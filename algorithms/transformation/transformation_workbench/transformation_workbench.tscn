@@ -1,10 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://b0kht3huf7ouv"]
 
-[ext_resource type="Script" path="res://algorithms/transformation/transformation_workbench/transformation_workbench.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://nnrknx7ruwh8" path="res://algorithms/transformation/transformation_workbench/transformation_workbench.gd" id="1_main"]
 
-[node name="TransformationWorkbench" type="Node3D"]
+[node name="TransformationWorkbench" type="Node3D" unique_id=990882650]
 script = ExtResource("1_main")
-show_matrix = true
-show_ghost = true
-show_vectors = true
-snap_rotation_to_90 = true

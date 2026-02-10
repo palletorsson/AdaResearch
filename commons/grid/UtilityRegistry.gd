@@ -181,6 +181,20 @@ const UTILITY_TYPES = {
 		"description": "Cube that carries players across voids with directional movement",
 		"supports_parameters": true  # distance:direction[:auto] (e.g. "4:z", "3.5:1,0,0", "3:z:auto")
 	},
+	"rc": {
+		"name": "rotation_cube",
+		"file": "rotation_cube.tscn",
+		"category": "transport",
+		"description": "Cube that rotates to create walkable ramps/surfaces",
+		"supports_parameters": true  # angle:axis:pause (e.g. "45:y:2" = 45° on Y, 2s pause) or "continuous:x:30"
+	},
+	"sc": {
+		"name": "scale_cube",
+		"file": "scale_cube.tscn",
+		"category": "transport",
+		"description": "Cube that scales to fill gaps with presence",
+		"supports_parameters": true  # max:min:offset (e.g. "3:0.5:1.5" = scale 0.5→3, offset 1.5)
+	},
 	
 	# UI/Information utilities
 	"x": {

@@ -12,7 +12,7 @@ enum Mode { TRANSLATE, ROTATE, SCALE }
 @export var snap_rotation_to_90: bool = true
 
 # References
-var grabbable_object: Node3D
+var grabbable_object: RigidBody3D
 var ghost_object: MeshInstance3D
 var matrix_display: Node3D
 var vector_display: Node3D
@@ -42,8 +42,11 @@ func _ready():
 
 func create_grabbable_object():
 	# The main object to manipulate
-	grabbable_object = Node3D.new()
+	# Must be RigidBody3D for XRToolsPickable compatibility
+	grabbable_object = RigidBody3D.new()
 	grabbable_object.name = "GrabbableObject"
+	grabbable_object.gravity_scale = 0.0  # Don't fall
+	grabbable_object.freeze = true  # Start frozen until grabbed
 	add_child(grabbable_object)
 	
 	# Visual mesh - a distinctive cube with edges

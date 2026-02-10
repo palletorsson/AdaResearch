@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/rotation_cube.gd" id="1_script"]
+
+[node name="RotationCube" type="Node3D"]
+script = ExtResource("1_script")
+cube_size = 2.2
+rotation_angle = 45.0
+pause_duration = 4.0

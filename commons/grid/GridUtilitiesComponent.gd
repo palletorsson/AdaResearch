@@ -570,6 +570,79 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
 				else:
 					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
+		"rc":  # Rotation Cube
+			# Format: rc:angle:axis:pause:y_offset (e.g. "45:y:4:0.5")
+			if parameters.size() >= 1:
+				var angle = float(parameters[0])
+				var axis = Vector3.UP  # Default Y axis
+				var pause = 4.0  # Default pause duration
+				var y_off = 0.0  # Default y offset
+				
+				if parameters.size() >= 2:
+					match parameters[1].to_lower():
+						"x": axis = Vector3.RIGHT
+						"y": axis = Vector3.UP
+						"z": axis = Vector3.BACK
+						"-x": axis = Vector3.LEFT
+						"-y": axis = Vector3.DOWN
+						"-z": axis = Vector3.FORWARD
+				
+				if parameters.size() >= 3:
+					pause = float(parameters[2])
+				
+				if parameters.size() >= 4:
+					y_off = float(parameters[3])
+				
+				# Apply to rotation cube
+				if utility_object.has_method("set_step_pause_mode"):
+					utility_object.set_step_pause_mode(angle, axis, pause)
+				else:
+					if "rotation_angle" in utility_object:
+						utility_object.rotation_angle = angle
+					if "rotation_axis" in utility_object:
+						utility_object.rotation_axis = axis
+					if "pause_duration" in utility_object:
+						utility_object.pause_duration = pause
+				
+				if "y_offset" in utility_object:
+					utility_object.y_offset = y_off
+				
+				print("GridUtilitiesComponent: Set rotation cube to %.1f° on %s axis, %.1fs pause, y=%.1f" % [angle, parameters[1] if parameters.size() >= 2 else "y", pause, y_off])
+		"sc":  # Scale Cube
+			# Format: sc:max:min:offset_x:y_offset (e.g. "3:0.5:1.5:0.5")
+			if parameters.size() >= 1:
+				var max_scale = float(parameters[0])
+				var min_scale = 0.5  # Default
+				var offset_x = 1.5  # Default
+				var y_off = 0.0  # Default y offset
+				
+				if parameters.size() >= 2:
+					min_scale = float(parameters[1])
+				
+				if parameters.size() >= 3:
+					offset_x = float(parameters[2])
+				
+				if parameters.size() >= 4:
+					y_off = float(parameters[3])
+				
+				# Apply to scale cube
+				if utility_object.has_method("set_scale_range"):
+					utility_object.set_scale_range(min_scale, max_scale)
+				else:
+					if "min_scale" in utility_object:
+						utility_object.min_scale = min_scale
+					if "max_scale" in utility_object:
+						utility_object.max_scale = max_scale
+				
+				if utility_object.has_method("set_offset"):
+					utility_object.set_offset(Vector3(offset_x, 0, 0))
+				elif "center_offset" in utility_object:
+					utility_object.center_offset = Vector3(offset_x, 0, 0)
+				
+				if "y_offset" in utility_object:
+					utility_object.y_offset = y_off
+				
+				print("GridUtilitiesComponent: Set scale cube %.1f→%.1f, offset_x=%.1f, y=%.1f" % [min_scale, max_scale, offset_x, y_off])
 		"rg":  # Regenerate cube
 			var target_params: Array = []
 			var status_message := ""

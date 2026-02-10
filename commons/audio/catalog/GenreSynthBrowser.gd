@@ -19,7 +19,7 @@ const GENRES = {
 		"bpm_range": "120-145",
 		"description": "Chicago/Detroit acid - defined by the TB-303 squelch and TR-808/909 drums",
 		"key_artists": ["Phuture", "Hardfloor", "DJ Pierre", "Plastikman"],
-		"elements": ["tb303_acid", "tr909_kick", "tr909_hihat", "tr909_clap", "tr808_kick", "acid_pad"]
+		"elements": ["tr909_kick", "tr909_hihat", "tr909_clap", "tr808_kick", "tb303_acid", "acid_pad", "acid_lead", "arp_synth", "noise_riser", "impact_hit"]
 	},
 	"detroit_techno": {
 		"name": "Detroit Techno",
@@ -28,7 +28,7 @@ const GENRES = {
 		"bpm_range": "125-140",
 		"description": "Cold machine funk - 909 drums, string stabs, minimal bass",
 		"key_artists": ["Juan Atkins", "Derrick May", "Kevin Saunderson", "Jeff Mills"],
-		"elements": ["tr909_kick", "tr909_hihat", "tr909_clap", "detroit_strings", "detroit_stab", "detroit_bass"]
+		"elements": ["tr909_kick", "tr909_hihat", "tr909_clap", "detroit_bass", "detroit_strings", "detroit_stab", "arp_sequence", "noise_riser", "noise_fall", "impact_hit"]
 	},
 	"chicago_house": {
 		"name": "Chicago House",
@@ -37,7 +37,7 @@ const GENRES = {
 		"bpm_range": "118-128",
 		"description": "Soulful machine music - organ stabs, 909 drums, disco influence",
 		"key_artists": ["Frankie Knuckles", "Marshall Jefferson", "Larry Heard"],
-		"elements": ["tr909_kick", "house_organ", "house_piano", "house_bass", "tr909_hihat", "house_clap"]
+		"elements": ["tr909_kick", "tr909_hihat", "house_clap", "house_bass", "house_organ", "house_piano", "disco_hihat", "noise_riser", "noise_fall", "impact_hit"]
 	},
 	"rave_hardcore": {
 		"name": "Rave / Hardcore",
@@ -46,7 +46,7 @@ const GENRES = {
 		"bpm_range": "140-180",
 		"description": "High energy rave - hoovers, breakbeats, piano stabs",
 		"key_artists": ["The Prodigy", "Altern-8", "SL2", "Acen"],
-		"elements": ["hoover_bass", "rave_stab", "amen_break", "rave_piano", "mentasm", "trancer"]
+		"elements": ["tr909_kick", "amen_break", "hoover_bass", "mentasm", "rave_stab", "rave_piano", "trancer", "noise_riser", "noise_fall", "impact_hit"]
 	},
 	"jungle_dnb": {
 		"name": "Jungle / Drum & Bass",
@@ -55,7 +55,7 @@ const GENRES = {
 		"bpm_range": "160-180",
 		"description": "Chopped breaks + rolling bass - Amen chopping, Reese bass",
 		"key_artists": ["Goldie", "LTJ Bukem", "Roni Size", "Ed Rush"],
-		"elements": ["reese_bass", "amen_break", "jungle_sub", "dnb_pad", "roller_bass", "jungle_stab"]
+		"elements": ["amen_break", "tr909_kick", "jungle_sub", "reese_bass", "roller_bass", "dnb_pad", "jungle_stab", "noise_riser", "noise_fall", "impact_hit"]
 	},
 	"synthwave": {
 		"name": "Synthwave / Retrowave",
@@ -64,7 +64,7 @@ const GENRES = {
 		"bpm_range": "80-118",
 		"description": "80s revival - gated drums, supersaws, arpeggios",
 		"key_artists": ["Kavinsky", "Perturbator", "Carpenter Brut", "Gunship"],
-		"elements": ["supersaw", "synthwave_bass", "gated_snare", "arp_synth", "synthwave_lead", "linn_kick"]
+		"elements": ["linn_kick", "gated_snare", "disco_hihat", "synthwave_bass", "supersaw", "arp_synth", "synthwave_lead", "solina_pad", "noise_riser", "impact_hit"]
 	},
 	"ambient_idm": {
 		"name": "Ambient / IDM",
@@ -73,7 +73,7 @@ const GENRES = {
 		"bpm_range": "70-140",
 		"description": "Atmospheric textures - detuned pads, lo-fi, glitch",
 		"key_artists": ["Aphex Twin", "Boards of Canada", "Autechre", "Brian Eno"],
-		"elements": ["warm_pad", "lofi_break", "tape_delay", "granular_pad", "bitcrush_drums", "ambient_drone"]
+		"elements": ["lofi_break", "bitcrush_drums", "warm_pad", "granular_pad", "ambient_drone", "tape_delay", "trap_bell", "noise_riser", "noise_fall", "impact_hit"]
 	},
 	"disco_funk": {
 		"name": "Disco / Italo",
@@ -82,7 +82,7 @@ const GENRES = {
 		"bpm_range": "110-130",
 		"description": "Moroder sequencers, 4-on-floor, string machines",
 		"key_artists": ["Giorgio Moroder", "Donna Summer", "Cerrone", "Italo disco"],
-		"elements": ["moroder_seq", "disco_strings", "disco_bass", "four_floor_kick", "disco_hihat", "solina_pad"]
+		"elements": ["four_floor_kick", "disco_hihat", "house_clap", "disco_bass", "moroder_seq", "disco_strings", "solina_pad", "minimoog_lead", "noise_riser", "impact_hit"]
 	},
 	"hip_hop": {
 		"name": "Hip-Hop / Trap",
@@ -91,7 +91,7 @@ const GENRES = {
 		"bpm_range": "70-150",
 		"description": "808 boom, SP-1200 crunch, modern trap hi-hats",
 		"key_artists": ["Afrika Bambaataa", "J Dilla", "Metro Boomin", "Timbaland"],
-		"elements": ["tr808_kick", "tr808_snare", "tr808_hihat", "sp1200_crunch", "trap_hihat", "808_bass"]
+		"elements": ["tr808_kick", "tr808_snare", "tr808_hihat", "trap_hihat", "808_bass", "sp1200_crunch", "trap_bell", "trap_pad", "noise_fall", "impact_hit"]
 	},
 	"prog_rock": {
 		"name": "70s Prog / Krautrock",
@@ -100,13 +100,142 @@ const GENRES = {
 		"bpm_range": "80-140",
 		"description": "Moog leads, motorik beats, ELP/Kraftwerk textures",
 		"key_artists": ["Kraftwerk", "Tangerine Dream", "ELP", "Yes"],
-		"elements": ["minimoog_lead", "motorik_beat", "arp_sequence", "mellotron_strings", "moog_bass", "cs80_brass"]
+		"elements": ["motorik_beat", "tr909_kick", "moog_bass", "minimoog_lead", "cs80_brass", "mellotron_strings", "arp_sequence", "tape_delay", "noise_riser", "noise_fall"]
+	},
+	"dub_techno": {
+		"name": "Dub Techno",
+		"icon": "DT",
+		"era": "1992-present",
+		"bpm_range": "108-122",
+		"description": "Deep chords, sub pressure, and long feedback tails",
+		"key_artists": ["Basic Channel", "Deepchord", "Monolake", "Rhythm & Sound"],
+		"elements": ["tr909_kick", "tr909_hihat", "dub_sub", "dub_chord", "dub_echo_stab", "warm_pad", "tape_delay", "noise_riser", "noise_fall", "impact_hit"]
+	},
+	"uk_garage": {
+		"name": "UK Garage / 2-Step",
+		"icon": "UKG",
+		"era": "1997-present",
+		"bpm_range": "128-136",
+		"description": "Shuffled hats, skippy drums, warm bass wobble and chopped hooks",
+		"key_artists": ["MJ Cole", "Artful Dodger", "El-B", "Burial"],
+		"elements": ["tr909_kick", "ukg_shuff_hat", "house_clap", "ukg_wobble_bass", "ukg_organ_stab", "ukg_pluck", "ukg_vocal_chop", "noise_riser", "noise_fall", "impact_hit"]
+	},
+	"neurofunk": {
+		"name": "Neurofunk",
+		"icon": "NF",
+		"era": "1998-present",
+		"bpm_range": "170-176",
+		"description": "Precision drums, snarling mid-bass, and futuristic FX design",
+		"key_artists": ["Ed Rush & Optical", "Noisia", "Phace", "Mefjus"],
+		"elements": ["tr909_kick", "tr808_snare", "trap_hihat", "neuro_mid_bass", "reese_bass", "dnb_pad", "neuro_stab", "neuro_laser", "noise_riser", "impact_hit"]
 	}
 }
 
 # ═══════════════════════════════════════════════════════════════════════════
 # ELEMENTS - Deep technical definitions
 # ═══════════════════════════════════════════════════════════════════════════
+
+const SUITE_REQUIREMENTS = {
+	"rhythm": 2,
+	"bass": 1,
+	"harmony": 1,
+	"hook": 1,
+	"fx": 1
+}
+
+const GENRE_SUITES = {
+	"acid_house": {
+		"rhythm": ["tr909_kick", "tr909_hihat", "tr909_clap", "tr808_kick"],
+		"bass": ["tb303_acid"],
+		"harmony": ["acid_pad"],
+		"hook": ["acid_lead", "arp_synth"],
+		"fx": ["noise_riser", "impact_hit"]
+	},
+	"detroit_techno": {
+		"rhythm": ["tr909_kick", "tr909_hihat", "tr909_clap"],
+		"bass": ["detroit_bass"],
+		"harmony": ["detroit_strings"],
+		"hook": ["detroit_stab", "arp_sequence"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	},
+	"chicago_house": {
+		"rhythm": ["tr909_kick", "tr909_hihat", "house_clap", "disco_hihat"],
+		"bass": ["house_bass"],
+		"harmony": ["house_organ", "house_piano"],
+		"hook": ["house_piano"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	},
+	"rave_hardcore": {
+		"rhythm": ["tr909_kick", "amen_break"],
+		"bass": ["hoover_bass", "mentasm"],
+		"harmony": ["rave_piano"],
+		"hook": ["rave_stab", "trancer"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	},
+	"jungle_dnb": {
+		"rhythm": ["amen_break", "tr909_kick"],
+		"bass": ["jungle_sub", "reese_bass", "roller_bass"],
+		"harmony": ["dnb_pad"],
+		"hook": ["jungle_stab"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	},
+	"synthwave": {
+		"rhythm": ["linn_kick", "gated_snare", "disco_hihat"],
+		"bass": ["synthwave_bass"],
+		"harmony": ["supersaw", "solina_pad"],
+		"hook": ["synthwave_lead", "arp_synth"],
+		"fx": ["noise_riser", "impact_hit"]
+	},
+	"ambient_idm": {
+		"rhythm": ["lofi_break", "bitcrush_drums"],
+		"bass": ["ambient_drone"],
+		"harmony": ["warm_pad", "granular_pad"],
+		"hook": ["trap_bell"],
+		"fx": ["tape_delay", "noise_riser", "noise_fall", "impact_hit"]
+	},
+	"disco_funk": {
+		"rhythm": ["four_floor_kick", "disco_hihat", "house_clap"],
+		"bass": ["disco_bass", "moroder_seq"],
+		"harmony": ["disco_strings", "solina_pad"],
+		"hook": ["minimoog_lead"],
+		"fx": ["noise_riser", "impact_hit"]
+	},
+	"hip_hop": {
+		"rhythm": ["tr808_kick", "tr808_snare", "tr808_hihat", "trap_hihat"],
+		"bass": ["808_bass"],
+		"harmony": ["trap_pad"],
+		"hook": ["trap_bell"],
+		"fx": ["sp1200_crunch", "noise_fall", "impact_hit"]
+	},
+	"prog_rock": {
+		"rhythm": ["motorik_beat", "tr909_kick"],
+		"bass": ["moog_bass"],
+		"harmony": ["mellotron_strings", "cs80_brass"],
+		"hook": ["minimoog_lead", "arp_sequence"],
+		"fx": ["tape_delay", "noise_riser", "noise_fall"]
+	},
+	"dub_techno": {
+		"rhythm": ["tr909_kick", "tr909_hihat"],
+		"bass": ["dub_sub"],
+		"harmony": ["dub_chord", "warm_pad"],
+		"hook": ["dub_echo_stab"],
+		"fx": ["tape_delay", "noise_riser", "noise_fall", "impact_hit"]
+	},
+	"uk_garage": {
+		"rhythm": ["tr909_kick", "ukg_shuff_hat", "house_clap"],
+		"bass": ["ukg_wobble_bass"],
+		"harmony": ["ukg_organ_stab"],
+		"hook": ["ukg_pluck", "ukg_vocal_chop"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	},
+	"neurofunk": {
+		"rhythm": ["tr909_kick", "tr808_snare", "trap_hihat"],
+		"bass": ["neuro_mid_bass", "reese_bass"],
+		"harmony": ["dnb_pad"],
+		"hook": ["neuro_stab", "neuro_laser"],
+		"fx": ["noise_riser", "noise_fall", "impact_hit"]
+	}
+}
 
 const ELEMENTS = {
 	# ─────────────────────────────────────────────────────────────────────
@@ -1437,6 +1566,400 @@ SP-1200 magic:
 	# ─────────────────────────────────────────────────────────────────────
 	# SYNTHWAVE ELEMENTS (NEW)
 	# ─────────────────────────────────────────────────────────────────────
+	"acid_lead": {
+		"name": "Acid Lead",
+		"type": "lead",
+		"genre": "acid_house",
+		"machine": "Roland TB-303 (pitched lead)",
+		"year": 1987,
+		"description": "Sharp resonant acid lead for hooks layered over the bassline.",
+		"signal_flow": "Saw OSC -> Resonant LPF -> Fast envelope -> Delay",
+		"tech_notes": """
+Acid lead profile:
+- Higher register than the bassline
+- Resonance-forward tone
+- Fast decay for rhythmic phrasing
+- Optional glide and delay for phrases
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 110, "max": 1200, "default": 330, "unit": "Hz", "label": "Freq"},
+			"cutoff": {"type": "float", "min": 300, "max": 4500, "default": 1600, "unit": "Hz", "label": "Filter"},
+			"resonance": {"type": "float", "min": 0, "max": 0.98, "default": 0.72, "label": "Resonance"},
+			"decay": {"type": "float", "min": 0.02, "max": 0.6, "default": 0.12, "unit": "s", "label": "Decay"},
+			"glide": {"type": "float", "min": 0, "max": 0.2, "default": 0.04, "unit": "s", "label": "Glide"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.3, "label": "Drive"}
+		}
+	},
+
+	"trap_bell": {
+		"name": "Trap Bell",
+		"type": "lead",
+		"genre": "hip_hop",
+		"machine": "FM Bell Synth",
+		"year": 2010,
+		"description": "Dark FM bell for trap melodies and sparse motifs.",
+		"signal_flow": "FM pair -> Short envelope -> Optional delay/reverb",
+		"tech_notes": """
+Trap bell traits:
+- Metallic FM overtone stack
+- Punchy attack with medium decay
+- Works for minimal motifs and countermelodies
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 160, "max": 1800, "default": 620, "unit": "Hz", "label": "Freq"},
+			"mod_ratio": {"type": "float", "min": 0.5, "max": 8, "default": 2.5, "label": "FM Ratio"},
+			"mod_index": {"type": "float", "min": 0, "max": 12, "default": 4.2, "label": "FM Index"},
+			"decay": {"type": "float", "min": 0.08, "max": 2.2, "default": 0.7, "unit": "s", "label": "Decay"},
+			"shimmer": {"type": "float", "min": 0, "max": 1, "default": 0.25, "label": "Shimmer"}
+		}
+	},
+
+	"trap_pad": {
+		"name": "Trap Pad",
+		"type": "pad",
+		"genre": "hip_hop",
+		"machine": "Dark Analog Pad",
+		"year": 2014,
+		"description": "Moody filtered pad layer for modern trap atmospheres.",
+		"signal_flow": "Detuned OSC stack -> LPF -> Slow envelope",
+		"tech_notes": """
+Trap pad profile:
+- Dark cutoff with moderate resonance
+- Slow attack and long release
+- Subtle movement from detune/LFO drift
+		""",
+		"parameters": {
+			"cutoff": {"type": "float", "min": 120, "max": 3500, "default": 700, "unit": "Hz", "label": "Filter"},
+			"resonance": {"type": "float", "min": 0, "max": 0.85, "default": 0.24, "label": "Resonance"},
+			"detune": {"type": "float", "min": 0, "max": 0.08, "default": 0.018, "label": "Detune"},
+			"attack": {"type": "float", "min": 0.03, "max": 2.5, "default": 0.6, "unit": "s", "label": "Attack"},
+			"release": {"type": "float", "min": 0.05, "max": 4.5, "default": 1.6, "unit": "s", "label": "Release"}
+		}
+	},
+
+	"noise_riser": {
+		"name": "Noise Riser",
+		"type": "effect",
+		"genre": "ambient_idm",
+		"machine": "Noise + Filter Automation",
+		"year": 2000,
+		"description": "Transition riser for builds and section changes.",
+		"signal_flow": "Noise source -> High-pass sweep -> Drive",
+		"tech_notes": """
+Riser behavior:
+- Noise gets brighter over time
+- Amplitude grows toward the end
+- Optional mild distortion for intensity
+		""",
+		"parameters": {
+			"duration": {"type": "float", "min": 0.4, "max": 6, "default": 2.4, "unit": "s", "label": "Duration"},
+			"start_hz": {"type": "float", "min": 80, "max": 4000, "default": 250, "unit": "Hz", "label": "Start HPF"},
+			"end_hz": {"type": "float", "min": 500, "max": 14000, "default": 9000, "unit": "Hz", "label": "End HPF"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.2, "label": "Drive"},
+			"level": {"type": "float", "min": 0.05, "max": 1, "default": 0.5, "label": "Level"}
+		}
+	},
+
+	"noise_fall": {
+		"name": "Noise Downlifter",
+		"type": "effect",
+		"genre": "ambient_idm",
+		"machine": "Noise + Filter Automation",
+		"year": 2000,
+		"description": "Downlifter for turnarounds, drops, and phrase endings.",
+		"signal_flow": "Noise source -> High-pass sweep down -> Envelope",
+		"tech_notes": """
+Downlifter behavior:
+- Starts bright and wide
+- Closes filter while decaying
+- Good for post-drop or break transitions
+		""",
+		"parameters": {
+			"duration": {"type": "float", "min": 0.3, "max": 6, "default": 2.0, "unit": "s", "label": "Duration"},
+			"start_hz": {"type": "float", "min": 500, "max": 14000, "default": 9500, "unit": "Hz", "label": "Start HPF"},
+			"end_hz": {"type": "float", "min": 80, "max": 5000, "default": 260, "unit": "Hz", "label": "End HPF"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.18, "label": "Drive"},
+			"level": {"type": "float", "min": 0.05, "max": 1, "default": 0.45, "label": "Level"}
+		}
+	},
+
+	"impact_hit": {
+		"name": "Impact Hit",
+		"type": "effect",
+		"genre": "ambient_idm",
+		"machine": "Hybrid synth impact",
+		"year": 2005,
+		"description": "Low-end impact with noisy transient for section accents.",
+		"signal_flow": "Low sine drop + noise burst -> Saturation",
+		"tech_notes": """
+Impact design:
+- Sub thump with short pitch drop
+- Broadband transient for attack
+- Tail decays quickly to avoid masking
+		""",
+		"parameters": {
+			"fundamental": {"type": "float", "min": 35, "max": 140, "default": 62, "unit": "Hz", "label": "Fundamental"},
+			"pitch_drop": {"type": "float", "min": 0, "max": 24, "default": 10, "label": "Pitch Drop"},
+			"noise": {"type": "float", "min": 0, "max": 1, "default": 0.35, "label": "Noise"},
+			"decay": {"type": "float", "min": 0.05, "max": 1.2, "default": 0.28, "unit": "s", "label": "Decay"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.25, "label": "Drive"}
+		}
+	},
+
+	# ----------------------------------------------------------------------------
+	# VR GENRE EXPANSION: DUB TECHNO / UK GARAGE / NEUROFUNK
+	# ----------------------------------------------------------------------------
+	"dub_sub": {
+		"name": "Dub Sub Bass",
+		"type": "bass",
+		"genre": "dub_techno",
+		"machine": "Sine Sub Synth",
+		"year": 1993,
+		"description": "Deep mono sub foundation for dub techno pressure and space.",
+		"signal_flow": "Sine OSC -> Gentle saturation -> VCA",
+		"tech_notes": """
+Dub techno sub:
+- Fundamental-led low end
+- Minimal harmonic content
+- Long but controlled tail
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 30, "max": 90, "default": 45, "unit": "Hz", "label": "Freq"},
+			"decay": {"type": "float", "min": 0.2, "max": 2.5, "default": 1.2, "unit": "s", "label": "Decay"},
+			"saturation": {"type": "float", "min": 0, "max": 1, "default": 0.12, "label": "Saturation"},
+			"drift": {"type": "float", "min": 0, "max": 1, "default": 0.08, "label": "Drift"}
+		}
+	},
+
+	"dub_chord": {
+		"name": "Dub Chord",
+		"type": "pad",
+		"genre": "dub_techno",
+		"machine": "Juno/MKS Chord Stab",
+		"year": 1993,
+		"description": "Filtered minor chord stab designed for long delays and reverb sends.",
+		"signal_flow": "Detuned saw stack -> LPF -> Amp envelope",
+		"tech_notes": """
+Dub chord profile:
+- Soft attack then decaying body
+- Mid-focused tone for delay throws
+- Slight detune for width
+		""",
+		"parameters": {
+			"cutoff": {"type": "float", "min": 200, "max": 4000, "default": 900, "unit": "Hz", "label": "Filter"},
+			"resonance": {"type": "float", "min": 0, "max": 0.9, "default": 0.35, "label": "Resonance"},
+			"attack": {"type": "float", "min": 0.005, "max": 0.5, "default": 0.03, "unit": "s", "label": "Attack"},
+			"decay": {"type": "float", "min": 0.1, "max": 2, "default": 0.7, "unit": "s", "label": "Decay"},
+			"detune": {"type": "float", "min": 0, "max": 0.06, "default": 0.015, "label": "Detune"}
+		}
+	},
+
+	"dub_echo_stab": {
+		"name": "Dub Echo Stab",
+		"type": "lead",
+		"genre": "dub_techno",
+		"machine": "Analog Stab + Tape Echo",
+		"year": 1994,
+		"description": "Short stab designed to be thrown into delay feedback.",
+		"signal_flow": "Saw/Pulse blend -> LPF -> Short envelope -> Echo",
+		"tech_notes": """
+Echo stab role:
+- Short transient source
+- Midrange focus for delay clarity
+- Slight drive for analog edge
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 120, "max": 1200, "default": 320, "unit": "Hz", "label": "Freq"},
+			"decay": {"type": "float", "min": 0.03, "max": 1, "default": 0.25, "unit": "s", "label": "Decay"},
+			"echo_time": {"type": "float", "min": 0.1, "max": 0.8, "default": 0.38, "unit": "s", "label": "Echo Time"},
+			"echo_feedback": {"type": "float", "min": 0, "max": 0.95, "default": 0.58, "label": "Feedback"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.2, "label": "Drive"}
+		}
+	},
+
+	"ukg_shuff_hat": {
+		"name": "UKG Shuffle Hat",
+		"type": "drum",
+		"genre": "uk_garage",
+		"machine": "Sampled Hat + Groove Sequencing",
+		"year": 1999,
+		"description": "Skippy shuffled hat articulation for 2-step swing.",
+		"signal_flow": "Noise/metal source -> fast env -> groove accents",
+		"tech_notes": """
+2-step hat behavior:
+- Off-grid shuffle feel
+- Ghost accents and roll-ins
+- Bright but short sustain
+		""",
+		"parameters": {
+			"tempo": {"type": "float", "min": 120, "max": 140, "default": 132, "unit": "BPM", "label": "Tempo"},
+			"swing": {"type": "float", "min": 0, "max": 0.4, "default": 0.22, "label": "Swing"},
+			"decay": {"type": "float", "min": 0.01, "max": 0.2, "default": 0.05, "unit": "s", "label": "Decay"},
+			"tone": {"type": "float", "min": 0, "max": 1, "default": 0.7, "label": "Tone"}
+		}
+	},
+
+	"ukg_wobble_bass": {
+		"name": "UKG Wobble Bass",
+		"type": "bass",
+		"genre": "uk_garage",
+		"machine": "Square/Sub Hybrid",
+		"year": 2000,
+		"description": "Warm bouncing bass with medium-rate filter wobble.",
+		"signal_flow": "Square+sub -> LPF (LFO mod) -> Saturation",
+		"tech_notes": """
+Garage bass profile:
+- Round low end with rhythmic movement
+- Filter wobble synced to groove feel
+- Enough harmonics for small speakers
+		""",
+		"parameters": {
+			"cutoff": {"type": "float", "min": 120, "max": 2000, "default": 480, "unit": "Hz", "label": "Filter"},
+			"resonance": {"type": "float", "min": 0, "max": 1, "default": 0.35, "label": "Resonance"},
+			"lfo_rate": {"type": "float", "min": 0.2, "max": 12, "default": 3.2, "unit": "Hz", "label": "LFO Rate"},
+			"lfo_depth": {"type": "float", "min": 0, "max": 1, "default": 0.45, "label": "LFO Depth"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.25, "label": "Drive"}
+		}
+	},
+
+	"ukg_organ_stab": {
+		"name": "UKG Organ Stab",
+		"type": "keys",
+		"genre": "uk_garage",
+		"machine": "M1-style Organ",
+		"year": 1998,
+		"description": "Bright organ chord hit used for syncopated garage phrasing.",
+		"signal_flow": "Organ tone -> fast amp env -> chorus",
+		"tech_notes": """
+Garage organ:
+- Snappy chord attack
+- Short decay for rhythm slots
+- Slight chorus for width
+		""",
+		"parameters": {
+			"brightness": {"type": "float", "min": 0, "max": 1, "default": 0.65, "label": "Brightness"},
+			"decay": {"type": "float", "min": 0.05, "max": 1.5, "default": 0.35, "unit": "s", "label": "Decay"},
+			"chorus": {"type": "float", "min": 0, "max": 1, "default": 0.3, "label": "Chorus"},
+			"detune": {"type": "float", "min": 0, "max": 0.03, "default": 0.006, "label": "Detune"}
+		}
+	},
+
+	"ukg_pluck": {
+		"name": "UKG Pluck",
+		"type": "lead",
+		"genre": "uk_garage",
+		"machine": "Digital Pluck Synth",
+		"year": 2001,
+		"description": "Snappy pluck lead for top hooks and call-response motifs.",
+		"signal_flow": "Saw/Pulse -> resonant LPF -> pluck envelope",
+		"tech_notes": """
+Pluck role:
+- Fast transient definition
+- Mid/high presence
+- Short delay support
+		""",
+		"parameters": {
+			"cutoff": {"type": "float", "min": 300, "max": 6000, "default": 1800, "unit": "Hz", "label": "Filter"},
+			"resonance": {"type": "float", "min": 0, "max": 1, "default": 0.5, "label": "Resonance"},
+			"decay": {"type": "float", "min": 0.03, "max": 0.8, "default": 0.22, "unit": "s", "label": "Decay"},
+			"pluck": {"type": "float", "min": 0, "max": 1, "default": 0.8, "label": "Pluck"},
+			"delay_mix": {"type": "float", "min": 0, "max": 1, "default": 0.22, "label": "Delay Mix"}
+		}
+	},
+
+	"ukg_vocal_chop": {
+		"name": "UKG Vocal Chop",
+		"type": "effect",
+		"genre": "uk_garage",
+		"machine": "Formant Synth Chop",
+		"year": 2000,
+		"description": "Synthetic vocal-style chop for hook punctuation.",
+		"signal_flow": "Pulse source -> formant shaping -> chopped gate",
+		"tech_notes": """
+Vocal chop traits:
+- Formant peaks around speech bands
+- Rhythmic slicing
+- Optional grit for texture
+		""",
+		"parameters": {
+			"formant": {"type": "float", "min": 0.5, "max": 2, "default": 1.15, "label": "Formant"},
+			"slice_rate": {"type": "float", "min": 2, "max": 16, "default": 8, "unit": "Hz", "label": "Slice Rate"},
+			"decay": {"type": "float", "min": 0.05, "max": 1, "default": 0.3, "unit": "s", "label": "Decay"},
+			"grit": {"type": "float", "min": 0, "max": 1, "default": 0.3, "label": "Grit"},
+			"width": {"type": "float", "min": 0, "max": 1, "default": 0.4, "label": "Width"}
+		}
+	},
+
+	"neuro_mid_bass": {
+		"name": "Neuro Mid Bass",
+		"type": "bass",
+		"genre": "neurofunk",
+		"machine": "FM + Filter Morph Bass",
+		"year": 2008,
+		"description": "Aggressive moving mid-bass with FM edge and filter motion.",
+		"signal_flow": "FM core -> LPF/BPF morph -> distortion",
+		"tech_notes": """
+Neuro bass traits:
+- Dense mids with articulated movement
+- LFO-driven timbre changes
+- Controlled low-end to keep kick clear
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 50, "max": 220, "default": 90, "unit": "Hz", "label": "Freq"},
+			"mod_ratio": {"type": "float", "min": 0.5, "max": 6, "default": 1.8, "label": "FM Ratio"},
+			"mod_index": {"type": "float", "min": 0, "max": 12, "default": 6, "label": "FM Index"},
+			"cutoff": {"type": "float", "min": 100, "max": 3000, "default": 800, "unit": "Hz", "label": "Filter"},
+			"lfo_rate": {"type": "float", "min": 0.2, "max": 12, "default": 4.5, "unit": "Hz", "label": "LFO Rate"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.45, "label": "Drive"}
+		}
+	},
+
+	"neuro_stab": {
+		"name": "Neuro Stab",
+		"type": "lead",
+		"genre": "neurofunk",
+		"machine": "Resonant Stab Synth",
+		"year": 2010,
+		"description": "Sharp transient stab for syncopated neuro callouts.",
+		"signal_flow": "Saw stack -> LPF -> short amp envelope",
+		"tech_notes": """
+Stab usage:
+- Tight envelope
+- Saturated upper mids
+- Supports rhythmic punctuation
+		""",
+		"parameters": {
+			"frequency": {"type": "float", "min": 100, "max": 1500, "default": 240, "unit": "Hz", "label": "Freq"},
+			"attack": {"type": "float", "min": 0, "max": 0.05, "default": 0.005, "unit": "s", "label": "Attack"},
+			"decay": {"type": "float", "min": 0.05, "max": 0.7, "default": 0.22, "unit": "s", "label": "Decay"},
+			"cutoff": {"type": "float", "min": 500, "max": 6000, "default": 2200, "unit": "Hz", "label": "Filter"},
+			"drive": {"type": "float", "min": 0, "max": 1, "default": 0.4, "label": "Drive"}
+		}
+	},
+
+	"neuro_laser": {
+		"name": "Neuro Laser FX",
+		"type": "effect",
+		"genre": "neurofunk",
+		"machine": "Pitch Envelope Synth FX",
+		"year": 2009,
+		"description": "Descending laser-style hit for fills and transitions.",
+		"signal_flow": "Sine/Pulse blend -> pitch envelope -> resonance/drive",
+		"tech_notes": """
+Laser profile:
+- Fast pitch sweep
+- Resonant edge
+- Optional noise burst at onset
+		""",
+		"parameters": {
+			"start_freq": {"type": "float", "min": 400, "max": 4000, "default": 1800, "unit": "Hz", "label": "Start Freq"},
+			"end_freq": {"type": "float", "min": 40, "max": 800, "default": 120, "unit": "Hz", "label": "End Freq"},
+			"decay": {"type": "float", "min": 0.05, "max": 1, "default": 0.35, "unit": "s", "label": "Decay"},
+			"resonance": {"type": "float", "min": 0, "max": 1, "default": 0.65, "label": "Resonance"},
+			"noise": {"type": "float", "min": 0, "max": 1, "default": 0.15, "label": "Noise"}
+		}
+	},
+
 	"linn_kick": {
 		"name": "LinnDrum Kick",
 		"type": "drum",
@@ -1485,6 +2008,7 @@ signal preview_requested(element_id: String, params: Dictionary)
 
 func _ready():
 	_build_ui()
+	_validate_suites()
 	_populate_genres()
 	_setup_audio()
 
@@ -1548,6 +2072,26 @@ func _populate_genres():
 		info_item.set_selectable(0, false)
 		info_item.set_custom_color(0, Color(0.5, 0.5, 0.5))
 		
+		var suite_status = get_suite_completeness(genre_id)
+		var counts: Dictionary = suite_status.get("counts", {})
+		var suite_item = _genre_tree.create_item(genre_item)
+		suite_item.set_text(
+			0,
+			"  %s suite r:%d b:%d h:%d hk:%d fx:%d" % [
+				"[ok]" if suite_status.get("complete", false) else "[missing]",
+				int(counts.get("rhythm", 0)),
+				int(counts.get("bass", 0)),
+				int(counts.get("harmony", 0)),
+				int(counts.get("hook", 0)),
+				int(counts.get("fx", 0))
+			]
+		)
+		suite_item.set_selectable(0, false)
+		suite_item.set_custom_color(
+			0,
+			Color(0.45, 0.8, 0.45) if suite_status.get("complete", false) else Color(0.95, 0.6, 0.3)
+		)
+		
 		# Elements
 		for element_id in genre.elements:
 			if ELEMENTS.has(element_id):
@@ -1557,6 +2101,51 @@ func _populate_genres():
 				var type_icon = _get_type_icon(element.type)
 				elem_item.set_text(0, "  %s %s" % [type_icon, element.name])
 				elem_item.set_metadata(0, {"type": "element", "id": element_id, "genre": genre_id})
+
+
+func get_genre_suite(genre_id: String) -> Dictionary:
+	if not GENRE_SUITES.has(genre_id):
+		return {}
+	return GENRE_SUITES[genre_id].duplicate(true)
+
+
+func get_suite_completeness(genre_id: String) -> Dictionary:
+	var suite = get_genre_suite(genre_id)
+	var counts: Dictionary = {}
+	var missing: Array[String] = []
+	var complete = true
+	
+	for role in SUITE_REQUIREMENTS:
+		var required = int(SUITE_REQUIREMENTS[role])
+		var role_elements = suite.get(role, [])
+		var available = 0
+		for element_id in role_elements:
+			if ELEMENTS.has(element_id):
+				available += 1
+		
+		counts[role] = available
+		if available < required:
+			complete = false
+			missing.append("%s %d/%d" % [role, available, required])
+	
+	return {
+		"complete": complete,
+		"counts": counts,
+		"missing": missing
+	}
+
+
+func _validate_suites():
+	for genre_id in GENRES:
+		var status = get_suite_completeness(genre_id)
+		if not status.get("complete", false):
+			var missing = status.get("missing", [])
+			var missing_txt = ""
+			for i in range(missing.size()):
+				if i > 0:
+					missing_txt += ", "
+				missing_txt += str(missing[i])
+			push_warning("Incomplete synth suite for %s: %s" % [genre_id, missing_txt])
 
 
 func _get_type_icon(type: String) -> String:
@@ -1912,6 +2501,23 @@ func generate_element(element_id: String, params: Dictionary) -> AudioStreamWAV:
 		"rave_piano": return _gen_rave_piano(params)
 		"house_piano": return _gen_house_piano(params)
 		"808_bass": return _gen_808_bass(params)
+		"acid_lead": return _gen_acid_lead(params)
+		"trap_bell": return _gen_trap_bell(params)
+		"trap_pad": return _gen_trap_pad(params)
+		"noise_riser": return _gen_noise_riser(params)
+		"noise_fall": return _gen_noise_fall(params)
+		"impact_hit": return _gen_impact_hit(params)
+		"dub_sub": return _gen_dub_sub(params)
+		"dub_chord": return _gen_dub_chord(params)
+		"dub_echo_stab": return _gen_dub_echo_stab(params)
+		"ukg_shuff_hat": return _gen_ukg_shuff_hat(params)
+		"ukg_wobble_bass": return _gen_ukg_wobble_bass(params)
+		"ukg_organ_stab": return _gen_organ(params)
+		"ukg_pluck": return _gen_ukg_pluck(params)
+		"ukg_vocal_chop": return _gen_ukg_vocal_chop(params)
+		"neuro_mid_bass": return _gen_neuro_mid_bass(params)
+		"neuro_stab": return _gen_stab(params)
+		"neuro_laser": return _gen_neuro_laser(params)
 		"linn_kick": return _gen_linn_kick(params)
 		"sp1200_crunch": return _gen_sp1200(params)
 		_: return _gen_test_tone()
@@ -3998,6 +4604,542 @@ func _gen_solina(p: Dictionary) -> AudioStreamWAV:
 		if t > dur - rel: env = (dur - t) / rel
 		
 		data[i] = sig * env * 0.4
+	
+	return _to_wav(data)
+
+
+func _gen_acid_lead(p: Dictionary) -> AudioStreamWAV:
+	var decay = p.get("decay", 0.12)
+	var dur = max(0.8, decay * 7.0)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var base_freq = p.get("frequency", 330.0)
+	var cutoff = p.get("cutoff", 1600.0)
+	var reso = p.get("resonance", 0.72)
+	var glide = p.get("glide", 0.04)
+	var drive = p.get("drive", 0.3)
+	
+	var filt = [0.0, 0.0, 0.0]
+	var start_freq = base_freq * 0.6
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var glide_pos = clamp(t / max(glide, 0.001), 0.0, 1.0)
+		var freq = lerp(start_freq, base_freq, glide_pos)
+		
+		var ph = fmod(freq * t, 1.0)
+		var saw = ph * 2.0 - 1.0
+		var sqr = 1.0 if ph < 0.5 else -1.0
+		var osc = saw * 0.82 + sqr * 0.18
+		
+		var env = exp(-t / max(decay, 0.02))
+		var ffreq = cutoff + env * 2200.0
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.49)
+		var g = tan(PI * fc)
+		var fb = filt[2] * clamp(reso, 0.0, 0.98) * 3.8
+		var x = tanh((osc - fb) * (1.0 + drive * 2.5))
+		filt[0] += g * (x - filt[0])
+		filt[1] += g * (filt[0] - filt[1])
+		filt[2] += g * (filt[1] - filt[2])
+		
+		data[i] = tanh(filt[2] * env * (1.0 + drive * 1.5)) * 0.78
+	
+	return _to_wav(data)
+
+
+func _gen_trap_bell(p: Dictionary) -> AudioStreamWAV:
+	var decay = p.get("decay", 0.7)
+	var dur = max(0.5, decay * 1.8)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var freq = p.get("frequency", 620.0)
+	var mod_ratio = p.get("mod_ratio", 2.5)
+	var mod_index = p.get("mod_index", 4.2)
+	var shimmer = p.get("shimmer", 0.25)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		
+		var attack_env = 1.0 if t > 0.005 else t / 0.005
+		var env = exp(-t / max(decay, 0.08))
+		var mod_env = exp(-t / max(decay * 0.6, 0.05))
+		
+		var mod = sin(TAU * freq * mod_ratio * t) * mod_index * mod_env
+		var carrier = sin(TAU * freq * t + mod)
+		var upper = sin(TAU * freq * 2.01 * t + mod * 0.4) * shimmer
+		
+		data[i] = (carrier * 0.85 + upper * 0.35) * env * attack_env * 0.65
+	
+	return _to_wav(data)
+
+
+func _gen_trap_pad(p: Dictionary) -> AudioStreamWAV:
+	var cutoff = p.get("cutoff", 700.0)
+	var reso = p.get("resonance", 0.24)
+	var detune = p.get("detune", 0.018)
+	var atk = p.get("attack", 0.6)
+	var rel = p.get("release", 1.6)
+	
+	var dur = max(2.4, atk + rel + 0.8)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var freq = 174.61
+	var filt = [0.0, 0.0, 0.0, 0.0]
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		
+		var osc = 0.0
+		for v in range(3):
+			var spread = float(v - 1)
+			var drift = sin(TAU * (0.08 + abs(spread) * 0.03) * t) * detune * 0.25
+			var v_freq = freq * (1.0 + spread * detune + drift)
+			osc += fmod(v_freq * t, 1.0) * 2.0 - 1.0
+		osc /= 3.0
+		osc += (fmod(freq * 0.5 * t, 1.0) * 2.0 - 1.0) * 0.2
+		
+		var sustain_end = dur - rel
+		var env = 1.0
+		if t < atk:
+			env = t / max(atk, 0.001)
+		elif t > sustain_end:
+			env = max(0.0, (dur - t) / max(rel, 0.001))
+		
+		var ffreq = cutoff * (1.0 + 0.18 * sin(TAU * 0.11 * t))
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.32)
+		var g = tan(PI * fc)
+		var k = clamp(reso, 0.0, 0.95) * 4.0
+		var fb = filt[3] * k
+		var x = osc - fb
+		for j in range(4):
+			filt[j] += g * (x - filt[j])
+			x = filt[j]
+		
+		data[i] = filt[3] * env * 0.42
+	
+	return _to_wav(data)
+
+
+func _gen_noise_riser(p: Dictionary) -> AudioStreamWAV:
+	var dur = p.get("duration", 2.4)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var start_hz = p.get("start_hz", 250.0)
+	var end_hz = p.get("end_hz", 9000.0)
+	var drive = p.get("drive", 0.2)
+	var level = p.get("level", 0.5)
+	
+	var lp = 0.0
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var prog = t / max(dur, 0.001)
+		
+		var cutoff = lerp(start_hz, end_hz, prog * prog)
+		var alpha = clamp((TAU * cutoff) / SAMPLE_RATE, 0.0005, 0.99)
+		
+		var n = randf_range(-1.0, 1.0)
+		lp += alpha * (n - lp)
+		var hpf = n - lp
+		
+		var env = pow(prog, 0.8)
+		if t > dur - 0.01:
+			env *= (dur - t) / 0.01
+		
+		var sig = tanh(hpf * (1.0 + drive * 5.0))
+		data[i] = sig * env * level * 0.9
+	
+	return _to_wav(data)
+
+
+func _gen_noise_fall(p: Dictionary) -> AudioStreamWAV:
+	var dur = p.get("duration", 2.0)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var start_hz = p.get("start_hz", 9500.0)
+	var end_hz = p.get("end_hz", 260.0)
+	var drive = p.get("drive", 0.18)
+	var level = p.get("level", 0.45)
+	
+	var lp = 0.0
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var prog = t / max(dur, 0.001)
+		
+		var cutoff = lerp(start_hz, end_hz, prog)
+		var alpha = clamp((TAU * cutoff) / SAMPLE_RATE, 0.0005, 0.99)
+		
+		var n = randf_range(-1.0, 1.0)
+		lp += alpha * (n - lp)
+		var hpf = n - lp
+		
+		var env = pow(1.0 - prog, 0.75)
+		var atk = min(0.02, dur * 0.2)
+		if t < atk:
+			env *= t / max(atk, 0.001)
+		
+		var sig = tanh(hpf * (1.0 + drive * 4.0))
+		data[i] = sig * env * level * 0.85
+	
+	return _to_wav(data)
+
+
+func _gen_impact_hit(p: Dictionary) -> AudioStreamWAV:
+	var fundamental = p.get("fundamental", 62.0)
+	var pitch_drop = p.get("pitch_drop", 10.0)
+	var noise_amt = p.get("noise", 0.35)
+	var decay = p.get("decay", 0.28)
+	var drive = p.get("drive", 0.25)
+	
+	var dur = max(0.35, decay * 2.5)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var drop_ratio = pow(2.0, pitch_drop / 12.0)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		
+		var pitch_env = exp(-t * 22.0)
+		var freq = fundamental * lerp(1.0, drop_ratio, pitch_env)
+		var body = sin(TAU * freq * t)
+		var sub = sin(TAU * fundamental * 0.5 * t) * 0.35
+		var transient = randf_range(-1.0, 1.0) * noise_amt * exp(-t * 70.0)
+		
+		var env = exp(-t / max(decay, 0.05))
+		var sig = (body * 0.9 + sub + transient) * env
+		data[i] = tanh(sig * (1.0 + drive * 4.0)) * 0.92
+	
+	return _to_wav(data)
+
+
+func _gen_dub_sub(p: Dictionary) -> AudioStreamWAV:
+	var freq = p.get("frequency", 45.0)
+	var decay = p.get("decay", 1.2)
+	var saturation = p.get("saturation", 0.12)
+	var drift = p.get("drift", 0.08)
+	
+	var dur = max(1.0, decay + 0.6)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var drift_mod = sin(TAU * 0.17 * t) * drift * 0.02
+		var f = freq * (1.0 + drift_mod)
+		var body = sin(TAU * f * t)
+		var harm = sin(TAU * f * 2.0 * t) * saturation * 0.25
+		var env = exp(-t / max(decay, 0.05))
+		data[i] = tanh((body + harm) * (1.0 + saturation * 2.0)) * env * 0.75
+	
+	return _to_wav(data)
+
+
+func _gen_dub_chord(p: Dictionary) -> AudioStreamWAV:
+	var cutoff = p.get("cutoff", 900.0)
+	var reso = p.get("resonance", 0.35)
+	var atk = p.get("attack", 0.03)
+	var decay = p.get("decay", 0.7)
+	var detune = p.get("detune", 0.015)
+	
+	var dur = max(1.2, atk + decay + 0.5)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var base = 146.83
+	var chord = [1.0, 1.1892, 1.4983]
+	var filt = [0.0, 0.0, 0.0, 0.0]
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var osc = 0.0
+		
+		for ratio in chord:
+			var f = base * ratio
+			osc += (fmod(f * (1.0 + detune) * t, 1.0) * 2.0 - 1.0) * 0.5
+			osc += (fmod(f * (1.0 - detune) * t, 1.0) * 2.0 - 1.0) * 0.5
+		osc /= chord.size()
+		
+		var env = 1.0
+		if t < atk:
+			env = t / max(atk, 0.001)
+		else:
+			env = exp(-(t - atk) / max(decay, 0.05))
+		
+		var ffreq = cutoff * (1.0 + 0.2 * sin(TAU * 0.28 * t))
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.4)
+		var g = tan(PI * fc)
+		var k = clamp(reso, 0.0, 0.95) * 4.0
+		var fb = filt[3] * k
+		var x = osc - fb
+		for j in range(4):
+			filt[j] += g * (x - filt[j])
+			x = filt[j]
+		
+		data[i] = filt[3] * env * 0.55
+	
+	return _to_wav(data)
+
+
+func _gen_dub_echo_stab(p: Dictionary) -> AudioStreamWAV:
+	var freq = p.get("frequency", 320.0)
+	var decay = p.get("decay", 0.25)
+	var echo_time = p.get("echo_time", 0.38)
+	var echo_feedback = p.get("echo_feedback", 0.58)
+	var drive = p.get("drive", 0.2)
+	
+	var dur = max(1.4, echo_time * 4.5)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var delay_samples = int(max(1.0, echo_time * SAMPLE_RATE))
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var ph = fmod(freq * t, 1.0)
+		var saw = ph * 2.0 - 1.0
+		var pulse = 1.0 if ph < 0.38 else -1.0
+		var env = exp(-t / max(decay, 0.02))
+		var dry = (saw * 0.7 + pulse * 0.3) * env
+		
+		var delayed = 0.0
+		if i - delay_samples >= 0:
+			delayed = data[i - delay_samples] * clamp(echo_feedback, 0.0, 0.98)
+		
+		data[i] = tanh((dry + delayed) * (1.0 + drive * 2.2)) * 0.7
+	
+	return _to_wav(data)
+
+
+func _gen_ukg_shuff_hat(p: Dictionary) -> AudioStreamWAV:
+	var tempo = p.get("tempo", 132.0)
+	var swing = p.get("swing", 0.22)
+	var decay = p.get("decay", 0.05)
+	var tone = p.get("tone", 0.7)
+	
+	var dur = 1.0
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var step = 60.0 / max(tempo, 1.0) / 4.0
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var idx = int(floor(t / step))
+		var start = float(idx) * step
+		if idx % 2 == 1:
+			start += swing * step * 0.5
+		
+		var local_t = t - start
+		var env = 0.0
+		if local_t >= 0.0 and local_t < 0.14:
+			var accent = 1.0 if idx % 4 == 0 else (0.78 if idx % 2 == 0 else 0.58)
+			env = exp(-local_t / max(decay, 0.005)) * accent
+		
+		var met = 0.0
+		met += 1.0 if fmod(421.0 * t, 1.0) < 0.5 else -1.0
+		met += 1.0 if fmod(613.0 * t, 1.0) < 0.5 else -1.0
+		met += 1.0 if fmod(907.0 * t, 1.0) < 0.5 else -1.0
+		met /= 3.0
+		
+		var noise = randf_range(-1.0, 1.0)
+		var src = met * tone + noise * (1.0 - tone) * 0.8
+		data[i] = src * env * 0.45
+	
+	return _to_wav(data)
+
+
+func _gen_ukg_wobble_bass(p: Dictionary) -> AudioStreamWAV:
+	var cutoff = p.get("cutoff", 480.0)
+	var reso = p.get("resonance", 0.35)
+	var lfo_rate = p.get("lfo_rate", 3.2)
+	var lfo_depth = p.get("lfo_depth", 0.45)
+	var drive = p.get("drive", 0.25)
+	
+	var dur = 1.2
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var freq = 82.41
+	var filt = [0.0, 0.0, 0.0, 0.0]
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var square = 1.0 if fmod(freq * t, 1.0) < 0.5 else -1.0
+		var sub = sin(TAU * freq * 0.5 * t) * 0.6
+		var osc = square * 0.65 + sub * 0.35
+		
+		var wob = (sin(TAU * lfo_rate * t) * 0.5 + 0.5) * lfo_depth
+		var ffreq = cutoff * (1.0 + wob * 2.4)
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.35)
+		var g = tan(PI * fc)
+		var k = clamp(reso, 0.0, 0.95) * 4.0
+		var fb = filt[3] * k
+		var x = tanh((osc - fb) * (1.0 + drive * 3.0))
+		for j in range(4):
+			filt[j] += g * (x - filt[j])
+			x = filt[j]
+		
+		var env = exp(-t / 1.0)
+		data[i] = filt[3] * env * 0.7
+	
+	return _to_wav(data)
+
+
+func _gen_ukg_pluck(p: Dictionary) -> AudioStreamWAV:
+	var cutoff = p.get("cutoff", 1800.0)
+	var reso = p.get("resonance", 0.5)
+	var decay = p.get("decay", 0.22)
+	var pluck = p.get("pluck", 0.8)
+	var delay_mix = p.get("delay_mix", 0.22)
+	
+	var dur = 1.0
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var freq = 293.66
+	var filt = [0.0, 0.0, 0.0, 0.0]
+	var delay_samples = int(0.19 * SAMPLE_RATE)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var saw = fmod(freq * t, 1.0) * 2.0 - 1.0
+		var tri = 2.0 * abs(2.0 * fmod(freq * t, 1.0) - 1.0) - 1.0
+		var osc = saw * 0.7 + tri * 0.3
+		
+		var env = exp(-t / max(decay, 0.03))
+		var ffreq = cutoff + env * pluck * 3500.0
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.45)
+		var g = tan(PI * fc)
+		var k = clamp(reso, 0.0, 0.98) * 4.0
+		var fb = filt[3] * k
+		var x = osc - fb
+		for j in range(4):
+			filt[j] += g * (x - filt[j])
+			x = filt[j]
+		
+		var dry = filt[3] * env
+		var delayed = 0.0
+		if i - delay_samples >= 0:
+			delayed = data[i - delay_samples] * delay_mix * 0.5
+		
+		data[i] = (dry + delayed) * 0.72
+	
+	return _to_wav(data)
+
+
+func _gen_ukg_vocal_chop(p: Dictionary) -> AudioStreamWAV:
+	var formant = p.get("formant", 1.15)
+	var slice_rate = p.get("slice_rate", 8.0)
+	var decay = p.get("decay", 0.3)
+	var grit = p.get("grit", 0.3)
+	var width = p.get("width", 0.4)
+	
+	var dur = 1.0
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var base = 210.0 * formant
+	var slice_len = 1.0 / max(slice_rate, 0.5)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var local_t = fmod(t, slice_len)
+		var gate = 1.0 if local_t < slice_len * 0.34 else 0.0
+		var env = exp(-local_t / max(decay, 0.03))
+		
+		var v1 = sin(TAU * base * t)
+		var v2 = sin(TAU * base * 1.73 * t) * 0.55
+		var v3 = sin(TAU * base * 2.41 * t) * 0.32
+		var wob = sin(TAU * 2.0 * t) * width * 0.08
+		var noise = randf_range(-1.0, 1.0) * grit * 0.25
+		var sig = (v1 + v2 + v3 + wob + noise) * gate * env
+		data[i] = tanh(sig * (1.0 + grit * 2.5)) * 0.55
+	
+	return _to_wav(data)
+
+
+func _gen_neuro_mid_bass(p: Dictionary) -> AudioStreamWAV:
+	var freq = p.get("frequency", 90.0)
+	var mod_ratio = p.get("mod_ratio", 1.8)
+	var mod_index = p.get("mod_index", 6.0)
+	var cutoff = p.get("cutoff", 800.0)
+	var lfo_rate = p.get("lfo_rate", 4.5)
+	var drive = p.get("drive", 0.45)
+	
+	var dur = 1.2
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	var filt = [0.0, 0.0, 0.0, 0.0]
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var motion = sin(TAU * lfo_rate * t) * 0.5 + 0.5
+		var mod = sin(TAU * freq * mod_ratio * t) * mod_index * (0.6 + 0.4 * motion)
+		var fm = sin(TAU * freq * t + mod)
+		var saw = fmod(freq * 1.01 * t, 1.0) * 2.0 - 1.0
+		var osc = fm * 0.7 + saw * 0.3
+		
+		var ffreq = cutoff * (1.0 + motion * 2.2)
+		var fc = clamp(ffreq / SAMPLE_RATE, 0.001, 0.4)
+		var g = tan(PI * fc)
+		var fb = filt[3] * 3.2
+		var x = tanh((osc - fb) * (1.0 + drive * 4.0))
+		for j in range(4):
+			filt[j] += g * (x - filt[j])
+			x = filt[j]
+		
+		var env = exp(-t / 1.0)
+		data[i] = filt[3] * env * 0.78
+	
+	return _to_wav(data)
+
+
+func _gen_neuro_laser(p: Dictionary) -> AudioStreamWAV:
+	var start_freq = p.get("start_freq", 1800.0)
+	var end_freq = p.get("end_freq", 120.0)
+	var decay = p.get("decay", 0.35)
+	var resonance = p.get("resonance", 0.65)
+	var noise = p.get("noise", 0.15)
+	
+	var dur = max(0.5, decay * 2.0)
+	var count = int(SAMPLE_RATE * dur)
+	var data = PackedFloat32Array()
+	data.resize(count)
+	
+	for i in range(count):
+		var t = float(i) / SAMPLE_RATE
+		var prog = t / max(dur, 0.001)
+		var freq = lerp(start_freq, end_freq, pow(prog, 0.55))
+		
+		var sine = sin(TAU * freq * t)
+		var pulse = 1.0 if fmod(freq * 2.0 * t, 1.0) < 0.5 else -1.0
+		var transient = randf_range(-1.0, 1.0) * noise * exp(-t * 70.0)
+		var env = exp(-t / max(decay, 0.05))
+		
+		var sig = (sine * 0.75 + pulse * 0.25 + transient) * env
+		data[i] = tanh(sig * (1.0 + resonance * 2.2)) * 0.8
 	
 	return _to_wav(data)
 

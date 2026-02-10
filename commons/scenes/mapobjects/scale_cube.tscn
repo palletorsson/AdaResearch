@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/scale_cube.gd" id="1_script"]
+
+[node name="ScaleCube" type="Node3D"]
+script = ExtResource("1_script")
+min_scale = 0.5
+max_scale = 3.0
+center_offset = Vector3(1.5, 0, 0)
+pause_at_max = 4.0

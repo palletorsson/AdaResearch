@@ -13,7 +13,7 @@ enum GameMode {
 	EXPLORER    # Full lab unlocked, all paths available
 }
 
-@export var game_mode: GameMode = GameMode.TEST  # Default to TEST for quick iteration
+@export var game_mode: GameMode = GameMode.STORY # Default to TEST for quick iteration
 
 signal game_mode_changed(new_mode: GameMode)
 

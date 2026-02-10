@@ -4802,11 +4802,11 @@
 										 "description":  "3D phase space visualization showing system state. Maps F, E(S), and Î”E to X, Y, Z axes.",
 										 "scene":  "res://commons/interfaces/qfep/phase_cube.tscn"
 									 },
-					  "entropy_meter":,
+					  
 					  "transformation_workbench":  {
 											 "name":  "Transformation Workbench",
 											 "lookup_name":  "transformation_workbench",
-											 "description":  "Interactive learning tool for transformations. Grabbable object with live 4x4 matrix display, ghost position, and mode switching (T/R/S). Shows coordinate swaps for 90° rotations without trigonometry.",
+											 "description":  "Interactive learning tool for transformations. Grabbable object with live 4x4 matrix display, ghost position, and mode switching (T/R/S). Shows coordinate swaps for 90ï¿½ rotations without trigonometry.",
 											 "scene":  "res://algorithms/transformation/transformation_workbench/transformation_workbench.tscn",
 											 "category":  "transformation",
 											 "interaction":  "grab",
@@ -4822,7 +4822,8 @@
 														  "interactive",
 														  "learning"
 													  ]
-										 }  {
+										 },
+										 "entropy_meter": {
 											"name":  "Entropy Meter",
 											"lookup_name":  "entropy_meter",
 											"description":  "Visual meter showing current system entropy E(S). Bar fills from order (blue) to chaos (red).",
