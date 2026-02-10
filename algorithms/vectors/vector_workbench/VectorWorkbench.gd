@@ -2,10 +2,26 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 ## Vector Workbench - Universal vector operation visualizer
 ## Two draggable vectors with live computed outputs for all major operations
+## VR-compatible with interactable sliders and buttons
 
 # Input vectors (draggable)
 var vector_a: Node3D
 var vector_b: Node3D
+
+# Interactable controls (VR sliders and buttons)
+var _slider_a_x: Node
+var _slider_a_y: Node
+var _slider_a_z: Node
+var _slider_b_x: Node
+var _slider_b_y: Node
+var _slider_b_z: Node
+var _btn_all: Node
+var _btn_add: Node
+var _btn_dot: Node
+var _btn_cross: Node
+var _btn_proj: Node
+var _btn_reset: Node
+var _use_sliders: bool = false  # True when sliders are controlling vectors
 
 # Result vectors (computed, not grabbable)
 var result_add: Node3D       # A + B
@@ -67,6 +83,9 @@ func _ready():
 	_cache_vector_nodes(result_sub, _cache_sub)
 	_cache_vector_nodes(result_cross, _cache_cross)
 	_cache_vector_nodes(result_proj, _cache_proj)
+	
+	# Connect interactable controls (if present)
+	_setup_interactables()
 
 func _process(_delta):
 	var a = _get_vector_fast(vector_a, _cache_a)
@@ -287,3 +306,156 @@ func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary)
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+# === INTERACTABLES INTEGRATION ===
+
+func _setup_interactables():
+	"""Connect to interactable sliders and buttons for VR control"""
+	# Find control panel
+	var panel = get_node_or_null("ControlPanel")
+	if not panel:
+		print("VectorWorkbench: No ControlPanel found, using keyboard controls only")
+		return
+	
+	# Vector A sliders
+	_slider_a_x = panel.get_node_or_null("SliderA_X")
+	_slider_a_y = panel.get_node_or_null("SliderA_Y")
+	_slider_a_z = panel.get_node_or_null("SliderA_Z")
+	
+	# Vector B sliders
+	_slider_b_x = panel.get_node_or_null("SliderB_X")
+	_slider_b_y = panel.get_node_or_null("SliderB_Y")
+	_slider_b_z = panel.get_node_or_null("SliderB_Z")
+	
+	# Mode buttons
+	var btn_container = panel.get_node_or_null("ModeButtons")
+	if btn_container:
+		_btn_all = btn_container.get_node_or_null("BtnAll")
+		_btn_add = btn_container.get_node_or_null("BtnAdd")
+		_btn_dot = btn_container.get_node_or_null("BtnDot")
+		_btn_cross = btn_container.get_node_or_null("BtnCross")
+		_btn_proj = btn_container.get_node_or_null("BtnProj")
+		_btn_reset = btn_container.get_node_or_null("BtnReset")
+	
+	# Connect slider signals
+	_connect_slider(_slider_a_x, "_on_slider_a_x", -2.0, 2.0, "A.x")
+	_connect_slider(_slider_a_y, "_on_slider_a_y", -2.0, 2.0, "A.y")
+	_connect_slider(_slider_a_z, "_on_slider_a_z", -2.0, 2.0, "A.z")
+	_connect_slider(_slider_b_x, "_on_slider_b_x", -2.0, 2.0, "B.x")
+	_connect_slider(_slider_b_y, "_on_slider_b_y", -2.0, 2.0, "B.y")
+	_connect_slider(_slider_b_z, "_on_slider_b_z", -2.0, 2.0, "B.z")
+	
+	# Connect button signals
+	_connect_button(_btn_all, "_on_btn_all")
+	_connect_button(_btn_add, "_on_btn_add")
+	_connect_button(_btn_dot, "_on_btn_dot")
+	_connect_button(_btn_cross, "_on_btn_cross")
+	_connect_button(_btn_proj, "_on_btn_proj")
+	_connect_button(_btn_reset, "_on_btn_reset")
+	
+	# Initialize slider positions to match initial vectors
+	call_deferred("_sync_sliders_to_vectors")
+	
+	print("VectorWorkbench: Interactables connected for VR control")
+
+func _connect_slider(slider: Node, callback: String, range_min: float, range_max: float, label: String):
+	if not slider:
+		return
+	if slider.has_method("set_range"):
+		slider.set_range(range_min, range_max)
+	if slider.has_method("set_param_name"):
+		slider.set_param_name(label)
+	if slider.has_signal("slider_moved"):
+		slider.slider_moved.connect(Callable(self, callback))
+
+func _connect_button(btn: Node, callback: String):
+	if not btn:
+		return
+	if btn.has_signal("pressed"):
+		btn.pressed.connect(Callable(self, callback))
+
+func _sync_sliders_to_vectors():
+	"""Sync slider positions to current vector values"""
+	var a = _get_vector_fast(vector_a, _cache_a)
+	var b = _get_vector_fast(vector_b, _cache_b)
+	
+	_set_slider_value(_slider_a_x, a.x, -2.0, 2.0)
+	_set_slider_value(_slider_a_y, a.y, -2.0, 2.0)
+	_set_slider_value(_slider_a_z, a.z, -2.0, 2.0)
+	_set_slider_value(_slider_b_x, b.x, -2.0, 2.0)
+	_set_slider_value(_slider_b_y, b.y, -2.0, 2.0)
+	_set_slider_value(_slider_b_z, b.z, -2.0, 2.0)
+
+func _set_slider_value(slider: Node, value: float, range_min: float, range_max: float):
+	if not slider or not slider.has_method("set_normalized_value"):
+		return
+	var norm = remap(value, range_min, range_max, 0.0, 1.0)
+	slider.set_normalized_value(clamp(norm, 0.0, 1.0))
+
+# Slider callbacks
+func _on_slider_a_x(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_a_x, pos, -2.0, 2.0)
+	var a = _get_vector_fast(vector_a, _cache_a)
+	_update_vector_fast(vector_a, Vector3(val, a.y, a.z), _cache_a)
+
+func _on_slider_a_y(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_a_y, pos, -2.0, 2.0)
+	var a = _get_vector_fast(vector_a, _cache_a)
+	_update_vector_fast(vector_a, Vector3(a.x, val, a.z), _cache_a)
+
+func _on_slider_a_z(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_a_z, pos, -2.0, 2.0)
+	var a = _get_vector_fast(vector_a, _cache_a)
+	_update_vector_fast(vector_a, Vector3(a.x, a.y, val), _cache_a)
+
+func _on_slider_b_x(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_b_x, pos, -2.0, 2.0)
+	var b = _get_vector_fast(vector_b, _cache_b)
+	_update_vector_fast(vector_b, Vector3(val, b.y, b.z), _cache_b)
+
+func _on_slider_b_y(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_b_y, pos, -2.0, 2.0)
+	var b = _get_vector_fast(vector_b, _cache_b)
+	_update_vector_fast(vector_b, Vector3(b.x, val, b.z), _cache_b)
+
+func _on_slider_b_z(pos):
+	_use_sliders = true
+	var val = _slider_to_value(_slider_b_z, pos, -2.0, 2.0)
+	var b = _get_vector_fast(vector_b, _cache_b)
+	_update_vector_fast(vector_b, Vector3(b.x, b.y, val), _cache_b)
+
+func _slider_to_value(slider: Node, pos, range_min: float, range_max: float) -> float:
+	if not slider or not slider.has_method("get_normalized_value"):
+		return 0.0
+	var norm = slider.get_normalized_value()
+	return lerp(range_min, range_max, norm)
+
+# Button callbacks
+func _on_btn_all():
+	current_mode = Mode.ALL
+	_update_visibility()
+
+func _on_btn_add():
+	current_mode = Mode.ADDITION
+	_update_visibility()
+
+func _on_btn_dot():
+	current_mode = Mode.DOT_PRODUCT
+	_update_visibility()
+
+func _on_btn_cross():
+	current_mode = Mode.CROSS_PRODUCT
+	_update_visibility()
+
+func _on_btn_proj():
+	current_mode = Mode.PROJECTION
+	_update_visibility()
+
+func _on_btn_reset():
+	_reset_vectors()
+	_sync_sliders_to_vectors()
