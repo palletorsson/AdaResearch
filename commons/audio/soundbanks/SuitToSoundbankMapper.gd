@@ -5,6 +5,16 @@ class_name SuitToSoundbankMapper
 extends RefCounted
 
 const GENRE_BROWSER_PATH := "res://commons/audio/catalog/GenreSynthBrowser.gd"
+const GENRE_INTENT_BASE_PATH := "res://commons/audio/parameters/genre_intent/"
+
+const INTENT_FILE_ALIASES := {
+	"detroit_sb": "detroit_techno",
+	"burial_sb": "burial",
+	"boc_sb": "boards_of_canada",
+	"synthwave_sb": "synthwave",
+	"kraftwerk_sb": "kraftwerk",
+	"dub_house_sb": "dub_house"
+}
 
 const FALLBACK_GENRE_SUITES := {
 	"detroit_techno": {
@@ -114,6 +124,41 @@ static func list_genre_ids() -> Array:
 	return ids
 
 
+static func list_genre_intent_ids() -> Array:
+	var ids: Array = []
+	var dir := DirAccess.open(GENRE_INTENT_BASE_PATH)
+	if dir == null:
+		return ids
+
+	dir.list_dir_begin()
+	var entry := dir.get_next()
+	while not entry.is_empty():
+		if not dir.current_is_dir() and entry.ends_with(".json"):
+			ids.append(entry.get_basename())
+		entry = dir.get_next()
+	dir.list_dir_end()
+	ids.sort()
+	return ids
+
+
+static func get_genre_intent(genre_id: String) -> Dictionary:
+	var normalized := genre_id.to_lower().strip_edges()
+	if normalized.is_empty():
+		return {}
+
+	var resolved_id := str(INTENT_FILE_ALIASES.get(normalized, normalized))
+	var intent := _load_json_dictionary(GENRE_INTENT_BASE_PATH + resolved_id + ".json")
+	if intent.is_empty() and resolved_id != normalized:
+		intent = _load_json_dictionary(GENRE_INTENT_BASE_PATH + normalized + ".json")
+	if intent.is_empty():
+		return {}
+
+	intent["requested_genre_id"] = normalized
+	if not intent.has("genre_id"):
+		intent["genre_id"] = resolved_id
+	return intent
+
+
 static func get_genre_suite(genre_id: String) -> Dictionary:
 	var constants := _get_browser_constants()
 	var suites: Dictionary = constants.get("GENRE_SUITES", {})
@@ -133,6 +178,9 @@ static func to_soundbank_layout(genre_id: String, soundbank_id: String = "") -> 
 	var bank := SoundbankLoader.load_genre(resolved_bank)
 	if bank == null:
 		return {}
+	var intent := get_genre_intent(genre_id)
+	if intent.is_empty() and resolved_bank != genre_id:
+		intent = get_genre_intent(resolved_bank)
 
 	var available: Array = bank.get_available_sounds()
 	var role_mappings := {}
@@ -172,7 +220,8 @@ static func to_soundbank_layout(genre_id: String, soundbank_id: String = "") -> 
 		"mapped_sounds": mapped_sounds,
 		"missing": missing,
 		"available_sounds": available,
-		"sections": _build_sections(role_mappings)
+		"sections": _build_sections(role_mappings),
+		"intent": intent
 	}
 
 
@@ -215,6 +264,7 @@ static func build_runtime_suite(genre_id: String, suite_id: String = "", soundba
 		},
 		"default_pattern": "main",
 		"sections": layout.get("sections", {}),
+		"intent": layout.get("intent", {}),
 		"mapping": layout
 	}
 
@@ -360,3 +410,15 @@ static func _get_browser_constants() -> Dictionary:
 		return {}
 
 	return script.get_script_constant_map()
+
+
+static func _load_json_dictionary(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return {}
+	var parsed = JSON.parse_string(file.get_as_text())
+	if parsed is Dictionary:
+		return parsed
+	return {}

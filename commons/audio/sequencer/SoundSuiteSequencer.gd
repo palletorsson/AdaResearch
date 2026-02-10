@@ -8,6 +8,7 @@ signal beat_triggered(beat_number: int)
 signal pattern_changed(pattern_name: String)
 signal suite_changed(suite_name: String)
 signal bpm_changed(new_bpm: float)
+signal intent_changed(intent: Dictionary)
 
 const SAMPLE_RATE := 44100.0
 const SUITE_MAPPER_PATH := "res://commons/audio/soundbanks/SuitToSoundbankMapper.gd"
@@ -93,6 +94,7 @@ const BASE_SUITES := {
 
 var current_suite: String = ""
 var current_pattern: Dictionary = {}
+var current_intent: Dictionary = {}
 var is_playing: bool = false
 var bpm: float = 120.0
 var swing_amount: float = 0.0
@@ -149,10 +151,12 @@ func change_suite(suite_name: String) -> bool:
 		return false
 
 	current_suite = suite_name
+	current_intent = {}
 	_stream_cache.clear()
 	_build_track_state()
 
 	var suite_def: Dictionary = _suite_definitions[current_suite]
+	current_intent = suite_def.get("intent", {}).duplicate(true)
 	if suite_def.has("bpm"):
 		set_bpm(float(suite_def.get("bpm", bpm)))
 
@@ -169,6 +173,7 @@ func change_suite(suite_name: String) -> bool:
 		pattern_length = 16
 
 	suite_changed.emit(current_suite)
+	intent_changed.emit(current_intent.duplicate(true))
 	return true
 
 
@@ -245,6 +250,10 @@ func set_swing(amount: float):
 
 func set_variation(amount: float):
 	variation = clampf(amount, 0.0, 1.0)
+
+
+func get_current_intent() -> Dictionary:
+	return current_intent.duplicate(true)
 
 
 func mute_track(track_name: String, muted: bool):

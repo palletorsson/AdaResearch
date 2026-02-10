@@ -1,172 +1,97 @@
 # Audio Catalog Architecture
 
-## Overview
+Last updated: 2026-02-10
 
-The Word Synth system provides **bidirectional translation** between:
-- **Semantic words** (warm, bright, punchy) — human-understandable
-- **Synth parameters** (filter.cutoff, env.attack) — machine-controllable
+This document covers the desktop audio app surfaces in `res://commons/audio/catalog/`.
 
-## User Flows
+## Scope
 
-### Flow 1: Words → Sound (Forward)
-```
-User selects words in WordSynthDisplay
-	↓
-WordSynthBridge.words_to_live_params(layer, words)
-	├─ Looks up each word in word_synthesis_map.json
-	├─ Resolves conflicts (exclusive pairs, layer priorities)
-	└─ Returns {bass_filter_cutoff: 400, reverb_mix: 0.5, ...}
-	↓
-SongDevTools.live_params updated
-	↓
-_apply_realtime_effects() → AudioServer bus effects
-	↓
-User hears the change
-```
+Main entry scenes:
+- `res://commons/audio/catalog/AudioCatalogDesktop.tscn`
+- `res://commons/audio/catalog/SongDevTools.tscn`
+- `res://commons/audio/catalog/SongPreviewDesktop.tscn`
 
-### Flow 2: Sound → Words (Reverse)
-```
-User clicks layer name in WordSynthDisplay
-	↓
-SongDevTools.show_sound_breakdown(layer)
-	↓
-SynthConfigRegistry.get_layer_config(song_id, layer)
-	└─ Returns actual synth params for this layer
-	↓
-SoundIdentity.from_params(layer, config)
-	├─ _build_recipe() → signal chain
-	├─ _compute_features() → normalized 0-1 values
-	├─ _derive_traits() → word tags
-	└─ _build_explanations() → why each trait applies
-	↓
-SoundIdentityPanel displays:
-	├─ Recipe: [osc:saw] → [filter:lowpass] → [fx:distortion]
-	├─ Features: brightness=30%, warmth=70%, ...
-	├─ Traits: warm, thick, analog (clickable)
-	└─ Explanations: "warm because filter.cutoff=400"
-```
+Main scripts:
+- `res://commons/audio/catalog/AudioCatalogDesktop.gd`
+- `res://commons/audio/catalog/SongDevTools.gd`
+- `res://commons/audio/catalog/SongPreviewDesktop.gd`
+- `res://commons/audio/catalog/WordSynthBridge.gd`
+- `res://commons/audio/catalog/SoundIdentity.gd`
 
-### Flow 3: Song Playback
-```
-User clicks song button (e.g., "Kraftwerk")
-	↓
-SongDevTools._on_song_selected(song_id)
-	↓
-_generate_and_play(song_id)
-	↓
-AudioSynthesizer.generate_kraftwerk_song({})
-	└─ Creates AudioStreamInteractive with sections
-	↓
-_load_song_words(song_id) → populates WordSynthDisplay
-_load_timeline_for_song() → populates timeline
-	↓
-Audio plays, user can:
-	├─ Adjust sliders → _apply_realtime_effects()
-	├─ Click words → applies via WordSynthBridge
-	└─ Click layers → shows SoundIdentity breakdown
-```
+## Runtime flows
 
-## Component Responsibilities
+### Flow A: Semantic words -> audible change
+
+1. User edits words in `WordSynthDisplay`.
+2. `WordSynthBridge.words_to_live_params()` maps words to live parameter keys.
+3. `SongDevTools.live_params` is updated.
+4. `SongDevTools` applies values to AudioServer bus effects in real time.
+
+Source file for semantics:
+- `res://commons/audio/parameters/word_synthesis_map.json`
+
+### Flow B: Song selection -> timeline playback
+
+1. User selects a song in `SongDevTools` or `SongPreviewDesktop`.
+2. Song is generated via `AudioSynthesizer` and/or `SoundbankGenerator`.
+3. `AudioStreamInteractive` is loaded into player.
+4. Timeline metadata is built and sent to `SongTimeline`.
+5. Section and layer views are updated for editing/analysis.
+
+### Flow C: Genre suit -> sequencer playback
+
+1. `GenreSynthBrowser` defines suite roles/elements by genre.
+2. `SuitToSoundbankMapper` maps those elements to real soundbank sound names.
+3. Runtime suite payload (including optional `intent`) is produced.
+4. `SoundSuiteSequencer` runs patterns and triggers generators/scripts.
+
+## Component responsibilities
 
 | Component | Responsibility |
-|-----------|----------------|
-| `SongDevTools.gd` | Main UI, playback, slider controls |
-| `WordSynthDisplay.gd` | Shows word tags per layer, "+"/click handlers |
-| `WordSynthBridge.gd` | Words ↔ params translation, conflict resolution |
-| `SoundIdentity.gd` | Analyzes params into traits/features/recipe |
-| `SoundIdentityPanel.gd` | Visualizes SoundIdentity breakdown |
-| `SynthConfigRegistry.gd` | Stores actual configs for iconic sounds |
-| `AudioSynthesizer.gd` | Generates audio from params |
-| `word_synthesis_map.json` | Word definitions, param specs, rules |
+|---|---|
+| `AudioCatalogDesktop.gd` | Desktop catalog shell, playback dispatch, generator routing |
+| `SongDevTools.gd` | Deep editing surface, transport, timeline, semantic controls |
+| `SongPreviewDesktop.gd` | Fast track preview, export-oriented playback |
+| `WordSynthBridge.gd` | Word-to-parameter and reverse analysis support |
+| `SoundIdentity.gd` | Derives traits/features from synth parameter dictionaries |
+| `SoundIdentityPanel.gd` | Displays sound identity analysis in UI |
+| `SynthConfigRegistry.gd` | Known layer config references used by analysis UI |
 
-## Data Flow Diagram
+## Data contracts
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        SongDevTools                             │
-│  ┌──────────┐  ┌──────────────┐  ┌─────────────────────────┐   │
-│  │ Sliders  │  │ WordSynth    │  │ SoundIdentityPanel      │   │
-│  │          │  │ Display      │  │ (breakdown popup)       │   │
-│  └────┬─────┘  └──────┬───────┘  └───────────┬─────────────┘   │
-│       │               │                      │                  │
-│       ▼               ▼                      ▼                  │
-│  live_params    WordSynthBridge         SoundIdentity          │
-│       │               │                      │                  │
-└───────┼───────────────┼──────────────────────┼──────────────────┘
-		│               │                      │
-		▼               ▼                      ▼
-┌───────────────┐ ┌─────────────────┐ ┌───────────────────┐
-│ AudioServer   │ │ word_synthesis  │ │ SynthConfig       │
-│ (bus effects) │ │ _map.json       │ │ Registry          │
-└───────────────┘ └─────────────────┘ └───────────────────┘
-```
+### Word map contract
 
-## Configuration Sources
+`word_synthesis_map.json` provides:
+- parameter specification metadata
+- word groups and opposites
+- conflict resolution metadata
+- mapping from namespaced synth params to live UI params
 
-### word_synthesis_map.json (Source of Truth for Words)
-- `param_spec`: Valid param names, units, ranges
-- `timbral_words`, `envelope_words`, etc.: Word → param mappings
-- `conflict_rules`: Exclusive pairs, priority groups
-- `scene_presets`: Pre-defined word combinations
-- `layer_templates`: Default words for bass/pad/lead/etc.
+### Runtime suite contract
 
-### SynthConfigRegistry.gd (Source of Truth for Iconic Sounds)
-- Hardcoded configs for 16 song styles
-- Each song has layers with actual param values
-- Used for reverse analysis (what IS this sound?)
+`SuitToSoundbankMapper.build_runtime_suite()` returns:
+- `id`, `source_genre`, `soundbank_id`
+- `bpm`
+- `sounds` dictionary with generator metadata
+- `patterns` and `default_pattern`
+- `sections`
+- `intent` (advisory profile, optional)
 
-### WordSynthBridge.gd (Runtime Translation)
-- `param_mapping`: Maps namespaced params to live_params names
-- `layer_priority`: Layer-specific word weights
-- Reads from JSON at runtime
+### Intent profile contract
 
-## Trait Detection Rules
+Intent files in `res://commons/audio/parameters/genre_intent/*.json` are advisory:
+- they guide arrangement and harmony decisions
+- they do not block generation
+- they do not enforce fixed structures
 
-Traits are derived from features using threshold rules:
+## Why SongDevTools and SongPreview can sound different
 
-```gdscript
-const TRAIT_RULES = {
-	"bright": {"feature": "brightness", "min": 0.65},
-	"warm": {"feature": "warmth", "min": 0.55},
-	"plucky": {"feature": "attack_speed", "min": 0.8, 
-			   "feature2": "decay_length", "max2": 0.4},
-}
-```
+They use overlapping but not identical playback surfaces:
+- different UI defaults and control states
+- different per-scene effect setup behavior
+- different generator selection paths for some songs
 
-**Threshold rationale:**
-- 0.65 for "bright" = top 35% of brightness range
-- 0.55 for "warm" = above midpoint (warm is common)
-- Compound rules (plucky) require multiple conditions
-
-## Conflict Resolution
-
-When words conflict (warm + cold both applied):
-
-1. Check `exclusive_pairs` in conflict_rules
-2. Later word in list wins (user intent)
-3. Remaining words blended via weighted average
-4. Layer priority adjusts weights (bass prefers warm)
-
-## Adding New Words
-
-1. Add to `word_synthesis_map.json` under appropriate category
-2. Define `params` with ranges/tendencies
-3. Add to `opposites` array of antonyms
-4. Optionally add to `layer_templates` defaults
-
-## Adding New Songs
-
-1. Add generator in `AudioSynthesizer.gd`:
-   - `generate_<name>_song()` returns AudioStreamInteractive
-   - `_generate_<name>_section()` renders one section
-
-2. Add config in `SynthConfigRegistry.gd`:
-   - Layer names → param dictionaries
-   - Use namespaced params (filter.cutoff, not cutoff)
-
-3. Add to `SongDevTools.gd`:
-   - Song list button
-   - Match case in `_generate_and_play()`
-   - Word definitions in `_load_song_words()`
-
-4. Run `SynthConfigRegistry.print_validation_report()` to check typos
+For regressions, compare both scenes with the same song and check:
+- active bus effects on `Master`
+- whether reference/preview mode is enabled
+- song path (soundbank generator vs direct synthesizer path)

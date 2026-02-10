@@ -1,123 +1,80 @@
-# Audio System
+# AdaResearch Audio System
 
-> Procedural sound generation with hierarchical configuration
+Last updated: 2026-02-10
 
-## Overview
+This folder contains the audio app stack used by AdaResearch:
+- procedural song and sound generation
+- genre suit to soundbank mapping
+- timeline and semantic editing tools
+- runtime ambient and interaction audio
 
-The audio system provides centralized sound generation and ambient management through a singleton architecture. Sounds are defined in JSON parameter files and generated on-demand with caching.
+## Canonical docs
 
-## Architecture
+Use these files as source of truth:
+- `commons/audio/README.md` (this file)
+- `commons/audio/catalog/ARCHITECTURE.md`
+- `commons/audio/SOUND_SUITE_SEQUENCER.md`
+- `commons/audio/parameters/README.md`
+- `commons/audio/soundbanks/README.md`
+- `commons/audio/SOUND_SYSTEM_GUIDE.md` (ambient/runtime path)
 
-```
-┌─────────────────────────────────────┐
-│  SoundBankSingleton (AutoLoad)      │
-│  - Sound generation & caching       │
-│  - Audio bus management             │
-│  - Parameter file loading           │
-└─────────────────────────────────────┘
-              │
-              ▼
-┌─────────────────────────────────────┐
-│  AmbientSoundController (per-scene) │
-│  - Loads ambient presets            │
-│  - Manages continuous layers        │
-│  - Triggers random events           │
-└─────────────────────────────────────┘
-              │
-              ▼
-┌─────────────────────────────────────┐
-│  GridAudioComponent (grid system)   │
-│  - Connects maps to audio           │
-└─────────────────────────────────────┘
-```
+Historical notes in other markdown files can still be useful, but they are not the contract.
 
-## Structure
+## Current architecture
 
-```
-audio/
-├── SoundBankSingleton.gd      # Core singleton (AutoLoad)
-├── AmbientSoundController.gd  # Per-map ambient
-├── AsyncAudioGenerator.gd     # Background thread generation
-├── presets/                   # Ambient preset definitions
-│   └── *.json
-├── parameters/                # Sound parameter files (70+)
-│   ├── basic/                 # Simple sounds
-│   ├── drums/                 # Percussion
-│   ├── synthesizers/          # Classic synths
-│   ├── retro/                 # Chiptune
-│   ├── experimental/          # Advanced synthesis
-│   └── ambient/               # Atmospheric drones
-├── generators/                # Synthesis engines
-├── interfaces/                # Sound design tools
-├── runtime/                   # Game runtime components
-└── documentation/             # Guides
-```
+### 1. Catalog and song authoring path
 
-## Configuration Hierarchy
+`AudioCatalogDesktop` and `SongDevTools` are the main desktop tools:
+- browse sounds and synth elements
+- preview and compare songs
+- map words to synthesis parameters
+- export WAV and MIDI
 
-Audio configuration cascades from global to specific:
+Key scenes:
+- `res://commons/audio/catalog/AudioCatalogDesktop.tscn`
+- `res://commons/audio/catalog/SongDevTools.tscn`
+- `res://commons/audio/catalog/SongPreviewDesktop.tscn`
 
-```
-Global defaults (map_sequences.json → audio_defaults)
-    │
-    └──► Sequence overrides (sequences/*.json → audio)
-            │
-            └──► Map overrides (map_data.json → audio)
-```
+### 2. Genre suit to playback path
 
-## Ambient Presets
+Suit path (used for genre-oriented sequencing):
 
-Presets define layered soundscapes:
+`GenreSynthBrowser` -> `SuitToSoundbankMapper` -> `SoundSuiteSequencer` -> `SoundbankLoader`/`Soundbank scripts`
 
-```json
-{
-  "name": "dark_ambient",
-  "layers": [
-    {"sound": "drone_low", "volume": -12, "continuous": true},
-    {"sound": "wind", "volume": -18, "continuous": true}
-  ],
-  "events": [
-    {"sound": "distant_thunder", "min_interval": 30, "max_interval": 120}
-  ]
-}
-```
+This path is intentionally open-ended:
+- genre intent profiles are advisory
+- no build-time lock or forced arrangement template
+- tools can use intent when useful and ignore it when exploration is needed
 
-## Key Files
+### 3. Runtime ambient path
 
-| File | Purpose |
-|------|---------|
-| `SoundBankSingleton.gd` | Core sound management |
-| `AmbientSoundController.gd` | Per-map ambient |
-| `SOUND_SYSTEM_GUIDE.md` | Complete integration guide |
-| `presets_manifest.json` | Available preset list |
+Map/runtime ambient path:
 
-## Usage
+`SoundBankSingleton` + `AmbientSoundController` + preset/config JSON
 
-### In Sequences
+This path is mainly for in-world audio behavior and scene transitions.
 
-```json
-{
-  "sequence_name": {
-    "audio": {
-      "ambient_preset": "dark_ambient",
-      "volume": -10.0
-    }
-  }
-}
-```
+## Directory map
 
-### Programmatically
+- `catalog/`: desktop tools, preview UIs, semantic word bridge
+- `soundbanks/`: isolated genre sound scripts + loader + mapper
+- `sequencer/`: suite sequencer and step sequencer
+- `generators/`: core synthesis and export helpers
+- `parameters/`: JSON parameter libraries, song configs, genre intent profiles
+- `presets/`: runtime preset sets
+- `tests/`: validation scenes and scripts
 
-```gdscript
-# Get a sound
-var sound = SoundBank.get_sound("pickup_coin")
+## Quick start
 
-# Set ambient
-AmbientSoundController.set_preset("dark_ambient")
-```
+1. Open `res://commons/audio/catalog/SongDevTools.tscn` for iterative authoring.
+2. Open `res://commons/audio/catalog/SongPreviewDesktop.tscn` for fast track preview/export.
+3. Open `res://commons/audio/tests/test_sound_suite_sequencer.tscn` for suite sequencing checks.
 
-## Testing
+## Practical update rule
 
-- `interfaces/` — Sound design tools with real-time preview
-- `testing/` — Validation scenes
-- `catalog/SongPreviewDesktop.tscn` — Sound browser
+When behavior changes in code, update docs in this order:
+1. `commons/audio/README.md`
+2. `commons/audio/catalog/ARCHITECTURE.md`
+3. Feature-specific doc (`SOUND_SUITE_SEQUENCER.md`, `parameters/README.md`, or `soundbanks/README.md`)
+
+If docs and code disagree, code wins until docs are patched.

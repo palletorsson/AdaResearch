@@ -1,118 +1,87 @@
-# Sound Parameters System
+# Audio Parameters
 
-This directory contains individual JSON files for each sound type, making it easy to organize, share, and modify sound parameters.
+Last updated: 2026-02-10
 
-## How It Works
+This folder contains JSON data used by generators, catalog tools, song builders, and suit mapping.
 
-Each sound type has its own JSON file (e.g., `pickup_mario.json`, `teleport_drone.json`) with the following structure:
+## Main paths
 
-```json
-{
-  "_metadata": {
-    "sound_type": "pickup_mario",
-    "description": "Classic video game pickup sound with frequency sweep",
-    "created_at": "2024-12-24T08:57:00Z",
-    "version": "1.0",
-    "is_default": true
-  },
-  "parameters": {
-    "duration": {
-      "value": 0.5,
-      "min": 0.1,
-      "max": 3.0,
-      "step": 0.01
-    },
-    "start_freq": {
-      "value": 440.0,
-      "min": 100.0,
-      "max": 1000.0,
-      "step": 5.0
-    },
-    "wave_type": {
-      "value": "square",
-      "options": ["sine", "square", "sawtooth"]
-    }
-  }
-}
-```
+- `res://commons/audio/parameters/basic/`
+- `res://commons/audio/parameters/drums/`
+- `res://commons/audio/parameters/synthesizers/`
+- `res://commons/audio/parameters/retro/`
+- `res://commons/audio/parameters/ambient/`
+- `res://commons/audio/parameters/experimental/`
+- `res://commons/audio/parameters/pop_edm/`
+- `res://commons/audio/parameters/songs/`
+- `res://commons/audio/parameters/genre_intent/`
+- `res://commons/audio/parameters/word_synthesis_map.json`
 
-## Parameter Types
+## Loader behavior
 
-### Numeric Parameters
-- `value`: Current value
-- `min`: Minimum allowed value
-- `max`: Maximum allowed value  
-- `step`: Step size for sliders
+Two loaders are active in this repo:
 
-### Option Parameters
-- `value`: Currently selected option
-- `options`: Array of available options
+### 1. `SoundParameterManager`
+File: `res://commons/audio/components/SoundParameterManager.gd`
 
-## Available Sound Types
+Used mainly for legacy/basic sound parameter flow:
+- prefers `user://sound_parameters/*.json`
+- falls back to `res://commons/audio/parameters/basic/*.json`
+- merges with built-in defaults
 
-- `basic_sine_wave.json` - Pure sine wave with fundamental frequency control
-- `pickup_mario.json` - Classic video game pickup sound with frequency sweep
-- `teleport_drone.json` - Sci-fi teleportation sound with modulation and noise
-- `lift_bass_pulse.json` - Mechanical bass pulse for elevators and machinery
-- `ghost_drone.json` - Atmospheric drone with multiple harmonic layers
-- `melodic_drone.json` - Complex harmonic drone with tremolo modulation
-- `laser_shot.json` - Sci-fi laser weapon sound with frequency decay
-- `power_up_jingle.json` - Uplifting musical power-up sound
-- `explosion.json` - Multi-layered explosion with low/mid/high frequency components
-- `retro_jump.json` - 8-bit style jump sound with duty cycle modulation
-- `shield_hit.json` - Impact sound with metallic ring characteristics
-- `ambient_wind.json` - Natural wind ambience with filtered noise
+### 2. `EnhancedParameterLoader`
+File: `res://commons/audio/runtime/EnhancedParameterLoader.gd`
 
-## File Locations
+Used for broad catalog loading across categories.
 
-- **Default Parameters**: `res://commons/audio/sound_parameters/` (read-only, part of project)
-- **User Customizations**: `user://sound_parameters/` (writable, saved locally)
+Accepted JSON patterns:
+1. `{"_metadata": {...}, "parameters": {...}}`
+2. `{"sound_name": {"_metadata": {...}, "parameters": {...}}}`
+3. direct param dictionary where entries have a `value` field
 
-## How Parameters are Loaded
+## Special parameter sets
 
-The system uses a priority system:
+### Songs
 
-1. **User Directory First**: `user://sound_parameters/filename.json`
-2. **Resource Directory**: `res://commons/audio/sound_parameters/filename.json` 
-3. **Built-in Defaults**: Hardcoded fallback parameters
+`res://commons/audio/parameters/songs/*.json` holds song-level configuration and variants.
+Archive snapshots are under:
+- `res://commons/audio/parameters/songs/archive/`
 
-## Creating New Sound Types
+### Genre intent (advisory)
 
-1. Create a new JSON file with your sound type name
-2. Follow the parameter structure shown above
-3. Add the sound type to `SoundParameterManager.sound_type_files`
-4. Implement the sound generation in `AudioSynthesizer.gd`
+`res://commons/audio/parameters/genre_intent/*.json` stores research guidance for genre suits.
 
-## Benefits
+Intent files are:
+- non-blocking
+- non-strict
+- optional for downstream systems
 
-✅ **Organized**: Each sound in its own file  
-✅ **Shareable**: Easy to copy/paste individual sound configs  
-✅ **Versionable**: Each file can be tracked in git  
-✅ **Editable**: Modify parameters in any text editor  
-✅ **Extendable**: Add new sounds without touching existing files  
-✅ **Cacheable**: Fast loading with intelligent caching  
-✅ **Fallback Safe**: Always works even if files are missing  
+Used by:
+- `res://commons/audio/soundbanks/SuitToSoundbankMapper.gd`
 
-## Example Usage
+### Semantic word map
 
-```gdscript
-# Load parameters for a specific sound
-var params = SoundParameterManager.get_sound_parameters("pickup_mario")
+`res://commons/audio/parameters/word_synthesis_map.json` is used by:
+- `WordSynthBridge`
+- `SoundIdentity`
+- trait calibration and word UI panels
 
-# Save modified parameters
-SoundParameterManager.save_sound_parameters("pickup_mario", modified_params)
+It defines:
+- word groups
+- opposites/conflict metadata
+- param mapping to live UI controls
+- trait rules
 
-# Get all available sound types
-var types = SoundParameterManager.get_available_sound_types()
+## Adding a new parameter file
 
-# Reload parameters from files (clear cache)
-SoundParameterManager.reload_parameters("pickup_mario")
-```
+1. Place JSON in the correct category folder.
+2. Keep parameter names consistent with target generator/tool.
+3. If it is for semantic control, update `word_synthesis_map.json`.
+4. Validate from a desktop tool:
+   - `SongDevTools.tscn`
+   - `AudioCatalogDesktop.tscn`
+   - or headless test scripts in `res://commons/audio/tests/`.
 
-## Development Workflow
+## Non-goal
 
-1. **Modify Parameters**: Use the sound designer interface
-2. **Auto-Save**: Parameters are automatically saved to user directory
-3. **Export**: Use the file manager to export configurations
-4. **Share**: Copy JSON files to share with others
-5. **Version Control**: Commit default parameter files to git 
+This folder is not enforcing one strict schema across all subsystems. Different subsystems have different contracts by design.
