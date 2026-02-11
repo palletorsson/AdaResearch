@@ -17,7 +17,7 @@ extends Node3D
 	Color.PURPLE, Color.AQUA, Color.DARK_ORANGE, Color.CYAN
 ]
 
-var tube_segments: Array = []
+var tube_segments: Array[MultiMeshInstance3D] = []
 var elapsed: float = 0.0
 
 func _ready():
@@ -43,6 +43,8 @@ func _setup_environment():
 
 func _create_sine_tubes():
 	var half_len := int(tube_length * 0.5)
+	var segments_per_tube := half_len * 2  # -half_len to half_len-1
+
 	var cyl_mesh := CylinderMesh.new()
 	cyl_mesh.top_radius = tube_radius
 	cyl_mesh.bottom_radius = tube_radius
@@ -51,34 +53,35 @@ func _create_sine_tubes():
 	cyl_mesh.radial_segments = 24
 
 	for i in range(tube_count):
-		var segments_for_tube: Array[MeshInstance3D] = []
 		var color = color_variants[i % color_variants.size()]
 		var material := _make_metallic(color)
-		for z in range(-half_len, half_len):
-			var mesh_instance := MeshInstance3D.new()
-			mesh_instance.mesh = cyl_mesh
-			mesh_instance.material_override = material
-			add_child(mesh_instance)
-			segments_for_tube.append(mesh_instance)
-		tube_segments.append(segments_for_tube)
+
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = segments_per_tube
+		mm.mesh = cyl_mesh
+
+		var mmi := MultiMeshInstance3D.new()
+		mmi.multimesh = mm
+		mmi.material_override = material
+		add_child(mmi)
+		tube_segments.append(mmi)
+
 	_update_tubes(0.0)
 
 func _update_tubes(time_val: float):
 	var half_len := int(tube_length * 0.5)
+	var rot_basis := Basis.IDENTITY.rotated(Vector3(1, 0, 0), PI * 0.5)
+
 	for i in range(tube_segments.size()):
-		var segments: Array = tube_segments[i]
+		var mm: MultiMesh = tube_segments[i].multimesh
 		var idx := 0
 		for z in range(-half_len, half_len):
 			var phase := float(i) * 0.6 + (time_val * rotation_speed)
 			var x := sin(float(z) * wave_frequency + phase) * wave_amplitude
 			var y := sin(float(z) * wave_frequency * 0.7 + phase) * 0.5 * wave_amplitude + hallway_height * 0.5
 			var pos := Vector3(x, y, float(z))
-			var node: MeshInstance3D = segments[idx]
-			node.position = pos
-			# Orient cylinder along Z direction
-			var basis := Basis.IDENTITY
-			basis = basis.rotated(Vector3(1, 0, 0), PI * 0.5)
-			node.basis = basis
+			mm.set_instance_transform(idx, Transform3D(rot_basis, pos))
 			idx += 1
 
 func _make_metallic(col: Color) -> StandardMaterial3D:

@@ -1,0 +1,282 @@
+{
+    "_metadata": {
+        "sound_type": "dark_wave_cathedral_song",
+        "display_name": "Cathedral",
+        "description": "Dark wave / cold wave. Syncopated post-punk drums, tribal toms, Juno chorus bass, cold detuned arpeggios, haunting sparse lead. Abandoned cathedral at midnight.",
+        "category": "songs",
+        "tags": ["dark_wave", "cold_wave", "post_punk", "goth", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["She Past Away", "Boy Harsher", "Lebanon Hanover", "Bauhaus", "Clan of Xymox"],
+        "reference_tracks": ["Ritüel", "Pain", "Gallowdance", "Bela Lugosi's Dead", "A Day"]
+    },
+    "identity": {
+        "emotion": "beautiful_despair",
+        "era": "1979_revival_2020s",
+        "character": ["cold", "driving", "hypnotic", "cavernous", "ritualistic"]
+    },
+    "parameters": {
+        "duration": { "min": 120.0, "max": 360.0, "value": 240.0, "step": 30.0, "description": "Song duration in seconds" },
+        "bpm": { "min": 110, "max": 125, "value": 118, "step": 1, "description": "Dark wave sweet spot — deliberate but driving" },
+        "key": { "options": ["Dm", "Am", "Em", "Gm"], "value": "Dm", "description": "D minor — the traditional key of darkness" },
+        "darkness": { "min": 0.0, "max": 1.0, "value": 0.8, "step": 0.1, "description": "Filter darkness — higher = more closed filters" }
+    },
+    "sound_design": {
+        "bass": {
+            "oscillators": 2,
+            "waveforms": ["sawtooth", "pulse"],
+            "pulse_width": 0.40,
+            "detune_cents": 7,
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": 450,
+            "filter_resonance": 0.35,
+            "filter_lfo_rate_hz": 0.2,
+            "filter_lfo_depth_hz": 150,
+            "chorus": { "rate_hz": 0.3, "depth": 0.003 },
+            "attack_ms": 30,
+            "sustain": 0.85,
+            "release_ms": 150,
+            "saturation": 1.5,
+            "character": "juno_106_moog_analog_round_with_midrange"
+        },
+        "pad": {
+            "oscillators": 5,
+            "waveform": "sawtooth",
+            "detune_cents": 12,
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": 1800,
+            "filter_lfo_rate_hz": 0.15,
+            "filter_lfo_depth_hz": 400,
+            "chorus": { "rate_hz": 0.25, "depth": 0.004 },
+            "attack_ms": 1200,
+            "sustain": 0.6,
+            "release_ms": 2500,
+            "character": "juno_60_cold_strings_eerie_not_warm"
+        },
+        "arp": {
+            "oscillators": 3,
+            "waveform": "pulse",
+            "pulse_width": 0.35,
+            "detune_cents": 8,
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": 2200,
+            "chorus": { "rate_hz": 0.4, "depth": 0.003 },
+            "attack_ms": 1,
+            "decay_ms": 80,
+            "sustain": 0.3,
+            "pattern_type": "triangle",
+            "pattern_indices": [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3],
+            "character": "sh_101_cold_hypnotic_16th_pulse"
+        },
+        "lead": {
+            "oscillators": 1,
+            "waveform": "sawtooth",
+            "filter_cutoff_hz": 3000,
+            "attack_ms": 50,
+            "release_ms": 800,
+            "vibrato_rate_hz": 4.5,
+            "vibrato_depth_cents": 6,
+            "level": 0.14,
+            "character": "ghost_melody_barely_there_drenched_in_space"
+        },
+        "atmosphere": {
+            "drone_octave": -2,
+            "noise_filter_hz": 800,
+            "breathing_lfo_hz": 0.05,
+            "character": "cathedral_felt_not_heard"
+        },
+        "drums": {
+            "style": "post_punk_syncopated",
+            "kick": {
+                "pitch_start_hz": 120,
+                "pitch_end_hz": 55,
+                "pitch_sweep_ms": 25,
+                "body_decay_ms": 90,
+                "click_ms": 2,
+                "character": "tight_punchy_not_boomy"
+            },
+            "snare": {
+                "body_hz": 180,
+                "body_decay_ms": 15,
+                "noise_decay_ms": 25,
+                "gate_ms": 80,
+                "character": "gated_crack_dry_no_tail"
+            },
+            "hihat": {
+                "metallic_hz": [6500, 9200],
+                "closed_decay_ms": 20,
+                "open_decay_ms": 80,
+                "character": "thin_metallic_tr606"
+            },
+            "tom_low": {
+                "fundamental_hz": 90,
+                "decay_ms": 200,
+                "character": "tribal_deep_resonant"
+            },
+            "tom_high": {
+                "fundamental_hz": 150,
+                "decay_ms": 120,
+                "character": "tight_pitched_percussive"
+            },
+            "processing": ["gated_reverb_80ms", "no_sidechain"]
+        }
+    },
+    "chord_progressions": [
+        {
+            "name": "dark_wave_main",
+            "chords": ["Dm", "Am", "Bb", "Am"],
+            "midi_roots": [50, 45, 46, 45],
+            "voicings": [
+                [50, 53, 57, 62],
+                [45, 48, 52, 57],
+                [46, 50, 53, 58],
+                [45, 48, 52, 57]
+            ],
+            "scale_degrees": [0, 4, 5, 4],
+            "description": "i-v-VI-v — Am↔Bb half-step oscillation, never resolves"
+        },
+        {
+            "name": "dark_wave_b_section",
+            "chords": ["Bb", "C5", "Dm", "Dm"],
+            "midi_roots": [46, 48, 50, 50],
+            "voicings": [
+                [46, 53, 58, 62],
+                [48, 55, 60, 67],
+                [50, 57, 62, 65],
+                [50, 57, 62, 65]
+            ],
+            "scale_degrees": [5, 6, 0, 0],
+            "description": "VI-VII-i-i — Aeolian cadence, Bauhaus resolution"
+        }
+    ],
+    "melody": {
+        "main": {
+            "notes_midi": [74, -1, -1, -1, -1, -1, -1, -1, 77, -1, -1, 76, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, 69, -1, -1, -1, -1, -1, -1, -1,
+                           70, -1, -1, -1, -1, -1, 69, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "description": "D5→F5→E5→(rest)→A4→(rest)→Bb4→A4→(silence). 7 notes in 4 bars. Bar 4 empty — the exhale."
+        },
+        "variation": {
+            "notes_midi": [74, -1, -1, -1, 75, -1, -1, -1, 74, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, 72, -1, -1, -1, -1, -1, -1, -1,
+                           69, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "description": "D5→Eb5→D5→(rest)→C5→(rest)→A4→(silence). Phrygian Eb borrowing."
+        }
+    },
+    "patterns": {
+        "drums_main": {
+            "name": "Ritüel",
+            "kick":     [2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            "snare":    [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+            "hihat":    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0.5, 0],
+            "tom_low":  [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+            "tom_high": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+            "clap":     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+        },
+        "drums_intro": {
+            "name": "Fog Machine",
+            "kick":     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0],
+            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+            "hihat":    [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+            "tom_low":  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_high": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "drums_breakdown": {
+            "name": "Tribal Descent",
+            "kick":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "hihat":    [0.5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0],
+            "tom_low":  [2, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 1],
+            "tom_high": [0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
+            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "drums_fill": {
+            "name": "The Return",
+            "kick":     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0],
+            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            "hihat":    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1],
+            "tom_low":  [2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            "tom_high": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+        },
+        "bass_main": {
+            "pattern": [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+            "note": "Follows chord root. Step 15 = octave jump (anticipation).",
+            "style": "sustained"
+        },
+        "bass_b_section": {
+            "pattern": [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+            "note": "Straight quarter notes. Locks with kick for driving urgency.",
+            "style": "sustained"
+        },
+        "arp": {
+            "pattern": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            "chord_indices": [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3],
+            "index_map": { "0": "root", "1": "3rd", "2": "5th", "3": "octave" },
+            "note": "Triangle cycle through chord tones. Never stops. The heartbeat."
+        }
+    },
+    "groove": {
+        "swing_pct": 7,
+        "humanize_ms": 4,
+        "humanize_exclude": ["kick"],
+        "velocity": {
+            "base": 0.75,
+            "accent": 1.0,
+            "ghost": 0.35,
+            "variation": 0.06
+        }
+    },
+    "arrangement": {
+        "structure": "verse_chorus_with_ritual_breakdown",
+        "sections": [
+            { "name": "intro",      "bars": 8,  "pattern": "drums_intro",     "elements": ["atmosphere", "pad"],                                          "progression": "dark_wave_main" },
+            { "name": "build",      "bars": 8,  "pattern": "drums_intro",     "elements": ["atmosphere", "pad", "bass", "hihat"],                         "progression": "dark_wave_main" },
+            { "name": "verse",      "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "atmosphere"], "progression": "dark_wave_main" },
+            { "name": "chorus",     "bars": 8,  "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
+            { "name": "verse_2",    "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
+            { "name": "chorus_2",   "bars": 8,  "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"], "progression": "dark_wave_main", "melody": "main" },
+            { "name": "breakdown",  "bars": 8,  "pattern": "drums_breakdown", "elements": ["tom_low", "tom_high", "hihat", "pad", "atmosphere"],           "progression": "dark_wave_b_section" },
+            { "name": "build_2",    "bars": 4,  "pattern": "drums_fill",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
+            { "name": "chorus_3",   "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"], "progression": "dark_wave_main", "melody": "variation" },
+            { "name": "outro",      "bars": 8,  "pattern": "drums_intro",     "elements": ["pad", "atmosphere"],                                          "progression": "dark_wave_main" }
+        ],
+        "total_bars": 100,
+        "total_duration_at_118bpm": "3m23s",
+        "transitions": {
+            "crossfade_s": 3.0,
+            "breakdown_entry": "drums_drop_toms_enter",
+            "chorus_entry": "fill_pattern_snap"
+        },
+        "energy_arc": "build → peak → sustain → drop → ritual → rebuild → peak → fade"
+    },
+    "mixing": {
+        "reverb": {
+            "type": "hall",
+            "pre_delay_ms": 40,
+            "decay_s": 3.5,
+            "mix": 0.30,
+            "character": "cavernous_but_clear"
+        },
+        "delay": {
+            "style": "dotted_eighth",
+            "feedback": 0.35,
+            "mix": 0.20,
+            "applied_to": ["lead", "arp"]
+        },
+        "chorus": {
+            "type": "bbd_juno",
+            "rate_hz": 0.3,
+            "depth": 0.003,
+            "applied_to": ["bass", "pad", "arp"]
+        },
+        "eq": {
+            "high_shelf_cut_db": -2,
+            "description": "Slight top-end roll-off for darkness"
+        },
+        "stereo_width": 0.75,
+        "master_level": 0.85
+    }
+}

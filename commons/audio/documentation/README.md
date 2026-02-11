@@ -1,6 +1,6 @@
 # Audio Documentation Index
 
-Last updated: 2026-02-10
+Last updated: 2026-02-11
 
 This folder is the documentation index for `res://commons/audio`.
 
@@ -17,6 +17,7 @@ Use these first:
 ## Supporting docs in this folder
 
 These are supplemental and may be task-specific:
+- `commons/audio/documentation/SUITE_QA_MATRIX_2026-02-11.md`
 - `commons/audio/documentation/SYNTH_ELEMENTS.md`
 - `commons/audio/documentation/AudioProjectStructure.md`
 - `commons/audio/documentation/README_SoundDesignerTutorial.md`

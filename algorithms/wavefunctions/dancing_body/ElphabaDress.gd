@@ -1,6 +1,9 @@
 # ElphabaDress - Mathematical wave dress that follows a rigged skeleton
 # Inspired by Elphaba from Wicked - a flowing dress made of sine waves
 # Attaches to skeleton bones and generates parametric fabric
+#
+# Performance: Mesh is built ONCE in _ready(). Animation updates vertex positions
+# directly via ArrayMesh surface arrays — no SurfaceTool per frame.
 
 extends Node3D
 
@@ -34,8 +37,18 @@ var _time: float = 0.0
 var _skeleton: Skeleton3D
 var _spine_bone_idx: int = -1
 var _hip_bone_idx: int = -1
-var _base_vertices: Array = []  # Store original vertices for animation
+var _base_vertices: Array = []  # 2D array [row][col] for animation math (indexes by row/column)
 var _initialized: bool = false  # Prevent animation before mesh is ready
+
+# Cached surface arrays from the initial mesh build — reused every frame
+var _cached_surface_arrays: Array = []
+# Base vertex positions (PackedVector3Array) — the unanimated positions
+var _base_vertices_packed: PackedVector3Array
+# Precomputed per-vertex animation parameters to avoid recalculating each frame
+var _vertex_u: PackedFloat32Array       # u parameter (0..1, top to bottom)
+var _vertex_angle: PackedFloat32Array   # angle around the circle
+var _vertex_cos_angle: PackedFloat32Array
+var _vertex_sin_angle: PackedFloat32Array
 
 func _ready():
 	call_deferred("_initialize")
@@ -120,7 +133,7 @@ func create_dress_mesh():
 
 	# Generate and apply mesh
 	surface_tool.generate_normals()
-	var generated_mesh = surface_tool.commit()
+	var generated_mesh: ArrayMesh = surface_tool.commit()
 
 	if mesh_instance:
 		mesh_instance.queue_free()
@@ -132,8 +145,55 @@ func create_dress_mesh():
 
 	apply_material()
 
+	# Cache the surface arrays for per-frame animation (avoids SurfaceTool rebuild)
+	_cached_surface_arrays = generated_mesh.surface_get_arrays(0)
+	_base_vertices_packed = PackedVector3Array(_cached_surface_arrays[Mesh.ARRAY_VERTEX])
+
+	# Precompute per-vertex animation parameters
+	_precompute_vertex_params()
+
 	_initialized = true
-	print("ElphabaDress: Mesh created with %d vertex rows" % _base_vertices.size())
+	print("ElphabaDress: Mesh created with %d vertex rows, %d packed verts" % [_base_vertices.size(), _base_vertices_packed.size()])
+
+func _precompute_vertex_params():
+	# For each vertex in the packed array, figure out which (i, j) grid cell it came from
+	# and store the u/angle values so we don't recompute them every frame.
+	#
+	# The mesh was built by _build_mesh_faces which emits 6 vertices per quad (2 triangles).
+	# Quad (i, j) emits vertices in order: v0, v1, v2, v0, v2, v3
+	# where v0 = [i][j], v1 = [i+1][j], v2 = [i+1][j+1], v3 = [i][j+1]
+	#
+	# We need the u and angle for each vertex to apply the wave animation.
+
+	var vert_count = _base_vertices_packed.size()
+	_vertex_u = PackedFloat32Array()
+	_vertex_angle = PackedFloat32Array()
+	_vertex_cos_angle = PackedFloat32Array()
+	_vertex_sin_angle = PackedFloat32Array()
+	_vertex_u.resize(vert_count)
+	_vertex_angle.resize(vert_count)
+	_vertex_cos_angle.resize(vert_count)
+	_vertex_sin_angle.resize(vert_count)
+
+	var idx := 0
+	for i in range(u_steps):
+		for j in range(v_steps):
+			# The 4 corner grid coordinates for this quad
+			var corners_i = [i, i + 1, i + 1, i, i + 1, i]       # v0,v1,v2, v0,v2,v3
+			var corners_j = [j, j, j + 1, j, j + 1, j + 1]
+
+			for k in range(6):
+				var ci = corners_i[k]
+				var cj = corners_j[k]
+				var u = float(ci) / float(u_steps)
+				var v = float(cj) / float(v_steps)
+				var angle = v * TAU
+
+				_vertex_u[idx] = u
+				_vertex_angle[idx] = angle
+				_vertex_cos_angle[idx] = cos(angle)
+				_vertex_sin_angle[idx] = sin(angle)
+				idx += 1
 
 func _build_mesh_faces(surface_tool: SurfaceTool, vertices: Array):
 	for i in range(u_steps):
@@ -217,59 +277,57 @@ func _animate_dress():
 	# Safety checks
 	if not _initialized:
 		return
-	if _base_vertices.is_empty() or not mesh_instance:
+	if _base_vertices_packed.is_empty() or not mesh_instance:
 		return
-	if _base_vertices.size() < u_steps + 1:
-		return
-
-	var surface_tool = SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	var animated_vertices = []
-
-	for i in range(u_steps + 1):
-		if i >= _base_vertices.size():
-			break
-		var row = []
-		var u = float(i) / float(u_steps)
-
-		for j in range(v_steps + 1):
-			if j >= _base_vertices[i].size():
-				break
-			var base_pos = _base_vertices[i][j]
-			var v = float(j) / float(v_steps)
-			var angle = v * TAU
-
-			# Animated wave offset
-			var time_wave = sin(_time + angle * wave_frequency + u * TAU) * flutter_intensity * u
-			var secondary_wave = cos(_time * 0.7 + angle * 3.0) * flutter_intensity * 0.5 * u
-
-			# Apply animation
-			var animated_pos = base_pos
-			animated_pos.x += time_wave * cos(angle)
-			animated_pos.z += time_wave * sin(angle)
-			animated_pos.y += secondary_wave * 0.3
-
-			# Swaying motion (like wind)
-			var sway = sin(_time * 0.5) * flutter_intensity * u * 2.0
-			animated_pos.x += sway
-
-			row.append(animated_pos)
-		animated_vertices.append(row)
-
-	# Verify we have enough vertices before building
-	if animated_vertices.size() < u_steps or animated_vertices[0].size() < v_steps:
+	if _cached_surface_arrays.is_empty():
 		return
 
-	# Rebuild mesh with animated vertices
-	_build_mesh_faces(surface_tool, animated_vertices)
-	surface_tool.generate_normals()
+	var vert_count := _base_vertices_packed.size()
 
-	var new_mesh = surface_tool.commit()
-	if new_mesh and new_mesh.get_surface_count() > 0:
-		var old_material = mesh_instance.material_override
-		mesh_instance.mesh = new_mesh
-		mesh_instance.material_override = old_material
+	# Create a new PackedVector3Array with animated positions
+	var animated_positions := PackedVector3Array()
+	animated_positions.resize(vert_count)
+
+	# Cache frequently accessed values to local variables
+	var time := _time
+	var wf := wave_frequency
+	var fi := flutter_intensity
+
+	# Precomputed trig for sway (constant across all vertices this frame)
+	var sway_base := sin(time * 0.5) * fi * 2.0
+	var time_07 := time * 0.7
+
+	for idx in range(vert_count):
+		var base_pos := _base_vertices_packed[idx]
+		var u := _vertex_u[idx]
+		var angle := _vertex_angle[idx]
+		var cos_a := _vertex_cos_angle[idx]
+		var sin_a := _vertex_sin_angle[idx]
+
+		# Animated wave offset — exact same math as original
+		var time_wave := sin(time + angle * wf + u * TAU) * fi * u
+		var secondary_wave := cos(time_07 + angle * 3.0) * fi * 0.5 * u
+
+		# Apply animation
+		var ax := base_pos.x + time_wave * cos_a
+		var ay := base_pos.y + secondary_wave * 0.3
+		var az := base_pos.z + time_wave * sin_a
+
+		# Swaying motion (like wind)
+		ax += sway_base * u
+
+		animated_positions[idx] = Vector3(ax, ay, az)
+
+	# Update the mesh in-place: swap vertex array, clear surface, re-add
+	# This avoids SurfaceTool entirely — just array manipulation on ArrayMesh
+	var arrays := _cached_surface_arrays.duplicate()
+	arrays[Mesh.ARRAY_VERTEX] = animated_positions
+	# Skip normal recalculation — SimpleGrid.gdshader is a wireframe shader
+	# that doesn't use normals for lighting. Keep the original normals.
+
+	var arr_mesh: ArrayMesh = mesh_instance.mesh
+	arr_mesh.clear_surfaces()
+	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
 func _follow_skeleton_position():
 	if not _skeleton:

@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "id": "dark_wave",
+    "name": "Dark Wave / Cold Wave",
+    "lineage": "She Past Away, Boy Harsher, Lebanon Hanover, Bauhaus, Siouxsie and the Banshees, Clan of Xymox",
+    "era": "1979-1985 origin, 2010s revival",
+    "bpm": { "min": 100, "max": 135, "typical": 120 },
+    "lambda": 0.3
+  },
+
+  "identity": {
+    "token": "Juno chorus bass + cold detuned arp + gated snare + cavernous reverb",
+    "two_second_test": "Deep analog bass pulse, cold arpeggiated sequence, sharp crack of snare, everything drenched in dark reverb",
+    "emotional_truth": "Abandoned cathedral at midnight, smoke machines, black clothing, beautiful despair"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "arp", "lead", "atmosphere"],
+
+  "forbidden": [
+    "supersaw",
+    "hoover_bass",
+    "sub_bass_only",
+    "bright_production",
+    "sidechain_pump",
+    "4_on_floor_techno",
+    "tropical_pluck",
+    "bitcrushing",
+    "tape_wow_flutter",
+    "happy_major_chords",
+    "trance_gate",
+    "edm_riser"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 5,
+    "swing_pct": 0,
+    "pattern": "post_punk_straight"
+  },
+
+  "harmony": {
+    "scales": ["natural_minor", "harmonic_minor", "phrygian"],
+    "voicings": "sparse_minor_triads",
+    "notes": "Root + fifth common, minor thirds, avoid major. Open voicings preferred."
+  },
+
+  "fx": {
+    "chorus": true,
+    "reverb_style": "hall_with_predelay",
+    "reverb_predelay_ms": 40,
+    "reverb_decay_s": 3.5,
+    "delay_sync": "dotted_eighth",
+    "sidechain": false,
+    "highshelf_cut_db": -2,
+    "vinyl_crackle": false,
+    "notes": "Pre-delay on reverb is crucial - keeps transients clear while creating depth. Long tails but NOT washy."
+  },
+
+  "transitions": {
+    "crossfade_s": 3.0
+  },
+
+  "sections": {
+    "intro": ["atmosphere", "pad"],
+    "build": ["atmosphere", "pad", "bass", "hihat"],
+    "verse": ["kick", "snare", "hihat", "bass", "pad", "atmosphere"],
+    "chorus": ["kick", "snare", "hihat", "bass", "pad", "arp", "atmosphere"],
+    "main": ["kick", "snare", "hihat", "bass", "pad", "arp", "lead", "atmosphere"],
+    "breakdown": ["pad", "atmosphere", "lead"],
+    "outro": ["pad", "atmosphere"]
+  }
+}

@@ -1,6 +1,6 @@
 # Audio Catalog Architecture
 
-Last updated: 2026-02-10
+Last updated: 2026-02-11
 
 This document covers the desktop audio app surfaces in `res://commons/audio/catalog/`.
 
@@ -38,12 +38,19 @@ Source file for semantics:
 4. Timeline metadata is built and sent to `SongTimeline`.
 5. Section and layer views are updated for editing/analysis.
 
+Important runtime mode detail in `SongDevTools`:
+- `Preview Ref` enabled: uses preview-reference routing and disables the first six DevTools bus effects.
+- `Preview Ref` disabled: uses generation path plus DevTools effect chain for active sound design.
+
 ### Flow C: Genre suit -> sequencer playback
 
 1. `GenreSynthBrowser` defines suite roles/elements by genre.
 2. `SuitToSoundbankMapper` maps those elements to real soundbank sound names.
 3. Runtime suite payload (including optional `intent`) is produced.
 4. `SoundSuiteSequencer` runs patterns and triggers generators/scripts.
+
+Current runtime registration note:
+- `SoundSuiteSequencer` currently auto-registers one mapper suite at startup: `detroit_techno`.
 
 ## Component responsibilities
 
@@ -95,3 +102,12 @@ For regressions, compare both scenes with the same song and check:
 - active bus effects on `Master`
 - whether reference/preview mode is enabled
 - song path (soundbank generator vs direct synthesizer path)
+
+## QA artifact
+
+Latest static wiring + parity audit:
+- `commons/audio/documentation/SUITE_QA_MATRIX_2026-02-11.md`
+
+Use it to track:
+- song routing parity between `SongDevTools` and `SongPreviewDesktop`
+- genre suite -> soundbank parity status (`main` pattern readiness + missing mappings)

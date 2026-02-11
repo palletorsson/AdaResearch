@@ -30,7 +30,8 @@ class_name ChladniPlate
 
 ## Internal
 var particles: Array[Dictionary] = []
-var particle_meshes: Array[MeshInstance3D] = []
+var _multimesh_instance: MultiMeshInstance3D
+var _multimesh: MultiMesh
 var time: float = 0.0
 var mode_timer: float = 0.0
 var current_mode_index: int = 0
@@ -84,6 +85,18 @@ func _spawn_particles() -> void:
 	particle_mesh.radial_segments = 6
 	particle_mesh.rings = 3
 	
+	# Create MultiMesh
+	_multimesh = MultiMesh.new()
+	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_multimesh.instance_count = num_particles
+	_multimesh.mesh = particle_mesh
+	
+	# Create MultiMeshInstance3D
+	_multimesh_instance = MultiMeshInstance3D.new()
+	_multimesh_instance.multimesh = _multimesh
+	_multimesh_instance.material_override = particle_mat
+	particle_container.add_child(_multimesh_instance)
+	
 	for i in range(num_particles):
 		# Random starting position on plate
 		var x = randf_range(-plate_size/2, plate_size/2)
@@ -95,12 +108,7 @@ func _spawn_particles() -> void:
 		}
 		particles.append(particle_data)
 		
-		var mesh_instance = MeshInstance3D.new()
-		mesh_instance.mesh = particle_mesh
-		mesh_instance.material_override = particle_mat
-		mesh_instance.position = particle_data.position
-		particle_container.add_child(mesh_instance)
-		particle_meshes.append(mesh_instance)
+		_multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, particle_data.position))
 
 func _process(delta: float) -> void:
 	time += delta
@@ -119,7 +127,7 @@ func _process(delta: float) -> void:
 	# Update all particles
 	for i in range(particles.size()):
 		_update_particle(i, delta)
-		particle_meshes[i].position = particles[i].position
+		_multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, particles[i].position))
 	
 	# Vibrate the plate visually
 	if plate:

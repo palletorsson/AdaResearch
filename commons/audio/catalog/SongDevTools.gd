@@ -17,6 +17,8 @@ const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
 const SoundIdentityPanel = preload("res://commons/audio/catalog/ui/SoundIdentityPanel.gd")
 const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPanel.gd")
 # AudioSynthesizer is available via class_name - no preload needed
+const PATTERN_OVERRIDES_PATH = "user://song_pattern_overrides.json"
+const GLOBAL_SECTION_KEY = "__global__"
 
 # Word→Synth bridge for semantic parameter control
 var _word_bridge: WordSynthBridge
@@ -66,6 +68,7 @@ var _archive_tab: Control
 var _sound_detail_panel: SoundDetailPanel
 var _editor_back_btn: Button
 var _editor_sound_name: Label
+var _current_editor_layer: String = ""
 
 # Archive UI
 var _archive_list: ItemList
@@ -82,6 +85,7 @@ var _config_path_label: Label
 var _current_config: Dictionary = {}
 var _current_config_path: String = ""
 var _current_section_name: String = ""
+var _pattern_overrides: Dictionary = {}  # generator_song_id -> {sections:{section->{layer->data}}}
 
 # Subset selector (grid editor subsets)
 var _subset_dropdown: OptionButton
@@ -148,6 +152,7 @@ func _ready():
 	if not Engine.is_editor_hint():
 		get_tree().root.title = "AdaResearch Song Dev Tools"
 	_word_bridge = WordSynthBridge.new()
+	_load_pattern_overrides()
 	_setup_audio()
 	_setup_ui()
 	_setup_spectrum_analyzer()
@@ -872,6 +877,167 @@ func _on_section_changed(section_name: String):
 	"""Called when the current section changes during playback"""
 	_current_section_name = section_name
 	_update_config_display()
+	_sync_open_sound_editor_section()
+
+
+func _load_pattern_overrides():
+	"""Load persistent pattern overrides from user storage."""
+	_pattern_overrides.clear()
+	if not FileAccess.file_exists(PATTERN_OVERRIDES_PATH):
+		return
+	
+	var file = FileAccess.open(PATTERN_OVERRIDES_PATH, FileAccess.READ)
+	if file == null:
+		push_warning("Could not open pattern override store: %s" % PATTERN_OVERRIDES_PATH)
+		return
+	
+	var json = JSON.new()
+	var parse_error = json.parse(file.get_as_text())
+	file.close()
+	
+	if parse_error != OK:
+		push_warning("Pattern override JSON parse error: %s" % json.get_error_message())
+		return
+	
+	if json.data is Dictionary:
+		_pattern_overrides = json.data
+
+
+func _save_pattern_overrides():
+	"""Persist pattern overrides to user storage."""
+	var global_path = ProjectSettings.globalize_path(PATTERN_OVERRIDES_PATH)
+	var base_dir = global_path.get_base_dir()
+	DirAccess.make_dir_recursive_absolute(base_dir)
+	
+	var file = FileAccess.open(PATTERN_OVERRIDES_PATH, FileAccess.WRITE)
+	if file == null:
+		push_warning("Could not write pattern override store: %s" % PATTERN_OVERRIDES_PATH)
+		return
+	
+	file.store_string(JSON.stringify(_pattern_overrides, "\t"))
+	file.close()
+
+
+func _resolve_pattern_song_id(song_id: String) -> String:
+	"""Resolve display/song aliases to SoundbankGenerator pattern ids."""
+	var pattern_map = {
+		"detroit_sb": "detroit_techno",
+		"synthwave_sb": "synthwave",
+		"burial_sb": "burial",
+		"boc_sb": "boards_of_canada",
+		"rave_sb": "rave",
+		"kraftwerk_sb": "kraftwerk",
+		"madonna_sb": "madonna_80s",
+		"gypsy_sb": "gypsy_woman_house",
+		"dub_house_sb": "dub_house",
+		"moroder_disco_sb": "moroder_disco",
+		"midnight_metroplex": "detroit_techno",
+		"i_feel_love": "moroder_disco",
+		"computer_love": "kraftwerk",
+		"dark_wave_cathedral": "dark_wave",
+	}
+	return pattern_map.get(song_id, song_id)
+
+
+func _get_song_pattern_overrides(song_id: String) -> Dictionary:
+	var resolved_song_id = _resolve_pattern_song_id(song_id)
+	var song_entry = _pattern_overrides.get(resolved_song_id, {})
+	if not (song_entry is Dictionary):
+		return {}
+	var sections = song_entry.get("sections", {})
+	return sections if sections is Dictionary else {}
+
+
+func _store_pattern_override(song_id: String, section_name: String, layer: String, pattern_data: Dictionary):
+	if song_id.is_empty() or layer.is_empty() or pattern_data.is_empty():
+		return
+	
+	var resolved_song_id = _resolve_pattern_song_id(song_id)
+	var song_entry = _pattern_overrides.get(resolved_song_id, {})
+	if not (song_entry is Dictionary):
+		song_entry = {}
+	
+	var sections = song_entry.get("sections", {})
+	if not (sections is Dictionary):
+		sections = {}
+	
+	var section_key = section_name if not section_name.is_empty() else GLOBAL_SECTION_KEY
+	if not sections.has(section_key):
+		sections[section_key] = {}
+	if not sections.has(GLOBAL_SECTION_KEY):
+		sections[GLOBAL_SECTION_KEY] = {}
+	
+	sections[section_key][layer] = pattern_data.duplicate(true)
+	sections[GLOBAL_SECTION_KEY][layer] = pattern_data.duplicate(true)
+	
+	song_entry["sections"] = sections
+	song_entry["updated_at"] = Time.get_datetime_string_from_system()
+	_pattern_overrides[resolved_song_id] = song_entry
+	_save_pattern_overrides()
+
+
+func _apply_pattern_override_to_generator(song_id: String, layer: String, pattern_data: Dictionary):
+	"""Apply one edited pattern to runtime generator dictionaries."""
+	if song_id.is_empty() or pattern_data.is_empty():
+		return
+	
+	var SG = load("res://commons/audio/generators/SoundbankGenerator.gd")
+	if SG == null:
+		return
+	
+	var resolved_song_id = _resolve_pattern_song_id(song_id)
+	if not SG.PATTERNS.has(resolved_song_id):
+		SG.PATTERNS[resolved_song_id] = {}
+	
+	var layer_lower = layer.to_lower()
+	
+	# Bass/lead melodic pattern payload
+	if pattern_data.has("pattern"):
+		var pattern_array = pattern_data.get("pattern", [])
+		if pattern_array is Array:
+			SG.PATTERNS[resolved_song_id][layer] = pattern_array.duplicate()
+			
+			if ("bass" in layer_lower or "sub" in layer_lower or "hoover" in layer_lower) and SG.BASS_PATTERNS.has(resolved_song_id):
+				SG.BASS_PATTERNS[resolved_song_id]["pattern"] = pattern_array.duplicate()
+				if pattern_data.has("notes"):
+					SG.BASS_PATTERNS[resolved_song_id]["notes"] = pattern_data["notes"].duplicate()
+				if pattern_data.has("glides"):
+					SG.BASS_PATTERNS[resolved_song_id]["glides"] = pattern_data["glides"].duplicate()
+		return
+	
+	# Multi-lane pattern payload (typically drums)
+	for key in pattern_data.keys():
+		if pattern_data[key] is Array:
+			SG.PATTERNS[resolved_song_id][key] = pattern_data[key].duplicate()
+
+
+func _apply_song_pattern_overrides_to_generator(song_id: String):
+	"""Apply persistent global overrides before generating/previewing songs."""
+	var sections = _get_song_pattern_overrides(song_id)
+	if sections.is_empty():
+		return
+	
+	var global_layers = sections.get(GLOBAL_SECTION_KEY, {})
+	if not (global_layers is Dictionary):
+		return
+	
+	for layer in global_layers.keys():
+		var layer_data = global_layers[layer]
+		if layer_data is Dictionary:
+			_apply_pattern_override_to_generator(song_id, str(layer), layer_data)
+		elif layer_data is Array:
+			_apply_pattern_override_to_generator(song_id, str(layer), {"pattern": layer_data})
+
+
+func _sync_open_sound_editor_section():
+	if _current_editor_layer.is_empty():
+		return
+	if _sound_detail_panel == null or not _sound_detail_panel.visible:
+		return
+	
+	var song_overrides = _get_song_pattern_overrides(_current_song_id)
+	_sound_detail_panel.set_pattern_overrides(song_overrides)
+	_sound_detail_panel.set_section(_current_section_name)
 
 
 func _load_archive_index():
@@ -1732,6 +1898,7 @@ func _style_panel_modern(panel: PanelContainer, bg_color: Color = Color(0.1, 0.1
 func _on_song_selected(song_id: String):
 	_stop_song()
 	_current_song = song_id
+	_current_editor_layer = ""
 	_status_label.text = "Generating " + song_id + "..."
 	
 	# Load config for inspector
@@ -1805,6 +1972,8 @@ func _generate_preview_reference_stream(song_id: String) -> AudioStream:
 			return SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
 		"k_bass":
 			return SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
+		"dark_wave_cathedral":
+			return SoundbankGenerator.generate_song("dark_wave", {"bpm": 118})
 		_:
 			return null
 
@@ -1870,6 +2039,8 @@ func _build_generation_params(song_id: String) -> Dictionary:
 
 
 func _generate_and_play(song_id: String):
+	_apply_song_pattern_overrides_to_generator(song_id)
+	
 	var stream: AudioStream = null
 	if _reference_mix_mode:
 		stream = _generate_preview_reference_stream(song_id)
@@ -1964,6 +2135,8 @@ func _generate_and_play(song_id: String):
 				stream = SoundbankGenerator.generate_song("k_bass", generation_params)
 			"vangelis_cs80":
 				stream = SoundbankGenerator.generate_song("vangelis_cs80", generation_params)
+			"dark_wave_cathedral":
+				stream = SoundbankGenerator.generate_song("dark_wave", generation_params)
 			# === HYBRID SONGS ===
 			"chicago_dusseldorf":
 				stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", generation_params)
@@ -3334,6 +3507,7 @@ func _apply_realtime_effects():
 
 func _load_timeline_for_song(song_id: String, stream: AudioStream):
 	_current_song_id = song_id  # Track for section word updates
+	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(song_id))
 	
 	var metadata = {"name": song_id, "sections": [], "total_duration": 0.0}
 	
@@ -3662,6 +3836,9 @@ func _on_word_picker_toggled(pressed: bool, layer: String, word: String):
 
 func show_sound_breakdown(layer: String):
 	"""Switch to Sound Editor tab and load the selected sound"""
+	_current_editor_layer = layer
+	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))
+	
 	# Get config and words
 	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
 	if config.is_empty():
@@ -3738,22 +3915,13 @@ func _on_detail_preview(layer: String):
 
 
 func _on_detail_pattern_changed(layer: String, pattern_data: Dictionary):
-	"""Handle pattern change from detail panel - update in-memory patterns"""
-	print("Pattern changed for %s: %s" % [layer, pattern_data])
+	"""Handle pattern change from detail panel and persist it."""
+	_apply_pattern_override_to_generator(_current_song_id, layer, pattern_data)
+	_store_pattern_override(_current_song_id, _current_section_name, layer, pattern_data)
+	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))
 	
-	# Update patterns in SoundbankGenerator (in memory)
-	# This would need to be saved to persist across sessions
-	var SG = load("res://commons/audio/generators/SoundbankGenerator.gd")
-	if SG and SG.PATTERNS.has(_current_song_id):
-		# For drum patterns, merge all drum data
-		if pattern_data.has("kick") or pattern_data.has("snare") or pattern_data.has("hihat"):
-			for key in pattern_data.keys():
-				SG.PATTERNS[_current_song_id][key] = pattern_data[key]
-		# For single layer patterns
-		elif pattern_data.has("pattern"):
-			SG.PATTERNS[_current_song_id][layer] = pattern_data["pattern"]
-	
-	_status_label.text = "🎵 Pattern updated for %s" % layer
+	var scope = _current_section_name if not _current_section_name.is_empty() else "global"
+	_status_label.text = "Pattern saved for %s (%s)" % [layer, scope]
 
 
 # === LEGACY IDENTITY PANEL (Read-only breakdown) ===
@@ -3889,3 +4057,4 @@ func get_current_subset_id() -> String:
 func get_subset(subset_id: String) -> Dictionary:
 	"""Get a specific subset by ID"""
 	return _loaded_subsets.get(subset_id, {})
+

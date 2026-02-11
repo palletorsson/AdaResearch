@@ -1,6 +1,6 @@
 # AdaResearch Audio System
 
-Last updated: 2026-02-10
+Last updated: 2026-02-11
 
 This folder contains the audio app stack used by AdaResearch:
 - procedural song and sound generation
@@ -78,3 +78,13 @@ When behavior changes in code, update docs in this order:
 3. Feature-specific doc (`SOUND_SUITE_SEQUENCER.md`, `parameters/README.md`, or `soundbanks/README.md`)
 
 If docs and code disagree, code wins until docs are patched.
+
+## Current QA baseline
+
+Latest static audit report:
+- `commons/audio/documentation/SUITE_QA_MATRIX_2026-02-11.md`
+
+It captures:
+- song routing parity across `SongDevTools` and `SongPreviewDesktop`
+- suite-to-soundbank parity status per genre
+- current mapper runtime scope in `SoundSuiteSequencer`

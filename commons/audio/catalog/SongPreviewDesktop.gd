@@ -106,7 +106,8 @@ func _setup_ui():
 		["chicago_dusseldorf", "🚂 Chi→Düss", "House × Kraftwerk"],
 		["dub_house_sb", "Dub House", "Dub chord stabs + tape space"],
 		["moroder_disco", "🪩 Moroder", "Instrumental version"],
-		["k_bass", "🇰🇷 K-Bass", "Seoul jungle/DnB - sub pressure"]
+		["k_bass", "🇰🇷 K-Bass", "Seoul jungle/DnB - sub pressure"],
+		["dark_wave_cathedral", "🦇 Cathedral", "Dark wave post-punk ritual"]
 	]
 	
 	for song in songs:
@@ -399,6 +400,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
 		"k_bass":
 			stream = SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
+		"dark_wave_cathedral":
+			stream = SoundbankGenerator.generate_song("dark_wave", {"bpm": 118})
 	
 	if stream == null:
 		_status_label.text = "Failed to generate song!"

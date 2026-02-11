@@ -1,6 +1,6 @@
 # Sound Suite Sequencer
 
-Last updated: 2026-02-10
+Last updated: 2026-02-11
 
 `SoundSuiteSequencer` (`res://commons/audio/sequencer/SoundSuiteSequencer.gd`) is the runtime sequencer for:
 - built-in generator suites
@@ -28,6 +28,21 @@ This comes from:
 - `res://commons/audio/soundbanks/SuitToSoundbankMapper.gd`
 - `res://commons/audio/soundbanks/SoundbankLoader.gd`
 - `res://commons/audio/soundbanks/detroit_techno/brief.json`
+
+## QA snapshot (2026-02-11)
+
+Reference report:
+- `commons/audio/documentation/SUITE_QA_MATRIX_2026-02-11.md`
+
+Key findings from the static audit:
+- `SoundSuiteSequencer` runtime mapper registration is currently limited to `detroit_techno` in `_ready()`.
+- `SuitToSoundbankMapper` can build suites for all `GenreSynthBrowser` genres, but most are not yet playable in sequencer because matching soundbanks are missing.
+- `detroit_techno` and `synthwave` have soundbank folders, but parity still has gaps:
+  - missing mapped sounds in bank (for example `sequence`, `sweep_up`, `sweep_down`, `impact`)
+  - missing element aliases (for example `supersaw`, `arp_synth`)
+- For suites where mapped sounds are present, the generated `main` pattern is structurally complete by construction.
+
+Use this as the current contract: sequencer core is stable, but full per-genre mapper parity is still in-progress.
 
 ## Initialize contract
 

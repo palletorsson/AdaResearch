@@ -183,6 +183,19 @@ const PATTERNS = {
 		"vocoder":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Robotic vocoder hits
 	},
 	
+	# Dark Wave Cathedral: She Past Away meets Bauhaus — post-punk syncopation, tribal toms
+	# Reference: She Past Away "Ritüel", Boy Harsher "Pain", Bauhaus "Bela Lugosi's Dead"
+	# 118 BPM, syncopated kick, gated snare, tribal toms, cold hypnotic arp
+	"dark_wave": {
+		"kick":     [2,0,0,0, 0,0,1,0, 0,0,0,0, 0,1,0,0],  # Syncopated post-punk
+		"snare":    [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # Gated crack on 2&4
+		"hihat":    [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,0.5,0],  # 8ths with ghost
+		"tom_low":  [0,0,1,0, 0,0,0,0, 1,0,0,0, 0,0,1,0],  # Tribal deep
+		"tom_high": [0,0,0,0, 0,0,0,1, 0,0,1,0, 0,0,0,0],  # Tight pitched
+		"clap":     [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # Layered with snare
+		"arp":      [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],  # Never stops — the heartbeat
+	},
+
 	# K-Bass: Korean bass music — jungle/DnB grammar with Seoul sensibilities
 	# Reference: yunji "ECHO", ENTER THE K-BASS Vol.1 (SCR × ScreaM)
 	# 170 BPM, break-led, sub as lead instrument, drop-based dynamics
@@ -272,6 +285,11 @@ const BASS_PATTERNS = {
 		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # Chicago offbeat
 		"style": "short",
 	},
+	# Dark Wave: Juno-106 Moog analog round bass — follows chord root
+	"dark_wave": {
+		"pattern": [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,1,0],  # Root hits + step 15 anticipation
+		"style": "sustained",  # Juno chorus bass, long round notes
+	},
 	# K-Bass: Reese sub as lead — pressure and weight, physical impact
 	"k_bass": {
 		"pattern": [2,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sub hits on 1&3, accent on 1
@@ -301,6 +319,7 @@ const SWING = {
 	"foggy_frequencies": 15.0,   # Blend of Burial (12) and BoC (18)
 	"chicago_dusseldorf": 4.0,   # Slight groove, transitioning to straight
 	"k_bass": 0.0,               # Jungle straight — precision at 170 BPM
+	"dark_wave": 7.0,            # Slight swing — deliberate, ritualistic (from song config)
 }
 
 # =============================================================================
@@ -422,6 +441,12 @@ const VELOCITY = {
 		"ghost": 0.4,      # Audible ghosts in break patterns
 		"variation": 0.08, # Tight but not robotic
 	},
+	"dark_wave": {
+		"base": 0.75,      # Driving but controlled
+		"accent": 1.0,     # Kick accents hit hard
+		"ghost": 0.35,     # Ghost hihats felt not heard
+		"variation": 0.06, # Tight, ritualistic repetition
+	},
 }
 
 # =============================================================================
@@ -510,6 +535,11 @@ const STRUCTURES = {
 	"k_bass": {
 		"sections": ["intro", "build", "drop1", "breakdown", "drop2", "switchup", "outro"],
 		"bars": [8, 8, 16, 8, 16, 8, 4],
+	},
+	# Dark Wave Cathedral: Ritual build → peak → tribal descent → rebuild → fade
+	"dark_wave": {
+		"sections": ["intro", "build", "verse", "chorus", "verse_2", "chorus_2", "breakdown", "build_2", "chorus_3", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8, 8, 4, 16, 8],
 	},
 }
 
@@ -1587,24 +1617,25 @@ static func _add_continuous_sound(mix: PackedFloat32Array, script, start: int,
 		var t = time_offset + float(i) / SAMPLE_RATE
 		var sample = 0.0
 		
-		match sound_name:
-			"pad", "atmosphere", "supersaw", "siren", "strings", "choir":
-				if script.has_method("generate"):
-					sample = script.generate(t, chord_freqs, note_duration, 0.0)
-				elif script.has_method("generate_sample"):
-					sample = script.generate_sample(t, chord_freqs)
-			"crackle", "texture":
-				if script.has_method("generate"):
-					sample = script.generate(t, 0.0)
-			"vocal", "vocoder":
-				var freq = chord_freqs[0] if chord_freqs.size() > 0 else 440.0
-				if script.has_method("generate"):
-					sample = script.generate(t, freq, 0.0)
-			_:
-				if script.has_method("generate_sample"):
-					sample = script.generate_sample(t, chord_freqs)
-				elif script.has_method("generate"):
-					sample = script.generate(t, 0.0)
+		# Poly sounds take chord_freqs Array; mono sounds take single float freq.
+		var freq = chord_freqs[0] if chord_freqs.size() > 0 else root_freq
+		var is_poly = sound_name in ["pad", "atmosphere", "supersaw", "siren", "strings", "choir", "stab"]
+		var is_ambient = sound_name in ["crackle", "texture"]
+		
+		if is_poly:
+			if script.has_method("generate"):
+				sample = script.generate(t, chord_freqs, note_duration, 0.0)
+			elif script.has_method("generate_sample"):
+				sample = script.generate_sample(t, chord_freqs)
+		elif is_ambient:
+			if script.has_method("generate"):
+				sample = script.generate(t, 0.0)
+		else:
+			# Mono-frequency sounds: lead, arp, sequence, organ, piano, vocal, etc.
+			if script.has_method("generate"):
+				sample = script.generate(t, freq, 0.0)
+			elif script.has_method("generate_sample"):
+				sample = script.generate_sample(t, freq)
 		
 		mix[idx] = clampf(mix[idx] + sample * volume, -1.0, 1.0)
 

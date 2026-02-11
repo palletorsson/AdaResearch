@@ -15,6 +15,7 @@ const DrumPatternEditor = preload("res://commons/audio/catalog/ui/DrumPatternEdi
 const BassPatternEditor = preload("res://commons/audio/catalog/ui/BassPatternEditor.gd")
 const ChordPatternEditor = preload("res://commons/audio/catalog/ui/ChordPatternEditor.gd")
 const ArpPatternEditor = preload("res://commons/audio/catalog/ui/ArpPatternEditor.gd")
+const LeadPatternEditor = preload("res://commons/audio/catalog/ui/LeadPatternEditor.gd")
 
 # Legacy editors (deprecated - kept for backwards compatibility)
 const DrumSequencer = preload("res://commons/audio/catalog/ui/DrumSequencer.gd")
@@ -41,6 +42,7 @@ var _current_params: Dictionary = {}
 var _current_words: Array = []
 var _original_params: Dictionary = {}
 var _current_pattern: Dictionary = {}
+var _pattern_overrides_by_section: Dictionary = {}
 
 # UI Components
 var _header_label: Label
@@ -149,8 +151,10 @@ const DRUM_SOUNDS = ["kick", "snare", "clap", "hihat", "rimshot", "shaker",
 					 "tambourine", "perc", "cr5000_kick", "cr5000_snare", 
 					 "cr5000_hihat", "fingersnap"]
 const BASS_SOUNDS = ["bass", "sub", "hoover"]
+const LEAD_SOUNDS = ["lead", "melody", "hook", "solo", "pluck"]
 const CHORD_SOUNDS = ["pad", "keys", "rhodes", "strings", "piano", "organ", "stab"]
 const ARP_SOUNDS = ["arp", "sequence", "sequencer", "jupiter_arp"]
+const GLOBAL_SECTION_KEY = "__global__"
 
 
 func _ready():
@@ -461,10 +465,7 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	
 	# Update header
 	_header_label.text = "ðŸŽ›ï¸ %s" % layer
-	var synth_type = SoundDescriptions.get_short_type(layer)
-	_type_label.text = "Song: %s | Type: %s" % [song_id, synth_type]
-	if not section.is_empty():
-		_type_label.text += " | Section: %s" % section
+	_refresh_context_label()
 	
 	# Synthesis description
 	_synth_description.text = "âš¡ " + SoundDescriptions.get_description(layer, song_id)
@@ -482,6 +483,28 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	_load_pattern_for_layer(song_id, layer)
 
 
+func set_section(section_name: String):
+	"""Update section context without changing selected layer."""
+	_current_section = section_name
+	_refresh_context_label()
+	if not _current_song.is_empty() and not _current_layer.is_empty():
+		_load_pattern_for_layer(_current_song, _current_layer)
+
+
+func set_pattern_overrides(overrides_by_section: Dictionary):
+	"""Set section-aware pattern overrides: section -> layer -> pattern data."""
+	_pattern_overrides_by_section = overrides_by_section.duplicate(true)
+	if not _current_song.is_empty() and not _current_layer.is_empty():
+		_load_pattern_for_layer(_current_song, _current_layer)
+
+
+func _refresh_context_label():
+	var synth_type = SoundDescriptions.get_short_type(_current_layer)
+	_type_label.text = "Song: %s | Type: %s" % [_current_song, synth_type]
+	if not _current_section.is_empty():
+		_type_label.text += " | Section: %s" % _current_section
+
+
 func _setup_pattern_editor_for_layer(layer: String):
 	"""Create the appropriate pattern editor based on layer type"""
 	# Remove existing pattern editor
@@ -495,11 +518,9 @@ func _setup_pattern_editor_for_layer(layer: String):
 		placeholder.queue_free()
 	
 	var layer_lower = layer.to_lower()
-	var editor_type = "none"
 	
 	# Determine editor type and create appropriate editor
 	if _is_drum_layer(layer_lower):
-		editor_type = "drum"
 		_pattern_type_label.text = "ðŸ¥ Drum Sequencer for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = DrumPatternEditor.new()
@@ -510,7 +531,6 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.pattern_changed.connect(_on_drum_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_pattern_preview)
 	elif _is_bass_layer(layer_lower):
-		editor_type = "bass"
 		_pattern_type_label.text = "ðŸŽ¸ Bass Timeline for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = BassPatternEditor.new()
@@ -520,8 +540,17 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor = BassTimeline.new()
 			_pattern_editor.pattern_changed.connect(_on_bass_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_bass_preview)
+	elif _is_lead_layer(layer_lower):
+		_pattern_type_label.text = "ðŸŽ¹ Lead/Melody Editor for: %s" % layer
+		if _use_unified_editors:
+			_pattern_editor = LeadPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_bass_preview)
+		else:
+			_pattern_editor = BassTimeline.new()
+			_pattern_editor.pattern_changed.connect(_on_bass_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_bass_preview)
 	elif _is_chord_layer(layer_lower):
-		editor_type = "chord"
 		_pattern_type_label.text = "ðŸŽ¹ Chord Timeline for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ChordPatternEditor.new()
@@ -532,7 +561,6 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.pattern_changed.connect(_on_chord_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_chord_preview)
 	elif _is_arp_layer(layer_lower):
-		editor_type = "arp"
 		_pattern_type_label.text = "ðŸŽµ Arpeggio Editor for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ArpPatternEditor.new()
@@ -578,6 +606,13 @@ func _is_chord_layer(layer: String) -> bool:
 	return false
 
 
+func _is_lead_layer(layer: String) -> bool:
+	for lead in LEAD_SOUNDS:
+		if lead in layer:
+			return true
+	return false
+
+
 func _is_arp_layer(layer: String) -> bool:
 	for arp in ARP_SOUNDS:
 		if arp in layer:
@@ -599,16 +634,28 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 		# Load patterns directly
 		var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
 		if SoundbankGenerator:
-			patterns = SoundbankGenerator.PATTERNS.get(song_id, {})
-	
+			var pattern_song_id = _resolve_pattern_song_id(song_id)
+			patterns = SoundbankGenerator.PATTERNS.get(pattern_song_id, {})
+
 	_current_pattern = patterns
-	
+	var layer_override = _get_layer_pattern_override(layer)
+
 	# Load into the appropriate editor
-	var layer_lower = layer.to_lower()
-	
 	# Handle unified editors
 	if _use_unified_editors:
 		if _pattern_editor is DrumPatternEditor:
+			if not layer_override.is_empty():
+				var override_drum_patterns = {}
+				if layer_override.has("pattern") and layer_override["pattern"] is Array:
+					override_drum_patterns[layer] = layer_override["pattern"]
+				else:
+					for key in layer_override.keys():
+						if layer_override[key] is Array:
+							override_drum_patterns[key] = layer_override[key]
+				if not override_drum_patterns.is_empty():
+					_pattern_editor.load_patterns(override_drum_patterns)
+					return
+			
 			var drum_patterns = {}
 			for key in patterns.keys():
 				if _is_drum_layer(key.to_lower()):
@@ -624,11 +671,31 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 				single_pattern[layer] = patterns.get(layer, [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0])
 				_pattern_editor.load_patterns(single_pattern)
 		
+		elif _pattern_editor is LeadPatternEditor:
+			if not layer_override.is_empty() and layer_override.has("pattern"):
+				_pattern_editor.load_pattern(
+					layer_override.get("pattern", []),
+					layer_override.get("notes", []),
+					layer_override.get("glides", [])
+				)
+				return
+			if patterns.has(layer):
+				_pattern_editor.load_pattern(patterns[layer], [], [])
+		
 		elif _pattern_editor is BassPatternEditor:
+			if not layer_override.is_empty() and layer_override.has("pattern"):
+				_pattern_editor.load_pattern(
+					layer_override.get("pattern", []),
+					layer_override.get("notes", []),
+					layer_override.get("glides", [])
+				)
+				return
+			
 			var bass_cfg = {}
 			var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
 			if SoundbankGenerator:
-				bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(song_id, {})
+				var pattern_song_id = _resolve_pattern_song_id(song_id)
+				bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(pattern_song_id, {})
 			
 			if bass_cfg.has("pattern"):
 				var notes = bass_cfg.get("notes", [])
@@ -636,10 +703,21 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 				_pattern_editor.load_pattern(bass_cfg["pattern"], notes, glides)
 		
 		elif _pattern_editor is ChordPatternEditor:
+			if not layer_override.is_empty() and layer_override.has("pattern"):
+				_pattern_editor.load_pattern(
+					layer_override.get("pattern", []),
+					layer_override.get("chords", []),
+					layer_override.get("voicings", []),
+					layer_override.get("sustains", [])
+				)
+				return
 			if patterns.has(layer):
 				_pattern_editor.load_pattern(patterns[layer])
 		
 		elif _pattern_editor is ArpPatternEditor:
+			if not layer_override.is_empty():
+				_pattern_editor.load_settings(layer_override)
+				return
 			var settings = {
 				"direction": "up",
 				"rate": "1/8",
@@ -651,6 +729,18 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 	
 	# Legacy editors (backwards compatibility)
 	if _pattern_editor is DrumSequencer:
+		if not layer_override.is_empty():
+			var override_drum_patterns = {}
+			if layer_override.has("pattern") and layer_override["pattern"] is Array:
+				override_drum_patterns[layer] = layer_override["pattern"]
+			else:
+				for key in layer_override.keys():
+					if layer_override[key] is Array:
+						override_drum_patterns[key] = layer_override[key]
+			if not override_drum_patterns.is_empty():
+				_pattern_editor.load_patterns(override_drum_patterns)
+				return
+		
 		# For drums, we might need to filter or load specific patterns
 		var drum_patterns = {}
 		for key in patterns.keys():
@@ -670,21 +760,34 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 			_pattern_editor.load_patterns(single_pattern)
 	
 	elif _pattern_editor is BassTimeline:
+		if not layer_override.is_empty() and layer_override.has("pattern"):
+			_pattern_editor.load_pattern(layer_override.get("pattern", []))
+			return
+		
 		# Load bass pattern
 		var bass_cfg = {}
 		var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
 		if SoundbankGenerator:
-			bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(song_id, {})
+			var pattern_song_id = _resolve_pattern_song_id(song_id)
+			bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(pattern_song_id, {})
 		
 		if bass_cfg.has("pattern"):
 			_pattern_editor.load_pattern(bass_cfg["pattern"])
 	
 	elif _pattern_editor is ChordTimeline:
+		if not layer_override.is_empty() and layer_override.has("pattern"):
+			_pattern_editor.load_pattern(layer_override.get("pattern", []))
+			return
+		
 		# Load chord pattern (from pad/keys pattern if exists)
 		if patterns.has(layer):
 			_pattern_editor.load_pattern(patterns[layer])
-	
+
 	elif _pattern_editor is ArpeggioEditor:
+		if not layer_override.is_empty():
+			_pattern_editor.load_settings(layer_override)
+			return
+		
 		# Load arp settings
 		var settings = {
 			"pattern": "up",
@@ -693,6 +796,62 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 			"gate_length": 0.8,
 		}
 		_pattern_editor.load_settings(settings)
+
+
+func _resolve_pattern_song_id(song_id: String) -> String:
+	var pattern_map = {
+		"detroit_sb": "detroit_techno",
+		"synthwave_sb": "synthwave",
+		"burial_sb": "burial",
+		"boc_sb": "boards_of_canada",
+		"rave_sb": "rave",
+		"kraftwerk_sb": "kraftwerk",
+		"madonna_sb": "madonna_80s",
+		"gypsy_sb": "gypsy_woman_house",
+		"dub_house_sb": "dub_house",
+		"moroder_disco_sb": "moroder_disco",
+		"midnight_metroplex": "detroit_techno",
+		"i_feel_love": "moroder_disco",
+		"computer_love": "kraftwerk",
+		"dark_wave_cathedral": "dark_wave",
+	}
+	return pattern_map.get(song_id, song_id)
+
+
+func _get_layer_pattern_override(layer: String) -> Dictionary:
+	if _pattern_overrides_by_section.is_empty():
+		return {}
+	
+	var section_key = _current_section if not _current_section.is_empty() else GLOBAL_SECTION_KEY
+	var section_override = _find_layer_override(section_key, layer)
+	if not section_override.is_empty():
+		return section_override
+	
+	return _find_layer_override(GLOBAL_SECTION_KEY, layer)
+
+
+func _find_layer_override(section_key: String, layer: String) -> Dictionary:
+	var section_data = _pattern_overrides_by_section.get(section_key, {})
+	if not (section_data is Dictionary):
+		return {}
+	
+	if section_data.has(layer):
+		var raw = section_data[layer]
+		if raw is Dictionary:
+			return raw.duplicate(true)
+		if raw is Array:
+			return {"pattern": raw.duplicate()}
+	
+	var layer_lower = layer.to_lower()
+	for key in section_data.keys():
+		if str(key).to_lower() == layer_lower:
+			var raw = section_data[key]
+			if raw is Dictionary:
+				return raw.duplicate(true)
+			if raw is Array:
+				return {"pattern": raw.duplicate()}
+	
+	return {}
 
 
 func _on_unified_pattern_changed(pattern_data: Dictionary):
