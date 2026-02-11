@@ -1,9 +1,11 @@
 extends Node3D
 
 signal start_game_requested
+signal load_game_requested
 signal quit_requested
 
-@onready var start_button = $Buttons/StartButton
+@onready var new_game_button = $Buttons/NewGameButton
+@onready var load_game_button = $Buttons/LoadGameButton
 @onready var browse_button = $Buttons/BrowseButton
 @onready var settings_button = $Buttons/SettingsButton
 @onready var quit_button = $Buttons/QuitButton
@@ -13,7 +15,8 @@ const MAP_BROWSER_SCENE = preload("res://commons/scenes/main_menu/components/Map
 var map_browser_instance: Node3D = null
 
 func _ready():
-	start_button.clicked.connect(_on_start_clicked)
+	new_game_button.clicked.connect(_on_new_game_clicked)
+	load_game_button.clicked.connect(_on_load_game_clicked)
 	if browse_button:
 		browse_button.clicked.connect(_on_browse_clicked)
 	settings_button.clicked.connect(_on_settings_clicked)
@@ -21,6 +24,9 @@ func _ready():
 
 	# Setup About text
 	_setup_about_text()
+	
+	# Update Load Game button visibility based on save existence
+	_update_load_button()
 
 func _setup_about_text():
 	var about_text = """[center][font_size=48][b]THRESHOLD PROTOCOL[/b][/font_size][/center]
@@ -35,9 +41,74 @@ func _setup_about_text():
 	if about_display.has_method("set_tutorial_from_text"):
 		about_display.set_tutorial_from_text(about_text)
 
-func _on_start_clicked():
-	print("MainMenu: Start Game clicked")
+func _update_load_button():
+	# Dim Load Game button if no save exists
+	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
+	var has_save = false
+	
+	if checkpoint_manager and checkpoint_manager.has_method("has_checkpoint"):
+		has_save = checkpoint_manager.has_checkpoint()
+	else:
+		# Fallback: check if save file exists
+		has_save = FileAccess.file_exists("user://checkpoint.save")
+	
+	if not load_game_button:
+		return
+	
+	var target_color: Color
+	var label_alpha: float
+	
+	if has_save:
+		target_color = Color(0.3, 0.7, 0.9, 1)  # Cyan
+		label_alpha = 1.0
+	else:
+		target_color = Color(0.3, 0.3, 0.3, 1)  # Gray/dimmed
+		label_alpha = 0.4
+	
+	# Update button color property
+	load_game_button.color = target_color
+	
+	# Update material if already created
+	var cube = load_game_button.get_node_or_null("InteractionCube")
+	if cube and cube.material_override:
+		cube.material_override.set_shader_parameter("modelColor", target_color)
+		cube.material_override.set_shader_parameter("emissionColor", target_color)
+	
+	# Update label opacity
+	var label = load_game_button.get_node_or_null("Label3D")
+	if label:
+		label.modulate.a = label_alpha
+
+func _on_new_game_clicked():
+	print("MainMenu: New Game clicked")
+	
+	# Clear any existing checkpoints
+	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
+	if checkpoint_manager and checkpoint_manager.has_method("clear_checkpoints"):
+		checkpoint_manager.clear_checkpoints()
+	
+	# Reset map progression
+	var progression_manager = get_node_or_null("/root/MapProgressionManager")
+	if progression_manager and progression_manager.has_method("reset_progress"):
+		progression_manager.reset_progress()
+	
 	start_game_requested.emit()
+
+func _on_load_game_clicked():
+	print("MainMenu: Load Game clicked")
+	
+	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
+	if checkpoint_manager and checkpoint_manager.has_method("has_checkpoint"):
+		if checkpoint_manager.has_checkpoint():
+			print("MainMenu: Resuming from checkpoint")
+			checkpoint_manager.respawn_at_checkpoint()
+			load_game_requested.emit()
+		else:
+			print("MainMenu: No save found, starting new game")
+			_on_new_game_clicked()
+	else:
+		print("MainMenu: CheckpointManager not available, starting new game")
+		_on_new_game_clicked()
 
 const SETTINGS_SCENE = preload("res://commons/scenes/main_menu/objects/settings_ui.tscn")
 var settings_instance: Node3D = null

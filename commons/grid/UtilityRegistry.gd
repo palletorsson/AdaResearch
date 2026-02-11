@@ -49,6 +49,13 @@ const UTILITY_TYPES = {
 		"description": "Player starting position and respawn location",
 		"supports_parameters": true  # spawn_name, rotation, priority
 	},
+	"cp": {
+		"name": "checkpoint",
+		"file": "checkpoint.tscn",
+		"category": "safety",
+		"description": "Save point - green sphere with S, saves player progress on touch",
+		"supports_parameters": true  # checkpoint_id
+	},
 	"sp": {
 	"name": "score points", 
 	"file": "score_cube.tscn", 
@@ -104,6 +111,13 @@ const UTILITY_TYPES = {
 	"category": "safety",
 	"description": "Resets player to safe position when approached",
 	"supports_parameters": true  # position, height_offset, warning_distance
+	},
+	"h": {
+		"name": "hazard_zone",
+		"file": "danger_zone.tscn",
+		"category": "hazard",
+		"description": "Danger zone that damages player (h:fire, h:vacuum, h:electric, h:toxic, h:radiation, h:death)",
+		"supports_parameters": true  # type:damage_per_tick (e.g. "fire:20", "death")
 	},
 	"q": {
 		"name": "quit_cube", 
@@ -272,6 +286,8 @@ const CATEGORIES = {
 	"ui": "User interface elements",
 	"educational": "Educational and informational content",
 	"navigation": "Navigation aids and indicators",
+	"safety": "Checkpoints and reset points",
+	"hazard": "Danger zones and environmental hazards",
 	"empty": "Empty space marker"
 }
 

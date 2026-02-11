@@ -159,6 +159,14 @@ func reset_level_state() -> void:
 	emit_signal("health_updated", player_health)
 
 func _reload_scene() -> void:
+	# Try checkpoint respawn first
+	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
+	if checkpoint_manager and checkpoint_manager.has_checkpoint():
+		checkpoint_manager.respawn_at_checkpoint()
+		reset_level_state()
+		return
+	
+	# Fallback: reload scene
 	var tree = get_tree()
 	if tree:
 		tree.reload_current_scene()
@@ -276,55 +284,128 @@ func _run_death_sequence(death_position: Vector3) -> void:
 
 	var scene_root: Node = tree.current_scene
 	var memorial_position: Vector3 = _resolve_memorial_position(death_position)
-	var focus_position: Vector3 = memorial_position + Vector3(0.0, 0.9, 0.0)
 	var player_node: Node3D = _resolve_player_node()
 	var is_xr_mode: bool = _is_xr_active()
 
+	# Spawn death cross at ground level
 	_spawn_death_cross(scene_root, memorial_position)
 
-	var camera_pivot: Node3D = Node3D.new()
-	camera_pivot.name = "DeathCameraPivot"
-	scene_root.add_child(camera_pivot)
-	camera_pivot.global_position = memorial_position
-
-	var camera_rig: Node3D = Node3D.new()
-	camera_rig.name = "DeathCameraRig"
-	camera_pivot.add_child(camera_rig)
-
+	# CCTV camera position: offset (1, 5, 1) from death position
+	var cctv_offset = Vector3(1.0, 5.0, 1.0)
+	var cctv_position = memorial_position + cctv_offset
+	
+	# Create CCTV camera
 	var death_camera: Camera3D = Camera3D.new()
-	death_camera.name = "DeathCamera"
-	death_camera.fov = 72.0
-	camera_rig.add_child(death_camera)
+	death_camera.name = "DeathCCTVCamera"
+	death_camera.fov = 60.0
+	scene_root.add_child(death_camera)
+	death_camera.global_position = cctv_position
+	death_camera.look_at(memorial_position, Vector3.UP)
 
 	if not is_xr_mode:
 		death_camera.current = true
+	elif is_instance_valid(player_node):
+		# In VR, move player to CCTV position
+		player_node.global_position = cctv_position
+	
+	# Create restart button UI
+	_show_death_ui(scene_root)
+	
+	print("[GameManager] Death sequence - CCTV at %s looking at %s" % [cctv_position, memorial_position])
 
-	var total_time: float = max(0.3, death_sequence_duration)
-	var elapsed: float = 0.0
+func _show_death_ui(scene_root: Node) -> void:
+	# Create a simple 3D restart button
+	var ui_root = Node3D.new()
+	ui_root.name = "DeathUI"
+	scene_root.add_child(ui_root)
+	
+	# Position UI in front of CCTV camera
+	var camera = scene_root.get_node_or_null("DeathCCTVCamera")
+	if camera:
+		ui_root.global_position = camera.global_position + (-camera.global_transform.basis.z * 2.0)
+		ui_root.look_at(camera.global_position, Vector3.UP)
+		ui_root.rotate_y(PI)  # Face camera
+	
+	# "YOU DIED" text
+	var died_label = Label3D.new()
+	died_label.text = "YOU DIED"
+	died_label.font_size = 72
+	died_label.modulate = Color(0.9, 0.2, 0.2)
+	died_label.position.y = 0.5
+	died_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	ui_root.add_child(died_label)
+	
+	# Restart button (using Area3D for VR interaction)
+	var restart_button = _create_death_button("RESTART", Vector3(0, 0, 0), Color(0.2, 0.8, 0.3))
+	restart_button.name = "RestartButton"
+	ui_root.add_child(restart_button)
+	
+	# Menu button
+	var menu_button = _create_death_button("MENU", Vector3(0, -0.4, 0), Color(0.3, 0.5, 0.8))
+	menu_button.name = "MenuButton"
+	ui_root.add_child(menu_button)
 
-	while elapsed < total_time and is_inside_tree() and tree.current_scene == scene_root:
-		await tree.process_frame
-		if tree == null:
-			break
+func _create_death_button(text: String, pos: Vector3, color: Color) -> Area3D:
+	var button = Area3D.new()
+	button.position = pos
+	button.collision_layer = 0
+	button.collision_mask = 524288  # Player layer
+	
+	# Collision shape
+	var collision = CollisionShape3D.new()
+	var box = BoxShape3D.new()
+	box.size = Vector3(0.8, 0.25, 0.1)
+	collision.shape = box
+	button.add_child(collision)
+	
+	# Visual box
+	var mesh = MeshInstance3D.new()
+	var box_mesh = BoxMesh.new()
+	box_mesh.size = Vector3(0.8, 0.25, 0.05)
+	mesh.mesh = box_mesh
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 0.5
+	mesh.material_override = mat
+	button.add_child(mesh)
+	
+	# Label
+	var label = Label3D.new()
+	label.text = text
+	label.font_size = 48
+	label.position.z = 0.03
+	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	button.add_child(label)
+	
+	# Connect body entered for VR hands
+	button.body_entered.connect(_on_death_button_pressed.bind(text))
+	button.area_entered.connect(_on_death_button_area.bind(text))
+	
+	return button
 
-		var delta: float = max(0.001, tree.root.get_process_delta_time())
-		elapsed += delta
+func _on_death_button_pressed(body: Node3D, button_name: String) -> void:
+	_handle_death_button(button_name)
 
-		var t: float = clamp(elapsed / total_time, 0.0, 1.0)
-		var eased: float = _ease_out_cubic(t)
-		var radius: float = lerp(death_start_radius, death_orbit_radius, eased)
-		var height: float = lerp(death_start_height, death_orbit_height, eased)
+func _on_death_button_area(area: Area3D, button_name: String) -> void:
+	if area.name.contains("Hand") or area.name.contains("Pointer"):
+		_handle_death_button(button_name)
 
-		camera_pivot.rotation.y += delta * death_orbit_speed
-		camera_rig.position = Vector3(0.0, height, radius)
-
-		if is_xr_mode and is_instance_valid(player_node):
-			player_node.global_position = camera_pivot.global_transform * camera_rig.position
-		else:
-			death_camera.look_at(focus_position, Vector3.UP)
-
+func _handle_death_button(button_name: String) -> void:
+	print("[GameManager] Death button pressed: %s" % button_name)
 	_death_sequence_running = false
-	call_deferred("_reload_scene")
+	
+	match button_name:
+		"RESTART":
+			call_deferred("_reload_scene")
+		"MENU":
+			# Go to main menu
+			var scene_manager = get_node_or_null("/root/SceneManager")
+			if scene_manager and scene_manager.has_method("load_main_menu"):
+				scene_manager.load_main_menu()
+			else:
+				get_tree().change_scene_to_file("res://commons/scenes/main_menu/MainMenu3D.tscn")
 
 func _get_player_death_position() -> Vector3:
 	var player_node: Node3D = _resolve_player_node()

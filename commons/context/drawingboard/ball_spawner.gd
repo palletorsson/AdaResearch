@@ -5,12 +5,12 @@ const BALL_SCENE_PATH = "res://commons/primitives/sphere/grab_sphere.tscn"
 const BALL_SCRIPT_PATH = "res://commons/context/drawingboard/ball_grab_sphere.gd"
 const PAINT_TIP_SCRIPT_PATH = "res://commons/context/drawingboard/ball_paint_tip.gd"
 
-@export var ball_count: int = 20
-@export var spawn_area_size: Vector2 = Vector2(1.5, 0.5)
-@export var base_height: float = 0.0
+@export var ball_count: int = 30
+@export var spawn_area_size: Vector2 = Vector2(2.5, 0.8)
+@export var base_height: float = 0.3
 
-@export var min_scale: float = 0.5
-@export var max_scale: float = 1.5
+@export var min_scale: float = 0.4
+@export var max_scale: float = 1.2
 
 func _ready() -> void:
 	# Clean up existing balls if running in tool mode to avoid duplicates if re-run

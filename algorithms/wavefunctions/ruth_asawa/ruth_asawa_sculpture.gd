@@ -245,44 +245,44 @@ func generate_audio_reactive_surface():
 
 	for i in range(v_resolution + 1):
 		var v_ratio := float(i) / float(v_resolution)
-		var y := (v_ratio - 0.5) * height
+		var base_y := (v_ratio - 0.5) * height
 
-		# Base radius from curve
+		# Base radius from curve - FIXED, not audio-modulated
 		var r := 1.0
 		if radius_curve:
 			r = radius_curve.sample(v_ratio) * max_radius
 
-		# Global volume influence - whole form breathes
-		r *= 1.0 + smoothed_volume * frequency_influence * 0.5
+		# VERTICAL RING MOVEMENT (instead of radius deformation)
+		# Each ring moves up/down based on audio frequency bands
+		var ring_index := i % spectrum_bands
+		var band_influence: float = smoothed_bands[ring_index] if ring_index < smoothed_bands.size() else 0.0
+		
+		# Bass creates slow vertical waves traveling up the form
+		var bass_wave := sin(v_ratio * TAU * 2.0 - time * 2.0) * bass_avg * frequency_influence * 0.3
+		
+		# Mids add bouncing motion to rings
+		var mid_bounce := sin(time * 4.0 + v_ratio * TAU * 3.0) * mid_avg * frequency_influence * 0.2
+		
+		# Treble adds fine vertical jitter
+		var treble_jitter := sin(time * 8.0 + v_ratio * TAU * 6.0) * treble_avg * frequency_influence * 0.1
+		
+		# Band-specific vertical displacement
+		var band_displacement := band_influence * frequency_influence * 0.5
+		
+		# Total vertical offset for this ring
+		var y_offset := bass_wave + mid_bounce + treble_jitter + band_displacement
+		var final_y := base_y + y_offset
 
 		for j in range(u_resolution + 1):
 			var u_ratio := float(j) / float(u_resolution)
 			var u := u_ratio * u_max
 
-			# Local radius modulation based on position + audio
-			var local_r := r
-			
-			# Bass creates slow waves traveling up
-			var bass_wave := sin(v_ratio * TAU * 2.0 - time * 2.0) * bass_avg * frequency_influence * 0.3
-			
-			# Mids create horizontal ripples
-			var mid_wave := sin(u * 4.0 + time * 3.0) * mid_avg * frequency_influence * 0.2
-			
-			# Treble creates fine texture shimmer
-			var treble_wave := sin(u * 8.0 + v_ratio * TAU * 4.0 + time * 5.0) * treble_avg * frequency_influence * 0.15
-			
-			# Band-specific bulges - spread across the whole form
-			var band_index := int(fposmod(v_ratio * 3.0 + u_ratio, 1.0) * (spectrum_bands - 1))
-			var band_influence: float = smoothed_bands[band_index] if band_index < smoothed_bands.size() else 0.0
-			var band_bulge := band_influence * frequency_influence * 0.4
-			
-			local_r *= 1.0 + bass_wave + mid_wave + treble_wave + band_bulge
-
-			var x := local_r * cos(u)
-			var z := local_r * sin(u)
+			# Radius stays constant - only Y moves
+			var x := r * cos(u)
+			var z := r * sin(u)
 
 			st.set_uv(Vector2(u_ratio, v_ratio))
-			st.add_vertex(Vector3(x, -y, z))
+			st.add_vertex(Vector3(x, -final_y, z))
 
 	# Generate indices
 	for i in range(v_resolution):

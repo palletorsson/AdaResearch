@@ -33,24 +33,32 @@ var audio_phase: float = 0.0
 # -- Scene State --
 var columns = []
 
-# Column positions - expanded colonnade layout (8 columns in two rows)
-var column_positions = [
-	# Inner square (original Baldacchino)
-	Vector3(-2, 0, -2),
-	Vector3(2, 0, -2),
-	Vector3(-2, 0, 2),
-	Vector3(2, 0, 2),
-	# Outer colonnade (4 additional columns)
-	Vector3(-4, 0, -4),
-	Vector3(4, 0, -4),
-	Vector3(-4, 0, 4),
-	Vector3(4, 0, 4),
-]
+# Column positions - equally spaced 3x3 grid
+@export var grid_spacing: float = 4.0  # Distance between columns
+var column_positions = []
+
+func _generate_grid_positions():
+	"""Generate a 3x3 equally spaced grid of column positions"""
+	column_positions.clear()
+	var grid_size = 3
+	var offset = (grid_size - 1) * grid_spacing / 2.0
+	
+	for x in range(grid_size):
+		for z in range(grid_size):
+			var pos = Vector3(
+				x * grid_spacing - offset,
+				0,
+				z * grid_spacing - offset
+			)
+			column_positions.append(pos)
 
 # -- Godot Lifecycle Functions --
 
 func _ready():
 	_setup_audio()
+	
+	# Generate equally spaced grid positions
+	_generate_grid_positions()
 	
 	# Create the Baldacchino columns
 	for pos in column_positions:
@@ -58,7 +66,6 @@ func _ready():
 		column.position = pos
 		add_child(column)
 		columns.append(column)
-	
 	
 	# Add a light to highlight the columns
 	create_lighting()

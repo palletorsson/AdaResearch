@@ -210,7 +210,11 @@ func _apply_fold():
 	if _cube_hinges.has("right"):
 		_cube_hinges["right"].rotation.z = -angle
 	if _cube_hinges.has("back"):
-		_cube_hinges["back"].rotation.z = angle
+		# Back tucks under: needs to fold in OPPOSITE direction to close the cube
+		# Delay slightly so it follows after right starts folding
+		var back_progress = clamp((fold_progress - 0.15) / 0.85, 0.0, 1.0)
+		var back_angle = deg_to_rad(90.0) * back_progress
+		_cube_hinges["back"].rotation.z = -back_angle  # Negative to tuck under
 
 func _play_fold_animation():
 	fold_progress = 0.0

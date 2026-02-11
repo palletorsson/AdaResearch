@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://lnw30ynfygou"]
+
+[ext_resource type="Script" path="res://commons/checkpoints/Checkpoint.gd" id="1_checkpoint"]
+
+[node name="Checkpoint" type="Area3D"]
+collision_layer = 0
+collision_mask = 524288
+script = ExtResource("1_checkpoint")
+checkpoint_id = ""
+auto_activate = true
+sphere_radius = 0.5

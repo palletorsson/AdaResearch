@@ -1,20 +1,26 @@
 # DiscoControlPanel.gd
 # VR-friendly control panel for the StandaloneDiscoFloor
-# Provides buttons to change patterns and control playback
+# Uses rack audio system interactables (push buttons, sliders)
 
 extends Node3D
 class_name DiscoControlPanel
 
+# Interactable scenes from rack audio system
+const PUSH_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
+const DIAL_SCENE = preload("res://commons/interactables/dial_smooth.tscn")
+
 ## Configuration
 @export var disco_floor_path: NodePath
-@export var button_size: float = 0.12
-@export var button_spacing: float = 0.14
+@export var button_size: float = 0.08
+@export var button_spacing: float = 0.12
 @export var panel_color: Color = Color(0.1, 0.1, 0.15, 0.9)
 
 ## References
 var disco_floor: StandaloneDiscoFloor
 var pattern_buttons: Array[Node3D] = []
 var control_buttons: Dictionary = {}
+var speed_slider: Node3D
 var current_label: Label3D
 var status_label: Label3D
 
@@ -31,7 +37,7 @@ func _ready() -> void:
 	
 	_create_panel()
 	_connect_signals()
-	print("DiscoControlPanel: Ready, connected to disco floor")
+	print("DiscoControlPanel: Ready, connected to disco floor (using rack interactables)")
 
 func _find_disco_floor() -> StandaloneDiscoFloor:
 	# Search siblings first
@@ -56,51 +62,55 @@ func _create_panel() -> void:
 	var panel_mesh = MeshInstance3D.new()
 	panel_mesh.name = "PanelBackground"
 	var box = BoxMesh.new()
-	box.size = Vector3(0.8, 0.5, 0.02)
+	box.size = Vector3(0.9, 0.6, 0.03)
 	panel_mesh.mesh = box
-	panel_mesh.position = Vector3(0, 0.25, -0.01)
+	panel_mesh.position = Vector3(0, 0.3, -0.015)
 	
 	var panel_mat = StandardMaterial3D.new()
 	panel_mat.albedo_color = panel_color
-	panel_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	panel_mat.metallic = 0.3
+	panel_mat.roughness = 0.7
 	panel_mesh.material_override = panel_mat
 	add_child(panel_mesh)
 	
 	# Title
 	var title = Label3D.new()
 	title.text = "🕺 DISCO CONTROL"
-	title.font_size = 48
-	title.position = Vector3(0, 0.45, 0.02)
+	title.font_size = 42
+	title.position = Vector3(0, 0.52, 0.02)
 	title.modulate = Color.WHITE
-	title.outline_size = 8
+	title.outline_size = 6
 	add_child(title)
 	
 	# Current pattern label
 	current_label = Label3D.new()
 	current_label.text = "Pattern: " + disco_floor.get_current_pattern_name()
-	current_label.font_size = 32
-	current_label.position = Vector3(0, 0.35, 0.02)
+	current_label.font_size = 28
+	current_label.position = Vector3(0, 0.43, 0.02)
 	current_label.modulate = Color.CYAN
 	add_child(current_label)
 	
 	# Status label
 	status_label = Label3D.new()
 	status_label.text = "▶ Playing"
-	status_label.font_size = 24
-	status_label.position = Vector3(0, 0.28, 0.02)
+	status_label.font_size = 22
+	status_label.position = Vector3(0, 0.36, 0.02)
 	status_label.modulate = Color.LIME
 	add_child(status_label)
 	
-	# Create control buttons (top row)
-	_create_control_button("⏮", Vector3(-0.25, 0.18, 0.02), "prev", Color.ORANGE)
-	_create_control_button("⏯", Vector3(0, 0.18, 0.02), "toggle", Color.LIME)
-	_create_control_button("⏭", Vector3(0.25, 0.18, 0.02), "next", Color.ORANGE)
+	# Create control buttons (using rack interactables)
+	_create_rack_button("⏮", Vector3(-0.28, 0.24, 0.02), "prev", Color.ORANGE)
+	_create_rack_button("⏯", Vector3(0, 0.24, 0.02), "toggle", Color.LIME)
+	_create_rack_button("⏭", Vector3(0.28, 0.24, 0.02), "next", Color.ORANGE)
+	
+	# Speed slider
+	_create_speed_slider(Vector3(0.35, 0.42, 0.02))
 	
 	# Create pattern buttons (grid below)
 	var patterns = disco_floor.get_all_pattern_names()
 	var cols = 5
-	var start_x = -0.3
-	var start_y = 0.05
+	var start_x = -0.32
+	var start_y = 0.12
 	
 	for i in range(patterns.size()):
 		var row = i / cols
@@ -112,90 +122,101 @@ func _create_panel() -> void:
 		)
 		_create_pattern_button(patterns[i], pos, i)
 
-func _create_control_button(icon: String, pos: Vector3, action: String, color: Color) -> void:
-	var button = _create_button_base(pos, color)
+func _create_rack_button(icon: String, pos: Vector3, action: String, color: Color) -> void:
+	"""Create a button using the rack audio system's push_button scene"""
+	var button = PUSH_BUTTON_SCENE.instantiate()
 	button.name = "Control_" + action
+	button.position = pos
+	button.scale = Vector3(0.8, 0.8, 0.8)
 	
+	# Set button color if possible
+	if "button_color" in button:
+		button.button_color = color
+	
+	# Add label above button
 	var label = Label3D.new()
 	label.text = icon
-	label.font_size = 48
-	label.position = Vector3(0, 0, 0.01)
+	label.font_size = 36
+	label.position = Vector3(0, 0.06, 0)
+	label.outline_size = 4
 	button.add_child(label)
 	
-	# Add interaction area
-	var area = _create_button_area(button)
-	area.input_event.connect(_on_control_button_pressed.bind(action))
+	# Connect signal
+	if button.has_signal("button_pressed"):
+		button.button_pressed.connect(_on_rack_button_pressed.bind(action))
+	elif button.has_signal("pressed"):
+		button.pressed.connect(_on_rack_button_pressed.bind(action))
+	else:
+		# Fallback: find InteractableAreaButton child
+		var area_btn = button.get_node_or_null("InteractableAreaButton")
+		if area_btn and area_btn.has_signal("button_pressed"):
+			area_btn.button_pressed.connect(_on_rack_button_pressed.bind(action))
 	
 	control_buttons[action] = button
 	add_child(button)
 
+func _create_speed_slider(pos: Vector3) -> void:
+	"""Create a speed control slider using rack audio system"""
+	speed_slider = SLIDER_SCENE.instantiate()
+	speed_slider.name = "SpeedSlider"
+	speed_slider.position = pos
+	speed_slider.scale = Vector3(0.6, 0.6, 0.6)
+	speed_slider.rotation_degrees.z = 90  # Horizontal orientation
+	
+	# Add label
+	var label = Label3D.new()
+	label.text = "SPEED"
+	label.font_size = 18
+	label.position = Vector3(0.12, 0, 0)
+	speed_slider.add_child(label)
+	
+	# Connect signal
+	if speed_slider.has_signal("slider_moved"):
+		speed_slider.slider_moved.connect(_on_speed_slider_moved)
+	elif speed_slider.has_signal("value_changed"):
+		speed_slider.value_changed.connect(_on_speed_slider_moved)
+	
+	add_child(speed_slider)
+
 func _create_pattern_button(pattern_name: String, pos: Vector3, index: int) -> void:
-	# Use first 2 chars as abbreviation
+	"""Create a pattern selection button using rack interactables"""
 	var abbrev = pattern_name.left(2).to_upper()
-	var color = Color.from_hsv(float(index) / 10.0, 0.5, 0.8)
+	var hue = float(index) / disco_floor.get_pattern_count()
+	var color = Color.from_hsv(hue, 0.6, 0.9)
 	
-	var button = _create_button_base(pos, color, button_size * 0.8)
+	var button = PUSH_BUTTON_SCENE.instantiate()
 	button.name = "Pattern_" + str(index)
+	button.position = pos
+	button.scale = Vector3(0.65, 0.65, 0.65)
 	
+	# Add abbreviation label
 	var label = Label3D.new()
 	label.text = abbrev
-	label.font_size = 24
-	label.position = Vector3(0, 0, 0.01)
+	label.font_size = 20
+	label.position = Vector3(0, 0.04, 0)
+	label.modulate = color
+	label.outline_size = 3
 	button.add_child(label)
 	
-	var area = _create_button_area(button)
-	area.input_event.connect(_on_pattern_button_pressed.bind(index))
+	# Connect signal
+	if button.has_signal("button_pressed"):
+		button.button_pressed.connect(_on_pattern_button_pressed.bind(index))
+	elif button.has_signal("pressed"):
+		button.pressed.connect(_on_pattern_button_pressed.bind(index))
+	else:
+		var area_btn = button.get_node_or_null("InteractableAreaButton")
+		if area_btn and area_btn.has_signal("button_pressed"):
+			area_btn.button_pressed.connect(_on_pattern_button_pressed.bind(index))
 	
 	pattern_buttons.append(button)
 	add_child(button)
-
-func _create_button_base(pos: Vector3, color: Color, size: float = button_size) -> Node3D:
-	var button = Node3D.new()
-	button.position = pos
-	
-	var mesh = MeshInstance3D.new()
-	var box = BoxMesh.new()
-	box.size = Vector3(size, size, 0.02)
-	mesh.mesh = box
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.emission_enabled = true
-	mat.emission = color
-	mat.emission_energy_multiplier = 0.3
-	mesh.material_override = mat
-	
-	button.add_child(mesh)
-	return button
-
-func _create_button_area(button: Node3D) -> Area3D:
-	var area = Area3D.new()
-	area.name = "ClickArea"
-	
-	var collision = CollisionShape3D.new()
-	var shape = BoxShape3D.new()
-	shape.size = Vector3(button_size, button_size, 0.05)
-	collision.shape = shape
-	
-	area.add_child(collision)
-	button.add_child(area)
-	
-	# Enable input
-	area.input_ray_pickable = true
-	area.monitoring = true
-	
-	return area
 
 func _connect_signals() -> void:
 	disco_floor.pattern_changed.connect(_on_pattern_changed)
 	disco_floor.disco_toggled.connect(_on_disco_toggled)
 
-func _on_control_button_pressed(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3, _shape_idx: int, action: String) -> void:
-	if not event is InputEventMouseButton:
-		return
-	if not event.pressed:
-		return
-	
+func _on_rack_button_pressed(action: String) -> void:
+	print("DiscoControlPanel: Button pressed - %s" % action)
 	match action:
 		"prev":
 			disco_floor.previous_pattern()
@@ -203,31 +224,16 @@ func _on_control_button_pressed(_camera: Node, event: InputEvent, _pos: Vector3,
 			disco_floor.next_pattern()
 		"toggle":
 			disco_floor.toggle_disco()
-	
-	# Visual feedback
-	_flash_button(control_buttons.get(action))
 
-func _on_pattern_button_pressed(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3, _shape_idx: int, index: int) -> void:
-	if not event is InputEventMouseButton:
-		return
-	if not event.pressed:
-		return
-	
+func _on_pattern_button_pressed(index: int) -> void:
+	print("DiscoControlPanel: Pattern button pressed - %d" % index)
 	disco_floor.set_pattern(index)
-	
-	if index < pattern_buttons.size():
-		_flash_button(pattern_buttons[index])
 
-func _flash_button(button: Node3D) -> void:
-	if not button:
-		return
-	var mesh = button.get_node_or_null("MeshInstance3D")
-	if mesh and mesh.material_override:
-		var mat = mesh.material_override as StandardMaterial3D
-		var original = mat.emission_energy_multiplier
-		mat.emission_energy_multiplier = 2.0
-		await get_tree().create_timer(0.1).timeout
-		mat.emission_energy_multiplier = original
+func _on_speed_slider_moved(value: float) -> void:
+	# Map slider 0-1 to speed 0.02-0.2
+	var speed = lerp(0.02, 0.2, 1.0 - value)  # Inverted: high slider = fast
+	disco_floor.set_speed(speed)
+	print("DiscoControlPanel: Speed set to %.3f" % speed)
 
 func _on_pattern_changed(pattern_name: String) -> void:
 	current_label.text = "Pattern: " + pattern_name

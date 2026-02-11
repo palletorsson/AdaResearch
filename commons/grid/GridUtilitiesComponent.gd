@@ -723,6 +723,56 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						utility_object.duration = float(param2)
 			print("GridUtilitiesComponent: Configured subtitle trigger for '%s'" % (parameters[0] if parameters.size() > 0 else "map"))
 
+		"cp":  # Checkpoint - save point
+			# Format: cp or cp:checkpoint_id
+			# Examples: cp, cp:save_01, cp:midpoint
+			var cp_id = ""
+			if parameters.size() > 0:
+				cp_id = parameters[0].strip_edges()
+			
+			if cp_id.is_empty():
+				# Auto-generate ID from position
+				cp_id = "cp_%d_%d" % [int(utility_object.position.x), int(utility_object.position.z)]
+			
+			if "checkpoint_id" in utility_object:
+				utility_object.checkpoint_id = cp_id
+			else:
+				utility_object.set_meta("checkpoint_id", cp_id)
+			
+			print("GridUtilitiesComponent: Configured checkpoint '%s'" % cp_id)
+
+		"h":  # Hazard zone - danger area
+			# Format: h:type or h:type:damage
+			# Examples: h:fire, h:electric:25, h:death, h:vacuum:10
+			var hazard_type = "generic"
+			var damage = 10.0
+			
+			if parameters.size() > 0:
+				hazard_type = parameters[0].strip_edges().to_lower()
+			
+			if parameters.size() > 1 and parameters[1].is_valid_float():
+				damage = float(parameters[1])
+			
+			# Map type string to enum
+			var type_enum = 5  # GENERIC default
+			match hazard_type:
+				"fire": type_enum = 0
+				"vacuum": type_enum = 1
+				"electric": type_enum = 2
+				"toxic": type_enum = 3
+				"radiation": type_enum = 4
+				"death":
+					type_enum = 5
+					if "instant_kill" in utility_object:
+						utility_object.instant_kill = true
+			
+			if "danger_type" in utility_object:
+				utility_object.danger_type = type_enum
+			if "damage_per_tick" in utility_object:
+				utility_object.damage_per_tick = damage
+			
+			print("GridUtilitiesComponent: Configured hazard zone type=%s damage=%.1f" % [hazard_type, damage])
+
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)

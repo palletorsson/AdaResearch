@@ -12,6 +12,8 @@ class_name StandaloneDiscoFloor
 @export var tile_gap: float = 0.02
 @export var base_color: Color = Color.WHITE
 @export var floor_height: float = 0.02  # Thin tiles
+@export var floor_y_offset: float = 0.5  # Y position of floor surface
+@export var walkable: bool = true  # Add collision for walking
 
 ## Animation
 @export var auto_start: bool = true
@@ -58,7 +60,7 @@ func _ready() -> void:
 
 func _create_floor_grid() -> void:
 	"""Create the tile grid using MultiMesh for performance"""
-	print("StandaloneDiscoFloor: Creating %dx%d tile grid" % [grid_width, grid_depth])
+	print("StandaloneDiscoFloor: Creating %dx%d tile grid at Y=%.2f" % [grid_width, grid_depth, floor_y_offset])
 	
 	# Create MultiMesh
 	multimesh = MultiMesh.new()
@@ -98,7 +100,7 @@ func _create_floor_grid() -> void:
 			var idx = z * grid_width + x
 			var pos = Vector3(
 				x * tile_size - offset_x,
-				floor_height / 2.0,
+				floor_y_offset + floor_height / 2.0,  # Position at floor_y_offset
 				z * tile_size - offset_z
 			)
 			var xform = Transform3D(Basis(), pos)
@@ -106,7 +108,34 @@ func _create_floor_grid() -> void:
 			multimesh.set_instance_color(idx, base_color)
 			tile_colors[idx] = base_color
 	
+	# Add collision for walking if enabled
+	if walkable:
+		_create_floor_collision(offset_x, offset_z)
+	
 	print("StandaloneDiscoFloor: Created %d tiles" % multimesh.instance_count)
+
+func _create_floor_collision(offset_x: float, offset_z: float) -> void:
+	"""Create a single collision shape for the entire floor for walking"""
+	var floor_body = StaticBody3D.new()
+	floor_body.name = "FloorCollision"
+	
+	var collision_shape = CollisionShape3D.new()
+	var box_shape = BoxShape3D.new()
+	# Create a box that covers the entire floor area
+	box_shape.size = Vector3(
+		grid_width * tile_size,
+		floor_height,
+		grid_depth * tile_size
+	)
+	collision_shape.shape = box_shape
+	
+	# Position at center of floor
+	floor_body.position = Vector3(0, floor_y_offset, 0)
+	
+	floor_body.add_child(collision_shape)
+	add_child(floor_body)
+	
+	print("StandaloneDiscoFloor: Added walkable floor collision")
 
 func _process(delta: float) -> void:
 	if not is_running:
@@ -332,4 +361,70 @@ func set_grid_size(width: int, depth: int) -> void:
 	# Recreate grid
 	if multimesh_instance:
 		multimesh_instance.queue_free()
+	# Remove old collision
+	var old_collision = get_node_or_null("FloorCollision")
+	if old_collision:
+		old_collision.queue_free()
 	_create_floor_grid()
+
+func set_floor_height(y_offset: float) -> void:
+	floor_y_offset = y_offset
+	# Recreate to update positions
+	if multimesh_instance:
+		multimesh_instance.queue_free()
+	var old_collision = get_node_or_null("FloorCollision")
+	if old_collision:
+		old_collision.queue_free()
+	_create_floor_grid()
+
+# === GRID CONFIG API (for GridInteractablesComponent) ===
+
+func apply_grid_config(config: Dictionary) -> void:
+	"""Apply configuration from map_data.json # syntax"""
+	print("StandaloneDiscoFloor: Applying config: %s" % str(config))
+	
+	var needs_rebuild := false
+	
+	# Grid dimensions
+	if config.has("width"):
+		grid_width = int(config["width"])
+		needs_rebuild = true
+	if config.has("depth"):
+		grid_depth = int(config["depth"])
+		needs_rebuild = true
+	
+	# Tile appearance
+	if config.has("tile_size"):
+		tile_size = float(config["tile_size"])
+		needs_rebuild = true
+	if config.has("tile_gap"):
+		tile_gap = float(config["tile_gap"])
+		needs_rebuild = true
+	
+	# Floor position and collision
+	if config.has("floor_y_offset"):
+		floor_y_offset = float(config["floor_y_offset"])
+		needs_rebuild = true
+	if config.has("walkable"):
+		var val = config["walkable"]
+		walkable = (str(val).to_lower() == "true" or val == true or val == 1)
+		needs_rebuild = true
+	
+	# Animation settings
+	if config.has("pattern_speed"):
+		pattern_speed = float(config["pattern_speed"])
+	if config.has("pattern_duration"):
+		pattern_duration = float(config["pattern_duration"])
+	if config.has("auto_start"):
+		var val = config["auto_start"]
+		auto_start = (str(val).to_lower() == "true" or val == true or val == 1)
+	
+	# Rebuild if needed
+	if needs_rebuild and multimesh_instance:
+		multimesh_instance.queue_free()
+		var old_collision = get_node_or_null("FloorCollision")
+		if old_collision:
+			old_collision.queue_free()
+		call_deferred("_create_floor_grid")
+		if auto_start:
+			call_deferred("start_disco")

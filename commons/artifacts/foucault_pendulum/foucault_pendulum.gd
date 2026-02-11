@@ -78,6 +78,7 @@ func _ready():
 	swing_direction = initial_direction
 	earth_angle = 0.0
 	
+	_create_podium()
 	_create_ceiling_mount()
 	_create_pivot()
 	_create_wire()
@@ -91,7 +92,60 @@ func _ready():
 	_create_debug_visuals()
 	_update_pendulum_visual()
 	
-	print("FoucaultPendulum ready - latitude: ", latitude, "Â° | precession = Earth Ã— sin(lat)")
+	print("FoucaultPendulum ready - latitude: ", latitude, "° | precession = Earth × sin(lat)")
+
+
+func _create_podium():
+	"""Create a podium/pedestal underneath the pendulum visualization"""
+	var podium = Node3D.new()
+	podium.name = "Podium"
+	
+	# Main podium cylinder
+	var base = MeshInstance3D.new()
+	var cyl = CylinderMesh.new()
+	cyl.top_radius = canvas_size / 2.0 + 0.5
+	cyl.bottom_radius = canvas_size / 2.0 + 0.7
+	cyl.height = 0.8
+	base.mesh = cyl
+	base.position = Vector3(0, -0.4, 0)
+	
+	var base_mat = StandardMaterial3D.new()
+	base_mat.albedo_color = Color(0.2, 0.18, 0.16)
+	base_mat.metallic = 0.1
+	base_mat.roughness = 0.8
+	base.material_override = base_mat
+	podium.add_child(base)
+	
+	# Decorative rim at top
+	var rim = MeshInstance3D.new()
+	var rim_torus = TorusMesh.new()
+	rim_torus.inner_radius = canvas_size / 2.0 + 0.35
+	rim_torus.outer_radius = canvas_size / 2.0 + 0.55
+	rim_torus.rings = 32
+	rim_torus.ring_segments = 8
+	rim.mesh = rim_torus
+	rim.position = Vector3(0, -0.02, 0)
+	rim.rotation.x = PI / 2
+	
+	var rim_mat = StandardMaterial3D.new()
+	rim_mat.albedo_color = Color(0.6, 0.5, 0.35)
+	rim_mat.metallic = 0.6
+	rim_mat.roughness = 0.4
+	rim.material_override = rim_mat
+	podium.add_child(rim)
+	
+	# Lower stepped base
+	var lower_base = MeshInstance3D.new()
+	var lower_cyl = CylinderMesh.new()
+	lower_cyl.top_radius = canvas_size / 2.0 + 0.7
+	lower_cyl.bottom_radius = canvas_size / 2.0 + 0.9
+	lower_cyl.height = 0.3
+	lower_base.mesh = lower_cyl
+	lower_base.position = Vector3(0, -0.95, 0)
+	lower_base.material_override = base_mat
+	podium.add_child(lower_base)
+	
+	add_child(podium)
 
 
 func _create_ceiling_mount():
@@ -278,50 +332,7 @@ func _create_earth_ring():
 	ring_mesh.material_override = ring_mat
 	_earth_ring.add_child(ring_mesh)
 	
-	# Compass markers (N, E, S, W)
-	var directions = ["N", "E", "S", "W"]
-	var colors = [Color(0.9, 0.2, 0.2), Color(0.3, 0.7, 0.3), Color(0.3, 0.3, 0.8), Color(0.7, 0.7, 0.2)]
-	
-	for i in range(4):
-		var angle = i * PI / 2.0
-		var marker = Node3D.new()
-		marker.name = "Compass_" + directions[i]
-		
-		# Arrow/triangle pointing inward
-		var arrow = MeshInstance3D.new()
-		var prism = PrismMesh.new()
-		prism.size = Vector3(0.2, 0.08, 0.3)
-		arrow.mesh = prism
-		arrow.rotation.x = -PI / 2  # Point up then rotate
-		arrow.rotation.y = PI  # Point inward
-		
-		var arrow_mat = StandardMaterial3D.new()
-		arrow_mat.albedo_color = colors[i]
-		arrow_mat.emission_enabled = true
-		arrow_mat.emission = colors[i] * 0.5
-		arrow_mat.emission_energy_multiplier = 0.5
-		arrow.material_override = arrow_mat
-		marker.add_child(arrow)
-		
-		# Direction label
-		var label = Label3D.new()
-		label.text = directions[i]
-		label.font_size = 42
-		label.position = Vector3(0, 0.15, -0.25)
-		label.modulate = colors[i]
-		label.outline_size = 4
-		marker.add_child(label)
-		
-		# Position on ring
-		marker.position = Vector3(
-			cos(angle) * ring_radius,
-			ring_height,
-			sin(angle) * ring_radius
-		)
-		marker.rotation.y = -angle + PI / 2  # Face center
-		
-		_earth_ring.add_child(marker)
-		_compass_markers.append(marker)
+	# Compass markers removed - cleaner visualization
 
 
 func _create_gravity_spheres():

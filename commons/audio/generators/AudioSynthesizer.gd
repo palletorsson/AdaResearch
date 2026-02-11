@@ -5561,7 +5561,7 @@ static func _generate_pop_section_stream(progression: Array, scale: Array, instr
 static func _apply_fade_envelope(buffer: PackedFloat32Array, fade_length: int):
 	var size = buffer.size()
 	if size < fade_length * 2:
-		fade_length = size / 2
+		fade_length = _idiv(size, 2)
 		
 	for i in range(fade_length):
 		var t = float(i) / float(fade_length)
@@ -8354,7 +8354,7 @@ static func _generate_spiegel_intelligent(data: PackedFloat32Array, sample_count
 	var voice_notes: Array[int] = []
 	for v in range(num_voices):
 		var scale_degree = (v * 2) % scale.size()
-		voice_notes.append(root_midi + scale[scale_degree] + (v / 2) * 12)
+		voice_notes.append(root_midi + scale[scale_degree] + _idiv(v, 2) * 12)
 	
 	var last_chord_time = 0.0
 	var chord_duration = 1.0 / chord_rate

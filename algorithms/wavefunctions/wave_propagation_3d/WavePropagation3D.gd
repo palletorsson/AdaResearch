@@ -1,14 +1,14 @@
 extends Node3D
 
-@export var grid_size: int = 20
-@export var tile_size: float = 0.4
-@export var tile_gutter: float = 0.1
-@export var tile_height: float = 0.06
+@export var grid_size: int = 30  # Larger propagation area
+@export var tile_size: float = 0.5  # Bigger tiles
+@export var tile_gutter: float = 0.08
+@export var tile_height: float = 0.15  # Taller tiles for more visible height
 @export var floor_tilt_degrees: float = -12.0
 @export var frequency: float = 0.7
-@export var amplitude: float = 0.5
+@export var amplitude: float = 1.2  # Much bigger wave displacement
 @export var wave_speed: float = 0.6
-@export var wave_damping: float = 0.08
+@export var wave_damping: float = 0.06  # Slightly less damping for larger visible area
 
 var time: float = 0.0
 var tile_positions: Array[Vector2] = []
@@ -18,8 +18,9 @@ var wave_rings: Array = []
 var tile_collision_bodies: Array[StaticBody3D] = []
 var soundscape: Node3D
 
-var base_tile_color := Color(0.22, 0.55, 0.85, 1.0)
-var peak_tile_color := Color(0.95, 0.85, 0.4, 1.0)
+# More distinct color gradient for wave visualization
+var base_tile_color := Color(0.15, 0.35, 0.65, 1.0)  # Darker blue base
+var peak_tile_color := Color(1.0, 0.9, 0.3, 1.0)  # Brighter yellow peak
 
 func _ready():
 	create_wave_surface()
@@ -147,17 +148,17 @@ func animate_wave_rings():
 	if wave_rings.is_empty():
 		return
 	var travel_rate = max(wave_speed * 1.8, 0.01)
-	var max_radius = 7.5
+	var max_radius = 12.0  # Larger radius to match bigger grid
 	var cycle_duration = max_radius / travel_rate
 	for i in range(wave_rings.size()):
 		var ring = wave_rings[i]
-		var local_time = time - float(i) * 0.9
+		var local_time = time - float(i) * 1.2  # Wider spacing between rings
 		if cycle_duration <= 0.0:
 			cycle_duration = 1.0
 		local_time = fposmod(local_time, cycle_duration)
-		var ring_radius = max(0.15, travel_rate * local_time)
+		var ring_radius = max(0.2, travel_rate * local_time)
 		ring.radius = ring_radius
-		var fade = clamp(1.0 - local_time * 0.18, 0.0, 1.0)
+		var fade = clamp(1.0 - local_time * 0.12, 0.0, 1.0)  # Slower fade
 		var ring_material = ring.material_override as StandardMaterial3D
 		if ring_material:
 			ring_material.albedo_color.a = fade * 0.35

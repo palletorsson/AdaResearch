@@ -201,15 +201,16 @@ func _apply_fold() -> void:
 	if _hinges.has("right"):
 		_hinges["right"].rotation.z = -angle
 	
-	# Back folds from right (after right has folded)
-	# It needs to fold 90° more to close the cube (total 180° relative to flat)
-	# This "tucks" the back face under/inside the forming cube
+	# Back folds from right - needs to tuck UNDER to complete the cube
+	# Back is a child of right, so it inherits right's 90° rotation
+	# Back then needs its OWN additional 90° rotation to close the cube
+	# The back hinge rotates around Z-axis (same direction as right)
 	if _hinges.has("back"):
-		_hinges["back"].rotation.z = -angle  # First 90° with right
-		# Add additional fold to tuck under (completes the cube closure)
-		if fold_progress > 0.5:
-			var extra_fold = (fold_progress - 0.5) * 2.0 * PI / 2.0  # Extra 90° in second half
-			_hinges["back"].rotation.z = -PI/2.0 - extra_fold
+		# Ease the back fold to start slightly after right begins folding
+		# This creates the "tucking under" effect
+		var back_progress = clamp((fold_progress - 0.2) / 0.8, 0.0, 1.0)
+		var back_angle = back_progress * PI / 2.0
+		_hinges["back"].rotation.z = -back_angle  # Tucks under as the cube closes
 
 # Public API
 
