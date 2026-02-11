@@ -47,7 +47,7 @@ void fragment() {
 	vec2 screen_uv = SCREEN_UV;
 	
 	// Calculate refraction offset based on surface normal and view direction
-	vec3 refracted_ray = refract(-view_direction, world_normal, 1.0 / ior);
+	vec3 refracted_ray = refmod(-view_direction, world_normal, 1.0 / ior, 1.0);
 	vec2 refraction_offset = refracted_ray.xy * refraction_strength * 0.1;
 	
 	// Sample background with refraction offset

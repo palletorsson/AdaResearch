@@ -1,4 +1,4 @@
-﻿# perception_altering.gd
+# perception_altering.gd
 class_name PerceptionAlteringEnvironment
 extends Node3D
 
@@ -420,12 +420,12 @@ func _load_or_create_grid_shader():
 		
 		// Calculate grid pattern
 		vec2 grid_pos = world_pos / grid_size;
-		vec2 grid_frac = fract(grid_pos);
+		vec2 grid_frac = fmod(grid_pos, 1.0);
 		vec2 grid_center = abs(grid_frac - 0.5);
 		
 		// Calculate major grid pattern
 		vec2 major_grid_pos = world_pos / major_grid_size;
-		vec2 major_grid_frac = fract(major_grid_pos);
+		vec2 major_grid_frac = fmod(major_grid_pos, 1.0);
 		vec2 major_grid_center = abs(major_grid_frac - 0.5);
 		
 		// Calculate grid lines

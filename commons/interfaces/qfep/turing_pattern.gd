@@ -41,12 +41,12 @@ uniform float scale : hint_range(1.0, 20.0) = 8.0;
 
 // Noise functions for pattern generation
 float hash(vec2 p) {
-	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+	return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 float noise(vec2 p) {
 	vec2 i = floor(p);
-	vec2 f = fract(p);
+	vec2 f = fmod(p, 1.0);
 	f = f * f * (3.0 - 2.0 * f);
 	
 	return mix(

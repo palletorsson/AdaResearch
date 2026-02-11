@@ -1,4 +1,4 @@
-﻿# surreal_machines.gd
+# surreal_machines.gd
 # Surreal mechanical contraptions with joints and joyful soft body interactions
 extends Node3D
 
@@ -51,7 +51,7 @@ void fragment() {
 	float color_index = hue * 6.0;
 	int index1 = int(color_index) % 6;
 	int index2 = (index1 + 1) % 6;
-	float blend = fract(color_index);
+	float blend = fmod(color_index, 1.0);
 
 	vec3 rainbow_color = mix(pride_colors[index1], pride_colors[index2], blend);
 	rainbow_color = mix(vec3(0.8), rainbow_color, pride_factor);

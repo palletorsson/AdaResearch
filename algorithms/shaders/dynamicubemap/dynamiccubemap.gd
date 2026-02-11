@@ -79,7 +79,7 @@ uniform float pattern_scale : hint_range(0.1, 2.0) = 0.8;
 varying vec3 world_pos;
 
 float noise(vec3 p) {
-	return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+	return fmod(sin(dot(p, vec3(127.1, 311.7, 74.7, 1.0))) * 43758.5453);
 }
 
 void vertex() {

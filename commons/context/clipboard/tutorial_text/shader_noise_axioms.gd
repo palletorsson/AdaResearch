@@ -37,7 +37,7 @@ shader_type canvas_item;
 
 // Hash function: vec2 → float [0, 1]
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 void fragment() {
@@ -100,12 +100,12 @@ float hash_pcg(vec2 p) {
 shader_type canvas_item;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 float value_noise(vec2 uv) {
     vec2 i = floor(uv);  // Integer part
-    vec2 f = fract(uv);  // Fractional part
+    vec2 f = fmod(uv, 1.0);  // Fractional part
 
     // Smoothstep interpolation
     vec2 u = f * f * (3.0 - 2.0 * f);
@@ -139,7 +139,7 @@ void fragment() {
 shader_type canvas_item;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 vec2 hash2(vec2 p) {
@@ -151,7 +151,7 @@ vec2 hash2(vec2 p) {
 
 float perlin_noise(vec2 uv) {
     vec2 i = floor(uv);
-    vec2 f = fract(uv);
+    vec2 f = fmod(uv, 1.0);
 
     // Smoothstep
     vec2 u = f * f * (3.0 - 2.0 * f);
@@ -247,7 +247,7 @@ void fragment() {
 shader_type canvas_item;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 vec2 hash2(vec2 p) {
@@ -256,7 +256,7 @@ vec2 hash2(vec2 p) {
 
 float worley_noise(vec2 uv) {
     vec2 cell = floor(uv);
-    vec2 fract_pos = fract(uv);
+    vec2 fract_pos = fmod(uv, 1.0);
 
     float min_dist = 1.0;
 
@@ -356,13 +356,13 @@ void fragment() {
 shader_type canvas_item;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 float value_noise_tile(vec2 uv, float tile_size) {
     // Wrap coordinates at tile boundary
     vec2 i = mod(floor(uv), tile_size);
-    vec2 f = fract(uv);
+    vec2 f = fmod(uv, 1.0);
     vec2 u = f * f * (3.0 - 2.0 * f);
 
     // Sample with wrapping

@@ -43,12 +43,12 @@ uniform float noise_scale : hint_range(1.0, 20.0) = 8.0;
 
 // Simple noise function
 float hash(vec3 p) {
-	return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+	return fmod(sin(dot(p, vec3(127.1, 311.7, 74.7, 1.0))) * 43758.5453);
 }
 
 float noise(vec3 p) {
 	vec3 i = floor(p);
-	vec3 f = fract(p);
+	vec3 f = fmod(p, 1.0);
 	f = f * f * (3.0 - 2.0 * f);
 	
 	return mix(

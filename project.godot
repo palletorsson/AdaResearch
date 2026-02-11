@@ -41,6 +41,7 @@ DebugLogger="*res://commons/managers/DebugLogger.gd"
 [debug]
 
 file_logging/enable_file_logging=true
+file_logging/max_log_files=12
 
 [display]
 

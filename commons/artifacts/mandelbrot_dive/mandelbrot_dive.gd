@@ -125,7 +125,7 @@ void fragment() {
 		float nu = log(log_zn / log(2.0)) / log(2.0);
 		float smooth_iter = float(iter) + 1.0 - nu;
 		float t = smooth_iter / float(max_iter);
-		ALBEDO = get_color(fract(t * 5.0), color_scheme);
+		ALBEDO = get_color(fmod(t * 5.0, 1.0), color_scheme);
 	}
 	
 	EMISSION = ALBEDO * 0.2;

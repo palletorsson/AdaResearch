@@ -199,7 +199,7 @@ uniform sampler2D texture_albedo;
 uniform float glitch_amount = 0.5;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 void fragment() {
@@ -266,7 +266,7 @@ uniform float block_size = 0.05;
 uniform float displacement_strength = 0.1;
 
 float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 }
 
 void fragment() {
@@ -326,7 +326,7 @@ shader_type canvas_item;
 uniform float time;
 
 float noise(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+    return fmod(sin(dot(p, vec2(12.9898, 78.233, 1.0))) * 43758.5453);
 }
 
 void fragment() {

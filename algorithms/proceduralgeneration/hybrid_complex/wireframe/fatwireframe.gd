@@ -96,7 +96,7 @@ void vertex() {
 void fragment() {
 	// Create wireframe by detecting edges using screen-space derivatives
 	vec3 fw = fwidth(local_pos);
-	vec3 edge_factor = step(fw * (line_width * 1000.0), abs(fract(local_pos * 8.0) - 0.5));
+	vec3 edge_factor = step(fw * (line_width * 1000.0), abs(fmod(local_pos * 8.0, 1.0) - 0.5));
 	float wireframe = 1.0 - min(min(edge_factor.x, edge_factor.y), edge_factor.z);
 	
 	if (wireframe < 0.5) {

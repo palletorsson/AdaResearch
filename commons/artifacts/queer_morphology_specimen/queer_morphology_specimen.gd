@@ -77,7 +77,7 @@ uniform float lambda = 0.5;
 uniform float phi = 0.0;
 
 float noise3d(vec3 p) {
-	return fract(sin(dot(p, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
+	return fmod(sin(dot(p, vec3(12.9898, 78.233, 45.164, 1.0))) * 43758.5453);
 }
 
 float fbm(vec3 p) {

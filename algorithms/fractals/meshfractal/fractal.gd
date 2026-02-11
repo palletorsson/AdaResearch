@@ -175,20 +175,20 @@ func update_colors():
 			
 			if is_leaf:
 				# Leaf colors
-				var t = fract(j * 0.381 + 0.618)
+				var t = fmod(j * 0.381 + 0.618, 1.0)
 				color = leaf_color_a.lerp(leaf_color_b, t)
 			else:
 				# Gradient colors
 				var gradient_t = float(i) / float(depth - 2)
 				var color_a = gradient_a.sample(gradient_t) if gradient_a else Color.WHITE
 				var color_b = gradient_b.sample(gradient_t) if gradient_b else Color.WHITE
-				var t = fract(j * 0.381 + i * 0.618)
+				var t = fmod(j * 0.381 + i * 0.618, 1.0)
 				color = color_a.lerp(color_b, t)
 			
 			# Set color for this instance
 			multi_mesh.set_instance_color(j, color)
 
-func fract(value: float) -> float:
+func fmod(value: float, 1.0) -> float:
 	return value - floor(value)
 
 func clear_fractal():

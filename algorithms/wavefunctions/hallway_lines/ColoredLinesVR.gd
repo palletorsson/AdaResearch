@@ -56,7 +56,7 @@ void vertex() {
 void fragment() {
 	// Animated gradient flows along the line
 	float color_wave = line_progress + (TIME * flow_speed * 0.1);
-	color_wave = fract(color_wave);  // Loop the animation
+	color_wave = fmod(color_wave, 1.0);  // Loop the animation
 	vec3 flowing_color = mix(color_start.rgb, color_end.rgb, color_wave);
 
 	// Animated rainbow effect

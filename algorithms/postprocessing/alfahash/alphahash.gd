@@ -30,12 +30,12 @@ varying vec2 screen_position;
 
 // Noise functions for dithering
 float random(vec2 st) {
-	return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+	return fmod(sin(dot(st.xy, vec2(12.9898, 78.233, 1.0))) * 43758.5453123);
 }
 
 float noise(vec2 st) {
 	vec2 i = floor(st);
-	vec2 f = fract(st);
+	vec2 f = fmod(st, 1.0);
 	
 	float a = random(i);
 	float b = random(i + vec2(1.0, 0.0));
@@ -114,7 +114,7 @@ void vertex() {
 void fragment() {
 	// Create stipple pattern
 	vec2 stipple_coords = world_pos.xz * stipple_size + TIME * animation_speed * 0.2;
-	float stipple_noise = fract(sin(dot(stipple_coords, vec2(127.1, 311.7))) * 43758.5453);
+	float stipple_noise = fmod(sin(dot(stipple_coords, vec2(127.1, 311.7, 1.0))) * 43758.5453);
 	
 	// Animate stipple density
 	float animated_density = stipple_density + sin(TIME * animation_speed + world_pos.y) * 0.2;

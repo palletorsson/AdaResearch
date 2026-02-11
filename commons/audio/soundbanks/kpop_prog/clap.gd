@@ -23,7 +23,7 @@ static func generate(t: float, trigger_time: float = 0.0) -> float:
 
 
 static func _noise(x: float) -> float:
-	return fract(sin(x * 10873.1) * 19642.349) * 2.0 - 1.0
+	return fmod(sin(x * 10873.1, 1.0) * 19642.349) * 2.0 - 1.0
 
 
 static func get_duration() -> float:

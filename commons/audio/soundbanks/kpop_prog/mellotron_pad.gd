@@ -29,7 +29,7 @@ static func generate(t: float, chord_freqs: Array = [], note_duration: float = 4
 		var f = chord_freqs[i] * (1.0 + wow)
 		var tri = 4.0 * absf(fmod(f * t, 1.0) - 0.5) - 1.0
 		var sine = sin(TAU * f * t)
-		var tape_noise = (fract(sin((t + float(i)) * 9817.3) * 17823.1) * 2.0 - 1.0) * 0.05
+		var tape_noise = (fmod(sin((t + float(i, 1.0)) * 9817.3) * 17823.1) * 2.0 - 1.0) * 0.05
 		out += tri * 0.55 + sine * 0.45 + tape_noise
 	
 	out /= voices * 1.4

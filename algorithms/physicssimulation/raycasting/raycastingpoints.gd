@@ -1,4 +1,4 @@
-﻿# RaycastingPointsVR.gd
+# RaycastingPointsVR.gd
 # A mesmerizing VR scene with particles that react to invisible rays
 extends Node3D
 
@@ -26,7 +26,7 @@ uniform float response_strength : hint_range(0.5, 5.0) = 2.0;
 uniform vec3 gravity = vec3(0.0, -0.5, 0.0);
 
 float random(vec2 uv) {
-	return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+	return fmod(sin(dot(uv, vec2(12.9898, 78.233, 1.0))) * 43758.5453);
 }
 
 void start() {

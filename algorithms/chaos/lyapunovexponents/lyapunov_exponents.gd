@@ -130,34 +130,34 @@ func create_trans_queer_shader() -> Shader:
 	// Get color from pride flag based on position
 	vec3 get_pride_color(float pos, int mode) {
 		// Ensure pos is between 0 and 1
-		pos = fract(pos);
+		pos = fmod(pos, 1.0);
 		
 		if (mode == 0) { // Trans flag
 			float idx = pos * 5.0;
 			int i = int(floor(idx));
 			int j = int(ceil(idx)) % 5;
-			float t = fract(idx);
+			float t = fmod(idx, 1.0);
 			return mix(TRANS_COLORS[i], TRANS_COLORS[j], t);
 		}
 		else if (mode == 1) { // Pride flag
 			float idx = pos * 6.0;
 			int i = int(floor(idx));
 			int j = int(ceil(idx)) % 6;
-			float t = fract(idx);
+			float t = fmod(idx, 1.0);
 			return mix(PRIDE_COLORS[i], PRIDE_COLORS[j], t);
 		}
 		else if (mode == 2) { // Nonbinary flag
 			float idx = pos * 4.0;
 			int i = int(floor(idx));
 			int j = int(ceil(idx)) % 4;
-			float t = fract(idx);
+			float t = fmod(idx, 1.0);
 			return mix(NONBINARY_COLORS[i], NONBINARY_COLORS[j], t);
 		}
 		else { // Gender fluid flag
 			float idx = pos * 5.0;
 			int i = int(floor(idx));
 			int j = int(ceil(idx)) % 5;
-			float t = fract(idx);
+			float t = fmod(idx, 1.0);
 			return mix(FLUID_COLORS[i], FLUID_COLORS[j], t);
 		}
 	}
