@@ -1164,7 +1164,7 @@ func _on_artifact_interact(lookup_name: String, artifact_object: Node):
 	}
 	
 	print("GridInteractablesComponent: Artifact interaction - %s ('%s')" % [lookup_name, artifact_info.get("name", "")])
-	interactable_activated.emit(lookup_name, position, artifact_data)
+	interactable_activated.emit(lookup_name, artifact_pos, artifact_data)
 
 # Handle artifact activation
 func _on_artifact_activated(lookup_name: String, artifact_object: Node):
