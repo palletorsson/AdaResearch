@@ -13,20 +13,13 @@ func _ready() -> void:
 	
 	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
 	
-	# On Android, write to external storage (sdcard) for easy access
+	# On Android/Quest, use app-private storage (no permissions needed)
 	if OS.get_name() == "Android":
-		var sdcard_path = "/sdcard/AdaResearch/logs"
-		# Create directory
-		DirAccess.make_dir_recursive_absolute(sdcard_path)
-		_log_path = "%s/debug_%s.log" % [sdcard_path, timestamp]
+		var dir = DirAccess.open("user://")
+		if dir and not dir.dir_exists("logs"):
+			dir.make_dir("logs")
+		_log_path = "user://logs/debug_%s.log" % timestamp
 		_log_file = FileAccess.open(_log_path, FileAccess.WRITE)
-		
-		if not _log_file:
-			# Fallback to app-specific external storage
-			var fallback = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/AdaResearch/logs"
-			DirAccess.make_dir_recursive_absolute(fallback)
-			_log_path = "%s/debug_%s.log" % [fallback, timestamp]
-			_log_file = FileAccess.open(_log_path, FileAccess.WRITE)
 	else:
 		# Desktop: use user:// as before
 		var dir = DirAccess.open("user://")

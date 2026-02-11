@@ -199,7 +199,7 @@ vec4 textureSeamless(sampler2D tex, vec2 uv, vec2 padding){
 	vec2 dy = dFdy(uv) * inv_scale;
 
 	// Textures need to repeat somewhere. In addition, repeat must be enabled on the sampler
-	uv = fmod(uv+0.5, 1.0)-0.5;
+	uv = mod(uv+0.5, 1.0)-0.5;
 
 	// Get the bilinear blend factors. This is actually undefined for padding = 0
 	vec2 u = smoothstep(-padding, padding, uv);
