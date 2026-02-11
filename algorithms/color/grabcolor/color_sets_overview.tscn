@@ -1,24 +1,21 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://csub3tchpy6pu"]
 
-[ext_resource type="Script" path="res://algorithms/color/grabcolor/color_sets_overview.gd" id="1_overview"]
+[ext_resource type="Script" uid="uid://bmdf4nojhf7lw" path="res://algorithms/color/grabcolor/color_sets_overview.gd" id="1_overview"]
 
-[node name="ColorSetsOverview" type="Node3D"]
+[node name="ColorSetsOverview" type="Node3D" unique_id=1224577052]
 script = ExtResource("1_overview")
-sets_to_show = 12
-colors_per_set = 12
-color_swatch_size = 0.08
-set_spacing_x = 1.2
-set_spacing_z = 0.6
-columns = 4
+set_spacing_x = 0.9
+set_spacing_z = 1.4
+columns = 2
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1495016099]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 2, 2.5, 3)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=123308585]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0)
 shadow_enabled = true
 
-[node name="Title" type="Label3D" parent="."]
+[node name="Title" type="Label3D" parent="." unique_id=595022574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -0.5)
 text = "COLOR PALETTE OVERVIEW"
 font_size = 48

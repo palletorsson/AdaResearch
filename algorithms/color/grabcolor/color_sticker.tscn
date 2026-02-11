@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://hn2llirsu2rx"]
+
+[ext_resource type="Script" uid="uid://bpa42tvn1yt4r" path="res://algorithms/color/grabcolor/color_sticker.gd" id="1_sticker"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sticker"]
+size = Vector3(0.2, 0.01, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sticker"]
+size = Vector3(0.2, 0.01, 0.2)
+
+[node name="ColorSticker" type="StaticBody3D" unique_id=816964122]
+collision_layer = 1048576
+collision_mask = 0
+script = ExtResource("1_sticker")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1797830039]
+mesh = SubResource("BoxMesh_sticker")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1725969287]
+shape = SubResource("BoxShape3D_sticker")
+
+[node name="ColorLabel" type="Label3D" parent="." unique_id=719078309]
+transform = Transform3D(0.76, 0, 0, 0, -3.3220655e-08, 0.76, 0, -0.76, -3.3220655e-08, 0.050021067, 0.012, 0.06738252)
+pixel_size = 0.001
+text = "#FFFFFF
+White"
+font_size = 12
+outline_size = 2
+horizontal_alignment = 0
+vertical_alignment = 0
