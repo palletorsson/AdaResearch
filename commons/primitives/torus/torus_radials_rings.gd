@@ -6,10 +6,10 @@ extends Node3D
 
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 
-@export var base_color: Color = Color(0.7, 0.3, 0.5)  # Dark magenta (not pure red)
+@export var base_color: Color = Color(0.5, 0.2, 0.35)  # Darker magenta for contrast
 @export var wireframe_color: Color = Color(1.0, 1.0, 1.0)  # White wireframe for contrast
-@export var rings: int = 24  # Higher divisions for visible triangular structure
-@export var ring_segments: int = 12  # More tube segments
+@export var rings: int = 8  # Low divisions for visible triangular structure
+@export var ring_segments: int = 4  # Low tube segments - visible triangles
 @export var inner_radius: float = 0.3  # Radius of the hole (distance from center to tube center)
 @export var outer_radius: float = 0.5  # Outer radius (inner_radius + tube_radius)
 

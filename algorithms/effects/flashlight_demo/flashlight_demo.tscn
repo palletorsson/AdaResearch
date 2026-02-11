@@ -23,25 +23,29 @@ size = Vector3(6, 4, 0.1)
 material = SubResource("Mat_Canvas")
 
 [node name="WhiteFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.3, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.6, 3)
+unique_name_in_owner = true
 
 [node name="SpotLight3D" parent="WhiteFlashlight" index="2"]
 light_color = Color(1, 1, 1, 1)
 
 [node name="RedFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.6, 3)
+unique_name_in_owner = true
 
 [node name="SpotLight3D" parent="RedFlashlight" index="2"]
 light_color = Color(1, 0, 0, 1)
 
 [node name="GreenFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.6, 3)
+unique_name_in_owner = true
 
 [node name="SpotLight3D" parent="GreenFlashlight" index="2"]
 light_color = Color(0, 1, 0, 1)
 
 [node name="BlueFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.6, 3)
+unique_name_in_owner = true
 
 [node name="SpotLight3D" parent="BlueFlashlight" index="2"]
 light_color = Color(0, 0, 1, 1)
