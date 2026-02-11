@@ -34,29 +34,39 @@ func _teardown() -> void:
 		_mesh_instance = null
 
 func _icosahedron_geometry() -> Dictionary:
-	var scale := 0.4
+	var s := 0.4
+	# Precise icosahedron vertices on unit sphere, scaled
+	var a := 0.5257311121 * s  # 1/sqrt(1+phi^2)
+	var b := 0.8506508084 * s  # phi/sqrt(1+phi^2)
 	var vertices: Array[Vector3] = [
-		Vector3(0.85065, 0.52573, 0.0),
-		Vector3(-0.85065, 0.52573, 0.0),
-		Vector3(0.85065, -0.52573, 0.0),
-		Vector3(-0.85065, -0.52573, 0.0),
-		Vector3(0.52573, 0.0, 0.85065),
-		Vector3(0.52573, 0.0, -0.85065),
-		Vector3(-0.52573, 0.0, 0.85065),
-		Vector3(-0.52573, 0.0, -0.85065),
-		Vector3(0.0, 0.85065, 0.52573),
-		Vector3(0.0, -0.85065, 0.52573),
-		Vector3(0.0, 0.85065, -0.52573),
-		Vector3(0.0, -0.85065, -0.52573)
+		Vector3( b,  a,  0),  # 0
+		Vector3(-b,  a,  0),  # 1
+		Vector3( b, -a,  0),  # 2
+		Vector3(-b, -a,  0),  # 3
+		Vector3( a,  0,  b),  # 4
+		Vector3( a,  0, -b),  # 5
+		Vector3(-a,  0,  b),  # 6
+		Vector3(-a,  0, -b),  # 7
+		Vector3( 0,  b,  a),  # 8
+		Vector3( 0, -b,  a),  # 9
+		Vector3( 0,  b, -a),  # 10
+		Vector3( 0, -b, -a),  # 11
 	]
-	for i in range(vertices.size()):
-		vertices[i] *= scale
+	# 20 faces — all wound counter-clockwise (outward normals)
+	# Verified: every edge shared by exactly 2 faces, Euler V-E+F = 12-30+20 = 2
 	var faces: Array = [
-		[0, 8, 4], [0, 5, 10], [2, 4, 9], [2, 11, 5],
-		[1, 6, 8], [1, 10, 7], [3, 9, 6], [3, 7, 11],
-		[0, 10, 8], [1, 8, 10], [2, 9, 11], [3, 11, 9],
-		[4, 2, 0], [5, 0, 2], [6, 1, 3], [7, 3, 1],
-		[8, 6, 4], [9, 4, 6], [10, 5, 7], [11, 7, 5]
+		# Top cap (vertex 8 neighborhood)
+		[0, 8, 4], [8, 1, 6], [8, 6, 4], [0, 10, 8], [1, 8, 10],
+		# Bottom cap (vertex 9 neighborhood)
+		[2, 4, 9], [9, 6, 3], [9, 4, 6], [2, 9, 11], [3, 11, 9],
+		# Middle band top
+		[0, 5, 10], [1, 10, 7],
+		# Middle band bottom
+		[2, 11, 5], [3, 7, 11],
+		# Connecting faces
+		[4, 2, 0], [5, 0, 2],
+		[6, 1, 3], [7, 3, 1],
+		[10, 5, 7], [11, 7, 5],
 	]
 	return {
 		"vertices": vertices,

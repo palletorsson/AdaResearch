@@ -24,20 +24,21 @@
 				"Transformations: Randomized geometric operations on primitives (scale, rotation, translation)"
 			],
 			"maps": [
-				"Random_Game",
+
 				"Random_Definition",
+				"Random_Remove",				
 				"Randomness_10_PRINT_Algorithm",
 				"Random_Cubes",
 				"Random_Rotate_Random_XYZ",
 				"Random_Walk",
-				"Random_Remove",				
+				
 				"Random_Gaussian",
 				"Random_Pheromone",
 				"Random_Mushrooms",
 				"Random_Space_Geometry",
 				"Randomness_Examples_of_Randomness",
-				"Random_Space"
-
+				"Random_Space", 
+				"Random_Game",
 			],
 			"audio": {
 				"ambient_preset": "white_noise_drift",
@@ -47,7 +48,7 @@
 				"volume": -12.0
 			},
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_randomness",
+			"lab_map": "Lab/map_data_post_random",
 			"unlock_requirements": [
 				"color"
 			],

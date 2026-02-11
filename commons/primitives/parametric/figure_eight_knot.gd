@@ -41,6 +41,14 @@ func create_parametric_surface():
 	var t_step_size = (t_max - t_min) / float(t_steps)
 	var angle_step = TAU / float(tube_steps)
 
+	# Parallel transport frame to avoid twist artifacts
+	var first_tangent = knot_tangent(t_min)
+	var up = Vector3.UP
+	if abs(first_tangent.dot(up)) > 0.9:
+		up = Vector3.RIGHT
+	var prev_normal = first_tangent.cross(up).normalized()
+	var prev_binormal = first_tangent.cross(prev_normal).normalized()
+
 	var vertices = []
 	for i in range(t_steps + 1):
 		var ring = []
@@ -49,16 +57,21 @@ func create_parametric_surface():
 		var center = knot_point(t)
 		var tangent = knot_tangent(t)
 
-		# Create perpendicular frame
-		var up = Vector3.UP
-		if abs(tangent.dot(up)) > 0.9:
-			up = Vector3.RIGHT
-		var normal = tangent.cross(up).normalized()
-		var binormal = tangent.cross(normal).normalized()
+		# Parallel transport: project previous normal onto new perpendicular plane
+		var cur_normal: Vector3
+		var cur_binormal: Vector3
+		if i == 0:
+			cur_normal = prev_normal
+			cur_binormal = prev_binormal
+		else:
+			cur_normal = (prev_normal - tangent * prev_normal.dot(tangent)).normalized()
+			cur_binormal = tangent.cross(cur_normal).normalized()
+		prev_normal = cur_normal
+		prev_binormal = cur_binormal
 
 		for j in range(tube_steps + 1):
 			var angle = j * angle_step
-			var offset = normal * cos(angle) + binormal * sin(angle)
+			var offset = cur_normal * cos(angle) + cur_binormal * sin(angle)
 			var vertex = (center + offset * tube_radius) * knot_scale
 			ring.append(vertex)
 

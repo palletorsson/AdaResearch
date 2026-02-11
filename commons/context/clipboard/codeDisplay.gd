@@ -154,6 +154,8 @@ func _display_content(content: String) -> void:
 
 	if rich_text_label:
 		print("CodeDisplay: Setting bbcode_text on RichTextLabel...")
+		rich_text_label.clear()
+		rich_text_label.text = ""
 		rich_text_label.bbcode_text = content
 		print("CodeDisplay: Content set successfully! Length: %d" % content.length())
 	else:

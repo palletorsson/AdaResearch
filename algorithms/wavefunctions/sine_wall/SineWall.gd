@@ -22,50 +22,53 @@ extends Node3D
 
 var _time: float = 0.0
 var _phase: float = 0.0
-var _nodes: Array = []
-var _base_mesh: SphereMesh
-var _base_material: StandardMaterial3D
+var _multimesh_instance: MultiMeshInstance3D
+var _multimesh: MultiMesh
 
 func _ready() -> void:
-	_base_mesh = SphereMesh.new()
-	_base_mesh.radius = 0.09
-	_base_mesh.height = 0.09
-
-	_base_material = StandardMaterial3D.new()
-	_base_material.emission_enabled = true
-
 	_create_wall()
 	_update_wall_state()
 
 func _process(delta: float) -> void:
 	_time += delta
 	_phase += delta * phase_speed
-
 	_update_wall_state()
 
 func _create_wall() -> void:
-	var parent := Node3D.new()
-	parent.name = "Wall"
-	add_child(parent)
-
-	_nodes.clear()
-
-	for x in range(columns):
-		_nodes.append([])
-		for y in range(rows):
-			var point := MeshInstance3D.new()
-			point.mesh = _base_mesh
-			point.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			point.material_override = _base_material.duplicate()
-			parent.add_child(point)
-			_nodes[x].append(point)
+	# Create MultiMesh for all wall points
+	_multimesh_instance = MultiMeshInstance3D.new()
+	_multimesh_instance.name = "Wall"
+	_multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	
+	_multimesh = MultiMesh.new()
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.09
+	sphere_mesh.height = 0.09
+	_multimesh.mesh = sphere_mesh
+	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_multimesh.use_colors = true
+	_multimesh.instance_count = columns * rows
+	_multimesh_instance.multimesh = _multimesh
+	
+	# Material with vertex colors and emission
+	var material = StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
+	material.emission_enabled = true
+	material.emission = Color(0.15, 0.25, 0.4)
+	material.emission_energy_multiplier = 0.35
+	material.roughness = 0.4
+	material.metallic = 0.1
+	_multimesh_instance.material_override = material
+	
+	add_child(_multimesh_instance)
 
 func _update_wall_state() -> void:
-	if columns <= 1 or rows <= 1:
+	if columns <= 1 or rows <= 1 or not _multimesh:
 		return
 
 	var freq := base_frequency + sin(_time * 0.37) * 0.35
 	var amp := base_amplitude + cos(_time * 0.29) * 0.4
+	var index := 0
 
 	for x in range(columns):
 		var x_norm := (x / float(columns - 1)) * 2.0 - 1.0
@@ -75,9 +78,11 @@ func _update_wall_state() -> void:
 		for y in range(rows):
 			var y_norm := (y / float(rows - 1)) * 2.0 - 1.0
 			var base_y := y_norm * wall_height * 0.5
-			var node: MeshInstance3D = _nodes[x][y]
-			node.position = Vector3(x_pos, base_y + wave_offset, wall_depth)
-			_apply_color(node, wave_offset, amp)
+			var pos = Vector3(x_pos, base_y + wave_offset, wall_depth)
+			
+			_multimesh.set_instance_transform(index, Transform3D(Basis.IDENTITY, pos))
+			_multimesh.set_instance_color(index, _compute_color(wave_offset, amp))
+			index += 1
 
 func _compute_wave_offset(x_norm: float, freq: float, amp: float) -> float:
 	var offset := 0.0
@@ -88,23 +93,15 @@ func _compute_wave_offset(x_norm: float, freq: float, amp: float) -> float:
 		offset += amp * amp_mul * sin((freq * freq_mul) * x_norm * PI + _phase + phase_shift)
 	return offset
 
-func _apply_color(node: MeshInstance3D, displacement: float, amp: float) -> void:
-	var material := node.material_override as StandardMaterial3D
-	if material == null:
-		material = _base_material.duplicate()
-		node.material_override = material
-
+func _compute_color(displacement: float, amp: float) -> Color:
 	var intensity := (displacement / (amp * 1.6)) + 0.5
 	intensity = clamp(intensity, 0.0, 1.0)
 
 	var mid_blend = clamp(intensity * 2.0, 0.0, 1.0)
-	var low_blend = clamp((1.0 - intensity) * 2.0, 0.0, 1.0)
 
 	var color := bottom_color.lerp(mid_color, mid_blend)
 	color = color.lerp(top_color, intensity)
-
-	material.albedo_color = color
-	material.emission = color * 0.35
+	return color
 
 func reset_wall() -> void:
 	_phase = 0.0

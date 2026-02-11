@@ -96,17 +96,16 @@ func _ready():
 
 
 func _create_podium():
-	"""Create a podium/pedestal underneath the pendulum visualization"""
+	"""Create a square podium/pedestal underneath the pendulum visualization"""
 	var podium = Node3D.new()
 	podium.name = "Podium"
 	
-	# Main podium cylinder
+	# Main podium box (square)
 	var base = MeshInstance3D.new()
-	var cyl = CylinderMesh.new()
-	cyl.top_radius = canvas_size / 2.0 + 0.5
-	cyl.bottom_radius = canvas_size / 2.0 + 0.7
-	cyl.height = 0.8
-	base.mesh = cyl
+	var box = BoxMesh.new()
+	var base_size = canvas_size + 1.0
+	box.size = Vector3(base_size, 0.8, base_size)
+	base.mesh = box
 	base.position = Vector3(0, -0.4, 0)
 	
 	var base_mat = StandardMaterial3D.new()
@@ -116,31 +115,36 @@ func _create_podium():
 	base.material_override = base_mat
 	podium.add_child(base)
 	
-	# Decorative rim at top
-	var rim = MeshInstance3D.new()
-	var rim_torus = TorusMesh.new()
-	rim_torus.inner_radius = canvas_size / 2.0 + 0.35
-	rim_torus.outer_radius = canvas_size / 2.0 + 0.55
-	rim_torus.rings = 32
-	rim_torus.ring_segments = 8
-	rim.mesh = rim_torus
-	rim.position = Vector3(0, -0.02, 0)
-	rim.rotation.x = PI / 2
-	
+	# Decorative rim at top (square frame)
+	var rim_thickness = 0.2
+	var rim_height = 0.06
 	var rim_mat = StandardMaterial3D.new()
 	rim_mat.albedo_color = Color(0.6, 0.5, 0.35)
 	rim_mat.metallic = 0.6
 	rim_mat.roughness = 0.4
-	rim.material_override = rim_mat
-	podium.add_child(rim)
 	
-	# Lower stepped base
+	var rim_outer = base_size + 0.1
+	var sides = [
+		[Vector3(rim_outer, rim_height, rim_thickness), Vector3(0, -0.02, base_size / 2.0)],
+		[Vector3(rim_outer, rim_height, rim_thickness), Vector3(0, -0.02, -base_size / 2.0)],
+		[Vector3(rim_thickness, rim_height, rim_outer), Vector3(base_size / 2.0, -0.02, 0)],
+		[Vector3(rim_thickness, rim_height, rim_outer), Vector3(-base_size / 2.0, -0.02, 0)],
+	]
+	for i in range(sides.size()):
+		var rim = MeshInstance3D.new()
+		var rim_box = BoxMesh.new()
+		rim_box.size = sides[i][0]
+		rim.mesh = rim_box
+		rim.position = sides[i][1]
+		rim.material_override = rim_mat
+		podium.add_child(rim)
+	
+	# Lower stepped base (square)
 	var lower_base = MeshInstance3D.new()
-	var lower_cyl = CylinderMesh.new()
-	lower_cyl.top_radius = canvas_size / 2.0 + 0.7
-	lower_cyl.bottom_radius = canvas_size / 2.0 + 0.9
-	lower_cyl.height = 0.3
-	lower_base.mesh = lower_cyl
+	var lower_box = BoxMesh.new()
+	var lower_size = canvas_size + 1.6
+	lower_box.size = Vector3(lower_size, 0.3, lower_size)
+	lower_base.mesh = lower_box
 	lower_base.position = Vector3(0, -0.95, 0)
 	lower_base.material_override = base_mat
 	podium.add_child(lower_base)
@@ -234,22 +238,22 @@ func _create_canvas():
 	_canvas_body.collision_mask = 1
 	add_child(_canvas_body)
 	
-	# Collision shape - thicker and centered at y=0
+	# Collision shape - sits on top of podium
 	var collision = CollisionShape3D.new()
 	var box_shape = BoxShape3D.new()
 	box_shape.size = Vector3(canvas_size, 0.1, canvas_size)
 	collision.shape = box_shape
-	collision.position = Vector3(0, -0.05, 0)  # Top surface at y=0
+	collision.position = Vector3(0, 0.05, 0)  # Top surface at y=0.1
 	_canvas_body.add_child(collision)
 	
-	# Visual mesh
+	# Visual mesh - raised above podium top
 	_canvas = MeshInstance3D.new()
 	_canvas.name = "CanvasSurface"
 	
 	var plane = PlaneMesh.new()
 	plane.size = Vector2(canvas_size, canvas_size)
 	_canvas.mesh = plane
-	_canvas.position = Vector3(0, 0, 0)
+	_canvas.position = Vector3(0, 0.1, 0)
 	
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = canvas_color
@@ -272,12 +276,13 @@ func _add_canvas_frame():
 	mat.albedo_color = Color(0.15, 0.12, 0.1)
 	mat.roughness = 0.8
 	
-	# Four sides: [size, position]
+	# Four sides: [size, position] — raised to match canvas at y=0.1
+	var base_y = 0.1 + frame_height / 2.0
 	var sides = [
-		[Vector3(canvas_size + frame_thickness * 2, frame_height, frame_thickness), Vector3(0, frame_height/2, half + frame_thickness/2)],
-		[Vector3(canvas_size + frame_thickness * 2, frame_height, frame_thickness), Vector3(0, frame_height/2, -half - frame_thickness/2)],
-		[Vector3(frame_thickness, frame_height, canvas_size), Vector3(-half - frame_thickness/2, frame_height/2, 0)],
-		[Vector3(frame_thickness, frame_height, canvas_size), Vector3(half + frame_thickness/2, frame_height/2, 0)],
+		[Vector3(canvas_size + frame_thickness * 2, frame_height, frame_thickness), Vector3(0, base_y, half + frame_thickness/2)],
+		[Vector3(canvas_size + frame_thickness * 2, frame_height, frame_thickness), Vector3(0, base_y, -half - frame_thickness/2)],
+		[Vector3(frame_thickness, frame_height, canvas_size), Vector3(-half - frame_thickness/2, base_y, 0)],
+		[Vector3(frame_thickness, frame_height, canvas_size), Vector3(half + frame_thickness/2, base_y, 0)],
 	]
 	
 	for i in range(sides.size()):
@@ -665,8 +670,8 @@ func _record_trail_point():
 	if abs(tip_local.x) > half_canvas or abs(tip_local.z) > half_canvas:
 		return
 	
-	# Project tip onto canvas plane (local coordinates)
-	var trail_point = Vector3(tip_local.x, draw_height, tip_local.z)
+	# Project tip onto canvas plane (local coordinates, canvas at y=0.1)
+	var trail_point = Vector3(tip_local.x, 0.1 + draw_height, tip_local.z)
 	
 	# Only record if moved enough from last point
 	if trail_points.size() == 0 or trail_point.distance_to(trail_points[-1]) > 0.003:

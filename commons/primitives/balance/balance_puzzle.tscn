@@ -4,9 +4,9 @@
 
 [node name="BalancePuzzle" type="Node3D"]
 script = ExtResource("1_balance")
-height_threshold = 0.4
+height_threshold = 0.6
 stability_time = 1.5
-piece_count = 6
+piece_count = 12
 cube_ratio = 0.7
 piece_scale = 0.08
 spawn_offset = Vector3(0.3, 0.1, 0)

@@ -1,10 +1,10 @@
 extends Node3D
 
-const COLOR_STICKER_SCENE = preload("res://algorithms/color/grabcolor/color_sticker.tscn")
+const GRAB_PAPER_SCENE = preload("res://commons/primitives/panels/DigitalPaper/grab_paper.tscn")
 const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 
-# Sticker size: ~0.2 x 0.01 x 0.2
-const STICKER_SIZE := Vector2(0.2, 0.2)  # X and Z dimensions
+# Sticker size: ~0.2 x 0.01 x 0.2 (matches grab_paper mesh)
+const STICKER_SIZE := Vector2(0.195, 0.205)  # X and Z dimensions from grab_paper
 const STICKER_GAP := 0.02  # Gap between stickers
 
 @export var palette_resource: Resource
@@ -79,6 +79,9 @@ func create_overview() -> void:
 		var set_container = Node3D.new()
 		set_container.name = "PaletteSet_%d" % set_index
 		set_container.position = set_position
+		# Flip second column (col=1) 180° so stickers face inward toward center
+		if col == 1:
+			set_container.rotation.y = PI
 		add_child(set_container)
 		
 		# Create color stickers - 3 rows stacked in Y (vertical)
@@ -102,40 +105,65 @@ func create_overview() -> void:
 			set_container.add_child(sticker)
 
 func _create_color_sticker(color: Color) -> Node3D:
-	# Use the color_sticker scene
-	if COLOR_STICKER_SCENE:
-		var sticker = COLOR_STICKER_SCENE.instantiate()
-		if sticker and sticker.has_method("set_sticker_color"):
-			sticker.sticker_color = color
-		elif sticker:
-			# Fallback: set color directly if method not available yet
-			sticker.set("sticker_color", color)
-		return sticker
+	# Use grab_paper scene (XR-pickable) instead of static color_sticker
+	var paper = GRAB_PAPER_SCENE.instantiate()
 	
-	# Fallback: create simple colored box
-	var sticker_root = StaticBody3D.new()
+	# Set color on the mesh material
+	var mesh_instance = paper.get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		var material = StandardMaterial3D.new()
+		material.albedo_color = color
+		material.metallic = 0.1
+		material.roughness = 0.3
+		material.emission_enabled = true
+		material.emission = color * 0.2
+		material.emission_energy_multiplier = 0.5
+		mesh_instance.material_override = material
 	
-	var mesh_instance = MeshInstance3D.new()
-	var box_mesh = BoxMesh.new()
-	box_mesh.size = Vector3(STICKER_SIZE.x, 0.01, STICKER_SIZE.y)
-	mesh_instance.mesh = box_mesh
+	# Remove text label from palette overview
+	var label = paper.get_node_or_null("Label")
+	if label:
+		label.visible = false
 	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.4
-	material.emission_energy_multiplier = 0.6
-	mesh_instance.material_override = material
-	sticker_root.add_child(mesh_instance)
-	
-	# Add collision for pointer interaction
-	var collision = CollisionShape3D.new()
-	var shape = BoxShape3D.new()
-	shape.size = Vector3(STICKER_SIZE.x, 0.01, STICKER_SIZE.y)
-	collision.shape = shape
-	sticker_root.add_child(collision)
-	
-	sticker_root.collision_layer = 1 << 20
-	sticker_root.collision_mask = 0
-	
-	return sticker_root
+	return paper
+
+func _color_to_hex(color: Color) -> String:
+	var r = int(color.r * 255)
+	var g = int(color.g * 255)
+	var b = int(color.b * 255)
+	return "#%02X%02X%02X" % [r, g, b]
+
+func _get_closest_web_color_name(target: Color) -> String:
+	var closest_name := "Unknown"
+	var min_distance := INF
+	var web_colors := {
+		"Red": Color(1, 0, 0), "Green": Color(0, 0.502, 0), "Blue": Color(0, 0, 1),
+		"Yellow": Color(1, 1, 0), "Cyan": Color(0, 1, 1), "Magenta": Color(1, 0, 1),
+		"White": Color(1, 1, 1), "Black": Color(0, 0, 0), "Gray": Color(0.502, 0.502, 0.502),
+		"Orange": Color(1, 0.647, 0), "Pink": Color(1, 0.753, 0.796),
+		"Purple": Color(0.502, 0, 0.502), "Brown": Color(0.647, 0.165, 0.165),
+		"Lime": Color(0, 1, 0), "Navy": Color(0, 0, 0.502), "Teal": Color(0, 0.502, 0.502),
+		"Maroon": Color(0.502, 0, 0), "Olive": Color(0.502, 0.502, 0),
+		"Coral": Color(1, 0.498, 0.314), "Salmon": Color(0.98, 0.502, 0.447),
+		"Gold": Color(1, 0.843, 0), "Indigo": Color(0.294, 0, 0.51),
+		"Violet": Color(0.933, 0.51, 0.933), "Crimson": Color(0.863, 0.078, 0.235),
+		"Turquoise": Color(0.251, 0.878, 0.816), "Khaki": Color(0.941, 0.902, 0.549),
+		"Lavender": Color(0.902, 0.902, 0.98), "Chocolate": Color(0.824, 0.412, 0.118),
+		"Tomato": Color(1, 0.388, 0.278), "SkyBlue": Color(0.529, 0.808, 0.922),
+		"SlateBlue": Color(0.416, 0.353, 0.804), "DarkGreen": Color(0, 0.392, 0),
+		"ForestGreen": Color(0.133, 0.545, 0.133), "Silver": Color(0.753, 0.753, 0.753),
+		"DodgerBlue": Color(0.118, 0.565, 1), "HotPink": Color(1, 0.412, 0.706),
+		"DeepPink": Color(1, 0.078, 0.576), "Firebrick": Color(0.698, 0.133, 0.133),
+		"DarkOrange": Color(1, 0.549, 0), "Sienna": Color(0.627, 0.322, 0.176),
+		"Peru": Color(0.804, 0.522, 0.247), "Tan": Color(0.824, 0.706, 0.549),
+	}
+	for color_name in web_colors:
+		var web_color: Color = web_colors[color_name]
+		var dr = target.r - web_color.r
+		var dg = target.g - web_color.g
+		var db = target.b - web_color.b
+		var distance = dr * dr + dg * dg + db * db
+		if distance < min_distance:
+			min_distance = distance
+			closest_name = color_name
+	return closest_name

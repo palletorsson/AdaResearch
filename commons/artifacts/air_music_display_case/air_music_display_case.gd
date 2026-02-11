@@ -31,10 +31,21 @@ func _setup_frame():
 			if line_node and line_node.has_method("set_line_properties"):
 				line_node.set_line_properties(frame_thickness, frame_color)
 			
-			# Remove the length labels
-			var label = frame.get_node_or_null(line_name + "/lineContainer/LengthLabel")
-			if label:
-				label.queue_free()
+			# Remove the length labels (deferred — they're created in line's _ready)
+			if line_node:
+				_remove_label_deferred(line_node)
+		
+		# Also hide the cube label
+		var cube_label = frame.get_node_or_null("Label3D")
+		if cube_label:
+			cube_label.visible = false
+
+func _remove_label_deferred(line_node: Node) -> void:
+	# Wait a frame so the line's _ready() has created the label
+	await get_tree().process_frame
+	var label = line_node.get_node_or_null("LengthLabel")
+	if label:
+		label.queue_free()
 
 func _setup_base():
 	# Create wooden base platform

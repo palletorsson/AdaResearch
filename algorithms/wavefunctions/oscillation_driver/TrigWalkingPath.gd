@@ -50,10 +50,25 @@ func _ready():
 	if add_end_platforms:
 		_create_end_platforms()
 
+@export_category("Stair Lighting")
+@export var light_interval: int = 10  # Add a light every N steps
+@export var light_color_sine: Color = Color(1.0, 0.6, 0.5)
+@export var light_color_cosine: Color = Color(0.5, 0.7, 1.0)
+@export var light_energy: float = 1.5
+@export var light_range: float = 6.0
+@export var light_height_offset: float = 2.0
+
+var sine_lights: Array[OmniLight3D] = []
+var cosine_lights: Array[OmniLight3D] = []
+
 func _generate_initial_path():
 	for i in range(path_length):
 		_add_step_pair(i)
 		current_z -= step_distance
+		
+		# Add lighting every Nth step
+		if i % light_interval == 0:
+			_add_stair_lights(i)
 
 func _add_step_pair(index: int):
 	# Initial z position based on index
@@ -108,6 +123,38 @@ func _create_step(color: Color) -> Node3D:
 	
 	return body
 
+func _add_stair_lights(step_index: int):
+	var z_pos = -step_index * step_distance
+	var t = step_index * step_distance * frequency
+	var total_length = path_length * step_distance
+	
+	var sin_y = _compute_step_y(z_pos, sin(t))
+	var cos_y = _compute_step_y(z_pos, cos(t))
+	
+	# Sine side light
+	var sin_light = OmniLight3D.new()
+	sin_light.name = "SineLight_%d" % step_index
+	sin_light.light_color = light_color_sine
+	sin_light.light_energy = light_energy
+	sin_light.omni_range = light_range
+	sin_light.omni_attenuation = 1.5
+	sin_light.shadow_enabled = false
+	sin_light.position = Vector3(-lane_offset, sin_y + light_height_offset, z_pos)
+	sine_path.add_child(sin_light)
+	sine_lights.append(sin_light)
+	
+	# Cosine side light
+	var cos_light = OmniLight3D.new()
+	cos_light.name = "CosineLight_%d" % step_index
+	cos_light.light_color = light_color_cosine
+	cos_light.light_energy = light_energy
+	cos_light.omni_range = light_range
+	cos_light.omni_attenuation = 1.5
+	cos_light.shadow_enabled = false
+	cos_light.position = Vector3(lane_offset, cos_y + light_height_offset, z_pos)
+	cosine_path.add_child(cos_light)
+	cosine_lights.append(cos_light)
+
 func _physics_process(delta: float):
 	if escalator_mode:
 		_update_escalator(delta)
@@ -138,6 +185,14 @@ func _update_escalator(delta: float):
 		# Update positions
 		step_sin.position = Vector3(-lane_offset, sin_y, z_pos_sin)
 		step_cos.position = Vector3(lane_offset, cos_y, z_pos_cos)
+		
+		# Update associated lights (every light_interval steps)
+		if i % light_interval == 0:
+			var light_idx = i / light_interval
+			if light_idx < sine_lights.size():
+				sine_lights[light_idx].position = Vector3(-lane_offset, sin_y + light_height_offset, z_pos_sin)
+			if light_idx < cosine_lights.size():
+				cosine_lights[light_idx].position = Vector3(lane_offset, cos_y + light_height_offset, z_pos_cos)
 
 func _create_end_platforms() -> void:
 	if end_platforms and is_instance_valid(end_platforms):

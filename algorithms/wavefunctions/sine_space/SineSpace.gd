@@ -2,12 +2,16 @@ extends Node3D
 
 var time = 0.0
 var grid_size = 25
-var surface_nodes = []
+var instance_count: int
 var frequency = 1.0
 var amplitude = 1.5
 var phase = 0.0
 var topology_timer = 0.0
 var topology_interval = 5.0
+
+# MultiMesh references
+var multi_mesh_instance: MultiMeshInstance3D
+var multi_mesh: MultiMesh
 
 # Topology modes
 enum TopologyMode {
@@ -21,59 +25,66 @@ enum TopologyMode {
 var current_topology = TopologyMode.FLAT_SINE
 
 func _ready():
-	create_sine_surface()
+	instance_count = grid_size * grid_size
+	create_multimesh_surface()
 	setup_materials()
 
-func create_sine_surface():
-	var surface_parent = $SineSurface
-	
-	for x in range(grid_size):
-		surface_nodes.append([])
-		for z in range(grid_size):
-			var node_sphere = CSGSphere3D.new()
-			node_sphere.radius = 0.08
-			
-			# Initial position
-			var x_pos = (x - grid_size/2.0) * 0.4
-			var z_pos = (z - grid_size/2.0) * 0.4
-			node_sphere.position = Vector3(x_pos, 0, z_pos)
-			
-			surface_parent.add_child(node_sphere)
-			surface_nodes[x].append(node_sphere)
+func create_multimesh_surface():
+	# Create the MultiMeshInstance3D as a child of SineSurface
+	multi_mesh_instance = MultiMeshInstance3D.new()
+	$SineSurface.add_child(multi_mesh_instance)
+
+	# Create the MultiMesh resource
+	multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+	multi_mesh.use_colors = true
+	multi_mesh.instance_count = instance_count
+
+	# Create the sphere mesh (matching original radius)
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.08
+	sphere.height = 0.16
+	sphere.radial_segments = 8
+	sphere.rings = 4
+	multi_mesh.mesh = sphere
+
+	# Create material with vertex colors and emission glow
+	var mat = StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission_energy_multiplier = 1.5
+
+	# We'll use a moderate emission color; per-instance color modulates via albedo
+	mat.emission = Color(0.3, 0.3, 0.3)
+	sphere.material = mat
+
+	multi_mesh_instance.multimesh = multi_mesh
+
+	# Initialize transforms to origin
+	for i in range(instance_count):
+		multi_mesh.set_instance_transform(i, Transform3D(Basis(), Vector3.ZERO))
+		multi_mesh.set_instance_color(i, Color.WHITE)
 
 func setup_materials():
-	# Surface node materials using sineShader
-	var sine_shader = load("res://commons/resourses/shaders/sineShader.gdshader")
-	
-	for row in surface_nodes:
-		for node in row:
-			var shader_material = ShaderMaterial.new()
-			if sine_shader:
-				shader_material.shader = sine_shader
-				shader_material.set_shader_parameter("line_thickness", 0.08)
-				shader_material.set_shader_parameter("noise_amplitude", 0.02)
-				shader_material.set_shader_parameter("noise_frequency", 3.0)
-			node.material_override = shader_material
-	
-	# Control materials
+	# Control materials (unchanged — only 4 CSG nodes)
 	var freq_material = StandardMaterial3D.new()
 	freq_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
 	freq_material.emission_enabled = true
 	freq_material.emission = Color(0.5, 0.1, 0.1, 1.0)
 	$FrequencyControl.material_override = freq_material
-	
+
 	var amp_material = StandardMaterial3D.new()
 	amp_material.albedo_color = Color(0.3, 1.0, 0.3, 1.0)
 	amp_material.emission_enabled = true
 	amp_material.emission = Color(0.1, 0.5, 0.1, 1.0)
 	$AmplitudeControl.material_override = amp_material
-	
+
 	var phase_material = StandardMaterial3D.new()
 	phase_material.albedo_color = Color(0.3, 0.3, 1.0, 1.0)
 	phase_material.emission_enabled = true
 	phase_material.emission = Color(0.1, 0.1, 0.5, 1.0)
 	$PhaseControl.material_override = phase_material
-	
+
 	var topology_material = StandardMaterial3D.new()
 	topology_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
 	topology_material.emission_enabled = true
@@ -83,17 +94,17 @@ func setup_materials():
 func _process(delta):
 	time += delta
 	topology_timer += delta
-	
+
 	# Switch topology modes
 	if topology_timer >= topology_interval:
 		topology_timer = 0.0
 		current_topology = (current_topology + 1) % TopologyMode.size()
-	
+
 	# Update parameters
 	frequency = 1.0 + sin(time * 0.3) * 0.5
 	amplitude = 1.5 + cos(time * 0.2) * 0.8
 	phase = time * 2.0
-	
+
 	update_sine_surface()
 	animate_controls()
 
@@ -110,131 +121,139 @@ func update_sine_surface():
 		TopologyMode.MOBIUS_STRIP:
 			update_mobius_surface()
 
+# --- Height-to-color gradient: blue (low) → cyan (mid) → orange (high) ---
+func height_to_color(height_value: float) -> Color:
+	var t = (height_value + amplitude) / (2.0 * amplitude)
+	t = clamp(t, 0.0, 1.0)
+
+	var color: Color
+	if t < 0.5:
+		# Blue → Cyan  (0.0 → 0.5)
+		var s = t * 2.0
+		color = Color(0.1, 0.2 + 0.6 * s, 0.9 - 0.1 * s)
+	else:
+		# Cyan → Orange (0.5 → 1.0)
+		var s = (t - 0.5) * 2.0
+		color = Color(0.1 + 0.9 * s, 0.8 - 0.3 * s, 0.8 - 0.7 * s)
+
+	return color
+
+# --- Topology update functions (MultiMesh) ---
+
 func update_flat_sine_surface():
-	# Standard sine wave surface z = A*sin(fx + fy + phase)
 	for x in range(grid_size):
 		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			
-			var x_normalized = (x - grid_size/2.0) / (grid_size/2.0)
-			var z_normalized = (z - grid_size/2.0) / (grid_size/2.0)
-			
+			var idx = x * grid_size + z
+
+			var x_normalized = (x - grid_size / 2.0) / (grid_size / 2.0)
+			var z_normalized = (z - grid_size / 2.0) / (grid_size / 2.0)
+
 			var x_pos = x_normalized * 5.0
 			var z_pos = z_normalized * 5.0
-			
+
 			var height = amplitude * sin(frequency * x_normalized * PI + phase) * sin(frequency * z_normalized * PI + phase * 0.7)
-			
-			node.position = Vector3(x_pos, height, z_pos)
-			update_node_color(node, height)
+
+			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), Vector3(x_pos, height, z_pos)))
+			multi_mesh.set_instance_color(idx, height_to_color(height))
 
 func update_cylindrical_surface():
-	# Map to cylindrical coordinates and apply sine waves
 	for x in range(grid_size):
 		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			
-			var u = (x / float(grid_size)) * 2.0 * PI  # Angle
-			var v = (z - grid_size/2.0) / (grid_size/2.0) * 3.0  # Height
-			
+			var idx = x * grid_size + z
+
+			var u = (x / float(grid_size)) * 2.0 * PI
+			var v = (z - grid_size / 2.0) / (grid_size / 2.0) * 3.0
+
 			var radius = 3.0 + amplitude * sin(frequency * u + phase) * sin(frequency * v * 0.5 + phase)
-			
-			node.position = Vector3(
+
+			var pos = Vector3(
 				radius * cos(u),
 				v,
 				radius * sin(u)
 			)
-			update_node_color(node, radius - 3.0)
+			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
+			multi_mesh.set_instance_color(idx, height_to_color(radius - 3.0))
 
 func update_spherical_surface():
-	# Map to spherical coordinates with sine wave modulation
 	for x in range(grid_size):
 		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			
-			var theta = (x / float(grid_size)) * 2.0 * PI  # Azimuthal angle
-			var phi = (z / float(grid_size)) * PI  # Polar angle
-			
+			var idx = x * grid_size + z
+
+			var theta = (x / float(grid_size)) * 2.0 * PI
+			var phi = (z / float(grid_size)) * PI
+
 			var radius = 3.0 + amplitude * sin(frequency * theta + phase) * sin(frequency * phi + phase * 0.8)
-			
-			node.position = Vector3(
+
+			var pos = Vector3(
 				radius * sin(phi) * cos(theta),
 				radius * cos(phi),
 				radius * sin(phi) * sin(theta)
 			)
-			update_node_color(node, radius - 3.0)
+			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
+			multi_mesh.set_instance_color(idx, height_to_color(radius - 3.0))
 
 func update_toroidal_surface():
-	# Torus with sine wave modulation
 	for x in range(grid_size):
 		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			
-			var u = (x / float(grid_size)) * 2.0 * PI  # Major angle
-			var v = (z / float(grid_size)) * 2.0 * PI  # Minor angle
-			
+			var idx = x * grid_size + z
+
+			var u = (x / float(grid_size)) * 2.0 * PI
+			var v = (z / float(grid_size)) * 2.0 * PI
+
 			var major_radius = 3.0
 			var minor_radius = 1.0 + amplitude * sin(frequency * u + phase) * sin(frequency * v + phase * 0.6)
-			
-			node.position = Vector3(
+
+			var pos = Vector3(
 				(major_radius + minor_radius * cos(v)) * cos(u),
 				minor_radius * sin(v),
 				(major_radius + minor_radius * cos(v)) * sin(u)
 			)
-			update_node_color(node, minor_radius - 1.0)
+			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
+			multi_mesh.set_instance_color(idx, height_to_color(minor_radius - 1.0))
 
 func update_mobius_surface():
-	# Möbius strip with sine wave modulation
 	for x in range(grid_size):
 		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			
-			var u = (x / float(grid_size)) * 2.0 * PI  # Parameter along the strip
-			var v = (z - grid_size/2.0) / (grid_size/2.0) * 0.5  # Width parameter
-			
-			# Möbius strip parametric equations with sine modulation
+			var idx = x * grid_size + z
+
+			var u = (x / float(grid_size)) * 2.0 * PI
+			var v = (z - grid_size / 2.0) / (grid_size / 2.0) * 0.5
+
 			var radius = 2.0 + amplitude * sin(frequency * u * 2.0 + phase) * 0.5
 			var twist_factor = 1.0 + amplitude * sin(frequency * u + phase) * 0.3
-			
-			node.position = Vector3(
-				(radius + v * cos(u/2.0) * twist_factor) * cos(u),
-				v * sin(u/2.0) * twist_factor,
-				(radius + v * cos(u/2.0) * twist_factor) * sin(u)
-			)
-			update_node_color(node, v * twist_factor)
 
-func update_node_color(node: CSGSphere3D, height_value: float):
-	var material = node.material_override as ShaderMaterial
-	if material:
-		# Modulate shader parameters based on height/displacement
-		var intensity = (height_value + amplitude) / (2.0 * amplitude)
-		intensity = clamp(intensity, 0.0, 1.0)
-		
-		# Adjust shader parameters dynamically
-		material.set_shader_parameter("line_thickness", 0.04 + intensity * 0.08)
-		material.set_shader_parameter("noise_amplitude", 0.01 + intensity * 0.03)
+			var pos = Vector3(
+				(radius + v * cos(u / 2.0) * twist_factor) * cos(u),
+				v * sin(u / 2.0) * twist_factor,
+				(radius + v * cos(u / 2.0) * twist_factor) * sin(u)
+			)
+			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
+			multi_mesh.set_instance_color(idx, height_to_color(v * twist_factor))
+
+# --- Control animations (unchanged) ---
 
 func animate_controls():
 	# Frequency control
 	var freq_height = frequency * 0.8 + 0.5
 	$FrequencyControl.height = freq_height
-	$FrequencyControl.position.y = -3 + freq_height/2
-	
+	$FrequencyControl.position.y = -3 + freq_height / 2
+
 	# Amplitude control
 	var amp_height = amplitude * 0.6 + 0.5
 	$AmplitudeControl.height = amp_height
-	$AmplitudeControl.position.y = -3 + amp_height/2
-	
+	$AmplitudeControl.position.y = -3 + amp_height / 2
+
 	# Phase control (rotating)
 	var phase_height = 1.0 + sin(phase) * 0.3
 	$PhaseControl.height = phase_height
-	$PhaseControl.position.y = -3 + phase_height/2
+	$PhaseControl.position.y = -3 + phase_height / 2
 	$PhaseControl.rotation_degrees.y = phase * 180.0 / PI
-	
+
 	# Topology mode indicator
 	var topology_height = (current_topology + 1) * 0.3 + 0.5
 	$TopologyMode.size.y = topology_height
-	$TopologyMode.position.y = -3 + topology_height/2
-	
+	$TopologyMode.position.y = -3 + topology_height / 2
+
 	# Update topology indicator color
 	var topology_material = $TopologyMode.material_override as StandardMaterial3D
 	if topology_material:
@@ -249,9 +268,9 @@ func animate_controls():
 				topology_material.albedo_color = Color(0.2, 0.8, 1.0, 1.0)
 			TopologyMode.MOBIUS_STRIP:
 				topology_material.albedo_color = Color(1.0, 0.2, 0.8, 1.0)
-		
+
 		topology_material.emission = topology_material.albedo_color * 0.3
-	
+
 	# Pulsing effects
 	var pulse = 1.0 + sin(time * 4.0) * 0.1
 	$FrequencyControl.scale.x = pulse

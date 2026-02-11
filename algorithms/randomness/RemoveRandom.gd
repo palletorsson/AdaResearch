@@ -30,8 +30,11 @@ var active_instances: Array[int] = []  # Track which instances are still active
 var initial_count: int = 0
 var removed_count: int = 0
 
+var _use_node_mode: bool = false
+var _target_nodes: Array[Node3D] = []
+
 func _ready():
-	# Find MultiMesh
+	# Try MultiMesh first
 	if not multimesh_path.is_empty():
 		multimesh_instance = get_node_or_null(multimesh_path)
 
@@ -44,11 +47,11 @@ func _ready():
 			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
 			find_all_instances()
 		else:
-			push_warning("MultiMesh found but has no instances")
-			return
+			push_warning("MultiMesh found but has no instances, trying node mode")
+			_try_node_mode()
 	else:
-		push_warning("Could not find MultiMeshInstance3D")
-		return
+		print("No MultiMesh found, trying node mode (individual grid cubes)")
+		_try_node_mode()
 
 	# Create timer
 	timer = Timer.new()
@@ -57,6 +60,45 @@ func _ready():
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
 	timer.start()
+
+func _try_node_mode():
+	"""Fallback: find individual StaticBody3D/MeshInstance3D nodes in range"""
+	_use_node_mode = true
+	_target_nodes.clear()
+	
+	# Search the GridScene (parent hierarchy) for floor tiles
+	var grid_scene = _find_grid_scene()
+	if not grid_scene:
+		grid_scene = get_parent()
+	
+	_collect_nodes_in_range(grid_scene)
+	initial_count = _target_nodes.size()
+	print("RemoveRandom (node mode): Found %d nodes in range" % initial_count)
+
+func _find_grid_scene() -> Node:
+	var current = get_parent()
+	while current:
+		if current.name == "GridScene" or current.has_method("get_map_data"):
+			return current
+		current = current.get_parent()
+	return null
+
+func _collect_nodes_in_range(root: Node):
+	"""Recursively find nodes in the target range"""
+	for child in root.get_children():
+		if child == self:
+			continue
+		if child is Node3D:
+			var pos = child.global_position - global_position  # Relative to our position
+			if _should_include_instance(pos):
+				# Only include nodes that have a mesh (actual visible objects)
+				if child is MeshInstance3D or child.get_node_or_null("MeshInstance3D") != null:
+					_target_nodes.append(child)
+				elif child is StaticBody3D and child.get_node_or_null("MeshInstance3D") != null:
+					_target_nodes.append(child)
+		# Don't recurse too deep into artifact scenes
+		if not (child.name.begins_with("Artifact") or child.get_script()):
+			_collect_nodes_in_range(child)
 
 func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 	if node is MultiMeshInstance3D:
@@ -99,36 +141,74 @@ func _should_include_instance(pos: Vector3) -> bool:
 
 func _on_timer_timeout():
 	"""Called every 0.5 seconds to remove one instance"""
+	if _use_node_mode:
+		_remove_node()
+	else:
+		_remove_multimesh_instance()
+
+func _remove_multimesh_instance():
 	if active_instances.is_empty():
 		print("No more instances to remove!")
 		timer.stop()
 		return
 
-	# Pick a random instance to remove
 	var random_index = randi() % active_instances.size()
 	var instance_index = active_instances[random_index]
 
-	# Highlight before removal
 	highlight_instance_for_removal(instance_index)
-
-	# Wait for highlight duration
 	await get_tree().create_timer(highlight_duration).timeout
 
-	# Remove by scaling to zero
 	var transform = multimesh.get_instance_transform(instance_index)
 	var removal_position = transform.origin
 	transform.basis = Basis().scaled(Vector3.ZERO)
 	multimesh.set_instance_transform(instance_index, transform)
 
-	# Make transparent if colors enabled
 	if multimesh.use_colors:
 		multimesh.set_instance_color(instance_index, Color(0, 0, 0, 0))
 
-	# Remove from active list
 	active_instances.remove_at(random_index)
 	removed_count += 1
 
-	# Create visual effect
+	if show_removal_effects:
+		create_removal_effect(removal_position)
+
+	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(initial_count)) * 100.0])
+
+func _remove_node():
+	# Clean up invalid references
+	_target_nodes = _target_nodes.filter(func(n): return is_instance_valid(n))
+	
+	if _target_nodes.is_empty():
+		print("No more nodes to remove!")
+		timer.stop()
+		return
+
+	var random_index = randi() % _target_nodes.size()
+	var node = _target_nodes[random_index]
+	var removal_position = node.global_position
+
+	# Highlight: tint red briefly
+	var mesh = node as MeshInstance3D
+	if not mesh:
+		mesh = node.get_node_or_null("MeshInstance3D")
+	if mesh:
+		var highlight_mat = StandardMaterial3D.new()
+		highlight_mat.albedo_color = Color(1, 0.2, 0.2)
+		highlight_mat.emission_enabled = true
+		highlight_mat.emission = Color(1, 0, 0) * 0.5
+		mesh.material_override = highlight_mat
+
+	await get_tree().create_timer(highlight_duration).timeout
+
+	# Animate shrink then remove
+	var tween = create_tween()
+	tween.tween_property(node, "scale", Vector3.ZERO, 0.2)
+	await tween.finished
+	node.queue_free()
+
+	_target_nodes.remove_at(random_index)
+	removed_count += 1
+
 	if show_removal_effects:
 		create_removal_effect(removal_position)
 

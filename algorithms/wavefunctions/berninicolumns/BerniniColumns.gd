@@ -16,7 +16,7 @@ const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolum
 @export var vertical_segments: int = 40
 @export var radial_segments: int = 16
 @export var twist_factor: float = 0.8  # How much the column twists as it rises
-@export var material_color: Color = Color(0.92, 0.88, 0.78, 1.0)  # Lighter marble-gold color
+@export var material_color: Color = Color(0.96, 0.93, 0.85, 1.0)  # Bright warm marble
 
 # For animated rotation
 @export var rotate_columns: bool = true
@@ -145,11 +145,14 @@ func create_spiral_column() -> Node3D:
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = generate_spiral_column_mesh()
 	
-	# Create and apply the material
+	# Create and apply the material — bright to emphasize column form
 	var material = StandardMaterial3D.new()
 	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
+	material.metallic = 0.4
+	material.roughness = 0.35
+	material.emission_enabled = true
+	material.emission = material_color * 0.15
+	material.emission_energy_multiplier = 0.5
 	mesh_instance.set_surface_override_material(0, material)
 	
 	rotating_root.add_child(mesh_instance)
@@ -234,8 +237,11 @@ func add_column_base(column_node: Node3D):
 	if mesh_instance:
 		var material = StandardMaterial3D.new()
 		material.albedo_color = material_color
-		material.metallic = 0.8
-		material.roughness = 0.2
+		material.metallic = 0.4
+		material.roughness = 0.35
+		material.emission_enabled = true
+		material.emission = material_color * 0.15
+		material.emission_energy_multiplier = 0.5
 		mesh_instance.set_surface_override_material(0, material)
 	column_node.add_child(base_instance)
 
@@ -252,8 +258,11 @@ func add_column_capital(column_node: Node3D):
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
+	material.metallic = 0.4
+	material.roughness = 0.35
+	material.emission_enabled = true
+	material.emission = material_color * 0.15
+	material.emission_energy_multiplier = 0.5
 	capital.set_surface_override_material(0, material)
 	
 	column_node.add_child(capital)

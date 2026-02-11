@@ -1,12 +1,12 @@
 extends Node3D
 
-@export var grid_size: int = 30  # Larger propagation area
+@export var grid_size: int = 20  # ~11.6m total span
 @export var tile_size: float = 0.5  # Bigger tiles
 @export var tile_gutter: float = 0.08
 @export var tile_height: float = 0.15  # Taller tiles for more visible height
 @export var floor_tilt_degrees: float = -12.0
 @export var frequency: float = 0.7
-@export var amplitude: float = 1.2  # Much bigger wave displacement
+@export var amplitude: float = 1.8  # Bigger wave displacement
 @export var wave_speed: float = 0.6
 @export var wave_damping: float = 0.06  # Slightly less damping for larger visible area
 
@@ -176,7 +176,7 @@ func animate_controls():
 	$AmplitudeControl.size = amp_size
 	$AmplitudeControl.position.y = -3.0 + amp_size.y * 0.5
 	frequency = 0.55 + sin(time * 0.12) * 0.25
-	amplitude = 0.22 + cos(time * 0.1) * 0.12
+	amplitude = 0.45 + cos(time * 0.1) * 0.2
 	wave_speed = 0.5 + sin(time * 0.09) * 0.18
 	$WaveSource.radius = 0.28 + sin(time * frequency * 2.4) * 0.05
 

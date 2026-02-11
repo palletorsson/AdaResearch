@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://gdfn5mwvwx1o"]
+[gd_scene load_steps=5 format=3 uid="uid://gdfn5mwvwx1o"]
 
 [ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/effects/flashlight_demo/flashlight.tscn" id="1_flashlight"]
+[ext_resource type="Script" path="res://algorithms/effects/flashlight_demo/flashlight_color.gd" id="2_color"]
 
 [sub_resource type="Environment" id="Environment_Dark"]
 background_mode = 1
@@ -22,33 +23,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 size = Vector3(6, 4, 0.1)
 material = SubResource("Mat_Canvas")
 
-[node name="WhiteFlashlight" parent="." instance=ExtResource("1_flashlight")]
+[node name="RedFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.6, 3)
 unique_name_in_owner = true
-
-[node name="SpotLight3D" parent="WhiteFlashlight" index="2"]
-light_color = Color(1, 1, 1, 1)
-
-[node name="RedFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.6, 3)
-unique_name_in_owner = true
-
-[node name="SpotLight3D" parent="RedFlashlight" index="2"]
+script = ExtResource("2_color")
 light_color = Color(1, 0, 0, 1)
 
 [node name="GreenFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.6, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.6, 3)
 unique_name_in_owner = true
-
-[node name="SpotLight3D" parent="GreenFlashlight" index="2"]
+script = ExtResource("2_color")
 light_color = Color(0, 1, 0, 1)
 
 [node name="BlueFlashlight" parent="." instance=ExtResource("1_flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.6, 3)
+unique_name_in_owner = true
+script = ExtResource("2_color")
+light_color = Color(0, 0, 1, 1)
+
+[node name="WhiteFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.6, 3)
 unique_name_in_owner = true
-
-[node name="SpotLight3D" parent="BlueFlashlight" index="2"]
-light_color = Color(0, 0, 1, 1)
+script = ExtResource("2_color")
+light_color = Color(1, 1, 1, 1)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -1.8)

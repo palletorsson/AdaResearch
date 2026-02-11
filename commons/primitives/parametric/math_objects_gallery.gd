@@ -1,8 +1,8 @@
 extends Node3D
 
 @export var variations_per_object: int = 3
-@export var row_spacing: float = 0.45
-@export var col_spacing: float = 0.32
+@export var row_spacing: float = 0.7
+@export var col_spacing: float = 0.5
 @export var target_size: float = 0.18
 @export var base_height: float = 0.08
 
