@@ -28,25 +28,28 @@ var _session_start: String = ""
 enum Level { DEBUG = 0, INFO = 1, WARN = 2, ERROR = 3 }
 
 func _ready() -> void:
+	print("DebugLogger: _ready() called, enabled=%s" % enabled)
+	
 	if not enabled:
 		return
 	
 	_session_start = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	print("DebugLogger: Session start = %s" % _session_start)
+	
 	_setup_log_directory()
 	_open_log_file()
-	_cleanup_old_logs()
 	
-	# Log session start
-	_write_header()
-	
-	# Connect to tree notifications for cleanup
-	get_tree().auto_accept_quit = false
+	if _log_file:
+		_cleanup_old_logs()
+		_write_header()
+		print("DebugLogger: ✅ Ready and logging to file")
+	else:
+		push_error("DebugLogger: ❌ Failed to open log file!")
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		_write_footer()
-		_close_log_file()
-		get_tree().quit()
+func _exit_tree() -> void:
+	# Clean up when the node is removed
+	_write_footer()
+	_close_log_file()
 
 func _setup_log_directory() -> void:
 	var dir = DirAccess.open("user://")
