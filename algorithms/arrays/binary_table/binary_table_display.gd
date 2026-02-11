@@ -176,10 +176,10 @@ func _format_value(val) -> String:
 	return str(val)
 
 func _get_color(val) -> Color:
-	# Color coding for different values
+	# Color coding for different values - high visibility
 	if val is int or val is float:
 		if val == 0:
-			return Color(0.4, 0.4, 0.45)  # Gray for 0
+			return Color(0.9, 0.5, 0.5)  # Light red for 0 - clearly visible
 		elif val == 1:
 			return Color(0.3, 1.0, 0.4)  # Green for 1
 		elif val > 1:

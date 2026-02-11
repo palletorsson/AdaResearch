@@ -213,8 +213,6 @@ static func _generate_choir_ensemble(params: Dictionary) -> AudioStreamWAV:
 		
 	return _create_stream(data)
 
-	return _create_stream(data)
-
 # Patch 5: String Machine (Solina Style)
 static func _generate_string_machine(params: Dictionary) -> AudioStreamWAV:
 	var duration = params.get("duration", 12.0)

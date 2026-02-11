@@ -69,13 +69,13 @@ func _check_for_progressive_map():
 		match map_file:
 			"map_data_init":
 				progression_state = "initial"
-			"map_data_post_array":
+			"map_data_post_array_tutorial":
 				progression_state = "post_array_tutorial"
 			"map_data_post_random":
-				progression_state = "post_randomness"
+				progression_state = "post_random"
 			"map_data_post_geometric":
 				progression_state = "post_geometric_algorithms"
-			"map_data_complete":
+			"map_data_complete", "map_data_post_qfeplaboratory":
 				progression_state = "all_complete"
 			_:
 				progression_state = "initial"

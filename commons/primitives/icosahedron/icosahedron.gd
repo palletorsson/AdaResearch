@@ -20,7 +20,8 @@ func _build_icosahedron() -> void:
 		geometry["faces"],
 		{
 			"name": "Icosahedron",
-			"material": material
+			"material": material,
+			"double_sided": true  # Fix holes from incorrect face winding
 		}
 	)
 	add_child(_mesh_instance)

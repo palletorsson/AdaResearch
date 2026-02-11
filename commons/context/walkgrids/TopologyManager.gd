@@ -20,6 +20,7 @@ class_name TopologyManager
 @export var create_mobius_space: bool = false
 @export var create_torus_space: bool = false
 @export var create_hyperbolic_space: bool = false
+@export var create_knowledge_terrain: bool = false  # The meta-layer: curriculum as terrain
 
 var spaces: Array[Node3D] = []
 var current_space_index: int = 0
@@ -72,6 +73,13 @@ func create_selected_topology_spaces():
 	if create_hyperbolic_space:
 		print("Hyperbolic space not yet implemented")
 		# var hyperbolic_space = create_hyperbolic_space_instance()
+	
+	if create_knowledge_terrain:
+		var knowledge_space = create_space("KnowledgeTerrainSpace", preload("res://commons/context/walkgrids/KnowledgeTerrainSpace.gd"))
+		if knowledge_space:
+			knowledge_space.position.x = position_index * space_separation
+			spaces.append(knowledge_space)
+			position_index += 1
 	
 	print("Created %d mathematical spaces" % spaces.size())
 	

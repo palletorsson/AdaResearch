@@ -1,4 +1,4 @@
-﻿# AudioSynthesizer.gd
+# AudioSynthesizer.gd
 # Path: res://commons/audio/AudioSynthesizer.gd
 # Procedural Audio Synthesizer for generating sound effects and music
 # Generates 16-bit PCM WAV data based on mathematical functions
@@ -19,6 +19,9 @@ static var is_generating = false
 # Audio configuration
 # const SAMPLE_RATE = 44100.0 # This was replaced by the new SAMPLE_RATE above
 const CHANNELS = 1
+
+static func _idiv(a: int, b: int) -> int:
+	return int(float(a) / float(b))
 
 # Constants
 const BPM = 100.0
@@ -359,21 +362,21 @@ static func generate_pop_interactive_song(parameters: Dictionary = {}) -> AudioS
 	var intro_stream = _generate_pop_section_stream(progression, scale, ["pad"])
 	playback.set_clip_stream(0, intro_stream)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1) # Intro -> Verse
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED) # Intro -> Verse
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Verse: Bass + Keys + Drums
 	var verse_stream = _generate_pop_section_stream(progression, scale, ["bass", "keys", "drums"])
 	playback.set_clip_stream(1, verse_stream)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1) # Verse -> Chorus
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED) # Verse -> Chorus
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Chorus: Full Mix
 	var chorus_stream = _generate_pop_section_stream(progression, scale, ["bass", "keys", "pad", "lead", "drums"])
 	playback.set_clip_stream(2, chorus_stream)
 	playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, 1) # Chorus -> Verse (Loop back)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED) # Chorus -> Verse (Loop back)
 	playback.set_clip_auto_advance_next_clip(2, 1)
 	
 	# 3. Transitions
@@ -410,28 +413,28 @@ static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStr
 	var intro_stream = _generate_ambient_section_stream(progression, scale, ["keys", "noise"], bar_duration)
 	playback.set_clip_stream(0, intro_stream)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)  # Auto-advance to Build
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)  # Auto-advance to Build
 	playback.set_clip_auto_advance_next_clip(0, 1)
 
 	# 2. Build: Add Warm Pad, Bass, and Drums (Groove starts)
 	var build_stream = _generate_ambient_section_stream(progression, scale, ["keys", "pad", "bass", "drums", "noise"], bar_duration)
 	playback.set_clip_stream(1, build_stream)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)  # Auto-advance to Main
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)  # Auto-advance to Main
 	playback.set_clip_auto_advance_next_clip(1, 2)
 
 	# 3. Main: Full Groove (Breakbeat + Acid Bass)
 	var main_stream = _generate_ambient_section_stream(progression, scale, ["keys", "pad", "bass", "drums", "noise"], bar_duration)
 	playback.set_clip_stream(2, main_stream)
 	playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1)  # Auto-advance to Outro
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)  # Auto-advance to Outro
 	playback.set_clip_auto_advance_next_clip(2, 3)
 
 	# 4. Outro: Fade to Pad
 	var outro_stream = _generate_ambient_section_stream(progression, scale, ["pad", "noise"], bar_duration)
 	playback.set_clip_stream(3, outro_stream)
 	playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1)  # Auto-advance back to Intro (loop)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)  # Auto-advance back to Intro (loop)
 	playback.set_clip_auto_advance_next_clip(3, 0)
 
 	# Transitions (Long crossfades for ambient feel)
@@ -477,35 +480,35 @@ static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStream
 	var intro_stream = _generate_prog_section_stream(progression, scale, ["moog_pad"], bar_duration)
 	playback.set_clip_stream(0, intro_stream)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 2. Verse: Add Minimoog bass + motorik drums
 	var verse_stream = _generate_prog_section_stream(progression, scale, ["moog_pad", "moog_bass", "motorik_drums"], bar_duration)
 	playback.set_clip_stream(1, verse_stream)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 3. Build: Add sequencer pattern (Kraftwerk style)
 	var build_stream = _generate_prog_section_stream(progression, scale, ["moog_pad", "moog_bass", "kraftwerk_seq", "motorik_drums"], bar_duration)
 	playback.set_clip_stream(2, build_stream)
 	playback.set_clip_name(2, "Build")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 4. Solo: ELP-style screaming Moog lead
 	var solo_stream = _generate_prog_section_stream(progression, scale, ["moog_pad", "moog_bass", "elp_lead", "motorik_drums"], bar_duration)
 	playback.set_clip_stream(3, solo_stream)
 	playback.set_clip_name(3, "Solo")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 4)
 	
 	# 5. Outro: Fade back to pad
 	var outro_stream = _generate_prog_section_stream(progression, scale, ["moog_pad", "kraftwerk_seq"], bar_duration)
 	playback.set_clip_stream(4, outro_stream)
 	playback.set_clip_name(4, "Outro")
-	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(4, 0)
 	
 	# Transitions
@@ -542,28 +545,28 @@ static func generate_moroder_disco_song(parameters: Dictionary = {}) -> AudioStr
 	var intro_stream = _generate_disco_section_stream(progression, scale, ["sequencer"], bar_duration, bpm)
 	playback.set_clip_stream(0, intro_stream)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 2. Build: Add kick and bass
 	var build_stream = _generate_disco_section_stream(progression, scale, ["sequencer", "kick", "bass"], bar_duration, bpm)
 	playback.set_clip_stream(1, build_stream)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 3. Main: Full groove with pad
 	var main_stream = _generate_disco_section_stream(progression, scale, ["sequencer", "kick", "bass", "pad", "hats"], bar_duration, bpm)
 	playback.set_clip_stream(2, main_stream)
 	playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 4. Outro: Strip back
 	var outro_stream = _generate_disco_section_stream(progression, scale, ["sequencer", "pad"], bar_duration, bpm)
 	playback.set_clip_stream(3, outro_stream)
 	playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.0
@@ -611,9 +614,9 @@ static func _generate_disco_section_stream(progression: Array, scale: Array, ins
 		if "kick" in instruments:
 			# 4-on-floor kick
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
-			for beat in range(int(samples_per_chord / beat_samples) + 1):
+			for beat in range(_idiv(samples_per_chord, beat_samples) + 1):
 				var start = beat * beat_samples
-				for j in range(min(beat_samples / 3, samples_per_chord - start)):
+				for j in range(min(_idiv(beat_samples, 3), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
 					var kfreq = 55.0 + exp(-kt * 30.0) * 100.0
 					var kick = sin(2.0 * PI * kfreq * kt) * exp(-kt * 8.0)
@@ -645,7 +648,7 @@ static func _generate_disco_section_stream(progression: Array, scale: Array, ins
 		if "hats" in instruments:
 			# 8th note hats
 			var eighth_samples = int(60.0 / bpm / 2.0 * SAMPLE_RATE)
-			for beat in range(int(samples_per_chord / eighth_samples) + 1):
+			for beat in range(_idiv(samples_per_chord, eighth_samples) + 1):
 				var start = beat * eighth_samples
 				for j in range(min(int(SAMPLE_RATE * 0.02), samples_per_chord - start)):
 					var ht = float(j) / SAMPLE_RATE
@@ -681,19 +684,19 @@ static func generate_detroit_techno_song(parameters: Dictionary = {}) -> AudioSt
 	
 	var intro = _generate_detroit_section(progression, scale, ["kick", "hihat"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var build = _generate_detroit_section(progression, scale, ["kick", "hihat", "bass", "stab"], bar_duration)
 	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var main = _generate_detroit_section(progression, scale, ["kick", "hihat", "clap", "bass", "stab", "pad"], bar_duration)
 	playback.set_clip_stream(2, main); playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var outro = _generate_detroit_section(progression, scale, ["pad", "hihat"], bar_duration)
 	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.0
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -720,7 +723,7 @@ static func _generate_detroit_section(progression: Array, scale: Array, instrume
 		# 909 KICK - Punchy with click transient (research: fast attack, triangle-ish)
 		if "kick" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
-			for beat in range(int(samples_per_chord / beat_samples) + 1):
+			for beat in range(_idiv(samples_per_chord, beat_samples) + 1):
 				var start = beat * beat_samples
 				for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
@@ -736,7 +739,7 @@ static func _generate_detroit_section(progression: Array, scale: Array, instrume
 		# 909 HIHAT - Metallic, crisp (research: +2dB high shelf)
 		if "hihat" in instruments:
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
-			for step in range(int(samples_per_chord / sixteenth) + 1):
+			for step in range(_idiv(samples_per_chord, sixteenth) + 1):
 				var start = step * sixteenth
 				for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
 					var ht = float(j) / SAMPLE_RATE
@@ -823,19 +826,19 @@ static func generate_synthwave_song(parameters: Dictionary = {}) -> AudioStreamI
 	
 	var intro = _generate_synthwave_section(progression, scale, ["arp", "pad"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var verse = _generate_synthwave_section(progression, scale, ["arp", "pad", "drums", "bass"], bar_duration)
 	playback.set_clip_stream(1, verse); playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var chorus = _generate_synthwave_section(progression, scale, ["arp", "pad", "drums", "bass", "lead"], bar_duration)
 	playback.set_clip_stream(2, chorus); playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var outro = _generate_synthwave_section(progression, scale, ["pad", "arp"], bar_duration)
 	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 3.0
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -863,7 +866,7 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 		if "arp" in instruments:
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
 			var arp_pattern = [0, 4, 7, 12, 7, 4]
-			for step in range(int(samples_per_chord / sixteenth)):
+			for step in range(_idiv(samples_per_chord, sixteenth)):
 				var start = step * sixteenth
 				var note_idx = step % arp_pattern.size()
 				var freq = root_freq * pow(2.0, arp_pattern[note_idx] / 12.0)
@@ -886,7 +889,7 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 				for freq in chord_freqs:
 					# 7 detuned saws per note
 					for voice in range(7):
-						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0  # Ãƒâ€šÃ‚Â±12.5 cents
+						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0  # ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±12.5 cents
 						var detune_ratio = pow(2.0, detune_cents / 1200.0)
 						var saw = fmod(t * freq * detune_ratio, 1.0) * 2.0 - 1.0
 						pad += saw / 7.0
@@ -975,19 +978,19 @@ static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamIntera
 	
 	var intro = _generate_rave_section(progression, scale, ["breakbeat"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var build = _generate_rave_section(progression, scale, ["breakbeat", "hoover", "stab"], bar_duration)
 	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var drop = _generate_rave_section(progression, scale, ["breakbeat", "hoover", "stab", "lead"], bar_duration)
 	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var breakdown = _generate_rave_section(progression, scale, ["pad", "stab"], bar_duration)
 	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 1.5
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -998,7 +1001,7 @@ static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamIntera
 
 
 static func _generate_rave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
-	# RAVE - Research: Hoover Ãƒâ€šÃ‚Â±3% detune, Amen breaks, Mentasm stabs, DISTORTION
+	# RAVE - Research: Hoover ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±3% detune, Amen breaks, Mentasm stabs, DISTORTION
 	var bpm = 140.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
@@ -1041,7 +1044,7 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 						var hat = (randf() - 0.5) * exp(-ht * 100.0)
 						if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.18
 		
-		# HOOVER BASS - Ãƒâ€šÃ‚Â±3% detuned saws with filter LFO (research: Mentasm sound)
+		# HOOVER BASS - ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±3% detuned saws with filter LFO (research: Mentasm sound)
 		if "hoover" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
@@ -1139,22 +1142,22 @@ static func generate_acid_house_song(parameters: Dictionary = {}) -> AudioStream
 	# Intro: Drums only, building anticipation
 	var intro = _generate_acid_house_section(progression, scale, ["kick", "hihat"], bar_duration, 0.3)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Build: 303 enters, filter closed
 	var build = _generate_acid_house_section(progression, scale, ["kick", "hihat", "acid303"], bar_duration, 0.5)
 	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Peak: Full squelch, claps, maximum energy
 	var peak = _generate_acid_house_section(progression, scale, ["kick", "hihat", "clap", "acid303", "cowbell"], bar_duration, 0.9)
 	playback.set_clip_stream(2, peak); playback.set_clip_name(2, "Peak")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# Breakdown: 303 solo with filter play
 	var breakdown = _generate_acid_house_section(progression, scale, ["acid303"], bar_duration, 0.7)
 	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.0
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1184,7 +1187,7 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 		# 808/909 KICK - 4-on-floor, punchy
 		if "kick" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
-			for beat in range(int(samples_per_chord / beat_samples) + 1):
+			for beat in range(_idiv(samples_per_chord, beat_samples) + 1):
 				var start = beat * beat_samples
 				for j in range(mini(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
@@ -1196,7 +1199,7 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 		# 808 HIHAT - 16th notes
 		if "hihat" in instruments:
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
-			for step in range(int(samples_per_chord / sixteenth) + 1):
+			for step in range(_idiv(samples_per_chord, sixteenth) + 1):
 				var start = step * sixteenth
 				var is_open = (step % 4 == 2)  # Open hat on offbeats
 				var decay = 80.0 if not is_open else 25.0
@@ -1272,7 +1275,7 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 				
 				for j in range(mini(sixteenth, samples_per_chord - start)):
 					var t = float(j) / SAMPLE_RATE
-					var step_phase = float(j) / float(sixteenth)
+					var _step_phase = float(j) / float(sixteenth)
 					
 					# Portamento (slide)
 					if note.slide:
@@ -1354,19 +1357,19 @@ static func generate_french_touch_song(parameters: Dictionary = {}) -> AudioStre
 	
 	var intro = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var verse = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead", "chiff", "drums"], bar_duration)
 	playback.set_clip_stream(1, verse); playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var chorus = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead", "chiff", "drums", "vocoder_pad"], bar_duration)
 	playback.set_clip_stream(2, chorus); playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var outro = _generate_french_touch_section(progression, scale, ["filter_bass", "vocoder_pad"], bar_duration)
 	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 1.5
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1431,7 +1434,7 @@ static func _generate_french_touch_section(progression: Array, scale: Array, ins
 		
 		# DRUMS - 4 on floor disco
 		if "drums" in instruments:
-			var sixteenth = int(samples_per_chord / 16)
+			var sixteenth = _idiv(samples_per_chord, 16)
 			for step in range(16):
 				var start = step * sixteenth
 				# Kick on 1, 5, 9, 13
@@ -1491,19 +1494,19 @@ static func generate_supersaw_trance_song(parameters: Dictionary = {}) -> AudioS
 	
 	var intro = _generate_supersaw_section(progression, scale, ["supersaw_pad"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var build = _generate_supersaw_section(progression, scale, ["supersaw_pad", "trance_bass", "buildup_drums"], bar_duration)
 	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var drop = _generate_supersaw_section(progression, scale, ["supersaw_pad", "supersaw_lead", "trance_bass", "trance_drums"], bar_duration)
 	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var breakdown = _generate_supersaw_section(progression, scale, ["supersaw_pad", "arp"], bar_duration)
 	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.0
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1571,7 +1574,7 @@ static func _generate_supersaw_section(progression: Array, scale: Array, instrum
 		
 		# TRANCE DRUMS - Punchy kick, offbeat hats
 		if "trance_drums" in instruments:
-			var sixteenth = int(samples_per_chord / 16)
+			var sixteenth = _idiv(samples_per_chord, 16)
 			for step in range(16):
 				var start = step * sixteenth
 				if step % 4 == 0:
@@ -1588,7 +1591,7 @@ static func _generate_supersaw_section(progression: Array, scale: Array, instrum
 		# BUILDUP DRUMS - Snare roll buildup
 		if "buildup_drums" in instruments:
 			var roll_density = 4 + int(float(i) / progression.size() * 12)
-			var roll_step = samples_per_chord / roll_density
+			var roll_step = _idiv(samples_per_chord, roll_density)
 			for r in range(roll_density):
 				var start = int(r * roll_step)
 				for j in range(min(int(SAMPLE_RATE * 0.05), samples_per_chord - start)):
@@ -1599,7 +1602,7 @@ static func _generate_supersaw_section(progression: Array, scale: Array, instrum
 		
 		# ARP - 16th note arpeggio
 		if "arp" in instruments:
-			var sixteenth = int(samples_per_chord / 16)
+			var sixteenth = _idiv(samples_per_chord, 16)
 			for step in range(16):
 				var note_idx = step % chord_freqs.size()
 				var arp_freq = chord_freqs[note_idx] * 2.0
@@ -1638,19 +1641,19 @@ static func generate_lofi_house_song(parameters: Dictionary = {}) -> AudioStream
 	
 	var intro = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_pad"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var groove = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_bass", "juno_pad"], bar_duration)
 	playback.set_clip_stream(1, groove); playback.set_clip_name(1, "Groove")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var main = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_bass", "juno_pad", "stab", "vocal_chop"], bar_duration)
 	playback.set_clip_stream(2, main); playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var outro = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_pad"], bar_duration)
 	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 1.5
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1708,7 +1711,7 @@ static func _generate_lofi_house_section(progression: Array, scale: Array, instr
 		
 		# DUSTY DRUMS - Lo-fi filtered drums
 		if "dusty_drums" in instruments:
-			var sixteenth = int(samples_per_chord / 16)
+			var sixteenth = _idiv(samples_per_chord, 16)
 			for step in range(16):
 				var start = step * sixteenth
 				# Kick on 1, 5, 9, 13
@@ -1766,7 +1769,7 @@ static func _generate_lofi_house_section(progression: Array, scale: Array, instr
 
 # ============================================================================
 # REESE JUNGLE - Kevin Saunderson's classic: 2 detuned saws + sub
-# Based on research: Ãƒâ€šÃ‚Â±0.07 semitone detune, 64 unison voices, metal filter
+# Based on research: ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±0.07 semitone detune, 64 unison voices, metal filter
 # ============================================================================
 static func generate_reese_jungle_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
 	parameters = _merge_with_song_research_parameters("reese_jungle", parameters)
@@ -1785,19 +1788,19 @@ static func generate_reese_jungle_song(parameters: Dictionary = {}) -> AudioStre
 	
 	var intro = _generate_reese_jungle_section(progression, scale, ["amen_break"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var build = _generate_reese_jungle_section(progression, scale, ["amen_break", "reese_bass", "stab"], bar_duration)
 	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var drop = _generate_reese_jungle_section(progression, scale, ["amen_break", "reese_bass", "stab", "pad"], bar_duration)
 	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var breakdown = _generate_reese_jungle_section(progression, scale, ["pad", "reese_bass"], bar_duration)
 	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 1.0
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1808,7 +1811,7 @@ static func generate_reese_jungle_song(parameters: Dictionary = {}) -> AudioStre
 
 
 static func _generate_reese_jungle_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
-	var bpm = 170.0
+	var _bpm = 170.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array(); final_mix.resize(total_samples); final_mix.fill(0.0)
@@ -1820,7 +1823,7 @@ static func _generate_reese_jungle_section(progression: Array, scale: Array, ins
 		var root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
-		# REESE BASS - Two detuned saws + sub (from research: Ãƒâ€šÃ‚Â±0.07 semitones)
+		# REESE BASS - Two detuned saws + sub (from research: ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±0.07 semitones)
 		if "reese_bass" in instruments:
 			var detune_semitones = 0.07
 			var detune_ratio = pow(2.0, detune_semitones / 12.0)
@@ -1841,7 +1844,7 @@ static func _generate_reese_jungle_section(progression: Array, scale: Array, ins
 		
 		# AMEN BREAK - Chopped breakbeat simulation
 		if "amen_break" in instruments:
-			var sixteenth = int(samples_per_chord / 16)
+			var sixteenth = _idiv(samples_per_chord, 16)
 			# Classic amen pattern approximation
 			var kick_steps = [0, 6, 10]
 			var snare_steps = [4, 12]
@@ -1924,19 +1927,19 @@ static func generate_ambient_techno_song(parameters: Dictionary = {}) -> AudioSt
 	
 	var intro = _generate_ambient_techno_section(progression, scale, ["ambient_pad"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var evolve = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture", "minimal_kick"], bar_duration)
 	playback.set_clip_stream(1, evolve); playback.set_clip_name(1, "Evolve")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var peak = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture", "minimal_kick", "arp"], bar_duration)
 	playback.set_clip_stream(2, peak); playback.set_clip_name(2, "Peak")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var dissolve = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture"], bar_duration)
 	playback.set_clip_stream(3, dissolve); playback.set_clip_name(3, "Dissolve")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 3.0  # Longer crossfade for ambient
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -1956,7 +1959,7 @@ static func _generate_ambient_techno_section(progression: Array, scale: Array, i
 	for i in range(progression.size()):
 		var degree = progression[i]
 		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
-		var root_freq = chord_freqs[0]
+		var _root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
 		# AMBIENT PAD - 4 oscillators at different octaves (from research)
@@ -1998,7 +2001,7 @@ static func _generate_ambient_techno_section(progression: Array, scale: Array, i
 		# MINIMAL KICK - Soft, sidechaining kick
 		if "minimal_kick" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
-			for beat in range(int(samples_per_chord / beat_samples) + 1):
+			for beat in range(_idiv(samples_per_chord, beat_samples) + 1):
 				var start = beat * beat_samples
 				for j in range(min(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
@@ -2007,7 +2010,7 @@ static func _generate_ambient_techno_section(progression: Array, scale: Array, i
 		
 		# ARP - Slow evolving arpeggio
 		if "arp" in instruments:
-			var eighth = int(samples_per_chord / 8)
+			var eighth = _idiv(samples_per_chord, 8)
 			for step in range(8):
 				var note_idx = step % chord_freqs.size()
 				var arp_freq = chord_freqs[note_idx]
@@ -2046,19 +2049,19 @@ static func generate_blade_runner_song(parameters: Dictionary = {}) -> AudioStre
 	
 	var intro = _generate_blade_runner_section(progression, scale, ["vangelis_keys"], bar_duration)
 	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	var theme = _generate_blade_runner_section(progression, scale, ["vangelis_keys", "string_pad", "bass_pulse"], bar_duration)
 	playback.set_clip_stream(1, theme); playback.set_clip_name(1, "Theme")
-	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	var climax = _generate_blade_runner_section(progression, scale, ["vangelis_keys", "string_pad", "bass_pulse", "lead"], bar_duration)
 	playback.set_clip_stream(2, climax); playback.set_clip_name(2, "Climax")
-	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	var outro = _generate_blade_runner_section(progression, scale, ["string_pad", "vangelis_keys"], bar_duration)
 	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.5
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
@@ -2069,7 +2072,7 @@ static func generate_blade_runner_song(parameters: Dictionary = {}) -> AudioStre
 
 
 static func _generate_blade_runner_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
-	var bpm = 70.0
+	var _bpm = 70.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array(); final_mix.resize(total_samples); final_mix.fill(0.0)
@@ -2312,12 +2315,12 @@ static func _generate_kraftwerk_sequence(data: PackedFloat32Array, sample_count:
 		seq_notes.append(freq)
 	
 	var notes_per_bar = 16  # 16th notes
-	var samples_per_note = sample_count / notes_per_bar
+	var samples_per_note = _idiv(sample_count, notes_per_bar)
 	var filter_state = 0.0
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var note_idx = int(i / samples_per_note) % seq_notes.size()
+		var note_idx = _idiv(i, samples_per_note) % seq_notes.size()
 		var freq = seq_notes[note_idx]
 		
 		# Square wave oscillator
@@ -2359,7 +2362,7 @@ static func _generate_elp_moog_lead(data: PackedFloat32Array, sample_count: int,
 			melody.append(chord_freqs[0] * 2.0)
 	
 	var notes_per_section = 4
-	var samples_per_note = sample_count / notes_per_section
+	var samples_per_note = _idiv(sample_count, notes_per_section)
 	
 	var current_freq = melody[0]
 	var target_freq = melody[0]
@@ -2368,7 +2371,7 @@ static func _generate_elp_moog_lead(data: PackedFloat32Array, sample_count: int,
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var note_idx = int(i / samples_per_note) % melody.size()
+		var note_idx = _idiv(i, samples_per_note) % melody.size()
 		target_freq = melody[note_idx]
 		
 		# PORTAMENTO - the signature ELP glide
@@ -2413,11 +2416,11 @@ static func _generate_motorik_beat(data: PackedFloat32Array, sample_count: int):
 	
 	var bpm = 110.0
 	var samples_per_beat = int(SAMPLE_RATE * 60.0 / bpm)
-	var samples_per_8th = samples_per_beat / 2
+	var samples_per_8th = _idiv(samples_per_beat, 2)
 	
 	for i in range(sample_count):
-		var t = float(i) / SAMPLE_RATE
-		var beat_in_bar = (i / samples_per_beat) % 4
+		var _t = float(i) / SAMPLE_RATE
+		var beat_in_bar = _idiv(i, samples_per_beat) % 4
 		var pos_in_beat = i % samples_per_beat
 		var pos_in_8th = i % samples_per_8th
 		
@@ -2562,21 +2565,21 @@ static func generate_boards_of_canada_song(parameters: Dictionary = {}) -> Audio
 	var intro = _generate_boc_section(progression, scale, ["warbly_pad", "texture"], bar_duration)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Main: Full arrangement
 	var main = _generate_boc_section(progression, scale, ["warbly_pad", "melody", "bass", "drums", "texture"], bar_duration)
 	playback.set_clip_stream(1, main)
 	playback.set_clip_name(1, "Main")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Outro: Fade out
 	var outro = _generate_boc_section(progression, scale, ["warbly_pad", "texture"], bar_duration)
 	playback.set_clip_stream(2, outro)
 	playback.set_clip_name(2, "Outro")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 0)
 	
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 3.0)
@@ -2624,7 +2627,7 @@ static func _generate_boc_section(progression: Array, scale: Array, instruments:
 		
 		# MELODIC SEQUENCE - Simple, detuned, nostalgic
 		if "melody" in instruments:
-			var note_length = samples_per_chord / 8
+			var note_length = _idiv(samples_per_chord, 8)
 			var melody_notes = [0, 2, 4, 2, 0, -1, 0, 2]  # Simple pattern
 			for n in range(8):
 				var start = n * note_length
@@ -2656,7 +2659,7 @@ static func _generate_boc_section(progression: Array, scale: Array, instruments:
 		
 		# DRUMS - Lo-fi hip-hop style
 		if "drums" in instruments:
-			var beat_samples = samples_per_chord / 8
+			var beat_samples = _idiv(samples_per_chord, 8)
 			for beat in range(8):
 				var start = beat * beat_samples
 				# Kick on 1 and 5
@@ -2720,21 +2723,21 @@ static func generate_burial_song(parameters: Dictionary = {}) -> AudioStreamInte
 	var intro = _generate_burial_section(progression, scale, ["atmosphere", "crackle"], bar_duration)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Main: Full 2-step
 	var main = _generate_burial_section(progression, scale, ["atmosphere", "sub_bass", "garage_stab", "drums", "crackle"], bar_duration)
 	playback.set_clip_stream(1, main)
 	playback.set_clip_name(1, "Main")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Outro
 	var outro = _generate_burial_section(progression, scale, ["atmosphere", "crackle"], bar_duration)
 	playback.set_clip_stream(2, outro)
 	playback.set_clip_name(2, "Outro")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 0)
 	
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 4.0)
@@ -2804,7 +2807,7 @@ static func _generate_burial_section(progression: Array, scale: Array, instrumen
 		
 		# DRUMS - 2-step shuffled garage
 		if "drums" in instruments:
-			var beat_samples = samples_per_chord / 16  # 16th notes
+			var beat_samples = _idiv(samples_per_chord, 16)  # 16th notes
 			for beat in range(16):
 				var start = beat * beat_samples
 				# Kick: offbeat pattern (not on 1)
@@ -2871,21 +2874,21 @@ static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamI
 	var intro = _generate_kraftwerk_section(progression, scale, ["sequence", "moog_bass"], bar_duration)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Main: Full arrangement
 	var main = _generate_kraftwerk_section(progression, scale, ["sequence", "moog_bass", "vocoder_pad", "lead", "drums"], bar_duration)
 	playback.set_clip_stream(1, main)
 	playback.set_clip_name(1, "Main")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Outro
 	var outro = _generate_kraftwerk_section(progression, scale, ["sequence", "vocoder_pad"], bar_duration)
 	playback.set_clip_stream(2, outro)
 	playback.set_clip_name(2, "Outro")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 0)
 	
 	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 2.0)
@@ -2909,7 +2912,7 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 		
 		# SEQUENCER LINE - Precise, repetitive 16th notes
 		if "sequence" in instruments:
-			var note_length = samples_per_chord / 16
+			var note_length = _idiv(samples_per_chord, 16)
 			var seq_pattern = [0, 0, 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 5, 0, 7, 0]  # Simple pattern
 			for n in range(16):
 				var start = n * note_length
@@ -2966,7 +2969,7 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 		# LEAD - Simple Moog melody with subtle vibrato
 		if "lead" in instruments:
 			var lead_pattern = [0, 0, 2, 0, 4, 0, 2, 0]  # Simple melody
-			var note_length = samples_per_chord / 8
+			var note_length = _idiv(samples_per_chord, 8)
 			for n in range(8):
 				var start = n * note_length
 				var note_offset = lead_pattern[n]
@@ -2984,7 +2987,7 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 		
 		# DRUMS - Electronic, precise (TR-808 style)
 		if "drums" in instruments:
-			var beat_samples = samples_per_chord / 8
+			var beat_samples = _idiv(samples_per_chord, 8)
 			for beat in range(8):
 				var start = beat * beat_samples
 				# Kick on 1, 3, 5, 7 (four on floor)
@@ -3043,28 +3046,28 @@ static func generate_boards_of_canada_v2_song(parameters: Dictionary = {}) -> Au
 	var intro = _generate_boc_v2_section(progression, scale, ["warbly_pad", "texture"], bar_duration, bpm)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Build: Add melody and bass
 	var build = _generate_boc_v2_section(progression, scale, ["warbly_pad", "melody", "warm_bass", "texture"], bar_duration, bpm)
 	playback.set_clip_stream(1, build)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Main: Full lo-fi groove with drums
 	var main = _generate_boc_v2_section(progression, scale, ["warbly_pad", "melody", "warm_bass", "lofi_drums", "texture"], bar_duration, bpm)
 	playback.set_clip_stream(2, main)
 	playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# Outro: Fade to texture
 	var outro = _generate_boc_v2_section(progression, scale, ["warbly_pad", "texture"], bar_duration, bpm)
 	playback.set_clip_stream(3, outro)
 	playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 4.0  # Long crossfades for dreamy feel
@@ -3076,7 +3079,7 @@ static func generate_boards_of_canada_v2_song(parameters: Dictionary = {}) -> Au
 	return playback
 
 
-static func _generate_boc_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+static func _generate_boc_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, _bpm: float) -> AudioStreamWAV:
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array()
@@ -3141,7 +3144,7 @@ static func _generate_boc_v2_section(progression: Array, scale: Array, instrumen
 		
 		# MELODY - Dotted eighth delay, pitch drift, simple childlike melody
 		if "melody" in instruments:
-			var note_length = samples_per_chord / 8
+			var note_length = _idiv(samples_per_chord, 8)
 			var melody_notes = [0, 0, 4, 0, 7, 4, 0, -3]  # Pentatonic-ish
 			
 			for n in range(8):
@@ -3200,10 +3203,10 @@ static func _generate_boc_v2_section(progression: Array, scale: Array, instrumen
 		
 		# LOFI DRUMS - Hip-hop influenced, humanized timing
 		if "lofi_drums" in instruments:
-			var beat_samples = samples_per_chord / 8
+			var beat_samples = _idiv(samples_per_chord, 8)
 			
 			for beat in range(8):
-				# Humanize timing (Ãƒâ€šÃ‚Â±10ms)
+				# Humanize timing (ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±10ms)
 				var timing_offset = int((randf() - 0.5) * SAMPLE_RATE * 0.01)
 				var start = beat * beat_samples + timing_offset
 				start = clampi(start, 0, samples_per_chord - 1)
@@ -3291,28 +3294,28 @@ static func generate_burial_v2_song(parameters: Dictionary = {}) -> AudioStreamI
 	var intro = _generate_burial_v2_section(progression, scale, ["atmosphere", "crackle", "rain"], bar_duration, bpm)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Build: Add bass, stabs
 	var build = _generate_burial_v2_section(progression, scale, ["atmosphere", "sub_bass", "garage_stab", "crackle", "rain"], bar_duration, bpm)
 	playback.set_clip_stream(1, build)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Main: Full 2-step with vocals
 	var main = _generate_burial_v2_section(progression, scale, ["atmosphere", "sub_bass", "garage_stab", "twostep_drums", "pitched_vocal", "crackle"], bar_duration, bpm)
 	playback.set_clip_stream(2, main)
 	playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# Outro: Fade to rain
 	var outro = _generate_burial_v2_section(progression, scale, ["atmosphere", "crackle", "rain"], bar_duration, bpm)
 	playback.set_clip_stream(3, outro)
 	playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 5.0  # Long, atmospheric fades
@@ -3324,7 +3327,7 @@ static func generate_burial_v2_song(parameters: Dictionary = {}) -> AudioStreamI
 	return playback
 
 
-static func _generate_burial_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+static func _generate_burial_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, _bpm: float) -> AudioStreamWAV:
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array()
@@ -3413,7 +3416,7 @@ static func _generate_burial_v2_section(progression: Array, scale: Array, instru
 		
 		# TWO-STEP DRUMS - Research: "intuitively arranged, not quantized"
 		if "twostep_drums" in instruments:
-			var sixteenth = samples_per_chord / 16
+			var sixteenth = _idiv(samples_per_chord, 16)
 			
 			# 2-step pattern: kick avoids 1, shuffled timing
 			var kick_steps = [2, 5, 10, 13]  # Offbeat kicks
@@ -3422,7 +3425,7 @@ static func _generate_burial_v2_section(progression: Array, scale: Array, instru
 			
 			for step in range(16):
 				# Research: "minute hesitations and slippages"
-				var timing_humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.015)  # Ãƒâ€šÃ‚Â±15ms
+				var timing_humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.015)  # ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±15ms
 				var start = step * sixteenth + timing_humanize
 				start = clampi(start, 0, samples_per_chord - 1)
 				
@@ -3535,28 +3538,28 @@ static func generate_kraftwerk_v2_song(parameters: Dictionary = {}) -> AudioStre
 	var intro = _generate_kraftwerk_v2_section(progression, scale, ["car_sounds", "sequence"], bar_duration, bpm)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Build: Add bass and motorik drums
 	var build = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "moog_bass", "motorik_drums"], bar_duration, bpm)
 	playback.set_clip_stream(1, build)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Main: Full arrangement with vocoder and lead
 	var main = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "moog_bass", "vocoder_pad", "moog_lead", "motorik_drums"], bar_duration, bpm)
 	playback.set_clip_stream(2, main)
 	playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# Outro: Fade to sequence
 	var outro = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "vocoder_pad", "car_sounds"], bar_duration, bpm)
 	playback.set_clip_stream(3, outro)
 	playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 0)
 	
 	var xfade = 2.5
@@ -3568,7 +3571,7 @@ static func generate_kraftwerk_v2_song(parameters: Dictionary = {}) -> AudioStre
 	return playback
 
 
-static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, _bpm: float) -> AudioStreamWAV:
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array()
@@ -3607,7 +3610,7 @@ static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, ins
 		
 		# SEQUENCE - Research: "Zero modulation, precise, stable pitch"
 		if "sequence" in instruments:
-			var step_samples = samples_per_chord / 16  # 16th notes
+			var step_samples = _idiv(samples_per_chord, 16)  # 16th notes
 			var seq_pattern = [0, 12, 7, 12, 0, 12, 7, 12, 0, 12, 7, 12, 5, 12, 7, 12]
 			
 			for step in range(16):
@@ -3686,7 +3689,7 @@ static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, ins
 		# MOOG LEAD - Research: "Bright filter 3500Hz, subtle vibrato 5Hz"
 		if "moog_lead" in instruments:
 			var lead_pattern = [0, 2, 4, 2, 0, -1, 0, 2]
-			var note_length = samples_per_chord / 8
+			var note_length = _idiv(samples_per_chord, 8)
 			
 			for n in range(8):
 				var start = n * note_length
@@ -3718,7 +3721,7 @@ static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, ins
 		
 		# MOTORIK DRUMS - Research: "Steady 4/4 with driving 8th-note hi-hats"
 		if "motorik_drums" in instruments:
-			var eighth_samples = samples_per_chord / 8
+			var eighth_samples = _idiv(samples_per_chord, 8)
 			
 			for beat in range(8):
 				var start = beat * eighth_samples
@@ -3784,28 +3787,28 @@ static func generate_gypsy_woman_house_song(parameters: Dictionary = {}) -> Audi
 	var intro = _generate_gypsy_house_section(progression, scale, ["drums"], bar_duration)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# Verse: Add bass and piano stabs
 	var verse = _generate_gypsy_house_section(progression, scale, ["drums", "bass", "piano_stab"], bar_duration)
 	playback.set_clip_stream(1, verse)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# Chorus: Full arrangement with pads
 	var chorus = _generate_gypsy_house_section(progression, scale, ["drums", "bass", "piano_stab", "pad"], bar_duration)
 	playback.set_clip_stream(2, chorus)
 	playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# Breakdown: Piano and pad only
 	var breakdown = _generate_gypsy_house_section([0, 2], scale, ["piano_stab", "pad"], bar_duration)
 	playback.set_clip_stream(3, breakdown)
 	playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 1)  # Back to verse
 	
 	var xfade = 1.0
@@ -3841,7 +3844,7 @@ static func _generate_gypsy_house_section(progression: Array, scale: Array, inst
 				var t = float(j) / SAMPLE_RATE
 				var beat_in_bar = int(fmod(j, bar_duration * SAMPLE_RATE) / beat_samples)
 				var sample_in_beat = j % beat_samples
-				var beat_t = float(sample_in_beat) / beat_samples
+				var _beat_t = float(sample_in_beat) / beat_samples
 				
 				# Kick on 1, 5, 9, 13 (4-on-floor)
 				if beat_in_bar % 4 == 0 and sample_in_beat < int(SAMPLE_RATE * 0.15):
@@ -3992,7 +3995,7 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		["gated_drums", "octave_bass", "synth_stab"], bar_duration, bpm, 0.7)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 1. VERSE
@@ -4000,7 +4003,7 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		["gated_drums", "octave_bass", "juno_pad", "synth_stab"], bar_duration, bpm, 0.8)
 	playback.set_clip_stream(1, verse)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 2. PRE-CHORUS: Build
@@ -4008,7 +4011,7 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		["gated_drums", "octave_bass", "juno_pad", "synth_stab", "hook_melody"], bar_duration, bpm, 0.9)
 	playback.set_clip_stream(2, pre)
 	playback.set_clip_name(2, "Pre-Chorus")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 3. CHORUS: Full energy
@@ -4016,7 +4019,7 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		["gated_drums", "octave_bass", "juno_pad", "synth_stab", "hook_melody", "string_hits"], bar_duration, bpm, 1.0)
 	playback.set_clip_stream(3, chorus)
 	playback.set_clip_name(3, "Chorus")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 4)
 	
 	# 4. OUTRO
@@ -4024,7 +4027,7 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		["gated_drums", "octave_bass", "synth_stab"], bar_duration, bpm, 0.7)
 	playback.set_clip_stream(4, outro)
 	playback.set_clip_name(4, "Outro")
-	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(4, 0)
 	
 	var xfade = 1.5
@@ -4057,7 +4060,7 @@ static func _generate_madonna_section(progression: Array, scale: Array, instrume
 		# === GATED DRUMS ===
 		# The defining 80s sound: tight kick, GATED REVERB snare, crisp hats
 		if "gated_drums" in instruments:
-			var sixteenth = samples_per_chord / 16
+			var sixteenth = _idiv(samples_per_chord, 16)
 			
 			for step in range(16):
 				var start = step * sixteenth
@@ -4113,7 +4116,7 @@ static func _generate_madonna_section(progression: Array, scale: Array, instrume
 		# Synth bass that jumps octaves - very 80s
 		if "octave_bass" in instruments:
 			var bass_freq = root_freq * 0.25
-			var eighth = samples_per_chord / 8
+			var eighth = _idiv(samples_per_chord, 8)
 			
 			for beat in range(8):
 				var start = beat * eighth
@@ -4200,7 +4203,7 @@ static func _generate_madonna_section(progression: Array, scale: Array, instrume
 		if "hook_melody" in instruments:
 			# Hooky pattern with call-response feel
 			var melody = [0, 2, 4, 2, 0, 0, 5, 4]  # Rising then falling
-			var eighth = samples_per_chord / 8
+			var eighth = _idiv(samples_per_chord, 8)
 			
 			for n in range(8):
 				var start = n * eighth
@@ -4285,14 +4288,14 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 	playback.clip_count = 5
 	playback.initial_clip = 0
 	
-	# Clear arc: Intro ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Verse ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Pre-Chorus ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Chorus ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Outro
+	# Clear arc: Intro ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Verse ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Pre-Chorus ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Chorus ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Outro
 	
 	# 0. INTRO: Pluck motif + beat hint (establish identity with energy)
 	var intro = _generate_pop_v2_section(progression, scale,
 		["pluck_motif", "shimmer_arp", "snap_beat"], bar_duration, bpm, 0.6)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 1. VERSE: Full groove
@@ -4300,7 +4303,7 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 		["pluck_motif", "sub_808", "full_beat", "sidechain_pad"], bar_duration, bpm, 0.75)
 	playback.set_clip_stream(1, verse)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 2. PRE-CHORUS: Build tension
@@ -4308,7 +4311,7 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 		["pluck_motif", "sub_808", "full_beat", "sidechain_pad", "shimmer_arp", "vocal_chop"], bar_duration, bpm, 0.85)
 	playback.set_clip_stream(2, pre)
 	playback.set_clip_name(2, "Pre-Chorus")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 3. CHORUS: Full energy
@@ -4316,7 +4319,7 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 		["pluck_motif", "sub_808", "full_beat", "sidechain_pad", "shimmer_arp", "synth_lead", "vocal_chop"], bar_duration, bpm, 1.0)
 	playback.set_clip_stream(3, chorus)
 	playback.set_clip_name(3, "Chorus")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 4)
 	
 	# 4. OUTRO: Return to intro energy (loop seam)
@@ -4324,7 +4327,7 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 		["pluck_motif", "shimmer_arp", "snap_beat"], bar_duration, bpm, 0.6)
 	playback.set_clip_stream(4, outro)
 	playback.set_clip_name(4, "Outro")
-	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(4, 0)
 	
 	var xfade = 2.0
@@ -4367,7 +4370,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 		# Identity token: clean digital pluck with signature rhythm
 		# Frequency: mid (500-2kHz)
 		if "pluck_motif" in instruments:
-			var sixteenth = samples_per_chord / 16
+			var sixteenth = _idiv(samples_per_chord, 16)
 			# Signature rhythm pattern (recognizable)
 			var pattern = [1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1]
 			var note_offsets = [0, 0, 4, 4, 7, 0, 0, 4, 7, 7, 4, 4, 0, 0, 7, 4]
@@ -4399,7 +4402,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 		# === SHIMMER ARP ===
 		# Frequency: high (4-8kHz) - "air" band, sparkle
 		if "shimmer_arp" in instruments:
-			var eighth = samples_per_chord / 8
+			var eighth = _idiv(samples_per_chord, 8)
 			var arp_notes = [0, 4, 7, 12, 7, 4, 0, 4]  # Up and down
 			
 			for step in range(8):
@@ -4506,7 +4509,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 		if "synth_lead" in instruments:
 			# -100 = rest, sparse pattern (modern pop has space)
 			var lead_pattern = [0, -100, 4, -100, 7, 4, -100, 0]
-			var note_samples = samples_per_chord / 8
+			var note_samples = _idiv(samples_per_chord, 8)
 			
 			for n in range(8):
 				var start = n * note_samples
@@ -4542,7 +4545,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 		# === SNAP BEAT ===
 		# Punchy: kick + snaps + offbeat hats (upbeat feel)
 		if "snap_beat" in instruments:
-			var sixteenth = samples_per_chord / 16
+			var sixteenth = _idiv(samples_per_chord, 16)
 			
 			for step in range(16):
 				var start = step * sixteenth
@@ -4582,7 +4585,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 		# === FULL BEAT ===
 		# Driving, energetic beat for verse/chorus
 		if "full_beat" in instruments:
-			var sixteenth = samples_per_chord / 16
+			var sixteenth = _idiv(samples_per_chord, 16)
 			
 			for step in range(16):
 				var start = step * sixteenth
@@ -4658,14 +4661,14 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 	playback.initial_clip = 0
 	
 	# Section design for clear ARC:
-	# Intro (sparse) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Build (add rhythm) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Peak (full + lead) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Release ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Loop-friendly outro
+	# Intro (sparse) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Build (add rhythm) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Peak (full + lead) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Release ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Loop-friendly outro
 	
 	# 0. INTRO: Mellotron pad + motif hint (sparse, establish identity)
 	var intro = _generate_prog_v2_section(progression, scale, 
 		["mellotron_pad", "motif_bell"], bar_duration, bpm, motif_interval, 0.4)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 1. BUILD: Add bass + motorik (energy rises)
@@ -4673,7 +4676,7 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 		["mellotron_pad", "moog_bass_v2", "motorik_v2", "motif_bell"], bar_duration, bpm, motif_interval, 0.6)
 	playback.set_clip_stream(1, build)
 	playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 2. PEAK: Full arrangement with sequence + lead (climax)
@@ -4681,7 +4684,7 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 		["mellotron_pad", "moog_bass_v2", "arp_sequence", "prog_lead", "motorik_v2"], bar_duration, bpm, motif_interval, 1.0)
 	playback.set_clip_stream(2, peak)
 	playback.set_clip_name(2, "Peak")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 3. RELEASE: Pull back to pad + bass (tension release)
@@ -4689,7 +4692,7 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 		["mellotron_pad", "moog_bass_v2", "motif_bell"], bar_duration, bpm, motif_interval, 0.5)
 	playback.set_clip_stream(3, release)
 	playback.set_clip_name(3, "Release")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 4)
 	
 	# 4. OUTRO: Match intro energy (loop-friendly seam)
@@ -4697,7 +4700,7 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 		["mellotron_pad", "motif_bell"], bar_duration, bpm, motif_interval, 0.4)
 	playback.set_clip_stream(4, outro)
 	playback.set_clip_name(4, "Outro")
-	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(4, 0)
 	
 	# Long crossfades for prog feel
@@ -4846,7 +4849,7 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 		# Frequency: presence range (2-4kHz) - clarity without VO conflict
 		# 16th notes, filter movement, recognizable pattern
 		if "arp_sequence" in instruments:
-			var step_samples = samples_per_chord / 16
+			var step_samples = _idiv(samples_per_chord, 16)
 			# Pattern: root, 5th, octave, 5th (ascending feel)
 			var seq_offsets = [0, 7, 12, 7, 0, 7, 12, 7, 0, 7, 12, 7, 5, 7, 12, 7]
 			
@@ -4879,7 +4882,7 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 		# Prog uses bigger intervals: 4ths, 5ths, octaves
 		if "prog_lead" in instruments:
 			var lead_pattern = [0, 5, 7, 5, 0, 4, 7, 12]  # Modal, uses 4ths/5ths
-			var note_samples = samples_per_chord / 8
+			var note_samples = _idiv(samples_per_chord, 8)
 			var prev_freq = chord_freqs[0] * 2.0
 			
 			for n in range(8):
@@ -4923,10 +4926,10 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 		# Frequency: sub (kick), presence (snare), air (hats)
 		# Research: 4/4 kick, 8th hats (driving), humanized
 		if "motorik_v2" in instruments:
-			var eighth_samples = samples_per_chord / 8
+			var eighth_samples = _idiv(samples_per_chord, 8)
 			
 			for beat in range(8):
-				# Humanize timing (Ãƒâ€šÃ‚Â±5ms - less than other genres, prog is tighter)
+				# Humanize timing (ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±5ms - less than other genres, prog is tighter)
 				var humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.005)
 				var start = beat * eighth_samples + humanize
 				start = clampi(start, 0, samples_per_chord - 1)
@@ -4981,7 +4984,7 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 # === K-POP PROG REMIX ===
 # 70s Progressive Rock (ELP, Kraftwerk, Yes) meets K-Pop (BTS, BLACKPINK, aespa)
 # CONSTANT BEAT - groove NEVER stops, same kick/snare throughout
-# Key modulation: Em ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ G major (lift) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Fm (climax) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ loops
+# Key modulation: Em ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ G major (lift) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Fm (climax) ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ loops
 # Research: ada_the_research/music_tracks/kpop_prog_remix.md
 static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
 	parameters = _merge_with_song_research_parameters("kpop_prog_remix", parameters)
@@ -4999,7 +5002,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 	var main_prog = [0, 5, 3, 4]  # i - VI - iv - V
 	var lift_prog = [0, 2, 5, 4]  # Ascending feel
 	
-	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ G ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Fm")
+	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ G ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Fm")
 	
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -5014,7 +5017,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 		["constant_beat", "kraftwerk_seq"], bar_duration, bpm, 0.7)
 	playback.set_clip_stream(0, intro)
 	playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
 	# 1. VERSE: Beat + mellotron + bass (Em)
@@ -5022,7 +5025,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 		["constant_beat", "mellotron_kpop", "sub_808"], bar_duration, bpm, 0.8)
 	playback.set_clip_stream(1, verse)
 	playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(1, 2)
 	
 	# 2. CHORUS: Beat + supersaw + bass + stabs (G major - KEY CHANGE 1)
@@ -5030,7 +5033,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 		["constant_beat", "supersaw_kpop", "sub_808", "chant_stab", "kraftwerk_seq"], bar_duration, bpm, 1.0)
 	playback.set_clip_stream(2, chorus)
 	playback.set_clip_name(2, "Chorus (G)")
-	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(2, 3)
 	
 	# 3. KILL PART: Beat + Moog lead (Em - resolves back)
@@ -5038,7 +5041,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 		["constant_beat", "neomoog_lead", "sub_808", "kraftwerk_seq"], bar_duration, bpm, 1.0)
 	playback.set_clip_stream(3, kill_part)
 	playback.set_clip_name(3, "Kill Part")
-	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(3, 4)
 	
 	# 4. FINAL: Beat + everything (Fm - KEY CHANGE 2, half step up)
@@ -5046,7 +5049,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 		["constant_beat", "supersaw_kpop", "sub_808", "chant_stab", "neomoog_lead"], bar_duration, bpm, 1.1)
 	playback.set_clip_stream(4, final_chorus)
 	playback.set_clip_name(4, "Final (Fm)")
-	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(4, 0)  # Loops back to intro
 	
 	# Tight crossfades (beat continuous)
@@ -5233,7 +5236,7 @@ static func _generate_kpop_prog_section(progression: Array, scale: Array, instru
 			# Offbeat hi-hats (Kraftwerk signature)
 			for beat in range(8):
 				if beat % 2 == 1:
-					var start = int(beat * beat_samples / 2)
+					var start = _idiv(beat * beat_samples, 2)
 					for j in range(min(int(SAMPLE_RATE * 0.03), samples_per_chord - start)):
 						var ht = float(j) / SAMPLE_RATE
 						var hat = (randf() - 0.5) * exp(-ht * 60.0)
@@ -5267,7 +5270,7 @@ static func _generate_kpop_prog_section(progression: Array, scale: Array, instru
 			
 			# HI-HATS: Steady 8ths with offbeat accent - constant pulse
 			for eighth in range(8):
-				var start = int(eighth * beat_samples / 2)
+				var start = _idiv(eighth * beat_samples, 2)
 				var is_offbeat = eighth % 2 == 1
 				var hat_vol = 0.12 if is_offbeat else 0.08  # Offbeat accent
 				for j in range(min(int(SAMPLE_RATE * 0.03), samples_per_chord - start)):
@@ -5363,8 +5366,8 @@ static func _generate_kpop_prog_section(progression: Array, scale: Array, instru
 			var prev_freq = root_freq * 2.0
 			
 			for note_idx in range(melody_notes.size()):
-				var note_start = int(note_idx * samples_per_chord / melody_notes.size())
-				var note_samples = int(samples_per_chord / melody_notes.size())
+				var note_start = _idiv(note_idx * samples_per_chord, melody_notes.size())
+				var note_samples = _idiv(samples_per_chord, melody_notes.size())
 				var target_freq = root_freq * 2.0 * pow(2.0, melody_notes[note_idx] / 12.0)
 				
 				for j in range(note_samples):
@@ -5931,7 +5934,7 @@ static func generate_sound(type: SoundType, duration: float = 1.0, parameters: D
 	return _create_audio_stream(data)
 
 static func _generate_basic_sine_wave(data: PackedFloat32Array, sample_count: int):
-	# Simple sine wave: amplitude * sin(2ÃƒÂÃ¢â€šÂ¬ * frequency * time)
+	# Simple sine wave: amplitude * sin(2ÃƒÆ’Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ * frequency * time)
 	var frequency = 440.0  # A4 note
 	var amplitude = 0.3
 	
@@ -6017,7 +6020,7 @@ static func _generate_ghost_drone(data: PackedFloat32Array, sample_count: int):
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Multiple frequency layers
 		var freq1 = 110.0
@@ -6349,7 +6352,7 @@ static func _generate_ambient_amiga_drone(data: PackedFloat32Array, sample_count
 	# Multi-layered ambient drone with slow modulation and detuning
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Three frequency layers
 		var freq1 = 45.0   # Fundamental
@@ -7370,7 +7373,7 @@ static func _create_stereo_audio_stream(data_stereo: PackedFloat32Array, loop_mo
 	stream.stereo = true
 	stream.loop_mode = loop_mode
 	
-	var frame_count = data_stereo.size() / 2
+	var frame_count = _idiv(data_stereo.size(), 2)
 	stream.loop_begin = 0
 	stream.loop_end = frame_count
 	
@@ -7416,9 +7419,9 @@ static func generate_and_save_all_sounds():
 		var file_path = script_path + sound_name + ".tres"
 		var save_result = ResourceSaver.save(sounds[sound_name], file_path)
 		if save_result == OK:
-			print("  ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Saved: %s" % file_path)
+			print("  ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ Saved: %s" % file_path)
 		else:
-			print("  ÃƒÂ¢Ã‚ÂÃ…â€™ Failed to save: %s (Error: %d)" % [file_path, save_result])
+			print("  ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€¦Ã¢â‚¬â„¢ Failed to save: %s (Error: %d)" % [file_path, save_result])
 	
 	print("AudioSynthesizer: All sounds generated and saved as .tres resources to res://commons/audio/!")
 
@@ -7566,7 +7569,7 @@ static func _generate_sci_fi_resonant_drone(data: PackedFloat32Array, sample_cou
 	# Evolving metallic swells using FM synthesis
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# FM Synthesis
 		var carrier_freq = 110.0
@@ -7799,7 +7802,7 @@ static func _generate_industrial_anvil(data: PackedFloat32Array, sample_count: i
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Very fast decay
 		var decay = exp(-t * 15.0)
@@ -7874,7 +7877,7 @@ static func _generate_ethnic_tabla(data: PackedFloat32Array, sample_count: int):
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Trigger pattern: repeating 7/8 feel
 		var pattern_len = 0.4  # ~150 BPM
@@ -7909,7 +7912,7 @@ static func _generate_gamelan_bell(data: PackedFloat32Array, sample_count: int):
 	# Characteristic: slow beating between detuned partials, long sustain
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var base = 523.25  # C5
 		
@@ -8190,7 +8193,7 @@ static func _generate_lab_hum(data: PackedFloat32Array, sample_count: int):
 	# More industrial than the sci-fi clean version
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Mains hum foundation (60Hz for US, could be 50Hz for EU)
 		var mains = sin(2.0 * PI * 60.0 * t) * 0.4
@@ -8278,7 +8281,7 @@ static func _generate_xenakis_stochastic(data: PackedFloat32Array, sample_count:
 	var cluster_size = int(params.get("cluster_density", 8.0))
 	var spread_cents = params.get("cluster_spread_cents", 50.0)
 	var event_rate = params.get("event_density", 3.0)
-	var gliss_prob = params.get("glissando_probability", 0.3)
+	var _gliss_prob = params.get("glissando_probability", 0.3)
 	
 	# Generate cluster frequencies using Gaussian distribution
 	var cluster_freqs: Array[float] = []
@@ -8369,19 +8372,19 @@ static func _generate_spiegel_intelligent(data: PackedFloat32Array, sample_count
 			for v in range(num_voices):
 				var current = voice_notes[v]
 				var target_degree = randi() % scale.size()
-				var target = root_midi + scale[target_degree] + ((current - root_midi) / 12) * 12
+				var target = root_midi + scale[target_degree] + _idiv(current - root_midi, 12) * 12
 				
 				# Prefer stepwise motion based on smoothness
 				if randf() < smoothness:
 					var step = 1 if randf() > 0.5 else -1
 					var new_degree = (scale.find((current - root_midi) % 12) + step) % scale.size()
 					if new_degree >= 0:
-						target = root_midi + scale[new_degree] + ((current - root_midi) / 12) * 12
+						target = root_midi + scale[new_degree] + _idiv(current - root_midi, 12) * 12
 				
 				voice_notes[v] = target
 		
 		# Generate audio for each voice
-		var phase_in_chord = (t - last_chord_time) / chord_duration
+		var _phase_in_chord = (t - last_chord_time) / chord_duration
 		for v in range(num_voices):
 			var freq = 440.0 * pow(2.0, (voice_notes[v] - 69.0) / 12.0)
 			
@@ -8597,7 +8600,7 @@ static func _generate_cellular_automata(data: PackedFloat32Array, sample_count: 
 	var cells: Array[int] = []
 	for j in range(grid_width):
 		cells.append(0)
-	cells[grid_width / 2] = 1  # Seed in middle
+	cells[_idiv(grid_width, 2)] = 1  # Seed in middle
 	
 	var gen_duration = 1.0 / evo_rate
 	var current_gen = 0
@@ -8627,7 +8630,7 @@ static func _generate_cellular_automata(data: PackedFloat32Array, sample_count: 
 				# Trigger note if cell turns on
 				if new_state == 1 and cells[j] == 0:
 					var scale_degree = j % scale.size()
-					var octave = j / scale.size()
+					var octave = _idiv(j, scale.size())
 					var midi = root_midi + scale[scale_degree] + octave * 12
 					var freq = 440.0 * pow(2.0, (midi - 69.0) / 12.0)
 					active_notes.append([freq, t, note_dur])
@@ -8717,7 +8720,7 @@ static func _generate_prophet_pad(data: PackedFloat32Array, sample_count: int, p
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var output = 0.0
 		for interval in chord:
@@ -9174,7 +9177,7 @@ static func _generate_cinematic_strings(data: PackedFloat32Array, sample_count: 
 static func _generate_industrial_clank(data: PackedFloat32Array, sample_count: int, params: Dictionary):
 	# Metal factory hit - FM synthesis metallic percussion
 	var pitch = params.get("pitch", 150.0)
-	var mod_ratio = params.get("mod_ratio", 1.414)  # ÃƒÂ¢Ã‹â€ Ã…Â¡2 for metallic inharmonic
+	var mod_ratio = params.get("mod_ratio", 1.414)  # ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â Ãƒâ€¦Ã‚Â¡2 for metallic inharmonic
 	var mod_index = params.get("mod_index", 8.0)
 	var decay = params.get("decay", 6.0)
 	
@@ -9232,7 +9235,7 @@ static func _generate_rain_atmosphere(data: PackedFloat32Array, sample_count: in
 
 
 static func _generate_wavetable_morph(data: PackedFloat32Array, sample_count: int, params: Dictionary):
-	# Slowly evolving wavetable - sine ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ triangle ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ saw ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ square
+	# Slowly evolving wavetable - sine ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ triangle ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ saw ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ square
 	var root_midi = int(params.get("root_note", 55.0))
 	var morph_rate = params.get("morph_rate", 0.1)  # Hz
 	

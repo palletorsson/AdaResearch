@@ -4,9 +4,9 @@ class_name SnapLine
 ## Dynamic line that connects two snap points
 ## Updates geometry in real-time as points move
 
-@export var line_thickness: float = 0.003
-@export var line_color: Color = Color(0.8, 0.5, 1.0, 1.0)  # Purple-ish
-@export var emission_strength: float = 1.5
+@export var line_thickness: float = 0.005
+@export var line_color: Color = Color(0.1, 0.7, 0.9, 0.9)  # Alyx-style cyan hologram
+@export var emission_strength: float = 2.0
 
 # The two snap points this line connects
 var point_a: Node3D = null
@@ -33,12 +33,11 @@ func _create_line_mesh() -> void:
 	
 	_mesh_instance.mesh = _cylinder_mesh
 	
-	# Create material (transparent and emissive)
+	# Create material (Alyx-style holographic)
 	var material = StandardMaterial3D.new()
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.albedo_color = Color(line_color.r, line_color.g, line_color.b, 0.5)  # 50% transparent
-	material.metallic = 0.6
-	material.roughness = 0.2
+	material.albedo_color = line_color
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.emission_enabled = true
 	material.emission = line_color
 	material.emission_energy_multiplier = emission_strength

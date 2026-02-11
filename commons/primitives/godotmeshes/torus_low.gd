@@ -1,4 +1,4 @@
-# torus_low.gd - Low poly torus (8 ring segments, 6 radial segments)
+# torus_low.gd - Low poly torus with visible triangular structure
 extends MeshInstance3D
 
 func _ready():
@@ -10,6 +10,10 @@ func _ready():
 
 	mesh = torus_mesh
 
-	# Apply grid material
+	# Apply grid material with contrasting wireframe for visible segments
 	const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
-	material_override = GridMaterialFactory.make(Color(0.5, 0.3, 0.9), {})
+	material_override = GridMaterialFactory.make(Color(0.4, 0.2, 0.6), {
+		"wireframe_color": Color(1.0, 0.9, 0.7),  # Light yellow wireframe
+		"wireframe_width": 3.0,
+		"wireframe_brightness": 3.5
+	})

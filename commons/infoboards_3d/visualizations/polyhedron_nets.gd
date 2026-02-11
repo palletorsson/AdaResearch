@@ -246,11 +246,5 @@ func _parse_bool(value) -> bool:
 	return text == "true" or text == "1" or text == "yes" or text == "on"
 
 func add_fold_line_labels():
-	# Add a label explaining this is a net
-	var label = Label3D.new()
-	label.text = net_type.capitalize() + " Net (fold along edges)"
-	label.font_size = 12
-	label.outline_size = 3
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 0.1, -1.0)
-	add_child(label)
+	# Title removed for cleaner VR presentation
+	pass

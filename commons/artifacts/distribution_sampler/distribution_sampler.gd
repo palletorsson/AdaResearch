@@ -101,13 +101,16 @@ func _create_axis_line(start: Vector3, end: Vector3):
 	
 	line.position = (start + end) / 2
 	var direction = end - start
+	
+	# Add to tree first so look_at can use global_position
+	add_child(line)
+	
 	if direction.length() > 0.001:
 		var up = Vector3.UP
 		if abs(direction.normalized().dot(up)) > 0.99:
 			up = Vector3.FORWARD
 		line.look_at(line.global_position + direction, up)
 		line.rotate_object_local(Vector3.RIGHT, PI/2)
-	add_child(line)
 
 func _create_bars():
 	var bar_width = display_width / float(num_bins)

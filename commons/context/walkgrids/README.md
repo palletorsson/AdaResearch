@@ -38,6 +38,16 @@ Transform abstract mathematical concepts into tangible, walkable 3D worlds where
 - **Constant balance challenges** - nowhere feels stable or "normal"
 - Walk through pure mathematical entropy where all order breaks down
 
+### **🧠 Knowledge Terrain - The Meta-Layer**
+*The curriculum itself rendered as walkable landscape*
+- **Concepts as peaks** - each sequence/map creates a hill in the terrain
+- **QFEP phases as elevation** - later phases (synthesis) are highest peaks
+- **Category neighborhoods** - Primitives cluster together, separate from Algorithms
+- **The structure of understanding** - paths between concepts are literal paths
+- Walk through the topology of knowledge; the ground IS what Claude knows
+
+*"The ground you walk on is shaped by what humanity wrote down."*
+
 ---
 
 ## 🛠️ **Technical Implementation**

@@ -170,8 +170,6 @@ static func _render_track_6(layer: String) -> AudioStreamWAV:
 		
 	return _create_wav(data)
 
-	return _create_wav(data)
-
 # TRACK 2: Interdimensional (Stems: mix, wave, blips)
 static func _render_track_2(layer: String) -> AudioStreamWAV:
 	var frames = int(PREVIEW_DURATION * PREVIEW_RATE)
@@ -274,8 +272,6 @@ static func _render_track_5(layer: String) -> AudioStreamWAV:
 			
 		_write_sample(data, i, l_sum, r_sum)
 		
-	return _create_wav(data)
-
 	return _create_wav(data)
 
 # TRACK 3: Foundry (Stems: mix, drone, hits)

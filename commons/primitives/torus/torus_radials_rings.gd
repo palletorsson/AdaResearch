@@ -6,9 +6,10 @@ extends Node3D
 
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 
-@export var base_color: Color = Color(0.9, 0.4, 0.4)  # Coral red
-@export var rings: int = 16  # Divisions around the main torus circle
-@export var ring_segments: int = 8  # Divisions around the tube cross-section
+@export var base_color: Color = Color(0.7, 0.3, 0.5)  # Dark magenta (not pure red)
+@export var wireframe_color: Color = Color(1.0, 1.0, 1.0)  # White wireframe for contrast
+@export var rings: int = 24  # Higher divisions for visible triangular structure
+@export var ring_segments: int = 12  # More tube segments
 @export var inner_radius: float = 0.3  # Radius of the hole (distance from center to tube center)
 @export var outer_radius: float = 0.5  # Outer radius (inner_radius + tube_radius)
 
@@ -68,7 +69,12 @@ func _build_torus() -> void:
 	_mesh_instance = MeshInstance3D.new()
 	_mesh_instance.mesh = torus_mesh
 	_mesh_instance.name = "TorusMesh"
-	_mesh_instance.material_override = GridMaterialFactory.make(base_color)
+	# Use distinct wireframe color for visible triangular structure
+	_mesh_instance.material_override = GridMaterialFactory.make(base_color, {
+		"wireframe_color": wireframe_color,
+		"wireframe_width": 2.5,
+		"wireframe_brightness": 3.0
+	})
 	add_child(_mesh_instance)
 
 	# Add collision (approximate with multiple capsules or use convex)

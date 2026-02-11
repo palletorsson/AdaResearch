@@ -242,7 +242,7 @@ static func generate_custom_basic_sine_wave(data: PackedFloat32Array, sample_cou
 	var fade_in_time = params.get("fade_in_time", 0.05)
 	var fade_out_time = params.get("fade_out_time", 0.05)
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -300,7 +300,7 @@ static func generate_custom_teleport_drone(data: PackedFloat32Array, sample_coun
 	
 	print("[SYNTH] TELEPORT DRONE GENERATING with wave_type: %s" % wave_type)
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -735,11 +735,11 @@ static func generate_custom_dark_808_sub_bass(data: PackedFloat32Array, sample_c
 	
 	print("[SYNTH] DARK 808 SUB BASS GENERATING with slow modulation")
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Slow frequency modulation for movement
 		var mod_wave = sin(2.0 * PI * modulation_freq * t)
@@ -950,7 +950,7 @@ static func generate_custom_dx7_electric_piano(data: PackedFloat32Array, sample_
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Modulator envelope (controls FM index)
 		var mod_envelope = 1.0
@@ -1015,7 +1015,7 @@ static func generate_custom_c64_sid_lead(data: PackedFloat32Array, sample_count:
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Vibrato
 		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
@@ -1098,7 +1098,7 @@ static func generate_custom_amiga_mod_sample(data: PackedFloat32Array, sample_co
 		
 		# Simple looping with crossfade
 		var loop_start_sample = loop_start * sample_count
-		var loop_end_sample = loop_start_sample + loop_length * sample_count
+		var _loop_end_sample = loop_start_sample + loop_length * sample_count
 		
 		if progress > loop_start and progress < (loop_start + loop_length):
 			# We're in the loop section - add slight modulation
@@ -1128,7 +1128,7 @@ static func generate_custom_ppg_wave_pad(data: PackedFloat32Array, sample_count:
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Wavetable position (morphing between waveforms)
 		var base_freq = 220.0
@@ -1219,7 +1219,7 @@ static func generate_custom_jupiter_8_strings(data: PackedFloat32Array, sample_c
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Multiple oscillators for richness
 		var wave = 0.0
@@ -1271,7 +1271,7 @@ static func generate_custom_korg_m1_piano(data: PackedFloat32Array, sample_count
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Digital piano harmonics
 		var wave = 0.0
@@ -1831,7 +1831,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var global_progress = t / duration
+		var _global_progress = t / duration
 		
 		# Current chord
 		var chord_index = int(t / chord_duration) % chord_sequence.size()
@@ -2005,7 +2005,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 	
 	# Mathematical constants and sequences
 	var golden_ratio = 1.618033988749
-	var euler_number = 2.718281828459
+	var _euler_number = 2.718281828459
 	var pi_constant = 3.141592653589
 	
 	# Generate mathematical sequences based on pattern
@@ -2047,7 +2047,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		[7, 11, 14]     # V - Major fifth
 	]
 	var progression_length = 4.0  # 4 seconds per chord
-	var beats_per_chord = 8  # 8 beats per chord change
+	var _beats_per_chord = 8  # 8 beats per chord change
 	
 	# Initialize feedback delay lines for complex modular routing
 	var feedback_buffers = []
@@ -2074,7 +2074,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		
 		# Beat timing for rhythmic elements
 		var beat_rate = 2.0  # 2 beats per second (120 BPM)
-		var beat_time = fmod(t * beat_rate, 1.0)
+		var _beat_time = fmod(t * beat_rate, 1.0)
 		var is_strong_beat = int(t * beat_rate) % 4 == 0  # Strong beat every 4 beats
 		
 		# Complex LFO network with tempo sync
@@ -2180,7 +2180,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 				var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
 				var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
 				var release_samples = release * AudioSynthesizer.SAMPLE_RATE
-				var total_samples = attack_samples + decay_samples + release_samples
+				var _total_samples = attack_samples + decay_samples + release_samples
 				
 				if i < attack_samples:
 					filter_env = float(i) / attack_samples
@@ -2191,7 +2191,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 					filter_env = sustain
 			"multi_stage":
 				# Complex envelope with multiple stages
-				var stage_duration = duration / 5.0
+				var _stage_duration = duration / 5.0
 				var stage = int(global_progress * 5.0)
 				var stage_progress = fmod(global_progress * 5.0, 1.0)
 				match stage:
@@ -2284,8 +2284,8 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 		# Sample rate reduction
 		if sample_rate_reduction > 0.0:
 			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_reduction * 0.9)
-			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
-			if int(i / sample_step) != int((i - 1) / sample_step):
+			var sample_step = float(AudioSynthesizer.SAMPLE_RATE) / reduced_rate
+			if int(float(i) / sample_step) != int(float(i - 1) / sample_step):
 				# Keep current sample
 				pass
 			else:
@@ -2421,12 +2421,12 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var global_progress = t / duration
+		var _global_progress = t / duration
 		
 		# Current chord progression
 		var chord_duration = 4.0  # 4 seconds per chord
 		var chord_index = int(t / chord_duration) % chord_progression.size()
-		var chord_progress = fmod(t / chord_duration, 1.0)
+		var _chord_progress = fmod(t / chord_duration, 1.0)
 		var current_chord = chord_progression[chord_index]
 		
 		# Beat timing with swing
@@ -2447,7 +2447,7 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		# Sample chopping simulation
 		var chop_rate = float(chop_density) / 4.0  # Chops per beat
 		var chop_time = fmod(t * chop_rate, 1.0)
-		var chop_index = int(t * chop_rate) % 64
+		var _chop_index = int(t * chop_rate) % 64
 		
 		# LFO with chaos
 		var lfo_base = sin(2.0 * PI * lfo_rate * t)
@@ -2548,8 +2548,8 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		# Sample rate reduction
 		if sample_rate_redux > 0.0:
 			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_redux * 0.8)
-			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
-			if int(i / sample_step) == int((i - 1) / sample_step):
+			var sample_step = float(AudioSynthesizer.SAMPLE_RATE) / reduced_rate
+			if int(float(i) / sample_step) == int(float(i - 1) / sample_step):
 				# Hold previous sample
 				pass
 		
@@ -2636,7 +2636,7 @@ static func generate_custom_heartbeat(data: PackedFloat32Array, sample_count: in
 	var amplitude = params.get("amplitude", 0.4)
 	var depth = params.get("depth", 0.8)
 
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var beat_interval = 60.0 / bpm  # Time between heartbeats
 
 	# Heartbeat frequencies - low thump
@@ -2696,7 +2696,7 @@ static func generate_custom_lab_hum(data: PackedFloat32Array, sample_count: int,
 	var amplitude = params.get("amplitude", 0.25)
 	var mod_depth = params.get("mod_depth", 0.3)
 
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 
 	# Multiple harmonic layers for rich lab ambience
 	var harmonics = [1.0, 2.0, 3.0, 5.0]  # Fundamental + harmonics
@@ -2843,7 +2843,7 @@ static func generate_custom_wobble_bass(data: PackedFloat32Array, sample_count: 
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# LFO for wobble (sine or triangle based on depth)
 		var lfo = sin(2.0 * PI * wobble_rate * t)
@@ -2969,7 +2969,7 @@ static func generate_custom_sub_bass_sine(data: PackedFloat32Array, sample_count
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Pitch drop (808-style)
 		var current_freq = freq
@@ -3022,7 +3022,7 @@ static func generate_custom_distorted_bass(data: PackedFloat32Array, sample_coun
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Main oscillator - saw for harmonics
 		var saw = 2.0 * fmod(freq * t, 1.0) - 1.0
@@ -3091,7 +3091,7 @@ static func generate_custom_juno_bass(data: PackedFloat32Array, sample_count: in
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Main oscillator - sawtooth
 		var saw = 2.0 * fmod(freq * t, 1.0) - 1.0
@@ -3166,7 +3166,7 @@ static func generate_custom_minimoog_bass(data: PackedFloat32Array, sample_count
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Oscillator 1
 		var osc1 = 0.0
@@ -3263,7 +3263,7 @@ static func generate_custom_sh101_bass(data: PackedFloat32Array, sample_count: i
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Portamento/glide
 		if t < glide_time:
@@ -3350,7 +3350,7 @@ static func generate_custom_prophet_bass(data: PackedFloat32Array, sample_count:
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Poly-mod LFO (Prophet-5 characteristic)
 		var poly_mod = sin(2.0 * PI * poly_mod_rate * t) * poly_mod_amount
@@ -3421,7 +3421,7 @@ static func generate_custom_upright_bass(data: PackedFloat32Array, sample_count:
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# String vibration (Karplus-Strong inspired)
 		var string_wave = sin(2.0 * PI * freq * t)
@@ -3491,7 +3491,7 @@ static func generate_custom_slap_bass(data: PackedFloat32Array, sample_count: in
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Slap transient (bright, percussive)
 		var slap = 0.0
@@ -3563,7 +3563,7 @@ static func generate_custom_picked_bass(data: PackedFloat32Array, sample_count: 
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Pick attack noise
 		var pick_noise = 0.0
@@ -3698,7 +3698,7 @@ static func generate_custom_open_hihat(data: PackedFloat32Array, sample_count: i
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Metallic oscillator component (6 oscillators at inharmonic ratios)
 		var metallic_wave = 0.0
@@ -3751,7 +3751,7 @@ static func generate_custom_snare_acoustic(data: PackedFloat32Array, sample_coun
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# 1. BODY - Pitched sine/triangle with slight pitch drop
 		var body_pitch_env = 1.0 + exp(-t * 40.0) * 0.3  # Pitch drops quickly at start
@@ -4263,7 +4263,7 @@ static func generate_custom_fm_bell(data: PackedFloat32Array, sample_count: int,
 	var brightness = params.get("brightness", 0.7)
 	var amplitude = params.get("amplitude", 0.4)
 	
-	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var _duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var modulator_freq = freq * mod_ratio
 	
 	for i in range(sample_count):
@@ -4375,7 +4375,7 @@ static func generate_custom_portamento_lead(data: PackedFloat32Array, sample_cou
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var current_freq = start_freq
 		if i < glide_samples:
@@ -4452,7 +4452,7 @@ static func generate_custom_vocal_formant(data: PackedFloat32Array, sample_count
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
 		var mod_freq = freq * (1.0 + vibrato)
@@ -4467,7 +4467,7 @@ static func generate_custom_vocal_formant(data: PackedFloat32Array, sample_count
 		for f in range(current_formants.size()):
 			var formant_freq = current_formants[f]
 			var bandwidth = formant_freq * 0.1
-			var formant_response = sin(2.0 * PI * formant_freq * t)
+			var _formant_response = sin(2.0 * PI * formant_freq * t)
 			var distance = abs(mod_freq - formant_freq)
 			var resonance = exp(-distance / bandwidth) * formant_weights[f]
 			filtered += source * resonance
@@ -4720,7 +4720,7 @@ static func generate_custom_distorted_lead(data: PackedFloat32Array, sample_coun
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
 		var mod_freq = freq * (1.0 + vibrato)
@@ -4790,7 +4790,7 @@ static func generate_custom_bitcrushed_lead(data: PackedFloat32Array, sample_cou
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
 		var mod_freq = freq * (1.0 + vibrato)

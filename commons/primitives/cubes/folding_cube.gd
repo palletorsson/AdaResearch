@@ -12,7 +12,7 @@ signal fold_progress_changed(progress: float)
 
 enum FoldState { FLAT, FOLDING, FOLDED, UNFOLDING }
 
-@export var face_size: float = 0.5:
+@export var face_size: float = 0.35:  # Smaller for stacking
 	set(v):
 		face_size = v
 		_rebuild()
@@ -51,7 +51,12 @@ enum FoldState { FLAT, FOLDING, FOLDED, UNFOLDING }
 		if auto_fold and _state == FoldState.FLAT:
 			animate_fold()
 
+@export var convert_to_rigidbody: bool = true  # Convert to physics object after folding
+@export var spawn_new_on_complete: bool = true  # Spawn a new folding cube for stacking
+@export var drop_height: float = 0.3  # How high above the fold position to drop from
+
 var _state: FoldState = FoldState.FLAT
+var _spawned_cubes: Array[RigidBody3D] = []  # Track spawned rigid cubes
 var _faces: Dictionary = {}  # name -> MeshInstance3D
 var _hinges: Dictionary = {}  # name -> Node3D (pivot point)
 var _material: StandardMaterial3D
@@ -197,9 +202,14 @@ func _apply_fold() -> void:
 		_hinges["right"].rotation.z = -angle
 	
 	# Back folds from right (after right has folded)
-	# It needs to fold 90° more to close the cube
+	# It needs to fold 90° more to close the cube (total 180° relative to flat)
+	# This "tucks" the back face under/inside the forming cube
 	if _hinges.has("back"):
-		_hinges["back"].rotation.z = -angle
+		_hinges["back"].rotation.z = -angle  # First 90° with right
+		# Add additional fold to tuck under (completes the cube closure)
+		if fold_progress > 0.5:
+			var extra_fold = (fold_progress - 0.5) * 2.0 * PI / 2.0  # Extra 90° in second half
+			_hinges["back"].rotation.z = -PI/2.0 - extra_fold
 
 # Public API
 
@@ -248,9 +258,54 @@ func set_fold_instant(folded: bool) -> void:
 func _on_fold_complete() -> void:
 	_state = FoldState.FOLDED
 	fold_completed.emit()
+	
+	if convert_to_rigidbody:
+		_convert_to_physics_cube()
 
 func _on_unfold_complete() -> void:
 	_state = FoldState.FLAT
+
+func _convert_to_physics_cube() -> void:
+	# Create a rigid body cube to replace the folded net
+	var rigid_cube = RigidBody3D.new()
+	rigid_cube.name = "FoldedCube_%d" % _spawned_cubes.size()
+	
+	# Create the cube mesh
+	var mesh_instance = MeshInstance3D.new()
+	var box = BoxMesh.new()
+	box.size = Vector3(face_size, face_size, face_size)
+	mesh_instance.mesh = box
+	
+	# Apply material
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = face_color
+	mesh_instance.material_override = mat
+	rigid_cube.add_child(mesh_instance)
+	
+	# Add collision shape
+	var collision = CollisionShape3D.new()
+	var shape = BoxShape3D.new()
+	shape.size = Vector3(face_size, face_size, face_size)
+	collision.shape = shape
+	rigid_cube.add_child(collision)
+	
+	# Position the rigid cube at the folded location, slightly above
+	var spawn_pos = global_position + Vector3(0, face_size/2 + drop_height, 0)
+	rigid_cube.global_position = spawn_pos
+	
+	# Add to scene
+	get_parent().add_child(rigid_cube)
+	_spawned_cubes.append(rigid_cube)
+	
+	# Hide the folded net faces
+	for face in _faces.values():
+		if is_instance_valid(face):
+			face.visible = false
+	
+	# Spawn a new folding cube if enabled
+	if spawn_new_on_complete:
+		await get_tree().create_timer(0.5).timeout
+		_reset_for_next_fold()
 
 func get_state() -> FoldState:
 	return _state
@@ -260,3 +315,27 @@ func is_folded() -> bool:
 
 func is_flat() -> bool:
 	return _state == FoldState.FLAT
+
+func _reset_for_next_fold() -> void:
+	# Reset the folding cube for another fold cycle
+	fold_progress = 0.0
+	_state = FoldState.FLAT
+	
+	# Show faces again
+	for face in _faces.values():
+		if is_instance_valid(face):
+			face.visible = true
+	
+	# Auto-start the next fold if enabled
+	if auto_fold:
+		await get_tree().create_timer(0.3).timeout
+		animate_fold()
+
+func get_spawned_cubes() -> Array[RigidBody3D]:
+	return _spawned_cubes
+
+func clear_spawned_cubes() -> void:
+	for cube in _spawned_cubes:
+		if is_instance_valid(cube):
+			cube.queue_free()
+	_spawned_cubes.clear()

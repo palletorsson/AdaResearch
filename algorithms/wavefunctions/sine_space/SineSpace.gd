@@ -42,15 +42,18 @@ func create_sine_surface():
 			surface_nodes[x].append(node_sphere)
 
 func setup_materials():
-	# Surface node materials
-	var surface_material = StandardMaterial3D.new()
-	surface_material.albedo_color = Color(0.3, 0.7, 1.0, 1.0)
-	surface_material.emission_enabled = true
-	surface_material.emission = Color(0.1, 0.2, 0.3, 1.0)
+	# Surface node materials using sineShader
+	var sine_shader = load("res://commons/resourses/shaders/sineShader.gdshader")
 	
 	for row in surface_nodes:
 		for node in row:
-			node.material_override = surface_material
+			var shader_material = ShaderMaterial.new()
+			if sine_shader:
+				shader_material.shader = sine_shader
+				shader_material.set_shader_parameter("line_thickness", 0.08)
+				shader_material.set_shader_parameter("noise_amplitude", 0.02)
+				shader_material.set_shader_parameter("noise_frequency", 3.0)
+			node.material_override = shader_material
 	
 	# Control materials
 	var freq_material = StandardMaterial3D.new()
@@ -200,19 +203,15 @@ func update_mobius_surface():
 			update_node_color(node, v * twist_factor)
 
 func update_node_color(node: CSGSphere3D, height_value: float):
-	var material = node.material_override as StandardMaterial3D
+	var material = node.material_override as ShaderMaterial
 	if material:
-		# Color based on height/displacement
+		# Modulate shader parameters based on height/displacement
 		var intensity = (height_value + amplitude) / (2.0 * amplitude)
 		intensity = clamp(intensity, 0.0, 1.0)
 		
-		material.albedo_color = Color(
-			0.3 + intensity * 0.7,
-			0.7 - intensity * 0.4,
-			1.0 - intensity * 0.7,
-			1.0
-		)
-		material.emission = material.albedo_color * (0.2 + intensity * 0.3)
+		# Adjust shader parameters dynamically
+		material.set_shader_parameter("line_thickness", 0.04 + intensity * 0.08)
+		material.set_shader_parameter("noise_amplitude", 0.01 + intensity * 0.03)
 
 func animate_controls():
 	# Frequency control

@@ -173,7 +173,8 @@ static func create_icosahedron(scale := 0.5, color := Color(0.5, 1.0, 0.5)) -> N
 	return create_polyhedron(vertices, faces, {
 		"name": "Icosahedron",
 		"base_color": color,
-		"scale": scale
+		"scale": scale,
+		"double_sided": true  # Fix holes from incorrect face winding
 	})
 
 static func create_dodecahedron(_scale := 0.5, color := Color(1.0, 0.5, 1.0)) -> Node3D:

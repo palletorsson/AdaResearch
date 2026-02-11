@@ -61,7 +61,8 @@ func _rebuild_icosahedron() -> void:
 		geometry["faces"],
 		{
 			"name": "Icosahedron",
-			"material": material
+			"material": material,
+			"double_sided": true  # Fix holes from incorrect face winding
 		}
 	)
 	mesh_instance.mesh = mesh

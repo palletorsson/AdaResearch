@@ -52,15 +52,17 @@ func create_grid_2d():
 			# Store reference
 			_cube_refs["%d_%d" % [x, z]] = cube_instance
 
-			# Add Index Label
+			# Add Index Label - high visibility from all angles
 			var label = Label3D.new()
 			label.text = "[%d, %d]" % [x, z]
-			label.font_size = 24
+			label.font_size = 32  # Larger for VR
 			label.pixel_size = 0.003
-			label.outline_size = 0
+			label.outline_size = 6  # Add outline for visibility
+			label.outline_modulate = Color(0, 0, 0, 1)  # Black outline
 			label.position = Vector3(0, 1.0, 0)
 			label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			label.modulate = Color(1.0, 0.7, 0.8)  # Light pink
+			label.no_depth_test = true  # Always visible, even through objects
+			label.modulate = Color(1.0, 1.0, 1.0)  # White for maximum contrast
 			cube_instance.add_child(label)
 
 			add_child(cube_instance)

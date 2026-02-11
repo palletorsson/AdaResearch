@@ -20,21 +20,18 @@ func create_grid_3d():
 				# Position cubes in a 4x4x4 grid, 1 units apart
 				cube_instance.position = Vector3(x * 1.0, y * 1.0, z * 1.0)
 				
-				# Add Index Label
+				# Add Index Label - high visibility from all angles
 				var label = Label3D.new()
 				label.text = "[%d, %d, %d]" % [x, y, z]
 				
-				# Font Settings (White Roboto)
-				var font = load("res://commons/font/static/Roboto-Regular.ttf")
-				if font:
-					label.font = font
-				
-				label.font_size = 32
+				label.font_size = 28  # Slightly smaller for 3D density
 				label.pixel_size = 0.003
-				label.outline_size = 0
+				label.outline_size = 5  # Add outline for visibility
+				label.outline_modulate = Color(0, 0, 0, 1)  # Black outline
 				
 				label.position = Vector3(0, 0.6, 0)
 				label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				label.no_depth_test = true  # Always visible
 				label.modulate = Color.WHITE
 				cube_instance.add_child(label)
 				

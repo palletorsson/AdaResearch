@@ -3036,6 +3036,12 @@
 											"description":  "A crystal that contains territorial boundary algorithms",
 											"scene":  "res://commons/context/walkgrids/voronoi_space.tscn"
 										},
+					  "knowledge_terrain_space":  {
+											"name":  "Knowledge Terrain",
+											"lookup_name":  "knowledge_terrain_space",
+											"description":  "Walkable terrain generated from the AdaResearch curriculum taxonomy. The ground you walk on is shaped by what humanity wrote down. Concepts cluster into neighborhoods, QFEP phases create elevation, and the paths between them are the structure of understanding.",
+											"scene":  "res://commons/context/walkgrids/knowledge_terrain_space.tscn"
+										},
 					  "geometric_crystal":  {
 												"name":  "Geometric Crystal",
 												"lookup_name":  "geometric_crystal",

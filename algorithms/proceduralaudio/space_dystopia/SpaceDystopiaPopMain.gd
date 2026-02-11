@@ -1248,7 +1248,7 @@ func _mix_chunk(mix: PackedFloat32Array, chunk: PackedFloat32Array, offset: int)
 
 func _set_auto_advance(p: AudioStreamInteractive, count: int):
 	for i in range(count):
-		p.set_clip_auto_advance(i, 1)
+		p.set_clip_auto_advance(i, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 		p.set_clip_auto_advance_next_clip(i, (i + 1) % count)
 
 

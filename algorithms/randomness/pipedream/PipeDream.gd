@@ -149,7 +149,7 @@ func _add_joint(joint_pos: Vector3, segment_color: Color) -> void:
 	mat.roughness = roughness * 0.8
 	mat.clearcoat_enabled = true
 	mat.clearcoat = 0.35
-	mat.clearcoat_gloss = 0.95
+	mat.clearcoat_roughness = 0.05  # Godot 4: low roughness = high gloss
 	mat.emission_enabled = true
 	mat.emission = segment_color
 	mat.emission_energy_multiplier = emission_energy * 0.75
@@ -168,7 +168,7 @@ func _build_pipe_material(segment_color: Color) -> StandardMaterial3D:
 	mat.rim_tint = 0.35
 	mat.clearcoat_enabled = true
 	mat.clearcoat = 0.25
-	mat.clearcoat_gloss = 0.9
+	mat.clearcoat_roughness = 0.1  # Godot 4: low roughness = high gloss
 	mat.emission_enabled = true
 	mat.emission = segment_color
 	mat.emission_energy_multiplier = emission_energy

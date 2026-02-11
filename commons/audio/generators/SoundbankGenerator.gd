@@ -673,7 +673,7 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 		playback.set_clip_stream(i, stream)
 		playback.set_clip_name(i, section_name.capitalize())
 		
-		playback.set_clip_auto_advance(i, 1)
+		playback.set_clip_auto_advance(i, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 		var next_clip = (i + 1) % section_names.size()
 		playback.set_clip_auto_advance_next_clip(i, next_clip)
 		
@@ -1202,7 +1202,7 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 		playback.set_clip_stream(i, stream)
 		playback.set_clip_name(i, section_name.capitalize())
 		
-		playback.set_clip_auto_advance(i, 1)
+		playback.set_clip_auto_advance(i, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 		var next_clip = (i + 1) % section_names.size()
 		playback.set_clip_auto_advance_next_clip(i, next_clip)
 		
