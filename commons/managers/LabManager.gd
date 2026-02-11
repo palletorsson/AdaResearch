@@ -182,12 +182,12 @@ func _instantiate_artifact(artifact_id: String):
 
 func _apply_artifact_transform(artifact_instance: Node3D, definition: Dictionary):
 	"""Apply position, rotation, and scale from definition"""
-	var position = definition.get("position", [0, 0, 0])
-	var rotation = definition.get("rotation", [0, 0, 0])
+	var pos_def = definition.get("position", [0, 0, 0])
+	var rot_def = definition.get("rotation", [0, 0, 0])
 	var scale_def = definition.get("scale", [1, 1, 1])
 	
-	artifact_instance.position = Vector3(position[0], position[1], position[2])
-	artifact_instance.rotation_degrees = Vector3(rotation[0], rotation[1], rotation[2])
+	artifact_instance.position = Vector3(pos_def[0], pos_def[1], pos_def[2])
+	artifact_instance.rotation_degrees = Vector3(rot_def[0], rot_def[1], rot_def[2])
 	artifact_instance.scale = Vector3(scale_def[0], scale_def[1], scale_def[2])
 
 func _connect_artifact_signals(artifact_instance: Node3D, artifact_id: String):

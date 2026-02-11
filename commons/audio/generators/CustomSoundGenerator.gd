@@ -1781,7 +1781,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	var sustain = params.get("sustain", 0.7)
 	var release = params.get("release", 0.6)
 	var polyphony = params.get("polyphony", 4)
-	var chord_voicing = params.get("chord_voicing", "jazz_7th")
+	var _chord_voicing = params.get("chord_voicing", "jazz_7th")  # TODO: Implement chord voicing variations
 	var groove_feel = params.get("groove_feel", 0.15)
 	var velocity_sensitivity = params.get("velocity_sensitivity", 0.6)
 	var distortion = params.get("distortion", 0.2)

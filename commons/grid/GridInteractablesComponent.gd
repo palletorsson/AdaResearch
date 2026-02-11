@@ -359,7 +359,7 @@ func generate_interactables(interactable_data):
 
 # Place a Marching Cubes object using API
 func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
-	var position = Vector3(x, y, z) * total_size
+	var world_pos = Vector3(x, y, z) * total_size
 	
 	# Determine if object should be pickable/grabbable
 	var is_pickable = false
@@ -371,7 +371,7 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 		is_pickable = (str(val).to_lower() == "true")
 	
 	# Create object using API
-	var mc_object = MarchingCubesAPI.create(lookup_name, position, 1.0, is_pickable)
+	var mc_object = MarchingCubesAPI.create(lookup_name, world_pos, 1.0, is_pickable)
 	if not mc_object:
 		return false
 		
@@ -430,8 +430,8 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	var agent = agent_scene.instantiate()
 	
 	# Position
-	var position = Vector3(x, y, z) * total_size
-	agent.position = position
+	var world_pos = Vector3(x, y, z) * total_size
+	agent.position = world_pos
 	
 	# Apply overrides (rotation, y_offset, scale)
 	if overrides.has("rotation_y_degrees"):
@@ -482,7 +482,7 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
-	var position = Vector3(x, y, z) * total_size
+	var world_pos = Vector3(x, y, z) * total_size
 	
 	var artifact_info = get_artifact_info(lookup_name)
 	if artifact_info.is_empty():
@@ -509,7 +509,7 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Handle different node types (Node3D vs Control)
 	if artifact_object is Node3D:
 		# Position the 3D artifact (base grid position)
-		artifact_object.position = position
+		artifact_object.position = world_pos
 		
 		# Apply position/rotation/scale from artifact definition
 		_apply_artifact_transform(artifact_object, artifact_info)
@@ -1145,18 +1145,18 @@ func _on_teleporter_artifact_activated(lookup_name: String, artifact_object: Nod
 # Handle artifact interaction
 func _on_artifact_interact(lookup_name: String, artifact_object: Node):
 	var artifact_info = get_artifact_info(lookup_name)
-	var position = Vector3.ZERO
+	var artifact_pos = Vector3.ZERO
 	
 	# Get position based on node type
 	if artifact_object is Node3D:
-		position = artifact_object.global_position
+		artifact_pos = artifact_object.global_position
 	elif artifact_object is Control:
 		# For Control nodes, use a default position or convert from 2D
-		position = Vector3(artifact_object.global_position.x, 0, artifact_object.global_position.y)
+		artifact_pos = Vector3(artifact_object.global_position.x, 0, artifact_object.global_position.y)
 	
 	var artifact_data = {
 		"lookup_name": lookup_name,
-		"position": position,
+		"position": artifact_pos,
 		"name": artifact_info.get("name", lookup_name),
 		"artifact_type": artifact_info.get("artifact_type", "unknown"),
 		"description": artifact_info.get("description", ""),
