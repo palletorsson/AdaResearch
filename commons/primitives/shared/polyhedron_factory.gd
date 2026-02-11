@@ -177,7 +177,7 @@ static func create_icosahedron(scale := 0.5, color := Color(0.5, 1.0, 0.5)) -> N
 		"double_sided": true  # Fix holes from incorrect face winding
 	})
 
-static func create_dodecahedron(_scale := 0.5, color := Color(1.0, 0.5, 1.0)) -> Node3D:
+static func create_dodecahedron(scale := 0.5, color := Color(1.0, 0.5, 1.0)) -> Node3D:
 	# 20 vertices using the correct dodecahedron coordinates
 	var vertices: Array[Vector3] = [
 		Vector3(0.5774, 0.5774, 0.5774),    # 0

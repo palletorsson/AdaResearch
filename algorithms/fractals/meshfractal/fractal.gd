@@ -188,7 +188,7 @@ func update_colors():
 			# Set color for this instance
 			multi_mesh.set_instance_color(j, color)
 
-func fmod(value: float, 1.0) -> float:
+func fmod_wrap(value: float) -> float:
 	return value - floor(value)
 
 func clear_fractal():
