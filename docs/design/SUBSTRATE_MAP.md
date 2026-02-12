@@ -8,10 +8,10 @@ Which reusable substrates serve which algorithms across sequences.
 |---|-----------|-----------|-----------|--------|
 | 0 | **Living Paper** (2D texture) | Grabbable paper with pixel-level drawing | `commons/substrates/living_paper/` | ✅ Built (35 cartridges) |
 | 1 | **Bar** (single value) | One vertical line — height = value | *new* | Planned |
-| 2 | **Profile** (1D line) | Continuous curve on 2D canvas | `oscilloscope_display.gd` | Exists (needs unification) |
+| 2 | **Profile** (1D line) | ImmediateMesh ribbon strips over grid | `commons/substrates/profile/` | ✅ Built (16 cartridges) |
 | 3 | **BarArray** (1D discrete) | Array of vertical bars on 2D canvas | `distribution_sampler.gd` | Exists (needs unification) |
 | 4 | **Grid2D** (2D discrete) | MultiMesh petri dish with cell emission | `commons/substrates/grid2d/` | ✅ Built (8 cartridges) |
-| 5 | **Grid3D** (3D volume) | MultiMesh dot/cube space you walk through | `entropy_axiom_multimesh.gd` | Exists (needs unification) |
+| 5 | **Grid3D** (3D volume) | Dual MultiMesh: spheres (nodes) + cylinders (edges) | `commons/substrates/grid3d/` | ✅ Built (8 cartridges) |
 | 6 | **WalkSurface** (2D continuous) | Room-scale walkable mesh terrain | `commons/context/walkgrids/` | ✅ Working (5 spaces) |
 | 7 | **MeshArtifact** (deformable 3D) | Algorithms reshape branches/cloth/joints | *new* | Planned |
 

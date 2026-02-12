@@ -2,12 +2,12 @@
 	"map_info": {
 		"name": "Substrate Showcase",
 		"lookup_name": "Test_Substrates",
-		"description": "All 4 substrate types side by side: Grid2D, Living Paper, BarArray, and standalone artifacts",
+		"description": "All substrates side by side: Grid2D, Living Paper, BarArray, Grid3D, Profile, and standalone artifacts",
 		"version": "1.0",
 		"format": "grid",
 		"dimensions": {
 			"width": 11,
-			"depth": 7,
+			"depth": 11,
 			"max_height": 3
 		},
 		"metadata": {
@@ -24,9 +24,17 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -42,6 +50,10 @@
 			[" ", "living_paper_random_walk", " ", "living_paper_levy", " ", "living_paper_mandelbrot", " ", "living_paper_life", " ", "living_paper_sierpinski", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "bar_array_bubble_sort", " ", "bar_array_quicksort", " ", "bar_array_merge_sort", " ", "bar_array_histogram", " ", "bar_array_prime_sieve", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "grid3d_bfs", " ", "grid3d_kruskal", " ", "grid3d_force_directed", " ", "grid3d_random_graph", " ", "grid3d_entropy", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "profile_sine", " ", "profile_fourier", " ", "profile_gradient_descent", " ", "profile_bell_curve", " ", "profile_logistic", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},

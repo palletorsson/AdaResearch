@@ -19,6 +19,7 @@ radius = 2.0
 script = ExtResource("1")
 brush_radius = 0.25
 smooth_strength = 0.4
+subdivide_interval = 0.08
 
 [node name="EditableMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0, 0)

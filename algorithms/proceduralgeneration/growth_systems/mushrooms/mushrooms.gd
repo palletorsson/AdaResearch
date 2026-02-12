@@ -12,6 +12,10 @@ extends Node3D
 @export var ground_resolution: int = 36
 @export var ground_seed: int = 0
 @export var ground_albedo_color: Color = Color(0.44, 0.56, 0.34)  # Lighter green forest floor
+@export_range(0.0, 1.0, 0.01) var glowing_mushroom_spawn_chance: float = 0.22
+@export var glowing_mushroom_body_color: Color = Color(0.2, 0.88, 0.38)
+@export var glowing_mushroom_glow_color: Color = Color(0.95, 0.12, 0.12)
+@export var glowing_mushroom_light_energy: float = 0.9
 
 # References
 var mushroom_types = []
@@ -408,10 +412,10 @@ func create_glowing_mushroom():
 	stem.mesh = cylinder
 	
 	var stem_material = StandardMaterial3D.new()
-	stem_material.albedo_color = Color(0.7, 0.9, 0.8)
+	stem_material.albedo_color = glowing_mushroom_body_color.lightened(0.25)
 	stem_material.emission_enabled = true
-	stem_material.emission = Color(0.2, 0.5, 0.4)
-	stem_material.emission_energy = 0.5
+	stem_material.emission = glowing_mushroom_glow_color
+	stem_material.emission_energy = glowing_mushroom_light_energy * 0.55
 	stem.material_override = stem_material
 	
 	# Position stem
@@ -435,10 +439,10 @@ func create_glowing_mushroom():
 	cap.position.y = 0.18
 	
 	var cap_material = StandardMaterial3D.new()
-	cap_material.albedo_color = Color(0.2, 0.8, 0.7)
+	cap_material.albedo_color = glowing_mushroom_body_color
 	cap_material.emission_enabled = true
-	cap_material.emission = Color(0.0, 0.7, 0.6)
-	cap_material.emission_energy = 2.0
+	cap_material.emission = glowing_mushroom_glow_color
+	cap_material.emission_energy = glowing_mushroom_light_energy * 2.2
 	cap.material_override = cap_material
 	
 	# Add to mushroom
@@ -448,8 +452,8 @@ func create_glowing_mushroom():
 	# Add glow effect
 	var glow = OmniLight3D.new()
 	glow.name = "GlowLight"
-	glow.light_color = Color(0.0, 0.7, 0.6)
-	glow.light_energy = 0.5
+	glow.light_color = glowing_mushroom_glow_color
+	glow.light_energy = glowing_mushroom_light_energy
 	glow.omni_range = 1.0
 	glow.position.y = 0.2
 	mushroom.add_child(glow)
@@ -474,8 +478,8 @@ func generate_mushroom_field():
 		
 		# For glowing mushrooms, use sparingly
 		if type_index == mushroom_types.size() - 1 && add_glowing_mushrooms:
-			# Only 5% chance for glowing mushrooms
-			if randf() > 0.05:
+			# Spawn chance is configurable so scenes can push denser glowing patches.
+			if randf() > clampf(glowing_mushroom_spawn_chance, 0.0, 1.0):
 				type_index = randi() % (mushroom_types.size() - 1)
 		
 		# Instantiate mushroom

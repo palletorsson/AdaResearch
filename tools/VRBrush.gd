@@ -19,6 +19,7 @@ var raycast: RayCast3D
 var rng := RandomNumberGenerator.new()
 var grab_stick: Node3D
 var grab_stick_area: Area3D
+var mesh_static_body: StaticBody3D
 var is_touching_mesh: bool = false
 var last_touch_position: Vector3
 var brush_indicator: MeshInstance3D
@@ -65,8 +66,10 @@ func _setup_scene() -> void:
 
 	# Store arrays for dynamic editing
 	if mesh and mesh.get_surface_count() > 0:
-		vertices = mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
-		indices = mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX]
+		var surface_arrays: Array = mesh.surface_get_arrays(0)
+		vertices = surface_arrays[Mesh.ARRAY_VERTEX]
+		indices = surface_arrays[Mesh.ARRAY_INDEX]
+		_ensure_indices_from_vertices()
 
 	# Get TheGrabStick from scene
 	grab_stick = get_node_or_null("TheGrabStick")
@@ -151,10 +154,10 @@ func _setup_grab_stick_collision() -> void:
 		grab_stick_area.area_entered.connect(_on_grab_stick_area_entered)
 
 	# Ensure the EditableMesh's StaticBody is on layer 1
-	var static_body = mesh_instance.get_node_or_null("StaticBody3D")
-	if static_body:
-		static_body.collision_layer = 1
-		static_body.collision_mask = 2  # Can detect stick on layer 2
+	mesh_static_body = mesh_instance.get_node_or_null("StaticBody3D") as StaticBody3D
+	if mesh_static_body:
+		mesh_static_body.collision_layer = 1
+		mesh_static_body.collision_mask = 2  # Can detect stick on layer 2
 
 	print("VRBrush: TheGrabStick collision detection setup complete")
 
@@ -227,8 +230,11 @@ func _process(delta: float) -> void:
 
 	last_action_time += delta
 
+	var touch_fallback_active: bool = _is_trackball_touching_mesh()
+	var touching_mesh_now: bool = is_touching_mesh or touch_fallback_active
+
 	# Update brush indicator position to TrackBall location
-	if is_touching_mesh and grab_stick:
+	if touching_mesh_now and grab_stick:
 		brush_indicator.visible = true
 		# Try to use TrackBall position for more accurate brush location
 		var track_ball = grab_stick.get_node_or_null("Blade/Top/TrackBall")
@@ -240,10 +246,10 @@ func _process(delta: float) -> void:
 		brush_indicator.visible = false
 
 	# If TheGrabStick is touching the mesh, apply brush effect
-	if is_touching_mesh and last_action_time >= subdivide_interval:
+	if touching_mesh_now and last_action_time >= subdivide_interval:
 		last_action_time = 0.0
 		_perform_grab_stick_brush_action()
-	elif not is_touching_mesh and last_action_time >= subdivide_interval:
+	elif not touching_mesh_now and last_action_time >= subdivide_interval:
 		# Use raycast method when not touching
 		last_action_time = 0.0
 		_perform_brush_action()
@@ -414,3 +420,56 @@ func _commit_mesh() -> void:
 
 	# Update collision shape to match new mesh
 	_update_collision_shape()
+
+func _ensure_indices_from_vertices() -> void:
+	# SurfaceTool commits can produce non-indexed triangle arrays. Build a fallback.
+	if not indices.is_empty():
+		return
+
+	if vertices.is_empty():
+		return
+
+	var vertex_count: int = vertices.size()
+	if vertex_count < 3:
+		return
+
+	var triangle_vertex_count: int = vertex_count - (vertex_count % 3)
+	if triangle_vertex_count < 3:
+		return
+
+	var rebuilt_indices: PackedInt32Array = PackedInt32Array()
+	rebuilt_indices.resize(triangle_vertex_count)
+	for i in range(triangle_vertex_count):
+		rebuilt_indices[i] = i
+	indices = rebuilt_indices
+
+func _is_trackball_touching_mesh() -> bool:
+	if grab_stick == null or mesh_static_body == null or mesh_instance == null:
+		return false
+
+	var track_ball: Node3D = grab_stick.get_node_or_null("Blade/Top/TrackBall") as Node3D
+	var probe_origin: Vector3 = grab_stick.global_position
+	if track_ball != null:
+		probe_origin = track_ball.global_position
+
+	var shape_query: PhysicsShapeQueryParameters3D = PhysicsShapeQueryParameters3D.new()
+	var probe_shape: SphereShape3D = SphereShape3D.new()
+	probe_shape.radius = maxf(brush_radius * 0.6, 0.05)
+	shape_query.shape = probe_shape
+	shape_query.transform = Transform3D(Basis.IDENTITY, probe_origin)
+	shape_query.collide_with_bodies = true
+	shape_query.collide_with_areas = false
+	shape_query.collision_mask = 1
+
+	var world: World3D = get_world_3d()
+	if world == null:
+		return false
+
+	var space_state: PhysicsDirectSpaceState3D = world.direct_space_state
+	var hits: Array = space_state.intersect_shape(shape_query, 8)
+	for hit in hits:
+		var collider: Object = hit.get("collider")
+		if collider == mesh_static_body:
+			return true
+
+	return false

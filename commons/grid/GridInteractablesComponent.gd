@@ -33,8 +33,8 @@ const CONFIG_PARAM_NAMES = [
 	"animate", "duration", "no_collision", "rotate_collision",
 	# Random cycle cube params
 	"span", "random_span", "wait_min", "wait_span", "down", "up", "hide",
-	# Grid2D / substrate params
-	"algorithm", "interval", "auto_play", "grid_width", "grid_height",
+	# Grid2D / Grid3D / substrate params
+	"algorithm", "interval", "auto_play", "grid_width", "grid_height", "nodes", "samples",
 	# Living paper params
 	"paper", "texture", "fold", "orientation",
 ]

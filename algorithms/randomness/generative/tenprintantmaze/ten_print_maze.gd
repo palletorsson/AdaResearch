@@ -17,6 +17,7 @@
 @export var ant_color: Color = Color.RED
 @export var path_color: Color = Color(1.0, 0.5, 0.0)
 @export var wall_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+@export_range(0.02, 2.0, 0.01) var wall_change_interval: float = 0.2
 
 # Maze representation
 var maze: Array = []
@@ -342,9 +343,9 @@ func update_path_visualization():
 	path_node.add_child(path_mesh_instance)
 
 func setup_wall_movement_timer():
-	"""Setup timer to move a random wall every second"""
+	"""Setup timer to move a random wall at the configured interval."""
 	wall_timer = Timer.new()
-	wall_timer.wait_time = 1.0
+	wall_timer.wait_time = maxf(wall_change_interval, 0.02)
 	wall_timer.timeout.connect(_on_wall_timer_timeout)
 	wall_timer.autostart = true
 	add_child(wall_timer)

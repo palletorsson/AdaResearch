@@ -157,10 +157,14 @@ func _setup_algorithm() -> void:
 		var mat = StandardMaterial3D.new()
 		mat.albedo_texture = _texture
 		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		mat.emission_enabled = true
 		mat.emission_texture = _texture
 		mat.emission_energy_multiplier = 0.3
 		mesh_instance.material_override = mat
+		print("LivingPaper: Applied material to mesh at %s (texture %dx%d)" % [mesh_instance.get_path(), width, height])
+	else:
+		push_error("LivingPaper: mesh_instance is null, cannot apply texture!")
 
 	if label3d:
 		var display_name = label_text if label_text != "" else _algorithm.get_name()
