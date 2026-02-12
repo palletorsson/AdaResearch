@@ -4,6 +4,19 @@
 
 [node name="RandomDecayMultiMesh" type="Node3D"]
 script = ExtResource("1_decay")
+decay_growth_rate = 0.05
+decay_injection_per_second = 0.06
+drift_strength = 0.12
+rotation_jitter_degrees = 3.0
+sink_distance = 0.12
+movement_xy_only = true
+rotation_xy_plane_only = true
+force_uniform_item_size = true
+cube_decay_speed_scale = 0.3
+cube_color_decay_mix = 0.35
+prism_base_color = Color(0.62, 0.72, 0.86, 1)
+prism_decay_speed_scale = 0.1
+prism_color_decay_mix = 0.16
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.955336, 0.29552, 0, -0.29552, 0.955336, 0, 4.8, 16.0)

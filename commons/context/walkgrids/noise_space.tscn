@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://nx3jhlnm6byv"]
+[gd_scene format=3 uid="uid://nx3jhlnm6byv"]
 
 [ext_resource type="Script" uid="uid://ds5k3srpps23h" path="res://commons/context/walkgrids/NoiseSpace.gd" id="1_ci0is"]
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_1n8c6"]
@@ -12,26 +12,22 @@ shader_parameter/emissionColor = Color(1, 0, 0, 1)
 shader_parameter/width = 1.0
 shader_parameter/blur = 1.0
 shader_parameter/emission_strength = 2.0
-shader_parameter/modelOpacity = 1.0
-shader_parameter/wireframeOpacity = 1.0
-shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2glbx"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
-[node name="NoiseSpace" type="Node3D"]
+[node name="NoiseSpace" type="Node3D" unique_id=1246172759]
 script = ExtResource("1_ci0is")
 space_size = Vector2(10, 10)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1544434343]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1829106134]
 material_override = SubResource("ShaderMaterial_yiymg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1935030898]
 shape = SubResource("ConvexPolygonShape3D_2glbx")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1594203980]
 transform = Transform3D(1, 0, 0, 0, 0.905495, 0.424357, 0, -0.424357, 0.905495, 0, 3.08208, 7.02245)
-

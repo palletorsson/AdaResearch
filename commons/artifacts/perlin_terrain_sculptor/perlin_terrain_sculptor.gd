@@ -6,6 +6,8 @@ extends Node3D
 
 class_name PerlinTerrainSculptor
 
+signal terrain_controls_changed(payload: Dictionary)
+
 ## Grid dimensions
 @export var grid_size: int = 24
 @export var voxel_size: float = 0.04
@@ -19,6 +21,7 @@ class_name PerlinTerrainSculptor
 			_noise.frequency = noise_scale * 0.1
 		_generate_terrain()
 		_sync_scale_slider()
+		_broadcast_controls_to_voxelnoise()
 
 @export var noise_octaves: int = 3:
 	set(value):
@@ -26,6 +29,7 @@ class_name PerlinTerrainSculptor
 		if _noise:
 			_noise.fractal_octaves = noise_octaves
 		_generate_terrain()
+		_broadcast_controls_to_voxelnoise()
 
 @export var threshold: float = 0.0:
 	set(value):
@@ -33,6 +37,7 @@ class_name PerlinTerrainSculptor
 		_generate_terrain()
 		_sync_threshold_slider()
 		_update_info()
+		_broadcast_controls_to_voxelnoise()
 
 ## Colors
 @export var voxel_color: Color = Color(0.3, 0.7, 0.4)
@@ -54,6 +59,7 @@ const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
+	add_to_group("perlin_terrain_sculptors")
 	_init_noise()
 	_init_voxels()
 	_create_multimesh()
@@ -61,6 +67,7 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_generate_terrain()
+	call_deferred("_broadcast_controls_to_voxelnoise")
 
 func _init_noise():
 	_noise = FastNoiseLite.new()
@@ -234,6 +241,7 @@ func _on_scale_slider_moved(_position):
 func _on_new_seed():
 	_noise.seed = randi()
 	_generate_terrain()
+	_broadcast_controls_to_voxelnoise()
 
 func _update_info():
 	if _info_label:
@@ -311,3 +319,25 @@ func reset():
 	noise_scale = 4.0
 	_noise.seed = randi()
 	_generate_terrain()
+	_broadcast_controls_to_voxelnoise()
+
+func _build_voxelnoise_payload() -> Dictionary:
+	var scale_norm: float = clampf((noise_scale - 0.5) / 19.5, 0.0, 1.0)
+	return {
+		"threshold": threshold,
+		"noise_scale": noise_scale,
+		"noise_scale_norm": scale_norm,
+		"noise_octaves": noise_octaves,
+		"seed": int(_noise.seed if _noise else 0),
+		"source_path": str(get_path())
+	}
+
+func _broadcast_controls_to_voxelnoise() -> void:
+	if not is_inside_tree():
+		return
+
+	var payload: Dictionary = _build_voxelnoise_payload()
+	terrain_controls_changed.emit(payload)
+
+	if get_tree():
+		get_tree().call_group("voxelnoise_receivers", "apply_perlin_terrain_controls", payload)

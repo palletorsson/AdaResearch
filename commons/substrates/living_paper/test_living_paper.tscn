@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cll4s0fmm5iox"]
+
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="1_grab"]
+[ext_resource type="Script" uid="uid://crx671pr4ly8t" path="res://commons/substrates/living_paper/living_paper_manager.gd" id="2_mgr"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.2, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_big"]
+cull_mode = 2
+albedo_color = Color(1, 0, 1, 1)
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_big"]
+size = Vector2(0.18, 0.18)
+subdivide_width = 1
+
+[node name="TestLivingPaper" type="Node3D" unique_id=972611452]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=420960553]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 0.4, 0.5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1786238560]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 2, 0)
+light_energy = 1.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=736085453]
+environment = SubResource("Environment_1")
+
+[node name="LivingPaper" type="Node3D" parent="." unique_id=1562330935]
+script = ExtResource("2_mgr")
+algorithm = 19
+
+[node name="GrabPaper" parent="LivingPaper" unique_id=1693618206 instance=ExtResource("1_grab")]
+
+[node name="RandomWalkPlanMesh" type="MeshInstance3D" parent="LivingPaper/GrabPaper" unique_id=2084413522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008895132, 0.0053224117)
+material_override = SubResource("StandardMaterial3D_big")
+mesh = SubResource("QuadMesh_big")
+
+[node name="id_info_Label3D" type="Label3D" parent="LivingPaper/GrabPaper" unique_id=1389025470]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.095, -0.095, 0.006)
+text = "asd"
+font_size = 20
+outline_size = 4
+horizontal_alignment = 0
+
+[connection signal="dropped" from="LivingPaper/GrabPaper" to="LivingPaper" method="_on_grab_paper_dropped"]
+[connection signal="grabbed" from="LivingPaper/GrabPaper" to="LivingPaper" method="_on_grab_paper_grabbed"]

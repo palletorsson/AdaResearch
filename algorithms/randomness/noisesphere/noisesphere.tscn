@@ -8,7 +8,7 @@ shader = ExtResource("1_mkyck")
 shader_parameter/noise_scale = 48.39
 shader_parameter/height_multiplier = 0.2
 shader_parameter/noise_speed = 0.05
-shader_parameter/elongation_factor = 2.0
+shader_parameter/elongation_factor = 1.0
 shader_parameter/hue_shift_speed = 0.05
 
 [sub_resource type="SphereMesh" id="SphereMesh_bhbqq"]
@@ -16,7 +16,7 @@ lightmap_size_hint = Vector2i(17, 17)
 flip_faces = true
 radial_segments = 128
 rings = 64
-is_hemisphere = true
+is_hemisphere = false
 
 [node name="Noisetorus" type="Node3D"]
 

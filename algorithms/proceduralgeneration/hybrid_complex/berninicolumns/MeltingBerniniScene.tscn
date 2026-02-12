@@ -1,11 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7g4dxk5n8yw6"]
 
-[ext_resource type="Script" uid="uid://v6alv7t3xuf2" path="res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniColumns.gd" id="1_jvgsx"]
+[ext_resource type="Script" uid="uid://v6alv7t3xuf2" path="res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd" id="1_jvgsx"]
 
 [node name="BerniniScene" type="Node3D"]
 
 [node name="BerniniColumns" type="Node3D" parent="."]
 script = ExtResource("1_jvgsx")
+column_count = 13
+layout_radius = 4.8
+show_platform = false
 column_height = 8.0
 spiral_density = 3.0
 sine_amplitude = 0.15

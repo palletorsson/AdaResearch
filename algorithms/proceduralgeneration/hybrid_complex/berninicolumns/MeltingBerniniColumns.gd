@@ -6,6 +6,13 @@ extends Node3D
 # -- Configuration --
 
 # Parameters for column generation
+@export_category("Layout")
+@export_range(1, 64, 1) var column_count: int = 9
+@export var layout_radius: float = 3.8
+@export var include_center_column: bool = true
+@export var show_platform: bool = true
+
+@export_category("Column Shape")
 @export var column_height: float = 10.0
 @export var column_radius: float = 0.5
 @export var spiral_density: float = 5.0  # More spirals
@@ -56,15 +63,7 @@ var time: float = 0.0
 
 # -- Scene State --
 var columns: Array = []  # Holds dictionaries with column node, mesh, material, and metadata
-
-# Column positions with variety
-var column_positions = [
-	Vector3(-3, 0, 0),
-	Vector3(3, 0, 0),
-	Vector3(0, 0, -3),
-	Vector3(0, 0, 3),
-	Vector3(0, 0, 0)  # Center column anchoring the cross
-]
+var column_positions: Array[Vector3] = []
 
 # Queer color palette
 var queer_colors = [
@@ -78,6 +77,8 @@ var queer_colors = [
 # -- Godot Lifecycle Functions --
 
 func _ready():
+	_build_column_positions()
+
 	# Confirm displacement shader availability (falls back to procedural normal map when null)
 	displacement_shader = DISPLACEMENT_SHADER if is_instance_valid(DISPLACEMENT_SHADER) else null
 	if not displacement_shader:
@@ -99,11 +100,32 @@ func _ready():
 		add_child(column_node)
 		columns.append(column_data)
 
-	# Create a simple platform/base
-	create_platform()
+	# Optional floor/platform.
+	if show_platform:
+		create_platform()
 
 	# Add a light to highlight the columns
 	create_lighting()
+
+func _build_column_positions() -> void:
+	column_positions.clear()
+
+	var include_center_count := 0
+	if include_center_column:
+		column_positions.append(Vector3.ZERO)
+		include_center_count = 1
+
+	var ring_count := maxi(column_count - include_center_count, 0)
+	if ring_count == 0:
+		if column_positions.is_empty():
+			column_positions.append(Vector3.ZERO)
+		return
+
+	for i in range(ring_count):
+		var angle := TAU * float(i) / float(ring_count)
+		var x := cos(angle) * layout_radius
+		var z := sin(angle) * layout_radius
+		column_positions.append(Vector3(x, 0.0, z))
 
 func _process(delta):
 	# Animate the columns if enabled
