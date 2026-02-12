@@ -17,6 +17,7 @@ const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
 const SoundIdentityPanel = preload("res://commons/audio/catalog/ui/SoundIdentityPanel.gd")
 const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPanel.gd")
 const MidiPianoRoll = preload("res://commons/audio/catalog/ui/MidiPianoRoll.gd")
+const AIAssistantPanel = preload("res://commons/audio/catalog/ui/AIAssistantPanel.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 const PATTERN_OVERRIDES_PATH = "user://song_pattern_overrides.json"
 const GLOBAL_SECTION_KEY = "__global__"
@@ -67,6 +68,7 @@ var _overview_tab: Control
 var _sound_editor_tab: Control
 var _archive_tab: Control
 var _midi_editor_tab: MidiPianoRoll
+var _ai_panel = null  # AIAssistantPanel
 var _sound_detail_panel: SoundDetailPanel
 var _editor_back_btn: Button
 var _editor_sound_name: Label
@@ -535,6 +537,13 @@ func _setup_ui():
 	_midi_editor_tab = MidiPianoRoll.new()
 	_midi_editor_tab.name = "🎹 MIDI Editor"
 	_main_tabs.add_child(_midi_editor_tab)
+	
+	# === AI ASSISTANT TAB ===
+	_ai_panel = AIAssistantPanel.new()
+	_ai_panel.name = "🤖 AI Assistant"
+	_ai_panel.midi_editor = _midi_editor_tab
+	_ai_panel.song_dev_tools = self
+	_main_tabs.add_child(_ai_panel)
 
 
 func _setup_sound_editor_tab():

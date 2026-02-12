@@ -146,21 +146,21 @@ func _apply_fly_translation(delta: float) -> void:
 		return
 
 	var forward := 0.0
-	if Input.is_key_pressed(KEY_W):
+	if _is_pressed(KEY_W):
 		forward += 1.0
-	if Input.is_key_pressed(KEY_S):
+	if _is_pressed(KEY_S):
 		forward -= 1.0
 
 	var strafe := 0.0
-	if Input.is_key_pressed(KEY_D):
+	if _is_pressed(KEY_D):
 		strafe += 1.0
-	if Input.is_key_pressed(KEY_A):
+	if _is_pressed(KEY_A):
 		strafe -= 1.0
 
 	var vertical := 0.0
-	if Input.is_key_pressed(fly_up_key) or Input.is_key_pressed(KEY_SPACE) or Input.is_key_pressed(KEY_PAGEUP) or Input.is_key_pressed(KEY_R):
+	if _is_pressed(fly_up_key) or _is_pressed(KEY_SPACE) or _is_pressed(KEY_PAGEUP) or _is_pressed(KEY_R):
 		vertical += 1.0
-	if Input.is_key_pressed(fly_down_key) or Input.is_key_pressed(KEY_CTRL) or Input.is_key_pressed(KEY_PAGEDOWN) or Input.is_key_pressed(KEY_C):
+	if _is_pressed(fly_down_key) or _is_pressed(KEY_CTRL) or _is_pressed(KEY_PAGEDOWN) or _is_pressed(KEY_C) or _is_pressed(KEY_X) or _is_pressed(KEY_Z):
 		vertical -= 1.0
 
 	var move_vector := Vector3.ZERO
@@ -172,16 +172,19 @@ func _apply_fly_translation(delta: float) -> void:
 		return
 
 	var speed := fly_speed
-	if Input.is_key_pressed(KEY_SHIFT):
+	if _is_pressed(KEY_SHIFT):
 		speed *= fly_boost_multiplier
 
 	_preview_camera.global_position += move_vector.normalized() * speed * delta
+
+func _is_pressed(keycode: Key) -> bool:
+	return Input.is_key_pressed(keycode) or Input.is_physical_key_pressed(keycode)
 
 func _set_status(text: String) -> void:
 	if _status_label:
 		var fly_state := "ON" if fly_mode_enabled else "OFF"
 		var look_hint := "RMB look" if fly_look_requires_button else "Mouse steers"
-		_status_label.text = "%s\nFly %s: F toggle, %s, WASD move, up E/Space/PgUp/R, down Q/Ctrl/PgDn/C" % [text, fly_state, look_hint]
+		_status_label.text = "%s\nFly %s: F toggle, %s, WASD move, up E/Space/PgUp/R, down Q/Ctrl/PgDn/C/X/Z" % [text, fly_state, look_hint]
 
 func _mark_clean_keep(node: Node) -> void:
 	if node:
