@@ -1,4 +1,4 @@
-﻿# Desktop Feedback Log
+# Desktop Feedback Log
 
 This file is written by DesktopMapSwitcherOverlay comment writer.
 

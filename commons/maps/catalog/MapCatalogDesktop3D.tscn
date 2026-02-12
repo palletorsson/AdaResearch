@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://cxh3gdgo60rfy"]
 
-[ext_resource type="Script" path="res://commons/maps/catalog/MapCatalogDesktop3D.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://3mceaovxceoe" path="res://commons/maps/catalog/MapCatalogDesktop3D.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MapBrowser3D.tscn" id="2_browser"]
-[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
+[ext_resource type="Script" uid="uid://ccnvftjwyddwq" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.14, 0.2, 0.32, 1)
@@ -25,40 +25,40 @@ glow_enabled = true
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(18, 18)
 
-[node name="MapCatalogDesktop3D" type="Node3D"]
+[node name="MapCatalogDesktop3D" type="Node3D" unique_id=473812210]
 script = ExtResource("1_script")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=983813494]
 environment = SubResource("Environment_1")
 
-[node name="PreviewCamera" type="Camera3D" parent="."]
+[node name="PreviewCamera" type="Camera3D" parent="." unique_id=990840116]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.2, 6.5)
 current = true
 fov = 55.0
 
-[node name="KeyLight" type="DirectionalLight3D" parent="."]
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=477756822]
 transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 4, 2)
 light_energy = 1.1
 shadow_enabled = true
 
-[node name="FillLight" type="DirectionalLight3D" parent="."]
+[node name="FillLight" type="DirectionalLight3D" parent="." unique_id=834454889]
 transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -2, 2, -2)
 light_color = Color(0.75, 0.82, 1, 1)
 light_energy = 0.35
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0, 0)
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1252182175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("PlaneMesh_1")
 
-[node name="MapBrowser3D" parent="." instance=ExtResource("2_browser")]
+[node name="MapBrowser3D" parent="." unique_id=1107449926 instance=ExtResource("2_browser")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 
-[node name="StatusLabel" type="Label3D" parent="."]
+[node name="StatusLabel" type="Label3D" parent="." unique_id=600361333]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.9, -1.8)
 text = "Loading sequence map catalog..."
 font_size = 30
 outline_size = 6
 
-[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
+[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="." unique_id=1138561512]
 script = ExtResource("3_overlay")
 open_on_start = true

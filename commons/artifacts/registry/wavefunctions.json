@@ -208,7 +208,14 @@
 		"mario_test_sound_ui": {
 			"name": "mario_test_sound_ui",
 			"lookup_name": "mario_test_sound_ui",
-			"description": "Sci-fi kiosk hosting the Mario slider UI with XR hand poses and 2D-in-3D controls.",
+			"description": "Sci-fi kiosk hosting a VR map-loader station UI with sequence and algorithm filters.",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
+			"category": "waves"
+		},
+		"vr_map_loader_kiosk": {
+			"name": "VR Map Loader Kiosk",
+			"lookup_name": "vr_map_loader_kiosk",
+			"description": "VR loading station for maps. Filter by sequence and algorithm, then load one map at a time from the kiosk screen.",
 			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
 			"category": "waves"
 		},

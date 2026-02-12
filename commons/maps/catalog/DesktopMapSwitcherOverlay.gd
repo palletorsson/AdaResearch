@@ -8,6 +8,9 @@ extends CanvasLayer
 @export var toggle_action: StringName = &"toggle_map_switcher_overlay"
 @export var next_map_key: Key = KEY_N
 @export var clean_scene_key: Key = KEY_C
+@export var spawn_kiosk_key: Key = KEY_B
+@export var spawn_kiosk_actions: PackedStringArray = PackedStringArray(["vr_button_b", "by_button"])
+@export var kiosk_spawn_distance: float = 2.5
 @export var open_on_start: bool = false
 @export var refresh_on_open: bool = true
 @export var auto_clean_before_load: bool = false
@@ -16,6 +19,8 @@ const MAIN_SEQUENCES_PATH := "res://commons/maps/map_sequences.json"
 const SEQUENCES_DIRECTORY := "res://commons/maps/sequences/"
 const DESKTOP_GRID_SCENE_PATH := "res://commons/scenes/grid_desktop.tscn"
 const CLEAN_KEEP_GROUP := "map_switcher_ui_keep"
+const VR_MAP_LOADER_KIOSK_SCENE_PATH := "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
+const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
 const COMMENT_DEFAULT_MARKDOWN_PATH := "res://ada_run/desktop_feedback.md"
 const COMMENT_DEFAULT_JSON_PATH := "res://ada_run/desktop_feedback.json"
 const COMMENT_CODEX_QUEUE_PATH := "res://ada_run/codex_change_requests.md"
@@ -87,6 +92,10 @@ func _input(event: InputEvent) -> void:
 		if not _is_text_input_focused():
 			_on_clean_scene_pressed()
 			_mark_input_handled()
+	elif _is_spawn_kiosk_event(event):
+		if not _is_text_input_focused():
+			_on_spawn_kiosk_pressed()
+			_mark_input_handled()
 	elif _is_next_map_event(event):
 		if not _is_text_input_focused():
 			_on_next_pressed()
@@ -99,6 +108,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif _is_clean_scene_event(event):
 		if not _is_text_input_focused():
 			_on_clean_scene_pressed()
+			_mark_input_handled()
+	elif _is_spawn_kiosk_event(event):
+		if not _is_text_input_focused():
+			_on_spawn_kiosk_pressed()
 			_mark_input_handled()
 	elif _is_next_map_event(event):
 		if not _is_text_input_focused():
@@ -140,6 +153,27 @@ func _is_clean_scene_event(event: InputEvent) -> bool:
 		return false
 
 	return key_event.keycode == clean_scene_key or key_event.physical_keycode == clean_scene_key
+
+func _is_spawn_kiosk_event(event: InputEvent) -> bool:
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if not key_event.pressed or key_event.echo:
+			return false
+		return key_event.keycode == spawn_kiosk_key or key_event.physical_keycode == spawn_kiosk_key
+
+	if event is InputEventAction:
+		var action_event := event as InputEventAction
+		if not action_event.pressed:
+			return false
+		return _is_spawn_kiosk_action_name(action_event.action)
+
+	return false
+
+func _is_spawn_kiosk_action_name(action_name: StringName) -> bool:
+	for configured_action in spawn_kiosk_actions:
+		if action_name == StringName(configured_action):
+			return true
+	return false
 
 func _mark_input_handled() -> void:
 	var viewport := get_viewport()
@@ -324,7 +358,7 @@ func _build_ui() -> void:
 	vb.add_child(_status_label)
 	
 	_hint_label = Label.new()
-	_hint_label.text = "Toggle: M | Next map: N | Clean: C"
+	_hint_label.text = "Toggle: M | Next map: N | Clean: C | Spawn kiosk: B / VR B"
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_hint_label.modulate = Color(0.62, 0.72, 0.84, 1.0)
 	vb.add_child(_hint_label)
@@ -818,6 +852,105 @@ func _on_refresh_pressed() -> void:
 func _on_clean_scene_pressed() -> void:
 	var removed := clean_scene_keep_player()
 	_set_status("Scene cleaned. Removed %d root nodes." % removed)
+
+func _on_spawn_kiosk_pressed() -> void:
+	var scene_tree := get_tree()
+	if not scene_tree:
+		_set_status("Cannot spawn kiosk: no SceneTree.")
+		return
+
+	var current_scene := scene_tree.current_scene
+	if not current_scene:
+		_set_status("Cannot spawn kiosk: no current scene.")
+		return
+
+	var existing_kiosk := _find_spawned_map_loader_kiosk(current_scene)
+	var spawn_transform := _build_map_loader_spawn_transform()
+	if existing_kiosk:
+		existing_kiosk.global_transform = spawn_transform
+		_set_status("Moved VR map loader kiosk in front of you.")
+		return
+
+	var kiosk_scene = load(VR_MAP_LOADER_KIOSK_SCENE_PATH)
+	if not (kiosk_scene is PackedScene):
+		_set_status("Cannot spawn kiosk: scene missing at %s" % VR_MAP_LOADER_KIOSK_SCENE_PATH)
+		return
+
+	var kiosk_instance = (kiosk_scene as PackedScene).instantiate()
+	if not (kiosk_instance is Node3D):
+		if kiosk_instance and kiosk_instance is Node:
+			(kiosk_instance as Node).queue_free()
+		_set_status("Cannot spawn kiosk: root is not Node3D.")
+		return
+
+	current_scene.add_child(kiosk_instance)
+	var kiosk_node := kiosk_instance as Node3D
+	kiosk_node.global_transform = spawn_transform
+	kiosk_node.add_to_group(SPAWNED_MAP_LOADER_GROUP)
+	_set_status("Spawned VR map loader kiosk (B).")
+
+func _find_spawned_map_loader_kiosk(current_scene: Node) -> Node3D:
+	var scene_tree := get_tree()
+	if not scene_tree:
+		return null
+
+	for node_candidate in scene_tree.get_nodes_in_group(SPAWNED_MAP_LOADER_GROUP):
+		if not (node_candidate is Node3D):
+			continue
+		var node3d := node_candidate as Node3D
+		if node3d == current_scene or current_scene.is_ancestor_of(node3d):
+			return node3d
+
+	return null
+
+func _build_map_loader_spawn_transform() -> Transform3D:
+	var camera := get_viewport().get_camera_3d()
+	var player := _get_primary_player_node3d()
+
+	var source_position := Vector3.ZERO
+	var source_forward := Vector3.FORWARD
+	if camera:
+		source_position = camera.global_position
+		source_forward = -camera.global_transform.basis.z
+	elif player:
+		source_position = player.global_position
+		source_forward = -player.global_transform.basis.z
+
+	var forward_flat := Vector3(source_forward.x, 0.0, source_forward.z)
+	if forward_flat.length_squared() <= 0.0001:
+		forward_flat = Vector3(0.0, 0.0, -1.0)
+	forward_flat = forward_flat.normalized()
+
+	var spawn_position := source_position + forward_flat * kiosk_spawn_distance
+	spawn_position.y = _resolve_map_loader_spawn_height(source_position.y)
+
+	var look_direction := source_position - spawn_position
+	look_direction.y = 0.0
+	if look_direction.length_squared() <= 0.0001:
+		look_direction = -forward_flat
+
+	var spawn_basis := Basis.looking_at(look_direction.normalized(), Vector3.UP)
+	return Transform3D(spawn_basis, spawn_position)
+
+func _resolve_map_loader_spawn_height(fallback_source_y: float) -> float:
+	var player := _get_primary_player_node3d()
+	if player:
+		return player.global_position.y
+
+	return max(0.0, fallback_source_y - 1.4)
+
+func _get_primary_player_node3d() -> Node3D:
+	var scene_tree := get_tree()
+	if not scene_tree:
+		return null
+
+	var group_names: Array[StringName] = [&"player_body", &"vr_player", &"player"]
+	for group_name in group_names:
+		for node_candidate in scene_tree.get_nodes_in_group(group_name):
+			if node_candidate is Node3D:
+				return node_candidate as Node3D
+
+	return null
 
 func _on_clean_before_load_toggled(enabled: bool) -> void:
 	auto_clean_before_load = enabled

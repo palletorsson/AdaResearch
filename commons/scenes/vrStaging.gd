@@ -12,11 +12,19 @@ extends XRToolsStaging
 @export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
+@export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray(["by_button", "b_button", "vr_button_b"])
+@export var spawn_map_loader_keyboard_key: Key = KEY_B
+@export var map_loader_spawn_distance: float = 1.8
+@export var map_loader_spawn_height: float = 1.6
 
 # Transition speed configuration
 @export var quick_transition_duration: float = 0.3  # Fast fades for in-sequence transitions
 @export var normal_transition_duration: float = 1.0  # Standard VR-comfortable fades
 var _use_quick_transition: bool = false  # Set by AdaSceneManager for in-sequence transitions
+
+const VR_MAP_LOADER_KIOSK_SCENE_PATH := "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
+const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
+const MAP_LOADER_SPAWN_COOLDOWN_MS := 250
 
 # Signal emitted when staging is complete
 signal staging_complete
@@ -24,6 +32,9 @@ signal staging_complete
 # Node references (specific to our lab system)
 var map_progression_manager = null
 var grid_system_manager = null
+var _spawn_map_loader_action_down: bool = false
+var _spawn_map_loader_key_down: bool = false
+var _last_map_loader_spawn_ms: int = -100000
 
 func _ready() -> void:
 	# Do not initialise if in the editor
@@ -70,6 +81,7 @@ func _ready() -> void:
 	
 	# CONNECT to XRToolsStaging signals properly
 	_connect_staging_signals()
+	_connect_map_loader_spawn_button_signals()
 	
 	# Show startup configuration
 	if OS.is_debug_build():
@@ -77,6 +89,11 @@ func _ready() -> void:
 	
 	# Start the game system
 	_start_game()
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	_handle_map_loader_spawn_shortcut()
 
 func _fix_loading_screen_curve():
 	"""Fix the follow_speed curve to prevent the null error"""
@@ -337,6 +354,7 @@ func _show_startup_info():
 func _on_scene_loaded_handler(scene, user_data):
 	"""Connected to XRToolsStaging scene_loaded signal"""
 	print("AdaVRStaging: Scene loaded successfully - %s" % scene.name if scene else "null")
+	_connect_map_loader_spawn_button_signals()
 	
 	# Pass user data to the scene if it has the method
 	if scene and user_data and scene.has_method("set_scene_user_data"):
@@ -574,6 +592,172 @@ func _initialize_managers():
 		print("AdaVRStaging: Grid system manager created")
 	
 	print("AdaVRStaging: Managers initialized")
+
+func _handle_map_loader_spawn_shortcut() -> void:
+	var action_down := _is_spawn_map_loader_action_down()
+	if action_down and not _spawn_map_loader_action_down:
+		_trigger_map_loader_spawn()
+	_spawn_map_loader_action_down = action_down
+
+	var key_down := Input.is_key_pressed(spawn_map_loader_keyboard_key) or Input.is_physical_key_pressed(spawn_map_loader_keyboard_key)
+	if key_down and not _spawn_map_loader_key_down:
+		_trigger_map_loader_spawn()
+	_spawn_map_loader_key_down = key_down
+
+func _is_spawn_map_loader_action_down() -> bool:
+	for action_name in spawn_map_loader_button_actions:
+		var action_key := StringName(action_name)
+		if InputMap.has_action(action_key) and Input.is_action_pressed(action_key):
+			return true
+
+	return false
+
+func _connect_map_loader_spawn_button_signals() -> void:
+	for controller in _get_staging_controllers():
+		if not controller or not controller.has_signal("button_pressed"):
+			continue
+
+		var callback := _on_map_loader_controller_button_pressed.bind(String(controller.name))
+		if not controller.is_connected("button_pressed", callback):
+			controller.connect("button_pressed", callback)
+
+func _on_map_loader_controller_button_pressed(button_action: StringName, controller_name: String) -> void:
+	if not _matches_map_loader_spawn_action(button_action):
+		return
+
+	print("AdaVRStaging: Spawn map loader with %s on %s" % [button_action, controller_name])
+	_trigger_map_loader_spawn()
+
+func _matches_map_loader_spawn_action(action_name: StringName) -> bool:
+	var action_text := String(action_name).strip_edges().to_lower()
+	for configured_action in spawn_map_loader_button_actions:
+		if action_text == String(configured_action).strip_edges().to_lower():
+			return true
+	return false
+
+func _trigger_map_loader_spawn() -> void:
+	var now_ms := Time.get_ticks_msec()
+	if now_ms - _last_map_loader_spawn_ms < MAP_LOADER_SPAWN_COOLDOWN_MS:
+		return
+
+	_last_map_loader_spawn_ms = now_ms
+	_spawn_or_move_map_loader_kiosk()
+
+func _get_staging_controllers() -> Array[Node]:
+	var controllers: Array[Node] = []
+	var controller_paths: Array[NodePath] = [
+		NodePath("XROrigin3D/RightHandController"),
+		NodePath("XROrigin3D/LeftHandController")
+	]
+
+	for controller_path in controller_paths:
+		var controller = get_node_or_null(controller_path)
+		if controller and controller is Node:
+			controllers.append(controller as Node)
+
+	for controller_candidate in find_children("*", "XRController3D", true, false):
+		if controller_candidate is Node and not controllers.has(controller_candidate):
+			controllers.append(controller_candidate as Node)
+
+	for node_candidate in find_children("*", "", true, false):
+		if not (node_candidate is Node):
+			continue
+		var node := node_candidate as Node
+		if not node.has_method("is_button_pressed") or not node.has_signal("button_pressed"):
+			continue
+		if not controllers.has(node):
+			controllers.append(node)
+
+	return controllers
+
+func _spawn_or_move_map_loader_kiosk() -> void:
+	var target_root: Node = current_scene
+	if target_root == null:
+		target_root = get_node_or_null("Scene")
+	if target_root == null:
+		target_root = self
+
+	var existing_kiosk := _find_spawned_map_loader_kiosk(target_root)
+	var spawn_transform := _build_map_loader_spawn_transform()
+	if existing_kiosk:
+		existing_kiosk.global_transform = spawn_transform
+		print("AdaVRStaging: Moved map loader kiosk in front of player")
+		return
+
+	var kiosk_scene = load(VR_MAP_LOADER_KIOSK_SCENE_PATH)
+	if not (kiosk_scene is PackedScene):
+		push_warning("AdaVRStaging: Map loader kiosk scene missing: %s" % VR_MAP_LOADER_KIOSK_SCENE_PATH)
+		return
+
+	var kiosk_instance = (kiosk_scene as PackedScene).instantiate()
+	if not (kiosk_instance is Node3D):
+		if kiosk_instance and kiosk_instance is Node:
+			(kiosk_instance as Node).queue_free()
+		push_warning("AdaVRStaging: Map loader kiosk root must be Node3D")
+		return
+
+	target_root.add_child(kiosk_instance)
+	var kiosk_node := kiosk_instance as Node3D
+	kiosk_node.global_transform = spawn_transform
+	kiosk_node.add_to_group(SPAWNED_MAP_LOADER_GROUP)
+	print("AdaVRStaging: Spawned map loader kiosk")
+
+func _find_spawned_map_loader_kiosk(target_root: Node) -> Node3D:
+	var scene_tree := get_tree()
+	if not scene_tree:
+		return null
+
+	for node_candidate in scene_tree.get_nodes_in_group(SPAWNED_MAP_LOADER_GROUP):
+		if not (node_candidate is Node3D):
+			continue
+		var node3d := node_candidate as Node3D
+		if node3d == target_root or target_root.is_ancestor_of(node3d):
+			return node3d
+
+	return null
+
+func _build_map_loader_spawn_transform() -> Transform3D:
+	var source_camera: Camera3D = xr_camera
+	if source_camera == null:
+		source_camera = get_viewport().get_camera_3d()
+
+	var source_position := Vector3.ZERO
+	var source_forward := Vector3.FORWARD
+	if source_camera:
+		source_position = source_camera.global_position
+		source_forward = -source_camera.global_transform.basis.z
+	elif xr_origin:
+		source_position = xr_origin.global_position
+		source_forward = -xr_origin.global_transform.basis.z
+
+	var forward_flat := Vector3(source_forward.x, 0.0, source_forward.z)
+	if forward_flat.length_squared() <= 0.0001:
+		forward_flat = Vector3(0.0, 0.0, -1.0)
+	forward_flat = forward_flat.normalized()
+
+	var spawn_position := source_position + forward_flat * map_loader_spawn_distance
+	spawn_position.y = _resolve_map_loader_spawn_height(source_position.y)
+
+	return Transform3D(Basis.IDENTITY, spawn_position)
+
+func _resolve_map_loader_spawn_height(_fallback_source_y: float) -> float:
+	return map_loader_spawn_height
+
+func _find_player_body_node3d() -> Node3D:
+	var scene_tree := get_tree()
+	if not scene_tree:
+		return null
+
+	for node_candidate in scene_tree.get_nodes_in_group("player_body"):
+		if node_candidate is Node3D:
+			return node_candidate as Node3D
+
+	if xr_origin:
+		var player_body = xr_origin.find_child("PlayerBody", true, false)
+		if player_body is Node3D:
+			return player_body as Node3D
+
+	return null
 
 # OPTIONAL: Simple loading text enhancement
 func _update_loading_screen_text(level_name: String, description: String = ""):
