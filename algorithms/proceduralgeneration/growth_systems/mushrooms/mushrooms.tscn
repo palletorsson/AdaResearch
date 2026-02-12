@@ -6,6 +6,7 @@
 
 [node name="Mushrooms" type="Node3D"]
 script = ExtResource("1_ltktd")
+ground_albedo_color = Color(0.44, 0.56, 0.34, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5605)

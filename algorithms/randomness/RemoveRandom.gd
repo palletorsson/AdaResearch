@@ -19,6 +19,8 @@ extends Node3D
 @export var removal_speed: float = 1.0
 @export var highlight_duration: float = 0.3
 @export var show_removal_effects: bool = true
+@export var localize_selection_to_artifact: bool = true
+@export var auto_expand_to_all_if_empty: bool = true
 
 @export_group("MultiMesh")
 @export var multimesh_path: NodePath = "../GridMultiMesh"
@@ -29,6 +31,10 @@ var multimesh: MultiMesh = null
 var active_instances: Array[int] = []  # Track which instances are still active
 var initial_count: int = 0
 var removed_count: int = 0
+var _removal_in_progress: bool = false
+var _selection_origin_local: Vector3 = Vector3.ZERO
+var _grid_step_x: float = 1.0
+var _grid_step_z: float = 1.0
 
 var _use_node_mode: bool = false
 var _target_nodes: Array[Node3D] = []
@@ -39,7 +45,13 @@ func _ready():
 		multimesh_instance = get_node_or_null(multimesh_path)
 
 	if not multimesh_instance:
+		multimesh_instance = _find_named_multimesh_instance(get_parent(), "GridMultiMesh")
+	if not multimesh_instance:
 		multimesh_instance = _find_multimesh_instance(get_parent())
+	if not multimesh_instance and get_tree() and get_tree().current_scene:
+		multimesh_instance = _find_named_multimesh_instance(get_tree().current_scene, "GridMultiMesh")
+	if not multimesh_instance and get_tree() and get_tree().current_scene:
+		multimesh_instance = _find_multimesh_instance(get_tree().current_scene)
 
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
@@ -55,7 +67,7 @@ func _ready():
 
 	# Create timer
 	timer = Timer.new()
-	timer.wait_time = 0.5 / removal_speed
+	timer.wait_time = 0.5 / maxf(removal_speed, 0.01)
 	timer.one_shot = false
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
@@ -101,10 +113,23 @@ func _collect_nodes_in_range(root: Node):
 			_collect_nodes_in_range(child)
 
 func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
+	if node == null:
+		return null
 	if node is MultiMeshInstance3D:
 		return node
 	for child in node.get_children():
 		var result = _find_multimesh_instance(child)
+		if result:
+			return result
+	return null
+
+func _find_named_multimesh_instance(node: Node, target_name: String) -> MultiMeshInstance3D:
+	if node == null:
+		return null
+	if node is MultiMeshInstance3D and node.name == target_name:
+		return node
+	for child in node.get_children():
+		var result = _find_named_multimesh_instance(child, target_name)
 		if result:
 			return result
 	return null
@@ -114,6 +139,7 @@ func find_all_instances():
 	if not multimesh:
 		return
 
+	_refresh_selection_reference()
 	active_instances.clear()
 
 	for i in range(multimesh.instance_count):
@@ -121,30 +147,78 @@ func find_all_instances():
 		if _should_include_instance(transform.origin):
 			active_instances.append(i)
 
+	if active_instances.is_empty() and auto_expand_to_all_if_empty:
+		for i in range(multimesh.instance_count):
+			active_instances.append(i)
+		print("RemoveRandom: Selection was empty, expanded to all %d instances" % active_instances.size())
+
 	initial_count = active_instances.size()
 	print("RemoveRandom: Selected %d instances based on mode '%s'" % [initial_count, selection_mode])
 
+func _refresh_selection_reference():
+	if not multimesh_instance or not multimesh:
+		return
+
+	_selection_origin_local = multimesh_instance.to_local(global_position)
+
+	# Estimate grid spacing from transforms so row/column mode remains correct
+	# when cube_size + gutter is not exactly 1.
+	var x_values: Array = []
+	var z_values: Array = []
+	for i in range(multimesh.instance_count):
+		var origin = multimesh.get_instance_transform(i).origin
+		x_values.append(origin.x)
+		z_values.append(origin.z)
+
+	_grid_step_x = _estimate_axis_step(x_values)
+	_grid_step_z = _estimate_axis_step(z_values)
+
+func _estimate_axis_step(values: Array) -> float:
+	if values.size() < 2:
+		return 1.0
+
+	values.sort()
+	var min_diff := INF
+	for i in range(1, values.size()):
+		var diff := absf(float(values[i]) - float(values[i - 1]))
+		if diff > 0.0001 and diff < min_diff:
+			min_diff = diff
+
+	if is_inf(min_diff):
+		return 1.0
+	return maxf(min_diff, 0.0001)
+
 func _should_include_instance(pos: Vector3) -> bool:
 	"""Check if an instance should be included based on selection mode"""
+	var check_pos = pos
+	if localize_selection_to_artifact:
+		check_pos -= _selection_origin_local
+
 	match selection_mode:
 		"All":
 			return true
 		"Column":
-			return abs(pos.x - target_column) < 0.1
+			var column_center = float(target_column) * _grid_step_x
+			return absf(check_pos.x - column_center) <= _grid_step_x * 0.4
 		"Row":
-			return abs(pos.z - target_row) < 0.1
+			var row_center = float(target_row) * _grid_step_z
+			return absf(check_pos.z - row_center) <= _grid_step_z * 0.4
 		"Range":
-			return (pos.x >= x_min and pos.x <= x_max and
-					pos.y >= y_min and pos.y <= y_max and
-					pos.z >= z_min and pos.z <= z_max)
+			return (check_pos.x >= x_min and check_pos.x <= x_max and
+					check_pos.y >= y_min and check_pos.y <= y_max and
+					check_pos.z >= z_min and check_pos.z <= z_max)
 	return false
 
 func _on_timer_timeout():
 	"""Called every 0.5 seconds to remove one instance"""
+	if _removal_in_progress:
+		return
+	_removal_in_progress = true
 	if _use_node_mode:
-		_remove_node()
+		await _remove_node()
 	else:
-		_remove_multimesh_instance()
+		await _remove_multimesh_instance()
+	_removal_in_progress = false
 
 func _remove_multimesh_instance():
 	if active_instances.is_empty():
@@ -172,7 +246,8 @@ func _remove_multimesh_instance():
 	if show_removal_effects:
 		create_removal_effect(removal_position)
 
-	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(initial_count)) * 100.0])
+	var total = maxi(initial_count, 1)
+	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(total)) * 100.0])
 
 func _remove_node():
 	# Clean up invalid references
@@ -212,7 +287,8 @@ func _remove_node():
 	if show_removal_effects:
 		create_removal_effect(removal_position)
 
-	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(initial_count)) * 100.0])
+	var total = maxi(initial_count, 1)
+	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(total)) * 100.0])
 
 func highlight_instance_for_removal(instance_index: int):
 	"""Highlight an instance before removing it"""
@@ -262,6 +338,86 @@ func create_removal_effect(position: Vector3):
 	# Auto-cleanup
 	await get_tree().create_timer(1.0).timeout
 	particles.queue_free()
+
+func apply_grid_config(config_data: Dictionary):
+	"""Allow map token config via #key:value syntax."""
+	if config_data.is_empty():
+		return
+
+	if config_data.has("selection_mode"):
+		selection_mode = _parse_selection_mode(config_data.get("selection_mode"))
+	elif config_data.has("mode"):
+		selection_mode = _parse_selection_mode(config_data.get("mode"))
+
+	if config_data.has("target_column"):
+		target_column = int(config_data.get("target_column"))
+	elif config_data.has("column"):
+		target_column = int(config_data.get("column"))
+
+	if config_data.has("target_row"):
+		target_row = int(config_data.get("target_row"))
+	elif config_data.has("row"):
+		target_row = int(config_data.get("row"))
+
+	if config_data.has("x_min"):
+		x_min = float(config_data.get("x_min"))
+	if config_data.has("x_max"):
+		x_max = float(config_data.get("x_max"))
+	if config_data.has("y_min"):
+		y_min = float(config_data.get("y_min"))
+	if config_data.has("y_max"):
+		y_max = float(config_data.get("y_max"))
+	if config_data.has("z_min"):
+		z_min = float(config_data.get("z_min"))
+	if config_data.has("z_max"):
+		z_max = float(config_data.get("z_max"))
+
+	if config_data.has("removal_speed"):
+		removal_speed = maxf(float(config_data.get("removal_speed")), 0.01)
+	if config_data.has("highlight_duration"):
+		highlight_duration = maxf(float(config_data.get("highlight_duration")), 0.0)
+	if config_data.has("show_removal_effects"):
+		show_removal_effects = _to_bool(config_data.get("show_removal_effects"), show_removal_effects)
+
+	if config_data.has("localize_selection_to_artifact"):
+		localize_selection_to_artifact = _to_bool(config_data.get("localize_selection_to_artifact"), localize_selection_to_artifact)
+	elif config_data.has("local"):
+		localize_selection_to_artifact = _to_bool(config_data.get("local"), localize_selection_to_artifact)
+
+	if config_data.has("auto_expand_to_all_if_empty"):
+		auto_expand_to_all_if_empty = _to_bool(config_data.get("auto_expand_to_all_if_empty"), auto_expand_to_all_if_empty)
+
+	var was_running := timer and not timer.is_stopped()
+	if timer:
+		timer.wait_time = 0.5 / maxf(removal_speed, 0.01)
+
+	reset_and_find_instances()
+	if was_running:
+		start_removal()
+
+func _parse_selection_mode(value: Variant) -> String:
+	var mode := str(value).strip_edges().to_lower()
+	match mode:
+		"all":
+			return "All"
+		"column", "col", "x":
+			return "Column"
+		"row", "z":
+			return "Row"
+		"range":
+			return "Range"
+		_:
+			return selection_mode
+
+func _to_bool(value: Variant, fallback: bool) -> bool:
+	if value is bool:
+		return value
+	var text := str(value).strip_edges().to_lower()
+	if text in ["true", "1", "yes", "on"]:
+		return true
+	if text in ["false", "0", "no", "off"]:
+		return false
+	return fallback
 
 # Public API
 func start_removal():

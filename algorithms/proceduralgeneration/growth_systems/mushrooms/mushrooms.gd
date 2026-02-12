@@ -11,6 +11,7 @@ extends Node3D
 @export var ground_random_amplitude: float = 0.18
 @export var ground_resolution: int = 36
 @export var ground_seed: int = 0
+@export var ground_albedo_color: Color = Color(0.44, 0.56, 0.34)  # Lighter green forest floor
 
 # References
 var mushroom_types = []
@@ -57,7 +58,7 @@ func create_ground():
 	
 	# Create ground material
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.3, 0.35, 0.25)  # Dark soil color
+	material.albedo_color = ground_albedo_color
 	material.roughness = 0.9
 	ground_mesh.material_override = material
 

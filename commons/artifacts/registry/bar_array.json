@@ -1,0 +1,114 @@
+{
+	"_comment": "BarArray substrate — MultiMesh bar visualization with algorithm cartridges. Use #algorithm:<name> or named variants.",
+	"artifacts": {
+		"bar_array": {
+			"name": "BarArray Substrate",
+			"lookup_name": "bar_array",
+			"description": "Universal 1D array visualization. MultiMesh bars with emission and smooth transitions. Defaults to Bubble Sort. Use #algorithm:<name> to select cartridge.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"tags": ["substrate", "bar_array", "sorting", "universal"],
+			"complexity": "beginner"
+		},
+		"bar_array_bubble_sort": {
+			"name": "BarArray — Bubble Sort",
+			"lookup_name": "bar_array_bubble_sort",
+			"description": "Bubble sort on a MultiMesh bar array. Adjacent comparisons, largest bubbles to the end. O(n²). The canonical first sort.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "bubble_sort", "sorting", "O(n²)"],
+			"complexity": "beginner"
+		},
+		"bar_array_insertion_sort": {
+			"name": "BarArray — Insertion Sort",
+			"lookup_name": "bar_array_insertion_sort",
+			"description": "Insertion sort — slides each element into its sorted position. O(n²) worst, O(n) best. The card-player sort.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "insertion_sort", "sorting", "O(n²)"],
+			"complexity": "beginner"
+		},
+		"bar_array_selection_sort": {
+			"name": "BarArray — Selection Sort",
+			"lookup_name": "bar_array_selection_sort",
+			"description": "Selection sort — find minimum, swap to front. O(n²) always. Simple and minimum swaps.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "selection_sort", "sorting", "O(n²)"],
+			"complexity": "beginner"
+		},
+		"bar_array_merge_sort": {
+			"name": "BarArray — Merge Sort",
+			"lookup_name": "bar_array_merge_sort",
+			"description": "Merge sort — iterative bottom-up divide and conquer. O(n log n) always. Stable. Watch halves merge.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "merge_sort", "sorting", "O(n log n)", "divide_conquer"],
+			"complexity": "intermediate"
+		},
+		"bar_array_quicksort": {
+			"name": "BarArray — Quicksort",
+			"lookup_name": "bar_array_quicksort",
+			"description": "Quicksort — pivot, partition, recurse. O(n log n) average. The practical fast sort.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "quicksort", "sorting", "O(n log n)", "divide_conquer"],
+			"complexity": "intermediate"
+		},
+		"bar_array_heap_sort": {
+			"name": "BarArray — Heap Sort",
+			"lookup_name": "bar_array_heap_sort",
+			"description": "Heap sort — build max-heap, extract maximums. O(n log n) always. In-place. Two visible phases.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "datastructures",
+			"tags": ["substrate", "bar_array", "heap_sort", "sorting", "O(n log n)", "heap"],
+			"complexity": "intermediate"
+		},
+		"bar_array_histogram": {
+			"name": "BarArray — Histogram",
+			"lookup_name": "bar_array_histogram",
+			"description": "Gaussian histogram — bins random samples to form a bell curve. Watch the distribution emerge from noise.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "randomness",
+			"tags": ["substrate", "bar_array", "histogram", "distribution", "gaussian", "statistics"],
+			"complexity": "beginner"
+		},
+		"bar_array_fibonacci": {
+			"name": "BarArray — Fibonacci",
+			"lookup_name": "bar_array_fibonacci",
+			"description": "Fibonacci sequence — each bar = F(n), growing exponentially. Watch the golden ratio emerge.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "recursiveemergence",
+			"tags": ["substrate", "bar_array", "fibonacci", "sequence", "golden_ratio", "mathematical"],
+			"complexity": "beginner"
+		},
+		"bar_array_prime_sieve": {
+			"name": "BarArray — Prime Sieve",
+			"lookup_name": "bar_array_prime_sieve",
+			"description": "Sieve of Eratosthenes — bars go dark when eliminated as composite. Watch the primes survive.",
+			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "criticalalgorithms",
+			"tags": ["substrate", "bar_array", "prime_sieve", "eratosthenes", "number_theory", "mathematical"],
+			"complexity": "intermediate"
+		}
+	}
+}

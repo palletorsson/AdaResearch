@@ -15,10 +15,20 @@ uniform float idle_pulse_speed : hint_range(0.0, 8.0) = 2.0;
 uniform float rim_power : hint_range(0.5, 8.0) = 3.0;
 uniform float rim_strength : hint_range(0.0, 1.0) = 0.25;
 
+varying flat float v_emission_energy;
+varying flat float v_cell_age;
+varying vec3 v_cell_color;
+
+void vertex() {
+	v_emission_energy = INSTANCE_CUSTOM.r;
+	v_cell_age = INSTANCE_CUSTOM.g;
+	v_cell_color = COLOR.rgb;
+}
+
 void fragment() {
-	vec3 cell_color = COLOR.rgb;
-	float emission_energy = INSTANCE_CUSTOM.r;
-	float cell_age = INSTANCE_CUSTOM.g;
+	vec3 cell_color = v_cell_color;
+	float emission_energy = v_emission_energy;
+	float cell_age = v_cell_age;
 
 	// Idle breathing — each instance slightly offset by its color hash
 	float phase_offset = dot(cell_color, vec3(17.0, 31.0, 47.0));

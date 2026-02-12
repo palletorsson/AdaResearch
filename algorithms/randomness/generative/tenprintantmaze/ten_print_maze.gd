@@ -9,12 +9,14 @@
 @export var grid_width: int = 10
 @export var grid_depth: int = 10
 @export var wall_thickness: float = 0.1
+@export var show_marker_disks: bool = false
 
 # Ant settings
 @export var ant_speed: float = 5.0
 @export var ant_size: float = 0.3
 @export var ant_color: Color = Color.RED
 @export var path_color: Color = Color(1.0, 0.5, 0.0)
+@export var wall_color: Color = Color(0.9, 0.95, 1.0, 1.0)
 
 # Maze representation
 var maze: Array = []
@@ -118,9 +120,10 @@ func create_3d_maze():
 			else:  # \ diagonal
 				create_diagonal_wall(wall_position, false)
 
-	# Create entrance and exit markers (now in ZY plane)
-	create_marker(Vector3(ant_size, start_pos.y * cell_size + cell_size/2, 0), Color.GREEN)
-	create_marker(Vector3(ant_size, exit_pos.y * cell_size + cell_size/2, grid_width * cell_size), Color.BLUE)
+	# Optional entrance/exit markers (disabled by default).
+	if show_marker_disks:
+		create_marker(Vector3(ant_size, start_pos.y * cell_size + cell_size/2, 0), Color.GREEN)
+		create_marker(Vector3(ant_size, exit_pos.y * cell_size + cell_size/2, grid_width * cell_size), Color.BLUE)
 
 func create_diagonal_wall(position, is_forward_slash):
 	var wall_node = Node3D.new()
@@ -130,16 +133,24 @@ func create_diagonal_wall(position, is_forward_slash):
 	# Store reference to wall node for movement
 	wall_nodes.append(wall_node)
 
-	# Wall in ZY plane: thin in X, diagonal length, line thickness
-	var wall_mesh = BoxMesh.new()
-	wall_mesh.size = Vector3(wall_thickness, wall_thickness, cell_size * sqrt(2))
-
-	var wall_material = ShaderMaterial.new()
-	wall_material.shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+	# Render each 10 PRINT stroke as a line (no square bars).
+	var line_length := cell_size * sqrt(2.0)
+	var wall_mesh := ImmediateMesh.new()
+	var wall_material := StandardMaterial3D.new()
+	wall_material.albedo_color = wall_color
+	wall_material.emission_enabled = true
+	wall_material.emission = wall_color
+	wall_material.emission_energy_multiplier = 0.6
+	wall_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	wall_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 	var wall_instance = MeshInstance3D.new()
 	wall_instance.mesh = wall_mesh
 	wall_instance.material_override = wall_material
+	wall_mesh.surface_begin(Mesh.PRIMITIVE_LINES, wall_material)
+	wall_mesh.surface_add_vertex(Vector3(0, 0, -line_length * 0.5))
+	wall_mesh.surface_add_vertex(Vector3(0, 0, line_length * 0.5))
+	wall_mesh.surface_end()
 
 	# Position at center of cell in ZY plane
 	wall_instance.position = Vector3(0, cell_size/2, cell_size/2)

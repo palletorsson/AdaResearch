@@ -1,0 +1,58 @@
+{
+	"map_info": {
+		"name": "Substrate Showcase",
+		"lookup_name": "Test_Substrates",
+		"description": "All 4 substrate types side by side: Grid2D, Living Paper, BarArray, and standalone artifacts",
+		"version": "1.0",
+		"format": "grid",
+		"dimensions": {
+			"width": 11,
+			"depth": 7,
+			"max_height": 3
+		},
+		"metadata": {
+			"author": "Ada",
+			"date": "2026-02-12",
+			"category": "testing"
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "grid2d_life", " ", "grid2d_wireworld", " ", "grid2d_bfs", " ", "grid2d_seeds", " ", "grid2d_langtons_ant", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "living_paper_random_walk", " ", "living_paper_levy", " ", "living_paper_mandelbrot", " ", "living_paper_life", " ", "living_paper_sierpinski", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "bar_array_bubble_sort", " ", "bar_array_quicksort", " ", "bar_array_merge_sort", " ", "bar_array_histogram", " ", "bar_array_prime_sieve", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Back to Lab",
+			"description": "Return to the lab",
+			"properties": {
+				"destination": "lab"
+			}
+		}
+	}
+}

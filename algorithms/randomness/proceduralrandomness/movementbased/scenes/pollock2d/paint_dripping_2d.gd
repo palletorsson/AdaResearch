@@ -25,6 +25,8 @@ signal stroke_path_generated(path: PackedVector2Array, stroke_color: Color, stro
 
 # Continuous painting parameters
 @export var paint_interval: float = 4.0  # Add new strokes every 4 seconds
+@export_range(0.0, 1.0, 0.01) var initial_paint_ratio: float = 0.15
+@export var paint_buildup_duration: float = 80.0  # Seconds to reach full density
 
 # Color palette (Pollock-inspired)
 var colors = [
@@ -41,6 +43,7 @@ var canvas: Image
 var texture: ImageTexture
 var rng = RandomNumberGenerator.new()
 var painting_timer: Timer
+var _paint_elapsed_time: float = 0.0
 
 func _ready():
 	rng.randomize()
@@ -70,24 +73,40 @@ func update_texture():
 	$CanvasLayer/TextureRect.texture = texture
 	
 func create_initial_painting():
+	_paint_elapsed_time = 0.0
+	var starting_ratio := clampf(initial_paint_ratio, 0.0, 1.0)
+	var initial_drips := maxi(1, int(round(float(drip_count) * starting_ratio)))
+	var initial_lines := maxi(1, int(round(float(line_count) * starting_ratio)))
+
 	# Add initial drip marks
-	for i in range(drip_count):
+	for i in range(initial_drips):
 		add_drip()
 	
 	# Add initial flowing lines
-	for i in range(line_count):
+	for i in range(initial_lines):
 		add_line()
 
 func add_new_painting_strokes():
-	# Add some new drips and lines to continuously evolve the painting
-	for i in range(rng.randi_range(1, 5)):  # 1-5 new drips
+	# Gradually increase the amount of paint over time.
+	_paint_elapsed_time += paint_interval
+	var intensity := _get_paint_intensity()
+
+	var max_drips_now := maxi(1, int(round(lerpf(2.0, 6.0, intensity))))
+	var max_lines_now := maxi(1, int(round(lerpf(1.0, 4.0, intensity))))
+
+	for i in range(rng.randi_range(1, max_drips_now)):
 		add_drip()
 	
-	for i in range(rng.randi_range(1, 3)):  # 1-3 new lines
+	for i in range(rng.randi_range(1, max_lines_now)):
 		add_line()
 	
 	# Update the texture to show new strokes
 	update_texture()
+
+func _get_paint_intensity() -> float:
+	if paint_buildup_duration <= 0.0:
+		return 1.0
+	return clampf(_paint_elapsed_time / paint_buildup_duration, 0.0, 1.0)
 
 func add_drip():
 	# Random position

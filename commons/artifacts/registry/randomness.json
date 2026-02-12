@@ -531,6 +531,13 @@
 			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn",
 			"category": "emergence"
 		},
+		"random_decay_multimesh": {
+			"name": "Random Decay MultiMesh",
+			"lookup_name": "random_decay_multimesh",
+			"description": "Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.",
+			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+			"category": "emergence"
+		},
 		"random_color_book_page_collection": {
 			"name": "Random Color Book Page Collection",
 			"lookup_name": "random_color_book_page_collection",
