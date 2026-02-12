@@ -144,3 +144,78 @@ func create_outline_collision(mesh: ArrayMesh):
 	var outline_shape = mesh.create_outline(0.1)  # 0.1 = margin
 	if outline_shape:
 		collision_shape.shape = outline_shape
+
+# ── Shared Shader Utilities ──────────────────────────────────
+
+func apply_height_shader(
+	color_low: Color = Color(0.15, 0.12, 0.2),
+	color_mid: Color = Color(0.4, 0.45, 0.5),
+	color_high: Color = Color(0.9, 0.85, 0.75),
+	h_min: float = -2.0,
+	h_max: float = 4.0,
+	contours: bool = false,
+	contour_spacing: float = 0.5
+) -> ShaderMaterial:
+	"""Apply the shared terrain_height_color shader to this space.
+	   Returns the ShaderMaterial for further customization."""
+	var shader = load("res://commons/context/walkgrids/terrain_height_color.gdshader")
+	if shader == null:
+		push_warning("TopologySpace: Could not load terrain_height_color.gdshader")
+		return null
+	var mat = ShaderMaterial.new()
+	mat.shader = shader
+	mat.set_shader_parameter("color_low", Vector3(color_low.r, color_low.g, color_low.b))
+	mat.set_shader_parameter("color_mid", Vector3(color_mid.r, color_mid.g, color_mid.b))
+	mat.set_shader_parameter("color_high", Vector3(color_high.r, color_high.g, color_high.b))
+	mat.set_shader_parameter("height_min", h_min)
+	mat.set_shader_parameter("height_max", h_max)
+	mat.set_shader_parameter("show_contours", contours)
+	mat.set_shader_parameter("contour_spacing", contour_spacing)
+	mesh_instance.material_override = mat
+	return mat
+
+func apply_standard_material(
+	color: Color = Color(0.5, 0.5, 0.5),
+	roughness_val: float = 0.7,
+	metallic_val: float = 0.1,
+	emission_color: Color = Color.BLACK,
+	emission_strength: float = 0.0
+) -> StandardMaterial3D:
+	"""Apply a StandardMaterial3D with common settings.
+	   Returns the material for further customization."""
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.roughness = roughness_val
+	mat.metallic = metallic_val
+	if emission_strength > 0.0:
+		mat.emission_enabled = true
+		mat.emission = emission_color
+		mat.emission_energy_multiplier = emission_strength
+	mesh_instance.material_override = mat
+	return mat
+
+func get_height_at_world_position(world_pos: Vector3) -> float:
+	"""Sample the terrain height at a world XZ position (approximate).
+	   Returns 0.0 if position is outside the space bounds."""
+	var local = world_pos - global_position
+	var u = (local.x + space_size.x / 2.0) / space_size.x
+	var v = (local.z + space_size.y / 2.0) / space_size.y
+	if u < 0.0 or u > 1.0 or v < 0.0 or v > 1.0:
+		return 0.0
+	# Bilinear sample from mesh vertices
+	var gx = u * float(resolution)
+	var gz = v * float(resolution)
+	var ix = int(gx)
+	var iz = int(gz)
+	ix = clampi(ix, 0, resolution - 1)
+	iz = clampi(iz, 0, resolution - 1)
+	# Read from mesh if available
+	if mesh_instance and mesh_instance.mesh:
+		var arrays = mesh_instance.mesh.surface_get_arrays(0)
+		if arrays and arrays[Mesh.ARRAY_VERTEX]:
+			var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			var gs = resolution + 1
+			var idx = iz * gs + ix
+			if idx < verts.size():
+				return verts[idx].y
+	return 0.0

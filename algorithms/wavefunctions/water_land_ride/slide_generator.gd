@@ -266,8 +266,15 @@ func _build_entry_pads() -> void:
 		if idx < path_normals.size():
 			pad_pos += path_normals[idx] * (tube_radius + pad_offset)
 		pad_pos += Vector3.UP * (pad_height + 0.05)
-		pad.global_position = pad_pos
-		pad.look_at(path_points[idx], Vector3.UP)
+		# Build local transform before adding to tree; avoid global transforms/look_at() pre-tree.
+		var to_slide: Vector3 = path_points[idx] - pad_pos
+		pad.position = pad_pos
+		if to_slide.length_squared() > 0.000001:
+			var forward := to_slide.normalized()
+			var up := Vector3.UP
+			if abs(forward.dot(up)) > 0.98:
+				up = Vector3.FORWARD
+			pad.basis = Basis.looking_at(forward, up)
 		add_child(pad)
 		entry_pads.append(pad)
 

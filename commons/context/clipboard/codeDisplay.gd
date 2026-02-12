@@ -153,13 +153,59 @@ func _display_content(content: String) -> void:
 			return
 
 	if rich_text_label:
-		print("CodeDisplay: Setting bbcode_text on RichTextLabel...")
+		print("CodeDisplay: Setting content on RichTextLabel...")
 		rich_text_label.clear()
 		rich_text_label.text = ""
-		rich_text_label.bbcode_text = content
+		if _should_render_plain_text(content):
+			# Content often includes code-style indexing (e.g. foo[cell]) which is parsed as BBCode tags.
+			rich_text_label.bbcode_enabled = false
+			rich_text_label.text = content
+		else:
+			rich_text_label.bbcode_enabled = true
+			rich_text_label.bbcode_text = content
 		print("CodeDisplay: Content set successfully! Length: %d" % content.length())
 	else:
 		push_error("CodeDisplay: rich_text_label is still null after search!")
+
+func _should_render_plain_text(content: String) -> bool:
+	# Markdown code fences should be shown literally in this display.
+	if content.find("```") != -1:
+		return true
+	
+	# Array/dictionary indexing such as grid[cell] causes RichTextLabel to interpret [cell] as a BBCode table cell tag.
+	var indexing_regex := RegEx.new()
+	if indexing_regex.compile("[A-Za-z_][A-Za-z0-9_]*\\s*\\[[^\\]\\n]+\\]") == OK:
+		if indexing_regex.search(content) != null:
+			return true
+	
+	# Fallback: if bracket tags are present but not in our safe BBCode subset, render as plain text.
+	var tag_regex := RegEx.new()
+	if tag_regex.compile("\\[/?([A-Za-z_][A-Za-z0-9_]*)[^\\]]*\\]") == OK:
+		var safe_tags := {
+			"b": true,
+			"i": true,
+			"u": true,
+			"s": true,
+			"code": true,
+			"color": true,
+			"url": true,
+			"img": true,
+			"center": true,
+			"right": true,
+			"left": true,
+			"font": true,
+			"indent": true,
+			"ul": true,
+			"ol": true,
+			"li": true,
+			"quote": true
+		}
+		for match in tag_regex.search_all(content):
+			var tag_name := match.get_string(1).to_lower()
+			if not safe_tags.has(tag_name):
+				return true
+	
+	return false
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	"""Apply configuration from grid system, similar to clipboard
