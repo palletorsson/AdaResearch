@@ -785,6 +785,7 @@ static func _merge_with_song_research_parameters(default_song_id: String, runtim
 static func _load_song_research_defaults(song_id: String) -> Dictionary:
 	var alias_map = {
 		"aphex_twin": "aphex_twin_digital_amber",
+		"dark_wave": "dark_wave_cathedral",
 	}
 	var lookup_song_id = alias_map.get(song_id, song_id)
 	var config_path = "res://commons/audio/parameters/songs/%s.json" % lookup_song_id
@@ -837,12 +838,33 @@ static func _load_song_research_defaults(song_id: String) -> Dictionary:
 	if config.has("chord_progressions"):
 		defaults["chord_progressions"] = config["chord_progressions"]
 	
+	# Song-research patterns (drums, bass, arp per-section)
+	if config.has("patterns") and config["patterns"] is Dictionary:
+		defaults["song_patterns"] = config["patterns"]
+	
+	# Song-research melodies (notes_midi arrays)
+	if config.has("melody") and config["melody"] is Dictionary:
+		defaults["song_melodies"] = config["melody"]
+	
+	# Groove settings (override rhythm section if present)
+	var groove = config.get("groove", null)
+	if groove is Dictionary:
+		if groove.has("swing_pct"):
+			defaults["swing_pct"] = float(groove["swing_pct"])
+		if groove.has("humanize_ms"):
+			defaults["humanize_ms"] = float(groove["humanize_ms"])
+		if groove.has("humanize_exclude") and groove["humanize_exclude"] is Array:
+			defaults["humanize_exclude"] = groove["humanize_exclude"]
+		if groove.has("velocity") and groove["velocity"] is Dictionary:
+			defaults["song_velocity"] = groove["velocity"]
+	
 	var rhythm = config.get("rhythm", null)
 	if rhythm is Dictionary:
-		if rhythm.has("humanize_ms"):
-			defaults["humanize_ms"] = float(rhythm["humanize_ms"])
-		if rhythm.has("swing_pct"):
+		# Only apply rhythm if groove didn't already set these
+		if not defaults.has("swing_pct") and rhythm.has("swing_pct"):
 			defaults["swing_pct"] = float(rhythm["swing_pct"])
+		if not defaults.has("humanize_ms") and rhythm.has("humanize_ms"):
+			defaults["humanize_ms"] = float(rhythm["humanize_ms"])
 	
 	return defaults
 
@@ -882,13 +904,56 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 	
 	var progression = _resolve_progression_from_parameters(genre_id, parameters, scale)
 	
-	print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%)" % [genre_id, root_note, bpm, swing_pct])
+	# Build song-research data bundle (patterns, melodies, per-section configs, progression map)
+	var song_patterns: Dictionary = parameters.get("song_patterns", {})
+	var song_melodies: Dictionary = parameters.get("song_melodies", {})
+	var chord_progressions_raw = parameters.get("chord_progressions", [])
+	var progressions_map: Dictionary = _build_progressions_map(chord_progressions_raw, scale)
+	
+	# Song-level velocity override from groove section
+	if parameters.has("song_velocity") and parameters["song_velocity"] is Dictionary:
+		var sv = parameters["song_velocity"]
+		velocity_cfg = {
+			"base": float(sv.get("base", velocity_cfg["base"])),
+			"accent": float(sv.get("accent", velocity_cfg["accent"])),
+			"ghost": float(sv.get("ghost", velocity_cfg["ghost"])),
+			"variation": float(sv.get("variation", velocity_cfg["variation"])),
+		}
+	
+	var humanize_exclude: Array = parameters.get("humanize_exclude", [])
+	
+	var song_data: Dictionary = {
+		"song_patterns": song_patterns,
+		"song_melodies": song_melodies,
+		"progressions_map": progressions_map,
+		"humanize_exclude": humanize_exclude,
+	}
+	
+	var has_song_research = not song_patterns.is_empty() or not song_melodies.is_empty()
+	if has_song_research:
+		print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%) [SONG-RESEARCH MODE: %d patterns, %d melodies, %d progressions]" % [genre_id, root_note, bpm, swing_pct, song_patterns.size(), song_melodies.size(), progressions_map.size()])
+		print("  Song patterns: %s" % ", ".join(song_patterns.keys()))
+		print("  Song melodies: %s" % ", ".join(song_melodies.keys()))
+		var prog_keys = []
+		var voicing_keys = []
+		for k in progressions_map.keys():
+			if k.ends_with("__voicing_freqs"):
+				voicing_keys.append(k.replace("__voicing_freqs", ""))
+			else:
+				prog_keys.append(k)
+		print("  Progressions map: %s" % str({})  )
+		for pk in prog_keys:
+			print("    %s: degrees=%s voicings=%s" % [pk, str(progressions_map[pk]), "YES" if pk in voicing_keys else "no"])
+		print("  Default progression (degrees): %s" % str(progression))
+	else:
+		print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%)" % [genre_id, root_note, bpm, swing_pct])
 	
 	var structure = STRUCTURES.get(genre_id, STRUCTURES["detroit_techno"])
 	var arrangement_plan = _resolve_arrangement_plan(structure, parameters.get("arrangement", {}), bank.get_available_sounds())
 	var section_names = arrangement_plan.get("sections", structure["sections"])
 	var section_bars = arrangement_plan.get("bars", structure["bars"])
 	var section_sound_overrides = arrangement_plan.get("section_sounds", {})
+	var section_configs = arrangement_plan.get("section_configs", {})
 	var genre_patterns = PATTERNS.get(genre_id, {})
 	var carry_pool: Array = []
 	
@@ -899,6 +964,7 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 	for i in range(section_names.size()):
 		var section_name = section_names[i]
 		var num_bars = section_bars[i]
+		var section_cfg = section_configs.get(section_name, {})
 		var section_sounds = section_sound_overrides.get(section_name, [])
 		if section_sounds.is_empty():
 			section_sounds = bank.get_section_sounds(section_name)
@@ -909,12 +975,30 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 		if carry_layers_enabled and not carry_pool.is_empty():
 			section_sounds = _merge_unique_sounds(section_sounds, carry_pool)
 		
-		print("  Section '%s' (%d bars): %s" % [section_name, num_bars, ", ".join(section_sounds)])
+		# Auto-add lead if section has a melody but lead isn't in the sound list
+		var section_melody = str(section_cfg.get("melody", "")).strip_edges()
+		var section_counter = str(section_cfg.get("melody_counter", "")).strip_edges()
+		if (not section_melody.is_empty() or not section_counter.is_empty()):
+			if not section_sounds.has("lead") and bank.has_sound("lead"):
+				section_sounds.append("lead")
 		
-		var stream = _generate_section(bank, genre_id, section_sounds, progression, 
+		# Resolve per-section chord progression (falls back to song-wide progression)
+		var section_progression = _resolve_section_progression(section_cfg, progressions_map, progression, scale)
+		
+		var _sr_drums = _resolve_section_drum_patterns(section_cfg, song_patterns)
+		var _sr_mel = str(section_cfg.get("melody", ""))
+		print("  Section '%s' (%d bars): %s" % [section_name, num_bars, ", ".join(section_sounds)])
+		print("    prog: %s -> degrees: %s | drums: %s | melody: %s" % [
+			str(section_cfg.get("progression", "(default)")),
+			str(section_progression),
+			"%d instruments" % _sr_drums.size() if not _sr_drums.is_empty() else "(genre fallback)",
+			_sr_mel if not _sr_mel.is_empty() else "(none)"])
+		
+		var stream = _generate_section(bank, genre_id, section_sounds, section_progression, 
 										scale, bar_duration, bpm, num_bars, 
 										humanize_ms, swing_pct, velocity_cfg,
-										section_name, enable_motif_variation, motif_variation_amount)
+										section_name, enable_motif_variation, motif_variation_amount,
+										song_data, section_cfg)
 		playback.set_clip_stream(i, stream)
 		playback.set_clip_name(i, section_name.capitalize())
 		
@@ -952,6 +1036,7 @@ static func _resolve_arrangement_plan(base_structure: Dictionary, arrangement_da
 	var parsed_sections: Array = []
 	var parsed_bars: Array = []
 	var section_sound_overrides: Dictionary = {}
+	var section_configs: Dictionary = {}  # per-section config (pattern, melody, progression, etc.)
 	
 	if arrangement.has("sections"):
 		var section_data = arrangement["sections"]
@@ -968,6 +1053,14 @@ static func _resolve_arrangement_plan(base_structure: Dictionary, arrangement_da
 					var resolved_elements = _resolve_arrangement_elements(raw_elements, available_sounds)
 					if not resolved_elements.is_empty():
 						section_sound_overrides[section_name] = resolved_elements
+					# Extract per-section config for pattern/melody/progression resolution
+					var cfg: Dictionary = {}
+					for cfg_key in ["pattern", "pattern_alt", "bass_pattern", "arp_pattern", 
+									"melody", "melody_counter", "progression"]:
+						if section_info.has(cfg_key):
+							cfg[cfg_key] = section_info[cfg_key]
+					if not cfg.is_empty():
+						section_configs[section_name] = cfg
 			else:
 				for section_name_variant in section_data:
 					var section_name = str(section_name_variant).strip_edges().to_lower()
@@ -997,6 +1090,7 @@ static func _resolve_arrangement_plan(base_structure: Dictionary, arrangement_da
 		plan["bars"] = parsed_bars
 	
 	plan["section_sounds"] = section_sound_overrides
+	plan["section_configs"] = section_configs
 	if arrangement.has("transitions"):
 		var transitions = arrangement["transitions"]
 		if transitions is Dictionary and transitions.has("crossfade_s"):
@@ -1631,7 +1725,9 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 							   humanize_ms: float, swing_pct: float,
 							   velocity_cfg: Dictionary, section_name: String = "",
 							   enable_motif_variation: bool = false,
-							   motif_variation_amount: float = 0.25) -> AudioStreamWAV:
+							   motif_variation_amount: float = 0.25,
+							   song_data: Dictionary = {},
+							   section_cfg: Dictionary = {}) -> AudioStreamWAV:
 	var total_duration = num_bars * bar_duration
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array()
@@ -1641,23 +1737,87 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 	var step_duration = bar_duration / 16.0  # 16th note (bar has 16 steps)
 	var step_samples = int(step_duration * SAMPLE_RATE)
 	
-	var patterns = PATTERNS.get(genre_id, PATTERNS["detroit_techno"])
-	var bass_cfg = BASS_PATTERNS.get(genre_id, BASS_PATTERNS["detroit_techno"])
+	# === PATTERN RESOLUTION ===
+	# Priority: song-research JSON patterns > hardcoded PATTERNS constant
+	var song_patterns: Dictionary = song_data.get("song_patterns", {})
+	var song_melodies: Dictionary = song_data.get("song_melodies", {})
+	var humanize_exclude: Array = song_data.get("humanize_exclude", [])
+	
+	# Resolve drum patterns from song-research section config
+	var sr_drum_patterns: Dictionary = _resolve_section_drum_patterns(section_cfg, song_patterns)
+	var sr_drum_patterns_alt: Dictionary = _resolve_section_drum_patterns_alt(section_cfg, song_patterns)
+	var has_song_drums = not sr_drum_patterns.is_empty()
+	var has_alt_pattern = not sr_drum_patterns_alt.is_empty()
+	
+	# Resolve bass from song-research
+	var fallback_bass = BASS_PATTERNS.get(genre_id, BASS_PATTERNS["detroit_techno"])
+	var sr_bass_cfg: Dictionary = _resolve_section_bass(section_cfg, song_patterns, fallback_bass)
+	
+	# Resolve arp indices from song-research
+	var sr_arp_indices: Array = _resolve_section_arp_indices(section_cfg, song_patterns)
+	var has_song_arp = not sr_arp_indices.is_empty()
+	
+	# Resolve melody for lead rendering
+	var melody_name = str(section_cfg.get("melody", "")).strip_edges()
+	var melody_data: Dictionary = song_melodies.get(melody_name, {}) if not melody_name.is_empty() else {}
+	var has_melody = melody_data.has("notes_midi") and melody_data["notes_midi"] is Array and not melody_data["notes_midi"].is_empty()
+	
+	# Counter-melody
+	var counter_name = str(section_cfg.get("melody_counter", "")).strip_edges()
+	var counter_data: Dictionary = song_melodies.get(counter_name, {}) if not counter_name.is_empty() else {}
+	var has_counter = counter_data.has("notes_midi") and counter_data["notes_midi"] is Array and not counter_data["notes_midi"].is_empty()
+	
+	# Fallback: hardcoded genre patterns (used when no song-research data)
+	var genre_patterns = PATTERNS.get(genre_id, PATTERNS["detroit_techno"])
+	
+	# Arp pattern from song-research (full step pattern, not just indices)
+	var sr_arp_step_pattern: Array = []
+	var arp_pattern_name = str(section_cfg.get("arp_pattern", "")).strip_edges()
+	if not arp_pattern_name.is_empty() and song_patterns.has(arp_pattern_name):
+		var arp_data = song_patterns[arp_pattern_name]
+		if arp_data.has("pattern") and arp_data["pattern"] is Array:
+			sr_arp_step_pattern = arp_data["pattern"]
+	
+	# Check for voicing-based frequency data (bypasses degree system for chromatic chords)
+	var prog_name = str(section_cfg.get("progression", "")).strip_edges()
+	var voicing_freqs_key = prog_name + "__voicing_freqs" if not prog_name.is_empty() else ""
+	var progressions_map: Dictionary = song_data.get("progressions_map", {})
+	var voicing_freq_arrays: Array = progressions_map.get(voicing_freqs_key, []) if not voicing_freqs_key.is_empty() else []
+	var has_voicing_freqs = not voicing_freq_arrays.is_empty()
+	if has_voicing_freqs:
+		print("    [VOICING] Using %d voiced chords from '%s'" % [voicing_freq_arrays.size(), prog_name])
 	
 	for bar in range(num_bars):
 		var bar_start = int(bar * bar_duration * SAMPLE_RATE)
 		var chord_idx = bar % progression.size()
 		var degree = progression[chord_idx]
-		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		
+		# Use voicing frequencies if available (exact MIDI→freq), else scale-degree lookup
+		var chord_freqs: Array
+		if has_voicing_freqs and chord_idx < voicing_freq_arrays.size():
+			chord_freqs = voicing_freq_arrays[chord_idx]
+		else:
+			chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		
 		var motif_degree = _resolve_motif_degree(degree, bar, num_bars, enable_motif_variation, motif_variation_amount)
 		var motif_chord_freqs = PopMusicTheory.get_chord_frequencies(scale, motif_degree)
 		var root_freq = chord_freqs[0] if chord_freqs.size() > 0 else 220.0
 		
+		# Choose drum pattern: alternate between main and alt every bar if alt exists
+		var active_drum_patterns: Dictionary = sr_drum_patterns
+		if has_alt_pattern and bar % 2 == 1:
+			active_drum_patterns = sr_drum_patterns_alt
+		
 		for sound_name in sounds:
-			if not bank.has_sound(sound_name):
+			# Map hihat_closed/hihat_open to the base hihat script
+			var script_name = sound_name
+			if sound_name in ["hihat_closed", "hihat_open"]:
+				script_name = "hihat"
+			
+			if not bank.has_sound(script_name):
 				continue
 			
-			var script = bank.get_sound_script(sound_name)
+			var script = bank.get_sound_script(script_name)
 			if script == null:
 				continue
 			
@@ -1668,16 +1828,73 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 						0.0, total_duration)
 				continue
 			
-			# Drums and melodic patterns
-			if patterns.has(sound_name):
-				var hit_chords = motif_chord_freqs if _is_hook_sound(sound_name) else chord_freqs
-				var bar_pattern = _get_bar_pattern(patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
+			# Per-sound humanize (some song configs exclude kick from humanize)
+			var sound_humanize = humanize_ms
+			if humanize_exclude.has(sound_name) or humanize_exclude.has(script_name):
+				sound_humanize = 0.0
+			
+			# === LEAD WITH MELODY FROM notes_midi ===
+			if sound_name == "lead" and has_melody:
+				_render_melody_to_mix(final_mix, script, melody_data, bar_start,
+									  bar, step_samples, sound_humanize, swing_pct, velocity_cfg)
+				# Also render counter-melody if present (using lead script at lower velocity)
+				if has_counter:
+					var counter_vel = velocity_cfg.duplicate()
+					counter_vel["base"] = velocity_cfg.get("base", 0.75) * 0.6  # softer
+					_render_melody_to_mix(final_mix, script, counter_data, bar_start,
+										  bar, step_samples, sound_humanize, swing_pct, counter_vel)
+				continue
+			
+			# === SONG-RESEARCH DRUM PATTERNS ===
+			# Check both exact name and variant names (hihat → hihat_closed/hihat_open)
+			var sr_drum_key = ""
+			if has_song_drums:
+				if active_drum_patterns.has(sound_name):
+					sr_drum_key = sound_name
+				elif sound_name == "hihat" and active_drum_patterns.has("hihat_closed"):
+					sr_drum_key = "hihat_closed"
+				elif active_drum_patterns.has(script_name):
+					sr_drum_key = script_name
+			
+			if not sr_drum_key.is_empty():
+				var bar_pattern = active_drum_patterns[sr_drum_key]
 				_add_pattern_sound(final_mix, script, bar_start, bar_pattern, 
-								   step_samples, sound_name, humanize_ms, swing_pct,
+								   step_samples, sound_name, sound_humanize, swing_pct,
+								   velocity_cfg, chord_freqs, genre_id, bar)
+				# Also render hihat_open pattern if present (separate layer)
+				if sound_name == "hihat" and active_drum_patterns.has("hihat_open"):
+					var open_pattern = active_drum_patterns["hihat_open"]
+					var has_open_hits = false
+					for v in open_pattern:
+						if v > 0:
+							has_open_hits = true
+							break
+					if has_open_hits:
+						_add_pattern_sound(final_mix, script, bar_start, open_pattern, 
+										   step_samples, "hihat_open", sound_humanize, swing_pct,
+										   velocity_cfg, chord_freqs, genre_id, bar)
+				continue
+			
+			# === SONG-RESEARCH ARP with custom indices and step pattern ===
+			if has_song_arp and sound_name in ["arp", "sequence", "sequencer"]:
+				var arp_step = sr_arp_step_pattern if not sr_arp_step_pattern.is_empty() else genre_patterns.get(sound_name, [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+				# Override the arp indices for this section
+				_add_pattern_sound_with_arp(final_mix, script, bar_start, arp_step, 
+											step_samples, sound_name, sound_humanize, swing_pct,
+											velocity_cfg, chord_freqs, sr_arp_indices, bar)
+				continue
+			
+			# === FALLBACK: Hardcoded genre patterns ===
+			# Drums and melodic patterns from PATTERNS constant
+			if genre_patterns.has(sound_name):
+				var hit_chords = motif_chord_freqs if _is_hook_sound(sound_name) else chord_freqs
+				var bar_pattern = _get_bar_pattern(genre_patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
+				_add_pattern_sound(final_mix, script, bar_start, bar_pattern, 
+								   step_samples, sound_name, sound_humanize, swing_pct,
 								   velocity_cfg, hit_chords, genre_id, bar)
-			# Bass with its own pattern
+			# Bass with its own pattern (song-research or fallback)
 			elif sound_name in ["bass", "sub", "hoover"]:
-				_add_bass_pattern(final_mix, script, bar_start, bass_cfg,
+				_add_bass_pattern(final_mix, script, bar_start, sr_bass_cfg,
 								  step_samples, root_freq, velocity_cfg, bar_duration)
 			# Continuous sounds
 			else:
@@ -1688,6 +1905,51 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 	
 	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.02))
 	return _create_audio_stream(final_mix)
+
+
+## Variant of _add_pattern_sound that uses explicit arp indices instead of genre lookup
+static func _add_pattern_sound_with_arp(mix: PackedFloat32Array, script, bar_start: int, 
+										 pattern: Array, step_samples: int, sound_name: String,
+										 humanize_ms: float, swing_pct: float,
+										 velocity_cfg: Dictionary, chord_freqs: Array,
+										 arp_indices: Array, bar_index: int) -> void:
+	var active_step_counter := 0
+	
+	for step in range(pattern.size()):
+		var vel = pattern[step]
+		if vel == 0:
+			continue
+		
+		var step_start = bar_start + step * step_samples
+		
+		if swing_pct > 0 and step % 2 == 1:
+			var swing_samples = int(swing_pct / 100.0 * step_samples * 0.5)
+			step_start += swing_samples
+		
+		if humanize_ms > 0:
+			var offset_samples = int((randf() - 0.5) * 2.0 * humanize_ms * SAMPLE_RATE / 1000.0)
+			step_start = maxi(0, step_start + offset_samples)
+		
+		var volume = velocity_cfg["base"]
+		if vel >= 2:
+			volume = velocity_cfg["accent"]
+		elif vel < 1:
+			volume = velocity_cfg["ghost"]
+		volume *= 1.0 + (randf() - 0.5) * velocity_cfg["variation"] * 2.0
+		
+		# Use explicit arp indices to select chord tone
+		var hit_freqs = chord_freqs
+		if arp_indices.size() > 0 and chord_freqs.size() >= 3:
+			var arp_idx = arp_indices[(bar_index * 16 + active_step_counter) % arp_indices.size()]
+			var selected_freq: float
+			if arp_idx >= chord_freqs.size():
+				selected_freq = chord_freqs[0] * 2.0  # octave up
+			else:
+				selected_freq = chord_freqs[arp_idx]
+			hit_freqs = [selected_freq, chord_freqs[1], chord_freqs[2]]
+		
+		active_step_counter += 1
+		_add_sound_hit(mix, script, step_start, sound_name, hit_freqs, volume)
 
 
 static func _resolve_motif_degree(base_degree: int, bar_index: int, num_bars: int, enabled: bool, amount: float) -> int:
@@ -1929,14 +2191,19 @@ static func _add_sound_hit(mix: PackedFloat32Array, script, start: int,
 		var sample = 0.0
 		
 		match sound_name:
-			"kick", "snare", "clap", "rimshot", "shaker", "fingersnap", "tambourine", "perc":
+			"kick", "snare", "clap", "rimshot", "shaker", "fingersnap", "tambourine", "perc", "tom_low", "tom_high", "tom", "cowbell":
 				if script.has_method("generate"):
 					sample = script.generate(t, 0.0)
-			"hihat":
+			"hihat", "hihat_closed":
 				if script.has_method("generate_closed"):
 					sample = script.generate_closed(t, 0.0)
 				elif script.has_method("generate"):
 					sample = script.generate(t, 0.0, false)
+			"hihat_open":
+				if script.has_method("generate_open"):
+					sample = script.generate_open(t, 0.0)
+				elif script.has_method("generate"):
+					sample = script.generate(t, 0.0, true)
 			"stab", "piano", "organ", "rhodes", "strings", "pad":
 				if script.has_method("generate"):
 					sample = script.generate(t, chord_freqs, 0.0)
@@ -2019,3 +2286,204 @@ static func _create_audio_stream(buffer: PackedFloat32Array) -> AudioStreamWAV:
 	
 	stream.data = data
 	return stream
+
+
+# =====================================================================
+# SONG-RESEARCH PATTERN & MELODY RESOLUTION
+# These functions bridge the JSON song specs to the render pipeline.
+# =====================================================================
+
+## Convert MIDI note number to frequency (A4=69=440Hz)
+static func _midi_to_freq(midi_note: int) -> float:
+	return 440.0 * pow(2.0, (midi_note - 69.0) / 12.0)
+
+
+## Resolve drum patterns for a section from song-research JSON.
+## Returns a dict like {"kick": [...], "snare": [...], ...} or empty if not found.
+static func _resolve_section_drum_patterns(section_cfg: Dictionary, song_patterns: Dictionary) -> Dictionary:
+	var pattern_name = str(section_cfg.get("pattern", "")).strip_edges()
+	if pattern_name.is_empty() or not song_patterns.has(pattern_name):
+		return {}
+	
+	var pattern_data: Dictionary = song_patterns[pattern_name]
+	var result: Dictionary = {}
+	# Extract only array entries (skip _rationale, name, etc.)
+	for key in pattern_data.keys():
+		if key.begins_with("_") or key == "name":
+			continue
+		var val = pattern_data[key]
+		if val is Array:
+			result[key] = val
+	return result
+
+
+## Resolve alternate drum pattern for 2-bar cycling
+static func _resolve_section_drum_patterns_alt(section_cfg: Dictionary, song_patterns: Dictionary) -> Dictionary:
+	var pattern_name = str(section_cfg.get("pattern_alt", "")).strip_edges()
+	if pattern_name.is_empty() or not song_patterns.has(pattern_name):
+		return {}
+	
+	var pattern_data: Dictionary = song_patterns[pattern_name]
+	var result: Dictionary = {}
+	for key in pattern_data.keys():
+		if key.begins_with("_") or key == "name":
+			continue
+		var val = pattern_data[key]
+		if val is Array:
+			result[key] = val
+	return result
+
+
+## Resolve bass config for a section from song-research JSON
+static func _resolve_section_bass(section_cfg: Dictionary, song_patterns: Dictionary, fallback: Dictionary) -> Dictionary:
+	var bass_name = str(section_cfg.get("bass_pattern", "")).strip_edges()
+	if bass_name.is_empty() or not song_patterns.has(bass_name):
+		return fallback
+	var bass_data: Dictionary = song_patterns[bass_name]
+	if bass_data.has("pattern") and bass_data["pattern"] is Array:
+		return {
+			"pattern": bass_data["pattern"],
+			"style": str(bass_data.get("style", "sustained")),
+		}
+	return fallback
+
+
+## Resolve arp chord-tone indices for a section from song-research JSON
+static func _resolve_section_arp_indices(section_cfg: Dictionary, song_patterns: Dictionary) -> Array:
+	var arp_name = str(section_cfg.get("arp_pattern", "")).strip_edges()
+	if arp_name.is_empty() or not song_patterns.has(arp_name):
+		return []
+	var arp_data: Dictionary = song_patterns[arp_name]
+	if arp_data.has("chord_indices") and arp_data["chord_indices"] is Array:
+		return arp_data["chord_indices"]
+	return []
+
+
+## Resolve the chord progression (as scale degrees) for a specific section.
+## Each section in the arrangement can reference a named progression.
+static func _resolve_section_progression(section_cfg: Dictionary, progressions_map: Dictionary, 
+										  fallback: Array, scale: Array) -> Array:
+	var prog_name = str(section_cfg.get("progression", "")).strip_edges()
+	if prog_name.is_empty():
+		return fallback
+	
+	# Check pre-resolved map first
+	if progressions_map.has(prog_name):
+		return progressions_map[prog_name]
+	
+	return fallback
+
+
+## Build a map of progression_name → [scale_degrees] from the chord_progressions array.
+## Also builds a voicings map when MIDI voicings are provided (for chromatic chords).
+static func _build_progressions_map(chord_progressions, scale: Array) -> Dictionary:
+	var result: Dictionary = {}
+	if not chord_progressions is Array:
+		return result
+	
+	for prog in chord_progressions:
+		if not prog is Dictionary:
+			continue
+		var name = str(prog.get("name", "")).strip_edges()
+		if name.is_empty():
+			continue
+		var chords = prog.get("chords", [])
+		if not chords is Array or chords.is_empty():
+			continue
+		var degrees = _chords_to_degrees(chords, scale)
+		if not degrees.is_empty():
+			result[name] = degrees
+		
+		# If voicings are provided, store them for direct frequency lookup
+		# This bypasses the degree system for chromatic chords (bII, etc.)
+		var voicings = prog.get("voicings", null)
+		if voicings is Array and voicings.size() == chords.size():
+			var freq_arrays: Array = []
+			for voicing in voicings:
+				if voicing is Array:
+					var freqs: Array = []
+					for midi_note in voicing:
+						freqs.append(440.0 * pow(2.0, (float(midi_note) - 69.0) / 12.0))
+					freq_arrays.append(freqs)
+			if freq_arrays.size() == chords.size():
+				result[name + "__voicing_freqs"] = freq_arrays
+	
+	return result
+
+
+## Render a melody from notes_midi array into the mix buffer.
+## notes_midi is a 64-step array (4 bars of 16th notes), MIDI note numbers, -1 = rest.
+## The melody loops across the section's bars.
+static func _render_melody_to_mix(mix: PackedFloat32Array, lead_script, 
+								   melody_data: Dictionary, bar_start_samples: int,
+								   bar_index: int, step_samples: int,
+								   humanize_ms: float, swing_pct: float,
+								   velocity_cfg: Dictionary) -> void:
+	var notes_midi = melody_data.get("notes_midi", [])
+	if notes_midi.is_empty():
+		return
+	
+	var melody_steps = notes_midi.size()  # typically 64 (4 bars × 16 steps)
+	var melody_bars = melody_steps / 16   # typically 4
+	if melody_bars <= 0:
+		melody_bars = 1
+	
+	# Which bar of the melody are we in?
+	var melody_bar = bar_index % melody_bars
+	var step_offset = melody_bar * 16
+	
+	for step in range(16):
+		var melody_idx = step_offset + step
+		if melody_idx >= melody_steps:
+			continue
+		
+		var midi_note = int(notes_midi[melody_idx])
+		if midi_note < 0:
+			continue  # rest
+		
+		var freq = _midi_to_freq(midi_note)
+		var step_start = bar_start_samples + step * step_samples
+		
+		# Apply swing
+		if swing_pct > 0 and step % 2 == 1:
+			var swing_samples = int(swing_pct / 100.0 * step_samples * 0.5)
+			step_start += swing_samples
+		
+		# Apply humanization
+		if humanize_ms > 0:
+			var offset_samples = int((randf() - 0.5) * 2.0 * humanize_ms * SAMPLE_RATE / 1000.0)
+			step_start = maxi(0, step_start + offset_samples)
+		
+		# Determine note length: sustain until next note or end of bar
+		var note_end_step = 16  # default: ring until end of current bar
+		for future_step in range(step + 1, 16):
+			var future_idx = step_offset + future_step
+			if future_idx < melody_steps and int(notes_midi[future_idx]) >= 0:
+				note_end_step = future_step
+				break
+		# Also check into next melody bar for sustain across bar lines
+		if note_end_step == 16 and melody_bar < melody_bars - 1:
+			var next_bar_offset = (melody_bar + 1) * 16
+			for future_step in range(0, 4):  # check first few steps of next bar
+				var future_idx = next_bar_offset + future_step
+				if future_idx < melody_steps and int(notes_midi[future_idx]) >= 0:
+					break
+		
+		var note_duration_steps = note_end_step - step
+		var note_duration = float(note_duration_steps) * float(step_samples) / SAMPLE_RATE
+		note_duration = maxf(note_duration, 0.05)  # minimum 50ms
+		
+		var volume = velocity_cfg.get("base", 0.75)
+		var length_samples = int(note_duration * SAMPLE_RATE)
+		
+		for i in range(length_samples):
+			var idx = step_start + i
+			if idx >= mix.size():
+				break
+			var t = float(i) / SAMPLE_RATE
+			var sample = 0.0
+			if lead_script.has_method("generate"):
+				sample = lead_script.generate(t, freq, 0.0)
+			elif lead_script.has_method("generate_sample"):
+				sample = lead_script.generate_sample(t, freq)
+			mix[idx] = clampf(mix[idx] + sample * volume, -1.0, 1.0)

@@ -275,6 +275,8 @@ static func generate_interactive_song_async(song_type: String, callback_node: No
 			gen_callable = func(): return AudioSynthesizer.generate_ambient_works_song()
 		"prog", "prog_synth", "prog_synth_70s":
 			gen_callable = func(): return AudioSynthesizer.generate_prog_synth_song()
+		"prog_odyssey":
+			gen_callable = func(): return AudioSynthesizer.generate_prog_odyssey_song()
 		"moroder", "moroder_disco":
 			gen_callable = func(): return AudioSynthesizer.generate_moroder_disco_song({})
 		"detroit", "detroit_techno":

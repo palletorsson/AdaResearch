@@ -16,6 +16,7 @@ const SynthConfigRegistry = preload("res://commons/audio/catalog/SynthConfigRegi
 const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
 const SoundIdentityPanel = preload("res://commons/audio/catalog/ui/SoundIdentityPanel.gd")
 const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPanel.gd")
+const MidiPianoRoll = preload("res://commons/audio/catalog/ui/MidiPianoRoll.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 const PATTERN_OVERRIDES_PATH = "user://song_pattern_overrides.json"
 const GLOBAL_SECTION_KEY = "__global__"
@@ -65,6 +66,7 @@ var _main_tabs: TabContainer
 var _overview_tab: Control
 var _sound_editor_tab: Control
 var _archive_tab: Control
+var _midi_editor_tab: MidiPianoRoll
 var _sound_detail_panel: SoundDetailPanel
 var _editor_back_btn: Button
 var _editor_sound_name: Label
@@ -528,6 +530,11 @@ func _setup_ui():
 	
 	# === ARCHIVE TAB ===
 	_setup_archive_tab()
+	
+	# === MIDI EDITOR TAB ===
+	_midi_editor_tab = MidiPianoRoll.new()
+	_midi_editor_tab.name = "🎹 MIDI Editor"
+	_main_tabs.add_child(_midi_editor_tab)
 
 
 func _setup_sound_editor_tab():
@@ -1112,7 +1119,7 @@ func _get_song_color(song_id: String) -> Color:
 		"detroit_techno", "detroit_sb": return Color(0.7, 0.5, 0.9)
 		"moroder_disco", "french_touch": return Color(0.9, 0.6, 0.4)
 		"pop_generative", "pop_v2", "pop_madonna": return Color(0.9, 0.4, 0.6)
-		"prog_synth_70s", "prog_synth_v2": return Color(0.5, 0.8, 0.5)
+		"prog_synth_70s", "prog_synth_v2", "prog_odyssey": return Color(0.5, 0.8, 0.5)
 		"rave", "reese_jungle": return Color(0.9, 0.3, 0.3)
 		"synthwave", "blade_runner", "synthwave_sb": return Color(0.6, 0.4, 0.9)
 		"burial_sb": return Color(0.4, 0.4, 0.5)
@@ -1176,6 +1183,7 @@ func _load_songs_from_folder() -> Array:
 		"pop_v2": "🎤 Pop V2",
 		"prog_synth_70s": "🎸 70s Prog",
 		"prog_synth_v2": "🎸 Prog V2",
+		"prog_odyssey": "🚀 Prog Odyssey",
 		"ada_theme": "🎤 Ada Theme",
 		"aphex_twin": "💛 Digital Amber (Aphex)",
 		"aphex_twin_digital_amber": "💛 Digital Amber",
@@ -1946,6 +1954,8 @@ func _generate_preview_reference_stream(song_id: String) -> AudioStream:
 			return SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
 		"prog_synth_70s":
 			return AudioSynthesizer.generate_prog_synth_song({})
+		"prog_odyssey":
+			return AudioSynthesizer.generate_prog_odyssey_song({})
 		"kpop_prog":
 			return AudioSynthesizer.generate_kpop_prog_song({})
 		"pop_generative":
@@ -2074,6 +2084,8 @@ func _generate_and_play(song_id: String):
 				stream = AudioSynthesizer.generate_acid_house_song(generation_params)
 			"prog_synth_70s":
 				stream = AudioSynthesizer.generate_prog_synth_song(generation_params)
+			"prog_odyssey":
+				stream = AudioSynthesizer.generate_prog_odyssey_song(generation_params)
 			"kpop_prog_remix":
 				stream = AudioSynthesizer.generate_kpop_prog_song(generation_params)
 			"pop_generative":
@@ -2172,6 +2184,12 @@ func _generate_and_play(song_id: String):
 	
 	# Load timeline metadata
 	_load_timeline_for_song(song_id, stream)
+	
+	# Populate MIDI editor tab if capture is available
+	if _midi_editor_tab:
+		var midi_capture = AudioSynthesizer.capture_midi_for_song(song_id)
+		if midi_capture:
+			_midi_editor_tab.load_from_capture(midi_capture)
 
 
 func _toggle_pause():
@@ -2295,6 +2313,8 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 			return 100.0
 		"prog_synth_v2":
 			return 105.0
+		"prog_odyssey":
+			return 100.0
 		"pop_v2":
 			return 118.0
 		"pop_madonna":
@@ -2382,8 +2402,10 @@ func _export_midi():
 			"computer_love": "kraftwerk",
 			"aphex_twin_digital_amber": "boards_of_canada",
 			"ada_theme": "chromatic_story",
-			# Songs that use AudioSynthesizer (no patterns in SoundbankGenerator)
+			# Songs that use AudioSynthesizer — use MIDI capture path
+			"prog_odyssey": "",
 			"prog_synth_70s": "",
+			"kraftwerk": "",
 			"pop_generative": "",
 			"ambient_works": "",
 		}
@@ -2392,7 +2414,18 @@ func _export_midi():
 		
 		# Check if this song has exportable patterns
 		if pattern_id.is_empty():
-			_status_label.text = "'" + _current_song + "' uses procedural generation (no fixed patterns to export)"
+			# AudioSynthesizer song — use MIDI capture
+			var capture = AudioSynthesizer.capture_midi_for_song(_current_song)
+			if capture != null:
+				var capture_result = MidiExporter.export_from_capture(capture, full_path)
+				if capture_result:
+					var global_path_c = ProjectSettings.globalize_path(full_path)
+					_status_label.text = "MIDI exported: " + global_path_c
+					print("MIDI (capture) exported to: ", global_path_c)
+				else:
+					_status_label.text = "MIDI capture export failed for " + _current_song
+			else:
+				_status_label.text = "No MIDI capture available for " + _current_song
 			_export_midi_btn.disabled = false
 			return
 		
@@ -2761,6 +2794,28 @@ func _load_song_words(song_id: String):
 			"Drums": {
 				"words": ["punchy", "crisp", "analog"],
 				"params": {"pattern": "motorik", "tempo": 110}
+			}
+		},
+		"prog_odyssey": {
+			"Pad": {
+				"words": ["warm", "wide", "swelling", "analog", "cathedral"],
+				"params": {"voices": 7, "detune": 10, "attack": 2.0}
+			},
+			"Bass": {
+				"words": ["warm", "thick", "analog", "punchy", "deep"],
+				"params": {"filter_cutoff": 800, "resonance": 0.4, "glide": 50}
+			},
+			"Sequence": {
+				"words": ["pulsing", "motorik", "hypnotic", "mechanical"],
+				"params": {"pattern": "16th_arp", "filter_sweep": true}
+			},
+			"Lead": {
+				"words": ["bright", "aggressive", "screaming", "portamento"],
+				"params": {"portamento": 80, "vibrato": 5.0, "filter_cutoff": 3000}
+			},
+			"Drums": {
+				"words": ["driving", "mechanical", "punchy", "motorik"],
+				"params": {"pattern": "motorik", "tempo": 130}
 			}
 		},
 		"ambient_works": {
@@ -4057,4 +4112,3 @@ func get_current_subset_id() -> String:
 func get_subset(subset_id: String) -> Dictionary:
 	"""Get a specific subset by ID"""
 	return _loaded_subsets.get(subset_id, {})
-

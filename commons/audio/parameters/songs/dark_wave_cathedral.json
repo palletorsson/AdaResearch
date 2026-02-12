@@ -86,38 +86,115 @@
         },
         "drums": {
             "style": "post_punk_syncopated",
+            "_design_notes": "TR-606 as primary reference (She Past Away, Sixth June). Supplemented by CR-78 tonal character (early Cure, Siouxsie). NOT TR-808/909 — those are too 'dance'. The 606 has thinner, more metallic character. Martin Hannett production approach: isolation, gating, every hit occupying its own dead space.",
             "kick": {
-                "pitch_start_hz": 120,
-                "pitch_end_hz": 55,
-                "pitch_sweep_ms": 25,
-                "body_decay_ms": 90,
-                "click_ms": 2,
-                "character": "tight_punchy_not_boomy"
+                "pitch_start_hz": 115,
+                "pitch_end_hz": 48,
+                "pitch_sweep_ms": 18,
+                "body_decay_ms": 75,
+                "click_ms": 1.5,
+                "click_level": 0.7,
+                "body_level": 0.85,
+                "sub_level": 0.5,
+                "saturation": 1.2,
+                "hp_filter_hz": 35,
+                "_rationale": "TR-606 kick: shorter sweep than 808, less sub than 909. The 115→48Hz sweep is faster and tighter — you hear the CLICK more than the boom. HP at 35Hz prevents sub mud. Dark wave kick should feel like a heartbeat in a concrete bunker, not a club thump.",
+                "character": "tr606_tight_click_felt_in_chest_not_ears"
             },
             "snare": {
-                "body_hz": 180,
-                "body_decay_ms": 15,
-                "noise_decay_ms": 25,
-                "gate_ms": 80,
-                "character": "gated_crack_dry_no_tail"
+                "body_hz": 190,
+                "body_decay_ms": 12,
+                "body_level": 0.6,
+                "noise_type": "band_filtered",
+                "noise_center_hz": 4500,
+                "noise_bandwidth_hz": 3000,
+                "noise_decay_ms": 18,
+                "noise_level": 0.85,
+                "gate_ms": 70,
+                "gate_curve": "exponential",
+                "gated_reverb": {
+                    "pre_delay_ms": 5,
+                    "decay_ms": 80,
+                    "gate_threshold": 0.15,
+                    "gate_release_ms": 8,
+                    "mix": 0.35,
+                    "_rationale": "Martin Hannett's technique: reverb exists but is GATED before the tail develops. Pre-delay of 5ms separates the dry crack from the reverb bloom. Gate closes at 80ms — you hear the 'space' of the room but not the decay. This creates the signature 'shot in a stairwell' sound. NOT Phil Collins (that's 300-500ms gate). This is COLD."
+                },
+                "character": "hannett_gated_crack_pistol_in_concrete"
             },
-            "hihat": {
-                "metallic_hz": [6500, 9200],
-                "closed_decay_ms": 20,
-                "open_decay_ms": 80,
-                "character": "thin_metallic_tr606"
+            "hihat_closed": {
+                "metallic_hz": [6200, 8800, 12500],
+                "metallic_ratios": [1.0, 0.7, 0.3],
+                "decay_ms": 15,
+                "hp_filter_hz": 5500,
+                "level": 0.55,
+                "_rationale": "TR-606 closed hat: three metallic partials. Thinner than 808/909. The 12.5kHz partial gives the 'tss' without brightness. Shorter decay than most — these hats TICK, they don't 'chh'. Level at 0.55 keeps them felt-not-dominant.",
+                "character": "tr606_tick_thin_metallic_background"
+            },
+            "hihat_open": {
+                "metallic_hz": [6200, 8800, 12500],
+                "metallic_ratios": [1.0, 0.8, 0.4],
+                "decay_ms": 95,
+                "hp_filter_hz": 4800,
+                "level": 0.5,
+                "choke_on_closed": true,
+                "_rationale": "Open hat used SPARINGLY in dark wave — mainly for accents at end of 2-bar or 4-bar phrases. The choke behavior (open hat cuts when closed hat plays) is essential for realism. 95ms decay — opens but doesn't wash.",
+                "character": "tr606_open_accent_only_not_continuous"
             },
             "tom_low": {
-                "fundamental_hz": 90,
-                "decay_ms": 200,
-                "character": "tribal_deep_resonant"
+                "fundamental_hz": 85,
+                "overtone_hz": 170,
+                "overtone_level": 0.25,
+                "resonance": 0.45,
+                "pitch_sweep_cents": 30,
+                "pitch_sweep_ms": 40,
+                "decay_ms": 220,
+                "body_level": 0.9,
+                "saturation": 1.3,
+                "_rationale": "THE dark wave signature. She Past Away 'Ritüel' tom is deep, resonant, with a slight pitch drop. 85Hz fundamental is felt physically — sub territory. The 30-cent pitch sweep gives it a 'doom' quality. Resonance at 0.45 lets it ring but not feedback. 220ms decay means it overlaps with the next hit in fast patterns — creating a droning, ritualistic quality.",
+                "character": "tribal_ritual_deep_doom_resonant"
             },
             "tom_high": {
-                "fundamental_hz": 150,
-                "decay_ms": 120,
-                "character": "tight_pitched_percussive"
+                "fundamental_hz": 145,
+                "overtone_hz": 290,
+                "overtone_level": 0.2,
+                "resonance": 0.35,
+                "pitch_sweep_cents": 20,
+                "pitch_sweep_ms": 25,
+                "decay_ms": 130,
+                "body_level": 0.75,
+                "_rationale": "High tom is the 'response' to the low tom's 'call'. 145Hz is pitched clearly above the kick (48Hz body) but below the snare noise band. Shorter decay than low tom — it's more percussive, less droning. Used for the upper voice in the tribal polyrhythm.",
+                "character": "tribal_pitched_call_response_taut"
             },
-            "processing": ["gated_reverb_80ms", "no_sidechain"]
+            "clap": {
+                "num_layers": 4,
+                "layer_spread_ms": 8,
+                "noise_center_hz": 2200,
+                "noise_bandwidth_hz": 1800,
+                "decay_ms": 45,
+                "reverb_send": 0.25,
+                "_rationale": "4 noise bursts spread across 8ms creates the 'multiple hands' effect. The spread is TIGHT — not the loose 15-20ms of house claps. This creates a short, sharp 'crack' that layers with the snare. The noise center at 2200Hz fills the mid-frequency gap between the snare (4500Hz) and toms (85-145Hz).",
+                "character": "dry_tight_layered_doubles_snare"
+            },
+            "processing": {
+                "master_reverb": "gated_hall_80ms",
+                "sidechain": "none",
+                "bus_compression": {
+                    "threshold_db": -8,
+                    "ratio": "3:1",
+                    "attack_ms": 10,
+                    "release_ms": 60,
+                    "_rationale": "Light bus compression glues the kit together. Fast attack catches transients, fast release lets the dynamics breathe. This is NOT EDM sidechain pumping — it's subtle cohesion."
+                },
+                "eq": {
+                    "low_cut_hz": 30,
+                    "presence_boost_hz": 3500,
+                    "presence_boost_db": 2,
+                    "air_cut_hz": 14000,
+                    "air_cut_db": -3,
+                    "_rationale": "Cut sub-rumble below 30Hz. Slight presence boost at 3.5kHz for snare crack. Roll off air above 14kHz — dark wave should NOT be bright or 'produced'. It should sound like it's coming through a concrete wall."
+                }
+            }
         }
     },
     "chord_progressions": [
@@ -132,6 +209,12 @@
                 [45, 48, 52, 57]
             ],
             "scale_degrees": [0, 4, 5, 4],
+            "voice_leading": {
+                "Dm_to_Am": { "held": [57], "moved": [[50,45],[53,48],[62,57]], "motion": "all voices drop — descent into the crypt" },
+                "Am_to_Bb": { "held": [], "moved": [[45,46],[48,50],[52,53],[57,58]], "motion": "everything rises one half/whole step — the half-step root shift 45→46 is the dark wave DNA" },
+                "Bb_to_Am": { "held": [], "moved": [[46,45],[50,48],[53,52],[58,57]], "motion": "mirror of Am→Bb — the perpetual oscillation, like breathing" }
+            },
+            "harmonic_analysis": "The Am↔Bb oscillation (roots a half-step apart) is the engine. v and VI share no common tones in these voicings — every voice moves, creating maximum harmonic shift from minimum root movement. She Past Away 'Ritüel' uses this exact oscillation. The progression never returns to Dm within the cycle — home is only the starting point, never the destination.",
             "description": "i-v-VI-v — Am↔Bb half-step oscillation, never resolves"
         },
         {
@@ -145,7 +228,51 @@
                 [50, 57, 62, 65]
             ],
             "scale_degrees": [5, 6, 0, 0],
+            "voice_leading": {
+                "Bb_to_C5": { "held": [], "moved": [[46,48],[53,55],[58,60],[62,67]], "motion": "parallel rise — every voice ascends 2-5 semitones. The C5 power chord (no 3rd) creates ambiguity — major or minor? The listener leans forward." },
+                "C5_to_Dm": { "held": [], "moved": [[48,50],[55,57],[60,62],[67,65]], "motion": "top voice DESCENDS (67→65) while bottom three rise — contrary motion creates the 'arrival' gravity of the Aeolian cadence" },
+                "Dm_to_Dm": { "held": [50,57,62,65], "moved": [], "motion": "stasis — two bars of home. The ritual is complete. Breathe." }
+            },
+            "harmonic_analysis": "VI→VII→i is THE Aeolian cadence — the defining resolution of dark wave, goth, and post-punk. Unlike V→i (classical), this resolution rises by whole steps (Bb→C→D) which feels like ascending from a grave rather than falling home. Bauhaus 'Bela Lugosi's Dead', Joy Division 'Atmosphere', Clan of Xymox 'A Day' — all built on this cadence. The C5 (no third) is deliberate: leaving out the E avoids the 'brightness' of C major while preserving the ascending bass energy.",
             "description": "VI-VII-i-i — Aeolian cadence, Bauhaus resolution"
+        },
+        {
+            "name": "dark_wave_outro",
+            "chords": ["Dm", "Ebmaj", "Dm", "A5"],
+            "midi_roots": [50, 51, 50, 45],
+            "voicings": [
+                [50, 53, 57, 62],
+                [51, 55, 58, 63],
+                [50, 53, 57, 62],
+                [45, 52, 57, 57]
+            ],
+            "scale_degrees": [0, "b2", 0, 4],
+            "voice_leading": {
+                "Dm_to_Ebmaj": { "held": [], "moved": [[50,51],[53,55],[57,58],[62,63]], "motion": "the Phrygian half-step — root creeps up ONE semitone (D→Eb). Every voice rises by 1-2 semitones. Maximum disorientation from minimum movement. This is the 'wrong turn in the cathedral' — familiar becomes alien." },
+                "Ebmaj_to_Dm": { "held": [], "moved": [[51,50],[55,53],[58,57],[63,62]], "motion": "exact mirror — the relief of returning. But you remember the darkness." },
+                "Dm_to_A5": { "held": [57], "moved": [[50,45],[53,52],[62,57]], "motion": "collapse to open 5th — hollow, medieval. The A5 power chord is the question mark at the end of the sentence." }
+            },
+            "harmonic_analysis": "The bII (Neapolitan) is the most extreme darkness available in tonal harmony. In Dm, Eb major contains Eb-G-Bb — the Eb is a half-step above the tonic, creating a gravitational pull back to D that feels INEVITABLE rather than chosen. Lebanon Hanover 'Gallowdance' uses this bII coloring. The outro ends on A5 (open fifth, no third) — an unanswered question. The candle flickers. Did it go out?",
+            "description": "i-bII-i-v5 — Phrygian Neapolitan darkness, the door closing"
+        },
+        {
+            "name": "dark_wave_ritual",
+            "chords": ["Dm", "Gm", "Am", "Bb"],
+            "midi_roots": [50, 55, 57, 58],
+            "voicings": [
+                [50, 53, 57, 62],
+                [50, 55, 58, 62],
+                [52, 57, 60, 64],
+                [53, 58, 62, 65]
+            ],
+            "scale_degrees": [0, 3, 4, 5],
+            "voice_leading": {
+                "Dm_to_Gm": { "held": [50, 62], "moved": [[53,55],[57,58]], "motion": "TWO common tones (D and D) — the smoothest transition. Only the middle voices shift up by step. The iv chord adds a moment of human warmth to the cold ritual — Gm is the 'prayer' chord." },
+                "Gm_to_Am": { "held": [], "moved": [[50,52],[55,57],[58,60],[62,64]], "motion": "all voices rise by 2 semitones — parallel motion, processional. The congregation rises." },
+                "Am_to_Bb": { "held": [], "moved": [[52,53],[57,58],[60,62],[64,65]], "motion": "all voices rise by 1 semitone — the half-step lift from v to VI. Same Am→Bb DNA as the main progression, but now it's the climax of an ascending journey, not an oscillation." }
+            },
+            "harmonic_analysis": "Bass line D→G→A→Bb is a rising processional: up a 4th, then stepwise ascent. This creates the feeling of walking deeper into the cathedral. Each chord transition lifts higher. The iv (Gm) is the emotional pivot — it shares D with the tonic (human connection) but its Bb pulls toward the Aeolian world. The final Am→Bb is the same half-step engine as the main progression, unifying the harmonic language. Use for breakdown/build sections where energy needs to ACCUMULATE rather than oscillate.",
+            "description": "i-iv-v-VI — ascending processional, walking deeper into the cathedral"
         }
     ],
     "melody": {
@@ -154,6 +281,11 @@
                            -1, -1, -1, -1, -1, -1, -1, -1, 69, -1, -1, -1, -1, -1, -1, -1,
                            70, -1, -1, -1, -1, -1, 69, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "note_count": 7,
+            "rhythm": "Beat 1 of bar 1 (D5), beat 3 of bar 1 (F5), 'and' of beat 3 (E5), beat 1 of bar 3 (A4), beat 1 of bar 3 (Bb4), beat 3 of bar 3 (A4). Bar 2 = rest. Bar 4 = silence.",
+            "intervals": "m3 up (D→F), m2 down (F→E), P5 down (E→A) — the Bauhaus plunge, m2 up (A→Bb), m2 down (Bb→A)",
+            "interval_profile": "Dominated by half-steps (m2) with one dramatic P5 leap. The m2 obsession = dark wave DNA. The P5 drop = the moment of vertigo.",
+            "silence_map": "Steps 17-24 (bar 2 = full rest), steps 41-64 (bar 4 + overhang = the exhale). 57% silence.",
             "description": "D5→F5→E5→(rest)→A4→(rest)→Bb4→A4→(silence). 7 notes in 4 bars. Bar 4 empty — the exhale."
         },
         "variation": {
@@ -161,61 +293,167 @@
                            -1, -1, -1, -1, -1, -1, -1, -1, 72, -1, -1, -1, -1, -1, -1, -1,
                            69, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-            "description": "D5→Eb5→D5→(rest)→C5→(rest)→A4→(silence). Phrygian Eb borrowing."
+            "note_count": 5,
+            "rhythm": "Beat 1 (D5), beat 2 (Eb5), beat 3 (D5), beat 1 of bar 3 (C5), beat 1 of bar 3 (A4). Bars 2 and 4 = silence.",
+            "intervals": "m2 up (D→Eb) — THE Phrygian borrowing, m2 down (Eb→D) — return, M2 down (D→C), m3 down (C→A)",
+            "interval_profile": "Pure half-step motion in bar 1 (the dark wave 'sigh': D→Eb→D), then descending steps. Even sparser than main — 5 notes. Boy Harsher 'breathy minimal' approach.",
+            "silence_map": "Steps 9-24 (bar 1 second half + bar 2 = rest), steps 37-64 (bar 3 second half through bar 4 = silence). 70% silence.",
+            "description": "D5→Eb5→D5→(rest)→C5→(rest)→A4→(silence). Phrygian Eb borrowing — the dark wave sigh."
+        },
+        "counter": {
+            "notes_midi": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                           57, -1, -1, -1, 57, -1, -1, -1, 58, -1, 57, -1, -1, -1, -1, -1,
+                           53, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "note_count": 5,
+            "rhythm": "Silent through bar 1 (main melody speaks). Beat 1 of bar 2 (A3), beat 2 (A3 repeated), 'and' of beat 2 (Bb3), beat 3 (A3). Beat 1 of bar 3 (F3). Bar 4 = silence.",
+            "intervals": "Unison (A→A), m2 up (A→Bb) — the half-step ornament again, m2 down (Bb→A), m3 down (A→F)",
+            "interval_profile": "Chant-like: repeated note (A3-A3) then half-step neighbor tone (Bb3), then drop to F3. The monk's prayer. Moves when the main melody rests, rests when it speaks — perfect counterpoint.",
+            "silence_map": "Steps 1-16 (bar 1 = silent while main melody plays), steps 33-64 (bars 3-4 = silence). 75% silence. The counter-melody lives in the GAPS of the main melody.",
+            "register": "A3-Bb3-F3 (MIDI 53-58) — one full octave below main melody. The bass voice of the cathedral choir.",
+            "description": "Monk's chant — A3→A3→Bb3→A3→F3. Speaks only when the main melody breathes. Lebanon Hanover's dual-voice shadow."
+        },
+        "phrygian_descent": {
+            "notes_midi": [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 75, -1, -1, -1,
+                           74, -1, -1, -1, -1, -1, -1, -1, 72, -1, -1, -1, -1, -1, -1, -1,
+                           70, -1, -1, -1, -1, -1, -1, -1, 69, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "note_count": 5,
+            "rhythm": "Beat 4 of bar 1 (Eb5 — enters on the weakest beat, disorienting). Beat 1 of bar 2 (D5). Beat 1 of bar 3 (C5). Beat 1 of bar 3 (Bb4). Beat 3 of bar 3 (A4). Bar 4 = silence.",
+            "intervals": "m2 down (Eb→D) — resolution of the Phrygian tension, M2 down (D→C), M2 down (C→Bb), M2 down (Bb→A)",
+            "interval_profile": "Pure stepwise DESCENT from the Phrygian Eb5 down to A4 — a chromatic-diatonic fall spanning a tritone (Eb to A = diminished 5th). This is the 'descending into the crypt' motif. Bauhaus 'Bela Lugosi's Dead' uses exactly this gesture. Each note one scale step lower. Gravity wins.",
+            "silence_map": "Steps 1-12 (three beats of silence before entry — dramatic pause), steps 45-64 (bar 4 = the abyss). 69% silence.",
+            "use_with": "dark_wave_b_section or dark_wave_outro — pairs with Aeolian/Phrygian harmony",
+            "description": "Eb5→D5→C5→Bb4→A4 — the crypt descent. Enters on beat 4, falls by step to the 5th. Bauhaus angular gravity."
+        },
+        "hypnotic_chant": {
+            "notes_midi": [74, -1, -1, -1, 74, -1, -1, -1, -1, -1, -1, -1, 74, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                           74, -1, -1, -1, -1, -1, -1, -1, 77, -1, -1, -1, -1, -1, -1, -1,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+            "note_count": 5,
+            "rhythm": "Beat 1 (D5), beat 2 (D5), beat 4 (D5) — three repetitions with irregular spacing. Bar 2 = silence. Beat 1 of bar 3 (D5 again), beat 3 of bar 3 (F5 — the ONLY different note). Bar 4 = silence.",
+            "intervals": "Unison, unison, unison, m3 up (D→F) — four repetitions of the same note then ONE escape",
+            "interval_profile": "She Past Away's Volkan Caner vocal technique distilled: repetition as trance-induction. The D5 repeated four times creates a hypnotic drone. The single F5 (minor 3rd) is the crack in the facade — the one moment of emotion in the ritual. Then silence swallows it.",
+            "silence_map": "Steps 17-32 (bar 2 = full silence), steps 45-64 (bar 4 = silence). 75% silence. The melody is 80% one note.",
+            "description": "D5→D5→D5→D5→F5 — hypnotic repetition with single escape tone. She Past Away trance-chant. 4 bars, 5 notes, 1 idea."
         }
     },
     "patterns": {
         "drums_main": {
             "name": "Ritüel",
-            "kick":     [2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-            "snare":    [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
-            "hihat":    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0.5, 0],
-            "tom_low":  [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-            "tom_high": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
-            "clap":     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+            "_rationale": "She Past Away's syncopated pulse. Kick avoids the downbeat emphasis of house — beat 1 accented, but the ghost on step 7 and 14 create a LOPSIDED feel. Snare on beats 2 and 4 (steps 5, 13) but placed on the 'and' of 2 and 'and' of 4 — shifted one 16th late from standard backbeat. This creates the signature dark wave 'stumble'. Toms in 3-against-4 polyrhythm against the 4/4 grid — tribal, ritualistic.",
+            "kick":         [2, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0.5, 0, 0],
+            "snare":        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0.4],
+            "hihat_closed": [1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0, 0.5, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_low":      [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+            "tom_high":     [0, 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0.7, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
+        },
+        "drums_main_var": {
+            "name": "Ritüel II",
+            "_rationale": "Second bar variation — open hat on the last 16th creates a 2-bar breathing cycle with drums_main. Kick adds a ghost on step 10 that wasn't in the first bar. Snare ghost removed — cleaner. The variation is SUBTLE, not a fill — dark wave repetition should hypnotize, not show off.",
+            "kick":         [2, 0, 0, 0, 0, 0, 0.5, 0, 0, 0.4, 0, 0, 0, 0.5, 0, 0],
+            "snare":        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+            "hihat_closed": [1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0, 0.5, 0, 1, 0, 0, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.6],
+            "tom_low":      [0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+            "tom_high":     [0, 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0.7, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]
         },
         "drums_intro": {
             "name": "Fog Machine",
-            "kick":     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0],
-            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            "hihat":    [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-            "tom_low":  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            "tom_high": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "_rationale": "Minimal. The kick on beat 1 and a ghost on step 14 (before the next downbeat) are the only low-end presence. Snare appears ONCE on step 13 — a single crack in the fog. Quarter-note hats at low velocity mark time like a clock in an empty room. No toms, no clap. The emptiness IS the arrangement.",
+            "kick":         [0.7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.35, 0, 0],
+            "snare":        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0],
+            "hihat_closed": [0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_low":      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_high":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "drums_breakdown": {
             "name": "Tribal Descent",
-            "kick":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            "hihat":    [0.5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0],
-            "tom_low":  [2, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 1],
-            "tom_high": [0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
-            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            "_rationale": "The ritual section. No kick, no snare — just toms and ghost hats. The tom pattern is a 3-note grouping (accented-ghost-ghost) against the 4/4 grid, creating a 12/16 polyrhythm. Tom_high fills the gaps in a complementary pattern. Ghost hats at steps 1, 7, 13 mark the downbeats of the implied 3/4. This is the 'tribal' dark wave moment — She Past Away 'Ritüel' breakdown, Bauhaus 'She's in Parties' middle section.",
+            "kick":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "snare":        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "hihat_closed": [0.35, 0, 0, 0, 0, 0, 0.35, 0, 0, 0, 0, 0, 0.35, 0, 0, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_low":      [2, 0, 0, 0.7, 0, 0, 2, 0, 0, 0.7, 0, 0, 2, 0, 0, 0.7],
+            "tom_high":     [0, 0, 0.8, 0, 0.6, 0, 0, 0, 0.8, 0, 0, 0.6, 0, 0, 0.8, 0],
+            "clap":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        "drums_ritual": {
+            "name": "Processional",
+            "_rationale": "For the dark_wave_ritual progression (i-iv-v-VI ascending). Kick on quarter notes — steady, processional, like footsteps in a cathedral nave. Snare only on beat 3 (step 9) — once per bar, a single crack echoing. Tom_low on the offbeats (steps 3, 7, 11, 15) creates a walking heartbeat between the kicks. This is the 'walking deeper into the cathedral' pattern — steady, inevitable, building.",
+            "kick":         [1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+            "snare":        [0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, 0],
+            "hihat_closed": [0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_low":      [0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0],
+            "tom_high":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "drums_fill": {
             "name": "The Return",
-            "kick":     [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0],
-            "snare":    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
-            "hihat":    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1],
-            "tom_low":  [2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            "tom_high": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-            "clap":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+            "_rationale": "Transition fill — first half is tom cascade (low→high alternating, descending velocity), second half is the kit reassembling. The snare roll at steps 15-16 (accent on 16) signals the section change. Hihat accelerates from nothing to 8ths to 16ths — the machine waking up.",
+            "kick":         [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0],
+            "snare":        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            "hihat_closed": [0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 1, 1, 1, 1],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_low":      [2, 0, 1, 0, 2, 0, 1, 0, 0.5, 0, 0, 0, 0, 0, 0, 0],
+            "tom_high":     [0, 1, 0, 1, 0, 1, 0, 1, 0, 0.5, 0, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+        },
+        "drums_outro": {
+            "name": "Last Rites",
+            "_rationale": "The mirror of the intro, but decaying. Kick ghost on step 1 only (barely there). Single snare at step 13 — the same crack as the intro, but now it means goodbye. Open hat on step 15 rings into silence. Each element appears once per bar at most — the machine is powering down.",
+            "kick":         [0.4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "snare":        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0],
+            "hihat_closed": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "hihat_open":   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0],
+            "tom_low":      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "tom_high":     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "clap":         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         },
         "bass_main": {
-            "pattern": [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-            "note": "Follows chord root. Step 15 = octave jump (anticipation).",
+            "pattern": [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0.8, 0],
+            "note": "Follows chord root. Step 15 = octave jump (anticipation). The gap between steps 1 and 9 lets the bass BREATHE — dark wave bass should pulse, not drone.",
             "style": "sustained"
         },
         "bass_b_section": {
             "pattern": [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-            "note": "Straight quarter notes. Locks with kick for driving urgency.",
+            "note": "Straight quarter notes. Locks with kick for driving urgency. The Aeolian cadence (Bb→C→Dm) needs forward momentum — quarter notes provide it.",
             "style": "sustained"
         },
-        "arp": {
+        "bass_ritual": {
+            "pattern": [1, 0, 0, 0, 0, 0, 0.6, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            "note": "Root on beat 1, ghost octave on 'and' of beat 2, root again on beat 3. The processional walk — steady but with a rhythmic 'limp' from the ghost note.",
+            "style": "sustained"
+        },
+        "bass_outro": {
+            "pattern": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "note": "Single root note per bar. Sustained. The last breath.",
+            "style": "sustained"
+        },
+        "arp_main": {
             "pattern": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             "chord_indices": [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3],
             "index_map": { "0": "root", "1": "3rd", "2": "5th", "3": "octave" },
-            "note": "Triangle cycle through chord tones. Never stops. The heartbeat."
+            "note": "Triangle cycle through chord tones. Never stops. The heartbeat. SH-101 monophonic — each note cuts the last."
+        },
+        "arp_ritual": {
+            "pattern": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+            "chord_indices": [0, 0, 1, 1, 2, 2, 3, 3],
+            "index_map": { "0": "root", "1": "3rd", "2": "5th", "3": "octave" },
+            "note": "8th notes instead of 16ths — slower, more deliberate. Each chord tone gets two beats. The processional pace."
+        },
+        "arp_outro": {
+            "pattern": [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            "chord_indices": [0, 2],
+            "index_map": { "0": "root", "2": "5th" },
+            "note": "Root and 5th only. Two notes per bar. The arpeggio stripped to its skeleton — hollow, medieval, fading."
         }
     },
     "groove": {
@@ -231,26 +469,136 @@
     },
     "arrangement": {
         "structure": "verse_chorus_with_ritual_breakdown",
+        "_design_notes": "Extended structure using all 4 progressions, 5 melodies, and 8 drum patterns. The arrangement follows the cathedral metaphor: entering (intro), exploring (verses), praying (choruses), descending to the crypt (breakdown), the ritual (processional), ascending back (build), the final sermon (chorus_3 with dual melodies), and leaving (outro with Phrygian darkness). Each section introduces exactly one new element — never overwhelm.",
         "sections": [
-            { "name": "intro",      "bars": 8,  "pattern": "drums_intro",     "elements": ["atmosphere", "pad"],                                          "progression": "dark_wave_main" },
-            { "name": "build",      "bars": 8,  "pattern": "drums_intro",     "elements": ["atmosphere", "pad", "bass", "hihat"],                         "progression": "dark_wave_main" },
-            { "name": "verse",      "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "atmosphere"], "progression": "dark_wave_main" },
-            { "name": "chorus",     "bars": 8,  "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
-            { "name": "verse_2",    "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
-            { "name": "chorus_2",   "bars": 8,  "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"], "progression": "dark_wave_main", "melody": "main" },
-            { "name": "breakdown",  "bars": 8,  "pattern": "drums_breakdown", "elements": ["tom_low", "tom_high", "hihat", "pad", "atmosphere"],           "progression": "dark_wave_b_section" },
-            { "name": "build_2",    "bars": 4,  "pattern": "drums_fill",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"], "progression": "dark_wave_main" },
-            { "name": "chorus_3",   "bars": 16, "pattern": "drums_main",      "elements": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"], "progression": "dark_wave_main", "melody": "variation" },
-            { "name": "outro",      "bars": 8,  "pattern": "drums_intro",     "elements": ["pad", "atmosphere"],                                          "progression": "dark_wave_main" }
+            {
+                "name": "intro",
+                "bars": 8,
+                "pattern": "drums_intro",
+                "bass_pattern": "bass_outro",
+                "elements": ["atmosphere", "pad"],
+                "progression": "dark_wave_main",
+                "_notes": "Pad and atmosphere only. The fog. Quarter-note ghost hats and a single snare crack. The cathedral door opens."
+            },
+            {
+                "name": "build",
+                "bars": 8,
+                "pattern": "drums_intro",
+                "bass_pattern": "bass_main",
+                "elements": ["atmosphere", "pad", "bass", "hihat_closed"],
+                "progression": "dark_wave_main",
+                "_notes": "Bass enters — the first warmth. Still intro drums. Hats mark time. Building anticipation."
+            },
+            {
+                "name": "verse",
+                "bars": 16,
+                "pattern": "drums_main",
+                "pattern_alt": "drums_main_var",
+                "bass_pattern": "bass_main",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "bass", "pad", "atmosphere"],
+                "progression": "dark_wave_main",
+                "_notes": "Full kit enters — the Ritüel pattern. 2-bar cycle (main/var). Toms establish the tribal polyrhythm. No arp yet, no lead — let the drums and bass speak."
+            },
+            {
+                "name": "chorus",
+                "bars": 8,
+                "pattern": "drums_main",
+                "pattern_alt": "drums_main_var",
+                "bass_pattern": "bass_main",
+                "arp_pattern": "arp_main",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "atmosphere"],
+                "progression": "dark_wave_main",
+                "_notes": "Arp and clap enter — the machine engages fully. SH-101 16th-note arpeggio is the heartbeat. Clap doubles the snare hits. Energy lifts."
+            },
+            {
+                "name": "verse_2",
+                "bars": 16,
+                "pattern": "drums_main",
+                "pattern_alt": "drums_main_var",
+                "bass_pattern": "bass_main",
+                "arp_pattern": "arp_main",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"],
+                "progression": "dark_wave_main",
+                "melody": "hypnotic_chant",
+                "_notes": "Arp continues from chorus (doesn't drop). Hypnotic chant melody enters — D5 repeated four times then F5. She Past Away trance-vocal style. The repetition IS the verse."
+            },
+            {
+                "name": "chorus_2",
+                "bars": 8,
+                "pattern": "drums_main",
+                "pattern_alt": "drums_main_var",
+                "bass_pattern": "bass_main",
+                "arp_pattern": "arp_main",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"],
+                "progression": "dark_wave_main",
+                "melody": "main",
+                "_notes": "Lead enters with the main melody — D5→F5→E5→A4→Bb4→A4. The Bauhaus plunge (P5 down from E to A). Clap returns. Maximum energy of the first half."
+            },
+            {
+                "name": "breakdown",
+                "bars": 8,
+                "pattern": "drums_breakdown",
+                "bass_pattern": null,
+                "elements": ["tom_low", "tom_high", "hihat_closed", "pad", "atmosphere"],
+                "progression": "dark_wave_b_section",
+                "melody": "phrygian_descent",
+                "_notes": "THE drop. Kick and snare vanish. Tribal toms only — 3-against-4 polyrhythm. Aeolian cadence (Bb→C→Dm). Phrygian descent melody: Eb5 falling to A4. Descending into the crypt."
+            },
+            {
+                "name": "ritual",
+                "bars": 8,
+                "pattern": "drums_ritual",
+                "bass_pattern": "bass_ritual",
+                "arp_pattern": "arp_ritual",
+                "elements": ["kick", "hihat_closed", "tom_low", "bass", "pad", "arp", "atmosphere"],
+                "progression": "dark_wave_ritual",
+                "melody": "counter",
+                "_notes": "NEW section. Processional drums — steady quarter-note kick, single snare on beat 3. Ritual progression (i-iv-v-VI ascending). Counter-melody monk's chant in low register. Arp at 8th notes (half speed). Walking deeper into the cathedral."
+            },
+            {
+                "name": "build_2",
+                "bars": 4,
+                "pattern": "drums_fill",
+                "bass_pattern": "bass_b_section",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "bass", "pad", "arp", "atmosphere"],
+                "progression": "dark_wave_main",
+                "_notes": "Fill pattern — tom cascade into kit reassembly. Snare roll at the end signals the return. 4 bars only — a bridge, not a section."
+            },
+            {
+                "name": "chorus_3",
+                "bars": 16,
+                "pattern": "drums_main",
+                "pattern_alt": "drums_main_var",
+                "bass_pattern": "bass_main",
+                "arp_pattern": "arp_main",
+                "elements": ["kick", "snare", "hihat_closed", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"],
+                "progression": "dark_wave_main",
+                "melody": "variation",
+                "melody_counter": "counter",
+                "_notes": "The final sermon. 16 bars — double length. Variation melody (Phrygian Eb borrowing: D5→Eb5→D5→C5→A4) with counter-melody underneath. Every element present. Maximum density before the fall."
+            },
+            {
+                "name": "outro",
+                "bars": 12,
+                "pattern": "drums_outro",
+                "bass_pattern": "bass_outro",
+                "arp_pattern": "arp_outro",
+                "elements": ["pad", "arp", "lead", "atmosphere"],
+                "progression": "dark_wave_outro",
+                "melody": "phrygian_descent",
+                "_notes": "Phrygian outro progression (i-bII-i-v5). Drums reduced to ghosts — single kick, single snare, open hat ringing. Arp stripped to root and 5th only. Lead plays the crypt descent one last time. The Neapolitan Eb major chord is the 'wrong turn' — then back to Dm — then the hollow A5 power chord. The candle goes out."
+            }
         ],
-        "total_bars": 100,
-        "total_duration_at_118bpm": "3m23s",
+        "total_bars": 112,
+        "total_duration_at_118bpm": "3m48s",
         "transitions": {
             "crossfade_s": 3.0,
             "breakdown_entry": "drums_drop_toms_enter",
-            "chorus_entry": "fill_pattern_snap"
+            "ritual_entry": "toms_morph_to_processional_kick",
+            "chorus_entry": "fill_pattern_snap",
+            "outro_entry": "elements_strip_one_per_bar"
         },
-        "energy_arc": "build → peak → sustain → drop → ritual → rebuild → peak → fade"
+        "energy_arc": "fog → emerge → pulse → surge → trance → peak → descent → ritual → rebuild → sermon → darkness"
     },
     "mixing": {
         "reverb": {

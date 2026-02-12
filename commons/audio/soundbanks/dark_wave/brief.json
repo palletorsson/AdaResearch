@@ -14,7 +14,7 @@
     "emotional_truth": "Abandoned cathedral at midnight, smoke machines, black clothing, beautiful despair"
   },
 
-  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "arp", "lead", "atmosphere"],
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "arp", "lead", "atmosphere", "tom_low", "tom_high", "clap"],
 
   "forbidden": [
     "supersaw",
@@ -63,10 +63,10 @@
   "sections": {
     "intro": ["atmosphere", "pad"],
     "build": ["atmosphere", "pad", "bass", "hihat"],
-    "verse": ["kick", "snare", "hihat", "bass", "pad", "atmosphere"],
-    "chorus": ["kick", "snare", "hihat", "bass", "pad", "arp", "atmosphere"],
-    "main": ["kick", "snare", "hihat", "bass", "pad", "arp", "lead", "atmosphere"],
-    "breakdown": ["pad", "atmosphere", "lead"],
+    "verse": ["kick", "snare", "hihat", "tom_low", "tom_high", "bass", "pad", "atmosphere"],
+    "chorus": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "atmosphere"],
+    "main": ["kick", "snare", "hihat", "tom_low", "tom_high", "clap", "bass", "pad", "arp", "lead", "atmosphere"],
+    "breakdown": ["tom_low", "tom_high", "hihat", "pad", "atmosphere"],
     "outro": ["pad", "atmosphere"]
   }
 }

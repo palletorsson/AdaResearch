@@ -521,6 +521,120 @@ static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStream
 	
 	return playback
 
+static func generate_prog_odyssey_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("prog_odyssey", parameters)
+	# Prog Odyssey — Through-composed suite in 7 movements
+	# Dark sci-fi Moog synthesis, variable tempos, asymmetric sections, thematic callbacks
+	# Inspired by: ELP (Tarkus), Tangerine Dream (Phaedra), King Crimson, Klaus Schulze (Timewind)
+	
+	randomize()
+	
+	# Variable tempos per movement
+	var bpm_normal = 100.0
+	var bpm_fast = 130.0
+	var bpm_slow = 75.0
+	
+	# Bar durations for each tempo
+	var bar_normal = 240.0 / bpm_normal   # 2.4s per bar
+	var bar_fast = 240.0 / bpm_fast       # ~1.846s per bar
+	var bar_slow = 240.0 / bpm_slow       # 3.2s per bar
+	
+	# Key: B minor (Aeolian) — distinct from Em used by prog_synth_70s
+	var root_note = "B2"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	
+	# Through-composed progressions for each movement (scale degree indices 0-6)
+	# Overture: i-VI-iv-VII-i-V-iii-VI — modal arc, the main motif (8 bars)
+	var overture_prog = [0, 5, 3, 6, 0, 4, 2, 5]
+	# Descent: chromatic tension building (12 bars)
+	var descent_prog = [0, 6, 5, 4, 0, 3, 6, 5, 0, 6, 4, 3]
+	# Machine Room: mechanical repeated pairs (8 bars)
+	var machine_prog = [0, 0, 3, 3, 5, 5, 6, 6]
+	# Cathedral: spacious, each chord breathes (6 bars)
+	var cathedral_prog = [5, 3, 0, 4, 5, 0]
+	# Eruption: 16-bar descending fury (longest section)
+	var eruption_prog = [0, 6, 5, 4, 3, 2, 6, 0, 0, 5, 4, 3, 6, 5, 4, 0]
+	# Reprise: same as overture — thematic callback
+	var reprise_prog = overture_prog.duplicate()
+	# Vanishing: pure root drone
+	var vanishing_prog = [0, 0, 0, 0]
+	
+	print("AudioSynthesizer: Generating Prog Odyssey Suite in B minor — 7 movements")
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 7
+	playback.initial_clip = 0
+	
+	# Movement 1: Overture (8 bars @ 100bpm) — Mellotron pad + motif statement
+	var overture_stream = _generate_prog_section_stream(overture_prog, scale, ["moog_pad"], bar_normal)
+	playback.set_clip_stream(0, overture_stream)
+	playback.set_clip_name(0, "Overture")
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Movement 2: Descent (12 bars @ 100bpm) — Add Moog bass + sequence, darker
+	var descent_stream = _generate_prog_section_stream(descent_prog, scale, ["moog_pad", "moog_bass", "kraftwerk_seq"], bar_normal)
+	playback.set_clip_stream(1, descent_stream)
+	playback.set_clip_name(1, "Descent")
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Movement 3: Machine Room (8 bars @ 130bpm) — Motorik drums hard, Kraftwerk dominant
+	var machine_stream = _generate_prog_section_stream(machine_prog, scale, ["kraftwerk_seq", "motorik_drums", "moog_bass"], bar_fast)
+	playback.set_clip_stream(2, machine_stream)
+	playback.set_clip_name(2, "Machine Room")
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Movement 4: Cathedral (6 bars @ 75bpm) — Dramatic slow-down, pad-only, spacious
+	var cathedral_stream = _generate_prog_section_stream(cathedral_prog, scale, ["moog_pad"], bar_slow)
+	playback.set_clip_stream(3, cathedral_stream)
+	playback.set_clip_name(3, "Cathedral")
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(3, 4)
+	
+	# Movement 5: Eruption (16 bars @ 130bpm) — Full force: ELP lead solo over everything
+	var eruption_stream = _generate_prog_section_stream(eruption_prog, scale, ["moog_pad", "moog_bass", "kraftwerk_seq", "elp_lead", "motorik_drums"], bar_fast)
+	playback.set_clip_stream(4, eruption_stream)
+	playback.set_clip_name(4, "Eruption")
+	playback.set_clip_auto_advance(4, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(4, 5)
+	
+	# Movement 6: Reprise (8 bars @ 100bpm) — Overture theme returns transformed, bass + pad
+	var reprise_stream = _generate_prog_section_stream(reprise_prog, scale, ["moog_pad", "moog_bass"], bar_normal)
+	playback.set_clip_stream(5, reprise_stream)
+	playback.set_clip_name(5, "Reprise")
+	playback.set_clip_auto_advance(5, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(5, 6)
+	
+	# Movement 7: Vanishing (4 bars @ 100bpm) — Fade to single oscillator drone
+	var vanishing_stream = _generate_prog_section_stream(vanishing_prog, scale, ["moog_pad"], bar_normal)
+	playback.set_clip_stream(6, vanishing_stream)
+	playback.set_clip_name(6, "Vanishing")
+	playback.set_clip_auto_advance(6, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(6, 0)  # Loop back to Overture
+	
+	# Transitions — longer crossfades for dramatic tempo changes
+	var xfade_normal = 3.0   # Normal transitions
+	var xfade_tempo = 5.0    # Tempo-change transitions (more dramatic)
+	
+	# Overture -> Descent (same tempo, normal crossfade)
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_normal)
+	# Descent -> Machine Room (100->130 bpm, dramatic tempo change)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_tempo)
+	# Machine Room -> Cathedral (130->75 bpm, dramatic slow-down)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_tempo)
+	# Cathedral -> Eruption (75->130 bpm, explosive tempo jump)
+	playback.add_transition(3, 4, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_tempo)
+	# Eruption -> Reprise (130->100 bpm, settling down)
+	playback.add_transition(4, 5, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_tempo)
+	# Reprise -> Vanishing (same tempo, gentle fade)
+	playback.add_transition(5, 6, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_normal)
+	# Vanishing -> Overture (loop back, long fade for suite restart)
+	playback.add_transition(6, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade_tempo)
+	
+	return playback
+
 static func generate_moroder_disco_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
 	parameters = _merge_with_song_research_parameters("moroder_disco", parameters)
 	# Giorgio Moroder "I Feel Love" style - the synth as motor
@@ -1295,20 +1409,23 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 					var accent_mult = 1.0 if not note.accent else 1.25
 					
 					# Calculate filter cutoff (THE ACID SOUND)
-					var base_cutoff = 200.0 + filter_intensity * 600.0
-					var env_mod = 3000.0 * filter_intensity
+					var base_cutoff = 200.0 + filter_intensity * 500.0
+					var env_mod = 2000.0 * filter_intensity
 					var filter_cutoff = base_cutoff + env * env_mod * accent_mult
 					
 					# Slow filter sweep over time for movement
 					var sweep = sin(float(start + j) / SAMPLE_RATE * 0.5) * 0.3 + 0.7
 					filter_cutoff *= sweep
 					
-					# Moderate resonance (0.5-0.65 range, tamed to avoid squealing)
-					var resonance = 0.5 + filter_intensity * 0.15
+					# Cap cutoff to prevent harsh resonant peaks
+					filter_cutoff = minf(filter_cutoff, 3500.0)
+					
+					# Moderate resonance (0.5-0.6 range, tamed to avoid squealing)
+					var resonance = 0.45 + filter_intensity * 0.12
 					
 					# Simple resonant lowpass approximation
-					var f = clampf(filter_cutoff / SAMPLE_RATE * 2.0, 0.01, 0.99)
-					var fb = resonance + resonance / (1.0 - f + 0.001)
+					var f = clampf(filter_cutoff / SAMPLE_RATE * 2.0, 0.01, 0.90)
+					var fb = resonance + resonance / (1.0 - f + 0.01)
 					
 					filter_state[0] += f * (saw - filter_state[0] + fb * (filter_state[0] - filter_state[2]))
 					filter_state[1] += f * (filter_state[0] - filter_state[1])
@@ -2199,7 +2316,9 @@ static func _generate_prog_section_stream(progression: Array, scale: Array, inst
 		if "motorik_drums" in instruments:
 			var data = PackedFloat32Array()
 			data.resize(samples_per_chord)
-			_generate_motorik_beat(data, samples_per_chord)
+			# Derive BPM from bar_duration (bar_duration = 240/bpm, but section doubles it)
+			var section_bpm = 240.0 / bar_duration
+			_generate_motorik_beat(data, samples_per_chord, section_bpm)
 			_mix_into(chord_mix, data, 0.6)
 		
 		# Mix into final buffer
@@ -2410,11 +2529,9 @@ static func _generate_elp_moog_lead(data: PackedFloat32Array, sample_count: int,
 		
 		data[i] = filtered * env * 0.55
 
-static func _generate_motorik_beat(data: PackedFloat32Array, sample_count: int):
+static func _generate_motorik_beat(data: PackedFloat32Array, sample_count: int, bpm: float = 110.0):
 	# Kraftwerk/Neu! "motorik" beat: steady 4/4, driving hi-hats
 	# Kick on 1 and 3, snare on 2 and 4, constant 8th note hats
-	
-	var bpm = 110.0
 	var samples_per_beat = int(SAMPLE_RATE * 60.0 / bpm)
 	var samples_per_8th = _idiv(samples_per_beat, 2)
 	
@@ -2877,8 +2994,8 @@ static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamI
 	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 	playback.set_clip_auto_advance_next_clip(0, 1)
 	
-	# Main: Full arrangement
-	var main = _generate_kraftwerk_section(progression, scale, ["sequence", "moog_bass", "vocoder_pad", "lead", "drums"], bar_duration)
+	# Main: Controlled build — Kraftwerk stays restrained even at full arrangement
+	var main = _generate_kraftwerk_section(progression, scale, ["sequence", "moog_bass", "vocoder_pad", "drums"], bar_duration)
 	playback.set_clip_stream(1, main)
 	playback.set_clip_name(1, "Main")
 	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
@@ -2985,7 +3102,7 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 					if t > (note_length / SAMPLE_RATE) * 0.8: env *= 1.0 - (t - (note_length / SAMPLE_RATE) * 0.8) / ((note_length / SAMPLE_RATE) * 0.2)
 					if start + j < samples_per_chord: chord_mix[start + j] += lead * env * 0.12
 		
-		# DRUMS - Electronic, precise (TR-808 style)
+		# DRUMS - Electronic, precise, understated (Kraftwerk: drums as texture, not driving force)
 		if "drums" in instruments:
 			var beat_samples = _idiv(samples_per_chord, 8)
 			for beat in range(8):
@@ -2996,14 +3113,14 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 						var t = float(j) / SAMPLE_RATE
 						var kick_freq = 60.0 * exp(-t * 30.0) + 45.0
 						var kick = sin(2.0 * PI * kick_freq * t) * exp(-t * 10.0)
-						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.35
+						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.2
 				# Snare on 2 and 6
 				if beat == 2 or beat == 6:
 					for j in range(min(int(SAMPLE_RATE * 0.1), beat_samples)):
 						var t = float(j) / SAMPLE_RATE
 						var snare = sin(2.0 * PI * 200.0 * t) * exp(-t * 20.0) * 0.4
 						snare += (randf() - 0.5) * exp(-t * 25.0) * 0.4
-						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.2
+						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.12
 				# Hi-hat on every beat
 				for j in range(min(int(SAMPLE_RATE * 0.04), beat_samples)):
 					var t = float(j) / SAMPLE_RATE
@@ -9419,3 +9536,394 @@ static func _generate_space_sub_drone(data: PackedFloat32Array, sample_count: in
 		elif progress > 0.85: env = (1.0 - progress) / 0.15
 		
 		data[i] = (sub + harm2) * amp_mod * env * 0.5
+
+
+# =============================================================================
+# MIDI CAPTURE — Parallel data capture for AudioSynthesizer songs
+# These functions mirror the audio generators but only produce MidiCapture data.
+# They do NOT modify any audio generation code.
+# =============================================================================
+
+static var _last_midi_capture: MidiCapture = null
+
+
+static func capture_midi_for_song(song_id: String) -> MidiCapture:
+	"""Dispatch: return a MidiCapture for the given AudioSynthesizer song."""
+	match song_id:
+		"prog_odyssey":
+			return _capture_prog_odyssey_midi()
+		"kraftwerk", "computer_love":
+			return _capture_kraftwerk_midi()
+		"prog_synth_70s":
+			return _capture_prog_synth_midi()
+		_:
+			return null
+
+
+# ---------------------------------------------------------------------------
+# Helper: capture one prog-style section into a MidiCapture
+# Mirrors _generate_prog_section_stream but only writes MIDI events.
+# ---------------------------------------------------------------------------
+static func _capture_prog_section_midi(
+	capture: MidiCapture,
+	progression: Array,
+	scale: Array,
+	instruments: Array,
+	bar_duration: float,
+	track_map: Dictionary,
+	start_tick: int,
+	section_bpm: float = 100.0
+):
+	var tpq = 480
+	var beats_per_bar = 4
+	var bars_per_chord = 2  # The doubling from _generate_prog_section_stream
+	var ticks_per_chord = bars_per_chord * beats_per_bar * tpq   # 3840
+	var ticks_per_beat = tpq
+	var ticks_per_8th = tpq / 2
+
+	for chord_idx in range(progression.size()):
+		var degree = progression[chord_idx]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_start = start_tick + chord_idx * ticks_per_chord
+
+		# --- MOOG PAD: full triad, long sustain ---
+		if "moog_pad" in instruments and track_map.has("moog_pad"):
+			for freq in chord_freqs:
+				var midi_note = capture.freq_to_midi(freq)
+				capture.add_note(track_map["moog_pad"], chord_start, midi_note, 70, ticks_per_chord - tpq / 4)
+
+		# --- MOOG BASS: root one octave down ---
+		if "moog_bass" in instruments and track_map.has("moog_bass"):
+			var bass_note = capture.freq_to_midi(root_freq * 0.5)
+			capture.add_note(track_map["moog_bass"], chord_start, bass_note, 95, ticks_per_chord - tpq / 4)
+
+		# --- KRAFTWERK SEQUENCE: 16th-note arpeggios (same as _generate_kraftwerk_sequence) ---
+		if "kraftwerk_seq" in instruments and track_map.has("kraftwerk_seq"):
+			# Build 8-note sequence from scale (mirrors _generate_kraftwerk_sequence)
+			var degrees = [0, 2, 4, 0, 4, 2, 0, 5]
+			var note_duration = ticks_per_chord / 16  # 16th notes
+			for n in range(16):
+				var seq_degree = degrees[n % 8]
+				var seq_note_name = scale[seq_degree]
+				var seq_freq = PopMusicTheory.get_freq(seq_note_name)
+				# Octave up for the 4th note in each group of 8 (index 3, 11)
+				if n % 8 == 3:
+					seq_freq *= 2.0
+				var midi_note = capture.freq_to_midi(seq_freq)
+				capture.add_note(
+					track_map["kraftwerk_seq"],
+					chord_start + n * note_duration,
+					midi_note, 75,
+					note_duration * 3 / 4
+				)
+
+		# --- ELP LEAD: scale-based melody, octave up ---
+		if "elp_lead" in instruments and track_map.has("elp_lead"):
+			var note_length = ticks_per_chord / 8
+			for n in range(8):
+				var scale_idx = (degree + n * 2) % 7
+				var note_name = scale[scale_idx]
+				var freq = PopMusicTheory.get_freq(note_name) * 2.0  # Octave up
+				var midi_note = capture.freq_to_midi(freq)
+				var vel = 90 + (randi() % 20)
+				capture.add_note(
+					track_map["elp_lead"],
+					chord_start + n * note_length,
+					midi_note, vel,
+					note_length * 7 / 8
+				)
+
+		# --- MOTORIK DRUMS: kick 1&3, snare 2&4, hihat every 8th ---
+		if "motorik_drums" in instruments and track_map.has("motorik_drums"):
+			for beat in range(bars_per_chord * beats_per_bar):  # 8 beats
+				var beat_tick = chord_start + beat * ticks_per_beat
+				var beat_in_bar = beat % 4
+				# Kick on 1, 3
+				if beat_in_bar == 0 or beat_in_bar == 2:
+					capture.add_note(track_map["motorik_drums"], beat_tick, 36, 100, tpq / 4)
+				# Snare on 2, 4
+				if beat_in_bar == 1 or beat_in_bar == 3:
+					capture.add_note(track_map["motorik_drums"], beat_tick, 38, 85, tpq / 4)
+				# Hi-hat on every 8th note
+				capture.add_note(track_map["motorik_drums"], beat_tick, 42, 65, tpq / 8)
+				capture.add_note(track_map["motorik_drums"], beat_tick + ticks_per_8th, 42, 55, tpq / 8)
+
+
+# ---------------------------------------------------------------------------
+# Prog Odyssey MIDI capture — 7-movement suite in B minor
+# Mirrors generate_prog_odyssey_song
+# ---------------------------------------------------------------------------
+static func _capture_prog_odyssey_midi(parameters: Dictionary = {}) -> MidiCapture:
+	var capture = MidiCapture.new()
+	capture.song_name = "Prog Odyssey"
+	capture.ticks_per_quarter = 480
+
+	# Variable tempos (must match generate_prog_odyssey_song exactly)
+	var bpm_normal = 100.0
+	var bpm_fast = 130.0
+	var bpm_slow = 75.0
+	var bar_normal = 240.0 / bpm_normal
+	var bar_fast = 240.0 / bpm_fast
+	var bar_slow = 240.0 / bpm_slow
+	capture.bpm = bpm_normal
+
+	# Key: B minor (same as generator)
+	var root_note = "B2"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+
+	# Through-composed progressions (identical to generator)
+	var overture_prog = [0, 5, 3, 6, 0, 4, 2, 5]
+	var descent_prog = [0, 6, 5, 4, 0, 3, 6, 5, 0, 6, 4, 3]
+	var machine_prog = [0, 0, 3, 3, 5, 5, 6, 6]
+	var cathedral_prog = [5, 3, 0, 4, 5, 0]
+	var eruption_prog = [0, 6, 5, 4, 3, 2, 6, 0, 0, 5, 4, 3, 6, 5, 4, 0]
+	var reprise_prog = overture_prog.duplicate()
+	var vanishing_prog = [0, 0, 0, 0]
+
+	# Tracks — GM program numbers chosen for analogue synth feel
+	var pad_track = capture.add_track("Moog Pad", 0, 89)          # Pad 2 (warm)
+	var bass_track = capture.add_track("Moog Bass", 1, 38)        # Synth Bass 1
+	var seq_track = capture.add_track("Kraftwerk Seq", 2, 80)     # Lead 1 (square)
+	var lead_track = capture.add_track("ELP Lead", 3, 81)         # Lead 2 (sawtooth)
+	var drum_track = capture.add_track("Motorik Drums", 9, 0, true)
+
+	var track_map = {
+		"moog_pad": pad_track,
+		"moog_bass": bass_track,
+		"kraftwerk_seq": seq_track,
+		"elp_lead": lead_track,
+		"motorik_drums": drum_track
+	}
+
+	var tpq = 480
+	var tick_cursor = 0
+
+	# Helper: calculate ticks for N chords at 2 bars each
+	# ticks = num_chords * 2 * 4 * 480
+
+	# Movement 1: Overture (8 chords @ 100 bpm) — pad only
+	capture.add_section("Overture", tick_cursor, bpm_normal)
+	_capture_prog_section_midi(capture, overture_prog, scale, ["moog_pad"], bar_normal, track_map, tick_cursor, bpm_normal)
+	tick_cursor += overture_prog.size() * 2 * 4 * tpq
+
+	# Movement 2: Descent (12 chords @ 100 bpm) — pad + bass + sequence
+	capture.add_section("Descent", tick_cursor, bpm_normal)
+	_capture_prog_section_midi(capture, descent_prog, scale, ["moog_pad", "moog_bass", "kraftwerk_seq"], bar_normal, track_map, tick_cursor, bpm_normal)
+	tick_cursor += descent_prog.size() * 2 * 4 * tpq
+
+	# Movement 3: Machine Room (8 chords @ 130 bpm) — sequence + drums + bass
+	capture.add_section("Machine Room", tick_cursor, bpm_fast)
+	_capture_prog_section_midi(capture, machine_prog, scale, ["kraftwerk_seq", "motorik_drums", "moog_bass"], bar_fast, track_map, tick_cursor, bpm_fast)
+	tick_cursor += machine_prog.size() * 2 * 4 * tpq
+
+	# Movement 4: Cathedral (6 chords @ 75 bpm) — pad only, spacious
+	capture.add_section("Cathedral", tick_cursor, bpm_slow)
+	_capture_prog_section_midi(capture, cathedral_prog, scale, ["moog_pad"], bar_slow, track_map, tick_cursor, bpm_slow)
+	tick_cursor += cathedral_prog.size() * 2 * 4 * tpq
+
+	# Movement 5: Eruption (16 chords @ 130 bpm) — full: pad, bass, seq, lead, drums
+	capture.add_section("Eruption", tick_cursor, bpm_fast)
+	_capture_prog_section_midi(capture, eruption_prog, scale, ["moog_pad", "moog_bass", "kraftwerk_seq", "elp_lead", "motorik_drums"], bar_fast, track_map, tick_cursor, bpm_fast)
+	tick_cursor += eruption_prog.size() * 2 * 4 * tpq
+
+	# Movement 6: Reprise (8 chords @ 100 bpm) — pad + bass
+	capture.add_section("Reprise", tick_cursor, bpm_normal)
+	_capture_prog_section_midi(capture, reprise_prog, scale, ["moog_pad", "moog_bass"], bar_normal, track_map, tick_cursor, bpm_normal)
+	tick_cursor += reprise_prog.size() * 2 * 4 * tpq
+
+	# Movement 7: Vanishing (4 chords @ 100 bpm) — pad only, drone
+	capture.add_section("Vanishing", tick_cursor, bpm_normal)
+	_capture_prog_section_midi(capture, vanishing_prog, scale, ["moog_pad"], bar_normal, track_map, tick_cursor, bpm_normal)
+
+	_last_midi_capture = capture
+	return capture
+
+
+# ---------------------------------------------------------------------------
+# Kraftwerk MIDI capture — clean electronic pop
+# Mirrors generate_kraftwerk_song / _generate_kraftwerk_section
+# ---------------------------------------------------------------------------
+static func _capture_kraftwerk_midi(parameters: Dictionary = {}) -> MidiCapture:
+	var capture = MidiCapture.new()
+	capture.song_name = "Kraftwerk"
+	capture.ticks_per_quarter = 480
+
+	var bpm = 110.0
+	var bar_duration = 240.0 / bpm
+	capture.bpm = bpm
+
+	# Key: pick the same way the generator does (random from C/D/E/G)
+	# For MIDI capture we use a fixed key so the export is deterministic
+	var root_note = "C3"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)
+
+	# Progression (from _default_progression_for_song("kraftwerk"))
+	var progression = [1, 4, 5, 1]
+
+	# Tracks — NO lead track (matches generator: "lead" was removed from Kraftwerk audio)
+	var seq_track = capture.add_track("Kraftwerk Sequence", 0, 80)   # Lead 1 (square)
+	var bass_track = capture.add_track("Moog Bass", 1, 38)           # Synth Bass 1
+	var pad_track = capture.add_track("Vocoder Pad", 2, 54)          # Synth Voice
+	var drum_track = capture.add_track("Electronic Drums", 9, 0, true)
+
+	var tpq = 480
+	var beats_per_bar = 4
+	var bars_per_chord = 2  # Same as _generate_kraftwerk_section
+	var ticks_per_chord = bars_per_chord * beats_per_bar * tpq  # 3840
+	var tick_cursor = 0
+
+	# Section 1: Intro — sequence + bass
+	capture.add_section("Intro", tick_cursor, bpm)
+	_capture_kraftwerk_section_midi(capture, progression, scale, ["sequence", "moog_bass"], {
+		"sequence": seq_track, "moog_bass": bass_track, "vocoder_pad": pad_track, "drums": drum_track
+	}, tick_cursor)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 2: Main — sequence + bass + vocoder + drums
+	capture.add_section("Main", tick_cursor, bpm)
+	_capture_kraftwerk_section_midi(capture, progression, scale, ["sequence", "moog_bass", "vocoder_pad", "drums"], {
+		"sequence": seq_track, "moog_bass": bass_track, "vocoder_pad": pad_track, "drums": drum_track
+	}, tick_cursor)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 3: Outro — sequence + vocoder
+	capture.add_section("Outro", tick_cursor, bpm)
+	_capture_kraftwerk_section_midi(capture, progression, scale, ["sequence", "vocoder_pad"], {
+		"sequence": seq_track, "moog_bass": bass_track, "vocoder_pad": pad_track, "drums": drum_track
+	}, tick_cursor)
+
+	_last_midi_capture = capture
+	return capture
+
+
+static func _capture_kraftwerk_section_midi(
+	capture: MidiCapture,
+	progression: Array,
+	scale: Array,
+	instruments: Array,
+	track_map: Dictionary,
+	start_tick: int
+):
+	"""Mirrors _generate_kraftwerk_section but only produces MIDI data."""
+	var tpq = 480
+	var beats_per_bar = 4
+	var bars_per_chord = 2
+	var ticks_per_chord = bars_per_chord * beats_per_bar * tpq  # 3840
+	var ticks_per_beat = tpq
+	var ticks_per_8th = tpq / 2
+
+	for chord_idx in range(progression.size()):
+		var degree = progression[chord_idx]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_start = start_tick + chord_idx * ticks_per_chord
+
+		# --- SEQUENCE: 16th-note pattern [0,0,7,0,0,0,7,0,0,0,7,0,5,0,7,0] ---
+		# Note offsets are semitones from root: 0=root, 7=perfect fifth, 5=perfect fourth
+		if "sequence" in instruments and track_map.has("sequence"):
+			var seq_pattern = [0, 0, 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 5, 0, 7, 0]
+			var note_duration = ticks_per_chord / 16
+			for n in range(16):
+				var semitone_offset = seq_pattern[n]
+				var note_freq = root_freq * pow(2.0, semitone_offset / 12.0)
+				var midi_note = capture.freq_to_midi(note_freq)
+				capture.add_note(
+					track_map["sequence"],
+					chord_start + n * note_duration,
+					midi_note, 75,
+					note_duration * 3 / 4
+				)
+
+		# --- MOOG BASS: saw + square, sustained, one octave down ---
+		if "moog_bass" in instruments and track_map.has("moog_bass"):
+			var bass_note = capture.freq_to_midi(root_freq * 0.5)
+			capture.add_note(track_map["moog_bass"], chord_start, bass_note, 95, ticks_per_chord - tpq / 4)
+
+		# --- VOCODER PAD: full chord, warm sustain ---
+		if "vocoder_pad" in instruments and track_map.has("vocoder_pad"):
+			for freq in chord_freqs:
+				var midi_note = capture.freq_to_midi(freq)
+				capture.add_note(track_map["vocoder_pad"], chord_start, midi_note, 65, ticks_per_chord - tpq / 4)
+
+		# --- DRUMS: 4-on-floor kick, snare on 2 & 6, hihat every beat ---
+		# The generator uses 8 beats (2 bars), kick on even beats (0,2,4,6),
+		# snare on beat 2 and 6, hihat on every beat
+		if "drums" in instruments and track_map.has("drums"):
+			for beat in range(8):  # 8 beats = 2 bars
+				var beat_tick = chord_start + beat * ticks_per_beat
+				# Kick on 0, 2, 4, 6 (four-on-floor)
+				if beat % 2 == 0:
+					capture.add_note(track_map["drums"], beat_tick, 36, 90, tpq / 4)
+				# Snare on beat 2 and 6
+				if beat == 2 or beat == 6:
+					capture.add_note(track_map["drums"], beat_tick, 38, 75, tpq / 4)
+				# Hi-hat on every beat
+				capture.add_note(track_map["drums"], beat_tick, 42, 60, tpq / 8)
+
+
+# ---------------------------------------------------------------------------
+# Prog Synth 70s MIDI capture
+# Mirrors generate_prog_synth_song
+# ---------------------------------------------------------------------------
+static func _capture_prog_synth_midi(parameters: Dictionary = {}) -> MidiCapture:
+	var capture = MidiCapture.new()
+	capture.song_name = "70s Prog Synth"
+	capture.ticks_per_quarter = 480
+
+	var bpm = 110.0
+	var bar_duration = 240.0 / bpm
+	capture.bpm = bpm
+
+	# Fixed key for deterministic output
+	var root_note = "A3"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+
+	# Default progression (from _default_progression_for_song)
+	var progression = [0, 6, 5, 4]
+
+	# Tracks
+	var pad_track = capture.add_track("Moog Pad", 0, 89)
+	var bass_track = capture.add_track("Moog Bass", 1, 38)
+	var seq_track = capture.add_track("Kraftwerk Seq", 2, 80)
+	var lead_track = capture.add_track("ELP Lead", 3, 81)
+	var drum_track = capture.add_track("Motorik Drums", 9, 0, true)
+
+	var track_map = {
+		"moog_pad": pad_track,
+		"moog_bass": bass_track,
+		"kraftwerk_seq": seq_track,
+		"elp_lead": lead_track,
+		"motorik_drums": drum_track
+	}
+
+	var tpq = 480
+	var ticks_per_chord = 2 * 4 * tpq  # 3840
+	var tick_cursor = 0
+
+	# Section 1: Intro — pad only
+	capture.add_section("Intro", tick_cursor, bpm)
+	_capture_prog_section_midi(capture, progression, scale, ["moog_pad"], bar_duration, track_map, tick_cursor, bpm)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 2: Verse — pad + bass + drums
+	capture.add_section("Verse", tick_cursor, bpm)
+	_capture_prog_section_midi(capture, progression, scale, ["moog_pad", "moog_bass", "motorik_drums"], bar_duration, track_map, tick_cursor, bpm)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 3: Build — pad + bass + sequence + drums
+	capture.add_section("Build", tick_cursor, bpm)
+	_capture_prog_section_midi(capture, progression, scale, ["moog_pad", "moog_bass", "kraftwerk_seq", "motorik_drums"], bar_duration, track_map, tick_cursor, bpm)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 4: Solo — pad + bass + lead + drums
+	capture.add_section("Solo", tick_cursor, bpm)
+	_capture_prog_section_midi(capture, progression, scale, ["moog_pad", "moog_bass", "elp_lead", "motorik_drums"], bar_duration, track_map, tick_cursor, bpm)
+	tick_cursor += progression.size() * ticks_per_chord
+
+	# Section 5: Outro — pad + sequence
+	capture.add_section("Outro", tick_cursor, bpm)
+	_capture_prog_section_midi(capture, progression, scale, ["moog_pad", "kraftwerk_seq"], bar_duration, track_map, tick_cursor, bpm)
+
+	_last_midi_capture = capture
+	return capture

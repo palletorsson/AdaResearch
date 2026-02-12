@@ -12,7 +12,10 @@ func _ready():
 	
 	# Connect to lab grid system
 	if lab_grid_system:
-		scene_manager.connect_to_grid_system(lab_grid_system)
+		if scene_manager and scene_manager.has_method("connect_to_grid_system"):
+			scene_manager.connect_to_grid_system(lab_grid_system)
+		else:
+			print("LabGridScene: No SceneManager available in this context; running without manager connection")
 		
 		# Connect lab-specific signals
 		if lab_grid_system.has_signal("lab_artifact_activated"):

@@ -29,8 +29,10 @@ func _ready():
 	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
 
 	# Connect to grid system if available
-	if grid_system:
+	if grid_system and scene_manager and scene_manager.has_method("connect_to_grid_system"):
 		scene_manager.connect_to_grid_system(grid_system)
+	elif grid_system:
+		print("GridScene: No SceneManager available in this context; running without manager connection")
 	
 	# Handle scene user data from staging
 	call_deferred("_process_scene_user_data")

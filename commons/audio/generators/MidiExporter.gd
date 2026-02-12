@@ -558,6 +558,190 @@ static func _get_default_bpm(genre_id: String) -> float:
 	return bpm_map.get(genre_id, 120.0)
 
 
+# ===========================================================================
+# MidiCapture export — for AudioSynthesizer procedural songs
+# ===========================================================================
+
+static func export_from_capture(capture: MidiCapture, output_path: String) -> bool:
+	"""Export a MidiCapture to Standard MIDI File.
+	Used for AudioSynthesizer songs (prog_odyssey, kraftwerk, prog_synth_70s, etc.)
+	that have no SoundbankGenerator.PATTERNS data."""
+	if capture == null or capture.tracks.is_empty():
+		push_error("MidiExporter: Cannot export — capture is null or has no tracks")
+		return false
+
+	print("MidiExporter: Exporting capture '%s' (%d tracks) to %s" % [capture.song_name, capture.tracks.size(), output_path])
+	var midi_data = _build_midi_file_from_capture(capture)
+	return _save_midi_file(midi_data, output_path)
+
+
+static func _build_midi_file_from_capture(capture: MidiCapture) -> PackedByteArray:
+	"""Build a complete Standard MIDI File from MidiCapture data.
+	Handles multiple tempo changes, section markers, and proper track names."""
+	var output = PackedByteArray()
+
+	# Header chunk (format 1: multi-track)
+	output.append_array(_create_header_chunk(capture.tracks.size() + 1))  # +1 for conductor track
+
+	# Conductor track (track 0): tempo map + section markers
+	output.append_array(_create_conductor_track_from_capture(capture))
+
+	# Instrument tracks
+	for track in capture.tracks:
+		output.append_array(_create_capture_track_chunk(track))
+
+	return output
+
+
+static func _create_conductor_track_from_capture(capture: MidiCapture) -> PackedByteArray:
+	"""Create the conductor (tempo) track from MidiCapture sections.
+	Includes tempo changes at section boundaries and section marker meta events."""
+	var events = PackedByteArray()
+
+	# Track name
+	events.append(0x00)
+	events.append(META_EVENT)
+	events.append(META_SEQUENCE_NAME)
+	var name_bytes = capture.song_name.to_utf8_buffer()
+	events.append_array(_create_variable_length(name_bytes.size()))
+	events.append_array(name_bytes)
+
+	# Time signature (4/4) at tick 0
+	events.append(0x00)
+	events.append(META_EVENT)
+	events.append(META_TIME_SIGNATURE)
+	events.append(0x04)
+	events.append(0x04)  # Numerator
+	events.append(0x02)  # Denominator (2^2 = 4)
+	events.append(0x18)  # MIDI clocks per metronome click
+	events.append(0x08)  # 32nd notes per quarter
+
+	# Build a sorted list of tempo/marker events from sections
+	var tempo_events: Array = []
+	if capture.sections.is_empty():
+		# No sections defined — just write a single tempo at tick 0
+		tempo_events.append({"tick": 0, "bpm": capture.bpm, "name": ""})
+	else:
+		for section in capture.sections:
+			tempo_events.append({
+				"tick": section.get("start_tick", 0),
+				"bpm": section.get("bpm", capture.bpm),
+				"name": section.get("name", "")
+			})
+	tempo_events.sort_custom(func(a, b): return a.tick < b.tick)
+
+	# Write tempo changes and markers as delta-timed events
+	var last_tick = 0
+	for ev in tempo_events:
+		var delta = ev.tick - last_tick
+
+		# Section marker (FF 06 = Marker)
+		if not ev.name.is_empty():
+			events.append_array(_create_variable_length(delta))
+			events.append(META_EVENT)
+			events.append(0x06)  # Marker meta event
+			var marker_bytes = ev.name.to_utf8_buffer()
+			events.append_array(_create_variable_length(marker_bytes.size()))
+			events.append_array(marker_bytes)
+			delta = 0  # Reset delta — tempo follows immediately
+
+		# Tempo change (FF 51 03)
+		var usec = int(60000000.0 / ev.bpm)
+		events.append_array(_create_variable_length(delta))
+		events.append(META_EVENT)
+		events.append(META_TEMPO)
+		events.append(0x03)
+		events.append((usec >> 16) & 0xFF)
+		events.append((usec >> 8) & 0xFF)
+		events.append(usec & 0xFF)
+
+		last_tick = ev.tick
+
+	# End of track
+	events.append(0x00)
+	events.append(META_EVENT)
+	events.append(META_END_OF_TRACK)
+	events.append(0x00)
+
+	var chunk = PackedByteArray()
+	chunk.append_array(MIDI_TRACK.to_utf8_buffer())
+	chunk.append_array(_int_to_bytes(events.size(), 4))
+	chunk.append_array(events)
+	return chunk
+
+
+static func _create_capture_track_chunk(track: Dictionary) -> PackedByteArray:
+	"""Create one instrument track chunk from MidiCapture track data."""
+	var events = PackedByteArray()
+	var channel = track.get("channel", 0)
+
+	# Track / instrument name
+	events.append(0x00)
+	events.append(META_EVENT)
+	events.append(META_INSTRUMENT_NAME)
+	var name_bytes = track.get("name", "Track").to_utf8_buffer()
+	events.append_array(_create_variable_length(name_bytes.size()))
+	events.append_array(name_bytes)
+
+	# Program change (melodic instruments only)
+	if not track.get("is_drum", false):
+		events.append(0x00)
+		events.append(PROGRAM_CHANGE | channel)
+		events.append(track.get("program", 0) & 0x7F)
+
+	# Collect & sort note events
+	var note_events: Array = track.get("events", []).duplicate()
+	note_events.sort_custom(func(a, b): return a.tick < b.tick)
+
+	# Expand into note-on / note-off pairs
+	var all_events: Array = []
+	for ev in note_events:
+		all_events.append({
+			"tick": ev.tick,
+			"status": NOTE_ON | channel,
+			"data1": ev.note & 0x7F,
+			"data2": ev.velocity & 0x7F
+		})
+		all_events.append({
+			"tick": ev.tick + ev.duration,
+			"status": NOTE_OFF | channel,
+			"data1": ev.note & 0x7F,
+			"data2": 0
+		})
+
+	# Sort all events by tick (note-off before note-on at same tick for clean output)
+	all_events.sort_custom(func(a, b):
+		if a.tick != b.tick:
+			return a.tick < b.tick
+		# Note-off (0x8x) before note-on (0x9x) at the same tick
+		return (a.status & 0xF0) < (b.status & 0xF0)
+	)
+
+	# Write as delta-timed MIDI events
+	var last_tick = 0
+	for ev in all_events:
+		var delta = ev.tick - last_tick
+		if delta < 0:
+			delta = 0
+		events.append_array(_create_variable_length(delta))
+		events.append(ev.status)
+		events.append(ev.data1)
+		events.append(ev.data2)
+		last_tick = ev.tick
+
+	# End of track
+	events.append(0x00)
+	events.append(META_EVENT)
+	events.append(META_END_OF_TRACK)
+	events.append(0x00)
+
+	var chunk = PackedByteArray()
+	chunk.append_array(MIDI_TRACK.to_utf8_buffer())
+	chunk.append_array(_int_to_bytes(events.size(), 4))
+	chunk.append_array(events)
+	return chunk
+
+
 static func _save_midi_file(data: PackedByteArray, path: String) -> bool:
 	"""Save MIDI data to file"""
 	

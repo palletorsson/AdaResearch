@@ -65,6 +65,11 @@ func pick_up(by: Node3D) -> void:
 		# Mark as divided first to prevent re-entry
 		has_divided = true
 
+		# Clear pickup state in the controller immediately, since this cube
+		# intentionally rejects being held while it is dividing.
+		if by and by.has_method("drop_object"):
+			by.drop_object()
+
 		# Use call_deferred to let the pickup system complete its frame
 		call_deferred("_do_division_from_pickup")
 		return

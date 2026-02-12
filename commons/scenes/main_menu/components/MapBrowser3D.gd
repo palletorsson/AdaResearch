@@ -27,73 +27,198 @@ var current_items: Array = []
 @onready var nav_buttons: Node3D = $NavButtons
 
 var _button_instances: Array = []
+const MAIN_SEQUENCES_PATH := "res://commons/maps/map_sequences.json"
+const SEQUENCES_DIRECTORY := "res://commons/maps/sequences/"
 
 func _ready() -> void:
 	_load_data()
 	_setup_navigation()
-	# Default to showing Lab Maps (more useful for quick navigation)
+	# Default to map mode for quick direct loading.
 	show_maps()
 
-## Main Lab maps to show in browser (direct map access)
-const LAB_MAPS := [
-	{"name": "Color", "path": "Lab/map_data_post_color"},
-	{"name": "Randomness", "path": "Lab/map_data_post_random"},
-	{"name": "Wavefunctions", "path": "Lab/map_data_post_wavefunctions"},
-	{"name": "Fractals", "path": "Lab/map_data_post_fractals"},
-	{"name": "Primitives", "path": "Lab/map_data_post_primitives"},
-	{"name": "Arrays", "path": "Lab/map_data_post_array"},
-	{"name": "Transformation", "path": "Lab/map_data_post_transformation"},
-	{"name": "Forces", "path": "Lab/map_data_post_forces"},
-	{"name": "Geometric", "path": "Lab/map_data_post_geometric"},
-]
-
-## Legacy sequences (kept for compatibility)
-const MAIN_SEQUENCES := [
-	"post_primitive",
-	"post_transformation",
-	"post_wavefunction",
-	"post_fractals"
-]
-
 func _load_data() -> void:
-	# Load Lab maps directly (primary navigation)
-	for lab_map in LAB_MAPS:
-		var map_path = "res://commons/maps/%s.json" % lab_map["path"]
-		if FileAccess.file_exists(map_path):
-			maps.append(lab_map)
+	sequences.clear()
+	maps.clear()
+	
+	var sequence_configs := _load_sequence_configs()
+	var unique_maps := {}
+	
+	for sequence_name in sequence_configs.keys():
+		var sequence_config = sequence_configs[sequence_name]
+		if not (sequence_config is Dictionary):
+			continue
+		
+		var sequence_maps: Array = sequence_config.get("maps", [])
+		if sequence_maps.is_empty():
+			continue
+		
+		var display_label = "%s (%d maps)" % [_format_name(sequence_name), sequence_maps.size()]
+		sequences.append({
+			"display_name": display_label,
+			"path": sequence_name
+		})
+		
+		for map_entry in sequence_maps:
+			var map_name := str(map_entry).strip_edges()
+			if map_name.is_empty():
+				continue
+			
+			if not unique_maps.has(map_name):
+				unique_maps[map_name] = {
+					"sequences": [],
+					"exists": _map_exists(map_name)
+				}
+			
+			var sequence_refs: Array = unique_maps[map_name].get("sequences", [])
+			if sequence_name not in sequence_refs:
+				sequence_refs.append(sequence_name)
+	
+	for map_name in unique_maps.keys():
+		var map_entry = unique_maps[map_name]
+		var map_exists: bool = bool(map_entry.get("exists", false))
+		var sequence_count: int = map_entry.get("sequences", []).size()
+		var display_name := _format_name(map_name)
+		
+		if sequence_count > 1:
+			display_name += " (%d sequences)" % sequence_count
+		if not map_exists:
+			display_name += " [missing]"
+		
+		maps.append({
+			"display_name": display_name,
+			"path": map_name if map_exists else "",
+			"raw_map_name": map_name
+		})
+	
+	sequences.sort_custom(func(a, b): return str(a.get("path", "")) < str(b.get("path", "")))
+	maps.sort_custom(func(a, b): return str(a.get("raw_map_name", "")) < str(b.get("raw_map_name", "")))
 
-	# Also load sequences if available
-	var scene_manager = get_node_or_null("/root/SceneManager")
-	if scene_manager and scene_manager.sequence_configs:
-		for seq_name in MAIN_SEQUENCES:
-			if scene_manager.sequence_configs.has(seq_name):
-				sequences.append(seq_name)
+func _load_sequence_configs() -> Dictionary:
+	var configs := {}
+	
+	_merge_sequence_file(MAIN_SEQUENCES_PATH, configs)
+	
+	var dir = DirAccess.open(SEQUENCES_DIRECTORY)
+	if not dir:
+		push_warning("MapBrowser3D: Could not open sequence directory: %s" % SEQUENCES_DIRECTORY)
+		return configs
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			_merge_sequence_file(SEQUENCES_DIRECTORY + file_name, configs)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	
+	return configs
 
-	# Scan other map directories (excluding Lab since we handle it above)
-	var other_maps = _scan_map_directories()
-	for map_name in other_maps:
-		maps.append({"name": map_name, "path": map_name})
+func _merge_sequence_file(path: String, out_configs: Dictionary) -> void:
+	if not FileAccess.file_exists(path):
+		return
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		push_warning("MapBrowser3D: Could not open sequence file: %s" % path)
+		return
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var parser = JSON.new()
+	var parse_result = parser.parse(json_text)
+	if parse_result != OK:
+		# Some sequence JSON files contain trailing commas; strip them for tolerant loading.
+		parse_result = parser.parse(_strip_trailing_commas(json_text))
+	
+	if parse_result != OK:
+		push_warning("MapBrowser3D: Failed to parse %s (%s)" % [path, parser.get_error_message()])
+		return
+	
+	var data = parser.data
+	if not (data is Dictionary):
+		return
+	
+	var sequence_data = data.get("sequences", {})
+	if not (sequence_data is Dictionary):
+		return
+	
+	for sequence_name in sequence_data.keys():
+		var sequence_config = sequence_data[sequence_name]
+		if sequence_config is Dictionary:
+			out_configs[sequence_name] = sequence_config
 
-func _scan_map_directories() -> Array:
-	var map_list: Array = []
-	var maps_path = "res://commons/maps/"
+func _strip_trailing_commas(json_text: String) -> String:
+	var result: Array[String] = []
+	var in_string := false
+	var escaped := false
+	var i := 0
+	var len := json_text.length()
+	
+	while i < len:
+		var ch = json_text.substr(i, 1)
+		
+		if in_string:
+			result.append(ch)
+			if escaped:
+				escaped = false
+			elif ch == "\\":
+				escaped = true
+			elif ch == "\"":
+				in_string = false
+			i += 1
+			continue
+		
+		if ch == "\"":
+			in_string = true
+			result.append(ch)
+			i += 1
+			continue
+		
+		if ch == ",":
+			var j := i + 1
+			while j < len and _is_whitespace(json_text.substr(j, 1)):
+				j += 1
+			
+			var next_char = json_text.substr(j, 1)
+			if j < len and (next_char == "}" or next_char == "]"):
+				i += 1
+				continue
+		
+		result.append(ch)
+		i += 1
+	
+	return "".join(result)
 
-	var dir = DirAccess.open(maps_path)
-	if dir:
-		dir.list_dir_begin()
-		var folder_name = dir.get_next()
-		while folder_name != "":
-			if dir.current_is_dir() and not folder_name.begins_with("."):
-				# Skip sequences folder and Lab folder
-				if folder_name != "sequences" and folder_name != "Lab":
-					# Check if it has a map_data.json
-					var map_data_path = maps_path + folder_name + "/map_data.json"
-					if FileAccess.file_exists(map_data_path):
-						map_list.append(folder_name)
-			folder_name = dir.get_next()
-		dir.list_dir_end()
+func _is_whitespace(ch: String) -> bool:
+	return ch == " " or ch == "\n" or ch == "\r" or ch == "\t"
 
-	return map_list
+func _map_exists(map_name: String) -> bool:
+	for candidate_path in _build_map_candidate_paths(map_name):
+		if FileAccess.file_exists(candidate_path):
+			return true
+	return false
+
+func _build_map_candidate_paths(map_name: String) -> Array[String]:
+	var paths: Array[String] = []
+	var map_id := map_name.strip_edges()
+	
+	if map_id.is_empty():
+		return paths
+	
+	if map_id.begins_with("res://"):
+		paths.append(map_id)
+		if not map_id.ends_with(".json"):
+			paths.append("%s/map_data.json" % map_id)
+		return paths
+	
+	if map_id.ends_with(".json"):
+		paths.append("res://commons/maps/%s" % map_id)
+	else:
+		paths.append("res://commons/maps/%s/map_data.json" % map_id)
+		paths.append("res://commons/maps/%s.json" % map_id)
+	
+	return paths
 
 func _setup_navigation() -> void:
 	# Connect navigation button signals
@@ -123,10 +248,10 @@ func _update_display() -> void:
 
 	# Update title
 	if title_label:
-		title_label.text = "Sequences" if current_mode == BrowseMode.SEQUENCES else "Lab Maps"
+		title_label.text = "All Sequences" if current_mode == BrowseMode.SEQUENCES else "All Sequence Maps"
 
 	# Calculate page info
-	var total_pages = ceil(float(current_items.size()) / items_per_page)
+	var total_pages = int(ceil(float(current_items.size()) / float(items_per_page)))
 	if page_label:
 		page_label.text = "Page %d / %d" % [current_page + 1, max(1, total_pages)]
 
@@ -141,14 +266,17 @@ func _update_display() -> void:
 
 		# Handle both dictionary (maps) and string (sequences) formats
 		if item is Dictionary:
-			_create_item_button(item["name"], local_idx, item["path"])
+			var button_label = str(item.get("display_name", item.get("name", "")))
+			var item_path = str(item.get("path", ""))
+			var is_enabled = not item_path.is_empty()
+			_create_item_button(button_label, local_idx, item_path, false, is_enabled)
 		else:
-			_create_item_button(item, local_idx, item)
+			_create_item_button(str(item), local_idx, str(item), true, true)
 
 	# Update nav button states
 	_update_nav_buttons()
 
-func _create_item_button(display_name: String, index: int, item_path: String = "") -> void:
+func _create_item_button(display_name: String, index: int, item_path: String = "", format_display_name: bool = true, enabled: bool = true) -> void:
 	if not button_scene:
 		# Try to load default button scene
 		button_scene = load("res://commons/scenes/main_menu/components/MenuButton3D.tscn")
@@ -164,15 +292,18 @@ func _create_item_button(display_name: String, index: int, item_path: String = "
 	button.position = Vector3(0, -index * item_spacing, 0)
 
 	# Set button text - format nicely
-	var formatted_name = _format_name(display_name)
+	var formatted_name = _format_name(display_name) if format_display_name else display_name
 	if button.has_method("set_text"):
 		button.set_text(formatted_name)
 	elif button.get("text") != null:
 		button.text = formatted_name
+	
+	if not enabled and button.get("color") != null:
+		button.color = Color(0.35, 0.35, 0.35, 1.0)
 
 	# Connect click signal - use path if provided, otherwise use display_name
 	var click_value = item_path if item_path != "" else display_name
-	if button.has_signal("clicked"):
+	if enabled and button.has_signal("clicked"):
 		button.clicked.connect(_on_item_clicked.bind(click_value))
 
 	_button_instances.append(button)
@@ -212,7 +343,7 @@ func _clear_buttons() -> void:
 	_button_instances.clear()
 
 func _update_nav_buttons() -> void:
-	var total_pages = ceil(float(current_items.size()) / items_per_page)
+	var total_pages = int(ceil(float(current_items.size()) / float(items_per_page)))
 
 	# Show/hide prev/next based on page
 	if has_node("NavButtons/PrevButton"):
@@ -230,6 +361,9 @@ func _update_nav_buttons() -> void:
 			toggle_btn.text = new_text
 
 func _on_item_clicked(item_name: String) -> void:
+	if item_name.is_empty():
+		return
+	
 	if current_mode == BrowseMode.SEQUENCES:
 		sequence_selected.emit(item_name)
 	else:
@@ -241,7 +375,7 @@ func _on_prev_clicked() -> void:
 		_update_display()
 
 func _on_next_clicked() -> void:
-	var total_pages = ceil(float(current_items.size()) / items_per_page)
+	var total_pages = int(ceil(float(current_items.size()) / float(items_per_page)))
 	if current_page < total_pages - 1:
 		current_page += 1
 		_update_display()

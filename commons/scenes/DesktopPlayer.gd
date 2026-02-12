@@ -7,6 +7,8 @@ class_name DesktopPlayer
 @export var jump_velocity: float = 4.5
 @export var mouse_sensitivity: float = 0.002
 @export var gravity: float = 9.8
+@export var use_gravity: bool = true
+@export var allow_jump: bool = true
 @export var interaction_distance: float = 5.0
 
 # Camera reference
@@ -61,13 +63,15 @@ func _physics_process(delta: float) -> void:
 	# Apply mouse look
 	_apply_camera_rotation(delta)
 
-	# Add gravity
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	# Keep preview mode stable when gravity is disabled.
+	if use_gravity:
+		if not is_on_floor():
+			velocity.y -= gravity * delta
 
-	# Handle jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
+		if allow_jump and Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = jump_velocity
+	else:
+		velocity.y = 0.0
 
 	# Get input direction
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
