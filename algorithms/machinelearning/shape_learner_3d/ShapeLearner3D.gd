@@ -1,13 +1,20 @@
 ﻿extends Node3D
 
+## GA + Cellular Automaton Shape Learner (3D).
+## Evolves 3D CA rules to grow target shapes (cube, sphere, pyramid) from a single seed voxel.
+## Uses MultiMesh for fast instanced rendering of the voxel grid.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
-@export var grid_size = 10  # Reduced from 20 to 10 (8x fewer cells)
-@export var population_size = 20  # Reduced from 100 to 20
-@export var mutation_rate = 0.01
-@export var generations = 50  # Reduced from 100 to 50
-@export var ca_generations = 5  # CA iterations per individual
-@export var individuals_per_frame = 5  # Process 5 individuals per frame
+# ──────────────────────────────────────────────
+# Tunable parameters
+# ──────────────────────────────────────────────
+@export_range(5, 30) var grid_size = 10
+@export_range(5, 100) var population_size = 20
+@export_range(0.001, 0.1) var mutation_rate = 0.01
+@export_range(10, 200) var generations = 50
+@export_range(1, 20) var ca_generations = 5
+@export_range(1, 20) var individuals_per_frame = 5
 
 enum TargetShape { CUBE, SPHERE, PYRAMID }
 @export var target_shape_enum: TargetShape = TargetShape.CUBE
@@ -21,6 +28,8 @@ var multimesh_instance: MultiMeshInstance3D
 var current_generation = 0
 var ca_grids = []
 var ca_grid_index = 0
+var _best_fitness_ever: float = 0.0
+var _status_label: Label3D
 
 # Async evaluation state
 var is_evaluating = false
@@ -30,6 +39,18 @@ func _ready():
 	multimesh_instance = $MultiMeshInstance3D
 	$Timer.wait_time = 0.1
 	$Timer.timeout.connect(stamp_ca_generation)
+	
+	# 3D HUD label
+	_status_label = Label3D.new()
+	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_status_label.font_size = 42
+	_status_label.modulate = Color(1.0, 0.85, 0.2)
+	_status_label.outline_modulate = Color(0, 0, 0, 0.6)
+	_status_label.outline_size = 4
+	_status_label.position = Vector3(grid_size * 0.25, grid_size + 2, grid_size * 0.25)
+	_status_label.text = "GA Shape Learner 3D — Gen 0"
+	add_child(_status_label)
+	
 	create_target_shape()
 	initialize_population()
 	run_ga_generation()
@@ -51,10 +72,19 @@ func run_ga_generation():
 
 func finish_ga_generation():
 	var best_fitness = fitness.max()
-	print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
+	_best_fitness_ever = max(_best_fitness_ever, best_fitness)
+	print("Gen %d | Best %.4f | Record %.4f" % [current_generation, best_fitness, _best_fitness_ever])
+	
+	# Update HUD
+	if _status_label:
+		_status_label.text = "Gen %d | Fit %.2f%% | Record %.2f%%" % [current_generation, best_fitness * 100, _best_fitness_ever * 100]
+	
 	if best_fitness == 1.0:
 		is_evaluating = false
 		set_process(false)
+		if _status_label:
+			_status_label.text = "🎉 Perfect shape at Gen %d!" % current_generation
+			_status_label.modulate = Color(0.3, 0.85, 0.4)
 		return
 
 	select_new_population()
@@ -233,6 +263,7 @@ func mutate(child):
 func update_multimesh(grid):
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.use_colors = true  # Per-instance colour coding
 	var cube_scene = CUBE_SCENE.instantiate()
 	var cube_mesh = cube_scene.get_node("CubeBaseStaticBody3D/CubeBaseMesh").mesh
 	multimesh.mesh = cube_mesh
@@ -253,6 +284,10 @@ func update_multimesh(grid):
 				if grid[x][y][z] == 1:
 					var transform = Transform3D().translated(Vector3(x, y, z)).scaled(Vector3(0.5, 0.5, 0.5))
 					multimesh.set_instance_transform(instance_index, transform)
+					# Green = matches target, blue = extra cell, red = wrong spot
+					var in_target = (x < target_shape.size() and y < target_shape[x].size() and z < target_shape[x][y].size() and target_shape[x][y][z] == 1)
+					var cell_color = Color(0.3, 0.85, 0.4) if in_target else Color(0.9, 0.3, 0.3, 0.7)
+					multimesh.set_instance_color(instance_index, cell_color)
 					instance_index += 1
 
 	multimesh_instance.multimesh = multimesh

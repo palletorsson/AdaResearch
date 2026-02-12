@@ -1,10 +1,18 @@
 extends Node3D
 
-# Configuration
-@export var population_size: int = 20
-@export var mutation_rate: float = 0.1
-@export var crossover_rate: float = 0.7
-@export var evolution_interval: float = 30.0  # Seconds between evolution cycles
+## Evolved Creatures – a population of exotic creature types evolving via genetic algorithm.
+## Creature morphologies include symbiotic clusters, phase-shifting blobs, recursive fractals,
+## resonance wave-forms, and topology-changing shapes.
+
+# ──────────────────────────────────────────────
+# Configuration — all @export vars can be tweaked at runtime
+# ──────────────────────────────────────────────
+@export_range(4, 50) var population_size: int = 20:
+	set(v):
+		population_size = v
+@export_range(0.01, 0.5) var mutation_rate: float = 0.1
+@export_range(0.1, 1.0) var crossover_rate: float = 0.7
+@export_range(5.0, 120.0) var evolution_interval: float = 30.0
 
 # Creature types
 enum CreatureType {SYMBIOTIC, PHASE_SHIFTING, RECURSIVE, RESONANCE, TOPOLOGY}
@@ -14,6 +22,8 @@ var creature_scene = preload("res://algorithms/machinelearning/evolutionaryalgor
 var evolution_timer: Timer
 var creatures = []
 var environment: Node3D
+var _generation_count: int = 0
+var _status_label: Label3D
 
 func _ready():
 	# Setup VR
@@ -31,6 +41,17 @@ func _ready():
 	evolution_timer.connect("timeout", Callable(self, "_on_evolution_timer_timeout"))
 	add_child(evolution_timer)
 	evolution_timer.start()
+	
+	# 3D HUD label for generation info
+	_status_label = Label3D.new()
+	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_status_label.font_size = 42
+	_status_label.modulate = Color(1.0, 0.85, 0.2)
+	_status_label.outline_modulate = Color(0, 0, 0, 0.6)
+	_status_label.outline_size = 4
+	_status_label.position = Vector3(0, 6, 0)
+	_status_label.text = "Generation 0 | Pop %d" % population_size
+	add_child(_status_label)
 
 func setup_vr():
 	var xr_interface = XRServer.find_interface("OpenXR")
@@ -68,6 +89,8 @@ func setup_environment():
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.2, 0.3, 0.4)
+	material.roughness = 0.85
+	material.metallic = 0.05
 	ground.material_override = material
 	
 	var ground_body = StaticBody3D.new()
@@ -109,8 +132,27 @@ func _on_evolution_timer_timeout():
 	evolve_population()
 
 func evolve_population():
+	_generation_count += 1
+	
 	# Sort creatures by fitness
 	creatures.sort_custom(Callable(self, "_sort_by_fitness"))
+	
+	# Flash the best creature with gold emission
+	if creatures.size() > 0:
+		var best = creatures[0]
+		if best.body_parts.size() > 0 and is_instance_valid(best.body_parts[0]):
+			var mesh_child = best.body_parts[0].get_child(1) if best.body_parts[0].get_child_count() > 1 else null
+			if mesh_child is MeshInstance3D and mesh_child.material_override is StandardMaterial3D:
+				var mat = mesh_child.material_override as StandardMaterial3D
+				var old_emission = mat.emission
+				mat.emission = Color(1.0, 0.85, 0.2) * 0.8
+				var flash_tw = create_tween()
+				flash_tw.tween_property(mat, "emission", old_emission, 1.2)
+	
+	# Update HUD label
+	if _status_label:
+		var best_fit = creatures[0].get_fitness() if creatures.size() > 0 else 0.0
+		_status_label.text = "Gen %d | Pop %d | Best %.1f" % [_generation_count, creatures.size(), best_fit]
 	
 	# Keep top performers
 	var elite_count = max(1, population_size / 10)

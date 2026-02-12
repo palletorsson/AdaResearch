@@ -1,4 +1,8 @@
 extends Node3D
+## Anomaly Detection Sandbox
+## Interactive visualization of Z-Score, Isolation Radius, and Autoencoder
+## Error anomaly detection methods. Anomalous points glow, rise, and scale
+## up with animated transitions.
 
 enum DetectionMode { Z_SCORE, ISOLATION_RADIUS, AUTOENCODER_ERROR }
 
@@ -8,13 +12,19 @@ const MODE_SEQUENCE := [
 	DetectionMode.AUTOENCODER_ERROR,
 ]
 
-@export var normal_sample_count: int = 72
-@export var anomaly_sample_count: int = 10
+# ─── Tunable parameters ──────────────────────────────────────────────────────
+@export_group("Dataset")
+@export_range(10, 400, 5) var normal_sample_count: int = 72
+@export_range(1, 60, 1) var anomaly_sample_count: int = 10
 @export var dataset_seed: int = 20241031
-@export var z_score_threshold: float = 2.4
-@export var isolation_radius_threshold: float = 3.4
-@export var autoencoder_error_threshold: float = 1.1
-@export var anomaly_scale_multiplier: float = 1.35
+
+@export_group("Thresholds")
+@export_range(0.5, 6.0, 0.1) var z_score_threshold: float = 2.4
+@export_range(0.5, 8.0, 0.1) var isolation_radius_threshold: float = 3.4
+@export_range(0.1, 4.0, 0.1) var autoencoder_error_threshold: float = 1.1
+
+@export_group("Visuals")
+@export_range(1.0, 2.5, 0.05) var anomaly_scale_multiplier: float = 1.35
 @export var detection_mode: DetectionMode = DetectionMode.Z_SCORE
 
 @onready var data_root: Node3D = $DataRoot
@@ -74,10 +84,11 @@ func _build_points():
 		mesh_instance.position = Vector3(sample["position"].x, 0.0, sample["position"].y)
 
 		var material := StandardMaterial3D.new()
-		material.metallic = 0.05
-		material.roughness = 0.25
+		material.metallic = 0.25
+		material.roughness = 0.2
 		material.emission_enabled = true
-		material.emission = Color(0.2, 0.6, 1.0, 1.0) * 0.2
+		material.emission = Color(0.2, 0.6, 1.0, 1.0) * 0.25
+		material.emission_energy_multiplier = 1.4
 		mesh_instance.material_override = material
 
 		data_root.add_child(mesh_instance)
@@ -108,10 +119,21 @@ func run_detection():
 		if is_anomaly:
 			anomaly_count += 1
 
+		# Animate colour, scale and height transitions via tweens
+		var target_emission := display_color * (0.9 if is_anomaly else 0.25)
+		var target_scale := Vector3.ONE * (anomaly_scale_multiplier if is_anomaly else 1.0)
+		var target_y := 0.25 if is_anomaly else 0.0
 		material.albedo_color = display_color
-		material.emission = display_color * (0.9 if is_anomaly else 0.25)
-		mesh.scale = Vector3.ONE * (anomaly_scale_multiplier if is_anomaly else 1.0)
-		mesh.position.y = 0.25 if is_anomaly else 0.0
+
+		if is_inside_tree():
+			var tw := create_tween().set_parallel(true)
+			tw.tween_property(material, "emission", target_emission, 0.4)
+			tw.tween_property(mesh, "scale", target_scale, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+			tw.tween_property(mesh, "position:y", target_y, 0.35).set_ease(Tween.EASE_OUT)
+		else:
+			material.emission = target_emission
+			mesh.scale = target_scale
+			mesh.position.y = target_y
 
 	_update_threshold_visual(threshold)
 	_update_labels(anomaly_count, scores, threshold)

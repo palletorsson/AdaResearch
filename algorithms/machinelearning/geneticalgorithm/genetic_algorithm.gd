@@ -1,8 +1,19 @@
 ﻿extends Node3D
 
-# Advanced Evolutionary Neural Network Ecosystem
-# Combines genetic algorithms, neural networks, emergent behavior, and multi-species evolution
-# Features adaptive fitness landscapes, speciation, neuroevolution, and ecosystem dynamics
+# =============================================================================
+# Genetic Algorithm — Advanced Evolutionary Neural Network Ecosystem
+# =============================================================================
+# Combines genetic algorithms, neural networks, emergent behavior, and
+# multi-species evolution. Features adaptive fitness landscapes, speciation,
+# neuroevolution, and ecosystem dynamics. Creatures evolve in a 3D environment
+# with food sources, predators, and environmental pressures.
+# =============================================================================
+
+# --- Color Palette (project-wide conventions) --------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for data / info
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive / food
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for negative / predators
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for best-fitness / highlights
 
 @export_category("Evolution Parameters")
 @export var population_size: int = 100
@@ -73,6 +84,10 @@ var ui_elements: Dictionary = {}
 var environment: Node3D
 var fitness_landscape_mesh: MeshInstance3D
 var neural_visualizer: Node3D
+
+# 3D in-scene labels for immersive / VR viewing
+var _title_label_3d: Label3D
+var _gen_label_3d: Label3D
 
 # Queer Forms Analysis
 var queer_forms_detector: QueerFormsDetector
@@ -930,11 +945,29 @@ func _ready():
 	initialize_population()
 	setup_ui()
 	setup_performance_tracking()
+	_build_3d_labels()
 	
 	# Initialize queer forms detector
 	if queer_forms_detection:
 		queer_forms_detector = QueerFormsDetector.new()
 		print("Queer forms detector initialized")
+
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Evolutionary Neural Network Ecosystem"
+	_title_label_3d.font_size = 64
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 15, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_gen_label_3d = Label3D.new()
+	_gen_label_3d.font_size = 40
+	_gen_label_3d.modulate = Color.WHITE
+	_gen_label_3d.position = Vector3(0, 13.5, 0)
+	_gen_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_gen_label_3d)
 
 func _process(delta):
 	update_environment(delta)
@@ -1086,9 +1119,11 @@ func initialize_ecosystem():
 		food_mesh.mesh.radius = 0.3
 		
 		var food_material = StandardMaterial3D.new()
-		food_material.albedo_color = Color(0.8, 0.6, 0.2)
+		food_material.albedo_color = COLOR_SPECIAL
 		food_material.emission_enabled = true
-		food_material.emission = Color(0.4, 0.3, 0.1)
+		food_material.emission = COLOR_SPECIAL * 0.4
+		food_material.metallic = 0.2
+		food_material.roughness = 0.5
 		food_mesh.material_override = food_material
 		
 		food_mesh.position = food_pos
@@ -1114,9 +1149,11 @@ func initialize_ecosystem():
 			predator_mesh.mesh.size = Vector3(1.5, 1.0, 3.0)
 			
 			var predator_material = StandardMaterial3D.new()
-			predator_material.albedo_color = Color(0.8, 0.2, 0.2)
+			predator_material.albedo_color = COLOR_NEGATIVE
 			predator_material.emission_enabled = true
-			predator_material.emission = Color(0.4, 0.1, 0.1)
+			predator_material.emission = COLOR_NEGATIVE * 0.45
+			predator_material.metallic = 0.4
+			predator_material.roughness = 0.3
 			predator_mesh.material_override = predator_material
 			
 			predator_mesh.position = predator_pos
@@ -1200,17 +1237,21 @@ func create_creature_visual(creature: EvolutionaryCreature):
 	material.albedo_color = base_color
 	
 	# Genetic traits affecting material properties
-	material.roughness = 0.3 + creature.genes.get("roughness", 0.5) * 0.4
-	material.metallic = creature.genes.get("metallic", 0.1) * 0.3
+	material.roughness = 0.25 + creature.genes.get("roughness", 0.5) * 0.35
+	material.metallic = 0.15 + creature.genes.get("metallic", 0.1) * 0.35
 	
-	# Bioluminescence
-	if creature.genes.luminescence > 0.7:
-		material.emission_enabled = true
-		material.emission = base_color * creature.genes.luminescence * 0.5
+	# All creatures get subtle emission for visibility in 3D
+	material.emission_enabled = true
+	material.emission = base_color * 0.2
+	
+	# Bioluminescence — brighter glow for luminescent creatures
+	if creature.genes.luminescence > 0.5:
+		material.emission = base_color * creature.genes.luminescence * 0.6
+		material.emission_energy_multiplier = 1.0 + creature.genes.luminescence
 	
 	# Pattern complexity (using textures or normal maps could be added here)
 	if creature.genes.pattern_complexity > 0.5:
-		material.albedo_color = material.albedo_color.lerp(Color.WHITE, 0.2)
+		material.albedo_color = material.albedo_color.lerp(Color.WHITE, 0.15)
 	
 	mesh_instance.material_override = material
 	mesh_instance.position = creature.position
@@ -1516,6 +1557,26 @@ func evolve_population():
 		evolve_traditional()
 	
 	generation += 1
+	
+	# Visual celebration: pulse the best creature in the population
+	var best := get_best_creature()
+	if best and best.mesh_instance:
+		var tw := create_tween()
+		tw.tween_property(best.mesh_instance, "scale", Vector3.ONE * best.genes.size * 2.0, 0.2).set_ease(Tween.EASE_OUT)
+		tw.tween_property(best.mesh_instance, "scale", Vector3.ONE * best.genes.size, 0.4).set_ease(Tween.EASE_IN_OUT)
+		var mat = best.mesh_instance.material_override as StandardMaterial3D
+		if mat:
+			var orig_emission := mat.emission
+			var tw2 := create_tween()
+			tw2.tween_property(mat, "emission", COLOR_SPECIAL * 1.5, 0.15)
+			tw2.tween_property(mat, "emission", orig_emission, 0.6)
+	
+	# Flash title label on new generation
+	if _title_label_3d:
+		var tw3 := create_tween()
+		tw3.tween_property(_title_label_3d, "modulate", Color.WHITE, 0.1)
+		tw3.tween_property(_title_label_3d, "modulate", COLOR_SPECIAL, 0.5)
+	
 	print("EcosystemEvolution: Evolution complete - Generation %d, Species: %d, Best Fitness: %.2f" % [generation, species_groups.size(), best_fitness])
 
 func evolve_species():
@@ -2651,6 +2712,12 @@ func update_ui():
 	if ui_elements.has("fitness_trend"):
 		var trend = calculate_fitness_trend()
 		ui_elements["fitness_trend"].text = "Fitness Trend: " + trend
+	
+	# Update 3D in-scene generation label
+	if _gen_label_3d:
+		_gen_label_3d.text = "Gen: %d  |  Pop: %d  |  Species: %d  |  Best: %.1f" % [
+			generation, population.size(), species_groups.size(), best_fitness
+		]
 	
 	# Update queer forms metrics
 	if queer_forms_detection and not current_queer_analysis.is_empty():

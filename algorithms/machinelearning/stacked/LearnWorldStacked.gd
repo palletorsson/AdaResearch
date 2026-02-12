@@ -1,15 +1,23 @@
 extends Node3D
 class_name BuildEnv
 
-@export var arena_size_x: float = 10.0
-@export var arena_size_z: float = 10.0
-@export var grid_res: float = 0.25
-@export var settle_time: float = 0.8
-@export var yaw_bins: int = 16
+## BuildEnv — a reinforcement-learning environment for constructing stable structures.
+## An agent places primitives (cubes, beams, pyramids, pillars, wedges, arches) and is
+## rewarded for height, span, stability, symmetry, and motif reuse. Includes automatic
+## grammar discovery that identifies recurring stable sub-structures as reusable motifs.
+
+# ──────────────────────────────────────────────
+# Arena & physics configuration
+# ──────────────────────────────────────────────
+@export_range(2.0, 50.0) var arena_size_x: float = 10.0
+@export_range(2.0, 50.0) var arena_size_z: float = 10.0
+@export_range(0.05, 1.0) var grid_res: float = 0.25
+@export_range(0.1, 5.0) var settle_time: float = 0.8
+@export_range(4, 64) var yaw_bins: int = 16
 @export var enable_motif_discovery: bool = true
-@export var stability_threshold: float = 0.5  # KE threshold for "stable"
-@export var min_motif_pieces: int = 2
-@export var max_motif_pieces: int = 5
+@export_range(0.1, 5.0) var stability_threshold: float = 0.5
+@export_range(2, 10) var min_motif_pieces: int = 2
+@export_range(3, 20) var max_motif_pieces: int = 5
 
 const DENSITY := 1.0
 const GROUND_Y := 0.0
@@ -27,9 +35,11 @@ var piece_placements: Array[Dictionary] = []  # History of placements this episo
 
 # Scene objects
 var ground_plane: StaticBody3D = null
+var _status_label: Label3D = null
 
 func _ready() -> void:
 	_setup_environment()
+	_create_status_label()
 	print("BuildEnv: Ready! Waiting for step() calls to place geometry...")
 
 func _setup_environment() -> void:
@@ -51,8 +61,9 @@ func _setup_environment() -> void:
 	ground_mesh_instance.position = Vector3(0, -0.1, 0)
 
 	var ground_material := StandardMaterial3D.new()
-	ground_material.albedo_color = Color(0.3, 0.35, 0.3)  # Dark green/gray
-	ground_material.roughness = 1.0
+	ground_material.albedo_color = Color(0.25, 0.28, 0.25)
+	ground_material.roughness = 0.9
+	ground_material.metallic = 0.05
 	ground_mesh_instance.material_override = ground_material
 
 	ground_plane.add_child(ground_mesh_instance)
@@ -60,32 +71,49 @@ func _setup_environment() -> void:
 
 	print("BuildEnv: Environment setup complete (ground: %.1fx%.1f)" % [arena_size_x * 2, arena_size_z * 2])
 
+func _create_status_label() -> void:
+	"""Floating 3D label showing build stats"""
+	_status_label = Label3D.new()
+	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_status_label.font_size = 36
+	_status_label.modulate = Color(1.0, 0.85, 0.2)
+	_status_label.outline_modulate = Color(0, 0, 0, 0.5)
+	_status_label.outline_size = 4
+	_status_label.position = Vector3(0, 5, 0)
+	_status_label.text = "BuildEnv — Ep %d | Step 0" % episode_count
+	add_child(_status_label)
+
 func _create_material(primitive_id: int) -> StandardMaterial3D:
-	"""Create a colored material based on primitive type for visual distinction"""
+	"""Create a coloured material based on primitive type with subtle emission and metallic finish"""
 	var material := StandardMaterial3D.new()
 
 	match primitive_id:
 		0:  # Small cube
-			material.albedo_color = Color(0.7, 0.5, 0.3)  # Tan
+			material.albedo_color = Color(0.7, 0.5, 0.3)
 		1:  # Long beam
-			material.albedo_color = Color(0.6, 0.4, 0.2)  # Dark brown
-		2:  # Pyramid
-			material.albedo_color = Color(0.8, 0.6, 0.2)  # Gold
-		3:  # Pillar
-			material.albedo_color = Color(0.5, 0.5, 0.6)  # Gray/stone
+			material.albedo_color = Color(0.6, 0.4, 0.2)
+		2:  # Pyramid — gold with emission
+			material.albedo_color = Color(1.0, 0.85, 0.2)
+			material.emission_enabled = true
+			material.emission = Color(1.0, 0.85, 0.2) * 0.1
+		3:  # Pillar — stone with slight metallic
+			material.albedo_color = Color(0.5, 0.5, 0.6)
+			material.metallic = 0.2
 		4:  # Short beam
-			material.albedo_color = Color(0.65, 0.45, 0.25)  # Medium brown
+			material.albedo_color = Color(0.65, 0.45, 0.25)
 		5:  # Wedge
-			material.albedo_color = Color(0.6, 0.4, 0.3)  # Reddish brown
+			material.albedo_color = Color(0.6, 0.4, 0.3)
 		6:  # Plate
-			material.albedo_color = Color(0.75, 0.55, 0.35)  # Light tan
-		7:  # Arch
-			material.albedo_color = Color(0.9, 0.9, 0.95)  # White/limestone
+			material.albedo_color = Color(0.75, 0.55, 0.35)
+		7:  # Arch — white/limestone with glow
+			material.albedo_color = Color(0.9, 0.9, 0.95)
+			material.emission_enabled = true
+			material.emission = Color(0.9, 0.9, 0.95) * 0.08
+			material.metallic = 0.1
 		_:
-			material.albedo_color = Color(0.5, 0.5, 0.5)  # Default gray
+			material.albedo_color = Color(0.5, 0.5, 0.5)
 
-	material.roughness = 0.8
-	material.metallic = 0.0
+	material.roughness = 0.75
 	return material
 
 # ---- PRIMITIVE FACTORIES ----
@@ -402,10 +430,20 @@ func _place_action(a: Dictionary) -> bool:
 	rb.set_meta("placement_step", step_count)
 	bodies.append(rb)
 
+	# Apply typed material
+	var typed_mat = _create_material(pid)
+	for child in rb.get_children():
+		if child is MeshInstance3D:
+			child.material_override = typed_mat
+	
 	# Debug output
 	print("BuildEnv: Placed %s (ID:%d) at (%.1f, %.1f, %.1f) - Total bodies: %d" % [
 		primitive_name, pid, x, y_top, z, bodies.size()
 	])
+	
+	# Update status label
+	if _status_label:
+		_status_label.text = "Ep %d | Step %d | Pieces %d" % [episode_count, step_count, bodies.size()]
 
 	# Record placement for motif discovery
 	piece_placements.append({

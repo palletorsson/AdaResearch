@@ -1,5 +1,10 @@
 extends Node3D
 
+## Carl Sims-inspired Evolved Creatures.
+## A population of bipedal creatures evolve their gait parameters (hip amplitude,
+## frequency, phase) through genetic algorithms. Fitness is measured by forward
+## locomotion distance. The best creatures pass their genes to the next generation.
+
 class_name CarlsimsEvolution
 
 const POPULATION_SIZE: int = 20
@@ -21,6 +26,8 @@ var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _population: Array[CreatureInstance] = []
 var _timer: float = 0.0
 var _generation: int = 0
+var _status_label: Label3D = null
+var _best_fitness_ever: float = 0.0
 
 class CreatureGenome:
 	var hip_amplitude: PackedFloat32Array = PackedFloat32Array([1.0, 1.0])
@@ -59,7 +66,19 @@ class CreatureInstance:
 func _ready() -> void:
 	_rng.seed = random_seed
 	_build_ground()
+	_create_status_label()
 	spawn_initial_population()
+
+func _create_status_label() -> void:
+	_status_label = Label3D.new()
+	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_status_label.font_size = 48
+	_status_label.modulate = Color(1.0, 0.85, 0.2)
+	_status_label.outline_modulate = Color(0, 0, 0, 0.6)
+	_status_label.outline_size = 4
+	_status_label.position = Vector3(0, 6, 0)
+	_status_label.text = "Generation 0 | Evolving…"
+	add_child(_status_label)
 
 func _build_ground() -> void:
 	var floor := StaticBody3D.new()
@@ -75,6 +94,7 @@ func _build_ground() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.22, 0.24, 0.26, 1.0)
 	mat.roughness = 0.85
+	mat.metallic = 0.05
 	mesh_instance.material_override = mat
 	floor.add_child(mesh_instance)
 	floor.position = Vector3(0, -0.2, 0)
@@ -119,6 +139,7 @@ func _spawn_creature(genome: CreatureGenome, start_pos: Vector3) -> CreatureInst
 	return instance
 
 func _create_body(size: Vector3, mass: float, colour: Color) -> RigidBody3D:
+	## Creates a physics body with emissive, slightly metallic material
 	var body := RigidBody3D.new()
 	body.mass = mass
 	body.linear_damp = 0.2
@@ -135,7 +156,10 @@ func _create_body(size: Vector3, mass: float, colour: Color) -> RigidBody3D:
 	mesh.mesh = box
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = colour
-	mat.roughness = 0.6
+	mat.roughness = 0.5
+	mat.metallic = 0.15
+	mat.emission_enabled = true
+	mat.emission = colour * 0.12
 	mesh.material_override = mat
 	body.add_child(mesh)
 	add_child(body)
@@ -172,6 +196,8 @@ func _physics_process(delta: float) -> void:
 		_timer = 0.0
 
 func _evaluate_population() -> void:
+	var gen_best: float = 0.0
+	var gen_avg: float = 0.0
 	for creature in _population:
 		if creature.bodies.is_empty():
 			creature.genome.fitness = 0.0
@@ -185,8 +211,31 @@ func _evaluate_population() -> void:
 		var distance := displacement.length()
 		var height_bonus: float = max(0.0, torso.global_position.y - 1.0)
 		creature.genome.fitness = forward * 2.0 + distance * 0.5 + height_bonus * 0.3
+		gen_best = max(gen_best, creature.genome.fitness)
+		gen_avg += creature.genome.fitness
 		if enable_debug_prints:
 			print("Generation %d fitness: %.2f" % [_generation, creature.genome.fitness])
+	
+	gen_avg /= max(1, _population.size())
+	_best_fitness_ever = max(_best_fitness_ever, gen_best)
+	
+	# Highlight the best creature with a gold flash
+	for creature in _population:
+		if creature.genome.fitness >= gen_best and creature.bodies.size() > 0:
+			var torso = creature.bodies[0]
+			if is_instance_valid(torso):
+				var mesh_child = torso.get_child(1) if torso.get_child_count() > 1 else null
+				if mesh_child is MeshInstance3D and mesh_child.material_override is StandardMaterial3D:
+					var mat = mesh_child.material_override as StandardMaterial3D
+					var orig_emission = mat.emission
+					mat.emission = Color(1.0, 0.85, 0.2) * 0.6
+					var tw = create_tween()
+					tw.tween_property(mat, "emission", orig_emission, 1.5)
+			break
+	
+	# Update HUD
+	if _status_label:
+		_status_label.text = "Gen %d | Best %.1f | Avg %.1f | Record %.1f" % [_generation, gen_best, gen_avg, _best_fitness_ever]
 
 func _evolve_generation() -> void:
 	_generation += 1

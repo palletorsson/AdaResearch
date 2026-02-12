@@ -1,25 +1,34 @@
 extends Node3D
-
-# Reinforcement Learning Creature with Random Joints
-# This script creates a creature with random joints that learns to move through reinforcement learning
+## Reinforcement Learning Creature with Random Joints
+## Creates a procedural creature that learns to walk using Q-learning.
+## Joint torques are discovered through exploration / exploitation,
+## and a live HUD tracks episodes, distance, and reward.
 
 class_name RLCreature
 
-# Settings for body generation
-@export var num_limbs: int = 5
-@export var min_limb_length: float = 0.5
-@export var max_limb_length: float = 1.5
-@export var limb_radius: float = 0.1
-@export var joint_size: float = 0.15
-@export var torque_strength: float = 2.0
+# ─── Body generation settings ─────────────────────────────────────────────────
+@export_group("Body Generation")
+@export_range(2, 12, 1) var num_limbs: int = 5
+@export_range(0.2, 3.0, 0.1) var min_limb_length: float = 0.5
+@export_range(0.5, 4.0, 0.1) var max_limb_length: float = 1.5
+@export_range(0.05, 0.3, 0.01) var limb_radius: float = 0.1
+@export_range(0.05, 0.4, 0.01) var joint_size: float = 0.15
+@export_range(0.5, 10.0, 0.5) var torque_strength: float = 2.0
 
-# Learning parameters
-@export var learning_rate: float = 0.1
-@export var discount_factor: float = 0.9
-@export var exploration_rate: float = 0.3
-@export var exploration_decay: float = 0.995
-@export var min_exploration_rate: float = 0.01
-@export var update_frequency: float = 0.1
+# ─── Learning parameters ─────────────────────────────────────────────────────
+@export_group("Learning")
+@export_range(0.01, 1.0, 0.01) var learning_rate: float = 0.1
+@export_range(0.5, 0.999, 0.001) var discount_factor: float = 0.9
+@export_range(0.0, 1.0, 0.01) var exploration_rate: float = 0.3
+@export_range(0.9, 0.9999, 0.0001) var exploration_decay: float = 0.995
+@export_range(0.0, 0.1, 0.001) var min_exploration_rate: float = 0.01
+@export_range(0.02, 1.0, 0.02) var update_frequency: float = 0.1
+
+# ─── Visual tweaks ───────────────────────────────────────────────────────────
+@export_group("Visuals")
+@export var core_color: Color = Color(0.9, 0.3, 0.3, 1.0)
+@export var limb_color: Color = Color(0.3, 0.5, 0.9, 1.0)
+@export var path_color: Color = Color(1.0, 0.85, 0.2, 1.0)
 
 # References
 var body_parts = []
@@ -108,7 +117,9 @@ func create_environment():
 	floor_instance.name = "Floor"
 	
 	var floor_material = StandardMaterial3D.new()
-	floor_material.albedo_color = Color(0.3, 0.3, 0.3)
+	floor_material.albedo_color = Color(0.18, 0.18, 0.22)
+	floor_material.metallic = 0.1
+	floor_material.roughness = 0.6
 	floor_instance.material_override = floor_material
 	
 	var floor_body = StaticBody3D.new()
@@ -171,8 +182,11 @@ func create_debug_visualization():
 	path_mesh_instance.name = "PathVisualization"
 	
 	var path_material = StandardMaterial3D.new()
-	path_material.albedo_color = Color(1.0, 0.5, 0.0)
-	path_material.flags_unshaded = true
+	path_material.albedo_color = path_color
+	path_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	path_material.emission_enabled = true
+	path_material.emission = path_color * 0.6
+	path_material.emission_energy_multiplier = 1.5
 	path_mesh_instance.material_override = path_material
 	
 	add_child(path_mesh_instance)
@@ -183,7 +197,12 @@ func create_debug_visualization():
 	start_marker.radius = 0.2
 	
 	var marker_material = StandardMaterial3D.new()
-	marker_material.albedo_color = Color(0.0, 1.0, 0.0)
+	marker_material.albedo_color = Color(0.3, 0.85, 0.4)
+	marker_material.emission_enabled = true
+	marker_material.emission = Color(0.3, 0.85, 0.4) * 0.6
+	marker_material.emission_energy_multiplier = 2.0
+	marker_material.metallic = 0.3
+	marker_material.roughness = 0.15
 	start_marker.material = marker_material
 	
 	add_child(start_marker)
@@ -208,6 +227,7 @@ func update_path_visualization():
 		path_instance.surface_end()
 
 func create_ui():
+	# 2D overlay for stats
 	ui_root = Control.new()
 	ui_root.name = "UI"
 	ui_root.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -218,6 +238,19 @@ func create_ui():
 	
 	ui_root.add_child(stats_label)
 	add_child(ui_root)
+	
+	# 3D billboard label above the creature
+	var label_3d = Label3D.new()
+	label_3d.name = "CreatureLabel"
+	label_3d.pixel_size = 0.008
+	label_3d.font_size = 22
+	label_3d.position = Vector3(0, 3.2, 0)
+	label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label_3d.modulate = Color(1, 1, 1, 0.85)
+	label_3d.outline_size = 6
+	label_3d.outline_modulate = Color(0, 0, 0, 0.5)
+	label_3d.text = "RL Creature"
+	add_child(label_3d)
 
 func update_ui():
 	var text = "Episode: %d\n" % episode_count
@@ -255,7 +288,12 @@ func create_core():
 	core_mesh.mesh.height = 0.6
 	
 	var core_material = StandardMaterial3D.new()
-	core_material.albedo_color = Color(0.9, 0.1, 0.1)
+	core_material.albedo_color = core_color
+	core_material.emission_enabled = true
+	core_material.emission = core_color * 0.5
+	core_material.emission_energy_multiplier = 1.5
+	core_material.metallic = 0.4
+	core_material.roughness = 0.15
 	core_mesh.material_override = core_material
 	
 	var core_collision = CollisionShape3D.new()
@@ -310,9 +348,14 @@ func create_limb(parent_body, limb_index):
 		limb_basis = Basis(axis, angle)
 	limb_mesh.transform.basis = limb_basis
 	
-	# Create limb material
+	# Create limb material with emission glow
 	var limb_material = StandardMaterial3D.new()
-	limb_material.albedo_color = Color(0.2, 0.6, 0.8)
+	limb_material.albedo_color = limb_color
+	limb_material.emission_enabled = true
+	limb_material.emission = limb_color * 0.35
+	limb_material.emission_energy_multiplier = 1.2
+	limb_material.metallic = 0.3
+	limb_material.roughness = 0.2
 	limb_mesh.material_override = limb_material
 	
 	# Create limb collision
@@ -578,6 +621,20 @@ func is_stuck():
 func end_episode():
 	episode_count += 1
 	print("Episode %d ended. Total reward: %.2f, Distance: %.2f" % [episode_count, episode_reward, current_distance])
+	
+	# Flash the core body on episode end for visual feedback
+	if is_instance_valid(core_body):
+		var mesh := core_body.get_node_or_null("MeshInstance3D")
+		if mesh == null:
+			for c in core_body.get_children():
+				if c is MeshInstance3D:
+					mesh = c
+					break
+		if mesh and mesh.material_override:
+			var mat: StandardMaterial3D = mesh.material_override
+			var tw := create_tween()
+			tw.tween_property(mat, "emission_energy_multiplier", 4.0, 0.15)
+			tw.tween_property(mat, "emission_energy_multiplier", 1.5, 0.3)
 	
 	# Reset the creature
 	for body in body_parts:

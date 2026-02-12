@@ -1,5 +1,9 @@
 extends Node3D
 
+## Smart Rockets — evolves rocket trajectories via genetic algorithm.
+## Each rocket carries a DNA sequence of thrust vectors. The population breeds
+## based on proximity to the target. Obstacles create selection pressure.
+
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROCKET := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 const MAT_TARGET := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
@@ -26,6 +30,8 @@ var _status_label: Label3D
 var _generation: int = 1
 var _step: int = 0
 var _record_time: int
+var _best_fitness_ever: float = 0.0
+var _hits_count: int = 0  # Total rockets that reached target
 
 func _ready() -> void:
 	_setup_environment()
@@ -156,7 +162,8 @@ func rocket_position_nearest() -> Vector3:
 	return best
 
 func _update_status(best_fit: float) -> void:
-	_status_label.text = "Gen %d | Step %d/%d | Best %.2f" % [_generation, _step, lifespan, best_fit]
+	_best_fitness_ever = max(_best_fitness_ever, best_fit)
+	_status_label.text = "Gen %d | Step %d/%d | Best %.2f | Record %.2f | Hits %d" % [_generation, _step, lifespan, best_fit, _best_fitness_ever, _hits_count]
 
 func _next_generation() -> void:
 	var mating_pool: Array[Rocket] = []
@@ -262,12 +269,22 @@ class Rocket:
 		if dist < 0.07:
 			done = true
 			fitness += 1.0
+			# Flash green on target hit
+			if body.material_override is StandardMaterial3D:
+				var mat = body.material_override as StandardMaterial3D
+				mat.emission_enabled = true
+				mat.emission = Color(0.3, 0.85, 0.4) * 0.8
 			return
 
 		for obstacle in obstacles:
 			if obstacle.contains(position):
 				done = true
 				fitness *= 0.2
+				# Flash red on crash
+				if body.material_override is StandardMaterial3D:
+					var mat = body.material_override as StandardMaterial3D
+					mat.emission_enabled = true
+					mat.emission = Color(0.9, 0.3, 0.3) * 0.6
 				return
 
 	func queue_free() -> void:
@@ -316,7 +333,14 @@ class RocketTarget:
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
 		mesh.mesh = sphere
-		mesh.material_override = material
+		# Glowing gold target material
+		var target_mat := StandardMaterial3D.new()
+		target_mat.albedo_color = Color(1.0, 0.85, 0.2)
+		target_mat.emission_enabled = true
+		target_mat.emission = Color(1.0, 0.85, 0.2) * 0.6
+		target_mat.metallic = 0.3
+		target_mat.roughness = 0.3
+		mesh.material_override = target_mat
 		root.add_child(mesh)
 		root.global_position = pos
 

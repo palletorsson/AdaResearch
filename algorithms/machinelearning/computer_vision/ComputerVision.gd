@@ -1,15 +1,35 @@
+## ============================================================================
+## ComputerVision.gd — Interactive Computer Vision Visualization
+## Demonstrates convolutional networks, feature extraction, and object detection
+## with animated image pixels, bounding boxes, and live accuracy/mAP metrics.
+## ============================================================================
 extends Node3D
- 
 
+# ── Runtime UI Controls ──────────────────────────────────────────────────────
+@export_range(0.0, 1.0, 0.01) var processing_progress: float = 0.0:
+	set(v):
+		processing_progress = clamp(v, 0.0, 1.0)
+		_on_progress_changed()
+
+@export_range(0.0, 1.0, 0.01) var accuracy_score: float = 0.0:
+	set(v):
+		accuracy_score = clamp(v, 0.0, 1.0)
+
+@export_range(0.0, 1.0, 0.01) var map_score: float = 0.0:
+	set(v):
+		map_score = clamp(v, 0.0, 1.0)
+
+@export_range(8, 64, 1) var particle_count: int = 32
+@export_range(0.1, 3.0, 0.1) var animation_speed: float = 1.0
+@export var auto_progress: bool = true  ## Automatically advance progress over time
+
+# ── Internal State ───────────────────────────────────────────────────────────
 var time: float = 0.0
-var processing_progress: float = 0.0
-var accuracy_score: float = 0.0
-var map_score: float = 0.0
-var particle_count: int = 32
 var flow_particles: Array = []
 var image_pixels: Array = []
 var feature_particles: Array = []
 var bounding_boxes: Array = []
+var _stats_label: Label3D = null
 
 func _ready():
 	# Initialize Computer Vision visualization
@@ -19,14 +39,16 @@ func _ready():
 	create_bounding_boxes()
 	create_flow_particles()
 	setup_vision_metrics()
+	_create_stats_label()
 
 func _process(delta):
-	time += delta
+	time += delta * animation_speed
 	
-	# Simulate processing progress
-	processing_progress = min(1.0, time * 0.1)
-	accuracy_score = processing_progress * 0.9
-	map_score = processing_progress * 0.85
+	# ── Auto-advance progress if enabled ─────────────────────────────────
+	if auto_progress:
+		processing_progress = min(1.0, time * 0.1)
+		accuracy_score = processing_progress * 0.9
+		map_score = processing_progress * 0.85
 	
 	animate_input_image(delta)
 	animate_convolutional_network(delta)
@@ -34,17 +56,21 @@ func _process(delta):
 	animate_object_detection(delta)
 	animate_data_flow(delta)
 	update_vision_metrics(delta)
+	_update_stats_label()
 
 func create_image_pixels():
-	# Create image pixel particles representing input image
+	## Create image pixel particles — color-varied spheres simulating pixel data in a grid
 	var image_pixels_node = $InputImage/ImagePixels
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.08
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.5, 0.9, 1)  # Blue for data
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		particle.material_override.emission = Color(0.3, 0.5, 0.9, 1) * 0.5
+		particle.material_override.emission_energy_multiplier = 1.5
+		particle.material_override.metallic = 0.3
+		particle.material_override.roughness = 0.35
 		
 		# Position particles in a grid representing image pixels
 		var grid_size = 6
@@ -59,15 +85,18 @@ func create_image_pixels():
 		image_pixels.append(particle)
 
 func create_feature_particles():
-	# Create feature extraction particles
+	## Create feature extraction particles — green spheres representing detected features
 	var feature_particles_node = $FeatureExtraction/FeatureParticles
 	for i in range(25):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
+		particle.material_override.albedo_color = Color(0.3, 0.85, 0.4, 1)  # Green for features
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.4
+		particle.material_override.emission = Color(0.3, 0.85, 0.4, 1) * 0.6
+		particle.material_override.emission_energy_multiplier = 1.8
+		particle.material_override.metallic = 0.5
+		particle.material_override.roughness = 0.2
 		
 		# Position particles in feature map arrangement
 		var row = i / 5
@@ -81,16 +110,18 @@ func create_feature_particles():
 		feature_particles.append(particle)
 
 func create_bounding_boxes():
-	# Create bounding box particles for object detection
+	## Create bounding boxes — transparent gold rectangles for object detection visualization
 	var bounding_boxes_node = $ObjectDetection/BoundingBoxes
 	for i in range(8):
 		var particle = CSGBox3D.new()
 		particle.size = Vector3(0.8, 0.8, 0.1)
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 0.3)
+		particle.material_override.albedo_color = Color(1.0, 0.85, 0.2, 0.3)  # Gold, semi-transparent
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.2
+		particle.material_override.emission = Color(1.0, 0.85, 0.2, 1) * 0.4
+		particle.material_override.emission_energy_multiplier = 1.5
 		particle.material_override.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		particle.material_override.metallic = 0.3
 		
 		# Position bounding boxes in detection space
 		var angle = float(i) / 8.0 * PI * 2
@@ -104,15 +135,18 @@ func create_bounding_boxes():
 		bounding_boxes.append(particle)
 
 func create_flow_particles():
-	# Create data flow particles
+	## Create data flow particles — gold spheres flowing through the vision processing pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(40):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
 		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
+		particle.material_override.albedo_color = Color(1.0, 0.85, 0.2, 1)  # Gold for flow
 		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		particle.material_override.emission = Color(1.0, 0.85, 0.2, 1) * 0.6
+		particle.material_override.emission_energy_multiplier = 2.0
+		particle.material_override.metallic = 0.6
+		particle.material_override.roughness = 0.2
 		
 		# Position particles along the processing flow path
 		var progress = float(i) / 40
@@ -349,6 +383,8 @@ func update_vision_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - map_score)
 		map_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
+# ── Public API ───────────────────────────────────────────────────────────────
+
 func set_processing_progress(progress: float):
 	processing_progress = clamp(progress, 0.0, 1.0)
 
@@ -372,3 +408,41 @@ func reset_processing():
 	processing_progress = 0.0
 	accuracy_score = 0.0
 	map_score = 0.0
+	var network_core = $ConvolutionalNetwork/NetworkCore
+	if network_core:
+		var tween = create_tween()
+		tween.tween_property(network_core, "scale", Vector3.ONE * 1.5, 0.15)
+		tween.tween_property(network_core, "scale", Vector3.ONE, 0.3)
+
+# ── Stats Label & Visual Feedback ────────────────────────────────────────────
+
+func _create_stats_label():
+	## Creates a floating 3D label showing live computer vision stats
+	_stats_label = Label3D.new()
+	_stats_label.text = "Initializing..."
+	_stats_label.font_size = 48
+	_stats_label.modulate = Color(1.0, 0.85, 0.2, 1.0)
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.8)
+	_stats_label.outline_size = 8
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.position = Vector3(0, 4.5, 0)
+	_stats_label.no_depth_test = true
+	add_child(_stats_label)
+
+func _update_stats_label():
+	if _stats_label:
+		_stats_label.text = "Computer Vision\nProgress: %d%%  |  Accuracy: %.0f%%  |  mAP: %.0f%%" % [
+			processing_progress * 100,
+			accuracy_score * 100,
+			map_score * 100
+		]
+
+func _on_progress_changed():
+	## Visual feedback — pulse network core with gold glow
+	var network_core = $ConvolutionalNetwork/NetworkCore
+	if network_core and network_core.material_override:
+		var tween = create_tween()
+		tween.tween_property(network_core.material_override, "emission",
+			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
+		tween.tween_property(network_core.material_override, "emission",
+			Color(0.3, 0.85, 0.4) * (0.3 + processing_progress * 0.7), 0.3)

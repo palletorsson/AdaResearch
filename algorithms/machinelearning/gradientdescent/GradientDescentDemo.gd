@@ -1,7 +1,25 @@
 extends Node3D
 
+# =============================================================================
+# Gradient Descent Visualization
+# =============================================================================
+# Demonstrates gradient descent optimization on a procedural noise terrain.
+# A glowing walker sphere follows the negative gradient downhill, leaving a
+# trail. The gradient vector is shown as a red arrow. When the walker converges
+# (gradient magnitude drops below threshold), a celebration effect plays.
+# =============================================================================
+
 enum RunState { RUNNING, COMPLETE }
 
+# --- Color Palette -----------------------------------------------------------
+const COLOR_TERRAIN := Color(0.25, 0.55, 0.32)    # Green terrain
+const COLOR_WALKER := Color(1.0, 0.85, 0.2)       # Gold walker
+const COLOR_PATH := Color(1.0, 0.9, 0.3)          # Yellow path trail
+const COLOR_GRADIENT := Color(0.9, 0.3, 0.3)      # Red gradient arrow
+const COLOR_CONVERGED := Color(0.3, 0.85, 0.4)    # Green for convergence
+
+# --- Export: Terrain ---------------------------------------------------------
+@export_category("Terrain")
 @export_range(20, 120, 2)
 var grid_resolution: int = 80
 @export var grid_size: float = 20.0
@@ -13,8 +31,12 @@ var noise_octaves: int = 4
 @export var noise_gain: float = 0.5
 @export var noise_seed: int = 20241101
 
+# --- Export: Descent Algorithm -----------------------------------------------
+@export_category("Descent Algorithm")
 @export var walker_start: Vector2 = Vector2(6.0, -5.0)
-@export var learning_rate: float = 0.85
+@export var learning_rate: float = 0.85:
+	set(v):
+		learning_rate = clamp(v, 0.01, 5.0)
 @export var step_interval: float = 0.18
 @export var gradient_sample_distance: float = 0.25
 @export var gradient_visual_scale: float = 2.0
@@ -22,6 +44,7 @@ var noise_octaves: int = 4
 @export var stop_gradient_magnitude: float = 0.02
 @export var show_gradient: bool = true
 
+# --- Scene references --------------------------------------------------------
 @onready var terrain_mesh: MeshInstance3D = $Terrain
 @onready var walker_mesh: MeshInstance3D = $Walker
 @onready var path_mesh: MeshInstance3D = $Path
@@ -37,12 +60,16 @@ var _current_position: Vector2 = Vector2.ZERO
 var _state: RunState = RunState.RUNNING
 var _step_index: int = 0
 var _time_accumulator: float = 0.0
+var _walker_mat: StandardMaterial3D   # Cached walker material for tween effects
+var _title_label: Label3D             # In-scene title
+var _stats_label: Label3D             # Secondary stats display
 
 func _ready() -> void:
 	_rng.randomize()
 	_init_noise()
 	_generate_terrain()
 	_configure_walker()
+	_build_controls()
 	reset_descent(false)
 
 func _init_noise() -> void:
@@ -69,10 +96,12 @@ func _generate_terrain() -> void:
 	var mesh := st.commit()
 	terrain_mesh.mesh = mesh
 	var material := StandardMaterial3D.new()
-	material.albedo_color = Color(0.25, 0.55, 0.32, 1.0)
-	material.roughness = 0.85
-	material.metallic = 0.1
-	material.specular = 0.35
+	material.albedo_color = COLOR_TERRAIN
+	material.roughness = 0.75
+	material.metallic = 0.15
+	material.specular = 0.4
+	material.emission_enabled = true
+	material.emission = COLOR_TERRAIN * 0.08
 	terrain_mesh.material_override = material
 
 func _vertex_for_grid(x: int, z: int) -> Vector3:
@@ -102,13 +131,40 @@ func _configure_walker() -> void:
 	sphere.radial_segments = 16
 	sphere.rings = 8
 	walker_mesh.mesh = sphere
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.9, 0.35, 1.0)
-	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.9, 0.35, 1.0) * 0.6
-	mat.roughness = 0.3
-	walker_mesh.material_override = mat
+	_walker_mat = StandardMaterial3D.new()
+	_walker_mat.albedo_color = COLOR_WALKER
+	_walker_mat.emission_enabled = true
+	_walker_mat.emission = COLOR_WALKER * 0.6
+	_walker_mat.roughness = 0.25
+	_walker_mat.metallic = 0.35
+	walker_mesh.material_override = _walker_mat
 
+# =============================================================================
+# In-scene 3D UI controls & labels
+# =============================================================================
+
+func _build_controls() -> void:
+	"""Add in-scene Label3D headers and stats panel."""
+	# Title
+	_title_label = Label3D.new()
+	_title_label.text = "Gradient Descent"
+	_title_label.font_size = 72
+	_title_label.modulate = COLOR_WALKER
+	_title_label.position = Vector3(0, height_scale + 3.0, -grid_size * 0.5 - 1.0)
+	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label)
+
+	# Learning-rate label
+	_stats_label = Label3D.new()
+	_stats_label.font_size = 40
+	_stats_label.modulate = Color.WHITE
+	_stats_label.position = Vector3(0, height_scale + 1.8, -grid_size * 0.5 - 1.0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label)
+
+# =============================================================================
+# Per-frame update
+# =============================================================================
 
 func _process(delta: float) -> void:
 	if _state != RunState.RUNNING:
@@ -158,6 +214,7 @@ func _finalize_descent() -> void:
 	_state = RunState.COMPLETE
 	_update_gradient_mesh(Vector2.ZERO)
 	_update_info_label(Vector2.ZERO)
+	_play_convergence_effect()
 
 func _estimate_gradient(pos: Vector2) -> Vector2:
 	var eps := gradient_sample_distance
@@ -170,8 +227,27 @@ func _estimate_gradient(pos: Vector2) -> Vector2:
 	return Vector2(grad_x, grad_z)
 
 func _update_walker_transform() -> void:
+	"""Smoothly tween the walker to its new position instead of snapping."""
 	var y := _sample_height(_current_position.x, _current_position.y)
-	walker_mesh.global_position = Vector3(_current_position.x, y + POINT_RADIUS, _current_position.y)
+	var target_pos := Vector3(_current_position.x, y + POINT_RADIUS, _current_position.y)
+	var tw := create_tween()
+	tw.tween_property(walker_mesh, "global_position", target_pos, 0.12).set_ease(Tween.EASE_OUT)
+	# Quick scale pulse on each step for visual feedback
+	tw.parallel().tween_property(walker_mesh, "scale", Vector3.ONE * 1.25, 0.06).set_ease(Tween.EASE_OUT)
+	tw.tween_property(walker_mesh, "scale", Vector3.ONE, 0.06).set_ease(Tween.EASE_IN)
+
+func _play_convergence_effect() -> void:
+	"""Visual celebration when the walker reaches a local minimum."""
+	if not _walker_mat:
+		return
+	# Flash walker green, then back to gold
+	var tw := create_tween()
+	tw.tween_property(_walker_mat, "emission", COLOR_CONVERGED * 1.5, 0.15)
+	tw.tween_property(_walker_mat, "emission", COLOR_WALKER * 0.6, 0.8)
+	# Scale pop
+	var tw2 := create_tween()
+	tw2.tween_property(walker_mesh, "scale", Vector3.ONE * 1.8, 0.2).set_ease(Tween.EASE_OUT)
+	tw2.tween_property(walker_mesh, "scale", Vector3.ONE, 0.5).set_ease(Tween.EASE_IN_OUT)
 
 func _update_path_mesh() -> void:
 	var immediate := path_mesh.mesh as ImmediateMesh
@@ -182,7 +258,7 @@ func _update_path_mesh() -> void:
 	if _path_points.size() < 2:
 		return
 	immediate.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	immediate.surface_set_color(Color(1.0, 0.9, 0.3, 1.0))
+	immediate.surface_set_color(COLOR_PATH)
 	for point in _path_points:
 		immediate.surface_add_vertex(point)
 	immediate.surface_end()
@@ -198,7 +274,7 @@ func _update_gradient_mesh(gradient: Vector2) -> void:
 	var start := walker_mesh.global_position + Vector3(0.0, 0.3, 0.0)
 	var end := start + Vector3(-gradient.x, 0.0, -gradient.y) * gradient_visual_scale
 	immediate.surface_begin(Mesh.PRIMITIVE_LINES)
-	immediate.surface_set_color(Color(1.0, 0.35, 0.35, 1.0))
+	immediate.surface_set_color(COLOR_GRADIENT)
 	immediate.surface_add_vertex(start)
 	immediate.surface_add_vertex(end)
 	immediate.surface_end()
@@ -210,14 +286,20 @@ func _update_info_label(gradient: Vector2) -> void:
 	var status := "running"
 	if _state == RunState.COMPLETE:
 		status = "converged" if slope < stop_gradient_magnitude else "max steps"
-	info_label.text = "Step %d / %d
-|grad| = %.03f
-State: %s" % [
+	info_label.text = "Step %d / %d\n|grad| = %.03f\nState: %s" % [
 		_step_index,
 		max_steps,
 		slope,
 		status,
 	]
+	# Update secondary stats label
+	if _stats_label:
+		_stats_label.text = "LR: %.2f  |  Height: %.2f  |  Pos: (%.1f, %.1f)" % [
+			learning_rate,
+			_sample_height(_current_position.x, _current_position.y),
+			_current_position.x,
+			_current_position.y,
+		]
 
 
 

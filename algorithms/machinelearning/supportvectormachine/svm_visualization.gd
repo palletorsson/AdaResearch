@@ -1,8 +1,21 @@
 extends Node3D
 
-# Support Vector Machine: Mathematical Justice & Boundary Politics
-# Visualizes the politics of classification boundaries and margin optimization
-# Demonstrates how algorithms create separating hyperplanes in high-dimensional identity spaces
+# =============================================================================
+# SVM — Support Vector Machine Visualization
+# =============================================================================
+# Visualizes classification with maximum-margin separating hyperplanes.
+# Positive (green) and negative (red) data points are shown as spheres.
+# The decision boundary is rendered as a point cloud. Support vectors are
+# highlighted with golden glow and enlarged size.
+# Uses a simplified SMO (Sequential Minimal Optimization) solver.
+# =============================================================================
+
+# --- Color Palette -----------------------------------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for data
+const COLOR_POSITIVE_SVM := Color(0.3, 0.85, 0.4) # Green for +1 class
+const COLOR_NEGATIVE_SVM := Color(0.9, 0.3, 0.3)  # Red for -1 class
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for support vectors
+const COLOR_BOUNDARY := Color(0.9, 0.2, 0.9)    # Magenta for boundary
 
 @export_category("SVM Configuration")
 @export var kernel_type: String = "rbf"  # linear, polynomial, rbf, sigmoid
@@ -23,10 +36,10 @@ extends Node3D
 @export var show_decision_boundary: bool = true
 @export var show_margin_lines: bool = true
 @export var support_vector_size: float = 0.3
-@export var positive_color: Color = Color(0.2, 0.9, 0.3)  # Green
-@export var negative_color: Color = Color(0.9, 0.3, 0.2)  # Red
-@export var support_vector_color: Color = Color(0.9, 0.9, 0.2)  # Yellow
-@export var boundary_color: Color = Color(0.9, 0.2, 0.9)  # Magenta
+@export var positive_color: Color = COLOR_POSITIVE_SVM
+@export var negative_color: Color = COLOR_NEGATIVE_SVM
+@export var support_vector_color: Color = COLOR_SPECIAL
+@export var boundary_color: Color = COLOR_BOUNDARY
 
 @export_category("Algorithm Animation")
 @export var auto_start: bool = true
@@ -54,6 +67,10 @@ var boundary_mesh: MeshInstance3D
 var margin_meshes: Array = []
 var ui_display: CanvasLayer
 
+# 3D in-scene labels
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
 # Algorithm signals
 signal training_step_complete()
 signal training_finished()
@@ -65,10 +82,28 @@ func _init():
 func _ready():
 	setup_ui()
 	setup_timer()
+	_build_3d_labels()
 	generate_training_data()
 	
 	if auto_start:
 		call_deferred("start_training")
+
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Support Vector Machine"
+	_title_label_3d.font_size = 64
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 5, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 36
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 4.2, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
 
 func setup_ui():
 	"""Create comprehensive UI for SVM visualization"""
@@ -139,17 +174,20 @@ func create_data_visualization():
 		add_child(sphere)
 
 func create_data_point(point: Vector2, label: int) -> MeshInstance3D:
-	"""Create a 3D sphere for a data point"""
+	"""Create a 3D sphere for a data point, colored by class label."""
 	var sphere = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
 	mesh.radius = 0.1
 	mesh.height = 0.2
 	sphere.mesh = mesh
 	
+	var base_color: Color = positive_color if label == 1 else negative_color
 	var material = StandardMaterial3D.new()
-	material.albedo_color = positive_color if label == 1 else negative_color
+	material.albedo_color = base_color
 	material.emission_enabled = true
-	material.emission = material.albedo_color * 0.3
+	material.emission = base_color * 0.35
+	material.metallic = 0.3
+	material.roughness = 0.45
 	sphere.material_override = material
 	
 	sphere.position = Vector3(point.x, point.y, 0)
@@ -198,6 +236,11 @@ func _on_optimization_timer_timeout():
 		training_finished.emit()
 	else:
 		training_step_complete.emit()
+		# Update 3D progress
+		if _stats_label_3d:
+			_stats_label_3d.text = "Training: iter %d/%d  |  Kernel: %s" % [
+				current_iteration, max_iterations, kernel_type
+			]
 	
 	update_ui()
 
@@ -346,6 +389,15 @@ func finalize_training():
 	update_support_vector_visualization()
 	is_trained = true
 	
+	# Update 3D stats
+	if _stats_label_3d:
+		_stats_label_3d.text = "Trained!  SVs: %d  |  Kernel: %s  |  Bias: %.2f" % [
+			support_vectors.size(), kernel_type, bias
+		]
+		var tw := create_tween()
+		tw.tween_property(_stats_label_3d, "modulate", COLOR_SPECIAL, 0.2)
+		tw.tween_property(_stats_label_3d, "modulate", Color.WHITE, 0.8)
+	
 	print("SVM training completed")
 	print("Support vectors found: ", support_vectors.size())
 
@@ -420,20 +472,23 @@ func create_boundary_mesh() -> ArrayMesh:
 	return array_mesh
 
 func update_support_vector_visualization():
-	"""Update visualization of support vectors"""
+	"""Highlight support vectors with animated scale-up and golden glow."""
 	if not show_support_vectors:
 		return
 	
-	# Highlight support vectors
 	for i in range(training_data.size()):
 		if alphas[i] > tolerance and i < data_points.size():
 			var material = data_points[i].material_override as StandardMaterial3D
 			material.albedo_color = support_vector_color
-			material.emission = support_vector_color * 0.5
+			material.emission = support_vector_color * 0.6
+			material.metallic = 0.5
+			material.roughness = 0.25
 			
-			# Make support vectors larger
-			var scale = Vector3.ONE * (1.0 + support_vector_size)
-			data_points[i].scale = scale
+			# Animate support vectors scaling up with a bounce
+			var target_scale = Vector3.ONE * (1.0 + support_vector_size)
+			var tw := create_tween()
+			tw.tween_property(data_points[i], "scale", target_scale * 1.3, 0.15).set_ease(Tween.EASE_OUT)
+			tw.tween_property(data_points[i], "scale", target_scale, 0.25).set_ease(Tween.EASE_IN_OUT)
 
 func classify_new_point(point: Vector2) -> Dictionary:
 	"""Classify a new point and return detailed results"""

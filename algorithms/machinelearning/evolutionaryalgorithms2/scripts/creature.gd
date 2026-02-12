@@ -189,7 +189,7 @@ func build_body():
 	body_parts.push_back(main_body)
 
 func build_symbiotic_body(main_body, collision_shape, mesh_instance):
-	# Create base sphere
+	# Create base sphere — symbiotic creatures glow faintly
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = 0.5 * genome["body_scale"].x
 	
@@ -199,6 +199,10 @@ func build_symbiotic_body(main_body, collision_shape, mesh_instance):
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = base_color
+	material.emission_enabled = true
+	material.emission = base_color * 0.2
+	material.metallic = 0.15
+	material.roughness = 0.5
 	mesh_instance.material_override = material
 	
 	main_body.add_child(collision_shape)
@@ -268,7 +272,7 @@ func build_phase_shifting_body(main_body, collision_shape, mesh_instance):
 	main_body.add_child(mesh_instance)
 
 func build_recursive_body(main_body, collision_shape, mesh_instance):
-	# Start with a cube base
+	# Start with a cube base — recursive fractal creatures
 	collision_shape.shape = BoxShape3D.new()
 	collision_shape.shape.size = genome["body_scale"]
 	
@@ -277,6 +281,10 @@ func build_recursive_body(main_body, collision_shape, mesh_instance):
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = base_color
+	material.emission_enabled = true
+	material.emission = base_color * 0.15
+	material.metallic = 0.25
+	material.roughness = 0.45
 	mesh_instance.material_override = material
 	
 	main_body.add_child(collision_shape)
@@ -806,15 +814,20 @@ func die():
 	# Emit death signal
 	emit_signal("death_event", self)
 	
-	# Decay effect
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector3(0.1, 0.1, 0.1), 2.0)
-	tween.tween_callback(Callable(self, "queue_free"))
-	
-	# Disable physics
+	# Flash red then shrink away — dramatic death animation
 	for part in body_parts:
 		if part is RigidBody3D:
 			part.freeze = true
+			var mesh_child = part.get_child(1) if part.get_child_count() > 1 else null
+			if mesh_child is MeshInstance3D and mesh_child.material_override is StandardMaterial3D:
+				var mat = mesh_child.material_override as StandardMaterial3D
+				mat.emission_enabled = true
+				mat.emission = Color(0.9, 0.3, 0.3) * 0.8
+	
+	var tween = create_tween()
+	tween.tween_interval(0.3)  # Hold the red flash briefly
+	tween.tween_property(self, "scale", Vector3(0.1, 0.1, 0.1), 1.5).set_ease(Tween.EASE_IN)
+	tween.tween_callback(Callable(self, "queue_free"))
 
 # Helper functions
 

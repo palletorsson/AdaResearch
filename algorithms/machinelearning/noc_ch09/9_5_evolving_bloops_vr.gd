@@ -1,5 +1,10 @@
 extends Node3D
 
+## Evolving Bloops — a self-sustaining ecosystem simulation.
+## Bloops wander, eat food, and reproduce when they have enough energy.
+## Their DNA gene controls the size/speed trade-off (bigger = slower but lasts longer).
+## Dead bloops become food. The population self-regulates.
+
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_BLOOP := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 const MAT_BLOOP_ALPHA := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
@@ -23,6 +28,8 @@ var _spawn_timer: float = 0.0
 var _status_label: Label3D
 var _generation: int = 1
 var _births: int = 0
+var _deaths: int = 0
+var _peak_population: int = 0
 
 func _ready() -> void:
 	randomize()
@@ -122,16 +129,18 @@ func _physics_process(delta: float) -> void:
 			_spawn_food(bloop.position)
 			bloop.queue_free()
 			_bloops.erase(bloop)
+			_deaths += 1
 
 	for food in _foods.duplicate():
 		if food.consumed:
 			food.queue_free()
 			_foods.erase(food)
 
+	_peak_population = max(_peak_population, _bloops.size())
 	_update_status()
 
 func _update_status() -> void:
-	_status_label.text = "Gen %d | Bloops %d | Food %d | Births %d" % [_generation, _bloops.size(), _foods.size(), _births]
+	_status_label.text = "Bloops %d (peak %d) | Food %d | Born %d | Died %d" % [_bloops.size(), _peak_population, _foods.size(), _births, _deaths]
 
 class DNA:
 	var gene: float
@@ -255,7 +264,7 @@ class FoodItem:
 		set(value):
 			root.position = value
 
-	func init(parent: Node3D, pos: Vector3, material: Material) -> void:
+	func init(parent: Node3D, pos: Vector3, _material: Material) -> void:
 		root = Node3D.new()
 		root.name = "Food"
 		root.position = pos
@@ -265,7 +274,12 @@ class FoodItem:
 		var sphere := SphereMesh.new()
 		sphere.radius = radius
 		mesh.mesh = sphere
-		mesh.material_override = material
+		# Glowing green food particles
+		var food_mat := StandardMaterial3D.new()
+		food_mat.albedo_color = Color(0.3, 0.85, 0.4)
+		food_mat.emission_enabled = true
+		food_mat.emission = Color(0.3, 0.85, 0.4) * 0.5
+		mesh.material_override = food_mat
 		root.add_child(mesh)
 
 	func pulse(delta: float) -> void:

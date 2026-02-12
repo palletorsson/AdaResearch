@@ -1,5 +1,9 @@
 extends Node3D
 
+## GA Shakespeare — evolves random strings toward a target phrase using
+## a genetic algorithm with fitness-proportional selection and crossover.
+## Demonstrates how evolutionary pressure drives convergence.
+
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 
 const TARGET_PHRASE := "to be or not to be"
@@ -19,6 +23,8 @@ var _population: Array[DNA] = []
 var _generation: int = 1
 var _elapsed: float = 0.0
 var _best_phrase: String = ""
+var _best_fitness: float = 0.0
+var _solved: bool = false
 
 func _ready() -> void:
 	randomize()
@@ -97,6 +103,9 @@ func _process(delta: float) -> void:
 		_run_generation()
 
 func _run_generation() -> void:
+	if _solved:
+		return
+	
 	var best: String = ""
 	var best_fitness := -1.0
 
@@ -107,6 +116,12 @@ func _run_generation() -> void:
 			best = dna.get_phrase()
 
 	_best_phrase = best
+	_best_fitness = best_fitness
+	
+	# Check if solved
+	if best_fitness >= 1.0:
+		_solved = true
+		_best_label.modulate = Color(0.3, 0.85, 0.4)  # Green flash for success
 
 	var mating_pool: Array[DNA] = []
 	for dna in _population:
@@ -131,7 +146,12 @@ func _run_generation() -> void:
 
 func _update_labels() -> void:
 	_best_label.text = "Best: " + _best_phrase
-	_metrics_label.text = "Generation %d | Mutation %.2f" % [_generation, mutation_rate]
+	# Colour the best label based on fitness — blue → green as it converges
+	var fit_color = Color(0.3, 0.5, 0.9).lerp(Color(0.3, 0.85, 0.4), _best_fitness)
+	if _solved:
+		fit_color = Color(1.0, 0.85, 0.2)  # Gold when solved
+	_best_label.modulate = fit_color
+	_metrics_label.text = "Gen %d | Fit %.0f%% | Mutation %.2f" % [_generation, _best_fitness * 100, mutation_rate]
 	_sample_label.text = _sample_population_text()
 
 func _sample_population_text() -> String:

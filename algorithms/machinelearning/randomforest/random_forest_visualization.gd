@@ -1,8 +1,18 @@
 extends Node3D
 
-# Random Forest: Collective Intelligence & Democratic Decision Making
-# Visualizes ensemble learning through multiple decision trees
-# Explores collective decision-making processes and democratic algorithms
+# =============================================================================
+# Random Forest Visualization — Collective Intelligence & Democratic Decisions
+# =============================================================================
+# Visualizes ensemble learning: multiple decision trees are trained on
+# bootstrap samples, each voting on the class label. The majority wins.
+# Trees grow into the scene with animated node appearance.
+# =============================================================================
+
+# --- Color Palette -----------------------------------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for data
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive class
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for negative class
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 
 @export_category("Random Forest Configuration")
 @export var num_trees: int = 5
@@ -49,6 +59,10 @@ var tree_visualizations: Array = []
 var data_points: Array = []
 var forest_root: Node3D
 var ui_display: CanvasLayer
+
+# 3D in-scene labels
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
 
 # Colors for visualization
 var tree_colors: Array = [
@@ -266,6 +280,7 @@ func _ready():
 	setup_ui()
 	setup_timer()
 	setup_forest_visualization()
+	_build_3d_labels()
 	generate_training_data()
 	
 	if auto_start:
@@ -306,6 +321,23 @@ func setup_forest_visualization():
 	forest_root = Node3D.new()
 	forest_root.name = "Forest_Root"
 	add_child(forest_root)
+
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels visible in VR / immersive mode."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Random Forest"
+	_title_label_3d.font_size = 72
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 6, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 40
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 5, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
 
 func generate_training_data():
 	"""Generate training data with multiple features"""
@@ -351,17 +383,20 @@ func create_data_visualization():
 		add_child(sphere)
 
 func create_data_point(position: Vector3, label: int) -> MeshInstance3D:
-	"""Create a 3D sphere for a data point"""
+	"""Create a 3D sphere for a data point, colored by class label."""
 	var sphere = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
-	mesh.radius = 0.05
-	mesh.height = 0.1
+	mesh.radius = 0.06
+	mesh.height = 0.12
 	sphere.mesh = mesh
 	
+	var base_color := COLOR_POSITIVE if label == 1 else COLOR_NEGATIVE
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.2, 0.9, 0.3) if label == 1 else Color(0.9, 0.3, 0.2)
+	material.albedo_color = base_color
 	material.emission_enabled = true
-	material.emission = material.albedo_color * 0.3
+	material.emission = base_color * 0.35
+	material.metallic = 0.25
+	material.roughness = 0.5
 	sphere.material_override = material
 	
 	sphere.position = position
@@ -431,6 +466,12 @@ func train_single_tree(tree_index: int):
 	if show_individual_trees:
 		create_tree_visualization(tree, tree_index)
 	
+	# Update 3D stats label
+	if _stats_label_3d:
+		_stats_label_3d.text = "Trees: %d / %d  |  Samples: %d" % [
+			decision_trees.size(), num_trees, training_data.size()
+		]
+	
 	print("Trained tree ", tree_index + 1, "/", num_trees)
 	update_ui()
 
@@ -449,6 +490,22 @@ func finalize_training():
 	
 	if show_feature_importance:
 		calculate_feature_importance()
+	
+	# Update 3D stats with completion
+	if _stats_label_3d:
+		_stats_label_3d.text = "Training Complete!  Trees: %d  |  Samples: %d" % [
+			num_trees, training_data.size()
+		]
+		# Flash gold on completion
+		var tw := create_tween()
+		tw.tween_property(_stats_label_3d, "modulate", COLOR_SPECIAL, 0.2)
+		tw.tween_property(_stats_label_3d, "modulate", Color.WHITE, 0.8)
+	
+	# Pulse all tree visualizations to celebrate
+	for tree_vis in tree_visualizations:
+		var tw2 := create_tween()
+		tw2.tween_property(tree_vis, "scale", Vector3.ONE * 1.15, 0.2).set_ease(Tween.EASE_OUT)
+		tw2.tween_property(tree_vis, "scale", Vector3.ONE, 0.4).set_ease(Tween.EASE_IN_OUT)
 	
 	print("Random Forest training completed")
 	update_ui()
@@ -472,6 +529,11 @@ func create_tree_visualization(tree: DecisionTree, tree_index: int):
 	# Create nodes for the tree
 	var color = tree_colors[tree_index % tree_colors.size()]
 	create_tree_nodes(tree.root, tree_root, Vector3.ZERO, color, 0)
+	
+	# Animate tree growing in (scale from zero)
+	tree_root.scale = Vector3.ZERO
+	var tw := create_tween()
+	tw.tween_property(tree_root, "scale", Vector3.ONE, 0.6).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	
 	tree_visualizations.append(tree_root)
 

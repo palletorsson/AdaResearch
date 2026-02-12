@@ -1,28 +1,54 @@
 extends Node3D
- 
+## Dimensionality Reduction Visualization
+## Shows high-dimensional data being projected into lower dimensions via PCA /
+## t-SNE. Particles collapse from a 3D cloud to a 2D plane as the reduction
+## progresses, with live stats and tunable parameters.
 
+# ─── Runtime-tunable parameters ───────────────────────────────────────────────
+@export_range(0.01, 0.5, 0.01) var simulation_speed: float = 0.1:
+	set(v):
+		simulation_speed = v
+@export_range(10, 80, 5) var particle_count: int = 25:
+	set(v):
+		particle_count = v
+		if is_inside_tree():
+			_rebuild_all_particles()
+@export var color_high_dim: Color = Color(0.8, 0.2, 0.8, 1.0):
+	set(v):
+		color_high_dim = v
+		_recolor_particles(high_dim_particles, color_high_dim)
+@export var color_low_dim: Color = Color(0.2, 0.8, 0.8, 1.0):
+	set(v):
+		color_low_dim = v
+		_recolor_particles(low_dim_particles, color_low_dim)
+@export var color_flow: Color = Color(1.0, 0.85, 0.2, 1.0):
+	set(v):
+		color_flow = v
+
+# ─── Internal state ───────────────────────────────────────────────────────────
 var time: float = 0.0
 var reduction_progress: float = 0.0
 var variance_explained: float = 0.0
 var reconstruction_error: float = 1.0
-var particle_count: int = 25
 var flow_particles: Array = []
 var high_dim_particles: Array = []
 var low_dim_particles: Array = []
 
+# ─── Stats overlay ────────────────────────────────────────────────────────────
+var _stats_label: Label3D = null
+
 func _ready():
-	# Initialize Dimensionality Reduction visualization
-	print("Dimensionality Reduction Visualization initialized")
 	create_high_dimensional_particles()
 	create_low_dimensional_particles()
 	create_flow_particles()
 	setup_reduction_metrics()
+	_create_stats_label()
 
 func _process(delta):
 	time += delta
 	
 	# Simulate reduction progress
-	reduction_progress = min(1.0, time * 0.1)
+	reduction_progress = min(1.0, time * simulation_speed)
 	variance_explained = reduction_progress * 0.9
 	reconstruction_error = max(0.1, 1.0 - reduction_progress * 0.8)
 	
@@ -31,17 +57,57 @@ func _process(delta):
 	animate_low_dimensional_data(delta)
 	animate_data_flow(delta)
 	update_reduction_metrics(delta)
+	_update_stats_label()
+
+# ─── Stats Label3D ────────────────────────────────────────────────────────────
+func _create_stats_label() -> void:
+	_stats_label = Label3D.new()
+	_stats_label.name = "StatsOverlay"
+	_stats_label.pixel_size = 0.005
+	_stats_label.font_size = 28
+	_stats_label.position = Vector3(0, 5.0, 0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.modulate = Color(1, 1, 1, 0.9)
+	_stats_label.outline_size = 8
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.6)
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Reduction: %d%%  |  Variance: %.0f%%  |  Error: %.2f" % [
+			int(reduction_progress * 100), variance_explained * 100, reconstruction_error]
+
+# ─── Helpers ──────────────────────────────────────────────────────────────────
+func _recolor_particles(arr: Array, col: Color) -> void:
+	for p in arr:
+		if is_instance_valid(p) and p.material_override:
+			p.material_override.albedo_color = col
+			p.material_override.emission = col * 0.35
+
+func _rebuild_all_particles() -> void:
+	for arr in [high_dim_particles, low_dim_particles, flow_particles]:
+		for p in arr:
+			if is_instance_valid(p): p.queue_free()
+		arr.clear()
+	high_dim_particles = []; low_dim_particles = []; flow_particles = []
+	create_high_dimensional_particles()
+	create_low_dimensional_particles()
+	create_flow_particles()
 
 func create_high_dimensional_particles():
-	# Create high-dimensional data particles
+	# Create high-dimensional data particles (scattered 3D cloud)
 	var high_dim_particles_node = $HighDimensionalData/HighDimParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_high_dim
+		mat.emission_enabled = true
+		mat.emission = color_high_dim * 0.4
+		mat.emission_energy_multiplier = 1.4
+		mat.metallic = 0.35
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in a complex 3D pattern (high-dimensional representation)
 		var x = randf_range(-2, 2)
@@ -53,15 +119,19 @@ func create_high_dimensional_particles():
 		high_dim_particles.append(particle)
 
 func create_low_dimensional_particles():
-	# Create low-dimensional data particles
+	# Create low-dimensional data particles (flattened 2D projection)
 	var low_dim_particles_node = $LowDimensionalData/LowDimParticles
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.1
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_low_dim
+		mat.emission_enabled = true
+		mat.emission = color_low_dim * 0.4
+		mat.emission_energy_multiplier = 1.4
+		mat.metallic = 0.35
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in a simpler 2D pattern (low-dimensional representation)
 		var x = randf_range(-1.5, 1.5)
@@ -72,20 +142,25 @@ func create_low_dimensional_particles():
 		low_dim_particles.append(particle)
 
 func create_flow_particles():
-	# Create data flow particles
+	# Create data flow particles travelling the projection pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
-	for i in range(30):
+	var flow_count := int(max(15, particle_count * 1.2))
+	for i in range(flow_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_flow
+		mat.emission_enabled = true
+		mat.emission = color_flow * 0.45
+		mat.emission_energy_multiplier = 1.8
+		mat.metallic = 0.15
+		mat.roughness = 0.25
+		particle.material_override = mat
 		
 		# Position particles along the reduction flow path
-		var progress = float(i) / 30
-		var x = lerp(-8, 8, progress)
-		var y = sin(progress * PI * 3) * 2
+		var progress = float(i) / float(flow_count)
+		var x = lerp(-8.0, 8.0, progress)
+		var y = sin(progress * PI * 3) * 2.0
 		particle.position = Vector3(x, y, 0)
 		
 		flow_particles_node.add_child(particle)
@@ -244,7 +319,18 @@ func get_reconstruction_error() -> float:
 	return reconstruction_error
 
 func reset_reduction():
+	var had_progress := reduction_progress > 0.1
 	time = 0.0
 	reduction_progress = 0.0
 	variance_explained = 0.0
 	reconstruction_error = 1.0
+	if is_inside_tree() and had_progress:
+		_flash_reset()
+
+## Visual pulse on the algorithm core when resetting
+func _flash_reset() -> void:
+	var core = $ReductionAlgorithm/AlgorithmCore
+	if core:
+		var tw := create_tween()
+		tw.tween_property(core, "scale", Vector3.ONE * 1.5, 0.15)
+		tw.tween_property(core, "scale", Vector3.ONE, 0.3)

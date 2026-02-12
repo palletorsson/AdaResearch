@@ -1,8 +1,19 @@
 extends Node3D
 
-# Principal Component Analysis: Dimensional Reduction & Identity Compression
-# Visualizes how high-dimensional data can be projected onto lower dimensions
-# Explores the politics of dimensionality reduction and information loss
+# =============================================================================
+# PCA — Principal Component Analysis Visualization
+# =============================================================================
+# Visualizes how high-dimensional data can be projected onto lower dimensions.
+# Original data points (blue) are shown alongside their projections (red).
+# Principal component axes are drawn as glowing lines with variance labels.
+# The projection animation smoothly interpolates points to their projections.
+# =============================================================================
+
+# --- Color Palette -----------------------------------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for original data
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for projections
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 
 @export_category("PCA Configuration")
 @export var num_dimensions: int = 4  # Original data dimensions
@@ -70,6 +81,10 @@ var explained_variance_ratio: Array = []
 var projection_animation_active: bool = false
 var animation_progress: float = 0.0
 
+# 3D in-scene labels
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
 func _init():
 	name = "PCA_Visualization"
 
@@ -77,6 +92,7 @@ func _ready():
 	setup_ui()
 	setup_timer()
 	setup_data_container()
+	_build_3d_labels()
 	generate_data()
 	
 	if auto_start:
@@ -117,6 +133,23 @@ func setup_data_container():
 	data_container = Node3D.new()
 	data_container.name = "Data_Container"
 	add_child(data_container)
+
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "Principal Component Analysis"
+	_title_label_3d.font_size = 64
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 6, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 36
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 5, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
 
 func generate_data():
 	"""Generate high-dimensional correlated data"""
@@ -167,7 +200,7 @@ func create_original_data_visualization():
 		data_container.add_child(point)
 
 func create_data_point(position: Vector3, color: Color, size: float) -> MeshInstance3D:
-	"""Create a 3D sphere for a data point"""
+	"""Create a 3D sphere for a data point with emissive material."""
 	var sphere = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
 	mesh.radius = size
@@ -177,7 +210,9 @@ func create_data_point(position: Vector3, color: Color, size: float) -> MeshInst
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
 	material.emission_enabled = true
-	material.emission = color * 0.3
+	material.emission = color * 0.35
+	material.metallic = 0.3
+	material.roughness = 0.45
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	sphere.material_override = material
 	
@@ -205,6 +240,8 @@ func _on_computation_timer_timeout():
 	if not is_computing:
 		return
 	
+	var step_names := ["Centering data...", "Covariance matrix...", "Eigendecomposition...",
+		"Selecting PCs...", "Projecting data...", "Finalizing..."]
 	match computation_step:
 		0:
 			center_and_normalize_data()
@@ -228,6 +265,13 @@ func _on_computation_timer_timeout():
 			computation_timer.stop()
 			is_computing = false
 			computation_complete = true
+	
+	# Update 3D stats
+	if _stats_label_3d:
+		if computation_step <= step_names.size():
+			_stats_label_3d.text = "Step %d/6: %s" % [computation_step, step_names[min(computation_step - 1, step_names.size() - 1)]]
+		else:
+			_stats_label_3d.text = "PCA Complete  |  Dims: %d → %d" % [num_dimensions, target_dimensions]
 	
 	update_ui()
 
@@ -472,6 +516,18 @@ func project_data():
 	
 	print("Data projection complete")
 
+func _update_3d_stats() -> void:
+	"""Update in-scene 3D stats label with current PCA state."""
+	if not _stats_label_3d:
+		return
+	if computation_complete and explained_variance_ratio.size() > 0:
+		var cumulative := 0.0
+		for r in explained_variance_ratio:
+			cumulative += r
+		_stats_label_3d.text = "PCA Complete  |  Explained: %.1f%%  |  Error: %.3f" % [
+			cumulative * 100.0, get_reconstruction_error()
+		]
+
 func create_projected_data_visualization():
 	"""Create visualization of projected data"""
 	if not show_projected_data:
@@ -496,8 +552,14 @@ func create_projected_data_visualization():
 		position.z = -4.0
 		
 		var point = create_data_point(position, projected_data_color, data_point_size * 1.2)
+		# Animate projected points scaling in
+		point.scale = Vector3.ZERO
 		projected_points.append(point)
 		data_container.add_child(point)
+		var tw := create_tween()
+		var delay := float(i) * 0.005  # Staggered appearance
+		tw.tween_interval(delay)
+		tw.tween_property(point, "scale", Vector3.ONE, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 func create_principal_component_visualization():
 	"""Create visualization of principal component vectors"""

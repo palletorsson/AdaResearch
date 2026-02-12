@@ -1,27 +1,57 @@
 extends Node3D
+## Reinforcement Learning Visualization
+## Displays agent-environment interaction loop with policy network,
+## reward system, and data flow particles. Supports runtime parameter
+## tuning via @export variables with setter functions.
 
+# ─── Runtime-tunable parameters ───────────────────────────────────────────────
+@export_range(0.01, 0.5, 0.01) var simulation_speed: float = 0.1:
+	set(v):
+		simulation_speed = v
+@export_range(10, 80, 5) var particle_count: int = 25:
+	set(v):
+		particle_count = v
+		if is_inside_tree():
+			_rebuild_all_particles()
+@export_range(0.3, 3.0, 0.1) var agent_orbit_radius: float = 1.5:
+	set(v):
+		agent_orbit_radius = v
+@export var color_environment: Color = Color(0.2, 0.8, 0.8, 1.0):
+	set(v):
+		color_environment = v
+		_recolor_particles(environment_particles, color_environment)
+@export var color_agent: Color = Color(0.8, 0.2, 0.8, 1.0):
+	set(v):
+		color_agent = v
+		_recolor_particles(agent_particles, color_agent)
+@export var color_flow: Color = Color(1.0, 0.85, 0.2, 1.0):
+	set(v):
+		color_flow = v
+
+# ─── Internal state ───────────────────────────────────────────────────────────
 var time: float = 0.0
 var learning_progress: float = 0.0
 var reward_score: float = 0.0
 var episode_count: float = 0.0
-var particle_count: int = 25
 var flow_particles: Array = []
 var environment_particles: Array = []
 var agent_particles: Array = []
 
+# ─── Stats overlay ────────────────────────────────────────────────────────────
+var _stats_label: Label3D = null
+
 func _ready():
-	# Initialize Reinforcement Learning visualization
-	print("Reinforcement Learning Visualization initialized")
 	create_environment_particles()
 	create_agent_particles()
 	create_flow_particles()
 	setup_learning_metrics()
+	_create_stats_label()
 
 func _process(delta):
 	time += delta
 	
 	# Simulate learning progress
-	learning_progress = min(1.0, time * 0.1)
+	learning_progress = min(1.0, time * simulation_speed)
 	reward_score = learning_progress * 0.9
 	episode_count = learning_progress * 0.8
 	
@@ -31,22 +61,66 @@ func _process(delta):
 	animate_reward_system(delta)
 	animate_data_flow(delta)
 	update_learning_metrics(delta)
+	_update_stats_label()
+
+# ─── Stats Label3D ────────────────────────────────────────────────────────────
+func _create_stats_label() -> void:
+	_stats_label = Label3D.new()
+	_stats_label.name = "StatsOverlay"
+	_stats_label.pixel_size = 0.005
+	_stats_label.font_size = 28
+	_stats_label.position = Vector3(0, 4.5, 0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.modulate = Color(1, 1, 1, 0.9)
+	_stats_label.outline_size = 8
+	_stats_label.outline_modulate = Color(0, 0, 0, 0.6)
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if _stats_label:
+		_stats_label.text = "Learning: %d%%  |  Reward: %.2f  |  Episodes: %.1f" % [
+			int(learning_progress * 100), reward_score, episode_count * 100]
+
+# ─── Helper: recolor existing particles ───────────────────────────────────────
+func _recolor_particles(arr: Array, col: Color) -> void:
+	for p in arr:
+		if is_instance_valid(p) and p.material_override:
+			p.material_override.albedo_color = col
+			p.material_override.emission = col * 0.35
+
+func _rebuild_all_particles() -> void:
+	for p in environment_particles:
+		if is_instance_valid(p): p.queue_free()
+	environment_particles.clear()
+	for p in agent_particles:
+		if is_instance_valid(p): p.queue_free()
+	agent_particles.clear()
+	for p in flow_particles:
+		if is_instance_valid(p): p.queue_free()
+	flow_particles.clear()
+	create_environment_particles()
+	create_agent_particles()
+	create_flow_particles()
 
 func create_environment_particles():
-	# Create environment grid particles
+	# Create environment grid particles representing the state space
 	var environment_grid = $Environment/EnvironmentGrid
 	for i in range(particle_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.08
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.2, 0.8, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.2, 0.8, 0.8, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_environment
+		mat.emission_enabled = true
+		mat.emission = color_environment * 0.35
+		mat.emission_energy_multiplier = 1.2
+		mat.metallic = 0.3
+		mat.roughness = 0.2
+		particle.material_override = mat
 		
 		# Position particles in a grid pattern
-		var grid_size = 5
-		var x = (i % grid_size - grid_size/2) * 0.8
-		var z = (i / grid_size - grid_size/2) * 0.8
+		var grid_size = int(ceil(sqrt(float(particle_count))))
+		var x = (i % grid_size - grid_size / 2) * 0.8
+		var z = (i / grid_size - grid_size / 2) * 0.8
 		var y = randf_range(-0.5, 0.5)
 		particle.position = Vector3(x, y, z)
 		
@@ -54,19 +128,24 @@ func create_environment_particles():
 		environment_particles.append(particle)
 
 func create_agent_particles():
-	# Create agent particles
+	# Create agent particles orbiting the agent core
 	var agent_core = $Agent/AgentCore
-	for i in range(15):
+	var agent_count := int(max(8, particle_count * 0.6))
+	for i in range(agent_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.06
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.2, 0.8, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_agent
+		mat.emission_enabled = true
+		mat.emission = color_agent * 0.4
+		mat.emission_energy_multiplier = 1.5
+		mat.metallic = 0.4
+		mat.roughness = 0.15
+		particle.material_override = mat
 		
-		# Position particles around agent
+		# Position particles around agent in orbital shell
 		var angle = randf() * PI * 2
-		var radius = randf_range(0.8, 1.5)
+		var radius = randf_range(0.8, agent_orbit_radius)
 		var x = cos(angle) * radius
 		var y = randf_range(-0.8, 0.8)
 		var z = sin(angle) * radius
@@ -76,20 +155,25 @@ func create_agent_particles():
 		agent_particles.append(particle)
 
 func create_flow_particles():
-	# Create data flow particles
+	# Create data flow particles that travel the agent→environment loop
 	var flow_particles_node = $DataFlow/FlowParticles
-	for i in range(30):
+	var flow_count := int(max(15, particle_count * 1.2))
+	for i in range(flow_count):
 		var particle = CSGSphere3D.new()
 		particle.radius = 0.05
-		particle.material_override = StandardMaterial3D.new()
-		particle.material_override.albedo_color = Color(0.8, 0.8, 0.2, 1)
-		particle.material_override.emission_enabled = true
-		particle.material_override.emission = Color(0.8, 0.8, 0.2, 1) * 0.3
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = color_flow
+		mat.emission_enabled = true
+		mat.emission = color_flow * 0.4
+		mat.emission_energy_multiplier = 1.8
+		mat.metallic = 0.15
+		mat.roughness = 0.25
+		particle.material_override = mat
 		
 		# Position particles along the learning flow path
-		var progress = float(i) / 30
-		var x = lerp(-8, 8, progress)
-		var y = sin(progress * PI * 4) * 2
+		var progress = float(i) / float(flow_count)
+		var x = lerp(-8.0, 8.0, progress)
+		var y = sin(progress * PI * 4) * 2.0
 		particle.position = Vector3(x, y, 0)
 		
 		flow_particles_node.add_child(particle)
@@ -295,7 +379,19 @@ func get_episode_count() -> float:
 	return episode_count
 
 func reset_learning():
+	# Animate a brief flash on reset for visual feedback
+	var prev_progress := learning_progress
 	time = 0.0
 	learning_progress = 0.0
 	reward_score = 0.0
 	episode_count = 0.0
+	if is_inside_tree() and prev_progress > 0.1:
+		_flash_reset_feedback()
+
+## Tween a quick scale-pulse on the agent core to signal reset
+func _flash_reset_feedback() -> void:
+	var agent_core = $Agent/AgentCore
+	if agent_core:
+		var tw := create_tween()
+		tw.tween_property(agent_core, "scale", Vector3.ONE * 1.6, 0.15)
+		tw.tween_property(agent_core, "scale", Vector3.ONE, 0.3)

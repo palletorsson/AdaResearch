@@ -1,7 +1,19 @@
 extends Node3D
 
-# Enhanced K-Means Clustering Algorithm Visualization
-# Educational tool with advanced features and interactive controls
+# =============================================================================
+# K-Means Clustering Algorithm Visualization
+# =============================================================================
+# Educational tool with advanced features and interactive controls.
+# Data points (spheres) are assigned to the nearest centroid (discs).
+# Centroids move toward the mean of their cluster each iteration.
+# Convergence is reached when centroid movement drops below threshold.
+# =============================================================================
+
+# --- Color Palette (project-wide conventions) --------------------------------
+const COLOR_DATA := Color(0.3, 0.5, 0.9)       # Blues for unassigned data
+const COLOR_POSITIVE := Color(0.3, 0.85, 0.4)   # Greens for positive feedback
+const COLOR_NEGATIVE := Color(0.9, 0.3, 0.3)    # Reds for negative
+const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for convergence
 
 @export_category("Algorithm Parameters")
 @export var data_point_count: int = 100:
@@ -109,6 +121,10 @@ var cluster_colors: Array = [
 	Color(0.7, 0.3, 1.0)   # Purple
 ]
 
+# 3D in-scene labels for VR/3D viewing
+var _title_label_3d: Label3D
+var _stats_label_3d: Label3D
+
 # Data structures
 class DataPoint:
 	var position: Vector3
@@ -136,6 +152,7 @@ class Centroid:
 func _ready():
 	setup_environment()
 	setup_ui()
+	_build_3d_labels()
 	generate_data()
 	initialize_centroids()
 	create_visuals()
@@ -143,6 +160,23 @@ func _ready():
 	
 	if animate_clustering and not step_by_step_mode:
 		start_clustering()
+
+func _build_3d_labels() -> void:
+	"""Create in-scene 3D labels for VR / immersive viewing."""
+	_title_label_3d = Label3D.new()
+	_title_label_3d.text = "K-Means Clustering"
+	_title_label_3d.font_size = 72
+	_title_label_3d.modulate = COLOR_SPECIAL
+	_title_label_3d.position = Vector3(0, 12, 0)
+	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_title_label_3d)
+
+	_stats_label_3d = Label3D.new()
+	_stats_label_3d.font_size = 40
+	_stats_label_3d.modulate = Color.WHITE
+	_stats_label_3d.position = Vector3(0, 10.5, 0)
+	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_stats_label_3d)
 
 func _process(delta):
 	if animate_clustering and not converged and not is_paused and not step_by_step_mode:
@@ -472,9 +506,11 @@ func create_visuals():
 		mesh_instance.mesh = sphere
 		
 		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.8, 0.8, 0.8)
-		material.metallic = 0.3
-		material.roughness = 0.7
+		material.albedo_color = COLOR_DATA
+		material.metallic = 0.35
+		material.roughness = 0.55
+		material.emission_enabled = true
+		material.emission = COLOR_DATA * 0.1
 		mesh_instance.material_override = material
 		mesh_instance.position = point.position
 		
@@ -573,10 +609,38 @@ func perform_clustering_step():
 		converged = true
 		if pause_on_convergence:
 			is_paused = true
+		_play_convergence_celebration()
 		print("Converged after ", iteration, " iterations")
 	
 	# Update visuals
 	update_visuals()
+	_update_3d_stats()
+
+func _play_convergence_celebration() -> void:
+	"""Scale-pulse all centroids and flash them gold on convergence."""
+	for centroid in centroids:
+		if centroid.mesh_instance:
+			var tw := create_tween()
+			tw.tween_property(centroid.mesh_instance, "scale", Vector3.ONE * 2.0, 0.25).set_ease(Tween.EASE_OUT)
+			tw.tween_property(centroid.mesh_instance, "scale", Vector3.ONE, 0.5).set_ease(Tween.EASE_IN_OUT)
+			var mat = centroid.mesh_instance.material_override as StandardMaterial3D
+			if mat:
+				var orig_emission = mat.emission
+				var tw2 := create_tween()
+				tw2.tween_property(mat, "emission", COLOR_SPECIAL * 1.5, 0.15)
+				tw2.tween_property(mat, "emission", orig_emission, 0.8)
+
+func _update_3d_stats() -> void:
+	"""Update the in-scene 3D stats label."""
+	if _stats_label_3d:
+		var status_str := "Clustering..."
+		if converged:
+			status_str = "Converged ✓"
+		elif is_paused:
+			status_str = "Paused"
+		_stats_label_3d.text = "Iter: %d  |  K: %d  |  Dist: %.1f  |  %s" % [
+			iteration, cluster_count, total_distance, status_str
+		]
 
 func update_visuals():
 	# Update point colors and highlight changes

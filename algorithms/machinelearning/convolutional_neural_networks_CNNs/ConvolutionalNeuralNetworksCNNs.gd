@@ -1,10 +1,21 @@
-﻿extends Node3D
+﻿# ============================================================================
+# Convolutional Neural Networks (CNN) Visualization
+# Interactive 3D visualization of CNN architecture: input grid, sliding kernel,
+# convolution feature maps, max-pooling, dense layer, and data ribbon.
+# Uses MultiMesh for efficient rendering of large grids.
+# ============================================================================
+extends Node3D
 class_name ConvolutionalNeuralNetworkShowcase
 
+# --- Network Architecture Controls ---
+@export_category("Network Architecture")
 @export_range(6, 16, 1) var grid_size: int = 8
 @export_range(3, 5, 1) var kernel_size: int = 3
 @export_range(2, 4, 1) var pooling_window: int = 2
 @export_range(1, 4, 1) var feature_map_count: int = 3
+
+# --- Animation & Visual Controls ---
+@export_category("Animation")
 @export var animation_speed: float = 0.65
 @export var voxel_spacing: float = 0.42
 @export var height_scale: float = 0.9
@@ -48,6 +59,7 @@ class RibbonParticle:
 	var offset: float
 
 var _ribbon_particles: Array[RibbonParticle] = []
+var _stats_label: Label3D
 
 func _ready() -> void:
 	_conv_output_size = grid_size - kernel_size + 1
@@ -58,6 +70,7 @@ func _ready() -> void:
 	_build_dense_stage()
 	_build_ribbon()
 	_build_annotations()
+	_build_stats_label()
 
 func _process(delta: float) -> void:
 	_time += delta * animation_speed
@@ -67,6 +80,11 @@ func _process(delta: float) -> void:
 	_update_pool_stage(delta)
 	_update_dense_stage(delta)
 	_update_ribbon(delta)
+	_update_stats_label()
+
+# ============================================================================
+# Build Stage — Construct all visual elements
+# ============================================================================
 
 func _build_input_grid() -> void:
 	var count := grid_size * grid_size
@@ -280,6 +298,10 @@ func _build_annotations() -> void:
 		label.position = entry["position"]
 		_annotation_root.add_child(label, true)
 
+# ============================================================================
+# Update Stage — Per-frame animation and data propagation
+# ============================================================================
+
 func _update_kernel_path() -> void:
 	for idx in _highlighted:
 		_input_multimesh.set_instance_transform(idx, _input_transforms[idx])
@@ -415,6 +437,44 @@ func _update_ribbon(_delta: float) -> void:
 		particle.mesh.look_at(ahead, Vector3.UP)
 		var flicker := 0.9 + 0.2 * sin((t + _time) * TAU)
 		particle.mesh.scale = Vector3.ONE * (0.1 * flicker)
+
+# ============================================================================
+# Stats Label — Live HUD showing kernel position and activation stats
+# ============================================================================
+
+func _build_stats_label() -> void:
+	_stats_label = Label3D.new()
+	_stats_label.text = "CNN Pipeline Active"
+	_stats_label.font_size = 28
+	_stats_label.outline_size = 4
+	_stats_label.modulate = Color(0.95, 0.95, 1.0)
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_stats_label.position = Vector3(0, 3.0, -2.5)
+	add_child(_stats_label)
+
+func _update_stats_label() -> void:
+	if not _stats_label:
+		return
+	# Show kernel position and average pool/dense activation
+	var avg_pool := 0.0
+	for col in _pool_columns:
+		avg_pool += col.scale.y
+	if _pool_columns.size() > 0:
+		avg_pool /= _pool_columns.size()
+	
+	var avg_dense := 0.0
+	for orb in _dense_orbs:
+		avg_dense += orb.scale.x
+	if _dense_orbs.size() > 0:
+		avg_dense /= _dense_orbs.size()
+	
+	_stats_label.text = "Grid: %dx%d | Kernel: %dx%d | Pool: %.2f | Dense: %.2f" % [
+		grid_size, grid_size, kernel_size, kernel_size, avg_pool, avg_dense
+	]
+
+# ============================================================================
+# Utility
+# ============================================================================
 
 func _clear_children(node: Node) -> void:
 	for child in node.get_children():

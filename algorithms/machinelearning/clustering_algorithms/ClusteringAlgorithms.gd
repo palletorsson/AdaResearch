@@ -1,4 +1,8 @@
 extends Node3D
+## Clustering Algorithms Sandbox
+## Interactive visualization of K-Means, Agglomerative, and DBSCAN clustering.
+## Points are coloured by cluster assignment with animated transitions,
+## centroid markers, and a silhouette/inertia stats overlay.
 
 enum AlgorithmMode { K_MEANS, AGGLOMERATIVE, DBSCAN }
 
@@ -110,8 +114,9 @@ func _build_point_meshes() -> void:
 		material.albedo_color = NOISE_COLOR
 		material.emission_enabled = true
 		material.emission = NOISE_COLOR * 0.25
-		material.metallic = 0.05
-		material.roughness = 0.3
+		material.emission_energy_multiplier = 1.3
+		material.metallic = 0.25
+		material.roughness = 0.2
 		mesh_instance.material_override = material
 		data_root.add_child(mesh_instance)
 		sample["mesh"] = mesh_instance
@@ -401,13 +406,22 @@ func _apply_cluster_visuals() -> void:
 			continue
 		var label := int(sample["label"])
 		var colour: Color = NOISE_COLOR if label < 0 else PALETTE[label % palette_size]
-		material.albedo_color = colour
-		material.emission = colour * (0.35 if label >= 0 else 0.2)
-		var height: float = 0.25 if label >= 0 else 0.0
-		if animate_clusters:
-			mesh.position.y = lerp(mesh.position.y, height, 0.3)
+		var target_emission := colour * (0.4 if label >= 0 else 0.2)
+		var target_height: float = 0.25 if label >= 0 else 0.0
+
+		if animate_clusters and is_inside_tree():
+			# Smooth tween transitions for colour, emission, height and scale pulse
+			material.albedo_color = colour
+			var tw := create_tween().set_parallel(true)
+			tw.tween_property(material, "emission", target_emission, 0.4)
+			tw.tween_property(mesh, "position:y", target_height, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+			# Quick scale pulse on reassigned points
+			tw.tween_property(mesh, "scale", Vector3.ONE * 1.3, 0.15).set_ease(Tween.EASE_OUT)
+			tw.chain().tween_property(mesh, "scale", Vector3.ONE, 0.2).set_ease(Tween.EASE_IN)
 		else:
-			mesh.position.y = height
+			material.albedo_color = colour
+			material.emission = target_emission
+			mesh.position.y = target_height
 
 func _update_centroid_visuals() -> void:
 	for child in centroids_root.get_children():
@@ -424,11 +438,17 @@ func _update_centroid_visuals() -> void:
 		var material := StandardMaterial3D.new()
 		material.albedo_color = PALETTE[idx % max(1, PALETTE.size())].lightened(0.25)
 		material.emission_enabled = true
-		material.emission = material.albedo_color * 0.6
-		material.metallic = 0.1
-		material.roughness = 0.25
+		material.emission = material.albedo_color * 0.7
+		material.emission_energy_multiplier = 2.0
+		material.metallic = 0.4
+		material.roughness = 0.15
 		mesh_instance.material_override = material
 		centroids_root.add_child(mesh_instance)
+		# Animate centroid entrance with scale-up
+		if is_inside_tree():
+			mesh_instance.scale = Vector3.ZERO
+			var tw := create_tween()
+			tw.tween_property(mesh_instance, "scale", Vector3.ONE, 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 func _update_threshold_visual() -> void:
 	if threshold_visual == null or not is_instance_valid(threshold_visual):

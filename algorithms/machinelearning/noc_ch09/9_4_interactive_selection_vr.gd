@@ -1,5 +1,10 @@
 extends Node3D
 
+## Interactive Selection — flowers evolve based on proximity-driven selection.
+## A virtual "selector" orbits and flowers near it gain fitness. Each generation,
+## high-fitness flowers breed to produce the next generation. Demonstrates
+## aesthetic selection without explicit fitness functions.
+
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 
 const MAX_FLOWERS := 8
@@ -258,8 +263,12 @@ class FlowerEntity:
 		center.material_override = center_mat
 
 	func set_hover(active: bool) -> void:
-		var scale = active if 1.1 else 1.0
-		root.scale = Vector3(scale, scale, scale)
+		var s = 1.15 if active else 1.0
+		root.scale = Vector3(s, s, s)
+		# Boost emission when hovered
+		if center and center.material_override is StandardMaterial3D:
+			var mat := center.material_override as StandardMaterial3D
+			mat.emission = mat.albedo_color * (0.6 if active else 0.3)
 
 	func queue_free() -> void:
 		if is_instance_valid(root):

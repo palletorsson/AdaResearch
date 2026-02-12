@@ -1,17 +1,23 @@
 extends Node3D
 
-# Evolving Flowers using Genetic Algorithms
-# Based on Nature of Code principles
+## Evolving Flowers — a genetic algorithm that breeds flowers via L-System branching,
+## petal geometry, and colour genes. Each generation is evaluated for aesthetic fitness
+## (symmetry, colour vibrancy, branching complexity) and the best survive to breed.
 
 const POPULATION_SIZE = 16
-const GENERATION_TIME = 8.0
-const MUTATION_RATE = 0.15
+@export_range(3.0, 30.0) var generation_time: float = 8.0
+@export_range(0.01, 0.5) var mutation_rate_export: float = 0.15:
+	set(v):
+		mutation_rate_export = v
+const MUTATION_RATE = 0.15  # Still used by FlowerGenome.mutate()
 const ELITE_COUNT = 2
 
 var generation := 0
 var timer := 0.0
 var current_population := []
 var fitness_scores := []
+var _info_label: Label3D  # Floating generation display
+var _best_fitness_ever: float = 0.0
 
 class FlowerGenome:
 	var petal_count: int = 5
@@ -181,13 +187,16 @@ func setup_environment():
 	camera.look_at_from_position(camera.position, Vector3(0, 1, 0), Vector3.UP)
 	add_child(camera)
 	
-	# Info label
-	var label := Label3D.new()
-	label.text = "Evolving Flowers - Generation 0"
-	label.font_size = 32
-	label.position = Vector3(0, 5, -5)
-	label.modulate = Color(1, 1, 1, 0.9)
-	add_child(label)
+	# Floating stats label
+	_info_label = Label3D.new()
+	_info_label.text = "Evolving Flowers — Generation 0"
+	_info_label.font_size = 36
+	_info_label.position = Vector3(0, 5, -5)
+	_info_label.modulate = Color(1.0, 0.85, 0.2)
+	_info_label.outline_modulate = Color(0, 0, 0, 0.5)
+	_info_label.outline_size = 4
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_info_label)
 
 func initialize_population():
 	for i in range(POPULATION_SIZE):
@@ -213,6 +222,8 @@ func spawn_flower(genome: FlowerGenome, pos: Vector3) -> Flower:
 	stem.mesh = stem_mesh
 	var stem_mat := StandardMaterial3D.new()
 	stem_mat.albedo_color = Color(0.2, 0.5, 0.1)
+	stem_mat.roughness = 0.9
+	stem_mat.metallic = 0.0
 	stem.material_override = stem_mat
 	stem.position.y = genome.stem_height / 2
 	flower.root_node.add_child(stem)
@@ -278,6 +289,11 @@ func spawn_flower(genome: FlowerGenome, pos: Vector3) -> Flower:
 	lsystem_container.rotation_degrees.x = 90  # Point branches outward
 	flower.flower_head.add_child(lsystem_container)
 	create_lsystem_branches(genome, lsystem_container, petal_color)
+
+	# Growth animation — flowers spring up from the ground
+	flower.root_node.scale = Vector3(0.01, 0.01, 0.01)
+	var grow_tween = create_tween()
+	grow_tween.tween_property(flower.root_node, "scale", Vector3.ONE, 0.8).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 
 	return flower
 
@@ -443,7 +459,7 @@ func _process(delta):
 			var bob = sin(flower.age * 2.0) * 0.05
 			flower.flower_head.position.y = flower.genome.stem_height + bob
 	
-	if timer >= GENERATION_TIME:
+	if timer >= generation_time:
 		evolve_population()
 		timer = 0.0
 
@@ -546,7 +562,13 @@ func select_parent(genomes_with_fitness: Array) -> FlowerGenome:
 	return best
 
 func update_generation_label():
-	for child in get_children():
-		if child is Label3D:
-			child.text = "Evolving Flowers - Generation " + str(generation)
-			break
+	if _info_label:
+		var best = fitness_scores.max() if fitness_scores.size() > 0 else 0.0
+		var avg = (fitness_scores.reduce(func(a, b): return a + b, 0.0) / fitness_scores.size()) if fitness_scores.size() > 0 else 0.0
+		_best_fitness_ever = max(_best_fitness_ever, best)
+		_info_label.text = "Generation %d | Best %.1f | Avg %.1f | Record %.1f" % [generation, best, avg, _best_fitness_ever]
+		# Pulse the label on new generation
+		var pulse_tw = create_tween()
+		pulse_tw.tween_property(_info_label, "modulate:a", 1.0, 0.0)
+		pulse_tw.tween_property(_info_label, "modulate:a", 0.5, 0.15)
+		pulse_tw.tween_property(_info_label, "modulate:a", 1.0, 0.15)

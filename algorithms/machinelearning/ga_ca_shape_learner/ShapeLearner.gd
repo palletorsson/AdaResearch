@@ -1,9 +1,16 @@
 extends Node2D
 
-@export var grid_size = 40
-@export var population_size = 100
-@export var mutation_rate = 0.01
-@export var generations = 100
+## GA + Cellular Automaton Shape Learner (2D).
+## Evolves CA rules via a genetic algorithm to grow a target shape from a seed cell.
+## Each individual is a set of 10 CA rules that control cell birth/death.
+
+# ──────────────────────────────────────────────
+# Tunable parameters
+# ──────────────────────────────────────────────
+@export_range(10, 80) var grid_size = 40
+@export_range(10, 500) var population_size = 100
+@export_range(0.001, 0.1) var mutation_rate = 0.01
+@export_range(10, 500) var generations = 100
 
 var ca_rules = []
 var population = []
@@ -11,6 +18,7 @@ var fitness = []
 var target_shape = []
 
 var current_generation = 0
+var _best_fitness_ever: float = 0.0
 
 @onready var multimesh_instance: MultiMeshInstance2D = $MultiMeshInstance2D
 @onready var timer: Timer = $Timer
@@ -28,11 +36,13 @@ func run_ga_loop():
 	while current_generation < generations:
 		await evaluate_population_async()
 		var best_fitness = fitness.max()
+		_best_fitness_ever = max(_best_fitness_ever, best_fitness)
 		var best_individual_index = fitness.find(best_fitness)
 		var best_rules = population[best_individual_index]
-		print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
+		print("Gen %d | Best %.4f | Record %.4f" % [current_generation, best_fitness, _best_fitness_ever])
 		await display_ca_sequence(run_ca(best_rules))
 		if best_fitness >= 1.0:
+			print("🎉 Perfect solution found at generation %d!" % current_generation)
 			break
 		select_new_population()
 		current_generation += 1
@@ -167,6 +177,7 @@ func update_multimesh(grid):
 	square_mesh.size = Vector2(10, 10)
 	var multimesh = MultiMesh.new()
 	multimesh.mesh = square_mesh
+	multimesh.use_colors = true  # Enable per-instance colour
 
 	var instance_count = 0
 	for x in range(grid_size):
@@ -181,6 +192,10 @@ func update_multimesh(grid):
 			if grid[x][y] == 1:
 				var transform = Transform2D().translated(Vector2(x * 10, y * 10))
 				multimesh.set_instance_transform_2d(instance_index, transform)
+				# Colour-code: green if matching target, blue otherwise
+				var matches_target = (target_shape[x][y] == 1)
+				var cell_color = Color(0.3, 0.85, 0.4) if matches_target else Color(0.3, 0.5, 0.9)
+				multimesh.set_instance_color(instance_index, cell_color)
 				instance_index += 1
 
 	multimesh_instance.multimesh = multimesh

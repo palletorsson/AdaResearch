@@ -1,17 +1,18 @@
+# ============================================================================
 # Neural Network Visualization: Learning & Adaptation in 3D Space
-# This algorithm visualizes how neural networks learn through backpropagation,
-# showing weight changes, activation flows, and emergent pattern recognition.
+# Interactive 3D visualization of a feedforward neural network training via
+# backpropagation. Shows weight changes, activation flows, and error descent.
 #
-# Enhanced by Gemini:
-# - Corrected 3D orientation for weight connections.
-# - Added interactive orbit camera (Right-click + drag to orbit, Wheel to zoom).
-# - Implemented a real-time 3D error graph.
-# - Added selectable activation functions (Sigmoid, ReLU, Tanh).
-# - Added a WorldEnvironment with a glow effect for better visuals.
-# - Implemented true mini-batch gradient descent.
-# - Fixed AmbientLight error for Godot 4 compatibility.
-
+# Features:
+# - Interactive orbit camera (Right-click + drag, scroll to zoom)
+# - Real-time 3D error graph
+# - Selectable activation functions (Sigmoid, ReLU, Tanh)
+# - Mini-batch gradient descent with Xavier/Glorot initialization
+# - WorldEnvironment with glow for visual polish
+# - Color-coded neurons: green=input, blue=hidden, red=output
+# ============================================================================
 extends Node3D
+class_name NeuralNetworkVisualizationShowcase
 
 # --- Configuration ---
 @export_category("Network Configuration")
@@ -288,13 +289,19 @@ func create_neuron(layer_idx: int, neuron_idx: int, layer_size: int) -> MeshInst
 	neuron.position = Vector3(x, y, 0)
 	
 	var material = StandardMaterial3D.new()
-	if layer_idx == 0: material.albedo_color = Color.GREEN
-	elif layer_idx == neuron_meshes.size() - 1: material.albedo_color = Color.RED
-	else: material.albedo_color = Color.BLUE
+	# Color palette: green=input, blue=hidden, red=output
+	if layer_idx == 0:
+		material.albedo_color = Color(0.3, 0.85, 0.4, 1.0) # Green for input
+	elif layer_idx == neuron_meshes.size() - 1:
+		material.albedo_color = Color(0.9, 0.3, 0.3, 1.0) # Red for output
+	else:
+		material.albedo_color = Color(0.3, 0.5, 0.9, 1.0) # Blue for hidden
 	
 	material.emission_enabled = true
 	material.emission = material.albedo_color
-	material.emission_energy = 0.5
+	material.emission_energy_multiplier = 1.2
+	material.metallic = 0.4
+	material.roughness = 0.35
 	neuron.material_override = material
 	
 	return neuron
@@ -565,16 +572,18 @@ func deep_copy(data):
 
 func update_visualization():
 	"""Update the 3D visualization based on current network state."""
-	# Update neuron colors/size based on activation levels
+	# Update neuron colors/size based on activation levels with tween animation
 	if show_activations:
 		for l in range(neuron_meshes.size()):
 			for n in range(neuron_meshes[l].size()):
 				var neuron = neuron_meshes[l][n]
 				var activation = activations[l][n]
 				var material = neuron.material_override as StandardMaterial3D
-				material.emission_energy = activation * 2.0
-				var scale = 1.0 + activation * 0.5
-				neuron.scale = Vector3(scale, scale, scale)
+				material.emission_energy_multiplier = 0.5 + activation * 2.0
+				var target_scale = 1.0 + activation * 0.5
+				# Smooth scale transition instead of instant snap
+				var tween = create_tween()
+				tween.tween_property(neuron, "scale", Vector3.ONE * target_scale, 0.15).set_trans(Tween.TRANS_SINE)
 	
 	# Update weight line colors/thickness
 	if show_weights:
