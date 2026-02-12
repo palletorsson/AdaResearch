@@ -3,6 +3,8 @@ extends Control
 ## Manages UI, file operations, and coordination between panels
 
 @onready var subset_selector: OptionButton = %SubsetSelector
+@onready var preset_selector: OptionButton = %PresetSelector
+@onready var apply_preset_button: Button = %ApplyPresetButton
 @onready var element_list: ItemList = %ElementList
 @onready var grid_canvas: GridCanvas = %GridCanvas
 @onready var properties_container: VBoxContainer = %PropertiesContainer
@@ -38,12 +40,16 @@ func _ready() -> void:
 
 func _setup_ui() -> void:
 	# Will be populated when subsets load
-	pass
+	preset_selector.clear()
+	preset_selector.disabled = true
+	apply_preset_button.disabled = true
 
 func _apply_modern_theme() -> void:
 	"""Apply modern dark theme styling"""
 	# Style the subset dropdown
 	_style_option_button(subset_selector)
+	_style_option_button(preset_selector)
+	_style_button(apply_preset_button)
 	
 	# Style element list
 	_style_item_list(element_list)
@@ -107,8 +113,41 @@ func _style_item_list(list: ItemList) -> void:
 	hovered.set_corner_radius_all(4)
 	list.add_theme_stylebox_override("hovered", hovered)
 
+func _style_button(btn: Button) -> void:
+	if not btn:
+		return
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.22, 0.3, 0.42)
+	style.set_corner_radius_all(6)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	style.border_color = Color(0.35, 0.45, 0.6)
+	style.set_border_width_all(1)
+	btn.add_theme_stylebox_override("normal", style)
+	
+	var hover = style.duplicate()
+	hover.bg_color = Color(0.26, 0.36, 0.5)
+	btn.add_theme_stylebox_override("hover", hover)
+	
+	var pressed = style.duplicate()
+	pressed.bg_color = Color(0.19, 0.26, 0.36)
+	btn.add_theme_stylebox_override("pressed", pressed)
+	
+	var disabled = style.duplicate()
+	disabled.bg_color = Color(0.17, 0.19, 0.22)
+	disabled.border_color = Color(0.25, 0.27, 0.3)
+	btn.add_theme_stylebox_override("disabled", disabled)
+	
+	btn.add_theme_font_size_override("font_size", 12)
+	btn.add_theme_color_override("font_color", Color(0.96, 0.98, 1.0))
+	btn.add_theme_color_override("font_disabled_color", Color(0.55, 0.58, 0.62))
+
 func _connect_signals() -> void:
 	subset_selector.item_selected.connect(_on_subset_selected)
+	apply_preset_button.pressed.connect(_on_apply_preset_pressed)
 	element_list.item_selected.connect(_on_element_selected)
 	grid_canvas.cell_hovered.connect(_on_cell_hovered)
 	grid_canvas.element_placed.connect(_on_element_placed)
@@ -140,6 +179,7 @@ func _on_subset_selected(index: int) -> void:
 	var subset_id = subset_selector.get_item_metadata(index)
 	subset_loader.set_current_subset(subset_id)
 	_populate_element_list()
+	_populate_preset_list()
 	_update_preview_grid()
 	_reset_camera_for_plane()
 	status_label.text = "Subset: " + subset_loader.current_subset.get("name", "Unknown")
@@ -176,6 +216,99 @@ func _populate_element_list() -> void:
 				var name = element.get("name", element.get("id", "?"))
 				var idx = element_list.add_item(icon + " " + name)
 				element_list.set_item_metadata(idx, element)
+
+func _populate_preset_list() -> void:
+	preset_selector.clear()
+	var presets = subset_loader.get_presets()
+	
+	if presets.is_empty():
+		preset_selector.add_item("No presets")
+		preset_selector.set_item_disabled(0, true)
+		preset_selector.disabled = true
+		apply_preset_button.disabled = true
+		return
+	
+	preset_selector.disabled = false
+	apply_preset_button.disabled = false
+	
+	for preset in presets:
+		var preset_name = preset.get("name", preset.get("id", "Preset"))
+		preset_selector.add_item(preset_name)
+		preset_selector.set_item_metadata(preset_selector.item_count - 1, preset)
+	
+	preset_selector.select(0)
+
+func _on_apply_preset_pressed() -> void:
+	if preset_selector.disabled or preset_selector.item_count == 0:
+		return
+	
+	var selected_index = preset_selector.selected
+	if selected_index < 0:
+		selected_index = 0
+	
+	var selected_preset = preset_selector.get_item_metadata(selected_index)
+	if not (selected_preset is Dictionary):
+		return
+	
+	_apply_preset(selected_preset)
+
+func _apply_preset(preset: Dictionary) -> void:
+	var preset_name = preset.get("name", preset.get("id", "Preset"))
+	var preset_placements = preset.get("placements", [])
+	var cleaned_placements: Array = []
+	var skipped_count := 0
+	
+	for i in range(preset_placements.size()):
+		var entry = preset_placements[i]
+		if not (entry is Dictionary):
+			skipped_count += 1
+			continue
+		
+		var element_id = str(entry.get("element", ""))
+		if element_id.is_empty() or subset_loader.get_element(element_id).is_empty():
+			skipped_count += 1
+			continue
+		
+		var pos = entry.get("position", [0, 0])
+		if not (pos is Array) or pos.size() < 2:
+			skipped_count += 1
+			continue
+		
+		var rotation = int(entry.get("rotation", 0)) % 360
+		if rotation < 0:
+			rotation += 360
+		# Grid editor rotates in 90-degree steps; normalize preset values.
+		rotation = int(round(float(rotation) / 90.0) * 90.0) % 360
+		
+		cleaned_placements.append({
+			"id": "preset_%d" % (i + 1),
+			"element": element_id,
+			"position": [int(pos[0]), int(pos[1])],
+			"rotation": rotation,
+			"params": entry.get("params", {})
+		})
+	
+	var current_grid = grid_canvas.grid_dimensions
+	var preset_grid = preset.get("grid_size", [current_grid.x, current_grid.y])
+	var grid_width = current_grid.x
+	var grid_height = current_grid.y
+	if preset_grid is Array and preset_grid.size() >= 2:
+		grid_width = max(1, int(preset_grid[0]))
+		grid_height = max(1, int(preset_grid[1]))
+	
+	grid_canvas.load_layout_data({
+		"grid_size": [grid_width, grid_height],
+		"placements": cleaned_placements
+	})
+	
+	current_layout_path = ""
+	is_dirty = true
+	_clear_properties()
+	_update_preview_grid()
+	_reset_camera_for_plane()
+	_update_3d_preview()
+	
+	status_label.text = "Preset applied: %s (%d items, %d skipped)" % [preset_name, cleaned_placements.size(), skipped_count]
 
 func _on_element_selected(index: int) -> void:
 	var element = element_list.get_item_metadata(index)
@@ -252,6 +385,8 @@ func new_layout() -> void:
 	grid_canvas.clear_placements()
 	current_layout_path = ""
 	is_dirty = false
+	_clear_properties()
+	_update_3d_preview()
 	status_label.text = "New layout"
 
 func save_layout(path: String = "") -> void:
@@ -303,9 +438,14 @@ func load_layout(path: String) -> void:
 				subset_selector.select(i)
 				break
 		_populate_element_list()
+		_populate_preset_list()
+		_update_preview_grid()
+		_reset_camera_for_plane()
 	
 	# Load layout
 	grid_canvas.load_layout_data(data)
+	_update_preview_grid()
+	_update_3d_preview()
 	
 	current_layout_path = path
 	is_dirty = false

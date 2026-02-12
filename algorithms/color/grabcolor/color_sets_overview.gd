@@ -120,10 +120,23 @@ func _create_color_sticker(color: Color) -> Node3D:
 		material.emission_energy_multiplier = 0.5
 		mesh_instance.material_override = material
 	
-	# Remove text label from palette overview
+	# Show compact color label on each sticker
 	var label = paper.get_node_or_null("Label")
-	if label:
-		label.visible = false
+	if label and label is Label3D:
+		var label3d := label as Label3D
+		var hex_value = _color_to_hex(color)
+		var web_name = _get_closest_web_color_name(color)
+		label3d.visible = true
+		label3d.text = "%s\n%s" % [hex_value, web_name]
+		
+		# Keep labels readable on both light and dark stickers.
+		var luminance = color.r * 0.299 + color.g * 0.587 + color.b * 0.114
+		if luminance > 0.5:
+			label3d.modulate = Color.BLACK
+			label3d.outline_modulate = Color.WHITE
+		else:
+			label3d.modulate = Color.WHITE
+			label3d.outline_modulate = Color.BLACK
 	
 	return paper
 

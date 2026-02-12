@@ -8,7 +8,6 @@ class_name DiscoControlPanel
 # Interactable scenes from rack audio system
 const PUSH_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
-const DIAL_SCENE = preload("res://commons/interactables/dial_smooth.tscn")
 
 ## Configuration
 @export var disco_floor_path: NodePath
@@ -75,7 +74,7 @@ func _create_panel() -> void:
 	
 	# Title
 	var title = Label3D.new()
-	title.text = "🕺 DISCO CONTROL"
+	title.text = "DISCO CONTROL"
 	title.font_size = 42
 	title.position = Vector3(0, 0.52, 0.02)
 	title.modulate = Color.WHITE
@@ -92,16 +91,16 @@ func _create_panel() -> void:
 	
 	# Status label
 	status_label = Label3D.new()
-	status_label.text = "▶ Playing"
+	status_label.text = "Playing"
 	status_label.font_size = 22
 	status_label.position = Vector3(0, 0.36, 0.02)
 	status_label.modulate = Color.LIME
 	add_child(status_label)
 	
 	# Create control buttons (using rack interactables)
-	_create_rack_button("⏮", Vector3(-0.28, 0.24, 0.02), "prev", Color.ORANGE)
-	_create_rack_button("⏯", Vector3(0, 0.24, 0.02), "toggle", Color.LIME)
-	_create_rack_button("⏭", Vector3(0.28, 0.24, 0.02), "next", Color.ORANGE)
+	_create_rack_button("PREV", Vector3(-0.28, 0.24, 0.02), "prev", Color.ORANGE)
+	_create_rack_button("PLAY", Vector3(0, 0.24, 0.02), "toggle", Color.LIME)
+	_create_rack_button("NEXT", Vector3(0.28, 0.24, 0.02), "next", Color.ORANGE)
 	
 	# Speed slider
 	_create_speed_slider(Vector3(0.35, 0.42, 0.02))
@@ -128,15 +127,12 @@ func _create_rack_button(icon: String, pos: Vector3, action: String, color: Colo
 	button.name = "Control_" + action
 	button.position = pos
 	button.scale = Vector3(0.8, 0.8, 0.8)
-	
-	# Set button color if possible
-	if "button_color" in button:
-		button.button_color = color
+	_style_push_button(button, color)
 	
 	# Add label above button
 	var label = Label3D.new()
 	label.text = icon
-	label.font_size = 36
+	label.font_size = 20
 	label.position = Vector3(0, 0.06, 0)
 	label.outline_size = 4
 	button.add_child(label)
@@ -163,6 +159,14 @@ func _create_speed_slider(pos: Vector3) -> void:
 	speed_slider.scale = Vector3(0.6, 0.6, 0.6)
 	speed_slider.rotation_degrees.z = 90  # Horizontal orientation
 	
+	if speed_slider.has_method("set_param_name"):
+		speed_slider.call("set_param_name", "SPEED")
+	if speed_slider.has_method("set_range"):
+		speed_slider.call("set_range", 0.02, 0.20)
+	if speed_slider.has_method("set_normalized_value"):
+		var speed_norm = clamp(inverse_lerp(0.02, 0.20, disco_floor.pattern_speed), 0.0, 1.0)
+		speed_slider.call("set_normalized_value", speed_norm)
+	
 	# Add label
 	var label = Label3D.new()
 	label.text = "SPEED"
@@ -188,6 +192,7 @@ func _create_pattern_button(pattern_name: String, pos: Vector3, index: int) -> v
 	button.name = "Pattern_" + str(index)
 	button.position = pos
 	button.scale = Vector3(0.65, 0.65, 0.65)
+	_style_push_button(button, color)
 	
 	# Add abbreviation label
 	var label = Label3D.new()
@@ -211,6 +216,14 @@ func _create_pattern_button(pattern_name: String, pos: Vector3, index: int) -> v
 	pattern_buttons.append(button)
 	add_child(button)
 
+func _style_push_button(button: Node, color: Color) -> void:
+	if "pressed_color" in button:
+		button.pressed_color = color
+	if "released_color" in button:
+		button.released_color = color.darkened(0.7)
+	if button.has_method("update_colors"):
+		button.call("update_colors")
+
 func _connect_signals() -> void:
 	disco_floor.pattern_changed.connect(_on_pattern_changed)
 	disco_floor.disco_toggled.connect(_on_disco_toggled)
@@ -230,8 +243,12 @@ func _on_pattern_button_pressed(index: int) -> void:
 	disco_floor.set_pattern(index)
 
 func _on_speed_slider_moved(value: float) -> void:
-	# Map slider 0-1 to speed 0.02-0.2
-	var speed = lerp(0.02, 0.2, 1.0 - value)  # Inverted: high slider = fast
+	var normalized = clamp(value, 0.0, 1.0)
+	if speed_slider and speed_slider.has_method("get_normalized_value"):
+		normalized = clamp(float(speed_slider.call("get_normalized_value")), 0.0, 1.0)
+	
+	# Map slider 0-1 to speed 0.02-0.20.
+	var speed = lerp(0.02, 0.20, normalized)
 	disco_floor.set_speed(speed)
 	print("DiscoControlPanel: Speed set to %.3f" % speed)
 
@@ -240,8 +257,8 @@ func _on_pattern_changed(pattern_name: String) -> void:
 
 func _on_disco_toggled(is_on: bool) -> void:
 	if is_on:
-		status_label.text = "▶ Playing"
+		status_label.text = "Playing"
 		status_label.modulate = Color.LIME
 	else:
-		status_label.text = "⏸ Paused"
+		status_label.text = "Paused"
 		status_label.modulate = Color.GRAY

@@ -1,0 +1,125 @@
+{
+	"_comment": "Grid2D substrate — MultiMesh cell grid with algorithm cartridges. Use #algorithm:<name> or named variants.",
+	"artifacts": {
+		"grid2d": {
+			"name": "Grid2D Substrate",
+			"lookup_name": "grid2d",
+			"description": "Universal 2D cell grid substrate. MultiMesh petri dish with emission and smooth transitions. Defaults to Game of Life. Use #algorithm:<name> to select cartridge.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"tags": ["substrate", "grid2d", "cellular_automata", "universal"],
+			"complexity": "beginner"
+		},
+		"grid2d_life": {
+			"name": "Grid2D — Game of Life",
+			"lookup_name": "grid2d_life",
+			"description": "Conway's Game of Life on a MultiMesh petri dish. B3/S23 — the canonical cellular automaton. Warm amber cells on dark glass.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "game_of_life", "conway", "cellular_automata"],
+			"complexity": "beginner"
+		},
+		"grid2d_seeds": {
+			"name": "Grid2D — Seeds",
+			"lookup_name": "grid2d_seeds",
+			"description": "Seeds automaton — explosive, ephemeral. Every cell lives one generation then dies. Electric cyan explosions from minimal seeds.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "seeds", "cellular_automata"],
+			"complexity": "beginner"
+		},
+		"grid2d_brians_brain": {
+			"name": "Grid2D — Brian's Brain",
+			"lookup_name": "grid2d_brians_brain",
+			"description": "Brian's Brain 3-state automaton. Self-sustaining oscillators and spaceships in hot pink. Off → On → Dying → Off.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "brians_brain", "cellular_automata"],
+			"complexity": "intermediate"
+		},
+		"grid2d_rule30": {
+			"name": "Grid2D — Rule 30",
+			"lookup_name": "grid2d_rule30",
+			"description": "Wolfram Rule 30 — generates chaos from order. 1D elementary CA scrolling row by row in warm gold.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "rule30", "wolfram", "1d_ca"],
+			"complexity": "beginner"
+		},
+		"grid2d_rule110": {
+			"name": "Grid2D — Rule 110",
+			"lookup_name": "grid2d_rule110",
+			"description": "Wolfram Rule 110 — Turing-complete elementary CA. Complex structures emerge from a single cell.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "rule110", "wolfram", "1d_ca", "turing_complete"],
+			"complexity": "intermediate"
+		},
+		"grid2d_rule90": {
+			"name": "Grid2D — Rule 90",
+			"lookup_name": "grid2d_rule90",
+			"description": "Wolfram Rule 90 — generates Sierpinski triangle pattern. Fractal from a 1D CA rule.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "rule90", "wolfram", "sierpinski", "fractal"],
+			"complexity": "beginner"
+		},
+		"grid2d_bfs": {
+			"name": "Grid2D — BFS Flood Fill",
+			"lookup_name": "grid2d_bfs",
+			"description": "Breadth-first search flood fill. Watch the uniform wavefront expand through a walled grid. Blue frontier, orange source.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "searchpathfinding",
+			"tags": ["substrate", "grid2d", "bfs", "flood_fill", "search", "pathfinding"],
+			"complexity": "intermediate"
+		},
+		"grid2d_dfs_maze": {
+			"name": "Grid2D — DFS Maze Generator",
+			"lookup_name": "grid2d_dfs_maze",
+			"description": "Depth-first search recursive backtracker maze. Watch the carver drill, backtrack, and explore. Green head, amber retreat.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "searchpathfinding",
+			"tags": ["substrate", "grid2d", "dfs", "maze", "generation", "backtracker"],
+			"complexity": "intermediate"
+		},
+		"grid2d_wireworld": {
+			"name": "Grid2D — Wireworld",
+			"lookup_name": "grid2d_wireworld",
+			"description": "Wireworld — 4-state CA for digital circuits. Copper wire, electric blue electrons, orange afterglow. Build logic gates from simple rules.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "wireworld", "circuit", "logic_gate"],
+			"complexity": "advanced"
+		},
+		"grid2d_langtons_ant": {
+			"name": "Grid2D — Langton's Ant",
+			"lookup_name": "grid2d_langtons_ant",
+			"description": "Langton's Ant — deterministic but emergent. Chaotic scribbling that spontaneously produces a highway. Purple trail, red ant.",
+			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
+			"category": "substrate",
+			"artifact_type": "interactive_algorithm",
+			"sequence": "cellular_automata",
+			"tags": ["substrate", "grid2d", "langtons_ant", "emergent", "deterministic"],
+			"complexity": "intermediate"
+		}
+	}
+}

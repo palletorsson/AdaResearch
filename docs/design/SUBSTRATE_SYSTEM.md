@@ -91,18 +91,41 @@ func remove_edge(from_idx: int, to_idx: int) -> void
 func set_edge_color(from_idx: int, to_idx: int, color: Color) -> void
 ```
 
-### 6. WalkSurface (continuous 2D terrain)
+### 6. WalkSurface (continuous 2D terrain) ✅
 Room-scale mesh you stand on. Algorithm generates the height field.
 
 - **Shows:** sine terrain, noise landscape, loss surface, pheromone terrain, potential energy surface, fractal terrain, SDF elevation
-- **Exists as:** `walkgrids/TopologySpace.gd` (SineSpace, NoiseSpace, VoronoiSpace, etc.)
+- **Location:** `commons/context/walkgrids/`
+- **Base class:** `TopologySpace.gd` — procedural mesh from height array, with StaticBody3D collision
+- **Manager:** `TopologyManager.gd` — orchestrates multiple spaces, teleport between them
 - **VR form:** ALREADY PROVEN — sine_space works because you feel the math with your body. Key: responsive to parameter changes (frequency slider → terrain deforms under your feet).
 - **Serves:** wavefunctions (1), noise (4), randomness (2), searchpathfinding (2), machinelearning (2), proceduralgeneration (3), physicssimulation (2), fractals (1), swarmintelligence (2), computationalgeometry (2)
 - **~20 maps**
 
-**Already has cartridge interface:**
+**5 existing spaces (cartridges):**
+
+| Space | Script | What you walk on |
+|-------|--------|-----------------|
+| SineSpace | `SineSpace.gd` | Perfect sine×cos waves — metallic, smooth, surveillance aesthetic |
+| NoiseSpace | `NoiseSpace.gd` | Fractal noise terrain — organic, rough, resistance aesthetic |
+| VoronoiSpace | `VoronoiSpace.gd` | Cellular territories from proximity — biological boundaries |
+| RandomSpace | `RandomSpace.gd` | Pure chaos heightfield — aggressive, unstable, anarchy |
+| FractalSpace | `FractalSpace.gd` | Fractal terrain generation |
+| KnowledgeTerrainSpace | `KnowledgeTerrainSpace.gd` | Curriculum taxonomy as walkable landscape — the meta-layer |
+
+**Registered in:** `grid_artifacts.json` as `sine_space`, `noise_space`, `voronoi_space`, `random_space`, `fractal_space`, `knowledge_terrain_space`
+
+**Cartridge interface:**
 ```gdscript
-func generate_space(x: float, z: float) -> float  # override per algorithm
+extends TopologySpace
+func generate_space():
+    var heights = []
+    for z in range(resolution + 1):
+        for x in range(resolution + 1):
+            heights.append(your_algorithm(x, z) * height_scale)
+    var mesh = create_mesh_from_heights(heights)
+    mesh_instance.mesh = mesh
+    create_collision_from_mesh(mesh)
 ```
 
 ### 7. MeshArtifact (deformable 3D)
@@ -122,18 +145,24 @@ A 3D mesh that algorithms reshape, branch, connect, or deform.
 |-----------|---------|--------|
 | `pattern_tile_puzzle.gd` | Grid2D (TABLE variant, with wallpaper cartridges) | ✅ Working |
 | `grid_agent/grid_operations.gd` | Grid2D shared operation library | ✅ Working |
-| `game_of_life_petri.gd` | Grid2D cartridge: Game of Life | → migrate to cartridge |
-| `ca_rule_explorer.gd` | Grid2D cartridge: Wolfram 1D | → migrate to cartridge |
+| `game_of_life_petri.gd` | Grid2D cartridge: Game of Life | ✅ `cartridge_game_of_life.gd` |
+| `ca_rule_explorer.gd` | Grid2D cartridge: Wolfram 1D | ✅ `cartridge_rule_1d.gd` |
 | `entropy_axiom_multimesh.gd` | Grid3D (rendering approach) | ✅ Working |
-| `walkgrids/TopologySpace.gd` | WalkSurface (base class + cartridges) | ✅ Working |
+| `commons/context/walkgrids/` | WalkSurface (6 spaces: Sine, Noise, Voronoi, Random, Fractal, Knowledge) | ✅ Working |
 | `oscilloscope_display.gd` | Profile (rendering approach) | ✅ Working |
 | `distribution_sampler.gd` | BarArray (rendering approach) | ✅ Working |
 | `array_sequencer.gd` | BarArray variant (time-based) | ✅ Working |
 
+### Built substrates
+| Substrate | Location | Cartridges | Registry |
+|-----------|----------|------------|----------|
+| **Living Paper** (2D texture) | `commons/substrates/living_paper/` | 35 algorithms (PaperAlgorithm) | `living_paper.json` (34 entries) |
+| **Grid2D** (MultiMesh petri dish) | `commons/substrates/grid2d/` | 8 cartridges (Grid2DCartridge) | `grid2d.json` (12 entries) |
+| **WalkSurface** (walkable terrain) | `commons/context/walkgrids/` | 6 spaces (TopologySpace) | `grid_artifacts.json` |
+
 ### Needs building
 | Component | Priority | Why |
 |-----------|----------|-----|
-| **Grid2D unified artifact** | HIGH | 80+ maps, most infrastructure exists |
 | **BarArray unified artifact** | HIGH | 35 maps, sorting visualization is iconic |
 | **Grid3D connection layer** | HIGH | Unlocks all 14 graphtheory maps |
 | **Profile unified artifact** | MEDIUM | 25 maps, oscilloscope exists |
@@ -144,15 +173,23 @@ A 3D mesh that algorithms reshape, branch, connect, or deform.
 
 ## Build Order
 
-### Phase 1: Grid2D (highest impact)
-1. Define `AlgorithmCartridge2D` base class (interface above)
-2. Create `AlgorithmGrid2D` scene — MultiMesh cells, touch interaction, step/play/reset, speed slider
-3. Migrate `game_of_life_petri` → Game of Life cartridge
-4. Migrate `ca_rule_explorer` → Wolfram 1D cartridge
-5. Write pathfinding cartridges: BFS, DFS, A*, flood fill
-6. Write WFC cartridge
-7. Register in artifact registry with `#mode:game_of_life` syntax
-8. Test in CA_1 and SearchPathfinding_BFS maps
+### ✅ Phase 0: Living Paper (completed 2026-02-12)
+Lightweight 2D texture substrate — grabbable paper with Image-based cartridges.
+- Location: `commons/substrates/living_paper/`
+- 35 PaperAlgorithm cartridges across all sequences
+- Registered in `commons/artifacts/registry/living_paper.json` (34 entries)
+- Map syntax: `"living_paper_mandelbrot"`, `"living_paper#algorithm:rule30"`
+
+### ✅ Phase 1: Grid2D (completed 2026-02-12)
+Full MultiMesh petri dish — the backbone serving 80+ maps.
+- Location: `commons/substrates/grid2d/`
+- `Grid2DCartridge` base class (RefCounted, PackedInt32Array grid)
+- `Grid2DRenderer` — MultiMesh with per-cell emission, smooth LERP, birth flash
+- `grid2d_cell.gdshader` — idle pulse, rim light, emission from INSTANCE_CUSTOM
+- 8 cartridges: Game of Life, Seeds, Brian's Brain, Rule 1D (30/110/90), BFS, DFS Maze, Wireworld, Langton's Ant
+- Registered in `commons/artifacts/registry/grid2d.json` (12 entries)
+- Map syntax: `"grid2d_life"`, `"grid2d#algorithm:wireworld#interval:0.04"`
+- TODO: A*, WFC, flood fill with multiple sources, touch interaction in VR
 
 ### Phase 2: BarArray
 1. Define `AlgorithmCartridge1D` base class
@@ -196,20 +233,22 @@ A 3D mesh that algorithms reshape, branch, connect, or deform.
 
 ### Grid2D in one map, three cartridges:
 ```
-# Same AlgorithmGrid2D artifact, placed three times with different cartridges
-"AlgorithmGrid2D#mode:game_of_life:1:0"
-"AlgorithmGrid2D#mode:a_star:3:0"
-"AlgorithmGrid2D#mode:wfc:5:0"
+# Same grid2d artifact, placed three times with different cartridges
+"grid2d_life"           at (2,0)    # Conway's amber glow
+"grid2d_bfs"            at (6,0)    # Blue wavefront expanding
+"grid2d_wireworld"      at (10,0)   # Copper circuits firing
 ```
-Player walks between three identical grids. Each running a different algorithm. Touch one to seed it. Watch them evolve differently. SAME object, DIFFERENT behavior. That's the substrate lesson.
+Player walks between three identical petri dishes. Each running a different algorithm. Touch one to seed it. Watch them evolve differently. SAME object, DIFFERENT behavior. That's the substrate lesson.
 
-### BarArray in sorting sequence:
+### Living Paper comparison wall:
 ```
-# Same bars, cycle through algorithms
-"AlgorithmBars#mode:bubble_sort#size:32:2:0"
-# VR button swaps cartridge: bubble → merge → quick → heap
-# Same bars reorganize differently. Feel the O(n²) vs O(n log n).
+# Same living paper, six random walk variants side by side
+"living_paper_random_walk"       at (0,0)
+"living_paper_brownian"          at (2,0)
+"living_paper_levy"              at (4,0)
+"living_paper_self_avoiding"     at (6,0)
 ```
+Pick up any paper. It computes while you hold it. Put it down — frozen mid-walk. Compare patterns.
 
 ### WalkSurface in optimization:
 ```

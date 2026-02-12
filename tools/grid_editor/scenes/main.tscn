@@ -75,6 +75,26 @@ text = "SUBSET"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="PresetLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.62, 0.68, 1)
+theme_override_font_sizes/font_size = 11
+text = "PRESET"
+
+[node name="PresetRow" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PresetSelector" type="OptionButton" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ApplyPresetButton" type="Button" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Apply"
+
 [node name="CategoryLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.62, 0.68, 1)

@@ -114,6 +114,16 @@ func get_categories(subset_id: String = "") -> Array:
 	var subset = subsets.get(subset_id if subset_id else current_subset_id, {})
 	return subset.get("categories", [])
 
+func get_presets(subset_id: String = "") -> Array:
+	var subset = subsets.get(subset_id if subset_id else current_subset_id, {})
+	return subset.get("presets", [])
+
+func get_preset(preset_id: String, subset_id: String = "") -> Dictionary:
+	for preset in get_presets(subset_id):
+		if preset.get("id", "") == preset_id:
+			return preset
+	return {}
+
 # Orientation helpers
 func get_orientation(subset_id: String = "") -> Dictionary:
 	var subset = subsets.get(subset_id if subset_id else current_subset_id, {})

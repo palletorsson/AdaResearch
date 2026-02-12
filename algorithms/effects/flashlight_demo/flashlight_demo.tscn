@@ -26,24 +26,32 @@ material = SubResource("Mat_Canvas")
 [node name="RedFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.6, 3)
 unique_name_in_owner = true
+
+[node name="ColorSetter" type="Node3D" parent="RedFlashlight"]
 script = ExtResource("2_color")
 light_color = Color(1, 0, 0, 1)
 
 [node name="GreenFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.6, 3)
 unique_name_in_owner = true
+
+[node name="ColorSetter" type="Node3D" parent="GreenFlashlight"]
 script = ExtResource("2_color")
 light_color = Color(0, 1, 0, 1)
 
 [node name="BlueFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.6, 3)
 unique_name_in_owner = true
+
+[node name="ColorSetter" type="Node3D" parent="BlueFlashlight"]
 script = ExtResource("2_color")
 light_color = Color(0, 0, 1, 1)
 
 [node name="WhiteFlashlight" parent="." instance=ExtResource("1_flashlight")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.6, 3)
 unique_name_in_owner = true
+
+[node name="ColorSetter" type="Node3D" parent="WhiteFlashlight"]
 script = ExtResource("2_color")
 light_color = Color(1, 1, 1, 1)
 

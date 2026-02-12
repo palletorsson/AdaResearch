@@ -206,7 +206,7 @@ func _create_hologram_cube() -> void:
 		
 		# Rotate to align with edge direction
 		if direction != Vector3.UP and direction != Vector3.DOWN:
-			edge_mesh.look_at(midpoint + direction, Vector3.UP)
+			edge_mesh.look_at_from_position(midpoint, midpoint + direction, Vector3.UP)
 			edge_mesh.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		hologram_content.add_child(edge_mesh)

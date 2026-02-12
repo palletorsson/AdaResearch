@@ -31,7 +31,8 @@
 				"Color_Rainbow: Spectral progression",
 				"Color_Pillar: Vertical color mapping",
 				"Color_Paint: Interactive color mixing",
-				"Color_Gradiant: Interpolation between colors"
+				"Color_Gradiant: Interpolation between colors",
+				"Color_Patch_Palette_Overview: Grabbable sticker atlas for patch-based color comparison"
 			],
 
 			"maps": [
@@ -41,7 +42,7 @@
 				"Color_Pillar",
 				"Color_Paint",
 				"Color_Walls",
-				"Color_Flashlight",
+				"Color_Flashlight"
 			],
 
 			"axiom_files": [
@@ -52,7 +53,8 @@
 
 			"algorithm_paths": {
 				"Color_Paint": "res://algorithms/color/paint/",
-				"Color_Grid_Pallet": "res://algorithms/color/palette/"
+				"Color_Grid_Pallet": "res://algorithms/color/palette/",
+				"Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
 			},
 
 			"return_to": "lab",

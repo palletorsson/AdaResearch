@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="1_grab"]
+[ext_resource type="Script" path="res://commons/substrates/living_paper/living_paper_manager.gd" id="2_mgr"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_paper"]
+size = Vector2(0.19, 0.19)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paper"]
+albedo_color = Color(0.2, 0.0, 0.2, 1)
+cull_mode = 2
+texture_filter = 0
+
+[node name="LivingPaper" type="Node3D"]
+script = ExtResource("2_mgr")
+
+[node name="GrabPaper" parent="." instance=ExtResource("1_grab")]
+
+[node name="Label" parent="GrabPaper" index="3"]
+text = ""
+
+[node name="RandomWalkPlanMesh" type="MeshInstance3D" parent="GrabPaper"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.006, 0)
+mesh = SubResource("QuadMesh_paper")
+material_override = SubResource("StandardMaterial3D_paper")
+
+[node name="id_info_Label3D" type="Label3D" parent="GrabPaper"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.095, -0.095, 0.006)
+font_size = 20
+outline_size = 4
+horizontal_alignment = 0
+
+[connection signal="grabbed" from="GrabPaper" to="." method="_on_grab_paper_grabbed"]
+[connection signal="dropped" from="GrabPaper" to="." method="_on_grab_paper_dropped"]

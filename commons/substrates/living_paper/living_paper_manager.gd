@@ -57,8 +57,82 @@ var _step_index: int = 0
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+
+	# Robust node lookup — @onready may fail for nodes inside instanced scenes
+	if not mesh_instance:
+		mesh_instance = find_child("RandomWalkPlanMesh", true, false) as MeshInstance3D
+	if not label3d:
+		label3d = find_child("id_info_Label3D", true, false) as Label3D
+
+	if not mesh_instance:
+		push_error("LivingPaper: RandomWalkPlanMesh not found! Children: %s" % str(_get_child_names()))
+	else:
+		print("LivingPaper: Found mesh at %s" % mesh_instance.get_path())
+
+	# Auto-detect algorithm from artifact lookup_name (e.g. living_paper_rule30 → rule30)
+	_resolve_algorithm_from_lookup_name()
 	await get_tree().create_timer(0.5).timeout
 	_setup_algorithm()
+
+
+func _get_child_names() -> Array:
+	var names: Array = []
+	for child in get_children():
+		names.append(child.name)
+		for grandchild in child.get_children():
+			names.append("%s/%s" % [child.name, grandchild.name])
+	return names
+
+
+## Map artifact lookup_name suffix to algorithm enum
+func _resolve_algorithm_from_lookup_name() -> void:
+	var lookup = get_meta("artifact_lookup_name", "")
+	if lookup == "" or lookup == "living_paper":
+		return  # No suffix → use default or grid config
+
+	# Strip "living_paper_" prefix to get the algorithm key
+	var key = lookup.replace("living_paper_", "")
+	var algo_map = {
+		"random_walk": Algorithm.RANDOM_WALK_SIMPLE,
+		"brownian": Algorithm.RANDOM_WALK_BROWNIAN,
+		"levy": Algorithm.RANDOM_WALK_LEVY,
+		"self_avoiding": Algorithm.RANDOM_WALK_SELF_AVOIDING,
+		"fractal": Algorithm.RANDOM_WALK_FRACTAL,
+		"fibonacci": Algorithm.RANDOM_WALK_FIBONACCI,
+		"rule30": Algorithm.CA_1D_RULE30,
+		"rule110": Algorithm.CA_1D_RULE110,
+		"rule90": Algorithm.CA_1D_RULE90,
+		"life": Algorithm.CA_2D_LIFE,
+		"seeds": Algorithm.CA_2D_SEEDS,
+		"brians_brain": Algorithm.CA_2D_BRIANS_BRAIN,
+		"bubble_sort": Algorithm.SORTING_BUBBLE,
+		"insertion_sort": Algorithm.SORTING_INSERTION,
+		"merge_sort": Algorithm.SORTING_MERGE,
+		"quick_sort": Algorithm.SORTING_QUICK,
+		"sine": Algorithm.SINE_WAVE,
+		"fourier": Algorithm.FOURIER_SERIES,
+		"lissajous": Algorithm.LISSAJOUS,
+		"mandelbrot": Algorithm.MANDELBROT,
+		"julia": Algorithm.JULIA_SET,
+		"sierpinski": Algorithm.SIERPINSKI,
+		"koch": Algorithm.KOCH_CURVE,
+		"tree": Algorithm.LSYSTEM_TREE,
+		"fern": Algorithm.LSYSTEM_FERN,
+		"dragon": Algorithm.LSYSTEM_DRAGON,
+		"perlin": Algorithm.PERLIN_NOISE,
+		"noise_octaves": Algorithm.NOISE_OCTAVES,
+		"bfs": Algorithm.BFS_FLOOD,
+		"dfs_maze": Algorithm.DFS_MAZE,
+		"reaction_diffusion": Algorithm.REACTION_DIFFUSION,
+		"dla": Algorithm.DLA_CRYSTAL,
+		"voronoi": Algorithm.VORONOI,
+		"kmeans": Algorithm.KMEANS,
+		"heat": Algorithm.HEAT_DIFFUSION,
+		"quadtree": Algorithm.QUADTREE,
+	}
+	if key in algo_map:
+		algorithm = algo_map[key]
+		print("LivingPaper: Auto-selected algorithm '%s' from lookup_name '%s'" % [key, lookup])
 
 
 func _setup_algorithm() -> void:
