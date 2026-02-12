@@ -43,6 +43,31 @@ static func _find_lab_system() -> Node:
 static var _standalone_registry: Dictionary = {}
 static var _standalone_loaded: bool = false
 
+## Keep only concrete artifact scene entries from commons/algorithms
+static func _sanitize_artifacts(raw_artifacts: Array) -> Array:
+	var filtered: Array = []
+	for artifact_value in raw_artifacts:
+		if not (artifact_value is Dictionary):
+			continue
+
+		var artifact: Dictionary = artifact_value.duplicate(true)
+		var scene_path := str(artifact.get("scene", "")).strip_edges()
+		if scene_path.is_empty():
+			continue
+		if not (scene_path.begins_with("res://commons/") or scene_path.begins_with("res://algorithms/")):
+			continue
+
+		var lookup_name := str(artifact.get("lookup_name", "")).strip_edges()
+		if lookup_name.is_empty():
+			lookup_name = scene_path.get_file().get_basename()
+			artifact["lookup_name"] = lookup_name
+		if str(artifact.get("name", "")).strip_edges().is_empty():
+			artifact["name"] = lookup_name
+
+		filtered.append(artifact)
+
+	return filtered
+
 ## Load artifacts directly from JSON files (fallback for standalone/desktop mode)
 static func _load_standalone_registry() -> void:
 	if _standalone_loaded:
@@ -112,7 +137,7 @@ static func get_all_artifacts() -> Array:
 		# Fallback: load directly from JSON files (desktop/standalone mode)
 		print("ArtifactCatalogDataProvider: GridSystem not found, using standalone mode")
 		_load_standalone_registry()
-		return _standalone_registry.values()
+		return _sanitize_artifacts(_standalone_registry.values())
 
 	print("ArtifactCatalogDataProvider: Found GridSystem: %s" % grid_system.name)
 
@@ -120,7 +145,7 @@ static func get_all_artifacts() -> Array:
 		# Fallback: load directly
 		print("ArtifactCatalogDataProvider: GridInteractablesComponent not found, using standalone mode")
 		_load_standalone_registry()
-		return _standalone_registry.values()
+		return _sanitize_artifacts(_standalone_registry.values())
 
 	var interactables = grid_system.get_node("GridInteractablesComponent")
 	print("ArtifactCatalogDataProvider: Found GridInteractablesComponent")
@@ -128,7 +153,7 @@ static func get_all_artifacts() -> Array:
 	if not "grid_artifact_registry" in interactables:
 		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry property not found in GridInteractablesComponent")
 		_load_standalone_registry()
-		return _standalone_registry.values()
+		return _sanitize_artifacts(_standalone_registry.values())
 
 	var registry = interactables.grid_artifact_registry
 	var artifact_count = registry.size()
@@ -137,10 +162,10 @@ static func get_all_artifacts() -> Array:
 		# GridSystem exists but registry is empty - try standalone fallback
 		print("ArtifactCatalogDataProvider: Registry empty, falling back to standalone mode")
 		_load_standalone_registry()
-		return _standalone_registry.values()
+		return _sanitize_artifacts(_standalone_registry.values())
 	
 	print("ArtifactCatalogDataProvider: ✅ Found %d artifacts in registry" % artifact_count)
-	return registry.values()
+	return _sanitize_artifacts(registry.values())
 
 ## Look up artifacts by lookup_names
 static func _lookup_artifacts(lookup_names: Array) -> Array:
@@ -180,11 +205,28 @@ static func get_artifacts_by_category(category: String) -> Array:
 	var lookup_names = ArtifactThemeQuery.get_by_category(category)
 	return _lookup_artifacts(lookup_names)
 
+## Get all available sequence names from artifact metadata
+static func get_all_sequences() -> Array:
+	var artifacts = get_all_artifacts()
+	var unique_sequences := {}
+	for artifact in artifacts:
+		if not (artifact is Dictionary):
+			continue
+		var sequence_name := str((artifact as Dictionary).get("sequence", "")).strip_edges()
+		if sequence_name.is_empty():
+			continue
+		unique_sequences[sequence_name] = true
+
+	var sequences: Array = unique_sequences.keys()
+	sequences.sort()
+	return sequences
+
 ## Get filtered artifacts with multiple criteria
 ## @param theme: Theme filter ("all" or specific theme)
 ## @param complexity: Complexity filter ("all" or specific level)
 ## @param search: Search string to filter by name/description
-static func get_filtered_artifacts(theme: String = "all", complexity: String = "all", search: String = "") -> Array:
+## @param sequence_name: Sequence filter ("all" or specific sequence)
+static func get_filtered_artifacts(theme: String = "all", complexity: String = "all", search: String = "", sequence_name: String = "all") -> Array:
 	var artifacts = get_all_artifacts()
 
 	# Apply theme filter
@@ -211,6 +253,16 @@ static func get_filtered_artifacts(theme: String = "all", complexity: String = "
 		var filtered = []
 		for artifact in artifacts:
 			if complexity_lookup_names.has(artifact.get("lookup_name", "")):
+				filtered.append(artifact)
+		artifacts = filtered
+
+	# Apply sequence filter
+	if sequence_name != "all" and sequence_name != "":
+		var target_sequence := sequence_name.to_lower()
+		var filtered = []
+		for artifact in artifacts:
+			var artifact_sequence := str(artifact.get("sequence", "")).to_lower()
+			if artifact_sequence == target_sequence:
 				filtered.append(artifact)
 		artifacts = filtered
 
@@ -278,11 +330,33 @@ static func get_artifact_by_lookup_name(lookup_name: String) -> Dictionary:
 		if "grid_artifact_registry" in interactables:
 			var registry = interactables.grid_artifact_registry
 			if registry.has(lookup_name):
-				return registry[lookup_name]
+				var direct_artifact: Dictionary = registry[lookup_name]
+				var direct_scene_path := str(direct_artifact.get("scene", "")).strip_edges()
+				if direct_scene_path.begins_with("res://commons/") or direct_scene_path.begins_with("res://algorithms/"):
+					return direct_artifact
+			for artifact_value in registry.values():
+				if not (artifact_value is Dictionary):
+					continue
+				var artifact_dict: Dictionary = artifact_value
+				if str(artifact_dict.get("lookup_name", "")).strip_edges() == lookup_name:
+					var matched_scene_path := str(artifact_dict.get("scene", "")).strip_edges()
+					if matched_scene_path.begins_with("res://commons/") or matched_scene_path.begins_with("res://algorithms/"):
+						return artifact_dict
 	
 	# Fallback to standalone registry
 	_load_standalone_registry()
 	if _standalone_registry.has(lookup_name):
-		return _standalone_registry[lookup_name]
+		var direct_artifact: Dictionary = _standalone_registry[lookup_name]
+		var direct_scene_path := str(direct_artifact.get("scene", "")).strip_edges()
+		if direct_scene_path.begins_with("res://commons/") or direct_scene_path.begins_with("res://algorithms/"):
+			return direct_artifact
+	for artifact_value in _standalone_registry.values():
+		if not (artifact_value is Dictionary):
+			continue
+		var artifact_dict: Dictionary = artifact_value
+		if str(artifact_dict.get("lookup_name", "")).strip_edges() == lookup_name:
+			var matched_scene_path := str(artifact_dict.get("scene", "")).strip_edges()
+			if matched_scene_path.begins_with("res://commons/") or matched_scene_path.begins_with("res://algorithms/"):
+				return artifact_dict
 
 	return {}

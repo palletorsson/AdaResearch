@@ -6,6 +6,8 @@ extends CanvasLayer
 
 @export var toggle_key: Key = KEY_M
 @export var toggle_action: StringName = &"toggle_map_switcher_overlay"
+@export var next_map_key: Key = KEY_N
+@export var clean_scene_key: Key = KEY_C
 @export var open_on_start: bool = false
 @export var refresh_on_open: bool = true
 @export var auto_clean_before_load: bool = false
@@ -14,14 +16,28 @@ const MAIN_SEQUENCES_PATH := "res://commons/maps/map_sequences.json"
 const SEQUENCES_DIRECTORY := "res://commons/maps/sequences/"
 const DESKTOP_GRID_SCENE_PATH := "res://commons/scenes/grid_desktop.tscn"
 const CLEAN_KEEP_GROUP := "map_switcher_ui_keep"
+const COMMENT_DEFAULT_MARKDOWN_PATH := "res://ada_run/desktop_feedback.md"
+const COMMENT_DEFAULT_JSON_PATH := "res://ada_run/desktop_feedback.json"
+const COMMENT_CODEX_QUEUE_PATH := "res://ada_run/codex_change_requests.md"
+const ARTIFACT_LEGACY_REGISTRY_PATH := "res://commons/artifacts/grid_artifacts.json"
+const ARTIFACT_REGISTRY_DIR_PATH := "res://commons/artifacts/registry/"
 static var pending_map_name: String = ""
 static var last_selected_sequence_name: String = ""
 static var last_selected_map_name: String = ""
 static var last_quick_scroll_vertical: int = 0
 static var last_quick_scroll_horizontal: int = 0
+static var last_comment_output_path: String = COMMENT_DEFAULT_MARKDOWN_PATH
+static var last_comment_format: int = 0
+static var last_comment_draft: String = ""
+
+enum CommentFormat {
+	MARKDOWN,
+	JSON
+}
 
 var _root: Control
 var _panel: PanelContainer
+var _comment_panel: PanelContainer
 var _backdrop: ColorRect
 var _sequence_option: OptionButton
 var _map_option: OptionButton
@@ -32,6 +48,16 @@ var _clean_before_load_check: CheckBox
 var _quick_load_scroll: ScrollContainer
 var _quick_load_content: VBoxContainer
 var _quick_map_buttons: Dictionary = {}
+var _comment_format_option: OptionButton
+var _comment_target_path_edit: LineEdit
+var _comment_context_label: Label
+var _comment_text_edit: TextEdit
+var _comment_artifact_scroll: ScrollContainer
+var _comment_artifact_flow: FlowContainer
+var _comment_status_label: Label
+var _comment_artifact_cache: Dictionary = {}
+var _artifact_scene_path_by_name: Dictionary = {}
+var _artifact_scene_index_loaded: bool = false
 
 var _sequence_names: Array[String] = []
 var _maps_by_sequence: Dictionary = {}
@@ -40,6 +66,7 @@ var _stored_mouse_mode: int = Input.MOUSE_MODE_VISIBLE
 
 func _ready() -> void:
 	layer = 120
+	visible = true
 	add_to_group(CLEAN_KEEP_GROUP)
 	_ensure_toggle_action()
 	_build_ui()
@@ -47,7 +74,6 @@ func _ready() -> void:
 	if open_on_start:
 		_set_overlay_visible(true)
 	else:
-		visible = false
 		if _root:
 			_root.visible = false
 	
@@ -56,12 +82,28 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if _is_toggle_event(event):
 		_toggle_overlay()
-		get_viewport().set_input_as_handled()
+		_mark_input_handled()
+	elif _is_clean_scene_event(event):
+		if not _is_text_input_focused():
+			_on_clean_scene_pressed()
+			_mark_input_handled()
+	elif _is_next_map_event(event):
+		if not _is_text_input_focused():
+			_on_next_pressed()
+			_mark_input_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _is_toggle_event(event):
 		_toggle_overlay()
-		get_viewport().set_input_as_handled()
+		_mark_input_handled()
+	elif _is_clean_scene_event(event):
+		if not _is_text_input_focused():
+			_on_clean_scene_pressed()
+			_mark_input_handled()
+	elif _is_next_map_event(event):
+		if not _is_text_input_focused():
+			_on_next_pressed()
+			_mark_input_handled()
 
 func _is_toggle_event(event: InputEvent) -> bool:
 	if not (event is InputEventKey):
@@ -79,8 +121,43 @@ func _is_toggle_event(event: InputEvent) -> bool:
 	
 	return false
 
+func _is_next_map_event(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	return key_event.keycode == next_map_key or key_event.physical_keycode == next_map_key
+
+func _is_clean_scene_event(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	return key_event.keycode == clean_scene_key or key_event.physical_keycode == clean_scene_key
+
+func _mark_input_handled() -> void:
+	var viewport := get_viewport()
+	if viewport:
+		viewport.set_input_as_handled()
+
+func _is_text_input_focused() -> bool:
+	var viewport := get_viewport()
+	if not viewport:
+		return false
+	var focused := viewport.gui_get_focus_owner()
+	return focused is LineEdit or focused is TextEdit
+
 func _toggle_overlay() -> void:
-	_set_overlay_visible(not visible)
+	_set_overlay_visible(not _is_menu_visible())
+
+func _is_menu_visible() -> bool:
+	return _root != null and _root.visible
 
 func _ensure_toggle_action() -> void:
 	if toggle_action.is_empty():
@@ -119,7 +196,7 @@ func _build_ui() -> void:
 	_panel.offset_left = 24
 	_panel.offset_top = 24
 	_panel.offset_right = 620
-	_panel.offset_bottom = 640
+	_panel.offset_bottom = 760
 	_root.add_child(_panel)
 
 	var panel_style := StyleBoxFlat.new()
@@ -131,9 +208,17 @@ func _build_ui() -> void:
 	panel_style.shadow_size = 14
 	_panel.add_theme_stylebox_override("panel", panel_style)
 	
+	var panel_scroll = ScrollContainer.new()
+	panel_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	panel_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_panel.add_child(panel_scroll)
+
 	var vb = VBoxContainer.new()
+	vb.custom_minimum_size = Vector2(560, 0)
+	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	vb.add_theme_constant_override("separation", 10)
-	_panel.add_child(vb)
+	panel_scroll.add_child(vb)
 	
 	var title = Label.new()
 	title.text = "Map Switcher"
@@ -239,7 +324,7 @@ func _build_ui() -> void:
 	vb.add_child(_status_label)
 	
 	_hint_label = Label.new()
-	_hint_label.text = "Toggle: M"
+	_hint_label.text = "Toggle: M | Next map: N | Clean: C"
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_hint_label.modulate = Color(0.62, 0.72, 0.84, 1.0)
 	vb.add_child(_hint_label)
@@ -261,6 +346,160 @@ func _build_ui() -> void:
 	_quick_load_content = VBoxContainer.new()
 	_quick_load_content.add_theme_constant_override("separation", 8)
 	_quick_load_scroll.add_child(_quick_load_content)
+
+	_build_comment_panel()
+
+func _build_comment_panel() -> void:
+	_comment_panel = PanelContainer.new()
+	_comment_panel.name = "CommentPanel"
+	_comment_panel.anchor_left = 0.5
+	_comment_panel.anchor_right = 0.5
+	_comment_panel.anchor_top = 1.0
+	_comment_panel.anchor_bottom = 1.0
+	_comment_panel.offset_left = -450
+	_comment_panel.offset_right = 450
+	_comment_panel.offset_top = -285
+	_comment_panel.offset_bottom = -20
+	_comment_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(_comment_panel)
+
+	var comment_panel_style := StyleBoxFlat.new()
+	comment_panel_style.bg_color = Color(0.035, 0.07, 0.115, 0.74)
+	comment_panel_style.set_border_width_all(1)
+	comment_panel_style.border_color = Color(0.3, 0.72, 1.0, 0.8)
+	comment_panel_style.set_corner_radius_all(14)
+	comment_panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.3)
+	comment_panel_style.shadow_size = 10
+	_comment_panel.add_theme_stylebox_override("panel", comment_panel_style)
+
+	var margin = MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 12)
+	margin.add_theme_constant_override("margin_right", 12)
+	margin.add_theme_constant_override("margin_top", 10)
+	margin.add_theme_constant_override("margin_bottom", 10)
+	_comment_panel.add_child(margin)
+
+	var panel_scroll = ScrollContainer.new()
+	panel_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	panel_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	margin.add_child(panel_scroll)
+
+	var vb = VBoxContainer.new()
+	vb.custom_minimum_size = Vector2(860, 0)
+	vb.add_theme_constant_override("separation", 8)
+	panel_scroll.add_child(vb)
+
+	var comment_title = Label.new()
+	comment_title.text = "Comment Writer"
+	comment_title.add_theme_color_override("font_color", Color(0.9, 0.97, 1.0, 1.0))
+	comment_title.add_theme_font_size_override("font_size", 18)
+	comment_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vb.add_child(comment_title)
+
+	_comment_context_label = Label.new()
+	_comment_context_label.text = "Map context: (none)"
+	_comment_context_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_comment_context_label.add_theme_color_override("font_color", Color(0.72, 0.85, 0.98, 1.0))
+	vb.add_child(_comment_context_label)
+
+	var comment_format_row = HBoxContainer.new()
+	comment_format_row.add_theme_constant_override("separation", 8)
+	vb.add_child(comment_format_row)
+
+	var comment_format_label = Label.new()
+	comment_format_label.text = "Save as:"
+	comment_format_label.custom_minimum_size = Vector2(80, 0)
+	comment_format_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
+	comment_format_row.add_child(comment_format_label)
+
+	_comment_format_option = OptionButton.new()
+	_comment_format_option.custom_minimum_size = Vector2(170, 30)
+	_comment_format_option.add_item("Markdown (.md)", CommentFormat.MARKDOWN)
+	_comment_format_option.add_item("JSON (.json)", CommentFormat.JSON)
+	_comment_format_option.item_selected.connect(_on_comment_format_selected)
+	_style_option_button(_comment_format_option)
+	comment_format_row.add_child(_comment_format_option)
+
+	var comment_default_button = Button.new()
+	comment_default_button.text = "Use Default Path"
+	comment_default_button.pressed.connect(_on_comment_use_default_path_pressed)
+	_style_button(comment_default_button)
+	comment_format_row.add_child(comment_default_button)
+
+	var comment_path_row = HBoxContainer.new()
+	comment_path_row.add_theme_constant_override("separation", 8)
+	vb.add_child(comment_path_row)
+
+	var comment_path_label = Label.new()
+	comment_path_label.text = "Target:"
+	comment_path_label.custom_minimum_size = Vector2(80, 0)
+	comment_path_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
+	comment_path_row.add_child(comment_path_label)
+
+	_comment_target_path_edit = LineEdit.new()
+	_comment_target_path_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_comment_target_path_edit.placeholder_text = COMMENT_DEFAULT_MARKDOWN_PATH
+	_comment_target_path_edit.text_changed.connect(_on_comment_target_path_changed)
+	comment_path_row.add_child(_comment_target_path_edit)
+
+	_comment_text_edit = TextEdit.new()
+	_comment_text_edit.custom_minimum_size = Vector2(0, 84)
+	_comment_text_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	_comment_text_edit.placeholder_text = "Write feedback, bug reports, or change requests..."
+	_comment_text_edit.text_changed.connect(_on_comment_text_changed)
+	vb.add_child(_comment_text_edit)
+
+	var comment_action_row = HBoxContainer.new()
+	comment_action_row.add_theme_constant_override("separation", 6)
+	vb.add_child(comment_action_row)
+
+	var insert_map_button = Button.new()
+	insert_map_button.text = "Insert Map Name"
+	insert_map_button.pressed.connect(_on_insert_map_name_pressed)
+	_style_button(insert_map_button)
+	comment_action_row.add_child(insert_map_button)
+
+	var refresh_artifacts_button = Button.new()
+	refresh_artifacts_button.text = "Refresh Artifacts"
+	refresh_artifacts_button.pressed.connect(_on_refresh_comment_artifacts_pressed)
+	_style_button(refresh_artifacts_button)
+	comment_action_row.add_child(refresh_artifacts_button)
+
+	var save_comment_button = Button.new()
+	save_comment_button.text = "Save Comment"
+	save_comment_button.pressed.connect(_on_save_comment_pressed)
+	_style_button(save_comment_button, true)
+	comment_action_row.add_child(save_comment_button)
+
+	var queue_codex_button = Button.new()
+	queue_codex_button.text = "Queue For Codex"
+	queue_codex_button.pressed.connect(_on_queue_for_codex_pressed)
+	_style_button(queue_codex_button)
+	comment_action_row.add_child(queue_codex_button)
+
+	var artifact_hint_label = Label.new()
+	artifact_hint_label.text = "Artifacts in interactables (click to insert into comment):"
+	artifact_hint_label.add_theme_color_override("font_color", Color(0.68, 0.8, 0.94, 1.0))
+	vb.add_child(artifact_hint_label)
+
+	_comment_artifact_scroll = ScrollContainer.new()
+	_comment_artifact_scroll.custom_minimum_size = Vector2(0, 72)
+	_comment_artifact_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vb.add_child(_comment_artifact_scroll)
+
+	_comment_artifact_flow = FlowContainer.new()
+	_comment_artifact_flow.add_theme_constant_override("h_separation", 6)
+	_comment_artifact_flow.add_theme_constant_override("v_separation", 6)
+	_comment_artifact_scroll.add_child(_comment_artifact_flow)
+
+	_comment_status_label = Label.new()
+	_comment_status_label.text = "Comment writer ready."
+	_comment_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_comment_status_label.add_theme_color_override("font_color", Color(0.66, 0.79, 0.92, 1.0))
+	vb.add_child(_comment_status_label)
+
+	_restore_comment_editor_state()
 
 func _style_option_button(option: OptionButton) -> void:
 	var normal := StyleBoxFlat.new()
@@ -324,11 +563,11 @@ func _style_button(button: Button, is_primary: bool = false) -> void:
 	button.custom_minimum_size = Vector2(0, 30)
 
 func _set_overlay_visible(is_visible: bool) -> void:
-	if not is_visible:
+	var was_visible := _is_menu_visible()
+	if was_visible and not is_visible:
 		_remember_current_ui_selection()
 		_save_quick_scroll_position()
 
-	visible = is_visible
 	if _root:
 		_root.visible = is_visible
 	
@@ -342,6 +581,7 @@ func _set_overlay_visible(is_visible: bool) -> void:
 
 func _reload_data() -> void:
 	_save_quick_scroll_position()
+	_comment_artifact_cache.clear()
 	_maps_by_sequence.clear()
 	_sequence_names.clear()
 	
@@ -370,6 +610,7 @@ func _reload_data() -> void:
 	_sequence_names.sort()
 	_rebuild_sequence_option()
 	_rebuild_quick_load_buttons()
+	_refresh_comment_context()
 	
 	if _sequence_names.is_empty():
 		_set_status("No sequences found.")
@@ -525,6 +766,8 @@ func _apply_sequence_selection(index: int) -> void:
 		_remember_selection(sequence_name, "")
 		_set_status("Sequence has no maps: %s" % sequence_name)
 
+	_refresh_comment_context()
+
 func _on_sequence_selected(index: int) -> void:
 	_apply_sequence_selection(index)
 
@@ -534,6 +777,7 @@ func _on_map_selected(index: int) -> void:
 		var map_name := _current_maps[index]
 		_remember_selection(sequence_name, map_name)
 		_set_status("Ready map: %s" % map_name)
+		_refresh_comment_context()
 
 func _on_prev_pressed() -> void:
 	if _current_maps.is_empty():
@@ -870,6 +1114,591 @@ func _short_map_label(map_name: String) -> String:
 	if readable.length() <= 18:
 		return readable
 	return readable.substr(0, 17) + "..."
+
+func _restore_comment_editor_state() -> void:
+	var format_index := clampi(last_comment_format, CommentFormat.MARKDOWN, CommentFormat.JSON)
+	if _comment_format_option:
+		_comment_format_option.select(format_index)
+
+	if _comment_target_path_edit:
+		var target_path := last_comment_output_path.strip_edges()
+		if target_path.is_empty():
+			target_path = _default_comment_path_for_format(format_index)
+		_comment_target_path_edit.text = target_path
+		last_comment_output_path = target_path
+
+	if _comment_text_edit:
+		_comment_text_edit.text = last_comment_draft
+
+func _default_comment_path_for_format(format_index: int) -> String:
+	if format_index == CommentFormat.JSON:
+		return COMMENT_DEFAULT_JSON_PATH
+	return COMMENT_DEFAULT_MARKDOWN_PATH
+
+func _get_selected_map_name() -> String:
+	var selected_map_index := -1
+	if _map_option:
+		selected_map_index = _map_option.get_selected()
+	if selected_map_index >= 0 and selected_map_index < _current_maps.size():
+		return _current_maps[selected_map_index]
+	return last_selected_map_name
+
+func _refresh_comment_context() -> void:
+	var map_name := _get_selected_map_name()
+	var sequence_name := _get_selected_sequence_name()
+
+	if _comment_context_label:
+		if map_name.is_empty():
+			_comment_context_label.text = "Map context: (none selected)"
+		elif sequence_name.is_empty():
+			_comment_context_label.text = "Map context: %s" % map_name
+		else:
+			_comment_context_label.text = "Map context: %s | Sequence: %s" % [map_name, sequence_name]
+
+	_rebuild_comment_artifact_buttons(map_name)
+
+func _rebuild_comment_artifact_buttons(map_name: String) -> void:
+	if not _comment_artifact_flow:
+		return
+
+	for child_candidate in _comment_artifact_flow.get_children():
+		if child_candidate is Node:
+			(child_candidate as Node).queue_free()
+
+	var artifacts := _get_map_interactable_artifacts(map_name)
+	if artifacts.is_empty():
+		var placeholder = Label.new()
+		placeholder.text = "No interactable artifacts found for this map."
+		placeholder.add_theme_color_override("font_color", Color(0.55, 0.67, 0.79, 1.0))
+		_comment_artifact_flow.add_child(placeholder)
+		return
+
+	for artifact_name in artifacts:
+		var scene_path := _get_artifact_scene_path(artifact_name)
+		var artifact_button = Button.new()
+		artifact_button.text = artifact_name
+		artifact_button.tooltip_text = "Insert artifact token: %s\n%s" % [artifact_name, scene_path if not scene_path.is_empty() else "(scene path not found)"]
+		artifact_button.custom_minimum_size = Vector2(90, 28)
+		artifact_button.pressed.connect(_on_insert_artifact_pressed.bind(artifact_name, scene_path))
+		_style_button(artifact_button)
+		_comment_artifact_flow.add_child(artifact_button)
+
+func _get_map_interactable_artifacts(map_name: String) -> Array[String]:
+	if map_name.is_empty():
+		return []
+
+	if _comment_artifact_cache.has(map_name):
+		var cached = _comment_artifact_cache[map_name]
+		if cached is Array:
+			var fallback_cached: Array[String] = []
+			for value in cached:
+				fallback_cached.append(str(value))
+			return fallback_cached
+
+	var map_data := _load_map_data_for_comments(map_name)
+	if map_data.is_empty():
+		_comment_artifact_cache[map_name] = []
+		return []
+
+	var layers = map_data.get("layers", {})
+	if not (layers is Dictionary):
+		_comment_artifact_cache[map_name] = []
+		return []
+
+	var interactables_layer = layers.get("interactables", [])
+	if not (interactables_layer is Array):
+		_comment_artifact_cache[map_name] = []
+		return []
+
+	var unique_artifacts := {}
+	for row_candidate in interactables_layer:
+		if not (row_candidate is Array):
+			continue
+		var row: Array = row_candidate
+		for cell_candidate in row:
+			var artifact_name := _extract_artifact_name_from_cell(cell_candidate)
+			if artifact_name.is_empty():
+				continue
+			unique_artifacts[artifact_name] = true
+
+	var artifacts: Array[String] = []
+	for artifact_name in unique_artifacts.keys():
+		artifacts.append(str(artifact_name))
+	artifacts.sort()
+
+	_comment_artifact_cache[map_name] = artifacts.duplicate()
+	return artifacts
+
+func _load_map_data_for_comments(map_name: String) -> Dictionary:
+	for candidate_path in _build_map_candidate_paths(map_name):
+		if not FileAccess.file_exists(candidate_path):
+			continue
+
+		var file = FileAccess.open(candidate_path, FileAccess.READ)
+		if not file:
+			continue
+
+		var json_text = file.get_as_text()
+		file.close()
+
+		var parser = JSON.new()
+		var parse_result = parser.parse(json_text)
+		if parse_result != OK:
+			parse_result = parser.parse(_strip_trailing_commas(json_text))
+		if parse_result != OK:
+			continue
+
+		var data = parser.data
+		if data is Dictionary:
+			return data
+
+	return {}
+
+func _build_map_candidate_paths(map_name: String) -> Array[String]:
+	var paths: Array[String] = []
+	var map_id := map_name.strip_edges()
+	if map_id.is_empty():
+		return paths
+
+	if map_id.begins_with("res://"):
+		paths.append(map_id)
+		if not map_id.ends_with(".json"):
+			paths.append("%s/map_data.json" % map_id)
+		return paths
+
+	if map_id.ends_with(".json"):
+		paths.append("res://commons/maps/%s" % map_id)
+	else:
+		paths.append("res://commons/maps/%s/map_data.json" % map_id)
+		paths.append("res://commons/maps/%s.json" % map_id)
+
+	return paths
+
+func _extract_artifact_name_from_cell(cell_value: Variant) -> String:
+	if typeof(cell_value) != TYPE_STRING:
+		return ""
+
+	var raw_cell := str(cell_value).strip_edges()
+	if raw_cell.is_empty():
+		return ""
+	if raw_cell == " " or raw_cell == "." or raw_cell == "-" or raw_cell == "_":
+		return ""
+	if raw_cell.begins_with("res://"):
+		var scene_end := raw_cell.find(".tscn")
+		if scene_end >= 0:
+			return raw_cell.substr(0, scene_end + 5)
+		return raw_cell
+
+	var artifact_name := raw_cell.get_slice(":", 0).strip_edges()
+	if artifact_name.is_empty():
+		return ""
+	if artifact_name.is_valid_int():
+		return ""
+
+	return artifact_name
+
+func _get_artifact_scene_path(artifact_name: String) -> String:
+	var lookup := artifact_name.strip_edges()
+	if lookup.is_empty():
+		return ""
+	if lookup.begins_with("res://"):
+		return lookup
+
+	_ensure_artifact_scene_index()
+	if _artifact_scene_path_by_name.has(lookup):
+		return str(_artifact_scene_path_by_name[lookup])
+
+	var lowercase_lookup := lookup.to_lower()
+	if _artifact_scene_path_by_name.has(lowercase_lookup):
+		return str(_artifact_scene_path_by_name[lowercase_lookup])
+
+	return ""
+
+func _ensure_artifact_scene_index() -> void:
+	if _artifact_scene_index_loaded:
+		return
+
+	_artifact_scene_path_by_name.clear()
+	_merge_artifact_registry_file(ARTIFACT_LEGACY_REGISTRY_PATH, _artifact_scene_path_by_name)
+
+	var dir = DirAccess.open(ARTIFACT_REGISTRY_DIR_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".json"):
+				_merge_artifact_registry_file(ARTIFACT_REGISTRY_DIR_PATH + file_name, _artifact_scene_path_by_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+
+	_artifact_scene_index_loaded = true
+
+func _merge_artifact_registry_file(file_path: String, out_lookup: Dictionary) -> void:
+	if not FileAccess.file_exists(file_path):
+		return
+
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if not file:
+		return
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var parser = JSON.new()
+	var parse_result = parser.parse(json_text)
+	if parse_result != OK:
+		parse_result = parser.parse(_strip_trailing_commas(json_text))
+	if parse_result != OK:
+		return
+
+	var data = parser.data
+	if not (data is Dictionary):
+		return
+
+	var artifacts = data.get("artifacts", {})
+	if not (artifacts is Dictionary):
+		return
+
+	for artifact_id in artifacts.keys():
+		var artifact_data = artifacts[artifact_id]
+		if not (artifact_data is Dictionary):
+			continue
+
+		var scene_path := str((artifact_data as Dictionary).get("scene", "")).strip_edges()
+		if scene_path.is_empty():
+			continue
+
+		var artifact_key := str(artifact_id).strip_edges()
+		if not artifact_key.is_empty():
+			out_lookup[artifact_key] = scene_path
+			out_lookup[artifact_key.to_lower()] = scene_path
+
+		var lookup_name := str((artifact_data as Dictionary).get("lookup_name", "")).strip_edges()
+		if not lookup_name.is_empty():
+			out_lookup[lookup_name] = scene_path
+			out_lookup[lookup_name.to_lower()] = scene_path
+
+func _on_comment_format_selected(index: int) -> void:
+	last_comment_format = index
+	if not _comment_target_path_edit:
+		return
+	if _comment_target_path_edit.text.strip_edges().is_empty():
+		_comment_target_path_edit.text = _default_comment_path_for_format(index)
+	last_comment_output_path = _comment_target_path_edit.text.strip_edges()
+
+func _on_comment_target_path_changed(new_path: String) -> void:
+	last_comment_output_path = new_path.strip_edges()
+
+func _on_comment_text_changed() -> void:
+	if _comment_text_edit:
+		last_comment_draft = _comment_text_edit.text
+
+func _on_comment_use_default_path_pressed() -> void:
+	if not _comment_target_path_edit:
+		return
+	var format_index := CommentFormat.MARKDOWN
+	if _comment_format_option:
+		format_index = _comment_format_option.get_selected()
+	var default_path := _default_comment_path_for_format(format_index)
+	_comment_target_path_edit.text = default_path
+	last_comment_output_path = default_path
+	_set_comment_status("Using default path: %s" % default_path)
+
+func _on_insert_map_name_pressed() -> void:
+	var map_name := _get_selected_map_name()
+	if map_name.is_empty():
+		_set_comment_status("No map selected to insert.")
+		return
+	_insert_comment_token("[map:%s]" % map_name)
+
+func _on_insert_artifact_pressed(artifact_name: String, scene_path: String) -> void:
+	var token := "[artifact:%s]" % artifact_name
+	if not scene_path.is_empty():
+		token += " [scene:%s]" % scene_path
+	_insert_comment_token(token)
+
+func _insert_comment_token(token: String) -> void:
+	if not _comment_text_edit:
+		return
+
+	var existing_text := _comment_text_edit.text
+	var separator := ""
+	if not existing_text.is_empty() and not existing_text.ends_with(" ") and not existing_text.ends_with("\n"):
+		separator = " "
+
+	_comment_text_edit.text = "%s%s%s" % [existing_text, separator, token]
+	last_comment_draft = _comment_text_edit.text
+	_comment_text_edit.grab_focus()
+
+func _on_refresh_comment_artifacts_pressed() -> void:
+	var map_name := _get_selected_map_name()
+	if not map_name.is_empty():
+		_comment_artifact_cache.erase(map_name)
+	_rebuild_comment_artifact_buttons(map_name)
+	_set_comment_status("Refreshed artifacts for map: %s" % (map_name if not map_name.is_empty() else "(none)"))
+
+func _on_save_comment_pressed() -> void:
+	_save_comment_to_target(false)
+
+func _on_queue_for_codex_pressed() -> void:
+	_save_comment_to_target(true)
+
+func _save_comment_to_target(queue_for_codex: bool) -> void:
+	if not _comment_text_edit:
+		return
+
+	var comment_text := _comment_text_edit.text.strip_edges()
+	if comment_text.is_empty():
+		_set_comment_status("Write a comment first.")
+		return
+
+	var map_name := _get_selected_map_name()
+	var sequence_name := _get_selected_sequence_name()
+	var artifacts := _get_map_interactable_artifacts(map_name)
+	var artifact_scene_paths := {}
+	for artifact_name in artifacts:
+		var scene_path := _get_artifact_scene_path(artifact_name)
+		if not scene_path.is_empty():
+			artifact_scene_paths[artifact_name] = scene_path
+	var entry := {
+		"timestamp": Time.get_datetime_string_from_system(),
+		"sequence_name": sequence_name,
+		"map_name": map_name,
+		"artifacts": artifacts,
+		"artifact_scene_paths": artifact_scene_paths,
+		"comment": comment_text
+	}
+
+	var format_index := CommentFormat.MARKDOWN
+	if _comment_format_option:
+		format_index = _comment_format_option.get_selected()
+	last_comment_format = format_index
+
+	var target_path := ""
+	if _comment_target_path_edit:
+		target_path = _comment_target_path_edit.text.strip_edges()
+	if target_path.is_empty():
+		target_path = _default_comment_path_for_format(format_index)
+		if _comment_target_path_edit:
+			_comment_target_path_edit.text = target_path
+	last_comment_output_path = target_path
+
+	var main_saved := _save_comment_entry_to_path(entry, target_path, format_index)
+	var queue_saved := false
+	if queue_for_codex:
+		queue_saved = _append_codex_queue_entry(entry)
+
+	if main_saved and (not queue_for_codex or queue_saved):
+		_set_comment_status("Saved comment for map '%s' to %s" % [map_name if not map_name.is_empty() else "(none)", target_path])
+		_comment_text_edit.text = ""
+		last_comment_draft = ""
+	elif main_saved and queue_for_codex:
+		_set_comment_status("Saved comment, but failed to queue Codex request.")
+	elif not main_saved:
+		_set_comment_status("Failed to save comment to: %s" % target_path)
+
+func _save_comment_entry_to_path(entry: Dictionary, path: String, format_index: int) -> bool:
+	if path.is_empty():
+		return false
+
+	var saved := false
+	if format_index == CommentFormat.JSON:
+		saved = _append_comment_json(path, entry)
+	else:
+		saved = _append_comment_markdown(path, entry)
+
+	if saved:
+		return true
+
+	if path.begins_with("res://"):
+		var fallback_path := "user://desktop_feedback/%s" % path.get_file()
+		if format_index == CommentFormat.JSON:
+			saved = _append_comment_json(fallback_path, entry)
+		else:
+			saved = _append_comment_markdown(fallback_path, entry)
+
+		if saved:
+			last_comment_output_path = fallback_path
+			if _comment_target_path_edit:
+				_comment_target_path_edit.text = fallback_path
+			_set_comment_status("res:// was not writable. Saved to fallback: %s" % fallback_path)
+			return true
+
+	return false
+
+func _append_comment_markdown(path: String, entry: Dictionary) -> bool:
+	var timestamp := str(entry.get("timestamp", Time.get_datetime_string_from_system()))
+	var sequence_name := str(entry.get("sequence_name", ""))
+	var map_name := str(entry.get("map_name", ""))
+	var comment_text := str(entry.get("comment", ""))
+	var artifacts_text := _format_artifacts_for_markdown(entry.get("artifacts", []))
+	var artifact_paths_text := _format_artifact_paths_for_markdown(entry.get("artifact_scene_paths", {}))
+
+	var lines: Array[String] = []
+	lines.append("")
+	lines.append("## %s | %s" % [timestamp, map_name if not map_name.is_empty() else "(no map selected)"])
+	if not sequence_name.is_empty():
+		lines.append("- Sequence: `%s`" % sequence_name)
+	if not map_name.is_empty():
+		lines.append("- Map: `%s`" % map_name)
+	if not artifacts_text.is_empty():
+		lines.append("- Interactables: %s" % artifacts_text)
+	if not artifact_paths_text.is_empty():
+		lines.append("- Artifact Paths:")
+		lines.append(artifact_paths_text)
+	lines.append("")
+	lines.append(comment_text)
+	lines.append("")
+	lines.append("---")
+
+	var markdown_block := "\n".join(lines)
+	return _append_text_to_file(path, markdown_block)
+
+func _append_comment_json(path: String, entry: Dictionary) -> bool:
+	var payload: Dictionary = {"entries": []}
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ)
+		if file:
+			var existing_text = file.get_as_text()
+			file.close()
+			if not existing_text.strip_edges().is_empty():
+				var parser = JSON.new()
+				var parse_result = parser.parse(existing_text)
+				if parse_result != OK:
+					parse_result = parser.parse(_strip_trailing_commas(existing_text))
+				if parse_result != OK:
+					return false
+
+				var data = parser.data
+				if data is Dictionary:
+					payload = data
+				elif data is Array:
+					payload = {"entries": data}
+				else:
+					return false
+
+	var entries = payload.get("entries", [])
+	if not (entries is Array):
+		entries = []
+	var entries_array: Array = entries
+	entries_array.append(entry)
+	payload["entries"] = entries_array
+
+	if not _ensure_parent_directory(path):
+		return false
+
+	var out_file = FileAccess.open(path, FileAccess.WRITE)
+	if not out_file:
+		return false
+
+	out_file.store_string(JSON.stringify(payload, "\t"))
+	out_file.close()
+	return true
+
+func _append_codex_queue_entry(entry: Dictionary) -> bool:
+	var timestamp := str(entry.get("timestamp", Time.get_datetime_string_from_system()))
+	var sequence_name := str(entry.get("sequence_name", ""))
+	var map_name := str(entry.get("map_name", ""))
+	var comment_text := str(entry.get("comment", ""))
+	var artifacts_text := _format_artifacts_for_markdown(entry.get("artifacts", []))
+	var artifact_paths_text := _format_artifact_paths_for_markdown(entry.get("artifact_scene_paths", {}))
+
+	var lines: Array[String] = []
+	lines.append("")
+	lines.append("## [%s] Desktop Request" % timestamp)
+	if not sequence_name.is_empty():
+		lines.append("- Sequence: `%s`" % sequence_name)
+	if not map_name.is_empty():
+		lines.append("- Map: `%s`" % map_name)
+	if not artifacts_text.is_empty():
+		lines.append("- Interactables: %s" % artifacts_text)
+	if not artifact_paths_text.is_empty():
+		lines.append("- Artifact Paths:")
+		lines.append(artifact_paths_text)
+	lines.append("- Source: `DesktopMapSwitcherOverlay`")
+	lines.append("")
+	lines.append(comment_text)
+	lines.append("")
+	lines.append("---")
+
+	var block := "\n".join(lines)
+	if _append_text_to_file(COMMENT_CODEX_QUEUE_PATH, block):
+		return true
+	return _append_text_to_file("user://desktop_feedback/codex_change_requests.md", block)
+
+func _append_text_to_file(path: String, content: String) -> bool:
+	if not _ensure_parent_directory(path):
+		return false
+
+	var file: FileAccess = null
+	if FileAccess.file_exists(path):
+		file = FileAccess.open(path, FileAccess.READ_WRITE)
+		if not file:
+			return false
+		file.seek_end()
+	else:
+		file = FileAccess.open(path, FileAccess.WRITE)
+		if not file:
+			return false
+
+	file.store_string(content)
+	file.close()
+	return true
+
+func _ensure_parent_directory(path: String) -> bool:
+	var base_dir := path.get_base_dir()
+	if base_dir.is_empty():
+		return true
+
+	var absolute_dir := ProjectSettings.globalize_path(base_dir)
+	if DirAccess.dir_exists_absolute(absolute_dir):
+		return true
+
+	var make_result := DirAccess.make_dir_recursive_absolute(absolute_dir)
+	return make_result == OK or DirAccess.dir_exists_absolute(absolute_dir)
+
+func _format_artifacts_for_markdown(artifacts_value: Variant) -> String:
+	if not (artifacts_value is Array):
+		return ""
+
+	var artifacts_array: Array = artifacts_value
+	if artifacts_array.is_empty():
+		return ""
+
+	var formatted: Array[String] = []
+	for artifact_name in artifacts_array:
+		var token := str(artifact_name).strip_edges()
+		if token.is_empty():
+			continue
+		formatted.append("`%s`" % token)
+
+	return ", ".join(formatted)
+
+func _format_artifact_paths_for_markdown(artifact_paths_value: Variant) -> String:
+	if not (artifact_paths_value is Dictionary):
+		return ""
+
+	var artifact_paths: Dictionary = artifact_paths_value
+	if artifact_paths.is_empty():
+		return ""
+
+	var artifact_names: Array[String] = []
+	for artifact_name in artifact_paths.keys():
+		artifact_names.append(str(artifact_name))
+	artifact_names.sort()
+
+	var lines: Array[String] = []
+	for artifact_name in artifact_names:
+		var scene_path := str(artifact_paths.get(artifact_name, "")).strip_edges()
+		if scene_path.is_empty():
+			continue
+		lines.append("  - `%s`: `%s`" % [artifact_name, scene_path])
+
+	return "\n".join(lines)
+
+func _set_comment_status(text: String) -> void:
+	if _comment_status_label:
+		_comment_status_label.text = text
 
 func _save_quick_scroll_position() -> void:
 	if not _quick_load_scroll:

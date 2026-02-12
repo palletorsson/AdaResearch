@@ -42,6 +42,7 @@ var _last_track_idx: int = -1
 var _last_selected_count: int = 0
 var _last_bar: int = -1
 var _last_section: String = ""
+var _last_view_bar: int = -1
 
 # ── Chat History ───────────────────────────────────────────────────────
 var _chat_messages: Array[Dictionary] = []  # [{role, text, timestamp}]
@@ -68,10 +69,28 @@ var _mix_panel: PanelContainer
 var _mix_container: HBoxContainer
 var _mix_labels: Array[Label] = []
 
+# JSON spec panel
+var _json_panel: PanelContainer
+var _json_spec_label: RichTextLabel
+var _json_toggle_btn: Button
+var _json_collapsed: bool = true
+var _last_json_song_id: String = ""
+const SONGS_PATH = "res://commons/audio/parameters/songs/"
+
 # Chat section
 var _chat_panel: PanelContainer
 var _chat_scroll: ScrollContainer
 var _chat_vbox: VBoxContainer
+var _context_bar: HFlowContainer
+var _ctx_position_btn: Button
+var _ctx_track_btn: Button
+var _ctx_section_btn: Button
+var _ctx_song_btn: Button
+var _ctx_selection_btn: Button
+var _word_bar: HFlowContainer
+var _word_buttons: Array[Button] = []
+var _last_word_track: String = ""
+var _last_word_song: String = ""
 var _input_hbox: HBoxContainer
 var _input_field: LineEdit
 var _send_btn: Button
@@ -111,6 +130,7 @@ func _build_ui():
 	_build_state_section()
 	_build_track_section()
 	_build_mix_section()
+	_build_json_spec_section()
 	_build_chat_section()
 
 
@@ -203,6 +223,176 @@ func _build_mix_section():
 	scroll.add_child(_mix_container)
 
 
+func _build_json_spec_section():
+	"""Collapsible panel showing current track's JSON spec data"""
+	_json_panel = _make_section_panel()
+	_main_vbox.add_child(_json_panel)
+
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 4)
+	_json_panel.add_child(vbox)
+
+	# Header row with toggle
+	var header_row = HBoxContainer.new()
+	header_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(header_row)
+
+	var header = _make_header("📋  TRACK JSON SPEC")
+	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header_row.add_child(header)
+
+	_json_toggle_btn = Button.new()
+	_json_toggle_btn.text = "▶ Show"
+	_json_toggle_btn.custom_minimum_size = Vector2(70, 24)
+	_json_toggle_btn.pressed.connect(_on_json_toggle)
+	var btn_style = StyleBoxFlat.new()
+	btn_style.bg_color = Color(0.2, 0.22, 0.28)
+	btn_style.set_corner_radius_all(4)
+	btn_style.content_margin_left = 8
+	btn_style.content_margin_right = 8
+	_json_toggle_btn.add_theme_stylebox_override("normal", btn_style)
+	_json_toggle_btn.add_theme_font_size_override("font_size", 11)
+	_json_toggle_btn.add_theme_color_override("font_color", COL_DIM_TEXT)
+	header_row.add_child(_json_toggle_btn)
+
+	# Spec content (hidden by default)
+	_json_spec_label = RichTextLabel.new()
+	_json_spec_label.bbcode_enabled = true
+	_json_spec_label.fit_content = true
+	_json_spec_label.scroll_active = false
+	_json_spec_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_json_spec_label.add_theme_font_size_override("normal_font_size", 11)
+	_json_spec_label.add_theme_color_override("default_color", COL_TEXT)
+	_json_spec_label.visible = false
+	vbox.add_child(_json_spec_label)
+
+
+func _on_json_toggle():
+	_json_collapsed = not _json_collapsed
+	_json_spec_label.visible = not _json_collapsed
+	_json_toggle_btn.text = "▼ Hide" if not _json_collapsed else "▶ Show"
+	if not _json_collapsed:
+		_refresh_json_spec()
+
+
+func _refresh_json_spec():
+	"""Load and display the current track's JSON spec summary"""
+	var song_id := ""
+	if song_dev_tools:
+		song_id = song_dev_tools._current_song_id if not song_dev_tools._current_song_id.is_empty() else song_dev_tools._current_song
+	if song_id.is_empty():
+		_json_spec_label.text = "No song loaded"
+		return
+
+	_last_json_song_id = song_id
+
+	# Try loading the JSON file
+	var json_path = SONGS_PATH + song_id + ".json"
+	if not FileAccess.file_exists(json_path):
+		_json_spec_label.text = "No JSON spec found: " + song_id + ".json"
+		return
+
+	var file = FileAccess.open(json_path, FileAccess.READ)
+	if file == null:
+		_json_spec_label.text = "Cannot read: " + json_path
+		return
+
+	var json = JSON.new()
+	var content = file.get_as_text()
+	file.close()
+
+	if json.parse(content) != OK:
+		_json_spec_label.text = "JSON parse error"
+		return
+
+	var data: Dictionary = json.data if json.data is Dictionary else {}
+
+	# Build summary
+	var lines: PackedStringArray = []
+
+	# Metadata
+	var meta = data.get("_metadata", {})
+	if meta:
+		var display = meta.get("display_name", song_id)
+		var bpm_val = meta.get("bpm", "?")
+		lines.append("[color=#80b0ff]%s[/color]  •  %s BPM" % [display, str(bpm_val)])
+		var refs = meta.get("reference_artists", [])
+		if refs.size() > 0:
+			lines.append("[color=#888]Ref: %s[/color]" % ", ".join(PackedStringArray(refs)))
+
+	# Chord progressions
+	var chords = data.get("chord_progressions", {})
+	if chords.size() > 0:
+		var names = PackedStringArray(chords.keys())
+		lines.append("\n[color=#80ff80]♯ Chords:[/color] %d (%s)" % [chords.size(), ", ".join(names)])
+	else:
+		lines.append("\n[color=#ff8080]♯ Chords:[/color] none")
+
+	# Patterns
+	var patterns = data.get("patterns", {})
+	if patterns.size() > 0:
+		var pat_names = PackedStringArray(patterns.keys())
+		var total_instruments := 0
+		for pname in patterns:
+			if patterns[pname] is Dictionary:
+				total_instruments += patterns[pname].size()
+		lines.append("[color=#80ff80]🥁 Patterns:[/color] %d (%d instruments)" % [patterns.size(), total_instruments])
+	else:
+		lines.append("[color=#ff8080]🥁 Patterns:[/color] none — uses hardcoded fallback")
+
+	# Bass patterns
+	var bass = data.get("bass_patterns", {})
+	if bass.size() > 0:
+		lines.append("[color=#80ff80]🎸 Bass patterns:[/color] %d" % bass.size())
+	else:
+		lines.append("[color=#ff8080]🎸 Bass patterns:[/color] none")
+
+	# Arp patterns
+	var arps = data.get("arp_patterns", {})
+	if arps.size() > 0:
+		lines.append("[color=#80ff80]🎹 Arp patterns:[/color] %d" % arps.size())
+	else:
+		lines.append("[color=#888]🎹 Arp patterns:[/color] none")
+
+	# Melodies
+	var melody = data.get("melody", {})
+	if melody.size() > 0:
+		var mel_names = PackedStringArray(melody.keys())
+		lines.append("[color=#80ff80]🎵 Melodies:[/color] %d (%s)" % [melody.size(), ", ".join(mel_names)])
+	else:
+		lines.append("[color=#ff8080]🎵 Melodies:[/color] none")
+
+	# Arrangement
+	var arr = data.get("arrangement", {})
+	var sections = arr.get("sections", [])
+	if sections.size() > 0:
+		var key = arr.get("key", "?")
+		var scale = arr.get("scale", "?")
+		var total_bars := 0
+		var section_names: PackedStringArray = []
+		for sec in sections:
+			total_bars += sec.get("bars", 0)
+			section_names.append(sec.get("name", "?"))
+		lines.append("\n[color=#80ff80]📐 Arrangement:[/color] %s %s • %d sections • %d bars" % [key, scale, sections.size(), total_bars])
+		lines.append("[color=#888]  %s[/color]" % " → ".join(section_names))
+	else:
+		lines.append("\n[color=#ff8080]📐 Arrangement:[/color] none")
+
+	# Groove
+	var groove = data.get("groove", {})
+	if groove.size() > 0:
+		var swing = groove.get("swing", 0)
+		var humanize = groove.get("humanize_ms", 0)
+		lines.append("[color=#80ff80]🔄 Groove:[/color] swing %.0f%% • humanize %dms" % [swing * 100, humanize])
+
+	# Sound design
+	var sd = data.get("sound_design", {})
+	if sd.size() > 0:
+		lines.append("[color=#80ff80]🔊 Sound design:[/color] %d sections" % sd.size())
+
+	_json_spec_label.text = "\n".join(lines)
+
+
 func _build_chat_section():
 	"""Chat interface (bottom, expands to fill)"""
 	_chat_panel = _make_section_panel()
@@ -231,6 +421,44 @@ func _build_chat_section():
 
 	# Welcome message
 	_add_chat_bubble("assistant", "Hi! I'm Ada, your AI music assistant. Tell me what you'd like to change about the current song, and I'll help.")
+
+	# Context buttons — click to append context tags to your message
+	_context_bar = HFlowContainer.new()
+	_context_bar.add_theme_constant_override("h_separation", 4)
+	_context_bar.add_theme_constant_override("v_separation", 4)
+	vbox.add_child(_context_bar)
+
+	var ctx_label = Label.new()
+	ctx_label.text = "Add context:"
+	ctx_label.add_theme_font_size_override("font_size", 11)
+	ctx_label.add_theme_color_override("font_color", COL_DIM_TEXT)
+	_context_bar.add_child(ctx_label)
+
+	_ctx_position_btn = _make_context_button("📍 Position")
+	_ctx_position_btn.pressed.connect(_on_ctx_position)
+	_context_bar.add_child(_ctx_position_btn)
+
+	_ctx_track_btn = _make_context_button("🎹 Track")
+	_ctx_track_btn.pressed.connect(_on_ctx_track)
+	_context_bar.add_child(_ctx_track_btn)
+
+	_ctx_section_btn = _make_context_button("§ Section")
+	_ctx_section_btn.pressed.connect(_on_ctx_section)
+	_context_bar.add_child(_ctx_section_btn)
+
+	_ctx_song_btn = _make_context_button("🎵 Song")
+	_ctx_song_btn.pressed.connect(_on_ctx_song)
+	_context_bar.add_child(_ctx_song_btn)
+
+	_ctx_selection_btn = _make_context_button("🎯 Selection")
+	_ctx_selection_btn.pressed.connect(_on_ctx_selection)
+	_context_bar.add_child(_ctx_selection_btn)
+
+	# Sound word buttons — populated from song_words based on current track
+	_word_bar = HFlowContainer.new()
+	_word_bar.add_theme_constant_override("h_separation", 3)
+	_word_bar.add_theme_constant_override("v_separation", 3)
+	vbox.add_child(_word_bar)
 
 	# Input row
 	_input_hbox = HBoxContainer.new()
@@ -265,6 +493,10 @@ func _update_live_state_display():
 		_song_name_label.text = "No song loaded"
 	else:
 		_song_name_label.text = "♪ " + song_id.replace("_", " ").capitalize()
+
+	# Auto-refresh JSON spec when song changes
+	if song_id != _last_json_song_id and not _json_collapsed:
+		_refresh_json_spec()
 
 	# Playback state
 	var is_playing: bool = song_dev_tools._is_playing and song_dev_tools._player.playing
@@ -319,6 +551,12 @@ func _update_live_state_display():
 
 	# --- Mix Overview ---
 	_update_mix_overview()
+
+	# --- Context Buttons ---
+	_update_context_buttons()
+
+	# --- Sound Word Buttons ---
+	_update_word_buttons()
 
 
 func _update_track_info():
@@ -487,12 +725,20 @@ func _is_state_dirty() -> bool:
 			var ticks_per_bar = midi_editor._ticks_per_quarter * 4
 			bar = midi_editor._playback_tick / ticks_per_bar
 
+	var view_bar := -1
+	if midi_editor:
+		var tpq: int = midi_editor._ticks_per_quarter
+		var ticks_per_bar: int = tpq * 4
+		var scroll_tick: int = int(midi_editor._scroll_x)
+		view_bar = scroll_tick / ticks_per_bar
+
 	var dirty = (
 		is_playing != _last_playing or
 		track_idx != _last_track_idx or
 		sel_count != _last_selected_count or
 		bar != _last_bar or
-		section != _last_section
+		section != _last_section or
+		view_bar != _last_view_bar
 	)
 
 	_last_playing = is_playing
@@ -500,6 +746,7 @@ func _is_state_dirty() -> bool:
 	_last_selected_count = sel_count
 	_last_bar = bar
 	_last_section = section
+	_last_view_bar = view_bar
 
 	return dirty
 
@@ -526,6 +773,8 @@ func _build_state_snapshot() -> Dictionary:
 	var bpm := 120.0
 	var playback_seconds := 0.0
 	var playing := false
+	var view_bar := 0
+	var view_beat := 0
 
 	if midi_editor:
 		bpm = midi_editor._bpm
@@ -536,6 +785,10 @@ func _build_state_snapshot() -> Dictionary:
 			beat = (midi_editor._playback_tick % ticks_per_bar) / tpq + 1
 			playback_seconds = float(midi_editor._playback_tick) / (bpm / 60.0 * tpq)
 		playing = midi_editor._is_playing
+		# Scroll position — where the user is looking in the timeline
+		var scroll_tick: int = int(midi_editor._scroll_x)
+		view_bar = scroll_tick / ticks_per_bar + 1
+		view_beat = (scroll_tick % ticks_per_bar) / tpq + 1
 	elif song_dev_tools:
 		playing = song_dev_tools._is_playing
 		playback_seconds = song_dev_tools._playback_time
@@ -546,6 +799,8 @@ func _build_state_snapshot() -> Dictionary:
 
 	state["bar"] = bar
 	state["beat"] = beat
+	state["view_bar"] = view_bar
+	state["view_beat"] = view_beat
 	state["playback_seconds"] = snappedf(playback_seconds, 0.1)
 	state["playing"] = playing
 	state["bpm"] = bpm
@@ -604,6 +859,37 @@ func _build_state_snapshot() -> Dictionary:
 	state["mix_levels"] = mix_levels
 	state["muted_tracks"] = muted_tracks
 	state["solo_tracks"] = solo_tracks
+
+	# JSON spec summary — what data the track has
+	var spec_summary := {}
+	if not song_id.is_empty():
+		var json_path = SONGS_PATH + song_id + ".json"
+		if FileAccess.file_exists(json_path):
+			var spec_file = FileAccess.open(json_path, FileAccess.READ)
+			if spec_file:
+				var spec_json = JSON.new()
+				if spec_json.parse(spec_file.get_as_text()) == OK and spec_json.data is Dictionary:
+					var d: Dictionary = spec_json.data
+					var arr = d.get("arrangement", {})
+					var secs = arr.get("sections", [])
+					var sec_names: Array = []
+					for s in secs:
+						sec_names.append(s.get("name", "?"))
+					spec_summary = {
+						"has_patterns": d.has("patterns") and d["patterns"].size() > 0,
+						"has_melody": d.has("melody") and d["melody"].size() > 0,
+						"has_chords": d.has("chord_progressions") and d["chord_progressions"].size() > 0,
+						"has_arrangement": secs.size() > 0,
+						"key": arr.get("key", ""),
+						"scale": arr.get("scale", ""),
+						"sections": sec_names,
+						"total_bars": secs.reduce(func(acc, s): return acc + s.get("bars", 0), 0),
+						"pattern_count": d.get("patterns", {}).size(),
+						"melody_count": d.get("melody", {}).size(),
+						"chord_count": d.get("chord_progressions", {}).size(),
+					}
+				spec_file.close()
+	state["json_spec"] = spec_summary
 
 	return state
 
@@ -807,6 +1093,317 @@ func _get_synth_params_text(track_name: String, is_drum: bool) -> String:
 		params = "Bus: Master"
 
 	return params
+
+
+# ── Context Buttons ────────────────────────────────────────────────────
+
+func _make_context_button(text: String) -> Button:
+	var btn = Button.new()
+	btn.text = text
+	btn.custom_minimum_size = Vector2(0, 26)
+	var st = StyleBoxFlat.new()
+	st.bg_color = Color(0.18, 0.2, 0.28)
+	st.set_corner_radius_all(12)
+	st.content_margin_left = 8
+	st.content_margin_right = 8
+	st.content_margin_top = 2
+	st.content_margin_bottom = 2
+	st.border_color = Color(0.3, 0.35, 0.5)
+	st.set_border_width_all(1)
+	btn.add_theme_stylebox_override("normal", st)
+	var hv = st.duplicate()
+	hv.bg_color = Color(0.25, 0.28, 0.4)
+	hv.border_color = COL_ACCENT
+	btn.add_theme_stylebox_override("hover", hv)
+	var pr = st.duplicate()
+	pr.bg_color = COL_ACCENT.darkened(0.2)
+	btn.add_theme_stylebox_override("pressed", pr)
+	btn.add_theme_font_size_override("font_size", 11)
+	btn.add_theme_color_override("font_color", Color(0.75, 0.8, 0.9))
+	return btn
+
+
+func _append_to_input(tag: String):
+	"""Append a context tag to the chat input field."""
+	var current = _input_field.text
+	if current.is_empty():
+		_input_field.text = tag + " "
+	else:
+		_input_field.text = current.strip_edges() + " " + tag + " "
+	_input_field.caret_column = _input_field.text.length()
+	_input_field.grab_focus()
+
+
+func _on_ctx_position():
+	"""Insert current playback or scroll position."""
+	var bar := 0
+	var beat := 0
+	var source := "view"
+	if midi_editor:
+		var tpq: int = midi_editor._ticks_per_quarter
+		var tpb: int = tpq * 4
+		if midi_editor._is_playing:
+			bar = midi_editor._playback_tick / tpb + 1
+			beat = (midi_editor._playback_tick % tpb) / tpq + 1
+			source = "playhead"
+		else:
+			var scroll_tick: int = int(midi_editor._scroll_x)
+			bar = scroll_tick / tpb + 1
+			beat = (scroll_tick % tpb) / tpq + 1
+			source = "view"
+	_append_to_input("[at bar:%d beat:%d (%s)]" % [bar, beat, source])
+
+
+func _on_ctx_track():
+	"""Insert current track name and key parameters."""
+	if midi_editor == null or midi_editor._tracks.is_empty():
+		_append_to_input("[track: none]")
+		return
+	var ti: int = midi_editor._current_track
+	if ti < 0 or ti >= midi_editor._tracks.size():
+		_append_to_input("[track: none]")
+		return
+	var trk: Dictionary = midi_editor._tracks[ti]
+	var tname: String = trk.get("name", "Track %d" % (ti + 1))
+	var program: int = trk.get("program", 0)
+	var is_drum: bool = trk.get("is_drum", false)
+	var note_count: int = trk.get("notes", []).size()
+	var type_str = "drums" if is_drum else "prog:%d" % program
+
+	# Add synth params if available
+	var params_str := ""
+	if song_dev_tools:
+		var lp: Dictionary = song_dev_tools.live_params
+		var inst = tname.to_lower()
+		if "bass" in inst or "sub" in inst:
+			params_str = " filter:%dHz res:%.2f" % [int(lp.get("bass_filter_cutoff", 800)), lp.get("bass_filter_resonance", 0.5)]
+		elif "pad" in inst or "mellotron" in inst:
+			params_str = " filter:%dHz detune:%.1f" % [int(lp.get("pad_filter_cutoff", 2000)), lp.get("pad_detune", 10.0)]
+		elif "lead" in inst or "elp" in inst:
+			params_str = " filter:%dHz vibrato:%.2f" % [int(lp.get("lead_filter_cutoff", 3000)), lp.get("lead_vibrato_depth", 0.2)]
+	_append_to_input("[track:%s %s notes:%d%s]" % [tname, type_str, note_count, params_str])
+
+
+func _on_ctx_section():
+	"""Insert current section name."""
+	var section := "none"
+	if song_dev_tools:
+		section = song_dev_tools._current_section_name if not song_dev_tools._current_section_name.is_empty() else "none"
+	_append_to_input("[section:%s]" % section)
+
+
+func _on_ctx_song():
+	"""Insert global song info: name, key, BPM, style."""
+	var song_id := ""
+	var bpm := 120.0
+	if song_dev_tools:
+		song_id = song_dev_tools._current_song_id if not song_dev_tools._current_song_id.is_empty() else song_dev_tools._current_song
+	if midi_editor:
+		bpm = midi_editor._bpm
+
+	# Try to read key from JSON
+	var key_str := "?"
+	if not song_id.is_empty():
+		var json_path = SONGS_PATH + song_id + ".json"
+		if FileAccess.file_exists(json_path):
+			var file = FileAccess.open(json_path, FileAccess.READ)
+			if file:
+				var json = JSON.new()
+				if json.parse(file.get_as_text()) == OK and json.data is Dictionary:
+					var params = json.data.get("parameters", {})
+					var key_data = params.get("key", {})
+					key_str = key_data.get("value", "?") if key_data is Dictionary else str(key_data)
+				file.close()
+	_append_to_input("[song:%s key:%s bpm:%d]" % [song_id, key_str, int(bpm)])
+
+
+func _on_ctx_selection():
+	"""Insert info about currently selected notes."""
+	if midi_editor == null or midi_editor._selected_notes.is_empty():
+		_append_to_input("[selection: none]")
+		return
+	var sel: Array = midi_editor._selected_notes
+	var note_strs: PackedStringArray = []
+	var count := 0
+	for s in sel:
+		if count >= 4:
+			note_strs.append("+%d more" % (sel.size() - 4))
+			break
+		var ti: int = s.get("track_idx", -1)
+		var ni: int = s.get("note_idx", -1)
+		if ti >= 0 and ti < midi_editor._tracks.size():
+			var notes_arr: Array = midi_editor._tracks[ti].get("notes", [])
+			if ni >= 0 and ni < notes_arr.size():
+				var n: Dictionary = notes_arr[ni]
+				var note_name = _midi_note_name(n.get("note", 60))
+				note_strs.append("%s v%d d%d" % [note_name, n.get("velocity", 100), n.get("duration", 480)])
+		count += 1
+	_append_to_input("[selected: %s]" % " | ".join(note_strs))
+
+
+func _update_word_buttons():
+	"""Rebuild word buttons when track or song changes. Shows all words for the current song grouped by layer."""
+	if song_dev_tools == null:
+		return
+
+	# Determine current track name and song
+	var track_name := ""
+	if midi_editor and not midi_editor._tracks.is_empty():
+		var ti: int = midi_editor._current_track
+		if ti >= 0 and ti < midi_editor._tracks.size():
+			track_name = midi_editor._tracks[ti].get("name", "")
+	var song_id := ""
+	if song_dev_tools:
+		song_id = song_dev_tools._current_song_id if not song_dev_tools._current_song_id.is_empty() else song_dev_tools._current_song
+
+	# Only rebuild if track or song changed
+	if track_name == _last_word_track and song_id == _last_word_song:
+		return
+	_last_word_track = track_name
+	_last_word_song = song_id
+
+	# Clear old buttons and labels
+	for child in _word_bar.get_children():
+		child.queue_free()
+	_word_buttons.clear()
+
+	if song_id.is_empty():
+		return
+
+	# Read words from SongDevTools._current_song_words (populated by _load_song_words)
+	var song_words: Dictionary = song_dev_tools._current_song_words
+	if song_words.is_empty():
+		return
+
+	# Collect all unique words, tracking which layer they belong to
+	# Highlight words from the current track's matching layer
+	var matched_layer := ""
+	var track_lower := track_name.to_lower()
+	for layer_name in song_words:
+		var layer_lower: String = layer_name.to_lower()
+		if layer_lower == track_lower or layer_lower in track_lower or track_lower in layer_lower:
+			matched_layer = layer_name
+			break
+
+	# Build word buttons — matched layer first, then others
+	var added_words: Dictionary = {}  # Track duplicates
+
+	# Current track's words first (highlighted)
+	if not matched_layer.is_empty() and song_words.has(matched_layer):
+		var data: Dictionary = song_words[matched_layer]
+		var words: Array = data.get("words", [])
+		if not words.is_empty():
+			var lbl = Label.new()
+			lbl.text = matched_layer + ":"
+			lbl.add_theme_font_size_override("font_size", 11)
+			lbl.add_theme_color_override("font_color", COL_HEADER)
+			_word_bar.add_child(lbl)
+			for word in words:
+				var w := str(word)
+				var btn = _make_word_button(w)
+				btn.pressed.connect(func(): _append_to_input("[%s]" % w))
+				_word_bar.add_child(btn)
+				_word_buttons.append(btn)
+				added_words[w] = true
+
+	# Other layers (dimmer)
+	for layer_name in song_words:
+		if layer_name == matched_layer:
+			continue
+		var data: Dictionary = song_words[layer_name]
+		var words: Array = data.get("words", [])
+		var new_words: Array = []
+		for word in words:
+			if not added_words.has(str(word)):
+				new_words.append(word)
+				added_words[str(word)] = true
+		if new_words.is_empty():
+			continue
+		# Separator label
+		var sep = Label.new()
+		sep.text = layer_name + ":"
+		sep.add_theme_font_size_override("font_size", 10)
+		sep.add_theme_color_override("font_color", COL_DIM_TEXT)
+		_word_bar.add_child(sep)
+		for word in new_words:
+			var w := str(word)
+			var btn = _make_word_button(w)
+			# Dim style for non-current layer
+			var dim_st = StyleBoxFlat.new()
+			dim_st.bg_color = Color(0.13, 0.15, 0.14)
+			dim_st.set_corner_radius_all(10)
+			dim_st.content_margin_left = 7
+			dim_st.content_margin_right = 7
+			dim_st.content_margin_top = 1
+			dim_st.content_margin_bottom = 1
+			dim_st.border_color = Color(0.25, 0.3, 0.28)
+			dim_st.set_border_width_all(1)
+			btn.add_theme_stylebox_override("normal", dim_st)
+			btn.add_theme_color_override("font_color", Color(0.5, 0.65, 0.55))
+			btn.pressed.connect(func(): _append_to_input("[%s]" % w))
+			_word_bar.add_child(btn)
+			_word_buttons.append(btn)
+
+
+func _make_word_button(word: String) -> Button:
+	var btn = Button.new()
+	btn.text = word
+	btn.custom_minimum_size = Vector2(0, 22)
+	var st = StyleBoxFlat.new()
+	st.bg_color = Color(0.15, 0.2, 0.18)
+	st.set_corner_radius_all(10)
+	st.content_margin_left = 7
+	st.content_margin_right = 7
+	st.content_margin_top = 1
+	st.content_margin_bottom = 1
+	st.border_color = Color(0.3, 0.45, 0.35)
+	st.set_border_width_all(1)
+	btn.add_theme_stylebox_override("normal", st)
+	var hv = st.duplicate()
+	hv.bg_color = Color(0.2, 0.35, 0.25)
+	hv.border_color = Color(0.4, 0.7, 0.5)
+	btn.add_theme_stylebox_override("hover", hv)
+	var pr = st.duplicate()
+	pr.bg_color = Color(0.3, 0.5, 0.35)
+	btn.add_theme_stylebox_override("pressed", pr)
+	btn.add_theme_font_size_override("font_size", 11)
+	btn.add_theme_color_override("font_color", Color(0.6, 0.85, 0.7))
+	return btn
+
+
+func _update_context_buttons():
+	"""Update context button labels with current live values for quick scanning."""
+	if midi_editor == null and song_dev_tools == null:
+		return
+
+	# Position button — show current bar
+	var bar := 0
+	if midi_editor:
+		var tpq: int = midi_editor._ticks_per_quarter
+		var tpb: int = tpq * 4
+		if midi_editor._is_playing:
+			bar = midi_editor._playback_tick / tpb + 1
+		else:
+			bar = int(midi_editor._scroll_x) / tpb + 1
+	_ctx_position_btn.text = "📍 Bar %d" % bar if bar > 0 else "📍 Position"
+
+	# Track button
+	if midi_editor and not midi_editor._tracks.is_empty():
+		var ti: int = midi_editor._current_track
+		if ti >= 0 and ti < midi_editor._tracks.size():
+			var tname: String = midi_editor._tracks[ti].get("name", "?")
+			if tname.length() > 12:
+				tname = tname.substr(0, 11) + "…"
+			_ctx_track_btn.text = "🎹 %s" % tname
+
+	# Section button
+	if song_dev_tools and not song_dev_tools._current_section_name.is_empty():
+		_ctx_section_btn.text = "§ %s" % song_dev_tools._current_section_name
+
+	# Selection button — show count
+	if midi_editor:
+		var sel_count: int = midi_editor._selected_notes.size()
+		_ctx_selection_btn.text = "🎯 %d notes" % sel_count if sel_count > 0 else "🎯 Selection"
 
 
 # ── Utility ────────────────────────────────────────────────────────────

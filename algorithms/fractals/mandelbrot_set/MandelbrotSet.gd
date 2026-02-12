@@ -136,9 +136,6 @@ func _animate_fractal():
 	var pulse = 1.0 + sin(time * 2.0) * 0.05
 	fractal_multimesh_instance.scale = Vector3.ONE * pulse
 
-	# Slow rotation for visual interest
-	fractal_multimesh_instance.rotation.y = time * 0.1
-
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		# Generate new view

@@ -21,6 +21,13 @@
     },
     "sound_design": {
         "vangelis_keys": { "filter_cutoff": 91, "resonance": 88, "velocity": 83 },
-        "string_pad": { "detune": 0.002, "attack": 0.3 }
+        "string_pad": { "detune": 0.002, "attack": 0.3 },
+        "derbyshire_fx": {
+            "description": "Delia Derbyshire / BBC Radiophonic Workshop textures — ring-modulated sine sweeps, tape-speed oscillators, concrete sci-fi",
+            "ring_modulator": { "carrier_hz": 150, "mod_hz": 30, "depth": 0.8 },
+            "wobbly_sine": { "base_hz": 440, "lfo_rate_hz": 3.0, "lfo_depth_cents": 80, "character": "doctor_who_theme" },
+            "tape_speed_sweep": { "start_rate": 0.5, "end_rate": 2.0, "duration_sec": 4.0 },
+            "white_noise_burst": { "filter_hz": 2000, "resonance": 0.7, "decay_ms": 200 }
+        }
     }
 }

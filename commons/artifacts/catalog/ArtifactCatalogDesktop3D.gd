@@ -4,6 +4,9 @@ extends Node3D
 ## Standalone 3D artifact catalog for desktop testing
 ## Includes preview viewport for viewing artifacts without needing GridSystem
 
+@export var next_artifact_key: Key = KEY_N
+@export var toggle_rotation_key: Key = KEY_R
+
 @onready var _catalog_ui: CanvasLayer = $CatalogUI
 @onready var _preview_container: Node3D = $PreviewContainer
 @onready var _preview_camera: Camera3D = $PreviewContainer/PreviewCamera
@@ -155,13 +158,41 @@ func _clear_preview():
 		_current_preview_artifact = null
 
 func _input(event: InputEvent):
-	# Toggle rotation with R key
-	if event.is_action_pressed("ui_text_completion_replace"):  # R key fallback
-		_rotate_preview = not _rotate_preview
-	
-	# Escape to close
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if key_event.pressed and not key_event.echo and not _is_text_input_focused():
+			if key_event.keycode == toggle_rotation_key or key_event.physical_keycode == toggle_rotation_key:
+				_rotate_preview = not _rotate_preview
+				return
+			if key_event.keycode == next_artifact_key or key_event.physical_keycode == next_artifact_key:
+				_select_next_artifact()
+				return
+
+	# Escape to clear preview
 	if event.is_action_pressed("ui_cancel"):
 		_clear_preview()
+
+
+func _select_next_artifact() -> void:
+	if not _catalog_ui:
+		return
+
+	var catalog = _catalog_ui.get_node_or_null("ArtifactCatalogUI")
+	if not catalog:
+		return
+
+	if catalog.has_method("select_next_artifact"):
+		var lookup_name := str(catalog.select_next_artifact())
+		if not lookup_name.is_empty():
+			_load_preview_artifact(lookup_name)
+
+
+func _is_text_input_focused() -> bool:
+	var viewport := get_viewport()
+	if not viewport:
+		return false
+	var focused := viewport.gui_get_focus_owner()
+	return focused is LineEdit or focused is TextEdit
 
 ## Public API
 func set_rotation_enabled(enabled: bool):

@@ -32,7 +32,7 @@ script = ExtResource("1_script")
 environment = SubResource("Environment_1")
 
 [node name="PreviewCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2.4, 6.5)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.2, 6.5)
 current = true
 fov = 55.0
 
@@ -47,7 +47,7 @@ light_color = Color(0.75, 0.82, 1, 1)
 light_energy = 0.35
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0, 0)
 mesh = SubResource("PlaneMesh_1")
 
 [node name="MapBrowser3D" parent="." instance=ExtResource("2_browser")]

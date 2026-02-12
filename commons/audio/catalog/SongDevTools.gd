@@ -89,6 +89,7 @@ var _config_path_label: Label
 var _current_config: Dictionary = {}
 var _current_config_path: String = ""
 var _current_section_name: String = ""
+var _current_song_words: Dictionary = {}  # layer_name -> {words: [...], params: {...}}
 var _pattern_overrides: Dictionary = {}  # generator_song_id -> {sections:{section->{layer->data}}}
 
 # Subset selector (grid editor subsets)
@@ -3003,8 +3004,8 @@ func _load_song_words(song_id: String):
 		},
 		"reese_jungle": {
 			"Reese Bass": {
-				"words": ["wobbling", "detuned", "thick", "dark"],
-				"params": {"detune": 0.07, "sub": true, "filter_lfo": 0.25}
+				"words": ["wobbling", "detuned", "thick", "dark", "modulated", "growling"],
+				"params": {"detune": 0.07, "sub": true, "filter_lfo": 0.5, "pitch_wobble": 0.003, "drive_swell": true}
 			},
 			"Amen Break": {
 				"words": ["chopped", "aggressive", "fast", "complex"],
@@ -3053,6 +3054,10 @@ func _load_song_words(song_id: String):
 			"Lead": {
 				"words": ["soaring", "vibrato", "expressive", "bright"],
 				"params": {"vibrato_rate": 5.0, "vibrato_depth": 0.01}
+			},
+			"Derbyshire FX": {
+				"words": ["metallic", "wobbly", "alien", "tape", "radiophonic", "zappy"],
+				"params": {"ring_mod_carrier": 150, "ring_mod_depth": 0.8, "wobble_lfo": 3.0, "wobble_depth_cents": 80, "tape_sweep": true, "noise_burst_hz": 2000}
 			}
 		},
 		"pop_generative": {
@@ -3315,6 +3320,7 @@ func _load_song_words(song_id: String):
 	}
 	
 	var layers = song_words.get(song_id, {})
+	_current_song_words = layers
 	for layer_name in layers.keys():
 		var data = layers[layer_name]
 		_word_display.set_layer_words(layer_name, data["words"], data["params"])

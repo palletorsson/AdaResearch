@@ -6,11 +6,17 @@ extends Control
 
 signal spawn_requested(lookup_name: String)
 
+const COMMENT_DEFAULT_MARKDOWN_PATH := "res://ada_run/desktop_feedback.md"
+
 @onready var _header_label: Label = $VBoxContainer/Header/HBoxContainer/TitleLabel
 @onready var _stats_label: Label = $VBoxContainer/Header/HBoxContainer/StatsLabel
 @onready var _filters: ArtifactFilters = $VBoxContainer/Filters
 @onready var _browser: ArtifactBrowser = $VBoxContainer/HSplitContainer/LeftPanel/Browser
 @onready var _preview: ArtifactPreview = $VBoxContainer/HSplitContainer/RightPanel/Preview
+@onready var _comment_edit: TextEdit = $VBoxContainer/HSplitContainer/RightPanel/CommentPanel/VBoxContainer/CommentEdit
+@onready var _insert_artifact_button: Button = $VBoxContainer/HSplitContainer/RightPanel/CommentPanel/VBoxContainer/CommentButtons/InsertArtifactButton
+@onready var _save_comment_button: Button = $VBoxContainer/HSplitContainer/RightPanel/CommentPanel/VBoxContainer/CommentButtons/SaveCommentButton
+@onready var _comment_status_label: Label = $VBoxContainer/HSplitContainer/RightPanel/CommentPanel/VBoxContainer/CommentStatusLabel
 
 
 func _ready():
@@ -32,6 +38,11 @@ func _setup_signals():
 	# Connect preview spawn button
 	if _preview:
 		_preview.spawn_requested.connect(_on_spawn_requested)
+
+	if _insert_artifact_button:
+		_insert_artifact_button.pressed.connect(_on_insert_artifact_comment_token_pressed)
+	if _save_comment_button:
+		_save_comment_button.pressed.connect(_on_save_comment_pressed)
 
 
 func _connect_to_grid_system():
@@ -81,9 +92,9 @@ func _on_map_generation_complete():
 	refresh()
 
 
-func _refresh_catalog(theme: String = "all", complexity: String = "all", search: String = ""):
+func _refresh_catalog(theme: String = "all", complexity: String = "all", search: String = "", sequence_name: String = "all"):
 	if _browser:
-		_browser.populate(theme, complexity, search)
+		_browser.populate(theme, complexity, search, sequence_name)
 
 	if _preview:
 		_preview.clear_preview()
@@ -110,8 +121,8 @@ func _update_stats():
 		_stats_label.text = "Artifacts: %d / %d Unlocked" % [unlocked, total]
 
 
-func _on_filters_changed(theme: String, complexity: String, search_text: String):
-	_refresh_catalog(theme, complexity, search_text)
+func _on_filters_changed(theme: String, complexity: String, sequence_name: String, search_text: String):
+	_refresh_catalog(theme, complexity, search_text, sequence_name)
 
 
 func _on_artifact_selected(lookup_name: String):
@@ -137,3 +148,121 @@ func clear_selection():
 		_browser.clear_selection()
 	if _preview:
 		_preview.clear_preview()
+
+
+## Public API: select next visible artifact in the current filter
+func select_next_artifact() -> String:
+	if not _browser:
+		return ""
+	return _browser.select_next_artifact()
+
+
+func _get_selected_lookup_name() -> String:
+	if _browser:
+		return _browser.get_selected_artifact()
+	return ""
+
+
+func _on_insert_artifact_comment_token_pressed() -> void:
+	if not _comment_edit:
+		return
+
+	var lookup_name := _get_selected_lookup_name()
+	if lookup_name.is_empty():
+		_set_comment_status("Select an artifact first.")
+		return
+
+	var artifact = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup_name)
+	var scene_path := str(artifact.get("scene", "")).strip_edges()
+
+	var token := "[artifact:%s]" % lookup_name
+	if not scene_path.is_empty():
+		token += " [scene:%s]" % scene_path
+
+	if not _comment_edit.text.is_empty() and not _comment_edit.text.ends_with(" ") and not _comment_edit.text.ends_with("\n"):
+		_comment_edit.text += " "
+	_comment_edit.text += token
+	_comment_edit.grab_focus()
+	_set_comment_status("Inserted artifact token.")
+
+
+func _on_save_comment_pressed() -> void:
+	if not _comment_edit:
+		return
+
+	var comment_text := _comment_edit.text.strip_edges()
+	if comment_text.is_empty():
+		_set_comment_status("Write a comment first.")
+		return
+
+	var lookup_name := _get_selected_lookup_name()
+	var artifact := ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup_name)
+	var scene_path := str(artifact.get("scene", "")).strip_edges()
+	var sequence_name := str(artifact.get("sequence", "")).strip_edges()
+
+	var lines: Array[String] = []
+	lines.append("")
+	lines.append("## %s | Artifact Catalog" % Time.get_datetime_string_from_system())
+	if not lookup_name.is_empty():
+		lines.append("- Artifact: `%s`" % lookup_name)
+	if not scene_path.is_empty():
+		lines.append("- Scene: `%s`" % scene_path)
+	if not sequence_name.is_empty():
+		lines.append("- Sequence: `%s`" % sequence_name)
+	lines.append("- Source: `ArtifactCatalogDesktop3D`")
+	lines.append("")
+	lines.append(comment_text)
+	lines.append("")
+	lines.append("---")
+
+	var block := "\n".join(lines)
+	if _append_text_to_file(COMMENT_DEFAULT_MARKDOWN_PATH, block):
+		_set_comment_status("Saved comment to %s" % COMMENT_DEFAULT_MARKDOWN_PATH)
+		_comment_edit.text = ""
+		return
+
+	var fallback_path := "user://desktop_feedback/desktop_feedback.md"
+	if _append_text_to_file(fallback_path, block):
+		_set_comment_status("res:// not writable. Saved comment to %s" % fallback_path)
+		_comment_edit.text = ""
+		return
+
+	_set_comment_status("Failed to save comment.")
+
+
+func _append_text_to_file(path: String, content: String) -> bool:
+	if not _ensure_parent_directory(path):
+		return false
+
+	var file: FileAccess = null
+	if FileAccess.file_exists(path):
+		file = FileAccess.open(path, FileAccess.READ_WRITE)
+		if not file:
+			return false
+		file.seek_end()
+	else:
+		file = FileAccess.open(path, FileAccess.WRITE)
+		if not file:
+			return false
+
+	file.store_string(content)
+	file.close()
+	return true
+
+
+func _ensure_parent_directory(path: String) -> bool:
+	var base_dir := path.get_base_dir()
+	if base_dir.is_empty():
+		return true
+
+	var absolute_dir := ProjectSettings.globalize_path(base_dir)
+	if DirAccess.dir_exists_absolute(absolute_dir):
+		return true
+
+	var make_result := DirAccess.make_dir_recursive_absolute(absolute_dir)
+	return make_result == OK or DirAccess.dir_exists_absolute(absolute_dir)
+
+
+func _set_comment_status(text: String) -> void:
+	if _comment_status_label:
+		_comment_status_label.text = text

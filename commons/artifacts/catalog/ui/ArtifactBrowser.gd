@@ -1,7 +1,7 @@
 class_name ArtifactBrowser
 extends Control
 
-## Tree widget for browsing artifacts by theme categories
+## Tree widget for browsing artifacts grouped by scene folder
 
 signal artifact_selected(lookup_name: String)
 
@@ -15,15 +15,16 @@ func _ready():
 	_tree.item_selected.connect(_on_tree_item_selected)
 
 
-## Populate tree with artifacts grouped by theme
-func populate(theme_filter: String = "all", complexity_filter: String = "all", search: String = ""):
+## Populate tree with artifacts grouped by scene folder
+func populate(theme_filter: String = "all", complexity_filter: String = "all", search: String = "", sequence_filter: String = "all"):
 	_tree.clear()
 
 	# Get filtered artifacts
 	_current_artifacts = ArtifactCatalogDataProvider.get_filtered_artifacts(
 		theme_filter,
 		complexity_filter,
-		search
+		search,
+		sequence_filter
 	)
 
 	if _current_artifacts.is_empty():
@@ -32,73 +33,66 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 
 	var root = _tree.create_item()
 
-	# Get all themes
-	var all_themes = ArtifactThemeQuery.get_all_themes()
-
-	# Group artifacts by theme
-	var artifacts_by_theme = {}
-	var uncategorized = []
-	for theme in all_themes:
-		artifacts_by_theme[theme] = []
-
+	var artifacts_by_folder := {}
 	for artifact in _current_artifacts:
-		var artifact_themes = artifact.get("dev_themes", [])
-		var matched_any_theme = false
+		var folder_key := _extract_folder_group(str(artifact.get("scene", "")))
+		if not artifacts_by_folder.has(folder_key):
+			artifacts_by_folder[folder_key] = []
+		(artifacts_by_folder[folder_key] as Array).append(artifact)
 
-		if not artifact_themes.is_empty():
-			for artifact_theme in artifact_themes:
-				if artifacts_by_theme.has(artifact_theme):
-					artifacts_by_theme[artifact_theme].append(artifact)
-					matched_any_theme = true
+	var folder_keys: Array[String] = []
+	for folder_name in artifacts_by_folder.keys():
+		folder_keys.append(str(folder_name))
+	folder_keys.sort()
 
-		# Add to uncategorized if no themes OR no matching themes found
-		if artifact_themes.is_empty() or not matched_any_theme:
-			uncategorized.append(artifact)
-
-	print("ArtifactBrowser: Populated with %d artifacts, %d uncategorized, %d themes" % [
-		_current_artifacts.size(), uncategorized.size(), all_themes.size()
+	print("ArtifactBrowser: Populated with %d artifacts across %d folders" % [
+		_current_artifacts.size(),
+		folder_keys.size()
 	])
 
-	# Add uncategorized artifacts FIRST (most artifacts are here)
-	# Limit initial display to prevent performance issues
-	const MAX_INITIAL_DISPLAY = 100
-
-	if not uncategorized.is_empty():
-		var uncategorized_item = _tree.create_item(root)
-		var display_count = mini(uncategorized.size(), MAX_INITIAL_DISPLAY)
-		var total_count = uncategorized.size()
-
-		if total_count > MAX_INITIAL_DISPLAY:
-			uncategorized_item.set_text(0, "All Artifacts (showing %d of %d - use search to filter)" % [display_count, total_count])
-		else:
-			uncategorized_item.set_text(0, "All Artifacts (%d)" % total_count)
-
-		uncategorized_item.set_selectable(0, false)
-		uncategorized_item.set_collapsed(false)  # Show expanded by default
-
-		# Only add first N items to prevent UI freeze
-		for i in range(display_count):
-			_add_artifact_item(uncategorized_item, uncategorized[i])
-
-	# Create theme categories
-	for theme in all_themes:
-		var theme_artifacts = artifacts_by_theme[theme]
-		if theme_artifacts.is_empty():
+	for folder_name in folder_keys:
+		var folder_artifacts: Array = artifacts_by_folder.get(folder_name, [])
+		if folder_artifacts.is_empty():
 			continue
 
-		# Create theme category item
-		var theme_item = _tree.create_item(root)
-		theme_item.set_text(0, "%s (%d)" % [theme.capitalize(), theme_artifacts.size()])
-		theme_item.set_selectable(0, false)
-		theme_item.set_collapsed(true)
+		folder_artifacts.sort_custom(func(a, b):
+			var a_name := str((a as Dictionary).get("name", (a as Dictionary).get("lookup_name", ""))).to_lower()
+			var b_name := str((b as Dictionary).get("name", (b as Dictionary).get("lookup_name", ""))).to_lower()
+			return a_name < b_name
+		)
 
-		# Add artifacts in this theme
-		for artifact in theme_artifacts:
-			_add_artifact_item(theme_item, artifact)
+		var folder_item := _tree.create_item(root)
+		folder_item.set_text(0, "%s (%d)" % [folder_name, folder_artifacts.size()])
+		folder_item.set_selectable(0, false)
+		folder_item.set_collapsed(false)
+
+		for artifact in folder_artifacts:
+			_add_artifact_item(folder_item, artifact)
 
 	# Force tree to repaint
 	_tree.queue_redraw()
 	queue_redraw()
+
+
+func _extract_folder_group(scene_path: String) -> String:
+	var trimmed := scene_path.strip_edges()
+	if trimmed.is_empty():
+		return "unmapped"
+
+	if trimmed.begins_with("res://"):
+		trimmed = trimmed.trim_prefix("res://")
+
+	var slash_index := trimmed.rfind("/")
+	if slash_index < 0:
+		return "unmapped"
+
+	var folder_path := trimmed.substr(0, slash_index)
+	var parts := folder_path.split("/")
+	if parts.size() >= 2 and (parts[0] == "commons" or parts[0] == "algorithms"):
+		return "%s/%s" % [parts[0], parts[1]]
+	if parts.size() >= 1:
+		return parts[0]
+	return "unmapped"
 
 
 func _add_artifact_item(parent_item: TreeItem, artifact: Dictionary):
@@ -134,6 +128,46 @@ func _on_tree_item_selected():
 	var lookup_name = selected.get_metadata(0)
 	if lookup_name and lookup_name != "":
 		artifact_selected.emit(lookup_name)
+
+
+func select_next_artifact() -> String:
+	var root := _tree.get_root()
+	if not root:
+		return ""
+
+	var items: Array[TreeItem] = []
+	_collect_selectable_artifact_items(root, items)
+	if items.is_empty():
+		return ""
+
+	var selected := _tree.get_selected()
+	var current_index := -1
+	if selected:
+		current_index = items.find(selected)
+
+	var next_index := 0
+	if current_index >= 0:
+		next_index = (current_index + 1) % items.size()
+
+	var next_item := items[next_index]
+	next_item.select(0)
+
+	var lookup_name := str(next_item.get_metadata(0))
+	if not lookup_name.is_empty():
+		artifact_selected.emit(lookup_name)
+	return lookup_name
+
+
+func _collect_selectable_artifact_items(item: TreeItem, out_items: Array[TreeItem]) -> void:
+	if item.get_parent() and item.is_selectable(0):
+		var lookup_name := str(item.get_metadata(0))
+		if not lookup_name.is_empty():
+			out_items.append(item)
+
+	var child := item.get_first_child()
+	while child:
+		_collect_selectable_artifact_items(child, out_items)
+		child = child.get_next()
 
 
 func _update_stats():

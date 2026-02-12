@@ -187,7 +187,11 @@
 	"analog": {"param": "osc.drift", "min": 0.03, "category": "character"},
 	"digital": {"param": "osc.drift", "max": 0.01, "feature": "warmth", "max2": 0.4, "category": "character"},
 	"lo-fi": {"param": "fx.bitcrush.depth", "max": 12, "category": "character"},
-	"clean": {"param": "fx.distortion", "max": 0.05, "category": "character"}
+	"clean": {"param": "fx.distortion", "max": 0.05, "category": "character"},
+	"metallic": {"param": "mod.ring_mod.depth", "min": 0.5, "category": "experimental"},
+	"wobbly": {"param": "mod.lfo.target", "equals": "pitch", "param2": "mod.lfo.depth", "min2": 0.3, "category": "experimental"},
+	"growling": {"param": "mod.lfo.target", "equals": "filter", "param2": "mod.lfo.rate", "min2": 3.0, "param3": "fx.distortion", "min3": 0.3, "category": "timbral"},
+	"modulated": {"param": "mod.lfo.depth", "min": 0.4, "category": "movement"}
   },
 
   "timbral_words": {
@@ -620,6 +624,86 @@
 		"grain.retrigger": true
 	  },
 	  "note": "Stutter, sample-rate reduction"
+	},
+	"metallic": {
+	  "category": "experimental",
+	  "weight": 1.0,
+	  "params": {
+		"mod.ring_mod.carrier_hz": { "range": [80, 400] },
+		"mod.ring_mod.depth": { "range": [0.5, 1.0] },
+		"filter.resonance": { "range": [0.6, 0.9] }
+	  },
+	  "note": "Ring modulation — Delia Derbyshire sideband technique"
+	},
+	"wobbly": {
+	  "category": "experimental",
+	  "weight": 1.0,
+	  "params": {
+		"mod.lfo.rate": { "range": [2, 6] },
+		"mod.lfo.depth": { "range": [0.3, 0.8] },
+		"mod.lfo.target": "pitch",
+		"osc.drift": { "range": [0.05, 0.2] }
+	  },
+	  "note": "Doctor Who theme wobble — unstable pitch via LFO on oscillator"
+	},
+	"radiophonic": {
+	  "category": "experimental",
+	  "weight": 1.0,
+	  "params": {
+		"mod.ring_mod.carrier_hz": { "range": [100, 300] },
+		"mod.ring_mod.depth": { "range": [0.4, 0.8] },
+		"mod.lfo.rate": { "range": [1, 5] },
+		"mod.lfo.target": "pitch",
+		"fx.reverb.mix": { "range": [0.2, 0.5] }
+	  },
+	  "note": "BBC Radiophonic Workshop aesthetic — ring mod + pitch mod + room"
+	},
+	"zappy": {
+	  "category": "experimental",
+	  "weight": 1.0,
+	  "params": {
+		"env.attack": { "value": 0.001 },
+		"env.decay": { "range": [0.02, 0.08] },
+		"env.sustain": { "value": 0 },
+		"filter.cutoff": { "range": [1500, 4000] },
+		"filter.resonance": { "range": [0.5, 0.8] },
+		"noise.level_db": { "range": [-12, -6] }
+	  },
+	  "note": "Short filtered noise burst — sci-fi zap/blaster"
+	},
+	"alien": {
+	  "category": "experimental",
+	  "weight": 1.0,
+	  "params": {
+		"mod.ring_mod.carrier_hz": { "range": [50, 250] },
+		"mod.ring_mod.depth": { "range": [0.6, 1.0] },
+		"osc.drift": { "range": [0.1, 0.25] },
+		"mod.lfo.rate": { "range": [0.1, 1.0] },
+		"mod.lfo.target": "pitch"
+	  },
+	  "note": "Non-human, inharmonic — ring mod destroys harmonic series"
+	},
+	"modulated": {
+	  "category": "movement",
+	  "weight": 1.0,
+	  "params": {
+		"mod.lfo.depth": { "range": [0.4, 0.8] },
+		"mod.lfo.rate": { "range": [0.3, 2.0] },
+		"mod.lfo.target": "filter"
+	  },
+	  "note": "Active filter/pitch modulation — audibly moving"
+	},
+	"growling": {
+	  "category": "timbral",
+	  "weight": 1.0,
+	  "params": {
+		"fx.distortion": { "range": [0.3, 0.7] },
+		"mod.lfo.rate": { "range": [3, 12] },
+		"mod.lfo.depth": { "range": [0.3, 0.6] },
+		"mod.lfo.target": "filter",
+		"filter.cutoff": { "range": [200, 800] }
+	  },
+	  "note": "Bass growl — fast filter LFO + distortion"
 	}
   },
 
@@ -681,6 +765,18 @@
 		"fx.reverb.mix": 0.7,
 		"fx.delay.mix": 0.3,
 		"filter.cutoff": 6000
+	  }
+	},
+	"radiophonic_workshop": {
+	  "style": "Delia Derbyshire / BBC",
+	  "words": ["metallic", "wobbly", "alien", "radiophonic", "zappy", "unstable"],
+	  "params": {
+		"mod.ring_mod.carrier_hz": 150,
+		"mod.ring_mod.depth": 0.8,
+		"mod.lfo.rate": 3.0,
+		"mod.lfo.target": "pitch",
+		"mod.lfo.depth": 0.5,
+		"osc.drift": 0.15
 	  }
 	}
   },
