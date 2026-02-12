@@ -1,0 +1,7471 @@
+{
+  "2d_in_3d_randomness_vis": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "AnimatedTree": {
+    "algorithm": {
+      "lsystem_expansion": 0.9,
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "continuous": 0.4
+    }
+  },
+  "BeatFrequencies": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "CircleSpiral": {
+    "algorithm": {
+      "physics_equations": 0.6,
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "parametric_surface": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.6
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "CityGenerator": {
+    "algorithm": {
+      "lsystem_expansion": 0.9,
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "curve_extrusion": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "ColoredLinesVR": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "procedural_mesh": 0.9
+    },
+    "information": {
+      "color_encoding": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "ContextSensitiveTree": {
+    "algorithm": {
+      "lsystem_expansion": 0.9,
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "DancingBody": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "DoublePendulum": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.5
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "DualBallFMController": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "material": {
+      "opaque_standard": 0.5
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "ElphabaDemo": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "ElphabaDress": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "soft_body": 0.7
+    },
+    "time": {
+      "accumulative": 0.6,
+      "continuous": 0.6,
+      "simulation": 0.7
+    }
+  },
+  "ForestCompetition": {
+    "algorithm": {
+      "lsystem_expansion": 0.9,
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "simulation": 0.7
+    }
+  },
+  "GaussianBlurCircle": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "GaussianBlurShader": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.8
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "GaussianPaintSplatter": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "GlassRack": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "physics": {
+      "soft_body": 0.5
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "HarmonicBuilder": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "Hilbert3D": {
+    "algorithm": {
+      "lsystem_expansion": 0.9,
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "Lissajous3D": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "MarioSoundController": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "MelodyChaser3D": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "parametric_surface": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "accumulative": 0.5,
+      "continuous": 0.4
+    }
+  },
+  "MelodySoundBoard": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "NoiseColors3D": {
+    "algorithm": {
+      "noise_sampling": 0.7,
+      "probability": 0.5,
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "OscillatingWave": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "OscillationCurve": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "OscillationDriver": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "PendulumCircle": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "PendulumGrid3x3": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "PendulumWave": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "PhonemeCloud": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "Rack303Acid": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.4
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "button": 0.4,
+      "slider": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "Rack808Drums": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "RackAmbientDrone": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "RackDX7Piano": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "RackMario": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "RackMoogBass": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.4
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "RackSineBasic": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "button": 0.4,
+      "grab": 0.8,
+      "slider": 0.8
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "RandomGaussianTexture": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "noise_sampling": 0.7,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "Random_Rotate_Random_XYZ": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "RotateGridCubes": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "SimpleOscillatingBridge": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "spatial_presence": 0.5
+    },
+    "physics": {
+      "collision_only": 0.6
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "SoundBoxLong": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "SoundBoxShort": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "SoundscapeRadioRack": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "SphericalHarmonics": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.6
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "SplineCables": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "curve_extrusion": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "static": 0.6
+    }
+  },
+  "StaticCables": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "curve_extrusion": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "static": 0.6
+    }
+  },
+  "SystemsMusicTest": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "TrigWalkingPath": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "spatial_presence": 0.5
+    },
+    "physics": {
+      "collision_only": 0.6
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "UnitCircleTrig": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "VRAudioMonitor": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "containment": {
+      "frame": 0.5,
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "VitruvianMan": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "VoxelNoiseROIs": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "procedural_mesh": 0.6,
+      "voxel_grid": 0.8
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "WavePaintings": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8,
+      "touch_surface": 0.6
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "accumulative": 0.6,
+      "continuous": 0.6
+    }
+  },
+  "WaveRideScene": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "WhiteNoiseGallery": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "air_music_display_case": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.6,
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "opaque_standard": 0.5,
+      "transparent": 0.7
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "albers_relief": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "analysis_station_puzzle": {
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "armadillo_droideka": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "armadillo_eggling": {
+    "algorithm": {
+      "flocking_rules": 0.6
+    },
+    "geometry": {
+      "multimesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "artifact_catalog_kiosk": {
+    "containment": {
+      "pedestal": 0.5,
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "assembly_line_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "atmosphericmonitoring": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "attachable_wood_cube": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "material": {
+      "opaque_standard": 0.5
+    }
+  },
+  "audio_catalog_tablet": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "button": 0.4
+    }
+  },
+  "axis_translation_cube": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6
+    }
+  },
+  "balance_puzzle": {
+    "containment": {
+      "petri_dish": 0.3,
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "ball_dropper": {
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5,
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "basis_vectors_rig": {
+    "algorithm": {
+      "vector_arithmetic": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "button": 0.4,
+      "grab": 0.8
+    }
+  },
+  "bell_alley": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "immediate_mesh": 0.5,
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "bernini_columns": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "biederman_relief": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "color_encoding": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "bifurcation_diagram": {
+    "algorithm": {
+      "probability": 0.5,
+      "state_machine": 0.6
+    },
+    "containment": {
+      "none": 1.0
+    },
+    "geometry": {
+      "procedural_mesh": 0.7
+    },
+    "information": {
+      "data_visualization": 0.8,
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "slider": 0.7,
+      "spatial_presence": 0.4
+    },
+    "material": {
+      "emissive": 0.5
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "event_driven": 0.6
+    }
+  },
+  "bifurcation_walkway": {
+    "algorithm": {
+      "state_machine": 0.6
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "slider": 0.2,
+      "spatial_presence": 0.7
+    },
+    "physics": {
+      "collision_only": 0.6
+    }
+  },
+  "binary_table": {
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "biomagneticresonator": {
+    "algorithm": {
+      "state_machine": 0.6,
+      "trig_functions": 0.6
+    },
+    "containment": {
+      "pedestal": 0.4,
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "blue_noise": {
+    "algorithm": {
+      "noise_sampling": 0.7,
+      "probability": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "boids_aquarium": {
+    "algorithm": {
+      "flocking_rules": 1.0
+    },
+    "containment": {
+      "glass_tank": 1.0
+    },
+    "geometry": {
+      "csg": 0.5,
+      "multimesh": 0.8
+    },
+    "information": {
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "slider": 0.7
+    },
+    "material": {
+      "emissive": 0.5,
+      "transparent": 0.7
+    },
+    "physics": {
+      "custom_integration": 1.0
+    },
+    "time": {
+      "simulation": 1.0
+    }
+  },
+  "boolean_tunnel": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "csg": 0.5,
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "breathing_room": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "bubbles_random": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "particle_system": 0.7
+    }
+  },
+  "ca_bridge": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "collision_only": 0.4
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "ca_chair_test": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "ca_columns": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "ca_growth_network": {
+    "algorithm": {
+      "cellular_automata": 0.9,
+      "lsystem_expansion": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.7
+    }
+  },
+  "ca_screen": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "containment": {
+      "frame": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "ca_showcase": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "ca_sphere": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cable_builder": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "curve_extrusion": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "cellular_automata_1d": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_2d": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_3d": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_3d_stacked": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_3d_tree": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_basic": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cellular_automata_grabable": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "chair_assembly_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "chaos_particles": {
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "chemicalapparatus": {
+    "algorithm": {
+      "state_machine": 0.6,
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "chladni_plate": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "petri_dish": 0.8
+    },
+    "geometry": {
+      "multimesh": 0.8,
+      "procedural_mesh": 0.5
+    },
+    "information": {
+      "spatial_encoding": 0.6
+    },
+    "interaction": {
+      "spatial_presence": 0.5
+    },
+    "material": {
+      "emissive": 0.3,
+      "opaque_standard": 0.6
+    },
+    "physics": {
+      "particle_system": 0.8
+    },
+    "time": {
+      "continuous": 0.8
+    }
+  },
+  "circle_spiral_scene": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "circularradarmonitor": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "cloth_simulation": {
+    "algorithm": {
+      "physics_equations": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.6,
+      "rigid_body": 0.3,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "cloth_straps": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "spatial_presence": 0.6
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "cloudvolume": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "complexity_pattern": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "discrete_step": 0.8
+    }
+  },
+  "configurable_portal": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "constructivist_relief": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "coshlea": {
+    "algorithm": {
+      "topology": 0.7,
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "coupled_oscillator_lattice": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.5
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "crack_propagation_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "cross_product_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "button": 0.4,
+      "grab": 0.8
+    }
+  },
+  "crossway_ca": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "cryogenicpreservation": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "crystal_cluster": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "crystal_formation": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "static": 0.6
+    }
+  },
+  "crystal_random_walk_demo": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "datatablet": {
+    "containment": {
+      "frame": 0.5,
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "decaying_bridge": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "collision_only": 0.4
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "dendrite_growth_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "diagnostic_station_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "digital_materiality_glitch": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "disease_spread_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "dissolving_form": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "distribution_visualization": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "dot_product_projector": {
+    "algorithm": {
+      "trig_functions": 0.7,
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "button": 0.4,
+      "grab": 0.8
+    }
+  },
+  "double_helix_oscillator": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "double_helix_scene": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "parametric_surface": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "doublehelix": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "dual_display_test": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "ecosystem_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "edge_core": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "edge_detector": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "edge_of_chaos_orb": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "edge_particles": {
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "electromagneticfieldgenerator": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "electronicscales": {
+    "algorithm": {
+      "physics_equations": 0.6,
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "elementary_ca_vr": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "emergence_zone": {
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "entropy_axiom": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "multimesh": 0.9
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "entropy_meter": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "env_one": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "equipment_assembly_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "escher_staircase": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "euclid_postulates_plaque": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.6
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "time": {
+      "event_driven": 0.4
+    }
+  },
+  "evolutionary_algorithms": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "particle_system": 0.7
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "extreme_randomness": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "flagdancer": {
+    "algorithm": {
+      "physics_equations": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.4,
+      "simulation": 0.7
+    }
+  },
+  "florensky_sphere": {
+    "algorithm": {
+      "state_machine": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "time": {
+      "event_driven": 0.5
+    }
+  },
+  "fluid_form": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "fluxdetector": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "foucault_pendulum": {
+    "algorithm": {
+      "physics_equations": 1.0
+    },
+    "containment": {
+      "none": 1.0
+    },
+    "geometry": {
+      "curve_extrusion": 0.7,
+      "immediate_mesh": 0.4,
+      "primitive_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.5,
+      "spatial_encoding": 0.7
+    },
+    "interaction": {
+      "grab": 0.5,
+      "spatial_presence": 0.4
+    },
+    "material": {
+      "emissive": 0.4,
+      "opaque_standard": 0.7
+    },
+    "physics": {
+      "custom_integration": 1.0
+    },
+    "time": {
+      "accumulative": 0.6,
+      "continuous": 0.8
+    }
+  },
+  "fourier_transform": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "fourier_transform_advanced": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "fouriertransformshape": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.5
+    },
+    "material": {
+      "emissive": 0.8
+    },
+    "time": {
+      "accumulative": 0.5,
+      "continuous": 0.5
+    }
+  },
+  "game_of_life_oop_vr": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.8
+    }
+  },
+  "game_of_life_vr": {
+    "algorithm": {
+      "cellular_automata": 1.0
+    },
+    "containment": {
+      "petri_dish": 0.7
+    },
+    "geometry": {
+      "multimesh": 0.9
+    },
+    "information": {
+      "color_encoding": 0.5
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    },
+    "material": {
+      "emissive": 0.6
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "discrete_step": 1.0
+    }
+  },
+  "gaussian_random": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "godel_statement_plaque": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.6
+    },
+    "interaction": {
+      "button": 0.5,
+      "grab": 0.8
+    },
+    "time": {
+      "event_driven": 0.4
+    }
+  },
+  "grab_sphere_E": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "grab_sphere_F": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "grab_sphere_lambda": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "grab_sphere_phi": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "grid2d": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "containment": {
+      "petri_dish": 0.8
+    },
+    "geometry": {
+      "multimesh": 0.9
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "discrete_step": 0.8
+    }
+  },
+  "grid2d_bfs": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "grid2d_brians_brain": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "grid2d_dfs_maze": {
+    "algorithm": {
+      "fractal_iteration": 0.5
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "grid2d_langtons_ant": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6
+    }
+  },
+  "grid2d_life": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "containment": {
+      "petri_dish": 0.8
+    },
+    "geometry": {
+      "multimesh": 0.9
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "time": {
+      "discrete_step": 0.8
+    }
+  },
+  "grid2d_rule110": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "grid2d_rule30": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "grid2d_rule90": {
+    "algorithm": {
+      "fractal_iteration": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "grid2d_seeds": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "grid2d_wireworld": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "hallway_scene": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "height_random": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "hexagon_ca_vr": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "hexagon_cave_vr": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "hl_turret_vectors": {
+    "algorithm": {
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "button": 0.7,
+      "grab": 0.8
+    },
+    "time": {
+      "accumulative": 0.5
+    }
+  },
+  "holographicdisplay": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "index_visualizer": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "instancingscatter": {
+    "algorithm": {
+      "noise_sampling": 0.7,
+      "probability": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "jelly_cube": {
+    "algorithm": {
+      "physics_equations": 1.0
+    },
+    "containment": {
+      "none": 1.0
+    },
+    "geometry": {
+      "primitive_mesh": 1.0
+    },
+    "information": {
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.5
+    },
+    "material": {
+      "emissive": 0.3,
+      "transparent": 0.7
+    },
+    "physics": {
+      "soft_body": 1.0
+    },
+    "time": {
+      "continuous": 1.0
+    }
+  },
+  "john_cage_tech_noir": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "kaleidocycle_enemy": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.7
+    }
+  },
+  "kresling_spire": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "event_driven": 0.5
+    }
+  },
+  "kusama_sine": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "lab_assembly_puzzle": {
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "lambda_slider": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.8
+    }
+  },
+  "laser_exploding_sphere": {
+    "geometry": {
+      "multimesh": 0.4,
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "laser_turret": {
+    "algorithm": {
+      "vector_arithmetic": 0.8
+    },
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "lattice_gas_automata": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "line_builder_3d": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.5
+    },
+    "time": {
+      "continuous": 0.7,
+      "discrete_step": 0.7
+    }
+  },
+  "line_network_ca": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "lissajous_curves": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.5,
+      "continuous": 0.4
+    }
+  },
+  "liturgicalambientgen": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "living_paper": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_bfs": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_brians_brain": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_brownian": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_bubble_sort": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.7
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_dfs_maze": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "living_paper_dla": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "accumulative": 0.4
+    }
+  },
+  "living_paper_dragon": {
+    "algorithm": {
+      "lsystem_expansion": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_fern": {
+    "algorithm": {
+      "lsystem_expansion": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_fourier": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "living_paper_heat": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.6
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_insertion_sort": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.7
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_julia": {
+    "algorithm": {
+      "fractal_iteration": 0.8
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_kmeans": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_koch": {
+    "algorithm": {
+      "fractal_iteration": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_levy": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_life": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.8
+    }
+  },
+  "living_paper_lissajous": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8,
+      "touch_surface": 0.5
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "living_paper_mandelbrot": {
+    "algorithm": {
+      "fractal_iteration": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_merge_sort": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.7
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_noise_octaves": {
+    "algorithm": {
+      "fractal_iteration": 0.7,
+      "noise_sampling": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_perlin": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_quadtree": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_quick_sort": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.7
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_random_walk": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_reaction_diffusion": {
+    "algorithm": {
+      "reaction_diffusion": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_rule110": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_rule30": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_seeds": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "accumulative": 0.4
+    }
+  },
+  "living_paper_self_avoiding": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_sierpinski": {
+    "algorithm": {
+      "fractal_iteration": 0.8
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "living_paper_sine": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8,
+      "touch_surface": 0.5
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "living_paper_tree": {
+    "algorithm": {
+      "lsystem_expansion": 0.9
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8,
+      "touch_surface": 0.5
+    }
+  },
+  "living_paper_voronoi": {
+    "algorithm": {
+      "noise_sampling": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "magritte_pipe": {
+    "geometry": {
+      "curve_extrusion": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "time": {
+      "event_driven": 0.4
+    }
+  },
+  "mandelbrot_dive": {
+    "algorithm": {
+      "fractal_iteration": 1.0
+    },
+    "containment": {
+      "table": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.8
+    },
+    "information": {
+      "color_encoding": 0.8,
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "slider": 0.8
+    },
+    "material": {
+      "shader_driven": 1.0
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "event_driven": 0.7
+    }
+  },
+  "mario_test_sound_ui": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "pedestal": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.8
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "math_objects": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "parametric_surface": 0.7,
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "formula_display": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "measurement_station_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "microscope": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.7
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "mirrored_cellular_automata": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.7
+    }
+  },
+  "miura_crawler": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "mold_network": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "mondrian_relief": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "multimeter": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "neon_wave_grid": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.6
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "noir_sequencer": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "noise_terrain": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "spatial_encoding": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "noise_terrain_with_blobs": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "multimesh": 0.4,
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.8
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "noiselayers": {
+    "algorithm": {
+      "fractal_iteration": 0.7,
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "noisesphere": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.7
+    }
+  },
+  "noisetext": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "containment": {
+      "pedestal": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "noisetorus": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "parametric_surface": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "omoss": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.5
+    }
+  },
+  "ordered_grid": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "origami_droideka": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "oscillation_controlled_cube": {
+    "algorithm": {
+      "trig_functions": 0.9
+    },
+    "containment": {
+      "pedestal": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 1.0
+    },
+    "information": {
+      "formula_display": 0.6,
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "slider": 0.7
+    },
+    "material": {
+      "emissive": 0.3,
+      "opaque_standard": 0.7
+    },
+    "physics": {
+      "none": 0.8
+    },
+    "time": {
+      "continuous": 1.0
+    }
+  },
+  "parametric_pendulum_waves": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "parametric_shapes": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "parametric_surface": 0.7
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "discrete_step": 0.5
+    }
+  },
+  "particle_chaos": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "physics": {
+      "particle_system": 0.7
+    }
+  },
+  "particle_randomness_emergent": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "particle_system": 0.7
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "particle_randomness_evolutionary": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "particle_randomness_patterns": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    }
+  },
+  "particle_randomness_perlin": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    }
+  },
+  "particle_randomness_pure": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    }
+  },
+  "pattern_tile_4x4": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pattern_tile_8x8": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pattern_tile_brick": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pattern_tile_cube": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "pattern_tile_herringbone": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pattern_tile_mirror": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pattern_tile_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pendulum_slap": {
+    "algorithm": {
+      "physics_equations": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "penrose_triangle": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "percolation_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "perlin_noise": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "perlin_noise_clouds": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "perlin_noise_terrain": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "perlinvolume": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "persian_rug": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "phase_cube": {
+    "algorithm": {
+      "state_machine": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "pheromone_terrain": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "flocking_rules": 0.6
+    },
+    "geometry": {
+      "multimesh": 0.5,
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6,
+      "discrete_step": 0.5
+    }
+  },
+  "phi_slider": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "grab": 0.8,
+      "slider": 0.8
+    }
+  },
+  "pickup_cube_placer": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pipe_dream": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "containment": {
+      "frame": 0.4
+    },
+    "geometry": {
+      "curve_extrusion": 0.5
+    },
+    "information": {
+      "color_encoding": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pipettedispenser": {
+    "geometry": {
+      "curve_extrusion": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pixel_cloud": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.5,
+      "voxel_grid": 0.8
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "plane_manipulator": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6,
+      "continuous": 0.4
+    }
+  },
+  "plane_random": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "poincare_disk": {
+    "algorithm": {
+      "topology": 1.0
+    },
+    "containment": {
+      "pedestal": 0.6
+    },
+    "geometry": {
+      "procedural_mesh": 0.7
+    },
+    "information": {
+      "label_3d": 0.4,
+      "spatial_encoding": 0.7
+    },
+    "interaction": {
+      "slider": 0.4
+    },
+    "material": {
+      "emissive": 0.5
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "event_driven": 0.3,
+      "static": 0.7
+    }
+  },
+  "pollock_3d": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "pollock_painting_in_3d": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    }
+  },
+  "pool_hole_noise": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "preserved_pattern": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "static": 0.6
+    }
+  },
+  "probability_distributions_3d": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "spatial_encoding": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "proximity_spawner": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "spatial_presence": 0.7
+    }
+  },
+  "pulsar_compact": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "pulsar_glass_tubes": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "pulsar_lines": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "pulsar_visualizer": {
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "pulsing_ca": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "discrete_step": 0.7
+    }
+  },
+  "pylon_cables": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "curve_extrusion": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "qfep_formula_3d": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2,
+      "formula_display": 0.7,
+      "spatial_encoding": 0.5
+    },
+    "interaction": {
+      "slider": 0.8
+    },
+    "material": {
+      "emissive": 0.7
+    }
+  },
+  "qfep_oscilloscope": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.7
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "continuous": 0.6
+    }
+  },
+  "qfep_reactor": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "qfep_sandbox_console": {
+    "algorithm": {
+      "physics_equations": 0.4
+    },
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "slider": 0.8
+    }
+  },
+  "quantumentanglementmeter": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "r_c": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "rainbow_hallway": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "csg": 0.9
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7,
+      "shader_driven": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "random_bell_curve": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "noise_sampling": 0.7,
+      "probability": 0.7
+    },
+    "geometry": {
+      "procedural_mesh": 0.6
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "random_butterflies": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "flocking_rules": 0.6
+    },
+    "geometry": {
+      "multimesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "random_color_book_page_collection": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "color_encoding": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "random_cubes": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "random_decay_objects": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "random_edge_profile": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_edge_profile_collection": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "random_gaussian_texture": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "random_number_book_page_1955": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "random_number_book_page_collection": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "random_plants": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.5
+    }
+  },
+  "random_transformations": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_transformations_geometric": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_transformations_matrices": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_transformations_noise": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_transformations_stochastic": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "random_walk_128": {
+    "algorithm": {
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.5,
+      "voxel_grid": 0.8
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "random_walk_collection": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "random_walk_grab_paper": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "randomize_cubes_over_Z": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "randomlines": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    }
+  },
+  "randompoint": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "grab": 0.6
+    }
+  },
+  "randompoints": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "noise_sampling": 0.7,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "randompoints_gaussian": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "randompoints_uniform": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "randomup": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "reactive_particle_field": {
+    "algorithm": {
+      "flocking_rules": 0.6
+    },
+    "geometry": {
+      "multimesh": 0.5
+    },
+    "information": {
+      "data_visualization": 0.2,
+      "formula_display": 0.7
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "physics": {
+      "particle_system": 0.7
+    }
+  },
+  "reactive_particles": {
+    "geometry": {
+      "multimesh": 0.4
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "recrystallization_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "opaque_standard": 0.4
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "remove_random": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "resonance_frequencies": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "resonance_frequencies_visualizer": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "resonancechamber": {
+    "algorithm": {
+      "physics_equations": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "resonating_metallophone": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "opaque_standard": 0.4
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "revolving_joy_ride": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4
+    },
+    "time": {
+      "continuous": 0.5
+    }
+  },
+  "rigid_sculpture": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "static": 0.6
+    }
+  },
+  "robotarm": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "rotate_grid_cubes": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "rotate_random_y": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "rotatescalecubes": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "rotating_cube_demo": {
+    "algorithm": {
+      "trig_functions": 0.5
+    },
+    "containment": {
+      "pedestal": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 1.0
+    },
+    "information": {
+      "formula_display": 0.4,
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "none": 0.8
+    },
+    "material": {
+      "opaque_standard": 0.8
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "continuous": 1.0
+    }
+  },
+  "rotation_oscillation_cube": {
+    "algorithm": {
+      "physics_equations": 0.7,
+      "trig_functions": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "physics": {
+      "custom_integration": 0.7
+    },
+    "time": {
+      "continuous": 0.7
+    }
+  },
+  "rounded_softbody_test": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "rule_30_110": {
+    "algorithm": {
+      "cellular_automata": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "rule_30_110_gravity": {
+    "algorithm": {
+      "cellular_automata": 0.8,
+      "physics_equations": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "russell_set_box": {
+    "containment": {
+      "box": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "time": {
+      "event_driven": 0.4
+    }
+  },
+  "ruth_asawa_sculpture": {
+    "algorithm": {
+      "topology": 0.8,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.5
+    },
+    "material": {
+      "opaque_standard": 0.4
+    },
+    "time": {
+      "continuous": 0.6,
+      "static": 0.6
+    }
+  },
+  "samplevialrack": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5,
+      "glass_jar": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "slider": 0.6
+    },
+    "material": {
+      "emissive": 0.7
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "scalable_wood_cube": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "material": {
+      "opaque_standard": 0.5
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "schrodinger_box": {
+    "algorithm": {
+      "probability": 0.6,
+      "state_machine": 0.8
+    },
+    "containment": {
+      "box": 1.0
+    },
+    "geometry": {
+      "csg": 1.0
+    },
+    "information": {
+      "formula_display": 0.6,
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "button": 0.8
+    },
+    "material": {
+      "opaque_standard": 0.6,
+      "transparent": 0.5
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "event_driven": 1.0
+    }
+  },
+  "scientific_assembly_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "scissor_stalker": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "score_display": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "script_runner": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "sculpt_one": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "segment_slide": {
+    "algorithm": {
+      "physics_equations": 0.5,
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "seismograph": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "self_organization_ca": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "sentry_turret": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "shader_noise_space": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "shader_driven": 0.7
+    }
+  },
+  "shelf_assembly_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "sierpinski_pyramid": {
+    "algorithm": {
+      "cellular_automata": 0.3,
+      "fractal_iteration": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.3
+    }
+  },
+  "simplex_noise": {
+    "algorithm": {
+      "noise_sampling": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "sine_art_monitor": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "sine_cylinder_staircase": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "sine_space_explanation": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "sine_wall_corridor": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "static": 0.6
+    }
+  },
+  "sine_wall_explanation": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.5
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "sine_wall_static": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.6,
+      "static": 0.6
+    }
+  },
+  "snappable_wood_cube": {
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "material": {
+      "opaque_standard": 0.5
+    }
+  },
+  "soft_mushrooms": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "soft_trampoline": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "softbody3d": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "softbody_gallery_part1": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "softbody_gallery_part2": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "softbody_gallery_part3": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "softbody_test_gallery": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "spawn_randomcubes": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "touch_surface": 0.6
+    }
+  },
+  "spectral_analyzer": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "spectral_sine_wave": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "spectrum_display": {
+    "algorithm": {
+      "trig_functions": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "sphere_droideka": {
+    "containment": {
+      "petri_dish": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "spring_network": {
+    "algorithm": {
+      "physics_equations": 0.6,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "physics": {
+      "custom_integration": 0.6
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "squishy_ball_pit": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "emissive": 0.7,
+      "transparent": 0.7
+    },
+    "physics": {
+      "custom_integration": 0.4,
+      "soft_body": 0.9
+    },
+    "time": {
+      "continuous": 0.3
+    }
+  },
+  "standing_waves": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "static_reference_cube": {
+    "algorithm": {
+      "none": 1.0
+    },
+    "containment": {
+      "pedestal": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 1.0
+    },
+    "information": {
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "none": 1.0
+    },
+    "material": {
+      "opaque_standard": 1.0
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "static": 1.0
+    }
+  },
+  "step_sequencer": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "button": 0.5
+    },
+    "time": {
+      "event_driven": 0.4
+    }
+  },
+  "step_sequencer_ambient": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_breakbeat": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_chiptune": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_cinematic": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "opaque_standard": 0.5
+    }
+  },
+  "step_sequencer_cosmic": {
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_disco": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_house": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_jazz": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_kraftwerk": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "step_sequencer_lofi": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_pads": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "step_sequencer_scifi": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_synth": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "step_sequencer_trap": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "stool_assembly_puzzle": {
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "storage_station_puzzle": {
+    "containment": {
+      "glass_jar": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "structure_growth": {
+    "algorithm": {
+      "cellular_automata": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.4,
+      "discrete_step": 0.3,
+      "simulation": 0.7
+    }
+  },
+  "table_assembly_puzzle": {
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "tech_noir_audio": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "ten_print": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "ten_print_maze_3d": {
+    "algorithm": {
+      "noise_sampling": 0.2
+    },
+    "containment": {
+      "pedestal": 0.4
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "terminal": {
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "tessellation_lattice_demo": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "transformation_workbench": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "containment": {
+      "pedestal": 0.4,
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "formula_display": 0.5
+    },
+    "interaction": {
+      "button": 0.7,
+      "grab": 0.8
+    }
+  },
+  "transforming_pattern": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "translation_cube_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "trng_vs_prng": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "turing_pattern": {
+    "algorithm": {
+      "reaction_diffusion": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "data_visualization": 0.2
+    },
+    "interaction": {
+      "slider": 0.2
+    }
+  },
+  "turret_boll_infoboard": {
+    "algorithm": {
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3,
+      "label_3d": 0.6
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "material": {
+      "transparent": 0.8
+    },
+    "time": {
+      "static": 0.6
+    }
+  },
+  "turret_targeting": {
+    "algorithm": {
+      "vector_arithmetic": 0.6
+    },
+    "containment": {
+      "frame": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "button": 0.7
+    }
+  },
+  "unit_circle": {
+    "algorithm": {
+      "trig_functions": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "unit_circle_advanced": {
+    "algorithm": {
+      "trig_functions": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "value_noise": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.5
+    }
+  },
+  "vector_addition_demo": {
+    "algorithm": {
+      "vector_arithmetic": 1.0
+    },
+    "containment": {
+      "none": 1.0
+    },
+    "geometry": {
+      "immediate_mesh": 1.0
+    },
+    "information": {
+      "formula_display": 0.8,
+      "label_3d": 0.5
+    },
+    "interaction": {
+      "button": 0.4,
+      "grab": 0.8
+    },
+    "material": {
+      "emissive": 0.5
+    },
+    "physics": {
+      "none": 1.0
+    },
+    "time": {
+      "event_driven": 0.7
+    }
+  },
+  "vector_joint_playground": {
+    "algorithm": {
+      "physics_equations": 0.6,
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "grab": 0.8
+    },
+    "physics": {
+      "custom_integration": 0.6
+    }
+  },
+  "vector_magnitude_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "vector_normalize_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "vector_projection_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "vector_subtraction_demo": {
+    "algorithm": {
+      "vector_arithmetic": 0.8
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "vector_translation_demo": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "formula_display": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "volumetric_fog_ca": {
+    "algorithm": {
+      "cellular_automata": 0.9
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "voxelnoise": {
+    "algorithm": {
+      "noise_sampling": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.5,
+      "voxel_grid": 0.8
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "walk_random": {
+    "algorithm": {
+      "noise_sampling": 0.2,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6
+    }
+  },
+  "walkable_sine_bridge": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "spatial_presence": 0.5
+    },
+    "physics": {
+      "collision_only": 0.6
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "walkingsphere": {
+    "algorithm": {
+      "cellular_automata": 0.9,
+      "probability": 0.6
+    },
+    "geometry": {
+      "primitive_mesh": 0.4
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "discrete_step": 0.7
+    }
+  },
+  "water_land_ride": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "waterbomb_enemy": {
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "event_driven": 0.5
+    }
+  },
+  "wave_interference": {
+    "algorithm": {
+      "state_machine": 0.6,
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4
+    }
+  },
+  "wave_propagation_3d": {
+    "algorithm": {
+      "trig_functions": 0.3
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "continuous": 0.4,
+      "simulation": 0.7
+    }
+  },
+  "world_map_tablet": {
+    "containment": {
+      "table": 0.5
+    },
+    "geometry": {
+      "primitive_mesh": 0.3
+    },
+    "information": {
+      "color_encoding": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "x_translation_cube": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "y_oscillation_cube": {
+    "algorithm": {
+      "trig_functions": 0.7
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.4
+    },
+    "interaction": {
+      "none": 0.3
+    },
+    "time": {
+      "accumulative": 0.6,
+      "continuous": 0.6
+    }
+  },
+  "y_translation_cube": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  },
+  "z_translation_cube": {
+    "algorithm": {
+      "vector_arithmetic": 0.2
+    },
+    "geometry": {
+      "primitive_mesh": 0.5
+    },
+    "information": {
+      "label_3d": 0.3
+    },
+    "interaction": {
+      "none": 0.3
+    }
+  }
+}

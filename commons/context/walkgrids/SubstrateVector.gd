@@ -20,7 +20,7 @@
 # "Every object carries the mathematics it embodies. The ground responds."
 
 extends Resource
-class_name SubstrateVector
+class_name TerrainSubstrateVector
 
 # The substrate weights — which mathematical terrains compose this artifact
 # Keys match TopologyManager.SPACE_REGISTRY keys
@@ -43,17 +43,17 @@ const ALL_SUBSTRATES = [
 
 # ── Construction ─────────────────────────────────────────────
 
-static func create(w: Dictionary) -> SubstrateVector:
-	var sv = SubstrateVector.new()
+static func create(w: Dictionary) -> TerrainSubstrateVector:
+	var sv = TerrainSubstrateVector.new()
 	sv.weights = w
 	sv._compute_dominant()
 	return sv
 
-static func from_single(key: String, weight: float = 1.0) -> SubstrateVector:
+static func from_single(key: String, weight: float = 1.0) -> TerrainSubstrateVector:
 	"""Create a vector dominated by a single substrate"""
 	return create({key: weight})
 
-static func from_artifact_tags(tags: Array) -> SubstrateVector:
+static func from_artifact_tags(tags: Array) -> TerrainSubstrateVector:
 	"""Infer substrate weights from artifact tags/themes.
 	   Uses keyword matching to estimate mathematical composition."""
 	var w: Dictionary = {}
@@ -174,24 +174,24 @@ func magnitude() -> float:
 		sum += weights[key] * weights[key]
 	return sqrt(sum)
 
-func normalized() -> SubstrateVector:
+func normalized() -> TerrainSubstrateVector:
 	"""Return unit vector (weights sum of squares = 1)"""
 	var mag = magnitude()
 	if mag < 0.0001:
-		return SubstrateVector.create({})
+		return TerrainSubstrateVector.create({})
 	var new_weights: Dictionary = {}
 	for key in weights:
 		new_weights[key] = weights[key] / mag
-	return SubstrateVector.create(new_weights)
+	return TerrainSubstrateVector.create(new_weights)
 
-func dot(other: SubstrateVector) -> float:
+func dot(other: TerrainSubstrateVector) -> float:
 	"""Dot product — measures similarity"""
 	var sum = 0.0
 	for key in weights:
 		sum += weights[key] * other.get_weight(key)
 	return sum
 
-func cosine_similarity(other: SubstrateVector) -> float:
+func cosine_similarity(other: TerrainSubstrateVector) -> float:
 	"""Cosine similarity (0-1) — how similar two artifacts' substrates are"""
 	var mag_a = magnitude()
 	var mag_b = other.magnitude()
@@ -199,7 +199,7 @@ func cosine_similarity(other: SubstrateVector) -> float:
 		return 0.0
 	return dot(other) / (mag_a * mag_b)
 
-func distance(other: SubstrateVector) -> float:
+func distance(other: TerrainSubstrateVector) -> float:
 	"""Euclidean distance between two substrate vectors"""
 	var sum = 0.0
 	var all_keys: Dictionary = {}
@@ -213,7 +213,7 @@ func distance(other: SubstrateVector) -> float:
 		sum += diff * diff
 	return sqrt(sum)
 
-func blend(other: SubstrateVector, t: float = 0.5) -> SubstrateVector:
+func blend(other: TerrainSubstrateVector, t: float = 0.5) -> TerrainSubstrateVector:
 	"""Blend two substrate vectors (lerp)"""
 	var all_keys: Dictionary = {}
 	for key in weights:
@@ -228,21 +228,21 @@ func blend(other: SubstrateVector, t: float = 0.5) -> SubstrateVector:
 		var blended = lerpf(a, b, t)
 		if blended > 0.001:
 			new_weights[key] = blended
-	return SubstrateVector.create(new_weights)
+	return TerrainSubstrateVector.create(new_weights)
 
-func add(other: SubstrateVector) -> SubstrateVector:
+func add(other: TerrainSubstrateVector) -> TerrainSubstrateVector:
 	"""Add two substrate vectors"""
 	var new_weights = weights.duplicate()
 	for key in other.weights:
 		new_weights[key] = new_weights.get(key, 0.0) + other.weights[key]
-	return SubstrateVector.create(new_weights)
+	return TerrainSubstrateVector.create(new_weights)
 
-func scale(factor: float) -> SubstrateVector:
+func scale(factor: float) -> TerrainSubstrateVector:
 	"""Scale all weights by a factor"""
 	var new_weights: Dictionary = {}
 	for key in weights:
 		new_weights[key] = weights[key] * factor
-	return SubstrateVector.create(new_weights)
+	return TerrainSubstrateVector.create(new_weights)
 
 # ── Terrain Generation ───────────────────────────────────────
 
@@ -277,7 +277,7 @@ func _load_space_script(key: String) -> Script:
 func to_dict() -> Dictionary:
 	return weights.duplicate()
 
-static func from_dict(d: Dictionary) -> SubstrateVector:
+static func from_dict(d: Dictionary) -> TerrainSubstrateVector:
 	return create(d)
 
 func to_string_readable() -> String:

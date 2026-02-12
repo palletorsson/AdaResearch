@@ -32,7 +32,11 @@ const CONFIG_PARAM_NAMES = [
 	"spin_x", "spin_y", "spin_z", "speed_x", "speed_y", "speed_z",
 	"animate", "duration", "no_collision", "rotate_collision",
 	# Random cycle cube params
-	"span", "random_span", "wait_min", "wait_span", "down", "up", "hide"
+	"span", "random_span", "wait_min", "wait_span", "down", "up", "hide",
+	# Grid2D / substrate params
+	"algorithm", "interval", "auto_play", "grid_width", "grid_height",
+	# Living paper params
+	"paper", "texture", "fold", "orientation",
 ]
 
 # References
