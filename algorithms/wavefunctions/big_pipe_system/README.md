@@ -53,14 +53,20 @@ The command string is a comma-separated list of actions.
 | `s` | **S-Bend** | Adds an S-shaped offset segment. Moves cursor 1 unit forward and 1 unit laterally (Right). |
 | `u` | **Up** | Pitch Up 90 degrees. Adds a corner segment turning Upward. |
 | `d` | **Down** | Pitch Down 90 degrees. Adds a corner segment turning Downward. |
+| `vu` | **Vertical Up Bend** | Uses `pipe_vertical_up` segment and turns upward. |
+| `vd` | **Vertical Down Bend** | Uses `pipe_vertical_down` segment and turns downward. |
 | `l` | **Left** | Yaw Left 90 degrees. Adds a corner segment turning Left. |
 | `r` | **Right** | Yaw Right 90 degrees. Adds a corner segment turning Right. |
+| `t` | **T-Junction** | Adds a T-junction segment. Advances forward 1 unit. |
+| `x` | **Cross** | Adds a cross-junction segment. Advances forward 1 unit. |
+| `cap` | **End Cap** | Adds an end-cap terminal segment. Does not advance cursor. |
 
 ## File Structure
 
 *   `big_pipe_system.gd`: Main controller script containing the turtle logic and generation loop.
 *   `big_pipe_test_scene.tscn`: A test scene demonstrating individual parts and a complex generated system.
-*   `segments/`: Contains the scene and script files for individual pipe pieces (`pipe_straight`, `pipe_corner`, `pipe_s_bend`).
+*   `segments/`: Contains scene/script files for pipe pieces (`pipe_straight`, `pipe_corner`, `pipe_s_bend`, `pipe_t_junction`, `pipe_cross`, `pipe_end_cap`, vertical bends).
+*   `configs/`: JSON presets for direct loading (`default.json`, `industrial_branch.json`).
 
 ## Implementation Details
 

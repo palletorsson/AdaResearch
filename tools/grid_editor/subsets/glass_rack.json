@@ -76,6 +76,15 @@
     },
     
     {
+      "id": "wobbly",
+      "name": "Wobbly Tube",
+      "category": "tubes",
+      "size": [2, 3],
+      "icon": "~",
+      "description": "Curved sinusoidal tube for decorative and flow transitions.",
+      "segment_type": "wobbly"
+    },
+    {
       "id": "corner_bl",
       "name": "Corner ╭",
       "category": "bends",
@@ -112,6 +121,15 @@
       "segment_type": "corner_tl"
     },
     {
+      "id": "corner45",
+      "name": "Corner 45",
+      "category": "bends",
+      "size": [2, 2],
+      "icon": "/",
+      "description": "45-degree elbow segment for gentle direction changes.",
+      "segment_type": "corner45"
+    },
+    {
       "id": "sbend",
       "name": "S-Bend",
       "category": "bends",
@@ -130,6 +148,15 @@
       "segment_type": "ubend"
     },
     
+    {
+      "id": "reducer",
+      "name": "Reducer",
+      "category": "bends",
+      "size": [1, 2],
+      "icon": "><",
+      "description": "Diameter transition from larger tube to smaller tube.",
+      "segment_type": "reducer"
+    },
     {
       "id": "tee",
       "name": "T-Junction",

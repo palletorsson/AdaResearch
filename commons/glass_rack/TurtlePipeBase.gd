@@ -4,6 +4,7 @@ extends Node3D
 class_name GlassRackPipeBase
 
 signal build_complete
+const PRESET_INDEX_FILE := "presets_index.json"
 
 @export_group("Build Settings")
 @export var auto_build: bool = true
@@ -230,12 +231,126 @@ func _build_from_segments(segments: Array) -> void:
 		var segment = _create_segment(seg_type, params)
 		if segment:
 			_place_segment(segment)
-			
-			# Advance cursor based on segment type
-			var advance = params.get("length", params.get("height", segment_length))
-			_advance_cursor_forward(advance)
+			_advance_cursor_from_segment(segment, params)
 	
 	build_complete.emit()
+
+
+func _advance_cursor_from_segment(segment: Node3D, params: Dictionary) -> void:
+	# Follow declared segment ports when available so bends/junctions advance correctly.
+	if segment and segment.has_meta("ports"):
+		var ports = segment.get_meta("ports", {})
+		if ports is Dictionary and ports.has("in"):
+			var out_name = _pick_primary_output_port(ports)
+			if out_name != "":
+				var in_port = ports.get("in", {})
+				var out_port = ports.get(out_name, {})
+				if in_port is Dictionary and out_port is Dictionary:
+					var in_pos = in_port.get("position", null)
+					var out_pos = out_port.get("position", null)
+					if in_pos is Vector3 and out_pos is Vector3:
+						var basis = _get_cursor_transform().basis
+						var local_delta: Vector3 = out_pos - in_pos
+						cursor_pos += basis * local_delta
+						var out_dir_local = out_port.get("direction", null)
+						if out_dir_local is Vector3:
+							_set_cursor_forward((basis * out_dir_local).normalized())
+						return
+	
+	var advance = params.get("advance", params.get("length", params.get("height", segment_length)))
+	_advance_cursor_forward(float(advance))
+
+
+func _pick_primary_output_port(ports: Dictionary) -> String:
+	for candidate in ["out", "out1", "branch", "right", "left", "out2"]:
+		if ports.has(candidate):
+			return candidate
+	for key in ports.keys():
+		if key != "in":
+			return str(key)
+	return ""
+
+
+func _set_cursor_forward(new_forward: Vector3) -> void:
+	if new_forward.length_squared() < 0.0001:
+		return
+	
+	cursor_forward = new_forward.normalized()
+	var reference_up = cursor_up
+	if abs(cursor_forward.dot(reference_up)) > 0.99:
+		reference_up = Vector3.UP
+		if abs(cursor_forward.dot(reference_up)) > 0.99:
+			reference_up = Vector3.RIGHT
+	
+	cursor_right = reference_up.cross(cursor_forward).normalized()
+	cursor_up = cursor_forward.cross(cursor_right).normalized()
+
+
+func _load_json_file(path: String) -> Dictionary:
+	if not FileAccess.file_exists(path):
+		return {}
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return {}
+	var json = JSON.new()
+	var err = json.parse(file.get_as_text())
+	file.close()
+	if err != OK:
+		return {}
+	return json.data if json.data is Dictionary else {}
+
+
+func list_presets() -> Array[Dictionary]:
+	var index_path = _get_config_directory().path_join(PRESET_INDEX_FILE)
+	var index_data = _load_json_file(index_path)
+	var presets: Array[Dictionary] = []
+	
+	if not index_data.is_empty():
+		var indexed = index_data.get("presets", [])
+		if indexed is Array:
+			for entry in indexed:
+				if entry is Dictionary:
+					presets.append(entry)
+			return presets
+	
+	var dir = DirAccess.open(_get_config_directory())
+	if not dir:
+		return presets
+	
+	dir.list_dir_begin()
+	var entry = dir.get_next()
+	while entry != "":
+		if not dir.current_is_dir() and entry.ends_with(".json") and entry != PRESET_INDEX_FILE:
+			presets.append({
+				"id": entry.trim_suffix(".json"),
+				"file": entry
+			})
+		entry = dir.get_next()
+	dir.list_dir_end()
+	return presets
+
+
+func has_preset(preset_id: String) -> bool:
+	for preset in list_presets():
+		if preset.get("id", "") == preset_id:
+			return true
+	return false
+
+
+func get_preset_count() -> int:
+	return list_presets().size()
+
+
+func load_preset(preset_id: String) -> bool:
+	for preset in list_presets():
+		if preset.get("id", "") == preset_id:
+			var file_name = preset.get("file", "")
+			if file_name == "":
+				file_name = preset_id + ".json"
+			load_config(file_name)
+			return true
+	return false
+
 
 func _get_config_directory() -> String:
 	return "res://commons/glass_rack/configs"

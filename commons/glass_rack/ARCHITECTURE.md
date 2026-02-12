@@ -175,7 +175,7 @@ commons/glass_rack/
 ├── GlassRackController.gd    # Main controller
 ├── TurtlePipeBase.gd         # Base turtle system
 ├── GlassPipeSegments.gd      # NEW: All segment generators
-├── GlassPipePorts.gd         # NEW: Port system
+├── GlassSegmentPorts.gd      # Port system
 ├── segments/                  # NEW: Segment scenes (optional)
 │   ├── glass_ypipe.tscn
 │   ├── glass_sbend.tscn

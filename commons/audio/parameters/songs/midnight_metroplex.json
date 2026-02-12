@@ -21,7 +21,7 @@
     "parameters": {
         "duration": { "min": 180.0, "max": 480.0, "value": 300.0, "step": 60.0 },
         "bpm": { "min": 120, "max": 130, "value": 126, "step": 1, "description": "Classic Detroit tempo" },
-        "key": { "options": ["Am", "Dm", "Em", "Gm"], "value": "Am", "description": "Minor/Dorian, jazz-influenced" }
+        "key": { "options": ["C#m", "F#m", "Bm", "G#m"], "value": "C#m", "description": "Cyberpunk noir — C#m Dorian, jazz-influenced Drexciya/Metroplex vibe" }
     },
 
     "sound_design": {

@@ -17,7 +17,7 @@
     "parameters": {
         "duration": { "min": 180.0, "max": 480.0, "value": 300.0, "step": 30.0, "description": "Rave track length" },
         "bpm": { "min": 140, "max": 160, "value": 145, "step": 1, "description": "Fast and driving" },
-        "key": { "options": ["Am", "Em", "Dm", "Gm"], "value": "Am", "description": "Minor for dark euphoria" },
+        "key": { "options": ["Em", "Am", "Bm", "Dm"], "value": "Em", "description": "Raw aggressive energy — classic rave key" },
         "aggression": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "Intensity level" }
     },
     "sound_design": {

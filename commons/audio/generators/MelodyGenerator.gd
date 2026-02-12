@@ -78,6 +78,94 @@ const PROFILES = {
 		"step_bias": 0.4,
 		"repeat_bias": 0.5,
 		"character": "hypnotic"
+	},
+	"acid_house": {
+		"intervals": [0, 3, 5, 6, 7, 10],  # Minor blues + b5 (303 acid)
+		"rhythm": [1, 1, 0, 1, 1, 0, 1, 0],  # Rolling 16ths
+		"range_octaves": 1.5,
+		"step_bias": 0.3,  # Wild leaps (resonant filter sweeps)
+		"repeat_bias": 0.4,
+		"character": "squelchy"
+	},
+	"acid_techno_303": {
+		"intervals": [0, 1, 3, 5, 7, 10],  # Minor + chromatic b2
+		"rhythm": [1, 1, 1, 0, 1, 1, 0, 1],  # Relentless
+		"range_octaves": 2.0,
+		"step_bias": 0.2,  # Big leaps, accent-driven
+		"repeat_bias": 0.3,
+		"character": "aggressive"
+	},
+	"ambient_techno": {
+		"intervals": [0, 2, 5, 7, 9],  # Dorian feel (warm minor)
+		"rhythm": [1, 0, 0, 0, 0, 1, 0, 0],  # Very sparse
+		"range_octaves": 0.5,
+		"step_bias": 0.7,  # Gentle movement
+		"repeat_bias": 0.6,
+		"character": "drifting"
+	},
+	"ambient_works": {
+		"intervals": [0, 2, 3, 7, 9],  # Pentatonic minor + 2nd
+		"rhythm": [1, 0, 0, 1, 0, 0, 0, 1],  # Irregular, human
+		"range_octaves": 0.7,
+		"step_bias": 0.6,
+		"repeat_bias": 0.5,
+		"character": "dreamy"
+	},
+	"rave": {
+		"intervals": [0, 0, 7, 12],  # Octaves and 5ths (hoover stabs)
+		"rhythm": [1, 0, 1, 0, 1, 1, 0, 1],  # Driving
+		"range_octaves": 1.5,
+		"step_bias": 0.2,  # Big jumps
+		"repeat_bias": 0.5,
+		"character": "euphoric"
+	},
+	"k_bass": {
+		"intervals": [0, 3, 5, 7],  # Minimal minor (sub-focused)
+		"rhythm": [1, 0, 0, 0, 1, 0, 0, 0],  # Sub pulses
+		"range_octaves": 0.5,
+		"step_bias": 0.5,
+		"repeat_bias": 0.7,  # Very repetitive (hypnotic pressure)
+		"character": "heavy"
+	},
+	"reese_jungle": {
+		"intervals": [0, 3, 5, 7, 10],  # Minor pentatonic
+		"rhythm": [1, 0, 1, 1, 0, 1, 0, 1],  # Breakbeat syncopation
+		"range_octaves": 1.0,
+		"step_bias": 0.3,  # Jumps (bass stabs)
+		"repeat_bias": 0.4,
+		"character": "rolling"
+	},
+	"supersaw_trance": {
+		"intervals": [0, 2, 3, 5, 7, 8, 10],  # Full natural minor
+		"rhythm": [1, 0, 1, 0, 1, 0, 1, 0],  # Steady 8ths
+		"range_octaves": 1.2,
+		"step_bias": 0.6,  # Singable, stepwise
+		"repeat_bias": 0.2,  # Flowing, not stuck
+		"character": "anthemic"
+	},
+	"midnight_metroplex": {
+		"intervals": [0, 2, 3, 5, 7, 9, 10],  # Dorian (jazz minor)
+		"rhythm": [1, 0, 0, 1, 0, 1, 0, 0],  # Syncopated jazz
+		"range_octaves": 1.0,
+		"step_bias": 0.4,
+		"repeat_bias": 0.4,
+		"character": "noir"
+	},
+	"lofi_house": {
+		"intervals": [0, 3, 5, 7, 10],  # Minor pentatonic
+		"rhythm": [0, 1, 0, 1, 0, 0, 1, 0],  # Offbeat, dusty
+		"range_octaves": 0.7,
+		"step_bias": 0.5,
+		"repeat_bias": 0.5,
+		"character": "dusty"
+	},
+	"dark_wave_cathedral": {
+		"intervals": [0, 1, 3, 5, 7, 8, 10],  # Phrygian (dark, gothic)
+		"rhythm": [1, 0, 0, 1, 0, 0, 1, 0],  # Sparse, reverberant
+		"range_octaves": 1.0,
+		"step_bias": 0.5,
+		"repeat_bias": 0.4,
+		"character": "gothic"
 	}
 }
 
@@ -90,7 +178,10 @@ static func generate_melody(genre: String, length: int = 8, seed_value: int = -1
 	else:
 		randomize()
 	
-	var profile = PROFILES.get(genre, PROFILES["modern_pop"])
+	var profile = PROFILES.get(genre, null)
+	if profile == null:
+		push_warning("MelodyGenerator: No profile for '%s' — using modern_pop fallback. Add a profile to PROFILES." % genre)
+		profile = PROFILES["modern_pop"]
 	var intervals = profile.intervals
 	var step_bias = profile.step_bias
 	var repeat_bias = profile.repeat_bias

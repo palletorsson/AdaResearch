@@ -17,7 +17,7 @@
     "parameters": {
         "duration": { "min": 60.0, "max": 480.0, "value": 180.0, "step": 30.0, "description": "Song duration in seconds" },
         "bpm": { "min": 85, "max": 100, "value": 92, "step": 1, "description": "Tempo (slow, contemplative)" },
-        "key": { "options": ["Am", "Em", "Dm", "Gm"], "value": "Am", "description": "Minor keys for melancholy" },
+        "key": { "options": ["Bb", "Eb", "Gm", "Dm"], "value": "Bb", "description": "SAW-era Aphex warmth — dreamy flat major key" },
         "lo_fi_amount": { "min": 0.0, "max": 1.0, "value": 0.6, "step": 0.1, "description": "Tape saturation and degradation" }
     },
     "sound_design": {

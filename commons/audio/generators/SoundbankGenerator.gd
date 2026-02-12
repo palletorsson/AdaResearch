@@ -44,7 +44,7 @@ const PATTERNS = {
 		"kick":  [2,0,0,0, 1,0,0,0, 2,0,0,0, 1,0,0,0],
 		"snare": [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # BIG gated hits
 		"hihat": [1,0,0.5,0, 1,0,0.5,0, 1,0,0.5,0, 1,0,0.5,0],  # Ghost 16ths
-		"arp":   [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],
+		"arp":   [1,0,0,1, 0,0,1,0, 0,1,0,0, 1,0,0,1],  # Dotted-8th cascade (Jan Hammer, Kavinsky)
 	},
 	
 	# Burial: 2-STEP - kick avoids beat 1! Ghost notes everywhere
@@ -60,7 +60,7 @@ const PATTERNS = {
 		"kick":    [1,0,0,0, 0,0,0.5,0, 0,0,0,0, 1,0,0,0],  # Soft ghost
 		"snare":   [0,0,0,0, 1,0,0,0, 0,0,0,0, 0.5,0,0,1],  # Swung
 		"hihat":   [0.5,0,0,0.5, 0,0,0.5,0, 0.5,0,0,0.5, 0,0,0.5,0],  # Very soft
-		"sequence":[1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1],
+		"sequence":[1,0,0,0, 0,0,0,1, 0,0,1,0, 0,0,0,0],  # Irregular, degraded — tape-warped feel
 	},
 	
 	# Rave: Aggressive, LOUD, frantic
@@ -68,7 +68,7 @@ const PATTERNS = {
 		"kick":  [2,0,2,0, 2,0,2,0, 2,0,2,0, 2,0,2,0],  # All accents!
 		"snare": [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,2],
 		"hihat": [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],  # 16ths full blast
-		"stab":  [0,0,0,0, 0,0,0,2, 0,0,0,0, 0,0,0,2],  # Hard stabs
+		"stab":  [0,0,0,2, 0,0,2,0, 0,0,0,2, 0,2,0,0],  # Rotating accent position — frantic, triplet-adjacent
 	},
 	
 	# Kraftwerk: Motorik - steady, consistent, robotic (no dynamics!)
@@ -85,8 +85,8 @@ const PATTERNS = {
 		"snare": [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # Big 2 and 4
 		"clap":  [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,1,0],  # Extra clap before 4
 		"hihat": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # Driving 8ths
-		"arp":   [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # Running 8ths
-		"stab":  [0,0,0,0, 0,0,0,1, 0,0,0,0, 0,0,0,1],  # Offbeat stabs
+		"arp":   [1,0,0,1, 0,1,0,0, 1,0,0,1, 0,1,0,0],  # Syncopated pop bounce (Like a Prayer era)
+		"stab":  [0,0,0,1, 0,1,0,0, 0,0,0,1, 0,0,1,0],  # Bouncy offbeat stab
 	},
 	
 	# Gypsy Woman House: Bouncy, groovy, piano-driven
@@ -145,7 +145,7 @@ const PATTERNS = {
 		"cr5000_kick":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sparse, cinematic
 		"cr5000_snare": [0,0,0,0, 0,0,0,0, 0,0,0,0, 1,0,0,0],  # Only on 4 (sparse)
 		"cr5000_hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Offbeat hats
-		"jupiter_arp":  [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # 8th note arpeggio
+		"jupiter_arp":  [1,0,0,0, 1,0,0,0, 1,0,1,0, 0,0,1,0],  # Slow shimmer with acceleration — expressive CS-80
 	},
 	
 	# === HYBRID PATTERNS (cross-genre experiments) ===
@@ -157,7 +157,7 @@ const PATTERNS = {
 		"hihat":       [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Offbeat (Detroit style)
 		"clap":        [0,0,0,0, 0,0,0,0, 0,0,0,0, 1,0,0,0],  # Sparse, cinematic
 		"stab":        [0,0,0,0, 0,0,1,0, 0,0,0,0, 0,0,1,0],  # Detroit stab
-		"jupiter_arp": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # Vangelis shimmer
+		"jupiter_arp": [1,0,1,0, 0,0,1,0, 1,0,0,0, 1,0,1,0],  # Detroit-influenced regularity — more mechanical than vanilla Vangelis
 	},
 	
 	# Foggy Frequencies: Boards of Canada x Burial (lo-fi 2-step)
@@ -167,7 +167,7 @@ const PATTERNS = {
 		"hihat":     [0.5,0,0,0.5, 0,1,0.5,0, 0.5,0,0,0.5, 0,1,0,0.5],  # Ghostly
 		"texture":   [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # BoC texture continuous
 		"crackle":   [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Burial crackle continuous
-		"sequence":  [1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1],  # BoC warped sequence
+		"sequence":  [0,0,1,0, 0,0,0,0, 1,0,0,0, 0,1,0,0],  # Broken, ghostly fragments — distinct from BoC
 		"vocal":     [0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Burial vocal chop (sparse)
 	},
 	
@@ -207,6 +207,85 @@ const PATTERNS = {
 		"stab":    [0,0,0,0, 0,0,0,2, 0,0,0,0, 0,0,0,0],  # Metallic stab punctuation (sparse)
 		"break":   [1,0,1,0, 0,1,0,0, 1,0,0,1, 0,0,1,0],  # Chopped break pattern overlay
 		"atmosphere": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Tension drone (sustained)
+	},
+	
+	# === ADDITIONAL GENRE PATTERNS ===
+	
+	# Acid House: 303 sequence IS the genre — rolling, accent-driven
+	# Reference: Phuture "Acid Tracks", DJ Pierre, Adonis
+	"acid_house": {
+		"kick":      [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # 4-on-floor
+		"snare":     [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # 2 and 4
+		"hihat":     [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # Open/closed 8ths
+		"clap":      [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # Layered with snare
+		"sequencer": [1,0,1,1, 0,1,1,0, 1,1,0,1, 0,1,0,1],  # 303 rolling pattern (accent-driven)
+	},
+	
+	# Acid Techno 303: Harder, more relentless — Birmingham/Berlin acid
+	# Reference: Hardfloor "Acperience 1", Dave Clarke, Chris Liberator
+	"acid_techno_303": {
+		"kick":      [2,0,0,0, 2,0,0,0, 2,0,0,0, 2,0,0,0],  # Pounding 4-on-floor
+		"snare":     [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # Hard snare on 2&4
+		"hihat":     [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],  # Relentless 16ths
+		"clap":      [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # Hard clap
+		"sequencer": [1,1,0,2, 1,0,2,1, 0,1,2,0, 1,2,0,1],  # Aggressive 303 with accents
+	},
+	
+	# French Touch: Filtered disco, offbeat everything — Daft Punk, Cassius, Etienne de Crécy
+	# Reference: "Around the World", "Da Funk", Stardust "Music Sounds Better with You"
+	"french_touch": {
+		"kick":  [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # 4-on-floor
+		"snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # 2 and 4
+		"clap":  [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # Layered
+		"hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,1],  # Offbeat with open hat on &4
+		"stab":  [0,1,0,0, 0,1,0,1, 0,1,0,0, 0,1,0,1],  # Disco stab — offbeat funk
+	},
+	
+	# Ambient Techno: Very sparse, dub-influenced — Basic Channel/Pole territory
+	# Reference: Biosphere "Substrata", Wolfgang Voigt, Deepchord
+	"ambient_techno": {
+		"kick":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Half-time pulse
+		"snare": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0.5,0,0,0],  # Ghost snare on 4
+		"hihat": [0,0,0.5,0, 0,0,0.5,0, 0,0,0.5,0, 0,0,0.5,0],  # Whisper offbeat hats
+		"stab":  [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Single chord hit per bar
+	},
+	
+	# Lo-fi House: Dusty, sample-based — DJ Seinfeld, Mall Grab, Ross from Friends
+	# Reference: "U", "I Just Wanna", warm tape hiss aesthetic
+	"lofi_house": {
+		"kick":  [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0.5,0],  # 4-on-floor with ghost
+		"snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # 2 and 4
+		"hihat": [0,0,1,1, 0,0,1,0, 0,0,1,1, 0,0,1,0],  # Offbeat shaker feel
+		"stab":  [0,0,0,1, 0,0,0,0, 0,1,0,0, 0,0,0,1],  # Dusty offbeat sample chops
+	},
+	
+	# Supersaw Trance: Anthemic, building — Ferry Corsten, ATB, Paul van Dyk
+	# Reference: "Out of the Blue", "9pm (Till I Come)", gate trance builds
+	"supersaw_trance": {
+		"kick":  [2,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # Accent on 1
+		"snare": [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],  # Big 2&4
+		"clap":  [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # Layered
+		"hihat": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],  # Driving 8ths
+		"arp":   [1,0,0,1, 0,1,0,0, 1,0,0,1, 0,0,1,0],  # Gate trance arp — syncopated, not straight
+	},
+	
+	# Reese Jungle: Breakbeat chopped, dark reese bass — Goldie, Photek, Dillinja
+	# Reference: "Inner City Life", "Ni Ten Ichi Ryu", dark roller aesthetics
+	"reese_jungle": {
+		"kick":  [2,0,0,0, 0,0,1,0, 0,0,0,0, 0,1,0,0],  # Broken kick pattern
+		"snare": [0,0,0,0, 2,0,0,0.5, 0,0,0,0, 2,0,0,1],  # Strong hits with ghost rolls
+		"hihat": [1,1,0,1, 0,1,1,0, 1,0,1,1, 0,1,0,1],  # Chopped break hats
+		"stab":  [0,0,0,0, 0,0,0,0, 0,0,1,0, 0,0,0,0],  # Single dark reese stab
+	},
+	
+	# Midnight Metroplex: Jazz-tinged Detroit — Carl Craig, Moodymann, Kenny Larkin
+	# Reference: "Bug in the Bassbin", "Shades of Jae", sparse melodic techno
+	"midnight_metroplex": {
+		"kick":  [2,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # Detroit 4-on-floor
+		"snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # 2 and 4
+		"hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Offbeat hats
+		"stab":  [0,0,0,0, 0,0,1,0, 0,0,0,0, 0,0,0,1],  # Jazz chord stab — syncopated, sparse
+		"lead":  [0,0,0,0, 0,0,0,0.5, 0,0,0,0, 0,0.7,0,0],  # Ghost melody fragments
 	},
 }
 
@@ -295,6 +374,46 @@ const BASS_PATTERNS = {
 		"pattern": [2,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sub hits on 1&3, accent on 1
 		"style": "sustained",  # Long, physical sub pressure
 	},
+	# Acid House: Pulsing 303 bass, locked to kick
+	"acid_house": {
+		"pattern": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # 4-on-floor pulse
+		"style": "sustained",
+	},
+	# Acid Techno 303: Hard, distorted bass
+	"acid_techno_303": {
+		"pattern": [2,0,0,0, 2,0,0,0, 2,0,0,0, 2,0,0,0],  # Pounding, accented
+		"style": "sustained",
+	},
+	# French Touch: Filtered disco bass — side-chained
+	"french_touch": {
+		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # Offbeat disco
+		"style": "short",  # Choppy, filtered
+	},
+	# Ambient Techno: Deep, sparse sub
+	"ambient_techno": {
+		"pattern": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # One hit per bar
+		"style": "sustained",  # Long, deep drone
+	},
+	# Lo-fi House: Warm, round bass
+	"lofi_house": {
+		"pattern": [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,1,0],  # Syncopated warmth
+		"style": "sustained",
+	},
+	# Supersaw Trance: Driving bass, locked to kick
+	"supersaw_trance": {
+		"pattern": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # Driving 4-on-floor
+		"style": "sustained",
+	},
+	# Reese Jungle: Heavy reese sub
+	"reese_jungle": {
+		"pattern": [2,0,0,0, 0,0,0,0, 0,0,1,0, 0,0,0,0],  # Sub pressure with offbeat hit
+		"style": "sustained",  # Long, dark reese
+	},
+	# Midnight Metroplex: Jazz-influenced walking bass
+	"midnight_metroplex": {
+		"pattern": [1,0,0,0, 0,0,1,0, 0,0,0,0, 0,0,1,0],  # Sparse, jazzy
+		"style": "sustained",
+	},
 }
 
 # =============================================================================
@@ -320,6 +439,14 @@ const SWING = {
 	"chicago_dusseldorf": 4.0,   # Slight groove, transitioning to straight
 	"k_bass": 0.0,               # Jungle straight — precision at 170 BPM
 	"dark_wave": 7.0,            # Slight swing — deliberate, ritualistic (from song config)
+	"acid_house": 0.0,           # Machine straight — 303 precision
+	"acid_techno_303": 0.0,      # Relentless machine
+	"french_touch": 0.0,         # Tight disco machine
+	"ambient_techno": 0.0,       # Dub precision
+	"lofi_house": 10.0,          # Dusty, loose swing
+	"supersaw_trance": 0.0,      # Driving straight
+	"reese_jungle": 0.0,         # Breakbeat precision at speed
+	"midnight_metroplex": 6.0,   # Jazz-tinged Detroit groove
 }
 
 # =============================================================================
@@ -447,6 +574,54 @@ const VELOCITY = {
 		"ghost": 0.35,     # Ghost hihats felt not heard
 		"variation": 0.06, # Tight, ritualistic repetition
 	},
+	"acid_house": {
+		"base": 0.85,      # Driving, raw
+		"accent": 1.0,     # 303 accents hit hard
+		"ghost": 0.5,
+		"variation": 0.05, # Machine tight
+	},
+	"acid_techno_303": {
+		"base": 0.95,      # Loud, relentless
+		"accent": 1.0,     # Everything hits
+		"ghost": 0.6,
+		"variation": 0.02, # Very tight machine
+	},
+	"french_touch": {
+		"base": 0.85,      # Filtered disco energy
+		"accent": 1.0,     # Stab accents
+		"ghost": 0.45,
+		"variation": 0.08, # Groovy but tight
+	},
+	"ambient_techno": {
+		"base": 0.5,       # Very soft, spacious
+		"accent": 0.7,     # Even accents are restrained
+		"ghost": 0.2,      # Whisper
+		"variation": 0.1,  # Slight drift
+	},
+	"lofi_house": {
+		"base": 0.7,       # Warm, dusty
+		"accent": 0.85,    # Not too punchy
+		"ghost": 0.35,
+		"variation": 0.15, # Lo-fi wobble
+	},
+	"supersaw_trance": {
+		"base": 0.9,       # Big, anthemic
+		"accent": 1.0,     # Full power
+		"ghost": 0.5,
+		"variation": 0.05, # Driving precision
+	},
+	"reese_jungle": {
+		"base": 0.85,      # Dark, heavy
+		"accent": 1.0,     # Breaks hit hard
+		"ghost": 0.4,      # Ghost notes in breaks
+		"variation": 0.1,  # Break feel
+	},
+	"midnight_metroplex": {
+		"base": 0.7,       # Understated, jazz feel
+		"accent": 0.9,     # Expressive but controlled
+		"ghost": 0.3,      # Subtle ghosts
+		"variation": 0.12, # Human, expressive
+	},
 }
 
 # =============================================================================
@@ -540,6 +715,46 @@ const STRUCTURES = {
 	"dark_wave": {
 		"sections": ["intro", "build", "verse", "chorus", "verse_2", "chorus_2", "breakdown", "build_2", "chorus_3", "outro"],
 		"bars": [8, 8, 16, 8, 16, 8, 8, 4, 16, 8],
+	},
+	# Acid House: Build → acid drops
+	"acid_house": {
+		"sections": ["intro", "build", "drop", "breakdown", "drop", "outro"],
+		"bars": [4, 8, 16, 8, 16, 4],
+	},
+	# Acid Techno 303: Relentless, minimal structure
+	"acid_techno_303": {
+		"sections": ["intro", "build", "main", "breakdown", "main", "outro"],
+		"bars": [4, 8, 16, 4, 16, 4],
+	},
+	# French Touch: Disco-influenced with filter sweeps
+	"french_touch": {
+		"sections": ["intro", "build", "main", "breakdown", "drop", "main", "outro"],
+		"bars": [4, 8, 16, 8, 16, 8, 4],
+	},
+	# Ambient Techno: Long, sparse sections
+	"ambient_techno": {
+		"sections": ["intro", "build", "main", "breakdown", "main", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8],
+	},
+	# Lo-fi House: Warm, sample-based loops
+	"lofi_house": {
+		"sections": ["intro", "build", "main", "breakdown", "drop", "outro"],
+		"bars": [4, 8, 16, 8, 16, 4],
+	},
+	# Supersaw Trance: Anthemic build-drop structure
+	"supersaw_trance": {
+		"sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
+		"bars": [8, 16, 16, 8, 16, 8],
+	},
+	# Reese Jungle: Breakbeat, drop-heavy
+	"reese_jungle": {
+		"sections": ["intro", "build", "drop1", "breakdown", "drop2", "outro"],
+		"bars": [8, 8, 16, 8, 16, 4],
+	},
+	# Midnight Metroplex: Jazz-tinged Detroit, contemplative
+	"midnight_metroplex": {
+		"sections": ["intro", "build", "main", "breakdown", "main", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8],
 	},
 }
 
@@ -1306,7 +1521,7 @@ static func _generate_hybrid_section(
 				var bar_pattern = _get_bar_pattern(patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
 				_add_pattern_sound(final_mix, script, bar_start, bar_pattern,
 								   step_samples, sound_name, 0.0, swing_pct,
-								   velocity_cfg, hit_chords)
+								   velocity_cfg, hit_chords, hybrid_id, bar)
 			# Bass with its own pattern
 			elif sound_name in ["bass", "sub", "hoover"]:
 				_add_bass_pattern(final_mix, script, bar_start, bass_cfg,
@@ -1327,17 +1542,17 @@ static func _get_genre_progression(genre_id: String) -> Array:
 		"moroder_disco":
 			return [0, 0, 0, 0]  # SINGLE CHORD - pure hypnosis (I Feel Love style)
 		"detroit_techno":
-			return [0, 5, 3, 4]
+			return [0, 5, 3, 4]  # i - VI - iv - V (classic Detroit)
 		"synthwave":
-			return [0, 3, 5, 4]
+			return [0, 3, 5, 4]  # i - iv - vi - V (cinematic 80s)
 		"burial":
-			return [0, 5, 0, 3]
-		"boards_of_canada":
-			return [0, 2, 5, 0]
+			return [0, 5, 0, 3]  # i - VI - i - iv (sparse, South London)
+		"boards_of_canada", "boards_of_canada_v2":
+			return [0, 2, 5, 0]  # I - iii - vi - I (nostalgic, childlike)
 		"rave":
-			return [0, 0, 5, 5]
-		"kraftwerk":
-			return [0, 4, 0, 4]
+			return [0, 0, 5, 5]  # i - i - VI - VI (aggressive, simple)
+		"kraftwerk", "kraftwerk_v2":
+			return [0, 4, 0, 4]  # i - V - i - V (robotic oscillation)
 		"madonna_80s":
 			return [0, 5, 3, 4]  # I - vi - IV - V (classic pop, MAJOR!)
 		"gypsy_woman_house":
@@ -1347,17 +1562,67 @@ static func _get_genre_progression(genre_id: String) -> Array:
 		"vangelis_cs80":
 			return [0, 3, 5, 4]  # i - iv - vi - V (cinematic minor drama)
 		"nineties_rnb":
-			return [0, 3, 6, 2]  # Dm → Gm → C → F (i-iv-bVII-bIII, Guy "Piece of My Love" style)
+			return [0, 3, 6, 2]  # Dm → Gm → C → F (i-iv-bVII-bIII, Guy style)
 		"chromatic_story":
-			return [0, 3, 4, 2]  # Am → F → G → Dm (chromatic journey through circle of fifths)
+			return [0, 3, 4, 2]  # Am → F → G → Dm (chromatic journey)
 		"replicants_dawn":
 			return [0, 5, 3, 4]  # Dm - Bb - Gm - A (cinematic minor)
 		"foggy_frequencies":
 			return [0, 5, 6, 3]  # Fm - Ab - Eb - Db (descending, melancholic)
 		"chicago_dusseldorf":
 			return [0, 3, 4, 0]  # Am - Dm - G - C (soulful then robotic)
+		# === Added: genres that were falling through to default ===
+		"acid_house":
+			return [0, 0, 0, 0]  # Single chord hypnosis (Phuture style, let the 303 do the work)
+		"acid_techno_303":
+			return [0, 0, 5, 0]  # i - i - VI - i (minimal movement, 303 carries it)
+		"ambient_techno":
+			return [0, 6, 3, 5]  # i - VII - iv - VI (slow drift, Basic Channel)
+		"ambient_works":
+			return [0, 5, 2, 4]  # i - VI - iii - V (melancholic descent, SAW-era)
+		"french_touch":
+			return [0, 4, 2, 5]  # i - V - iii - VI (funky, filtered disco)
+		"k_bass":
+			return [0, 0, 3, 0]  # i - i - iv - i (sub-led, minimal - let the reese speak)
+		"midnight_metroplex":
+			return [0, 4, 3, 6]  # i - V - iv - VII (Drexciya noir, jazz-tinged)
+		"lofi_house":
+			return [0, 3, 5, 3]  # i - iv - vi - iv (warm, dusty loop)
+		"supersaw_trance":
+			return [0, 5, 3, 4]  # i - VI - iv - V (anthemic, uplifting)
+		"reese_jungle":
+			return [0, 4, 3, 6]  # i - V - iv - VII (rolling, dark)
+		"pop_generative", "pop_v2":
+			return [0, 3, 4, 5]  # I - IV - V - vi (bright pop)
+		"pop_madonna":
+			return [0, 5, 3, 4]  # I - vi - IV - V (classic 80s pop)
+		"prog_synth_70s", "prog_synth_v2":
+			return [0, 2, 4, 6]  # i - iii - V - VII (modal exploration)
+		"blade_runner":
+			return [0, 3, 5, 4]  # i - iv - vi - V (Vangelis noir)
+		"dark_wave_cathedral":
+			return [0, 4, 5, 4]  # i - V - VI - V (gothic oscillation)
+		"aphex_twin_digital_amber":
+			return [0, 5, 2, 4]  # i - VI - iii - V (complex, melancholic)
+		"ada_theme":
+			return [0, 3, 4, 5]  # I - IV - V - vi (warm, hopeful)
+		"kpop_prog_remix":
+			return [0, 4, 5, 3]  # i - V - VI - iv (K-pop drama + prog complexity)
+		"burial_v2":
+			return [0, 3, 0, 5]  # i - iv - i - VI (ghost dub variation)
 		_:
-			return [0, 5, 3, 4]
+			push_warning("SoundbankGenerator: No progression defined for '%s' — using genre-hashed fallback. Add an entry to _get_genre_progression()." % genre_id)
+			# Hash the genre name to pick a semi-random but consistent progression
+			# so unknown genres at least don't ALL sound identical
+			var h = genre_id.hash()
+			var options = [
+				[0, 3, 5, 4],  # i - iv - vi - V
+				[0, 5, 3, 6],  # i - VI - iv - VII
+				[0, 4, 0, 3],  # i - V - i - iv
+				[0, 6, 3, 5],  # i - VII - iv - VI
+				[0, 3, 6, 4],  # i - iv - VII - V
+			]
+			return options[absi(h) % options.size()]
 
 
 static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: Array, 
@@ -1409,7 +1674,7 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 				var bar_pattern = _get_bar_pattern(patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
 				_add_pattern_sound(final_mix, script, bar_start, bar_pattern, 
 								   step_samples, sound_name, humanize_ms, swing_pct,
-								   velocity_cfg, hit_chords)
+								   velocity_cfg, hit_chords, genre_id, bar)
 			# Bass with its own pattern
 			elif sound_name in ["bass", "sub", "hoover"]:
 				_add_bass_pattern(final_mix, script, bar_start, bass_cfg,
@@ -1471,7 +1736,16 @@ static func _get_bar_pattern(base_pattern: Array, sound_name: String, bar_index:
 static func _add_pattern_sound(mix: PackedFloat32Array, script, bar_start: int, 
 								pattern: Array, step_samples: int, sound_name: String,
 								humanize_ms: float, swing_pct: float,
-								velocity_cfg: Dictionary, chord_freqs: Array) -> void:
+								velocity_cfg: Dictionary, chord_freqs: Array,
+								genre_id: String = "", bar_index: int = 0) -> void:
+	# For hook sounds, get genre-specific arp/melody pattern to cycle through chord tones
+	var is_hook = _is_hook_sound(sound_name)
+	var arp_indices: Array = []
+	if is_hook and chord_freqs.size() >= 3:
+		arp_indices = _get_arp_indices_for_genre(genre_id, sound_name, bar_index)
+	
+	var active_step_counter := 0  # Counts only steps that actually trigger
+	
 	for step in range(pattern.size()):
 		var vel = pattern[step]
 		if vel == 0:
@@ -1499,7 +1773,88 @@ static func _add_pattern_sound(mix: PackedFloat32Array, script, bar_start: int,
 		# Add random variation
 		volume *= 1.0 + (randf() - 0.5) * velocity_cfg["variation"] * 2.0
 		
-		_add_sound_hit(mix, script, step_start, sound_name, chord_freqs, volume)
+		# For hook sounds: cycle through chord tones using arp pattern
+		var hit_freqs = chord_freqs
+		if is_hook and arp_indices.size() > 0 and chord_freqs.size() >= 3:
+			var arp_idx = arp_indices[active_step_counter % arp_indices.size()]
+			# arp_idx maps to chord tone: 0=root, 1=3rd, 2=5th, 3=octave
+			var selected_freq: float
+			if arp_idx >= chord_freqs.size():
+				selected_freq = chord_freqs[0] * 2.0  # Octave up
+			else:
+				selected_freq = chord_freqs[arp_idx]
+			hit_freqs = [selected_freq, chord_freqs[1], chord_freqs[2]]
+		
+		active_step_counter += 1
+		_add_sound_hit(mix, script, step_start, sound_name, hit_freqs, volume)
+
+
+## Returns an array of chord-tone indices for cycling through on each hit.
+## 0 = root, 1 = 3rd, 2 = 5th, 3 = octave (root * 2)
+## Genre-specific patterns create distinct arpeggio characters.
+static func _get_arp_indices_for_genre(genre_id: String, sound_name: String, bar_index: int) -> Array:
+	# Stabs typically hit chord tones (root or full chord) — less arpeggiation
+	if sound_name in ["stab", "piano", "organ", "rhodes"]:
+		match genre_id:
+			"detroit_techno", "midnight_metroplex":
+				return [0, 0, 2, 0]  # Root-heavy with occasional 5th
+			"gypsy_woman_house", "chicago_dusseldorf":
+				return [0, 1, 2, 1] if bar_index % 2 == 0 else [2, 1, 0, 1]  # Alternating direction
+			"french_touch":
+				return [1, 2, 0, 2]  # Disco inversion — starts on 3rd
+			"dub_house":
+				return [0, 2, 0, 2]  # Minimal root-5th
+			_:
+				return [0, 1, 2, 1]  # Default: up-down through chord
+	
+	# Arps and sequences cycle through chord tones — this IS the melody
+	match genre_id:
+		"moroder_disco":
+			return [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3]  # Classic disco triangle
+		"synthwave":
+			return [0, 2, 1, 3, 0, 2, 1, 3]  # Wide, cinematic jumps
+		"madonna_80s":
+			return [0, 1, 2, 3, 2, 1, 0, 0]  # Pop arp with root anchor
+		"boards_of_canada", "foggy_frequencies":
+			# Irregular — skip tones, repeat, warp
+			return [0, 0, 2, 1, 0, 2, 0, 1] if bar_index % 4 < 2 else [2, 0, 1, 0, 2, 1, 0, 0]
+		"kraftwerk", "chicago_dusseldorf":
+			return [0, 3, 0, 3, 2, 3, 0, 3]  # Robotic octave + 5th
+		"vangelis_cs80", "replicants_dawn":
+			return [0, 2, 3, 2, 0, 1, 3, 1]  # Expressive, wide voicing
+		"rave":
+			return [0, 3, 0, 3, 0, 3, 0, 3]  # Octave stab — aggressive
+		"dark_wave":
+			return [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3]  # Triangle — never stops
+		"burial":
+			return [0, 2, 0, 2, 0, 0, 2, 0]  # Sparse root-5th
+		"acid_house", "acid_techno_303":
+			return [0, 0, 2, 0, 1, 0, 3, 0]  # 303-style — root-heavy with chromatic escapes
+		"ambient_techno":
+			return [0, 2, 1, 2]  # Slow, drifting chord tones
+		"french_touch":
+			return [1, 2, 3, 2, 1, 0, 1, 2]  # Disco: starts on 3rd, funky inversion
+		"supersaw_trance":
+			return [0, 1, 2, 3, 3, 2, 1, 0]  # Anthemic — full sweep up and down
+		"reese_jungle", "k_bass":
+			return [0, 0, 2, 0, 0, 2, 0, 0]  # Sub-focused — mostly root
+		"lofi_house":
+			return [0, 1, 0, 2, 0, 1, 2, 0]  # Dusty, irregular cycling
+		"nineties_rnb", "chromatic_story":
+			return [0, 1, 2, 1, 0, 2, 1, 0]  # Smooth, jazzy voice-leading
+		"dark_wave_cathedral":
+			return [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0, 1, 2, 3]  # Triangle arp
+		_:
+			# Genre-hashed fallback — at least different per genre
+			var h = absi(genre_id.hash())
+			var options = [
+				[0, 1, 2, 3, 2, 1, 0, 1],  # Triangle
+				[0, 2, 1, 3, 0, 2, 1, 3],  # Wide jumps
+				[0, 0, 2, 1, 0, 2, 0, 1],  # Root-heavy irregular
+				[0, 1, 2, 1, 2, 3, 2, 1],  # Ascending bias
+				[3, 2, 1, 0, 1, 2, 3, 2],  # Descending bias
+			]
+			return options[h % options.size()]
 
 
 static func _add_bass_pattern(mix: PackedFloat32Array, script, bar_start: int,

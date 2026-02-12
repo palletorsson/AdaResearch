@@ -13,6 +13,9 @@ signal liquid_flow_stopped
 @export var glass_roughness: float = 0.0
 @export var use_refraction: bool = true
 
+@export_group("Dimensions")
+@export var dimension_scale: float = 1.0
+
 @export_group("Liquid")
 @export var liquid_color: Color = Color(0.2, 0.8, 0.4, 0.6)
 @export var show_liquid: bool = true
@@ -254,11 +257,25 @@ func _create_segment(segment_type: String, params: Dictionary) -> Node3D:
 			return null
 
 func _scale_params(params: Dictionary) -> Dictionary:
-	# Apply rack scale to dimension parameters
+	# Apply a global dimension scale to geometry parameters.
 	var scaled = params.duplicate()
-	for key in ["length", "height", "radius", "spiral_radius", "tube_radius", "corner_radius"]:
+	if is_equal_approx(dimension_scale, 1.0):
+		return scaled
+	
+	for key in [
+		"length", "height", "radius", "spiral_radius", "tube_radius",
+		"corner_radius", "bend_radius", "branch_length", "tip_length",
+		"arm_length", "offset", "inner_radius", "outer_radius",
+		"jacket_radius", "neck_radius", "neck_length", "pole_radius",
+		"width", "depth"
+	]:
 		if scaled.has(key):
-			scaled[key] = scaled[key]
+			scaled[key] = float(scaled[key]) * dimension_scale
+	
+	for key in ["radius_in", "radius_out"]:
+		if scaled.has(key):
+			scaled[key] = maxf(0.0001, float(scaled[key]) * dimension_scale)
+	
 	return scaled
 
 func _create_straight_segment(params: Dictionary) -> Node3D:

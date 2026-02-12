@@ -1,0 +1,100 @@
+{
+  "registry_info": {
+    "name": "lab",
+    "description": "Laboratory equipment artifacts for bench instruments, monitors, and advanced experimental devices",
+    "category": "laboratory",
+    "theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
+  },
+  "artifacts": {
+    "pipettedispenser": {
+      "lookup_name": "pipettedispenser",
+      "scene": "res://commons/lab/pipettedispenser/pipettedispenser.tscn",
+      "name": "Pipette Dispenser",
+      "description": "Precision liquid handling instrument with volume feedback and dispense animation.",
+      "category": "laboratory",
+      "complexity": "intermediate",
+      "tags": ["lab", "chemistry", "pipette", "measurement", "instrument"]
+    },
+    "quantumentanglementmeter": {
+      "lookup_name": "quantumentanglementmeter",
+      "scene": "res://commons/lab/quantumentanglementmeter/quantumentanglementmeter.tscn",
+      "name": "Quantum Entanglement Meter",
+      "description": "Dual-chamber quantum diagnostic device with coherence and anomaly visualization.",
+      "category": "laboratory",
+      "complexity": "advanced",
+      "tags": ["lab", "quantum", "entanglement", "meter", "instrument"]
+    },
+    "resonancechamber": {
+      "lookup_name": "resonancechamber",
+      "scene": "res://commons/lab/resonancechamber/resonancechamber.tscn",
+      "name": "Resonance Chamber",
+      "description": "High-energy resonance chamber with rotating rings and phased conduit feedback.",
+      "category": "laboratory",
+      "complexity": "advanced",
+      "tags": ["lab", "resonance", "chamber", "energy", "instrument"]
+    },
+    "fluxdetector": {
+      "lookup_name": "fluxdetector",
+      "scene": "res://commons/lab/fluxdetector/fluxdetector.tscn",
+      "name": "Flux Detector",
+      "description": "Temporal and field flux detector with sweep animations and anomaly signaling.",
+      "category": "laboratory",
+      "complexity": "advanced",
+      "tags": ["lab", "flux", "detector", "temporal", "instrument"]
+    },
+    "cryogenicpreservation": {
+      "lookup_name": "cryogenicpreservation",
+      "scene": "res://commons/lab/cryogenicpreservation/cryogenicpreservation.tscn",
+      "name": "Cryogenic Preservation Unit",
+      "description": "Cryogenic chamber with cooling cycle visuals and preservation state indicators.",
+      "category": "laboratory",
+      "complexity": "advanced",
+      "tags": ["lab", "cryogenic", "preservation", "cooling", "instrument"]
+    },
+    "robotarm": {
+      "lookup_name": "robotarm",
+      "scene": "res://commons/lab/robotarm/robotarm.tscn",
+      "name": "Robot Arm",
+      "description": "Articulated lab robot for scripted precision handling and calibration sequences.",
+      "category": "laboratory",
+      "complexity": "intermediate",
+      "tags": ["lab", "robotics", "arm", "automation", "instrument"]
+    },
+    "circularradarmonitor": {
+      "lookup_name": "circularradarmonitor",
+      "scene": "res://commons/lab/circularradarmonitor/circularradarmonitor.tscn",
+      "name": "Circular Radar Monitor",
+      "description": "Circular sweep monitor with contact blips, range rings, and target status cues.",
+      "category": "laboratory",
+      "complexity": "intermediate",
+      "tags": ["lab", "radar", "monitor", "detection", "instrument"]
+    },
+    "datatablet": {
+      "lookup_name": "datatablet",
+      "scene": "res://commons/lab/datatablet/datatablet.tscn",
+      "name": "Data Tablet",
+      "description": "Portable lab tablet interface for dataset refresh, sync status, and alerts.",
+      "category": "laboratory",
+      "complexity": "beginner",
+      "tags": ["lab", "tablet", "data", "interface", "monitor"]
+    },
+    "electromagneticfieldgenerator": {
+      "lookup_name": "electromagneticfieldgenerator",
+      "scene": "res://commons/lab/electromagneticfieldgenerator/electromagneticfieldgenerator.tscn",
+      "name": "Electromagnetic Field Generator",
+      "description": "Electromagnetic generator with Tesla coil phases and field-strength dynamics.",
+      "category": "laboratory",
+      "complexity": "advanced",
+      "tags": ["lab", "electromagnetic", "field", "generator", "instrument"]
+    },
+    "terminal": {
+      "lookup_name": "terminal",
+      "scene": "res://commons/lab/terminal/terminal.tscn",
+      "name": "Lab Terminal",
+      "description": "Research terminal with animated status lights, screen flicker, and analysis cycle.",
+      "category": "laboratory",
+      "complexity": "beginner",
+      "tags": ["lab", "terminal", "computer", "interface", "monitor"]
+    }
+  }
+}

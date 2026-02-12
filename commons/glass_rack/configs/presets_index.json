@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "presets": [
+    {
+      "id": "branching_condenser",
+      "name": "Branching Condenser System",
+      "file": "branching_condenser.json",
+      "description": "Y-pipe splits flow into two parallel spiral condensers, then recombines."
+    },
+    {
+      "id": "breaking_bad_coffee",
+      "name": "Breaking Bad Coffee Maker",
+      "file": "breaking_bad_coffee.json",
+      "description": "Multi-level cold drip coffee / distillation apparatus with metal frame."
+    },
+    {
+      "id": "complex_apparatus",
+      "name": "Reflux Distillation System",
+      "file": "complex_apparatus.json",
+      "description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes."
+    },
+    {
+      "id": "distillation_rack",
+      "name": "Distillation Apparatus",
+      "file": "distillation_rack.json",
+      "description": "Classic distillation setup with flask, spiral condenser, and collection vessel."
+    },
+    {
+      "id": "distillation_y",
+      "name": "Y-Branch Distillation",
+      "file": "distillation_y.json",
+      "description": "Simple Y-branch with two spiral condensers feeding into beakers."
+    },
+    {
+      "id": "fractional_distillation",
+      "name": "Fractional Distillation Column",
+      "file": "fractional_distillation.json",
+      "description": "Multi-stage distillation with reducers and collection points."
+    },
+    {
+      "id": "reflux_apparatus",
+      "name": "Reflux Apparatus",
+      "file": "reflux_apparatus.json",
+      "description": "Flask with condenser and U-bend return for continuous reflux."
+    },
+    {
+      "id": "sbend_manifold",
+      "name": "S-Bend Manifold",
+      "file": "sbend_manifold.json",
+      "description": "Multiple S-bends creating an offset distribution manifold."
+    },
+    {
+      "id": "simple_tube",
+      "name": "Simple Test Tube",
+      "file": "simple_tube.json",
+      "description": "Basic straight tube with a bend."
+    },
+    {
+      "id": "spiral_condenser",
+      "name": "Spiral Condenser",
+      "file": "spiral_condenser.json",
+      "description": "Standalone spiral condenser with inlet and outlet tubes."
+    },
+    {
+      "id": "spiral_tube",
+      "name": "Spiral Tube",
+      "file": "spiral_tube.json",
+      "description": "Simple spiral glass tube for condenser coil layouts."
+    }
+  ]
+}

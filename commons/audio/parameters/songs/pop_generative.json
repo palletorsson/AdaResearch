@@ -17,7 +17,7 @@
     "parameters": {
         "duration": { "min": 150.0, "max": 270.0, "value": 200.0, "step": 10.0, "description": "Radio-friendly length" },
         "bpm": { "min": 100, "max": 128, "value": 118, "step": 1, "description": "Varies by sub-style" },
-        "key": { "options": ["C", "Am", "G", "Em", "F", "Dm"], "value": "Am", "description": "Emotional flexibility" },
+        "key": { "options": ["C", "G", "F", "D"], "value": "C", "description": "Bright major key — pop optimism and clarity" },
         "energy": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "Overall intensity" }
     },
     "sound_design": {

@@ -16,7 +16,7 @@
     },
     "parameters": {
         "bpm": { "min": 135, "max": 145, "value": 140, "step": 1 },
-        "key": { "options": ["Am", "Fm", "Cm", "Gm"], "value": "Am" },
+        "key": { "options": ["Fm", "Am", "Cm", "Gm"], "value": "Fm" },
         "supersaw_width": { "min": 0.0, "max": 1.0, "value": 0.8 }
     },
     "sound_design": {

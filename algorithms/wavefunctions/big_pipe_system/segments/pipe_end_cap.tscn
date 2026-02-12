@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://pipe_cap_001"]
+[gd_scene load_steps=6 format=3 uid="uid://pipe_cap_001"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pipe"]
 cull_mode = 2
@@ -19,6 +19,13 @@ radial_segments = 16
 rings = 8
 is_hemisphere = true
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_stub"]
+radius = 0.8
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cap"]
+radius = 0.8
+
 [node name="PipeEndCap" type="Node3D"]
 
 [node name="Stub" type="MeshInstance3D" parent="."]
@@ -32,3 +39,11 @@ material_override = SubResource("StandardMaterial3D_pipe")
 mesh = SubResource("SphereMesh_cap")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="StubCollision" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.25)
+shape = SubResource("CylinderShape3D_stub")
+
+[node name="CapCollision" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.5)
+shape = SubResource("SphereShape3D_cap")

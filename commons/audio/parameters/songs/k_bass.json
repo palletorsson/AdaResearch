@@ -18,11 +18,11 @@
     "parameters": {
         "duration": { "min": 180.0, "max": 300.0, "value": 240.0, "step": 30.0, "description": "Club-functional duration" },
         "bpm": { "min": 160, "max": 180, "value": 170, "step": 2, "description": "DnB velocity (jungle/DnB pillar)" },
-        "key": { "options": ["Am", "Dm", "Em", "Gm"], "value": "Am", "description": "Minor keys for tension" },
+        "key": { "options": ["Fm", "Ebm", "Gm", "Cm"], "value": "Fm", "description": "Maximum sub pressure — Fm for heavy low end tension" },
         "swing": { "min": 0.0, "max": 0.15, "value": 0.0, "step": 0.02, "description": "Straight 16ths or subtle shuffle for jungle feel" }
     },
     "theory": {
-        "tonal_center": "Am",
+        "tonal_center": "Fm",
         "mode": "Natural minor with chromatic tension",
         "harmonic_language": "Minimal — texture over harmony, stabs over progressions",
         "signature_moves": {
