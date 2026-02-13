@@ -6,6 +6,7 @@
 extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 
 # Game constants
 const GOAL_SCORE_POINTS := 10
@@ -311,34 +312,21 @@ func create_wind_visual_effect(pos: Vector3, color: Color):
 
 func create_ui():
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 32
-	info_label.outline_size = 4
-	info_label.modulate = Color.WHITE
-	info_label.position = Vector3(0, 0.8, 0)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.8, 0), 32)
 	add_child(info_label)
 
 	score_label = Label3D.new()
-	score_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	score_label.font_size = 48
+	FORCES_UI.style_value_label(score_label, Vector3(0, 0.65, 0), Color.YELLOW, 48)
 	score_label.outline_size = 5
-	score_label.modulate = Color.YELLOW
-	score_label.position = Vector3(0, 0.65, 0)
 	add_child(score_label)
 
 	timer_label = Label3D.new()
-	timer_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	timer_label.font_size = 24
-	timer_label.modulate = Color.CYAN
-	timer_label.position = Vector3(0, 0.5, 0)
+	FORCES_UI.style_value_label(timer_label, Vector3(0, 0.5, 0), Color.CYAN, 24)
 	add_child(timer_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.8)
-	instructions_label.position = Vector3(0, 0.35, 0)
-	instructions_label.text = "[TRIGGER] Blow Wind | [R] Reset Game"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.35, 0), 18)
+	FORCES_UI.set_label_text(instructions_label, "[TRIGGER] Blow Wind | [R] Reset Game")
 	add_child(instructions_label)
 
 	# Wind strength controller
@@ -356,14 +344,14 @@ func create_ui():
 
 func update_ui():
 	if info_label:
-		info_label.text = "WIND SOCCER VR"
+		FORCES_UI.set_label_text(info_label, "WIND SOCCER VR")
 
 	if score_label:
-		score_label.text = "Blue %d - %d Red" % [score_left, score_right]
+		FORCES_UI.set_label_text(score_label, "Blue %d - %d Red" % [score_left, score_right])
 
 	if timer_label:
 		var time_left := MAX_GAME_TIME - game_time
-		timer_label.text = "Time: %d:%02d" % [int(time_left) / 60, int(time_left) % 60]
+		FORCES_UI.set_label_text(timer_label, "Time: %d:%02d" % [int(time_left) / 60, int(time_left) % 60])
 
 func _on_wind_strength_changed(value: float):
 	wind_strength = value
@@ -392,7 +380,7 @@ func end_game():
 		winner = "TIE"
 
 	if info_label:
-		info_label.text = "GAME OVER! Winner: %s" % winner
+		FORCES_UI.set_label_text(info_label, "GAME OVER! Winner: %s" % winner)
 
 	# Auto-reset after 5 seconds
 	await get_tree().create_timer(5.0).timeout

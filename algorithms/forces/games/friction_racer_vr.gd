@@ -6,6 +6,7 @@
 extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 
 # Track configuration
 const TRACK_SEGMENTS := [
@@ -137,13 +138,8 @@ func create_track_segment(pos: Vector3, size: Vector3, color: Color, friction: f
 
 func create_friction_label(pos: Vector3, text: String, color: Color):
 	var label := Label3D.new()
-	label.text = text
-	label.font_size = 14
-	label.modulate = color
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = pos
-	label.outline_size = 2
-	label.outline_modulate = Color.BLACK
+	FORCES_UI.style_tag_label(label, pos, color, 14)
+	FORCES_UI.set_label_text(label, text)
 	add_child(label)
 	friction_info_labels.append(label)
 
@@ -326,7 +322,7 @@ func check_race_completion():
 	if opponent and opponent.position_v.z >= FINISH_LINE_Z and race_active:
 		race_active = false
 		if info_label:
-			info_label.text = "OPPONENT WON!"
+			FORCES_UI.set_label_text(info_label, "OPPONENT WON!")
 
 func complete_race():
 	if not race_active:
@@ -338,7 +334,7 @@ func complete_race():
 		best_time = race_time
 
 	if info_label:
-		info_label.text = "YOU WON! Time: %.2fs" % race_time
+		FORCES_UI.set_label_text(info_label, "YOU WON! Time: %.2fs" % race_time)
 
 	await get_tree().create_timer(3.0).timeout
 	reset_race()
@@ -349,53 +345,40 @@ func position_camera_overhead():
 
 func create_ui():
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 32
-	info_label.outline_size = 4
-	info_label.modulate = Color.WHITE
-	info_label.position = Vector3(0, 0.7, 0)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, 0), 32)
 	add_child(info_label)
 
 	time_label = Label3D.new()
-	time_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	time_label.font_size = 28
-	time_label.modulate = Color.YELLOW
-	time_label.position = Vector3(0, 0.55, 0)
+	FORCES_UI.style_value_label(time_label, Vector3(0, 0.55, 0), Color.YELLOW, 28)
 	add_child(time_label)
 
 	boost_label = Label3D.new()
-	boost_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	boost_label.font_size = 20
-	boost_label.modulate = Color.CYAN
-	boost_label.position = Vector3(0, 0.42, 0)
+	FORCES_UI.style_value_label(boost_label, Vector3(0, 0.42, 0), Color.CYAN, 20)
 	add_child(boost_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.8)
-	instructions_label.position = Vector3(0, 0.3, 0)
-	instructions_label.text = "[SPACE/TRIGGER] Boost | [R] Reset | [S] Start"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.3, 0), 18)
+	FORCES_UI.set_label_text(instructions_label, "[SPACE/TRIGGER] Boost | [R] Reset | [S] Start")
 	add_child(instructions_label)
 
 func update_ui():
 	if info_label and not race_active:
 		if best_time < INF:
-			info_label.text = "FRICTION RACER\nBest: %.2fs" % best_time
+			FORCES_UI.set_label_text(info_label, "FRICTION RACER\nBest: %.2fs" % best_time)
 		else:
-			info_label.text = "FRICTION RACER\nPress [S] to Start"
+			FORCES_UI.set_label_text(info_label, "FRICTION RACER\nPress [S] to Start")
 
 	if time_label:
 		if race_active:
-			time_label.text = "Time: %.2fs" % race_time
+			FORCES_UI.set_label_text(time_label, "Time: %.2fs" % race_time)
 		else:
-			time_label.text = ""
+			FORCES_UI.set_label_text(time_label, "")
 
 	if boost_label:
 		if can_boost:
-			boost_label.text = "BOOST READY!"
+			FORCES_UI.set_label_text(boost_label, "BOOST READY!")
 		else:
-			boost_label.text = "Boost: %.1fs" % (BOOST_COOLDOWN - boost_timer)
+			FORCES_UI.set_label_text(boost_label, "Boost: %.1fs" % (BOOST_COOLDOWN - boost_timer))
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and not event.echo:

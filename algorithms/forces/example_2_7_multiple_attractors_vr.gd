@@ -11,6 +11,7 @@ extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const ATTRACTOR_SCENE := preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY_STRENGTH := 0.55
 const DEFAULT_ATTRACTOR_MASS := 3.5
 const ARROW_LENGTH_SCALE := 0.4
@@ -111,19 +112,12 @@ func create_attractors() -> void:
 
 func create_ui() -> void:
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.7, -0.2)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, -0.2), 28)
 	add_child(info_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.6, -0.2)
-	instructions_label.text = "[SPACE] Scatter  |  [R] Reset  |  [T] Force arrows"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.6, -0.2), 18)
+	FORCES_UI.set_label_text(instructions_label, "[SPACE] Scatter  |  [R] Reset  |  [T] Force arrows")
 	add_child(instructions_label)
 
 	strength_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
@@ -280,7 +274,7 @@ func update_force_visual(mover: Mover, force: Vector3) -> void:
 
 func update_info_label() -> void:
 	if info_label:
-		info_label.text = "Example 2.7: Multiple attractors\nStrength %.2f  |  Mass %.1f" % [DEFAULT_GRAVITY_STRENGTH, DEFAULT_ATTRACTOR_MASS]
+		FORCES_UI.set_label_text(info_label, "Example 2.7: Multiple attractors\nStrength %.2f  |  Mass %.1f" % [DEFAULT_GRAVITY_STRENGTH, DEFAULT_ATTRACTOR_MASS])
 
 func reset_scene() -> void:
 	for attractor in attractors:

@@ -10,6 +10,7 @@
 extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY := 0.9
 const DEFAULT_DRAG_COEFF := 0.8
 const DEFAULT_FLUID_DEPTH := 0.45
@@ -99,28 +100,18 @@ func create_fluid_volume() -> void:
 
 	var surface_label := Label3D.new()
 	surface_label.name = "FluidSurfaceLabel"
-	surface_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	surface_label.font_size = 18
-	surface_label.modulate = Color(1.0, 0.85, 1.0)
-	surface_label.position = Vector3(0, fluid_surface_y + 0.02, -0.38)
-	surface_label.text = "Fluid surface"
+	FORCES_UI.style_tag_label(surface_label, Vector3(0, fluid_surface_y + 0.02, -0.38), Color(1.0, 0.9, 1.0), 18)
+	FORCES_UI.set_label_text(surface_label, "Fluid surface")
 	add_child(surface_label)
 
 func create_ui() -> void:
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.7, -0.25)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, -0.25), 28)
 	add_child(info_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.6, -0.25)
-	instructions_label.text = "[SPACE] Scatter movers  |  [R] Reset"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.6, -0.25), 18)
+	FORCES_UI.set_label_text(instructions_label, "[SPACE] Scatter movers  |  [R] Reset")
 	add_child(instructions_label)
 
 	drag_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
@@ -301,7 +292,7 @@ func update_drag_visual(mover: Mover, drag_force: Vector3) -> void:
 
 func update_info_label() -> void:
 	if info_label:
-		info_label.text = "Example 2.5: Fluid resistance\nDrag %.2f  |  Depth %.2f" % [drag_coefficient, fluid_depth]
+		FORCES_UI.set_label_text(info_label, "Example 2.5: Fluid resistance\nDrag %.2f  |  Depth %.2f" % [drag_coefficient, fluid_depth])
 
 
 func update_fluid_volume() -> void:

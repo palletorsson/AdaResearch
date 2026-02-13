@@ -9,6 +9,8 @@
 
 extends Node3D
 
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
+
 ## Example 2.1: Forces
 ## Demonstrating wind and gravity forces on a mover
 ## Chapter 02: Forces
@@ -65,26 +67,19 @@ func _input(event):
 func create_info_label():
 	"""Create info label"""
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.6, 0)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.6, 0), 28)
 	add_child(info_label)
 
 	var instructions = Label3D.new()
-	instructions.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions.font_size = 18
-	instructions.modulate = Color(0.8, 1.0, 0.8)
-	instructions.position = Vector3(0, 0.5, 0)
-	instructions.text = "[SPACE] Toggle Wind | [↑/↓] Wind | [←/→] Gravity | [R] Reset"
+	FORCES_UI.style_instruction_label(instructions, Vector3(0, 0.5, 0), 18)
+	FORCES_UI.set_label_text(instructions, "[SPACE] Toggle Wind | [UP/DOWN] Wind | [LEFT/RIGHT] Gravity | [R] Reset")
 	add_child(instructions)
 
 func update_info_label():
 	"""Update info label"""
 	if info_label and mover:
 		var wind_status = "ON" if wind_enabled else "OFF"
-		info_label.text = "Forces (F=ma)\nWind: %s | G: %.1f" % [wind_status, abs(gravity.y)]
+		FORCES_UI.set_label_text(info_label, "Forces (F=ma)\nWind: %s | G: %.1f" % [wind_status, abs(gravity.y)])
 
 func create_mover():
 	"""Create mover object"""

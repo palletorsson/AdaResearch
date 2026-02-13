@@ -21,7 +21,6 @@
 			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn",
 			"category": "waves"
 		},
-		
 		"SoundBoxLong": {
 			"name": "Sound Box (Long)",
 			"lookup_name": "SoundBoxLong",
@@ -36,7 +35,6 @@
 			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn",
 			"category": "waves"
 		},
-
 		"seismograph": {
 			"name": "seismograph",
 			"lookup_name": "seismograph",
@@ -278,7 +276,7 @@
 		"spring_network": {
 			"name": "SpringNetwork",
 			"lookup_name": "spring_network",
-			"description": "10\u00d710 grid of coupled springs",
+			"description": "10×10 grid of coupled springs",
 			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
 			"category": "waves"
 		},
@@ -292,7 +290,7 @@
 		"coupled_oscillator_lattice": {
 			"name": "CoupledOscillatorLattice",
 			"lookup_name": "coupled_oscillator_lattice",
-			"description": "12\u00d712 oscillator grid",
+			"description": "12×12 oscillator grid",
 			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
 			"category": "waves"
 		},
@@ -380,7 +378,6 @@
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn",
 			"category": "waves"
 		},
-
 		"math_objects": {
 			"name": "Mathematical Objects",
 			"lookup_name": "math_objects",
@@ -388,7 +385,6 @@
 			"scene": "res://commons/primitives/parametric/math_objects.tscn",
 			"category": "waves"
 		},
-
 		"CircleSpiral": {
 			"name": "Circle Spiral",
 			"lookup_name": "CircleSpiral",
@@ -444,8 +440,7 @@
 			"description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
 			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn",
 			"category": "waves"
-		},			
-		
+		},
 		"wave_interference": {
 			"name": "Wave Interference",
 			"lookup_name": "wave_interference",
@@ -470,7 +465,7 @@
 		"MelodySoundBoard": {
 			"name": "MelodySoundBoard",
 			"lookup_name": "MelodySoundBoard",
-			"description": "MelodySoundBoard",
+			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
 			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
 			"category": "waves"
 		},
@@ -487,8 +482,7 @@
 			"description": "SoundscapeRadioRack",
 			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
 			"category": "waves"
-		},				
-		
+		},
 		"water_land_ride": {
 			"name": "water_land_ride",
 			"lookup_name": "water_land_ride",
@@ -509,15 +503,14 @@
 			"description": "double_helix_scene",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn",
 			"category": "waves"
-		},	
+		},
 		"circle_spiral_scene": {
 			"name": "circle_spiral_scene",
 			"lookup_name": "circle_spiral_scene",
 			"description": "circle_spiral_scene",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn",
 			"category": "waves"
-		},				
-		
+		},
 		"OscillationCurve": {
 			"name": "OscillationCurve",
 			"lookup_name": "OscillationCurve",
@@ -581,13 +574,6 @@
 			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn",
 			"category": "waves"
 		},
-		"MelodySoundBoard": {
-			"name": "MelodySoundBoard",
-			"lookup_name": "MelodySoundBoard",
-			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
-			"category": "waves"
-		},
 		"air_music_display_case": {
 			"name": "Air Music Display Case",
 			"lookup_name": "air_music_display_case",
@@ -609,7 +595,6 @@
 			"scene": "res://commons/glass_rack/GlassRack.tscn",
 			"category": "waves"
 		},
-		
 		"multimeter": {
 			"name": "Multimeter",
 			"lookup_name": "multimeter",
@@ -666,7 +651,6 @@
 			"scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
 			"category": "waves"
 		},
-
 		"static_reference_cube": {
 			"name": "Static Reference Cube",
 			"lookup_name": "static_reference_cube",
@@ -702,7 +686,6 @@
 			"scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
 			"category": "waves"
 		},
-		
 		"sine_wall_explanation": {
 			"name": "Sine Wall Explanation",
 			"lookup_name": "sine_wall_explanation",
@@ -717,7 +700,6 @@
 			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn",
 			"category": "waves"
 		},
-
 		"RackSineBasic": {
 			"name": "Sine Wave Rack",
 			"lookup_name": "RackSineBasic",
@@ -773,7 +755,42 @@
 			"description": "Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.",
 			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
 			"category": "waves"
+		},
+		"harmonic_distance_table": {
+			"name": "Harmonic Distance Table",
+			"lookup_name": "harmonic_distance_table",
+			"description": "Tabletop artifact with 12 chromatic pitch nodes in circle-of-fifths layout. Grab nodes to hear intervals; spatial distance corresponds to harmonic consonance. Activate a node as tonal center to see all others recolor by harmonic function (tonic=green, dominant=blue, subdominant=yellow). Glowing overtone connection lines show shared harmonics between pitches. Cognitive compression: harmonic distance becomes a felt spatial relationship.",
+			"scene": "res://commons/artifacts/harmonic_distance_table/harmonic_distance_table.tscn",
+			"category": "waves"
+		},
+		"timbre_sculptor": {
+			"name": "Timbre Sculptor",
+			"lookup_name": "timbre_sculptor",
+			"description": "VR rack panel with 8 vertical sliders controlling harmonic amplitudes for real-time additive synthesis. Waveform and spectrum displays show the result. Preset buttons morph to known timbres: sine, square, sawtooth, triangle, and vowel approximations (A, E, I, O, U). Cognitive compression: timbre IS harmonic recipe — the slider heights ARE the spectrum. Build Fourier transforms with your hands.",
+			"scene": "res://commons/artifacts/timbre_sculptor/timbre_sculptor.tscn",
+			"category": "waves"
+		},
+		"chord_tension_spring": {
+			"name": "Chord Tension Spring",
+			"lookup_name": "chord_tension_spring",
+			"description": "Four pitch nodes connected by visible springs. Consonant chord = springs relax, nodes settle. Dissonant chord = springs vibrate, nodes jitter. Drag nodes to change pitch and feel tension physically. Preset buttons for major, minor, dom7, dim, aug, sus4, tritone. Resolution IS relaxation.",
+			"scene": "res://commons/artifacts/chord_tension_spring/chord_tension_spring.tscn",
+			"category": "audio",
+			"dev_themes": [
+				"audio",
+				"music_theory",
+				"physics"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"chord",
+				"tension",
+				"consonance",
+				"dissonance",
+				"spring",
+				"harmony",
+				"cognitive_compression"
+			]
 		}
-
 	}
 }

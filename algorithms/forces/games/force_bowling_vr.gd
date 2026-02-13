@@ -6,6 +6,7 @@
 extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 
 # Game constants
 const PIN_COUNT := 10
@@ -289,27 +290,17 @@ func create_pin_knock_effect(pos: Vector3):
 
 func create_ui():
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 32
-	info_label.outline_size = 4
-	info_label.modulate = Color.WHITE
-	info_label.position = Vector3(0, 0.75, -0.5)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.75, -0.5), 32)
 	add_child(info_label)
 
 	score_label = Label3D.new()
-	score_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	score_label.font_size = 40
+	FORCES_UI.style_value_label(score_label, Vector3(0, 0.6, -0.5), Color.YELLOW, 40)
 	score_label.outline_size = 5
-	score_label.modulate = Color.YELLOW
-	score_label.position = Vector3(0, 0.6, -0.5)
 	add_child(score_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.8)
-	instructions_label.position = Vector3(0, 0.45, -0.5)
-	instructions_label.text = "[Grab Ball] Throw | [R] Reset"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.45, -0.5), 18)
+	FORCES_UI.set_label_text(instructions_label, "[Grab Ball] Throw | [R] Reset")
 	add_child(instructions_label)
 
 	# Ball mass controller
@@ -340,10 +331,10 @@ func create_ui():
 
 func update_ui():
 	if info_label:
-		info_label.text = "FORCE BOWLING VR"
+		FORCES_UI.set_label_text(info_label, "FORCE BOWLING VR")
 
 	if score_label:
-		score_label.text = "Score: %d | Throw: %d/%d" % [total_score, current_throw, MAX_THROWS]
+		FORCES_UI.set_label_text(score_label, "Score: %d | Throw: %d/%d" % [total_score, current_throw, MAX_THROWS])
 
 func _on_ball_mass_changed(value: float):
 	ball_mass = value
@@ -373,7 +364,7 @@ func reset_game():
 
 func end_game():
 	if info_label:
-		info_label.text = "GAME OVER! Final Score: %d" % total_score
+		FORCES_UI.set_label_text(info_label, "GAME OVER! Final Score: %d" % total_score)
 
 	await get_tree().create_timer(5.0).timeout
 	reset_game()

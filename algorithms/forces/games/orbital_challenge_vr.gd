@@ -7,6 +7,7 @@ extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const ATTRACTOR_SCENE := preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 
 # Game constants
 const MAX_SATELLITES := 5
@@ -436,40 +437,24 @@ func update_force_arrow(satellite: Mover, force: Vector3):
 
 func create_ui():
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 32
-	info_label.outline_size = 4
-	info_label.modulate = Color.WHITE
-	info_label.position = Vector3(0, 0.8, -0.3)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.8, -0.3), 32)
 	add_child(info_label)
 
 	score_label = Label3D.new()
-	score_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	score_label.font_size = 28
-	score_label.modulate = Color.YELLOW
-	score_label.position = Vector3(0, 0.65, -0.3)
+	FORCES_UI.style_value_label(score_label, Vector3(0, 0.65, -0.3), Color.YELLOW, 28)
 	add_child(score_label)
 
 	time_label = Label3D.new()
-	time_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	time_label.font_size = 24
-	time_label.modulate = Color.CYAN
-	time_label.position = Vector3(0, 0.52, -0.3)
+	FORCES_UI.style_value_label(time_label, Vector3(0, 0.52, -0.3), Color.CYAN, 24)
 	add_child(time_label)
 
 	objective_label = Label3D.new()
-	objective_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	objective_label.font_size = 20
-	objective_label.modulate = Color(0.8, 1.0, 0.8)
-	objective_label.position = Vector3(0, 0.4, -0.3)
+	FORCES_UI.style_value_label(objective_label, Vector3(0, 0.4, -0.3), Color(0.8, 1.0, 0.8), 20)
 	add_child(objective_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 16
-	instructions_label.modulate = Color(0.7, 0.9, 1.0)
-	instructions_label.position = Vector3(0, 0.28, -0.3)
-	instructions_label.text = "[SPACE] Launch | [R] Reset | [T] Toggle Orbits"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.28, -0.3), 16)
+	FORCES_UI.set_label_text(instructions_label, "[SPACE] Launch | [R] Reset | [T] Toggle Orbits")
 	add_child(instructions_label)
 
 	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
@@ -486,16 +471,16 @@ func create_ui():
 
 func update_ui():
 	if info_label:
-		info_label.text = "ORBITAL CHALLENGE\nLevel %d" % level
+		FORCES_UI.set_label_text(info_label, "ORBITAL CHALLENGE\nLevel %d" % level)
 
 	if score_label:
-		score_label.text = "Score: %d" % score
+		FORCES_UI.set_label_text(score_label, "Score: %d" % score)
 
 	if time_label:
-		time_label.text = "Time: %d" % int(time_remaining)
+		FORCES_UI.set_label_text(time_label, "Time: %d" % int(time_remaining))
 
 	if objective_label:
-		objective_label.text = "Orbits: %d/%d | Collect: %d" % [satellites_in_orbit, required_satellites_in_orbit, collectibles_remaining]
+		FORCES_UI.set_label_text(objective_label, "Orbits: %d/%d | Collect: %d" % [satellites_in_orbit, required_satellites_in_orbit, collectibles_remaining])
 
 func _on_gravity_changed(value: float):
 	gravity_strength = value
@@ -516,7 +501,7 @@ func complete_level():
 	game_active = false
 
 	if info_label:
-		info_label.text = "LEVEL %d COMPLETE!\nScore: %d" % [level, score]
+		FORCES_UI.set_label_text(info_label, "LEVEL %d COMPLETE!\nScore: %d" % [level, score])
 
 	await get_tree().create_timer(3.0).timeout
 	setup_level(level + 1)
@@ -525,7 +510,7 @@ func fail_level():
 	game_active = false
 
 	if info_label:
-		info_label.text = "TIME'S UP!\nTry Again"
+		FORCES_UI.set_label_text(info_label, "TIME'S UP!\nTry Again")
 
 	await get_tree().create_timer(3.0).timeout
 	setup_level(level)

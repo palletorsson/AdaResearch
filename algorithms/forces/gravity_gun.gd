@@ -3,6 +3,8 @@
 # Objects must be grabbed and placed into the capture zone
 extends Node3D
 
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
+
 @export_group("Targeting Settings")
 @export var ray_length: float = 15.0  # How far the ray reaches
 @export var ray_start_offset: float = 0.6  # Start ray 0.6m from hand
@@ -87,11 +89,8 @@ func setup_visuals() -> void:
 	# Create count label (positioned near bracelet)
 	count_label = Label3D.new()
 	count_label.name = "CountLabel"
-	count_label.position = Vector3(0, 0.12, 0.12)  # Above bracelet
-	count_label.font_size = 48
+	FORCES_UI.style_value_label(count_label, Vector3(0, 0.12, 0.12), Color(1, 1, 1, 0.9), 48)  # Above bracelet
 	count_label.pixel_size = 0.001
-	count_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	count_label.modulate = Color(1, 1, 1, 0.9)
 	count_label.outline_size = 8
 	count_label.visible = false
 	add_child(count_label)
@@ -577,7 +576,7 @@ func _update_count_label() -> void:
 	
 	var count = captured_objects.size()
 	if count > 0:
-		count_label.text = str(count)
+		FORCES_UI.set_label_text(count_label, str(count))
 		count_label.visible = true
 		var fullness = float(count) / float(max_captured_objects)
 		count_label.modulate = Color(1, 1 - fullness * 0.5, 1 - fullness * 0.7, 0.9)

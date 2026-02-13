@@ -2,13 +2,14 @@ class_name ParameterController3D
 extends Node3D
 
 ## 3D Parameter Controller - Grabbable slider/dial for VR interaction
-## Based on line.tscn primitive. Uses the project-wide light pink palette.
+## Based on line.tscn primitive. Uses commons/ui material palette.
 
 signal value_changed(new_value: float)
 
-const TRACK_MATERIAL: StandardMaterial3D = preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
-const HANDLE_MATERIAL: StandardMaterial3D = preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
-const LABEL_TINT: Color = Color(1.0, 0.9, 1.0)
+const TRACK_MATERIAL: StandardMaterial3D = preload("res://commons/ui/materials/track_groove.tres")
+const HANDLE_MATERIAL: StandardMaterial3D = preload("res://commons/ui/materials/handle_glow.tres")
+const LABEL_TINT: Color = Color(0.92, 0.92, 0.94, 1.0)
+const LABEL_OUTLINE: Color = Color(0.05, 0.06, 0.09, 0.95)
 const TRACK_LENGTH: float = 0.3
 
 @export var parameter_name: String = "Parameter"
@@ -34,7 +35,7 @@ func _ready():
 	update_label_text()
 
 func create_slider_geometry() -> void:
-	"""Create slider visuals using the pink palette."""
+	"""Create slider visuals using the shared commons/ui palette."""
 	slider_track = MeshInstance3D.new()
 	var track_mesh := BoxMesh.new()
 	track_mesh.size = Vector3(TRACK_LENGTH, 0.02, 0.02)
@@ -55,14 +56,16 @@ func create_label() -> void:
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.font_size = 24
 	label.outline_size = 4
-	label.outline_modulate = Color.BLACK
+	label.outline_modulate = LABEL_OUTLINE
 	label.modulate = LABEL_TINT
 	label.position = Vector3(0, 0.08, 0)
 	add_child(label)
 
 func update_label_text() -> void:
 	if label:
-		label.text = "%s: %.2f" % [parameter_name, current_value]
+		var value_text: String = "%s: %.2f" % [parameter_name, current_value]
+		if label.text != value_text:
+			label.text = value_text
 
 func update_handle_position() -> void:
 	if handle:

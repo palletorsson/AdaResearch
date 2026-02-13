@@ -10,6 +10,7 @@
 extends Node3D
 
 const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY := 0.9
 const DEFAULT_COEFF := 0.15
 const FLOOR_ZONES: Array = [
@@ -93,28 +94,18 @@ func create_floor_segments() -> void:
 		add_child(plane)
 
 		var label := Label3D.new()
-		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		label.font_size = 16
-		label.modulate = Color(1.0, 0.85, 1.0)
-		label.position = plane.position + Vector3(0, 0.02, 0)
-		label.text = "%s mu=%.2f" % [String(zone["label"]), coeff]
+		FORCES_UI.style_tag_label(label, plane.position + Vector3(0, 0.02, 0), Color(1.0, 0.92, 0.98), 16)
+		FORCES_UI.set_label_text(label, "%s mu=%.2f" % [String(zone["label"]), coeff])
 		add_child(label)
 
 func create_ui() -> void:
 	info_label = Label3D.new()
-	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	info_label.font_size = 28
-	info_label.outline_size = 4
-	info_label.modulate = Color(1.0, 0.9, 1.0)
-	info_label.position = Vector3(0, 0.68, -0.25)
+	FORCES_UI.style_title_label(info_label, Vector3(0, 0.68, -0.25), 28)
 	add_child(info_label)
 
 	instructions_label = Label3D.new()
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.font_size = 18
-	instructions_label.modulate = Color(0.8, 1.0, 0.9)
-	instructions_label.position = Vector3(0, 0.58, -0.25)
-	instructions_label.text = "[SPACE] Push forward  |  [R] Reset"
+	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.58, -0.25), 18)
+	FORCES_UI.set_label_text(instructions_label, "[SPACE] Push forward  |  [R] Reset")
 	add_child(instructions_label)
 
 	coeff_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
@@ -223,7 +214,7 @@ func update_info_label() -> void:
 	if info_label and is_instance_valid(mover):
 		var speed: float = mover.velocity.length()
 		var mu: float = base_coefficient + lookup_zone_coefficient(mover.position_v.z)
-		info_label.text = "Example 2.4: Friction\nmu %.2f  |  speed %.2f" % [mu, speed]
+		FORCES_UI.set_label_text(info_label, "Example 2.4: Friction\nmu %.2f  |  speed %.2f" % [mu, speed])
 
 func update_friction_arrow(force: Vector3) -> void:
 	if not friction_arrow or not is_instance_valid(friction_arrow):
