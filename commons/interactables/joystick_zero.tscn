@@ -1,50 +1,52 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtrftty6i383g"]
+[gd_scene load_steps=18 format=3 uid="uid://c1iuyo3c6kpb8"]
 
-[ext_resource type="Material" path="res://assets/wahooney.itch.io/blue_grid.tres" id="1"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" id="2"]
-[ext_resource type="Material" path="res://assets/wahooney.itch.io/brown_grid_triplanar.tres" id="3"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_i88vc"]
-[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="5_kujqm"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_ve8n7"]
-[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_k3kr4"]
-[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="8_4ywv1"]
-[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_j1gnl"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_dxrni"]
+[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="5_nf72j"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_xdnkf"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_fogq8"]
+[ext_resource type="Animation" uid="uid://d1xnpyc08njjx" path="res://addons/godot-xr-tools/hands/animations/right/Grip 4.res" id="8_vbsbw"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_yqm2n"]
+[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.2, 0.2, 0.1)
+size = Vector3(0.16, 0.16, 0.02)
 
-[sub_resource type="BoxMesh" id="2"]
-size = Vector3(0.2, 0.2, 0.1)
+[sub_resource type="BoxMesh" id="BoxMesh_Base"]
+size = Vector3(0.16, 0.16, 0.02)
 
-[sub_resource type="BoxShape3D" id="3"]
-size = Vector3(0.04, 0.04, 0.2)
+[sub_resource type="CylinderShape3D" id="3"]
+height = 0.1
+radius = 0.01
 
-[sub_resource type="SphereShape3D" id="4"]
-radius = 0.06
+[sub_resource type="CylinderMesh" id="CylinderMesh_Stick"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.1
+radial_segments = 16
 
-[sub_resource type="BoxMesh" id="5"]
-size = Vector3(0.04, 0.04, 0.2)
-
-[sub_resource type="SphereMesh" id="6"]
-radius = 0.06
-height = 0.12
+[sub_resource type="SphereMesh" id="SphereMesh_Handle"]
+radius = 0.03
+height = 0.06
 radial_segments = 16
 rings = 8
 
-[sub_resource type="Resource" id="Resource_ouraf"]
-script = ExtResource("6_ve8n7")
-open_pose = ExtResource("5_kujqm")
-closed_pose = ExtResource("5_kujqm")
+[sub_resource type="Resource" id="Resource_b7ph4"]
+script = ExtResource("6_fogq8")
+open_pose = ExtResource("5_nf72j")
+closed_pose = ExtResource("5_nf72j")
 
-[sub_resource type="Resource" id="Resource_upq8k"]
-script = ExtResource("6_ve8n7")
-open_pose = ExtResource("8_4ywv1")
-closed_pose = ExtResource("8_4ywv1")
+[sub_resource type="Resource" id="Resource_2v03l"]
+script = ExtResource("6_fogq8")
+open_pose = ExtResource("8_vbsbw")
+closed_pose = ExtResource("8_vbsbw")
 
 [sub_resource type="SphereShape3D" id="7"]
 margin = 0.12
-radius = 0.06
+radius = 0.04
 
 [node name="JoystickZero" type="Node3D"]
 
@@ -54,45 +56,42 @@ radius = 0.06
 shape = SubResource("1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Frame"]
-mesh = SubResource("2")
-surface_material_override/0 = ExtResource("1")
+mesh = SubResource("BoxMesh_Base")
+surface_material_override/0 = ExtResource("MatPanel")
 
 [node name="JoystickOrigin" type="Node3D" parent="."]
-transform = Transform3D(1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="InteractableJoystick" type="Node3D" parent="JoystickOrigin"]
 script = ExtResource("2")
-default_on_release = true
+joystick_x_steps = 0.0
+joystick_y_steps = 0.0
+default_position = Vector2(0.5, 0.5)
 
 [node name="JoystickBody" type="StaticBody3D" parent="JoystickOrigin/InteractableJoystick"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 
 [node name="BarCollision" type="CollisionShape3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
 shape = SubResource("3")
 
-[node name="HandleCollision" type="CollisionShape3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
-shape = SubResource("4")
-
 [node name="BarMesh" type="MeshInstance3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
-mesh = SubResource("5")
-surface_material_override/0 = ExtResource("3")
+mesh = SubResource("CylinderMesh_Stick")
+surface_material_override/0 = ExtResource("MatMetal")
 
 [node name="HandleMesh" type="MeshInstance3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
-mesh = SubResource("6")
-surface_material_override/0 = ExtResource("3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+mesh = SubResource("SphereMesh_Handle")
+surface_material_override/0 = ExtResource("MatAccent")
 
-[node name="GrabPointHandLeft" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("4_i88vc")]
-transform = Transform3D(-4.37114e-08, 1, -7.53641e-15, -0.707107, -3.09086e-08, -0.707107, -0.707107, -3.09086e-08, 0.707107, 0.05, 0.0759278, -0.0419973)
-hand_pose = SubResource("Resource_ouraf")
+[node name="GrabPointHandLeft" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("4_dxrni")]
+transform = Transform3D(-4.37114e-08, 1, -7.53641e-15, -0.707107, -3.09086e-08, -0.707107, -0.707107, -3.09086e-08, 0.707107, 0.05, 0.05, -0.04)
+hand_pose = SubResource("Resource_b7ph4")
 
-[node name="GrabPointHandRight" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("7_k3kr4")]
-transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.0759278, -0.0419973)
-hand_pose = SubResource("Resource_upq8k")
+[node name="GrabPointHandRight" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("5_xdnkf")]
+transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.05, -0.04)
+hand_pose = SubResource("Resource_2v03l")
 
 [node name="HandleOrigin" type="Node3D" parent="JoystickOrigin/InteractableJoystick"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 
 [node name="InteractableHandle" type="RigidBody3D" parent="JoystickOrigin/InteractableJoystick/HandleOrigin"]
 collision_layer = 262144
@@ -104,8 +103,8 @@ picked_up_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle"]
 shape = SubResource("7")
 
-[node name="GrabPointRedirectLeft" parent="JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_j1gnl")]
+[node name="GrabPointRedirectLeft" parent="JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_yqm2n")]
 target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandLeft")
 
-[node name="GrabPointRedirectRight" parent="JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_j1gnl")]
+[node name="GrabPointRedirectRight" parent="JoystickOrigin/InteractableJoystick/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_yqm2n")]
 target = NodePath("../../../JoystickBody/HandleMesh/GrabPointHandRight")

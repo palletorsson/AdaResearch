@@ -72,7 +72,7 @@ mesh = SubResource("BoxMesh_Notch")
 surface_material_override/0 = ExtResource("MatNotchMat")
 
 [node name="SliderOrigin" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0.01)
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -0.07, 0.012)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
 script = ExtResource("2")

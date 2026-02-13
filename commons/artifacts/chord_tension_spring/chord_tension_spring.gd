@@ -227,7 +227,6 @@ func _create_preset_buttons() -> void:
 	]
 	
 	var start_x := -0.28
-	var z_pos := BASE_RADIUS + 0.18
 	
 	for i in button_names.size():
 		var btn_area := Area3D.new()
@@ -257,12 +256,13 @@ func _create_preset_buttons() -> void:
 		btn_label.font_size = 28
 		btn_label.pixel_size = 0.0005
 		btn_label.modulate = _P.TEXT_ON_DARK
-		btn_label.position = Vector3(0, 0.02, 0)
-		btn_label.rotation.x = -PI / 2
+		btn_label.position = Vector3(0, 0.025, 0)
+		btn_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		btn_label.no_depth_test = true
 		btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn_area.add_child(btn_label)
 		
-		btn_area.position = Vector3(start_x + i * 0.075, 0.02, z_pos)
+		btn_area.position = Vector3(start_x + i * 0.075, 0.02, -(BASE_RADIUS + 0.18))
 		add_child(btn_area)
 		
 		var preset_name: String = button_names[i]
