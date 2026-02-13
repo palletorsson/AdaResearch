@@ -21,6 +21,12 @@ label_x = "R"
 label_y = "G"
 label_z = "B"
 show_projection_lines = false
+show_color_space_map = true
+color_space_opacity = 0.35
+color_space_grid_density = 8.0
+color_space_grid_thickness = 0.08
+color_space_grid_strength = 0.65
+color_space_emission_strength = 0.45
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
