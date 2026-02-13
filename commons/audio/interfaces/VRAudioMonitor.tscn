@@ -1,16 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkvrnpnoen1oh"]
+[gd_scene load_steps=6 format=3 uid="uid://dkvrnpnoen1oh"]
 
 [ext_resource type="Script" uid="uid://co0lielaeip03" path="res://commons/audio/interfaces/VRAudioMonitor.gd" id="1_v4m4"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport"]
 [ext_resource type="PackedScene" uid="uid://d3yq8v5gq2r1" path="res://commons/audio/interfaces/VRAudioMonitorUI.tscn" id="3_ui"]
+[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
 size = Vector3(0.32, 0.24, 0.1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
-albedo_color = Color(0.04, 0.04, 0.05, 1)
-metallic = 1.0
-roughness = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
 size = Vector3(0.34, 0.26, 0.12)
@@ -20,14 +16,15 @@ script = ExtResource("1_v4m4")
 
 [node name="Chassis" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_chassis")
-surface_material_override/0 = SubResource("StandardMaterial3D_chassis")
+surface_material_override/0 = ExtResource("MatBezel")
 
 [node name="LabelName" type="Label3D" parent="Chassis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.051)
 pixel_size = 0.0005
 text = "MONITOR"
 font_size = 28
-outline_size = 4
+font_color = Color(0.92, 0.92, 0.94, 1)
+outline_size = 0
 uppercase = true
 
 [node name="ScreenOrigin" type="Node3D" parent="."]

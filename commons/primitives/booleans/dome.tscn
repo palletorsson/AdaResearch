@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dauqfg13lhdvi"]
+[gd_scene format=3 uid="uid://dauqfg13lhdvi"]
 
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_axc48"]
 
@@ -13,36 +13,36 @@ shader_parameter/blur = 1.0
 shader_parameter/emission_strength = 2.0
 shader_parameter/show_interior = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1266018762]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1312668756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.684956, 0)
 material_override = SubResource("ShaderMaterial_iw16f")
 use_collision = true
 size = Vector3(20, 26, 20)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D" unique_id=1824079987]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.501813, 0)
 operation = 2
 radius = 7.5086746
 radial_segments = 24
 rings = 12
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D" unique_id=62380376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.971512, 0)
 operation = 2
 radius = 9.0
 height = 11.664124
 sides = 64
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D" unique_id=1997349282]
 transform = Transform3D(1, 0, 0, 0, -0.04309623, -0.99907094, 0, 0.99907094, -0.04309623, 0, -2.5504265, 9.543989)
 operation = 2
 radius = 3.0
 height = 2.6733398
 sides = 32
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" unique_id=1818836170]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0073242188, -7.6908283, 9.163788)
 operation = 2
 size = Vector3(6.288086, 10.314453, 3.7894897)

@@ -7,6 +7,8 @@ class_name WorldMapUI
 
 signal sequence_selected(sequence_name: String)
 
+@export var show_full_map: bool = false
+
 @onready var subway_map: SubwayMapRenderer = $SubwayMapRenderer
 @onready var tooltip: PanelContainer = $Tooltip
 @onready var tooltip_title: Label = $Tooltip/VBox/Title
@@ -23,6 +25,7 @@ func _ready():
 	# Connect signals
 	subway_map.station_hovered.connect(_on_station_hovered)
 	subway_map.station_clicked.connect(_on_station_clicked)
+	_apply_map_mode()
 	
 	# Connect to progression updates
 	if MapProgressionManager:
@@ -32,6 +35,20 @@ func _ready():
 	# Initialize UI
 	tooltip.visible = false
 	_build_legend()
+	_update_stats()
+
+func _apply_map_mode() -> void:
+	if subway_map:
+		subway_map.set_show_full_map(show_full_map)
+
+func set_show_full_map(enabled: bool) -> void:
+	show_full_map = enabled
+	_apply_map_mode()
+	_update_stats()
+
+func refresh() -> void:
+	if subway_map:
+		subway_map.refresh()
 	_update_stats()
 
 func _build_legend():
@@ -165,6 +182,9 @@ func _on_station_hovered(sequence_name: String):
 	
 	var completion_pct: float = seq_data.get("completion_pct", 0.0)
 	tooltip_progress.text = "%.0f%% complete" % completion_pct
+	if state == WorldMapDataProvider.StationState.UNLOCKED or state == WorldMapDataProvider.StationState.COMPLETED:
+		var hold_seconds := subway_map.hold_time_required if subway_map else 3.0
+		tooltip_progress.text += " | Hold %.1fs to enter" % hold_seconds
 	
 	# Show next recommended hint
 	var next_rec = WorldMapDataProvider.get_next_spine_sequence()
@@ -196,7 +216,12 @@ func _on_station_clicked(sequence_name: String):
 		sequence_selected.emit(sequence_name)
 
 func _get_sequence_info(sequence_name: String) -> Dictionary:
-	var sequences = WorldMapDataProvider.get_visible_sequences()
+	var sequences: Array[Dictionary] = []
+	if subway_map and subway_map.show_full_map:
+		sequences = WorldMapDataProvider.get_all_sequences_with_states(true)
+	else:
+		sequences = WorldMapDataProvider.get_visible_sequences()
+
 	for seq in sequences:
 		if seq.get("name", "") == sequence_name:
 			return seq
@@ -204,12 +229,10 @@ func _get_sequence_info(sequence_name: String) -> Dictionary:
 
 func _on_map_completed(_map_name: String):
 	# Refresh the map display
-	subway_map.refresh()
-	_update_stats()
+	refresh()
 
 func _on_sequence_completed(_sequence_name: String):
-	subway_map.refresh()
-	_update_stats()
+	refresh()
 
 # Panning support (optional, for larger maps)
 func _gui_input(event: InputEvent):

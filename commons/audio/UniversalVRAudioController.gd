@@ -586,7 +586,7 @@ func _create_meter(control_id: String) -> Node3D:
 	bg_mesh.size = Vector3(0.03, 0.12, 0.01)
 	bg.mesh = bg_mesh
 	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.3, 0.3, 0.35)
+	bg_mat.albedo_color = Color(0.18, 0.18, 0.22, 1)
 	bg.material_override = bg_mat
 	meter.add_child(bg)
 
@@ -597,9 +597,9 @@ func _create_meter(control_id: String) -> Node3D:
 	level_mesh.size = Vector3(0.025, 0.11, 0.015)
 	level.mesh = level_mesh
 	var level_mat = StandardMaterial3D.new()
-	level_mat.albedo_color = Color(0.2, 0.8, 0.2)
+	level_mat.albedo_color = Color(0.25, 0.78, 0.35, 1)
 	level_mat.emission_enabled = true
-	level_mat.emission = Color(0.2, 0.8, 0.2)
+	level_mat.emission = Color(0.25, 0.78, 0.35, 1)
 	level_mat.emission_energy_multiplier = 0.5
 	level.material_override = level_mat
 	level.position.z = 0.005
@@ -612,9 +612,9 @@ func _create_meter(control_id: String) -> Node3D:
 	peak_mesh.size = Vector3(0.025, 0.005, 0.02)
 	peak.mesh = peak_mesh
 	var peak_mat = StandardMaterial3D.new()
-	peak_mat.albedo_color = Color(1.0, 0.2, 0.2)
+	peak_mat.albedo_color = Color(0.90, 0.22, 0.22, 1)
 	peak_mat.emission_enabled = true
-	peak_mat.emission = Color(1.0, 0.2, 0.2)
+	peak_mat.emission = Color(0.90, 0.22, 0.22, 1)
 	peak.material_override = peak_mat
 	peak.position = Vector3(0, 0.05, 0.01)
 	meter.add_child(peak)
@@ -673,8 +673,8 @@ func _create_label(control_id: String) -> Node3D:
 	label.font_size = 32
 	label.pixel_size = 0.0008
 	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	label.modulate = Color(0.9, 0.9, 0.9)
-	label.outline_size = 4
+	label.font_color = Color(0.12, 0.12, 0.14, 1)
+	label.outline_size = 0
 	label_container.add_child(label)
 
 	return label_container
@@ -691,7 +691,7 @@ func _create_group(control_id: String) -> Node3D:
 	bg_mesh.size = Vector3(0.25, 0.2, 0.005)  # Will be resized based on contents
 	bg.mesh = bg_mesh
 	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.25, 0.25, 0.3, 0.9)
+	bg_mat.albedo_color = Color(0.90, 0.90, 0.92, 0.95)
 	bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	bg.material_override = bg_mat
 	bg.position.z = -0.01
@@ -703,8 +703,8 @@ func _create_group(control_id: String) -> Node3D:
 	label.text = control_id.to_upper()
 	label.font_size = 24
 	label.pixel_size = 0.0006
-	label.modulate = Color(0.7, 0.7, 0.8)
-	label.outline_size = 2
+	label.font_color = Color(0.40, 0.40, 0.44, 1)
+	label.outline_size = 0
 	label.position.y = 0.09
 	group.add_child(label)
 
@@ -715,9 +715,9 @@ func _create_group(control_id: String) -> Node3D:
 	border_mesh.size = Vector3(0.25, 0.003, 0.008)
 	border.mesh = border_mesh
 	var border_mat = StandardMaterial3D.new()
-	border_mat.albedo_color = Color(0.3, 0.5, 0.8)
+	border_mat.albedo_color = Color(0.95, 0.45, 0.15, 1)
 	border_mat.emission_enabled = true
-	border_mat.emission = Color(0.3, 0.5, 0.8)
+	border_mat.emission = Color(0.95, 0.45, 0.15, 1)
 	border_mat.emission_energy_multiplier = 0.3
 	border.material_override = border_mat
 	border.position = Vector3(0, 0.098, 0)

@@ -103,6 +103,7 @@ AdaResearch/
 | [TAXONOMY.md](TAXONOMY.md) | Generative paradigms framework |
 | [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |
 | [commons/audio/SOUND_SYSTEM_GUIDE.md](commons/audio/SOUND_SYSTEM_GUIDE.md) | Audio system details |
+| [commons/scenes/world_map/README.md](commons/scenes/world_map/README.md) | World map modes, VR full-map toggle, hold-to-enter |
 | [doc/VR_GAMEPLAY_DESIGN.md](doc/VR_GAMEPLAY_DESIGN.md) | VR design philosophy |
 | [doc/QFEP_GAMWELL_MAPPING.md](doc/QFEP_GAMWELL_MAPPING.md) | Theory grounded in art/math history |
 | [XR_TOOLS_CHANGES.md](XR_TOOLS_CHANGES.md) | Local patches to `godot-xr-tools` when addon code is ignored |

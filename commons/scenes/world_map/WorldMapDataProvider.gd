@@ -236,15 +236,29 @@ static func get_all_sequences() -> Array[Dictionary]:
 	
 	return result
 
+# Get all sequences with explicit state assignment.
+# If reveal_hidden_as_locked is true, hidden items are included as locked.
+static func get_all_sequences_with_states(reveal_hidden_as_locked: bool = true) -> Array[Dictionary]:
+	var all_sequences = get_all_sequences()
+	var with_states: Array[Dictionary] = []
+
+	for seq in all_sequences:
+		var state: int = _calculate_visibility(seq)
+		if state == StationState.HIDDEN and reveal_hidden_as_locked:
+			state = StationState.LOCKED
+		seq["state"] = state
+		with_states.append(seq)
+
+	return with_states
+
 # Get visible sequences based on progressive reveal logic
 static func get_visible_sequences() -> Array[Dictionary]:
-	var all_sequences = get_all_sequences()
+	var all_sequences = get_all_sequences_with_states(false)
 	var visible: Array[Dictionary] = []
 	
 	for seq in all_sequences:
-		var visibility = _calculate_visibility(seq)
+		var visibility: int = seq.get("state", StationState.HIDDEN)
 		if visibility != StationState.HIDDEN:
-			seq["state"] = visibility
 			visible.append(seq)
 	
 	return visible

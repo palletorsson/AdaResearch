@@ -4,18 +4,16 @@
 [ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
 [ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
-[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
-[ext_resource type="Material" uid="uid://b8y2x3g5q7v8n" path="res://commons/interactables/materials/rack_accent.tres" id="MatAccent"]
+[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://ada_handle_glow" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
+[ext_resource type="Material" uid="uid://ada_track_groove" path="res://commons/ui/materials/track_groove.tres" id="MatTrackGroove"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.16, 0.16, 0.02)
 
 [sub_resource type="BoxMesh" id="BoxMesh_Base"]
 size = Vector3(0.16, 0.16, 0.02)
-
-[sub_resource type="StandardMaterial3D" id="MatTrack"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_Track"]
 size = Vector3(0.14, 0.14, 0.001)
@@ -51,7 +49,7 @@ surface_material_override/0 = ExtResource("MatPanel")
 [node name="TrackMesh" type="MeshInstance3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.006)
 mesh = SubResource("BoxMesh_Track")
-surface_material_override/0 = SubResource("MatTrack")
+surface_material_override/0 = ExtResource("MatTrackGroove")
 
 [node name="Label3DValue" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.02)

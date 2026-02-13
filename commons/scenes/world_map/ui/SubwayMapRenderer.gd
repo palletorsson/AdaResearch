@@ -7,6 +7,7 @@ class_name SubwayMapRenderer
 
 signal station_hovered(sequence_name: String)
 signal station_clicked(sequence_name: String)
+signal station_hold_progress(sequence_name: String, progress: float)
 
 # Visual settings
 @export var spine_station_radius: float = 16.0
@@ -16,6 +17,13 @@ signal station_clicked(sequence_name: String)
 @export var fog_color: Color = Color(0.1, 0.1, 0.15, 0.9)
 @export var pulse_speed: float = 2.0
 @export var recommended_glow_color: Color = Color(1.0, 0.9, 0.4, 0.8)
+@export var hold_time_required: float = 3.0
+@export var hold_progress_color: Color = Color(0.2, 0.85, 1.0, 0.95)
+@export var click_to_select: bool = false
+@export var show_full_map: bool = false
+@export var show_station_labels: bool = false
+@export var show_station_labels_in_full_map: bool = true
+@export var station_label_size: int = 14
 
 # Data
 var _sequences: Array[Dictionary] = []
@@ -24,6 +32,9 @@ var _layout: Dictionary = {}  # sequence_name -> Vector2 position
 var _current_sequence: String = ""
 var _next_recommended: String = ""
 var _hovered_station: String = ""
+var _hold_station: String = ""
+var _hold_timer: float = 0.0
+var _hold_triggered: bool = false
 
 # Animation
 var _pulse_time: float = 0.0
@@ -34,19 +45,37 @@ func _ready():
 	_load_map_data()
 
 func _load_map_data():
-	_sequences = WorldMapDataProvider.get_visible_sequences()
+	if show_full_map:
+		_sequences = WorldMapDataProvider.get_all_sequences_with_states(true)
+	else:
+		_sequences = WorldMapDataProvider.get_visible_sequences()
+
 	_connections = WorldMapDataProvider.get_sequence_connections()
+	if show_full_map:
+		for i in range(_connections.size()):
+			var conn: Dictionary = _connections[i]
+			conn["visible"] = true
+			_connections[i] = conn
+
 	_layout = WorldMapDataProvider.calculate_subway_layout(size)
 	_current_sequence = WorldMapDataProvider.get_current_sequence()
 	_next_recommended = WorldMapDataProvider.get_next_spine_sequence()
+	_reset_hold_state()
 	queue_redraw()
 
 func refresh():
 	_load_map_data()
 
+func set_show_full_map(enabled: bool) -> void:
+	if show_full_map == enabled:
+		return
+	show_full_map = enabled
+	refresh()
+
 func _process(delta: float):
 	_pulse_time += delta * pulse_speed
 	_glow_time += delta * 1.5
+	_update_hold_selection(delta)
 	queue_redraw()  # Animate pulse
 
 func _draw():
@@ -62,14 +91,20 @@ func _draw():
 	# 4. Draw stations
 	_draw_stations()
 	
-	# 5. Draw phase labels
+	# 5. Draw station labels
+	_draw_station_labels()
+	
+	# 6. Draw phase labels
 	_draw_phase_labels()
 	
-	# 6. Draw current position pulse
+	# 7. Draw current position pulse
 	_draw_current_position()
 	
-	# 7. Draw recommended indicator
+	# 8. Draw recommended indicator
 	_draw_recommended_indicator()
+	
+	# 9. Draw hold-to-select progress
+	_draw_hold_progress()
 
 func _draw_background():
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.05, 0.05, 0.08, 1.0))
@@ -292,13 +327,73 @@ func _draw_station(pos: Vector2, state: int, color: Color, is_spine: bool, is_ho
 				_draw_diamond(pos, radius * 0.8, color, false)
 		
 		WorldMapDataProvider.StationState.LOCKED:
-			var locked_color = Color(0.4, 0.4, 0.45, 0.6)
+			var locked_color := Color(0.4, 0.4, 0.45, 0.6)
+			if show_full_map:
+				locked_color = color.darkened(0.35)
+				locked_color.a = 0.85
 			if is_spine:
-				# Grayed circle
-				draw_circle(pos, radius * 0.7, locked_color)
+				if show_full_map:
+					# Keep phase color cue in full-map mode
+					draw_arc(pos, radius * 0.95, 0, TAU, 24, locked_color, 3.0, true)
+					draw_circle(pos, radius * 0.38, locked_color)
+				else:
+					# Grayed circle
+					draw_circle(pos, radius * 0.7, locked_color)
 			else:
-				# Grayed diamond
-				_draw_diamond(pos, radius * 0.6, locked_color, true)
+				if show_full_map:
+					# Keep branch shape legible while preserving sequence tint
+					_draw_diamond(pos, radius * 0.7, locked_color, false)
+				else:
+					# Grayed diamond
+					_draw_diamond(pos, radius * 0.6, locked_color, true)
+
+func _draw_station_labels() -> void:
+	if not _should_draw_station_labels():
+		return
+
+	for seq in _sequences:
+		_draw_station_label(seq)
+
+func _should_draw_station_labels() -> bool:
+	if show_station_labels:
+		return true
+	return show_full_map and show_station_labels_in_full_map
+
+func _draw_station_label(seq: Dictionary) -> void:
+	var seq_name: String = seq.get("name", "")
+	if seq_name.is_empty():
+		return
+	if not _layout.has(seq_name):
+		return
+
+	var label_text: String = seq.get("display_name", seq_name)
+	var pos: Vector2 = _layout[seq_name]
+	var state: int = seq.get("state", WorldMapDataProvider.StationState.HIDDEN)
+	var seq_color: Color = seq.get("color", Color.WHITE)
+
+	var label_color := Color(0.85, 0.9, 1.0, 0.95)
+	match state:
+		WorldMapDataProvider.StationState.COMPLETED:
+			label_color = Color(0.95, 1.0, 0.95, 0.98)
+		WorldMapDataProvider.StationState.UNLOCKED:
+			label_color = Color(1.0, 1.0, 1.0, 0.98)
+		WorldMapDataProvider.StationState.LOCKED:
+			if show_full_map:
+				label_color = seq_color.lightened(0.2)
+				label_color.a = 0.92
+			else:
+				label_color = Color(0.6, 0.65, 0.72, 0.8)
+
+	var label_pos: Vector2 = pos + Vector2(12.0, -8.0)
+	draw_string(
+		ThemeDB.fallback_font,
+		label_pos,
+		label_text,
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1.0,
+		maxi(station_label_size, 8),
+		label_color
+	)
 
 func _draw_checkmark(pos: Vector2, size_factor: float):
 	var check_color = Color.WHITE
@@ -393,6 +488,33 @@ func _draw_recommended_indicator():
 	
 	draw_string(ThemeDB.fallback_font, label_pos, "NEXT", HORIZONTAL_ALIGNMENT_CENTER, -1, 16, label_color)
 
+func _draw_hold_progress():
+	if _hold_station.is_empty():
+		return
+	if not _layout.has(_hold_station):
+		return
+	if hold_time_required <= 0.0:
+		return
+	if _hold_triggered:
+		return
+
+	var progress: float = clampf(_hold_timer / hold_time_required, 0.0, 1.0)
+	if progress <= 0.0:
+		return
+
+	var seq := _find_sequence(_hold_station)
+	var is_spine: bool = (seq.get("is_spine", false) == true) if not seq.is_empty() else false
+	var base_radius := spine_station_radius if is_spine else branch_station_radius
+	var ring_radius := base_radius * 1.65
+
+	var bg_color := hold_progress_color
+	bg_color.a *= 0.2
+	draw_arc(_layout[_hold_station], ring_radius, 0.0, TAU, 48, bg_color, 2.0, true)
+
+	var progress_color := hold_progress_color
+	progress_color.a *= 0.95
+	draw_arc(_layout[_hold_station], ring_radius, -PI * 0.5, -PI * 0.5 + TAU * progress, 48, progress_color, 4.0, true)
+
 # Input handling
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseMotion:
@@ -418,8 +540,8 @@ func _handle_mouse_motion(mouse_pos: Vector2):
 	
 	if closest_station != _hovered_station:
 		_hovered_station = closest_station
-		if not closest_station.is_empty():
-			station_hovered.emit(closest_station)
+		_reset_hold_state()
+		station_hovered.emit(closest_station)
 		queue_redraw()
 
 func _handle_click(mouse_pos: Vector2):
@@ -438,8 +560,57 @@ func _handle_click(mouse_pos: Vector2):
 			closest_dist = dist
 			closest_station = seq_name
 	
-	if not closest_station.is_empty():
+	if click_to_select and not closest_station.is_empty():
 		station_clicked.emit(closest_station)
+
+func _update_hold_selection(delta: float) -> void:
+	if _hovered_station.is_empty():
+		_reset_hold_state()
+		return
+
+	if not _is_station_selectable(_hovered_station):
+		_reset_hold_state()
+		return
+
+	if _hold_station != _hovered_station:
+		_hold_station = _hovered_station
+		_hold_timer = 0.0
+		_hold_triggered = false
+
+	if _hold_triggered:
+		return
+
+	if hold_time_required <= 0.0:
+		_hold_triggered = true
+		station_hold_progress.emit(_hold_station, 1.0)
+		station_clicked.emit(_hold_station)
+		return
+
+	_hold_timer = min(_hold_timer + delta, hold_time_required)
+	var progress: float = clampf(_hold_timer / hold_time_required, 0.0, 1.0)
+	station_hold_progress.emit(_hold_station, progress)
+
+	if _hold_timer >= hold_time_required:
+		_hold_triggered = true
+		station_clicked.emit(_hold_station)
+
+func _reset_hold_state() -> void:
+	if not _hold_station.is_empty() or _hold_timer > 0.0:
+		station_hold_progress.emit("", 0.0)
+	_hold_station = ""
+	_hold_timer = 0.0
+	_hold_triggered = false
+
+func _is_station_selectable(sequence_name: String) -> bool:
+	if sequence_name.is_empty():
+		return false
+
+	var seq := _find_sequence(sequence_name)
+	if seq.is_empty():
+		return false
+
+	var state: int = seq.get("state", WorldMapDataProvider.StationState.HIDDEN)
+	return state == WorldMapDataProvider.StationState.UNLOCKED or state == WorldMapDataProvider.StationState.COMPLETED
 
 # Helper to find sequence by name
 func _find_sequence(name: String) -> Dictionary:

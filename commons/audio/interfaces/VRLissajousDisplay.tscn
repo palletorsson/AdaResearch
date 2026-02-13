@@ -1,14 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8lissajous3d"]
+[gd_scene load_steps=7 format=3 uid="uid://c8lissajous3d"]
 
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRLissajousDisplay.gd" id="1_lissajous"]
+[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
 size = Vector3(0.32, 0.24, 0.02)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
-albedo_color = Color(0.06, 0.06, 0.08, 1)
-metallic = 0.8
-roughness = 0.3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
 size = Vector3(0.34, 0.26, 0.04)
@@ -81,14 +77,15 @@ script = SubResource("GDScript_controller")
 
 [node name="Chassis" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_chassis")
-surface_material_override/0 = SubResource("StandardMaterial3D_chassis")
+surface_material_override/0 = ExtResource("MatBezel")
 
 [node name="LabelName" type="Label3D" parent="Chassis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.011)
 pixel_size = 0.0005
 text = "LISSAJOUS"
 font_size = 20
-outline_size = 4
+font_color = Color(0.92, 0.92, 0.94, 1)
+outline_size = 0
 
 [node name="LissajousViewport" type="SubViewport" parent="."]
 disable_3d = true

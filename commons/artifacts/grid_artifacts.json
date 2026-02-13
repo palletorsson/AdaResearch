@@ -5088,7 +5088,26 @@
 														  "name":  "Oscillation Controlled Cube",
 														  "lookup_name":  "oscillation_controlled_cube",
 														  "scene":  "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn"
-													  }
+													  },
+					  "vr_component_demo":  {
+												"name":  "VR Component Demo",
+												"lookup_name":  "vr_component_demo",
+												"description":  "Showcase of all Ada UI Design System VR components. White backdrop with every interactable (sliders, dials, buttons, joystick, XY pad, lever, wheel) and every display (waveform, spectrum, lissajous, monitor). Press R to rebuild layout.",
+												"scene":  "res://commons/ui/demo/vr_component_demo.tscn",
+												"category":  "tools",
+												"interaction":  "grab",
+												"complexity":  "beginner",
+												"sequence":  "devtools",
+												"qfep_connection":  "Interface as substrate — controls become visible, graspable objects rather than invisible mediators.",
+												"tags":  [
+															"ui",
+															"demo",
+															"interface",
+															"design_system",
+															"showcase",
+															"devtools"
+														]
+											}
 				  },
 	"euclid_postulates_plaque":  {
 									 "description":  "Euclid\u0027s five postulates - the parallel postulate",

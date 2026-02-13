@@ -244,6 +244,19 @@
 				"primitives"
 			],
 			"complexity": "beginner"
+		},
+		"vr_component_demo": {
+			"name": "VR Component Demo",
+			"lookup_name": "vr_component_demo",
+			"description": "Showcase panel of all interactable and display components. Sliders (vertical, horizontal, snap, bipolar, axis), dials, buttons, joystick, lever, wheel, XY pad, plus VR audio controls and waveform/spectrum/Lissajous displays. Press R to rebuild layout.",
+			"scene": "res://commons/ui/demo/vr_component_demo.tscn",
+			"category": "tools",
+			"dev_themes": [
+				"tools",
+				"ui",
+				"audio"
+			],
+			"complexity": "beginner"
 		}
 	}
 }

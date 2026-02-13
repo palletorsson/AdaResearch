@@ -1,12 +1,15 @@
 # VRLissajousDisplay.gd - Lissajous figure visualization from two frequency parameters
 # Creates an XY plot where X = sin(freq1*t) and Y = sin(freq2*t) with phase offset
+# Uses Ada palette constants for display colors
 extends Control
 class_name VRLissajousDisplay
 
-@export var line_color: Color = Color(0, 1, 1, 1)  # Cyan primary trace
-@export var glow_color: Color = Color(0, 0.5, 1, 0.3)  # Blue glow
-@export var background_color: Color = Color(0, 0.05, 0.1, 1)
-@export var grid_color: Color = Color(0.15, 0.25, 0.3, 0.5)
+const _P = preload("res://commons/ui/ada_palette.gd")
+
+@export var line_color: Color = Color(0, 0.78, 0.85, 1)  # Ada ACCENT_CYAN
+@export var glow_color: Color = Color(0.2, 0.55, 0.95, 0.3)  # Ada ACCENT_BLUE faded
+@export var background_color: Color = Color(0.02, 0.04, 0.08, 1)  # Ada SCREEN_BG
+@export var grid_color: Color = Color(0.10, 0.18, 0.22, 0.5)  # Ada SCREEN_GRID
 @export var line_width: float = 2.5
 @export var sample_count: int = 512  # More samples = smoother curve
 @export var trail_length: float = 1.0  # Seconds of trail to show

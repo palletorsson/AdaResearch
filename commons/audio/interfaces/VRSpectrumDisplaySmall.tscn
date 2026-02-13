@@ -1,23 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://dck80am3y6t48"]
+[gd_scene load_steps=7 format=3 uid="uid://dck80am3y6t48"]
 
 [ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRSpectrumDisplay.gd" id="2_controller"]
+[ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
 size = Vector3(0.16, 0.16, 0.02)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
-albedo_color = Color(0.08, 0.08, 0.1, 1)
-metallic = 0.8
-roughness = 0.3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
 size = Vector3(0.18, 0.18, 0.04)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0.25, 0.78, 0.35, 1)
 emission_enabled = true
-emission = Color(0, 0.5, 0, 1)
+emission = Color(0.12, 0.4, 0.18, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_screen"]
@@ -28,14 +24,15 @@ script = ExtResource("2_controller")
 
 [node name="Chassis" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_chassis")
-surface_material_override/0 = SubResource("StandardMaterial3D_chassis")
+surface_material_override/0 = ExtResource("MatBezel")
 
 [node name="LabelName" type="Label3D" parent="Chassis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0.011)
 pixel_size = 0.0004
 text = "FILTER"
 font_size = 20
-outline_size = 4
+font_color = Color(0.92, 0.92, 0.94, 1)
+outline_size = 0
 
 [node name="SpectrumViewport" type="SubViewport" parent="."]
 disable_3d = true

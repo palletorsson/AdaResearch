@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://limy4c3uigx5"]
+[gd_scene load_steps=11 format=3 uid="uid://limy4c3uigx5"]
 
 [ext_resource type="Script" path="res://commons/interactables/dial_smooth.gd" id="1"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3"]
-
-[sub_resource type="StandardMaterial3D" id="MatPanelDark"]
-albedo_color = Color(0.25, 0.25, 0.28, 1)
-metallic = 0.15
-roughness = 0.75
+[ext_resource type="Material" uid="uid://ada_panel_white" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://ada_metal_dark" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
+[ext_resource type="Material" uid="uid://ada_accent_orange" path="res://commons/ui/materials/accent_orange.tres" id="MatIndicator"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_Panel"]
 size = Vector3(0.08, 0.08, 0.008)
@@ -15,35 +13,17 @@ size = Vector3(0.08, 0.08, 0.008)
 [sub_resource type="BoxShape3D" id="CollisionPanel"]
 size = Vector3(0.08, 0.08, 0.015)
 
-[sub_resource type="StandardMaterial3D" id="MatKnobBase"]
-albedo_color = Color(0.02, 0.02, 0.025, 1)
-metallic = 0.7
-roughness = 0.25
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_Base"]
 top_radius = 0.028
 bottom_radius = 0.032
 height = 0.006
 radial_segments = 32
 
-[sub_resource type="StandardMaterial3D" id="MatKnobTop"]
-albedo_color = Color(0.12, 0.12, 0.15, 1)
-metallic = 0.85
-roughness = 0.15
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_Knob"]
 top_radius = 0.022
 bottom_radius = 0.024
 height = 0.025
 radial_segments = 32
-
-[sub_resource type="StandardMaterial3D" id="MatIndicatorGlow"]
-albedo_color = Color(0.2, 0.85, 1.0, 1)
-metallic = 0.3
-roughness = 0.3
-emission_enabled = true
-emission = Color(0.15, 0.65, 0.85, 1)
-emission_energy_multiplier = 0.6
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_Indicator"]
 radius = 0.003
@@ -64,27 +44,27 @@ shape = SubResource("CollisionPanel")
 
 [node name="PanelMesh" type="MeshInstance3D" parent="Frame"]
 mesh = SubResource("BoxMesh_Panel")
-surface_material_override/0 = SubResource("MatPanelDark")
+surface_material_override/0 = ExtResource("MatPanel")
 
 [node name="Label3DValue" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.048, 0.008)
 pixel_size = 0.0008
 text = "0.50"
 font_size = 14
+font_color = Color(0.12, 0.12, 0.14, 1)
 outline_size = 0
-modulate = Color(0.85, 0.9, 0.95, 1)
 
 [node name="LabelName" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048, 0.008)
 pixel_size = 0.0008
 font_size = 11
+font_color = Color(0.40, 0.40, 0.44, 1)
 outline_size = 0
-modulate = Color(0.5, 0.55, 0.6, 1)
 
 [node name="BaseRing" type="MeshInstance3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.007)
 mesh = SubResource("CylinderMesh_Base")
-surface_material_override/0 = SubResource("MatKnobBase")
+surface_material_override/0 = ExtResource("MatKnobBase")
 
 [node name="DialOrigin" type="Node3D" parent="."]
 
@@ -96,12 +76,12 @@ hinge_limit_max = 135.0
 [node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.022)
 mesh = SubResource("CylinderMesh_Knob")
-surface_material_override/0 = SubResource("MatKnobTop")
+surface_material_override/0 = ExtResource("MatKnobBase")
 
 [node name="Indicator" type="MeshInstance3D" parent="DialOrigin/InteractableHinge/KnobMesh"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.0125, -0.015)
 mesh = SubResource("CapsuleMesh_Indicator")
-surface_material_override/0 = SubResource("MatIndicatorGlow")
+surface_material_override/0 = ExtResource("MatIndicator")
 
 [node name="Handles" type="Node3D" parent="DialOrigin/InteractableHinge"]
 
