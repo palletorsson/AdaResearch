@@ -9,8 +9,6 @@
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
-const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY := 0.9
 const DEFAULT_COEFF := 0.15
 const FLOOR_ZONES: Array = [
@@ -19,15 +17,22 @@ const FLOOR_ZONES: Array = [
 	{ "start": 0.2, "end": 0.45, "coeff": 0.35, "label": "Rough" }
 ]
 
+# Ada palette colors for floor zones (light to dark ramp)
+const ZONE_COLORS: Array = [
+	Color(0.90, 0.90, 0.92, 0.55),   # Polished — panel_light, subtle
+	Color(0.80, 0.78, 0.76, 0.55),   # Wood — warm mid tone
+	Color(0.60, 0.60, 0.64, 0.55),   # Rough — panel_medium
+]
+
 var mover: Mover
 
 var gravity_strength: float = DEFAULT_GRAVITY
 var base_coefficient: float = DEFAULT_COEFF
 
-var info_label: Label3D
-var instructions_label: Label3D
-var coeff_controller: ParameterController3D
-var gravity_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _coeff_slider: Node3D
+var _gravity_slider: Node3D
 var friction_arrow: Node3D
 var auto_reset_timer: Timer
 
@@ -36,7 +41,7 @@ func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 
 	create_floor_segments()
-	create_ui()
+	_create_panel()
 	spawn_mover()
 	setup_auto_reset()
 	print("Example 2.4: Friction")
@@ -49,7 +54,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	_update_readouts()
 
 func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(mover):
@@ -72,7 +77,8 @@ func _input(event: InputEvent) -> void:
 				impulse_forward()
 
 func create_floor_segments() -> void:
-	for zone in FLOOR_ZONES:
+	for i in range(FLOOR_ZONES.size()):
+		var zone = FLOOR_ZONES[i]
 		var width: float = 0.9
 		var depth: float = float(zone["end"]) - float(zone["start"])
 
@@ -83,54 +89,51 @@ func create_floor_segments() -> void:
 		plane.rotation_degrees = Vector3(-90, 0, 0)
 		plane.position = Vector3(0, -0.3, (float(zone["start"]) + float(zone["end"])) * 0.5)
 
+		# Use Ada palette zone colors
 		var mat := StandardMaterial3D.new()
+		mat.albedo_color = ZONE_COLORS[i]
 		var coeff := float(zone["coeff"])
-		var intensity: float = lerp(0.4, 0.75, coeff)
-		mat.albedo_color = Color(1.0, intensity, 0.9, 0.7)
 		mat.roughness = clamp(coeff * 1.5, 0.2, 1.0)
-		mat.metallic = 0.0
+		mat.metallic = 0.05
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		plane.material_override = mat
 		add_child(plane)
 
+		# Zone label — non-billboard, on the floor surface
 		var label := Label3D.new()
-		FORCES_UI.style_tag_label(label, plane.position + Vector3(0, 0.02, 0), Color(1.0, 0.92, 0.98), 16)
-		FORCES_UI.set_label_text(label, "%s mu=%.2f" % [String(zone["label"]), coeff])
+		label.text = "%s μ=%.2f" % [String(zone["label"]), coeff]
+		label.font_size = 14
+		label.pixel_size = 0.001
+		label.font_color = Color(0.12, 0.12, 0.14, 1.0)
+		label.outline_size = 0
+		label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		label.position = plane.position + Vector3(0, 0.02, 0)
+		label.rotation_degrees = Vector3(-90, 0, 0)
 		add_child(label)
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	FORCES_UI.style_title_label(info_label, Vector3(0, 0.68, -0.25), 28)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.4  Friction", 2, 3)
+	_panel.set_instructions("[SPACE] Push forward  [R] Reset")
 
-	instructions_label = Label3D.new()
-	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.58, -0.25), 18)
-	FORCES_UI.set_label_text(instructions_label, "[SPACE] Push forward  |  [R] Reset")
-	add_child(instructions_label)
+	_coeff_slider = _panel.add_slider("μ base", 0.0, 0.4, base_coefficient, 0.01)
+	_coeff_slider.slider_moved.connect(_on_coeff_slider_moved)
 
-	coeff_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	coeff_controller.parameter_name = "mu base"
-	coeff_controller.min_value = 0.0
-	coeff_controller.max_value = 0.4
-	coeff_controller.default_value = base_coefficient
-	coeff_controller.step_size = 0.01
-	coeff_controller.position = Vector3(-0.45, 0.48, 0.2)
-	coeff_controller.rotation_degrees = Vector3(0, 25, 0)
-	add_child(coeff_controller)
-	coeff_controller.value_changed.connect(_on_coeff_changed)
-	coeff_controller.set_value(base_coefficient)
+	_gravity_slider = _panel.add_slider("Gravity", 0.3, 2.0, gravity_strength, 0.05)
+	_gravity_slider.slider_moved.connect(_on_gravity_slider_moved)
 
-	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	gravity_controller.parameter_name = "Gravity"
-	gravity_controller.min_value = 0.3
-	gravity_controller.max_value = 2.0
-	gravity_controller.default_value = gravity_strength
-	gravity_controller.step_size = 0.05
-	gravity_controller.position = Vector3(0.45, 0.48, 0.2)
-	gravity_controller.rotation_degrees = Vector3(0, -25, 0)
-	add_child(gravity_controller)
-	gravity_controller.value_changed.connect(_on_gravity_changed)
-	gravity_controller.set_value(gravity_strength)
+	_panel.add_readout("Speed", "0.00")
+
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.5, 0.35, 0.0)
+	_panel.rotation_degrees = Vector3(0, 30, 0)
+	add_child(_panel)
+
+func _update_readouts() -> void:
+	if is_instance_valid(mover) and _panel:
+		var speed: float = mover.velocity.length()
+		var mu: float = base_coefficient + lookup_zone_coefficient(mover.position_v.z)
+		_panel.update_readout("Speed", "%.2f  μ=%.2f" % [speed, mu])
 
 func spawn_mover() -> void:
 	if is_instance_valid(mover):
@@ -183,7 +186,7 @@ func create_friction_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, -0.5)
 	shaft.rotation_degrees = Vector3(90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_friction_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -195,26 +198,21 @@ func create_friction_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, -1.0)
 	head.rotation_degrees = Vector3(90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_friction_arrow_material()
 	arrow_root.add_child(head)
 
 	arrow_root.visible = false
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_friction_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_red for friction arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.90, 0.22, 0.22, 0.25)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.90, 0.22, 0.22)
+	mat.emission_energy_multiplier = 0.4
 	return mat
-
-func update_info_label() -> void:
-	if info_label and is_instance_valid(mover):
-		var speed: float = mover.velocity.length()
-		var mu: float = base_coefficient + lookup_zone_coefficient(mover.position_v.z)
-		FORCES_UI.set_label_text(info_label, "Example 2.4: Friction\nmu %.2f  |  speed %.2f" % [mu, speed])
 
 func update_friction_arrow(force: Vector3) -> void:
 	if not friction_arrow or not is_instance_valid(friction_arrow):
@@ -249,16 +247,15 @@ func update_friction_arrow(force: Vector3) -> void:
 func reset_scene() -> void:
 	gravity_strength = DEFAULT_GRAVITY
 	base_coefficient = DEFAULT_COEFF
-	if coeff_controller:
-		coeff_controller.set_value(base_coefficient)
-	if gravity_controller:
-		gravity_controller.set_value(gravity_strength)
+	if _panel:
+		_panel.set_slider_value(0, base_coefficient)
+		_panel.set_slider_value(1, gravity_strength)
 	spawn_mover()
 
-func _on_coeff_changed(value: float) -> void:
-	base_coefficient = value
+func _on_coeff_slider_moved(_position) -> void:
+	base_coefficient = _panel.get_slider_value(0)
 
-func _on_gravity_changed(value: float) -> void:
-	gravity_strength = value
+func _on_gravity_slider_moved(_position) -> void:
+	gravity_strength = _panel.get_slider_value(1)
 	if is_instance_valid(mover):
 		mover.velocity = Vector3.ZERO

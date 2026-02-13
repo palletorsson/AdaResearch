@@ -9,8 +9,6 @@
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
-const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY := 0.9
 const DEFAULT_DRAG_COEFF := 0.8
 const DEFAULT_FLUID_DEPTH := 0.45
@@ -28,11 +26,11 @@ var drag_coefficient: float = DEFAULT_DRAG_COEFF
 var fluid_depth: float = DEFAULT_FLUID_DEPTH
 var fluid_surface_y: float = -0.05
 
-var info_label: Label3D
-var instructions_label: Label3D
-var drag_controller: ParameterController3D
-var gravity_controller: ParameterController3D
-var depth_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _drag_slider: Node3D
+var _gravity_slider: Node3D
+var _depth_slider: Node3D
 
 var fluid_volume: MeshInstance3D
 var auto_reset_timer: Timer
@@ -42,7 +40,7 @@ func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 
 	create_fluid_volume()
-	create_ui()
+	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
 	print("Example 2.5: Fluid resistance")
@@ -55,7 +53,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	pass  # Slider labels auto-update
 
 func _physics_process(_delta: float) -> void:
 	for mover in movers:
@@ -85,70 +83,50 @@ func create_fluid_volume() -> void:
 	fluid_volume.mesh = mesh
 	fluid_volume.position = Vector3(0, fluid_surface_y - fluid_depth * 0.5, 0)
 
+	# Use Ada accent_blue tinted translucent material
 	var material := StandardMaterial3D.new()
-	material.albedo_color = Color(1.0, 0.65, 0.92, 0.35)
+	material.albedo_color = Color(0.20, 0.55, 0.95, 0.20)
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.roughness = 0.6
 	material.metallic = 0.0
 	material.emission_enabled = true
-	material.emission = Color(1.0, 0.6, 1.0) * 0.3
-	material.emission_energy_multiplier = 0.5
+	material.emission = Color(0.20, 0.55, 0.95)
+	material.emission_energy_multiplier = 0.25
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	fluid_volume.material_override = material
 
 	add_child(fluid_volume)
 
+	# Surface label — clean, non-billboard
 	var surface_label := Label3D.new()
 	surface_label.name = "FluidSurfaceLabel"
-	FORCES_UI.style_tag_label(surface_label, Vector3(0, fluid_surface_y + 0.02, -0.38), Color(1.0, 0.9, 1.0), 18)
-	FORCES_UI.set_label_text(surface_label, "Fluid surface")
+	surface_label.text = "Fluid surface"
+	surface_label.font_size = 14
+	surface_label.pixel_size = 0.001
+	surface_label.font_color = Color(0.20, 0.55, 0.95, 1.0)
+	surface_label.outline_size = 0
+	surface_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	surface_label.position = Vector3(0, fluid_surface_y + 0.02, -0.38)
 	add_child(surface_label)
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, -0.25), 28)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.5  Fluid Resistance", 3, 3)
+	_panel.set_instructions("[SPACE] Scatter movers  [R] Reset")
 
-	instructions_label = Label3D.new()
-	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.6, -0.25), 18)
-	FORCES_UI.set_label_text(instructions_label, "[SPACE] Scatter movers  |  [R] Reset")
-	add_child(instructions_label)
+	_drag_slider = _panel.add_slider("Drag", 0.05, 1.5, drag_coefficient, 0.01)
+	_drag_slider.slider_moved.connect(_on_drag_slider_moved)
 
-	drag_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	drag_controller.parameter_name = "Drag"
-	drag_controller.min_value = 0.05
-	drag_controller.max_value = 1.5
-	drag_controller.default_value = drag_coefficient
-	drag_controller.step_size = 0.01
-	drag_controller.position = Vector3(-0.45, 0.5, 0.2)
-	drag_controller.rotation_degrees = Vector3(0, 25, 0)
-	add_child(drag_controller)
-	drag_controller.value_changed.connect(_on_drag_changed)
-	drag_controller.set_value(drag_coefficient)
+	_gravity_slider = _panel.add_slider("Gravity", 0.3, 2.0, gravity_strength, 0.05)
+	_gravity_slider.slider_moved.connect(_on_gravity_slider_moved)
 
-	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	gravity_controller.parameter_name = "Gravity"
-	gravity_controller.min_value = 0.3
-	gravity_controller.max_value = 2.0
-	gravity_controller.default_value = gravity_strength
-	gravity_controller.step_size = 0.05
-	gravity_controller.position = Vector3(0.45, 0.5, 0.2)
-	gravity_controller.rotation_degrees = Vector3(0, -25, 0)
-	add_child(gravity_controller)
-	gravity_controller.value_changed.connect(_on_gravity_changed)
-	gravity_controller.set_value(gravity_strength)
+	_depth_slider = _panel.add_slider("Depth", 0.15, 0.9, fluid_depth, 0.02)
+	_depth_slider.slider_moved.connect(_on_depth_slider_moved)
 
-	depth_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	depth_controller.parameter_name = "Fluid depth"
-	depth_controller.min_value = 0.15
-	depth_controller.max_value = 0.9
-	depth_controller.default_value = fluid_depth
-	depth_controller.step_size = 0.02
-	depth_controller.position = Vector3(0, 0.5, 0.25)
-	depth_controller.rotation_degrees = Vector3.ZERO
-	add_child(depth_controller)
-	depth_controller.value_changed.connect(_on_depth_changed)
-	depth_controller.set_value(fluid_depth)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.55, 0.35, 0.15)
+	_panel.rotation_degrees = Vector3(0, 30, 0)
+	add_child(_panel)
 
 func spawn_movers() -> void:
 	clear_existing_movers()
@@ -212,7 +190,7 @@ func create_drag_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, -0.5)
 	shaft.rotation_degrees = Vector3(90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_drag_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -224,18 +202,19 @@ func create_drag_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, -1.0)
 	head.rotation_degrees = Vector3(90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_drag_arrow_material()
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_drag_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_cyan for drag arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.00, 0.78, 0.85, 0.25)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.00, 0.78, 0.85)
+	mat.emission_energy_multiplier = 0.4
 	return mat
 
 func compute_drag_force(mover: Mover) -> Vector3:
@@ -290,11 +269,6 @@ func update_drag_visual(mover: Mover, drag_force: Vector3) -> void:
 	var basis := Basis().looking_at(direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
-func update_info_label() -> void:
-	if info_label:
-		FORCES_UI.set_label_text(info_label, "Example 2.5: Fluid resistance\nDrag %.2f  |  Depth %.2f" % [drag_coefficient, fluid_depth])
-
-
 func update_fluid_volume() -> void:
 	if not is_instance_valid(fluid_volume):
 		return
@@ -312,12 +286,10 @@ func reset_scene() -> void:
 	drag_coefficient = DEFAULT_DRAG_COEFF
 	gravity_strength = DEFAULT_GRAVITY
 	fluid_depth = DEFAULT_FLUID_DEPTH
-	if drag_controller:
-		drag_controller.set_value(drag_coefficient)
-	if gravity_controller:
-		gravity_controller.set_value(gravity_strength)
-	if depth_controller:
-		depth_controller.set_value(fluid_depth)
+	if _panel:
+		_panel.set_slider_value(0, drag_coefficient)
+		_panel.set_slider_value(1, gravity_strength)
+		_panel.set_slider_value(2, fluid_depth)
 	spawn_movers()
 	update_fluid_volume()
 
@@ -328,15 +300,15 @@ func spread_movers() -> void:
 			continue
 		mover.velocity += Vector3(rng.randf_range(-0.2, 0.2), 0.0, rng.randf_range(-0.2, 0.2))
 
-func _on_drag_changed(value: float) -> void:
-	drag_coefficient = value
+func _on_drag_slider_moved(_position) -> void:
+	drag_coefficient = _panel.get_slider_value(0)
 
-func _on_gravity_changed(value: float) -> void:
-	gravity_strength = value
+func _on_gravity_slider_moved(_position) -> void:
+	gravity_strength = _panel.get_slider_value(1)
 	for mover in movers:
 		if is_instance_valid(mover):
 			mover.velocity = Vector3.ZERO
 
-func _on_depth_changed(value: float) -> void:
-	fluid_depth = value
+func _on_depth_slider_moved(_position) -> void:
+	fluid_depth = _panel.get_slider_value(2)
 	update_fluid_volume()

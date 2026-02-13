@@ -9,8 +9,6 @@
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
-const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY_STRENGTH := 0.35
 const MAX_BODIES := 8
 const ARROW_LENGTH_SCALE := 0.35
@@ -22,20 +20,21 @@ var force_visuals: Dictionary = {}
 var initial_states: Dictionary = {}
 
 var gravity_strength: float = DEFAULT_GRAVITY_STRENGTH
+var body_count: int = 6
 var show_force_vectors: bool = true
 
-var info_label: Label3D
-var instructions_label: Label3D
-var gravity_controller: ParameterController3D
-var add_body_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _gravity_slider: Node3D
+var _bodies_slider: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
-	create_ui()
-	spawn_bodies(6)
+	_create_panel()
+	spawn_bodies(body_count)
 	setup_auto_reset()
 	print("Example 2.9: N-body attraction")
 
@@ -47,7 +46,7 @@ func setup_auto_reset() -> void:
 	add_child(auto_reset_timer)
 
 func _process(_delta: float) -> void:
-	update_info_label()
+	pass  # Slider labels auto-update
 
 func _physics_process(_delta: float) -> void:
 	for i in range(bodies.size()):
@@ -75,39 +74,22 @@ func _input(event: InputEvent) -> void:
 			KEY_T:
 				toggle_force_vectors()
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	FORCES_UI.style_title_label(info_label, Vector3(0, 0.72, -0.15), 26)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.9  N-Body Attraction", 2, 3)
+	_panel.set_instructions("[T] Toggle arrows  [R] Reset")
 
-	instructions_label = Label3D.new()
-	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.62, -0.15), 18)
-	FORCES_UI.set_label_text(instructions_label, "[T] Toggle arrows  |  [R] Reset")
-	add_child(instructions_label)
+	_gravity_slider = _panel.add_slider("Gravity", 0.1, 0.8, gravity_strength, 0.02)
+	_gravity_slider.slider_moved.connect(_on_gravity_slider_moved)
 
-	gravity_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	gravity_controller.parameter_name = "Gravity"
-	gravity_controller.min_value = 0.1
-	gravity_controller.max_value = 0.8
-	gravity_controller.default_value = gravity_strength
-	gravity_controller.step_size = 0.02
-	gravity_controller.position = Vector3(-0.45, 0.5, 0.2)
-	gravity_controller.rotation_degrees = Vector3(0, 25, 0)
-	add_child(gravity_controller)
-	gravity_controller.value_changed.connect(_on_gravity_changed)
-	gravity_controller.set_value(gravity_strength)
+	# Bodies slider — use snap for integer stepping
+	_bodies_slider = _panel.add_slider("Bodies", 3.0, 8.0, float(body_count), 1.0, true)
+	_bodies_slider.slider_moved.connect(_on_bodies_slider_moved)
 
-	add_body_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	add_body_controller.parameter_name = "Bodies"
-	add_body_controller.min_value = 3
-	add_body_controller.max_value = MAX_BODIES
-	add_body_controller.step_size = 1
-	add_body_controller.default_value = 6
-	add_body_controller.position = Vector3(0.45, 0.5, 0.2)
-	add_body_controller.rotation_degrees = Vector3(0, -25, 0)
-	add_body_controller.value_changed.connect(_on_body_count_changed)
-	add_child(add_body_controller)
-	add_body_controller.set_value(6)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.5, 0.35, 0.15)
+	_panel.rotation_degrees = Vector3(0, 30, 0)
+	add_child(_panel)
 
 func spawn_bodies(count: int) -> void:
 	clear_bodies()
@@ -117,7 +99,7 @@ func spawn_bodies(count: int) -> void:
 
 	for i in range(count):
 		var mass := rng.randf_range(0.6, 2.2)
-		var position := Vector3(
+		var pos := Vector3(
 			rng.randf_range(-0.4, 0.4),
 			rng.randf_range(-0.1, 0.4),
 			rng.randf_range(-0.4, 0.4)
@@ -134,11 +116,11 @@ func spawn_bodies(count: int) -> void:
 			rng.randf_range(0.8, 1.0)
 		)
 
-		var body := create_body("Body_%d" % i, mass, position, velocity, random_color)
+		var body := create_body("Body_%d" % i, mass, pos, velocity, random_color)
 
 		bodies.append(body)
 		initial_states[body] = {
-			"position": position,
+			"position": pos,
 			"velocity": velocity,
 			"mass": mass
 		}
@@ -147,11 +129,11 @@ func spawn_bodies(count: int) -> void:
 		body.add_child(arrow)
 		force_visuals[body] = arrow
 
-func create_body(name: String, mass: float, position: Vector3, velocity: Vector3, color: Color) -> Mover:
+func create_body(body_name: String, mass: float, pos: Vector3, velocity: Vector3, color: Color) -> Mover:
 	var body := Mover.new()
-	body.name = name
+	body.name = body_name
 	body.mass = mass
-	body.position_v = position
+	body.position_v = pos
 	body.velocity = velocity
 	body.acceleration = Vector3.ZERO
 	body.bounce_damping = 0.5
@@ -174,7 +156,7 @@ func create_force_arrow(base_color: Color) -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, 0.5)
 	shaft.rotation_degrees = Vector3(-90, 0, 0)
-	shaft.material_override = create_arrow_material(base_color)
+	shaft.material_override = _create_arrow_material(base_color)
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -186,17 +168,17 @@ func create_force_arrow(base_color: Color) -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, 1.0)
 	head.rotation_degrees = Vector3(-90, 0, 0)
-	head.material_override = create_arrow_material(base_color)
+	head.material_override = _create_arrow_material(base_color)
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material(base_color: Color) -> StandardMaterial3D:
+func _create_arrow_material(base_color: Color) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(base_color.r, base_color.g, base_color.b, 0.2)
+	mat.albedo_color = Color(base_color.r, base_color.g, base_color.b, 0.25)
 	mat.emission_enabled = true
-	mat.emission = base_color * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = base_color
+	mat.emission_energy_multiplier = 0.4
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	return mat
 
@@ -238,12 +220,9 @@ func update_force_arrow(arrow: Node3D, force: Vector3) -> void:
 	var basis := Basis().looking_at(direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
-func update_info_label() -> void:
-	if info_label:
-		FORCES_UI.set_label_text(info_label, "Example 2.9: N-body attraction\nBodies %d  |  Gravity %.2f" % [bodies.size(), gravity_strength])
-
 func reset_scene() -> void:
-	spawn_bodies(int(add_body_controller.get_value()))
+	body_count = int(_panel.get_slider_value(1))
+	spawn_bodies(body_count)
 
 func toggle_force_vectors() -> void:
 	show_force_vectors = !show_force_vectors
@@ -251,11 +230,14 @@ func toggle_force_vectors() -> void:
 		if is_instance_valid(arrow):
 			arrow.visible = show_force_vectors
 
-func _on_gravity_changed(value: float) -> void:
-	gravity_strength = value
+func _on_gravity_slider_moved(_position) -> void:
+	gravity_strength = _panel.get_slider_value(0)
 
-func _on_body_count_changed(value: float) -> void:
-	spawn_bodies(int(value))
+func _on_bodies_slider_moved(_position) -> void:
+	var new_count: int = int(round(_panel.get_slider_value(1)))
+	if new_count != body_count:
+		body_count = new_count
+		spawn_bodies(body_count)
 
 func clear_bodies() -> void:
 	for body in bodies:

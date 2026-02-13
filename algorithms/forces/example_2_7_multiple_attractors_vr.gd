@@ -9,9 +9,7 @@
 
 extends Node3D
 
-const PARAMETER_CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const ATTRACTOR_SCENE := preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
-const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")
 const DEFAULT_GRAVITY_STRENGTH := 0.55
 const DEFAULT_ATTRACTOR_MASS := 3.5
 const ARROW_LENGTH_SCALE := 0.4
@@ -31,10 +29,10 @@ var movers: Array[Mover] = []
 var force_visuals: Dictionary = {}
 var mover_initial_states: Dictionary = {}
 
-var info_label: Label3D
-var instructions_label: Label3D
-var strength_controller: ParameterController3D
-var mass_controller: ParameterController3D
+# UI — Ada rack panel
+var _panel: ForcesRackPanel
+var _strength_slider: Node3D
+var _mass_slider: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
@@ -42,7 +40,7 @@ func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 
 	create_attractors()
-	create_ui()
+	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
 	print("Example 2.7: Multiple attractors")
@@ -59,8 +57,6 @@ func _process(_delta: float) -> void:
 	for attractor in attractors:
 		if is_instance_valid(attractor.anchor):
 			attractor.position = attractor.anchor.global_position
-
-	update_info_label()
 
 func _physics_process(_delta: float) -> void:
 	for mover in movers:
@@ -110,39 +106,21 @@ func create_attractors() -> void:
 
 		attractors.append(attractor)
 
-func create_ui() -> void:
-	info_label = Label3D.new()
-	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, -0.2), 28)
-	add_child(info_label)
+func _create_panel() -> void:
+	_panel = ForcesRackPanel.new()
+	_panel.setup("2.7  Multiple Attractors", 2, 3)
+	_panel.set_instructions("[SPACE] Scatter  [R] Reset  [T] Arrows")
 
-	instructions_label = Label3D.new()
-	FORCES_UI.style_instruction_label(instructions_label, Vector3(0, 0.6, -0.2), 18)
-	FORCES_UI.set_label_text(instructions_label, "[SPACE] Scatter  |  [R] Reset  |  [T] Force arrows")
-	add_child(instructions_label)
+	_strength_slider = _panel.add_slider("Gravity", 0.2, 1.0, DEFAULT_GRAVITY_STRENGTH, 0.05)
+	_strength_slider.slider_moved.connect(_on_strength_slider_moved)
 
-	strength_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	strength_controller.parameter_name = "Gravity strength"
-	strength_controller.min_value = 0.2
-	strength_controller.max_value = 1.0
-	strength_controller.default_value = DEFAULT_GRAVITY_STRENGTH
-	strength_controller.step_size = 0.05
-	strength_controller.position = Vector3(-0.45, 0.5, 0.2)
-	strength_controller.rotation_degrees = Vector3(0, 25, 0)
-	add_child(strength_controller)
-	strength_controller.value_changed.connect(_on_strength_changed)
-	strength_controller.set_value(DEFAULT_GRAVITY_STRENGTH)
+	_mass_slider = _panel.add_slider("Att. Mass", 1.0, 8.0, DEFAULT_ATTRACTOR_MASS, 0.2)
+	_mass_slider.slider_moved.connect(_on_mass_slider_moved)
 
-	mass_controller = PARAMETER_CONTROLLER_SCENE.instantiate()
-	mass_controller.parameter_name = "Attractor mass"
-	mass_controller.min_value = 1.0
-	mass_controller.max_value = 8.0
-	mass_controller.default_value = DEFAULT_ATTRACTOR_MASS
-	mass_controller.step_size = 0.2
-	mass_controller.position = Vector3(0.45, 0.5, 0.2)
-	mass_controller.rotation_degrees = Vector3(0, -25, 0)
-	add_child(mass_controller)
-	mass_controller.value_changed.connect(_on_mass_changed)
-	mass_controller.set_value(DEFAULT_ATTRACTOR_MASS)
+	# Position panel to the left, at chest height, angled toward viewer
+	_panel.position = Vector3(-0.5, 0.35, 0.15)
+	_panel.rotation_degrees = Vector3(0, 30, 0)
+	add_child(_panel)
 
 func spawn_movers() -> void:
 	clear_existing_movers()
@@ -206,7 +184,7 @@ func create_force_arrow() -> Node3D:
 	shaft.mesh = shaft_mesh
 	shaft.position = Vector3(0, 0, 0.5)
 	shaft.rotation_degrees = Vector3(-90, 0, 0)
-	shaft.material_override = create_arrow_material()
+	shaft.material_override = _create_attraction_arrow_material()
 	arrow_root.add_child(shaft)
 
 	var head := MeshInstance3D.new()
@@ -218,17 +196,18 @@ func create_force_arrow() -> Node3D:
 	head.mesh = head_mesh
 	head.position = Vector3(0, 0, 1.0)
 	head.rotation_degrees = Vector3(-90, 0, 0)
-	head.material_override = create_arrow_material()
+	head.material_override = _create_attraction_arrow_material()
 	arrow_root.add_child(head)
 
 	return arrow_root
 
-func create_arrow_material() -> StandardMaterial3D:
+func _create_attraction_arrow_material() -> StandardMaterial3D:
+	# Use Ada accent_orange for attraction arrows
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.6, 1.0, 0.2)
+	mat.albedo_color = Color(0.95, 0.45, 0.15, 0.25)
 	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 1.0) * 0.3
-	mat.emission_energy_multiplier = 0.5
+	mat.emission = Color(0.95, 0.45, 0.15)
+	mat.emission_energy_multiplier = 0.4
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	return mat
 
@@ -272,18 +251,13 @@ func update_force_visual(mover: Mover, force: Vector3) -> void:
 	var basis := Basis().looking_at(direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
-func update_info_label() -> void:
-	if info_label:
-		FORCES_UI.set_label_text(info_label, "Example 2.7: Multiple attractors\nStrength %.2f  |  Mass %.1f" % [DEFAULT_GRAVITY_STRENGTH, DEFAULT_ATTRACTOR_MASS])
-
 func reset_scene() -> void:
 	for attractor in attractors:
 		attractor.mass = DEFAULT_ATTRACTOR_MASS
 		attractor.strength = DEFAULT_GRAVITY_STRENGTH
-	if strength_controller:
-		strength_controller.set_value(DEFAULT_GRAVITY_STRENGTH)
-	if mass_controller:
-		mass_controller.set_value(DEFAULT_ATTRACTOR_MASS)
+	if _panel:
+		_panel.set_slider_value(0, DEFAULT_GRAVITY_STRENGTH)
+		_panel.set_slider_value(1, DEFAULT_ATTRACTOR_MASS)
 	restore_movers()
 
 func restore_movers() -> void:
@@ -308,10 +282,12 @@ func toggle_force_vectors() -> void:
 		if is_instance_valid(arrow):
 			arrow.visible = not arrow.visible
 
-func _on_strength_changed(value: float) -> void:
+func _on_strength_slider_moved(_position) -> void:
+	var val: float = _panel.get_slider_value(0)
 	for attractor in attractors:
-		attractor.strength = value
+		attractor.strength = val
 
-func _on_mass_changed(value: float) -> void:
+func _on_mass_slider_moved(_position) -> void:
+	var val: float = _panel.get_slider_value(1)
 	for attractor in attractors:
-		attractor.mass = value
+		attractor.mass = val
