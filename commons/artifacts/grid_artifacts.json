@@ -5107,6 +5107,138 @@
 															"showcase",
 															"devtools"
 														]
+											},
+					  "shader_01_shaping":  {
+												"name":  "Shaping Functions",
+												"lookup_name":  "shader_01_shaping",
+												"description":  "Book of Shaders Ch.5: step(), smoothstep(), sin(), pow() — shaping functions visualized on surfaces",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_01_shaping.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "beginner",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "shaping", "functions", "book_of_shaders"]
+											},
+					  "shader_02_colors":  {
+												"name":  "Color Spaces",
+												"lookup_name":  "shader_02_colors",
+												"description":  "Book of Shaders Ch.6: RGB, HSB, gradient mixing — color as a continuous field across UV space",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_02_colors.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "beginner",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "color", "hsb", "gradient", "book_of_shaders"]
+											},
+					  "shader_03_shapes":  {
+												"name":  "Shader Shapes",
+												"lookup_name":  "shader_03_shapes",
+												"description":  "Book of Shaders Ch.7: circles, rectangles, polygons — distance fields as the geometry of GPU drawing",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_03_shapes.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "beginner",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "shapes", "distance_field", "sdf", "book_of_shaders"]
+											},
+					  "shader_04_matrices":  {
+												"name":  "Matrix Transforms",
+												"lookup_name":  "shader_04_matrices",
+												"description":  "Book of Shaders Ch.8: translate, rotate, scale — 2D matrix transformations applied to UV coordinates",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_04_matrices.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "intermediate",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "matrices", "transform", "rotate", "scale", "book_of_shaders"]
+											},
+					  "shader_05_patterns":  {
+												"name":  "Tiling Patterns",
+												"lookup_name":  "shader_05_patterns",
+												"description":  "Book of Shaders Ch.9: tile, brick, offset, Truchet — repetition and symmetry through fract() and modular UV",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_05_patterns.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "intermediate",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "patterns", "tiling", "truchet", "book_of_shaders"]
+											},
+					  "shader_06_random":  {
+												"name":  "Pseudorandom",
+												"lookup_name":  "shader_06_random",
+												"description":  "Book of Shaders Ch.10: hash functions, animated noise, grid randomness — deterministic chaos from sin(dot())",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_06_random.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "intermediate",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "random", "hash", "noise", "book_of_shaders"]
+											},
+					  "shader_07_noise":  {
+												"name":  "Gradient Noise",
+												"lookup_name":  "shader_07_noise",
+												"description":  "Book of Shaders Ch.11: value noise, gradient noise, simplex, domain warping — smooth randomness for organic textures",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "intermediate",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "noise", "perlin", "simplex", "gradient", "book_of_shaders"]
+											},
+					  "shader_08_cellularnoise":  {
+												"name":  "Cellular Noise",
+												"lookup_name":  "shader_08_cellularnoise",
+												"description":  "Book of Shaders Ch.12: Worley noise, Voronoi, crackle — distance-to-nearest-point creates biological tessellation",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "intermediate",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "cellular", "voronoi", "worley", "book_of_shaders"]
+											},
+					  "shader_09_fbm":  {
+												"name":  "Fractal Brownian Motion",
+												"lookup_name":  "shader_09_fbm",
+												"description":  "Book of Shaders Ch.13: fBm, turbulence, ridged, domain warp — octave stacking for clouds, terrain, and organic complexity",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_09_fbm.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "advanced",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "fbm", "fractal", "turbulence", "octaves", "book_of_shaders"]
+											},
+					  "shader_10_reactiondiffusion":  {
+												"name":  "Reaction Diffusion",
+												"lookup_name":  "shader_10_reactiondiffusion",
+												"description":  "Book of Shaders advanced: Gray-Scott reaction-diffusion, DLA aggregation — Turing morphogenesis on the GPU, life emerging from math",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "advanced",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "reaction_diffusion", "gray_scott", "turing", "morphogenesis", "book_of_shaders"]
+											},
+					  "shader_11_queerrubber":  {
+												"name":  "Queer Rubber",
+												"lookup_name":  "shader_11_queerrubber",
+												"description":  "Form that refuses to behave. Iridescent rubber membrane stretching between states — neither solid nor liquid, neither here nor there. Vertex displacement meets queer phenomenology. The surface breathes.",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "advanced",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "queer", "rubber", "vertex_displacement", "iridescent", "book_of_shaders"]
+											},
+					  "shader_12_pinkextravaganza":  {
+												"name":  "Pink Extravaganza",
+												"lookup_name":  "shader_12_pinkextravaganza",
+												"description":  "The finale. Every technique from the entire Book of Shaders detonated simultaneously in hot pink. Noise, patterns, shapes, matrices, fBm — all of it, layered and screaming. Maximalist shader excess as aesthetic statement. This is what happens when you learn all the rules and then break them on purpose.",
+												"scene":  "res://algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.tscn",
+												"category":  "shader",
+												"interaction":  "observe",
+												"complexity":  "advanced",
+												"sequence":  "patterngeneration",
+												"tags":  ["shader", "extravaganza", "pink", "maximalist", "synthesis", "book_of_shaders"]
 											}
 				  },
 	"euclid_postulates_plaque":  {

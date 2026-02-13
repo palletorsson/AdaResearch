@@ -2581,12 +2581,8 @@ func _on_param_changed(value: float, param_name: String):
 
 
 func _apply_live_params():
-	# Apply to audio buses/effects
-	var master_idx = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_volume_db(master_idx, live_params["master_volume"])
-	
-	# TODO: Connect these to actual synth parameters when AudioSynthesizer supports it
-	# For now, this demonstrates the UI - full integration requires synth modifications
+	# Reuse the full realtime effects path so slider updates are audible immediately.
+	_apply_realtime_effects()
 
 
 func _save_current_snapshot():

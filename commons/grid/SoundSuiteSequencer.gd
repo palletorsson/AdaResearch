@@ -1,5 +1,5 @@
 extends Node
-class_name SoundSuiteSequencer
+class_name GridSoundSuiteSequencer
 
 ## Sound Suite Sequencer
 ## Bridges audio catalog sound generation with pattern sequencing
