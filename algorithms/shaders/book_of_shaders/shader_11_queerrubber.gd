@@ -56,7 +56,7 @@ func _build_dramatic_scene() -> void:
 	env_label.text = "Q U E E R   M A T E R I A L S"
 	env_label.font_size = 28
 	env_label.pixel_size = 0.001
-	env_label.font_color = Color(0.95, 0.15, 0.5)
+	env_label.modulate = Color(0.95, 0.15, 0.5)
 	env_label.position = Vector3(0.0, 4.0, -2.0)
 	env_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(env_label)
@@ -68,17 +68,17 @@ func _build_dramatic_scene() -> void:
 	var arc_end := PI * 0.35
 
 	for i in range(count):
-		var def: Dictionary = material_defs[i]
-		var t := float(i) / float(count - 1) if count > 1 else 0.5
-		var angle := lerp(arc_start, arc_end, t)
-		var x := sin(angle) * arc_radius
-		var z := -cos(angle) * arc_radius + arc_radius * 0.3
+		var def = material_defs[i]
+		var t: float = float(i) / float(count - 1) if count > 1 else 0.5
+		var angle: float = lerp(arc_start, arc_end, t)
+		var x: float = sin(angle) * arc_radius
+		var z: float = -cos(angle) * arc_radius + arc_radius * 0.3
 
 		# Create 3D object based on mesh type
 		var mesh_inst := MeshInstance3D.new()
 		mesh_inst.name = "Object_%s" % def["title"].replace(" ", "_")
 
-		var s: float = def["scale"]
+		var s := float(def["scale"])
 		match def["mesh"]:
 			"sphere":
 				var sphere := SphereMesh.new()
@@ -122,7 +122,7 @@ func _build_dramatic_scene() -> void:
 		title.text = def["title"]
 		title.font_size = 16
 		title.pixel_size = 0.001
-		title.font_color = Color(0.8, 0.2, 0.5)
+		title.modulate = Color(0.8, 0.2, 0.5)
 		title.position = Vector3(x, 0.2, z)
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		title.billboard = BaseMaterial3D.BILLBOARD_ENABLED

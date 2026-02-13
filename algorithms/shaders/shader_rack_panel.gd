@@ -80,7 +80,7 @@ func _build_panel(title: String) -> void:
 	_title_label.text = title
 	_title_label.font_size = 14
 	_title_label.pixel_size = 0.001
-	_title_label.font_color = TEXT_PRIMARY
+	_title_label.modulate = TEXT_PRIMARY
 	_title_label.outline_size = 0
 	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	_title_label.position = Vector3(0, panel_height * 0.5 - TITLE_HEIGHT * 0.5 - 0.005, PANEL_DEPTH * 0.5 + 0.001)
@@ -93,7 +93,7 @@ func _build_panel(title: String) -> void:
 	instructions_label.text = ""
 	instructions_label.font_size = 9
 	instructions_label.pixel_size = 0.001
-	instructions_label.font_color = TEXT_SECONDARY
+	instructions_label.modulate = TEXT_SECONDARY
 	instructions_label.outline_size = 0
 	instructions_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	instructions_label.position = Vector3(0, panel_height * 0.5 - TITLE_HEIGHT - 0.005, PANEL_DEPTH * 0.5 + 0.001)
@@ -133,7 +133,7 @@ func set_code_snippet(text: String) -> void:
 		_code_label.name = "CodeSnippet"
 		_code_label.font_size = 8
 		_code_label.pixel_size = 0.001
-		_code_label.font_color = ACCENT_CYAN
+		_code_label.modulate = ACCENT_CYAN
 		_code_label.outline_size = 0
 		_code_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		_code_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -194,7 +194,7 @@ func add_readout(label_name: String, initial_text: String = "--") -> Label3D:
 	readout.name = "Readout_%s" % label_name.replace(" ", "_")
 	readout.font_size = 11
 	readout.pixel_size = 0.001
-	readout.font_color = ACCENT_CYAN
+	readout.modulate = ACCENT_CYAN
 	readout.outline_size = 0
 	readout.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

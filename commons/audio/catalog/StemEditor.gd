@@ -14,6 +14,7 @@ extends Control
 
 signal editor_closed
 
+const LayerRenderer = preload("res://commons/audio/catalog/LayerRenderer.gd")
 const SAMPLE_RATE = 44100.0
 const LANE_HEIGHT = 50
 const STEP_WIDTH = 40
@@ -620,119 +621,19 @@ func _update_playhead():
 
 
 func _generate_mix() -> AudioStreamWAV:
-	"""Generate the audio mix from current patterns"""
-	var bar_duration = 240.0 / _bpm
-	var total_duration = _num_bars * bar_duration
-	var total_samples = int(total_duration * SAMPLE_RATE)
-	
-	var final_mix = PackedFloat32Array()
-	final_mix.resize(total_samples)
-	final_mix.fill(0.0)
-	
-	# Check for solo
-	var any_solo = false
-	for track in _tracks:
-		if track.solo:
-			any_solo = true
-			break
-	
-	# Load soundbank
-	var bank = SoundbankLoader.load_genre(_song_id)
-	
-	# Mix each track
-	for track in _tracks:
-		if track.muted:
-			continue
-		if any_solo and not track.solo:
-			continue
-		
-		var track_audio = _generate_track_audio(track, bank, total_samples, bar_duration)
-		if track_audio != null:
-			for i in range(total_samples):
-				final_mix[i] = clampf(final_mix[i] + track_audio[i], -1.0, 1.0)
-	
-	return _create_audio_stream(final_mix)
+	"""Generate the audio mix from current patterns."""
+	return LayerRenderer.render_mix_stream(_song_id, _tracks, _bpm, _num_bars)
 
 
 func _generate_track_audio(track: Dictionary, bank: SoundbankLoader, total_samples: int, bar_duration: float) -> PackedFloat32Array:
-	"""Generate audio for a single track"""
-	var buffer = PackedFloat32Array()
-	buffer.resize(total_samples)
-	buffer.fill(0.0)
-	
-	var step_samples = int((bar_duration / 16.0) * SAMPLE_RATE)
-	var velocity_cfg = SoundbankGenerator.VELOCITY.get(_song_id, SoundbankGenerator.VELOCITY["detroit_techno"])
-	
-	var script = null
-	if bank != null and bank.has_sound(track.name):
-		script = bank.get_sound_script(track.name)
-	
-	if script == null:
-		return buffer
-	
-	var pattern = track.pattern
-	
-	for bar in range(_num_bars):
-		var bar_start = int(bar * bar_duration * SAMPLE_RATE)
-		
-		for step in range(16):
-			var pattern_step = step % pattern.size()
-			var vel = pattern[pattern_step]
-			if vel <= 0:
-				continue
-			
-			var step_start = bar_start + step * step_samples
-			var volume = velocity_cfg["base"]
-			
-			if vel >= 2:
-				volume = velocity_cfg["accent"]
-			elif vel < 1:
-				volume = velocity_cfg["ghost"]
-			
-			_add_sound_to_buffer(buffer, script, step_start, track.name, volume)
-	
-	return buffer
-
-
-func _add_sound_to_buffer(buffer: PackedFloat32Array, script, start: int, sound_name: String, volume: float):
-	"""Add a single sound hit to the buffer"""
-	var duration_samples = int(0.5 * SAMPLE_RATE)
-	
-	for i in range(duration_samples):
-		var idx = start + i
-		if idx >= buffer.size():
-			break
-		
-		var t = float(i) / SAMPLE_RATE
-		var sample = 0.0
-		
-		if script.has_method("generate"):
-			sample = script.generate(t, 0.0)
-		elif script.has_method("generate_closed"):
-			sample = script.generate_closed(t, 0.0)
-		elif script.has_method("generate_sample"):
-			sample = script.generate_sample(t, [])
-		
-		buffer[idx] = clampf(buffer[idx] + sample * volume, -1.0, 1.0)
+	"""Generate audio for a single track via shared renderer."""
+	var velocity_song_id: String = LayerRenderer.resolve_bank_id(_song_id)
+	return LayerRenderer.render_track_buffer(track, bank, velocity_song_id, total_samples, bar_duration, _num_bars)
 
 
 func _create_audio_stream(buffer: PackedFloat32Array) -> AudioStreamWAV:
-	"""Create AudioStreamWAV from float buffer"""
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = int(SAMPLE_RATE)
-	stream.stereo = false
-	
-	var data = PackedByteArray()
-	data.resize(buffer.size() * 2)
-	
-	for i in range(buffer.size()):
-		var sample_16 = int(clampf(buffer[i], -1.0, 1.0) * 32767.0)
-		data[i * 2] = sample_16 & 0xFF
-		data[i * 2 + 1] = (sample_16 >> 8) & 0xFF
-	
-	stream.data = data
-	return stream
+	"""Create AudioStreamWAV from float buffer via shared renderer."""
+	return LayerRenderer.create_audio_stream(buffer)
 
 
 func _on_export_stems_pressed():
@@ -742,7 +643,7 @@ func _on_export_stems_pressed():
 	
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(base_path))
 	
-	var bank = SoundbankLoader.load_genre(_song_id)
+	var bank = LayerRenderer.load_song_bank(_song_id)
 	var bar_duration = 240.0 / _bpm
 	var total_samples = int(_num_bars * bar_duration * SAMPLE_RATE)
 	

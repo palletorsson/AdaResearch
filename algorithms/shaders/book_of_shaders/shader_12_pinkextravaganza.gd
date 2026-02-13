@@ -61,7 +61,7 @@ func _build_finale_scene() -> void:
 	main_title.text = "★ P I N K   E X T R A V A G A N Z A ★"
 	main_title.font_size = 36
 	main_title.pixel_size = 0.001
-	main_title.font_color = Color(1.0, 0.08, 0.58)
+	main_title.modulate = Color(1.0, 0.08, 0.58)
 	main_title.outline_size = 4
 	main_title.outline_modulate = Color(0.5, 0.0, 0.3)
 	main_title.position = Vector3(0.0, 5.5, -3.0)
@@ -78,13 +78,13 @@ func _build_finale_scene() -> void:
 	]
 
 	for i in range(material_defs.size()):
-		var def: Dictionary = material_defs[i]
-		var pos: Vector3 = positions[i]
-		pos.y += def["y_offset"]
+		var def = material_defs[i]
+		var pos := positions[i] as Vector3
+		pos.y += float(def["y_offset"])
 
 		var mesh_inst := MeshInstance3D.new()
 		mesh_inst.name = "Object_%d" % i
-		var s: float = def["scale"]
+		var s := float(def["scale"])
 
 		match def["mesh"]:
 			"sphere":
@@ -134,7 +134,7 @@ func _build_finale_scene() -> void:
 		title.text = def["title"]
 		title.font_size = 14
 		title.pixel_size = 0.001
-		title.font_color = Color(1.0, 0.3, 0.7)
+		title.modulate = Color(1.0, 0.3, 0.7)
 		title.outline_size = 2
 		title.outline_modulate = Color(0.3, 0.0, 0.2)
 		title.position = pos + Vector3(0.0, -1.0, 0.0)

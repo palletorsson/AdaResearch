@@ -62,7 +62,7 @@ func _ready() -> void:
 		title.text = def["title"]
 		title.font_size = 18
 		title.pixel_size = 0.001
-		title.font_color = Color(0.92, 0.92, 0.94)
+		title.modulate = Color(0.92, 0.92, 0.94)
 		title.position = Vector3(x_pos, 2.7, 0.01)
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		add_child(title)

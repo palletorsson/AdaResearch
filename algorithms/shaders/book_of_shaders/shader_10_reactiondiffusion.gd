@@ -40,7 +40,7 @@ func _ready() -> void:
 		title.text = "Reaction-Diffusion"
 		title.font_size = 18
 		title.pixel_size = 0.001
-		title.font_color = Color(0.92, 0.92, 0.94)
+		title.modulate = Color(0.92, 0.92, 0.94)
 		title.position = Vector3(-DISPLAY_GAP * 0.5, 3.0, 0.01)
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		add_child(title)
@@ -66,7 +66,7 @@ func _ready() -> void:
 		title2.text = def["title"]
 		title2.font_size = 18
 		title2.pixel_size = 0.001
-		title2.font_color = Color(0.92, 0.92, 0.94)
+		title2.modulate = Color(0.92, 0.92, 0.94)
 		title2.position = Vector3(x_pos, 3.0, 0.01)
 		title2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		add_child(title2)

@@ -18,6 +18,7 @@ const SoundIdentityPanel = preload("res://commons/audio/catalog/ui/SoundIdentity
 const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPanel.gd")
 const MidiPianoRoll = preload("res://commons/audio/catalog/ui/MidiPianoRoll.gd")
 const AIAssistantPanel = preload("res://commons/audio/catalog/ui/AIAssistantPanel.gd")
+const LayerRenderer = preload("res://commons/audio/catalog/LayerRenderer.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 const PATTERN_OVERRIDES_PATH = "user://song_pattern_overrides.json"
 const GLOBAL_SECTION_KEY = "__global__"
@@ -61,6 +62,8 @@ var _layer_controls: VBoxContainer
 # Word Display
 var _word_display: WordSynthDisplay
 var _layer_solos: Dictionary = {}  # layer_name -> {solo: CheckBox, mute: CheckBox, volume: HSlider}
+var _layer_mix_active: bool = false
+var _layer_mix_duration: float = 0.0
 
 # Tab navigation
 var _main_tabs: TabContainer
@@ -89,6 +92,7 @@ var _config_path_label: Label
 var _current_config: Dictionary = {}
 var _current_config_path: String = ""
 var _current_section_name: String = ""
+var _current_song_id: String = ""
 var _current_song_words: Dictionary = {}  # layer_name -> {words: [...], params: {...}}
 var _pattern_overrides: Dictionary = {}  # generator_song_id -> {sections:{section->{layer->data}}}
 
@@ -1760,6 +1764,202 @@ func _populate_layer_controls(layer_names: Array):
 		_layer_solos[layer_name] = {"solo": solo, "mute": mute, "volume": vol}
 
 
+func _reset_layer_controls_ui():
+	for layer_name in _layer_solos.keys():
+		var state = _layer_solos[layer_name]
+		if not (state is Dictionary):
+			continue
+		var solo_btn = state.get("solo", null)
+		if solo_btn is CheckBox:
+			solo_btn.set_pressed_no_signal(false)
+		var mute_btn = state.get("mute", null)
+		if mute_btn is CheckBox:
+			mute_btn.set_pressed_no_signal(false)
+		var vol_slider = state.get("volume", null)
+		if vol_slider is HSlider:
+			vol_slider.set_value_no_signal(0.0)
+
+
+func _current_song_for_layers() -> String:
+	return _current_song_id if not _current_song_id.is_empty() else _current_song
+
+
+func _layer_controls_are_default() -> bool:
+	for layer_name in _layer_solos.keys():
+		var state = _layer_solos[layer_name]
+		if not (state is Dictionary):
+			continue
+		var solo_btn = state.get("solo", null)
+		var mute_btn = state.get("mute", null)
+		var vol_slider = state.get("volume", null)
+		if solo_btn is CheckBox and solo_btn.button_pressed:
+			return false
+		if mute_btn is CheckBox and mute_btn.button_pressed:
+			return false
+		if vol_slider is HSlider and absf(vol_slider.value) > 0.001:
+			return false
+	return true
+
+
+func _extract_pattern_for_layer(song_id: String, layer_name: String) -> Array:
+	var resolved_song_id: String = LayerRenderer.resolve_bank_id(song_id)
+	var patterns_data = SoundbankGenerator.PATTERNS.get(resolved_song_id, {})
+	if not (patterns_data is Dictionary):
+		return []
+
+	var patterns: Dictionary = patterns_data
+	var layer_token: String = layer_name.to_lower().replace(" ", "_")
+	var tokens: Array = [layer_token]
+	if layer_token.contains("drum"):
+		tokens.append_array(["kick", "snare", "hihat", "clap", "tom", "perc"])
+	elif layer_token.contains("bass"):
+		tokens.append_array(["bass", "sub", "reese"])
+	elif layer_token.contains("pad"):
+		tokens.append_array(["pad", "strings", "chord"])
+	elif layer_token.contains("lead"):
+		tokens.append_array(["lead", "arp", "keys", "melody", "hook", "seq"])
+
+	for key in patterns.keys():
+		var pattern_data = patterns[key]
+		if not (pattern_data is Array):
+			continue
+		var key_token: String = str(key).to_lower()
+		for token_value in tokens:
+			var token: String = str(token_value)
+			if key_token == token or key_token.contains(token) or token.contains(key_token):
+				return (pattern_data as Array).duplicate()
+
+	return []
+
+
+func _build_layer_mix_tracks(song_id: String) -> Array:
+	var tracks: Array = []
+	for layer_name in _layer_solos.keys():
+		var state = _layer_solos[layer_name]
+		if not (state is Dictionary):
+			continue
+
+		var solo_btn = state.get("solo", null)
+		var mute_btn = state.get("mute", null)
+		var vol_slider = state.get("volume", null)
+		var pattern: Array = _extract_pattern_for_layer(song_id, str(layer_name))
+		var layer_data = _current_song_words.get(str(layer_name), {})
+		if layer_data is Dictionary:
+			var param_data = layer_data.get("params", {})
+			if param_data is Dictionary and param_data.has("pattern") and param_data["pattern"] is Array:
+				pattern = (param_data["pattern"] as Array).duplicate()
+
+		tracks.append({
+			"name": str(layer_name),
+			"pattern": pattern,
+			"muted": mute_btn is CheckBox and mute_btn.button_pressed,
+			"solo": solo_btn is CheckBox and solo_btn.button_pressed,
+			"gain_linear": db_to_linear(vol_slider.value if vol_slider is HSlider else 0.0),
+		})
+
+	return tracks
+
+
+func _estimate_song_bar_count(_song_id: String, bpm: float) -> int:
+	var total_duration: float = 0.0
+
+	if _timeline != null and _timeline._sections.size() > 0:
+		var last_section = _timeline._sections[_timeline._sections.size() - 1]
+		if last_section is Dictionary:
+			total_duration = float(last_section.get("end", 0.0))
+
+	if total_duration <= 0.0 and _current_stream != null:
+		total_duration = _current_stream.get_length()
+	if total_duration <= 0.0:
+		total_duration = 8.0
+
+	var safe_bpm: float = maxf(1.0, bpm)
+	var bar_duration: float = 240.0 / safe_bpm
+	return maxi(1, int(ceil(total_duration / bar_duration)))
+
+
+func _seek_layer_mix(time: float):
+	if _player.stream == null:
+		return
+
+	var stream_length: float = _layer_mix_duration
+	if stream_length <= 0.0:
+		stream_length = _player.stream.get_length()
+	var max_seek: float = maxf(0.0, stream_length - 0.01)
+	var seek_time: float = clampf(time, 0.0, max_seek)
+	_player.play(seek_time)
+
+
+func _restore_main_stream_from_layer_mix():
+	if not _layer_mix_active:
+		return
+
+	var was_playing: bool = _is_playing and _player.playing and not _player.stream_paused
+	var saved_time: float = _playback_time
+
+	_layer_mix_active = false
+	_layer_mix_duration = 0.0
+
+	if _current_stream == null:
+		return
+
+	_player.stop()
+	_player.stream = _current_stream
+	_player.stream_paused = false
+
+	if was_playing:
+		_on_timeline_seek(saved_time)
+	else:
+		_is_playing = false
+		_play_btn.text = "▶"
+		_timeline.set_playing(false)
+
+
+func _apply_layer_mix_controls():
+	var song_id: String = _current_song_for_layers()
+	if song_id.is_empty() or _player == null:
+		return
+
+	if _layer_controls_are_default():
+		_restore_main_stream_from_layer_mix()
+		return
+
+	var bank_id: String = LayerRenderer.resolve_bank_id(song_id)
+	var brief_path: String = "res://commons/audio/soundbanks/%s/brief.json" % bank_id
+	if not ResourceLoader.exists(brief_path):
+		return
+
+	var tracks: Array = _build_layer_mix_tracks(song_id)
+	if tracks.is_empty():
+		return
+
+	var bpm: float = _estimate_bpm_from_song(song_id)
+	var bars: int = _estimate_song_bar_count(song_id, bpm)
+	var mixed_stream: AudioStreamWAV = LayerRenderer.render_mix_stream(song_id, tracks, bpm, bars)
+	if mixed_stream == null:
+		return
+
+	var was_playing: bool = _is_playing and _player.playing and not _player.stream_paused
+	var target_time: float = _playback_time
+	var max_seek: float = maxf(0.0, mixed_stream.get_length() - 0.01)
+
+	_player.stop()
+	_player.stream = mixed_stream
+	_layer_mix_active = true
+	_layer_mix_duration = mixed_stream.get_length()
+	_playback_time = clampf(target_time, 0.0, max_seek)
+
+	if was_playing:
+		_seek_layer_mix(_playback_time)
+		_is_playing = true
+		_play_btn.text = "⏸"
+		_timeline.set_playing(true)
+	else:
+		_is_playing = false
+		_play_btn.text = "▶"
+		_timeline.set_playing(false)
+
+
 func _style_button_compact(btn: Button, color: Color):
 	var style = StyleBoxFlat.new()
 	style.bg_color = color
@@ -2170,7 +2370,7 @@ func _generate_and_play(song_id: String):
 				# No generator - show config breakdown only (no audio)
 				_status_label.text = "?? %s (config only - no audio)" % song_id
 				_current_song_id = song_id
-				_load_song_words(song_id)
+				_load_song_words(song_id, true)
 				_enable_buttons()
 				return
 	if stream == null:
@@ -2194,6 +2394,9 @@ func _generate_and_play(song_id: String):
 	
 	# Load timeline metadata
 	_load_timeline_for_song(song_id, stream)
+
+	if not _layer_controls_are_default():
+		_apply_layer_mix_controls()
 	
 	# Populate MIDI editor tab if capture is available
 	if _midi_editor_tab:
@@ -2203,6 +2406,17 @@ func _generate_and_play(song_id: String):
 
 
 func _toggle_pause():
+	if not _player.playing and _player.stream != null:
+		if _layer_mix_active:
+			_seek_layer_mix(_playback_time)
+		else:
+			_on_timeline_seek(_playback_time)
+		_player.stream_paused = false
+		_is_playing = true
+		_play_btn.text = "⏸"
+		_timeline.set_playing(true)
+		return
+
 	if _player.stream_paused:
 		_player.stream_paused = false
 		_play_btn.text = "⏸"
@@ -2218,6 +2432,8 @@ func _stop_song():
 	_player.stream_paused = false
 	_is_playing = false
 	_playback_time = 0.0
+	_layer_mix_active = false
+	_layer_mix_duration = 0.0
 	_play_btn.text = "▶"
 	_play_btn.disabled = true
 	_stop_btn.disabled = true
@@ -2455,7 +2671,10 @@ func _export_midi():
 func _on_song_finished():
 	if _loop_enabled:
 		_playback_time = _loop_start
-		_player.play()
+		if _layer_mix_active:
+			_seek_layer_mix(_loop_start)
+		else:
+			_player.play()
 	else:
 		_is_playing = false
 		_playback_time = 0.0
@@ -2488,13 +2707,15 @@ func _on_section_selected(index: int):
 		_timeline.set_current_time(_playback_time)
 		
 		# For AudioStreamInteractive, we need to switch clips, not seek
-		if _current_stream and section.has("index"):
+		if _layer_mix_active:
+			_seek_layer_mix(_playback_time)
+		elif _current_stream and section.has("index"):
 			# Switch to the correct clip
 			var playback = _player.get_stream_playback()
 			if playback and playback.has_method("switch_to_clip"):
 				playback.switch_to_clip(section["index"])
 		
-		if not _player.playing:
+		if not _player.playing and not _layer_mix_active:
 			_player.play()
 		_is_playing = true
 		_play_btn.text = "⏸"
@@ -2533,12 +2754,14 @@ func _on_section_clicked(section_name: String):
 			_timeline.set_current_time(_playback_time)
 			
 			# Switch clip for AudioStreamInteractive
-			if _current_stream and section.has("index"):
+			if _layer_mix_active:
+				_seek_layer_mix(_playback_time)
+			elif _current_stream and section.has("index"):
 				var playback = _player.get_stream_playback()
 				if playback and playback.has_method("switch_to_clip"):
 					playback.switch_to_clip(section["index"])
 			
-			if not _player.playing:
+			if not _player.playing and not _layer_mix_active:
 				_player.play()
 			_is_playing = true
 			_play_btn.text = "⏸"
@@ -2553,6 +2776,12 @@ func _on_timeline_seek(time: float):
 	# Set playback time manually
 	_playback_time = time
 	_timeline.set_current_time(_playback_time)
+
+	if _layer_mix_active:
+		_seek_layer_mix(_playback_time)
+		_is_playing = true
+		_play_btn.text = "⏸"
+		return
 	
 	# Find which section this time falls into and switch clip
 	if _current_stream:
@@ -2633,19 +2862,19 @@ func _reset_all():
 
 # === LAYERS ===
 
-func _on_layer_solo(_pressed: bool, layer_name: String):
-	# TODO: Implement actual solo via bus routing
-	pass
+func _on_layer_solo(pressed: bool, layer_name: String):
+	_apply_layer_mix_controls()
+	_status_label.text = "Layer solo %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
-func _on_layer_mute(_pressed: bool, layer_name: String):
-	# TODO: Implement actual mute via bus routing
-	pass
+func _on_layer_mute(pressed: bool, layer_name: String):
+	_apply_layer_mix_controls()
+	_status_label.text = "Layer mute %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
-func _on_layer_volume(_value: float, layer_name: String):
-	# TODO: Apply to layer-specific bus
-	pass
+func _on_layer_volume(value: float, layer_name: String):
+	_apply_layer_mix_controls()
+	_status_label.text = "Layer volume %s: %.1f dB" % [layer_name, value]
 
 
 func _on_word_clicked(layer: String, word: String):
@@ -2691,94 +2920,35 @@ func _on_layer_selected(layer: String):
 
 
 func _on_layer_preview(layer: String, params: Dictionary):
-	_status_label.text = "▶ Previewing %s..." % layer
+	_status_label.text = "Previewing %s..." % layer
 	var preview = _generate_layer_preview(layer, params)
 	if preview:
 		var was_playing = _player.playing
 		var saved_pos = _playback_time
+		var restore_stream = _player.stream
+		var restore_layer_mix: bool = _layer_mix_active
 		_player.stop()
 		_player.stream = preview
 		_player.play()
 		await get_tree().create_timer(2.0).timeout
-		if _current_stream:
-			_player.stream = _current_stream
+		if restore_stream:
+			_player.stream = restore_stream
 			if was_playing:
-				_player.play()
 				_playback_time = saved_pos
+				if restore_layer_mix:
+					_seek_layer_mix(saved_pos)
+				else:
+					_on_timeline_seek(saved_pos)
 		_status_label.text = "Playing: " + _current_song_id if _current_song_id else "Ready"
 
 
-func _resolve_param(value) -> float:
-	"""Resolve param value that might be a dict with range/value to a float"""
-	if value is Dictionary:
-		if value.has("value"):
-			return float(value["value"])
-		elif value.has("range"):
-			var r = value["range"]
-			var tendency = value.get("tendency", "middle")
-			match tendency:
-				"low": return r[0] + (r[1] - r[0]) * 0.25
-				"high": return r[0] + (r[1] - r[0]) * 0.75
-				_: return (r[0] + r[1]) / 2.0
-		return 0.0
-	return float(value) if value != null else 0.0
-
-
 func _generate_layer_preview(layer: String, params: Dictionary) -> AudioStream:
-	var sample_rate = 44100
-	var duration = 2.0
-	var samples = int(sample_rate * duration)
-	var data = PackedFloat32Array()
-	data.resize(samples)
-	
-	var base_freq = 261.63
-	var attack = _resolve_param(params.get("env.attack", params.get("attack", 0.01)))
-	var decay = _resolve_param(params.get("env.decay", params.get("decay", 0.2)))
-	var sustain = _resolve_param(params.get("env.sustain", params.get("sustain", 0.7)))
-	var voices = int(_resolve_param(params.get("osc.voices", params.get("voices", 1))))
-	var detune = _resolve_param(params.get("osc.detune", params.get("detune", 0.0)))
-	
-	match layer.to_lower():
-		"bass", "reese bass", "juno bass", "filter bass", "trance bass":
-			base_freq = 65.41
-		"pad", "ambient pad", "juno pad", "supersaw pad", "string pad":
-			base_freq = 130.81
-		"lead", "supersaw lead", "duck lead", "vangelis keys":
-			base_freq = 523.25
-	
-	for i in range(samples):
-		var t = float(i) / sample_rate
-		var env = 1.0
-		if t < attack: env = t / attack
-		elif t < attack + decay: env = 1.0 - (1.0 - sustain) * ((t - attack) / decay)
-		elif t > duration - 0.3: env = sustain * (duration - t) / 0.3
-		else: env = sustain
-		
-		var osc = 0.0
-		for v in range(max(1, voices)):
-			var vd = (float(v) / max(1, voices - 1) - 0.5) * detune * 0.01 if voices > 1 else 0.0
-			var freq = base_freq * (1.0 + vd)
-			if "pad" in layer.to_lower() or "ambient" in layer.to_lower():
-				osc += sin(2.0 * PI * freq * t)
-			else:
-				osc += fmod(t * freq, 1.0) * 2.0 - 1.0
-		osc /= max(1, voices)
-		data[i] = clampf(osc * env * 0.5, -1.0, 1.0)
-	
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = sample_rate
-	stream.stereo = false
-	var bytes = PackedByteArray()
-	for s in data:
-		var val = int(clamp(s, -1.0, 1.0) * 32767)
-		bytes.append(val & 0xFF)
-		bytes.append((val >> 8) & 0xFF)
-	stream.data = bytes
-	return stream
+	var preview_song_id: String = _current_song_id if not _current_song_id.is_empty() else _current_song
+	var bpm: float = _estimate_bpm_from_song(preview_song_id)
+	return LayerRenderer.render_song_layer_preview(preview_song_id, layer, params, bpm, 1)
 
 
-func _load_song_words(song_id: String):
+func _load_song_words(song_id: String, refresh_layer_controls: bool = false):
 	"""Load word descriptors for each layer based on song type"""
 	_word_display.clear_all()
 	
@@ -3321,8 +3491,14 @@ func _load_song_words(song_id: String):
 		var data = layers[layer_name]
 		_word_display.set_layer_words(layer_name, data["words"], data["params"])
 
-
-var _current_song_id: String = ""
+	if refresh_layer_controls:
+		var layer_names: Array = layers.keys()
+		if layer_names.is_empty():
+			layer_names = ["Bass", "Pad", "Lead", "Drums", "FX"]
+		_populate_layer_controls(layer_names)
+		_reset_layer_controls_ui()
+		_layer_mix_active = false
+		_layer_mix_duration = 0.0
 
 func _update_words_for_section(section_name: String):
 	"""Update word display based on current section - sections modify layer emphasis"""
@@ -3440,8 +3616,10 @@ func _process(delta):
 		# Check loop
 		if _loop_enabled and _playback_time >= _loop_end:
 			_playback_time = _loop_start
+			if _layer_mix_active:
+				_seek_layer_mix(_loop_start)
 			# Switch to correct clip for the loop start
-			if _current_stream:
+			elif _current_stream:
 				for section in _timeline._sections:
 					if _loop_start >= section["start"] and _loop_start < section["end"] and section.has("index"):
 						var playback = _player.get_stream_playback()
@@ -3608,7 +3786,7 @@ func _load_timeline_for_song(song_id: String, stream: AudioStream):
 	_timeline.load_song_metadata(metadata)
 	
 	# Load word descriptors for the song
-	_load_song_words(song_id)
+	_load_song_words(song_id, true)
 	
 	# Populate section dropdown
 	_section_dropdown.clear()
@@ -3985,6 +4163,9 @@ func _on_detail_pattern_changed(layer: String, pattern_data: Dictionary):
 	_apply_pattern_override_to_generator(_current_song_id, layer, pattern_data)
 	_store_pattern_override(_current_song_id, _current_section_name, layer, pattern_data)
 	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))
+
+	if _layer_mix_active:
+		_apply_layer_mix_controls()
 	
 	var scope = _current_section_name if not _current_section_name.is_empty() else "global"
 	_status_label.text = "Pattern saved for %s (%s)" % [layer, scope]
