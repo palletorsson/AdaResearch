@@ -1,145 +1,122 @@
-﻿extends Node3D
+## Magnetic Simulation — RigidBody3D magnets with force-based attraction/repulsion
+## Uses apply_central_force() for magnetic interaction, GPUParticles3D for field lines
+extends Node3D
 
-# Magnetic simulation parameters
-@export var field_size := Vector3(10, 10, 10)
-@export var resolution := 16  # Number of points per axis
-@export var visualization_scale := 0.5  # Scale of the visualization arrows
-@export var field_strength := 2.0  # Overall field strength
+@export var magnet_count: int = 4
+@export var magnetic_constant: float = 5.0
 
-# References to the magnets
-var magnet1: MagneticObject
-var magnet2: MagneticObject
-
-# The flow field visualization
-var field_arrows = []
-var field_points = []
+var magnets: Array[RigidBody3D] = []
+var polarities: Array[float] = []  # +1 or -1
 
 func _ready():
-	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
+	_create_floor()
+	_create_magnets()
+	_create_field_particles()
 
-	# Create the magnetic objects
-	magnet1 = $pickMe_1/MagneticObject1
-	magnet2 = $pickMe_2/MagneticObject2
+func _create_floor():
+	var floor_body := StaticBody3D.new()
+	var floor_col := CollisionShape3D.new()
+	var floor_shape := BoxShape3D.new()
+	floor_shape.size = Vector3(6, 0.2, 6)
+	floor_col.shape = floor_shape
+	floor_body.add_child(floor_col)
+	floor_body.position = Vector3(0, -0.1, 0)
+	add_child(floor_body)
 
-	# Initialize the field visualization
-	create_field_visualization()
+func _create_magnets():
+	var positions := [
+		Vector3(-1, 1, -1), Vector3(1, 1, -1),
+		Vector3(-1, 1, 1), Vector3(1, 1, 1)
+	]
 
-	# Update the field initially
-	update_field()
+	for i in range(magnet_count):
+		var rb := RigidBody3D.new()
+		rb.name = "Magnet_%d" % i
+		rb.mass = 1.0
+		rb.linear_damp = 0.5
+		rb.angular_damp = 0.5
 
-	print("Magnetic Simulation - VR Ready!")
+		var col := CollisionShape3D.new()
+		var shape := CylinderShape3D.new()
+		shape.radius = 0.2
+		shape.height = 0.4
+		col.shape = shape
+		rb.add_child(col)
 
-func _process(_delta):
-	# Update the field every frame
-	update_field()
+		var mesh_inst := MeshInstance3D.new()
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.2
+		cyl.bottom_radius = 0.2
+		cyl.height = 0.4
+		mesh_inst.mesh = cyl
 
-func create_field_visualization():
-	# Create a 3D grid of arrows to represent the field
-	var step = field_size / resolution
-	
-	for x in range(resolution):
-		for y in range(resolution):
-			for z in range(resolution):
-				# Calculate the position
-				var pos = Vector3(
-					x * step.x - field_size.x / 2 + step.x / 2,
-					y * step.y - field_size.y / 2 + step.y / 2,
-					z * step.z - field_size.z / 2 + step.z / 2
-				)
-				
-				# Create an arrow to represent the field at this point
-				var arrow = create_arrow()
-				arrow.position = pos
-				add_child(arrow)
-				field_arrows.append(arrow)
-				field_points.append(pos)
+		# Alternate polarity
+		var polarity := 1.0 if i % 2 == 0 else -1.0
+		polarities.append(polarity)
 
-func create_arrow() -> MeshInstance3D:
-	# Create a simple arrow mesh
-	var arrow = MeshInstance3D.new()
-	
-	# Create a cone mesh for the arrow head
-	var arrow_mesh = CylinderMesh.new()
-	arrow_mesh.top_radius = 0.0
-	arrow_mesh.bottom_radius = 0.05
-	arrow_mesh.height = 0.2
-	
-	# Create a material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.2, 0.6, 1.0)
-	material.metallic = 0.8
-	material.roughness = 0.1
-	
-	arrow_mesh.material = material
-	arrow.mesh = arrow_mesh
-	
-	# Adjust the orientation
-	arrow.rotation_degrees.x = -90
-	
-	return arrow
+		var mat := StandardMaterial3D.new()
+		if polarity > 0:
+			mat.albedo_color = Color(1.0, 0.2, 0.2)  # North = red
+			mat.emission = Color(1.0, 0.1, 0.1) * 0.4
+		else:
+			mat.albedo_color = Color(0.2, 0.3, 1.0)  # South = blue
+			mat.emission = Color(0.1, 0.2, 1.0) * 0.4
+		mat.emission_enabled = true
+		mat.metallic = 0.7
+		mat.roughness = 0.3
+		mesh_inst.material_override = mat
+		rb.add_child(mesh_inst)
 
-func update_field():
-	# Calculate the magnetic field at each point and update the arrows
-	for i in range(field_arrows.size()):
-		var point = field_points[i]
-		
-		# Get the current world position of the magnets
-		var magnet1_pos = magnet1.global_position
-		var magnet2_pos = magnet2.global_position
-		
-		# Calculate field vector using the world positions
-		var field_vector = calculate_magnetic_field(point, magnet1_pos, magnet2_pos)
-		
-		# Skip if field is very weak
-		if field_vector.length() < 0.001:
-			field_arrows[i].visible = false
-			continue
-		
-		field_arrows[i].visible = true
-		
-		# Scale the arrow based on field strength
-		var field_magnitude = field_vector.length()
-		field_arrows[i].scale = Vector3(1, field_magnitude * visualization_scale, 1)
-		
-		# Point the arrow in the direction of the field
-		if field_magnitude > 0:
-			var look_dir = field_vector.normalized()
-			if look_dir.length() > 0:
-				field_arrows[i].look_at(field_arrows[i].position + look_dir, Vector3.UP)
+		rb.position = positions[i]
+		add_child(rb)
+		magnets.append(rb)
 
-func calculate_magnetic_field(point: Vector3, magnet1_pos: Vector3, magnet2_pos: Vector3) -> Vector3:
-	# Implementation based on the magnetic dipole formula
-	var field = Vector3.ZERO
-	
-	# Contribution from magnet1
-	var r1 = point - magnet1_pos
-	var r1_mag = r1.length()
-	if r1_mag > 0.001:  # Avoid division by zero
-		var m1 = magnet1.get_magnetic_moment()
-		var r1_norm = r1.normalized()
-		field += (3 * r1_norm * r1_norm.dot(m1) - m1) / pow(r1_mag, 3)
-	
-	# Contribution from magnet2
-	var r2 = point - magnet2_pos
-	var r2_mag = r2.length()
-	if r2_mag > 0.001:  # Avoid division by zero
-		var m2 = magnet2.get_magnetic_moment()
-		var r2_norm = r2.normalized()
-		field += (3 * r2_norm * r2_norm.dot(m2) - m2) / pow(r2_mag, 3)
-	
-	# Scale the field for better visualization
-	return field * field_strength
+func _create_field_particles():
+	# Iron filings effect using GPUParticles3D
+	var particles := GPUParticles3D.new()
+	particles.name = "FieldParticles"
+	particles.amount = 60
+	particles.lifetime = 3.0
+	particles.position = Vector3(0, 1, 0)
 
-# Helper method to clear the current field
-func clear_field():
-	for arrow in field_arrows:
-		arrow.queue_free()
-	field_arrows.clear()
-	field_points.clear()
-	
-# Method to adjust the field resolution
-func set_resolution(new_resolution: int):
-	resolution = new_resolution
-	clear_field()
-	create_field_visualization()
+	var mat := ParticleProcessMaterial.new()
+	mat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	mat.emission_box_extents = Vector3(2, 0.5, 2)
+	mat.direction = Vector3(0, 0, 0)
+	mat.spread = 180.0
+	mat.initial_velocity_min = 0.1
+	mat.initial_velocity_max = 0.3
+	mat.gravity = Vector3(0, -2, 0)
+	mat.damping_min = 2.0
+	mat.damping_max = 4.0
+	mat.scale_min = 0.02
+	mat.scale_max = 0.04
+	mat.color = Color(0.6, 0.6, 0.7)
+
+	particles.process_material = mat
+	particles.draw_pass_1 = SphereMesh.new()
+	particles.draw_pass_1.radius = 0.02
+	particles.draw_pass_1.height = 0.04
+
+	add_child(particles)
+
+func _physics_process(_delta: float):
+	# Apply magnetic forces between all pairs
+	for i in range(magnets.size()):
+		for j in range(i + 1, magnets.size()):
+			var a := magnets[i]
+			var b := magnets[j]
+			var direction := b.position - a.position
+			var dist := direction.length()
+			if dist < 0.3:
+				continue
+
+			# Magnetic force: F = k * p1 * p2 / r²
+			# Same polarity = repulsion, opposite = attraction
+			var force_mag := magnetic_constant * polarities[i] * polarities[j] / (dist * dist)
+			var force := direction.normalized() * force_mag
+
+			# Opposite poles attract (force_mag negative when polarities differ)
+			a.apply_central_force(force)
+			b.apply_central_force(-force)

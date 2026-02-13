@@ -47,10 +47,12 @@ func _on_extra_controls_setup(container: HBoxContainer):
 	container.add_child(_scale_dropdown)
 
 	# Lead default: one octave above bass center.
+	_octave = 4
 	_octave_spin.value = 4
-	_on_octave_changed(4.0)
 	_base_octave = 3
 	_visible_octaves = 3
+	_root_note = 12 + _root_dropdown.selected + (_octave * 12)
+	call_deferred("_rebuild_grid")
 
 
 func _on_snap_toggled(pressed: bool):

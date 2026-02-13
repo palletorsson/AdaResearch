@@ -1,54 +1,72 @@
 {
-    "sequences": {
-        "physicssimulation": {
-            "name": "Physics Simulation",
-            "description": "Advanced physics simulation techniques",
-            "difficulty": "advanced",
-            "estimated_time": "45-60 minutes",
-            "learning_objectives": [
-                "Numerical integration",
-                "Rigid body dynamics",
-                "Fluid simulation (SPH)",
-                "Soft body physics"
-            ],
-            "maps": [
-                "Physics_1",
-                "Physics_2",
-                "Physics_3",
-                "Physics_4",
-                "Physics_5",
-                "Joints_1",
-                "Joints_2",
-                "Joints_3",
-                "Joints_4",
-                "Joints_5",
-                "Joints_6",
-                "Joints_7",
-                "PhysicsSimulation_Newton_s_Laws",
-                "PhysicsSimulation_Vector_Fields",
-                "PhysicsSimulation_Numerical_Integration",
-                "PhysicsSimulation_Verlet_Integration",
-                "PhysicsSimulation_Particle_Systems",
-                "PhysicsSimulation_Mass_Spring_Damper",
-                "PhysicsSimulation_Spring_Mass_Systems",
-                "PhysicsSimulation_Three_Body_Problem",
-                "PhysicsSimulation_Rigid_Body_Dynamics",
-                "PhysicsSimulation_Collision_Detection",
-                "PhysicsSimulation_Constraints",
-                "PhysicsSimulation_Cloth_Simulation",
-                "PhysicsSimulation_Fluid_Simulation_SPH",
-                "PhysicsSimulation_Finite_Element_Method_FEM",
-                "PhysicsSimulation_Force_Fields",
-                "PhysicsSimulation_Bouncing_Ball_Physics"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_physicssimulation",
-            "unlock_requirements": [
-                "forces"
-            ],
-            "completion_rewards": [
-                "physics_engine_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"physicssimulation": {
+			"name": "Physics Simulation: The Engine Behind Reality",
+			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous — and knowing where the illusion breaks.",
+			"qfep_term": "dynamics",
+			"qfep_connection": "Physics simulation is the computational engine of emergence (φ). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden λ — the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
+			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)·dt²",
+			"demonstration": "Feel Newton's laws pull you. Watch rigid bodies collide and scatter. Stretch springs until they oscillate. See force fields push particles into orbits. Pour fluid into a simulated world.",
+
+			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity — and a new way the simulation can break.",
+			"layer": "dynamics",
+			"prerequisites": ["forces"],
+			"unlocks": ["softbodies", "swarmintelligence"],
+
+			"ambient_preset": "ambient_drone",
+			"difficulty": "advanced",
+			"estimated_time": "40-50 minutes",
+
+			"learning_objectives": [
+				"Numerical integration: Euler, Verlet, RK4 — and why the method matters",
+				"Rigid body dynamics: rotation, angular momentum, inertia tensors",
+				"Collision detection: broad phase (spatial hashing) and narrow phase (GJK/SAT)",
+				"Constraints: joints, hinges, and how physics engines solve them",
+				"Spring-mass systems: Hooke's law, damping, and emergent cloth behavior",
+				"Force fields and vector fields: invisible forces made visible",
+				"N-body simulation: gravitational democracy and the three-body problem",
+				"SPH fluid simulation: discretizing continuous matter into particles",
+				"Finite Element Method: engineering simulation for deformable bodies",
+				"Soft body physics: the compromise between rigid and fluid"
+			],
+
+			"content": [
+				"PhysicsSim_Foundations: Newton's laws → numerical integration → Verlet. The math that makes simulation possible.",
+				"PhysicsSim_Bodies: Rigid bodies → collision detection → constraints → bouncing ball. Solid things interacting.",
+				"PhysicsSim_Springs: Mass-spring-damper → spring networks → cloth. Elastic connections and emergent softness.",
+				"PhysicsSim_Fields: Force fields → vector fields → particles → n-body → three-body problem. Invisible forces, visible chaos.",
+				"PhysicsSim_Continuum: Fluid (SPH) → FEM → soft bodies → magnetic fields → kinetic sculpture. Continuous matter, discrete approximation."
+			],
+
+			"maps": [
+				"PhysicsSim_Foundations",
+				"PhysicsSim_Bodies",
+				"PhysicsSim_Springs",
+				"PhysicsSim_Fields",
+				"PhysicsSim_Continuum"
+			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/newtons_laws.md"
+			],
+
+			"algorithm_paths": {
+				"PhysicsSim_Foundations": "res://algorithms/physicssimulation/newtonslaws/",
+				"PhysicsSim_Bodies": "res://algorithms/physicssimulation/rigidbody/",
+				"PhysicsSim_Springs": "res://algorithms/physicssimulation/springmass/",
+				"PhysicsSim_Fields": "res://algorithms/physicssimulation/forcefields/",
+				"PhysicsSim_Continuum": "res://algorithms/physicssimulation/fluidsimulation/"
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_physicssimulation",
+			"unlock_requirements": ["forces"],
+			"completion_rewards": [
+				"physics_engine_badge",
+				"numerical_methods_badge",
+				"simulation_master_badge"
+			]
+		}
+	}
 }

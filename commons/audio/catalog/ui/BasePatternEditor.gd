@@ -359,6 +359,9 @@ func _setup_playback():
 
 func _rebuild_grid():
 	"""Rebuild the visual grid from pattern data"""
+	if _grid_container == null:
+		return
+
 	# Clear existing (except playhead)
 	for child in _grid_container.get_children():
 		if child != _playhead:

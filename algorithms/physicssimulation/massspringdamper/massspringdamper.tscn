@@ -29,14 +29,6 @@ emission_energy_multiplier = 0.3
 [node name="MassSpringDamper" type="Node3D"]
 script = ExtResource("1_erchh")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 1.5
-shadow_enabled = true
-
 [node name="MassSpringSystem" type="Node3D" parent="."]
 
 [node name="Masses" type="Node3D" parent="MassSpringSystem"]

@@ -172,9 +172,21 @@ static func render_song_layer_preview(song_id: String, layer_name: String, param
 		return _render_procedural_preview(layer_name, params, total_samples)
 
 	var available_sounds: Array = bank.get_available_sounds()
-	var sound_name: String = _resolve_sound_name(layer_name, available_sounds)
+	var preferred_instrument_id: String = str(params.get("instrument_id", ""))
+	var sound_name: String = _resolve_sound_name_with_preferred(layer_name, available_sounds, preferred_instrument_id)
 	if sound_name.is_empty():
 		return _render_procedural_preview(layer_name, params, total_samples)
+
+	var script: Variant = null
+	if bank.has_sound(sound_name):
+		script = bank.get_sound_script(sound_name)
+
+	var is_step_preview: bool = bool(params.get("step_preview", false))
+	if is_step_preview and script != null:
+		var overrides: Dictionary = _build_preview_overrides(layer_name, params)
+		var step_buffer: PackedFloat32Array = _render_step_preview_buffer(script, total_samples, overrides)
+		if not _is_silent(step_buffer):
+			return create_audio_stream(step_buffer)
 
 	var pattern: Array = _coerce_pattern(params.get("pattern", _default_pattern_for_layer(layer_name)), _default_pattern_for_layer(layer_name))
 	var track = {
@@ -221,15 +233,65 @@ static func _add_sound_to_buffer(buffer: PackedFloat32Array, script: Variant, st
 		buffer[idx] += sample * volume
 
 
-static func _build_hit_buffer(script: Variant) -> PackedFloat32Array:
+static func _build_preview_overrides(layer_name: String, params: Dictionary) -> Dictionary:
+	var overrides: Dictionary = {}
+	var layer_lower: String = layer_name.to_lower()
+
+	var hit_duration: float = 0.28
+	if layer_lower.contains("pad") or layer_lower.contains("key") or layer_lower.contains("chord") or layer_lower.contains("vocoder"):
+		hit_duration = 0.72
+	elif layer_lower.contains("arp") or layer_lower.contains("sequence"):
+		hit_duration = 0.22
+	overrides["hit_duration"] = hit_duration
+	overrides["note_duration"] = hit_duration
+
+	if params.has("preview_freq_hz"):
+		overrides["preview_freq_hz"] = maxf(20.0, float(params.get("preview_freq_hz", 220.0)))
+	elif params.has("preview_note"):
+		var raw_note: int = int(params.get("preview_note", 60))
+		var midi_note: int = raw_note if raw_note >= 24 else 60 + raw_note
+		overrides["preview_freq_hz"] = _midi_to_frequency(midi_note)
+
+	if params.has("chord_freqs"):
+		var chord_variant: Variant = params.get("chord_freqs", [])
+		if chord_variant is Array:
+			overrides["chord_freqs"] = _coerce_float_array(chord_variant)
+	elif params.has("chord_degree"):
+		var chord_degree: String = str(params.get("chord_degree", "I"))
+		var key_name: String = str(params.get("key", "C"))
+		var scale_name: String = str(params.get("scale", "major"))
+		var chord_freqs: Array = _chord_degree_to_freqs(chord_degree, key_name, scale_name)
+		if not chord_freqs.is_empty():
+			overrides["chord_freqs"] = chord_freqs
+
+	return overrides
+
+
+static func _render_step_preview_buffer(script: Variant, sample_count: int, overrides: Dictionary) -> PackedFloat32Array:
+	var buffer = PackedFloat32Array()
+	buffer.resize(sample_count)
+	buffer.fill(0.0)
+
+	if script == null:
+		return buffer
+
+	var hit_buffer: PackedFloat32Array = _build_hit_buffer(script, overrides)
+	_mix_hit_into_buffer(buffer, hit_buffer, 0, 1.0)
+	return buffer
+
+
+static func _build_hit_buffer(script: Variant, overrides: Dictionary = {}) -> PackedFloat32Array:
 	var hit = PackedFloat32Array()
-	var duration_samples: int = int(HIT_DURATION_SECONDS * SAMPLE_RATE)
+	var hit_duration: float = HIT_DURATION_SECONDS
+	if overrides.has("hit_duration"):
+		hit_duration = maxf(0.05, float(overrides.get("hit_duration", HIT_DURATION_SECONDS)))
+	var duration_samples: int = int(hit_duration * SAMPLE_RATE)
 	hit.resize(duration_samples)
 	if script == null:
 		hit.fill(0.0)
 		return hit
 
-	var generator_desc: Dictionary = _resolve_generator_descriptor(script)
+	var generator_desc: Dictionary = _resolve_generator_descriptor(script, overrides)
 	if generator_desc.is_empty():
 		hit.fill(0.0)
 		return hit
@@ -265,7 +327,7 @@ static func _mix_hit_into_buffer(buffer: PackedFloat32Array, hit_buffer: PackedF
 		buffer[dst_start + i] += hit_buffer[offset + i] * volume
 
 
-static func _resolve_generator_descriptor(script: Variant) -> Dictionary:
+static func _resolve_generator_descriptor(script: Variant, overrides: Dictionary = {}) -> Dictionary:
 	if script == null:
 		return {}
 
@@ -288,7 +350,7 @@ static func _resolve_generator_descriptor(script: Variant) -> Dictionary:
 			for i in range(1, method_args.size()):
 				var arg_info_variant: Variant = method_args[i]
 				var arg_info: Dictionary = arg_info_variant if arg_info_variant is Dictionary else {}
-				tail_args.append(_default_arg_value(arg_info))
+				tail_args.append(_default_arg_value(arg_info, overrides))
 
 		return {
 			"name": method_name,
@@ -357,24 +419,34 @@ static func _get_method_args(target: Object, method_name: String) -> Array:
 	return []
 
 
-static func _default_arg_value(arg_info: Dictionary) -> Variant:
+static func _default_arg_value(arg_info: Dictionary, overrides: Dictionary = {}) -> Variant:
 	var arg_name: String = str(arg_info.get("name", "")).to_lower()
 	var arg_type: int = int(arg_info.get("type", TYPE_NIL))
 
 	# Name-driven defaults first (more reliable than missing type metadata).
 	if arg_name.contains("chord") or arg_name.contains("freqs"):
+		if overrides.has("chord_freqs"):
+			var chord_variant: Variant = overrides.get("chord_freqs", [])
+			if chord_variant is Array:
+				return (chord_variant as Array).duplicate()
 		return [220.0, 277.18, 329.63]
 	if arg_name.contains("params") or arg_name.contains("config"):
 		return {}
 	if arg_name == "open":
 		return false
 	if arg_name.contains("freq"):
+		if overrides.has("preview_freq_hz"):
+			return float(overrides.get("preview_freq_hz", 110.0))
 		return 110.0
 	if arg_name.contains("duration"):
+		if overrides.has("note_duration"):
+			return float(overrides.get("note_duration", 0.5))
 		return 0.5
 	if arg_name.contains("velocity"):
 		return 1.0
 	if arg_name.contains("trigger") or arg_name.contains("time"):
+		if overrides.has("trigger_time"):
+			return float(overrides.get("trigger_time", 0.0))
 		return 0.0
 
 	# Type-driven defaults.
@@ -392,6 +464,100 @@ static func _default_arg_value(arg_info: Dictionary) -> Variant:
 		return ""
 
 	return 0.0
+
+
+static func _coerce_float_array(values_variant: Variant) -> Array:
+	var values: Array = []
+	if values_variant is Array:
+		var source: Array = values_variant as Array
+		for value_variant in source:
+			values.append(float(value_variant))
+	return values
+
+
+static func _midi_to_frequency(midi_note: int) -> float:
+	return 440.0 * pow(2.0, (float(midi_note) - 69.0) / 12.0)
+
+
+static func _normalize_chord_degree(chord_degree: String) -> String:
+	var token: String = chord_degree.to_lower().strip_edges()
+	token = token.replace(" ", "")
+	token = token.replace("dim", "")
+	token = token.replace("_", "")
+	token = token.replace("-", "")
+	var cleaned: String = ""
+	for i in range(token.length()):
+		var ch: String = token.substr(i, 1)
+		if (ch >= "a" and ch <= "z") or (ch >= "0" and ch <= "9"):
+			cleaned += ch
+	token = cleaned
+
+	var roman_candidates: Array[String] = ["vii", "vi", "iv", "iii", "ii", "v", "i"]
+	for candidate_variant in roman_candidates:
+		var candidate: String = str(candidate_variant)
+		if token.begins_with(candidate):
+			return candidate
+	return "i"
+
+
+static func _key_to_pitch_class(key_name: String) -> int:
+	var normalized_key: String = key_name.to_lower().strip_edges()
+	var key_map: Dictionary = {
+		"c": 0,
+		"c#": 1, "db": 1,
+		"d": 2,
+		"d#": 3, "eb": 3,
+		"e": 4,
+		"f": 5,
+		"f#": 6, "gb": 6,
+		"g": 7,
+		"g#": 8, "ab": 8,
+		"a": 9,
+		"a#": 10, "bb": 10,
+		"b": 11, "cb": 11,
+	}
+	return int(key_map.get(normalized_key, 0))
+
+
+static func _chord_degree_to_freqs(chord_degree: String, key_name: String = "C", scale_name: String = "major") -> Array:
+	var degree: String = _normalize_chord_degree(chord_degree)
+	var degree_map: Dictionary = {
+		"i": 0,
+		"ii": 1,
+		"iii": 2,
+		"iv": 3,
+		"v": 4,
+		"vi": 5,
+		"vii": 6,
+	}
+	var degree_index: int = int(degree_map.get(degree, 0))
+
+	var scale_intervals: Array = [0, 2, 4, 5, 7, 9, 11]
+	var lower_scale: String = scale_name.to_lower()
+	if lower_scale == "minor" or lower_scale == "aeolian" or lower_scale == "phrygian" or lower_scale == "dorian":
+		scale_intervals = [0, 2, 3, 5, 7, 8, 10]
+
+	var tonic_pitch_class: int = _key_to_pitch_class(key_name)
+	var tonic_midi: int = 60 + tonic_pitch_class
+
+	var root_interval: int = int(scale_intervals[degree_index % 7])
+	var third_index: int = (degree_index + 2) % 7
+	var fifth_index: int = (degree_index + 4) % 7
+	var third_interval: int = int(scale_intervals[third_index])
+	var fifth_interval: int = int(scale_intervals[fifth_index])
+	if third_index <= degree_index:
+		third_interval += 12
+	if fifth_index <= degree_index:
+		fifth_interval += 12
+
+	var root_midi: int = tonic_midi + root_interval
+	var third_midi: int = tonic_midi + third_interval
+	var fifth_midi: int = tonic_midi + fifth_interval
+	return [
+		_midi_to_frequency(root_midi),
+		_midi_to_frequency(third_midi),
+		_midi_to_frequency(fifth_midi),
+	]
 
 
 static func _resolve_bank_id(song_id: String) -> String:
@@ -416,6 +582,27 @@ static func _normalize_token(name: String) -> String:
 	return name.to_lower().strip_edges().replace(" ", "_").replace("-", "_")
 
 
+static func _find_sound_index(normalized_sounds: Array[String], target: String) -> int:
+	var normalized_target: String = _normalize_token(target)
+	if normalized_target.is_empty():
+		return -1
+
+	for i in range(normalized_sounds.size()):
+		if normalized_sounds[i] == normalized_target:
+			return i
+
+	# Avoid one/two-character partial matches (e.g. "i" matching "kick").
+	if normalized_target.length() < 3:
+		return -1
+
+	for i in range(normalized_sounds.size()):
+		var normalized_sound: String = normalized_sounds[i]
+		if normalized_sound.contains(normalized_target) or normalized_target.contains(normalized_sound):
+			return i
+
+	return -1
+
+
 static func _resolve_sound_name(layer_name: String, available_sounds: Array) -> String:
 	if available_sounds.is_empty():
 		return ""
@@ -425,10 +612,48 @@ static func _resolve_sound_name(layer_name: String, available_sounds: Array) -> 
 	for sound_variant in available_sounds:
 		normalized_sounds.append(_normalize_token(str(sound_variant)))
 
+	# Chord-degree labels can come from pattern row previews.
+	# Route them to harmony-like sounds rather than falling back to kick.
+	var roman_degree_tokens: Array[String] = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viio", "vii_dim"]
+	if roman_degree_tokens.has(normalized_layer):
+		for harmony_target in ["pad", "vocoder", "keys", "piano", "organ", "strings", "sequence"]:
+			var harmony_idx: int = _find_sound_index(normalized_sounds, harmony_target)
+			if harmony_idx >= 0:
+				return str(available_sounds[harmony_idx])
+
 	# 1) Exact normalized match.
 	for i in range(normalized_sounds.size()):
 		if normalized_sounds[i] == normalized_layer:
 			return str(available_sounds[i])
+
+	# 1.5) Keyword-to-sound targets for descriptive layer names.
+	var keyword_targets: Dictionary = {
+		"minimoog_bass": ["bass", "sub"],
+		"bassline": ["bass", "sub"],
+		"sequencer_line": ["sequence", "sequencer", "arp"],
+		"sequencer": ["sequence", "sequencer", "arp"],
+		"sequence": ["sequence", "sequencer", "arp"],
+		"arpeggio": ["sequence", "arp", "lead"],
+		"arp": ["sequence", "arp", "lead"],
+		"lead_melody": ["lead", "sequence", "vocoder", "arp"],
+		"melody": ["lead", "sequence", "vocoder", "arp"],
+		"vocoder_pad": ["vocoder", "pad"],
+		"vocoder": ["vocoder", "pad"],
+		"electric_percussion": ["electronic_perc", "perc", "hihat"],
+		"percussion": ["electronic_perc", "perc", "hihat"],
+	}
+	for keyword_variant in keyword_targets.keys():
+		var keyword: String = str(keyword_variant)
+		if not normalized_layer.contains(keyword):
+			continue
+		var targets_variant: Variant = keyword_targets.get(keyword_variant, [])
+		if not (targets_variant is Array):
+			continue
+		var targets: Array = targets_variant as Array
+		for target_variant in targets:
+			var match_index: int = _find_sound_index(normalized_sounds, str(target_variant))
+			if match_index >= 0:
+				return str(available_sounds[match_index])
 
 	# 2) Alias families.
 	var aliases: Dictionary = {
@@ -436,29 +661,67 @@ static func _resolve_sound_name(layer_name: String, available_sounds: Array) -> 
 		"bass": ["bass", "sub", "reese", "juno_bass", "filter_bass", "trance_bass"],
 		"pad": ["pad", "strings", "string_pad", "ambient_pad", "supersaw_pad"],
 		"lead": ["lead", "keys", "arp", "duck_lead", "supersaw_lead"],
-		"keys": ["keys", "piano", "chords", "lead"],
-		"perc": ["perc", "rim", "tom", "hihat_closed"],
+		"keys": ["keys", "piano", "chords", "pad", "organ", "rhodes", "vocoder", "lead"],
+		"perc": ["electronic_perc", "perc", "rim", "tom", "hihat", "hihat_closed"],
+		"percussion": ["electronic_perc", "perc", "rim", "tom", "hihat", "hihat_closed"],
+		"arp": ["sequence", "arp", "lead"],
+		"sequence": ["sequence", "arp", "lead"],
+		"sequencer": ["sequence", "arp", "lead"],
+		"vocoder": ["vocoder", "pad"],
 	}
 	for alias_key_variant in aliases.keys():
 		var alias_key: String = str(alias_key_variant)
 		if normalized_layer == alias_key or normalized_layer.contains(alias_key):
 			var candidates_variant: Variant = aliases[alias_key_variant]
 			if candidates_variant is Array:
-				var candidates: Array = candidates_variant
+				var candidates: Array = candidates_variant as Array
 				for candidate_variant in candidates:
-					var candidate: String = _normalize_token(str(candidate_variant))
-					for i in range(normalized_sounds.size()):
-						if normalized_sounds[i] == candidate:
-							return str(available_sounds[i])
+					var match_index: int = _find_sound_index(normalized_sounds, str(candidate_variant))
+					if match_index >= 0:
+						return str(available_sounds[match_index])
 
 	# 3) Partial containment.
 	for i in range(normalized_sounds.size()):
 		var normalized_sound: String = normalized_sounds[i]
-		if normalized_layer.contains(normalized_sound) or normalized_sound.contains(normalized_layer):
+		if normalized_layer.length() >= 3 and (normalized_layer.contains(normalized_sound) or normalized_sound.contains(normalized_layer)):
 			return str(available_sounds[i])
 
 	# 4) First available as last resort.
 	return str(available_sounds[0])
+
+
+static func _resolve_sound_name_with_preferred(layer_name: String, available_sounds: Array, preferred_sound: String) -> String:
+	if available_sounds.is_empty():
+		return ""
+
+	var preferred_normalized: String = _normalize_token(preferred_sound)
+	if not preferred_normalized.is_empty():
+		var normalized_sounds: Array[String] = []
+		for sound_variant in available_sounds:
+			normalized_sounds.append(_normalize_token(str(sound_variant)))
+
+		var preferred_index: int = _find_sound_index(normalized_sounds, preferred_normalized)
+		if preferred_index >= 0:
+			return str(available_sounds[preferred_index])
+
+		var role_targets: Dictionary = {
+			"drum": ["kick", "snare", "hihat", "clap", "perc"],
+			"bass": ["bass", "sub", "reese"],
+			"lead": ["lead", "keys", "vocoder", "arp"],
+			"pad": ["pad", "strings", "keys", "organ", "vocoder"],
+			"arp": ["sequence", "arp", "lead"],
+			"fx": ["noise", "fx", "perc"],
+		}
+		if role_targets.has(preferred_normalized):
+			var targets_variant: Variant = role_targets.get(preferred_normalized, [])
+			if targets_variant is Array:
+				var targets: Array = targets_variant as Array
+				for target_variant in targets:
+					var role_match_index: int = _find_sound_index(normalized_sounds, str(target_variant))
+					if role_match_index >= 0:
+						return str(available_sounds[role_match_index])
+
+	return _resolve_sound_name(layer_name, available_sounds)
 
 
 static func _coerce_pattern(pattern_variant: Variant, fallback: Array) -> Array:

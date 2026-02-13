@@ -43,6 +43,8 @@ var _current_words: Array = []
 var _original_params: Dictionary = {}
 var _current_pattern: Dictionary = {}
 var _pattern_overrides_by_section: Dictionary = {}
+var _last_pattern_preview_ms: int = -100000
+var _pending_preview_context: Dictionary = {}
 
 # UI Components
 var _header_label: Label
@@ -62,6 +64,10 @@ var _evaluation_container: VBoxContainer
 var _pattern_tab: Control
 var _pattern_editor: Control  # Will be DrumSequencer, BassTimeline, ChordTimeline, or ArpeggioEditor
 var _pattern_type_label: Label
+var _pattern_toolbar: HBoxContainer
+var _pattern_preset_dropdown: OptionButton
+var _pattern_apply_preset_btn: Button
+var _active_pattern_family: String = "generic"
 
 # FX Tab  
 var _fx_tab: Control
@@ -155,6 +161,15 @@ const LEAD_SOUNDS = ["lead", "melody", "hook", "solo", "pluck"]
 const CHORD_SOUNDS = ["pad", "keys", "rhodes", "strings", "piano", "organ", "stab"]
 const ARP_SOUNDS = ["arp", "sequence", "sequencer", "jupiter_arp"]
 const GLOBAL_SECTION_KEY = "__global__"
+const DEFAULT_PATTERN_STEPS = 16
+const PATTERN_PREVIEW_COOLDOWN_MS = 120
+const PATTERN_PRESET_OPTIONS = {
+	"drums": ["Four on Floor", "Broken Beat", "Half Time", "Sparse"],
+	"bass": ["Root Pulse", "Offbeat Bounce", "Syncopated", "Sparse Sub"],
+	"lead": ["Hook Phrase", "Staccato Run", "Call and Response", "Long Tone"],
+	"chord": ["Pop 1-5-6-4", "Minor Flow", "Slow Pads", "Sparse Stabs"],
+	"arp": ["Up 1/8", "Down 1/16", "Up-Down Trance", "Random Texture"],
+}
 
 
 func _ready():
@@ -330,6 +345,28 @@ func _setup_pattern_tab():
 	_pattern_type_label.add_theme_font_size_override("font_size", 14)
 	_pattern_type_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.65))
 	_pattern_tab.add_child(_pattern_type_label)
+
+	_pattern_toolbar = HBoxContainer.new()
+	_pattern_toolbar.add_theme_constant_override("separation", 8)
+	_pattern_tab.add_child(_pattern_toolbar)
+
+	var preset_label = Label.new()
+	preset_label.text = "Preset:"
+	preset_label.add_theme_font_size_override("font_size", 12)
+	preset_label.add_theme_color_override("font_color", Color(0.62, 0.66, 0.74))
+	_pattern_toolbar.add_child(preset_label)
+
+	_pattern_preset_dropdown = OptionButton.new()
+	_pattern_preset_dropdown.custom_minimum_size.x = 180
+	_pattern_preset_dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_pattern_toolbar.add_child(_pattern_preset_dropdown)
+
+	_pattern_apply_preset_btn = Button.new()
+	_pattern_apply_preset_btn.text = "Apply Preset"
+	_pattern_apply_preset_btn.pressed.connect(Callable(self, "_on_pattern_apply_preset_pressed"))
+	_style_button(_pattern_apply_preset_btn, Color(0.35, 0.4, 0.56))
+	_pattern_toolbar.add_child(_pattern_apply_preset_btn)
+	call_deferred("_refresh_pattern_preset_options", "")
 	
 	# Pattern editor placeholder (will be replaced with appropriate editor)
 	var placeholder = Label.new()
@@ -518,10 +555,13 @@ func _setup_pattern_editor_for_layer(layer: String):
 		placeholder.queue_free()
 	
 	var layer_lower = layer.to_lower()
+
+	_active_pattern_family = _get_pattern_layer_family(layer_lower)
+	_refresh_pattern_preset_options(layer)
 	
 	# Determine editor type and create appropriate editor
-	if _is_drum_layer(layer_lower):
-		_pattern_type_label.text = "ðŸ¥ Drum Sequencer for: %s" % layer
+	if _active_pattern_family == "drums":
+		_pattern_type_label.text = "Drum Sequencer: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = DrumPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -530,8 +570,8 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor = DrumSequencer.new()
 			_pattern_editor.pattern_changed.connect(_on_drum_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_pattern_preview)
-	elif _is_bass_layer(layer_lower):
-		_pattern_type_label.text = "ðŸŽ¸ Bass Timeline for: %s" % layer
+	elif _active_pattern_family == "bass":
+		_pattern_type_label.text = "Bass Timeline: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = BassPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -540,8 +580,8 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor = BassTimeline.new()
 			_pattern_editor.pattern_changed.connect(_on_bass_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_bass_preview)
-	elif _is_lead_layer(layer_lower):
-		_pattern_type_label.text = "ðŸŽ¹ Lead/Melody Editor for: %s" % layer
+	elif _active_pattern_family == "lead":
+		_pattern_type_label.text = "Lead Melody Editor: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = LeadPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -550,8 +590,8 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor = BassTimeline.new()
 			_pattern_editor.pattern_changed.connect(_on_bass_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_bass_preview)
-	elif _is_chord_layer(layer_lower):
-		_pattern_type_label.text = "ðŸŽ¹ Chord Timeline for: %s" % layer
+	elif _active_pattern_family == "chord":
+		_pattern_type_label.text = "Pad/Chord Progression: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ChordPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -560,8 +600,8 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor = ChordTimeline.new()
 			_pattern_editor.pattern_changed.connect(_on_chord_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_chord_preview)
-	elif _is_arp_layer(layer_lower):
-		_pattern_type_label.text = "ðŸŽµ Arpeggio Editor for: %s" % layer
+	elif _active_pattern_family == "arp":
+		_pattern_type_label.text = "Arpeggio Motion: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ArpPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -571,18 +611,33 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.pattern_changed.connect(_on_arp_pattern_changed)
 			_pattern_editor.preview_requested.connect(_on_arp_preview)
 	else:
-		# Default to drum pattern editor for unknown
-		_pattern_type_label.text = "ðŸŽµ Pattern Editor for: %s (generic)" % layer
+		_pattern_type_label.text = "Pattern Editor: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = DrumPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_pattern_preview)
 		else:
 			_pattern_editor = DrumSequencer.new()
 			_pattern_editor.pattern_changed.connect(_on_drum_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_pattern_preview)
 	
 	if _pattern_editor:
 		_pattern_editor.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		_pattern_tab.add_child(_pattern_editor)
+
+
+func _get_pattern_layer_family(layer: String) -> String:
+	if _is_drum_layer(layer):
+		return "drums"
+	if _is_bass_layer(layer):
+		return "bass"
+	if _is_lead_layer(layer):
+		return "lead"
+	if _is_chord_layer(layer):
+		return "chord"
+	if _is_arp_layer(layer):
+		return "arp"
+	return "generic"
 
 
 func _is_drum_layer(layer: String) -> bool:
@@ -656,20 +711,10 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 					_pattern_editor.load_patterns(override_drum_patterns)
 					return
 			
-			var drum_patterns = {}
-			for key in patterns.keys():
-				if _is_drum_layer(key.to_lower()):
-					drum_patterns[key] = patterns[key]
-			
-			if patterns.has(layer):
-				drum_patterns[layer] = patterns[layer]
-			
-			if not drum_patterns.is_empty():
-				_pattern_editor.load_patterns(drum_patterns)
-			else:
-				var single_pattern = {}
-				single_pattern[layer] = patterns.get(layer, [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0])
-				_pattern_editor.load_patterns(single_pattern)
+			var drum_patterns = _extract_drum_patterns(patterns, layer)
+			if drum_patterns.is_empty():
+				drum_patterns = _build_drum_preset_data("Four on Floor")
+			_pattern_editor.load_patterns(drum_patterns)
 		
 		elif _pattern_editor is LeadPatternEditor:
 			if not layer_override.is_empty() and layer_override.has("pattern"):
@@ -679,8 +724,15 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 					layer_override.get("glides", [])
 				)
 				return
-			if patterns.has(layer):
-				_pattern_editor.load_pattern(patterns[layer], [], [])
+			var lead_pattern = _find_pattern_array(patterns, layer, LEAD_SOUNDS)
+			var lead_data = _build_melodic_preset_data("lead", "Hook Phrase")
+			if not lead_pattern.is_empty():
+				lead_data["pattern"] = lead_pattern
+			_pattern_editor.load_pattern(
+				lead_data.get("pattern", []),
+				lead_data.get("notes", []),
+				lead_data.get("glides", [])
+			)
 		
 		elif _pattern_editor is BassPatternEditor:
 			if not layer_override.is_empty() and layer_override.has("pattern"):
@@ -697,33 +749,53 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 				var pattern_song_id = _resolve_pattern_song_id(song_id)
 				bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(pattern_song_id, {})
 			
+			var bass_data = _build_melodic_preset_data("bass", "Root Pulse")
+			var fallback_bass_pattern = _find_pattern_array(patterns, layer, BASS_SOUNDS)
 			if bass_cfg.has("pattern"):
-				var notes = bass_cfg.get("notes", [])
-				var glides = bass_cfg.get("glides", [])
-				_pattern_editor.load_pattern(bass_cfg["pattern"], notes, glides)
+				bass_data["pattern"] = bass_cfg["pattern"]
+				bass_data["notes"] = bass_cfg.get("notes", [])
+				bass_data["glides"] = bass_cfg.get("glides", [])
+			elif not fallback_bass_pattern.is_empty():
+				bass_data["pattern"] = fallback_bass_pattern
+			_pattern_editor.load_pattern(
+				bass_data.get("pattern", []),
+				bass_data.get("notes", []),
+				bass_data.get("glides", [])
+			)
 		
 		elif _pattern_editor is ChordPatternEditor:
 			if not layer_override.is_empty() and layer_override.has("pattern"):
+				var override_pattern = layer_override.get("pattern", [])
+				var override_chords = layer_override.get("chords", [])
+				if override_chords.is_empty():
+					override_chords = _build_chord_steps_from_pattern(override_pattern)
 				_pattern_editor.load_pattern(
-					layer_override.get("pattern", []),
-					layer_override.get("chords", []),
+					override_pattern,
+					override_chords,
 					layer_override.get("voicings", []),
 					layer_override.get("sustains", [])
 				)
 				return
-			if patterns.has(layer):
-				_pattern_editor.load_pattern(patterns[layer])
+			var chord_pattern = _find_pattern_array(patterns, layer, CHORD_SOUNDS)
+			if chord_pattern.is_empty():
+				var default_chord = _build_chord_preset_data("Pop 1-5-6-4")
+				_pattern_editor.load_pattern(
+					default_chord.get("pattern", []),
+					default_chord.get("chords", []),
+					default_chord.get("voicings", []),
+					default_chord.get("sustains", [])
+				)
+			else:
+				var generated_chords = _build_chord_steps_from_pattern(chord_pattern)
+				var generated_voicings = _build_constant_int_steps(0)
+				var generated_sustains = _build_false_steps()
+				_pattern_editor.load_pattern(chord_pattern, generated_chords, generated_voicings, generated_sustains)
 		
 		elif _pattern_editor is ArpPatternEditor:
 			if not layer_override.is_empty():
 				_pattern_editor.load_settings(layer_override)
 				return
-			var settings = {
-				"direction": "up",
-				"rate": "1/8",
-				"octave_range": 1,
-				"gate_length": 0.8,
-			}
+			var settings = _build_arp_preset_data("Up 1/8")
 			_pattern_editor.load_settings(settings)
 		return
 	
@@ -741,23 +813,10 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 				_pattern_editor.load_patterns(override_drum_patterns)
 				return
 		
-		# For drums, we might need to filter or load specific patterns
-		var drum_patterns = {}
-		for key in patterns.keys():
-			if _is_drum_layer(key.to_lower()):
-				drum_patterns[key] = patterns[key]
-		
-		# If loading a specific drum layer, show that plus related drums
-		if patterns.has(layer):
-			drum_patterns[layer] = patterns[layer]
-		
-		if not drum_patterns.is_empty():
-			_pattern_editor.load_patterns(drum_patterns)
-		else:
-			# Load with just the current layer
-			var single_pattern = {}
-			single_pattern[layer] = patterns.get(layer, [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0])
-			_pattern_editor.load_patterns(single_pattern)
+		var drum_patterns = _extract_drum_patterns(patterns, layer)
+		if drum_patterns.is_empty():
+			drum_patterns = _build_drum_preset_data("Four on Floor")
+		_pattern_editor.load_patterns(drum_patterns)
 	
 	elif _pattern_editor is BassTimeline:
 		if not layer_override.is_empty() and layer_override.has("pattern"):
@@ -773,15 +832,19 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 		
 		if bass_cfg.has("pattern"):
 			_pattern_editor.load_pattern(bass_cfg["pattern"])
+		else:
+			_pattern_editor.load_pattern(_build_melodic_preset_data("bass", "Root Pulse").get("pattern", []))
 	
 	elif _pattern_editor is ChordTimeline:
 		if not layer_override.is_empty() and layer_override.has("pattern"):
 			_pattern_editor.load_pattern(layer_override.get("pattern", []))
 			return
 		
-		# Load chord pattern (from pad/keys pattern if exists)
-		if patterns.has(layer):
-			_pattern_editor.load_pattern(patterns[layer])
+		var chord_pattern = _find_pattern_array(patterns, layer, CHORD_SOUNDS)
+		if chord_pattern.is_empty():
+			_pattern_editor.load_pattern(_build_chord_preset_data("Pop 1-5-6-4").get("pattern", []))
+		else:
+			_pattern_editor.load_pattern(chord_pattern)
 
 	elif _pattern_editor is ArpeggioEditor:
 		if not layer_override.is_empty():
@@ -796,6 +859,351 @@ func _load_pattern_for_layer(song_id: String, layer: String):
 			"gate_length": 0.8,
 		}
 		_pattern_editor.load_settings(settings)
+
+
+func _refresh_pattern_preset_options(layer: String):
+	if _pattern_preset_dropdown == null:
+		return
+	
+	var family = _active_pattern_family
+	if not layer.is_empty():
+		family = _get_pattern_layer_family(layer.to_lower())
+	_active_pattern_family = family
+	
+	_pattern_preset_dropdown.clear()
+	var presets: Array = _get_pattern_presets_for_family(family)
+	if presets.is_empty():
+		_pattern_preset_dropdown.add_item("No presets")
+		_pattern_preset_dropdown.disabled = true
+		if _pattern_apply_preset_btn:
+			_pattern_apply_preset_btn.disabled = true
+		return
+	
+	_pattern_preset_dropdown.disabled = false
+	for preset_name in presets:
+		_pattern_preset_dropdown.add_item(str(preset_name))
+	_pattern_preset_dropdown.selected = 0
+	if _pattern_apply_preset_btn:
+		_pattern_apply_preset_btn.disabled = false
+
+
+func _get_pattern_presets_for_family(family: String) -> Array:
+	var raw_presets: Variant = PATTERN_PRESET_OPTIONS.get(family, [])
+	if raw_presets is Array:
+		return raw_presets
+	return []
+
+
+func _on_pattern_apply_preset_pressed():
+	if _pattern_editor == null or _pattern_preset_dropdown == null:
+		return
+	var item_count: int = _pattern_preset_dropdown.get_item_count()
+	if _pattern_preset_dropdown.disabled or item_count <= 0:
+		return
+	
+	var selected_idx: int = _pattern_preset_dropdown.selected
+	if selected_idx < 0 or selected_idx >= item_count:
+		return
+	
+	var preset_name: String = _pattern_preset_dropdown.get_item_text(selected_idx)
+	if preset_name == "No presets":
+		return
+	
+	_apply_pattern_preset_to_editor(_active_pattern_family, preset_name)
+	_emit_current_pattern_from_editor()
+
+
+func _apply_pattern_preset_to_editor(family: String, preset_name: String):
+	if family == "drums":
+		var drum_data = _build_drum_preset_data(preset_name)
+		if _pattern_editor is DrumPatternEditor or _pattern_editor is DrumSequencer:
+			_pattern_editor.load_patterns(drum_data)
+		return
+	
+	if family == "bass" or family == "lead":
+		var melodic_data = _build_melodic_preset_data(family, preset_name)
+		if _pattern_editor is BassPatternEditor or _pattern_editor is LeadPatternEditor:
+			_pattern_editor.load_pattern(
+				melodic_data.get("pattern", []),
+				melodic_data.get("notes", []),
+				melodic_data.get("glides", [])
+			)
+		elif _pattern_editor is BassTimeline:
+			_pattern_editor.load_pattern(melodic_data.get("pattern", []))
+		return
+	
+	if family == "chord":
+		var chord_data = _build_chord_preset_data(preset_name)
+		if _pattern_editor is ChordPatternEditor:
+			_pattern_editor.load_pattern(
+				chord_data.get("pattern", []),
+				chord_data.get("chords", []),
+				chord_data.get("voicings", []),
+				chord_data.get("sustains", [])
+			)
+		elif _pattern_editor is ChordTimeline:
+			_pattern_editor.load_pattern(chord_data.get("pattern", []))
+		return
+	
+	if family == "arp":
+		var arp_data = _build_arp_preset_data(preset_name)
+		if _pattern_editor is ArpPatternEditor:
+			_pattern_editor.load_settings(arp_data)
+		elif _pattern_editor is ArpeggioEditor:
+			_pattern_editor.load_settings({
+				"pattern": arp_data.get("direction", "up"),
+				"rate": arp_data.get("rate", "1/8"),
+				"octave_range": arp_data.get("octave_range", 1),
+				"gate_length": arp_data.get("gate_length", 0.8),
+			})
+
+
+func _emit_current_pattern_from_editor():
+	if _pattern_editor and _pattern_editor.has_method("get_pattern_data"):
+		var raw_data: Variant = _pattern_editor.get_pattern_data()
+		if raw_data is Dictionary:
+			var pattern_data: Dictionary = raw_data
+			_current_pattern = pattern_data
+			pattern_changed.emit(_current_layer, pattern_data)
+
+
+func _build_steps_from_indices(indices: Array, value: float = 1.0) -> Array:
+	var steps = []
+	for i in range(DEFAULT_PATTERN_STEPS):
+		steps.append(0.0)
+	for raw_step in indices:
+		var step = int(raw_step)
+		if step >= 0 and step < DEFAULT_PATTERN_STEPS:
+			steps[step] = value
+	return steps
+
+
+func _build_false_steps() -> Array:
+	var values = []
+	for i in range(DEFAULT_PATTERN_STEPS):
+		values.append(false)
+	return values
+
+
+func _build_constant_int_steps(value: int) -> Array:
+	var values = []
+	for i in range(DEFAULT_PATTERN_STEPS):
+		values.append(value)
+	return values
+
+
+func _build_constant_note_steps(note: int) -> Array:
+	var values = []
+	for i in range(DEFAULT_PATTERN_STEPS):
+		values.append(note)
+	return values
+
+
+func _build_note_steps_from_pattern(pattern: Array, note_pool: Array, fallback_note: int) -> Array:
+	var notes = _build_constant_note_steps(fallback_note)
+	if note_pool.is_empty():
+		return notes
+	
+	var note_idx = 0
+	var max_steps: int = mini(DEFAULT_PATTERN_STEPS, pattern.size())
+	for step in range(max_steps):
+		if float(pattern[step]) > 0.0:
+			notes[step] = int(note_pool[note_idx % note_pool.size()])
+			note_idx += 1
+	return notes
+
+
+func _extract_drum_patterns(patterns: Dictionary, layer: String) -> Dictionary:
+	var drum_patterns = {}
+	for key in patterns.keys():
+		var key_name = str(key)
+		if patterns[key] is Array and _is_drum_layer(key_name.to_lower()):
+			drum_patterns[key_name] = patterns[key]
+	
+	if patterns.has(layer) and patterns[layer] is Array:
+		drum_patterns[layer] = patterns[layer]
+	
+	if drum_patterns.is_empty():
+		var layer_pattern = _find_pattern_array(patterns, layer, DRUM_SOUNDS)
+		if not layer_pattern.is_empty():
+			drum_patterns[layer] = layer_pattern
+	
+	return drum_patterns
+
+
+func _find_pattern_array(patterns: Dictionary, layer: String, aliases: Array) -> Array:
+	if patterns.has(layer) and patterns[layer] is Array:
+		return patterns[layer]
+	
+	var layer_lower = layer.to_lower()
+	for key in patterns.keys():
+		var key_name = str(key)
+		if key_name.to_lower() == layer_lower and patterns[key] is Array:
+			return patterns[key]
+	
+	for alias in aliases:
+		var alias_name = str(alias)
+		if patterns.has(alias_name) and patterns[alias_name] is Array:
+			return patterns[alias_name]
+	
+	for key in patterns.keys():
+		var key_name = str(key).to_lower()
+		if not (patterns[key] is Array):
+			continue
+		for alias in aliases:
+			var alias_name = str(alias).to_lower()
+			if alias_name in key_name:
+				return patterns[key]
+	
+	return []
+
+
+func _build_drum_preset_data(preset_name: String) -> Dictionary:
+	var kick_indices = [0, 4, 8, 12]
+	var snare_indices = [4, 12]
+	var hihat_indices = [2, 6, 10, 14]
+	var clap_indices = [4, 12]
+	
+	match preset_name:
+		"Broken Beat":
+			kick_indices = [0, 6, 9, 14]
+			snare_indices = [4, 12]
+			hihat_indices = [1, 3, 5, 7, 9, 11, 13, 15]
+			clap_indices = [12]
+		"Half Time":
+			kick_indices = [0, 7, 10]
+			snare_indices = [8]
+			hihat_indices = [2, 6, 10, 14]
+			clap_indices = [8]
+		"Sparse":
+			kick_indices = [0, 12]
+			snare_indices = [8]
+			hihat_indices = [4, 14]
+			clap_indices = []
+	
+	return {
+		"kick": _build_steps_from_indices(kick_indices),
+		"snare": _build_steps_from_indices(snare_indices),
+		"hihat": _build_steps_from_indices(hihat_indices),
+		"clap": _build_steps_from_indices(clap_indices),
+	}
+
+
+func _build_melodic_preset_data(family: String, preset_name: String) -> Dictionary:
+	var is_bass = (family == "bass")
+	var base_note = 36 if is_bass else 60
+	var pattern = _build_steps_from_indices([0, 4, 8, 12])
+	var note_pool = [base_note]
+	
+	if is_bass:
+		match preset_name:
+			"Offbeat Bounce":
+				pattern = _build_steps_from_indices([2, 6, 10, 14])
+				note_pool = [36, 36, 38, 36]
+			"Syncopated":
+				pattern = _build_steps_from_indices([0, 3, 6, 10, 14])
+				note_pool = [36, 38, 41, 38, 36]
+			"Sparse Sub":
+				pattern = _build_steps_from_indices([0, 10])
+				note_pool = [35, 38]
+			_:
+				pattern = _build_steps_from_indices([0, 4, 8, 12])
+				note_pool = [36, 36, 38, 36]
+	else:
+		match preset_name:
+			"Staccato Run":
+				pattern = _build_steps_from_indices([0, 2, 4, 6, 8, 10, 12, 14])
+				note_pool = [60, 62, 64, 67, 69, 67, 64, 62]
+			"Call and Response":
+				pattern = _build_steps_from_indices([0, 1, 2, 8, 9, 10, 14])
+				note_pool = [64, 67, 69, 60, 62, 64, 67]
+			"Long Tone":
+				pattern = _build_steps_from_indices([0])
+				note_pool = [67]
+			_:
+				pattern = _build_steps_from_indices([0, 2, 3, 6, 8, 11, 14])
+				note_pool = [64, 67, 69, 67, 65, 64, 62]
+	
+	var notes = _build_note_steps_from_pattern(pattern, note_pool, base_note)
+	var glides = _build_false_steps()
+	return {
+		"pattern": pattern,
+		"notes": notes,
+		"glides": glides,
+	}
+
+
+func _build_chord_preset_data(preset_name: String) -> Dictionary:
+	var pattern = _build_steps_from_indices([0, 4, 8, 12])
+	var progression = ["I", "V", "vi", "IV"]
+	
+	match preset_name:
+		"Minor Flow":
+			pattern = _build_steps_from_indices([0, 4, 8, 12])
+			progression = ["vi", "IV", "I", "V"]
+		"Slow Pads":
+			pattern = _build_steps_from_indices([0, 8])
+			progression = ["I", "vi"]
+		"Sparse Stabs":
+			pattern = _build_steps_from_indices([2, 6, 10, 14])
+			progression = ["I", "IV", "V", "vi"]
+	
+	return {
+		"pattern": pattern,
+		"chords": _build_chord_steps_from_pattern(pattern, progression),
+		"voicings": _build_constant_int_steps(0),
+		"sustains": _build_false_steps(),
+	}
+
+
+func _build_chord_steps_from_pattern(pattern: Array, progression: Array = []) -> Array:
+	var chord_steps = []
+	for i in range(DEFAULT_PATTERN_STEPS):
+		chord_steps.append("rest")
+	
+	var prog: Array = progression
+	if prog.is_empty():
+		prog = ["I", "V", "vi", "IV"]
+	
+	var chord_idx = 0
+	var max_steps: int = mini(DEFAULT_PATTERN_STEPS, pattern.size())
+	for step in range(max_steps):
+		if float(pattern[step]) > 0.0:
+			chord_steps[step] = prog[chord_idx % prog.size()]
+			chord_idx += 1
+	
+	return chord_steps
+
+
+func _build_arp_preset_data(preset_name: String) -> Dictionary:
+	var settings = {
+		"direction": "up",
+		"rate": "1/8",
+		"octave_range": 1,
+		"gate_length": 0.8,
+		"swing": 0.0,
+		"velocity_curve": "flat",
+	}
+	
+	match preset_name:
+		"Down 1/16":
+			settings["direction"] = "down"
+			settings["rate"] = "1/16"
+			settings["gate_length"] = 0.65
+		"Up-Down Trance":
+			settings["direction"] = "up_down"
+			settings["rate"] = "1/16"
+			settings["octave_range"] = 2
+			settings["gate_length"] = 0.75
+		"Random Texture":
+			settings["direction"] = "random"
+			settings["rate"] = "1/8T"
+			settings["octave_range"] = 3
+			settings["gate_length"] = 0.55
+			settings["swing"] = 8.0
+			settings["velocity_curve"] = "crescendo"
+	
+	return settings
 
 
 func _resolve_pattern_song_id(song_id: String) -> String:
@@ -880,30 +1288,68 @@ func _on_arp_pattern_changed(settings: Dictionary):
 
 
 func _on_pattern_preview(element: String):
-	preview_requested.emit(element)
+	_pending_preview_context = {
+		"step_preview": true,
+		"preview_source": "pattern_row"
+	}
+	_emit_preview_request(element)
 
 
-func _on_bass_preview(_note: int):
-	preview_requested.emit(_current_layer)
+func _on_bass_preview(note: int):
+	_pending_preview_context = {
+		"step_preview": true,
+		"preview_source": "bass_step",
+		"preview_note": note
+	}
+	_emit_preview_request(_current_layer)
 
 
-func _on_chord_preview(_chord: Array):
-	preview_requested.emit(_current_layer)
+func _on_chord_preview(chord: Variant):
+	var pattern_data: Dictionary = get_current_pattern()
+	_pending_preview_context = {
+		"step_preview": true,
+		"preview_source": "chord_step",
+		"chord_degree": str(chord),
+		"key": str(pattern_data.get("key", "C")),
+		"scale": str(pattern_data.get("scale", "major"))
+	}
+	_emit_preview_request(_current_layer)
 
 
-func _on_arp_preview():
-	preview_requested.emit(_current_layer)
+func _on_arp_preview(note: Variant = null):
+	_pending_preview_context = {
+		"step_preview": true,
+		"preview_source": "arp_step"
+	}
+	if note is int or note is float:
+		_pending_preview_context["preview_note"] = int(note)
+	_emit_preview_request(_current_layer)
+
+
+func _emit_preview_request(request_layer: String, force: bool = false):
+	var layer_name: String = request_layer if not request_layer.is_empty() else _current_layer
+	if layer_name.is_empty():
+		return
+	if not force:
+		var now_ms: int = Time.get_ticks_msec()
+		if (now_ms - _last_pattern_preview_ms) < PATTERN_PREVIEW_COOLDOWN_MS:
+			return
+		_last_pattern_preview_ms = now_ms
+	preview_requested.emit(layer_name)
 
 
 func _detect_layer_type(layer: String) -> String:
 	"""Detect layer type from name for param definitions"""
-	var lower = layer.to_lower()
-	if "bass" in lower: return "bass"
-	if "pad" in lower: return "pad"
-	if "lead" in lower: return "lead"
-	if "drums" in lower or "kick" in lower or "snare" in lower: return "drums"
-	if "arp" in lower or "seq" in lower: return "arp"
-	return "pad"  # Default
+	var family = _get_pattern_layer_family(layer.to_lower())
+	if family == "bass":
+		return "bass"
+	if family == "lead":
+		return "lead"
+	if family == "drums":
+		return "drums"
+	if family == "arp":
+		return "arp"
+	return "pad"
 
 
 # === REBUILD UI ===
@@ -1384,7 +1830,41 @@ func _on_add_word_pressed():
 
 
 func _on_preview_pressed():
-	preview_requested.emit(_current_layer)
+	_pending_preview_context = _build_manual_preview_context()
+	_emit_preview_request(_current_layer, true)
+
+
+func consume_preview_context() -> Dictionary:
+	var context: Dictionary = _pending_preview_context.duplicate(true)
+	_pending_preview_context.clear()
+	return context
+
+
+func _build_manual_preview_context() -> Dictionary:
+	var context: Dictionary = {
+		"step_preview": false,
+		"preview_source": "manual"
+	}
+	var pattern_data: Dictionary = get_current_pattern()
+	if pattern_data.is_empty():
+		return context
+	
+	if pattern_data.has("pattern") and pattern_data["pattern"] is Array:
+		context["pattern"] = pattern_data["pattern"].duplicate()
+	if pattern_data.has("notes") and pattern_data["notes"] is Array:
+		context["notes"] = pattern_data["notes"].duplicate()
+	if pattern_data.has("chords") and pattern_data["chords"] is Array:
+		context["chords"] = pattern_data["chords"].duplicate()
+	if pattern_data.has("key"):
+		context["key"] = pattern_data["key"]
+	if pattern_data.has("scale"):
+		context["scale"] = pattern_data["scale"]
+	if pattern_data.has("direction"):
+		context["direction"] = pattern_data["direction"]
+	if pattern_data.has("rate"):
+		context["rate"] = pattern_data["rate"]
+	
+	return context
 
 
 func _on_reset_pressed():

@@ -1,0 +1,331 @@
+{
+  "registry_info": {
+    "name": "physics_simulation",
+    "description": "Physics simulation artifacts — from Newton's laws and numerical integration through rigid bodies, spring systems, fluid dynamics, and beyond. A comprehensive tour of classical mechanics rendered interactive.",
+    "category": "physics",
+    "theoretical_grounding": "Classical mechanics, Newtonian dynamics, numerical methods (Euler/Verlet/RK4), continuum mechanics, Lagrangian and Hamiltonian frameworks, computational physics"
+  },
+  "artifacts": {
+    "newtons_laws": {
+      "lookup_name": "newtons_laws",
+      "scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
+      "name": "Newton's Laws",
+      "description": "Interactive visualization of Newton's three laws of motion: inertia (an object at rest stays at rest), F=ma (force produces acceleration proportional to mass), and action-reaction (every force has an equal opposite). Objects of varying mass respond to applied forces, making the relationship between force, mass, and acceleration viscerally tangible.",
+      "qfep_connection": "Newton's laws as the foundational grammar of physical order — F=ma is the simplest lambda mapping force to motion, the irreducible rule from which all mechanical complexity emerges.",
+      "category": "physics",
+      "complexity": "beginner",
+      "dev_themes": ["classical_mechanics", "foundations", "force", "acceleration"],
+      "dev_category": "physics_foundations",
+      "tags": ["newton", "force", "mass", "acceleration", "inertia", "action_reaction", "f_equals_ma", "classical_mechanics", "beginner", "foundations"]
+    },
+    "numerical_integration": {
+      "lookup_name": "numerical_integration",
+      "scene": "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
+      "name": "Numerical Integration Methods",
+      "description": "Side-by-side comparison of numerical integration schemes: forward Euler (simple but drifty), symplectic Euler (energy-preserving), and RK4 (fourth-order accuracy). Watch identical initial conditions diverge as each method accumulates different error profiles over time. The gap between the curves is the price of computational shortcuts.",
+      "qfep_connection": "Integration methods as different lambda functions approximating the same continuous truth — discretization introduces entropy (numerical error), and the choice of method determines how much order is preserved across time steps.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["numerical_methods", "integration", "accuracy", "stability"],
+      "dev_category": "physics_foundations",
+      "tags": ["euler", "rk4", "symplectic", "integration", "numerical_methods", "time_stepping", "error", "stability", "comparison"]
+    },
+    "verlet_integration": {
+      "lookup_name": "verlet_integration",
+      "scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
+      "name": "Verlet Integration",
+      "description": "Position-based Verlet integration — the workhorse of game physics and molecular dynamics. Instead of tracking velocity explicitly, it infers motion from the difference between current and previous positions. This makes it naturally stable, time-reversible, and beautifully simple: x_new = 2x_current - x_old + a·dt².",
+      "qfep_connection": "Verlet as elegant order-preservation — by encoding velocity implicitly in position history, it sidesteps the entropy accumulation that plagues explicit velocity methods. Simplicity as a route to stability.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["numerical_methods", "verlet", "position_based", "stability"],
+      "dev_category": "physics_foundations",
+      "tags": ["verlet", "integration", "position_based", "stable", "time_reversible", "molecular_dynamics", "game_physics"]
+    },
+    "rigid_body": {
+      "lookup_name": "rigid_body",
+      "scene": "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
+      "name": "Rigid Body Dynamics",
+      "description": "Full rigid body simulation with linear and angular motion. Watch objects translate, rotate, and tumble under applied forces and torques. Demonstrates moment of inertia tensors, angular momentum conservation, and the coupling between linear and rotational dynamics that makes a thrown wrench wobble differently than a thrown ball.",
+      "qfep_connection": "Rigid bodies as the emergence of rotational complexity from simple force rules — angular momentum conservation as a deep symmetry (Noether's theorem), where rotational order persists even as translational chaos increases.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["rigid_body", "rotation", "angular_momentum", "torque"],
+      "dev_category": "physics_bodies",
+      "tags": ["rigid_body", "rotation", "angular_momentum", "torque", "inertia_tensor", "dynamics", "tumbling"]
+    },
+    "collision_detection": {
+      "lookup_name": "collision_detection",
+      "scene": "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
+      "name": "Collision Detection",
+      "description": "Two-phase collision detection pipeline: broad phase (spatial hashing, bounding boxes) rapidly culls impossible pairs, then narrow phase (GJK/SAT algorithms) computes exact contact points, penetration depth, and collision normals. Visualizes the acceleration structures that make real-time physics possible — without them, checking every pair is O(n²) death.",
+      "qfep_connection": "Collision detection as the boundary between order and disorder — the moment two objects meet is a phase transition where kinetic energy redistributes. The algorithm itself is a lambda that converts spatial proximity into contact events.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["collision", "gjk", "sat", "broad_phase", "narrow_phase"],
+      "dev_category": "physics_bodies",
+      "tags": ["collision", "detection", "gjk", "sat", "broad_phase", "narrow_phase", "contact_points", "spatial_hashing", "bounding_box", "optimization"]
+    },
+    "constraints": {
+      "lookup_name": "constraints",
+      "scene": "res://algorithms/physicssimulation/constraints/constraints.tscn",
+      "name": "Constraints & Joints",
+      "description": "Joint constraints that restrict rigid body degrees of freedom: hinges (1 rotational DOF), sliders (1 translational DOF), ball-and-socket (3 rotational DOF), and fixed joints. Watch how iterative constraint solvers project invalid states back onto the constraint manifold, enforcing physical laws as geometric relationships.",
+      "qfep_connection": "Constraints as imposed order — reducing the phase space of possible configurations. Each joint is a lambda that maps free motion onto a restricted manifold, and the solver's iterations are entropy reduction in action.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["constraints", "joints", "degrees_of_freedom", "solver"],
+      "dev_category": "physics_bodies",
+      "tags": ["constraints", "joints", "hinge", "slider", "ball_socket", "degrees_of_freedom", "solver", "iterative", "manifold"]
+    },
+    "bouncing_ball": {
+      "lookup_name": "bouncing_ball",
+      "scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
+      "name": "Bouncing Ball",
+      "description": "The quintessential physics demo: a ball bouncing under gravity with configurable coefficient of restitution. At e=1.0, perfectly elastic — energy conserved, bounces forever. Below 1.0, each impact dissipates energy as heat and sound, and the ball gradually dies. A complete parabolic trajectory with collision response in the simplest possible package.",
+      "qfep_connection": "The coefficient of restitution as a direct entropy dial — e=1 preserves all kinetic order, e<1 irreversibly converts ordered motion into thermal disorder. Each bounce is a measurement of how much structure survives impact.",
+      "category": "physics",
+      "complexity": "beginner",
+      "dev_themes": ["collision", "restitution", "energy", "gravity"],
+      "dev_category": "physics_bodies",
+      "tags": ["bouncing", "ball", "gravity", "restitution", "elastic", "inelastic", "energy", "parabolic", "collision_response", "beginner"]
+    },
+    "mass_spring_damper": {
+      "lookup_name": "mass_spring_damper",
+      "scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
+      "name": "Mass-Spring-Damper",
+      "description": "The canonical second-order system: a mass on a spring with viscous damping. Hooke's law (F = -kx) provides the restoring force, damping (F = -cv) dissipates energy. Explore underdamped oscillation, critical damping, and overdamped decay by tweaking spring stiffness k and damping coefficient c. The foundation of every vibration analysis ever performed.",
+      "qfep_connection": "The mass-spring-damper as the archetype of order-entropy interplay — the spring stores and restores order (potential energy), the damper converts it to entropy (heat). Critical damping is the lambda that optimally balances both.",
+      "category": "physics",
+      "complexity": "beginner",
+      "dev_themes": ["springs", "damping", "oscillation", "hookes_law"],
+      "dev_category": "physics_springs",
+      "tags": ["spring", "damper", "mass", "hookes_law", "oscillation", "underdamped", "critical_damping", "overdamped", "harmonic_oscillator"]
+    },
+    "spring_mass_system": {
+      "lookup_name": "spring_mass_system",
+      "scene": "res://algorithms/physicssimulation/springmass/springmass.tscn",
+      "name": "Spring-Mass Network",
+      "description": "A network of point masses connected by springs, forming a deformable mesh. Energy propagates as waves through the lattice — pluck one node and watch the disturbance ripple outward. The discrete analog of a continuous elastic medium, and the building block for cloth, soft bodies, and lattice dynamics.",
+      "qfep_connection": "Emergence of wave behavior from purely local spring interactions — no node knows about the global pattern, yet coherent waves arise. Individual springs are simple lambdas; their network produces emergent order.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["springs", "network", "waves", "lattice"],
+      "dev_category": "physics_springs",
+      "tags": ["spring", "mass", "network", "mesh", "waves", "lattice", "elastic", "deformable", "propagation"]
+    },
+    "spring_system": {
+      "lookup_name": "spring_system",
+      "scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
+      "name": "Spring System",
+      "description": "System-level spring behavior exploring coupled oscillators, resonance, and energy transfer between connected springs. When natural frequencies align, energy sloshes back and forth between modes in beautiful beat patterns. Demonstrates normal modes and the spectral decomposition of complex vibrations into simple harmonic components.",
+      "qfep_connection": "Normal modes as the eigenstates of mechanical order — the system's natural basis of vibration. Resonance is what happens when external forcing aligns with internal structure, a lambda-to-lambda coupling that amplifies coherence.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["springs", "coupled_oscillators", "resonance", "normal_modes"],
+      "dev_category": "physics_springs",
+      "tags": ["spring", "system", "coupled", "resonance", "normal_modes", "beats", "energy_transfer", "spectral"]
+    },
+    "cloth_simulation": {
+      "lookup_name": "cloth_simulation",
+      "scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+      "name": "Cloth Simulation",
+      "description": "A grid of particles connected by structural, shear, and bend springs forming a deformable cloth surface. Responds to gravity, wind forces, and collisions. Pin corners and watch it drape; release and watch it fall. The interplay of thousands of tiny spring forces creating fluid, fabric-like motion from purely mechanical rules.",
+      "qfep_connection": "Cloth as emergent softness — rigid spring rules at the micro level produce flowing, organic behavior at the macro level. The visual gap between the grid topology and the draped result is emergence made visible.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["cloth", "springs", "particles", "deformation"],
+      "dev_category": "physics_springs",
+      "tags": ["cloth", "fabric", "particles", "springs", "structural", "shear", "bend", "draping", "wind", "deformable", "grid"]
+    },
+    "force_fields": {
+      "lookup_name": "force_fields",
+      "scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+      "name": "Force Fields",
+      "description": "Configurable force fields — uniform gravity, directional wind, radial attraction/repulsion, and vortex fields — applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
+      "qfep_connection": "Force fields as the lambda landscape — spatial functions that shape particle trajectories. Particles flowing through a field are entropy exploring the contours of imposed order. Superposition of fields creates emergent complexity from simple additive rules.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["fields", "gravity", "wind", "forces"],
+      "dev_category": "physics_fields",
+      "tags": ["force_field", "gravity", "wind", "radial", "vortex", "particles", "spatial", "superposition", "flow"]
+    },
+    "vector_fields": {
+      "lookup_name": "vector_fields",
+      "scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
+      "name": "Vector Fields",
+      "description": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points. Particles advected through the field trace streamlines, revealing the flow structure — sources, sinks, saddle points, and vortices. Includes curl, divergence, and gradient field types with real-time parameter control.",
+      "qfep_connection": "Vector fields as the topology of flow — divergence measures local entropy production (sources spread, sinks concentrate), curl measures local rotation (persistent order). The field itself is a continuous lambda assigning motion to every point in space.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["fields", "vectors", "flow", "visualization"],
+      "dev_category": "physics_fields",
+      "tags": ["vector_field", "streamlines", "curl", "divergence", "gradient", "flow", "visualization", "3d", "advection", "topology"]
+    },
+    "particle_systems": {
+      "lookup_name": "particle_systems",
+      "scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+      "name": "Particle Systems",
+      "description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die — creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
+      "qfep_connection": "Particle systems as statistical emergence — each particle follows trivial rules (birth, force, death), but the ensemble produces recognizable macroscopic patterns. Order from quantity: the thermodynamic limit where individual randomness becomes collective structure.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "dev_themes": ["particles", "emitters", "lifetime", "effects"],
+      "dev_category": "physics_fields",
+      "tags": ["particles", "emitter", "lifetime", "force", "fire", "smoke", "sparks", "statistical", "ensemble", "effects"]
+    },
+    "nbody_simulation": {
+      "lookup_name": "nbody_simulation",
+      "scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
+      "name": "N-Body Gravitational Simulation",
+      "description": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm₁m₂/r²). Watch galaxies form, binary stars orbit, and clusters scatter. The O(n²) pairwise force computation is the computational bottleneck that drove the invention of Barnes-Hut trees and fast multipole methods.",
+      "qfep_connection": "N-body gravity as the ultimate emergence engine — simple 1/r² attraction between pairs produces spiral galaxies, binary orbits, gravitational slingshots, and chaotic scattering. The richness of gravitational structure from the simplest possible force law.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["gravity", "nbody", "orbital_mechanics", "computational"],
+      "dev_category": "physics_fields",
+      "tags": ["nbody", "gravity", "gravitational", "orbital", "galaxy", "binary_star", "pairwise", "computational", "barnes_hut"]
+    },
+    "three_body_problem": {
+      "lookup_name": "three_body_problem",
+      "scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+      "name": "Three-Body Problem",
+      "description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
+      "qfep_connection": "The three-body problem as the boundary where Newtonian order meets chaos — deterministic rules (pure lambda) producing unpredictable outcomes (maximal entropy in prediction space). The simplest system where emergence defeats reductionism.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["chaos", "gravity", "three_body", "sensitivity"],
+      "dev_category": "physics_fields",
+      "tags": ["three_body", "chaos", "gravitational", "sensitivity", "deterministic", "unpredictable", "lagrange_points", "figure_eight", "initial_conditions"]
+    },
+    "fluid_simulation": {
+      "lookup_name": "fluid_simulation",
+      "scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
+      "name": "Fluid Simulation (SPH)",
+      "description": "Smoothed Particle Hydrodynamics (SPH) fluid simulation — the Navier-Stokes equations approximated by a cloud of particles carrying mass, velocity, and pressure. Kernel functions smooth physical quantities over neighbor particles, producing viscous flow, surface tension, and splashing. The Lagrangian approach to fluid dynamics where the fluid carries its own computational grid.",
+      "qfep_connection": "Fluid as the continuum limit of particle interactions — pressure enforces incompressibility (order), viscosity dissipates vortices (entropy), and turbulence is the perpetual negotiation between them. SPH kernels are the lambda functions that interpolate local physics.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["fluid", "sph", "navier_stokes", "continuum"],
+      "dev_category": "physics_continuum",
+      "tags": ["fluid", "sph", "navier_stokes", "pressure", "viscosity", "surface_tension", "splash", "lagrangian", "particles", "continuum"]
+    },
+    "fem_simulation": {
+      "lookup_name": "fem_simulation",
+      "scene": "res://algorithms/physicssimulation/fem/fem.tscn",
+      "name": "Finite Element Method",
+      "description": "Finite Element Method (FEM) for deformable solid mechanics. A continuous body is discretized into tetrahedral or hexahedral elements, each computing stress and strain from local deformation gradients. Assemble the global stiffness matrix, solve the linear system, and watch beams bend, bridges sag, and materials yield under load — engineering simulation made visible.",
+      "qfep_connection": "FEM as discretized order — the continuous stress field (infinite-dimensional) projected onto a finite basis of shape functions. Each element is a local lambda mapping displacement to force; the assembled system is emergent global behavior from local constitutive laws.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["fem", "deformation", "stress", "strain", "engineering"],
+      "dev_category": "physics_continuum",
+      "tags": ["fem", "finite_element", "deformable", "stress", "strain", "stiffness_matrix", "tetrahedral", "engineering", "solid_mechanics"]
+    },
+    "soft_bodies": {
+      "lookup_name": "soft_bodies",
+      "scene": "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
+      "name": "Soft Body Physics",
+      "description": "Soft body deformation using pressure-volume models and shape matching. Objects squish, stretch, and jiggle while maintaining approximate volume — like jelly, rubber, or biological tissue. Combines ideas from spring networks, FEM, and position-based dynamics into satisfying, tactile deformation that you want to poke.",
+      "qfep_connection": "Soft bodies as elastic memory — deformed states always remember and seek their rest shape (order), while external forces and collisions continuously perturb them (entropy). The wobble is the visible oscillation between imposed disorder and intrinsic structure.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["soft_body", "deformation", "pressure", "shape_matching"],
+      "dev_category": "physics_continuum",
+      "tags": ["soft_body", "deformable", "jelly", "pressure", "volume", "shape_matching", "squish", "jiggle", "position_based"]
+    },
+    "magnetic_simulation": {
+      "lookup_name": "magnetic_simulation",
+      "scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
+      "name": "Magnetic Field Simulation",
+      "description": "Magnetic field simulation with dipoles, field line visualization, and Lorentz force on charged particles. Watch iron filings align along field lines, see how bar magnets attract and repel, and observe charged particles spiraling in helical paths through uniform fields. Maxwell's equations made tangible through interactive electromagnetic landscapes.",
+      "qfep_connection": "Magnetism as invisible order — field lines are the hidden structure that organizes matter at a distance. The Lorentz force is the lambda coupling charge velocity to magnetic field, producing the perpendicular deflection that makes electric motors and particle accelerators possible.",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["magnetism", "electromagnetic", "field_lines", "lorentz"],
+      "dev_category": "physics_special",
+      "tags": ["magnetic", "electromagnetic", "field_lines", "lorentz_force", "dipole", "charged_particles", "maxwell", "helical", "iron_filings"]
+    },
+    "surreal_kinetic_sculpture": {
+      "lookup_name": "surreal_kinetic_sculpture",
+      "scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
+      "name": "Surreal Kinetic Sculpture",
+      "description": "An art installation that weaves together multiple physics systems — springs, rigid bodies, constraints, particles, and forces — into a mesmerizing, perpetually-moving kinetic sculpture. Gears drive pendulums that scatter particles through force fields while cloth banners ripple in simulated wind. Not a tutorial but a celebration: physics as aesthetic experience, computation as art.",
+      "qfep_connection": "The sculpture as physics made beautiful — all the individual simulation techniques unified into a single emergent artwork. Each subsystem contributes its lambda; the whole is irreducible to its parts. The QFEP synthesis: order (structure), entropy (motion), lambda (physics rules), emergence (art).",
+      "category": "physics",
+      "complexity": "advanced",
+      "dev_themes": ["art", "kinetic", "combined_systems", "aesthetic"],
+      "dev_category": "physics_special",
+      "tags": ["kinetic_sculpture", "art", "combined", "springs", "rigid_body", "constraints", "particles", "forces", "cloth", "aesthetic", "surreal", "perpetual_motion"]
+    }
+  },
+  "sequence_mapping": {
+    "foundations": [
+      "newtons_laws",
+      "numerical_integration",
+      "verlet_integration"
+    ],
+    "bodies": [
+      "rigid_body",
+      "collision_detection",
+      "constraints",
+      "bouncing_ball"
+    ],
+    "springs": [
+      "mass_spring_damper",
+      "spring_mass_system",
+      "spring_system",
+      "cloth_simulation"
+    ],
+    "fields": [
+      "force_fields",
+      "vector_fields",
+      "particle_systems",
+      "nbody_simulation",
+      "three_body_problem"
+    ],
+    "continuum": [
+      "fluid_simulation",
+      "fem_simulation",
+      "soft_bodies"
+    ],
+    "special": [
+      "magnetic_simulation",
+      "surreal_kinetic_sculpture"
+    ],
+    "all_physics": [
+      "newtons_laws",
+      "numerical_integration",
+      "verlet_integration",
+      "rigid_body",
+      "collision_detection",
+      "constraints",
+      "bouncing_ball",
+      "mass_spring_damper",
+      "spring_mass_system",
+      "spring_system",
+      "cloth_simulation",
+      "force_fields",
+      "vector_fields",
+      "particle_systems",
+      "nbody_simulation",
+      "three_body_problem",
+      "fluid_simulation",
+      "fem_simulation",
+      "soft_bodies",
+      "magnetic_simulation",
+      "surreal_kinetic_sculpture"
+    ]
+  },
+  "theoretical_connections": {
+    "newtonian_mechanics": ["newtons_laws", "rigid_body", "bouncing_ball", "collision_detection"],
+    "numerical_methods": ["numerical_integration", "verlet_integration"],
+    "harmonic_motion": ["mass_spring_damper", "spring_mass_system", "spring_system"],
+    "deformable_bodies": ["cloth_simulation", "soft_bodies", "fem_simulation", "spring_mass_system"],
+    "field_theory": ["force_fields", "vector_fields", "magnetic_simulation"],
+    "gravitational_dynamics": ["nbody_simulation", "three_body_problem"],
+    "chaos_theory": ["three_body_problem"],
+    "fluid_mechanics": ["fluid_simulation"],
+    "constraint_based": ["constraints", "rigid_body", "cloth_simulation"]
+  }
+}

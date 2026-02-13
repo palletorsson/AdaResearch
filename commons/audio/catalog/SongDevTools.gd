@@ -19,6 +19,8 @@ const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPane
 const MidiPianoRoll = preload("res://commons/audio/catalog/ui/MidiPianoRoll.gd")
 const AIAssistantPanel = preload("res://commons/audio/catalog/ui/AIAssistantPanel.gd")
 const LayerRenderer = preload("res://commons/audio/catalog/LayerRenderer.gd")
+const SongStateStore = preload("res://commons/audio/catalog/SongStateStore.gd")
+const SongRuntimeEngine = preload("res://commons/audio/catalog/SongRuntimeEngine.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 const PATTERN_OVERRIDES_PATH = "user://song_pattern_overrides.json"
 const GLOBAL_SECTION_KEY = "__global__"
@@ -129,6 +131,11 @@ var _sound_detail_panel: SoundDetailPanel
 var _editor_back_btn: Button
 var _editor_sound_name: Label
 var _current_editor_layer: String = ""
+var _layer_preview_busy: bool = false
+var _queued_preview_layer: String = ""
+var _queued_preview_params: Dictionary = {}
+const LAYER_PREVIEW_DURATION_SEC: float = 1.0
+const STEP_LAYER_PREVIEW_DURATION_SEC: float = 0.09
 
 # Archive UI
 var _archive_list: ItemList
@@ -148,6 +155,8 @@ var _current_section_name: String = ""
 var _current_song_id: String = ""
 var _current_song_words: Dictionary = {}  # layer_name -> {words: [...], params: {...}}
 var _pattern_overrides: Dictionary = {}  # generator_song_id -> {sections:{section->{layer->data}}}
+var _song_state_store: SongStateStore = null
+var _runtime_engine: SongRuntimeEngine = null
 
 # Subset selector (grid editor subsets)
 var _subset_dropdown: OptionButton
@@ -214,6 +223,8 @@ func _ready():
 	if not Engine.is_editor_hint():
 		get_tree().root.title = "AdaResearch Song Dev Tools"
 	_word_bridge = WordSynthBridge.new()
+	_setup_runtime_engine()
+	_setup_song_state_store()
 	_load_pattern_overrides()
 	_setup_audio()
 	_setup_ui()
@@ -238,6 +249,220 @@ func _setup_audio():
 	# Add realtime effects to Master bus
 	_setup_realtime_effects()
 	_set_dev_effects_enabled(not _reference_mix_mode)
+
+
+func _setup_runtime_engine() -> void:
+	_runtime_engine = SongRuntimeEngine.new()
+
+
+func _setup_song_state_store() -> void:
+	_song_state_store = SongStateStore.new()
+	if _song_state_store != null:
+		_song_state_store.command_rejected.connect(_on_song_state_command_rejected)
+
+
+func _on_song_state_command_rejected(command: Dictionary, reason: String) -> void:
+	var command_type: String = str(command.get("type", "unknown"))
+	print("SongStateStore rejected command '%s': %s" % [command_type, reason])
+
+
+func _initialize_song_state(song_id: String) -> void:
+	if _song_state_store == null:
+		return
+
+	var bpm: float = _estimate_bpm_from_song(song_id)
+	var key_scale: Dictionary = _extract_song_key_scale()
+	var key_name: String = str(key_scale.get("key", "C"))
+	var scale_name: String = str(key_scale.get("scale", "major"))
+	_song_state_store.initialize(song_id, bpm, key_name, scale_name)
+
+
+func _extract_song_key_scale() -> Dictionary:
+	var key_name: String = "C"
+	var scale_name: String = "major"
+
+	var music_variant: Variant = _current_config.get("musical", {})
+	if music_variant is Dictionary:
+		var music: Dictionary = music_variant as Dictionary
+		if music.has("key"):
+			key_name = str(music.get("key", key_name))
+		if music.has("scale"):
+			scale_name = str(music.get("scale", scale_name))
+
+	if _current_config.has("key"):
+		key_name = str(_current_config.get("key", key_name))
+	if _current_config.has("scale"):
+		scale_name = str(_current_config.get("scale", scale_name))
+
+	return {
+		"key": key_name,
+		"scale": scale_name,
+	}
+
+
+func _normalize_audio_id(value: String) -> String:
+	var normalized: String = value.strip_edges().to_lower()
+	normalized = normalized.replace(" ", "_")
+	normalized = normalized.replace("-", "_")
+	normalized = normalized.replace("/", "_")
+	while normalized.contains("__"):
+		normalized = normalized.replace("__", "_")
+	return normalized
+
+
+func _track_id_for_layer(layer_name: String) -> String:
+	var normalized: String = _normalize_audio_id(layer_name)
+	if normalized.is_empty():
+		return "track_unknown"
+	return "track_%s" % normalized
+
+
+func _role_for_layer(layer_name: String) -> String:
+	var layer_lower: String = layer_name.to_lower()
+	if "kick" in layer_lower or "snare" in layer_lower or "hat" in layer_lower or "clap" in layer_lower or "drum" in layer_lower or "perc" in layer_lower:
+		return "drum"
+	if "bass" in layer_lower or "sub" in layer_lower:
+		return "bass"
+	if "lead" in layer_lower or "melody" in layer_lower or "hook" in layer_lower:
+		return "lead"
+	if "arp" in layer_lower or "sequence" in layer_lower or "seq" in layer_lower:
+		return "arp"
+	if "pad" in layer_lower or "chord" in layer_lower or "keys" in layer_lower or "piano" in layer_lower or "rhodes" in layer_lower or "strings" in layer_lower:
+		return "pad"
+	if "fx" in layer_lower or "noise" in layer_lower or "riser" in layer_lower:
+		return "fx"
+	return "generic"
+
+
+func _instrument_id_for_layer(layer_name: String) -> String:
+	var config: Dictionary = SynthConfigRegistry.get_layer_config(_current_song_id, layer_name)
+	if not config.is_empty():
+		var explicit_keys: Array[String] = ["instrument_id", "sound_name", "sound", "name"]
+		for key_name_variant in explicit_keys:
+			var key_name: String = str(key_name_variant)
+			if not config.has(key_name):
+				continue
+			var value: String = _normalize_audio_id(str(config.get(key_name, "")))
+			if not value.is_empty():
+				return value
+
+	var layer_normalized: String = _normalize_audio_id(layer_name)
+	if not layer_normalized.is_empty():
+		return layer_normalized
+
+	return _role_for_layer(layer_name)
+
+
+func _build_track_command_metadata(layer_name: String) -> Dictionary:
+	var resolved_layer: String = layer_name if not layer_name.is_empty() else _current_editor_layer
+	return {
+		"layer_name": resolved_layer,
+		"track_id": _track_id_for_layer(resolved_layer),
+		"instrument_id": _instrument_id_for_layer(resolved_layer),
+		"role": _role_for_layer(resolved_layer),
+	}
+
+
+func _register_layers_in_song_state(layer_names: Array) -> void:
+	if _song_state_store == null:
+		return
+
+	for layer_variant in layer_names:
+		var layer_name: String = str(layer_variant)
+		if layer_name.is_empty():
+			continue
+		var track_id: String = _track_id_for_layer(layer_name)
+		var instrument_id: String = _instrument_id_for_layer(layer_name)
+		var role: String = _role_for_layer(layer_name)
+		_song_state_store.register_track(track_id, layer_name, instrument_id, role)
+
+
+func _dispatch_song_state_command(command: Dictionary) -> bool:
+	if _song_state_store == null:
+		return false
+	return _song_state_store.apply_command(command)
+
+
+func _get_song_state_track(layer_name: String) -> Dictionary:
+	if _song_state_store == null:
+		return {}
+	return _song_state_store.get_track_for_layer(layer_name)
+
+
+func _build_runtime_song_snapshot() -> Dictionary:
+	if _song_state_store != null:
+		var snapshot: Dictionary = _song_state_store.snapshot()
+		var fallback_song: String = _current_song_id if not _current_song_id.is_empty() else _current_song
+		if str(snapshot.get("song_id", "")).is_empty():
+			snapshot["song_id"] = fallback_song
+		if not snapshot.has("bpm"):
+			snapshot["bpm"] = _estimate_bpm_from_song(fallback_song)
+		if not snapshot.has("key"):
+			snapshot["key"] = "C"
+		if not snapshot.has("scale"):
+			snapshot["scale"] = "major"
+		return snapshot
+
+	var song_id: String = _current_song_id if not _current_song_id.is_empty() else _current_song
+	return {
+		"song_id": song_id,
+		"bpm": _estimate_bpm_from_song(song_id),
+		"key": "C",
+		"scale": "major",
+	}
+
+
+func _build_runtime_track_state_for_layer(layer_name: String, preview_params: Dictionary) -> Dictionary:
+	var track_state: Dictionary = _get_song_state_track(layer_name)
+	if track_state.is_empty():
+		var track_meta: Dictionary = _build_track_command_metadata(layer_name)
+		track_state = {
+			"track_id": str(track_meta.get("track_id", _track_id_for_layer(layer_name))),
+			"layer_name": layer_name,
+			"instrument_id": str(track_meta.get("instrument_id", _instrument_id_for_layer(layer_name))),
+			"role": str(track_meta.get("role", _role_for_layer(layer_name))),
+			"pattern": [],
+			"notes": [],
+			"chords": [],
+			"pattern_data": {},
+			"params": {},
+		}
+	else:
+		track_state = track_state.duplicate(true)
+
+	var pattern_data: Dictionary = {}
+	var pattern_data_variant: Variant = track_state.get("pattern_data", {})
+	if pattern_data_variant is Dictionary:
+		pattern_data = (pattern_data_variant as Dictionary).duplicate(true)
+	if preview_params.has("pattern"):
+		pattern_data["pattern"] = preview_params.get("pattern", [])
+	if preview_params.has("notes"):
+		pattern_data["notes"] = preview_params.get("notes", [])
+	if preview_params.has("chords"):
+		pattern_data["chords"] = preview_params.get("chords", [])
+	if preview_params.has("key"):
+		pattern_data["key"] = preview_params.get("key", "C")
+	if preview_params.has("scale"):
+		pattern_data["scale"] = preview_params.get("scale", "major")
+	if preview_params.has("direction"):
+		pattern_data["direction"] = preview_params.get("direction", "")
+	if preview_params.has("rate"):
+		pattern_data["rate"] = preview_params.get("rate", "")
+	track_state["pattern_data"] = pattern_data
+
+	return track_state
+
+
+func _dispatch_transport_state(playing: bool, position_sec: float) -> void:
+	var bpm: float = _estimate_bpm_from_song(_current_song_for_layers())
+	_dispatch_song_state_command({
+		"type": "SetTransport",
+		"playing": playing,
+		"position_sec": maxf(0.0, position_sec),
+		"loop_start": maxf(0.0, _loop_start),
+		"loop_end": maxf(0.0, _loop_end),
+		"bpm": bpm,
+	})
 
 
 func _setup_realtime_effects():
@@ -1859,6 +2084,8 @@ func _populate_layer_controls(layer_names: Array):
 		
 		_layer_solos[layer_name] = {"solo": solo, "mute": mute, "volume": vol}
 
+	_register_layers_in_song_state(layer_names)
+
 
 func _reset_layer_controls_ui():
 	for layer_name in _layer_solos.keys():
@@ -2441,12 +2668,28 @@ func _layer_controls_are_default() -> bool:
 
 
 func _extract_pattern_for_layer(song_id: String, layer_name: String) -> Array:
+	var state_track: Dictionary = _get_song_state_track(layer_name)
+	if not state_track.is_empty():
+		var pattern_data_variant: Variant = state_track.get("pattern_data", {})
+		if pattern_data_variant is Dictionary:
+			var pattern_data: Dictionary = pattern_data_variant as Dictionary
+			var embedded_pattern_variant: Variant = pattern_data.get("pattern", [])
+			if embedded_pattern_variant is Array:
+				var embedded_pattern: Array = embedded_pattern_variant as Array
+				if not embedded_pattern.is_empty():
+					return embedded_pattern.duplicate()
+		var state_pattern_variant: Variant = state_track.get("pattern", [])
+		if state_pattern_variant is Array:
+			var state_pattern: Array = state_pattern_variant as Array
+			if not state_pattern.is_empty():
+				return state_pattern.duplicate()
+
 	var resolved_song_id: String = LayerRenderer.resolve_bank_id(song_id)
 	var patterns_data = SoundbankGenerator.PATTERNS.get(resolved_song_id, {})
 	if not (patterns_data is Dictionary):
 		return []
 
-	var patterns: Dictionary = patterns_data
+	var patterns: Dictionary = patterns_data as Dictionary
 	var layer_token: String = layer_name.to_lower().replace(" ", "_")
 	var tokens: Array = [layer_token]
 	if layer_token.contains("drum"):
@@ -2482,6 +2725,7 @@ func _build_layer_mix_tracks(song_id: String) -> Array:
 		var mute_btn = state.get("mute", null)
 		var vol_slider = state.get("volume", null)
 		var pattern: Array = _extract_pattern_for_layer(song_id, str(layer_name))
+		var track_meta: Dictionary = _build_track_command_metadata(str(layer_name))
 		var layer_data = _current_song_words.get(str(layer_name), {})
 		if layer_data is Dictionary:
 			var param_data = layer_data.get("params", {})
@@ -2490,6 +2734,9 @@ func _build_layer_mix_tracks(song_id: String) -> Array:
 
 		tracks.append({
 			"name": str(layer_name),
+			"track_id": str(track_meta.get("track_id", _track_id_for_layer(str(layer_name)))),
+			"instrument_id": str(track_meta.get("instrument_id", _instrument_id_for_layer(str(layer_name)))),
+			"role": str(track_meta.get("role", _role_for_layer(str(layer_name)))),
 			"pattern": pattern,
 			"muted": mute_btn is CheckBox and mute_btn.button_pressed,
 			"solo": solo_btn is CheckBox and solo_btn.button_pressed,
@@ -2917,6 +3164,7 @@ func _style_panel_modern(panel: PanelContainer, bg_color: Color = Color(0.1, 0.1
 func _on_song_selected(song_id: String):
 	_stop_song()
 	_current_song = song_id
+	_current_song_id = song_id
 	_current_editor_layer = ""
 	_layer_mix_preview_mode = false
 	_layer_mix_last_bars = 0
@@ -2929,6 +3177,7 @@ func _on_song_selected(song_id: String):
 	
 	# Load config for inspector
 	_load_config_for_song(song_id)
+	_initialize_song_state(song_id)
 	
 	for btn in _song_buttons.values():
 		btn.disabled = true
@@ -3068,15 +3317,78 @@ func _build_generation_params(song_id: String) -> Dictionary:
 
 func _generate_and_play(song_id: String):
 	_apply_song_pattern_overrides_to_generator(song_id)
+	var generation_params: Dictionary = _build_generation_params(song_id)
+	var song_snapshot: Dictionary = _build_runtime_song_snapshot()
+	song_snapshot["song_id"] = song_id
+	song_snapshot["bpm"] = _estimate_bpm_from_song(song_id)
+	_dispatch_song_state_command({
+		"type": "SetSongMeta",
+		"song_id": song_id,
+		"bpm": song_snapshot.get("bpm", 120.0),
+	})
+
+	var stream: AudioStream = null
+	if _runtime_engine != null:
+		stream = _runtime_engine.render_realtime(song_snapshot, {
+			"generation_params": generation_params,
+			"reference_mix_mode": _reference_mix_mode,
+		})
+		if stream == null and _runtime_engine.get_last_error() == "config_only":
+			_status_label.text = "?? %s (config only - no audio)" % song_id
+			_current_song_id = song_id
+			_load_song_words(song_id, true)
+			_enable_buttons()
+			return
+
+	if stream == null:
+		stream = _generate_song_stream_legacy(song_id, generation_params)
+		if stream == null:
+			_status_label.text = "?? %s (config only - no audio)" % song_id
+			_current_song_id = song_id
+			_load_song_words(song_id, true)
+			_enable_buttons()
+			return
+
+	if stream == null:
+		_status_label.text = "Generation failed - check console for errors"
+		_enable_buttons()
+		return
 	
+	_current_stream = stream as AudioStreamInteractive
+	_player.stream = stream
+	_player.play()
+	_is_playing = true
+	_playback_time = 0.0
+	_dispatch_transport_state(true, 0.0)
+	
+	_status_label.text = "Playing: " + song_id
+	_play_btn.disabled = false
+	_play_btn.text = "⏸"
+	_stop_btn.disabled = false
+	_export_wav_btn.disabled = false
+	_export_midi_btn.disabled = false
+	_enable_buttons()
+	
+	# Load timeline metadata
+	_load_timeline_for_song(song_id, stream)
+
+	if not _layer_controls_are_default():
+		_apply_layer_mix_controls()
+	
+	# Populate MIDI editor tab if capture is available
+	if _midi_editor_tab:
+		var midi_capture = AudioSynthesizer.capture_midi_for_song(song_id)
+		if midi_capture:
+			_midi_editor_tab.load_from_capture(midi_capture)
+
+
+func _generate_song_stream_legacy(song_id: String, generation_params: Dictionary) -> AudioStream:
 	var stream: AudioStream = null
 	if _reference_mix_mode:
 		stream = _generate_preview_reference_stream(song_id)
-	var generation_params = _build_generation_params(song_id)
-	
-	# Soundbank previews (explicit *_sb IDs)
+
 	if stream == null and song_id.ends_with("_sb"):
-		var soundbank_map = {
+		var soundbank_map: Dictionary = {
 			"detroit_sb": "detroit_techno",
 			"synthwave_sb": "synthwave",
 			"burial_sb": "burial",
@@ -3088,13 +3400,10 @@ func _generate_and_play(song_id: String):
 			"dub_house_sb": "dub_house",
 			"moroder_disco_sb": "moroder_disco",
 		}
-		var bank_id = soundbank_map.get(song_id, "")
-		if bank_id != "":
+		var bank_id: String = str(soundbank_map.get(song_id, ""))
+		if not bank_id.is_empty():
 			stream = SoundbankGenerator.generate_song(bank_id, generation_params)
-		else:
-			stream = null
 	elif stream == null:
-		# AudioSynthesizer has class_name - call static methods directly
 		match song_id:
 			"acid_house":
 				stream = AudioSynthesizer.generate_acid_house_song(generation_params)
@@ -3152,7 +3461,6 @@ func _generate_and_play(song_id: String):
 				stream = AudioSynthesizer.generate_pop_madonna_song(generation_params)
 			"gypsy_woman_house":
 				stream = AudioSynthesizer.generate_gypsy_woman_house_song(generation_params)
-			# === SOUND BANK-ONLY SONGS ===
 			"aphex_twin", "aphex_twin_digital_amber":
 				stream = SoundbankGenerator.generate_song("aphex_twin", generation_params)
 			"ada_theme":
@@ -3167,7 +3475,6 @@ func _generate_and_play(song_id: String):
 				stream = SoundbankGenerator.generate_song("vangelis_cs80", generation_params)
 			"dark_wave_cathedral":
 				stream = SoundbankGenerator.generate_song("dark_wave", generation_params)
-			# === HYBRID SONGS ===
 			"chicago_dusseldorf":
 				stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", generation_params)
 			"replicants_dawn":
@@ -3175,42 +3482,9 @@ func _generate_and_play(song_id: String):
 			"foggy_frequencies":
 				stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", generation_params)
 			_:
-				# No generator - show config breakdown only (no audio)
-				_status_label.text = "?? %s (config only - no audio)" % song_id
-				_current_song_id = song_id
-				_load_song_words(song_id, true)
-				_enable_buttons()
-				return
-	if stream == null:
-		_status_label.text = "Generation failed - check console for errors"
-		_enable_buttons()
-		return
-	
-	_current_stream = stream as AudioStreamInteractive
-	_player.stream = stream
-	_player.play()
-	_is_playing = true
-	_playback_time = 0.0
-	
-	_status_label.text = "Playing: " + song_id
-	_play_btn.disabled = false
-	_play_btn.text = "⏸"
-	_stop_btn.disabled = false
-	_export_wav_btn.disabled = false
-	_export_midi_btn.disabled = false
-	_enable_buttons()
-	
-	# Load timeline metadata
-	_load_timeline_for_song(song_id, stream)
+				stream = null
 
-	if not _layer_controls_are_default():
-		_apply_layer_mix_controls()
-	
-	# Populate MIDI editor tab if capture is available
-	if _midi_editor_tab:
-		var midi_capture = AudioSynthesizer.capture_midi_for_song(song_id)
-		if midi_capture:
-			_midi_editor_tab.load_from_capture(midi_capture)
+	return stream
 
 
 func _toggle_pause():
@@ -3223,16 +3497,19 @@ func _toggle_pause():
 		_is_playing = true
 		_play_btn.text = "⏸"
 		_timeline.set_playing(true)
+		_dispatch_transport_state(true, _playback_time)
 		return
 
 	if _player.stream_paused:
 		_player.stream_paused = false
 		_play_btn.text = "⏸"
 		_timeline.set_playing(true)
+		_dispatch_transport_state(true, _playback_time)
 	else:
 		_player.stream_paused = true
 		_play_btn.text = "▶"
 		_timeline.set_playing(false)
+		_dispatch_transport_state(false, _playback_time)
 
 
 func _stop_song():
@@ -3256,6 +3533,7 @@ func _stop_song():
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
 	_update_layer_mix_perf_label()
+	_dispatch_transport_state(false, 0.0)
 
 
 func _analyze_current_track():
@@ -3397,13 +3675,30 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 
 func _export_wav():
 	"""Export current song to WAV file"""
-	var target_stream: AudioStream = _get_active_audio_stream()
+	var song_id: String = _current_song_for_layers()
+	if song_id.is_empty():
+		_status_label.text = "No song to export!"
+		return
+
+	_apply_song_pattern_overrides_to_generator(song_id)
+	var target_stream: AudioStream = null
+	if _runtime_engine != null:
+		var song_snapshot: Dictionary = _build_runtime_song_snapshot()
+		song_snapshot["song_id"] = song_id
+		song_snapshot["bpm"] = _estimate_bpm_from_song(song_id)
+		var generation_params: Dictionary = _build_generation_params(song_id)
+		target_stream = _runtime_engine.render_offline(song_snapshot, "high", {
+			"generation_params": generation_params,
+		})
+
+	if target_stream == null:
+		target_stream = _get_active_audio_stream()
 	if target_stream == null:
 		_status_label.text = "No song to export!"
 		return
 	
 	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
-	var filename = _current_song + "_" + timestamp + ".wav"
+	var filename = song_id + "_" + timestamp + ".wav"
 	var export_path = "user://exports/"
 	
 	# Ensure export directory exists
@@ -3525,11 +3820,13 @@ func _on_song_finished():
 			_seek_layer_mix(_loop_start)
 		else:
 			_player.play()
+		_dispatch_transport_state(true, _playback_time)
 	else:
 		_is_playing = false
 		_playback_time = 0.0
 		_play_btn.disabled = true
 		_stop_btn.disabled = true
+		_dispatch_transport_state(false, 0.0)
 
 
 func _enable_buttons():
@@ -3631,6 +3928,7 @@ func _on_timeline_seek(time: float):
 		_seek_layer_mix(_playback_time)
 		_is_playing = true
 		_play_btn.text = "⏸"
+		_dispatch_transport_state(true, _playback_time)
 		return
 	
 	# Find which section this time falls into and switch clip
@@ -3646,6 +3944,8 @@ func _on_timeline_seek(time: float):
 		_player.play()
 		_is_playing = true
 		_play_btn.text = "⏸"
+
+	_dispatch_transport_state(_is_playing and not _player.stream_paused, _playback_time)
 
 
 # === PARAMETERS ===
@@ -3712,17 +4012,60 @@ func _reset_all():
 
 # === LAYERS ===
 
+func _dispatch_track_mix_from_controls(layer_name: String, overrides: Dictionary = {}) -> void:
+	var muted: bool = false
+	var soloed: bool = false
+	var gain_db: float = 0.0
+	var state_variant: Variant = _layer_solos.get(layer_name, {})
+	if state_variant is Dictionary:
+		var state: Dictionary = state_variant as Dictionary
+		var solo_variant: Variant = state.get("solo", null)
+		if solo_variant is CheckBox:
+			var solo_btn: CheckBox = solo_variant
+			soloed = solo_btn.button_pressed
+		var mute_variant: Variant = state.get("mute", null)
+		if mute_variant is CheckBox:
+			var mute_btn: CheckBox = mute_variant
+			muted = mute_btn.button_pressed
+		var volume_variant: Variant = state.get("volume", null)
+		if volume_variant is HSlider:
+			var volume_slider: HSlider = volume_variant
+			gain_db = volume_slider.value
+
+	if overrides.has("mute"):
+		muted = bool(overrides.get("mute", muted))
+	if overrides.has("solo"):
+		soloed = bool(overrides.get("solo", soloed))
+	if overrides.has("gain_db"):
+		gain_db = float(overrides.get("gain_db", gain_db))
+
+	var track_meta: Dictionary = _build_track_command_metadata(layer_name)
+	_dispatch_song_state_command({
+		"type": "SetTrackMix",
+		"layer_name": track_meta.get("layer_name", layer_name),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer_name)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer_name)),
+		"role": track_meta.get("role", _role_for_layer(layer_name)),
+		"mute": muted,
+		"solo": soloed,
+		"gain_db": gain_db,
+	})
+
+
 func _on_layer_solo(pressed: bool, layer_name: String):
+	_dispatch_track_mix_from_controls(layer_name, {"solo": pressed})
 	_request_layer_mix_update(true)
 	_status_label.text = "Layer solo %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
 func _on_layer_mute(pressed: bool, layer_name: String):
+	_dispatch_track_mix_from_controls(layer_name, {"mute": pressed})
 	_request_layer_mix_update(true)
 	_status_label.text = "Layer mute %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
 func _on_layer_volume(value: float, layer_name: String):
+	_dispatch_track_mix_from_controls(layer_name, {"gain_db": value})
 	_request_layer_mix_update(false)
 	_status_label.text = "Layer volume %s: %.1f dB" % [layer_name, value]
 
@@ -3733,7 +4076,7 @@ func _on_layer_volume_drag_ended(value_changed: bool, layer_name: String):
 	_request_layer_mix_update(true)
 	var state_variant: Variant = _layer_solos.get(layer_name, {})
 	if state_variant is Dictionary:
-		var state: Dictionary = state_variant
+		var state: Dictionary = state_variant as Dictionary
 		var slider_variant: Variant = state.get("volume", null)
 		if slider_variant is HSlider:
 			var slider: HSlider = slider_variant
@@ -3783,18 +4126,44 @@ func _on_layer_selected(layer: String):
 
 
 func _on_layer_preview(layer: String, params: Dictionary):
-	_status_label.text = "Previewing %s..." % layer
+	var resolved_layer: String = _resolve_preview_layer(layer)
+	var resolved_params: Dictionary = params.duplicate(true)
+	var track_state: Dictionary = _get_song_state_track(resolved_layer)
+	if not track_state.is_empty():
+		if not resolved_params.has("track_id"):
+			resolved_params["track_id"] = str(track_state.get("track_id", _track_id_for_layer(resolved_layer)))
+		if not resolved_params.has("instrument_id"):
+			resolved_params["instrument_id"] = str(track_state.get("instrument_id", _instrument_id_for_layer(resolved_layer)))
+		if not resolved_params.has("role"):
+			resolved_params["role"] = str(track_state.get("role", _role_for_layer(resolved_layer)))
+	else:
+		var track_meta: Dictionary = _build_track_command_metadata(resolved_layer)
+		resolved_params["track_id"] = str(track_meta.get("track_id", _track_id_for_layer(resolved_layer)))
+		resolved_params["instrument_id"] = str(track_meta.get("instrument_id", _instrument_id_for_layer(resolved_layer)))
+		resolved_params["role"] = str(track_meta.get("role", _role_for_layer(resolved_layer)))
+	var is_step_preview: bool = bool(resolved_params.get("step_preview", false))
+	
+	# Pattern editors can emit preview events every step while transport runs.
+	# Queue the latest request and avoid overlapping full preview renders.
+	if _layer_preview_busy:
+		_queued_preview_layer = resolved_layer
+		_queued_preview_params = resolved_params
+		return
+	
+	_layer_preview_busy = true
+	_status_label.text = "Previewing %s..." % resolved_layer
 	_cancel_layer_mix_render_job()
-	var preview = _generate_layer_preview(layer, params)
+	var preview: AudioStream = _generate_layer_preview(resolved_layer, resolved_params)
 	if preview:
-		var was_playing = _player.playing
-		var saved_pos = _playback_time
-		var restore_stream = _player.stream
+		var was_playing: bool = _player.playing
+		var saved_pos: float = _playback_time
+		var restore_stream: AudioStream = _player.stream
 		var restore_layer_mix: bool = _layer_mix_active
 		_player.stop()
 		_player.stream = preview
 		_player.play()
-		await get_tree().create_timer(2.0).timeout
+		var hold_duration_sec: float = STEP_LAYER_PREVIEW_DURATION_SEC if is_step_preview else LAYER_PREVIEW_DURATION_SEC
+		await get_tree().create_timer(hold_duration_sec).timeout
 		if restore_stream:
 			_player.stream = restore_stream
 			if was_playing:
@@ -3804,12 +4173,60 @@ func _on_layer_preview(layer: String, params: Dictionary):
 				else:
 					_on_timeline_seek(saved_pos)
 		_status_label.text = "Playing: " + _current_song_id if _current_song_id else "Ready"
+	else:
+		_status_label.text = "Preview unavailable for %s" % resolved_layer
+	
+	_layer_preview_busy = false
+	if not _queued_preview_layer.is_empty():
+		var next_layer: String = _queued_preview_layer
+		var next_params: Dictionary = _queued_preview_params.duplicate(true)
+		_queued_preview_layer = ""
+		_queued_preview_params.clear()
+		call_deferred("_on_layer_preview", next_layer, next_params)
 
 
 func _generate_layer_preview(layer: String, params: Dictionary) -> AudioStream:
+	var runtime_params: Dictionary = params.duplicate(true)
+	var song_snapshot: Dictionary = _build_runtime_song_snapshot()
+	var track_state: Dictionary = _build_runtime_track_state_for_layer(layer, runtime_params)
+	var is_step_preview: bool = bool(runtime_params.get("step_preview", false))
+
+	if _runtime_engine != null:
+		if is_step_preview:
+			return _runtime_engine.preview_step(song_snapshot, track_state, runtime_params)
+		return _runtime_engine.preview_layer(song_snapshot, track_state, runtime_params)
+
+	var preview_song_id: String = str(song_snapshot.get("song_id", ""))
+	var bpm: float = maxf(1.0, float(song_snapshot.get("bpm", 120.0)))
+	return LayerRenderer.render_song_layer_preview(preview_song_id, layer, runtime_params, bpm, 1)
+
+
+func _resolve_preview_layer(requested_layer: String) -> String:
+	var fallback_layer: String = requested_layer if not requested_layer.is_empty() else _current_editor_layer
+	if fallback_layer.is_empty():
+		return requested_layer
+	
 	var preview_song_id: String = _current_song_id if not _current_song_id.is_empty() else _current_song
-	var bpm: float = _estimate_bpm_from_song(preview_song_id)
-	return LayerRenderer.render_song_layer_preview(preview_song_id, layer, params, bpm, 1)
+	var resolved_song_id: String = _resolve_pattern_song_id(preview_song_id)
+	var known_layers: Array = SynthConfigRegistry.get_all_layers(resolved_song_id)
+	if known_layers.is_empty():
+		return fallback_layer
+	
+	var requested_lower: String = requested_layer.to_lower()
+	for layer_variant in known_layers:
+		var layer_name: String = str(layer_variant)
+		if layer_name == requested_layer:
+			return layer_name
+		if layer_name.to_lower() == requested_lower:
+			return layer_name
+	
+	for layer_variant in known_layers:
+		var layer_name: String = str(layer_variant)
+		var layer_lower: String = layer_name.to_lower()
+		if requested_lower.contains(layer_lower) or layer_lower.contains(requested_lower):
+			return layer_name
+	
+	return fallback_layer
 
 
 func _load_song_words(song_id: String, refresh_layer_controls: bool = false):
@@ -4351,12 +4768,26 @@ func _load_song_words(song_id: String, refresh_layer_controls: bool = false):
 	
 	var layers = song_words.get(song_id, {})
 	_current_song_words = layers
-	for layer_name in layers.keys():
-		var data = layers[layer_name]
-		_word_display.set_layer_words(layer_name, data["words"], data["params"])
+	var discovered_layers: Array = []
+	for layer_name_variant in layers.keys():
+		var layer_name: String = str(layer_name_variant)
+		var data_variant: Variant = layers.get(layer_name_variant, {})
+		if not (data_variant is Dictionary):
+			continue
+		var data: Dictionary = data_variant as Dictionary
+		var words_variant: Variant = data.get("words", [])
+		var params_variant: Variant = data.get("params", {})
+		var words: Array = words_variant if words_variant is Array else []
+		var params: Dictionary = params_variant if params_variant is Dictionary else {}
+		_word_display.set_layer_words(layer_name, words, params)
+		discovered_layers.append(layer_name)
+
+	if discovered_layers.is_empty():
+		discovered_layers = ["Bass", "Pad", "Lead", "Drums", "FX"]
+	_register_layers_in_song_state(discovered_layers)
 
 	if refresh_layer_controls:
-		var layer_names: Array = layers.keys()
+		var layer_names: Array = discovered_layers.duplicate()
 		if layer_names.is_empty():
 			layer_names = ["Bass", "Pad", "Lead", "Drums", "FX"]
 		_populate_layer_controls(layer_names)
@@ -4959,6 +5390,7 @@ func show_sound_breakdown(layer: String):
 	"""Switch to Sound Editor tab and load the selected sound"""
 	_current_editor_layer = layer
 	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))
+	_register_layers_in_song_state([layer])
 	
 	# Get config and words
 	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
@@ -4987,6 +5419,17 @@ func show_sound_breakdown(layer: String):
 
 func _on_detail_param_changed(layer: String, param: String, value: float):
 	"""Handle param change from detail panel - apply to live params"""
+	var track_meta: Dictionary = _build_track_command_metadata(layer)
+	_dispatch_song_state_command({
+		"type": "SetTrackParam",
+		"layer_name": track_meta.get("layer_name", layer),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer)),
+		"role": track_meta.get("role", _role_for_layer(layer)),
+		"param": param,
+		"value": value,
+	})
+
 	# Map detail panel param to live_params
 	var mapping = {
 		"filter.cutoff": "bass_filter_cutoff" if "bass" in layer.to_lower() else "pad_filter_cutoff" if "pad" in layer.to_lower() else "lead_filter_cutoff",
@@ -5009,6 +5452,16 @@ func _on_detail_param_changed(layer: String, param: String, value: float):
 
 func _on_detail_word_added(layer: String, word: String):
 	"""Handle word added from detail panel"""
+	var track_meta: Dictionary = _build_track_command_metadata(layer)
+	_dispatch_song_state_command({
+		"type": "AddTrackWord",
+		"layer_name": track_meta.get("layer_name", layer),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer)),
+		"role": track_meta.get("role", _role_for_layer(layer)),
+		"word": word,
+	})
+
 	var words = _word_display._layer_words.get(layer, []).duplicate()
 	if word not in words:
 		words.append(word)
@@ -5022,6 +5475,16 @@ func _on_detail_word_added(layer: String, word: String):
 
 func _on_detail_word_removed(layer: String, word: String):
 	"""Handle word removed from detail panel"""
+	var track_meta: Dictionary = _build_track_command_metadata(layer)
+	_dispatch_song_state_command({
+		"type": "RemoveTrackWord",
+		"layer_name": track_meta.get("layer_name", layer),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer)),
+		"role": track_meta.get("role", _role_for_layer(layer)),
+		"word": word,
+	})
+
 	var words = _word_display._layer_words.get(layer, []).duplicate()
 	words.erase(word)
 	var params = _word_display._layer_params.get(layer, {})
@@ -5031,12 +5494,48 @@ func _on_detail_word_removed(layer: String, word: String):
 
 func _on_detail_preview(layer: String):
 	"""Preview just this layer from detail panel"""
-	var params = _word_display._layer_params.get(layer, {})
-	_on_layer_preview(layer, params)
+	var base_params_variant: Variant = _word_display._layer_params.get(layer, {})
+	var merged_params: Dictionary = {}
+	var preview_context: Dictionary = {}
+	if base_params_variant is Dictionary:
+		merged_params = (base_params_variant as Dictionary).duplicate(true)
+	
+	if _sound_detail_panel != null and _sound_detail_panel.has_method("consume_preview_context"):
+		var preview_context_variant: Variant = _sound_detail_panel.consume_preview_context()
+		if preview_context_variant is Dictionary:
+			preview_context = preview_context_variant as Dictionary
+			for key_variant in preview_context.keys():
+				merged_params[str(key_variant)] = preview_context[key_variant]
+
+	var track_meta: Dictionary = _build_track_command_metadata(layer)
+	merged_params["track_id"] = str(track_meta.get("track_id", _track_id_for_layer(layer)))
+	merged_params["instrument_id"] = str(track_meta.get("instrument_id", _instrument_id_for_layer(layer)))
+	merged_params["role"] = str(track_meta.get("role", _role_for_layer(layer)))
+
+	_dispatch_song_state_command({
+		"type": "SetPreviewContext",
+		"layer_name": track_meta.get("layer_name", layer),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer)),
+		"role": track_meta.get("role", _role_for_layer(layer)),
+		"context": preview_context.duplicate(true),
+	})
+	
+	_on_layer_preview(layer, merged_params)
 
 
 func _on_detail_pattern_changed(layer: String, pattern_data: Dictionary):
 	"""Handle pattern change from detail panel and persist it."""
+	var track_meta: Dictionary = _build_track_command_metadata(layer)
+	_dispatch_song_state_command({
+		"type": "SetPatternData",
+		"layer_name": track_meta.get("layer_name", layer),
+		"track_id": track_meta.get("track_id", _track_id_for_layer(layer)),
+		"instrument_id": track_meta.get("instrument_id", _instrument_id_for_layer(layer)),
+		"role": track_meta.get("role", _role_for_layer(layer)),
+		"pattern_data": pattern_data.duplicate(true),
+	})
+
 	_apply_pattern_override_to_generator(_current_song_id, layer, pattern_data)
 	_store_pattern_override(_current_song_id, _current_section_name, layer, pattern_data)
 	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))

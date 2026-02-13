@@ -14,14 +14,6 @@ emission_energy_multiplier = 0.5
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_aim8i")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 1.5
-shadow_enabled = true
-
 [node name="FluidDragField" type="Node3D" parent="."]
 
 [node name="FluidDragCenter" type="CSGBox3D" parent="FluidDragField"]
