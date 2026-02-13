@@ -1,15 +1,15 @@
-## ForcesRackPanel — Shared Ada-styled rack panel for Forces examples
+## ShaderRackPanel — Ada-styled rack panel for Shader examples
 ##
-## Builds a white backing panel with title, sliders, and readouts.
-## Uses the Ada design system palette and interactable slider scenes.
+## Builds a white backing panel with title, sliders, readouts,
+## and an optional code snippet display for showing GLSL lines.
 ##
 ## Usage:
-##   var panel = ForcesRackPanel.new()
-##   panel.setup("Example 2.3: Gravity", 1, 3)
-##   var slider = panel.add_slider("Gravity", 0.1, 2.5, 0.9, 0.05)
-##   slider.value_changed.connect(_on_gravity_changed)
+##   var panel = ShaderRackPanel.new()
+##   panel.setup("Shaping: smoothstep()", 2, 4)
+##   panel.add_slider("Edge 0", 0.0, 1.0, 0.2, 0.01)
+##   panel.set_code_snippet("float y = smoothstep(edge0, edge1, x);")
 ##   add_child(panel)
-class_name ForcesRackPanel
+class_name ShaderRackPanel
 extends Node3D
 
 const SLIDER_SMOOTH_SCENE := preload("res://commons/interactables/slider_smooth.tscn")
@@ -21,34 +21,36 @@ const TEXT_SECONDARY := Color(0.40, 0.40, 0.44, 1.0)
 const TEXT_ON_DARK := Color(0.92, 0.92, 0.94, 1.0)
 const ACCENT_ORANGE := Color(0.95, 0.45, 0.15, 1.0)
 const ACCENT_CYAN := Color(0.00, 0.78, 0.85, 1.0)
+const CODE_BG := Color(0.08, 0.08, 0.12, 1.0)
 
-# Layout constants (from AdaPalette)
-const RACK_UNIT := 0.08     # 8cm
-const MODULE_GAP := 0.006   # 6mm
-const PANEL_DEPTH := 0.012  # 12mm
+# Layout constants
+const RACK_UNIT := 0.08
+const MODULE_GAP := 0.006
+const PANEL_DEPTH := 0.012
 
-# Slider module size: 1x2 rack units = 8cm x 16cm
 const SLIDER_WIDTH := 0.08
 const SLIDER_HEIGHT := 0.16
 
-# Panel layout
-const TITLE_HEIGHT := 0.04       # Space for title at top
-const PADDING_H := 0.02          # Horizontal padding
-const PADDING_V := 0.015         # Vertical padding
-const READOUT_HEIGHT := 0.025    # Height for a readout row
-const SLIDER_SLOT_GAP := 0.012   # Gap between slider columns
+const TITLE_HEIGHT := 0.04
+const PADDING_H := 0.02
+const PADDING_V := 0.015
+const READOUT_HEIGHT := 0.025
+const SLIDER_SLOT_GAP := 0.012
+const CODE_SNIPPET_HEIGHT := 0.06
 
 # Internal state
 var _title_label: Label3D
 var _panel_mesh: MeshInstance3D
+var _code_label: Label3D
+var _code_bg: MeshInstance3D
 var _columns: int = 1
 var _rack_units_tall: int = 3
 var _next_slider_index: int = 0
 var _readout_count: int = 0
 var _sliders: Array = []
 var _readouts: Dictionary = {}
+var _has_code_snippet: bool = false
 
-# Signal forwarded from sliders — carries (slider_name: String, value: float)
 signal slider_value_changed(slider_name: String, value: float)
 
 
@@ -59,14 +61,11 @@ func setup(title: String, columns: int = 1, rack_units_tall: int = 3) -> void:
 
 
 func _build_panel(title: String) -> void:
-	# Calculate panel dimensions
 	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
 	var panel_height: float = _rack_units_tall * RACK_UNIT
+	panel_width = max(panel_width, 0.22)
 
-	# Ensure minimum width for title
-	panel_width = max(panel_width, 0.18)
-
-	# Create backing panel mesh
+	# Backing panel
 	_panel_mesh = MeshInstance3D.new()
 	_panel_mesh.name = "PanelBacking"
 	var box := BoxMesh.new()
@@ -75,7 +74,7 @@ func _build_panel(title: String) -> void:
 	_panel_mesh.material_override = PANEL_MATERIAL
 	add_child(_panel_mesh)
 
-	# Title label — at top of panel, on the surface
+	# Title label
 	_title_label = Label3D.new()
 	_title_label.name = "TitleLabel"
 	_title_label.text = title
@@ -88,7 +87,7 @@ func _build_panel(title: String) -> void:
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_title_label)
 
-	# Instruction label below title
+	# Instruction label
 	var instructions_label := Label3D.new()
 	instructions_label.name = "InstructionsLabel"
 	instructions_label.text = ""
@@ -108,38 +107,65 @@ func set_instructions(text: String) -> void:
 		lbl.text = text
 
 
-## Add a slider to the panel.
-## Returns the slider root Node3D (has slider_moved signal and value API).
-## For integer/stepped params, set use_snap=true — values will be rounded.
-## All sliders use slider_smooth.tscn which provides set_range/get_normalized_value/slider_moved.
+## Show a code snippet on the panel — a small monospace-styled GLSL line
+## displayed in ACCENT_CYAN on a dark background strip at the bottom.
+func set_code_snippet(text: String) -> void:
+	var panel_height: float = _rack_units_tall * RACK_UNIT
+	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
+	panel_width = max(panel_width, 0.22)
+
+	if not _has_code_snippet:
+		# Create dark background strip for code
+		_code_bg = MeshInstance3D.new()
+		_code_bg.name = "CodeBg"
+		var bg_box := BoxMesh.new()
+		bg_box.size = Vector3(panel_width - 0.008, CODE_SNIPPET_HEIGHT, 0.002)
+		_code_bg.mesh = bg_box
+		var bg_mat := StandardMaterial3D.new()
+		bg_mat.albedo_color = CODE_BG
+		bg_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		_code_bg.material_override = bg_mat
+		_code_bg.position = Vector3(0, -panel_height * 0.5 + CODE_SNIPPET_HEIGHT * 0.5 + 0.004, PANEL_DEPTH * 0.5 + 0.001)
+		add_child(_code_bg)
+
+		# Code text label
+		_code_label = Label3D.new()
+		_code_label.name = "CodeSnippet"
+		_code_label.font_size = 8
+		_code_label.pixel_size = 0.001
+		_code_label.font_color = ACCENT_CYAN
+		_code_label.outline_size = 0
+		_code_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		_code_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_code_label.position = Vector3(-panel_width * 0.5 + 0.01, -panel_height * 0.5 + CODE_SNIPPET_HEIGHT * 0.5 + 0.004, PANEL_DEPTH * 0.5 + 0.003)
+		add_child(_code_label)
+		_has_code_snippet = true
+
+	_code_label.text = text
+
+
+## Add a slider to the panel. Returns the slider Node3D.
 func add_slider(param_name: String, range_min: float, range_max: float, default_val: float, step: float = 0.0, use_snap: bool = false) -> Node3D:
 	var slider_instance: Node3D = SLIDER_SMOOTH_SCENE.instantiate()
 	slider_instance.name = "Slider_%s" % param_name.replace(" ", "_")
 
-	# For snap sliders, set decimal_places to 0 so the label shows integers
 	if use_snap:
 		slider_instance.set("decimal_places", 0)
 
-	# Position the slider in its slot on the panel
 	var slot_pos := _get_slider_slot_position(_next_slider_index)
 	slider_instance.position = slot_pos
 	add_child(slider_instance)
 
-	# Configure range and default value
-	# The smooth slider has set_range() and set_normalized_value()
 	if slider_instance.has_method("set_range"):
 		slider_instance.set_range(range_min, range_max)
 
 	if slider_instance.has_method("set_param_name"):
 		slider_instance.set_param_name(param_name)
 
-	# Set default normalized value (deferred so the slider's _ready() runs first)
 	if range_max != range_min:
 		var norm := (default_val - range_min) / (range_max - range_min)
 		norm = clampf(norm, 0.0, 1.0)
 		_defer_set_normalized.call_deferred(slider_instance, norm)
-
-	# The smooth slider scene has a built-in LabelName node — no extra label needed
 
 	_sliders.append({
 		"instance": slider_instance,
@@ -158,12 +184,11 @@ func _defer_set_normalized(slider: Node3D, norm: float) -> void:
 		slider.set_normalized_value(norm)
 
 
-## Add a display-only readout label on the panel.
-## Returns the Label3D so the caller can update its text.
+## Add a display-only readout label. Returns the Label3D.
 func add_readout(label_name: String, initial_text: String = "--") -> Label3D:
 	var panel_height: float = _rack_units_tall * RACK_UNIT
 	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	panel_width = max(panel_width, 0.18)
+	panel_width = max(panel_width, 0.22)
 
 	var readout := Label3D.new()
 	readout.name = "Readout_%s" % label_name.replace(" ", "_")
@@ -174,8 +199,8 @@ func add_readout(label_name: String, initial_text: String = "--") -> Label3D:
 	readout.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
-	# Position readouts below the sliders area
-	var readout_y: float = -panel_height * 0.5 + PADDING_V + _readout_count * READOUT_HEIGHT + READOUT_HEIGHT * 0.5
+	var code_offset := CODE_SNIPPET_HEIGHT + 0.008 if _has_code_snippet else 0.0
+	var readout_y: float = -panel_height * 0.5 + PADDING_V + code_offset + _readout_count * READOUT_HEIGHT + READOUT_HEIGHT * 0.5
 	readout.position = Vector3(0, readout_y, PANEL_DEPTH * 0.5 + 0.001)
 	readout.text = "%s: %s" % [label_name, initial_text]
 
@@ -195,18 +220,15 @@ func update_readout(label_name: String, value_text: String) -> void:
 			readout.text = new_text
 
 
-## Get the panel width for external positioning
 func get_panel_width() -> float:
 	var w: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	return max(w, 0.18)
+	return max(w, 0.22)
 
 
-## Get the panel height for external positioning
 func get_panel_height() -> float:
 	return _rack_units_tall * RACK_UNIT
 
 
-## Programmatically set a slider's value by index
 func set_slider_value(index: int, value: float) -> void:
 	if index < 0 or index >= _sliders.size():
 		return
@@ -223,7 +245,6 @@ func set_slider_value(index: int, value: float) -> void:
 		slider.set_normalized_value(norm)
 
 
-## Get a slider's current logical value by index
 func get_slider_value(index: int) -> float:
 	if index < 0 or index >= _sliders.size():
 		return 0.0
@@ -242,21 +263,18 @@ func get_slider_value(index: int) -> float:
 func _get_slider_slot_position(index: int) -> Vector3:
 	var panel_height: float = _rack_units_tall * RACK_UNIT
 	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	panel_width = max(panel_width, 0.18)
+	panel_width = max(panel_width, 0.22)
 
 	var col: int = index % _columns
 	var row: int = index / _columns
 
-	# Horizontal: center the columns on the panel
 	var total_sliders_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP
 	var start_x: float = -total_sliders_width * 0.5 + SLIDER_WIDTH * 0.5
 	var x: float = start_x + col * (SLIDER_WIDTH + SLIDER_SLOT_GAP)
 
-	# Vertical: start below title area, each row goes down
 	var top_y: float = panel_height * 0.5 - TITLE_HEIGHT - 0.02
 	var y: float = top_y - SLIDER_HEIGHT * 0.5 - row * (SLIDER_HEIGHT + MODULE_GAP)
 
-	# Z: on the front surface of the panel
 	var z: float = PANEL_DEPTH * 0.5 + 0.002
 
 	return Vector3(x, y, z)

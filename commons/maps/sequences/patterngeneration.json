@@ -1,37 +1,95 @@
 {
 	"sequences": {
 		"patterngeneration": {
-			"name": "Pattern Generation",
-			"description": "Algorithms for generating visual patterns and tiling",
+			"name": "Shaders & Patterns: The Book of Shaders",
+			"truth": "A fragment shader runs once per pixel. UV is your canvas. Math is your brush. Every function shapes light.",
+			"qfep_term": "visual_computation",
+			"qfep_connection": "Shaders are pure functions mapping coordinates to colors — the most direct expression of mathematical aesthetics. Each pixel independently computes its own reality. In QFEP terms, shaders demonstrate how local rules (per-pixel math) create emergent global patterns — the micro generating the macro.",
+			"formula": "color = f(UV, TIME, uniforms) — every pixel independently evaluates the same function",
+			"demonstration": "Watch mathematical functions become visual. Twist UV coordinates and see space warp. Layer noise into landscapes. Push materials past taste into queer extravagance.",
+
+			"description": "A complete shader programming curriculum structured around The Book of Shaders. From basic shaping functions through noise and fractals to queer material design. Each lesson builds on the last: shaping → color → shapes → transforms → patterns → randomness → noise → cellular → FBM → simulation → material extravaganza.",
+			"layer": "visual_computation",
+			"prerequisites": ["randomness"],
+			"unlocks": ["generativeart", "physicssimulation"],
+
 			"difficulty": "intermediate",
-			"estimated_time": "20-30 minutes",
+			"estimated_time": "60-90 minutes",
+
 			"learning_objectives": [
-				"Tiling systems",
-				"Diffusion Limited Aggregation",
-				"Penrose tiling",
-                "Wang tiles"
+				"Shaping functions: step(), smoothstep(), sin(), pow() — sculpting gradients",
+				"Color spaces: RGB, HSB, mix() — painting with math",
+				"Signed Distance Fields: circles, rects, polygons — geometry from equations",
+				"Matrix transforms: translate, rotate, scale UV space",
+				"Tiling and patterns: fract(), modular arithmetic, Truchet tiles",
+				"Pseudorandom on GPU: fract(sin(dot())) and its variations",
+				"Value noise, gradient noise, simplex noise — controlled chaos",
+				"Cellular noise: Voronoi, Worley — organic tessellation",
+				"Fractional Brownian Motion: layered noise, turbulence, domain warping",
+				"Reaction-diffusion and DLA: simulation as pattern",
+				"Queer material design: leather, latex, oil slick, fur — tactile computation",
+				"Extravagance as aesthetic: melted candy, crushed pearl, memory skin — beauty beyond taste"
 			],
+
+			"content": [
+				"Shader_01_Shaping: Shaping functions — step, smoothstep, sin, pow as visual tools",
+				"Shader_02_Colors: Color mixing — gradients, HSB, rainbows from math",
+				"Shader_03_Shapes: Signed Distance Fields — circles, rects, polygons from equations",
+				"Shader_04_Matrices: UV transforms — translate, rotate, scale coordinate space",
+				"Shader_05_Patterns: Tiling — fract(), Truchet, bricks, offset grids",
+				"Shader_06_Random: GPU randomness — the classic fract(sin(dot())) trick",
+				"Shader_07_Noise: Noise functions — value, gradient, simplex, warped",
+				"Shader_08_CellularNoise: Cellular noise — Voronoi diagrams, Worley noise",
+				"Shader_09_FBM: Fractional Brownian Motion — layered noise, turbulence, domain warping",
+				"Shader_10_ReactionDiffusion: Simulation patterns — reaction-diffusion, DLA growth",
+				"Shader_11_QueerRubber: Queer materials — leather, latex, oil slick, plastic, fur",
+				"Shader_12_PinkExtravaganza: Drag shader finale — melted candy, crushed pearl, extreme pink"
+			],
+
 			"maps": [
-				"Pattern_Generation_One",
-				"Pattern_Generation_Two",
-				"Pattern_Generation_Three",
-				"Pattern_Generation_Four",
-				"Pattern_Generation_Five",
-				"Pattern_Generation_Six",
-				"Pattern_Generation_Seven",
-				"PatternGeneration_Diffusion_Limited_Aggregation_DLA",
-				"PatternGeneration_Narrative_Generation",
-				"PatternGeneration_Penrose_Tilings",
-				"PatternGeneration_Typography_Generation",
-				"PatternGeneration_Wang_Tiles"
+				"Shader_01_Shaping",
+				"Shader_02_Colors",
+				"Shader_03_Shapes",
+				"Shader_04_Matrices",
+				"Shader_05_Patterns",
+				"Shader_06_Random",
+				"Shader_07_Noise",
+				"Shader_08_CellularNoise",
+				"Shader_09_FBM",
+				"Shader_10_ReactionDiffusion",
+				"Shader_11_QueerRubber",
+				"Shader_12_PinkExtravaganza"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/shaders_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/book_of_shaders_notes.md"
+			],
+
+			"algorithm_paths": {
+				"Shader_01_Shaping": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_02_Colors": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_03_Shapes": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_04_Matrices": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_05_Patterns": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_06_Random": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_07_Noise": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_08_CellularNoise": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_09_FBM": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_10_ReactionDiffusion": "res://algorithms/shaders/book_of_shaders/",
+				"Shader_11_QueerRubber": "res://algorithms/shaders/queer_materials/",
+				"Shader_12_PinkExtravaganza": "res://algorithms/shaders/queer_collection_2/"
+			},
+
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_patterngeneration",
 			"unlock_requirements": [
-                "randomness"
+				"randomness"
 			],
 			"completion_rewards": [
-                "pattern_weaver_badge"
+				"pattern_weaver_badge",
+				"shader_wizard_badge",
+				"queer_materialist_badge"
 			]
 		}
 	}

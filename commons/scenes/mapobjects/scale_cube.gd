@@ -4,6 +4,8 @@ extends Node3D
 
 class_name ScaleCube
 
+const MIN_SHAPE_SCALE: float = 0.001
+
 # Scale settings
 @export var min_scale: float = 0.5  # Minimum size
 @export var max_scale: float = 3.0  # Maximum size (fills 3m gap)
@@ -32,6 +34,7 @@ var box_shape: BoxShape3D
 
 func _ready() -> void:
 	create_cube()
+	_sanitize_scale_range()
 	current_scale = min_scale
 	apply_scale()
 	
@@ -82,7 +85,8 @@ func create_cube() -> void:
 	add_child(static_body)
 
 func apply_scale() -> void:
-	var scale_vec = Vector3(current_scale, current_scale, current_scale)
+	var safe_scale: float = maxf(absf(current_scale), MIN_SHAPE_SCALE)
+	var scale_vec: Vector3 = Vector3(safe_scale, safe_scale, safe_scale)
 	mesh_instance.scale = scale_vec
 	mesh_instance.position = center_offset
 	
@@ -118,6 +122,8 @@ func is_walkable() -> bool:
 func set_scale_range(min_s: float, max_s: float):
 	min_scale = min_s
 	max_scale = max_s
+	_sanitize_scale_range()
+	current_scale = clampf(current_scale, min_scale, max_scale)
 
 func set_offset(offset: Vector3):
 	center_offset = offset
@@ -147,3 +153,12 @@ static func parse_parameters(param_string: String) -> Dictionary:
 		result.speed = parts[3].to_float()
 	
 	return result
+
+
+func _sanitize_scale_range() -> void:
+	min_scale = maxf(min_scale, MIN_SHAPE_SCALE)
+	max_scale = maxf(max_scale, MIN_SHAPE_SCALE)
+	if max_scale < min_scale:
+		var tmp: float = min_scale
+		min_scale = max_scale
+		max_scale = tmp
