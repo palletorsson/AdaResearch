@@ -41,6 +41,7 @@ var _loop_end: float = 0.0
 # UI Components
 var _title_label: Label
 var _status_label: Label
+var _perf_label: Label
 var _song_buttons: Dictionary = {}
 var _play_btn: Button
 var _stop_btn: Button
@@ -64,6 +65,58 @@ var _word_display: WordSynthDisplay
 var _layer_solos: Dictionary = {}  # layer_name -> {solo: CheckBox, mute: CheckBox, volume: HSlider}
 var _layer_mix_active: bool = false
 var _layer_mix_duration: float = 0.0
+var _layer_mix_update_timer: Timer
+var _layer_mix_update_wait_sec: float = 0.12
+var _layer_mix_cache_song_id: String = ""
+var _layer_mix_cache_resolved_song_id: String = ""
+var _layer_mix_cache_bpm: float = -1.0
+var _layer_mix_cache_bars: int = -1
+var _layer_mix_cache_total_samples: int = 0
+var _layer_mix_cache_bar_duration: float = 0.0
+var _layer_mix_cache_bank: SoundbankLoader = null
+var _layer_mix_cache_signatures: Dictionary = {}  # layer_name -> signature
+var _layer_mix_cache_buffers: Dictionary = {}  # layer_name -> PackedFloat32Array
+var _layer_mix_render_running: bool = false
+var _layer_mix_render_tracks: Array = []
+var _layer_mix_render_mix: PackedFloat32Array = PackedFloat32Array()
+var _layer_mix_render_any_solo: bool = false
+var _layer_mix_render_track_index: int = 0
+var _layer_mix_render_sample_index: int = 0
+var _layer_mix_render_target_time: float = 0.0
+var _layer_mix_render_was_playing: bool = false
+var _layer_mix_render_chunk_samples: int = 8192
+var _layer_mix_render_time_budget_usec: int = 4500
+var _layer_mix_live_max_bars: int = 16
+var _layer_mix_preview_max_bars: int = 4
+var _layer_mix_preview_mode: bool = false
+var _layer_mix_last_bars: int = 0
+var _layer_mix_cache_hits: int = 0
+var _layer_mix_cache_misses: int = 0
+var _layer_mix_last_cache_build_ms: float = 0.0
+var _layer_mix_last_mix_render_ms: float = 0.0
+var _layer_mix_render_start_usec: int = 0
+var _layer_mix_cache_build_running: bool = false
+var _layer_mix_cache_build_song_id: String = ""
+var _layer_mix_cache_build_resolved_song_id: String = ""
+var _layer_mix_cache_build_bpm: float = -1.0
+var _layer_mix_cache_build_bars: int = -1
+var _layer_mix_cache_build_total_samples: int = 0
+var _layer_mix_cache_build_bar_duration: float = 0.0
+var _layer_mix_cache_build_tracks: Array = []
+var _layer_mix_cache_build_signatures: Dictionary = {}
+var _layer_mix_cache_build_track_index: int = 0
+var _layer_mix_cache_build_bank: SoundbankLoader = null
+var _layer_mix_cache_build_buffers: Dictionary = {}
+var _layer_mix_cache_build_start_usec: int = 0
+var _layer_mix_cache_build_time_budget_usec: int = 5000
+var _layer_mix_state_by_layer: Dictionary = {}
+var _layer_mix_state_any_solo: bool = false
+var _layer_mix_state_song_id: String = ""
+var _layer_mix_state_bpm: float = -1.0
+var _layer_mix_state_bars: int = -1
+var _layer_mix_active_buffer: PackedFloat32Array = PackedFloat32Array()
+var _layer_mix_render_delta_mode: bool = false
+var _layer_mix_render_delta_ops: Array = []
 
 # Tab navigation
 var _main_tabs: TabContainer
@@ -175,6 +228,12 @@ func _setup_audio():
 	_player.bus = "Master"
 	_player.finished.connect(_on_song_finished)
 	add_child(_player)
+
+	_layer_mix_update_timer = Timer.new()
+	_layer_mix_update_timer.one_shot = true
+	_layer_mix_update_timer.wait_time = _layer_mix_update_wait_sec
+	_layer_mix_update_timer.timeout.connect(_on_layer_mix_update_timeout)
+	add_child(_layer_mix_update_timer)
 	
 	# Add realtime effects to Master bus
 	_setup_realtime_effects()
@@ -269,6 +328,27 @@ func _setup_spectrum_analyzer():
 	analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_2048
 	AudioServer.add_bus_effect(bus_idx, analyzer)
 	_spectrum = AudioServer.get_bus_effect_instance(bus_idx, AudioServer.get_bus_effect_count(bus_idx) - 1)
+
+
+func _update_layer_mix_perf_label():
+	if _perf_label == null:
+		return
+	var song_for_label: String = _current_song_id if not _current_song_id.is_empty() else _current_song
+	if song_for_label.is_empty():
+		_perf_label.text = ""
+		return
+
+	var mode_text: String = "PREVIEW" if _layer_mix_preview_mode else "FULL"
+	var bars_text: String = str(_layer_mix_last_bars) if _layer_mix_last_bars > 0 else "-"
+	var cache_text: String = "H%s/M%s" % [str(_layer_mix_cache_hits), str(_layer_mix_cache_misses)]
+	var build_text: String = "%.1fms" % _layer_mix_last_cache_build_ms
+	var mix_text: String = "%.1fms" % _layer_mix_last_mix_render_ms
+	var state_text: String = "idle"
+	if _layer_mix_cache_build_running:
+		state_text = "caching"
+	elif _layer_mix_render_running:
+		state_text = "rendering"
+	_perf_label.text = "Mix %s %s bars | cache %s | build %s | mix %s | %s" % [mode_text, bars_text, cache_text, build_text, mix_text, state_text]
 
 
 func _setup_ui():
@@ -449,11 +529,25 @@ func _setup_ui():
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	transport.add_child(spacer)
 	
+	var info_column = VBoxContainer.new()
+	info_column.add_theme_constant_override("separation", 2)
+	info_column.size_flags_horizontal = Control.SIZE_SHRINK_END
+	transport.add_child(info_column)
+
 	_status_label = Label.new()
 	_status_label.text = "Select a song..."
 	_status_label.add_theme_font_size_override("font_size", 13)
 	_status_label.add_theme_color_override("font_color", Color(0.55, 0.57, 0.65))
-	transport.add_child(_status_label)
+	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	info_column.add_child(_status_label)
+
+	_perf_label = Label.new()
+	_perf_label.text = ""
+	_perf_label.add_theme_font_size_override("font_size", 11)
+	_perf_label.add_theme_color_override("font_color", Color(0.46, 0.72, 0.66))
+	_perf_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	info_column.add_child(_perf_label)
+	_update_layer_mix_perf_label()
 	
 	# Visualizer
 	_visualizer = _create_visualizer()
@@ -1759,6 +1853,8 @@ func _populate_layer_controls(layer_names: Array):
 		vol.value = 0.0
 		vol.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		vol.value_changed.connect(_on_layer_volume.bind(layer_name))
+		if vol.has_signal("drag_ended"):
+			vol.drag_ended.connect(_on_layer_volume_drag_ended.bind(layer_name))
 		row.add_child(vol)
 		
 		_layer_solos[layer_name] = {"solo": solo, "mute": mute, "volume": vol}
@@ -1778,6 +1874,549 @@ func _reset_layer_controls_ui():
 		var vol_slider = state.get("volume", null)
 		if vol_slider is HSlider:
 			vol_slider.set_value_no_signal(0.0)
+
+
+func _on_layer_mix_update_timeout():
+	_apply_layer_mix_controls()
+
+
+func _request_layer_mix_update(immediate: bool = false):
+	_layer_mix_preview_mode = not immediate
+	if immediate:
+		if _layer_mix_update_timer != null:
+			_layer_mix_update_timer.stop()
+		_apply_layer_mix_controls()
+		_update_layer_mix_perf_label()
+		return
+
+	if _layer_mix_update_timer != null:
+		_layer_mix_update_timer.start()
+	else:
+		_apply_layer_mix_controls()
+	_update_layer_mix_perf_label()
+
+
+func _clear_layer_mix_render_cache():
+	_cancel_layer_mix_cache_build_job()
+	_cancel_layer_mix_render_job()
+	_clear_layer_mix_live_state()
+	_layer_mix_cache_song_id = ""
+	_layer_mix_cache_resolved_song_id = ""
+	_layer_mix_cache_bpm = -1.0
+	_layer_mix_cache_bars = -1
+	_layer_mix_cache_total_samples = 0
+	_layer_mix_cache_bar_duration = 0.0
+	_layer_mix_cache_bank = null
+	_layer_mix_cache_signatures.clear()
+	_layer_mix_cache_buffers.clear()
+
+
+func _clear_layer_mix_live_state():
+	_layer_mix_state_by_layer.clear()
+	_layer_mix_state_any_solo = false
+	_layer_mix_state_song_id = ""
+	_layer_mix_state_bpm = -1.0
+	_layer_mix_state_bars = -1
+	_layer_mix_active_buffer = PackedFloat32Array()
+
+
+func _cancel_layer_mix_cache_build_job():
+	_layer_mix_cache_build_running = false
+	_layer_mix_cache_build_song_id = ""
+	_layer_mix_cache_build_resolved_song_id = ""
+	_layer_mix_cache_build_bpm = -1.0
+	_layer_mix_cache_build_bars = -1
+	_layer_mix_cache_build_total_samples = 0
+	_layer_mix_cache_build_bar_duration = 0.0
+	_layer_mix_cache_build_tracks.clear()
+	_layer_mix_cache_build_signatures.clear()
+	_layer_mix_cache_build_track_index = 0
+	_layer_mix_cache_build_bank = null
+	_layer_mix_cache_build_buffers.clear()
+	_layer_mix_cache_build_start_usec = 0
+
+
+func _is_current_cache_build_request(song_id: String, bpm: float, bars: int, signatures: Dictionary) -> bool:
+	if not _layer_mix_cache_build_running:
+		return false
+	if _layer_mix_cache_build_song_id != song_id:
+		return false
+	if _layer_mix_cache_build_bars != bars:
+		return false
+	if absf(_layer_mix_cache_build_bpm - bpm) > 0.0001:
+		return false
+	if _layer_mix_cache_build_signatures.size() != signatures.size():
+		return false
+	for key_variant in signatures.keys():
+		var key: String = str(key_variant)
+		var lhs: String = str(signatures.get(key_variant, ""))
+		var rhs: String = str(_layer_mix_cache_build_signatures.get(key, ""))
+		if lhs != rhs:
+			return false
+	return true
+
+
+func _start_or_update_layer_mix_cache_build(song_id: String, bpm: float, bars: int, tracks: Array, signatures: Dictionary):
+	if _is_current_cache_build_request(song_id, bpm, bars, signatures):
+		return
+
+	_cancel_layer_mix_cache_build_job()
+	_layer_mix_cache_build_running = true
+	_layer_mix_cache_build_song_id = song_id
+	_layer_mix_cache_build_resolved_song_id = LayerRenderer.resolve_bank_id(song_id)
+	_layer_mix_cache_build_bpm = bpm
+	_layer_mix_cache_build_bars = bars
+	_layer_mix_cache_build_bar_duration = 240.0 / maxf(1.0, bpm)
+	var total_duration: float = float(bars) * _layer_mix_cache_build_bar_duration
+	_layer_mix_cache_build_total_samples = maxi(1, int(total_duration * 44100.0))
+	_layer_mix_cache_build_tracks = tracks.duplicate(true)
+	_layer_mix_cache_build_signatures = signatures.duplicate(true)
+	_layer_mix_cache_build_track_index = 0
+	_layer_mix_cache_build_bank = LayerRenderer.load_song_bank(song_id)
+	if _layer_mix_cache_build_bank == null:
+		_cancel_layer_mix_cache_build_job()
+		return
+	_layer_mix_cache_build_buffers = {}
+	_layer_mix_cache_build_start_usec = Time.get_ticks_usec()
+
+
+func _step_layer_mix_cache_build_job():
+	if not _layer_mix_cache_build_running:
+		return
+
+	var frame_start_usec: int = Time.get_ticks_usec()
+	while _layer_mix_cache_build_running:
+		if _layer_mix_cache_build_track_index >= _layer_mix_cache_build_tracks.size():
+			_finalize_layer_mix_cache_build_job()
+			return
+
+		var track_variant: Variant = _layer_mix_cache_build_tracks[_layer_mix_cache_build_track_index]
+		_layer_mix_cache_build_track_index += 1
+		if not (track_variant is Dictionary):
+			continue
+
+		var track: Dictionary = track_variant
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			continue
+
+		var raw_track: Dictionary = track.duplicate(true)
+		raw_track["muted"] = false
+		raw_track["solo"] = false
+		raw_track["gain_linear"] = 1.0
+
+		var buffer: PackedFloat32Array = LayerRenderer.render_track_buffer(
+			raw_track,
+			_layer_mix_cache_build_bank,
+			_layer_mix_cache_build_resolved_song_id,
+			_layer_mix_cache_build_total_samples,
+			_layer_mix_cache_build_bar_duration,
+			_layer_mix_cache_build_bars
+		)
+		_layer_mix_cache_build_buffers[layer_name] = buffer
+
+		if Time.get_ticks_usec() - frame_start_usec >= _layer_mix_cache_build_time_budget_usec:
+			return
+
+
+func _finalize_layer_mix_cache_build_job():
+	if not _layer_mix_cache_build_running:
+		return
+
+	_layer_mix_last_cache_build_ms = 0.0
+	if _layer_mix_cache_build_start_usec > 0:
+		_layer_mix_last_cache_build_ms = float(Time.get_ticks_usec() - _layer_mix_cache_build_start_usec) / 1000.0
+
+	_layer_mix_cache_song_id = _layer_mix_cache_build_song_id
+	_layer_mix_cache_resolved_song_id = _layer_mix_cache_build_resolved_song_id
+	_layer_mix_cache_bpm = _layer_mix_cache_build_bpm
+	_layer_mix_cache_bars = _layer_mix_cache_build_bars
+	_layer_mix_cache_total_samples = _layer_mix_cache_build_total_samples
+	_layer_mix_cache_bar_duration = _layer_mix_cache_build_bar_duration
+	_layer_mix_cache_bank = _layer_mix_cache_build_bank
+	_layer_mix_cache_signatures = _layer_mix_cache_build_signatures.duplicate(true)
+	_layer_mix_cache_buffers = _layer_mix_cache_build_buffers.duplicate(true)
+
+	_cancel_layer_mix_cache_build_job()
+	_update_layer_mix_perf_label()
+	_apply_layer_mix_controls()
+
+
+func _compute_layer_track_signature(track: Dictionary) -> String:
+	var pattern_variant: Variant = track.get("pattern", [])
+	var pattern_repr: String = JSON.stringify(pattern_variant)
+	return "%s|%s" % [str(track.get("name", "")), pattern_repr]
+
+
+func _build_layer_mix_track_signatures(tracks: Array) -> Dictionary:
+	var signatures: Dictionary = {}
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			continue
+		signatures[layer_name] = _compute_layer_track_signature(track)
+	return signatures
+
+
+func _is_layer_mix_cache_valid(song_id: String, bpm: float, bars: int, signatures: Dictionary) -> bool:
+	if _layer_mix_cache_song_id != song_id:
+		return false
+	if _layer_mix_cache_bars != bars:
+		return false
+	if absf(_layer_mix_cache_bpm - bpm) > 0.0001:
+		return false
+	if _layer_mix_cache_total_samples <= 0:
+		return false
+	if _layer_mix_cache_bank == null:
+		return false
+	if _layer_mix_cache_signatures.size() != signatures.size():
+		return false
+
+	for layer_name_variant in signatures.keys():
+		var layer_name: String = str(layer_name_variant)
+		var current_sig: String = str(signatures[layer_name_variant])
+		var cached_sig: String = str(_layer_mix_cache_signatures.get(layer_name, ""))
+		if current_sig != cached_sig:
+			return false
+		if not _layer_mix_cache_buffers.has(layer_name):
+			return false
+
+	return true
+
+
+func _rebuild_layer_mix_cache(song_id: String, bpm: float, bars: int, tracks: Array, signatures: Dictionary):
+	_clear_layer_mix_render_cache()
+
+	_layer_mix_cache_song_id = song_id
+	_layer_mix_cache_resolved_song_id = LayerRenderer.resolve_bank_id(song_id)
+	_layer_mix_cache_bpm = bpm
+	_layer_mix_cache_bars = bars
+	_layer_mix_cache_bar_duration = 240.0 / maxf(1.0, bpm)
+
+	var total_duration: float = float(bars) * _layer_mix_cache_bar_duration
+	_layer_mix_cache_total_samples = maxi(1, int(total_duration * 44100.0))
+	_layer_mix_cache_bank = LayerRenderer.load_song_bank(song_id)
+	_layer_mix_cache_signatures = signatures.duplicate(true)
+
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			continue
+
+		var raw_track: Dictionary = track.duplicate(true)
+		raw_track["muted"] = false
+		raw_track["solo"] = false
+		raw_track["gain_linear"] = 1.0
+
+		var buffer: PackedFloat32Array = LayerRenderer.render_track_buffer(
+			raw_track,
+			_layer_mix_cache_bank,
+			_layer_mix_cache_resolved_song_id,
+			_layer_mix_cache_total_samples,
+			_layer_mix_cache_bar_duration,
+			_layer_mix_cache_bars
+		)
+		_layer_mix_cache_buffers[layer_name] = buffer
+
+
+func _render_layer_mix_from_cache(tracks: Array) -> AudioStreamWAV:
+	if _layer_mix_cache_total_samples <= 0:
+		return null
+
+	var any_solo: bool = false
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track_check: Dictionary = track_variant
+		if bool(track_check.get("solo", false)):
+			any_solo = true
+			break
+
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(_layer_mix_cache_total_samples)
+	final_mix.fill(0.0)
+
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			continue
+
+		var muted: bool = bool(track.get("muted", false))
+		var solo: bool = bool(track.get("solo", false))
+		if muted:
+			continue
+		if any_solo and not solo:
+			continue
+
+		var gain_linear: float = maxf(0.0, float(track.get("gain_linear", 1.0)))
+		var buffer_variant: Variant = _layer_mix_cache_buffers.get(layer_name, null)
+		if not (buffer_variant is PackedFloat32Array):
+			continue
+		var layer_buffer: PackedFloat32Array = buffer_variant
+		if layer_buffer.size() != _layer_mix_cache_total_samples:
+			continue
+
+		for i in range(_layer_mix_cache_total_samples):
+			final_mix[i] = clampf(final_mix[i] + layer_buffer[i] * gain_linear, -1.0, 1.0)
+
+	return LayerRenderer.create_audio_stream(final_mix)
+
+
+func _cancel_layer_mix_render_job():
+	_layer_mix_render_running = false
+	_layer_mix_render_tracks.clear()
+	_layer_mix_render_mix = PackedFloat32Array()
+	_layer_mix_render_any_solo = false
+	_layer_mix_render_track_index = 0
+	_layer_mix_render_sample_index = 0
+	_layer_mix_render_target_time = 0.0
+	_layer_mix_render_was_playing = false
+	_layer_mix_render_start_usec = 0
+	_layer_mix_render_delta_mode = false
+	_layer_mix_render_delta_ops.clear()
+
+
+func _queue_layer_mix_render(tracks: Array, was_playing: bool, target_time: float):
+	if _layer_mix_cache_total_samples <= 0:
+		return
+
+	_cancel_layer_mix_render_job()
+	_layer_mix_render_tracks = tracks.duplicate(true)
+	_layer_mix_render_mix = PackedFloat32Array()
+	_layer_mix_render_mix.resize(_layer_mix_cache_total_samples)
+	_layer_mix_render_mix.fill(0.0)
+	_layer_mix_render_delta_mode = false
+	_layer_mix_render_any_solo = false
+	for track_variant in _layer_mix_render_tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		if bool(track.get("solo", false)):
+			_layer_mix_render_any_solo = true
+			break
+
+	_layer_mix_render_track_index = 0
+	_layer_mix_render_sample_index = 0
+	_layer_mix_render_target_time = target_time
+	_layer_mix_render_was_playing = was_playing
+	_layer_mix_render_start_usec = Time.get_ticks_usec()
+	_layer_mix_render_running = true
+	_update_layer_mix_perf_label()
+
+
+func _queue_layer_mix_render_delta(tracks: Array, delta_ops: Array, was_playing: bool, target_time: float):
+	if _layer_mix_cache_total_samples <= 0:
+		return
+	if _layer_mix_active_buffer.size() != _layer_mix_cache_total_samples:
+		_queue_layer_mix_render(tracks, was_playing, target_time)
+		return
+
+	_cancel_layer_mix_render_job()
+	_layer_mix_render_tracks = tracks.duplicate(true)
+	_layer_mix_render_delta_mode = true
+	_layer_mix_render_delta_ops = delta_ops.duplicate(true)
+	_layer_mix_render_any_solo = _compute_any_solo_from_tracks(_layer_mix_render_tracks)
+	_layer_mix_render_mix = _layer_mix_active_buffer.duplicate()
+	if _layer_mix_render_mix.size() != _layer_mix_cache_total_samples:
+		_queue_layer_mix_render(tracks, was_playing, target_time)
+		return
+
+	_layer_mix_render_track_index = 0
+	_layer_mix_render_sample_index = 0
+	_layer_mix_render_target_time = target_time
+	_layer_mix_render_was_playing = was_playing
+	_layer_mix_render_start_usec = Time.get_ticks_usec()
+	_layer_mix_render_running = true
+	_update_layer_mix_perf_label()
+
+
+func _track_enabled_for_layer_mix(track: Dictionary, any_solo: bool) -> bool:
+	if bool(track.get("muted", false)):
+		return false
+	if any_solo and not bool(track.get("solo", false)):
+		return false
+	return true
+
+
+func _step_layer_mix_render_job():
+	if not _layer_mix_render_running:
+		return
+	if _layer_mix_cache_total_samples <= 0:
+		_cancel_layer_mix_render_job()
+		return
+	if _layer_mix_render_mix.size() != _layer_mix_cache_total_samples:
+		_cancel_layer_mix_render_job()
+		return
+
+	var frame_start_usec: int = Time.get_ticks_usec()
+	if _layer_mix_render_delta_mode:
+		_step_layer_mix_render_delta(frame_start_usec)
+	else:
+		_step_layer_mix_render_full(frame_start_usec)
+
+
+func _step_layer_mix_render_full(frame_start_usec: int):
+	while _layer_mix_render_running:
+		if _layer_mix_render_track_index >= _layer_mix_render_tracks.size():
+			_finalize_layer_mix_render_job()
+			return
+
+		var track_variant: Variant = _layer_mix_render_tracks[_layer_mix_render_track_index]
+		if not (track_variant is Dictionary):
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var track: Dictionary = track_variant
+		if not _track_enabled_for_layer_mix(track, _layer_mix_render_any_solo):
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var buffer_variant: Variant = _layer_mix_cache_buffers.get(layer_name, null)
+		if not (buffer_variant is PackedFloat32Array):
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var layer_buffer: PackedFloat32Array = buffer_variant
+		if layer_buffer.size() != _layer_mix_cache_total_samples:
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var gain_linear: float = maxf(0.0, float(track.get("gain_linear", 1.0)))
+		var chunk_end: int = mini(_layer_mix_render_sample_index + _layer_mix_render_chunk_samples, _layer_mix_cache_total_samples)
+		for sample_index in range(_layer_mix_render_sample_index, chunk_end):
+			_layer_mix_render_mix[sample_index] += layer_buffer[sample_index] * gain_linear
+
+		_layer_mix_render_sample_index = chunk_end
+		if _layer_mix_render_sample_index >= _layer_mix_cache_total_samples:
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+
+		if Time.get_ticks_usec() - frame_start_usec >= _layer_mix_render_time_budget_usec:
+			return
+
+
+func _step_layer_mix_render_delta(frame_start_usec: int):
+	while _layer_mix_render_running:
+		if _layer_mix_render_track_index >= _layer_mix_render_delta_ops.size():
+			_finalize_layer_mix_render_job()
+			return
+
+		var op_variant: Variant = _layer_mix_render_delta_ops[_layer_mix_render_track_index]
+		if not (op_variant is Dictionary):
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var op: Dictionary = op_variant
+		var layer_name: String = str(op.get("layer_name", ""))
+		var delta_gain: float = float(op.get("delta_gain", 0.0))
+		if layer_name.is_empty() or absf(delta_gain) <= 0.000001:
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var buffer_variant: Variant = _layer_mix_cache_buffers.get(layer_name, null)
+		if not (buffer_variant is PackedFloat32Array):
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var layer_buffer: PackedFloat32Array = buffer_variant
+		if layer_buffer.size() != _layer_mix_cache_total_samples:
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+			continue
+
+		var chunk_end: int = mini(_layer_mix_render_sample_index + _layer_mix_render_chunk_samples, _layer_mix_cache_total_samples)
+		for sample_index in range(_layer_mix_render_sample_index, chunk_end):
+			_layer_mix_render_mix[sample_index] += layer_buffer[sample_index] * delta_gain
+
+		_layer_mix_render_sample_index = chunk_end
+		if _layer_mix_render_sample_index >= _layer_mix_cache_total_samples:
+			_layer_mix_render_track_index += 1
+			_layer_mix_render_sample_index = 0
+
+		if Time.get_ticks_usec() - frame_start_usec >= _layer_mix_render_time_budget_usec:
+			return
+
+
+func _finalize_layer_mix_render_job():
+	if not _layer_mix_render_running:
+		return
+
+	var render_start_usec: int = _layer_mix_render_start_usec
+	var final_buffer: PackedFloat32Array = _layer_mix_render_mix
+	var was_playing: bool = _layer_mix_render_was_playing
+	var target_time: float = _layer_mix_render_target_time
+	var target_tracks: Array = _layer_mix_render_tracks.duplicate(true)
+	var target_any_solo: bool = _layer_mix_render_any_solo
+	_cancel_layer_mix_render_job()
+
+	if render_start_usec > 0:
+		_layer_mix_last_mix_render_ms = float(Time.get_ticks_usec() - render_start_usec) / 1000.0
+	else:
+		_layer_mix_last_mix_render_ms = 0.0
+
+	if final_buffer.is_empty():
+		_update_layer_mix_perf_label()
+		return
+
+	var mixed_stream: AudioStreamWAV = LayerRenderer.create_audio_stream(final_buffer)
+	if mixed_stream == null:
+		_update_layer_mix_perf_label()
+		return
+
+	var state_map: Dictionary = _tracks_to_layer_mix_state(target_tracks)
+	_commit_layer_mix_stream(mixed_stream, final_buffer, was_playing, target_time, state_map, target_any_solo)
+
+
+func _commit_layer_mix_stream(mixed_stream: AudioStreamWAV, final_buffer: PackedFloat32Array, was_playing: bool, target_time: float, state_map: Dictionary, any_solo: bool):
+	if _player == null:
+		return
+
+	var max_seek: float = maxf(0.0, mixed_stream.get_length() - 0.01)
+	_player.stop()
+	_player.stream = mixed_stream
+	_layer_mix_active = true
+	_layer_mix_duration = mixed_stream.get_length()
+	_layer_mix_active_buffer = final_buffer.duplicate()
+	_layer_mix_state_by_layer = state_map.duplicate(true)
+	_layer_mix_state_any_solo = any_solo
+	_layer_mix_state_song_id = _layer_mix_cache_song_id
+	_layer_mix_state_bpm = _layer_mix_cache_bpm
+	_layer_mix_state_bars = _layer_mix_cache_bars
+	_playback_time = clampf(target_time, 0.0, max_seek)
+
+	if was_playing:
+		_seek_layer_mix(_playback_time)
+		_is_playing = true
+		_play_btn.text = "⏸"
+		_timeline.set_playing(true)
+	else:
+		_is_playing = false
+		_play_btn.text = "▶"
+		_timeline.set_playing(false)
+
+	_update_layer_mix_perf_label()
 
 
 func _current_song_for_layers() -> String:
@@ -1860,6 +2499,126 @@ func _build_layer_mix_tracks(song_id: String) -> Array:
 	return tracks
 
 
+func _compute_any_solo_from_tracks(tracks: Array) -> bool:
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		if bool(track.get("solo", false)):
+			return true
+	return false
+
+
+func _compute_any_solo_from_state_map(state_map: Dictionary) -> bool:
+	for state_variant in state_map.values():
+		if not (state_variant is Dictionary):
+			continue
+		var state: Dictionary = state_variant
+		if bool(state.get("solo", false)):
+			return true
+	return false
+
+
+func _tracks_to_layer_mix_state(tracks: Array) -> Dictionary:
+	var state_map: Dictionary = {}
+	for track_variant in tracks:
+		if not (track_variant is Dictionary):
+			continue
+		var track: Dictionary = track_variant
+		var layer_name: String = str(track.get("name", ""))
+		if layer_name.is_empty():
+			continue
+		state_map[layer_name] = {
+			"muted": bool(track.get("muted", false)),
+			"solo": bool(track.get("solo", false)),
+			"gain_linear": maxf(0.0, float(track.get("gain_linear", 1.0))),
+		}
+	return state_map
+
+
+func _effective_layer_gain_from_state(state_variant: Variant, any_solo: bool) -> float:
+	if not (state_variant is Dictionary):
+		return 0.0
+	var state: Dictionary = state_variant
+	if bool(state.get("muted", false)):
+		return 0.0
+	if any_solo and not bool(state.get("solo", false)):
+		return 0.0
+	return maxf(0.0, float(state.get("gain_linear", 1.0)))
+
+
+func _solo_layer_set_from_state_map(state_map: Dictionary) -> Dictionary:
+	var result: Dictionary = {}
+	for key_variant in state_map.keys():
+		var layer_name: String = str(key_variant)
+		var state_variant: Variant = state_map[key_variant]
+		if not (state_variant is Dictionary):
+			continue
+		var state: Dictionary = state_variant
+		if bool(state.get("solo", false)):
+			result[layer_name] = true
+	return result
+
+
+func _can_use_delta_layer_mix(song_id: String, bpm: float, bars: int, new_state_map: Dictionary) -> bool:
+	if not _layer_mix_active:
+		return false
+	if _layer_mix_cache_build_running:
+		return false
+	if _layer_mix_active_buffer.size() != _layer_mix_cache_total_samples:
+		return false
+	if _layer_mix_state_by_layer.is_empty():
+		return false
+	if _layer_mix_state_song_id != song_id:
+		return false
+	if _layer_mix_state_bars != bars:
+		return false
+	if absf(_layer_mix_state_bpm - bpm) > 0.0001:
+		return false
+
+	var new_any_solo: bool = _compute_any_solo_from_state_map(new_state_map)
+	if new_any_solo != _layer_mix_state_any_solo:
+		return false
+	if new_any_solo:
+		var old_solo_set: Dictionary = _solo_layer_set_from_state_map(_layer_mix_state_by_layer)
+		var new_solo_set: Dictionary = _solo_layer_set_from_state_map(new_state_map)
+		if old_solo_set.size() != new_solo_set.size():
+			return false
+		for layer_variant in old_solo_set.keys():
+			var layer_name: String = str(layer_variant)
+			if not new_solo_set.has(layer_name):
+				return false
+
+	return true
+
+
+func _build_delta_layer_mix_ops(new_state_map: Dictionary, any_solo: bool) -> Array:
+	var ops: Array = []
+	var layer_union: Dictionary = {}
+	for layer_variant in _layer_mix_state_by_layer.keys():
+		layer_union[str(layer_variant)] = true
+	for layer_variant in new_state_map.keys():
+		layer_union[str(layer_variant)] = true
+
+	for layer_variant in layer_union.keys():
+		var layer_name: String = str(layer_variant)
+		if not _layer_mix_cache_buffers.has(layer_name):
+			continue
+		var old_state_variant: Variant = _layer_mix_state_by_layer.get(layer_name, {})
+		var new_state_variant: Variant = new_state_map.get(layer_name, {})
+		var old_gain: float = _effective_layer_gain_from_state(old_state_variant, any_solo)
+		var new_gain: float = _effective_layer_gain_from_state(new_state_variant, any_solo)
+		var delta_gain: float = new_gain - old_gain
+		if absf(delta_gain) <= 0.0001:
+			continue
+		ops.append({
+			"layer_name": layer_name,
+			"delta_gain": delta_gain,
+		})
+
+	return ops
+
+
 func _estimate_song_bar_count(_song_id: String, bpm: float) -> int:
 	var total_duration: float = 0.0
 
@@ -1876,6 +2635,28 @@ func _estimate_song_bar_count(_song_id: String, bpm: float) -> int:
 	var safe_bpm: float = maxf(1.0, bpm)
 	var bar_duration: float = 240.0 / safe_bpm
 	return maxi(1, int(ceil(total_duration / bar_duration)))
+
+
+func _estimate_layer_mix_bar_count(song_id: String, bpm: float) -> int:
+	var estimated_bars: int
+	var safe_bpm: float = maxf(1.0, bpm)
+	var bar_duration: float = 240.0 / safe_bpm
+	if _loop_enabled and _loop_end > _loop_start:
+		var loop_duration: float = _loop_end - _loop_start
+		estimated_bars = maxi(1, int(ceil(loop_duration / bar_duration)))
+	else:
+		estimated_bars = _estimate_song_bar_count(song_id, bpm)
+
+	var bars_cap: int = _layer_mix_live_max_bars
+	if _layer_mix_preview_mode and _layer_mix_preview_max_bars > 0:
+		if bars_cap > 0:
+			bars_cap = mini(bars_cap, _layer_mix_preview_max_bars)
+		else:
+			bars_cap = _layer_mix_preview_max_bars
+
+	if bars_cap > 0:
+		estimated_bars = mini(estimated_bars, bars_cap)
+	return maxi(1, estimated_bars)
 
 
 func _seek_layer_mix(time: float):
@@ -1899,6 +2680,7 @@ func _restore_main_stream_from_layer_mix():
 
 	_layer_mix_active = false
 	_layer_mix_duration = 0.0
+	_clear_layer_mix_live_state()
 
 	if _current_stream == null:
 		return
@@ -1914,50 +2696,69 @@ func _restore_main_stream_from_layer_mix():
 		_play_btn.text = "▶"
 		_timeline.set_playing(false)
 
+	_update_layer_mix_perf_label()
+
 
 func _apply_layer_mix_controls():
 	var song_id: String = _current_song_for_layers()
 	if song_id.is_empty() or _player == null:
+		_cancel_layer_mix_cache_build_job()
+		_cancel_layer_mix_render_job()
+		_update_layer_mix_perf_label()
 		return
 
 	if _layer_controls_are_default():
+		_cancel_layer_mix_cache_build_job()
+		_cancel_layer_mix_render_job()
 		_restore_main_stream_from_layer_mix()
+		_update_layer_mix_perf_label()
 		return
 
 	var bank_id: String = LayerRenderer.resolve_bank_id(song_id)
 	var brief_path: String = "res://commons/audio/soundbanks/%s/brief.json" % bank_id
 	if not ResourceLoader.exists(brief_path):
+		_cancel_layer_mix_cache_build_job()
+		_cancel_layer_mix_render_job()
+		_update_layer_mix_perf_label()
 		return
 
 	var tracks: Array = _build_layer_mix_tracks(song_id)
 	if tracks.is_empty():
+		_cancel_layer_mix_cache_build_job()
+		_cancel_layer_mix_render_job()
+		_update_layer_mix_perf_label()
 		return
 
 	var bpm: float = _estimate_bpm_from_song(song_id)
-	var bars: int = _estimate_song_bar_count(song_id, bpm)
-	var mixed_stream: AudioStreamWAV = LayerRenderer.render_mix_stream(song_id, tracks, bpm, bars)
-	if mixed_stream == null:
+	var bars: int = _estimate_layer_mix_bar_count(song_id, bpm)
+	_layer_mix_last_bars = bars
+	var state_map: Dictionary = _tracks_to_layer_mix_state(tracks)
+	var signatures: Dictionary = _build_layer_mix_track_signatures(tracks)
+	var cache_valid: bool = _is_layer_mix_cache_valid(song_id, bpm, bars, signatures)
+	if cache_valid:
+		_layer_mix_cache_hits += 1
+	else:
+		_layer_mix_cache_misses += 1
+		_start_or_update_layer_mix_cache_build(song_id, bpm, bars, tracks, signatures)
+		_update_layer_mix_perf_label()
 		return
 
 	var was_playing: bool = _is_playing and _player.playing and not _player.stream_paused
 	var target_time: float = _playback_time
-	var max_seek: float = maxf(0.0, mixed_stream.get_length() - 0.01)
-
-	_player.stop()
-	_player.stream = mixed_stream
-	_layer_mix_active = true
-	_layer_mix_duration = mixed_stream.get_length()
-	_playback_time = clampf(target_time, 0.0, max_seek)
-
-	if was_playing:
-		_seek_layer_mix(_playback_time)
-		_is_playing = true
-		_play_btn.text = "⏸"
-		_timeline.set_playing(true)
+	if _can_use_delta_layer_mix(song_id, bpm, bars, state_map):
+		var delta_ops: Array = _build_delta_layer_mix_ops(state_map, _layer_mix_state_any_solo)
+		if delta_ops.is_empty():
+			_layer_mix_state_by_layer = state_map.duplicate(true)
+			_layer_mix_state_any_solo = _compute_any_solo_from_state_map(state_map)
+			_layer_mix_state_song_id = song_id
+			_layer_mix_state_bpm = bpm
+			_layer_mix_state_bars = bars
+			_update_layer_mix_perf_label()
+			return
+		_queue_layer_mix_render_delta(tracks, delta_ops, was_playing, target_time)
 	else:
-		_is_playing = false
-		_play_btn.text = "▶"
-		_timeline.set_playing(false)
+		_queue_layer_mix_render(tracks, was_playing, target_time)
+	_update_layer_mix_perf_label()
 
 
 func _style_button_compact(btn: Button, color: Color):
@@ -2117,7 +2918,14 @@ func _on_song_selected(song_id: String):
 	_stop_song()
 	_current_song = song_id
 	_current_editor_layer = ""
+	_layer_mix_preview_mode = false
+	_layer_mix_last_bars = 0
+	_layer_mix_cache_hits = 0
+	_layer_mix_cache_misses = 0
+	_layer_mix_last_cache_build_ms = 0.0
+	_layer_mix_last_mix_render_ms = 0.0
 	_status_label.text = "Generating " + song_id + "..."
+	_update_layer_mix_perf_label()
 	
 	# Load config for inspector
 	_load_config_for_song(song_id)
@@ -2432,8 +3240,14 @@ func _stop_song():
 	_player.stream_paused = false
 	_is_playing = false
 	_playback_time = 0.0
+	if _layer_mix_update_timer != null:
+		_layer_mix_update_timer.stop()
+	_cancel_layer_mix_render_job()
 	_layer_mix_active = false
 	_layer_mix_duration = 0.0
+	_layer_mix_preview_mode = false
+	_layer_mix_last_bars = 0
+	_clear_layer_mix_render_cache()
 	_play_btn.text = "▶"
 	_play_btn.disabled = true
 	_stop_btn.disabled = true
@@ -2441,33 +3255,27 @@ func _stop_song():
 	_export_midi_btn.disabled = true
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
+	_update_layer_mix_perf_label()
 
 
 func _analyze_current_track():
 	"""Analyze the current track and display results in the scorecard"""
-	if _current_stream == null:
+	var stream_to_analyze: AudioStream = _get_active_audio_stream()
+	if stream_to_analyze == null:
 		_status_label.text = "No track loaded - select a song first"
 		return
 	
 	_status_label.text = "Analyzing track..."
 	
-	# Extract audio samples from the current stream
-	var audio_data = PackedFloat32Array()
-	
-	if _current_stream is AudioStreamInteractive:
-		var clip_count = _current_stream.clip_count
-		if clip_count > 0:
-			# Get first clip's stream
-			var first_clip = _current_stream.get_clip_stream(0)
-			if first_clip is AudioStreamWAV:
-				audio_data = _extract_samples_from_wav(first_clip)
+	# Extract audio samples from the active stream (layer mix or generator output)
+	var audio_data: PackedFloat32Array = _extract_samples_from_stream(stream_to_analyze)
 	
 	if audio_data.is_empty():
 		_status_label.text = "Could not extract audio for analysis"
 		return
 	
 	# Run analysis
-	var bpm = _estimate_bpm_from_song(_current_song_id)
+	var bpm = _estimate_bpm_from_song(_current_song_for_layers())
 	_scorecard.analyze(audio_data, bpm)
 	
 	# Show scorecard and update status
@@ -2505,6 +3313,42 @@ func _extract_samples_from_wav(wav: AudioStreamWAV) -> PackedFloat32Array:
 		AudioStreamWAV.FORMAT_IMA_ADPCM:
 			pass  # Complex, skip
 	
+	return result
+
+
+func _get_active_audio_stream() -> AudioStream:
+	if _layer_mix_active and _player != null and _player.stream != null:
+		return _player.stream
+	if _current_stream != null:
+		return _current_stream
+	if _player != null and _player.stream != null:
+		return _player.stream
+	return null
+
+
+func _extract_samples_from_stream(stream: AudioStream) -> PackedFloat32Array:
+	var result = PackedFloat32Array()
+	if stream == null:
+		return result
+
+	if stream is AudioStreamWAV:
+		return _extract_samples_from_wav(stream as AudioStreamWAV)
+
+	if stream is AudioStreamInteractive:
+		var interactive: AudioStreamInteractive = stream as AudioStreamInteractive
+		var all_samples = PackedFloat32Array()
+		for clip_idx in range(interactive.clip_count):
+			var clip_stream: AudioStream = interactive.get_clip_stream(clip_idx)
+			if clip_stream is AudioStreamWAV:
+				var clip_samples: PackedFloat32Array = _extract_samples_from_wav(clip_stream as AudioStreamWAV)
+				if clip_samples.is_empty():
+					continue
+				var start_idx: int = all_samples.size()
+				all_samples.resize(start_idx + clip_samples.size())
+				for sample_idx in range(clip_samples.size()):
+					all_samples[start_idx + sample_idx] = clip_samples[sample_idx]
+		return all_samples
+
 	return result
 
 
@@ -2553,7 +3397,8 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 
 func _export_wav():
 	"""Export current song to WAV file"""
-	if _current_stream == null:
+	var target_stream: AudioStream = _get_active_audio_stream()
+	if target_stream == null:
 		_status_label.text = "No song to export!"
 		return
 	
@@ -2569,28 +3414,33 @@ func _export_wav():
 	_status_label.text = "Exporting WAV..."
 	_export_wav_btn.disabled = true
 	
-	# Use SongExporter if available
-	if ResourceLoader.exists("res://commons/audio/generators/SongExporter.gd"):
-		var SongExporter = load("res://commons/audio/generators/SongExporter.gd")
-		var result = SongExporter.export_interactive_to_wav(_current_stream, full_path)
-		if result == OK:
-			var global_path = ProjectSettings.globalize_path(full_path)
-			_status_label.text = "Exported: " + global_path
-			print("WAV exported to: ", global_path)
+	if target_stream is AudioStreamWAV:
+		var wav_stream: AudioStreamWAV = target_stream as AudioStreamWAV
+		var wav_err: int = wav_stream.save_to_wav(full_path)
+		if wav_err == OK:
+			var wav_path = ProjectSettings.globalize_path(full_path)
+			_status_label.text = "Exported: " + wav_path
+			print("WAV exported to: ", wav_path)
 		else:
 			_status_label.text = "WAV export failed!"
-	else:
-		# Fallback: export the stream directly if it's a WAV
-		if _player.stream is AudioStreamWAV:
-			var wav: AudioStreamWAV = _player.stream
-			var err = wav.save_to_wav(full_path)
-			if err == OK:
+
+	elif target_stream is AudioStreamInteractive:
+		# Use SongExporter for interactive streams
+		if ResourceLoader.exists("res://commons/audio/generators/SongExporter.gd"):
+			var SongExporter = load("res://commons/audio/generators/SongExporter.gd")
+			var interactive_stream: AudioStreamInteractive = target_stream as AudioStreamInteractive
+			var result = SongExporter.export_interactive_to_wav(interactive_stream, full_path)
+			if result == OK:
 				var global_path = ProjectSettings.globalize_path(full_path)
 				_status_label.text = "Exported: " + global_path
+				print("WAV exported to: ", global_path)
 			else:
 				_status_label.text = "WAV export failed!"
 		else:
-			_status_label.text = "Cannot export this stream type"
+			_status_label.text = "SongExporter missing (cannot export interactive stream)"
+
+	else:
+		_status_label.text = "Cannot export this stream type"
 	
 	_export_wav_btn.disabled = false
 
@@ -2863,18 +3713,31 @@ func _reset_all():
 # === LAYERS ===
 
 func _on_layer_solo(pressed: bool, layer_name: String):
-	_apply_layer_mix_controls()
+	_request_layer_mix_update(true)
 	_status_label.text = "Layer solo %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
 func _on_layer_mute(pressed: bool, layer_name: String):
-	_apply_layer_mix_controls()
+	_request_layer_mix_update(true)
 	_status_label.text = "Layer mute %s: %s" % ["ON" if pressed else "OFF", layer_name]
 
 
 func _on_layer_volume(value: float, layer_name: String):
-	_apply_layer_mix_controls()
+	_request_layer_mix_update(false)
 	_status_label.text = "Layer volume %s: %.1f dB" % [layer_name, value]
+
+
+func _on_layer_volume_drag_ended(value_changed: bool, layer_name: String):
+	if not value_changed:
+		return
+	_request_layer_mix_update(true)
+	var state_variant: Variant = _layer_solos.get(layer_name, {})
+	if state_variant is Dictionary:
+		var state: Dictionary = state_variant
+		var slider_variant: Variant = state.get("volume", null)
+		if slider_variant is HSlider:
+			var slider: HSlider = slider_variant
+			_status_label.text = "Layer volume %s: %.1f dB" % [layer_name, slider.value]
 
 
 func _on_word_clicked(layer: String, word: String):
@@ -2921,6 +3784,7 @@ func _on_layer_selected(layer: String):
 
 func _on_layer_preview(layer: String, params: Dictionary):
 	_status_label.text = "Previewing %s..." % layer
+	_cancel_layer_mix_render_job()
 	var preview = _generate_layer_preview(layer, params)
 	if preview:
 		var was_playing = _player.playing
@@ -3497,8 +4361,15 @@ func _load_song_words(song_id: String, refresh_layer_controls: bool = false):
 			layer_names = ["Bass", "Pad", "Lead", "Drums", "FX"]
 		_populate_layer_controls(layer_names)
 		_reset_layer_controls_ui()
+		if _layer_mix_update_timer != null:
+			_layer_mix_update_timer.stop()
+		_cancel_layer_mix_render_job()
 		_layer_mix_active = false
 		_layer_mix_duration = 0.0
+		_layer_mix_preview_mode = false
+		_layer_mix_last_bars = 0
+		_clear_layer_mix_render_cache()
+		_update_layer_mix_perf_label()
 
 func _update_words_for_section(section_name: String):
 	"""Update word display based on current section - sections modify layer emphasis"""
@@ -3608,6 +4479,12 @@ var _last_section_name: String = ""
 var _skip_section_update_until: float = 0.0  # Skip auto-update until this time (seconds)
 
 func _process(delta):
+	if _layer_mix_cache_build_running:
+		_step_layer_mix_cache_build_job()
+
+	if _layer_mix_render_running:
+		_step_layer_mix_render_job()
+
 	if _is_playing and _player.playing:
 		# Manual time tracking (AudioStreamInteractive doesn't report position correctly)
 		_playback_time += delta
@@ -4165,7 +5042,9 @@ func _on_detail_pattern_changed(layer: String, pattern_data: Dictionary):
 	_sound_detail_panel.set_pattern_overrides(_get_song_pattern_overrides(_current_song_id))
 
 	if _layer_mix_active:
-		_apply_layer_mix_controls()
+		_cancel_layer_mix_render_job()
+		_clear_layer_mix_render_cache()
+		_request_layer_mix_update(true)
 	
 	var scope = _current_section_name if not _current_section_name.is_empty() else "global"
 	_status_label.text = "Pattern saved for %s (%s)" % [layer, scope]

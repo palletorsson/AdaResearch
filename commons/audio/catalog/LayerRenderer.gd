@@ -105,6 +105,7 @@ static func render_track_buffer(track: Dictionary, bank: SoundbankLoader, song_i
 		return buffer
 
 	var steps_per_bar: int = 16
+	var bar_samples: int = maxi(1, int(bar_duration * SAMPLE_RATE))
 	var step_samples: int = maxi(1, int((bar_duration / float(steps_per_bar)) * SAMPLE_RATE))
 	var velocity_cfg_raw: Variant = SoundbankGenerator.VELOCITY.get(song_id, DEFAULT_VELOCITY)
 	var velocity_cfg: Dictionary = velocity_cfg_raw if velocity_cfg_raw is Dictionary else DEFAULT_VELOCITY
@@ -117,24 +118,40 @@ static func render_track_buffer(track: Dictionary, bank: SoundbankLoader, song_i
 	elif track.has("volume_db"):
 		track_gain_linear = maxf(0.0, db_to_linear(float(track.get("volume_db", 0.0))))
 
-	for bar in range(maxi(1, num_bars)):
-		var bar_start: int = int(float(bar) * bar_duration * SAMPLE_RATE)
-		for step in range(steps_per_bar):
-			var pattern_step: int = step % pattern.size()
-			var vel_raw: Variant = pattern[pattern_step]
-			var vel: float = float(vel_raw)
-			if vel <= 0.0:
-				continue
+	var hit_buffer: PackedFloat32Array = _build_hit_buffer(script)
+	if hit_buffer.is_empty():
+		return buffer
 
-			var volume: float = base_volume
-			if vel >= 2.0:
-				volume = accent_volume
-			elif vel < 1.0:
-				volume = ghost_volume
-			volume *= track_gain_linear
+	# Build one bar once, then copy it across bars (pattern repeats per bar).
+	var bar_buffer: PackedFloat32Array = PackedFloat32Array()
+	bar_buffer.resize(bar_samples)
+	bar_buffer.fill(0.0)
 
-			var step_start: int = bar_start + step * step_samples
-			_add_sound_to_buffer(buffer, script, step_start, volume)
+	for step in range(steps_per_bar):
+		var pattern_step: int = step % pattern.size()
+		var vel_raw: Variant = pattern[pattern_step]
+		var vel: float = float(vel_raw)
+		if vel <= 0.0:
+			continue
+
+		var volume: float = base_volume
+		if vel >= 2.0:
+			volume = accent_volume
+		elif vel < 1.0:
+			volume = ghost_volume
+		volume *= track_gain_linear
+
+		var step_start: int = step * step_samples
+		_mix_hit_into_buffer(bar_buffer, hit_buffer, step_start, volume)
+
+	var safe_num_bars: int = maxi(1, num_bars)
+	for bar in range(safe_num_bars):
+		var bar_start: int = bar * bar_samples
+		if bar_start >= total_samples:
+			break
+		var copy_count: int = mini(bar_samples, total_samples - bar_start)
+		for sample_index in range(copy_count):
+			buffer[bar_start + sample_index] += bar_buffer[sample_index]
 
 	return buffer
 
@@ -201,7 +218,84 @@ static func _add_sound_to_buffer(buffer: PackedFloat32Array, script: Variant, st
 
 		var t: float = float(i) / SAMPLE_RATE
 		var sample: float = _sample_script(script, t)
-		buffer[idx] = clampf(buffer[idx] + sample * volume, -1.0, 1.0)
+		buffer[idx] += sample * volume
+
+
+static func _build_hit_buffer(script: Variant) -> PackedFloat32Array:
+	var hit = PackedFloat32Array()
+	var duration_samples: int = int(HIT_DURATION_SECONDS * SAMPLE_RATE)
+	hit.resize(duration_samples)
+	if script == null:
+		hit.fill(0.0)
+		return hit
+
+	var generator_desc: Dictionary = _resolve_generator_descriptor(script)
+	if generator_desc.is_empty():
+		hit.fill(0.0)
+		return hit
+
+	var method_name: String = str(generator_desc.get("name", ""))
+	var tail_args_variant: Variant = generator_desc.get("tail_args", [])
+	var tail_args: Array = tail_args_variant if tail_args_variant is Array else []
+	var call_args: Array = [0.0]
+	call_args.append_array(tail_args)
+
+	for i in range(duration_samples):
+		call_args[0] = float(i) / SAMPLE_RATE
+		hit[i] = float(script.callv(method_name, call_args))
+	return hit
+
+
+static func _mix_hit_into_buffer(buffer: PackedFloat32Array, hit_buffer: PackedFloat32Array, start: int, volume: float) -> void:
+	if buffer.is_empty() or hit_buffer.is_empty():
+		return
+	if start >= buffer.size():
+		return
+
+	var offset: int = 0
+	if start < 0:
+		offset = -start
+
+	var dst_start: int = maxi(0, start)
+	var max_count: int = mini(buffer.size() - dst_start, hit_buffer.size() - offset)
+	if max_count <= 0:
+		return
+
+	for i in range(max_count):
+		buffer[dst_start + i] += hit_buffer[offset + i] * volume
+
+
+static func _resolve_generator_descriptor(script: Variant) -> Dictionary:
+	if script == null:
+		return {}
+
+	var candidates: Array[String] = ["generate", "generate_closed", "generate_sample"]
+	for method_name_variant in candidates:
+		var method_name: String = str(method_name_variant)
+		if not script.has_method(method_name):
+			continue
+
+		var method_args: Array = _get_method_args(script, method_name)
+		var tail_args: Array = []
+		if method_args.is_empty():
+			# Fallback when metadata is unavailable.
+			if method_name == "generate_sample":
+				tail_args.append([220.0, 277.18, 329.63])
+			else:
+				tail_args.append(110.0)
+				tail_args.append(0.0)
+		else:
+			for i in range(1, method_args.size()):
+				var arg_info_variant: Variant = method_args[i]
+				var arg_info: Dictionary = arg_info_variant if arg_info_variant is Dictionary else {}
+				tail_args.append(_default_arg_value(arg_info))
+
+		return {
+			"name": method_name,
+			"tail_args": tail_args,
+		}
+
+	return {}
 
 
 static func _sample_script(script: Variant, t: float) -> float:
@@ -209,14 +303,93 @@ static func _sample_script(script: Variant, t: float) -> float:
 		return 0.0
 
 	if script.has_method("generate"):
-		var value: Variant = script.call("generate", t, 0.0)
+		var value: Variant = _call_method_with_defaults(script, "generate", t)
 		return float(value)
 	if script.has_method("generate_closed"):
-		var value_closed: Variant = script.call("generate_closed", t, 0.0)
+		var value_closed: Variant = _call_method_with_defaults(script, "generate_closed", t)
 		return float(value_closed)
 	if script.has_method("generate_sample"):
-		var value_sample: Variant = script.call("generate_sample", t, [])
+		var value_sample: Variant = _call_method_with_defaults(script, "generate_sample", t)
 		return float(value_sample)
+
+	return 0.0
+
+
+static func _call_method_with_defaults(target: Object, method_name: String, t: float) -> Variant:
+	if target == null:
+		return 0.0
+
+	var method_args: Array = _get_method_args(target, method_name)
+	if method_args.is_empty():
+		# Fallback when method metadata is unavailable.
+		if method_name == "generate_sample":
+			return target.call(method_name, t, [220.0, 277.18, 329.63])
+		return target.call(method_name, t, 110.0, 0.0)
+
+	var call_args: Array = [t]
+	for i in range(1, method_args.size()):
+		var arg_info_variant: Variant = method_args[i]
+		var arg_info: Dictionary = arg_info_variant if arg_info_variant is Dictionary else {}
+		call_args.append(_default_arg_value(arg_info))
+
+	return target.callv(method_name, call_args)
+
+
+static func _get_method_args(target: Object, method_name: String) -> Array:
+	if target == null:
+		return []
+
+	var methods: Array = []
+	if target is Script and target.has_method("get_script_method_list"):
+		methods = target.get_script_method_list()
+	if methods.is_empty():
+		methods = target.get_method_list()
+
+	for method_variant in methods:
+		if not (method_variant is Dictionary):
+			continue
+		var method_info: Dictionary = method_variant
+		if str(method_info.get("name", "")) != method_name:
+			continue
+		var args_variant: Variant = method_info.get("args", method_info.get("arguments", []))
+		return args_variant if args_variant is Array else []
+
+	return []
+
+
+static func _default_arg_value(arg_info: Dictionary) -> Variant:
+	var arg_name: String = str(arg_info.get("name", "")).to_lower()
+	var arg_type: int = int(arg_info.get("type", TYPE_NIL))
+
+	# Name-driven defaults first (more reliable than missing type metadata).
+	if arg_name.contains("chord") or arg_name.contains("freqs"):
+		return [220.0, 277.18, 329.63]
+	if arg_name.contains("params") or arg_name.contains("config"):
+		return {}
+	if arg_name == "open":
+		return false
+	if arg_name.contains("freq"):
+		return 110.0
+	if arg_name.contains("duration"):
+		return 0.5
+	if arg_name.contains("velocity"):
+		return 1.0
+	if arg_name.contains("trigger") or arg_name.contains("time"):
+		return 0.0
+
+	# Type-driven defaults.
+	if arg_type == TYPE_ARRAY:
+		return [220.0, 277.18, 329.63]
+	if arg_type == TYPE_DICTIONARY:
+		return {}
+	if arg_type == TYPE_BOOL:
+		return false
+	if arg_type == TYPE_INT:
+		return 0
+	if arg_type == TYPE_FLOAT:
+		return 0.0
+	if arg_type == TYPE_STRING:
+		return ""
 
 	return 0.0
 

@@ -140,7 +140,7 @@ func _add_colored_light(pos: Vector3, color: Color, energy: float) -> void:
 	light.light_color = color
 	light.light_energy = energy
 	light.omni_range = 10.0
-	light.shadow_enabled = true
+	light.shadow_enabled = false
 	add_child(light)
 
 

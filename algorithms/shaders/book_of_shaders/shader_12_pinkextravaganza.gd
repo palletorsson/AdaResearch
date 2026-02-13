@@ -25,8 +25,8 @@ var material_defs := [
 		"y_offset": 0.3
 	},
 	{
-		"shader": "res://algorithms/shaders/queer_collection_2/memory_skin.gdshader",
-		"title": "MEMORY SKIN",
+		"shader": "res://algorithms/shaders/queer_collection_2/oil_slick_latex.gdshader",
+		"title": "OIL SLICK LATEX",
 		"mesh": "capsule",
 		"scale": 1.2,
 		"rotation_speed": 0.1,
@@ -98,8 +98,8 @@ func _build_finale_scene() -> void:
 				var sphere := SphereMesh.new()
 				sphere.radius = 0.8 * s
 				sphere.height = 1.6 * s
-				sphere.radial_segments = 96
-				sphere.rings = 48
+				sphere.radial_segments = 48
+				sphere.rings = 24
 				mesh_inst.mesh = sphere
 			"torus":
 				var torus := TorusMesh.new()
@@ -115,9 +115,9 @@ func _build_finale_scene() -> void:
 				mesh_inst.mesh = capsule
 			"plane":
 				var plane := PlaneMesh.new()
-				plane.size = Vector2(6.0 * s, 6.0 * s)
-				plane.subdivide_width = 64
-				plane.subdivide_depth = 64
+				plane.size = Vector2(4.0 * s, 4.0 * s)
+				plane.subdivide_width = 24
+				plane.subdivide_depth = 24
 				mesh_inst.mesh = plane
 
 		var mat := ShaderMaterial.new()
@@ -142,22 +142,10 @@ func _build_finale_scene() -> void:
 		title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		add_child(title)
 
-	# MAXIMUM DRAMATIC LIGHTING
-	_add_light(Vector3(-5.0, 5.0, 3.0), Color(1.0, 0.0, 0.5), 12.0)
-	_add_light(Vector3(5.0, 5.0, 3.0), Color(0.5, 0.0, 1.0), 12.0)
-	_add_light(Vector3(0.0, 6.0, -2.0), Color(1.0, 0.1, 0.8), 10.0)
-	_add_light(Vector3(-3.0, 1.0, 4.0), Color(1.0, 0.5, 0.8), 6.0)
-	_add_light(Vector3(3.0, 1.0, 4.0), Color(0.8, 0.2, 1.0), 6.0)
-	# Spotlight on the center star
-	var spot := SpotLight3D.new()
-	spot.position = Vector3(0.0, 8.0, 2.0)
-	spot.rotation_degrees = Vector3(-60, 0, 0)
-	spot.light_color = Color(1.0, 0.3, 0.8)
-	spot.light_energy = 15.0
-	spot.spot_range = 15.0
-	spot.spot_angle = 30.0
-	spot.shadow_enabled = true
-	add_child(spot)
+	# DRAMATIC LIGHTING (shadows off for performance — emission carries the look)
+	_add_light(Vector3(-5.0, 5.0, 3.0), Color(1.0, 0.0, 0.5), 8.0)
+	_add_light(Vector3(5.0, 5.0, 3.0), Color(0.5, 0.0, 1.0), 8.0)
+	_add_light(Vector3(0.0, 6.0, -2.0), Color(1.0, 0.1, 0.8), 6.0)
 
 
 func _add_light(pos: Vector3, color: Color, energy: float) -> void:
@@ -165,8 +153,8 @@ func _add_light(pos: Vector3, color: Color, energy: float) -> void:
 	light.position = pos
 	light.light_color = color
 	light.light_energy = energy
-	light.omni_range = 12.0
-	light.shadow_enabled = true
+	light.omni_range = 10.0
+	light.shadow_enabled = false
 	add_child(light)
 
 
