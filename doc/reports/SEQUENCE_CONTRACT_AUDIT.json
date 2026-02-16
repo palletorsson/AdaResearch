@@ -1,147 +1,19 @@
 {
   "summary": {
-    "total_sequences": 49,
-    "declared_entries": 424,
-    "declared_unique_maps": 411,
+    "total_sequences": 48,
+    "declared_entries": 445,
+    "declared_unique_maps": 440,
     "map_folders_with_data": 528,
     "duplicate_entries_within_sequence": 0,
-    "duplicates_across_sequences": 13,
+    "duplicates_across_sequences": 5,
     "missing_declared_maps": 0,
-    "undeclared_map_folders": 117,
-    "undeclared_prefix_hints": 89,
-    "cross_sequence_prefix_hints": 28
+    "undeclared_map_folders": 88,
+    "undeclared_prefix_hints": 60,
+    "cross_sequence_prefix_hints": 36
   },
   "issues": {
     "duplicate_entries_within_sequence": [],
     "duplicates_across_sequences": [
-      {
-        "map": "CA_1",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_2",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_3",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_4",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_5",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_6",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_7",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "CA_8",
-        "owners": [
-          {
-            "sequence": "cellular_automata_showcase",
-            "sequence_name": "Cellular Automata Showcase",
-            "source": "commons/maps/map_progression.json"
-          },
-          {
-            "sequence": "cellularautomata",
-            "sequence_name": "Cellular Automata: Local Rules, Global Patterns",
-            "source": "commons/maps/sequences/cellularautomata.json"
-          }
-        ],
-        "owner_count": 2
-      },
       {
         "map": "Escher_Impossible",
         "owners": [
@@ -227,46 +99,17 @@
     "undeclared_map_folders": [
       "Lab",
       "Oscillation_Animated_Cube",
-      "Pattern_Generation_Five",
-      "Pattern_Generation_Four",
-      "Pattern_Generation_One",
-      "Pattern_Generation_Seven",
-      "Pattern_Generation_Six",
-      "Pattern_Generation_Three",
-      "Pattern_Generation_Two",
-      "PatternGeneration_Diffusion_Limited_Aggregation_DLA",
-      "PatternGeneration_Narrative_Generation",
-      "PatternGeneration_Penrose_Tilings",
-      "PatternGeneration_Typography_Generation",
-      "PatternGeneration_Wang_Tiles",
       "Physics_1",
       "Physics_2",
       "Physics_3",
       "Physics_4",
       "Physics_5",
-      "PhysicsSimulation_Bouncing_Ball_Physics",
-      "PhysicsSimulation_Cloth_Simulation",
-      "PhysicsSimulation_Collision_Detection",
-      "PhysicsSimulation_Constraints",
-      "PhysicsSimulation_Finite_Element_Method_FEM",
-      "PhysicsSimulation_Fluid_Simulation_SPH",
-      "PhysicsSimulation_Force_Fields",
-      "PhysicsSimulation_Mass_Spring_Damper",
-      "PhysicsSimulation_Newton_s_Laws",
-      "PhysicsSimulation_Numerical_Integration",
-      "PhysicsSimulation_Particle_Systems",
-      "PhysicsSimulation_Rigid_Body_Dynamics",
-      "PhysicsSimulation_Spring_Mass_Systems",
-      "PhysicsSimulation_Three_Body_Problem",
-      "PhysicsSimulation_Vector_Fields",
-      "PhysicsSimulation_Verlet_Integration",
       "Point_Context",
       "Point_Line",
       "Point_Line_Context",
       "Point_Tests",
       "Point_Zero",
       "Point_Zero_",
-      "Primitives_2",
       "Primitives_4",
       "Primitives_Godot",
       "Primitives_Irregular",
@@ -344,271 +187,6 @@
       "WaveFunctions_Unused"
     ],
     "undeclared_prefix_hints": [
-      {
-        "map": "Pattern_Generation_Five",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_Four",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_One",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_Seven",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_Six",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_Three",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Pattern_Generation_Two",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PatternGeneration_Diffusion_Limited_Aggregation_DLA",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PatternGeneration_Narrative_Generation",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PatternGeneration_Penrose_Tilings",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PatternGeneration_Typography_Generation",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PatternGeneration_Wang_Tiles",
-        "hints": [
-          {
-            "sequence": "patterngeneration",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Bouncing_Ball_Physics",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Cloth_Simulation",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Collision_Detection",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Constraints",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Finite_Element_Method_FEM",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Fluid_Simulation_SPH",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Force_Fields",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Mass_Spring_Damper",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Newton_s_Laws",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Numerical_Integration",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Particle_Systems",
-        "hints": [
-          {
-            "sequence": "particles",
-            "score": 8
-          },
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Rigid_Body_Dynamics",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Spring_Mass_Systems",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Three_Body_Problem",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Vector_Fields",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "PhysicsSimulation_Verlet_Integration",
-        "hints": [
-          {
-            "sequence": "physicssimulation",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Primitives_2",
-        "hints": [
-          {
-            "sequence": "primitives",
-            "score": 8
-          }
-        ]
-      },
       {
         "map": "Primitives_4",
         "hints": [
@@ -1179,6 +757,102 @@
         "hints": [
           {
             "sequence": "joints",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Four",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_One",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Seven",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Six",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Three",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Two",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "PhysicsSimulation_Particle_Systems",
+        "owners": [
+          "physicssimulation"
+        ],
+        "hints": [
+          {
+            "sequence": "particles",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_2",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
             "score": 8
           }
         ]

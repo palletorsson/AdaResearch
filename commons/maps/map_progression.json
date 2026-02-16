@@ -4,29 +4,8 @@
 	"description": "Central configuration for map sequence progression in the VR system",
 	"default_sequence": "tutorial_progression",
 	"sequences": {
-		"tutorial_progression": {
-			"name": "Tutorial Progression",
-			"description": "Complete onboarding sequence for new VR users",
-			"category": "tutorial",
-			"maps": [
-				"Tutorial_Row",
-				"Tutorial_2D",
-				"Tutorial_Disco",
-				"Tutorial_Start",
-				"Tutorial_Single",
-				"Tutorial_Room"
-			]
-		},
-		"random_challenges": {
-			"name": "Random Challenge Series",
-			"description": "Procedurally generated challenge levels",
-			"category": "challenge",
-			"maps": [
-				"Random_0",
-				"Random_3",
-				"Random_4"
-			]
-		},
+
+
 		"advanced_concepts": {
 			"name": "Advanced Concepts",
 			"description": "Complex theoretical and experimental maps",
@@ -72,21 +51,6 @@
 			],
 			"estimated_time": "15-20 minutes",
 			"category": "concepts"
-		},
-		"cellular_automata_showcase": {
-			"name": "Cellular Automata Showcase",
-			"description": "A journey through various cellular automata simulations.",
-			"category": "showcase",
-			"maps": [
-				"CA_1",
-				"CA_2",
-				"CA_3",
-				"CA_4",
-				"CA_5",
-				"CA_6",
-				"CA_7",
-				"CA_8"
-			]
 		}
 	},
 	"map_metadata": {

@@ -4,16 +4,16 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 | Metric | Count |
 |---|---:|
-| `total_sequences` | 49 |
-| `declared_entries` | 424 |
-| `declared_unique_maps` | 411 |
+| `total_sequences` | 48 |
+| `declared_entries` | 445 |
+| `declared_unique_maps` | 440 |
 | `map_folders_with_data` | 528 |
 | `duplicate_entries_within_sequence` | 0 |
-| `duplicates_across_sequences` | 13 |
+| `duplicates_across_sequences` | 5 |
 | `missing_declared_maps` | 0 |
-| `undeclared_map_folders` | 117 |
-| `undeclared_prefix_hints` | 89 |
-| `cross_sequence_prefix_hints` | 28 |
+| `undeclared_map_folders` | 88 |
+| `undeclared_prefix_hints` | 60 |
+| `cross_sequence_prefix_hints` | 36 |
 
 ### Interpretation Notes
 
@@ -25,14 +25,6 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 ### duplicates_across_sequences
 
-- `CA_1` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_2` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_3` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_4` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_5` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_6` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_7` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
-- `CA_8` declared in `cellular_automata_showcase` (commons/maps/map_progression.json), `cellularautomata` (commons/maps/sequences/cellularautomata.json)
 - `Escher_Impossible` declared in `artmathematics` (commons/maps/sequences/artmathematics.json), `foundationscrisis` (commons/maps/sequences/foundationscrisis.json)
 - `Structure_Examples_VoxelGrammar_Principles` declared in `testmaps` (commons/maps/sequences/testmaps.json), `transformation` (commons/maps/sequences/transformation.json)
 - `Tutorial_Disco` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
@@ -43,71 +35,79 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 - `Lab` has `map_data.json` but is not in any sequence `maps[]`
 - `Oscillation_Animated_Cube` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Five` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Four` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_One` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Seven` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Six` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Three` has `map_data.json` but is not in any sequence `maps[]`
-- `Pattern_Generation_Two` has `map_data.json` but is not in any sequence `maps[]`
-- `PatternGeneration_Diffusion_Limited_Aggregation_DLA` has `map_data.json` but is not in any sequence `maps[]`
-- `PatternGeneration_Narrative_Generation` has `map_data.json` but is not in any sequence `maps[]`
-- `PatternGeneration_Penrose_Tilings` has `map_data.json` but is not in any sequence `maps[]`
-- `PatternGeneration_Typography_Generation` has `map_data.json` but is not in any sequence `maps[]`
-- `PatternGeneration_Wang_Tiles` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_1` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_2` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_3` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_4` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_5` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Bouncing_Ball_Physics` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Cloth_Simulation` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Collision_Detection` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Constraints` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Finite_Element_Method_FEM` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Fluid_Simulation_SPH` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Force_Fields` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Mass_Spring_Damper` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Newton_s_Laws` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Numerical_Integration` has `map_data.json` but is not in any sequence `maps[]`
-- `PhysicsSimulation_Particle_Systems` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Context` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Line` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Line_Context` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Tests` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Zero` has `map_data.json` but is not in any sequence `maps[]`
+- `Point_Zero_` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_4` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Godot` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Irregular` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Load` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Platonic` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Torus` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Tron_Grid_Navigation` has `map_data.json` but is not in any sequence `maps[]`
+- `Primitives_Useful` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationCaveExplorer3dUi` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationCrystalRandom` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingcubesFlatLandscape` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingCubesInsideCave` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingcubesPortalLandscape` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingCubesSculpture` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingcubesTorusSculpture` has `map_data.json` but is not in any sequence `maps[]`
+- `ProceduralGenerationMarchingCubesVovelNoise` has `map_data.json` but is not in any sequence `maps[]`
+- `Random_Plane` has `map_data.json` but is not in any sequence `maps[]`
 
 ### undeclared_prefix_hints (info only)
 
-- `Pattern_Generation_Five` looks related to `patterngeneration`(8)
-- `Pattern_Generation_Four` looks related to `patterngeneration`(8)
-- `Pattern_Generation_One` looks related to `patterngeneration`(8)
-- `Pattern_Generation_Seven` looks related to `patterngeneration`(8)
-- `Pattern_Generation_Six` looks related to `patterngeneration`(8)
-- `Pattern_Generation_Three` looks related to `patterngeneration`(8)
-- `Pattern_Generation_Two` looks related to `patterngeneration`(8)
-- `PatternGeneration_Diffusion_Limited_Aggregation_DLA` looks related to `patterngeneration`(8)
-- `PatternGeneration_Narrative_Generation` looks related to `patterngeneration`(8)
-- `PatternGeneration_Penrose_Tilings` looks related to `patterngeneration`(8)
-- `PatternGeneration_Typography_Generation` looks related to `patterngeneration`(8)
-- `PatternGeneration_Wang_Tiles` looks related to `patterngeneration`(8)
-- `PhysicsSimulation_Bouncing_Ball_Physics` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Cloth_Simulation` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Collision_Detection` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Constraints` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Finite_Element_Method_FEM` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Fluid_Simulation_SPH` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Force_Fields` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Mass_Spring_Damper` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Newton_s_Laws` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Numerical_Integration` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Particle_Systems` looks related to `particles`(8), `physicssimulation`(8)
-- `PhysicsSimulation_Rigid_Body_Dynamics` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Spring_Mass_Systems` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Three_Body_Problem` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Vector_Fields` looks related to `physicssimulation`(8)
-- `PhysicsSimulation_Verlet_Integration` looks related to `physicssimulation`(8)
-- `Primitives_2` looks related to `primitives`(8)
 - `Primitives_4` looks related to `primitives`(8)
+- `Primitives_Godot` looks related to `primitives`(8)
+- `Primitives_Irregular` looks related to `primitives`(8)
+- `Primitives_Load` looks related to `primitives`(8)
+- `Primitives_Platonic` looks related to `primitives`(8)
+- `Primitives_Torus` looks related to `primitives`(8)
+- `Primitives_Tron_Grid_Navigation` looks related to `primitives`(8)
+- `Primitives_Useful` looks related to `primitives`(8)
+- `ProceduralGenerationCaveExplorer3dUi` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationCrystalRandom` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingcubesFlatLandscape` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingCubesInsideCave` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingcubesPortalLandscape` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingCubesSculpture` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingcubesTorusSculpture` looks related to `proceduralgeneration`(8)
+- `ProceduralGenerationMarchingCubesVovelNoise` looks related to `noise`(8), `proceduralgeneration`(8)
+- `Randomness_Random_Transformations` looks related to `randomness`(8), `transformation`(8)
+- `SoftBodies_Obsticals_Part1` looks related to `softbodies`(8)
+- `TestMap_Unused_1` looks related to `unused`(8)
+- `TestMap_Unused_10` looks related to `unused`(8)
+- `TestMap_Unused_11` looks related to `unused`(8)
+- `TestMap_Unused_12` looks related to `unused`(8)
+- `TestMap_Unused_13` looks related to `unused`(8)
+- `TestMap_Unused_14` looks related to `unused`(8)
+- `TestMap_Unused_15` looks related to `unused`(8)
+- `TestMap_Unused_16` looks related to `unused`(8)
+- `TestMap_Unused_17` looks related to `unused`(8)
+- `TestMap_Unused_18` looks related to `unused`(8)
+- `TestMap_Unused_19` looks related to `unused`(8)
+- `TestMap_Unused_2` looks related to `unused`(8)
 
 ### cross_sequence_prefix_hints (info only)
 
 - `DataStructures_Union_Find_Disjoint_Set` owned by `datastructures`; also name-matches `joints`(8)
+- `Pattern_Generation_Four` owned by `unused`; also name-matches `patterngeneration`(8)
+- `Pattern_Generation_One` owned by `unused`; also name-matches `patterngeneration`(8)
+- `Pattern_Generation_Seven` owned by `unused`; also name-matches `patterngeneration`(8)
+- `Pattern_Generation_Six` owned by `unused`; also name-matches `patterngeneration`(8)
+- `Pattern_Generation_Three` owned by `unused`; also name-matches `patterngeneration`(8)
+- `Pattern_Generation_Two` owned by `unused`; also name-matches `patterngeneration`(8)
+- `PhysicsSimulation_Particle_Systems` owned by `physicssimulation`; also name-matches `particles`(8)
+- `Primitives_2` owned by `unused`; also name-matches `primitives`(8)
 - `ProceduralGenerationBooleanPatterns` owned by `constraint_solvers`; also name-matches `proceduralgeneration`(8)
 - `ProceduralGenerationNetSpace` owned by `higher_dimensions`; also name-matches `proceduralgeneration`(8)
 - `ProceduralGenerationPortals` owned by `higher_dimensions`; also name-matches `proceduralgeneration`(8)
@@ -129,9 +129,3 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `RecursiveEmergence_Cellular_Automata_2D` owned by `recursiveemergence`; also name-matches `cellularautomata`(8)
 - `RecursiveEmergence_Cellular_Automata_3D` owned by `recursiveemergence`; also name-matches `cellularautomata`(8)
 - `SearchPathfinding_Particle_Swarm_Optimization` owned by `searchpathfinding`; also name-matches `particles`(8)
-- `Shader_02_Colors` owned by `patterngeneration`; also name-matches `color`(8)
-- `Shader_07_Noise` owned by `patterngeneration`; also name-matches `noise`(8)
-- `Shader_08_CellularNoise` owned by `patterngeneration`; also name-matches `noise`(8)
-- `SpeculativeComputation_Queer_Morphological_Systems` owned by `speculativecomputation`; also name-matches `lsystems`(8)
-- `SwarmIntelligence_Particle_Swarm_Optimization` owned by `swarmintelligence`; also name-matches `particles`(8)
-- `VectorForces` owned by `vectors`; also name-matches `forces`(8)

@@ -1,285 +1,285 @@
 {
   "_meta": {
-    "description": "Explicit curriculum spine - recommended progression through QFEP",
-    "version": "1.2",
-    "last_updated": "2026-02-16",
-    "note": "Vectors integrated into primitives, transformations, forces, and noise"
+	"description": "Explicit curriculum spine - recommended progression through QFEP",
+	"version": "1.2",
+	"last_updated": "2026-02-16",
+	"note": "Vectors integrated into primitives, transformations, forces, and noise"
   },
 
   "navigation": {
-    "description": "How the player moves through the game",
-    "pattern": "hub_and_spoke",
-    "hub": "Lab",
-    "rules": [
-      "The Lab is the central hub. All sequences start and end here.",
-      "The last map in every sequence returns the player to the Lab.",
-      "On return to Lab, new teleporters appear based on completed sequences.",
-      "Spine sequences unlock the next spine sequence teleporter.",
-      "Branch sequences unlock from their parent (spine or branch).",
-      "Branch completions can unlock further branch sequences (chain unlocks).",
+	"description": "How the player moves through the game",
+	"pattern": "hub_and_spoke",
+	"hub": "Lab",
+	"rules": [
+	  "The Lab is the central hub. All sequences start and end here.",
+	  "The last map in every sequence returns the player to the Lab.",
+	  "On return to Lab, new teleporters appear based on completed sequences.",
+	  "Spine sequences unlock the next spine sequence teleporter.",
+	  "Branch sequences unlock from their parent (spine or branch).",
+	  "Branch completions can unlock further branch sequences (chain unlocks).",
       "The player discovers the full curriculum by completing sequences and returning to see what opened."
-    ],
-    "teleporter_logic": "Defined by branch_points + branch_chains. Spine progression is linear (order field). On completing sequence X, all sequences listed in X's unlocks appear as new Lab teleporters."
+	],
+	"teleporter_logic": "Defined by branch_points + branch_chains. Spine progression is linear (order field). On completing sequence X, all sequences listed in X's unlocks appear as new Lab teleporters."
   },
 
   "spine": {
-    "description": "The recommended path through Ada Research, ordered by QFEP phases",
-    "sequences": [
-      {
-        "name": "primitives",
-        "phase": "F_order",
-        "qfep_role": "Foundation - points, lines, planes, and basic vectors",
-        "lab_post": "Lab/map_data_post_primitives",
-        "order": 1
-      },
-      {
-        "name": "transformation",
-        "phase": "F_order",
-        "qfep_role": "Invariants - dot/cross products enable rotation",
-        "lab_post": "Lab/map_data_post_transformation",
-        "order": 2
-      },
-      {
-        "name": "wavefunctions",
-        "phase": "oscillation",
-        "qfep_role": "F ↔ E oscillation - sine creates curves",
-        "lab_post": "Lab/map_data_post_wavefunctions",
-        "order": 3
-      },
-      {
-        "name": "forces",
-        "phase": "oscillation",
-        "qfep_role": "Newton's laws - vectors become physics",
-        "lab_post": "Lab/map_data_post_forces",
-        "order": 4
-      },
-      {
-        "name": "randomness",
-        "phase": "E_entropy",
-        "qfep_role": "Disorder as creative force",
-        "lab_post": "Lab/map_data_post_random",
-        "order": 5
-      },
-      {
-        "name": "noise",
-        "phase": "E_entropy",
-        "qfep_role": "Structured randomness - Perlin, flow fields",
-        "lab_post": "Lab/map_data_post_noise",
-        "order": 6
-      },
-      {
-        "name": "cellularautomata",
-        "phase": "E_entropy",
-        "qfep_role": "Simple rules → complex behavior",
-        "lab_post": "Lab/map_data_post_cellularautomata",
-        "order": 7
-      },
-      {
-        "name": "fractals",
-        "phase": "lambda_edge",
-        "qfep_role": "Self-similarity, infinite detail",
-        "lab_post": "Lab/map_data_post_fractals",
-        "order": 8
-      },
-      {
-        "name": "lsystems",
-        "phase": "lambda_edge",
-        "qfep_role": "Generative grammars",
-        "lab_post": "Lab/map_data_post_lsystems",
-        "order": 9
-      },
-      {
-        "name": "proceduralgeneration",
-        "phase": "lambda_edge",
-        "qfep_role": "WFC, Markov, emergence from rules",
-        "lab_post": "Lab/map_data_post_proceduralgeneration",
-        "order": 10
-      },
-      {
-        "name": "morphogenesis",
-        "phase": "integration",
-        "qfep_role": "Turing patterns - order from chaos",
-        "lab_post": "Lab/map_data_post_morphogenesis",
-        "order": 11
-      },
-      {
-        "name": "swarmintelligence",
-        "phase": "integration",
-        "qfep_role": "Collective behavior, stigmergy",
-        "lab_post": "Lab/map_data_post_swarmintelligence",
-        "order": 12
-      },
-      {
-        "name": "softbodies",
-        "phase": "integration",
-        "qfep_role": "Deformable matter, cloth, fluid",
-        "lab_post": "Lab/map_data_post_softbodies",
-        "order": 13
-      },
-      {
-        "name": "machinelearning",
-        "phase": "integration",
-        "qfep_role": "Learning systems, neural networks",
-        "lab_post": "Lab/map_data_post_machinelearning",
-        "order": 14
-      },
-      {
-        "name": "foundationscrisis",
-        "phase": "synthesis",
-        "qfep_role": "Gödel, Russell - limits of formal systems",
-        "lab_post": "Lab/map_data_post_foundationscrisis",
-        "order": 15
-      },
-      {
-        "name": "qfeplaboratory",
-        "phase": "synthesis",
-        "qfep_role": "The complete QFEP formula embodied",
-        "lab_post": "Lab/map_data_post_qfeplaboratory",
-        "order": 16
-      },
-      {
-        "name": "speculativecomputation",
-        "phase": "synthesis",
-        "qfep_role": "Queer futures, non-normative algorithms",
-        "lab_post": "Lab/map_data_post_speculativecomputation",
-        "order": 17
-      },
-      {
-        "name": "criticalalgorithms",
-        "phase": "synthesis",
-        "qfep_role": "Ethics of computation, algorithmic bias",
-        "lab_post": "Lab/map_data_post_criticalalgorithms",
-        "order": 18
-      }
-    ]
+	"description": "The recommended path through Ada Research, ordered by QFEP phases",
+	"sequences": [
+	  {
+		"name": "primitives",
+		"phase": "F_order",
+		"qfep_role": "Foundation - points, lines, planes, and basic vectors",
+		"lab_post": "Lab/map_data_post_primitives",
+		"order": 1
+	  },
+	  {
+		"name": "transformation",
+		"phase": "F_order",
+		"qfep_role": "Invariants - dot/cross products enable rotation",
+		"lab_post": "Lab/map_data_post_transformation",
+		"order": 2
+	  },
+	  {
+		"name": "wavefunctions",
+		"phase": "oscillation",
+		"qfep_role": "F ↔ E oscillation - sine creates curves",
+		"lab_post": "Lab/map_data_post_wavefunctions",
+		"order": 3
+	  },
+	  {
+		"name": "forces",
+		"phase": "oscillation",
+		"qfep_role": "Newton's laws - vectors become physics",
+		"lab_post": "Lab/map_data_post_forces",
+		"order": 4
+	  },
+	  {
+		"name": "randomness",
+		"phase": "E_entropy",
+		"qfep_role": "Disorder as creative force",
+		"lab_post": "Lab/map_data_post_random",
+		"order": 5
+	  },
+	  {
+		"name": "noise",
+		"phase": "E_entropy",
+		"qfep_role": "Structured randomness - Perlin, flow fields",
+		"lab_post": "Lab/map_data_post_noise",
+		"order": 6
+	  },
+	  {
+		"name": "cellularautomata",
+		"phase": "E_entropy",
+		"qfep_role": "Simple rules → complex behavior",
+		"lab_post": "Lab/map_data_post_cellularautomata",
+		"order": 7
+	  },
+	  {
+		"name": "fractals",
+		"phase": "lambda_edge",
+		"qfep_role": "Self-similarity, infinite detail",
+		"lab_post": "Lab/map_data_post_fractals",
+		"order": 8
+	  },
+	  {
+		"name": "lsystems",
+		"phase": "lambda_edge",
+		"qfep_role": "Generative grammars",
+		"lab_post": "Lab/map_data_post_lsystems",
+		"order": 9
+	  },
+	  {
+		"name": "proceduralgeneration",
+		"phase": "lambda_edge",
+		"qfep_role": "WFC, Markov, emergence from rules",
+		"lab_post": "Lab/map_data_post_proceduralgeneration",
+		"order": 10
+	  },
+	  {
+		"name": "morphogenesis",
+		"phase": "integration",
+		"qfep_role": "Turing patterns - order from chaos",
+		"lab_post": "Lab/map_data_post_morphogenesis",
+		"order": 11
+	  },
+	  {
+		"name": "swarmintelligence",
+		"phase": "integration",
+		"qfep_role": "Collective behavior, stigmergy",
+		"lab_post": "Lab/map_data_post_swarmintelligence",
+		"order": 12
+	  },
+	  {
+		"name": "softbodies",
+		"phase": "integration",
+		"qfep_role": "Deformable matter, cloth, fluid",
+		"lab_post": "Lab/map_data_post_softbodies",
+		"order": 13
+	  },
+	  {
+		"name": "machinelearning",
+		"phase": "integration",
+		"qfep_role": "Learning systems, neural networks",
+		"lab_post": "Lab/map_data_post_machinelearning",
+		"order": 14
+	  },
+	  {
+		"name": "foundationscrisis",
+		"phase": "synthesis",
+		"qfep_role": "Gödel, Russell - limits of formal systems",
+		"lab_post": "Lab/map_data_post_foundationscrisis",
+		"order": 15
+	  },
+	  {
+		"name": "qfeplaboratory",
+		"phase": "synthesis",
+		"qfep_role": "The complete QFEP formula embodied",
+		"lab_post": "Lab/map_data_post_qfeplaboratory",
+		"order": 16
+	  },
+	  {
+		"name": "speculativecomputation",
+		"phase": "synthesis",
+		"qfep_role": "Queer futures, non-normative algorithms",
+		"lab_post": "Lab/map_data_post_speculativecomputation",
+		"order": 17
+	  },
+	  {
+		"name": "criticalalgorithms",
+		"phase": "synthesis",
+		"qfep_role": "Ethics of computation, algorithmic bias",
+		"lab_post": "Lab/map_data_post_criticalalgorithms",
+		"order": 18
+	  }
+	]
   },
 
   "phases": {
-    "F_order": {
-      "name": "Order (F)",
-      "color": "#4A90D9",
-      "description": "Free energy minimization - prediction, stability, structure",
-      "gamwell_chapters": "Ch 1-4: Euclid, Formalism"
-    },
-    "oscillation": {
-      "name": "Oscillation (F ↔ E)",
-      "color": "#9B59B6",
-      "description": "Dynamic balance between order and entropy",
-      "gamwell_chapters": "Ch 7-8: Symmetry, Bauhaus"
-    },
-    "E_entropy": {
-      "name": "Entropy (E(S))",
-      "color": "#E74C3C",
-      "description": "System entropy - disorder as creative force",
-      "gamwell_chapters": "Ch 10: Turing Morphogenesis"
-    },
-    "lambda_edge": {
-      "name": "Edge of Chaos (λ)",
-      "color": "#F39C12",
-      "description": "The λ parameter - tuning between order and chaos",
-      "gamwell_chapters": "Ch 12: Fractals, Complexity"
-    },
-    "integration": {
-      "name": "Integration (φΔE)",
-      "color": "#2ECC71",
-      "description": "Rate of entropy change - emergence, self-organization",
-      "gamwell_chapters": "Ch 10-12: Turing, Emergence"
-    },
-    "synthesis": {
-      "name": "Synthesis",
-      "color": "#E91E63",
-      "description": "Full QFEP - edges, paradoxes, queer futures",
-      "gamwell_chapters": "Ch 3-6, 9, 13: Foundations Crisis"
-    }
+	"F_order": {
+	  "name": "Order (F)",
+	  "color": "#4A90D9",
+	  "description": "Free energy minimization - prediction, stability, structure",
+	  "gamwell_chapters": "Ch 1-4: Euclid, Formalism"
+	},
+	"oscillation": {
+	  "name": "Oscillation (F ↔ E)",
+	  "color": "#9B59B6",
+	  "description": "Dynamic balance between order and entropy",
+	  "gamwell_chapters": "Ch 7-8: Symmetry, Bauhaus"
+	},
+	"E_entropy": {
+	  "name": "Entropy (E(S))",
+	  "color": "#E74C3C",
+	  "description": "System entropy - disorder as creative force",
+	  "gamwell_chapters": "Ch 10: Turing Morphogenesis"
+	},
+	"lambda_edge": {
+	  "name": "Edge of Chaos (λ)",
+	  "color": "#F39C12",
+	  "description": "The λ parameter - tuning between order and chaos",
+	  "gamwell_chapters": "Ch 12: Fractals, Complexity"
+	},
+	"integration": {
+	  "name": "Integration (φΔE)",
+	  "color": "#2ECC71",
+	  "description": "Rate of entropy change - emergence, self-organization",
+	  "gamwell_chapters": "Ch 10-12: Turing, Emergence"
+	},
+	"synthesis": {
+	  "name": "Synthesis",
+	  "color": "#E91E63",
+	  "description": "Full QFEP - edges, paradoxes, queer futures",
+	  "gamwell_chapters": "Ch 3-6, 9, 13: Foundations Crisis"
+	}
   },
 
   "branches": {
-    "description": "Optional sequences that unlock from spine or other branch completions",
-    "branch_points": {
-      "primitives": {
-        "unlocks": ["meshes", "datastructures", "color"],
-        "note": "Foundation tools for building"
-      },
-      "transformation": {
-        "unlocks": ["computationalgeometry", "graphtheory"],
-        "note": "Spatial and relational structures"
-      },
-      "forces": {
-        "unlocks": ["physicssimulation", "particles"],
-        "note": "Physics engines and particle systems"
-      },
-      "wavefunctions": {
-        "unlocks": ["proceduralaudio"],
-        "note": "Sound synthesis"
-      },
-      "noise": {
-        "unlocks": ["patterngeneration"],
-        "note": "Shaders and visual pattern generation"
-      },
-      "proceduralgeneration": {
-        "unlocks": ["spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "grammar_systems"],
-        "note": "The split procgen sub-sequences"
-      },
-      "machinelearning": {
-        "unlocks": ["recursiveemergence", "artmathematics"],
-        "note": "Recursive patterns and art history"
-      },
-      "criticalalgorithms": {
-        "unlocks": ["advancedlaboratory"],
-        "note": "Post-game content"
-      }
-    },
-    "branch_chains": {
-      "description": "Branch completions that unlock further branches",
-      "color": {
-        "unlocks": ["array_tutorial"],
-        "note": "Color patterns lead to structured repetition"
-      },
-      "datastructures": {
-        "unlocks": ["searchpathfinding"],
-        "note": "Data structures enable search and traversal algorithms"
-      }
-    },
-    "unassigned": {
-      "description": "Sequences not yet connected to the unlock graph",
-      "sequences": ["vectors", "resourcemanagement", "bricolage"],
-      "note": "Pending design decisions on where these branch from"
-    }
+	"description": "Optional sequences that unlock from spine or other branch completions",
+	"branch_points": {
+	  "primitives": {
+		"unlocks": ["meshes", "datastructures", "color"],
+		"note": "Foundation tools for building"
+	  },
+	  "transformation": {
+		"unlocks": ["computationalgeometry", "graphtheory"],
+		"note": "Spatial and relational structures"
+	  },
+	  "forces": {
+		"unlocks": ["physicssimulation", "particles"],
+		"note": "Physics engines and particle systems"
+	  },
+	  "wavefunctions": {
+		"unlocks": ["proceduralaudio"],
+		"note": "Sound synthesis"
+	  },
+	  "noise": {
+		"unlocks": ["patterngeneration"],
+		"note": "Shaders and visual pattern generation"
+	  },
+	  "proceduralgeneration": {
+		"unlocks": ["spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "grammar_systems"],
+		"note": "The split procgen sub-sequences"
+	  },
+	  "machinelearning": {
+		"unlocks": ["recursiveemergence", "artmathematics"],
+		"note": "Recursive patterns and art history"
+	  },
+	  "criticalalgorithms": {
+		"unlocks": ["advancedlaboratory"],
+		"note": "Post-game content"
+	  }
+	},
+	"branch_chains": {
+	  "description": "Branch completions that unlock further branches",
+	  "color": {
+		"unlocks": ["array_tutorial"],
+		"note": "Color patterns lead to structured repetition"
+	  },
+	  "datastructures": {
+		"unlocks": ["searchpathfinding"],
+		"note": "Data structures enable search and traversal algorithms"
+	  }
+	},
+	"unassigned": {
+	  "description": "Sequences not yet connected to the unlock graph",
+	  "sequences": ["vectors", "resourcemanagement", "bricolage"],
+	  "note": "Pending design decisions on where these branch from"
+	}
   },
 
   "lab_evolution": {
-    "description": "Lab teleporter progression. Each post-map is a FULL lab layout loaded after completing that sequence. The Lab is the hub: every sequence ends here, new teleporters appear on return.",
-    "actual_progression": [
-      { "after": "none",           "lab_file": "map_data.json",                      "added": ["primitives", "transformation", "color"], "note": "Initial. Slope to primitives walkable, others visible but not reachable." },
-      { "after": "primitives",     "lab_file": "map_data_post_primitives.json",       "added": [],                                        "note": "Slope to transformation opens." },
-      { "after": "transformation", "lab_file": "map_data_post_transformation.json",   "added": ["tc:2:y"],                                "note": "Transport cube unlocks vertical access to color." },
-      { "after": "color",          "lab_file": "map_data_post_color.json",            "added": ["array_tutorial", "forces", "wavefunctions"], "note": "New space opens." },
-      { "after": "wavefunctions",  "lab_file": "map_data_post_wavefunctions.json",    "added": ["noise", "randomness"],                    "note": "New space opens." },
-      { "after": "noise",          "lab_file": "map_data_post_noise.json",            "added": ["cellularautomata", "fractals", "lsystems"], "note": "New room opens." },
-      { "after": "fractals",       "lab_file": "map_data_post_fractals.json",         "added": ["proceduralgeneration", "softbodies"] },
-      { "after": "softbodies",     "lab_file": "map_data_post_softbodies.json",       "added": ["swarmintelligence", "morphogenesis"] },
-      { "after": "morphogenesis",  "lab_file": "map_data_post_morphogenesis.json",    "added": ["machinelearning"] },
-      { "after": "machinelearning","lab_file": "map_data_post_machinelearning.json",  "added": ["foundationscrisis", "graphtheory"] },
-      { "after": "foundationscrisis","lab_file": "map_data_post_foundationscrisis.json","added": ["qfeplaboratory"] },
-      { "after": "qfeplaboratory", "lab_file": "map_data_post_qfeplaboratory.json",  "added": ["speculativecomputation", "criticalalgorithms"] }
-    ],
-    "known_issues": [
-      "cellularautomata post-map removes lsystems teleporter (copy error, reappears in post_fractals)",
+	"description": "Lab teleporter progression. Each post-map is a FULL lab layout loaded after completing that sequence. The Lab is the hub: every sequence ends here, new teleporters appear on return.",
+	"actual_progression": [
+	  { "after": "none",           "lab_file": "map_data.json",                      "added": ["primitives", "transformation", "color"], "note": "Initial. Slope to primitives walkable, others visible but not reachable." },
+	  { "after": "primitives",     "lab_file": "map_data_post_primitives.json",       "added": [],                                        "note": "Slope to transformation opens." },
+	  { "after": "transformation", "lab_file": "map_data_post_transformation.json",   "added": ["tc:2:y"],                                "note": "Transport cube unlocks vertical access to color." },
+	  { "after": "color",          "lab_file": "map_data_post_color.json",            "added": ["array_tutorial", "forces", "wavefunctions"], "note": "New space opens." },
+	  { "after": "wavefunctions",  "lab_file": "map_data_post_wavefunctions.json",    "added": ["noise", "randomness"],                    "note": "New space opens." },
+	  { "after": "noise",          "lab_file": "map_data_post_noise.json",            "added": ["cellularautomata", "fractals", "lsystems"], "note": "New room opens." },
+	  { "after": "fractals",       "lab_file": "map_data_post_fractals.json",         "added": ["proceduralgeneration", "softbodies"] },
+	  { "after": "softbodies",     "lab_file": "map_data_post_softbodies.json",       "added": ["swarmintelligence", "morphogenesis"] },
+	  { "after": "morphogenesis",  "lab_file": "map_data_post_morphogenesis.json",    "added": ["machinelearning"] },
+	  { "after": "machinelearning","lab_file": "map_data_post_machinelearning.json",  "added": ["foundationscrisis", "graphtheory"] },
+	  { "after": "foundationscrisis","lab_file": "map_data_post_foundationscrisis.json","added": ["qfeplaboratory"] },
+	  { "after": "qfeplaboratory", "lab_file": "map_data_post_qfeplaboratory.json",  "added": ["speculativecomputation", "criticalalgorithms"] }
+	],
+	"known_issues": [
+	  "cellularautomata post-map removes lsystems teleporter (copy error, reappears in post_fractals)",
       "Branch sequences have post-map files but aren't in the main progression chain yet"
-    ]
+	]
   },
 
   "visualization": {
-    "layout": "metro_map",
-    "spine_style": {
-      "line_width": 8,
-      "station_size": 24,
-      "glow": true
-    },
-    "branch_style": {
-      "line_width": 4,
-      "station_size": 16,
-      "dashed": true
-    }
+	"layout": "metro_map",
+	"spine_style": {
+	  "line_width": 8,
+	  "station_size": 24,
+	  "glow": true
+	},
+	"branch_style": {
+	  "line_width": 4,
+	  "station_size": 16,
+	  "dashed": true
+	}
   }
 }
