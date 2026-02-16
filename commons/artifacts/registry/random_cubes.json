@@ -5,7 +5,10 @@
 			"lookup_name": "r_c",
 			"description": "Cube that sinks out and rises back in on randomized timing, with in/out state indicator and collider gating.",
 			"scene": "res://commons/primitives/cubes/random_cycle_cube.tscn",
-			"category": "hazards"
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

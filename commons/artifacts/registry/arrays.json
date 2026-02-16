@@ -5,7 +5,10 @@
 			"lookup_name": "pattern_tile_puzzle",
 			"description": "Create patterns on a small tile grid. Watch them repeat across a carpet. Handmade meets computational - from textile traditions to pixel art.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_4x4": {
 			"name": "4x4 Pattern Tile",
@@ -16,7 +19,10 @@
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 0
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_mirror": {
 			"name": "Mirror Pattern Tile",
@@ -27,7 +33,10 @@
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 3
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_8x8": {
 			"name": "8x8 Pattern Tile",
@@ -38,7 +47,10 @@
 			"config": {
 				"tile_size": 8,
 				"repeat_mode": 0
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_brick": {
 			"name": "Brick Pattern Tile",
@@ -49,7 +61,10 @@
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 6
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_herringbone": {
 			"name": "Herringbone Pattern Tile",
@@ -60,28 +75,40 @@
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 8
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"index_visualizer": {
 			"name": "Index Visualizer",
 			"lookup_name": "index_visualizer",
 			"description": "Displays current grid position as array index [row, col].",
 			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pattern_tile_cube": {
 			"name": "Pattern Tile Cube",
 			"lookup_name": "pattern_tile_cube",
 			"description": "Small grabbable color cube for pattern tile puzzle. Drag to grid cells to place colors.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer": {
 			"name": "Step Sequencer",
 			"lookup_name": "step_sequencer",
 			"description": "2D step sequencer with click-to-toggle grid. Arrays as sound - playhead reads indices, triggers sounds.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_trap": {
 			"name": "Trap Sequencer",
@@ -95,10 +122,21 @@
 				"bpm": 85,
 				"sound_preset": "trap_beats"
 			},
-			"dev_themes": ["audio"],
+			"dev_themes": [
+				"audio"
+			],
 			"dev_category": "procedural_audio",
 			"complexity": "beginner",
-			"tags": ["music", "sequencer", "trap", "beats", "interactive"]
+			"tags": [
+				"music",
+				"sequencer",
+				"trap",
+				"beats",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_synth": {
 			"name": "Synth Sequencer",
@@ -111,7 +149,10 @@
 				"num_steps": 16,
 				"bpm": 120,
 				"sound_preset": "synth_kit"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_house": {
 			"name": "90s House Sequencer",
@@ -125,10 +166,22 @@
 				"bpm": 122,
 				"sound_preset": "90s_house"
 			},
-			"dev_themes": ["audio"],
+			"dev_themes": [
+				"audio"
+			],
 			"dev_category": "procedural_audio",
 			"complexity": "beginner",
-			"tags": ["music", "sequencer", "house", "90s", "dance", "interactive"]
+			"tags": [
+				"music",
+				"sequencer",
+				"house",
+				"90s",
+				"dance",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_pads": {
 			"name": "Juno Pads Sequencer",
@@ -141,7 +194,10 @@
 				"num_steps": 8,
 				"bpm": 80,
 				"sound_preset": "juno_pads"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_kraftwerk": {
 			"name": "Kraftwerk Sequencer",
@@ -155,10 +211,23 @@
 				"bpm": 112,
 				"sound_preset": "kraftwerk"
 			},
-			"dev_themes": ["audio", "philosophy"],
+			"dev_themes": [
+				"audio",
+				"philosophy"
+			],
 			"dev_category": "procedural_audio",
 			"complexity": "intermediate",
-			"tags": ["music", "sequencer", "kraftwerk", "electronic", "historic", "interactive"]
+			"tags": [
+				"music",
+				"sequencer",
+				"kraftwerk",
+				"electronic",
+				"historic",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_disco": {
 			"name": "Disco Sequencer",
@@ -171,7 +240,10 @@
 				"num_steps": 16,
 				"bpm": 120,
 				"sound_preset": "disco"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_ambient": {
 			"name": "Ambient Works Sequencer",
@@ -185,10 +257,22 @@
 				"bpm": 75,
 				"sound_preset": "ambient_works"
 			},
-			"dev_themes": ["audio"],
+			"dev_themes": [
+				"audio"
+			],
 			"dev_category": "procedural_audio",
 			"complexity": "intermediate",
-			"tags": ["music", "sequencer", "ambient", "atmospheric", "generative", "interactive"]
+			"tags": [
+				"music",
+				"sequencer",
+				"ambient",
+				"atmospheric",
+				"generative",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_jazz": {
 			"name": "Jazz Fusion Sequencer",
@@ -202,10 +286,22 @@
 				"bpm": 100,
 				"sound_preset": "jazz_fusion"
 			},
-			"dev_themes": ["audio"],
+			"dev_themes": [
+				"audio"
+			],
 			"dev_category": "procedural_audio",
 			"complexity": "intermediate",
-			"tags": ["music", "sequencer", "jazz", "fusion", "experimental", "interactive"]
+			"tags": [
+				"music",
+				"sequencer",
+				"jazz",
+				"fusion",
+				"experimental",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_chiptune": {
 			"name": "Chiptune Sequencer",
@@ -218,7 +314,10 @@
 				"num_steps": 16,
 				"bpm": 140,
 				"sound_preset": "chiptune"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_scifi": {
 			"name": "Sci-Fi Lab Sequencer",
@@ -231,7 +330,10 @@
 				"num_steps": 8,
 				"bpm": 90,
 				"sound_preset": "sci_fi_lab"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_cinematic": {
 			"name": "Cinematic Sequencer",
@@ -244,7 +346,10 @@
 				"num_steps": 8,
 				"bpm": 85,
 				"sound_preset": "cinematic"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_breakbeat": {
 			"name": "Breakbeat Sequencer",
@@ -257,7 +362,10 @@
 				"num_steps": 16,
 				"bpm": 160,
 				"sound_preset": "breakbeat"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_cosmic": {
 			"name": "Cosmic Sequencer",
@@ -270,7 +378,10 @@
 				"num_steps": 16,
 				"bpm": 110,
 				"sound_preset": "cosmic"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"step_sequencer_lofi": {
 			"name": "Lo-Fi Sequencer",
@@ -283,28 +394,40 @@
 				"num_steps": 8,
 				"bpm": 85,
 				"sound_preset": "lo_fi"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"binary_table": {
 			"name": "Binary Table Display",
 			"lookup_name": "binary_table",
 			"description": "Show any 2D array as a grid of values. See the data structure made visible.",
 			"scene": "res://algorithms/arrays/binary_table/binary_table_display.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pulsar_glass_tubes": {
 			"name": "Pulsar Glass Tubes",
 			"lookup_name": "pulsar_glass_tubes",
 			"description": "3D glass tube visualization of Pulsar B1919+21 radio waves. Height = signal intensity. Arrays as art.",
 			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pulsar_visualizer": {
 			"name": "Pulsar B1919+21 Visualizer",
 			"lookup_name": "pulsar_visualizer",
 			"description": "The first pulsar discovered (1967). Binary table + 3D glass tubes. Joy Division's Unknown Pleasures made interactive.",
 			"scene": "res://algorithms/arrays/pulsar/pulsar_visualizer.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pulsar_compact": {
 			"name": "Pulsar Compact",
@@ -316,7 +439,10 @@
 				"rows": 20,
 				"cols": 30,
 				"max_height": 0.15
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pulsar_lines": {
 			"name": "Pulsar Lines",
@@ -328,7 +454,10 @@
 				"visualization_mode": 1,
 				"rows": 60,
 				"cols": 50
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dffy0xfqibarl"]
+
+[ext_resource type="Script" uid="uid://bnf6t3euky5f" path="res://commons/mesh_grammar/mesh_grammar_demo.gd" id="1_demo"]
+
+[node name="MeshGrammarDemo" type="Node3D" unique_id=1041229208]
+script = ExtResource("1_demo")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=798228047]
+visible = false

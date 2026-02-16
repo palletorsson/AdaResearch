@@ -22,6 +22,11 @@
 				"slider",
 				"parameter_control",
 				"entropy"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
 			]
 		},
 		"phi_slider": {
@@ -47,6 +52,11 @@
 				"parameter_control",
 				"change_rate",
 				"queer_theory"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
 			]
 		},
 		"qfep_formula_3d": {
@@ -71,6 +81,11 @@
 				"formula",
 				"theory",
 				"3d"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
 			]
 		},
 		"qfep_sandbox_console": {
@@ -84,7 +99,12 @@
 			"artifact_type": "qfep_controller",
 			"qfep_term": "all",
 			"capacity": "CONTROL everything",
-			"status": "planned"
+			"status": "planned",
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"bifurcation_walkway": {
 			"name": "Bifurcation Walkway",
@@ -109,6 +129,11 @@
 				"chaos",
 				"phase_transition",
 				"embodied_learning"
+			],
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": [
+				"qfeplaboratory"
 			]
 		},
 		"edge_of_chaos_orb": {
@@ -134,6 +159,11 @@
 				"realtime",
 				"state_indicator",
 				"edge_of_chaos"
+			],
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": [
+				"qfeplaboratory"
 			]
 		},
 		"grab_sphere_F": {
@@ -148,7 +178,12 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "F"
+			"qfep_term": "F",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"grab_sphere_E": {
 			"name": "E Term Sphere",
@@ -162,7 +197,12 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "E(S)"
+			"qfep_term": "E(S)",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"grab_sphere_lambda": {
 			"name": "Lambda Term Sphere",
@@ -176,7 +216,12 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "λ"
+			"qfep_term": "λ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"grab_sphere_phi": {
 			"name": "Phi Term Sphere",
@@ -190,7 +235,12 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "φ"
+			"qfep_term": "φ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"qfep_reactor": {
 			"name": "QFEP Reactor",
@@ -202,7 +252,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "all",
-			"capacity": "SEE system state"
+			"capacity": "SEE system state",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"entropy_meter": {
 			"name": "Entropy Meter",
@@ -214,7 +269,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_instrument",
 			"qfep_term": "E(S)",
-			"capacity": "MEASURE entropy"
+			"capacity": "MEASURE entropy",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"edge_detector": {
 			"name": "Edge Detector",
@@ -226,7 +286,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_tool",
 			"qfep_term": "λ",
-			"capacity": "DETECT edge of chaos"
+			"capacity": "DETECT edge of chaos",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"phase_cube": {
 			"name": "Phase Cube",
@@ -238,7 +303,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "λ",
-			"capacity": "SEE phase transitions"
+			"capacity": "SEE phase transitions",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"qfep_oscilloscope": {
 			"name": "QFEP Oscilloscope",
@@ -250,7 +320,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_instrument",
 			"qfep_term": "F, E(S)",
-			"capacity": "SEE oscillation"
+			"capacity": "SEE oscillation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"reactive_particle_field": {
 			"name": "Reactive Particle Field",
@@ -262,7 +337,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "all",
-			"capacity": "SEE emergence"
+			"capacity": "SEE emergence",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"_comment_aliases": "=== ALIASES TO EXISTING ARTIFACTS ===",
 		"crystal_cluster": {
@@ -275,7 +355,12 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "F",
-			"capacity": "SEE order"
+			"capacity": "SEE order",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"reactive_particles": {
 			"name": "Reactive Particles",
@@ -286,7 +371,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "all"
+			"qfep_term": "all",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"crystal_formation": {
 			"name": "Crystal Formation",
@@ -300,7 +390,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "F"
+			"qfep_term": "F",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"edge_particles": {
 			"name": "Edge Particles",
@@ -314,7 +409,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ"
+			"qfep_term": "λ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"emergence_zone": {
 			"name": "Emergence Zone",
@@ -329,7 +429,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "all"
+			"qfep_term": "all",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"_comment_new": "=== NEW ARTIFACTS TO BUILD ===",
 		"random_cubes": {
@@ -341,7 +446,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)"
+			"qfep_term": "E(S)",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"particle_chaos": {
 			"name": "Particle Chaos",
@@ -352,7 +462,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)"
+			"qfep_term": "E(S)",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"ordered_grid": {
 			"name": "Ordered Grid",
@@ -363,7 +478,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "F"
+			"qfep_term": "F",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"chaos_particles": {
 			"name": "Chaos Particles",
@@ -374,7 +494,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)"
+			"qfep_term": "E(S)",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"dissolving_form": {
 			"name": "Dissolving Form",
@@ -385,7 +510,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)"
+			"qfep_term": "E(S)",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"complexity_pattern": {
 			"name": "Complexity Pattern",
@@ -396,7 +526,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ"
+			"qfep_term": "λ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"turing_pattern": {
 			"name": "Turing Pattern",
@@ -407,7 +542,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ"
+			"qfep_term": "λ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"edge_core": {
 			"name": "Edge Core",
@@ -418,7 +558,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "all"
+			"qfep_term": "all",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"rigid_sculpture": {
 			"name": "Rigid Sculpture",
@@ -429,7 +574,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ"
+			"qfep_term": "φ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"fluid_form": {
 			"name": "Fluid Form",
@@ -440,7 +590,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ"
+			"qfep_term": "φ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"preserved_pattern": {
 			"name": "Preserved Pattern",
@@ -451,7 +606,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ"
+			"qfep_term": "φ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		},
 		"transforming_pattern": {
 			"name": "Transforming Pattern",
@@ -462,7 +622,12 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ"
+			"qfep_term": "φ",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			]
 		}
 	}
 }

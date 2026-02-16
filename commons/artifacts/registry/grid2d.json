@@ -8,8 +8,16 @@
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
-			"tags": ["substrate", "grid2d", "cellular_automata", "universal"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"cellular_automata",
+				"universal"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"grid2d_life": {
 			"name": "Grid2D — Game of Life",
@@ -19,8 +27,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "game_of_life", "conway", "cellular_automata"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"game_of_life",
+				"conway",
+				"cellular_automata"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_seeds": {
 			"name": "Grid2D — Seeds",
@@ -30,8 +49,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "seeds", "cellular_automata"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"seeds",
+				"cellular_automata"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_brians_brain": {
 			"name": "Grid2D — Brian's Brain",
@@ -41,8 +70,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "brians_brain", "cellular_automata"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"brians_brain",
+				"cellular_automata"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_rule30": {
 			"name": "Grid2D — Rule 30",
@@ -52,8 +91,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "rule30", "wolfram", "1d_ca"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"rule30",
+				"wolfram",
+				"1d_ca"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_rule110": {
 			"name": "Grid2D — Rule 110",
@@ -63,8 +113,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "rule110", "wolfram", "1d_ca", "turing_complete"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"rule110",
+				"wolfram",
+				"1d_ca",
+				"turing_complete"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_rule90": {
 			"name": "Grid2D — Rule 90",
@@ -74,8 +136,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "rule90", "wolfram", "sierpinski", "fractal"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"rule90",
+				"wolfram",
+				"sierpinski",
+				"fractal"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_bfs": {
 			"name": "Grid2D — BFS Flood Fill",
@@ -85,8 +159,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "searchpathfinding",
-			"tags": ["substrate", "grid2d", "bfs", "flood_fill", "search", "pathfinding"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"bfs",
+				"flood_fill",
+				"search",
+				"pathfinding"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"searchpathfinding"
+			]
 		},
 		"grid2d_dfs_maze": {
 			"name": "Grid2D — DFS Maze Generator",
@@ -96,8 +182,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "searchpathfinding",
-			"tags": ["substrate", "grid2d", "dfs", "maze", "generation", "backtracker"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"dfs",
+				"maze",
+				"generation",
+				"backtracker"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"searchpathfinding"
+			]
 		},
 		"grid2d_wireworld": {
 			"name": "Grid2D — Wireworld",
@@ -107,8 +205,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "wireworld", "circuit", "logic_gate"],
-			"complexity": "advanced"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"wireworld",
+				"circuit",
+				"logic_gate"
+			],
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"grid2d_langtons_ant": {
 			"name": "Grid2D — Langton's Ant",
@@ -118,8 +227,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "grid2d", "langtons_ant", "emergent", "deterministic"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid2d",
+				"langtons_ant",
+				"emergent",
+				"deterministic"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		}
 	}
 }

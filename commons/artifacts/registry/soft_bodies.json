@@ -8,105 +8,150 @@
 			"lookup_name": "cloth_simulation",
 			"description": "Soft body physics simulation using spring-mass systems",
 			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"flagdancer": {
 			"name": "Flag Dancer",
 			"lookup_name": "flagdancer",
 			"description": "Animated soft body flag that waves and dances using cloth physics simulation with wind forces.",
 			"scene": "res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"softbody3d": {
 			"name": "SoftBody 3D",
 			"lookup_name": "softbody3d",
 			"description": "Core soft body physics demonstration using Godot's SoftBody3D node for deformable mesh simulation.",
 			"scene": "res://algorithms/physicssimulation/softbody3d/softbody3d.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"squishy_ball_pit": {
 			"name": "Squishy Ball Pit",
 			"lookup_name": "squishy_ball_pit",
 			"description": "A glass container filled with squishy, glowing soft body spheres.",
 			"scene": "res://algorithms/softbodies/advanced_concepts/squishy_ball_pit.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"soft_trampoline": {
 			"name": "Soft Trampoline",
 			"lookup_name": "soft_trampoline",
 			"description": "A large, bouncy soft body sheet pinned at the edges.",
 			"scene": "res://algorithms/softbodies/advanced_concepts/soft_trampoline.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"breathing_room": {
 			"name": "Breathing Room",
 			"lookup_name": "breathing_room",
 			"description": "A corridor with soft body walls that rhythmically expand and contract.",
 			"scene": "res://algorithms/softbodies/advanced_concepts/breathing_room.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"soft_mushrooms": {
 			"name": "Soft Mushrooms",
 			"lookup_name": "soft_mushrooms",
 			"description": "Procedurally generated mushrooms with wobbly soft body caps.",
 			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"cloth_straps": {
 			"name": "Cloth Straps",
 			"lookup_name": "cloth_straps",
 			"description": "Hanging soft body cloth straps that the player can walk through.",
 			"scene": "res://algorithms/softbodies/cloth_straps/cloth_straps.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"revolving_joy_ride": {
 			"name": "Revolving Joy Ride",
 			"lookup_name": "revolving_joy_ride",
 			"description": "A rotating ride with hanging soft bodies colliding with obstacles.",
 			"scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"pendulum_slap": {
 			"name": "Pendulum Slap",
 			"lookup_name": "pendulum_slap",
 			"description": "A double pendulum that slaps soft bodies.",
 			"scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"softbody_test_gallery": {
 			"name": "SoftBody Test Gallery",
 			"lookup_name": "softbody_test_gallery",
 			"description": "A gallery of various soft body configuration tests.",
 			"scene": "res://algorithms/softbodies/softbody_test_gallery.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": []
 		},
 		"softbody_gallery_part1": {
 			"name": "SoftBody Gallery Part 1",
 			"lookup_name": "softbody_gallery_part1",
 			"description": "Part 1 of the soft body test gallery.",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"softbody_gallery_part2": {
 			"name": "SoftBody Gallery Part 2",
 			"lookup_name": "softbody_gallery_part2",
 			"description": "Part 2 of the soft body test gallery.",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"softbody_gallery_part3": {
 			"name": "SoftBody Gallery Part 3",
 			"lookup_name": "softbody_gallery_part3",
 			"description": "Part 3 of the soft body test gallery.",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"rounded_softbody_test": {
 			"name": "Rounded SoftBody Test",
 			"lookup_name": "rounded_softbody_test",
 			"description": "Test scene for a rounded soft body implementation.",
 			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
-			"category": "physics"
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

@@ -12,10 +12,10 @@ Checks unresolved scenes, placeholder-backed entries, and curation metadata cove
 | `unsupported_scene_path` | 0 |
 | `disallowed_scene_prefix` | 1 |
 | `unresolved_scene_files` | 38 |
-| `missing_include_in_map_data` | 1120 |
-| `missing_map_ready` | 1120 |
-| `missing_map_sequences_field` | 1120 |
-| `empty_map_sequences` | 0 |
+| `missing_include_in_map_data` | 0 |
+| `missing_map_ready` | 0 |
+| `missing_map_sequences_field` | 0 |
+| `empty_map_sequences` | 1033 |
 | `algorithm_without_curation` | 404 |
 
 ### unresolved_scene_files
@@ -68,71 +68,25 @@ Checks unresolved scenes, placeholder-backed entries, and curation metadata cove
 - toruscylinder | res://algorithms/transformation/toruscylinder/toruscylinder.tscn | grid_artifacts.json
 - floor_tiles | res://algorithms/transformation/floor_tiles.tscn | grid_artifacts.json
 
-### missing_include_in_map_data
+### empty_map_sequences
 
-- boids_aquarium | res://commons/artifacts/boids_aquarium/boids_aquarium.tscn | grid_artifacts.json
-- jelly_cube | res://commons/artifacts/jelly_cube/jelly_cube.tscn | grid_artifacts.json
-- jelly_variants | res://commons/artifacts/jelly_cube/jelly_variants.tscn | grid_artifacts.json
-- ca_rule_explorer | res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn | grid_artifacts.json
-- mandelbrot_dive | res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn | grid_artifacts.json
-- bifurcation_walkway | res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.tscn | grid_artifacts.json
-- turing_pattern_generator | res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn | grid_artifacts.json
-- perlin_terrain_sculptor | res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn | grid_artifacts.json
-- lsystem_editor | res://commons/artifacts/lsystem_editor/lsystem_editor.tscn | grid_artifacts.json
-- bias_visualizer | res://commons/artifacts/bias_visualizer/bias_visualizer.tscn | grid_artifacts.json
-- vector_addition_demo | res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn | grid_artifacts.json
-- vector_magnitude_demo | res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn | grid_artifacts.json
-- vector_normalize_demo | res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn | grid_artifacts.json
-- game_of_life_petri | res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn | grid_artifacts.json
-- julia_set_explorer | res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn | grid_artifacts.json
-- queer_morphology_specimen | res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn | grid_artifacts.json
 - vector_translation_demo | res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn | grid_artifacts.json
 - oscilloscope | res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn | grid_artifacts.json
 - harmonic_motion_demo | res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn | grid_artifacts.json
 - spring_demo | res://commons/artifacts/spring_demo/spring_demo.tscn | grid_artifacts.json
-
-### missing_map_ready
-
-- boids_aquarium | res://commons/artifacts/boids_aquarium/boids_aquarium.tscn | grid_artifacts.json
-- jelly_cube | res://commons/artifacts/jelly_cube/jelly_cube.tscn | grid_artifacts.json
-- jelly_variants | res://commons/artifacts/jelly_cube/jelly_variants.tscn | grid_artifacts.json
-- ca_rule_explorer | res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn | grid_artifacts.json
-- mandelbrot_dive | res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn | grid_artifacts.json
-- bifurcation_walkway | res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.tscn | grid_artifacts.json
-- turing_pattern_generator | res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn | grid_artifacts.json
-- perlin_terrain_sculptor | res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn | grid_artifacts.json
-- lsystem_editor | res://commons/artifacts/lsystem_editor/lsystem_editor.tscn | grid_artifacts.json
-- bias_visualizer | res://commons/artifacts/bias_visualizer/bias_visualizer.tscn | grid_artifacts.json
-- vector_addition_demo | res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn | grid_artifacts.json
-- vector_magnitude_demo | res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn | grid_artifacts.json
-- vector_normalize_demo | res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn | grid_artifacts.json
-- game_of_life_petri | res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn | grid_artifacts.json
-- julia_set_explorer | res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn | grid_artifacts.json
-- queer_morphology_specimen | res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn | grid_artifacts.json
-- vector_translation_demo | res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn | grid_artifacts.json
-- oscilloscope | res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn | grid_artifacts.json
-- harmonic_motion_demo | res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn | grid_artifacts.json
-- spring_demo | res://commons/artifacts/spring_demo/spring_demo.tscn | grid_artifacts.json
-
-### missing_map_sequences_field
-
-- boids_aquarium | res://commons/artifacts/boids_aquarium/boids_aquarium.tscn | grid_artifacts.json
-- jelly_cube | res://commons/artifacts/jelly_cube/jelly_cube.tscn | grid_artifacts.json
-- jelly_variants | res://commons/artifacts/jelly_cube/jelly_variants.tscn | grid_artifacts.json
-- ca_rule_explorer | res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn | grid_artifacts.json
-- mandelbrot_dive | res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn | grid_artifacts.json
-- bifurcation_walkway | res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.tscn | grid_artifacts.json
-- turing_pattern_generator | res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn | grid_artifacts.json
-- perlin_terrain_sculptor | res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn | grid_artifacts.json
-- lsystem_editor | res://commons/artifacts/lsystem_editor/lsystem_editor.tscn | grid_artifacts.json
-- bias_visualizer | res://commons/artifacts/bias_visualizer/bias_visualizer.tscn | grid_artifacts.json
-- vector_addition_demo | res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn | grid_artifacts.json
-- vector_magnitude_demo | res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn | grid_artifacts.json
-- vector_normalize_demo | res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn | grid_artifacts.json
-- game_of_life_petri | res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn | grid_artifacts.json
-- julia_set_explorer | res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn | grid_artifacts.json
-- queer_morphology_specimen | res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn | grid_artifacts.json
-- vector_translation_demo | res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn | grid_artifacts.json
-- oscilloscope | res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn | grid_artifacts.json
-- harmonic_motion_demo | res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn | grid_artifacts.json
-- spring_demo | res://commons/artifacts/spring_demo/spring_demo.tscn | grid_artifacts.json
+- additive_wave_demo | res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn | grid_artifacts.json
+- dna_specimen | res://commons/artifacts/dna_specimen/dna_specimen.tscn | grid_artifacts.json
+- petri_dish_worms | res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn | grid_artifacts.json
+- chladni_plate | res://commons/artifacts/chladni_plate/chladni_plate.tscn | grid_artifacts.json
+- mobius_world | res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn | grid_artifacts.json
+- rotation_match_puzzle | res://commons/primitives/puzzles/rotation_match_puzzle.tscn | grid_artifacts.json
+- player_presence_indicator | res://commons/interfaces/player_presence_indicator.tscn | grid_artifacts.json
+- portal | res://commons/scenes/mapobjects/portal.tscn | grid_artifacts.json
+- cctv | res://commons/monitor/cctv.tscn | grid_artifacts.json
+- menu | res://commons/primitives/menu/menu.tscn | grid_artifacts.json
+- origin | res://commons/primitives/origin/origin.tscn | grid_artifacts.json
+- folding_past | res://commons/primitives/temporal/animated_folding_past.tscn | grid_artifacts.json
+- arrow | res://commons/primitives/arrow/arrow.tscn | grid_artifacts.json
+- dgrid | res://commons/primitives/frame/durer_grid.tscn | grid_artifacts.json
+- lightrod | res://commons/primitives/line/light_rod.tscn | grid_artifacts.json
+- tetrahedron_edit | res://commons/primitives/pyramid/tetrahedron_edit.tscn | grid_artifacts.json

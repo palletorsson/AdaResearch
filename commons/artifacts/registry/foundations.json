@@ -1,230 +1,422 @@
 {
-  "registry_info": {
-    "name": "foundations",
-    "description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
-    "category": "integration",
-    "theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
-  },
-  "artifacts": {
-    "godel_statement_plaque": {
-      "lookup_name": "godel_statement_plaque",
-      "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
-      "class_name": "GodelStatementPlaque",
-      "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
-      "gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
-      "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
-      "signals": ["statement_changed", "paradox_triggered"],
-      "interactions": ["click to advance statement", "grab to cycle"],
-      "parameters": {
-        "current_index": "Starting statement (0-8)",
-        "grabbable": "Enable XR grab interaction"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": ["godel", "self_reference", "paradox", "incompleteness", "interactive"]
-    },
-    "russell_set_box": {
-      "lookup_name": "russell_set_box",
-      "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
-      "class_name": "RussellSetBox",
-      "description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
-      "gamwell_reference": "Chapter 5: Russell's Paradox (1901)",
-      "qfep_connection": "Self-reference creates edges in formal systems",
-      "signals": ["paradox_observed", "box_opened", "infinite_regress_detected"],
-      "interactions": ["click to open layers", "reveals infinite regress"],
-      "parameters": {
-        "max_visible_depth": "How many nested boxes before infinite indicator",
-        "size": "Outer box dimensions"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": ["russell", "paradox", "self_reference", "set_theory", "interactive"]
-    },
-    "magritte_pipe": {
-      "lookup_name": "magritte_pipe",
-      "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
-      "class_name": "MagrittePipe",
-      "description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
-      "gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
-      "qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
-      "signals": ["representation_questioned", "layer_revealed"],
-      "interactions": ["click to cycle through meta-layers of representation"],
-      "parameters": {
-        "current_layer": "Current level of representation questioning (0-5)"
-      },
-      "dev_themes": ["philosophy"],
-      "dev_category": "art_mathematics",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": ["magritte", "representation", "meta", "art", "interactive"]
-    },
-    "escher_staircase": {
-      "lookup_name": "escher_staircase",
-      "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
-      "class_name": "EscherStaircase",
-      "description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
-      "gamwell_reference": "Chapter 9: Escher's impossible objects",
-      "qfep_connection": "Local validity does not guarantee global consistency",
-      "signals": ["step_taken", "paradox_completed"],
-      "interactions": ["climb_step() to ascend forever and return to start"],
-      "parameters": {
-        "steps_per_side": "Number of steps on each side of the square",
-        "rotate_view": "Auto-rotate for viewing"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": ["escher", "impossible", "paradox", "geometry", "interactive"]
-    },
-    "florensky_sphere": {
-      "lookup_name": "florensky_sphere",
-      "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
-      "class_name": "FlorenskySphere",
-      "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
-      "gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
-      "qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
-      "signals": ["state_observed", "superposition_entered", "superposition_collapsed"],
-      "interactions": ["left-click to observe (collapses temporarily)", "right-click to cycle states"],
-      "parameters": {
-        "current_state": "A, NOT_A, BOTH, or NEITHER",
-        "allow_observation": "Whether observation collapses superposition"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "expert",
-      "tags": ["florensky", "paraconsistent_logic", "superposition", "quantum", "interactive"]
-    },
-    "bifurcation_diagram": {
-      "lookup_name": "bifurcation_diagram",
-      "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
-      "class_name": "BifurcationDiagram",
-      "description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
-      "gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
-      "qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
-      "signals": ["r_changed", "regime_changed"],
-      "interactions": ["set_r_value() to highlight different regimes", "animate_r() for transitions"],
-      "parameters": {
-        "current_r": "Current r value (2.5-4.0)",
-        "r_steps": "Resolution of diagram",
-        "width": "Physical width of visualization"
-      },
-      "dev_themes": ["qfep", "philosophy"],
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": ["chaos", "bifurcation", "edge_of_chaos", "lambda", "interactive"]
-    },
-    "euclid_postulates_plaque": {
-      "lookup_name": "euclid_postulates_plaque",
-      "scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
-      "class_name": "EuclidPostulatesPlaque",
-      "description": "Interactive plaque displaying Euclid's five postulates, highlighting the controversial fifth (parallel) postulate",
-      "gamwell_reference": "Chapter 1-2: Euclidean Geometry",
-      "qfep_connection": "The parallel postulate seemed self-evident for 2000 years - certainty is fragile",
-      "signals": ["postulate_selected", "parallel_highlighted"],
-      "interactions": ["click to cycle postulates"],
-      "parameters": {
-        "current_postulate": "Current postulate (0-4)",
-        "highlight_fifth": "Emphasize the parallel postulate"
-      },
-      "dev_themes": ["philosophy", "geometry"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": ["euclid", "geometry", "parallel_postulate", "foundations", "interactive"]
-    },
-    "penrose_triangle": {
-      "lookup_name": "penrose_triangle",
-      "scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
-      "class_name": "PenroseTriangle",
-      "description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
-      "gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
-      "qfep_connection": "Local validity does not guarantee global consistency",
-      "signals": ["viewpoint_locked", "illusion_revealed"],
-      "interactions": ["move to find the 'sweet spot' where illusion works"],
-      "parameters": {
-        "size": "Triangle size",
-        "auto_rotate": "Slowly rotate to reveal impossibility"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": ["penrose", "impossible", "illusion", "escher", "interactive"]
-    },
-    "poincare_disk": {
-      "lookup_name": "poincare_disk",
-      "scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
-      "class_name": "PoincareDisk",
-      "description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
-      "gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
-      "qfep_connection": "The parallel postulate is independent - geometry is a choice",
-      "signals": ["curvature_changed"],
-      "interactions": ["observe geodesics as circular arcs"],
-      "parameters": {
-        "disk_radius": "Size of the disk",
-        "line_count": "Number of geodesic lines",
-        "show_triangle": "Display hyperbolic triangle"
-      },
-      "dev_themes": ["geometry", "philosophy"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": ["hyperbolic", "poincare", "non_euclidean", "geometry", "interactive"]
-    },
-    "schrodinger_box": {
-      "lookup_name": "schrodinger_box",
-      "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
-      "class_name": "SchrodingerBox",
-      "description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
-      "gamwell_reference": "Quantum mechanics and measurement problem",
-      "qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
-      "signals": ["box_opened", "state_collapsed", "superposition_entered"],
-      "interactions": ["click to observe (collapse superposition)", "auto-resets to superposition"],
-      "parameters": {
-        "box_size": "Physical dimensions",
-        "auto_reset_time": "Seconds before returning to superposition"
-      },
-      "dev_themes": ["philosophy", "qfep"],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": ["schrodinger", "quantum", "superposition", "collapse", "interactive"]
-    }
-  },
-  "sequence_mapping": {
-    "foundationscrisis": [
-      "godel_statement_plaque",
-      "russell_set_box",
-      "escher_staircase",
-      "florensky_sphere",
-      "euclid_postulates_plaque",
-      "penrose_triangle",
-      "poincare_disk",
-      "schrodinger_box"
-    ],
-    "artmathematics": [
-      "magritte_pipe",
-      "escher_staircase",
-      "penrose_triangle"
-    ],
-    "qfeplaboratory": [
-      "bifurcation_diagram",
-      "florensky_sphere",
-      "schrodinger_box"
-    ]
-  },
-  "theoretical_connections": {
-    "self_reference_artifacts": ["godel_statement_plaque", "russell_set_box", "escher_staircase"],
-    "representation_gap_artifacts": ["magritte_pipe", "penrose_triangle"],
-    "paraconsistent_artifacts": ["florensky_sphere", "schrodinger_box"],
-    "edge_of_chaos_artifacts": ["bifurcation_diagram"],
-    "non_euclidean_artifacts": ["poincare_disk"],
-    "foundations_artifacts": ["euclid_postulates_plaque"]
-  }
+	"registry_info": {
+		"name": "foundations",
+		"description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
+		"category": "integration",
+		"theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
+	},
+	"artifacts": {
+		"godel_statement_plaque": {
+			"lookup_name": "godel_statement_plaque",
+			"scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
+			"class_name": "GodelStatementPlaque",
+			"description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
+			"gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
+			"qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
+			"signals": [
+				"statement_changed",
+				"paradox_triggered"
+			],
+			"interactions": [
+				"click to advance statement",
+				"grab to cycle"
+			],
+			"parameters": {
+				"current_index": "Starting statement (0-8)",
+				"grabbable": "Enable XR grab interaction"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"godel",
+				"self_reference",
+				"paradox",
+				"incompleteness",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"russell_set_box": {
+			"lookup_name": "russell_set_box",
+			"scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
+			"class_name": "RussellSetBox",
+			"description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
+			"gamwell_reference": "Chapter 5: Russell's Paradox (1901)",
+			"qfep_connection": "Self-reference creates edges in formal systems",
+			"signals": [
+				"paradox_observed",
+				"box_opened",
+				"infinite_regress_detected"
+			],
+			"interactions": [
+				"click to open layers",
+				"reveals infinite regress"
+			],
+			"parameters": {
+				"max_visible_depth": "How many nested boxes before infinite indicator",
+				"size": "Outer box dimensions"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"russell",
+				"paradox",
+				"self_reference",
+				"set_theory",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"magritte_pipe": {
+			"lookup_name": "magritte_pipe",
+			"scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
+			"class_name": "MagrittePipe",
+			"description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
+			"gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
+			"qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
+			"signals": [
+				"representation_questioned",
+				"layer_revealed"
+			],
+			"interactions": [
+				"click to cycle through meta-layers of representation"
+			],
+			"parameters": {
+				"current_layer": "Current level of representation questioning (0-5)"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "art_mathematics",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"magritte",
+				"representation",
+				"meta",
+				"art",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"escher_staircase": {
+			"lookup_name": "escher_staircase",
+			"scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
+			"class_name": "EscherStaircase",
+			"description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
+			"gamwell_reference": "Chapter 9: Escher's impossible objects",
+			"qfep_connection": "Local validity does not guarantee global consistency",
+			"signals": [
+				"step_taken",
+				"paradox_completed"
+			],
+			"interactions": [
+				"climb_step() to ascend forever and return to start"
+			],
+			"parameters": {
+				"steps_per_side": "Number of steps on each side of the square",
+				"rotate_view": "Auto-rotate for viewing"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"escher",
+				"impossible",
+				"paradox",
+				"geometry",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"florensky_sphere": {
+			"lookup_name": "florensky_sphere",
+			"scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
+			"class_name": "FlorenskySphere",
+			"description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
+			"gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
+			"qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
+			"signals": [
+				"state_observed",
+				"superposition_entered",
+				"superposition_collapsed"
+			],
+			"interactions": [
+				"left-click to observe (collapses temporarily)",
+				"right-click to cycle states"
+			],
+			"parameters": {
+				"current_state": "A, NOT_A, BOTH, or NEITHER",
+				"allow_observation": "Whether observation collapses superposition"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "expert",
+			"tags": [
+				"florensky",
+				"paraconsistent_logic",
+				"superposition",
+				"quantum",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"bifurcation_diagram": {
+			"lookup_name": "bifurcation_diagram",
+			"scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
+			"class_name": "BifurcationDiagram",
+			"description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
+			"gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
+			"qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
+			"signals": [
+				"r_changed",
+				"regime_changed"
+			],
+			"interactions": [
+				"set_r_value() to highlight different regimes",
+				"animate_r() for transitions"
+			],
+			"parameters": {
+				"current_r": "Current r value (2.5-4.0)",
+				"r_steps": "Resolution of diagram",
+				"width": "Physical width of visualization"
+			},
+			"dev_themes": [
+				"qfep",
+				"philosophy"
+			],
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"bifurcation",
+				"edge_of_chaos",
+				"lambda",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"euclid_postulates_plaque": {
+			"lookup_name": "euclid_postulates_plaque",
+			"scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
+			"class_name": "EuclidPostulatesPlaque",
+			"description": "Interactive plaque displaying Euclid's five postulates, highlighting the controversial fifth (parallel) postulate",
+			"gamwell_reference": "Chapter 1-2: Euclidean Geometry",
+			"qfep_connection": "The parallel postulate seemed self-evident for 2000 years - certainty is fragile",
+			"signals": [
+				"postulate_selected",
+				"parallel_highlighted"
+			],
+			"interactions": [
+				"click to cycle postulates"
+			],
+			"parameters": {
+				"current_postulate": "Current postulate (0-4)",
+				"highlight_fifth": "Emphasize the parallel postulate"
+			},
+			"dev_themes": [
+				"philosophy",
+				"geometry"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"euclid",
+				"geometry",
+				"parallel_postulate",
+				"foundations",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"penrose_triangle": {
+			"lookup_name": "penrose_triangle",
+			"scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
+			"class_name": "PenroseTriangle",
+			"description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
+			"gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
+			"qfep_connection": "Local validity does not guarantee global consistency",
+			"signals": [
+				"viewpoint_locked",
+				"illusion_revealed"
+			],
+			"interactions": [
+				"move to find the 'sweet spot' where illusion works"
+			],
+			"parameters": {
+				"size": "Triangle size",
+				"auto_rotate": "Slowly rotate to reveal impossibility"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"penrose",
+				"impossible",
+				"illusion",
+				"escher",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"poincare_disk": {
+			"lookup_name": "poincare_disk",
+			"scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
+			"class_name": "PoincareDisk",
+			"description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
+			"gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
+			"qfep_connection": "The parallel postulate is independent - geometry is a choice",
+			"signals": [
+				"curvature_changed"
+			],
+			"interactions": [
+				"observe geodesics as circular arcs"
+			],
+			"parameters": {
+				"disk_radius": "Size of the disk",
+				"line_count": "Number of geodesic lines",
+				"show_triangle": "Display hyperbolic triangle"
+			},
+			"dev_themes": [
+				"geometry",
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"hyperbolic",
+				"poincare",
+				"non_euclidean",
+				"geometry",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"schrodinger_box": {
+			"lookup_name": "schrodinger_box",
+			"scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
+			"class_name": "SchrodingerBox",
+			"description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
+			"gamwell_reference": "Quantum mechanics and measurement problem",
+			"qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
+			"signals": [
+				"box_opened",
+				"state_collapsed",
+				"superposition_entered"
+			],
+			"interactions": [
+				"click to observe (collapse superposition)",
+				"auto-resets to superposition"
+			],
+			"parameters": {
+				"box_size": "Physical dimensions",
+				"auto_reset_time": "Seconds before returning to superposition"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"schrodinger",
+				"quantum",
+				"superposition",
+				"collapse",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	},
+	"sequence_mapping": {
+		"foundationscrisis": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase",
+			"florensky_sphere",
+			"euclid_postulates_plaque",
+			"penrose_triangle",
+			"poincare_disk",
+			"schrodinger_box"
+		],
+		"artmathematics": [
+			"magritte_pipe",
+			"escher_staircase",
+			"penrose_triangle"
+		],
+		"qfeplaboratory": [
+			"bifurcation_diagram",
+			"florensky_sphere",
+			"schrodinger_box"
+		]
+	},
+	"theoretical_connections": {
+		"self_reference_artifacts": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase"
+		],
+		"representation_gap_artifacts": [
+			"magritte_pipe",
+			"penrose_triangle"
+		],
+		"paraconsistent_artifacts": [
+			"florensky_sphere",
+			"schrodinger_box"
+		],
+		"edge_of_chaos_artifacts": [
+			"bifurcation_diagram"
+		],
+		"non_euclidean_artifacts": [
+			"poincare_disk"
+		],
+		"foundations_artifacts": [
+			"euclid_postulates_plaque"
+		]
+	}
 }

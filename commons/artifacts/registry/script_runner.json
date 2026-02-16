@@ -7,12 +7,25 @@
 			"scene": "res://commons/primitives/script_runner/script_runner.tscn",
 			"category": "tools",
 			"config_mapping": {
-				"point": {"script_name": "point"},
-				"vector_math": {"script_name": "vector_math"},
-				"array": {"script_name": "array"},
-				"pattern": {"script_name": "pattern"},
-				"loop": {"script_name": "loop"}
-			}
+				"point": {
+					"script_name": "point"
+				},
+				"vector_math": {
+					"script_name": "vector_math"
+				},
+				"array": {
+					"script_name": "array"
+				},
+				"pattern": {
+					"script_name": "pattern"
+				},
+				"loop": {
+					"script_name": "loop"
+				}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

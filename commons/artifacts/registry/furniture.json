@@ -27,35 +27,50 @@
 				"frame": "bool - show frame (default true)",
 				"active": "bool - can be used (default true)",
 				"cooldown": "float - seconds between uses"
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"chair_assembly_puzzle": {
 			"name": "Chair Assembly Puzzle",
 			"lookup_name": "chair_assembly_puzzle",
 			"description": "Interactive puzzle where players assemble a Judd-inspired chair by scaling, rotating, and positioning cube pieces to match ghost guides.",
 			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
-			"category": "puzzles"
+			"category": "puzzles",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"scalable_wood_cube": {
 			"name": "Scalable Wood Cube",
 			"lookup_name": "scalable_wood_cube",
 			"description": "Grabbable wood cube with two-handed scaling support. Scale snaps to discrete values (0.05x to 4.0x) per axis.",
 			"scene": "res://commons/primitives/cubes/grab_cube_scalable.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"attachable_wood_cube": {
 			"name": "Attachable Wood Cube",
 			"lookup_name": "attachable_wood_cube",
 			"description": "Scalable wood cube with attachment points on all faces. Pieces snap together when attachment points align and face each other.",
 			"scene": "res://commons/primitives/cubes/grab_cube_attachable.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"snappable_wood_cube": {
 			"name": "Snappable Wood Cube",
 			"lookup_name": "snappable_wood_cube",
 			"description": "Scalable wood cube with grid-based face snapping. Faces snap to 0.05m grid alignment when parallel and close.",
 			"scene": "res://commons/primitives/cubes/grab_cube_snappable.tscn",
-			"category": "primitives"
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"stool_assembly_puzzle": {
 			"name": "Stool Assembly Puzzle",
@@ -65,7 +80,10 @@
 			"category": "puzzles",
 			"config": {
 				"furniture_type": 1
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"table_assembly_puzzle": {
 			"name": "Table Assembly Puzzle",
@@ -75,7 +93,10 @@
 			"category": "puzzles",
 			"config": {
 				"furniture_type": 2
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"shelf_assembly_puzzle": {
 			"name": "Shelf Assembly Puzzle",
@@ -85,14 +106,20 @@
 			"category": "puzzles",
 			"config": {
 				"furniture_type": 3
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"biederman_relief": {
 			"name": "Biederman Relief Puzzle",
 			"lookup_name": "biederman_relief",
 			"description": "Constructivist relief composition inspired by Charles Biederman. Arrange colored rectangular bars at varying depths on a blue backing.",
 			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
-			"category": "puzzles"
+			"category": "puzzles",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"mondrian_relief": {
 			"name": "Mondrian Relief Puzzle",
@@ -102,7 +129,10 @@
 			"category": "puzzles",
 			"config": {
 				"relief_type": 1
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"albers_relief": {
 			"name": "Albers Relief Puzzle",
@@ -112,7 +142,10 @@
 			"category": "puzzles",
 			"config": {
 				"relief_type": 2
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"constructivist_relief": {
 			"name": "Constructivist Relief Puzzle",
@@ -122,14 +155,20 @@
 			"category": "puzzles",
 			"config": {
 				"relief_type": 3
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"assembly_line_puzzle": {
 			"name": "Assembly Line Puzzle",
 			"lookup_name": "assembly_line_puzzle",
 			"description": "Conveyor belt puzzle. Build houses from cubes and pyramids on a production line.",
 			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
-			"category": "puzzles"
+			"category": "puzzles",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"lab_assembly_puzzle": {
 			"name": "Lab Assembly Puzzle",
@@ -139,7 +178,10 @@
 			"category": "puzzles",
 			"config": {
 				"puzzle_type": 1
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"scientific_assembly_puzzle": {
 			"name": "Scientific Equipment Assembly",
@@ -149,28 +191,40 @@
 			"category": "puzzles",
 			"config": {
 				"puzzle_type": 2
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"score_display": {
 			"name": "Score Display",
 			"lookup_name": "score_display",
 			"description": "Visual counter display showing score. Can be incremented via signals or methods.",
 			"scene": "res://commons/visualaid/score/score_display.tscn",
-			"category": "tools"
+			"category": "tools",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"balance_puzzle": {
 			"name": "Balance Puzzle",
 			"lookup_name": "balance_puzzle",
 			"description": "Stack freely. Reach the height threshold while stable. Your creation transforms into a walking creature. No templates - truth emerges from physics.",
 			"scene": "res://commons/primitives/balance/balance_puzzle.tscn",
-			"category": "puzzles"
+			"category": "puzzles",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"equipment_assembly_puzzle": {
 			"name": "Equipment Assembly Puzzle",
 			"lookup_name": "equipment_assembly_puzzle",
 			"description": "Level 2 compositional assembly. Combine assembled equipment (microscope, scales, etc.) into functional workstations.",
 			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
-			"category": "puzzles"
+			"category": "puzzles",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"analysis_station_puzzle": {
 			"name": "Analysis Station Assembly",
@@ -180,7 +234,10 @@
 			"category": "puzzles",
 			"config": {
 				"workstation_type": 0
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"measurement_station_puzzle": {
 			"name": "Measurement Station Assembly",
@@ -190,7 +247,10 @@
 			"category": "puzzles",
 			"config": {
 				"workstation_type": 1
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"storage_station_puzzle": {
 			"name": "Storage Station Assembly",
@@ -200,7 +260,10 @@
 			"category": "puzzles",
 			"config": {
 				"workstation_type": 2
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"diagnostic_station_puzzle": {
 			"name": "Diagnostic Station Assembly",
@@ -210,28 +273,40 @@
 			"category": "puzzles",
 			"config": {
 				"workstation_type": 3
-			}
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"world_map_tablet": {
 			"name": "World Map Tablet",
 			"lookup_name": "world_map_tablet",
 			"description": "Metro-style map showing your learning journey. 6 colored lines represent QFEP layers. Stations unlock as you complete sequences.",
 			"scene": "res://commons/scenes/world_map/WorldMapOverview3D.tscn",
-			"category": "navigation"
+			"category": "navigation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"audio_catalog_tablet": {
 			"name": "Audio Catalog Tablet",
 			"lookup_name": "audio_catalog_tablet",
 			"description": "Handheld sound library. Browse 73+ audio presets across 15 categories, preview sounds, edit parameters in VR.",
 			"scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
-			"category": "audio"
+			"category": "audio",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"artifact_catalog_kiosk": {
 			"name": "Artifact Catalog Kiosk",
 			"lookup_name": "artifact_catalog_kiosk",
 			"description": "VR kiosk for browsing and spawning artifacts. Filter by theme and complexity, search by tags. 318+ artifacts organized into 10 thematic categories. Dev tool that becomes player inventory through progression.",
 			"scene": "res://commons/artifacts/catalog/ArtifactCatalogTablet3D.tscn",
-			"category": "navigation"
+			"category": "navigation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"laser_exploding_sphere": {
 			"name": "Laser Exploding Sphere",
@@ -243,7 +318,10 @@
 				"tools",
 				"primitives"
 			],
-			"complexity": "beginner"
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		},
 		"vr_component_demo": {
 			"name": "VR Component Demo",
@@ -256,7 +334,10 @@
 				"ui",
 				"audio"
 			],
-			"complexity": "beginner"
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
