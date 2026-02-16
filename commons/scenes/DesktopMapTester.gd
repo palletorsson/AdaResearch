@@ -161,7 +161,7 @@ func _input(event):
 		# Reload current map
 		load_sequence(current_sequence_name, current_map_index)
 	
-	# Game Mode controls (F1-F3)
+	# Game Mode controls
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_F1:
@@ -171,9 +171,11 @@ func _input(event):
 			KEY_F3:
 				_set_game_mode(GameManager.GameMode.EXPLORER)
 			KEY_F4:
-				_print_debug_info()
+				_set_game_mode(GameManager.GameMode.TESTPLUS)
 			KEY_F5:
 				_skip_to_sequence_end()
+			KEY_F6:
+				_print_debug_info()
 
 func _set_game_mode(mode: GameManager.GameMode):
 	"""Set game mode with feedback"""
@@ -212,7 +214,8 @@ func _print_debug_info():
 	print("    F1 = Story Mode")
 	print("    F2 = Test Mode (skip sequences)")
 	print("    F3 = Explorer Mode (unlock all)")
-	print("    F4 = Debug Info")
+	print("    F4 = TestPlus Mode")
 	print("    F5 = Skip to sequence end")
+	print("    F6 = Debug Info")
 	print("    PageUp/Down = Prev/Next map")
 	print("═══════════════════════════════════════")

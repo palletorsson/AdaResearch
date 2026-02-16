@@ -37,6 +37,7 @@ func _setup_ui():
 	game_mode_option.add_item("Story Mode", 0)
 	game_mode_option.add_item("Test Mode", 1)
 	game_mode_option.add_item("Explorer Mode", 2)
+	game_mode_option.add_item("TestPlus Mode", 3)
 	
 	# Setup health slider
 	health_slider.min_value = 0

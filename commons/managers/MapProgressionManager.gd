@@ -165,10 +165,19 @@ func _load_external_sequences(path: String):
 					var err = json.parse(file.get_as_text())
 					if err == OK:
 						var data = json.data
-						if data.has("sequences"):
-							for seq_id in data.sequences:
-								sequences[seq_id] = data.sequences[seq_id]
-								print("  - Loaded sequence: " + seq_id)
+						if data is Dictionary and data.has("sequences") and data.sequences is Dictionary:
+							for seq_id in data.sequences.keys():
+								var seq_data = data.sequences[seq_id]
+								if seq_data is Dictionary and seq_data.has("maps") and seq_data.maps is Array:
+									var normalized_id := str(seq_id)
+									sequences[normalized_id] = seq_data
+									print("  - Loaded sequence: " + normalized_id)
+								else:
+									print("  - Skipped non-sequence entry '%s' in %s" % [str(seq_id), file_name])
+						else:
+							print("  - Skipped file (no valid sequences dictionary): " + file_name)
+					else:
+						print("  - Failed to parse JSON in %s: %s" % [file_name, json.get_error_message()])
 			file_name = dir.get_next()
 	else:
 		print("MapProgressionManager: Could not open sequences directory: " + path)
@@ -582,17 +591,24 @@ func unlock_all_sequences() -> void:
 func should_skip_sequence() -> bool:
 	if not is_instance_valid(GameManager):
 		return false
-	return GameManager.is_test_mode()
+	if GameManager.is_test_mode():
+		return true
+	if GameManager.is_testplus_mode():
+		return not GameManager.testplus_full_sequence_active
+	return false
 
 # Get next map considering game mode
 func get_next_map_for_mode(current_map_name: String) -> String:
 	# Check game mode
-	if is_instance_valid(GameManager) and GameManager.is_test_mode():
-		# In test mode, check if this is the last map in sequence
+	if is_instance_valid(GameManager) and (GameManager.is_test_mode() or GameManager.should_testplus_sample_sequence()):
+		# In test/testplus sample mode, check if this is the last map in sequence
 		for seq_name in sequences.keys():
 			var maps = get_sequence_maps(seq_name)
 			var idx = maps.find(current_map_name)
 			if idx >= 0:
+				# In TestPlus, excluded sequences should immediately return to lab
+				if GameManager.is_testplus_mode() and GameManager.is_sequence_excluded_in_testplus(seq_name):
+					return get_sequence_lab_map(seq_name)
 				# If not last map, skip to last
 				if idx < maps.size() - 1:
 					return maps[maps.size() - 1]

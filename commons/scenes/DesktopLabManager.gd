@@ -104,7 +104,7 @@ func _load_map(map_name: String):
 		lab_grid_system.reload_map = true
 
 func _start_sequence(sequence_name: String):
-	"""Start a sequence - loads last map in TEST mode, first incomplete otherwise"""
+	"""Start a sequence based on active game mode behavior"""
 	current_sequence = sequence_name
 
 	# Get sequence configuration from AdaSceneManager
@@ -125,6 +125,13 @@ func _start_sequence(sequence_name: String):
 		push_error("DesktopLabManager: No maps in sequence '%s'" % sequence_name)
 		return
 
+	# TESTPLUS: skip excluded sequences entirely
+	if GameManager and GameManager.is_testplus_mode() and GameManager.is_sequence_excluded_in_testplus(sequence_name):
+		print("DesktopLabManager: TESTPLUS MODE - Sequence '%s' excluded, not loading" % sequence_name)
+		current_sequence = ""
+		current_map_index = 0
+		return
+
 	# Determine which map to load based on game mode
 	var target_index = 0
 	
@@ -132,6 +139,13 @@ func _start_sequence(sequence_name: String):
 	if GameManager and GameManager.is_test_mode():
 		target_index = maps.size() - 1
 		print("DesktopLabManager: TEST MODE - Skipping to last map")
+	elif GameManager and GameManager.is_testplus_mode():
+		if GameManager.should_testplus_sample_sequence(sequence_name):
+			target_index = maps.size() - 1
+			print("DesktopLabManager: TESTPLUS MODE - Sample mode, using last map")
+		else:
+			target_index = 0
+			print("DesktopLabManager: TESTPLUS MODE - Full sequence active, starting first map")
 	else:
 		# Normal mode: find first incomplete map (or last if all complete)
 		target_index = maps.size() - 1  # Default to last

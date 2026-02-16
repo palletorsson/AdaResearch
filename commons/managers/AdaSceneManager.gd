@@ -351,16 +351,26 @@ func _start_sequence_from_request(request: Dictionary):
 		return
 	
 	var config = sequence_configs[sequence_name]
+	var maps = config.get("maps", [])
+	
+	# TESTPLUS: optionally exclude specific sequences entirely
+	if GameManager and GameManager.is_testplus_mode() and GameManager.is_sequence_excluded_in_testplus(sequence_name):
+		print("AdaSceneManager: TESTPLUS MODE - Sequence '%s' excluded by configuration, skipping launch" % sequence_name)
+		if GameManager.has_method("add_console_message"):
+			GameManager.add_console_message("TestPlus skipped sequence: %s" % sequence_name, "info", "testplus")
+		current_sequence_data.clear()
+		return
+	
 	current_sequence_data = {
 		"sequence_name": sequence_name,
-		"maps": config.get("maps", []),
+		"maps": maps,
 		"current_step": 0,
 		"return_to": config.get("return_to", "lab"),
 		"transition_source": request,
 		"sequence_info": {
 			"name": config.get("name", sequence_name),
 			"description": config.get("description", ""),
-			"total_maps": config.get("maps", []).size()
+			"total_maps": maps.size()
 		}
 	}
 	
@@ -370,14 +380,20 @@ func _start_sequence_from_request(request: Dictionary):
 	# Debug: Print current game mode
 	print("AdaSceneManager: GameManager exists: %s" % (GameManager != null))
 	if GameManager:
-		print("AdaSceneManager: Current game mode: %s (is_test_mode=%s)" % [GameManager.get_game_mode_name(), GameManager.is_test_mode()])
+		print("AdaSceneManager: Current game mode: %s (is_test_mode=%s, is_testplus_mode=%s)" % [GameManager.get_game_mode_name(), GameManager.is_test_mode(), GameManager.is_testplus_mode()])
 	
 	# Check for TEST mode - skip to last map
 	if GameManager and GameManager.is_test_mode():
-		var maps = current_sequence_data.get("maps", [])
 		if maps.size() > 1:
 			current_sequence_data["current_step"] = maps.size() - 1
 			print("AdaSceneManager: TEST MODE - Skipping to last map: %s" % maps[maps.size() - 1])
+	elif GameManager and GameManager.is_testplus_mode():
+		if GameManager.should_testplus_sample_sequence(sequence_name):
+			if maps.size() > 1:
+				current_sequence_data["current_step"] = maps.size() - 1
+				print("AdaSceneManager: TESTPLUS MODE - Sample mode active, jumping to map: %s" % maps[maps.size() - 1])
+		else:
+			print("AdaSceneManager: TESTPLUS MODE - Full sequence active, starting from first map")
 	else:
 		print("AdaSceneManager: STORY MODE - Starting from first map")
 	

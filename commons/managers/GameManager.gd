@@ -5,15 +5,24 @@
 extends Node
 
 const DEATH_CROSS_SCENE: PackedScene = preload("res://commons/primitives/plus/plus.tscn")
+const TESTPLUS_SEQUENCE_INDEX_PATH := "res://commons/maps/sequences/sequence_index.json"
 
 # Game Modes
 enum GameMode {
 	STORY,      # Full sequence playthrough (default)
 	TEST,       # Skip to last map of each sequence, then lab
-	EXPLORER    # Full lab unlocked, all paths available
+	EXPLORER,   # Full lab unlocked, all paths available
+	TESTPLUS    # Test flow with sequence filtering and optional full-sequence traversal
 }
 
 @export var game_mode: GameMode = GameMode.STORY # Default to TEST for quick iteration
+@export var testplus_full_sequence_active: bool = false
+@export var testplus_excluded_sequences: Array[String] = []
+@export var testplus_available_sequence_ids: Array[String] = []
+@export var testplus_available_sequence_names: Array[String] = []
+@export_multiline var testplus_available_sequence_named_list: String = "Loads names from res://commons/maps/sequences/sequence_index.json at runtime."
+var _testplus_sequence_alias_to_id: Dictionary = {}
+var _testplus_sequence_id_to_name: Dictionary = {}
 
 signal game_mode_changed(new_mode: GameMode)
 
@@ -133,6 +142,7 @@ signal console_cleared()
 
 # Called when the game starts
 func _ready() -> void:
+	_refresh_testplus_sequence_reference()
 	print("GameManager: Singleton initialized - game_mode before load: %s" % get_game_mode_name())
 	reset_game_state()
 	
@@ -140,9 +150,69 @@ func _ready() -> void:
 	if FileAccess.file_exists("user://savegame.save"):
 		print("GameManager: Save file exists, loading...")
 		load_game()
-		print("GameManager: After load - game_mode: %s (is_test=%s)" % [get_game_mode_name(), is_test_mode()])
+		print("GameManager: After load - game_mode: %s (is_test=%s, is_testplus=%s)" % [get_game_mode_name(), is_test_mode(), is_testplus_mode()])
 	
 	add_test_console_messages()
+
+func _refresh_testplus_sequence_reference() -> void:
+	testplus_available_sequence_ids.clear()
+	testplus_available_sequence_names.clear()
+	testplus_available_sequence_named_list = ""
+	_testplus_sequence_alias_to_id.clear()
+	_testplus_sequence_id_to_name.clear()
+
+	if not FileAccess.file_exists(TESTPLUS_SEQUENCE_INDEX_PATH):
+		testplus_available_sequence_named_list = "Sequence index not found: %s" % TESTPLUS_SEQUENCE_INDEX_PATH
+		return
+
+	var file = FileAccess.open(TESTPLUS_SEQUENCE_INDEX_PATH, FileAccess.READ)
+	if not file:
+		testplus_available_sequence_named_list = "Could not open: %s" % TESTPLUS_SEQUENCE_INDEX_PATH
+		return
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var json = JSON.new()
+	if json.parse(json_text) != OK:
+		testplus_available_sequence_named_list = "Failed to parse sequence index JSON: %s" % json.get_error_message()
+		return
+
+	var data = json.data
+	var sequence_entries = data.get("sequences", [])
+	if not (sequence_entries is Array):
+		testplus_available_sequence_named_list = "Invalid sequence index format: sequences must be an array"
+		return
+
+	var named_lines: Array[String] = []
+	for entry in sequence_entries:
+		if not (entry is Dictionary):
+			continue
+		var sequence_id = str(entry.get("id", "")).strip_edges()
+		if sequence_id.is_empty():
+			continue
+		var sequence_name = str(entry.get("name", sequence_id)).strip_edges()
+		testplus_available_sequence_ids.append(sequence_id)
+		testplus_available_sequence_names.append(sequence_name)
+
+		var normalized_id = sequence_id.to_lower()
+		var normalized_name = sequence_name.to_lower()
+		_testplus_sequence_alias_to_id[normalized_id] = sequence_id
+		_testplus_sequence_alias_to_id[normalized_name] = sequence_id
+		_testplus_sequence_id_to_name[normalized_id] = sequence_name
+		named_lines.append(sequence_name)
+
+	testplus_available_sequence_named_list = "\n".join(named_lines)
+
+func _resolve_testplus_sequence_id(sequence_ref: String) -> String:
+	if _testplus_sequence_alias_to_id.is_empty() and FileAccess.file_exists(TESTPLUS_SEQUENCE_INDEX_PATH):
+		_refresh_testplus_sequence_reference()
+	var normalized_ref = sequence_ref.strip_edges().to_lower()
+	if normalized_ref.is_empty():
+		return ""
+	if _testplus_sequence_alias_to_id.has(normalized_ref):
+		return str(_testplus_sequence_alias_to_id[normalized_ref]).strip_edges().to_lower()
+	return normalized_ref
 # Reset the game state
 func reset_game_state() -> void:
 	player_score = 0
@@ -601,6 +671,8 @@ func save_game() -> void:
 		"sfx_volume": sfx_volume,
 		"show_infoboard": show_infoboard,
 		"game_mode": game_mode,
+		"testplus_full_sequence_active": testplus_full_sequence_active,
+		"testplus_excluded_sequences": testplus_excluded_sequences,
 		"nail_color": {"r": nail_color.r, "g": nail_color.g, "b": nail_color.b, "a": nail_color.a},
 		"hand_color": {"r": hand_color.r, "g": hand_color.g, "b": hand_color.b, "a": hand_color.a},
 		"timestamp": Time.get_datetime_string_from_system()
@@ -629,6 +701,12 @@ func load_game() -> bool:
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
 		show_infoboard = save_data.get("show_infoboard", false)
+		testplus_full_sequence_active = bool(save_data.get("testplus_full_sequence_active", false))
+		testplus_excluded_sequences.clear()
+		var saved_testplus_exclusions = save_data.get("testplus_excluded_sequences", [])
+		if saved_testplus_exclusions is Array:
+			for seq_name in saved_testplus_exclusions:
+				testplus_excluded_sequences.append(str(seq_name))
 		# Skip loading game_mode - use default from script/scene instead
 		# var loaded_mode = save_data.get("game_mode", GameMode.STORY)
 		# print("GameManager: load_game() - raw game_mode from file: %s (type: %s)" % [loaded_mode, typeof(loaded_mode)])
@@ -676,6 +754,58 @@ func is_explorer_mode() -> bool:
 
 func is_story_mode() -> bool:
 	return game_mode == GameMode.STORY
+
+func is_testplus_mode() -> bool:
+	return game_mode == GameMode.TESTPLUS
+
+func is_sequence_excluded_in_testplus(sequence_name: String) -> bool:
+	if sequence_name.is_empty():
+		return false
+	var normalized = _resolve_testplus_sequence_id(sequence_name)
+	for excluded_sequence in testplus_excluded_sequences:
+		if _resolve_testplus_sequence_id(str(excluded_sequence)) == normalized:
+			return true
+	return false
+
+func should_testplus_play_full_sequence(sequence_name: String = "") -> bool:
+	if not is_testplus_mode():
+		return false
+	if not sequence_name.is_empty() and is_sequence_excluded_in_testplus(sequence_name):
+		return false
+	return testplus_full_sequence_active
+
+func should_testplus_sample_sequence(sequence_name: String = "") -> bool:
+	if not is_testplus_mode():
+		return false
+	if not sequence_name.is_empty() and is_sequence_excluded_in_testplus(sequence_name):
+		return false
+	return not testplus_full_sequence_active
+
+func set_testplus_full_sequence_active(active: bool) -> void:
+	if testplus_full_sequence_active == active:
+		return
+	testplus_full_sequence_active = active
+	emit_signal("settings_changed", "testplus_full_sequence_active", active)
+	save_game()
+
+func set_testplus_excluded_sequences(sequence_names: Array[String]) -> void:
+	testplus_excluded_sequences.clear()
+	var seen: Dictionary = {}
+	for sequence_name in sequence_names:
+		var normalized = str(sequence_name).strip_edges()
+		if normalized.is_empty():
+			continue
+		var canonical_id = _resolve_testplus_sequence_id(normalized)
+		if seen.has(canonical_id):
+			continue
+		seen[canonical_id] = true
+
+		if _testplus_sequence_id_to_name.has(canonical_id):
+			testplus_excluded_sequences.append(str(_testplus_sequence_id_to_name[canonical_id]))
+		else:
+			testplus_excluded_sequences.append(normalized)
+	emit_signal("settings_changed", "testplus_excluded_sequences", testplus_excluded_sequences.duplicate())
+	save_game()
 
 func cycle_game_mode() -> void:
 	var next_mode = (game_mode + 1) % GameMode.size()

@@ -18,6 +18,7 @@ func _setup_game_mode_option():
 	game_mode_option.add_item("Story Mode", 0)
 	game_mode_option.add_item("Test Mode (Skip)", 1)
 	game_mode_option.add_item("Explorer Mode", 2)
+	game_mode_option.add_item("TestPlus Mode", 3)
 	
 	# Set current selection
 	game_mode_option.selected = GameManager.game_mode
