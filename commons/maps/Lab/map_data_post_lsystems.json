@@ -6,8 +6,8 @@
 		"format": "json_lab_progressive",
 		"progression_state": "post_lsystems",
 		"dimensions": {
-			"width": 15,
-			"depth": 15,
+			"width": 13,
+			"depth": 20,
 			"max_height": 6
 		},
 		"metadata": {
@@ -58,7 +58,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " "], 
 			[" ", "t:softbodies", " ", " ", " ", " ", "t:proceduralgeneration", " ", "t:cellularautomata", " ", " ", " ", " "],	
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " "],	
-			[" ", "t:lsystems", "m:5:1:10:0.1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
+			[" ", "t:lsystems", "m:t:lsystems:0.1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
 								
 		],
 		"interactables": [

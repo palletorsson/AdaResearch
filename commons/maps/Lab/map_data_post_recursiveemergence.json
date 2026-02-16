@@ -6,7 +6,7 @@
 		"format": "json_lab_progressive",
 		"progression_state": "post_recursiveemergence",
 		"dimensions": {
-			"width": 16,
+			"width": 12,
 			"depth": 20,
 			"max_height": 6
 		},
@@ -61,7 +61,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:noise", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t:recursiveemergence", "m:5:1:10:0.1", " "],	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t:recursiveemergence", "m:t:recursiveemergence:0.1", " "],	
 			[" ", "t:forces", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],	
 			[" ", " ", " ", " ", "t:proceduralgeneration", " ", " ", " ", " ", " ", " ", " "],												
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],												

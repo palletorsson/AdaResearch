@@ -6,8 +6,8 @@
 		"format": "json_lab_progressive",
 		"progression_state": "post_softbodies",
 		"dimensions": {
-			"width": 20,
-			"depth": 30,
+			"width": 16,
+			"depth": 27,
 			"max_height": 6
 		},
 		"metadata": {
@@ -65,7 +65,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:array_tutorial", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " ", " ", " ", " "],
-			[" ", "t:softbodies", "m:5:1:10:0.1", " ", " ", " ", "t:proceduralgeneration", " ", "t:cellularautomata", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "t:softbodies", "m:t:softbodies:0.1", " ", " ", " ", "t:proceduralgeneration", " ", "t:cellularautomata", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

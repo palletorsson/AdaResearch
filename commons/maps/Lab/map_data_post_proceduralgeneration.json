@@ -6,8 +6,8 @@
 		"format": "json_lab_progressive",
 		"progression_state": "post_proceduralgeneration",
 		"dimensions": {
-			"width": 22,
-			"depth": 22,
+			"width": 13,
+			"depth": 20,
 			"max_height": 6
 		},
 		"metadata": {
@@ -60,7 +60,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:array_tutorial", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " "], 
-			[" ", " ", " ", " ", " ", " ", "t:proceduralgeneration", "m:5:1:10:0.1", "t:cellularautomata", " ", " ", " ", " "],	
+			[" ", " ", " ", " ", " ", " ", "t:proceduralgeneration", "m:t:proceduralgeneration:0.1", "t:cellularautomata", " ", " ", " ", " "],	
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " "],	
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],	

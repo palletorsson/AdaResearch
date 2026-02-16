@@ -22,6 +22,9 @@ var map_settings: Dictionary = {}
 var utility_objects: Dictionary = {}
 var scene_cache: Dictionary = {}
 
+# Cached utility layout for cross-referencing (e.g. m:t:name lookups)
+var _cached_utility_layout: Array = []
+
 # Signals
 signal utility_generation_complete(utility_count: int)
 signal utility_activated(utility_type: String, position: Vector3, data: Dictionary)
@@ -159,6 +162,7 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 	print("GridUtilitiesComponent: Generating utilities")
 	
 	var utility_layout = utility_data.layout_data
+	_cached_utility_layout = utility_layout  # Cache for m:t:name lookups
 	var total_size = cube_size + gutter
 	var utility_count = 0
 	
@@ -276,6 +280,77 @@ func _parse_big_pipe_utility(cell_value: String, x: int, z: int) -> Dictionary:
 		"code": code,
 		"position": pos
 	}
+
+# Find the grid position of a teleport by sequence name (scans cached utility layout)
+# Returns Vector3i(col, 0, row) or Vector3i(-1,-1,-1) if not found
+func _find_teleport_grid_position(sequence_name: String) -> Vector3i:
+	var target_prefix = "t:" + sequence_name
+	for z in range(_cached_utility_layout.size()):
+		var row = _cached_utility_layout[z]
+		for x_col in range(row.size()):
+			var cell = str(row[x_col]).strip_edges()
+			if cell.begins_with(target_prefix):
+				# Verify it's the right teleport (not t:wavefunctions matching t:wave)
+				var remainder = cell.substr(target_prefix.length())
+				if remainder.is_empty() or remainder.begins_with(":"):
+					return Vector3i(x_col, 0, z)
+	return Vector3i(-1, -1, -1)
+
+# Find the nearest cell with structure value "1" (flat ground floor)
+# Searches in expanding radius around the given position
+# A cell is "structure 1" if it has a cube at y=0 but NOT at y=1
+# Also avoids cells with teleports on them
+# Returns Vector2i(col, row) of the safe cell, or best fallback
+func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
+	var dims = structure_component.get_grid_dimensions()
+	var best_fallback := Vector2i(grid_x + 1, grid_z)
+	var found_any_floor := false
+
+	# Search in expanding radius (1 to 5 cells away)
+	for radius in range(1, 6):
+		for dz in range(-radius, radius + 1):
+			for dx in range(-radius, radius + 1):
+				# Only check cells at this exact radius (ring, not filled square)
+				if abs(dx) != radius and abs(dz) != radius:
+					continue
+
+				var check_x = grid_x + dx
+				var check_z = grid_z + dz
+
+				# Bounds check
+				if check_x < 0 or check_x >= dims.x or check_z < 0 or check_z >= dims.z:
+					continue
+
+				# Check for structure == "1": cube at y=0 but not y=1
+				var has_ground = structure_component.has_cube_at(check_x, 0, check_z)
+				if not has_ground:
+					continue
+
+				var has_above = structure_component.has_cube_at(check_x, 1, check_z)
+
+				# Skip cells with teleports
+				var has_teleport := false
+				if check_z < _cached_utility_layout.size() and check_x < _cached_utility_layout[check_z].size():
+					var util_cell = str(_cached_utility_layout[check_z][check_x]).strip_edges()
+					if util_cell.begins_with("t:"):
+						has_teleport = true
+
+				if has_teleport:
+					continue
+
+				# Track best fallback (any walkable floor)
+				if not found_any_floor:
+					best_fallback = Vector2i(check_x, check_z)
+					found_any_floor = true
+
+				# Ideal: structure "1" — flat ground, no wall above
+				if not has_above:
+					print("GridUtilitiesComponent: Safe flat floor (structure=1) at grid(%d,%d), %d cells from teleport" % [check_x, check_z, radius])
+					return Vector2i(check_x, check_z)
+
+	# If no structure=1 found, use best fallback
+	print("GridUtilitiesComponent: WARNING - No structure=1 cell found near grid(%d,%d), using fallback grid(%d,%d)" % [grid_x, grid_z, best_fallback.x, best_fallback.y])
+	return best_fallback
 
 # Place a single utility object
 func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float):
@@ -669,27 +744,51 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				else:
 					print("GridUtilitiesComponent: Warning - Label object doesn't have set_keyid method")
 		"m":  # Move player to specific location after delay
-			if parameters.size() >= 3:
-				var target_x = float(parameters[0])
-				var target_y = float(parameters[1])
-				var target_z = float(parameters[2])
-				var delay = 0.5  # Default delay
+			# Format A: m:t:sequencename[:delay] - move near a teleporter (auto-find)
+			# Format B: m:gx:gy:gz[:delay] - move to grid coordinates (converted to world)
+			var move_target := Vector3.ZERO
+			var move_delay := 0.5
+			var move_resolved := false
+			var m_total_size := cube_size + gutter
 
-				# Optional 4th parameter for custom delay
+			if parameters.size() >= 1 and parameters[0] == "t":
+				# Format A: m:t:sequencename[:delay]
+				if parameters.size() >= 2:
+					var seq_name = parameters[1]
+					var teleport_pos = _find_teleport_grid_position(seq_name)
+					if teleport_pos != Vector3i(-1, -1, -1):
+						# Find nearest flat floor (structure=1) next to the teleport
+						var safe_cell = _find_safe_adjacent_cell(teleport_pos.x, teleport_pos.z)
+						var safe_y = structure_component.find_highest_y_at(safe_cell.x, safe_cell.y)
+						move_target = Vector3(safe_cell.x, safe_y, safe_cell.y) * m_total_size
+						move_target.y += 2.0  # Drop player from 2m above
+						move_resolved = true
+						print("GridUtilitiesComponent: m:t:%s → teleport at grid(%d,%d), safe spot at grid(%d,%d) = world %s" % [seq_name, teleport_pos.x, teleport_pos.z, safe_cell.x, safe_cell.y, move_target])
+					else:
+						print("GridUtilitiesComponent: WARNING - m:t:%s could not find teleport '%s' in utility grid" % [seq_name, seq_name])
+				if parameters.size() >= 3 and parameters[2].is_valid_float():
+					move_delay = float(parameters[2])
+
+			elif parameters.size() >= 3:
+				# Format B: m:gx:gy:gz[:delay] - grid coordinates → world position
+				var grid_x = float(parameters[0])
+				var grid_y = float(parameters[1])
+				var grid_z = float(parameters[2])
+				move_target = Vector3(grid_x, grid_y, grid_z) * m_total_size
+				move_target.y += 2.0  # Drop player from 2m above
+				move_resolved = true
 				if parameters.size() >= 4 and parameters[3].is_valid_float():
-					delay = float(parameters[3])
-
-				# Store move parameters as metadata
-				utility_object.set_meta("move_target", Vector3(target_x, target_y, target_z))
-				utility_object.set_meta("move_delay", delay)
-
-				# If utility has a method to set these, use it
-				if utility_object.has_method("set_move_parameters"):
-					utility_object.set_move_parameters(Vector3(target_x, target_y, target_z), delay)
-
-				print("GridUtilitiesComponent: Set move player to (%.1f, %.1f, %.1f) after %.1fs" % [target_x, target_y, target_z, delay])
+					move_delay = float(parameters[3])
+				print("GridUtilitiesComponent: m:grid(%s,%s,%s) → world %s" % [parameters[0], parameters[1], parameters[2], move_target])
 			else:
-				print("GridUtilitiesComponent: WARNING - Move utility requires at least 3 parameters (x, y, z)")
+				print("GridUtilitiesComponent: WARNING - Move utility requires m:t:name or m:x:y:z format")
+
+			if move_resolved:
+				utility_object.set_meta("move_target", move_target)
+				utility_object.set_meta("move_delay", move_delay)
+				if utility_object.has_method("set_move_parameters"):
+					utility_object.set_move_parameters(move_target, move_delay)
+				print("GridUtilitiesComponent: Move player to %s after %.1fs" % [move_target, move_delay])
 
 		"pb":  # Player body trigger - unlocks/activates player customization
 			# Format: pb:feature or pb:feature:color
