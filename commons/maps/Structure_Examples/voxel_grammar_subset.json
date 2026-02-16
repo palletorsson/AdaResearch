@@ -1,0 +1,378 @@
+{
+	"schema": "adaresearch.voxel_grammar_subset.v1",
+	"source_map": "Structure_Examples",
+	"description": "Between/beyond voxel grammar modules for grid composition, based on the Structure_Examples baseline.",
+	"assumptions": {
+		"grid_cell_meters": 1.0,
+		"supports_multi_level": true,
+		"tables_are_walkable_platforms": true,
+		"default_structure_height_legend": {
+			"0": "void or hole",
+			"1": "floor",
+			"2": "platform or plinth",
+			"3": "wall or pillar",
+			"4": "accent wall or buttress"
+		}
+	},
+	"naming_scheme": {
+		"pattern": "[Role]_[Primitive]_[Operator]_[Size]_[Variant]",
+		"examples": [
+			"THRESH_GATE_PILLARPAIR_3x1_A",
+			"CORRIDOR_PATH_CHICANE_5x3_A",
+			"COURT_RING_PERIMETER_5x5_A",
+			"VOID_COLUMN_ANTIPILLAR_3x3_A",
+			"TOPO_PATH_WRAP_5x2_A"
+		]
+	},
+	"piece_fields": [
+		"id",
+		"name",
+		"layer",
+		"tags",
+		"description",
+		"size",
+		"heightmap",
+		"void_ops",
+		"logic_hooks",
+		"flow_ports",
+		"variants"
+	],
+	"pieces": [
+		{
+			"id": "CONNECT_WALL_TJUNCTION_3x3_A",
+			"name": "T-Junction Wall",
+			"layer": "between",
+			"tags": ["connector", "junction", "wall"],
+			"description": "A wall branch joining a stem segment.",
+			"size": { "x": 3, "z": 3, "y": 3 },
+			"heightmap": [
+				["3", "3", "3"],
+				["1", "3", "1"],
+				["1", "3", "1"]
+			],
+			"flow_ports": [[0, 0], [2, 0], [1, 2]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "CONNECT_WALL_CROSSJUNCTION_3x3_A",
+			"name": "Cross-Junction Wall",
+			"layer": "between",
+			"tags": ["connector", "junction", "wall", "cross"],
+			"description": "Four-way wall crossing for branch-rich plans.",
+			"size": { "x": 3, "z": 3, "y": 3 },
+			"heightmap": [
+				["1", "3", "1"],
+				["3", "3", "3"],
+				["1", "3", "1"]
+			],
+			"flow_ports": [[1, 0], [0, 1], [2, 1], [1, 2]],
+			"variants": { "rotations": [0], "mirror_axes": [] }
+		},
+		{
+			"id": "THRESH_WALL_DOORCUT_3x1_A",
+			"name": "Doorway Cut",
+			"layer": "between",
+			"tags": ["threshold", "aperture", "door"],
+			"description": "Three-cell wall with a carved 1x2 doorway in the center.",
+			"size": { "x": 3, "z": 1, "y": 3 },
+			"heightmap": [
+				["3", "3", "3"]
+			],
+			"void_ops": [
+				{ "from": [1, 0, 0], "to": [1, 1, 0], "kind": "door_cut" }
+			],
+			"flow_ports": [[1, 0]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "THRESH_WALL_WINDOWSLIT_3x1_A",
+			"name": "Window Slit",
+			"layer": "between",
+			"tags": ["threshold", "aperture", "window"],
+			"description": "Three-cell wall with a 1x1 eye-height slit.",
+			"size": { "x": 3, "z": 1, "y": 3 },
+			"heightmap": [
+				["3", "3", "3"]
+			],
+			"void_ops": [
+				{ "from": [1, 1, 0], "to": [1, 1, 0], "kind": "window_slit" }
+			],
+			"flow_ports": [],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "THRESH_GATE_PILLARPAIR_3x1_A",
+			"name": "Pier Gate",
+			"layer": "between",
+			"tags": ["threshold", "gate", "pillar_pair"],
+			"description": "Two pillars with a one-cell gap that reads as a doorway.",
+			"size": { "x": 3, "z": 1, "y": 3 },
+			"heightmap": [
+				["3", "1", "3"]
+			],
+			"flow_ports": [[1, 0]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": [] }
+		},
+		{
+			"id": "JOINT_WALL_BUTTRESS_2x2_A",
+			"name": "Buttress Node",
+			"layer": "between",
+			"tags": ["joint", "corner", "buttress"],
+			"description": "Corner wall condition with an accented support pillar.",
+			"size": { "x": 2, "z": 2, "y": 4 },
+			"heightmap": [
+				["4", "3"],
+				["3", "1"]
+			],
+			"flow_ports": [[1, 1]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": [] }
+		},
+		{
+			"id": "CORRIDOR_PATH_DOGLEG_4x4_A",
+			"name": "Dogleg Corridor",
+			"layer": "between",
+			"tags": ["corridor", "turn", "flow"],
+			"description": "A single-turn path with short lead-in and offset sightline.",
+			"size": { "x": 4, "z": 4, "y": 3 },
+			"heightmap": [
+				["3", "3", "3", "3"],
+				["3", "1", "1", "3"],
+				["3", "1", "3", "3"],
+				["3", "1", "3", "3"]
+			],
+			"flow_ports": [[1, 3], [2, 1]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "CORRIDOR_PATH_SBEND_5x3_A",
+			"name": "S-Bend Corridor",
+			"layer": "between",
+			"tags": ["corridor", "s_bend", "flow"],
+			"description": "Opposed turns that produce rhythmic movement and delayed reveal.",
+			"size": { "x": 5, "z": 3, "y": 3 },
+			"heightmap": [
+				["3", "1", "1", "3", "3"],
+				["3", "3", "1", "1", "3"],
+				["3", "3", "3", "1", "3"]
+			],
+			"flow_ports": [[1, 0], [3, 2]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "CORRIDOR_PATH_CHICANE_5x3_A",
+			"name": "Chicane Corridor",
+			"layer": "between",
+			"tags": ["corridor", "chicane", "pillar_offset"],
+			"description": "Offset obstructions force zig-zag pathing through a narrow section.",
+			"size": { "x": 5, "z": 3, "y": 3 },
+			"heightmap": [
+				["3", "1", "3", "1", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "3", "1", "3", "3"]
+			],
+			"flow_ports": [[1, 0], [2, 2]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "THRESH_ROOM_VESTIBULE_3x3_A",
+			"name": "Vestibule",
+			"layer": "between",
+			"tags": ["threshold", "buffer", "roomlet"],
+			"description": "Small transition chamber between corridor and court.",
+			"size": { "x": 3, "z": 3, "y": 3 },
+			"heightmap": [
+				["3", "3", "3"],
+				["1", "1", "3"],
+				["3", "1", "3"]
+			],
+			"flow_ports": [[1, 2], [0, 1]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		},
+		{
+			"id": "COURT_VOID_POCKET_5x5_A",
+			"name": "Pocket Court",
+			"layer": "beyond",
+			"tags": ["court", "void", "adjacent_space"],
+			"description": "Compact side court for pause, stash, or secondary focus.",
+			"size": { "x": 5, "z": 5, "y": 3 },
+			"heightmap": [
+				["3", "3", "3", "3", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "3", "1", "3", "3"]
+			],
+			"flow_ports": [[2, 4]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": [] }
+		},
+		{
+			"id": "COURT_RING_PERIMETER_5x5_A",
+			"name": "Perimeter Court",
+			"layer": "beyond",
+			"tags": ["court", "ring", "figure_ground"],
+			"description": "Ring enclosure with hollow center for focal object or event.",
+			"size": { "x": 5, "z": 5, "y": 3 },
+			"heightmap": [
+				["3", "3", "3", "3", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "3", "3", "3", "3"]
+			],
+			"flow_ports": [[2, 0], [0, 2], [4, 2], [2, 4]],
+			"variants": { "rotations": [0], "mirror_axes": [] }
+		},
+		{
+			"id": "COURT_DIVIDER_SPLIT_7x5_A",
+			"name": "Split Court",
+			"layer": "beyond",
+			"tags": ["court", "divider", "colonnade"],
+			"description": "Court bisected by linear divider; supports comparison staging.",
+			"size": { "x": 7, "z": 5, "y": 3 },
+			"heightmap": [
+				["3", "3", "3", "3", "3", "3", "3"],
+				["3", "1", "1", "3", "1", "1", "3"],
+				["3", "1", "1", "3", "1", "1", "3"],
+				["3", "1", "1", "3", "1", "1", "3"],
+				["3", "3", "3", "3", "3", "3", "3"]
+			],
+			"flow_ports": [[3, 0], [3, 4]],
+			"variants": { "rotations": [0, 90], "mirror_axes": [] }
+		},
+		{
+			"id": "PLATFORM_PLINTH_ISLAND_2x2_A",
+			"name": "Plinth",
+			"layer": "beyond",
+			"tags": ["platform", "furniture", "display"],
+			"description": "Low monument base for centered exhibit objects.",
+			"size": { "x": 2, "z": 2, "y": 2 },
+			"heightmap": [
+				["2", "2"],
+				["2", "2"]
+			],
+			"flow_ports": [],
+			"variants": { "rotations": [0], "mirror_axes": [] }
+		},
+		{
+			"id": "PLATFORM_DAIS_BACKWALL_3x2_A",
+			"name": "Dais + Back Wall",
+			"layer": "beyond",
+			"tags": ["platform", "stage", "focal"],
+			"description": "Raised presentation edge with backdrop wall.",
+			"size": { "x": 3, "z": 2, "y": 3 },
+			"heightmap": [
+				["3", "3", "3"],
+				["2", "2", "2"]
+			],
+			"flow_ports": [[1, 1]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": [] }
+		},
+		{
+			"id": "FIELD_COLUMN_COLONNADE_7x1_A",
+			"name": "Colonnade Strip",
+			"layer": "beyond",
+			"tags": ["field", "rhythm", "repeat", "boundary"],
+			"description": "Alternating pillars and voids for paced edge articulation.",
+			"size": { "x": 7, "z": 1, "y": 3 },
+			"heightmap": [
+				["3", "1", "3", "1", "3", "1", "3"]
+			],
+			"flow_ports": [[1, 0], [3, 0], [5, 0]],
+			"variants": { "rotations": [0, 90], "mirror_axes": [] }
+		},
+		{
+			"id": "SYMM_LAYOUT_MIRROR_ERROR_5x5_A",
+			"name": "Mirror-With-Error",
+			"layer": "beyond",
+			"tags": ["symmetry", "misalignment", "tension"],
+			"description": "Near-symmetric composition with one deliberate mismatch cell.",
+			"size": { "x": 5, "z": 5, "y": 3 },
+			"heightmap": [
+				["3", "1", "1", "1", "3"],
+				["1", "2", "1", "2", "1"],
+				["1", "1", "1", "1", "1"],
+				["1", "2", "1", "2", "1"],
+				["3", "1", "1", "1", "2"]
+			],
+			"flow_ports": [[2, 0], [2, 4]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": [] }
+		},
+		{
+			"id": "VOID_WALL_HOLLOW_5x3_A",
+			"name": "Hollow Wall",
+			"layer": "beyond",
+			"tags": ["negative_space", "shell", "embedded_corridor"],
+			"description": "A thick shell wall containing a thin interior passage.",
+			"size": { "x": 5, "z": 3, "y": 3 },
+			"heightmap": [
+				["3", "3", "3", "3", "3"],
+				["3", "1", "1", "1", "3"],
+				["3", "3", "3", "3", "3"]
+			],
+			"flow_ports": [[1, 1], [3, 1]],
+			"variants": { "rotations": [0, 90], "mirror_axes": [] }
+		},
+		{
+			"id": "VOID_COLUMN_ANTIPILLAR_3x3_A",
+			"name": "Void Pillar",
+			"layer": "beyond",
+			"tags": ["negative_space", "anti_column", "void"],
+			"description": "Column-shaped vertical subtraction through occupied mass.",
+			"size": { "x": 3, "z": 3, "y": 4 },
+			"heightmap": [
+				["1", "1", "1"],
+				["1", "0", "1"],
+				["1", "1", "1"]
+			],
+			"void_ops": [
+				{ "from": [1, 0, 1], "to": [1, 3, 1], "kind": "void_pillar" }
+			],
+			"flow_ports": [[1, 1]],
+			"variants": { "rotations": [0], "mirror_axes": [] }
+		},
+		{
+			"id": "TOPO_PATH_WRAP_5x2_A",
+			"name": "Non-Euclid Wrap Corridor",
+			"layer": "beyond",
+			"tags": ["topology", "portal", "wrap", "non_euclid"],
+			"description": "Straight corridor that wraps traversal via linked portal ends.",
+			"size": { "x": 5, "z": 2, "y": 3 },
+			"heightmap": [
+				["3", "1", "1", "1", "3"],
+				["3", "1", "1", "1", "3"]
+			],
+			"logic_hooks": [
+				{
+					"type": "portal_pair",
+					"from": { "x": 1, "z": 0, "direction": "west" },
+					"to": { "x": 3, "z": 1, "direction": "east" },
+					"preserve_velocity": true
+				}
+			],
+			"flow_ports": [[1, 0], [3, 1]],
+			"variants": { "rotations": [0, 90, 180, 270], "mirror_axes": ["x"] }
+		}
+	],
+	"priority_batch": [
+		"CONNECT_WALL_TJUNCTION_3x3_A",
+		"CONNECT_WALL_CROSSJUNCTION_3x3_A",
+		"THRESH_WALL_DOORCUT_3x1_A",
+		"THRESH_WALL_WINDOWSLIT_3x1_A",
+		"THRESH_GATE_PILLARPAIR_3x1_A",
+		"JOINT_WALL_BUTTRESS_2x2_A",
+		"CORRIDOR_PATH_DOGLEG_4x4_A",
+		"CORRIDOR_PATH_SBEND_5x3_A",
+		"CORRIDOR_PATH_CHICANE_5x3_A",
+		"THRESH_ROOM_VESTIBULE_3x3_A",
+		"COURT_VOID_POCKET_5x5_A",
+		"COURT_RING_PERIMETER_5x5_A",
+		"COURT_DIVIDER_SPLIT_7x5_A",
+		"PLATFORM_PLINTH_ISLAND_2x2_A",
+		"PLATFORM_DAIS_BACKWALL_3x2_A",
+		"FIELD_COLUMN_COLONNADE_7x1_A",
+		"SYMM_LAYOUT_MIRROR_ERROR_5x5_A",
+		"VOID_WALL_HOLLOW_5x3_A",
+		"VOID_COLUMN_ANTIPILLAR_3x3_A",
+		"TOPO_PATH_WRAP_5x2_A"
+	]
+}

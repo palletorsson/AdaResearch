@@ -1,0 +1,1301 @@
+{
+	"schema": "adaresearch.grammar_structure.v1",
+	"title": "Voxel Grammar Structure",
+	"lookup_name": "grammar_structue",
+	"description": "Standalone grammar catalog for grid-based spatial composition. Each element includes meaning, use, and design thinking guidance.",
+	"source_files": [
+		"res://commons/maps/Structure_Examples/voxel_grammar_subset.json",
+		"res://commons/maps/Structure_Examples/map_data.json"
+	],
+	"coverage": {
+		"scope": "All elements in this grammar set",
+		"categories": [
+			"primitive",
+			"operator",
+			"spatial_role",
+			"between",
+			"beyond"
+		]
+	},
+	"naming_scheme": {
+		"pattern": "[CATEGORY]_[ELEMENT]_[VARIANT]",
+		"examples": [
+			"PRIM_WALL_A",
+			"BETWEEN_T_JUNCTION_WALL_A",
+			"BEYOND_NON_EUCLID_WRAP_A"
+		]
+	},
+	"thinking_framework": [
+		{
+			"name": "Local to Global",
+			"meaning": "Small local rules generate larger spatial behavior.",
+			"how_to_use": "Compose maps from modules, then evaluate whole-path flow.",
+			"how_to_think": "Do not optimize single tiles first; optimize transitions between modules."
+		},
+		{
+			"name": "Figure and Ground",
+			"meaning": "Solid and void are equally authored.",
+			"how_to_use": "Alternate built cells with strategic emptiness.",
+			"how_to_think": "Treat absence as a constructive material."
+		},
+		{
+			"name": "Compression and Release",
+			"meaning": "Narrow to wide transitions create rhythm and orientation.",
+			"how_to_use": "Use corridor bottlenecks before courts.",
+			"how_to_think": "Path drama comes from contrast, not constant width."
+		},
+		{
+			"name": "Symmetry and Error",
+			"meaning": "Order becomes memorable when one deviation is intentional.",
+			"how_to_use": "Mirror modules and alter one cell.",
+			"how_to_think": "Asymmetry is a signal, not noise."
+		},
+		{
+			"name": "Threshold Literacy",
+			"meaning": "Doors, gates, and vestibules are cognitive markers.",
+			"how_to_use": "Separate zones with explicit threshold pieces.",
+			"how_to_think": "A threshold should communicate state change."
+		},
+		{
+			"name": "Topology Awareness",
+			"meaning": "Portals and wraps alter adjacency beyond Euclidean layout.",
+			"how_to_use": "Attach logic hooks to specific cells, not entire maps.",
+			"how_to_think": "Topology is a gameplay rule, not decoration."
+		}
+	],
+	"compositional_axiom": {
+		"question": "Are larger structures built from more basic grammar?",
+		"answer": "Yes. Composite structures are authored as layered combinations of primitives, operators, and spatial roles.",
+		"formula": "primitives + operators + roles -> modules -> composite structure",
+		"design_note": "Treat named architectures as recipes over a finite base alphabet."
+	},
+	"elements": [
+		{
+			"id": "PRIM_FLOOR_A",
+			"category": "primitive",
+			"name": "Floor",
+			"meaning": "Default walkable surface.",
+			"how_to_use": [
+				"Use as baseline in all modules.",
+				"Keep large regions floor-only for orientation resets."
+			],
+			"how_to_think": [
+				"Floor is neutral context, not an event.",
+				"Too much variation removes readability."
+			],
+			"sample": {
+				"size": { "x": 1, "z": 1 },
+				"structure": [["1"]]
+			}
+		},
+		{
+			"id": "PRIM_VOID_A",
+			"category": "primitive",
+			"name": "Void",
+			"meaning": "Absence of floor; negative space that creates edge conditions.",
+			"how_to_use": [
+				"Carve pits, wells, and reveal chambers.",
+				"Pair with rails, walls, or thresholds for safety legibility."
+			],
+			"how_to_think": [
+				"Void is structure by subtraction.",
+				"Depth can focus attention more than height."
+			],
+			"sample": {
+				"size": { "x": 1, "z": 1 },
+				"structure": [["0"]]
+			}
+		},
+		{
+			"id": "PRIM_PLATFORM_A",
+			"category": "primitive",
+			"name": "Platform",
+			"meaning": "Raised walkable tile.",
+			"how_to_use": [
+				"Use for emphasis and line-of-sight control.",
+				"Group platforms into plinths and decks."
+			],
+			"how_to_think": [
+				"Height means hierarchy.",
+				"Raise only what should be noticed."
+			],
+			"sample": {
+				"size": { "x": 1, "z": 1 },
+				"structure": [["2"]]
+			}
+		},
+		{
+			"id": "PRIM_PILLAR_A",
+			"category": "primitive",
+			"name": "Pillar",
+			"meaning": "Vertical accent and obstacle anchor.",
+			"how_to_use": [
+				"Use in pairs for gates.",
+				"Use in rows for colonnades."
+			],
+			"how_to_think": [
+				"Pillars are rhythm markers.",
+				"Single pillars imply orientation pivots."
+			],
+			"sample": {
+				"size": { "x": 1, "z": 1 },
+				"structure": [["3"]]
+			}
+		},
+		{
+			"id": "PRIM_WALL_A",
+			"category": "primitive",
+			"name": "Wall",
+			"meaning": "Linear barrier that channels movement.",
+			"how_to_use": [
+				"Build corridors and court perimeters.",
+				"Interrupt long walls with apertures."
+			],
+			"how_to_think": [
+				"Wall controls route, not only blockage.",
+				"Long uninterrupted walls flatten pacing."
+			],
+			"sample": {
+				"size": { "x": 3, "z": 1 },
+				"structure": [["3", "3", "3"]]
+			}
+		},
+		{
+			"id": "PRIM_GATE_A",
+			"category": "primitive",
+			"name": "Gate",
+			"meaning": "Passage framed by two supports.",
+			"how_to_use": [
+				"Use between zones with distinct rule sets.",
+				"Combine with signage or lighting for clarity."
+			],
+			"how_to_think": [
+				"A gate marks permission.",
+				"Gates should read before they are reached."
+			],
+			"sample": {
+				"size": { "x": 3, "z": 1 },
+				"structure": [["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "PRIM_PLINTH_A",
+			"category": "primitive",
+			"name": "Plinth",
+			"meaning": "Low 2x2 platform for focal placement.",
+			"how_to_use": [
+				"Place artifacts at center of view cones.",
+				"Use as a stable visual anchor in open courts."
+			],
+			"how_to_think": [
+				"Plinth equals significance.",
+				"Do not overuse or emphasis collapses."
+			],
+			"sample": {
+				"size": { "x": 2, "z": 2 },
+				"structure": [["2", "2"], ["2", "2"]]
+			}
+		},
+		{
+			"id": "PRIM_RAMP_A",
+			"category": "primitive",
+			"name": "Ramp",
+			"meaning": "Gradual transition between elevations.",
+			"how_to_use": [
+				"Connect platform heights while preserving flow.",
+				"Use with corridor turns for kinetic pacing."
+			],
+			"how_to_think": [
+				"Ramps are verbs in space.",
+				"Vertical movement should feel intentional, not abrupt."
+			],
+			"sample": {
+				"size": { "x": 3, "z": 1 },
+				"structure": [["1", "1", "2"]],
+				"utility_hint": "wp:90"
+			}
+		},
+		{
+			"id": "OP_PLACE_A",
+			"category": "operator",
+			"name": "Place",
+			"meaning": "Insert a primitive or module at coordinates.",
+			"how_to_use": [
+				"Start from floor field, then place constraints.",
+				"Use consistent grid offsets for repeatability."
+			],
+			"how_to_think": [
+				"Placement defines intent.",
+				"Every cell should answer why it exists."
+			],
+			"sample": {
+				"before": [["1", "1", "1"]],
+				"after": [["1", "3", "1"]]
+			}
+		},
+		{
+			"id": "OP_REPEAT_A",
+			"category": "operator",
+			"name": "Repeat",
+			"meaning": "Copy a module along an axis with spacing.",
+			"how_to_use": [
+				"Create rhythms like colonnades and striped walls.",
+				"Use beat intervals to place landmarks."
+			],
+			"how_to_think": [
+				"Repetition creates expectation.",
+				"Break expectation once to signal transition."
+			],
+			"sample": {
+				"module": [["3", "1"]],
+				"repeat_x": 3,
+				"result": [["3", "1", "3", "1", "3", "1"]]
+			}
+		},
+		{
+			"id": "OP_ROTATE_A",
+			"category": "operator",
+			"name": "Rotate",
+			"meaning": "Turn module orientation by 90-degree increments.",
+			"how_to_use": [
+				"Reuse one authored module in four directions.",
+				"Compose rotational quartets around center cells."
+			],
+			"how_to_think": [
+				"Rotation preserves identity while changing affordance.",
+				"Directionality is part of module meaning."
+			],
+			"sample": {
+				"input": [["3", "1"], ["1", "1"]],
+				"rotation_degrees": 90,
+				"output": [["1", "3"], ["1", "1"]]
+			}
+		},
+		{
+			"id": "OP_MIRROR_A",
+			"category": "operator",
+			"name": "Mirror",
+			"meaning": "Reflect module across x or z axis.",
+			"how_to_use": [
+				"Generate balanced pairs quickly.",
+				"Use mirror-with-error for subtle tension."
+			],
+			"how_to_think": [
+				"Mirrors stabilize orientation.",
+				"Perfect symmetry is calm; broken symmetry is narrative."
+			],
+			"sample": {
+				"input": [["3", "1", "1"]],
+				"mirror_axis": "x",
+				"output": [["1", "1", "3"]]
+			}
+		},
+		{
+			"id": "OP_TRANSLATE_A",
+			"category": "operator",
+			"name": "Translate",
+			"meaning": "Shift a module without changing form.",
+			"how_to_use": [
+				"Build staggered corridors and phase-shifted repeats.",
+				"Offset duplicates by one cell for chicanes."
+			],
+			"how_to_think": [
+				"Translation is a relation, not a shape.",
+				"Offset controls alignment tension."
+			],
+			"sample": {
+				"delta": { "x": 1, "z": 0 },
+				"effect": "module copied one cell to the east"
+			}
+		},
+		{
+			"id": "OP_STACK_HEIGHT_A",
+			"category": "operator",
+			"name": "Stack Height",
+			"meaning": "Increase vertical level values to build hierarchy.",
+			"how_to_use": [
+				"Raise landmarks and observation points.",
+				"Use stepped stacks for staircase motifs."
+			],
+			"how_to_think": [
+				"Height communicates priority.",
+				"Vertical contrast should support route readability."
+			],
+			"sample": {
+				"before": [["1", "1", "1"]],
+				"after": [["1", "2", "3"]]
+			}
+		},
+		{
+			"id": "OP_CARVE_VOID_A",
+			"category": "operator",
+			"name": "Carve Void",
+			"meaning": "Subtract occupied cells to create apertures or wells.",
+			"how_to_use": [
+				"Cut doorways, window slits, and anti-columns.",
+				"Use carve operations to make thresholds legible."
+			],
+			"how_to_think": [
+				"Subtraction is equivalent to construction.",
+				"A carved void should still imply intentional form."
+			],
+			"sample": {
+				"before": [["3", "3", "3"]],
+				"after": [["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "OP_SPLIT_A",
+			"category": "operator",
+			"name": "Split",
+			"meaning": "Divide a space into two related subspaces.",
+			"how_to_use": [
+				"Use thin walls or colonnades to split courts.",
+				"Assign each half a distinct interaction mode."
+			],
+			"how_to_think": [
+				"Split introduces comparison.",
+				"Division can clarify contrast better than separate rooms."
+			],
+			"sample": {
+				"input": [["1", "1", "1", "1", "1"]],
+				"output": [["1", "1", "3", "1", "1"]]
+			}
+		},
+		{
+			"id": "OP_MERGE_A",
+			"category": "operator",
+			"name": "Merge",
+			"meaning": "Combine adjacent modules into one coherent field.",
+			"how_to_use": [
+				"Merge vestibule and court into one flow chain.",
+				"Unify materials/heights at join seams."
+			],
+			"how_to_think": [
+				"Merge resolves boundary noise.",
+				"A merge should remove ambiguity, not detail."
+			],
+			"sample": {
+				"left_module": [["3", "1", "3"]],
+				"right_module": [["3", "1", "3"]],
+				"result": [["3", "1", "3", "1", "3"]]
+			}
+		},
+		{
+			"id": "OP_SLIP_SHEAR_A",
+			"category": "operator",
+			"name": "Slip / Shear",
+			"meaning": "Offset repeated lines to create staggered tension.",
+			"how_to_use": [
+				"Apply to parallel walls for dynamic corridors.",
+				"Use with beat gates for syncopated pacing."
+			],
+			"how_to_think": [
+				"Shear is controlled misalignment.",
+				"Small offsets can produce large perceptual effects."
+			],
+			"sample": {
+				"before": [["3", "3", "3"], ["3", "3", "3"]],
+				"after": [["3", "3", "3"], ["1", "3", "3"]]
+			}
+		},
+		{
+			"id": "OP_PHASE_SHIFT_A",
+			"category": "operator",
+			"name": "Phase Shift",
+			"meaning": "Change repeat parity to alter alignment and rhythm.",
+			"how_to_use": [
+				"Shift every second module by one cell.",
+				"Use in wave corridors and field textures."
+			],
+			"how_to_think": [
+				"Phase is a temporal idea applied spatially.",
+				"Parity changes can mark zone boundaries."
+			],
+			"sample": {
+				"base_pattern": [["3", "1", "3", "1"]],
+				"phase_shifted": [["1", "3", "1", "3"]]
+			}
+		},
+		{
+			"id": "OP_PORTAL_LINK_A",
+			"category": "operator",
+			"name": "Portal Link",
+			"meaning": "Declare non-local adjacency between distant cells.",
+			"how_to_use": [
+				"Use for non-Euclid wraps and loop corridors.",
+				"Pair with clear frame geometry for user legibility."
+			],
+			"how_to_think": [
+				"Portal links modify topology, not geometry.",
+				"Player trust requires consistent portal rules."
+			],
+			"sample": {
+				"hook": {
+					"type": "portal_pair",
+					"from": { "x": 1, "z": 0 },
+					"to": { "x": 3, "z": 1 }
+				}
+			}
+		},
+		{
+			"id": "ROLE_CENTER_A",
+			"category": "spatial_role",
+			"name": "Center",
+			"meaning": "Focal cell cluster for primary attention.",
+			"how_to_use": [
+				"Place plinths, key artifacts, or anchor cells.",
+				"Use ring courts to reinforce centrality."
+			],
+			"how_to_think": [
+				"Center answers what matters.",
+				"A weak center makes the map feel undecided."
+			],
+			"sample": {
+				"pattern": [["1", "1", "1"], ["1", "2", "1"], ["1", "1", "1"]]
+			}
+		},
+		{
+			"id": "ROLE_EDGE_A",
+			"category": "spatial_role",
+			"name": "Edge",
+			"meaning": "Boundary region where containment is read.",
+			"how_to_use": [
+				"Line with walls, pillars, or colonnades.",
+				"Use edge rhythm to drive orientation."
+			],
+			"how_to_think": [
+				"Edges are memory rails.",
+				"Consistent edge language reduces disorientation."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"], ["1", "1", "1"], ["1", "1", "1"]]
+			}
+		},
+		{
+			"id": "ROLE_CORNER_A",
+			"category": "spatial_role",
+			"name": "Corner",
+			"meaning": "Turning or anchoring condition at boundary intersections.",
+			"how_to_use": [
+				"Place buttress nodes at external corners.",
+				"Use inside corners for pockets and reveals."
+			],
+			"how_to_think": [
+				"Corners accumulate directional meaning.",
+				"Corner treatment determines whether space feels open or tight."
+			],
+			"sample": {
+				"pattern": [["3", "3"], ["3", "1"]]
+			}
+		},
+		{
+			"id": "ROLE_THRESHOLD_A",
+			"category": "spatial_role",
+			"name": "Threshold",
+			"meaning": "Transition cell set between two states.",
+			"how_to_use": [
+				"Use doorway cuts, gates, and vestibules.",
+				"Attach labels or utility markers for explicit transition."
+			],
+			"how_to_think": [
+				"Thresholds are cognitive punctuation.",
+				"A good threshold clarifies before crossing."
+			],
+			"sample": {
+				"pattern": [["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "ROLE_CORRIDOR_A",
+			"category": "spatial_role",
+			"name": "Corridor",
+			"meaning": "Directed path channel between zones.",
+			"how_to_use": [
+				"Use dogleg, S-bend, and chicane variants for pacing.",
+				"Alternate narrow and wide sections for compression/release."
+			],
+			"how_to_think": [
+				"Corridor defines time through space.",
+				"Route complexity should serve learning, not confusion."
+			],
+			"sample": {
+				"pattern": [["3", "1", "3"], ["3", "1", "3"], ["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "ROLE_NODE_A",
+			"category": "spatial_role",
+			"name": "Node",
+			"meaning": "Decision point where multiple paths meet.",
+			"how_to_use": [
+				"Use T and cross junction modules.",
+				"Place annotations at nodes to explain branch choices."
+			],
+			"how_to_think": [
+				"Node quality controls map legibility.",
+				"Nodes should expose options without overload."
+			],
+			"sample": {
+				"pattern": [["1", "3", "1"], ["3", "3", "3"], ["1", "3", "1"]]
+			}
+		},
+		{
+			"id": "ROLE_BUFFER_A",
+			"category": "spatial_role",
+			"name": "Buffer",
+			"meaning": "Intermediary chamber easing transition between scales or rules.",
+			"how_to_use": [
+				"Insert vestibules before large courts.",
+				"Use small neutral cells to reset orientation."
+			],
+			"how_to_think": [
+				"Buffers prevent abrupt cognitive jumps.",
+				"A map without buffers feels brittle."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"], ["1", "1", "3"], ["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "ROLE_COURT_A",
+			"category": "spatial_role",
+			"name": "Court",
+			"meaning": "Open central field enclosed or framed by boundaries.",
+			"how_to_use": [
+				"Use perimeter and split variants for comparison.",
+				"Place center artifacts in courts with controlled entries."
+			],
+			"how_to_think": [
+				"Courts are interaction stages.",
+				"Court boundaries define audience and focus."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "3", "3", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BETWEEN_T_JUNCTION_WALL_A",
+			"category": "between",
+			"name": "T-Junction Wall",
+			"meaning": "Branch node where one wall joins another mid-span.",
+			"how_to_use": [
+				"Use as branch decision point.",
+				"Place signage where branch semantics differ."
+			],
+			"how_to_think": [
+				"T-junction is a controlled fork.",
+				"Branches should represent meaningful alternatives."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"], ["1", "3", "1"], ["1", "3", "1"]]
+			}
+		},
+		{
+			"id": "BETWEEN_CROSS_JUNCTION_WALL_A",
+			"category": "between",
+			"name": "Cross-Junction Wall",
+			"meaning": "Four-way node with maximal route connectivity.",
+			"how_to_use": [
+				"Use in hub-like intersections.",
+				"Reduce clutter near cross-junctions for readability."
+			],
+			"how_to_think": [
+				"Cross-junctions accelerate decision load.",
+				"Pair with landmarks to prevent disorientation."
+			],
+			"sample": {
+				"pattern": [["1", "3", "1"], ["3", "3", "3"], ["1", "3", "1"]]
+			}
+		},
+		{
+			"id": "BETWEEN_DOORWAY_CUT_A",
+			"category": "between",
+			"name": "Doorway Cut",
+			"meaning": "Carved opening in an otherwise solid wall.",
+			"how_to_use": [
+				"Place as explicit transition marker.",
+				"Use repeated doorway rhythm to signal sequence progression."
+			],
+			"how_to_think": [
+				"A doorway is both permission and direction.",
+				"Openings should align with intended view corridors."
+			],
+			"sample": {
+				"before": [["3", "3", "3"]],
+				"after": [["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "BETWEEN_WINDOW_SLIT_A",
+			"category": "between",
+			"name": "Window Slit",
+			"meaning": "Visual aperture without full pass-through.",
+			"how_to_use": [
+				"Preview next zone without granting access.",
+				"Use to frame focal artifacts at distance."
+			],
+			"how_to_think": [
+				"Slits create anticipation.",
+				"Visibility can precede navigability."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"]],
+				"void_ops": [{"kind": "window_slit", "cell": [1, 1, 0]}]
+			}
+		},
+		{
+			"id": "BETWEEN_PIER_GATE_A",
+			"category": "between",
+			"name": "Pier Gate",
+			"meaning": "Two pillars framing a one-cell pass.",
+			"how_to_use": [
+				"Use as lightweight threshold where full wall is too heavy.",
+				"Repeat as arcades for temporal rhythm."
+			],
+			"how_to_think": [
+				"Frames can be softer than walls.",
+				"Gate cadence can encode progression tempo."
+			],
+			"sample": {
+				"pattern": [["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "BETWEEN_BUTTRESS_NODE_A",
+			"category": "between",
+			"name": "Buttress Node",
+			"meaning": "Wall corner with structural accent pillar.",
+			"how_to_use": [
+				"Use to emphasize turns and outer boundaries.",
+				"Use at corners where route should feel fortified."
+			],
+			"how_to_think": [
+				"Buttress implies load and seriousness.",
+				"Corner accents can mark sequence phase changes."
+			],
+			"sample": {
+				"pattern": [["4", "3"], ["3", "1"]]
+			}
+		},
+		{
+			"id": "BETWEEN_DOGLEG_CORRIDOR_A",
+			"category": "between",
+			"name": "Dogleg Corridor",
+			"meaning": "Single right-angle bend with lead-in.",
+			"how_to_use": [
+				"Use to hide direct line-of-sight to target room.",
+				"Insert before reveal spaces for pacing."
+			],
+			"how_to_think": [
+				"Dogleg equals deferred information.",
+				"Turns can create narrative beats."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3"],
+					["3", "1", "1", "3"],
+					["3", "1", "3", "3"],
+					["3", "1", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BETWEEN_S_BEND_CORRIDOR_A",
+			"category": "between",
+			"name": "S-Bend Corridor",
+			"meaning": "Two opposing turns that modulate flow.",
+			"how_to_use": [
+				"Use for measured traversal between dense nodes.",
+				"Pair with rhythmic lighting or labels."
+			],
+			"how_to_think": [
+				"S-bends prevent straight-line autopilot.",
+				"Alternating direction keeps attention active."
+			],
+			"sample": {
+				"pattern": [
+					["3", "1", "1", "3", "3"],
+					["3", "3", "1", "1", "3"],
+					["3", "3", "3", "1", "3"]
+				]
+			}
+		},
+		{
+			"id": "BETWEEN_CHICANE_CORRIDOR_A",
+			"category": "between",
+			"name": "Chicane Corridor",
+			"meaning": "Offset obstacles forcing zig-zag traversal.",
+			"how_to_use": [
+				"Use to slow movement before key interaction zones.",
+				"Combine with pillar rhythm for stronger effect."
+			],
+			"how_to_think": [
+				"Chicane is embodied parsing.",
+				"The body learns the rule by navigating it."
+			],
+			"sample": {
+				"pattern": [
+					["3", "1", "3", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "3", "1", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BETWEEN_VESTIBULE_A",
+			"category": "between",
+			"name": "Vestibule",
+			"meaning": "Small interstitial chamber between spaces.",
+			"how_to_use": [
+				"Use as a decompression stage.",
+				"Use to prepare users for rule/context changes."
+			],
+			"how_to_think": [
+				"Vestibules reduce abruptness.",
+				"Buffers are pedagogical, not decorative."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"], ["1", "1", "3"], ["3", "1", "3"]]
+			}
+		},
+		{
+			"id": "BEYOND_POCKET_COURT_A",
+			"category": "beyond",
+			"name": "Pocket Court",
+			"meaning": "Small side court attached to a route.",
+			"how_to_use": [
+				"Place optional interactions or side notes here.",
+				"Use as quiet zone off major corridors."
+			],
+			"how_to_think": [
+				"Pockets hold secondary meaning.",
+				"Not every space needs to be on mainline progression."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "3", "1", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_PERIMETER_COURT_A",
+			"category": "beyond",
+			"name": "Perimeter Court",
+			"meaning": "Ring enclosure with central open field.",
+			"how_to_use": [
+				"Use for central demonstrations or boss-like nodes.",
+				"Connect by multiple gates for nonlinear traversal."
+			],
+			"how_to_think": [
+				"Ring form emphasizes center and circulation.",
+				"Perimeter is audience, center is performance."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "3", "3", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_SPLIT_COURT_A",
+			"category": "beyond",
+			"name": "Split Court",
+			"meaning": "Court divided by a thin linear separator.",
+			"how_to_use": [
+				"Stage side-by-side comparisons.",
+				"Separate two interaction logics in one room."
+			],
+			"how_to_think": [
+				"Split form means dialogue.",
+				"Difference can coexist without full isolation."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3", "3", "3"],
+					["3", "1", "1", "3", "1", "1", "3"],
+					["3", "1", "1", "3", "1", "1", "3"],
+					["3", "1", "1", "3", "1", "1", "3"],
+					["3", "3", "3", "3", "3", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_PLINTH_A",
+			"category": "beyond",
+			"name": "Plinth Field",
+			"meaning": "One or more low platforms used as semantic anchors.",
+			"how_to_use": [
+				"Use isolated plinths in open courts.",
+				"Assign one concept per plinth cluster."
+			],
+			"how_to_think": [
+				"Plinth = declaration of importance.",
+				"Spacing between plinths sets conceptual distance."
+			],
+			"sample": {
+				"pattern": [["2", "2"], ["2", "2"]]
+			}
+		},
+		{
+			"id": "BEYOND_DAIS_BACKWALL_A",
+			"category": "beyond",
+			"name": "Dais + Back Wall",
+			"meaning": "Stage-like composition with backdrop.",
+			"how_to_use": [
+				"Frame explanations or key demonstrations.",
+				"Use in sequence finales to increase closure."
+			],
+			"how_to_think": [
+				"Dais configures audience attention.",
+				"Backdrop converts platform into statement."
+			],
+			"sample": {
+				"pattern": [["3", "3", "3"], ["2", "2", "2"]]
+			}
+		},
+		{
+			"id": "BEYOND_COLONNADE_STRIP_A",
+			"category": "beyond",
+			"name": "Colonnade Strip",
+			"meaning": "Alternating pillar-void rhythm on boundary lines.",
+			"how_to_use": [
+				"Use as pacing rail along long walks.",
+				"Use as visual metronome for progression maps."
+			],
+			"how_to_think": [
+				"Repetition structures memory.",
+				"Rhythm can replace signage in familiar sections."
+			],
+			"sample": {
+				"pattern": [["3", "1", "3", "1", "3", "1", "3"]]
+			}
+		},
+		{
+			"id": "BEYOND_MIRROR_WITH_ERROR_A",
+			"category": "beyond",
+			"name": "Mirror-With-Error",
+			"meaning": "Near-symmetry with one intentional mismatch.",
+			"how_to_use": [
+				"Highlight one important anomaly.",
+				"Use in puzzle teaching around invariants."
+			],
+			"how_to_think": [
+				"Error introduces narrative in otherwise stable systems.",
+				"The smallest asymmetry can carry the largest semantic weight."
+			],
+			"sample": {
+				"pattern": [
+					["3", "1", "1", "1", "3"],
+					["1", "2", "1", "2", "1"],
+					["1", "1", "1", "1", "1"],
+					["1", "2", "1", "2", "1"],
+					["3", "1", "1", "1", "2"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_HOLLOW_WALL_A",
+			"category": "beyond",
+			"name": "Hollow Wall",
+			"meaning": "Thick shell wall with interior pass-through.",
+			"how_to_use": [
+				"Hide traversal channels in apparent barriers.",
+				"Use as advanced legibility challenge."
+			],
+			"how_to_think": [
+				"Surface appearance and traversal truth can diverge.",
+				"Hollow structures reward exploration."
+			],
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3"],
+					["3", "1", "1", "1", "3"],
+					["3", "3", "3", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_VOID_PILLAR_A",
+			"category": "beyond",
+			"name": "Void Pillar",
+			"meaning": "Column-shaped vertical subtraction (anti-column).",
+			"how_to_use": [
+				"Mark key centers with absence instead of mass.",
+				"Use as contrast against physical pillar sets."
+			],
+			"how_to_think": [
+				"Negative landmarks can guide as strongly as positive ones.",
+				"Void pillars expose figure-ground reversibility."
+			],
+			"sample": {
+				"pattern": [["1", "1", "1"], ["1", "0", "1"], ["1", "1", "1"]],
+				"void_ops": [{"kind": "void_pillar", "from": [1, 0, 1], "to": [1, 3, 1]}]
+			}
+		},
+		{
+			"id": "BEYOND_NON_EUCLID_WRAP_A",
+			"category": "beyond",
+			"name": "Non-Euclid Wrap Corridor",
+			"meaning": "Straight corridor with portal-linked wrap adjacency.",
+			"how_to_use": [
+				"Use sparingly to teach topology shifts.",
+				"Always signal wrap behavior with clear framing."
+			],
+			"how_to_think": [
+				"Euclidean geometry can remain while topology changes.",
+				"Consistency of rule is more important than realism."
+			],
+			"sample": {
+				"pattern": [["3", "1", "1", "1", "3"], ["3", "1", "1", "1", "3"]],
+				"logic_hooks": [
+					{
+						"type": "portal_pair",
+						"from": { "x": 1, "z": 0, "direction": "west" },
+						"to": { "x": 3, "z": 1, "direction": "east" }
+					}
+				]
+			}
+		},
+		{
+			"id": "BEYOND_LOOP_PORTAL_PAIR_A",
+			"category": "beyond",
+			"name": "Loop Portal Pair",
+			"meaning": "Two portals forming a circulation cycle.",
+			"how_to_use": [
+				"Create repeatable loops for training or rhythm.",
+				"Use loop exits to branch into optional side content."
+			],
+			"how_to_think": [
+				"Loops create temporal structures in map traversal.",
+				"Repeated path can support mastery or disorientation."
+			],
+			"sample": {
+				"logic_hooks": [
+					{
+						"type": "portal_pair",
+						"from": { "x": 0, "z": 0 },
+						"to": { "x": 4, "z": 4 }
+					},
+					{
+						"type": "portal_pair",
+						"from": { "x": 4, "z": 4 },
+						"to": { "x": 0, "z": 0 }
+					}
+				]
+			}
+		},
+		{
+			"id": "BEYOND_ANCHOR_CELL_A",
+			"category": "beyond",
+			"name": "Anchor Cell",
+			"meaning": "Reference cell that reorients local coordinate reading.",
+			"how_to_use": [
+				"Use at major node entries and topology transitions.",
+				"Bind HUD/text annotations to anchor location."
+			],
+			"how_to_think": [
+				"Anchor cells reduce cognitive drift in complex maps.",
+				"Orientation cues are part of grammar, not post-processing."
+			],
+			"sample": {
+				"pattern": [["2"]],
+				"utility_hint": "3t:ANCHOR"
+			}
+		},
+		{
+			"id": "BEYOND_JAPANESE_GARDEN_MINI_A",
+			"category": "beyond",
+			"name": "Japanese Garden (Mini)",
+			"meaning": "Asymmetric contemplative micro-court with stones, stepping path, and framed entry.",
+			"how_to_use": [
+				"Use as a calm pocket between dense algorithm spaces.",
+				"Place one focused artifact at edge rather than center."
+			],
+			"how_to_think": [
+				"Asymmetry should feel intentional, not random.",
+				"Negative space and path cadence are the main content."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_FLOOR_A", "PRIM_VOID_A", "PRIM_PILLAR_A", "PRIM_GATE_A"],
+				"operators": ["OP_PLACE_A", "OP_TRANSLATE_A", "OP_PHASE_SHIFT_A", "OP_CARVE_VOID_A"],
+				"spatial_roles": ["ROLE_THRESHOLD_A", "ROLE_BUFFER_A", "ROLE_CENTER_A"],
+				"assembly_steps": [
+					"Lay a quiet 7x7 floor field.",
+					"Place offset stone nodes (pillars/platforms) asymmetrically.",
+					"Carve selective void pockets for rake-like contrast.",
+					"Add one gate/threshold for controlled entry."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["3", "1", "1", "1", "1", "1", "3"],
+					["1", "1", "0", "1", "2", "1", "1"],
+					["1", "1", "1", "1", "1", "1", "1"],
+					["1", "2", "1", "1", "0", "1", "1"],
+					["1", "1", "1", "1", "1", "2", "1"],
+					["1", "1", "0", "1", "1", "1", "1"],
+					["3", "1", "1", "1", "1", "1", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_TEMPLAR_COMPOUND_MINI_A",
+			"category": "beyond",
+			"name": "Templar Compound (Mini)",
+			"meaning": "Compact fortified court with axial gate and cross-ordered interior.",
+			"how_to_use": [
+				"Use for high-clarity, high-discipline spaces in sequence transitions.",
+				"Place rule-heavy demonstrations inside this structure."
+			],
+			"how_to_think": [
+				"Axial symmetry communicates doctrine and control.",
+				"Use one deliberate break if you want narrative tension."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_WALL_A", "PRIM_GATE_A", "PRIM_PLATFORM_A", "PRIM_PILLAR_A"],
+				"operators": ["OP_REPEAT_A", "OP_MIRROR_A", "OP_PLACE_A", "OP_STACK_HEIGHT_A"],
+				"spatial_roles": ["ROLE_EDGE_A", "ROLE_THRESHOLD_A", "ROLE_COURT_A", "ROLE_CENTER_A"],
+				"assembly_steps": [
+					"Build a square perimeter wall.",
+					"Insert one central gate on primary axis.",
+					"Lay a cross-axis interior path.",
+					"Raise a small central platform as focus."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "1", "3", "3", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "2", "1", "1", "3"],
+					["1", "1", "2", "2", "2", "1", "1"],
+					["3", "1", "1", "2", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "3", "3", "3", "3", "3", "3"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_AMPHITHEATRE_MINI_A",
+			"category": "beyond",
+			"name": "Amphitheatre (Mini)",
+			"meaning": "Tiered semi-circular seating condition facing a stage platform.",
+			"how_to_use": [
+				"Use for collective viewing of dynamic artifacts.",
+				"Align stage with strongest entry axis."
+			],
+			"how_to_think": [
+				"Height tiers encode audience hierarchy and sightline logic.",
+				"Amp spaces are about orientation convergence."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_PLATFORM_A", "PRIM_FLOOR_A", "PRIM_WALL_A", "PRIM_PLINTH_A"],
+				"operators": ["OP_STACK_HEIGHT_A", "OP_SPLIT_A", "OP_MIRROR_A", "OP_PLACE_A"],
+				"spatial_roles": ["ROLE_CENTER_A", "ROLE_EDGE_A", "ROLE_CORRIDOR_A"],
+				"assembly_steps": [
+					"Create a stage strip at one edge.",
+					"Stack stepped tiers opposite the stage.",
+					"Keep a central aisle or split lane for access.",
+					"Frame lateral edges with low walls."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["3", "3", "3", "3", "3", "3", "3"],
+					["1", "1", "1", "2", "1", "1", "1"],
+					["1", "2", "2", "2", "2", "2", "1"],
+					["2", "2", "3", "3", "3", "2", "2"],
+					["1", "1", "1", "1", "1", "1", "1"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_MINI_FORTRESS_A",
+			"category": "beyond",
+			"name": "Mini Fortress",
+			"meaning": "Small defensive enclosure with corner towers and controlled gate.",
+			"how_to_use": [
+				"Use as challenge node around hazards or enemies.",
+				"Place one protected objective inside."
+			],
+			"how_to_think": [
+				"Fortress grammar emphasizes chokepoints and visibility control.",
+				"Corner towers should support surveillance logic."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_WALL_A", "PRIM_PILLAR_A", "PRIM_GATE_A", "PRIM_VOID_A"],
+				"operators": ["OP_REPEAT_A", "OP_PLACE_A", "OP_CARVE_VOID_A", "OP_STACK_HEIGHT_A"],
+				"spatial_roles": ["ROLE_EDGE_A", "ROLE_CORNER_A", "ROLE_THRESHOLD_A", "ROLE_COURT_A"],
+				"assembly_steps": [
+					"Lay a square wall ring with one gate break.",
+					"Raise corner towers with higher pillar values.",
+					"Optionally carve moat-like void outside one face.",
+					"Reserve interior as protected court."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["4", "3", "3", "1", "3", "3", "4"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["1", "1", "1", "2", "1", "1", "1"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["4", "3", "3", "3", "3", "3", "4"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_TORII_THRESHOLD_A",
+			"category": "beyond",
+			"name": "Torii Threshold (Mini)",
+			"meaning": "Symbolic framed gate for ritualized entry into a distinct zone.",
+			"how_to_use": [
+				"Place at entry to contemplative or sacred subspaces.",
+				"Use repeated torii frames for processional paths."
+			],
+			"how_to_think": [
+				"The frame changes interpretation of the next cells.",
+				"Threshold semantics can be cultural, not purely functional."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_PILLAR_A", "PRIM_GATE_A"],
+				"operators": ["OP_REPEAT_A", "OP_PLACE_A", "OP_TRANSLATE_A"],
+				"spatial_roles": ["ROLE_THRESHOLD_A", "ROLE_CORRIDOR_A"],
+				"assembly_steps": [
+					"Place two supports with one-cell pass.",
+					"Add top lintel marker via elevated accents if desired.",
+					"Align with processional path."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["1", "3", "1", "3", "1"],
+					["1", "1", "1", "1", "1"],
+					["1", "1", "1", "1", "1"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_BASTION_RING_MINI_A",
+			"category": "beyond",
+			"name": "Bastion Ring (Mini)",
+			"meaning": "Polygonal-like defensive ring approximated on grid with offset bastions.",
+			"how_to_use": [
+				"Use when you want fortress feel with non-rectangular rhythm.",
+				"Pair with loop corridors or patrol routes."
+			],
+			"how_to_think": [
+				"Bastions are geometry for lateral visibility.",
+				"Offset projections encode directional control."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_WALL_A", "PRIM_PILLAR_A", "PRIM_FLOOR_A"],
+				"operators": ["OP_REPEAT_A", "OP_SLIP_SHEAR_A", "OP_MERGE_A", "OP_PLACE_A"],
+				"spatial_roles": ["ROLE_EDGE_A", "ROLE_CORNER_A", "ROLE_NODE_A"],
+				"assembly_steps": [
+					"Start from perimeter court.",
+					"Shear selected edge segments outward as bastions.",
+					"Merge ring and projections into one path network."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["1", "3", "3", "3", "3", "3", "1"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "2", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["3", "1", "1", "1", "1", "1", "3"],
+					["1", "3", "3", "3", "3", "3", "1"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_PYRAMID_TERRACE_A",
+			"category": "beyond",
+			"name": "Pyramid Terrace (Mini)",
+			"meaning": "Stepped concentric mass rising from broad base to focused apex.",
+			"how_to_use": [
+				"Use as a hierarchy landmark: base for circulation, apex for key artifact.",
+				"Place at sequence pivots where you want clear progression from edge to center."
+			],
+			"how_to_think": [
+				"Pyramid principle is compression: many routes at base, one point at top.",
+				"Each step is both boundary and platform, so vertical order becomes legible."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_FLOOR_A", "PRIM_PLATFORM_A", "PRIM_WALL_A", "PRIM_PLINTH_A"],
+				"operators": ["OP_STACK_HEIGHT_A", "OP_REPEAT_A", "OP_MIRROR_A", "OP_PLACE_A"],
+				"spatial_roles": ["ROLE_EDGE_A", "ROLE_CENTER_A", "ROLE_NODE_A", "ROLE_THRESHOLD_A"],
+				"assembly_steps": [
+					"Lay a square base footprint.",
+					"Step inward each ring while increasing height.",
+					"Reserve one apex cell as focal node.",
+					"Optionally cut one processional entry axis."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["1", "1", "1", "1", "1", "1", "1"],
+					["1", "2", "2", "2", "2", "2", "1"],
+					["1", "2", "3", "3", "3", "2", "1"],
+					["1", "2", "3", "4", "3", "2", "1"],
+					["1", "2", "3", "3", "3", "2", "1"],
+					["1", "2", "2", "2", "2", "2", "1"],
+					["1", "1", "1", "1", "1", "1", "1"]
+				]
+			}
+		},
+		{
+			"id": "BEYOND_HALF_PYRAMID_SECTION_A",
+			"category": "beyond",
+			"name": "Half Pyramid Section",
+			"meaning": "A pyramid cut by a plane, exposing stepped interior profile.",
+			"how_to_use": [
+				"Use to teach structure logic by showing inside and outside simultaneously.",
+				"Place a path along the cut face so players read each terrace as a chapter."
+			],
+			"how_to_think": [
+				"Half-pyramid principle is revelation: sectioning turns hidden order into pedagogy.",
+				"One half remains mass, the other half becomes void/interface."
+			],
+			"built_from_basic_grammar": {
+				"primitives": ["PRIM_FLOOR_A", "PRIM_PLATFORM_A", "PRIM_WALL_A", "PRIM_VOID_A", "PRIM_RAMP_A"],
+				"operators": ["OP_SPLIT_A", "OP_CARVE_VOID_A", "OP_STACK_HEIGHT_A", "OP_PLACE_A", "OP_TRANSLATE_A"],
+				"spatial_roles": ["ROLE_EDGE_A", "ROLE_CENTER_A", "ROLE_CORRIDOR_A", "ROLE_THRESHOLD_A"],
+				"assembly_steps": [
+					"Author a full stepped pyramid block.",
+					"Split along one axis.",
+					"Carve one half to expose the stepped section.",
+					"Add a ramp/corridor on the section face for readable traversal."
+				]
+			},
+			"sample": {
+				"pattern": [
+					["1", "1", "1", "1", "1", "1", "1"],
+					["1", "2", "2", "2", "2", "2", "1"],
+					["1", "2", "3", "3", "3", "0", "0"],
+					["1", "2", "3", "4", "0", "0", "0"],
+					["1", "2", "3", "3", "3", "0", "0"],
+					["1", "2", "2", "2", "2", "2", "1"],
+					["1", "1", "1", "1", "1", "1", "1"]
+				]
+			}
+		}
+	]
+}
