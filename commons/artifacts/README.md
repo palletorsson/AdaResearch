@@ -91,3 +91,19 @@ Use `foundations.json` as the exemplary model:
 - `gamwell_reference` for art/math history
 - `qfep_connection` for theoretical tie-in
 - `signals`, `interactions`, `parameters` documentation
+
+## Spatial Contracts
+
+Directional identity and placement constraints are tracked in a sidecar file so map generation can reason about artifact fit.
+
+- Contract file: `res://commons/artifacts/artifact_spatial_contracts.json`
+- Planner class: `ArtifactSpatialFitPlanner` (`res://commons/artifacts/ArtifactSpatialFitPlanner.gd`)
+
+Core contract fields:
+
+- `directional_profile`: `full_circle | half_circle | cone | corridor | ambient`
+- `interaction_mode`: `observe | grab | manipulate | walkthrough`
+- `staging_preference`
+- `enclosure_need`
+- `clearance_radius_cells`, `height_clearance_cells`
+- `preferred_view_distance_m`

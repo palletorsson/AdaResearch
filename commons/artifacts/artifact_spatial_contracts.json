@@ -1,0 +1,470 @@
+{
+	"schema": "adaresearch.artifact_spatial_contracts.v1",
+	"title": "Artifact Spatial Contracts",
+	"description": "Directional identity and placement contracts used by ArtifactSpatialFitPlanner for automatic map staging.",
+	"rotation_semantics": {
+		"0": "south",
+		"90": "west",
+		"180": "north",
+		"270": "east",
+		"note": "Matches map token convention used by interactables."
+	},
+	"directional_profiles": {
+		"full_circle": {
+			"name": "Full Circle",
+			"front_angle_degrees": 360,
+			"rotation_sensitive": false,
+			"meaning": "Artifact can be read and approached from all directions.",
+			"how_to_use": [
+				"Place in center spaces where players can orbit.",
+				"Do not rely on facing for readability."
+			],
+			"how_to_think": "Treat as a volumetric object with spherical social space."
+		},
+		"half_circle": {
+			"name": "Half Circle",
+			"front_angle_degrees": 180,
+			"rotation_sensitive": true,
+			"meaning": "Artifact has a front hemisphere and a less meaningful back.",
+			"how_to_use": [
+				"Face toward expected approach direction.",
+				"Reserve rear cells for support geometry or wall backing."
+			],
+			"how_to_think": "Treat as a stage object with audience side and backstage side."
+		},
+		"cone": {
+			"name": "Cone",
+			"front_angle_degrees": 90,
+			"rotation_sensitive": true,
+			"meaning": "Artifact projects meaning in a focused forward cone (screens, kiosks, labels).",
+			"how_to_use": [
+				"Align front toward corridor, spawn, or decision point.",
+				"Avoid placing primary interaction path behind the object."
+			],
+			"how_to_think": "Treat as directional communication that must address the player."
+		},
+		"corridor": {
+			"name": "Corridor",
+			"front_angle_degrees": 120,
+			"rotation_sensitive": true,
+			"requires_axis_alignment": true,
+			"meaning": "Artifact is read while moving through or along a path axis.",
+			"how_to_use": [
+				"Place on movement routes, not in isolated corners.",
+				"Align local forward with corridor axis."
+			],
+			"how_to_think": "Treat as kinetic architecture, not static sculpture."
+		},
+		"ambient": {
+			"name": "Ambient",
+			"front_angle_degrees": 360,
+			"rotation_sensitive": false,
+			"meaning": "Artifact contributes context or atmosphere more than directional instruction.",
+			"how_to_use": [
+				"Use for background legibility and mood.",
+				"Do not block key interaction lanes."
+			],
+			"how_to_think": "Treat as environmental field rather than focal subject."
+		}
+	},
+	"interaction_modes": {
+		"observe": {
+			"approach_distance_cells": [
+				2.0,
+				4.0
+			],
+			"minimum_clearance_cells": 1.5
+		},
+		"grab": {
+			"approach_distance_cells": [
+				0.5,
+				1.5
+			],
+			"minimum_clearance_cells": 1.2
+		},
+		"manipulate": {
+			"approach_distance_cells": [
+				0.8,
+				2.0
+			],
+			"minimum_clearance_cells": 1.8
+		},
+		"walkthrough": {
+			"approach_distance_cells": [
+				0.0,
+				0.8
+			],
+			"minimum_clearance_cells": 2.0
+		}
+	},
+	"staging_archetypes": {
+		"table": {
+			"meaning": "Eye-level instructional focus.",
+			"default_enclosure": "open"
+		},
+		"plinth": {
+			"meaning": "Monument style pedestal for symbolic objects.",
+			"default_enclosure": "open"
+		},
+		"pillar": {
+			"meaning": "Vertical marker with small footprint.",
+			"default_enclosure": "open"
+		},
+		"alcove": {
+			"meaning": "Semi-contained station for concentrated interaction.",
+			"default_enclosure": "semi"
+		},
+		"room": {
+			"meaning": "Contained zone for medium-to-high interaction complexity.",
+			"default_enclosure": "enclosed"
+		},
+		"corridor": {
+			"meaning": "On-path artifact integrated into flow between zones.",
+			"default_enclosure": "semi"
+		},
+		"ambient": {
+			"meaning": "Background environmental placement.",
+			"default_enclosure": "open"
+		}
+	},
+	"default_contract": {
+		"directional_profile": "ambient",
+		"interaction_mode": "observe",
+		"staging_preference": [
+			"table",
+			"plinth",
+			"room"
+		],
+		"enclosure_need": "open",
+		"footprint_cells": [
+			1,
+			1
+		],
+		"clearance_radius_cells": 1.5,
+		"height_clearance_cells": 2.0,
+		"preferred_view_distance_m": [
+			1.5,
+			3.0
+		],
+		"sequence_tags": [],
+		"orientation_markers": []
+	},
+	"artifact_contracts": {
+		"dark_sphere": {
+			"directional_profile": "full_circle",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"plinth",
+				"table",
+				"room"
+			],
+			"footprint_cells": [
+				1,
+				1
+			],
+			"clearance_radius_cells": 1.4,
+			"preferred_view_distance_m": [
+				1.8,
+				3.8
+			],
+			"sequence_tags": [
+				"primitives",
+				"directionality"
+			]
+		},
+		"platonicsolids": {
+			"directional_profile": "full_circle",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"plinth",
+				"table"
+			],
+			"footprint_cells": [
+				2,
+				2
+			],
+			"clearance_radius_cells": 1.8,
+			"preferred_view_distance_m": [
+				2.0,
+				4.0
+			],
+			"sequence_tags": [
+				"primitives",
+				"geometry"
+			]
+		},
+		"pick_up_cube": {
+			"directional_profile": "half_circle",
+			"interaction_mode": "grab",
+			"staging_preference": [
+				"table",
+				"alcove"
+			],
+			"footprint_cells": [
+				1,
+				1
+			],
+			"clearance_radius_cells": 1.2,
+			"preferred_view_distance_m": [
+				0.8,
+				2.0
+			],
+			"orientation_markers": [
+				"grab_handles",
+				"interaction_face"
+			]
+		},
+		"rotating_cube": {
+			"directional_profile": "ambient",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"table",
+				"ambient",
+				"plinth"
+			],
+			"footprint_cells": [
+				1,
+				1
+			],
+			"clearance_radius_cells": 1.3,
+			"preferred_view_distance_m": [
+				1.4,
+				3.2
+			]
+		},
+		"clipboard": {
+			"directional_profile": "half_circle",
+			"interaction_mode": "manipulate",
+			"staging_preference": [
+				"table",
+				"alcove"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				1,
+				1
+			],
+			"clearance_radius_cells": 1.8,
+			"preferred_view_distance_m": [
+				0.8,
+				1.8
+			],
+			"orientation_markers": [
+				"text_surface",
+				"front_face"
+			]
+		},
+		"infokiosk": {
+			"directional_profile": "cone",
+			"interaction_mode": "manipulate",
+			"staging_preference": [
+				"alcove",
+				"table",
+				"corridor"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				2,
+				1
+			],
+			"clearance_radius_cells": 2.0,
+			"preferred_view_distance_m": [
+				1.2,
+				2.5
+			],
+			"orientation_markers": [
+				"screen_front",
+				"ui_face"
+			],
+			"sequence_tags": [
+				"tutorial",
+				"lab"
+			]
+		},
+		"algorithm_overview": {
+			"directional_profile": "cone",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"table",
+				"alcove"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				2,
+				1
+			],
+			"clearance_radius_cells": 2.2,
+			"preferred_view_distance_m": [
+				1.6,
+				3.2
+			],
+			"orientation_markers": [
+				"display_face",
+				"label_face"
+			]
+		},
+		"code_display": {
+			"directional_profile": "cone",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"alcove",
+				"corridor",
+				"table"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				2,
+				1
+			],
+			"clearance_radius_cells": 2.4,
+			"preferred_view_distance_m": [
+				1.6,
+				3.6
+			],
+			"orientation_markers": [
+				"text_panel",
+				"front_face"
+			],
+			"sequence_tags": [
+				"tutorial",
+				"transforms"
+			]
+		},
+		"coloredlines": {
+			"directional_profile": "corridor",
+			"interaction_mode": "walkthrough",
+			"staging_preference": [
+				"corridor",
+				"room"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				3,
+				1
+			],
+			"clearance_radius_cells": 2.0,
+			"preferred_view_distance_m": [
+				0.0,
+				2.5
+			],
+			"orientation_markers": [
+				"flow_axis"
+			]
+		},
+		"cube_scene": {
+			"directional_profile": "ambient",
+			"interaction_mode": "observe",
+			"staging_preference": [
+				"ambient",
+				"table",
+				"pillar"
+			],
+			"footprint_cells": [
+				1,
+				1
+			],
+			"clearance_radius_cells": 1.0,
+			"preferred_view_distance_m": [
+				1.0,
+				2.2
+			]
+		},
+		"configurable_portal": {
+			"directional_profile": "corridor",
+			"interaction_mode": "walkthrough",
+			"staging_preference": [
+				"corridor",
+				"room"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				2,
+				1
+			],
+			"clearance_radius_cells": 2.2,
+			"height_clearance_cells": 3.0,
+			"preferred_view_distance_m": [
+				0.0,
+				2.5
+			],
+			"orientation_markers": [
+				"gate_axis"
+			],
+			"sequence_tags": [
+				"threshold",
+				"transitions"
+			]
+		},
+		"world_map_tablet": {
+			"directional_profile": "cone",
+			"interaction_mode": "manipulate",
+			"staging_preference": [
+				"table",
+				"alcove"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				2,
+				1
+			],
+			"clearance_radius_cells": 2.0,
+			"preferred_view_distance_m": [
+				0.9,
+				2.4
+			],
+			"orientation_markers": [
+				"screen_front",
+				"interaction_face"
+			]
+		},
+		"balance_puzzle": {
+			"directional_profile": "full_circle",
+			"interaction_mode": "manipulate",
+			"staging_preference": [
+				"room",
+				"plinth"
+			],
+			"enclosure_need": "enclosed",
+			"footprint_cells": [
+				4,
+				4
+			],
+			"clearance_radius_cells": 2.8,
+			"height_clearance_cells": 4.0,
+			"preferred_view_distance_m": [
+				1.0,
+				4.5
+			],
+			"sequence_tags": [
+				"construction",
+				"play"
+			]
+		},
+		"assembly_line_puzzle": {
+			"directional_profile": "corridor",
+			"interaction_mode": "walkthrough",
+			"staging_preference": [
+				"corridor",
+				"room"
+			],
+			"enclosure_need": "semi",
+			"footprint_cells": [
+				5,
+				2
+			],
+			"clearance_radius_cells": 2.8,
+			"height_clearance_cells": 3.5,
+			"preferred_view_distance_m": [
+				0.0,
+				3.5
+			],
+			"orientation_markers": [
+				"conveyor_axis"
+			],
+			"sequence_tags": [
+				"assembly",
+				"workflow"
+			]
+		}
+	}
+}
