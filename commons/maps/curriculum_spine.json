@@ -248,64 +248,24 @@
   },
 
   "lab_evolution": {
-    "description": "How the Lab changes at each spine completion. Extracted from actual Lab post-map files. The Lab is the hub: every sequence ends here, and new teleporters appear based on completions. Note: post_randomness shares the same layout expansion as post_wavefunctions.",
-    "note_on_implicit_design": "Each post-map is a FULL lab layout, not a delta. The system loads the appropriate post-map based on the latest completed sequence. Teleporters listed here are what's present in each post-map file.",
+    "description": "Lab teleporter progression. Each post-map is a FULL lab layout loaded after completing that sequence. The Lab is the hub: every sequence ends here, new teleporters appear on return.",
     "actual_progression": [
-      {
-        "after": "none",
-        "lab_file": "map_data.json",
-        "teleporters": ["primitives", "transformation", "color"],
-        "note": "Initial lab. Primitives slope is walkable, transformation and color visible but not reachable yet."
-      },
-      {
-        "after": "primitives",
-        "lab_file": "map_data_post_primitives.json",
-        "teleporters": ["primitives", "transformation", "color"],
-        "new_access": "Slope to transformation becomes walkable",
-        "note": "Color teleporter visible but requires tc (transport cube) unlocked in post_transformation"
-      },
-      {
-        "after": "transformation",
-        "lab_file": "map_data_post_transformation.json",
-        "teleporters": ["primitives", "transformation", "color"],
-        "new_access": "tc:2:y transport cube unlocks vertical access to color teleporter"
-      },
-      {
-        "after": "color",
-        "lab_file": "map_data_post_color.json",
-        "teleporters_added": ["array_tutorial", "forces", "wavefunctions"],
-        "note": "New space opens with three teleporters"
-      },
-      {
-        "after": "wavefunctions",
-        "lab_file": "map_data_post_wavefunctions.json",
-        "teleporters_added": ["noise", "randomness"],
-        "note": "New space opens to noise and randomness"
-      },
-      {
-        "after": "noise",
-        "lab_file": "map_data_post_noise.json",
-        "teleporters_added": ["cellularautomata", "fractals", "lsystems"],
-        "note": "New room opens to fractals, l-systems and cellular automata"
-      },
-      {
-        "after": "fractals",
-        "lab_file": "map_data_post_fractals.json",
-        "teleporters_added": ["proceduralgeneration", "softbodies"],
-        "note": "lsystems reappears (was in post_noise, removed in post_cellularautomata, back now)"
-      },
-      {
-        "after": "softbodies",
-        "lab_file": "map_data_post_softbodies.json",
-        "teleporters_added": ["criticalalgorithms", "machinelearning", "morphogenesis", "foundationscrisis", "graphtheory", "qfeplaboratory", "speculativecomputation", "swarmintelligence"],
-        "note": "Big expansion — most remaining sequences open at once. Needs more granular progression."
-      }
+      { "after": "none",           "lab_file": "map_data.json",                      "added": ["primitives", "transformation", "color"], "note": "Initial. Slope to primitives walkable, others visible but not reachable." },
+      { "after": "primitives",     "lab_file": "map_data_post_primitives.json",       "added": [],                                        "note": "Slope to transformation opens." },
+      { "after": "transformation", "lab_file": "map_data_post_transformation.json",   "added": ["tc:2:y"],                                "note": "Transport cube unlocks vertical access to color." },
+      { "after": "color",          "lab_file": "map_data_post_color.json",            "added": ["array_tutorial", "forces", "wavefunctions"], "note": "New space opens." },
+      { "after": "wavefunctions",  "lab_file": "map_data_post_wavefunctions.json",    "added": ["noise", "randomness"],                    "note": "New space opens." },
+      { "after": "noise",          "lab_file": "map_data_post_noise.json",            "added": ["cellularautomata", "fractals", "lsystems"], "note": "New room opens." },
+      { "after": "fractals",       "lab_file": "map_data_post_fractals.json",         "added": ["proceduralgeneration", "softbodies"] },
+      { "after": "softbodies",     "lab_file": "map_data_post_softbodies.json",       "added": ["swarmintelligence", "morphogenesis"] },
+      { "after": "morphogenesis",  "lab_file": "map_data_post_morphogenesis.json",    "added": ["machinelearning"] },
+      { "after": "machinelearning","lab_file": "map_data_post_machinelearning.json",  "added": ["foundationscrisis", "graphtheory"] },
+      { "after": "foundationscrisis","lab_file": "map_data_post_foundationscrisis.json","added": ["qfeplaboratory"] },
+      { "after": "qfeplaboratory", "lab_file": "map_data_post_qfeplaboratory.json",  "added": ["speculativecomputation", "criticalalgorithms"] }
     ],
     "known_issues": [
-      "Post-softbodies dumps too many teleporters at once — should be more gradual",
-      "cellularautomata post-map removes lsystems teleporter (likely copy error)",
-      "No post-map progression defined after softbodies — late game is flat",
-      "Several branch sequences (meshes, datastructures, particles, physicssimulation, proceduralaudio, patterngeneration, computationalgeometry, recursiveemergence, artmathematics, searchpathfinding, resourcemanagement, constraint_solvers, isosurfaces, higher_dimensions, spatial_partitioning, grammar_systems) have post-map files but aren't in the main spine progression chain"
+      "cellularautomata post-map removes lsystems teleporter (copy error, reappears in post_fractals)",
+      "Branch sequences have post-map files but aren't in the main progression chain yet"
     ]
   },
 
