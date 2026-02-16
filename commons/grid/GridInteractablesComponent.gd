@@ -298,15 +298,12 @@ func generate_interactables(interactable_data):
 				
 				# Check for Grid Agent syntax gridagent:tier
 				if token.begins_with("gridagent:"):
-					var parsed = _parse_interactable_token(token)
-					var overrides: Dictionary = parsed.get("overrides", {})
-					var config_data: Dictionary = parsed.get("config_data", {})
-
 					var y_pos = structure_component.find_highest_y_at(x, z)
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
 
-					if _place_grid_agent(x, y_pos, z, token, total_size, overrides, config_data):
+					# Grid agent tokens have custom parsing (tier + optional #config stack).
+					if _place_grid_agent(x, y_pos, z, token, total_size):
 						interactable_count += 1
 					else:
 						placement_errors.append("Failed to place grid agent '%s' at (%d,%d,%d)" % [token, x, y_pos, z])
@@ -409,15 +406,64 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 	print("  ✅ Placed Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y, z])
 	return true
 
+func _parse_grid_agent_token(token: String) -> Dictionary:
+	token = _normalize_legacy_semicolon_token(token)
+	var result := {"tier": "", "overrides": {}, "config_data": {}}
+	
+	var hash_index = token.find("#")
+	var head = token if hash_index == -1 else token.substr(0, hash_index)
+	var config_tail = "" if hash_index == -1 else token.substr(hash_index + 1)
+	
+	var head_parts = head.split(":", false)
+	if head_parts.size() < 2:
+		return result
+	if head_parts[0].strip_edges().to_lower() != "gridagent":
+		return result
+	
+	result["tier"] = head_parts[1].strip_edges().to_lower()
+	
+	# gridagent:tier[:rotation[:y_offset[:scale]]]
+	if head_parts.size() >= 3 and head_parts[2].strip_edges().is_valid_float():
+		result["overrides"]["rotation_y_degrees"] = float(head_parts[2].strip_edges())
+	if head_parts.size() >= 4 and head_parts[3].strip_edges().is_valid_float():
+		result["overrides"]["y_position"] = float(head_parts[3].strip_edges())
+	if head_parts.size() >= 5 and head_parts[4].strip_edges().is_valid_float():
+		result["overrides"]["uniform_scale"] = float(head_parts[4].strip_edges())
+	
+	# Optional config syntax:
+	# gridagent:copy#stack:array,mirror,twist#mirror_axis:x#twist_angle:18
+	if not config_tail.is_empty():
+		var config_parts = config_tail.split("#", false)
+		for part in config_parts:
+			var config_part = part.strip_edges()
+			if config_part.is_empty():
+				continue
+			if config_part.find(":") != -1:
+				var kv = config_part.split(":", false, 1)
+				if kv.size() == 2:
+					result["config_data"][kv[0].strip_edges()] = kv[1].strip_edges()
+				else:
+					result["config_data"][config_part] = true
+			else:
+				result["config_data"][config_part] = true
+	
+	return result
+
 # Place a Grid Agent using gridagent:tier syntax
 func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
-	# Parse: gridagent:tier
-	var parts = lookup_name.split(":")
-	if parts.size() < 2:
+	var parsed = _parse_grid_agent_token(lookup_name)
+	var tier = str(parsed.get("tier", "")).strip_edges()
+	if tier.is_empty():
 		print("GridInteractablesComponent: Invalid grid agent format: %s" % lookup_name)
 		return false
 	
-	var tier = parts[1].to_lower()  # copy, translate, rotate, scale, color, array, sine, random, ca
+	var merged_overrides: Dictionary = parsed.get("overrides", {}).duplicate(true)
+	if not overrides.is_empty():
+		merged_overrides.merge(overrides, true)
+	
+	var merged_config: Dictionary = parsed.get("config_data", {}).duplicate(true)
+	if not config_data.is_empty():
+		merged_config.merge(config_data, true)
 	
 	# Load appropriate agent scene based on tier
 	var scene_path = "res://commons/hazards/gridagent/variants/grid_agent_%s.tscn" % tier
@@ -438,21 +484,25 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	agent.position = world_pos
 	
 	# Apply overrides (rotation, y_offset, scale)
-	if overrides.has("rotation_y_degrees"):
-		agent.rotation_degrees.y = float(overrides.get("rotation_y_degrees", 0.0))
-	if overrides.has("y_position"):
-		agent.position.y += float(overrides.get("y_position", 0.0))
-	if overrides.has("uniform_scale"):
-		var s = float(overrides.get("uniform_scale", 1.0))
+	if merged_overrides.has("rotation_y_degrees"):
+		agent.rotation_degrees.y = float(merged_overrides.get("rotation_y_degrees", 0.0))
+	if merged_overrides.has("y_position"):
+		agent.position.y += float(merged_overrides.get("y_position", 0.0))
+	if merged_overrides.has("uniform_scale"):
+		var s = float(merged_overrides.get("uniform_scale", 1.0))
 		agent.scale = Vector3.ONE * s
 	
-	# Set agent tier via metadata
+	# Set agent metadata
 	agent.set_meta("agent_tier", tier)
 	agent.set_meta("spawn_position", Vector3i(x, y, z))
+	if not merged_config.is_empty():
+		agent.set_meta("agent_config", merged_config.duplicate(true))
 	
-	# Initialize agent if it has setup method
+	# Initialize agent if it has setup methods
 	if agent.has_method("set_tier"):
 		agent.set_tier(tier)
+	if not merged_config.is_empty() and agent.has_method("configure_modifier_stack"):
+		agent.configure_modifier_stack(merged_config)
 	
 	# Add to scene
 	parent_node.add_child(agent)

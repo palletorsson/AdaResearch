@@ -1,5 +1,9 @@
 # Grid Agent Integration Plan
 
+> Scope note: this file documents base integration (`gridagent:tier` placement).
+> For the broader two-system roadmap (GridModifierAgent + ArtifactSpatialFitPlanner + Blender-style modifier pipeline), see:
+> `docs/GRID_MODIFIER_AND_SPATIAL_FIT_PLAN.md`
+
 ## Overview
 Integrate Grid Agents into the existing AdaResearch grid/map system using the `gridagent:tier` syntax in the interactables layer of map JSON files.
 

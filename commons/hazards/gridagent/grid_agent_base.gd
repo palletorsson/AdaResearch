@@ -14,6 +14,7 @@ class_name GridAgent
 # Agent tier (set via metadata or directly)
 var current_tier: EvolutionTiers.Tier = EvolutionTiers.Tier.TIER_1_COPY
 var evolution_xp: int = 0
+var modifier_stack: Array[Dictionary] = []
 
 # Grid reference
 var current_grid: Node = null
@@ -71,6 +72,12 @@ func _ready():
 		base_color = EvolutionTiers.get_color(current_tier)
 		_update_visual_tier()
 	
+	# Optional stack config injected by GridInteractablesComponent.
+	if has_meta("agent_config"):
+		var cfg = get_meta("agent_config")
+		if cfg is Dictionary:
+			configure_modifier_stack(cfg)
+
 	# Start in wandering state
 	_change_state(AgentState.WANDERING)
 
@@ -246,6 +253,10 @@ func _execute_tier_operation() -> bool:
 	if not current_grid:
 		return false
 	
+	# If a modifier stack is configured, run it as a pipeline.
+	if not modifier_stack.is_empty():
+		return _execute_modifier_stack()
+	
 	# Execute operation based on current tier
 	match current_tier:
 		EvolutionTiers.Tier.TIER_1_COPY:
@@ -326,6 +337,191 @@ func _operation_ca() -> bool:
 	# Apply cellular automata
 	return GridOperations.apply_ca_step(current_grid, grid_cell_position, "growth", operation_radius)
 
+func _execute_modifier_stack() -> bool:
+	var success_any = false
+	for step in modifier_stack:
+		if not (step is Dictionary):
+			continue
+		
+		var op_name = str(step.get("op", "")).strip_edges().to_lower()
+		if op_name.is_empty():
+			continue
+		
+		var params = step.get("params", {})
+		if not (params is Dictionary):
+			params = {}
+		
+		var op_success = _execute_named_operation(op_name, params)
+		success_any = success_any or op_success
+	
+	return success_any
+
+func _execute_named_operation(op_name: String, params: Dictionary) -> bool:
+	var radius = _coerce_int(params.get("radius", operation_radius), operation_radius)
+	
+	match op_name:
+		"copy":
+			var source_cell = GridInterface.find_nearest_occupied_cell(current_grid, grid_cell_position, radius)
+			if source_cell == grid_cell_position:
+				return false
+			var direction = _parse_direction(str(params.get("direction", "")), GridOperations.get_random_direction())
+			return GridOperations.copy_cube_adjacent(current_grid, source_cell, direction)
+		
+		"translate":
+			var source_cell = GridInterface.find_nearest_occupied_cell(current_grid, grid_cell_position, radius)
+			if source_cell == grid_cell_position:
+				return false
+			var direction = _parse_direction(str(params.get("direction", "")), GridOperations.get_random_direction())
+			var distance = _coerce_int(params.get("distance", 2), 2)
+			return GridOperations.translate_cube_direction(current_grid, source_cell, direction, distance)
+		
+		"rotate":
+			var axis = _axis_to_vector(str(params.get("axis", "y")))
+			return GridOperations.rotate_structure_90(current_grid, grid_cell_position, axis, radius)
+		
+		"scale":
+			var scale_factor = _coerce_float(params.get("factor", 1.5), 1.5)
+			return GridOperations.scale_structure(current_grid, grid_cell_position, scale_factor, radius)
+		
+		"color":
+			return GridOperations.colorize_region(current_grid, grid_cell_position, base_color, radius)
+		
+		"array":
+			var direction = _parse_direction(str(params.get("direction", "x")), Vector3i(1, 0, 0))
+			var count = _coerce_int(params.get("count", 3), 3)
+			var spacing = _coerce_int(params.get("spacing", 2), 2)
+			return GridOperations.array_linear(current_grid, grid_cell_position, direction, count, spacing, radius)
+		
+		"sine":
+			var amplitude = _coerce_float(params.get("amplitude", 2.0), 2.0)
+			var frequency = _coerce_float(params.get("frequency", 0.5), 0.5)
+			var axis_name = str(params.get("axis", "x"))
+			return GridOperations.apply_sine_wave(current_grid, grid_cell_position, amplitude, frequency, radius, axis_name)
+		
+		"random":
+			var probability = _coerce_float(params.get("probability", 0.3), 0.3)
+			return GridOperations.randomize_structure(current_grid, grid_cell_position, probability, radius)
+		
+		"ca":
+			var rule_type = str(params.get("rule", "growth"))
+			return GridOperations.apply_ca_step(current_grid, grid_cell_position, rule_type, radius)
+		
+		"mirror":
+			var mirror_axis = str(params.get("axis", "x"))
+			var keep_original = _coerce_bool(params.get("keep_original", true), true)
+			return GridOperations.mirror_structure(current_grid, grid_cell_position, mirror_axis, radius, keep_original)
+		
+		"twist":
+			var twist_axis = str(params.get("axis", "y"))
+			var twist_angle = _coerce_float(params.get("angle_degrees", 15.0), 15.0)
+			return GridOperations.twist_structure(current_grid, grid_cell_position, twist_angle, radius, twist_axis)
+	
+	return false
+
+func _build_modifier_stack_from_config(config: Dictionary) -> Array[Dictionary]:
+	var stack_steps: Array[Dictionary] = []
+	var stack_raw = str(config.get("stack", "")).strip_edges()
+	if stack_raw.is_empty():
+		stack_raw = str(config.get("stack_ops", "")).strip_edges()
+	if stack_raw.is_empty():
+		return stack_steps
+	
+	var default_radius = _coerce_int(config.get("stack_radius", operation_radius), operation_radius)
+	var raw_ops = stack_raw.split(",", false)
+	for raw_op in raw_ops:
+		var op_name = raw_op.strip_edges().to_lower()
+		if op_name.is_empty():
+			continue
+		
+		var params: Dictionary = {"radius": default_radius}
+		
+		match op_name:
+			"array":
+				params["direction"] = str(config.get("array_direction", "x"))
+				params["count"] = _coerce_int(config.get("array_count", 3), 3)
+				params["spacing"] = _coerce_int(config.get("array_spacing", 2), 2)
+			"sine":
+				params["axis"] = str(config.get("sine_axis", "x"))
+				params["amplitude"] = _coerce_float(config.get("sine_amplitude", 2.0), 2.0)
+				params["frequency"] = _coerce_float(config.get("sine_frequency", 0.5), 0.5)
+			"random":
+				params["probability"] = _coerce_float(config.get("random_probability", 0.3), 0.3)
+			"ca":
+				params["rule"] = str(config.get("ca_rule", "growth"))
+			"mirror":
+				params["axis"] = str(config.get("mirror_axis", "x"))
+				params["keep_original"] = _coerce_bool(config.get("mirror_keep_original", true), true)
+			"twist":
+				params["axis"] = str(config.get("twist_axis", "y"))
+				params["angle_degrees"] = _coerce_float(config.get("twist_angle", 15.0), 15.0)
+			"translate":
+				params["direction"] = str(config.get("translate_direction", "x"))
+				params["distance"] = _coerce_int(config.get("translate_distance", 2), 2)
+			"rotate":
+				params["axis"] = str(config.get("rotate_axis", "y"))
+			"scale":
+				params["factor"] = _coerce_float(config.get("scale_factor", 1.5), 1.5)
+		
+		stack_steps.append({"op": op_name, "params": params})
+	
+	return stack_steps
+
+func _axis_to_vector(axis_name: String) -> Vector3i:
+	match axis_name.strip_edges().to_lower():
+		"x":
+			return Vector3i(1, 0, 0)
+		"z":
+			return Vector3i(0, 0, 1)
+		_:
+			return Vector3i(0, 1, 0)
+
+func _parse_direction(value: String, fallback: Vector3i) -> Vector3i:
+	var dir = value.strip_edges().to_lower()
+	match dir:
+		"x", "+x", "east":
+			return Vector3i(1, 0, 0)
+		"-x", "west":
+			return Vector3i(-1, 0, 0)
+		"y", "+y", "up":
+			return Vector3i(0, 1, 0)
+		"-y", "down":
+			return Vector3i(0, -1, 0)
+		"z", "+z", "north":
+			return Vector3i(0, 0, 1)
+		"-z", "south":
+			return Vector3i(0, 0, -1)
+	return fallback
+
+func _coerce_float(value, fallback: float) -> float:
+	if value is float:
+		return value
+	if value is int:
+		return float(value)
+	var text = str(value).strip_edges()
+	if text.is_valid_float():
+		return float(text)
+	return fallback
+
+func _coerce_int(value, fallback: int) -> int:
+	if value is int:
+		return value
+	if value is float:
+		return int(round(value))
+	var text = str(value).strip_edges()
+	if text.is_valid_float():
+		return int(round(float(text)))
+	return fallback
+
+func _coerce_bool(value, fallback: bool) -> bool:
+	if value is bool:
+		return value
+	var text = str(value).strip_edges().to_lower()
+	if text in ["1", "true", "yes", "on"]:
+		return true
+	if text in ["0", "false", "no", "off"]:
+		return false
+	return fallback
+
 # ===== State Management =====
 
 func _change_state(new_state: AgentState):
@@ -368,6 +564,17 @@ func set_tier(tier_str: String):
 	base_color = EvolutionTiers.get_color(current_tier)
 	if is_node_ready():
 		_update_visual_tier()
+
+func configure_modifier_stack(config: Dictionary) -> void:
+	"""Configure a Blender-like ordered operation stack from map config."""
+	var enabled = _coerce_bool(config.get("stack_enabled", true), true)
+	if not enabled:
+		modifier_stack.clear()
+		return
+	
+	modifier_stack = _build_modifier_stack_from_config(config)
+	if not modifier_stack.is_empty():
+		print("GridAgent: Configured modifier stack (%d steps)" % modifier_stack.size())
 
 func capture():
 	"""Called by algo-gun when capturing agent"""

@@ -139,6 +139,73 @@ static func scale_structure(grid: Node, center: Vector3i, scale_factor: float, r
 	
 	return true
 
+# ===== MODIFIER EXTENSIONS: MIRROR / TWIST =====
+# Mirror a structure across a center-aligned axis plane.
+# Axis is one of: "x", "y", "z"
+# keep_original=true behaves like a duplicate mirror modifier.
+static func mirror_structure(grid: Node, center: Vector3i, axis: String = "x", radius: int = 3, keep_original: bool = true) -> bool:
+	var min_pos = center - Vector3i.ONE * radius
+	var max_pos = center + Vector3i.ONE * radius
+	var cubes = GridInterface.get_occupied_cells_in_region(grid, min_pos, max_pos)
+	
+	if cubes.is_empty():
+		return false
+	
+	var axis_name = axis.strip_edges().to_lower()
+	if axis_name != "x" and axis_name != "y" and axis_name != "z":
+		axis_name = "x"
+	
+	var cube_states = {}
+	for cube_pos in cubes:
+		cube_states[cube_pos] = GridInterface.get_cube_at_cell(grid, cube_pos)
+	
+	# If we are performing a pure reflection, clear source first.
+	if not keep_original:
+		for cube_pos in cubes:
+			GridInterface.remove_cube_at_cell(grid, cube_pos)
+	
+	var placed_count = 0
+	for cube_pos in cubes:
+		var mirrored_pos = _mirror_point(cube_pos, center, axis_name)
+		var cube_data = cube_states[cube_pos]
+		
+		if not GridInterface.is_cell_occupied(grid, mirrored_pos):
+			if GridInterface.place_cube_at_cell(grid, mirrored_pos, cube_data.color):
+				placed_count += 1
+	
+	return placed_count > 0
+
+# Twist structure by applying a rotation that increases along the chosen axis.
+# This gives a voxel approximation of a twist deform.
+static func twist_structure(grid: Node, center: Vector3i, angle_degrees: float = 15.0, radius: int = 3, axis: String = "y") -> bool:
+	var min_pos = center - Vector3i.ONE * radius
+	var max_pos = center + Vector3i.ONE * radius
+	var cubes = GridInterface.get_occupied_cells_in_region(grid, min_pos, max_pos)
+	
+	if cubes.is_empty():
+		return false
+	
+	var axis_name = axis.strip_edges().to_lower()
+	if axis_name != "x" and axis_name != "y" and axis_name != "z":
+		axis_name = "y"
+	
+	# Snapshot and clear before re-placement.
+	var cube_states = {}
+	for cube_pos in cubes:
+		cube_states[cube_pos] = GridInterface.get_cube_at_cell(grid, cube_pos)
+		GridInterface.remove_cube_at_cell(grid, cube_pos)
+	
+	var placed_count = 0
+	for cube_pos in cubes:
+		var twisted_pos = _twist_point(cube_pos, center, angle_degrees, axis_name)
+		var cube_data = cube_states[cube_pos]
+		
+		if not GridInterface.is_cell_occupied(grid, twisted_pos):
+			if GridInterface.place_cube_at_cell(grid, twisted_pos, cube_data.color):
+				placed_count += 1
+	
+	return placed_count > 0
+
 # ===== TIER 5: COLOR (Placeholder for future implementation) =====
 # Change cube colors in a region
 static func colorize_region(grid: Node, center: Vector3i, color: Color, radius: int = 3) -> bool:
@@ -324,6 +391,52 @@ static func _apply_erosion(grid: Node, center: Vector3i, radius: int) -> bool:
 	return cells_to_remove.size() > 0
 
 # ===== UTILITY FUNCTIONS =====
+
+static func _mirror_point(point: Vector3i, center: Vector3i, axis: String) -> Vector3i:
+	var mirrored := point
+	match axis:
+		"x":
+			mirrored.x = center.x - (point.x - center.x)
+		"y":
+			mirrored.y = center.y - (point.y - center.y)
+		"z":
+			mirrored.z = center.z - (point.z - center.z)
+		_:
+			mirrored.x = center.x - (point.x - center.x)
+	return mirrored
+
+static func _twist_point(point: Vector3i, center: Vector3i, angle_degrees: float, axis: String) -> Vector3i:
+	var offset = point - center
+	var angle_rad = 0.0
+	var x = float(offset.x)
+	var y = float(offset.y)
+	var z = float(offset.z)
+	var nx = x
+	var ny = y
+	var nz = z
+	
+	match axis:
+		# Twist around Y by amount proportional to vertical offset.
+		"y":
+			angle_rad = deg_to_rad(angle_degrees * y)
+			nx = x * cos(angle_rad) - z * sin(angle_rad)
+			nz = x * sin(angle_rad) + z * cos(angle_rad)
+		# Twist around X by amount proportional to x offset.
+		"x":
+			angle_rad = deg_to_rad(angle_degrees * x)
+			ny = y * cos(angle_rad) - z * sin(angle_rad)
+			nz = y * sin(angle_rad) + z * cos(angle_rad)
+		# Twist around Z by amount proportional to z offset.
+		"z":
+			angle_rad = deg_to_rad(angle_degrees * z)
+			nx = x * cos(angle_rad) - y * sin(angle_rad)
+			ny = x * sin(angle_rad) + y * cos(angle_rad)
+		_:
+			angle_rad = deg_to_rad(angle_degrees * y)
+			nx = x * cos(angle_rad) - z * sin(angle_rad)
+			nz = x * sin(angle_rad) + z * cos(angle_rad)
+	
+	return center + Vector3i(int(round(nx)), int(round(ny)), int(round(nz)))
 
 # Get a random adjacent direction (for wandering/random operations)
 static func get_random_direction() -> Vector3i:

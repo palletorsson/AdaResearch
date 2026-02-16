@@ -61,6 +61,28 @@ Agents are placed via the **interactables layer** in map JSON files:
 - `gridagent:random:180:2.0` - RANDOM tier, rotated 180°, +2.0m Y offset
 - `gridagent:ca:0:1.5:2.0` - CA tier, no rotation, +1.5m Y, 2x scale
 
+### Modifier Stack (Pipeline Mode)
+
+Agents can run an ordered modifier stack via `#` config syntax:
+
+```json
+{
+  "interactables": [
+    ["gridagent:copy#stack:array,mirror,twist#array_direction:x#array_count:4#array_spacing:2#mirror_axis:x#twist_axis:y#twist_angle:18#stack_radius:3"]
+  ]
+}
+```
+
+Supported stack ops:
+- Existing: `copy`, `translate`, `rotate`, `scale`, `color`, `array`, `sine`, `random`, `ca`
+- New pipeline ops: `mirror`, `twist`
+
+Useful stack params:
+- `stack_radius`
+- `array_direction`, `array_count`, `array_spacing`
+- `mirror_axis`, `mirror_keep_original`
+- `twist_axis`, `twist_angle`
+
 ### Valid Tier Names
 
 - `copy` - Tier 1
