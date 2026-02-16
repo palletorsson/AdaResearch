@@ -1,10 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://math_gallery_main"]
+[gd_scene format=3 uid="uid://dhc4dw1tvmqfa"]
 
-[ext_resource type="Script" path="res://commons/primitives/math_gallery/math_gallery.gd" id="1_math_gallery"]
+[ext_resource type="Script" uid="uid://c8444yhhxfp8c" path="res://commons/primitives/math_gallery/math_gallery.gd" id="1_math_gallery"]
 
-[node name="MathGallery" type="Node3D"]
+[node name="MathGallery" type="Node3D" unique_id=1263494506]
 script = ExtResource("1_math_gallery")
-grid_spacing = 0.35
-objects_per_row = 4
-show_labels = true
-show_pedestals = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2066056953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6394889)
