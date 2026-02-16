@@ -8,8 +8,20 @@
 			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
-			"tags": ["substrate", "bar_array", "sorting", "universal"],
-			"complexity": "beginner"
+			"sequence": "datastructures",
+			"tags": [
+				"substrate",
+				"bar_array",
+				"sorting",
+				"universal"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures",
+				"randomness"
+			]
 		},
 		"bar_array_bubble_sort": {
 			"name": "BarArray — Bubble Sort",
@@ -19,8 +31,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "bubble_sort", "sorting", "O(n²)"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"bubble_sort",
+				"sorting",
+				"O(n²)"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_insertion_sort": {
 			"name": "BarArray — Insertion Sort",
@@ -30,8 +53,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "insertion_sort", "sorting", "O(n²)"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"insertion_sort",
+				"sorting",
+				"O(n²)"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_selection_sort": {
 			"name": "BarArray — Selection Sort",
@@ -41,8 +75,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "selection_sort", "sorting", "O(n²)"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"selection_sort",
+				"sorting",
+				"O(n²)"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_merge_sort": {
 			"name": "BarArray — Merge Sort",
@@ -52,8 +97,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "merge_sort", "sorting", "O(n log n)", "divide_conquer"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"merge_sort",
+				"sorting",
+				"O(n log n)",
+				"divide_conquer"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_quicksort": {
 			"name": "BarArray — Quicksort",
@@ -63,8 +120,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "quicksort", "sorting", "O(n log n)", "divide_conquer"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"quicksort",
+				"sorting",
+				"O(n log n)",
+				"divide_conquer"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_heap_sort": {
 			"name": "BarArray — Heap Sort",
@@ -74,8 +143,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "datastructures",
-			"tags": ["substrate", "bar_array", "heap_sort", "sorting", "O(n log n)", "heap"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"heap_sort",
+				"sorting",
+				"O(n log n)",
+				"heap"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bar_array_histogram": {
 			"name": "BarArray — Histogram",
@@ -85,8 +166,21 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "bar_array", "histogram", "distribution", "gaussian", "statistics"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"histogram",
+				"distribution",
+				"gaussian",
+				"statistics"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			]
 		},
 		"bar_array_fibonacci": {
 			"name": "BarArray — Fibonacci",
@@ -96,8 +190,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "recursiveemergence",
-			"tags": ["substrate", "bar_array", "fibonacci", "sequence", "golden_ratio", "mathematical"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"fibonacci",
+				"sequence",
+				"golden_ratio",
+				"mathematical"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence"
+			]
 		},
 		"bar_array_prime_sieve": {
 			"name": "BarArray — Prime Sieve",
@@ -107,8 +213,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "criticalalgorithms",
-			"tags": ["substrate", "bar_array", "prime_sieve", "eratosthenes", "number_theory", "mathematical"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"bar_array",
+				"prime_sieve",
+				"eratosthenes",
+				"number_theory",
+				"mathematical"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			]
 		}
 	}
 }

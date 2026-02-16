@@ -9,8 +9,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "grab", "2d", "universal"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"grab",
+				"2d",
+				"universal"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_random_walk": {
 			"name": "Living Paper — Random Walk",
@@ -20,8 +31,17 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "random_walk"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"random_walk"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_brownian": {
 			"name": "Living Paper — Brownian Motion",
@@ -31,8 +51,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "brownian", "random_walk"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"brownian",
+				"random_walk"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_levy": {
 			"name": "Living Paper — Lévy Flight",
@@ -42,8 +72,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "levy_flight", "random_walk"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"levy_flight",
+				"random_walk"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_self_avoiding": {
 			"name": "Living Paper — Self-Avoiding Walk",
@@ -53,8 +93,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "self_avoiding", "random_walk"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"self_avoiding",
+				"random_walk"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_rule30": {
 			"name": "Living Paper — Rule 30",
@@ -64,8 +114,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "cellular_automata", "rule30", "wolfram"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"cellular_automata",
+				"rule30",
+				"wolfram"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_rule110": {
 			"name": "Living Paper — Rule 110",
@@ -75,8 +136,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "cellular_automata", "rule110", "wolfram"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"cellular_automata",
+				"rule110",
+				"wolfram"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_life": {
 			"name": "Living Paper — Game of Life",
@@ -86,8 +158,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "cellular_automata", "game_of_life", "conway"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"cellular_automata",
+				"game_of_life",
+				"conway"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_seeds": {
 			"name": "Living Paper — Seeds",
@@ -97,8 +180,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "cellular_automata", "seeds"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"cellular_automata",
+				"seeds"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_brians_brain": {
 			"name": "Living Paper — Brian's Brain",
@@ -108,8 +201,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "cellular_automata", "brians_brain"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"cellular_automata",
+				"brians_brain"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_bubble_sort": {
 			"name": "Living Paper — Bubble Sort",
@@ -119,8 +222,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "arrays",
-			"tags": ["substrate", "living_paper", "sorting", "bubble_sort"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sorting",
+				"bubble_sort"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"arrays"
+			]
 		},
 		"living_paper_insertion_sort": {
 			"name": "Living Paper — Insertion Sort",
@@ -130,8 +243,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "arrays",
-			"tags": ["substrate", "living_paper", "sorting", "insertion_sort"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sorting",
+				"insertion_sort"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"arrays"
+			]
 		},
 		"living_paper_merge_sort": {
 			"name": "Living Paper — Merge Sort",
@@ -141,8 +264,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "arrays",
-			"tags": ["substrate", "living_paper", "sorting", "merge_sort"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sorting",
+				"merge_sort"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"arrays"
+			]
 		},
 		"living_paper_quick_sort": {
 			"name": "Living Paper — Quick Sort",
@@ -152,8 +285,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "arrays",
-			"tags": ["substrate", "living_paper", "sorting", "quick_sort"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sorting",
+				"quick_sort"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"arrays"
+			]
 		},
 		"living_paper_sine": {
 			"name": "Living Paper — Sine Wave",
@@ -163,8 +306,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "living_paper", "sine", "wave"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sine",
+				"wave"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"living_paper_fourier": {
 			"name": "Living Paper — Fourier Series",
@@ -174,8 +327,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "living_paper", "fourier", "wave", "harmonics"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"fourier",
+				"wave",
+				"harmonics"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"living_paper_lissajous": {
 			"name": "Living Paper — Lissajous Figures",
@@ -185,8 +349,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "living_paper", "lissajous", "wave"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"lissajous",
+				"wave"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"living_paper_mandelbrot": {
 			"name": "Living Paper — Mandelbrot Set",
@@ -196,8 +370,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "fractals",
-			"tags": ["substrate", "living_paper", "mandelbrot", "fractal"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"mandelbrot",
+				"fractal"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			]
 		},
 		"living_paper_julia": {
 			"name": "Living Paper — Julia Set",
@@ -207,8 +391,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "fractals",
-			"tags": ["substrate", "living_paper", "julia_set", "fractal"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"julia_set",
+				"fractal"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			]
 		},
 		"living_paper_sierpinski": {
 			"name": "Living Paper — Sierpinski Triangle",
@@ -218,8 +412,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "fractals",
-			"tags": ["substrate", "living_paper", "sierpinski", "fractal", "chaos_game"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"sierpinski",
+				"fractal",
+				"chaos_game"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			]
 		},
 		"living_paper_koch": {
 			"name": "Living Paper — Koch Snowflake",
@@ -229,8 +434,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "fractals",
-			"tags": ["substrate", "living_paper", "koch", "fractal", "snowflake"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"koch",
+				"fractal",
+				"snowflake"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			]
 		},
 		"living_paper_tree": {
 			"name": "Living Paper — L-System Tree",
@@ -240,8 +456,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "living_paper", "lsystem", "tree"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"lsystem",
+				"tree"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"living_paper_fern": {
 			"name": "Living Paper — L-System Fern",
@@ -251,8 +477,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "living_paper", "lsystem", "fern", "barnsley"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"lsystem",
+				"fern",
+				"barnsley"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"living_paper_dragon": {
 			"name": "Living Paper — Dragon Curve",
@@ -262,8 +499,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "living_paper", "lsystem", "dragon_curve"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"lsystem",
+				"dragon_curve"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"living_paper_perlin": {
 			"name": "Living Paper — Perlin Noise",
@@ -273,8 +520,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "perlin", "noise"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"perlin",
+				"noise"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			]
 		},
 		"living_paper_noise_octaves": {
 			"name": "Living Paper — Noise Octaves",
@@ -284,8 +542,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "noise", "octaves", "fbm"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"noise",
+				"octaves",
+				"fbm"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			]
 		},
 		"living_paper_bfs": {
 			"name": "Living Paper — BFS Flood Fill",
@@ -295,8 +565,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "living_paper", "bfs", "flood_fill", "search"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"bfs",
+				"flood_fill",
+				"search"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"living_paper_dfs_maze": {
 			"name": "Living Paper — DFS Maze",
@@ -306,8 +587,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "living_paper", "dfs", "maze", "generation"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"dfs",
+				"maze",
+				"generation"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"living_paper_reaction_diffusion": {
 			"name": "Living Paper — Reaction-Diffusion",
@@ -317,8 +609,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellular_automata",
-			"tags": ["substrate", "living_paper", "reaction_diffusion", "turing", "pattern"],
-			"complexity": "advanced"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"reaction_diffusion",
+				"turing",
+				"pattern"
+			],
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellular_automata"
+			]
 		},
 		"living_paper_dla": {
 			"name": "Living Paper — DLA Crystal",
@@ -328,8 +631,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "living_paper", "dla", "crystal", "aggregation"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"dla",
+				"crystal",
+				"aggregation"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"living_paper_voronoi": {
 			"name": "Living Paper — Voronoi Diagram",
@@ -339,8 +653,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "compgeom",
-			"tags": ["substrate", "living_paper", "voronoi", "computational_geometry"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"voronoi",
+				"computational_geometry"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"compgeom",
+				"noise",
+				"randomness"
+			]
 		},
 		"living_paper_kmeans": {
 			"name": "Living Paper — K-Means Clustering",
@@ -350,8 +676,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "machinelearning",
-			"tags": ["substrate", "living_paper", "kmeans", "clustering", "ml"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"kmeans",
+				"clustering",
+				"ml"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			]
 		},
 		"living_paper_heat": {
 			"name": "Living Paper — Heat Diffusion",
@@ -361,8 +698,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "living_paper", "heat", "diffusion", "physics"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"heat",
+				"diffusion",
+				"physics"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"living_paper_quadtree": {
 			"name": "Living Paper — Quadtree",
@@ -372,8 +720,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "compgeom",
-			"tags": ["substrate", "living_paper", "quadtree", "spatial", "data_structure"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"living_paper",
+				"quadtree",
+				"spatial",
+				"data_structure"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"compgeom"
+			]
 		}
 	}
 }

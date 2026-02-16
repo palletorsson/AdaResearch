@@ -11,11 +11,11 @@
 				"Turtle graphics",
 				"Stochastic systems",
 				"Context-sensitive growth",
-                "Ecosystem dynamics"
+				"Ecosystem dynamics"
 			],
 			"maps": [
 				"LSystems_Hilbert3D",
-				"LSystems_CityGenerator",				
+				"LSystems_CityGenerator",
 				"LSystems_Context_Free_Grammars_CFG",
 				"LSystems_Different_Grammar_Types",
 				"LSystems_Shape_Grammars",
@@ -23,18 +23,16 @@
 				"LSystems_Tree_L_Systems",
 				"LSystems_AnimatedTree",
 				"LSystems_ContextSensitiveTree",
-				"LSystems_Context_Free_Grammars_CFG",
-				"LSystems_Tree_L_Systems",
-
-                "LSystems_ForestCompetition"
+				"LSystems_ForestCompetition",
+				"LSystems_Backus_Naur_Form_BNF"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_lsystems",
 			"unlock_requirements": [
-                "proceduralgeneration"
+				"proceduralgeneration"
 			],
 			"completion_rewards": [
-                "botanist_badge"
+				"botanist_badge"
 			]
 		}
 	}

@@ -7,16 +7,18 @@
 			"qfep_connection": "Stable foundations before entropy enters. The deterministic base from which complexity grows. Primitives are pure order—the F term before λE(S) introduces chaos.",
 			"formula": "Point = Vector3(x, y, z)",
 			"demonstration": "Place a point in void. Connect two points to make a line. Three points define a plane. From nothing, everything.",
-
 			"description": "Fundamental geometric primitives and their axioms. The atoms of computation—dimensionless points become lines, triangles, cubes, worlds.",
 			"layer": "primitives",
 			"prerequisites": [],
-			"unlocks": ["transformations", "meshes", "color", "datastructures"],
-
+			"unlocks": [
+				"transformations",
+				"meshes",
+				"color",
+				"datastructures"
+			],
 			"ambient_preset": "prog_synth_70s",
 			"difficulty": "beginner",
 			"estimated_time": "15-20 minutes",
-
 			"learning_objectives": [
 				"Understanding Vector3 as position in 3D space",
 				"Point visualization: existence without extension",
@@ -24,7 +26,6 @@
 				"Triangle rasterization: the GPU's atomic unit",
 				"From primitives to meshes: building complexity from simplicity"
 			],
-
 			"content": [
 				"Point_Zero: The origin—where all coordinates meet",
 				"Point_One: A single point, position without extension",
@@ -40,40 +41,31 @@
 				"Primitives_Portals: Primitives as boundaries between spaces",
 				"Primitives_Melencolia: Dürer's polyhedra—historical context"
 			],
-
 			"maps": [
- 
 				"Point_One",
- 
 				"Point_Lines",
-
 				"Point_Trace",
- 	 			"Point_Line_Grid", 
+				"Point_Line_Grid",
 				"Point_Triangle",
 				"Point_Triangle_Context",
-				"Primitives_Polythedra", 
+				"Primitives_Polythedra",
 				"Point_Animatedcube",
-	
 				"Primitives_Ignorance",
- 
 				"Primitives_Portals",
-				"Primitives_Melencolia"
-
+				"Primitives_Melencolia",
+				"One_Primitives"
 			],
-
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/primitives_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/point_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/line_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/triangle_axioms.md"
 			],
-
 			"algorithm_paths": {
 				"Point_Zero": "res://commons/primitives/points/",
 				"Point_Line": "res://commons/primitives/lines/",
 				"Point_Triangle": "res://commons/primitives/triangles/"
 			},
-
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_primitives",
 			"unlock_requirements": [],

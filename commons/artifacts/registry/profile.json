@@ -8,8 +8,22 @@
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
-			"tags": ["substrate", "profile", "1d", "curve", "universal"],
-			"complexity": "beginner"
+			"sequence": "wavefunctions",
+			"tags": [
+				"substrate",
+				"profile",
+				"1d",
+				"curve",
+				"universal"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions",
+				"randomness",
+				"noise"
+			]
 		},
 		"profile_sine": {
 			"name": "Profile — Sine Wave",
@@ -19,8 +33,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "sine", "wave"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"sine",
+				"wave"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_square": {
 			"name": "Profile — Square Wave",
@@ -30,8 +54,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "square", "wave"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"square",
+				"wave"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_saw": {
 			"name": "Profile — Sawtooth Wave",
@@ -41,8 +75,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "sawtooth", "wave"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"sawtooth",
+				"wave"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_triangle": {
 			"name": "Profile — Triangle Wave",
@@ -52,8 +96,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "triangle", "wave"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"triangle",
+				"wave"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_fourier": {
 			"name": "Profile — Fourier Series",
@@ -63,8 +117,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "fourier", "harmonics"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"fourier",
+				"harmonics"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_beat": {
 			"name": "Profile — Beat Frequencies",
@@ -74,8 +138,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "beat", "interference"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"beat",
+				"interference"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_lissajous": {
 			"name": "Profile — Lissajous Components",
@@ -85,8 +159,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "wavefunctions",
-			"tags": ["substrate", "profile", "lissajous", "wave"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"lissajous",
+				"wave"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			]
 		},
 		"profile_noise": {
 			"name": "Profile — 1D Noise",
@@ -96,8 +180,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "profile", "noise", "perlin"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"noise",
+				"perlin"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			]
 		},
 		"profile_noise_octaves": {
 			"name": "Profile — Noise Octaves",
@@ -107,8 +202,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "profile", "noise", "octaves", "fbm"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"noise",
+				"octaves",
+				"fbm"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			]
 		},
 		"profile_random_walk": {
 			"name": "Profile — Random Walk (1D)",
@@ -118,8 +225,17 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "profile", "random_walk"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"profile",
+				"random_walk"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"profile_brownian": {
 			"name": "Profile — Brownian Bridge",
@@ -129,8 +245,18 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "profile", "brownian", "bridge"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"brownian",
+				"bridge"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		},
 		"profile_bell_curve": {
 			"name": "Profile — Bell Curve (CLT)",
@@ -140,8 +266,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "statistics",
-			"tags": ["substrate", "profile", "gaussian", "bell_curve", "clt"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"gaussian",
+				"bell_curve",
+				"clt"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness",
+				"statistics"
+			]
 		},
 		"profile_damped": {
 			"name": "Profile — Damped Oscillation",
@@ -151,8 +289,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "physicssimulation",
-			"tags": ["substrate", "profile", "damped", "oscillation", "physics"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"damped",
+				"oscillation",
+				"physics"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			]
 		},
 		"profile_spring": {
 			"name": "Profile — Spring-Mass System",
@@ -162,8 +311,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "physicssimulation",
-			"tags": ["substrate", "profile", "spring", "mass", "physics"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"spring",
+				"mass",
+				"physics"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			]
 		},
 		"profile_gradient_descent": {
 			"name": "Profile — Gradient Descent",
@@ -173,8 +333,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "machinelearning",
-			"tags": ["substrate", "profile", "gradient_descent", "optimization", "ml"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"profile",
+				"gradient_descent",
+				"optimization",
+				"ml"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			]
 		},
 		"profile_logistic": {
 			"name": "Profile — Logistic Map",
@@ -184,8 +355,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "recursiveemergence",
-			"tags": ["substrate", "profile", "logistic", "bifurcation", "chaos"],
-			"complexity": "advanced"
+			"tags": [
+				"substrate",
+				"profile",
+				"logistic",
+				"bifurcation",
+				"chaos"
+			],
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence"
+			]
 		}
 	}
 }

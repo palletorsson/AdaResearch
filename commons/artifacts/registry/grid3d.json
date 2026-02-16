@@ -8,8 +8,22 @@
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
-			"tags": ["substrate", "grid3d", "graph", "universal"],
-			"complexity": "intermediate"
+			"sequence": "graphtheory",
+			"tags": [
+				"substrate",
+				"grid3d",
+				"graph",
+				"universal"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"searchpathfinding",
+				"randomness",
+				"proceduralgeneration"
+			]
 		},
 		"grid3d_bfs": {
 			"name": "Grid3D — BFS",
@@ -19,8 +33,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "bfs", "search", "graph"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"bfs",
+				"search",
+				"graph"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"grid3d_dfs": {
 			"name": "Grid3D — DFS",
@@ -30,8 +55,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "dfs", "search", "graph", "backtracking"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"dfs",
+				"search",
+				"graph",
+				"backtracking"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"grid3d_dijkstra": {
 			"name": "Grid3D — Dijkstra",
@@ -41,8 +78,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "searchpathfinding",
-			"tags": ["substrate", "grid3d", "dijkstra", "shortest_path", "graph", "greedy"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"dijkstra",
+				"shortest_path",
+				"graph",
+				"greedy"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"searchpathfinding"
+			]
 		},
 		"grid3d_kruskal": {
 			"name": "Grid3D — Kruskal's MST",
@@ -52,8 +101,21 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "kruskal", "mst", "graph", "greedy", "union_find"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"kruskal",
+				"mst",
+				"graph",
+				"greedy",
+				"union_find"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"grid3d_prim": {
 			"name": "Grid3D — Prim's MST",
@@ -63,8 +125,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "prim", "mst", "graph", "greedy"],
-			"complexity": "intermediate"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"prim",
+				"mst",
+				"graph",
+				"greedy"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"grid3d_force_directed": {
 			"name": "Grid3D — Force-Directed Layout",
@@ -74,8 +148,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "force_directed", "graph", "physics", "layout"],
-			"complexity": "advanced"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"force_directed",
+				"graph",
+				"physics",
+				"layout"
+			],
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			]
 		},
 		"grid3d_random_graph": {
 			"name": "Grid3D — Random Graph",
@@ -85,8 +171,20 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "graphtheory",
-			"tags": ["substrate", "grid3d", "random_graph", "erdos_renyi", "degree"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"random_graph",
+				"erdos_renyi",
+				"degree"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"randomness"
+			]
 		},
 		"grid3d_entropy": {
 			"name": "Grid3D — Entropy Field",
@@ -96,8 +194,19 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "grid3d", "entropy", "point_cloud", "randomness"],
-			"complexity": "beginner"
+			"tags": [
+				"substrate",
+				"grid3d",
+				"entropy",
+				"point_cloud",
+				"randomness"
+			],
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			]
 		}
 	}
 }

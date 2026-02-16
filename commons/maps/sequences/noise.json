@@ -8,12 +8,15 @@
 			"formula": "noise(p) = Σ amplitude^i × perlin(frequency^i × p)",
 			"description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuity—each value smoothly related to those around it. This is the λ parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usable—random enough to be surprising, continuous enough to be natural.",
 			"layer": "behaviors",
-			"prerequisites": ["randomness"],
-			"unlocks": ["proceduralgeneration", "morphogenesis"],
-
+			"prerequisites": [
+				"randomness"
+			],
+			"unlocks": [
+				"proceduralgeneration",
+				"morphogenesis"
+			],
 			"difficulty": "intermediate",
 			"estimated_time": "30-40 minutes",
-
 			"learning_objectives": [
 				"Noise as structured entropy: randomness with continuity constraints",
 				"White noise vs. smooth noise: the λ spectrum of coherence",
@@ -22,7 +25,6 @@
 				"Vector fields: noise as flow direction",
 				"Procedural generation: noise as substrate for worlds"
 			],
-
 			"content": [
 				"Noise_Columns: Vertical extrusion of 2D noise field",
 				"Noise_One: Single-dimensional noise visualization",
@@ -37,28 +39,27 @@
 				"Random_Noise_Types: White and blue noise taxonomy in interactive examples",
 				"VectorFieldFlow: Vector fields and fluid dynamics—noise as direction"
 			],
-
 			"maps": [
-				"Random_Noise_Types",			
+				"Random_Noise_Types",
 				"Noise_Columns",
 				"Noise_One",
 				"Noise_Voxel",
 				"Noise_6_Wall",
 				"Noise_Inside_Noise",
 				"Noise_Space_10",
-				"Noise_Perlin_Simplex"
+				"Noise_Perlin_Simplex",
+				"Noise_Blue",
+				"Noise_Functions",
+				"Noise_Volume"
 			],
-
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/noise_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
 			],
-
 			"algorithm_paths": {
 				"Noise_Perlin_Simplex": "res://algorithms/noise/",
 				"VectorFieldFlow": "res://algorithms/vectors/flowfield/"
 			},
-
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_noise",
 			"unlock_requirements": [],
