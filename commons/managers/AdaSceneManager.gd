@@ -191,13 +191,45 @@ func _load_single_sequence_file(path: String):
 		return
 	
 	var json_data = json.data
-	var sequences = json_data.get("sequences", {})
-	
-	# Merge into main config
-	for seq_name in sequences.keys():
-		sequence_configs[seq_name] = sequences[seq_name]
+	if not (json_data is Dictionary):
 		if debug:
-			print("    Loaded sequence: %s" % seq_name)
+			print("AdaSceneManager: Skipping %s (root JSON is not a Dictionary)" % path)
+		return
+
+	var sequences_data = json_data.get("sequences", {})
+
+	# Support both:
+	# 1) {"sequences": { "id": { ...maps... } } }
+	# 2) {"sequences": [ {"id":"...", ...maps...}, ... ] }
+	if sequences_data is Dictionary:
+		for seq_name in sequences_data.keys():
+			var seq_data = sequences_data[seq_name]
+			if not (seq_data is Dictionary):
+				if debug:
+					print("    Skipped sequence '%s' (entry is not a Dictionary)" % str(seq_name))
+				continue
+			sequence_configs[str(seq_name)] = seq_data
+			if debug:
+				print("    Loaded sequence: %s" % str(seq_name))
+	elif sequences_data is Array:
+		for entry_variant in sequences_data:
+			if not (entry_variant is Dictionary):
+				continue
+			var entry: Dictionary = entry_variant
+			var seq_id = str(entry.get("id", "")).strip_edges()
+			if seq_id.is_empty():
+				continue
+			# Only merge array entries that are actual runnable sequence configs.
+			if not entry.has("maps") or not (entry.get("maps", []) is Array):
+				if debug:
+					print("    Skipped sequence index entry: %s" % seq_id)
+				continue
+			sequence_configs[seq_id] = entry
+			if debug:
+				print("    Loaded sequence: %s" % seq_id)
+	else:
+		if debug:
+			print("AdaSceneManager: Skipping %s (\"sequences\" is neither Dictionary nor Array)" % path)
 
 # =============================================================================
 # ARTIFACT SEQUENCE MAPPING
