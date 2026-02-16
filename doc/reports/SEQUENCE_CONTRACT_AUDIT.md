@@ -4,16 +4,24 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 | Metric | Count |
 |---|---:|
-| `total_sequences` | 46 |
-| `declared_entries` | 396 |
-| `declared_unique_maps` | 383 |
-| `map_folders_with_data` | 529 |
+| `total_sequences` | 49 |
+| `declared_entries` | 424 |
+| `declared_unique_maps` | 411 |
+| `map_folders_with_data` | 528 |
 | `duplicate_entries_within_sequence` | 0 |
 | `duplicates_across_sequences` | 13 |
 | `missing_declared_maps` | 0 |
-| `undeclared_map_folders` | 146 |
-| `undeclared_prefix_hints` | 61 |
-| `cross_sequence_prefix_hints` | 27 |
+| `undeclared_map_folders` | 117 |
+| `undeclared_prefix_hints` | 89 |
+| `cross_sequence_prefix_hints` | 28 |
+
+### Interpretation Notes
+
+- `missing_declared_maps`: blocker. Sequence points to maps that do not exist on disk.
+- `duplicate_entries_within_sequence`: blocker. Same map repeats in one sequence `maps[]`.
+- `duplicates_across_sequences`: review case-by-case. Some shared maps are intentional.
+- `undeclared_map_folders`: inventory queue. Maps exist but are not in any sequence.
+- `*_prefix_hints`: informational only. Name similarity never assigns sequence ownership.
 
 ### duplicates_across_sequences
 
@@ -33,40 +41,39 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 ### undeclared_map_folders
 
-- `Base` has `map_data.json` but is not in any sequence `maps[]`
-- `Dialectic_Automation` has `map_data.json` but is not in any sequence `maps[]`
-- `Directionality_Examples` has `map_data.json` but is not in any sequence `maps[]`
-- `gridagent_puzzle01_copy` has `map_data.json` but is not in any sequence `maps[]`
-- `gridagent_puzzle02_translate` has `map_data.json` but is not in any sequence `maps[]`
-- `gridagent_puzzle03_rotate` has `map_data.json` but is not in any sequence `maps[]`
-- `InfoBoards_Example` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_1` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_2` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_3` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_4` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_5` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_6` has `map_data.json` but is not in any sequence `maps[]`
-- `Joints_7` has `map_data.json` but is not in any sequence `maps[]`
 - `Lab` has `map_data.json` but is not in any sequence `maps[]`
-- `lsystem` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_1` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_2` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_3` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_4` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_5` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_6` has `map_data.json` but is not in any sequence `maps[]`
-- `One_Adapt_7` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_1` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_2` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_3` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_4` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_5` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_6` has `map_data.json` but is not in any sequence `maps[]`
-- `oscillation_7` has `map_data.json` but is not in any sequence `maps[]`
+- `Oscillation_Animated_Cube` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Five` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Four` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_One` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Seven` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Six` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Three` has `map_data.json` but is not in any sequence `maps[]`
+- `Pattern_Generation_Two` has `map_data.json` but is not in any sequence `maps[]`
+- `PatternGeneration_Diffusion_Limited_Aggregation_DLA` has `map_data.json` but is not in any sequence `maps[]`
+- `PatternGeneration_Narrative_Generation` has `map_data.json` but is not in any sequence `maps[]`
+- `PatternGeneration_Penrose_Tilings` has `map_data.json` but is not in any sequence `maps[]`
+- `PatternGeneration_Typography_Generation` has `map_data.json` but is not in any sequence `maps[]`
+- `PatternGeneration_Wang_Tiles` has `map_data.json` but is not in any sequence `maps[]`
+- `Physics_1` has `map_data.json` but is not in any sequence `maps[]`
+- `Physics_2` has `map_data.json` but is not in any sequence `maps[]`
+- `Physics_3` has `map_data.json` but is not in any sequence `maps[]`
+- `Physics_4` has `map_data.json` but is not in any sequence `maps[]`
+- `Physics_5` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Bouncing_Ball_Physics` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Cloth_Simulation` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Collision_Detection` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Constraints` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Finite_Element_Method_FEM` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Fluid_Simulation_SPH` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Force_Fields` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Mass_Spring_Damper` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Newton_s_Laws` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Numerical_Integration` has `map_data.json` but is not in any sequence `maps[]`
+- `PhysicsSimulation_Particle_Systems` has `map_data.json` but is not in any sequence `maps[]`
 
 ### undeclared_prefix_hints (info only)
 
-- `lsystem` looks related to `lsystems`(8)
 - `Pattern_Generation_Five` looks related to `patterngeneration`(8)
 - `Pattern_Generation_Four` looks related to `patterngeneration`(8)
 - `Pattern_Generation_One` looks related to `patterngeneration`(8)
@@ -96,9 +103,11 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `PhysicsSimulation_Vector_Fields` looks related to `physicssimulation`(8)
 - `PhysicsSimulation_Verlet_Integration` looks related to `physicssimulation`(8)
 - `Primitives_2` looks related to `primitives`(8)
+- `Primitives_4` looks related to `primitives`(8)
 
 ### cross_sequence_prefix_hints (info only)
 
+- `DataStructures_Union_Find_Disjoint_Set` owned by `datastructures`; also name-matches `joints`(8)
 - `ProceduralGenerationBooleanPatterns` owned by `constraint_solvers`; also name-matches `proceduralgeneration`(8)
 - `ProceduralGenerationNetSpace` owned by `higher_dimensions`; also name-matches `proceduralgeneration`(8)
 - `ProceduralGenerationPortals` owned by `higher_dimensions`; also name-matches `proceduralgeneration`(8)

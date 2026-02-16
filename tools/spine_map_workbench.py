@@ -780,6 +780,14 @@ def render_sequence_contract_markdown(audit: dict[str, Any], sample_limit: int =
     for key, value in summary.items():
         lines.append(f"| `{key}` | {int(value)} |")
     lines.append("")
+    lines.append("### Interpretation Notes")
+    lines.append("")
+    lines.append("- `missing_declared_maps`: blocker. Sequence points to maps that do not exist on disk.")
+    lines.append("- `duplicate_entries_within_sequence`: blocker. Same map repeats in one sequence `maps[]`.")
+    lines.append("- `duplicates_across_sequences`: review case-by-case. Some shared maps are intentional.")
+    lines.append("- `undeclared_map_folders`: inventory queue. Maps exist but are not in any sequence.")
+    lines.append("- `*_prefix_hints`: informational only. Name similarity never assigns sequence ownership.")
+    lines.append("")
 
     duplicates_within = issues.get("duplicate_entries_within_sequence", [])
     if duplicates_within:

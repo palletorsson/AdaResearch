@@ -1,0 +1,24 @@
+{
+	"sequences": {
+		"devexamples": {
+			"name": "Dev Examples",
+			"description": "Development example maps for grid agent and info-board testing.",
+			"difficulty": "testing",
+			"estimated_time": "variable",
+			"learning_objectives": [
+				"Prototype validation",
+				"Interaction debugging"
+			],
+			"maps": [
+				"gridagent_puzzle01_copy",
+				"gridagent_puzzle02_translate",
+				"gridagent_puzzle03_rotate",
+				"InfoBoards_Example"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_init",
+			"unlock_requirements": [],
+			"completion_rewards": []
+		}
+	}
+}
