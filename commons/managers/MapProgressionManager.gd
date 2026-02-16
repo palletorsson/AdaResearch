@@ -1,6 +1,6 @@
 # MapProgressionManager.gd
 # Central manager for map progression and sequencing
-# Loads configuration from map_progression.json and provides progression logic
+# Loads sequence files from commons/maps/sequences and optional legacy metadata
 
 extends Node
 
@@ -24,8 +24,13 @@ signal map_unlocked(map_name: String)
 signal sequence_completed(sequence_name: String)
 signal progression_loaded()
 
-const PROGRESSION_FILE = "res://commons/maps/map_progression.json"
+const CURRICULUM_SPINE_FILE = "res://commons/maps/curriculum_spine.json"
+const SEQUENCE_DIR = "res://commons/maps/sequences/"
+const DEFAULT_STARTING_MAP = "Minimal_Test"
+const DEFAULT_MAIN_MENU_MAP = "menu"
+const DEFAULT_FALLBACK_MAP = "default"
 const SAVE_FILE = "user://map_progress.json"
+var default_sequence_id: String = "primitives"
 var instance 
 func _init():
 	instance = self
@@ -111,45 +116,136 @@ func _navigate_to_target_map():
 # Load the central progression configuration
 func load_progression_config() -> bool:
 	print("MapProgressionManager: Loading progression configuration...")
-	
-	if not FileAccess.file_exists(PROGRESSION_FILE):
-		print("MapProgressionManager: Configuration file not found: " + PROGRESSION_FILE)
-		return false
-	
-	var file = FileAccess.open(PROGRESSION_FILE, FileAccess.READ)
-	if not file:
-		print("MapProgressionManager: Could not open configuration file")
-		return false
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	if json_text.is_empty():
-		print("MapProgressionManager: Configuration file is empty")
-		return false
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		print("MapProgressionManager: Failed to parse JSON: " + json.get_error_message())
-		return false
-	
-	progression_config = json.data
-	
-	# Extract sections with defaults
-	sequences = progression_config.get("sequences", {})
-	map_metadata = progression_config.get("map_metadata", {})
-	navigation_config = progression_config.get("navigation", {})
-	settings = progression_config.get("settings", {})
-	
-	print("MapProgressionManager: Loaded %d sequences and %d maps from core config" % [sequences.size(), map_metadata.size()])
-	
-	# Load external sequences from commons/maps/sequences/
-	_load_external_sequences("res://commons/maps/sequences/")
-	
+
+	# Sequence-first defaults.
+	progression_config = {}
+	sequences = {}
+	map_metadata = {}
+	navigation_config = {
+		"starting_map": "",
+		"main_menu": DEFAULT_MAIN_MENU_MAP,
+		"fallback_map": DEFAULT_FALLBACK_MAP
+	}
+	settings = {
+		"enforce_progression": true,
+		"allow_map_skipping": false,
+		"auto_unlock_next": true,
+		"save_progress": true
+	}
+	default_sequence_id = "primitives"
+
+	# Load canonical sequence definitions.
+	_load_external_sequences(SEQUENCE_DIR)
+	_synthesize_map_metadata_from_sequences()
+	_resolve_default_sequence()
+	_resolve_starting_map()
+
+	print(
+		"MapProgressionManager: Loaded %d sequences and synthesized %d map metadata entries"
+		% [sequences.size(), map_metadata.size()]
+	)
+
 	progression_loaded.emit()
 	return true
+
+func _synthesize_map_metadata_from_sequences() -> void:
+	var prior_metadata: Dictionary = map_metadata.duplicate(true)
+	map_metadata.clear()
+
+	for seq_id in sequences.keys():
+		var sequence_data: Dictionary = sequences[seq_id]
+		if not sequence_data.has("maps") or not (sequence_data.maps is Array):
+			continue
+
+		var seq_maps: Array[String] = []
+		for map_entry in sequence_data.maps:
+			var map_name := str(map_entry).strip_edges()
+			if map_name.is_empty():
+				continue
+			if not seq_maps.has(map_name):
+				seq_maps.append(map_name)
+
+		for i in range(seq_maps.size()):
+			var map_name := seq_maps[i]
+			var metadata_entry: Dictionary = {}
+			if prior_metadata.has(map_name) and prior_metadata[map_name] is Dictionary:
+				metadata_entry = (prior_metadata[map_name] as Dictionary).duplicate(true)
+
+			if not metadata_entry.has("difficulty"):
+				metadata_entry["difficulty"] = str(sequence_data.get("difficulty", "unknown"))
+			if not metadata_entry.has("estimated_time"):
+				metadata_entry["estimated_time"] = str(sequence_data.get("estimated_time", "unknown"))
+
+			var prerequisites: Array[String] = []
+			var raw_prerequisites = metadata_entry.get("prerequisites", [])
+			if metadata_entry.has("prerequisites") and raw_prerequisites is Array:
+				for prereq in raw_prerequisites:
+					var prereq_name := str(prereq).strip_edges()
+					if not prereq_name.is_empty():
+						prerequisites.append(prereq_name)
+			elif i > 0:
+				prerequisites.append(seq_maps[i - 1])
+			metadata_entry["prerequisites"] = prerequisites
+
+			var unlocks: Array[String] = []
+			var raw_unlocks = metadata_entry.get("unlocks", [])
+			if metadata_entry.has("unlocks") and raw_unlocks is Array:
+				for unlock in raw_unlocks:
+					var unlock_name := str(unlock).strip_edges()
+					if not unlock_name.is_empty():
+						unlocks.append(unlock_name)
+			elif i < seq_maps.size() - 1:
+				unlocks.append(seq_maps[i + 1])
+			metadata_entry["unlocks"] = unlocks
+
+			map_metadata[map_name] = metadata_entry
+
+func _resolve_default_sequence() -> void:
+	if sequences.has(default_sequence_id):
+		return
+
+	if FileAccess.file_exists(CURRICULUM_SPINE_FILE):
+		var file = FileAccess.open(CURRICULUM_SPINE_FILE, FileAccess.READ)
+		if file:
+			var spine_text = file.get_as_text()
+			file.close()
+			var json = JSON.new()
+			if json.parse(spine_text) == OK and json.data is Dictionary:
+				var spine = json.data.get("spine", {})
+				if spine is Dictionary and spine.has("sequences") and spine.sequences is Array:
+					for sequence_entry in spine.sequences:
+						if sequence_entry is Dictionary:
+							var candidate := str(sequence_entry.get("name", "")).strip_edges()
+							if sequences.has(candidate):
+								default_sequence_id = candidate
+								return
+
+	if sequences.has("primitives"):
+		default_sequence_id = "primitives"
+	elif sequences.has("array_tutorial"):
+		default_sequence_id = "array_tutorial"
+	elif sequences.size() > 0:
+		default_sequence_id = str(sequences.keys()[0])
+
+func _resolve_starting_map() -> void:
+	var configured_start := str(navigation_config.get("starting_map", "")).strip_edges()
+	if not configured_start.is_empty() and map_metadata.has(configured_start):
+		return
+
+	var sequence_maps := get_sequence_maps(default_sequence_id)
+	if not sequence_maps.is_empty():
+		navigation_config["starting_map"] = sequence_maps[0]
+	elif map_metadata.has(DEFAULT_STARTING_MAP):
+		navigation_config["starting_map"] = DEFAULT_STARTING_MAP
+	elif map_metadata.size() > 0:
+		navigation_config["starting_map"] = str(map_metadata.keys()[0])
+	else:
+		navigation_config["starting_map"] = DEFAULT_STARTING_MAP
+
+	if str(navigation_config.get("main_menu", "")).strip_edges().is_empty():
+		navigation_config["main_menu"] = DEFAULT_MAIN_MENU_MAP
+	if str(navigation_config.get("fallback_map", "")).strip_edges().is_empty():
+		navigation_config["fallback_map"] = DEFAULT_FALLBACK_MAP
 
 func _load_external_sequences(path: String):
 	var dir = DirAccess.open(path)
@@ -432,9 +528,7 @@ func get_fallback_map() -> String:
 
 # Get the default sequence
 func get_default_sequence() -> String:
-	if progression_config.is_empty():
-		return "tutorial_progression"
-	return progression_config.get("default_sequence", "tutorial_progression")
+	return default_sequence_id
 
 # Convert destination map name to scene path for teleporter
 func get_scene_path_for_map(map_name: String) -> String:

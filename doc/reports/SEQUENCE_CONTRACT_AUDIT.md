@@ -4,14 +4,14 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 | Metric | Count |
 |---|---:|
-| `total_sequences` | 46 |
-| `declared_entries` | 434 |
-| `declared_unique_maps` | 434 |
+| `total_sequences` | 44 |
+| `declared_entries` | 431 |
+| `declared_unique_maps` | 431 |
 | `map_folders_with_data` | 528 |
 | `duplicate_entries_within_sequence` | 0 |
 | `duplicates_across_sequences` | 0 |
 | `missing_declared_maps` | 0 |
-| `undeclared_map_folders` | 94 |
+| `undeclared_map_folders` | 97 |
 | `undeclared_prefix_hints` | 60 |
 | `cross_sequence_prefix_hints` | 36 |
 
@@ -25,7 +25,10 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 ### undeclared_map_folders
 
+- `AgentialRealism` has `map_data.json` but is not in any sequence `maps[]`
+- `JSON_Demo` has `map_data.json` but is not in any sequence `maps[]`
 - `Lab` has `map_data.json` but is not in any sequence `maps[]`
+- `Minimal_Test` has `map_data.json` but is not in any sequence `maps[]`
 - `Oscillation_Animated_Cube` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_1` has `map_data.json` but is not in any sequence `maps[]`
 - `Physics_2` has `map_data.json` but is not in any sequence `maps[]`
@@ -52,9 +55,6 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `ProceduralGenerationMarchingCubesInsideCave` has `map_data.json` but is not in any sequence `maps[]`
 - `ProceduralGenerationMarchingcubesPortalLandscape` has `map_data.json` but is not in any sequence `maps[]`
 - `ProceduralGenerationMarchingCubesSculpture` has `map_data.json` but is not in any sequence `maps[]`
-- `ProceduralGenerationMarchingcubesTorusSculpture` has `map_data.json` but is not in any sequence `maps[]`
-- `ProceduralGenerationMarchingCubesVovelNoise` has `map_data.json` but is not in any sequence `maps[]`
-- `Random_0` has `map_data.json` but is not in any sequence `maps[]`
 
 ### undeclared_prefix_hints (info only)
 

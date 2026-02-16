@@ -30,7 +30,6 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SPINE_PATH = ROOT / "commons/maps/curriculum_spine.json"
 SEQUENCE_DIR = ROOT / "commons/maps/sequences"
-MAP_PROGRESSION_PATH = ROOT / "commons/maps/map_progression.json"
 ARTIFACT_REGISTRY_DIR = ROOT / "commons/artifacts/registry"
 ARTIFACT_BASE_REGISTRY_PATH = ROOT / "commons/artifacts/grid_artifacts.json"
 MAPS_DIR = ROOT / "commons/maps"
@@ -140,15 +139,6 @@ def load_spine() -> list[dict[str, Any]]:
 def load_sequence_catalog() -> tuple[dict[str, dict[str, Any]], dict[str, Path]]:
     catalog: dict[str, dict[str, Any]] = {}
     source: dict[str, Path] = {}
-
-    if MAP_PROGRESSION_PATH.exists():
-        progression = read_json(MAP_PROGRESSION_PATH)
-        sequences = progression.get("sequences", {})
-        if isinstance(sequences, dict):
-            for seq_id, seq_def in sequences.items():
-                if isinstance(seq_id, str) and isinstance(seq_def, dict):
-                    catalog[seq_id] = seq_def
-                    source[seq_id] = MAP_PROGRESSION_PATH
 
     for seq_file in sorted(SEQUENCE_DIR.glob("*.json")):
         data = read_json(seq_file)

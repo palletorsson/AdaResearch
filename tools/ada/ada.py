@@ -161,34 +161,6 @@ def build_index() -> ProjectIndex:
                     "has_map_data": False,
                 }
     
-    # 2b. Also check map_progression.json for additional sequences
-    map_prog = load_json(PROJECT_ROOT / "commons/maps/map_progression.json")
-    if map_prog:
-        prog_sequences = map_prog.get("sequences", {})
-        for seq_name, seq_info in prog_sequences.items():
-            if isinstance(seq_info, dict):
-                maps = seq_info.get("maps", [])
-                if seq_name not in idx.sequences:
-                    idx.sequences[seq_name] = {
-                        "phase": "",
-                        "is_spine": False,
-                        "maps": maps,
-                        "docs": [],
-                        "artifacts": [],
-                        "description": seq_info.get("description", ""),
-                    }
-                elif not idx.sequences[seq_name].get("maps"):
-                    idx.sequences[seq_name]["maps"] = maps
-                
-                for map_name in maps:
-                    if map_name not in idx.maps:
-                        idx.maps[map_name] = {
-                            "sequence": seq_name,
-                            "path": f"commons/maps/{map_name}",
-                            "artifacts": [],
-                            "has_map_data": False,
-                        }
-    
     # 3. Scan map directories for map_data.json
     maps_dir = PROJECT_ROOT / "commons/maps"
     if maps_dir.exists():
