@@ -6,6 +6,36 @@ This guide explains how to create and register a new map sequence in AdaResearch
 
 A **sequence** is a series of maps that the player progresses through linearly. Sequences are used for tutorials, thematic explorations, and structured learning paths.
 
+## Fast Path: Spine Map Workbench
+
+For map-building sessions, use the workbench CLI to audit spine coverage, suggest artifacts, scaffold new maps, and append them to a sequence:
+
+```powershell
+# 1) Check full playable spine status + update taxonomy status block
+python tools/spine_map_workbench.py status --report doc/reports/SPINE_MAP_BUILD_STATUS.md --update-taxonomy doc/TAXONOMY.md
+
+# 2) Get artifact suggestions for a sequence
+python tools/spine_map_workbench.py suggest --sequence noise --limit 12
+
+# 3) Create a scaffold map and auto-add it to the sequence maps list
+python tools/spine_map_workbench.py scaffold --sequence noise --map Noise_New_01 --auto-artifacts 3 --update-sequence
+```
+
+This is the recommended workflow when your goal is to keep the full spine playable while rapidly adding maps.
+
+## Artifact Bridge Policy (Folders vs Sequences)
+
+Artifacts can live in either `res://commons/...` or `res://algorithms/...`.  
+Sequence ownership should come from registry metadata, not folder location.
+
+- Use `lookup_name` as the stable artifact ID.
+- Use registry fields like `sequence`, `category`, `dev_category`, and `tags` to bridge artifacts into sequence maps.
+- It is valid for multiple sequences to reuse artifacts from the same folder domain (for example `randomness` and `noise`).
+- In-progress artifacts are allowed: if a registry entry has a missing/unresolved `scene`, runtime now falls back to `res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn`.
+- Sequence membership for maps is explicit in each sequence JSON `maps[]`. A map name prefix alone does not assign the map to that sequence.
+
+This keeps map flow playable while you gradually replace placeholders with real artifact scenes.
+
 ## Step 1: Create the Sequence Definition
 
 Create a new JSON file in `commons/maps/sequences/` with your sequence name:

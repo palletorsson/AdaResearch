@@ -8,6 +8,7 @@ class_name GridInteractablesComponent
 # Path constants
 const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
+const ARTIFACT_PLACEHOLDER_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
 
 # Known config parameter names (NOT to be treated as tutorial shorthand)
 # These are artifact configuration keys that can have numeric values
@@ -176,21 +177,32 @@ func _load_single_artifact_registry(registry_path: String, validation_errors: Ar
 			validation_errors.append("Artifact '%s' must be a Dictionary, got %s in %s" % [artifact_key, type_string(typeof(artifact_data)), registry_path])
 			continue
 
-		# Validate required fields
-		if not artifact_data.has("lookup_name"):
-			validation_errors.append("Artifact '%s' missing required 'lookup_name' field in %s" % [artifact_key, registry_path])
-			continue
+		# Tolerant validation for in-progress artifact entries.
+		var normalized_artifact_data: Dictionary = artifact_data.duplicate(true)
+		var lookup_name := str(normalized_artifact_data.get("lookup_name", "")).strip_edges()
+		if lookup_name.is_empty():
+			lookup_name = artifact_key
+			normalized_artifact_data["lookup_name"] = lookup_name
+			validation_warnings.append("Artifact '%s' missing lookup_name in %s (defaulted to key)" % [artifact_key, registry_path])
 		
-		if not artifact_data.has("scene"):
-			validation_errors.append("Artifact '%s' missing required 'scene' field in %s" % [artifact_key, registry_path])
-			continue
-		
-		var lookup_name = artifact_data["lookup_name"]
-		
-		# Validate lookup_name consistency
+		# Keep key consistency deterministic.
 		if lookup_name != artifact_key:
-			validation_errors.append("Artifact key '%s' doesn't match lookup_name '%s' in %s" % [artifact_key, lookup_name, registry_path])
-			continue
+			validation_warnings.append("Artifact key '%s' didn't match lookup_name '%s' in %s (using key)" % [artifact_key, lookup_name, registry_path])
+			lookup_name = artifact_key
+			normalized_artifact_data["lookup_name"] = lookup_name
+
+		var raw_scene_path := str(normalized_artifact_data.get("scene", "")).strip_edges()
+		var scene_path := _normalize_artifact_scene_path(raw_scene_path)
+		if scene_path.is_empty():
+			scene_path = ARTIFACT_PLACEHOLDER_SCENE_PATH
+			normalized_artifact_data["scene"] = scene_path
+			normalized_artifact_data["artifact_type"] = "placeholder"
+			normalized_artifact_data["placeholder_reason"] = "missing_scene_path"
+			validation_warnings.append("Artifact '%s' missing scene in %s (using placeholder)" % [lookup_name, registry_path])
+		else:
+			normalized_artifact_data["scene"] = scene_path
+			if scene_path != raw_scene_path:
+				validation_warnings.append("Artifact '%s' scene normalized '%s' -> '%s' in %s" % [lookup_name, raw_scene_path, scene_path, registry_path])
 		
 		# Check for duplicates
 		if grid_artifact_registry.has(lookup_name):
@@ -201,7 +213,7 @@ func _load_single_artifact_registry(registry_path: String, validation_errors: Ar
 			validation_warnings.append("Artifact '%s' has non-standard lookup_name format (prefer snake_case) in %s" % [lookup_name, registry_path])
 		
 		# Store using lookup_name as key
-		grid_artifact_registry[lookup_name] = artifact_data
+		grid_artifact_registry[lookup_name] = normalized_artifact_data
 		loaded_count += 1
 		
 		#print("  → Registered artifact: %s ('%s')" % [lookup_name, artifact_data.get("name", "Unnamed")])
@@ -214,6 +226,88 @@ func _is_valid_lookup_name(lookup_name: String) -> bool:
 	var regex = RegEx.new()
 	regex.compile("^[a-z][a-z0-9_]*$")
 	return regex.search(lookup_name) != null
+
+func _normalize_artifact_scene_path(scene_path: String) -> String:
+	var normalized := scene_path.strip_edges()
+	if normalized.is_empty():
+		return ""
+	
+	if normalized.begins_with("res://"):
+		return normalized
+	
+	if normalized.begins_with("commons/") or normalized.begins_with("algorithms/") or normalized.begins_with("tools/"):
+		return "res://" + normalized.trim_prefix("/")
+	
+	return normalized
+
+func _build_placeholder_artifact_info(lookup_name: String, reason: String, source_scene_path: String = "") -> Dictionary:
+	var artifact_info: Dictionary = {
+		"name": "Missing Artifact (%s)" % lookup_name,
+		"lookup_name": lookup_name,
+		"description": "Placeholder shown because artifact is not implemented or scene cannot be loaded yet.",
+		"scene": ARTIFACT_PLACEHOLDER_SCENE_PATH,
+		"artifact_type": "placeholder",
+		"placeholder_reason": reason,
+		"sequence": ""
+	}
+	if not source_scene_path.is_empty():
+		artifact_info["source_scene_path"] = source_scene_path
+	return artifact_info
+
+func _coerce_artifact_info_to_placeholder(lookup_name: String, artifact_info: Dictionary, reason: String, source_scene_path: String = "") -> Dictionary:
+	var merged_info: Dictionary = artifact_info.duplicate(true)
+	merged_info["lookup_name"] = lookup_name
+	merged_info["scene"] = ARTIFACT_PLACEHOLDER_SCENE_PATH
+	merged_info["artifact_type"] = "placeholder"
+	merged_info["placeholder_reason"] = reason
+	if not source_scene_path.is_empty():
+		merged_info["source_scene_path"] = source_scene_path
+	if str(merged_info.get("name", "")).strip_edges().is_empty():
+		merged_info["name"] = "Missing Artifact (%s)" % lookup_name
+	if str(merged_info.get("description", "")).strip_edges().is_empty():
+		merged_info["description"] = "Placeholder shown because artifact is not implemented or scene cannot be loaded yet."
+	return merged_info
+
+func _get_artifact_info_or_placeholder(lookup_name: String) -> Dictionary:
+	if grid_artifact_registry.has(lookup_name):
+		var artifact_info: Dictionary = grid_artifact_registry[lookup_name]
+		if str(artifact_info.get("lookup_name", "")).strip_edges().is_empty():
+			artifact_info["lookup_name"] = lookup_name
+		return artifact_info
+	
+	push_warning("GridInteractablesComponent: Unknown artifact lookup_name '%s' (using placeholder)" % lookup_name)
+	return _build_placeholder_artifact_info(lookup_name, "unknown_lookup_name")
+
+func _resolve_artifact_scene_for_loading(lookup_name: String, artifact_info: Dictionary) -> Dictionary:
+	var resolved_info: Dictionary = artifact_info.duplicate(true)
+	var scene_path := _normalize_artifact_scene_path(str(resolved_info.get("scene", "")).strip_edges())
+	
+	if scene_path.is_empty():
+		resolved_info = _coerce_artifact_info_to_placeholder(lookup_name, resolved_info, "missing_scene_path")
+		return {
+			"scene_path": ARTIFACT_PLACEHOLDER_SCENE_PATH,
+			"artifact_info": resolved_info
+		}
+	
+	if not scene_path.begins_with("res://"):
+		resolved_info = _coerce_artifact_info_to_placeholder(lookup_name, resolved_info, "unsupported_scene_path", scene_path)
+		return {
+			"scene_path": ARTIFACT_PLACEHOLDER_SCENE_PATH,
+			"artifact_info": resolved_info
+		}
+	
+	if scene_path != ARTIFACT_PLACEHOLDER_SCENE_PATH and not ResourceLoader.exists(scene_path):
+		resolved_info = _coerce_artifact_info_to_placeholder(lookup_name, resolved_info, "scene_file_missing", scene_path)
+		return {
+			"scene_path": ARTIFACT_PLACEHOLDER_SCENE_PATH,
+			"artifact_info": resolved_info
+		}
+	
+	resolved_info["scene"] = scene_path
+	return {
+		"scene_path": scene_path,
+		"artifact_info": resolved_info
+	}
 
 # Get artifact info by lookup_name
 func get_artifact_info(lookup_name: String) -> Dictionary:
@@ -267,6 +361,7 @@ func generate_interactables(interactable_data):
 	var total_size = cube_size + gutter
 	var interactable_count = 0
 	var placement_errors = []
+	var placement_warnings = []
 	
 	# Get grid dimensions from structure component
 	var dimensions = structure_component.get_grid_dimensions()
@@ -333,20 +428,23 @@ func generate_interactables(interactable_data):
 				var config_data: Dictionary = parsed.get("config_data", {})
 				var tag: String = parsed.get("tag", "")
 				var trigger_action: String = parsed.get("trigger_action", "")
+				if lookup_name.is_empty():
+					placement_errors.append("Invalid artifact token '%s' at (%d,%d)" % [token, x, z])
+					continue
 
-				if has_artifact(lookup_name):
-					var y_pos = structure_component.find_highest_y_at(x, z)
-					
-					# Adjust for utilities at same position
-					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
-						y_pos += 1
-					
-					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides, config_data, tag, trigger_action):
-						interactable_count += 1
-					else:
-						placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
+				var y_pos = structure_component.find_highest_y_at(x, z)
+				
+				# Adjust for utilities at same position
+				if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
+					y_pos += 1
+				
+				if not has_artifact(lookup_name):
+					placement_warnings.append("Unknown artifact lookup_name '%s' at (%d,%d) (placing placeholder)" % [lookup_name, x, z])
+				
+				if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides, config_data, tag, trigger_action):
+					interactable_count += 1
 				else:
-					placement_errors.append("Unknown artifact lookup_name '%s' at grid position (%d,%d)" % [lookup_name, x, z])
+					placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
 	
 	# Report results
 	if placement_errors.size() > 0:
@@ -354,6 +452,11 @@ func generate_interactables(interactable_data):
 		for error in placement_errors:
 			print("  - %s" % error)
 		print("GridInteractablesComponent: Available artifacts: %s" % str(grid_artifact_registry.keys()))
+	
+	if placement_warnings.size() > 0:
+		print("GridInteractablesComponent: Placement warnings:")
+		for warning in placement_warnings:
+			print("  - %s" % warning)
 	
 	print("GridInteractablesComponent: ✅ Successfully placed %d interactables" % interactable_count)
 	interactables_generation_complete.emit(interactable_count)
@@ -538,19 +641,26 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
 	var world_pos = Vector3(x, y, z) * total_size
 	
-	var artifact_info = get_artifact_info(lookup_name)
+	var artifact_info = _get_artifact_info_or_placeholder(lookup_name)
 	if artifact_info.is_empty():
 		return false
 	
-	var scene_path = artifact_info.get("scene", "")
+	var scene_resolution: Dictionary = _resolve_artifact_scene_for_loading(lookup_name, artifact_info)
+	artifact_info = scene_resolution.get("artifact_info", artifact_info)
+	var scene_path: String = str(scene_resolution.get("scene_path", "")).strip_edges()
 	if scene_path.is_empty():
-		print("GridInteractablesComponent: WARNING - No scene path for artifact '%s'" % lookup_name)
+		print("GridInteractablesComponent: WARNING - Could not resolve scene path for artifact '%s'" % lookup_name)
 		return false
 	
 	var artifact_object = _load_and_instantiate_artifact(scene_path)
 	if not artifact_object:
-		print("GridInteractablesComponent: WARNING - Failed to load scene for artifact '%s'" % lookup_name)
-		return false
+		if scene_path != ARTIFACT_PLACEHOLDER_SCENE_PATH:
+			print("GridInteractablesComponent: WARNING - Failed to load scene for '%s', trying placeholder" % lookup_name)
+			artifact_info = _coerce_artifact_info_to_placeholder(lookup_name, artifact_info, "instantiate_failed", scene_path)
+			artifact_object = _load_and_instantiate_artifact(ARTIFACT_PLACEHOLDER_SCENE_PATH)
+		if not artifact_object:
+			print("GridInteractablesComponent: WARNING - Failed to load placeholder scene for artifact '%s'" % lookup_name)
+			return false
 	
 	# Handle visibility override from artifact_definitions
 	if artifact_info.has("visible"):
@@ -648,6 +758,11 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	artifact_object.set_meta("artifact_type", artifact_info.get("artifact_type", "unknown"))
 	artifact_object.set_meta("description", artifact_info.get("description", ""))
 	artifact_object.set_meta("sequence", artifact_info.get("sequence", ""))
+	artifact_object.set_meta("is_placeholder_artifact", str(artifact_info.get("artifact_type", "")) == "placeholder")
+	if artifact_info.has("placeholder_reason"):
+		artifact_object.set_meta("placeholder_reason", str(artifact_info.get("placeholder_reason", "")))
+	if artifact_info.has("source_scene_path"):
+		artifact_object.set_meta("source_scene_path", str(artifact_info.get("source_scene_path", "")))
 	
 	# Update labels if they exist
 	_update_artifact_labels(artifact_object, lookup_name, artifact_info)
@@ -1198,7 +1313,7 @@ func _on_teleporter_artifact_activated(lookup_name: String, artifact_object: Nod
 
 # Handle artifact interaction
 func _on_artifact_interact(lookup_name: String, artifact_object: Node):
-	var artifact_info = get_artifact_info(lookup_name)
+	var artifact_info = _get_artifact_info_or_placeholder(lookup_name)
 	var artifact_pos = Vector3.ZERO
 	
 	# Get position based on node type
@@ -1233,12 +1348,20 @@ func _load_scene_cached(scene_path: String) -> PackedScene:
 	
 	if ResourceLoader.exists(scene_path):
 		var scene = ResourceLoader.load(scene_path)
-		scene_cache[scene_path] = scene
-		print("GridInteractablesComponent: ✅ Successfully loaded scene: %s" % scene_path)
-		return scene
+		if scene and scene is PackedScene:
+			scene_cache[scene_path] = scene
+			print("GridInteractablesComponent: OK loaded scene: %s" % scene_path)
+			return scene
+		print("GridInteractablesComponent: ERROR - Failed to load PackedScene: %s" % scene_path)
 	else:
-		print("GridInteractablesComponent: ❌ ERROR - Scene file not found: %s" % scene_path)
-		return null
+		print("GridInteractablesComponent: ERROR - Scene file not found: %s" % scene_path)
+	
+	if scene_path != ARTIFACT_PLACEHOLDER_SCENE_PATH:
+		print("GridInteractablesComponent: Falling back to placeholder scene")
+		return _load_scene_cached(ARTIFACT_PLACEHOLDER_SCENE_PATH)
+	
+	print("GridInteractablesComponent: ERROR - Placeholder scene is missing: %s" % ARTIFACT_PLACEHOLDER_SCENE_PATH)
+	return null
 
 # Get interactable at position
 func get_interactable_at(x: int, y: int, z: int) -> Node3D:

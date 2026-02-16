@@ -42,28 +42,99 @@ static func _find_lab_system() -> Node:
 # Cached standalone registry (loaded when GridSystem not available)
 static var _standalone_registry: Dictionary = {}
 static var _standalone_loaded: bool = false
+const PLACEHOLDER_ARTIFACT_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
 
-## Keep only concrete artifact scene entries from commons/algorithms
+static func _normalize_scene_path(scene_path: String) -> String:
+	var normalized: String = scene_path.strip_edges()
+	if normalized.is_empty():
+		return ""
+	if normalized.begins_with("res://"):
+		return normalized
+	if normalized.begins_with("commons/") or normalized.begins_with("algorithms/") or normalized.begins_with("tools/"):
+		return "res://" + normalized.trim_prefix("/")
+	return normalized
+
+static func _is_supported_scene_path(scene_path: String) -> bool:
+	return scene_path.begins_with("res://commons/") or scene_path.begins_with("res://algorithms/")
+
+static func _looks_like_artifact_entry(artifact: Dictionary) -> bool:
+	if artifact.has("scene"):
+		return true
+	var artifact_marker_keys := ["lookup_name", "name", "description", "category", "sequence", "artifact_type", "tags"]
+	for key in artifact_marker_keys:
+		if artifact.has(key):
+			return true
+	return false
+
+static func _build_placeholder_artifact(lookup_name: String, reason: String, source_scene_path: String = "") -> Dictionary:
+	var placeholder: Dictionary = {
+		"lookup_name": lookup_name,
+		"name": "Missing Artifact (%s)" % lookup_name,
+		"description": "Placeholder shown because this artifact scene is not available yet.",
+		"scene": PLACEHOLDER_ARTIFACT_SCENE_PATH,
+		"artifact_type": "placeholder",
+		"placeholder_reason": reason
+	}
+	if not source_scene_path.is_empty():
+		placeholder["source_scene_path"] = source_scene_path
+	return placeholder
+
+static func _coerce_artifact_entry(raw_key: String, artifact: Dictionary) -> Dictionary:
+	if not _looks_like_artifact_entry(artifact):
+		return {}
+	
+	var normalized: Dictionary = artifact.duplicate(true)
+	var lookup_name: String = str(normalized.get("lookup_name", "")).strip_edges()
+	if lookup_name.is_empty():
+		lookup_name = raw_key.strip_edges()
+	if lookup_name.is_empty():
+		var scene_for_name: String = _normalize_scene_path(str(normalized.get("scene", "")).strip_edges())
+		if not scene_for_name.is_empty():
+			lookup_name = scene_for_name.get_file().get_basename()
+	if lookup_name.is_empty():
+		return {}
+	
+	normalized["lookup_name"] = lookup_name
+	if str(normalized.get("name", "")).strip_edges().is_empty():
+		normalized["name"] = lookup_name
+	
+	var scene_path: String = _normalize_scene_path(str(normalized.get("scene", "")).strip_edges())
+	var placeholder_reason := ""
+	var source_scene_path := scene_path
+	
+	if scene_path.is_empty():
+		placeholder_reason = "missing_scene_path"
+	elif not scene_path.begins_with("res://"):
+		placeholder_reason = "unsupported_scene_path"
+	elif not _is_supported_scene_path(scene_path):
+		placeholder_reason = "disallowed_scene_path"
+	elif scene_path != PLACEHOLDER_ARTIFACT_SCENE_PATH and not ResourceLoader.exists(scene_path):
+		placeholder_reason = "scene_file_missing"
+	
+	if not placeholder_reason.is_empty():
+		normalized["scene"] = PLACEHOLDER_ARTIFACT_SCENE_PATH
+		normalized["artifact_type"] = "placeholder"
+		normalized["placeholder_reason"] = placeholder_reason
+		if not source_scene_path.is_empty():
+			normalized["source_scene_path"] = source_scene_path
+		if str(normalized.get("name", "")).strip_edges().is_empty():
+			normalized["name"] = "Missing Artifact (%s)" % lookup_name
+		if str(normalized.get("description", "")).strip_edges().is_empty():
+			normalized["description"] = "Placeholder shown because this artifact scene is not available yet."
+		return normalized
+	
+	normalized["scene"] = scene_path
+	return normalized
+
+## Keep only artifact entries and normalize unresolved scenes to placeholder.
 static func _sanitize_artifacts(raw_artifacts: Array) -> Array:
 	var filtered: Array = []
 	for artifact_value in raw_artifacts:
 		if not (artifact_value is Dictionary):
 			continue
-
-		var artifact: Dictionary = artifact_value.duplicate(true)
-		var scene_path := str(artifact.get("scene", "")).strip_edges()
-		if scene_path.is_empty():
+		var artifact: Dictionary = _coerce_artifact_entry("", artifact_value)
+		if artifact.is_empty():
 			continue
-		if not (scene_path.begins_with("res://commons/") or scene_path.begins_with("res://algorithms/")):
-			continue
-
-		var lookup_name := str(artifact.get("lookup_name", "")).strip_edges()
-		if lookup_name.is_empty():
-			lookup_name = scene_path.get_file().get_basename()
-			artifact["lookup_name"] = lookup_name
-		if str(artifact.get("name", "")).strip_edges().is_empty():
-			artifact["name"] = lookup_name
-
 		filtered.append(artifact)
 
 	return filtered
@@ -119,10 +190,11 @@ static func _load_registry_file(path: String) -> void:
 			for key in artifacts.keys():
 				var artifact = artifacts[key]
 				if artifact is Dictionary:
-					# Ensure lookup_name is set
-					if not artifact.has("lookup_name"):
-						artifact["lookup_name"] = key
-					_standalone_registry[key] = artifact
+					var coerced: Dictionary = _coerce_artifact_entry(str(key), artifact)
+					if coerced.is_empty():
+						continue
+					var lookup_name: String = str(coerced.get("lookup_name", str(key))).strip_edges()
+					_standalone_registry[lookup_name] = coerced
 		var count_added = _standalone_registry.size() - count_before
 		print("ArtifactCatalogDataProvider: Loaded %d artifacts from %s" % [count_added, path.get_file()])
 
@@ -186,7 +258,11 @@ static func _lookup_artifacts(lookup_names: Array) -> Array:
 	var artifacts = []
 	for lookup_name in lookup_names:
 		if registry.has(lookup_name):
-			artifacts.append(registry[lookup_name])
+			var artifact_value = registry[lookup_name]
+			if artifact_value is Dictionary:
+				var coerced: Dictionary = _coerce_artifact_entry(str(lookup_name), artifact_value)
+				if not coerced.is_empty():
+					artifacts.append(coerced)
 
 	return artifacts
 
@@ -322,41 +398,40 @@ static func get_unlocked_artifact_count() -> int:
 			count += 1
 	return count
 
+static func _find_artifact_in_registry(registry: Dictionary, lookup_name: String) -> Dictionary:
+	if registry.has(lookup_name):
+		var direct_value = registry[lookup_name]
+		if direct_value is Dictionary:
+			var direct_artifact: Dictionary = _coerce_artifact_entry(lookup_name, direct_value)
+			if not direct_artifact.is_empty():
+				return direct_artifact
+	
+	for artifact_value in registry.values():
+		if not (artifact_value is Dictionary):
+			continue
+		var candidate: Dictionary = _coerce_artifact_entry("", artifact_value)
+		if candidate.is_empty():
+			continue
+		if str(candidate.get("lookup_name", "")).strip_edges() == lookup_name:
+			return candidate
+	
+	return {}
+
 ## Get artifact by lookup_name
 static func get_artifact_by_lookup_name(lookup_name: String) -> Dictionary:
 	var grid_system = _find_grid_system()
 	if grid_system and grid_system.has_node("GridInteractablesComponent"):
 		var interactables = grid_system.get_node("GridInteractablesComponent")
 		if "grid_artifact_registry" in interactables:
-			var registry = interactables.grid_artifact_registry
-			if registry.has(lookup_name):
-				var direct_artifact: Dictionary = registry[lookup_name]
-				var direct_scene_path := str(direct_artifact.get("scene", "")).strip_edges()
-				if direct_scene_path.begins_with("res://commons/") or direct_scene_path.begins_with("res://algorithms/"):
-					return direct_artifact
-			for artifact_value in registry.values():
-				if not (artifact_value is Dictionary):
-					continue
-				var artifact_dict: Dictionary = artifact_value
-				if str(artifact_dict.get("lookup_name", "")).strip_edges() == lookup_name:
-					var matched_scene_path := str(artifact_dict.get("scene", "")).strip_edges()
-					if matched_scene_path.begins_with("res://commons/") or matched_scene_path.begins_with("res://algorithms/"):
-						return artifact_dict
+			var registry: Dictionary = interactables.grid_artifact_registry
+			var artifact_from_grid: Dictionary = _find_artifact_in_registry(registry, lookup_name)
+			if not artifact_from_grid.is_empty():
+				return artifact_from_grid
 	
 	# Fallback to standalone registry
 	_load_standalone_registry()
-	if _standalone_registry.has(lookup_name):
-		var direct_artifact: Dictionary = _standalone_registry[lookup_name]
-		var direct_scene_path := str(direct_artifact.get("scene", "")).strip_edges()
-		if direct_scene_path.begins_with("res://commons/") or direct_scene_path.begins_with("res://algorithms/"):
-			return direct_artifact
-	for artifact_value in _standalone_registry.values():
-		if not (artifact_value is Dictionary):
-			continue
-		var artifact_dict: Dictionary = artifact_value
-		if str(artifact_dict.get("lookup_name", "")).strip_edges() == lookup_name:
-			var matched_scene_path := str(artifact_dict.get("scene", "")).strip_edges()
-			if matched_scene_path.begins_with("res://commons/") or matched_scene_path.begins_with("res://algorithms/"):
-				return artifact_dict
+	var artifact_from_standalone: Dictionary = _find_artifact_in_registry(_standalone_registry, lookup_name)
+	if not artifact_from_standalone.is_empty():
+		return artifact_from_standalone
 
-	return {}
+	return _build_placeholder_artifact(lookup_name, "unknown_lookup_name")

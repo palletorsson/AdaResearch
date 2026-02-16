@@ -59,25 +59,37 @@ func _load_preview_artifact(lookup_name: String):
 		push_warning("ArtifactCatalogDesktop3D: Artifact not found: %s" % lookup_name)
 		return
 	
-	var scene_path = artifact_info.get("scene", "")
+	var scene_path: String = str(artifact_info.get("scene", "")).strip_edges()
 	if scene_path.is_empty():
-		push_warning("ArtifactCatalogDesktop3D: No scene path for: %s" % lookup_name)
-		return
+		push_warning("ArtifactCatalogDesktop3D: No scene path for '%s', using placeholder" % lookup_name)
+		scene_path = ArtifactCatalogDataProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH
 	
 	if not ResourceLoader.exists(scene_path):
-		push_warning("ArtifactCatalogDesktop3D: Scene not found: %s" % scene_path)
-		return
+		push_warning("ArtifactCatalogDesktop3D: Scene not found: %s (using placeholder)" % scene_path)
+		scene_path = ArtifactCatalogDataProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH
 	
-	# Load and instantiate
+	# Load and instantiate with placeholder fallback
 	var scene = ResourceLoader.load(scene_path)
+	if not scene and scene_path != ArtifactCatalogDataProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH:
+		scene_path = ArtifactCatalogDataProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH
+		scene = ResourceLoader.load(scene_path)
 	if not scene:
-		push_warning("ArtifactCatalogDesktop3D: Failed to load: %s" % scene_path)
+		push_warning("ArtifactCatalogDesktop3D: Failed to load scene and placeholder for '%s'" % lookup_name)
 		return
 	
 	var artifact = scene.instantiate()
 	if not artifact:
-		push_warning("ArtifactCatalogDesktop3D: Failed to instantiate: %s" % lookup_name)
+		push_warning("ArtifactCatalogDesktop3D: Failed to instantiate scene for '%s'" % lookup_name)
 		return
+	if not (artifact is Node3D):
+		push_warning("ArtifactCatalogDesktop3D: Preview scene root must be Node3D for '%s' (using placeholder)" % lookup_name)
+		artifact.queue_free()
+		var placeholder_scene = ResourceLoader.load(ArtifactCatalogDataProvider.PLACEHOLDER_ARTIFACT_SCENE_PATH)
+		if not placeholder_scene:
+			return
+		artifact = placeholder_scene.instantiate()
+		if not artifact or not (artifact is Node3D):
+			return
 	
 	# Add to preview container
 	_preview_container.add_child(artifact)
@@ -89,7 +101,7 @@ func _load_preview_artifact(lookup_name: String):
 	# Animate in
 	_animate_preview_in(artifact)
 	
-	print("ArtifactCatalogDesktop3D: ✅ Previewing: %s" % lookup_name)
+	print("ArtifactCatalogDesktop3D: OK previewing: %s" % lookup_name)
 
 func _fit_artifact_to_preview(artifact: Node3D):
 	"""Scale and position artifact to fit nicely in preview area"""

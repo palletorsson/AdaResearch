@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/placeholders/ArtifactPlaceholder.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="1"]
+albedo_color = Color(0.95, 0.35, 0.35, 1)
+roughness = 1.0
+emission_enabled = true
+emission = Color(0.6, 0.12, 0.12, 1)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="BoxMesh" id="2"]
+size = Vector3(0.8, 0.8, 0.8)
+material = SubResource("1")
+
+[node name="ArtifactPlaceholder" type="Node3D"]
+script = ExtResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("2")
+
+[node name="Label3D" type="Label3D" parent="."]
+position = Vector3(0, 0.8, 0)
+billboard = 1
+pixel_size = 0.01
+modulate = Color(1, 0.9, 0.9, 1)
+text = "MISSING"
