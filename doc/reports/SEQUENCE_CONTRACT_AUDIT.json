@@ -1,49 +1,18 @@
 {
   "summary": {
-    "total_sequences": 47,
-    "declared_entries": 391,
-    "declared_unique_maps": 375,
-    "map_folders_with_data": 515,
-    "duplicate_entries_within_sequence": 3,
+    "total_sequences": 46,
+    "declared_entries": 396,
+    "declared_unique_maps": 383,
+    "map_folders_with_data": 529,
+    "duplicate_entries_within_sequence": 0,
     "duplicates_across_sequences": 13,
-    "missing_declared_maps": 19,
-    "undeclared_map_folders": 159,
-    "undeclared_prefix_hints": 71,
+    "missing_declared_maps": 0,
+    "undeclared_map_folders": 146,
+    "undeclared_prefix_hints": 61,
     "cross_sequence_prefix_hints": 27
   },
   "issues": {
-    "duplicate_entries_within_sequence": [
-      {
-        "map": "LSystems_Context_Free_Grammars_CFG",
-        "sequence": "lsystems",
-        "sequence_name": "L-Systems",
-        "source": "commons/maps/sequences/lsystems.json",
-        "positions": [
-          3,
-          10
-        ]
-      },
-      {
-        "map": "LSystems_Tree_L_Systems",
-        "sequence": "lsystems",
-        "sequence_name": "L-Systems",
-        "source": "commons/maps/sequences/lsystems.json",
-        "positions": [
-          7,
-          11
-        ]
-      },
-      {
-        "map": "Tutorial_Single",
-        "sequence": "tutorial_progression",
-        "sequence_name": "Tutorial Progression",
-        "source": "commons/maps/map_progression.json",
-        "positions": [
-          1,
-          6
-        ]
-      }
-    ],
+    "duplicate_entries_within_sequence": [],
     "duplicates_across_sequences": [
       {
         "map": "CA_1",
@@ -254,131 +223,9 @@
         "owner_count": 2
       }
     ],
-    "missing_declared_maps": [
-      {
-        "map": "AgentialRealism",
-        "sequence": "advanced_concepts",
-        "sequence_name": "Advanced Concepts",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "JSON_Demo",
-        "sequence": "advanced_concepts",
-        "sequence_name": "Advanced Concepts",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Escher_Tessellation",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Magritte_Pipe",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Magritte_Windows",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Rodchenko_Monochrome",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Judd_Minimalism",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Dark_Room_Paradox",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Art_Synthesis",
-        "sequence": "artmathematics",
-        "sequence_name": "Art & Mathematics: Visual Philosophy",
-        "source": "commons/maps/sequences/artmathematics.json"
-      },
-      {
-        "map": "Minimal_Test",
-        "sequence": "development_testing",
-        "sequence_name": "Development Testing",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Preface_0",
-        "sequence": "preface_series",
-        "sequence_name": "Preface Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Preface_1",
-        "sequence": "preface_series",
-        "sequence_name": "Preface Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Random_0",
-        "sequence": "random_challenges",
-        "sequence_name": "Random Challenge Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Random_1",
-        "sequence": "random_challenges",
-        "sequence_name": "Random Challenge Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Random_3",
-        "sequence": "random_challenges",
-        "sequence_name": "Random Challenge Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Random_4",
-        "sequence": "random_challenges",
-        "sequence_name": "Random Challenge Series",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Tutorial_Room",
-        "sequence": "tutorial_progression",
-        "sequence_name": "Tutorial Progression",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Intro_0",
-        "sequence": "tutorial_progression",
-        "sequence_name": "Tutorial Progression",
-        "source": "commons/maps/map_progression.json"
-      },
-      {
-        "map": "Intro_1",
-        "sequence": "tutorial_progression",
-        "sequence_name": "Tutorial Progression",
-        "source": "commons/maps/map_progression.json"
-      }
-    ],
+    "missing_declared_maps": [],
     "undeclared_map_folders": [
-      "Array_Basics",
-      "Array_Patterns",
       "Base",
-      "Color_Context",
-      "Color_Grabbable",
-      "Color_Overlay",
-      "Color_Spectrum",
-      "Color_Sphere",
       "Dialectic_Automation",
       "Directionality_Examples",
       "gridagent_puzzle01_copy",
@@ -394,11 +241,6 @@
       "Joints_7",
       "Lab",
       "lsystem",
-      "LSystems_Backus_Naur_Form_BNF",
-      "MathArt_Cultural_History",
-      "Noise_Blue",
-      "Noise_Functions",
-      "Noise_Volume",
       "One_Adapt_1",
       "One_Adapt_2",
       "One_Adapt_3",
@@ -406,7 +248,6 @@
       "One_Adapt_5",
       "One_Adapt_6",
       "One_Adapt_7",
-      "One_Primitives",
       "oscillation_1",
       "oscillation_2",
       "oscillation_3",
@@ -533,100 +374,10 @@
     ],
     "undeclared_prefix_hints": [
       {
-        "map": "Color_Context",
-        "hints": [
-          {
-            "sequence": "color",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Color_Grabbable",
-        "hints": [
-          {
-            "sequence": "color",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Color_Overlay",
-        "hints": [
-          {
-            "sequence": "color",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Color_Spectrum",
-        "hints": [
-          {
-            "sequence": "color",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Color_Sphere",
-        "hints": [
-          {
-            "sequence": "color",
-            "score": 8
-          }
-        ]
-      },
-      {
         "map": "lsystem",
         "hints": [
           {
             "sequence": "lsystems",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "LSystems_Backus_Naur_Form_BNF",
-        "hints": [
-          {
-            "sequence": "lsystems",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Noise_Blue",
-        "hints": [
-          {
-            "sequence": "noise",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Noise_Functions",
-        "hints": [
-          {
-            "sequence": "noise",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "Noise_Volume",
-        "hints": [
-          {
-            "sequence": "noise",
-            "score": 8
-          }
-        ]
-      },
-      {
-        "map": "One_Primitives",
-        "hints": [
-          {
-            "sequence": "primitives",
             "score": 8
           }
         ]

@@ -3,6 +3,21 @@
 ## Purpose
 Give the second AI a clear, non-overlapping scope for today so map-building can continue fast.
 
+## Progress Update (2026-02-16)
+- Sequence contract baseline improved:
+  - `missing_declared_maps`: `19 -> 0`
+  - `duplicate_entries_within_sequence`: `3 -> 0`
+  - `undeclared_map_folders`: `159 -> 146` (targeted sequence assignments for obvious prefix matches)
+- Scaffolded 19 previously-declared maps so sequence ownership is now resolvable at runtime:
+  - `AgentialRealism`, `JSON_Demo`, `Escher_Tessellation`, `Magritte_Pipe`, `Magritte_Windows`, `Rodchenko_Monochrome`, `Judd_Minimalism`, `Dark_Room_Paradox`, `Art_Synthesis`, `Minimal_Test`, `Random_0`, `Random_3`, `Random_4`, `Tutorial_Room`
+- Registry curation pass completed for high-priority randomness/noise substrate set:
+  - Updated files: `randomness.json`, `living_paper.json`, `profile.json`, `grid3d.json`, `bar_array.json`
+  - Added metadata fields (`include_in_map_data`, `map_ready`, `map_sequences`) and explicit base-sequence targets where missing.
+  - Artifact audit improvement:
+    - `missing_include_in_map_data`: `1282 -> 1120`
+    - `missing_map_ready`: `1282 -> 1120`
+    - `missing_map_sequences_field`: `1282 -> 1120`
+
 ## Current Decisions (Do Not Re-open)
 - Sequence membership is explicit from sequence JSON `maps[]`.
 - Map name prefixes do **not** assign sequence membership.

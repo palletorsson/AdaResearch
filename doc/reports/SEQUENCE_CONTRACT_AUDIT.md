@@ -4,22 +4,16 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 | Metric | Count |
 |---|---:|
-| `total_sequences` | 47 |
-| `declared_entries` | 391 |
-| `declared_unique_maps` | 375 |
-| `map_folders_with_data` | 515 |
-| `duplicate_entries_within_sequence` | 3 |
+| `total_sequences` | 46 |
+| `declared_entries` | 396 |
+| `declared_unique_maps` | 383 |
+| `map_folders_with_data` | 529 |
+| `duplicate_entries_within_sequence` | 0 |
 | `duplicates_across_sequences` | 13 |
-| `missing_declared_maps` | 19 |
-| `undeclared_map_folders` | 159 |
-| `undeclared_prefix_hints` | 71 |
+| `missing_declared_maps` | 0 |
+| `undeclared_map_folders` | 146 |
+| `undeclared_prefix_hints` | 61 |
 | `cross_sequence_prefix_hints` | 27 |
-
-### duplicate_entries_within_sequence
-
-- `lsystems` repeats `LSystems_Context_Free_Grammars_CFG` at positions [3, 10] (commons/maps/sequences/lsystems.json)
-- `lsystems` repeats `LSystems_Tree_L_Systems` at positions [7, 11] (commons/maps/sequences/lsystems.json)
-- `tutorial_progression` repeats `Tutorial_Single` at positions [1, 6] (commons/maps/map_progression.json)
 
 ### duplicates_across_sequences
 
@@ -37,38 +31,9 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `Tutorial_Row` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
 - `Tutorial_Single` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
 
-### missing_declared_maps
-
-- `AgentialRealism` referenced by `advanced_concepts` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `JSON_Demo` referenced by `advanced_concepts` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Escher_Tessellation` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Magritte_Pipe` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Magritte_Windows` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Rodchenko_Monochrome` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Judd_Minimalism` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Dark_Room_Paradox` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Art_Synthesis` referenced by `artmathematics` (commons/maps/sequences/artmathematics.json) but `map_data.json` is missing
-- `Minimal_Test` referenced by `development_testing` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Preface_0` referenced by `preface_series` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Preface_1` referenced by `preface_series` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Random_0` referenced by `random_challenges` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Random_1` referenced by `random_challenges` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Random_3` referenced by `random_challenges` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Random_4` referenced by `random_challenges` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Tutorial_Room` referenced by `tutorial_progression` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Intro_0` referenced by `tutorial_progression` (commons/maps/map_progression.json) but `map_data.json` is missing
-- `Intro_1` referenced by `tutorial_progression` (commons/maps/map_progression.json) but `map_data.json` is missing
-
 ### undeclared_map_folders
 
-- `Array_Basics` has `map_data.json` but is not in any sequence `maps[]`
-- `Array_Patterns` has `map_data.json` but is not in any sequence `maps[]`
 - `Base` has `map_data.json` but is not in any sequence `maps[]`
-- `Color_Context` has `map_data.json` but is not in any sequence `maps[]`
-- `Color_Grabbable` has `map_data.json` but is not in any sequence `maps[]`
-- `Color_Overlay` has `map_data.json` but is not in any sequence `maps[]`
-- `Color_Spectrum` has `map_data.json` but is not in any sequence `maps[]`
-- `Color_Sphere` has `map_data.json` but is not in any sequence `maps[]`
 - `Dialectic_Automation` has `map_data.json` but is not in any sequence `maps[]`
 - `Directionality_Examples` has `map_data.json` but is not in any sequence `maps[]`
 - `gridagent_puzzle01_copy` has `map_data.json` but is not in any sequence `maps[]`
@@ -84,27 +49,24 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `Joints_7` has `map_data.json` but is not in any sequence `maps[]`
 - `Lab` has `map_data.json` but is not in any sequence `maps[]`
 - `lsystem` has `map_data.json` but is not in any sequence `maps[]`
-- `LSystems_Backus_Naur_Form_BNF` has `map_data.json` but is not in any sequence `maps[]`
-- `MathArt_Cultural_History` has `map_data.json` but is not in any sequence `maps[]`
-- `Noise_Blue` has `map_data.json` but is not in any sequence `maps[]`
-- `Noise_Functions` has `map_data.json` but is not in any sequence `maps[]`
-- `Noise_Volume` has `map_data.json` but is not in any sequence `maps[]`
 - `One_Adapt_1` has `map_data.json` but is not in any sequence `maps[]`
 - `One_Adapt_2` has `map_data.json` but is not in any sequence `maps[]`
+- `One_Adapt_3` has `map_data.json` but is not in any sequence `maps[]`
+- `One_Adapt_4` has `map_data.json` but is not in any sequence `maps[]`
+- `One_Adapt_5` has `map_data.json` but is not in any sequence `maps[]`
+- `One_Adapt_6` has `map_data.json` but is not in any sequence `maps[]`
+- `One_Adapt_7` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_1` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_2` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_3` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_4` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_5` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_6` has `map_data.json` but is not in any sequence `maps[]`
+- `oscillation_7` has `map_data.json` but is not in any sequence `maps[]`
 
 ### undeclared_prefix_hints (info only)
 
-- `Color_Context` looks related to `color`(8)
-- `Color_Grabbable` looks related to `color`(8)
-- `Color_Overlay` looks related to `color`(8)
-- `Color_Spectrum` looks related to `color`(8)
-- `Color_Sphere` looks related to `color`(8)
 - `lsystem` looks related to `lsystems`(8)
-- `LSystems_Backus_Naur_Form_BNF` looks related to `lsystems`(8)
-- `Noise_Blue` looks related to `noise`(8)
-- `Noise_Functions` looks related to `noise`(8)
-- `Noise_Volume` looks related to `noise`(8)
-- `One_Primitives` looks related to `primitives`(8)
 - `Pattern_Generation_Five` looks related to `patterngeneration`(8)
 - `Pattern_Generation_Four` looks related to `patterngeneration`(8)
 - `Pattern_Generation_One` looks related to `patterngeneration`(8)
@@ -124,6 +86,16 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `PhysicsSimulation_Finite_Element_Method_FEM` looks related to `physicssimulation`(8)
 - `PhysicsSimulation_Fluid_Simulation_SPH` looks related to `physicssimulation`(8)
 - `PhysicsSimulation_Force_Fields` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Mass_Spring_Damper` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Newton_s_Laws` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Numerical_Integration` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Particle_Systems` looks related to `particles`(8), `physicssimulation`(8)
+- `PhysicsSimulation_Rigid_Body_Dynamics` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Spring_Mass_Systems` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Three_Body_Problem` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Vector_Fields` looks related to `physicssimulation`(8)
+- `PhysicsSimulation_Verlet_Integration` looks related to `physicssimulation`(8)
+- `Primitives_2` looks related to `primitives`(8)
 
 ### cross_sequence_prefix_hints (info only)
 
