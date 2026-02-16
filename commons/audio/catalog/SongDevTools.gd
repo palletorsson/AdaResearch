@@ -1465,6 +1465,7 @@ func _get_song_color(song_id: String) -> Color:
 		"boards_of_canada", "boards_of_canada_v2": return Color(0.6, 0.75, 0.6)
 		"burial", "burial_v2": return Color(0.4, 0.4, 0.6)
 		"kraftwerk", "kraftwerk_v2": return Color(0.8, 0.5, 0.5)
+		"dark_kraftwerk_ambience": return Color(0.45, 0.42, 0.62)
 		"supersaw_trance": return Color(0.3, 0.6, 0.9)
 		"lofi_house": return Color(0.7, 0.6, 0.5)
 		"chromatic_story": return Color(0.5, 0.7, 0.85)
@@ -1509,6 +1510,7 @@ func _load_songs_from_folder() -> Array:
 		"gypsy_woman_house": "💃 Gypsy Woman",
 		"kraftwerk": "🤖 Kraftwerk",
 		"kraftwerk_v2": "🤖 Kraftwerk V2",
+		"dark_kraftwerk_ambience": "🌒 Dark Kraftwerk Ambience",
 		"lofi_house": "📼 Lo-Fi House",
 		"moroder_disco": "🪩 Moroder Disco",
 		"pop_generative": "🎤 Pop",
@@ -3447,6 +3449,8 @@ func _generate_song_stream_legacy(song_id: String, generation_params: Dictionary
 				stream = AudioSynthesizer.generate_burial_song(generation_params)
 			"kraftwerk":
 				stream = AudioSynthesizer.generate_kraftwerk_song(generation_params)
+			"dark_kraftwerk_ambience":
+				stream = AudioSynthesizer.generate_dark_kraftwerk_ambience_song(generation_params)
 			"boards_of_canada_v2":
 				stream = AudioSynthesizer.generate_boards_of_canada_v2_song(generation_params)
 			"burial_v2":
@@ -3639,6 +3643,8 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 			return 130.0
 		"kraftwerk", "kraftwerk_v2":
 			return 110.0
+		"dark_kraftwerk_ambience":
+			return 90.0
 		"detroit_techno", "detroit_sb":
 			return 128.0
 		"rave":

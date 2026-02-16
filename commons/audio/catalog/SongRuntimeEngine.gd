@@ -250,6 +250,8 @@ func _generate_song_stream(song_id: String, generation_params: Dictionary) -> Au
 			return AudioSynthesizer.generate_burial_song(generation_params)
 		"kraftwerk":
 			return AudioSynthesizer.generate_kraftwerk_song(generation_params)
+		"dark_kraftwerk_ambience":
+			return AudioSynthesizer.generate_dark_kraftwerk_ambience_song(generation_params)
 		"boards_of_canada_v2":
 			return AudioSynthesizer.generate_boards_of_canada_v2_song(generation_params)
 		"burial_v2":

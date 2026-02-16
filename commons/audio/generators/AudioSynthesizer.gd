@@ -323,6 +323,8 @@ static func _default_progression_for_song(song_id: String) -> Array:
 			return [1, 6, 4, 5]
 		"kraftwerk":
 			return [1, 4, 5, 1]
+		"dark_kraftwerk_ambience":
+			return [0, 5, 6, 0]
 		"boards_of_canada_v2":
 			return [0, 5, 3, 4]
 		"burial_v2":
@@ -3036,15 +3038,15 @@ static func _generate_burial_section(progression: Array, scale: Array, instrumen
 static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
 	parameters = _merge_with_song_research_parameters("kraftwerk", parameters)
 	randomize()
-	var bpm = 110.0  # Kraftwerk typical tempo
+	var bpm: float = clampf(float(parameters.get("bpm", 110.0)), 70.0, 180.0)
 	var bar_duration = 240.0 / bpm
 
-	var root_note = ["C", "D", "E", "G"][randi() % 4] + "3"
-	var scale = PopMusicTheory.get_major_scale_notes(root_note)  # Often major/bright
+	var root_note: String = ["C", "D", "E", "G"][randi() % 4] + "3"
+	var scale: Array = PopMusicTheory.get_major_scale_notes(root_note)  # Often major/bright
 
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song("kraftwerk"), scale)
 
-	print("AudioSynthesizer: Generating Kraftwerk in ", root_note)
+	print("AudioSynthesizer: Generating Kraftwerk in %s @ %.1f BPM" % [root_note, bpm])
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 3
@@ -3076,6 +3078,238 @@ static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamI
 	playback.add_transition(2, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 2.0)
 
 	return playback
+
+
+static func generate_dark_kraftwerk_ambience_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("dark_kraftwerk_ambience", parameters)
+	randomize()
+	var bpm: float = clampf(float(parameters.get("bpm", 90.0)), 60.0, 120.0)
+	var bar_duration: float = 240.0 / bpm
+
+	var key_value: String = str(parameters.get("key", "Em")).strip_edges()
+	var key_root: String = _extract_chord_root(key_value)
+	if key_root.is_empty():
+		key_root = ["E", "F", "G", "A"][randi() % 4]
+	var root_note: String = key_root + "3"
+	var scale: Array = PopMusicTheory.get_minor_scale_notes(root_note) if _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root_note)
+
+	var progression: Array = _resolve_progression_from_parameters(parameters, _default_progression_for_song("dark_kraftwerk_ambience"), scale)
+	print("AudioSynthesizer: Generating Dark Kraftwerk Ambience in %s @ %.1f BPM" % [root_note, bpm])
+
+	var playback := AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+
+	var intro: AudioStreamWAV = _generate_dark_kraftwerk_ambience_section(
+		progression,
+		scale,
+		["shadow_pad", "drone_bed", "noise_floor", "echo_wash"],
+		bar_duration,
+		parameters
+	)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+
+	var pulse: AudioStreamWAV = _generate_dark_kraftwerk_ambience_section(
+		progression,
+		scale,
+		["shadow_pad", "drone_bed", "sub_pulse", "noise_floor", "machine_clicks"],
+		bar_duration,
+		parameters
+	)
+	playback.set_clip_stream(1, pulse)
+	playback.set_clip_name(1, "Pulse")
+	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+
+	var main: AudioStreamWAV = _generate_dark_kraftwerk_ambience_section(
+		progression,
+		scale,
+		["shadow_pad", "drone_bed", "sub_pulse", "ghost_sequence", "vocoder_cloud", "noise_floor", "echo_wash", "machine_clicks"],
+		bar_duration,
+		parameters
+	)
+	playback.set_clip_stream(2, main)
+	playback.set_clip_name(2, "Main")
+	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+
+	var dissolve: AudioStreamWAV = _generate_dark_kraftwerk_ambience_section(
+		progression,
+		scale,
+		["shadow_pad", "drone_bed", "ghost_sequence", "noise_floor", "echo_wash"],
+		bar_duration,
+		parameters
+	)
+	playback.set_clip_stream(3, dissolve)
+	playback.set_clip_name(3, "Dissolve")
+	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
+	playback.set_clip_auto_advance_next_clip(3, 0)
+
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 3.4)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 3.8)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 4.2)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 4.6)
+
+	return playback
+
+
+static func _generate_dark_kraftwerk_ambience_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, parameters: Dictionary) -> AudioStreamWAV:
+	var pad_darkness: float = clampf(float(parameters.get("pad_darkness", 0.78)), 0.0, 1.0)
+	var vocoder_mix: float = clampf(float(parameters.get("vocoder_mix", 0.36)), 0.0, 1.0)
+	var mechanical_feel: float = clampf(float(parameters.get("mechanical_feel", 0.82)), 0.0, 1.0)
+	var sequence_density: float = clampf(float(parameters.get("sequence_density", 0.35)), 0.0, 1.0)
+	var bpm: float = maxf(1.0, 240.0 / bar_duration)
+
+	var total_duration: float = float(progression.size()) * bar_duration * 2.0
+	var total_samples: int = int(total_duration * SAMPLE_RATE)
+	var final_mix := PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord: int = int(bar_duration * 2.0 * SAMPLE_RATE)
+
+	for i in range(progression.size()):
+		var degree: int = int(progression[i])
+		var chord_freqs: Array = PopMusicTheory.get_chord_frequencies(scale, degree)
+		if chord_freqs.is_empty():
+			continue
+		var root_freq: float = float(chord_freqs[0])
+
+		var chord_mix := PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+
+		if "shadow_pad" in instruments:
+			for j in range(samples_per_chord):
+				var t: float = float(j) / SAMPLE_RATE
+				var progress: float = float(j) / float(samples_per_chord)
+				var pad: float = 0.0
+				for freq_var in chord_freqs:
+					var freq: float = float(freq_var) * 0.5
+					var drift: float = sin(2.0 * PI * 0.07 * t + freq * 0.001) * 0.004
+					var sine_a: float = sin(2.0 * PI * freq * (1.0 + drift) * t)
+					var sine_b: float = sin(2.0 * PI * freq * 1.01 * t) * 0.45
+					var tri: float = asin(sin(2.0 * PI * freq * 0.5 * t)) * (2.0 / PI) * 0.25
+					pad += sine_a * 0.55 + sine_b * 0.30 + tri
+				pad /= float(maxi(1, chord_freqs.size()))
+				var motion: float = sin(2.0 * PI * 0.05 * t) * 0.18 + 0.82
+				var env: float = 1.0
+				if progress < 0.20:
+					env = progress / 0.20
+				elif progress > 0.88:
+					env = (1.0 - progress) / 0.12
+				chord_mix[j] += pad * motion * env * (0.26 - pad_darkness * 0.08)
+
+		if "drone_bed" in instruments:
+			for j in range(samples_per_chord):
+				var t: float = float(j) / SAMPLE_RATE
+				var progress: float = float(j) / float(samples_per_chord)
+				var sub_oct: float = root_freq * 0.25
+				var fifth: float = root_freq * 0.375
+				var minor_second: float = root_freq * pow(2.0, 1.0 / 12.0)
+				var drone: float = sin(2.0 * PI * sub_oct * t) * 0.55
+				drone += sin(2.0 * PI * fifth * t + 0.6) * 0.30
+				drone += sin(2.0 * PI * minor_second * t + 1.1) * 0.18
+				var wobble: float = sin(2.0 * PI * 0.03 * t) * 0.12 + 0.88
+				var env: float = 1.0
+				if progress < 0.10:
+					env = progress / 0.10
+				elif progress > 0.95:
+					env = (1.0 - progress) / 0.05
+				chord_mix[j] += drone * wobble * env * (0.20 + pad_darkness * 0.05)
+
+		if "sub_pulse" in instruments:
+			var pulse_period: int = maxi(1, int((60.0 / bpm) * SAMPLE_RATE * 0.5))
+			var gate_width: int = maxi(1, int(float(pulse_period) * (0.10 + mechanical_feel * 0.08)))
+			for j in range(samples_per_chord):
+				var t: float = float(j) / SAMPLE_RATE
+				var phase: int = j % pulse_period
+				var gate: float = 0.0
+				if phase < gate_width:
+					gate = 1.0 - (float(phase) / float(gate_width))
+				var sub: float = sin(2.0 * PI * root_freq * 0.25 * t) + sin(2.0 * PI * root_freq * 0.5 * t) * 0.40
+				chord_mix[j] += sub * gate * 0.16
+
+		if "ghost_sequence" in instruments and scale.size() > 0:
+			var seq_pattern: Array = [0, 2, 4, 6, 4, 2, 1, 2]
+			var step_count: int = 16
+			var note_length: int = maxi(1, _idiv(samples_per_chord, step_count))
+			for n in range(step_count):
+				var fire: bool = (n % 8 == 0) or (n == 12 and sequence_density > 0.45) or (n == 6 and sequence_density > 0.75)
+				if not fire:
+					continue
+				var start: int = n * note_length
+				var scale_idx: int = int(seq_pattern[n % seq_pattern.size()]) % scale.size()
+				var note_name: String = str(scale[scale_idx])
+				var note_freq: float = PopMusicTheory.get_freq(note_name)
+				if n >= 8:
+					note_freq *= 2.0
+				var note_gain: float = 0.08 + mechanical_feel * 0.10
+				for j in range(note_length):
+					if start + j >= samples_per_chord:
+						break
+					var t: float = float(j) / SAMPLE_RATE
+					var step_progress: float = float(j) / float(note_length)
+					var pulse: float = sign(sin(2.0 * PI * note_freq * t))
+					var shimmer: float = sin(2.0 * PI * note_freq * 2.01 * t) * 0.25
+					var env: float = exp(-t * (6.5 + pad_darkness * 4.0)) * (1.0 - step_progress * 0.25)
+					chord_mix[start + j] += (pulse * 0.70 + shimmer) * env * note_gain
+
+		if "vocoder_cloud" in instruments and vocoder_mix > 0.01:
+			for j in range(samples_per_chord):
+				var t: float = float(j) / SAMPLE_RATE
+				var progress: float = float(j) / float(samples_per_chord)
+				var cloud: float = 0.0
+				for freq_var in chord_freqs:
+					var freq: float = float(freq_var)
+					cloud += sin(2.0 * PI * freq * 1.5 * t) * 0.45
+					cloud += sin(2.0 * PI * freq * 2.5 * t) * 0.25
+					cloud += sin(2.0 * PI * freq * 3.5 * t) * 0.15
+				cloud /= float(maxi(1, chord_freqs.size()))
+				var formant_lfo: float = sin(2.0 * PI * 0.33 * t + float(i) * 0.45) * 0.20 + 0.80
+				var env: float = 1.0
+				if progress < 0.08:
+					env = progress / 0.08
+				elif progress > 0.94:
+					env = (1.0 - progress) / 0.06
+				chord_mix[j] += cloud * formant_lfo * env * (0.15 * vocoder_mix)
+
+		if "machine_clicks" in instruments:
+			var beat_samples: int = maxi(1, _idiv(samples_per_chord, 8))
+			for beat in range(8):
+				var chance: float = 0.25 + sequence_density * 0.30
+				if randf() > chance:
+					continue
+				var start: int = beat * beat_samples
+				for j in range(mini(int(SAMPLE_RATE * 0.018), beat_samples)):
+					if start + j >= samples_per_chord:
+						break
+					var t: float = float(j) / SAMPLE_RATE
+					var click: float = sin(2.0 * PI * 1900.0 * t) * exp(-t * 130.0)
+					click += sin(2.0 * PI * 1200.0 * t) * exp(-t * 90.0) * 0.35
+					chord_mix[start + j] += click * 0.07
+
+		if "noise_floor" in instruments:
+			var noise_state: float = 0.0
+			for j in range(samples_per_chord):
+				noise_state = noise_state * 0.965 + (randf() - 0.5) * 0.04
+				chord_mix[j] += noise_state * (0.025 + pad_darkness * 0.02)
+
+		if "echo_wash" in instruments:
+			var delay_samples: int = int((60.0 / bpm) * 0.75 * SAMPLE_RATE)
+			if delay_samples > 0 and delay_samples < samples_per_chord:
+				for j in range(delay_samples, samples_per_chord):
+					chord_mix[j] += chord_mix[j - delay_samples] * 0.22
+
+		var start_idx: int = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				final_mix[start_idx + j] = clampf(chord_mix[j], -1.0, 1.0)
+
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.03))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
 
 
 static func _generate_kraftwerk_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
