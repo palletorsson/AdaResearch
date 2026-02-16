@@ -1,9 +1,25 @@
 {
   "_meta": {
     "description": "Explicit curriculum spine - recommended progression through QFEP",
-    "version": "1.1",
-    "last_updated": "2026-02-02",
+    "version": "1.2",
+    "last_updated": "2026-02-16",
     "note": "Vectors integrated into primitives, transformations, forces, and noise"
+  },
+
+  "navigation": {
+    "description": "How the player moves through the game",
+    "pattern": "hub_and_spoke",
+    "hub": "Lab",
+    "rules": [
+      "The Lab is the central hub. All sequences start and end here.",
+      "The last map in every sequence returns the player to the Lab.",
+      "On return to Lab, new teleporters appear based on completed sequences.",
+      "Spine sequences unlock the next spine sequence teleporter.",
+      "Branch sequences unlock from their parent (spine or branch).",
+      "Branch completions can unlock further branch sequences (chain unlocks).",
+      "The player discovers the full curriculum by completing sequences and returning to see what opened."
+    ],
+    "teleporter_logic": "Defined by branch_points + branch_chains. Spine progression is linear (order field). On completing sequence X, all sequences listed in X's unlocks appear as new Lab teleporters."
   },
 
   "spine": {
@@ -178,13 +194,13 @@
   },
 
   "branches": {
-    "description": "Optional sequences that unlock from spine points",
+    "description": "Optional sequences that unlock from spine or other branch completions",
     "branch_points": {
       "primitives": {
         "unlocks": ["meshes", "datastructures", "color"],
         "note": "Foundation tools for building"
       },
-      "transformations": {
+      "transformation": {
         "unlocks": ["computationalgeometry", "graphtheory"],
         "note": "Spatial and relational structures"
       },
@@ -195,6 +211,10 @@
       "wavefunctions": {
         "unlocks": ["proceduralaudio"],
         "note": "Sound synthesis"
+      },
+      "noise": {
+        "unlocks": ["patterngeneration"],
+        "note": "Shaders and visual pattern generation"
       },
       "proceduralgeneration": {
         "unlocks": ["spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "grammar_systems"],
@@ -208,48 +228,84 @@
         "unlocks": ["advancedlaboratory"],
         "note": "Post-game content"
       }
+    },
+    "branch_chains": {
+      "description": "Branch completions that unlock further branches",
+      "color": {
+        "unlocks": ["array_tutorial"],
+        "note": "Color patterns lead to structured repetition"
+      },
+      "datastructures": {
+        "unlocks": ["searchpathfinding"],
+        "note": "Data structures enable search and traversal algorithms"
+      }
+    },
+    "unassigned": {
+      "description": "Sequences not yet connected to the unlock graph",
+      "sequences": ["vectors", "resourcemanagement", "bricolage"],
+      "note": "Pending design decisions on where these branch from"
     }
   },
 
   "lab_evolution": {
-    "description": "How the Lab changes at each spine completion",
-    "patterns": [
+    "description": "How the Lab changes at each spine completion. Extracted from actual Lab post-map files. The Lab is the hub: every sequence ends here, and new teleporters appear based on completions. Note: post_randomness shares the same layout expansion as post_wavefunctions.",
+    "note_on_implicit_design": "Each post-map is a FULL lab layout, not a delta. The system loads the appropriate post-map based on the latest completed sequence. Teleporters listed here are what's present in each post-map file.",
+    "actual_progression": [
       {
-        "after": "primitives",
-        "changes": ["trace_visible", "vector_arrows_on_walls", "ramp_to_transformations", "side_doors_mesh_color_data"]
+        "after": "none",
+        "lab_file": "map_data.json",
+        "teleporters": ["primitives", "transformation", "color"],
+        "note": "Initial lab. Primitives slope is walkable, transformation and color visible but not reachable yet."
       },
       {
-        "after": "transformations",
-        "changes": ["rotating_structures", "bridge_to_wavefunctions"]
+        "after": "primitives",
+        "lab_file": "map_data_post_primitives.json",
+        "teleporters": ["primitives", "transformation", "color"],
+        "new_access": "Slope to transformation becomes walkable",
+        "note": "Color teleporter visible but requires tc (transport cube) unlocked in post_transformation"
+      },
+      {
+        "after": "transformation",
+        "lab_file": "map_data_post_transformation.json",
+        "teleporters": ["primitives", "transformation", "color"],
+        "new_access": "tc:2:y transport cube unlocks vertical access to color teleporter"
+      },
+      {
+        "after": "color",
+        "lab_file": "map_data_post_color.json",
+        "teleporters_added": ["array_tutorial", "forces", "wavefunctions"],
+        "note": "New space opens with three teleporters"
       },
       {
         "after": "wavefunctions",
-        "changes": ["oscillating_elements", "sound_activated", "stairs_to_forces"]
+        "lab_file": "map_data_post_wavefunctions.json",
+        "teleporters_added": ["noise", "randomness"],
+        "note": "New space opens to noise and randomness"
       },
       {
-        "after": "forces",
-        "changes": ["physics_objects_falling", "ladder_to_randomness"]
-      },
-      {
-        "after": "randomness",
-        "changes": ["entropy_particles", "noise_textures", "tunnel_to_noise"]
-      },
-      {
-        "after": "cellularautomata",
-        "changes": ["ca_patterns_on_floor", "portal_to_fractals"]
+        "after": "noise",
+        "lab_file": "map_data_post_noise.json",
+        "teleporters_added": ["cellularautomata", "fractals", "lsystems"],
+        "note": "New room opens to fractals, l-systems and cellular automata"
       },
       {
         "after": "fractals",
-        "changes": ["fractal_structures_grow", "menger_sponge_corner"]
+        "lab_file": "map_data_post_fractals.json",
+        "teleporters_added": ["proceduralgeneration", "softbodies"],
+        "note": "lsystems reappears (was in post_noise, removed in post_cellularautomata, back now)"
       },
       {
-        "after": "morphogenesis",
-        "changes": ["turing_patterns_walls", "organic_portals"]
-      },
-      {
-        "after": "qfeplaboratory",
-        "changes": ["qfep_formula_floating", "lambda_phi_sliders_everywhere"]
+        "after": "softbodies",
+        "lab_file": "map_data_post_softbodies.json",
+        "teleporters_added": ["criticalalgorithms", "machinelearning", "morphogenesis", "foundationscrisis", "graphtheory", "qfeplaboratory", "speculativecomputation", "swarmintelligence"],
+        "note": "Big expansion — most remaining sequences open at once. Needs more granular progression."
       }
+    ],
+    "known_issues": [
+      "Post-softbodies dumps too many teleporters at once — should be more gradual",
+      "cellularautomata post-map removes lsystems teleporter (likely copy error)",
+      "No post-map progression defined after softbodies — late game is flat",
+      "Several branch sequences (meshes, datastructures, particles, physicssimulation, proceduralaudio, patterngeneration, computationalgeometry, recursiveemergence, artmathematics, searchpathfinding, resourcemanagement, constraint_solvers, isosurfaces, higher_dimensions, spatial_partitioning, grammar_systems) have post-map files but aren't in the main spine progression chain"
     ]
   },
 
