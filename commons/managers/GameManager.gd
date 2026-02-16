@@ -15,12 +15,11 @@ enum GameMode {
 	TESTPLUS    # Test flow with sequence filtering and optional full-sequence traversal
 }
 
-@export var game_mode: GameMode = GameMode.STORY # Default to TEST for quick iteration
+@export var game_mode: GameMode = GameMode.TEST  # Default to TEST for quick iteration
 @export var testplus_full_sequence_active: bool = false
 @export var testplus_excluded_sequences: Array[String] = []
-@export var testplus_available_sequence_ids: Array[String] = []
-@export var testplus_available_sequence_names: Array[String] = []
-@export_multiline var testplus_available_sequence_named_list: String = "Loads names from res://commons/maps/sequences/sequence_index.json at runtime."
+var _testplus_sequence_ids: Array[String] = []
+var _testplus_sequence_names: Array[String] = []
 var _testplus_sequence_alias_to_id: Dictionary = {}
 var _testplus_sequence_id_to_name: Dictionary = {}
 
@@ -155,19 +154,16 @@ func _ready() -> void:
 	add_test_console_messages()
 
 func _refresh_testplus_sequence_reference() -> void:
-	testplus_available_sequence_ids.clear()
-	testplus_available_sequence_names.clear()
-	testplus_available_sequence_named_list = ""
+	_testplus_sequence_ids.clear()
+	_testplus_sequence_names.clear()
 	_testplus_sequence_alias_to_id.clear()
 	_testplus_sequence_id_to_name.clear()
 
 	if not FileAccess.file_exists(TESTPLUS_SEQUENCE_INDEX_PATH):
-		testplus_available_sequence_named_list = "Sequence index not found: %s" % TESTPLUS_SEQUENCE_INDEX_PATH
 		return
 
 	var file = FileAccess.open(TESTPLUS_SEQUENCE_INDEX_PATH, FileAccess.READ)
 	if not file:
-		testplus_available_sequence_named_list = "Could not open: %s" % TESTPLUS_SEQUENCE_INDEX_PATH
 		return
 
 	var json_text = file.get_as_text()
@@ -175,16 +171,13 @@ func _refresh_testplus_sequence_reference() -> void:
 
 	var json = JSON.new()
 	if json.parse(json_text) != OK:
-		testplus_available_sequence_named_list = "Failed to parse sequence index JSON: %s" % json.get_error_message()
 		return
 
 	var data = json.data
 	var sequence_entries = data.get("sequences", [])
 	if not (sequence_entries is Array):
-		testplus_available_sequence_named_list = "Invalid sequence index format: sequences must be an array"
 		return
 
-	var named_lines: Array[String] = []
 	for entry in sequence_entries:
 		if not (entry is Dictionary):
 			continue
@@ -192,17 +185,14 @@ func _refresh_testplus_sequence_reference() -> void:
 		if sequence_id.is_empty():
 			continue
 		var sequence_name = str(entry.get("name", sequence_id)).strip_edges()
-		testplus_available_sequence_ids.append(sequence_id)
-		testplus_available_sequence_names.append(sequence_name)
+		_testplus_sequence_ids.append(sequence_id)
+		_testplus_sequence_names.append(sequence_name)
 
 		var normalized_id = sequence_id.to_lower()
 		var normalized_name = sequence_name.to_lower()
 		_testplus_sequence_alias_to_id[normalized_id] = sequence_id
 		_testplus_sequence_alias_to_id[normalized_name] = sequence_id
 		_testplus_sequence_id_to_name[normalized_id] = sequence_name
-		named_lines.append(sequence_name)
-
-	testplus_available_sequence_named_list = "\n".join(named_lines)
 
 func _resolve_testplus_sequence_id(sequence_ref: String) -> String:
 	if _testplus_sequence_alias_to_id.is_empty() and FileAccess.file_exists(TESTPLUS_SEQUENCE_INDEX_PATH):
@@ -707,11 +697,13 @@ func load_game() -> bool:
 		if saved_testplus_exclusions is Array:
 			for seq_name in saved_testplus_exclusions:
 				testplus_excluded_sequences.append(str(seq_name))
-		# Skip loading game_mode - use default from script/scene instead
-		# var loaded_mode = save_data.get("game_mode", GameMode.STORY)
-		# print("GameManager: load_game() - raw game_mode from file: %s (type: %s)" % [loaded_mode, typeof(loaded_mode)])
-		# game_mode = loaded_mode
-		print("GameManager: load_game() - keeping game_mode from default: %s" % get_game_mode_name())
+		# Load game mode from save
+		var loaded_mode = save_data.get("game_mode", game_mode)
+		if loaded_mode is float:
+			loaded_mode = int(loaded_mode)
+		if loaded_mode is int and loaded_mode >= 0 and loaded_mode < GameMode.size():
+			game_mode = loaded_mode as GameMode
+		print("GameManager: load_game() - game_mode: %s" % get_game_mode_name())
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)
@@ -753,7 +745,7 @@ func is_explorer_mode() -> bool:
 	return game_mode == GameMode.EXPLORER
 
 func is_story_mode() -> bool:
-	return game_mode == GameMode.STORY
+	return game_mode == GameMode.TEST
 
 func is_testplus_mode() -> bool:
 	return game_mode == GameMode.TESTPLUS

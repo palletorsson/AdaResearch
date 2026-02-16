@@ -517,12 +517,35 @@ func _handle_next_action(current_map_name: String):
 	if current_sequence_data.is_empty():
 		_activate_sequence_context(sequence_name, current_step)
 	
-	# Determine next action
-	if current_step + 1 >= maps.size():
-		# Last map in sequence - complete and return to lab
+	# Determine next action based on game mode
+	var is_last_map = current_step + 1 >= maps.size()
+	
+	# TEST mode: always complete after current map (already skipped to last on launch)
+	if GameManager and GameManager.is_test_mode():
+		_complete_sequence(sequence_name, maps)
+		return
+	
+	# TESTPLUS mode
+	if GameManager and GameManager.is_testplus_mode():
+		# Excluded: shouldn't be here, but complete anyway
+		if GameManager.is_sequence_excluded_in_testplus(sequence_name):
+			_complete_sequence(sequence_name, maps)
+			return
+		# Sample mode: complete after current map (already skipped to last on launch)
+		if GameManager.should_testplus_sample_sequence(sequence_name):
+			_complete_sequence(sequence_name, maps)
+			return
+		# Full sequence mode: play all maps, then lab
+		if is_last_map:
+			_complete_sequence(sequence_name, maps)
+		else:
+			_advance_to_next_map(sequence_name, maps, current_step)
+		return
+	
+	# STORY / EXPLORER mode: default behavior
+	if is_last_map:
 		_complete_sequence(sequence_name, maps)
 	else:
-		# Advance to next map in sequence
 		_advance_to_next_map(sequence_name, maps, current_step)
 
 func _find_sequence_containing_map(map_name: String) -> Dictionary:

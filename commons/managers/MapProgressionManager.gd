@@ -693,24 +693,43 @@ func should_skip_sequence() -> bool:
 
 # Get next map considering game mode
 func get_next_map_for_mode(current_map_name: String) -> String:
-	# Check game mode
-	if is_instance_valid(GameManager) and (GameManager.is_test_mode() or GameManager.should_testplus_sample_sequence()):
-		# In test/testplus sample mode, check if this is the last map in sequence
-		for seq_name in sequences.keys():
-			var maps = get_sequence_maps(seq_name)
-			var idx = maps.find(current_map_name)
-			if idx >= 0:
-				# In TestPlus, excluded sequences should immediately return to lab
-				if GameManager.is_testplus_mode() and GameManager.is_sequence_excluded_in_testplus(seq_name):
-					return get_sequence_lab_map(seq_name)
-				# If not last map, skip to last
+	if not is_instance_valid(GameManager):
+		return get_next_map(current_map_name)
+
+	# Find which sequence this map belongs to
+	for seq_name in sequences.keys():
+		var maps = get_sequence_maps(seq_name)
+		var idx = maps.find(current_map_name)
+		if idx < 0:
+			continue
+
+		# TEST mode: skip to last map, then lab
+		if GameManager.is_test_mode():
+			if idx < maps.size() - 1:
+				return maps[maps.size() - 1]
+			else:
+				return get_sequence_lab_map(seq_name)
+
+		# TESTPLUS mode
+		if GameManager.is_testplus_mode():
+			# Excluded sequences: straight to lab
+			if GameManager.is_sequence_excluded_in_testplus(seq_name):
+				return get_sequence_lab_map(seq_name)
+
+			# Sample mode (full_sequence_active = false): skip to last map, then lab
+			if GameManager.should_testplus_sample_sequence(seq_name):
 				if idx < maps.size() - 1:
 					return maps[maps.size() - 1]
 				else:
-					# Already at last map, go to lab
 					return get_sequence_lab_map(seq_name)
-	
-	# Default behavior
+
+			# Full sequence mode: play all maps, then return to lab
+			if idx < maps.size() - 1:
+				return maps[idx + 1]
+			else:
+				return get_sequence_lab_map(seq_name)
+
+	# Default behavior (STORY mode or map not in any sequence)
 	return get_next_map(current_map_name)
 
 # Get all available sequences

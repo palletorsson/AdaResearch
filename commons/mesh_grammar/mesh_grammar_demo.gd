@@ -48,11 +48,11 @@ func _create_environment() -> void:
 	fill.shadow_enabled = false
 	add_child(fill)
 
-	# Camera
+	# Camera — looking down at the gallery from front
 	var cam := Camera3D.new()
-	cam.position = Vector3(0, 3.5, 6.0)
-	cam.rotation_degrees = Vector3(-25, 0, 0)
-	cam.fov = 50
+	cam.position = Vector3(0, 4.0, 7.0)
+	cam.rotation_degrees = Vector3(-30, 0, 0)
+	cam.fov = 60
 	add_child(cam)
 
 # ---------------------------------------------------------------------------
@@ -65,7 +65,7 @@ func _create_floor() -> void:
 
 	var floor_mesh := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(14, 10)
+	plane.size = Vector2(14, 16)
 	floor_mesh.mesh = plane
 
 	var floor_mat := StandardMaterial3D.new()
@@ -77,7 +77,7 @@ func _create_floor() -> void:
 
 	var col := CollisionShape3D.new()
 	var col_shape := BoxShape3D.new()
-	col_shape.size = Vector3(14, 0.1, 10)
+	col_shape.size = Vector3(14, 0.1, 16)
 	col.shape = col_shape
 	col.position.y = -0.05
 	floor_body.add_child(col)
@@ -229,6 +229,103 @@ func _create_gallery() -> void:
 		"generations": 1
 	})
 
+	# --- Row 4: Decoration operations ---
+
+	# 13. Petal flower — petals radiating from upward faces
+	specimens.append({
+		"name": "Petal Flower",
+		"seed": "icosahedron",
+		"color": Color(0.95, 0.5, 0.6),
+		"rules": [
+			{"op": "petal_splay", "selector": "up", "params": {"count": 6, "length": 0.25, "width": 0.12, "curl": 0.4, "tilt": 0.4, "segments": 5}},
+		],
+		"generations": 1
+	})
+
+	# 14. Scale armor — overlapping pointed scales
+	specimens.append({
+		"name": "Scale Armor",
+		"seed": "sphere",
+		"color": Color(0.4, 0.7, 0.45),
+		"rules": [
+			{"op": "split", "selector": "all", "params": {"pattern": "midpoint"}},
+			{"op": "scale_tile", "selector": "all", "params": {"scale_length": 0.08, "scale_width": 0.06, "tilt_degrees": 35.0, "pointed": true}},
+		],
+		"generations": 1
+	})
+
+	# 15. Riveted sphere — edge beads along boundary
+	specimens.append({
+		"name": "Riveted Sphere",
+		"seed": "sphere",
+		"color": Color(0.8, 0.65, 0.4),
+		"rules": [
+			{"op": "extrude", "selector": "random:0.15", "params": {"distance": 0.15, "scale": 0.75}},
+			{"op": "delete", "selector": "tag:extruded_top", "params": {}},
+			{"op": "edge_decorate", "selector": "all", "params": {"shape": "sphere", "size": 0.02, "spacing": 0.06, "boundary_only": true}},
+		],
+		"generations": 1
+	})
+
+	# 16. Scatter nodules — scattered sub-meshes across surface
+	specimens.append({
+		"name": "Barnacle Sphere",
+		"seed": "sphere",
+		"color": Color(0.6, 0.75, 0.8),
+		"rules": [
+			{"op": "scatter", "selector": "all", "params": {"shape": "sphere", "density": 0.3, "min_size": 0.015, "max_size": 0.04}},
+		],
+		"generations": 1
+	})
+
+	# --- Row 5: Bridge operations + compound forms ---
+
+	# 17. L-system tree — fractal branching from upward faces
+	specimens.append({
+		"name": "L-System Tree",
+		"seed": "icosahedron",
+		"color": Color(0.45, 0.7, 0.35),
+		"rules": [
+			{"op": "lsystem_branch", "selector": "up", "params": {"preset": "bush", "lsystem_generations": 2, "step_length": 0.1, "start_radius": 0.02, "angle_degrees": 25.0, "max_branches": 30}},
+		],
+		"generations": 1
+	})
+
+	# 18. CA growth — cellular automata tags faces, then extrude alive
+	specimens.append({
+		"name": "CA Growth",
+		"seed": "sphere",
+		"color": Color(0.7, 0.4, 0.8),
+		"rules": [
+			{"op": "cellular", "selector": "all", "params": {"rule": "coral", "ca_steps": 4, "initial_density": 0.25, "seed_value": 42}},
+			{"op": "extrude", "selector": "tag:ca_alive", "params": {"distance": 0.1, "scale": 0.85}},
+		],
+		"generations": 1
+	})
+
+	# 19. Spike scatter — spiky sub-meshes across surface
+	specimens.append({
+		"name": "Spike Ball",
+		"seed": "icosahedron",
+		"color": Color(0.85, 0.35, 0.3),
+		"rules": [
+			{"op": "scatter", "selector": "all", "params": {"shape": "spike", "density": 0.6, "min_size": 0.06, "max_size": 0.12, "align_to_normal": true}},
+		],
+		"generations": 1
+	})
+
+	# 20. Petal rosette on bulge — compound decoration
+	specimens.append({
+		"name": "Blooming Bulge",
+		"seed": "sphere",
+		"color": Color(0.9, 0.75, 0.5),
+		"rules": [
+			{"op": "bulge", "selector": "random:0.08", "params": {"height": 0.12, "ring_depth": 1, "smoothing": 0.5}},
+			{"op": "petal_splay", "selector": "tag:bulge_tip", "params": {"count": 5, "length": 0.15, "width": 0.08, "curl": 0.5, "tilt": 0.5, "segments": 4}},
+		],
+		"generations": 1
+	})
+
 	# Layout specimens in a grid
 	var cols: int = 4
 	for i in range(specimens.size()):
@@ -261,9 +358,9 @@ func _build_specimen(spec: Dictionary) -> MeshGrammarNode:
 	node.seed_scale = 0.35
 	node.base_color = spec.get("color", Color(0.6, 0.7, 0.8))
 	node.generations = spec.get("generations", 1)
-	node.auto_generate = false  # We'll call generate() after adding rules
+	node.auto_generate = true  # Generate in _ready() after entering tree
 
-	# Parse and add rules
+	# Parse and add rules before adding to tree
 	var rule_defs: Array = spec.get("rules", [])
 	for rdef in rule_defs:
 		var rule := _create_rule(rdef)
@@ -280,6 +377,7 @@ func _create_rule(rdef: Dictionary) -> MeshRule:
 	var sel := _parse_selector(selector_str)
 
 	match op:
+		# --- Topology ops ---
 		"extrude":
 			return ExtrudeFaceOp.new(sel, rule_params)
 		"bulge":
@@ -298,6 +396,22 @@ func _create_rule(rdef: Dictionary) -> MeshRule:
 			return ScaleFaceOp.new(sel, rule_params)
 		"rotate":
 			return RotateFaceOp.new(sel, rule_params)
+		"scallop":
+			return ScallopEdgeOp.new(sel, rule_params)
+		# --- Decoration ops ---
+		"petal_splay":
+			return PetalSplayOp.new(sel, rule_params)
+		"scale_tile":
+			return ScaleTileOp.new(sel, rule_params)
+		"edge_decorate":
+			return EdgeDecorateOp.new(sel, rule_params)
+		"scatter":
+			return SurfaceScatterOp.new(sel, rule_params)
+		# --- Bridge ops ---
+		"lsystem_branch":
+			return LSystemBranchOp.new(sel, rule_params)
+		"cellular":
+			return CellularSurfaceOp.new(sel, rule_params)
 	return null
 
 func _parse_selector(s: String) -> MeshSelector:
@@ -311,6 +425,8 @@ func _parse_selector(s: String) -> MeshSelector:
 		"up_random":
 			return MeshSelector.by_normal_direction(Vector3.UP, 60.0).and_also(
 				MeshSelector.by_random(0.25))
+		"boundary":
+			return MeshSelector.by_boundary()
 		_:
 			# Parse "random:0.3", "tag:something", "depth:0-3"
 			if s.begins_with("random:"):

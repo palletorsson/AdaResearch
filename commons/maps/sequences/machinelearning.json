@@ -1,45 +1,47 @@
 {
-    "sequences": {
-        "machinelearning": {
-            "name": "Machine Learning",
-            "description": "Explore neural networks and AI algorithms",
-            "difficulty": "advanced",
-            "estimated_time": "45-55 minutes",
-            "learning_objectives": [
-                "Neural network architectures",
-                "Deep learning systems",
-                "AI model training",
-                "Explainable AI concepts"
-            ],
-            "maps": [
-                "MachineLearning_Evolving_Creatures",
-                "MachineLearning_Evolving_Flowers",
-                "MachineLearning_Random_Walker_Machine",
-                "MachineLearning_Neural_Networks",
-                "MachineLearning_Convolutional_Neural_Networks_CNNs",
-                "MachineLearning_Recurrent_Neural_Networks_RNNs",
-                "MachineLearning_LSTMs",
-                "MachineLearning_Transformers",
-                "MachineLearning_Generative_Adversarial_Networks_GANs",
-                "MachineLearning_Variational_Autoencoders_VAEs",
-                "MachineLearning_Clustering_Algorithms",
-                "MachineLearning_Dimensionality_Reduction",
-                "MachineLearning_Transfer_Learning",
-                "MachineLearning_Fine_tuning",
-                "MachineLearning_Explainable_AI_XAI",
-                "MachineLearning_Recommendation_Systems",
-                "MachineLearning_Classification_Algorithms",
+	"sequences": {
+		"machinelearning": {
+			"name": "Machine Learning",
+			"description": "Explore neural networks and AI algorithms",
+			"difficulty": "advanced",
+			"estimated_time": "45-55 minutes",
+			"learning_objectives": [
+				"Neural network architectures",
+				"Deep learning systems",
+				"AI model training",
+				"Explainable AI concepts",
+				"MachineLearning_Convolutional_Neural_Networks_CNNs",
+				"MachineLearning_Recurrent_Neural_Networks_RNNs",				
+			],
+			"maps": [
+				"MachineLearning_Evolving_Creatures",
+				"MachineLearning_Evolving_Flowers",
+				"MachineLearning_Random_Walker_Machine",
+				"MachineLearning_Neural_Networks",
+		
+
+				"MachineLearning_LSTMs",
+				"MachineLearning_Transformers",
+				"MachineLearning_Generative_Adversarial_Networks_GANs",
+				"MachineLearning_Variational_Autoencoders_VAEs",
+				"MachineLearning_Clustering_Algorithms",
+				"MachineLearning_Dimensionality_Reduction",
+				"MachineLearning_Transfer_Learning",
+				"MachineLearning_Fine_tuning",
+				"MachineLearning_Explainable_AI_XAI",
+				"MachineLearning_Recommendation_Systems",
+				"MachineLearning_Classification_Algorithms",
                 "MachineLearning_Attention_Mechanisms"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_machinelearning",
-            "unlock_requirements": [
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_machinelearning",
+			"unlock_requirements": [
                 "computationalgeometry"
-            ],
-            "completion_rewards": [
-                "ai_specialist_badge",
+			],
+			"completion_rewards": [
+				"ai_specialist_badge",
                 "neural_network_architect_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

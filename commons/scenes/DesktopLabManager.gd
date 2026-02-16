@@ -225,7 +225,7 @@ func _return_to_lab():
 		lab_grid_system.reload_map = true
 
 func _next_map_in_sequence():
-	"""Load next map in current sequence"""
+	"""Load next map in current sequence, respecting game mode"""
 	if current_sequence.is_empty():
 		return
 
@@ -239,22 +239,47 @@ func _next_map_in_sequence():
 
 	var sequence_data = scene_manager.sequence_configs[current_sequence]
 	var maps = sequence_data.get("maps", [])
+	var is_last_map = current_map_index >= maps.size() - 1
 
-	if current_map_index < maps.size() - 1:
-		current_map_index += 1
-		var next_map = maps[current_map_index]
-		print("DesktopLabManager: Loading next map [%d/%d]: %s" % [current_map_index + 1, maps.size(), next_map])
+	# TEST mode: always return to lab (we launched at last map)
+	if GameManager and GameManager.is_test_mode():
+		print("DesktopLabManager: TEST MODE - Sequence done, returning to lab")
+		_return_to_lab()
+		return
 
-		if lab_grid_system:
-			lab_grid_system.map_name = next_map
-			lab_grid_system.reload_map = true
+	# TESTPLUS mode
+	if GameManager and GameManager.is_testplus_mode():
+		if GameManager.is_sequence_excluded_in_testplus(current_sequence):
+			print("DesktopLabManager: TESTPLUS - Excluded sequence, returning to lab")
+			_return_to_lab()
+			return
+		if GameManager.should_testplus_sample_sequence(current_sequence):
+			print("DesktopLabManager: TESTPLUS - Sample mode, returning to lab")
+			_return_to_lab()
+			return
+		# Full sequence mode: advance or return to lab at end
+		if is_last_map:
+			print("DesktopLabManager: TESTPLUS - Full sequence complete, returning to lab")
+			_return_to_lab()
+			return
 
-			# Wait for map to generate, then move player to spawn
-			if lab_grid_system.has_signal("map_generation_complete"):
-				if not lab_grid_system.map_generation_complete.is_connected(_on_map_loaded):
-					lab_grid_system.map_generation_complete.connect(_on_map_loaded)
-	else:
-		print("DesktopLabManager: Already at last map in sequence")
+	# STORY mode or TESTPLUS full sequence: advance to next map
+	if is_last_map:
+		print("DesktopLabManager: Sequence complete, returning to lab")
+		_return_to_lab()
+		return
+
+	current_map_index += 1
+	var next_map = maps[current_map_index]
+	print("DesktopLabManager: Loading next map [%d/%d]: %s" % [current_map_index + 1, maps.size(), next_map])
+
+	if lab_grid_system:
+		lab_grid_system.map_name = next_map
+		lab_grid_system.reload_map = true
+
+		if lab_grid_system.has_signal("map_generation_complete"):
+			if not lab_grid_system.map_generation_complete.is_connected(_on_map_loaded):
+				lab_grid_system.map_generation_complete.connect(_on_map_loaded)
 
 func _previous_map_in_sequence():
 	"""Load previous map in current sequence"""
