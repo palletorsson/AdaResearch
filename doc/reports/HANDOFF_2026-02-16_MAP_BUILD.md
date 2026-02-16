@@ -61,7 +61,9 @@ Tasks:
 
 Acceptance checks:
 - `python tools/spine_map_workbench.py status --report doc/reports/SPINE_MAP_BUILD_STATUS.md --update-taxonomy doc/TAXONOMY.md`
+- `python tools/spine_map_workbench.py sequence-contract --report doc/reports/SEQUENCE_CONTRACT_AUDIT.md --json doc/reports/SEQUENCE_CONTRACT_AUDIT.json`
 - Review `doc/reports/SPINE_MAP_BUILD_STATUS.md` for correctness.
+- Review `doc/reports/SEQUENCE_CONTRACT_AUDIT.md` for duplicate ownership, missing declared maps, and undeclared map folders.
 
 ### Work Package 3 - Runtime QA Sweep (Medium Priority)
 Validate that curated data still runs without breaking map flow.

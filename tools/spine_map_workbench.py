@@ -13,6 +13,7 @@ Examples:
   python tools/spine_map_workbench.py status --report doc/reports/SPINE_MAP_BUILD_STATUS.md --update-taxonomy doc/TAXONOMY.md
   python tools/spine_map_workbench.py suggest --sequence noise --limit 12
   python tools/spine_map_workbench.py audit-artifacts --report doc/reports/ARTIFACT_REGISTRY_AUDIT.md --json doc/reports/ARTIFACT_REGISTRY_AUDIT.json
+  python tools/spine_map_workbench.py sequence-contract --report doc/reports/SEQUENCE_CONTRACT_AUDIT.md --json doc/reports/SEQUENCE_CONTRACT_AUDIT.json
   python tools/spine_map_workbench.py scaffold --sequence noise --map Noise_New_01 --auto-artifacts 3 --update-sequence
 """
 
@@ -612,6 +613,248 @@ def render_artifact_audit_markdown(audit: dict[str, Any], sample_limit: int = 20
     return "\n".join(lines).rstrip() + "\n"
 
 
+def _collect_maps_with_data() -> list[str]:
+    maps: list[str] = []
+    if not MAPS_DIR.exists():
+        return maps
+    for folder in sorted(MAPS_DIR.iterdir()):
+        if folder.is_dir() and (folder / "map_data.json").exists():
+            maps.append(folder.name)
+    return maps
+
+
+def _sequence_hints_for_map(map_name: str, sequence_ids: list[str], min_score: int = 8) -> list[dict[str, Any]]:
+    hints: list[dict[str, Any]] = []
+    for seq_id in sequence_ids:
+        score = _metadata_relation_score(seq_id, map_name)
+        if score >= min_score:
+            hints.append({"sequence": seq_id, "score": score})
+    return sorted(hints, key=lambda item: (-int(item["score"]), str(item["sequence"])))
+
+
+def build_sequence_contract_audit(limit: int = 400) -> dict[str, Any]:
+    catalog, source = load_sequence_catalog()
+    declared_entries: list[dict[str, Any]] = []
+    duplicate_entries_within_sequence: list[dict[str, Any]] = []
+    per_map_owners: dict[str, list[dict[str, Any]]] = {}
+
+    for seq_id in sorted(catalog.keys()):
+        seq_def = catalog.get(seq_id, {})
+        if not isinstance(seq_def, dict):
+            continue
+
+        sequence_name = str(seq_def.get("name", seq_id)).strip() or seq_id
+        seq_source = rel(source.get(seq_id, Path("-"))) if seq_id in source else "-"
+        maps_raw = seq_def.get("maps", [])
+        maps = [str(m).strip() for m in maps_raw if isinstance(m, str) and str(m).strip()] if isinstance(maps_raw, list) else []
+
+        positions_by_map: dict[str, list[int]] = {}
+        for idx, map_name in enumerate(maps, start=1):
+            positions_by_map.setdefault(map_name, []).append(idx)
+            entry = {
+                "map": map_name,
+                "sequence": seq_id,
+                "sequence_name": sequence_name,
+                "source": seq_source,
+                "position": idx,
+            }
+            declared_entries.append(entry)
+            per_map_owners.setdefault(map_name, []).append(entry)
+
+        for map_name, positions in positions_by_map.items():
+            if len(positions) > 1:
+                duplicate_entries_within_sequence.append(
+                    {
+                        "map": map_name,
+                        "sequence": seq_id,
+                        "sequence_name": sequence_name,
+                        "source": seq_source,
+                        "positions": positions,
+                    }
+                )
+
+    duplicates_across_sequences: list[dict[str, Any]] = []
+    for map_name, owners in sorted(per_map_owners.items()):
+        owner_ids = sorted({str(o.get("sequence", "")) for o in owners if str(o.get("sequence", ""))})
+        if len(owner_ids) <= 1:
+            continue
+        compact_owners = []
+        seen_owner: set[str] = set()
+        for owner in owners:
+            seq_id = str(owner.get("sequence", "")).strip()
+            if not seq_id or seq_id in seen_owner:
+                continue
+            seen_owner.add(seq_id)
+            compact_owners.append(
+                {
+                    "sequence": seq_id,
+                    "sequence_name": str(owner.get("sequence_name", seq_id)),
+                    "source": str(owner.get("source", "-")),
+                }
+            )
+        duplicates_across_sequences.append(
+            {
+                "map": map_name,
+                "owners": compact_owners,
+                "owner_count": len(compact_owners),
+            }
+        )
+
+    missing_declared_maps = [
+        {
+            "map": str(entry.get("map", "")),
+            "sequence": str(entry.get("sequence", "")),
+            "sequence_name": str(entry.get("sequence_name", "")),
+            "source": str(entry.get("source", "-")),
+        }
+        for entry in declared_entries
+        if not map_has_data(str(entry.get("map", "")))
+    ]
+
+    maps_with_data = _collect_maps_with_data()
+    declared_map_names = sorted(set(str(entry.get("map", "")).strip() for entry in declared_entries if str(entry.get("map", "")).strip()))
+    declared_map_set = set(declared_map_names)
+    undeclared_map_folders = [map_name for map_name in maps_with_data if map_name not in declared_map_set]
+
+    sequence_ids = sorted(catalog.keys())
+    undeclared_prefix_hints: list[dict[str, Any]] = []
+    for map_name in undeclared_map_folders:
+        hints = _sequence_hints_for_map(map_name, sequence_ids, min_score=8)
+        if hints:
+            undeclared_prefix_hints.append(
+                {
+                    "map": map_name,
+                    "hints": hints,
+                }
+            )
+
+    cross_sequence_prefix_hints: list[dict[str, Any]] = []
+    for map_name in declared_map_names:
+        owners = sorted({str(entry.get("sequence", "")) for entry in per_map_owners.get(map_name, []) if str(entry.get("sequence", ""))})
+        owner_set = set(owners)
+        hints = [hint for hint in _sequence_hints_for_map(map_name, sequence_ids, min_score=8) if str(hint.get("sequence", "")) not in owner_set]
+        if hints:
+            cross_sequence_prefix_hints.append(
+                {
+                    "map": map_name,
+                    "owners": owners,
+                    "hints": hints,
+                }
+            )
+
+    return {
+        "summary": {
+            "total_sequences": len(catalog),
+            "declared_entries": len(declared_entries),
+            "declared_unique_maps": len(declared_map_names),
+            "map_folders_with_data": len(maps_with_data),
+            "duplicate_entries_within_sequence": len(duplicate_entries_within_sequence),
+            "duplicates_across_sequences": len(duplicates_across_sequences),
+            "missing_declared_maps": len(missing_declared_maps),
+            "undeclared_map_folders": len(undeclared_map_folders),
+            "undeclared_prefix_hints": len(undeclared_prefix_hints),
+            "cross_sequence_prefix_hints": len(cross_sequence_prefix_hints),
+        },
+        "issues": {
+            "duplicate_entries_within_sequence": duplicate_entries_within_sequence[:limit],
+            "duplicates_across_sequences": duplicates_across_sequences[:limit],
+            "missing_declared_maps": missing_declared_maps[:limit],
+            "undeclared_map_folders": undeclared_map_folders[:limit],
+            "undeclared_prefix_hints": undeclared_prefix_hints[:limit],
+            "cross_sequence_prefix_hints": cross_sequence_prefix_hints[:limit],
+        },
+    }
+
+
+def render_sequence_contract_markdown(audit: dict[str, Any], sample_limit: int = 30) -> str:
+    summary = audit.get("summary", {})
+    issues = audit.get("issues", {})
+
+    lines: list[str] = []
+    lines.append("## Sequence Contract Audit")
+    lines.append("")
+    lines.append("Checks explicit `maps[]` ownership only; map-name similarities are informational hints and never auto-assigned.")
+    lines.append("")
+    lines.append("| Metric | Count |")
+    lines.append("|---|---:|")
+    for key, value in summary.items():
+        lines.append(f"| `{key}` | {int(value)} |")
+    lines.append("")
+
+    duplicates_within = issues.get("duplicate_entries_within_sequence", [])
+    if duplicates_within:
+        lines.append("### duplicate_entries_within_sequence")
+        lines.append("")
+        for row in duplicates_within[:sample_limit]:
+            map_name = str(row.get("map", ""))
+            sequence = str(row.get("sequence", ""))
+            positions = ", ".join([str(p) for p in row.get("positions", [])])
+            source = str(row.get("source", "-"))
+            lines.append(f"- `{sequence}` repeats `{map_name}` at positions [{positions}] ({source})")
+        lines.append("")
+
+    duplicates_across = issues.get("duplicates_across_sequences", [])
+    if duplicates_across:
+        lines.append("### duplicates_across_sequences")
+        lines.append("")
+        for row in duplicates_across[:sample_limit]:
+            map_name = str(row.get("map", ""))
+            owners = row.get("owners", [])
+            owner_text = ", ".join(
+                [
+                    f"`{str(owner.get('sequence', ''))}` ({str(owner.get('source', '-'))})"
+                    for owner in owners
+                    if isinstance(owner, dict)
+                ]
+            )
+            lines.append(f"- `{map_name}` declared in {owner_text}")
+        lines.append("")
+
+    missing_maps = issues.get("missing_declared_maps", [])
+    if missing_maps:
+        lines.append("### missing_declared_maps")
+        lines.append("")
+        for row in missing_maps[:sample_limit]:
+            map_name = str(row.get("map", ""))
+            sequence = str(row.get("sequence", ""))
+            source = str(row.get("source", "-"))
+            lines.append(f"- `{map_name}` referenced by `{sequence}` ({source}) but `map_data.json` is missing")
+        lines.append("")
+
+    undeclared_maps = issues.get("undeclared_map_folders", [])
+    if undeclared_maps:
+        lines.append("### undeclared_map_folders")
+        lines.append("")
+        for map_name in undeclared_maps[:sample_limit]:
+            lines.append(f"- `{str(map_name)}` has `map_data.json` but is not in any sequence `maps[]`")
+        lines.append("")
+
+    undeclared_hints = issues.get("undeclared_prefix_hints", [])
+    if undeclared_hints:
+        lines.append("### undeclared_prefix_hints (info only)")
+        lines.append("")
+        for row in undeclared_hints[:sample_limit]:
+            map_name = str(row.get("map", ""))
+            hints = row.get("hints", [])
+            hint_text = ", ".join([f"`{str(h.get('sequence', ''))}`({int(h.get('score', 0))})" for h in hints if isinstance(h, dict)])
+            lines.append(f"- `{map_name}` looks related to {hint_text}")
+        lines.append("")
+
+    cross_hints = issues.get("cross_sequence_prefix_hints", [])
+    if cross_hints:
+        lines.append("### cross_sequence_prefix_hints (info only)")
+        lines.append("")
+        for row in cross_hints[:sample_limit]:
+            map_name = str(row.get("map", ""))
+            owners = ", ".join([f"`{owner}`" for owner in row.get("owners", [])])
+            hints = row.get("hints", [])
+            hint_text = ", ".join([f"`{str(h.get('sequence', ''))}`({int(h.get('score', 0))})" for h in hints if isinstance(h, dict)])
+            lines.append(f"- `{map_name}` owned by {owners}; also name-matches {hint_text}")
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def upsert_taxonomy_section(taxonomy_path: Path, section_markdown: str) -> None:
     if not taxonomy_path.exists():
         raise RuntimeError(f"Taxonomy file does not exist: {rel(taxonomy_path)}")
@@ -861,6 +1104,26 @@ def cmd_audit_artifacts(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_sequence_contract(args: argparse.Namespace) -> int:
+    audit = build_sequence_contract_audit(limit=max(1, int(args.limit)))
+    markdown = render_sequence_contract_markdown(audit, sample_limit=max(1, int(args.sample_limit)))
+    print(markdown)
+
+    if args.report:
+        report_path = (ROOT / args.report).resolve() if not Path(args.report).is_absolute() else Path(args.report)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(markdown, encoding="utf-8")
+        print(f"Wrote report: {rel(report_path)}")
+
+    if args.json:
+        json_path = (ROOT / args.json).resolve() if not Path(args.json).is_absolute() else Path(args.json)
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        json_path.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(f"Wrote JSON: {rel(json_path)}")
+
+    return 0
+
+
 def cmd_scaffold(args: argparse.Namespace) -> int:
     sequence_id = args.sequence.strip()
     map_name = normalize_map_name(args.map)
@@ -932,6 +1195,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_audit_artifacts.add_argument("--report", default="", help="Optional markdown report path")
     p_audit_artifacts.add_argument("--json", default="", help="Optional JSON output path")
     p_audit_artifacts.set_defaults(func=cmd_audit_artifacts)
+
+    p_sequence_contract = sub.add_parser("sequence-contract", help="Audit sequence map ownership contract")
+    p_sequence_contract.add_argument("--limit", type=int, default=400, help="Max rows to keep per issue class in JSON data")
+    p_sequence_contract.add_argument("--sample-limit", type=int, default=30, help="Max rows shown per section in markdown output")
+    p_sequence_contract.add_argument("--report", default="", help="Optional markdown report path")
+    p_sequence_contract.add_argument("--json", default="", help="Optional JSON output path")
+    p_sequence_contract.set_defaults(func=cmd_sequence_contract)
 
     p_scaffold = sub.add_parser("scaffold", help="Create a new scaffold map and optional sequence entry")
     p_scaffold.add_argument("--sequence", required=True, help="Sequence id")
