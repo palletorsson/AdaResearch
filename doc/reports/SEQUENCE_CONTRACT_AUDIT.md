@@ -4,14 +4,14 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 
 | Metric | Count |
 |---|---:|
-| `total_sequences` | 48 |
-| `declared_entries` | 445 |
-| `declared_unique_maps` | 440 |
+| `total_sequences` | 46 |
+| `declared_entries` | 434 |
+| `declared_unique_maps` | 434 |
 | `map_folders_with_data` | 528 |
 | `duplicate_entries_within_sequence` | 0 |
-| `duplicates_across_sequences` | 5 |
+| `duplicates_across_sequences` | 0 |
 | `missing_declared_maps` | 0 |
-| `undeclared_map_folders` | 88 |
+| `undeclared_map_folders` | 94 |
 | `undeclared_prefix_hints` | 60 |
 | `cross_sequence_prefix_hints` | 36 |
 
@@ -22,14 +22,6 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `duplicates_across_sequences`: review case-by-case. Some shared maps are intentional.
 - `undeclared_map_folders`: inventory queue. Maps exist but are not in any sequence.
 - `*_prefix_hints`: informational only. Name similarity never assigns sequence ownership.
-
-### duplicates_across_sequences
-
-- `Escher_Impossible` declared in `artmathematics` (commons/maps/sequences/artmathematics.json), `foundationscrisis` (commons/maps/sequences/foundationscrisis.json)
-- `Structure_Examples_VoxelGrammar_Principles` declared in `testmaps` (commons/maps/sequences/testmaps.json), `transformation` (commons/maps/sequences/transformation.json)
-- `Tutorial_Disco` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
-- `Tutorial_Row` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
-- `Tutorial_Single` declared in `array_tutorial` (commons/maps/sequences/array_tutorial.json), `tutorial_progression` (commons/maps/map_progression.json)
 
 ### undeclared_map_folders
 
@@ -62,7 +54,7 @@ Checks explicit `maps[]` ownership only; map-name similarities are informational
 - `ProceduralGenerationMarchingCubesSculpture` has `map_data.json` but is not in any sequence `maps[]`
 - `ProceduralGenerationMarchingcubesTorusSculpture` has `map_data.json` but is not in any sequence `maps[]`
 - `ProceduralGenerationMarchingCubesVovelNoise` has `map_data.json` but is not in any sequence `maps[]`
-- `Random_Plane` has `map_data.json` but is not in any sequence `maps[]`
+- `Random_0` has `map_data.json` but is not in any sequence `maps[]`
 
 ### undeclared_prefix_hints (info only)
 

@@ -1,100 +1,19 @@
 {
   "summary": {
-    "total_sequences": 48,
-    "declared_entries": 445,
-    "declared_unique_maps": 440,
+    "total_sequences": 46,
+    "declared_entries": 434,
+    "declared_unique_maps": 434,
     "map_folders_with_data": 528,
     "duplicate_entries_within_sequence": 0,
-    "duplicates_across_sequences": 5,
+    "duplicates_across_sequences": 0,
     "missing_declared_maps": 0,
-    "undeclared_map_folders": 88,
+    "undeclared_map_folders": 94,
     "undeclared_prefix_hints": 60,
     "cross_sequence_prefix_hints": 36
   },
   "issues": {
     "duplicate_entries_within_sequence": [],
-    "duplicates_across_sequences": [
-      {
-        "map": "Escher_Impossible",
-        "owners": [
-          {
-            "sequence": "artmathematics",
-            "sequence_name": "Art & Mathematics: Visual Philosophy",
-            "source": "commons/maps/sequences/artmathematics.json"
-          },
-          {
-            "sequence": "foundationscrisis",
-            "sequence_name": "Foundations Crisis: The Limits of Formalization",
-            "source": "commons/maps/sequences/foundationscrisis.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "Structure_Examples_VoxelGrammar_Principles",
-        "owners": [
-          {
-            "sequence": "testmaps",
-            "sequence_name": "Unused Artifacts Test",
-            "source": "commons/maps/sequences/testmaps.json"
-          },
-          {
-            "sequence": "transformation",
-            "sequence_name": "Transformation: What Stays the Same When Everything Changes",
-            "source": "commons/maps/sequences/transformation.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "Tutorial_Disco",
-        "owners": [
-          {
-            "sequence": "array_tutorial",
-            "sequence_name": "Array Tutorial Sequence",
-            "source": "commons/maps/sequences/array_tutorial.json"
-          },
-          {
-            "sequence": "tutorial_progression",
-            "sequence_name": "Tutorial Progression",
-            "source": "commons/maps/map_progression.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "Tutorial_Row",
-        "owners": [
-          {
-            "sequence": "array_tutorial",
-            "sequence_name": "Array Tutorial Sequence",
-            "source": "commons/maps/sequences/array_tutorial.json"
-          },
-          {
-            "sequence": "tutorial_progression",
-            "sequence_name": "Tutorial Progression",
-            "source": "commons/maps/map_progression.json"
-          }
-        ],
-        "owner_count": 2
-      },
-      {
-        "map": "Tutorial_Single",
-        "owners": [
-          {
-            "sequence": "array_tutorial",
-            "sequence_name": "Array Tutorial Sequence",
-            "source": "commons/maps/sequences/array_tutorial.json"
-          },
-          {
-            "sequence": "tutorial_progression",
-            "sequence_name": "Tutorial Progression",
-            "source": "commons/maps/map_progression.json"
-          }
-        ],
-        "owner_count": 2
-      }
-    ],
+    "duplicates_across_sequences": [],
     "missing_declared_maps": [],
     "undeclared_map_folders": [
       "Lab",
@@ -126,6 +45,9 @@
       "ProceduralGenerationMarchingCubesSculpture",
       "ProceduralGenerationMarchingcubesTorusSculpture",
       "ProceduralGenerationMarchingCubesVovelNoise",
+      "Random_0",
+      "Random_3",
+      "Random_4",
       "Random_Plane",
       "Random_Random_Bell_Curve",
       "Random_Random_Over_Z",
@@ -167,10 +89,13 @@
       "Topology_Riemann_Torus",
       "Trans_Composition",
       "Trans_Rotation_2_",
+      "Tutorial_2D",
       "Tutorial_2D_Color",
       "Tutorial_App",
       "Tutorial_Col",
       "Tutorial_Game",
+      "Tutorial_Room",
+      "Tutorial_Start",
       "Vector_Exhibition",
       "VectorWorkbench",
       "WaveFunctions_AudioLib",
