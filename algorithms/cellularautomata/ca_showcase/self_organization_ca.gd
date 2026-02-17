@@ -12,7 +12,8 @@ func initialize_grid():
 	var mesh = BoxMesh.new()
 	mesh.size = Vector3(cube_size, cube_size, cube_size)
 	
-	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
+	var cells_per_axis := ceili(float(GRID_SIZE) / step)
+	var max_instances = cells_per_axis * cells_per_axis * cells_per_axis
 	configure_multimesh(mesh, max_instances)
 	
 	grid = create_3d_grid()
@@ -26,7 +27,7 @@ func initialize_grid():
 func update_simulation(_delta):
 	# Evolve self-organizing patterns
 	evolve_self_organization()
-	update_visualization()
+	# Note: update_visualization() is called by base_ca._process() after this
 
 func evolve_self_organization():
 	var new_grid = duplicate_3d_grid(grid)
@@ -72,7 +73,7 @@ func update_visualization():
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
 				var state = grid[x][y][z]
-				if state > 0:  # Only show non-zero states
+				if state > 0 and idx < mm.instance_count:  # Only show non-zero states
 					var world_pos = Vector3(
 						(x - GRID_SIZE/2) * CUBE_SIZE,
 						(y - GRID_SIZE/2) * CUBE_SIZE,

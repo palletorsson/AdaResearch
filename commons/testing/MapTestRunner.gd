@@ -22,6 +22,9 @@ class_name MapTestRunner
 ## Jump to this sequence (skip earlier ones). Empty = start from beginning.
 @export var start_sequence: String = ""
 
+## Skip to this map index in the queue (0-based). E.g. 20 = start at map 21.
+@export var start_index: int = 0
+
 ## For single_sequence mode: which sequence to test
 @export var single_sequence_name: String = ""
 
@@ -185,6 +188,13 @@ func _start_tests() -> void:
 
 	is_testing = true
 	current_test_index = 0
+
+	# Skip ahead if start_index is set
+	if start_index > 0 and start_index < test_queue.size():
+		current_test_index = start_index
+		print("MapTestRunner: Skipping to index %d (%s / %s)" % [
+			start_index, test_queue[start_index].sequence_name, test_queue[start_index].map_name])
+
 	_test_next_map()
 
 func _build_test_queue() -> void:

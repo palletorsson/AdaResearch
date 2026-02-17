@@ -94,20 +94,22 @@ func _ready():
 		var n = name.to_lower()
 		if "mold" in n:
 			gradient = Gradient.new()
-			gradient.remove_point(0) # Clear default
-			gradient.remove_point(0)
-			gradient.add_point(0.0, Color("2e7d32")) # Dark Green
+			# Overwrite the 2 default points instead of remove+add
+			gradient.set_offset(0, 0.0)
+			gradient.set_color(0, Color("2e7d32"))   # Dark Green
+			gradient.set_offset(1, 1.0)
+			gradient.set_color(1, Color("aed581"))   # Light Green
 			gradient.add_point(0.5, Color("4db6ac")) # Teal
-			gradient.add_point(1.0, Color("aed581")) # Light Green
 			use_gradient = true
 			gradient_mode = 1 # Height
 		elif "structure" in n:
 			gradient = Gradient.new()
-			gradient.remove_point(0)
-			gradient.remove_point(0)
-			gradient.add_point(0.0, Color("455a64")) # Blue Grey Dark
+			# Overwrite the 2 default points instead of remove+add
+			gradient.set_offset(0, 0.0)
+			gradient.set_color(0, Color("455a64"))   # Blue Grey Dark
+			gradient.set_offset(1, 1.0)
+			gradient.set_color(1, Color("eceff1"))   # White-ish
 			gradient.add_point(0.5, Color("90a4ae")) # Blue Grey Light
-			gradient.add_point(1.0, Color("eceff1")) # White-ish
 			use_gradient = true
 			gradient_mode = 1 # Height
 

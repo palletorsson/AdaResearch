@@ -15,7 +15,7 @@ enum GameMode {
 	TESTPLUS    # Test flow with sequence filtering and optional full-sequence traversal
 }
 
-@export var game_mode: GameMode = GameMode.TEST  # Default to TEST for quick iteration
+@export var game_mode: GameMode = GameMode.STORY  # Default to TEST for quick iteration
 @export var testplus_full_sequence_active: bool = false
 @export var testplus_excluded_sequences: Array[String] = []
 var _testplus_sequence_ids: Array[String] = []

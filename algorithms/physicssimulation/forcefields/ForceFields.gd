@@ -41,6 +41,12 @@ var colors := [
 # ===========================================================================
 func _ready():
 	scale = Vector3(0.8, 0.8, 0.8)
+	var fields := Node3D.new()
+	fields.name = "Fields"
+	add_child(fields)
+	var balls_container := Node3D.new()
+	balls_container.name = "Balls"
+	add_child(balls_container)
 	setup_vr_controllers()
 	_build_gravity_field()
 	_build_point_attractor()

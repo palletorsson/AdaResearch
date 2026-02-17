@@ -32,8 +32,8 @@ func setup_multimesh():
 	var multi_mesh = MultiMesh.new()
 	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
 	multi_mesh.mesh = box_mesh
+	multi_mesh.use_colors = true  # Must be set BEFORE instance_count > 0
 	multi_mesh.instance_count = grid_size.x * grid_size.y * grid_size.z
-	multi_mesh.use_colors = true
 	
 	multimesh_instance.multimesh = multi_mesh
 	multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -127,22 +127,25 @@ func update_visualization():
 		if cell and cell.is_occupied:
 			occupied_cells.append(cell)
 	
+	var mm = multimesh_instance.multimesh
 	if occupied_cells.is_empty():
-		multimesh_instance.multimesh.instance_count = 0
+		mm.visible_instance_count = 0
 		return
-	
-	multimesh_instance.multimesh.instance_count = occupied_cells.size()
+
+	# Reset to 0 first so use_colors stays enabled when resizing
+	mm.instance_count = 0
+	mm.instance_count = occupied_cells.size()
 	
 	for i in range(occupied_cells.size()):
 		var cell = occupied_cells[i]
 		var pos = cell.position
-		
+
 		# Set transform
 		var xform = Transform3D()
 		xform.origin = Vector3(pos.x, pos.z, pos.y)  # Y is up in Godot
-		multimesh_instance.multimesh.set_instance_transform(i, xform)
-		
+		mm.set_instance_transform(i, xform)
+
 		# Set color based on height
 		var height_ratio = float(pos.z) / float(grid_size.z)
 		var color = Color(0.3 + height_ratio * 0.5, 0.5, 0.3 + height_ratio * 0.3)
-		multimesh_instance.multimesh.set_instance_color(i, color)
+		mm.set_instance_color(i, color)

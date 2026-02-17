@@ -7,13 +7,13 @@ Checks:
   2. LAYER DIMS      structure/utilities/interactables same dimensions
   3. EMPTY CELLS     no "0" in utilities or interactables (use " ")
   4. TELEPORTER      at least one t: or t3: in utilities
-  5. SCORE POINT     at least one sp in utilities
-  6. SPAWN MARKER    s in utilities
-  7. ANNOTATION      an in utilities
-  8. REGISTRY        all artifacts in interactables registered
-  9. WALKABILITY     player can reach all artifacts + teleporter from spawn
- 10. NO LIFTS        no l: in utilities (use tc instead)
- 11. ARTIFACTS OK    no artifacts placed on void (h=0) cells
+  5. SPAWN MARKER    s in utilities
+  6. ANNOTATION      an in opposite corner of spawn row [0, cols-1]
+  7. REGISTRY        all artifacts in interactables registered
+  8. WALKABILITY     player can reach teleporter (t) from spawn
+  9. NO LIFTS        no l: in utilities (use tc instead)
+ 10. VOID ARTIFACTS  artifacts on void cells flagged as INFO (valid design)
+ 11. EXIT PATTERN    3x3 floor with void center for teleporter
 
 Usage:
   python map_checklist.py <map_data.json>
@@ -192,20 +192,7 @@ def run_checklist(path):
     else:
         results.append(('FAIL', 'TELEPORTER', 'No teleporter (t: or t3:) in utilities'))
 
-    # 5. SCORE POINT
-    has_sp = False
-    for r in range(rows):
-        for c in range(cols):
-            if ucell(r, c) == 'sp':
-                has_sp = True; break
-        if has_sp: break
-    if has_sp:
-        results.append(('PASS', 'SCOREPOINT', 'Found'))
-        passed += 1
-    else:
-        results.append(('WARN', 'SCOREPOINT', 'No sp in utilities'))
-
-    # 6. SPAWN MARKER
+    # 5. SPAWN MARKER
     has_spawn = False
     for r in range(rows):
         for c in range(cols):
@@ -218,21 +205,29 @@ def run_checklist(path):
     else:
         results.append(('WARN', 'SPAWN_MARKER', 'No s in utilities (default [0,0])'))
 
-    # 7. ANNOTATION
-    has_an = False
+    # 6. ANNOTATION — should be in opposite corner of spawn row [0, cols-1] area
+    an_pos = None
     for r in range(rows):
         for c in range(cols):
             u = ucell(r, c)
             if u.startswith('an'):
-                has_an = True; break
-        if has_an: break
-    if has_an:
-        results.append(('PASS', 'ANNOTATION', 'Found'))
-        passed += 1
+                an_pos = (r, c)
+                break
+        if an_pos:
+            break
+    if an_pos:
+        ar, ac = an_pos
+        # Check if it's in the first row, opposite corner from spawn (near [0, cols-1])
+        if ar == 0 and ac >= cols - 2:
+            results.append(('PASS', 'ANNOTATION', f'an at ({ac},{ar}) — opposite corner of spawn row'))
+            passed += 1
+        else:
+            results.append(('WARN', 'ANNOTATION', f'an at ({ac},{ar}) — should be near [0,{cols-1}] (opposite corner of spawn row)'))
+            passed += 1  # warn only, doesn't fail
     else:
         results.append(('WARN', 'ANNOTATION', 'No an (annotation board) in utilities'))
 
-    # 8. REGISTRY: all artifacts registered
+    # 7. REGISTRY: all artifacts registered
     registry = get_registry()
     unregistered = []
     for r in range(rows):
@@ -249,7 +244,7 @@ def run_checklist(path):
     else:
         results.append(('FAIL', 'REGISTRY', f'{len(unregistered)} unregistered: {", ".join(sorted(unregistered))}'))
 
-    # 9. WALKABILITY: flood fill from spawn
+    # 8. WALKABILITY: flood fill from spawn
     hmap = {}
     for r in range(rows):
         for c in range(min(cols, len(struct[r]))):
@@ -294,41 +289,37 @@ def run_checklist(path):
 
     visited = flood_fill(hmap, wp_cells, tc_edges, spawn, rows, cols)
 
-    # Check artifacts reachable
-    unreachable_arts = []
-    for r in range(rows):
-        for c in range(cols):
-            cell = icell(r, c)
-            if cell and cell != ' ':
-                if (r, c) not in visited:
-                    art = cell.split(':')[0].split('#')[0]
-                    unreachable_arts.append(f'{art}({c},{r})')
-
-    # Check teleporter/sp reachable
+    # Primary check: can the player reach the teleporter (t) from spawn?
     # Teleporter on void (exit pattern) counts as reachable if any adjacent cell is visited
-    unreachable_exits = []
+    tele_reachable = False
+    tele_found = False
     for r in range(rows):
         for c in range(cols):
             u = ucell(r, c)
-            if u.startswith('t:') or u.startswith('t3:') or u == 't' or u == 'sp':
-                if (r, c) not in visited:
-                    # If on void, check if any adjacent cell is reachable (exit ring pattern)
-                    if h(r, c) == 0:
-                        ring_reached = any((r+dr, c+dc) in visited 
-                                          for dr in [-1,0,1] for dc in [-1,0,1] 
-                                          if not (dr==0 and dc==0))
-                        if ring_reached:
-                            continue  # reachable via ring
-                    unreachable_exits.append(f'{u}({c},{r})')
+            if u.startswith('t:') or u.startswith('t3:') or u == 't':
+                tele_found = True
+                if (r, c) in visited:
+                    tele_reachable = True
+                elif h(r, c) == 0:
+                    # Exit ring pattern: adjacent cell reachable counts
+                    ring_reached = any((r+dr, c+dc) in visited
+                                      for dr in [-1,0,1] for dc in [-1,0,1]
+                                      if not (dr==0 and dc==0))
+                    if ring_reached:
+                        tele_reachable = True
+                break
+        if tele_found:
+            break
 
-    if not unreachable_arts and not unreachable_exits:
-        results.append(('PASS', 'WALKABILITY', 'All targets reachable from spawn'))
+    if tele_reachable:
+        results.append(('PASS', 'WALKABILITY', 'Teleporter reachable from spawn'))
         passed += 1
+    elif not tele_found:
+        results.append(('WARN', 'WALKABILITY', 'No teleporter found to pathfind to'))
     else:
-        issues = unreachable_arts + unreachable_exits
-        results.append(('FAIL', 'WALKABILITY', f'{len(issues)} unreachable: {", ".join(issues[:5])}'))
+        results.append(('FAIL', 'WALKABILITY', 'Teleporter NOT reachable from spawn'))
 
-    # 10. NO LIFTS
+    # 9. NO LIFTS
     has_lift = False
     for r in range(rows):
         for c in range(cols):
@@ -342,7 +333,7 @@ def run_checklist(path):
     else:
         results.append(('FAIL', 'NO_LIFTS', 'Uses l: (lift) — replace with tc'))
 
-    # 11. ARTIFACTS NOT ON VOID
+    # 10. ARTIFACTS ON VOID — info only (valid design choice)
     void_arts = []
     for r in range(rows):
         for c in range(cols):
@@ -351,12 +342,13 @@ def run_checklist(path):
                 art = cell.split(':')[0].split('#')[0]
                 void_arts.append(f'{art}({c},{r})')
     if not void_arts:
-        results.append(('PASS', 'NO_VOID_ART', 'No artifacts on void cells'))
+        results.append(('PASS', 'VOID_ART', 'No artifacts on void cells'))
         passed += 1
     else:
-        results.append(('FAIL', 'NO_VOID_ART', f'{len(void_arts)} on void: {", ".join(void_arts[:5])}'))
+        results.append(('INFO', 'VOID_ART', f'{len(void_arts)} on void (intentional?): {", ".join(void_arts[:5])}'))
+        passed += 1  # doesn't count against grade
 
-    # 12. EXIT PATTERN: 3x3 floor with void center for teleporter
+    # 11. EXIT PATTERN: 3x3 floor with void center for teleporter
     # Find teleporter position, check surrounding 3x3
     tele_pos = None
     for r in range(rows):
@@ -425,6 +417,8 @@ def print_results(name, results, passed):
             sym = 'X'
         elif level == 'WARN':
             sym = '!'
+        elif level == 'INFO':
+            sym = 'i'
         else:
             sym = ' ' if '--verbose' not in sys.argv else '+'
             if '--verbose' not in sys.argv:

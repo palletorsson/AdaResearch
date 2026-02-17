@@ -24,11 +24,10 @@ func _ready():
 		
 		material.albedo_texture = viewport_texture
 		material.emission_texture = viewport_texture
-		material.emission_energy = 3.0
-		material.unshaded = true
+		material.emission_energy_multiplier = 3.0
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED
-		material.flags_transparent = false
-		material.flags_unshaded = true
+		material.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
 		
 		# Ensure proper texture filtering and wrapping
 		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR

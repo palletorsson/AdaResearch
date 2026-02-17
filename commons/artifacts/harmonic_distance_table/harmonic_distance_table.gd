@@ -253,16 +253,13 @@ func _create_line_between(from: Vector3, to: Vector3, shared_count: int) -> Mesh
 	mesh_inst.position = midpoint
 	
 	# Orient: cylinder is Y-aligned by default, need to rotate to match from→to
+	# Build basis manually — node is not in tree yet so look_at() won't work
 	if delta.length() > 0.001:
-		var up = Vector3.UP
 		var direction = delta.normalized()
-		# Use look_at approach: build basis
-		if abs(direction.dot(up)) > 0.99:
-			# Nearly vertical, no rotation needed
-			pass
-		else:
-			mesh_inst.look_at(midpoint + direction, Vector3.UP)
-			mesh_inst.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+		if abs(direction.dot(Vector3.UP)) < 0.99:
+			var basis := Basis.looking_at(direction, Vector3.UP)
+			basis = basis * Basis(Vector3.RIGHT, PI / 2.0)
+			mesh_inst.basis = basis
 	
 	return mesh_inst
 

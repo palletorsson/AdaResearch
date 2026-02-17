@@ -326,7 +326,7 @@ func _apply_ball_color() -> void:
 	_glow_material = _build_glow_material(_original_material)
 
 	# Apply to mesh if not currently glowing
-	if not _is_glowing:
+	if not _is_glowing and mesh_instance.mesh and mesh_instance.mesh.get_surface_count() > 0:
 		mesh_instance.set_surface_override_material(0, _original_material)
 
 func set_ball_color(color: Color) -> void:

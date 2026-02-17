@@ -2,84 +2,58 @@
 	"map_info": {
 		"name": "Mathematics and Art: A Cultural History",
 		"lookup_name": "MathArt_Cultural_History",
-		"description": "From construction to abstraction - explore the deep resonance between mathematics and visual art through hands-on assembly puzzles and geometric compositions.",
+		"description": "Gallery room — open center with height-2 pedestals around edges. An exhibition space for mathematical art.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 11,
-			"depth": 11,
-			"max_height": 3
+			"width": 9,
+			"depth": 9,
+			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "intermediate",
 			"category": "art_mathematics",
-			"estimated_time": "15-20 minutes",
+			"estimated_time": "8-12 minutes",
 			"learning_objectives": [
-				"Spatial reasoning through construction",
-				"Geometric abstraction principles",
-				"Mathematical structure in visual art",
-				"Form as arrangement of primitives"
-			],
-			"references": [
-				"Lynn Gamwell - Mathematics and Art: A Cultural History",
-				"Charles Biederman - Art as the Evolution of Visual Knowledge",
-				"Piet Mondrian - Neo-Plasticism",
-				"Josef Albers - Interaction of Color"
+				"Mathematical art history",
+				"Geometric abstraction",
+				"Form and structure in art"
 			]
 		}
 	},
 	"layers": {
 		"structure": [
-			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "1", "2", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "2", "1", "1", "1", "1", "1", "2", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "2", "1", "1", "1", "1", "1", "2", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "1", "0", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "s", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"artifacts": [
-			" ",
-			" ",
-			"3:2:shelf_assembly_puzzle",
-			" ",
-			" ",
-			"2:5:biederman_relief:90",
-			" ",
-			"8:7:mondrian_relief:270",
-			" ",
-			"5:9:albers_relief",
-			" "
+			["s", " ", " ", " ", " ", " ", " ", " ", "an"],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "sp", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t:lab:0:0:0.6", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "penrose_tiling_3d", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "penrose_tilings", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -88,7 +62,8 @@
 			"name": "Continue",
 			"description": "Proceed to next experience",
 			"properties": {
-				"action": "next_in_sequence"
+				"destination": "next",
+				"visual_effect": "portal_glow"
 			}
 		},
 		"s": {

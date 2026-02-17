@@ -673,7 +673,7 @@ func _create_label(control_id: String) -> Node3D:
 	label.font_size = 32
 	label.pixel_size = 0.0008
 	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	label.font_color = Color(0.12, 0.12, 0.14, 1)
+	label.modulate = Color(0.12, 0.12, 0.14, 1)
 	label.outline_size = 0
 	label_container.add_child(label)
 
@@ -703,7 +703,7 @@ func _create_group(control_id: String) -> Node3D:
 	label.text = control_id.to_upper()
 	label.font_size = 24
 	label.pixel_size = 0.0006
-	label.font_color = Color(0.40, 0.40, 0.44, 1)
+	label.modulate = Color(0.40, 0.40, 0.44, 1)
 	label.outline_size = 0
 	label.position.y = 0.09
 	group.add_child(label)
