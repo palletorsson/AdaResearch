@@ -109,6 +109,15 @@ func _ready() -> void:
 
 func _deferred_start() -> void:
 	_take_snapshot()
+
+	# Disconnect LabGridSystem's catalog setup — camera tour doesn't need the
+	# DesktopArtifactCatalog, and its synchronous load() blocks every transition.
+	if lab_grid_system and lab_grid_system.map_generation_complete.is_connected(
+			lab_grid_system._on_lab_map_ready_for_catalog):
+		lab_grid_system.map_generation_complete.disconnect(
+			lab_grid_system._on_lab_map_ready_for_catalog)
+		print("CameraTourManager: Disconnected catalog setup (not needed for tour)")
+
 	_initialize_tour()
 
 func _initialize_tour() -> void:
@@ -168,10 +177,20 @@ func _wait_for_initial_map() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
+	# Stop audio that auto-started during generation — start after fade-in
+	var audio_comp = lab_grid_system.get_node_or_null("GridAudioComponent")
+	if audio_comp and audio_comp.has_method("stop_ambient"):
+		audio_comp.stop_ambient()
+
 	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
 	await _fade_from_black(fade_duration)
+
+	# NOW start audio — screen is visible
+	if audio_comp and audio_comp.has_method("start_ambient"):
+		audio_comp.start_ambient()
+
 	is_transitioning = false
 	_start_traversal()
 
@@ -272,8 +291,14 @@ func _load_map(map_name: String) -> void:
 
 	print("CameraTourManager: Transitioning to map '%s' via reload_map" % map_name)
 
+	var audio_comp = lab_grid_system.get_node_or_null("GridAudioComponent")
+
 	# Fade to black
 	await _fade_to_black(fade_duration)
+
+	# Stop audio from previous map before nuking
+	if audio_comp and audio_comp.has_method("stop_ambient"):
+		audio_comp.stop_ambient()
 
 	# Nuke all non-essential content from previous map
 	_nuke_map_content()
@@ -302,10 +327,20 @@ func _load_map(map_name: String) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
+	# Stop audio that GridSystem auto-started during generation —
+	# we only want it playing after the screen is visible
+	if audio_comp and audio_comp.has_method("stop_ambient"):
+		audio_comp.stop_ambient()
+
 	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
 	await _fade_from_black(fade_duration)
+
+	# NOW start audio — screen is visible
+	if audio_comp and audio_comp.has_method("start_ambient"):
+		audio_comp.start_ambient()
+
 	is_transitioning = false
 	_start_traversal()
 
