@@ -255,6 +255,7 @@
 	  { "after": "transformation", "lab_file": "map_data_post_transformation.json",   "added": ["tc:2:y"],                                "note": "Transport cube unlocks vertical access to color." },
 	  { "after": "color",          "lab_file": "map_data_post_color.json",            "added": ["array_tutorial", "forces", "wavefunctions"], "note": "New space opens." },
 	  { "after": "wavefunctions",  "lab_file": "map_data_post_wavefunctions.json",    "added": ["noise", "randomness"],                    "note": "New space opens." },
+	  { "after": "forces",         "lab_file": "map_data_post_forces.json",           "added": [],                                          "note": "Forces artifacts displayed. No new areas." },
 	  { "after": "noise",          "lab_file": "map_data_post_noise.json",            "added": ["cellularautomata", "fractals", "lsystems"], "note": "New room opens." },
 	  { "after": "fractals",       "lab_file": "map_data_post_fractals.json",         "added": ["proceduralgeneration", "softbodies"] },
 	  { "after": "softbodies",     "lab_file": "map_data_post_softbodies.json",       "added": ["swarmintelligence", "morphogenesis"] },
@@ -264,9 +265,9 @@
 	  { "after": "qfeplaboratory", "lab_file": "map_data_post_qfeplaboratory.json",  "added": ["speculativecomputation", "criticalalgorithms"] }
 	],
 	"known_issues": [
-	  "cellularautomata post-map removes lsystems teleporter (copy error, reappears in post_fractals)",
       "Branch sequences have post-map files but aren't in the main progression chain yet"
-	]
+	],
+	"rebuild_log": "2026-02-17: Rebuilt entire chain with accumulative approach. Each post-map is now a strict superset of the previous. Fixed m:t: utility bugs, dimension mismatches (morphogenesis was 13 cols, now 16 to match softbodies), and teleporter continuity. Forces added to chain."
   },
 
   "visualization": {

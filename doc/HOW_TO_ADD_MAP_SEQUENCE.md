@@ -134,26 +134,51 @@ In the `utilities` layer, add:
 The teleporter format is: `t:sequence_name:rotation:height:scale`
 - Just `t:your_sequence_name` uses defaults (rotation=0, height=1.0, scale=0.5)
 
-## Step 5: Create Post-Sequence Lab Variant (Optional)
+## Step 5: Create Post-Sequence Lab Variant (Required for spine sequences)
 
-Create a Lab variant that appears after completing your sequence:
+The Lab is one living space that grows. Each `map_data_post_*.json` is a snapshot of the Lab after completing a sequence. **Every post-map must be a strict superset of the previous one in the chain** — you can add structure, teleporters, and artifacts, but never remove them.
 
-**File:** `commons/maps/Lab/map_data_post_your_sequence.json`
+### The Chain Rule
 
-```json
-{
-	"map_info": {
-		"name": "Lab - Post Your Sequence",
-		"description": "Lab after completing your sequence",
-		"metadata": {
-			"post_sequence": "your_sequence_name",
-			"narrative": "Describe what changed after completing this sequence"
-		}
-	},
-	"completed_sequences": ["your_sequence_name"],
-	// ... rest of lab structure ...
-}
+The Lab progression chain is defined in `curriculum_spine.json` → `lab_evolution.actual_progression`. Each entry's map must contain everything from the previous entry's map, plus new content.
+
 ```
+map_data.json → post_primitives → post_transformation → post_color → 
+post_wavefunctions → post_forces → post_noise → post_cellularautomata → 
+post_fractals → post_softbodies → post_morphogenesis → post_machinelearning → 
+post_foundationscrisis → post_qfeplaboratory
+```
+
+### How to add your post-map
+
+1. **Find your position in the chain** — check `curriculum_spine.json` `lab_evolution`
+2. **Copy the previous stage's post-map** as your starting point
+3. **Add your new content** (teleporters, artifacts, opened passages)
+4. **Leave void space** (`0` cells) where future stages will expand
+5. **Run the audit** to verify continuity:
+
+```bash
+python scripts/audit_lab_chain.py
+```
+
+All transitions should show either `OK (superset)` or only `STRUCTURE CHANGED` (opening passages). Never `LOST`.
+
+### If things get out of sync
+
+The rebuild script reconstructs the entire chain from the original maps:
+
+```bash
+python scripts/rebuild_lab_chain.py
+```
+
+This reads each map's unique additions and accumulates them forward, guaranteeing monotonic growth. It also fixes common issues like `m:t:destination:0.1` (should be `m:0.1`).
+
+### Key rules
+
+- **Teleporters**: `t:destination` or `t:destination:rotation:height:scale`. Each destination should appear at exactly one position per stage (it can move between stages).
+- **Structure heights**: Changing a wall (`6`) to floor (`1`) is how you "open" a passage — this is an intentional change, not a loss.
+- **Dimensions grow or stay**: Grid width/height can increase, never decrease.
+- **Preserve everything**: All artifacts, utilities, and interactables from earlier stages must persist.
 
 ## Common Issues & Solutions
 
@@ -209,8 +234,10 @@ When adding a new sequence, you should modify these files:
 - [ ] `commons/maps/sequences/your_sequence_name.json` - Sequence definition
 - [ ] `commons/grid/GridSystem.gd` - Add to known_sequences (~line 179)
 - [ ] `commons/scenes/LabGridSystem.gd` - Add to known_sequences (~line 406)
-- [ ] `commons/maps/Lab/map_data_*.json` - Add teleporter (optional)
-- [ ] `commons/maps/Lab/map_data_post_your_sequence.json` - Post-sequence variant (optional)
+- [ ] `commons/maps/Lab/map_data_post_*.json` - Add teleporter to the right stage's post-map
+- [ ] `commons/maps/Lab/map_data_post_your_sequence.json` - Post-sequence Lab variant (copy previous stage, add new content)
+- [ ] `commons/maps/curriculum_spine.json` - Add to `lab_evolution.actual_progression` if spine sequence
+- [ ] Run `python scripts/audit_lab_chain.py` - Verify zero LOST issues in the chain
 
 ## Additional Resources
 

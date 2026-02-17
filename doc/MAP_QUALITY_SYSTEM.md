@@ -71,10 +71,10 @@ rotation:270 → faces East (increasing col)
 | Utility | Format | Notes |
 |---------|--------|-------|
 | `s` | `s` or `s:x:y:z` | Spawn point |
-| `t` | `t` or `t:destination` | Teleporter |
+| `t` | `t:destination` or `t:dest:rot:h:scale` | Teleporter — **structure must be `0` at this position** |
 | `wp` | `wp:rotation` | Walkable ramp |
 | `tc` | `tc:distance:direction` | Transport cube (vertical) |
-| `m` | `m` or `m:delay` | Move player |
+| `m` | `m` or `m:delay` | Move player — **exactly one per map**, near the map's own-name teleporter, **structure must be `1`** |
 | `an` | `an` or `an:rotation` | Annotation board |
 | `el` | `el:energy:hide` | Extra light |
 | `3t` | `3t:text` | 3D text display |
@@ -98,8 +98,10 @@ Maps diversify as players progress through the curriculum. Temperature (= λ in 
 1. **2×2 Spawn Safety** — Cells [0,0], [0,1], [1,0], [1,1] must all be height 1. OR the map uses `s:` or `m:` to relocate spawn to a safe 2×2 area.
 2. **No `l` (lift)** — Use `tc` for vertical movement.
 3. **Teleporter required** — Every map needs at least one `t` utility.
-4. **Artifacts must exist** — Every artifact in interactables must be in the registry.
-5. **No artifacts on void** — Don't place artifacts on height-0 cells.
+4. **Teleporters on void** — Structure must be `0` at every teleporter position.
+5. **One `m:` per map** — Exactly one move-player utility, placed near the map's own-name teleporter on structure `1`.
+6. **Artifacts must exist** — Every artifact in interactables must be in the registry.
+7. **No artifacts on void** — Don't place artifacts on height-0 cells.
 
 ## The Validator
 
@@ -130,6 +132,34 @@ The validator checks:
 
 Output: pass/fail checks, grammar description, directionality warnings, grade (A/B/C/F).
 
+## Lab Progression Chain
+
+The Lab is a hub that grows as the player completes sequences. Each `Lab/map_data_post_*.json` must be a strict superset of the previous one — structure, utilities, and interactables only accumulate, never disappear.
+
+### Audit the chain
+```bash
+python scripts/audit_lab_chain.py
+```
+Reports continuity issues between each consecutive pair. Valid results:
+- `OK (superset)` — perfect
+- `STRUCTURE CHANGED` — intentional (opening passages, adjusting heights)
+- `LOST` — **broken** — content disappeared and needs fixing
+
+### Rebuild the chain
+```bash
+python scripts/rebuild_lab_chain.py
+```
+Reconstructs all post-maps from `map_data.json` forward by accumulating each stage's unique additions. Backs up originals first. Fixes `m:t:` bugs and teleporter duplicates.
+
+### Chain order (defined in `curriculum_spine.json` → `lab_evolution`)
+```
+map_data.json → primitives → transformation → color → wavefunctions →
+forces → noise → cellularautomata → fractals → softbodies →
+morphogenesis → machinelearning → foundationscrisis → qfeplaboratory
+```
+
+See `doc/HOW_TO_ADD_MAP_SEQUENCE.md` Step 5 for how to add new stages.
+
 ## Skills
 
 | Skill | Role | Phase |
@@ -149,6 +179,8 @@ Output: pass/fail checks, grammar description, directionality warnings, grade (A
 | `commons/artifacts/registry/*.json` | Artifact registries (10 files) |
 | `commons/artifacts/grid_artifacts.json` | Legacy artifact registry (~736 entries) |
 | `scripts/validate_map.py` | Map validator script |
+| `scripts/audit_lab_chain.py` | Lab progression continuity checker |
+| `scripts/rebuild_lab_chain.py` | Lab chain rebuilder (accumulative) |
 | `skills/ada-spatial-designer/references/artifact-directionality.md` | Full directionality reference |
 | `skills/ada-spatial-designer/references/formulas-catalog.md` | 53 spatial formulas with JSON grids |
 | `skills/ada-spatial-designer/references/design-tiers.md` | Daily drivers, tier system |

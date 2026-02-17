@@ -1,5 +1,7 @@
 # Post-Lab Maps Report
 
+> **⚠️ SUPERSEDED**: This report is from 2026-02-09. The Lab chain was rebuilt on 2026-02-17 — all dimension mismatches and continuity breaks are fixed. Run `python scripts/audit_lab_chain.py` for current state.
+
 **Date:** 2026-02-09  
 **Total Files:** 34
 

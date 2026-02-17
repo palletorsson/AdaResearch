@@ -1,5 +1,7 @@
 # Lab Progression Consistency Report
 
+> **⚠️ SUPERSEDED**: This report is from 2026-02-09. The Lab chain was rebuilt on 2026-02-17 using `scripts/rebuild_lab_chain.py`. All continuity breaks are fixed. Run `python scripts/audit_lab_chain.py` for current state.
+
 **Date:** 2026-02-09  
 **Analyzed:** 34 post_* lab files
 
