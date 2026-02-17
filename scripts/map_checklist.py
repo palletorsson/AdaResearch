@@ -305,12 +305,20 @@ def run_checklist(path):
                     unreachable_arts.append(f'{art}({c},{r})')
 
     # Check teleporter/sp reachable
+    # Teleporter on void (exit pattern) counts as reachable if any adjacent cell is visited
     unreachable_exits = []
     for r in range(rows):
         for c in range(cols):
             u = ucell(r, c)
             if u.startswith('t:') or u.startswith('t3:') or u == 't' or u == 'sp':
                 if (r, c) not in visited:
+                    # If on void, check if any adjacent cell is reachable (exit ring pattern)
+                    if h(r, c) == 0:
+                        ring_reached = any((r+dr, c+dc) in visited 
+                                          for dr in [-1,0,1] for dc in [-1,0,1] 
+                                          if not (dr==0 and dc==0))
+                        if ring_reached:
+                            continue  # reachable via ring
                     unreachable_exits.append(f'{u}({c},{r})')
 
     if not unreachable_arts and not unreachable_exits:
@@ -347,6 +355,48 @@ def run_checklist(path):
         passed += 1
     else:
         results.append(('FAIL', 'NO_VOID_ART', f'{len(void_arts)} on void: {", ".join(void_arts[:5])}'))
+
+    # 12. EXIT PATTERN: 3x3 floor with void center for teleporter
+    # Find teleporter position, check surrounding 3x3
+    tele_pos = None
+    for r in range(rows):
+        for c in range(cols):
+            u = ucell(r, c)
+            if u.startswith('t:') or u.startswith('t3:') or u == 't':
+                tele_pos = (r, c)
+                break
+        if tele_pos:
+            break
+    
+    if tele_pos:
+        tr, tc_ = tele_pos
+        exit_ok = True
+        issues = []
+        # Center must be void (h=0)
+        if h(tr, tc_) != 0:
+            exit_ok = False
+            issues.append(f'teleporter at ({tc_},{tr}) h={h(tr,tc_)}, need h=0')
+        # Surrounding 8 cells must be h=1
+        for dr in [-1, 0, 1]:
+            for dc in [-1, 0, 1]:
+                if dr == 0 and dc == 0:
+                    continue
+                nr, nc = tr + dr, tc_ + dc
+                if 0 <= nr < rows and 0 <= nc < cols:
+                    ch = h(nr, nc)
+                    if ch != 1:
+                        exit_ok = False
+                        issues.append(f'exit ring ({nc},{nr}) h={ch}, need h=1')
+                else:
+                    exit_ok = False
+                    issues.append(f'exit ring ({tc_+dc},{tr+dr}) out of bounds')
+        if exit_ok:
+            results.append(('PASS', 'EXIT_PATTERN', f'3x3 exit at ({tc_},{tr}) correct'))
+            passed += 1
+        else:
+            results.append(('FAIL', 'EXIT_PATTERN', '; '.join(issues[:3])))
+    else:
+        results.append(('WARN', 'EXIT_PATTERN', 'No teleporter found to check'))
 
     return name, results, passed
 
