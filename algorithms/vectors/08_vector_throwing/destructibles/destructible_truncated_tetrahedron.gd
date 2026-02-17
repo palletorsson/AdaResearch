@@ -182,6 +182,8 @@ func _destroy_part(part: RigidBody3D, mesh_instance: MeshInstance3D, impact_velo
 
 	# Animate fade out
 	var tween = create_tween()
+	if not tween:
+		return
 	tween.set_parallel(true)
 
 	if mesh_instance.material_override:
