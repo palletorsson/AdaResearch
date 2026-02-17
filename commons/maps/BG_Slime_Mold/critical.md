@@ -1,0 +1,3 @@
+# BG_Slime_Mold - Critical
+
+Describe what this map normalizes, what it excludes, and what alternative computation it can open.

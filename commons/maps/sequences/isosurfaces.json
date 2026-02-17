@@ -4,16 +4,16 @@
 			"name": "Isosurfaces: Implicit to Explicit",
 			"truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
 			"qfep_term": "λ",
-			"qfep_connection": "Marching algorithms find the edge—the threshold between states. This IS the edge of chaos made geometric: where density crosses zero, form emerges.",
+			"qfep_connection": "Marching algorithms find the edge — the threshold between states. This IS the edge of chaos made geometric: where density crosses zero, form emerges.",
 			"formula": "f(x,y,z) = threshold → mesh",
 
-			"description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries, Marching Squares does 2D contours. Metaballs merge implicit surfaces. The implicit becomes explicit.",
+			"description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries, Marching Squares does 2D contours. Metaballs merge implicit surfaces into organic forms. The implicit becomes explicit.",
 			"layer": "systems",
-			"prerequisites": ["noise", "vectors"],
-			"unlocks": ["proceduralgeneration_advanced", "physicssimulation"],
+			"prerequisites": ["noise"],
+			"unlocks": [],
 
-			"difficulty": "intermediate",
-			"estimated_time": "30-40 minutes",
+			"difficulty": "intermediate-advanced",
+			"estimated_time": "25-35 minutes",
 
 			"learning_objectives": [
 				"Implicit surfaces: functions that define inside/outside",
@@ -23,11 +23,43 @@
 				"Terrain, caves, sculptures from noise fields"
 			],
 
-		"maps": [
-			"ProceduralGeneration_Marching_Cubes_Algorithm",
-			"ProceduralGeneration_MarchingCave",
-			"ProceduralGeneration_MarchingGallery"
-		],
+			"content": [
+				"ProceduralGeneration_Marching_Cubes_Algorithm: The core algorithm — sphere/torus extraction with mc: prefix artifacts",
+				"ProceduralGeneration_MarchingCave: Full walkable procedural cave system — the immersive showcase",
+				"ProceduralGeneration_MarchingGallery: Sculpture gallery — DNA, atom, flask, human, portal to BooleanPatterns",
+				"ISO_Metaballs: Organic blobby forms — implicit surfaces that merge and flow",
+				"ISO_Implicit_Modeling: Implicit surface modeling — CSG-like boolean operations on distance fields"
+			],
+
+			"maps": [
+				"ProceduralGeneration_Marching_Cubes_Algorithm",
+				"ProceduralGeneration_MarchingCave",
+				"ProceduralGeneration_MarchingGallery",
+				"ISO_Metaballs",
+				"ISO_Implicit_Modeling"
+			],
+
+			"algorithm_sources": {
+				"ISO_Metaballs": {
+					"algorithms": ["proceduralgeneration/isosurfaces/metaballs", "proceduralgeneration/hybrid_complex/metaballgenerator"],
+					"artifacts": ["metaballs", "metaball_generator"],
+					"compute": "MEDIUM — 15KB + 34KB, real-time distance field evaluation"
+				},
+				"ISO_Implicit_Modeling": {
+					"algorithms": ["proceduralgeneration/isosurfaces/implicitsurfacemodeling"],
+					"artifacts": ["implicit_surface_modeling"],
+					"compute": "MEDIUM — 17KB, CSG operations on fields"
+				}
+			},
+
+			"deferred_maps": [
+				"ProceduralGenerationMarchingcubesFlatLandscape",
+				"ProceduralGenerationMarchingCubesInsideCave",
+				"ProceduralGenerationMarchingCubesSculpture",
+				"ProceduralGenerationMarchingcubesTorusSculpture",
+				"ProceduralGenerationMarchingCubesVovelNoise",
+				"ProceduralGenerationMarchingcubesPortalLandscape"
+			],
 
 			"algorithm_paths": {
 				"marching_cubes": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/",
@@ -36,13 +68,17 @@
 				"implicit": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/"
 			},
 
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+
 			"return_to": "lab",
-            "lab_map": "Lab/map_data_post_isosurfaces",
-			"completion_rewards": [
-				"isosurface_badge",
-				"marching_master_badge",
-				"implicit_explicit_badge"
-			]
+
+			"references": {
+				"key_concepts": ["Marching Cubes (Lorensen & Cline, 1987)", "Metaballs (Blinn, 1982)", "Signed Distance Fields"],
+				"related_sequences": ["proceduralgeneration", "noise", "spatial_partitioning"]
+			}
 		}
 	}
 }

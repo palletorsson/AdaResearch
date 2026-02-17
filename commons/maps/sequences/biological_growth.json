@@ -1,0 +1,74 @@
+{
+	"sequences": {
+		"biological_growth": {
+			"name": "Biological Growth: Life Finds a Way",
+			"truth": "Growth doesn't follow blueprints. It follows rules that respond to environment — and what emerges surprises even the rules.",
+			"qfep_term": "φΔE(S,t)",
+			"qfep_connection": "Biological growth IS the φ term — the rate of entropy change over time. Slime mold finds shortest paths. Mushrooms colonize. Cracks propagate along stress. Each system increases or decreases local entropy through growth. The queer signature: growth that doesn't optimize, just persists.",
+
+			"description": "Algorithms inspired by biological growth processes. Slime mold solves mazes, mushroom mycelium networks, crack propagation follows stress fields, and tree generation builds branching forms. Nature's algorithms — no central planner, no global view, just local rules and time.",
+			"layer": "systems",
+			"prerequisites": ["noise", "cellularautomata"],
+			"unlocks": [],
+
+			"difficulty": "intermediate-advanced",
+			"estimated_time": "20-25 minutes",
+
+			"learning_objectives": [
+				"Physarum transport networks — slime mold as optimization",
+				"Mycelium growth — colonization without coordination",
+				"Crack propagation — stress creates paths of least resistance",
+				"L-system tree generation — grammar-driven branching"
+			],
+
+			"content": [
+				"BG_Slime_Mold: Physarum polycephalum simulation — the organism that solves mazes and redesigns Tokyo's rail network",
+				"BG_Mushroom_Growth: Mycelium network expansion — colonization, resource transport, fairy rings",
+				"BG_Crack_Propagation: Stress-driven fracture patterns — cracks as cellular automata following material grain",
+				"BG_Tree_Forms: Procedural tree generation — parametric branching, wind response, seasonal variation"
+			],
+
+			"maps": [
+				"BG_Slime_Mold",
+				"BG_Mushroom_Growth",
+				"BG_Crack_Propagation",
+				"BG_Tree_Forms"
+			],
+
+			"algorithm_sources": {
+				"BG_Slime_Mold": {
+					"algorithms": ["proceduralgeneration/growth_systems/slimemold"],
+					"artifacts": ["slimemold"],
+					"compute": "MEDIUM — 23KB, network simulation with _process"
+				},
+				"BG_Mushroom_Growth": {
+					"algorithms": ["proceduralgeneration/growth_systems/mushrooms"],
+					"artifacts": ["mushrooms"],
+					"compute": "MEDIUM — 29KB, growth simulation"
+				},
+				"BG_Crack_Propagation": {
+					"algorithms": ["proceduralgeneration/growth_systems/crackpropagation_ca"],
+					"artifacts": ["crackpropagation_ca"],
+					"compute": "LIGHT — 13KB, CA-based"
+				},
+				"BG_Tree_Forms": {
+					"algorithms": ["proceduralgeneration/growth_systems/treegen"],
+					"artifacts": ["tree_gen"],
+					"compute": "LIGHT — 15KB, one-shot generation"
+				}
+			},
+
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+
+			"return_to": "lab",
+
+			"references": {
+				"key_figures": ["Physarum polycephalum", "Atsushi Tero (Tokyo rail network)", "D'Arcy Thompson"],
+				"related_sequences": ["swarmintelligence", "proceduralgeneration", "cellularautomata"]
+			}
+		}
+	}
+}
