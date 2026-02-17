@@ -14,173 +14,82 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore the oscillation wing",
-				"Access forces and color sequences",
-				"Wavefunction artifacts displayed"
-			]
+			"learning_objectives": ["Explore the oscillation wing","Access forces and color sequences","Wavefunction artifacts displayed"]
 		}
 	},
 	"progression_delta": {
 		"base": "map_data_post_transformation",
 		"spine_order": 3,
 		"description": "After wavefunctions: south wing opens (rows 7-13), wavefunction artifacts added, new teleporters accessible",
-		"structure_changes": [
-			{
-				"row": 6,
-				"col": 4,
-				"from": "3",
-				"to": "1",
-				"note": "passage to south wing opens"
-			}
-		],
+		"structure_changes": [{"row": 6,"col": 4,"from": "3","to": "1","note": "passage to south wing opens"}],
 		"structure_additions": {
-			"rows_added": [
-				7,
-				8,
-				9,
-				10,
-				11,
-				12,
-				13
-			],
+			"rows_added": [7,8,9,10,11,12,13],
 			"note": "South wing with oscillation and color areas"
 		},
-		"added_utilities": [
-			{
-				"row": 7,
-				"col": 1,
-				"utility": "t:array_tutorial",
-				"note": "array tutorial access"
-			},
-			{
-				"row": 12,
-				"col": 6,
-				"utility": "t:wavefunctions",
-				"note": "wavefunctions portal"
-			}
-		],
-		"added_interactables": [
-			{
-				"row": 3,
-				"col": 5,
-				"artifact": "infokiosk:-90",
-				"note": "info display"
-			},
-			{
-				"row": 4,
-				"col": 5,
-				"artifact": "homagetothesquare:0:1:0.2",
-				"note": "color theory piece"
-			},
-			{
-				"row": 8,
-				"col": 1,
-				"artifact": "nail_color_controller:90",
-				"note": "color control"
-			},
-			{
-				"row": 9,
-				"col": 1,
-				"artifact": "hand_model:0:-1",
-				"note": "hand visualization"
-			},
-			{
-				"row": 9,
-				"col": 4,
-				"artifact": "spectral_sine_wave:0:0:0.4",
-				"note": "wavefunction showcase"
-			},
-			{
-				"row": 9,
-				"col": 5,
-				"artifact": "RackMoogBass:180",
-				"note": "audio synthesis"
-			},
-			{
-				"row": 10,
-				"col": 1,
-				"artifact": "hand_color_controller:90",
-				"note": "hand color control"
-			}
-		]
+		"added_utilities": [{"row": 7,"col": 1,"utility": "t:array_tutorial","note": "array tutorial access"},{"row": 12,"col": 6,"utility": "t:wavefunctions","note": "wavefunctions portal"}],
+		"added_interactables": [{"row": 3,"col": 5,"artifact": "infokiosk:-90","note": "info display"},{"row": 4,"col": 5,"artifact": "homagetothesquare:0:1:0.2","note": "color theory piece"},{"row": 8,"col": 1,"artifact": "nail_color_controller:90","note": "color control"},{"row": 9,"col": 1,"artifact": "hand_model:0:-1","note": "hand visualization"},{"row": 9,"col": 4,"artifact": "spectral_sine_wave:0:0:0.4","note": "wavefunction showcase"},{"row": 9,"col": 5,"artifact": "RackMoogBass:180","note": "audio synthesis"},{"row": 10,"col": 1,"artifact": "hand_color_controller:90","note": "hand color control"}]
 	},
 	"layers": {
 		"structure": [
-			["6", "1", "6", "6", "6", "6", "6", "6", "6", "6", "0", "0", "0"],
-			["6", "1", "1", "1", "1", "1", "2", "2", "0", "6", "0", "0", "0"],
-			["6", "1", "2", "1", "1", "1", "2", "2", "2", "6", "0", "0", "0"],
-			["6", "1", "2", "1", "1", "1", "6", "3", "3", "6", "0", "0", "0"],
-			["6", "1", "0", "1", "1", "1", "3", "3", "3", "6", "0", "0", "0"],
-			["6", "1", "1", "1", "1", "1", "3", "4", "0", "6", "0", "0", "0"],
-			["6", "2", "6", "3", "1", "3", "6", "6", "6", "6", "6", "6", "6"],
-			["6", "0", "1", "1", "1", "1", "2", "6", "0", "1", "1", "0", "6"],
-			["6", "2", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
-			["6", "2", "1", "1", "2", "2", "1", "1", "1", "2", "6", "1", "6"],
-			["6", "2", "1", "1", "3", "3", "1", "6", "1", "2", "2", "1", "6"],
-			["6", "1", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
-			["6", "0", "6", "6", "0", "6", "1", "6", "1", "1", "1", "1", "6"],
-			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]
+			["6","1","6","6","6","6","6","6","6","6","0","0","0"],
+			["6","1","1","1","1","1","2","2","0","6","0","0","0"],
+			["6","1","2","1","1","1","2","2","2","6","0","0","0"],
+			["6","1","2","1","1","1","6","3","3","6","0","0","0"],
+			["6","1","0","1","1","1","3","3","3","6","0","0","0"],
+			["6","1","1","1","1","0","3","4","0","6","0","0","0"],
+			["6","2","6","3","1","3","6","6","6","6","6","6","6"],
+			["6","0","1","1","1","1","2","6","0","1","1","0","6"],
+			["6","2","1","1","1","1","1","6","1","1","1","1","6"],
+			["6","2","1","1","2","2","1","1","1","2","6","1","6"],
+			["6","2","1","1","3","3","1","6","1","2","2","1","6"],
+			["6","1","1","1","1","1","1","6","1","1","1","1","6"],
+			["6","0","6","6","0","6","1","6","1","1","1","1","6"],
+			["6","6","6","6","6","6","6","6","6","6","6","6","6"]
 		],
 		"utilities": [
-			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "wp:90", " ", " ", "t:transformation", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "sub:Lab_One_Info", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "t:primitives:0:0:0.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "tc:2:y", " ", " ", "t:color", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "t:forces", " ", " ", " ", " ", " ", " ", "t:randomness", " ", " ", "t:noise", " "],
-			[" ", " ", " ", " ", " ", "m:0.6", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "t:array_tutorial", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+			["s"," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," ","wp:90"," "," ","t:transformation"," "," "," "," "],
+			[" "," "," "," ","sub:Lab_One_Info"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," ","t:primitives:0:0:0.6"," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," ","tc:2:y"," "," ","t:color"," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","t:forces"," "," "," "," "," "," ","t:randomness"," "," ","t:noise"," "],
+			[" "," "," "," "," ","m:0.6"," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","t:array_tutorial"," "," ","t:wavefunctions"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " "],
-			[" ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "cube_lines", "light_sphere", " ", "homagetothesquare:90:1:0.2", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
-			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
-			[" ", "smallcontainment:180:0:4", " ", " ", "world_map_tablet:180:2.7:2", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "nail_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "hand_model:0:-1", " ", " ", "spectral_sine_wave:0:0:0.4", "RackMoogBass:180", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "hand_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," ","rotating_cube:0:1:0.2"," "," "," "," "],
+			[" "," ","grid_lines:0:-0.4:0.19"," "," "," ","lshape:-90:-1.0"," "," "," "," "," "," "],
+			[" "," ","pyramid_edit:45:0:0.4"," "," ","infokiosk:-90"," "," "," "," "," "," "," "],
+			[" "," ","cube_lines","light_sphere"," ","homagetothesquare:90:1:0.2"," "," ","rainbow:90:0:0.05"," "," "," "," "],
+			[" "," ","cube_scene:0:2:0.6"," "," "," "," "," ","rainbow:90:0:0.05"," "," "," "," "],
+			[" ","smallcontainment:180:0:4"," "," ","world_map_tablet:180:2.7:2"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","nail_color_controller:90"," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","hand_model:0:-1"," "," ","spectral_sine_wave:0:0:0.4","RackMoogBass:180"," "," "," "," "," "," "," "],
+			[" ","hand_color_controller:90"," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json","res://commons/artifacts/grid_artifacts.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"lighting": {
-		"ambient_color": [
-			0.2,
-			0.2,
-			0.3
-		],
+		"ambient_color": [0.2,0.2,0.3],
 		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
-			"direction": [
-				-0.3,
-				-0.8,
-				-0.2
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
+			"direction": [-0.3,-0.8,-0.2],
+			"color": [1.0,0.9,0.8],
 			"energy": 0.5
 		},
 		"lab_atmosphere": {
@@ -205,10 +114,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube",
-				"xyz_coordinates"
-			],
+			"initial_artifacts": ["rotating_cube","xyz_coordinates"],
 			"unlock_on_sequence_completion": true
 		}
 	}
