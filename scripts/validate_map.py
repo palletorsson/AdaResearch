@@ -47,19 +47,30 @@ def load_artifact_keys() -> set:
         for f in REGISTRY_DIR.glob("*.json"):
             try:
                 data = json.loads(f.read_text(encoding="utf-8"))
-                if isinstance(data, dict) and "artifacts" in data:
-                    for art in data["artifacts"]:
-                        if isinstance(art, dict) and "key_id" in art:
-                            keys.add(art["key_id"])
+                if isinstance(data, dict):
+                    artifacts = data.get("artifacts", {})
+                    if isinstance(artifacts, dict):
+                        # Format: {"artifacts": {"name": {...}}}
+                        keys.update(artifacts.keys())
+                    elif isinstance(artifacts, list):
+                        # Format: {"artifacts": [{"key_id": "name"}]}
+                        for art in artifacts:
+                            if isinstance(art, dict) and "key_id" in art:
+                                keys.add(art["key_id"])
             except Exception:
                 pass
 
-    # Legacy registry (grid_artifacts.json) — dict keyed by artifact name
+    # Legacy registry (grid_artifacts.json) — nested: {"artifacts": {name: {...}}}
     if LEGACY_REGISTRY.is_file():
         try:
             data = json.loads(LEGACY_REGISTRY.read_text(encoding="utf-8"))
             if isinstance(data, dict):
-                keys.update(data.keys())
+                # New format: {"artifacts": {"name": {...}}}
+                if "artifacts" in data and isinstance(data["artifacts"], dict):
+                    keys.update(data["artifacts"].keys())
+                else:
+                    # Flat format: {"name": {...}} (no wrapper)
+                    keys.update(data.keys())
         except Exception:
             pass
 
