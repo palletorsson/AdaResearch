@@ -20,6 +20,7 @@ class_name CameraTourManager
 @export var look_smoothing: float = 5.0		## Camera look-at interpolation speed
 @export var overview_height: float = 6.0	## Height for map overview waypoints
 @export var start_with_lab: bool = true		## Start tour from Lab hub first
+@export var start_sequence: String = ""		## Jump to this sequence (e.g. "color", "vectors"). Empty = start from beginning.
 
 # ---------------------------------------------------------------------------
 # References (set in _ready)
@@ -132,6 +133,26 @@ func _initialize_tour() -> void:
 	print("CameraTourManager: Loaded %d sequences for tour" % tour_data.size())
 	for td in tour_data:
 		print("  - %s: %d maps" % [td.display_name, td.maps.size()])
+
+	# If start_sequence is set, jump directly to that sequence
+	if start_sequence != "":
+		var found := false
+		for i in tour_data.size():
+			if tour_data[i].sequence_name == start_sequence:
+				spine_index = i
+				map_index = 0
+				current_map_name = tour_data[i].maps[0]
+				lab_grid_system.map_name = current_map_name
+				_update_sequence_display()
+				_update_map_display()
+				print("CameraTourManager: Jumping to sequence '%s' (index %d)" % [start_sequence, i])
+				_wait_for_initial_map()
+				found = true
+				break
+		if not found:
+			push_warning("CameraTourManager: Sequence '%s' not found, starting from Lab" % start_sequence)
+		else:
+			return
 
 	if start_with_lab:
 		spine_index = -1
