@@ -42,13 +42,17 @@
 				"Color_Pillar",
 				"Color_Paint",
 				"Color_Walls",
-				"Color_Flashlight",
+				"Color_Flashlight"
+			],
+
+			"deferred_maps": [
 				"Color_Context",
 				"Color_Grabbable",
 				"Color_Overlay",
 				"Color_Spectrum",
 				"Color_Sphere"
 			],
+			"deferred_reason": "Removed from active sequence to tighten progression. Color_Context is a 30-artifact showcase map — potential future standalone or advanced color sequence.",
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/color_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
