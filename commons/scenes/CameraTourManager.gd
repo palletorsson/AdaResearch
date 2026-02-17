@@ -219,9 +219,8 @@ func _wait_for_initial_map() -> void:
 	_precache_sequence(0)
 
 # ---------------------------------------------------------------------------
-# Tour data loading — follows lab_evolution.actual_progression order
-# This is the order the player actually experiences the game: each completed
-# sequence unlocks the next set of Lab teleporters.
+# Tour data loading — reads spine.sequences sorted by order field
+# This follows the curriculum spine's recommended progression through QFEP.
 # ---------------------------------------------------------------------------
 func _load_tour_data() -> void:
 	tour_data.clear()
@@ -235,24 +234,20 @@ func _load_tour_data() -> void:
 	var spine_json = JSON.parse_string(spine_file.get_as_text())
 	spine_file.close()
 
-	if spine_json == null or not spine_json.has("lab_evolution"):
-		push_error("CameraTourManager: Invalid curriculum_spine.json (missing lab_evolution)")
+	if spine_json == null or not spine_json.has("spine"):
+		push_error("CameraTourManager: Invalid curriculum_spine.json (missing 'spine')")
 		return
 
-	var progression: Array = spine_json["lab_evolution"]["actual_progression"]
+	# Read spine.sequences sorted by order field
+	var sequences: Array = spine_json["spine"]["sequences"]
+	sequences.sort_custom(func(a, b): return a.get("order", 999) < b.get("order", 999))
+
 	var added: Dictionary = {}
-
-	for entry in progression:
-		# The "after" field is the sequence just completed — add it first
-		var completed: String = entry.get("after", "")
-		if completed != "none" and completed != "" and not added.has(completed):
-			_try_add_sequence(completed, "", added)
-
-		# The "added" field lists sequences that unlock — add them in order
-		var unlocked: Array = entry.get("added", [])
-		for seq_name in unlocked:
-			if seq_name is String and not added.has(seq_name) and not ":" in seq_name:
-				_try_add_sequence(seq_name, "", added)
+	for spine_entry in sequences:
+		var seq_name: String = spine_entry.get("name", "")
+		var phase: String = spine_entry.get("phase", "")
+		if seq_name != "" and not added.has(seq_name):
+			_try_add_sequence(seq_name, phase, added)
 
 func _try_add_sequence(seq_name: String, phase: String, added: Dictionary) -> void:
 	var seq_data := _load_sequence_maps(seq_name)

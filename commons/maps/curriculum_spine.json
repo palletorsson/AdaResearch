@@ -106,11 +106,12 @@
 				"order": 12
 			},
 			{
-				"name": "morphogenesis",
+				"name": "softbodies",
 				"phase": "integration",
-				"qfep_role": "Turing patterns - order from chaos",
-				"lab_post": "Lab/map_data_post_morphogenesis",
-				"order": 13
+				"qfep_role": "Deformable matter, cloth, fluid + Turing morphogenesis",
+				"lab_post": "Lab/map_data_post_softbodies",
+				"order": 13,
+				"note": "Absorbed morphogenesis (2 maps). Turing's reaction-diffusion as soft matter finding form."
 			},
 			{
 				"name": "swarmintelligence",
@@ -120,51 +121,38 @@
 				"order": 14
 			},
 			{
-				"name": "softbodies",
-				"phase": "integration",
-				"qfep_role": "Deformable matter, cloth, fluid",
-				"lab_post": "Lab/map_data_post_softbodies",
-				"order": 15
-			},
-			{
 				"name": "machinelearning",
 				"phase": "integration",
 				"qfep_role": "Learning systems, neural networks",
 				"lab_post": "Lab/map_data_post_machinelearning",
-				"order": 16
+				"order": 15
 			},
 			{
 				"name": "foundationscrisis",
 				"phase": "synthesis",
 				"qfep_role": "Gödel, Russell - limits of formal systems",
 				"lab_post": "Lab/map_data_post_foundationscrisis",
-				"order": 17
+				"order": 16
 			},
 			{
 				"name": "qfeplaboratory",
 				"phase": "synthesis",
 				"qfep_role": "The complete QFEP formula embodied",
 				"lab_post": "Lab/map_data_post_qfeplaboratory",
-				"order": 18
+				"order": 17
 			},
 			{
-				"name": "speculativecomputation",
+				"name": "postfoundationscrisis",
 				"phase": "synthesis",
-				"qfep_role": "Queer futures, non-normative algorithms",
-				"lab_post": "Lab/map_data_post_speculativecomputation",
-				"order": 19
-			},
-			{
-				"name": "criticalalgorithms",
-				"phase": "synthesis",
-				"qfep_role": "Ethics of computation, algorithmic bias",
-				"lab_post": "Lab/map_data_post_criticalalgorithms",
-				"order": 20
+				"qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
+				"lab_post": "Lab/map_data_post_foundationscrisis",
+				"order": 18,
+				"note": "Collects real maps from deferred sequences (criticalalgorithms, speculativecomputation, advancedlaboratory)."
 			},
 			{
 				"name": "graphtheory",
 				"phase": "integration",
-				"order": 21,
+				"order": 19,
 				"description": "Graph structures and algorithms"
 			}
 		]
@@ -261,11 +249,9 @@
 				],
 				"note": "Recursive patterns and art history"
 			},
-			"criticalalgorithms": {
-				"unlocks": [
-					"advancedlaboratory"
-				],
-				"note": "Post-game content"
+			"postfoundationscrisis": {
+				"unlocks": [],
+				"note": "Collects real maps from deferred sequences. AdvancedLaboratory absorbed."
 			}
 		},
 		"branch_chains": {
@@ -397,23 +383,15 @@
 				"map": "Lab/map_data_post_softbodies",
 				"added": [
 					"swarmintelligence",
-					"morphogenesis"
+					"machinelearning"
 				],
-				"note": "Gate: opens emergence branch. Closes south corridors."
+				"note": "Gate: opens emergence branch + machinelearning. Morphogenesis absorbed into softbodies."
 			},
 			{
 				"stage": "post_swarmintelligence",
 				"map": "Lab/map_data_post_swarmintelligence",
 				"added": [],
 				"note": "Neutral - same as post_softbodies"
-			},
-			{
-				"stage": "post_morphogenesis",
-				"map": "Lab/map_data_post_morphogenesis",
-				"added": [
-					"machinelearning"
-				],
-				"note": "Gate: opens col 5 wall, reveals machinelearning nook"
 			},
 			{
 				"stage": "post_machinelearning",
@@ -435,8 +413,7 @@
 				"map": "Lab/map_data_post_foundationscrisis",
 				"added": [
 					"qfeplaboratory",
-					"speculativecomputation",
-					"criticalalgorithms"
+					"postfoundationscrisis"
 				],
 				"note": "Gate: opens northeast room and final teleporters"
 			},
@@ -447,16 +424,10 @@
 				"note": "Neutral - same as post_foundationscrisis"
 			},
 			{
-				"stage": "post_speculativecomputation",
-				"map": "Lab/map_data_post_speculativecomputation",
+				"stage": "post_postfoundationscrisis",
+				"map": "Lab/map_data_post_foundationscrisis",
 				"added": [],
-				"note": "Neutral - same as post_qfeplaboratory"
-			},
-			{
-				"stage": "post_criticalalgorithms",
-				"map": "Lab/map_data_post_criticalalgorithms",
-				"added": [],
-				"note": "Neutral - same as post_qfeplaboratory"
+				"note": "Neutral - collects bias visualization, rhizome network, molecular design"
 			}
 		],
 		"known_issues": [

@@ -104,7 +104,7 @@ func create_floor_segments() -> void:
 		label.text = "%s μ=%.2f" % [String(zone["label"]), coeff]
 		label.font_size = 14
 		label.pixel_size = 0.001
-		label.font_color = Color(0.12, 0.12, 0.14, 1.0)
+		label.modulate = Color(0.12, 0.12, 0.14, 1.0)
 		label.outline_size = 0
 		label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		label.position = plane.position + Vector3(0, 0.02, 0)

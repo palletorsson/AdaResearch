@@ -1,33 +1,27 @@
 {
-    "sequences": {
-        "resourcemanagement": {
-            "name": "Resource Management",
-            "description": "Explore computational efficiency and system optimization",
-            "difficulty": "intermediate",
-            "estimated_time": "25-30 minutes",
-            "learning_objectives": [
-                "Performance optimization",
-                "Hardware utilization",
-                "Algorithmic complexity analysis",
-                "Development workflow optimization"
-            ],
-            "maps": [
-                "ResourceManagement_Real_time_vs_Offline_Processing",
-                "ResourceManagement_Hardware_Considerations",
-                "ResourceManagement_Algorithmic_Complexity_Big_O",
-                "ResourceManagement_Data_Locality_Caching",
-                "ResourceManagement_Version_Control",
-                "ResourceManagement_Testing_and_Debugging"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_resourcemanagement",
-            "unlock_requirements": [
-                "speculativecomputation"
-            ],
-            "completion_rewards": [
-                "optimization_expert_badge",
-                "efficiency_master_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"resourcemanagement": {
+			"name": "Resource Management",
+			"status": "deferred",
+			"deferred_reason": "All 6 maps were env_one placeholders. No real content. Rebuild when content exists.",
+			"description": "Algorithmic complexity, hardware considerations, and development practices",
+			"difficulty": "intermediate",
+			"learning_objectives": [
+				"Big O complexity",
+				"Data locality and caching",
+				"Real-time vs offline processing",
+				"Version control",
+				"Testing and debugging"
+			],
+			"maps": [],
+			"deferred_maps": [
+				"ResourceManagement_Real_time_vs_Offline_Processing",
+				"ResourceManagement_Hardware_Considerations",
+				"ResourceManagement_Algorithmic_Complexity_Big_O",
+				"ResourceManagement_Data_Locality_Caching",
+				"ResourceManagement_Version_Control",
+				"ResourceManagement_Testing_and_Debugging"
+			]
+		}
+	}
 }

@@ -1,40 +1,75 @@
 {
 	"sequences": {
 		"graphtheory": {
-			"name": "Graph Theory",
-			"description": "Explore graph algorithms and network analysis",
+			"name": "Graph Theory: Connections Define Structure",
+			"truth": "Everything is a graph if you squint hard enough.",
+			"qfep_term": "Integration",
+			"qfep_connection": "Graphs are pure relation — nodes are identity, edges are connection. The F-term lives in structure (spanning trees, shortest paths); the E-term in randomness (random graphs, percolation). Flow algorithms optimize the F↔E boundary.",
+
+			"description": "Nodes and edges — the mathematics of connection. From Königsberg bridges to network flow, graph theory asks: what can you reach, what's connected, and what's the best path? Each map combines related algorithms into one explorable space.",
+			"layer": "integration",
+			"prerequisites": ["transformation", "array_tutorial"],
+			"unlocks": [],
+
 			"difficulty": "advanced",
-			"estimated_time": "35-40 minutes",
+			"estimated_time": "30-40 minutes",
+
 			"learning_objectives": [
-				"Network analysis techniques",
-				"Graph traversal algorithms",
-				"Flow optimization",
-                "Connectivity analysis"
+				"Graphs as abstract representations of relationship",
+				"Force-directed layout as physics applied to structure",
+				"Pathfinding and traversal strategies",
+				"Connectivity — strongly connected components",
+				"Optimization on graphs — spanning trees, flow, matching"
 			],
+
+			"content": [
+				"GT_Foundations: Königsberg Bridge problem + graph space exploration — what IS a graph?",
+				"GT_Layout: Force-directed graph layout in 2D and 3D — letting physics arrange structure",
+				"GT_Pathfinding: Finding paths through graphs — the traversal problem",
+				"GT_Network_Analysis: Network structure, flow, and analysis",
+				"GT_Connectivity: Tarjan's + Kosaraju's + topological sort — what's connected to what, in what order",
+				"GT_Spanning_Trees: Minimum spanning tree — the lightest skeleton",
+				"GT_Flow: Push-relabel + Karger's — maximum flow and minimum cut",
+				"GT_Matching: Edmonds' algorithm — optimal pairing"
+			],
+
 			"maps": [
-				"GraphTheory_Network_Analysis",
-				"GraphTheory_Force_Directed_Graph_Layout",
-				"GraphTheory_Force_Directed_3d",
-				"GraphTheory_Graphspace",
-				"GraphTheory_Graphspace_3d",
-				"GraphTheory_Path_Finding_3d",
-				"GraphTheory_Tarjan_s_Algorithm",
-				"GraphTheory_Kosaraju_s_Algorithm",
-				"GraphTheory_Topological_Sort",
-				"GraphTheory_Minimum_Spanning_Tree",
-				"GraphTheory_Maximum_Flow_Algorithms",
-				"GraphTheory_Push_Relabel_Algorithm",
-				"GraphTheory_Karger_s_Algorithm",
-                "GraphTheory_Edmonds_Algorithm"
+				"GT_Foundations",
+				"GT_Layout",
+				"GT_Pathfinding",
+				"GT_Network_Analysis",
+				"GT_Connectivity",
+				"GT_Spanning_Trees",
+				"GT_Flow",
+				"GT_Matching"
 			],
+
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_graphtheory",
-			"unlock_requirements": [
-                "searchpathfinding"
-			],
+
 			"completion_rewards": [
-				"graph_theory_master_badge",
-                "network_analyst_badge"
+				"graph_theory_badge"
+			],
+
+			"merge_plan": {
+				"_note": "Maps created by merging interactables from original 14 maps",
+				"GT_Foundations": ["GraphTheory_Graphspace (graphspace, KonigsbergBridge)", "GraphTheory_Graphspace_3d (graphspace3d)"],
+				"GT_Layout": ["GraphTheory_Force_Directed_Graph_Layout (force_directed_layout)", "GraphTheory_Force_Directed_3d (forcedirected3d)"],
+				"GT_Pathfinding": ["GraphTheory_Path_Finding_3d (pathfinding3d)"],
+				"GT_Network_Analysis": ["GraphTheory_Network_Analysis (networkflow3d, network_analysis)"],
+				"GT_Connectivity": ["GraphTheory_Tarjan_s_Algorithm (tarjan_algorithm)", "GraphTheory_Kosaraju_s_Algorithm (kosaraju_algorithm)", "GraphTheory_Topological_Sort (topological_sort_algorithm)"],
+				"GT_Spanning_Trees": ["GraphTheory_Minimum_Spanning_Tree (mst_visualization)"],
+				"GT_Flow": ["GraphTheory_Push_Relabel_Algorithm (push_relabel_algorithm)", "GraphTheory_Karger_s_Algorithm (karger_algorithm)"],
+				"GT_Matching": ["GraphTheory_Edmonds_Algorithm (edmonds_algorithm)"]
+			},
+
+			"deferred_maps": [
+				"GraphTheory_Maximum_Flow_Algorithms"
 			]
 		}
 	}

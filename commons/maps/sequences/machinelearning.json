@@ -1,26 +1,63 @@
 {
 	"sequences": {
 		"machinelearning": {
-			"name": "Machine Learning",
-			"description": "Explore neural networks and AI algorithms",
-			"difficulty": "advanced",
-			"estimated_time": "45-55 minutes",
-			"learning_objectives": [
-				"Neural network architectures",
-				"Deep learning systems",
-				"AI model training",
-				"Explainable AI concepts",
-				"MachineLearning_Convolutional_Neural_Networks_CNNs",
-				"MachineLearning_Recurrent_Neural_Networks_RNNs"
-			],
-			"maps": [
-				"MachineLearning_Evolving_Creatures",
-				"MachineLearning_Evolving_Flowers",
-				"MachineLearning_Random_Walker_Machine",
-				"MachineLearning_Neural_Networks",
-		
+			"name": "Machine Learning: Algorithms That Learn",
+			"truth": "Learning is optimization in a landscape you can't fully see.",
+			"qfep_term": "Integration",
+			"qfep_connection": "ML systems navigate F↔E by descending loss landscapes. Gradient descent IS the oscillation between order (model) and entropy (data). Overfitting is F-collapse; underfitting is E-dominance.",
 
-				"MachineLearning_LSTMs",
+			"description": "From evolving creatures to neural networks — algorithms that adapt. Three arcs: evolution (selection pressure shapes form), perception (learning to classify and compress), generation (machines that make new things).",
+			"layer": "integration",
+			"prerequisites": ["forces", "randomness"],
+			"unlocks": ["foundationscrisis"],
+
+			"difficulty": "advanced",
+			"estimated_time": "30-40 minutes",
+
+			"learning_objectives": [
+				"Evolution as optimization without gradient",
+				"Gradient descent as landscape navigation",
+				"Clustering as unsupervised pattern finding",
+				"Neural networks as layered feature extraction",
+				"Generative models as learned distributions",
+				"The gap between model and reality"
+			],
+
+			"content": [
+				"ML_Evolution: Carl Sims creatures + evolving flowers — selection pressure shapes form without explicit design",
+				"ML_Gradient_Landscape: Gradient descent visualization + PCA — navigating loss surfaces, seeing high dimensions",
+				"ML_Classification: K-means clustering + SVM + random forest — different ways to draw boundaries in data",
+				"ML_Neural_Networks: Neural network visualization + architecture exploration — layers learn features",
+				"ML_Perception: Computer vision + CNNs + attention — how machines learn to see",
+				"ML_Sequence_Memory: LSTMs + transformers — learning temporal patterns and long-range dependencies",
+				"ML_Generative: GANs + VAEs — machines that generate, not just classify",
+				"ML_Synthesis: Reinforcement learning + explainable AI — agents that act, models we can question"
+			],
+
+			"maps": [
+				"ML_Evolution",
+				"ML_Gradient_Landscape",
+				"ML_Classification",
+				"ML_Neural_Networks",
+				"ML_Perception",
+				"ML_Sequence_Memory",
+				"ML_Generative",
+				"ML_Synthesis"
+			],
+
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_machinelearning",
+
+			"completion_rewards": [
+				"ai_specialist_badge"
+			],
+
+			"deferred_maps": [
 				"MachineLearning_Transformers",
 				"MachineLearning_Generative_Adversarial_Networks_GANs",
 				"MachineLearning_Variational_Autoencoders_VAEs",
@@ -28,20 +65,22 @@
 				"MachineLearning_Dimensionality_Reduction",
 				"MachineLearning_Transfer_Learning",
 				"MachineLearning_Fine_tuning",
-				"MachineLearning_Explainable_AI_XAI",
 				"MachineLearning_Recommendation_Systems",
 				"MachineLearning_Classification_Algorithms",
-                "MachineLearning_Attention_Mechanisms"
+				"MachineLearning_Attention_Mechanisms"
 			],
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_machinelearning",
-			"unlock_requirements": [
-                "computationalgeometry"
-			],
-			"completion_rewards": [
-				"ai_specialist_badge",
-                "neural_network_architect_badge"
-			]
+
+			"algorithm_sources": {
+				"_note": "Mapping from new maps to algorithms/machinelearning/ folders",
+				"ML_Evolution": ["carlsims", "evolvingflowers", "evolutionaryalgorithms", "noc_ch09 (smart_rockets, evolving_bloops)", "ga_ca_shape_learner"],
+				"ML_Gradient_Landscape": ["gradientdescent", "pca", "optimization_algorithms"],
+				"ML_Classification": ["kmeansclustering", "supportvectormachine", "randomforest", "clustering_algorithms"],
+				"ML_Neural_Networks": ["neural_networks", "neuralnetworkvisualization", "stacked"],
+				"ML_Perception": ["computer_vision", "convolutional_neural_networks_CNNs", "attention_mechanisms"],
+				"ML_Sequence_Memory": ["LSTMs", "transformers", "time_series_analysis"],
+				"ML_Generative": ["generative_adversarial_networks_GANs", "variational_autoencoders_VAEs"],
+				"ML_Synthesis": ["reinforcementlearning", "explainable_AI_XAI", "anomaly_detection"]
+			}
 		}
 	}
 }

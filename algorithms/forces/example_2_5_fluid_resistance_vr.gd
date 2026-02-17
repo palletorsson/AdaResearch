@@ -103,7 +103,7 @@ func create_fluid_volume() -> void:
 	surface_label.text = "Fluid surface"
 	surface_label.font_size = 14
 	surface_label.pixel_size = 0.001
-	surface_label.font_color = Color(0.20, 0.55, 0.95, 1.0)
+	surface_label.modulate = Color(0.20, 0.55, 0.95, 1.0)
 	surface_label.outline_size = 0
 	surface_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	surface_label.position = Vector3(0, fluid_surface_y + 0.02, -0.38)

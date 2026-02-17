@@ -1,32 +1,28 @@
 {
-    "sequences": {
-        "advancedlaboratory": {
-            "name": "Advanced Laboratory",
-            "description": "Explore complex systems theory and laboratory simulation",
-            "difficulty": "advanced",
-            "estimated_time": "25-30 minutes",
-            "learning_objectives": [
-                "Complex systems modeling",
-                "Cybernetic feedback loops",
-                "Entropy and information theory",
-                "Laboratory equipment simulation"
-            ],
-            "maps": [
-                "AdvancedLaboratory_Lab_Equipment_Simulation",
-                "AdvancedLaboratory_Water_Dynamics",
-                "AdvancedLaboratory_Entropy_Visualization",
-                "AdvancedLaboratory_Feedback_Cybernetics",
-                "AdvancedLaboratory_Systems_Theory"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_advancedlaboratory",
-            "unlock_requirements": [
-                "resourcemanagement"
-            ],
-            "completion_rewards": [
-                "systems_master_badge",
-                "laboratory_architect_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"advancedlaboratory": {
+			"name": "Advanced Laboratory",
+			"status": "deferred",
+			"deferred_reason": "4/5 maps were env_one placeholders or borrowed artifacts. Real map (Lab_Equipment_Simulation) moved to postfoundationscrisis. Rebuild when content exists.",
+			"description": "Advanced lab equipment simulation and systems theory",
+			"difficulty": "advanced",
+			"learning_objectives": [
+				"Lab equipment simulation",
+				"Water dynamics",
+				"Entropy visualization",
+				"Feedback cybernetics",
+				"Systems theory"
+			],
+			"maps": [],
+			"deferred_maps": [
+				"AdvancedLaboratory_Water_Dynamics",
+				"AdvancedLaboratory_Entropy_Visualization",
+				"AdvancedLaboratory_Feedback_Cybernetics",
+				"AdvancedLaboratory_Systems_Theory"
+			],
+			"moved_maps": {
+				"AdvancedLaboratory_Lab_Equipment_Simulation": "postfoundationscrisis"
+			}
+		}
+	}
 }

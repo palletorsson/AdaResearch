@@ -545,8 +545,12 @@ def find_sequence_maps(sequence_name: str) -> list[Path]:
         return []
 
     maps = []
-    # Sequence format varies — try common patterns
-    map_list = data.get("maps", data.get("sequence", []))
+    # Sequence format: {"sequences": {"id": {"maps": [...]}}}
+    seqs = data.get("sequences", {})
+    if isinstance(seqs, dict) and sequence_name in seqs:
+        map_list = seqs[sequence_name].get("maps", [])
+    else:
+        map_list = data.get("maps", data.get("sequence", []))
     if isinstance(map_list, list):
         for entry in map_list:
             name = entry if isinstance(entry, str) else entry.get("map", entry.get("name", ""))
