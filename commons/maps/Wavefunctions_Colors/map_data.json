@@ -14,14 +14,24 @@
 			"difficulty": "beginner",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Algorithm visualization",
+				"Grid manipulation",
+				"Random processes",
+				"8x8 region operations"
+			]
 		}
 	},
 	"documentation": {
 		"summary": "Wavefunctions Level Four",
 		"layout": "13x14 corridor highlighting colored line halls and waveform lighting.",
 		"objective": "Traverse colored waveform corridors to experience line-based interference patterns.",
-		"key_elements": ["Spawn `s` at the entry", "`coloredlines` walkway tied into `hallway_scene`", "`dark_sphere` dome enhancing visual clarity", "Teleporter `t` at the terminus"]
+		"key_elements": [
+			"Spawn `s` at the entry",
+			"`coloredlines` walkway tied into `hallway_scene`",
+			"`dark_sphere` dome enhancing visual clarity",
+			"Teleporter `t` at the terminus"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -49,7 +59,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "t", " "]
+			[" ", " ", " ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -60,6 +71,7 @@
 			[" ", " ", " ", " ", "coloredlines:0:1:0.05", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "hallway_scene:0:0:0.1", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -81,12 +93,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -99,7 +123,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
 }

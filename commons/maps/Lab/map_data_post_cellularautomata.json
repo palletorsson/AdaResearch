@@ -13,7 +13,11 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Explore the Wave Functions wing", "Access the Wave Functions overview sequence", "Navigate expanded lab space"]
+			"learning_objectives": [
+				"Explore the Wave Functions wing",
+				"Access the Wave Functions overview sequence",
+				"Navigate expanded lab space"
+			]
 		}
 	},
 	"layers": {
@@ -37,7 +41,7 @@
 			["6", "2", "1", "1", "3", "3", "2", "6", "3", "3", "3", "3", "6"],
 			["6", "2", "1", "1", "3", "3", "2", "6", "3", "3", "3", "3", "6"],
 			["6", "0", "1", "1", "2", "2", "2", "2", "3", "4", "4", "1", "6"],
-			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]			
+			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -53,12 +57,13 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:array_tutorial", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", "t:cellularautomata", "m:0.1", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t:fractals", " "]										
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", "t:cellularautomata", "m:0.1", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t:fractals", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -74,11 +79,20 @@
 			[" ", "hand_color_controller:90", " ", " ", " ", " ", " ", " ", " ", "noisetext:90:-0.3:0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -91,18 +105,38 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 8.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
 			"description": "Main entrance - with wave functions access"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 0.5
 		},
 		"lab_atmosphere": {
@@ -120,7 +154,10 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"initial_artifacts": [
+				"rotating_cube",
+				"xyz_coordinates"
+			],
 			"unlock_on_sequence_completion": true
 		},
 		"ceiling": {

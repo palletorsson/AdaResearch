@@ -14,7 +14,11 @@
 			"difficulty": "intermediate",
 			"category": "cellular_automata",
 			"estimated_time": "5 minutes",
-			"learning_objectives": ["Fluid dynamics", "Elementary rules", "Computational universality"]
+			"learning_objectives": [
+				"Fluid dynamics",
+				"Elementary rules",
+				"Computational universality"
+			]
 		}
 	},
 	"layers": {
@@ -35,7 +39,8 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "]
+			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],

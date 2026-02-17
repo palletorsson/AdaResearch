@@ -14,7 +14,11 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Central hub after primitives completion", "Access to transformation sequence", "Progressive artifact discovery"]
+			"learning_objectives": [
+				"Central hub after primitives completion",
+				"Access to transformation sequence",
+				"Progressive artifact discovery"
+			]
 		}
 	},
 	"progression_delta": {
@@ -23,12 +27,32 @@
 		"description": "After primitives: ramp to transformations accessible, basic primitives artifacts displayed",
 		"structure_changes": [],
 		"added_utilities": [
-			{"row": 1, "col": 5, "utility": "wp:90", "note": "ramp to transformation platform"}
+			{
+				"row": 1,
+				"col": 5,
+				"utility": "wp:90",
+				"note": "ramp to transformation platform"
+			}
 		],
 		"added_interactables": [
-			{"row": 2, "col": 2, "artifact": "grid_lines:0:-0.4:0.19", "note": "primitives showcase"},
-			{"row": 3, "col": 2, "artifact": "pyramid_edit:45:0:0.4", "note": "primitives showcase"},
-			{"row": 6, "col": 1, "artifact": "smallcontainment:180:0:4", "note": "containment sphere"}
+			{
+				"row": 2,
+				"col": 2,
+				"artifact": "grid_lines:0:-0.4:0.19",
+				"note": "primitives showcase"
+			},
+			{
+				"row": 3,
+				"col": 2,
+				"artifact": "pyramid_edit:45:0:0.4",
+				"note": "primitives showcase"
+			},
+			{
+				"row": 6,
+				"col": 1,
+				"artifact": "smallcontainment:180:0:4",
+				"note": "containment sphere"
+			}
 		]
 	},
 	"layers": {
@@ -64,17 +88,31 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
-
 	"lighting": {
-		"ambient_color": [0.9, 0.9, 1.0],
+		"ambient_color": [
+			0.9,
+			0.9,
+			1.0
+		],
 		"ambient_energy": 0.3,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 1.0, 1.0],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"energy": 1.0
 		},
 		"lab_atmosphere": {
@@ -98,7 +136,9 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube"],
+			"initial_artifacts": [
+				"rotating_cube"
+			],
 			"unlock_on_sequence_completion": true
 		}
 	}

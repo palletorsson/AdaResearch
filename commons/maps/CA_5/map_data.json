@@ -14,7 +14,11 @@
 			"difficulty": "intermediate",
 			"category": "cellular_automata",
 			"estimated_time": "5 minutes",
-			"learning_objectives": ["Hexagonal grids", "3D cellular automata", "Biological networks"]
+			"learning_objectives": [
+				"Hexagonal grids",
+				"3D cellular automata",
+				"Biological networks"
+			]
 		}
 	},
 	"layers": {
@@ -35,7 +39,8 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "]
+			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],

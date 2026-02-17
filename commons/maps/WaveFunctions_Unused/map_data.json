@@ -14,14 +14,24 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Algorithm visualization",
+				"Grid manipulation",
+				"Random processes",
+				"8x8 region operations"
+			]
 		}
 	},
 	"documentation": {
 		"summary": "WaveFunctions Standing Wave Patterns",
 		"layout": "13x14 observation floor with annotation and scoring kiosks flanking the standing wave array.",
 		"objective": "Study interference nodes using the standing wave visualizer before concluding the module.",
-		"key_elements": ["Spawn `s` at the northern entry", "`standing_waves` array at center stage", "Annotation cube `an` and score cube `sp` near the southern exit", "Teleporter `t` to advance"]
+		"key_elements": [
+			"Spawn `s` at the northern entry",
+			"`standing_waves` array at center stage",
+			"Annotation cube `an` and score cube `sp` near the southern exit",
+			"Teleporter `t` to advance"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -58,7 +68,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "DancingBody", " ", "clipboard#wave_desire_axioms:194:1.0",  " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "DancingBody", " ", "clipboard#wave_desire_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "standing_waves", " ", " ", " ", " ", " ", " "],
@@ -86,12 +96,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -104,7 +126,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
 }

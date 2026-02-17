@@ -71,7 +71,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "preserved_pattern:0:0.5", " ", " ", " ", " ", " ", "transforming_pattern:0:0.5", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "tt:phi_conservative:180:0.5", " ", " ", " ", "tt:phi_queer:180:0.5", " ", " "],
+			[" ", " ", "tt:phi_conservative:180:0.5", " ", " ", " ", "tt:phi_queer:180:0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
@@ -86,12 +86,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.25, 0.2, 0.3],
+		"ambient_color": [
+			0.25,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.3],
-			"color": [0.9, 0.85, 1.0],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.3
+			],
+			"color": [
+				0.9,
+				0.85,
+				1.0
+			],
 			"energy": 0.9
 		}
 	},
@@ -102,7 +114,11 @@
 		"enable_physics": true,
 		"background": {
 			"type": "sky",
-			"color": [0.1, 0.08, 0.15]
+			"color": [
+				0.1,
+				0.08,
+				0.15
+			]
 		},
 		"grid_animation": {
 			"enabled": true,

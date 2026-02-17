@@ -14,7 +14,13 @@
 			"difficulty": "advanced",
 			"category": "graphtheory",
 			"estimated_time": "10-15 minutes",
-			"learning_objectives": ["Maximum matching", "Blossom contraction", "Augmenting paths", "Graph algorithms", "Network optimization"]
+			"learning_objectives": [
+				"Maximum matching",
+				"Blossom contraction",
+				"Augmenting paths",
+				"Graph algorithms",
+				"Network optimization"
+			]
 		}
 	},
 	"layers": {
@@ -45,8 +51,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -60,8 +66,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]		
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -70,23 +76,34 @@
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
 			"properties": {
-				"action": "next_in_sequence" 
+				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -99,7 +116,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
-} 
+}

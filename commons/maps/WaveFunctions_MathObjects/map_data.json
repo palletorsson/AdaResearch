@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Harmonic Builder: The Architecture of Timbre",
 		"lookup_name": "WaveFunctions_MathObjects",
-		"description": "Any complex repeating wave can be built by summing simple sine waves at integer multiples of a fundamental frequency. Construct square, sawtooth, and triangle waves by manually adjusting harmonic amplitudes. Act as a Fourier Synthesizer and discover that complexity is reducible\u2014the strangest waveform is just a choir of sines singing in perfect ratios.",
+		"description": "Any complex repeating wave can be built by summing simple sine waves at integer multiples of a fundamental frequency. Construct square, sawtooth, and triangle waves by manually adjusting harmonic amplitudes. Act as a Fourier Synthesizer and discover that complexity is reducible—the strangest waveform is just a choir of sines singing in perfect ratios.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -14,7 +14,13 @@
 			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-10 minutes",
-			"learning_objectives": ["Harmonic series: fundamental + overtones at integer multiples (f, 2f, 3f...)", "Additive synthesis: building complex waves from simple sines", "Wave recipes: square (odd harmonics), sawtooth (all harmonics), triangle (odd 1/n\u00b2)", "Amplitude decay: 1/n for sawtooth, 1/n\u00b2 for triangle", "Critical: Complexity is reducible\u2014chaos is often undecomposed order"]
+			"learning_objectives": [
+				"Harmonic series: fundamental + overtones at integer multiples (f, 2f, 3f...)",
+				"Additive synthesis: building complex waves from simple sines",
+				"Wave recipes: square (odd harmonics), sawtooth (all harmonics), triangle (odd 1/n²)",
+				"Amplitude decay: 1/n for sawtooth, 1/n² for triangle",
+				"Critical: Complexity is reducible—chaos is often undecomposed order"
+			]
 		}
 	},
 	"layers": {
@@ -44,7 +50,9 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -55,6 +63,7 @@
 			[" ", " ", "math_objects", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "Lissajous3D", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -77,12 +86,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.8,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -95,7 +116,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.1, 0.1, 0.2]
+			"color": [
+				0.1,
+				0.1,
+				0.2
+			]
 		}
 	}
 }

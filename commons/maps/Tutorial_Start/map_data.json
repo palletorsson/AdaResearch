@@ -15,7 +15,11 @@
 			"difficulty": "absolute_beginner",
 			"category": "onboarding",
 			"estimated_time": "30 seconds",
-			"learning_objectives": ["Understand VR spatial presence", "Learn basic movement", "Concept of world progression"]
+			"learning_objectives": [
+				"Understand VR spatial presence",
+				"Learn basic movement",
+				"Concept of world progression"
+			]
 		}
 	},
 	"documentation": {
@@ -31,7 +35,7 @@
 	"layers": {
 		"structure": [
 			["1", "1", "2"],
-			["2", "1", "2"], 
+			["2", "1", "2"],
 			["2", "1", "2"]
 		],
 		"utilities": [
@@ -55,20 +59,32 @@
 				"activation_method": "step_on",
 				"visual_effect": "portal_glow"
 			}
-		}, 
+		},
 		"s": {
-		"properties": {
-			"height": 5.5 
+			"properties": {
+				"height": 5.5
+			}
 		}
-	}
 	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.8,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.2, -0.8, -0.1],
-			"color": [1.0, 1.0, 1.0],
+			"direction": [
+				-0.2,
+				-0.8,
+				-0.1
+			],
+			"color": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"energy": 1.2
 		}
 	},
@@ -79,8 +95,12 @@
 		"enable_physics": true,
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.5]
+			"color": [
+				0.2,
+				0.3,
+				0.5
+			]
 		},
 		"special_instructions": "This is the absolute minimal VR experience - just exist in space and move forward"
 	}
-} 
+}

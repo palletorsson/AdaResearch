@@ -124,8 +124,16 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [3.5, 1.2, 0.5],
-			"rotation": [0, 0, 0]
+			"position": [
+				3.5,
+				1.2,
+				0.5
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			]
 		}
 	},
 	"utility_definitions": {
@@ -150,7 +158,11 @@
 		"enable_physics": true,
 		"background": {
 			"type": "color",
-			"color": [0.05, 0.05, 0.1]
+			"color": [
+				0.05,
+				0.05,
+				0.1
+			]
 		}
 	}
 }

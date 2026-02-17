@@ -5,7 +5,11 @@
 		"description": "What if we can't use proof by contradiction? Brouwer rejected the law of excluded middle. Math must be constructed, not just proven to exist.",
 		"version": "1.0",
 		"format": "json",
-		"dimensions": { "width": 9, "depth": 9, "max_height": 3 },
+		"dimensions": {
+			"width": 9,
+			"depth": 9,
+			"max_height": 3
+		},
 		"metadata": {
 			"difficulty": "expert",
 			"category": "foundations",
@@ -18,7 +22,10 @@
 			]
 		}
 	},
-	"audio": { "ambient_preset": "construction_site", "volume": -10.0 },
+	"audio": {
+		"ambient_preset": "construction_site",
+		"volume": -10.0
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2", "2", "2", "2"],
@@ -55,8 +62,35 @@
 		]
 	},
 	"utility_definitions": {
-		"t": { "type": "teleporter", "name": "Continue", "description": "To paraconsistent logic", "properties": { "action": "next_in_sequence" } }
+		"t": {
+			"type": "teleporter",
+			"name": "Continue",
+			"description": "To paraconsistent logic",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
 	},
-	"lighting": { "ambient_color": [0.18, 0.2, 0.15], "ambient_energy": 0.5 },
-	"settings": { "cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "background": { "type": "sky", "color": [0.08, 0.1, 0.06] } }
+	"lighting": {
+		"ambient_color": [
+			0.18,
+			0.2,
+			0.15
+		],
+		"ambient_energy": 0.5
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [
+				0.08,
+				0.1,
+				0.06
+			]
+		}
+	}
 }

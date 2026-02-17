@@ -13,7 +13,12 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Explore the Advanced Laboratory wing", "Access the Advanced Laboratory overview sequence", "Navigate the ultimate expanded lab space", "Master all 20 algorithmic categories"]
+			"learning_objectives": [
+				"Explore the Advanced Laboratory wing",
+				"Access the Advanced Laboratory overview sequence",
+				"Navigate the ultimate expanded lab space",
+				"Master all 20 algorithmic categories"
+			]
 		}
 	},
 	"layers": {
@@ -100,6 +105,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t:advancedlaboratory", "m:t:advancedlaboratory:0.1", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
@@ -128,11 +134,15 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "level_entrance:180|Advanced Laboratory", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -145,18 +155,38 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 25.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				25.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
 			"description": "Facing the ultimate laboratory - all 20 algorithmic categories mastered"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.3, 0.3, 0.4],
+		"ambient_color": [
+			0.3,
+			0.3,
+			0.4
+		],
 		"ambient_energy": 0.3,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.95, 0.9],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				0.95,
+				0.9
+			],
 			"energy": 0.6
 		},
 		"lab_atmosphere": {
@@ -174,7 +204,10 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"initial_artifacts": [
+				"rotating_cube",
+				"xyz_coordinates"
+			],
 			"unlock_on_sequence_completion": true,
 			"ultimate_lab_achieved": true
 		}

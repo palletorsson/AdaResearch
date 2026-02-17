@@ -16,14 +16,23 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["Line as relation", "Measurement", "Direction and length"]
+			"learning_objectives": [
+				"Line as relation",
+				"Measurement",
+				"Direction and length"
+			]
 		}
 	},
 	"documentation": {
 		"summary": "Point_Line - Line Introduction Chamber",
 		"layout": "7x13 grid with varied heights; south-west cells voided.",
 		"objective": "Demonstrate line segment as relation between two points; embodied measurement.",
-		"key_elements": ["`la:line` annotation at (3,4)", "`line_demo` at (3,4) height -1.3m", "`dark_sphere` enclosure at (3,2)", "Teleporter `t` at (5,6)"]
+		"key_elements": [
+			"`la:line` annotation at (3,4)",
+			"`line_demo` at (3,4) height -1.3m",
+			"`dark_sphere` enclosure at (3,2)",
+			"Teleporter `t` at (5,6)"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -34,7 +43,7 @@
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],			
+			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "0", "1"],
 			["0", "0", "0", "0", "1", "1", "1"],
 			["0", "0", "0", "0", "0", "0", "0"],
@@ -53,7 +62,12 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "]
+			[" ", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", ""],
@@ -63,6 +77,13 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "line_demo", " ", " ", " "],
 			["", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		]
 	},
@@ -81,14 +102,25 @@
 			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -102,7 +134,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
 }

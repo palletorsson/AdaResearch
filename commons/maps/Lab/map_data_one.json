@@ -13,7 +13,11 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Explore the Procedural Generation wing", "Access the Procedural Generation overview sequence", "Navigate expanded lab space grid_2d_4x4:0:0:0.1nail_color_controller:180"]
+			"learning_objectives": [
+				"Explore the Procedural Generation wing",
+				"Access the Procedural Generation overview sequence",
+				"Navigate expanded lab space grid_2d_4x4:0:0:0.1nail_color_controller:180"
+			]
 		}
 	},
 	"audio": {
@@ -66,10 +70,9 @@
 			[" ", "t:noise", " ", "t:fractals", " ", "t:vectors", " ", "t:forces", " ", "t:machinelearning", " ", "t:advancedlaboratory", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "t:physics", " ", "t:proceduralgeneration", " ", "t:physicssimulation", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -81,17 +84,25 @@
 			[" ", "line:180", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "clipboard#point_zero:15:-0.3:1.1", " ", " ", " ", " ", " ", "lshape:180:-0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "light_sphere", " ", " ", " ", "lshape:0:-0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "light_sphere", " ", " ", " ", "lshape:0:-0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "walkableprism_short", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "noisetext:90:-0.3:0.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -104,18 +115,38 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.6, 1.8, 17.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.6,
+				1.8,
+				17.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
 			"description": "Facing newest wing"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 0.6
 		},
 		"lab_atmosphere": {
@@ -133,7 +164,10 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"initial_artifacts": [
+				"rotating_cube",
+				"xyz_coordinates"
+			],
 			"unlock_on_sequence_completion": true
 		},
 		"ceiling": {

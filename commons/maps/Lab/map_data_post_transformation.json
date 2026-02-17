@@ -14,7 +14,10 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Transport cube access to color sequence", "Transformation artifacts displayed"]
+			"learning_objectives": [
+				"Transport cube access to color sequence",
+				"Transformation artifacts displayed"
+			]
 		}
 	},
 	"progression_delta": {
@@ -22,10 +25,21 @@
 		"spine_order": 2,
 		"description": "After transformations: transport cube added to reach color teleporter at height 4",
 		"structure_changes": [
-			{"row": 5, "col": 5, "from": "1", "to": "0", "note": "hole for transport cube"}
+			{
+				"row": 5,
+				"col": 5,
+				"from": "1",
+				"to": "0",
+				"note": "hole for transport cube"
+			}
 		],
 		"added_utilities": [
-			{"row": 5, "col": 5, "utility": "tc:2:y", "note": "transport cube to height 4"}
+			{
+				"row": 5,
+				"col": 5,
+				"utility": "tc:2:y",
+				"note": "transport cube to height 4"
+			}
 		],
 		"added_interactables": []
 	},
@@ -62,23 +76,46 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 6.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
 			"description": "Main entrance - facing the central table"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.9, 0.9, 1.0],
+		"ambient_color": [
+			0.9,
+			0.9,
+			1.0
+		],
 		"ambient_energy": 0.3,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 1.0, 1.0],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"energy": 1.0
 		},
 		"lab_atmosphere": {
@@ -102,7 +139,9 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube"],
+			"initial_artifacts": [
+				"rotating_cube"
+			],
 			"unlock_on_sequence_completion": true
 		}
 	}

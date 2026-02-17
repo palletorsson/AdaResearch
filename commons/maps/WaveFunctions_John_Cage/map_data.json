@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "John Cage",
 		"lookup_name": "WaveFunctions_John_Cage",
-		"description": "In 1952, John Cage presented four minutes and thirty-three seconds of 'silence.' But it wasn't silent\u2014the audience coughed, rain fell, chairs creaked. Silence is not absence of sound, but presence of unintended noise. Explore aleatoric algorithms (chance as life), noise floor (thermal noise, blood in ear), and ambient computation (simulating the uneventful). Cage reframed silence as space of infinite potential. The algorithm is running, but not 'working.' It is just breathing.",
+		"description": "In 1952, John Cage presented four minutes and thirty-three seconds of 'silence.' But it wasn't silent—the audience coughed, rain fell, chairs creaked. Silence is not absence of sound, but presence of unintended noise. Explore aleatoric algorithms (chance as life), noise floor (thermal noise, blood in ear), and ambient computation (simulating the uneventful). Cage reframed silence as space of infinite potential. The algorithm is running, but not 'working.' It is just breathing.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -14,14 +14,26 @@
 			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Aleatoric algorithms: chance operations via randf() as life, not chaos", "Noise floor: you cannot have signal of 0, thermal noise in circuit", "Ambient computation: simulating the uneventful, code that does nothing beautifully", "Drift without destination: noise.get_noise_1d() for wandering", "Queer silence: reframing silence as space of infinite potential", "Critical: Do not look for the puzzle. Just listen. The algorithm is just breathing."]
+			"learning_objectives": [
+				"Aleatoric algorithms: chance operations via randf() as life, not chaos",
+				"Noise floor: you cannot have signal of 0, thermal noise in circuit",
+				"Ambient computation: simulating the uneventful, code that does nothing beautifully",
+				"Drift without destination: noise.get_noise_1d() for wandering",
+				"Queer silence: reframing silence as space of infinite potential",
+				"Critical: Do not look for the puzzle. Just listen. The algorithm is just breathing."
+			]
 		}
 	},
 	"documentation": {
 		"summary": "WaveFunctions John Cage Installation",
 		"layout": "13x14 experimental sound space dotted with double helix sculptures and dual display pylons.",
 		"objective": "Blend John Cage-inspired soundscapes while monitoring dual displays and helix visuals.",
-		"key_elements": ["Spawn `s` on the northern threshold", "`john_cage_tech_noir` controller at the arena center", "Companion interactables: `doublehelix` and `dual_display_test`", "`dark_sphere` ambience and teleporter `t` toward the exit"]
+		"key_elements": [
+			"Spawn `s` on the northern threshold",
+			"`john_cage_tech_noir` controller at the arena center",
+			"Companion interactables: `doublehelix` and `dual_display_test`",
+			"`dark_sphere` ambience and teleporter `t` toward the exit"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -53,7 +65,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "an", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", "", " ", " ", " ", " ", " ", " "],
@@ -68,7 +81,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "john_cage_tech_noir", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", "john_cage_tech_noir", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -87,12 +101,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -105,7 +131,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
 }

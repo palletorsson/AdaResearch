@@ -37,7 +37,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
-	"utilities": [ 
+		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
@@ -46,16 +46,18 @@
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "t:array_tutorial", " ", " ", " "],
 			[" ", " ", " ", "t:wavefunctions", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "]
-		], 
+		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "cube_scene:0:2", " ", " ", " ", " " ],
+			[" ", " ", " ", "cube_scene:0:2", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "rotating_cube", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "]
 		]
@@ -77,25 +79,46 @@
 	},
 	"spawn_points": {
 		"default": {
-			"position": [0.5, 1.8, 6.0],
-			"rotation": [0.0, 180.0, 0.0],
+			"position": [
+				0.5,
+				1.8,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
 			"description": "Main entrance - now with sequence access"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
 		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 0.5
 		},
 		"lab_atmosphere": {
 			"mood": "brightening_discovery"
 		}
 	},
-	"settings": { "enter_type": "corridor",
+	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
@@ -105,7 +128,10 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"initial_artifacts": [
+				"rotating_cube",
+				"xyz_coordinates"
+			],
 			"unlock_on_sequence_completion": true
 		}
 	}

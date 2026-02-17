@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Kusama's Polka Dots: Self-Obliteration",
 		"lookup_name": "WaveFunctions_Kusama",
-		"description": "Inspired by Yayoi Kusama's aesthetic of accumulation and obsession. Experience high-frequency sine wave grids, step functions creating hard polka dot edges, and UV scrolling simulating hallucinations where patterns move from canvas to wall to body to universe. Lose the burden of uniqueness\u2014camouflaged by the pattern of the world.",
+		"description": "Inspired by Yayoi Kusama's aesthetic of accumulation and obsession. Experience high-frequency sine wave grids, step functions creating hard polka dot edges, and UV scrolling simulating hallucinations where patterns move from canvas to wall to body to universe. Lose the burden of uniqueness—camouflaged by the pattern of the world.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -14,14 +14,25 @@
 			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Infinite field: high-frequency sine grids (sin(x * density) * sin(y * density))", "Step functions: thresholds for hard-edged polka dots", "UV scrolling: simulating hallucination and pattern spread", "Camouflage: losing individual contour in the pattern", "Critical: Is this madness or liberation? The pattern encompasses all, cares for none"]
+			"learning_objectives": [
+				"Infinite field: high-frequency sine grids (sin(x * density) * sin(y * density))",
+				"Step functions: thresholds for hard-edged polka dots",
+				"UV scrolling: simulating hallucination and pattern spread",
+				"Camouflage: losing individual contour in the pattern",
+				"Critical: Is this madness or liberation? The pattern encompasses all, cares for none"
+			]
 		}
 	},
 	"documentation": {
 		"summary": "WaveFunctions Kusama Field",
 		"layout": "13x14 void with a transport cube runway to reach the Kusama-inspired sine installation.",
 		"objective": "Ride the transport cube across the gap and observe the infinite polka-wave effect.",
-		"key_elements": ["Spawn `s` at the northern lip of the chasm", "Transport cube `tc` spanning the central void", "`kusama_sine` interactive sculpture at the far platform", "Teleporter `t` positioned beyond the exhibit"]
+		"key_elements": [
+			"Spawn `s` at the northern lip of the chasm",
+			"Transport cube `tc` spanning the central void",
+			"`kusama_sine` interactive sculpture at the far platform",
+			"Teleporter `t` positioned beyond the exhibit"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -51,7 +62,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "tc:6:x", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -85,12 +97,24 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -103,7 +127,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
 }

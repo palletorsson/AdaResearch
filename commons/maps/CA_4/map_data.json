@@ -14,7 +14,11 @@
 			"difficulty": "intermediate",
 			"category": "cellular_automata",
 			"estimated_time": "5 minutes",
-			"learning_objectives": ["1D CA", "Game of Life", "VR interactions"]
+			"learning_objectives": [
+				"1D CA",
+				"Game of Life",
+				"VR interactions"
+			]
 		}
 	},
 	"layers": {
@@ -30,6 +34,7 @@
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", "t"],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

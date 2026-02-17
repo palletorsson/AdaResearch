@@ -5,7 +5,11 @@
 		"description": "The set of all sets that don't contain themselves. Does it contain itself? If yes, then no. If no, then yes. Self-reference breaks logic.",
 		"version": "1.0",
 		"format": "json",
-		"dimensions": { "width": 9, "depth": 9, "max_height": 3 },
+		"dimensions": {
+			"width": 9,
+			"depth": 9,
+			"max_height": 3
+		},
 		"metadata": {
 			"difficulty": "advanced",
 			"category": "foundations",
@@ -18,7 +22,10 @@
 			]
 		}
 	},
-	"audio": { "ambient_preset": "logic_chamber", "volume": -8.0 },
+	"audio": {
+		"ambient_preset": "logic_chamber",
+		"volume": -8.0
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2", "2", "2", "2"],
@@ -55,8 +62,35 @@
 		]
 	},
 	"utility_definitions": {
-		"t": { "type": "teleporter", "name": "Continue", "description": "To Gödel's theorem", "properties": { "action": "next_in_sequence" } }
+		"t": {
+			"type": "teleporter",
+			"name": "Continue",
+			"description": "To Gödel's theorem",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
 	},
-	"lighting": { "ambient_color": [0.15, 0.1, 0.2], "ambient_energy": 0.5 },
-	"settings": { "cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "background": { "type": "sky", "color": [0.08, 0.05, 0.12] } }
+	"lighting": {
+		"ambient_color": [
+			0.15,
+			0.1,
+			0.2
+		],
+		"ambient_energy": 0.5
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [
+				0.08,
+				0.05,
+				0.12
+			]
+		}
+	}
 }
