@@ -64,7 +64,7 @@ var show_infoboard: bool = true
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
 var hand_color: Color = Color(0.8, 0.6, 0.5, 1.0)  # Default skin tone
 
-@export var debug = true
+@export var debug = false
 # Signals
 signal score_updated(new_score: int)
 signal pickup_collected(pickup_position: Vector3)
@@ -646,8 +646,8 @@ func get_nail_color() -> Color:
 func set_hand_color(color: Color) -> void:
 	hand_color = color
 	emit_signal("hand_color_changed", hand_color)
-	if debug:
-		print("GameManager: Hand color set to %s" % color)
+	#if debug:
+		#print("GameManager: Hand color set to %s" % color)
 
 func get_hand_color() -> Color:
 	return hand_color

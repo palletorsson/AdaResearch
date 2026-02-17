@@ -1,6 +1,11 @@
 ## CameraTourManager — Automated first-person camera tour through the entire game.
 ## Loads maps in curriculum spine order, generates camera paths through artifacts,
 ## and provides speed/pause/skip controls. No player body — just a floating camera.
+##
+## Cleanup strategy: before each map transition, ALL non-essential children of
+## LabGridSystem are destroyed (keeping only CubeScene + 8 component nodes).
+## Stray root nodes are also removed. The grid rebuilds everything from scratch
+## via LabGridSystem.reload_map = true.
 extends Node3D
 class_name CameraTourManager
 
@@ -50,7 +55,17 @@ var is_paused: bool = false
 var is_transitioning: bool = false
 var active_tween: Tween = null
 var tour_complete: bool = false
-var _map_load_timeout_id: int = 0  # Track which timeout is active
+
+# Snapshot of root's children at startup (autoloads + scene — used for cleanup)
+var _root_snapshot: Array[StringName] = []
+
+# Children of LabGridSystem that must survive between map reloads
+const _GRID_ESSENTIAL := [
+	"CubeScene",
+	"GridDataComponent", "GridStructureComponent", "GridUtilitiesComponent",
+	"GridInteractablesComponent", "GridSpawnComponent", "GridCeilingComponent",
+	"GridWallComponent", "GridAudioComponent",
+]
 
 # ---------------------------------------------------------------------------
 # Initialization
@@ -84,12 +99,16 @@ func _ready() -> void:
 	if help_label:
 		help_label.text = "SPACE: Pause | +/-: Speed | N/P: Next/Prev Map | S: Next Seq | ESC: Quit"
 
-	# Start fade rect fully black (we'll fade in after first map loads)
+	# Start fade rect fully black (we'll fade in after map loads)
 	if fade_rect:
 		fade_rect.color = Color(0, 0, 0, 1)
 
-	# Load tour data and begin
-	call_deferred("_initialize_tour")
+	# Defer startup so all other nodes' deferred inits complete first
+	call_deferred("_deferred_start")
+
+func _deferred_start() -> void:
+	_take_snapshot()
+	_initialize_tour()
 
 func _initialize_tour() -> void:
 	_load_tour_data()
@@ -104,11 +123,6 @@ func _initialize_tour() -> void:
 	for td in tour_data:
 		print("  - %s: %d maps" % [td.display_name, td.maps.size()])
 
-	# Connect to map generation signal for FUTURE map loads
-	if lab_grid_system.has_signal("map_generation_complete"):
-		if not lab_grid_system.map_generation_complete.is_connected(_on_map_generation_complete):
-			lab_grid_system.map_generation_complete.connect(_on_map_generation_complete)
-
 	if start_with_lab:
 		spine_index = -1
 		map_index = 0
@@ -120,42 +134,50 @@ func _initialize_tour() -> void:
 		spine_index = 0
 		map_index = 0
 		if tour_data.size() > 0 and tour_data[0].maps.size() > 0:
-			_load_map(tour_data[0].maps[0])
+			current_map_name = tour_data[0].maps[0]
+			lab_grid_system.map_name = current_map_name
+			_update_sequence_display()
+			_update_map_display()
+			_wait_for_initial_map()
 
 func _wait_for_initial_map() -> void:
-	print("CameraTourManager: Waiting for initial Lab map...")
+	"""Wait for the first map (loaded by LabGridSystem._ready) to finish generating."""
+	print("CameraTourManager: Waiting for initial map '%s'..." % current_map_name)
 	is_transitioning = true
 
 	var wait_time: float = 0.0
-	var max_wait: float = 10.0
+	var max_wait: float = 15.0
 
-	while wait_time < max_wait:
+	# For the initial load, the map might already be ready or still generating.
+	# Connect signal first, then check if already done.
+	var signal_received := false
+	var _on_complete := func(): signal_received = true
+	lab_grid_system.map_generation_complete.connect(_on_complete, CONNECT_ONE_SHOT)
+
+	# If already ready, the signal won't fire again — use polling as fallback
+	while not signal_received and wait_time < max_wait:
 		if lab_grid_system.has_method("is_map_ready") and lab_grid_system.is_map_ready():
 			break
-		if wait_time > 1.0 and lab_grid_system.get("generation_in_progress") == false:
-			var data_comp = lab_grid_system.get("data_component")
-			if data_comp and data_comp.has_method("is_data_loaded") and data_comp.is_data_loaded():
-				break
-		await get_tree().create_timer(0.1).timeout
-		wait_time += 0.1
+		await get_tree().create_timer(0.05).timeout
+		wait_time += 0.05
 
-	# Brief settle time for interactables
+	if not signal_received and lab_grid_system.map_generation_complete.is_connected(_on_complete):
+		lab_grid_system.map_generation_complete.disconnect(_on_complete)
+
 	await get_tree().process_frame
 	await get_tree().process_frame
-	await get_tree().create_timer(0.3).timeout
 
-	print("CameraTourManager: Initial map ready (waited %.1fs)" % wait_time)
-
+	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
-
 	await _fade_from_black(fade_duration)
 	is_transitioning = false
 	_start_traversal()
 
 # ---------------------------------------------------------------------------
-# Tour data loading — game progression order from curriculum_spine.json
-# with maps loaded from res://commons/maps/sequences/
+# Tour data loading — follows lab_evolution.actual_progression order
+# This is the order the player actually experiences the game: each completed
+# sequence unlocks the next set of Lab teleporters.
 # ---------------------------------------------------------------------------
 func _load_tour_data() -> void:
 	tour_data.clear()
@@ -169,56 +191,24 @@ func _load_tour_data() -> void:
 	var spine_json = JSON.parse_string(spine_file.get_as_text())
 	spine_file.close()
 
-	if spine_json == null or not spine_json.has("spine"):
-		push_error("CameraTourManager: Invalid curriculum_spine.json")
+	if spine_json == null or not spine_json.has("lab_evolution"):
+		push_error("CameraTourManager: Invalid curriculum_spine.json (missing lab_evolution)")
 		return
 
-	var spine_sequences: Array = spine_json["spine"]["sequences"]
-	spine_sequences.sort_custom(func(a, b): return int(a.get("order", 0)) < int(b.get("order", 0)))
-
-	var branch_points: Dictionary = {}
-	var branch_chains: Dictionary = {}
-	if spine_json.has("branches"):
-		var branches = spine_json["branches"]
-		if branches.has("branch_points"):
-			for parent_name in branches["branch_points"]:
-				var entry = branches["branch_points"][parent_name]
-				if entry is Dictionary:
-					branch_points[parent_name] = entry.get("unlocks", [])
-		if branches.has("branch_chains"):
-			for parent_name in branches["branch_chains"]:
-				var entry = branches["branch_chains"][parent_name]
-				if entry is Dictionary:
-					branch_chains[parent_name] = entry.get("unlocks", [])
-
+	var progression: Array = spine_json["lab_evolution"]["actual_progression"]
 	var added: Dictionary = {}
 
-	for spine_entry in spine_sequences:
-		var seq_name: String = spine_entry.get("name", "")
-		if seq_name.is_empty() or added.has(seq_name):
-			continue
-		_try_add_sequence(seq_name, spine_entry.get("phase", ""), added)
-		_add_branches(seq_name, branch_points, branch_chains, added)
+	for entry in progression:
+		# The "after" field is the sequence just completed — add it first
+		var completed: String = entry.get("after", "")
+		if completed != "none" and completed != "" and not added.has(completed):
+			_try_add_sequence(completed, "", added)
 
-	# Unassigned sequences at end
-	var unassigned: Array = []
-	if spine_json.has("branches") and spine_json["branches"].has("unassigned"):
-		unassigned = spine_json["branches"]["unassigned"].get("sequences", [])
-	for seq_name in unassigned:
-		if not added.has(seq_name):
-			_try_add_sequence(seq_name, "", added)
-
-func _add_branches(parent: String, branch_points: Dictionary, branch_chains: Dictionary, added: Dictionary) -> void:
-	if branch_points.has(parent):
-		for branch_name in branch_points[parent]:
-			if not added.has(branch_name):
-				_try_add_sequence(branch_name, "", added)
-				_add_branches(branch_name, branch_points, branch_chains, added)
-	if branch_chains.has(parent):
-		for chain_name in branch_chains[parent]:
-			if not added.has(chain_name):
-				_try_add_sequence(chain_name, "", added)
-				_add_branches(chain_name, branch_points, branch_chains, added)
+		# The "added" field lists sequences that unlock — add them in order
+		var unlocked: Array = entry.get("added", [])
+		for seq_name in unlocked:
+			if seq_name is String and not added.has(seq_name) and not ":" in seq_name:
+				_try_add_sequence(seq_name, "", added)
 
 func _try_add_sequence(seq_name: String, phase: String, added: Dictionary) -> void:
 	var seq_data := _load_sequence_maps(seq_name)
@@ -258,38 +248,7 @@ func _load_sequence_maps(seq_name: String) -> Dictionary:
 	}
 
 # ---------------------------------------------------------------------------
-# Cleanup — remove stray artifacts before loading new map
-# ---------------------------------------------------------------------------
-func _cleanup_before_reload() -> void:
-	"""Remove stray nodes that persist across map reloads."""
-	print("CameraTourManager: Cleaning up before map reload...")
-
-	# Remove DesktopArtifactCatalog from root (LabGridSystem adds it there)
-	var root = get_tree().root
-	for child in root.get_children():
-		if child is CanvasLayer and child.name.begins_with("DesktopArtifactCatalog"):
-			print("CameraTourManager: Removing stray DesktopArtifactCatalog")
-			child.queue_free()
-
-	# Remove ArtifactSpawnManager from LabGridSystem (recreated on each map load)
-	if lab_grid_system:
-		var spawn_mgr = lab_grid_system.get_node_or_null("ArtifactSpawnManager")
-		if spawn_mgr:
-			spawn_mgr.queue_free()
-		# Clear the reference on LabGridSystem
-		if "desktop_catalog" in lab_grid_system:
-			lab_grid_system.set("desktop_catalog", null)
-		if "artifact_spawn_manager" in lab_grid_system:
-			lab_grid_system.set("artifact_spawn_manager", null)
-
-	# Kill any running tweens from artifacts
-	# (queue_free on interactable nodes will handle their tweens)
-
-	# Wait for queue_free to process
-	await get_tree().process_frame
-
-# ---------------------------------------------------------------------------
-# Map loading
+# Map loading — fast reload via GridSystem.reload_map with stray node cleanup
 # ---------------------------------------------------------------------------
 func _load_map(map_name: String) -> void:
 	if is_transitioning:
@@ -307,54 +266,82 @@ func _load_map(map_name: String) -> void:
 	_update_sequence_display()
 	_update_map_display()
 
-	print("CameraTourManager: Loading map '%s'" % map_name)
+	print("CameraTourManager: Transitioning to map '%s' via reload_map" % map_name)
 
 	# Fade to black
 	await _fade_to_black(fade_duration)
 
-	# Clean up stray artifacts from previous map
-	await _cleanup_before_reload()
+	# Nuke all non-essential content from previous map
+	_nuke_map_content()
+	await get_tree().process_frame  # let queue_free process
 
-	# Load the new map
+	# Connect signal BEFORE triggering reload — this way we can't miss it,
+	# no matter how many frames the deferred chain takes.
+	var map_ready := false
+	var _on_done := func(): map_ready = true
+	lab_grid_system.map_generation_complete.connect(_on_done, CONNECT_ONE_SHOT)
+
+	# Trigger fast grid reload
 	lab_grid_system.map_name = map_name
 	lab_grid_system.reload_map = true
 
-	# Safety timeout in case signal never fires
-	_map_load_timeout_id += 1
-	_start_map_load_timeout(_map_load_timeout_id)
+	# Wait for signal (no frame-count guessing needed)
+	var wait_time: float = 0.0
+	while not map_ready and wait_time < 15.0:
+		await get_tree().create_timer(0.05).timeout
+		wait_time += 0.05
 
-func _start_map_load_timeout(timeout_id: int) -> void:
-	await get_tree().create_timer(15.0).timeout
-	if is_transitioning and timeout_id == _map_load_timeout_id:
-		print("CameraTourManager: WARNING - Map load timeout for '%s', forcing continue" % current_map_name)
-		_on_map_ready_continue()
+	if not map_ready and lab_grid_system.map_generation_complete.is_connected(_on_done):
+		lab_grid_system.map_generation_complete.disconnect(_on_done)
 
-func _on_map_generation_complete() -> void:
-	if not is_transitioning:
-		return
-
-	# Invalidate any pending timeout
-	_map_load_timeout_id += 1
-
-	print("CameraTourManager: Map '%s' generation complete" % current_map_name)
-
-	# Brief settle for interactables
+	# Two frames for interactables to finish their _ready()
 	await get_tree().process_frame
 	await get_tree().process_frame
-	await get_tree().create_timer(0.3).timeout
 
-	_on_map_ready_continue()
-
-func _on_map_ready_continue() -> void:
-	if not is_instance_valid(tour_camera):
-		return
-
+	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
-
 	await _fade_from_black(fade_duration)
 	is_transitioning = false
 	_start_traversal()
+
+# ---------------------------------------------------------------------------
+# Cleanup — nuke all non-essential content before loading a new map
+# ---------------------------------------------------------------------------
+func _take_snapshot() -> void:
+	"""Record root's children at startup (autoloads + scene) for stray node cleanup."""
+	_root_snapshot.clear()
+	for child in get_tree().root.get_children():
+		_root_snapshot.append(child.name)
+	print("CameraTourManager: Snapshot taken — root: %d nodes" % _root_snapshot.size())
+
+func _nuke_map_content() -> void:
+	"""Destroy ALL non-essential children of LabGridSystem and stray root nodes.
+	The grid system rebuilds everything during map generation, so only the 9
+	essential nodes (CubeScene + 8 components) need to survive."""
+	var removed: int = 0
+
+	# Destroy all non-essential children of LabGridSystem (cubes, artifacts,
+	# collision bodies, multimesh instances, spawn managers, everything)
+	if lab_grid_system:
+		for child in lab_grid_system.get_children():
+			if child.name not in _GRID_ESSENTIAL:
+				child.queue_free()
+				removed += 1
+		# Null out LabGridSystem's catalog refs — they'll be recreated
+		# by _on_lab_map_ready_for_catalog() on next map_generation_complete
+		if lab_grid_system.get("desktop_catalog"):
+			lab_grid_system.desktop_catalog = null
+		if lab_grid_system.get("artifact_spawn_manager"):
+			lab_grid_system.artifact_spawn_manager = null
+
+	# Destroy stray nodes on root (DesktopArtifactCatalog, sound clones, effects)
+	for child in get_tree().root.get_children():
+		if child.name not in _root_snapshot:
+			child.queue_free()
+			removed += 1
+
+	print("CameraTourManager: Nuked %d nodes before map reload" % removed)
 
 # ---------------------------------------------------------------------------
 # Camera positioning — always start at origin looking +Z

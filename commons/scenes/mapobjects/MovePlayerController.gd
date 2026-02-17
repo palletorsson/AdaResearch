@@ -31,12 +31,28 @@ func _ready():
 
 func _start_automatic_move():
 	"""Start the automatic move sequence"""
-	# Wait a brief moment for the scene to fully initialize
-	await get_tree().create_timer(0.1).timeout
+	# Wait for scene to fully initialize (physics, transforms, spawning)
+	await get_tree().create_timer(1.0).timeout
 	
 	if not player_node:
 		print("MovePlayerController: ❌ Cannot start move - Player not found!")
 		return
+	
+	# Debug: log position chain up to root
+	print("MovePlayerController: === POSITION DEBUG ===")
+	print("MovePlayerController: local_pos=%s global_pos=%s" % [position, global_position])
+	var node = self
+	while node.get_parent():
+		node = node.get_parent()
+		if node is Node3D:
+			print("MovePlayerController:   ancestor '%s' pos=%s global=%s" % [node.name, node.position, node.global_position])
+		if node == get_tree().root:
+			break
+	
+	# Use own global position + drop height as target
+	move_target = global_position + Vector3(0, 2.0, 0)
+	print("MovePlayerController: target=%s player_at=%s" % [move_target, player_node.global_position])
+	print("MovePlayerController: ===================")
 	
 	print("MovePlayerController: Starting automatic move in %.1fs..." % move_delay)
 	_activate_move()
@@ -122,16 +138,8 @@ func _execute_move():
 	# Wait for the physics frame to process the velocity reset
 	await get_tree().physics_frame
 
-	# Find the player root (XROrigin3D)
-	var player_root = _find_player_root(player_node)
-
-	if player_root:
-		# Move the player root
-		player_root.global_position = move_target
-		print("MovePlayerController: ✅ Moved player root '%s' to %s" % [player_root.name, move_target])
-	else:
-		print("MovePlayerController: ⚠️ Could not find player root, moving player node directly")
-		player_node.global_position = move_target
+	# Use XRToolsPlayerBody.teleport() if available (proper XR teleport)
+	_teleport_player_to(move_target)
 	
 	# Reset velocity AGAIN after the move to prevent physics from moving player away
 	_reset_velocity(player_node)
@@ -161,6 +169,43 @@ func _reset_velocity(body: Node3D):
 		if "linear_velocity" in player_root:
 			player_root.linear_velocity = Vector3.ZERO
 			player_root.angular_velocity = Vector3.ZERO
+
+# Teleport player using XRToolsPlayerBody.teleport() if available, else fallback
+func _teleport_player_to(target_pos: Vector3):
+	var player_body = _find_xr_player_body()
+	
+	if player_body and player_body.has_method("teleport"):
+		var target_transform = Transform3D()
+		target_transform.origin = target_pos
+		target_transform.basis = player_body.global_transform.basis  # Keep current rotation
+		player_body.teleport(target_transform)
+		player_body.velocity = Vector3.ZERO
+		print("MovePlayerController: ✅ Used XRToolsPlayerBody.teleport() to %s" % target_pos)
+	else:
+		# Fallback to raw position set
+		var player_root = _find_player_root(player_node)
+		if player_root:
+			player_root.global_position = target_pos
+			print("MovePlayerController: ⚠️ Fallback - set global_position to %s" % target_pos)
+		elif player_node:
+			player_node.global_position = target_pos
+
+# Find XRToolsPlayerBody in the tree
+func _find_xr_player_body() -> Node3D:
+	# Search in groups first
+	var player_bodies = get_tree().get_nodes_in_group("player_body")
+	for pb in player_bodies:
+		if pb.has_method("teleport"):
+			return pb
+	
+	# Find by name in scene
+	var root = get_tree().current_scene
+	if root:
+		var pb = root.find_child("PlayerBody", true, false)
+		if pb and pb.has_method("teleport"):
+			return pb
+	
+	return null
 
 # Find the player root (XROrigin3D) from a player body
 func _find_player_root(body: Node3D) -> Node3D:

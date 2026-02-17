@@ -1,4 +1,4 @@
-# GridUtilitiesComponent.gd  
+# GridUtilitiesComponent.gd
 # Handles utility object placement (teleports, lifts, doors, etc.)
 # Uses UtilityRegistry for type definitions and validation
 
@@ -36,30 +36,30 @@ func _ready():
 func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, settings: Dictionary = {}):
 	parent_node = grid_parent
 	structure_component = struct_component
-	
+
 	# Apply settings
 	map_settings = settings
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
-	
+
 	print("GridUtilitiesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 # Generate Big Pipe System
 func _generate_big_pipe(bp_code: String, start_pos: Vector3 = Vector3.ZERO) -> void:
 	print("GridUtilitiesComponent: Generating Big Pipe System at %s with code: %s" % [start_pos, bp_code])
-	
+
 	# Create BigPipeSystem instance (using global class_name)
 	var pipe_system = BigPipeSystem.new()
 	pipe_system.name = "BigPipeSystem"
 	pipe_system.position = start_pos
-	
+
 	# Configure pipe parameters to align with grid
 	pipe_system.segment_length = cube_size + gutter
 	pipe_system.pipe_radius = (cube_size * 0.5) * 0.8 # Fit inside grid cell
-	
+
 	# Generate geometry
 	pipe_system.generate_pipes(bp_code)
-	
+
 	# Add to scene
 	parent_node.add_child(pipe_system)
 
@@ -160,15 +160,15 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 		return
 
 	print("GridUtilitiesComponent: Generating utilities")
-	
+
 	var utility_layout = utility_data.layout_data
 	_cached_utility_layout = utility_layout  # Cache for m:t:name lookups
 	var total_size = cube_size + gutter
 	var utility_count = 0
-	
+
 	# Get grid dimensions from structure component
 	var dimensions = structure_component.get_grid_dimensions()
-	
+
 	# Validate utilities using UtilityRegistry
 	var validation = UtilityRegistry.validate_utility_grid(utility_layout)
 	if not validation.valid:
@@ -177,7 +177,7 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 			print("  ERROR: %s" % error)
 		for warning in validation.warnings:
 			print("  WARNING: %s" % warning)
-	
+
 	# Separate info board utilities and tutorial text displays from regular utilities
 	var info_board_data = []
 	var tutorial_display_data = []
@@ -223,27 +223,27 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				# Handle regular utilities
 				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
 				var utility_type = parsed.type
-				
+
 				# Check settings for Infoboard ("an")
 				if utility_type == "an" and not GameManager.show_infoboard:
 					print("GridUtilitiesComponent: Skipping Infoboard due to user setting")
 					continue
 				var parameters = parsed.parameters
-				
+
 				if UtilityRegistry.is_valid_utility_type(utility_type) and utility_type != " ":
 					var y_pos = structure_component.find_highest_y_at(x, z)
-					
+
 					# Get utility definition if available
 					var utility_definition = utility_definitions.get(utility_type, {})
-					
+
 					# Ensure utility_definition is always a Dictionary (handle string references)
 					if typeof(utility_definition) != TYPE_DICTIONARY:
 						print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
 						utility_definition = {}
-					
+
 					_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size)
 					utility_count += 1
-	
+
 	# Generate info boards if any were found
 	if not info_board_data.is_empty():
 		_generate_info_boards(info_board_data)
@@ -261,21 +261,21 @@ func _parse_big_pipe_utility(cell_value: String, x: int, z: int) -> Dictionary:
 	# Code: f,f,s,u...
 	var parts = cell_value.split(":")
 	var code = ""
-	
+
 	if parts.size() > 1:
 		# Join rest of parts back together in case code has colons (unlikely but safe)
 		# Actually code is usually comma separated.
 		# bp:f,f,s
 		code = parts[1]
-	
+
 	if code.is_empty():
 		return {}
-		
+
 	# Calculate position
 	var y = structure_component.find_highest_y_at(x, z)
 	var total_size = cube_size + gutter
 	var pos = Vector3(x, y, z) * total_size
-	
+
 	return {
 		"code": code,
 		"position": pos
@@ -343,7 +343,7 @@ func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
 					best_fallback = Vector2i(check_x, check_z)
 					found_any_floor = true
 
-				# Ideal: structure "1" — flat ground, no wall above
+				# Ideal: structure "1" - flat ground, no wall above
 				if not has_above:
 					print("GridUtilitiesComponent: Safe flat floor (structure=1) at grid(%d,%d), %d cells from teleport" % [check_x, check_z, radius])
 					return Vector2i(check_x, check_z)
@@ -355,21 +355,21 @@ func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
 # Place a single utility object
 func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float):
 	var position = Vector3(x, y, z) * total_size
-	
+
 	var scene_path = UtilityRegistry.get_utility_scene_path(utility_type)
 	if scene_path.is_empty():
 		print("GridUtilitiesComponent: WARNING - No scene file for utility type '%s'" % utility_type)
 		return
-	
+
 	var scene_resource = _load_scene_cached(UtilityRegistry.get_utility_info(utility_type).file)
 	if not scene_resource:
 		print("GridUtilitiesComponent: WARNING - Could not load scene for utility type '%s'" % utility_type)
 		return
-	
+
 	var utility_object = scene_resource.instantiate()
 	if utility_object:
 		utility_object.position = position
-		
+
 		# Apply parameters if supported
 		print("GridUtilitiesComponent: Utility type '%s' has %d parameters: %s" % [utility_type, parameters.size(), str(parameters)])
 		if parameters.size() > 0 and UtilityRegistry.supports_parameters(utility_type):
@@ -377,10 +377,10 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 			_apply_utility_parameters(utility_object, utility_type, parameters)
 		else:
 			print("GridUtilitiesComponent: No parameters to apply for utility type '%s' (supports: %s)" % [utility_type, UtilityRegistry.supports_parameters(utility_type)])
-		
+
 		# Apply definition properties
 		_apply_utility_definition(utility_object, utility_type, definition)
-		
+
 		# Connect signals if utility has them
 		_connect_utility_signals(utility_object, utility_type)
 
@@ -394,7 +394,7 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 			utility_object.owner = parent_node.get_tree().edited_scene_root
 
 		utility_objects[Vector3i(x, y, z)] = utility_object
-		
+
 		var param_info = ""
 		if parameters.size() > 0:
 			param_info = " (params: %s)" % str(parameters)
@@ -581,26 +581,26 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var m_data = parent_node.map_data
 				if m_data is Dictionary and m_data.has("info"):
 					map_info = m_data.info
-			
+
 			if not map_info.is_empty():
 				var title = map_info.get("title", "Untitled Map")
 				var description = map_info.get("description", "")
-				
+
 				# Apply to utility object properties
 				# We try multiple property names to cover different board implementations
 				utility_object.set("title", title)
 				utility_object.set("description", description)
 				utility_object.set("header_text", title)
 				utility_object.set("body_text", description)
-				
+
 				# Fallback: some boards might need a specific method call
 				if utility_object.has_method("set_content"):
 					utility_object.set_content(title, description)
-					
+
 				print("GridUtilitiesComponent: Populated 'an' board with map info: %s" % title)
 			else:
 				print("GridUtilitiesComponent: 'an' board placed, but no map info found in parent")
-			
+
 			# Apply rotation if specified as parameter (an:90)
 			if parameters.size() > 0:
 				var rot_y = float(parameters[0])
@@ -652,7 +652,7 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var axis = Vector3.UP  # Default Y axis
 				var pause = 4.0  # Default pause duration
 				var y_off = 0.0  # Default y offset
-				
+
 				if parameters.size() >= 2:
 					match parameters[1].to_lower():
 						"x": axis = Vector3.RIGHT
@@ -661,13 +661,13 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						"-x": axis = Vector3.LEFT
 						"-y": axis = Vector3.DOWN
 						"-z": axis = Vector3.FORWARD
-				
+
 				if parameters.size() >= 3:
 					pause = float(parameters[2])
-				
+
 				if parameters.size() >= 4:
 					y_off = float(parameters[3])
-				
+
 				# Apply to rotation cube
 				if utility_object.has_method("set_step_pause_mode"):
 					utility_object.set_step_pause_mode(angle, axis, pause)
@@ -678,10 +678,10 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						utility_object.rotation_axis = axis
 					if "pause_duration" in utility_object:
 						utility_object.pause_duration = pause
-				
+
 				if "y_offset" in utility_object:
 					utility_object.y_offset = y_off
-				
+
 				print("GridUtilitiesComponent: Set rotation cube to %.1f° on %s axis, %.1fs pause, y=%.1f" % [angle, parameters[1] if parameters.size() >= 2 else "y", pause, y_off])
 		"sc":  # Scale Cube
 			# Format: sc:max:min:offset_x:y_offset (e.g. "3:0.5:1.5:0.5")
@@ -690,16 +690,16 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var min_scale = 0.5  # Default
 				var offset_x = 1.5  # Default
 				var y_off = 0.0  # Default y offset
-				
+
 				if parameters.size() >= 2:
 					min_scale = float(parameters[1])
-				
+
 				if parameters.size() >= 3:
 					offset_x = float(parameters[2])
-				
+
 				if parameters.size() >= 4:
 					y_off = float(parameters[3])
-				
+
 				# Apply to scale cube
 				if utility_object.has_method("set_scale_range"):
 					utility_object.set_scale_range(min_scale, max_scale)
@@ -708,15 +708,15 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						utility_object.min_scale = min_scale
 					if "max_scale" in utility_object:
 						utility_object.max_scale = max_scale
-				
+
 				if utility_object.has_method("set_offset"):
 					utility_object.set_offset(Vector3(offset_x, 0, 0))
 				elif "center_offset" in utility_object:
 					utility_object.center_offset = Vector3(offset_x, 0, 0)
-				
+
 				if "y_offset" in utility_object:
 					utility_object.y_offset = y_off
-				
+
 				print("GridUtilitiesComponent: Set scale cube %.1f→%.1f, offset_x=%.1f, y=%.1f" % [min_scale, max_scale, offset_x, y_off])
 		"rg":  # Regenerate cube
 			var target_params: Array = []
@@ -743,52 +743,26 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					print("GridUtilitiesComponent: Set label keyid to: %s" % keyid)
 				else:
 					print("GridUtilitiesComponent: Warning - Label object doesn't have set_keyid method")
-		"m":  # Move player to specific location after delay
-			# Format A: m:t:sequencename[:delay] - move near a teleporter (auto-find)
-			# Format B: m:gx:gy:gz[:delay] - move to grid coordinates (converted to world)
-			var move_target := Vector3.ZERO
+		"m":  # Move player - drops player at this cell's position from 2m above
+			# Place m: where you want the player to land (like placing s: for spawn)
+			# Format: m or m:delay or m:t:name:delay (t:name is just a label)
+			# Target position computed at runtime from global_position (in MovePlayerController)
 			var move_delay := 0.5
-			var move_resolved := false
-			var m_total_size := cube_size + gutter
 
-			if parameters.size() >= 1 and parameters[0] == "t":
-				# Format A: m:t:sequencename[:delay]
-				if parameters.size() >= 2:
-					var seq_name = parameters[1]
-					var teleport_pos = _find_teleport_grid_position(seq_name)
-					if teleport_pos != Vector3i(-1, -1, -1):
-						# Find nearest flat floor (structure=1) next to the teleport
-						var safe_cell = _find_safe_adjacent_cell(teleport_pos.x, teleport_pos.z)
-						var safe_y = structure_component.find_highest_y_at(safe_cell.x, safe_cell.y)
-						move_target = Vector3(safe_cell.x, safe_y, safe_cell.y) * m_total_size
-						move_target.y += 2.0  # Drop player from 2m above
-						move_resolved = true
-						print("GridUtilitiesComponent: m:t:%s → teleport at grid(%d,%d), safe spot at grid(%d,%d) = world %s" % [seq_name, teleport_pos.x, teleport_pos.z, safe_cell.x, safe_cell.y, move_target])
-					else:
-						print("GridUtilitiesComponent: WARNING - m:t:%s could not find teleport '%s' in utility grid" % [seq_name, seq_name])
-				if parameters.size() >= 3 and parameters[2].is_valid_float():
-					move_delay = float(parameters[2])
+			# Parse optional delay from parameters
+			if parameters.size() >= 1:
+				if parameters[0] == "t":
+					# m:t:sequencename:delay — name is just a label
+					if parameters.size() >= 3 and parameters[2].is_valid_float():
+						move_delay = float(parameters[2])
+				elif parameters[0].is_valid_float():
+					# m:delay
+					move_delay = float(parameters[0])
 
-			elif parameters.size() >= 3:
-				# Format B: m:gx:gy:gz[:delay] - grid coordinates → world position
-				var grid_x = float(parameters[0])
-				var grid_y = float(parameters[1])
-				var grid_z = float(parameters[2])
-				move_target = Vector3(grid_x, grid_y, grid_z) * m_total_size
-				move_target.y += 2.0  # Drop player from 2m above
-				move_resolved = true
-				if parameters.size() >= 4 and parameters[3].is_valid_float():
-					move_delay = float(parameters[3])
-				print("GridUtilitiesComponent: m:grid(%s,%s,%s) → world %s" % [parameters[0], parameters[1], parameters[2], move_target])
-			else:
-				print("GridUtilitiesComponent: WARNING - Move utility requires m:t:name or m:x:y:z format")
-
-			if move_resolved:
-				utility_object.set_meta("move_target", move_target)
-				utility_object.set_meta("move_delay", move_delay)
-				if utility_object.has_method("set_move_parameters"):
-					utility_object.set_move_parameters(move_target, move_delay)
-				print("GridUtilitiesComponent: Move player to %s after %.1fs" % [move_target, move_delay])
+			utility_object.set_meta("move_delay", move_delay)
+			if "move_delay" in utility_object:
+				utility_object.move_delay = move_delay
+			print("GridUtilitiesComponent: m: placed at local %s, delay %.1fs (target computed at runtime from global_position)" % [utility_object.position, move_delay])
 
 		"pb":  # Player body trigger - unlocks/activates player customization
 			# Format: pb:feature or pb:feature:color
@@ -828,16 +802,16 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			var cp_id = ""
 			if parameters.size() > 0:
 				cp_id = parameters[0].strip_edges()
-			
+
 			if cp_id.is_empty():
 				# Auto-generate ID from position
 				cp_id = "cp_%d_%d" % [int(utility_object.position.x), int(utility_object.position.z)]
-			
+
 			if "checkpoint_id" in utility_object:
 				utility_object.checkpoint_id = cp_id
 			else:
 				utility_object.set_meta("checkpoint_id", cp_id)
-			
+
 			print("GridUtilitiesComponent: Configured checkpoint '%s'" % cp_id)
 
 		"h":  # Hazard zone - danger area
@@ -845,13 +819,13 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			# Examples: h:fire, h:electric:25, h:death, h:vacuum:10
 			var hazard_type = "generic"
 			var damage = 10.0
-			
+
 			if parameters.size() > 0:
 				hazard_type = parameters[0].strip_edges().to_lower()
-			
+
 			if parameters.size() > 1 and parameters[1].is_valid_float():
 				damage = float(parameters[1])
-			
+
 			# Map type string to enum
 			var type_enum = 5  # GENERIC default
 			match hazard_type:
@@ -864,12 +838,12 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					type_enum = 5
 					if "instant_kill" in utility_object:
 						utility_object.instant_kill = true
-			
+
 			if "danger_type" in utility_object:
 				utility_object.danger_type = type_enum
 			if "damage_per_tick" in utility_object:
 				utility_object.damage_per_tick = damage
-			
+
 			print("GridUtilitiesComponent: Configured hazard zone type=%s damage=%.1f" % [hazard_type, damage])
 
 # Apply color to utility object (works with materials and shaders)
@@ -877,13 +851,13 @@ func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)
 	if color == Color.WHITE:
 		print("GridUtilitiesComponent: Warning - Could not parse color '%s', using white" % color_param)
-	
+
 	# Find the mesh instance in the utility object
 	var mesh_instance = _find_mesh_instance_in_utility(utility_object)
 	if not mesh_instance:
 		print("GridUtilitiesComponent: Warning - No MeshInstance3D found in utility object")
 		return
-	
+
 	# Apply color based on material type
 	var material = mesh_instance.material_override
 	if material is ShaderMaterial:
@@ -933,17 +907,17 @@ func _parse_color_parameter(color_param: String) -> Color:
 func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Color):
 	# Check for common shader parameter names
 	var shader_params = ["fill_color", "base_color", "albedo_color", "modelColor", "color"]
-	
+
 	for param_name in shader_params:
 		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
 			shader_material.set_shader_parameter(param_name, color)
 			print("GridUtilitiesComponent: Set shader parameter '%s' to %s" % [param_name, color])
 			break
-	
+
 	# Also try to set wireframe color to a complementary color
 	var wireframe_params = ["wireframe_color", "edge_color", "wireframeColor"]
 	var wireframe_color = Color(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0)  # Complementary color
-	
+
 	for param_name in wireframe_params:
 		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
 			shader_material.set_shader_parameter(param_name, wireframe_color)
@@ -963,7 +937,7 @@ func _find_mesh_instance_in_utility(utility_object: Node3D) -> MeshInstance3D:
 	# Check if the object itself is a MeshInstance3D
 	if utility_object is MeshInstance3D:
 		return utility_object as MeshInstance3D
-	
+
 	# Search children recursively
 	return _find_mesh_instance_recursive(utility_object)
 
@@ -1014,17 +988,17 @@ func _apply_text_display_text(utility_object: Node3D, text_value: String):
 func _apply_utility_definition(utility_object: Node3D, utility_type: String, definition: Dictionary):
 	if definition.is_empty():
 		return
-		
+
 	var properties = definition.get("properties", {})
-	
+
 	# Apply visual effects for teleporters
 	if utility_type == "t" and properties.has("visual_effect"):
 		_apply_teleporter_visual_effect(utility_object, properties["visual_effect"])
-	
+
 	# Apply spawn point properties
 	if utility_type == "s":
 		_apply_spawn_point_properties(utility_object, properties)
-	
+
 	# Apply generic properties
 	for property_name in properties.keys():
 		var property_value = properties[property_name]
@@ -1039,16 +1013,16 @@ func _apply_spawn_point_properties(spawn_point: Node3D, properties: Dictionary):
 	# Set spawn point metadata
 	if properties.has("spawn_name"):
 		spawn_point.set_meta("spawn_name", properties["spawn_name"])
-	
+
 	if properties.has("priority"):
 		spawn_point.set_meta("priority", int(properties["priority"]))
-	
+
 	if properties.has("height"):
 		spawn_point.set_meta("height", float(properties["height"]))
-	
+
 	if properties.has("player_rotation"):
 		spawn_point.set_meta("player_rotation", float(properties["player_rotation"]))
-	
+
 	# Apply visual settings
 	if properties.has("visible_in_game"):
 		var visible = bool(properties["visible_in_game"])
@@ -1081,7 +1055,7 @@ func _connect_utility_signals(utility_object: Node3D, utility_type: String):
 	# Connect common utility signals
 	if utility_object.has_signal("activated"):
 		utility_object.activated.connect(_on_utility_activated.bind(utility_type, utility_object))
-	
+
 	if utility_object.has_signal("teleporter_activated"):
 		utility_object.teleporter_activated.connect(_on_teleporter_activated.bind(utility_object))
 		print("GridUtilitiesComponent: ✅ Connected teleporter_activated signal for %s" % utility_type)
@@ -1093,33 +1067,33 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 		"name": utility_object.name,
 		"type": utility_type
 	}
-	
+
 	# Add utility-specific data
 	if "destination" in utility_object:
 		utility_data["destination"] = utility_object.destination
 	else:
 		utility_data["destination"] = utility_object.get_meta("destination", "")
-	
+
 	# Add action property from metadata (crucial for teleporters!)
 	if utility_object.has_meta("action"):
 		utility_data["action"] = utility_object.get_meta("action")
 		print("GridUtilitiesComponent: 🎯 Found action in metadata: %s" % utility_data["action"])
-	
+
 	utility_activated.emit(utility_type, utility_object.global_position, utility_data)
 
 # Handle teleporter activation specifically - connect to SceneManager
 func _on_teleporter_activated(utility_object: Node3D):
 	print("GridUtilitiesComponent: 🚀 Teleporter activated - checking for custom handling")
-	
+
 	# Get destination and action from teleporter
 	var destination = ""
 	if "destination" in utility_object:
 		destination = utility_object.destination
 	else:
 		destination = utility_object.get_meta("destination", "")
-	
+
 	var action = utility_object.get_meta("action", "")
-	
+
 	# First, try to let the parent GridSystem handle it (for lab-specific logic)
 	if parent_node and parent_node.has_method("_on_utility_activated"):
 		var utility_data = {
@@ -1129,13 +1103,13 @@ func _on_teleporter_activated(utility_object: Node3D):
 			"destination": destination,
 			"action": action
 		}
-		
+
 		print("GridUtilitiesComponent: Delegating to parent GridSystem for custom handling")
 		print("GridUtilitiesComponent: Action: %s" % action)
 		print("GridUtilitiesComponent: Destination: %s" % destination)
 		parent_node._on_utility_activated("t", utility_object.global_position, utility_data)
 		return
-	
+
 	# Fallback to default behavior
 	print("GridUtilitiesComponent: Using default teleporter behavior")
 	var scene_manager = _find_scene_manager()
@@ -1157,12 +1131,12 @@ func _find_scene_manager():
 		get_tree().current_scene.find_child("SceneManager", true, false),
 		get_tree().current_scene.find_child("AdaSceneManager", true, false)
 	]
-	
+
 	for manager in potential_managers:
 		if manager:
 			print("GridUtilitiesComponent: Found SceneManager at: %s" % manager.get_path())
 			return manager
-	
+
 	return null
 
 func _is_sequence_name(name: String) -> bool:
@@ -1170,15 +1144,15 @@ func _is_sequence_name(name: String) -> bool:
 	var known_sequences = [
 		"primitives",
 		"transformation",
-		"tests", 
-		"color", 
+		"tests",
+		"color",
 		"array_tutorial",
 		"meshestextures",
 		"randomness",
-		"vectors", 
-		"fractals", 
-		"cellularautomata", 
-		"joints", 
+		"vectors",
+		"fractals",
+		"cellularautomata",
+		"joints",
 		"wavefunctions",
 		"noise",
 		"forces",
@@ -1198,7 +1172,7 @@ func _is_sequence_name(name: String) -> bool:
 		"criticalalgorithms",
 		"speculativecomputation",
 		"resourcemanagement",
-		"advancedlaboratory", 
+		"advancedlaboratory",
 		"qfeplaboratory",
 		"testmaps",
 		"grammar_systems",
@@ -1209,7 +1183,7 @@ func _is_sequence_name(name: String) -> bool:
 		"morphogenesis"
 	]
 	return name in known_sequences
-	
+
 # Debug: Print scene tree to help find SceneManager
 func _debug_print_scene_tree():
 	print("GridUtilitiesComponent: Scene tree structure:")
@@ -1218,7 +1192,7 @@ func _debug_print_scene_tree():
 func _print_node_tree(node: Node, depth: int):
 	var indent = "  ".repeat(depth)
 	print("%s%s (%s)" % [indent, node.name, node.get_class()])
-	
+
 	if depth < 3:  # Limit depth to avoid spam
 		for child in node.get_children():
 			_print_node_tree(child, depth + 1)
@@ -1227,13 +1201,13 @@ func _print_node_tree(node: Node, depth: int):
 func _load_scene_cached(scene_filename: String) -> PackedScene:
 	if scene_filename.is_empty():
 		return null
-	
+
 	if scene_cache.has(scene_filename):
 		return scene_cache[scene_filename]
-	
+
 	var scene_path = MAP_OBJECTS_PATH + scene_filename
 	print("GridUtilitiesComponent: Attempting to load scene: %s" % scene_path)
-	
+
 	if ResourceLoader.exists(scene_path):
 		var scene = ResourceLoader.load(scene_path)
 		scene_cache[scene_filename] = scene
@@ -1241,21 +1215,21 @@ func _load_scene_cached(scene_filename: String) -> PackedScene:
 		return scene
 	else:
 		print("GridUtilitiesComponent: ❌ ERROR - Scene file not found: %s" % scene_path)
-		
+
 		# Try to find what files actually exist
 		_list_available_scenes()
-		
+
 		return null
 
 # Debug: List available utility scenes
 func _list_available_scenes():
 	print("GridUtilitiesComponent: Listing available scenes in %s:" % MAP_OBJECTS_PATH)
-	
+
 	var dir = DirAccess.open(MAP_OBJECTS_PATH)
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
-		
+
 		while file_name != "":
 			if file_name.ends_with(".tscn"):
 				print("  → %s" % file_name)
@@ -1275,12 +1249,12 @@ func has_utility_at(x: int, y: int, z: int) -> bool:
 # Clear all utilities
 func clear_utilities():
 	print("GridUtilitiesComponent: Clearing all utilities")
-	
+
 	for key in utility_objects.keys():
 		var utility = utility_objects[key]
 		if is_instance_valid(utility):
 			utility.queue_free()
-	
+
 	utility_objects.clear()
 
 # Get utility count
@@ -1401,7 +1375,7 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 		board_3d.set("display_mode", 1)  # DisplayMode.SINGLE_BOARD
 		board_3d.set("auto_load_on_ready", true)
 		board_3d.set("enable_navigation", true)
-		
+
 		print("GridUtilitiesComponent: Configured HandheldInfoBoard - board_id: %s" % board_id)
 	else:
 		push_error("GridUtilitiesComponent: HandheldInfoBoard doesn't have Viewport2Din3D script configured")
@@ -1458,7 +1432,7 @@ func _place_info_board_at_position(board_type: String, position: Vector3, rotati
 		# Store in utility objects for tracking
 		var grid_pos = Vector3i(int(position.x / (cube_size + gutter)), int(position.y), int(position.z / (cube_size + gutter)))
 		utility_objects[grid_pos] = info_board
-		
+
 		print("GridUtilitiesComponent: ✅ Successfully placed %s info board at %s" % [board_type, position])
 	else:
 		print("GridUtilitiesComponent: ❌ Failed to instantiate info board: %s" % board_type)

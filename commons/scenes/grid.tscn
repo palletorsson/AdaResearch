@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
@@ -38,35 +38,35 @@ shader = ExtResource("5_al13m")
 [sub_resource type="PlaneMesh" id="PlaneMesh_jli6m"]
 size = Vector2(100, 100)
 
-[node name="Base2" instance=ExtResource("1_tp52a")]
+[node name="Base2" unique_id=32484138 instance=ExtResource("1_tp52a")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=647017336]
 environment = SubResource("Environment_q35sa")
 
 [node name="XROrigin3D" parent="." index="2" groups=["player_body"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.8, 0)
 
-[node name="Label3D" parent="." index="3"]
+[node name="Label3D" parent="." index="3" unique_id=645111340]
 visible = false
 text = "Base - Grid"
 
-[node name="GridSystem" parent="." index="5" instance=ExtResource("2_s4bvx")]
+[node name="GridSystem" parent="." index="5" unique_id=2133953560 instance=ExtResource("2_s4bvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="GridScene" type="Node3D" parent="." index="7"]
+[node name="GridScene" type="Node3D" parent="." index="7" unique_id=905463453]
 script = ExtResource("3_0u7bn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene" index="0" unique_id=907078593]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 visible = false
 material_override = SubResource("ShaderMaterial_6o8e0")
 mesh = SubResource("PlaneMesh_jli6m")
 
-[node name="PlayerBoundsCheck2" type="Node3D" parent="." index="8"]
+[node name="PlayerBoundsCheck2" type="Node3D" parent="." index="8" unique_id=1500793908]
 script = ExtResource("4_bounds_script")
 box_bounds = Vector3(100, 50, 100)
 
-[node name="AudioLoadingIndicator" type="Node3D" parent="." index="9"]
+[node name="AudioLoadingIndicator" type="Node3D" parent="." index="9" unique_id=37476056]
 script = ExtResource("6_loading")
 label_offset = Vector3(0, 0.3, -1.2)
 label_font_size = 24
