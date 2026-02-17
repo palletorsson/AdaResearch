@@ -965,8 +965,9 @@ func _precache_sequence(seq_index: int) -> void:
 	var batch: int = 0
 	for sp in scene_paths:
 		if ResourceLoader.exists(sp):
-			ResourceLoader.load(sp)
-			count += 1
+			var res = ResourceLoader.load(sp)
+			if res != null:
+				count += 1
 			batch += 1
 			if batch >= 5:
 				batch = 0
