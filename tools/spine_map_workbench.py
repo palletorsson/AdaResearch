@@ -1050,6 +1050,43 @@ def write_scaffold_docs(map_dir: Path, map_name: str, sequence_id: str, force: b
         path.write_text(content, encoding="utf-8")
 
 
+def cmd_list_maps(args: argparse.Namespace) -> int:
+    catalog, source = load_sequence_catalog()
+    spine = load_spine()
+
+    # Use spine order for active sequences; fall back to all if --all
+    if args.all:
+        ordered_ids = sorted(catalog.keys())
+    else:
+        ordered_ids = [str(item.get("name", "")).strip() for item in spine]
+        ordered_ids = [sid for sid in ordered_ids if sid in catalog]
+
+    if args.sequence:
+        ordered_ids = [sid for sid in ordered_ids if sid in args.sequence]
+
+    total = 0
+    for seq_id in ordered_ids:
+        seq_def = catalog.get(seq_id, {})
+        maps = seq_def.get("maps", []) if isinstance(seq_def, dict) else []
+        maps = [str(m).strip() for m in maps if isinstance(m, str) and str(m).strip()]
+
+        if args.flat:
+            for m in maps:
+                print(f"{seq_id}/{m}")
+        else:
+            print(f"\n{seq_id} ({len(maps)} maps):")
+            for i, m in enumerate(maps, 1):
+                has_data = map_has_data(m)
+                flag = "" if has_data else " [MISSING]"
+                print(f"  {i:3d}. {m}{flag}")
+
+        total += len(maps)
+
+    if not args.flat:
+        print(f"\nTotal: {total} maps across {len(ordered_ids)} sequences")
+    return 0
+
+
 def cmd_status(args: argparse.Namespace) -> int:
     rows = build_spine_rows()
     markdown = render_spine_status_markdown(rows)
@@ -1171,6 +1208,12 @@ def cmd_scaffold(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Spine map building utilities")
     sub = parser.add_subparsers(dest="command", required=True)
+
+    p_list = sub.add_parser("list-maps", help="List all maps in active sequences")
+    p_list.add_argument("--sequence", nargs="*", default=None, help="Filter to specific sequence(s)")
+    p_list.add_argument("--all", action="store_true", help="Include all sequences, not just spine")
+    p_list.add_argument("--flat", action="store_true", help="Flat output: sequence/map per line")
+    p_list.set_defaults(func=cmd_list_maps)
 
     p_status = sub.add_parser("status", help="Audit playable spine coverage")
     p_status.add_argument("--report", default="", help="Optional markdown output path (e.g. doc/reports/SPINE_MAP_BUILD_STATUS.md)")

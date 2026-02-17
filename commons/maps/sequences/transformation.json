@@ -7,15 +7,18 @@
 			"qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
 			"formula": "T(v) = M × v, where M is a 4×4 matrix encoding translate, rotate, scale",
 			"demonstration": "Translate: move without changing. Rotate: spin without deforming. Scale: grow without breaking. Combine transformations and see order matters.",
-
 			"description": "Affine transformations in 3D space. Translation, rotation, and scale—the three fundamental ways to change position, orientation, and size while preserving shape. Matrix math makes this possible.",
 			"layer": "properties",
-			"prerequisites": ["primitives", "vectors"],
-			"unlocks": ["fractals", "proceduralgeneration"],
-
+			"prerequisites": [
+				"primitives",
+				"vectors"
+			],
+			"unlocks": [
+				"fractals",
+				"proceduralgeneration"
+			],
 			"difficulty": "beginner",
 			"estimated_time": "15-20 minutes",
-
 			"learning_objectives": [
 				"Translation: moving objects in space (T_x, T_y, T_z)",
 				"Rotation: changing orientation around axes",
@@ -24,7 +27,6 @@
 				"Composition: combining transformations (order matters!)",
 				"Invariants: what properties are preserved under each transformation"
 			],
-
 			"content": [
 				"Trans_Translate_1: Moving objects in space—translation basics",
 				"Trans_Translate_2: Advanced translation and composition",
@@ -33,31 +35,24 @@
 				"Trans_Rotation_2: Combined rotations and gimbal lock",
 				"Trans_Scale: Scaling uniformly and non-uniformly"
 			],
-
 			"maps": [
-				"Structure_Examples", 
-				"Structure_Examples_VoxelGrammar_Principles", 
 				"Trans_Intro",
 				"Trans_Translate_1",
 				"Trans_Translate_2",
-	 
 				"Trans_Rotation_1",
 				"Trans_Rotation_2",
 				"Trans_Scale"
 			],
-
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
 			],
-
 			"algorithm_paths": {
 				"Transformation_Intro": "res://algorithms/transformations/",
 				"Trans_Rotation_1": "res://algorithms/transformations/rotation/",
 				"Trans_Composition": "res://commons/primitives/furniture/"
 			},
-
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_transformation",
 			"unlock_requirements": [],
