@@ -2,95 +2,58 @@
 	"map_info": {
 		"name": "PG Branching Growth",
 		"lookup_name": "PG_Branching_Growth",
-		"description": "Scaffold map for sequence proceduralgeneration.",
+		"description": "Two growth strategies: explicit branching algorithm builds tree-like structures while noise-driven organic space creates continuous terrain. Rules vs fields.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 7,
-			"depth": 9,
+			"width": 12,
+			"depth": 10,
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "intermediate",
 			"category": "proceduralgeneration",
-			"estimated_time": "3-5 minutes",
-			"learning_objectives": [
-				"Prototype map for sequence `proceduralgeneration`.",
-				"Validate map flow and artifact placement.",
-				"Refine layout for sequence pedagogy."
-			]
+			"estimated_time": "5-7 minutes",
+			"spatial_temperature": 0.55,
+			"design_notes": "L-shaped room. Left wing: branching growth in void pit. Right wing: organic space on raised platform. Connected by a floor corridor. Two artifacts physically separated for compute safety."
 		}
-	},
-	"documentation": {
-		"summary": "PG_Branching_Growth scaffold",
-		"layout": "7x9 test room with spawn and teleporter.",
-		"objective": "Prototype map for sequence `proceduralgeneration`.",
-		"key_elements": [
-			"Add sequence artifacts."
-		]
 	},
 	"layers": {
 		"structure": [
-			["2", "2", "2", "2", "2", "2", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+			["1", "1", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "s", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			["s", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "wp:270", "0", "0", "0"],
+			["0", "an", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "sp", "0", "0", "0", "0", "0", "0", "0", "0", "0", "t:lab:0:0:0.6"]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "branching_growth_algorithm:0:2:2", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "organic_space:0:2", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
 		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next map in sequence.",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true
 	}
 }
