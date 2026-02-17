@@ -1,0 +1,92 @@
+{
+	"artifacts": {
+		"enhanced_kmeans": {
+			"name": "Enhanced K-Means Clustering",
+			"description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"random_forest_visualization": {
+			"name": "Random Forest Visualization",
+			"description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"svm_visualization": {
+			"name": "Support Vector Machine Visualization",
+			"description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"9_3_smart_rockets_vr": {
+			"name": "Smart Rockets (Genetic Algorithm)",
+			"description": "Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
+			"interaction": "observe",
+			"complexity": "beginner"
+		},
+		"9_5_evolving_bloops_vr": {
+			"name": "Evolving Bloops",
+			"description": "Organisms evolving size, speed, and behavior through natural selection pressure. Survival of the fittest visualized. Based on Nature of Code Ch.9.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_5_evolving_bloops_vr.tscn",
+			"interaction": "observe",
+			"complexity": "beginner"
+		},
+		"pca_visualization": {
+			"name": "PCA Visualization",
+			"description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+			"interaction": "observe",
+			"complexity": "advanced"
+		},
+		"neural_network_visualization": {
+			"name": "Neural Network Visualization",
+			"description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"attention_mechanisms": {
+			"name": "Attention Mechanisms",
+			"description": "Transformer attention visualization — query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
+			"interaction": "observe",
+			"complexity": "advanced"
+		},
+		"time_series_analysis": {
+			"name": "Time Series Analysis",
+			"description": "Temporal pattern recognition — sliding windows, autocorrelation, seasonal decomposition. Algorithms that learn from sequential data.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"anomaly_detection": {
+			"name": "Anomaly Detection",
+			"description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+			"interaction": "observe",
+			"complexity": "intermediate"
+		},
+		"joint_learn_walk": {
+			"name": "Joint Learn Walk (Reinforcement Learning)",
+			"description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
+			"category": "machinelearning",
+			"scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+			"interaction": "observe",
+			"complexity": "advanced"
+		}
+	}
+}
