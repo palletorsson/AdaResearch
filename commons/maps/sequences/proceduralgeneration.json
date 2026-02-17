@@ -1,50 +1,117 @@
 {
 	"sequences": {
 		"proceduralgeneration": {
-			"name": "Procedural Generation Hub",
-			"description": "Hub for procedural content generation. This sequence has been split into focused sub-sequences for better learning progression.",
+			"name": "Procedural Generation: Rules Build Worlds",
+			"truth": "A world doesn't need an author. Rules and randomness are enough.",
+			"qfep_term": "Lambda_Edge",
+			"qfep_connection": "Procedural generation IS the λ boundary — rules (F) constrained by randomness (E) produce emergent worlds. Every generator balances determinism against surprise. The threshold IS the interesting part.",
+
+			"description": "From a seed, a world grows. Growth algorithms, maze generators, evolutionary systems — each finds different ways to let rules create structure. Heavy compute artifacts get their own rooms; lighter ones share space.",
+			"layer": "lambda_edge",
+			"prerequisites": ["noise", "cellularautomata"],
+			"unlocks": [],
+
 			"difficulty": "intermediate-advanced",
-			"estimated_time": "See sub-sequences",
-			
-			"sub_sequences": {
-				"grammar_systems": {
-					"name": "Grammar Systems",
-					"description": "Rules generate structure: Markov chains, N-grams, L-systems basics",
-					"estimated_time": "25-30 minutes"
+			"estimated_time": "30-40 minutes",
+
+			"learning_objectives": [
+				"Evolutionary computation — selection pressure without design",
+				"Growth algorithms — branching, colonization, organic form",
+				"Procedural exploration — caves and mazes from rules",
+				"Geometric construction — sculpting forms from procedures",
+				"Pattern generation — mirrors, rhizomes, cellular textures"
+			],
+
+			"content": [
+				"PG_Genetic_Evolution: Genetic programming — 3D creatures evolve through selection (HEAVY: solo)",
+				"PG_Space_Colonization: Space colonization algorithm — trees grow toward attractors (HEAVY: solo)",
+				"PG_Percolation_Network: Percolation network CA — connectivity thresholds in random grids (HEAVY: solo)",
+				"PG_Branching_Growth: Branching growth + organic noise space — two growth strategies compared",
+				"PG_Caves_Mazes: Cave random walk + maze generation — procedural exploration spaces",
+				"PG_Sculpted_Forms: Cube mound + dome + layered membrane — geometry from accumulation rules",
+				"PG_Mirrored_Patterns: Mirrored cellular texture + rhizomatic maze — pattern from reflection and branching"
+			],
+
+			"maps": [
+				"PG_Genetic_Evolution",
+				"PG_Space_Colonization",
+				"PG_Percolation_Network",
+				"PG_Branching_Growth",
+				"PG_Caves_Mazes",
+				"PG_Sculpted_Forms",
+				"PG_Mirrored_Patterns"
+			],
+
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_proceduralgeneration",
+
+			"completion_rewards": [
+				"procedural_master_badge"
+			],
+
+			"algorithm_sources": {
+				"_note": "Mapping from new maps to source algorithm folders and original map artifacts",
+				"PG_Genetic_Evolution": {
+					"algorithms": ["proceduralgeneration/growth_systems/genetic_programming"],
+					"original_maps": ["ProceduralGeneration_Genetic_Algorithms", "ProceduralGeneration_Genetic_Programming"],
+					"artifacts": ["GeneticProgramming"],
+					"compute": "HEAVY — TICK + MESH + NESTED_LOOP (24KB). Solo map."
 				},
-				"spatial_partitioning": {
-					"name": "Spatial Partitioning", 
-					"description": "Dividing space: Voronoi, Delaunay, BSP, Poisson",
-					"estimated_time": "25-30 minutes"
+				"PG_Space_Colonization": {
+					"algorithms": ["proceduralgeneration/growth_systems/space_colonization_algorithm"],
+					"original_maps": ["ProceduralGeneration_Space_Colonization_Algorithms"],
+					"artifacts": ["space_colonization_algorithm"],
+					"compute": "HEAVY — TICK + MESH + NESTED_LOOP (14KB). Solo map."
 				},
-				"constraint_solvers": {
-					"name": "Constraint Solvers",
-					"description": "Rules become worlds: Wave Function Collapse, Boolean patterns",
-					"estimated_time": "30-35 minutes"
+				"PG_Percolation_Network": {
+					"algorithms": ["proceduralgeneration/growth_systems/percolationnetwork_ca"],
+					"original_maps": ["ProceduralGeneration_17"],
+					"artifacts": ["percolationnetwork_ca"],
+					"compute": "HEAVY — TICK + NESTED_LOOP (15KB). Solo map."
 				},
-				"isosurfaces": {
-					"name": "Isosurfaces",
-					"description": "Implicit to explicit: Marching Cubes, metaballs, terrain",
-					"estimated_time": "30-40 minutes"
+				"PG_Branching_Growth": {
+					"algorithms": ["proceduralgeneration/growth_systems/branchinggrowthalgorithm", "alternativegeometries/organicspace"],
+					"original_maps": ["ProceduralGeneration_BranchingGrowthAlgorithm", "ProceduralGeneration_Seven"],
+					"artifacts": ["branching_growth_algorithm", "organic_space"],
+					"compute": "MEDIUM — branching is TICK+MESH (14KB), organic is one-shot NOISE/SHADER (9KB). Safe to pair."
 				},
-				"higher_dimensions": {
-					"name": "Higher Dimensions",
-					"description": "Beyond 3D: Tesseract, Penteract, 16-cell projections",
-					"estimated_time": "25-30 minutes"
+				"PG_Caves_Mazes": {
+					"algorithms": ["proceduralgeneration/growth_systems/caverandomwalk", "proceduralgeneration/procedural_logic/mazegeneration"],
+					"original_maps": ["ProceduralGeneration_CaveRandomWalk", "ProceduralGeneration_Maze"],
+					"artifacts": ["caverandomwalk", "maze_generation"],
+					"compute": "MEDIUM — cave is one-shot NESTED_LOOP (6KB), maze has TICK but mostly generates-then-explores (11KB). Safe to pair."
+				},
+				"PG_Sculpted_Forms": {
+					"algorithms": ["proceduralgeneration/hybrid_complex/cubemound", "alternativegeometries/organicspace", "proceduralgeneration/hybrid_complex/layeredmembrane"],
+					"original_maps": ["ProceduralGeneration_CubeMound", "ProceduralGeneration_Dome", "ProceduralGeneration_Five"],
+					"artifacts": ["cube_mound_scene", "cube_mound_scene_sphere", "dome", "layered_membrane"],
+					"compute": "MEDIUM — cube_mound has TICK+MESH (9KB), dome/membrane are one-shot. Spread spatially."
+				},
+				"PG_Mirrored_Patterns": {
+					"algorithms": ["proceduralgeneration/growth_systems/mirroredcellularautomata", "alternativegeometries/rhizomaticmazespace"],
+					"original_maps": ["ProceduralGeneration_Eight"],
+					"artifacts": ["mirror_cellular_texture_for_3d", "rhizomatic_maze_space"],
+					"compute": "LIGHT — both are one-shot generators. Safe to share."
 				}
 			},
 
-			"learning_objectives": [
-				"Grammar systems for sequential generation",
-				"Spatial partitioning for world organization",
-				"Constraint propagation for coherent generation",
-				"Isosurface extraction from scalar fields",
-				"Higher-dimensional geometry visualization"
-			],
+			"redistributed_artifacts": {
+				"_note": "Artifacts from stripped numbered maps that belong in other sequences",
+				"to_fractals": ["julia_set (from _Ten)", "fibonacci_sequences (from _Four, _Ten)"],
+				"to_lsystems": ["lsystem_tree (from _Five)", "context_free_grammars (from _Ten)", "recursive_tree (from _Seven)", "tree_gen (from _Ten)"],
+				"to_cellularautomata": ["rule_30_110 (from _Eleven)"],
+				"to_spatial_partitioning": ["voronoi_diagrams + voronoi_space (from _Three)", "voronoi_grid_3d (from _Dome)"],
+				"to_constraint_solvers": ["boolean_patterns_demo (from _Two)"],
+				"to_higher_dimensions": ["sixteen_cell_net_space_showcase (from _21)"],
+				"misplaced": ["grab_stick (from _Eight — color tool, not procgen)", "interactable_demo (from _Dome — generic demo)", "array_visualizer (from _Seven, _Eleven — generic display)"]
+			},
 
-			"progression_note": "Start with grammar_systems or spatial_partitioning. constraint_solvers builds on cellularautomata. isosurfaces builds on noise. higher_dimensions builds on transformations.",
-
-			"maps": [
+			"deferred_maps": [
 				"ProceduralGeneration_Two",
 				"ProceduralGeneration_Three",
 				"ProceduralGeneration_Four",
@@ -53,52 +120,22 @@
 				"ProceduralGeneration_Eight",
 				"ProceduralGeneration_Ten",
 				"ProceduralGeneration_Eleven",
-				"ProceduralGeneration_17",
-				"ProceduralGeneration_21",
-				"ProceduralGeneration_BranchingGrowthAlgorithm",
-				"ProceduralGeneration_CaveRandomWalk",
-				"ProceduralGeneration_CubeMound",
-				"ProceduralGeneration_Dome",
-				"ProceduralGeneration_Genetic_Algorithms",
-				"ProceduralGeneration_Genetic_Programming",
-				"ProceduralGeneration_Maze",
-				"ProceduralGeneration_Space_Colonization_Algorithms"
+				"ProceduralGeneration_21"
 			],
 
-			"legacy_maps": [
-				"ProceduralGeneration_Markov_Chains",
-				"ProceduralGenerationCaveExplorer3dUi", 
-				"ProceduralGeneration_CaveRandomWalk",
-				"ProceduralGeneration_Maze",
-				"ProceduralGeneration_Genetic_Programming",
-				"ProceduralGeneration_Space_Colonization_Algorithms",
-				"ProceduralGeneration_BranchingGrowthAlgorithm",
-				"ProceduralGenerationBooleanPatterns",
-				"ProceduralGenerationCrystalRandom",
-				"ProceduralGenerationNetSpace",
-				"ProceduralGenerationSixteenCellNet",
-				"ProceduralGenerationTesseractErrorTunnel",
-				"ProceduralGenerationPortals",
-				"ProceduralGeneration_Reaction_Diffusion_Systems",
-				"ProceduralGeneration_Voronoi_Diagrams",
-				"ProceduralGeneration_Delaunay_Triangulation",
-				"ProceduralGeneration_Space_Partitioning",
-				"ProceduralGeneration_Poisson_Disk_Sampling",
-				"ProceduralGeneration_Wave_Function_Collapse",
-				"ProceduralGenerationWfcDungeonGenerator",
-				"ProceduralGeneration_Marching_Cubes_Algorithm",
-				"ProceduralGeneration_MarchingGallery",
-				"ProceduralGenerationMarchingCubesVovelNoise",
-				"ProceduralGenerationMarchingCubesSculpture",
-				"ProceduralGenerationMarchingcubesTorusSculpture",
-				"ProceduralGenerationMarchingcubesFlatLandscape",
-				"ProceduralGeneration_MarchingCave"
-			],
+			"sub_sequences": {
+				"_note": "Focused sub-sequences in branch tracks — see their own sequence JSONs",
+				"grammar_systems": "3 maps — Markov, N-grams, Voxel Grammar",
+				"spatial_partitioning": "4 maps — Voronoi, Delaunay, BSP, Poisson",
+				"constraint_solvers": "3 maps — WFC, Boolean patterns",
+				"isosurfaces": "3 maps — Marching cubes, cave, gallery",
+				"higher_dimensions": "4 maps — Tesseract, 16-cell, portals"
+			},
 
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_proceduralgeneration",
-			"unlock_requirements": ["noise"],
-			"completion_rewards": ["procedural_master_badge"]
+			"references": {
+				"reorg_doc": "doc/PROCEDURAL_GENERATION_REORGANIZATION.md",
+				"algorithm_categories": "algorithms/proceduralgeneration/ (9 folders)"
+			}
 		}
 	}
 }
