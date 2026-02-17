@@ -72,11 +72,10 @@
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
-			"name": "Next Lesson",
-			"description": "Continue to the next algorithm demonstration",
+			"name": "Next",
+			"description": "Continue to next step",
 			"properties": {
-				"destination": "next",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
 		},
 		"s": {

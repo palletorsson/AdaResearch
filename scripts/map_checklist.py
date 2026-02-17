@@ -14,6 +14,7 @@ Checks:
   9. NO LIFTS        no l: in utilities (use tc instead)
  10. VOID ARTIFACTS  artifacts on void cells flagged as INFO (valid design)
  11. EXIT PATTERN    3x3 floor with void center for teleporter
+ 12. SEQUENCE FLOW   bare t teleporter has utility_definitions with next_in_sequence
 
 Usage:
   python map_checklist.py <map_data.json>
@@ -389,6 +390,29 @@ def run_checklist(path):
             results.append(('FAIL', 'EXIT_PATTERN', '; '.join(issues[:3])))
     else:
         results.append(('WARN', 'EXIT_PATTERN', 'No teleporter found to check'))
+
+    # 12. SEQUENCE FLOW: bare 't' needs utility_definitions with next_in_sequence
+    has_bare_t = False
+    for r in range(rows):
+        for c in range(cols):
+            if ucell(r, c) == 't':
+                has_bare_t = True
+                break
+        if has_bare_t:
+            break
+    if has_bare_t:
+        ud = data.get('utility_definitions', {})
+        t_def = ud.get('t', {})
+        t_props = t_def.get('properties', {})
+        if t_props.get('action') == 'next_in_sequence':
+            results.append(('PASS', 'SEQ_FLOW', 't has next_in_sequence'))
+            passed += 1
+        else:
+            results.append(('FAIL', 'SEQ_FLOW', 'bare t missing utility_definitions with action: next_in_sequence'))
+    else:
+        # Uses t: or t3: with explicit target — no need for utility_definitions
+        results.append(('PASS', 'SEQ_FLOW', 'teleporter has explicit target'))
+        passed += 1
 
     return name, results, passed
 

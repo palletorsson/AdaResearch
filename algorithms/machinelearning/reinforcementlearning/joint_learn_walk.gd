@@ -624,7 +624,7 @@ func end_episode():
 	
 	# Flash the core body on episode end for visual feedback
 	if is_instance_valid(core_body):
-		var mesh := core_body.get_node_or_null("MeshInstance3D")
+		var mesh = core_body.get_node_or_null("MeshInstance3D")
 		if mesh == null:
 			for c in core_body.get_children():
 				if c is MeshInstance3D:

@@ -84,9 +84,10 @@
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
-			"name": "Exit",
+			"name": "Next",
+			"description": "Continue to next step",
 			"properties": {
-				"action": "return_to_lab"
+				"action": "next_in_sequence"
 			}
 		}
 	},

@@ -100,6 +100,14 @@
 			"properties": {
 				"height": 5.5
 			}
+		},
+		"t": {
+			"type": "teleporter",
+			"name": "Next",
+			"description": "Continue to next step",
+			"properties": {
+				"action": "next_in_sequence"
+			}
 		}
 	},
 	"lighting": {

@@ -62,10 +62,10 @@
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
-			"name": "Exit Test",
-			"description": "Return to main menu",
+			"name": "Next",
+			"description": "Continue to next step",
 			"properties": {
-				"action": "main_menu"
+				"action": "next_in_sequence"
 			}
 		}
 	},
