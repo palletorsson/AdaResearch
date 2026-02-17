@@ -80,7 +80,7 @@ func _spawn_balls():
 		sphere.height = radius * 2.0
 		mesh_inst.mesh = sphere
 		var mat := StandardMaterial3D.new()
-		var color := queer_colors[i % queer_colors.size()]
+		var color: Color = queer_colors[i % queer_colors.size()]
 		mat.albedo_color = color
 		mat.emission_enabled = true
 		mat.emission = color * 0.4

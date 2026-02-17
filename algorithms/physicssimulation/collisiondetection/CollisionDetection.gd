@@ -56,7 +56,7 @@ func _create_objects():
 
 		var col := CollisionShape3D.new()
 		var mesh_inst := MeshInstance3D.new()
-		var color := shape_colors[shape_type]
+		var color: Color = shape_colors[shape_type]
 
 		match shape_type:
 			0:  # Sphere

@@ -55,6 +55,7 @@ var is_paused: bool = false
 var is_transitioning: bool = false
 var active_tween: Tween = null
 var tour_complete: bool = false
+var _last_precached_seq: int = -1  # Track which sequence we've already pre-cached
 
 # Snapshot of root's children at startup (autoloads + scene — used for cleanup)
 var _root_snapshot: Array[StringName] = []
@@ -173,6 +174,9 @@ func _wait_for_initial_map() -> void:
 	await _fade_from_black(fade_duration)
 	is_transitioning = false
 	_start_traversal()
+
+	# Pre-cache the first sequence's artifact scenes while Lab tour plays.
+	_precache_sequence(0)
 
 # ---------------------------------------------------------------------------
 # Tour data loading — follows lab_evolution.actual_progression order
@@ -304,6 +308,11 @@ func _load_map(map_name: String) -> void:
 	await _fade_from_black(fade_duration)
 	is_transitioning = false
 	_start_traversal()
+
+	# Pre-cache next sequence's artifacts in background (if entering a new sequence)
+	if spine_index >= 0 and spine_index != _last_precached_seq:
+		_last_precached_seq = spine_index
+		_precache_sequence(spine_index + 1)
 
 # ---------------------------------------------------------------------------
 # Cleanup — nuke all non-essential content before loading a new map
@@ -827,3 +836,104 @@ func _get_grid_dimensions() -> Vector3:
 		var dims = data_comp.get_grid_dimensions()
 		return Vector3(dims.x, dims.y, dims.z)
 	return Vector3(10, 4, 10)
+
+# ---------------------------------------------------------------------------
+# Per-sequence pre-caching — load next sequence's artifact scenes in background
+# ---------------------------------------------------------------------------
+var _artifact_registry: Dictionary = {}  # lookup_name -> scene_path (built once)
+
+func _build_artifact_registry() -> void:
+	"""Build a lookup_name → scene_path dictionary from all registry JSONs."""
+	# Try to reuse GridInteractablesComponent's loaded registry first
+	if lab_grid_system:
+		var interactables = lab_grid_system.get_node_or_null("GridInteractablesComponent")
+		if interactables and interactables.get("grid_artifact_registry"):
+			for key in interactables.grid_artifact_registry:
+				var entry = interactables.grid_artifact_registry[key]
+				if entry is Dictionary and entry.has("scene"):
+					_artifact_registry[key] = entry["scene"]
+			if _artifact_registry.size() > 0:
+				print("CameraTourManager: Built registry from GridInteractablesComponent (%d entries)" % _artifact_registry.size())
+				return
+
+	# Fallback: read registry JSONs ourselves
+	var registry_paths: Array[String] = [
+		"res://commons/artifacts/grid_artifacts.json",
+		"res://commons/artifacts/lab_artifacts.json",
+	]
+	var dir := DirAccess.open("res://commons/artifacts/registry/")
+	if dir:
+		dir.list_dir_begin()
+		var fname := dir.get_next()
+		while fname != "":
+			if fname.ends_with(".json"):
+				registry_paths.append("res://commons/artifacts/registry/" + fname)
+			fname = dir.get_next()
+
+	for reg_path in registry_paths:
+		if not FileAccess.file_exists(reg_path):
+			continue
+		var f := FileAccess.open(reg_path, FileAccess.READ)
+		var data = JSON.parse_string(f.get_as_text())
+		f.close()
+		if data == null:
+			continue
+		var artifacts: Dictionary = data.get("artifacts", {})
+		for key in artifacts:
+			var entry = artifacts[key]
+			if entry is Dictionary:
+				var sp: String = entry.get("scene", "")
+				if sp != "":
+					_artifact_registry[key] = sp
+	print("CameraTourManager: Built registry from JSON files (%d entries)" % _artifact_registry.size())
+
+func _extract_lookup_name(token: String) -> String:
+	"""Strip #config and :rotation suffixes from a map interactable token."""
+	var base := token.split("#")[0]
+	base = base.split(":")[0]
+	return base.strip_edges()
+
+func _precache_sequence(seq_index: int) -> void:
+	"""Pre-cache artifact scenes for a specific sequence by reading its map JSONs."""
+	if seq_index < 0 or seq_index >= tour_data.size():
+		return
+	if _artifact_registry.is_empty():
+		_build_artifact_registry()
+
+	var seq: Dictionary = tour_data[seq_index]
+	var scene_paths: Dictionary = {}
+
+	# Read each map's JSON to find which artifacts it uses
+	for map_name in seq.maps:
+		var map_path := "res://commons/maps/%s/map_data.json" % map_name
+		if not FileAccess.file_exists(map_path):
+			continue
+		var f := FileAccess.open(map_path, FileAccess.READ)
+		var map_data = JSON.parse_string(f.get_as_text())
+		f.close()
+		if map_data == null:
+			continue
+		var layers = map_data.get("layers", {})
+		var interactables = layers.get("interactables", [])
+		for row in interactables:
+			if row is Array:
+				for token in row:
+					if token is String and token != "":
+						var lookup := _extract_lookup_name(token)
+						if lookup != "":
+							var sp: String = _artifact_registry.get(lookup, "")
+							if sp != "" and not scene_paths.has(sp):
+								scene_paths[sp] = true
+
+	# Pre-load in batches, yielding to avoid frame stutter
+	var count: int = 0
+	var batch: int = 0
+	for sp in scene_paths:
+		if ResourceLoader.exists(sp):
+			ResourceLoader.load(sp)
+			count += 1
+			batch += 1
+			if batch >= 5:
+				batch = 0
+				await get_tree().process_frame
+	print("CameraTourManager: Pre-cached %d scenes for '%s'" % [count, seq.sequence_name])
