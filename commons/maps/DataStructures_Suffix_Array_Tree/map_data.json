@@ -30,7 +30,7 @@
 			["s", "an:datastructures", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t:lab:0:0:0.6", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " ", " "]
 		],
 		"interactables": [
@@ -42,17 +42,17 @@
 		]
 	},
 	"utility_definitions": {
-		"t:lab:0:0:0.6": {
-			"type": "teleporter",
-			"name": "Next Lesson",
-			"description": "Continue to the next lesson",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
 		"s": {
 			"properties": {
 				"height": 5.5
+			}
+		},
+		"t": {
+			"type": "teleporter",
+			"name": "Next",
+			"description": "Continue to next step",
+			"properties": {
+				"action": "next_in_sequence"
 			}
 		}
 	},
