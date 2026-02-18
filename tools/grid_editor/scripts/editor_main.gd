@@ -665,13 +665,16 @@ func _get_orientation_plane() -> String:
 func _grid_to_3d(grid_x: float, grid_y: float, grid_size: float) -> Vector3:
 	# Convert 2D grid coords to 3D based on orientation plane
 	var plane = _get_orientation_plane()
+	# For vertical planes (YZ, XY), grid row 0 is at the top of the 2D editor
+	# but should map to the highest Y in 3D, so we flip: Y = (max_row - grid_y).
+	var grid_extent_y := float(grid_canvas.grid_dimensions.y) if grid_canvas else 12.0
 	match plane:
 		"XZ":  # Horizontal surface, Y up (top-down view)
 			return Vector3(grid_x * grid_size, 0, grid_y * grid_size)
 		"YZ":  # Vertical surface, X forward (side view - glass rack)
-			return Vector3(0, grid_y * grid_size, grid_x * grid_size)
-		"XY":  # Vertical surface, Z forward (front view - science table)
-			return Vector3(grid_x * grid_size, grid_y * grid_size, 0)
+			return Vector3(0, (grid_extent_y - grid_y) * grid_size, grid_x * grid_size)
+		"XY":  # Vertical surface, Z forward (front view - audio rack)
+			return Vector3(grid_x * grid_size, (grid_extent_y - grid_y) * grid_size, 0)
 		_:
 			return Vector3(grid_x * grid_size, 0, grid_y * grid_size)
 
