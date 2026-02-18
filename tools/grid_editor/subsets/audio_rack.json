@@ -1,7 +1,7 @@
 {
   "id": "audio_rack",
   "name": "Audio Rack",
-  "version": "2.1",
+  "version": "2.2",
   "description": "Audio synthesis elements with parameter bindings for SongDevTools",
   "orientation": {
     "plane": "XY",
@@ -24,6 +24,118 @@
     {"id": "modulators", "name": "Modulators", "color": "#9C27B0"},
     {"id": "displays", "name": "Displays", "color": "#F44336"},
     {"id": "buttons", "name": "Buttons", "color": "#E91E63"}
+  ],
+  "presets": [
+    {
+      "id": "basic_synth_panel",
+      "name": "Basic Synth Panel",
+      "description": "Single oscillator with frequency, amplitude, waveform display and play button.",
+      "grid_size": [8, 6],
+      "placements": [
+        {"element": "src_sine", "position": [0, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [5, 0], "rotation": 0},
+        {"element": "sl_dur", "position": [7, 0], "rotation": 0},
+        {"element": "disp_waveform", "position": [0, 4], "rotation": 0},
+        {"element": "btn_play", "position": [5, 4], "rotation": 0},
+        {"element": "btn_stop", "position": [6, 4], "rotation": 0},
+        {"element": "btn_reset", "position": [7, 4], "rotation": 0}
+      ]
+    },
+    {
+      "id": "subtractive_synth",
+      "name": "Subtractive Synth",
+      "description": "303-style acid bass with filter cutoff, resonance, envelope and spectrum display.",
+      "grid_size": [10, 8],
+      "placements": [
+        {"element": "src_303", "position": [0, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [5, 0], "rotation": 0},
+        {"element": "knob_cutoff", "position": [7, 0], "rotation": 0},
+        {"element": "knob_resonance", "position": [7, 3], "rotation": 0},
+        {"element": "knob_attack", "position": [0, 4], "rotation": 0},
+        {"element": "knob_release", "position": [3, 4], "rotation": 0},
+        {"element": "disp_spectrum", "position": [0, 6], "rotation": 0},
+        {"element": "disp_wave_small", "position": [5, 6], "rotation": 0},
+        {"element": "btn_play", "position": [8, 6], "rotation": 0},
+        {"element": "btn_stop", "position": [9, 6], "rotation": 0},
+        {"element": "btn_reset", "position": [9, 7], "rotation": 0}
+      ]
+    },
+    {
+      "id": "fm_synthesis_station",
+      "name": "FM Synthesis Station",
+      "description": "DX7 FM piano with dual oscillator control, Lissajous phase display and full monitoring.",
+      "grid_size": [12, 8],
+      "placements": [
+        {"element": "src_dx7", "position": [0, 0], "rotation": 0},
+        {"element": "knob_freq", "position": [3, 0], "rotation": 0},
+        {"element": "sl_start_freq", "position": [6, 0], "rotation": 0},
+        {"element": "sl_end_freq", "position": [8, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [10, 0], "rotation": 0},
+        {"element": "knob_attack", "position": [0, 3], "rotation": 0},
+        {"element": "knob_release", "position": [3, 3], "rotation": 0},
+        {"element": "sl_decay", "position": [6, 3], "rotation": 0},
+        {"element": "sl_h_mix", "position": [8, 3], "rotation": 0},
+        {"element": "disp_lissajous", "position": [0, 5], "rotation": 0},
+        {"element": "disp_waveform", "position": [4, 5], "rotation": 0},
+        {"element": "disp_spectrum", "position": [8, 5], "rotation": 0},
+        {"element": "btn_play", "position": [0, 8], "rotation": 0},
+        {"element": "btn_stop", "position": [1, 8], "rotation": 0},
+        {"element": "btn_reset", "position": [2, 8], "rotation": 0}
+      ]
+    },
+    {
+      "id": "beat_machine",
+      "name": "Beat Machine",
+      "description": "808 kick + heartbeat combo with pan control and dual monitoring.",
+      "grid_size": [10, 6],
+      "placements": [
+        {"element": "src_808kick", "position": [0, 0], "rotation": 0},
+        {"element": "src_heartbeat", "position": [3, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [6, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [8, 0], "rotation": 0},
+        {"element": "sl_h_pan", "position": [0, 3], "rotation": 0},
+        {"element": "sl_h_mix", "position": [5, 3], "rotation": 0},
+        {"element": "disp_monitor", "position": [0, 4], "rotation": 0},
+        {"element": "meter_vu", "position": [5, 4], "rotation": 0},
+        {"element": "meter_vu", "position": [7, 4], "rotation": 0},
+        {"element": "btn_play", "position": [9, 4], "rotation": 0},
+        {"element": "btn_stop", "position": [9, 5], "rotation": 0}
+      ]
+    },
+    {
+      "id": "modular_exploration",
+      "name": "Modular Exploration",
+      "description": "Full modular synth wall with Moog, Aphex and ambient sources, all controls and all displays.",
+      "grid_size": [14, 10],
+      "placements": [
+        {"element": "src_moog", "position": [0, 0], "rotation": 0},
+        {"element": "src_aphex", "position": [3, 0], "rotation": 0},
+        {"element": "src_ambient", "position": [6, 0], "rotation": 0},
+        {"element": "sl_freq", "position": [9, 0], "rotation": 0},
+        {"element": "sl_amp", "position": [11, 0], "rotation": 0},
+        {"element": "sl_dur", "position": [13, 0], "rotation": 0},
+        {"element": "knob_freq", "position": [0, 3], "rotation": 0},
+        {"element": "knob_cutoff", "position": [3, 3], "rotation": 0},
+        {"element": "knob_resonance", "position": [6, 3], "rotation": 0},
+        {"element": "knob_attack", "position": [9, 3], "rotation": 0},
+        {"element": "knob_release", "position": [12, 3], "rotation": 0},
+        {"element": "sl_decay", "position": [0, 6], "rotation": 0},
+        {"element": "sl_start_freq", "position": [2, 6], "rotation": 0},
+        {"element": "sl_end_freq", "position": [4, 6], "rotation": 0},
+        {"element": "sl_h_pan", "position": [6, 6], "rotation": 0},
+        {"element": "sl_h_mix", "position": [6, 7], "rotation": 0},
+        {"element": "disp_waveform", "position": [0, 8], "rotation": 0},
+        {"element": "disp_spectrum", "position": [4, 8], "rotation": 0},
+        {"element": "disp_lissajous", "position": [8, 8], "rotation": 0},
+        {"element": "meter_vu", "position": [12, 6], "rotation": 0},
+        {"element": "meter_vu", "position": [13, 6], "rotation": 0},
+        {"element": "btn_play", "position": [12, 8], "rotation": 0},
+        {"element": "btn_stop", "position": [13, 8], "rotation": 0},
+        {"element": "btn_reset", "position": [12, 9], "rotation": 0}
+      ]
+    }
   ],
   "elements": [
     {

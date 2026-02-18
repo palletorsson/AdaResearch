@@ -1,7 +1,7 @@
 {
   "id": "glass_rack",
   "name": "Glass Rack",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Laboratory glassware apparatus - vertical side view",
   
   "orientation": {
@@ -25,7 +25,88 @@
     {"id": "condensers", "name": "Condensers", "color": "#00BCD4"},
     {"id": "terminals", "name": "Terminals", "color": "#F44336"}
   ],
-  
+
+  "presets": [
+    {
+      "id": "simple_distillation",
+      "name": "Simple Distillation",
+      "description": "Classic distillation setup: flask → condenser → beaker. The foundational chemistry apparatus.",
+      "grid_size": [8, 10],
+      "placements": [
+        {"element": "flask", "position": [0, 0], "rotation": 0},
+        {"element": "straight", "position": [1, 3], "rotation": 0},
+        {"element": "corner_br", "position": [1, 5], "rotation": 0},
+        {"element": "straight_h", "position": [3, 5], "rotation": 0},
+        {"element": "condenser", "position": [5, 5], "rotation": 0},
+        {"element": "corner_bl", "position": [5, 8], "rotation": 0},
+        {"element": "drip", "position": [6, 9], "rotation": 0},
+        {"element": "beaker", "position": [5, 8], "rotation": 0}
+      ]
+    },
+    {
+      "id": "reflux_condenser",
+      "name": "Reflux Condenser",
+      "description": "Vertical reflux tower: flask with spiral condenser returning liquid back down.",
+      "grid_size": [6, 12],
+      "placements": [
+        {"element": "flask", "position": [2, 0], "rotation": 0},
+        {"element": "straight", "position": [2, 3], "rotation": 0},
+        {"element": "spiral", "position": [2, 5], "rotation": 0},
+        {"element": "cap", "position": [2, 9], "rotation": 0}
+      ]
+    },
+    {
+      "id": "fractional_distillation",
+      "name": "Fractional Distillation",
+      "description": "Multi-stage apparatus with Y-splitter separating into two collection paths.",
+      "grid_size": [10, 14],
+      "placements": [
+        {"element": "flask", "position": [4, 0], "rotation": 0},
+        {"element": "straight_long", "position": [4, 3], "rotation": 0},
+        {"element": "spiral", "position": [4, 6], "rotation": 0},
+        {"element": "ypipe", "position": [4, 10], "rotation": 0},
+        {"element": "corner_br", "position": [2, 11], "rotation": 0},
+        {"element": "drip", "position": [2, 13], "rotation": 0},
+        {"element": "beaker", "position": [1, 12], "rotation": 0},
+        {"element": "corner_bl", "position": [6, 11], "rotation": 0},
+        {"element": "drip", "position": [6, 13], "rotation": 0},
+        {"element": "beaker", "position": [6, 12], "rotation": 0}
+      ]
+    },
+    {
+      "id": "circulation_loop",
+      "name": "Circulation Loop",
+      "description": "Closed loop apparatus: flask → up → across → condenser → down → back to flask.",
+      "grid_size": [8, 8],
+      "placements": [
+        {"element": "flask", "position": [0, 0], "rotation": 0},
+        {"element": "straight", "position": [0, 3], "rotation": 0},
+        {"element": "corner_tl", "position": [0, 5], "rotation": 0},
+        {"element": "straight_h", "position": [2, 5], "rotation": 0},
+        {"element": "condenser", "position": [4, 5], "rotation": 0},
+        {"element": "corner_tr", "position": [6, 5], "rotation": 0},
+        {"element": "straight", "position": [6, 3], "rotation": 0},
+        {"element": "sbend", "position": [5, 1], "rotation": 0}
+      ]
+    },
+    {
+      "id": "cascading_filter",
+      "name": "Cascading Filter",
+      "description": "Three-stage cascade: each stage has a flask with wobbly connector to the next.",
+      "grid_size": [12, 6],
+      "placements": [
+        {"element": "flask", "position": [0, 0], "rotation": 0},
+        {"element": "straight_h", "position": [2, 1], "rotation": 0},
+        {"element": "wobbly", "position": [3, 0], "rotation": 0},
+        {"element": "flask", "position": [5, 0], "rotation": 0},
+        {"element": "straight_h", "position": [7, 1], "rotation": 0},
+        {"element": "wobbly", "position": [8, 0], "rotation": 0},
+        {"element": "beaker", "position": [10, 0], "rotation": 0},
+        {"element": "cap", "position": [10, 3], "rotation": 0}
+      ]
+    }
+  ],
+
   "elements": [
     {
       "id": "flask",
