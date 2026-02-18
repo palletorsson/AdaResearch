@@ -506,7 +506,8 @@ func _toggle_edit_mode() -> void:
 		_set_mouse_look(false)
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		_create_edit_cursor()
-		_set_status("EDIT MODE — LMB: orbit, RMB: pan, Scroll: zoom, Click: add/remove cube, 1-6: height, Ctrl+S: save")
+		_load_grammar_pieces()
+		_set_status("EDIT MODE — Click:+1h RClick:-1h Scroll:zoom Tab:stamps R:rotate M:mirror Ctrl+Z:undo Ctrl+S:save")
 	else:
 		_spin_speed = 0.3
 		_remove_edit_cursor()
@@ -610,6 +611,13 @@ func _handle_edit_input(event: InputEvent) -> void:
 		else:
 			# No button — update cursor
 			_update_edit_cursor_pos(mm.position)
+			# Update stamp preview position if stamp is active
+			if _stamp_index >= 0:
+				var stamp_result := _edit_raycast(mm.position)
+				if not stamp_result.is_empty():
+					var sn: Vector3 = stamp_result.normal
+					var sg := _world_to_grid(stamp_result.position - sn * 0.1)
+					_update_stamp_preview(sg.x, sg.z)
 
 		_edit_last_mouse = mm.position
 		return
@@ -630,6 +638,60 @@ func _handle_edit_input(event: InputEvent) -> void:
 		# Ctrl+S = save
 		if key.keycode == KEY_S and key.ctrl_pressed:
 			_edit_save_map()
+			get_viewport().set_input_as_handled()
+			return
+
+		# Ctrl+Z = undo
+		if key.keycode == KEY_Z and key.ctrl_pressed and not key.shift_pressed:
+			_undo()
+			get_viewport().set_input_as_handled()
+			return
+
+		# Ctrl+Y or Ctrl+Shift+Z = redo
+		if (key.keycode == KEY_Y and key.ctrl_pressed) or (key.keycode == KEY_Z and key.ctrl_pressed and key.shift_pressed):
+			_redo()
+			get_viewport().set_input_as_handled()
+			return
+
+		# Tab / Shift+Tab = browse stamp pieces
+		if key.keycode == KEY_TAB:
+			if key.shift_pressed:
+				_stamp_select_prev()
+			else:
+				_stamp_select_next()
+			get_viewport().set_input_as_handled()
+			return
+
+		# R = rotate stamp 90° CW
+		if key.keycode == KEY_R and _stamp_index >= 0:
+			_stamp_rotation = (_stamp_rotation + 90) % 360
+			if _stamp_grid_pos.x >= 0:
+				_update_stamp_preview(_stamp_grid_pos.x, _stamp_grid_pos.y)
+			_set_status("STAMP — Rotation: %d°" % _stamp_rotation)
+			get_viewport().set_input_as_handled()
+			return
+
+		# M = mirror stamp on X axis
+		if key.keycode == KEY_M and _stamp_index >= 0:
+			_stamp_mirror_x = not _stamp_mirror_x
+			if _stamp_grid_pos.x >= 0:
+				_update_stamp_preview(_stamp_grid_pos.x, _stamp_grid_pos.y)
+			_set_status("STAMP — Mirror: %s" % ("ON" if _stamp_mirror_x else "OFF"))
+			get_viewport().set_input_as_handled()
+			return
+
+		# Enter = place stamp
+		if key.keycode == KEY_ENTER and _stamp_index >= 0:
+			_stamp_place()
+			get_viewport().set_input_as_handled()
+			return
+
+		# Escape = cancel stamp (or exit edit mode)
+		if key.keycode == KEY_ESCAPE:
+			if _stamp_index >= 0:
+				_stamp_cancel()
+			else:
+				_toggle_edit_mode()
 			get_viewport().set_input_as_handled()
 			return
 
@@ -694,9 +756,21 @@ func _update_edit_cursor_pos(screen_pos: Vector2) -> void:
 
 func _edit_click(screen_pos: Vector2, is_right: bool) -> void:
 	"""2.5D heightmap editor: Left click = +1 layer, Right click = -1 layer.
-	Hold Shift + click to set column to exact paint_height (number keys 1-6)."""
+	Hold Shift + click to set column to exact paint_height (number keys 1-6).
+	If a stamp is active, click places the stamp instead."""
 	var result := _edit_raycast(screen_pos)
 	if result.is_empty():
+		return
+
+	# If stamp is active, place it on click
+	if _stamp_index >= 0 and not is_right:
+		var hit_normal_s: Vector3 = result.normal
+		var grid_pos_s := _world_to_grid(result.position - hit_normal_s * 0.1)
+		_stamp_grid_pos = Vector2i(grid_pos_s.x, grid_pos_s.z)
+		_stamp_place()
+		return
+	elif _stamp_index >= 0 and is_right:
+		_stamp_cancel()
 		return
 
 	var hit_pos: Vector3 = result.position
@@ -734,6 +808,8 @@ func _edit_click(screen_pos: Vector2, is_right: bool) -> void:
 
 	if target_height == current_height:
 		return
+
+	_push_undo()
 
 	# Remove cubes above target height
 	for y in range(target_height, sc.grid_y):
@@ -865,6 +941,343 @@ func _edit_save_map() -> void:
 	out_file.store_string(json_out)
 	out_file.close()
 	_set_status("EDIT — Saved to %s ✓" % save_path)
+
+# ---------------------------------------------------------------------------
+# UNDO / REDO — snapshot the whole layout + utility layer before each edit
+# ---------------------------------------------------------------------------
+
+const UNDO_MAX := 50
+var _undo_stack: Array[Dictionary] = []
+var _redo_stack: Array[Dictionary] = []
+
+func _snapshot_state() -> Dictionary:
+	"""Capture current layout + utility state for undo."""
+	var dc = _grid_system.get("data_component") if _grid_system and "data_component" in _grid_system else null
+	if not dc:
+		return {}
+	var sd = dc.get_structure_data() if dc.has_method("get_structure_data") else null
+	if not sd or not ("layout_data" in sd):
+		return {}
+	# Deep copy layout
+	var layout_copy: Array = []
+	for row in sd.layout_data:
+		var row_copy: Array = []
+		for cell in row:
+			row_copy.append(str(cell))
+		layout_copy.append(row_copy)
+	# Deep copy utility layer if present
+	var utility_copy: Array = []
+	var map_data := _get_current_map_data()
+	if map_data.has("layers") and map_data.layers.has("utility"):
+		for row in map_data.layers.utility:
+			var row_copy: Array = []
+			for cell in row:
+				row_copy.append(str(cell) if cell != null else "")
+			utility_copy.append(row_copy)
+	return {"layout": layout_copy, "utility": utility_copy}
+
+func _push_undo() -> void:
+	"""Push current state onto undo stack (call BEFORE making changes)."""
+	var snap := _snapshot_state()
+	if snap.is_empty():
+		return
+	_undo_stack.append(snap)
+	if _undo_stack.size() > UNDO_MAX:
+		_undo_stack.pop_front()
+	_redo_stack.clear()
+
+func _undo() -> void:
+	if _undo_stack.is_empty():
+		_set_status("EDIT — Nothing to undo")
+		return
+	# Push current state to redo before restoring
+	var current := _snapshot_state()
+	if not current.is_empty():
+		_redo_stack.append(current)
+	var prev: Dictionary = _undo_stack.pop_back()
+	_restore_state(prev)
+	_set_status("EDIT — Undo (%d left)" % _undo_stack.size())
+
+func _redo() -> void:
+	if _redo_stack.is_empty():
+		_set_status("EDIT — Nothing to redo")
+		return
+	var current := _snapshot_state()
+	if not current.is_empty():
+		_undo_stack.append(current)
+	var next: Dictionary = _redo_stack.pop_back()
+	_restore_state(next)
+	_set_status("EDIT — Redo (%d left)" % _redo_stack.size())
+
+func _restore_state(state: Dictionary) -> void:
+	"""Apply a snapshot back to the grid — rebuild structure from layout."""
+	var sc := _get_structure_component()
+	var dc = _grid_system.get("data_component") if _grid_system and "data_component" in _grid_system else null
+	if not sc or not dc:
+		return
+
+	var layout: Array = state.get("layout", [])
+	if layout.is_empty():
+		return
+
+	# Write layout back to data component
+	var sd = dc.get_structure_data() if dc.has_method("get_structure_data") else null
+	if sd and "layout_data" in sd:
+		sd.layout_data = layout
+
+	# Rebuild the grid visuals: clear all cubes, re-add from layout
+	for x in range(sc.grid_x):
+		for y in range(sc.grid_y):
+			for z in range(sc.grid_z):
+				if sc.grid[x][y][z]:
+					sc.remove_cube_at(x, y, z)
+
+	for z in range(mini(layout.size(), sc.grid_z)):
+		for x in range(mini(layout[z].size(), sc.grid_x)):
+			var h: int = int(str(layout[z][x]))
+			for y in range(h):
+				if y < sc.grid_y:
+					sc.add_cube_at(x, y, z)
+
+	# Restore utility layer if present
+	var utility: Array = state.get("utility", [])
+	if not utility.is_empty():
+		var map_data := _get_current_map_data()
+		if map_data.has("layers"):
+			map_data.layers["utility"] = utility
+
+func _get_current_map_data() -> Dictionary:
+	"""Get the parsed map_data dict from the data component."""
+	var dc = _grid_system.get("data_component") if _grid_system and "data_component" in _grid_system else null
+	if not dc:
+		return {}
+	if dc.has_method("get_map_data"):
+		var d = dc.get_map_data()
+		if d is Dictionary:
+			return d
+	# Fallback: read from file
+	var map_name: String = _grid_system.map_name if _grid_system and "map_name" in _grid_system else ""
+	if map_name.is_empty():
+		return {}
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(path):
+		return {}
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return {}
+	var parser := JSON.new()
+	if parser.parse(file.get_as_text()) != OK:
+		return {}
+	return parser.data if parser.data is Dictionary else {}
+
+# ---------------------------------------------------------------------------
+# STAMP SYSTEM — paste voxel grammar pieces onto the grid
+# ---------------------------------------------------------------------------
+
+const GRAMMAR_PATH := "res://commons/maps/Structure_Examples/voxel_grammar_subset.json"
+
+var _stamp_pieces: Array[Dictionary] = []  # loaded grammar pieces
+var _stamp_index: int = -1                 # -1 = no stamp selected
+var _stamp_rotation: int = 0               # 0, 90, 180, 270
+var _stamp_mirror_x: bool = false
+var _stamp_preview_meshes: Array[MeshInstance3D] = []
+var _stamp_grid_pos: Vector2i = Vector2i(-1, -1)  # last hovered grid x,z
+
+func _load_grammar_pieces() -> void:
+	"""Load all pieces from the voxel grammar JSON."""
+	if not _stamp_pieces.is_empty():
+		return  # already loaded
+	if not FileAccess.file_exists(GRAMMAR_PATH):
+		push_warning("MapCatalogDesktop3D: Grammar file not found: %s" % GRAMMAR_PATH)
+		return
+	var file := FileAccess.open(GRAMMAR_PATH, FileAccess.READ)
+	if not file:
+		return
+	var parser := JSON.new()
+	if parser.parse(file.get_as_text()) != OK:
+		push_warning("MapCatalogDesktop3D: Grammar JSON parse error")
+		return
+	var data: Dictionary = parser.data
+	if not data.has("pieces"):
+		return
+	for piece in data.pieces:
+		if piece is Dictionary and piece.has("heightmap"):
+			_stamp_pieces.append(piece)
+	_set_status("EDIT — Loaded %d grammar pieces" % _stamp_pieces.size())
+
+func _stamp_select_next() -> void:
+	if _stamp_pieces.is_empty():
+		_load_grammar_pieces()
+	if _stamp_pieces.is_empty():
+		return
+	_stamp_index = (_stamp_index + 1) % _stamp_pieces.size()
+	_stamp_rotation = 0
+	_stamp_mirror_x = false
+	var piece: Dictionary = _stamp_pieces[_stamp_index]
+	_set_status("STAMP [%d/%d]: %s (%s) — R:rotate M:mirror Enter:place Esc:cancel" % [
+		_stamp_index + 1, _stamp_pieces.size(),
+		piece.get("name", "?"), piece.get("id", "?")])
+
+func _stamp_select_prev() -> void:
+	if _stamp_pieces.is_empty():
+		_load_grammar_pieces()
+	if _stamp_pieces.is_empty():
+		return
+	_stamp_index = (_stamp_index - 1) if _stamp_index > 0 else (_stamp_pieces.size() - 1)
+	_stamp_rotation = 0
+	_stamp_mirror_x = false
+	var piece: Dictionary = _stamp_pieces[_stamp_index]
+	_set_status("STAMP [%d/%d]: %s (%s) — R:rotate M:mirror Enter:place Esc:cancel" % [
+		_stamp_index + 1, _stamp_pieces.size(),
+		piece.get("name", "?"), piece.get("id", "?")])
+
+func _stamp_cancel() -> void:
+	_stamp_index = -1
+	_stamp_rotation = 0
+	_stamp_mirror_x = false
+	_clear_stamp_preview()
+	_set_status("EDIT MODE — stamp cancelled")
+
+func _get_transformed_heightmap() -> Array:
+	"""Return the current stamp piece heightmap after rotation + mirror."""
+	if _stamp_index < 0 or _stamp_index >= _stamp_pieces.size():
+		return []
+	var piece: Dictionary = _stamp_pieces[_stamp_index]
+	var hm: Array = piece.get("heightmap", [])
+	if hm.is_empty():
+		return []
+
+	# Deep copy
+	var result: Array = []
+	for row in hm:
+		var r: Array = []
+		for cell in row:
+			r.append(cell)
+		result.append(r)
+
+	# Apply rotation (0, 90, 180, 270) — rotate the 2D grid clockwise
+	var rotations := _stamp_rotation / 90
+	for _i in range(rotations):
+		result = _rotate_90_cw(result)
+
+	# Apply mirror on X axis
+	if _stamp_mirror_x:
+		for row in result:
+			row.reverse()
+
+	return result
+
+static func _rotate_90_cw(grid: Array) -> Array:
+	"""Rotate a 2D array 90° clockwise."""
+	var rows: int = grid.size()
+	if rows == 0:
+		return []
+	var cols: int = grid[0].size()
+	var rotated: Array = []
+	for c in range(cols):
+		var new_row: Array = []
+		for r in range(rows - 1, -1, -1):
+			new_row.append(grid[r][c])
+		rotated.append(new_row)
+	return rotated
+
+func _update_stamp_preview(gx: int, gz: int) -> void:
+	"""Show/update a transparent preview of the stamp at grid position gx,gz."""
+	_clear_stamp_preview()
+	_stamp_grid_pos = Vector2i(gx, gz)
+
+	var hm := _get_transformed_heightmap()
+	if hm.is_empty():
+		return
+
+	var total_size := 1.0
+	if _grid_system and "cube_size" in _grid_system:
+		total_size = _grid_system.cube_size
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.3, 1.0, 0.4, 0.35)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.no_depth_test = true
+
+	for rz in range(hm.size()):
+		var row: Array = hm[rz]
+		for rx in range(row.size()):
+			var h: int = int(str(row[rx]))
+			if h <= 0:
+				continue
+			for y in range(h):
+				var mesh_inst := MeshInstance3D.new()
+				var box := BoxMesh.new()
+				box.size = Vector3(0.95, 0.95, 0.95)
+				mesh_inst.mesh = box
+				mesh_inst.material_override = mat
+				mesh_inst.global_position = Vector3(
+					(gx + rx) * total_size,
+					y * total_size,
+					(gz + rz) * total_size
+				)
+				add_child(mesh_inst)
+				_stamp_preview_meshes.append(mesh_inst)
+
+func _clear_stamp_preview() -> void:
+	for m in _stamp_preview_meshes:
+		if is_instance_valid(m):
+			m.queue_free()
+	_stamp_preview_meshes.clear()
+
+func _stamp_place() -> void:
+	"""Place the current stamp at the previewed position."""
+	if _stamp_index < 0 or _stamp_grid_pos.x < 0:
+		return
+
+	var sc := _get_structure_component()
+	if not sc:
+		return
+
+	var hm := _get_transformed_heightmap()
+	if hm.is_empty():
+		return
+
+	_push_undo()
+
+	for rz in range(hm.size()):
+		var row: Array = hm[rz]
+		for rx in range(row.size()):
+			var gx: int = _stamp_grid_pos.x + rx
+			var gz: int = _stamp_grid_pos.y + rz
+			if gx < 0 or gx >= sc.grid_x or gz < 0 or gz >= sc.grid_z:
+				continue
+			var target_h: int = int(str(row[rx]))
+
+			# Get current height
+			var current_h := 0
+			for y in range(sc.grid_y - 1, -1, -1):
+				if sc.grid[gx][y][gz]:
+					current_h = y + 1
+					break
+
+			# Remove cubes above target
+			for y in range(target_h, sc.grid_y):
+				if sc.grid[gx][y][gz]:
+					sc.remove_cube_at(gx, y, gz)
+
+			# Add cubes below target
+			for y in range(target_h):
+				if y < sc.grid_y and not sc.grid[gx][y][gz]:
+					sc.add_cube_at(gx, y, gz)
+
+			_update_structure_data(gx, gz, target_h)
+
+	var piece: Dictionary = _stamp_pieces[_stamp_index]
+	_set_status("EDIT — Stamped '%s' at %d,%d" % [piece.get("name", "?"), _stamp_grid_pos.x, _stamp_grid_pos.y])
+	_clear_stamp_preview()
+	# Keep stamp selected for repeated placement
+	_update_stamp_preview(_stamp_grid_pos.x, _stamp_grid_pos.y)
+
+# ---------------------------------------------------------------------------
+# JSON compact helper
+# ---------------------------------------------------------------------------
 
 static func _compact_inner_arrays(json: String) -> String:
 	"""Collapse leaf arrays (no nested [] or {}) onto single lines.

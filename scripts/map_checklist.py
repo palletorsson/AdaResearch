@@ -258,7 +258,8 @@ def run_checklist(path):
             u = ucell(r, c)
             if u.startswith('wp'):
                 wp_cells.add((r, c))
-            elif u.startswith('tc'):
+            elif u.startswith('tc') or u.startswith('br'):
+                # tc and br both create walkable connections across voids
                 parts = u.split(':')
                 if len(parts) >= 3:
                     try:
