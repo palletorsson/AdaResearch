@@ -324,9 +324,11 @@ func auto_connect_segments(snap_position: bool = true, snap_rotation: bool = tru
 			continue
 		
 		# World-space position of previous segment's output port
-		var prev_out_world: Vector3 = prev_seg.global_transform * prev_out["position"]
+		var _prev_out_pos: Vector3 = prev_out["position"]
+		var _curr_in_pos: Vector3 = curr_in["position"]
+		var prev_out_world: Vector3 = prev_seg.global_transform * _prev_out_pos
 		# World-space position of current segment's input port
-		var curr_in_world: Vector3 = curr_seg.global_transform * curr_in["position"]
+		var curr_in_world: Vector3 = curr_seg.global_transform * _curr_in_pos
 		
 		var delta := prev_out_world - curr_in_world
 		
@@ -353,14 +355,17 @@ func auto_connect_segments(snap_position: bool = true, snap_rotation: bool = tru
 					var angle := actual_in_dir.angle_to(desired_in_dir)
 					var axis := cross.normalized()
 					# Rotate around the in-port world position
-					var pivot: Vector3 = curr_seg.global_position + curr_seg.global_transform.basis * (curr_in["position"] as Vector3)
-					var rot_basis := Basis(axis, angle)
+					var in_pos_v3: Vector3 = curr_in["position"]
+					var pivot: Vector3 = curr_seg.global_position + curr_seg.global_transform.basis * in_pos_v3
+					var rot_basis: Basis = Basis(axis, angle)
 					var offset: Vector3 = curr_seg.global_position - pivot
 					curr_seg.global_position = pivot + rot_basis * offset
 					curr_seg.global_transform.basis = rot_basis * curr_seg.global_transform.basis
 					# Re-snap position after rotation
-					prev_out_world = prev_seg.global_transform * prev_out["position"]
-					curr_in_world = curr_seg.global_transform * curr_in["position"]
+					var prev_out_pos_v3: Vector3 = prev_out["position"]
+					var curr_in_pos_v3: Vector3 = curr_in["position"]
+					prev_out_world = prev_seg.global_transform * prev_out_pos_v3
+					curr_in_world = curr_seg.global_transform * curr_in_pos_v3
 					curr_seg.global_position += prev_out_world - curr_in_world
 					fixes += 1
 	
@@ -388,8 +393,10 @@ func get_connection_gaps() -> Array[Dictionary]:
 		if out_name == "" or not curr_ports.has("in"):
 			continue
 		
-		var prev_out_world: Vector3 = prev_seg.global_transform * prev_ports[out_name]["position"]
-		var curr_in_world: Vector3 = curr_seg.global_transform * curr_ports["in"]["position"]
+		var _po_pos: Vector3 = prev_ports[out_name]["position"]
+		var _ci_pos: Vector3 = curr_ports["in"]["position"]
+		var prev_out_world: Vector3 = prev_seg.global_transform * _po_pos
+		var curr_in_world: Vector3 = curr_seg.global_transform * _ci_pos
 		var gap := prev_out_world.distance_to(curr_in_world)
 		
 		gaps.append({
@@ -527,8 +534,10 @@ func _add_port_debug_visualization() -> void:
 		if out_name == "" or not curr_ports.has("in"):
 			continue
 		
-		var prev_out_world: Vector3 = prev_seg.global_transform * prev_ports[out_name]["position"]
-		var curr_in_world: Vector3 = curr_seg.global_transform * curr_ports["in"]["position"]
+		var _dbg_po_pos: Vector3 = prev_ports[out_name]["position"]
+		var _dbg_ci_pos: Vector3 = curr_ports["in"]["position"]
+		var prev_out_world: Vector3 = prev_seg.global_transform * _dbg_po_pos
+		var curr_in_world: Vector3 = curr_seg.global_transform * _dbg_ci_pos
 		var gap := prev_out_world.distance_to(curr_in_world)
 		
 		if gap > 0.001:
