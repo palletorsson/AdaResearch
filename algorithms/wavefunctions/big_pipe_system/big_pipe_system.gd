@@ -223,13 +223,19 @@ func _create_end_cap_segment(_params: Dictionary) -> Node3D:
 
 func _create_vertical_up_segment(_params: Dictionary) -> Node3D:
 	var instance = SEGMENT_VERTICAL_UP.instantiate()
-	_configure_cylinder_meshes(instance)
+	if instance.get("pipe_radius") != null:
+		instance.pipe_radius = pipe_radius
+	if instance.get("corner_radius") != null:
+		instance.corner_radius = segment_length
 	return instance
 
 
 func _create_vertical_down_segment(_params: Dictionary) -> Node3D:
 	var instance = SEGMENT_VERTICAL_DOWN.instantiate()
-	_configure_cylinder_meshes(instance)
+	if instance.get("pipe_radius") != null:
+		instance.pipe_radius = pipe_radius
+	if instance.get("corner_radius") != null:
+		instance.corner_radius = segment_length
 	return instance
 
 
