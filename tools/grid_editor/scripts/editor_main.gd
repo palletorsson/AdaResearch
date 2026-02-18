@@ -803,11 +803,21 @@ func _create_element_3d(element: Dictionary, placement: Dictionary, grid_size: f
 	if not node:
 		node = _create_placeholder_3d(element, grid_size)
 	
-	# Position: grid cell to 3D based on orientation plane
+	# Position: grid cell to 3D based on orientation plane.
+	# For vertical planes (YZ/XY) with Y-flip, _grid_to_3d maps grid_y to
+	# the TOP of the cell. But meshes grow upward from origin, so we need
+	# the origin at the BOTTOM of the element footprint:
+	#   bottom_row = grid_y + elem_size[1]  (one past the last occupied row)
+	var plane = _get_orientation_plane()
+	var is_vertical_plane = (plane == "YZ" or plane == "XY")
+	
 	var scene_path2 = str(element.get("scene", ""))
 	if not scene_path2.is_empty() or not segment_type.is_empty():
-		# Scenes/procedural: use cell origin (pivot at origin)
-		node.position = _grid_to_3d(pos[0], pos[1], grid_size)
+		# Scenes/procedural: origin at bottom of element footprint
+		if is_vertical_plane:
+			node.position = _grid_to_3d(pos[0], pos[1] + elem_size[1], grid_size)
+		else:
+			node.position = _grid_to_3d(pos[0], pos[1], grid_size)
 	else:
 		# Placeholders: use cell center
 		var center_x = pos[0] + elem_size[0] / 2.0
@@ -895,11 +905,9 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, grid_size
 		"beaker":
 			node = _create_glass_beaker_smooth(width, height, glass_mat)
 		"cap":
-			node = _create_glass_cap_smooth(tube_radius, glass_mat)
-			node.position = Vector3(0, height, width / 2)
+			node = _create_glass_cap_smooth(width, height, tube_radius, glass_mat)
 		"drip":
-			node = _create_glass_drip_smooth(tube_radius, glass_mat)
-			node.position.z = width / 2
+			node = _create_glass_drip_smooth(width, height, tube_radius, glass_mat)
 		_:
 			push_warning("[GridEditor] Unknown segment_type '%s', falling back to tube" % segment_type)
 			node = _create_glass_tube_smooth(height, tube_radius, glass_mat)
@@ -1099,41 +1107,42 @@ func _generate_sbend_mesh_yz(height: float, width: float, tube_radius: float, tu
 func _create_glass_ubend_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
 	## U-bend in YZ plane (2×2 grid element)
 	## Shape: ∪ - two openings at top, semicircle curve at bottom
-	##   Entry: (Y=height, Z=tube_radius) going down
-	##   Exit:  (Y=height, Z=width-tube_radius) going up
-	##   Lowest: Y ≈ tube_radius
+	## Fits within [0,height] × [0,width] bounding box.
+	##   Entry: (Y=height, Z≈radius) going down
+	##   Exit:  (Y=height, Z≈width-radius) going up
+	##   Lowest: Y ≈ radius (tube thickness)
 	var node = Node3D.new()
 	var mesh_instance = MeshInstance3D.new()
-	var bend_radius = (width / 2) - radius
-	mesh_instance.mesh = _generate_ubend_mesh_yz(bend_radius, height, radius, 16, 16)
+	mesh_instance.mesh = _generate_ubend_mesh_yz(width, height, radius, 16, 20)
 	mesh_instance.material_override = mat
-	mesh_instance.position = Vector3(0, height, width / 2)
 	node.add_child(mesh_instance)
 	return node
 
-func _generate_ubend_mesh_yz(bend_radius: float, height: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
-	## U-bend mesh: 180° arc in YZ plane, shaped like ∪
-	## Arc center at origin, opens upward (+Y)
-	## Starts at (0, 0, -bend_radius), curves down then up to (0, 0, +bend_radius)
+func _generate_ubend_mesh_yz(width: float, height: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
+	## U-bend mesh fitting [0,height] × [0,width] in YZ plane.
+	## Semicircle: two legs descend from Y=height, curve at bottom near Y=0.
+	## Arc center at (0, height, width/2), arc radius fills available height.
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
+	var center_z = width / 2.0
+	var arc_radius = center_z - tube_radius  # horizontal half-span
+	# Scale the dip to use full height: bottom of U is at Y = tube_radius
+	var y_top = height
+	var y_bottom = tube_radius
+	var y_span = y_top - y_bottom
+	
 	for b in range(bend_segs + 1):
-		var bend_angle = (float(b) / bend_segs) * PI  # 0 to PI
-		# Semicircle in YZ: Y goes down then up, Z goes from -r to +r
-		var center = Vector3(
-			0,
-			-bend_radius * sin(bend_angle),  # Y: 0 -> -r -> 0 (dip down)
-			-bend_radius * cos(bend_angle)   # Z: -r -> 0 -> +r
-		)
+		var t = float(b) / bend_segs
+		var angle = PI * t  # 0 to PI (left opening → bottom → right opening)
+		# Z sweeps from left to right: center_z - arc_radius → center_z + arc_radius
+		var z = center_z - arc_radius * cos(angle)
+		# Y starts at top, dips to bottom at PI/2, back to top
+		var y = y_top - y_span * sin(angle)
+		var center = Vector3(0, y, z)
 		
-		# Tangent along the curve
-		var tangent = Vector3(
-			0,
-			-bend_radius * cos(bend_angle),
-			bend_radius * sin(bend_angle)
-		).normalized()
-		
+		# Tangent (derivative of position w.r.t. angle)
+		var tangent = Vector3(0, -y_span * cos(angle), arc_radius * sin(angle)).normalized()
 		var binormal = Vector3(1, 0, 0)
 		var normal = binormal.cross(tangent).normalized()
 		
@@ -1141,7 +1150,7 @@ func _generate_ubend_mesh_yz(bend_radius: float, height: float, tube_radius: flo
 			var ring_angle = (float(s) / tube_segs) * TAU
 			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
 			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, float(b) / bend_segs))
+			st.set_uv(Vector2(float(s) / tube_segs, t))
 			st.add_vertex(center + offset)
 	
 	for b in range(bend_segs):
@@ -1357,65 +1366,97 @@ func _create_glass_beaker_smooth(width: float, height: float, mat: Material) -> 
 	node.add_child(mesh_instance)
 	return node
 
-func _create_glass_cap_smooth(radius: float, mat: Material) -> Node3D:
-	# Cap - hemisphere pointing down
+func _create_glass_cap_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+	## Cap - hemisphere fitting within [0,height] × [0,width] cell.
+	## Sealed dome sitting at the bottom of the cell, centered horizontally.
 	var node = Node3D.new()
 	var mesh_instance = MeshInstance3D.new()
 	
+	var cap_radius = min(width, height) * 0.4
 	var sphere = SphereMesh.new()
-	sphere.radius = radius * 1.3
-	sphere.height = radius * 2.6
+	sphere.radius = cap_radius
+	sphere.height = cap_radius * 2.0
 	sphere.is_hemisphere = true
 	mesh_instance.mesh = sphere
 	mesh_instance.material_override = mat
+	# Hemisphere flat side up, dome pointing down. Position at cell center.
 	mesh_instance.rotation.x = PI
+	mesh_instance.position = Vector3(0, height * 0.5, width / 2.0)
 	
 	node.add_child(mesh_instance)
 	return node
 
-func _create_glass_drip_smooth(radius: float, mat: Material) -> Node3D:
-	# Drip tip - tapered cone pointing down
+func _create_glass_drip_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+	## Drip tip - tapered cone fitting within [0,height] × [0,width] cell.
+	## Wider at top (Y=height), tapers to point at bottom (Y≈0).
 	var node = Node3D.new()
 	var mesh_instance = MeshInstance3D.new()
 	
 	var cone = CylinderMesh.new()
 	cone.top_radius = radius
 	cone.bottom_radius = radius * 0.3
-	cone.height = radius * 5
+	cone.height = height * 0.8
 	mesh_instance.mesh = cone
 	mesh_instance.material_override = mat
+	mesh_instance.position = Vector3(0, height * 0.5, width / 2.0)
 	
 	node.add_child(mesh_instance)
 	return node
 
 func _create_glass_corner45_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	## 45° bend in YZ plane — gentle direction change
-	## Enters from bottom, exits at 45° toward top-right
+	## 45° bend in YZ plane fitting within [0,height] × [0,width].
+	## Enters from bottom-center, curves 45° toward top-right.
+	## Uses same parametric arc as directed elbow but only 45° sweep.
 	var node = Node3D.new()
 	var mesh_instance = MeshInstance3D.new()
-	var arc_radius = min(width, height) * 0.6
-	mesh_instance.mesh = _generate_corner45_mesh_yz(arc_radius, radius, 16, 12)
+	var arc_radius = min(width, height) / 2.0
+	var center_y = height / 2.0
+	var center_z = width / 2.0
+	mesh_instance.mesh = _generate_corner45_mesh_yz(arc_radius, radius, center_y, center_z, 16, 12)
 	mesh_instance.material_override = mat
 	node.add_child(mesh_instance)
 	return node
 
-func _generate_corner45_mesh_yz(arc_radius: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
-	## 45° elbow: sweeps from +Y to 45° between Y and Z
+func _generate_corner45_mesh_yz(arc_radius: float, tube_radius: float, center_y: float, center_z: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
+	## 45° elbow arc centered at (0, center_y, center_z).
+	## Sweeps from -90° to -45° (bottom-center toward right).
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
+	var start_angle = -PI / 2.0   # bottom: Y = center_y - r, Z = center_z
+	var end_angle = -PI / 4.0     # 45°: partway toward right
+	var prev_normal := Vector3.ZERO
+	
 	for b in range(bend_segs + 1):
-		var bend_angle = (float(b) / bend_segs) * (PI / 4.0)  # 0 to 45°
-		var center = Vector3(0, arc_radius * sin(bend_angle), arc_radius * (1.0 - cos(bend_angle)))
-		var tangent = Vector3(0, cos(bend_angle), sin(bend_angle)).normalized()
-		var binormal = Vector3(1, 0, 0)
-		var normal = binormal.cross(tangent).normalized()
+		var t = float(b) / bend_segs
+		var angle = lerpf(start_angle, end_angle, t)
+		var center = Vector3(0, center_y + arc_radius * sin(angle), center_z + arc_radius * cos(angle))
+		
+		var d_angle = end_angle - start_angle
+		var tangent = Vector3(0, arc_radius * cos(angle) * d_angle, -arc_radius * sin(angle) * d_angle).normalized()
+		
+		var normal: Vector3
+		var binormal: Vector3
+		if prev_normal == Vector3.ZERO:
+			var ref = Vector3.RIGHT
+			normal = tangent.cross(ref)
+			if normal.length_squared() < 0.001:
+				normal = tangent.cross(Vector3.UP)
+			normal = normal.normalized()
+		else:
+			normal = prev_normal - tangent * tangent.dot(prev_normal)
+			if normal.length_squared() < 0.001:
+				normal = prev_normal
+			else:
+				normal = normal.normalized()
+		binormal = tangent.cross(normal).normalized()
+		prev_normal = normal
 		
 		for s in range(tube_segs + 1):
 			var ring_angle = (float(s) / tube_segs) * TAU
 			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
 			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, float(b) / bend_segs))
+			st.set_uv(Vector2(float(s) / tube_segs, t))
 			st.add_vertex(center + offset)
 	
 	for b in range(bend_segs):
