@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dtlg6if0wfioi" path="res://commons/glass_rack/GlassRackController.gd" id="1_ctrl"]
+
+[node name="GlassRack_BranchingCondenser" type="Node3D"]
+script = ExtResource("1_ctrl")
+auto_build = true
+config_file = "branching_condenser.json"
+glass_color = Color(0.85, 0.92, 1.0, 0.25)
+liquid_color = Color(0.6, 0.2, 0.8, 0.6)
+show_liquid = true

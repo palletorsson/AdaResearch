@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dtlg6if0wfioi" path="res://commons/glass_rack/GlassRackController.gd" id="1_ctrl"]
+
+[node name="GlassRack_ComplexApparatus" type="Node3D"]
+script = ExtResource("1_ctrl")
+auto_build = true
+config_file = "complex_apparatus.json"
+glass_color = Color(0.82, 0.90, 1.0, 0.28)
+liquid_color = Color(0.9, 0.6, 0.1, 0.7)
+show_liquid = true

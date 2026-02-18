@@ -1100,6 +1100,186 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
+		"GlassRack_BranchingCondenser": {
+			"name": "Glass Rack: Branching Condenser",
+			"lookup_name": "GlassRack_BranchingCondenser",
+			"description": "Y-pipe splits flow into two parallel spiral condensers, then recombines.",
+			"scene": "res://commons/glass_rack/presets/branching_condenser.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_BreakingBadCoffee": {
+			"name": "Glass Rack: Breaking Bad Coffee",
+			"lookup_name": "GlassRack_BreakingBadCoffee",
+			"description": "Multi-level cold drip coffee / distillation apparatus with metal frame.",
+			"scene": "res://commons/glass_rack/presets/breaking_bad_coffee.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_ComplexApparatus": {
+			"name": "Glass Rack: Complex Apparatus",
+			"lookup_name": "GlassRack_ComplexApparatus",
+			"description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes.",
+			"scene": "res://commons/glass_rack/presets/complex_apparatus.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_DistillationRack": {
+			"name": "Glass Rack: Distillation Rack",
+			"lookup_name": "GlassRack_DistillationRack",
+			"description": "Classic distillation setup with flask, spiral condenser, and collection vessel.",
+			"scene": "res://commons/glass_rack/presets/distillation_rack.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_DistillationY": {
+			"name": "Glass Rack: Y-Branch Distillation",
+			"lookup_name": "GlassRack_DistillationY",
+			"description": "Simple Y-branch with two spiral condensers feeding into beakers.",
+			"scene": "res://commons/glass_rack/presets/distillation_y.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_FractionalDistillation": {
+			"name": "Glass Rack: Fractional Distillation",
+			"lookup_name": "GlassRack_FractionalDistillation",
+			"description": "Multi-stage distillation with reducers and collection points.",
+			"scene": "res://commons/glass_rack/presets/fractional_distillation.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_RefluxApparatus": {
+			"name": "Glass Rack: Reflux Apparatus",
+			"lookup_name": "GlassRack_RefluxApparatus",
+			"description": "Flask with condenser and U-bend return for continuous reflux.",
+			"scene": "res://commons/glass_rack/presets/reflux_apparatus.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_SbendManifold": {
+			"name": "Glass Rack: S-Bend Manifold",
+			"lookup_name": "GlassRack_SbendManifold",
+			"description": "Multiple S-bends creating an offset distribution manifold.",
+			"scene": "res://commons/glass_rack/presets/sbend_manifold.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_SimpleTube": {
+			"name": "Glass Rack: Simple Tube",
+			"lookup_name": "GlassRack_SimpleTube",
+			"description": "Basic straight tube with a bend.",
+			"scene": "res://commons/glass_rack/presets/simple_tube.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_SpiralCondenser": {
+			"name": "Glass Rack: Spiral Condenser",
+			"lookup_name": "GlassRack_SpiralCondenser",
+			"description": "Standalone spiral condenser with inlet and outlet tubes.",
+			"scene": "res://commons/glass_rack/presets/spiral_condenser.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"GlassRack_SpiralTube": {
+			"name": "Glass Rack: Spiral Tube",
+			"lookup_name": "GlassRack_SpiralTube",
+			"description": "Simple spiral glass tube — classic lab condenser coil.",
+			"scene": "res://commons/glass_rack/presets/spiral_tube.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_StraightRun": {
+			"name": "Big Pipe: Straight Run",
+			"lookup_name": "BigPipe_StraightRun",
+			"description": "Capped pipeline — simple industrial backbone.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/straight_run.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_LBend": {
+			"name": "Big Pipe: L-Bend",
+			"lookup_name": "BigPipe_LBend",
+			"description": "Right-angle corner routing with straight runs on each side.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/l_bend.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_TDistribution": {
+			"name": "Big Pipe: T-Distribution",
+			"lookup_name": "BigPipe_TDistribution",
+			"description": "Main line splits into two branches via T-junction.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/t_distribution.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_Serpentine": {
+			"name": "Big Pipe: Serpentine",
+			"lookup_name": "BigPipe_Serpentine",
+			"description": "Back-and-forth pipe runs for cooling or heating pattern.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/serpentine.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_VerticalBypass": {
+			"name": "Big Pipe: Vertical Bypass",
+			"lookup_name": "BigPipe_VerticalBypass",
+			"description": "Main line with vertical up-and-over bypass loop.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/vertical_bypass.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_CrossManifold": {
+			"name": "Big Pipe: Cross Manifold",
+			"lookup_name": "BigPipe_CrossManifold",
+			"description": "Central cross junction with four capped branches — distribution hub.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/cross_manifold.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"BigPipe_IndustrialBranch": {
+			"name": "Big Pipe: Industrial Branch",
+			"lookup_name": "BigPipe_IndustrialBranch",
+			"description": "Full demo of all pipe segments: S-bend, T-junction, cross, vertical up/down, end cap.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/industrial_branch.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
 		"BigPipeSystem": {
 			"name": "Big Pipe System",
 			"lookup_name": "BigPipeSystem",
