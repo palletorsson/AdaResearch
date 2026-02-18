@@ -35,3 +35,27 @@ This file is written by DesktopMapSwitcherOverlay comment writer.
 [artifact:random_decay_multimesh] [scene:res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn] the pris should be saller without gapp
 
 ---
+
+## 2026-02-18T08:41:28 | One_Primitives
+- Sequence: `primitives`
+- Map: `One_Primitives`
+- Interactables: `modernistchairgallery`, `platonicsolids`, `radiolaria`
+- Artifact Paths:
+  - `modernistchairgallery`: `res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn`
+  - `platonicsolids`: `res://algorithms/primitives/platonicsolids/platonicsolids.tscn`
+  - `radiolaria`: `res://algorithms/computationalbiology/radiolaria/radiolaria.tscn`
+
+[map:One_Primitives] remove from sequence
+
+---
+## 2026-02-18T08:50:54 | Array_Basics
+- Sequence: `array_tutorial`
+- Map: `Array_Basics`
+- Interactables: `IndexVisualizer`, `pick_up_cube`, `t`
+- Artifact Paths:
+  - `IndexVisualizer`: `res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn`
+  - `pick_up_cube`: `res://commons/scenes/mapobjects/pick_up_cube.tscn`
+
+[map:Array_Basics] remove from sequence
+
+---
