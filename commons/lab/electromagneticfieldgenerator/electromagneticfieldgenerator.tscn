@@ -57,7 +57,7 @@ func initialize_field_systems():
 	# Power conduit energy flow
 	animate_power_conduits()
 
-func animate_tesla_coil(coil: Node3D, phase_offset: float, time: float):
+func animate_tesla_coil(time: float, coil: Node3D, phase_offset: float):
 	var intensity = sin(time + phase_offset) * 0.5 + 0.5
 	coil.get_child(0).light_energy = intensity * 2.0
 
