@@ -857,27 +857,19 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, grid_size
 			node = _create_glass_tube_smooth(height, tube_radius, glass_mat)
 			node.position.z = width / 2  # Center in Z (horizontal for YZ plane)
 		"corner":
-			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
 		"corner_bl":
-			# ╭ Bottom to right (default elbow orientation)
-			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+			# ╭ Bottom to right
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
 		"corner_br":
-			# ╮ Bottom to left — mirror elbow across Z center
-			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
-			node.scale.z = -1.0
-			node.position.z = width
+			# ╮ Bottom to left
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 90)
 		"corner_tr":
-			# ╯ Top to left — mirror both Y and Z
-			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
-			node.scale.y = -1.0
-			node.scale.z = -1.0
-			node.position.y = height
-			node.position.z = width
+			# ╯ Top to left
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 180)
 		"corner_tl":
-			# ╰ Top to right — mirror across Y center
-			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
-			node.scale.y = -1.0
-			node.position.y = height
+			# ╰ Top to right
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 270)
 		"corner45":
 			node = _create_glass_corner45_smooth(width, height, tube_radius, glass_mat)
 		"wobbly":
@@ -956,41 +948,81 @@ func _generate_tube_mesh(length: float, radius: float, segments: int, rings: int
 	st.generate_tangents()
 	return st.commit()
 
-func _create_glass_elbow_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	## 90° Corner/Elbow in YZ plane (2×2 grid element)
-	## Enters from bottom (Y=0), exits to right (Z=width)
-	## Bend radius fills the 2×2 space
+func _create_glass_elbow_directed(width: float, height: float, radius: float, mat: Material, direction: int) -> Node3D:
+	## 90° Corner/Elbow in YZ plane with proper arc direction.
+	## direction:
+	##   0   (╭ corner_bl): bottom-center → right-center
+	##   90  (╮ corner_br): bottom-center → left-center
+	##   180 (╯ corner_tr): top-center → left-center
+	##   270 (╰ corner_tl): top-center → right-center
 	var node = Node3D.new()
 	var mesh_instance = MeshInstance3D.new()
-	var bend_radius = min(width, height) - radius  # Fit within grid
-	mesh_instance.mesh = _generate_elbow_mesh_yz(bend_radius, radius, 16, 12)
+	var arc_radius = min(width, height) / 2.0
+	var center_y = height / 2.0
+	var center_z = width / 2.0
+	mesh_instance.mesh = _generate_directed_elbow_yz(arc_radius, radius, center_y, center_z, direction, 16, 16)
 	mesh_instance.material_override = mat
-	# Position at bottom-left, curve goes up then right
 	node.add_child(mesh_instance)
 	return node
 
-func _generate_elbow_mesh_yz(bend_radius: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
-	## 90° elbow mesh in YZ plane
-	## Starts at origin going +Y, curves to exit going +Z
-	## Center of bend arc is at (0, 0, bend_radius)
+func _generate_directed_elbow_yz(arc_radius: float, tube_radius: float, center_y: float, center_z: float, direction: int, tube_segs: int, bend_segs: int) -> ArrayMesh:
+	## Generates a 90° elbow in YZ plane with the arc going the right direction.
+	## Arc center is at (0, center_y, center_z).
+	## Direction controls which quadrant the arc sweeps through.
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
+	var start_angle: float
+	var end_angle: float
+	match direction:
+		0:    # ╭ bottom → right: arc from -90° to 0°
+			start_angle = -PI / 2.0
+			end_angle = 0.0
+		90:   # ╮ bottom → left: arc from -90° to -180°
+			start_angle = -PI / 2.0
+			end_angle = -PI
+		180:  # ╯ top → left: arc from 90° to 180°
+			start_angle = PI / 2.0
+			end_angle = PI
+		_:    # ╰ top → right: arc from 90° to 0°
+			start_angle = PI / 2.0
+			end_angle = 0.0
+	
+	var prev_normal := Vector3.ZERO
+	
 	for b in range(bend_segs + 1):
-		var bend_angle = (float(b) / bend_segs) * (PI / 2)
-		# Curve center traces arc: Y = r*sin(a), Z = r*(1-cos(a))
-		var center = Vector3(0, bend_radius * sin(bend_angle), bend_radius * (1.0 - cos(bend_angle)))
-		# Tangent is derivative of position
-		var tangent = Vector3(0, cos(bend_angle), sin(bend_angle)).normalized()
-		# Binormal perpendicular to YZ plane
-		var binormal = Vector3(1, 0, 0)
-		var normal = binormal.cross(tangent).normalized()
+		var t = float(b) / bend_segs
+		var angle = lerpf(start_angle, end_angle, t)
+		var center = Vector3(0, center_y + arc_radius * sin(angle), center_z + arc_radius * cos(angle))
+		
+		# Tangent: derivative of center w.r.t. angle
+		var d_angle = end_angle - start_angle
+		var tangent = Vector3(0, arc_radius * cos(angle) * d_angle, -arc_radius * sin(angle) * d_angle).normalized()
+		
+		# Build perpendicular frame (minimize twist)
+		var normal: Vector3
+		var binormal: Vector3
+		if prev_normal == Vector3.ZERO:
+			var ref = Vector3.RIGHT
+			normal = tangent.cross(ref)
+			if normal.length_squared() < 0.001:
+				ref = Vector3.UP
+				normal = tangent.cross(ref)
+			normal = normal.normalized()
+		else:
+			normal = prev_normal - tangent * tangent.dot(prev_normal)
+			if normal.length_squared() < 0.001:
+				normal = prev_normal
+			else:
+				normal = normal.normalized()
+		binormal = tangent.cross(normal).normalized()
+		prev_normal = normal
 		
 		for s in range(tube_segs + 1):
 			var ring_angle = (float(s) / tube_segs) * TAU
 			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
 			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, float(b) / bend_segs))
+			st.set_uv(Vector2(float(s) / tube_segs, t))
 			st.add_vertex(center + offset)
 	
 	for b in range(bend_segs):
