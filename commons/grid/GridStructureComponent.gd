@@ -664,51 +664,23 @@ func add_cube_at(x: int, y: int, z: int) -> bool:
 	if not _is_valid_xyz(x, y, z):
 		push_warning("GridStructureComponent: Cannot add cube at invalid position (%d, %d, %d)" % [x, y, z])
 		return false
-	
-	# Check if cube already exists
 	if grid[x][y][z]:
-		return false  # Cube already exists
-	
-	# Ensure multimesh exists before proceeding
+		return false
 	if not multimesh:
 		push_warning("GridStructureComponent: Cannot add cube - MultiMesh not initialized")
 		return false
-	
-	# Mark position as occupied
+
 	grid[x][y][z] = true
-	
-	# Add to positions array
-	var pos = Vector3i(x, y, z)
-	var old_count = cube_positions.size()
-	cube_positions.append(pos)
-	var new_count = cube_positions.size()
-	
-	# IMPORTANT: Store existing transforms before changing instance count
-	# This is necessary because in some Godot versions, changing instance_count
-	# can reset transforms
-	var existing_transforms: Array[Transform3D] = []
-	existing_transforms.resize(old_count)
-	for i in range(old_count):
-		existing_transforms[i] = multimesh.get_instance_transform(i)
-	
-	# Increase instance count
-	multimesh.instance_count = new_count
-	
-	# Restore existing transforms
-	var total_size = cube_size + gutter
-	for i in range(old_count):
-		multimesh.set_instance_transform(i, existing_transforms[i])
-	
-	# Set transform for the new instance
-	var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
-	var transform = Transform3D()
-	transform.origin = world_pos
-	multimesh.set_instance_transform(old_count, transform)
-	
+	cube_positions.append(Vector3i(x, y, z))
+
+	# Rebuild the entire multimesh from cube_positions — avoids all buffer issues
+	_rebuild_multimesh_from_positions()
+
 	# Create collision shape
+	var total_size = cube_size + gutter
+	var world_pos = Vector3(x, y, z) * total_size
 	_create_collision_at(world_pos, cube_size)
-	
-	print("GridStructureComponent: Added cube at (%d, %d, %d) - count: %d->%d" % [x, y, z, old_count, new_count])
+
 	return true
 
 func remove_cube_at(x: int, y: int, z: int) -> bool:
@@ -716,56 +688,220 @@ func remove_cube_at(x: int, y: int, z: int) -> bool:
 	if not _is_valid_xyz(x, y, z):
 		push_warning("GridStructureComponent: Cannot remove cube at invalid position (%d, %d, %d)" % [x, y, z])
 		return false
-	
-	# Check if cube exists
 	if not grid[x][y][z]:
-		return false  # No cube to remove
-	
-	# Ensure multimesh exists
+		return false
 	if not multimesh:
 		push_warning("GridStructureComponent: Cannot remove cube - MultiMesh not initialized")
 		return false
-	
-	# Find the index of this cube in cube_positions
-	var pos_to_remove = Vector3i(x, y, z)
-	var index_to_remove = -1
-	for i in range(cube_positions.size()):
-		if cube_positions[i] == pos_to_remove:
-			index_to_remove = i
-			break
-	
-	if index_to_remove == -1:
-		push_warning("GridStructureComponent: Cube at (%d, %d, %d) not found in cube_positions" % [x, y, z])
-		return false
-	
-	# Mark position as unoccupied
+
 	grid[x][y][z] = false
-	
-	var old_count = cube_positions.size()
-	var last_index = old_count - 1
-	
-	# If we're removing from the middle, swap with the last element
-	# This avoids having to rebuild all transforms
-	if index_to_remove < last_index:
-		var last_pos = cube_positions[last_index]
-		cube_positions[index_to_remove] = last_pos
-		
-		# Update the transform at index_to_remove to match the swapped cube
-		var total_size = cube_size + gutter
-		var world_pos = Vector3(last_pos.x, last_pos.y, last_pos.z) * total_size
-		var transform = Transform3D()
-		transform.origin = world_pos
-		multimesh.set_instance_transform(index_to_remove, transform)
-	
-	# Remove the last element
-	cube_positions.pop_back()
-	var new_count = cube_positions.size()
-	
-	# Update instance count
-	multimesh.instance_count = new_count
-	
-	# TODO: Remove collision shape at this position
-	# (would need to track collision shapes to remove them)
-	
-	print("GridStructureComponent: Removed cube at (%d, %d, %d) - count: %d->%d" % [x, y, z, old_count, new_count])
+
+	# Remove collision body at this position
+	var total_size = cube_size + gutter
+	var target_world: Vector3 = Vector3(x, y, z) * total_size
+	if collision_parent:
+		for body in collision_parent.get_children():
+			if body is StaticBody3D and body.position.distance_to(target_world) < 0.1:
+				body.queue_free()
+				break
+
+	# Remove from positions array
+	var pos_to_remove = Vector3i(x, y, z)
+	var idx = cube_positions.find(pos_to_remove)
+	if idx >= 0:
+		cube_positions.remove_at(idx)
+
+	# Rebuild the entire multimesh from cube_positions
+	_rebuild_multimesh_from_positions()
+
+	return true
+
+func _rebuild_multimesh_from_positions() -> void:
+	"""Rebuild the multimesh transforms from the cube_positions array.
+	This is the nuclear option — simple, correct, no buffer corruption possible."""
+	if not multimesh:
+		return
+	var count = cube_positions.size()
+	multimesh.instance_count = count
+	var total_size = cube_size + gutter
+	for i in range(count):
+		var pos = cube_positions[i]
+		multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(pos.x, pos.y, pos.z) * total_size))
+		if multimesh.use_colors:
+			multimesh.set_instance_color(i, Color.WHITE)
+		if multimesh.use_custom_data:
+			multimesh.set_instance_custom_data(i, Color(0, 0, 0, 0))
+
+# ===== TRANSFORM DISTORTION API =====
+# These operate on multimesh instance transforms directly — visual-only, no grid state change.
+# Used by GridAgent "distort" / "explode" operations to create glitch art effects.
+
+## Snapshot the current transforms so they can be restored later.
+var _stored_transforms: Array[Transform3D] = []
+
+func snapshot_transforms() -> void:
+	"""Store all current multimesh transforms for later restore."""
+	_stored_transforms.clear()
+	if not multimesh:
+		return
+	_stored_transforms.resize(multimesh.instance_count)
+	for i in range(multimesh.instance_count):
+		_stored_transforms[i] = multimesh.get_instance_transform(i)
+	print("GridStructureComponent: Snapshot %d transforms" % _stored_transforms.size())
+
+func restore_transforms() -> void:
+	"""Restore transforms from the last snapshot."""
+	if not multimesh or _stored_transforms.is_empty():
+		return
+	var count = mini(multimesh.instance_count, _stored_transforms.size())
+	for i in range(count):
+		multimesh.set_instance_transform(i, _stored_transforms[i])
+	print("GridStructureComponent: Restored %d transforms" % count)
+
+func distort_explode(center: Vector3i, radius: int = 5, strength: float = 3.0) -> bool:
+	"""Explode cubes outward from center — transforms scale + translate away from the origin point.
+	Creates the 'laser wireframe' glitch effect seen in the editor bug."""
+	if not multimesh or multimesh.instance_count == 0:
+		return false
+
+	var total_size = cube_size + gutter
+	var center_world = Vector3(center.x, center.y, center.z) * total_size
+	var affected := 0
+
+	for i in range(multimesh.instance_count):
+		var t = multimesh.get_instance_transform(i)
+		var offset = t.origin - center_world
+		var dist = offset.length()
+
+		if dist > float(radius) * total_size or dist < 0.001:
+			continue
+
+		# Strength falls off with distance (closer cubes fly further)
+		var falloff = 1.0 - clampf(dist / (float(radius) * total_size), 0.0, 1.0)
+		var push = offset.normalized() * strength * falloff * total_size
+
+		# Stretch the basis along the push direction — this creates the wireframe laser lines
+		var stretch_axis = offset.normalized()
+		var stretch_amount = 1.0 + strength * falloff * 0.5
+		var basis = t.basis
+		basis = basis * Basis(
+			Vector3(1.0 + stretch_axis.x * (stretch_amount - 1.0), stretch_axis.x * stretch_axis.y * (stretch_amount - 1.0), stretch_axis.x * stretch_axis.z * (stretch_amount - 1.0)),
+			Vector3(stretch_axis.y * stretch_axis.x * (stretch_amount - 1.0), 1.0 + stretch_axis.y * (stretch_amount - 1.0), stretch_axis.y * stretch_axis.z * (stretch_amount - 1.0)),
+			Vector3(stretch_axis.z * stretch_axis.x * (stretch_amount - 1.0), stretch_axis.z * stretch_axis.y * (stretch_amount - 1.0), 1.0 + stretch_axis.z * (stretch_amount - 1.0))
+		)
+
+		t.origin += push
+		t.basis = basis
+		multimesh.set_instance_transform(i, t)
+		affected += 1
+
+	print("GridStructureComponent: Explode distort affected %d instances" % affected)
+	return affected > 0
+
+func distort_twist(center: Vector3i, radius: int = 5, angle_per_unit: float = 15.0, axis: String = "y") -> bool:
+	"""Twist transforms around an axis — rotation increases with distance along that axis.
+	Creates a spiraling deformation effect."""
+	if not multimesh or multimesh.instance_count == 0:
+		return false
+
+	var total_size = cube_size + gutter
+	var center_world = Vector3(center.x, center.y, center.z) * total_size
+	var affected := 0
+
+	for i in range(multimesh.instance_count):
+		var t = multimesh.get_instance_transform(i)
+		var offset = t.origin - center_world
+		var dist = offset.length()
+
+		if dist > float(radius) * total_size:
+			continue
+
+		# How far along the twist axis determines rotation amount
+		var axis_dist := 0.0
+		match axis.to_lower():
+			"x": axis_dist = offset.x / total_size
+			"z": axis_dist = offset.z / total_size
+			_:   axis_dist = offset.y / total_size
+
+		var angle_rad = deg_to_rad(angle_per_unit * axis_dist)
+		var rot_basis: Basis
+		match axis.to_lower():
+			"x": rot_basis = Basis(Vector3(1, 0, 0), angle_rad)
+			"z": rot_basis = Basis(Vector3(0, 0, 1), angle_rad)
+			_:   rot_basis = Basis(Vector3(0, 1, 0), angle_rad)
+
+		# Rotate position around center and apply rotation to basis
+		var rotated_offset = rot_basis * offset
+		t.origin = center_world + rotated_offset
+		t.basis = rot_basis * t.basis
+		multimesh.set_instance_transform(i, t)
+		affected += 1
+
+	print("GridStructureComponent: Twist distort affected %d instances" % affected)
+	return affected > 0
+
+func distort_scatter(center: Vector3i, radius: int = 5, scatter_strength: float = 2.0, rotation_strength: float = 45.0) -> bool:
+	"""Randomly scatter cubes — each gets a random offset and rotation.
+	Creates chaotic dissolution effect."""
+	if not multimesh or multimesh.instance_count == 0:
+		return false
+
+	var total_size = cube_size + gutter
+	var center_world = Vector3(center.x, center.y, center.z) * total_size
+	var affected := 0
+
+	for i in range(multimesh.instance_count):
+		var t = multimesh.get_instance_transform(i)
+		var offset = t.origin - center_world
+		var dist = offset.length()
+
+		if dist > float(radius) * total_size:
+			continue
+
+		var falloff = 1.0 - clampf(dist / (float(radius) * total_size), 0.0, 1.0)
+
+		# Random displacement
+		var rand_offset = Vector3(
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0)
+		) * scatter_strength * falloff * total_size
+		t.origin += rand_offset
+
+		# Random rotation
+		var rand_rot = deg_to_rad(rotation_strength * falloff)
+		var rand_axis = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
+		if rand_axis.length() > 0.01:
+			t.basis = Basis(rand_axis, rand_rot * randf()) * t.basis
+
+		multimesh.set_instance_transform(i, t)
+		affected += 1
+
+	print("GridStructureComponent: Scatter distort affected %d instances" % affected)
+	return affected > 0
+
+func distort_wave(amplitude: float = 1.5, frequency: float = 0.5, phase: float = 0.0, axis: String = "y") -> bool:
+	"""Apply a sine wave displacement to all transforms.
+	Phase can be animated over time for a flowing wave effect."""
+	if not multimesh or multimesh.instance_count == 0:
+		return false
+
+	var total_size = cube_size + gutter
+
+	for i in range(multimesh.instance_count):
+		var t = multimesh.get_instance_transform(i)
+		var wave_input := 0.0
+		match axis.to_lower():
+			"x": wave_input = t.origin.z / total_size
+			"z": wave_input = t.origin.x / total_size
+			_:   wave_input = t.origin.x / total_size  # y-displacement driven by x
+
+		var displacement = sin(wave_input * frequency * TAU + phase) * amplitude * total_size
+		match axis.to_lower():
+			"x": t.origin.x += displacement
+			"z": t.origin.z += displacement
+			_:   t.origin.y += displacement
+
+		multimesh.set_instance_transform(i, t)
+
 	return true

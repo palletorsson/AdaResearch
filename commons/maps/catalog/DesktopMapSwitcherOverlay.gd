@@ -1,8 +1,8 @@
 class_name DesktopMapSwitcherOverlay
 extends CanvasLayer
 
-## 2D desktop overlay for fast map switching.
-## Toggle with M, pick sequence/map, then load directly.
+## 2D desktop overlay for fast map switching — AudioCatalog-style layout.
+## Toggle with M, browse all maps at once, click to load.
 
 @export var toggle_key: Key = KEY_M
 @export var toggle_action: StringName = &"toggle_map_switcher_overlay"
@@ -11,9 +11,9 @@ extends CanvasLayer
 @export var spawn_kiosk_key: Key = KEY_B
 @export var spawn_kiosk_actions: PackedStringArray = PackedStringArray(["vr_button_b", "by_button"])
 @export var kiosk_spawn_distance: float = 2.5
-@export var open_on_start: bool = false
+@export var open_on_start: bool = true
 @export var refresh_on_open: bool = true
-@export var auto_clean_before_load: bool = false
+@export var auto_clean_before_load: bool = true
 
 const MAIN_SEQUENCES_PATH := "res://commons/maps/map_sequences.json"
 const SEQUENCES_DIRECTORY := "res://commons/maps/sequences/"
@@ -26,6 +26,7 @@ const COMMENT_DEFAULT_JSON_PATH := "res://ada_run/desktop_feedback.json"
 const COMMENT_CODEX_QUEUE_PATH := "res://ada_run/codex_change_requests.md"
 const ARTIFACT_LEGACY_REGISTRY_PATH := "res://commons/artifacts/grid_artifacts.json"
 const ARTIFACT_REGISTRY_DIR_PATH := "res://commons/artifacts/registry/"
+const MAP_GRADES_PATH := "res://commons/maps/catalog/map_grades.json"
 static var pending_map_name: String = ""
 static var last_selected_sequence_name: String = ""
 static var last_selected_map_name: String = ""
@@ -34,6 +35,8 @@ static var last_quick_scroll_horizontal: int = 0
 static var last_comment_output_path: String = COMMENT_DEFAULT_MARKDOWN_PATH
 static var last_comment_format: int = 0
 static var last_comment_draft: String = ""
+static var last_filter_text: String = ""
+static var last_collapsed_sequences: Dictionary = {}
 
 enum CommentFormat {
 	MARKDOWN,
@@ -50,9 +53,14 @@ var _status_label: Label
 var _count_label: Label
 var _hint_label: Label
 var _clean_before_load_check: CheckBox
-var _quick_load_scroll: ScrollContainer
-var _quick_load_content: VBoxContainer
+var _filter_edit: LineEdit
+var _catalog_scroll: ScrollContainer
+var _catalog_content: VBoxContainer
 var _quick_map_buttons: Dictionary = {}
+var _sequence_sections: Dictionary = {}  # sequence_name -> { "header": Button, "flow": VBoxContainer, "section": VBoxContainer }
+var _camera_bar: PanelContainer
+var _cam_buttons: Array = []
+var _active_cam_index: int = 2  # default: Spin
 var _comment_format_option: OptionButton
 var _comment_target_path_edit: LineEdit
 var _comment_context_label: Label
@@ -63,10 +71,14 @@ var _comment_status_label: Label
 var _comment_artifact_cache: Dictionary = {}
 var _artifact_scene_path_by_name: Dictionary = {}
 var _artifact_scene_index_loaded: bool = false
+var _map_grades: Dictionary = {}  # map_name -> "A"/"B"/"C"/"F"
+var _claude_panel: ClaudeCodePanel = null
+var _claude_visible: bool = false
 
+# Keep legacy references for API compat (some code reads _map_option / _sequence_option)
+var _current_maps: Array[String] = []
 var _sequence_names: Array[String] = []
 var _maps_by_sequence: Dictionary = {}
-var _current_maps: Array[String] = []
 var _stored_mouse_mode: int = Input.MOUSE_MODE_VISIBLE
 
 func _ready() -> void:
@@ -76,62 +88,65 @@ func _ready() -> void:
 	_ensure_toggle_action()
 	_build_ui()
 	_reload_data()
-	if open_on_start:
-		_set_overlay_visible(true)
-	else:
-		if _root:
-			_root.visible = false
-	
+	# Sidebar is always visible by default; M key toggles it
+	if _panel:
+		_panel.visible = open_on_start
+	if _camera_bar:
+		_camera_bar.visible = open_on_start
+
 	call_deferred("_apply_pending_map_if_any")
 
 func _input(event: InputEvent) -> void:
+	if _is_text_input_focused():
+		return
 	if _is_toggle_event(event):
 		_toggle_overlay()
 		_mark_input_handled()
 	elif _is_clean_scene_event(event):
-		if not _is_text_input_focused():
-			_on_clean_scene_pressed()
-			_mark_input_handled()
+		_on_clean_scene_pressed()
+		_mark_input_handled()
 	elif _is_spawn_kiosk_event(event):
-		if not _is_text_input_focused():
-			_on_spawn_kiosk_pressed()
-			_mark_input_handled()
+		_on_spawn_kiosk_pressed()
+		_mark_input_handled()
 	elif _is_next_map_event(event):
-		if not _is_text_input_focused():
-			_on_next_pressed()
-			_mark_input_handled()
+		_on_next_pressed()
+		_mark_input_handled()
+	elif _is_camera_key_event(event):
+		_mark_input_handled()
+	elif _is_claude_toggle_event(event):
+		_toggle_claude_panel()
+		_mark_input_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _is_text_input_focused():
+		return
 	if _is_toggle_event(event):
 		_toggle_overlay()
 		_mark_input_handled()
 	elif _is_clean_scene_event(event):
-		if not _is_text_input_focused():
-			_on_clean_scene_pressed()
-			_mark_input_handled()
+		_on_clean_scene_pressed()
+		_mark_input_handled()
 	elif _is_spawn_kiosk_event(event):
-		if not _is_text_input_focused():
-			_on_spawn_kiosk_pressed()
-			_mark_input_handled()
+		_on_spawn_kiosk_pressed()
+		_mark_input_handled()
 	elif _is_next_map_event(event):
-		if not _is_text_input_focused():
-			_on_next_pressed()
-			_mark_input_handled()
+		_on_next_pressed()
+		_mark_input_handled()
 
 func _is_toggle_event(event: InputEvent) -> bool:
 	if not (event is InputEventKey):
 		return false
-	
+
 	var key_event := event as InputEventKey
 	if not key_event.pressed or key_event.echo:
 		return false
-	
+
 	if key_event.keycode == toggle_key or key_event.physical_keycode == toggle_key:
 		return true
-	
+
 	if not toggle_action.is_empty() and key_event.is_action_pressed(toggle_action, true):
 		return true
-	
+
 	return false
 
 func _is_next_map_event(event: InputEvent) -> bool:
@@ -175,6 +190,27 @@ func _is_spawn_kiosk_action_name(action_name: StringName) -> bool:
 			return true
 	return false
 
+func _is_camera_key_event(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+	match key_event.keycode:
+		KEY_1:
+			_on_camera_static_pressed()
+			return true
+		KEY_2:
+			_on_camera_isometric_pressed()
+			return true
+		KEY_3:
+			_on_camera_spin_pressed()
+			return true
+		KEY_4:
+			_on_camera_player_pressed()
+			return true
+	return false
+
 func _mark_input_handled() -> void:
 	var viewport := get_viewport()
 	if viewport:
@@ -187,201 +223,304 @@ func _is_text_input_focused() -> bool:
 	var focused := viewport.gui_get_focus_owner()
 	return focused is LineEdit or focused is TextEdit
 
+func _is_claude_toggle_event(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+	return key_event.keycode == KEY_QUOTELEFT  # backtick / tilde key
+
+func _toggle_claude_panel() -> void:
+	if _claude_panel:
+		_claude_visible = not _claude_visible
+		_claude_panel.visible = _claude_visible
+
+func _build_claude_panel() -> void:
+	_claude_panel = ClaudeCodePanel.new()
+	_claude_panel.name = "ClaudeCodePanel"
+	_claude_panel.project_root = ProjectSettings.globalize_path("res://")
+	# Right-side panel: fills right 40% of screen
+	_claude_panel.anchor_left = 0.6
+	_claude_panel.anchor_top = 0.0
+	_claude_panel.anchor_right = 1.0
+	_claude_panel.anchor_bottom = 1.0
+	_claude_panel.offset_left = 0
+	_claude_panel.offset_top = 0
+	_claude_panel.offset_right = 0
+	_claude_panel.offset_bottom = 0
+	_claude_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	_claude_panel.visible = false
+	_root.add_child(_claude_panel)
+
 func _toggle_overlay() -> void:
 	_set_overlay_visible(not _is_menu_visible())
 
 func _is_menu_visible() -> bool:
-	return _root != null and _root.visible
+	return _panel != null and _panel.visible
 
 func _ensure_toggle_action() -> void:
 	if toggle_action.is_empty():
 		return
-	
+
 	if not InputMap.has_action(toggle_action):
 		InputMap.add_action(toggle_action)
-	
+
 	# Prevent duplicate bindings when multiple overlays exist in scene.
 	for existing_event in InputMap.action_get_events(toggle_action):
 		if existing_event is InputEventKey:
 			var key_event := existing_event as InputEventKey
 			if key_event.keycode == toggle_key or key_event.physical_keycode == toggle_key:
 				return
-	
+
 	var key_binding := InputEventKey.new()
 	key_binding.keycode = toggle_key
 	key_binding.physical_keycode = toggle_key
 	InputMap.action_add_event(toggle_action, key_binding)
 
+# ---------------------------------------------------------------------------
+# UI BUILD
+# ---------------------------------------------------------------------------
+
 func _build_ui() -> void:
 	_root = Control.new()
 	_root.name = "Root"
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_root.mouse_filter = Control.MOUSE_FILTER_STOP
+	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE  # Don't block clicks on the 3D view
 	add_child(_root)
 
-	_backdrop = ColorRect.new()
-	_backdrop.name = "Backdrop"
-	_backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_backdrop.color = Color(0.015, 0.025, 0.045, 0.58)
-	_root.add_child(_backdrop)
-	
+	# No backdrop — sidebar is always visible, 3D preview fills the rest
+	_backdrop = null
+
+	_build_left_panel()
+	_build_camera_bar()
+	_build_comment_panel()
+	_build_claude_panel()
+
+func _build_left_panel() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "Panel"
-	_panel.offset_left = 24
-	_panel.offset_top = 24
-	_panel.offset_right = 620
-	_panel.offset_bottom = 760
+	_panel.mouse_filter = Control.MOUSE_FILTER_STOP  # Capture clicks on the sidebar
+	# Narrow sidebar: ~250px wide, full height, always visible
+	_panel.anchor_left = 0.0
+	_panel.anchor_top = 0.0
+	_panel.anchor_right = 0.0
+	_panel.anchor_bottom = 1.0
+	_panel.offset_left = 0
+	_panel.offset_top = 0
+	_panel.offset_right = 250
+	_panel.offset_bottom = 0
 	_root.add_child(_panel)
 
 	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.055, 0.085, 0.13, 0.96)
-	panel_style.set_border_width_all(1)
-	panel_style.border_color = Color(0.22, 0.66, 0.98, 0.85)
-	panel_style.set_corner_radius_all(16)
-	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.38)
-	panel_style.shadow_size = 14
+	panel_style.bg_color = Color(0.04, 0.06, 0.10, 0.92)
+	panel_style.set_border_width_all(0)
+	panel_style.border_width_right = 1
+	panel_style.border_color = Color(0.22, 0.66, 0.98, 0.6)
+	panel_style.set_corner_radius_all(0)
 	_panel.add_theme_stylebox_override("panel", panel_style)
-	
-	var panel_scroll = ScrollContainer.new()
-	panel_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	panel_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_panel.add_child(panel_scroll)
 
-	var vb = VBoxContainer.new()
-	vb.custom_minimum_size = Vector2(560, 0)
-	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vb.add_theme_constant_override("separation", 10)
-	panel_scroll.add_child(vb)
-	
+	var margin = MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 6)
+	margin.add_theme_constant_override("margin_right", 6)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 4)
+	_panel.add_child(margin)
+
+	var outer_vb = VBoxContainer.new()
+	outer_vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	outer_vb.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	outer_vb.add_theme_constant_override("separation", 4)
+	margin.add_child(outer_vb)
+
+	# ---- Title ----
 	var title = Label.new()
-	title.text = "Map Switcher"
+	title.text = "Maps"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 24)
-	title.add_theme_color_override("font_color", Color(0.92, 0.97, 1.0, 1.0))
-	vb.add_child(title)
-	
-	var sequence_row = HBoxContainer.new()
-	sequence_row.add_theme_constant_override("separation", 10)
-	vb.add_child(sequence_row)
-	
-	var sequence_label = Label.new()
-	sequence_label.text = "Sequence:"
-	sequence_label.custom_minimum_size = Vector2(100, 0)
-	sequence_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
-	sequence_row.add_child(sequence_label)
-	
-	_sequence_option = OptionButton.new()
-	_sequence_option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_sequence_option.item_selected.connect(_on_sequence_selected)
-	_style_option_button(_sequence_option)
-	sequence_row.add_child(_sequence_option)
-	
-	var map_row = HBoxContainer.new()
-	map_row.add_theme_constant_override("separation", 10)
-	vb.add_child(map_row)
-	
-	var map_label = Label.new()
-	map_label.text = "Map:"
-	map_label.custom_minimum_size = Vector2(100, 0)
-	map_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
-	map_row.add_child(map_label)
-	
-	_map_option = OptionButton.new()
-	_map_option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_map_option.item_selected.connect(_on_map_selected)
-	_style_option_button(_map_option)
-	map_row.add_child(_map_option)
-	
+	title.add_theme_font_size_override("font_size", 16)
+	title.add_theme_color_override("font_color", Color(0.82, 0.90, 1.0, 1.0))
+	outer_vb.add_child(title)
+
+	# ---- Filter / search ----
+	var filter_row = HBoxContainer.new()
+	filter_row.add_theme_constant_override("separation", 4)
+	outer_vb.add_child(filter_row)
+
+	_filter_edit = LineEdit.new()
+	_filter_edit.placeholder_text = "Filter..."
+	_filter_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_filter_edit.custom_minimum_size = Vector2(0, 26)
+	_filter_edit.text = last_filter_text
+	_filter_edit.text_changed.connect(_on_filter_text_changed)
+	filter_row.add_child(_filter_edit)
+
+	var clear_filter_btn = Button.new()
+	clear_filter_btn.text = "✕"
+	clear_filter_btn.custom_minimum_size = Vector2(26, 26)
+	clear_filter_btn.pressed.connect(_on_clear_filter_pressed)
+	_style_button(clear_filter_btn)
+	filter_row.add_child(clear_filter_btn)
+
+	# ---- Count label ----
 	_count_label = Label.new()
-	_count_label.text = "0 maps"
-	_count_label.add_theme_color_override("font_color", Color(0.67, 0.78, 0.9, 1.0))
-	vb.add_child(_count_label)
-	
-	var buttons_row = HBoxContainer.new()
-	buttons_row.add_theme_constant_override("separation", 6)
-	vb.add_child(buttons_row)
-	
-	var prev_button = Button.new()
-	prev_button.text = "Prev"
-	prev_button.pressed.connect(_on_prev_pressed)
-	_style_button(prev_button)
-	buttons_row.add_child(prev_button)
-	
-	var next_button = Button.new()
-	next_button.text = "Next"
-	next_button.pressed.connect(_on_next_pressed)
-	_style_button(next_button)
-	buttons_row.add_child(next_button)
-	
-	var load_button = Button.new()
-	load_button.text = "Load Map"
-	load_button.pressed.connect(_on_load_pressed)
-	_style_button(load_button, true)
-	buttons_row.add_child(load_button)
-	
-	var start_button = Button.new()
-	start_button.text = "Start Sequence"
-	start_button.pressed.connect(_on_start_sequence_pressed)
-	_style_button(start_button)
-	buttons_row.add_child(start_button)
-	
-	var refresh_button = Button.new()
-	refresh_button.text = "Refresh"
-	refresh_button.pressed.connect(_on_refresh_pressed)
-	_style_button(refresh_button)
-	buttons_row.add_child(refresh_button)
+	_count_label.text = ""
+	_count_label.add_theme_font_size_override("font_size", 11)
+	_count_label.add_theme_color_override("font_color", Color(0.55, 0.65, 0.78, 1.0))
+	outer_vb.add_child(_count_label)
 
-	var clean_button = Button.new()
-	clean_button.text = "Clean Scene"
-	clean_button.pressed.connect(_on_clean_scene_pressed)
-	_style_button(clean_button)
-	buttons_row.add_child(clean_button)
-	
-	var close_button = Button.new()
-	close_button.text = "Close"
-	close_button.pressed.connect(_on_close_pressed)
-	_style_button(close_button)
-	buttons_row.add_child(close_button)
+	# ---- Catalog scroll area (fills remaining space) — single column of map names ----
+	_catalog_scroll = ScrollContainer.new()
+	_catalog_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_catalog_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_catalog_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	outer_vb.add_child(_catalog_scroll)
 
+	_catalog_content = VBoxContainer.new()
+	_catalog_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_catalog_content.add_theme_constant_override("separation", 1)
+	_catalog_scroll.add_child(_catalog_content)
+
+	# ---- Status line (small) ----
+	_status_label = Label.new()
+	_status_label.text = ""
+	_status_label.add_theme_font_size_override("font_size", 10)
+	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_status_label.add_theme_color_override("font_color", Color(0.55, 0.68, 0.82, 1.0))
+	outer_vb.add_child(_status_label)
+
+	# ---- Hint label (compact) ----
+	_hint_label = Label.new()
+	_hint_label.text = "M toggle | N next | 1-4 camera"
+	_hint_label.add_theme_font_size_override("font_size", 10)
+	_hint_label.modulate = Color(0.50, 0.58, 0.70, 1.0)
+	outer_vb.add_child(_hint_label)
+
+	# ---- Hidden controls (checkbox + legacy OptionButtons for API compat) ----
 	_clean_before_load_check = CheckBox.new()
-	_clean_before_load_check.text = "Clean scene before load"
 	_clean_before_load_check.button_pressed = auto_clean_before_load
 	_clean_before_load_check.toggled.connect(_on_clean_before_load_toggled)
-	_clean_before_load_check.add_theme_color_override("font_color", Color(0.84, 0.92, 1.0, 1.0))
-	vb.add_child(_clean_before_load_check)
-	
-	_status_label = Label.new()
-	_status_label.text = "Loading sequence registry..."
-	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status_label.add_theme_color_override("font_color", Color(0.75, 0.87, 0.98, 1.0))
-	vb.add_child(_status_label)
-	
-	_hint_label = Label.new()
-	_hint_label.text = "Toggle: M | Next map: N | Clean: C | Spawn kiosk: B / VR B"
-	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_hint_label.modulate = Color(0.62, 0.72, 0.84, 1.0)
-	vb.add_child(_hint_label)
+	_clean_before_load_check.visible = false
+	outer_vb.add_child(_clean_before_load_check)
 
-	var divider = HSeparator.new()
-	vb.add_child(divider)
+	_sequence_option = OptionButton.new()
+	_sequence_option.visible = false
+	_sequence_option.item_selected.connect(_on_sequence_selected)
+	outer_vb.add_child(_sequence_option)
 
-	var quick_title = Label.new()
-	quick_title.text = "One-click map buttons"
-	quick_title.add_theme_color_override("font_color", Color(0.84, 0.94, 1.0, 1.0))
-	quick_title.add_theme_font_size_override("font_size", 16)
-	vb.add_child(quick_title)
+	_map_option = OptionButton.new()
+	_map_option.visible = false
+	_map_option.item_selected.connect(_on_map_selected)
+	outer_vb.add_child(_map_option)
 
-	_quick_load_scroll = ScrollContainer.new()
-	_quick_load_scroll.custom_minimum_size = Vector2(0, 220)
-	_quick_load_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	vb.add_child(_quick_load_scroll)
+## Returns true when the mouse cursor is over the sidebar panel.
+func is_mouse_over_panel() -> bool:
+	if not _panel or not _panel.visible:
+		return false
+	var mouse_pos := _panel.get_global_mouse_position()
+	return _panel.get_global_rect().has_point(mouse_pos)
 
-	_quick_load_content = VBoxContainer.new()
-	_quick_load_content.add_theme_constant_override("separation", 8)
-	_quick_load_scroll.add_child(_quick_load_content)
+func _build_camera_bar() -> void:
+	_camera_bar = PanelContainer.new()
+	_camera_bar.name = "CameraBar"
+	_camera_bar.mouse_filter = Control.MOUSE_FILTER_STOP
+	# Compact bar that fits to content, positioned top-left after sidebar
+	_camera_bar.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_camera_bar.offset_left = 258
+	_camera_bar.offset_top = 8
+	_root.add_child(_camera_bar)
 
-	_build_comment_panel()
+	var bar_style := StyleBoxFlat.new()
+	bar_style.bg_color = Color(0.04, 0.06, 0.10, 0.85)
+	bar_style.set_border_width_all(1)
+	bar_style.border_color = Color(0.22, 0.66, 0.98, 0.5)
+	bar_style.set_corner_radius_all(6)
+	bar_style.set_content_margin_all(3)
+	_camera_bar.add_theme_stylebox_override("panel", bar_style)
+
+	var hb = HBoxContainer.new()
+	hb.add_theme_constant_override("separation", 3)
+	_camera_bar.add_child(hb)
+
+	_cam_buttons = []
+	var cam_names: Array[String] = ["1:Static", "2:Iso", "3:Spin", "4:Player"]
+	var cam_callbacks: Array[Callable] = [
+		_on_camera_static_pressed, _on_camera_isometric_pressed,
+		_on_camera_spin_pressed, _on_camera_player_pressed,
+	]
+	for i in cam_names.size():
+		var btn = Button.new()
+		btn.text = cam_names[i]
+		btn.add_theme_font_size_override("font_size", 11)
+		btn.pressed.connect(cam_callbacks[i])
+		_style_button(btn)
+		hb.add_child(btn)
+		_cam_buttons.append(btn)
+
+	var btn_launch = Button.new()
+	btn_launch.text = "Launch"
+	btn_launch.add_theme_font_size_override("font_size", 11)
+	btn_launch.pressed.connect(_on_launch_map_pressed)
+	_style_button(btn_launch, true)
+	hb.add_child(btn_launch)
+
+	# Default highlight: spin (index 2)
+	_highlight_cam_button(2)
+
+# ---------------------------------------------------------------------------
+# Camera mode button callbacks
+# ---------------------------------------------------------------------------
+
+func _get_catalog_parent() -> Node:
+	# The overlay is a direct child of MapCatalogDesktop3D
+	return get_parent()
+
+func _highlight_cam_button(index: int) -> void:
+	_active_cam_index = index
+	for i in _cam_buttons.size():
+		if _cam_buttons[i] is Button:
+			_style_button(_cam_buttons[i] as Button, i == index)
+
+func _on_camera_static_pressed() -> void:
+	var parent := _get_catalog_parent()
+	if parent and parent.has_method("set_camera_mode"):
+		parent.set_camera_mode(0)
+	_highlight_cam_button(0)
+	_set_status("Camera: Static")
+
+func _on_camera_isometric_pressed() -> void:
+	var parent := _get_catalog_parent()
+	if parent and parent.has_method("set_camera_mode"):
+		parent.set_camera_mode(1)
+	_highlight_cam_button(1)
+	_set_status("Camera: Isometric")
+
+func _on_camera_spin_pressed() -> void:
+	var parent := _get_catalog_parent()
+	if parent and parent.has_method("set_camera_mode"):
+		parent.set_camera_mode(2)
+	_highlight_cam_button(2)
+	_set_status("Camera: Spin Around")
+
+func _on_camera_player_pressed() -> void:
+	var parent := _get_catalog_parent()
+	if parent and parent.has_method("set_camera_mode"):
+		parent.set_camera_mode(3)
+	_highlight_cam_button(3)
+	_set_status("Camera: Player")
+
+func _on_launch_map_pressed() -> void:
+	var map_name := _get_selected_map_name()
+	if map_name.is_empty():
+		_set_status("No map selected to launch.")
+		return
+	pending_map_name = map_name
+	var scene_tree := get_tree()
+	if scene_tree:
+		scene_tree.change_scene_to_file(DESKTOP_GRID_SCENE_PATH)
+
+# ---------------------------------------------------------------------------
+# Comment panel (unchanged from original)
+# ---------------------------------------------------------------------------
 
 func _build_comment_panel() -> void:
 	_comment_panel = PanelContainer.new()
@@ -427,113 +566,130 @@ func _build_comment_panel() -> void:
 	var comment_title = Label.new()
 	comment_title.text = "Comment Writer"
 	comment_title.add_theme_color_override("font_color", Color(0.9, 0.97, 1.0, 1.0))
-	comment_title.add_theme_font_size_override("font_size", 18)
+	comment_title.add_theme_font_size_override("font_size", 14)
 	comment_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(comment_title)
 
 	_comment_context_label = Label.new()
 	_comment_context_label.text = "Map context: (none)"
 	_comment_context_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_comment_context_label.add_theme_font_size_override("font_size", 12)
 	_comment_context_label.add_theme_color_override("font_color", Color(0.72, 0.85, 0.98, 1.0))
 	vb.add_child(_comment_context_label)
 
 	var comment_format_row = HBoxContainer.new()
-	comment_format_row.add_theme_constant_override("separation", 8)
+	comment_format_row.add_theme_constant_override("separation", 6)
 	vb.add_child(comment_format_row)
 
 	var comment_format_label = Label.new()
 	comment_format_label.text = "Save as:"
-	comment_format_label.custom_minimum_size = Vector2(80, 0)
+	comment_format_label.custom_minimum_size = Vector2(60, 0)
+	comment_format_label.add_theme_font_size_override("font_size", 12)
 	comment_format_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
 	comment_format_row.add_child(comment_format_label)
 
 	_comment_format_option = OptionButton.new()
-	_comment_format_option.custom_minimum_size = Vector2(170, 30)
+	_comment_format_option.custom_minimum_size = Vector2(140, 24)
 	_comment_format_option.add_item("Markdown (.md)", CommentFormat.MARKDOWN)
 	_comment_format_option.add_item("JSON (.json)", CommentFormat.JSON)
 	_comment_format_option.item_selected.connect(_on_comment_format_selected)
+	_comment_format_option.add_theme_font_size_override("font_size", 12)
 	_style_option_button(_comment_format_option)
 	comment_format_row.add_child(_comment_format_option)
 
 	var comment_default_button = Button.new()
-	comment_default_button.text = "Use Default Path"
+	comment_default_button.text = "Default Path"
+	comment_default_button.add_theme_font_size_override("font_size", 12)
 	comment_default_button.pressed.connect(_on_comment_use_default_path_pressed)
 	_style_button(comment_default_button)
 	comment_format_row.add_child(comment_default_button)
 
 	var comment_path_row = HBoxContainer.new()
-	comment_path_row.add_theme_constant_override("separation", 8)
+	comment_path_row.add_theme_constant_override("separation", 6)
 	vb.add_child(comment_path_row)
 
 	var comment_path_label = Label.new()
 	comment_path_label.text = "Target:"
-	comment_path_label.custom_minimum_size = Vector2(80, 0)
+	comment_path_label.custom_minimum_size = Vector2(60, 0)
+	comment_path_label.add_theme_font_size_override("font_size", 12)
 	comment_path_label.add_theme_color_override("font_color", Color(0.78, 0.87, 0.97, 1.0))
 	comment_path_row.add_child(comment_path_label)
 
 	_comment_target_path_edit = LineEdit.new()
 	_comment_target_path_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_comment_target_path_edit.placeholder_text = COMMENT_DEFAULT_MARKDOWN_PATH
+	_comment_target_path_edit.add_theme_font_size_override("font_size", 12)
 	_comment_target_path_edit.text_changed.connect(_on_comment_target_path_changed)
 	comment_path_row.add_child(_comment_target_path_edit)
 
 	_comment_text_edit = TextEdit.new()
-	_comment_text_edit.custom_minimum_size = Vector2(0, 84)
+	_comment_text_edit.custom_minimum_size = Vector2(0, 68)
 	_comment_text_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	_comment_text_edit.placeholder_text = "Write feedback, bug reports, or change requests..."
+	_comment_text_edit.add_theme_font_size_override("font_size", 12)
 	_comment_text_edit.text_changed.connect(_on_comment_text_changed)
 	vb.add_child(_comment_text_edit)
 
 	var comment_action_row = HBoxContainer.new()
-	comment_action_row.add_theme_constant_override("separation", 6)
+	comment_action_row.add_theme_constant_override("separation", 4)
 	vb.add_child(comment_action_row)
 
 	var insert_map_button = Button.new()
-	insert_map_button.text = "Insert Map Name"
+	insert_map_button.text = "Insert Map"
+	insert_map_button.add_theme_font_size_override("font_size", 12)
 	insert_map_button.pressed.connect(_on_insert_map_name_pressed)
 	_style_button(insert_map_button)
 	comment_action_row.add_child(insert_map_button)
 
 	var refresh_artifacts_button = Button.new()
 	refresh_artifacts_button.text = "Refresh Artifacts"
+	refresh_artifacts_button.add_theme_font_size_override("font_size", 12)
 	refresh_artifacts_button.pressed.connect(_on_refresh_comment_artifacts_pressed)
 	_style_button(refresh_artifacts_button)
 	comment_action_row.add_child(refresh_artifacts_button)
 
 	var save_comment_button = Button.new()
-	save_comment_button.text = "Save Comment"
+	save_comment_button.text = "Save"
+	save_comment_button.add_theme_font_size_override("font_size", 12)
 	save_comment_button.pressed.connect(_on_save_comment_pressed)
 	_style_button(save_comment_button, true)
 	comment_action_row.add_child(save_comment_button)
 
 	var queue_codex_button = Button.new()
-	queue_codex_button.text = "Queue For Codex"
+	queue_codex_button.text = "Queue Codex"
+	queue_codex_button.add_theme_font_size_override("font_size", 12)
 	queue_codex_button.pressed.connect(_on_queue_for_codex_pressed)
 	_style_button(queue_codex_button)
 	comment_action_row.add_child(queue_codex_button)
 
 	var artifact_hint_label = Label.new()
-	artifact_hint_label.text = "Artifacts in interactables (click to insert into comment):"
+	artifact_hint_label.text = "Artifacts (click to insert):"
+	artifact_hint_label.add_theme_font_size_override("font_size", 11)
 	artifact_hint_label.add_theme_color_override("font_color", Color(0.68, 0.8, 0.94, 1.0))
 	vb.add_child(artifact_hint_label)
 
 	_comment_artifact_scroll = ScrollContainer.new()
-	_comment_artifact_scroll.custom_minimum_size = Vector2(0, 72)
+	_comment_artifact_scroll.custom_minimum_size = Vector2(0, 52)
 	_comment_artifact_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vb.add_child(_comment_artifact_scroll)
 
 	_comment_artifact_flow = FlowContainer.new()
-	_comment_artifact_flow.add_theme_constant_override("h_separation", 6)
-	_comment_artifact_flow.add_theme_constant_override("v_separation", 6)
+	_comment_artifact_flow.add_theme_constant_override("h_separation", 4)
+	_comment_artifact_flow.add_theme_constant_override("v_separation", 4)
 	_comment_artifact_scroll.add_child(_comment_artifact_flow)
 
 	_comment_status_label = Label.new()
-	_comment_status_label.text = "Comment writer ready."
+	_comment_status_label.text = ""
 	_comment_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_comment_status_label.add_theme_color_override("font_color", Color(0.66, 0.79, 0.92, 1.0))
+	_comment_status_label.add_theme_font_size_override("font_size", 10)
+	_comment_status_label.add_theme_color_override("font_color", Color(0.55, 0.68, 0.82, 1.0))
 	vb.add_child(_comment_status_label)
 
 	_restore_comment_editor_state()
+
+# ---------------------------------------------------------------------------
+# Styling
+# ---------------------------------------------------------------------------
 
 func _style_option_button(option: OptionButton) -> void:
 	var normal := StyleBoxFlat.new()
@@ -596,59 +752,79 @@ func _style_button(button: Button, is_primary: bool = false) -> void:
 	button.add_theme_color_override("font_color", Color(0.91, 0.97, 1.0, 1.0))
 	button.custom_minimum_size = Vector2(0, 30)
 
+# ---------------------------------------------------------------------------
+# Overlay visibility
+# ---------------------------------------------------------------------------
+
 func _set_overlay_visible(is_visible: bool) -> void:
 	var was_visible := _is_menu_visible()
 	if was_visible and not is_visible:
 		_remember_current_ui_selection()
 		_save_quick_scroll_position()
 
-	if _root:
-		_root.visible = is_visible
-	
-	if is_visible:
-		_stored_mouse_mode = Input.mouse_mode
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		if refresh_on_open:
-			_reload_data()
-	else:
-		Input.mouse_mode = _stored_mouse_mode
+	# Toggle sidebar visibility (no backdrop to manage)
+	if _panel:
+		_panel.visible = is_visible
+	if _camera_bar:
+		_camera_bar.visible = is_visible
+
+	if is_visible and refresh_on_open:
+		_reload_data()
+
+# ---------------------------------------------------------------------------
+# Data loading
+# ---------------------------------------------------------------------------
 
 func _reload_data() -> void:
 	_save_quick_scroll_position()
 	_comment_artifact_cache.clear()
 	_maps_by_sequence.clear()
 	_sequence_names.clear()
-	
+	_load_map_grades()
+
 	var sequence_configs = _get_sequence_configs()
 	for sequence_name in sequence_configs.keys():
 		var sequence_config = sequence_configs[sequence_name]
 		if not (sequence_config is Dictionary):
 			continue
-		
+
 		var raw_maps = sequence_config.get("maps", [])
 		if not (raw_maps is Array):
 			continue
-		
+
 		var clean_maps: Array[String] = []
 		for map_value in raw_maps:
 			var map_name := str(map_value).strip_edges()
 			if not map_name.is_empty():
 				clean_maps.append(map_name)
-		
+
 		if clean_maps.is_empty():
 			continue
-		
+
 		_maps_by_sequence[sequence_name] = clean_maps
 		_sequence_names.append(sequence_name)
-	
-	_sequence_names.sort()
+
+	_sequence_names = _sort_sequences(_sequence_names)
 	_rebuild_sequence_option()
-	_rebuild_quick_load_buttons()
+	_rebuild_catalog_buttons()
 	_refresh_comment_context()
-	
+
 	if _sequence_names.is_empty():
 		_set_status("No sequences found.")
 	else:
+		var total_maps := 0
+		var grade_counts := {"A": 0, "B": 0, "C": 0, "F": 0}
+		for seq_name in _sequence_names:
+			var maps: Array[String] = _maps_by_sequence.get(seq_name, [])
+			total_maps += maps.size()
+			for mn in maps:
+				var g := _get_grade(mn)
+				if grade_counts.has(g):
+					grade_counts[g] += 1
+		if _map_grades.is_empty():
+			_count_label.text = "%d maps · %d seq" % [total_maps, _sequence_names.size()]
+		else:
+			_count_label.text = "%d maps · %dA %dB %dC %dF" % [total_maps, grade_counts["A"], grade_counts["B"], grade_counts["C"], grade_counts["F"]]
 		_set_status("Loaded %d sequences." % _sequence_names.size())
 
 func _get_sequence_configs() -> Dictionary:
@@ -656,14 +832,14 @@ func _get_sequence_configs() -> Dictionary:
 		var scene_manager = AdaSceneManager.get_instance()
 		if scene_manager and not scene_manager.sequence_configs.is_empty():
 			return scene_manager.sequence_configs
-	
+
 	var configs := {}
 	_merge_sequence_file(MAIN_SEQUENCES_PATH, configs)
-	
+
 	var dir = DirAccess.open(SEQUENCES_DIRECTORY)
 	if not dir:
 		return configs
-	
+
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
 	while file_name != "":
@@ -671,36 +847,36 @@ func _get_sequence_configs() -> Dictionary:
 			_merge_sequence_file(SEQUENCES_DIRECTORY + file_name, configs)
 		file_name = dir.get_next()
 	dir.list_dir_end()
-	
+
 	return configs
 
 func _merge_sequence_file(path: String, out_configs: Dictionary) -> void:
 	if not FileAccess.file_exists(path):
 		return
-	
+
 	var file = FileAccess.open(path, FileAccess.READ)
 	if not file:
 		return
-	
+
 	var json_text = file.get_as_text()
 	file.close()
-	
+
 	var parser = JSON.new()
 	var parse_result = parser.parse(json_text)
 	if parse_result != OK:
 		parse_result = parser.parse(_strip_trailing_commas(json_text))
-	
+
 	if parse_result != OK:
 		return
-	
+
 	var data = parser.data
 	if not (data is Dictionary):
 		return
-	
+
 	var sequence_data = data.get("sequences", {})
 	if not (sequence_data is Dictionary):
 		return
-	
+
 	for sequence_name in sequence_data.keys():
 		var sequence_config = sequence_data[sequence_name]
 		if sequence_config is Dictionary:
@@ -712,10 +888,10 @@ func _strip_trailing_commas(json_text: String) -> String:
 	var escaped := false
 	var i := 0
 	var len := json_text.length()
-	
+
 	while i < len:
 		var ch = json_text.substr(i, 1)
-		
+
 		if in_string:
 			result.append(ch)
 			if escaped:
@@ -726,13 +902,13 @@ func _strip_trailing_commas(json_text: String) -> String:
 				in_string = false
 			i += 1
 			continue
-		
+
 		if ch == "\"":
 			in_string = true
 			result.append(ch)
 			i += 1
 			continue
-		
+
 		if ch == ",":
 			var j := i + 1
 			while j < len and _is_whitespace(json_text.substr(j, 1)):
@@ -741,14 +917,207 @@ func _strip_trailing_commas(json_text: String) -> String:
 			if j < len and (next_char == "}" or next_char == "]"):
 				i += 1
 				continue
-		
+
 		result.append(ch)
 		i += 1
-	
+
 	return "".join(result)
 
 func _is_whitespace(ch: String) -> bool:
 	return ch == " " or ch == "\n" or ch == "\r" or ch == "\t"
+
+# ---------------------------------------------------------------------------
+# Map grades
+# ---------------------------------------------------------------------------
+
+func _load_map_grades() -> void:
+	_map_grades.clear()
+	if not FileAccess.file_exists(MAP_GRADES_PATH):
+		return
+
+	var file = FileAccess.open(MAP_GRADES_PATH, FileAccess.READ)
+	if not file:
+		return
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var parser = JSON.new()
+	if parser.parse(json_text) != OK:
+		return
+
+	var data = parser.data
+	if not (data is Dictionary):
+		return
+
+	var grades = data.get("grades", {})
+	if grades is Dictionary:
+		_map_grades = grades
+
+func _get_grade(map_name: String) -> String:
+	return str(_map_grades.get(map_name, ""))
+
+func _grade_color(grade: String) -> Color:
+	match grade:
+		"A":
+			return Color(0.3, 0.9, 0.4, 1.0)   # green
+		"B":
+			return Color(0.75, 0.85, 0.95, 1.0) # soft blue (fine)
+		"C":
+			return Color(1.0, 0.75, 0.3, 1.0)   # orange
+		"F":
+			return Color(1.0, 0.35, 0.3, 1.0)   # red
+	return Color(0.5, 0.55, 0.6, 1.0)           # grey (ungraded)
+
+func _sequence_grade_summary(maps: Array[String]) -> String:
+	var counts := {"A": 0, "B": 0, "C": 0, "F": 0}
+	for map_name in maps:
+		var g := _get_grade(map_name)
+		if counts.has(g):
+			counts[g] += 1
+	var parts: Array[String] = []
+	if counts["F"] > 0:
+		parts.append("%dF" % counts["F"])
+	if counts["C"] > 0:
+		parts.append("%dC" % counts["C"])
+	if parts.is_empty():
+		return "✓"
+	return " ".join(parts)
+
+func _grade_prefix(grade: String) -> String:
+	match grade:
+		"A":
+			return "● "
+		"B":
+			return "● "
+		"C":
+			return "● "
+		"F":
+			return "✘ "
+	return "  "
+
+const GRADE_CYCLE: Array[String] = ["", "A", "B", "C", "F"]
+
+func _cycle_grade(map_name: String) -> void:
+	var current := _get_grade(map_name)
+	var idx := GRADE_CYCLE.find(current)
+	if idx < 0:
+		idx = 0
+	var next_grade: String = GRADE_CYCLE[(idx + 1) % GRADE_CYCLE.size()]
+	if next_grade.is_empty():
+		_map_grades.erase(map_name)
+	else:
+		_map_grades[map_name] = next_grade
+	_save_map_grades()
+	_refresh_map_button_grade(map_name, next_grade)
+	_refresh_grade_counts()
+
+func _save_map_grades() -> void:
+	var data := {"count": _map_grades.size(), "grades": _map_grades}
+	var json_text := JSON.stringify(data, " ")
+	var file := FileAccess.open(MAP_GRADES_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(json_text)
+		file.close()
+
+func _refresh_map_button_grade(map_name: String, grade: String) -> void:
+	# Update all quick buttons that reference this map
+	for key in _quick_map_buttons.keys():
+		var parts: PackedStringArray = str(key).split("|")
+		if parts.size() == 2 and parts[1] == map_name:
+			var btn: Button = _quick_map_buttons[key] as Button
+			if not btn:
+				continue
+			btn.text = "%s%s" % [_grade_prefix(grade), _format_name(map_name)]
+			var seq_name: String = parts[0]
+			btn.tooltip_text = "%s / %s [%s]" % [_format_name(seq_name), _format_name(map_name), grade if not grade.is_empty() else "?"]
+			if not grade.is_empty():
+				btn.add_theme_color_override("font_color", _grade_color(grade))
+			else:
+				btn.remove_theme_color_override("font_color")
+			# Also update sequence header grade summary
+			if _sequence_sections.has(seq_name):
+				var header_btn: Button = _sequence_sections[seq_name].get("header") as Button
+				var maps: Array[String] = _maps_by_sequence.get(seq_name, [])
+				if header_btn:
+					var collapsed: bool = last_collapsed_sequences.get(seq_name, true)
+					var arrow := "▾" if not collapsed else "▸"
+					var seq_grade_summary := _sequence_grade_summary(maps)
+					header_btn.text = "%s %s (%d) %s" % [arrow, _format_name(seq_name), maps.size(), seq_grade_summary]
+
+func _refresh_grade_counts() -> void:
+	var total_maps := 0
+	var grade_counts := {"A": 0, "B": 0, "C": 0, "F": 0}
+	for seq_name in _sequence_names:
+		var maps: Array[String] = _maps_by_sequence.get(seq_name, [])
+		total_maps += maps.size()
+		for mn in maps:
+			var g := _get_grade(mn)
+			if grade_counts.has(g):
+				grade_counts[g] += 1
+	if _map_grades.is_empty():
+		_count_label.text = "%d maps · %d seq" % [total_maps, _sequence_names.size()]
+	else:
+		_count_label.text = "%d maps · %dA %dB %dC %dF" % [total_maps, grade_counts["A"], grade_counts["B"], grade_counts["C"], grade_counts["F"]]
+
+# ---------------------------------------------------------------------------
+# Sequence ordering: spine first, then branches, then test/dev, then rest
+# ---------------------------------------------------------------------------
+
+const SPINE_ORDER: Array[String] = [
+	"primitives", "transformation", "color", "forces", "array_tutorial",
+	"wavefunctions", "randomness", "noise", "cellularautomata", "fractals",
+	"lsystems", "proceduralgeneration", "softbodies", "swarmintelligence",
+	"morphogenesis", "machinelearning", "foundationscrisis", "qfeplaboratory",
+	"postfoundationscrisis", "graphtheory",
+]
+
+const BRANCH_ORDER: Array[String] = [
+	"speculativecomputation", "criticalalgorithms", "recursiveemergence",
+	"physicssimulation", "datastructures", "searchpathfinding", "vectors",
+	"computationalgeometry", "meshes", "patterngeneration",
+	"grammar_systems", "spatial_partitioning", "constraint_solvers",
+	"isosurfaces", "higher_dimensions", "biological_growth",
+	"artmathematics", "advancedlaboratory", "resourcemanagement", "bricolage",
+	"proceduralaudio",
+]
+
+const TEST_ORDER: Array[String] = [
+	"devexamples", "testmaps", "joints", "particles", "unused",
+]
+
+func _sort_sequences(names: Array[String]) -> Array[String]:
+	var spine_list: Array[String] = []
+	var branch_list: Array[String] = []
+	var test_list: Array[String] = []
+	var other_list: Array[String] = []
+
+	for seq_name in names:
+		if SPINE_ORDER.has(seq_name):
+			spine_list.append(seq_name)
+		elif BRANCH_ORDER.has(seq_name):
+			branch_list.append(seq_name)
+		elif TEST_ORDER.has(seq_name):
+			test_list.append(seq_name)
+		else:
+			other_list.append(seq_name)
+
+	# Sort within each group by their defined order
+	spine_list.sort_custom(func(a: String, b: String) -> bool: return SPINE_ORDER.find(a) < SPINE_ORDER.find(b))
+	branch_list.sort_custom(func(a: String, b: String) -> bool: return BRANCH_ORDER.find(a) < BRANCH_ORDER.find(b))
+	test_list.sort_custom(func(a: String, b: String) -> bool: return TEST_ORDER.find(a) < TEST_ORDER.find(b))
+	other_list.sort()
+
+	var result: Array[String] = []
+	result.append_array(spine_list)
+	result.append_array(branch_list)
+	result.append_array(test_list)
+	result.append_array(other_list)
+	return result
+
+# ---------------------------------------------------------------------------
+# Legacy hidden OptionButton management (preserves _sequence_option / _map_option API)
+# ---------------------------------------------------------------------------
 
 func _rebuild_sequence_option() -> void:
 	_sequence_option.clear()
@@ -756,7 +1125,7 @@ func _rebuild_sequence_option() -> void:
 		var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
 		var label = "%s (%d)" % [_format_name(sequence_name), maps.size()]
 		_sequence_option.add_item(label)
-	
+
 	if _sequence_names.is_empty():
 		_current_maps.clear()
 		_rebuild_map_option()
@@ -774,13 +1143,11 @@ func _rebuild_map_option() -> void:
 	_map_option.clear()
 	for map_name in _current_maps:
 		_map_option.add_item(_format_name(map_name))
-	
-	_count_label.text = "%d maps in sequence" % _current_maps.size()
 
 func _apply_sequence_selection(index: int) -> void:
 	if index < 0 or index >= _sequence_names.size():
 		return
-	
+
 	var sequence_name = _sequence_names[index]
 	_current_maps = _maps_by_sequence.get(sequence_name, [])
 	_rebuild_map_option()
@@ -795,10 +1162,8 @@ func _apply_sequence_selection(index: int) -> void:
 		_map_option.select(selected_map_index)
 		var selected_map_name := _current_maps[selected_map_index]
 		_remember_selection(sequence_name, selected_map_name)
-		_set_status("Selected sequence: %s" % sequence_name)
 	else:
 		_remember_selection(sequence_name, "")
-		_set_status("Sequence has no maps: %s" % sequence_name)
 
 	_refresh_comment_context()
 
@@ -810,8 +1175,280 @@ func _on_map_selected(index: int) -> void:
 		var sequence_name := _get_selected_sequence_name()
 		var map_name := _current_maps[index]
 		_remember_selection(sequence_name, map_name)
-		_set_status("Ready map: %s" % map_name)
 		_refresh_comment_context()
+
+# ---------------------------------------------------------------------------
+# Catalog buttons (AudioCatalog style — all maps visible, collapsible sections)
+# ---------------------------------------------------------------------------
+
+func _rebuild_catalog_buttons() -> void:
+	if not _catalog_content:
+		return
+
+	for child_candidate in _catalog_content.get_children():
+		if child_candidate is Node:
+			(child_candidate as Node).queue_free()
+
+	_quick_map_buttons.clear()
+	_sequence_sections.clear()
+
+	for sequence_name in _sequence_names:
+		var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
+		if maps.is_empty():
+			continue
+
+		var section = VBoxContainer.new()
+		section.add_theme_constant_override("separation", 0)
+		_catalog_content.add_child(section)
+
+		# Collapsible header — default collapsed, remember user's choice
+		var is_collapsed: bool = last_collapsed_sequences.get(sequence_name, true)
+		var header_btn = Button.new()
+		var seq_grade_summary := _sequence_grade_summary(maps)
+		header_btn.text = "%s %s (%d) %s" % ["▾" if not is_collapsed else "▸", _format_name(sequence_name), maps.size(), seq_grade_summary]
+		header_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		header_btn.pressed.connect(_on_section_header_pressed.bind(sequence_name))
+		_style_section_header(header_btn)
+		section.add_child(header_btn)
+
+		# Single column of map names (VBoxContainer, not FlowContainer)
+		var map_list = VBoxContainer.new()
+		map_list.add_theme_constant_override("separation", 0)
+		map_list.visible = not is_collapsed
+		section.add_child(map_list)
+
+		_sequence_sections[sequence_name] = {"header": header_btn, "flow": map_list, "section": section}
+
+		for map_name in maps:
+			var grade := _get_grade(map_name)
+			var map_btn = Button.new()
+			map_btn.text = "%s%s" % [_grade_prefix(grade), _format_name(map_name)]
+			map_btn.tooltip_text = "%s / %s [%s]" % [_format_name(sequence_name), _format_name(map_name), grade if not grade.is_empty() else "?"]
+			map_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			map_btn.custom_minimum_size = Vector2(0, 20)
+			map_btn.pressed.connect(_on_quick_map_button_pressed.bind(sequence_name, map_name))
+			map_btn.gui_input.connect(_on_map_btn_gui_input.bind(map_name))
+			_style_map_item(map_btn)
+			# Tint by grade
+			if not grade.is_empty():
+				map_btn.add_theme_color_override("font_color", _grade_color(grade))
+			map_list.add_child(map_btn)
+			_quick_map_buttons[_quick_button_key(sequence_name, map_name)] = map_btn
+
+	_update_quick_button_highlights()
+	_apply_filter(last_filter_text)
+	call_deferred("_restore_quick_scroll_position")
+
+func _style_section_header(button: Button) -> void:
+	var bg := Color(0.06, 0.10, 0.16, 1.0)
+	var hover_bg := Color(0.08, 0.13, 0.20, 1.0)
+
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = bg
+	normal.set_border_width_all(0)
+	normal.set_corner_radius_all(0)
+	normal.set_content_margin_all(2)
+	button.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = hover_bg
+	hover.set_border_width_all(0)
+	hover.set_corner_radius_all(0)
+	hover.set_content_margin_all(2)
+	button.add_theme_stylebox_override("hover", hover)
+
+	button.add_theme_stylebox_override("pressed", normal)
+	button.add_theme_stylebox_override("focus", hover)
+
+	button.add_theme_color_override("font_color", Color(0.55, 0.72, 0.92, 1.0))
+	button.add_theme_font_size_override("font_size", 12)
+	button.custom_minimum_size = Vector2(0, 22)
+
+func _style_map_item(button: Button, is_selected: bool = false) -> void:
+	var bg := Color(0.0, 0.0, 0.0, 0.0)  # transparent
+	var hover_bg := Color(0.12, 0.20, 0.30, 0.8)
+	var selected_bg := Color(0.10, 0.28, 0.48, 0.9)
+
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = selected_bg if is_selected else bg
+	normal.set_border_width_all(0)
+	normal.set_corner_radius_all(2)
+	normal.set_content_margin(SIDE_LEFT, 14)
+	normal.set_content_margin(SIDE_RIGHT, 2)
+	normal.set_content_margin(SIDE_TOP, 1)
+	normal.set_content_margin(SIDE_BOTTOM, 1)
+	button.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = hover_bg
+	hover.set_border_width_all(0)
+	hover.set_corner_radius_all(2)
+	hover.set_content_margin(SIDE_LEFT, 14)
+	hover.set_content_margin(SIDE_RIGHT, 2)
+	hover.set_content_margin(SIDE_TOP, 1)
+	hover.set_content_margin(SIDE_BOTTOM, 1)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_stylebox_override("pressed", hover)
+	button.add_theme_stylebox_override("focus", hover)
+
+	button.add_theme_color_override("font_color", Color(0.82, 0.90, 0.98, 1.0) if is_selected else Color(0.72, 0.80, 0.90, 1.0))
+	button.add_theme_font_size_override("font_size", 12)
+	button.custom_minimum_size = Vector2(0, 20)
+
+func _on_section_header_pressed(sequence_name: String) -> void:
+	if not _sequence_sections.has(sequence_name):
+		return
+
+	var section_data: Dictionary = _sequence_sections[sequence_name]
+	var map_list: VBoxContainer = section_data.get("flow") as VBoxContainer
+	var header_btn: Button = section_data.get("header") as Button
+	if not map_list or not header_btn:
+		return
+
+	var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
+	var is_now_collapsed := map_list.visible  # toggling
+	map_list.visible = not is_now_collapsed
+	last_collapsed_sequences[sequence_name] = is_now_collapsed
+	header_btn.text = "%s %s (%d)" % ["▾" if not is_now_collapsed else "▸", _format_name(sequence_name), maps.size()]
+
+# ---------------------------------------------------------------------------
+# Filter
+# ---------------------------------------------------------------------------
+
+func _on_filter_text_changed(new_text: String) -> void:
+	last_filter_text = new_text
+	_apply_filter(new_text)
+
+func _on_clear_filter_pressed() -> void:
+	if _filter_edit:
+		_filter_edit.text = ""
+	last_filter_text = ""
+	_apply_filter("")
+
+func _apply_filter(filter_text: String) -> void:
+	var search := filter_text.strip_edges().to_lower()
+
+	for sequence_name in _sequence_sections.keys():
+		var section_data: Dictionary = _sequence_sections[sequence_name]
+		var map_list: VBoxContainer = section_data.get("flow") as VBoxContainer
+		var header_btn: Button = section_data.get("header") as Button
+		var section: VBoxContainer = section_data.get("section") as VBoxContainer
+		if not map_list or not header_btn or not section:
+			continue
+
+		var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
+		var sequence_match: bool = search.is_empty() or sequence_name.to_lower().find(search) >= 0
+
+		var visible_count := 0
+		for i in map_list.get_child_count():
+			var child = map_list.get_child(i)
+			if not (child is Button):
+				continue
+			var btn := child as Button
+			var map_index := i
+			if map_index < maps.size():
+				var map_name := maps[map_index]
+				var map_match: bool = search.is_empty() or map_name.to_lower().find(search) >= 0 or _format_name(map_name).to_lower().find(search) >= 0
+				btn.visible = sequence_match or map_match
+				if btn.visible:
+					visible_count += 1
+			else:
+				btn.visible = sequence_match
+				if btn.visible:
+					visible_count += 1
+
+		if search.is_empty():
+			# Respect collapsed state
+			var is_collapsed: bool = last_collapsed_sequences.get(sequence_name, true)
+			map_list.visible = not is_collapsed
+			section.visible = true
+			header_btn.text = "%s %s (%d)" % ["▾" if not is_collapsed else "▸", _format_name(sequence_name), maps.size()]
+		else:
+			# When filtering, show matching sections expanded, hide empty ones
+			var has_visible: bool = visible_count > 0 or sequence_match
+			section.visible = has_visible
+			if has_visible:
+				map_list.visible = true
+				header_btn.text = "▾ %s (%d/%d)" % [_format_name(sequence_name), visible_count, maps.size()]
+
+# ---------------------------------------------------------------------------
+# Quick map button handlers
+# ---------------------------------------------------------------------------
+
+func _on_quick_map_button_pressed(sequence_name: String, map_name: String) -> void:
+	_select_sequence_and_map(sequence_name, map_name)
+	if load_map_via_best_path(map_name):
+		_set_status(map_name)
+		_auto_expand_sequence(sequence_name)
+		# Update 3D status label
+		var parent := _get_catalog_parent()
+		if parent and parent.has_method("_set_status"):
+			parent._set_status("%s — %s" % [_format_name(sequence_name), _format_name(map_name)])
+	else:
+		_set_status("Failed: %s" % map_name)
+
+func _on_map_btn_gui_input(event: InputEvent, map_name: String) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_RIGHT:
+		_cycle_grade(map_name)
+		var grade := _get_grade(map_name)
+		_set_status("Grade %s → %s" % [map_name, grade if not grade.is_empty() else "—"])
+		get_viewport().set_input_as_handled()
+
+## Auto-expand the sequence containing the loaded map so user sees context.
+func _auto_expand_sequence(sequence_name: String) -> void:
+	if not _sequence_sections.has(sequence_name):
+		return
+	var section_data: Dictionary = _sequence_sections[sequence_name]
+	var map_list: VBoxContainer = section_data.get("flow") as VBoxContainer
+	var header_btn: Button = section_data.get("header") as Button
+	if not map_list or not header_btn:
+		return
+	if not map_list.visible:
+		var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
+		map_list.visible = true
+		last_collapsed_sequences[sequence_name] = false
+		header_btn.text = "▾ %s (%d)" % [_format_name(sequence_name), maps.size()]
+
+func _select_sequence_and_map(sequence_name: String, map_name: String) -> void:
+	var sequence_index := _sequence_names.find(sequence_name)
+	if sequence_index >= 0:
+		_sequence_option.select(sequence_index)
+		_apply_sequence_selection(sequence_index)
+
+	var map_index := _current_maps.find(map_name)
+	if map_index >= 0:
+		_map_option.select(map_index)
+		_remember_selection(sequence_name, map_name)
+
+func _update_quick_button_highlights() -> void:
+	var selected_key := _quick_button_key(last_selected_sequence_name, last_selected_map_name)
+	for key in _quick_map_buttons.keys():
+		var quick_button = _quick_map_buttons[key]
+		if not (quick_button is Button):
+			continue
+		var is_sel: bool = key == selected_key
+		_style_map_item(quick_button as Button, is_sel)
+		# Re-apply grade color (selection styling overwrites font_color)
+		if not is_sel:
+			var parts: PackedStringArray = str(key).split("|")
+			if parts.size() == 2:
+				var grade := _get_grade(parts[1])
+				if not grade.is_empty():
+					(quick_button as Button).add_theme_color_override("font_color", _grade_color(grade))
+
+func _quick_button_key(sequence_name: String, map_name: String) -> String:
+	return "%s|%s" % [sequence_name, map_name]
+
+func _short_map_label(map_name: String) -> String:
+	var readable := _format_name(map_name)
+	if readable.length() <= 18:
+		return readable
+	return readable.substr(0, 17) + "..."
+
+# ---------------------------------------------------------------------------
+# Prev / Next (keyboard shortcuts)
+# ---------------------------------------------------------------------------
 
 func _on_prev_pressed() -> void:
 	if _current_maps.is_empty():
@@ -960,15 +1597,19 @@ func _on_close_pressed() -> void:
 	_remember_current_ui_selection()
 	_set_overlay_visible(false)
 
+# ---------------------------------------------------------------------------
+# Map loading (public API — unchanged)
+# ---------------------------------------------------------------------------
+
 func _load_selected_map() -> void:
 	if _current_maps.is_empty():
 		_set_status("No maps available.")
 		return
-	
+
 	var current_index = _map_option.get_selected()
 	if current_index < 0 or current_index >= _current_maps.size():
 		current_index = 0
-	
+
 	var sequence_name := _get_selected_sequence_name()
 	var map_name = _current_maps[current_index]
 	_remember_selection(sequence_name, map_name)
@@ -984,13 +1625,12 @@ func load_map_via_best_path(map_name: String) -> bool:
 		sequence_name = _find_sequence_for_map(map_name)
 	_remember_selection(sequence_name, map_name)
 
-	if _should_clean_before_load():
-		clean_scene_keep_player()
-		return _load_map_through_transition(map_name)
+	# Create a fresh grid system with the map name pre-set — it loads on _ready()
+	var parent := _get_catalog_parent()
+	if parent and parent.has_method("load_map_fresh"):
+		return parent.load_map_fresh(map_name)
 
-	if _load_map_in_current_grid(map_name):
-		return true
-	
+	# Fallback: scene transition
 	return _load_map_through_transition(map_name)
 
 func _load_map_through_transition(map_name: String) -> bool:
@@ -998,7 +1638,7 @@ func _load_map_through_transition(map_name: String) -> bool:
 	if scene_manager:
 		scene_manager.load_map(map_name)
 		return true
-	
+
 	return _change_to_desktop_grid_scene_with_pending_map(map_name)
 
 func start_sequence_via_best_path(sequence_name: String) -> bool:
@@ -1010,7 +1650,7 @@ func start_sequence_via_best_path(sequence_name: String) -> bool:
 	if scene_manager and scene_manager.has_method("start_sequence"):
 		scene_manager.start_sequence(sequence_name)
 		return true
-	
+
 	var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
 	if maps.is_empty():
 		_remember_selection(sequence_name, "")
@@ -1025,7 +1665,7 @@ func _change_to_desktop_grid_scene_with_pending_map(map_name: String) -> bool:
 	var scene_tree = get_tree()
 	if not scene_tree:
 		return false
-	
+
 	var change_result = scene_tree.change_scene_to_file(DESKTOP_GRID_SCENE_PATH)
 	return change_result == OK
 
@@ -1090,7 +1730,7 @@ func _load_map_in_current_grid(map_name: String) -> bool:
 	var scene_tree = get_tree()
 	if not scene_tree:
 		return false
-	
+
 	var grid_systems = scene_tree.get_nodes_in_group("grid_system")
 	for grid_system in grid_systems:
 		if "map_name" in grid_system:
@@ -1101,38 +1741,42 @@ func _load_map_in_current_grid(map_name: String) -> bool:
 		if grid_system.has_method("reload_map_with_name"):
 			grid_system.reload_map_with_name(map_name)
 			return true
-	
+
 	return false
 
 func _get_scene_manager_for_transitions() -> Node:
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if not scene_manager:
 		return null
-	
+
 	if not scene_manager.has_method("load_map"):
 		return null
-	
+
 	# SceneManager transitions rely on staging. If there is no staging, use desktop fallback.
 	if get_node_or_null("/root/VRStaging") or get_node_or_null("/root/AdaVRStaging"):
 		return scene_manager
-	
+
 	var current_scene = get_tree().current_scene
 	if current_scene and ("staging" in current_scene.name.to_lower() or "vr" in current_scene.name.to_lower()):
 		return scene_manager
-	
+
 	return null
 
 func _apply_pending_map_if_any() -> void:
 	if pending_map_name.is_empty():
 		return
-	
+
 	var map_to_apply = pending_map_name
 	pending_map_name = ""
 	var sequence_name := _find_sequence_for_map(map_to_apply)
 	_remember_selection(sequence_name, map_to_apply)
-	
+
 	if _load_map_in_current_grid(map_to_apply):
 		_set_status("Loaded map: %s" % map_to_apply)
+
+# ---------------------------------------------------------------------------
+# Selection persistence
+# ---------------------------------------------------------------------------
 
 func _resolve_preferred_sequence_name() -> String:
 	if not last_selected_sequence_name.is_empty():
@@ -1171,82 +1815,9 @@ func _remember_selection(sequence_name: String, map_name: String) -> void:
 		last_selected_map_name = map_name
 	_update_quick_button_highlights()
 
-func _rebuild_quick_load_buttons() -> void:
-	if not _quick_load_content:
-		return
-
-	for child_candidate in _quick_load_content.get_children():
-		if child_candidate is Node:
-			(child_candidate as Node).queue_free()
-
-	_quick_map_buttons.clear()
-
-	for sequence_name in _sequence_names:
-		var maps: Array[String] = _maps_by_sequence.get(sequence_name, [])
-		if maps.is_empty():
-			continue
-
-		var section = VBoxContainer.new()
-		section.add_theme_constant_override("separation", 4)
-		_quick_load_content.add_child(section)
-
-		var sequence_label = Label.new()
-		sequence_label.text = _format_name(sequence_name)
-		sequence_label.add_theme_color_override("font_color", Color(0.68, 0.84, 1.0, 1.0))
-		section.add_child(sequence_label)
-
-		var flow = FlowContainer.new()
-		flow.add_theme_constant_override("h_separation", 6)
-		flow.add_theme_constant_override("v_separation", 6)
-		section.add_child(flow)
-
-		for map_name in maps:
-			var quick_button = Button.new()
-			quick_button.text = _short_map_label(map_name)
-			quick_button.tooltip_text = "%s / %s" % [_format_name(sequence_name), _format_name(map_name)]
-			quick_button.custom_minimum_size = Vector2(126, 28)
-			quick_button.pressed.connect(_on_quick_map_button_pressed.bind(sequence_name, map_name))
-			_style_button(quick_button)
-			flow.add_child(quick_button)
-			_quick_map_buttons[_quick_button_key(sequence_name, map_name)] = quick_button
-
-	_update_quick_button_highlights()
-	call_deferred("_restore_quick_scroll_position")
-
-func _on_quick_map_button_pressed(sequence_name: String, map_name: String) -> void:
-	_select_sequence_and_map(sequence_name, map_name)
-	if load_map_via_best_path(map_name):
-		_set_status("Loading map: %s" % map_name)
-	else:
-		_set_status("Failed to load map: %s" % map_name)
-
-func _select_sequence_and_map(sequence_name: String, map_name: String) -> void:
-	var sequence_index := _sequence_names.find(sequence_name)
-	if sequence_index >= 0:
-		_sequence_option.select(sequence_index)
-		_apply_sequence_selection(sequence_index)
-
-	var map_index := _current_maps.find(map_name)
-	if map_index >= 0:
-		_map_option.select(map_index)
-		_remember_selection(sequence_name, map_name)
-
-func _update_quick_button_highlights() -> void:
-	var selected_key := _quick_button_key(last_selected_sequence_name, last_selected_map_name)
-	for key in _quick_map_buttons.keys():
-		var quick_button = _quick_map_buttons[key]
-		if not (quick_button is Button):
-			continue
-		_style_button(quick_button as Button, key == selected_key)
-
-func _quick_button_key(sequence_name: String, map_name: String) -> String:
-	return "%s|%s" % [sequence_name, map_name]
-
-func _short_map_label(map_name: String) -> String:
-	var readable := _format_name(map_name)
-	if readable.length() <= 18:
-		return readable
-	return readable.substr(0, 17) + "..."
+# ---------------------------------------------------------------------------
+# Comment editor state
+# ---------------------------------------------------------------------------
 
 func _restore_comment_editor_state() -> void:
 	var format_index := clampi(last_comment_format, CommentFormat.MARKDOWN, CommentFormat.JSON)
@@ -1510,6 +2081,10 @@ func _merge_artifact_registry_file(file_path: String, out_lookup: Dictionary) ->
 		if not lookup_name.is_empty():
 			out_lookup[lookup_name] = scene_path
 			out_lookup[lookup_name.to_lower()] = scene_path
+
+# ---------------------------------------------------------------------------
+# Comment save callbacks
+# ---------------------------------------------------------------------------
 
 func _on_comment_format_selected(index: int) -> void:
 	last_comment_format = index
@@ -1833,29 +2408,37 @@ func _set_comment_status(text: String) -> void:
 	if _comment_status_label:
 		_comment_status_label.text = text
 
+# ---------------------------------------------------------------------------
+# Scroll persistence
+# ---------------------------------------------------------------------------
+
 func _save_quick_scroll_position() -> void:
-	if not _quick_load_scroll:
+	if not _catalog_scroll:
 		return
-	last_quick_scroll_vertical = _quick_load_scroll.scroll_vertical
-	last_quick_scroll_horizontal = _quick_load_scroll.scroll_horizontal
+	last_quick_scroll_vertical = _catalog_scroll.scroll_vertical
+	last_quick_scroll_horizontal = _catalog_scroll.scroll_horizontal
 
 func _restore_quick_scroll_position() -> void:
-	if not _quick_load_scroll:
+	if not _catalog_scroll:
 		return
 
-	var vbar := _quick_load_scroll.get_v_scroll_bar()
+	var vbar := _catalog_scroll.get_v_scroll_bar()
 	if vbar:
 		var target_v := clampf(float(last_quick_scroll_vertical), vbar.min_value, vbar.max_value)
-		_quick_load_scroll.scroll_vertical = int(target_v)
+		_catalog_scroll.scroll_vertical = int(target_v)
 	else:
-		_quick_load_scroll.scroll_vertical = max(0, last_quick_scroll_vertical)
+		_catalog_scroll.scroll_vertical = max(0, last_quick_scroll_vertical)
 
-	var hbar := _quick_load_scroll.get_h_scroll_bar()
+	var hbar := _catalog_scroll.get_h_scroll_bar()
 	if hbar:
 		var target_h := clampf(float(last_quick_scroll_horizontal), hbar.min_value, hbar.max_value)
-		_quick_load_scroll.scroll_horizontal = int(target_h)
+		_catalog_scroll.scroll_horizontal = int(target_h)
 	else:
-		_quick_load_scroll.scroll_horizontal = max(0, last_quick_scroll_horizontal)
+		_catalog_scroll.scroll_horizontal = max(0, last_quick_scroll_horizontal)
+
+# ---------------------------------------------------------------------------
+# Utility
+# ---------------------------------------------------------------------------
 
 func _get_selected_sequence_name() -> String:
 	var index = _sequence_option.get_selected()

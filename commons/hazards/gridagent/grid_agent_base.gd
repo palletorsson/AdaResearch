@@ -337,6 +337,31 @@ func _operation_ca() -> bool:
 	# Apply cellular automata
 	return GridOperations.apply_ca_step(current_grid, grid_cell_position, "growth", operation_radius)
 
+# ===== Transform Distortion Operations =====
+# These manipulate multimesh transforms directly — visual-only glitch art.
+
+func _operation_distort_explode() -> bool:
+	# Snapshot first so we can restore later
+	GridOperations.snapshot_transforms(current_grid)
+	return GridOperations.distort_explode(current_grid, grid_cell_position, operation_radius, 3.0)
+
+func _operation_distort_twist() -> bool:
+	GridOperations.snapshot_transforms(current_grid)
+	var axis = ["x", "y", "z"][randi() % 3]
+	return GridOperations.distort_twist(current_grid, grid_cell_position, operation_radius, 15.0, axis)
+
+func _operation_distort_scatter() -> bool:
+	GridOperations.snapshot_transforms(current_grid)
+	return GridOperations.distort_scatter(current_grid, grid_cell_position, operation_radius, 2.0, 45.0)
+
+func _operation_distort_wave() -> bool:
+	GridOperations.snapshot_transforms(current_grid)
+	var axis = ["x", "y", "z"][randi() % 3]
+	return GridOperations.distort_wave(current_grid, 1.5, 0.5, randf() * TAU, axis)
+
+func _operation_distort_restore() -> bool:
+	return GridOperations.restore_transforms(current_grid)
+
 func _execute_modifier_stack() -> bool:
 	var success_any = false
 	for step in modifier_stack:
@@ -415,6 +440,35 @@ func _execute_named_operation(op_name: String, params: Dictionary) -> bool:
 			var twist_axis = str(params.get("axis", "y"))
 			var twist_angle = _coerce_float(params.get("angle_degrees", 15.0), 15.0)
 			return GridOperations.twist_structure(current_grid, grid_cell_position, twist_angle, radius, twist_axis)
+		
+		# Transform distortion ops (visual-only, glitch art)
+		"distort_explode", "explode":
+			var strength = _coerce_float(params.get("strength", 3.0), 3.0)
+			GridOperations.snapshot_transforms(current_grid)
+			return GridOperations.distort_explode(current_grid, grid_cell_position, radius, strength)
+		
+		"distort_twist":
+			var twist_axis = str(params.get("axis", "y"))
+			var angle = _coerce_float(params.get("angle_per_unit", 15.0), 15.0)
+			GridOperations.snapshot_transforms(current_grid)
+			return GridOperations.distort_twist(current_grid, grid_cell_position, radius, angle, twist_axis)
+		
+		"distort_scatter", "scatter":
+			var scatter_str = _coerce_float(params.get("scatter_strength", 2.0), 2.0)
+			var rot_str = _coerce_float(params.get("rotation_strength", 45.0), 45.0)
+			GridOperations.snapshot_transforms(current_grid)
+			return GridOperations.distort_scatter(current_grid, grid_cell_position, radius, scatter_str, rot_str)
+		
+		"distort_wave":
+			var amplitude = _coerce_float(params.get("amplitude", 1.5), 1.5)
+			var frequency = _coerce_float(params.get("frequency", 0.5), 0.5)
+			var phase = _coerce_float(params.get("phase", 0.0), 0.0)
+			var wave_axis = str(params.get("axis", "y"))
+			GridOperations.snapshot_transforms(current_grid)
+			return GridOperations.distort_wave(current_grid, amplitude, frequency, phase, wave_axis)
+		
+		"distort_restore", "restore":
+			return GridOperations.restore_transforms(current_grid)
 	
 	return false
 
@@ -461,6 +515,19 @@ func _build_modifier_stack_from_config(config: Dictionary) -> Array[Dictionary]:
 				params["axis"] = str(config.get("rotate_axis", "y"))
 			"scale":
 				params["factor"] = _coerce_float(config.get("scale_factor", 1.5), 1.5)
+			"distort_explode", "explode":
+				params["strength"] = _coerce_float(config.get("explode_strength", 3.0), 3.0)
+			"distort_twist":
+				params["axis"] = str(config.get("distort_twist_axis", "y"))
+				params["angle_per_unit"] = _coerce_float(config.get("distort_twist_angle", 15.0), 15.0)
+			"distort_scatter", "scatter":
+				params["scatter_strength"] = _coerce_float(config.get("scatter_strength", 2.0), 2.0)
+				params["rotation_strength"] = _coerce_float(config.get("scatter_rotation", 45.0), 45.0)
+			"distort_wave":
+				params["amplitude"] = _coerce_float(config.get("wave_amplitude", 1.5), 1.5)
+				params["frequency"] = _coerce_float(config.get("wave_frequency", 0.5), 0.5)
+				params["phase"] = _coerce_float(config.get("wave_phase", 0.0), 0.0)
+				params["axis"] = str(config.get("wave_axis", "y"))
 		
 		stack_steps.append({"op": op_name, "params": params})
 	

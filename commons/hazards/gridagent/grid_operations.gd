@@ -390,6 +390,48 @@ static func _apply_erosion(grid: Node, center: Vector3i, radius: int) -> bool:
 	
 	return cells_to_remove.size() > 0
 
+# ===== TRANSFORM DISTORTIONS =====
+# These manipulate multimesh transforms directly (visual glitch effects).
+# They only work on GridStructureComponent since it owns the MultiMesh.
+
+## Snapshot transforms for later restoration.
+static func snapshot_transforms(grid: Node) -> bool:
+	if grid.has_method("snapshot_transforms"):
+		grid.snapshot_transforms()
+		return true
+	return false
+
+## Restore previously-snapshotted transforms.
+static func restore_transforms(grid: Node) -> bool:
+	if grid.has_method("restore_transforms"):
+		grid.restore_transforms()
+		return true
+	return false
+
+## Explode cubes outward from center — the "laser wireframe" effect.
+static func distort_explode(grid: Node, center: Vector3i, radius: int = 5, strength: float = 3.0) -> bool:
+	if grid.has_method("distort_explode"):
+		return grid.distort_explode(center, radius, strength)
+	return false
+
+## Twist transforms around an axis — spiral deformation.
+static func distort_twist(grid: Node, center: Vector3i, radius: int = 5, angle_per_unit: float = 15.0, axis: String = "y") -> bool:
+	if grid.has_method("distort_twist"):
+		return grid.distort_twist(center, radius, angle_per_unit, axis)
+	return false
+
+## Scatter cubes randomly — chaotic dissolution.
+static func distort_scatter(grid: Node, center: Vector3i, radius: int = 5, scatter_strength: float = 2.0, rotation_strength: float = 45.0) -> bool:
+	if grid.has_method("distort_scatter"):
+		return grid.distort_scatter(center, radius, scatter_strength, rotation_strength)
+	return false
+
+## Sine wave displacement across all transforms.
+static func distort_wave(grid: Node, amplitude: float = 1.5, frequency: float = 0.5, phase: float = 0.0, axis: String = "y") -> bool:
+	if grid.has_method("distort_wave"):
+		return grid.distort_wave(amplitude, frequency, phase, axis)
+	return false
+
 # ===== UTILITY FUNCTIONS =====
 
 static func _mirror_point(point: Vector3i, center: Vector3i, axis: String) -> Vector3i:
