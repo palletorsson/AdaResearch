@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://bcu4rxnaeuiv8"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/big_pipe_system/presets/pipe_demo_gallery.gd" id="1_gallery"]
+[ext_resource type="Script" uid="uid://d10hjisotinfj" path="res://algorithms/wavefunctions/big_pipe_system/presets/pipe_demo_gallery.gd" id="1_gallery"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn" id="2_ssljd"]
+[ext_resource type="Script" uid="uid://c2lvqpvf2ig88" path="res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd" id="3_6mdad"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -10,12 +12,110 @@ ambient_light_color = Color(0.3, 0.3, 0.35, 1)
 ambient_light_energy = 0.6
 tonemap_mode = 2
 
-[node name="PipeDemoGallery" type="Node3D"]
+[node name="PipeDemoGallery" type="Node3D" unique_id=682803696]
 script = ExtResource("1_gallery")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=307596140]
 transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 0, 15, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=305264429]
 environment = SubResource("Environment_1")
+
+[node name="BigPipeSystem" type="Node3D" parent="." unique_id=1227166090 instance=ExtResource("2_ssljd")]
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84974" type="Label3D" parent="." unique_id=1395712675]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, -1.5, 2)
+text = "cross_manifold"
+font_size = 48
+
+[node name="@Node3D@84975" type="Node3D" parent="." unique_id=454309966 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84976" type="Label3D" parent="." unique_id=322362023]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 16, -1.5, 2)
+text = "default"
+font_size = 48
+
+[node name="@Node3D@84977" type="Node3D" parent="." unique_id=1647619167 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84978" type="Label3D" parent="." unique_id=2004817300]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 32, -1.5, 2)
+text = "industrial_branch"
+font_size = 48
+
+[node name="@Node3D@84979" type="Node3D" parent="." unique_id=1058622876 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84980" type="Label3D" parent="." unique_id=379286120]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 48, -1.5, 2)
+text = "l_bend"
+font_size = 48
+
+[node name="@Node3D@84981" type="Node3D" parent="." unique_id=735017673 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84982" type="Label3D" parent="." unique_id=1138397431]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 64, -1.5, 2)
+text = "serpentine"
+font_size = 48
+
+[node name="@Node3D@84983" type="Node3D" parent="." unique_id=1110586552 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84984" type="Label3D" parent="." unique_id=633402126]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 80, -1.5, 2)
+text = "straight_run"
+font_size = 48
+
+[node name="@Node3D@84985" type="Node3D" parent="." unique_id=1344462970 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84986" type="Label3D" parent="." unique_id=297341981]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 96, -1.5, 2)
+text = "t_distribution"
+font_size = 48
+
+[node name="@Node3D@84987" type="Node3D" parent="." unique_id=1419403889 instance=ExtResource("2_ssljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, 0)
+script = ExtResource("3_6mdad")
+pipe_radius = 0.8
+segment_length = 2.0
+auto_build = false
+
+[node name="@Label3D@84988" type="Label3D" parent="." unique_id=1595875318]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 112, -1.5, 2)
+text = "vertical_bypass"
+font_size = 48
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=97289613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105.78388, 0, 18.073517)

@@ -1,4 +1,4 @@
-@tool
+ 
 extends Node3D
 
 ## Demo gallery for Big Pipe System presets.

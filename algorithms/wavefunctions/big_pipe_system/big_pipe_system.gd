@@ -158,21 +158,15 @@ func _create_corner_segment(params: Dictionary) -> Node3D:
 	if instance.get("corner_radius") != null:
 		instance.corner_radius = segment_length
 
-	# Handle visual rotation for parametric corner orientation
+	# The parametric corner defaults to a right turn in XZ.
+	# Use `mirror` property for left turns — generates correct geometry with proper normals.
 	var axis = params.get("axis", Vector3.UP)
 	var angle_deg = params.get("angle", 90)
 
-	# The parametric corner is a right turn by default
-	# Rotate visual basis to match intended direction
-	if axis == Vector3.RIGHT:  # Pitch
-		if angle_deg > 0:  # Up
-			instance.rotate(Vector3.FORWARD, PI / 2)
-		else:  # Down
-			instance.rotate(Vector3.FORWARD, -PI / 2)
-	elif axis == Vector3.UP:  # Yaw
-		if angle_deg > 0:  # Left
-			instance.rotate(Vector3.FORWARD, PI)
-		# Right is default, no rotation needed
+	if axis == Vector3.UP:  # Yaw (left/right)
+		if angle_deg > 0:  # Left turn
+			if instance.get("mirror") != null:
+				instance.mirror = true
 
 	return instance
 

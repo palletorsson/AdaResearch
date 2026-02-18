@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckhxug8sjlpc7"]
+[gd_scene format=3 uid="uid://ckhxug8sjlpc7"]
 
 [ext_resource type="Script" uid="uid://crfuxrnfn5c3s" path="res://algorithms/arrays/grid_editor/grid_editor_main.gd" id="1_main_script"]
 [ext_resource type="Script" uid="uid://b4bq41wgnojy3" path="res://algorithms/arrays/grid_editor/GridEditorManager.gd" id="2_manager_script"]
 
-[node name="GridEditorMain" type="Node3D"]
+[node name="GridEditorMain" type="Node3D" unique_id=1137501767]
 script = ExtResource("1_main_script")
 
-[node name="GridEditorManager" type="Node3D" parent="."]
+[node name="GridEditorManager" type="Node3D" parent="." unique_id=1289431271]
 script = ExtResource("2_manager_script")
 
+[node name="Camera3D" type="Camera3D" parent="." unique_id=88766751]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0333745)

@@ -5,6 +5,7 @@ extends MeshInstance3D
 @export var v_resolution: int = 20
 @export var pipe_radius: float = 0.8 # Match BigPipeSystem default
 @export var corner_radius: float = 2.0 # Match BigPipeSystem radius/length logic
+@export var mirror: bool = false  ## Mirror to create left turn instead of right
 
 func _ready():
 	generate_surface()
@@ -26,35 +27,29 @@ func generate_surface():
 	var columns := v_resolution
 	
 	# Curve Function C(u):
-	# u from 0 to 1
-	# Quarter circle turn to Right.
+	# u from 0 to 1, quarter circle 90° in XZ plane.
 	# Start (0,0,0) facing +Z.
-	# End (R, 0, R) facing +X.
-	# Math:
-	# z(angle) = R * sin(angle)
-	# x(angle) = R * (1 - cos(angle))
-	# angle goes 0 to PI/2
+	# mirror=false (right turn): End (R, 0, R) facing +X.
+	# mirror=true  (left turn):  End (-R, 0, R) facing -X.
+	#
+	# Right: x = R*(1-cos(a)), z = R*sin(a), tangent = (sin(a), 0, cos(a))
+	# Left:  x = -R*(1-cos(a)), z = R*sin(a), tangent = (-sin(a), 0, cos(a))
+	
+	var x_sign: float = -1.0 if mirror else 1.0
 	
 	for i in range(rows + 1):
 		var u_ratio = float(i) / float(rows)
 		var angle = u_ratio * (PI / 2.0)
 		
-		# Define Center Point C(u)
 		var cz = corner_radius * sin(angle)
-		var cx = corner_radius * (1.0 - cos(angle))
+		var cx = x_sign * corner_radius * (1.0 - cos(angle))
 		var cy = 0.0
 		var center = Vector3(cx, cy, cz)
 		
-		# Calculate Derivatives for Tangent
-		# z'(a) = R cos(a)
-		# x'(a) = R sin(a)
-		# Tangent direction (normalized):
 		var dz = cos(angle)
-		var dx = sin(angle)
+		var dx = x_sign * sin(angle)
 		var tangent = Vector3(dx, 0, dz).normalized()
 		
-		# Calculate Frame (Normal, Binormal)
-		# Curve in XZ plane. Binormal (Up) is Y (0,1,0).
 		var binormal = Vector3(0, 1, 0)
 		var normal = binormal.cross(tangent).normalized()
 		
