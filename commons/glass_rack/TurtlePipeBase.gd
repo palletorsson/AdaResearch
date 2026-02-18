@@ -353,9 +353,9 @@ func auto_connect_segments(snap_position: bool = true, snap_rotation: bool = tru
 					var angle := actual_in_dir.angle_to(desired_in_dir)
 					var axis := cross.normalized()
 					# Rotate around the in-port world position
-					var pivot := curr_seg.global_position + curr_seg.global_transform.basis * curr_in["position"]
+					var pivot: Vector3 = curr_seg.global_position + curr_seg.global_transform.basis * (curr_in["position"] as Vector3)
 					var rot_basis := Basis(axis, angle)
-					var offset := curr_seg.global_position - pivot
+					var offset: Vector3 = curr_seg.global_position - pivot
 					curr_seg.global_position = pivot + rot_basis * offset
 					curr_seg.global_transform.basis = rot_basis * curr_seg.global_transform.basis
 					# Re-snap position after rotation
