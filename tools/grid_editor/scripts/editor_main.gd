@@ -858,6 +858,32 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, grid_size
 			node.position.z = width / 2  # Center in Z (horizontal for YZ plane)
 		"corner":
 			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+		"corner_bl":
+			# ╭ Bottom to right (default elbow orientation)
+			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+		"corner_br":
+			# ╮ Bottom to left — mirror elbow across Z center
+			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+			node.scale.z = -1.0
+			node.position.z = width
+		"corner_tr":
+			# ╯ Top to left — mirror both Y and Z
+			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+			node.scale.y = -1.0
+			node.scale.z = -1.0
+			node.position.y = height
+			node.position.z = width
+		"corner_tl":
+			# ╰ Top to right — mirror across Y center
+			node = _create_glass_elbow_smooth(width, height, tube_radius, glass_mat)
+			node.scale.y = -1.0
+			node.position.y = height
+		"corner45":
+			node = _create_glass_corner45_smooth(width, height, tube_radius, glass_mat)
+		"wobbly":
+			node = _create_glass_wobbly_smooth(width, height, tube_radius, glass_mat)
+		"reducer":
+			node = _create_glass_reducer_smooth(width, height, tube_radius, glass_mat)
 		"sbend":
 			node = _create_glass_sbend_smooth(width, height, tube_radius, glass_mat)
 		"ubend":
@@ -883,6 +909,7 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, grid_size
 			node = _create_glass_drip_smooth(tube_radius, glass_mat)
 			node.position.z = width / 2
 		_:
+			push_warning("[GridEditor] Unknown segment_type '%s', falling back to tube" % segment_type)
 			node = _create_glass_tube_smooth(height, tube_radius, glass_mat)
 			node.position.x = width / 2
 	
@@ -1328,6 +1355,141 @@ func _create_glass_drip_smooth(radius: float, mat: Material) -> Node3D:
 	
 	node.add_child(mesh_instance)
 	return node
+
+func _create_glass_corner45_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+	## 45° bend in YZ plane — gentle direction change
+	## Enters from bottom, exits at 45° toward top-right
+	var node = Node3D.new()
+	var mesh_instance = MeshInstance3D.new()
+	var arc_radius = min(width, height) * 0.6
+	mesh_instance.mesh = _generate_corner45_mesh_yz(arc_radius, radius, 16, 12)
+	mesh_instance.material_override = mat
+	node.add_child(mesh_instance)
+	return node
+
+func _generate_corner45_mesh_yz(arc_radius: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
+	## 45° elbow: sweeps from +Y to 45° between Y and Z
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	for b in range(bend_segs + 1):
+		var bend_angle = (float(b) / bend_segs) * (PI / 4.0)  # 0 to 45°
+		var center = Vector3(0, arc_radius * sin(bend_angle), arc_radius * (1.0 - cos(bend_angle)))
+		var tangent = Vector3(0, cos(bend_angle), sin(bend_angle)).normalized()
+		var binormal = Vector3(1, 0, 0)
+		var normal = binormal.cross(tangent).normalized()
+		
+		for s in range(tube_segs + 1):
+			var ring_angle = (float(s) / tube_segs) * TAU
+			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
+			st.set_normal(offset.normalized())
+			st.set_uv(Vector2(float(s) / tube_segs, float(b) / bend_segs))
+			st.add_vertex(center + offset)
+	
+	for b in range(bend_segs):
+		for s in range(tube_segs):
+			var curr = b * (tube_segs + 1) + s
+			var next = curr + tube_segs + 1
+			st.add_index(curr)
+			st.add_index(next)
+			st.add_index(curr + 1)
+			st.add_index(curr + 1)
+			st.add_index(next)
+			st.add_index(next + 1)
+	
+	st.generate_tangents()
+	return st.commit()
+
+func _create_glass_wobbly_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+	## Wobbly tube — vertical with sinusoidal horizontal wobble
+	var node = Node3D.new()
+	var mesh_instance = MeshInstance3D.new()
+	var center_z = width / 2.0
+	var amplitude = max(radius * 1.5, width * 0.2)
+	var wave_count = max(2.0, height / max(width * 0.4, 0.001))
+	mesh_instance.mesh = _generate_wobbly_mesh_yz(height, center_z, amplitude, wave_count, radius, 16, 32)
+	mesh_instance.material_override = mat
+	node.add_child(mesh_instance)
+	return node
+
+func _generate_wobbly_mesh_yz(height: float, center_z: float, amplitude: float, wave_count: float, tube_radius: float, tube_segs: int, len_segs: int) -> ArrayMesh:
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	for l in range(len_segs + 1):
+		var t = float(l) / len_segs
+		var y = t * height
+		var z = center_z + sin(t * TAU * wave_count) * amplitude
+		var center = Vector3(0, y, z)
+		
+		var dy = height / len_segs
+		var dz = cos(t * TAU * wave_count) * amplitude * TAU * wave_count / len_segs
+		var tangent = Vector3(0, dy, dz).normalized()
+		var binormal = Vector3(1, 0, 0)
+		var normal = binormal.cross(tangent).normalized()
+		
+		for s in range(tube_segs + 1):
+			var ring_angle = (float(s) / tube_segs) * TAU
+			var ring_offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
+			st.set_normal(ring_offset.normalized())
+			st.set_uv(Vector2(float(s) / tube_segs, t))
+			st.add_vertex(center + ring_offset)
+	
+	for l in range(len_segs):
+		for s in range(tube_segs):
+			var curr = l * (tube_segs + 1) + s
+			var next = curr + tube_segs + 1
+			st.add_index(curr)
+			st.add_index(next)
+			st.add_index(curr + 1)
+			st.add_index(curr + 1)
+			st.add_index(next)
+			st.add_index(next + 1)
+	
+	st.generate_tangents()
+	return st.commit()
+
+func _create_glass_reducer_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+	## Reducer — tapered tube from larger to smaller radius
+	var node = Node3D.new()
+	var mesh_instance = MeshInstance3D.new()
+	var center_z = width / 2.0
+	var top_radius = radius * 0.6
+	mesh_instance.mesh = _generate_reducer_mesh_yz(height, center_z, radius, top_radius, 16, 8)
+	mesh_instance.material_override = mat
+	node.add_child(mesh_instance)
+	return node
+
+func _generate_reducer_mesh_yz(height: float, center_z: float, bottom_radius: float, top_radius: float, tube_segs: int, rings: int) -> ArrayMesh:
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	for r in range(rings + 1):
+		var t = float(r) / rings
+		var y = t * height
+		var current_radius = lerpf(bottom_radius, top_radius, t)
+		
+		for s in range(tube_segs + 1):
+			var theta = (float(s) / tube_segs) * TAU
+			var offset = Vector3(current_radius * cos(theta), 0, current_radius * sin(theta))
+			var vert = Vector3(offset.x, y, center_z + offset.z)
+			st.set_normal(Vector3(cos(theta), 0, sin(theta)))
+			st.set_uv(Vector2(float(s) / tube_segs, t))
+			st.add_vertex(vert)
+	
+	for r in range(rings):
+		for s in range(tube_segs):
+			var curr = r * (tube_segs + 1) + s
+			var next = curr + tube_segs + 1
+			st.add_index(curr)
+			st.add_index(next)
+			st.add_index(curr + 1)
+			st.add_index(curr + 1)
+			st.add_index(next)
+			st.add_index(next + 1)
+	
+	st.generate_tangents()
+	return st.commit()
 
 func _create_placeholder_3d(element: Dictionary, grid_size: float) -> Node3D:
 	var node = Node3D.new()
