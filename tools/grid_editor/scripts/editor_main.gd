@@ -778,7 +778,7 @@ func _create_element_3d(element: Dictionary, placement: Dictionary, grid_size: f
 	
 	# Try to load actual scene if specified
 	if not node:
-		var scene_path = element.get("scene", "")
+		var scene_path = str(element.get("scene", ""))
 		if not scene_path.is_empty() and ResourceLoader.exists(scene_path):
 			var scene = load(scene_path)
 			if scene:
