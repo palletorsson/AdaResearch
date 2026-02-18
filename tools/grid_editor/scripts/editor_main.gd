@@ -1,7 +1,7 @@
 extends Control
-## Main editor controller — 3D-only interaction
-## All placement, selection, hovering is done via raycasting in the 3D viewport.
-## No 2D canvas. No coordinate flipping.
+## Grid editor — simple XY plane. Camera looks from +Z.
+## Grid X = right, Grid Y = up. No orientation abstraction.
+## Glass generators build in YZ, get rotated 90° around Y to become XY.
 
 @onready var subset_selector: OptionButton = %SubsetSelector
 @onready var preset_selector: OptionButton = %PresetSelector
@@ -10,805 +10,473 @@ extends Control
 @onready var status_label: Label = %StatusLabel
 @onready var zoom_label: Label = %ZoomLabel
 @onready var subset_loader: GridEditorSubsetLoader = %SubsetLoader
-@onready var properties_label: Label = %StatusLabel  # in PropertiesBar (unique in its branch)
-@onready var viewport_container: SubViewportContainer = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer
-@onready var sub_viewport: SubViewport = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport
-@onready var camera: Camera3D = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport/Camera3D
-@onready var preview_root: Node3D = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport/PreviewRoot
-@onready var grid_mesh: MeshInstance3D = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport/GridMesh
-@onready var hover_indicator: MeshInstance3D = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport/HoverIndicator
-@onready var axis_indicator: Node3D = $VBoxContainer/HSplitContainer/RightArea/ViewportContainer/SubViewport/AxisIndicator
-@onready var properties_bar_label: Label = $VBoxContainer/HSplitContainer/RightArea/PropertiesBar/StatusLabel
+@onready var preview_root: Node3D = %PreviewRoot
+@onready var preview_camera: Camera3D = %Camera3D
+@onready var viewport_container: SubViewportContainer = $VBoxContainer/HSplitContainer/ViewportContainer
+@onready var viewport: SubViewport = $VBoxContainer/HSplitContainer/ViewportContainer/SubViewport
 
-# Camera orbit
 var camera_pivot: Node3D
 var camera_distance: float = 3.0
-var camera_rotation: Vector2 = Vector2(-30, 45)  # pitch, yaw in degrees
-var is_orbiting: bool = false
+var camera_pan_offset: Vector3 = Vector3.ZERO
+var is_orbiting := false
+var is_panning := false
 
-# Grid state (was in grid_canvas)
-var grid_dimensions: Vector2i = Vector2i(16, 12)
-var orientation: String = "XZ"
-var grid_plane: Plane = Plane(Vector3.UP, 0)
-var grid_size: float = 1.0
+var grid_mesh: MeshInstance3D
+var hover_mesh: MeshInstance3D
+var selection_mesh: MeshInstance3D
+var grid_dimensions := Vector2i(16, 12)
 
-# Placements (was in grid_canvas)
 var placements: Array = []
-var _placement_nodes: Dictionary = {}  # placement dict -> Node3D
-var _placement_bodies: Dictionary = {}  # StaticBody3D -> placement dict (reverse lookup for picking)
+var placement_nodes: Dictionary = {}
+var selected_index: int = -1
 
-# Interaction state
-var hovered_cell: Vector2i = Vector2i(-1, -1)
-var selected_placement: Dictionary = {}
-var dragging_element: Dictionary = {}  # element def being placed
+var dragging_element: Dictionary = {}
 var drag_rotation: int = 0
-var is_moving: bool = false
-var move_offset: Vector2i = Vector2i.ZERO
+var is_moving := false
+var move_source_index: int = -1
 
-# Ghost preview node shown while placing/moving
-var _ghost_node: Node3D = null
+var undo_stack: Array = []
+var redo_stack: Array = []
 
-var current_layout_path: String = ""
-var is_dirty: bool = false
+var current_layout_path := ""
+var is_dirty := false
+var save_dialog: FileDialog
+var open_dialog: FileDialog
 
-func _ready() -> void:
-	_setup_ui()
-	_connect_signals()
-	subset_loader.subsets_loaded.connect(_on_subsets_loaded)
-	_apply_modern_theme()
-	_setup_3d_viewport()
+func _get_grid_size() -> float:
+	return subset_loader.get_grid_size() if subset_loader else 0.1
 
-# ============ UI Setup ============
 
-func _setup_ui() -> void:
-	preset_selector.clear()
-	preset_selector.disabled = true
-	apply_preset_button.disabled = true
-
-func _apply_modern_theme() -> void:
-	_style_option_button(subset_selector)
-	_style_option_button(preset_selector)
-	_style_button(apply_preset_button)
-	_style_item_list(element_list)
-	for label in [status_label, zoom_label]:
-		if label:
-			label.add_theme_font_size_override("font_size", 12)
-			label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.75))
-
-func _style_option_button(btn: OptionButton) -> void:
-	if not btn: return
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.18, 0.19, 0.22)
-	style.set_corner_radius_all(6)
-	style.content_margin_left = 12
-	style.content_margin_right = 28
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	style.border_color = Color(0.3, 0.32, 0.38)
-	style.set_border_width_all(1)
-	btn.add_theme_stylebox_override("normal", style)
-	var hover = style.duplicate()
-	hover.bg_color = Color(0.22, 0.24, 0.28)
-	hover.border_color = Color(0.4, 0.5, 0.7)
-	btn.add_theme_stylebox_override("hover", hover)
-	var pressed = style.duplicate()
-	pressed.bg_color = Color(0.25, 0.28, 0.32)
-	btn.add_theme_stylebox_override("pressed", pressed)
-	btn.add_theme_font_size_override("font_size", 13)
-	btn.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
-	btn.add_theme_color_override("font_hover_color", Color(1, 1, 1))
-
-func _style_item_list(list: ItemList) -> void:
-	if not list: return
-	var panel = StyleBoxFlat.new()
-	panel.bg_color = Color(0.1, 0.1, 0.12)
-	panel.set_corner_radius_all(6)
-	panel.border_color = Color(0.2, 0.22, 0.26)
-	panel.set_border_width_all(1)
-	list.add_theme_stylebox_override("panel", panel)
-	list.add_theme_color_override("font_color", Color(0.85, 0.85, 0.9))
-	list.add_theme_color_override("font_selected_color", Color(1, 1, 1))
-	var selected = StyleBoxFlat.new()
-	selected.bg_color = Color(0.3, 0.45, 0.65)
-	selected.set_corner_radius_all(4)
-	list.add_theme_stylebox_override("selected", selected)
-	list.add_theme_stylebox_override("selected_focus", selected)
-	var hovered = StyleBoxFlat.new()
-	hovered.bg_color = Color(0.2, 0.25, 0.32)
-	hovered.set_corner_radius_all(4)
-	list.add_theme_stylebox_override("hovered", hovered)
-
-func _style_button(btn: Button) -> void:
-	if not btn: return
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.22, 0.3, 0.42)
-	style.set_corner_radius_all(6)
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	style.border_color = Color(0.35, 0.45, 0.6)
-	style.set_border_width_all(1)
-	btn.add_theme_stylebox_override("normal", style)
-	var hover = style.duplicate()
-	hover.bg_color = Color(0.26, 0.36, 0.5)
-	btn.add_theme_stylebox_override("hover", hover)
-	var pressed = style.duplicate()
-	pressed.bg_color = Color(0.19, 0.26, 0.36)
-	btn.add_theme_stylebox_override("pressed", pressed)
-	var disabled = style.duplicate()
-	disabled.bg_color = Color(0.17, 0.19, 0.22)
-	disabled.border_color = Color(0.25, 0.27, 0.3)
-	btn.add_theme_stylebox_override("disabled", disabled)
-	btn.add_theme_font_size_override("font_size", 12)
-	btn.add_theme_color_override("font_color", Color(0.96, 0.98, 1.0))
-	btn.add_theme_color_override("font_disabled_color", Color(0.55, 0.58, 0.62))
-
-func _connect_signals() -> void:
-	subset_selector.item_selected.connect(_on_subset_selected)
-	apply_preset_button.pressed.connect(_on_apply_preset_pressed)
-	element_list.item_selected.connect(_on_element_list_selected)
-
-# ============ 3D Viewport Setup ============
-
-func _setup_3d_viewport() -> void:
-	# Create camera pivot for orbiting
-	camera_pivot = Node3D.new()
-	camera_pivot.name = "CameraPivot"
-	sub_viewport.add_child(camera_pivot)
-	camera.get_parent().remove_child(camera)
-	camera_pivot.add_child(camera)
-	camera.position = Vector3(0, 0, camera_distance)
-	camera.look_at(Vector3.ZERO)
-
-	# Setup grid mesh material
-	var mat = StandardMaterial3D.new()
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.albedo_color = Color(0.3, 0.35, 0.4, 0.5)
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.vertex_color_use_as_albedo = true
-	grid_mesh.material_override = mat
-
-	# Setup hover indicator
-	_setup_hover_indicator()
-
-	# Setup axis indicator
-	_create_axis_indicator()
-
-	# Connect viewport input
-	viewport_container.mouse_filter = Control.MOUSE_FILTER_STOP
-	viewport_container.gui_input.connect(_on_viewport_input)
-
-	_update_camera_orbit()
-
-func _setup_hover_indicator() -> void:
-	var box = BoxMesh.new()
-	box.size = Vector3(grid_size, 0.01, grid_size)
-	hover_indicator.mesh = box
-	var mat = StandardMaterial3D.new()
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.albedo_color = Color(0.3, 0.5, 0.9, 0.35)
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	hover_indicator.material_override = mat
-	hover_indicator.visible = false
-
-func _create_axis_indicator() -> void:
-	# Clear existing children
-	for child in axis_indicator.get_children():
-		child.queue_free()
-
-	var axis_length = 0.5
-	var arrow_size = 0.08
-	_add_axis_arrow(axis_indicator, Vector3.RIGHT, axis_length, arrow_size, Color.RED, "X")
-	_add_axis_arrow(axis_indicator, Vector3.UP, axis_length, arrow_size, Color.GREEN, "Y")
-	_add_axis_arrow(axis_indicator, Vector3.BACK, axis_length, arrow_size, Color.BLUE, "Z")
-
-	# Origin sphere
-	var origin = MeshInstance3D.new()
-	var sphere = SphereMesh.new()
-	sphere.radius = 0.04
-	sphere.height = 0.08
-	origin.mesh = sphere
-	var origin_mat = StandardMaterial3D.new()
-	origin_mat.albedo_color = Color.WHITE
-	origin_mat.emission_enabled = true
-	origin_mat.emission = Color.WHITE * 0.5
-	origin.material_override = origin_mat
-	axis_indicator.add_child(origin)
-
-func _add_axis_arrow(parent: Node3D, direction: Vector3, length: float, arrow_size: float, color: Color, label_text: String) -> void:
-	var axis_node = Node3D.new()
-	var shaft = MeshInstance3D.new()
-	var cyl = CylinderMesh.new()
-	cyl.top_radius = 0.015
-	cyl.bottom_radius = 0.015
-	cyl.height = length
-	shaft.mesh = cyl
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.emission_enabled = true
-	mat.emission = color * 0.5
-	shaft.material_override = mat
-	if direction == Vector3.UP:
-		shaft.position = direction * length / 2
-	elif direction == Vector3.RIGHT:
-		shaft.rotation.z = -PI / 2
-		shaft.position = direction * length / 2
-	else:
-		shaft.rotation.x = PI / 2
-		shaft.position = direction * length / 2
-	axis_node.add_child(shaft)
-
-	var cone = MeshInstance3D.new()
-	var cone_mesh = CylinderMesh.new()
-	cone_mesh.top_radius = 0
-	cone_mesh.bottom_radius = arrow_size
-	cone_mesh.height = arrow_size * 2
-	cone.mesh = cone_mesh
-	cone.material_override = mat
-	if direction == Vector3.UP:
-		cone.position = direction * length
-	elif direction == Vector3.RIGHT:
-		cone.rotation.z = -PI / 2
-		cone.position = direction * length
-	else:
-		cone.rotation.x = PI / 2
-		cone.position = direction * length
-	axis_node.add_child(cone)
-
-	var label = Label3D.new()
-	label.text = label_text
-	label.font_size = 48
-	label.pixel_size = 0.005
-	label.position = direction * (length + arrow_size * 3)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.modulate = color
-	label.outline_size = 8
-	axis_node.add_child(label)
-	parent.add_child(axis_node)
-
-# ============ Coordinate System (NO FLIPPING) ============
+# ── Coordinates: grid (gx,gy) → world XY plane at Z=0 ──
 
 func _cell_to_world(gx: int, gy: int) -> Vector3:
-	match orientation:
-		"XZ": return Vector3(gx * grid_size, 0, gy * grid_size)
-		"YZ": return Vector3(0, gy * grid_size, gx * grid_size)
-		"XY": return Vector3(gx * grid_size, gy * grid_size, 0)
-		_: return Vector3(gx * grid_size, 0, gy * grid_size)
+	var gs = _get_grid_size()
+	return Vector3(gx * gs, gy * gs, 0)
 
-func _cell_center_world(gx: int, gy: int, elem_w: int = 1, elem_h: int = 1) -> Vector3:
-	# Center of a multi-cell element for placeholder positioning
-	var cx = gx + elem_w / 2.0
-	var cy = gy + elem_h / 2.0
-	match orientation:
-		"XZ": return Vector3(cx * grid_size, 0, cy * grid_size)
-		"YZ": return Vector3(0, cy * grid_size, cx * grid_size)
-		"XY": return Vector3(cx * grid_size, cy * grid_size, 0)
-		_: return Vector3(cx * grid_size, 0, cy * grid_size)
+func _world_to_cell(w: Vector3) -> Vector2i:
+	var gs = _get_grid_size()
+	if gs <= 0: return Vector2i(-1, -1)
+	return Vector2i(int(floor(w.x / gs)), int(floor(w.y / gs)))
 
-func _screen_to_grid(screen_pos: Vector2) -> Vector2i:
-	var from = camera.project_ray_origin(screen_pos)
-	var dir = camera.project_ray_normal(screen_pos)
-	var hit = grid_plane.intersects_ray(from, dir)
-	if hit == null:
-		return Vector2i(-1, -1)
-	match orientation:
-		"XZ": return Vector2i(int(floor(hit.x / grid_size)), int(floor(hit.z / grid_size)))
-		"YZ": return Vector2i(int(floor(hit.z / grid_size)), int(floor(hit.y / grid_size)))
-		"XY": return Vector2i(int(floor(hit.x / grid_size)), int(floor(hit.y / grid_size)))
-		_: return Vector2i(int(floor(hit.x / grid_size)), int(floor(hit.z / grid_size)))
+func _screen_to_world(sp: Vector2):
+	var from = preview_camera.project_ray_origin(sp)
+	var dir = preview_camera.project_ray_normal(sp)
+	return Plane(Vector3.FORWARD, 0).intersects_ray(from, dir)  # Z=0 plane
 
-func _update_grid_plane() -> void:
-	match orientation:
-		"XZ": grid_plane = Plane(Vector3.UP, 0)
-		"YZ": grid_plane = Plane(Vector3.RIGHT, 0)
-		"XY": grid_plane = Plane(Vector3.BACK, 0)
-		_: grid_plane = Plane(Vector3.UP, 0)
+func _screen_to_cell(sp: Vector2) -> Vector2i:
+	var hit = _screen_to_world(sp)
+	return _world_to_cell(hit) if hit != null else Vector2i(-1, -1)
 
-func _get_orientation_plane() -> String:
-	if subset_loader and not subset_loader.current_subset.is_empty():
-		return subset_loader.current_subset.get("orientation", {}).get("plane", "XZ")
-	return "XZ"
+func _is_valid(c: Vector2i) -> bool:
+	return c.x >= 0 and c.y >= 0 and c.x < grid_dimensions.x and c.y < grid_dimensions.y
 
-# ============ Grid Drawing ============
+func _safe_pos(p: Dictionary) -> Array:
+	var pos = p.get("position", [0, 0])
+	return pos if pos is Array and pos.size() >= 2 else [0, 0]
 
-func _update_preview_grid() -> void:
-	if not grid_mesh or not grid_mesh.mesh is ImmediateMesh:
-		grid_mesh.mesh = ImmediateMesh.new()
+func _safe_size(e: Dictionary) -> Array:
+	var sz = e.get("size", [1, 1])
+	return sz if sz is Array and sz.size() >= 2 else [1, 1]
 
-	var im = grid_mesh.mesh as ImmediateMesh
-	im.clear_surfaces()
 
+# ── Ready ──
+
+func _ready() -> void:
+	subset_loader.subsets_loaded.connect(_on_subsets_loaded)
+	subset_selector.item_selected.connect(_on_subset_selected)
+	apply_preset_button.pressed.connect(_on_apply_preset_pressed)
+	element_list.item_selected.connect(_on_element_selected)
+	preset_selector.clear(); preset_selector.disabled = true; apply_preset_button.disabled = true
+	viewport_container.mouse_filter = Control.MOUSE_FILTER_STOP
+	viewport_container.gui_input.connect(_on_viewport_input)
+	_setup_menus(); _setup_camera(); _setup_visuals(); _setup_file_dialogs()
+
+
+# ── Menus ──
+
+func _setup_menus() -> void:
+	($VBoxContainer/MenuBar/File as PopupMenu).id_pressed.connect(_on_file_menu)
+	($VBoxContainer/MenuBar/Edit as PopupMenu).id_pressed.connect(_on_edit_menu)
+
+func _on_file_menu(id: int) -> void:
+	match id:
+		0: _do_new()
+		1: _do_open()
+		2: _do_save()
+		4: get_tree().quit()
+
+func _on_edit_menu(id: int) -> void:
+	match id:
+		0: undo()
+		1: redo()
+		2: _delete_selected()
+
+
+# ── File Dialogs ──
+
+func _setup_file_dialogs() -> void:
+	save_dialog = FileDialog.new()
+	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	save_dialog.add_filter("*.json", "Layout JSON")
+	save_dialog.size = Vector2i(700, 500)
+	save_dialog.file_selected.connect(func(p): save_layout(p))
+	add_child(save_dialog)
+	open_dialog = FileDialog.new()
+	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	open_dialog.add_filter("*.json", "Layout JSON")
+	open_dialog.size = Vector2i(700, 500)
+	open_dialog.file_selected.connect(func(p): load_layout(p))
+	add_child(open_dialog)
+
+func _do_new() -> void:
+	_push_undo(); placements.clear(); selected_index = -1
+	current_layout_path = ""; is_dirty = false; _rebuild_all()
+	status_label.text = "New layout"
+
+func _do_open() -> void:
+	open_dialog.popup_centered()
+
+func _do_save() -> void:
+	if current_layout_path.is_empty():
+		save_dialog.popup_centered()
+	else:
+		save_layout(current_layout_path)
+
+
+# ── Undo / Redo ──
+
+func _snapshot() -> Dictionary:
+	var sp: Array = []
+	for p in placements: sp.append(p.duplicate(true))
+	return {"placements": sp, "selected": selected_index, "grid": [grid_dimensions.x, grid_dimensions.y]}
+
+func _restore(s: Dictionary) -> void:
+	placements = s.get("placements", [])
+	selected_index = s.get("selected", -1)
+	var g = s.get("grid", [16, 12]); grid_dimensions = Vector2i(g[0], g[1])
+	_rebuild_all()
+
+func _push_undo() -> void:
+	undo_stack.append(_snapshot())
+	if undo_stack.size() > 50: undo_stack.pop_front()
+	redo_stack.clear()
+
+func undo() -> void:
+	if undo_stack.is_empty(): status_label.text = "Nothing to undo"; return
+	redo_stack.append(_snapshot()); _restore(undo_stack.pop_back()); is_dirty = true
+	status_label.text = "Undo (%d left)" % undo_stack.size()
+
+func redo() -> void:
+	if redo_stack.is_empty(): status_label.text = "Nothing to redo"; return
+	undo_stack.append(_snapshot()); _restore(redo_stack.pop_back()); is_dirty = true
+	status_label.text = "Redo"
+
+
+# ── Camera ──
+
+func _setup_camera() -> void:
+	camera_pivot = Node3D.new(); camera_pivot.name = "CameraPivot"
+	viewport.add_child(camera_pivot)
+	preview_camera.get_parent().remove_child(preview_camera)
+	camera_pivot.add_child(preview_camera)
+	_fit_camera()
+
+func _fit_camera() -> void:
+	var gs = _get_grid_size()
+	var extent = max(grid_dimensions.x, grid_dimensions.y) * gs
+	camera_distance = extent * 1.2 + 0.5
+	_update_camera()
+
+func _update_camera() -> void:
+	if not camera_pivot: return
+	var center = _cell_to_world(grid_dimensions.x / 2, grid_dimensions.y / 2) + camera_pan_offset
+	camera_pivot.position = center
+	# Camera sits on +Z looking toward -Z (straight at XY plane)
+	preview_camera.position = Vector3(0, 0, camera_distance)
+	preview_camera.look_at(camera_pivot.global_position)
+	zoom_label.text = "Zoom: %d%%" % int(3.0 / camera_distance * 100)
+
+
+# ── Grid + Hover + Selection visuals ──
+
+func _setup_visuals() -> void:
+	# Grid lines
+	grid_mesh = MeshInstance3D.new(); grid_mesh.name = "Grid"
+	var gm = StandardMaterial3D.new()
+	gm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	gm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	gm.vertex_color_use_as_albedo = true
+	grid_mesh.material_override = gm; grid_mesh.mesh = ImmediateMesh.new()
+	viewport.add_child(grid_mesh)
+	# Hover
+	hover_mesh = MeshInstance3D.new(); hover_mesh.mesh = BoxMesh.new()
+	var hm = StandardMaterial3D.new()
+	hm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	hm.albedo_color = Color(0.3, 0.6, 1.0, 0.4)
+	hm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	hover_mesh.material_override = hm; hover_mesh.visible = false
+	viewport.add_child(hover_mesh)
+	# Selection
+	selection_mesh = MeshInstance3D.new(); selection_mesh.mesh = BoxMesh.new()
+	var sm = StandardMaterial3D.new()
+	sm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	sm.albedo_color = Color(1.0, 0.85, 0.2, 0.35)
+	sm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	selection_mesh.material_override = sm; selection_mesh.visible = false
+	viewport.add_child(selection_mesh)
+
+func _rebuild_grid() -> void:
+	var im = grid_mesh.mesh as ImmediateMesh; im.clear_surfaces()
+	var gs = _get_grid_size()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
-
-	var line_color = Color(0.3, 0.35, 0.4, 0.6)
-	var major_color = Color(0.4, 0.45, 0.5, 0.8)
-
-	# Horizontal lines
-	for i in range(grid_dimensions.y + 1):
-		var color = major_color if i % 4 == 0 else line_color
-		im.surface_set_color(color)
-		im.surface_add_vertex(_cell_to_world(0, i))
-		im.surface_set_color(color)
-		im.surface_add_vertex(_cell_to_world(grid_dimensions.x, i))
-
-	# Vertical lines
-	for i in range(grid_dimensions.x + 1):
-		var color = major_color if i % 4 == 0 else line_color
-		im.surface_set_color(color)
-		im.surface_add_vertex(_cell_to_world(i, 0))
-		im.surface_set_color(color)
-		im.surface_add_vertex(_cell_to_world(i, grid_dimensions.y))
-
+	var c1 = Color(0.3, 0.35, 0.4, 0.6); var c2 = Color(0.4, 0.45, 0.5, 0.8)
+	for y in range(grid_dimensions.y + 1):
+		var c = c2 if y % 4 == 0 else c1
+		im.surface_set_color(c); im.surface_add_vertex(_cell_to_world(0, y))
+		im.surface_set_color(c); im.surface_add_vertex(_cell_to_world(grid_dimensions.x, y))
+	for x in range(grid_dimensions.x + 1):
+		var c = c2 if x % 4 == 0 else c1
+		im.surface_set_color(c); im.surface_add_vertex(_cell_to_world(x, 0))
+		im.surface_set_color(c); im.surface_add_vertex(_cell_to_world(x, grid_dimensions.y))
 	im.surface_end()
 
-# ============ Hover Indicator ============
+func _show_box(mesh: MeshInstance3D, cell: Vector2i, w: float, h: float) -> void:
+	var box = mesh.mesh as BoxMesh
+	box.size = Vector3(w, h, 0.002)
+	mesh.position = _cell_to_world(cell.x, cell.y) + Vector3(w / 2.0, h / 2.0, 0.001)
 
-func _update_hover_indicator(cell: Vector2i, elem_w: int = 1, elem_h: int = 1) -> void:
-	if cell.x < 0 or cell.y < 0:
-		hover_indicator.visible = false
-		return
+func _update_hover(cell: Vector2i, sz: Array = [1, 1]) -> void:
+	if not _is_valid(cell): hover_mesh.visible = false; return
+	hover_mesh.visible = true
+	var gs = _get_grid_size()
+	_show_box(hover_mesh, cell, sz[0] * gs, sz[1] * gs)
+	var ok = _can_place_at(cell, sz)
+	(hover_mesh.material_override as StandardMaterial3D).albedo_color = \
+		Color(0.3, 0.8, 0.4, 0.4) if ok else Color(0.9, 0.2, 0.2, 0.4)
 
-	hover_indicator.visible = true
+func _update_selection() -> void:
+	if selected_index < 0 or selected_index >= placements.size():
+		selection_mesh.visible = false; return
+	selection_mesh.visible = true
+	var p = placements[selected_index]; var pos = _safe_pos(p)
+	var elem = subset_loader.get_element(str(p.get("element", "")))
+	var sz = _rotated_size(elem, p.get("rotation", 0)); var gs = _get_grid_size()
+	_show_box(selection_mesh, Vector2i(int(pos[0]), int(pos[1])), sz[0] * gs, sz[1] * gs)
 
-	# Resize box to element footprint
-	var box = hover_indicator.mesh as BoxMesh
-	match orientation:
-		"XZ":
-			box.size = Vector3(elem_w * grid_size, 0.01, elem_h * grid_size)
-		"YZ":
-			box.size = Vector3(0.01, elem_h * grid_size, elem_w * grid_size)
-		"XY":
-			box.size = Vector3(elem_w * grid_size, elem_h * grid_size, 0.01)
 
-	# Position at center of footprint
-	hover_indicator.position = _cell_center_world(cell.x, cell.y, elem_w, elem_h)
-
-	# Color based on validity
-	var can_place = _can_place_at(cell, Vector2i(elem_w, elem_h))
-	var mat = hover_indicator.material_override as StandardMaterial3D
-	if can_place:
-		mat.albedo_color = Color(0.3, 0.5, 0.9, 0.35)
-	else:
-		mat.albedo_color = Color(0.9, 0.25, 0.25, 0.35)
-
-# ============ Camera Orbit ============
-
-func _reset_camera_for_plane() -> void:
-	match orientation:
-		"XZ":
-			camera_rotation = Vector2(-45, 45)
-		"YZ":
-			camera_rotation = Vector2(-15, 0)
-		"XY":
-			camera_rotation = Vector2(-15, 0)
-	_fit_camera_to_grid()
-
-func _fit_camera_to_grid() -> void:
-	var max_extent = max(grid_dimensions.x, grid_dimensions.y) * grid_size
-	if not placements.is_empty():
-		var max_a = 0.0
-		var max_b = 0.0
-		for placement in placements:
-			var pos = placement.get("position", [0, 0])
-			var element = subset_loader.get_element(placement.get("element", ""))
-			var elem_size = element.get("size", [1, 1])
-			max_a = max(max_a, (pos[0] + elem_size[0]) * grid_size)
-			max_b = max(max_b, (pos[1] + elem_size[1]) * grid_size)
-		max_extent = max(max_a, max_b)
-	camera_distance = max_extent * 1.2 + 1.0
-	_update_camera_orbit()
-
-func _update_camera_orbit() -> void:
-	if not camera_pivot or not camera:
-		return
-	var center = _cell_center_world(0, 0, grid_dimensions.x, grid_dimensions.y)
-	camera_pivot.position = center
-	camera_pivot.rotation_degrees = Vector3(camera_rotation.x, camera_rotation.y, 0)
-	camera.position = Vector3(0, 0, camera_distance)
-	camera.look_at(camera_pivot.global_position)
-	zoom_label.text = "Dist: %.1f" % camera_distance
-
-# ============ Viewport Input ============
+# ── Input ──
 
 func _on_viewport_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		_handle_mouse_button(event as InputEventMouseButton)
+		var mb = event as InputEventMouseButton
+		match mb.button_index:
+			MOUSE_BUTTON_RIGHT: is_orbiting = mb.pressed; is_panning = false
+			MOUSE_BUTTON_MIDDLE: is_panning = mb.pressed; is_orbiting = false
+			MOUSE_BUTTON_WHEEL_UP: camera_distance = max(0.3, camera_distance * 0.9); _update_camera()
+			MOUSE_BUTTON_WHEEL_DOWN: camera_distance = min(50.0, camera_distance * 1.1); _update_camera()
+			MOUSE_BUTTON_LEFT:
+				if mb.pressed: _on_click(mb.position)
 	elif event is InputEventMouseMotion:
-		_handle_mouse_motion(event as InputEventMouseMotion)
-	elif event is InputEventKey:
-		_handle_key(event as InputEventKey)
-
-func _handle_mouse_button(mb: InputEventMouseButton) -> void:
-	# Orbit camera with right-click drag
-	if mb.button_index == MOUSE_BUTTON_RIGHT:
-		is_orbiting = mb.pressed
-		viewport_container.accept_event()
-		return
-
-	# Zoom with scroll wheel
-	if mb.button_index == MOUSE_BUTTON_WHEEL_UP:
-		camera_distance = max(0.5, camera_distance - 0.5)
-		_update_camera_orbit()
-		viewport_container.accept_event()
-		return
-	if mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		camera_distance = min(30.0, camera_distance + 0.5)
-		_update_camera_orbit()
-		viewport_container.accept_event()
-		return
-
-	# Left-click: place / select / move
-	if mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed:
-		var cell = _screen_to_grid(mb.position)
-		if not dragging_element.is_empty():
-			# Place mode: place element
-			_try_place_element(cell)
-		elif is_moving:
-			# Finish move
-			_finish_move(cell)
+		var mm = event as InputEventMouseMotion
+		if is_panning:
+			var spd = camera_distance * 0.002
+			camera_pan_offset.x -= mm.relative.x * spd
+			camera_pan_offset.y += mm.relative.y * spd
+			_update_camera()
+		elif is_orbiting:
+			pass  # Could add slight tilt, but keeping it 2D-like for now
 		else:
-			# Select or start move
-			_try_select_or_move(cell, mb.position)
-		viewport_container.accept_event()
-		return
-
-	if mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
-		# Release during move
-		if is_moving:
-			var cell = _screen_to_grid(mb.position)
-			_finish_move(cell)
-			viewport_container.accept_event()
-		return
-
-func _handle_mouse_motion(mm: InputEventMouseMotion) -> void:
-	if is_orbiting:
-		camera_rotation.y += mm.relative.x * 0.5
-		camera_rotation.x = clamp(camera_rotation.x - mm.relative.y * 0.5, -89, 89)
-		_update_camera_orbit()
-		return
-
-	var cell = _screen_to_grid(mm.position)
-
-	if cell != hovered_cell:
-		hovered_cell = cell
-		if cell.x >= 0 and cell.y >= 0:
-			status_label.text = "Cell: %d, %d" % [cell.x, cell.y]
-
-	# Update hover indicator and ghost
-	if not dragging_element.is_empty():
-		var elem_size = _get_rotated_size(dragging_element, drag_rotation)
-		_update_hover_indicator(cell, elem_size.x, elem_size.y)
-		_update_ghost(dragging_element, cell, drag_rotation)
-	elif is_moving and not selected_placement.is_empty():
-		var target = cell - move_offset
-		var element = subset_loader.get_element(selected_placement.get("element", ""))
-		var rotation = selected_placement.get("rotation", 0)
-		var elem_size = _get_rotated_size(element, rotation)
-		_update_hover_indicator(target, elem_size.x, elem_size.y)
-		_update_ghost(element, target, rotation)
-	else:
-		_update_hover_indicator(cell)
-		_clear_ghost()
-
-func _handle_key(ke: InputEventKey) -> void:
-	if not ke.pressed:
-		return
-
-	if ke.keycode == KEY_R:
-		if not dragging_element.is_empty():
-			drag_rotation = (drag_rotation + 90) % 360
-			if hovered_cell.x >= 0:
-				var elem_size = _get_rotated_size(dragging_element, drag_rotation)
-				_update_hover_indicator(hovered_cell, elem_size.x, elem_size.y)
-				_update_ghost(dragging_element, hovered_cell, drag_rotation)
-			viewport_container.accept_event()
-		elif not selected_placement.is_empty():
-			_rotate_selected()
-			viewport_container.accept_event()
-
-	elif ke.keycode == KEY_DELETE or ke.keycode == KEY_BACKSPACE:
-		if not selected_placement.is_empty():
-			_delete_selected()
-			viewport_container.accept_event()
-
-	elif ke.keycode == KEY_ESCAPE:
-		if not dragging_element.is_empty():
-			_cancel_place_mode()
-			viewport_container.accept_event()
-		elif is_moving:
-			is_moving = false
-			_clear_ghost()
-			hover_indicator.visible = false
-			# Re-show the node that was being moved
-			if _placement_nodes.has(selected_placement):
-				var node = _placement_nodes[selected_placement] as Node3D
-				if node: node.visible = true
-			viewport_container.accept_event()
+			_on_mouse_move(mm.position)
 
 func _input(event: InputEvent) -> void:
-	# Global key shortcuts
+	if not viewport_container or not viewport_container.get_global_rect().has_point(get_global_mouse_position()):
+		return
 	if event is InputEventKey and event.pressed:
-		var ke = event as InputEventKey
-		if ke.keycode == KEY_DELETE or ke.keycode == KEY_BACKSPACE:
-			if not selected_placement.is_empty():
-				_delete_selected()
+		if event.ctrl_pressed:
+			match event.keycode:
+				KEY_Z: redo() if event.shift_pressed else undo()
+				KEY_Y: redo()
+				KEY_S: _do_save()
+		else:
+			match event.keycode:
+				KEY_R: _rotate_current()
+				KEY_DELETE, KEY_BACKSPACE: _delete_selected()
+				KEY_ESCAPE: _cancel()
+				KEY_F: camera_pan_offset = Vector3.ZERO; _fit_camera()
 
-# ============ Element Placement ============
-
-func _try_place_element(cell: Vector2i) -> void:
-	if dragging_element.is_empty():
-		return
-	var elem_size = _get_rotated_size(dragging_element, drag_rotation)
-	if not _can_place_at(cell, elem_size):
-		return
-
-	var placement = {
-		"id": "elem_%d" % (placements.size() + 1),
-		"element": dragging_element.get("id", ""),
-		"position": [cell.x, cell.y],
-		"rotation": drag_rotation,
-		"params": {}
-	}
-	placements.append(placement)
-	_instantiate_placement_3d(placement)
-
-	is_dirty = true
-	status_label.text = "Placed: " + dragging_element.get("name", "element")
-
-	# Exit place mode after placing
-	dragging_element = {}
-	drag_rotation = 0
-	_clear_ghost()
-	hover_indicator.visible = false
-
-func _cancel_place_mode() -> void:
-	dragging_element = {}
-	drag_rotation = 0
-	_clear_ghost()
-	hover_indicator.visible = false
-	status_label.text = "Ready"
-
-# ============ Element Selection & Picking ============
-
-func _try_select_or_move(cell: Vector2i, screen_pos: Vector2) -> void:
-	# First try physics raycast for picking placed elements
-	var from = camera.project_ray_origin(screen_pos)
-	var dir = camera.project_ray_normal(screen_pos)
-	var space_state = sub_viewport.world_3d.direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(from, from + dir * 100.0)
-	var result = space_state.intersect_ray(query)
-
-	if not result.is_empty():
-		var collider = result.get("collider")
-		if collider is StaticBody3D and _placement_bodies.has(collider):
-			var placement = _placement_bodies[collider]
-			_select_placement(placement)
-			# Start move
-			var p_cell = Vector2i(placement.get("position", [0, 0])[0], placement.get("position", [0, 0])[1])
-			is_moving = true
-			move_offset = cell - p_cell
-			# Hide the original node while moving
-			if _placement_nodes.has(placement):
-				var node = _placement_nodes[placement] as Node3D
-				if node: node.visible = false
-			return
-
-	# Also check grid-cell-based overlap as fallback
-	for placement in placements:
-		var p_pos = placement.get("position", [0, 0])
-		var p_cell = Vector2i(p_pos[0], p_pos[1])
-		var element = subset_loader.get_element(placement.get("element", ""))
-		var p_rot = placement.get("rotation", 0)
-		var p_size = _get_rotated_size(element, p_rot)
-		if cell.x >= p_cell.x and cell.x < p_cell.x + p_size.x \
-		  and cell.y >= p_cell.y and cell.y < p_cell.y + p_size.y:
-			_select_placement(placement)
-			is_moving = true
-			move_offset = cell - p_cell
-			if _placement_nodes.has(placement):
-				var node = _placement_nodes[placement] as Node3D
-				if node: node.visible = false
-			return
-
-	# Nothing hit — clear selection
-	_clear_selection()
-
-func _select_placement(placement: Dictionary) -> void:
-	selected_placement = placement
-	_update_properties_bar(placement)
-
-	# Highlight selected node
-	for p in _placement_nodes:
-		var node = _placement_nodes[p] as Node3D
-		if not node: continue
-		# Reset all highlight
-		_set_node_highlight(node, false)
-	if _placement_nodes.has(placement):
-		_set_node_highlight(_placement_nodes[placement] as Node3D, true)
-
-func _clear_selection() -> void:
-	if not selected_placement.is_empty():
-		if _placement_nodes.has(selected_placement):
-			_set_node_highlight(_placement_nodes[selected_placement] as Node3D, false)
-	selected_placement = {}
-	is_moving = false
-	_clear_ghost()
-	hover_indicator.visible = false
-	properties_bar_label.text = "No selection"
-
-func _set_node_highlight(node: Node3D, highlight: bool) -> void:
-	if not node: return
-	# Walk children looking for MeshInstance3D to tint
-	for child in node.get_children():
-		if child is MeshInstance3D:
-			if highlight:
-				# Store original material and apply highlight
-				if not child.has_meta("orig_mat"):
-					child.set_meta("orig_mat", child.material_override)
-				var mat = StandardMaterial3D.new()
-				if child.material_override is StandardMaterial3D:
-					mat = (child.material_override as StandardMaterial3D).duplicate()
-				mat.emission_enabled = true
-				mat.emission = Color(1.0, 0.7, 0.2)
-				mat.emission_energy_multiplier = 0.4
-				child.material_override = mat
-			else:
-				if child.has_meta("orig_mat"):
-					child.material_override = child.get_meta("orig_mat")
-					child.remove_meta("orig_mat")
-		elif child is Node3D:
-			_set_node_highlight(child, highlight)
-
-# ============ Element Moving ============
-
-func _finish_move(cell: Vector2i) -> void:
-	if not is_moving or selected_placement.is_empty():
-		is_moving = false
-		return
-
-	var target = cell - move_offset
-	var element = subset_loader.get_element(selected_placement.get("element", ""))
-	var rotation = selected_placement.get("rotation", 0)
-	var elem_size = _get_rotated_size(element, rotation)
-
-	if _can_place_at_for_move(target, elem_size, selected_placement):
-		selected_placement["position"] = [target.x, target.y]
-		# Rebuild the 3D node at new position
-		_remove_placement_node(selected_placement)
-		_instantiate_placement_3d(selected_placement)
-		is_dirty = true
-		status_label.text = "Moved to %d, %d" % [target.x, target.y]
+func _on_mouse_move(sp: Vector2) -> void:
+	var cell = _screen_to_cell(sp)
+	if is_moving and move_source_index >= 0 and move_source_index < placements.size():
+		var elem = subset_loader.get_element(str(placements[move_source_index].get("element", "")))
+		_update_hover(cell, _rotated_size(elem, placements[move_source_index].get("rotation", 0)))
+		status_label.text = "Move to %d,%d (click=confirm, Esc=cancel)" % [cell.x, cell.y]
+	elif not dragging_element.is_empty():
+		_update_hover(cell, _rotated_size(dragging_element, drag_rotation))
+		status_label.text = "Place: %s at %d,%d (R=rotate, Esc=cancel)" % [dragging_element.get("name", "?"), cell.x, cell.y]
+	elif _is_valid(cell):
+		_update_hover(cell)
+		var occ = _occupied(cell)
+		if occ >= 0 and occ < placements.size():
+			var elem = subset_loader.get_element(str(placements[occ].get("element", "")))
+			status_label.text = "%s at %d,%d (click=select)" % [elem.get("name", "?"), cell.x, cell.y]
+		else:
+			status_label.text = "Cell: %d, %d" % [cell.x, cell.y]
 	else:
-		# Cancel move — show original node again
-		if _placement_nodes.has(selected_placement):
-			var node = _placement_nodes[selected_placement] as Node3D
-			if node: node.visible = true
+		hover_mesh.visible = false; status_label.text = ""
 
-	is_moving = false
-	_clear_ghost()
-	hover_indicator.visible = false
-	_update_properties_bar(selected_placement)
-
-# ============ Element Rotation & Deletion ============
-
-func _rotate_selected() -> void:
-	if selected_placement.is_empty():
+func _on_click(sp: Vector2) -> void:
+	var cell = _screen_to_cell(sp)
+	if not _is_valid(cell): return
+	if is_moving: _confirm_move(cell); return
+	if not dragging_element.is_empty():
+		var sz = _rotated_size(dragging_element, drag_rotation)
+		if _can_place_at(cell, sz):
+			_push_undo(); _place(dragging_element, cell, drag_rotation)
+			dragging_element = {}; drag_rotation = 0; hover_mesh.visible = false; element_list.deselect_all()
 		return
-	selected_placement["rotation"] = (selected_placement.get("rotation", 0) + 90) % 360
-	# Rebuild node
-	_remove_placement_node(selected_placement)
-	_instantiate_placement_3d(selected_placement)
-	is_dirty = true
-	_update_properties_bar(selected_placement)
-	status_label.text = "Rotated to %d°" % selected_placement.get("rotation", 0)
+	var idx = _occupied(cell)
+	if idx >= 0:
+		if idx == selected_index: _start_move(idx)
+		else: _select(idx)
+	else: _deselect()
+
+
+# ── Actions ──
+
+func _rotate_current() -> void:
+	if not dragging_element.is_empty():
+		drag_rotation = (drag_rotation + 90) % 360
+	elif selected_index >= 0:
+		_push_undo(); placements[selected_index]["rotation"] = (placements[selected_index].get("rotation", 0) + 90) % 360
+		_rebuild_all(); is_dirty = true; status_label.text = "Rotated"
 
 func _delete_selected() -> void:
-	if selected_placement.is_empty():
-		return
-	_remove_placement_node(selected_placement)
-	placements.erase(selected_placement)
-	selected_placement = {}
-	is_dirty = true
-	properties_bar_label.text = "No selection"
-	status_label.text = "Element deleted"
+	if selected_index >= 0 and selected_index < placements.size():
+		_push_undo(); placements.remove_at(selected_index); selected_index = -1
+		_rebuild_all(); is_dirty = true; status_label.text = "Deleted"
 
-# ============ Ghost Preview ============
+func _cancel() -> void:
+	if is_moving:
+		is_moving = false; move_source_index = -1; _rebuild_all(); status_label.text = "Cancelled"
+	elif not dragging_element.is_empty():
+		dragging_element = {}; drag_rotation = 0; hover_mesh.visible = false; element_list.deselect_all()
+	else: _deselect()
 
-func _update_ghost(element: Dictionary, cell: Vector2i, rotation: int) -> void:
-	if cell.x < 0 or cell.y < 0:
-		_clear_ghost()
-		return
+func _start_move(idx: int) -> void:
+	is_moving = true; move_source_index = idx
+	if placement_nodes.has(idx) and placement_nodes[idx]: placement_nodes[idx].visible = false
+	status_label.text = "Click destination (Esc=cancel)"
 
-	_clear_ghost()
+func _confirm_move(cell: Vector2i) -> void:
+	if move_source_index < 0 or move_source_index >= placements.size():
+		is_moving = false; return
+	var elem = subset_loader.get_element(str(placements[move_source_index].get("element", "")))
+	var sz = _rotated_size(elem, placements[move_source_index].get("rotation", 0))
+	var old = placements[move_source_index]["position"]
+	placements[move_source_index]["position"] = [-999, -999]
+	var ok = _can_place_at(cell, sz)
+	placements[move_source_index]["position"] = old
+	if ok:
+		_push_undo(); placements[move_source_index]["position"] = [cell.x, cell.y]
+		is_moving = false; move_source_index = -1; _rebuild_all(); is_dirty = true
+		status_label.text = "Moved to %d,%d" % [cell.x, cell.y]
+	else: status_label.text = "Can't place there"
 
-	var ghost_placement = {
-		"element": element.get("id", ""),
-		"position": [cell.x, cell.y],
-		"rotation": rotation,
-		"params": {}
-	}
-	_ghost_node = _create_element_3d(element, ghost_placement, grid_size)
-	if _ghost_node:
-		# Make semi-transparent
-		_set_node_transparency(_ghost_node, 0.4)
-		preview_root.add_child(_ghost_node)
 
-func _clear_ghost() -> void:
-	if _ghost_node and is_instance_valid(_ghost_node):
-		_ghost_node.queue_free()
-	_ghost_node = null
+# ── Placement logic ──
 
-func _set_node_transparency(node: Node3D, alpha: float) -> void:
-	for child in node.get_children():
-		if child is MeshInstance3D:
-			if child.material_override is StandardMaterial3D:
-				var mat = (child.material_override as StandardMaterial3D).duplicate()
-				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-				mat.albedo_color.a = alpha
-				child.material_override = mat
-		elif child is Node3D:
-			_set_node_transparency(child, alpha)
+func _rotated_size(elem: Dictionary, rot: int) -> Array:
+	var sz = _safe_size(elem); var w = int(sz[0]); var h = int(sz[1])
+	return [h, w] if (rot % 180) == 90 else [w, h]
 
-# ============ Placement Validation ============
-
-func _is_valid_cell(cell: Vector2i) -> bool:
-	return cell.x >= 0 and cell.y >= 0 and cell.x < grid_dimensions.x and cell.y < grid_dimensions.y
-
-func _can_place_at(cell: Vector2i, elem_size: Vector2i) -> bool:
-	if cell.x < 0 or cell.y < 0:
-		return false
-	if cell.x + elem_size.x > grid_dimensions.x:
-		return false
-	if cell.y + elem_size.y > grid_dimensions.y:
-		return false
-	for placement in placements:
-		if _placements_overlap(cell, elem_size, placement):
-			return false
+func _can_place_at(cell: Vector2i, sz: Array) -> bool:
+	if sz.size() < 2: return false
+	for dx in range(int(sz[0])):
+		for dy in range(int(sz[1])):
+			var c = Vector2i(cell.x + dx, cell.y + dy)
+			if not _is_valid(c) or _occupied(c) >= 0: return false
 	return true
 
-func _can_place_at_for_move(cell: Vector2i, elem_size: Vector2i, exclude: Dictionary) -> bool:
-	if cell.x < 0 or cell.y < 0:
-		return false
-	if cell.x + elem_size.x > grid_dimensions.x:
-		return false
-	if cell.y + elem_size.y > grid_dimensions.y:
-		return false
-	for placement in placements:
-		if placement == exclude:
-			continue
-		if _placements_overlap(cell, elem_size, placement):
-			return false
-	return true
+func _occupied(cell: Vector2i) -> int:
+	for i in range(placements.size()):
+		var pos = _safe_pos(placements[i])
+		if pos[0] < 0: continue
+		var elem = subset_loader.get_element(str(placements[i].get("element", "")))
+		var sz = _rotated_size(elem, placements[i].get("rotation", 0))
+		if cell.x >= pos[0] and cell.x < pos[0] + int(sz[0]) and cell.y >= pos[1] and cell.y < pos[1] + int(sz[1]):
+			return i
+	return -1
 
-func _placements_overlap(cell: Vector2i, elem_size: Vector2i, placement: Dictionary) -> bool:
-	var p_cell = Vector2i(placement.get("position", [0, 0])[0], placement.get("position", [0, 0])[1])
-	var p_size = Vector2i(1, 1)
-	if subset_loader:
-		var p_element = subset_loader.get_element(placement.get("element", ""))
-		var p_rotation = placement.get("rotation", 0)
-		p_size = _get_rotated_size(p_element, p_rotation)
-	var r1 = Rect2i(cell, elem_size)
-	var r2 = Rect2i(p_cell, p_size)
-	return r1.intersects(r2)
+func _place(elem: Dictionary, cell: Vector2i, rot: int) -> void:
+	placements.append({"element": elem.get("id", ""), "position": [cell.x, cell.y], "rotation": rot})
+	_instantiate(placements.size() - 1); is_dirty = true
+	status_label.text = "Placed: %s at %d,%d" % [elem.get("name", "?"), cell.x, cell.y]
 
-func _get_rotated_size(element: Dictionary, rotation: int) -> Vector2i:
-	var s = Vector2i(element.get("size", [1, 1])[0], element.get("size", [1, 1])[1])
-	if rotation == 90 or rotation == 270:
-		return Vector2i(s.y, s.x)
-	return s
+func _select(idx: int) -> void:
+	selected_index = idx; _update_selection()
+	var elem = subset_loader.get_element(str(placements[idx].get("element", "")))
+	status_label.text = "Selected: %s (click=move, R=rotate, Del=delete)" % elem.get("name", "?")
 
-# ============ Properties Bar ============
+func _deselect() -> void:
+	selected_index = -1; _update_selection()
 
-func _update_properties_bar(placement: Dictionary) -> void:
-	var element = subset_loader.get_element(placement.get("element", ""))
-	var name = element.get("name", "Unknown")
-	var pos = placement.get("position", [0, 0])
-	var rot = placement.get("rotation", 0)
-	properties_bar_label.text = "%s  |  Pos: %d, %d  |  Rot: %d°  |  [R] rotate  [Del] delete" % [name, pos[0], pos[1], rot]
 
-# ============ Subset / Preset / Element List ============
+# ── Build 3D ──
+
+func _rebuild_all() -> void:
+	for c in preview_root.get_children(): c.queue_free()
+	placement_nodes.clear()
+	for i in range(placements.size()): _instantiate(i)
+	_rebuild_grid(); _update_selection()
+
+func _instantiate(index: int) -> void:
+	if index < 0 or index >= placements.size(): return
+	var p = placements[index]
+	var element = subset_loader.get_element(str(p.get("element", "")))
+	if element.is_empty(): return
+	var gs = _get_grid_size(); var pos = _safe_pos(p); var rot = int(p.get("rotation", 0))
+
+	var node = _create_element_3d(element, gs)
+	if not node: return
+
+	node.position = _cell_to_world(int(pos[0]), int(pos[1]))
+	if rot != 0: node.rotate_z(deg_to_rad(rot))  # XY plane: rotate around Z
+
+	# Debug label
+	var lbl = Label3D.new()
+	lbl.text = str(element.get("icon", "")) + " " + str(p.get("element", ""))
+	lbl.font_size = 32; lbl.pixel_size = 0.001; lbl.modulate = Color.YELLOW
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED; lbl.no_depth_test = true
+	var sz = _safe_size(element)
+	lbl.position = Vector3(sz[0] * gs * 0.5, sz[1] * gs + 0.02, 0)
+	node.add_child(lbl)
+
+	preview_root.add_child(node)
+	placement_nodes[index] = node
+
+func _create_element_3d(element: Dictionary, grid_size: float) -> Node3D:
+	var node: Node3D = null
+	var segment_type = str(element.get("segment_type", ""))
+	if not segment_type.is_empty() and subset_loader.current_subset_id == "glass_rack":
+		node = _create_glass_segment(element, grid_size)
+		if node:
+			# Glass generators build in YZ plane. Rotate 90° around Y to convert to XY.
+			# (0,y,z) → (z,y,0): Z becomes X, Y stays Y
+			node.rotation.y = PI / 2.0
+	if not node:
+		var scene_path = str(element.get("scene", ""))
+		if not scene_path.is_empty() and scene_path != "null" and ResourceLoader.exists(scene_path):
+			var scene = load(scene_path)
+			if scene:
+				node = scene.instantiate(); node.name = element.get("id", "element")
+	if not node:
+		node = _create_placeholder_3d(element, grid_size)
+	return node
+
+
+# ── Subset / Preset / Element list ──
 
 func _on_subsets_loaded() -> void:
 	subset_selector.clear()
@@ -817,351 +485,156 @@ func _on_subsets_loaded() -> void:
 		subset_selector.add_item(names[id])
 		subset_selector.set_item_metadata(subset_selector.item_count - 1, id)
 	if subset_selector.item_count > 0:
-		subset_selector.select(0)
-		_on_subset_selected(0)
+		subset_selector.select(0); _on_subset_selected(0)
 
 func _on_subset_selected(index: int) -> void:
-	var subset_id = subset_selector.get_item_metadata(index)
-	subset_loader.set_current_subset(subset_id)
+	subset_loader.set_current_subset(subset_selector.get_item_metadata(index))
+	_populate_elements(); _populate_presets(); _rebuild_grid()
+	camera_pan_offset = Vector3.ZERO; _fit_camera()
+	status_label.text = "Subset: " + subset_loader.current_subset.get("name", "?")
 
-	# Update orientation/grid from subset
-	var orient = subset_loader.get_orientation()
-	orientation = orient.get("plane", "XZ")
-	grid_size = orient.get("grid_size", 1.0)
-	_update_grid_plane()
-
-	# Update grid dimensions from subset defaults
-	var defaults = subset_loader.current_subset.get("defaults", {})
-	var gs = defaults.get("grid_size", [grid_dimensions.x, grid_dimensions.y])
-	if gs is Array and gs.size() >= 2:
-		grid_dimensions = Vector2i(int(gs[0]), int(gs[1]))
-
-	# Update hover indicator size for new grid_size
-	_setup_hover_indicator()
-
-	_populate_element_list()
-	_populate_preset_list()
-	_update_preview_grid()
-	_reset_camera_for_plane()
-	status_label.text = "Subset: " + subset_loader.current_subset.get("name", "Unknown")
-
-func _populate_element_list() -> void:
+func _populate_elements() -> void:
 	element_list.clear()
-	var categories = subset_loader.get_categories()
-	var elements = subset_loader.current_subset.get("elements", [])
-	for category in categories:
-		var cat_idx = element_list.add_item("── " + category.get("name", "Unknown") + " ──")
-		element_list.set_item_disabled(cat_idx, true)
-		element_list.set_item_selectable(cat_idx, false)
-		for element in elements:
-			if element.get("category") == category.get("id"):
-				var icon = element.get("icon", "?")
-				var ename = element.get("name", element.get("id", "?"))
-				var idx = element_list.add_item(icon + " " + ename)
-				element_list.set_item_metadata(idx, element)
+	for cat in subset_loader.get_categories():
+		var ci = element_list.add_item("── " + cat.get("name", "?") + " ──")
+		element_list.set_item_disabled(ci, true); element_list.set_item_selectable(ci, false)
+		for e in subset_loader.current_subset.get("elements", []):
+			if e.get("category") == cat.get("id"):
+				var sz = _safe_size(e)
+				var idx = element_list.add_item("%s %s (%dx%d)" % [e.get("icon", "?"), e.get("name", e.get("id", "?")), sz[0], sz[1]])
+				element_list.set_item_metadata(idx, e)
 
-func _populate_preset_list() -> void:
+func _populate_presets() -> void:
 	preset_selector.clear()
 	var presets = subset_loader.get_presets()
 	if presets.is_empty():
-		preset_selector.add_item("No presets")
-		preset_selector.set_item_disabled(0, true)
-		preset_selector.disabled = true
-		apply_preset_button.disabled = true
-		return
-	preset_selector.disabled = false
-	apply_preset_button.disabled = false
-	for preset in presets:
-		var preset_name = preset.get("name", preset.get("id", "Preset"))
-		preset_selector.add_item(preset_name)
-		preset_selector.set_item_metadata(preset_selector.item_count - 1, preset)
+		preset_selector.add_item("No presets"); preset_selector.disabled = true; apply_preset_button.disabled = true; return
+	preset_selector.disabled = false; apply_preset_button.disabled = false
+	for pr in presets:
+		preset_selector.add_item(pr.get("name", "Preset"))
+		preset_selector.set_item_metadata(preset_selector.item_count - 1, pr)
 	preset_selector.select(0)
 
 func _on_apply_preset_pressed() -> void:
-	if preset_selector.disabled or preset_selector.item_count == 0:
-		return
-	var selected_index = preset_selector.selected
-	if selected_index < 0:
-		selected_index = 0
-	var selected_preset = preset_selector.get_item_metadata(selected_index)
-	if not (selected_preset is Dictionary):
-		return
-	_apply_preset(selected_preset)
+	if preset_selector.disabled: return
+	var pr = preset_selector.get_item_metadata(preset_selector.selected)
+	if pr is Dictionary: _apply_preset(pr)
 
 func _apply_preset(preset: Dictionary) -> void:
-	var preset_name = preset.get("name", preset.get("id", "Preset"))
-	var preset_placements = preset.get("placements", [])
-	var cleaned_placements: Array = []
-	var skipped_count := 0
-
-	for i in range(preset_placements.size()):
-		var entry = preset_placements[i]
-		if not (entry is Dictionary):
-			skipped_count += 1
-			continue
-		var element_id = str(entry.get("element", ""))
-		if element_id.is_empty() or subset_loader.get_element(element_id).is_empty():
-			skipped_count += 1
-			continue
+	_push_undo(); placements.clear(); selected_index = -1
+	var pg = preset.get("grid_size", [16, 12])
+	if pg is Array and pg.size() >= 2: grid_dimensions = Vector2i(max(1, int(pg[0])), max(1, int(pg[1])))
+	for entry in preset.get("placements", []):
+		if not entry is Dictionary: continue
+		var eid = str(entry.get("element", ""))
+		if eid.is_empty() or subset_loader.get_element(eid).is_empty(): continue
 		var pos = entry.get("position", [0, 0])
-		if not (pos is Array) or pos.size() < 2:
-			skipped_count += 1
-			continue
-		var rotation = int(entry.get("rotation", 0)) % 360
-		if rotation < 0:
-			rotation += 360
-		rotation = int(round(float(rotation) / 90.0) * 90.0) % 360
-		cleaned_placements.append({
-			"id": "preset_%d" % (i + 1),
-			"element": element_id,
-			"position": [int(pos[0]), int(pos[1])],
-			"rotation": rotation,
-			"params": entry.get("params", {})
-		})
+		if not pos is Array or pos.size() < 2: continue
+		var rot = int(round(float(entry.get("rotation", 0)) / 90.0) * 90.0) % 360
+		if rot < 0: rot += 360
+		placements.append({"element": eid, "position": [int(pos[0]), int(pos[1])], "rotation": rot})
+	_rebuild_all(); camera_pan_offset = Vector3.ZERO; _fit_camera(); is_dirty = true
+	status_label.text = "Preset: %s (%d items)" % [preset.get("name", "?"), placements.size()]
 
-	var preset_grid = preset.get("grid_size", [grid_dimensions.x, grid_dimensions.y])
-	if preset_grid is Array and preset_grid.size() >= 2:
-		grid_dimensions = Vector2i(max(1, int(preset_grid[0])), max(1, int(preset_grid[1])))
+func _on_element_selected(index: int) -> void:
+	var e = element_list.get_item_metadata(index)
+	if e is Dictionary and not e.is_empty():
+		dragging_element = e; drag_rotation = 0
+		status_label.text = "Place: %s (click grid, R=rotate, Esc=cancel)" % e.get("name", "?")
 
-	_load_placements_data({
-		"grid_size": [grid_dimensions.x, grid_dimensions.y],
-		"placements": cleaned_placements
-	})
 
-	current_layout_path = ""
-	is_dirty = true
-	_clear_selection()
-	_update_preview_grid()
-	_reset_camera_for_plane()
-	status_label.text = "Preset applied: %s (%d items, %d skipped)" % [preset_name, cleaned_placements.size(), skipped_count]
+# ── File I/O ──
 
-func _on_element_list_selected(index: int) -> void:
-	var element = element_list.get_item_metadata(index)
-	if element is Dictionary and not element.is_empty():
-		dragging_element = element
-		drag_rotation = 0
-		_clear_selection()
-		status_label.text = "Place: " + element.get("name", "element") + "  (click grid, R to rotate, Esc to cancel)"
+func save_layout(path: String = "") -> void:
+	if path.is_empty(): path = current_layout_path
+	if path.is_empty(): _do_save(); return
+	var f = FileAccess.open(path, FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify({"version": "1.0", "subset": subset_loader.current_subset_id,
+			"name": path.get_file().get_basename(), "grid_size": [grid_dimensions.x, grid_dimensions.y],
+			"placements": placements}, "  "))
+		f.close(); current_layout_path = path; is_dirty = false
+		status_label.text = "Saved: " + path.get_file()
 
-# ============ Placement 3D Node Management ============
+func load_layout(path: String) -> void:
+	var f = FileAccess.open(path, FileAccess.READ)
+	if not f: status_label.text = "File not found"; return
+	var json = JSON.new()
+	if json.parse(f.get_as_text()) != OK: status_label.text = "Parse error"; return
+	f.close(); _push_undo()
+	var d = json.data; var sid = d.get("subset", "")
+	if subset_loader.subsets.has(sid):
+		subset_loader.set_current_subset(sid)
+		for i in range(subset_selector.item_count):
+			if subset_selector.get_item_metadata(i) == sid: subset_selector.select(i); break
+		_populate_elements(); _populate_presets()
+	var g = d.get("grid_size", [16, 12]); grid_dimensions = Vector2i(g[0], g[1])
+	placements = d.get("placements", [])
+	_rebuild_all(); camera_pan_offset = Vector3.ZERO; _fit_camera()
+	current_layout_path = path; is_dirty = false
+	status_label.text = "Loaded: " + path.get_file()
 
-func _instantiate_placement_3d(placement: Dictionary) -> void:
-	var element = subset_loader.get_element(placement.get("element", ""))
-	if element.is_empty():
-		return
-	var node = _create_element_3d(element, placement, grid_size)
-	if not node:
-		return
 
-	# Add collision for picking
-	_add_picking_collision(node, element, placement)
+# ============================================================
+# GLASS ELEMENT GENERATORS
+# ============================================================
+# These build geometry in YZ plane (Y=up, Z=horizontal).
+# _create_element_3d rotates the result 90° around Y to convert to XY.
+# Direction mapping (in YZ before rotation):
+#   0: bottom→+Z   →  after 90°Y rotation: bottom→+X = bottom→right = ╭
+#   90: bottom→-Z  →  bottom→-X = bottom→left = ╮
+#   180: top→-Z    →  top→-X = top→left = ╯
+#   270: top→+Z    →  top→+X = top→right = ╰
 
-	preview_root.add_child(node)
-	_placement_nodes[placement] = node
-
-func _remove_placement_node(placement: Dictionary) -> void:
-	if _placement_nodes.has(placement):
-		var node = _placement_nodes[placement] as Node3D
-		if node and is_instance_valid(node):
-			# Remove body references
-			_remove_body_refs(node)
-			node.queue_free()
-		_placement_nodes.erase(placement)
-
-func _remove_body_refs(node: Node3D) -> void:
-	for child in node.get_children():
-		if child is StaticBody3D:
-			_placement_bodies.erase(child)
-		elif child is Node3D:
-			_remove_body_refs(child)
-
-func _add_picking_collision(node: Node3D, element: Dictionary, placement: Dictionary) -> void:
-	var elem_size = element.get("size", [1, 1])
-	var rotation = placement.get("rotation", 0)
-	var rsize = _get_rotated_size(element, rotation)
-	var body = StaticBody3D.new()
-	body.name = "PickBody"
-	var shape = CollisionShape3D.new()
-	var box = BoxShape3D.new()
-	# Size the collision box to cover the element footprint
-	match orientation:
-		"XZ":
-			box.size = Vector3(rsize.x * grid_size, 0.2, rsize.y * grid_size)
-		"YZ":
-			box.size = Vector3(0.2, rsize.y * grid_size, rsize.x * grid_size)
-		"XY":
-			box.size = Vector3(rsize.x * grid_size, rsize.y * grid_size, 0.2)
-	shape.shape = box
-	body.add_child(shape)
-
-	# Position body at center of element footprint relative to node origin
-	var pos = placement.get("position", [0, 0])
-	var world_origin = _cell_to_world(pos[0], pos[1])
-	var world_center = _cell_center_world(pos[0], pos[1], rsize.x, rsize.y)
-	body.position = world_center - world_origin
-
-	node.add_child(body)
-	_placement_bodies[body] = placement
-
-func _rebuild_all_3d() -> void:
-	# Clear all existing nodes
-	for p in _placement_nodes:
-		var node = _placement_nodes[p] as Node3D
-		if node and is_instance_valid(node):
-			_remove_body_refs(node)
-			node.queue_free()
-	_placement_nodes.clear()
-	_placement_bodies.clear()
-
-	# Rebuild
-	for placement in placements:
-		_instantiate_placement_3d(placement)
-
-# ============ Element 3D Creation ============
-
-func _create_element_3d(element: Dictionary, placement: Dictionary, gs: float) -> Node3D:
-	var node: Node3D = null
-	var pos = placement.get("position", [0, 0])
-	var elem_size = element.get("size", [1, 1])
-	var rotation = placement.get("rotation", 0)
-
-	# Check for procedural glass generation
-	var segment_type = str(element.get("segment_type", ""))
-	if not segment_type.is_empty() and subset_loader.current_subset_id == "glass_rack":
-		node = _create_glass_segment(element, placement, gs)
-
-	# Try to load actual scene
-	if not node:
-		var scene_path = str(element.get("scene", ""))
-		if not scene_path.is_empty() and ResourceLoader.exists(scene_path):
-			var scene = load(scene_path)
-			if scene:
-				node = scene.instantiate()
-				node.name = element.get("id", "element")
-				var scale_arr = element.get("scene_scale", [1, 1, 1])
-				node.scale = Vector3(scale_arr[0], scale_arr[1], scale_arr[2])
-				var rot_y = element.get("rotation_y", 0)
-				node.rotation_degrees.y = rot_y + rotation
-
-	# Fallback to placeholder
-	if not node:
-		node = _create_placeholder_3d(element, gs)
-
-	# Position: direct cell-to-world, no flip
-	var scene_path2 = str(element.get("scene", ""))
-	if not scene_path2.is_empty() or not segment_type.is_empty():
-		# Scenes/procedural: origin at cell corner
-		node.position = _cell_to_world(pos[0], pos[1])
-	else:
-		# Placeholders: center in cell footprint
-		node.position = _cell_center_world(pos[0], pos[1], elem_size[0], elem_size[1])
-
-	# Apply placement rotation
-	if rotation != 0:
-		node.rotation_degrees.y += rotation
-
-	return node
-
-func _create_placeholder_3d(element: Dictionary, gs: float) -> Node3D:
-	var node = Node3D.new()
-	node.name = element.get("id", "element")
-	var elem_size = element.get("size", [1, 1])
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.name = "Mesh"
-	var mesh: Mesh
-	var category = element.get("category", "")
-	match category:
-		"sources":
-			mesh = CylinderMesh.new()
-			mesh.top_radius = elem_size[0] * gs * 0.4
-			mesh.bottom_radius = elem_size[0] * gs * 0.4
-			mesh.height = 0.3
-		"filters":
-			mesh = BoxMesh.new()
-			mesh.size = Vector3(elem_size[0] * gs * 0.8, 0.25, elem_size[1] * gs * 0.8)
-		"effects":
-			mesh = SphereMesh.new()
-			mesh.radius = elem_size[0] * gs * 0.35
-			mesh.height = elem_size[0] * gs * 0.7
-		"modulators":
-			mesh = PrismMesh.new()
-			mesh.size = Vector3(elem_size[0] * gs * 0.7, 0.3, elem_size[1] * gs * 0.7)
-		"outputs":
-			mesh = CylinderMesh.new()
-			mesh.top_radius = 0
-			mesh.bottom_radius = elem_size[0] * gs * 0.4
-			mesh.height = 0.4
-		_:
-			mesh = BoxMesh.new()
-			mesh.size = Vector3(elem_size[0] * gs * 0.8, 0.2, elem_size[1] * gs * 0.8)
-	mesh_instance.mesh = mesh
-	var mat = StandardMaterial3D.new()
-	var cat_color = _get_category_color(category)
-	mat.albedo_color = cat_color
-	mat.emission_enabled = true
-	mat.emission = cat_color * 0.3
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
-
-	var label = Label3D.new()
-	label.text = element.get("icon", "?")
-	label.position = Vector3(0, 0.35, 0)
-	label.pixel_size = 0.01
-	label.font_size = 32
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	node.add_child(label)
-	return node
-
-func _get_category_color(category: String) -> Color:
-	match category:
-		"sources": return Color(0.3, 0.69, 0.31)
-		"filters": return Color(0.13, 0.59, 0.95)
-		"effects": return Color(1.0, 0.6, 0.0)
-		"modulators": return Color(0.61, 0.15, 0.69)
-		"outputs": return Color(0.96, 0.26, 0.21)
-		_: return Color(0.5, 0.5, 0.5)
-
-# ============ Glass Segment Generators ============
-
-func _create_glass_segment(element: Dictionary, placement: Dictionary, gs: float) -> Node3D:
+func _create_glass_segment(element: Dictionary, grid_size: float) -> Node3D:
 	var segment_type = element.get("segment_type", "")
 	var elem_size = element.get("size", [1, 1])
 	var tube_radius = subset_loader.current_subset.get("defaults", {}).get("tube_radius", 0.015)
-	var width = elem_size[0] * gs
-	var height = elem_size[1] * gs
+	var width = elem_size[0] * grid_size
+	var height = elem_size[1] * grid_size
 
 	var glass_mat = StandardMaterial3D.new()
 	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass_mat.albedo_color = Color(0.85, 0.92, 1.0, 0.4)
-	glass_mat.metallic = 0.1
-	glass_mat.roughness = 0.05
+	glass_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	glass_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var bend_mat = glass_mat
 
 	var node: Node3D = null
+
 	match segment_type:
 		"straight":
-			node = _create_glass_tube_smooth(height, tube_radius, glass_mat)
-			node.position.z = width / 2
-		"corner":
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
-		"corner_bl":
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 90)
+			# Vertical tube: one grid unit longer, shifted -0.5 in y to meet bends
+			node = Node3D.new()
+			var mi = MeshInstance3D.new()
+			mi.mesh = _generate_tube_mesh(height + grid_size, tube_radius, 16, 2, 0.0, -grid_size * 0.5)
+			mi.material_override = glass_mat
+			node.add_child(mi)
+		"straight_h":
+			# Horizontal tube: vertices along Z, on grid (center_y=0), extended by 1 grid unit
+			node = Node3D.new()
+			var mi_h = MeshInstance3D.new()
+			mi_h.mesh = _generate_tube_mesh_horizontal(width + grid_size, tube_radius, 16, 2, 0.0, -grid_size * 0.5)
+			mi_h.material_override = glass_mat
+			node.add_child(mi_h)
+		"corner", "corner_bl":
+			node = _create_glass_elbow_directed(width, height, tube_radius, bend_mat, 180)
 		"corner_br":
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
+			node = _create_glass_elbow_directed(width, height, tube_radius, bend_mat, 270)
 		"corner_tr":
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 270)
+			node = _create_glass_elbow_directed(width, height, tube_radius, bend_mat, 0)
 		"corner_tl":
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 180)
+			node = _create_glass_elbow_directed(width, height, tube_radius, bend_mat, 90)
 		"corner45":
-			node = _create_glass_corner45_smooth(width, height, tube_radius, glass_mat)
+			node = _create_glass_corner45_smooth(width, height, tube_radius, bend_mat)
 		"wobbly":
-			node = _create_glass_wobbly_smooth(width, height, tube_radius, glass_mat)
+			node = _create_glass_wobbly_smooth(width, height, tube_radius, glass_mat, -grid_size * 0.5)
 		"reducer":
 			node = _create_glass_reducer_smooth(width, height, tube_radius, glass_mat)
 		"sbend":
-			node = _create_glass_sbend_smooth(width, height, tube_radius, glass_mat)
+			node = _create_glass_sbend_smooth(width, height, tube_radius, bend_mat)
 		"ubend":
-			node = _create_glass_ubend_smooth(width, height, tube_radius, glass_mat)
+			node = _create_glass_ubend_smooth(width, height, tube_radius, glass_mat, -grid_size * 0.5)
 		"ypipe":
 			node = _create_glass_ypipe_smooth(width, height, tube_radius, glass_mat)
 		"junction":
@@ -1181,78 +654,97 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, gs: float
 		"drip":
 			node = _create_glass_drip_smooth(width, height, tube_radius, glass_mat)
 		_:
-			push_warning("[GridEditor] Unknown segment_type '%s', falling back to tube" % segment_type)
 			node = _create_glass_tube_smooth(height, tube_radius, glass_mat)
 			node.position.x = width / 2
 
-	if node:
-		node.name = element.get("id", "segment")
+	if node: node.name = element.get("id", "segment")
 	return node
-
-# ============ Smooth Procedural Glass Tubes ============
 
 func _create_glass_tube_smooth(length: float, radius: float, mat: Material) -> Node3D:
 	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = _generate_tube_mesh(length, radius, 16, 2)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
+	var mi = MeshInstance3D.new()
+	mi.mesh = _generate_tube_mesh(length, radius, 16, 2)
+	mi.material_override = mat
+	node.add_child(mi)
 	return node
 
-func _generate_tube_mesh(length: float, radius: float, segments: int, rings: int) -> ArrayMesh:
+func _generate_tube_mesh(length: float, radius: float, segments: int, rings: int, center_z: float = 0.0, y_offset: float = 0.0) -> ArrayMesh:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for r in range(rings + 1):
-		var y = (float(r) / rings) * length
+		var y = y_offset + (float(r) / rings) * length
 		for s in range(segments + 1):
 			var angle = (float(s) / segments) * TAU
-			var x = cos(angle) * radius
-			var z = sin(angle) * radius
 			st.set_normal(Vector3(cos(angle), 0, sin(angle)))
 			st.set_uv(Vector2(float(s) / segments, float(r) / rings))
-			st.add_vertex(Vector3(x, y, z))
+			st.add_vertex(Vector3(cos(angle) * radius, y, center_z + sin(angle) * radius))
 	for r in range(rings):
 		for s in range(segments):
 			var curr = r * (segments + 1) + s
 			var next = curr + segments + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
+			st.add_index(curr); st.add_index(next); st.add_index(curr + 1)
+			st.add_index(curr + 1); st.add_index(next); st.add_index(next + 1)
+	st.generate_tangents()
+	return st.commit()
+
+func _generate_tube_mesh_horizontal(length: float, radius: float, segments: int, rings: int, center_y: float = 0.0, z_offset: float = 0.0) -> ArrayMesh:
+	# Tube along Z axis (horizontal in YZ plane)
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for r in range(rings + 1):
+		var z = z_offset + (float(r) / rings) * length
+		for s in range(segments + 1):
+			var angle = (float(s) / segments) * TAU
+			st.set_normal(Vector3(cos(angle), sin(angle), 0))
+			st.set_uv(Vector2(float(s) / segments, float(r) / rings))
+			st.add_vertex(Vector3(cos(angle) * radius, center_y + sin(angle) * radius, z))
+	for r in range(rings):
+		for s in range(segments):
+			var curr = r * (segments + 1) + s
+			var next = curr + segments + 1
+			st.add_index(curr); st.add_index(next); st.add_index(curr + 1)
+			st.add_index(curr + 1); st.add_index(next); st.add_index(next + 1)
+	st.generate_tangents()
+	return st.commit()
+
+func _generate_tube_mesh_along_x(length: float, radius: float, segments: int, rings: int, center_y: float = 0.0, x_offset: float = 0.0) -> ArrayMesh:
+	# Tube along X axis directly (no rotation needed for horizontal)
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for r in range(rings + 1):
+		var x = x_offset + (float(r) / rings) * length
+		for s in range(segments + 1):
+			var angle = (float(s) / segments) * TAU
+			st.set_normal(Vector3(0, cos(angle), sin(angle)))
+			st.set_uv(Vector2(float(s) / segments, float(r) / rings))
+			st.add_vertex(Vector3(x, center_y + cos(angle) * radius, sin(angle) * radius))
+	for r in range(rings):
+		for s in range(segments):
+			var curr = r * (segments + 1) + s
+			var next = curr + segments + 1
+			st.add_index(curr); st.add_index(next); st.add_index(curr + 1)
+			st.add_index(curr + 1); st.add_index(next); st.add_index(next + 1)
 	st.generate_tangents()
 	return st.commit()
 
 func _create_glass_elbow_directed(width: float, height: float, radius: float, mat: Material, direction: int) -> Node3D:
 	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var arc_radius = min(width, height) / 2.0
-	var center_y = height / 2.0
-	var center_z = width / 2.0
-	mesh_instance.mesh = _generate_directed_elbow_yz(arc_radius, radius, center_y, center_z, direction, 16, 16)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
+	var mi = MeshInstance3D.new()
+	var arc_r = min(width, height) / 2.0
+	mi.mesh = _generate_directed_elbow_yz(arc_r, radius, height / 2.0, width / 2.0, direction, 16, 16)
+	mi.material_override = mat
+	node.add_child(mi)
 	return node
 
 func _generate_directed_elbow_yz(arc_radius: float, tube_radius: float, center_y: float, center_z: float, direction: int, tube_segs: int, bend_segs: int) -> ArrayMesh:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var start_angle: float
-	var end_angle: float
+	var start_angle: float; var end_angle: float
 	match direction:
-		0:
-			start_angle = -PI / 2.0
-			end_angle = 0.0
-		90:
-			start_angle = -PI / 2.0
-			end_angle = -PI
-		180:
-			start_angle = PI / 2.0
-			end_angle = PI
-		_:
-			start_angle = PI / 2.0
-			end_angle = 0.0
+		0: start_angle = -PI / 2.0; end_angle = 0.0
+		90: start_angle = -PI / 2.0; end_angle = -PI
+		180: start_angle = PI / 2.0; end_angle = PI
+		_: start_angle = PI / 2.0; end_angle = 0.0
 	var prev_normal := Vector3.ZERO
 	for b in range(bend_segs + 1):
 		var t = float(b) / bend_segs
@@ -1260,573 +752,235 @@ func _generate_directed_elbow_yz(arc_radius: float, tube_radius: float, center_y
 		var center = Vector3(0, center_y + arc_radius * sin(angle), center_z + arc_radius * cos(angle))
 		var d_angle = end_angle - start_angle
 		var tangent = Vector3(0, arc_radius * cos(angle) * d_angle, -arc_radius * sin(angle) * d_angle).normalized()
-		var normal: Vector3
-		var binormal: Vector3
+		var normal: Vector3; var binormal: Vector3
 		if prev_normal == Vector3.ZERO:
-			var ref = Vector3.RIGHT
-			normal = tangent.cross(ref)
-			if normal.length_squared() < 0.001:
-				ref = Vector3.UP
-				normal = tangent.cross(ref)
+			normal = tangent.cross(Vector3.RIGHT)
+			if normal.length_squared() < 0.001: normal = tangent.cross(Vector3.UP)
 			normal = normal.normalized()
 		else:
 			normal = prev_normal - tangent * tangent.dot(prev_normal)
-			if normal.length_squared() < 0.001:
-				normal = prev_normal
-			else:
-				normal = normal.normalized()
-		binormal = tangent.cross(normal).normalized()
-		prev_normal = normal
+			if normal.length_squared() < 0.001: normal = prev_normal
+			else: normal = normal.normalized()
+		binormal = tangent.cross(normal).normalized(); prev_normal = normal
 		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
+			var ra = (float(s) / tube_segs) * TAU
+			var offset = (normal * cos(ra) + binormal * sin(ra)) * tube_radius
+			st.set_normal(offset.normalized()); st.set_uv(Vector2(float(s) / tube_segs, t))
 			st.add_vertex(center + offset)
 	for b in range(bend_segs):
 		for s in range(tube_segs):
-			var curr = b * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
+			var curr = b * (tube_segs + 1) + s; var next = curr + tube_segs + 1
+			st.add_index(curr); st.add_index(next); st.add_index(curr + 1)
+			st.add_index(curr + 1); st.add_index(next); st.add_index(next + 1)
 	st.generate_tangents()
 	return st.commit()
 
-func _create_glass_sbend_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = _generate_sbend_mesh_yz(height, width, radius, 16, 24)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
+func _create_glass_sbend_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	mi.mesh = _generate_sbend_mesh_yz(h, w, r, 16, 24); mi.material_override = mat
+	node.add_child(mi); return node
+
+func _generate_sbend_mesh_yz(height: float, width: float, tr: float, ts: int, ls: int) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for l in range(ls + 1):
+		var t = float(l) / ls; var y = t * height; var z = width * (0.5 - 0.5 * cos(PI * t))
+		var dy = height / ls; var dz = width * 0.5 * PI * sin(PI * t) / ls
+		var tang = Vector3(0, dy, dz).normalized(); var bn = Vector3(1, 0, 0); var n = bn.cross(tang).normalized()
+		for s in range(ts + 1):
+			var ra = (float(s) / ts) * TAU; var ro = (n * cos(ra) + bn * sin(ra)) * tr
+			st.set_normal(ro.normalized()); st.set_uv(Vector2(float(s) / ts, t)); st.add_vertex(Vector3(0, y, z) + ro)
+	for l in range(ls):
+		for s in range(ts):
+			var c = l * (ts + 1) + s; var nx = c + ts + 1
+			st.add_index(c); st.add_index(nx); st.add_index(c + 1)
+			st.add_index(c + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_glass_ubend_smooth(w: float, h: float, r: float, mat: Material, y_offset: float = 0.0) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	mi.mesh = _generate_ubend_mesh_yz(w, h, r, 16, 20, y_offset); mi.material_override = mat
+	node.add_child(mi); return node
+
+func _generate_ubend_mesh_yz(width: float, height: float, tr: float, ts: int, bs: int, y_offset: float = 0.0) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var cz = width / 2.0; var ar = cz - tr; var yt = height; var yb = tr; var ys = yt - yb
+	for b in range(bs + 1):
+		var t = float(b) / bs; var a = PI * t; var z = cz - ar * cos(a); var y = y_offset + yt - ys * sin(a)
+		var tang = Vector3(0, -ys * cos(a), ar * sin(a)).normalized(); var bn = Vector3(1, 0, 0); var n = bn.cross(tang).normalized()
+		for s in range(ts + 1):
+			var ra = (float(s) / ts) * TAU; var off = (n * cos(ra) + bn * sin(ra)) * tr
+			st.set_normal(off.normalized()); st.set_uv(Vector2(float(s) / ts, t)); st.add_vertex(Vector3(0, y, z) + off)
+	for b in range(bs):
+		for s in range(ts):
+			var c = b * (ts + 1) + s; var nx = c + ts + 1
+			st.add_index(c); st.add_index(nx); st.add_index(c + 1)
+			st.add_index(c + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_glass_tee_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var cz = w / 2; var cy = h / 2
+	var vert = _create_glass_tube_smooth(h, r, mat); vert.position.z = cz; node.add_child(vert)
+	var horiz = MeshInstance3D.new(); horiz.mesh = _generate_tube_mesh(w / 2, r, 16, 2)
+	horiz.material_override = mat; horiz.rotation.x = PI / 2; horiz.position = Vector3(0, cy, cz); node.add_child(horiz)
+	var sp = MeshInstance3D.new(); var sm = SphereMesh.new(); sm.radius = r * 1.5; sm.height = r * 3
+	sp.mesh = sm; sp.material_override = mat; sp.position = Vector3(0, cy, cz); node.add_child(sp)
 	return node
 
-func _generate_sbend_mesh_yz(height: float, width: float, tube_radius: float, tube_segs: int, len_segs: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for l in range(len_segs + 1):
-		var t = float(l) / len_segs
-		var y = t * height
-		var z = width * (0.5 - 0.5 * cos(PI * t))
-		var center = Vector3(0, y, z)
-		var dy = height / len_segs
-		var dz = width * 0.5 * PI * sin(PI * t) / len_segs
-		var tangent = Vector3(0, dy, dz).normalized()
-		var binormal = Vector3(1, 0, 0)
-		var normal = binormal.cross(tangent).normalized()
-		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var ring_offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(ring_offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(center + ring_offset)
-	for l in range(len_segs):
-		for s in range(tube_segs):
-			var curr = l * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-func _create_glass_ubend_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = _generate_ubend_mesh_yz(width, height, radius, 16, 20)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
-	return node
-
-func _generate_ubend_mesh_yz(width: float, height: float, tube_radius: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var center_z = width / 2.0
-	var arc_radius = center_z - tube_radius
-	var y_top = height
-	var y_bottom = tube_radius
-	var y_span = y_top - y_bottom
-	for b in range(bend_segs + 1):
-		var t = float(b) / bend_segs
-		var angle = PI * t
-		var z = center_z - arc_radius * cos(angle)
-		var y = y_top - y_span * sin(angle)
-		var center = Vector3(0, y, z)
-		var tangent = Vector3(0, -y_span * cos(angle), arc_radius * sin(angle)).normalized()
-		var binormal = Vector3(1, 0, 0)
-		var normal = binormal.cross(tangent).normalized()
-		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(center + offset)
-	for b in range(bend_segs):
-		for s in range(tube_segs):
-			var curr = b * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-func _create_glass_tee_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var center_z = width / 2
-	var center_y = height / 2
-	var vert = _create_glass_tube_smooth(height, radius, mat)
-	vert.position.z = center_z
-	node.add_child(vert)
-	var horiz = MeshInstance3D.new()
-	horiz.mesh = _generate_tube_mesh(width / 2, radius, 16, 2)
-	horiz.material_override = mat
-	horiz.rotation.x = PI / 2
-	horiz.position = Vector3(0, center_y, center_z)
-	node.add_child(horiz)
-	var sphere = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = radius * 1.5
-	sphere_mesh.height = radius * 3
-	sphere.mesh = sphere_mesh
-	sphere.material_override = mat
-	sphere.position = Vector3(0, center_y, center_z)
-	node.add_child(sphere)
-	return node
-
-func _create_glass_ypipe_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var center_z = width / 2
-	var junction_y = height * 0.35
-	var stem = _create_glass_tube_smooth(junction_y, radius, mat)
-	stem.position.z = center_z
-	node.add_child(stem)
-	var branch_length = height * 0.55
-	var spread = PI / 5
+func _create_glass_ypipe_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var cz = w / 2; var jy = h * 0.35
+	var stem = _create_glass_tube_smooth(jy, r, mat); stem.position.z = cz; node.add_child(stem)
 	for side in [-1, 1]:
-		var branch = MeshInstance3D.new()
-		branch.mesh = _generate_tube_mesh(branch_length, radius, 16, 2)
-		branch.material_override = mat
-		branch.position = Vector3(0, junction_y, center_z)
-		branch.rotation.x = side * spread
-		node.add_child(branch)
-	var sphere = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = radius * 2
-	sphere_mesh.height = radius * 4
-	sphere.mesh = sphere_mesh
-	sphere.material_override = mat
-	sphere.position = Vector3(0, junction_y, center_z)
-	node.add_child(sphere)
+		var br = MeshInstance3D.new(); br.mesh = _generate_tube_mesh(h * 0.55, r, 16, 2)
+		br.material_override = mat; br.position = Vector3(0, jy, cz); br.rotation.x = side * PI / 5; node.add_child(br)
+	var sp = MeshInstance3D.new(); var sm = SphereMesh.new(); sm.radius = r * 2; sm.height = r * 4
+	sp.mesh = sm; sp.material_override = mat; sp.position = Vector3(0, jy, cz); node.add_child(sp)
 	return node
 
-func _create_glass_cross_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+func _create_glass_cross_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var c = Vector3(0, h / 2, w / 2)
+	var vert = _create_glass_tube_smooth(h, r, mat); vert.position.z = c.z; node.add_child(vert)
+	var horiz = MeshInstance3D.new(); horiz.mesh = _generate_tube_mesh(w, r, 16, 2)
+	horiz.material_override = mat; horiz.rotation.x = PI / 2; horiz.position = c; node.add_child(horiz)
+	var sp = MeshInstance3D.new(); var sm = SphereMesh.new(); sm.radius = r * 1.8; sm.height = r * 3.6
+	sp.mesh = sm; sp.material_override = mat; sp.position = c; node.add_child(sp)
+	return node
+
+func _create_glass_spiral_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	mi.mesh = _generate_spiral_mesh(h, w * 0.35, r, 4, 12, 48)
+	mi.material_override = mat; mi.position.z = w / 2; node.add_child(mi); return node
+
+func _generate_spiral_mesh(h: float, cr: float, tr: float, turns: int, ts: int, cs: int) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for c in range(cs + 1):
+		var t = float(c) / cs; var ca = t * turns * TAU; var y = t * h
+		var center = Vector3(cr * cos(ca), y, cr * sin(ca))
+		var dx = -cr * sin(ca) * turns * TAU / cs; var dy = h / cs; var dz = cr * cos(ca) * turns * TAU / cs
+		var tang = Vector3(dx, dy, dz).normalized()
+		var bn = tang.cross(Vector3.UP).normalized(); var n = bn.cross(tang).normalized()
+		for s in range(ts + 1):
+			var ra = (float(s) / ts) * TAU; var off = (n * cos(ra) + bn * sin(ra)) * tr
+			st.set_normal(off.normalized()); st.set_uv(Vector2(float(s) / ts, t)); st.add_vertex(center + off)
+	for c2 in range(cs):
+		for s in range(ts):
+			var cu = c2 * (ts + 1) + s; var nx = cu + ts + 1
+			st.add_index(cu); st.add_index(nx); st.add_index(cu + 1)
+			st.add_index(cu + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_glass_condenser_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
 	var node = Node3D.new()
-	var center = Vector3(0, height / 2, width / 2)
-	var vert = _create_glass_tube_smooth(height, radius, mat)
-	vert.position.z = center.z
-	node.add_child(vert)
-	var horiz = MeshInstance3D.new()
-	horiz.mesh = _generate_tube_mesh(width, radius, 16, 2)
-	horiz.material_override = mat
-	horiz.rotation.x = PI / 2
-	horiz.position = center
-	node.add_child(horiz)
-	var sphere = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = radius * 1.8
-	sphere_mesh.height = radius * 3.6
-	sphere.mesh = sphere_mesh
-	sphere.material_override = mat
-	sphere.position = center
-	node.add_child(sphere)
+	var inner = _create_glass_tube_smooth(h, r, mat); inner.position.z = w / 2; node.add_child(inner)
+	var jacket = _create_glass_tube_smooth(h * 0.7, r * 2.5, mat); jacket.position = Vector3(0, h * 0.15, w / 2); node.add_child(jacket)
 	return node
 
-func _create_glass_spiral_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
+func _create_glass_flask_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
 	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var coil_radius = width * 0.35
-	mesh_instance.mesh = _generate_spiral_mesh(height, coil_radius, radius, 4, 12, 48)
-	mesh_instance.material_override = mat
-	mesh_instance.position.z = width / 2
-	node.add_child(mesh_instance)
+	var bulb = MeshInstance3D.new(); var sm = SphereMesh.new(); sm.radius = w * 0.4; sm.height = w * 0.8
+	bulb.mesh = sm; bulb.material_override = mat; bulb.position = Vector3(0, w * 0.4, w / 2); node.add_child(bulb)
+	var neck = _create_glass_tube_smooth(h - w * 0.7, r, mat)
+	neck.position = Vector3(0, w * 0.7, w / 2); node.add_child(neck); return node
+
+func _create_glass_beaker_smooth(w: float, h: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	var cyl = CylinderMesh.new(); cyl.top_radius = w * 0.4; cyl.bottom_radius = w * 0.35; cyl.height = h * 0.9
+	mi.mesh = cyl; mi.material_override = mat; mi.position = Vector3(0, h * 0.45, w / 2)
+	node.add_child(mi); return node
+
+func _create_glass_cap_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	var sp = SphereMesh.new(); sp.radius = min(w, h) * 0.4; sp.height = sp.radius * 2.0; sp.is_hemisphere = true
+	mi.mesh = sp; mi.material_override = mat; mi.rotation.x = PI; mi.position = Vector3(0, h * 0.5, w / 2.0)
+	node.add_child(mi); return node
+
+func _create_glass_drip_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	var cone = CylinderMesh.new(); cone.top_radius = r; cone.bottom_radius = r * 0.3; cone.height = h * 0.8
+	mi.mesh = cone; mi.material_override = mat; mi.position = Vector3(0, h * 0.5, w / 2.0)
+	node.add_child(mi); return node
+
+func _create_glass_corner45_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	var ar = min(w, h) / 2.0
+	mi.mesh = _generate_corner45_mesh_yz(ar, r, h / 2.0, w / 2.0, 16, 12)
+	mi.material_override = mat; node.add_child(mi); return node
+
+func _generate_corner45_mesh_yz(ar: float, tr: float, cy: float, cz: float, ts: int, bs: int) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var sa = -PI / 2.0; var ea = -PI / 4.0; var pn := Vector3.ZERO
+	for b in range(bs + 1):
+		var t = float(b) / bs; var a = lerpf(sa, ea, t)
+		var center = Vector3(0, cy + ar * sin(a), cz + ar * cos(a))
+		var da = ea - sa; var tang = Vector3(0, ar * cos(a) * da, -ar * sin(a) * da).normalized()
+		var n: Vector3; var bn: Vector3
+		if pn == Vector3.ZERO:
+			n = tang.cross(Vector3.RIGHT); if n.length_squared() < 0.001: n = tang.cross(Vector3.UP)
+			n = n.normalized()
+		else: n = pn - tang * tang.dot(pn); n = pn if n.length_squared() < 0.001 else n.normalized()
+		bn = tang.cross(n).normalized(); pn = n
+		for s in range(ts + 1):
+			var ra = (float(s) / ts) * TAU; var off = (n * cos(ra) + bn * sin(ra)) * tr
+			st.set_normal(off.normalized()); st.set_uv(Vector2(float(s) / ts, t)); st.add_vertex(center + off)
+	for b2 in range(bs):
+		for s in range(ts):
+			var c = b2 * (ts + 1) + s; var nx = c + ts + 1
+			st.add_index(c); st.add_index(nx); st.add_index(c + 1)
+			st.add_index(c + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_glass_wobbly_smooth(w: float, h: float, r: float, mat: Material, y_offset: float = 0.0) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	var cz = w / 2.0; var amp = max(r * 1.5, w * 0.2); var wc = max(2.0, h / max(w * 0.4, 0.001))
+	mi.mesh = _generate_wobbly_mesh_yz(h, cz, amp, wc, r, 16, 32, y_offset)
+	mi.material_override = mat; node.add_child(mi); return node
+
+func _generate_wobbly_mesh_yz(h: float, cz: float, amp: float, wc: float, tr: float, ts: int, ls: int, y_offset: float = 0.0) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for l in range(ls + 1):
+		var t = float(l) / ls; var y = y_offset + t * h; var z = cz + sin(t * TAU * wc) * amp
+		var dy = h / ls; var dz = cos(t * TAU * wc) * amp * TAU * wc / ls
+		var tang = Vector3(0, dy, dz).normalized(); var bn = Vector3(1, 0, 0); var n = bn.cross(tang).normalized()
+		for s in range(ts + 1):
+			var ra = (float(s) / ts) * TAU; var ro = (n * cos(ra) + bn * sin(ra)) * tr
+			st.set_normal(ro.normalized()); st.set_uv(Vector2(float(s) / ts, t)); st.add_vertex(Vector3(0, y, z) + ro)
+	for l2 in range(ls):
+		for s in range(ts):
+			var c = l2 * (ts + 1) + s; var nx = c + ts + 1
+			st.add_index(c); st.add_index(nx); st.add_index(c + 1)
+			st.add_index(c + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_glass_reducer_smooth(w: float, h: float, r: float, mat: Material) -> Node3D:
+	var node = Node3D.new(); var mi = MeshInstance3D.new()
+	mi.mesh = _generate_reducer_mesh_yz(h, w / 2.0, r, r * 0.6, 16, 8)
+	mi.material_override = mat; node.add_child(mi); return node
+
+func _generate_reducer_mesh_yz(h: float, cz: float, br: float, tr: float, ts: int, rs: int) -> ArrayMesh:
+	var st = SurfaceTool.new(); st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for r in range(rs + 1):
+		var t = float(r) / rs; var y = t * h; var cr = lerpf(br, tr, t)
+		for s in range(ts + 1):
+			var th = (float(s) / ts) * TAU
+			st.set_normal(Vector3(cos(th), 0, sin(th))); st.set_uv(Vector2(float(s) / ts, t))
+			st.add_vertex(Vector3(cr * cos(th), y, cz + cr * sin(th)))
+	for r2 in range(rs):
+		for s in range(ts):
+			var c = r2 * (ts + 1) + s; var nx = c + ts + 1
+			st.add_index(c); st.add_index(nx); st.add_index(c + 1)
+			st.add_index(c + 1); st.add_index(nx); st.add_index(nx + 1)
+	st.generate_tangents(); return st.commit()
+
+func _create_placeholder_3d(element: Dictionary, grid_size: float) -> Node3D:
+	var node = Node3D.new(); node.name = element.get("id", "element")
+	var sz = _safe_size(element); var mi = MeshInstance3D.new()
+	var mesh = BoxMesh.new(); mesh.size = Vector3(sz[0] * grid_size * 0.8, sz[1] * grid_size * 0.8, 0.01)
+	mi.mesh = mesh
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.4, 0.5, 0.6); mat.emission_enabled = true; mat.emission = Color(0.2, 0.3, 0.4)
+	mi.material_override = mat; mi.position = Vector3(sz[0] * grid_size * 0.5, sz[1] * grid_size * 0.5, 0)
+	node.add_child(mi)
+	var label = Label3D.new(); label.text = element.get("icon", "?")
+	label.position = Vector3(sz[0] * grid_size * 0.5, sz[1] * grid_size * 0.5, 0.01)
+	label.pixel_size = 0.005; label.font_size = 32; label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	node.add_child(label)
 	return node
-
-func _generate_spiral_mesh(height: float, coil_radius: float, tube_radius: float, turns: int, tube_segs: int, coil_segs: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for c in range(coil_segs + 1):
-		var t = float(c) / coil_segs
-		var coil_angle = t * turns * TAU
-		var y = t * height
-		var center = Vector3(coil_radius * cos(coil_angle), y, coil_radius * sin(coil_angle))
-		var dx = -coil_radius * sin(coil_angle) * turns * TAU / coil_segs
-		var dy = height / coil_segs
-		var dz = coil_radius * cos(coil_angle) * turns * TAU / coil_segs
-		var tangent = Vector3(dx, dy, dz).normalized()
-		var up = Vector3(0, 1, 0)
-		var binormal = tangent.cross(up).normalized()
-		var normal = binormal.cross(tangent).normalized()
-		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(center + offset)
-	for c in range(coil_segs):
-		for s in range(tube_segs):
-			var curr = c * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-func _create_glass_condenser_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var inner = _create_glass_tube_smooth(height, radius, mat)
-	inner.position.z = width / 2
-	node.add_child(inner)
-	var jacket = _create_glass_tube_smooth(height * 0.7, radius * 2.5, mat)
-	jacket.position = Vector3(0, height * 0.15, width / 2)
-	node.add_child(jacket)
-	return node
-
-func _create_glass_flask_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var bulb = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = width * 0.4
-	sphere_mesh.height = width * 0.8
-	bulb.mesh = sphere_mesh
-	bulb.material_override = mat
-	bulb.position = Vector3(0, width * 0.4, width / 2)
-	node.add_child(bulb)
-	var neck_height = height - width * 0.7
-	var neck = _create_glass_tube_smooth(neck_height, radius, mat)
-	neck.position = Vector3(0, width * 0.7, width / 2)
-	node.add_child(neck)
-	return node
-
-func _create_glass_beaker_smooth(width: float, height: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var cyl = CylinderMesh.new()
-	cyl.top_radius = width * 0.4
-	cyl.bottom_radius = width * 0.35
-	cyl.height = height * 0.9
-	mesh_instance.mesh = cyl
-	mesh_instance.material_override = mat
-	mesh_instance.position = Vector3(0, height * 0.45, width / 2)
-	node.add_child(mesh_instance)
-	return node
-
-func _create_glass_cap_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var cap_radius = min(width, height) * 0.4
-	var sphere = SphereMesh.new()
-	sphere.radius = cap_radius
-	sphere.height = cap_radius * 2.0
-	sphere.is_hemisphere = true
-	mesh_instance.mesh = sphere
-	mesh_instance.material_override = mat
-	mesh_instance.rotation.x = PI
-	mesh_instance.position = Vector3(0, height * 0.5, width / 2.0)
-	node.add_child(mesh_instance)
-	return node
-
-func _create_glass_drip_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var cone = CylinderMesh.new()
-	cone.top_radius = radius
-	cone.bottom_radius = radius * 0.3
-	cone.height = height * 0.8
-	mesh_instance.mesh = cone
-	mesh_instance.material_override = mat
-	mesh_instance.position = Vector3(0, height * 0.5, width / 2.0)
-	node.add_child(mesh_instance)
-	return node
-
-func _create_glass_corner45_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var arc_radius = min(width, height) / 2.0
-	var center_y = height / 2.0
-	var center_z = width / 2.0
-	mesh_instance.mesh = _generate_corner45_mesh_yz(arc_radius, radius, center_y, center_z, 16, 12)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
-	return node
-
-func _generate_corner45_mesh_yz(arc_radius: float, tube_radius: float, center_y: float, center_z: float, tube_segs: int, bend_segs: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var start_angle = -PI / 2.0
-	var end_angle = -PI / 4.0
-	var prev_normal := Vector3.ZERO
-	for b in range(bend_segs + 1):
-		var t = float(b) / bend_segs
-		var angle = lerpf(start_angle, end_angle, t)
-		var center = Vector3(0, center_y + arc_radius * sin(angle), center_z + arc_radius * cos(angle))
-		var d_angle = end_angle - start_angle
-		var tangent = Vector3(0, arc_radius * cos(angle) * d_angle, -arc_radius * sin(angle) * d_angle).normalized()
-		var normal: Vector3
-		var binormal: Vector3
-		if prev_normal == Vector3.ZERO:
-			var ref = Vector3.RIGHT
-			normal = tangent.cross(ref)
-			if normal.length_squared() < 0.001:
-				normal = tangent.cross(Vector3.UP)
-			normal = normal.normalized()
-		else:
-			normal = prev_normal - tangent * tangent.dot(prev_normal)
-			if normal.length_squared() < 0.001:
-				normal = prev_normal
-			else:
-				normal = normal.normalized()
-		binormal = tangent.cross(normal).normalized()
-		prev_normal = normal
-		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(center + offset)
-	for b in range(bend_segs):
-		for s in range(tube_segs):
-			var curr = b * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-func _create_glass_wobbly_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var center_z = width / 2.0
-	var amplitude = max(radius * 1.5, width * 0.2)
-	var wave_count = max(2.0, height / max(width * 0.4, 0.001))
-	mesh_instance.mesh = _generate_wobbly_mesh_yz(height, center_z, amplitude, wave_count, radius, 16, 32)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
-	return node
-
-func _generate_wobbly_mesh_yz(height: float, center_z: float, amplitude: float, wave_count: float, tube_radius: float, tube_segs: int, len_segs: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for l in range(len_segs + 1):
-		var t = float(l) / len_segs
-		var y = t * height
-		var z = center_z + sin(t * TAU * wave_count) * amplitude
-		var center = Vector3(0, y, z)
-		var dy = height / len_segs
-		var dz = cos(t * TAU * wave_count) * amplitude * TAU * wave_count / len_segs
-		var tangent = Vector3(0, dy, dz).normalized()
-		var binormal = Vector3(1, 0, 0)
-		var normal = binormal.cross(tangent).normalized()
-		for s in range(tube_segs + 1):
-			var ring_angle = (float(s) / tube_segs) * TAU
-			var ring_offset = (normal * cos(ring_angle) + binormal * sin(ring_angle)) * tube_radius
-			st.set_normal(ring_offset.normalized())
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(center + ring_offset)
-	for l in range(len_segs):
-		for s in range(tube_segs):
-			var curr = l * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-func _create_glass_reducer_smooth(width: float, height: float, radius: float, mat: Material) -> Node3D:
-	var node = Node3D.new()
-	var mesh_instance = MeshInstance3D.new()
-	var center_z = width / 2.0
-	var top_radius = radius * 0.6
-	mesh_instance.mesh = _generate_reducer_mesh_yz(height, center_z, radius, top_radius, 16, 8)
-	mesh_instance.material_override = mat
-	node.add_child(mesh_instance)
-	return node
-
-func _generate_reducer_mesh_yz(height: float, center_z: float, bottom_radius: float, top_radius: float, tube_segs: int, rings: int) -> ArrayMesh:
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for r in range(rings + 1):
-		var t = float(r) / rings
-		var y = t * height
-		var current_radius = lerpf(bottom_radius, top_radius, t)
-		for s in range(tube_segs + 1):
-			var theta = (float(s) / tube_segs) * TAU
-			var offset = Vector3(current_radius * cos(theta), 0, current_radius * sin(theta))
-			var vert = Vector3(offset.x, y, center_z + offset.z)
-			st.set_normal(Vector3(cos(theta), 0, sin(theta)))
-			st.set_uv(Vector2(float(s) / tube_segs, t))
-			st.add_vertex(vert)
-	for r in range(rings):
-		for s in range(tube_segs):
-			var curr = r * (tube_segs + 1) + s
-			var next = curr + tube_segs + 1
-			st.add_index(curr)
-			st.add_index(next)
-			st.add_index(curr + 1)
-			st.add_index(curr + 1)
-			st.add_index(next)
-			st.add_index(next + 1)
-	st.generate_tangents()
-	return st.commit()
-
-# ============ File Operations ============
-
-func new_layout() -> void:
-	_clear_all_placements()
-	current_layout_path = ""
-	is_dirty = false
-	_clear_selection()
-	status_label.text = "New layout"
-
-func save_layout(path: String = "") -> void:
-	if path.is_empty():
-		path = current_layout_path
-	if path.is_empty():
-		return
-	var data = {
-		"version": "1.0",
-		"subset": subset_loader.current_subset_id,
-		"name": path.get_file().get_basename(),
-		"grid_size": [grid_dimensions.x, grid_dimensions.y],
-		"placements": placements
-	}
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(data, "  "))
-	file.close()
-	current_layout_path = path
-	is_dirty = false
-	status_label.text = "Saved: " + path.get_file()
-
-func load_layout(path: String) -> void:
-	if not FileAccess.file_exists(path):
-		push_error("File not found: ", path)
-		return
-	var file = FileAccess.open(path, FileAccess.READ)
-	var json = JSON.new()
-	var error = json.parse(file.get_as_text())
-	file.close()
-	if error != OK:
-		push_error("Failed to parse: ", path)
-		return
-	var data = json.data
-
-	# Set subset
-	var subset_id = data.get("subset", "")
-	if subset_loader.subsets.has(subset_id):
-		subset_loader.set_current_subset(subset_id)
-		for i in range(subset_selector.item_count):
-			if subset_selector.get_item_metadata(i) == subset_id:
-				subset_selector.select(i)
-				break
-		var orient = subset_loader.get_orientation()
-		orientation = orient.get("plane", "XZ")
-		grid_size = orient.get("grid_size", 1.0)
-		_update_grid_plane()
-		_populate_element_list()
-		_populate_preset_list()
-
-	_load_placements_data(data)
-	_update_preview_grid()
-	_reset_camera_for_plane()
-	current_layout_path = path
-	is_dirty = false
-	status_label.text = "Loaded: " + path.get_file()
-
-func _load_placements_data(data: Dictionary) -> void:
-	var gs = data.get("grid_size", [grid_dimensions.x, grid_dimensions.y])
-	if gs is Array and gs.size() >= 2:
-		grid_dimensions = Vector2i(int(gs[0]), int(gs[1]))
-	placements = data.get("placements", []).duplicate(true)
-	_clear_selection()
-	_rebuild_all_3d()
-
-func _clear_all_placements() -> void:
-	for p in _placement_nodes:
-		var node = _placement_nodes[p] as Node3D
-		if node and is_instance_valid(node):
-			_remove_body_refs(node)
-			node.queue_free()
-	_placement_nodes.clear()
-	_placement_bodies.clear()
-	placements.clear()
-
-func get_layout_data() -> Dictionary:
-	return {
-		"grid_size": [grid_dimensions.x, grid_dimensions.y],
-		"placements": placements.duplicate(true)
-	}
-
-func export_to_config(path: String) -> void:
-	var data = get_layout_data()
-	var subset = subset_loader.current_subset
-	var path_string = _generate_path_string(data.placements)
-	var schematic = _generate_schematic(data)
-	var config = {
-		"name": path.get_file().get_basename(),
-		"schematic": schematic,
-		"path": path_string,
-		"layout": {
-			"segment_length": subset.get("orientation", {}).get("grid_size", 0.1),
-			"tube_radius": 0.015
-		}
-	}
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(config, "  "))
-	file.close()
-	status_label.text = "Exported: " + path.get_file()
-
-func _generate_path_string(p_placements: Array) -> String:
-	var parts = []
-	for p in p_placements:
-		var element = subset_loader.get_element(p.get("element", ""))
-		var cmd = element.get("segment_type", element.get("id", "?"))
-		parts.append(cmd)
-	return ",".join(parts)
-
-func _generate_schematic(data: Dictionary) -> Array:
-	var gs = Vector2i(data.get("grid_size", [16, 12])[0], data.get("grid_size", [16, 12])[1])
-	var schematic = []
-	for y in range(gs.y):
-		var row = ""
-		for x in range(gs.x):
-			row += " "
-		schematic.append(row)
-	for p in data.placements:
-		var element = subset_loader.get_element(p.get("element", ""))
-		var pos = Vector2i(p.get("position", [0, 0])[0], p.get("position", [0, 0])[1])
-		var icon = element.get("icon", "?")
-		if pos.y < schematic.size() and pos.x < schematic[pos.y].length():
-			var row = schematic[pos.y]
-			schematic[pos.y] = row.substr(0, pos.x) + icon + row.substr(pos.x + 1)
-	return schematic

@@ -28,6 +28,25 @@
 
   "presets": [
     {
+      "id": "empty",
+      "name": "Empty Grid",
+      "description": "Blank 16x12 grid. Place elements freely.",
+      "grid_size": [16, 12],
+      "placements": []
+    },
+    {
+      "id": "debug_tubes_bends",
+      "name": "DEBUG: 4 Corners",
+      "description": "Just the 4 corners in a row. grid X=horizontal, grid Y=vertical.",
+      "grid_size": [12, 4],
+      "placements": [
+        {"element": "corner_bl",     "position": [0, 0], "rotation": 0},
+        {"element": "corner_br",     "position": [3, 0], "rotation": 0},
+        {"element": "corner_tr",     "position": [6, 0], "rotation": 0},
+        {"element": "corner_tl",     "position": [9, 0], "rotation": 0}
+      ]
+    },
+    {
       "id": "simple_distillation",
       "name": "Simple Distillation",
       "description": "Classic distillation setup: flask → condenser → beaker.",
@@ -152,8 +171,7 @@
       "size": [2, 1],
       "icon": "─",
       "description": "Horizontal tube, 2 units wide. Connects left-to-right.",
-      "segment_type": "straight",
-      "rotation": 90
+      "segment_type": "straight_h"
     },
     
     {
