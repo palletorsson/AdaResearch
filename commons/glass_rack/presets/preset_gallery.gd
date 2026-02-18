@@ -37,6 +37,8 @@ var _current_path: String = ""
 var _current_instance: Node3D = null
 var _label: Label3D = null
 var _path_label: Label3D = null
+var _gap_label: Label3D = null
+var _debug_ports: bool = false
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -57,6 +59,12 @@ func _setup_labels() -> void:
 	_path_label.position = Vector3(0, 1.1, -0.5)
 	_path_label.modulate = Color(0.8, 0.8, 0.6)
 	add_child(_path_label)
+
+	_gap_label = Label3D.new()
+	_gap_label.font_size = 22
+	_gap_label.position = Vector3(0, 0.85, -0.5)
+	_gap_label.modulate = Color(0.6, 0.6, 0.6)
+	add_child(_gap_label)
 
 func _load_preset(index: int, is_pipe: bool) -> void:
 	# Remove old instance
@@ -98,6 +106,7 @@ func _build_glass(path_str: String, preset: Dictionary) -> Node3D:
 	# Override config with live path
 	inst.set("auto_build", false)
 	inst.set("config_file", "")
+	inst.set("show_port_debug", _debug_ports)
 	# Read the config for material colors
 	var config_path := "res://commons/glass_rack/configs/%s.json" % preset["file"]
 	if FileAccess.file_exists(config_path):
@@ -119,8 +128,9 @@ func _build_glass(path_str: String, preset: Dictionary) -> Node3D:
 				if mats.has("liquid_color"):
 					var c: Array = mats["liquid_color"]
 					inst.set("liquid_color", Color(c[0], c[1], c[2], c[3]))
-	# Deferred build after _ready
+	# Deferred build after _ready, then report gaps
 	inst.call_deferred("generate_from_code", path_str)
+	inst.connect("build_complete", _on_build_complete.bind(inst), CONNECT_ONE_SHOT)
 	return inst
 
 func _build_pipe(path_str: String) -> Node3D:
@@ -129,8 +139,29 @@ func _build_pipe(path_str: String) -> Node3D:
 		return null
 	var inst := (scene as PackedScene).instantiate()
 	inst.set("auto_build", false)
+	inst.set("show_port_debug", _debug_ports)
 	inst.call_deferred("generate_from_code", path_str)
+	inst.connect("build_complete", _on_build_complete.bind(inst), CONNECT_ONE_SHOT)
 	return inst
+
+func _on_build_complete(inst: Node3D) -> void:
+	# Report connection gaps
+	if inst.has_method("get_connection_gaps"):
+		var gaps: Array = inst.get_connection_gaps()
+		var total_gap := 0.0
+		var bad_count := 0
+		for g in gaps:
+			total_gap += g["gap"]
+			if g["gap"] > 0.005:
+				bad_count += 1
+		
+		if _gap_label:
+			if bad_count == 0:
+				_gap_label.text = "Connections: %d joints, all snapped" % gaps.size()
+				_gap_label.modulate = Color(0.4, 1.0, 0.4)
+			else:
+				_gap_label.text = "Connections: %d joints, %d gaps (total %.1fmm)" % [gaps.size(), bad_count, total_gap * 1000]
+				_gap_label.modulate = Color(1.0, 0.5, 0.3)
 
 func _rebuild_current() -> void:
 	_load_preset(_current_index, _current_is_pipe)
@@ -206,6 +237,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Ctrl+S = save current path to config file
 	if key.keycode == KEY_S and key.ctrl_pressed:
 		_save_current_config()
+		return
+
+	# D = toggle port debug visualization
+	if key.keycode == KEY_D and not key.ctrl_pressed and not key.shift_pressed:
+		_debug_ports = not _debug_ports
+		if _current_instance and _current_instance.has_method("toggle_port_debug"):
+			_current_instance.toggle_port_debug()
+		if _label:
+			_label.text += "  [DEBUG %s]" % ("ON" if _debug_ports else "OFF")
 		return
 
 func _key_to_index(keycode: Key) -> int:
