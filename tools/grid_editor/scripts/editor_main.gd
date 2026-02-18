@@ -869,17 +869,17 @@ func _create_glass_segment(element: Dictionary, placement: Dictionary, grid_size
 		"corner":
 			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
 		"corner_bl":
-			# ╭ Bottom to right
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
-		"corner_br":
-			# ╮ Bottom to left
+			# ╭ Bend in bottom-left of cell: connects bottom edge ↔ left edge
 			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 90)
+		"corner_br":
+			# ╮ Bend in bottom-right of cell: connects bottom edge ↔ right edge
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 0)
 		"corner_tr":
-			# ╯ Top to left
-			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 180)
-		"corner_tl":
-			# ╰ Top to right
+			# ╯ Bend in top-right of cell: connects top edge ↔ right edge
 			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 270)
+		"corner_tl":
+			# ╰ Bend in top-left of cell: connects top edge ↔ left edge
+			node = _create_glass_elbow_directed(width, height, tube_radius, glass_mat, 180)
 		"corner45":
 			node = _create_glass_corner45_smooth(width, height, tube_radius, glass_mat)
 		"wobbly":
