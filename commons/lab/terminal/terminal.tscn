@@ -38,7 +38,7 @@ func animate_status_lights():
 		var tween = create_tween()
 		tween.set_loops()
 		var delay = i * 0.5
-		tween.tween_delay(delay)
+		tween.tween_interval(delay)
 		tween.tween_property(light, 'light_energy', 1.0, 0.2)
 		tween.tween_property(light, 'light_energy', 0.2, 0.8)
 
