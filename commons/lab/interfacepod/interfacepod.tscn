@@ -57,7 +57,7 @@ func animate_neural_cables():
 		var cable_tween = create_tween()
 		cable_tween.set_loops()
 		var delay = i * 0.5
-		cable_tween.tween_delay(delay)
+		cable_tween.tween_interval(delay)
 		cable_tween.tween_property(cable, 'scale:y', 1.1, 1.0)
 		cable_tween.tween_property(cable, 'scale:y', 0.9, 1.0)
 		cable_tween.tween_property(cable, 'scale:y', 1.0, 0.5)

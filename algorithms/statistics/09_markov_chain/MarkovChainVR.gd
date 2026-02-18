@@ -350,7 +350,7 @@ func start_simulation():
 	# Continuous stepping
 	for i in range(simulation_steps):
 		simulation_tween.tween_callback(step_once)
-		simulation_tween.tween_delay(1.0 / animation_speed)
+		simulation_tween.tween_interval(1.0 / animation_speed)
 
 func stop_simulation():
 	"""Stop continuous simulation"""

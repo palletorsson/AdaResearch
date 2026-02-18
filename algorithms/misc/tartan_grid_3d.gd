@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # 3D Tartan Grid Generator
 # Creates a 3D grid of tartan-patterned cubes with various clan patterns
@@ -122,7 +122,7 @@ var animation_speed = 1.0
 @export var wave_height: float = 2.0
 
 func _ready():
-	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ TartanGrid3D: Initializing 3D tartan cube gallery...")
+	print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 TartanGrid3D: Initializing 3D tartan cube gallery...")
 	
 	# Combine all tartan patterns
 	all_tartans = clan_tartans + modern_tartans
@@ -134,8 +134,8 @@ func _ready():
 	setup_camera()
 	generate_3d_tartan_grid()
 	
-	print("âœ… Generated ", cube_instances.size(), " tartan cubes in 10x10x1 grid")
-	print("ðŸŽ® Controls: R=Regenerate, T=Toggle Animation, Space=Wave Effect")
+	print("✅ Generated ", cube_instances.size(), " tartan cubes in 10x10x1 grid")
+	print("🎮 Controls: R=Regenerate, T=Toggle Animation, Space=Wave Effect")
 
 func setup_camera():
 	# Add a camera if none exists
@@ -144,7 +144,7 @@ func setup_camera():
 		camera.position = Vector3(GRID_SIZE * TOTAL_SPACING * 0.5, 15, GRID_SIZE * TOTAL_SPACING * 0.8)
 		camera.look_at(Vector3(GRID_SIZE * TOTAL_SPACING * 0.5, 0, GRID_SIZE * TOTAL_SPACING * 0.5), Vector3.UP)
 		add_child(camera)
-		print("ðŸ“· Added camera for 3D tartan grid view")
+		print("📷 Added camera for 3D tartan grid view")
 
 func generate_3d_tartan_grid():
 	# Clear existing cubes
@@ -295,7 +295,7 @@ func _on_cube_clicked(_camera, event, position, _normal, _shape_idx, cube: MeshI
 		var tartan_data = cube.get_meta("tartan_data", {})
 		var grid_index = cube.get_meta("grid_index", -1)
 		
-		print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ Clicked tartan cube: ", tartan_data.get("name", "Unknown"))
+		print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 Clicked tartan cube: ", tartan_data.get("name", "Unknown"))
 		print("  Grid position: ", grid_index % GRID_SIZE, ",", grid_index / GRID_SIZE)
 		print("  Colors: ", tartan_data.get("colors", []).size())
 		
@@ -320,20 +320,20 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("ðŸ”„ Regenerating tartan grid...")
+				print("🔄 Regenerating tartan grid...")
 				regenerate_grid()
 			KEY_T:
 				animate_colors = !animate_colors
-				print("ðŸŽ­ Animation toggled: ", animate_colors)
+				print("🎭 Animation toggled: ", animate_colors)
 			KEY_SPACE:
 				trigger_wave_effect()
 			KEY_Q:
 				rotate_cubes = !rotate_cubes
-				print("ðŸ”„ Rotation toggled: ", rotate_cubes)
+				print("🔄 Rotation toggled: ", rotate_cubes)
 			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5:
 				var speed_level = event.keycode - KEY_0
 				animation_speed = speed_level * 0.5
-				print("âš¡ Animation speed: ", animation_speed)
+				print("⚡ Animation speed: ", animation_speed)
 
 func regenerate_grid():
 	# Regenerate random patterns
@@ -344,7 +344,7 @@ func regenerate_grid():
 	generate_3d_tartan_grid()
 
 func trigger_wave_effect():
-	print("ðŸŒŠ Triggering wave effect...")
+	print("🌊 Triggering wave effect...")
 	
 	for i in range(cube_instances.size()):
 		var cube = cube_instances[i]
@@ -354,12 +354,12 @@ func trigger_wave_effect():
 		var delay = i * 0.02
 		var tween = create_tween()
 		
-		tween.tween_delay(delay)
+		tween.tween_interval(delay)
 		tween.tween_property(cube, "position:y", cube.position.y + wave_height, 0.3)
 		tween.tween_property(cube, "position:y", cube.position.y, 0.3)
 
 func print_stats():
-	print("\nðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ 3D Tartan Grid Statistics:")
+	print("\n🏴󠁧󠁢󠁳󠁣󠁴󠁿 3D Tartan Grid Statistics:")
 	print("  Total cubes: ", cube_instances.size())
 	print("  Clan tartans: ", clan_tartans.size())
 	print("  Modern tartans: ", modern_tartans.size())

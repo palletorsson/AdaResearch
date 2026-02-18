@@ -237,7 +237,7 @@ func start_simulation():
 	# Run simulation in batches
 	for batch in range(sample_size / batch_size):
 		simulation_tween.tween_callback(run_simulation_batch)
-		simulation_tween.tween_delay(0.1 / animation_speed)
+		simulation_tween.tween_interval(0.1 / animation_speed)
 	
 	simulation_tween.tween_callback(complete_simulation)
 

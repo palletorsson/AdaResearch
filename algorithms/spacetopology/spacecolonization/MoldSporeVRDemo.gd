@@ -543,7 +543,7 @@ func create_growth_animation():
 			
 			# Animate scale up with slight delay for organic feel
 			var delay = randf_range(0.0, 2.0)
-			tween.tween_delay(delay)
+			tween.tween_interval(delay)
 			tween.tween_property(mesh_instance, "scale", Vector3.ONE, 1.5)
 
 func pulse_spore_bodies():

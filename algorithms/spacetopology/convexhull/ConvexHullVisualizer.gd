@@ -338,7 +338,7 @@ func get_hull_info() -> Dictionary:
 func animate_hull_computation():
 	clear_hull_visuals()
 	var tween = create_tween()
-	tween.tween_delay(0.5)
+	tween.tween_interval(0.5)
 	tween.tween_callback(compute_convex_hull)
 
 func _input(event):

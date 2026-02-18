@@ -305,7 +305,7 @@ func start_cross_validation():
 	for degree in polynomial_degrees:
 		current_degree = degree
 		cv_tween.tween_callback(run_cv_for_degree.bind(degree))
-		cv_tween.tween_delay(0.5)  # Pause between degrees
+		cv_tween.tween_interval(0.5)  # Pause between degrees
 	
 	cv_tween.tween_callback(complete_cross_validation)
 

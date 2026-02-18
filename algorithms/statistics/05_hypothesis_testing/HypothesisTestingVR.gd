@@ -195,7 +195,7 @@ func animate_sampling_process():
 	# Animate each data point appearing
 	for i in range(sample_data.size()):
 		sampling_tween.tween_callback(show_sample_point.bind(i))
-		sampling_tween.tween_delay(0.05)
+		sampling_tween.tween_interval(0.05)
 	
 	sampling_tween.tween_callback(perform_hypothesis_test)
 

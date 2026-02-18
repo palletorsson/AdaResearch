@@ -916,7 +916,7 @@ func animate_celebration_bounces():
 			var bounce_force = Vector3(0, randf_range(5.0, 15.0) * bouncy_factor, 0)
 			var bounce_interval = randf_range(2.0, 5.0)
 
-			# Create a timer for the delay instead of tween_delay
+			# Create a timer for the delay instead of tween_interval
 			var delay_timer = Timer.new()
 			delay_timer.wait_time = bounce_interval
 			delay_timer.one_shot = true

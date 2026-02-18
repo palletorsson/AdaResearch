@@ -68,7 +68,7 @@ func animate_power_conduits():
 		
 		var conduit_tween = create_tween()
 		conduit_tween.set_loops()
-		conduit_tween.tween_delay(delay)
+		conduit_tween.tween_interval(delay)
 		conduit_tween.tween_property(conduit, 'light_energy', 0.1, 0.3)
 		conduit_tween.tween_property(conduit, 'light_energy', 1.8, 0.2)
 		conduit_tween.tween_property(conduit, 'light_energy', 0.1, 1.0)

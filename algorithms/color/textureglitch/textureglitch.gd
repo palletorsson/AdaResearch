@@ -596,7 +596,7 @@ func trigger_layer_explosion(obj_index: int):
 		tween.parallel().tween_property(layer, "rotation", Vector3(randf() * PI, randf() * PI, randf() * PI), 1.5)
 		tween.parallel().tween_property(layer, "scale", Vector3.ONE * (1.5 + i * 0.3), 1.5)
 		
-		tween.tween_delay(1.0)
+		tween.tween_interval(1.0)
 		tween.parallel().tween_property(layer, "position", Vector3.ZERO, 1.0)
 		tween.parallel().tween_property(layer, "rotation", Vector3.ZERO, 1.0) 
 		tween.parallel().tween_property(layer, "scale", Vector3.ONE, 1.0)
@@ -625,7 +625,7 @@ func trigger_chromatic_separation(obj_index: int):
 		
 		var tween = create_tween()
 		tween.tween_property(layer, "position", offsets[i], 1.0)
-		tween.tween_delay(2.0)
+		tween.tween_interval(2.0)
 		tween.tween_property(layer, "position", Vector3.ZERO, 1.0)
 
 func trigger_system_wide_glitch():
