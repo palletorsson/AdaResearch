@@ -195,6 +195,13 @@ const UTILITY_TYPES = {
 		"description": "Cube that carries players across voids with directional movement",
 		"supports_parameters": true  # distance:direction[:auto] (e.g. "4:z", "3.5:1,0,0", "3:z:auto")
 	},
+	"br": {
+		"name": "bridge_path",
+		"file": "bridge_path.tscn",
+		"category": "transport",
+		"description": "Transparent green grid bridge spanning voids on x/z axis",
+		"supports_parameters": true  # length:axis (e.g. "5:x", "3:z")
+	},
 	"rc": {
 		"name": "rotation_cube",
 		"file": "rotation_cube.tscn",

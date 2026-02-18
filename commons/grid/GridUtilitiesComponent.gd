@@ -645,6 +645,16 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
 				else:
 					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
+		"br":  # Bridge Path
+			# Format: br:length:axis (e.g. "br:5:x", "br:3:z")
+			if parameters.size() >= 1:
+				var bridge_length = int(parameters[0]) if parameters[0].is_valid_int() else 4
+				var bridge_axis = "x"
+				if parameters.size() >= 2:
+					bridge_axis = parameters[1].strip_edges().to_lower()
+				if "set_bridge_parameters" in utility_object:
+					utility_object.set_bridge_parameters(bridge_length, bridge_axis)
+				print("GridUtilitiesComponent: Set bridge path %d segments along %s" % [bridge_length, bridge_axis])
 		"rc":  # Rotation Cube
 			# Format: rc:angle:axis:pause:y_offset (e.g. "45:y:4:0.5")
 			if parameters.size() >= 1:

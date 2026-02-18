@@ -28,7 +28,7 @@ func load_map(map_path: String) -> bool:
 	var parse_result = json.parse(json_string)
 	
 	if parse_result != OK:
-		push_error("JsonMapLoader: Failed to parse JSON: %s" % json.error_string)
+		push_error("JsonMapLoader: Failed to parse JSON at line %d: %s" % [json.get_error_line(), json.get_error_message()])
 		return false
 	
 	map_data = json.data

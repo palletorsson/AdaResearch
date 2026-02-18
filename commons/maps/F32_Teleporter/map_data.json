@@ -21,14 +21,14 @@
 		"ambient_color": [0.4,0.4,0.5],
 		"ambient_energy": 0.6,
 		"directional_light": {
-			"color": [1.0,0.9,0.8],
+			"color": [1,0.9,0.8],
 			"direction": [-0.4,-0.7,-0.4],
 			"enabled": true,
 			"energy": 1.2
 		}
 	},
 	"map_info": {
-		"description": "The t utility marks a teleport exit â€” step on it to advance to the next map in sequence. Used at the end of every map as the progression mechanism. The s utility marks the spawn point where the player appears.",
+		"description": "The t utility marks a teleport exit -- step on it to advance to the next map in sequence. Used at the end of every map as the progression mechanism. The s utility marks the spawn point where the player appears.",
 		"dimensions": {
 			"depth": 9,
 			"max_height": 3,
@@ -40,9 +40,9 @@
 		"version": "1.0"
 	},
 	"settings": {
-		"cube_size": 1.0,
+		"cube_size": 1,
 		"enable_physics": true,
-		"gutter": 0.0,
+		"gutter": 0,
 		"show_grid": true
 	}
 }
