@@ -85,6 +85,7 @@ func _register_custom_commands() -> void:
 	_command_handlers["cross"] = _cmd_cross
 	_command_handlers["x"] = _cmd_cross
 	_command_handlers["condenser"] = _cmd_condenser
+	_command_handlers["beaker"] = _cmd_beaker
 	
 	# Branching commands (stack-based)
 	_command_handlers["["] = _cmd_push
@@ -94,72 +95,69 @@ func _register_custom_commands() -> void:
 
 func _cmd_spiral() -> void:
 	var spiral_height = segment_length * 2
-	var spiral_radius = 0.08  # Match the default in _create_spiral_segment
-	var stub_length = spiral_radius * 0.5
+	var spiral_radius = 0.08
 	var segment = _create_segment("spiral", {"height": spiral_height, "spiral_radius": spiral_radius})
 	if segment:
 		_place_segment(segment)
-		# Total height: spiral + exit curve + exit stub
-		var exit_y = spiral_height + spiral_radius * 0.5 + stub_length
-		cursor_pos += Vector3.UP * exit_y
-		# Spiral changes direction from forward to up
-		_rotate_cursor_pitch(-PI / 2)
+		# Use port metadata for accurate cursor advancement
+		_advance_cursor_from_segment(segment, {"height": spiral_height})
 
 func _cmd_wobbly() -> void:
-	var segment = _create_segment("wobbly", {"length": segment_length * 2})
+	var length = segment_length * 2
+	var segment = _create_segment("wobbly", {"length": length})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length * 2)
+		_advance_cursor_forward(length)
 
 func _cmd_flask() -> void:
-	var segment = _create_segment("flask", {"radius": segment_length * 0.5})
+	var flask_radius = segment_length * 0.5
+	var neck_length = 0.1 * dimension_scale
+	var segment = _create_segment("flask", {"radius": flask_radius, "neck_length": neck_length})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length)
+		# Flask actual length: diameter + neck
+		var total = flask_radius * 2 + neck_length
+		_advance_cursor_forward(total)
 
 func _cmd_junction() -> void:
-	var segment = _create_segment("junction", {})
+	var length = segment_length * 0.5
+	var segment = _create_segment("junction", {"length": length})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length)
+		_advance_cursor_forward(length)
 
 # New segment commands
 func _cmd_sbend() -> void:
 	var segment = _create_segment("sbend", {"length": segment_length, "offset": segment_length * 0.5})
 	if segment:
 		_place_segment(segment)
-		var exit_offset = segment.get_meta("exit_offset") if segment.has_meta("exit_offset") else Vector3(0, 0, segment_length)
-		cursor_pos += cursor_forward * exit_offset.z + cursor_right * exit_offset.x
+		_advance_cursor_from_segment(segment, {"length": segment_length})
 
 func _cmd_ypipe() -> void:
 	var segment = _create_segment("ypipe", {"length": segment_length, "branch_length": segment_length})
 	if segment:
 		_place_segment(segment)
-		# After Y-pipe, cursor continues on out1 (left branch)
-		# Use push/pop to also build out2
-		_advance_cursor_forward(segment_length * 1.5)
+		_advance_cursor_from_segment(segment, {"length": segment_length})
 
 func _cmd_corner45() -> void:
 	var segment = _create_segment("corner45", {"corner_radius": segment_length})
 	if segment:
 		_place_segment(segment)
-		_rotate_cursor_yaw(PI / 4)
-		_advance_cursor_forward(segment_length * 0.7)
+		_advance_cursor_from_segment(segment, {"corner_radius": segment_length})
 
 func _cmd_ubend() -> void:
 	var segment = _create_segment("ubend", {"bend_radius": segment_length * 0.5})
 	if segment:
 		_place_segment(segment)
-		# U-bend reverses direction and offsets
-		_rotate_cursor_yaw(PI)
-		cursor_pos += cursor_right * segment_length
+		_advance_cursor_from_segment(segment, {"bend_radius": segment_length * 0.5})
 
 func _cmd_reducer() -> void:
-	var segment = _create_segment("reducer", {"length": segment_length * 0.5, "radius_in": pipe_radius, "radius_out": pipe_radius * 0.6})
+	var length = segment_length * 0.5
+	var segment = _create_segment("reducer", {"length": length, "radius_in": pipe_radius, "radius_out": pipe_radius * 0.6})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length * 0.5)
-		pipe_radius = pipe_radius * 0.6  # Update radius for subsequent segments
+		_advance_cursor_forward(length)
+		pipe_radius = pipe_radius * 0.6
 
 func _cmd_cap() -> void:
 	var segment = _create_segment("cap", {"tube_radius": pipe_radius})
@@ -177,13 +175,22 @@ func _cmd_cross() -> void:
 	var segment = _create_segment("cross", {"tube_radius": pipe_radius, "arm_length": segment_length})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length)
+		_advance_cursor_from_segment(segment, {"arm_length": segment_length})
 
 func _cmd_condenser() -> void:
-	var segment = _create_segment("condenser", {"length": segment_length * 3, "inner_radius": pipe_radius * 0.5, "jacket_radius": pipe_radius * 2})
+	var length = segment_length * 3
+	var segment = _create_segment("condenser", {"length": length, "inner_radius": pipe_radius * 0.5, "jacket_radius": pipe_radius * 2})
 	if segment:
 		_place_segment(segment)
-		_advance_cursor_forward(segment_length * 3)
+		_advance_cursor_forward(length)
+
+func _cmd_beaker() -> void:
+	var beaker_radius = segment_length * 0.4
+	var beaker_height = segment_length * 0.6
+	var segment = _create_segment("beaker", {"radius": beaker_radius, "height": beaker_height})
+	if segment:
+		_place_segment(segment)
+		# Beaker is terminal — no cursor advancement
 
 # Stack-based branching
 var _cursor_stack: Array = []
