@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://cv06fgkniivlx"]
 
-[ext_resource type="Script" path="res://commons/glass_rack/presets/preset_gallery.gd" id="1_gallery"]
+[ext_resource type="Script" uid="uid://dk5pmbw1vqfuh" path="res://commons/glass_rack/presets/preset_gallery.gd" id="1_gallery"]
+[ext_resource type="PackedScene" uid="uid://bs5u2tp5yq6qf" path="res://commons/glass_rack/GlassRack.tscn" id="2_qdywm"]
+[ext_resource type="Script" uid="uid://dtlg6if0wfioi" path="res://commons/glass_rack/GlassRackController.gd" id="3_en0yn"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn" id="4_kuo3d"]
+[ext_resource type="Script" uid="uid://c2lvqpvf2ig88" path="res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd" id="5_0gaeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
 sky_top_color = Color(0.12, 0.15, 0.22, 1)
@@ -17,37 +21,254 @@ ambient_light_color = Color(0.35, 0.38, 0.42, 1)
 ambient_light_energy = 0.6
 tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 0.3
 
-[node name="PresetGallery" type="Node3D"]
+[node name="PresetGallery" type="Node3D" unique_id=682299735]
 script = ExtResource("1_gallery")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1321465792]
 environment = SubResource("env")
 
-[node name="KeyLight" type="DirectionalLight3D" parent="."]
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=2078541590]
 transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 2, 5, 3)
 light_color = Color(1, 0.98, 0.95, 1)
-light_energy = 1.0
 shadow_enabled = true
 
-[node name="FillLight" type="DirectionalLight3D" parent="."]
+[node name="FillLight" type="DirectionalLight3D" parent="." unique_id=1880512542]
 transform = Transform3D(0.866, 0.25, -0.433, 0, 0.866, 0.5, 0.5, -0.433, 0.75, -3, 3, -2)
 light_color = Color(0.7, 0.8, 1, 1)
 light_energy = 0.4
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1600005396]
 transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 5, 2, 5)
 fov = 60.0
 
-[node name="GlassRowLabel" type="Label3D" parent="."]
+[node name="GlassRowLabel" type="Label3D" parent="." unique_id=1222669204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.8, 0.3)
+modulate = Color(0.4, 0.8, 1, 1)
 text = "GLASS RACK PRESETS"
 font_size = 64
-modulate = Color(0.4, 0.8, 1, 1)
 
-[node name="PipeRowLabel" type="Label3D" parent="."]
+[node name="PipeRowLabel" type="Label3D" parent="." unique_id=1181541836]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, -8)
+modulate = Color(0.8, 0.6, 0.4, 1)
 text = "BIG PIPE PRESETS"
 font_size = 64
-modulate = Color(0.8, 0.6, 0.4, 1)
+
+[node name="GlassRack" type="Node3D" parent="." unique_id=1606845427 instance=ExtResource("2_qdywm")]
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "simple_tube.json"
+
+[node name="@Label3D@49672" type="Label3D" parent="." unique_id=1187013587]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, -0.3, 0.15)
+text = "simple_tube"
+font_size = 24
+
+[node name="@Node3D@49673" type="Node3D" parent="." unique_id=1432261616 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "spiral_tube.json"
+
+[node name="@Label3D@49674" type="Label3D" parent="." unique_id=1737217367]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 1.2, -0.3, 0.15)
+text = "spiral_tube"
+font_size = 24
+
+[node name="@Node3D@49675" type="Node3D" parent="." unique_id=1380390746 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "spiral_condenser.json"
+
+[node name="@Label3D@49676" type="Label3D" parent="." unique_id=520657238]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 2.4, -0.3, 0.15)
+text = "spiral_condenser"
+font_size = 24
+
+[node name="@Node3D@49677" type="Node3D" parent="." unique_id=1912468083 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "distillation_rack.json"
+
+[node name="@Label3D@49678" type="Label3D" parent="." unique_id=800150422]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 3.6, -0.3, 0.15)
+text = "distillation_rack"
+font_size = 24
+
+[node name="@Node3D@49679" type="Node3D" parent="." unique_id=32687082 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "distillation_y.json"
+
+[node name="@Label3D@49680" type="Label3D" parent="." unique_id=317325287]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 4.8, -0.3, 0.15)
+text = "distillation_y"
+font_size = 24
+
+[node name="@Node3D@49681" type="Node3D" parent="." unique_id=1241188235 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "fractional_distillation.json"
+
+[node name="@Label3D@49682" type="Label3D" parent="." unique_id=1454932530]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 6, -0.3, 0.15)
+text = "fractional_distillation"
+font_size = 24
+
+[node name="@Node3D@49683" type="Node3D" parent="." unique_id=514057776 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "reflux_apparatus.json"
+
+[node name="@Label3D@49684" type="Label3D" parent="." unique_id=1461275260]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 7.2, -0.3, 0.15)
+text = "reflux_apparatus"
+font_size = 24
+
+[node name="@Node3D@49685" type="Node3D" parent="." unique_id=1956172785 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "branching_condenser.json"
+
+[node name="@Label3D@49686" type="Label3D" parent="." unique_id=1760107581]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 8.4, -0.3, 0.15)
+text = "branching_condenser"
+font_size = 24
+
+[node name="@Node3D@49687" type="Node3D" parent="." unique_id=2111419542 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "sbend_manifold.json"
+
+[node name="@Label3D@49688" type="Label3D" parent="." unique_id=51063664]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 9.6, -0.3, 0.15)
+text = "sbend_manifold"
+font_size = 24
+
+[node name="@Node3D@49689" type="Node3D" parent="." unique_id=2085517301 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "complex_apparatus.json"
+
+[node name="@Label3D@49690" type="Label3D" parent="." unique_id=1420390821]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 10.8, -0.3, 0.15)
+text = "complex_apparatus"
+font_size = 24
+
+[node name="@Node3D@49691" type="Node3D" parent="." unique_id=1002034919 instance=ExtResource("2_qdywm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+script = ExtResource("3_en0yn")
+glass_color = Color(0.85, 0.92, 1, 0.3)
+liquid_color = Color(0.4, 0.9, 0.5, 0.6)
+config_file = "breaking_bad_coffee.json"
+
+[node name="@Label3D@49692" type="Label3D" parent="." unique_id=494006915]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 12, -0.3, 0.15)
+text = "breaking_bad_coffee"
+font_size = 24
+
+[node name="BigPipeSystem" type="Node3D" parent="." unique_id=1264150569 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49693" type="Label3D" parent="." unique_id=1208754872]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, -0.5, -6)
+text = "default"
+font_size = 36
+
+[node name="@Node3D@49694" type="Node3D" parent="." unique_id=1977406400 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49695" type="Label3D" parent="." unique_id=1507734803]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 6, -0.5, -6)
+text = "straight_run"
+font_size = 36
+
+[node name="@Node3D@49696" type="Node3D" parent="." unique_id=1417549778 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49697" type="Label3D" parent="." unique_id=303860007]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 12, -0.5, -6)
+text = "l_bend"
+font_size = 36
+
+[node name="@Node3D@49698" type="Node3D" parent="." unique_id=1862371131 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49699" type="Label3D" parent="." unique_id=985030418]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 18, -0.5, -6)
+text = "t_distribution"
+font_size = 36
+
+[node name="@Node3D@49700" type="Node3D" parent="." unique_id=1139109104 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49701" type="Label3D" parent="." unique_id=27322548]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 24, -0.5, -6)
+text = "serpentine"
+font_size = 36
+
+[node name="@Node3D@49702" type="Node3D" parent="." unique_id=452058562 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49703" type="Label3D" parent="." unique_id=1794883677]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 30, -0.5, -6)
+text = "vertical_bypass"
+font_size = 36
+
+[node name="@Node3D@49704" type="Node3D" parent="." unique_id=650123103 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49705" type="Label3D" parent="." unique_id=807068462]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 36, -0.5, -6)
+text = "cross_manifold"
+font_size = 36
+
+[node name="@Node3D@49706" type="Node3D" parent="." unique_id=1572430731 instance=ExtResource("4_kuo3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -8)
+script = ExtResource("5_0gaeg")
+pipe_radius = 0.8
+segment_length = 2.0
+
+[node name="@Label3D@49707" type="Label3D" parent="." unique_id=1931646220]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 42, -0.5, -6)
+text = "industrial_branch"
+font_size = 36
