@@ -772,7 +772,7 @@ func _create_element_3d(element: Dictionary, placement: Dictionary, grid_size: f
 	var rotation = placement.get("rotation", 0)
 	
 	# Check for procedural generation (glass_rack)
-	var segment_type = element.get("segment_type", "")
+	var segment_type = str(element.get("segment_type", ""))
 	if not segment_type.is_empty() and subset_loader.current_subset_id == "glass_rack":
 		node = _create_glass_segment(element, placement, grid_size)
 	
@@ -801,8 +801,8 @@ func _create_element_3d(element: Dictionary, placement: Dictionary, grid_size: f
 		node = _create_placeholder_3d(element, grid_size)
 	
 	# Position: grid cell to 3D based on orientation plane
-	var scene_path = element.get("scene", "")
-	if not scene_path.is_empty() or not segment_type.is_empty():
+	var scene_path2 = str(element.get("scene", ""))
+	if not scene_path2.is_empty() or not segment_type.is_empty():
 		# Scenes/procedural: use cell origin (pivot at origin)
 		node.position = _grid_to_3d(pos[0], pos[1], grid_size)
 	else:
