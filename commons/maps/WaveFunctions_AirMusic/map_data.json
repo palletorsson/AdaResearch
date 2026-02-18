@@ -24,7 +24,13 @@
 		"layout": "Standard layout",
 		"objective": "Observe the wave function",
 		"key_elements": [
-			"Teleporter"
+			"SystemsMusicTest - Spatial audio triggered by movement through space",
+			"GlassRack - Spiral tube and fractional distillation on lab tables",
+			"lab_table - Workbenches flanking the entrance",
+			"RackAmbientDrone - Ambient drone synthesizer with lissajous display",
+			"BigPipeSystem - Pipe run with vertical bypass along south wall",
+			"air_music_display_case - Air Music spatial audio in glass display case",
+			"resonating_metallophone - Metal bars tuned to different pitches"
 		]
 	},
 	"layers": {
@@ -58,15 +64,15 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "GlassRack:0:0.7#config:spiral_tube", " ", " ", " ", " ", " ", " ", " ", "GlassRack:-90:0.7#config:fractional_distillation", " "],
+			[" ", "lab_table", " ", " ", " ", " ", " ", " ", " ", "lab_table", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "  ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "SystemsMusicTest:0:0.5:0.9", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "RackAmbientDrone:0:1", " ", " ", " ", " ", " ", "BigPipeSystem:90:1#path:straight,straight,up,straight,down,straight,straight", " ", " ", " "],
+			[" ", " ", " ", "air_music_display_case:0:1", " ", "resonating_metallophone", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]

@@ -28,7 +28,14 @@
 		"layout": "Standard layout",
 		"objective": "Observe the wave function",
 		"key_elements": [
-			"Teleporter"
+			"PendulumWave - Three pendulum wave installations along the east wall",
+			"WavePaintings - Pendulum bob paints oscillation traces on canvas",
+			"foucault_pendulum - Rosette patterns proving Earth's rotation",
+			"GlassRack - Reflux apparatus and spiral condenser on lab tables",
+			"lab_table - Workbenches for glass apparatus",
+			"BigPipeSystem - Industrial pipe run along south corridor",
+			"VRAudioMonitor - Audio waveform display",
+			"seismograph - Drum chart recorder with sine trace"
 		]
 	},
 	"layers": {
@@ -84,14 +91,14 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "WavePaintings:180:1:0.2", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "", " ", "", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "GlassRack:0:0.6#config:reflux_apparatus", " ", " ", " ", " ", " ", " ", " ", "GlassRack:0:0.6#config:spiral_condenser", " "],
+			[" ", "lab_table", " ", " ", " ", " ", " ", " ", " ", "lab_table", " "],
 			[" ", " ", " ", " ", "", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "foucault_pendulum", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "VRAudioMonitor", " ", " ", " ", "seismograph", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]

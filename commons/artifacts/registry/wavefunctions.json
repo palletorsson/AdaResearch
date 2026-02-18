@@ -1100,6 +1100,26 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
+		"BigPipeSystem": {
+			"name": "Big Pipe System",
+			"lookup_name": "BigPipeSystem",
+			"description": "Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"lab_table": {
+			"name": "Lab Table",
+			"lookup_name": "lab_table",
+			"description": "Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.",
+			"scene": "res://commons/lab/table/table.tscn",
+			"category": "waves",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
 		"chord_tension_spring": {
 			"name": "Chord Tension Spring",
 			"lookup_name": "chord_tension_spring",
