@@ -11,7 +11,9 @@ enum ShapeType {
 	FLASK = 7,
 	DNA = 8,
 	ATOM = 9,
-	SCULPTURE = 10
+	SCULPTURE = 10,
+	SPHERE = 11,
+	TORUS = 12
 }
 
 @export var shape_type : ShapeType = ShapeType.HUMAN

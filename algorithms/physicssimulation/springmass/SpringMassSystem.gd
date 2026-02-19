@@ -174,10 +174,21 @@ func _update_spring_visuals():
 		visual.material.albedo_color = color
 
 func _connect_ui():
-	$UI/VBoxContainer/ResetButton.pressed.connect(_on_reset_pressed)
-	$UI/VBoxContainer/PauseButton.pressed.connect(_on_pause_pressed)
-	$UI/VBoxContainer/SpringStiffnessSlider.value_changed.connect(_on_stiffness_changed)
-	$UI/VBoxContainer/DampingSlider.value_changed.connect(_on_damping_changed)
+	var ui: Node = get_node_or_null("UI/VBoxContainer")
+	if not ui:
+		return
+	var reset_btn: Node = ui.get_node_or_null("ResetButton")
+	var pause_btn: Node = ui.get_node_or_null("PauseButton")
+	var stiffness_slider: Node = ui.get_node_or_null("SpringStiffnessSlider")
+	var damping_slider: Node = ui.get_node_or_null("DampingSlider")
+	if reset_btn:
+		reset_btn.pressed.connect(_on_reset_pressed)
+	if pause_btn:
+		pause_btn.pressed.connect(_on_pause_pressed)
+	if stiffness_slider:
+		stiffness_slider.value_changed.connect(_on_stiffness_changed)
+	if damping_slider:
+		damping_slider.value_changed.connect(_on_damping_changed)
 
 func _on_reset_pressed():
 	# Reset all mass points to initial positions

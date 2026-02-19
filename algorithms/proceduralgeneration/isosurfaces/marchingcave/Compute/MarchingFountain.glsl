@@ -188,11 +188,10 @@ vec4 evaluate(vec3 coord)
 	// Calculate distance from center axis (vertical line)
 	float distanceFromAxis = length(worldPos.xz);
 	
-	// Column radius tapers off at the top (like a fountain jet)
-	// Or maybe it gets wider at the bottom
-	float columnRadius = 20.0; 
+	// Column radius scales with the sampling volume
+	float columnRadius = params.scale * 0.4;
 	// Make it taper out at the bottom
-	columnRadius += smoothstep(0.0, -50.0, worldPos.y) * 20.0;
+	columnRadius += smoothstep(0.0, -params.scale, worldPos.y) * params.scale * 0.4;
 	
 	// Density is high inside the column, low outside
 	// Add noise to the surface

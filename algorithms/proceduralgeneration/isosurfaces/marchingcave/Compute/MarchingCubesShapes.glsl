@@ -392,6 +392,8 @@ vec4 evaluate(vec3 coord)
 	else if (id == 8) dist = dnaSDF(worldPos);
 	else if (id == 9) dist = atomSDF(worldPos);
 	else if (id == 10) dist = sculptureSDF(worldPos);
+	else if (id == 11) dist = sdSphere(worldPos, 30.0);
+	else if (id == 12) dist = sdTorus(worldPos, vec2(25.0, 8.0));
 	else dist = humanSDF(worldPos); // Default
 
 	return vec4(worldPos, dist);

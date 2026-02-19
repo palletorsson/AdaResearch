@@ -30,7 +30,7 @@ func _ready():
 	
 	# Load the shader
 	shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaball.gdshader")
+	shader_material.shader = load("res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaball.gdshader")
 	
 	# Apply to mesh
 	cube_mesh.material_override = shader_material

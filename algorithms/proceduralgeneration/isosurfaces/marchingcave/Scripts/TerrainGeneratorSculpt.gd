@@ -44,8 +44,10 @@ func clear_blobs() -> void:
 
 func get_params_array():
 	var params = super.get_params_array()
-	# Add numBlobs
-	params.append(float(blobs_array.size()))
+	# Base returns 11 floats (indices 0-10).
+	# Shader expects: index 11 = shapeId, index 12 = numBlobs
+	params.append(0.0)  # shapeId (unused placeholder, keeps alignment)
+	params.append(float(blobs_array.size()))  # numBlobs
 	return params
 
 # --- OVERRIDE INIT_COMPUTE TO ADD BLOB BUFFER ---

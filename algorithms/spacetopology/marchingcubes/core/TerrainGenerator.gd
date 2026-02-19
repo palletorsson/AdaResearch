@@ -166,7 +166,7 @@ func create_terrain_voxel_grid():
 			for z in range(chunks_z):
 				var chunk_world_pos = Vector3(
 					x * chunk_world_size_x - terrain_size.x * 0.5,
-					-terrain_height * 0.5,
+					0.0,  # Ground level — terrain grows upward from y=0
 					z * chunk_world_size_z - terrain_size.y * 0.5
 				)
 				
@@ -463,7 +463,13 @@ func get_terrain_info() -> Dictionary:
 func add_terrain_to_scene(parent_node: Node3D):
 	"""Add generated terrain to scene"""
 	for mesh_instance in terrain_meshes:
+		var old_parent = mesh_instance.get_parent()
+		if old_parent:
+			old_parent.remove_child(mesh_instance)
 		parent_node.add_child(mesh_instance)
 	
 	for collision_body in collision_bodies:
-		parent_node.add_child(collision_body) 
+		var old_parent = collision_body.get_parent()
+		if old_parent:
+			old_parent.remove_child(collision_body)
+		parent_node.add_child(collision_body)

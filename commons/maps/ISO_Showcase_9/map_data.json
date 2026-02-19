@@ -1,21 +1,17 @@
-﻿{
-	"map_info": {
-		"name": "ISO Showcase 9 — Nakama + Raymarched Metaballs",
-		"lookup_name": "ISO_Showcase_9",
-		"description": "Test: nakama_metaballs + raymarched_metaballs",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 14,
-			"depth": 10,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "test",
-			"category": "showcase"
-		}
-	},
+{
 	"layers": {
+		"interactables": [
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," ","nakama_metaballs:0:0:0.2"," "," "," "," "," "," ","raymarched_metaballs:0:0:0.2"," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," ","nakama_metaballs:0:0:0.2"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		],
 		"structure": [
 			["1","1","2","2","2","2","2","2","2","2","2","2","2","2"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","2"],
@@ -39,45 +35,58 @@
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," ","t"," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-		],
-		"interactables": [
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," ","nakama_metaballs"," "," "," "," "," "," ","raymarched_metaballs"," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"properties": { "action": "next_in_sequence" }
-		},
-		"s": { "properties": { "height": 5.5 } }
-	},
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [0.4,0.4,0.5],
 		"ambient_energy": 0.6,
 		"directional_light": {
+			"color": [1.0,0.9,0.8],
+			"direction": [-0.4,-0.7,-0.4],
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
 		}
 	},
+	"map_info": {
+		"description": "Test: nakama_metaballs + raymarched_metaballs",
+		"dimensions": {
+			"depth": 10,
+			"max_height": 3,
+			"width": 14
+		},
+		"format": "json",
+		"lookup_name": "ISO_Showcase_9",
+		"metadata": {
+			"category": "showcase",
+			"difficulty": "test"
+		},
+		"name": "ISO Showcase 9 — Nakama + Raymarched Metaballs",
+		"version": "1.0"
+	},
 	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true,
 		"auto_reveal_on_entry": false,
+		"background": {
+			"color": [0.15,0.2,0.35],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
 		"initial_tile_visibility": "visible",
-		"background": { "type": "sky", "color": [0.15, 0.2, 0.35] }
+		"show_grid": true
+	},
+	"utility_definitions": {
+		"s": {
+			"properties": {
+				"height": 5.5
+			}
+		},
+		"t": {
+			"name": "Next",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
 	}
 }

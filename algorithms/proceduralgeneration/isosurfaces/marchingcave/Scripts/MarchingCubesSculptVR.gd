@@ -57,18 +57,27 @@ func _create_terrain_generator():
 	terrain_generator.set_script(sculpt_script)
 
 	# Configure the generator
-	terrain_generator.chunk_scale = volume_size * 50  # Scale factor
+	terrain_generator.chunk_scale = volume_size  # 1:1 with VR volume (meters)
+	terrain_generator.center_position = Vector3(0, 0, 0)  # Ground level
 	terrain_generator.iso_level = 0.3
 	terrain_generator.noise_scale = 0.0  # No noise - pure sculpting
 	terrain_generator.invert_faces = true  # View from outside
 
-	# Material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = sculpt_color
-	material.metallic = 0.2
-	material.roughness = 0.6
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	terrain_generator.material_override = material
+	# Material — glass wireframe shader (same as voxel_noise_demo)
+	var shader = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Shaders/glass_wireframe.gdshader")
+	if shader:
+		var material = ShaderMaterial.new()
+		material.shader = shader
+		material.set_shader_parameter("glass_color", sculpt_color)
+		material.set_shader_parameter("outline_color", Color(1.0, 0.0, 0.5, 1.0))
+		material.set_shader_parameter("outline_width", 1.5)
+		terrain_generator.material_override = material
+	else:
+		# Fallback to simple material
+		var material = StandardMaterial3D.new()
+		material.albedo_color = sculpt_color
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		terrain_generator.material_override = material
 
 	add_child(terrain_generator)
 

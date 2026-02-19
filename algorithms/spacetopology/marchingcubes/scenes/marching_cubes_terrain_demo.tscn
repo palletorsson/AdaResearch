@@ -118,7 +118,7 @@ text = "[color=gray]Ready to generate terrain...[/color]"
 fit_content = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(36.68, 0, 0, 0, 36.68, 0, 0, 0, 36.68, 0, -23.9706, 0)
+transform = Transform3D(36.68, 0, 0, 0, 36.68, 0, 0, 0, 36.68, 0, -0.1, 0)
 material_override = SubResource("StandardMaterial3D_64v61")
 mesh = SubResource("PlaneMesh_64v61")
 

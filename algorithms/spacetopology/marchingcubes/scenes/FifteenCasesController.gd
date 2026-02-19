@@ -99,7 +99,8 @@ var fifteen_cases = [
 	}
 ]
 
-@export var case_spacing: float = 4.0  # Distance between cases
+@export var case_spacing: float = 2.0  # Distance between cases
+@export var case_scale: float = 0.5  # Scale of each example
 @export var show_wireframes: bool = true
 @export var show_labels: bool = true
 @export var animate_threshold: bool = false
@@ -165,12 +166,14 @@ func generate_case_mesh(case_data: Dictionary, position: Vector3, case_index: in
 	
 	# Create visual representation
 	var mesh_instance = create_case_mesh_instance(mesh, position, case_data, case_index)
+	mesh_instance.scale = Vector3.ONE * case_scale
 	add_child(mesh_instance)
 	meshes.append(mesh_instance)
 	
 	# Add wireframe cube to show the voxel structure
 	if show_wireframes:
 		var wireframe = create_wireframe_cube(position, case_data.densities)
+		wireframe.scale = Vector3.ONE * case_scale
 		add_child(wireframe)
 
 func create_voxel_chunk_from_case(case_data: Dictionary) -> VoxelChunk:
@@ -207,24 +210,13 @@ func create_case_mesh_instance(mesh: ArrayMesh, position: Vector3, case_data: Di
 	if mesh != null and mesh.get_surface_count() > 0:
 		mesh_instance.mesh = mesh
 		
-		# Create material with case-specific color and enhanced visualization
+		# Create material — flat, non-reflective
 		var material = StandardMaterial3D.new()
 		material.albedo_color = get_case_color(case_index)
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides
-		material.metallic = 0.1
-		material.roughness = 0.7
-		material.emission_enabled = true
-		material.emission = material.albedo_color * 0.2
-		material.emission_energy = 0.4
-		
-		# Add rim lighting for better edge definition
-		material.rim_enabled = true
-		material.rim = 0.3
-		material.rim_tint = 0.8
-		
-		if show_wireframes:
-			material.flags_transparent = true
-			material.albedo_color.a = 0.85
+		material.metallic = 0.0
+		material.roughness = 1.0
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 		
 		mesh_instance.set_surface_override_material(0, material)
 		

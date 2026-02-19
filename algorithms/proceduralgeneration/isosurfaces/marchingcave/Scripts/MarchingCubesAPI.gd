@@ -15,7 +15,9 @@ const SHAPE_MAP = {
 	"flask": 7,
 	"dna": 8,
 	"atom": 9,
-	"sculpture": 10
+	"sculpture": 10,
+	"sphere": 11,
+	"torus": 12
 }
 
 static func create(shape_name: String, position: Vector3 = Vector3.ZERO, scale: float = 1.0, is_pickable: bool = false) -> Node3D:
@@ -23,7 +25,9 @@ static func create(shape_name: String, position: Vector3 = Vector3.ZERO, scale: 
 	Creates a new Marching Cubes object by name.
 	Returns the container Node3D containing the mesh.
 	"""
-	var key = shape_name.to_lower().replace("mc:", "")
+	# Parse "mc:sphere:0:1:0.04" → shape key = "sphere", extra params after
+	var parts = shape_name.to_lower().replace("mc:", "").split(":")
+	var key = parts[0]
 	
 	if not key in SHAPE_MAP:
 		push_error("MarchingCubesAPI: Unknown shape '%s'. Available: %s" % [shape_name, SHAPE_MAP.keys()])
