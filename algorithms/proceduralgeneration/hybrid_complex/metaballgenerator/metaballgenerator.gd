@@ -95,21 +95,10 @@ func generate_metaballs():
 			randf_range(-bounds.z, bounds.z)
 		)
 		
-		var strength = randf_range(0.8, 2.0)
-		var radius = randf_range(3.0, 8.0)
+		var strength = randf_range(0.8, 1.5)
+		var radius = randf_range(1.0, 2.5)
 		
 		var metaball = Metaball.new(pos, strength, radius)
-		metaballs.append(metaball)
-	
-	# Add a few larger metaballs for main structure
-	for i in 3:
-		var pos = Vector3(
-			randf_range(-bounds.x * 0.5, bounds.x * 0.5),
-			randf_range(-bounds.y * 0.3, bounds.y * 0.7),
-			randf_range(-bounds.z * 0.5, bounds.z * 0.5)
-		)
-		
-		var metaball = Metaball.new(pos, randf_range(2.0, 4.0), randf_range(8.0, 12.0))
 		metaballs.append(metaball)
 
 func calculate_field_value(point: Vector3) -> float:
