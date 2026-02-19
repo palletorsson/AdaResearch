@@ -105,7 +105,7 @@ func _create_facade_gallery() -> void:
 
 	var x_offset: float = 0.0
 	for i in range(presets.size()):
-		var spec := presets[i]
+		var spec: Dictionary = presets[i]
 		var fw: float = spec["width"]
 		var fh: float = spec["height"]
 
@@ -161,7 +161,7 @@ func _create_element_gallery() -> void:
 
 	var x_offset: float = 0.0
 	for i in range(elements.size()):
-		var spec := elements[i]
+		var spec: Dictionary = elements[i]
 		var ew: float = spec["width"]
 		var eh: float = spec["height"]
 

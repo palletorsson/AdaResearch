@@ -38,6 +38,8 @@ var symmetry: int = 1:
 ## Study pack name (e.g., "italy", "japan", "new_york")
 @export var study_pack: String = "":
 	set(v):
+		if v == study_pack:
+			return
 		study_pack = v
 		if v != "" and is_inside_tree():
 			_load_pack_and_rebuild()
@@ -45,6 +47,8 @@ var symmetry: int = 1:
 ## Preset name from the study pack
 @export var preset: String = "":
 	set(v):
+		if v == preset:
+			return
 		preset = v
 		if v != "" and is_inside_tree():
 			_load_preset_and_rebuild()

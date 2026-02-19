@@ -63,6 +63,8 @@ enum TileShape {
 ## Active study pack name (e.g., "italy", "japan")
 @export var study_pack_name: String = "":
 	set(v):
+		if v == study_pack_name:
+			return
 		study_pack_name = v
 		if v != "" and is_inside_tree():
 			load_study_pack(v)
