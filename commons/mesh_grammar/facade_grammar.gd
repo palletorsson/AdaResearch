@@ -300,10 +300,10 @@ func _subdivide_into_grid() -> void:
 	for r in range(num_rows):
 		var zone_name: String = zones[r].get("name", "zone_%d" % r)
 		for c in range(num_cols):
-			var i00 := vert_grid[r][c]
-			var i10 := vert_grid[r][c + 1]
-			var i01 := vert_grid[r + 1][c]
-			var i11 := vert_grid[r + 1][c + 1]
+			var i00: int = vert_grid[r][c]
+			var i10: int = vert_grid[r][c + 1]
+			var i01: int = vert_grid[r + 1][c]
+			var i11: int = vert_grid[r + 1][c + 1]
 
 			var cell_tags := PackedStringArray()
 			cell_tags.append("zone_%s" % zone_name)
