@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://csdf0w3k8m2yx"]
 
 [ext_resource type="Script" path="res://commons/context/discofloor/StandaloneDiscoFloor.gd" id="1_disco"]
-[ext_resource type="Script" path="res://commons/context/discofloor/DiscoControlPanel.gd" id="2_panel"]
+[ext_resource type="Script" path="res://commons/context/discofloor/DiscoSequencerBridge.gd" id="2_bridge"]
 
 [node name="StandaloneDiscoSetup" type="Node3D"]
 
 [node name="DiscoFloor" type="Node3D" parent="."]
 script = ExtResource("1_disco")
-grid_width = 8
-grid_depth = 8
+grid_width = 10
+grid_depth = 10
 tile_size = 0.5
 tile_gap = 0.02
 base_color = Color(1, 1, 1, 1)
@@ -17,9 +17,5 @@ auto_start = true
 pattern_speed = 0.08
 pattern_duration = 8.0
 
-[node name="ControlPanel" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -2.5)
-script = ExtResource("2_panel")
-disco_floor_path = NodePath("../DiscoFloor")
-button_size = 0.12
-button_spacing = 0.14
+[node name="SequencerBridge" type="Node" parent="DiscoFloor"]
+script = ExtResource("2_bridge")
