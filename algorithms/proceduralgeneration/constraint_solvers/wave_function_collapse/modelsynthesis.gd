@@ -36,7 +36,7 @@ class ModelVoxel:
 		position = pos
 
 class Neighborhood:
-	var voxels: Array[Voxel] = []
+	var voxels: Array[ModelVoxel] = []
 	var center_position: Vector3i
 	var size: int
 	
@@ -44,7 +44,7 @@ class Neighborhood:
 		center_position = center
 		size = neighborhood_size
 	
-	func add_voxel(voxel: Voxel):
+	func add_voxel(voxel: ModelVoxel):
 		voxels.append(voxel)
 	
 	func get_pattern_hash() -> String:
@@ -121,7 +121,7 @@ class ModelSynthesis:
 			output[pos.x][pos.y][pos.z].type = type
 			output[pos.x][pos.y][pos.z].synthesized = true
 	
-	func get_output_voxel(pos: Vector3i) -> Voxel:
+	func get_output_voxel(pos: Vector3i) -> ModelVoxel:
 		if _is_valid_output_pos(pos):
 			return output[pos.x][pos.y][pos.z]
 		return null
