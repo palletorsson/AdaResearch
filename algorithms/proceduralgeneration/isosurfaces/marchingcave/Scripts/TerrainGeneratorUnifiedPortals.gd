@@ -11,7 +11,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorUnifiedPortals"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesPortalTerrain.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesPortalTerrain.glsl"
 
 func get_params_array() -> Array:
 	var params = super.get_params_array()

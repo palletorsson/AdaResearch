@@ -49,7 +49,7 @@ func _create_terrain():
 		terrain_mesh.material_override = terrain_material
 	
 	# Use TerrainGeneratorFlat script - SET BEFORE ADDING TO TREE
-	var terrain_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorFlat.gd")
+	var terrain_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd")
 	terrain_mesh.set_script(terrain_script)
 	
 	# Configure terrain BEFORE adding to tree
@@ -82,7 +82,7 @@ func _create_portals():
 		portal.position = position
 		
 		# Apply torus generator script BEFORE adding to tree
-		var torus_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorTorus.gd")
+		var torus_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd")
 		portal.set_script(torus_script)
 		
 		# Configure portal BEFORE adding to tree

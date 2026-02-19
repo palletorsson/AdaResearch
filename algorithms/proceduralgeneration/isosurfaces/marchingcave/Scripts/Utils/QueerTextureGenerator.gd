@@ -170,7 +170,7 @@ static func save_queer_textures_to_resources():
 	"""
 	Saves all queer textures as resource files
 	"""
-	var base_path = "res://algorithms/proceduralgeneration/marchingcave/Textures/"
+	var base_path = "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Textures/"
 	
 	# Create pride gradient
 	var pride_texture = create_pride_gradient_texture()

@@ -20,7 +20,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorShapes"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesShapes.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesShapes.glsl"
 
 func get_params_array():
 	# Get base parameters first

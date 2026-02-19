@@ -56,7 +56,7 @@ func generate_gallery():
 
 func create_sculpture(config: Dictionary, position: Vector3, index: int):
 	# Load the SHAPES generator, not the base one
-	var terrain_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorShapes.gd")
+	var terrain_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorShapes.gd")
 	
 	# Create container node
 	var container = Node3D.new()

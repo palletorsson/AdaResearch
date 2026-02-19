@@ -32,7 +32,7 @@ static func create(shape_name: String, position: Vector3 = Vector3.ZERO, scale: 
 	var shape_id = SHAPE_MAP[key]
 	
 	# Load the generator script
-	var generator_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorShapes.gd")
+	var generator_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorShapes.gd")
 	
 	# Create container
 	var container

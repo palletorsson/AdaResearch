@@ -159,7 +159,7 @@ func init_compute() -> bool:
 	counter_uniform.add_id(counter_buffer)
 	
 	# Create lut buffer
-	var lut = load_lut("res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesLUT.txt")
+	var lut = load_lut("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesLUT.txt")
 	if lut.is_empty():
 		push_error("%s: LUT data is empty, cannot create buffer" % get_class_name())
 		return false

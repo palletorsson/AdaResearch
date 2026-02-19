@@ -4,7 +4,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorOverhang"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesOverhangTerrain.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesOverhangTerrain.glsl"
 
 func _create_fallback_mesh():
 	print("TerrainGeneratorOverhang: Creating fallback flat landscape...")

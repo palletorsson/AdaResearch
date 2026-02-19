@@ -47,7 +47,7 @@ func _ready():
 
 func _create_terrain_generator():
 	# Load and instantiate the sculpt terrain generator
-	var sculpt_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorSculpt.gd")
+	var sculpt_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd")
 	if not sculpt_script:
 		push_error("MarchingCubesSculptVR: Could not load TerrainGeneratorSculpt.gd")
 		return

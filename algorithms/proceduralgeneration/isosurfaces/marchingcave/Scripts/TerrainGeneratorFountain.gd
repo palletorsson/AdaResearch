@@ -5,7 +5,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorFountain"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingFountain.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingFountain.glsl"
 
 func _create_fallback_mesh():
 	print("TerrainGeneratorFountain: Creating fallback cylinder...")

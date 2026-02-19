@@ -4,7 +4,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorTorus"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesTorus.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesTorus.glsl"
 
 func _create_fallback_mesh():
 	print("TerrainGeneratorTorus: Creating fallback simple torus...")

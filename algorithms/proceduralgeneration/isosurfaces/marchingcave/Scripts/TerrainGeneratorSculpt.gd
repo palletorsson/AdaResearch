@@ -11,7 +11,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorSculpt"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesSculpt.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesSculpt.glsl"
 
 func add_blob(pos: Vector3, radius: float) -> void:
 	blobs_array.append(Vector4(pos.x, pos.y, pos.z, radius))
@@ -80,7 +80,7 @@ func init_compute() -> bool:
 	counter_uniform.add_id(counter_buffer)
 	
 	# 4. LUT Buffer
-	var lut = load_lut("res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesLUT.txt")
+	var lut = load_lut("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesLUT.txt")
 	var lut_bytes = PackedInt32Array(lut).to_byte_array()
 	lut_buffer = rendering_device.storage_buffer_create(lut_bytes.size(), lut_bytes)
 	var lut_uniform = RDUniform.new()

@@ -85,8 +85,8 @@ func connect_ui_signals():
 
 func create_mini_cave():
 	# Create a scaled-down version of the marching cubes cave
-	var terrain_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd")
-	var terrain_material = load("res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres")
+	var terrain_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd")
+	var terrain_material = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres")
 	
 	# Find the display node
 	var display_node = $MiniCaveDisplay

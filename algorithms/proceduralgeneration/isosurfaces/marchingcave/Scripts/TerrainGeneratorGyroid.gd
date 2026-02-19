@@ -5,7 +5,7 @@ func get_class_name() -> String:
 	return "TerrainGeneratorGyroid"
 
 func get_compute_shader_path() -> String:
-	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingGyroid.glsl"
+	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingGyroid.glsl"
 
 func _process(_delta):
 	# Disable per-frame updates for optimal static mesh generation
