@@ -1,0 +1,329 @@
+{
+	"name": "italy",
+	"display_name": "Italian Architecture",
+	"techniques": {
+		"opus_tessellatum": {
+			"display": "Opus Tessellatum",
+			"description": "Regular small square tesserae, typical of Roman floors",
+			"tile_shape": "square",
+			"grout_width": 0.02,
+			"regularity": 0.9,
+			"tessera_size_range": [0.01, 0.02]
+		},
+		"opus_vermiculatum": {
+			"display": "Opus Vermiculatum",
+			"description": "Irregular curved tesserae following contour lines",
+			"tile_shape": "irregular",
+			"grout_width": 0.01,
+			"regularity": 0.3,
+			"tessera_size_range": [0.005, 0.015]
+		},
+		"opus_sectile": {
+			"display": "Opus Sectile",
+			"description": "Cut marble slabs forming geometric inlay",
+			"tile_shape": "polygon",
+			"grout_width": 0.005,
+			"regularity": 1.0,
+			"tessera_size_range": [0.05, 0.3]
+		},
+		"opus_signinum": {
+			"display": "Opus Signinum",
+			"description": "Scattered tesserae embedded in tinted concrete",
+			"tile_shape": "square",
+			"grout_width": 0.0,
+			"regularity": 0.4,
+			"tessera_size_range": [0.01, 0.02]
+		},
+		"majolica": {
+			"display": "Majolica",
+			"description": "Glazed ceramic tiles, tin-glazed earthenware",
+			"tile_shape": "square",
+			"grout_width": 0.01,
+			"regularity": 1.0,
+			"glazed": true,
+			"tessera_size_range": [0.1, 0.2]
+		},
+		"cosmatesque": {
+			"display": "Cosmatesque",
+			"description": "Geometric marble inlay using cut stone rounds and strips",
+			"tile_shape": "mixed",
+			"grout_width": 0.003,
+			"regularity": 1.0,
+			"tessera_size_range": [0.02, 0.15]
+		}
+	},
+	"periods": {
+		"roman_republican": {
+			"display": "Roman Republican (2nd-1st c. BC)",
+			"palette": ["#141418", "#EBE6D9", "#B8603C"],
+			"palette_names": ["Black basalt", "White limestone", "Terracotta"]
+		},
+		"roman_imperial": {
+			"display": "Roman Imperial (1st-4th c. AD)",
+			"palette": ["#141418", "#EBE6D9", "#B32719", "#C09933", "#267366", "#D4A0A0"],
+			"palette_names": ["Black basalt", "White marble", "Red oxide", "Gold ochre", "Blue-green glass", "Pink marble"]
+		},
+		"cosmatesque_period": {
+			"display": "Cosmatesque (12th-13th c.)",
+			"palette": ["#E8E0D4", "#264D26", "#8C1A26", "#CCA329"],
+			"palette_names": ["White Carrara", "Green serpentine", "Red porphyry", "Gold mosaic"]
+		},
+		"renaissance": {
+			"display": "Renaissance (15th-16th c.)",
+			"palette": ["#1F3380", "#D9B333", "#2D6633", "#F0EAD6", "#4D2666"],
+			"palette_names": ["Majolica blue", "Majolica yellow", "Green", "White", "Manganese purple"]
+		},
+		"baroque": {
+			"display": "Baroque (17th-18th c.)",
+			"palette": ["#1A3399", "#CCA329", "#1A4D26", "#CC6633", "#F5F0E1", "#0D0D0D"],
+			"palette_names": ["Rich blue", "Gold", "Deep green", "Terracotta orange", "Cream", "Black"]
+		}
+	},
+	"sites": {
+		"casa_del_fauno": {
+			"display": "Casa del Fauno, Pompeii",
+			"palette": ["#141418", "#EBE6D9"],
+			"default_technique": "opus_tessellatum",
+			"default_period": "roman_imperial",
+			"default_motifs": { "field": "perspective_cubes", "border": "meander_key" }
+		},
+		"casa_dei_vettii": {
+			"display": "Casa dei Vettii, Pompeii",
+			"palette": ["#141418", "#EBE6D9", "#B32719", "#C09933"],
+			"default_technique": "opus_tessellatum",
+			"default_period": "roman_imperial",
+			"default_motifs": { "field": "checkerboard", "border": "guilloche" }
+		},
+		"casa_dei_cervi": {
+			"display": "Casa dei Cervi, Herculaneum",
+			"palette": ["#141418", "#EBE6D9", "#267366", "#B32719"],
+			"default_technique": "opus_sectile",
+			"default_period": "roman_imperial",
+			"default_motifs": { "field": "diamond_lozenge", "border": "wave_scroll" }
+		},
+		"santa_chiara": {
+			"display": "Santa Chiara Cloister, Naples",
+			"palette": ["#1F3380", "#D9B333", "#2D6633", "#F5F0E1"],
+			"default_technique": "majolica",
+			"default_period": "baroque",
+			"default_motifs": { "field": "floral_cross", "border": "vine_scroll" }
+		},
+		"villa_san_michele": {
+			"display": "Villa San Michele, Capri",
+			"palette": ["#E8E0D4", "#264D26", "#8C1A26", "#1A3399"],
+			"default_technique": "cosmatesque",
+			"default_period": "cosmatesque_period"
+		},
+		"museo_archeologico": {
+			"display": "Museo Archeologico Nazionale, Naples",
+			"palette": ["#141418", "#EBE6D9", "#B32719", "#C09933", "#267366", "#D4A0A0"],
+			"default_technique": "opus_tessellatum",
+			"default_period": "roman_imperial",
+			"default_motifs": { "field": "star_pattern", "border": "meander_key", "medallion": "hex_rosette" }
+		}
+	},
+	"motifs": {
+		"meander_key": {
+			"display": "Greek Key / Meander",
+			"group": "PMM",
+			"zone": "border",
+			"domain_size": 8,
+			"domain": [
+				[1, 1, 1, 1, 1, 1, 1, 0],
+				[0, 0, 0, 0, 0, 0, 1, 0],
+				[0, 1, 1, 1, 1, 0, 1, 0],
+				[0, 1, 0, 0, 1, 0, 1, 0],
+				[0, 1, 0, 1, 1, 0, 1, 0],
+				[0, 1, 0, 0, 0, 0, 1, 0],
+				[0, 1, 1, 1, 1, 1, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0]
+			]
+		},
+		"wave_scroll": {
+			"display": "Running Wave / Scroll",
+			"group": "PG",
+			"zone": "border",
+			"domain_size": 6,
+			"domain": [
+				[0, 0, 1, 1, 0, 0],
+				[0, 1, 0, 0, 1, 0],
+				[1, 0, 0, 0, 0, 1],
+				[1, 0, 0, 0, 0, 1],
+				[0, 1, 0, 0, 1, 0],
+				[0, 0, 1, 1, 0, 0]
+			]
+		},
+		"guilloche": {
+			"display": "Guilloche / Interlocking Circles",
+			"group": "PM",
+			"zone": "border",
+			"domain_size": 6,
+			"domain": [
+				[0, 1, 1, 1, 1, 0],
+				[1, 0, 0, 0, 0, 1],
+				[1, 0, 2, 2, 0, 1],
+				[1, 0, 2, 2, 0, 1],
+				[1, 0, 0, 0, 0, 1],
+				[0, 1, 1, 1, 1, 0]
+			]
+		},
+		"checkerboard": {
+			"display": "Checkerboard",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 2,
+			"domain": [
+				[0, 1],
+				[1, 0]
+			]
+		},
+		"diamond_lozenge": {
+			"display": "Diamond Lozenge Grid",
+			"group": "CMM",
+			"zone": "field",
+			"domain_size": 4,
+			"domain": [
+				[0, 0, 1, 0],
+				[0, 1, 1, 1],
+				[1, 1, 0, 1],
+				[0, 1, 0, 0]
+			]
+		},
+		"octagon_square": {
+			"display": "Octagon and Square",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 6,
+			"domain": [
+				[0, 1, 1, 1, 1, 0],
+				[1, 1, 0, 0, 1, 1],
+				[1, 0, 0, 0, 0, 1],
+				[1, 0, 0, 0, 0, 1],
+				[1, 1, 0, 0, 1, 1],
+				[0, 1, 1, 1, 1, 0]
+			]
+		},
+		"perspective_cubes": {
+			"display": "Perspective Cubes (3D Illusion)",
+			"group": "P3M1",
+			"zone": "field",
+			"domain_size": 6,
+			"domain": [
+				[0, 0, 1, 1, 2, 2],
+				[0, 0, 1, 1, 2, 2],
+				[2, 2, 0, 0, 1, 1],
+				[2, 2, 0, 0, 1, 1],
+				[1, 1, 2, 2, 0, 0],
+				[1, 1, 2, 2, 0, 0]
+			]
+		},
+		"hex_rosette": {
+			"display": "Hexagonal Rosette",
+			"group": "P6M",
+			"zone": "medallion",
+			"domain_size": 8,
+			"domain": [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 1, 2, 2, 1, 0, 0],
+				[0, 1, 2, 1, 1, 2, 1, 0],
+				[1, 2, 1, 0, 0, 1, 2, 1],
+				[1, 2, 1, 0, 0, 1, 2, 1],
+				[0, 1, 2, 1, 1, 2, 1, 0],
+				[0, 0, 1, 2, 2, 1, 0, 0],
+				[0, 0, 0, 1, 1, 0, 0, 0]
+			]
+		},
+		"star_pattern": {
+			"display": "Eight-Pointed Star",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 8,
+			"domain": [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 1, 1, 1, 1, 0, 0],
+				[0, 1, 1, 0, 0, 1, 1, 0],
+				[1, 1, 0, 0, 0, 0, 1, 1],
+				[1, 1, 0, 0, 0, 0, 1, 1],
+				[0, 1, 1, 0, 0, 1, 1, 0],
+				[0, 0, 1, 1, 1, 1, 0, 0],
+				[0, 0, 0, 1, 1, 0, 0, 0]
+			]
+		},
+		"labyrinth": {
+			"display": "Labyrinth / Maze",
+			"group": "PM",
+			"zone": "field",
+			"domain_size": 8,
+			"domain": [
+				[1, 1, 1, 1, 1, 1, 1, 1],
+				[0, 0, 0, 0, 0, 0, 0, 1],
+				[1, 1, 1, 1, 1, 1, 0, 1],
+				[1, 0, 0, 0, 0, 1, 0, 1],
+				[1, 0, 1, 1, 0, 1, 0, 1],
+				[1, 0, 1, 0, 0, 1, 0, 1],
+				[1, 0, 1, 1, 1, 1, 0, 1],
+				[1, 0, 0, 0, 0, 0, 0, 1]
+			]
+		},
+		"vine_scroll": {
+			"display": "Vine Scroll",
+			"group": "PM",
+			"zone": "border",
+			"domain_size": 8,
+			"domain": [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 1, 2, 2, 1, 0, 0],
+				[0, 1, 2, 0, 0, 2, 1, 0],
+				[1, 2, 0, 0, 0, 0, 2, 1],
+				[1, 2, 0, 0, 0, 0, 2, 1],
+				[0, 1, 2, 0, 0, 2, 1, 0],
+				[0, 0, 1, 2, 2, 1, 0, 0],
+				[0, 0, 0, 1, 1, 0, 0, 0]
+			]
+		},
+		"citrus_tile": {
+			"display": "Citrus / Lemon Tile",
+			"group": "P1",
+			"zone": "field",
+			"domain_size": 6,
+			"domain": [
+				[0, 0, 3, 3, 0, 0],
+				[0, 3, 3, 3, 3, 0],
+				[3, 3, 2, 2, 3, 3],
+				[3, 3, 2, 2, 3, 3],
+				[0, 3, 3, 3, 3, 0],
+				[0, 0, 3, 3, 0, 0]
+			]
+		},
+		"floral_cross": {
+			"display": "Floral Cross",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 8,
+			"domain": [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 2, 1, 1, 2, 0, 0],
+				[0, 2, 3, 2, 2, 3, 2, 0],
+				[1, 1, 2, 0, 0, 2, 1, 1],
+				[1, 1, 2, 0, 0, 2, 1, 1],
+				[0, 2, 3, 2, 2, 3, 2, 0],
+				[0, 0, 2, 1, 1, 2, 0, 0],
+				[0, 0, 0, 1, 1, 0, 0, 0]
+			]
+		},
+		"quincunx": {
+			"display": "Quincunx (Circles in Squares)",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 6,
+			"domain": [
+				[0, 0, 1, 1, 0, 0],
+				[0, 1, 2, 2, 1, 0],
+				[1, 2, 2, 2, 2, 1],
+				[1, 2, 2, 2, 2, 1],
+				[0, 1, 2, 2, 1, 0],
+				[0, 0, 1, 1, 0, 0]
+			]
+		}
+	}
+}
