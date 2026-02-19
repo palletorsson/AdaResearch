@@ -72,8 +72,17 @@ var _comment_artifact_cache: Dictionary = {}
 var _artifact_scene_path_by_name: Dictionary = {}
 var _artifact_scene_index_loaded: bool = false
 var _map_grades: Dictionary = {}  # map_name -> "A"/"B"/"C"/"F"
+var _map_flags: Dictionary = {}  # map_name -> Array of flag strings
 var _claude_panel: ClaudeCodePanel = null
 var _claude_visible: bool = false
+
+# Rating & flags panel (top-right)
+var _rating_panel: PanelContainer
+var _rating_map_label: Label
+var _rating_grade_buttons: Dictionary = {}  # grade_string -> Button
+var _rating_flag_checks: Dictionary = {}    # flag_string -> CheckBox
+const MAP_FLAGS: Array[String] = ["need_fix", "used", "archived", "wip", "showcase"]
+const FLAG_ICONS: Dictionary = {"need_fix": "🔧", "used": "✓", "archived": "📦", "wip": "🚧", "showcase": "⭐"}
 
 # Keep legacy references for API compat (some code reads _map_option / _sequence_option)
 var _current_maps: Array[String] = []
@@ -294,6 +303,7 @@ func _build_ui() -> void:
 
 	_build_left_panel()
 	_build_camera_bar()
+	_build_rating_panel()
 	_build_comment_panel()
 	_build_claude_panel()
 
@@ -465,6 +475,153 @@ func _build_camera_bar() -> void:
 
 	# Default highlight: spin (index 2)
 	_highlight_cam_button(2)
+
+# ---------------------------------------------------------------------------
+# Rating & Flags panel (top-right corner)
+# ---------------------------------------------------------------------------
+
+func _build_rating_panel() -> void:
+	_rating_panel = PanelContainer.new()
+	_rating_panel.name = "RatingPanel"
+	_rating_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	# Top-right corner, compact
+	_rating_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_rating_panel.offset_right = -8
+	_rating_panel.offset_left = -180
+	_rating_panel.offset_top = 8
+	_root.add_child(_rating_panel)
+
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.04, 0.06, 0.10, 0.92)
+	panel_style.set_border_width_all(1)
+	panel_style.border_color = Color(0.22, 0.66, 0.98, 0.5)
+	panel_style.set_corner_radius_all(6)
+	panel_style.set_content_margin_all(6)
+	_rating_panel.add_theme_stylebox_override("panel", panel_style)
+
+	var vb = VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 4)
+	_rating_panel.add_child(vb)
+
+	# Map name label
+	_rating_map_label = Label.new()
+	_rating_map_label.text = "No map loaded"
+	_rating_map_label.add_theme_font_size_override("font_size", 10)
+	_rating_map_label.add_theme_color_override("font_color", Color(0.65, 0.75, 0.88))
+	_rating_map_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vb.add_child(_rating_map_label)
+
+	# Grade row: A B C F buttons
+	var grade_row = HBoxContainer.new()
+	grade_row.add_theme_constant_override("separation", 2)
+	grade_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	vb.add_child(grade_row)
+
+	var grade_label = Label.new()
+	grade_label.text = "Grade"
+	grade_label.add_theme_font_size_override("font_size", 10)
+	grade_label.add_theme_color_override("font_color", Color(0.5, 0.58, 0.7))
+	grade_row.add_child(grade_label)
+
+	for grade_str in ["A", "B", "C", "F"]:
+		var btn = Button.new()
+		btn.text = grade_str
+		btn.custom_minimum_size = Vector2(28, 22)
+		btn.add_theme_font_size_override("font_size", 11)
+		btn.pressed.connect(_on_rating_grade_pressed.bind(grade_str))
+		_style_button(btn)
+		grade_row.add_child(btn)
+		_rating_grade_buttons[grade_str] = btn
+
+	# Separator
+	var sep = HSeparator.new()
+	sep.add_theme_constant_override("separation", 2)
+	vb.add_child(sep)
+
+	# Flag checkboxes — compact two-column grid
+	var flag_grid = GridContainer.new()
+	flag_grid.columns = 2
+	flag_grid.add_theme_constant_override("h_separation", 2)
+	flag_grid.add_theme_constant_override("v_separation", 1)
+	vb.add_child(flag_grid)
+
+	for flag_name in MAP_FLAGS:
+		var cb = CheckBox.new()
+		cb.text = "%s %s" % [FLAG_ICONS.get(flag_name, ""), flag_name.replace("_", " ")]
+		cb.add_theme_font_size_override("font_size", 10)
+		cb.add_theme_color_override("font_color", Color(0.7, 0.78, 0.88))
+		cb.toggled.connect(_on_rating_flag_toggled.bind(flag_name))
+		flag_grid.add_child(cb)
+		_rating_flag_checks[flag_name] = cb
+
+	_rating_panel.visible = true
+
+func _on_rating_grade_pressed(grade: String) -> void:
+	if last_selected_map_name.is_empty():
+		return
+	var current := _get_grade(last_selected_map_name)
+	if current == grade:
+		# Toggle off if already set
+		_map_grades.erase(last_selected_map_name)
+		_save_map_grades()
+		_refresh_map_button_grade(last_selected_map_name, "")
+		_refresh_grade_counts()
+		_update_rating_panel_display()
+		_set_status("Grade cleared: %s" % last_selected_map_name)
+	else:
+		_map_grades[last_selected_map_name] = grade
+		_save_map_grades()
+		_refresh_map_button_grade(last_selected_map_name, grade)
+		_refresh_grade_counts()
+		_update_rating_panel_display()
+		_set_status("Grade %s → %s" % [last_selected_map_name, grade])
+
+func _on_rating_flag_toggled(toggled_on: bool, flag_name: String) -> void:
+	if last_selected_map_name.is_empty():
+		return
+	var flags: Array = _map_flags.get(last_selected_map_name, [])
+	if toggled_on:
+		if not flags.has(flag_name):
+			flags.append(flag_name)
+	else:
+		flags.erase(flag_name)
+	if flags.is_empty():
+		_map_flags.erase(last_selected_map_name)
+	else:
+		_map_flags[last_selected_map_name] = flags
+	_save_map_grades()
+	# Refresh sidebar button to show/hide flag icons
+	var grade := _get_grade(last_selected_map_name)
+	_refresh_map_button_grade(last_selected_map_name, grade)
+	_set_status("%s flag %s: %s" % [last_selected_map_name, "+" if toggled_on else "-", flag_name])
+
+func _update_rating_panel_display() -> void:
+	if not _rating_panel:
+		return
+	if last_selected_map_name.is_empty():
+		_rating_map_label.text = "No map loaded"
+		for btn in _rating_grade_buttons.values():
+			_style_button(btn as Button, false)
+		for cb in _rating_flag_checks.values():
+			(cb as CheckBox).set_pressed_no_signal(false)
+		return
+
+	_rating_map_label.text = _format_name(last_selected_map_name)
+
+	# Highlight active grade
+	var current_grade := _get_grade(last_selected_map_name)
+	for grade_str in _rating_grade_buttons.keys():
+		var btn: Button = _rating_grade_buttons[grade_str]
+		var is_active: bool = str(grade_str) == current_grade
+		_style_button(btn, is_active)
+		if is_active:
+			btn.add_theme_color_override("font_color", _grade_color(grade_str))
+
+	# Set flag checkboxes
+	var flags: Array = _map_flags.get(last_selected_map_name, [])
+	for flag_name in _rating_flag_checks.keys():
+		var cb: CheckBox = _rating_flag_checks[flag_name]
+		cb.set_pressed_no_signal(flags.has(flag_name))
 
 # ---------------------------------------------------------------------------
 # Camera mode button callbacks
@@ -767,6 +924,8 @@ func _set_overlay_visible(is_visible: bool) -> void:
 		_panel.visible = is_visible
 	if _camera_bar:
 		_camera_bar.visible = is_visible
+	if _rating_panel:
+		_rating_panel.visible = is_visible
 
 	if is_visible and refresh_on_open:
 		_reload_data()
@@ -932,6 +1091,7 @@ func _is_whitespace(ch: String) -> bool:
 
 func _load_map_grades() -> void:
 	_map_grades.clear()
+	_map_flags.clear()
 	if not FileAccess.file_exists(MAP_GRADES_PATH):
 		return
 
@@ -953,6 +1113,10 @@ func _load_map_grades() -> void:
 	var grades = data.get("grades", {})
 	if grades is Dictionary:
 		_map_grades = grades
+
+	var flags = data.get("flags", {})
+	if flags is Dictionary:
+		_map_flags = flags
 
 func _get_grade(map_name: String) -> String:
 	return str(_map_grades.get(map_name, ""))
@@ -1014,21 +1178,34 @@ func _cycle_grade(map_name: String) -> void:
 
 func _save_map_grades() -> void:
 	var data := {"count": _map_grades.size(), "grades": _map_grades}
+	if not _map_flags.is_empty():
+		data["flags"] = _map_flags
 	var json_text := JSON.stringify(data, " ")
 	var file := FileAccess.open(MAP_GRADES_PATH, FileAccess.WRITE)
 	if file:
 		file.store_string(json_text)
 		file.close()
 
+func _flag_suffix(map_name: String) -> String:
+	var flags: Array = _map_flags.get(map_name, [])
+	if flags.is_empty():
+		return ""
+	var icons: Array[String] = []
+	for f in flags:
+		if FLAG_ICONS.has(f):
+			icons.append(FLAG_ICONS[f])
+	return " " + "".join(icons) if not icons.is_empty() else ""
+
 func _refresh_map_button_grade(map_name: String, grade: String) -> void:
 	# Update all quick buttons that reference this map
+	var suffix := _flag_suffix(map_name)
 	for key in _quick_map_buttons.keys():
 		var parts: PackedStringArray = str(key).split("|")
 		if parts.size() == 2 and parts[1] == map_name:
 			var btn: Button = _quick_map_buttons[key] as Button
 			if not btn:
 				continue
-			btn.text = "%s%s" % [_grade_prefix(grade), _format_name(map_name)]
+			btn.text = "%s%s%s" % [_grade_prefix(grade), _format_name(map_name), suffix]
 			var seq_name: String = parts[0]
 			btn.tooltip_text = "%s / %s [%s]" % [_format_name(seq_name), _format_name(map_name), grade if not grade.is_empty() else "?"]
 			if not grade.is_empty():
@@ -1222,7 +1399,7 @@ func _rebuild_catalog_buttons() -> void:
 		for map_name in maps:
 			var grade := _get_grade(map_name)
 			var map_btn = Button.new()
-			map_btn.text = "%s%s" % [_grade_prefix(grade), _format_name(map_name)]
+			map_btn.text = "%s%s%s" % [_grade_prefix(grade), _format_name(map_name), _flag_suffix(map_name)]
 			map_btn.tooltip_text = "%s / %s [%s]" % [_format_name(sequence_name), _format_name(map_name), grade if not grade.is_empty() else "?"]
 			map_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			map_btn.custom_minimum_size = Vector2(0, 20)
@@ -1814,6 +1991,7 @@ func _remember_selection(sequence_name: String, map_name: String) -> void:
 	if not map_name.is_empty():
 		last_selected_map_name = map_name
 	_update_quick_button_highlights()
+	_update_rating_panel_display()
 
 # ---------------------------------------------------------------------------
 # Comment editor state

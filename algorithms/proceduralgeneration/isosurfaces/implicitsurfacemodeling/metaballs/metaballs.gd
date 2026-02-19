@@ -8,6 +8,7 @@
 @export var metaball_color: Color = Color(0.2, 0.6, 1.0)
 @export var animate_strength: bool = false
 @export var base_strength: float = 1.0  # Base strength value for all metaballs
+@export var world_offset: Vector3 = Vector3.ZERO  # Local offset (grid system handles world position)
 
 # Internal variables
 var cube_mesh: MeshInstance3D
@@ -20,7 +21,8 @@ func _ready():
 	# Create a simple cube mesh for ray marching
 	cube_mesh = MeshInstance3D.new()
 	cube_mesh.mesh = BoxMesh.new()
-	cube_mesh.mesh.size = Vector3(10.0, 10.0, 10.0)
+	cube_mesh.mesh.size = Vector3(12.0, 12.0, 12.0)
+	cube_mesh.position = world_offset
 	add_child(cube_mesh)
 	
 	# Add light
@@ -51,28 +53,32 @@ func initialize_metaballs():
 	metaball_strengths.clear()
 	metaball_radii.clear()
 	
+	# Get the world-space center of the box (available after _ready / add_child)
+	var center = cube_mesh.global_position if cube_mesh.is_inside_tree() else world_offset
+	
 	# Initialize metaball positions and strengths
 	for i in range(metaball_count):
 		var radius = randf_range(0.5, 1.0)
 		metaball_radii.append(radius)
 		
-		# Create Vector4 where xyz = position, w = radius
+		# Create Vector4 where xyz = world position, w = radius
 		var position = Vector4(
-			randf_range(-2.0, 2.0),  # x
-			randf_range(-2.0, 2.0),  # y
-			randf_range(-2.0, 2.0),  # z
-			radius                    # radius
+			center.x + randf_range(-2.0, 2.0),
+			center.y + randf_range(-2.0, 2.0),
+			center.z + randf_range(-2.0, 2.0),
+			radius
 		)
 		
 		metaball_positions.append(position)
-		
-		# Use the base_strength parameter for all metaballs
 		metaball_strengths.append(base_strength)
 	
 	# Update shader parameters
 	update_shader_parameters()
 
 func _process(_delta):
+	# Animate around the box's actual world position (works wherever the grid places us)
+	var center = cube_mesh.global_position
+	
 	# Create new array for updated positions
 	var updated_positions = []
 	
@@ -82,10 +88,10 @@ func _process(_delta):
 		
 		# Create a new Vector4 for each position (Vector4 is immutable in Godot 4)
 		var new_position = Vector4(
-			sin(t * (0.3 + float(i) * 0.1) + i) * 2.0,           # x
-			cos(t * (0.2 + float(i) * 0.1) + i * 0.7) * 2.0,      # y
-			sin(t * (0.4 + float(i) * 0.05) + i * 1.3) * 2.0,     # z
-			metaball_radii[i]                                      # Keep same radius
+			center.x + sin(t * (0.3 + float(i) * 0.1) + i) * 2.0,
+			center.y + cos(t * (0.2 + float(i) * 0.1) + i * 0.7) * 2.0,
+			center.z + sin(t * (0.4 + float(i) * 0.05) + i * 1.3) * 2.0,
+			metaball_radii[i]
 		)
 		
 		updated_positions.append(new_position)

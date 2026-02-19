@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled;
 
 // Metaball parameters - can be controlled from GDScript
 uniform vec4 metaball_positions[9]; // xyz = position, w = radius
@@ -32,7 +32,7 @@ float map(vec3 p) {
     float dist = 100.0;
 
     // Blend all metaballs together
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 9; i++) {
         vec3 center = metaball_positions[i].xyz;
         float radius = metaball_positions[i].w;
         float strength = metaball_strengths[i];

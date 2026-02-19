@@ -9,17 +9,46 @@ class_name MetaballGenerator
 @export var metaball_count: int = 8
 @export var animation_speed: float = 0.5
 @export var generate_on_ready: bool = true
+@export var max_steps: int = 5  # Stop after this many steps (0 = unlimited)
+@export var step_duration: float = 0.4  # Seconds per step
+
+# Shader to apply to the metaball surface
+@export var surface_shader: Shader
+
+# Step state
+var current_step: int = 0
+var stepping: bool = false
+var step_timer: float = 0.0
+var is_stopped: bool = false
 
 # Metaball properties
 var metaballs: Array[Metaball] = []
 var field_values: PackedFloat32Array = []
 var mesh_instance: MeshInstance3D
+var array_mesh: ArrayMesh  # Reused across frames
 var collision_shape: CollisionShape3D
 var static_body: StaticBody3D
+
+# Pre-computed grid world positions (avoids recomputing every frame)
+var grid_positions_x: PackedFloat32Array = []
+var grid_positions_y: PackedFloat32Array = []
+var grid_positions_z: PackedFloat32Array = []
+
+# Per-metaball max influence distance squared (for culling)
+var influence_radius_sq: PackedFloat32Array = []
 
 # Marching cubes lookup tables
 var edge_table: PackedInt32Array
 var tri_table: Array[PackedInt32Array]
+
+# Bourke offsets as flat array for speed
+var bourke_x: PackedInt32Array = PackedInt32Array([0,1,1,0,0,1,1,0])
+var bourke_y: PackedInt32Array = PackedInt32Array([0,0,1,1,0,0,1,1])
+var bourke_z: PackedInt32Array = PackedInt32Array([0,0,0,0,1,1,1,1])
+
+# Edge vertex pairs (flat)
+var edge_v1: PackedInt32Array = PackedInt32Array([0,1,2,3,4,5,6,7,0,1,2,3])
+var edge_v2: PackedInt32Array = PackedInt32Array([1,2,3,0,5,6,7,4,4,5,6,7])
 
 # Performance tracking
 var generation_time: float = 0.0
@@ -28,107 +57,191 @@ class Metaball:
 	var position: Vector3
 	var strength: float
 	var radius: float
-	var velocity: Vector3
 	var target_strength: float
 	var animation_phase: float
+	# Lava lamp: mainly vertical motion with slight horizontal drift
+	var rise_speed: float
+	var drift_freq_x: float
+	var drift_freq_z: float
+	var drift_amount: float
+	var phase_offset: float
 	
 	func _init(pos: Vector3, str: float, rad: float):
 		position = pos
 		strength = str
 		target_strength = str
 		radius = rad
-		velocity = Vector3.ZERO
 		animation_phase = randf() * TAU
+		# Vertical bobbing at different speeds
+		rise_speed = randf_range(0.3, 0.8)
+		# Small horizontal drift
+		drift_freq_x = randf_range(0.5, 1.5)
+		drift_freq_z = randf_range(0.5, 1.5)
+		drift_amount = randf_range(0.3, 0.7)
+		phase_offset = randf() * TAU
 	
 	func get_field_value(point: Vector3) -> float:
-		var distance = position.distance_to(point)
-		if distance < 0.001:
-			return strength * 1000.0  # Avoid division by zero
-		return strength * radius * radius / (distance * distance)
+		var dist_sq = position.distance_squared_to(point)
+		if dist_sq < 0.0001:
+			return strength * 10000.0
+		return strength * radius * radius / dist_sq
 	
 	func update(delta: float, bounds: Vector3):
-		# Animate metaball movement
-		animation_phase += delta * 2.0
+		animation_phase += delta
 		
-		# Smooth movement with sine waves
-		var target_pos = Vector3(
-			bounds.x * 0.3 * sin(animation_phase * 0.7),
-			bounds.y * 0.2 * sin(animation_phase * 0.5 + 1.0),
-			bounds.z * 0.3 * cos(animation_phase * 0.6)
-		)
+		# Vertical: full height bobbing like a lava lamp
+		var target_y = bounds.y * 0.8 * sin(animation_phase * rise_speed + phase_offset)
+		# Horizontal: small gentle drift
+		var target_x = bounds.x * drift_amount * sin(animation_phase * drift_freq_x + phase_offset)
+		var target_z = bounds.z * drift_amount * cos(animation_phase * drift_freq_z + phase_offset * 1.3)
 		
-		position = position.lerp(target_pos, delta * 2.0)
+		var target_pos = Vector3(target_x, target_y, target_z)
+		position = position.lerp(target_pos, delta * 2.5)
 		
-		# Animate strength
-		strength = lerp(strength, target_strength * (0.8 + 0.4 * sin(animation_phase * 1.3)), delta * 3.0)
+		# Gentle strength pulsing
+		strength = target_strength * (0.92 + 0.08 * sin(animation_phase * 0.6 + phase_offset))
 
 func _ready():
 	setup_marching_cubes_tables()
+	_precompute_grid_positions()
 	setup_scene()
 	
 	if generate_on_ready:
 		generate_metaballs()
 		generate_mesh()
+		# Auto-start stepping
+		if max_steps > 0:
+			start_stepping()
+
+func _precompute_grid_positions():
+	# Pre-compute axis positions once — no per-frame math for grid coords
+	grid_positions_x.resize(grid_size.x)
+	grid_positions_y.resize(grid_size.y)
+	grid_positions_z.resize(grid_size.z)
+	var half_x = grid_size.x * 0.5
+	var half_y = grid_size.y * 0.5
+	var half_z = grid_size.z * 0.5
+	for i in grid_size.x:
+		grid_positions_x[i] = (i - half_x) * cell_size
+	for i in grid_size.y:
+		grid_positions_y[i] = (i - half_y) * cell_size
+	for i in grid_size.z:
+		grid_positions_z[i] = (i - half_z) * cell_size
 
 func setup_scene():
-	# Create mesh instance
+	# Create mesh instance with reusable ArrayMesh
 	mesh_instance = MeshInstance3D.new()
+	array_mesh = ArrayMesh.new()
+	mesh_instance.mesh = array_mesh
 	add_child(mesh_instance)
 	
-	# Setup material — flat, non-reflective
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(1.0, 0.9, 0.3)
-	material.metallic = 0.0
-	material.roughness = 1.0
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	mesh_instance.material_override = material
+	# Use the pink shader if assigned, otherwise fallback to standard material
+	if surface_shader:
+		var shader_mat = ShaderMaterial.new()
+		shader_mat.shader = surface_shader
+		mesh_instance.material_override = shader_mat
+	else:
+		# Try loading PinkTeleport shader by default
+		var pink_shader = load("res://commons/resourses/shaders/PinkTeleport.gdshader")
+		if pink_shader:
+			var shader_mat = ShaderMaterial.new()
+			shader_mat.shader = pink_shader
+			mesh_instance.material_override = shader_mat
+		else:
+			# Fallback: glossy organic material
+			var material = StandardMaterial3D.new()
+			material.albedo_color = Color(0.15, 0.55, 0.85)
+			material.metallic = 0.3
+			material.roughness = 0.25
+			material.cull_mode = BaseMaterial3D.CULL_DISABLED
+			material.rim_enabled = true
+			material.rim = 0.3
+			material.rim_tint = 0.4
+			mesh_instance.material_override = material
 
 func generate_metaballs():
 	metaballs.clear()
-	var bounds = Vector3(grid_size) * cell_size * 0.4
+	influence_radius_sq.clear()
+	var bounds = Vector3(grid_size) * cell_size * 0.5
 	
-	# Create main cluster of metaballs
+	# Small balls distributed vertically through the column
 	for i in metaball_count:
+		var y_frac = float(i) / float(metaball_count) * 2.0 - 1.0
 		var pos = Vector3(
-			randf_range(-bounds.x, bounds.x),
-			randf_range(-bounds.y * 0.5, bounds.y),
-			randf_range(-bounds.z, bounds.z)
+			randf_range(-bounds.x * 0.3, bounds.x * 0.3),
+			bounds.y * y_frac * 0.7,
+			randf_range(-bounds.z * 0.3, bounds.z * 0.3)
 		)
 		
-		var strength = randf_range(0.8, 1.5)
-		var radius = randf_range(1.0, 2.5)
-		
-		var metaball = Metaball.new(pos, strength, radius)
-		metaballs.append(metaball)
+		var strength = randf_range(0.7, 1.0)
+		var radius = randf_range(0.35, 0.55)
+		metaballs.append(Metaball.new(pos, strength, radius))
+	
+	_update_influence_radii()
 
-func calculate_field_value(point: Vector3) -> float:
-	var total_field = 0.0
-	
-	for metaball in metaballs:
-		total_field += metaball.get_field_value(point)
-	
-	return total_field
+func _update_influence_radii():
+	# Max distance where a metaball's field > min_threshold
+	# Beyond this, the contribution is negligible
+	var min_threshold = iso_level * 0.05  # 5% of iso — anything less won't matter
+	influence_radius_sq.resize(metaballs.size())
+	for i in metaballs.size():
+		var mb = metaballs[i]
+		# field = strength * r² / d²  →  d = r * sqrt(strength / threshold)
+		var max_dist = mb.radius * sqrt(mb.target_strength / min_threshold)
+		influence_radius_sq[i] = max_dist * max_dist
 
 func generate_mesh():
 	var start_time = Time.get_ticks_usec()
+	var num_metaballs = metaballs.size()
 	
-	# Calculate field values for all grid points
-	field_values.clear()
-	field_values.resize(grid_size.x * grid_size.y * grid_size.z)
+	# Cache metaball data into flat arrays for inner-loop speed
+	var mb_px: PackedFloat32Array = []
+	var mb_py: PackedFloat32Array = []
+	var mb_pz: PackedFloat32Array = []
+	var mb_sr2: PackedFloat32Array = []  # strength * radius²
+	mb_px.resize(num_metaballs)
+	mb_py.resize(num_metaballs)
+	mb_pz.resize(num_metaballs)
+	mb_sr2.resize(num_metaballs)
+	for i in num_metaballs:
+		var mb = metaballs[i]
+		mb_px[i] = mb.position.x
+		mb_py[i] = mb.position.y
+		mb_pz[i] = mb.position.z
+		mb_sr2[i] = mb.strength * mb.radius * mb.radius
+	
+	# Calculate field values with influence-radius culling
+	var total_points = grid_size.x * grid_size.y * grid_size.z
+	if field_values.size() != total_points:
+		field_values.resize(total_points)
+	
+	var sx = grid_size.x
+	var sy = grid_size.y
+	var stride_y = sx
+	var stride_z = sx * sy
 	
 	var index = 0
 	for z in grid_size.z:
+		var wz = grid_positions_z[z]
 		for y in grid_size.y:
+			var wy = grid_positions_y[y]
 			for x in grid_size.x:
-				var world_pos = Vector3(
-					(x - grid_size.x * 0.5) * cell_size,
-					(y - grid_size.y * 0.5) * cell_size,
-					(z - grid_size.z * 0.5) * cell_size
-				)
-				field_values[index] = calculate_field_value(world_pos)
+				var wx = grid_positions_x[x]
+				var total_field = 0.0
+				for m in num_metaballs:
+					var dx = wx - mb_px[m]
+					var dy = wy - mb_py[m]
+					var dz = wz - mb_pz[m]
+					var dist_sq = dx * dx + dy * dy + dz * dz
+					if dist_sq < influence_radius_sq[m]:
+						if dist_sq < 0.0001:
+							total_field += mb_sr2[m] * 10000.0
+						else:
+							total_field += mb_sr2[m] / dist_sq
+				field_values[index] = total_field
 				index += 1
 	
-	# Generate mesh using marching cubes
+	# --- Marching cubes pass ---
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
 	var indices = PackedInt32Array()
@@ -136,138 +249,189 @@ func generate_mesh():
 	for z in range(grid_size.z - 1):
 		for y in range(grid_size.y - 1):
 			for x in range(grid_size.x - 1):
-				march_cube(x, y, z, vertices, normals, indices)
+				_march_cube_fast(x, y, z, stride_y, stride_z, vertices, normals, indices)
 	
-	# Create the mesh
-	var array_mesh = ArrayMesh.new()
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	arrays[Mesh.ARRAY_INDEX] = indices
-	
+	# Reuse ArrayMesh — clear old surface, add new
+	array_mesh.clear_surfaces()
 	if vertices.size() > 0:
+		var arrays = []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = vertices
+		arrays[Mesh.ARRAY_NORMAL] = normals
+		arrays[Mesh.ARRAY_INDEX] = indices
 		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		mesh_instance.mesh = array_mesh
 	
 	generation_time = (Time.get_ticks_usec() - start_time) / 1000.0
-	print("Metaball mesh: %.1fms, %d verts, %d tris | global_pos=%s" % [generation_time, vertices.size(), indices.size() / 3, str(global_position)])
 
-func march_cube(x: int, y: int, z: int, vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array):
-	# Get the 8 cube vertices in Paul Bourke order:
-	# 0=(0,0,0) 1=(1,0,0) 2=(1,1,0) 3=(0,1,0) 4=(0,0,1) 5=(1,0,1) 6=(1,1,1) 7=(0,1,1)
-	var cube_values = PackedFloat32Array()
-	var cube_positions = PackedVector3Array()
+func _march_cube_fast(x: int, y: int, z: int, stride_y: int, stride_z: int, vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array):
+	# Inline field lookups — no function call overhead, no Vector3i allocations
+	var base_idx = z * stride_z + y * stride_y + x
+	var cv0 = field_values[base_idx]
+	var cv1 = field_values[base_idx + 1]
+	var cv2 = field_values[base_idx + stride_y + 1]
+	var cv3 = field_values[base_idx + stride_y]
+	var cv4 = field_values[base_idx + stride_z]
+	var cv5 = field_values[base_idx + stride_z + 1]
+	var cv6 = field_values[base_idx + stride_z + stride_y + 1]
+	var cv7 = field_values[base_idx + stride_z + stride_y]
 	
-	var bourke_offsets = [
-		Vector3i(0,0,0), Vector3i(1,0,0), Vector3i(1,1,0), Vector3i(0,1,0),
-		Vector3i(0,0,1), Vector3i(1,0,1), Vector3i(1,1,1), Vector3i(0,1,1)
-	]
-	
-	for i in 8:
-		var grid_pos = Vector3i(x, y, z) + bourke_offsets[i]
-		var world_pos = Vector3(
-			(grid_pos.x - grid_size.x * 0.5) * cell_size,
-			(grid_pos.y - grid_size.y * 0.5) * cell_size,
-			(grid_pos.z - grid_size.z * 0.5) * cell_size
-		)
-		
-		cube_positions.append(world_pos)
-		cube_values.append(get_field_value_at_grid(grid_pos))
-	
-	# Determine cube configuration
+	# Cube index
 	var cube_index = 0
-	for i in 8:
-		if cube_values[i] > iso_level:
-			cube_index |= (1 << i)
+	if cv0 > iso_level: cube_index |= 1
+	if cv1 > iso_level: cube_index |= 2
+	if cv2 > iso_level: cube_index |= 4
+	if cv3 > iso_level: cube_index |= 8
+	if cv4 > iso_level: cube_index |= 16
+	if cv5 > iso_level: cube_index |= 32
+	if cv6 > iso_level: cube_index |= 64
+	if cv7 > iso_level: cube_index |= 128
 	
-	# Skip if completely inside or outside
 	if cube_index == 0 or cube_index == 255:
 		return
 	
-	# Get edge intersections
-	var edge_vertices = PackedVector3Array()
-	edge_vertices.resize(12)
+	# Corner world positions from precomputed axes
+	var px0 = grid_positions_x[x]
+	var px1 = grid_positions_x[x + 1]
+	var py0 = grid_positions_y[y]
+	var py1 = grid_positions_y[y + 1]
+	var pz0 = grid_positions_z[z]
+	var pz1 = grid_positions_z[z + 1]
+	
+	# Pack corners: pos + value (avoid PackedVector3Array allocation)
+	var cp_x = PackedFloat32Array([px0,px1,px1,px0,px0,px1,px1,px0])
+	var cp_y = PackedFloat32Array([py0,py0,py1,py1,py0,py0,py1,py1])
+	var cp_z = PackedFloat32Array([pz0,pz0,pz0,pz0,pz1,pz1,pz1,pz1])
+	var cv = PackedFloat32Array([cv0,cv1,cv2,cv3,cv4,cv5,cv6,cv7])
+	
+	# Edge intersections
+	var ev_x = PackedFloat32Array()
+	var ev_y = PackedFloat32Array()
+	var ev_z = PackedFloat32Array()
+	ev_x.resize(12); ev_y.resize(12); ev_z.resize(12)
 	
 	var edges = edge_table[cube_index]
-	
 	for i in 12:
 		if edges & (1 << i):
-			edge_vertices[i] = interpolate_edge(i, cube_positions, cube_values)
+			var a = edge_v1[i]
+			var b = edge_v2[i]
+			var val_a = cv[a]
+			var val_b = cv[b]
+			var t = clampf((iso_level - val_a) / (val_b - val_a), 0.0, 1.0)
+			ev_x[i] = cp_x[a] + t * (cp_x[b] - cp_x[a])
+			ev_y[i] = cp_y[a] + t * (cp_y[b] - cp_y[a])
+			ev_z[i] = cp_z[a] + t * (cp_z[b] - cp_z[a])
 	
-	# Generate triangles
-	var triangle_config = tri_table[cube_index]
-	var base_index = vertices.size()
+	# Triangles
+	var tri_cfg = tri_table[cube_index]
+	var base = vertices.size()
 	
-	for i in range(0, triangle_config.size(), 3):
-		if triangle_config[i] == -1:
+	var ti = 0
+	while ti < tri_cfg.size():
+		var e0 = tri_cfg[ti]
+		if e0 == -1:
 			break
+		var e1 = tri_cfg[ti + 1]
+		var e2 = tri_cfg[ti + 2]
 		
-		var v1 = edge_vertices[triangle_config[i]]
-		var v2 = edge_vertices[triangle_config[i + 1]]
-		var v3 = edge_vertices[triangle_config[i + 2]]
+		var v1 = Vector3(ev_x[e0], ev_y[e0], ev_z[e0])
+		var v2 = Vector3(ev_x[e1], ev_y[e1], ev_z[e1])
+		var v3 = Vector3(ev_x[e2], ev_y[e2], ev_z[e2])
 		
 		vertices.append(v1)
 		vertices.append(v2)
 		vertices.append(v3)
 		
-		# Calculate normal
 		var normal = (v2 - v1).cross(v3 - v1).normalized()
 		normals.append(normal)
 		normals.append(normal)
 		normals.append(normal)
 		
-		indices.append(base_index)
-		indices.append(base_index + 1)
-		indices.append(base_index + 2)
-		base_index += 3
-
-func interpolate_edge(edge_index: int, positions: PackedVector3Array, values: PackedFloat32Array) -> Vector3:
-	# Edge to vertex mapping
-	var edge_vertices = [
-		[0, 1], [1, 2], [2, 3], [3, 0],  # Bottom face
-		[4, 5], [5, 6], [6, 7], [7, 4],  # Top face
-		[0, 4], [1, 5], [2, 6], [3, 7]   # Vertical edges
-	]
-	
-	var v1_idx = edge_vertices[edge_index][0]
-	var v2_idx = edge_vertices[edge_index][1]
-	
-	var p1 = positions[v1_idx]
-	var p2 = positions[v2_idx]
-	var val1 = values[v1_idx]
-	var val2 = values[v2_idx]
-	
-	# Linear interpolation to iso_level
-	var t = (iso_level - val1) / (val2 - val1)
-	t = clamp(t, 0.0, 1.0)
-	
-	return p1.lerp(p2, t)
-
-func get_field_value_at_grid(grid_pos: Vector3i) -> float:
-	if grid_pos.x < 0 or grid_pos.x >= grid_size.x or grid_pos.y < 0 or grid_pos.y >= grid_size.y or grid_pos.z < 0 or grid_pos.z >= grid_size.z:
-		return 0.0
-	
-	var index = grid_pos.z * grid_size.y * grid_size.x + grid_pos.y * grid_size.x + grid_pos.x
-	return field_values[index]
+		indices.append(base)
+		indices.append(base + 1)
+		indices.append(base + 2)
+		base += 3
+		ti += 3
 
 var regen_timer: float = 0.0
-const REGEN_INTERVAL: float = 0.5  # Regenerate at most twice per second
+var regen_interval: float = 0.2
+const REGEN_MIN: float = 0.1
+const REGEN_MAX: float = 0.5
+const TIME_BUDGET_MS: float = 15.0
 
 func _process(delta):
-	if metaballs.size() == 0:
+	if metaballs.size() == 0 or is_stopped:
 		return
 	
-	# Update metaball positions
-	var bounds = Vector3(grid_size) * cell_size * 0.4
+	if not stepping:
+		return
+	
+	# Accumulate time for this step
+	step_timer += delta
+	
+	# During a step: animate metaballs smoothly
+	var bounds = Vector3(grid_size) * cell_size * 0.5
 	for metaball in metaballs:
 		metaball.update(delta * animation_speed, bounds)
 	
-	# Regenerate mesh on a timer (not every frame)
+	# Regenerate mesh
 	regen_timer += delta
-	if regen_timer >= REGEN_INTERVAL:
+	if regen_timer >= regen_interval:
 		regen_timer = 0.0
 		generate_mesh()
+		if generation_time > TIME_BUDGET_MS * 1.5:
+			regen_interval = minf(regen_interval * 1.3, REGEN_MAX)
+		elif generation_time < TIME_BUDGET_MS * 0.5:
+			regen_interval = maxf(regen_interval * 0.85, REGEN_MIN)
+	
+	# Check if this step is complete
+	if step_timer >= step_duration:
+		step_timer = 0.0
+		current_step += 1
+		# Final mesh regen at step boundary for clean state
+		generate_mesh()
+		print("Metaball step %d/%d complete" % [current_step, max_steps])
+		
+		if max_steps > 0 and current_step >= max_steps:
+			stepping = false
+			is_stopped = true
+			print("Metaball simulation stopped after %d steps" % max_steps)
+
+# --- Public step API (for future player interface) ---
+
+func start_stepping():
+	"""Begin stepping. Resets step counter."""
+	current_step = 0
+	stepping = true
+	is_stopped = false
+	step_timer = 0.0
+	print("Metaball stepping started (max %d steps)" % max_steps)
+
+func do_single_step():
+	"""Execute one step on demand (for player button)."""
+	if metaballs.size() == 0:
+		return
+	var bounds = Vector3(grid_size) * cell_size * 0.5
+	# Advance each metaball by one step_duration worth of time
+	for metaball in metaballs:
+		metaball.update(step_duration * animation_speed, bounds)
+	generate_mesh()
+	current_step += 1
+	print("Metaball manual step %d" % current_step)
+
+func reset_simulation():
+	"""Reset metaballs to fresh random positions."""
+	current_step = 0
+	stepping = false
+	is_stopped = false
+	step_timer = 0.0
+	generate_metaballs()
+	generate_mesh()
+
+func get_step_count() -> int:
+	return current_step
+
+func is_simulation_stopped() -> bool:
+	return is_stopped
 
 # Marching cubes lookup tables setup — complete Paul Bourke tables
 func setup_marching_cubes_tables():
