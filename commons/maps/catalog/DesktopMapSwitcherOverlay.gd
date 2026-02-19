@@ -1250,7 +1250,7 @@ const SPINE_ORDER: Array[String] = [
 ]
 
 const BRANCH_ORDER: Array[String] = [
-	"speculativecomputation", "criticalalgorithms", "recursiveemergence",
+	"speculativecomputation", "criticalalgorithms",
 	"physicssimulation", "datastructures", "searchpathfinding", "vectors",
 	"computationalgeometry", "meshes", "patterngeneration",
 	"grammar_systems", "spatial_partitioning", "constraint_solvers",
@@ -1261,6 +1261,7 @@ const BRANCH_ORDER: Array[String] = [
 
 const TEST_ORDER: Array[String] = [
 	"devexamples", "testmaps", "joints", "particles", "unused",
+	"recursiveemergence",
 ]
 
 func _sort_sequences(names: Array[String]) -> Array[String]:
