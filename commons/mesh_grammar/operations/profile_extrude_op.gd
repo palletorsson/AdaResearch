@@ -109,7 +109,7 @@ func _extrude_face_with_profile(mesh: MeshData, face_idx: int,
 	var dots: Array[float] = []
 	for vi in f:
 		dots.append(mesh.vertices[vi].dot(up))
-	var face_height := dots.max() - dots.min()
+	var face_height: float = dots.max() - dots.min()
 	if face_height < 0.001:
 		face_height = 1.0
 
@@ -133,7 +133,7 @@ func _extrude_face_with_profile(mesh: MeshData, face_idx: int,
 		for vi_idx in range(f.size()):
 			var base_pos: Vector3 = mesh.vertices[f[vi_idx]]
 			# Offset along normal by depth and shift along up by height fraction
-			var offset_pos := base_pos + normal * depth + up * (height_frac * face_height - (mesh.vertices[f[vi_idx]].dot(up) - dots.min()))
+			var offset_pos: Vector3 = base_pos + normal * depth + up * (height_frac * face_height - (mesh.vertices[f[vi_idx]].dot(up) - dots.min()))
 			var new_vi := mesh.add_vertex(offset_pos)
 			new_verts.append(new_vi)
 
