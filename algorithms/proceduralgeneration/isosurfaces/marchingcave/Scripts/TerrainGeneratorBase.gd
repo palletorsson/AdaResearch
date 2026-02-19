@@ -8,6 +8,7 @@ class_name TerrainGeneratorBase extends MeshInstance3D
 @export var center_position : Vector3 = Vector3(0, 10, 0)
 @export var use_fallback : bool = false  # Force use simple mesh for testing
 @export var invert_faces : bool = false # Flip triangle winding and normals (useful for objects vs caves)
+@export var continuous_update : bool = false # Keep re-rendering every frame (for animated shaders like Fountain)
 
 const resolution : int = 8
 const num_waitframes_gpusync : int = 12
@@ -77,6 +78,8 @@ func _ready():
 	create_mesh()
 	print("✅ %s: Generation complete!" % get_class_name())
 	
+var _initial_generation_done : bool = false
+
 func _process(delta):
 	# Skip compute processing if we're using fallback or if rendering device is null
 	if use_fallback or not rendering_device:
@@ -86,6 +89,10 @@ func _process(delta):
 		fetch_and_process_compute_data()
 	elif (waiting_for_meshthread && frame - last_meshthread_start_frame >= num_waitframes_meshthread):
 		create_mesh()
+		if not continuous_update and not _initial_generation_done:
+			_initial_generation_done = true
+			set_process(false)  # Stop the loop — no tick
+			return
 	elif (!waiting_for_compute && !waiting_for_meshthread):
 		run_compute()
 	

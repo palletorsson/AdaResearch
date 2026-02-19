@@ -62,6 +62,7 @@ func _create_terrain_generator():
 	terrain_generator.iso_level = 0.3
 	terrain_generator.noise_scale = 0.0  # No noise - pure sculpting
 	terrain_generator.invert_faces = true  # View from outside
+	terrain_generator.continuous_update = true  # Needs re-render on each paint stroke
 
 	# Material — glass wireframe shader (same as voxel_noise_demo)
 	var shader = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Shaders/glass_wireframe.gdshader")

@@ -40,8 +40,4 @@ func _create_fallback_mesh():
 	_create_collision()
 	print("✅ Fallback mesh created")
 
-func create_mesh():
-	super.create_mesh()
-	# Stop rebuilding triangles after first generation (static shape)
-	set_process(false)
-	print("TerrainGeneratorShapes: Static generation complete, stopping updates.")
+	# continuous_update defaults to false in base class, so it auto-stops after first mesh

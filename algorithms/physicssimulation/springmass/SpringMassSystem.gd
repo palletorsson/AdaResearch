@@ -22,6 +22,16 @@ func _ready():
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
+	# Ensure container nodes exist (may not have a .tscn)
+	if not has_node("MassPoints"):
+		var mp := Node3D.new()
+		mp.name = "MassPoints"
+		add_child(mp)
+	if not has_node("Springs"):
+		var sp := Node3D.new()
+		sp.name = "Springs"
+		add_child(sp)
+
 	print("Creating VR-optimized spring-mass system...")
 	_create_mass_point_grid()
 	_create_spring_connections()
@@ -197,20 +207,26 @@ func _on_reset_pressed():
 
 func _on_pause_pressed():
 	paused = !paused
-	$UI/VBoxContainer/PauseButton.text = "Resume" if paused else "Pause"
+	var pause_btn: Node = get_node_or_null("UI/VBoxContainer/PauseButton")
+	if pause_btn:
+		pause_btn.text = "Resume" if paused else "Pause"
 
 func _on_stiffness_changed(value: float):
 	spring_stiffness = value
-	$UI/VBoxContainer/StiffnessLabel.text = "Spring Stiffness: " + str(value)
-	
+	var label: Node = get_node_or_null("UI/VBoxContainer/StiffnessLabel")
+	if label:
+		label.text = "Spring Stiffness: " + str(value)
+
 	# Update all springs
 	for spring in springs:
 		spring.stiffness = value
 
 func _on_damping_changed(value: float):
 	damping = value
-	$UI/VBoxContainer/DampingLabel.text = "Damping: " + str(value)
-	
+	var label: Node = get_node_or_null("UI/VBoxContainer/DampingLabel")
+	if label:
+		label.text = "Damping: " + str(value)
+
 	# Update all mass points
 	for mass_point in mass_points:
 		mass_point.damping = value
