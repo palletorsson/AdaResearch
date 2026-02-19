@@ -1,8 +1,8 @@
 {
 	"map_info": {
-		"name": "Noise Exit",
-		"lookup_name": "Noise_Exit",
-		"description": "Transition space — the noise fades, the lab awaits.",
+		"name": "Lab Path",
+		"lookup_name": "Lab_Path",
+		"description": "Transition corridor back to the lab. Shared endpoint for all sequences.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -12,8 +12,8 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "noise",
-			"estimated_time": "30 seconds"
+			"category": "transition",
+			"estimated_time": "15 seconds"
 		}
 	},
 	"layers": {
