@@ -468,6 +468,9 @@ func _notification(type):
 		release()
 
 func release():
+	if thread and thread.is_started():
+		thread.wait_to_finish()
+		thread = null
 	if rendering_device:
 		rendering_device.free_rid(pipeline)
 		rendering_device.free_rid(triangle_buffer)
