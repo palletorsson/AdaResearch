@@ -3,8 +3,8 @@
 ## Run this scene directly to test the tiling system.
 extends Node3D
 
-@export var panel_size: Vector2 = Vector2(2.5, 2.5)
-@export var panel_spacing: float = 3.5
+@export var panel_size: Vector2 = Vector2(4.0, 4.0)
+@export var panel_spacing: float = 2.0
 
 func _ready() -> void:
 	_create_environment()
@@ -108,8 +108,8 @@ func _create_motif_gallery() -> void:
 func _spawn_motif_panel(spec: Dictionary, pos: Vector3) -> void:
 	var tiling := TilingSystem.new()
 	tiling.name = "Tiling_%s" % spec["motif"]
-	tiling.tile_size = 6
-	tiling.field_size = Vector2i(3, 3)
+	tiling.tile_size = 8
+	tiling.field_size = Vector2i(5, 5)
 	tiling.has_border = false
 	tiling.has_corners = false
 	tiling.has_medallion = false
@@ -125,7 +125,7 @@ func _spawn_motif_panel(spec: Dictionary, pos: Vector3) -> void:
 	label.text = spec["name"]
 	label.font_size = 32
 	label.pixel_size = 0.002
-	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 0.3)
+	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 0.15)
 	label.rotation_degrees.x = -90
 	label.modulate = Color(0.7, 0.7, 0.8)
 	add_child(label)
@@ -161,15 +161,15 @@ func _create_composed_floors() -> void:
 	label.text = "COMPOSED FLOORS"
 	label.font_size = 64
 	label.pixel_size = 0.003
-	label.position = Vector3(0, 0.05, 9.0)
+	label.position = Vector3(0, 0.05, 5.0)
 	label.rotation_degrees.x = -90
 	label.modulate = Color(0.7, 0.7, 0.8)
 	add_child(label)
 
 	for i in range(compositions.size()):
 		var spec: Dictionary = compositions[i]
-		var x: float = i * (panel_spacing + 2.0)
-		var z: float = 10.5
+		var x: float = i * panel_spacing
+		var z: float = 6.0
 
 		_spawn_composed_floor(spec, Vector3(x, 0, z))
 
@@ -177,8 +177,8 @@ func _create_composed_floors() -> void:
 func _spawn_composed_floor(spec: Dictionary, pos: Vector3) -> void:
 	var tiling := TilingSystem.new()
 	tiling.name = "Composed_%s" % spec.get("name", "floor").replace(" ", "_")
-	tiling.tile_size = 6
-	tiling.field_size = Vector2i(3, 3)
+	tiling.tile_size = 8
+	tiling.field_size = Vector2i(5, 5)
 	tiling.border_width = 4
 	tiling.has_border = true
 	tiling.has_corners = true
@@ -198,7 +198,7 @@ func _spawn_composed_floor(spec: Dictionary, pos: Vector3) -> void:
 	label.text = spec.get("name", "Floor")
 	label.font_size = 32
 	label.pixel_size = 0.002
-	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 1.5)
+	label.position = pos + Vector3(panel_size.x / 2.0, 0.05, panel_size.y + 0.15)
 	label.rotation_degrees.x = -90
 	label.modulate = Color(0.7, 0.7, 0.8)
 	add_child(label)
