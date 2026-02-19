@@ -1,7 +1,7 @@
 ﻿extends Node3D
 
-@export var spacing : float = 3.0  # Meters between shapes
-@export var shape_scale : float = 0.01  # Scale down from SDF units to VR meters
+@export var spacing : float = 4.0  # Meters between shapes
+@export var shape_scale : float = 0.025  # Scale down from SDF units to VR meters
 
 func _ready():
 	var shape_names = ["Human", "Chair", "House", "Bottle", "Cup", "Computer"]
