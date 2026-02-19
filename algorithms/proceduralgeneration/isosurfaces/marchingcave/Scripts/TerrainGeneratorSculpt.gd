@@ -16,13 +16,13 @@ func _ready() -> void:
 	if seed_blobs_on_ready and blobs_array.is_empty():
 		# Seed with an organic vertical form — grows from ground
 		var center := center_position
-		var s := chunk_scale * 0.3  # scale relative to chunk
+		var s := chunk_scale * 0.15  # smaller blobs = more sculpt detail
 		add_blob(center + Vector3(0, -s * 0.2, 0), s * 0.5)   # wide base
-		add_blob(center + Vector3(0, s * 0.15, 0), s * 0.35)   # torso
-		add_blob(center + Vector3(s * 0.08, s * 0.4, 0), s * 0.25)  # shoulder
-		add_blob(center + Vector3(-s * 0.06, s * 0.35, s * 0.05), s * 0.22)
-		add_blob(center + Vector3(0, s * 0.6, 0), s * 0.18)    # neck
-		add_blob(center + Vector3(0.02, s * 0.75, -0.01), s * 0.15)  # top
+		add_blob(center + Vector3(0, s * 0.3, 0), s * 0.35)    # torso
+		add_blob(center + Vector3(s * 0.15, s * 0.7, 0), s * 0.25)  # shoulder
+		add_blob(center + Vector3(-s * 0.1, s * 0.6, s * 0.08), s * 0.22)
+		add_blob(center + Vector3(0, s * 1.0, 0), s * 0.18)    # neck
+		add_blob(center + Vector3(0.02, s * 1.3, -0.01), s * 0.15)  # top
 		print("%s: Seeded %d initial blobs" % [get_class_name(), blobs_array.size()])
 	super._ready()
 

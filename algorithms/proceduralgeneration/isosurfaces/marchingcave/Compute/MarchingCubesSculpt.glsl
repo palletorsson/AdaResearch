@@ -127,8 +127,8 @@ float getBlobsSDF(vec3 p) {
 	int count = int(params.numBlobs);
 	if (count == 0) return dist;
 	
-	// Smoothness factor (k) — scales with volume so blending stays proportional
-	float k = params.scale * 0.15;
+	// Smoothness factor (k) — scales with volume, lower = more defined blobs
+	float k = params.scale * 0.06;
 	
 	for (int i = 0; i < count; i++) {
 		vec4 blob = blobs.data[i].pos_rad;
