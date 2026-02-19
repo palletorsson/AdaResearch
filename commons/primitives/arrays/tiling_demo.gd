@@ -167,7 +167,7 @@ func _create_composed_floors() -> void:
 	add_child(label)
 
 	for i in range(compositions.size()):
-		var spec := compositions[i]
+		var spec: Dictionary = compositions[i]
 		var x: float = i * (panel_spacing + 2.0)
 		var z: float = 10.5
 
