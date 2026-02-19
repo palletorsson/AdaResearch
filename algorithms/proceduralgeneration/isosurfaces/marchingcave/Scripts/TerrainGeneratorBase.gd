@@ -251,9 +251,10 @@ func process_mesh_data():
 	print("%s: Compute shader generated %d triangles" % [get_class_name(), num_triangles])
 	
 	# SAFETY CAP: Prevent device hang if shader outputs garbage or too much density
-	# 65k triangles is plenty for a single prop. Processing 100k+ in GDScript will freeze Quest.
-	if num_triangles > 65000:
-		print("❌ SAFETY ABORT: Triangle count %d exceeds safety limit (65000). Expected ~100-2000 for objects. Aborting to prevent hang." % num_triangles)
+	# 500k triangles is the desktop limit. For Quest VR, reduce to ~65k.
+	var safety_limit := 500000
+	if num_triangles > safety_limit:
+		print("❌ SAFETY ABORT: Triangle count %d exceeds safety limit (%d). Aborting to prevent hang." % [num_triangles, safety_limit])
 		num_triangles = 0
 		return
 	

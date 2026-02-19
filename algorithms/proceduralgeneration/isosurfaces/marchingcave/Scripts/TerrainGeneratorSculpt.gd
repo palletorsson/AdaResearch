@@ -7,8 +7,24 @@ var blobs_array : Array[Vector4] = [] # x,y,z,radius
 var blob_buffer : RID
 const blob_bind_index : int = 4
 
+@export var seed_blobs_on_ready: bool = true
+
 func get_class_name() -> String:
 	return "TerrainGeneratorSculpt"
+
+func _ready() -> void:
+	if seed_blobs_on_ready and blobs_array.is_empty():
+		# Seed with an organic vertical form — grows from ground
+		var center := center_position
+		var s := chunk_scale * 0.3  # scale relative to chunk
+		add_blob(center + Vector3(0, -s * 0.2, 0), s * 0.5)   # wide base
+		add_blob(center + Vector3(0, s * 0.15, 0), s * 0.35)   # torso
+		add_blob(center + Vector3(s * 0.08, s * 0.4, 0), s * 0.25)  # shoulder
+		add_blob(center + Vector3(-s * 0.06, s * 0.35, s * 0.05), s * 0.22)
+		add_blob(center + Vector3(0, s * 0.6, 0), s * 0.18)    # neck
+		add_blob(center + Vector3(0.02, s * 0.75, -0.01), s * 0.15)  # top
+		print("%s: Seeded %d initial blobs" % [get_class_name(), blobs_array.size()])
+	super._ready()
 
 func get_compute_shader_path() -> String:
 	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesSculpt.glsl"
