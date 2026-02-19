@@ -3317,7 +3317,7 @@
 			"name": "Context-Free Grammars",
 			"lookup_name": "context_free_grammars",
 			"description": "L-system context-free grammar generation and visualization",
-			"scene": "res://algorithms/recursiveemergence/lsystems/context_free_grammars/context_free_grammars.tscn",
+			"scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -3326,7 +3326,7 @@
 			"name": "Tree Generation",
 			"lookup_name": "tree_generation",
 			"description": "Procedural tree generation using L-system algorithms",
-			"scene": "res://algorithms/recursiveemergence/lsystems/tree_generation/tree_generation.tscn",
+			"scene": "res://algorithms/lsystems/tree_generation/tree_generation.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -3656,7 +3656,7 @@
 			"name": "L-System Tree",
 			"lookup_name": "lsystem_tree",
 			"description": "Interactive L-system tree generation demonstrating formal grammar-based plant growth",
-			"scene": "res://algorithms/proceduralgeneration/lsystem/tree_l_system.tscn",
+			"scene": "res://algorithms/lsystems/tree_generation/tree_generation.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -5908,7 +5908,7 @@
 			"name": "Hilbert3D",
 			"lookup_name": "Hilbert3D",
 			"description": "Hilbert3D",
-			"scene": "res://algorithms/l_systems/Hilbert3D.tscn",
+			"scene": "res://algorithms/lsystems/Hilbert3D.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
