@@ -78,6 +78,8 @@ func _check_for_scene_data():
 
 	# Try multiple locations for scene data
 	# 1. Check current scene's metadata
+	if not is_inside_tree():
+		return
 	var scene_root = get_tree().current_scene
 	if scene_root:
 		scene_data = scene_root.get_meta("scene_user_data", {})
