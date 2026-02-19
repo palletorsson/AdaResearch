@@ -1,0 +1,155 @@
+# mario_cube.gd — Listens for NextCube signal, removes DarkSphere, shows rainbow
+extends Node3D
+
+class_name MarioCube
+
+var _dark_sphere_ref: Node3D = null
+var _rainbow_ref: Node3D = null
+var _activated: bool = false
+
+func _ready() -> void:
+	# Wait a frame so NextCubes are ready
+	await get_tree().process_frame
+	_connect_to_next_cubes()
+	_cache_dark_sphere()
+	_create_rainbow()
+
+func _connect_to_next_cubes() -> void:
+	var count := 0
+	for node in get_tree().get_nodes_in_group("next_cube"):
+		if node is NextCube and not node.next_requested.is_connected(_on_next_requested):
+			node.next_requested.connect(_on_next_requested)
+			count += 1
+	# Fallback: find by class
+	if count == 0:
+		_find_next_cubes_recursive(get_tree().current_scene)
+	print("MarioCube: Connected to %d NextCubes" % count)
+
+func _find_next_cubes_recursive(node: Node) -> void:
+	if node is NextCube:
+		if not node.next_requested.is_connected(_on_next_requested):
+			node.next_requested.connect(_on_next_requested)
+	for child in node.get_children():
+		_find_next_cubes_recursive(child)
+
+func _on_next_requested(_from_position: Vector3) -> void:
+	if _activated:
+		return
+	_activated = true
+	_remove_dark_sphere()
+	_show_rainbow()
+
+# ---------------------------------------------------------------------------
+# Dark sphere
+# ---------------------------------------------------------------------------
+
+func _cache_dark_sphere() -> void:
+	for node in get_tree().get_nodes_in_group("dark_sphere"):
+		if node is Node3D:
+			_dark_sphere_ref = node as Node3D
+			return
+	_dark_sphere_ref = _find_by_name(get_tree().current_scene, "DarkSphere")
+
+func _find_by_name(root: Node, target: String) -> Node3D:
+	if root.name == target and root is Node3D:
+		return root as Node3D
+	for child in root.get_children():
+		var found := _find_by_name(child, target)
+		if found:
+			return found
+	return null
+
+func _remove_dark_sphere() -> void:
+	if not _dark_sphere_ref or not is_instance_valid(_dark_sphere_ref):
+		_cache_dark_sphere()
+	if _dark_sphere_ref and is_instance_valid(_dark_sphere_ref):
+		var tween := create_tween()
+		tween.tween_property(_dark_sphere_ref, "scale", Vector3.ZERO, 1.2) \
+			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+		tween.tween_callback(_dark_sphere_ref.queue_free)
+		print("MarioCube: Removing DarkSphere")
+	else:
+		print("MarioCube: No DarkSphere found")
+
+# ---------------------------------------------------------------------------
+# Rainbow
+# ---------------------------------------------------------------------------
+
+func _create_rainbow() -> void:
+	_rainbow_ref = Node3D.new()
+	_rainbow_ref.name = "Rainbow"
+	_rainbow_ref.visible = false
+
+	var colors: Array[Color] = [
+		Color(1.0, 0.0, 0.0),
+		Color(1.0, 0.5, 0.0),
+		Color(1.0, 1.0, 0.0),
+		Color(0.0, 1.0, 0.0),
+		Color(0.0, 0.5, 1.0),
+		Color(0.3, 0.0, 0.8),
+		Color(0.6, 0.0, 1.0),
+	]
+
+	var inner_radius := 4.0
+	var band_width := 0.6
+
+	for i in colors.size():
+		var r_in := inner_radius + i * band_width
+		var r_out := r_in + band_width * 0.9
+		var mesh_inst := MeshInstance3D.new()
+		mesh_inst.mesh = _arc_mesh(r_in, r_out, 32)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = colors[i]
+		mat.emission_enabled = true
+		mat.emission = colors[i]
+		mat.emission_energy_multiplier = 1.5
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mesh_inst.material_override = mat
+		_rainbow_ref.add_child(mesh_inst)
+
+	_rainbow_ref.position = Vector3(0.0, 3.0, 0.0)
+	add_child(_rainbow_ref)
+
+func _show_rainbow() -> void:
+	if not _rainbow_ref:
+		return
+	_rainbow_ref.visible = true
+	_rainbow_ref.scale = Vector3.ZERO
+	var tween := create_tween()
+	tween.tween_property(_rainbow_ref, "scale", Vector3.ONE, 1.0) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+
+func _arc_mesh(r_in: float, r_out: float, segs: int) -> ArrayMesh:
+	var mesh := ArrayMesh.new()
+	var verts := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var indices := PackedInt32Array()
+
+	for i in range(segs + 1):
+		var a := PI * float(i) / float(segs)
+		var x := cos(a)
+		var y := sin(a)
+		verts.append(Vector3(x * r_in, y * r_in, 0.0))
+		verts.append(Vector3(x * r_out, y * r_out, 0.0))
+		normals.append(Vector3.BACK)
+		normals.append(Vector3.BACK)
+		if i < segs:
+			var b := i * 2
+			indices.append_array([b, b+1, b+2, b+1, b+3, b+2])
+
+	# Back face
+	var vc := verts.size()
+	for i in vc:
+		verts.append(verts[i])
+		normals.append(Vector3.FORWARD)
+	for i in range(segs):
+		var b := vc + i * 2
+		indices.append_array([b+2, b+1, b, b+2, b+3, b+1])
+
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh

@@ -8130,6 +8130,26 @@
 				"recursiveemergence",
 				"machinelearning"
 			]
+		},
+		"mario_cube": {
+			"name": "Mario Cube",
+			"lookup_name": "mario_cube",
+			"description": "Mario-style question cube. Step on it to remove the DarkSphere enclosure and reveal a rainbow. Respawns after 5 seconds.",
+			"scene": "res://commons/artifacts/mario_cube/mario_cube.tscn",
+			"category": "interactive",
+			"interaction": "step",
+			"complexity": "beginner",
+			"tags": [
+				"mario",
+				"cube",
+				"interactive",
+				"dark_sphere",
+				"rainbow",
+				"reveal"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	},
 	"euclid_postulates_plaque": {
