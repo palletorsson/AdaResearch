@@ -8061,6 +8061,75 @@
 			"map_sequences": [
 				"foundationscrisis"
 			]
+		},
+		"cellular_automata_3d_stacked": {
+			"name": "3D Cellular Automata Stacked",
+			"lookup_name": "cellular_automata_3d_stacked",
+			"description": "Stacked layers of 3D cellular automata — each generation builds on the previous, creating emergent vertical structures from simple rules.",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3DStacked.tscn",
+			"category": "cellular_automata",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"cellular_automata",
+				"3d",
+				"stacked",
+				"emergence",
+				"procgen"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence",
+				"cellularautomata"
+			]
+		},
+		"cellular_automata_3d_tree": {
+			"name": "3D Cellular Automata Tree",
+			"lookup_name": "cellular_automata_3d_tree",
+			"description": "Tree-like branching structures grown from 3D cellular automata rules. Emergent organic forms from discrete computation.",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3DTree.tscn",
+			"category": "cellular_automata",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"cellular_automata",
+				"3d",
+				"tree",
+				"branching",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence",
+				"cellularautomata"
+			]
+		},
+		"evolutionary_algorithms": {
+			"name": "Evolutionary Algorithms",
+			"lookup_name": "evolutionary_algorithms",
+			"description": "Evolving creatures through selection, mutation, and crossover. Populations adapt over generations — fitness emerges from variation and pressure.",
+			"scene": "res://algorithms/machinelearning/evolutionaryalgorithms/evolving_creatures.tscn",
+			"category": "machine_learning",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"evolutionary",
+				"genetic",
+				"selection",
+				"mutation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence",
+				"machinelearning"
+			]
 		}
 	},
 	"euclid_postulates_plaque": {
