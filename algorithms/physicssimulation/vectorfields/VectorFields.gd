@@ -185,7 +185,7 @@ func _update_arrows():
 					t = t.looking_at(pos + field.normalized(), up)
 					t.basis = t.basis * Basis(Vector3.RIGHT, -PI / 2)  # Point cone along direction
 
-				var mag := clamp(field.length(), 0.1, 3.0)
+				var mag: float = clamp(field.length(), 0.1, 3.0)
 				t.basis = t.basis.scaled(Vector3(1, mag, 1))
 				mm.set_instance_transform(idx, t)
 
