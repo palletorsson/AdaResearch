@@ -3544,19 +3544,19 @@
 			"description": "Interactive metaball visualization demonstrating implicit surface modeling",
 			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
 			"position": [
-				9.0,
-				1.0,
-				2.0
+				9,
+				1,
+				2
 			],
 			"rotation": [
-				0.0,
-				0.0,
-				0.0
+				0,
+				0,
+				0
 			],
 			"scale": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -7000,7 +7000,10 @@
 			"scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"russell_set_box": {
 			"name": "Russell's Set Box",
@@ -7009,7 +7012,10 @@
 			"scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"magritte_pipe": {
 			"name": "Magritte Pipe",
@@ -7027,7 +7033,10 @@
 			"scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"florensky_sphere": {
 			"name": "Florensky Sphere",
@@ -7036,7 +7045,10 @@
 			"scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"bifurcation_diagram": {
 			"name": "Bifurcation Diagram",
@@ -7045,7 +7057,10 @@
 			"scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"lambda_slider": {
 			"name": "Lambda Slider",
@@ -7054,7 +7069,10 @@
 			"scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"phi_slider": {
 			"name": "Phi Slider",
@@ -7063,7 +7081,10 @@
 			"scene": "res://commons/interfaces/qfep/phi_slider.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"qfep_formula_3d": {
 			"name": "QFEP Formula 3D",
@@ -7072,7 +7093,10 @@
 			"scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		},
 		"qfep_reactor": {
 			"name": "QFEP Reactor",
@@ -7758,6 +7782,284 @@
 			"map_ready": true,
 			"map_sequences": [
 				"patterngeneration"
+			]
+		},
+		"euclid_postulates_plaque": {
+			"name": "Euclid's Postulates Plaque",
+			"lookup_name": "euclid_postulates_plaque",
+			"description": "Interactive plaque displaying Euclid's five postulates. Highlights the fifth (parallel) postulate — the one that held for millennia before being shown independent.",
+			"scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
+			"category": "foundations",
+			"interaction": "observe",
+			"complexity": "beginner",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Axioms as arbitrary starting points — what you choose to assume determines what you can build.",
+			"tags": [
+				"euclid",
+				"postulates",
+				"axioms",
+				"geometry",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"angle_sum_triangle": {
+			"name": "Angle Sum Triangle",
+			"lookup_name": "angle_sum_triangle",
+			"description": "Interactive triangle showing angle sum varies by curvature: 180° on flat, >180° on sphere, <180° on hyperbolic. Drag vertices to explore.",
+			"scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
+			"category": "foundations",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "The 'obvious' truth (angles sum to 180°) depends on hidden assumptions about space.",
+			"tags": [
+				"triangle",
+				"angle_sum",
+				"curvature",
+				"non-euclidean",
+				"geometry"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"curvature_slider": {
+			"name": "Curvature Slider",
+			"lookup_name": "curvature_slider",
+			"description": "Slider controlling surface curvature from negative (hyperbolic) through zero (flat) to positive (spherical). Watch geometry transform continuously.",
+			"scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+			"category": "foundations",
+			"interaction": "slider",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Curvature as continuous parameter — the 'natural' flat geometry is just one point on a spectrum.",
+			"tags": [
+				"curvature",
+				"slider",
+				"non-euclidean",
+				"geometry",
+				"continuous"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"elliptic_surface": {
+			"name": "Elliptic Surface",
+			"lookup_name": "elliptic_surface",
+			"description": "Positively curved surface where parallel lines converge. All 'straight' lines are great circles. No parallel lines exist.",
+			"scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+			"category": "foundations",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Elliptic geometry: the parallel postulate fails by excess. Too many intersections, not too few.",
+			"tags": [
+				"elliptic",
+				"surface",
+				"non-euclidean",
+				"positive_curvature",
+				"great_circles"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"hyperbolic_surface": {
+			"name": "Hyperbolic Surface",
+			"lookup_name": "hyperbolic_surface",
+			"description": "Negatively curved surface where infinitely many lines through a point never meet a given line. Space itself diverges.",
+			"scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+			"category": "foundations",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Hyperbolic geometry: the parallel postulate fails by excess of parallels. More room than you expected.",
+			"tags": [
+				"hyperbolic",
+				"surface",
+				"non-euclidean",
+				"negative_curvature",
+				"lobachevsky"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"poincare_disk": {
+			"name": "Poincaré Disk",
+			"lookup_name": "poincare_disk",
+			"description": "The Poincaré disk model — hyperbolic space projected into a circle. Lines become arcs, distances warp toward the edge. Infinity fits in your hand.",
+			"scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
+			"category": "foundations",
+			"interaction": "observe",
+			"complexity": "advanced",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Representation distorts what it represents. The disk is 'wrong' about distances but 'right' about angles — every model trades something.",
+			"tags": [
+				"poincare",
+				"disk",
+				"hyperbolic",
+				"model",
+				"projection",
+				"escher"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"riemann_sphere": {
+			"name": "Riemann Sphere",
+			"lookup_name": "riemann_sphere",
+			"description": "The complex plane wrapped onto a sphere via stereographic projection. Infinity becomes a point. Singularities become navigable.",
+			"scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+			"category": "foundations",
+			"interaction": "grab",
+			"complexity": "advanced",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Compactification — making infinity finite by changing your perspective. The edge becomes reachable.",
+			"tags": [
+				"riemann",
+				"sphere",
+				"complex_plane",
+				"stereographic",
+				"infinity",
+				"compactification"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"brouwer_choice_sequence": {
+			"name": "Brouwer Choice Sequence",
+			"lookup_name": "brouwer_choice_sequence",
+			"description": "Interactive choice sequence — build a real number one digit at a time. The number exists only as far as you've constructed it. Brouwer's intuitionism made tangible.",
+			"scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+			"category": "foundations",
+			"interaction": "button",
+			"complexity": "advanced",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Existence requires construction. You can't assert what you haven't built. The constructive stance as ethical position.",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"choice_sequence",
+				"constructive",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"constructive_proof": {
+			"name": "Constructive Proof",
+			"lookup_name": "constructive_proof",
+			"description": "Side-by-side comparison: classical proof by contradiction vs constructive proof. Only the constructive proof actually builds the object it claims exists.",
+			"scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn",
+			"category": "foundations",
+			"interaction": "button",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Classical logic asserts existence without construction. Intuitionism demands you build what you claim. Making vs declaring.",
+			"tags": [
+				"constructive",
+				"proof",
+				"intuitionism",
+				"classical_logic",
+				"brouwer"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"excluded_middle_demo": {
+			"name": "Excluded Middle Demo",
+			"lookup_name": "excluded_middle_demo",
+			"description": "Interactive demonstration of the law of excluded middle (P ∨ ¬P). Classical logic accepts it as axiom; intuitionism rejects it. Toggle between worldviews.",
+			"scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+			"category": "foundations",
+			"interaction": "button",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "The excluded middle forces binary: true or false, nothing between. Rejecting it opens space for the undecided, the in-progress, the queer.",
+			"tags": [
+				"excluded_middle",
+				"classical_logic",
+				"intuitionism",
+				"binary",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"schrodinger_box": {
+			"name": "Schrödinger's Box",
+			"lookup_name": "schrodinger_box",
+			"description": "A box in superposition — open it to collapse the state. Before observation: both states coexist. Paraconsistent logic made physical.",
+			"scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
+			"category": "foundations",
+			"interaction": "grab",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Superposition as paraconsistency — A and not-A held simultaneously without explosion. Observation forces a choice the system doesn't require.",
+			"tags": [
+				"schrodinger",
+				"superposition",
+				"paraconsistent",
+				"observation",
+				"quantum"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			]
+		},
+		"superposition_display": {
+			"name": "Superposition Display",
+			"lookup_name": "superposition_display",
+			"description": "Visual display showing multiple contradictory states existing simultaneously. Florensky's paraconsistent logic — holding contradiction without triviality.",
+			"scene": "res://commons/artifacts/superposition_display/superposition_display.tscn",
+			"category": "foundations",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "foundationscrisis",
+			"qfep_connection": "Paraconsistent logic: contradiction doesn't destroy the system. A and not-A coexist. The edge is productive.",
+			"tags": [
+				"superposition",
+				"paraconsistent",
+				"florensky",
+				"contradiction",
+				"display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
 			]
 		}
 	},

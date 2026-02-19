@@ -1,0 +1,58 @@
+{
+	"sequences": {
+		"lab": {
+			"name": "Lab Evolution States",
+			"description": "The Lab evolves after each completed sequence. These are all Lab states — from initial empty lab through post-sequence transformations. Each map shows the lab with artifacts unlocked up to that point in the curriculum.",
+			"layer": "integration",
+			"difficulty": "beginner",
+
+			"maps": [
+				"Lab",
+				"Lab/map_data_init",
+				"Lab/map_data_one",
+				"Lab/map_data_one_back",
+				"Lab/map_data_back",
+				"Lab/map_data_post_primitives",
+				"Lab/map_data_post_transformation",
+				"Lab/map_data_post_color",
+				"Lab/map_data_post_forces",
+				"Lab/map_data_post_array_tutorial",
+				"Lab/map_data_post_wavefunctions",
+				"Lab/map_data_post_randomness",
+				"Lab/map_data_post_noise",
+				"Lab/map_data_post_cellularautomata",
+				"Lab/map_data_post_fractals",
+				"Lab/map_data_post_lsystems",
+				"Lab/map_data_post_proceduralgeneration",
+				"Lab/map_data_post_softbodies",
+				"Lab/map_data_post_swarmintelligence",
+				"Lab/map_data_post_morphogenesis",
+				"Lab/map_data_post_machinelearning",
+				"Lab/map_data_post_foundationscrisis",
+				"Lab/map_data_post_qfeplaboratory",
+				"Lab/map_data_post_vectors",
+				"Lab/map_data_post_physicssimulation",
+				"Lab/map_data_post_datastructures",
+				"Lab/map_data_post_searchpathfinding",
+				"Lab/map_data_post_computationalgeometry",
+				"Lab/map_data_post_meshes",
+				"Lab/map_data_post_patterngeneration",
+				"Lab/map_data_post_criticalalgorithms",
+				"Lab/map_data_post_speculativecomputation",
+				"Lab/map_data_post_recursiveemergence",
+				"Lab/map_data_post_artmathematics",
+				"Lab/map_data_post_proceduralaudio",
+				"Lab/map_data_post_graphtheory",
+				"Lab/map_data_post_advancedlaboratory",
+				"Lab/map_data_post_resourcemanagement",
+				"Lab/map_data_post_geometric"
+			],
+
+			"return_to": "lab",
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			}
+		}
+	}
+}
