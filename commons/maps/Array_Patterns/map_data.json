@@ -31,7 +31,9 @@
 			"pattern_tile_4x4 - basic repeat",
 			"pattern_tile_mirror - kaleidoscope symmetry",
 			"pattern_tile_brick - offset tiling",
-			"pattern_tile_herringbone - weave patterns"
+			"pattern_tile_herringbone - weave patterns",
+			"tiling_demo - Italian mosaic motifs and wallpaper groups",
+			"facade_grammar_demo - Classical facade presets and elements"
 		]
 	},
 	"layers": {
@@ -70,7 +72,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "tiling_demo:0:-0.5", " ", " ", " ", " ", " ", " ", " ", "facade_grammar_demo:0:-0.5", " "],
 			[" ", " ", " ", "pattern_tile_brick:0:-0.5", " ", " ", " ", "pattern_tile_herringbone:0:-0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]

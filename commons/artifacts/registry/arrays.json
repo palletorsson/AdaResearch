@@ -458,6 +458,42 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"tiling_demo": {
+			"name": "Tiling System Demo",
+			"lookup_name": "tiling_demo",
+			"description": "Italian tiling motifs gallery. 17 wallpaper groups, multi-layer composition. Checkerboard to cosmatesque — field study preparation.",
+			"scene": "res://commons/primitives/arrays/tiling_demo.tscn",
+			"category": "primitives",
+			"tags": [
+				"tiling",
+				"wallpaper_groups",
+				"symmetry",
+				"mosaic",
+				"architecture",
+				"italy"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"facade_grammar_demo": {
+			"name": "Facade Grammar Demo",
+			"lookup_name": "facade_grammar_demo",
+			"description": "Architectural facade gallery. Italian presets (Villa San Michele, Certosa, San Gregorio Armeno) plus element library (columns, arches, cornices, rustication).",
+			"scene": "res://commons/mesh_grammar/facade_grammar_demo.tscn",
+			"category": "primitives",
+			"tags": [
+				"facade",
+				"architecture",
+				"classical",
+				"mesh_grammar",
+				"columns",
+				"italy"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
