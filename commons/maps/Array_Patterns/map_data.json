@@ -33,7 +33,8 @@
 			"pattern_tile_brick - offset tiling",
 			"pattern_tile_herringbone - weave patterns",
 			"tiling_demo - Italian mosaic motifs and wallpaper groups",
-			"facade_grammar_demo - Classical facade presets and elements"
+			"facade_grammar_demo - Classical facade presets and elements",
+			"vr_tile_editor_mirror - VR tile editor with live floor carpet"
 		]
 	},
 	"layers": {
@@ -65,7 +66,7 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "pattern_tile_4x4:0:-0.5", " ", " ", " ", "pattern_tile_mirror:0:-0.5", " ", " ", " "],
+			[" ", " ", " ", "pattern_tile_4x4:0:-0.5", " ", "vr_tile_editor_mirror:0:-0.5", " ", "pattern_tile_mirror:0:-0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],

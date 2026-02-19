@@ -494,6 +494,47 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"vr_tile_editor": {
+			"name": "VR Tile Editor",
+			"lookup_name": "vr_tile_editor",
+			"description": "VR workspace for designing tile patterns. Edit a grid at desk height, see it tile across a floor carpet in real-time. Cycle wallpaper groups with VR controllers.",
+			"scene": "res://commons/primitives/arrays/vr_tile_editor.tscn",
+			"category": "primitives",
+			"tags": [
+				"vr",
+				"tiling",
+				"editor",
+				"patterns",
+				"carpet",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vr_tile_editor_mirror": {
+			"name": "VR Tile Editor Mirror",
+			"lookup_name": "vr_tile_editor_mirror",
+			"description": "VR tile editor starting in kaleidoscope mirror mode. Design symmetric patterns and see them tile across a floor carpet.",
+			"scene": "res://commons/primitives/arrays/vr_tile_editor.tscn",
+			"category": "primitives",
+			"config": {
+				"tile_size": 4,
+				"repeat_mode": 3
+			},
+			"tags": [
+				"vr",
+				"tiling",
+				"mirror",
+				"kaleidoscope",
+				"patterns",
+				"carpet",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
