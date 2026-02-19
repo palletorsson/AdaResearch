@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://3mceaovxceoe" path="res://commons/maps/catalog/MapCatalogDesktop3D.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MapBrowser3D.tscn" id="2_browser"]
 [ext_resource type="Script" uid="uid://ccnvftjwyddwq" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapDataEditorOverlay.gd" id="4_editor"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.14, 0.2, 0.32, 1)
@@ -61,3 +62,6 @@ outline_size = 6
 
 [node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="." unique_id=1138561512]
 script = ExtResource("3_overlay")
+
+[node name="MapDataEditorOverlay" type="CanvasLayer" parent="." unique_id=1248672301]
+script = ExtResource("4_editor")

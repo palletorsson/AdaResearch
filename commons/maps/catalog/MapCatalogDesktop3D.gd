@@ -28,6 +28,7 @@ enum CameraMode {
 @onready var _map_browser: Node3D = $MapBrowser3D
 @onready var _status_label: Label3D = $StatusLabel
 @onready var _overlay: DesktopMapSwitcherOverlay = $DesktopMapSwitcherOverlay
+@onready var _map_data_editor: MapDataEditorOverlay = $MapDataEditorOverlay
 @onready var _world_environment: WorldEnvironment = $WorldEnvironment
 @onready var _key_light: DirectionalLight3D = $KeyLight
 @onready var _fill_light: DirectionalLight3D = $FillLight
@@ -76,6 +77,11 @@ func _ready() -> void:
 	_mark_clean_keep(_world_environment)
 	_mark_clean_keep(_key_light)
 	_mark_clean_keep(_fill_light)
+	_mark_clean_keep(_map_data_editor)
+
+	# Connect map data editor save → reload the map live
+	if _map_data_editor and _map_data_editor.has_signal("map_data_saved"):
+		_map_data_editor.map_data_saved.connect(_on_map_data_saved)
 
 	# Hide the old 3D menu — sidebar replaces it
 	if _map_browser:
@@ -110,6 +116,10 @@ func load_map_fresh(map_name: String) -> bool:
 
 	_grid_system.transform.origin = Vector3(0.0, -0.5, 0.0)
 	add_child(_grid_system)
+
+	# Notify the JSON editor overlay of the new map
+	if _map_data_editor:
+		_map_data_editor.set_current_map(map_name)
 
 	# Listen for generation complete to recenter orbit
 	if _grid_system.has_signal("map_generation_complete"):
@@ -158,6 +168,14 @@ func ensure_grid_system() -> Node3D:
 		_grid_system.map_generation_complete.connect(_on_map_generation_complete)
 
 	return _grid_system
+
+## Reload the current map after its JSON was edited and saved.
+func _on_map_data_saved(map_name: String) -> void:
+	if map_name.is_empty():
+		return
+	# Re-load the map so changes are visible immediately
+	load_map_fresh(map_name)
+	_set_status("Reloaded %s after JSON edit" % map_name)
 
 ## Recenter orbit on the loaded map.
 func _on_map_generation_complete() -> void:
