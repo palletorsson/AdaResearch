@@ -66,26 +66,10 @@ var demo_descriptions = [
 func _ready():
 	randomize()
 	
-	# Setup camera for better viewing
-	var camera = Camera3D.new()
-	camera.position = Vector3(0, 0, 10)
-	add_child(camera)
-	
-	# Create lighting
-	var light = DirectionalLight3D.new()
-	light.position = Vector3(5, 5, 5)
-	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
-	add_child(light)
-	
-	# Create world environment with ambient lighting
-	var environment = Environment.new()
-	environment.ambient_light_color = Color(0.2, 0.2, 0.3)
-	environment.ambient_light_energy = 0.5
-	
-	var world_env = WorldEnvironment.new()
-	world_env.environment = environment
-	add_child(world_env)
-	
+	# NOTE: Camera3D, DirectionalLight3D, and WorldEnvironment removed —
+	# the grid scene (GridSystem) already provides these. Creating duplicates
+	# causes rendering conflicts (multiple active cameras, double lighting).
+
 	# Create particles
 	create_particles()
 	

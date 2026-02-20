@@ -42,7 +42,8 @@
       "Bash(for map in ConstraintSolvers_WFC_Intro ConstraintSolvers_WFC_Entropy ConstraintSolvers_WFC_Propagation ConstraintSolvers_WFC_Tiles)",
       "Bash(do [ -d \"commons/maps/$map\" ])",
       "Bash(python3:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

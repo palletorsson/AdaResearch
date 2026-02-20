@@ -1301,6 +1301,160 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"galton_board": {
+			"name": "Galton Board",
+			"lookup_name": "galton_board",
+			"description": "Balls drop through a triangular peg array. Each peg deflects left or right with equal probability. After many rows, the bin counts form a binomial distribution converging to a Gaussian bell curve. VR buttons: DROP, AUTO, RESET, SPEED.",
+			"scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
+			"category": "randomness",
+			"interaction": "button",
+			"complexity": "intermediate",
+			"qfep_connection": "CLT as convergence — many independent binary choices accumulate into Gaussian structure. Order from repetition.",
+			"tags": [
+				"galton",
+				"binomial",
+				"central_limit_theorem",
+				"gaussian",
+				"bell_curve",
+				"probability",
+				"physics",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
+		"dice_throw": {
+			"name": "Dice Throw",
+			"lookup_name": "dice_throw",
+			"description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+			"scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
+			"category": "randomness",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"qfep_connection": "Equiprobability — each face equally likely. Fairness as geometric symmetry.",
+			"tags": [
+				"dice",
+				"uniform_distribution",
+				"expected_value",
+				"probability",
+				"physics",
+				"interactive",
+				"grab"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
+		"coin_toss": {
+			"name": "Coin Toss",
+			"lookup_name": "coin_toss",
+			"description": "The simplest random experiment. Grab coins from a tray and toss them. A counter tracks the heads/tails ratio converging to 0.5 over many flips. Gold side = heads, silver side = tails.",
+			"scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
+			"category": "randomness",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"qfep_connection": "Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.",
+			"tags": [
+				"coin",
+				"bernoulli",
+				"binary",
+				"probability",
+				"convergence",
+				"interactive",
+				"grab"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
+		"prng_crank_machine": {
+			"name": "PRNG Crank Machine",
+			"lookup_name": "prng_crank_machine",
+			"description": "A physical pseudo-random number generator machine. Press CRANK to step the LCG formula: state = (state * 1664525 + 1013904223) mod 2^32. Each step animates multiply, add, mod phases. Shows deterministic sequence, normalized 0-1 output, and full history.",
+			"scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+			"category": "randomness",
+			"interaction": "button",
+			"complexity": "intermediate",
+			"qfep_connection": "Determinism masquerading as randomness — structure hidden in apparent chaos.",
+			"tags": [
+				"prng",
+				"lcg",
+				"deterministic",
+				"seed",
+				"algorithm",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
+		"monte_carlo_dartboard": {
+			"name": "Monte Carlo Dart Board",
+			"lookup_name": "monte_carlo_dartboard",
+			"description": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
+			"scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+			"category": "randomness",
+			"interaction": "button",
+			"complexity": "intermediate",
+			"qfep_connection": "Computation through accumulation — random sampling converges to mathematical truth.",
+			"tags": [
+				"monte_carlo",
+				"pi",
+				"estimation",
+				"sampling",
+				"convergence",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
+		"hardware_entropy_decay": {
+			"name": "Hardware Entropy Decay",
+			"lookup_name": "hardware_entropy_decay",
+			"description": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
+			"scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+			"category": "randomness",
+			"interaction": "immersive",
+			"complexity": "advanced",
+			"qfep_connection": "Entropy from embodiment — the observer's physical presence is the source of randomness that degrades order.",
+			"tags": [
+				"decay",
+				"shader",
+				"hardware",
+				"entropy",
+				"vr",
+				"controller",
+				"procedural",
+				"scratches",
+				"grime",
+				"weathering",
+				"interactive",
+				"immersive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }

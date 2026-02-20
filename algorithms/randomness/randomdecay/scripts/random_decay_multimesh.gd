@@ -54,6 +54,8 @@ var _rng := RandomNumberGenerator.new()
 var _layers: Array[Dictionary] = []
 var _decay_elapsed: float = 0.0
 
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
 func _ready() -> void:
 	if random_seed != 0:
 		_rng.seed = random_seed
@@ -61,6 +63,7 @@ func _ready() -> void:
 		_rng.randomize()
 	_decay_elapsed = 0.0
 	_create_layers()
+	_create_vr_controls()
 
 func _process(delta: float) -> void:
 	if not decay_active:
@@ -79,6 +82,69 @@ func _input(event: InputEvent) -> void:
 		decay_active = not decay_active
 		if decay_active:
 			_decay_elapsed = 0.0
+
+func _create_vr_controls() -> void:
+	var panel := Node3D.new()
+	panel.name = "VRControlPanel"
+	# Position between the two stacks, at a comfortable VR hand height
+	var mid_x := (cube_origin.x + prism_origin.x) / 2.0
+	panel.position = Vector3(mid_x, 0.85, 1.2)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+
+	# Panel backing
+	var back := MeshInstance3D.new()
+	var back_mesh := BoxMesh.new()
+	back_mesh.size = Vector3(0.3, 0.08, 0.008)
+	back.mesh = back_mesh
+	var back_mat := StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.06, 0.06, 0.08)
+	back_mat.metallic = 0.3
+	back.material_override = back_mat
+	back.position.z = -0.008
+	panel.add_child(back)
+
+	# TOGGLE button (play/pause)
+	var toggle_btn := PUSH_BUTTON.instantiate()
+	toggle_btn.name = "ToggleBtn"
+	toggle_btn.position = Vector3(-0.08, 0.0, 0)
+	toggle_btn.scale = Vector3(0.7, 0.7, 0.7)
+	panel.add_child(toggle_btn)
+	var toggle_lbl := Label3D.new()
+	toggle_lbl.text = "TOGGLE"
+	toggle_lbl.pixel_size = 0.001
+	toggle_lbl.font_size = 8
+	toggle_lbl.position = Vector3(0, -0.022, 0)
+	toggle_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	toggle_btn.add_child(toggle_lbl)
+
+	var toggle_area := toggle_btn.get_node_or_null("InteractableAreaButton")
+	if toggle_area:
+		toggle_area.button_pressed.connect(func(_b):
+			decay_active = not decay_active
+			if decay_active:
+				_decay_elapsed = 0.0
+		)
+
+	# RESET button
+	var reset_btn := PUSH_BUTTON.instantiate()
+	reset_btn.name = "ResetBtn"
+	reset_btn.position = Vector3(0.08, 0.0, 0)
+	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
+	panel.add_child(reset_btn)
+	var reset_lbl := Label3D.new()
+	reset_lbl.text = "RESET"
+	reset_lbl.pixel_size = 0.001
+	reset_lbl.font_size = 8
+	reset_lbl.position = Vector3(0, -0.022, 0)
+	reset_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	reset_btn.add_child(reset_lbl)
+
+	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
+	if reset_area:
+		reset_area.button_pressed.connect(func(_b):
+			_reset_layers()
+		)
 
 func _create_layers() -> void:
 	_clear_layers()

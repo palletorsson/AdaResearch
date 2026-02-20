@@ -1,10 +1,16 @@
 # Guide: How to "Play" Ada Research by Reading the Files
 
+*Last updated: 2026-02-20*
+
 This guide explains how to navigate and experience the Ada Research VR educational system by reading its source files.
 
 ## Project Overview
 
-**Ada Research** is a VR computational geometry education system built in Godot + XR Tools. It teaches algorithms through dual lenses: technical implementation + queer theory critique. Maps are designed as 3D spaces where players walk through and interact with educational content displayed on clipboards, grabbable objects, primitives and gradually more complex objects.
+**Ada Research Zero One** is a VR computational algorithm education system built in Godot 4.6 + XR Tools. It teaches algorithms through dual lenses: technical implementation + queer theory critique. Maps are designed as 3D grid spaces where players walk through and interact with educational content displayed on clipboards, grabbable objects, primitives, and gradually more complex algorithm visualizations.
+
+**Scale:** 22 major algorithm domains, 100+ distinct implementations, 50+ learning sequences, 200+ maps.
+
+**Platforms:** Meta Quest, Pico, Lynx, Khronos (VR) + desktop fallback.
 
 ## The "Generative Play" Method
 
@@ -19,31 +25,75 @@ This is not "cheating" or "development"--it is the core mechanic of this specifi
 
 ## How to Start: The Map Sequence System
 
-### 1. Begin with `map_sequences.json` (and modular sequences)
+### 1. Begin with the Sequence Files
 
-**Primary location:** `commons/maps/map_sequences.json`
-**Modular files:** `commons/maps/sequences/*.json` (AdaSceneManager merges these at runtime)
+**Primary location:** `commons/maps/sequences/*.json` (one file per domain)
+**Sequence index:** `commons/maps/sequences/sequence_index.json` (master inventory)
+**Legacy file:** `commons/maps/map_sequences.json` (effectively deprecated — only contains a phoneme_cloud prototype)
 
-This file defines learning sequences (like chapters in a book). Each sequence contains:
+AdaSceneManager loads all `.json` files from the sequences directory at runtime and merges them. Each sequence file defines learning sequences (like chapters in a book). Each sequence contains:
 - `name`: Display name
-- `description`: What the sequence teaches - you can update this
+- `description`: Thematic/poetic description of the learning journey
 - `maps`: **Array of map names in order** <- This is your playlist!
-- `learning_objectives`: Educational goals - you can update these 
-- `unlock_requirements`: Prerequisites - are not used 
+- `learning_objectives`: Educational goals
+- `difficulty`: beginner / intermediate / advanced
+- `estimated_time`: How long the sequence takes
+- `unlock_requirements`: Prerequisites (which sequences must be completed first)
+- `lab_map`: Which Lab state to load after completing this sequence
+- `audio`: Ambient sound and transition presets
+- `completion_rewards`: Badges/rewards earned
 
-**Example - The "primitives" sequence:**
+**Example - The "randomness" sequence** (`commons/maps/sequences/randomness.json`):
 ```json
-"primitives": {
-	"name": "name Primitives",
+"randomness": {
+	"name": "Randomness: Freedom from Pattern",
+	"difficulty": "intermediate",
+	"estimated_time": "25-30 minutes",
+	"unlock_requirements": ["color"],
 	"maps": [
-		"Point_Zero",      <- Start here!
-		"Point_1",         <- Then this
-		"Point_Context",   <- Then this
-		"Point_Line",
-		...
-	]
+		"Random_Definition",                    <- Start here!
+		"Random_Remove",                        <- Then this
+		"Randomness_10_PRINT_Algorithm",        <- Then this
+		"Random_Cubes",
+		"Random_Rotate_Random_XYZ",
+		"Random_Walk",
+		"Random_Gaussian",
+		"Random_Mushrooms",
+		"Random_Space_Geometry",
+		"Randomness_Examples_of_Randomness",
+		"Random_Pheromone",
+		"Random_Space",
+		"Random_Game"
+	],
+	"lab_map": "Lab/map_data_post_random",
+	"return_to": "lab"
 }
 ```
+
+### Current Sequence Inventory (50+ sequences)
+
+| Domain | Maps | Domain | Maps |
+|---|---|---|---|
+| primitives | 12 | color | 12 |
+| randomness | 13 | noise | 11 |
+| vectors | 17 | forces | 10 |
+| wavefunctions | 12 | cellularautomata | 12 |
+| fractals | 14 | lsystems | 11 |
+| graphtheory | 14 | machinelearning | 16 |
+| physicssimulation | 21 | proceduralgeneration | 18 |
+| patterngeneration | 18 | datastructures | 12 |
+| softbodies | 8 | recursiveemergence | 11 |
+| swarmintelligence | 7 | computationalgeometry | 11 |
+| artmathematics | 9 | qfeplaboratory | 8 |
+| searchpathfinding | 7 | transformation | 6 |
+| foundationscrisis | 7 | criticalalgorithms | 6 |
+| proceduralaudio | 8 | array_tutorial | 8 |
+| bricolage | 7 | speculativecomputation | 5 |
+| particles | 5 | meshes | 4 |
+| resourcemanagement | 6 | advancedlaboratory | 5 |
+| joints | 7 | constraint_solvers | 3 |
+| grammar_systems | 3 | higher_dimensions | 4 |
+| isosurfaces | 3 | morphogenesis | 2 |
 
 ### 2. Navigate to Individual Maps
 
@@ -116,14 +166,24 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 - `"m"` = move player - Format: `m:x:y:z:delay` moves player after delay
 - `"tc"` = transport cube - Format: `tc:distance:direction` (e.g., `tc:4:z`, `tc:3:-x:auto`)
 - `"wp"` = walkable prism - Format: `wp:rotation`
+- `"br"` = bridge path
+- `"rc"` = rotation cube
+- `"sc"` = scale cube
+
+**Safety/Navigation:**
+- `"cp"` = checkpoint
+- `"r"` = reset cube - resets player to safe position
+- `"arrow"` = exit arrow (navigation hint)
 
 **UI/Text utilities:**
 - `"3t:text"` = floating 3D text - underscores become spaces (e.g., `3t:Hello_World`)
-- `"la:keyid"` = label showing artifact name from grid_artifacts.json
 - `"an"` = annotation/info board - displays map name and description
 - `"sr:key"` = speed reader - shows tutorial text one line at a time
 - `"sub:key"` = subtitle trigger - Portal 2-style subtitles (e.g., `sub:map`, `sub:welcome:GLaDOS`)
 - `"tts:message"` = text-to-speech - speaks text on load
+- `"x"` = XP label
+- `"i"` = info board
+- `"ib:topic"` = handheld info board (e.g., `ib:randomwalk`, `ib:vectors`)
 
 **Visual/Structural:**
 - `"el"` = extra light - Format: `el` or `el:energy_value`
@@ -136,14 +196,18 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 - `"p"` = pick up cube
 - `"n"` = next cube - advances to next example with 3s respawn
 - `"rg"` = regenerate cube - triggers regenerate signal
-- `"r"` = reset cube - resets player to safe position
 - `"q"` = quit cube - quit game with confirmation
 - `"pb:feature"` = player body trigger - customization (e.g., `pb:dress`, `pb:skin_color:FF0000`)
+
+**Hazard:**
+- `"h:type"` = hazard zone (e.g., `h:fire`, `h:vacuum`, `h:electric`, `h:toxic`, `h:radiation`, `h:death`)
 
 **Other:**
 - `"sp"` = score points display
 - `"b"` = table
-- `" "` = empty space 
+- `" "` = empty space
+
+See `commons/grid/UtilityRegistry.gd` for the complete, authoritative list of all 30+ utility types.
 
 #### **Layer 3: `interactables`** (Educational objects)
 ```json
@@ -182,6 +246,14 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 - `snap_pyramid_puzzle` - Snap-together pyramid puzzle
 - `snap_octahedron_puzzle` - Snap-together octahedron
 - `furniture_assembly_puzzle` - Grabbable furniture assembly
+
+**Randomness/Probability (new in current dev):**
+- `coin_toss` - Physical Bernoulli trial: 8 grabbable coins, throw and track H/T convergence to p=0.5
+- `dice_throw` - Physics-based die on felt table: grab, throw, spawns reward balls, tracks distribution toward E=3.5
+- `galton_board` - Full Galton board: 8 peg rows, 50 recycled balls, live bar histogram with Gaussian overlay
+- `prng_crank_machine` - Physical LCG-32 machine: CRANK button triggers 4-phase animation showing multiply→add→mod→output
+- `monte_carlo_dartboard` - Pi estimation: auto-throw darts at inscribed circle, watch pi converge with color-coded accuracy
+- `hardware_entropy_decay` - VR body as entropy source: controller velocity→scratches, grip→grime, head rotation→decay rate
 
 **Visual/Artistic:**
 - `pollock_painting_in_3d` - Particle-based Jackson Pollock visualization
@@ -487,50 +559,128 @@ Experience:
   - Exit reads as pause, not triumph
 ```
 
-### Playing "randomness_exploration" Sequence
+### Playing "randomness" Sequence (13 maps)
 
-**Map 1: Random_Define**
+**Sequence file:** `commons/maps/sequences/randomness.json`
+**Theme:** "Randomness: Freedom from Pattern" — Entropy is not decay, entropy is freedom.
+**Audio:** `white_noise_drift` ambient preset
+**Prerequisite:** Complete the "color" sequence first
+
+**Map 1: Random_Definition** (The Gateway)
 ```bash
-Read: commons/maps/Random_Define/map_data.json
+Read: commons/maps/Random_Definition/map_data.json
 
-Structure: 12x17 grid with 8x8 middle arena
+Structure: 5x30 long corridor, max height 3
+Spawn at row 0. Walk south through a narrow passage.
+
 Interactables:
-  - entropy_axiom at (1,2)
-  - code_display at (3,5) -> "entropy_axioms"
-  - digital_materiality_glitch at (0,7)
-  - random_number_book_page_1955 at (2,15)
+  - entropy_axiom at [4,2] — interactive entropy visualization
+  - prng_crank_machine at [8,2] — NEW: physical LCG machine, crank to see multiply→add→mod
+  - random_butterflies at [10,2] — flocking with random flight paths
+  - dark_sphere at [12,2] — ambient darkness dome
+  - clipboard#prng_axioms at [13,4] — tutorial on pseudorandomness
+  - digital_materiality_glitch at [15,0] — glitch art
+  - trng_vs_prng at [15,4] — true vs pseudo comparison
+  - random_number_book_page_1955 at [19,2] — RAND Corp historical artifact
+  - speed_reader at row 19
 
 Experience:
-  - Introduction to the concept of Entropy
-  - Visualizing chaos through the glitch artifact
-  - Historical context with the random number book
+  - The corridor forces linear progression through entropy concepts
+  - PRNG crank machine makes deterministic randomness tactile
+  - Historical context: the 1955 random number book grounds the abstract
+  - Glitch art meets formal mathematics
 ```
 
-**Map 11: Creative Chaos (Randomness_Examples_of_Randomness)**
+**Map 4: Random_Cubes** (The Playground)
+```bash
+Read: commons/maps/Random_Cubes/map_data.json
+
+Structure: 12x20 grid, max height 3
+Spawn at [0,0]. Large open space with artifacts scattered.
+
+Interactables:
+  - dice_throw at [2,3] — NEW: grab and throw dice, watch distribution converge to 3.5
+  - coin_toss at [2,8] — NEW: 8 coins in a tray, flip and track convergence to p=0.5
+  - dark_sphere at [4,6]
+  - random_object_spawner at [6,5] and [6,6]
+  - 6x8 grid of random_edge_profile instances at rows 8-15
+
+Experience:
+  - Physical probability toys: dice and coins are genuinely satisfying to throw in VR
+  - The edge profile grid creates a visual field of randomness
+  - Coin toss demonstrates Bernoulli trials; dice shows uniform distribution
+  - Both track convergence — randomness reveals order over time
+```
+
+**Map 5: Random_Rotate_Random_XYZ** (Entropy as Material)
+```bash
+Read: commons/maps/Random_Rotate_Random_XYZ/map_data.json
+
+Structure: 13x16 grid, all height-2 cubes with a hole at [14,6]
+
+Interactables:
+  - Random_Rotate_Random_XYZ at [1,1] — objects rotating on random axes
+  - dark_sphere at [8,5]
+  - random_decay_multimesh at [9,5] — mass object decay
+  - hardware_entropy_decay at [10,8] — NEW: your VR movements become entropy
+
+Experience:
+  - hardware_entropy_decay is the standout: your body generates the randomness
+  - Controller velocity drives scratches, grip pressure accumulates grime
+  - Head rotation feeds weathering rate on 3 display surfaces
+  - QFEP: "Entropy from embodiment" — the player IS the source of chaos
+```
+
+**Map 7: Random_Gaussian** (The Bell Curve)
+```bash
+Read: commons/maps/Random_Gaussian/map_data.json
+
+Structure: 12x22 grid, max height 3. Top section elevated, lower rows void.
+
+Interactables:
+  - galton_board at [3,5] — NEW: full physics Galton board with histogram + Gaussian overlay
+  - GaussianPaintSplatter at [6,5] — Box-Muller paint visualization
+  - distribution_sampler at [6,9]
+  - GaussianBlurShader at [8,2] and [8,9]
+  - gaussian_random at [11,3]
+  - random_bell_curve at [20,6]
+
+Experience:
+  - Galton board is the centerpiece: 50 balls, 8 peg rows, live histogram
+  - Watch the bell curve emerge from physical collisions
+  - Multiple representations: physics, paint, shader, sampler, curve
+  - QFEP: "CLT as convergence" — individual chaos, collective order
+```
+
+**Map 10: Randomness_Examples_of_Randomness** (The Gallery)
 ```bash
 Read: commons/maps/Randomness_Examples_of_Randomness/map_data.json
 
-Structure: Large 12x12 gallery space
+Structure: 12x17 grid, max height 4. Two chambers separated by wall with gap.
+
 Interactables:
-  - pollock_painting_in_3d at (2,2)
-  - pipe_dream at (8,2)
-  - random_butterflies at (2,8)
-  - extrem_randomness at (8,8)
+  - pollock_painting_in_3d at [3,5] — particle-based Jackson Pollock
+  - pipe_dream at [4,5] — procedural pipe network
+  - dark_sphere at [5,5]
+  - monte_carlo_dartboard at [7,5] — NEW: throw darts to estimate pi
+  - extreme_randomness at [10,5] — high-entropy mathematical visualization
 
 Experience:
-  - A finale showcasing artistic applications of randomness
-  - From Pollock's expressionism to biological simulation
-  - Demonstrates "Generative Play" in action
+  - The dartboard makes pi computation physical: watch accuracy improve with each throw
+  - Green label (<1% error), gold (<5%), orange (>5%) — gamified convergence
+  - Art meets mathematics: Pollock's intuitive randomness beside formal estimation
+  - QFEP: "Computation through accumulation" — knowledge accretes from noise
 ```
 
 ## Key Files Reference
 
 ### Map System
-- **Primary sequences:** `commons/maps/map_sequences.json`
-- **Modular sequences:** `commons/maps/sequences/*.json` (merged at runtime by `AdaSceneManager`)
-- **Progression views:** `commons/maps/map_progression.json`, `commons/maps/curriculum_spine.json` (overview/curation layers)
-- **Individual maps:** `commons/maps/{MapName}/map_data.json`
-- **Example sequence files:** `primitives.json`, `randomness.json`, `vectors.json`, `wavefunctions.json`, `noise.json`, `fractals.json`, `particles.json`, `meshes.json`, `proceduralaudio.json`, `machinelearning.json`, `graphtheory.json`, `cellularautomata.json`, `lsystems.json`, `morphogenesis.json`
+- **Sequence files:** `commons/maps/sequences/*.json` (50+ files, one per domain — the primary source)
+- **Sequence index:** `commons/maps/sequences/sequence_index.json` (master inventory of all sequences)
+- **Legacy sequences:** `commons/maps/map_sequences.json` (deprecated — only contains phoneme_cloud prototype)
+- **Individual maps:** `commons/maps/{MapName}/map_data.json` (200+ maps)
+- **Lab states:** `commons/maps/Lab/map_data_post_*.json` (one per completed sequence)
+- **Lab progression routing:** `commons/maps/Lab/lab_map_progression.json`
 
 ### Audio System
 - **Ambient Presets:** `commons/audio/presets/*.json`
@@ -570,11 +720,21 @@ Map-level audio is configured in `map_data.json`:
   - Manages map-to-map transitions within sequences
   - Emits `scene_transition_started` / `scene_transition_completed` signals
   - Quick transition mode (0.3s fades) for in-sequence teleports
+  - **Game modes:** Story (full sequence), Test (last map only), TestPlus (hybrid), Explorer (all unlocked)
+  - **Transition types:** ARTIFACT_ACTIVATION, TELEPORTER, TRIGGER_ZONE, SEQUENCE_COMPLETE, MANUAL_LOAD, RETURN_TO_HUB
+  - **Actions:** `start_sequence`, `load_map`, `next_in_sequence`, `next`, `return_to_hub`
+
+### Progression System
+- **Progression Manager:** `commons/managers/MapProgressionManager.gd`
+  - Tracks completed sequences and visited maps
+  - Manages unlock graph (sequences have `unlock_requirements`)
+  - Determines which Lab state to load after completing a sequence
+  - Saves progress to `user://map_progress.json`
 
 ### Grid System Components
 All grid components live in `res://commons/grid/`:
 
-- **GridSystem.gd** - Main coordinator, orchestrates all components
+- **GridSystem.gd** - Main coordinator, orchestrates all 8 components
 - **GridDataComponent.gd** - Loads and parses `map_data.json`
 - **GridStructureComponent.gd** - Generates physical floor/platform cubes from `structure` layer
 - **GridUtilitiesComponent.gd** - Spawns teleporters, lifts, text displays from `utilities` layer
@@ -582,14 +742,22 @@ All grid components live in `res://commons/grid/`:
 - **GridSpawnComponent.gd** - Handles player spawn points
 - **GridAudioComponent.gd** - Manages ambient audio for the map
 - **GridCeilingComponent.gd** - Optional ceiling generation
-- **UtilityRegistry.gd** - Single source of truth for all utility type definitions
+- **GridWallComponent.gd** - Wall generation
+- **UtilityRegistry.gd** - Single source of truth for all 30+ utility type definitions
+- **GridCommon.gd** - Shared constants and helpers
+- **SoundSuiteSequencer.gd** - Audio sequencing for grid events
+- **tag_system.gd** - Tag system for grid objects
+
+**Signals:** `map_loaded`, `map_generation_complete`, `interactable_activated`, `grid_animation_started`, `grid_animation_complete`
 
 ### Artifact Registry
-- **Base catalog:** `commons/artifacts/grid_artifacts.json`
-- **Modular registries:** `commons/artifacts/registry/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
-  - `GridInteractablesComponent` merges these files dynamically at runtime.
-  - Contains descriptions and metadata for specialized objects.
+- **Base catalog:** `commons/artifacts/grid_artifacts.json` (legacy master lookup)
+- **Modular registries:** `commons/artifacts/registry/*.json` (24 category-specific files)
+  - `GridArtifactRegistry.gd` loads both sources and merges them at runtime
+  - Each entry has: `name`, `lookup_name`, `description`, `scene`, `category`, `tags`, `qfep_connection`
+  - Example registries: `randomness.json` (75 artifacts), `wavefunctions.json`, `cellular_automata.json`, `physics_simulation.json`, `machinelearning.json`, `lsystems.json`, etc.
   - Maps keys like `"code_display"` -> scene files like `"res://commons/context/clipboard/codeDisplay.tscn"`
+  - New artifacts include QFEP connections linking each algorithm to queer theory
 
 ## Understanding the Pedagogical Strategy
 
@@ -653,7 +821,10 @@ Example in Point_Context:
 
 **To find all maps in a sequence:**
 ```bash
-grep -A 20 '"primitives"' commons/maps/map_sequences.json
+# Read the specific sequence file directly
+cat commons/maps/sequences/randomness.json
+# Or search across all sequence files
+grep -l '"randomness"' commons/maps/sequences/*.json
 ```
 
 **To find tutorial content:**
@@ -664,6 +835,11 @@ grep "point_axioms" commons/context/clipboard/tutorial_text.json -A 5
 **To see all tutorial files:**
 ```bash
 ls commons/context/clipboard/tutorial_text/*.gd
+```
+
+**To look up an artifact across all registries:**
+```bash
+grep -r '"coin_toss"' commons/artifacts/registry/
 ```
 
 ### Understanding Map Coordinates
@@ -757,21 +933,33 @@ The grid IS the lesson - discretization is both tool and subject.
 ## Summary: Quick Reference
 
 **To play through a sequence:**
-1. Open `commons/maps/map_sequences.json`
+1. Open `commons/maps/sequences/<domain>.json` (or browse `sequence_index.json` for the full list)
 2. Pick a sequence, note the `maps` array
 3. For each map name:
    - Read `commons/maps/{MapName}/map_data.json`
-   - Visualize the three layers
+   - Visualize the three layers (structure → utilities → interactables)
+   - Look up artifacts in `commons/artifacts/registry/*.json` for descriptions and QFEP connections
    - Look up tutorial content in `tutorial_text.json`
    - Read the text (inline or in .gd file)
-   - Find teleporter position
+   - Find teleporter position (exit to next map)
 4. Move to next map
+5. After the last map, note the sequence's `lab_map` — this is the expanded Lab state
 
 **To understand the project philosophy:**
 - Read Point_Zero, Point_1, Point_Context in sequence
 - Notice the technical <-> critical oscillation
 - Pay attention to spatial architecture (raised platforms, galleries, voids)
+- Read the QFEP connections in artifact registries — every algorithm has a queer theory dimension
 - The project teaches **and** critiques computational thinking simultaneously
+- Entropy is not decay — entropy is freedom
+
+**Current development highlights (Feb 2026):**
+- 6 new physical probability artifacts in the randomness domain (coin_toss, dice_throw, galton_board, prng_crank_machine, monte_carlo_dartboard, hardware_entropy_decay)
+- All 6 are registered in `commons/artifacts/registry/randomness.json` with QFEP connections
+- All 6 are placed in existing randomness maps (Random_Cubes, Random_Definition, Random_Gaussian, Random_Rotate_Random_XYZ, Randomness_Examples_of_Randomness)
+- 50+ sequences spanning 22 algorithm domains with 200+ maps
+- Component-based grid system with 8 specialized components
+- 30+ utility types across 11 categories
 
 ---
 
