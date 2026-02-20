@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_5",
 		"lookup_name": "Forces_5",
-		"description": "Advanced Force Systems - explore complex force combinations and interactions",
+		"description": "Force fields and superposition — spatial functions mapping position to force, combining multiple fields",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,7 +45,7 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "vector_fields", " ", "force_field_visualizer", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "force_fields:0:1:10", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

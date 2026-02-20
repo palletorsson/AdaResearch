@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cslngsht04004"]
+
+[ext_resource type="Script" path="res://algorithms/physicssimulation/slingshotlauncher/SlingshotLauncher.gd" id="1_sling"]
+
+[node name="SlingshotLauncher" type="Node3D"]
+script = ExtResource("1_sling")

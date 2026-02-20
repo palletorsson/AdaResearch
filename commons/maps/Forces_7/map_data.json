@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_7",
 		"lookup_name": "Forces_7",
-		"description": "Coordinate Systems - explore polar coordinates and force transformations",
+		"description": "Particle systems — many bodies under forces, statistical emergence from individual rules",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_3_4_polar_to_cartesian_vr", " ", " ", " ", " "],
+			[" ", " ", "particle_systems", " ", "force_fields", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "example_1_10_accelerating_towards_the_mouse_vr", " ", " "],
+			[" ", " ", "firework_launcher", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

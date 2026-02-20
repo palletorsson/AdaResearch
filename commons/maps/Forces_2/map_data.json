@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_2",
 		"lookup_name": "Forces_2",
-		"description": "Friction and Resistance - explore friction forces and fluid resistance",
+		"description": "Gravity and falling — parabolic trajectories, mass-scaled acceleration, bouncing with energy loss",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_2_4_friction_vr", " ", " ", " ", " "],
+			[" ", " ", "bouncing_ball", " ", "viscosity_layers", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "example_2_5_fluid_resistance_vr", " ", " "],
+			[" ", " ", "mass_spring_damper", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

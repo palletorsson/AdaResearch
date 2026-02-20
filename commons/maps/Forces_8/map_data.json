@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_8",
 		"lookup_name": "Forces_8",
-		"description": "Master Forces - explore advanced force systems and chaos attractors",
+		"description": "N-body and chaos — gravitational dynamics, three-body problem, deterministic unpredictability",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "chaos_attractor", " ", " ", " ", " "],
+			[" ", " ", "three_body_problem", " ", "nbody_simulation", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "forcedirected3d", " ", " "],
+			[" ", " ", "chaos_attractor", " ", "forcedirected3d", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_1",
 		"lookup_name": "Forces_1",
-		"description": "Introduction to Forces - explore basic force interactions and gravity",
+		"description": "Newton's Laws — inertia, F=ma, and action-reaction made tangible with bouncing balls and mass variation",
 		"manual_file": "res://commons/context/clipboard/tutorial_text/forces_axioms.md",
 		"version": "1.0",
 		"format": "json",
@@ -35,7 +35,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -46,13 +46,13 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_2_2_forces_mass_variation_vr", " ", " ", " ", " "],
+			[" ", " ", "newtons_laws", " ", "bouncing_ball", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "VectorThrowing", " ", "example_2_3_gravity_scaled_by_mass_vr", " ", " "],
+			[" ", " ", "newton_cradle", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "destructibles_test_scene"]
+			[" ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {

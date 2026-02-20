@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_6",
 		"lookup_name": "Forces_6",
-		"description": "Angular Motion Forces - explore forces with rotational dynamics",
+		"description": "Springs and oscillation — Hooke's law, damping, underdamped and overdamped motion, harmonic oscillators",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_3_2_forces_with_arbitrary_angular_motion_vr", " ", " ", " ", " "],
+			[" ", " ", "mass_spring_damper", " ", "spring_system", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "example_3_3_pointing_in_the_direction_of_motion_vr", " ", " "],
+			[" ", " ", "example_3_2_forces_with_arbitrary_angular_motion_vr", " ", "example_3_3_pointing_in_the_direction_of_motion_vr", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_3",
 		"lookup_name": "Forces_3",
-		"description": "Attractor Forces - explore single and multiple attractor systems",
+		"description": "Friction and drag — resistance proportional to normal force and velocity, energy dissipation",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_2_6_single_attractor_vr", " ", " ", " ", " "],
+			[" ", " ", "gravity_well", " ", "force_fields", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "example_2_7_multiple_attractors_vr", " ", " "],
+			[" ", " ", "force_field_visualizer", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

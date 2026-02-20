@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Forces_4",
 		"lookup_name": "Forces_4",
-		"description": "Body Interactions - explore two-body and N-body attraction systems",
+		"description": "Attractor systems — single and multiple attractors pulling particles through force fields",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -34,7 +34,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -45,10 +45,10 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "example_2_8_two_body_attraction_vr", " ", " ", " ", " "],
+			[" ", " ", "slingshot_launcher", " ", "nbody_simulation", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "example_2_9_n_body_attraction_vr", " ", " "],
+			[" ", " ", "orbital_mechanics_demo", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
