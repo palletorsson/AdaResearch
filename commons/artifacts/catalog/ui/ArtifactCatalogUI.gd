@@ -128,6 +128,8 @@ func _on_filters_changed(theme: String, complexity: String, sequence_name: Strin
 func _on_artifact_selected(lookup_name: String):
 	if _preview:
 		_preview.show_artifact(lookup_name)
+	# Also spawn 3D preview immediately on selection
+	spawn_requested.emit(lookup_name)
 
 
 func _on_spawn_requested(lookup_name: String):

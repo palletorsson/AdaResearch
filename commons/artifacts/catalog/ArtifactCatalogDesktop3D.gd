@@ -7,6 +7,15 @@ extends Node3D
 @export var next_artifact_key: Key = KEY_N
 @export var toggle_rotation_key: Key = KEY_R
 
+## Orbit camera settings
+@export_group("Camera Controls")
+@export var orbit_sensitivity: float = 0.005
+@export var pan_sensitivity: float = 0.01
+@export var zoom_sensitivity: float = 0.3
+@export var zoom_min: float = 1.0
+@export var zoom_max: float = 20.0
+@export var auto_rotate_speed: float = 0.3
+
 @onready var _catalog_ui: CanvasLayer = $CatalogUI
 @onready var _preview_container: Node3D = $PreviewContainer
 @onready var _preview_camera: Camera3D = $PreviewContainer/PreviewCamera
@@ -14,7 +23,15 @@ extends Node3D
 
 var _current_preview_artifact: Node3D = null
 var _rotate_preview: bool = true
-var _rotation_speed: float = 0.5
+
+# Orbit camera state
+var _orbit_yaw: float = 0.0
+var _orbit_pitch: float = -0.35  # Slight downward angle (~20°)
+var _orbit_distance: float = 5.0
+var _orbit_focus: Vector3 = Vector3(0, 1.0, 0)
+var _is_orbiting: bool = false
+var _is_panning: bool = false
+var _mouse_captured: bool = false
 
 func _ready():
 	print("ArtifactCatalogDesktop3D: Initializing standalone catalog...")
@@ -25,6 +42,9 @@ func _ready():
 		if catalog and catalog.has_signal("spawn_requested"):
 			catalog.spawn_requested.connect(_on_artifact_selected)
 			print("ArtifactCatalogDesktop3D: Connected to spawn_requested signal")
+	
+	# Set initial camera from orbit state
+	_update_camera_from_orbit()
 	
 	# Ensure artifacts are loaded (standalone mode)
 	call_deferred("_refresh_catalog")
@@ -41,17 +61,20 @@ func _refresh_catalog():
 			catalog.refresh()
 
 func _process(delta: float):
-	# Rotate preview artifact
-	if _rotate_preview and _current_preview_artifact and is_instance_valid(_current_preview_artifact):
-		_current_preview_artifact.rotate_y(_rotation_speed * delta)
+	# Auto-rotate orbit when not interacting
+	if _rotate_preview and not _is_orbiting and not _is_panning:
+		if _current_preview_artifact and is_instance_valid(_current_preview_artifact):
+			_orbit_yaw += auto_rotate_speed * delta
+			_update_camera_from_orbit()
 
 func _on_artifact_selected(lookup_name: String):
 	print("ArtifactCatalogDesktop3D: Artifact selected: %s" % lookup_name)
 	_load_preview_artifact(lookup_name)
 
 func _load_preview_artifact(lookup_name: String):
-	# Clear existing preview
+	# Clear existing preview and reset camera
 	_clear_preview()
+	_reset_orbit()
 	
 	# Get artifact info
 	var artifact_info = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup_name)
@@ -183,6 +206,57 @@ func _input(event: InputEvent):
 	# Escape to clear preview
 	if event.is_action_pressed("ui_cancel"):
 		_clear_preview()
+
+	# --- Mouse orbit / pan / zoom ---
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		# Left mouse: orbit
+		if mb.button_index == MOUSE_BUTTON_LEFT:
+			_is_orbiting = mb.pressed
+		# Right mouse: pan
+		elif mb.button_index == MOUSE_BUTTON_RIGHT:
+			_is_panning = mb.pressed
+		# Scroll: zoom
+		elif mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
+			_orbit_distance = max(zoom_min, _orbit_distance - zoom_sensitivity)
+			_update_camera_from_orbit()
+		elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
+			_orbit_distance = min(zoom_max, _orbit_distance + zoom_sensitivity)
+			_update_camera_from_orbit()
+
+	if event is InputEventMouseMotion:
+		var motion := event as InputEventMouseMotion
+		if _is_orbiting:
+			_orbit_yaw -= motion.relative.x * orbit_sensitivity
+			_orbit_pitch -= motion.relative.y * orbit_sensitivity
+			_orbit_pitch = clamp(_orbit_pitch, -PI * 0.45, PI * 0.45)
+			_update_camera_from_orbit()
+		elif _is_panning:
+			var right := _preview_camera.global_transform.basis.x
+			var up := _preview_camera.global_transform.basis.y
+			_orbit_focus -= right * motion.relative.x * pan_sensitivity
+			_orbit_focus += up * motion.relative.y * pan_sensitivity
+			_update_camera_from_orbit()
+
+func _update_camera_from_orbit() -> void:
+	"""Position the camera on a sphere around _orbit_focus using yaw/pitch/distance."""
+	if not _preview_camera:
+		return
+	var offset := Vector3(
+		sin(_orbit_yaw) * cos(_orbit_pitch),
+		sin(_orbit_pitch),
+		cos(_orbit_yaw) * cos(_orbit_pitch)
+	) * _orbit_distance
+	_preview_camera.global_position = _orbit_focus + offset
+	_preview_camera.look_at(_orbit_focus, Vector3.UP)
+
+func _reset_orbit() -> void:
+	"""Reset orbit to default view."""
+	_orbit_yaw = 0.0
+	_orbit_pitch = -0.35
+	_orbit_distance = 5.0
+	_orbit_focus = Vector3(0, 1.0, 0)
+	_update_camera_from_orbit()
 
 
 func _select_next_artifact() -> void:
