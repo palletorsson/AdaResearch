@@ -90,9 +90,9 @@ func _launch_firework():
 		"target_height": launch_height + randf_range(-0.3, 0.3),
 		"colors": colors,
 		"pattern": preset[2] as String,
-		"mesh": null as MeshInstance3D,
+		"mesh": null,
 		"trail_points": PackedVector3Array(),
-		"trail_mesh": null as MeshInstance3D,
+		"trail_mesh": null,
 	}
 
 	# Rocket visual
@@ -151,7 +151,7 @@ func _explode(rocket: Dictionary):
 			"color": color,
 			"life": particle_lifetime,
 			"max_life": particle_lifetime,
-			"mesh": null as MeshInstance3D,
+			"mesh": null,
 		}
 
 		# Particle visual
@@ -217,7 +217,7 @@ func _physics_process(delta: float):
 			mesh.position = p["pos"]
 
 			# Fade out
-			var life_ratio := p["life"] / p["max_life"]
+			var life_ratio: float = float(p["life"]) / float(p["max_life"])
 			var mat := mesh.material_override as StandardMaterial3D
 			if mat:
 				mat.albedo_color.a = life_ratio
@@ -225,7 +225,7 @@ func _physics_process(delta: float):
 				mat.emission_energy_multiplier = 2.5 * life_ratio
 
 			# Shrink
-			var s := life_ratio * 0.8 + 0.2
+			var s: float = life_ratio * 0.8 + 0.2
 			mesh.scale = Vector3(s, s, s)
 
 		if p["life"] <= 0:
