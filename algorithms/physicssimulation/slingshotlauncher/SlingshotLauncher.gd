@@ -312,7 +312,7 @@ func _launch():
 		else:
 			# Use a tween to simulate the launch arc
 			var tween := create_tween()
-			var start_pos := player_body.global_position
+			var start_pos: Vector3 = player_body.global_position
 			tween.tween_property(player_body, "global_position",
 				start_pos + launch_velocity * 0.3, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
