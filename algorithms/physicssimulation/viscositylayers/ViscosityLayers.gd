@@ -156,10 +156,10 @@ func _physics_process(delta: float):
 
 		# Drag opposes velocity: F_drag = -c * v * |v|  (quadratic drag)
 		var vy: float = state["vy"]
-		var force_drag := -drag_coeff * vy * abs(vy)
+		var force_drag: float = -drag_coeff * vy * absf(vy)
 
 		# Net acceleration
-		var accel := (force_gravity + force_drag) / ball_mass
+		var accel: float = (force_gravity + force_drag) / ball_mass
 		state["vy"] += accel * delta
 		state["y"] += state["vy"] * delta
 
