@@ -42,6 +42,8 @@ var _history: Array[String] = []  # Last N results
 const MAX_COINS := 8
 const MAX_HISTORY := 30
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -241,7 +243,17 @@ func _spawn_coins_in_tray() -> void:
 
 
 func _create_coin() -> RigidBody3D:
-	var rb := RigidBody3D.new()
+	# Same grab/pick principle as grab_paper: XRTools pickable base + custom cylinder body
+	var rb: XRToolsPickable = PICKABLE_SCENE.instantiate() as XRToolsPickable
+	if rb == null:
+		push_error("CoinToss: Failed to instantiate XRTools pickable for coin.")
+		return RigidBody3D.new()
+
+	rb.freeze = true
+	rb.release_mode = XRToolsPickable.ReleaseMode.UNFROZEN
+	rb.press_to_hold = true
+	rb.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	rb.second_hand_grab = XRToolsPickable.SecondHandGrab.SECOND
 	rb.mass = coin_mass
 	rb.gravity_scale = 1.2
 	rb.linear_damp = 0.2
@@ -254,12 +266,22 @@ func _create_coin() -> RigidBody3D:
 	rb.physics_material_override = phys
 
 	# Collision — cylinder
-	var col := CollisionShape3D.new()
+	var col: CollisionShape3D = rb.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if col == null:
+		col = CollisionShape3D.new()
+		rb.add_child(col)
 	var shape := CylinderShape3D.new()
 	shape.radius = coin_radius
 	shape.height = coin_thickness
 	col.shape = shape
-	rb.add_child(col)
+
+	# Highlight ring (same XR highlight behavior as grab_paper)
+	var highlight: Node3D = HIGHLIGHT_RING_SCENE.instantiate() as Node3D
+	if highlight:
+		var ring_scale_raw: float = (coin_radius * 2.4) / 0.05
+		var ring_scale: float = ring_scale_raw if ring_scale_raw > 1.0 else 1.0
+		highlight.scale = Vector3.ONE * ring_scale
+		rb.add_child(highlight)
 
 	# Heads side (+Y) — gold
 	var heads_mesh := MeshInstance3D.new()
@@ -324,7 +346,32 @@ func _create_coin() -> RigidBody3D:
 	t_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	rb.add_child(t_label)
 
+	if rb.has_signal("picked_up"):
+		rb.picked_up.connect(_on_coin_picked_up.bind(rb))
+	if rb.has_signal("dropped"):
+		rb.dropped.connect(_on_coin_dropped.bind(rb))
+
 	return rb
+
+
+func _on_coin_picked_up(_pickable, coin: RigidBody3D) -> void:
+	if not is_instance_valid(coin):
+		return
+	var state: Dictionary = _coin_states.get(coin.get_instance_id(), {})
+	state["settled"] = false
+	state["thrown"] = false
+	state["settle_timer"] = 0.0
+	_coin_states[coin.get_instance_id()] = state
+
+
+func _on_coin_dropped(_pickable, coin: RigidBody3D) -> void:
+	if not is_instance_valid(coin):
+		return
+	var state: Dictionary = _coin_states.get(coin.get_instance_id(), {})
+	state["settled"] = false
+	state["thrown"] = true
+	state["settle_timer"] = 0.0
+	_coin_states[coin.get_instance_id()] = state
 
 
 func _read_coin_result(coin: RigidBody3D) -> void:

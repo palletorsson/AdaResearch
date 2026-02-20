@@ -43,6 +43,7 @@ var _last_result: int = 0
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
 # Face normal vectors for a standard die (opposing faces sum to 7)
 # Face 1 = -Y, Face 2 = -X, Face 3 = +Z, Face 4 = -Z, Face 5 = +X, Face 6 = +Y
@@ -208,9 +209,17 @@ func _create_rim() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_dice() -> void:
-	# The dice is a RigidBody3D with pip meshes on each face
-	_dice_body = RigidBody3D.new()
+	# Build dice from XR Tools pickable base (same principle as grab_cube_wood.tscn)
+	var pickable: XRToolsPickable = PICKABLE_SCENE.instantiate() as XRToolsPickable
+	if pickable == null:
+		push_error("DiceThrow: Failed to instantiate XRTools pickable scene for dice.")
+		return
+
+	_dice_body = pickable
 	_dice_body.name = "Dice"
+	pickable.press_to_hold = true
+	pickable.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	pickable.second_hand_grab = XRToolsPickable.SecondHandGrab.SECOND
 	_dice_body.mass = dice_mass
 	_dice_body.gravity_scale = 1.5  # Slightly heavier feel
 	_dice_body.linear_damp = 0.3
@@ -223,11 +232,13 @@ func _create_dice() -> void:
 	_dice_body.physics_material_override = phys
 
 	# Collision shape
-	var col := CollisionShape3D.new()
+	var col := _dice_body.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if col == null:
+		col = CollisionShape3D.new()
+		_dice_body.add_child(col)
 	var shape := BoxShape3D.new()
 	shape.size = Vector3.ONE * dice_size
 	col.shape = shape
-	_dice_body.add_child(col)
 
 	# Dice body mesh
 	var mesh := MeshInstance3D.new()
@@ -243,6 +254,14 @@ func _create_dice() -> void:
 	mesh.material_override = mat
 	_dice_body.add_child(mesh)
 
+	# Highlight ring for hover/selection feedback
+	var highlight: Node3D = HIGHLIGHT_RING_SCENE.instantiate() as Node3D
+	if highlight:
+		highlight.position = Vector3(0, -dice_size * 0.46, 0)
+		var ring_scale: float = dice_size / 0.05 if dice_size / 0.05 > 1.0 else 1.0
+		highlight.scale = Vector3.ONE * ring_scale
+		_dice_body.add_child(highlight)
+
 	# Add pips to each face
 	_add_pips_to_dice()
 
@@ -252,6 +271,8 @@ func _create_dice() -> void:
 	# Connect dropped signal if XRToolsPickable
 	if _dice_body.has_signal("dropped"):
 		_dice_body.dropped.connect(_on_dice_dropped)
+	if _dice_body.has_signal("picked_up"):
+		_dice_body.picked_up.connect(_on_dice_picked_up)
 
 	add_child(_dice_body)
 
@@ -314,6 +335,12 @@ func _add_pips_to_dice() -> void:
 
 func _on_dice_dropped(_pickable) -> void:
 	_is_rolling = true
+	_settle_timer = 0.0
+
+
+func _on_dice_picked_up(_pickable) -> void:
+	# Stop any settle sampling while the player is holding the die
+	_is_rolling = false
 	_settle_timer = 0.0
 
 
