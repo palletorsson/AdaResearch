@@ -8,7 +8,11 @@
 			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"grammar_systems",
+				"lsystems"
+			],
+			"sequence": "grammar_systems"
 		},
 		"Hilbert3D": {
 			"name": "3D Hilbert Curve",
@@ -18,7 +22,9 @@
 			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"AnimatedTree": {
 			"name": "Animated Tree Growth",
@@ -28,7 +34,9 @@
 			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"ForestCompetition": {
 			"name": "Forest Ecosystem",
@@ -38,7 +46,9 @@
 			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"lsystems"
+			]
 		},
 		"ContextSensitiveTree": {
 			"name": "Context-Sensitive Tree",
@@ -48,7 +58,11 @@
 			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"grammar_systems",
+				"lsystems"
+			],
+			"sequence": "grammar_systems"
 		}
 	}
 }

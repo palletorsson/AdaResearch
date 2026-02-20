@@ -9,7 +9,10 @@
 			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"y_translation_cube": {
 			"name": "Y-Translation Cube",
@@ -19,7 +22,10 @@
 			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"z_translation_cube": {
 			"name": "Z-Translation Cube",
@@ -29,7 +35,10 @@
 			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"axis_translation_cube": {
 			"name": "Axis Translation Cube",
@@ -49,7 +58,10 @@
 			"category": "transforms",
 			"include_in_map_data": false,
 			"map_ready": false,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"boolean_tunnel": {
 			"name": "Boolean Tunnel",
@@ -68,7 +80,10 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"transformation_workbench": {
 			"name": "Transformation Workbench",
@@ -95,7 +110,10 @@
 			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"sequence": "wavefunctions"
 		}
 	}
 }

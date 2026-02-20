@@ -43,6 +43,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"testmaps",
 				"wavefunctions"
 			]
 		},
@@ -127,6 +128,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"testmaps",
 				"wavefunctions"
 			]
 		},
@@ -278,7 +280,8 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness",
-				"statistics"
+				"statistics",
+				"testmaps"
 			]
 		},
 		"profile_damped": {
@@ -344,7 +347,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"machinelearning"
+				"machinelearning",
+				"testmaps"
 			]
 		},
 		"profile_logistic": {
@@ -366,7 +370,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"recursiveemergence"
+				"recursiveemergence",
+				"testmaps"
 			]
 		}
 	}

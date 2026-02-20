@@ -44,7 +44,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory"
+				"graphtheory",
+				"testmaps"
 			]
 		},
 		"grid3d_dfs": {
@@ -114,7 +115,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory"
+				"graphtheory",
+				"testmaps"
 			]
 		},
 		"grid3d_prim": {
@@ -160,7 +162,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory"
+				"graphtheory",
+				"testmaps"
 			]
 		},
 		"grid3d_random_graph": {
@@ -183,7 +186,8 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory",
-				"randomness"
+				"randomness",
+				"testmaps"
 			]
 		},
 		"grid3d_entropy": {
@@ -205,7 +209,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness"
+				"randomness",
+				"testmaps"
 			]
 		}
 	}

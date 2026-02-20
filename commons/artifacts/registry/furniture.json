@@ -30,7 +30,10 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"noise"
+			],
+			"sequence": "noise"
 		},
 		"chair_assembly_puzzle": {
 			"name": "Chair Assembly Puzzle",
@@ -40,7 +43,10 @@
 			"category": "puzzles",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"scalable_wood_cube": {
 			"name": "Scalable Wood Cube",
@@ -214,7 +220,10 @@
 			"category": "puzzles",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		},
 		"equipment_assembly_puzzle": {
 			"name": "Equipment Assembly Puzzle",
@@ -286,7 +295,10 @@
 			"category": "navigation",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"lab"
+			],
+			"sequence": "lab"
 		},
 		"audio_catalog_tablet": {
 			"name": "Audio Catalog Tablet",
@@ -296,7 +308,10 @@
 			"category": "audio",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"sequence": "wavefunctions"
 		},
 		"artifact_catalog_kiosk": {
 			"name": "Artifact Catalog Kiosk",
@@ -321,7 +336,10 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"primitives"
+			],
+			"sequence": "primitives"
 		},
 		"vr_component_demo": {
 			"name": "VR Component Demo",
@@ -337,7 +355,10 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"lab"
+			],
+			"sequence": "lab"
 		}
 	}
 }

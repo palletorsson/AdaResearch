@@ -20,6 +20,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"lab",
 				"randomness"
 			]
 		},
@@ -40,7 +41,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness"
+				"randomness",
+				"testmaps"
 			]
 		},
 		"living_paper_brownian": {
@@ -82,7 +84,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness"
+				"randomness",
+				"testmaps"
 			]
 		},
 		"living_paper_self_avoiding": {
@@ -169,7 +172,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata"
+				"cellular_automata",
+				"testmaps"
 			]
 		},
 		"living_paper_seeds": {
@@ -380,7 +384,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"fractals"
+				"fractals",
+				"testmaps"
 			]
 		},
 		"living_paper_julia": {
@@ -423,7 +428,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"fractals"
+				"fractals",
+				"testmaps"
 			]
 		},
 		"living_paper_koch": {

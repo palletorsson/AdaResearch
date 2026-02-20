@@ -35,7 +35,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"numerical_integration": {
 			"lookup_name": "numerical_integration",
@@ -65,7 +69,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"verlet_integration": {
 			"lookup_name": "verlet_integration",
@@ -93,7 +100,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"rigid_body": {
 			"lookup_name": "rigid_body",
@@ -121,7 +131,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"collision_detection": {
 			"lookup_name": "collision_detection",
@@ -153,7 +166,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"constraints": {
 			"lookup_name": "constraints",
@@ -183,7 +199,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"bouncing_ball": {
 			"lookup_name": "bouncing_ball",
@@ -214,7 +233,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"mass_spring_damper": {
 			"lookup_name": "mass_spring_damper",
@@ -244,7 +267,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"spring_mass_system": {
 			"lookup_name": "spring_mass_system",
@@ -274,7 +301,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"spring_system": {
 			"lookup_name": "spring_system",
@@ -303,7 +333,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"cloth_simulation": {
 			"lookup_name": "cloth_simulation",
@@ -335,7 +369,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"force_fields": {
 			"lookup_name": "force_fields",
@@ -365,7 +402,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"vector_fields": {
 			"lookup_name": "vector_fields",
@@ -396,7 +437,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"particle_systems": {
 			"lookup_name": "particle_systems",
@@ -427,7 +472,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"nbody_simulation": {
 			"lookup_name": "nbody_simulation",
@@ -457,7 +506,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"three_body_problem": {
 			"lookup_name": "three_body_problem",
@@ -487,7 +540,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"sequence": "forces"
 		},
 		"fluid_simulation": {
 			"lookup_name": "fluid_simulation",
@@ -518,7 +575,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"fem_simulation": {
 			"lookup_name": "fem_simulation",
@@ -549,7 +609,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"soft_bodies": {
 			"lookup_name": "soft_bodies",
@@ -579,7 +642,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"magnetic_simulation": {
 			"lookup_name": "magnetic_simulation",
@@ -609,7 +675,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
 		},
 		"surreal_kinetic_sculpture": {
 			"lookup_name": "surreal_kinetic_sculpture",
@@ -642,20 +711,188 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"sequence": "physicssimulation"
+		},
+		"newton_cradle": {
+			"lookup_name": "newton_cradle",
+			"scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
+			"name": "Newton's Cradle",
+			"description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release — momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
+			"qfep_connection": "Momentum as conserved quantity — what enters must exit. The cradle is a perfect lambda: input maps to output through invariant rules.",
+			"category": "physics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"classical_mechanics",
+				"momentum",
+				"collisions",
+				"pendulum"
+			],
+			"dev_category": "physics_foundations",
+			"tags": [
+				"newton",
+				"cradle",
+				"pendulum",
+				"momentum",
+				"elastic_collision",
+				"energy_conservation",
+				"F=ma"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"viscosity_layers": {
+			"lookup_name": "viscosity_layers",
+			"scene": "res://algorithms/physicssimulation/viscositylayers/viscositylayers.tscn",
+			"name": "Viscosity Layers",
+			"description": "Three transparent columns side by side — air, water, and honey. Drop identical balls into all three simultaneously and watch them descend at wildly different rates. Quadratic drag makes the honey ball crawl while the air ball plummets. Real-time speed readouts let you compare terminal velocities directly.",
+			"qfep_connection": "Resistance as information — the medium tells you what it's made of. Drag is the environment's signature, entropy in the friction between motion and medium.",
+			"category": "physics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"drag",
+				"viscosity",
+				"fluid_resistance",
+				"terminal_velocity"
+			],
+			"dev_category": "physics_foundations",
+			"tags": [
+				"viscosity",
+				"drag",
+				"friction",
+				"fluid",
+				"terminal_velocity",
+				"comparison",
+				"air",
+				"water",
+				"honey"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"gravity_well": {
+			"lookup_name": "gravity_well",
+			"scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn",
+			"name": "Gravity Well",
+			"description": "The rubber-sheet metaphor made real: a deformable grid mesh warps around a movable mass, creating a visible gravitational well. Colored test particles roll along the curved surface, orbiting, spiraling inward, or escaping depending on their velocity. Adjustable mass strength deepens or flattens the well in real time.",
+			"qfep_connection": "Geometry IS gravity — mass tells space how to curve. The well is the invisible made visible, the field rendered as landscape.",
+			"category": "physics",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gravity",
+				"general_relativity_metaphor",
+				"attraction",
+				"fields"
+			],
+			"dev_category": "physics_fields",
+			"tags": [
+				"gravity",
+				"well",
+				"rubber_sheet",
+				"curvature",
+				"attraction",
+				"orbit",
+				"field",
+				"general_relativity"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"slingshot_launcher": {
+			"lookup_name": "slingshot_launcher",
+			"scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
+			"name": "Slingshot Launcher",
+			"description": "Step onto the platform and get catapulted! A charging catapult mechanism detects the player, builds power, then fires you (and demo balls) along a parabolic trajectory. Adjustable launch angle and power with a visible trajectory preview. Shows impulse, projectile motion, and the visceral thrill of Newton's third law.",
+			"qfep_connection": "Impulse — a short burst of force that changes everything. The launcher is a delta function: infinite force for zero time, producing finite momentum.",
+			"category": "physics",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"impulse",
+				"projectile_motion",
+				"interaction",
+				"catapult"
+			],
+			"dev_category": "physics_interactive",
+			"tags": [
+				"slingshot",
+				"catapult",
+				"launch",
+				"projectile",
+				"impulse",
+				"trajectory",
+				"parabola",
+				"player_interaction",
+				"VR"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"firework_launcher": {
+			"lookup_name": "firework_launcher",
+			"scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
+			"name": "Firework Launcher",
+			"description": "Launch rockets that climb, then explode into showers of glowing particles — each one a tiny body under gravity, drag, and fading lifetime. Four color presets (classic, ocean, garden, ring pattern) create distinct particle distributions. Shows particle emission, statistical spread, force application to many bodies, and emergent visual patterns from simple rules.",
+			"qfep_connection": "Many from one — a single event creates a statistical population. Each particle follows deterministic rules; the beauty is emergent, irreducible to any single trajectory.",
+			"category": "physics",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"particles",
+				"emission",
+				"lifetime",
+				"forces_on_many"
+			],
+			"dev_category": "physics_particles",
+			"tags": [
+				"firework",
+				"particles",
+				"emission",
+				"gravity",
+				"drag",
+				"lifetime",
+				"explosion",
+				"color",
+				"statistical"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
 		}
 	},
 	"sequence_mapping": {
 		"foundations": [
 			"newtons_laws",
 			"numerical_integration",
-			"verlet_integration"
+			"verlet_integration",
+			"newton_cradle",
+			"viscosity_layers"
 		],
 		"bodies": [
 			"rigid_body",
 			"collision_detection",
 			"constraints",
-			"bouncing_ball"
+			"bouncing_ball",
+			"slingshot_launcher"
 		],
 		"springs": [
 			"mass_spring_damper",
@@ -668,7 +905,9 @@
 			"vector_fields",
 			"particle_systems",
 			"nbody_simulation",
-			"three_body_problem"
+			"three_body_problem",
+			"gravity_well",
+			"firework_launcher"
 		],
 		"continuum": [
 			"fluid_simulation",
@@ -700,7 +939,12 @@
 			"fem_simulation",
 			"soft_bodies",
 			"magnetic_simulation",
-			"surreal_kinetic_sculpture"
+			"surreal_kinetic_sculpture",
+			"newton_cradle",
+			"viscosity_layers",
+			"gravity_well",
+			"slingshot_launcher",
+			"firework_launcher"
 		]
 	},
 	"theoretical_connections": {
@@ -708,7 +952,9 @@
 			"newtons_laws",
 			"rigid_body",
 			"bouncing_ball",
-			"collision_detection"
+			"collision_detection",
+			"newton_cradle",
+			"slingshot_launcher"
 		],
 		"numerical_methods": [
 			"numerical_integration",
@@ -732,13 +978,19 @@
 		],
 		"gravitational_dynamics": [
 			"nbody_simulation",
-			"three_body_problem"
+			"three_body_problem",
+			"gravity_well"
 		],
 		"chaos_theory": [
 			"three_body_problem"
 		],
 		"fluid_mechanics": [
-			"fluid_simulation"
+			"fluid_simulation",
+			"viscosity_layers"
+		],
+		"particle_dynamics": [
+			"particle_systems",
+			"firework_launcher"
 		],
 		"constraint_based": [
 			"constraints",

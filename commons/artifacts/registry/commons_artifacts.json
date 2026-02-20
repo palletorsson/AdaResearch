@@ -1,0 +1,576 @@
+{
+	"registry_info": {
+		"name": "commons_artifacts",
+		"description": "Standalone museum-style artifacts living in commons/artifacts/ — interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
+		"category": "artifacts"
+	},
+	"artifacts": {
+		"additive_wave_demo": {
+			"lookup_name": "additive_wave_demo",
+			"name": "Additive Wave Demo",
+			"description": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
+			"scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"waves",
+				"fourier",
+				"additive_synthesis",
+				"sine",
+				"frequency"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			]
+		},
+		"bias_visualizer": {
+			"lookup_name": "bias_visualizer",
+			"name": "Bias Visualizer",
+			"description": "Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
+			"scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"bias",
+				"statistics",
+				"critical_theory",
+				"visualization",
+				"fairness"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "postfoundationscrisis",
+			"map_sequences": [
+				"postfoundationscrisis",
+				"machinelearning",
+				"criticalalgorithms"
+			]
+		},
+		"ca_rule_explorer": {
+			"lookup_name": "ca_rule_explorer",
+			"name": "Cellular Automata Rule Explorer",
+			"description": "Browse and experiment with different cellular automata rule sets in real-time. Dial through Wolfram's elementary rules or configure custom neighborhood and transition tables to discover the full spectrum from dead stillness to chaotic noise, with complexity emerging at the edge.",
+			"scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"rules",
+				"wolfram",
+				"exploration",
+				"edge_of_chaos"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "cellularautomata",
+			"map_sequences": [
+				"cellularautomata"
+			]
+		},
+		"control_pendulum": {
+			"lookup_name": "control_pendulum",
+			"name": "Control Pendulum",
+			"description": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
+			"scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"control",
+				"damping",
+				"chaos",
+				"nonlinear_dynamics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces"
+			]
+		},
+		"coupled_pendulums": {
+			"lookup_name": "coupled_pendulums",
+			"name": "Coupled Pendulums",
+			"description": "Two or more pendulums connected by springs or shared supports, demonstrating energy transfer, normal modes, and synchronization. Watch energy slosh back and forth between pendulums — the physical basis of beat frequencies and resonance coupling.",
+			"scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"coupled",
+				"synchronization",
+				"normal_modes",
+				"energy_transfer"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces"
+			]
+		},
+		"distribution_sampler": {
+			"lookup_name": "distribution_sampler",
+			"name": "Distribution Sampler",
+			"description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
+			"scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+			"category": "emergence",
+			"complexity": "beginner",
+			"tags": [
+				"probability",
+				"distribution",
+				"sampling",
+				"histogram",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			]
+		},
+		"dna_specimen": {
+			"lookup_name": "dna_specimen",
+			"name": "DNA Specimen",
+			"description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.",
+			"scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"dna",
+				"biology",
+				"helix",
+				"specimen",
+				"molecular"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"morphogenesis"
+			]
+		},
+		"flow_field_painter": {
+			"lookup_name": "flow_field_painter",
+			"name": "Flow Field Painter",
+			"description": "Paint with vector fields — particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
+			"scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"flow_field",
+				"painting",
+				"particles",
+				"streamlines",
+				"interactive_art"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "noise",
+			"map_sequences": [
+				"noise",
+				"proceduralgeneration"
+			]
+		},
+		"force_field_visualizer": {
+			"lookup_name": "force_field_visualizer",
+			"name": "Force Field Visualizer",
+			"description": "Visualize gravitational, electric, and magnetic force fields in 3D using arrow glyphs and particle tracers. Place sources and sinks to sculpt the field landscape, then release test particles to see how forces guide motion through space.",
+			"scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"force_field",
+				"visualization",
+				"gravity",
+				"electric",
+				"magnetic",
+				"3d"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			]
+		},
+		"game_of_life_petri": {
+			"lookup_name": "game_of_life_petri",
+			"name": "Game of Life Petri Dish",
+			"description": "Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
+			"scene": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
+			"category": "emergence",
+			"complexity": "beginner",
+			"tags": [
+				"game_of_life",
+				"cellular_automata",
+				"petri_dish",
+				"emergence",
+				"conway"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "cellularautomata",
+			"map_sequences": [
+				"cellularautomata"
+			]
+		},
+		"harmonic_motion_demo": {
+			"lookup_name": "harmonic_motion_demo",
+			"name": "Harmonic Motion Demo",
+			"description": "Interactive simple harmonic motion demonstration — a mass oscillating on a spring with real-time graphs of position, velocity, and acceleration. Adjust spring constant and mass to see how frequency depends on physical parameters.",
+			"scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"harmonic_motion",
+				"spring",
+				"oscillation",
+				"shm",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces"
+			]
+		},
+		"jelly_variants": {
+			"lookup_name": "jelly_variants",
+			"name": "Jelly Cube Variants",
+			"description": "A collection of soft body jelly cubes with different material properties — varying stiffness, damping, and viscosity. Poke, squeeze, and throw them to feel how parameters shape deformation behavior. A tactile physics playground.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
+			"category": "physics",
+			"complexity": "beginner",
+			"tags": [
+				"jelly",
+				"soft_body",
+				"variants",
+				"deformation",
+				"tactile"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "softbodies",
+			"map_sequences": [
+				"softbodies"
+			]
+		},
+		"julia_set_explorer": {
+			"lookup_name": "julia_set_explorer",
+			"name": "Julia Set Explorer",
+			"description": "Navigate the infinite complexity of Julia sets — zoom into fractal boundaries where order and chaos interweave at every scale. Adjust the complex parameter c to morph between connected and disconnected Julia sets, watching the Mandelbrot set's DNA unfold.",
+			"scene": "res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"julia_set",
+				"fractal",
+				"complex_numbers",
+				"exploration",
+				"mandelbrot"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "fractals",
+			"map_sequences": [
+				"fractals"
+			]
+		},
+		"lsystem_editor": {
+			"lookup_name": "lsystem_editor",
+			"name": "L-System Editor",
+			"description": "Edit L-system grammars in real-time and watch procedural plants, fractals, and branching structures grow from simple rewriting rules. Adjust axiom, production rules, angle, and iteration depth to explore the space of formal grammars made visible.",
+			"scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"lsystem",
+				"grammar",
+				"procedural",
+				"plants",
+				"fractals",
+				"editor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "lsystems",
+			"map_sequences": [
+				"lsystems"
+			]
+		},
+		"mario_cube": {
+			"lookup_name": "mario_cube",
+			"name": "Mario Cube",
+			"description": "An interactive surprise cube inspired by classic platformer mechanics — hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.",
+			"scene": "res://commons/artifacts/mario_cube/mario_cube.tscn",
+			"category": "primitives",
+			"complexity": "beginner",
+			"tags": [
+				"mario",
+				"cube",
+				"interactive",
+				"signal",
+				"game_design"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "primitives",
+			"map_sequences": [
+				"primitives"
+			]
+		},
+		"monte_carlo_estimator": {
+			"lookup_name": "monte_carlo_estimator",
+			"name": "Monte Carlo Estimator",
+			"description": "Estimate mathematical quantities through random sampling — watch as dart throws approximate pi, random walks estimate integrals, and stochastic processes converge to deterministic values. The power of randomness as a computational tool.",
+			"scene": "res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"monte_carlo",
+				"estimation",
+				"random_sampling",
+				"pi",
+				"stochastic"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			]
+		},
+		"orbital_mechanics_demo": {
+			"lookup_name": "orbital_mechanics_demo",
+			"name": "Orbital Mechanics Demo",
+			"description": "Interactive orbital mechanics simulation — launch satellites, adjust velocity and angle, and watch Kepler's laws emerge from Newton's gravity. Explore circular, elliptical, parabolic, and hyperbolic orbits by tuning initial conditions.",
+			"scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"orbital_mechanics",
+				"kepler",
+				"gravity",
+				"satellite",
+				"trajectories"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			]
+		},
+		"oscilloscope_artifact": {
+			"lookup_name": "oscilloscope_artifact",
+			"name": "Oscilloscope",
+			"description": "A virtual oscilloscope displaying real-time waveforms — connect it to audio sources or mathematical functions to visualize signals in the time domain. Adjust timebase, amplitude, and trigger settings like its real-world counterpart.",
+			"scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"oscilloscope",
+				"waveform",
+				"signal",
+				"time_domain",
+				"measurement"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			]
+		},
+		"perlin_terrain_sculptor": {
+			"lookup_name": "perlin_terrain_sculptor",
+			"name": "Perlin Terrain Sculptor",
+			"description": "Sculpt terrain using Perlin noise parameters — adjust octaves, persistence, lacunarity, and scale to shape landscapes from smooth rolling hills to jagged mountain ranges. Real-time terrain generation making noise mathematics tangible.",
+			"scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"perlin_noise",
+				"terrain",
+				"sculpting",
+				"procedural",
+				"landscape"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "noise",
+			"map_sequences": [
+				"noise"
+			]
+		},
+		"petri_dish_worms": {
+			"lookup_name": "petri_dish_worms",
+			"name": "Petri Dish Worms",
+			"description": "Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
+			"scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"worms",
+				"petri_dish",
+				"steering",
+				"biological",
+				"procedural_animation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"swarmintelligence",
+				"morphogenesis"
+			]
+		},
+		"queer_morphology_specimen": {
+			"lookup_name": "queer_morphology_specimen",
+			"name": "Queer Morphology Specimen",
+			"description": "A procedural specimen that defies binary classification — its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework's challenge to normative boundaries in biological and computational classification.",
+			"scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+			"category": "emergence",
+			"complexity": "advanced",
+			"tags": [
+				"queer_theory",
+				"morphology",
+				"specimen",
+				"critical_theory",
+				"qfep",
+				"taxonomy"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "qfeplaboratory",
+			"map_sequences": [
+				"qfeplaboratory",
+				"criticalalgorithms"
+			]
+		},
+		"random_walk_terrarium": {
+			"lookup_name": "random_walk_terrarium",
+			"name": "Random Walk Terrarium",
+			"description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
+			"scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"random_walk",
+				"terrarium",
+				"terrain",
+				"stochastic",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			]
+		},
+		"spring_demo": {
+			"lookup_name": "spring_demo",
+			"name": "Spring Demo",
+			"description": "A hands-on spring physics demonstration — stretch, compress, and release springs to feel Hooke's law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.",
+			"scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
+			"category": "physics",
+			"complexity": "beginner",
+			"tags": [
+				"spring",
+				"hookes_law",
+				"physics",
+				"oscillation",
+				"force"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces",
+				"physicssimulation"
+			]
+		},
+		"transform_matrix_cube": {
+			"lookup_name": "transform_matrix_cube",
+			"name": "Transform Matrix Cube",
+			"description": "Interactive 3D cube with its transformation matrix displayed in real-time. Rotate, scale, and translate the cube while watching the 4x4 matrix update — making the abstract algebra of linear transformations concrete and visual.",
+			"scene": "res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.tscn",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"tags": [
+				"transform",
+				"matrix",
+				"linear_algebra",
+				"rotation",
+				"scale",
+				"translation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "transformation",
+			"map_sequences": [
+				"transformation"
+			]
+		},
+		"turing_pattern_generator": {
+			"lookup_name": "turing_pattern_generator",
+			"name": "Turing Pattern Generator",
+			"description": "Generate reaction-diffusion Turing patterns in real-time — spots, stripes, and labyrinthine structures emerge from the interplay of activator and inhibitor chemicals diffusing at different rates. Alan Turing's morphogenesis made visible.",
+			"scene": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
+			"category": "emergence",
+			"complexity": "advanced",
+			"tags": [
+				"turing_patterns",
+				"reaction_diffusion",
+				"morphogenesis",
+				"spots",
+				"stripes"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "softbodies",
+			"map_sequences": [
+				"softbodies",
+				"proceduralgeneration_all",
+				"cellularautomata",
+				"morphogenesis"
+			]
+		},
+		"wave_interference_tank": {
+			"lookup_name": "wave_interference_tank",
+			"name": "Wave Interference Tank",
+			"description": "A ripple tank simulation showing wave interference patterns — place point sources and watch circular waves superpose, creating constructive and destructive interference. The physical demonstration that reveals the wave nature of light, sound, and quantum mechanics.",
+			"scene": "res://commons/artifacts/wave_interference_tank/wave_interference_tank.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"wave_interference",
+				"ripple_tank",
+				"superposition",
+				"constructive",
+				"destructive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			]
+		}
+	}
+}
