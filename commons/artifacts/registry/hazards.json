@@ -117,6 +117,46 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"plasma_critter": {
+			"name": "Plasma Critter",
+			"lookup_name": "plasma_critter",
+			"description": "Shapeshifting energy substance — a critter that takes form based on relational context. Raw form shocks on contact. Touch with a stick → fire torch. Touch water → healing aura. Touch crystal → power orb. Q-FEP: same potential, different restraint.",
+			"scene": "res://commons/hazards/plasma/plasma_critter.tscn",
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"stick_tool": {
+			"name": "Stick Tool",
+			"lookup_name": "stick_tool",
+			"description": "A simple wooden stick the player can grab. Hold near a Plasma Critter to transform it into a torch. The mediator between player and plasma — the relational bridge.",
+			"scene": "res://commons/hazards/plasma/stick_tool.tscn",
+			"category": "tools",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"octapod_crawler": {
+			"name": "Octapod Crawler",
+			"lookup_name": "octapod_crawler",
+			"description": "Procedural 8-legged wall-crawling creature. Headcrab meets octopus. Patrols surfaces, detects player, chases and leaps. Can be stunned with fire. Future: befriend in lab, evolves through game.",
+			"scene": "res://commons/hazards/octapod_crawler/octapod_crawler.tscn",
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"hazards_demo": {
+			"name": "Hazards Demo",
+			"lookup_name": "hazards_demo",
+			"description": "Test arena for all hazard creatures. Spawns plasma critters, stick tools, dormant egg-plant octapods, and an active crawler in a dark atmospheric arena with moody lighting and fog.",
+			"scene": "res://commons/hazards/hazards_demo/hazards_demo.tscn",
+			"category": "demos",
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": []
 		}
 	}
 }
