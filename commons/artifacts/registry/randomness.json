@@ -1533,6 +1533,32 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"random_walk_leash": {
+			"name": "Random Walk Leash",
+			"lookup_name": "random_walk_leash",
+			"description": "A glowing orb on a leash that tugs in random directions. Grab it in VR and feel the random walk through your hand. The orb pulses with each impulse. A trail traces the walk path. Stats track drift vs sqrt(N) theoretical scaling.",
+			"scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
+			"category": "randomness",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"qfep_connection": "Embodied randomness — the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
+			"tags": [
+				"random_walk",
+				"embodied",
+				"haptic",
+				"drift",
+				"sqrt_n",
+				"physics",
+				"interactive",
+				"grab"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
