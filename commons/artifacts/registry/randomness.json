@@ -1508,6 +1508,31 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"slot_machine": {
+			"name": "Slot Machine",
+			"lookup_name": "slot_machine",
+			"description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
+			"scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+			"category": "randomness",
+			"interaction": "button",
+			"complexity": "beginner",
+			"qfep_connection": "Independence — each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
+			"tags": [
+				"slot_machine",
+				"uniform_distribution",
+				"independence",
+				"combinatorics",
+				"probability",
+				"histogram",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
