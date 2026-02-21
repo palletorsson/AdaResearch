@@ -1046,11 +1046,15 @@
 			"sequence": "randomness"
 		},
 		"random_number_book_page_collection": {
-			"name": "Random Number Book Page Collection",
+			"name": "Random Number Book — Live Cascade",
 			"lookup_name": "random_number_book_page_collection",
-			"description": "Interactive collection of randomly generated numbered book pages using procedural algorithms",
+			"description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it — frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
 			"category": "procedural",
+			"interaction": "touch",
+			"complexity": "beginner",
+			"qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
+			"tags": ["random_digits", "cascade", "interactive", "touch", "RAND_corporation", "stock_ticker", "freeze"],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -1128,9 +1132,11 @@
 		"random_number_book_page_1955": {
 			"name": "Random Number Book Page 1955",
 			"lookup_name": "random_number_book_page_1955",
-			"description": "Interactive 1955-style random number book page generation using procedural algorithms",
+			"description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
 			"category": "procedural",
+			"interaction": "touch",
+			"tags": ["random_digits", "cascade", "interactive", "touch", "RAND_corporation"],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
