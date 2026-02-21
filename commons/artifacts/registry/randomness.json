@@ -1379,6 +1379,33 @@
 			],
 			"sequence": "randomness"
 		},
+		"entropy_jar": {
+			"name": "Entropy Jar",
+			"lookup_name": "entropy_jar",
+			"description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
+			"scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+			"category": "randomness",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"qfep_connection": "Irreversibility — mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
+			"tags": [
+				"entropy",
+				"thermodynamics",
+				"irreversibility",
+				"mixing",
+				"shannon",
+				"second_law",
+				"physics",
+				"interactive",
+				"grab"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
 		"coin_toss": {
 			"name": "Coin Toss",
 			"lookup_name": "coin_toss",
