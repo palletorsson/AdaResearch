@@ -17,10 +17,15 @@ extends Node3D
 @export var volume_size: float = 2.0  # Size of the sculpting volume in meters
 @export var volume_resolution: int = 64  # Voxels per axis (affects detail)
 
+# VR interactables
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+
 # References
 var terrain_generator: Node  # TerrainGeneratorSculpt
 var brush_indicator: MeshInstance3D
 var volume_bounds: MeshInstance3D
+var _status_label: Label3D
 
 # Controller tracking
 var left_controller: Node3D
@@ -32,6 +37,14 @@ var right_trigger_pressed: bool = false
 var left_paint_timer: float = 0.0
 var right_paint_timer: float = 0.0
 
+# VR control panel
+var _control_panel: Node3D
+var _btn_regen: Node3D
+var _btn_clear: Node3D
+var _btn_erase_toggle: Node3D
+var _btn_brush_up: Node3D
+var _btn_brush_down: Node3D
+
 # State
 var is_initialized: bool = false
 var blobs_painted: int = 0
@@ -41,8 +54,11 @@ func _ready():
 	_create_terrain_generator()
 	_create_brush_indicator()
 	_create_volume_bounds()
+	_build_vr_controls()
+	_build_status_label()
 	_find_controllers()
 	is_initialized = true
+	_update_status_label()
 	print("MarchingCubesSculptVR: Ready! Use triggers to paint in 3D.")
 
 func _create_terrain_generator():
@@ -129,6 +145,176 @@ func _create_volume_bounds():
 	volume_bounds.material_override = mat
 
 	add_child(volume_bounds)
+
+func _build_vr_controls():
+	# Create a control panel floating beside the sculpting volume
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	# Position to the right of the volume, slightly angled toward user
+	_control_panel.position = Vector3(volume_size * 0.75, 0.0, -volume_size * 0.3)
+	add_child(_control_panel)
+
+	if not PUSH_BUTTON:
+		print("MarchingCubesSculptVR: push_button.tscn not found, skipping VR controls")
+		return
+
+	var btn_scale := Vector3(0.4, 0.4, 0.4)
+	var spacing := 0.18
+
+	# --- REGENERATE button ---
+	_btn_regen = PUSH_BUTTON.instantiate()
+	_btn_regen.name = "RegenBtn"
+	_btn_regen.position = Vector3(0, spacing * 2, 0)
+	_btn_regen.scale = btn_scale
+	_control_panel.add_child(_btn_regen)
+	if _btn_regen.has_signal("button_pressed"):
+		_btn_regen.button_pressed.connect(func(_b): _regenerate_sculpture())
+
+	var lbl_regen := Label3D.new()
+	lbl_regen.text = "REGEN"
+	lbl_regen.font_size = 32
+	lbl_regen.pixel_size = 0.001
+	lbl_regen.position = Vector3(0.12, 0, 0)
+	lbl_regen.modulate = Color(0.4, 1.0, 0.4)
+	_btn_regen.add_child(lbl_regen)
+
+	# --- CLEAR button ---
+	_btn_clear = PUSH_BUTTON.instantiate()
+	_btn_clear.name = "ClearBtn"
+	_btn_clear.position = Vector3(0, spacing, 0)
+	_btn_clear.scale = btn_scale
+	_control_panel.add_child(_btn_clear)
+	if _btn_clear.has_signal("button_pressed"):
+		_btn_clear.button_pressed.connect(func(_b): clear_sculpture())
+
+	var lbl_clear := Label3D.new()
+	lbl_clear.text = "CLEAR"
+	lbl_clear.font_size = 32
+	lbl_clear.pixel_size = 0.001
+	lbl_clear.position = Vector3(0.12, 0, 0)
+	lbl_clear.modulate = Color(1.0, 0.5, 0.2)
+	_btn_clear.add_child(lbl_clear)
+
+	# --- ERASE TOGGLE button ---
+	_btn_erase_toggle = PUSH_BUTTON.instantiate()
+	_btn_erase_toggle.name = "EraseToggleBtn"
+	_btn_erase_toggle.position = Vector3(0, 0, 0)
+	_btn_erase_toggle.scale = btn_scale
+	_control_panel.add_child(_btn_erase_toggle)
+	if _btn_erase_toggle.has_signal("button_pressed"):
+		_btn_erase_toggle.button_pressed.connect(func(_b): _toggle_erase())
+
+	var lbl_erase := Label3D.new()
+	lbl_erase.name = "EraseLabel"
+	lbl_erase.text = "ERASE: OFF"
+	lbl_erase.font_size = 32
+	lbl_erase.pixel_size = 0.001
+	lbl_erase.position = Vector3(0.12, 0, 0)
+	lbl_erase.modulate = Color(0.7, 0.7, 0.7)
+	_btn_erase_toggle.add_child(lbl_erase)
+
+	# --- BRUSH SIZE + button ---
+	_btn_brush_up = PUSH_BUTTON.instantiate()
+	_btn_brush_up.name = "BrushUpBtn"
+	_btn_brush_up.position = Vector3(0, -spacing, 0)
+	_btn_brush_up.scale = btn_scale
+	_control_panel.add_child(_btn_brush_up)
+	if _btn_brush_up.has_signal("button_pressed"):
+		_btn_brush_up.button_pressed.connect(func(_b): _change_brush_size(0.03))
+
+	var lbl_brush_up := Label3D.new()
+	lbl_brush_up.text = "BRUSH +"
+	lbl_brush_up.font_size = 32
+	lbl_brush_up.pixel_size = 0.001
+	lbl_brush_up.position = Vector3(0.12, 0, 0)
+	lbl_brush_up.modulate = Color(0.6, 0.8, 1.0)
+	_btn_brush_up.add_child(lbl_brush_up)
+
+	# --- BRUSH SIZE - button ---
+	_btn_brush_down = PUSH_BUTTON.instantiate()
+	_btn_brush_down.name = "BrushDownBtn"
+	_btn_brush_down.position = Vector3(0, -spacing * 2, 0)
+	_btn_brush_down.scale = btn_scale
+	_control_panel.add_child(_btn_brush_down)
+	if _btn_brush_down.has_signal("button_pressed"):
+		_btn_brush_down.button_pressed.connect(func(_b): _change_brush_size(-0.03))
+
+	var lbl_brush_down := Label3D.new()
+	lbl_brush_down.text = "BRUSH -"
+	lbl_brush_down.font_size = 32
+	lbl_brush_down.pixel_size = 0.001
+	lbl_brush_down.position = Vector3(0.12, 0, 0)
+	lbl_brush_down.modulate = Color(0.6, 0.8, 1.0)
+	_btn_brush_down.add_child(lbl_brush_down)
+
+	# Panel title label
+	var title_label := Label3D.new()
+	title_label.text = "SCULPT CONTROLS"
+	title_label.font_size = 24
+	title_label.pixel_size = 0.001
+	title_label.position = Vector3(0, spacing * 3, 0)
+	title_label.modulate = Color(1.0, 1.0, 1.0, 0.7)
+	title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_control_panel.add_child(title_label)
+
+func _build_status_label():
+	_status_label = Label3D.new()
+	_status_label.name = "StatusLabel"
+	_status_label.font_size = 28
+	_status_label.pixel_size = 0.001
+	_status_label.position = Vector3(0, -volume_size * 0.65, 0)
+	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_status_label.modulate = Color(0.9, 0.9, 1.0, 0.9)
+	_status_label.text = "Initializing..."
+	add_child(_status_label)
+
+func _update_status_label():
+	if not _status_label:
+		return
+	var mode_str = "ERASE" if erase_mode else "PAINT"
+	var mode_color = "🔴" if erase_mode else "🟠"
+	_status_label.text = "%s %s | Brush: %.2f | Blobs: %d" % [mode_color, mode_str, brush_radius, blobs_painted]
+
+func _regenerate_sculpture():
+	# Clear everything and regenerate with a fresh starting blob
+	if terrain_generator and terrain_generator.has_method("clear_blobs"):
+		terrain_generator.clear_blobs()
+		blobs_painted = 0
+		print("MarchingCubesSculptVR: Regenerating sculpture...")
+
+		await get_tree().process_frame
+		if terrain_generator.has_method("add_blob"):
+			# Add a few random blobs for variety
+			terrain_generator.add_blob(Vector3(0, 0, 0), 0.3)
+			terrain_generator.add_blob(
+				Vector3(randf_range(-0.3, 0.3), randf_range(-0.3, 0.3), randf_range(-0.3, 0.3)),
+				randf_range(0.1, 0.25)
+			)
+			terrain_generator.add_blob(
+				Vector3(randf_range(-0.3, 0.3), randf_range(-0.3, 0.3), randf_range(-0.3, 0.3)),
+				randf_range(0.1, 0.2)
+			)
+			blobs_painted = 3
+		_update_status_label()
+
+func _toggle_erase():
+	erase_mode = !erase_mode
+	_update_brush_color()
+	_update_status_label()
+	# Update erase button label
+	if _btn_erase_toggle:
+		for child in _btn_erase_toggle.get_children():
+			if child is Label3D and child.name == "EraseLabel":
+				child.text = "ERASE: ON" if erase_mode else "ERASE: OFF"
+				child.modulate = Color(1.0, 0.3, 0.3) if erase_mode else Color(0.7, 0.7, 0.7)
+				break
+	print("Erase mode: ", "ON" if erase_mode else "OFF")
+
+func _change_brush_size(delta: float):
+	brush_radius = clampf(brush_radius + delta, brush_radius_min, brush_radius_max)
+	_update_brush_size()
+	_update_status_label()
+	print("Brush radius: ", brush_radius)
 
 func _find_controllers():
 	# Try to find XR controllers in the scene tree
@@ -217,19 +403,13 @@ func _input(event):
 				_paint_at_position(Vector3(0, 0, 0))
 			KEY_E:
 				# Toggle erase mode
-				erase_mode = !erase_mode
-				print("Erase mode: ", "ON" if erase_mode else "OFF")
-				_update_brush_color()
+				_toggle_erase()
 			KEY_EQUAL, KEY_KP_ADD:
 				# Increase brush size
-				brush_radius = min(brush_radius + 0.02, brush_radius_max)
-				_update_brush_size()
-				print("Brush radius: ", brush_radius)
+				_change_brush_size(0.02)
 			KEY_MINUS, KEY_KP_SUBTRACT:
 				# Decrease brush size
-				brush_radius = max(brush_radius - 0.02, brush_radius_min)
-				_update_brush_size()
-				print("Brush radius: ", brush_radius)
+				_change_brush_size(-0.02)
 			KEY_C:
 				# Clear all blobs
 				clear_sculpture()
@@ -279,6 +459,7 @@ func _paint_at_position(local_pos: Vector3):
 
 	terrain_generator.add_blob(gen_pos, abs(effective_radius))
 	blobs_painted += 1
+	_update_status_label()
 
 	# Visual feedback
 	if show_brush_indicator:
@@ -335,6 +516,22 @@ func clear_sculpture():
 		if terrain_generator.has_method("add_blob"):
 			terrain_generator.add_blob(Vector3(0, 0, 0), 0.2)
 			blobs_painted = 1
+		_update_status_label()
 
 func get_blob_count() -> int:
 	return blobs_painted
+
+func reset():
+	clear_sculpture()
+	erase_mode = false
+	brush_radius = 0.15
+	_update_brush_size()
+	_update_brush_color()
+	_update_status_label()
+	# Reset erase button label
+	if _btn_erase_toggle:
+		for child in _btn_erase_toggle.get_children():
+			if child is Label3D and child.name == "EraseLabel":
+				child.text = "ERASE: OFF"
+				child.modulate = Color(0.7, 0.7, 0.7)
+				break

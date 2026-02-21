@@ -1,0 +1,34 @@
+{
+	"registry_info": {
+		"name": "neuroscience",
+		"description": "Computational neuroscience artifacts — Markov blankets, perception, and the boundary between self and environment. Where information theory meets biology.",
+		"category": "neuroscience",
+		"theoretical_grounding": "Free energy principle, Markov blankets, active inference, perception as Bayesian inference, sensory processing"
+	},
+	"artifacts": {
+		"puls_markov": {
+			"lookup_name": "puls_markov",
+			"scene": "res://algorithms/neuroscience/markovblanket/puls_markov.tscn",
+			"name": "Pulsing Markov Blanket",
+			"description": "Markov blanket cell simulation with noise-driven pulsing and entropy measurement. Visualizes the statistical boundary between internal states and external environment — the free energy principle made tangible.",
+			"category": "neuroscience",
+			"complexity": "advanced",
+			"tags": ["markov_blanket", "free_energy", "entropy", "active_inference", "boundary", "neuroscience"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"perception_altering": {
+			"lookup_name": "perception_altering",
+			"scene": "res://algorithms/neuroscience/perceptionaltering/perception_altering.tscn",
+			"name": "Perception Altering Environment",
+			"description": "Environmental perception distortion through shader manipulation and spatial warping. Experience how altered sensory parameters change the felt quality of space — perception as active construction, not passive recording.",
+			"category": "neuroscience",
+			"complexity": "intermediate",
+			"tags": ["perception", "shader", "distortion", "sensory", "embodiment", "neuroscience"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

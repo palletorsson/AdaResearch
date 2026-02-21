@@ -62,6 +62,16 @@ Read `commons/maps/<MapName>/map_data.json` and process the 3 layers:
 - Look up in `commons/context/clipboard/tutorial_text.json`
 - If `content_file` is specified, read that `.gd` file instead
 
+### Step 3b: Read the Map Booklet
+Each map has 4 companion documentation files (the in-game booklet, opened by pressing **X**):
+```
+commons/maps/<MapName>/blurb.md       # Short evocative description
+commons/maps/<MapName>/summary.md     # Pedagogical overview
+commons/maps/<MapName>/technical.md   # Algorithm details
+commons/maps/<MapName>/critical.md    # Queer theory / QFEP connection
+```
+Read all 4 files — they provide the dual-lens framing (technical + critical) for the map's content. Include booklet content in your play report under a **Booklet** section.
+
 ### Step 4: Examine Artifacts
 - For each interactable, look up its registry entry for description and QFEP connection
 - For deeper understanding, read the `.gd` script at the scene path
@@ -88,6 +98,8 @@ For each map, produce a "play report":
 
 **Tutorial content:** [Summary of clipboard/speed reader text]
 
+**Booklet:** [Summary of blurb.md, summary.md, technical.md, critical.md]
+
 **QFEP moment:** [The queer theory / free energy connection for this map]
 
 **Audio:** [What ambient sound is playing]
@@ -103,6 +115,10 @@ For each map, produce a "play report":
 commons/maps/sequences/*.json           # Sequence definitions
 commons/maps/sequences/sequence_index.json  # Master index of all sequences
 commons/maps/<MapName>/map_data.json    # Individual maps
+commons/maps/<MapName>/blurb.md        # Map booklet — short description
+commons/maps/<MapName>/summary.md      # Map booklet — pedagogical overview
+commons/maps/<MapName>/technical.md    # Map booklet — algorithm details
+commons/maps/<MapName>/critical.md     # Map booklet — QFEP / critical theory
 commons/artifacts/registry/*.json       # Artifact registries (75+ randomness, etc.)
 commons/artifacts/grid_artifacts.json   # Legacy base artifact lookup
 commons/context/clipboard/tutorial_text.json  # Tutorial text index

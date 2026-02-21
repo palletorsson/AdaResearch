@@ -1,0 +1,82 @@
+{
+	"registry_info": {
+		"name": "vectors_demos",
+		"description": "Vector concept demonstration artifacts — applied physics demos showing vectors in action: force addition, work/energy, torque, reflection, and targeting.",
+		"category": "vectors",
+		"theoretical_grounding": "Vector algebra, dot product (work, projection), cross product (torque, normals), force superposition, targeting and aiming algorithms"
+	},
+	"artifacts": {
+		"combined_forces_demo": {
+			"lookup_name": "combined_forces_demo",
+			"scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
+			"name": "Combined Forces Demo",
+			"description": "Vector addition as force combination — multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
+			"category": "vectors",
+			"complexity": "beginner",
+			"tags": ["vector", "addition", "force", "superposition", "resultant", "physics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		},
+		"work_energy_demo": {
+			"lookup_name": "work_energy_demo",
+			"scene": "res://algorithms/vectors/03_dot_product/WorkEnergyDemo.tscn",
+			"name": "Work-Energy Demo",
+			"description": "Dot product as physical work — force dotted with displacement gives energy transfer. See why pushing perpendicular to motion does zero work.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": ["vector", "dot_product", "work", "energy", "projection", "physics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		},
+		"torque_demo": {
+			"lookup_name": "torque_demo",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
+			"name": "Torque Demo",
+			"description": "Cross product as torque — force applied at a lever arm produces rotation perpendicular to both. The right-hand rule determines which way things spin.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": ["vector", "cross_product", "torque", "rotation", "right_hand_rule", "physics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		},
+		"normal_force_demo": {
+			"lookup_name": "normal_force_demo",
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.tscn",
+			"name": "Normal Force & Reflection Demo",
+			"description": "Vector projection and reflection — decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": ["vector", "projection", "reflection", "normal", "bounce", "physics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		},
+		"turret_targeting": {
+			"lookup_name": "turret_targeting",
+			"scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn",
+			"name": "Turret Targeting",
+			"description": "Applied vector math for targeting — calculate direction, lead the target, account for projectile speed. Vectors solving the ancient problem of aiming at a moving target.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": ["vector", "targeting", "turret", "prediction", "direction", "game_math"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		},
+		"weather_vector_field": {
+			"lookup_name": "weather_vector_field",
+			"scene": "res://algorithms/vectors/weather_vector_field/weather_vector_field.tscn",
+			"name": "Weather Vector Field",
+			"description": "Applied vector addition as weather — two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum. Rain particles fall under gravity + wind, their diagonal paths demonstrating force superposition. Pressure zones add local variation to the field.",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": ["vector_addition", "weather", "wind", "force_superposition", "vector_field", "rain", "pressure", "interactive"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
+		}
+	}
+}

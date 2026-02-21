@@ -106,6 +106,19 @@ Every map has three aligned 2D grids:
 }
 ```
 
+### Map Documentation Booklets
+
+Each map can have 4 companion markdown files that appear as an in-game booklet when the player presses **X**:
+
+```
+commons/maps/<MapName>/blurb.md       # Short poetic/evocative description
+commons/maps/<MapName>/summary.md     # What the map teaches (pedagogical overview)
+commons/maps/<MapName>/technical.md   # Algorithm details and implementation notes
+commons/maps/<MapName>/critical.md    # Queer theory / critical theory connection
+```
+
+These embody the project's dual-lens pedagogy — `technical.md` covers the algorithm, `critical.md` connects it to QFEP. When creating a new map, include all 4 booklet files alongside `map_data.json`.
+
 ## Rules for Map Creation/Editing
 
 1. **All three layers must have identical dimensions** (same rows, same columns)
@@ -128,6 +141,7 @@ When creating or editing a map, verify:
 - [ ] Teleporter targets are valid
 - [ ] The map is reachable from spawn to exit
 - [ ] JSON is valid (no trailing commas, proper quoting)
+- [ ] Booklet files exist (blurb.md, summary.md, technical.md, critical.md)
 
 ## How to Find Valid Artifacts
 

@@ -1,0 +1,190 @@
+{
+	"registry_info": {
+		"name": "datastructures",
+		"description": "3D visualizations of fundamental and advanced data structures — from linked lists and binary trees through B-trees, tries, and spatial partitioning. Each artifact makes abstract memory layouts tangible and traversal algorithms visible.",
+		"category": "datastructures",
+		"theoretical_grounding": "Abstract data types, algorithmic complexity (Big-O), tree balancing invariants, hashing theory, spatial indexing, graph representations"
+	},
+	"artifacts": {
+		"binary_trees": {
+			"lookup_name": "binary_trees",
+			"scene": "res://algorithms/datastructures/binary_trees/binary_trees.tscn",
+			"name": "Binary Trees",
+			"description": "Interactive binary tree visualization showing insertion, deletion, and traversal orders (in-order, pre-order, post-order). Nodes light up as each traversal algorithm visits them, making the recursive structure visible.",
+			"category": "datastructures",
+			"complexity": "beginner",
+			"tags": ["binary_tree", "traversal", "recursion", "tree", "data_structure", "beginner"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"bst_visualization": {
+			"lookup_name": "bst_visualization",
+			"scene": "res://algorithms/datastructures/binarysearchtree/bst_visualization.tscn",
+			"name": "Binary Search Tree",
+			"description": "Binary search tree with dynamic insertion maintaining the BST invariant: left child < parent < right child. Watch how ordered insertion creates degenerate trees while balanced insertion creates efficient ones.",
+			"category": "datastructures",
+			"complexity": "beginner",
+			"tags": ["bst", "binary_search_tree", "search", "ordered", "tree", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"bsp_trees": {
+			"lookup_name": "bsp_trees",
+			"scene": "res://algorithms/datastructures/bsp_trees/bsp_trees.tscn",
+			"name": "BSP Trees",
+			"description": "Binary Space Partitioning tree visualization — recursive halfplane splits dividing space into convex regions. The algorithm behind Doom's rendering and modern collision detection.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["bsp", "space_partitioning", "spatial", "rendering", "tree", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"btree_visualization": {
+			"lookup_name": "btree_visualization",
+			"scene": "res://algorithms/datastructures/btree/btree_visualization.tscn",
+			"name": "B-Tree",
+			"description": "B-tree visualization showing multi-key nodes that split and merge to maintain balance. The data structure behind databases and filesystems — every query you've ever run touched one.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["btree", "database", "balanced", "multi_key", "tree", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"fenwick_tree": {
+			"lookup_name": "fenwick_tree",
+			"scene": "res://algorithms/datastructures/fenwick_tree/fenwick_tree.tscn",
+			"name": "Fenwick Tree",
+			"description": "Binary Indexed Tree for efficient prefix sum queries. Shows how clever bit manipulation enables O(log n) range queries and updates — compact elegance in a tree that isn't really a tree.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["fenwick", "binary_indexed_tree", "prefix_sum", "range_query", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"graph_structures": {
+			"lookup_name": "graph_structures",
+			"scene": "res://algorithms/datastructures/graph_structures/graph_structures.tscn",
+			"name": "Graph Structures",
+			"description": "Side-by-side comparison of directed and undirected graphs with adjacency visualization. Nodes and edges as the universal language for relationships — from social networks to circuit diagrams.",
+			"category": "datastructures",
+			"complexity": "beginner",
+			"tags": ["graph", "directed", "undirected", "adjacency", "network", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"hash_maps": {
+			"lookup_name": "hash_maps",
+			"scene": "res://algorithms/datastructures/hash_maps/hash_maps.tscn",
+			"name": "Hash Maps",
+			"description": "Hash table visualization with buckets, collision chains, and hash function mapping. Watch keys distribute across buckets and see why a good hash function means O(1) lookup while a bad one degrades to O(n).",
+			"category": "datastructures",
+			"complexity": "intermediate",
+			"tags": ["hash_map", "hash_table", "hashing", "collision", "bucket", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"heap_operations": {
+			"lookup_name": "heap_operations",
+			"scene": "res://algorithms/datastructures/heap_operations/heap_operations.tscn",
+			"name": "Heap Operations",
+			"description": "Min-heap and max-heap with sift-up and sift-down operations animated. The structure behind priority queues — always know your most important element in O(1), insert and extract in O(log n).",
+			"category": "datastructures",
+			"complexity": "intermediate",
+			"tags": ["heap", "priority_queue", "sift", "min_heap", "max_heap", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"linked_lists": {
+			"lookup_name": "linked_lists",
+			"scene": "res://algorithms/datastructures/linked_lists/linked_lists.tscn",
+			"name": "Linked Lists",
+			"description": "Singly and doubly linked list visualization with node insertion, deletion, and pointer traversal. The simplest dynamic data structure — nodes connected by references, not memory layout.",
+			"category": "datastructures",
+			"complexity": "beginner",
+			"tags": ["linked_list", "pointer", "node", "dynamic", "linear", "data_structure", "beginner"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"quadtrees_octrees": {
+			"lookup_name": "quadtrees_octrees",
+			"scene": "res://algorithms/datastructures/quadtrees_octrees/quadtrees_octrees.tscn",
+			"name": "Quadtrees & Octrees",
+			"description": "Side-by-side spatial partitioning: quadtree subdivides 2D space, octree subdivides 3D. Watch regions split as points accumulate — the backbone of collision detection, LOD systems, and spatial databases.",
+			"category": "datastructures",
+			"complexity": "intermediate",
+			"tags": ["quadtree", "octree", "spatial", "partitioning", "collision", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"redblack_visualization": {
+			"lookup_name": "redblack_visualization",
+			"scene": "res://algorithms/datastructures/redblacktree/redblack_visualization.tscn",
+			"name": "Red-Black Tree",
+			"description": "Self-balancing BST with red-black coloring invariants. Rotations and recolorings maintain O(log n) height — the tree behind Java's TreeMap and Linux's scheduler.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["red_black_tree", "self_balancing", "rotation", "invariant", "tree", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"segment_tree": {
+			"lookup_name": "segment_tree",
+			"scene": "res://algorithms/datastructures/segment_tree/segment_tree.tscn",
+			"name": "Segment Tree",
+			"description": "Segment tree for range queries (min, max, sum) with lazy propagation. Each node stores an aggregate of its interval — answer any range query in O(log n) after O(n) construction.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["segment_tree", "range_query", "lazy_propagation", "interval", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"suffix_array_tree": {
+			"lookup_name": "suffix_array_tree",
+			"scene": "res://algorithms/datastructures/suffix_array_tree/suffix_array_tree.tscn",
+			"name": "Suffix Array & Tree",
+			"description": "Side-by-side suffix array and suffix tree for string indexing. The structures that make text search instantaneous — every substring query answered in O(m) regardless of text length.",
+			"category": "datastructures",
+			"complexity": "advanced",
+			"tags": ["suffix_array", "suffix_tree", "string", "text_search", "index", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"trie_operations": {
+			"lookup_name": "trie_operations",
+			"scene": "res://algorithms/datastructures/trie_operations/trie_operations.tscn",
+			"name": "Trie Operations",
+			"description": "Prefix tree (trie) with insertion and search animated character-by-character. The structure behind autocomplete and spell checkers — shared prefixes become shared paths.",
+			"category": "datastructures",
+			"complexity": "intermediate",
+			"tags": ["trie", "prefix_tree", "autocomplete", "string", "search", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		},
+		"union_find": {
+			"lookup_name": "union_find",
+			"scene": "res://algorithms/datastructures/union_find/union_find.tscn",
+			"name": "Union-Find",
+			"description": "Disjoint set union with path compression and union by rank. Watch components merge in near-constant time — the algorithm that makes Kruskal's MST efficient and connected component detection trivial.",
+			"category": "datastructures",
+			"complexity": "intermediate",
+			"tags": ["union_find", "disjoint_set", "path_compression", "component", "data_structure"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["datastructures"]
+		}
+	}
+}

@@ -22,6 +22,7 @@ const SLIDER_AXIS  = preload("res://commons/interactables/slider_axis.tscn")
 const SLIDER_TIME  = preload("res://commons/interactables/slider_time.tscn")
 const DIAL         = preload("res://commons/interactables/dial_smooth.tscn")
 const BUTTON       = preload("res://commons/interactables/push_button.tscn")
+const BUTTON_2D3D  = preload("res://commons/interactables/push_button_2d3d.tscn")
 const JOYSTICK     = preload("res://commons/interactables/joystick_smooth.tscn")
 const JOYSTICK_SNAP = preload("res://commons/interactables/joystick_snap.tscn")
 const JOYSTICK_ZERO = preload("res://commons/interactables/joystick_zero.tscn")
@@ -109,9 +110,10 @@ func _build_layout():
 	x = _place_labeled(DIAL,   Vector3(x, y, COMP_Z), "Dial");        x += 0.14
 	x = _place_labeled(DIAL,   Vector3(x, y, COMP_Z), "Dial 2");      x += 0.14
 	x = _place_labeled(WHEEL,  Vector3(x, y, COMP_Z), "Wheel");       x += 0.20
-	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn"); x += 0.12
-	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn 2"); x += 0.12
-	x = _place_labeled(XY_PAD, Vector3(x, y, COMP_Z), "XY Pad");     x += 0.20
+	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn", Vector3(90, 0, 0)); x += 0.12
+	x = _place_labeled(BUTTON_2D3D, Vector3(x, y + 0.02, COMP_Z), "2D/3D Btn", Vector3(90, 0, 0)); x += 0.14
+	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn 2", Vector3(90, 0, 0)); x += 0.12
+	x = _place_labeled(XY_PAD, Vector3(x, y, COMP_Z), "XY Pad");     x += 0.18
 
 	y -= 0.24 + ROW_GAP
 
@@ -180,9 +182,11 @@ func _build_layout():
 # ═══════════════════════════════════════════
 
 ## Place a component and add a billboard label underneath it
-func _place_labeled(scene: PackedScene, pos: Vector3, label_text: String) -> float:
+func _place_labeled(scene: PackedScene, pos: Vector3, label_text: String, rotation_deg: Vector3 = Vector3.ZERO) -> float:
 	var inst = scene.instantiate()
 	inst.position = pos
+	if inst is Node3D:
+		(inst as Node3D).rotation_degrees = rotation_deg
 	components_root.add_child(inst)
 
 	# Try to set the built-in param name (only at runtime, not in editor)

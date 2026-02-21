@@ -1,0 +1,56 @@
+{
+	"registry_name": "grammar_systems",
+	"description": "Formal grammars as generative systems — Markov chains, N-grams, stochastic grammars",
+	"artifacts": {
+		"markov_chains": {
+			"lookup_name": "markov_chains",
+			"name": "Markov Chains",
+			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains/markov_chains.tscn",
+			"class_name": "MarkovChains",
+			"description": "Interactive Markov chain visualization — states as 3D nodes, transitions as probability arcs, dice-roll selection animation, stationary distribution bars. Watch how history-free memory generates structure from chance.",
+			"gamwell_reference": "Chapter 7: Probability and Stochastic Processes",
+			"qfep_connection": "Markov chains are pure F: deterministic transition rules applied to stochastic states. The stationary distribution IS the free energy minimum — the system finds its own equilibrium.",
+			"sequence": "grammar_systems",
+			"category": "procedural_generation",
+			"interaction": "observe_interactive",
+			"signals": [],
+			"parameters": {
+				"state_count": "Number of states (default 5)",
+				"sequence_length": "Steps to generate (default 20)",
+				"step_interval": "Time between transitions (default 1.5s)"
+			},
+			"tags": ["markov", "probability", "stochastic", "grammar", "procedural"],
+			"map_sequences": ["grammar_systems"]
+		},
+		"markov_chains_tree": {
+			"lookup_name": "markov_chains_tree",
+			"name": "Markov Chains Tree",
+			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains_tree/MarkovChainsTree.tscn",
+			"class_name": "MarkovChainsTree",
+			"description": "A tree grown by Markov chain decisions — each branch point is a state transition. Branch/terminate/grow probabilities shape the form. Randomness parameter tunes order vs chaos. Bark, leaves, animated growth.",
+			"gamwell_reference": "Chapter 12: Fractals and Self-Similarity, Chapter 7: Probability",
+			"qfep_connection": "The randomness parameter IS λ — low randomness produces rigid, symmetrical trees (order), high randomness produces wild tangles (chaos). The sweet spot grows the most lifelike forms.",
+			"sequence": "grammar_systems",
+			"category": "procedural_generation",
+			"interaction": "configurable",
+			"signals": [],
+			"parameters": {
+				"randomness": "Controls Markov chain entropy (0-1)",
+				"branch_probability": "Chance of branching at each step (0-1)",
+				"terminate_probability": "Chance of stopping a branch (0-1)",
+				"vertical_bias": "How much branches prefer growing upward (0-1)",
+				"animate_growth": "Show growth animation",
+				"add_leaves": "Add leaf meshes at branch tips"
+			},
+			"tags": ["markov", "tree", "growth", "procedural", "organic", "grammar"],
+			"map_sequences": ["grammar_systems"]
+		}
+	},
+	"sequence_mapping": {
+		"grammar_systems": ["markov_chains", "markov_chains_tree"]
+	},
+	"theoretical_connections": {
+		"stochastic_processes": ["markov_chains"],
+		"organic_generation": ["markov_chains_tree"]
+	}
+}

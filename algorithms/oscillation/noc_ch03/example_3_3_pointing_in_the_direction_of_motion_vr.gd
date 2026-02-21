@@ -79,8 +79,17 @@ class DirectionalMover:
 
 	var position: Vector3:
 		get:
+			if not is_instance_valid(root):
+				return Vector3.ZERO
 			return root.global_position
 		set(value):
+			if not is_instance_valid(root):
+				return
+			if root.get_parent() is Node3D:
+				var det := (root.get_parent() as Node3D).global_transform.basis.determinant()
+				if abs(det) < 0.0001:
+					root.position = value
+					return
 			root.global_position = value
 
 	func init(parent: Node3D, mat: Material) -> void:
@@ -106,9 +115,15 @@ class DirectionalMover:
 		position += velocity * delta * 60.0
 		acceleration = Vector3.ZERO
 
-		if velocity.length() > 0.01:
-			root.look_at_from_position(root.position, position + velocity, Vector3.UP)
-			root.rotate_object_local(Vector3.RIGHT, -PI / 2)
+		if velocity.length() > 0.01 and is_instance_valid(root):
+			var target_pos := position + velocity
+			if root.position.distance_squared_to(target_pos) > 0.0001:
+				if root.get_parent() is Node3D:
+					var det := (root.get_parent() as Node3D).global_transform.basis.determinant()
+					if abs(det) < 0.0001:
+						return
+				root.look_at_from_position(root.position, target_pos, Vector3.UP)
+				root.rotate_object_local(Vector3.RIGHT, -PI / 2)
 
 	func wrap_bounds() -> void:
 		var pos := position

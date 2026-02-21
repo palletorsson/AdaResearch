@@ -49,6 +49,18 @@ Generate documentation covering:
 - **Configuration**: How it's configured (JSON, exports, etc.)
 - **Integration points**: How other systems interact with it
 
+### For a Map
+1. Read `commons/maps/<MapName>/map_data.json`
+2. Read the 4 booklet files if they exist:
+   - `commons/maps/<MapName>/blurb.md` — short evocative description
+   - `commons/maps/<MapName>/summary.md` — pedagogical overview
+   - `commons/maps/<MapName>/technical.md` — algorithm details
+   - `commons/maps/<MapName>/critical.md` — queer theory / QFEP connection
+3. Check which sequence includes this map
+4. Look up artifacts in the interactables layer
+
+Generate/update the booklet files covering the dual-lens pedagogy: `technical.md` explains the algorithm, `critical.md` connects it to QFEP. If booklet files are missing, create them. The booklet appears in-game when the player presses **X**.
+
 ### For a Domain (e.g., "randomness", "chaos")
 1. Scan the entire domain directory
 2. Read all algorithm READMEs

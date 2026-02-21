@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://ri4nvrsndb6m"]
+
+[ext_resource type="Script" uid="uid://dbmus6owv8eon" path="res://commons/interactables/push_button_2d3d.gd" id="1_btnscript"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport3d"]
+[ext_resource type="PackedScene" path="res://commons/interactables/push_button_2d3d_content.tscn" id="3_uicontent"]
+[ext_resource type="Script" uid="uid://dq042kibpfryy" path="res://addons/godot-xr-tools/interactables/interactable_area_button.gd" id="4_areabtn"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_handpose"]
+[ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="6_rumbler"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="7_poseleft"]
+[ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="8_taprumble"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="9_poseright"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_Panel"]
+size = Vector3(0.13, 0.07, 0.006)
+
+[sub_resource type="StandardMaterial3D" id="MatPanelDark"]
+albedo_color = Color(0.05, 0.06, 0.09, 1)
+metallic = 0.2
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_Indicator"]
+top_radius = 0.008
+bottom_radius = 0.008
+height = 0.004
+radial_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="MatIndicator"]
+resource_local_to_scene = true
+albedo_color = Color(0.12, 0.12, 0.15, 1)
+metallic = 0.6
+roughness = 0.25
+emission_enabled = true
+emission = Color(0.12, 0.12, 0.15, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="BoxShape3D" id="GrabShape"]
+size = Vector3(0.14, 0.08, 0.03)
+
+[sub_resource type="CylinderShape3D" id="AreaShape"]
+height = 0.03
+radius = 0.012
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_Pose"]
+radius = 0.035
+
+[node name="PushButton2D3D" unique_id=190173316 instance=ExtResource("1_pickable")]
+freeze = true
+press_to_hold = true
+ranged_grab_method = 0
+script = ExtResource("1_btnscript")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("GrabShape")
+
+[node name="Frame" type="MeshInstance3D" parent="." index="1" unique_id=918675441]
+mesh = SubResource("BoxMesh_Panel")
+surface_material_override/0 = SubResource("MatPanelDark")
+
+[node name="Viewport2Din3D" parent="." index="2" unique_id=1221321828 instance=ExtResource("2_viewport3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, 0.004)
+screen_size = Vector2(0.08, 0.05)
+scene = ExtResource("3_uicontent")
+viewport_size = Vector2(520, 260)
+transparent = 1
+unshaded = true
+scene_properties_keys = PackedStringArray()
+
+[node name="Indicator" type="MeshInstance3D" parent="." index="3" unique_id=1404636284]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.04, 0, 0.006)
+mesh = SubResource("CylinderMesh_Indicator")
+surface_material_override/0 = SubResource("MatIndicator")
+
+[node name="InteractableAreaButton" type="Area3D" parent="." index="4" unique_id=1892576448]
+collision_layer = 0
+collision_mask = 393216
+script = ExtResource("4_areabtn")
+button = NodePath("../Indicator")
+
+[node name="Rumbler" type="Node" parent="InteractableAreaButton" unique_id=1498417568]
+script = ExtResource("6_rumbler")
+event = ExtResource("8_taprumble")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableAreaButton" unique_id=661569997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0, 0.012)
+shape = SubResource("AreaShape")
+
+[node name="HandPoseArea" parent="." index="5" unique_id=627444931 instance=ExtResource("5_handpose")]
+left_pose = ExtResource("7_poseleft")
+right_pose = ExtResource("9_poseright")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea" unique_id=41592536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0, 0.012)
+shape = SubResource("SphereShape3D_Pose")
+
+[connection signal="body_entered" from="InteractableAreaButton" to="InteractableAreaButton/Rumbler" method="rumble_hand"]
+[connection signal="body_exited" from="InteractableAreaButton" to="InteractableAreaButton/Rumbler" method="cancel_hand"]

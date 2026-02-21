@@ -53,6 +53,9 @@ var _static_camera_rotation: Vector3 = Vector3(-0.2618, 0.0, 0.0)  # ~-15° pitc
 const GRID_SYSTEM_SCENE_PATH := "res://commons/grid/grid_system.tscn"
 var _grid_system: Node3D = null
 
+# Layer editor panel (right-side artifact/utility picker)
+var _layer_editor_panel: MapLayerEditorPanel = null
+
 func _ready() -> void:
 	if not _map_browser:
 		push_warning("MapCatalogDesktop3D: MapBrowser3D node not found")
@@ -88,6 +91,13 @@ func _ready() -> void:
 		_map_browser.visible = false
 
 	_sync_mouse_look_state()
+
+	# Create layer editor panel (right-side artifact/utility picker)
+	_layer_editor_panel = MapLayerEditorPanel.new()
+	_layer_editor_panel.name = "MapLayerEditorPanel"
+	add_child(_layer_editor_panel)
+	_mark_clean_keep(_layer_editor_panel)
+	_layer_editor_panel.brush_selected.connect(_on_layer_brush_selected)
 
 	# Default to spin camera
 	call_deferred("_start_default_spin")
@@ -392,6 +402,7 @@ func _apply_player_camera() -> void:
 # ---------------------------------------------------------------------------
 
 func _on_sequence_selected(sequence_name: String) -> void:
+	_send_to_claude("sequence_selected", sequence_name)
 	if _overlay and _overlay.start_sequence_via_best_path(sequence_name):
 		_set_status("Starting sequence: %s" % sequence_name)
 		return
@@ -400,12 +411,34 @@ func _on_sequence_selected(sequence_name: String) -> void:
 	_set_status("Could not start sequence: %s" % sequence_name)
 
 func _on_map_selected(map_name: String) -> void:
+	_send_to_claude("map_selected", map_name)
 	if _overlay and _overlay.load_map_via_best_path(map_name):
 		_set_status("Loading map: %s" % map_name)
 		return
 
 	push_warning("MapCatalogDesktop3D: Could not load map: %s" % map_name)
 	_set_status("Could not load map: %s" % map_name)
+
+## Claude Bridge — send selection events to local Claude Code session
+func _send_to_claude(event_type: String, value: String) -> void:
+	var http := HTTPRequest.new()
+	http.name = "ClaudeBridgeHTTP"
+	add_child(http)
+	http.request_completed.connect(func(_r, _c, _h, _b): http.queue_free())
+	var payload := JSON.stringify({
+		"text": "Map catalog: %s — %s" % [event_type, value],
+		"type": event_type,
+		"name": value,
+		"source": "MapCatalogDesktop3D",
+	})
+	var err := http.request(
+		"http://127.0.0.1:9876/message",
+		["Content-Type: application/json"],
+		HTTPClient.METHOD_POST,
+		payload
+	)
+	if err != OK:
+		http.queue_free()  # Clean up on failure
 
 func _is_fly_toggle_event(event: InputEvent) -> bool:
 	if not (event is InputEventKey):
@@ -423,12 +456,16 @@ func _set_mouse_look(enabled: bool) -> void:
 
 	if enabled and _overlay and _overlay.is_mouse_over_panel():
 		enabled = false
+	if enabled and _layer_editor_panel and _layer_editor_panel.is_mouse_over_panel():
+		enabled = false
 
 	_is_mouse_look_active = enabled
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if enabled else Input.MOUSE_MODE_VISIBLE
 
 func _sync_mouse_look_state() -> void:
 	var overlay_blocking := _overlay and _overlay.is_mouse_over_panel()
+	if not overlay_blocking and _layer_editor_panel and _layer_editor_panel.is_mouse_over_panel():
+		overlay_blocking = true
 	var should_capture := fly_mode_enabled and not overlay_blocking and (not fly_look_requires_button or _is_mouse_look_active)
 	if should_capture and not _is_mouse_look_active:
 		_set_mouse_look(true)
@@ -515,6 +552,21 @@ var _edit_last_mouse: Vector2 = Vector2.ZERO
 var _edit_drag_threshold: float = 6.0  # pixels before drag vs click
 var _edit_cursor: MeshInstance3D = null  # wireframe cursor showing hovered cell
 
+# Layer editing state
+var _edit_layer: String = "structure"  # "structure", "interactables", "utilities"
+var _interactables_grid: Array = []  # 2D Array[z][x] of String
+var _utilities_grid: Array = []      # 2D Array[z][x] of String
+var _edit_layer_brush: String = ""   # current artifact/utility to place
+var _edit_cell_label: Label3D = null # floating label showing cell contents
+var _layer_tab_buttons: Dictionary = {}  # "structure"->Button, "interactables"->Button, "utilities"->Button
+var _layer_tab_container: Control = null
+var _cell_labels_3d: Dictionary = {}    # "gx,gz" -> Label3D — persistent labels for all placed items
+var _cell_labels_parent: Node3D = null  # container node for all persistent labels
+var _props_popup: Control = null        # right-click properties popup (CanvasLayer child)
+var _props_popup_canvas: CanvasLayer = null
+var _props_gx: int = -1                # grid coords for currently open popup
+var _props_gz: int = -1
+
 func _toggle_edit_mode() -> void:
 	_edit_mode = not _edit_mode
 	if _edit_mode:
@@ -525,10 +577,21 @@ func _toggle_edit_mode() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		_create_edit_cursor()
 		_load_grammar_pieces()
-		_set_status("EDIT MODE — Click:+1h RClick:-1h Scroll:zoom Tab:stamps R:rotate M:mirror Ctrl+Z:undo Ctrl+S:save")
+		_load_layer_grids()
+		_edit_layer = "structure"
+		_create_layer_tabs()
+		_update_layer_tab_highlight()
+		_set_status("EDIT MODE [Structure] — Click:+1h RClick:-1h L:layer Scroll:zoom Ctrl+S:save")
 	else:
 		_spin_speed = 0.3
 		_remove_edit_cursor()
+		_remove_cell_label()
+		_remove_layer_tabs()
+		_remove_edit_utility_markers()
+		_clear_all_cell_labels()
+		_close_props_popup()
+		if _layer_editor_panel:
+			_layer_editor_panel.hide_panel()
 		_set_status("Edit mode off")
 
 func _create_edit_cursor() -> void:
@@ -646,6 +709,10 @@ func _handle_edit_input(event: InputEvent) -> void:
 		if not key.pressed or key.echo:
 			return
 
+		# Don't process edit keys when typing in a text field
+		if _is_text_focused():
+			return
+
 		# Number keys 1-6 set paint height
 		if key.keycode >= KEY_1 and key.keycode <= KEY_6:
 			_edit_paint_height = key.keycode - KEY_0
@@ -704,12 +771,26 @@ func _handle_edit_input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 
-		# Escape = cancel stamp (or exit edit mode)
+		# Escape = close popup, cancel stamp, or exit edit mode
 		if key.keycode == KEY_ESCAPE:
-			if _stamp_index >= 0:
+			if _is_props_popup_visible():
+				_close_props_popup()
+			elif _stamp_index >= 0:
 				_stamp_cancel()
 			else:
 				_toggle_edit_mode()
+			get_viewport().set_input_as_handled()
+			return
+
+		# L = cycle edit layer
+		if key.keycode == KEY_L:
+			_cycle_edit_layer()
+			get_viewport().set_input_as_handled()
+			return
+
+		# Delete = remove artifact/utility at hovered cell
+		if key.keycode == KEY_DELETE and _edit_layer != "structure":
+			_remove_at_hovered_cell()
 			get_viewport().set_input_as_handled()
 			return
 
@@ -753,6 +834,7 @@ func _update_edit_cursor_pos(screen_pos: Vector2) -> void:
 	var result := _edit_raycast(screen_pos)
 	if result.is_empty():
 		_edit_cursor.visible = false
+		_hide_cell_label()
 		return
 	var hit_normal: Vector3 = result.normal
 	var grid_pos := _world_to_grid(result.position - hit_normal * 0.1)
@@ -767,17 +849,53 @@ func _update_edit_cursor_pos(screen_pos: Vector2) -> void:
 			if sc.grid[grid_pos.x][y][grid_pos.z]:
 				top_y = y
 				break
-		_edit_cursor.global_position = Vector3(grid_pos.x, top_y, grid_pos.z) * total_size
-		_edit_cursor.visible = true
+
+		if _edit_layer == "structure":
+			_edit_cursor.global_position = Vector3(grid_pos.x, top_y, grid_pos.z) * total_size
+			_edit_cursor.visible = true
+			_hide_cell_label()
+		elif _edit_layer == "interactables":
+			# Show cursor at ground level with green tint
+			_edit_cursor.global_position = Vector3(grid_pos.x, 0, grid_pos.z) * total_size
+			_edit_cursor.visible = true
+			var cell_val := _get_interactable_at(grid_pos.x, grid_pos.z)
+			_show_cell_label(cell_val, Vector3(grid_pos.x, top_y + 1.5, grid_pos.z) * total_size)
+		elif _edit_layer == "utilities":
+			_edit_cursor.global_position = Vector3(grid_pos.x, 0, grid_pos.z) * total_size
+			_edit_cursor.visible = true
+			var cell_val := _get_utility_at(grid_pos.x, grid_pos.z)
+			_show_cell_label(cell_val, Vector3(grid_pos.x, top_y + 1.5, grid_pos.z) * total_size)
 	else:
 		_edit_cursor.visible = false
+		_hide_cell_label()
 
 func _edit_click(screen_pos: Vector2, is_right: bool) -> void:
 	"""2.5D heightmap editor: Left click = +1 layer, Right click = -1 layer.
 	Hold Shift + click to set column to exact paint_height (number keys 1-6).
-	If a stamp is active, click places the stamp instead."""
+	If a stamp is active, click places the stamp instead.
+	In interactables/utilities mode: Left click = place brush, Right click = remove."""
 	var result := _edit_raycast(screen_pos)
 	if result.is_empty():
+		return
+
+	# Check if click is over the layer editor panel
+	if _layer_editor_panel and _layer_editor_panel.is_mouse_over_panel():
+		return
+
+	# Check if click is over the properties popup
+	if _is_props_popup_visible():
+		var mouse_pos := get_viewport().get_mouse_position()
+		if _props_popup and _props_popup.get_global_rect().has_point(mouse_pos):
+			return  # Click is inside popup, let it handle
+		else:
+			_close_props_popup()  # Click outside popup, close it
+
+	# Route to layer-specific click handler
+	if _edit_layer == "interactables":
+		_edit_click_interactable(result, is_right)
+		return
+	elif _edit_layer == "utilities":
+		_edit_click_utility(result, is_right)
 		return
 
 	# If stamp is active, place it on click
@@ -874,6 +992,16 @@ func _get_structure_component() -> GridStructureComponent:
 		return _grid_system.structure_component as GridStructureComponent
 	return null
 
+func _get_interactables_component() -> GridInteractablesComponent:
+	if _grid_system and "interactables_component" in _grid_system:
+		return _grid_system.interactables_component as GridInteractablesComponent
+	return null
+
+func _get_utilities_component() -> GridUtilitiesComponent:
+	if _grid_system and "utilities_component" in _grid_system:
+		return _grid_system.utilities_component as GridUtilitiesComponent
+	return null
+
 func _edit_save_map() -> void:
 	"""Save current grid state back to map_data.json."""
 	if not _grid_system:
@@ -940,6 +1068,12 @@ func _edit_save_map() -> void:
 		data["layers"] = {}
 	data["layers"]["structure"] = new_structure
 
+	# Also save interactables and utilities if they were loaded
+	if not _interactables_grid.is_empty():
+		data["layers"]["interactables"] = _interactables_grid
+	if not _utilities_grid.is_empty():
+		data["layers"]["utilities"] = _utilities_grid
+
 	# Update dimensions
 	if data.has("map_info") and data["map_info"] is Dictionary:
 		data["map_info"]["dimensions"] = {
@@ -992,7 +1126,24 @@ func _snapshot_state() -> Dictionary:
 			for cell in row:
 				row_copy.append(str(cell) if cell != null else "")
 			utility_copy.append(row_copy)
-	return {"layout": layout_copy, "utility": utility_copy}
+
+	# Deep copy interactables grid
+	var interactables_copy: Array = []
+	for row in _interactables_grid:
+		var row_copy: Array = []
+		for cell in row:
+			row_copy.append(str(cell))
+		interactables_copy.append(row_copy)
+
+	# Deep copy utilities grid
+	var utilities_copy: Array = []
+	for row in _utilities_grid:
+		var row_copy: Array = []
+		for cell in row:
+			row_copy.append(str(cell))
+		utilities_copy.append(row_copy)
+
+	return {"layout": layout_copy, "utility": utility_copy, "interactables": interactables_copy, "utilities_grid": utilities_copy}
 
 func _push_undo() -> void:
 	"""Push current state onto undo stack (call BEFORE making changes)."""
@@ -1063,6 +1214,20 @@ func _restore_state(state: Dictionary) -> void:
 		var map_data := _get_current_map_data()
 		if map_data.has("layers"):
 			map_data.layers["utility"] = utility
+
+	# Restore interactables grid
+	var interactables: Array = state.get("interactables", [])
+	if not interactables.is_empty():
+		_interactables_grid = interactables
+
+	# Restore utilities grid
+	var utilities: Array = state.get("utilities_grid", [])
+	if not utilities.is_empty():
+		_utilities_grid = utilities
+
+	# Refresh live visuals to match restored data
+	if _edit_layer != "structure":
+		_refresh_all_edit_markers()
 
 func _get_current_map_data() -> Dictionary:
 	"""Get the parsed map_data dict from the data component."""
@@ -1292,6 +1457,889 @@ func _stamp_place() -> void:
 	_clear_stamp_preview()
 	# Keep stamp selected for repeated placement
 	_update_stamp_preview(_stamp_grid_pos.x, _stamp_grid_pos.y)
+
+# ---------------------------------------------------------------------------
+# LAYER EDITING — interactables & utilities layer support
+# ---------------------------------------------------------------------------
+
+func _load_layer_grids() -> void:
+	"""Load interactables and utilities layers from map_data into in-memory grids."""
+	_interactables_grid.clear()
+	_utilities_grid.clear()
+
+	var map_data := _get_current_map_data()
+	if map_data.is_empty() or not map_data.has("layers"):
+		return
+
+	var layers: Dictionary = map_data["layers"]
+
+	# Load interactables
+	if layers.has("interactables") and layers["interactables"] is Array:
+		for row in layers["interactables"]:
+			var row_copy: Array = []
+			if row is Array:
+				for cell in row:
+					row_copy.append(str(cell) if cell != null else " ")
+			_interactables_grid.append(row_copy)
+
+	# Load utilities
+	if layers.has("utilities") and layers["utilities"] is Array:
+		for row in layers["utilities"]:
+			var row_copy: Array = []
+			if row is Array:
+				for cell in row:
+					row_copy.append(str(cell) if cell != null else " ")
+			_utilities_grid.append(row_copy)
+
+
+func _cycle_edit_layer() -> void:
+	"""Cycle through structure -> interactables -> utilities -> structure."""
+	_close_props_popup()
+	match _edit_layer:
+		"structure":
+			_edit_layer = "interactables"
+		"interactables":
+			_edit_layer = "utilities"
+		"utilities":
+			_edit_layer = "structure"
+		_:
+			_edit_layer = "structure"
+
+	_update_layer_tab_highlight()
+	_update_edit_cursor_color()
+
+	# Show/hide layer editor panel
+	if _layer_editor_panel:
+		if _edit_layer == "interactables" or _edit_layer == "utilities":
+			_layer_editor_panel.show_for_layer(_edit_layer)
+		else:
+			_layer_editor_panel.hide_panel()
+
+	# Rebuild persistent 3D labels for the active layer
+	_rebuild_cell_labels_for_layer()
+
+	var status_map := {
+		"structure": "EDIT [Structure] — Click:+1h RClick:-1h L:layer Ctrl+S:save",
+		"interactables": "EDIT [Interactables] — Click:place RClick:edit L:layer Ctrl+S:save",
+		"utilities": "EDIT [Utilities] — Click:place RClick:edit L:layer Ctrl+S:save",
+	}
+	_set_status(status_map.get(_edit_layer, "EDIT"))
+
+
+func _set_edit_layer(layer_name: String) -> void:
+	"""Set edit layer directly (from tab buttons)."""
+	_close_props_popup()
+	_edit_layer = layer_name
+	_update_layer_tab_highlight()
+	_update_edit_cursor_color()
+
+	if _layer_editor_panel:
+		if _edit_layer == "interactables" or _edit_layer == "utilities":
+			_layer_editor_panel.show_for_layer(_edit_layer)
+		else:
+			_layer_editor_panel.hide_panel()
+
+	# Rebuild persistent 3D labels for the active layer
+	_rebuild_cell_labels_for_layer()
+
+	var status_map := {
+		"structure": "EDIT [Structure] — Click:+1h RClick:-1h L:layer Ctrl+S:save",
+		"interactables": "EDIT [Interactables] — Click:place RClick:edit L:layer Ctrl+S:save",
+		"utilities": "EDIT [Utilities] — Click:place RClick:edit L:layer Ctrl+S:save",
+	}
+	_set_status(status_map.get(_edit_layer, "EDIT"))
+
+
+func _update_edit_cursor_color() -> void:
+	"""Update cursor color based on active layer."""
+	if not _edit_cursor or not _edit_cursor.material_override:
+		return
+	match _edit_layer:
+		"structure":
+			_edit_cursor.material_override.albedo_color = Color(0.2, 0.8, 1.0, 0.3)
+		"interactables":
+			_edit_cursor.material_override.albedo_color = Color(0.2, 1.0, 0.4, 0.3)
+		"utilities":
+			_edit_cursor.material_override.albedo_color = Color(1.0, 0.7, 0.2, 0.3)
+
+
+func _on_layer_brush_selected(value: String) -> void:
+	"""Callback from MapLayerEditorPanel when user selects an artifact/utility."""
+	_edit_layer_brush = value
+	_set_status("EDIT [%s] — Brush: %s" % [_edit_layer.capitalize(), value])
+
+
+# --- Interactable/Utility grid access ---
+
+func _get_interactable_at(gx: int, gz: int) -> String:
+	if gz < 0 or gz >= _interactables_grid.size():
+		return ""
+	var row: Array = _interactables_grid[gz]
+	if gx < 0 or gx >= row.size():
+		return ""
+	var val: String = str(row[gx])
+	if val.strip_edges().is_empty() or val == " ":
+		return ""
+	return val
+
+
+func _set_interactable_at(gx: int, gz: int, value: String) -> void:
+	# Ensure grid is big enough
+	_ensure_grid_size(_interactables_grid, gx, gz)
+	_interactables_grid[gz][gx] = value
+
+
+func _get_utility_at(gx: int, gz: int) -> String:
+	if gz < 0 or gz >= _utilities_grid.size():
+		return ""
+	var row: Array = _utilities_grid[gz]
+	if gx < 0 or gx >= row.size():
+		return ""
+	var val: String = str(row[gx])
+	if val.strip_edges().is_empty() or val == " ":
+		return ""
+	return val
+
+
+func _set_utility_at(gx: int, gz: int, value: String) -> void:
+	_ensure_grid_size(_utilities_grid, gx, gz)
+	_utilities_grid[gz][gx] = value
+
+
+func _ensure_grid_size(grid: Array, gx: int, gz: int) -> void:
+	"""Ensure the 2D grid array is large enough for position (gx, gz)."""
+	while grid.size() <= gz:
+		grid.append([])
+	while grid[gz].size() <= gx:
+		grid[gz].append(" ")
+
+
+# --- Live spawn/despawn helpers ---
+
+func _live_spawn_interactable(gx: int, gz: int, lookup_name: String) -> void:
+	"""Spawn or replace the 3D artifact at grid position for immediate visual feedback."""
+	var ic := _get_interactables_component()
+	var sc := _get_structure_component()
+	if not ic or not sc:
+		return
+	var y_pos: int = sc.find_highest_y_at(gx, gz)
+	var total_size: float = ic.cube_size + ic.gutter
+	# Remove any existing artifact at this cell first
+	_live_despawn_interactable(gx, gz)
+	# Use the component's _place_artifact to handle scene loading, transforms, etc.
+	ic._place_artifact(gx, y_pos, gz, lookup_name, total_size)
+
+
+func _live_despawn_interactable(gx: int, gz: int) -> void:
+	"""Remove the 3D artifact node at grid position."""
+	var ic := _get_interactables_component()
+	var sc := _get_structure_component()
+	if not ic or not sc:
+		return
+	# The artifact could be at any Y, scan the column
+	for y in range(sc.grid_y - 1, -1, -1):
+		var key := Vector3i(gx, y, gz)
+		if ic.interactable_objects.has(key):
+			var node: Node = ic.interactable_objects[key]
+			if is_instance_valid(node):
+				node.queue_free()
+			ic.interactable_objects.erase(key)
+			return
+	# Also check y = grid_y (artifact placed on top of tallest column)
+	var y_top: int = sc.find_highest_y_at(gx, gz)
+	var key_top := Vector3i(gx, y_top, gz)
+	if ic.interactable_objects.has(key_top):
+		var node: Node = ic.interactable_objects[key_top]
+		if is_instance_valid(node):
+			node.queue_free()
+		ic.interactable_objects.erase(key_top)
+
+
+func _live_spawn_utility_marker(gx: int, gz: int, code: String) -> void:
+	"""Spawn a simple visual marker for a utility at grid position."""
+	var sc := _get_structure_component()
+	if not sc:
+		return
+	var total_size := 1.0
+	if _grid_system and "cube_size" in _grid_system:
+		total_size = _grid_system.cube_size
+	var y_pos: int = sc.find_highest_y_at(gx, gz)
+	# Remove existing marker first
+	_live_despawn_utility_marker(gx, gz)
+	# Create a small coloured sphere as visual indicator
+	var marker := MeshInstance3D.new()
+	marker.name = "EditUtilityMarker_%d_%d" % [gx, gz]
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.2
+	sphere.height = 0.4
+	marker.mesh = sphere
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.7, 0.2, 0.8)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	marker.material_override = mat
+	marker.position = Vector3(gx, y_pos + 0.3, gz) * total_size
+	marker.set_meta("edit_utility_marker", true)
+	marker.set_meta("utility_code", code)
+	add_child(marker)
+
+
+func _live_despawn_utility_marker(gx: int, gz: int) -> void:
+	"""Remove the visual utility marker at grid position."""
+	var marker_name := "EditUtilityMarker_%d_%d" % [gx, gz]
+	var existing := get_node_or_null(marker_name)
+	if existing and is_instance_valid(existing):
+		existing.queue_free()
+
+
+func _refresh_all_edit_markers() -> void:
+	"""Refresh all live-spawned interactables and utility markers to match grids.
+	Used after undo/redo to sync visuals with data."""
+	# Clear all existing edit utility markers
+	for child in get_children():
+		if child.has_meta("edit_utility_marker"):
+			child.queue_free()
+	# Clear all spawned interactables from the component
+	var ic := _get_interactables_component()
+	if ic:
+		ic.clear_interactables()
+	# Re-spawn interactables from grid data
+	var sc := _get_structure_component()
+	if ic and sc:
+		var total_size: float = ic.cube_size + ic.gutter
+		for gz in range(_interactables_grid.size()):
+			var row: Array = _interactables_grid[gz]
+			for gx in range(row.size()):
+				var val: String = str(row[gx]).strip_edges()
+				if not val.is_empty() and val != " ":
+					var y_pos: int = sc.find_highest_y_at(gx, gz)
+					ic._place_artifact(gx, y_pos, gz, val, total_size)
+	# Re-spawn utility markers from grid data
+	for gz in range(_utilities_grid.size()):
+		var row: Array = _utilities_grid[gz]
+		for gx in range(row.size()):
+			var val: String = str(row[gx]).strip_edges()
+			if not val.is_empty() and val != " ":
+				_live_spawn_utility_marker(gx, gz, val)
+	# Rebuild persistent labels
+	_rebuild_cell_labels_for_layer()
+
+
+# --- Layer-specific click handlers ---
+
+func _edit_click_interactable(result: Dictionary, is_right: bool) -> void:
+	var hit_normal: Vector3 = result.normal
+	var grid_pos := _world_to_grid(result.position - hit_normal * 0.1)
+	var gx: int = grid_pos.x
+	var gz: int = grid_pos.z
+
+	var sc := _get_structure_component()
+	if not sc:
+		return
+	if gx < 0 or gx >= sc.grid_x or gz < 0 or gz >= sc.grid_z:
+		return
+
+	if is_right:
+		# Right-click: open properties popup (or show empty-cell info)
+		var cell_val := _get_interactable_at(gx, gz)
+		if cell_val.is_empty():
+			_set_status("EDIT [Interactables] — Empty cell at %d,%d" % [gx, gz])
+			return
+		_open_props_popup(gx, gz, cell_val, "interactables")
+	else:
+		# Left-click: place brush
+		if _edit_layer_brush.is_empty():
+			_set_status("EDIT [Interactables] — No brush selected! Pick an artifact first.")
+			return
+		_push_undo()
+		_set_interactable_at(gx, gz, _edit_layer_brush)
+		_live_spawn_interactable(gx, gz, _edit_layer_brush)
+		_update_cell_label_at(gx, gz, _edit_layer_brush)
+		_set_status("EDIT [Interactables] — Placed '%s' at %d,%d" % [_edit_layer_brush, gx, gz])
+
+
+func _edit_click_utility(result: Dictionary, is_right: bool) -> void:
+	var hit_normal: Vector3 = result.normal
+	var grid_pos := _world_to_grid(result.position - hit_normal * 0.1)
+	var gx: int = grid_pos.x
+	var gz: int = grid_pos.z
+
+	var sc := _get_structure_component()
+	if not sc:
+		return
+	if gx < 0 or gx >= sc.grid_x or gz < 0 or gz >= sc.grid_z:
+		return
+
+	if is_right:
+		# Right-click: open properties popup
+		var cell_val := _get_utility_at(gx, gz)
+		if cell_val.is_empty():
+			_set_status("EDIT [Utilities] — Empty cell at %d,%d" % [gx, gz])
+			return
+		_open_props_popup(gx, gz, cell_val, "utilities")
+	else:
+		if _edit_layer_brush.is_empty():
+			_set_status("EDIT [Utilities] — No brush selected! Pick a utility first.")
+			return
+		_push_undo()
+		_set_utility_at(gx, gz, _edit_layer_brush)
+		_live_spawn_utility_marker(gx, gz, _edit_layer_brush)
+		_update_cell_label_at(gx, gz, _edit_layer_brush)
+		_set_status("EDIT [Utilities] — Placed '%s' at %d,%d" % [_edit_layer_brush, gx, gz])
+
+
+func _remove_at_hovered_cell() -> void:
+	"""Remove artifact/utility at the cell under the cursor (Delete key)."""
+	if not _edit_cursor or not _edit_cursor.visible:
+		return
+	var total_size := 1.0
+	if _grid_system and "cube_size" in _grid_system:
+		total_size = _grid_system.cube_size
+	var cursor_pos := _edit_cursor.global_position / total_size
+	var gx := roundi(cursor_pos.x)
+	var gz := roundi(cursor_pos.z)
+
+	_push_undo()
+	if _edit_layer == "interactables":
+		_set_interactable_at(gx, gz, " ")
+		_live_despawn_interactable(gx, gz)
+		_remove_cell_label_at(gx, gz)
+		_set_status("EDIT [Interactables] — Removed at %d,%d" % [gx, gz])
+	elif _edit_layer == "utilities":
+		_set_utility_at(gx, gz, " ")
+		_live_despawn_utility_marker(gx, gz)
+		_remove_cell_label_at(gx, gz)
+		_set_status("EDIT [Utilities] — Removed at %d,%d" % [gx, gz])
+
+
+# --- Cell label (floating text showing contents) ---
+
+func _show_cell_label(text: String, world_pos: Vector3) -> void:
+	if text.is_empty():
+		_hide_cell_label()
+		return
+	if not _edit_cell_label:
+		_edit_cell_label = Label3D.new()
+		_edit_cell_label.name = "EditCellLabel"
+		_edit_cell_label.font_size = 20
+		_edit_cell_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_edit_cell_label.no_depth_test = true
+		_edit_cell_label.render_priority = 100
+		_edit_cell_label.outline_size = 4
+		_edit_cell_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
+		add_child(_edit_cell_label)
+
+	_edit_cell_label.text = text
+	_edit_cell_label.global_position = world_pos
+	_edit_cell_label.visible = true
+
+	# Color by layer type
+	match _edit_layer:
+		"interactables":
+			_edit_cell_label.modulate = Color(0.4, 1.0, 0.5)
+		"utilities":
+			_edit_cell_label.modulate = Color(1.0, 0.8, 0.3)
+		_:
+			_edit_cell_label.modulate = Color.WHITE
+
+
+func _hide_cell_label() -> void:
+	if _edit_cell_label:
+		_edit_cell_label.visible = false
+
+
+func _remove_cell_label() -> void:
+	if _edit_cell_label:
+		_edit_cell_label.queue_free()
+		_edit_cell_label = null
+
+
+func _remove_edit_utility_markers() -> void:
+	"""Remove all edit-mode utility markers from the scene."""
+	for child in get_children():
+		if child.has_meta("edit_utility_marker"):
+			child.queue_free()
+
+
+# --- Persistent 3D labels for all placed items ---
+
+func _create_cell_label_3d(gx: int, gz: int, text: String, is_utility: bool) -> Label3D:
+	"""Create a persistent 3D label floating above a grid cell."""
+	var lbl := Label3D.new()
+	lbl.name = "CellLabel_%d_%d" % [gx, gz]
+	lbl.text = text
+	lbl.font_size = 14
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lbl.no_depth_test = true
+	lbl.render_priority = 90
+	lbl.outline_size = 6
+	lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.95)
+	if is_utility:
+		lbl.modulate = Color(1.0, 0.85, 0.3)
+	else:
+		lbl.modulate = Color(0.4, 1.0, 0.55)
+	# Position above the column
+	var sc := _get_structure_component()
+	var total_size := 1.0
+	if _grid_system and "cube_size" in _grid_system:
+		total_size = _grid_system.cube_size
+	var top_y := 0
+	if sc and gx >= 0 and gx < sc.grid_x and gz >= 0 and gz < sc.grid_z:
+		for y in range(sc.grid_y - 1, -1, -1):
+			if sc.grid[gx][y][gz]:
+				top_y = y + 1
+				break
+	lbl.global_position = Vector3(gx, top_y + 1.2, gz) * total_size
+	if not _cell_labels_parent:
+		_cell_labels_parent = Node3D.new()
+		_cell_labels_parent.name = "CellLabels3D"
+		add_child(_cell_labels_parent)
+	_cell_labels_parent.add_child(lbl)
+	return lbl
+
+
+func _rebuild_cell_labels_for_layer() -> void:
+	"""Clear and recreate all persistent 3D labels for the current edit layer."""
+	_clear_all_cell_labels()
+	if _edit_layer == "interactables":
+		for gz in range(_interactables_grid.size()):
+			var row: Array = _interactables_grid[gz]
+			for gx in range(row.size()):
+				var val: String = str(row[gx]).strip_edges()
+				if not val.is_empty() and val != " ":
+					# Show only the base name (before first :)
+					var display := _short_label(val)
+					var lbl := _create_cell_label_3d(gx, gz, display, false)
+					_cell_labels_3d["%d,%d" % [gx, gz]] = lbl
+	elif _edit_layer == "utilities":
+		for gz in range(_utilities_grid.size()):
+			var row: Array = _utilities_grid[gz]
+			for gx in range(row.size()):
+				var val: String = str(row[gx]).strip_edges()
+				if not val.is_empty() and val != " ":
+					var lbl := _create_cell_label_3d(gx, gz, val, true)
+					_cell_labels_3d["%d,%d" % [gx, gz]] = lbl
+	# Structure layer: no labels
+
+
+func _update_cell_label_at(gx: int, gz: int, text: String) -> void:
+	"""Update or create the persistent label at a cell after placing an item."""
+	var key := "%d,%d" % [gx, gz]
+	if text.strip_edges().is_empty() or text == " ":
+		_remove_cell_label_at(gx, gz)
+		return
+	var is_utility: bool = (_edit_layer == "utilities")
+	var display := text if is_utility else _short_label(text)
+	if _cell_labels_3d.has(key):
+		var lbl: Label3D = _cell_labels_3d[key]
+		if is_instance_valid(lbl):
+			lbl.text = display
+			return
+	# Create new
+	var lbl := _create_cell_label_3d(gx, gz, display, is_utility)
+	_cell_labels_3d[key] = lbl
+
+
+func _remove_cell_label_at(gx: int, gz: int) -> void:
+	"""Remove the persistent label at a specific cell."""
+	var key := "%d,%d" % [gx, gz]
+	if _cell_labels_3d.has(key):
+		var lbl: Label3D = _cell_labels_3d[key]
+		if is_instance_valid(lbl):
+			lbl.queue_free()
+		_cell_labels_3d.erase(key)
+
+
+func _clear_all_cell_labels() -> void:
+	"""Remove all persistent 3D labels."""
+	for key in _cell_labels_3d.keys():
+		var lbl = _cell_labels_3d[key]
+		if is_instance_valid(lbl):
+			lbl.queue_free()
+	_cell_labels_3d.clear()
+	if _cell_labels_parent and is_instance_valid(_cell_labels_parent):
+		_cell_labels_parent.queue_free()
+		_cell_labels_parent = null
+
+
+func _short_label(token: String) -> String:
+	"""Extract just the artifact name from a token like 'name:rot:y:scale'."""
+	var base := token
+	# Strip #config part first
+	if base.find("#") != -1:
+		base = base.substr(0, base.find("#"))
+	# Strip :params
+	if base.find(":") != -1:
+		base = base.substr(0, base.find(":"))
+	# Truncate very long names
+	if base.length() > 24:
+		base = base.substr(0, 21) + "..."
+	return base
+
+
+# --- Properties popup (right-click edit) ---
+
+func _open_props_popup(gx: int, gz: int, cell_value: String, layer: String) -> void:
+	"""Open a floating properties popup for editing rotation/y/scale or deleting."""
+	_close_props_popup()
+	_props_gx = gx
+	_props_gz = gz
+
+	# Parse current token to extract params
+	var base_name := cell_value
+	var rot_y := 0.0
+	var y_pos := 0.0
+	var uniform_scale := 0.0  # 0 means default
+	if layer == "interactables":
+		# Strip #config
+		var config_part := ""
+		if base_name.find("#") != -1:
+			config_part = base_name.substr(base_name.find("#"))
+			base_name = base_name.substr(0, base_name.find("#"))
+		var parts := base_name.split(":")
+		if parts.size() >= 2 and parts[1].strip_edges().is_valid_float():
+			rot_y = float(parts[1])
+		if parts.size() >= 3 and parts[2].strip_edges().is_valid_float():
+			y_pos = float(parts[2])
+		if parts.size() >= 4 and parts[3].strip_edges().is_valid_float():
+			uniform_scale = float(parts[3])
+		base_name = parts[0] + config_part
+
+	# Build popup CanvasLayer
+	if not _props_popup_canvas:
+		_props_popup_canvas = CanvasLayer.new()
+		_props_popup_canvas.name = "PropsPopupCanvas"
+		_props_popup_canvas.layer = 126  # Above layer editor panel (125)
+		add_child(_props_popup_canvas)
+
+	var popup := PanelContainer.new()
+	popup.name = "PropsPopup"
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.08, 0.1, 0.16, 0.97)
+	sb.set_border_width_all(2)
+	sb.border_color = Color(0.3, 0.6, 0.9, 0.9)
+	sb.set_corner_radius_all(8)
+	sb.set_content_margin_all(14)
+	popup.add_theme_stylebox_override("panel", sb)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 8)
+	popup.add_child(vbox)
+
+	# Title
+	var title := Label.new()
+	title.text = "%s  [%d, %d]" % [_short_label(cell_value), gx, gz]
+	title.add_theme_color_override("font_color", Color(0.7, 0.9, 1.0))
+	title.add_theme_font_size_override("font_size", 14)
+	vbox.add_child(title)
+
+	# Full token display
+	var token_lbl := Label.new()
+	token_lbl.text = cell_value
+	token_lbl.add_theme_color_override("font_color", Color(0.5, 0.6, 0.7))
+	token_lbl.add_theme_font_size_override("font_size", 11)
+	vbox.add_child(token_lbl)
+
+	# Separator
+	var sep := HSeparator.new()
+	sep.add_theme_color_override("separator", Color(0.2, 0.35, 0.5, 0.5))
+	vbox.add_child(sep)
+
+	if layer == "interactables":
+		# Rotation Y
+		var rot_row := _make_prop_row("Rotation Y", str(rot_y), "rot_y")
+		vbox.add_child(rot_row)
+		# Y Position
+		var ypos_row := _make_prop_row("Y Offset", str(y_pos), "y_pos")
+		vbox.add_child(ypos_row)
+		# Scale
+		var scale_row := _make_prop_row("Scale", str(uniform_scale), "scale")
+		vbox.add_child(scale_row)
+	else:
+		# For utilities: just show the code, editable
+		var code_row := _make_prop_row("Code", cell_value, "code")
+		vbox.add_child(code_row)
+
+	# Separator
+	var sep2 := HSeparator.new()
+	sep2.add_theme_color_override("separator", Color(0.2, 0.35, 0.5, 0.5))
+	vbox.add_child(sep2)
+
+	# Buttons row
+	var btn_row := HBoxContainer.new()
+	btn_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(btn_row)
+
+	var apply_btn := Button.new()
+	apply_btn.text = "Apply"
+	apply_btn.custom_minimum_size = Vector2(70, 30)
+	_style_popup_btn(apply_btn, Color(0.12, 0.3, 0.5))
+	apply_btn.pressed.connect(_on_props_apply.bind(layer, base_name, popup))
+	btn_row.add_child(apply_btn)
+
+	var delete_btn := Button.new()
+	delete_btn.text = "Delete"
+	delete_btn.custom_minimum_size = Vector2(70, 30)
+	_style_popup_btn(delete_btn, Color(0.5, 0.12, 0.12))
+	delete_btn.pressed.connect(_on_props_delete.bind(layer))
+	btn_row.add_child(delete_btn)
+
+	var cancel_btn := Button.new()
+	cancel_btn.text = "Cancel"
+	cancel_btn.custom_minimum_size = Vector2(70, 30)
+	_style_popup_btn(cancel_btn, Color(0.2, 0.2, 0.25))
+	cancel_btn.pressed.connect(_close_props_popup)
+	btn_row.add_child(cancel_btn)
+
+	# Position popup near mouse
+	var mouse_pos := get_viewport().get_mouse_position()
+	popup.position = mouse_pos + Vector2(10, -20)
+	# Clamp to viewport
+	popup.size = Vector2(260, 0)  # auto-height
+
+	_props_popup_canvas.add_child(popup)
+	_props_popup = popup
+
+
+func _make_prop_row(label_text: String, value: String, field_name: String) -> HBoxContainer:
+	"""Create a label + input row for the properties popup."""
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	var lbl := Label.new()
+	lbl.text = label_text
+	lbl.custom_minimum_size = Vector2(80, 0)
+	lbl.add_theme_color_override("font_color", Color(0.7, 0.75, 0.85))
+	lbl.add_theme_font_size_override("font_size", 12)
+	row.add_child(lbl)
+	var input := LineEdit.new()
+	input.text = value
+	input.custom_minimum_size = Vector2(100, 26)
+	input.add_theme_font_size_override("font_size", 12)
+	input.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0))
+	var input_sb := StyleBoxFlat.new()
+	input_sb.bg_color = Color(0.12, 0.15, 0.22)
+	input_sb.set_border_width_all(1)
+	input_sb.border_color = Color(0.3, 0.45, 0.6, 0.7)
+	input_sb.set_corner_radius_all(4)
+	input_sb.set_content_margin_all(4)
+	input.add_theme_stylebox_override("normal", input_sb)
+	input.set_meta("field_name", field_name)
+	row.add_child(input)
+	return row
+
+
+func _style_popup_btn(button: Button, bg_color: Color) -> void:
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = bg_color
+	normal.set_border_width_all(1)
+	normal.border_color = bg_color.lightened(0.3)
+	normal.set_corner_radius_all(5)
+	button.add_theme_stylebox_override("normal", normal)
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = bg_color.lightened(0.15)
+	hover.set_border_width_all(1)
+	hover.border_color = bg_color.lightened(0.5)
+	hover.set_corner_radius_all(5)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0))
+	button.add_theme_font_size_override("font_size", 12)
+
+
+func _on_props_apply(layer: String, base_name: String, popup: Control) -> void:
+	"""Apply property changes from the popup."""
+	var gx := _props_gx
+	var gz := _props_gz
+	if gx < 0 or gz < 0:
+		return
+
+	_push_undo()
+
+	if layer == "interactables":
+		# Read input values from popup
+		var rot_y := 0.0
+		var y_pos := 0.0
+		var scale_val := 0.0
+		var inputs := _find_prop_inputs(popup)
+		for input in inputs:
+			var fname: String = input.get_meta("field_name", "")
+			var txt: String = input.text.strip_edges()
+			if fname == "rot_y" and txt.is_valid_float():
+				rot_y = float(txt)
+			elif fname == "y_pos" and txt.is_valid_float():
+				y_pos = float(txt)
+			elif fname == "scale" and txt.is_valid_float():
+				scale_val = float(txt)
+
+		# Build token: name:rot:y:scale (omit trailing defaults)
+		# Strip old :params from base_name (keep name + #config)
+		var name_part := base_name
+		# base_name already has #config but no :params
+		if name_part.find(":") != -1 and name_part.find("#") == -1:
+			name_part = name_part.substr(0, name_part.find(":"))
+
+		var token := name_part
+		if scale_val != 0.0:
+			token = "%s:%s:%s:%s" % [name_part, str(rot_y), str(y_pos), str(scale_val)]
+		elif y_pos != 0.0:
+			token = "%s:%s:%s" % [name_part, str(rot_y), str(y_pos)]
+		elif rot_y != 0.0:
+			token = "%s:%s" % [name_part, str(rot_y)]
+
+		_set_interactable_at(gx, gz, token)
+		_live_despawn_interactable(gx, gz)
+		_live_spawn_interactable(gx, gz, token)
+		_update_cell_label_at(gx, gz, token)
+		_set_status("EDIT [Interactables] — Updated '%s' at %d,%d" % [_short_label(token), gx, gz])
+	else:
+		# Utilities: read code from input
+		var inputs := _find_prop_inputs(popup)
+		var code := ""
+		for input in inputs:
+			if input.get_meta("field_name", "") == "code":
+				code = input.text.strip_edges()
+		if code.is_empty():
+			code = " "
+		_set_utility_at(gx, gz, code)
+		_live_despawn_utility_marker(gx, gz)
+		if code != " ":
+			_live_spawn_utility_marker(gx, gz, code)
+		_update_cell_label_at(gx, gz, code)
+		_set_status("EDIT [Utilities] — Updated '%s' at %d,%d" % [code, gx, gz])
+
+	_close_props_popup()
+
+
+func _on_props_delete(layer: String) -> void:
+	"""Delete the item at the popup's grid position."""
+	var gx := _props_gx
+	var gz := _props_gz
+	if gx < 0 or gz < 0:
+		return
+
+	_push_undo()
+
+	if layer == "interactables":
+		_set_interactable_at(gx, gz, " ")
+		_live_despawn_interactable(gx, gz)
+		_remove_cell_label_at(gx, gz)
+		_set_status("EDIT [Interactables] — Deleted at %d,%d" % [gx, gz])
+	else:
+		_set_utility_at(gx, gz, " ")
+		_live_despawn_utility_marker(gx, gz)
+		_remove_cell_label_at(gx, gz)
+		_set_status("EDIT [Utilities] — Deleted at %d,%d" % [gx, gz])
+
+	_close_props_popup()
+
+
+func _find_prop_inputs(node: Node) -> Array:
+	"""Recursively find all LineEdit nodes with 'field_name' meta."""
+	var result: Array = []
+	if node is LineEdit and node.has_meta("field_name"):
+		result.append(node)
+	for child in node.get_children():
+		result.append_array(_find_prop_inputs(child))
+	return result
+
+
+func _close_props_popup() -> void:
+	"""Close and clean up the properties popup."""
+	if _props_popup and is_instance_valid(_props_popup):
+		_props_popup.queue_free()
+		_props_popup = null
+	_props_gx = -1
+	_props_gz = -1
+
+
+func _is_props_popup_visible() -> bool:
+	return _props_popup != null and is_instance_valid(_props_popup) and _props_popup.visible
+
+
+# --- Layer tab buttons ---
+
+func _create_layer_tabs() -> void:
+	_remove_layer_tabs()
+
+	_layer_tab_container = Control.new()
+	_layer_tab_container.name = "LayerTabs"
+	_layer_tab_container.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_layer_tab_container.position = Vector2(268, 50)  # Right of sidebar, below camera bar
+	_layer_tab_container.size = Vector2(200, 35)
+
+	# Add as CanvasLayer child so it's always on top
+	# Actually, add it to the overlay's CanvasLayer so it shares the same 2D space
+	if _overlay:
+		_overlay.add_child(_layer_tab_container)
+	else:
+		# Fallback: use a new CanvasLayer
+		var cl := CanvasLayer.new()
+		cl.layer = 121
+		cl.name = "LayerTabsCanvas"
+		add_child(cl)
+		cl.add_child(_layer_tab_container)
+
+	var hbox := HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", 4)
+	_layer_tab_container.add_child(hbox)
+
+	# Label
+	var lbl := Label.new()
+	lbl.text = "Layer:"
+	lbl.add_theme_color_override("font_color", Color(0.6, 0.7, 0.8))
+	lbl.add_theme_font_size_override("font_size", 12)
+	hbox.add_child(lbl)
+
+	for tab_data in [
+		{"key": "structure", "label": "S"},
+		{"key": "interactables", "label": "I"},
+		{"key": "utilities", "label": "U"},
+	]:
+		var btn := Button.new()
+		btn.text = tab_data.label
+		btn.tooltip_text = tab_data.key.capitalize()
+		btn.custom_minimum_size = Vector2(30, 28)
+		btn.pressed.connect(_set_edit_layer.bind(tab_data.key))
+		_style_layer_tab(btn, false)
+		hbox.add_child(btn)
+		_layer_tab_buttons[tab_data.key] = btn
+
+
+func _remove_layer_tabs() -> void:
+	if _layer_tab_container and is_instance_valid(_layer_tab_container):
+		_layer_tab_container.queue_free()
+		_layer_tab_container = null
+	_layer_tab_buttons.clear()
+
+
+func _update_layer_tab_highlight() -> void:
+	for key in _layer_tab_buttons.keys():
+		var btn: Button = _layer_tab_buttons[key]
+		_style_layer_tab(btn, key == _edit_layer)
+
+
+func _style_layer_tab(button: Button, is_active: bool) -> void:
+	var normal := StyleBoxFlat.new()
+	if is_active:
+		normal.bg_color = Color(0.15, 0.35, 0.55, 0.98)
+		normal.set_border_width_all(2)
+		normal.border_color = Color(0.4, 0.85, 1.0, 1.0)
+	else:
+		normal.bg_color = Color(0.08, 0.13, 0.2, 0.96)
+		normal.set_border_width_all(1)
+		normal.border_color = Color(0.2, 0.4, 0.6, 0.6)
+	normal.set_corner_radius_all(6)
+	button.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = Color(0.12, 0.25, 0.4, 0.98)
+	hover.set_border_width_all(1)
+	hover.border_color = Color(0.3, 0.65, 0.9, 0.8)
+	hover.set_corner_radius_all(6)
+	button.add_theme_stylebox_override("hover", hover)
+
+	button.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0) if is_active else Color(0.6, 0.7, 0.8))
+	button.add_theme_font_size_override("font_size", 13)
+
 
 # ---------------------------------------------------------------------------
 # JSON compact helper

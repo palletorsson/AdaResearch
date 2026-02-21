@@ -44,6 +44,12 @@ static var _standalone_registry: Dictionary = {}
 static var _standalone_loaded: bool = false
 const PLACEHOLDER_ARTIFACT_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
 
+## Force reload of standalone registry (call after editing registry JSON files)
+static func reload_registry() -> void:
+	_standalone_loaded = false
+	_standalone_registry.clear()
+	_load_standalone_registry()
+
 static func _normalize_scene_path(scene_path: String) -> String:
 	var normalized: String = scene_path.strip_edges()
 	if normalized.is_empty():
@@ -58,13 +64,22 @@ static func _is_supported_scene_path(scene_path: String) -> bool:
 	return scene_path.begins_with("res://commons/") or scene_path.begins_with("res://algorithms/")
 
 static func _looks_like_artifact_entry(artifact: Dictionary) -> bool:
+	# Strong signals: these keys are definitive artifact markers
 	if artifact.has("scene"):
 		return true
-	var artifact_marker_keys := ["lookup_name", "name", "description", "category", "sequence", "artifact_type", "tags"]
-	for key in artifact_marker_keys:
+	if artifact.has("lookup_name"):
+		return true
+	if artifact.has("artifact_type"):
+		return true
+	# Require at least TWO weak signals to qualify
+	# (prevents substrate_vectors.json theme data from being mistaken for artifacts —
+	#  those files may have "sequence" but lack "scene", "name", "description", etc.)
+	var weak_marker_keys := ["name", "description", "category", "sequence", "tags"]
+	var weak_count := 0
+	for key in weak_marker_keys:
 		if artifact.has(key):
-			return true
-	return false
+			weak_count += 1
+	return weak_count >= 2
 
 static func _build_placeholder_artifact(lookup_name: String, reason: String, source_scene_path: String = "") -> Dictionary:
 	var placeholder: Dictionary = {
@@ -435,3 +450,23 @@ static func get_artifact_by_lookup_name(lookup_name: String) -> Dictionary:
 		return artifact_from_standalone
 
 	return _build_placeholder_artifact(lookup_name, "unknown_lookup_name")
+
+## Diagnostic: print all artifacts that resolve to placeholder
+static func print_placeholder_report() -> void:
+	_load_standalone_registry()
+	var placeholders: Array = []
+	var total := 0
+	for lookup_name in _standalone_registry.keys():
+		total += 1
+		var art: Dictionary = _standalone_registry[lookup_name]
+		if str(art.get("artifact_type", "")) == "placeholder" or str(art.get("scene", "")) == PLACEHOLDER_ARTIFACT_SCENE_PATH:
+			var reason := str(art.get("placeholder_reason", "unknown"))
+			var source := str(art.get("source_scene_path", ""))
+			placeholders.append("  ❌ '%s' reason='%s' original_scene='%s'" % [lookup_name, reason, source])
+
+	print("=== PLACEHOLDER REPORT (%d/%d artifacts) ===" % [placeholders.size(), total])
+	for line in placeholders:
+		print(line)
+	if placeholders.is_empty():
+		print("  ✅ No placeholders! All artifacts have valid scenes.")
+	print("=== END REPORT ===")

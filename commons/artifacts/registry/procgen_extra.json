@@ -1,0 +1,70 @@
+{
+	"registry_info": {
+		"name": "procgen_extra",
+		"description": "Additional procedural generation artifacts — wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
+		"category": "proceduralgeneration",
+		"theoretical_grounding": "Constraint satisfaction (WFC), higher-dimensional geometry (tesseracts, penteracts), Turing patterns, maze generation algorithms"
+	},
+	"artifacts": {
+		"wfc": {
+			"lookup_name": "wfc",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFC.tscn",
+			"name": "Wave Function Collapse",
+			"description": "Wave Function Collapse algorithm — generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": ["wfc", "wave_function_collapse", "constraint", "procedural", "generation", "tile"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"reaction_diffusion_vr": {
+			"lookup_name": "reaction_diffusion_vr",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",
+			"name": "Reaction Diffusion (VR)",
+			"description": "Turing reaction-diffusion patterns in VR — two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": ["reaction_diffusion", "turing_pattern", "morphogenesis", "vr", "growth"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"tesseract_tunnel": {
+			"lookup_name": "tesseract_tunnel",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel.tscn",
+			"name": "Tesseract Tunnel",
+			"description": "Fly through a tunnel of rotating tesseracts — 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": ["tesseract", "4d", "hypercube", "tunnel", "projection", "higher_dimensional"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"penteract_double_projection": {
+			"lookup_name": "penteract_double_projection",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/penteract_double_projection.tscn",
+			"name": "Penteract Double Projection",
+			"description": "5D hypercube (penteract) projected twice — from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": ["penteract", "5d", "projection", "hypercube", "higher_dimensional"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"maze_generator": {
+			"lookup_name": "maze_generator",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn",
+			"name": "Maze Generator",
+			"description": "Procedural maze generation — watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": ["maze", "generation", "dfs", "backtracking", "spanning_tree", "procedural"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

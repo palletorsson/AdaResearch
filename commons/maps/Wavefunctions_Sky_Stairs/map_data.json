@@ -1,8 +1,8 @@
 {
 	"map_info": {
-		"name": "Wavefunctions Level Six",
+		"name": "Sky Stairs: Climbing the Wave",
 		"lookup_name": "Wavefunctions_Sky_Stairs",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"description": "A vertical amphitheater where you are launched 10 units skyward, then descend through sine-modulated cylinder staircases. Each step follows sin(t)—climbing stairs IS tracing a waveform. Floating cube fields at varying heights sample 3D space. Mathematical objects await at the deep stage below. The tallest structure in the wavefunctions sequence.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,14 +11,14 @@
 			"max_height": 10
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
 			"learning_objectives": [
-				"Algorithm visualization",
-				"Grid manipulation",
-				"Random processes",
-				"8x8 region operations"
+				"Sine-modulated geometry as architecture",
+				"Vertical oscillation and spatial sampling",
+				"Embodied waveform tracing through climbing",
+				"Phase relationships in 3D space"
 			]
 		}
 	},

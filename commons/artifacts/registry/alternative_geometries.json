@@ -1,0 +1,58 @@
+{
+	"registry_info": {
+		"name": "alternative_geometries",
+		"description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
+		"category": "geometry",
+		"theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
+	},
+	"artifacts": {
+		"bulging_tunnel": {
+			"lookup_name": "bulging_tunnel",
+			"scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
+			"name": "Bulging Tunnel",
+			"description": "A tunnel whose walls bulge and contract, warping the perception of depth and distance. Non-Euclidean spatial distortion experienced from inside.",
+			"category": "geometry",
+			"complexity": "intermediate",
+			"tags": ["alternative_geometry", "tunnel", "distortion", "non_euclidean", "spatial"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"mobius_strip_altgeo": {
+			"lookup_name": "mobius_strip_altgeo",
+			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
+			"name": "Möbius Strip (Walkable)",
+			"description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
+			"category": "geometry",
+			"complexity": "beginner",
+			"tags": ["mobius", "topology", "non_orientable", "walkable", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"non_euclidean_space": {
+			"lookup_name": "non_euclidean_space",
+			"scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
+			"name": "Non-Euclidean Space",
+			"description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
+			"category": "geometry",
+			"complexity": "advanced",
+			"tags": ["non_euclidean", "hyperbolic", "elliptic", "impossible_space", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"rhizomatic_structure": {
+			"lookup_name": "rhizomatic_structure",
+			"scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+			"name": "Rhizomatic Structure",
+			"description": "Rhizomatic growth structure inspired by Deleuze and Guattari — non-hierarchical, multiply-connected, without center or periphery. Any point connects to any other.",
+			"category": "geometry",
+			"complexity": "intermediate",
+			"tags": ["rhizome", "deleuze", "non_hierarchical", "network", "alternative_geometry", "critical_theory"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

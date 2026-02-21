@@ -55,11 +55,15 @@ func _create_star_field():
 			radius * cos(angle2)
 		)
 		
-		$StarField.add_child(star)
+		var star_field = get_node_or_null("StarField")
+		if star_field:
+			star_field.add_child(star)
 
 func _initialize_bodies():
-	# Get all celestial bodies
-	bodies = $CelestialBodies.get_children()
+	var celestial = get_node_or_null("CelestialBodies")
+	if not celestial:
+		return
+	bodies = celestial.get_children()
 	
 	# Initialize each body
 	for body in bodies:
@@ -113,10 +117,18 @@ func _update_trails():
 		body.update_trail()
 
 func _connect_ui():
-	$UI/VBoxContainer/ResetButton.pressed.connect(_on_reset_pressed)
-	$UI/VBoxContainer/PauseButton.pressed.connect(_on_pause_pressed)
-	$UI/VBoxContainer/TrailToggle.pressed.connect(_on_trail_toggle_pressed)
-	$UI/VBoxContainer/MassSlider.value_changed.connect(_on_mass_changed)
+	var reset_btn = get_node_or_null("UI/VBoxContainer/ResetButton")
+	if reset_btn:
+		reset_btn.pressed.connect(_on_reset_pressed)
+	var pause_btn = get_node_or_null("UI/VBoxContainer/PauseButton")
+	if pause_btn:
+		pause_btn.pressed.connect(_on_pause_pressed)
+	var trail_btn = get_node_or_null("UI/VBoxContainer/TrailToggle")
+	if trail_btn:
+		trail_btn.pressed.connect(_on_trail_toggle_pressed)
+	var mass_slider = get_node_or_null("UI/VBoxContainer/MassSlider")
+	if mass_slider:
+		mass_slider.value_changed.connect(_on_mass_changed)
 
 func _on_reset_pressed():
 	# Reset all bodies to initial positions
@@ -124,21 +136,29 @@ func _on_reset_pressed():
 		body.reset_to_initial()
 	
 	# Clear trails
-	for child in $Trails.get_children():
-		child.queue_free()
+	var trails = get_node_or_null("Trails")
+	if trails:
+		for child in trails.get_children():
+			child.queue_free()
 
 func _on_pause_pressed():
 	paused = !paused
-	$UI/VBoxContainer/PauseButton.text = "Resume" if paused else "Pause"
+	var pause_btn = get_node_or_null("UI/VBoxContainer/PauseButton")
+	if pause_btn:
+		pause_btn.text = "Resume" if paused else "Pause"
 
 func _on_trail_toggle_pressed():
 	trails_enabled = !trails_enabled
-	$UI/VBoxContainer/TrailToggle.text = "Trails: " + ("ON" if trails_enabled else "OFF")
+	var trail_btn = get_node_or_null("UI/VBoxContainer/TrailToggle")
+	if trail_btn:
+		trail_btn.text = "Trails: " + ("ON" if trails_enabled else "OFF")
 	
 	if !trails_enabled:
 		# Clear all trails
-		for child in $Trails.get_children():
-			child.queue_free()
+		var trails = get_node_or_null("Trails")
+		if trails:
+			for child in trails.get_children():
+				child.queue_free()
 
 func _on_mass_changed(value: float):
 	# Update mass of all bodies
@@ -146,7 +166,9 @@ func _on_mass_changed(value: float):
 		body.body_mass = value
 
 	# Update UI label
-	$UI/VBoxContainer/MassLabel.text = "Mass: " + str(int(value))
+	var mass_label = get_node_or_null("UI/VBoxContainer/MassLabel")
+	if mass_label:
+		mass_label.text = "Mass: " + str(int(value))
 
 func _apply_vibrant_colors():
 	# Apply vibrant queer colors to celestial bodies

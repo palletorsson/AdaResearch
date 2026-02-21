@@ -34,6 +34,7 @@ Located in `.claude/skills/`:
 | ada-student | `/ada-student` | Asks probing questions to help think through ideas |
 | ada-test-player | `/ada-test-player` | Plays through sequences by reading source files |
 | ada-skill-updater | `/ada-skill-updater` | This skill — maintains the skill system |
+| ada-orchestrator | `/ada-orchestrator` | Produces onboarding guide — synthesizes project state, architecture, curriculum, theory, skills |
 
 ## How to Update a Skill
 

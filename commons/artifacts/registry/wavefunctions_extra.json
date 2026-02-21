@@ -1,0 +1,106 @@
+{
+	"registry_info": {
+		"name": "wavefunctions_extra",
+		"description": "Additional wavefunction artifacts not in the main wavefunctions.json — sine spaces, sound timelines, modulor constructions, and cochlear models.",
+		"category": "wavefunctions",
+		"theoretical_grounding": "Wave mechanics, Fourier analysis, Le Corbusier's Modulor proportional system, cochlear mechanics, sound synthesis"
+	},
+	"artifacts": {
+		"coshlea": {
+			"lookup_name": "coshlea",
+			"scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
+			"name": "Cochlea Model",
+			"description": "Model of the cochlea — the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
+			"category": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": ["cochlea", "hearing", "frequency", "fourier", "biology", "wave"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		},
+		"modulor_man": {
+			"lookup_name": "modulor_man",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn",
+			"name": "Modulor Man",
+			"description": "Le Corbusier's Modulor proportional system in 3D — the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
+			"category": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": ["modulor", "le_corbusier", "proportion", "golden_ratio", "architecture", "human_scale"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"modulor_man_interactive": {
+			"lookup_name": "modulor_man_interactive",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn",
+			"name": "Modulor Man (Interactive)",
+			"description": "Interactive Modulor proportional system — adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
+			"category": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": ["modulor", "interactive", "proportion", "architecture", "human_scale"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"sine_space": {
+			"lookup_name": "sine_space",
+			"scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
+			"name": "Sine Space",
+			"description": "3D space defined by sine waves — walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
+			"category": "wavefunctions",
+			"complexity": "beginner",
+			"tags": ["sine", "wave", "space", "environment", "oscillation", "3d"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		},
+		"sine_wall": {
+			"lookup_name": "sine_wall",
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall.tscn",
+			"name": "Sine Wall",
+			"description": "A wall of oscillating elements driven by sine functions — amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
+			"category": "wavefunctions",
+			"complexity": "beginner",
+			"tags": ["sine", "wall", "oscillation", "amplitude", "frequency", "phase"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		},
+		"sine_oscillation": {
+			"lookup_name": "sine_oscillation",
+			"scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
+			"name": "Sine Oscillation",
+			"description": "Pure sine wave oscillation visualization in 2D — the most fundamental periodic motion. Amplitude, frequency, phase, and their relationship to circular motion.",
+			"category": "wavefunctions",
+			"complexity": "beginner",
+			"tags": ["sine", "oscillation", "2d", "circular_motion", "amplitude", "frequency"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		},
+		"sound_timeline": {
+			"lookup_name": "sound_timeline",
+			"scene": "res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn",
+			"name": "Sound Timeline",
+			"description": "Audio timeline controller — visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
+			"category": "wavefunctions",
+			"complexity": "beginner",
+			"tags": ["sound", "timeline", "audio", "waveform", "time_domain", "controller"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		},
+		"vertical_wave_lines": {
+			"lookup_name": "vertical_wave_lines",
+			"scene": "res://algorithms/wavefunctions/vertical_wave_lines/vertical_wave_lines.tscn",
+			"name": "Vertical Wave Lines",
+			"description": "Array of vertical lines displaced by wave functions — interference, standing waves, and superposition made visible as a wall of oscillating rods.",
+			"category": "wavefunctions",
+			"complexity": "beginner",
+			"tags": ["wave", "vertical", "lines", "interference", "standing_wave", "superposition"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
+		}
+	}
+}

@@ -295,7 +295,7 @@ func _generate_diagram():
 			_multimesh.set_instance_transform(idx, transform)
 			
 			# Color based on r value (chaos regions brighter)
-			var brightness = 0.5 + smoothstep(3.0, 4.0, r) * 0.5
+			var brightness = 0.5 + _smoothstep(3.0, 4.0, r) * 0.5
 			var color = point_color
 			color.v = brightness
 			_multimesh.set_instance_color(idx, color)
@@ -310,7 +310,7 @@ func _generate_diagram():
 	_active_points = idx
 	_multimesh.visible_instance_count = idx
 
-func smoothstep(edge0: float, edge1: float, x: float) -> float:
+func _smoothstep(edge0: float, edge1: float, x: float) -> float:
 	var t = clampf((x - edge0) / (edge1 - edge0), 0.0, 1.0)
 	return t * t * (3.0 - 2.0 * t)
 

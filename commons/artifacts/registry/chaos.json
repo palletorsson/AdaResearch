@@ -1,0 +1,34 @@
+{
+	"registry_info": {
+		"name": "chaos",
+		"description": "Chaos theory artifacts — Lyapunov exponents, strange attractors, and the sensitive dependence on initial conditions that makes deterministic systems unpredictable.",
+		"category": "chaos",
+		"theoretical_grounding": "Dynamical systems theory, Lyapunov stability, strange attractors (Lorenz, Rössler), fractal dimension, ergodic theory"
+	},
+	"artifacts": {
+		"lyapunov_exponents": {
+			"lookup_name": "lyapunov_exponents",
+			"scene": "res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.tscn",
+			"name": "Lyapunov Exponents",
+			"description": "Visualization of Lyapunov exponents — the rate at which nearby trajectories diverge in phase space. Positive exponents mean chaos: small differences amplify exponentially, making long-term prediction impossible.",
+			"category": "chaos",
+			"complexity": "advanced",
+			"tags": ["lyapunov", "chaos", "divergence", "sensitivity", "dynamical_systems", "exponent"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"strange_attractors": {
+			"lookup_name": "strange_attractors",
+			"scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
+			"name": "Strange Attractors",
+			"description": "Gallery of strange attractors — Lorenz, Rössler, and others. Deterministic systems that never repeat yet stay bounded, tracing fractal paths through phase space forever.",
+			"category": "chaos",
+			"complexity": "intermediate",
+			"tags": ["strange_attractor", "lorenz", "rossler", "chaos", "fractal", "phase_space"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

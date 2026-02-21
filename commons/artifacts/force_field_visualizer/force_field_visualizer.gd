@@ -302,11 +302,13 @@ func _orient_arrow(arrow: Node3D, field: Vector3):
 	arrow.transform.basis = Basis.IDENTITY
 	
 	if field.length() > 0.001:
-		var up = Vector3.UP
-		if abs(direction.dot(up)) > 0.99:
-			up = Vector3.FORWARD
-		arrow.look_at(arrow.global_position + field, up)
-		arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
+		var target_pos = arrow.global_position + field
+		if arrow.global_position.distance_squared_to(target_pos) > 0.0001:
+			var up = Vector3.UP
+			if abs(direction.dot(up)) > 0.99:
+				up = Vector3.FORWARD
+			arrow.look_at(target_pos, up)
+			arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
 
 func _update_info():
 	var type_names = ["GRAVITY", "POINT CHARGE", "DIPOLE", "VORTEX", "CUSTOM"]

@@ -90,6 +90,11 @@ var _sequence_names: Array[String] = []
 var _maps_by_sequence: Dictionary = {}
 var _stored_mouse_mode: int = Input.MOUSE_MODE_VISIBLE
 
+# Context menu state
+var _ctx_menu: PopupMenu = null
+var _ctx_map_name: String = ""
+var _ctx_sequence_name: String = ""
+
 func _ready() -> void:
 	layer = 120
 	visible = true
@@ -1386,6 +1391,7 @@ func _rebuild_catalog_buttons() -> void:
 		header_btn.text = "%s %s (%d) %s" % ["▾" if not is_collapsed else "▸", _format_name(sequence_name), maps.size(), seq_grade_summary]
 		header_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		header_btn.pressed.connect(_on_section_header_pressed.bind(sequence_name))
+		header_btn.gui_input.connect(_on_section_header_gui_input.bind(sequence_name))
 		_style_section_header(header_btn)
 		section.add_child(header_btn)
 
@@ -1405,7 +1411,7 @@ func _rebuild_catalog_buttons() -> void:
 			map_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			map_btn.custom_minimum_size = Vector2(0, 20)
 			map_btn.pressed.connect(_on_quick_map_button_pressed.bind(sequence_name, map_name))
-			map_btn.gui_input.connect(_on_map_btn_gui_input.bind(map_name))
+			map_btn.gui_input.connect(_on_map_btn_gui_input.bind(sequence_name, map_name))
 			_style_map_item(map_btn)
 			# Tint by grade
 			if not grade.is_empty():
@@ -1565,13 +1571,308 @@ func _on_quick_map_button_pressed(sequence_name: String, map_name: String) -> vo
 	else:
 		_set_status("Failed: %s" % map_name)
 
-func _on_map_btn_gui_input(event: InputEvent, map_name: String) -> void:
+func _on_map_btn_gui_input(event: InputEvent, sequence_name: String, map_name: String) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_RIGHT:
-		_cycle_grade(map_name)
-		var grade := _get_grade(map_name)
-		_set_status("Grade %s → %s" % [map_name, grade if not grade.is_empty() else "—"])
+		_show_map_context_menu(sequence_name, map_name)
 		get_viewport().set_input_as_handled()
+
+# ---------------------------------------------------------------------------
+# Context menus — right-click on map buttons and sequence headers
+# ---------------------------------------------------------------------------
+
+enum CtxAction { COPY_PATH, COPY_MAP_DATA_PATH, REMOVE_FROM_SEQ, MOVE_UP, MOVE_DOWN, GRADE_A, GRADE_B, GRADE_C, GRADE_F, GRADE_CLEAR, ADD_MAP }
+
+func _show_map_context_menu(sequence_name: String, map_name: String) -> void:
+	_ctx_sequence_name = sequence_name
+	_ctx_map_name = map_name
+	_close_context_menu()
+
+	var popup := PopupMenu.new()
+	popup.name = "MapContextMenu"
+	popup.add_item("Copy Map Folder Path", CtxAction.COPY_PATH)
+	popup.add_item("Copy map_data.json Path", CtxAction.COPY_MAP_DATA_PATH)
+	popup.add_separator()
+
+	# Move within sequence
+	var maps: Array = _maps_by_sequence.get(sequence_name, [])
+	var idx := maps.find(map_name)
+	if idx > 0:
+		popup.add_item("Move Up", CtxAction.MOVE_UP)
+	if idx >= 0 and idx < maps.size() - 1:
+		popup.add_item("Move Down", CtxAction.MOVE_DOWN)
+	if idx >= 0:
+		popup.add_separator()
+		popup.add_item("Remove from Sequence", CtxAction.REMOVE_FROM_SEQ)
+
+	# Grade sub-items
+	popup.add_separator()
+	var current_grade := _get_grade(map_name)
+	var grade_actions := {"A": CtxAction.GRADE_A, "B": CtxAction.GRADE_B, "C": CtxAction.GRADE_C, "F": CtxAction.GRADE_F}
+	for g in ["A", "B", "C", "F"]:
+		var label := "Grade %s" % g
+		if current_grade == g:
+			label += "  ●"
+		popup.add_item(label, grade_actions[g])
+	if not current_grade.is_empty():
+		popup.add_item("Clear Grade", CtxAction.GRADE_CLEAR)
+
+	popup.id_pressed.connect(_on_map_ctx_action)
+	add_child(popup)
+	_ctx_menu = popup
+	popup.position = Vector2i(get_viewport().get_mouse_position())
+	popup.popup()
+
+
+func _show_seq_context_menu(sequence_name: String) -> void:
+	_ctx_sequence_name = sequence_name
+	_ctx_map_name = ""
+	_close_context_menu()
+
+	var popup := PopupMenu.new()
+	popup.name = "SeqContextMenu"
+	popup.add_item("Add Map to Sequence...", CtxAction.ADD_MAP)
+	popup.id_pressed.connect(_on_seq_ctx_action)
+	add_child(popup)
+	_ctx_menu = popup
+	popup.position = Vector2i(get_viewport().get_mouse_position())
+	popup.popup()
+
+
+func _on_section_header_gui_input(event: InputEvent, sequence_name: String) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_RIGHT:
+		_show_seq_context_menu(sequence_name)
+		get_viewport().set_input_as_handled()
+
+
+func _close_context_menu() -> void:
+	if _ctx_menu and is_instance_valid(_ctx_menu):
+		_ctx_menu.queue_free()
+		_ctx_menu = null
+
+
+func _on_map_ctx_action(id: int) -> void:
+	var map_name := _ctx_map_name
+	var seq_name := _ctx_sequence_name
+	_close_context_menu()
+
+	match id:
+		CtxAction.COPY_PATH:
+			var path := "res://commons/maps/%s/" % map_name
+			DisplayServer.clipboard_set(path)
+			_set_status("Copied: %s" % path)
+		CtxAction.COPY_MAP_DATA_PATH:
+			var path := "res://commons/maps/%s/map_data.json" % map_name
+			DisplayServer.clipboard_set(path)
+			_set_status("Copied: %s" % path)
+		CtxAction.MOVE_UP:
+			_move_map_in_sequence(seq_name, map_name, -1)
+		CtxAction.MOVE_DOWN:
+			_move_map_in_sequence(seq_name, map_name, 1)
+		CtxAction.REMOVE_FROM_SEQ:
+			_remove_map_from_sequence(seq_name, map_name)
+		CtxAction.GRADE_A:
+			_set_grade_and_refresh(map_name, "A")
+		CtxAction.GRADE_B:
+			_set_grade_and_refresh(map_name, "B")
+		CtxAction.GRADE_C:
+			_set_grade_and_refresh(map_name, "C")
+		CtxAction.GRADE_F:
+			_set_grade_and_refresh(map_name, "F")
+		CtxAction.GRADE_CLEAR:
+			_set_grade_and_refresh(map_name, "")
+
+
+func _on_seq_ctx_action(id: int) -> void:
+	var seq_name := _ctx_sequence_name
+	_close_context_menu()
+
+	match id:
+		CtxAction.ADD_MAP:
+			_show_add_map_dialog(seq_name)
+
+
+func _set_grade_and_refresh(map_name: String, grade: String) -> void:
+	if grade.is_empty():
+		_map_grades.erase(map_name)
+	else:
+		_map_grades[map_name] = grade
+	_save_map_grades()
+	_refresh_map_button_grade(map_name, grade)
+	_refresh_grade_counts()
+	_set_status("Grade %s → %s" % [map_name, grade if not grade.is_empty() else "—"])
+
+
+# --- Sequence modification helpers ---
+
+func _move_map_in_sequence(sequence_name: String, map_name: String, direction: int) -> void:
+	"""Move a map up (-1) or down (+1) within its sequence. Saves to JSON."""
+	var maps: Array = _maps_by_sequence.get(sequence_name, [])
+	var idx := maps.find(map_name)
+	if idx < 0:
+		return
+	var new_idx := idx + direction
+	if new_idx < 0 or new_idx >= maps.size():
+		return
+	# Swap
+	var tmp = maps[idx]
+	maps[idx] = maps[new_idx]
+	maps[new_idx] = tmp
+	_maps_by_sequence[sequence_name] = maps
+	_save_sequence_to_json(sequence_name)
+	_rebuild_catalog_buttons()
+	_set_status("Moved '%s' %s in %s" % [_format_name(map_name), "up" if direction < 0 else "down", _format_name(sequence_name)])
+
+
+func _remove_map_from_sequence(sequence_name: String, map_name: String) -> void:
+	"""Remove a map from a sequence. Saves to JSON."""
+	var maps: Array = _maps_by_sequence.get(sequence_name, [])
+	var idx := maps.find(map_name)
+	if idx < 0:
+		return
+	maps.remove_at(idx)
+	_maps_by_sequence[sequence_name] = maps
+	_save_sequence_to_json(sequence_name)
+	_rebuild_catalog_buttons()
+	_set_status("Removed '%s' from %s" % [_format_name(map_name), _format_name(sequence_name)])
+
+
+func _add_map_to_sequence(sequence_name: String, map_name: String) -> void:
+	"""Add a map to the end of a sequence. Saves to JSON."""
+	var maps: Array = _maps_by_sequence.get(sequence_name, [])
+	if maps.has(map_name):
+		_set_status("'%s' already in %s" % [map_name, _format_name(sequence_name)])
+		return
+	maps.append(map_name)
+	_maps_by_sequence[sequence_name] = maps
+	_save_sequence_to_json(sequence_name)
+	_rebuild_catalog_buttons()
+	_auto_expand_sequence(sequence_name)
+	_set_status("Added '%s' to %s" % [_format_name(map_name), _format_name(sequence_name)])
+
+
+func _save_sequence_to_json(sequence_name: String) -> void:
+	"""Save the current maps list for a sequence back to its JSON file."""
+	# Find which file this sequence lives in
+	var file_path := _find_sequence_file(sequence_name)
+	if file_path.is_empty():
+		_set_status("Can't find sequence file for '%s'" % sequence_name)
+		return
+
+	# Read existing file
+	var file := FileAccess.open(file_path, FileAccess.READ)
+	if not file:
+		_set_status("Can't read %s" % file_path)
+		return
+	var json_text := file.get_as_text()
+	file.close()
+
+	var parser := JSON.new()
+	if parser.parse(json_text) != OK:
+		# Try stripping trailing commas
+		if parser.parse(_strip_trailing_commas(json_text)) != OK:
+			_set_status("JSON parse error in %s" % file_path)
+			return
+	var data: Dictionary = parser.data
+	if not data.has("sequences") or not (data["sequences"] is Dictionary):
+		_set_status("Invalid sequence file format: %s" % file_path)
+		return
+
+	# Update maps array
+	if data["sequences"].has(sequence_name) and data["sequences"][sequence_name] is Dictionary:
+		var maps: Array = _maps_by_sequence.get(sequence_name, [])
+		data["sequences"][sequence_name]["maps"] = maps
+
+	# Write back
+	var out_text := JSON.stringify(data, "\t")
+	var out_file := FileAccess.open(file_path, FileAccess.WRITE)
+	if not out_file:
+		_set_status("Can't write %s" % file_path)
+		return
+	out_file.store_string(out_text)
+	out_file.close()
+	print("DesktopMapSwitcherOverlay: Saved sequence '%s' → %s" % [sequence_name, file_path])
+
+
+func _find_sequence_file(sequence_name: String) -> String:
+	"""Find which JSON file a sequence is defined in."""
+	# Check main file first
+	if _file_contains_sequence(MAIN_SEQUENCES_PATH, sequence_name):
+		return MAIN_SEQUENCES_PATH
+	# Check sequence directory
+	var dir := DirAccess.open(SEQUENCES_DIRECTORY)
+	if not dir:
+		return ""
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var path := SEQUENCES_DIRECTORY + file_name
+			if _file_contains_sequence(path, sequence_name):
+				return path
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	return ""
+
+
+func _file_contains_sequence(path: String, sequence_name: String) -> bool:
+	if not FileAccess.file_exists(path):
+		return false
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return false
+	var json_text := file.get_as_text()
+	file.close()
+	var parser := JSON.new()
+	if parser.parse(json_text) != OK:
+		if parser.parse(_strip_trailing_commas(json_text)) != OK:
+			return false
+	var data = parser.data
+	if not (data is Dictionary):
+		return false
+	var seqs = data.get("sequences", {})
+	return seqs is Dictionary and seqs.has(sequence_name)
+
+
+# --- Add Map Dialog ---
+
+func _show_add_map_dialog(sequence_name: String) -> void:
+	"""Show a simple dialog to type a map name and add it to the sequence."""
+	_close_context_menu()
+
+	var dialog := AcceptDialog.new()
+	dialog.title = "Add Map to '%s'" % _format_name(sequence_name)
+	dialog.min_size = Vector2i(350, 120)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 8)
+	dialog.add_child(vbox)
+
+	var lbl := Label.new()
+	lbl.text = "Map folder name:"
+	lbl.add_theme_font_size_override("font_size", 13)
+	vbox.add_child(lbl)
+
+	var input := LineEdit.new()
+	input.placeholder_text = "e.g. My_New_Map"
+	input.custom_minimum_size = Vector2(300, 30)
+	vbox.add_child(input)
+
+	dialog.confirmed.connect(func():
+		var map_name := input.text.strip_edges()
+		if not map_name.is_empty():
+			_add_map_to_sequence(sequence_name, map_name)
+		dialog.queue_free()
+	)
+	dialog.canceled.connect(func():
+		dialog.queue_free()
+	)
+
+	add_child(dialog)
+	dialog.popup_centered()
+	input.grab_focus()
+
 
 ## Auto-expand the sequence containing the loaded map so user sees context.
 func _auto_expand_sequence(sequence_name: String) -> void:

@@ -52,29 +52,6 @@
 				"softbodies"
 			]
 		},
-		"jelly_variants": {
-			"name": "Jelly Variants",
-			"lookup_name": "jelly_variants",
-			"description": "Five soft body specimens: Jelly (balanced), Bouncy (high pressure), Water Balloon (low stiffness), Slime (high damping), Queer Morph (φ>0). Each demonstrates different physics parameter configurations.",
-			"scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
-			"category": "physics",
-			"interaction": "observe",
-			"complexity": "intermediate",
-			"sequence": "softbodies",
-			"qfep_connection": "Parameter space exploration — stiffness, pressure, damping create different morphological behaviors",
-			"tags": [
-				"softbody",
-				"physics",
-				"variants",
-				"comparison",
-				"queer_morphology"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			]
-		},
 		"ca_rule_explorer": {
 			"name": "CA Rule Explorer",
 			"lookup_name": "ca_rule_explorer",
@@ -225,32 +202,6 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
-		},
-		"bias_visualizer": {
-			"name": "Bias Visualizer",
-			"lookup_name": "bias_visualizer",
-			"description": "Word embedding bias made visible. Shows how professions cluster by gender in ML models (doctor→male, nurse→female). Joy Buolamwini's 'Coded Gaze' embodied. The training data encodes our prejudices.",
-			"scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
-			"category": "critical",
-			"interaction": "observe",
-			"complexity": "advanced",
-			"sequence": "criticalalgorithms",
-			"qfep_connection": "Bias is frozen E(S) — entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical φ: questioning whose data, whose categories.",
-			"tags": [
-				"bias",
-				"word_embedding",
-				"critical_algorithms",
-				"coded_gaze",
-				"buolamwini",
-				"fairness",
-				"ml_ethics",
-				"gender_bias"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"criticalalgorithms"
 			]
 		},
 		"vector_addition_demo": {
@@ -441,26 +392,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"harmonic_motion_demo": {
-			"name": "Simple Harmonic Motion Demo",
-			"lookup_name": "harmonic_motion_demo",
-			"description": "Interactive SHM demonstration. Ball oscillates along track showing x = A·sin(ωt + φ). Sliders for Amplitude, Frequency, Phase, Damping. Shows formula and live values.",
-			"scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
-			"category": "wavefunctions",
-			"interaction": "grab",
-			"complexity": "beginner",
-			"tags": [
-				"harmonic",
-				"oscillation",
-				"sine",
-				"physics",
-				"interactive",
-				"slider"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
 		"spring_demo": {
 			"name": "Spring-Mass System Demo",
 			"lookup_name": "spring_demo",
@@ -476,47 +407,6 @@
 				"physics",
 				"interactive",
 				"slider"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"additive_wave_demo": {
-			"name": "Additive Wave Synthesis Demo",
-			"lookup_name": "additive_wave_demo",
-			"description": "Build complex waveforms from sine harmonics. 5 sliders control harmonic amplitudes. Shows combined wave and individual components. Detects square/sawtooth/triangle presets.",
-			"scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
-			"category": "wavefunctions",
-			"interaction": "grab",
-			"complexity": "intermediate",
-			"tags": [
-				"fourier",
-				"additive",
-				"synthesis",
-				"harmonics",
-				"waveform",
-				"interactive",
-				"slider"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"dna_specimen": {
-			"name": "DNA Specimen Jar",
-			"lookup_name": "dna_specimen",
-			"description": "Double helix DNA suspended in luminescent fluid inside a glass specimen jar. Slowly rotates. Demonstrates biological oscillation and helical wave patterns.",
-			"scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
-			"category": "wavefunctions",
-			"interaction": "observe",
-			"complexity": "beginner",
-			"tags": [
-				"dna",
-				"helix",
-				"biology",
-				"oscillation",
-				"specimen",
-				"glass"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -941,15 +831,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"point_is": {
-			"name": "point_is",
-			"lookup_name": "point_is",
-			"description": "point_is.",
-			"scene": "res://commons/text/point_is.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
 		"dome": {
 			"name": "dome",
 			"lookup_name": "dome",
@@ -993,15 +874,6 @@
 			"scene": "res://commons/monitor/infokiosk.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
-		},
-		"player_position_to_console": {
-			"name": "player_position_to_console",
-			"lookup_name": "player_position_to_console",
-			"description": "player_position_to_console.",
-			"scene": "res://commons/displays/player_position_to_console.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
 			"map_sequences": []
 		},
 		"line": {
@@ -2115,7 +1987,7 @@
 			"name": "Animated Cube",
 			"lookup_name": "animated_cube",
 			"description": "Cartesian coordinate system, x y z godot",
-			"scene": "res://commons/primitives/cubes/animated_cube.tscn",
+			"scene": "res://commons/primitives/cubes/animationsine/animated_cube.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -2133,7 +2005,7 @@
 			"name": "Rotation Oscillation Cube",
 			"lookup_name": "rotation_oscillation_cube",
 			"description": "A cube that combines rotation and oscillation with dynamic shader effects",
-			"scene": "res://commons/primitives/cubes/rotation_oscillation_cube.tscn",
+			"scene": "res://commons/artifacts/rotation_oscillation_cube/rotation_oscillation_cube.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -2552,15 +2424,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"probability_sphere": {
-			"name": "Probability Sphere",
-			"lookup_name": "probability_sphere",
-			"description": "A sphere that shows the dance of randomness",
-			"scene": "res://commons/primitives/spheres/probability_sphere.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
 		"coordinate_axes_xy": {
 			"name": "coordinate_axes_xy",
 			"lookup_name": "coordinate_axes_xy",
@@ -2682,7 +2545,7 @@
 			"name": "Rhizomatic Cave System",
 			"lookup_name": "rhizome_cave_system",
 			"description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
-			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -3081,7 +2944,7 @@
 			"name": "Fibonacci Sequences",
 			"lookup_name": "fibonacci_sequences",
 			"description": "Recursive mathematical sequences and spiral visualizations",
-			"scene": "res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn",
+			"scene": "res://algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -3226,7 +3089,7 @@
 			"name": "Koch Curve",
 			"lookup_name": "koch_curve",
 			"description": "Classic Koch snowflake fractal curve generation",
-			"scene": "res://algorithms/recursiveemergence/koch_curve/koch_curve.tscn",
+			"scene": "res://algorithms/fractals/koch_curve/koch_curve.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -3392,15 +3255,6 @@
 			"scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
-		},
-		"marching_cubes_static": {
-			"name": "Marching Cubes Static",
-			"lookup_name": "marching_cubes_static",
-			"description": "Static marching cubes demonstration",
-			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
 			"map_sequences": []
 		},
 		"rhizome_cave_demo": {
@@ -3857,15 +3711,6 @@
 			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
-		},
-		"VRBrush": {
-			"name": "VRBrush",
-			"lookup_name": "VRBrush",
-			"description": "VRBrush",
-			"scene": "res://tools/VRBrush.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
 			"map_sequences": []
 		},
 		"marching_cubes_gallery": {
@@ -4462,87 +4307,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"geometric_crystal": {
-			"name": "Geometric Crystal",
-			"lookup_name": "geometric_crystal",
-			"description": "A crystal that contains spatial algorithms",
-			"scene": "res://commons/primitives/crystals/geometric_crystal.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"array_visualizer": {
-			"name": "Array Visualizer",
-			"lookup_name": "array_visualizer",
-			"description": "Interactive tool for visualizing array structures",
-			"scene": "res://commons/primitives/tools/array_visualizer.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"quantum_dice": {
-			"name": "Quantum Dice",
-			"lookup_name": "quantum_dice",
-			"description": "Dice that demonstrate quantum probability principles",
-			"scene": "res://commons/primitives/dice/quantum_dice.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"chaos_attractor": {
-			"name": "Chaos Attractor",
-			"lookup_name": "chaos_attractor",
-			"description": "Visualization of chaotic systems and strange attractors",
-			"scene": "res://commons/primitives/attractors/chaos_attractor.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"spatial_compass": {
-			"name": "Spatial Compass",
-			"lookup_name": "spatial_compass",
-			"description": "Tool for navigating geometric algorithms",
-			"scene": "res://commons/primitives/tools/spatial_compass.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"dimension_lens": {
-			"name": "Dimension Lens",
-			"lookup_name": "dimension_lens",
-			"description": "Lens for viewing multi-dimensional spaces",
-			"scene": "res://commons/primitives/tools/dimension_lens.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"knowledge_prism": {
-			"name": "Knowledge Prism",
-			"lookup_name": "knowledge_prism",
-			"description": "Prism that refracts complex concepts into understandable forms",
-			"scene": "res://commons/primitives/prisms/knowledge_prism.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"reality_modifier": {
-			"name": "Reality Modifier",
-			"lookup_name": "reality_modifier",
-			"description": "Tool for modifying the fundamental nature of reality",
-			"scene": "res://commons/primitives/tools/reality_modifier.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"concept_synthesizer": {
-			"name": "Concept Synthesizer",
-			"lookup_name": "concept_synthesizer",
-			"description": "Device for synthesizing abstract concepts into tangible forms",
-			"scene": "res://commons/primitives/tools/concept_synthesizer.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
 		"mondrian_2d": {
 			"name": "Mondrian 2D Canvas",
 			"lookup_name": "mondrian_2d",
@@ -4615,15 +4379,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"mondrian_3d_display": {
-			"name": "Mondrian 3D Display",
-			"lookup_name": "mondrian_3d_display",
-			"description": "3D representation of Mondrian compositions with depth and spatial presentation",
-			"scene": "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
 		"grabable_mondrian": {
 			"name": "Grabable Mondrian",
 			"lookup_name": "grabable_mondrian",
@@ -4637,7 +4392,7 @@
 			"name": "Bucket of Tulips",
 			"lookup_name": "bucket_of_tulips",
 			"description": "A charming metal bucket filled with colorful tulips, bringing natural beauty and algorithmic growth patterns to the laboratory space",
-			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
+			"scene": "res://algorithms/computationalbiology/bucketoftulips/bucket_of_tulips.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -5157,15 +4912,6 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
-		"entropy_visualization": {
-			"name": "entropy_visualization",
-			"lookup_name": "entropy_visualization",
-			"description": "entropy_visualization",
-			"scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
 		"buffergeometryparticles": {
 			"name": "Buffer Geometry Particles",
 			"lookup_name": "buffergeometryparticles",
@@ -5611,7 +5357,7 @@
 			"name": "voronoi_grid_3d",
 			"lookup_name": "voronoi_grid_3d",
 			"description": "voronoi_grid_3d",
-			"scene": "res://algorithms/voronoi/voronoi_grid_3D.tscn",
+			"scene": "res://algorithms/computationalgeometry/voronoi_grid_3D.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
@@ -5656,7 +5402,7 @@
 			"name": "renaissancepaintingfloorrattern",
 			"lookup_name": "renaissancepaintingfloorrattern",
 			"description": "renaissancepaintingfloorrattern",
-			"scene": "res://algorithms/geometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn",
+			"scene": "res://algorithms/computationalgeometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn",
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []

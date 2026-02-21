@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://daxg2bsid0uhu"]
+
+[ext_resource type="Script" uid="uid://nesskdh8ugtsq" path="res://algorithms/vectors/weather_vector_field/weather_vector_field.gd" id="1_wvf"]
+
+[node name="WeatherVectorField" type="Node3D"]
+script = ExtResource("1_wvf")

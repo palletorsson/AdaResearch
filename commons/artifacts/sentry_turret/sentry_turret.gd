@@ -318,8 +318,17 @@ func _track_target(delta: float):
 	var target_pos = _get_target_position(current_target)
 	var head_pos = head.global_position
 	
-	# Transform target direction into turret's local space for proper yaw/pitch
+	# Guard: skip if positions are too close (causes singular matrix)
 	var to_target_world = target_pos - head_pos
+	if to_target_world.length_squared() < 0.0001:
+		return
+	
+	# Guard: skip if basis is degenerate (zero scale during animation)
+	var det = global_transform.basis.determinant()
+	if abs(det) < 0.0001:
+		return
+	
+	# Transform target direction into turret's local space for proper yaw/pitch
 	var to_target_local = global_transform.basis.inverse() * to_target_world
 	
 	# Yaw (in local space)

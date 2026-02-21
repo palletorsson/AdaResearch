@@ -1,21 +1,72 @@
 {
 	"sequences": {
 		"forces": {
-			"name": "Vectors & Forces: From Direction to Dynamics",
-			"truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
-			"qfep_term": "dynamics",
-			"qfep_connection": "Vectors define system states—the S in QFEP. Forces introduce change—they drive the temporal evolution φΔE(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
-			"formula": "v = (x,y,z), |v| = √(x²+y²+z²), F = ma → a = F/m → v += a·dt → p += v·dt",
+			"algorithm_paths": {
+				"Forces_1": "res://algorithms/physics/forces/",
+				"Forces_Destruct": "res://algorithms/physics/destruction/",
+				"VectorAddition": "res://algorithms/vectors/addition/",
+				"VectorBasics": "res://algorithms/vectors/basics/",
+				"VectorFieldFlow": "res://algorithms/vectors/flowfield/",
+				"VectorForces": "res://algorithms/vectors/forces/",
+				"VectorMotion": "res://algorithms/vectors/motion/"
+			},
+			"audio": {
+				"ambient_preset": "industrial_hum",
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.IMPACT_THUD"
+				},
+				"volume": -10.0
+			},
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
+				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+			],
+			"completion_rewards": [
+				"spatial_architect_badge",
+				"vector_master_badge",
+				"force_master_badge",
+				"newton_badge",
+				"physics_vector_badge"
+			],
+			"content": [
+				"VectorBasics: Components and magnitude—what vectors are, direction meets quantity",
+				"VectorAddition: Combining vectors head-to-tail, parallelogram law, resultant forces",
+				"VectorSubtraction: Relative position and direction—finding what separates two states",
+				"VectorDotProduct: Projections, angles, and alignment—A·B = |A||B|cos(θ)",
+				"VectorCrossProduct: Orthogonality, torque, and normals—A×B perpendicular to both",
+				"VectorProjectionReflection: Mirrors and collision response—decomposing motion",
+				"Vectors_1: Coordinate systems and spatial reasoning—navigating 3D space",
+				"VectorFieldFlow: Vector fields and fluid dynamics—flow, curl, divergence",
+				"VectorForces: Vectors as physical forces—direction meets physics",
+				"VectorMotion: Velocity and acceleration as vectors—the calculus of motion",
+				"Vectors_5: Advanced vector fields—torque, flow, bouncing balls in 3D",
+				"Vectors_6: Vector exercises—acceleration, deceleration, attraction magnitude",
+				"VectorWorkbench: Universal sandbox—all vector operations in one interactive space",
+				"Forces_1: Newton's Laws—inertia, F=ma, action-reaction made tangible",
+				"Forces_2: Gravity and falling—parabolic trajectories, mass-scaled acceleration",
+				"Forces_3: Friction and drag—resistance proportional to normal force and velocity",
+				"Forces_4: Attractor systems—single and multiple attractors pulling particles",
+				"Forces_5: Force fields—spatial functions mapping position to force, superposition",
+				"Forces_6: Springs and oscillation—Hooke's law, damping, harmonic motion",
+				"Forces_7: Particle systems—many bodies under forces, statistical emergence",
+				"Forces_8: N-body and chaos—gravitational dynamics, three-body problem, deterministic unpredictability",
+				"VectorThrowing: Physics interaction—throwing objects with force vectors",
+				"VectorTorque: Rotational forces from cross products—angular momentum",
+				"Forces_Drone_Game: Applied forces in interactive context—drone control",
+				"Forces_Destruct: Destructible environments—forces break things",
+				"Vector_Exhibition: Gallery showcasing all vector mathematics examples"
+			],
 			"demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
-
 			"description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitude—the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
-			"layer": "behaviors",
-			"prerequisites": ["primitives", "transformation"],
-			"unlocks": ["physicssimulation", "swarmintelligence", "softbodies"],
-
 			"difficulty": "intermediate",
 			"estimated_time": "50-70 minutes",
-
+			"formula": "v = (x,y,z), |v| = √(x²+y²+z²), F = ma → a = F/m → v += a·dt → p += v·dt",
+			"lab_map": "Lab/map_data_post_forces",
+			"layer": "behaviors",
 			"learning_objectives": [
 				"Coordinate systems and spatial reasoning in 3D",
 				"Vector components: x, y, z as decomposed direction",
@@ -34,48 +85,18 @@
 				"Particle systems: many bodies under forces",
 				"N-body dynamics: gravitational chaos from simple rules"
 			],
-
-			"content": [
-				"VectorBasics: Components and magnitude—what vectors are, direction meets quantity",
-				"VectorAddition: Combining vectors head-to-tail, parallelogram law, resultant forces",
-				"VectorSubtraction: Relative position and direction—finding what separates two states",
-				"VectorDotProduct: Projections, angles, and alignment—A·B = |A||B|cos(θ)",
-				"VectorCrossProduct: Orthogonality, torque, and normals—A×B perpendicular to both",
-				"VectorProjectionReflection: Mirrors and collision response—decomposing motion",
-				"Vectors_1: Coordinate systems and spatial reasoning—navigating 3D space",
-				"VectorFieldFlow: Vector fields and fluid dynamics—flow, curl, divergence",
-				"VectorForces: Vectors as physical forces—direction meets physics",
-				"VectorMotion: Velocity and acceleration as vectors—the calculus of motion",
-				"VectorWorkbench: Universal sandbox—all vector operations in one interactive space",
-				"Forces_1: Newton's Laws—inertia, F=ma, action-reaction made tangible",
-				"Forces_2: Gravity and falling—parabolic trajectories, mass-scaled acceleration",
-				"Forces_3: Friction and drag—resistance proportional to normal force and velocity",
-				"Forces_4: Attractor systems—single and multiple attractors pulling particles",
-				"Forces_5: Force fields—spatial functions mapping position to force, superposition",
-				"Forces_6: Springs and oscillation—Hooke's law, damping, harmonic motion",
-				"Forces_7: Particle systems—many bodies under forces, statistical emergence",
-				"Forces_8: N-body and chaos—gravitational dynamics, three-body problem, deterministic unpredictability",
-				"VectorThrowing: Physics interaction—throwing objects with force vectors",
-				"VectorTorque: Rotational forces from cross products—angular momentum",
-				"Forces_Drone_Game: Applied forces in interactive context—drone control",
-				"Forces_Destruct: Destructible environments—forces break things",
-				"Vector_Exhibition: Gallery showcasing all vector mathematics examples"
-			],
-
 			"maps": [
 				"VectorBasics",
-				"VectorAddition",
 				"VectorSubtraction",
-				"VectorDotProduct",
 				"VectorCrossProduct",
 				"VectorProjectionReflection",
-
 				"Vectors_1",
 				"VectorFieldFlow",
 				"VectorForces",
 				"VectorMotion",
+				"Vectors_5",
+				"Vectors_6",
 				"VectorWorkbench",
-
 				"Forces_1",
 				"Forces_2",
 				"Forces_3",
@@ -84,50 +105,26 @@
 				"Forces_6",
 				"Forces_7",
 				"Forces_8",
-
 				"VectorThrowing",
 				"VectorTorque",
 				"Forces_Drone_Game",
 				"Forces_Destruct",
 				"Vector_Exhibition"
 			],
-
-			"axiom_files": [
-				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
-				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+			"name": "Vectors & Forces: From Direction to Dynamics",
+			"prerequisites": [
+				"primitives",
+				"transformation"
 			],
-
-			"algorithm_paths": {
-				"VectorBasics": "res://algorithms/vectors/basics/",
-				"VectorAddition": "res://algorithms/vectors/addition/",
-				"VectorFieldFlow": "res://algorithms/vectors/flowfield/",
-				"VectorForces": "res://algorithms/vectors/forces/",
-				"VectorMotion": "res://algorithms/vectors/motion/",
-				"Forces_1": "res://algorithms/physics/forces/",
-				"Forces_Destruct": "res://algorithms/physics/destruction/"
-			},
-
-			"audio": {
-				"ambient_preset": "industrial_hum",
-				"interactive_sounds": {
-					"teleport": "AudioSynthesizer.IMPACT_THUD"
-				},
-				"volume": -10.0
-			},
-
+			"qfep_connection": "Vectors define system states—the S in QFEP. Forces introduce change—they drive the temporal evolution φΔE(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
+			"qfep_term": "dynamics",
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_forces",
+			"truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
 			"unlock_requirements": [],
-			"completion_rewards": [
-				"spatial_architect_badge",
-				"vector_master_badge",
-				"force_master_badge",
-				"newton_badge",
-				"physics_vector_badge"
+			"unlocks": [
+				"physicssimulation",
+				"swarmintelligence",
+				"softbodies"
 			]
 		}
 	}

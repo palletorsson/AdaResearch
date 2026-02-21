@@ -2,7 +2,7 @@ class_name ArtifactCatalogDesktop3D
 extends Node3D
 
 ## Standalone 3D artifact catalog for desktop testing
-## Includes preview viewport for viewing artifacts without needing GridSystem
+## Uses DesktopArtifactSwitcherOverlay sidebar (same layout as MapCatalog)
 
 @export var next_artifact_key: Key = KEY_N
 @export var toggle_rotation_key: Key = KEY_R
@@ -16,7 +16,7 @@ extends Node3D
 @export var zoom_max: float = 20.0
 @export var auto_rotate_speed: float = 0.3
 
-@onready var _catalog_ui: CanvasLayer = $CatalogUI
+@onready var _overlay: DesktopArtifactSwitcherOverlay = $DesktopArtifactSwitcherOverlay
 @onready var _preview_container: Node3D = $PreviewContainer
 @onready var _preview_camera: Camera3D = $PreviewContainer/PreviewCamera
 @onready var _preview_light: DirectionalLight3D = $PreviewContainer/PreviewLight
@@ -31,17 +31,14 @@ var _orbit_distance: float = 5.0
 var _orbit_focus: Vector3 = Vector3(0, 1.0, 0)
 var _is_orbiting: bool = false
 var _is_panning: bool = false
-var _mouse_captured: bool = false
 
 func _ready():
 	print("ArtifactCatalogDesktop3D: Initializing standalone catalog...")
 	
-	# Connect catalog UI signals
-	if _catalog_ui:
-		var catalog = _catalog_ui.get_node_or_null("ArtifactCatalogUI")
-		if catalog and catalog.has_signal("spawn_requested"):
-			catalog.spawn_requested.connect(_on_artifact_selected)
-			print("ArtifactCatalogDesktop3D: Connected to spawn_requested signal")
+	# Connect overlay sidebar signal
+	if _overlay:
+		_overlay.artifact_selected.connect(_on_artifact_selected)
+		print("ArtifactCatalogDesktop3D: Connected to overlay artifact_selected signal")
 	
 	# Set initial camera from orbit state
 	_update_camera_from_orbit()
@@ -53,12 +50,6 @@ func _refresh_catalog():
 	# Force load standalone registry
 	var artifacts = ArtifactCatalogDataProvider.get_all_artifacts()
 	print("ArtifactCatalogDesktop3D: Loaded %d artifacts" % artifacts.size())
-	
-	# Refresh UI if available
-	if _catalog_ui:
-		var catalog = _catalog_ui.get_node_or_null("ArtifactCatalogUI")
-		if catalog and catalog.has_method("refresh"):
-			catalog.refresh()
 
 func _process(delta: float):
 	# Auto-rotate orbit when not interacting
@@ -69,6 +60,7 @@ func _process(delta: float):
 
 func _on_artifact_selected(lookup_name: String):
 	print("ArtifactCatalogDesktop3D: Artifact selected: %s" % lookup_name)
+	_send_to_claude("artifact_selected", lookup_name)
 	_load_preview_artifact(lookup_name)
 
 func _load_preview_artifact(lookup_name: String):
@@ -150,30 +142,39 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 	"""Get combined AABB of node and all children"""
 	var result = AABB()
 	var first = true
-	
+
 	for child in node.get_children():
+		var child_aabb := AABB()
+		var has_aabb := false
+
 		if child is MeshInstance3D:
-			var mesh = child.mesh
+			var mesh = (child as MeshInstance3D).mesh
 			if mesh:
-				var child_aabb = mesh.get_aabb()
-				# Transform to node space
-				child_aabb = child.transform * child_aabb
-				if first:
-					result = child_aabb
-					first = false
-				else:
-					result = result.merge(child_aabb)
-		
+				child_aabb = child.transform * mesh.get_aabb()
+				has_aabb = true
+		elif child is MultiMeshInstance3D:
+			var mm = child.multimesh
+			if mm and mm.instance_count > 0:
+				child_aabb = child.transform * mm.get_aabb()
+				has_aabb = true
+
+		if has_aabb and child_aabb.size.length() > 0:
+			if first:
+				result = child_aabb
+				first = false
+			else:
+				result = result.merge(child_aabb)
+
 		# Recurse into children
 		if child is Node3D:
-			var child_aabb = _get_combined_aabb(child)
-			if child_aabb.size.length() > 0:
+			var sub_aabb = _get_combined_aabb(child)
+			if sub_aabb.size.length() > 0:
 				if first:
-					result = child_aabb
+					result = sub_aabb
 					first = false
 				else:
-					result = result.merge(child_aabb)
-	
+					result = result.merge(sub_aabb)
+
 	return result
 
 func _animate_preview_in(artifact: Node3D):
@@ -200,12 +201,17 @@ func _input(event: InputEvent):
 				_rotate_preview = not _rotate_preview
 				return
 			if key_event.keycode == next_artifact_key or key_event.physical_keycode == next_artifact_key:
-				_select_next_artifact()
 				return
 
 	# Escape to clear preview
 	if event.is_action_pressed("ui_cancel"):
 		_clear_preview()
+
+	# Skip mouse controls when over sidebar
+	if _overlay and _overlay.is_mouse_over_panel():
+		_is_orbiting = false
+		_is_panning = false
+		return
 
 	# --- Mouse orbit / pan / zoom ---
 	if event is InputEventMouseButton:
@@ -259,26 +265,38 @@ func _reset_orbit() -> void:
 	_update_camera_from_orbit()
 
 
-func _select_next_artifact() -> void:
-	if not _catalog_ui:
-		return
-
-	var catalog = _catalog_ui.get_node_or_null("ArtifactCatalogUI")
-	if not catalog:
-		return
-
-	if catalog.has_method("select_next_artifact"):
-		var lookup_name := str(catalog.select_next_artifact())
-		if not lookup_name.is_empty():
-			_load_preview_artifact(lookup_name)
-
-
 func _is_text_input_focused() -> bool:
 	var viewport := get_viewport()
 	if not viewport:
 		return false
 	var focused := viewport.gui_get_focus_owner()
 	return focused is LineEdit or focused is TextEdit
+
+## Claude Bridge — send selection events to local Claude Code session
+func _send_to_claude(event_type: String, value: String) -> void:
+	var http := HTTPRequest.new()
+	http.name = "ClaudeBridgeHTTP"
+	add_child(http)
+	http.request_completed.connect(func(result: int, code: int, _h: PackedStringArray, _b: PackedByteArray):
+		print("ClaudeBridge: response code=%d result=%d" % [code, result])
+		http.queue_free()
+	)
+	var payload := JSON.stringify({
+		"text": "Artifact catalog: %s — %s" % [event_type, value],
+		"type": event_type,
+		"lookup_name": value,
+		"source": "ArtifactCatalogDesktop3D",
+	})
+	print("ClaudeBridge: sending %s -> %s" % [event_type, value])
+	var err := http.request(
+		"http://127.0.0.1:9876/message",
+		["Content-Type: application/json"],
+		HTTPClient.METHOD_POST,
+		payload
+	)
+	if err != OK:
+		push_warning("ClaudeBridge: request failed with error %s" % error_string(err))
+		http.queue_free()
 
 ## Public API
 func set_rotation_enabled(enabled: bool):

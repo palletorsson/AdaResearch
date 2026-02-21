@@ -121,8 +121,17 @@ class AngularMover:
 
 	var position: Vector3:
 		get:
+			if not is_instance_valid(root):
+				return Vector3.ZERO
 			return root.global_position
 		set(value):
+			if not is_instance_valid(root):
+				return
+			if root.get_parent() is Node3D:
+				var det := (root.get_parent() as Node3D).global_transform.basis.determinant()
+				if abs(det) < 0.0001:
+					root.position = value
+					return
 			root.global_position = value
 
 	func init(parent: Node3D, mat: Material) -> void:

@@ -1,0 +1,82 @@
+{
+	"registry_info": {
+		"name": "color",
+		"description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
+		"category": "color",
+		"theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
+	},
+	"artifacts": {
+		"color_mixing": {
+			"lookup_name": "color_mixing",
+			"scene": "res://algorithms/color/color_mixing/color_mixing.tscn",
+			"name": "Color Mixing",
+			"description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["color", "mixing", "additive", "subtractive", "rgb", "beginner"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"color_scanner": {
+			"lookup_name": "color_scanner",
+			"scene": "res://algorithms/color/color_scanner/color_scanner.tscn",
+			"name": "Color Scanner",
+			"description": "Scans and analyzes color properties of objects and materials. See the numeric values behind what your eyes perceive.",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["color", "scanner", "analysis", "rgb", "hsv"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"colorsheets": {
+			"lookup_name": "colorsheets",
+			"scene": "res://algorithms/color/colorsheets/colorsheets.tscn",
+			"name": "Color Sheets",
+			"description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["color", "reference", "hue", "saturation", "value", "palette"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"glitchcolor": {
+			"lookup_name": "glitchcolor",
+			"scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
+			"name": "Glitch Color",
+			"description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
+			"category": "color",
+			"complexity": "intermediate",
+			"tags": ["color", "glitch", "chromatic_aberration", "corruption", "aesthetics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"k_means_color": {
+			"lookup_name": "k_means_color",
+			"scene": "res://algorithms/color/k_means_color/k_means_color.tscn",
+			"name": "K-Means Color Clustering",
+			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
+			"category": "color",
+			"complexity": "intermediate",
+			"tags": ["color", "k_means", "clustering", "palette_extraction", "machine_learning"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"minimalglitch": {
+			"lookup_name": "minimalglitch",
+			"scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
+			"name": "Minimal Glitch",
+			"description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["color", "glitch", "minimal", "digital", "aesthetics"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

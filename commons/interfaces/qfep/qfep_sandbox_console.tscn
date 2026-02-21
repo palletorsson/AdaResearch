@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cqfepsndbx003"]
+
+[ext_resource type="Script" path="res://commons/interfaces/qfep/qfep_sandbox_console.gd" id="1_script"]
+
+[node name="QFEPSandboxConsole" type="Node3D"]
+script = ExtResource("1_script")

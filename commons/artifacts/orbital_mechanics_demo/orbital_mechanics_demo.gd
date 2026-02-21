@@ -268,11 +268,13 @@ func _update_velocity_arrow():
 	
 	# Orient along velocity
 	if vel_mag > 0.001:
-		var up = Vector3.UP
-		if abs(_satellite_vel.normalized().dot(up)) > 0.99:
-			up = Vector3.FORWARD
-		_velocity_arrow.look_at(_velocity_arrow.global_position + _satellite_vel, up)
-		_velocity_arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
+		var target_pos = _velocity_arrow.global_position + _satellite_vel
+		if _velocity_arrow.global_position.distance_squared_to(target_pos) > 0.0001:
+			var up = Vector3.UP
+			if abs(_satellite_vel.normalized().dot(up)) > 0.99:
+				up = Vector3.FORWARD
+			_velocity_arrow.look_at(target_pos, up)
+			_velocity_arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
 
 func _update_trail():
 	_trail.append(_satellite_pos)
