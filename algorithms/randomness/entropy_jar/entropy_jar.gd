@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	if _is_held:
 		_shake_cooldown -= delta
 		var vel := _jar_body.linear_velocity
-		var accel := (vel - _prev_velocity).length() / max(delta, 0.001)
+		var accel: float = (vel - _prev_velocity).length() / max(delta, 0.001)
 		_prev_velocity = vel
 
 		if accel > shake_threshold and _shake_cooldown <= 0.0:
@@ -431,7 +431,7 @@ func _update_display() -> void:
 	if _entropy_label:
 		_entropy_label.text = "S = %.2f" % _current_entropy
 		# Color shifts from cool blue (ordered) to warm red (mixed)
-		var t := clamp(_current_entropy, 0.0, 1.0)
+		var t: float = clamp(_current_entropy, 0.0, 1.0)
 		_entropy_label.modulate = Color(
 			lerp(0.3, 1.0, t),
 			lerp(0.7, 0.4, t),

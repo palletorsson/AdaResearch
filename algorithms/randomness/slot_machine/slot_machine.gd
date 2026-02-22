@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 			if _reel_stopping[i]:
 				# Decelerating toward target
 				_reel_decel[i] += delta * 8.0
-				var speed := max(spin_speed - _reel_decel[i] * spin_speed, 0.0)
+				var speed: float = max(spin_speed - _reel_decel[i] * spin_speed, 0.0)
 				_reel_angles[i] += speed * delta
 				if speed <= 0.1:
 					# Snap to target
@@ -397,7 +397,7 @@ func _begin_reel_stop(reel_idx: int) -> void:
 		# Adjust angle so deceleration ends near the target
 		var target_angle: float = _reel_target_indices[reel_idx] * (TAU / symbols_per_reel)
 		# Round up current angle to next multiple of TAU, then add target offset
-		var full_rots := ceil(_reel_angles[reel_idx] / TAU) + 1.0
+		var full_rots: float = ceil(_reel_angles[reel_idx] / TAU) + 1.0
 		_reel_angles[reel_idx] = full_rots * TAU + target_angle - TAU * 0.25
 
 
