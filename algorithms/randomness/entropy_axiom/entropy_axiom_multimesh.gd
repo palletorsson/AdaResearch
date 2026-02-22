@@ -22,6 +22,7 @@ var multimesh_instance: MultiMeshInstance3D
 var frame_root: Node3D
 
 func _ready():
+	add_to_group("entropy_axiom")
 	create_multimesh()
 	generate_entropy_grid()
 	create_bounds_frame()

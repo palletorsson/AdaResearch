@@ -1147,9 +1147,10 @@
 		"random_butterflies": {
 			"name": "Random Butterflies",
 			"lookup_name": "random_butterflies",
-			"description": "Interactive butterfly swarm with random movement patterns and procedural animation",
+			"description": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",
 			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
 			"category": "emergence",
+			"interaction": "interactive",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
