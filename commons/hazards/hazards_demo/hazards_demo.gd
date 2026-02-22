@@ -1,11 +1,13 @@
 # ===========================================================================
 # Hazards Demo Scene
-# Test scene for Plasma Critter, Stick Tool, and Octapod Crawler
+# Test scene for Plasma Critter, Stick Tool, Octapod Crawler, and Force Fields
 #
 # Place this scene in the Godot editor and run it to test:
 # - Plasma Critter: walk into it (damage), touch with stick (fire torch)
 # - Stick Tool: pick up and use to interact with plasma
 # - Octapod Crawler: starts as egg-plant, hatches when you approach
+# - Force Fields: walk into them (hazard), bring mushroom to transmute (benefit)
+#   Q-FEP: same potential, different restraint, different manifestation
 #
 # Works in both VR and desktop (flat screen) modes.
 # ===========================================================================
@@ -154,7 +156,7 @@ func _build_info_labels() -> void:
 	_info_label.outline_size = 6
 	_info_label.modulate = Color(0.9, 0.95, 1.0)
 	_info_label.position = Vector3(0, 2.2, -3.0)
-	_info_label.text = "HAZARDS DEMO\nPlasma + Octapod + IK Critters"
+	_info_label.text = "HAZARDS DEMO\nPlasma + Octapod + Force Fields"
 	add_child(_info_label)
 
 	# Health display
@@ -399,11 +401,52 @@ func _spawn_hazards() -> void:
 	mush_label.text = "MUSHROOMS\nGrab + bring to face = eat\nEach color = different effect (10s)"
 	add_child(mush_label)
 
+	# --- Force Fields (dual-nature: hazard → transmuted) ---
+	_spawn_force_fields()
+
 	# --- Some environment props for atmosphere ---
 	_add_glowing_pillar(Vector3(-5.0, 0, -5.0), Color(0.2, 0.1, 0.3))
 	_add_glowing_pillar(Vector3(5.0, 0, -5.0), Color(0.1, 0.2, 0.15))
 	_add_glowing_pillar(Vector3(-5.0, 0, 5.0), Color(0.15, 0.1, 0.2))
 	_add_glowing_pillar(Vector3(5.0, 0, 5.0), Color(0.2, 0.15, 0.1))
+
+func _spawn_force_fields() -> void:
+	# Four force fields along the back-left area of the arena.
+	# Each is a different type. Walk in = damage. Bring a mushroom = transmute.
+	# The mushrooms in the demo are already in group "mushroom" (from EdibleMushroom).
+
+	var force_configs: Array[Dictionary] = [
+		{"type": ForceField.ForceType.FIRE, "pos": Vector3(-6.0, 0, -2.0)},
+		{"type": ForceField.ForceType.ELECTRIC, "pos": Vector3(-6.0, 0, 0.5)},
+		{"type": ForceField.ForceType.TOXIC, "pos": Vector3(-6.0, 0, 3.0)},
+		{"type": ForceField.ForceType.FREEZING, "pos": Vector3(-6.0, 0, 5.5)},
+	]
+
+	for cfg in force_configs:
+		var ff: ForceField = ForceField.new()
+		ff.force_type = cfg["type"] as ForceField.ForceType
+		ff.force_intensity = 0.5  # Gentler for demo
+		ff.zone_radius = 1.2
+		ff.zone_height = 2.2
+		ff.position = cfg["pos"] as Vector3
+		add_child(ff)
+
+		var type_int: int = cfg["type"] as int
+		var force_name: String = ForceTransmutationConfig.get_force_name(type_int)
+		print("[HazardsDemo] Spawned ForceField: %s at %s" % [force_name, str(cfg["pos"])])
+
+	# Force field section label
+	var ff_label := Label3D.new()
+	ff_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	ff_label.font_size = 16
+	ff_label.outline_size = 3
+	ff_label.modulate = Color(1.0, 0.7, 0.4)
+	ff_label.position = Vector3(-6.0, 2.5, 1.5)
+	ff_label.text = "FORCE FIELDS\nWalk in = hazard damage\nBring mushroom in = TRANSMUTE\nSame potential, different restraint"
+	add_child(ff_label)
+
+	print("[HazardsDemo] Spawned 4 force fields — grab a mushroom and bring it in to transmute!")
+
 
 func _add_glowing_pillar(pos: Vector3, color: Color) -> void:
 	var pillar := StaticBody3D.new()

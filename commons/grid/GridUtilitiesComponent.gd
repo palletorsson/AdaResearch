@@ -219,6 +219,11 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				if not bp_data.is_empty():
 					_generate_big_pipe(bp_data.code, bp_data.position)
 				utility_count += 1
+			# Check if this is a Force Field (f: prefix) — dual-nature hazard/benefit
+			elif utility_cell.begins_with("f:"):
+				var y_pos = structure_component.find_highest_y_at(x, z)
+				_place_force_field(utility_cell, x, y_pos, z, total_size)
+				utility_count += 1
 			else:
 				# Handle regular utilities
 				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
@@ -399,6 +404,30 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		if parameters.size() > 0:
 			param_info = " (params: %s)" % str(parameters)
 		print("  Added %s at (%d,%d,%d)%s" % [UtilityRegistry.get_utility_name(utility_type), x, y, z, param_info])
+
+
+## Place a ForceField from notation like f:fire:1.5
+func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: float) -> void:
+	var parts: PackedStringArray = cell_value.split(":")
+	var force_type_str: String = "fire"
+	var intensity: float = 1.0
+
+	if parts.size() > 1:
+		force_type_str = parts[1].strip_edges().to_lower()
+	if parts.size() > 2 and parts[2].is_valid_float():
+		intensity = float(parts[2])
+
+	var force_field: ForceField = ForceField.new()
+	force_field.force_type = ForceTransmutationConfig.parse_force_type(force_type_str) as ForceField.ForceType
+	force_field.force_intensity = intensity
+	force_field.position = Vector3(x, y, z) * total_size
+	force_field.add_to_group("utility")
+
+	parent_node.add_child(force_field)
+	utility_objects[Vector3i(x, y, z)] = force_field
+
+	print("  Added ForceField (%s, intensity=%.1f) at (%d,%d,%d)" % [force_type_str, intensity, x, y, z])
+
 
 # Apply utility parameters
 

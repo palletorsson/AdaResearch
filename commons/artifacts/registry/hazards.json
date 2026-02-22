@@ -1,5 +1,19 @@
 {
 	"artifacts": {
+		"force_field": {
+			"name": "Force Field",
+			"lookup_name": "force_field",
+			"description": "Dual-nature force zone: every hazard is also medicine. Fire warms or burns. Poison kills or reveals. Q-FEP: same potential, different restraint, different manifestation. Bring a mediator object into the field to transmute hazard into benefit.",
+			"scene": "res://commons/hazards/force_field/force_field.tscn",
+			"category": "hazards",
+			"interaction": "immersive",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"qfep_connection": "Central demonstration of Q-FEP: identical potential under different relational constraint produces opposite outcomes. The player experiences this directly.",
+			"tags": ["forces", "transmutation", "qfep", "dual-nature", "vr"],
+			"map_sequences": ["forces"]
+		},
 		"armadillo_droideka": {
 			"name": "Armadillo Droideka",
 			"lookup_name": "armadillo_droideka",

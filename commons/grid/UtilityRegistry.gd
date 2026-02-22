@@ -119,6 +119,13 @@ const UTILITY_TYPES = {
 		"description": "Danger zone that damages player (h:fire, h:vacuum, h:electric, h:toxic, h:radiation, h:death)",
 		"supports_parameters": true  # type:damage_per_tick (e.g. "fire:20", "death")
 	},
+	"f": {
+		"name": "force_field",
+		"file": "",
+		"category": "hazard",
+		"description": "Dual-nature force zone — hazard that transmutes into benefit (f:fire, f:electric:15, f:toxic:10). Q-FEP: same potential, different restraint.",
+		"supports_parameters": true  # type:intensity (e.g. "fire:1.5", "electric:2")
+	},
 	"q": {
 		"name": "quit_cube", 
 		"file": "quit_cube.tscn", 
