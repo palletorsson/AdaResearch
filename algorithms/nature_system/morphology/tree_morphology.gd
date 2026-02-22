@@ -2,7 +2,8 @@
 #
 # Uses the existing LSystem class (utils/lsystem.gd) to produce a rewrite
 # string, then interprets it with a 3D turtle that emits MeshInstance3D
-# tube segments + leaf clusters. All parameters are derived from CritterDNA
+# tube segments. Leaves are batched into a single MultiMeshInstance3D
+# for efficient rendering. All parameters are derived from CritterDNA
 # genes so every tree is unique and breedable.
 #
 # DNA → L-system mapping:
@@ -211,6 +212,7 @@ static func _get_branch_rotation(index: int, count: int, phyllotaxis: float) -> 
 
 ## Interpret an L-system sentence with a 3D turtle, emitting
 ## MeshInstance3D segments for each 'F' or 'S' command.
+## Leaf placements are collected and batched into a single MultiMeshInstance3D.
 static func _interpret_turtle(sentence: String, dna: CritterDNA, params: Dictionary,
 		root: Node3D, mapper: CritterTraitMapper, lod: int) -> void:
 
@@ -240,6 +242,9 @@ static func _interpret_turtle(sentence: String, dna: CritterDNA, params: Diction
 	var depth: int = 0          # Current recursion depth for taper
 
 	var base_seed: int = root.get_instance_id()
+
+	# Leaf collection for MultiMesh batching
+	var leaf_placements: Array[Dictionary] = []
 
 	# Track tip positions for leaf placement
 	var rng := RandomNumberGenerator.new()
@@ -337,12 +342,12 @@ static func _interpret_turtle(sentence: String, dna: CritterDNA, params: Diction
 
 			"]":
 				# Pop state — returning from a branch
-				# Before popping, potentially place a leaf at the tip
+				# Before popping, potentially collect a leaf placement at the tip
 				if leaf_chance > 0.1 and rng.randf() < leaf_chance:
 					leaf_counter += 1
 					if leaf_counter % leaf_skip == 0:
-						_add_leaf(dna, root, mapper, base_seed + segment_count + 10000,
-							pos, dir, radius, lod)
+						_collect_leaf_placements(dna, base_seed + segment_count + 10000,
+							pos, dir, radius, lod, leaf_placements)
 
 				# Also place fruit/flowers at tips if inflorescence > 0
 				if dna.inflorescence > 0.3 and depth >= (params["generations"] as int) - 1:
@@ -364,9 +369,13 @@ static func _interpret_turtle(sentence: String, dna: CritterDNA, params: Diction
 				# Decrease radius
 				radius *= 0.7
 
-	# Place leaves at the final turtle position too
+	# Collect final leaf at the last turtle position
 	if leaf_chance > 0.3 and branch_count > 0:
-		_add_leaf(dna, root, mapper, base_seed + 99999, pos, dir, radius, lod)
+		_collect_leaf_placements(dna, base_seed + 99999, pos, dir, radius, lod, leaf_placements)
+
+	# Batch all leaves into a single MultiMeshInstance3D
+	if leaf_placements.size() > 0:
+		_build_leaf_multimesh(dna, root, mapper, base_seed, leaf_placements, lod)
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -471,70 +480,126 @@ static func _add_branch_segment(dna: CritterDNA, root: Node3D, mapper: CritterTr
 # LEAVES — placed at branch tips
 # ═══════════════════════════════════════════════════════════════
 
-## Add a leaf cluster at a branch tip position.
-static func _add_leaf(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapper,
-		seed_val: int, pos: Vector3, dir: Vector3, branch_radius: float, lod: int) -> void:
+## Collect leaf placement data at a branch tip (for later MultiMesh batching).
+## Each leaf in the cluster becomes one entry in the placements array.
+static func _collect_leaf_placements(dna: CritterDNA, seed_val: int,
+		pos: Vector3, _dir: Vector3, branch_radius: float, lod: int,
+		placements: Array[Dictionary]) -> void:
 
 	# Leaf size relative to branch radius and DNA scale
 	var leaf_size: float = branch_radius * 3.0 + 0.02 * dna.scale
 	var leaf_count: int = clampi(roundi(dna.leaf_density * 4.0), 1, 6)
 
 	if lod <= 1:
-		leaf_count = 1  # Single billboard leaf at low LOD
+		leaf_count = 1  # Fewer leaves at low LOD
 
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_val
 
 	for i in leaf_count:
-		var leaf_node: MeshInstance3D
-
-		if lod >= 2:
-			# High LOD: flat quad leaf with some curvature
-			leaf_node = _create_leaf_quad(dna, leaf_size, rng, lod)
-		else:
-			# Low LOD: simple sphere billboard
-			var sphere := SphereMesh.new()
-			sphere.radius = leaf_size * 0.5
-			sphere.height = leaf_size
-			sphere.radial_segments = 4
-			sphere.rings = 2
-			leaf_node = MeshInstance3D.new()
-			leaf_node.mesh = sphere
-
-		leaf_node.name = "Leaf_%d_%d" % [seed_val, i]
-
 		# Position: spread around the tip
 		var offset: Vector3 = Vector3(
 			rng.randf_range(-leaf_size, leaf_size),
 			rng.randf_range(-leaf_size * 0.3, leaf_size * 0.5),
 			rng.randf_range(-leaf_size, leaf_size)
 		)
-		leaf_node.position = pos + offset
+		var leaf_pos: Vector3 = pos + offset
 
 		# Rotation: point roughly along branch direction with variation
-		leaf_node.rotation = Vector3(
+		var leaf_rot: Vector3 = Vector3(
 			rng.randf_range(-0.5, 0.5),
 			rng.randf_range(0.0, TAU),
 			rng.randf_range(-0.3, 0.3)
 		)
 
-		# Material: primary color (leaf green / foliage color)
-		var mat := mapper.create_material_from_dna(dna, seed_val + i * 100)
-		mat.set_shader_parameter("primary_color", dna.primary_color)
-		mat.set_shader_parameter("secondary_color", dna.primary_color.darkened(0.15))
-		# Leaves are smoother than bark
-		mat.set_shader_parameter("roughness", clampf(dna.roughness - 0.2, 0.05, 0.6))
-		# Subsurface / transparency for leaves
-		if dna.transparency > 0.1:
-			mat.set_shader_parameter("transparency", dna.transparency * 0.5)
-		mapper.apply_variation(mat, seed_val + i * 77)
-		leaf_node.material_override = mat
+		# Per-leaf color drift
+		var drift_r: float = rng.randf_range(-0.04, 0.04)
+		var drift_g: float = rng.randf_range(-0.04, 0.04)
+		var drift_b: float = rng.randf_range(-0.04, 0.04)
 
-		root.add_child(leaf_node)
+		# Per-leaf pattern rotation (0-1 → 0-TAU in shader)
+		var pattern_rot: float = rng.randf()
+
+		placements.append({
+			"position": leaf_pos,
+			"rotation": leaf_rot,
+			"size": leaf_size,
+			"color_drift_r": drift_r,
+			"color_drift_g": drift_g,
+			"color_drift_b": drift_b,
+			"pattern_rot": pattern_rot,
+		})
 
 
-## Create a flat quad leaf mesh with optional curvature.
-static func _create_leaf_quad(dna: CritterDNA, size: float, rng: RandomNumberGenerator, lod: int) -> MeshInstance3D:
+## Build a MultiMeshInstance3D containing all leaves from collected placements.
+static func _build_leaf_multimesh(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapper,
+		base_seed: int, placements: Array[Dictionary], lod: int) -> void:
+
+	var leaf_mesh: Mesh = _create_leaf_mesh(dna, lod)
+	var count: int = placements.size()
+	if count == 0:
+		return
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.use_custom_data = true
+	mm.mesh = leaf_mesh
+	mm.instance_count = count  # Must be set AFTER mesh/format/flags
+
+	for i in count:
+		var p: Dictionary = placements[i]
+		var leaf_pos: Vector3 = p["position"] as Vector3
+		var leaf_rot: Vector3 = p["rotation"] as Vector3
+		var leaf_size: float = p["size"] as float
+
+		var basis := Basis.from_euler(leaf_rot)
+		basis = basis.scaled(Vector3.ONE * leaf_size)
+		mm.set_instance_transform(i, Transform3D(basis, leaf_pos))
+
+		# Per-leaf color tint (drift around white = neutral)
+		var drift_r: float = p["color_drift_r"] as float
+		var drift_g: float = p["color_drift_g"] as float
+		var drift_b: float = p["color_drift_b"] as float
+		mm.set_instance_color(i, Color(
+			clampf(1.0 + drift_r, 0.0, 1.1),
+			clampf(1.0 + drift_g, 0.0, 1.1),
+			clampf(1.0 + drift_b, 0.0, 1.1),
+			1.0
+		))
+
+		# Per-leaf pattern rotation in custom data
+		mm.set_instance_custom_data(i, Color(p["pattern_rot"] as float, 0.0, 0.0, 0.0))
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Leaves"
+	mmi.multimesh = mm
+
+	# Shared leaf material: primary color (foliage)
+	var mat: ShaderMaterial = mapper.create_material_from_dna(dna, base_seed + 80000)
+	mat.set_shader_parameter("primary_color", dna.primary_color)
+	mat.set_shader_parameter("secondary_color", dna.primary_color.darkened(0.15))
+	mat.set_shader_parameter("roughness", clampf(dna.roughness - 0.2, 0.05, 0.6))
+	if dna.transparency > 0.1:
+		mat.set_shader_parameter("transparency", dna.transparency * 0.5)
+	mmi.material_override = mat
+
+	root.add_child(mmi)
+
+
+## Create a canonical leaf mesh (unit-size, to be scaled per instance).
+## High LOD: flat quad with curvature. Low LOD: simple sphere billboard.
+static func _create_leaf_mesh(dna: CritterDNA, lod: int) -> Mesh:
+	if lod < 2:
+		# Low LOD: simple sphere billboard
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.5
+		sphere.height = 1.0
+		sphere.radial_segments = 4
+		sphere.rings = 2
+		return sphere
+
+	# High LOD: flat quad leaf with curvature (unit-size)
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -542,8 +607,7 @@ static func _create_leaf_quad(dna: CritterDNA, size: float, rng: RandomNumberGen
 	var segments_across: int = 2
 
 	var curvature: float = dna.part_curve * 0.3
-	var width: float = size * (0.3 + dna.part_width * 0.4)
-	var length: float = size
+	var width: float = 0.3 + dna.part_width * 0.4  # Unit-size proportions
 
 	# Leaf shape: tapered ellipse
 	for zi in segments_along:
@@ -557,8 +621,8 @@ static func _create_leaf_quad(dna: CritterDNA, size: float, rng: RandomNumberGen
 				width_at_z *= (1.0 - (zt - 0.6) / 0.4)  # Taper to point
 
 			var x: float = (xt - 0.5) * width_at_z * 2.0
-			var y: float = curvature * sin(PI * xt) * sin(PI * zt) * size * 0.1
-			var z: float = zt * length
+			var y: float = curvature * sin(PI * xt) * sin(PI * zt) * 0.1
+			var z: float = zt
 
 			st.set_uv(Vector2(xt, zt))
 			st.set_normal(Vector3.UP)
@@ -567,14 +631,14 @@ static func _create_leaf_quad(dna: CritterDNA, size: float, rng: RandomNumberGen
 	# Index the triangles
 	for zi in range(segments_along - 1):
 		for xi in range(segments_across - 1):
-			var base: int = zi * segments_across + xi
-			var next_row: int = base + segments_across
+			var base_idx: int = zi * segments_across + xi
+			var next_row: int = base_idx + segments_across
 
-			st.add_index(base)
+			st.add_index(base_idx)
 			st.add_index(next_row)
-			st.add_index(base + 1)
+			st.add_index(base_idx + 1)
 
-			st.add_index(base + 1)
+			st.add_index(base_idx + 1)
 			st.add_index(next_row)
 			st.add_index(next_row + 1)
 
@@ -582,9 +646,13 @@ static func _create_leaf_quad(dna: CritterDNA, size: float, rng: RandomNumberGen
 	st.generate_tangents()
 
 	var mesh: Mesh = st.commit()
-	var inst := MeshInstance3D.new()
-	inst.mesh = mesh if mesh else SphereMesh.new() as Mesh
-	return inst
+	if not mesh:
+		# Fallback
+		var fallback := SphereMesh.new()
+		fallback.radius = 0.5
+		return fallback
+
+	return mesh
 
 
 # ═══════════════════════════════════════════════════════════════

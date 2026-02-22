@@ -1,6 +1,7 @@
 # FungusMorphology.gd — Generates fungus/mushroom meshes from CritterDNA
 #
 # Builds mushroom-like forms: cap + stem + gills/pores + spore clusters.
+# Gills and spores use MultiMeshInstance3D for efficient rendering.
 # DNA genes map to:
 #   part_curve     → cap dome shape (flat→convex→conical→inverted)
 #   part_width     → cap diameter
@@ -355,78 +356,98 @@ static func _build_gills(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapp
 	var gill_depth: float = cap_radius * 0.4
 	var gill_inner: float = cap_radius * 0.15  # Inner edge near stem
 
+	# Create canonical gill mesh at angle=0 (along +X axis)
+	var canonical_gill: Mesh = _create_canonical_gill_mesh(gill_inner, cap_radius * 0.9, gill_depth)
+	if not canonical_gill:
+		return
+
+	# Build MultiMesh — each instance is the canonical gill rotated around Y
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.use_custom_data = true
+	mm.mesh = canonical_gill
+	mm.instance_count = gill_count  # Must be set AFTER mesh/format/flags
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_val
+
 	for i in gill_count:
 		var angle: float = TAU * float(i) / float(gill_count)
+		var basis := Basis.from_euler(Vector3(0.0, angle, 0.0))
+		mm.set_instance_transform(i, Transform3D(basis, Vector3.ZERO))
 
-		# Gill as a thin quad
-		var st := SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		# Slight per-gill color drift
+		var drift: float = rng.randf_range(-0.03, 0.03)
+		mm.set_instance_color(i, Color(
+			clampf(1.0 + drift, 0.0, 1.1),
+			clampf(1.0 + drift * 0.5, 0.0, 1.1),
+			clampf(1.0 - drift, 0.0, 1.1),
+			1.0
+		))
+		mm.set_instance_custom_data(i, Color(rng.randf(), 0.0, 0.0, 0.0))
 
-		var inner_x: float = cos(angle) * gill_inner
-		var inner_z: float = sin(angle) * gill_inner
-		var outer_x: float = cos(angle) * cap_radius * 0.9
-		var outer_z: float = sin(angle) * cap_radius * 0.9
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Gills"
+	mmi.multimesh = mm
+	mmi.position = Vector3(0.0, stem_height, 0.0)
 
-		var top_y: float = 0.0
-		var bottom_y: float = -gill_depth
+	# Gill material: tertiary color, slightly translucent
+	var mat: ShaderMaterial = mapper.create_material_from_dna(dna, seed_val)
+	mat.set_shader_parameter("primary_color", dna.tertiary_color)
+	mat.set_shader_parameter("secondary_color", dna.tertiary_color.darkened(0.15))
+	mat.set_shader_parameter("roughness", 0.3)
+	if dna.leaf_density > 0.6:
+		mat.set_shader_parameter("emission_energy", dna.leaf_density * 0.1)
+	mmi.material_override = mat
+	root.add_child(mmi)
 
-		# Two triangles forming a quad
-		var v0: Vector3 = Vector3(inner_x, top_y, inner_z)
-		var v1: Vector3 = Vector3(outer_x, top_y, outer_z)
-		var v2: Vector3 = Vector3(inner_x, bottom_y, inner_z)
-		var v3: Vector3 = Vector3(outer_x, bottom_y * 0.5, outer_z)  # Shorter at edge
 
-		var gill_normal: Vector3 = Vector3(-sin(angle), 0, cos(angle))
+## Create a canonical gill mesh at angle=0 (radial from center along +X).
+## A thin double-sided quad from inner radius to outer radius, hanging downward.
+static func _create_canonical_gill_mesh(inner_radius: float, outer_radius: float, depth: float) -> Mesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-		# Front face
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(0, 0)); st.add_vertex(v0)
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
+	# Gill quad vertices along +X axis, angle=0
+	var v0: Vector3 = Vector3(inner_radius, 0.0, 0.0)       # Inner top
+	var v1: Vector3 = Vector3(outer_radius, 0.0, 0.0)       # Outer top
+	var v2: Vector3 = Vector3(inner_radius, -depth, 0.0)     # Inner bottom
+	var v3: Vector3 = Vector3(outer_radius, -depth * 0.5, 0.0)  # Outer bottom (shorter at edge)
 
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
-		st.set_normal(gill_normal)
-		st.set_uv(Vector2(1, 1)); st.add_vertex(v3)
+	var gill_normal: Vector3 = Vector3(0.0, 0.0, 1.0)
 
-		# Back face
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(0, 0)); st.add_vertex(v0)
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
+	# Front face
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(0, 0)); st.add_vertex(v0)
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
 
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(1, 1)); st.add_vertex(v3)
-		st.set_normal(-gill_normal)
-		st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
+	st.set_normal(gill_normal)
+	st.set_uv(Vector2(1, 1)); st.add_vertex(v3)
 
-		var gill_mesh: Mesh = st.commit()
-		if not gill_mesh:
-			continue
+	# Back face
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(0, 0)); st.add_vertex(v0)
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
 
-		var gill_inst := MeshInstance3D.new()
-		gill_inst.name = "Gill_%d" % i
-		gill_inst.mesh = gill_mesh
-		gill_inst.position = Vector3(0.0, stem_height, 0.0)
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(1, 0)); st.add_vertex(v1)
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(1, 1)); st.add_vertex(v3)
+	st.set_normal(-gill_normal)
+	st.set_uv(Vector2(0, 1)); st.add_vertex(v2)
 
-		# Gill material: tertiary color, slightly translucent
-		var mat := mapper.create_material_from_dna(dna, seed_val + i)
-		mat.set_shader_parameter("primary_color", dna.tertiary_color)
-		mat.set_shader_parameter("secondary_color", dna.tertiary_color.darkened(0.15))
-		mat.set_shader_parameter("roughness", 0.3)
-		if dna.leaf_density > 0.6:
-			mat.set_shader_parameter("emission_energy", dna.leaf_density * 0.1)
-		mapper.apply_variation(mat, seed_val + i * 7)
-		gill_inst.material_override = mat
-		root.add_child(gill_inst)
+	return st.commit()
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -439,6 +460,20 @@ static func _build_spores(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 	var spore_count: int = clampi(roundi(dna.leaf_density * 12.0), 2, 16)
 	var cap_radius: float = dna.part_width * dna.scale * 0.15 * scale_factor
 	var spore_radius: float = 0.005 * dna.scale * scale_factor
+
+	# Canonical unit-radius sphere for all spores
+	var spore_mesh := SphereMesh.new()
+	spore_mesh.radius = 1.0
+	spore_mesh.height = 2.0
+	spore_mesh.radial_segments = 4
+	spore_mesh.rings = 2
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.use_custom_data = true
+	mm.mesh = spore_mesh
+	mm.instance_count = spore_count  # Must be set AFTER mesh/format/flags
 
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_val
@@ -454,24 +489,32 @@ static func _build_spores(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 			sin(angle) * radial_dist
 		)
 
-		var spore_mesh := SphereMesh.new()
-		spore_mesh.radius = spore_radius * rng.randf_range(0.5, 1.5)
-		spore_mesh.height = spore_mesh.radius * 2.0
-		spore_mesh.radial_segments = 4
-		spore_mesh.rings = 2
+		# Per-spore size variation via transform scale
+		var size: float = spore_radius * rng.randf_range(0.5, 1.5)
+		var basis := Basis.IDENTITY.scaled(Vector3.ONE * size)
+		mm.set_instance_transform(i, Transform3D(basis, spore_pos))
 
-		var spore_inst := MeshInstance3D.new()
-		spore_inst.name = "Spore_%d" % i
-		spore_inst.mesh = spore_mesh
-		spore_inst.position = spore_pos
+		# Slight per-spore color drift
+		var drift: float = rng.randf_range(-0.05, 0.05)
+		mm.set_instance_color(i, Color(
+			clampf(1.0 + drift, 0.0, 1.1),
+			clampf(1.0 + drift * 0.8, 0.0, 1.1),
+			clampf(1.0 - drift * 0.5, 0.0, 1.1),
+			1.0
+		))
+		mm.set_instance_custom_data(i, Color(rng.randf(), 0.0, 0.0, 0.0))
 
-		# Spore material: tertiary color with slight glow
-		var mat := mapper.create_material_from_dna(dna, seed_val + i * 100)
-		mat.set_shader_parameter("primary_color", dna.tertiary_color.lightened(0.3))
-		mat.set_shader_parameter("emission_energy", 0.1 + dna.iridescence * 0.3)
-		mat.set_shader_parameter("transparency", 0.3)
-		spore_inst.material_override = mat
-		root.add_child(spore_inst)
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Spores"
+	mmi.multimesh = mm
+
+	# Spore material: tertiary color with slight glow
+	var mat: ShaderMaterial = mapper.create_material_from_dna(dna, seed_val)
+	mat.set_shader_parameter("primary_color", dna.tertiary_color.lightened(0.3))
+	mat.set_shader_parameter("emission_energy", 0.1 + dna.iridescence * 0.3)
+	mat.set_shader_parameter("transparency", 0.3)
+	mmi.material_override = mat
+	root.add_child(mmi)
 
 
 # ═══════════════════════════════════════════════════════════════

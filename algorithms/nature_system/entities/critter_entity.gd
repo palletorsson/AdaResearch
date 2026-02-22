@@ -31,6 +31,7 @@ extends Node3D
 # ─────────────────────────────────────────────────────────────
 var _trait_mapper: CritterTraitMapper = null
 var _mesh_instances: Array[MeshInstance3D] = []
+var _multimesh_instances: Array[MultiMeshInstance3D] = []
 var _bond_level: float = 0.0  ## Player bond (0-1), drives transmutation overlay
 var _age: float = 0.0
 var _energy: float = 100.0
@@ -123,9 +124,10 @@ func _apply_gameplay_traits() -> void:
 # MESH & MATERIAL MANAGEMENT
 # ═══════════════════════════════════════════════════════════════
 
-## Recursively collect all MeshInstance3D children.
+## Recursively collect all MeshInstance3D and MultiMeshInstance3D children.
 func _collect_mesh_instances() -> void:
 	_mesh_instances.clear()
+	_multimesh_instances.clear()
 	_collect_meshes_recursive(self)
 
 
@@ -133,6 +135,9 @@ func _collect_meshes_recursive(node: Node) -> void:
 	if node is MeshInstance3D:
 		if not node in _mesh_instances:
 			_mesh_instances.append(node)
+	elif node is MultiMeshInstance3D:
+		if not node in _multimesh_instances:
+			_multimesh_instances.append(node)
 	for child in node.get_children():
 		_collect_meshes_recursive(child)
 
@@ -162,9 +167,17 @@ func _apply_materials() -> void:
 
 		mesh.material_override = material
 
+	# MultiMeshInstance3D nodes: apply bond overlay to their existing material
+	# (morphology generators already set material_override with the base material)
+	for mmi in _multimesh_instances:
+		if not is_instance_valid(mmi):
+			continue
+		if _bond_level > 0.01 and mmi.material_override is ShaderMaterial:
+			_trait_mapper.apply_bond_overlay(mmi.material_override, dna, _bond_level)
+
 	if debug_mode:
-		print("[CritterEntity: %s] Applied materials to %d meshes (seed: %d)" % [
-			name, _mesh_instances.size(), base_seed
+		print("[CritterEntity: %s] Applied materials to %d meshes + %d multimeshes (seed: %d)" % [
+			name, _mesh_instances.size(), _multimesh_instances.size(), base_seed
 		])
 
 
@@ -227,6 +240,10 @@ func _update_bond_visuals() -> void:
 	for mesh in _mesh_instances:
 		if is_instance_valid(mesh) and mesh.material_override is ShaderMaterial:
 			_trait_mapper.apply_bond_overlay(mesh.material_override, dna, _bond_level)
+
+	for mmi in _multimesh_instances:
+		if is_instance_valid(mmi) and mmi.material_override is ShaderMaterial:
+			_trait_mapper.apply_bond_overlay(mmi.material_override, dna, _bond_level)
 
 
 # ═══════════════════════════════════════════════════════════════

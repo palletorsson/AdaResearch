@@ -98,7 +98,7 @@ static func rebuild(
 	# Remove existing mesh children (preserve non-mesh children like Area3D, etc.)
 	var to_remove: Array[Node] = []
 	for child in entity.get_children():
-		if child is MeshInstance3D or child.has_meta("morphology_root"):
+		if child is MeshInstance3D or child is MultiMeshInstance3D or child.has_meta("morphology_root"):
 			to_remove.append(child)
 
 	for child in to_remove:
@@ -396,22 +396,34 @@ static func _add_fungus_decorations(
 # UTILITY
 # ═══════════════════════════════════════════════════════════════
 
-## Estimate the AABB of all mesh children.
+## Estimate the AABB of all mesh children (MeshInstance3D + MultiMeshInstance3D).
 static func _estimate_aabb(root: Node3D) -> AABB:
 	var combined := AABB()
 	var found_any: bool = false
 
 	for child in root.get_children():
+		var child_aabb := AABB()
+		var valid: bool = false
+
 		if child is MeshInstance3D:
 			var mi: MeshInstance3D = child as MeshInstance3D
 			if mi.mesh:
-				var mesh_aabb: AABB = mi.mesh.get_aabb()
-				mesh_aabb.position += mi.position
-				if found_any:
-					combined = combined.merge(mesh_aabb)
-				else:
-					combined = mesh_aabb
-					found_any = true
+				child_aabb = mi.mesh.get_aabb()
+				child_aabb.position += mi.position
+				valid = true
+		elif child is MultiMeshInstance3D:
+			var mmi: MultiMeshInstance3D = child as MultiMeshInstance3D
+			if mmi.multimesh and mmi.multimesh.instance_count > 0:
+				child_aabb = mmi.multimesh.get_aabb()
+				child_aabb.position += mmi.position
+				valid = true
+
+		if valid:
+			if found_any:
+				combined = combined.merge(child_aabb)
+			else:
+				combined = child_aabb
+				found_any = true
 
 	if not found_any:
 		# Default small AABB

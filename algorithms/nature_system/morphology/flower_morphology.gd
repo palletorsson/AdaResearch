@@ -7,8 +7,10 @@
 #   - Stem
 #   - Inflorescence (when inflorescence > 0): multiple sub-flowers on a stem
 #
-# Each petal gets its own ShaderMaterial via CritterTraitMapper for
-# per-petal color variation and unique pattern seeds.
+# Petals use MultiMeshInstance3D — one draw call for all petals in a bloom.
+# Per-petal color variation is encoded via MultiMesh instance COLOR,
+# and pattern rotation via INSTANCE_CUSTOM.r. The critter_dna.gdshader
+# reads these varyings to produce per-petal uniqueness.
 #
 # Adapted from queerbreader's PetalGenerator.gd — same Bézier approach
 # but driven by CritterDNA Resource fields instead of individual exports.
@@ -53,10 +55,19 @@ static func _build_single_bloom(dna: CritterDNA, root: Node3D, mapper: CritterTr
 	# ── Stem ──
 	_build_stem(dna, root, mapper, base_seed, scale_factor)
 
-	# ── Petal rings ──
+	# ── Petal rings → MultiMesh ──
 	var ring_count := clampi(roundi(dna.segments), 1, 3)
 	var petals_per_ring := clampi(roundi(dna.symmetry), 3, 12)
-	var petal_mesh := _generate_petal_mesh(dna, lod)
+	var total_petals: int = ring_count * petals_per_ring
+	var petal_mesh: Mesh = _generate_petal_mesh(dna, lod)
+
+	# Collect per-petal data before creating MultiMesh
+	var transforms: Array[Transform3D] = []
+	var colors: Array[Color] = []
+	var custom_data: Array[Color] = []
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = base_seed
 
 	for ring_idx in ring_count:
 		var ring_t: float = float(ring_idx) / maxf(ring_count - 1.0, 1.0)
@@ -72,21 +83,50 @@ static func _build_single_bloom(dna: CritterDNA, root: Node3D, mapper: CritterTr
 		for petal_idx in petals_per_ring:
 			var angle: float = (TAU / petals_per_ring) * petal_idx + ring_rotation_offset
 
-			var petal_node := MeshInstance3D.new()
-			petal_node.name = "Petal_R%d_P%d" % [ring_idx, petal_idx]
-			petal_node.mesh = petal_mesh
-
-			# Position: rotate around Y, then tilt outward
+			# Build transform: rotate around Y, then tilt outward, then scale
 			var tilt_rad: float = deg_to_rad(ring_angle_deg + ring_tilt_offset)
-			petal_node.rotation = Vector3(tilt_rad, angle, 0.0)
-			petal_node.scale = Vector3.ONE * ring_scale
+			var basis := Basis.from_euler(Vector3(tilt_rad, angle, 0.0))
+			basis = basis.scaled(Vector3.ONE * ring_scale)
+			transforms.append(Transform3D(basis, Vector3.ZERO))
 
-			# Unique material per petal
-			var mat := mapper.create_material_from_dna(dna, base_seed + ring_idx * 100 + petal_idx)
-			mapper.apply_variation(mat, base_seed + ring_idx * 1000 + petal_idx * 7)
-			petal_node.material_override = mat
+			# Per-petal color drift (±0.04 RGB, was apply_variation)
+			var drift_r: float = rng.randf_range(-0.04, 0.04)
+			var drift_g: float = rng.randf_range(-0.04, 0.04)
+			var drift_b: float = rng.randf_range(-0.04, 0.04)
+			colors.append(Color(
+				clampf(1.0 + drift_r, 0.0, 1.1),
+				clampf(1.0 + drift_g, 0.0, 1.1),
+				clampf(1.0 + drift_b, 0.0, 1.1),
+				1.0
+			))
 
-			root.add_child(petal_node)
+			# Per-petal pattern rotation (0-1 maps to 0-TAU in shader)
+			var pattern_rot: float = rng.randf()
+			custom_data.append(Color(pattern_rot, 0.0, 0.0, 0.0))
+
+	# Build MultiMesh
+	if total_petals > 0:
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.use_colors = true
+		mm.use_custom_data = true
+		mm.mesh = petal_mesh
+		mm.instance_count = total_petals  # Must be set AFTER mesh/format/flags
+
+		for i in total_petals:
+			mm.set_instance_transform(i, transforms[i])
+			mm.set_instance_color(i, colors[i])
+			mm.set_instance_custom_data(i, custom_data[i])
+
+		var mmi := MultiMeshInstance3D.new()
+		mmi.name = "Petals"
+		mmi.multimesh = mm
+
+		# Shared material for all petals — base DNA material, no per-instance variation
+		var mat: ShaderMaterial = mapper.create_material_from_dna(dna, base_seed)
+		mmi.material_override = mat
+
+		root.add_child(mmi)
 
 	# ── Center / stamen ──
 	_build_center(dna, root, mapper, base_seed, scale_factor)

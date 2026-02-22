@@ -52,10 +52,23 @@ uniform vec4 rim_color : source_color = vec4(0.8, 0.9, 1.0, 1.0);
 
 
 // ═══════════════════════════════════════════════════════════════
-// VERTEX — Wave animation
+// MULTIMESH INSTANCE DATA — passed from vertex to fragment
+// When not using MultiMesh, COLOR=(1,1,1,1), INSTANCE_CUSTOM=(0,0,0,0)
+// ═══════════════════════════════════════════════════════════════
+
+varying vec4 v_instance_color;
+varying vec4 v_instance_custom;
+
+
+// ═══════════════════════════════════════════════════════════════
+// VERTEX — Wave animation + instance data passthrough
 // ═══════════════════════════════════════════════════════════════
 
 void vertex() {
+    // Pass MultiMesh per-instance data to fragment
+    v_instance_color = COLOR;           // Per-instance tint (white = no effect)
+    v_instance_custom = INSTANCE_CUSTOM; // .r = extra pattern rotation (0-1)
+
     if (wave_intensity > 0.01) {
         vec2 dir = normalize(wave_direction);
         float phase = dot(VERTEX.xz, dir) * wave_frequency + TIME * wave_speed;
@@ -346,8 +359,13 @@ void fragment() {
     float color_mixing = effect_flags.w;
 
     // UV processing with rotation and scale
+    // Instance custom data: .r adds extra pattern rotation (0-1 → 0-TAU)
+    float total_rotation = pattern_rotation;
+    if (v_instance_custom.r > 0.001) {
+        total_rotation += v_instance_custom.r * 6.28318;
+    }
     vec2 base_uv = UV * pattern_scale;
-    vec2 rotated_uv = rotate2d(pattern_rotation) * base_uv;
+    vec2 rotated_uv = rotate2d(total_rotation) * base_uv;
 
     // Subtle time-based distortion (skip at low LOD)
     vec2 final_uv = rotated_uv;
@@ -421,6 +439,11 @@ void fragment() {
         float rim = pow(1.0 - view_dot, 3.0) * rim_light;
         base_color = mix(base_color, rim_color.rgb, rim * 0.6);
     }
+
+    // ── MultiMesh per-instance color tint ──
+    // When used in MultiMesh, v_instance_color carries per-instance tint.
+    // When used as individual MeshInstance3D, v_instance_color is (1,1,1,1) — no effect.
+    base_color *= v_instance_color.rgb;
 
     // ── Final PBR output ──
     ALBEDO = base_color;
