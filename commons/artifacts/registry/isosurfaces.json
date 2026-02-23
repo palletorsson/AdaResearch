@@ -59,7 +59,11 @@
 				"working"
 			],
 			"include_in_map_data": true,
-			"map_ready": true
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces"
 		},
 		"fountain_demo": {
 			"lookup_name": "fountain_demo",

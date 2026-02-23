@@ -20,6 +20,8 @@
 				"step_interval": "Time between transitions (default 1.5s)"
 			},
 			"tags": ["markov", "probability", "stochastic", "grammar", "procedural"],
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": ["grammar_systems"]
 		},
 		"markov_chains_tree": {
@@ -43,6 +45,8 @@
 				"add_leaves": "Add leaf meshes at branch tips"
 			},
 			"tags": ["markov", "tree", "growth", "procedural", "organic", "grammar"],
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": ["grammar_systems"]
 		}
 	},

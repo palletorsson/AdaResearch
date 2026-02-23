@@ -7,6 +7,8 @@
 			"scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
 			"interaction": "observe",
 			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -19,6 +21,8 @@
 			"scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
 			"interaction": "observe",
 			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -31,6 +35,8 @@
 			"scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
 			"interaction": "observe",
 			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -43,6 +49,8 @@
 			"scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
 			"interaction": "observe",
 			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -55,6 +63,8 @@
 			"scene": "res://algorithms/machinelearning/noc_ch09/9_5_evolving_bloops_vr.tscn",
 			"interaction": "observe",
 			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -67,6 +77,8 @@
 			"scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
 			"interaction": "observe",
 			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -79,6 +91,8 @@
 			"scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
 			"interaction": "observe",
 			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -90,7 +104,13 @@
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
 			"interaction": "observe",
-			"complexity": "advanced"
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"sequence": "machinelearning"
 		},
 		"time_series_analysis": {
 			"name": "Time Series Analysis",
@@ -98,7 +118,13 @@
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
 			"interaction": "observe",
-			"complexity": "intermediate"
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"sequence": "machinelearning"
 		},
 		"anomaly_detection": {
 			"name": "Anomaly Detection",
@@ -107,6 +133,8 @@
 			"scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
 			"interaction": "observe",
 			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
@@ -119,6 +147,8 @@
 			"scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
 			"interaction": "observe",
 			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
