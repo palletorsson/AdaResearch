@@ -157,13 +157,21 @@ static func _load_single_sequence(seq_name: String, report: ValidationReport) ->
 		return
 	file.close()
 	
-	var data = json.data
+	var data_variant: Variant = json.data
+	if not (data_variant is Dictionary):
+		return
+	var data: Dictionary = data_variant
 	var seq_info = SequenceInfo.new()
 	seq_info.name = seq_name
 	
 	# Navigate to actual sequence data
-	var sequences_wrapper = data.get("sequences", {})
-	var seq_data = sequences_wrapper.get(seq_name, {})
+	var seq_data: Dictionary = {}
+	var sequences_wrapper: Variant = data.get("sequences", {})
+	if sequences_wrapper is Dictionary:
+		var sequence_dict: Dictionary = sequences_wrapper
+		var seq_variant: Variant = sequence_dict.get(seq_name, {})
+		if seq_variant is Dictionary:
+			seq_data = seq_variant
 	if seq_data.is_empty():
 		seq_data = data
 	
