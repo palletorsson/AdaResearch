@@ -28,6 +28,13 @@ SEQUENCES_DIR = MAPS_DIR / "sequences"
 # (e.g. artifacts bigger than the grid)
 DIMENSION_EXCEPTIONS = {"Noise_Voxel", "Random_Definition"}
 
+# Team policy (default):
+# - Spawn safety is map-design specific and should not fail validation.
+# - Artifacts on void are allowed for floating/staged compositions.
+# These can still be enforced ad hoc via CLI flags.
+ENFORCE_SPAWN_SAFE = False
+ENFORCE_NO_ARTIFACTS_ON_VOID = False
+
 # ---------------------------------------------------------------------------
 # Registry loader
 # ---------------------------------------------------------------------------
@@ -316,7 +323,8 @@ def validate_map(path: Path) -> dict:
                 if cell_height(row[c]) != 1:
                     spawn_safe = False
     
-    checks["spawn_safe"] = spawn_safe or has_spawn_override
+    spawn_safe_pass = spawn_safe or has_spawn_override
+    checks["spawn_safe"] = spawn_safe_pass if ENFORCE_SPAWN_SAFE else True
 
     # 5. Has teleporter
     has_teleporter = False
@@ -369,7 +377,7 @@ def validate_map(path: Path) -> dict:
                 void_violations.append(f"{parsed['name']} at ({x},{z}) on void")
 
     checks["no_artifacts_on_void"] = {
-        "pass": len(void_violations) == 0,
+        "pass": len(void_violations) == 0 if ENFORCE_NO_ARTIFACTS_ON_VOID else True,
         "violations": void_violations,
     }
 
@@ -653,12 +661,26 @@ def main():
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show all details")
     parser.add_argument("--grade", help="Filter by grade (A/B/C/F)")
+    parser.add_argument(
+        "--enforce-spawn-safe",
+        action="store_true",
+        help="Treat spawn safety as a failing check (disabled by default)",
+    )
+    parser.add_argument(
+        "--enforce-no-artifacts-on-void",
+        action="store_true",
+        help="Treat artifacts on void cells as a failing check (disabled by default)",
+    )
 
     args = parser.parse_args()
 
     if not args.path and not args.all and not args.sequence:
         parser.print_help()
         return 1
+
+    global ENFORCE_SPAWN_SAFE, ENFORCE_NO_ARTIFACTS_ON_VOID
+    ENFORCE_SPAWN_SAFE = args.enforce_spawn_safe
+    ENFORCE_NO_ARTIFACTS_ON_VOID = args.enforce_no_artifacts_on_void
 
     # Collect maps
     if args.all:
