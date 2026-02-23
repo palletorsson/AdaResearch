@@ -25,9 +25,6 @@ albedo_color = Color(1, 0, 1, 1)
 [node name="PickUpCube" type="Node3D"]
 script = ExtResource("1_oqxi0")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.359572, 1.74679)
-
 [node name="DetectionArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
 collision_layer = 0

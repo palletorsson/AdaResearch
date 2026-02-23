@@ -6,6 +6,9 @@ extends Node
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 @export var multimesh_path: NodePath = ""
+@export var debug_logs: bool = false
+@export var auto_cycle_enabled: bool = true
+@export var cycle_interval_seconds: float = 10.0
 
 const DEFAULT_PALETTE_SEQUENCE := [
 	"starry_night",
@@ -22,12 +25,15 @@ var gradient_pattern_names: Array = []
 var pattern_names: Array = []
 
 # Manual pattern control
-var auto_cycle_enabled := true
-
 # MultiMesh references
 var multimesh_instance: MultiMeshInstance3D = null
 var multimesh: MultiMesh = null
 var grid_structure: GridStructureComponent = null
+var _cycle_active := false
+
+func _log(message: String) -> void:
+	if debug_logs:
+		print(message)
 
 func _initialize_pattern_names():
 	if pattern_names.size() > 0:
@@ -65,7 +71,7 @@ func _get_palette_colors(palette_name: String) -> Array:
 	return []
 
 func _ready():
-	print("ColorGrid: Ready to cycle through vibrant queer patterns! ðŸŒˆ")
+	_log("ColorGrid: Ready to cycle through palette patterns")
 	_initialize_pattern_names()
 
 	# Wait one second before checking for MultiMesh
@@ -73,13 +79,13 @@ func _ready():
 
 	# Find MultiMesh
 	if not find_multimesh():
-		print("ColorGrid: WARNING - Could not find MultiMeshInstance3D")
+		_log("ColorGrid: WARNING - Could not find MultiMeshInstance3D")
 		return
 
 	# Apply initial pattern
 	if pattern_names.size() > 0:
 		_apply_named_pattern(pattern_names[current_pattern_index])
-		print("ColorGrid: Applied initial pattern: %s" % pattern_names[current_pattern_index])
+		_log("ColorGrid: Applied initial pattern: %s" % pattern_names[current_pattern_index])
 
 	# Connect to next cubes if they exist
 	connect_to_next_cubes()
@@ -89,40 +95,40 @@ func _ready():
 		start_pattern_cycling()
 
 func find_multimesh() -> bool:
-	print("ColorGrid: Searching for MultiMesh...")
+	_log("ColorGrid: Searching for MultiMesh...")
 
 	# Try exported path first
 	if not multimesh_path.is_empty():
-		print("ColorGrid: Trying path: %s" % multimesh_path)
+		_log("ColorGrid: Trying path: %s" % multimesh_path)
 		multimesh_instance = get_node_or_null(multimesh_path)
 		if multimesh_instance:
-			print("ColorGrid: Found via exported path!")
+			_log("ColorGrid: Found via exported path!")
 
 	# Search parent hierarchy
 	if not multimesh_instance:
-		print("ColorGrid: Searching parent hierarchy...")
+		_log("ColorGrid: Searching parent hierarchy...")
 		multimesh_instance = _find_multimesh_recursive(get_parent())
 		if multimesh_instance:
-			print("ColorGrid: Found in parent hierarchy!")
+			_log("ColorGrid: Found in parent hierarchy!")
 
 	# Search scene root
 	if not multimesh_instance:
-		print("ColorGrid: Searching scene root...")
+		_log("ColorGrid: Searching scene root...")
 		multimesh_instance = _find_multimesh_recursive(get_tree().current_scene)
 		if multimesh_instance:
-			print("ColorGrid: Found in scene root!")
+			_log("ColorGrid: Found in scene root!")
 
 	if multimesh_instance:
-		print("ColorGrid: MultiMeshInstance3D found: %s" % multimesh_instance.name)
+		_log("ColorGrid: MultiMeshInstance3D found: %s" % multimesh_instance.name)
 		multimesh = multimesh_instance.multimesh
 		if multimesh:
-			print("ColorGrid: MultiMesh resource exists")
-			print("ColorGrid: Instance count: %d" % multimesh.instance_count)
-			print("ColorGrid: use_colors: %s" % multimesh.use_colors)
+			_log("ColorGrid: MultiMesh resource exists")
+			_log("ColorGrid: Instance count: %d" % multimesh.instance_count)
+			_log("ColorGrid: use_colors: %s" % multimesh.use_colors)
 
 			# Enable per-instance colors if not already enabled
 			if not multimesh.use_colors:
-				print("ColorGrid: WARNING - use_colors was false, enabling it now...")
+				_log("ColorGrid: WARNING - use_colors was false, enabling it now...")
 				multimesh.use_colors = true
 
 			# Try to find GridStructureComponent for position info
@@ -132,9 +138,9 @@ func find_multimesh() -> bool:
 
 			return true
 		else:
-			print("ColorGrid: ERROR - MultiMeshInstance3D found but multimesh resource is null!")
+			_log("ColorGrid: ERROR - MultiMeshInstance3D found but multimesh resource is null!")
 	else:
-		print("ColorGrid: ERROR - No MultiMeshInstance3D found in scene!")
+		_log("ColorGrid: ERROR - No MultiMeshInstance3D found in scene!")
 
 	return false
 
@@ -168,42 +174,49 @@ func _apply_named_pattern(pattern_name: String) -> void:
 	elif SPECIAL_PATTERN_NAMES.has(pattern_name):
 		apply_sphere_reflection(pattern_name)
 	else:
-		print("ColorGrid: WARNING - Unknown pattern '%s'" % pattern_name)
+		_log("ColorGrid: WARNING - Unknown pattern '%s'" % pattern_name)
 
 func start_pattern_cycling():
 	_initialize_pattern_names()
+	if _cycle_active:
+		return
+
 	if pattern_names.is_empty():
-		print("ColorGrid: No patterns available - pattern cycling aborted")
+		_log("ColorGrid: No patterns available - pattern cycling aborted")
 		return
 
 	if not multimesh or multimesh.instance_count == 0:
-		print("ColorGrid: No MultiMesh found - pattern cycling aborted")
+		_log("ColorGrid: No MultiMesh found - pattern cycling aborted")
 		return
 
-	while true:
+	_cycle_active = true
+	while _cycle_active and auto_cycle_enabled and is_inside_tree():
 		var pattern_name = pattern_names[current_pattern_index]
-		print("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
+		_log("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
 		_apply_named_pattern(pattern_name)
 
-		await get_tree().create_timer(10.0).timeout
+		await get_tree().create_timer(max(cycle_interval_seconds, 0.1)).timeout
+		if not _cycle_active or not auto_cycle_enabled:
+			break
 
 		if pattern_names.is_empty():
 			_initialize_pattern_names()
 			if pattern_names.is_empty():
 				break
 		current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
+	_cycle_active = false
 
 func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String):
 	if not multimesh:
-		print("ColorGrid: ERROR - No multimesh!")
+		_log("ColorGrid: ERROR - No multimesh!")
 		return
 
 	if palette_colors.is_empty():
-		print("ColorGrid: ERROR - No palette colors!")
+		_log("ColorGrid: ERROR - No palette colors!")
 		return
 
 	if not multimesh.use_colors:
-		print("ColorGrid: ERROR - MultiMesh use_colors is not enabled!")
+		_log("ColorGrid: ERROR - MultiMesh use_colors is not enabled!")
 		return
 
 	var instance_count = multimesh.instance_count
@@ -230,29 +243,32 @@ func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String):
 				sample_colors.append("i%d=%s" % [i, color_value])
 
 	# Debug: Verify MultiMesh configuration
-	print("ColorGrid: ðŸ” MultiMesh.use_colors = %s" % multimesh.use_colors)
-	print("ColorGrid: ðŸ” MultiMesh.instance_count = %d" % multimesh.instance_count)
+	_log("ColorGrid: MultiMesh.use_colors = %s" % multimesh.use_colors)
+	_log("ColorGrid: MultiMesh.instance_count = %d" % multimesh.instance_count)
 
 	# CRITICAL: Adjust material to make instance colors visible
 	_adjust_material_for_colors()
 
-	print("ColorGrid: âœ… Applied palette '%s' - set %d colors on %d instances" % [pattern_name, colors_applied, instance_count])
-	print("ColorGrid: ðŸŽ¨ Sample colors: %s" % ", ".join(sample_colors))
+	_log("ColorGrid: Applied palette '%s' - set %d colors on %d instances" % [pattern_name, colors_applied, instance_count])
+	_log("ColorGrid: Sample colors: %s" % ", ".join(sample_colors))
 
 func _adjust_material_for_colors():
 	"""Adjust shader parameters to make instance colors visible"""
 	if not multimesh_instance:
-		print("ColorGrid: âŒ No multimesh_instance found!")
+		_log("ColorGrid: No multimesh_instance found")
 		return
 
 	var material = multimesh_instance.material_override
 	if not material:
-		print("ColorGrid: âŒ No material_override found on MultiMeshInstance3D!")
+		_log("ColorGrid: No material_override found on MultiMeshInstance3D")
 		return
 
 	if material is ShaderMaterial:
 		var shader_mat = material as ShaderMaterial
-		print("ColorGrid: âœ… Found ShaderMaterial: %s" % shader_mat.shader.resource_path if shader_mat.shader else "no shader")
+		var shader_path: String = "no shader"
+		if shader_mat.shader:
+			shader_path = str(shader_mat.shader.resource_path)
+		_log("ColorGrid: Found ShaderMaterial: %s" % shader_path)
 
 		# Set modelColor to white so instance colors show through
 		shader_mat.set_shader_parameter("modelColor", Color.WHITE)
@@ -266,9 +282,9 @@ func _adjust_material_for_colors():
 		# Increase model opacity
 		shader_mat.set_shader_parameter("modelOpacity", 1.0)
 
-		print("ColorGrid: âœ… Adjusted shader parameters: modelColor=WHITE, wireframeOpacity=0.3, show_interior=true, modelOpacity=1.0")
+		_log("ColorGrid: Adjusted shader parameters for instance color visibility")
 	else:
-		print("ColorGrid: âŒ Material is not a ShaderMaterial! Type: %s" % material.get_class())
+		_log("ColorGrid: Material is not a ShaderMaterial. Type: %s" % material.get_class())
 
 func apply_gradient_pattern(gradient_name: String):
 	if not multimesh:
@@ -384,13 +400,14 @@ func calculate_sphere_reflection_color(row: int, col: int, center: Vector2, grid
 func connect_to_next_cubes():
 	var next_cubes = find_next_cubes()
 	if next_cubes.size() > 0:
-		print("ColorGrid: Found %d NextCube(s), disabling auto-cycle" % next_cubes.size())
+		_log("ColorGrid: Found %d NextCube(s), disabling auto-cycle" % next_cubes.size())
 		auto_cycle_enabled = false
+		_cycle_active = false
 
 		for next_cube in next_cubes:
 			if next_cube.has_signal("next_requested"):
 				next_cube.next_requested.connect(_on_next_requested)
-				print("ColorGrid: Connected to NextCube at %s" % next_cube.global_position)
+				_log("ColorGrid: Connected to NextCube at %s" % next_cube.global_position)
 
 func find_next_cubes() -> Array:
 	var next_cubes = []
@@ -404,19 +421,19 @@ func find_next_cubes_recursive(node: Node, next_cubes: Array):
 		find_next_cubes_recursive(child, next_cubes)
 
 func _on_next_requested(from_position: Vector3):
-	print("ColorGrid: ðŸŽ¨ Next pattern requested from %s" % from_position)
+	_log("ColorGrid: Next pattern requested from %s" % from_position)
 	advance_to_next_pattern()
 
 func advance_to_next_pattern():
 	if pattern_names.is_empty():
 		_initialize_pattern_names()
 		if pattern_names.is_empty():
-			print("ColorGrid: No patterns available to advance")
+			_log("ColorGrid: No patterns available to advance")
 			return
 
 	current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
 	var pattern_name = pattern_names[current_pattern_index]
-	print("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
+	_log("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
 	_apply_named_pattern(pattern_name)
 
 # Public API
@@ -437,7 +454,12 @@ func get_current_pattern_name() -> String:
 
 func enable_auto_cycle():
 	auto_cycle_enabled = true
-	start_pattern_cycling()
+	if not _cycle_active:
+		start_pattern_cycling()
 
 func disable_auto_cycle():
 	auto_cycle_enabled = false
+	_cycle_active = false
+
+func _exit_tree() -> void:
+	_cycle_active = false

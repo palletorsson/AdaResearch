@@ -6,8 +6,8 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 19,
-			"depth": 20,
+			"width": 17,
+			"depth": 17,
 			"max_height": 4
 		},
 		"metadata": {
@@ -24,14 +24,13 @@
 	},
 	"documentation": {
 		"summary": "Tutorial_Disco - Reactive Floor Showcase",
-		"layout": "11x16 entertainment hall with lighting features, disco floor centerpiece, and projectile demo zone.",
-		"objective": "Expose players to animated surfaces and interactive panels before tackling more complex scenes.",
+		"layout": "17x17 performance hall with a central disco floor, sequencer station, and open circulation ring.",
+		"objective": "Expose players to large reactive surfaces, audio-step interaction, and spatial pattern reading in one room.",
 		"key_elements": [
-			"`scifi_panel_wall` feature near the entrance",
-			"`disco_floor` active surface at (5,7)",
-			"Platform lift `l` at (8,3) for vertical observation",
-			"`cube_projectile_spawner` at (5,11) for dynamic feedback",
-			"Annotation `an`, score cube `sp`, and teleporter `t` clustered near the stage exit"
+			"`step_sequencer#house` interaction near the entrance lane",
+			"`standalone_disco` as the central reactive floor platform",
+			"`dark_sphere` visual anchor on the west side of the floor",
+			"Teleporter `t` at the south edge for progression after exploration"
 		]
 	},
 	"layers": {

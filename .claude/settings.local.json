@@ -91,7 +91,21 @@
       "Bash(gh issue view:*)",
       "Bash(gh auth:*)",
       "WebFetch(domain:trinovantes.github.io)",
-      "Bash(git status:*)"
+      "Bash(git status:*)",
+      "Bash(git ls-tree:*)",
+      "Skill(ada-task-manager)",
+      "Skill(ada-task-manager:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"DIR: $d\")",
+      "Bash(done)",
+      "Bash(powershell -ExecutionPolicy Bypass -Command:*)",
+      "Bash(powershell -File commons/tools/project_dashboard_cli.ps1:*)",
+      "Bash(powershell -c \"\\(Get-Content commons/maps/sequence_requirements.json | ConvertFrom-Json\\).spine_sequences.PSObject.Properties.Name\")",
+      "Bash(powershell -File:*)",
+      "Bash(powershell -c:*)",
+      "Bash(set:*)",
+      "Bash(chcp:*)",
+      "Bash(git diff:*)"
     ],
     "deny": [],
     "ask": []

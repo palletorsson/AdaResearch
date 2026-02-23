@@ -109,20 +109,50 @@ def compare_stages(prev_data, curr_data, prev_name, curr_name, show_diff=False):
             elif ph != ch and ph > 0:
                 changes.append(f"structure ({x},{z}): h={ph} -> h={ch}")
 
-    # Check teleporter continuity
+    # Check teleporter continuity — teleporters should NOT move position.
+    # A teleporter destination present in prev should appear at the SAME position in curr.
     prev_tps = find_teleporters(prev_utils)
     curr_tps = find_teleporters(curr_utils)
 
+    # Build destination -> position maps for checking moves
+    def _tp_dest(val):
+        """Extract destination name from teleporter value like 't:forces:0:0:0.6'."""
+        if val.startswith("t:"):
+            rest = val[2:]
+        elif val.startswith("tp:"):
+            rest = val[3:]
+        else:
+            return val
+        return rest.split(":")[0] if rest else val
+
+    prev_dest_to_pos = {}
     for pos, val in prev_tps.items():
+        dest = _tp_dest(val)
+        prev_dest_to_pos[dest] = pos
+
+    curr_dest_to_pos = {}
+    for pos, val in curr_tps.items():
+        dest = _tp_dest(val)
+        curr_dest_to_pos[dest] = pos
+
+    for pos, val in prev_tps.items():
+        dest = _tp_dest(val)
         if pos not in curr_tps:
-            # Check if it moved nearby
-            issues.append(f"TELEPORTER LOST: {val} at {pos}")
+            # Position lost — check if same destination exists elsewhere (moved)
+            if dest in curr_dest_to_pos:
+                new_pos = curr_dest_to_pos[dest]
+                issues.append(f"TELEPORTER MOVED: {val} from {pos} to {new_pos}")
+            else:
+                issues.append(f"TELEPORTER LOST: {val} at {pos}")
         elif curr_tps[pos] != val:
             changes.append(f"teleporter {pos}: '{val}' -> '{curr_tps[pos]}'")
 
     new_tps = {pos: val for pos, val in curr_tps.items() if pos not in prev_tps}
     for pos, val in new_tps.items():
-        changes.append(f"NEW teleporter: {val} at {pos}")
+        dest = _tp_dest(val)
+        if dest not in prev_dest_to_pos:
+            changes.append(f"NEW teleporter: {val} at {pos}")
+        # If dest was in prev but at different pos, already reported as MOVED above
 
     # Check artifact continuity
     prev_arts = find_artifacts(prev_inter)
@@ -146,13 +176,18 @@ def compare_stages(prev_data, curr_data, prev_name, curr_name, show_diff=False):
         changes.append(f"NEW artifact: {name} at {pos}")
 
     # Check utility continuity (non-teleporter utilities)
+    # Note: sub: (subtitle/info tiles) and m: (music markers) are map-specific
+    # and routinely move between stages — they are not continuity issues.
     for z in range(prev_rows):
         for x in range(prev_cols):
             pu = cell_at(prev_utils, z, x)
             cu = cell_at(curr_utils, z, x)
             if pu and pu != " " and not pu.startswith("t"):
                 if (not cu or cu == " "):
-                    issues.append(f"UTILITY LOST: '{pu}' at ({x},{z})")
+                    if pu.startswith("sub:") or pu.startswith("m:"):
+                        changes.append(f"utility moved/removed (map-specific): '{pu}' at ({x},{z})")
+                    else:
+                        issues.append(f"UTILITY LOST: '{pu}' at ({x},{z})")
 
     return issues, changes
 
@@ -206,8 +241,12 @@ def main():
     prev_name = None
 
     for entry in progression:
-        lab_file = entry["lab_file"]
-        after = entry.get("after", "none")
+        raw_path = entry.get("lab_file") or entry.get("map", "")
+        # Strip "Lab/" prefix if present, add .json if missing
+        lab_file = raw_path.replace("Lab/", "") if raw_path.startswith("Lab/") else raw_path
+        if lab_file and not lab_file.endswith(".json"):
+            lab_file += ".json"
+        after = entry.get("after", entry.get("stage", "none"))
         added = entry.get("added", [])
 
         data = load_lab_map(lab_file)

@@ -6,8 +6,8 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 3,
-			"depth": 12,
+			"width": 7,
+			"depth": 9,
 			"max_height": 2
 		},
 		"metadata": {
@@ -24,7 +24,7 @@
 	},
 	"documentation": {
 		"summary": "Tutorial_Row - Row Focus",
-		"layout": "3x12 corridor highlighting row scanning with spawn at the north and exit mid-way down the hall.",
+		"layout": "7x9 corridor with a central traversal lane and side buffer columns for orientation.",
 		"objective": "Reinforce row traversal concepts through the `column_3_z` widget and coordinate reference.",
 		"key_elements": [
 			"Spawn `s` at (0,0)",

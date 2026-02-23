@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Translate 1",
 		"lookup_name": "Trans_Translate_1",
-		"description": ".... is reframed as a transformation acting on relations rather than objects. Through controlled scaling operations, the player observes how distances, proportions, and perceived mass change while topological structure remains intact. The map highlights scale as a global modifier that reconfigures spatial meaning without introducing new geometry. This establishes scale as a central operator in both simulation and abstraction.",
+		"description": "Translation as navigational infrastructure. Walkways, transport cubes, and axis-constrained artifacts stage displacement across voids while keeping orientation and scale intact.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -15,23 +15,23 @@
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
 			"learning_objectives": [
-				"2D arrays",
-				"Grid navigation",
-				"X-Y coordinate system",
-				"Multi-dimensional thinking"
+				"Translation along constrained axes",
+				"Displacement without rotation or scaling",
+				"Route planning through transport systems",
+				"Spatial reasoning across voids"
 			]
 		}
 	},
 	"documentation": {
-		"summary": "Transformation_3 - Walkway Translation Field",
-		"layout": "Asymmetric platform with void gaps bridged by a 90-degree walkway and a transport cube shuttle.",
-		"objective": "Demonstrate translation across voids using walkways, transport cubes, and elevated pickups.",
+		"summary": "Transformation_2 - Translation Route Field",
+		"layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.",
+		"objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.",
 		"key_elements": [
-			"`wp:90` walkway launching from the north ridge",
-			"Transport cube `tc:4:z` spanning the central gap",
-			"`pick_up_cube:0:3` elevated grab at (4,3)",
-			"`dark_sphere` observation dome at (3,3)",
-			"Score cube `sp` with teleporter `t` on the south-east platform"
+			"`player_trace` records movement path through the route",
+			"`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations",
+			"Multiple `pick_up_cube` targets staged across levels",
+			"`pickup_gate#pickups:7` as collection threshold gate",
+			"`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"
 		]
 	},
 	"layers": {

@@ -1,7 +1,7 @@
 {
 	"version": "3.0",
 	"description": "Lab post-map progression: sequence name → post lab map file",
-	"last_updated": "2026-02-16",
+	"last_updated": "2026-02-23",
 	"sequence_to_post_map": {
 		"primitives": "Lab/map_data_post_primitives",
 		"transformation": "Lab/map_data_post_transformation",
@@ -9,7 +9,7 @@
 		"array_tutorial": "Lab/map_data_post_array_tutorial",
 		"wavefunctions": "Lab/map_data_post_wavefunctions",
 		"forces": "Lab/map_data_post_forces",
-		"randomness": "Lab/map_data_post_random",
+		"randomness": "Lab/map_data_post_randomness",
 		"noise": "Lab/map_data_post_noise",
 		"cellularautomata": "Lab/map_data_post_cellularautomata",
 		"fractals": "Lab/map_data_post_fractals",
@@ -35,7 +35,8 @@
 		"datastructures": "Lab/map_data_post_datastructures",
 		"meshes": "Lab/map_data_post_meshes",
 		"artmathematics": "Lab/map_data_post_artmathematics",
-		"vectors": "Lab/map_data_post_vectors"
+		"vectors": "Lab/map_data_post_vectors",
+		"postfoundationscrisis": "Lab/map_data_post_foundationscrisis"
 	},
 	"fallback_map": "Lab/map_data",
 	"fallback_description": "Initial lab state when no sequences completed"

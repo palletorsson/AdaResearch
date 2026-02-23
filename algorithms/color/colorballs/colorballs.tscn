@@ -6,7 +6,7 @@
 
 [node name="ColorBalls" type="Node3D"]
 script = ExtResource("1_abc123")
-ball_count = 40
+ball_count = 24
 spawn_area_size = Vector3(10, 1, 10)
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -16,5 +16,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02559, 2.89893)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 light_energy = 2.0
 omni_range = 10.0
-
 

@@ -4,11 +4,12 @@ extends Node3D
 @export_category("Scanner Settings")
 @export var scan_range: float = 15.0
 @export var scan_frequency: float = 30.0
+@export var debug_logs: bool = false
 
 @export_category("Texture Pixel Sampling")
 @export var enable_pixel_sampling: bool = true
-@export var uv_debug: bool = true
-@export var texture_debug: bool = true
+@export var uv_debug: bool = false
+@export var texture_debug: bool = false
 @export var sample_area_size: int = 1  # Sample NxN pixels for averaging
 
 @export_category("Visual Ray Settings")
@@ -42,15 +43,24 @@ var scan_camera: Camera3D
 var scan_texture: ViewportTexture
 var viewport_ready: bool = false
 
+func _log(a = null, b = null, c = null, d = null, e = null, f = null, g = null, h = null) -> void:
+	if not (debug_logs or uv_debug or texture_debug):
+		return
+	var parts: Array[String] = []
+	for value in [a, b, c, d, e, f, g, h]:
+		if value != null:
+			parts.append(str(value))
+	print(" ".join(parts))
+
 
 func _ready():
-	print("=== UV TEXTURE PIXEL SCANNER STARTING ===")
+	_log("=== UV TEXTURE PIXEL SCANNER STARTING ===")
 	setup_components()
 	setup_optical_scanner()
 	setup_visual_ray()
 	setup_raycast()
 	
-	print("UV texture pixel scanner ready!")
+	_log("UV texture pixel scanner ready!")
 	update_display_screen(Color.BLACK, false)
 
 func setup_components():
@@ -91,7 +101,7 @@ func setup_components():
 		# Screen is approx (2.7, 4.4, 1.0) ? Wait, let's just try small uniform scale first.
 		color_data_label.scale = Vector3(0.05, 0.05, 0.05)
 	else:
-		print("Warning: Display Screen not found for Label attachment")
+		_log("Warning: Display Screen not found for Label attachment")
 
 func setup_display_screen():
 	"""Setup display screen"""
@@ -171,9 +181,9 @@ func perform_uv_texture_scan():
 		var hit_distance = global_position.distance_to(hit_point)
 		
 		if uv_debug:
-			print("=== UV TEXTURE SCAN ===")
-			print("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
-			print("Hit point: ", hit_point)
+			_log("=== UV TEXTURE SCAN ===")
+			_log("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
+			_log("Hit point: ", hit_point)
 		
 		# Extract color using Optical Scanning (Secondary) or UV texture sampling (Primary)
 		detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
@@ -194,28 +204,28 @@ func extract_texture_pixel_color(hit_object: Node, hit_point: Vector3, hit_norma
 	
 	var mesh_instance = find_mesh_instance(hit_object)
 	if not mesh_instance:
-		print("No MeshInstance3D found")
+		_log("No MeshInstance3D found")
 		return Color.BLACK
 	
-	#print("Found mesh: ", mesh_instance.name)
+	#_log("Found mesh: ", mesh_instance.name)
 	
 	# Calculate UV coordinates at hit point
 	var uv_coord = calculate_precise_uv(mesh_instance, hit_point)
 	if uv_coord == Vector2(-1, -1):
-		print("UV calculation failed")
+		_log("UV calculation failed")
 		return fallback_material_color(mesh_instance)
 	
-	if uv_debug: print("UV coordinates: ", uv_coord)
+	if uv_debug: _log("UV coordinates: ", uv_coord)
 	last_uv_coord = uv_coord
 	
 	# Get material and sample texture
 	var sampled_color = sample_texture_at_uv(mesh_instance, uv_coord)
 	
 	if sampled_color != Color.BLACK:
-		print("Successfully sampled texture pixel: ", sampled_color)
+		_log("Successfully sampled texture pixel: ", sampled_color)
 		return sampled_color
 	else:
-		print("Texture sampling failed, using material fallback")
+		_log("Texture sampling failed, using material fallback")
 		return fallback_material_color(mesh_instance)
 
 func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
@@ -227,7 +237,7 @@ func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
 
 	# Check parent (common case: StaticBody3D is child of MeshInstance3D)
 	if hit_object.get_parent() and hit_object.get_parent() is MeshInstance3D:
-		print("Found mesh as parent of: ", hit_object.name)
+		_log("Found mesh as parent of: ", hit_object.name)
 		return hit_object.get_parent() as MeshInstance3D
 
 	# Physics body with mesh children (alternative structure)
@@ -240,7 +250,7 @@ func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
 	if hit_object.get_parent():
 		for sibling in hit_object.get_parent().get_children():
 			if sibling is MeshInstance3D:
-				print("Found mesh as sibling of: ", hit_object.name)
+				_log("Found mesh as sibling of: ", hit_object.name)
 				return sibling as MeshInstance3D
 
 	return null
@@ -275,7 +285,7 @@ func setup_optical_scanner():
 	scan_viewport.add_child(scan_camera)
 	
 	viewport_ready = true
-	if texture_debug: print("Optical scanner initialized")
+	if texture_debug: _log("Optical scanner initialized")
 
 func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector3) -> Vector2:
 	"""Calculate precise UV coordinates for the hit point"""
@@ -286,7 +296,7 @@ func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector
 	# Convert to local space
 	var local_hit = mesh_instance.to_local(world_hit_point)
 	
-	# if uv_debug: print("Local hit point: ", local_hit)
+	# if uv_debug: _log("Local hit point: ", local_hit)
 	
 	# Handle different mesh types
 	if mesh_instance.mesh is BoxMesh:
@@ -302,14 +312,14 @@ func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector
 	elif mesh_instance.mesh is SphereMesh:
 		return calculate_sphere_uv(mesh_instance.mesh as SphereMesh, local_hit)
 	else:
-		print("Unsupported mesh type: ", mesh_instance.mesh.get_class())
+		_log("Unsupported mesh type: ", mesh_instance.mesh.get_class())
 		return Vector2(0.5, 0.5)  # Center fallback
 
 func calculate_box_uv(box_mesh: BoxMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for BoxMesh at local hit point"""
 	
 	var size = box_mesh.size
-	# if uv_debug: print("Box size: ", size)
+	# if uv_debug: _log("Box size: ", size)
 	
 	var half_size = size * 0.5
 	# Normalize point relative to size to find dominant axis
@@ -328,14 +338,14 @@ func calculate_box_uv(box_mesh: BoxMesh, local_point: Vector3) -> Vector2:
 		# Flip U if on negative side? Depends on Godot mapping.
 		if local_point.x < 0: u = 1.0 - u
 		
-		# if uv_debug: print("Hit X face, UV: ", Vector2(u, 1.0 - v))
+		# if uv_debug: _log("Hit X face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 		
 	elif max_axis == 1:
 		# Hit Y face (top/bottom)
 		var u = (local_point.x + half_size.x) / size.x
 		var v = (local_point.z + half_size.z) / size.z
-		# if uv_debug: print("Hit Y face, UV: ", Vector2(u, 1.0 - v))
+		# if uv_debug: _log("Hit Y face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 		
 	else: # max_axis == 2
@@ -344,7 +354,7 @@ func calculate_box_uv(box_mesh: BoxMesh, local_point: Vector3) -> Vector2:
 		var v = (local_point.y + half_size.y) / size.y
 		if local_point.z > 0: u = 1.0 - u # Flip for front face logic
 		
-		# if uv_debug: print("Hit Z face, UV: ", Vector2(u, 1.0 - v))
+		# if uv_debug: _log("Hit Z face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 
 func calculate_plane_uv(plane_mesh: PlaneMesh, local_point: Vector3) -> Vector2:
@@ -404,12 +414,12 @@ func calculate_arraymesh_uv(array_mesh: ArrayMesh, local_point: Vector3) -> Vect
 	"""Calculate UV for ArrayMesh by finding closest triangle"""
 
 	if array_mesh.get_surface_count() == 0:
-		print("ArrayMesh has no surfaces")
+		_log("ArrayMesh has no surfaces")
 		return Vector2(0.5, 0.5)
 
 	var arrays = array_mesh.surface_get_arrays(0)
 	if arrays.size() <= Mesh.ARRAY_VERTEX:
-		print("ArrayMesh has no vertex data")
+		_log("ArrayMesh has no vertex data")
 		return Vector2(0.5, 0.5)
 
 	var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
@@ -418,7 +428,7 @@ func calculate_arraymesh_uv(array_mesh: ArrayMesh, local_point: Vector3) -> Vect
 		uvs = arrays[Mesh.ARRAY_TEX_UV] as PackedVector2Array
 
 	if not uvs or uvs.is_empty():
-		print("ArrayMesh has no UV data, using fallback")
+		_log("ArrayMesh has no UV data, using fallback")
 		# Fallback: create basic UV from position
 		var bounds = _calculate_mesh_bounds(vertices)
 		var u = (local_point.x - bounds[0].x) / (bounds[1].x - bounds[0].x)
@@ -435,7 +445,7 @@ func calculate_arraymesh_uv(array_mesh: ArrayMesh, local_point: Vector3) -> Vect
 			min_dist_sq = dist_sq
 			closest_idx = i
 
-	print("Closest vertex index: ", closest_idx, " UV: ", uvs[closest_idx])
+	_log("Closest vertex index: ", closest_idx, " UV: ", uvs[closest_idx])
 	return uvs[closest_idx]
 
 func _calculate_mesh_bounds(vertices: PackedVector3Array) -> Array:
@@ -461,10 +471,10 @@ func sample_texture_at_uv(mesh_instance: MeshInstance3D, uv_coord: Vector2) -> C
 	
 	var material = get_material_from_mesh(mesh_instance)
 	if not material:
-		print("No material found")
+		_log("No material found")
 		return Color.BLACK
 	
-	print("Material type: ", material.get_class())
+	_log("Material type: ", material.get_class())
 	
 	# Handle StandardMaterial3D
 	if material is StandardMaterial3D:
@@ -472,16 +482,16 @@ func sample_texture_at_uv(mesh_instance: MeshInstance3D, uv_coord: Vector2) -> C
 		
 		# Check if there's an albedo texture
 		if std_mat.albedo_texture:
-			print("Found albedo texture!")
+			_log("Found albedo texture!")
 			var texture_color = sample_texture_pixel(std_mat.albedo_texture, uv_coord)
 			
 			# Combine texture color with albedo color (material tinting)
 			var final_color = texture_color * std_mat.albedo_color
-			print("Texture color: ", texture_color, " * Albedo: ", std_mat.albedo_color, " = ", final_color)
+			_log("Texture color: ", texture_color, " * Albedo: ", std_mat.albedo_color, " = ", final_color)
 			return final_color
 		else:
 			# No texture, just return albedo color
-			print("No texture, using albedo color: ", std_mat.albedo_color)
+			_log("No texture, using albedo color: ", std_mat.albedo_color)
 			return std_mat.albedo_color
 	
 	# Handle ShaderMaterial
@@ -496,19 +506,19 @@ func get_material_from_mesh(mesh_instance: MeshInstance3D) -> Material:
 	
 	# Priority 1: Material override
 	if mesh_instance.material_override:
-		print("Using material_override")
+		_log("Using material_override")
 		return mesh_instance.material_override
 	
 	# Priority 2: Surface material overrides
 	if mesh_instance.get_surface_override_material(0):
-		print("Using surface_override_material")
+		_log("Using surface_override_material")
 		return mesh_instance.get_surface_override_material(0)
 	
 	# Priority 3: Mesh surface materials
 	if mesh_instance.mesh and mesh_instance.mesh.get_surface_count() > 0:
 		var surface_mat = mesh_instance.mesh.surface_get_material(0)
 		if surface_mat:
-			print("Using mesh surface material")
+			_log("Using mesh surface material")
 			return surface_mat
 	
 	return null
@@ -536,7 +546,7 @@ func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
 			texture_image_cache[cache_key] = image
 	
 	if not image:
-		if texture_debug: print("Could not get image from texture")
+		if texture_debug: _log("Could not get image from texture")
 		return Color.BLACK
 	
 	# Ensure image was properly loaded/cached
@@ -544,7 +554,7 @@ func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
 		return Color.BLACK
 		
 	var texture_size = image.get_size()
-	# if texture_debug: print("Texture size: ", texture_size)
+	# if texture_debug: _log("Texture size: ", texture_size)
 	
 	# Convert UV to pixel coordinates
 	var pixel_x = int(uv_coord.x * (texture_size.x - 1))
@@ -554,14 +564,14 @@ func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
 	pixel_x = clamp(pixel_x, 0, texture_size.x - 1)
 	pixel_y = clamp(pixel_y, 0, texture_size.y - 1)
 	
-	print("Sampling texture pixel at: (", pixel_x, ", ", pixel_y, ")")
+	_log("Sampling texture pixel at: (", pixel_x, ", ", pixel_y, ")")
 	
 	# Sample pixel or area
 	if sample_area_size > 1:
 		return sample_texture_area(image, pixel_x, pixel_y, sample_area_size)
 	else:
 		var pixel_color = image.get_pixel(pixel_x, pixel_y)
-		# if texture_debug: print("Sampled pixel color: ", pixel_color)
+		# if texture_debug: _log("Sampled pixel color: ", pixel_color)
 		return pixel_color
 
 func sample_texture_area(image: Image, center_x: int, center_y: int, area_size: int) -> Color:
@@ -588,7 +598,7 @@ func sample_texture_area(image: Image, center_x: int, center_y: int, area_size: 
 		return Color.BLACK
 	
 	var average_color = Color(total_r / sample_count, total_g / sample_count, total_b / sample_count, 1.0)
-	print("Averaged ", sample_count, " texture pixels: ", average_color)
+	_log("Averaged ", sample_count, " texture pixels: ", average_color)
 	return average_color
 
 func sample_shader_texture(shader_mat: ShaderMaterial, uv_coord: Vector2) -> Color:
@@ -600,7 +610,7 @@ func sample_shader_texture(shader_mat: ShaderMaterial, uv_coord: Vector2) -> Col
 	for param_name in texture_params:
 		var texture = shader_mat.get_shader_parameter(param_name)
 		if texture and texture is Texture2D:
-			print("Found shader texture parameter: ", param_name)
+			_log("Found shader texture parameter: ", param_name)
 			return sample_texture_pixel(texture, uv_coord)
 	
 	# Try color parameters as fallback
@@ -608,7 +618,7 @@ func sample_shader_texture(shader_mat: ShaderMaterial, uv_coord: Vector2) -> Col
 	for param_name in color_params:
 		var color = shader_mat.get_shader_parameter(param_name)
 		if color and color is Color:
-			print("Found shader color parameter: ", param_name, " = ", color)
+			_log("Found shader color parameter: ", param_name, " = ", color)
 			return color
 	
 	return Color.BLACK
@@ -620,7 +630,7 @@ func fallback_material_color(mesh_instance: MeshInstance3D) -> Color:
 	
 	if material is StandardMaterial3D:
 		var std_mat = material as StandardMaterial3D
-		print("Fallback to albedo color: ", std_mat.albedo_color)
+		_log("Fallback to albedo color: ", std_mat.albedo_color)
 		return std_mat.albedo_color
 	
 	return Color.BLACK
@@ -713,21 +723,22 @@ func toggle_uv_debug():
 	"""Toggle UV calculation debug output"""
 	uv_debug = not uv_debug
 	texture_debug = not texture_debug
-	print("UV/Texture debug: ", "enabled" if uv_debug else "disabled")
+	_log("UV/Texture debug: ", "enabled" if uv_debug else "disabled")
 
 func test_uv_calculation():
 	"""Test UV calculation with current hit"""
-	print("=== UV CALCULATION TEST ===")
+	_log("=== UV CALCULATION TEST ===")
 	if raycast and raycast.is_colliding():
 		var hit_point = raycast.get_collision_point()
 		var hit_object = raycast.get_collider()
 		var mesh_instance = find_mesh_instance(hit_object)
 		
 		if mesh_instance:
-			print("Testing UV calculation for: ", mesh_instance.name)
+			_log("Testing UV calculation for: ", mesh_instance.name)
 			var uv = calculate_precise_uv(mesh_instance, hit_point)
-			print("Calculated UV: ", uv)
+			_log("Calculated UV: ", uv)
 		else:
-			print("No mesh instance found for UV test")
+			_log("No mesh instance found for UV test")
 	else:
-		print("No current hit to test UV calculation")
+		_log("No current hit to test UV calculation")
+

@@ -35,6 +35,8 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 
 @export_category("Rendering")
 @export var use_multimesh_renderer: bool = true
+@export var multimesh_sync_rate: float = 30.0
+@export var debug_logs: bool = false
 
 # Internal variables
 var palette_keys: Array = []
@@ -45,6 +47,11 @@ var ball_bodies: Array = []
 var ball_scene: PackedScene
 var multimesh_instance: MultiMeshInstance3D
 var multimesh: MultiMesh
+var _sync_accumulator: float = 0.0
+
+func _log(message: String) -> void:
+	if debug_logs:
+		print(message)
 
 func _ready() -> void:
 	# Add to group so turret can find us
@@ -99,7 +106,7 @@ func _get_palette_colors(palette_name: String) -> Array:
 func create_ball_scene() -> void:
 	# We'll create balls directly instead of using PackedScene
 	# This avoids the packing/instantiation issues
-	print("Ball scene creation skipped - using direct creation")
+	_log("Ball scene creation skipped - using direct creation")
 
 func create_ball_directly(name: String) -> Node3D:
 	"""Create a ball directly without using PackedScene"""
@@ -144,9 +151,9 @@ func create_ball_directly(name: String) -> Node3D:
 	
 	root.add_child(rigid_body)
 	
-	print("Created ball directly: %s" % name)
-	print("Root children: ", root.get_children())
-	print("RigidBody children: ", rigid_body.get_children())
+	_log("Created ball directly: %s" % name)
+	_log("Root children: %s" % [str(root.get_children())])
+	_log("RigidBody children: %s" % [str(rigid_body.get_children())])
 	
 	return root
 
@@ -225,9 +232,9 @@ func spawn_balls() -> void:
 	for i in range(ball_count):
 		var ball_instance = create_ball_directly("Ball_%d" % i)
 		
-		print("Created ball %d structure:" % i)
-		print("Ball instance children: ", ball_instance.get_children())
-		print("Ball instance name: ", ball_instance.name)
+		_log("Created ball %d structure:" % i)
+		_log("Ball instance children: %s" % [str(ball_instance.get_children())])
+		_log("Ball instance name: %s" % ball_instance.name)
 		
 		# Random position within spawn area
 		var random_pos = Vector3(
@@ -266,7 +273,7 @@ func spawn_balls() -> void:
 			continue
 		rigid_body.linear_velocity = random_vel
 		
-		print("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])
+		_log("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])
 
 	if use_multimesh_renderer:
 		_rebuild_multimesh()
@@ -300,11 +307,18 @@ func set_ball_color(ball_instance: Node3D, color: Color) -> void:
 		material.emission_energy_multiplier = 1.0
 		mesh_instance.material_override = material
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if respawn_on_fall:
 		check_and_respawn_fallen_balls()
 	if use_multimesh_renderer:
-		_sync_multimesh_transforms()
+		if multimesh_sync_rate <= 0.0:
+			_sync_multimesh_transforms()
+		else:
+			_sync_accumulator += delta
+			var sync_interval := 1.0 / multimesh_sync_rate
+			if _sync_accumulator >= sync_interval:
+				_sync_accumulator = 0.0
+				_sync_multimesh_transforms()
 
 func check_and_respawn_fallen_balls() -> void:
 	for i in range(balls.size()):
@@ -345,7 +359,7 @@ func check_and_respawn_fallen_balls() -> void:
 			else:
 				set_ball_color(ball, new_color)
 			
-			print("Respawned Ball_%d with new color: %s" % [i, new_color])
+			_log("Respawned Ball_%d with new color: %s" % [i, new_color])
 
 func regenerate_balls() -> void:
 	spawn_balls()
@@ -368,7 +382,7 @@ func cycle_to_next_palette() -> void:
 			else:
 				set_ball_color(ball, new_color)
 	
-	print("Cycled to palette: %s" % get_current_palette_name())
+	_log("Cycled to palette: %s" % get_current_palette_name())
 
 func get_current_palette_name() -> String:
 	if palette_keys.is_empty():
@@ -414,7 +428,7 @@ func add_ball() -> void:
 	if use_multimesh_renderer:
 		_sync_multimesh_transforms()
 	
-	print("Added new ball with radius: %.3f, color: %s" % [fixed_radius, color])
+	_log("Added new ball with radius: %.3f, color: %s" % [fixed_radius, color])
 
 func remove_ball() -> void:
 	if balls.size() > 0:
@@ -428,7 +442,7 @@ func remove_ball() -> void:
 			ball_colors.pop_back()
 		if use_multimesh_renderer:
 			_rebuild_multimesh()
-		print("Removed ball. Remaining: %d" % balls.size())
+		_log("Removed ball. Remaining: %d" % balls.size())
 
 func clear_all_balls() -> void:
 	for ball in balls:
@@ -439,7 +453,7 @@ func clear_all_balls() -> void:
 	ball_colors.clear()
 	if use_multimesh_renderer:
 		_rebuild_multimesh()
-	print("Cleared all balls")
+	_log("Cleared all balls")
 
 func create_ball_at_y(y_position: float = 7.0) -> void:
 	"""Create a single color ball at the specified y position"""
@@ -481,7 +495,7 @@ func create_ball_at_y(y_position: float = 7.0) -> void:
 	if use_multimesh_renderer:
 		_sync_multimesh_transforms()
 	
-	print("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
+	_log("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key

@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "Formal registry of Lab changes per sequence completion",
 		"version": "1.0",
-		"last_updated": "2026-02-22",
+		"last_updated": "2026-02-23",
 		"note": "Documents existing progression_delta data from map variants + adds nature/capability layers for future phases. This is the single source of truth for Lab evolution.",
 		"categories": {
 			"showcase": "Student's creation displayed — 'you made this'",
@@ -303,9 +303,24 @@
 			"phase": "F_order",
 			"spine_order": 5,
 			"teleporters": [],
-			"teleporters_note": "Neutral map — no new teleporters. Same as post_color layout.",
-			"artifacts": [],
-			"utilities_added": [],
+			"teleporters_note": "Neutral map — no new teleporters. Same as post_forces layout.",
+			"artifacts": [
+				{
+					"id": "array_carpet",
+					"cell": [11, 3],
+					"params": "0:0:0.3",
+					"category": "showcase",
+					"why": "The carpet you made in arrays — repeating tile pattern as floor art. Repetition is not boring, it's ornamental."
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "bp:f,u,u,f,f,f,f,f",
+					"cell": [9, 6],
+					"category": "instrument",
+					"why": "Blueprint grid showing array structure — arrays as spatial pattern"
+				}
+			],
 			"structure_changes": [],
 			"nature": [],
 			"capability": {
@@ -313,7 +328,7 @@
 				"description": "See structure in repetition — arrays as grids, patterns as indices",
 				"status": "stub"
 			},
-			"note": "Neutral stage — same layout as post_color. Arrays taught structure but the Lab already has structure. The learning is internal."
+			"note": "Neutral stage — same layout as post_forces (its predecessor). Arrays taught structure but the Lab already has structure. Blueprint utility added to show array concepts in-situ."
 		},
 		{
 			"stage": "post_forces",
@@ -492,7 +507,15 @@
 			"spine_order": 9,
 			"teleporters": [],
 			"teleporters_note": "Neutral — same as post_noise layout",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "ca_rule_explorer",
+					"cell": [15, 3],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "1x1m board with Rule 110 running — simple rules, complex behavior. Emergence on a board."
+				}
+			],
 			"utilities_added": [],
 			"structure_changes": [],
 			"nature": [],
@@ -512,7 +535,15 @@
 			"spine_order": 10,
 			"teleporters": ["proceduralgeneration", "softbodies"],
 			"teleporters_note": "GATE MAP — generation branch opens with proceduralgeneration and softbodies portals",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "mandelbrot_dive",
+					"cell": [16, 3],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "GPU-accelerated infinite zoom into the Mandelbrot set. Self-similarity at every scale."
+				}
+			],
 			"utilities_added": [
 				{
 					"type": "t:proceduralgeneration",
@@ -545,7 +576,15 @@
 			"spine_order": 11,
 			"teleporters": [],
 			"teleporters_note": "Neutral — same as post_fractals layout",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "lsystem_tree",
+					"cell": [17, 3],
+					"params": "0:1:0.5",
+					"category": "nature",
+					"why": "The first real tree in the Lab — grown from L-system grammar rules. Nature as grammar. This is where the forest begins."
+				}
+			],
 			"utilities_added": [],
 			"structure_changes": [],
 			"nature": [],
@@ -565,7 +604,15 @@
 			"spine_order": 12,
 			"teleporters": [],
 			"teleporters_note": "Neutral — same as post_fractals layout",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "wfc_tile_mosaic",
+					"cell": [17, 4],
+					"params": "0:0:0.3",
+					"category": "showcase",
+					"why": "A procedurally generated tile mosaic — WFC collapsed into coherent pattern. Constraints as art."
+				}
+			],
 			"utilities_added": [],
 			"structure_changes": [],
 			"nature": [],
@@ -585,7 +632,15 @@
 			"spine_order": 13,
 			"teleporters": ["swarmintelligence", "morphogenesis"],
 			"teleporters_note": "GATE MAP — emergence branch opens. Lab grows to 16x27 with new south rooms.",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "jelly_cube",
+					"cell": [21, 3],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "Soft deformable cube — matter that refuses rigidity. Grab it, squish it. Form as fluid."
+				}
+			],
 			"utilities_added": [
 				{
 					"type": "t:swarmintelligence",
@@ -661,7 +716,15 @@
 			"spine_order": 14,
 			"teleporters": [],
 			"teleporters_note": "Neutral — same as post_morphogenesis layout",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "boids_aquarium",
+					"cell": [23, 3],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "Glass cube with 30 boids flocking — collective intelligence made visible. No leader, just rules."
+				}
+			],
 			"utilities_added": [],
 			"structure_changes": [],
 			"nature": [],
@@ -681,7 +744,15 @@
 			"spine_order": 15,
 			"teleporters": ["foundationscrisis", "graphtheory"],
 			"teleporters_note": "GATE MAP — east corridor extends. foundationscrisis and graphtheory portals appear.",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "neural_landscape",
+					"cell": [22, 7],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "Error surface visualization — gradient descent as terrain. You learned to descend; now the landscape lives here."
+				}
+			],
 			"utilities_added": [
 				{
 					"type": "t:graphtheory",
@@ -718,7 +789,15 @@
 			"spine_order": 19,
 			"teleporters": [],
 			"teleporters_note": "Neutral — same as post_machinelearning layout",
-			"artifacts": [],
+			"artifacts": [
+				{
+					"id": "network_sculpture",
+					"cell": [23, 7],
+					"params": "0:1:0.3",
+					"category": "showcase",
+					"why": "3D graph sculpture — nodes and edges as physical structure. Everything is connected."
+				}
+			],
 			"utilities_added": [],
 			"structure_changes": [],
 			"nature": [],
@@ -1099,10 +1178,19 @@
 		"artifacts_with_progression_delta": [
 			"post_primitives: grid_lines, pyramid_edit, lshape, smallcontainment",
 			"post_color: infokiosk, homagetothesquare, nail_color_controller, hand_model, hand_color_controller",
-			"post_wavefunctions: spectral_sine_wave, RackMoogBass",
 			"post_forces: force_field_demo",
+			"post_array_tutorial: array_carpet",
+			"post_wavefunctions: spectral_sine_wave, RackMoogBass",
 			"post_randomness: random_walk_collection",
 			"post_noise: noisetext",
+			"post_cellularautomata: ca_rule_explorer",
+			"post_lsystems: lsystem_tree",
+			"post_fractals: mandelbrot_dive",
+			"post_proceduralgeneration: wfc_tile_mosaic",
+			"post_softbodies: jelly_cube",
+			"post_swarmintelligence: boids_aquarium",
+			"post_machinelearning: neural_landscape",
+			"post_graphtheory: network_sculpture",
 			"post_foundationscrisis: escher_staircase_mini, penrose_triangle, godel_statement_plaque, russell_set_display, self_referential_sign, incompleteness_badge",
 			"post_qfeplaboratory: lambda_wall_slider, phi_wall_slider, qfep_formula_display, edge_of_chaos_orb, bifurcation_diagram_3d, entropy_meter, qfep_master_badge",
 			"post_artmathematics: magritte_pipe_frame, escher_tessellation_tile, mondrian_composition, judd_minimalist_box, droste_effect_frame, visual_philosopher_badge"

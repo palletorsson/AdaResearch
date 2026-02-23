@@ -6,8 +6,8 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 12,
-			"depth": 20,
+			"width": 11,
+			"depth": 17,
 			"max_height": 6
 		},
 		"metadata": {
@@ -22,14 +22,14 @@
 		}
 	},
 	"documentation": {
-		"summary": "Color_1 - Grid Colorizer Lab",
-		"layout": "12x12 illumination grid with corner lights and central colorizing table beneath a dome.",
-		"objective": "Introduce the grid colorizer system and next-cube progression trigger.",
+		"summary": "Color_Paint - Action Painting Studio",
+		"layout": "11x17 paint lab with a central splash arena, drawingboard station, and Albers wall showcase.",
+		"objective": "Throw and blend color physically, then compare gestural paint marks with structured color studies.",
 		"key_elements": [
-			"`gridcolorizer` console at the north-west tile",
-			"Ambient `dark_sphere` dome and `n` next cube at (5,5)",
-			"Overhead extra lights `el` framing the workspace",
-			"Teleporter `t` at (9,10)"
+			"`ball_painting_demo:180:0.5` interactive paint/splash station in the center lane",
+			"`albers_wall_gallery:180:0.5` comparative color wall near the exit",
+			"`dark_sphere` dome for contrast and focus in the painting zone",
+			"Guiding lights `el` plus teleporter `t` at the south end"
 		]
 	},
 	"layers": {
@@ -73,7 +73,7 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "c ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

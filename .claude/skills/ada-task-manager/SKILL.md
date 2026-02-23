@@ -99,6 +99,13 @@ When you've finished building/fixing something during a session, proactively sug
 - Any new tasks discovered during the work
 - Key decisions or discoveries as memories
 
+## Integration with Dashboard CLI
+
+For project coverage data (missing .md files, sequence completeness, near-wins), use `/ada-dashboard` instead. The task manager talks to Oversight for human-defined tasks; the dashboard CLI reads filesystem state for coverage tasks. They complement each other:
+
+- **Oversight tasks** = human-defined priorities, blockers, decisions
+- **Dashboard CLI** = auto-detected gaps from filesystem scan
+
 ## Important
 
 - The server runs on the local network at `192.168.0.112:3001`

@@ -7,7 +7,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 10,
+			"depth": 8,
 			"max_height": 5
 		},
 		"metadata": {
@@ -15,17 +15,17 @@
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
 			"learning_objectives": [
-				"2D arrays",
-				"Grid navigation",
-				"X-Y coordinate system",
-				"Multi-dimensional thinking"
+				"3D arrays",
+				"Vertical navigation",
+				"X-Y-Z coordinate mapping",
+				"Volumetric thinking"
 			]
 		}
 	},
 	"documentation": {
 		"summary": "Tutorial_3D - Spatial Navigation Pad",
-		"layout": "7x7 multi-level test bed with walkways and lifts positioned around the spawn.",
-		"objective": "Encourage movement through vertical space before engaging the 3D grid interaction.",
+		"layout": "7x8 multi-level pad with stepped heights, corner towers, and a central 3D interaction lane.",
+		"objective": "Encourage vertical movement and then anchor it in the `grid_3d_4x4x4` interaction.",
 		"key_elements": [
 			"Spawn `s` at (0,0) feeding into a `wp:90` walkway",
 			"Series of platform lifts `l` wrapping the north and west edges",

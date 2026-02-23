@@ -14,6 +14,16 @@
 			"tags": ["forces", "transmutation", "qfep", "dual-nature", "vr"],
 			"map_sequences": ["forces"]
 		},
+		"gridagent": {
+			"name": "Grid Agent",
+			"lookup_name": "gridagent",
+			"description": "Grid-traversing hazard agent spawned from map tokens like `gridagent:copy`.",
+			"scene": "res://commons/hazards/gridagent/grid_agent_base.tscn",
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
 		"armadillo_droideka": {
 			"name": "Armadillo Droideka",
 			"lookup_name": "armadillo_droideka",

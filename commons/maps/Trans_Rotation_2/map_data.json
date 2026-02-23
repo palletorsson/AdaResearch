@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Rotation Two",
 		"lookup_name": "Trans_Rotation_2",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"description": "Rotation as procession and spectacle. Long dual corridors lead toward a rotating centerpiece, showing how orientation and angular velocity shape spatial experience over time.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -15,23 +15,23 @@
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
 			"learning_objectives": [
-				"2D arrays",
-				"Grid navigation",
-				"X-Y coordinate system",
-				"Multi-dimensional thinking"
+				"Layered rotation and angular velocity",
+				"Orientation as navigational cue",
+				"Rotation as spatial carving",
+				"Long-form rotational staging"
 			]
 		}
 	},
 	"documentation": {
-		"summary": "Transformation_5 - Torus Translation Runway",
-		"layout": "Expanded 12x14 field with northern staging pads, a mid-lane transport cube, and southern return deck.",
-		"objective": "Combine long-form translations with torus-cylinder manipulation and distant pickup goals.",
+		"summary": "Transformation_5 - Rotation Processional Corridor",
+		"layout": "Long twin-corridor layout that funnels toward a southern rotation showcase platform.",
+		"objective": "Demonstrate rotation as orientation, layering, and continuous temporal transformation.",
 		"key_elements": [
-			"Transport cube `tc:3:z` positioned along the north lane",
-			"`toruscylinder:0:4` demo tower at (5,2)",
-			"`dark_sphere` canopy over the runway",
-			"Remote `pick_up_cube:0:0:1` target at (1,12)",
-			"Teleporter `t` and score cube `sp` sharing the south platform"
+			"`boolean_tunnel:0:-1.05` rotation-carved entry object",
+			"`righttriangle:90:0:1.5` directional anchor at spawn side",
+			"`dark_sphere` atmospheric canopy in the north sector",
+			"Remote `pick_up_cube:0:1` collection target near the south corridor end",
+			"`carousel_cake:0:0.35:1` layered rotational finale at the destination platform"
 		]
 	},
 	"layers": {
@@ -139,7 +139,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "pick_up_cube:0:1", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "t", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -199,7 +199,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "pick_up_cube:0:1", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "carousel_cake:0:0.35:1", " ", " ", " ", " ", " ", " "]
 		]
