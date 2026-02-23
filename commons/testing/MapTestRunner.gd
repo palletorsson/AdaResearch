@@ -34,14 +34,25 @@ class_name MapTestRunner
 ## Start testing automatically on scene load
 @export var auto_start: bool = true
 
+## Wait for the startup map load before testing (disable for much faster startup)
+@export var wait_for_initial_load: bool = false
+
 ## Also test Lab/map_data_post_* maps between sequences
 @export var include_lab_posts: bool = true
 
 ## Capture a screenshot for each map (saved to user://map_test_screenshots/)
 @export var take_screenshots: bool = false
+@export var screenshot_fit_padding: float = 1.35
+@export var screenshot_hide_overlay: bool = true
 
 ## Load time threshold (ms) — maps slower than this get flagged as SLOW
 @export var slow_threshold_ms: float = 3000.0
+
+## Stop after testing this many maps (-1 = no limit)
+@export var max_maps_to_test: int = -1
+
+## Quit the app when tests finish (useful for CLI automation)
+@export var quit_on_complete: bool = false
 
 # ============================================================================
 # CONSTANTS
@@ -76,6 +87,7 @@ var _test_start_memory: float = 0.0
 var _map_ready: bool = false
 var _map_timed_out: bool = false
 var _run_start_time: float = 0.0
+var _maps_tested: int = 0
 
 # Snapshot for stray node cleanup
 var _root_snapshot: Array[StringName] = []
@@ -93,6 +105,7 @@ var timeout_count: int = 0
 func _ready() -> void:
 	lab_grid_system = get_node_or_null("../LabGridSystem")
 	timeout_timer = get_node_or_null("TimeoutTimer")
+	_apply_cmdline_overrides()
 
 	# Find UI elements
 	status_label = get_node_or_null("../TestOverlay/InfoPanel/VBox/StatusLabel")
@@ -113,6 +126,92 @@ func _ready() -> void:
 
 	call_deferred("_deferred_start")
 
+func _apply_cmdline_overrides() -> void:
+	var user_args: PackedStringArray = OS.get_cmdline_user_args()
+	if user_args.is_empty():
+		return
+
+	for raw_arg in user_args:
+		var arg: String = String(raw_arg).strip_edges()
+		if arg.is_empty():
+			continue
+
+		if arg == "--screenshots":
+			take_screenshots = true
+			continue
+
+		if arg == "--quit-on-complete":
+			quit_on_complete = true
+			continue
+
+		if arg == "--single-sequence":
+			test_mode = "single_sequence"
+			continue
+
+		var eq_idx: int = arg.find("=")
+		if eq_idx <= 0:
+			continue
+
+		var key: String = arg.substr(0, eq_idx)
+		var value: String = arg.substr(eq_idx + 1).strip_edges()
+
+		match key:
+			"--test-mode":
+				if value == "spine_only" or value == "single_sequence":
+					test_mode = value
+			"--single-sequence":
+				test_mode = "single_sequence"
+				single_sequence_name = value
+			"--start-sequence":
+				start_sequence = value
+			"--start-index":
+				if value.is_valid_int():
+					start_index = int(value)
+			"--include-lab-posts":
+				include_lab_posts = _parse_bool_arg(value, include_lab_posts)
+			"--take-screenshots":
+				take_screenshots = _parse_bool_arg(value, take_screenshots)
+			"--screenshot-padding":
+				if value.is_valid_float():
+					screenshot_fit_padding = maxf(1.0, float(value))
+			"--screenshot-hide-overlay":
+				screenshot_hide_overlay = _parse_bool_arg(value, screenshot_hide_overlay)
+			"--timeout":
+				if value.is_valid_float():
+					timeout_seconds = float(value)
+			"--slow-threshold-ms":
+				if value.is_valid_float():
+					slow_threshold_ms = float(value)
+			"--max-maps":
+				if value.is_valid_int():
+					max_maps_to_test = int(value)
+			"--quit-on-complete":
+				quit_on_complete = _parse_bool_arg(value, quit_on_complete)
+			"--auto-start":
+				auto_start = _parse_bool_arg(value, auto_start)
+			"--wait-initial-load":
+				wait_for_initial_load = _parse_bool_arg(value, wait_for_initial_load)
+
+	print("MapTestRunner CLI overrides: mode=%s sequence=%s start_index=%d screenshots=%s max_maps=%d quit_on_complete=%s screenshot_padding=%.2f hide_overlay=%s wait_initial_load=%s" % [
+		test_mode,
+		single_sequence_name,
+		start_index,
+		str(take_screenshots),
+		max_maps_to_test,
+		str(quit_on_complete),
+		screenshot_fit_padding,
+		str(screenshot_hide_overlay),
+		str(wait_for_initial_load),
+	])
+
+func _parse_bool_arg(value: String, fallback: bool) -> bool:
+	var lowered: String = value.to_lower().strip_edges()
+	if lowered == "1" or lowered == "true" or lowered == "yes" or lowered == "on":
+		return true
+	if lowered == "0" or lowered == "false" or lowered == "no" or lowered == "off":
+		return false
+	return fallback
+
 func _deferred_start() -> void:
 	_take_snapshot()
 
@@ -127,8 +226,10 @@ func _deferred_start() -> void:
 				print("MapTestRunner: Disconnected catalog setup")
 
 	if auto_start:
-		# Wait for initial Lab map to finish loading
-		await _wait_for_initial_load()
+		if wait_for_initial_load:
+			await _wait_for_initial_load()
+		else:
+			await get_tree().process_frame
 		_start_tests()
 
 # ============================================================================
@@ -188,6 +289,7 @@ func _start_tests() -> void:
 
 	is_testing = true
 	current_test_index = 0
+	_maps_tested = 0
 
 	# Skip ahead if start_index is set
 	if start_index > 0 and start_index < test_queue.size():
@@ -294,6 +396,10 @@ func _load_sequence_maps(seq_name: String) -> Array:
 # TEST LOOP — nuke / reload / signal / validate
 # ============================================================================
 func _test_next_map() -> void:
+	if max_maps_to_test > 0 and _maps_tested >= max_maps_to_test:
+		_finish_tests()
+		return
+
 	if current_test_index >= test_queue.size():
 		_finish_tests()
 		return
@@ -366,9 +472,10 @@ func _test_next_map() -> void:
 	# Optional screenshot
 	if take_screenshots:
 		await get_tree().process_frame
-		_capture_screenshot(map_name)
+		await _capture_screenshot(map_name)
 
 	# Next map
+	_maps_tested += 1
 	current_test_index += 1
 	# Small delay between maps to let GC settle
 	await get_tree().create_timer(0.1).timeout
@@ -606,15 +713,161 @@ func _stop_audio() -> void:
 # SCREENSHOT CAPTURE
 # ============================================================================
 func _capture_screenshot(map_name: String) -> void:
-	var image := get_viewport().get_texture().get_image()
+	var overlay: CanvasLayer = get_node_or_null("../TestOverlay") as CanvasLayer
+	var overlay_was_visible: bool = false
+	if screenshot_hide_overlay and overlay:
+		overlay_was_visible = overlay.visible
+		overlay.visible = false
+
+	_position_capture_camera(map_name)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var image: Image = get_viewport().get_texture().get_image()
 	if image == null:
+		if screenshot_hide_overlay and overlay:
+			overlay.visible = overlay_was_visible
 		return
-	var dir_path := "user://map_test_screenshots/"
-	if not DirAccess.dir_exists_absolute(dir_path):
-		DirAccess.make_dir_recursive_absolute(dir_path)
-	var safe_name := map_name.replace("/", "_").replace("\\", "_")
-	var file_path := dir_path + safe_name + ".png"
-	image.save_png(file_path)
+
+	var user_dir_path: String = "user://map_test_screenshots/"
+	var absolute_dir_path: String = ProjectSettings.globalize_path(user_dir_path)
+	if not DirAccess.dir_exists_absolute(absolute_dir_path):
+		DirAccess.make_dir_recursive_absolute(absolute_dir_path)
+
+	var safe_name: String = map_name.replace("/", "_").replace("\\", "_")
+	var file_path: String = absolute_dir_path.path_join(safe_name + ".png")
+	var save_err: int = image.save_png(file_path)
+	if save_err != OK:
+		push_warning("MapTestRunner: Failed screenshot save for %s (%s)" % [map_name, file_path])
+
+	if screenshot_hide_overlay and overlay:
+		overlay.visible = overlay_was_visible
+
+func _position_capture_camera(map_name: String) -> void:
+	var test_camera: Camera3D = get_node_or_null("../TestCamera") as Camera3D
+	if not test_camera:
+		return
+
+	var scene_bounds: AABB = _compute_scene_bounds(lab_grid_system)
+	if scene_bounds.size.length() <= 0.001:
+		scene_bounds = _fallback_bounds_from_map(map_name)
+
+	if scene_bounds.size.length() <= 0.001:
+		test_camera.global_position = Vector3(5.5, 9.5, 8.5)
+		test_camera.look_at(Vector3(3.0, 0.0, 3.0), Vector3.UP)
+		return
+
+	var center: Vector3 = scene_bounds.get_center()
+	var size: Vector3 = scene_bounds.size
+	var radius: float = maxf(size.length() * 0.5, 2.0)
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var aspect: float = 16.0 / 9.0
+	if viewport_size.y > 0.0:
+		aspect = viewport_size.x / viewport_size.y
+
+	var half_vertical_fov: float = deg_to_rad(maxf(test_camera.fov, 1.0) * 0.5)
+	var half_horizontal_fov: float = atan(tan(half_vertical_fov) * aspect)
+	var limiting_half_fov: float = maxf(0.2, minf(half_vertical_fov, half_horizontal_fov))
+	var distance: float = (radius / tan(limiting_half_fov)) * screenshot_fit_padding
+	var view_direction: Vector3 = Vector3(1.0, 0.85, 1.0).normalized()
+
+	test_camera.global_position = center + (view_direction * distance)
+	test_camera.look_at(center + Vector3(0.0, size.y * 0.1, 0.0), Vector3.UP)
+	test_camera.near = 0.05
+	test_camera.far = maxf(200.0, distance * 4.0 + size.length())
+
+func _compute_scene_bounds(root_node: Node) -> AABB:
+	var boxes: Array[AABB] = []
+	if root_node:
+		_collect_visual_aabbs(root_node, boxes)
+
+	if boxes.is_empty():
+		return AABB()
+
+	var merged: AABB = boxes[0]
+	for i in range(1, boxes.size()):
+		merged = merged.merge(boxes[i])
+	return merged
+
+func _collect_visual_aabbs(node: Node, boxes: Array[AABB]) -> void:
+	if node is MeshInstance3D:
+		var mesh_instance: MeshInstance3D = node as MeshInstance3D
+		if mesh_instance.mesh:
+			boxes.append(_transform_aabb(mesh_instance.get_aabb(), mesh_instance.global_transform))
+	elif node is MultiMeshInstance3D:
+		var multimesh_instance: MultiMeshInstance3D = node as MultiMeshInstance3D
+		if multimesh_instance.multimesh:
+			boxes.append(_transform_aabb(multimesh_instance.get_aabb(), multimesh_instance.global_transform))
+
+	for child in node.get_children():
+		_collect_visual_aabbs(child, boxes)
+
+func _transform_aabb(local_aabb: AABB, world_transform: Transform3D) -> AABB:
+	var p: Vector3 = local_aabb.position
+	var s: Vector3 = local_aabb.size
+	var corners: Array[Vector3] = [
+		p,
+		p + Vector3(s.x, 0.0, 0.0),
+		p + Vector3(0.0, s.y, 0.0),
+		p + Vector3(0.0, 0.0, s.z),
+		p + Vector3(s.x, s.y, 0.0),
+		p + Vector3(s.x, 0.0, s.z),
+		p + Vector3(0.0, s.y, s.z),
+		p + s,
+	]
+
+	var min_corner: Vector3 = world_transform * corners[0]
+	var max_corner: Vector3 = min_corner
+	for i in range(1, corners.size()):
+		var world_corner: Vector3 = world_transform * corners[i]
+		min_corner = Vector3(
+			minf(min_corner.x, world_corner.x),
+			minf(min_corner.y, world_corner.y),
+			minf(min_corner.z, world_corner.z)
+		)
+		max_corner = Vector3(
+			maxf(max_corner.x, world_corner.x),
+			maxf(max_corner.y, world_corner.y),
+			maxf(max_corner.z, world_corner.z)
+		)
+
+	return AABB(min_corner, max_corner - min_corner)
+
+func _fallback_bounds_from_map(map_name: String) -> AABB:
+	var map_path: String = "res://commons/maps/%s/map_data.json" % map_name
+	if not FileAccess.file_exists(map_path):
+		map_path = "res://commons/maps/%s.json" % map_name
+		if not FileAccess.file_exists(map_path):
+			return AABB()
+
+	var file: FileAccess = FileAccess.open(map_path, FileAccess.READ)
+	if file == null:
+		return AABB()
+
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	file.close()
+	if parsed == null or not (parsed is Dictionary):
+		return AABB()
+
+	var data: Dictionary = parsed as Dictionary
+	var map_info: Dictionary = data.get("map_info", {})
+	var dimensions: Dictionary = map_info.get("dimensions", {})
+	var settings: Dictionary = data.get("settings", {})
+
+	var width: float = float(dimensions.get("width", 6))
+	var depth: float = float(dimensions.get("depth", 6))
+	var max_height: float = float(dimensions.get("max_height", 3))
+	var cube_size: float = float(settings.get("cube_size", 1.0))
+	var gutter: float = float(settings.get("gutter", 0.0))
+	var cell_size: float = maxf(0.05, cube_size + gutter)
+
+	var size: Vector3 = Vector3(
+		maxf(1.0, width * cell_size),
+		maxf(2.0, (max_height + 2.0) * cell_size),
+		maxf(1.0, depth * cell_size)
+	)
+
+	return AABB(Vector3.ZERO, size)
 
 # ============================================================================
 # FINISH — console summary + JSON report
@@ -677,6 +930,13 @@ func _finish_tests() -> void:
 	_set_detail("Report saved to user://map_test_report.json")
 	if progress_bar:
 		progress_bar.value = progress_bar.max_value
+
+	if quit_on_complete:
+		var exit_code: int = 0 if (fail_count == 0 and timeout_count == 0) else 1
+		call_deferred("_quit_with_code", exit_code)
+
+func _quit_with_code(code: int) -> void:
+	get_tree().quit(code)
 
 func _save_json_report(total_time: float) -> void:
 	var report := {

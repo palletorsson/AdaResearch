@@ -51,6 +51,7 @@ fov = 70.0
 
 [node name="LabGridSystem" parent="." unique_id=999202173 instance=ExtResource("2_grid")]
 script = ExtResource("1_labgrid")
+auto_load_map_on_ready = false
 lab_mode = true
 lab_cube_color = Color(0.95, 0.95, 0.98, 1)
 lab_ambient_color = Color(0.9, 0.9, 1, 1)
@@ -58,7 +59,7 @@ map_name = "Lab"
 
 [node name="MapTestRunnerNode" type="Node3D" parent="." unique_id=124994858]
 script = ExtResource("3_runner")
-start_index = 60
+wait_for_initial_load = false
 
 [node name="TimeoutTimer" type="Timer" parent="MapTestRunnerNode" unique_id=1998204625]
 one_shot = true

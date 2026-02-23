@@ -20,6 +20,8 @@ const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
 @export var reload_map: bool = false : set = reload_map_setter
+@export var auto_load_map_on_ready: bool = true
+@export var cache_artifact_registry_between_maps: bool = true
 @export var flatten_post_lab_structure_walls: bool = false
 @export var post_lab_wall_height_threshold: int = 6
 
@@ -72,7 +74,10 @@ func _deferred_initialization():
 	_check_for_scene_data()
 
 	# Load map data
-	_load_map_data()
+	if auto_load_map_on_ready:
+		_load_map_data()
+	else:
+		print("GridSystem: auto_load_map_on_ready=false (awaiting explicit reload_map trigger)")
 
 # Check for scene data and update map_name
 func _check_for_scene_data():
@@ -281,7 +286,8 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	# Initialize components with settings and references
 	var component_settings = {
 		"cube_size": cube_size,
-		"gutter": gutter
+		"gutter": gutter,
+		"cache_artifact_registry": cache_artifact_registry_between_maps
 	}
 	
 	# Pass animation settings if present

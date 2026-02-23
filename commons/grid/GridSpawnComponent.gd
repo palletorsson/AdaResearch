@@ -42,14 +42,17 @@ func handle_player_spawn():
 	print("  Rotation: %s" % spawn_data.rotation)
 	print("  Source: %s" % spawn_data.source)
 
-	# Position the player
-	_position_player(spawn_data)
+	# Position the player (if available in this runtime mode)
+	var player_positioned: bool = _position_player(spawn_data)
 
 	# Update reset systems
 	_update_reset_systems(spawn_data.position)
 
  
-	print("GridSpawnComponent: SPAWN POSITIONING COMPLETE")
+	print("GridSpawnComponent: SPAWN POSITIONING COMPLETE (player_positioned=%s)" % str(player_positioned))
+
+	# Always emit completion so desktop/headless runs don't stall on missing VR origin.
+	spawn_positioning_complete.emit(spawn_data.position)
  
 
 # Get spawn data from JSON (or use defaults)
@@ -141,12 +144,12 @@ func _check_utility_spawn() -> Dictionary:
 	return {}
 
 # Position the player at spawn point
-func _position_player(spawn_data: Dictionary):
+func _position_player(spawn_data: Dictionary) -> bool:
 	"""Set player position and rotation"""
 	var vr_origin = _find_vr_origin()
 	if not vr_origin:
 		print("GridSpawnComponent: ERROR - Could not find VR origin")
-		return
+		return false
 
 	var position = spawn_data.position
 	var rotation = spawn_data.rotation
@@ -160,14 +163,8 @@ func _position_player(spawn_data: Dictionary):
 	print("GridSpawnComponent: Set position TO: %s" % position)
 	print("GridSpawnComponent: Actual position AFTER: %s" % vr_origin.global_position)
 
-	# Wait a frame and check if position stuck
-	await get_tree().process_frame
-	print("GridSpawnComponent: Position after 1 frame: %s" % vr_origin.global_position)
-
 	print("GridSpawnComponent: ✓ Player spawned at %s (rotation: %s, source: %s)" % [position, rotation, spawn_data.source])
-
-	# Emit completion signal
-	spawn_positioning_complete.emit(position)
+	return true
 
 # Find VR origin in the scene
 func _find_vr_origin() -> Node3D:

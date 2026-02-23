@@ -9,6 +9,7 @@ class_name GridInteractablesComponent
 const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 const ARTIFACT_PLACEHOLDER_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
+static var _artifact_registry_cache_by_key: Dictionary = {}
 
 # Known config parameter names (NOT to be treated as tutorial shorthand)
 # These are artifact configuration keys that can have numeric values
@@ -50,6 +51,7 @@ var map_data_component: GridDataComponent  # Add reference to data component
 var cube_size: float = 1.0
 var gutter: float = 0.0
 var current_palette: String = ""
+var cache_artifact_registry: bool = true
 
 # Interactable objects tracking
 var interactable_objects: Dictionary = {}
@@ -67,24 +69,37 @@ func _ready():
 	# Artifact registry will be loaded during initialization with map data
 
 # Load artifact registries based on map configuration
-func _load_artifact_registries():
+func _load_artifact_registries() -> void:
 	print("GridInteractablesComponent: ============ LOADING ARTIFACT REGISTRIES ============")
 	print("GridInteractablesComponent: Starting artifact registry loading with lookup_name validation...")
 
 	# Get artifact registries from map external references
-	var artifact_paths = _get_artifact_registry_paths()
+	var artifact_paths: Array[String] = _get_artifact_registry_paths()
+	var cache_key: String = _build_registry_cache_key(artifact_paths)
+
+	if cache_artifact_registry and _artifact_registry_cache_by_key.has(cache_key):
+		var cached_registry: Variant = _artifact_registry_cache_by_key.get(cache_key, {})
+		if cached_registry is Dictionary:
+			grid_artifact_registry = (cached_registry as Dictionary).duplicate(true)
+			print("GridInteractablesComponent: Using cached artifact registry (%d artifacts)" % grid_artifact_registry.size())
+			return
+
+	grid_artifact_registry.clear()
 	print("GridInteractablesComponent: Found %d registry paths to load" % artifact_paths.size())
 	for path in artifact_paths:
 		print("GridInteractablesComponent:   - %s" % path)
 
-	var total_loaded = 0
-	var validation_errors = []
-	var validation_warnings = []
+	var total_loaded: int = 0
+	var validation_errors: Array[String] = []
+	var validation_warnings: Array[String] = []
 
 	for registry_path in artifact_paths:
-		var loaded_count = _load_single_artifact_registry(registry_path, validation_errors, validation_warnings)
+		var loaded_count: int = _load_single_artifact_registry(registry_path, validation_errors, validation_warnings)
 		total_loaded += loaded_count
 		print("GridInteractablesComponent:   → Loaded %d artifacts from %s" % [loaded_count, registry_path])
+
+	if cache_artifact_registry:
+		_artifact_registry_cache_by_key[cache_key] = grid_artifact_registry.duplicate(true)
 
 	# Report validation results
 	if validation_errors.size() > 0:
@@ -101,6 +116,11 @@ func _load_artifact_registries():
 	print("GridInteractablesComponent: ✅ TOTAL: Loaded %d validated artifacts from %d registries" % [total_loaded, artifact_paths.size()])
 	print("GridInteractablesComponent: Final registry size: %d" % grid_artifact_registry.size())
 	print("GridInteractablesComponent: ============================================")
+
+func _build_registry_cache_key(paths: Array[String]) -> String:
+	var sorted_paths: Array[String] = paths.duplicate()
+	sorted_paths.sort()
+	return "|".join(PackedStringArray(sorted_paths))
 
 # Get artifact registry paths from map data and registry directory
 func _get_artifact_registry_paths() -> Array[String]:
@@ -333,7 +353,8 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, u
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
 	current_palette = settings.get("palette", "")
-	
+	cache_artifact_registry = bool(settings.get("cache_artifact_registry", true))
+
 	# Load artifact registries based on map configuration
 	_load_artifact_registries()
 	

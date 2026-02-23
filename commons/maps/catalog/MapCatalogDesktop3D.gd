@@ -207,8 +207,8 @@ func _update_orbit_center() -> void:
 			var grid_origin: Vector3 = _grid_system.global_transform.origin
 			_orbit_center = grid_origin + Vector3(float(dims.x) * 0.5, float(dims.y) * 0.5 + 0.5, float(dims.z) * 0.5)
 			var map_extent := maxf(float(dims.x), float(dims.z))
-			_orbit_radius = maxf(map_extent * 0.8, 6.0)
-			_orbit_height = maxf(float(dims.y) + 2.0, 4.0)
+			_orbit_radius = maxf(map_extent * 0.78, 5.5)
+			_orbit_height = maxf(maxf(float(dims.y) + 2.5, map_extent * 0.95), 5.0)
 			return
 
 	# Fallback: compute AABB from all visible geometry in the scene
@@ -219,8 +219,8 @@ func _update_orbit_center() -> void:
 	if aabb.size.length() > 0.1:
 		_orbit_center = aabb.get_center()
 		var map_extent := maxf(aabb.size.x, aabb.size.z)
-		_orbit_radius = maxf(map_extent * 0.8, 6.0)
-		_orbit_height = maxf(aabb.size.y + 2.0, 4.0)
+		_orbit_radius = maxf(map_extent * 0.78, 5.5)
+		_orbit_height = maxf(maxf(aabb.size.y + 2.5, map_extent * 0.95), 5.0)
 
 ## Compute a merged AABB from all VisualInstance3D nodes under a root.
 func _compute_scene_aabb(root: Node3D) -> AABB:
@@ -369,7 +369,7 @@ func _apply_isometric_camera() -> void:
 	if not _preview_camera:
 		return
 	# Classic isometric-ish: elevated 45° angle from a corner
-	_preview_camera.global_position = Vector3(10.0, 10.0, 10.0)
+	_preview_camera.global_position = Vector3(10.0, 12.0, 10.0)
 	_preview_camera.look_at(Vector3.ZERO, Vector3.UP)
 	_fly_yaw = _preview_camera.rotation.y
 	_fly_pitch = _preview_camera.rotation.x
