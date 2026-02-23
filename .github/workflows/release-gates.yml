@@ -23,9 +23,20 @@ jobs:
 
       - name: Run release gates (honors toggle file)
         run: |
+          STRICT_FLAGS=""
+          if [[ "$GITHUB_REF_NAME" == "main" || "$GITHUB_REF_NAME" == release/* ]]; then
+            STRICT_FLAGS="--require-all-gates-enabled"
+          fi
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            if [[ "$GITHUB_BASE_REF" == "main" || "$GITHUB_BASE_REF" == release/* ]]; then
+              STRICT_FLAGS="--require-all-gates-enabled"
+            fi
+          fi
+
           python tools/run_release_gates.py \
             --max-grade-c -1 \
             --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json \
+            $STRICT_FLAGS \
             --json-out "$RUNNER_TEMP/RELEASE_GATES.json" \
             --md-out "$RUNNER_TEMP/RELEASE_GATES.md"
 

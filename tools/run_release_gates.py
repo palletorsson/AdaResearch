@@ -282,6 +282,12 @@ def to_markdown(report: dict[str, Any]) -> str:
             int(report.get("enabled_gate_count", 0)),
         )
     )
+    gate_policy = report.get("gate_policy", {})
+    if isinstance(gate_policy, dict) and bool(gate_policy.get("require_all_gates_enabled", False)):
+        lines.append("- Strict policy: all gates must be enabled")
+        disabled_ids = gate_policy.get("disabled_gate_ids", [])
+        if isinstance(disabled_ids, list) and disabled_ids:
+            lines.append(f"- Disabled gate IDs: {', '.join(str(x) for x in disabled_ids)}")
     lines.append("")
     lines.append("| Gate | Status | Key Metrics |")
     lines.append("|---|---|---|")
@@ -320,6 +326,11 @@ def main() -> int:
         action="store_true",
         help="Ignore gate toggle file and evaluate all gates",
     )
+    parser.add_argument(
+        "--require-all-gates-enabled",
+        action="store_true",
+        help="Fail if any gate is disabled (strict policy for main/release)",
+    )
     parser.add_argument("--json-out", default="", help="Optional JSON report path")
     parser.add_argument("--md-out", default="", help="Optional markdown report path")
     args = parser.parse_args()
@@ -338,9 +349,24 @@ def main() -> int:
         max_grade_c=max_grade_c,
         gate_enabled=gate_enabled,
     )
+    disabled_gate_ids = [
+        str(gate.get("id", ""))
+        for gate in report.get("gates", [])
+        if not bool(gate.get("enabled", True))
+    ]
+    disabled_gate_ids = [gate_id for gate_id in disabled_gate_ids if gate_id != ""]
+    all_gates_enabled = int(report.get("enabled_gate_count", 0)) == int(report.get("total_gate_count", 0))
+
+    if args.require_all_gates_enabled and not all_gates_enabled:
+        report["overall_pass"] = False
+        report["overall_status"] = "FAIL"
+
     report["gate_policy"] = {
         "toggle_source": gate_toggle_source,
         "ignore_gate_toggles": bool(args.ignore_gate_toggles),
+        "require_all_gates_enabled": bool(args.require_all_gates_enabled),
+        "all_gates_enabled": all_gates_enabled,
+        "disabled_gate_ids": disabled_gate_ids,
     }
 
     print("")
@@ -356,6 +382,10 @@ def main() -> int:
     )
     if gate_toggle_source:
         print(f"Gate toggles: {gate_toggle_source}")
+    if args.require_all_gates_enabled:
+        print("Strict policy: all gates must be enabled")
+        if disabled_gate_ids:
+            print(f"Disabled gate IDs: {', '.join(disabled_gate_ids)}")
     print("")
     for gate in report.get("gates", []):
         status = "OFF"

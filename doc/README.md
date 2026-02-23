@@ -94,6 +94,23 @@ AdaResearch/
 - `commons/scenes/grid_desktop.tscn` — Test any map
 - `commons/scenes/desktop_map_tester.tscn` — Map browser
 
+### Release Gates (Onboarding)
+
+Before opening a PR, run the machine gate checks:
+
+```powershell
+python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json
+```
+
+Strict mode (all gates must be ON and passing):
+
+```powershell
+python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json --require-all-gates-enabled
+```
+
+Gate toggle file used by dashboard + tooling:
+- `doc/reports/RELEASE_GATES_TOGGLES.json`
+
 ## 📚 Documentation
 
 | Document | Purpose |
@@ -103,6 +120,8 @@ AdaResearch/
 | [TAXONOMY.md](TAXONOMY.md) | Generative paradigms framework |
 | [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |
 | [commons/audio/SOUND_SYSTEM_GUIDE.md](commons/audio/SOUND_SYSTEM_GUIDE.md) | Audio system details |
+| [doc/LAUNCH_GATES.md](doc/LAUNCH_GATES.md) | Release gate policy, strict mode, and CI behavior |
+| [doc/SKILL_WORKFLOW.md](doc/SKILL_WORKFLOW.md) | Skill-driven PR workflow and evidence checklist |
 | [doc/VR_GAMEPLAY_DESIGN.md](doc/VR_GAMEPLAY_DESIGN.md) | VR design philosophy |
 | [doc/QFEP_GAMWELL_MAPPING.md](doc/QFEP_GAMWELL_MAPPING.md) | Theory grounded in art/math history |
 

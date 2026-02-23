@@ -89,6 +89,38 @@ Strict map mode (`C` also blocked):
 python tools/run_release_gates.py --max-grade-c 0
 ```
 
+Use dashboard/tooling gate toggles:
+
+```powershell
+python tools/run_release_gates.py --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json
+```
+
+Ignore toggles (evaluate all gates):
+
+```powershell
+python tools/run_release_gates.py --ignore-gate-toggles
+```
+
+Strict enablement mode (fail if any gate is OFF):
+
+```powershell
+python tools/run_release_gates.py --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json --require-all-gates-enabled
+```
+
+## CI Policy
+
+Workflow file:
+- `.github/workflows/release-gates.yml`
+
+Policy:
+- `main` and `release/*`: strict mode enabled (`--require-all-gates-enabled`)
+- pull requests targeting `main` or `release/*`: strict mode enabled
+- `dev` and other branches: toggles are honored without strict enablement
+
+Shared toggle file:
+- `doc/reports/RELEASE_GATES_TOGGLES.json`
+- Dashboard and CLI both read/write this file.
+
 ## Operational Rhythm
 
 - Run on every major merge.
