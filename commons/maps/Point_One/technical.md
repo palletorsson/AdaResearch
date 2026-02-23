@@ -1,124 +1,74 @@
-	# Point One - Technical Tutorial
+# Point One - Technical Tutorial
 
-	*This tutorial reuses and extends content from `point_axioms.md`*
+This chapter focuses on one thing: how a point becomes manipulable in VR while staying mathematically minimal.
 
-	## The Point as Data
+## Point as Data
 
-	### Position in the Engine
+In Godot, a point is represented as a `Vector3` position:
 
-	In a game engine like Godot, every point always has a position.
-	The engine stores this position continuously as a vector.
+```gdscript
+var point_position: Vector3 = Vector3(1.0, 0.5, 0.0)
+```
 
-	```gdscript
-	var point_position = Vector3(3.0, 1.5, 4.0)
-	```
+The vector is the data-model. Any visible sphere is only a proxy so bodies can see and grab that position.
 
-	This vector **is** the point. The three float values (x, y, z) define position in 3D space.
+## Interactive Point Implementation
 
-	### The Point Has No Intrinsic Properties
+`interactive_point_origin.tscn` uses `XRToolsPickable` and adds three feedback channels:
 
-	A point is:
-	- No size (infinitely small)
-	- No shape (dimensionless)
-	- No direction (no orientation)
+1. Material glow when picked up.
+2. Audio + haptic pulse on pickup/drop.
+3. A live line from current point position to `Vector3.ZERO`.
 
-	It is defined **only by where it is**.
+Core loop (simplified):
 
-	```gdscript
-	# A point is just a position
-	var point_a = Vector3(1.0, 2.0, 3.0)
-	var point_b = Vector3(4.0, 5.0, 6.0)
+```gdscript
+extends XRToolsPickable
 
-	# These are different points because they have different positions
-	print(point_a == point_b)  # false
-	```
+var _is_held := false
+var _line_mesh_instance: MeshInstance3D
+var _line_cylinder: CylinderMesh
 
-	### Making a Point Visible
+func _process(_delta: float) -> void:
+	if _is_held:
+		_update_line_to_origin()
+		_update_position_label()
+```
 
-	To see a point, we represent it with a small sphere.
-	The sphere is not the point — it is a **visual marker** for a position.
+The current optimization avoids creating a new cylinder mesh every frame. The line mesh is created once and only its transform/height is updated while held.
 
-	```gdscript
-	extends Node3D
+## Fixed vs Movable Point
 
-	func create_point_marker(position: Vector3, radius: float = 0.01) -> MeshInstance3D:
-		# Create sphere geometry
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = radius
-		sphere_mesh.height = radius * 2.0  # Height = diameter for perfect sphere
+Point One now places:
 
-		# Create mesh instance
-		var mesh_instance = MeshInstance3D.new()
-		mesh_instance.mesh = sphere_mesh
-		mesh_instance.position = position
+- `static_point` on the isolated cube (fixed reference)
+- `interactive_point_origin` on the main platform (movable reference)
 
-		# Create glowing material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.8, 0.95, 1, 1)
-		material.emission_enabled = true
-		material.emission = Color(0.3, 0.6, 0.8, 1)
-		material.emission_energy = 0.5
-		mesh_instance.material_override = material
+This creates a direct technical contrast:
 
-		return mesh_instance
-	```
+- static point: no XR pickup, low runtime updates
+- interactive point: XR pickup, per-frame feedback only while held
 
-	### Making a Point Interactive
+## Script Runner Link
 
-	The `interactive_point_origin.tscn` in this map uses XR Tools to make the point **grabbable**:
+`script_runner#point` demonstrates the same concept in code form:
 
-	```gdscript
-	extends XRToolsPickable
+```gdscript
+var point = Vector3(1.0, 0.5, 0.0)
+print(point.x)
+```
 
-	@export var glow_color: Color = Color(0.3, 0.8, 1, 1)
-	@export var glow_emission_energy: float = 2.5
+So the map aligns embodiment (grab and move) with symbolic representation (execute and inspect).
 
-	func _ready():
-		# Point can be grabbed and moved
-		freeze = true  # Starts frozen in place
-		alter_freeze = false  # Can be un-frozen when grabbed
+## VR Performance Notes
 
-		# Connect grab signals
-		picked_up.connect(_on_picked_up)
-		dropped.connect(_on_dropped)
+For this map's interactables:
 
-	func _on_picked_up(pickable):
-		# Point glows brighter when held
-		# Your body is now determining its position
-		pass
+- Keep per-frame work conditional (`_is_held`) for interactive objects.
+- Reuse meshes/materials in loops; avoid runtime mesh allocation in `_process`.
+- Keep tiny point meshes low-segment where possible.
+- Debounce tactile button triggers so one touch does not cause multiple toggles.
 
-	func _on_dropped(pickable):
-		# Point remains where your hand placed it
-		# The body has instantiated a new position
-		pass
-	```
+## Key Takeaway
 
-	### Point Position Updates
-
-	When you move a point, you're updating its Vector3 position every frame:
-
-	```gdscript
-	func _process(delta):
-	    if is_picked_up:
-			# The controller's position becomes the point's position
-	        global_position = get_picking_hand().global_position
-	```
-
-	The point has no memory of previous positions - only its current location exists.
-
-	## Euclidean Definition
-
-	The floating text references Euclid's *Elements*, Book I, Definition 1:
-
-	> "A point is that which has no part."
-
-	In code terms:
-	- A point cannot be subdivided (atomic)
-	- It has zero dimensions (0D)
-	- It occupies no volume (infinitesimal)
-
-	## Key Takeaway
-
-	A point in code is a **position marker** - three float values that locate something in 3D space. The visual sphere, the grabbable object, the glowing material - none of these **are** the point. They make the position **visible and manipulable** by bodies in VR space.
-
-	When you grab and move the point, your hand's position becomes the point's new Vector3 coordinates. **Your body creates geometry.**
+A point is still just coordinates. VR interaction layers on top of that model: feedback, visibility, and embodied control. The implementation should preserve that simplicity while staying robust at VR frame rates.

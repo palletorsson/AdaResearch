@@ -30,6 +30,8 @@ var _current_controller: XRController3D
 # Line to origin
 var _line_mesh_instance: MeshInstance3D
 var _line_material: StandardMaterial3D
+var _line_cylinder: CylinderMesh
+var _last_line_distance: float = -1.0
 var _is_held := false
 
 # Position label
@@ -69,7 +71,18 @@ func _setup_line_to_origin() -> void:
 	# Create line mesh instance
 	_line_mesh_instance = MeshInstance3D.new()
 	_line_mesh_instance.name = "LineToOrigin"
+	_line_mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_line_mesh_instance.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 	add_child(_line_mesh_instance)
+	
+	# Reuse one mesh to avoid per-frame allocations while held in VR
+	_line_cylinder = CylinderMesh.new()
+	_line_cylinder.height = 0.001
+	_line_cylinder.top_radius = line_width
+	_line_cylinder.bottom_radius = line_width
+	_line_cylinder.radial_segments = 6
+	_line_cylinder.rings = 1
+	_line_mesh_instance.mesh = _line_cylinder
 	
 	# Create material for line
 	_line_material = StandardMaterial3D.new()
@@ -89,32 +102,29 @@ func _update_line_to_origin() -> void:
 	if not _line_mesh_instance:
 		return
 	
-	var current_pos = global_position
-	var direction = origin_point - current_pos
-	var distance = direction.length()
+	var current_pos: Vector3 = global_position
+	var direction: Vector3 = origin_point - current_pos
+	var distance: float = direction.length()
 	
 	if distance < 0.001:
 		_line_mesh_instance.visible = false
 		return
 	
 	_line_mesh_instance.visible = true
-	
-	# Create cylinder mesh for the line
-	var cylinder = CylinderMesh.new()
-	cylinder.height = distance
-	cylinder.top_radius = line_width
-	cylinder.bottom_radius = line_width
-	cylinder.radial_segments = 8
-	cylinder.rings = 1
-	
-	_line_mesh_instance.mesh = cylinder
+
+	if _line_cylinder:
+		if absf(distance - _last_line_distance) > 0.0005:
+			_line_cylinder.height = distance
+			_last_line_distance = distance
+		_line_cylinder.top_radius = line_width
+		_line_cylinder.bottom_radius = line_width
 	
 	# Position at midpoint between current position and origin
-	var midpoint = (current_pos + origin_point) / 2.0
+	var midpoint: Vector3 = (current_pos + origin_point) / 2.0
 	_line_mesh_instance.global_position = midpoint
 	
 	# Rotate to point from current position to origin
-	var up = Vector3.UP
+	var up: Vector3 = Vector3.UP
 	if abs(direction.normalized().dot(up)) > 0.99:
 		up = Vector3.RIGHT
 	

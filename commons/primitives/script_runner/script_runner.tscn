@@ -4,7 +4,7 @@
 
 [node name="ScriptRunner" type="Node3D"]
 script = ExtResource("1_script")
-script_name = "point_demo"
+script_name = "point"
 auto_loop = true
 start_delay = 1.0
 default_line_duration = 1.0
@@ -20,4 +20,4 @@ keyword_color = Color(0.6, 0.8, 1, 1)
 string_color = Color(0.6, 1, 0.6, 1)
 number_color = Color(1, 0.8, 0.5, 1)
 comment_color = Color(0.5, 0.5, 0.5, 1)
-highlight_color = Color(1, 0.9, 0.3, 0.3)
+highlight_color = Color(1, 0.8, 0, 0.85)

@@ -1,170 +1,48 @@
 # Script Runner
 
-A live code display gadget that shows GDScript code executing line-by-line with real evaluation and visual feedback.
+A live code display artifact for map lessons. It renders code on a panel and executes scripted line actions over time.
 
-## Features
+## What It Does
 
-- **Line-by-line execution** with prominent yellow highlight bar
-- **Real Expression evaluation** using Godot's Expression class
-- **Variable storage** - variables persist across lines
-- **Visual feedback** - Vector3 values spawn 3D markers, arrays show grids
-- **VR-ready** play button with touch interaction
+- Displays syntax-highlighted code line by line.
+- Highlights the active line.
+- Executes actions (`eval`, grid actions, point actions).
+- Shows evaluated result text and optional 3D markers.
+- Exposes a VR-touchable play/pause button.
 
-## Usage in Maps
+## Map Usage
 
-Add to map's `interactables` array:
-
-```json
-"interactables": [
-    ["script_runner#point:90:1", " ", " "],
-    ["script_runner#array:0:1", " ", " "]
-]
-```
-
-### Available Scripts
-
-| Config | Description |
-|--------|-------------|
-| `#point` | Vector3 basics - creating points, accessing x/y/z |
-| `#vector_math` | Vector operations - addition, scaling, length |
-| `#array` | 2D array indexing with visual 4x4 grid |
-| `#pattern` | Checkerboard pattern using (row+col)%2 |
-| `#loop` | For loop iteration through rows |
-
-## Creating Custom Scripts
-
-Edit `scripts.json` to add new scripts:
+Use registry config syntax in `interactables`:
 
 ```json
-{
-    "scripts": {
-        "my_script": {
-            "name": "My Script",
-            "description": "What this script teaches",
-            "lines": [
-                {"text": "# Comment line", "action": "none", "duration": 1.5},
-                {"text": "var x = Vector3(1, 2, 3)", "action": "eval", "params": {"code": "var x = Vector3(1, 2, 3)"}, "duration": 2.0}
-            ]
-        }
-    }
-}
+"script_runner#point:90:1"
 ```
 
-### Line Structure
+Supported script keys:
 
-Each line in the `lines` array:
+- `point`
+- `vector_math`
+- `array`
+- `pattern`
+- `loop`
 
-```json
-{
-    "text": "code displayed on screen",
-    "action": "action_name",
-    "params": {"key": "value"},
-    "duration": 2.0
-}
-```
+Scripts are defined in `scripts.json`.
 
-## Actions
+## VR Interaction Notes
 
-### Code Evaluation
+- Play button uses `Area3D` touch + mouse input.
+- Presses are debounced with `button_press_cooldown` (default `0.25s`) to prevent double toggles from hand collider overlap.
+- Button icon uses ASCII-safe states: `>` (idle), `||` (running).
 
-| Action | Params | Description |
-|--------|--------|-------------|
-| `eval` | `{"code": "expression"}` | Evaluates real GDScript expression, stores variables, shows result |
-| `none` | - | Display only, no action |
+## Scene Defaults
 
-**Eval Examples:**
-```json
-{"text": "var point = Vector3(1, 2, 3)", "action": "eval", "params": {"code": "var point = Vector3(1, 2, 3)"}}
-{"text": "print(point.x)", "action": "eval", "params": {"code": "print(point.x)"}}
-{"text": "point = point + offset", "action": "eval", "params": {"code": "point = point + offset"}}
-```
+`script_runner.tscn` defaults to:
 
-The `eval` action:
-- Parses `var x = expr` assignments and stores variables
-- Evaluates `print(expr)` and shows `>>> result`
-- Supports property access like `point.x`
-- Variables persist: use `point` after defining it
+- `script_name = "point"`
+- strong highlight alpha for readability in VR
 
-### Grid Visualization
+## Extending
 
-| Action | Params | Description |
-|--------|--------|-------------|
-| `init_grid` | `{"size": 4}` | Creates NxN visual grid |
-| `set_cell` | `{"row": 0, "col": 0, "color": "red"}` | Sets cell color with animation |
-| `set_diagonal` | `{"color": "white"}` | Sets diagonal cells |
-| `highlight_row` | `{"row": 0, "color": "cyan"}` | Highlights entire row |
-| `highlight_col` | `{"col": 0, "color": "cyan"}` | Highlights entire column |
-| `clear_grid` | - | Removes the grid |
-
-**Available Colors:** `red`, `blue`, `green`, `yellow`, `white`, `black`, `orange`, `purple`, `cyan`, `off`
-
-### Legacy Point Actions
-
-| Action | Params | Description |
-|--------|--------|-------------|
-| `spawn_point` | `{"pos": [x,y,z], "color": [r,g,b,a]}` | Creates glowing sphere |
-| `move_point` | `{"pos": [x,y,z]}` | Moves existing point |
-| `shrink_point` | `{"scale": 0.5}` | Scales point size |
-| `show_label` | `{"text": "label", "offset": [x,y,z]}` | Shows 3D text label |
-| `clear_all` | - | Removes all spawned objects and resets |
-
-## Display Components
-
-### Code Panel
-- Dark background with syntax highlighting
-- Line numbers on left
-- Yellow highlight bar shows current executing line
-- Orange left accent for visibility
-
-### Result Display (below panel)
-- **Line indicator**: "Line X:" in yellow
-- **Result value**: Evaluated result in green
-
-### Visual Grid (for array scripts)
-- 4x4 grid of 3D cubes to the right of panel
-- Row/column headers (0, 1, 2, 3)
-- Cells pulse and glow when set
-- Index labels `[row,col]` appear briefly
-
-### Play Button
-- Green button at bottom-right of panel
-- Click or VR touch to start/pause
-- Changes to orange when running
-
-## Keyboard Controls (for testing)
-
-- `Space` - Play/Pause
-- `R` - Reset and play from beginning
-
-## Adding to Registry
-
-After creating a new script, add it to `script_runner.json` registry:
-
-```json
-{
-    "config_mapping": {
-        "my_script": {"script_name": "my_script"}
-    }
-}
-```
-
-And update `_check_config_metadata()` in `script_runner.gd`:
-
-```gdscript
-var known_scripts = ["point", "vector_math", "array", "pattern", "loop", "my_script"]
-```
-
-## Expression Limitations
-
-Godot's Expression class supports:
-- Basic math: `+`, `-`, `*`, `/`, `%`
-- Constructors: `Vector3()`, `Vector2()`, `Color()`
-- Property access: `point.x`, `color.r`
-- Method calls: `vector.length()`, `vector.normalized()`
-- Variables defined in earlier lines
-
-Does NOT support:
-- Control flow (`if`, `for`, `while`)
-- Function definitions
-- Class instantiation
-- File/scene access
+1. Add a new script block in `scripts.json`.
+2. Add config mapping in `commons/artifacts/registry/script_runner.json`.
+3. Add key in `_check_config_metadata()` if using metadata toggle path.

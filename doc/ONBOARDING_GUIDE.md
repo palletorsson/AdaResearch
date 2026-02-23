@@ -325,6 +325,7 @@ Full reference: `doc/CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md`
 | `doc/reports/ARTIFACT_REGISTRY_AUDIT.md` | Registry completeness |
 | `doc/reports/LAB_PROGRESSION_CONSISTENCY_REPORT.md` | Lab post-state consistency |
 | `doc/reports/HANDOFF_2026-02-16_MAP_BUILD.md` | Most recent development handoff |
+| `doc/reports/POINT_PRIMITIVES_AUDIT_LOG.md` | Point-sequence audit memory (`Point_Zero`/`Point_One` pass tracking) |
 
 ### Contribution Guides
 
@@ -455,5 +456,6 @@ d5e2afec Noise_Voxel: remove stray s marker
 - [ ] Skim `doc/reports/SPINE_MAP_BUILD_STATUS.md` — playability at a glance (all clear)
 - [ ] Pick a sequence and run `/ada-test-player [sequence]` — experience the content from source
 - [ ] Run `/ada-knowledge-updater all` if `SYSTEM_KNOWLEDGE.md` doesn't exist yet
+- [ ] Check `doc/reports/POINT_PRIMITIVES_AUDIT_LOG.md` before point-map edits so you continue the current pass
 - [ ] Check `doc/reports/SEQUENCE_CONTRACT_AUDIT.md` — 0 blockers, 97 undeclared folders to triage
 - [ ] Run `git log --oneline -10` to see recent changes (or use `python tools/ada/ada.py` CLI navigator)

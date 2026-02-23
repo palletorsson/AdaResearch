@@ -9,7 +9,7 @@ signal line_executed(line_index: int, line_text: String)
 signal script_completed
 
 @export_category("Script Configuration")
-@export var script_name: String = "demo"
+@export var script_name: String = "point"
 @export var script_lines: Array[Dictionary] = []
 @export var auto_loop: bool = true
 @export var start_delay: float = 1.0
@@ -17,6 +17,7 @@ signal script_completed
 @export_category("Timing")
 @export var default_line_duration: float = 1.0
 @export var highlight_transition_time: float = 0.15
+@export var button_press_cooldown: float = 0.25
 
 @export_category("Display")
 @export var panel_width: float = 0.6
@@ -40,6 +41,7 @@ var _is_running: bool = false
 var _line_timer: float = 0.0
 var _current_duration: float = 0.0
 var _waiting_for_start: bool = true
+var _last_button_press_time: float = -10.0
 
 # Scene references
 var _viewport: SubViewport
@@ -88,6 +90,8 @@ const KEYWORDS = ["var", "func", "if", "else", "elif", "for", "while", "return",
 
 # Path to scripts JSON
 const SCRIPTS_PATH = "res://commons/primitives/script_runner/scripts.json"
+const PLAY_ICON_IDLE: String = ">"
+const PLAY_ICON_RUNNING: String = "||"
 
 func _ready():
 	_setup_display()
@@ -251,7 +255,7 @@ func _setup_play_button():
 	# Play icon (triangle)
 	var play_icon = Label3D.new()
 	play_icon.name = "PlayIcon"
-	play_icon.text = "▶"
+	play_icon.text = PLAY_ICON_IDLE
 	play_icon.font_size = 64
 	play_icon.pixel_size = 0.001
 	play_icon.position.z = 0.012
@@ -986,26 +990,30 @@ func play():
 
 	# Update button visual
 	if _play_button:
-		var icon = _play_button.get_node_or_null("PlayIcon")
+		var icon: Label3D = _play_button.get_node_or_null("PlayIcon") as Label3D
 		if icon:
-			icon.text = "⏸"
+			icon.text = PLAY_ICON_RUNNING
 		# Change button color to indicate running
-		var mesh = _play_button.get_node_or_null("ButtonMesh")
+		var mesh: MeshInstance3D = _play_button.get_node_or_null("ButtonMesh") as MeshInstance3D
 		if mesh and mesh.material_override:
-			mesh.material_override.albedo_color = Color(0.6, 0.3, 0.2, 1.0)
-			mesh.material_override.emission = Color(0.4, 0.2, 0.1, 1.0)
+			var mesh_material: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+			if mesh_material:
+				mesh_material.albedo_color = Color(0.6, 0.3, 0.2, 1.0)
+				mesh_material.emission = Color(0.4, 0.2, 0.1, 1.0)
 
 func stop():
 	_is_running = false
 	if _play_button:
-		var icon = _play_button.get_node_or_null("PlayIcon")
+		var icon: Label3D = _play_button.get_node_or_null("PlayIcon") as Label3D
 		if icon:
-			icon.text = "▶"
+			icon.text = PLAY_ICON_IDLE
 		# Restore button color
-		var mesh = _play_button.get_node_or_null("ButtonMesh")
+		var mesh: MeshInstance3D = _play_button.get_node_or_null("ButtonMesh") as MeshInstance3D
 		if mesh and mesh.material_override:
-			mesh.material_override.albedo_color = Color(0.2, 0.6, 0.3, 1.0)
-			mesh.material_override.emission = Color(0.1, 0.4, 0.2, 1.0)
+			var mesh_material: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+			if mesh_material:
+				mesh_material.albedo_color = Color(0.2, 0.6, 0.3, 1.0)
+				mesh_material.emission = Color(0.1, 0.4, 0.2, 1.0)
 	script_stopped.emit()
 
 func toggle():
@@ -1022,32 +1030,41 @@ func load_script(lines: Array[Dictionary]):
 	_update_code_display()
 	_reset_script()
 
+func _try_toggle_from_interaction() -> bool:
+	var now: float = float(Time.get_ticks_msec()) / 1000.0
+	if now - _last_button_press_time < button_press_cooldown:
+		return false
+	_last_button_press_time = now
+	toggle()
+	_animate_button_press()
+	return true
+
 # Input handling
 func _on_play_button_input(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		toggle()
+		_try_toggle_from_interaction()
 
 func _on_play_button_touched(area: Area3D):
 	# Handle VR finger/hand touch
 	var area_name = area.name.to_lower()
 	if "finger" in area_name or "hand" in area_name or "pointer" in area_name:
-		print("ScriptRunner: Button touched by %s" % area.name)
-		toggle()
-		_animate_button_press()
+		if _try_toggle_from_interaction():
+			print("ScriptRunner: Button touched by %s" % area.name)
 
 func _on_play_button_body_touched(body: Node3D):
 	# Handle physics body collision (grabbing hand, thrown objects, etc.)
 	var body_name = body.name.to_lower()
 	if "hand" in body_name or "finger" in body_name or "controller" in body_name:
-		print("ScriptRunner: Button touched by body %s" % body.name)
-		toggle()
-		_animate_button_press()
+		if _try_toggle_from_interaction():
+			print("ScriptRunner: Button touched by body %s" % body.name)
 
 func _on_play_button_hover():
 	# Brighten button on hover
-	var mesh = _play_button.get_node_or_null("ButtonMesh")
+	var mesh: MeshInstance3D = _play_button.get_node_or_null("ButtonMesh") as MeshInstance3D
 	if mesh and mesh.material_override:
-		mesh.material_override.emission_energy_multiplier = 1.0
+		var mesh_material: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+		if mesh_material:
+			mesh_material.emission_energy_multiplier = 1.0
 
 func _animate_button_press():
 	# Visual feedback for button press
@@ -1067,3 +1084,4 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			_reset_script()
 			play()
+
