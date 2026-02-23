@@ -578,6 +578,17 @@
 				"array_tutorial"
 			],
 			"sequence": "array_tutorial"
+		},
+		"wfc_tile_mosaic": {
+			"name": "WFC Tile Mosaic",
+			"lookup_name": "wfc_tile_mosaic",
+			"description": "Floor panel showing a pre-generated Wave Function Collapse output — a grid of tiles where each cell respects adjacency constraints. Constraint propagation made visible.",
+			"scene": "res://commons/artifacts/wfc_tile_mosaic/wfc_tile_mosaic.tscn",
+			"category": "showcase",
+			"tags": ["wfc", "wave_function_collapse", "constraint", "tiling", "mosaic", "procedural"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
