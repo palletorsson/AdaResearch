@@ -565,6 +565,19 @@
 				"array_tutorial"
 			],
 			"sequence": "array_tutorial"
+		},
+		"array_carpet": {
+			"name": "Array Carpet",
+			"lookup_name": "array_carpet",
+			"description": "A decorative floor carpet displaying the player's tiled pattern from the arrays lesson. Repetition is not boring, it's ornamental.",
+			"scene": "res://commons/artifacts/array_carpet/array_carpet.tscn",
+			"category": "showcase",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"sequence": "array_tutorial"
 		}
 	}
 }

@@ -27,7 +27,14 @@
 		"description": "After cellular automata: neutral stage. CA taught emergence from simple rules. The learning is internal — no new doors, just new perception.",
 		"structure_changes": [],
 		"added_utilities": [],
-		"added_interactables": []
+		"added_interactables": [
+			{
+				"row": 15,
+				"col": 3,
+				"artifact": "ca_rule_explorer:0:0:0.4",
+				"note": "1x1m CA board — simple rules generating complex behavior"
+			}
+		]
 	},
 	"layers": {
 		"structure": [
@@ -86,11 +93,11 @@
 			[" ", "nail_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "hand_model:0:-1", " ", " ", "spectral_sine_wave:0:0:0.4", "RackMoogBass:180", " ", " ", " ", "random_walk_collection:90", " ", " ", " "],
 			[" ", "hand_color_controller:90", " ", " ", " ", " ", " ", " ", " ", "noisetext:90:-0.3:0.5", " ", " ", " "],
+			[" ", " ", " ", "array_carpet:0:0:0.3", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "ca_rule_explorer:0:0:0.4", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

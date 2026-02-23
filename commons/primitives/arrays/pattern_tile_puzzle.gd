@@ -114,6 +114,11 @@ signal color_selected(color_index: int)
 ## Spawn offset for cube dispensers
 @export var spawner_offset: Vector3 = Vector3(0.25, 0, 0)
 
+@export_group("Audio")
+@export var snap_volume_db: float = -16.0
+@export var snap_pitch_hz: float = 920.0
+@export var snap_duration_seconds: float = 0.07
+
 ## === CURSOR VISUALIZATION ===
 ## The cursor makes array indexing visible - it's the index incarnate
 
@@ -157,6 +162,9 @@ var _preview_container: Node3D
 var _spawner_container: Node3D
 var _mode_label: Label3D
 var _grid_lines: Node3D
+var _snap_player: AudioStreamPlayer3D
+var _snap_stream: AudioStreamWAV
+var _selected_indicator: MeshInstance3D  # Glow ring on selected color spawner
 
 ## Preload cube scene
 var _cube_scene: PackedScene = null
@@ -171,6 +179,7 @@ func _ready() -> void:
 
 	# Try to load cube scene
 	_cube_scene = load("res://commons/primitives/arrays/pattern_tile_cube.tscn")
+	_setup_snap_audio()
 
 	_initialize_grid_data()
 	_create_editor_grid()
@@ -239,6 +248,9 @@ func _create_editor_grid() -> void:
 	if show_grid_lines:
 		_create_grid_lines()
 
+	# Add subtle frame border around editor
+	_create_editor_frame()
+
 
 func _create_cell(x: int, y: int) -> MeshInstance3D:
 	var mesh_instance = MeshInstance3D.new()
@@ -301,6 +313,52 @@ func _create_line_mesh(from: Vector3, to: Vector3, mat: Material) -> MeshInstanc
 	return mesh_instance
 
 
+func _create_editor_frame() -> void:
+	var frame = Node3D.new()
+	frame.name = "EditorFrame"
+	_editor_container.add_child(frame)
+
+	var grid_total_size = tile_size * cell_size
+	var frame_width = 0.006
+	var frame_depth = 0.002
+
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.3, 0.25, 0.2)
+	frame_mat.roughness = 0.9
+
+	# Top border
+	var top = MeshInstance3D.new()
+	var top_box = BoxMesh.new()
+	top_box.size = Vector3(grid_total_size + frame_width * 2, frame_width, frame_depth)
+	top.mesh = top_box
+	top.material_override = frame_mat
+	top.position = Vector3(0, grid_total_size / 2 + frame_width / 2, cell_size / 2)
+	frame.add_child(top)
+
+	# Bottom border
+	var bottom = MeshInstance3D.new()
+	bottom.mesh = top_box
+	bottom.material_override = frame_mat
+	bottom.position = Vector3(0, -grid_total_size / 2 - frame_width / 2, cell_size / 2)
+	frame.add_child(bottom)
+
+	# Left border
+	var left = MeshInstance3D.new()
+	var side_box = BoxMesh.new()
+	side_box.size = Vector3(frame_width, grid_total_size, frame_depth)
+	left.mesh = side_box
+	left.material_override = frame_mat
+	left.position = Vector3(-grid_total_size / 2 - frame_width / 2, 0, cell_size / 2)
+	frame.add_child(left)
+
+	# Right border
+	var right = MeshInstance3D.new()
+	right.mesh = side_box
+	right.material_override = frame_mat
+	right.position = Vector3(grid_total_size / 2 + frame_width / 2, 0, cell_size / 2)
+	frame.add_child(right)
+
+
 func _create_preview() -> void:
 	_preview_container = Node3D.new()
 	_preview_container.name = "Preview"
@@ -322,13 +380,44 @@ func _create_preview_frame() -> void:
 
 	var total_width = preview_repeats.x * tile_size * cell_size
 	var total_height = preview_repeats.y * tile_size * cell_size
-	var frame_width = 0.01
+	var frame_width = 0.008
+	var frame_depth = 0.003
 
 	var frame_mat = StandardMaterial3D.new()
 	frame_mat.albedo_color = Color(0.4, 0.3, 0.2)
+	frame_mat.roughness = 0.85
 
-	# Create frame borders (simplified - just corners)
-	# Full frame would need 4 box meshes
+	# Top border
+	var top = MeshInstance3D.new()
+	var top_box = BoxMesh.new()
+	top_box.size = Vector3(total_width + frame_width * 2, frame_width, frame_depth)
+	top.mesh = top_box
+	top.material_override = frame_mat
+	top.position = Vector3(0, total_height / 2 + frame_width / 2, 0)
+	frame.add_child(top)
+
+	# Bottom border
+	var bottom = MeshInstance3D.new()
+	bottom.mesh = top_box  # Reuse same mesh
+	bottom.material_override = frame_mat
+	bottom.position = Vector3(0, -total_height / 2 - frame_width / 2, 0)
+	frame.add_child(bottom)
+
+	# Left border
+	var left = MeshInstance3D.new()
+	var side_box = BoxMesh.new()
+	side_box.size = Vector3(frame_width, total_height, frame_depth)
+	left.mesh = side_box
+	left.material_override = frame_mat
+	left.position = Vector3(-total_width / 2 - frame_width / 2, 0, 0)
+	frame.add_child(left)
+
+	# Right border
+	var right = MeshInstance3D.new()
+	right.mesh = side_box  # Reuse same mesh
+	right.material_override = frame_mat
+	right.position = Vector3(total_width / 2 + frame_width / 2, 0, 0)
+	frame.add_child(right)
 
 
 func _create_cube_spawners() -> void:
@@ -348,6 +437,9 @@ func _create_cube_spawners() -> void:
 		spawner.position = Vector3(0, start_y - i * spacing, 0)
 		_spawner_container.add_child(spawner)
 		_cube_spawners.append(spawner)
+
+	# Create selected-color indicator (glow ring)
+	_create_selected_indicator(spawner_size, spacing, start_y)
 
 	# Spawn initial cubes after tree is ready
 	call_deferred("_spawn_initial_cubes")
@@ -469,6 +561,42 @@ func _on_cube_left_spawner(body: Node3D, color_idx: int) -> void:
 		# Spawn a new cube after a short delay
 		await get_tree().create_timer(0.5).timeout
 		_spawn_cube_at_spawner(color_idx)
+
+
+func _create_selected_indicator(spawner_size: float, spacing: float, start_y: float) -> void:
+	_selected_indicator = MeshInstance3D.new()
+	_selected_indicator.name = "SelectedIndicator"
+
+	var ring = TorusMesh.new()
+	ring.inner_radius = spawner_size * 0.85
+	ring.outer_radius = spawner_size * 1.05
+	ring.rings = 16
+	ring.ring_segments = 16
+	_selected_indicator.mesh = ring
+	_selected_indicator.rotation_degrees.x = 90
+
+	var glow_mat = StandardMaterial3D.new()
+	glow_mat.albedo_color = Color(1.0, 0.9, 0.5, 0.9)
+	glow_mat.emission_enabled = true
+	glow_mat.emission = Color(1.0, 0.9, 0.5)
+	glow_mat.emission_energy_multiplier = 1.5
+	glow_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_selected_indicator.material_override = glow_mat
+
+	_spawner_container.add_child(_selected_indicator)
+
+	# Position on the initially selected color
+	_update_selected_indicator()
+
+
+func _update_selected_indicator() -> void:
+	if not _selected_indicator or _cube_spawners.is_empty():
+		return
+	if selected_color < 0 or selected_color >= _cube_spawners.size():
+		return
+
+	var spawner = _cube_spawners[selected_color]
+	_selected_indicator.position = Vector3(spawner.position.x, spawner.position.y, spawner.position.z - cell_size * 0.1)
 
 
 func _create_mode_label() -> void:
@@ -837,8 +965,49 @@ func _find_nearest_cell(world_pos: Vector3) -> Dictionary:
 
 ## Play snap sound effect
 func _play_snap_sound() -> void:
-	# Could add AudioStreamPlayer3D here
-	pass
+	if not _snap_player:
+		return
+	_snap_player.global_position = global_position
+	if _snap_player.playing:
+		_snap_player.stop()
+	_snap_player.play()
+
+
+func _setup_snap_audio() -> void:
+	_snap_stream = _generate_snap_stream()
+	_snap_player = AudioStreamPlayer3D.new()
+	_snap_player.name = "SnapAudio"
+	_snap_player.volume_db = snap_volume_db
+	_snap_player.unit_size = 2.0
+	_snap_player.max_distance = 12.0
+	_snap_player.stream = _snap_stream
+	add_child(_snap_player)
+
+
+func _generate_snap_stream() -> AudioStreamWAV:
+	const SAMPLE_RATE: int = 44100
+
+	var duration_seconds: float = clampf(snap_duration_seconds, 0.02, 0.25)
+	var sample_count: int = int(float(SAMPLE_RATE) * duration_seconds)
+	var pcm_data: PackedByteArray = PackedByteArray()
+	pcm_data.resize(sample_count * 2)
+
+	for i in range(sample_count):
+		var t: float = float(i) / float(SAMPLE_RATE)
+		var progress: float = float(i) / float(sample_count)
+		var envelope: float = exp(-8.0 * progress)
+		var sweep_hz: float = snap_pitch_hz * (1.0 - 0.35 * progress)
+		var wave: float = sin(TAU * sweep_hz * t)
+		var sample_value: float = wave * envelope * 0.3
+		var sample_int: int = int(clamp(sample_value, -1.0, 1.0) * 32767.0)
+		pcm_data.encode_s16(i * 2, sample_int)
+
+	var stream: AudioStreamWAV = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = SAMPLE_RATE
+	stream.stereo = false
+	stream.data = pcm_data
+	return stream
 
 
 ## Set a cell's color
@@ -858,6 +1027,11 @@ func set_cell(x: int, y: int, color_idx: int) -> void:
 	cell_changed.emit(x, y, color_idx)
 	_update_preview()
 
+	# Persist pattern for array_carpet display
+	var trace_data = get_node_or_null("/root/TraceData")
+	if trace_data and trace_data.has_method("save_pattern"):
+		trace_data.save_pattern(_grid_data, tile_size, repeat_mode, palette)
+
 
 ## Get a cell's color
 func get_cell(x: int, y: int) -> int:
@@ -872,6 +1046,7 @@ func select_color(color_idx: int) -> void:
 		return
 	selected_color = color_idx
 	color_selected.emit(color_idx)
+	_update_selected_indicator()
 
 
 ## Remove a placed cube from a cell (when picking up)
