@@ -1,0 +1,236 @@
+{
+  "overall_pass": true,
+  "command_exit_codes": {
+    "sequence_contract": 0,
+    "artifact_audit": 0,
+    "validate_map_all": 0,
+    "audit_lab_chain": 0
+  },
+  "gates": [
+    {
+      "id": "A",
+      "name": "Sequence Contract",
+      "pass": true,
+      "metrics": {
+        "missing_declared_maps": 0,
+        "duplicate_entries_within_sequence": 0,
+        "undeclared_map_folders": 164
+      }
+    },
+    {
+      "id": "B",
+      "name": "Artifact Registry Integrity",
+      "pass": true,
+      "metrics": {
+        "unresolved_scene_files": 0,
+        "missing_scene_path": 0,
+        "unsupported_scene_path": 0,
+        "missing_map_ready": 0,
+        "missing_include_in_map_data": 0
+      }
+    },
+    {
+      "id": "C",
+      "name": "Map Validation",
+      "pass": true,
+      "metrics": {
+        "grade_A": 438,
+        "grade_B": 50,
+        "grade_C": 98,
+        "grade_F": 0,
+        "max_grade_c": null,
+        "grade_c_blocking": false,
+        "max_grade_f": 0
+      }
+    },
+    {
+      "id": "D",
+      "name": "Lab Progression Continuity",
+      "pass": true,
+      "metrics": {
+        "lost_count": 0,
+        "changed_count": 11,
+        "total_issues": 31,
+        "ok_superset_pairs": 2
+      },
+      "examples": {
+        "lost": [],
+        "changed": [
+          "  STRUCTURE CHANGED (1 cells): e.g. [((6, 1), '1', '2')]",
+          "  UTILITIES CHANGED (1 cells): e.g. [((4, 2), 't:primitives', 't:primitives:0:0:0.6')]",
+          "  STRUCTURE CHANGED (6 cells): e.g. [((7, 4), '6', '1'), ((6, 4), '3', '1'), ((7, 3), '6', '1')]",
+          "  UTILITIES CHANGED (1 cells): e.g. [((4, 4), 'm:0.1', 'm:0.4')]",
+          "  STRUCTURE CHANGED (8 cells): e.g. [((10, 5), '2', '3'), ((10, 4), '2', '3'), ((12, 3), '1', '6')]",
+          "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+          "  STRUCTURE CHANGED (12 cells): e.g. [((15, 5), '2', '3'), ((18, 4), '1', '2'), ((18, 7), '6', '2')]",
+          "  STRUCTURE CHANGED (9 cells): e.g. [((15, 5), '3', '2'), ((19, 4), '6', '1'), ((14, 4), '2', '1')]",
+          "  STRUCTURE CHANGED (15 cells): e.g. [((21, 10), '2', '1'), ((23, 7), '1', '2'), ((22, 5), '3', '1')]",
+          "  STRUCTURE CHANGED (7 cells): e.g. [((26, 11), '6', '2'), ((19, 4), '1', '6'), ((25, 10), '2', '6')]"
+        ]
+      }
+    }
+  ],
+  "raw": {
+    "sequence_contract_summary": {
+      "total_sequences": 49,
+      "declared_entries": 475,
+      "declared_unique_maps": 459,
+      "map_folders_with_data": 585,
+      "duplicate_entries_within_sequence": 0,
+      "duplicates_across_sequences": 16,
+      "missing_declared_maps": 0,
+      "undeclared_map_folders": 164,
+      "undeclared_prefix_hints": 126,
+      "cross_sequence_prefix_hints": 112
+    },
+    "artifact_audit_summary": {
+      "total_entries": 1492,
+      "dict_entries": 1492,
+      "non_dict_entries": 0,
+      "placeholder_entries": 0,
+      "missing_scene_path": 0,
+      "unsupported_scene_path": 0,
+      "disallowed_scene_prefix": 0,
+      "unresolved_scene_files": 0,
+      "missing_include_in_map_data": 0,
+      "missing_map_ready": 0,
+      "missing_map_sequences_field": 0,
+      "empty_map_sequences": 922,
+      "algorithm_without_curation": 403
+    },
+    "grade_counts": {
+      "A": 438,
+      "C": 98,
+      "B": 50
+    },
+    "lab_metrics": {
+      "total_issues": 31,
+      "lost_count": 0,
+      "changed_count": 11,
+      "ok_superset_pairs": 2,
+      "lost_examples": [],
+      "changed_examples": [
+        "  STRUCTURE CHANGED (1 cells): e.g. [((6, 1), '1', '2')]",
+        "  UTILITIES CHANGED (1 cells): e.g. [((4, 2), 't:primitives', 't:primitives:0:0:0.6')]",
+        "  STRUCTURE CHANGED (6 cells): e.g. [((7, 4), '6', '1'), ((6, 4), '3', '1'), ((7, 3), '6', '1')]",
+        "  UTILITIES CHANGED (1 cells): e.g. [((4, 4), 'm:0.1', 'm:0.4')]",
+        "  STRUCTURE CHANGED (8 cells): e.g. [((10, 5), '2', '3'), ((10, 4), '2', '3'), ((12, 3), '1', '6')]",
+        "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+        "  STRUCTURE CHANGED (12 cells): e.g. [((15, 5), '2', '3'), ((18, 4), '1', '2'), ((18, 7), '6', '2')]",
+        "  STRUCTURE CHANGED (9 cells): e.g. [((15, 5), '3', '2'), ((19, 4), '6', '1'), ((14, 4), '2', '1')]",
+        "  STRUCTURE CHANGED (15 cells): e.g. [((21, 10), '2', '1'), ((23, 7), '1', '2'), ((22, 5), '3', '1')]",
+        "  STRUCTURE CHANGED (7 cells): e.g. [((26, 11), '6', '2'), ((19, 4), '1', '6'), ((25, 10), '2', '6')]"
+      ]
+    },
+    "stderr_samples": {
+      "sequence_contract": [
+        "## Sequence Contract Audit",
+        "",
+        "Checks explicit `maps[]` ownership only; map-name similarities are informational hints and never auto-assigned.",
+        "",
+        "| Metric | Count |",
+        "|---|---:|",
+        "| `total_sequences` | 49 |",
+        "| `declared_entries` | 475 |",
+        "| `declared_unique_maps` | 459 |",
+        "| `map_folders_with_data` | 585 |",
+        "| `duplicate_entries_within_sequence` | 0 |",
+        "| `duplicates_across_sequences` | 16 |",
+        "| `missing_declared_maps` | 0 |",
+        "| `undeclared_map_folders` | 164 |",
+        "| `undeclared_prefix_hints` | 126 |",
+        "| `cross_sequence_prefix_hints` | 112 |",
+        "",
+        "### Interpretation Notes",
+        "",
+        "- `missing_declared_maps`: blocker. Sequence points to maps that do not exist on disk."
+      ],
+      "artifact_audit": [
+        "## Artifact Registry Audit",
+        "",
+        "Checks unresolved scenes, placeholder-backed entries, and curation metadata coverage.",
+        "",
+        "| Metric | Count |",
+        "|---|---:|",
+        "| `total_entries` | 1492 |",
+        "| `dict_entries` | 1492 |",
+        "| `non_dict_entries` | 0 |",
+        "| `placeholder_entries` | 0 |",
+        "| `missing_scene_path` | 0 |",
+        "| `unsupported_scene_path` | 0 |",
+        "| `disallowed_scene_prefix` | 0 |",
+        "| `unresolved_scene_files` | 0 |",
+        "| `missing_include_in_map_data` | 0 |",
+        "| `missing_map_ready` | 0 |",
+        "| `missing_map_sequences_field` | 0 |",
+        "| `empty_map_sequences` | 922 |",
+        "| `algorithm_without_curation` | 403 |",
+        ""
+      ],
+      "validate_map_all": [
+        "[",
+        "  {",
+        "    \"map\": \"AdvancedLaboratory_Entropy_Visualization\",",
+        "    \"path\": \"commons\\\\maps\\\\AdvancedLaboratory_Entropy_Visualization\\\\map_data.json\",",
+        "    \"checks\": {",
+        "      \"json_valid\": true,",
+        "      \"has_required_fields\": true,",
+        "      \"dimensions_consistent\": {",
+        "        \"pass\": true,",
+        "        \"issues\": []",
+        "      },",
+        "      \"spawn_safe\": true,",
+        "      \"has_teleporter\": true,",
+        "      \"no_lifts\": true,",
+        "      \"artifacts_in_registry\": {",
+        "        \"pass\": true,",
+        "        \"missing\": []",
+        "      },",
+        "      \"no_artifacts_on_void\": {",
+        "        \"pass\": true,"
+      ],
+      "audit_lab_chain": [
+        "======================================================================",
+        "LAB PROGRESSION CHAIN AUDIT",
+        "======================================================================",
+        "",
+        "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€",
+        "Stage: Initial (map_data.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 76",
+        "  Utilities: 6",
+        "  Artifacts: 0",
+        "  Interactables: 8",
+        "  Teleporters: 4",
+        "    tpâ†’color",
+        "    tpâ†’primitives",
+        "    tpâ†’randomness",
+        "    tpâ†’transformation",
+        "",
+        "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€",
+        "Stage: primitives (map_data_post_primitives.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 76",
+        "  Utilities: 6",
+        "  Artifacts: 0",
+        "  Interactables: 10",
+        "  Teleporters: 3",
+        "    tpâ†’color",
+        "    tpâ†’primitives",
+        "    tpâ†’transformation",
+        "",
+        "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€",
+        "Stage: transformation (map_data_post_transformation.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 76",
+        "  Utilities: 9",
+        "  Artifacts: 0",
+        "  Interactables: 10",
+        "  Teleporters: 4",
+        "    tpâ†’color",
+        "    tpâ†’forces",
+        "    tpâ†’primitives"
+      ]
+    }
+  }
+}

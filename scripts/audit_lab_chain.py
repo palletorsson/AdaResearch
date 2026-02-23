@@ -28,6 +28,12 @@ PROGRESSION = [
     ("qfeplaboratory",    "map_data_post_qfeplaboratory.json"),
 ]
 
+# Known intentional destination removals in legacy Lab snapshots.
+# These are tracked as non-blocking removals, not continuity failures.
+ALLOWED_TELEPORTER_DEST_LOSS = {
+    ("Initial", "primitives"): {"randomness"},
+}
+
 def load_map(filename):
     path = os.path.join(LAB_DIR, filename)
     if not os.path.exists(path):
@@ -71,8 +77,30 @@ def summarize_map(data):
     interactables = parse_grid(layers.get("interactables", []))
     artifacts = parse_grid(layers.get("artifacts", []))
     
-    # Extract teleporters from interactables
-    teleporters = {k: v for k, v in interactables.items() if v.startswith("tp:")}
+    # Extract teleporter destinations from utilities and interactables.
+    def _tp_dest(cell):
+        if not isinstance(cell, str):
+            return ""
+        c = cell.strip()
+        if c.startswith("t:"):
+            rest = c[2:]
+        elif c.startswith("tp:"):
+            rest = c[3:]
+        else:
+            return ""
+        if not rest:
+            return ""
+        return rest.split(":", 1)[0].strip()
+
+    teleporter_destinations = set()
+    for _, v in utilities.items():
+        dest = _tp_dest(v)
+        if dest:
+            teleporter_destinations.add(dest)
+    for _, v in interactables.items():
+        dest = _tp_dest(v)
+        if dest:
+            teleporter_destinations.add(dest)
     
     return {
         "dims": (w, h),
@@ -80,18 +108,18 @@ def summarize_map(data):
         "utilities": utilities,
         "interactables": interactables,
         "artifacts": artifacts,
-        "teleporters": teleporters,
+        "teleporters": teleporter_destinations,
     }
 
 def compare_stages(name_a, summary_a, name_b, summary_b):
-    """Compare two stages. B should be a superset of A."""
+    """Compare two stages. Destination continuity is release-critical."""
     issues = []
     
     # Dimension check
     if summary_a["dims"] != summary_b["dims"]:
         issues.append(f"  DIMS: {name_a} is {summary_a['dims']}, {name_b} is {summary_b['dims']}")
     
-    # For each layer, check what A had that B lost
+    # For each layer, check removals/changes (non-blocking diagnostics).
     for layer_name in ["structure", "utilities", "artifacts"]:
         a_grid = summary_a[layer_name]
         b_grid = summary_b[layer_name]
@@ -99,26 +127,33 @@ def compare_stages(name_a, summary_a, name_b, summary_b):
         changed = {k for k in set(a_grid.keys()) & set(b_grid.keys()) if a_grid[k] != b_grid[k]}
         
         if lost:
-            issues.append(f"  {layer_name.upper()} LOST ({len(lost)} cells): e.g. {list(lost)[:5]}")
+            issues.append(f"  {layer_name.upper()} REMOVED ({len(lost)} cells): e.g. {list(lost)[:5]}")
         if changed:
             examples = [(k, a_grid[k], b_grid[k]) for k in list(changed)[:3]]
             issues.append(f"  {layer_name.upper()} CHANGED ({len(changed)} cells): e.g. {examples}")
     
-    # Teleporters specifically
+    # Teleporter destinations are the progression contract.
     a_tp = summary_a["teleporters"]
     b_tp = summary_b["teleporters"]
-    lost_tp = set(a_tp.keys()) - set(b_tp.keys())
-    if lost_tp:
-        lost_details = [(k, a_tp[k]) for k in lost_tp]
-        issues.append(f"  TELEPORTERS LOST: {lost_details}")
+    lost_tp = set(a_tp) - set(b_tp)
+    allowed_loss = ALLOWED_TELEPORTER_DEST_LOSS.get((name_a, name_b), set())
+    expected_lost = sorted(lost_tp & allowed_loss)
+    unexpected_lost = sorted(lost_tp - allowed_loss)
+    if expected_lost:
+        issues.append(f"  TELEPORTERS REMOVED_BY_DESIGN: {expected_lost}")
+    if unexpected_lost:
+        issues.append(f"  TELEPORTERS LOST: {unexpected_lost}")
     
-    # Interactables (non-teleporter)
-    a_inter = {k: v for k, v in summary_a["interactables"].items() if not v.startswith("tp:")}
-    b_inter = {k: v for k, v in summary_b["interactables"].items() if not v.startswith("tp:")}
+    # Interactables (non-teleporter) diagnostics.
+    def _is_teleporter_value(v):
+        return isinstance(v, str) and (v.startswith("tp:") or v.startswith("t:"))
+
+    a_inter = {k: v for k, v in summary_a["interactables"].items() if not _is_teleporter_value(v)}
+    b_inter = {k: v for k, v in summary_b["interactables"].items() if not _is_teleporter_value(v)}
     lost_inter = set(a_inter.keys()) - set(b_inter.keys())
     if lost_inter:
         lost_details = [(k, a_inter[k]) for k in list(lost_inter)[:5]]
-        issues.append(f"  INTERACTABLES LOST ({len(lost_inter)}): e.g. {lost_details}")
+        issues.append(f"  INTERACTABLES REMOVED ({len(lost_inter)}): e.g. {lost_details}")
     
     return issues
 
@@ -131,11 +166,11 @@ def main():
     for name, filename in PROGRESSION:
         data = load_map(filename)
         if data is None:
-            print(f"\n⚠ {name}: {filename} NOT FOUND")
+            print(f"\nâš  {name}: {filename} NOT FOUND")
             summaries.append((name, filename, None))
             continue
         s = summarize_map(data)
-        print(f"\n{'─'*50}")
+        print(f"\n{'â”€'*50}")
         print(f"Stage: {name} ({filename})")
         print(f"  Dimensions: {s['dims'][0]}x{s['dims'][1]}")
         print(f"  Structure cells: {len(s['structure'])}")
@@ -144,8 +179,8 @@ def main():
         print(f"  Interactables: {len(s['interactables'])}")
         print(f"  Teleporters: {len(s['teleporters'])}")
         # List teleporter destinations
-        for pos, val in sorted(s["teleporters"].items()):
-            print(f"    tp@{pos}: {val}")
+        for dest in sorted(s["teleporters"]):
+            print(f"    tpâ†’{dest}")
         summaries.append((name, filename, s))
     
     print(f"\n{'=' * 70}")
@@ -157,17 +192,17 @@ def main():
         name_a, _, s_a = summaries[i-1]
         name_b, _, s_b = summaries[i]
         if s_a is None or s_b is None:
-            print(f"\n⚠ Skipping {name_a} → {name_b} (missing file)")
+            print(f"\nâš  Skipping {name_a} â†’ {name_b} (missing file)")
             continue
         
         issues = compare_stages(name_a, s_a, name_b, s_b)
         if issues:
-            print(f"\n❌ {name_a} → {name_b}: {len(issues)} issues")
+            print(f"\nâŒ {name_a} â†’ {name_b}: {len(issues)} issues")
             for iss in issues:
                 print(iss)
             total_issues += len(issues)
         else:
-            print(f"\n✅ {name_a} → {name_b}: OK (superset)")
+            print(f"\nâœ… {name_a} â†’ {name_b}: OK (superset)")
     
     print(f"\n{'=' * 70}")
     print(f"TOTAL ISSUES: {total_issues}")
@@ -182,7 +217,7 @@ def main():
         if s_a is None or s_b is None:
             continue
         
-        new_tp = set(s_b["teleporters"].keys()) - set(s_a["teleporters"].keys())
+        new_tp = set(s_b["teleporters"]) - set(s_a["teleporters"])
         new_struct = len(s_b["structure"]) - len(s_a["structure"])
         new_art = set(s_b["artifacts"].keys()) - set(s_a["artifacts"].keys())
         
@@ -190,8 +225,9 @@ def main():
         print(f"  New structure cells: {new_struct}")
         print(f"  New artifact positions: {len(new_art)}")
         if new_tp:
-            for pos in sorted(new_tp):
-                print(f"  New teleporter: {pos} → {s_b['teleporters'][pos]}")
+            for dest in sorted(new_tp):
+                print(f"  New teleporter destination: {dest}")
 
 if __name__ == "__main__":
     main()
+

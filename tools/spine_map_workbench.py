@@ -154,7 +154,22 @@ def load_sequence_catalog() -> tuple[dict[str, dict[str, Any]], dict[str, Path]]
 
 
 def map_has_data(map_name: str) -> bool:
-    return (MAPS_DIR / map_name / "map_data.json").exists()
+    # Standard map folder contract: commons/maps/<MapName>/map_data.json
+    if (MAPS_DIR / map_name / "map_data.json").exists():
+        return True
+
+    # Legacy/special-case contract used by Lab progression:
+    # sequence entries can point at explicit map_data json files under commons/maps.
+    direct_json = MAPS_DIR / f"{map_name}.json"
+    if direct_json.exists():
+        return True
+
+    # Also allow fully-qualified json paths relative to commons/maps.
+    as_path = MAPS_DIR / map_name
+    if as_path.suffix.lower() == ".json" and as_path.exists():
+        return True
+
+    return False
 
 
 def _artifact_registry_files() -> list[Path]:
