@@ -14,10 +14,10 @@
 		},
 		"architecture_note": "Two lab styles exist: 'old-style' (walled rooms 16x30, structure codes 1-6, corridors) used for spine stages, and 'new-style' (diagonal spiral, open floor) used for some branch post-maps. The manifest documents the old-style spine progression.",
 		"anomalies": {
-			"post_cellularautomata": "Contains Lab_Post_Fractals data — duplicate of fractals",
-			"post_meshes": "Contains Lab_Post_Array data — misnamed",
-			"post_vectors": "Contains Lab - Post Primitives data — misnamed",
-			"post_geometric": "Contains Lab_Post_Array data with geometric_algorithms teleporter"
+			"post_cellularautomata": "FIXED 2026-02-23 — was duplicate of fractals, now correct neutral post-noise stage",
+			"post_meshes": "FIXED 2026-02-23 — was Lab_Post_Array data, now correct branch post-lab shell (needs artifacts)",
+			"post_vectors": "FIXED 2026-02-23 — was Lab_Post_Primitives data, now correctly identified as legacy orphan (vectors absorbed into forces)",
+			"post_geometric": "FIXED 2026-02-23 — was Lab_Post_Array data with geometric_algorithms teleporter, now correctly identified as legacy orphan (geometric_algorithms renamed to computationalgeometry, real post-lab is map_data_post_computationalgeometry.json)"
 		}
 	},
 	"stages": [
@@ -501,7 +501,7 @@
 				"description": "See simple rules generating complex behavior — emergence from local interaction",
 				"status": "stub"
 			},
-			"note": "Neutral stage. Note: this file currently contains Lab_Post_Fractals data (anomaly). Cellular automata's gift is seeing emergence, which the capability layer will make visible."
+			"note": "Neutral stage. FIXED 2026-02-23: file corrected to proper post-noise-based neutral stage. Cellular automata's gift is seeing emergence — simple rules generating complex behavior."
 		},
 		{
 			"stage": "post_fractals",
@@ -741,43 +741,43 @@
 			"artifacts": [
 				{
 					"id": "escher_staircase_mini",
-					"cell": null,
-					"params": null,
+					"cell": [3, 12],
+					"params": "0:1:0.3",
 					"category": "showcase",
 					"why": "Impossible staircase — formal systems that loop back on themselves"
 				},
 				{
 					"id": "penrose_triangle",
-					"cell": null,
-					"params": null,
+					"cell": [3, 13],
+					"params": "0:1:0.25",
 					"category": "showcase",
 					"why": "Penrose triangle — impossible geometry, limits of representation"
 				},
 				{
 					"id": "godel_statement_plaque",
-					"cell": null,
-					"params": null,
+					"cell": [5, 13],
+					"params": "0:1:0.4",
 					"category": "reference",
 					"why": "Gödel's statement — 'This statement is unprovable'"
 				},
 				{
 					"id": "russell_set_display",
-					"cell": null,
-					"params": null,
+					"cell": [2, 13],
+					"params": "0:1:0.4",
 					"category": "reference",
 					"why": "Russell's paradox display — the set of all sets that don't contain themselves"
 				},
 				{
 					"id": "self_referential_sign",
-					"cell": null,
-					"params": null,
+					"cell": [8, 11],
+					"params": "0:2:0.3",
 					"category": "showcase",
 					"why": "Self-referential sign — a sign pointing to itself"
 				},
 				{
 					"id": "incompleteness_badge",
-					"cell": null,
-					"params": null,
+					"cell": [5, 11],
+					"params": "0:1.5:0.2",
 					"category": "showcase",
 					"why": "Incompleteness badge — you've touched the limits"
 				}
@@ -823,50 +823,50 @@
 			"artifacts": [
 				{
 					"id": "lambda_wall_slider",
-					"cell": null,
-					"params": null,
+					"cell": [3, 11],
+					"params": "0:1:0.4",
 					"category": "instrument",
 					"why": "λ slider on the wall — tune the edge of chaos parameter"
 				},
 				{
 					"id": "phi_wall_slider",
-					"cell": null,
-					"params": null,
+					"cell": [7, 11],
+					"params": "0:1:0.4",
 					"category": "instrument",
 					"why": "φ slider on the wall — tune the rate of entropy change"
 				},
 				{
 					"id": "qfep_formula_display",
-					"cell": null,
-					"params": null,
+					"cell": [3, 12],
+					"params": "0:1.5:0.5",
 					"category": "reference",
 					"why": "The complete QFEP formula: QFE = F − λE(S) + φΔE(S,t)"
 				},
 				{
 					"id": "edge_of_chaos_orb",
-					"cell": null,
-					"params": null,
+					"cell": [5, 12],
+					"params": "0:1.5:0.4",
 					"category": "showcase",
 					"why": "Edge of chaos orb — the λ parameter visualized as a living sphere"
 				},
 				{
 					"id": "bifurcation_diagram_3d",
-					"cell": null,
-					"params": null,
+					"cell": [7, 13],
+					"params": "0:0.5:0.3",
 					"category": "showcase",
 					"why": "3D bifurcation diagram — chaos theory made spatial"
 				},
 				{
 					"id": "entropy_meter",
-					"cell": null,
-					"params": null,
+					"cell": [9, 13],
+					"params": "0:2:0.3",
 					"category": "instrument",
 					"why": "Entropy meter — measures the Lab's current E(S) value"
 				},
 				{
 					"id": "qfep_master_badge",
-					"cell": null,
-					"params": null,
+					"cell": [7, 12],
+					"params": "0:1.5:0.2",
 					"category": "showcase",
 					"why": "QFEP Master badge — you understand the formula"
 				}
@@ -949,7 +949,7 @@
 			"branches_from": "primitives",
 			"map_file": "Lab/map_data_post_meshes",
 			"dimensions": "8x10",
-			"note": "Branch map. Currently contains Lab_Post_Array data (anomaly). Mesh completion should display mesh artifacts."
+			"note": "Branch map. FIXED 2026-02-23: now proper branch post-lab shell. Needs mesh showcase artifacts (wireframe, vertex display, procedural mesh demo)."
 		},
 		{
 			"stage": "post_datastructures",
@@ -1061,7 +1061,7 @@
 			"branches_from": null,
 			"map_file": "Lab/map_data_post_vectors",
 			"dimensions": "7x9",
-			"note": "Branch map. Currently contains Lab - Post Primitives data (anomaly). Unassigned in branch graph."
+			"note": "Branch map. FIXED 2026-02-23: correctly identified as legacy orphan. Vectors sequence was absorbed into forces. Layout preserved from early Lab v2.0 for reference."
 		},
 		{
 			"stage": "post_advancedlaboratory",

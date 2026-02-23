@@ -20,6 +20,8 @@ const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
 @export var reload_map: bool = false : set = reload_map_setter
+@export var flatten_post_lab_structure_walls: bool = false
+@export var post_lab_wall_height_threshold: int = 6
 
 # Components
 var data_component
@@ -260,6 +262,8 @@ func _find_ada_scene_manager():
 # Handle successful data loading
 func _on_data_loaded(loaded_map_name: String, format: String):
 	print("GridSystem: Data loaded successfully - %s (%s)" % [loaded_map_name, format])
+
+	_apply_post_lab_structure_override_if_needed()
 	
 	# Try to get base_cube if invalid (structure_component can use cached data if unavailable)
 	if not is_instance_valid(base_cube):
@@ -306,6 +310,64 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 		GameManager.set_current_map(loaded_map_name)
 	
 	emit_signal("map_loaded", loaded_map_name, format)
+
+func _apply_post_lab_structure_override_if_needed() -> void:
+	if not flatten_post_lab_structure_walls:
+		return
+	if not _is_post_lab_map_name(map_name):
+		return
+	if data_component == null:
+		return
+
+	var structure_data = data_component.get_structure_data()
+	if structure_data == null:
+		return
+	if not ("layout_data" in structure_data):
+		return
+
+	var layout_data_variant: Variant = structure_data.layout_data
+	if not (layout_data_variant is Array):
+		return
+
+	var layout_data: Array = layout_data_variant
+	var changed_cells: int = 0
+
+	for z in range(layout_data.size()):
+		var row_variant: Variant = layout_data[z]
+		if not (row_variant is Array):
+			continue
+		var row: Array = row_variant
+		for x in range(row.size()):
+			var cell_height: int = _parse_structure_height(row[x])
+			if cell_height >= post_lab_wall_height_threshold:
+				row[x] = "1"
+				changed_cells += 1
+		layout_data[z] = row
+
+	structure_data.layout_data = layout_data
+
+	if changed_cells > 0:
+		print("GridSystem: Flattened %d tall post-lab wall cells (threshold=%d)" % [changed_cells, post_lab_wall_height_threshold])
+
+func _is_post_lab_map_name(target_map_name: String) -> bool:
+	return target_map_name.begins_with("Lab/map_data_post_")
+
+func _parse_structure_height(cell_value: Variant) -> int:
+	match typeof(cell_value):
+		TYPE_INT:
+			return int(cell_value)
+		TYPE_FLOAT:
+			return int(round(float(cell_value)))
+		TYPE_STRING:
+			var raw_text: String = str(cell_value).strip_edges()
+			if raw_text.is_empty():
+				return 0
+			if raw_text == " " or raw_text == "." or raw_text == "-" or raw_text == "_":
+				return 0
+			var value_text: String = raw_text.get_slice(":", 0).strip_edges()
+			if value_text.is_valid_int():
+				return value_text.to_int()
+	return 0
 
 # Handle data loading failure
 func _on_data_load_failed(failed_map_name: String, error: String):
@@ -418,6 +480,11 @@ func _on_ceiling_complete(tile_count: int, light_count: int):
 
 # Handle wall generation
 func _handle_wall_generation():
+	if flatten_post_lab_structure_walls and _is_post_lab_map_name(map_name):
+		print("GridSystem: Skipping explicit wall generation for post-lab desktop preview")
+		call_deferred("_handle_player_spawn")
+		return
+
 	var settings = data_component.get_settings()
 	var wall_config = settings.get("walls", {})
 

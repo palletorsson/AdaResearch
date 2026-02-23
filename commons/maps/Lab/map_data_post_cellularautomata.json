@@ -1,10 +1,11 @@
 {
 	"map_info": {
-		"name": "Lab_Post_Fractals",
-		"description": "Lab State After Fractals - New wing and sequence portal unlocked",
-		"version": "1.0",
+		"name": "Lab - Post Cellular Automata",
+		"lookup_name": "Lab_Post_CellularAutomata",
+		"description": "Central Science Lab - After completing cellular automata. Emergence from simple rules witnessed.",
+		"version": "2.1",
 		"format": "json_lab_progressive",
-		"progression_state": "post_fractals",
+		"progression_state": "post_cellularautomata",
 		"dimensions": {
 			"width": 13,
 			"depth": 20,
@@ -14,11 +15,19 @@
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
 			"learning_objectives": [
-				"Explore the Wave Functions wing",
-				"Access the Wave Functions overview sequence",
-				"Navigate expanded lab space"
+				"Simple rules generating complex behavior witnessed",
+				"Emergence from local interaction",
+				"Pattern wing fully accessible"
 			]
 		}
+	},
+	"progression_delta": {
+		"base": "map_data_post_noise",
+		"spine_order": 9,
+		"description": "After cellular automata: neutral stage. CA taught emergence from simple rules. The learning is internal — no new doors, just new perception.",
+		"structure_changes": [],
+		"added_utilities": [],
+		"added_interactables": []
 	},
 	"layers": {
 		"structure": [
@@ -52,13 +61,13 @@
 			[" ", " ", " ", " ", " ", "tc:2:y", " ", " ", "t:color", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:forces", " ", " ", " ", " ", " ", " ", "t:randomness", " ", " ", "t:noise", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "m:0.1", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "t:array_tutorial", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "t:cellularautomata", "m:0.1", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", "t:cellularautomata", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "wp:-90", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "t:lsystems", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -93,15 +102,7 @@
 			"res://commons/artifacts/lab_artifacts.json",
 			"res://commons/artifacts/grid_artifacts.json"
 		],
-		"utility_registry": "res://commons/utilities/utility_registry.json",
-		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Sequence Portal",
-			"description": "Portal to learning sequences"
-		}
+		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
 		"default": {
@@ -115,7 +116,7 @@
 				180.0,
 				0.0
 			],
-			"description": "Main entrance - with wave functions access"
+			"description": "Main entrance - facing expanded lab"
 		}
 	},
 	"lighting": {
@@ -150,7 +151,14 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_fractals",
+		"progression_state": "post_cellularautomata",
+		"ceiling": {
+			"preset": "laboratory",
+			"height": 5.5,
+			"light_spacing": 2,
+			"light_intensity": 1.8,
+			"pattern": "sparse"
+		},
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
@@ -159,13 +167,6 @@
 				"xyz_coordinates"
 			],
 			"unlock_on_sequence_completion": true
-		},
-		"ceiling": {
-			"preset": "laboratory",
-			"height": 5.5,
-			"light_spacing": 2,
-			"light_intensity": 1.8,
-			"pattern": "sparse"
 		}
 	}
 }

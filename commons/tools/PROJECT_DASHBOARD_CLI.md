@@ -278,6 +278,57 @@ powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1
 # Should now show: Book ready: YES, Wiki ready: YES
 ```
 
+## Two Workflows: Coverage vs Quality
+
+This CLI tracks **coverage** — does the file exist? There is a separate **quality audit** workflow run by Codex (OpenAI agent) that reviews and rewrites existing files. You need to understand both.
+
+### Coverage Workflow (this tool)
+
+Goal: fill in the 878 missing .md files so sequences become book-ready and wiki-ready.
+
+Use: `recommend` → `sequence` → `context` → write files → `sequence` to verify.
+
+This is the primary workflow for new sessions. The CLI tells you what's missing.
+
+### Quality Audit Workflow (Codex)
+
+Goal: review existing .md files and VR code for accuracy, tone, and correctness.
+
+The Codex agent has its own skills at `C:\Users\palle\.codex\skills\`:
+- **ada-auditor** — validates content chains (sequences → maps → artifacts → scenes)
+- **ada-code-specialist** — reviews and fixes GDScript implementation
+- **ada-artificer** — builds/fixes VR artifacts
+- **ada-cartographer** — writes blurb and summary files
+- **ada-chronicler** — tracks audit progress
+- **context-persistence** — maintains context across Codex sessions via `bin/mem.js`
+
+Audit progress is tracked in `doc/reports/POINT_PRIMITIVES_AUDIT_LOG.md`.
+
+The audit passes are:
+- `pass_one` — baseline: interactables review, VR interaction sanity, map data alignment
+- `pass_two` — (not started yet) — deeper quality and theoretical consistency
+
+**The two workflows are complementary**: this CLI finds what's missing (coverage), the Codex audit checks what exists (quality). Both are needed.
+
+## Multi-AI Environment
+
+This project has **two AI agents** operating on it:
+
+| Agent | Tool | Strength | Primary Work |
+|-------|------|----------|-------------|
+| Claude Code | Claude CLI (`/ada-task-manager`, CLI tool) | Coverage, planning, strategic recommendations, .md writing | Fill missing files, dashboard, tooling |
+| Codex | OpenAI Codex (`.codex/skills/`) | VR code quality, artifact review, GDScript fixes | Audit passes, code refactoring, interactable fixes |
+
+Both share the same git repo on `dev` branch. Handover notes pass context between them. The user coordinates.
+
+If you see `.codex/skills/` referenced, that's the other agent's tools. If you see `.claude/skills/`, those are yours.
+
+## Other Tools Available
+
+- **`/ada-task-manager`** skill — talks to the Oversight server at `http://192.168.0.112:3001` for project-level task management. Use `plan` to see tasks, `done TASK_ID` to complete, `report` to submit session work.
+- **`ada-bridge-listener`** skill — reads feedback from Godot's `ada_run/desktop_feedback.md`.
+- **In-engine dashboard** — press P in any desktop scene to see a visual version of this CLI data. Toggle with P key, tabs 1-4.
+
 ## What the Tool Cannot Do (Yet)
 
 - **Cannot check .md quality** — it only checks existence, not content. A 1-byte file counts as "done."

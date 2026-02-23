@@ -1,9 +1,11 @@
 {
 	"map_info": {
-		"name": "Lab - Post Primitives",
-		"description": "Central Science Lab - After completing primitives sequence",
-		"version": "2.0",
-		"format": "json_lab",
+		"name": "Lab_Post_Vectors",
+		"description": "LEGACY/ORPHAN - Vectors sequence was absorbed into forces. This file contained Post Primitives data and has been corrected to identify itself. Layout is from early Lab v2.0 format. Not in active branch graph.",
+		"version": "2.1",
+		"format": "json_lab_progressive",
+		"progression_state": "post_vectors",
+		"_anomaly_note": "Originally contained Lab - Post Primitives data. Vectors content merged into forces sequence. This branch post-lab is unassigned in the progression manifest.",
 		"dimensions": {
 			"width": 7,
 			"depth": 9,
@@ -11,12 +13,12 @@
 		},
 		"metadata": {
 			"difficulty": "hub",
-			"category": "laboratory",
-			"estimated_time": "exploration based",
+			"category": "laboratory_progressive",
+			"status": "legacy_orphan",
 			"learning_objectives": [
-				"Central hub after primitives completion",
-				"Access to more advanced sequences",
-				"Progressive artifact discovery"
+				"Vector operations demonstrated",
+				"Force concepts previewed",
+				"Legacy layout from early Lab design"
 			]
 		}
 	},

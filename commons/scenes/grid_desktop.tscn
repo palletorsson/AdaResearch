@@ -61,6 +61,7 @@ text = "Grid Desktop (M: Map Switcher  L: Layer Editor  P: Project Dashboard)"
 
 [node name="GridSystem" parent="." instance=ExtResource("2_s4bvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+flatten_post_lab_structure_walls = true
 
 [node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)

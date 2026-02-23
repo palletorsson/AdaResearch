@@ -49,7 +49,7 @@ The grid is not only a visual overlay - it's a **storage strategy** for mapping 
 # 2D Grid as Nested Array
 var grid_data = []
 var width = 8
-var depth = 10
+var depth = 14
 
 # Initialize grid
 for x in range(width):

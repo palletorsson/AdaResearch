@@ -1,9 +1,11 @@
 {
 	"map_info": {
 		"name": "Lab - Post Foundations Crisis",
-		"description": "Central Science Lab - After completing foundationscrisis sequence. The walls show impossible geometries. Gödel's shadow is everywhere.",
-		"version": "2.0",
-		"format": "json_lab",
+		"lookup_name": "Lab_Post_FoundationsCrisis",
+		"description": "Central Science Lab - After completing foundationscrisis. GATE MAP: Northeast area opens. Impossible geometries appear. QFEP Laboratory, Critical Algorithms, Speculative Computation portals emerge.",
+		"version": "2.1",
+		"format": "json_lab_progressive",
+		"progression_state": "post_foundationscrisis",
 		"dimensions": {
 			"width": 16,
 			"depth": 30,
@@ -11,10 +13,34 @@
 		},
 		"metadata": {
 			"difficulty": "hub",
-			"category": "laboratory",
-			"post_sequence": "foundationscrisis",
-			"narrative": "You've walked the edge where formal systems fail. The lab now contains impossible objects - Escher staircases that go up by going down, signs that point to themselves. A new portal glows: QFEP Laboratory. You're ready to understand the formula."
+			"category": "laboratory_progressive",
+			"learning_objectives": [
+				"Foundations crisis artifacts showcase paradox and incompleteness",
+				"Northeast area opens — QFEP Laboratory, Critical Algorithms, Speculative Computation accessible",
+				"The Lab confronts its own formal limits"
+			]
 		}
+	},
+	"progression_delta": {
+		"base": "map_data_post_machinelearning",
+		"spine_order": 16,
+		"description": "GATE MAP — After foundations crisis: northeast area opens with modified structure codes. Escher staircase, Penrose triangle, Gödel statement, Russell set, self-referential sign, incompleteness badge displayed. Three new portals: QFEP Laboratory, Critical Algorithms, Speculative Computation.",
+		"structure_changes": [
+			"Northeast area (rows 1-5, cols 10-15) structure modified to open new wing"
+		],
+		"added_utilities": [
+			"t:qfeplaboratory at [14, 1]",
+			"t:criticalalgorithms at [10, 1]",
+			"t:speculativecomputation at [10, 5]"
+		],
+		"added_interactables": [
+			"incompleteness_badge at [5, 11]",
+			"self_referential_sign at [8, 11]",
+			"escher_staircase_mini at [3, 12]",
+			"russell_set_display at [2, 13]",
+			"penrose_triangle at [3, 13]",
+			"godel_statement_plaque at [5, 13]"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -114,6 +140,28 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
+	"external_references": {
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
+		"utility_registry": "res://commons/utilities/utility_registry.json"
+	},
+	"spawn_points": {
+		"default": {
+			"position": [
+				0.5,
+				1.8,
+				21.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"description": "Main entrance - facing expanded lab with impossible geometries"
+		}
+	},
 	"narrative_elements": {
 		"wall_effect": "impossible_geometry_shadows",
 		"ambient_particles": "logic_fragments",
@@ -170,18 +218,28 @@
 		}
 	},
 	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.1,
-				0.1,
-				0.15
-			]
+		"progression_state": "post_foundationscrisis",
+		"ceiling": {
+			"preset": "laboratory",
+			"height": 5.5,
+			"light_spacing": 2,
+			"light_intensity": 1.8,
+			"pattern": "sparse"
+		},
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": [
+				"rotating_cube",
+				"xyz_coordinates"
+			],
+			"unlock_on_sequence_completion": true
 		}
 	}
 }

@@ -2,13 +2,13 @@
 	"map_info": {
 		"name": "09 Melencolia",
 		"lookup_name": "Primitives_Melencolia",
-		"description": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude—where knowing and not knowing interlock.",
-		"description_2": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation—an accumulation of finite decisions that can never exhaust the curve they simulate. Dürer's Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
+		"description": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude - where knowing and not knowing interlock.",
+		"description_2": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation - an accumulation of finite decisions that can never exhaust the curve they simulate. Durer's Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 20,
+			"depth": 14,
 			"max_height": 3
 		},
 		"metadata": {
@@ -24,15 +24,16 @@
 	},
 	"documentation": {
 		"summary": "Primitives_Melencolia - Melancholy of Knowledge",
-		"layout": "7x13 multi-tier plaza with elevated central courtyard (height 2-3).",
+		"layout": "7x14 multi-tier plaza with elevated central court and southern reflection platform.",
 		"objective": "Culminate primitives sequence with melancholic reflection on geometric limits.",
 		"key_elements": [
-			"Four corner `pyramid` fixtures at (1,1), (5,1), (1,5), (5,5)",
-			"`pyramidlong` and `cube_scene` cluster at center",
-			"`snap_pyramid_puzzle` at (3,6)",
-			"`diamondtoruscollection` at (3,10) height 4m",
+			"Four `pyramid` fixtures at (1,1), (5,1), (1,5), (5,5)",
+			"`pyramidlong` and `cube_scene` cluster around (3,3)",
+			"`snap_pyramid_puzzle` at (3,1)",
+			"`diamondtoruscollection` at (3,10) on elevated tier",
 			"`code_display` with melencolia_axioms at (3,13)",
 			"`dark_sphere` at (2,5)",
+			"`durer_scene` at (3,12)",
 			"Twin teleporters at (1,8) and (5,8)"
 		]
 	},
@@ -54,7 +55,7 @@
 			[0, 0, 0, 0, 0, 0, 0]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", "an:90"],
+			[" ", " ", " ", " ", " ", " ", "an:90"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			["wp", " ", " ", " ", " ", " ", " "],
@@ -73,8 +74,8 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "pyramid:0:-0.5", " ", "snap_pyramid_puzzle:180", " ", "pyramid:0:-0.5", " "],
 			[" ", " ", " ", "cube_scene:0:-0.5:0.5", " ", " ", " "],
-			[" ", " ", "cube_scene:0:-0.5:0.5", "pyramidlong:0:-0.5 ", "cube_scene:0:-0.5:0.5", " ", "prism_block:90"],
-			[" ", " ", " ", "cube_scene:0:-0.5:0.5", "", " ", " "],
+			[" ", " ", "cube_scene:0:-0.5:0.5", "pyramidlong:0:-0.5", "cube_scene:0:-0.5:0.5", " ", "prism_block:90"],
+			[" ", " ", " ", "cube_scene:0:-0.5:0.5", " ", " ", " "],
 			[" ", "pyramid:0:-0.5", "dark_sphere", " ", " ", "pyramid:0:-0.5", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

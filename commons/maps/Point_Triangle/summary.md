@@ -1,85 +1,62 @@
 # Point Triangle - Map Summary
 
 ## Overview
-Point Triangle introduces the first closed geometry - the triangle as fundamental enclosure. After experiencing points (position), lines (measured relation), grids (indexed space), this map reveals how three vertices produce something categorically new: **a boundary that defines inside and outside**.
+Point Triangle introduces the first closed geometry: the triangle as fundamental enclosure. After points, lines, and grid indexing, this map shows what changes when three vertices form a boundary with an interior.
 
 ## Spatial Layout
-- **Dimensions**: 7×9 grid (compact workspace)
-- **Architecture**: Varied height platform with elevated markers (1-2 levels)
-- **Central void**: Single absent tile at (3,7) creating focal point
-- **Entry**: Standard spawn
+- **Dimensions**: 7x9 grid (compact workshop)
+- **Architecture**: Stepped platform with local height variation (1-2 levels)
+- **Central void**: One absent structural cell at (3,7), used as a floating focus zone
+- **Entry**: Default map spawn
 
 ## Key Elements
 
 ### Primary Interactables
-- **triangle** (3,3) - Editable triangle with grabbable vertices
-  - Three snap points that can be moved in 3D space
-  - Triangle surface updates in real-time as vertices move
-  - Demonstrates how closure is maintained through vertex positions
-
-- **triangle_line_puzzle** (3,2) - Triangle construction puzzle
-  - Sunken to height 0 (fillhole group) creating focused interaction space
-  - Challenges player to understand triangle constraints
+- **triangle_line_puzzle** (3,3) - Three-line snap puzzle for constructing closure
+  - Configured with `#fillhole:remove` trigger
+  - Elevated via token offset (`:1.2`) for clearer hand access
+- **triangle** (3,6) - Interactive triangle mesh with draggable vertices
+  - Real-time surface updates from vertex motion
+  - Demonstrates orientation and area through live manipulation
 
 ### Supporting Elements
-- **triangleprofiles** (3,7) height 0.5m - Gallery of triangle variations
-  - Equilateral, isosceles, right, scalene examples
-  - Shows how same primitive (three vertices) produces diverse forms
-
-- **dark_sphere** (3,4) - Intimate lighting enclosure
-- **cube_scene** (3,5) height 0.9m - Spatial marker in fillhole group
-- **Label annotation** "triangle" at (3,3)
+- **dark_sphere** (3,4) - Enclosure for visual focus
+- **cube_scene** (3,5) at 0.9 scale - Fillhole-tagged marker linked to puzzle flow
+- **triangleprofiles** (3,7) elevated by +2.0 - Companion profile artifact for extended form reading
+- **la:triangle** annotation utility (3,3)
 
 ### Utilities
 - **Teleporter** (3,7) - Exit to next map
-- **Annotation** (6,2) rotated -90° - Navigation marker
+- **Annotation** (6,0) rotated -90 deg - Navigation marker
+- **Floating text** (3,8) - "Everything triangle"
 
 ## Atmosphere
-- **Audio**: "fractal_exploration" preset at -10dB - contemplative algorithmic sound
+- **Audio**: `fractal_exploration` preset at -10 dB
 - **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Lighting**: Warm directional (1.2 energy) creating defined shadows
-- **Mood**: Workshop-like, focused on geometric manipulation
-- **Visibility**: Hidden tiles except corners - progressive revelation
+- **Lighting**: Warm directional light with ambient fill
+- **Mood**: Focused geometric workshop
 
 ## Learning Sequence
-1. Player spawns into workshop space
-2. Encounters `triangle` interactable - three grabbable vertices
-3. Grabs and moves vertices - observes triangle surface updating
-4. Discovers constraints: vertices must remain non-collinear
-5. Experiences triangle_line_puzzle - constructing triangles from scratch
-6. Studies triangleprofiles - sees variety within triangular form
-7. Recognizes triangle as first closure - space is now **inside** or **outside**
-8. Exits having encountered geometry that contains
+1. Player enters the stepped workspace and finds the triangle annotation.
+2. Builds closure through `triangle_line_puzzle`.
+3. Encounters the fillhole marker and observes puzzle-linked reveal behavior.
+4. Manipulates `triangle` vertices to see area and orientation change in real time.
+5. Compares the primary triangle with the elevated `triangleprofiles` artifact.
+6. Exits via teleporter with closure understood as boundary production.
 
 ## Design Intent
-
-The **editable triangle** is central - unlike previous fixed demonstrations, this triangle's vertices can be moved. This interactivity reveals that:
-- Triangle is **three positions** + **three relations**
-- Moving one vertex changes **all three edges**
-- The surface persists as long as vertices are non-collinear
-- Closure is **dynamic**, not static
-
-The **triangleprofiles** gallery shows that "triangle" is a category containing infinite variations. All share the same structure (3 vertices, 3 edges, 1 face) but differ in proportions.
-
-The map's architecture itself echoes triangulation - varied heights at (3,2), (0,3), (5,3), (2,4), (4,4) create non-uniform terrain requiring triangular faces to render.
+This map stages a progression from relation to enclosure. The puzzle introduces closure as a rule-governed event, while the draggable triangle makes closure dynamic and embodied. The floating focus zone at (3,7) reinforces that the triangle's logic can operate beyond grounded tiles.
 
 ## Key Concept: First Closure
+- **Point**: isolated position
+- **Line**: open relation
+- **Triangle**: closed boundary with inside/outside distinction
 
-**Point** - Singular position
-**Line** - Two positions, open connection
-**Triangle** - Three positions, **closed boundary**
-
-The triangle is the first geometry that produces:
-- **Inside vs. Outside** - Decisive binary distinction
-- **Orientation** - Front and back faces
-- **Area** - Quantified enclosure
-- **Surface** - Visible boundary
-
-All subsequent complex geometry (cubes, spheres, organic models) reduces to triangles.
+The triangle is the first primitive that can contain.
 
 ## Connection to Sequence
-- **Position in primitives sequence**: 7/13
-- **Precedes**: Point_Triangle_Context (triangle variations and theorems)
-- **Follows**: Point_Line_Grid (coordinate systems)
-- **Establishes**: Closure, containment, inside/outside binary
-- **Critical theme**: Boundaries as governance - who decides what's enclosed?
+- **Position in primitives sequence**: 5/11
+- **Precedes**: `Point_Triangle_Context`
+- **Follows**: `Point_Line_Grid`
+- **Establishes**: Closure, orientation, interior/exterior logic
+- **Critical theme**: Boundaries as computational and political decisions

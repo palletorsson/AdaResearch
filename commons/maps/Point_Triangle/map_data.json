@@ -32,9 +32,11 @@
 		"objective": "Introduce triangle as first closure; editable vertices, inside/outside distinction.",
 		"key_elements": [
 			"`la:triangle` annotation at (3,3)",
-			"`triangle` manipulator at (3,3)",
-			"`triangle_line_puzzle` at (3,2)",
+			"`triangle_line_puzzle` at (3,3)",
+			"`triangle` manipulator at (3,6)",
 			"`dark_sphere` enclosure at (3,4)",
+			"`cube_scene` fillhole marker at (3,5)",
+			"`triangleprofiles` elevated profile at (3,7)",
 			"Teleporter `t` at (3,7)"
 		]
 	},
@@ -54,7 +56,7 @@
 			[" ", " ", " ", " ", " ", " ", "an:-90"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " e", " ", " ", " "],
+			[" ", " ", " ", "la:triangle", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -62,8 +64,8 @@
 			[" ", " ", " ", "3t:Everything triangle", " ", " ", " "]
 		],
 		"interactables": [
-			["", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "triangle_line_puzzle:0:1.2:0#fillhole:remove", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],

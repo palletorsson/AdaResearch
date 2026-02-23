@@ -59,6 +59,7 @@ allow_jump = false
 
 [node name="GridSystem" parent="." instance=ExtResource("3_grid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+flatten_post_lab_structure_walls = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

@@ -3,12 +3,12 @@
 		"name": "06 The Quad",
 		"lookup_name": "Point_Animatedcube",
 		"description": "A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.",
-		"description_2": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation—how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.",
+		"description_2": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation - how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 16,
+			"depth": 14,
 			"max_height": 2
 		},
 		"metadata": {
@@ -24,12 +24,13 @@
 	},
 	"documentation": {
 		"summary": "Point_Animatedcube - Cube Construction Animation",
-		"layout": "7x9 grid with raised pedestals at (2,4) and (4,4); south-east exit.",
-		"objective": "Observe cube assembly from primitives; animation shows construction process.",
+		"layout": "7x14 grid with two stacked builder rows, a central dome, and a late teleporter exit.",
+		"objective": "Observe staged cube assembly from primitives and compare multiple synchronized builder instances.",
 		"key_elements": [
-			"Twin `animatedcubebuilder` rigs at (2,4) and (4,4)",
+			"`animatedcubebuilder` rigs at (2,4), (4,4), (2,8), and (4,8)",
 			"`dark_sphere` ambient dome at (3,4)",
-			"Teleporter `t` at (5,7)"
+			"`polyhedron_nets_cube` fold preview at (3,10)",
+			"Teleporter `t` at (5,12)"
 		]
 	},
 	"layers": {
@@ -62,7 +63,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [

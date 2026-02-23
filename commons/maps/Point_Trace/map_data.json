@@ -7,7 +7,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 15,
+			"depth": 14,
 			"max_height": 2
 		},
 		"metadata": {
@@ -21,14 +21,15 @@
 	},
 	"documentation": {
 		"summary": "Point_Trace - Duration and Residue",
-		"layout": "7x11 corridor with irregular terrain; L-shaped walkway.",
+		"layout": "7x14 corridor with irregular terrain and a southern taper.",
 		"objective": "Introduce trace as accumulated movement; gesture and error over time.",
 		"key_elements": [
-			"`grab_sphere_point_snap` at (2,4)",
+			"`grab_sphere_point_snap` at (2,4) rotated 180 deg",
 			"`draw_dot` fillhole at (3,4)",
-			"`dark_sphere` enclosure at (4,3)",
-			"Teleporter `t` at (5,7)",
-			"Floating text: the_trace"
+			"`dark_sphere` enclosure at (3,3)",
+			"`cube_scene` markers at (3,5) and (4,5)",
+			"Teleporter `t` at (5,10)",
+			"Floating text `3t:the_trace` at (3,13)"
 		]
 	},
 	"layers": {
@@ -50,7 +51,7 @@
 		],
 		"utilities": [
 			["m:0:3:-1:0.1", " ", " ", " ", " ", " ", "an:-90"],
-			[" ", " ", " ", " ", " ", " ", ""],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -69,9 +70,9 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", "draw_dot:0:1:0#fillhole:remove", "", " ", " "],
-			[" ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", "", " "],
-			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", "grab_sphere_point_snap:180", "draw_dot:0:1:0#fillhole:remove", " ", " ", " "],
+			[" ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", "cube_scene:0:0:0.90#group:fillhole", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

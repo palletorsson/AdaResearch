@@ -144,11 +144,6 @@ volumetric_fog_albedo = Color(0.15, 0.12, 0.18, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_melancholia")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-material_override = SubResource("StandardMaterial3D_floor")
-mesh = SubResource("BoxMesh_floor")
-
 [node name="Polyhedron" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -2.5, 1.2, -0.8)
 material_override = SubResource("StandardMaterial3D_stone")

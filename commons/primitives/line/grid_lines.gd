@@ -25,11 +25,12 @@ var _data_table_page: int = 0  # Current page of points to display
 var _data_table_timer: float = 0.0  # Timer for page cycling
 
 func _process(delta: float) -> void:
-	for instance in _rotating_instances:
+	for i in range(_rotating_instances.size() - 1, -1, -1):
+		var instance: Node3D = _rotating_instances[i]
 		if is_instance_valid(instance):
 			instance.rotate_y(deg_to_rad(rotation_speed * delta))
 		else:
-			_rotating_instances.erase(instance)
+			_rotating_instances.remove_at(i)
 
 	# Cycle through data table pages
 	if _data_table_label and _data_table_label.visible:

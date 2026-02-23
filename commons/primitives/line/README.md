@@ -28,6 +28,12 @@ This folder contains interactive line primitives for VR that explore the fundame
   - Renaissance perspective
   - Orientation in space
 
+### Grid Trace
+- **`grid_lines.tscn`** - Grid overlay plus saved trace archive visualization
+  - Renders static X/Z lattice using `line_static` instances
+  - Listens to `/root/TraceData` and visualizes saved traces
+  - Includes optional data table paging for recent trace samples
+
 ### Documentation
 - **`LINE_POETICS.md`** - Philosophical and poetic framework
 - **`README.md`** - This file

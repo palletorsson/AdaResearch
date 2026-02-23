@@ -8,7 +8,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 8,
-			"depth": 16,
+			"depth": 14,
 			"max_height": 3
 		},
 		"metadata": {
@@ -24,12 +24,13 @@
 	},
 	"documentation": {
 		"summary": "Point_Line_Grid - Grid and Trace Space",
-		"layout": "8x10 grid with central void; U-shaped walkway framing empty space.",
+		"layout": "8x14 grid with central void and extended south runway.",
 		"objective": "Combine grid structure with trace recording; addressable space meets duration.",
 		"key_elements": [
 			"`player_trace` at (0,0)",
 			"`grid_lines` at (4,3)",
 			"`dark_sphere` enclosure at (3,4)",
+			"`grab_sphere_point_snap` at (2,8)",
 			"Teleporter `t` at (4,8)",
 			"Floating text: the_grid/the_trace"
 		]

@@ -2,12 +2,12 @@
 	"map_info": {
 		"name": "The First Primitive",
 		"lookup_name": "Primitives_1",
-		"description": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space. It is not a closed solid by itself, but a spatial junction—an elementary expression of volume beginning to form.",
+		"description": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space. It is not a closed solid by itself, but a spatial junction - an elementary expression of volume beginning to form.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 12,
+			"depth": 9,
 			"max_height": 2
 		},
 		"metadata": {
@@ -23,14 +23,16 @@
 	},
 	"documentation": {
 		"summary": "Primitives_1 - Trihedron and Tetrahedron",
-		"layout": "7x8 platform with raised pedestals; fillhole puzzle area.",
-		"objective": "Introduce trihedron as corner of space; tetrahedron puzzle assembly.",
+		"layout": "7x9 platform with raised pedestals and a central fillhole puzzle band.",
+		"objective": "Introduce trihedron as corner of space and tetrahedron assembly through hands-on interaction.",
 		"key_elements": [
-			"`trihedron` at (2,2)",
+			"`grab_trihedron` at (2,2) rotated 90 deg",
 			"`snap_tetrahedron_puzzle` fillhole at (3,2)",
 			"`dark_sphere` ambient dome at (3,3)",
-			"`cube_scene` fillhole array at row 4",
-			"Teleporter `t` at (5,6)"
+			"`cube_scene` fillhole markers at (2,4), (3,4), (4,4)",
+			"`pyramid_edit` side station at (1,7)",
+			"Teleporter `t` at (5,6)",
+			"Title text `3t:polythedra` at (3,8)"
 		]
 	},
 	"layers": {
@@ -54,14 +56,14 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t3:polythedra", " ", " ", " "]
+			[" ", " ", " ", "3t:polythedra", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "tetrahedron_edit:0:0:0.4", "snap_tetrahedron_puzzle:0:0.5:0#fillhole:reveal", " ", " ", " "],
+			[" ", " ", "grab_trihedron:90:0:0.4", "snap_tetrahedron_puzzle:0:0.5:0#fillhole:reveal", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", "cube_scene:0:0:0.90#group:fillhole", "cube_scene:0:0:0.90#group:fillhole", "cube_scene:0:0:0.90#group:fillhole", "", " "],
+			[" ", " ", "cube_scene:0:0:0.90#group:fillhole", "cube_scene:0:0:0.90#group:fillhole", "cube_scene:0:0:0.90#group:fillhole", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "pyramid_edit:0:0:0.4", " ", " ", " ", " ", " "],

@@ -25,19 +25,19 @@
 	},
 	"documentation": {
 		"summary": "Primitives_Ignorance - Epistemic Reset Pavilion",
-		"layout": "9x23 runway with repeating plinths; Platonic inscription entrance.",
-		"objective": "Re-encounter primitives as constructs; challenge formal mastery through variety.",
+		"layout": "9x27 gallery runway with staggered plinth bands and a late teleporter exit.",
+		"objective": "Re-encounter primitives as constructs through resolution studies, variant solids, and architectural modules.",
 		"key_elements": [
-			"`platonic_demo` at (4,2)",
-			"Sphere LOD comparison (high/mid/low) at rows 9,11,13",
-			"`lefttriangle`, `righttriangle` variations",
-			"`star_primitive`, `truncatedtetrahedron`, `capsule`",
-			"`snap_octahedron_puzzle` at (4,15)",
-			"`prism_block` row at row 19",
-			"`diamonds` collection at (4,23)",
-			"`dark_sphere` at (4,6)",
-			"Teleporter `t` at (4,21)",
-			"Floating text: Let_no_one_ignorant_of_geometry_enter_here"
+			"`platonic_grabbables` at (3,4)",
+			"Sphere LOD comparison (`sphere_high`/`sphere_mid`/`sphere_low`) at rows 11, 13, 15",
+			"`star_primitive`, `truncatedtetrahedron`, and `capsule` at x=7 across rows 11-15",
+			"`snap_octahedron_puzzle` at (4,17) with `grab_octahedron` supports at (2,17) and (6,17)",
+			"`prism_block` strip at row 21",
+			"`torus_radials_rings` + `capsule_radials_rings` pattern at row 23",
+			"`diamonds` centerpiece at (4,25)",
+			"`dark_sphere` at (4,8)",
+			"Teleporter `t` at (4,23)",
+			"Floating text `3t:Let_no_one_ignorant_of_geometry_enter_here` at (4,8)"
 		]
 	},
 	"layers": {
@@ -71,14 +71,14 @@
 			[0, 0, 0, 0, 0, 0, 0, 0, 0]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "platonic_grabbables", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			["", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -89,14 +89,14 @@
 			[" ", "roughrock", " ", "sphere_low", " ", "sphere_low", " ", "capsule", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "grab_octahedron:0:0:0.4", " ", "snap_octahedron_puzzle:0:0.5:0#fillhole:remove", " ", "grab_octahedron:0:0:0.4", " ", " "],
-			[" ", " ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", "", " ", " ", " "],
+			[" ", " ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "sphere:0:5.6", " ", " ", " ", " "],
 			[" ", " ", " ", "lshape:0:-0.5", " ", "lshape:180:-0.5", " ", " ", " "],
 			["prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90", " ", "prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90"],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			["torus_radials_rings:0:1:1#config:8:4", "", "capsule_radials_rings:90:1:#radial:3#rings:3", "capsule_radials_rings:90:1:#radial:7#rings:3", " ", "capsule_radials_rings:90:1:#radial:7#rings:3", "capsule_radials_rings:90:1:#radial:3#rings:3", " ", "torus_radials_rings:0:1:1#config:8:4"],
+			["torus_radials_rings:0:1:1#config:8:4", " ", "capsule_radials_rings:90:1:#radial:3#rings:3", "capsule_radials_rings:90:1:#radial:7#rings:3", " ", "capsule_radials_rings:90:1:#radial:7#rings:3", "capsule_radials_rings:90:1:#radial:3#rings:3", " ", "torus_radials_rings:0:1:1#config:8:4"],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "plus:0:1", " ", " ", "diamonds:0:1:0.6", " ", "", "plus:0:1", " "],
+			[" ", "plus:0:1", " ", " ", "diamonds:0:1:0.6", " ", " ", "plus:0:1", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"utilities": [
