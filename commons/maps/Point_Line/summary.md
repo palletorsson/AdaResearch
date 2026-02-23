@@ -1,58 +1,39 @@
 # Point Line - Map Summary
 
 ## Overview
-Point_Line introduces **relation** between discrete units. After learning about individual points, this map presents the line as captured trace - the formalization of movement into measured distance between two commitments in space.
+Point_Line shifts from isolated point to relation. The map centers a single manipulable line relation so distance and direction are learned through direct hand movement.
 
 ## Spatial Layout
-- **Dimensions**: 7×13 grid
-- **Architecture**: Mostly-filled irregular platform with voids in southwest corner and strategic notches
-- **Height**: Single level with line_demo sunken to height -1.5m (below floor level)
+- **Dimensions**: 7x15 grid
+- **Architecture**: irregular single-floor platform with void cuts toward the south edge
+- **Height**: mostly level floor with central interaction focus
 
 ## Key Elements
 
 ### Interactables
-- **line_demo** (3,4) height -1.5m - Two grabbable snap points connected by a measuring line
-- **Dark sphere** (3,2) - Ambient darkness
+- **line_demo** at (3,5): two snap points with dynamic connection line
+- **dark_sphere** at (3,2): enclosure to isolate the relation exercise
 
 ### Utilities
-- **Teleporter** (5,6) - Exit to next map
-- **Label annotation** (3,4) - "la:line"
-- **Floating text** (3,7) - "stretching_between_two_points,_the_line_that_measures"
+- **annotation board** `an:-90` near the north-east edge
+- **floating text** `3t:stretching_between_two_points,_the_line_that_measures`
+- **teleporter** `t` at (5,8)
 
 ## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Audio**: Default ambient
-- **Lighting**: Standard directional + ambient
-- **Mood**: Interactive, measured, relational
+- **Background**: sky blue [0.2, 0.3, 0.7]
+- **Lighting**: default directional + ambient
+- **Mood**: focused and comparative, with one core interaction
 
 ## Learning Sequence
-1. Player enters map with recessed center
-2. Looks down to see the line_demo **sunken into the floor**
-3. Grabs one of two snap points (now bigger and shinier with our modifications!)
-4. Pulls the points apart - the line stretches and shows length
-5. Pushes points together - the line compresses
-6. Reads the poetic text: "stretching between two points, the line that measures"
-7. **No clipboard tutorial** - learning through embodied manipulation
-8. Exits via teleporter
+1. Enter and identify the central two-point setup.
+2. Grab either endpoint and stretch/compress the relation.
+3. Observe that length and direction are computed from endpoint placement.
+4. Read the line text prompt and exit through teleporter.
 
 ## Design Intent
-
-### Sunken Interaction
-The line_demo is placed at **height -1.5m**, meaning it's **below the floor tiles**. This creates a "pit" or "well" effect - the player must look down into the recess to interact with the line. This architectural choice:
-- **Focuses attention** downward to the minimal interaction
-- **Isolates** the line from surrounding space
-- **Emphasizes** the one-dimensional nature (line sinks into lower dimension)
-
-### The Measuring Line
-The line_demo scene creates a **dynamic measurement system**. As you move the snap points:
-- The line's length updates in real-time
-- The visual cylinder stretches/compresses
-- The relation between points becomes **visible as geometry**
-
-This is the key insight: **The line is not an object - it is a visualized relation**.
+Point_Line is intentionally sparse so the player stays with one conceptual move: a line is not a standalone object, but a measured relation between two commitments in space.
 
 ## Connection to Sequence
-- **Position in primitives sequence**: 3/13
-- **Follows**: Point_One (individual discrete unit)
-- **Precedes**: Point_Lines (networks of lines, grids)
-- **Establishes**: Relation, measurement, direction, the concept of "between"
+- **Follows**: Point_One (single point)
+- **Prepares**: Point_Lines (multi-line systems)
+- **Core transition**: from atom (point) to relation (line)

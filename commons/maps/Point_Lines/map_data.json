@@ -7,8 +7,8 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 10,
-			"depth": 23,
+			"width": 7,
+			"depth": 27,
 			"max_height": 4
 		},
 		"metadata": {
@@ -24,16 +24,16 @@
 	},
 	"documentation": {
 		"summary": "Point_Lines - Line Networks Workshop",
-		"layout": "7x10 grid with 2-high markers; varied platform heights.",
+		"layout": "7x27 elongated gallery with staged line systems and a late-map perspective zone.",
 		"objective": "Explore line multiplication: parallels, crossings, grids, and networks.",
 		"key_elements": [
-			"`parallel_line_puzzle` at (3,2)",
-			"`grab_line_drawer`, `grab_line_pusher`, `grab_line` at row 4",
-			"`modulor_man_demo` at (0,7)",
-			"`line_builder_3d` at (3,9)",
-			"`dark_sphere` enclosure at (3,3)",
-			"`laser_measure` at (0,3) - distance measurement tool",
-			"Teleporter `t` at (5,8)"
+			"`line_demo` at (3,3) as baseline two-point relation",
+			"`modulor_man_demo` and `line_builder_3d` at row 4 for embodied proportion/construction",
+			"`plus_line_puzzle` and `parallel_line_puzzle` at row 9",
+			"`dark_sphere` enclosure at (3,11)",
+			"`line` + `laser_measure` + `laser_exploding_sphere` trio across rows 12-14",
+			"`perspective_lines` and `scale_lines` near row 23",
+			"Teleporter `t` at (5,21)"
 		]
 	},
 	"layers": {
@@ -100,18 +100,18 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "line_demo:0", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "modulor_man_demo:0:-0.5", " ", " ", " ", "line_builder_3d:0:0:0.5", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "plus_line_puzzle:0:1.2:0#plusfillhole:remove", " ", "parallel_line_puzzle:0:1.2:0#fillhole:remove", " ", " "],
 			[" ", " ", "cube_scene:0:0:0.90#group:plusfillhole", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			["cube_scene:0:1:0.6", "line:0:1", " ", " ", "laser_measure:0:1", " ", " ", "laser_exploding_sphere:0:2"],
-			["cube_scene:0:1:0.4", "line:0:1", " ", " ", "laser_measure:0:1", " ", " ", "laser_exploding_sphere:0:2"],
-			["cube_scene:0:1:0.2", "line:0:1", " ", " ", "laser_measure:0:1", " ", " ", "laser_exploding_sphere:0:2"],
+			["cube_scene:0:1:0.6", "line:0:1", " ", " ", "laser_measure:0:1", " ", "laser_exploding_sphere:0:2"],
+			["cube_scene:0:1:0.4", "line:0:1", " ", " ", "laser_measure:0:1", " ", "laser_exploding_sphere:0:2"],
+			["cube_scene:0:1:0.2", "line:0:1", " ", " ", "laser_measure:0:1", " ", "laser_exploding_sphere:0:2"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -121,8 +121,8 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "perspective_lines:0:2", " ", "scale_lines:0:3", " ", "perspective_lines:0:2", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "", " ", "lightrod:0:0:1#config:4:1", " ", " ", " "],
-			["", " ", " ", "", " ", " ", "dgrid:90:1.15:0.9#config:5:5"]
+			[" ", " ", " ", "lightrod:0:0:1#config:4:1", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "dgrid:90:1.15:0.9#config:5:5"]
 		]
 	},
 	"utility_definitions": {

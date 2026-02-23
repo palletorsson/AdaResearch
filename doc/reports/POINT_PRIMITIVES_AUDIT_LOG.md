@@ -6,6 +6,8 @@ This file is the persistent memory for point-sequence audit passes.
 
 - `Point_Zero` audit: `pass_one` completed.
 - `Point_One` audit: `pass_one` completed.
+- `Point_Line` audit: `pass_one` completed.
+- `Point_Lines` audit: `pass_one` completed.
 
 ### Pass One Scope (baseline audit)
 

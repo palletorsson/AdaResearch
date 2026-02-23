@@ -1,64 +1,47 @@
 # Point Lines - Map Summary
 
 ## Overview
-Point Lines transforms the single line into a network, introducing multiplicity and systemic interaction. Where Point_Line showed a measured relation between two points, this map reveals how lines produce orientation, grids, and coordinate frameworks when they multiply and intersect.
+Point_Lines multiplies single relations into a line system: puzzles, measurement lanes, perspective demonstrations, and grid framing.
 
 ## Spatial Layout
-- **Dimensions**: 7×21 grid (elongated gallery space)
-- **Architecture**: Long exhibition hall with varied height markers (1-3 levels)
-- **Entry**: Type "I" - immersive spawn directly into space
+- **Dimensions**: 7x27 grid
+- **Architecture**: elongated gallery with mid-map enclosure and late-map perspective zone
+- **Height**: mixed terrain with a raised belt (`4`) acting as structural backdrop
 
 ## Key Elements
 
-### Interactive Line Tools
-- **grab_line_drawer** (0,4) - Draw lines through gesture
-- **grab_line_pusher** (1,4) - Push lines through space
-- **grab_line** (2,4) - Direct line manipulation
-- **parallel_line_puzzle** (3,2) - Puzzle about maintaining parallelism
-
-### Line System Demonstrations
-- **line_builder_3d** (3,9) height 1.8m - 3D Modulor Man construction
-- **line** (1,7) - Basic line interactable
-- **perspective_lines** (1,13) height 2m - Vanishing point demonstration
-- **scale_lines** (3,13) height 1m - Scale and proportion systems
-
-### Grid and Framework
-- **grid_lines** (2,16) - Grid overlay system
-- **VectorBasics** (6,15) - Vector coordinate introduction
-
-### Atmosphere & Context
-- **dark_sphere** (3,3) - Intimate lighting enclosure
-- **cube_scene** (3,4) height 0.9m - Spatial marker with fill-hole group
+### Interactables
+- **line_demo** at (3,3): baseline line relation
+- **modulor_man_demo** at (1,4) and **line_builder_3d** at (5,4): proportional and constructed line systems
+- **plus_line_puzzle** at (2,9) and **parallel_line_puzzle** at (4,9): relation constraints
+- **dark_sphere** at (3,11): focused chamber for transition
+- **measurement lane** rows 12-14: `line`, `laser_measure`, `laser_exploding_sphere`, and stepped `cube_scene`
+- **perspective_lines** and **scale_lines** near row 23
+- **lightrod** and **dgrid** in end-zone framing
 
 ### Utilities
-- **Teleporter** (5,8) - Exit to next map
-- **Floating text** (3,10) - "lines" label
-- **Annotation** (6,0) rotated -90° - Navigation marker
+- **spawn** `s` at entry
+- **annotation board** `an:-90`
+- **subtitle trigger** `sub:line_measures`
+- **teleporter** `t` at (5,21)
+- **floating text** `3t:lines`
 
 ## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Lighting**: Cool ambient with warm directional (higher energy at 1.2)
-- **Mood**: Gallery-like, systematic, exploratory
-- **Visibility**: Hidden tiles except corners (progressive revelation)
+- **Background**: sky blue [0.2, 0.3, 0.7]
+- **Lighting**: standard directional + ambient
+- **Mood**: workshop-to-gallery progression
 
 ## Learning Sequence
-1. Player spawns into elongated gallery space
-2. Encounters three line manipulation tools (grab variations)
-3. Experiences parallel_line_puzzle - maintaining relationships
-4. Observes line_builder_3d constructing Modulor Man in 3D
-5. Studies perspective_lines - convergence and vanishing points
-6. Explores scale_lines - proportional relationships
-7. Engages with grid_lines - space becoming indexed
-8. Reviews VectorBasics - coordinate system foundations
-9. Exits via teleporter having experienced lines as system
+1. Revisit baseline line relation.
+2. Explore constrained relations (plus/parallel puzzles).
+3. Transition through enclosed mid-zone.
+4. Compare practical measurement tools against visual line structures.
+5. End with perspective/scale frameworks and exit.
 
 ## Design Intent
-The elongated 7×21 space creates a **gallery of line behaviors**. Unlike Point_Line's focused single interaction, this map presents multiple line systems simultaneously, allowing comparison and pattern recognition. The spatial arrangement moves from concrete manipulation (grab tools) through geometric principles (parallel, perspective, scale) to abstract frameworks (grid, vectors).
-
-The architecture itself demonstrates the concept: the long rectangular space is bounded by lines, organized by grid coordinates, and experienced through movement along linear paths.
+The map stages line multiplicity as curriculum, not clutter. It moves from direct manipulation to systemic framing, so "line" evolves from local relation into spatial infrastructure.
 
 ## Connection to Sequence
-- **Position in primitives sequence**: 4/13
-- **Precedes**: Point_Trace (duration and continuous gesture)
-- **Follows**: Point_Line (single measured line)
-- **Establishes**: Networks, grids, coordinate systems - the infrastructure for addressing space
+- **Follows**: Point_Line
+- **Prepares**: trace, grid, and broader coordinate reasoning
+- **Core transition**: from relation to networked line systems

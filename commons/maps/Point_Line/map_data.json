@@ -9,7 +9,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 13,
+			"depth": 15,
 			"max_height": 2
 		},
 		"metadata": {
@@ -25,11 +25,10 @@
 	},
 	"documentation": {
 		"summary": "Point_Line - Line Introduction Chamber",
-		"layout": "7x13 grid with varied heights; south-west cells voided.",
+		"layout": "7x15 grid with irregular voids and a central line interaction zone.",
 		"objective": "Demonstrate line segment as relation between two points; embodied measurement.",
 		"key_elements": [
-			"`la:line` annotation at (3,4)",
-			"`line_demo` at (3,4) height -1.3m",
+			"`line_demo` at (3,5) - two snap points connected by dynamic measuring line",
 			"`dark_sphere` enclosure at (3,2)",
 			"Teleporter `t` at (5,6)"
 		]
