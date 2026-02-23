@@ -10,6 +10,9 @@ extends CanvasLayer
 
 # ── Paths ────────────────────────────────────────────────────────────────
 const REQUIREMENTS_PATH := "res://commons/maps/sequence_requirements.json"
+const RELEASE_GATES_PATH := "res://doc/reports/RELEASE_GATES.json"
+const RELEASE_GATES_TOGGLES_USER_PATH := "user://project_dashboard_gate_toggles.json"
+const RELEASE_GATES_TOGGLES_SHARED_PATH := "res://doc/reports/RELEASE_GATES_TOGGLES.json"
 const SEQUENCES_DIR := "res://commons/maps/sequences/"
 const MAPS_DIR := "res://commons/maps/"
 const LAB_DIR := "res://commons/maps/Lab/"
@@ -71,6 +74,9 @@ var _all_results: Array[Dictionary] = []
 var _mismatches: Array[Dictionary] = []
 var _issues: Array[Dictionary] = []
 var _summary: Dictionary = {}
+var _release_gates: Dictionary = {}
+var _release_gates_loaded: bool = false
+var _release_gate_enabled: Dictionary = {}
 var _data_loaded: bool = false
 
 # ── UI Nodes ─────────────────────────────────────────────────────────────
@@ -222,6 +228,11 @@ func _load_data() -> void:
 	if _requirements.is_empty():
 		push_warning("ProjectDashboard: Could not load sequence_requirements.json")
 		return
+
+	_release_gates = _read_json(RELEASE_GATES_PATH)
+	_release_gates_loaded = not _release_gates.is_empty()
+	_load_release_gate_toggles()
+	_sync_release_gate_toggles_with_report()
 
 	_spine_results.clear()
 	_branch_results.clear()
@@ -576,6 +587,93 @@ func _read_json(path: String) -> Dictionary:
 	if json.data is Dictionary:
 		return json.data
 	return {}
+
+
+func _load_release_gate_toggles() -> void:
+	_release_gate_enabled.clear()
+	var toggle_data: Dictionary = _read_json(RELEASE_GATES_TOGGLES_SHARED_PATH)
+	if toggle_data.is_empty():
+		toggle_data = _read_json(RELEASE_GATES_TOGGLES_USER_PATH)
+	var enabled_value: Variant = toggle_data.get("enabled", {})
+	if enabled_value is Dictionary:
+		var enabled_dict: Dictionary = enabled_value as Dictionary
+		for key in enabled_dict.keys():
+			var gate_id: String = str(key)
+			_release_gate_enabled[gate_id] = bool(enabled_dict.get(key, true))
+
+
+func _save_release_gate_toggles() -> void:
+	var payload: Dictionary = {
+		"enabled": _release_gate_enabled
+	}
+	_write_json(RELEASE_GATES_TOGGLES_USER_PATH, payload)
+	_write_json(RELEASE_GATES_TOGGLES_SHARED_PATH, payload)
+
+
+func _write_json(path: String, data: Dictionary) -> void:
+	var resolved_path: String = path
+	if path.begins_with("res://"):
+		resolved_path = ProjectSettings.globalize_path(path)
+	var file: FileAccess = FileAccess.open(resolved_path, FileAccess.WRITE)
+	if not file:
+		return
+	file.store_string(JSON.stringify(data, "\t"))
+
+
+func _extract_release_gates() -> Array[Dictionary]:
+	var gates: Array[Dictionary] = []
+	var gates_value: Variant = _release_gates.get("gates", [])
+	if gates_value is Array:
+		var gates_raw: Array = gates_value as Array
+		for gate_item in gates_raw:
+			if gate_item is Dictionary:
+				gates.append(gate_item as Dictionary)
+	return gates
+
+
+func _sync_release_gate_toggles_with_report() -> void:
+	var gates: Array[Dictionary] = _extract_release_gates()
+	var valid_ids: Dictionary = {}
+	var changed: bool = false
+
+	for gate in gates:
+		var gate_id: String = str(gate.get("id", ""))
+		if gate_id == "":
+			continue
+		valid_ids[gate_id] = true
+		if not _release_gate_enabled.has(gate_id):
+			_release_gate_enabled[gate_id] = true
+			changed = true
+
+	var existing_keys: Array = _release_gate_enabled.keys()
+	for key in existing_keys:
+		var gate_key: String = str(key)
+		if not valid_ids.has(gate_key):
+			_release_gate_enabled.erase(gate_key)
+			changed = true
+
+	if changed:
+		_save_release_gate_toggles()
+
+
+func _is_release_gate_enabled(gate_id: String) -> bool:
+	return bool(_release_gate_enabled.get(gate_id, true))
+
+
+func _set_release_gates_enabled(gate_ids: Array[String], enabled: bool) -> void:
+	for gate_id in gate_ids:
+		if gate_id == "":
+			continue
+		_release_gate_enabled[gate_id] = enabled
+	_save_release_gate_toggles()
+	_populate_overview_tab()
+
+
+func _reset_release_gate_toggles_to_default() -> void:
+	_release_gate_enabled.clear()
+	_sync_release_gate_toggles_with_report()
+	_save_release_gate_toggles()
+	_populate_overview_tab()
 
 
 func _file_exists(path: String) -> bool:
@@ -959,6 +1057,7 @@ func _populate_overview_tab() -> void:
 		"files needed", COLOR_CRITICAL if s_missing_md > 100 else COLOR_PARTIAL)
 	_add_stat_card(cards_row, "Mismatches", "%d" % s_mismatch,
 		"stale data", COLOR_CRITICAL if s_mismatch > 0 else COLOR_COMPLETE)
+	_add_release_gates_section(_overview_container)
 
 	# ── Section: Deliverable Progress ────────────────────────────────────
 	_overview_container.add_child(_make_spacer(8))
@@ -1661,3 +1760,212 @@ func _percent(part: int, whole: int) -> int:
 	if whole <= 0:
 		return 0
 	return int(float(part) / float(whole) * 100.0)
+
+
+func _add_release_gates_section(parent: VBoxContainer) -> void:
+	parent.add_child(_make_spacer(8))
+	parent.add_child(_make_section_label("RELEASE GATES"))
+
+	if not _release_gates_loaded:
+		var missing_label := Label.new()
+		missing_label.text = "No release gate report found at %s" % RELEASE_GATES_PATH
+		missing_label.add_theme_font_size_override("font_size", 11)
+		missing_label.add_theme_color_override("font_color", COLOR_PARTIAL)
+		parent.add_child(missing_label)
+		return
+
+	var gates: Array[Dictionary] = _extract_release_gates()
+	_sync_release_gate_toggles_with_report()
+
+	if gates.is_empty():
+		var empty_label := Label.new()
+		empty_label.text = "Release gate report is loaded but has no gate rows."
+		empty_label.add_theme_font_size_override("font_size", 11)
+		empty_label.add_theme_color_override("font_color", COLOR_PARTIAL)
+		parent.add_child(empty_label)
+		return
+
+	var gate_ids: Array[String] = []
+	var enabled_count: int = 0
+	var pass_count: int = 0
+	for gate in gates:
+		var gate_id: String = str(gate.get("id", ""))
+		if gate_id != "":
+			gate_ids.append(gate_id)
+		if not _is_release_gate_enabled(gate_id):
+			continue
+		enabled_count += 1
+		if bool(gate.get("pass", false)):
+			pass_count += 1
+
+	var has_enabled_gates: bool = enabled_count > 0
+	var overall_pass: bool = has_enabled_gates and pass_count == enabled_count
+	var summary_text: String = "PASS" if overall_pass else ("N/A" if not has_enabled_gates else "FAIL")
+	var summary_color: Color = COLOR_COMPLETE if overall_pass else (COLOR_DEFERRED if not has_enabled_gates else COLOR_CRITICAL)
+
+	var summary_row := HBoxContainer.new()
+	summary_row.add_theme_constant_override("separation", 8)
+
+	var summary_label := Label.new()
+	summary_label.text = "Overall release status"
+	summary_label.custom_minimum_size.x = 220
+	summary_label.add_theme_font_size_override("font_size", 12)
+	summary_label.add_theme_color_override("font_color", COLOR_TEXT)
+	summary_row.add_child(summary_label)
+
+	var summary_badge := _make_colored_cell(
+		summary_text,
+		summary_color,
+		56
+	)
+	summary_row.add_child(summary_badge)
+
+	var summary_metrics := Label.new()
+	summary_metrics.text = "%d/%d enabled gates passing (%d total)" % [pass_count, enabled_count, gates.size()]
+	summary_metrics.add_theme_font_size_override("font_size", 10)
+	summary_metrics.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	summary_metrics.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	summary_metrics.clip_text = true
+	summary_row.add_child(summary_metrics)
+
+	parent.add_child(summary_row)
+
+	var hint_label := Label.new()
+	hint_label.text = "Toggle gates ON/OFF. Disabled gates are excluded from overall release status."
+	hint_label.add_theme_font_size_override("font_size", 10)
+	hint_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	hint_label.clip_text = true
+	parent.add_child(hint_label)
+
+	var actions_row := HBoxContainer.new()
+	actions_row.add_theme_constant_override("separation", 6)
+
+	var all_on_button := Button.new()
+	all_on_button.text = "All ON"
+	all_on_button.custom_minimum_size.x = 72
+	all_on_button.pressed.connect(func() -> void:
+		_set_release_gates_enabled(gate_ids, true)
+	)
+	actions_row.add_child(all_on_button)
+
+	var all_off_button := Button.new()
+	all_off_button.text = "All OFF"
+	all_off_button.custom_minimum_size.x = 72
+	all_off_button.pressed.connect(func() -> void:
+		_set_release_gates_enabled(gate_ids, false)
+	)
+	actions_row.add_child(all_off_button)
+
+	var reset_button := Button.new()
+	reset_button.text = "Reset"
+	reset_button.custom_minimum_size.x = 72
+	reset_button.pressed.connect(func() -> void:
+		_reset_release_gate_toggles_to_default()
+	)
+	actions_row.add_child(reset_button)
+
+	var actions_hint := Label.new()
+	actions_hint.text = "Reset = enable all known gates"
+	actions_hint.add_theme_font_size_override("font_size", 10)
+	actions_hint.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	actions_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	actions_hint.clip_text = true
+	actions_row.add_child(actions_hint)
+	parent.add_child(actions_row)
+
+	for gate in gates:
+		_add_release_gate_row(parent, gate)
+
+
+func _add_release_gate_row(parent: VBoxContainer, gate: Dictionary) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+
+	var gate_id: String = str(gate.get("id", "?"))
+	var gate_name: String = str(gate.get("name", "Unnamed Gate"))
+	var gate_enabled: bool = _is_release_gate_enabled(gate_id)
+	var gate_pass: bool = bool(gate.get("pass", false))
+	var metrics: Dictionary = {}
+	var metrics_value: Variant = gate.get("metrics", {})
+	if metrics_value is Dictionary:
+		metrics = metrics_value as Dictionary
+
+	var toggle := CheckBox.new()
+	toggle.text = "ON"
+	toggle.button_pressed = gate_enabled
+	toggle.custom_minimum_size.x = 52
+	var toggle_gate_id: String = gate_id
+	toggle.toggled.connect(func(pressed: bool) -> void:
+		_release_gate_enabled[toggle_gate_id] = pressed
+		_save_release_gate_toggles()
+		_populate_overview_tab()
+	)
+	row.add_child(toggle)
+
+	var name_label := Label.new()
+	name_label.text = "Gate %s: %s" % [gate_id, gate_name]
+	name_label.custom_minimum_size.x = 220
+	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.add_theme_color_override("font_color", COLOR_TEXT if gate_enabled else COLOR_TEXT_DIM)
+	name_label.clip_text = true
+	row.add_child(name_label)
+
+	var status_text: String = "OFF"
+	var status_color: Color = COLOR_DEFERRED
+	if gate_enabled:
+		status_text = "PASS" if gate_pass else "FAIL"
+		status_color = COLOR_COMPLETE if gate_pass else COLOR_CRITICAL
+
+	var status_badge := _make_colored_cell(
+		status_text,
+		status_color,
+		56
+	)
+	row.add_child(status_badge)
+
+	var metrics_label := Label.new()
+	metrics_label.text = _gate_metrics_text(gate_id, metrics)
+	metrics_label.add_theme_font_size_override("font_size", 10)
+	metrics_label.add_theme_color_override("font_color", COLOR_TEXT_DIM if gate_enabled else COLOR_DEFERRED)
+	metrics_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	metrics_label.clip_text = true
+	row.add_child(metrics_label)
+
+	parent.add_child(row)
+
+
+func _gate_metrics_text(gate_id: String, metrics: Dictionary) -> String:
+	match gate_id:
+		"A":
+			var missing_declared_maps: int = int(metrics.get("missing_declared_maps", 0))
+			var duplicate_entries: int = int(metrics.get("duplicate_entries_within_sequence", 0))
+			var undeclared_folders: int = int(metrics.get("undeclared_map_folders", 0))
+			return "missing declared: %d, duplicate entries: %d, undeclared folders: %d" % [missing_declared_maps, duplicate_entries, undeclared_folders]
+		"B":
+			var unresolved_scene_files: int = int(metrics.get("unresolved_scene_files", 0))
+			var missing_scene_path: int = int(metrics.get("missing_scene_path", 0))
+			var missing_map_ready: int = int(metrics.get("missing_map_ready", 0))
+			return "unresolved scenes: %d, missing scene_path: %d, missing map_ready: %d" % [unresolved_scene_files, missing_scene_path, missing_map_ready]
+		"C":
+			var grade_a: int = int(metrics.get("grade_A", 0))
+			var grade_b: int = int(metrics.get("grade_B", 0))
+			var grade_c: int = int(metrics.get("grade_C", 0))
+			var grade_f: int = int(metrics.get("grade_F", 0))
+			return "grades A:%d B:%d C:%d F:%d" % [grade_a, grade_b, grade_c, grade_f]
+		"D":
+			var lost_count: int = int(metrics.get("lost_count", 0))
+			var changed_count: int = int(metrics.get("changed_count", 0))
+			var total_issues: int = int(metrics.get("total_issues", 0))
+			return "lost: %d, changed: %d, total issues: %d" % [lost_count, changed_count, total_issues]
+		_:
+			if metrics.is_empty():
+				return "no metrics"
+			var metric_keys: Array[String] = []
+			for metric_key in metrics.keys():
+				metric_keys.append(str(metric_key))
+			metric_keys.sort()
+			var parts: Array[String] = []
+			for key_name in metric_keys:
+				var metric_value: Variant = metrics.get(key_name, null)
+				parts.append("%s: %s" % [key_name, str(metric_value)])
+			return ", ".join(parts)

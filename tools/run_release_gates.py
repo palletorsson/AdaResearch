@@ -18,6 +18,7 @@ from typing import Any
 
 
 REPO = Path(__file__).resolve().parent.parent
+DEFAULT_GATE_TOGGLES_PATH = REPO / "doc/reports/RELEASE_GATES_TOGGLES.json"
 
 
 def run_cmd(cmd: list[str], env: dict[str, str] | None = None) -> tuple[int, str]:
@@ -54,7 +55,56 @@ def parse_lab_audit_output(text: str) -> dict[str, Any]:
     }
 
 
-def build_report(max_grade_f: int, max_grade_c: int | None) -> dict[str, Any]:
+def load_gate_toggles(path: Path) -> dict[str, bool]:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    enabled_raw = data.get("enabled", {})
+    if not isinstance(enabled_raw, dict):
+        return {}
+    enabled: dict[str, bool] = {}
+    for key, value in enabled_raw.items():
+        gate_id = str(key).strip()
+        if not gate_id:
+            continue
+        enabled[gate_id] = bool(value)
+    return enabled
+
+
+def apply_gate_toggles(
+    gates: list[dict[str, Any]], gate_enabled: dict[str, bool]
+) -> tuple[int, int, bool, str]:
+    enabled_count = 0
+    pass_count = 0
+    for gate in gates:
+        gate_id = str(gate.get("id", "")).strip()
+        enabled = bool(gate_enabled.get(gate_id, True))
+        gate["enabled"] = enabled
+        if not enabled:
+            continue
+        enabled_count += 1
+        if bool(gate.get("pass", False)):
+            pass_count += 1
+
+    if enabled_count == 0:
+        return pass_count, enabled_count, True, "N/A"
+
+    overall_pass = pass_count == enabled_count
+    return pass_count, enabled_count, overall_pass, ("PASS" if overall_pass else "FAIL")
+
+
+def build_report(
+    max_grade_f: int,
+    max_grade_c: int | None,
+    gate_enabled: dict[str, bool] | None = None,
+) -> dict[str, Any]:
+    if gate_enabled is None:
+        gate_enabled = {}
     with tempfile.TemporaryDirectory() as td:
         td_path = Path(td)
 
@@ -188,10 +238,16 @@ def build_report(max_grade_f: int, max_grade_c: int | None) -> dict[str, Any]:
             }
         )
 
-        overall_pass = all(bool(g["pass"]) for g in gates)
+        pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
+            gates, gate_enabled
+        )
 
         return {
             "overall_pass": overall_pass,
+            "overall_status": overall_status,
+            "enabled_gate_count": enabled_count,
+            "passing_enabled_gate_count": pass_count,
+            "total_gate_count": len(gates),
             "command_exit_codes": {
                 "sequence_contract": rc_seq,
                 "artifact_audit": rc_art,
@@ -218,12 +274,21 @@ def to_markdown(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append("# Release Gates Report")
     lines.append("")
-    lines.append(f"- Overall: {'PASS' if report.get('overall_pass') else 'FAIL'}")
+    overall_status = str(report.get("overall_status", "PASS" if report.get("overall_pass") else "FAIL"))
+    lines.append(f"- Overall: {overall_status}")
+    lines.append(
+        "- Enabled gates: {}/{} passing".format(
+            int(report.get("passing_enabled_gate_count", 0)),
+            int(report.get("enabled_gate_count", 0)),
+        )
+    )
     lines.append("")
     lines.append("| Gate | Status | Key Metrics |")
     lines.append("|---|---|---|")
     for gate in report.get("gates", []):
-        status = "PASS" if gate.get("pass") else "FAIL"
+        status = "OFF"
+        if bool(gate.get("enabled", True)):
+            status = "PASS" if gate.get("pass") else "FAIL"
         metrics = gate.get("metrics", {})
         metric_text = ", ".join(f"{k}={v}" for k, v in metrics.items())
         lines.append(f"| {gate.get('id')}: {gate.get('name')} | {status} | {metric_text} |")
@@ -245,20 +310,57 @@ def main() -> int:
         default=-1,
         help="Maximum allowed count of grade-C maps (-1 disables C as a blocking gate; default: -1)",
     )
+    parser.add_argument(
+        "--gate-toggles",
+        default=str(DEFAULT_GATE_TOGGLES_PATH),
+        help="Path to gate-toggle JSON with {'enabled': {'A': true, ...}} (default: doc/reports/RELEASE_GATES_TOGGLES.json)",
+    )
+    parser.add_argument(
+        "--ignore-gate-toggles",
+        action="store_true",
+        help="Ignore gate toggle file and evaluate all gates",
+    )
     parser.add_argument("--json-out", default="", help="Optional JSON report path")
     parser.add_argument("--md-out", default="", help="Optional markdown report path")
     args = parser.parse_args()
 
     max_grade_c: int | None = None if args.max_grade_c < 0 else max(0, args.max_grade_c)
-    report = build_report(max_grade_f=max(0, args.max_grade_f), max_grade_c=max_grade_c)
+    gate_toggle_path = Path(args.gate_toggles)
+    gate_enabled: dict[str, bool] = {}
+    gate_toggle_source = ""
+    if not args.ignore_gate_toggles:
+        gate_enabled = load_gate_toggles(gate_toggle_path)
+        if gate_toggle_path.exists():
+            gate_toggle_source = str(gate_toggle_path)
+
+    report = build_report(
+        max_grade_f=max(0, args.max_grade_f),
+        max_grade_c=max_grade_c,
+        gate_enabled=gate_enabled,
+    )
+    report["gate_policy"] = {
+        "toggle_source": gate_toggle_source,
+        "ignore_gate_toggles": bool(args.ignore_gate_toggles),
+    }
 
     print("")
     print("=== RELEASE GATES ===")
     print("")
-    print(f"Overall: {'PASS' if report['overall_pass'] else 'FAIL'}")
+    print(f"Overall: {report.get('overall_status', 'PASS' if report['overall_pass'] else 'FAIL')}")
+    print(
+        "Enabled gates: {}/{} passing ({} total)".format(
+            int(report.get("passing_enabled_gate_count", 0)),
+            int(report.get("enabled_gate_count", 0)),
+            int(report.get("total_gate_count", 0)),
+        )
+    )
+    if gate_toggle_source:
+        print(f"Gate toggles: {gate_toggle_source}")
     print("")
     for gate in report.get("gates", []):
-        status = "PASS" if gate.get("pass") else "FAIL"
+        status = "OFF"
+        if bool(gate.get("enabled", True)):
+            status = "PASS" if gate.get("pass") else "FAIL"
         print(f"[{status}] {gate.get('id')}: {gate.get('name')}")
         for key, value in gate.get("metrics", {}).items():
             print(f"  - {key}: {value}")
