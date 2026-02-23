@@ -114,6 +114,19 @@
 				"wavefunctions"
 			],
 			"sequence": "wavefunctions"
+		},
+		"shear_matrix_demo": {
+			"name": "Shear Matrix Demo",
+			"lookup_name": "shear_matrix_demo",
+			"description": "Wall panel showing shearing transformation with the visible 2x2 matrix. A unit square (blue) gets sheared into a parallelogram (orange) with fixed shear factor k=0.5. Shows [[1,k],[0,1]] matrix and transformation arrow between original and sheared shapes.",
+			"scene": "res://commons/artifacts/shear_matrix_demo/shear_matrix_demo.tscn",
+			"category": "transforms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		}
 	}
 }
