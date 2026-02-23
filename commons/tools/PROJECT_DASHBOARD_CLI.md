@@ -56,7 +56,7 @@ These are the gold standard. Match their quality and voice.
 powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode <mode> [-Name <name>] [-Format <format>]
 ```
 
-Always run from the project root: `C:\Users\palle\Documents\GitHub\AdaResearch_46`
+The script auto-detects repo root from its own location, so it works regardless of where the repo is checked out.
 
 ## Modes
 

@@ -1,4 +1,6 @@
-$mapsDir = 'C:\Users\palle\Documents\GitHub\AdaResearch_46\commons\maps'
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$root = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
+$mapsDir = Join-Path $root 'commons\maps'
 $seqDir = Join-Path $mapsDir 'sequences'
 
 # Get all map folders that have each .md file type
