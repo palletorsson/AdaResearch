@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqus3el56gbp5"]
+[gd_scene load_steps=13 format=3 uid="uid://dqus3el56gbp5"]
 
 [ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="1_labgrid"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_grid"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" path="res://commons/scenes/desktop_player.tscn" id="3_player"]
 [ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="4_sky"]
 [ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
 shader = ExtResource("4_sky")
@@ -111,3 +113,9 @@ outline_size = 8
 
 [node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
 script = ExtResource("5_overlay")
+
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("6_layer_editor")
+
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("7_dashboard")

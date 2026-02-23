@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardStandalone.gd" id="1_launcher"]
+[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="2_dashboard"]
+
+[node name="ProjectDashboardApp" type="Node"]
+script = ExtResource("1_launcher")
+
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("2_dashboard")

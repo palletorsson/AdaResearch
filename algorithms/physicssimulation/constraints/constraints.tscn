@@ -4,3 +4,17 @@
 
 [node name="Constraints" type="Node3D"]
 script = ExtResource("1_con")
+
+[node name="Demonstrations" type="Node3D" parent="."]
+
+[node name="PendulumChain" type="Node3D" parent="Demonstrations"]
+
+[node name="RopeBridge" type="Node3D" parent="Demonstrations"]
+
+[node name="Ragdoll" type="Node3D" parent="Demonstrations"]
+
+[node name="SliderRails" type="Node3D" parent="Demonstrations"]
+
+[node name="SwingingDoors" type="Node3D" parent="Demonstrations"]
+
+[node name="SpringDamper" type="Node3D" parent="Demonstrations"]

@@ -1,0 +1,1156 @@
+{
+	"_meta": {
+		"description": "Formal registry of Lab changes per sequence completion",
+		"version": "1.0",
+		"last_updated": "2026-02-22",
+		"note": "Documents existing progression_delta data from map variants + adds nature/capability layers for future phases. This is the single source of truth for Lab evolution.",
+		"categories": {
+			"showcase": "Student's creation displayed — 'you made this'",
+			"navigation": "Enables reaching new areas (ramps, transport cubes, teleporters)",
+			"nature": "Organic growth — the forest emerging from the Lab",
+			"instrument": "Lab tool that enables new interactions",
+			"reference": "Info board, kiosk, educational display",
+			"gate": "Structural change that opens a new wing or corridor"
+		},
+		"architecture_note": "Two lab styles exist: 'old-style' (walled rooms 16x30, structure codes 1-6, corridors) used for spine stages, and 'new-style' (diagonal spiral, open floor) used for some branch post-maps. The manifest documents the old-style spine progression.",
+		"anomalies": {
+			"post_cellularautomata": "Contains Lab_Post_Fractals data — duplicate of fractals",
+			"post_meshes": "Contains Lab_Post_Array data — misnamed",
+			"post_vectors": "Contains Lab - Post Primitives data — misnamed",
+			"post_geometric": "Contains Lab_Post_Array data with geometric_algorithms teleporter"
+		}
+	},
+	"stages": [
+		{
+			"stage": "initial",
+			"trigger": null,
+			"map_file": "Lab/map_data",
+			"dimensions": "10x8",
+			"phase": null,
+			"spine_order": 0,
+			"teleporters": ["primitives", "transformation", "color"],
+			"artifacts": [
+				{
+					"id": "rotating_cube",
+					"cell": [1, 8],
+					"params": "0:1:0.2",
+					"category": "showcase",
+					"why": "The first thing the player sees — a rotating cube, the atom of 3D space"
+				},
+				{
+					"id": "living_paper",
+					"cell": [2, 2],
+					"params": "180#algorithm:mandelbrot",
+					"category": "reference",
+					"why": "Living paper showing mandelbrot — a preview of what's possible"
+				},
+				{
+					"id": "cube_lines",
+					"cell": [4, 2],
+					"params": "",
+					"category": "showcase",
+					"why": "Wireframe cube — geometry as lines"
+				},
+				{
+					"id": "light_sphere",
+					"cell": [4, 3],
+					"params": "",
+					"category": "showcase",
+					"why": "Light sphere — illumination as spatial phenomenon"
+				},
+				{
+					"id": "vr_component_demo",
+					"cell": [4, 4],
+					"params": "180:1",
+					"category": "instrument",
+					"why": "VR interaction demo — teaches the player how to interact"
+				},
+				{
+					"id": "rainbow",
+					"cell": [4, 8],
+					"params": "90:0:0.05",
+					"category": "showcase",
+					"why": "Rainbow — color as spectrum, preview of color sequence"
+				},
+				{
+					"id": "cube_scene",
+					"cell": [5, 2],
+					"params": "0:2:0.6",
+					"category": "showcase",
+					"why": "Cube scene — 3D composition"
+				},
+				{
+					"id": "world_map_tablet",
+					"cell": [6, 4],
+					"params": "180:0.2:2",
+					"category": "reference",
+					"why": "World map tablet — navigation aid"
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "sub:Lab_One_Info",
+					"cell": [2, 4],
+					"category": "reference",
+					"why": "Subtitle: 'Find First Simulation'"
+				},
+				{
+					"type": "m:0.1",
+					"cell": [0, 1],
+					"category": "instrument",
+					"why": "Music volume marker"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": null,
+			"note": "Starting Lab — the hub. Dark, minimal, a few objects. Three teleporters visible: primitives, transformation, color. The player's journey begins here."
+		},
+		{
+			"stage": "post_primitives",
+			"trigger": "primitives_completed",
+			"map_file": "Lab/map_data_post_primitives",
+			"dimensions": "10x8",
+			"phase": "F_order",
+			"spine_order": 1,
+			"teleporters": [],
+			"teleporters_note": "No new teleporters — primitives, transformation, color already present",
+			"artifacts": [
+				{
+					"id": "grid_lines",
+					"cell": [2, 2],
+					"params": "0:-0.4:0.19",
+					"category": "showcase",
+					"why": "Player's first creation — visible grid lines from point exercises. Replaces living_paper."
+				},
+				{
+					"id": "pyramid_edit",
+					"cell": [3, 2],
+					"params": "45:0:0.4",
+					"category": "showcase",
+					"why": "Editable pyramid — primitives hands-on artifact"
+				},
+				{
+					"id": "lshape",
+					"cell": [2, 6],
+					"params": "-90:-1.0",
+					"category": "showcase",
+					"why": "L-shape — geometric composition from primitives"
+				},
+				{
+					"id": "smallcontainment",
+					"cell": [6, 1],
+					"params": "180:0:4",
+					"category": "showcase",
+					"why": "Small containment field — boundary concept from primitives"
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "wp:90",
+					"cell": [1, 5],
+					"category": "navigation",
+					"why": "Ramp to transformation platform — completing primitives unlocks the path upward"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "geometry_sight",
+				"description": "See wireframes and vertex positions in the world",
+				"status": "stub"
+			},
+			"note": "After primitives: the draw dot, grid lines, pyramid appear. The ramp to the transformation platform opens. You made these shapes — now they live in the Lab."
+		},
+		{
+			"stage": "post_transformation",
+			"trigger": "transformation_completed",
+			"map_file": "Lab/map_data_post_transformation",
+			"dimensions": "10x8",
+			"phase": "F_order",
+			"spine_order": 2,
+			"teleporters": ["forces"],
+			"teleporters_note": "Forces teleporter appears at [2,3]",
+			"artifacts": [],
+			"artifacts_note": "No new interactables added — transformation's gift is movement itself",
+			"utilities_added": [
+				{
+					"type": "tc:2:y",
+					"cell": [5, 5],
+					"category": "navigation",
+					"why": "Transport cube to height 4 — transformation made movement possible. You learned to translate, now the Lab gives you a transport cube."
+				}
+			],
+			"structure_changes": [
+				{
+					"cell": [5, 5],
+					"from": "1",
+					"to": "0",
+					"why": "Hole for transport cube — floor removed where the cube sits"
+				}
+			],
+			"nature": [],
+			"capability": {
+				"perception": "transform_sense",
+				"description": "See rotation/scale/translation as continuous flows",
+				"status": "stub"
+			},
+			"note": "After transformation: a transport cube appears. You learned to move things — now the Lab moves you. The forces teleporter becomes accessible."
+		},
+		{
+			"stage": "post_color",
+			"trigger": "color_completed",
+			"map_file": "Lab/map_data_post_color",
+			"dimensions": "10x14",
+			"phase": "F_order",
+			"spine_order": 3,
+			"teleporters": ["array_tutorial", "wavefunctions"],
+			"teleporters_note": "GATE MAP — south wing opens. array_tutorial [8,1] and wavefunctions [10,1] appear in new wing",
+			"artifacts": [
+				{
+					"id": "infokiosk",
+					"cell": [3, 5],
+					"params": "-90",
+					"category": "reference",
+					"why": "Information kiosk — educational reference point"
+				},
+				{
+					"id": "homagetothesquare",
+					"cell": [4, 5],
+					"params": "0:1:0.2",
+					"category": "showcase",
+					"why": "Albers' Homage to the Square — color theory made physical. You learned color, now art appears."
+				},
+				{
+					"id": "nail_color_controller",
+					"cell": [9, 3],
+					"params": "0:1.0",
+					"category": "instrument",
+					"why": "Color controller for nails — interactive color tool in new south wing"
+				},
+				{
+					"id": "hand_model",
+					"cell": [9, 1],
+					"params": "0:-1",
+					"category": "instrument",
+					"why": "Hand model display — VR hand in the south wing"
+				},
+				{
+					"id": "hand_color_controller",
+					"cell": [10, 1],
+					"params": "90",
+					"category": "instrument",
+					"why": "Hand color controller — another color interaction tool"
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "t:array_tutorial",
+					"cell": [8, 1],
+					"category": "navigation",
+					"why": "Teleporter to array tutorial — learning to structure data"
+				},
+				{
+					"type": "t:wavefunctions",
+					"cell": [10, 1],
+					"category": "navigation",
+					"why": "Teleporter to wavefunctions — oscillation awaits"
+				},
+				{
+					"type": "t:forces",
+					"cell": [7, 1],
+					"category": "navigation",
+					"why": "Forces teleporter moved to south entrance"
+				}
+			],
+			"structure_changes": [
+				{
+					"cell": [6, 3],
+					"from": "6",
+					"to": "1",
+					"why": "Wall opens — passage south"
+				},
+				{
+					"cell": [6, 4],
+					"from": "6",
+					"to": "1",
+					"why": "Wall opens — passage south"
+				},
+				{
+					"cell": [6, 5],
+					"from": "6",
+					"to": "1",
+					"why": "Wall opens — passage south"
+				}
+			],
+			"structure_additions": {
+				"rows_added": [7, 8, 9, 10, 11, 12, 13],
+				"note": "Entire south wing (7 rows) appears — the Lab grows"
+			},
+			"nature": [],
+			"capability": {
+				"perception": "chromatic_sense",
+				"description": "See color relationships — complementary, analogous, triadic",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After color: the south wall opens. A whole new wing appears with color tools, art artifacts, and portals to arrays and wavefunctions. The Lab literally grows."
+		},
+		{
+			"stage": "post_array_tutorial",
+			"trigger": "array_tutorial_completed",
+			"map_file": "Lab/map_data_post_array_tutorial",
+			"dimensions": "13x14",
+			"phase": "F_order",
+			"spine_order": 5,
+			"teleporters": [],
+			"teleporters_note": "Neutral map — no new teleporters. Same as post_color layout.",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "index_sight",
+				"description": "See structure in repetition — arrays as grids, patterns as indices",
+				"status": "stub"
+			},
+			"note": "Neutral stage — same layout as post_color. Arrays taught structure but the Lab already has structure. The learning is internal."
+		},
+		{
+			"stage": "post_forces",
+			"trigger": "forces_completed",
+			"map_file": "Lab/map_data_post_forces",
+			"dimensions": "13x14",
+			"phase": "oscillation",
+			"spine_order": 4,
+			"teleporters": ["randomness", "noise"],
+			"teleporters_note": "GATE MAP — randomness [7,8] and noise [7,11] portals appear in east corridor",
+			"artifacts": [
+				{
+					"id": "force_field_demo",
+					"cell": [7, 10],
+					"params": "0:0:0.5",
+					"category": "showcase",
+					"why": "Force field demo — Newton's laws made visible. You learned forces, now one lives here."
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "t:randomness",
+					"cell": [7, 8],
+					"category": "navigation",
+					"why": "Teleporter to randomness — entropy branch opens"
+				},
+				{
+					"type": "t:noise",
+					"cell": [7, 11],
+					"category": "navigation",
+					"why": "Teleporter to noise — structured randomness"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "force_sense",
+				"description": "See vectors as forces — gravity, attraction, repulsion made visible",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After forces: east corridor opens to entropy. Randomness and noise teleporters appear. A force field demo showcases what you learned. Physics becomes the Lab."
+		},
+		{
+			"stage": "post_wavefunctions",
+			"trigger": "wavefunctions_completed",
+			"map_file": "Lab/map_data_post_wavefunctions",
+			"dimensions": "13x14",
+			"phase": "oscillation",
+			"spine_order": 6,
+			"teleporters": ["cellularautomata", "lsystems", "fractals"],
+			"teleporters_note": "GATE MAP — pattern branch opens with three new portals in south extension",
+			"artifacts": [
+				{
+					"id": "spectral_sine_wave",
+					"cell": [9, 4],
+					"params": "0:0:0.4",
+					"category": "showcase",
+					"why": "Spectral sine wave — wavefunctions visualized. The oscillation you learned now lives in the Lab."
+				},
+				{
+					"id": "RackMoogBass",
+					"cell": [9, 5],
+					"params": "180",
+					"category": "instrument",
+					"why": "Moog synthesizer rack — waves become sound. Audio as wavefunction."
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "t:cellularautomata",
+					"cell": [14, 8],
+					"category": "navigation",
+					"why": "Portal to cellular automata — simple rules, complex behavior"
+				},
+				{
+					"type": "t:lsystems",
+					"cell": [16, 7],
+					"category": "navigation",
+					"why": "Portal to L-systems — generative grammars"
+				},
+				{
+					"type": "t:fractals",
+					"cell": [18, 11],
+					"category": "navigation",
+					"why": "Portal to fractals — infinite self-similarity"
+				},
+				{
+					"type": "wp:-90",
+					"cell": [15, 9],
+					"category": "navigation",
+					"why": "Ramp down to pattern wing"
+				}
+			],
+			"structure_changes": [],
+			"structure_additions": {
+				"rows_added": [14, 15, 16, 17, 18, 19],
+				"note": "South extension grows further — pattern wing with CA, L-systems, fractals"
+			},
+			"nature": [],
+			"capability": {
+				"perception": "wave_sense",
+				"description": "See oscillation everywhere — sine as breath, frequency as rhythm",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After wavefunctions: the pattern branch opens southward. Three new portals appear — cellular automata, L-systems, fractals. A Moog synthesizer appears. The Lab grows again, deeper."
+		},
+		{
+			"stage": "post_randomness",
+			"trigger": "randomness_completed",
+			"map_file": "Lab/map_data_post_randomness",
+			"dimensions": "13x20",
+			"phase": "E_entropy",
+			"spine_order": 7,
+			"teleporters": [],
+			"teleporters_note": "Neutral — noise teleporter already present from post_forces",
+			"artifacts": [
+				{
+					"id": "random_walk_collection",
+					"cell": [9, 9],
+					"params": "90",
+					"category": "showcase",
+					"why": "Random walk collection — disorder as art. You learned randomness is creative."
+				}
+			],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "entropy_sense",
+				"description": "See randomness as creative force — disorder reveals possibility space",
+				"status": "stub"
+			},
+			"note": "After randomness: a random walk collection appears. Neutral map — entropy is not about opening doors, it's about seeing what was always there."
+		},
+		{
+			"stage": "post_noise",
+			"trigger": "noise_completed",
+			"map_file": "Lab/map_data_post_noise",
+			"dimensions": "13x20",
+			"phase": "E_entropy",
+			"spine_order": 8,
+			"teleporters": [],
+			"teleporters_note": "Neutral — cellularautomata already present from post_wavefunctions",
+			"artifacts": [
+				{
+					"id": "noisetext",
+					"cell": [10, 9],
+					"params": "90:-0.3:0.5",
+					"category": "showcase",
+					"why": "Noise texture display — Perlin noise made visible. Structured randomness."
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "wp",
+					"cell": [13, 11],
+					"category": "navigation",
+					"why": "Platform in pattern wing — walkable surface"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "noise_sense",
+				"description": "See structure in randomness — Perlin gradients, flow fields, coherence",
+				"status": "stub"
+			},
+			"note": "After noise: a noise texture appears near the random walk. Structured randomness lives beside raw randomness."
+		},
+		{
+			"stage": "post_cellularautomata",
+			"trigger": "cellularautomata_completed",
+			"map_file": "Lab/map_data_post_cellularautomata",
+			"dimensions": "13x20",
+			"phase": "E_entropy",
+			"spine_order": 9,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_noise layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "rule_sight",
+				"description": "See simple rules generating complex behavior — emergence from local interaction",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Note: this file currently contains Lab_Post_Fractals data (anomaly). Cellular automata's gift is seeing emergence, which the capability layer will make visible."
+		},
+		{
+			"stage": "post_fractals",
+			"trigger": "fractals_completed",
+			"map_file": "Lab/map_data_post_fractals",
+			"dimensions": "13x20",
+			"phase": "lambda_edge",
+			"spine_order": 10,
+			"teleporters": ["proceduralgeneration", "softbodies"],
+			"teleporters_note": "GATE MAP — generation branch opens with proceduralgeneration and softbodies portals",
+			"artifacts": [],
+			"utilities_added": [
+				{
+					"type": "t:proceduralgeneration",
+					"cell": [13, 6],
+					"category": "navigation",
+					"why": "Portal to procedural generation — WFC, Markov, emergence"
+				},
+				{
+					"type": "t:softbodies",
+					"cell": [14, 1],
+					"category": "navigation",
+					"why": "Portal to soft bodies — deformable matter"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "fractal_sight",
+				"description": "See self-similarity at every scale — the edge of chaos as infinite recursion",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After fractals: procedural generation and soft bodies portals appear. Self-similarity opens the door to generation and matter."
+		},
+		{
+			"stage": "post_lsystems",
+			"trigger": "lsystems_completed",
+			"map_file": "Lab/map_data_post_lsystems",
+			"dimensions": "13x20",
+			"phase": "lambda_edge",
+			"spine_order": 11,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_fractals layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "grammar_sight",
+				"description": "See growth rules — branches as rewriting, nature as grammar",
+				"status": "stub"
+			},
+			"note": "Neutral stage. L-systems teach growth grammars. The nature layer (Phase 2) should make this the first stage where organic vines appear — grammar becoming botany."
+		},
+		{
+			"stage": "post_proceduralgeneration",
+			"trigger": "proceduralgeneration_completed",
+			"map_file": "Lab/map_data_post_proceduralgeneration",
+			"dimensions": "13x20",
+			"phase": "lambda_edge",
+			"spine_order": 12,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_fractals layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "generation_sight",
+				"description": "See constraint satisfaction — WFC as possibility collapse, Markov as memory",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Procedural generation teaches making worlds from rules."
+		},
+		{
+			"stage": "post_softbodies",
+			"trigger": "softbodies_completed",
+			"map_file": "Lab/map_data_post_softbodies",
+			"dimensions": "16x27",
+			"phase": "integration",
+			"spine_order": 13,
+			"teleporters": ["swarmintelligence", "morphogenesis"],
+			"teleporters_note": "GATE MAP — emergence branch opens. Lab grows to 16x27 with new south rooms.",
+			"artifacts": [],
+			"utilities_added": [
+				{
+					"type": "t:swarmintelligence",
+					"cell": [20, 1],
+					"category": "navigation",
+					"why": "Portal to swarm intelligence — collective behavior"
+				},
+				{
+					"type": "t:morphogenesis",
+					"cell": [25, 1],
+					"category": "navigation",
+					"why": "Portal to morphogenesis (absorbed into softbodies) — Turing patterns"
+				},
+				{
+					"type": "wp:90",
+					"cell": [20, 10],
+					"category": "navigation",
+					"why": "Ramp to east section"
+				},
+				{
+					"type": "tc:1:y",
+					"cell": [22, 3],
+					"category": "navigation",
+					"why": "Second transport cube — deformable matter teaches you new ways to move"
+				}
+			],
+			"structure_changes": [],
+			"structure_additions": {
+				"rows_added": [20, 21, 22, 23, 24, 25, 26],
+				"note": "Lab grows southward again — emergence wing with swarm and morphogenesis rooms"
+			},
+			"nature": [],
+			"capability": {
+				"perception": "matter_sense",
+				"description": "See deformation — cloth, fluid, pressure as continuous fields",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After soft bodies: a massive expansion. New south wing opens with swarm intelligence and morphogenesis portals. Second transport cube added. The Lab's biggest growth — matter teaches space."
+		},
+		{
+			"stage": "post_morphogenesis",
+			"trigger": "morphogenesis_completed",
+			"map_file": "Lab/map_data_post_morphogenesis",
+			"dimensions": "16x27",
+			"phase": "integration",
+			"spine_order": null,
+			"teleporters": ["machinelearning"],
+			"teleporters_note": "Machine learning portal appears at [22,8]",
+			"artifacts": [],
+			"utilities_added": [
+				{
+					"type": "t:machinelearning",
+					"cell": [22, 8],
+					"category": "navigation",
+					"why": "Portal to machine learning — from pattern formation to learning systems"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "morphogenesis_sense",
+				"description": "See reaction-diffusion — Turing patterns as living mathematics",
+				"status": "stub"
+			},
+			"note": "After morphogenesis: machine learning portal appears. Turing's reaction-diffusion leads to Turing's learning machines."
+		},
+		{
+			"stage": "post_swarmintelligence",
+			"trigger": "swarmintelligence_completed",
+			"map_file": "Lab/map_data_post_swarmintelligence",
+			"dimensions": "16x27",
+			"phase": "integration",
+			"spine_order": 14,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_morphogenesis layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "swarm_sense",
+				"description": "See collective behavior — stigmergy, flocking, distributed intelligence",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Swarm intelligence teaches that intelligence can be distributed. No individual controls the flock."
+		},
+		{
+			"stage": "post_machinelearning",
+			"trigger": "machinelearning_completed",
+			"map_file": "Lab/map_data_post_machinelearning",
+			"dimensions": "16x30",
+			"phase": "integration",
+			"spine_order": 15,
+			"teleporters": ["foundationscrisis", "graphtheory"],
+			"teleporters_note": "GATE MAP — east corridor extends. foundationscrisis and graphtheory portals appear.",
+			"artifacts": [],
+			"utilities_added": [
+				{
+					"type": "t:graphtheory",
+					"cell": [19, 5],
+					"category": "navigation",
+					"why": "Portal to graph theory — relational structures"
+				},
+				{
+					"type": "t:foundationscrisis",
+					"cell": [20, 8],
+					"category": "navigation",
+					"why": "Portal to foundations crisis — limits of formal systems"
+				}
+			],
+			"structure_changes": [],
+			"structure_additions": {
+				"rows_added": [27, 28, 29],
+				"note": "Lab grows to 16x30 — final expansion southward for foundations crisis wing"
+			},
+			"nature": [],
+			"capability": {
+				"perception": "learning_sense",
+				"description": "See gradient descent — error surfaces, weight spaces, convergence",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After machine learning: the Lab reaches its maximum extent. Foundations crisis and graph theory portals open. The journey toward synthesis begins."
+		},
+		{
+			"stage": "post_graphtheory",
+			"trigger": "graphtheory_completed",
+			"map_file": "Lab/map_data_post_graphtheory",
+			"dimensions": "16x30",
+			"phase": "integration",
+			"spine_order": 19,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_machinelearning layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "graph_sense",
+				"description": "See connections — nodes and edges, paths and cycles, the topology of relation",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Graph theory teaches you to see relationships — everything is connected."
+		},
+		{
+			"stage": "post_foundationscrisis",
+			"trigger": "foundationscrisis_completed",
+			"map_file": "Lab/map_data_post_foundationscrisis",
+			"dimensions": "16x30",
+			"phase": "synthesis",
+			"spine_order": 16,
+			"teleporters": ["qfeplaboratory", "criticalalgorithms", "speculativecomputation"],
+			"teleporters_note": "GATE MAP — northeast room opens. QFEP Laboratory, Critical Algorithms, Speculative Computation portals appear.",
+			"artifacts": [
+				{
+					"id": "escher_staircase_mini",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "Impossible staircase — formal systems that loop back on themselves"
+				},
+				{
+					"id": "penrose_triangle",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "Penrose triangle — impossible geometry, limits of representation"
+				},
+				{
+					"id": "godel_statement_plaque",
+					"cell": null,
+					"params": null,
+					"category": "reference",
+					"why": "Gödel's statement — 'This statement is unprovable'"
+				},
+				{
+					"id": "russell_set_display",
+					"cell": null,
+					"params": null,
+					"category": "reference",
+					"why": "Russell's paradox display — the set of all sets that don't contain themselves"
+				},
+				{
+					"id": "self_referential_sign",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "Self-referential sign — a sign pointing to itself"
+				},
+				{
+					"id": "incompleteness_badge",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "Incompleteness badge — you've touched the limits"
+				}
+			],
+			"utilities_added": [
+				{
+					"type": "t:criticalalgorithms",
+					"cell": [1, 10],
+					"category": "navigation",
+					"why": "Portal to critical algorithms — bias, ethics, power in computation"
+				},
+				{
+					"type": "t:qfeplaboratory",
+					"cell": [1, 14],
+					"category": "navigation",
+					"why": "Portal to QFEP Laboratory — the complete formula embodied"
+				},
+				{
+					"type": "t:speculativecomputation",
+					"cell": [5, 10],
+					"category": "navigation",
+					"why": "Portal to speculative computation — queer futures"
+				}
+			],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "paradox_sight",
+				"description": "See incompleteness — every system has truths it cannot prove",
+				"status": "stub"
+			},
+			"note": "GATE MAP. After foundations crisis: impossible objects appear. Escher staircases, Penrose triangles, Gödel's statement. The Lab shows you that formal systems have limits. QFEP Laboratory portal glows — you're ready for the formula. Narrative: 'You've walked the edge where formal systems fail.'"
+		},
+		{
+			"stage": "post_qfeplaboratory",
+			"trigger": "qfeplaboratory_completed",
+			"map_file": "Lab/map_data_post_qfeplaboratory",
+			"dimensions": "16x30",
+			"phase": "synthesis",
+			"spine_order": 17,
+			"teleporters": [],
+			"teleporters_note": "Neutral — QFEP is internalized, no new doors needed",
+			"artifacts": [
+				{
+					"id": "lambda_wall_slider",
+					"cell": null,
+					"params": null,
+					"category": "instrument",
+					"why": "λ slider on the wall — tune the edge of chaos parameter"
+				},
+				{
+					"id": "phi_wall_slider",
+					"cell": null,
+					"params": null,
+					"category": "instrument",
+					"why": "φ slider on the wall — tune the rate of entropy change"
+				},
+				{
+					"id": "qfep_formula_display",
+					"cell": null,
+					"params": null,
+					"category": "reference",
+					"why": "The complete QFEP formula: QFE = F − λE(S) + φΔE(S,t)"
+				},
+				{
+					"id": "edge_of_chaos_orb",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "Edge of chaos orb — the λ parameter visualized as a living sphere"
+				},
+				{
+					"id": "bifurcation_diagram_3d",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "3D bifurcation diagram — chaos theory made spatial"
+				},
+				{
+					"id": "entropy_meter",
+					"cell": null,
+					"params": null,
+					"category": "instrument",
+					"why": "Entropy meter — measures the Lab's current E(S) value"
+				},
+				{
+					"id": "qfep_master_badge",
+					"cell": null,
+					"params": null,
+					"category": "showcase",
+					"why": "QFEP Master badge — you understand the formula"
+				}
+			],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "qfep_sense",
+				"description": "See the formula everywhere — F, E(S), λ, φΔE as the fabric of the Lab itself",
+				"status": "stub"
+			},
+			"note": "After QFEP Laboratory: the formula lives in the Lab. Wall sliders let you tune λ and φ. An entropy meter measures E(S). The Lab breathes between order and chaos. Narrative: 'You've internalized the formula. The space itself oscillates.'"
+		},
+		{
+			"stage": "post_speculativecomputation",
+			"trigger": "speculativecomputation_completed",
+			"map_file": "Lab/map_data_post_speculativecomputation",
+			"dimensions": "16x30",
+			"phase": "synthesis",
+			"spine_order": null,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same as post_qfeplaboratory",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "speculative_sight",
+				"description": "See queer futures — computation as possibility space, not determinism",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Speculative computation teaches that the future is not determined — it is generated."
+		},
+		{
+			"stage": "post_criticalalgorithms",
+			"trigger": "criticalalgorithms_completed",
+			"map_file": "Lab/map_data_post_criticalalgorithms",
+			"dimensions": "16x30",
+			"phase": "synthesis",
+			"spine_order": null,
+			"teleporters": [],
+			"teleporters_note": "Neutral — same layout",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "critical_sight",
+				"description": "See power in algorithms — bias, fairness, who benefits and who is harmed",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Critical algorithms teaches you to see the politics in computation."
+		},
+		{
+			"stage": "post_postfoundationscrisis",
+			"trigger": "postfoundationscrisis_completed",
+			"map_file": "Lab/map_data_post_foundationscrisis",
+			"dimensions": "16x30",
+			"phase": "synthesis",
+			"spine_order": 18,
+			"teleporters": [],
+			"teleporters_note": "Neutral — reuses foundationscrisis map. Collects bias visualization, rhizome network, molecular design.",
+			"artifacts": [],
+			"utilities_added": [],
+			"structure_changes": [],
+			"nature": [],
+			"capability": {
+				"perception": "rhizomatic_sight",
+				"description": "See non-hierarchical connection — rhizomes, molecular design, post-crisis practice",
+				"status": "stub"
+			},
+			"note": "Neutral stage. Post-foundations crisis collects maps from deferred sequences (critical algorithms, speculative computation, advanced laboratory). Reuses foundationscrisis map file."
+		}
+	],
+	"branch_stages": [
+		{
+			"stage": "post_meshes",
+			"trigger": "meshes_completed",
+			"branches_from": "primitives",
+			"map_file": "Lab/map_data_post_meshes",
+			"dimensions": "8x10",
+			"note": "Branch map. Currently contains Lab_Post_Array data (anomaly). Mesh completion should display mesh artifacts."
+		},
+		{
+			"stage": "post_datastructures",
+			"trigger": "datastructures_completed",
+			"branches_from": "primitives",
+			"map_file": "Lab/map_data_post_datastructures",
+			"dimensions": "10x10",
+			"note": "Branch map. Uses diagonal spiral layout (new-style)."
+		},
+		{
+			"stage": "post_computationalgeometry",
+			"trigger": "computationalgeometry_completed",
+			"branches_from": "transformation",
+			"map_file": "Lab/map_data_post_computationalgeometry",
+			"dimensions": "21x22",
+			"note": "Branch map. Uses diagonal spiral layout (new-style)."
+		},
+		{
+			"stage": "post_physicssimulation",
+			"trigger": "physicssimulation_completed",
+			"branches_from": "forces",
+			"map_file": "Lab/map_data_post_physicssimulation",
+			"dimensions": "8x17",
+			"note": "Branch map. Linear layout with teleporters along corridor."
+		},
+		{
+			"stage": "post_proceduralaudio",
+			"trigger": "proceduralaudio_completed",
+			"branches_from": "wavefunctions",
+			"map_file": "Lab/map_data_post_proceduralaudio",
+			"dimensions": "11x11",
+			"note": "Branch map. Uses diagonal spiral layout (new-style)."
+		},
+		{
+			"stage": "post_patterngeneration",
+			"trigger": "patterngeneration_completed",
+			"branches_from": "noise",
+			"map_file": "Lab/map_data_post_patterngeneration",
+			"dimensions": "11x17",
+			"note": "Branch map. Linear layout."
+		},
+		{
+			"stage": "post_recursiveemergence",
+			"trigger": "recursiveemergence_completed",
+			"branches_from": "machinelearning",
+			"map_file": "Lab/map_data_post_recursiveemergence",
+			"dimensions": "12x20",
+			"note": "Branch map. Mixed layout."
+		},
+		{
+			"stage": "post_artmathematics",
+			"trigger": "artmathematics_completed",
+			"branches_from": "machinelearning",
+			"map_file": "Lab/map_data_post_artmathematics",
+			"dimensions": "10x7",
+			"artifacts": [
+				{
+					"id": "magritte_pipe_frame",
+					"category": "showcase",
+					"why": "Magritte's pipe — 'This is not a pipe' — representation vs reality"
+				},
+				{
+					"id": "escher_tessellation_tile",
+					"category": "showcase",
+					"why": "Escher tessellation — mathematics as art"
+				},
+				{
+					"id": "mondrian_composition",
+					"category": "showcase",
+					"why": "Mondrian — grid as artistic expression"
+				},
+				{
+					"id": "judd_minimalist_box",
+					"category": "showcase",
+					"why": "Donald Judd — minimalism, the cube as art"
+				},
+				{
+					"id": "droste_effect_frame",
+					"category": "showcase",
+					"why": "Droste effect — recursion as visual pattern"
+				},
+				{
+					"id": "visual_philosopher_badge",
+					"category": "showcase",
+					"why": "Visual philosopher badge — art and mathematics united"
+				}
+			],
+			"note": "Branch map. Rich with art-mathematics artifacts. Small layout focused on gallery experience."
+		},
+		{
+			"stage": "post_searchpathfinding",
+			"trigger": "searchpathfinding_completed",
+			"branches_from": "datastructures",
+			"map_file": "Lab/map_data_post_searchpathfinding",
+			"dimensions": "19x19",
+			"note": "Branch map. Uses diagonal spiral layout (new-style)."
+		},
+		{
+			"stage": "post_resourcemanagement",
+			"trigger": "resourcemanagement_completed",
+			"branches_from": null,
+			"map_file": "Lab/map_data_post_resourcemanagement",
+			"dimensions": "25x25",
+			"note": "Branch map. Large diagonal spiral layout. Currently unassigned in branch graph."
+		},
+		{
+			"stage": "post_vectors",
+			"trigger": "vectors_completed",
+			"branches_from": null,
+			"map_file": "Lab/map_data_post_vectors",
+			"dimensions": "7x9",
+			"note": "Branch map. Currently contains Lab - Post Primitives data (anomaly). Unassigned in branch graph."
+		},
+		{
+			"stage": "post_advancedlaboratory",
+			"trigger": "advancedlaboratory_completed",
+			"branches_from": "postfoundationscrisis",
+			"map_file": "Lab/map_data_post_advancedlaboratory",
+			"dimensions": "26x27",
+			"note": "Branch map. Full 20-sequence diagonal spiral layout — the 'master lab' with all sequences accessible. Uses level_entrance interactables."
+		}
+	],
+	"progression_summary": {
+		"total_spine_stages": 22,
+		"total_branch_stages": 12,
+		"gate_maps": [
+			"post_color (opens south wing: array_tutorial, wavefunctions)",
+			"post_forces (opens entropy: randomness, noise)",
+			"post_wavefunctions (opens pattern: cellularautomata, lsystems, fractals)",
+			"post_fractals (opens generation: proceduralgeneration, softbodies)",
+			"post_softbodies (opens emergence: swarmintelligence, morphogenesis)",
+			"post_machinelearning (opens synthesis: foundationscrisis, graphtheory)",
+			"post_foundationscrisis (opens QFEP: qfeplaboratory, criticalalgorithms, speculativecomputation)"
+		],
+		"lab_growth_arc": [
+			{"stage": "initial", "size": "10x8", "note": "Small starting room"},
+			{"stage": "post_color", "size": "10x14", "note": "South wing opens"},
+			{"stage": "post_wavefunctions", "size": "13x20", "note": "Pattern wing extends south"},
+			{"stage": "post_softbodies", "size": "16x27", "note": "Emergence wing — biggest growth"},
+			{"stage": "post_machinelearning", "size": "16x30", "note": "Final extent — foundations wing"}
+		],
+		"navigation_elements_total": {
+			"walkable_platforms": 4,
+			"transport_cubes": 2,
+			"teleporters_at_max": "~25 sequence portals"
+		},
+		"artifacts_with_progression_delta": [
+			"post_primitives: grid_lines, pyramid_edit, lshape, smallcontainment",
+			"post_color: infokiosk, homagetothesquare, nail_color_controller, hand_model, hand_color_controller",
+			"post_wavefunctions: spectral_sine_wave, RackMoogBass",
+			"post_forces: force_field_demo",
+			"post_randomness: random_walk_collection",
+			"post_noise: noisetext",
+			"post_foundationscrisis: escher_staircase_mini, penrose_triangle, godel_statement_plaque, russell_set_display, self_referential_sign, incompleteness_badge",
+			"post_qfeplaboratory: lambda_wall_slider, phi_wall_slider, qfep_formula_display, edge_of_chaos_orb, bifurcation_diagram_3d, entropy_meter, qfep_master_badge",
+			"post_artmathematics: magritte_pipe_frame, escher_tessellation_tile, mondrian_composition, judd_minimalist_box, droste_effect_frame, visual_philosopher_badge"
+		]
+	},
+	"nature_roadmap": {
+		"_status": "Phase 2 stub — to be populated",
+		"principle": "Each QFEP phase brings a category of organic life. The Lab transforms from sterile to alive.",
+		"phase_mapping": {
+			"F_order": {
+				"nature_type": "mineral/crystalline",
+				"examples": ["crystal_cluster", "geode", "mineral_vein"],
+				"why": "Geometry = crystalline structure. Order creates minerals."
+			},
+			"oscillation": {
+				"nature_type": "water/wave",
+				"examples": ["puddle", "dripping_stalactite", "wave_pool"],
+				"why": "Oscillation = water. Waves create fluid."
+			},
+			"E_entropy": {
+				"nature_type": "moss/lichen/fungal",
+				"examples": ["moss_patch", "lichen_wall", "mycelium_network"],
+				"why": "Entropy = decomposition. Randomness feeds fungal life."
+			},
+			"lambda_edge": {
+				"nature_type": "plant/vine/fern",
+				"examples": ["vine", "fern", "spiral_plant", "tree_sapling"],
+				"why": "Edge of chaos = growth. L-systems and fractals become botany."
+			},
+			"integration": {
+				"nature_type": "animal/swarm/movement",
+				"examples": ["butterfly_colony", "fish_school", "ant_trail"],
+				"why": "Integration = collective life. Swarms become fauna."
+			},
+			"synthesis": {
+				"nature_type": "ecosystem/forest",
+				"examples": ["full_canopy", "forest_floor", "bird_nest", "stream"],
+				"why": "Synthesis = ecosystem. All prior life integrates. The Lab is a forest."
+			}
+		}
+	},
+	"capability_roadmap": {
+		"_status": "Phase 4 stub — to be populated",
+		"principle": "Each sequence grants a perception + capability + relation. The player accumulates ways of seeing.",
+		"layering": {
+			"perception": "How you see differently after this sequence",
+			"capability": "What you can now do in the Lab",
+			"relation": "How this connects you to something beyond yourself"
+		}
+	}
+}

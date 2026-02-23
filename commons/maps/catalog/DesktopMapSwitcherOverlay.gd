@@ -405,7 +405,7 @@ func _build_left_panel() -> void:
 
 	# ---- Hint label (compact) ----
 	_hint_label = Label.new()
-	_hint_label.text = "M toggle | N next | 1-4 camera"
+	_hint_label.text = "M toggle | N next | L layers | 1-4 cam"
 	_hint_label.add_theme_font_size_override("font_size", 10)
 	_hint_label.modulate = Color(0.50, 0.58, 0.70, 1.0)
 	outer_vb.add_child(_hint_label)

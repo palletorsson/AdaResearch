@@ -1,0 +1,1331 @@
+{
+	"_meta": {
+		"description": "Per-sequence requirements and completeness tracking",
+		"version": "2.0",
+		"last_updated": "2026-02-22",
+		"purpose": "See what's missing. Build what's needed. Make it mechanical.",
+		"application_reference": "doc/VR_VR_PT_2023.md",
+		"central_question": "Can we put Paul Klee's Pedagogical Sketchbook (1953) in Virtual Drag?",
+		"deliverables": {
+			"vr_world": "Immersive landscape of algorithms from basic to AI",
+			"book": "Documentation of all environments, props, deep explanations, critical reflections",
+			"wiki": "Fandom-like documentation of props, algorithms, and labs",
+			"installations": "Exhibited in galleries nationally and internationally"
+		},
+		"work_packages": {
+			"WP1": "Basic Elements — F_order (randomness, Fibonacci, Perlin, Voronoi, sine, particles)",
+			"WP2": "Advanced Elements — oscillation + E_entropy (fractals, flow fields, Fourier, L-systems, CA, soft bodies)",
+			"WP3": "Pattern & World Building — lambda_edge + integration (reaction-diffusion, graph theory, procgen, neural nets, shaders)",
+			"WP4": "Advanced Techniques — synthesis (swarm intelligence, chaos theory, AI, non-euclidean spaces)"
+		},
+		"status_values": ["complete", "partial", "stub", "missing", "deferred"],
+		"layers": ["maps", "algorithms", "text", "artifacts", "lab_evolution", "qfep", "nature", "capability", "application"],
+		"nature_phase_mapping": {
+			"F_order": {"category": "mineral", "examples": ["crystal_cluster", "geode", "mineral_vein", "quartz_formation"]},
+			"oscillation": {"category": "water", "examples": ["puddle", "dripping_stalactite", "wave_pool", "stream"]},
+			"E_entropy": {"category": "fungal", "examples": ["moss_patch", "lichen_wall", "mycelium_network", "mushroom_cluster"]},
+			"lambda_edge": {"category": "plant", "examples": ["vine", "fern", "spiral_plant", "tree_sapling", "flower"]},
+			"integration": {"category": "animal", "examples": ["butterfly_colony", "fish_school", "ant_trail", "bird_nest"]},
+			"synthesis": {"category": "ecosystem", "examples": ["full_canopy", "forest_floor", "meadow", "pond_ecosystem"]}
+		},
+		"global_md_totals": {
+			"blurb_md": 223,
+			"summary_md": 120,
+			"technical_md": 118,
+			"critical_md": 121,
+			"audit_date": "2026-02-22"
+		}
+	},
+	"requirements_template": {
+		"_note": "Every sequence MUST have all of these. Missing = gap to fill.",
+		"maps": {
+			"sequence_file": "required",
+			"map_count_minimum": 3,
+			"all_maps_have_data": "required",
+			"first_map_has_intro_text": "required",
+			"last_map_returns_to_lab": "required"
+		},
+		"algorithms": {
+			"directory_exists": "required",
+			"core_scripts_functional": "required",
+			"no_placeholder_scenes": "required"
+		},
+		"text": {
+			"all_maps_have_blurb": "required — blurb.md feeds wiki + installations",
+			"all_maps_have_summary": "required — summary.md feeds wiki + book",
+			"all_maps_have_technical": "required — technical.md feeds book (deep explanations)",
+			"all_maps_have_critical": "required — critical.md feeds book (critical reflections)",
+			"legacy_axiom_gd_converted": "cleanup — merge unique .gd content into .md"
+		},
+		"artifacts": {
+			"registry_file": "desired",
+			"lab_showcase_artifact": "required — at least 1 artifact appears in Lab after completion"
+		},
+		"lab_evolution": {
+			"post_lab_map": "required",
+			"progression_manifest_entry": "required",
+			"lab_showcase_artifact_placed": "required"
+		},
+		"qfep": {
+			"phase_assignment": "required",
+			"contribution": "required — which QFEP terms this builds",
+			"builds_on": "required",
+			"leads_to": "required"
+		},
+		"nature": {
+			"element": "required — organic element added to Lab",
+			"category": "required — mineral/water/fungal/plant/animal/ecosystem",
+			"forest_note": "required — how this moves Lab toward forest"
+		},
+		"capability": {
+			"perception": "required — what you SEE differently",
+			"capability_grant": "required — what you CAN DO differently",
+			"relation": "required — how this CONNECTS you"
+		},
+		"application": {
+			"work_package": "required — WP1/WP2/WP3/WP4",
+			"queer_dimension": "required — what queer potential this algorithm reveals",
+			"book_ready": "required — all maps have technical.md + critical.md",
+			"wiki_ready": "required — all maps have blurb.md + summary.md"
+		}
+	},
+	"spine_sequences": {
+		"primitives": {
+			"spine_order": 1,
+			"phase": "F_order",
+			"maps": {"count": 11, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/primitives/", "gd_count": 17, "tscn_count": 29, "status": "complete"},
+			"text": {
+				"blurb": {"have": 11, "of": 11, "missing": []},
+				"summary": {"have": 11, "of": 11, "missing": []},
+				"technical": {"have": 11, "of": 11, "missing": []},
+				"critical": {"have": 11, "of": 11, "missing": []},
+				"legacy_gd": ["point_axioms.gd", "line_axioms.gd", "triangle_axioms.gd", "primitives_axioms.gd"],
+				"legacy_gd_status": "covered — all content exists in per-map .md files",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": null, "lab_showcase": ["grid_lines", "pyramid_edit", "smallcontainment", "lshape"], "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "F_order",
+				"contribution": "F — free energy minimization. Points, lines, planes establish geometric order. The most basic prediction: space has structure.",
+				"builds_on": null,
+				"leads_to": ["transformation", "meshes", "datastructures", "color"]
+			},
+			"nature": {
+				"element": "crystal_cluster",
+				"category": "mineral",
+				"forest_note": "Geometry = crystalline structure. Points and lines are the crystal lattice of space. Minerals recognize the student."
+			},
+			"capability": {
+				"perception": "geometry_sight — see wireframes, vertex positions, the skeleton of space",
+				"capability_grant": "construct — place and connect geometric primitives in the world",
+				"relation": "recognition — the shapes you made recognize you. Your first creation lives."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "The point as irreducible identity — positioned, existing before categorization. Euclid's elements queered: the atom of space has no gender, no norm, only position.",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — Point_One as standalone VR piece"
+			}
+		},
+		"transformation": {
+			"spine_order": 2,
+			"phase": "F_order",
+			"maps": {"count": 6, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/transformation/", "gd_count": 11, "tscn_count": 11, "status": "complete"},
+			"text": {
+				"blurb": {"have": 6, "of": 6, "missing": []},
+				"summary": {"have": 6, "of": 6, "missing": []},
+				"technical": {"have": 6, "of": 6, "missing": []},
+				"critical": {"have": 6, "of": 6, "missing": []},
+				"legacy_gd": ["rotation_axioms.gd", "scale_axioms.gd", "transformation_axioms.gd", "translation_axioms.gd"],
+				"legacy_gd_status": "covered — all content exists in per-map .md files",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": "transforms.json", "lab_showcase": [], "lab_showcase_note": "Transport cube is the showcase — movement itself", "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "F_order",
+				"contribution": "F — invariants under transformation. Dot/cross products enable rotation. Structure persists through change.",
+				"builds_on": ["primitives"],
+				"leads_to": ["color", "forces", "computationalgeometry", "graphtheory"]
+			},
+			"nature": {
+				"element": "spiral_shells",
+				"category": "mineral",
+				"forest_note": "Rotation + scaling = spiral growth. Nautilus shells appear on the Lab floor. Geometry begins to curve."
+			},
+			"capability": {
+				"perception": "transform_sense — see rotation, scale, translation as continuous flows",
+				"capability_grant": "move — the Lab gives you a transport cube. You learned to translate, now the Lab moves you.",
+				"relation": "continuity — nothing is fixed. Everything can be transformed. Identity is a process."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "Transformation as identity fluidity. Rotation, scale, translation — the body is never fixed. Matrix multiplication as gender performance.",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — carousel/rotation pieces"
+			}
+		},
+		"color": {
+			"spine_order": 3,
+			"phase": "F_order",
+			"maps": {"count": 7, "deferred": 5, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/color/", "gd_count": 36, "tscn_count": 43, "status": "complete"},
+			"text": {
+				"blurb": {"have": 7, "of": 7, "missing": []},
+				"summary": {"have": 6, "of": 7, "missing": ["Color_Flashlight"]},
+				"technical": {"have": 6, "of": 7, "missing": ["Color_Flashlight"]},
+				"critical": {"have": 6, "of": 7, "missing": ["Color_Flashlight"]},
+				"legacy_gd": ["color_axioms.gd", "rgb_axioms.gd", "perception_axioms.gd", "magenta_axioms.gd", "wavelength_axioms.gd"],
+				"legacy_gd_status": "partial — perception_axioms.gd and magenta_axioms.gd have UNIQUE content (queer ontology of vision, impossible color) not in any .md",
+				"unique_gd_content": ["perception_axioms.gd — plural vision biology, queer ontology of perception", "magenta_axioms.gd — non-spectral hue, perception constructs reality"],
+				"status": "partial — Color_Flashlight missing 3 .md files + 2 unique legacy .gd"
+			},
+			"artifacts": {"registry_file": "color.json", "lab_showcase": ["homagetothesquare", "nail_color_controller", "infokiosk"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["array_tutorial", "wavefunctions"], "status": "complete"},
+			"qfep": {
+				"phase": "F_order",
+				"contribution": "F — color as organized perception. RGB as coordinate system. Color spaces as structured mappings.",
+				"builds_on": ["primitives", "transformation"],
+				"leads_to": ["array_tutorial", "forces", "wavefunctions"]
+			},
+			"nature": {
+				"element": "geode",
+				"category": "mineral",
+				"forest_note": "Color enters the mineral world. Geodes crack open to reveal amethyst interiors. The Lab's crystals gain hue."
+			},
+			"capability": {
+				"perception": "chromatic_sense — see color relationships: complementary, analogous, triadic",
+				"capability_grant": "paint — apply color to objects. The Lab becomes chromatic.",
+				"relation": "empathy — color is feeling. Albers taught that color acts on us. Perception is relational."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "Color beyond the binary of black/white. Spectrums, not categories. Simultaneous contrast as social construction — the same color appears different in different contexts.",
+				"book_ready": false,
+				"book_missing": ["Color_Flashlight needs technical.md + critical.md"],
+				"wiki_ready": false,
+				"wiki_missing": ["Color_Flashlight needs summary.md"],
+				"installation_potential": "yes — Color_Flashlight, Color_Paint"
+			}
+		},
+		"forces": {
+			"spine_order": 4,
+			"phase": "oscillation",
+			"maps": {"count": 24, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/forces/ + algorithms/vectors/", "gd_count": "17+75", "status": "complete"},
+			"text": {
+				"blurb": {"have": 21, "of": 24, "missing": ["Vectors_1", "Vectors_5", "Vectors_6"]},
+				"summary": {"have": 0, "of": 24, "missing": "ALL 24 maps"},
+				"technical": {"have": 0, "of": 24, "missing": "ALL 24 maps"},
+				"critical": {"have": 0, "of": 24, "missing": "ALL 24 maps"},
+				"legacy_gd": ["forces_axioms.gd", "vectors_axioms.gd"],
+				"legacy_gd_status": "covered — content exists in per-map .md files (where blurbs exist)",
+				"status": "critical — 0/24 summary, 0/24 technical, 0/24 critical. Major book/wiki gap."
+			},
+			"artifacts": {"registry_file": "vectors.json + vectors_demos.json", "lab_showcase": ["force_field_demo"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["randomness", "noise"], "status": "complete"},
+			"qfep": {
+				"phase": "oscillation",
+				"contribution": "F ↔ E oscillation begins. Newton's laws = vectors become physics. Force is the mechanism of change between order and entropy.",
+				"builds_on": ["primitives", "transformation"],
+				"leads_to": ["randomness", "noise", "physicssimulation"]
+			},
+			"nature": {
+				"element": "dripping_stalactite",
+				"category": "water",
+				"forest_note": "Forces create flow. Water appears — dripping from stalactites. Gravity makes the mineral world weep."
+			},
+			"capability": {
+				"perception": "force_sense — see vectors as forces: gravity, attraction, repulsion",
+				"capability_grant": "push — apply forces to objects. The Lab responds to your touch.",
+				"relation": "agency — every action has an equal and opposite reaction. You affect the world and it affects you."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "Force as power dynamics. Newton's third law as reciprocity. Attraction and repulsion as the physics of desire.",
+				"book_ready": false,
+				"book_missing": "ALL 24 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 24 maps need summary.md, 3 need blurb.md",
+				"installation_potential": "yes — Forces_Drone_Game, VectorThrowing"
+			}
+		},
+		"array_tutorial": {
+			"spine_order": 5,
+			"phase": "F_order",
+			"maps": {"count": 7, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/arrays/", "gd_count": 17, "tscn_count": 15, "status": "complete"},
+			"text": {
+				"blurb": {"have": 1, "of": 7, "missing": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D_Build", "Tutorial_3D", "Tutorial_Pattern", "Tutorial_Disco"]},
+				"summary": {"have": 1, "of": 7, "missing": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D_Build", "Tutorial_3D", "Tutorial_Pattern", "Tutorial_Disco"]},
+				"technical": {"have": 0, "of": 7, "missing": ["Array_Patterns", "Tutorial_Single", "Tutorial_Row", "Tutorial_2D_Build", "Tutorial_3D", "Tutorial_Pattern", "Tutorial_Disco"]},
+				"critical": {"have": 1, "of": 7, "missing": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D_Build", "Tutorial_3D", "Tutorial_Pattern", "Tutorial_Disco"]},
+				"legacy_gd": ["arrays_axioms.gd", "nested_arrays_axioms.gd"],
+				"legacy_gd_status": "covered",
+				"status": "critical — 6/7 maps missing most .md files"
+			},
+			"artifacts": {"registry_file": "arrays.json + bar_array.json", "lab_showcase": [], "lab_showcase_note": "Neutral stage — no new artifacts", "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "F_order",
+				"contribution": "F — arrays as structured repetition. Indexing as addressing. Grid = ordered container for complexity.",
+				"builds_on": ["color"],
+				"leads_to": ["wavefunctions", "cellularautomata"]
+			},
+			"nature": {
+				"element": "mineral_vein",
+				"category": "mineral",
+				"forest_note": "Arrays = regular structure. Mineral veins streak through the Lab walls — ordered patterns in stone."
+			},
+			"capability": {
+				"perception": "index_sight — see structure in repetition. Arrays as grids, patterns as indices.",
+				"capability_grant": "organize — arrange objects in grids. The Lab gains order.",
+				"relation": "address — everything has a position. To name is to index. Identity as location."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "The grid as both prison and possibility. Arrays enforce order but enable Mondrian, disco floors, kaleidoscopes. Structure as liberation.",
+				"book_ready": false,
+				"book_missing": "7/7 maps need technical.md, 6/7 need critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "6/7 maps need blurb.md + summary.md",
+				"installation_potential": "yes — Tutorial_Disco"
+			}
+		},
+		"wavefunctions": {
+			"spine_order": 6,
+			"phase": "oscillation",
+			"maps": {"count": 12, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/wavefunctions/", "gd_count": "100+", "status": "complete"},
+			"text": {
+				"blurb": {"have": 8, "of": 12, "missing": ["WaveFunctions_Intro", "WaveFunctions_AirMusic", "WaveFunctions_TrigWalkingPath", "WaveFunctions_Synthesis_Lab"]},
+				"summary": {"have": 1, "of": 12, "missing": "11 maps"},
+				"technical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"critical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"legacy_gd": ["sine_wave_axioms.gd", "fourier_synthesis_axioms.gd"],
+				"legacy_gd_status": "covered — but 8+ unique .gd files exist in wave/sound group (electromagnetic_spectrum, frequency_domains, harmonic_series, additive_synthesis, beat_frequencies, harmonic_builder, spherical_harmonics, wave_desire)",
+				"unique_gd_content": "Tier 2 gap: 8-9 wave/sound .gd files form a coherent uncovered sub-sequence on signal processing and synthesis mathematics",
+				"status": "critical — 0/12 technical, 0/12 critical"
+			},
+			"artifacts": {"registry_file": "wavefunctions.json", "lab_showcase": ["spectral_sine_wave", "RackMoogBass"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["cellularautomata", "lsystems", "fractals"], "status": "complete"},
+			"qfep": {
+				"phase": "oscillation",
+				"contribution": "F ↔ E pure oscillation. Sine as the breath between order and entropy. Frequency, amplitude, phase — the grammar of change.",
+				"builds_on": ["forces", "array_tutorial"],
+				"leads_to": ["cellularautomata", "lsystems", "fractals", "proceduralaudio"]
+			},
+			"nature": {
+				"element": "wave_pool",
+				"category": "water",
+				"forest_note": "Oscillation IS water. A wave pool appears in the Lab. Ripples carry information. The Lab breathes."
+			},
+			"capability": {
+				"perception": "wave_sense — see oscillation everywhere: sine as breath, frequency as rhythm",
+				"capability_grant": "resonate — play sounds, create standing waves. The Lab becomes acoustic.",
+				"relation": "synchrony — to oscillate together is to communicate. Phase as intimacy."
+			},
+			"application": {
+				"work_package": "WP2",
+				"queer_dimension": "The wave as neither particle nor spread. Superposition as being multiple things at once. Sound as queer embodiment — felt in the body, not just seen.",
+				"book_ready": false,
+				"book_missing": "ALL 12 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "11 maps need summary.md, 4 need blurb.md",
+				"installation_potential": "yes — WaveFunctions_Synthesis_Lab, John_Cage"
+			}
+		},
+		"randomness": {
+			"spine_order": 7,
+			"phase": "E_entropy",
+			"maps": {"count": 13, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/randomness/", "gd_count": "100+", "status": "complete"},
+			"text": {
+				"blurb": {"have": 11, "of": 13, "missing": ["Random_Remove", "Random_Game"]},
+				"summary": {"have": 11, "of": 13, "missing": ["Random_Remove", "Random_Game"]},
+				"technical": {"have": 11, "of": 13, "missing": ["Random_Remove", "Random_Game"]},
+				"critical": {"have": 11, "of": 13, "missing": ["Random_Remove", "Random_Game"]},
+				"legacy_gd": ["prng_axioms.gd", "distributions_axioms.gd", "random_walk_axioms.gd", "entropy_axioms.gd", "ten_print_axioms.gd", "pheromone_axioms.gd"],
+				"legacy_gd_status": "covered — but decay_axioms.gd has unique content (exponential decay as creative tool)",
+				"status": "partial — 2 maps missing all 4 .md files"
+			},
+			"artifacts": {"registry_file": "randomness.json", "lab_showcase": ["random_walk_collection"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "E_entropy",
+				"contribution": "E(S) — entropy as creative force. Disorder reveals possibility space. Randomness is not absence of meaning but excess of it.",
+				"builds_on": ["forces"],
+				"leads_to": ["noise"]
+			},
+			"nature": {
+				"element": "moss_patch",
+				"category": "fungal",
+				"forest_note": "Entropy feeds decomposition. Moss appears on Lab surfaces — the first organic colonizer. Disorder enables life."
+			},
+			"capability": {
+				"perception": "entropy_sense — see randomness as creative force. Disorder reveals possibility.",
+				"capability_grant": "scatter — randomize arrangements. Break patterns. The Lab becomes unpredictable.",
+				"relation": "surprise — to be truly random is to be truly free. Unpredictability as liberation from the normative."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "Randomness as resistance to categorization. The coin flip that refuses the binary. Gaussian distributions queered — the 'normal' curve is a construct.",
+				"book_ready": false,
+				"book_missing": "Random_Remove + Random_Game need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "Random_Remove + Random_Game need blurb.md + summary.md",
+				"installation_potential": "yes — Random_Space, Random_Mushrooms"
+			}
+		},
+		"noise": {
+			"spine_order": 8,
+			"phase": "E_entropy",
+			"maps": {"count": 9, "deferred": 3, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/randomness/noise/ (nested)", "note": "No standalone algorithms/noise/ dir", "status": "complete"},
+			"text": {
+				"blurb": {"have": 8, "of": 9, "missing": ["Lab_Path"]},
+				"summary": {"have": 1, "of": 9, "missing": ["Noise_Columns", "Noise_One", "Noise_Voxel", "Noise_6_Wall", "Noise_Inside_Noise", "Noise_Space_10", "Noise_Perlin_Simplex", "Lab_Path"]},
+				"technical": {"have": 1, "of": 9, "missing": ["Noise_Columns", "Noise_One", "Noise_Voxel", "Noise_6_Wall", "Noise_Inside_Noise", "Noise_Space_10", "Noise_Perlin_Simplex", "Lab_Path"]},
+				"critical": {"have": 1, "of": 9, "missing": ["Noise_Columns", "Noise_One", "Noise_Voxel", "Noise_6_Wall", "Noise_Inside_Noise", "Noise_Space_10", "Noise_Perlin_Simplex", "Lab_Path"]},
+				"legacy_gd": ["noise_axioms.gd", "perlin_noise_axioms.gd", "simplex_noise_axioms.gd", "value_noise_axioms.gd", "blue_noise_axioms.gd"],
+				"legacy_gd_status": "mostly covered — worley_noise_axioms.gd, white_noise_axioms.gd, shader_noise_axioms.gd have unique content",
+				"status": "critical — 8/9 maps missing summary, technical, critical"
+			},
+			"artifacts": {"registry_file": null, "lab_showcase": ["noisetext"], "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "E_entropy",
+				"contribution": "E(S) structured — Perlin noise as entropy with coherence. Not all disorder is equal. Structured randomness creates organic form.",
+				"builds_on": ["randomness"],
+				"leads_to": ["cellularautomata", "patterngeneration"]
+			},
+			"nature": {
+				"element": "lichen_wall",
+				"category": "fungal",
+				"forest_note": "Structured randomness = lichen patterns. Perlin noise IS the texture of bark, stone, moss. The Lab walls grow lichen."
+			},
+			"capability": {
+				"perception": "noise_sense — see structure in randomness. Perlin gradients, flow fields, coherent noise.",
+				"capability_grant": "texture — apply organic textures to surfaces. The Lab's sterile walls become natural.",
+				"relation": "landscape — noise creates terrain. You begin to feel the Lab as a landscape, not a room."
+			},
+			"application": {
+				"work_package": "WP1",
+				"queer_dimension": "Noise as the queer blur between signal and static. Perlin noise: neither random nor ordered. The terrain of ambiguity.",
+				"book_ready": false,
+				"book_missing": "8/9 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "8/9 maps need summary.md, 1 needs blurb.md",
+				"installation_potential": "yes — Noise_Inside_Noise, Noise_Voxel"
+			}
+		},
+		"cellularautomata": {
+			"spine_order": 9,
+			"phase": "E_entropy",
+			"maps": {"count": 12, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/cellularautomata/", "gd_count": 41, "tscn_count": 41, "status": "complete"},
+			"text": {
+				"blurb": {"have": 12, "of": 12, "missing": []},
+				"summary": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"technical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"critical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"legacy_gd": ["game_of_life_axioms.gd", "elementary_ca_axioms.gd", "ca_universe_axioms.gd"],
+				"legacy_gd_status": "partial — ca_universe_axioms.gd has unique content (Wolfram's universe-as-CA thesis, computational irreducibility)",
+				"status": "critical — 0/12 summary, 0/12 technical, 0/12 critical"
+			},
+			"artifacts": {"registry_file": "cellular_automata.json", "lab_showcase": [], "lab_showcase_note": "Neutral stage — anomalous file", "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "note": "File contains wrong data (Lab_Post_Fractals)", "status": "partial"},
+			"qfep": {
+				"phase": "E_entropy",
+				"contribution": "E(S) → emergence. Simple rules create complex behavior. Local interaction generates global pattern. The bridge from entropy to order.",
+				"builds_on": ["wavefunctions", "array_tutorial"],
+				"leads_to": ["fractals", "lsystems"]
+			},
+			"nature": {
+				"element": "mycelium_network",
+				"category": "fungal",
+				"forest_note": "CA = mycelium. Simple rules, local connection, network emergence. Underground networks spread through the Lab floor."
+			},
+			"capability": {
+				"perception": "rule_sight — see simple rules generating complex behavior. Emergence from local interaction.",
+				"capability_grant": "seed — place initial conditions and watch systems evolve. The Lab becomes alive.",
+				"relation": "emergence — you are not in control. The system surprises you. Humility before complexity."
+			},
+			"application": {
+				"work_package": "WP2",
+				"queer_dimension": "Game of Life: survival requires exactly 2-3 neighbors. Too few = isolation death. Too many = suffocation. Queer survival as cellular automaton.",
+				"book_ready": false,
+				"book_missing": "ALL 12 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 12 maps need summary.md (blurbs complete)",
+				"installation_potential": "yes — CA_3D, persian_rug, ecosystem"
+			}
+		},
+		"fractals": {
+			"spine_order": 10,
+			"phase": "lambda_edge",
+			"maps": {"count": 14, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/fractals/", "gd_count": 41, "tscn_count": 42, "status": "complete"},
+			"text": {
+				"blurb": {"have": 14, "of": 14, "missing": []},
+				"summary": {"have": 14, "of": 14, "missing": []},
+				"technical": {"have": 14, "of": 14, "missing": []},
+				"critical": {"have": 14, "of": 14, "missing": []},
+				"legacy_gd": ["fractals_axioms.gd", "recursion_axioms.gd"],
+				"legacy_gd_status": "mostly covered — recursion_axioms.gd has unique foundational CS content",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": null, "lab_showcase": [], "lab_showcase_note": "Gate map but no specific artifact", "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["proceduralgeneration", "softbodies"], "status": "complete"},
+			"qfep": {
+				"phase": "lambda_edge",
+				"contribution": "λ — the edge of chaos. Self-similarity at every scale. Infinite detail from finite rules. The fractal IS λ.",
+				"builds_on": ["cellularautomata", "noise"],
+				"leads_to": ["proceduralgeneration", "softbodies", "lsystems"]
+			},
+			"nature": {
+				"element": "fern",
+				"category": "plant",
+				"forest_note": "Fractals ARE ferns. Barnsley's fern is the proof. The first true plants appear in the Lab. Self-similarity becomes botany."
+			},
+			"capability": {
+				"perception": "fractal_sight — see self-similarity at every scale. The edge of chaos as infinite recursion.",
+				"capability_grant": "recurse — create structures that contain themselves. The Lab gains depth.",
+				"relation": "infinity — you are a fractal too. Same patterns at every scale of your life."
+			},
+			"application": {
+				"work_package": "WP2",
+				"queer_dimension": "The Mandelbrot set: infinite complexity from z² + c. The boundary between inside and outside is infinitely complex — like the boundary of any identity.",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — Mandelbrot, Julia sets, Sierpinski pyramid"
+			}
+		},
+		"lsystems": {
+			"spine_order": 11,
+			"phase": "lambda_edge",
+			"maps": {"count": 7, "deferred": 4, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/lsystems/", "gd_count": 9, "tscn_count": 7, "status": "complete"},
+			"text": {
+				"blurb": {"have": 3, "of": 7, "missing": ["LSystems_ContextSensitiveTree", "LSystems_ForestCompetition", "LSystems_Context_Free_Grammars_CFG", "LSystems_Hilbert3D"]},
+				"summary": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"technical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"critical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"legacy_gd": ["lsystems_axioms.gd"],
+				"legacy_gd_status": "covered",
+				"status": "critical — 0/7 summary, 0/7 technical, 0/7 critical"
+			},
+			"artifacts": {"registry_file": "lsystems.json", "lab_showcase": [], "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "lambda_edge",
+				"contribution": "λ — grammars at the edge. Rewriting rules generate growth. Language becomes morphology.",
+				"builds_on": ["fractals", "cellularautomata"],
+				"leads_to": ["proceduralgeneration"]
+			},
+			"nature": {
+				"element": "vine",
+				"category": "plant",
+				"forest_note": "L-systems ARE botanical grammar. Vines climb the Lab walls. Rewriting rules produce tendrils. Grammar becomes growth."
+			},
+			"capability": {
+				"perception": "grammar_sight — see growth rules. Branches as rewriting. Nature as recursive grammar.",
+				"capability_grant": "grow — plant seeds that follow L-system rules. The Lab sprouts.",
+				"relation": "authorship — you write the grammar, but the plant writes itself. Co-creation with systems."
+			},
+			"application": {
+				"work_package": "WP2",
+				"queer_dimension": "Generative grammars: the same axiom can produce infinite different organisms. Identity as grammar — the rules are yours but the growth is emergent.",
+				"book_ready": false,
+				"book_missing": "ALL 7 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 7 maps need summary.md, 4 need blurb.md",
+				"installation_potential": "yes — ForestCompetition, CityGenerator"
+			}
+		},
+		"proceduralgeneration": {
+			"spine_order": 12,
+			"phase": "lambda_edge",
+			"maps": {"count": 7, "deferred": 9, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/proceduralgeneration/", "gd_count": "100+", "status": "complete"},
+			"text": {
+				"blurb": {"have": 7, "of": 7, "missing": []},
+				"summary": {"have": 7, "of": 7, "missing": []},
+				"technical": {"have": 7, "of": 7, "missing": []},
+				"critical": {"have": 7, "of": 7, "missing": []},
+				"legacy_gd": ["wfc_axioms.gd", "procedural_placement_axioms.gd"],
+				"legacy_gd_status": "covered",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": "procgen_extra.json", "lab_showcase": [], "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "lambda_edge",
+				"contribution": "λ — WFC as possibility collapse. Markov as memory. The edge between constraint and freedom generates worlds.",
+				"builds_on": ["fractals", "lsystems", "noise"],
+				"leads_to": ["softbodies"]
+			},
+			"nature": {
+				"element": "tree_sapling",
+				"category": "plant",
+				"forest_note": "Procedural generation IS how forests grow. Tree saplings appear — each unique, all following the same constraints. The Lab's first trees."
+			},
+			"capability": {
+				"perception": "generation_sight — see constraint satisfaction. WFC as possibility collapse.",
+				"capability_grant": "generate — create worlds from rules. The Lab begins to generate itself.",
+				"relation": "trust — you set constraints, the system fills in the rest. Letting go of total control."
+			},
+			"application": {
+				"work_package": "WP3",
+				"queer_dimension": "WFC: every tile must agree with its neighbors. The queer reading: local compatibility, not global conformity. How do we navigate an auto-generated world?",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — WFC dungeons, caves, marching landscapes"
+			}
+		},
+		"softbodies": {
+			"spine_order": 13,
+			"phase": "integration",
+			"maps": {"count": 10, "note": "Absorbed morphogenesis (2 maps)", "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/softbodies/", "gd_count": 9, "tscn_count": 13, "status": "complete"},
+			"text": {
+				"blurb": {"have": 1, "of": 10, "missing": "9 maps"},
+				"summary": {"have": 1, "of": 10, "missing": "9 maps"},
+				"technical": {"have": 1, "of": 10, "missing": "9 maps"},
+				"critical": {"have": 1, "of": 10, "missing": "9 maps"},
+				"legacy_gd": ["reaction_diffusion_axioms.gd"],
+				"legacy_gd_status": "covered",
+				"status": "critical — 9/10 maps missing all 4 .md files"
+			},
+			"artifacts": {"registry_file": "soft_bodies.json", "lab_showcase": [], "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["swarmintelligence", "machinelearning"], "status": "complete"},
+			"qfep": {
+				"phase": "integration",
+				"contribution": "φΔE — rate of change in entropy. Deformable matter. Cloth, fluid, pressure as continuous fields. Turing's reaction-diffusion as living mathematics.",
+				"builds_on": ["fractals", "proceduralgeneration", "forces"],
+				"leads_to": ["swarmintelligence", "machinelearning"]
+			},
+			"nature": {
+				"element": "mushroom_cluster",
+				"category": "fungal",
+				"forest_note": "Soft bodies = soft life. Mushrooms push through the Lab floor — deformable, squishy, alive. Reaction-diffusion creates their spots."
+			},
+			"capability": {
+				"perception": "matter_sense — see deformation. Cloth, fluid, pressure as continuous fields.",
+				"capability_grant": "deform — squeeze, stretch, pour. The Lab becomes soft and responsive.",
+				"relation": "vulnerability — soft bodies can be hurt. Deformation as emotional capacity. Softness as strength."
+			},
+			"application": {
+				"work_package": "WP2",
+				"queer_dimension": "Soft bodies resist rigid categorization. Cloth drapes across boundaries. Fluid has no fixed shape. The queer body as soft body — deformable, resilient, beautiful.",
+				"book_ready": false,
+				"book_missing": "9/10 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "9/10 maps need blurb.md + summary.md",
+				"installation_potential": "yes — Cloth_Physics, Playground_of_Joy"
+			}
+		},
+		"swarmintelligence": {
+			"spine_order": 14,
+			"phase": "integration",
+			"maps": {"count": 7, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/swarmintelligence/", "gd_count": 16, "tscn_count": 9, "status": "complete"},
+			"text": {
+				"blurb": {"have": 7, "of": 7, "missing": []},
+				"summary": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"technical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"critical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"legacy_gd": ["flocking_boids_axioms.gd", "ant_colony_optimization_axioms.gd", "particle_swarm_optimization_axioms.gd"],
+				"legacy_gd_status": "covered — but steering_behaviors_axioms.gd has unique content (Reynolds autonomous agents)",
+				"status": "critical — 0/7 summary, 0/7 technical, 0/7 critical"
+			},
+			"artifacts": {"registry_file": null, "lab_showcase": [], "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "integration",
+				"contribution": "φΔE — collective rate of change. No individual controls the flock. Intelligence emerges from interaction. Stigmergy as distributed memory.",
+				"builds_on": ["softbodies", "cellularautomata"],
+				"leads_to": ["machinelearning"]
+			},
+			"nature": {
+				"element": "butterfly_colony",
+				"category": "animal",
+				"forest_note": "Swarm = first animal life. Butterflies flock through the Lab. Boids become monarchs. The Lab has fauna."
+			},
+			"capability": {
+				"perception": "swarm_sense — see collective behavior. Flocking, stigmergy, distributed intelligence.",
+				"capability_grant": "flock — summon swarms. The Lab fills with movement that you don't control.",
+				"relation": "belonging — to flock is to belong without hierarchy. Community as emergent property."
+			},
+			"application": {
+				"work_package": "WP4",
+				"queer_dimension": "The swarm has no leader, no center, no norm. Stigmergy: you leave traces that others follow. Queer community as swarm intelligence.",
+				"book_ready": false,
+				"book_missing": "ALL 7 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 7 maps need summary.md (blurbs complete)",
+				"installation_potential": "yes — Boids, PhysarumColony, AntColony"
+			}
+		},
+		"machinelearning": {
+			"spine_order": 15,
+			"phase": "integration",
+			"maps": {"count": 8, "deferred": 10, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/machinelearning/", "gd_count": "100+", "tscn_count": 65, "status": "complete"},
+			"text": {
+				"blurb": {"have": 8, "of": 8, "missing": []},
+				"summary": {"have": 8, "of": 8, "missing": []},
+				"technical": {"have": 8, "of": 8, "missing": []},
+				"critical": {"have": 8, "of": 8, "missing": []},
+				"legacy_gd": ["neural_networks_axioms.gd", "genetic_algorithms_axioms.gd", "kmeans_clustering_axioms.gd", "pca_axioms.gd"],
+				"legacy_gd_status": "mostly covered — pca_axioms.gd has unique mathematical content",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": "machinelearning.json", "lab_showcase": [], "status": "partial"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["foundationscrisis", "graphtheory"], "status": "complete"},
+			"qfep": {
+				"phase": "integration",
+				"contribution": "φΔE — learning as optimizing the rate of entropy change. Gradient descent finds the path. Neural networks integrate all prior patterns.",
+				"builds_on": ["swarmintelligence", "softbodies", "randomness"],
+				"leads_to": ["foundationscrisis", "graphtheory", "recursiveemergence", "artmathematics"]
+			},
+			"nature": {
+				"element": "ant_trail",
+				"category": "animal",
+				"forest_note": "ML = optimization trails. Ant trails mark gradient descent paths on the Lab floor. The Lab learns where you walk."
+			},
+			"capability": {
+				"perception": "learning_sense — see gradient descent, error surfaces, weight spaces, convergence",
+				"capability_grant": "train — teach systems to recognize patterns. The Lab starts learning from you.",
+				"relation": "mutual_learning — the system learns from you, you learn from the system. Teaching as relation."
+			},
+			"application": {
+				"work_package": "WP3",
+				"queer_dimension": "Clustering algorithms: who gets grouped with whom? PCA: which dimensions are kept, which are discarded? ML as the politics of categorization.",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — ML_Evolution, NeuralNetworks, Generative"
+			}
+		},
+		"foundationscrisis": {
+			"spine_order": 16,
+			"phase": "synthesis",
+			"maps": {"count": 7, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": null, "note": "No algorithms/foundationscrisis/ dir — uses alternativegeometries/, criticaltheory/", "status": "partial"},
+			"text": {
+				"blurb": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"summary": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"technical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"critical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"legacy_gd": [],
+				"status": "critical — 0/7 across all 4 .md types"
+			},
+			"artifacts": {"registry_file": "foundations.json", "lab_showcase": ["escher_staircase_mini", "penrose_triangle", "godel_statement_plaque", "russell_set_display", "self_referential_sign", "incompleteness_badge"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "gate_map": true, "opens": ["qfeplaboratory", "postfoundationscrisis"], "status": "complete"},
+			"qfep": {
+				"phase": "synthesis",
+				"contribution": "The formula's limit. Godel shows every formal system has truths it cannot prove. Russell's paradox breaks set theory. The QFEP formula itself has edges.",
+				"builds_on": ["machinelearning", "fractals"],
+				"leads_to": ["qfeplaboratory", "postfoundationscrisis"]
+			},
+			"nature": {
+				"element": "bird_nest",
+				"category": "ecosystem",
+				"forest_note": "Crisis = nesting. Birds build nests in the impossible staircases. Life finds a way in the paradoxes. The Lab's broken logic becomes habitat."
+			},
+			"capability": {
+				"perception": "paradox_sight — see incompleteness. Every system has truths it cannot prove.",
+				"capability_grant": "question — place paradoxes. Self-referential signs. The Lab questions itself.",
+				"relation": "humility — you cannot know everything. Incompleteness is not failure, it's the nature of systems."
+			},
+			"application": {
+				"work_package": "WP4",
+				"queer_dimension": "Godel: the system cannot fully describe itself. Russell: the set of all sets that don't contain themselves. Queerness as the paradox that breaks the binary classification.",
+				"book_ready": false,
+				"book_missing": "ALL 7 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 7 maps need blurb.md + summary.md",
+				"installation_potential": "yes — Escher spaces, Penrose objects, Godel plaque"
+			}
+		},
+		"qfeplaboratory": {
+			"spine_order": 17,
+			"phase": "synthesis",
+			"maps": {"count": 8, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": null, "note": "Uses chaos/ + various", "status": "partial"},
+			"text": {
+				"blurb": {"have": 8, "of": 8, "missing": []},
+				"summary": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"technical": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"critical": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"legacy_gd": [],
+				"status": "critical — 0/8 summary, 0/8 technical, 0/8 critical"
+			},
+			"artifacts": {"registry_file": "qfep.json", "lab_showcase": ["lambda_wall_slider", "phi_wall_slider", "qfep_formula_display", "edge_of_chaos_orb", "bifurcation_diagram_3d", "entropy_meter", "qfep_master_badge"], "status": "complete"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "synthesis",
+				"contribution": "THE COMPLETE FORMULA: QFE = F - λE(S) + φΔE(S,t). All terms embodied. The player tunes λ and φ. The Lab oscillates between order and chaos.",
+				"builds_on": ["foundationscrisis", "all_prior_sequences"],
+				"leads_to": ["postfoundationscrisis"]
+			},
+			"nature": {
+				"element": "full_canopy",
+				"category": "ecosystem",
+				"forest_note": "The formula IS the ecosystem. A full canopy grows over the QFEP room. The Lab is nearly forest. You understand why."
+			},
+			"capability": {
+				"perception": "qfep_sense — see the formula everywhere. F, E(S), λ, φΔE as the fabric of reality.",
+				"capability_grant": "tune — adjust λ and φ sliders. You control the edge of chaos.",
+				"relation": "integration — you ARE the formula. Subject and object dissolve. The Lab is you."
+			},
+			"application": {
+				"work_package": "WP4",
+				"queer_dimension": "QFEP as queer physics. The formula describes the oscillation between structure and dissolution. λ at the edge of chaos IS the queer position — neither fully ordered nor fully entropic.",
+				"book_ready": false,
+				"book_missing": "ALL 8 maps need technical.md + critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 8 maps need summary.md (blurbs complete)",
+				"installation_potential": "yes — the culminating piece. QFEP_Sandbox as exhibition centerpiece."
+			}
+		},
+		"postfoundationscrisis": {
+			"spine_order": 18,
+			"phase": "synthesis",
+			"maps": {"count": 3, "note": "Collects maps from criticalalgorithms, speculativecomputation, advancedlaboratory", "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/criticalalgorithms/ + criticaltheory/", "status": "partial"},
+			"text": {
+				"blurb": {"have": 0, "of": 3, "missing": "ALL 3 maps"},
+				"summary": {"have": 0, "of": 3, "missing": "ALL 3 maps"},
+				"technical": {"have": 0, "of": 3, "missing": "ALL 3 maps"},
+				"critical": {"have": 1, "of": 3, "missing": ["CriticalAlgorithms_Algorithmic_Bias_Visualization", "AdvancedLaboratory_Lab_Equipment_Simulation"]},
+				"legacy_gd": [],
+				"status": "critical — nearly all .md missing"
+			},
+			"artifacts": {"registry_file": null, "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": "shared with foundationscrisis", "manifest_entry": true, "status": "partial"},
+			"qfep": {
+				"phase": "synthesis",
+				"contribution": "Applied limits — bias, rhizomes, molecular design as post-crisis practice. After the crisis, what do you build?",
+				"builds_on": ["foundationscrisis", "qfeplaboratory"],
+				"leads_to": null
+			},
+			"nature": {
+				"element": "meadow",
+				"category": "ecosystem",
+				"forest_note": "Post-crisis = clearing. A meadow opens in the Lab. After the forest, light breaks through. New growth on the other side of paradox."
+			},
+			"capability": {
+				"perception": "rhizomatic_sight — see non-hierarchical connection. Rhizomes, not trees.",
+				"capability_grant": "connect — create links between any two things. The Lab becomes a network.",
+				"relation": "solidarity — post-crisis building is collective. You build with others, not alone."
+			},
+			"application": {
+				"work_package": "WP4",
+				"queer_dimension": "After the foundations crisis: what remains? Bias visualization reveals power. Rhizome networks reject hierarchy. Molecular design as queer engineering.",
+				"book_ready": false,
+				"book_missing": "3/3 maps need technical.md, 2/3 need critical.md",
+				"wiki_ready": false,
+				"wiki_missing": "ALL 3 maps need blurb.md + summary.md",
+				"installation_potential": "partial"
+			}
+		},
+		"graphtheory": {
+			"spine_order": 19,
+			"phase": "integration",
+			"maps": {"count": 8, "deferred": 1, "sequence_file": true, "all_have_data": true, "status": "complete"},
+			"algorithms": {"directory": "algorithms/graphtheory/", "gd_count": 20, "tscn_count": 21, "status": "complete"},
+			"text": {
+				"blurb": {"have": 8, "of": 8, "missing": []},
+				"summary": {"have": 8, "of": 8, "missing": []},
+				"technical": {"have": 8, "of": 8, "missing": []},
+				"critical": {"have": 8, "of": 8, "missing": []},
+				"legacy_gd": ["graph_theory_axioms.gd", "astar_pathfinding_axioms.gd", "dijkstra_algorithm_axioms.gd"],
+				"legacy_gd_status": "covered — but delaunay_triangulation_axioms.gd has unique content (Voronoi dual)",
+				"status": "complete"
+			},
+			"artifacts": {"registry_file": null, "status": "missing_registry"},
+			"lab_evolution": {"post_lab_map": true, "manifest_entry": true, "status": "complete"},
+			"qfep": {
+				"phase": "integration",
+				"contribution": "φΔE — topology of connection. Nodes and edges. Paths and cycles. The substrate on which all other patterns exist.",
+				"builds_on": ["machinelearning", "transformation"],
+				"leads_to": ["foundationscrisis"]
+			},
+			"nature": {
+				"element": "fish_school",
+				"category": "animal",
+				"forest_note": "Graphs = networks of relation. Fish school through the Lab's wave pools. Edges become paths. Nodes become habitats."
+			},
+			"capability": {
+				"perception": "graph_sense — see connections. Nodes and edges. Paths and cycles. The topology of relation.",
+				"capability_grant": "connect — draw edges between objects. The Lab reveals its hidden graph.",
+				"relation": "topology — everything is connected. The shape of connection matters more than the things connected."
+			},
+			"application": {
+				"work_package": "WP3",
+				"queer_dimension": "Graph theory: who is connected to whom, and how? Queer networks. Bridges and cut vertices — removing which person disconnects the community?",
+				"book_ready": true,
+				"wiki_ready": true,
+				"installation_potential": "yes — Konigsberg bridges, network flow"
+			}
+		}
+	},
+	"branch_sequences": {
+		"meshes": {
+			"branches_from": "primitives",
+			"maps": {"count": 4, "status": "complete"},
+			"algorithms": {"note": "Within primitives/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 4, "of": 4, "missing": []},
+				"summary": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"technical": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"critical": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"status": "critical"
+			},
+			"lab_evolution": {"post_lab_map": true, "note": "File contains wrong data (Lab_Post_Array)", "status": "partial"},
+			"qfep": {"phase": "F_order", "contribution": "F — topology of surfaces", "builds_on": ["primitives"]},
+			"nature": {"element": "quartz_formation", "category": "mineral"},
+			"capability": {"perception": "surface_sight — see topology, genus, manifolds"},
+			"application": {"work_package": "WP1", "queer_dimension": "Mesh topology: a torus is not a sphere. Identity as topology — which holes define you?", "book_ready": false, "wiki_ready": false}
+		},
+		"datastructures": {
+			"branches_from": "primitives",
+			"maps": {"count": 12, "status": "complete"},
+			"algorithms": {"directory": "algorithms/datastructures/", "gd_count": 16, "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"summary": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"technical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"critical": {"have": 0, "of": 12, "missing": "ALL 12 maps"},
+				"legacy_gd_unique": ["skip_list_axioms.gd", "bloom_filter_axioms.gd"],
+				"status": "critical — 0/12 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "F_order", "contribution": "F — structured containers for complexity", "builds_on": ["primitives", "array_tutorial"]},
+			"nature": {"element": "root_system", "category": "plant"},
+			"capability": {"perception": "structure_sight — see trees, graphs, hash maps in everything"},
+			"application": {"work_package": "WP1", "queer_dimension": "Data structures: who gets stored where? Priority queues as social hierarchy. Hash maps as identity lookup.", "book_ready": false, "wiki_ready": false}
+		},
+		"computationalgeometry": {
+			"branches_from": "transformation",
+			"maps": {"count": 11, "status": "complete"},
+			"algorithms": {"directory": "algorithms/computationalgeometry/", "gd_count": 7, "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"summary": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"technical": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"critical": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"legacy_gd_unique": ["convex_hull_axioms.gd", "quadtree_axioms.gd", "octree_axioms.gd"],
+				"status": "critical — 0/11 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "F_order", "contribution": "F — spatial reasoning formalized", "builds_on": ["transformation"]},
+			"nature": {"element": "crystal_cave", "category": "mineral"},
+			"capability": {"perception": "spatial_sense — see convex hulls, Voronoi regions, distance fields"},
+			"application": {"work_package": "WP1", "queer_dimension": "Voronoi: space divided by proximity. Whose territory? Distance fields as borders.", "book_ready": false, "wiki_ready": false}
+		},
+		"physicssimulation": {
+			"branches_from": "forces",
+			"maps": {"count": 21, "status": "complete"},
+			"algorithms": {"directory": "algorithms/physicssimulation/", "gd_count": 60, "tscn_count": 44, "status": "complete"},
+			"text": {
+				"blurb": {"have": 5, "of": 21, "missing": "16 maps"},
+				"summary": {"have": 5, "of": 21, "missing": "16 maps"},
+				"technical": {"have": 5, "of": 21, "missing": "16 maps"},
+				"critical": {"have": 5, "of": 21, "missing": "16 maps"},
+				"legacy_gd_unique": ["collision_detection_axioms.gd"],
+				"status": "critical — 16/21 maps missing all .md"
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "oscillation", "contribution": "F ↔ E — physics engines as entropy simulators", "builds_on": ["forces"]},
+			"nature": {"element": "waterfall", "category": "water"},
+			"capability": {"perception": "physics_sense — see constraints, springs, joints, fluid dynamics"},
+			"application": {"work_package": "WP2", "queer_dimension": "Constraints: what holds bodies together and apart? Joints as articulation. Spring-dampers as emotional regulation.", "book_ready": false, "wiki_ready": false}
+		},
+		"proceduralaudio": {
+			"branches_from": "wavefunctions",
+			"maps": {"count": 8, "status": "complete"},
+			"algorithms": {"note": "Within wavefunctions/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"summary": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"technical": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"critical": {"have": 0, "of": 8, "missing": "ALL 8 maps"},
+				"legacy_gd_unique": ["additive_synthesis_axioms.gd", "harmonic_series_axioms.gd", "beat_frequencies_axioms.gd", "harmonic_builder_axioms.gd", "audio_reactivity_axioms.gd"],
+				"status": "critical — 0/8 across all .md types. 5 unique legacy .gd files."
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "oscillation", "contribution": "F ↔ E — sound as oscillation made audible", "builds_on": ["wavefunctions"]},
+			"nature": {"element": "singing_crystal", "category": "water"},
+			"capability": {"perception": "sonic_sense — hear Fourier, synthesis, granulation"},
+			"application": {"work_package": "WP2", "queer_dimension": "Sound synthesis: combining harmonics creates timbre. The voice as additive synthesis — identity as spectral composition.", "book_ready": false, "wiki_ready": false}
+		},
+		"patterngeneration": {
+			"branches_from": "noise",
+			"maps": {"count": 18, "status": "complete"},
+			"algorithms": {"directory": "algorithms/patterngeneration/ + algorithms/shaders/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 18, "missing": "ALL 18 maps"},
+				"summary": {"have": 0, "of": 18, "missing": "ALL 18 maps"},
+				"technical": {"have": 0, "of": 18, "missing": "ALL 18 maps"},
+				"critical": {"have": 0, "of": 18, "missing": "ALL 18 maps"},
+				"status": "critical — 0/18 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "E_entropy", "contribution": "E(S) — visual entropy. Shaders as real-time entropy processing.", "builds_on": ["noise"]},
+			"nature": {"element": "coral", "category": "fungal"},
+			"capability": {"perception": "pattern_sense — see shaders, reaction-diffusion, tilings"},
+			"application": {"work_package": "WP3", "queer_dimension": "Penrose tilings: aperiodic order. Neither random nor repeating. Queer pattern — regular irregularity.", "book_ready": false, "wiki_ready": false}
+		},
+		"recursiveemergence": {
+			"branches_from": "machinelearning",
+			"maps": {"count": 11, "status": "complete"},
+			"algorithms": {"note": "Draws from fractals, CA, cellularautomata", "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"summary": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"technical": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"critical": {"have": 0, "of": 11, "missing": "ALL 11 maps"},
+				"status": "critical — 0/11 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — recursion at the edge generates emergence", "builds_on": ["machinelearning", "fractals"]},
+			"nature": {"element": "spiral_plant", "category": "plant"},
+			"capability": {"perception": "recursion_sense — see self-reference, iteration, emergence from repetition"},
+			"application": {"work_package": "WP3", "queer_dimension": "Recursion: the function calls itself. Self-reference as identity. The Droste effect of looking at yourself looking.", "book_ready": false, "wiki_ready": false}
+		},
+		"artmathematics": {
+			"branches_from": "machinelearning",
+			"maps": {"count": 9, "status": "complete"},
+			"algorithms": {"note": "Uses criticaltheory/, misc/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 8, "of": 9, "missing": ["Escher_Impossible"]},
+				"summary": {"have": 7, "of": 9, "missing": ["Escher_Impossible", "MathArt_Cultural_History"]},
+				"technical": {"have": 7, "of": 9, "missing": ["Escher_Impossible", "MathArt_Cultural_History"]},
+				"critical": {"have": 8, "of": 9, "missing": ["Escher_Impossible"]},
+				"status": "partial — 1-2 maps missing .md files"
+			},
+			"lab_evolution": {"post_lab_map": true, "lab_showcase": ["magritte_pipe_frame", "escher_tessellation_tile", "mondrian_composition", "judd_minimalist_box", "droste_effect_frame"], "status": "complete"},
+			"qfep": {"phase": "synthesis", "contribution": "Full QFEP in art history — how artists intuitively found the formula", "builds_on": ["machinelearning", "foundationscrisis"]},
+			"nature": {"element": "flower", "category": "plant"},
+			"capability": {"perception": "art_sense — see algorithms in art history. Escher = tessellation. Mondrian = grid. Magritte = representation."},
+			"application": {"work_package": "WP4", "queer_dimension": "Magritte: 'This is not a pipe.' The gap between representation and reality. Art as the queer space between algorithm and experience.", "book_ready": false, "wiki_ready": false}
+		},
+		"particles": {
+			"branches_from": "forces",
+			"maps": {"count": 5, "status": "complete"},
+			"algorithms": {"note": "Within physicssimulation/ and forces/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 5, "of": 5, "missing": []},
+				"summary": {"have": 0, "of": 5, "missing": "ALL 5 maps"},
+				"technical": {"have": 0, "of": 5, "missing": "ALL 5 maps"},
+				"critical": {"have": 0, "of": 5, "missing": "ALL 5 maps"},
+				"status": "critical — 0/5 summary, technical, critical"
+			},
+			"lab_evolution": {"post_lab_map": false, "status": "missing"},
+			"qfep": {"phase": "oscillation", "contribution": "F ↔ E — particles as discrete energy packets in continuous fields", "builds_on": ["forces"]},
+			"nature": {"element": "pollen", "category": "water"},
+			"capability": {"perception": "particle_sense — see emission, lifetime, field interaction"},
+			"application": {"work_package": "WP1", "queer_dimension": "Particles: discrete entities in continuous fields. Neither fully point nor wave. Identity as particle — distinct yet field-dependent.", "book_ready": false, "wiki_ready": false}
+		},
+		"joints": {
+			"branches_from": "forces",
+			"maps": {"count": 7, "status": "complete"},
+			"algorithms": {"note": "Within physicssimulation/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 7, "of": 7, "missing": []},
+				"summary": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"technical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"critical": {"have": 0, "of": 7, "missing": "ALL 7 maps"},
+				"status": "critical — 0/7 summary, technical, critical"
+			},
+			"lab_evolution": {"post_lab_map": false, "status": "missing"},
+			"qfep": {"phase": "oscillation", "contribution": "F ↔ E — joints as constrained oscillation between rigid bodies", "builds_on": ["forces"]},
+			"nature": {"element": "ice_crystal", "category": "water"},
+			"capability": {"perception": "joint_sense — see articulation, constraint, degrees of freedom"},
+			"application": {"work_package": "WP2", "queer_dimension": "Joints connect while constraining. Hinge, ball, slider — each allows specific freedom while preventing others. Identity as articulation.", "book_ready": false, "wiki_ready": false}
+		},
+		"bricolage": {
+			"branches_from": null,
+			"note": "Unassigned in curriculum_spine.json — pending design decision",
+			"maps": {"count": 7, "status": "complete"},
+			"algorithms": {"note": "Uses primitives, arrays, construction logic", "status": "complete"},
+			"text": {
+				"blurb": {"have": 7, "of": 7, "missing": []},
+				"summary": {"have": 7, "of": 7, "missing": []},
+				"technical": {"have": 7, "of": 7, "missing": []},
+				"critical": {"have": 7, "of": 7, "missing": []},
+				"legacy_gd": ["bricolage_axioms.gd"],
+				"legacy_gd_status": "covered",
+				"status": "complete"
+			},
+			"lab_evolution": {"post_lab_map": false, "status": "missing"},
+			"qfep": {"phase": "F_order", "contribution": "F — construction from available parts. Making-do as creative method.", "builds_on": ["primitives", "array_tutorial"]},
+			"nature": {"element": "driftwood", "category": "mineral"},
+			"capability": {"perception": "bricoleur_sense — see affordances, constraints, improvisation"},
+			"application": {"work_package": "WP1", "queer_dimension": "Levi-Strauss: the bricoleur vs the engineer. Making-do with what you have. Queer creativity from constraint, not abundance.", "book_ready": true, "wiki_ready": true}
+		},
+		"biological_growth": {
+			"branches_from": null,
+			"note": "Unassigned in curriculum_spine.json — pending design decision",
+			"maps": {"count": 4, "status": "complete"},
+			"algorithms": {"note": "Uses lsystems, softbodies, proceduralgeneration", "status": "complete"},
+			"text": {
+				"blurb": {"have": 4, "of": 4, "missing": []},
+				"summary": {"have": 4, "of": 4, "missing": []},
+				"technical": {"have": 4, "of": 4, "missing": []},
+				"critical": {"have": 4, "of": 4, "missing": []},
+				"status": "complete"
+			},
+			"lab_evolution": {"post_lab_map": false, "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — biological systems at the edge of chaos. Growth as emergent property.", "builds_on": ["lsystems", "softbodies"]},
+			"nature": {"element": "slime_mold", "category": "fungal"},
+			"capability": {"perception": "growth_sense — see mycelium networks, crack propagation, tree generation"},
+			"application": {"work_package": "WP3", "queer_dimension": "Biological growth: organisms find form without blueprint. Slime mold solves shortest path. Life as queer computation.", "book_ready": true, "wiki_ready": true}
+		},
+		"structure": {
+			"branches_from": null,
+			"note": "Unassigned in curriculum_spine.json — teaches spatial formulas from architecture and game design",
+			"maps": {"count": 16, "status": "complete"},
+			"algorithms": {"note": "Uses grid system, voxel grammar, spatial logic", "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 16, "missing": "ALL 16 maps"},
+				"summary": {"have": 0, "of": 16, "missing": "ALL 16 maps"},
+				"technical": {"have": 0, "of": 16, "missing": "ALL 16 maps"},
+				"critical": {"have": 0, "of": 16, "missing": "ALL 16 maps"},
+				"status": "critical — 0/16 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": false, "status": "missing"},
+			"qfep": {"phase": "F_order", "contribution": "F — spatial grammar as structure. Architecture as formal language.", "builds_on": ["primitives", "array_tutorial"]},
+			"nature": {"element": "stalactite_column", "category": "mineral"},
+			"capability": {"perception": "spatial_grammar_sense — see pedestals, corridors, amphitheaters as spatial formulas"},
+			"application": {"work_package": "WP1", "queer_dimension": "Architecture encodes power. Cathedrals enforce hierarchy. Corridors direct movement. What spatial formulas liberate?", "book_ready": false, "wiki_ready": false}
+		},
+		"searchpathfinding": {
+			"branches_from": "datastructures",
+			"maps": {"count": 0, "deferred": 7, "note": "ALL PLACEHOLDER — no real content", "status": "deferred"},
+			"algorithms": {"directory": "algorithms/searchpathfinding/", "gd_count": 3, "status": "partial"},
+			"text": {"status": "deferred"},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "integration", "contribution": "φΔE — optimizing paths through state space", "builds_on": ["datastructures", "graphtheory"]},
+			"nature": {"element": "deer_path", "category": "animal"},
+			"capability": {"perception": "path_sense — see optimal routes, heuristics, search trees"},
+			"application": {"work_package": "WP3", "queer_dimension": "Pathfinding: there is no single shortest path. A* uses heuristics — approximations shaped by assumptions. Whose heuristic?", "note": "DEFERRED — needs real content"}
+		},
+		"resourcemanagement": {
+			"branches_from": null,
+			"maps": {"count": 0, "deferred": 6, "note": "ALL PLACEHOLDER — no real content", "status": "deferred"},
+			"algorithms": {"note": "No dedicated directory", "status": "missing"},
+			"text": {"status": "deferred"},
+			"lab_evolution": {"post_lab_map": true, "status": "complete"},
+			"qfep": {"phase": "integration", "contribution": "φΔE — managing finite resources under constraints", "builds_on": []},
+			"nature": {"element": "beaver_dam", "category": "animal"},
+			"capability": {"perception": "resource_sense — see allocation, contention, optimization under scarcity"},
+			"application": {"work_package": "WP3", "queer_dimension": "Resource management: who gets what? Allocation algorithms encode values. Scheduling as politics of time.", "note": "DEFERRED — needs real content"}
+		},
+		"spatial_partitioning": {
+			"branches_from": "proceduralgeneration",
+			"maps": {"count": 4, "status": "complete"},
+			"algorithms": {"note": "Within proceduralgeneration/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 1, "of": 4, "missing": "3 maps"},
+				"summary": {"have": 1, "of": 4, "missing": "3 maps"},
+				"technical": {"have": 1, "of": 4, "missing": "3 maps"},
+				"critical": {"have": 1, "of": 4, "missing": "3 maps"},
+				"status": "partial"
+			},
+			"lab_evolution": {"post_lab_map": false, "note": "MISSING post-lab map", "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — dividing space to find structure", "builds_on": ["proceduralgeneration"]},
+			"nature": {"element": "terraced_hillside", "category": "plant"},
+			"capability": {"perception": "partition_sense — see spatial hierarchies, BSP trees, quadtree regions"},
+			"application": {"work_package": "WP3", "book_ready": false, "wiki_ready": false}
+		},
+		"constraint_solvers": {
+			"branches_from": "proceduralgeneration",
+			"maps": {"count": 3, "status": "complete"},
+			"algorithms": {"note": "Within proceduralgeneration/ + wfc/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 1, "of": 3, "missing": "2 maps"},
+				"summary": {"have": 1, "of": 3, "missing": "2 maps"},
+				"technical": {"have": 1, "of": 3, "missing": "2 maps"},
+				"critical": {"have": 1, "of": 3, "missing": "2 maps"},
+				"status": "partial"
+			},
+			"lab_evolution": {"post_lab_map": false, "note": "MISSING post-lab map", "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — constraint satisfaction at the edge", "builds_on": ["proceduralgeneration"]},
+			"nature": {"element": "climbing_ivy", "category": "plant"},
+			"capability": {"perception": "constraint_sense — see satisfaction, propagation, arc consistency"},
+			"application": {"work_package": "WP3", "book_ready": false, "wiki_ready": false}
+		},
+		"isosurfaces": {
+			"branches_from": "proceduralgeneration",
+			"maps": {"count": 16, "status": "complete"},
+			"algorithms": {"note": "Within spacetopology/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 2, "of": 16, "missing": "14 maps"},
+				"summary": {"have": 2, "of": 16, "missing": "14 maps"},
+				"technical": {"have": 2, "of": 16, "missing": "14 maps"},
+				"critical": {"have": 2, "of": 16, "missing": "14 maps"},
+				"status": "critical — 14/16 maps missing all .md"
+			},
+			"lab_evolution": {"post_lab_map": false, "note": "MISSING post-lab map", "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — the surface between inside and outside", "builds_on": ["proceduralgeneration", "noise"]},
+			"nature": {"element": "cave_mouth", "category": "plant"},
+			"capability": {"perception": "isosurface_sense — see scalar fields, threshold boundaries, marching cubes"},
+			"application": {"work_package": "WP3", "book_ready": false, "wiki_ready": false}
+		},
+		"higher_dimensions": {
+			"branches_from": "proceduralgeneration",
+			"maps": {"count": 4, "status": "complete"},
+			"algorithms": {"note": "Within proceduralgeneration/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"summary": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"technical": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"critical": {"have": 0, "of": 4, "missing": "ALL 4 maps"},
+				"status": "critical — 0/4 across all .md types"
+			},
+			"lab_evolution": {"post_lab_map": false, "note": "MISSING post-lab map", "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — dimensions beyond three. The edge of spatial perception.", "builds_on": ["proceduralgeneration"]},
+			"nature": {"element": "impossible_flower", "category": "plant"},
+			"capability": {"perception": "dimensional_sense — see tesseracts, 16-cell nets, projection from higher space"},
+			"application": {"work_package": "WP4", "book_ready": false, "wiki_ready": false}
+		},
+		"grammar_systems": {
+			"branches_from": "proceduralgeneration",
+			"maps": {"count": 3, "status": "complete"},
+			"algorithms": {"note": "Within proceduralgeneration/", "status": "complete"},
+			"text": {
+				"blurb": {"have": 1, "of": 3, "missing": "2 maps"},
+				"summary": {"have": 1, "of": 3, "missing": "2 maps"},
+				"technical": {"have": 1, "of": 3, "missing": "2 maps"},
+				"critical": {"have": 1, "of": 3, "missing": "2 maps"},
+				"status": "partial"
+			},
+			"lab_evolution": {"post_lab_map": false, "note": "MISSING post-lab map", "status": "missing"},
+			"qfep": {"phase": "lambda_edge", "contribution": "λ — generative grammar at the edge of language and structure", "builds_on": ["proceduralgeneration", "lsystems"]},
+			"nature": {"element": "branching_coral", "category": "plant"},
+			"capability": {"perception": "grammar_sense — see Markov chains, n-grams, probabilistic generation"},
+			"application": {"work_package": "WP3", "book_ready": false, "wiki_ready": false}
+		}
+	},
+	"tombstone_sequences": {
+		"_note": "These sequence files exist but contain no active maps — merged or absorbed into other sequences",
+		"vectors": {"merged_into": "forces", "date": "2026-02-20", "maps_moved_to": "forces"},
+		"morphogenesis": {"absorbed_into": "softbodies", "maps_moved": ["ProceduralGeneration_Reaction_Diffusion_Systems", "Topology_Entropy_Morphogenesis"]},
+		"criticalalgorithms": {"status": "deferred", "real_map_moved_to": "postfoundationscrisis", "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization"},
+		"speculativecomputation": {"status": "deferred", "real_map_moved_to": "postfoundationscrisis", "map": "SpeculativeComputation_Rhizome_Network"},
+		"advancedlaboratory": {"status": "deferred", "real_map_moved_to": "postfoundationscrisis", "map": "AdvancedLaboratory_Lab_Equipment_Simulation"}
+	},
+	"legacy_gd_audit": {
+		"_note": "105 .gd axiom files audited. These are DEAD CODE — not referenced at runtime. Per-map .md files are the active text system.",
+		"total_files": 105,
+		"covered_by_md": 58,
+		"partially_covered": 7,
+		"unique_content": 40,
+		"tier_1_priority": {
+			"description": "Rich, original philosophical/creative content not in any .md file",
+			"files": [
+				"perception_axioms.gd — queer ontology of vision, tetrachromacy/dichromacy, plural perception",
+				"magenta_axioms.gd — the impossible color, non-spectral hue fabrication",
+				"ca_universe_axioms.gd — Wolfram's universe-as-CA thesis, computational irreducibility",
+				"strange_attractors_axioms.gd — Lorenz/Rossler/Clifford chaos with full code",
+				"self_organized_criticality_axioms.gd — sandpile model, power laws, edge of chaos",
+				"vitruvian_axioms.gd — Da Vinci proportions, Fourier Body, body politics",
+				"glitch_axioms.gd — error as art, digital materiality",
+				"collided_iq_axioms.gd — human-AI intelligence as vector interference",
+				"music_formalism_axioms.gd — Hilbert Program mapped to generative music",
+				"cables_axioms.gd — catenary physics, Verlet cable simulation"
+			]
+		},
+		"tier_2_uncovered_subseries": {
+			"description": "Coherent 8-9 file sub-sequence on advanced wave physics / sound synthesis with ZERO .md coverage",
+			"files": [
+				"electromagnetic_spectrum_axioms.gd",
+				"frequency_domains_axioms.gd",
+				"harmonic_series_axioms.gd",
+				"additive_synthesis_axioms.gd",
+				"beat_frequencies_axioms.gd",
+				"harmonic_builder_axioms.gd",
+				"spherical_harmonics_axioms.gd",
+				"wave_desire_axioms.gd",
+				"audio_reactivity_axioms.gd"
+			]
+		},
+		"tier_3_algorithm_tutorials": {
+			"description": "Self-contained CS/algorithm tutorials with code — migrate when corresponding maps are created",
+			"count": 18,
+			"examples": ["steering_behaviors_axioms.gd", "recursion_axioms.gd", "bezier_curves_axioms.gd", "ray_marching_axioms.gd", "dynamic_programming_axioms.gd", "pca_axioms.gd"]
+		}
+	},
+	"gap_summary": {
+		"_note": "Computed from audit data 2026-02-22. These are the actionable gaps.",
+		"text_gaps_by_priority": {
+			"description": "Sequences where book/wiki readiness is BLOCKED. Ordered by map count (biggest gaps first).",
+			"critical_zero_coverage": [
+				{"sequence": "forces", "maps": 24, "has_blurb": 21, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "patterngeneration", "maps": 18, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "structure", "maps": 16, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "physicssimulation", "maps": 21, "has_blurb": 5, "has_summary": 5, "has_technical": 5, "has_critical": 5},
+				{"sequence": "isosurfaces", "maps": 16, "has_blurb": 2, "has_summary": 2, "has_technical": 2, "has_critical": 2},
+				{"sequence": "wavefunctions", "maps": 12, "has_blurb": 8, "has_summary": 1, "has_technical": 0, "has_critical": 0},
+				{"sequence": "cellularautomata", "maps": 12, "has_blurb": 12, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "datastructures", "maps": 12, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "recursiveemergence", "maps": 11, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "computationalgeometry", "maps": 11, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "softbodies", "maps": 10, "has_blurb": 1, "has_summary": 1, "has_technical": 1, "has_critical": 1},
+				{"sequence": "noise", "maps": 9, "has_blurb": 8, "has_summary": 1, "has_technical": 1, "has_critical": 1},
+				{"sequence": "proceduralaudio", "maps": 8, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "qfeplaboratory", "maps": 8, "has_blurb": 8, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "lsystems", "maps": 7, "has_blurb": 3, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "swarmintelligence", "maps": 7, "has_blurb": 7, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "foundationscrisis", "maps": 7, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "array_tutorial", "maps": 7, "has_blurb": 1, "has_summary": 1, "has_technical": 0, "has_critical": 1},
+				{"sequence": "joints", "maps": 7, "has_blurb": 7, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "particles", "maps": 5, "has_blurb": 5, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "higher_dimensions", "maps": 4, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "meshes", "maps": 4, "has_blurb": 4, "has_summary": 0, "has_technical": 0, "has_critical": 0},
+				{"sequence": "postfoundationscrisis", "maps": 3, "has_blurb": 0, "has_summary": 0, "has_technical": 0, "has_critical": 1}
+			],
+			"total_missing_md_files": {
+				"blurb": "~75 maps need blurb.md",
+				"summary": "~177 maps need summary.md",
+				"technical": "~182 maps need technical.md",
+				"critical": "~178 maps need critical.md",
+				"total_md_files_needed": "~612 .md files to reach full coverage"
+			}
+		},
+		"book_ready_sequences": ["primitives", "transformation", "fractals", "proceduralgeneration", "machinelearning", "graphtheory", "bricolage", "biological_growth"],
+		"wiki_ready_sequences": ["primitives", "transformation", "fractals", "proceduralgeneration", "machinelearning", "graphtheory", "bricolage", "biological_growth"],
+		"missing_post_lab_maps": [
+			"spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "grammar_systems",
+			"particles", "joints", "bricolage", "biological_growth", "structure"
+		],
+		"anomalous_post_lab_maps": [
+			"cellularautomata — contains Lab_Post_Fractals data (wrong content)",
+			"meshes — contains Lab_Post_Array data (wrong content)",
+			"vectors — contains Lab_Post_Primitives data (wrong content)",
+			"geometric — contains Lab_Post_Array data (wrong content)"
+		],
+		"missing_artifact_registries": ["primitives", "noise", "fractals", "swarmintelligence", "graphtheory", "postfoundationscrisis"],
+		"deferred_sequences": [
+			"searchpathfinding — 7 placeholder maps, needs real content",
+			"resourcemanagement — 6 placeholder maps, needs real content"
+		],
+		"missing_algorithm_directories": [
+			"foundationscrisis — no dedicated dir (uses alternativegeometries/, criticaltheory/)",
+			"qfeplaboratory — no dedicated dir (uses chaos/ + various)",
+			"resourcemanagement — no dedicated dir"
+		],
+		"unassigned_sequences": ["bricolage", "biological_growth", "structure — not connected to curriculum_spine.json branch graph"],
+		"nature_status": "All spine + major branch sequences have nature entries. 5 procgen sub-branches now have entries. Runtime LabNatureLayer.gd not yet built.",
+		"capability_status": "All spine + major branch sequences have capability triples. 5 procgen sub-branches now have entries. Runtime PlayerCapabilities.gd not yet built.",
+		"legacy_gd_status": "105 files audited: 58 covered, 7 partial, 40 unique. Tier 1 (10 philosophical) and Tier 2 (9 wave/sound) are highest migration priority."
+	}
+}
