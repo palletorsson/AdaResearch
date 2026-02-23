@@ -127,6 +127,19 @@
 				"transformation"
 			],
 			"sequence": "transformation"
+		},
+		"homogeneous_coordinates": {
+			"name": "Homogeneous Coordinates",
+			"lookup_name": "homogeneous_coordinates",
+			"description": "Wall panel explaining why 4x4 matrices are used in 3D. Shows a color-coded 4x4 homogeneous transformation matrix: rotation/scale (blue), translation (green), projection (red), homogeneous row (gray). Demonstrates [x,y,z,1] → [x',y',z',1] via matrix multiplication with a 3D coordinate frame.",
+			"scene": "res://commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.tscn",
+			"category": "transforms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		}
 	}
 }
