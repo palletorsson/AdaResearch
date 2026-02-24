@@ -42,8 +42,15 @@ var _planet: MeshInstance3D
 var _satellite: MeshInstance3D
 var _velocity_arrow: Node3D
 var _trail_mesh: MeshInstance3D
+var _trail_immediate: ImmediateMesh
+var _trail_mat: StandardMaterial3D
 var _info_label: Label3D
 var _control_panel: Node3D
+var _time_slider: Node
+
+# Throttle info updates
+var _info_update_timer: float = 0.0
+const INFO_UPDATE_INTERVAL: float = 0.1
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
@@ -64,7 +71,7 @@ func _create_planet():
 	sphere.radius = planet_radius
 	sphere.height = planet_radius * 2
 	_planet.mesh = sphere
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color_planet
 	mat.emission_enabled = true
@@ -72,7 +79,7 @@ func _create_planet():
 	mat.emission_energy_multiplier = 0.4
 	_planet.material_override = mat
 	add_child(_planet)
-	
+
 	# Add rings for reference
 	var ring = MeshInstance3D.new()
 	ring.name = "ReferenceRing"
@@ -81,7 +88,7 @@ func _create_planet():
 	torus.outer_radius = initial_radius + 0.005
 	ring.mesh = torus
 	ring.rotation_degrees.x = 90
-	
+
 	var ring_mat = StandardMaterial3D.new()
 	ring_mat.albedo_color = Color(0.3, 0.3, 0.4, 0.3)
 	ring_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -95,7 +102,7 @@ func _create_satellite():
 	sphere.radius = satellite_radius
 	sphere.height = satellite_radius * 2
 	_satellite.mesh = sphere
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color_satellite
 	mat.emission_enabled = true
@@ -107,7 +114,7 @@ func _create_satellite():
 func _create_velocity_arrow():
 	_velocity_arrow = Node3D.new()
 	_velocity_arrow.name = "VelocityArrow"
-	
+
 	var shaft = MeshInstance3D.new()
 	shaft.name = "Shaft"
 	var cylinder = CylinderMesh.new()
@@ -115,7 +122,7 @@ func _create_velocity_arrow():
 	cylinder.bottom_radius = 0.004
 	cylinder.height = 0.1
 	shaft.mesh = cylinder
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color_velocity
 	mat.emission_enabled = true
@@ -124,7 +131,7 @@ func _create_velocity_arrow():
 	shaft.material_override = mat
 	shaft.position = Vector3(0, 0.05, 0)
 	_velocity_arrow.add_child(shaft)
-	
+
 	var head = MeshInstance3D.new()
 	head.name = "Head"
 	var cone = CylinderMesh.new()
@@ -135,12 +142,23 @@ func _create_velocity_arrow():
 	head.material_override = mat
 	head.position = Vector3(0, 0.1125, 0)
 	_velocity_arrow.add_child(head)
-	
+
 	add_child(_velocity_arrow)
 
 func _create_trail():
 	_trail_mesh = MeshInstance3D.new()
 	_trail_mesh.name = "OrbitTrail"
+
+	# Pre-create reusable mesh and material
+	_trail_immediate = ImmediateMesh.new()
+	_trail_mesh.mesh = _trail_immediate
+
+	_trail_mat = StandardMaterial3D.new()
+	_trail_mat.vertex_color_use_as_albedo = true
+	_trail_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_trail_mesh.material_override = _trail_mat
+
 	add_child(_trail_mesh)
 
 func _create_labels():
@@ -158,7 +176,7 @@ func _create_vr_controls():
 	_control_panel.position = Vector3(0, -0.1, 0.35)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
+
 	# Panel
 	var panel_back = MeshInstance3D.new()
 	var panel_mesh = BoxMesh.new()
@@ -170,7 +188,7 @@ func _create_vr_controls():
 	panel_back.material_override = panel_mat
 	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
-	
+
 	# Orbit preset buttons
 	var presets = [
 		["CIRCULAR", 0.3, 1.29],  # v = sqrt(GM/r)
@@ -178,7 +196,7 @@ func _create_vr_controls():
 		["ESCAPE", 0.25, 2.0],
 		["DECAY", 0.35, 0.9]
 	]
-	
+
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
@@ -186,27 +204,32 @@ func _create_vr_controls():
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
-		
+
 		var r = presets[i][1]
 		var v = presets[i][2]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _set_orbit(r, v))
-	
-	# Time scale slider
-	var time_slider = SLIDER_HORIZONTAL.instantiate()
-	time_slider.name = "TimeSlider"
-	time_slider.position = Vector3(0, -0.03, 0)
-	time_slider.rotation_degrees.x = -30
-	time_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var time_label = time_slider.get_node_or_null("Frame/LabelName")
-	if time_label:
-		time_label.text = "SPEED"
-	_control_panel.add_child(time_slider)
-	time_slider.slider_moved.connect(func(_pos):
-		if time_slider.has_method("get_normalized_value"):
-			time_scale = 0.1 + time_slider.get_normalized_value() * 4.9
-	)
+		# Connect to the push_button's own "pressed" signal (not internal InteractableAreaButton)
+		btn.pressed.connect(func(): _set_orbit(r, v))
+
+	# Time scale slider — add to tree first, then configure via API
+	_time_slider = SLIDER_HORIZONTAL.instantiate()
+	_time_slider.name = "TimeSlider"
+	_time_slider.position = Vector3(0, -0.03, 0)
+	_time_slider.rotation_degrees.x = -30
+	_time_slider.scale = Vector3(0.8, 0.8, 0.8)
+	_control_panel.add_child(_time_slider)
+
+	# Configure slider using its public API (after it's in the tree)
+	if _time_slider.has_method("set_param_name"):
+		_time_slider.set_param_name("SPEED")
+	if _time_slider.has_method("set_range"):
+		_time_slider.set_range(0.1, 5.0)
+	if _time_slider.has_method("set_normalized_value"):
+		_time_slider.set_normalized_value(0.18)  # ~1.0x default
+	_time_slider.slider_moved.connect(_on_time_slider_changed)
+
+func _on_time_slider_changed(_pos) -> void:
+	if _time_slider and _time_slider.has_method("get_normalized_value"):
+		time_scale = lerpf(0.1, 5.0, _time_slider.get_normalized_value())
 
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()
@@ -228,91 +251,92 @@ func _reset_orbit():
 
 func _physics_process(delta):
 	var dt = delta * time_scale
-	
+
 	# Gravitational acceleration: a = -GM/r² * r̂
 	var r = _satellite_pos.length()
 	if r < planet_radius:
-		_reset_orbit()  # Crashed
+		_reset_orbit()  # Crashed into planet
 		return
-	
+
 	var r_hat = _satellite_pos.normalized()
 	var accel = -gravitational_constant * central_mass / (r * r) * r_hat
-	
+
 	# Velocity Verlet integration
 	var new_pos = _satellite_pos + _satellite_vel * dt + 0.5 * accel * dt * dt
-	
+
 	var new_r = new_pos.length()
+	if new_r < 0.001:
+		_reset_orbit()
+		return
 	var new_r_hat = new_pos.normalized()
 	var new_accel = -gravitational_constant * central_mass / (new_r * new_r) * new_r_hat
-	
+
 	_satellite_vel += 0.5 * (accel + new_accel) * dt
 	_satellite_pos = new_pos
-	
-	# Escape detection
+
+	# Escape detection — reset if satellite flies too far away
 	if r > 2.0:
-		# Reset if too far
-		pass
-	
+		_reset_orbit()
+		return
+
 	# Update visuals
 	_satellite.position = _satellite_pos
 	_update_velocity_arrow()
 	_update_trail()
-	_update_info()
+
+	# Throttle info label updates
+	_info_update_timer += delta
+	if _info_update_timer >= INFO_UPDATE_INTERVAL:
+		_info_update_timer = 0.0
+		_update_info()
 
 func _update_velocity_arrow():
 	_velocity_arrow.position = _satellite_pos
-	
+
+	var vel_dir = _satellite_vel.normalized()
 	var vel_mag = _satellite_vel.length()
-	var scale = clampf(vel_mag * 0.08, 0.05, 0.2)
-	_velocity_arrow.scale = Vector3(1, scale / 0.1, 1)
-	
-	# Orient along velocity
+	var arrow_scale = clampf(vel_mag * 0.08, 0.05, 0.2)
+	_velocity_arrow.scale = Vector3(1, arrow_scale / 0.1, 1)
+
+	# Orient arrow along velocity direction using basis
 	if vel_mag > 0.001:
-		var target_pos = _velocity_arrow.global_position + _satellite_vel
-		if _velocity_arrow.global_position.distance_squared_to(target_pos) > 0.0001:
-			var up = Vector3.UP
-			if abs(_satellite_vel.normalized().dot(up)) > 0.99:
-				up = Vector3.FORWARD
-			_velocity_arrow.look_at(target_pos, up)
-			_velocity_arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
+		var up = Vector3.UP
+		if absf(vel_dir.dot(up)) > 0.99:
+			up = Vector3.FORWARD
+		var basis = Basis.looking_at(vel_dir, up)
+		# CylinderMesh points along +Y, so rotate from -Z (looking_at forward) to +Y
+		_velocity_arrow.basis = basis * Basis(Vector3.RIGHT, PI / 2.0)
 
 func _update_trail():
 	_trail.append(_satellite_pos)
 	while _trail.size() > trail_length:
 		_trail.remove_at(0)
-	
+
 	if _trail.size() < 2:
 		return
-	
-	# Build trail mesh
-	var immediate_mesh = ImmediateMesh.new()
-	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+
+	# Reuse the existing ImmediateMesh — clear and rebuild
+	_trail_immediate.clear_surfaces()
+	_trail_immediate.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+
 	for i in range(_trail.size()):
 		var alpha = float(i) / float(_trail.size())
-		immediate_mesh.surface_set_color(Color(color_orbit.r, color_orbit.g, color_orbit.b, alpha * 0.6))
-		immediate_mesh.surface_add_vertex(_trail[i])
-	
-	immediate_mesh.surface_end()
-	_trail_mesh.mesh = immediate_mesh
-	
-	var mat = StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	_trail_mesh.material_override = mat
+		_trail_immediate.surface_set_color(Color(color_orbit.r, color_orbit.g, color_orbit.b, alpha * 0.6))
+		_trail_immediate.surface_add_vertex(_trail[i])
+
+	_trail_immediate.surface_end()
 
 func _update_info():
 	var r = _satellite_pos.length()
 	var v = _satellite_vel.length()
-	
+
 	# Specific orbital energy: E = v²/2 - GM/r
-	var energy = 0.5 * v * v - gravitational_constant * central_mass / r
+	var energy = 0.5 * v * v - gravitational_constant * central_mass / maxf(r, 0.001)
 	var orbit_type = "ELLIPSE" if energy < 0 else ("PARABOLA" if energy < 0.01 else "HYPERBOLA")
-	
+
 	# Angular momentum
 	var h = _satellite_pos.cross(_satellite_vel).length()
-	
+
 	_info_label.text = "ORBITAL MECHANICS\nr=%.3f v=%.3f E=%.3f\n%s  L=%.3f" % [r, v, energy, orbit_type, h]
 
 func _input(event):
