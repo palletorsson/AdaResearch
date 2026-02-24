@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://d31t45rigq080" path="res://commons/scenes/mapobjects/MapInfoLabel.gd" id="25_mapinfo"]
 [ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="30_wall_walk"]
 [ext_resource type="Script" uid="uid://qlvmq6ji5udp" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
+[ext_resource type="Script" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -198,3 +199,6 @@ particle_density = -0.98
 script = ExtResource("19_bounds")
 
 [node name="EntryZone" type="Node3D" parent="." index="7" unique_id=2098305078]
+
+[node name="OversightVoiceBridge" type="Node" parent="." index="8"]
+script = ExtResource("32_voice_bridge")

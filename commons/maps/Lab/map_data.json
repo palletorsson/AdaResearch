@@ -1,112 +1,112 @@
 {
   "map_info": {
-    "name": "Lab",
-    "description": "Central Science Lab - Hub for algorithmic exploration",
-    "version": "2.0",
-    "format": "json_lab",
-    "dimensions": {
-      "width": 23,
-      "depth": 22,
-      "max_height": 6
-    },
-    "metadata": {
-      "difficulty": "hub",
-      "category": "laboratory",
-      "estimated_time": "exploration based",
-      "learning_objectives": [ "Central hub for all learning sequences", "Progressive artifact discovery", "Interactive lab environment" ]
-    }
+	"name": "Lab",
+	"description": "Central Science Lab - Hub for algorithmic exploration",
+	"version": "2.0",
+	"format": "json_lab",
+	"dimensions": {
+	  "width": 23,
+	  "depth": 22,
+	  "max_height": 6
+	},
+	"metadata": {
+	  "difficulty": "hub",
+	  "category": "laboratory",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": [ "Central hub for all learning sequences", "Progressive artifact discovery", "Interactive lab environment" ]
+	}
   },
   "layers": {
-    "structure": [
-      [ "6", "1", "6", "6", "6", "6", "6", "6", "6", "6" ],
-      [ "6", "1", "1", "1", "1", "1", "2", "2", "0", "6" ],
-      [ "6", "1", "2", "0", "1", "1", "2", "2", "2", "6" ],
-      [ "6", "1", "2", "1", "1", "1", "6", "3", "3", "6" ],
-      [ "6", "1", "0", "1", "1", "1", "3", "3", "3", "6" ],
-      [ "6", "1", "1", "1", "1", "1", "3", "4", "0", "6" ],
-      [ "6", "1", "6", "3", "3", "3", "6", "6", "6", "6" ],
-      [ "6", "6", "6", "6", "6", "6", "6", "6", "6", "6" ]
-    ],
-    "utilities": [
-      [ " ", "m:0.1", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", "t:transformation", " " ],
-      [ " ", " ", " ", "t:array_tutorial", "sub:Lab_One_Info", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "t:primitives", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", "t:color", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", "", " ", "rotating_cube:0:1:0.2", " " ],
-      [ " ", " ", "living_paper:180#algorithm:mandelbrot", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "cube_lines", "light_sphere", "vr_component_demo:180:1", " ", " ", " ", "rainbow:90:0:0.05", " " ],
-      [ " ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
-    ]
+	"structure": [
+	  [ "6", "1", "6", "6", "6", "6", "6", "6", "6", "6" ],
+	  [ "6", "1", "1", "1", "1", "1", "2", "2", "0", "6" ],
+	  [ "6", "1", "2", "0", "1", "1", "2", "2", "2", "6" ],
+	  [ "6", "1", "2", "1", "1", "1", "6", "3", "3", "6" ],
+	  [ "6", "1", "0", "1", "1", "1", "3", "3", "3", "6" ],
+	  [ "6", "1", "1", "1", "1", "1", "3", "4", "0", "6" ],
+	  [ "6", "1", "6", "3", "3", "3", "6", "6", "6", "6" ],
+	  [ "6", "6", "6", "6", "6", "6", "6", "6", "6", "6" ]
+	],
+	"utilities": [
+	  [ " ", "m:0.1", " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", "t:transformation", " " ],
+	  [ " ", " ", " ", "t:array_tutorial", "sub:Lab_One_Info", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", "t:primitives", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", "t:color", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+	],
+	"interactables": [
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", "", " ", "rotating_cube:0:1:0.2", " " ],
+	  [ " ", " ", "living_paper:180#algorithm:mandelbrot", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", "cube_lines", "light_sphere", "vr_component_demo:180:1", " ", " ", " ", "rainbow:90:0:0.05", " " ],
+	  [ " ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+	]
   },
   "subtitles": {
-    "Lab_One_Info": " Find First Simulation. "
+	"Lab_One_Info": " Find First Simulation. "
   },
   "external_references": {
-    "artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json" ],
-    "utility_registry": "res://commons/utilities/utility_registry.json",
-    "fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
+	"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json" ],
+	"utility_registry": "res://commons/utilities/utility_registry.json",
+	"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
   },
   "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Sequence Portal",
-      "description": "Portal to learning sequences"
-    }
+	"t": {
+	  "type": "teleporter",
+	  "name": "Sequence Portal",
+	  "description": "Portal to learning sequences"
+	}
   },
   "spawn_points": {
-    "default": {
-      "position": [ 0.6, 1.8, 1.0 ],
-      "rotation": [ 0.0, 180.0, 0.0 ],
-      "description": "Facing newest wing"
-    }
+	"default": {
+	  "position": [ 0.6, 1.8, 1.0 ],
+	  "rotation": [ 0.0, 180.0, 0.0 ],
+	  "description": "Facing newest wing"
+	}
   },
   "lighting": {
-    "ambient_color": [ 0.2, 0.2, 0.3 ],
-    "ambient_energy": 0.2,
-    "directional_light": {
-      "enabled": true,
-      "direction": [ -0.3, -0.8, -0.2 ],
-      "color": [ 1.0, 0.9, 0.8 ],
-      "energy": 0.6
-    },
-    "lab_atmosphere": {
-      "mood": "brightening_discovery"
-    }
+	"ambient_color": [ 0.2, 0.2, 0.3 ],
+	"ambient_energy": 0.2,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [ -0.3, -0.8, -0.2 ],
+	  "color": [ 1.0, 0.9, 0.8 ],
+	  "energy": 0.6
+	},
+	"lab_atmosphere": {
+	  "mood": "brightening_discovery"
+	}
   },
   "settings": {
-    "enter_type": "corridor",
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": false,
-    "enable_physics": true,
-    "lab_mode": true,
-    "progression_state": "post_proceduralgeneration",
-    "progression": {
-      "enable_artifact_unlocking": true,
-      "save_progression": true,
-      "initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
-      "unlock_on_sequence_completion": true
-    },
-    "ceiling": {
-      "preset": "office",
-      "height": 5.5,
-      "size_x": 9.0,
-      "size_z": 8.0,
-      "offset_x": 0.0,
-      "offset_z": 0.0,
-      "light_spacing": 3,
-      "light_intensity": 1.2,
-      "pattern": "sparse"
-    }
+	"enter_type": "corridor",
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": false,
+	"enable_physics": true,
+	"lab_mode": true,
+	"progression_state": "post_proceduralgeneration",
+	"progression": {
+	  "enable_artifact_unlocking": true,
+	  "save_progression": true,
+	  "initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
+	  "unlock_on_sequence_completion": true
+	},
+	"ceiling": {
+	  "preset": "office",
+	  "height": 5.5,
+	  "size_x": 9.0,
+	  "size_z": 8.0,
+	  "offset_x": 0.0,
+	  "offset_z": 0.0,
+	  "light_spacing": 3,
+	  "light_intensity": 1.2,
+	  "pattern": "sparse"
+	}
   }
 }

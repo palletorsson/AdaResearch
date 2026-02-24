@@ -2,7 +2,7 @@ extends Node
 
 @export var enabled: bool = true
 @export var oversight_base_url: String = "http://localhost:3001"
-@export var voice_endpoint: String = "/api/voice"
+@export var voice_endpoint: String = "/api/audio" # Use "/api/voice" for direct retry/create without manual editing.
 @export var push_to_talk_action: StringName = &"oversight_push_to_talk"
 @export var secondary_push_to_talk_action: StringName = &"vr_button_a"
 @export var default_mode: String = "auto" # auto | retry | create
@@ -14,6 +14,10 @@ extends Node
 @export var scene_hint: String = ""
 @export var min_recording_seconds: float = 0.25
 @export var max_recording_seconds: float = 20.0
+@export var show_status_label: bool = true
+@export var status_label_distance: float = 0.55
+@export var status_label_height_offset: float = -0.16
+@export var status_label_lifetime: float = 3.0
 
 const RECORD_BUS_NAME := "OversightMicCapture"
 const RECORD_FILE_PATH := "user://oversight_voice/latest_debug.wav"
@@ -27,12 +31,22 @@ var _record_effect: AudioEffectRecord
 var _mic_player: AudioStreamPlayer
 var _is_recording := false
 var _record_start_msec := 0
+var _status_label: Label3D
+var _status_hide_at_msec := 0
 
 func _ready() -> void:
+	print("OversightVoiceBridge: ready (enabled=%s, base_url=%s, push_action=%s, secondary_action=%s)" % [
+		enabled,
+		oversight_base_url,
+		push_to_talk_action,
+		secondary_push_to_talk_action
+	])
 	_ensure_input_action()
 	_setup_recording_pipeline()
+	if show_status_label:
+		call_deferred("_setup_status_label")
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not enabled:
 		return
 
@@ -44,15 +58,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		_stop_and_dispatch()
 
 func _process(_delta: float) -> void:
-	if not _is_recording:
-		return
+	if _is_recording and max_recording_seconds > 0:
+		var elapsed_sec := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
+		if elapsed_sec >= max_recording_seconds:
+			_stop_and_dispatch()
 
-	if max_recording_seconds <= 0:
-		return
-
-	var elapsed_sec := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
-	if elapsed_sec >= max_recording_seconds:
-		_stop_and_dispatch()
+	if _status_label and _status_label.visible and _status_hide_at_msec > 0:
+		if Time.get_ticks_msec() >= _status_hide_at_msec:
+			_status_label.visible = false
+			_status_hide_at_msec = 0
 
 func send_transcript(transcript: String, extra: Dictionary = {}) -> void:
 	var clean := transcript.strip_edges()
@@ -106,6 +120,46 @@ func _event_is_action_pressed(event: InputEvent, action_name: StringName) -> boo
 		return false
 	return true
 
+func _setup_status_label() -> void:
+	if not show_status_label:
+		return
+	var scene := get_tree().current_scene
+	if scene == null:
+		return
+	var camera := scene.find_child("XRCamera3D", true, false) as Node3D
+	if camera == null:
+		return
+	if camera.get_node_or_null("OversightVoiceStatus"):
+		_status_label = camera.get_node("OversightVoiceStatus") as Label3D
+	else:
+		_status_label = Label3D.new()
+		_status_label.name = "OversightVoiceStatus"
+		_status_label.position = Vector3(0.18, status_label_height_offset, -status_label_distance)
+		_status_label.pixel_size = 0.001
+		_status_label.font_size = 42
+		_status_label.outline_size = 4
+		_status_label.no_depth_test = true
+		_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_status_label.visible = false
+		camera.add_child(_status_label)
+	_set_status("Voice bridge ready", Color(0.6, 0.9, 1.0, 1.0), 2.0)
+
+func _set_status(message: String, color: Color = Color(1, 1, 1, 1), lifetime_sec: float = -1.0) -> void:
+	if not show_status_label:
+		return
+	if _status_label == null:
+		_setup_status_label()
+	if _status_label == null:
+		return
+	_status_label.text = message
+	_status_label.modulate = color
+	_status_label.visible = true
+	var duration := lifetime_sec if lifetime_sec >= 0 else status_label_lifetime
+	if duration > 0:
+		_status_hide_at_msec = Time.get_ticks_msec() + int(duration * 1000.0)
+	else:
+		_status_hide_at_msec = 0
+
 func _setup_recording_pipeline() -> void:
 	var bus_index := _ensure_record_bus()
 	_record_effect = _find_or_add_record_effect(bus_index)
@@ -151,6 +205,7 @@ func _start_recording() -> void:
 	_record_effect.set_recording_active(true)
 	emit_signal("voice_recording_started")
 	print("OversightVoiceBridge: recording started")
+	_set_status("REC", Color(1.0, 0.25, 0.25, 1.0), 0.0)
 
 func _stop_and_dispatch() -> void:
 	if not _is_recording:
@@ -165,9 +220,11 @@ func _stop_and_dispatch() -> void:
 
 	var duration_sec := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
 	emit_signal("voice_recording_stopped", duration_sec)
+	_set_status("Sending...", Color(1.0, 0.85, 0.3, 1.0), 8.0)
 
 	if duration_sec < min_recording_seconds:
 		print("OversightVoiceBridge: recording ignored (%.2fs < %.2fs)" % [duration_sec, min_recording_seconds])
+		_set_status("Ignored: too short", Color(1.0, 0.7, 0.25, 1.0), 2.5)
 		return
 
 	var stream := _record_effect.get_recording()
@@ -187,6 +244,7 @@ func _stop_and_dispatch() -> void:
 	if save_err != OK:
 		_emit_fail("Failed to save WAV: %s" % error_string(save_err))
 		return
+	print("OversightVoiceBridge: saved recording to %s" % RECORD_FILE_PATH)
 
 	var file := FileAccess.open(RECORD_FILE_PATH, FileAccess.READ)
 	if file == null:
@@ -241,6 +299,7 @@ func _send_payload(payload: Dictionary) -> void:
 		return
 
 	print("OversightVoiceBridge: sent voice payload to %s" % url)
+	_set_status("Upload sent", Color(0.75, 0.85, 1.0, 1.0), 3.0)
 
 func _on_request_completed(
 	result: int,
@@ -268,7 +327,9 @@ func _on_request_completed(
 		emit_signal("voice_dispatch_succeeded", {"raw": text})
 
 	print("OversightVoiceBridge: dispatch complete (%d)" % response_code)
+	_set_status("Sent to Oversight", Color(0.45, 1.0, 0.45, 1.0), 3.0)
 
 func _emit_fail(message: String) -> void:
 	push_warning("OversightVoiceBridge: %s" % message)
 	emit_signal("voice_dispatch_failed", message)
+	_set_status("Voice error", Color(1.0, 0.35, 0.35, 1.0), 6.0)

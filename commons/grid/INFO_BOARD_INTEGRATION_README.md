@@ -17,11 +17,11 @@ This document describes the integration of info boards (`ib:vectors`, `ib:forces
 **New Utility Type**:
 ```gdscript
 "ib": {
-    "name": "info_board_handheld",
-    "file": "",
-    "category": "educational",
-    "description": "Handheld 3D info board for algorithm education (ib:randomwalk, ib:vectors, ib:forces, etc.)",
-    "supports_parameters": true  # board_type, height_offset
+	"name": "info_board_handheld",
+	"file": "",
+	"category": "educational",
+	"description": "Handheld 3D info board for algorithm education (ib:randomwalk, ib:vectors, ib:forces, etc.)",
+	"supports_parameters": true  # board_type, height_offset
 }
 ```
 
@@ -53,9 +53,9 @@ This document describes the integration of info boards (`ib:vectors`, `ib:forces
 ```json
 {
   "utilities": [
-    ["ib:vectors", " ", "ib:forces"],
-    [" ", "ib:randomwalk", " "],
-    ["t:next", " ", "l:2.0"]
+	["ib:vectors", " ", "ib:forces"],
+	[" ", "ib:randomwalk", " "],
+	["t:next", " ", "l:2.0"]
   ]
 }
 ```
@@ -64,9 +64,9 @@ This document describes the integration of info boards (`ib:vectors`, `ib:forces
 ```json
 {
   "utilities": [
-    ["ib:vectors:1.5", " ", "ib:forces:0.5"],
-    [" ", "ib:randomwalk:2.0", " "],
-    ["t:next", " ", "l:2.0"]
+	["ib:vectors:1.5", " ", "ib:forces:0.5"],
+	[" ", "ib:randomwalk:2.0", " "],
+	["t:next", " ", "l:2.0"]
   ]
 }
 ```
@@ -75,9 +75,9 @@ This document describes the integration of info boards (`ib:vectors`, `ib:forces
 ```json
 {
   "utilities": [
-    ["ib:vectors", "t:next", "ib:forces:1.5"],
-    ["l:3.0", "ib:randomwalk", "sp:100"],
-    [" ", " ", "ib:unitcircle:0.5"]
+	["ib:vectors", "t:next", "ib:forces:1.5"],
+	["l:3.0", "ib:randomwalk", "sp:100"],
+	[" ", " ", "ib:unitcircle:0.5"]
   ]
 }
 ```
@@ -176,9 +176,9 @@ commons/infoboards_3d/
 │   ├── InfoBoardComponent.gd        # Info board component
 │   └── InfoBoardRegistry.gd         # Board type registry
 └── boards/
-    ├── Vectors/                     # Vectors info board
-    ├── Forces/                      # Forces info board
-    └── RandomWalk/                  # Random walk info board
+	├── Vectors/                     # Vectors info board
+	├── Forces/                      # Forces info board
+	└── RandomWalk/                  # Random walk info board
 ```
 
 ## Benefits

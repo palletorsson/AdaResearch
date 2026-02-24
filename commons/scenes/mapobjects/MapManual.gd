@@ -585,9 +585,9 @@ func _connect_controller_signals() -> void:
 		if not right_controller.button_pressed.is_connected(_on_controller_button_pressed):
 			right_controller.button_pressed.connect(_on_controller_button_pressed.bind(right_controller))
 
-func _on_controller_button_pressed(button: String, _controller: XRController3D) -> void:
-	# Toggle on X button (ax_button)
-	if button == "ax_button":
+func _on_controller_button_pressed(button: String, controller: XRController3D) -> void:
+	# Toggle only from left-hand AX button (X on Quest) so right-hand A stays free.
+	if button == "ax_button" and controller and controller.tracker == &"left_hand":
 		toggle_manual()
 
 func _input(event: InputEvent) -> void:
