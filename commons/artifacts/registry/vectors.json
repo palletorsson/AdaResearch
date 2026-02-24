@@ -615,6 +615,38 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"vector_field_visualizer": {
+			"lookup_name": "vector_field_visualizer",
+			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
+			"class_name": "VectorFieldVisualizer",
+			"name": "Vector Field Visualizer",
+			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
+			"dev_themes": [
+				"vectors",
+				"fields",
+				"visualization"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"vector_field",
+				"flow",
+				"vortex",
+				"dipole",
+				"source",
+				"sink",
+				"arrows",
+				"3d",
+				"magnitude",
+				"direction"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"]
 		}
 	},
 	"sequence_mapping": {
@@ -636,7 +668,8 @@
 			"ball_dropper",
 			"turret_boll_infoboard",
 			"basis_vectors_rig",
-			"vector_joint_playground"
+			"vector_joint_playground",
+			"vector_field_visualizer"
 		],
 		"all_vectors": [
 			"vector_addition_demo",
@@ -652,7 +685,8 @@
 			"ball_dropper",
 			"turret_boll_infoboard",
 			"basis_vectors_rig",
-			"vector_joint_playground"
+			"vector_joint_playground",
+			"vector_field_visualizer"
 		]
 	},
 	"theoretical_connections": {
@@ -671,7 +705,8 @@
 			"turret_targeting",
 			"laser_turret",
 			"ball_dropper",
-			"turret_boll_infoboard"
+			"turret_boll_infoboard",
+			"vector_field_visualizer"
 		],
 		"coordinate_systems": [
 			"basis_vectors_rig",
