@@ -116,6 +116,7 @@ Gate toggle file used by dashboard + tooling:
 | Document | Purpose |
 |----------|---------|
 | [ENTRY.md](ENTRY.md) | **Start here** — Project entry point |
+| [MAP_AGENT_ONBOARDING.md](MAP_AGENT_ONBOARDING.md) | Fast AI-agent quickstart (context + CLI tools) |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Technical system reference |
 | [TAXONOMY.md](TAXONOMY.md) | Generative paradigms framework |
 | [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |

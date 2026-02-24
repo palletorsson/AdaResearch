@@ -1,13 +1,9 @@
 {
 	"sequences": {
 		"structure": {
-			"name": "Structure Grammar: Spatial Formulas",
-			"truth": "Space is authored, not found. Every room is an argument.",
 			"description": "Individual spatial formula examples extracted from the Structure Examples showcase. Each map demonstrates one proven pattern from architecture and game design.",
-			"layer": "proceduralgeneration",
-			"prerequisites": [],
-			"unlocks": [],
 			"difficulty": "beginner",
+			"layer": "proceduralgeneration",
 			"maps": [
 				"F1_Pedestal",
 				"F2_Corridor",
@@ -25,7 +21,11 @@
 				"F31_Transport_Cube",
 				"F32_Teleporter",
 				"F33_Bridge"
-			]
+			],
+			"name": "Structure Grammar: Spatial Formulas",
+			"prerequisites": [],
+			"truth": "Space is authored, not found. Every room is an argument.",
+			"unlocks": []
 		}
 	}
 }

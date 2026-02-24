@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MapBrowser3D.tscn" id="2_browser"]
 [ext_resource type="Script" uid="uid://ccnvftjwyddwq" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
 [ext_resource type="Script" uid="uid://0qg3huie1ep7" path="res://commons/maps/catalog/MapDataEditorOverlay.gd" id="4_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="5_layer_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="6_dashboard"]
+[ext_resource type="Script" uid="uid://3fvf1c2sfs8g" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="5_layer_editor"]
+[ext_resource type="Script" uid="uid://bxaoja1oejlkh" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="6_dashboard"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.14, 0.2, 0.32, 1)
@@ -68,8 +68,8 @@ script = ExtResource("3_overlay")
 [node name="MapDataEditorOverlay" type="CanvasLayer" parent="." unique_id=1248672301]
 script = ExtResource("4_editor")
 
-[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="." unique_id=966429122]
 script = ExtResource("5_layer_editor")
 
-[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="." unique_id=828404279]
 script = ExtResource("6_dashboard")

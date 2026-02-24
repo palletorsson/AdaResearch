@@ -11,6 +11,7 @@ This guide orients anyone arriving at the Ada Research project for the first tim
 - **"I want to contribute a map or sequence"** — Read Sections 3, 5, then use the skills in Section 8
 - **"I need to know what's happening right now"** — Jump to Section 7
 - **"I want to explore from code"** — Section 5 with the worked example
+- **"I am an AI agent and need immediate CLI/tooling context"** - Start with `doc/MAP_AGENT_ONBOARDING.md`
 
 ---
 

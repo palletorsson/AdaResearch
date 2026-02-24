@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport3d"]
 [ext_resource type="PackedScene" path="res://commons/interactables/push_button_2d3d_content.tscn" id="3_uicontent"]
-[ext_resource type="Script" uid="uid://dq042kibpfryy" path="res://addons/godot-xr-tools/interactables/interactable_area_button.gd" id="4_areabtn"]
+[ext_resource type="Script" path="res://commons/interactables/interactable_area_button_pointer.gd" id="4_areabtn"]
 [ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_handpose"]
 [ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="6_rumbler"]
 [ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="7_poseleft"]
@@ -72,7 +72,7 @@ mesh = SubResource("CylinderMesh_Indicator")
 surface_material_override/0 = SubResource("MatIndicator")
 
 [node name="InteractableAreaButton" type="Area3D" parent="." index="4" unique_id=1892576448]
-collision_layer = 0
+collision_layer = 1048576
 collision_mask = 393216
 script = ExtResource("4_areabtn")
 button = NodePath("../Indicator")
