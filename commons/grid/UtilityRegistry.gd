@@ -207,7 +207,7 @@ const UTILITY_TYPES = {
 		"file": "bridge_path.tscn",
 		"category": "transport",
 		"description": "Transparent green grid bridge spanning voids on x/z axis",
-		"supports_parameters": true  # length:axis (e.g. "5:x", "3:z")
+		"supports_parameters": true  # axis:length (e.g. "z:3", "-x:2")
 	},
 	"rc": {
 		"name": "rotation_cube",

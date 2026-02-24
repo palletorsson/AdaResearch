@@ -7,19 +7,14 @@
 		"format": "json",
 		"dimensions": {
 			"width": 11,
-			"depth": 11,
+			"depth": 12,
 			"max_height": 4
 		},
 		"metadata": {
 			"difficulty": "intermediate",
 			"category": "foundations",
 			"estimated_time": "4-5 minutes",
-			"learning_objectives": [
-				"Walk the impossible staircase",
-				"See how local validity fails globally",
-				"Connect to Gödel: local proofs, global incompleteness",
-				"Understand Penrose and Escher's collaboration"
-			]
+			"learning_objectives": ["Walk the impossible staircase","See how local validity fails globally","Connect to Gödel: local proofs, global incompleteness","Understand Penrose and Escher's collaboration"]
 		}
 	},
 	"audio": {
@@ -30,13 +25,7 @@
 		"summary": "Escher's Impossible Objects — a clockwise ascending loop",
 		"layout": "A perimeter loop that ascends clockwise: north side height-1, east side height-2, south side height-3, west side height-4. Each step up feels locally valid — you're just climbing stairs. But when you complete the loop, you're impossibly back where you started at height-1. The center is a void or sunken area. Artifacts placed along the loop path. The spatial paradox IS the lesson: local coherence, global impossibility.",
 		"spatial_pattern": "ascending_loop",
-		"key_elements": [
-			"Clockwise ascending perimeter: 1 → 2 → 3 → 4 → back to 1",
-			"Each side feels like a natural step up",
-			"Completing the loop reveals the impossibility",
-			"Central void — no shortcut through the paradox",
-			"Escher staircase, Penrose triangle, Magritte pipe along the path"
-		]
+		"key_elements": ["Clockwise ascending perimeter: 1 → 2 → 3 → 4 → back to 1","Each side feels like a natural step up","Completing the loop reveals the impossibility","Central void — no shortcut through the paradox","Escher staircase, Penrose triangle, Magritte pipe along the path"]
 	},
 	"layers": {
 		"structure": [
@@ -50,10 +39,11 @@
 			["4","0","0","0","0","0","0","0","0","0","3"],
 			["4","4","4","0","0","0","0","0","3","3","3"],
 			["0","0","4","0","0","0","0","0","3","0","0"],
-			["0","0","4","4","3","3","3","3","3","0","0"]
+			["0","0","4","4","3","3","0","3","3","0","0"],
+			["1","1","4","4","3","3","3","3","3","1","1"]
 		],
 		"utilities": [
-			[" "," "," "," ","s:1:1:1"," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," ","sub:map"," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "],
@@ -63,7 +53,8 @@
 			[" "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," ","tt:escher_technical:180:0.5"," "," ","tt:escher_critical:180:0.5"," "," "," "],
-			[" "," "," "," "," "," ","t"," "," "," "," "]
+			[" "," "," "," "," "," ","t"," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "]
 		],
 		"interactables": [
 			[" "," "," "," "," "," "," "," "," "," "," "],
@@ -76,7 +67,8 @@
 			[" "," "," "," "," "," "," "," "," "," ","penrose_triangle:0:0.8"],
 			[" "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," ","magritte_pipe:0:0.8"," "," "," "," "," "]
+			[" "," "," "," "," ","magritte_pipe:0:0.8"," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
 	"utility_definitions": {
@@ -90,7 +82,11 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.2, 0.18, 0.22],
+		"ambient_color": [
+			0.2,
+			0.18,
+			0.22
+		],
 		"ambient_energy": 0.5
 	},
 	"settings": {
@@ -100,7 +96,11 @@
 		"enable_physics": true,
 		"background": {
 			"type": "sky",
-			"color": [0.1, 0.08, 0.12]
+			"color": [
+				0.1,
+				0.08,
+				0.12
+			]
 		}
 	}
 }

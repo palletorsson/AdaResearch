@@ -1,28 +1,17 @@
 {
 	"sequences": {
 		"softbodies": {
-			"name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
-			"truth": "Form is not imposed — it emerges from the material's own dynamics.",
-			"qfep_term": "Integration",
-			"qfep_connection": "Soft bodies embody F↔E oscillation physically — elastic forces (F) against deformation (E). Morphogenesis extends this: Turing's reaction-diffusion shows how pattern emerges from the tension between activation and inhibition, the chemical F and E.",
-
-			"description": "From cloth draping to Turing patterns — matter that deforms, bounces, and self-organizes. Starts with soft body physics (jelly, cloth, obstacles), then expands into morphogenesis: how biological form emerges from reaction-diffusion dynamics. Alan Turing's last paper becomes a VR experience.",
-			"layer": "integration",
-			"prerequisites": ["forces", "cellularautomata"],
-			"unlocks": ["swarmintelligence", "morphogenesis"],
-
-			"difficulty": "intermediate",
-			"estimated_time": "25-35 minutes",
-
-			"learning_objectives": [
-				"Spring-mass systems as soft body foundation",
-				"Cloth physics — constraints on deformable surfaces",
-				"Obstacle interaction with deformable bodies",
-				"Affect and materiality — what softness means",
-				"Turing's reaction-diffusion — pattern from chemical dynamics",
-				"Morphogenesis — entropy becoming structure"
+			"absorbed": {
+				"morphogenesis": "2 maps absorbed from standalone morphogenesis sequence. Turing's reaction-diffusion connects to soft body dynamics — both are about continuous matter finding form."
+			},
+			"audio": {
+				"ambient_preset": "minimal_drone",
+				"volume": -10.0
+			},
+			"completion_rewards": [
+				"soft_body_badge",
+				"morphogenesis_badge"
 			],
-
 			"content": [
 				"SoftBodies_Soft_Body_Deformation: Jelly cubes and soft mills — basic deformation",
 				"SoftBodies_Carusell: Carousel of soft cloth and mushrooms — playful physics",
@@ -35,36 +24,43 @@
 				"Morphogenesis_Reaction_Diffusion: Turing patterns — activator-inhibitor dynamics made visible",
 				"Morphogenesis_Entropy: Entropy becoming morphology — the boundary where disorder finds form"
 			],
-
+			"description": "From cloth draping to Turing patterns — matter that deforms, bounces, and self-organizes. Starts with soft body physics (jelly, cloth, obstacles), then expands into morphogenesis: how biological form emerges from reaction-diffusion dynamics. Alan Turing's last paper becomes a VR experience.",
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+			"lab_map": "Lab/map_data_post_softbodies",
+			"layer": "integration",
+			"learning_objectives": [
+				"Spring-mass systems as soft body foundation",
+				"Cloth physics — constraints on deformable surfaces",
+				"Obstacle interaction with deformable bodies",
+				"Affect and materiality — what softness means",
+				"Turing's reaction-diffusion — pattern from chemical dynamics",
+				"Morphogenesis — entropy becoming structure"
+			],
 			"maps": [
 				"SoftBodies_Soft_Body_Deformation",
 				"SoftBodies_Carusell",
 				"SoftBodies_Obsticals",
 				"SoftBodies_Obsticals_Part2",
-				"SoftBodies_Obsticals_Part3",
 				"SoftBodies_Cloth_Physics",
 				"SoftBodies_Playground_of_Joy",
 				"SoftBodies_Affect_Theory_Visualization",
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"Topology_Entropy_Morphogenesis"
 			],
-
-			"audio": {
-				"ambient_preset": "minimal_drone",
-				"volume": -10.0
-			},
-
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_softbodies",
-
-			"completion_rewards": [
-				"soft_body_badge",
-				"morphogenesis_badge"
+			"name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+			"prerequisites": [
+				"forces",
+				"cellularautomata"
 			],
-
-			"absorbed": {
-				"morphogenesis": "2 maps absorbed from standalone morphogenesis sequence. Turing's reaction-diffusion connects to soft body dynamics — both are about continuous matter finding form."
-			}
+			"qfep_connection": "Soft bodies embody F↔E oscillation physically — elastic forces (F) against deformation (E). Morphogenesis extends this: Turing's reaction-diffusion shows how pattern emerges from the tension between activation and inhibition, the chemical F and E.",
+			"qfep_term": "Integration",
+			"return_to": "lab",
+			"truth": "Form is not imposed — it emerges from the material's own dynamics.",
+			"unlocks": [
+				"swarmintelligence",
+				"morphogenesis"
+			]
 		}
 	}
 }

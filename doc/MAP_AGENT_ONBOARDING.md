@@ -102,7 +102,34 @@ python tools/spine_map_workbench.py sequence-contract
 python tools/spine_map_workbench.py suggest --sequence <sequence_name>
 ```
 
-### D) Release Gates
+### D) Map Pathfinder (reachability + path finding)
+Path: `tools/map_pathfinder.py`
+
+Use for:
+- checking map construction rules (spawn height, teleport row, reachability)
+- finding shortest path from spawn to any artifact or teleport
+- ASCII visualization of walkability and paths
+
+Common commands:
+
+```powershell
+# Check all 4 rules on a single map
+python tools/map_pathfinder.py check Crisis_Synthesis --verbose
+
+# Check all curriculum maps
+python tools/map_pathfinder.py check --all
+
+# Show ASCII map with reachability overlay
+python tools/map_pathfinder.py show Russell_Paradox
+
+# Find shortest path from spawn to an artifact
+python tools/map_pathfinder.py path Crisis_Synthesis --to qfep_formula_3d
+
+# Find path to teleport
+python tools/map_pathfinder.py path Euclid_Parallel --to teleport
+```
+
+### E) Release Gates
 Path: `tools/run_release_gates.py`
 
 Use for:
@@ -158,14 +185,55 @@ A map/level task is done when all are true:
 - Evidence captured when requested (for example screenshot output/report paths).
 - Handoff summary includes: files changed, commands run, known risks, next actions.
 
-## 7) Repo Gotchas (Important)
+## 7) Map Construction Rules
+
+Every map must satisfy these rules. Violating them causes the player to fall into void or get stuck.
+
+**Movement model:** The player can walk between same-height tiles and **drop down 1 level** (e.g. h2→h1). Dropping **2 or more levels** (e.g. h3→h1) requires a `tc` transport cube. The player **cannot climb up** without a `wp` ramp.
+
+### Rule 2: Teleport needs +1 row of floor cubes in z
+The teleport (`t` in utilities) requires **a structure row with floor cubes (h>0) behind it in +z**. Without it the player falls through on arrival. The row immediately after the teleport row in structure must contain floor tiles to catch the player.
+
+Reference: `res://commons/maps/Russell_Paradox/map_data.json` — teleport at row 10 on void, row 11 has floor cubes behind it.
+
+### Rule 3: Teleport must be reachable
+The teleport tile must be reachable from spawn. The player can drop down to it or walk to it, with utility assistance if needed (see Rule 4).
+
+### Rule 4: All interactable artifacts must be reachable
+Every artifact placed in the interactables layer must be reachable by the player through one of:
+- **Walking/dropping** — adjacent floor tiles at same or lower height (player can always fall down)
+- **Ramp/walkpath (`wp`)** — required for **climbing up** between height levels (e.g. `wp:180` ramps south). Reference: `res://commons/maps/F30_Ramp_Walkpath/`
+- **Transport cube (`tc`)** — moving platforms that bridge gaps over void or between heights (e.g. `tc:3:z:auto` moves 3 units on z-axis). Reference: `res://commons/maps/F31_Transport_Cube/`
+
+If an artifact sits on an elevated tile (higher than spawn) or across a void gap, the utilities layer **must** provide a path to it.
+
+### Rule 5: Teleport must stand on y=0 (void)
+The structure cell at the teleport position **must be `"0"`** (void). The teleport itself provides the landing — it should not have floor geometry underneath. Auto-fixable: `map_pathfinder.py fix`.
+
+### Rule 6: Only one teleport per map
+In the normal case a map should have **exactly one teleport**. Multiple teleports are allowed in special cases but trigger a warning during validation.
+
+### Checking and fixing rules
+
+```powershell
+# Check rules on a map
+python tools/map_pathfinder.py check Russell_Paradox --verbose
+
+# Auto-fix Rule 2 and Rule 5 across all curriculum maps
+python tools/map_pathfinder.py fix --all
+
+# Dry run (show what would change without writing)
+python tools/map_pathfinder.py fix --all --dry-run
+```
+
+## 8) Repo Gotchas (Important)
 
 - `addons/*` is gitignored in this repo. Do not rely on committed changes inside `addons/`.
   - If you must extend addon behavior, prefer a wrapper script under `commons/`.
 - The worktree can be dirty. Never revert unrelated user changes.
 - Prefer non-destructive commands and explicit audits before broad map edits.
 
-## 8) Handoff Template (for next agent)
+## 9) Handoff Template (for next agent)
 
 When handing off, include:
 - objective

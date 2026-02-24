@@ -5,7 +5,8 @@
 
 extends Node3D
 
-class_name BifurcationWalkway
+# Intentionally not global-named to avoid class-name collision with
+# res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.gd
 
 signal r_changed(r_value: float)
 signal regime_changed(regime: String)

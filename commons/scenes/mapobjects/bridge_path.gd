@@ -1,6 +1,6 @@
 # bridge_path.gd - A transparent grid bridge that spans voids
 # Creates a walkable path of translucent green grid cubes between two points
-# Usage in map_data.json utilities layer: "br:LENGTH:AXIS" e.g. "br:5:x", "br:3:z"
+# Usage in map_data.json utilities layer: "br:AXIS:LENGTH" e.g. "br:z:3", "br:-x:2"
 extends Node3D
 
 class_name BridgePath
@@ -11,9 +11,9 @@ class_name BridgePath
 @export var cube_size: float = 1.0  # Size of each bridge segment
 
 # Visual settings
-@export var bridge_color: Color = Color(0.0, 1.0, 0.4, 0.4)  # Green, semi-transparent
-@export var wireframe_color: Color = Color(0.0, 1.0, 0.3, 1.0)  # Bright green wireframe
-@export var emission_color: Color = Color(0.0, 0.8, 0.2, 1.0)  # Green glow
+@export var bridge_color: Color = Color(0.2, 0.5, 1.0, 0.15)  # Blue, very transparent
+@export var wireframe_color: Color = Color(0.3, 0.6, 1.0, 0.6)  # Blue wireframe
+@export var emission_color: Color = Color(0.2, 0.4, 1.0, 1.0)  # Blue glow
 @export var emission_strength: float = 1.5
 @export var pulse_speed: float = 1.0  # Pulsing glow speed (0 = no pulse)
 
@@ -54,8 +54,8 @@ func _create_bridge_material() -> void:
 	bridge_material.set_shader_parameter("blur", 1.5)
 	bridge_material.set_shader_parameter("show_interior", true)
 
-	# Enable transparency on the shader material
-	bridge_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	# Transparency is handled by the shader itself (Grid.gdshader alpha)
+	# ShaderMaterial does not have a transparency property like StandardMaterial3D
 
 func _generate_bridge() -> void:
 	var direction := Vector3.ZERO
@@ -68,7 +68,7 @@ func _generate_bridge() -> void:
 
 	for i in range(bridge_length):
 		var segment := _create_segment(i)
-		segment.position = direction * float(i) * cube_size
+		segment.position = direction * float(i) * cube_size + Vector3(0, 0.5, 0)
 		add_child(segment)
 		bridge_segments.append(segment)
 
@@ -129,19 +129,19 @@ func _clear_segments() -> void:
 # ===== Parameter parsing =====
 
 static func parse_parameters(param_string: String) -> Dictionary:
-	"""Parse parameter string like '5:x' or '3:z'"""
+	## Parse parameter string like 'z:3' or '-x:2' (AXIS:LENGTH format)
 	var result = {"length": 4, "axis": "x"}
 
 	if param_string.is_empty():
 		return result
 
 	var parts = param_string.split(":")
-	if parts.size() >= 1 and parts[0].is_valid_int():
-		result.length = int(parts[0])
-
-	if parts.size() >= 2:
-		var axis_str = parts[1].strip_edges().to_lower()
+	if parts.size() >= 1:
+		var axis_str = parts[0].strip_edges().to_lower()
 		if axis_str in ["x", "z", "-x", "-z"]:
 			result.axis = axis_str
+
+	if parts.size() >= 2 and parts[1].is_valid_int():
+		result.length = int(parts[1])
 
 	return result

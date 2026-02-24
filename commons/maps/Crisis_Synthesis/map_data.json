@@ -1,77 +1,15 @@
 {
-	"map_info": {
-		"name": "Crisis Synthesis",
-		"lookup_name": "Crisis_Synthesis",
-		"description": "The foundations crisis revealed: every formal system has limits. Self-reference creates edges. Contradictions can coexist. The territory exceeds any map.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 17,
-			"depth": 17,
-			"max_height": 4
-		},
-		"metadata": {
-			"difficulty": "expert",
-			"category": "foundations",
-			"estimated_time": "6-8 minutes",
-			"learning_objectives": ["Synthesize the foundations crisis insights","See how QFEP embraces these limits","Understand that edges are generative","Move from crisis to creativity"]
-		}
-	},
 	"audio": {
 		"ambient_preset": "synthesis_chamber",
-		"volume": -6
+		"volume": -6.0
 	},
 	"documentation": {
-		"summary": "Crisis Synthesis — the edge is where the interesting work happens",
+		"key_elements": ["Central platform (height 3-4) with QFEP formula at summit","Four ground-level wings with callback artifacts from earlier maps","Lambda and phi sliders on the descent from the platform","Bifurcation diagram near the exit","Widest,most open map — dramatic expansion after 7 compressed maps"],
 		"layout": "Vast open arena with a central raised platform (height 3-4) providing a vista over 4 artifact wings at ground level. Each wing echoes a previous map: Gödel (northeast), Russell (northwest), Escher (southwest), Florensky (southeast). The QFEP formula stands at the center summit. Lambda and phi sliders on the descent. Bifurcation diagram at the exit threshold. Maximum expansion — the largest map in the sequence.",
 		"spatial_pattern": "central_summit_with_wings",
-		"key_elements": [
-			"Central platform (height 3-4) with QFEP formula at summit",
-			"Four ground-level wings with callback artifacts from earlier maps",
-			"Lambda and phi sliders on the descent from the platform",
-			"Bifurcation diagram near the exit",
-			"Widest, most open map — dramatic expansion after 7 compressed maps"
-		]
+		"summary": "Crisis Synthesis — the edge is where the interesting work happens"
 	},
 	"layers": {
-		"structure": [
-			["0","0","0","0","0","0","1","1","1","1","1","0","0","0","0","0","0"],
-			["0","0","0","0","0","1","1","1","1","1","1","1","0","0","0","0","0"],
-			["0","0","0","0","1","1","1","1","1","1","1","1","1","0","0","0","0"],
-			["0","0","0","1","1","1","1","1","1","1","1","1","1","1","0","0","0"],
-			["0","0","1","1","1","1","1","2","2","2","1","1","1","1","1","0","0"],
-			["0","1","1","1","1","1","2","2","2","2","2","1","1","1","1","1","0"],
-			["1","1","1","1","1","2","2","3","3","3","2","2","1","1","1","1","1"],
-			["1","1","1","1","1","2","3","3","4","3","3","2","1","1","1","1","1"],
-			["1","1","1","1","1","2","3","4","4","4","3","2","1","1","1","1","1"],
-			["1","1","1","1","1","2","3","3","4","3","3","2","1","1","1","1","1"],
-			["1","1","1","1","1","2","2","3","3","3","2","2","1","1","1","1","1"],
-			["0","1","1","1","1","1","2","2","2","2","2","1","1","1","1","1","0"],
-			["0","0","1","1","1","1","1","2","2","2","1","1","1","1","1","0","0"],
-			["0","0","0","1","1","1","1","1","1","1","1","1","1","1","0","0","0"],
-			["0","0","0","0","1","1","1","1","1","1","1","1","1","0","0","0","0"],
-			["0","0","0","0","0","1","1","1","1","1","1","1","0","0","0","0","0"],
-			["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]
-		],
-		"utilities": [
-			[" "," "," "," "," "," "," "," ","s:1:1:1"," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," ","sub:map"," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," ","tt:crisis_technical:180:0.5"," "," "," "," "," ","tt:crisis_critical:180:0.5"," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," ","t"," "," "," "," "," "," "," "," "]
-		],
 		"interactables": [
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
@@ -89,31 +27,98 @@
 			[" "," "," "," ","escher_staircase:0:0.6"," "," "," ","bifurcation_diagram:0:1"," "," "," ","florensky_sphere:0:0.8"," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		],
+		"structure": [
+			["1","1","0","1","0","0","1","1","1","1","1","0","0","1","0","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["0","0","1","0","1","1","1","1","1","1","1","1","1","0","1","0","0"],
+			["0","0","0","1","1","1","1","1","0","1","1","1","1","1","0","0","0"],
+			["0","0","1","1","1","1","2","2","2","2","2","1","1","1","1","0","0"],
+			["0","1","1","1","1","1","2","2","2","2","2","1","1","1","1","1","0"],
+			["1","1","1","1","1","2","2","3","3","3","2","2","1","1","1","1","1"],
+			["1","1","1","1","1","2","3","3","3","3","3","2","1","1","1","1","1"],
+			["1","1","1","1","1","2","3","4","3","4","3","2","1","1","1","1","1"],
+			["1","1","1","1","1","2","3","3","3","3","3","2","1","1","1","1","1"],
+			["1","1","1","1","1","2","2","3","3","3","2","2","1","1","1","1","1"],
+			["0","1","1","1","1","1","2","2","2","2","2","1","1","1","1","1","0"],
+			["0","0","1","1","1","1","1","2","2","2","1","1","1","1","1","0","0"],
+			["0","0","0","1","1","1","1","1","1","1","1","1","1","1","0","0","0"],
+			["0","0","0","0","1","1","1","1","1","1","1","1","1","0","0","0","0"],
+			["0","0","0","0","0","1","1","1","1","1","1","1","0","0","0","0","0"],
+			["0","0","0","0","0","0","0","1","0","1","0","0","0","0","0","0","0"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+		],
+		"utilities": [
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," ","sub:map"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," ","tc:y:1"," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," ","wp"," "," "," ","wp"," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," ","tt:crisis_technical:180:0.5"," "," "," "," "," ","tt:crisis_critical:180:0.5"," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," ","t"," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Complete",
-			"description": "Return to QFEP Laboratory",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	},
 	"lighting": {
-		"ambient_color": [0.2, 0.15, 0.25],
+		"ambient_color": [
+			0.2,
+			0.15,
+			0.25
+		],
 		"ambient_energy": 0.6
 	},
+	"map_info": {
+		"description": "The foundations crisis revealed: every formal system has limits. Self-reference creates edges. Contradictions can coexist. The territory exceeds any map.",
+		"dimensions": {
+			"depth": 18.0,
+			"max_height": 4.0,
+			"width": 17.0
+		},
+		"format": "json",
+		"lookup_name": "Crisis_Synthesis",
+		"metadata": {
+			"category": "foundations",
+			"difficulty": "expert",
+			"estimated_time": "6-8 minutes",
+			"learning_objectives": ["Synthesize the foundations crisis insights","See how QFEP embraces these limits","Understand that edges are generative","Move from crisis to creativity"]
+		},
+		"name": "Crisis Synthesis",
+		"version": "1.0"
+	},
 	"settings": {
-		"cube_size": 1,
-		"gutter": 0,
-		"show_grid": true,
-		"enable_physics": true,
 		"background": {
-			"type": "sky",
-			"color": [0.1, 0.05, 0.15]
+			"color": [
+				0.1,
+				0.05,
+				0.15
+			],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"show_grid": true
+	},
+	"utility_definitions": {
+		"t": {
+			"description": "Return to QFEP Laboratory",
+			"name": "Complete",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
 		}
 	}
 }

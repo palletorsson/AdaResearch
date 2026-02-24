@@ -18,6 +18,8 @@ const MAPS_DIR := "res://commons/maps/"
 const LAB_DIR := "res://commons/maps/Lab/"
 const ALGO_DIR := "res://algorithms/"
 const REGISTRY_DIR := "res://commons/artifacts/registry/"
+const MAP_RULES_REPORT_PATH := "res://doc/reports/MAP_RULES_REPORT.json"
+const OVERSIGHT_URL := "http://localhost:3001"
 
 # ── QFEP Phase Colors (from WorldMapDataProvider) ────────────────────────
 const PHASE_COLORS := {
@@ -78,6 +80,8 @@ var _release_gates: Dictionary = {}
 var _release_gates_loaded: bool = false
 var _release_gate_enabled: Dictionary = {}
 var _data_loaded: bool = false
+var _map_rules_data: Dictionary = {}
+var _map_rules_loaded: bool = false
 
 # ── UI Nodes ─────────────────────────────────────────────────────────────
 var _root: Control
@@ -97,6 +101,14 @@ var _grid_container: VBoxContainer
 var _graph_control: Control
 var _issues_scroll: ScrollContainer
 var _issues_container: VBoxContainer
+var _map_rules_scroll: ScrollContainer
+var _map_rules_container: VBoxContainer
+var _task_popup: PanelContainer
+var _task_popup_title: Label
+var _task_text_edit: TextEdit
+var _task_status_label: Label
+var _task_map_name: String = ""
+var _task_seq_id: String = ""
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -143,9 +155,14 @@ func _input(event: InputEvent) -> void:
 			KEY_4:
 				_switch_tab(3)
 				get_viewport().set_input_as_handled()
+			KEY_5:
+				_switch_tab(4)
+				get_viewport().set_input_as_handled()
 
 	if key.keycode == KEY_ESCAPE:
-		if _detail_popup and _detail_popup.visible:
+		if _task_popup and _task_popup.visible:
+			_task_popup.visible = false
+		elif _detail_popup and _detail_popup.visible:
 			_detail_popup.visible = false
 		else:
 			_toggle()
@@ -280,6 +297,10 @@ func _load_data() -> void:
 	# Build issues list
 	_build_issues()
 
+	# Load map rules report
+	_map_rules_data = _read_json(MAP_RULES_REPORT_PATH)
+	_map_rules_loaded = not _map_rules_data.is_empty()
+
 	_data_loaded = true
 
 	# Refresh UI
@@ -287,12 +308,19 @@ func _load_data() -> void:
 	_populate_grid_tab()
 	_populate_graph_tab()
 	_populate_issues_tab()
+	_populate_map_rules_tab()
 
 	if _status_label:
 		var mismatch_text := ""
 		if _mismatches.size() > 0:
 			mismatch_text = "  |  %d mismatches" % _mismatches.size()
-		_status_label.text = "Loaded %d sequences%s" % [_all_results.size(), mismatch_text]
+		var rules_text := ""
+		if _map_rules_loaded:
+			var rules_summary: Dictionary = _map_rules_data.get("summary", {}) as Dictionary
+			var rules_fail: int = int(rules_summary.get("fail", 0))
+			var rules_ok: int = int(rules_summary.get("ok", 0))
+			rules_text = "  |  rules: %d OK, %d fail" % [rules_ok, rules_fail]
+		_status_label.text = "Loaded %d sequences%s%s" % [_all_results.size(), mismatch_text, rules_text]
 
 
 func _validate_sequence(seq_name: String, seq_data: Dictionary, seq_type: String) -> Dictionary:
@@ -743,12 +771,16 @@ func _build_ui() -> void:
 	_build_grid_tab(tab_area)
 	_build_graph_tab(tab_area)
 	_build_issues_tab(tab_area)
+	_build_map_rules_tab(tab_area)
 
 	# Status bar
 	_build_status_bar(main_vbox)
 
 	# Detail popup (hidden by default)
 	_build_detail_popup()
+
+	# Task creation popup (hidden by default)
+	_build_task_popup()
 
 	# Show first tab
 	_switch_tab(0)
@@ -781,7 +813,7 @@ func _build_title_bar(parent: Control) -> void:
 	_title_bar.add_child(spacer)
 
 	var hint := Label.new()
-	hint.text = "P: toggle  |  1-4: tabs  |  ESC: close"
+	hint.text = "P: toggle  |  1-5: tabs  |  ESC: close"
 	hint.add_theme_font_size_override("font_size", 12)
 	hint.add_theme_color_override("font_color", COLOR_TEXT_DIM)
 	_title_bar.add_child(hint)
@@ -806,7 +838,7 @@ func _build_tab_bar(parent: Control) -> void:
 	parent.add_child(margin)
 	margin.add_child(bar)
 
-	var tab_names := ["Overview", "Sequence Grid", "Dependency Graph", "Issues & Todos"]
+	var tab_names := ["Overview", "Sequence Grid", "Dependency Graph", "Issues & Todos", "Map Rules"]
 	_tab_buttons.clear()
 	for i in range(tab_names.size()):
 		var btn := Button.new()
@@ -1604,6 +1636,353 @@ func _add_issue_row(parent: VBoxContainer, issue: Dictionary) -> void:
 		row.add_child(badge)
 
 	parent.add_child(row)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# TAB 5: MAP RULES
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_map_rules_tab(parent: Control) -> void:
+	_map_rules_scroll = ScrollContainer.new()
+	_map_rules_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_map_rules_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var margin := MarginContainer.new()
+	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_top", 12)
+	margin.add_theme_constant_override("margin_bottom", 12)
+	parent.add_child(margin)
+	margin.add_child(_map_rules_scroll)
+
+	_map_rules_container = VBoxContainer.new()
+	_map_rules_container.add_theme_constant_override("separation", 4)
+	_map_rules_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_map_rules_scroll.add_child(_map_rules_container)
+
+	_tab_containers.append(margin)
+
+
+func _populate_map_rules_tab() -> void:
+	_clear_children(_map_rules_container)
+
+	if not _map_rules_loaded:
+		var hint_label := Label.new()
+		hint_label.text = "No map rules report found. Generate with:\npython tools/map_pathfinder.py report --output doc/reports/MAP_RULES_REPORT.md"
+		hint_label.add_theme_font_size_override("font_size", 12)
+		hint_label.add_theme_color_override("font_color", COLOR_PARTIAL)
+		_map_rules_container.add_child(hint_label)
+		return
+
+	# ── Summary stats ────────────────────────────────────────────────────
+	var summary_data: Dictionary = _map_rules_data.get("summary", {}) as Dictionary
+	var s_total: int = int(summary_data.get("total_maps", 0))
+	var s_ok: int = int(summary_data.get("ok", 0))
+	var s_fail: int = int(summary_data.get("fail", 0))
+	var s_missing: int = int(summary_data.get("missing", 0))
+	var s_seqs: int = int(summary_data.get("total_sequences", 0))
+
+	_map_rules_container.add_child(_make_section_label("MAP RULES REPORT"))
+
+	var cards_row := HBoxContainer.new()
+	cards_row.add_theme_constant_override("separation", 8)
+	_map_rules_container.add_child(cards_row)
+
+	_add_stat_card(cards_row, "Sequences", "%d" % s_seqs, "", COLOR_ACCENT)
+	_add_stat_card(cards_row, "Total Maps", "%d" % s_total, "", COLOR_ACCENT)
+	_add_stat_card(cards_row, "Passing", "%d" % s_ok,
+		"%d%%" % _percent(s_ok, maxi(s_total, 1)),
+		COLOR_COMPLETE if s_fail == 0 else COLOR_PARTIAL)
+	_add_stat_card(cards_row, "Failing", "%d" % s_fail,
+		"%d%%" % _percent(s_fail, maxi(s_total, 1)),
+		COLOR_CRITICAL if s_fail > 0 else COLOR_COMPLETE)
+	_add_stat_card(cards_row, "Missing", "%d" % s_missing, "",
+		COLOR_MISSING if s_missing > 0 else COLOR_COMPLETE)
+
+	var generated_text: String = str(_map_rules_data.get("generated", "unknown"))
+	var gen_label := Label.new()
+	gen_label.text = "Generated: %s" % generated_text
+	gen_label.add_theme_font_size_override("font_size", 10)
+	gen_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	_map_rules_container.add_child(gen_label)
+
+	_map_rules_container.add_child(_make_spacer(8))
+
+	# ── Per-sequence sections ────────────────────────────────────────────
+	var sequences_value: Variant = _map_rules_data.get("sequences", [])
+	if not (sequences_value is Array):
+		return
+	var sequences: Array = sequences_value as Array
+
+	for seq_item in sequences:
+		if not (seq_item is Dictionary):
+			continue
+		var seq: Dictionary = seq_item as Dictionary
+		var seq_id: String = str(seq.get("id", ""))
+		var seq_title: String = str(seq.get("title", ""))
+		var seq_ok: int = int(seq.get("ok", 0))
+		var seq_fail: int = int(seq.get("fail", 0))
+		var seq_missing: int = int(seq.get("missing", 0))
+
+		var maps_value: Variant = seq.get("maps", [])
+		if not (maps_value is Array):
+			continue
+		var maps: Array = maps_value as Array
+		var map_count: int = maps.size()
+
+		# Skip sequences with no maps
+		if map_count == 0:
+			continue
+
+		# Only show sequences that have failures or missing maps (collapse passing ones)
+		var has_problems: bool = seq_fail > 0 or seq_missing > 0
+
+		# Section header
+		var header_color: Color = COLOR_CRITICAL if seq_fail > 0 else (COLOR_PARTIAL if seq_missing > 0 else COLOR_COMPLETE)
+		var header_text: String = "%s — %s (%d maps: %d OK" % [seq_id.to_upper(), seq_title, map_count, seq_ok]
+		if seq_fail > 0:
+			header_text += ", %d fail" % seq_fail
+		if seq_missing > 0:
+			header_text += ", %d missing" % seq_missing
+		header_text += ")"
+
+		var section := _make_section_label(header_text)
+		section.add_theme_color_override("font_color", header_color)
+		section.add_theme_font_size_override("font_size", 12)
+		_map_rules_container.add_child(section)
+
+		# Map rows — only show failing/missing maps for compact display
+		for map_item in maps:
+			if not (map_item is Dictionary):
+				continue
+			var m: Dictionary = map_item as Dictionary
+			var map_name: String = str(m.get("name", ""))
+			var map_status: String = str(m.get("status", ""))
+
+			# Skip OK maps in sequences that have problems (compact view)
+			if map_status == "OK" and has_problems:
+				continue
+
+			_add_map_rules_row(_map_rules_container, map_name, map_status, m, seq_id)
+
+
+func _add_map_rules_row(parent: VBoxContainer, map_name: String, status: String, map_data: Dictionary, seq_id: String) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+
+	# Status badge
+	var badge_text: String = status
+	var badge_color: Color
+	match status:
+		"OK":
+			badge_color = COLOR_COMPLETE
+		"FAIL":
+			badge_color = COLOR_CRITICAL
+		"MISSING":
+			badge_color = COLOR_MISSING
+		"ERROR":
+			badge_color = COLOR_CRITICAL
+		_:
+			badge_color = COLOR_DEFERRED
+	var badge := _make_colored_cell(badge_text, badge_color, 60)
+	row.add_child(badge)
+
+	# Map name
+	var name_label := Label.new()
+	name_label.text = map_name
+	name_label.custom_minimum_size.x = 280
+	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.add_theme_color_override("font_color", COLOR_TEXT)
+	name_label.clip_text = true
+	row.add_child(name_label)
+
+	# Issues text
+	var issues_value: Variant = map_data.get("issues", [])
+	var issue_str: String = ""
+	if issues_value is Array:
+		var issues: Array = issues_value as Array
+		var error_parts: Array[String] = []
+		for iss_item in issues:
+			if iss_item is Dictionary:
+				var iss: Dictionary = iss_item as Dictionary
+				if str(iss.get("severity", "")) == "ERROR":
+					error_parts.append("R%s: %s" % [str(iss.get("rule", "")), str(iss.get("msg", ""))[:50]])
+		issue_str = "; ".join(error_parts)
+
+	var issue_label := Label.new()
+	issue_label.text = issue_str
+	issue_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	issue_label.add_theme_font_size_override("font_size", 11)
+	issue_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	issue_label.clip_text = true
+	row.add_child(issue_label)
+
+	# "Create Task" button — only for FAIL/ERROR maps
+	if status == "FAIL" or status == "ERROR":
+		var fix_text: String = str(map_data.get("fix_text", ""))
+		var btn := Button.new()
+		btn.text = "Create Task"
+		btn.custom_minimum_size.x = 90
+		btn.add_theme_font_size_override("font_size", 11)
+		var captured_name: String = map_name
+		var captured_seq: String = seq_id
+		var captured_fix: String = fix_text
+		btn.pressed.connect(func() -> void:
+			_open_task_popup(captured_name, captured_seq, captured_fix)
+		)
+		row.add_child(btn)
+
+	parent.add_child(row)
+
+
+# ── Task creation popup ──────────────────────────────────────────────────
+
+func _build_task_popup() -> void:
+	_task_popup = PanelContainer.new()
+	_task_popup.visible = false
+	_task_popup.set_anchors_preset(Control.PRESET_CENTER)
+	_task_popup.anchor_left = 0.2
+	_task_popup.anchor_right = 0.8
+	_task_popup.anchor_top = 0.15
+	_task_popup.anchor_bottom = 0.85
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.08, 0.10, 0.16, 0.98)
+	style.set_border_width_all(2)
+	style.border_color = COLOR_ACCENT
+	style.set_corner_radius_all(8)
+	style.set_content_margin_all(12)
+	_task_popup.add_theme_stylebox_override("panel", style)
+	_root.add_child(_task_popup)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 8)
+	_task_popup.add_child(vbox)
+
+	# Header
+	var header := HBoxContainer.new()
+	vbox.add_child(header)
+
+	_task_popup_title = Label.new()
+	_task_popup_title.text = "Create Fix Task"
+	_task_popup_title.add_theme_font_size_override("font_size", 15)
+	_task_popup_title.add_theme_color_override("font_color", COLOR_ACCENT)
+	_task_popup_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(_task_popup_title)
+
+	var close_btn := Button.new()
+	close_btn.text = "X"
+	close_btn.flat = true
+	close_btn.pressed.connect(func() -> void: _task_popup.visible = false)
+	header.add_child(close_btn)
+
+	# TextEdit for fix instructions
+	_task_text_edit = TextEdit.new()
+	_task_text_edit.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_task_text_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_task_text_edit.add_theme_font_size_override("font_size", 12)
+	_task_text_edit.add_theme_color_override("font_color", COLOR_TEXT)
+	var te_style := StyleBoxFlat.new()
+	te_style.bg_color = Color(0.04, 0.05, 0.08, 1.0)
+	te_style.set_border_width_all(1)
+	te_style.border_color = COLOR_BORDER
+	te_style.set_corner_radius_all(4)
+	te_style.set_content_margin_all(8)
+	_task_text_edit.add_theme_stylebox_override("normal", te_style)
+	vbox.add_child(_task_text_edit)
+
+	# Status label
+	_task_status_label = Label.new()
+	_task_status_label.text = ""
+	_task_status_label.add_theme_font_size_override("font_size", 11)
+	_task_status_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	vbox.add_child(_task_status_label)
+
+	# Button bar
+	var btn_bar := HBoxContainer.new()
+	btn_bar.add_theme_constant_override("separation", 8)
+	vbox.add_child(btn_bar)
+
+	var send_btn := Button.new()
+	send_btn.text = "Send to Oversight"
+	send_btn.custom_minimum_size.x = 140
+	send_btn.pressed.connect(_send_task_to_oversight)
+	btn_bar.add_child(send_btn)
+
+	var copy_btn := Button.new()
+	copy_btn.text = "Copy to Clipboard"
+	copy_btn.custom_minimum_size.x = 130
+	copy_btn.pressed.connect(_copy_task_to_clipboard)
+	btn_bar.add_child(copy_btn)
+
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	btn_bar.add_child(spacer)
+
+	var cancel_btn := Button.new()
+	cancel_btn.text = "Close"
+	cancel_btn.custom_minimum_size.x = 80
+	cancel_btn.pressed.connect(func() -> void: _task_popup.visible = false)
+	btn_bar.add_child(cancel_btn)
+
+
+func _open_task_popup(map_name: String, seq_id: String, fix_text: String) -> void:
+	_task_map_name = map_name
+	_task_seq_id = seq_id
+	_task_popup_title.text = "Create Fix Task: %s" % map_name
+	_task_text_edit.text = fix_text
+	_task_status_label.text = ""
+	_task_popup.visible = true
+
+
+func _send_task_to_oversight() -> void:
+	var task_payload := {
+		"title": "Fix map rules: %s" % _task_map_name,
+		"description": _task_text_edit.text,
+		"status": "todo",
+		"priority": "medium",
+		"tags": JSON.stringify(["map-rules", "pathfinder", _task_seq_id]),
+		"source": "pathfinder-dashboard",
+	}
+
+	var http := HTTPRequest.new()
+	add_child(http)
+	http.request_completed.connect(_on_task_sent.bind(http))
+
+	var url := "%s/api/tasks" % OVERSIGHT_URL
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	var body := JSON.stringify(task_payload)
+
+	_task_status_label.text = "Sending..."
+	_task_status_label.add_theme_color_override("font_color", COLOR_ACCENT)
+
+	var err := http.request(url, headers, HTTPClient.METHOD_POST, body)
+	if err != OK:
+		_task_status_label.text = "Request failed: error %d" % err
+		_task_status_label.add_theme_color_override("font_color", COLOR_CRITICAL)
+		http.queue_free()
+
+
+func _on_task_sent(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, http: HTTPRequest) -> void:
+	http.queue_free()
+
+	if result != HTTPRequest.RESULT_SUCCESS:
+		_task_status_label.text = "Connection failed (is Oversight running on %s?)" % OVERSIGHT_URL
+		_task_status_label.add_theme_color_override("font_color", COLOR_CRITICAL)
+		return
+
+	if response_code == 201 or response_code == 200:
+		_task_status_label.text = "Task created for %s" % _task_map_name
+		_task_status_label.add_theme_color_override("font_color", COLOR_COMPLETE)
+	else:
+		var body_text := body.get_string_from_utf8()
+		_task_status_label.text = "Error %d: %s" % [response_code, body_text.substr(0, 80)]
+		_task_status_label.add_theme_color_override("font_color", COLOR_CRITICAL)
+
+
+func _copy_task_to_clipboard() -> void:
+	DisplayServer.clipboard_set(_task_text_edit.text)
+	_task_status_label.text = "Copied to clipboard"
+	_task_status_label.add_theme_color_override("font_color", COLOR_COMPLETE)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

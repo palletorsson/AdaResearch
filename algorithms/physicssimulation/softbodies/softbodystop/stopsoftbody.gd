@@ -182,13 +182,31 @@ func freeze_soft_body():
 
 	print("ðŸ§Š Soft body stopped successfully!")
 
+func _get_soft_body_material(soft_body: SoftBody3D, surface_index: int = 0) -> Material:
+	"""Resolve material safely for SoftBody3D instances in Godot 4."""
+	if soft_body.material_override != null:
+		return soft_body.material_override
+	
+	var override_material = soft_body.get_surface_override_material(surface_index)
+	if override_material != null:
+		return override_material
+	
+	var active_material = soft_body.get_active_material(surface_index)
+	if active_material != null:
+		return active_material
+	
+	if soft_body.mesh != null and surface_index < soft_body.mesh.get_surface_count():
+		return soft_body.mesh.surface_get_material(surface_index)
+	
+	return null
+
 func disable_soft_body():
 	"""Alternative: Disable physics processing"""
 	
 	target_soft_body.set_process_mode(Node.PROCESS_MODE_DISABLED)
 	
 	# Visual feedback - gray out
-	var material = target_soft_body.surface_get_material(0)
+	var material = _get_soft_body_material(target_soft_body, 0)
 	if material is StandardMaterial3D:
 		var std_mat = material as StandardMaterial3D
 		std_mat.albedo_color = Color(0.3, 0.3, 0.3, 0.6)  # Gray out
@@ -230,7 +248,7 @@ func restart_soft_body():
 		target_soft_body.drag_coefficient = 0.0
 	
 	# Restore original visual
-	var material = target_soft_body.surface_get_material(0)
+	var material = _get_soft_body_material(target_soft_body, 0)
 	if material is StandardMaterial3D and target_soft_body.has_meta("original_color"):
 		var std_mat = material as StandardMaterial3D
 		std_mat.emission_enabled = false
