@@ -1,45 +1,45 @@
 {
-	"map_info": {
-		"name": "TestMap_Unused_12",
-		"lookup_name": "TestMap_Unused_12",
-		"description": "Test map for artifacts: omoss, parametric_pendulum_waves, parametric_shapes, particle_randomness_emergent",
-		"dimensions": {
-			"width": 5,
-			"depth": 5,
-			"max_height": 3
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "omoss:0:2", " ", "parametric_pendulum_waves:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "parametric_shapes:0:2", " ", "particle_randomness_emergent:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next Lesson",
-			"description": "Continue to the next algorithm demonstration",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	}
+  "map_info": {
+    "name": "TestMap_Unused_12",
+    "lookup_name": "TestMap_Unused_12",
+    "description": "Test map for artifacts: omoss, parametric_pendulum_waves, parametric_shapes, particle_randomness_emergent",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 3
+    }
+  },
+  "layers": {
+    "structure": [
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ]
+    ],
+    "utilities": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "s", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "t", " ", " " ]
+    ],
+    "interactables": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "omoss:0:2", " ", "parametric_pendulum_waves:0:2", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "parametric_shapes:0:2", " ", "particle_randomness_emergent:0:2", " " ],
+      [ " ", " ", " ", " ", " " ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next Lesson",
+      "description": "Continue to the next algorithm demonstration",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  }
 }

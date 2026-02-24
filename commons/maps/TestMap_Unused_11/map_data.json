@@ -1,45 +1,45 @@
 {
-	"map_info": {
-		"name": "TestMap_Unused_11",
-		"lookup_name": "TestMap_Unused_11",
-		"description": "Test map for artifacts: noiselayers, noisesphere, noisetext, noisetorus",
-		"dimensions": {
-			"width": 5,
-			"depth": 5,
-			"max_height": 3
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "noiselayers:0:2", " ", "noisesphere:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "noisetext:0:2", " ", "noisetorus:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next Lesson",
-			"description": "Continue to the next algorithm demonstration",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	}
+  "map_info": {
+    "name": "TestMap_Unused_11",
+    "lookup_name": "TestMap_Unused_11",
+    "description": "Test map for artifacts: noiselayers, noisesphere, noisetext, noisetorus",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 3
+    }
+  },
+  "layers": {
+    "structure": [
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ]
+    ],
+    "utilities": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "s", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "t", " ", " " ]
+    ],
+    "interactables": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "noiselayers:0:2", " ", "noisesphere:0:2", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "noisetext:0:2", " ", "noisetorus:0:2", " " ],
+      [ " ", " ", " ", " ", " " ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next Lesson",
+      "description": "Continue to the next algorithm demonstration",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  }
 }

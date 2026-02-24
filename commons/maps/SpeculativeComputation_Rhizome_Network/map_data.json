@@ -1,68 +1,68 @@
 {
-	"map_info": {
-		"name": "Rhizome Network",
-		"lookup_name": "SpeculativeComputation_Rhizome_Network",
-		"description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy — multiple paths connect every chamber. Rhizomatic.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 10,
-			"depth": 10,
-			"max_height": 5
-		},
-		"metadata": {
-			"difficulty": "advanced",
-			"category": "speculative_computation",
-			"spatial_temperature": 0.75,
-			"design_notes": "Four chambers in corners connected by narrow passages. Central void. No single path dominates — Deleuze/Guattari spatial."
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "5", "5", "0", "0", "5", "5", "1", "1"],
-			["1", "1", "1", "5", "5", "5", "5", "1", "1", "1"],
-			["5", "1", "1", "1", "1", "1", "1", "1", "1", "5"],
-			["5", "5", "1", "1", "5", "5", "1", "1", "5", "5"],
-			["0", "5", "1", "5", "0", "0", "5", "1", "5", "0"],
-			["0", "5", "1", "5", "0", "0", "5", "1", "5", "0"],
-			["5", "5", "1", "1", "5", "5", "1", "1", "5", "5"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "5"],
-			["1", "0", "1", "5", "5", "5", "5", "1", "1", "1"],
-			["1", "1", "1", "5", "0", "0", "5", "5", "1", "1"]
-		],
-		"utilities": [
-			["s", "an", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "t", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "sp", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "rhizome_cave_demo", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	}
+  "map_info": {
+    "name": "Rhizome Network",
+    "lookup_name": "SpeculativeComputation_Rhizome_Network",
+    "description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy — multiple paths connect every chamber. Rhizomatic.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 5
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "speculative_computation",
+      "spatial_temperature": 0.75,
+      "design_notes": "Four chambers in corners connected by narrow passages. Central void. No single path dominates — Deleuze/Guattari spatial."
+    }
+  },
+  "layers": {
+    "structure": [
+      [ "1", "1", "5", "5", "0", "0", "5", "5", "1", "1" ],
+      [ "1", "1", "1", "5", "5", "5", "5", "1", "1", "1" ],
+      [ "5", "1", "1", "1", "1", "1", "1", "1", "1", "5" ],
+      [ "5", "5", "1", "1", "5", "5", "1", "1", "5", "5" ],
+      [ "0", "5", "1", "5", "0", "0", "5", "1", "5", "0" ],
+      [ "0", "5", "1", "5", "0", "0", "5", "1", "5", "0" ],
+      [ "5", "5", "1", "1", "5", "5", "1", "1", "5", "5" ],
+      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "5" ],
+      [ "1", "0", "1", "5", "5", "5", "5", "1", "1", "1" ],
+      [ "1", "1", "1", "5", "0", "0", "5", "5", "1", "1" ]
+    ],
+    "utilities": [
+      [ "s", "an", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", "t", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", "sp", " ", " ", " ", " ", " ", " ", " ", " " ]
+    ],
+    "interactables": [
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", "rhizome_cave_demo", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  }
 }

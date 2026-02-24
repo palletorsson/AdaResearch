@@ -1,45 +1,45 @@
 {
-	"map_info": {
-		"name": "TestMap_Unused_3",
-		"lookup_name": "TestMap_Unused_3",
-		"description": "Test map for artifacts: SplineCables, VoxelNoiseROIs, bell_alley, bernini_columns",
-		"dimensions": {
-			"width": 5,
-			"depth": 5,
-			"max_height": 3
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "SplineCables:0:2", " ", "VoxelNoiseROIs:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "bell_alley:0:2", " ", " ", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next Lesson",
-			"description": "Continue to the next algorithm demonstration",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	}
+  "map_info": {
+    "name": "TestMap_Unused_3",
+    "lookup_name": "TestMap_Unused_3",
+    "description": "Test map for artifacts: SplineCables, VoxelNoiseROIs, bell_alley, bernini_columns",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 3
+    }
+  },
+  "layers": {
+    "structure": [
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ],
+      [ "1", "1", "1", "1", "1" ]
+    ],
+    "utilities": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "s", " ", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", " ", "t", " ", " " ]
+    ],
+    "interactables": [
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "SplineCables:0:2", " ", "VoxelNoiseROIs:0:2", " " ],
+      [ " ", " ", " ", " ", " " ],
+      [ " ", "bell_alley:0:2", " ", " ", " " ],
+      [ " ", " ", " ", " ", " " ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next Lesson",
+      "description": "Continue to the next algorithm demonstration",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  }
 }
