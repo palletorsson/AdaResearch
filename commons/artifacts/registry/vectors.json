@@ -647,6 +647,36 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": ["forces"]
+		},
+		"coordinate_system_switcher": {
+			"lookup_name": "coordinate_system_switcher",
+			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+			"class_name": "CoordinateSystemSwitcher",
+			"name": "Coordinate System Switcher",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
+			"dev_themes": [
+				"vectors",
+				"coordinate_systems",
+				"visualization"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"coordinates",
+				"cartesian",
+				"cylindrical",
+				"spherical",
+				"polar",
+				"conversion",
+				"3d",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["vectors"]
 		}
 	},
 	"sequence_mapping": {
@@ -686,7 +716,8 @@
 			"turret_boll_infoboard",
 			"basis_vectors_rig",
 			"vector_joint_playground",
-			"vector_field_visualizer"
+			"vector_field_visualizer",
+			"coordinate_system_switcher"
 		]
 	},
 	"theoretical_connections": {
@@ -710,7 +741,8 @@
 		],
 		"coordinate_systems": [
 			"basis_vectors_rig",
-			"vector_translation_demo"
+			"vector_translation_demo",
+			"coordinate_system_switcher"
 		]
 	}
 }
