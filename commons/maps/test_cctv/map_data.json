@@ -1,106 +1,274 @@
 {
-	"map_info": {
-		"name": "CCTV Monitor Test",
-		"lookup_name": "test_cctv",
-		"description": "Test map for CCTV monitor system - displays different scenes on security monitors",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 7,
-			"depth": 7,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "test",
-			"category": "test",
-			"estimated_time": "2 minutes",
-			"learning_objectives": [
-				"Test CCTV monitor functionality"
-			]
-		}
-	},
-	"documentation": {
-		"summary": "CCTV Test - Monitor Display System",
-		"layout": "Simple 7x7 grid with CCTV monitors displaying various scenes",
-		"objective": "Test CCTV monitor system with different configurations",
-		"key_elements": [
-			"CCTV monitors at various positions",
-			"Different rotation angles and scales",
-			"Various target scenes displayed",
-			"Teleporter to exit"
-		]
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t", " ", " ", " "]
-		],
-		"interactables": [
-			["origin", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "cctv#res://commons/primitives/origin/origin.tscn:0:0:1", " ", "cctv#res://commons/primitives/point/grab_sphere_point.tscn:90:0:1.2", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "cctv#res://commons/primitives/arrow/arrow.tscn:180:0.3:0.8", " ", "cctv#res://algorithms/vectors/01_vector_basics/coordinates.tscn:270:0.2:1.5", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	},
-	"artifact_definitions": {
-		"origin": {
-			"artifact": "origin",
-			"description": "Origin point for reference"
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.3,
-			0.3,
-			0.4
-		],
-		"ambient_energy": 0.8,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.5,
-				-0.7,
-				-0.3
-			],
-			"color": [
-				1.0,
-				0.95,
-				0.9
-			],
-			"energy": 1.0
-		}
-	},
-	"settings": {
-		"gravity": -9.8,
-		"sky": "default",
-		"fog_enabled": false,
-		"enable_vr": true
-	}
+  "map_info": {
+    "name": "CCTV Monitor Test",
+    "lookup_name": "test_cctv",
+    "description": "Test map for CCTV monitor system - displays different scenes on security monitors",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 7,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "test",
+      "category": "test",
+      "estimated_time": "2 minutes",
+      "learning_objectives": [
+        "Test CCTV monitor functionality"
+      ]
+    }
+  },
+  "documentation": {
+    "summary": "CCTV Test - Monitor Display System",
+    "layout": "Simple 7x7 grid with CCTV monitors displaying various scenes",
+    "objective": "Test CCTV monitor system with different configurations",
+    "key_elements": [
+      "CCTV monitors at various positions",
+      "Different rotation angles and scales",
+      "Various target scenes displayed",
+      "Teleporter to exit"
+    ]
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        "origin",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "cctv#res://commons/primitives/origin/origin.tscn:0:0:1",
+        " ",
+        "cctv#res://commons/primitives/point/grab_sphere_point.tscn:90:0:1.2",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "cctv#res://commons/primitives/arrow/arrow.tscn:180:0.3:0.8",
+        " ",
+        "cctv#res://algorithms/vectors/01_vector_basics/coordinates.tscn:270:0.2:1.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "artifact_definitions": {
+    "origin": {
+      "artifact": "origin",
+      "description": "Origin point for reference"
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.3,
+      0.3,
+      0.4
+    ],
+    "ambient_energy": 0.8,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.5,
+        -0.7,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 1.0
+    }
+  },
+  "settings": {
+    "gravity": -9.8,
+    "sky": "default",
+    "fog_enabled": false,
+    "enable_vr": true
+  }
 }

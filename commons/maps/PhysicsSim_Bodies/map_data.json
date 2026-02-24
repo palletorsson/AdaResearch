@@ -1,111 +1,381 @@
 {
-	"map_info": {
-		"name": "Physics Simulation: Rigid Bodies & Collisions",
-		"lookup_name": "PhysicsSim_Bodies",
-		"description": "Solid objects colliding, bouncing, and constraining each other. Four artifacts demonstrate rigid body dynamics, collision detection, constraints, and elastic response.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 9,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "intermediate",
-			"category": "physics",
-			"estimated_time": "10-15 minutes",
-			"learning_objectives": [
-				"Rigid body dynamics: position, orientation, angular velocity",
-				"Broad-phase and narrow-phase collision detection",
-				"Constraints: joints, hinges, sliders",
-				"Elastic and inelastic collision response"
-			]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "2", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "an", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "an", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "t", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "rigid_body:0:1", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "collision_detection:0:1", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "constraints:0:1", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "bouncing_ball:0:1", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "To Springs Gallery",
-			"description": "Continue to elastic connections",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
-	}
+  "map_info": {
+    "name": "Physics Simulation: Rigid Bodies & Collisions",
+    "lookup_name": "PhysicsSim_Bodies",
+    "description": "Solid objects colliding, bouncing, and constraining each other. Four artifacts demonstrate rigid body dynamics, collision detection, constraints, and elastic response.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "physics",
+      "estimated_time": "10-15 minutes",
+      "learning_objectives": [
+        "Rigid body dynamics: position, orientation, angular velocity",
+        "Broad-phase and narrow-phase collision detection",
+        "Constraints: joints, hinges, sliders",
+        "Elastic and inelastic collision response"
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "rigid_body:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "collision_detection:0:1",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "constraints:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "bouncing_ball:0:1",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "To Springs Gallery",
+      "description": "Continue to elastic connections",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
+  }
 }

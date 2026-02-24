@@ -1,117 +1,447 @@
 {
-	"map_info": {
-		"name": "Physics Simulation: Fields & Many-Body",
-		"lookup_name": "PhysicsSim_Fields",
-		"description": "Invisible forces made visible. Force fields, vector fields, particle systems, and the gravitational chaos of n-body and three-body problems.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 11,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "advanced",
-			"category": "physics",
-			"estimated_time": "12-15 minutes",
-			"learning_objectives": [
-				"Force fields: assigning forces to every point in space",
-				"Vector field visualization and particle advection",
-				"N-body gravitational simulation",
-				"Three-body problem and deterministic chaos"
-			]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "2", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "an", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "an", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "t", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "force_fields:0:1", " ", " ", " ", "vector_fields:0:1", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "three_body_problem:0:1", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "particle_systems:0:1", " ", " ", " ", "nbody_simulation:0:1", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "To Continuum Lab",
-			"description": "Continue to fluids and soft bodies",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
-	}
+  "map_info": {
+    "name": "Physics Simulation: Fields & Many-Body",
+    "lookup_name": "PhysicsSim_Fields",
+    "description": "Invisible forces made visible. Force fields, vector fields, particle systems, and the gravitational chaos of n-body and three-body problems.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 11,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "physics",
+      "estimated_time": "12-15 minutes",
+      "learning_objectives": [
+        "Force fields: assigning forces to every point in space",
+        "Vector field visualization and particle advection",
+        "N-body gravitational simulation",
+        "Three-body problem and deterministic chaos"
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "force_fields:0:1",
+        " ",
+        " ",
+        " ",
+        "vector_fields:0:1",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "three_body_problem:0:1",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "particle_systems:0:1",
+        " ",
+        " ",
+        " ",
+        "nbody_simulation:0:1",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "To Continuum Lab",
+      "description": "Continue to fluids and soft bodies",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
+  }
 }

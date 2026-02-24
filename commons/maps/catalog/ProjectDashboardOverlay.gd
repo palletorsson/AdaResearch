@@ -109,6 +109,11 @@ var _task_text_edit: TextEdit
 var _task_status_label: Label
 var _task_map_name: String = ""
 var _task_seq_id: String = ""
+var _json_editor_popup: PanelContainer
+var _json_editor_title: Label
+var _json_editor_text: TextEdit
+var _json_editor_status: Label
+var _json_editor_path: String = ""
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -160,7 +165,9 @@ func _input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 
 	if key.keycode == KEY_ESCAPE:
-		if _task_popup and _task_popup.visible:
+		if _json_editor_popup and _json_editor_popup.visible:
+			_json_editor_popup.visible = false
+		elif _task_popup and _task_popup.visible:
 			_task_popup.visible = false
 		elif _detail_popup and _detail_popup.visible:
 			_detail_popup.visible = false
@@ -781,6 +788,9 @@ func _build_ui() -> void:
 
 	# Task creation popup (hidden by default)
 	_build_task_popup()
+
+	# JSON editor popup (hidden by default)
+	_build_json_editor_popup()
 
 	# Show first tab
 	_switch_tab(0)
@@ -1787,14 +1797,24 @@ func _add_map_rules_row(parent: VBoxContainer, map_name: String, status: String,
 	var badge := _make_colored_cell(badge_text, badge_color, 60)
 	row.add_child(badge)
 
-	# Map name
-	var name_label := Label.new()
-	name_label.text = map_name
-	name_label.custom_minimum_size.x = 280
-	name_label.add_theme_font_size_override("font_size", 12)
-	name_label.add_theme_color_override("font_color", COLOR_TEXT)
-	name_label.clip_text = true
-	row.add_child(name_label)
+	# Map name — clickable to open JSON editor
+	var name_btn := Button.new()
+	name_btn.text = map_name
+	name_btn.flat = true
+	name_btn.custom_minimum_size.x = 280
+	name_btn.add_theme_font_size_override("font_size", 12)
+	name_btn.add_theme_color_override("font_color", COLOR_TEXT)
+	name_btn.add_theme_color_override("font_hover_color", COLOR_ACCENT)
+	name_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	name_btn.clip_text = true
+	if status != "MISSING":
+		var captured_name: String = map_name
+		name_btn.pressed.connect(func() -> void:
+			_open_json_editor(captured_name)
+		)
+	else:
+		name_btn.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	row.add_child(name_btn)
 
 	# Issues text
 	var issues_value: Variant = map_data.get("issues", [])
@@ -1983,6 +2003,147 @@ func _copy_task_to_clipboard() -> void:
 	DisplayServer.clipboard_set(_task_text_edit.text)
 	_task_status_label.text = "Copied to clipboard"
 	_task_status_label.add_theme_color_override("font_color", COLOR_COMPLETE)
+
+
+# ── JSON editor popup ────────────────────────────────────────────────────
+
+func _build_json_editor_popup() -> void:
+	_json_editor_popup = PanelContainer.new()
+	_json_editor_popup.visible = false
+	_json_editor_popup.set_anchors_preset(Control.PRESET_CENTER)
+	_json_editor_popup.anchor_left = 0.08
+	_json_editor_popup.anchor_right = 0.92
+	_json_editor_popup.anchor_top = 0.06
+	_json_editor_popup.anchor_bottom = 0.94
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.06, 0.08, 0.12, 0.99)
+	style.set_border_width_all(2)
+	style.border_color = COLOR_ACCENT
+	style.set_corner_radius_all(8)
+	style.set_content_margin_all(12)
+	_json_editor_popup.add_theme_stylebox_override("panel", style)
+	_root.add_child(_json_editor_popup)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
+	_json_editor_popup.add_child(vbox)
+
+	# Header
+	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation", 8)
+	vbox.add_child(header)
+
+	_json_editor_title = Label.new()
+	_json_editor_title.text = "Edit map_data.json"
+	_json_editor_title.add_theme_font_size_override("font_size", 15)
+	_json_editor_title.add_theme_color_override("font_color", COLOR_ACCENT)
+	_json_editor_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(_json_editor_title)
+
+	var close_btn := Button.new()
+	close_btn.text = "X"
+	close_btn.flat = true
+	close_btn.pressed.connect(func() -> void: _json_editor_popup.visible = false)
+	header.add_child(close_btn)
+
+	# TextEdit for JSON content
+	_json_editor_text = TextEdit.new()
+	_json_editor_text.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_json_editor_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_json_editor_text.add_theme_font_size_override("font_size", 12)
+	_json_editor_text.add_theme_color_override("font_color", COLOR_TEXT)
+	_json_editor_text.scroll_fit_content_height = false
+	var te_style := StyleBoxFlat.new()
+	te_style.bg_color = Color(0.03, 0.04, 0.06, 1.0)
+	te_style.set_border_width_all(1)
+	te_style.border_color = COLOR_BORDER
+	te_style.set_corner_radius_all(4)
+	te_style.set_content_margin_all(8)
+	_json_editor_text.add_theme_stylebox_override("normal", te_style)
+	vbox.add_child(_json_editor_text)
+
+	# Status label
+	_json_editor_status = Label.new()
+	_json_editor_status.text = ""
+	_json_editor_status.add_theme_font_size_override("font_size", 11)
+	_json_editor_status.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	vbox.add_child(_json_editor_status)
+
+	# Button bar
+	var btn_bar := HBoxContainer.new()
+	btn_bar.add_theme_constant_override("separation", 8)
+	vbox.add_child(btn_bar)
+
+	var save_btn := Button.new()
+	save_btn.text = "Save"
+	save_btn.custom_minimum_size.x = 80
+	save_btn.pressed.connect(_save_json_editor)
+	btn_bar.add_child(save_btn)
+
+	var reload_btn := Button.new()
+	reload_btn.text = "Reload"
+	reload_btn.custom_minimum_size.x = 80
+	reload_btn.pressed.connect(_reload_json_editor)
+	btn_bar.add_child(reload_btn)
+
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	btn_bar.add_child(spacer)
+
+	var cancel_btn := Button.new()
+	cancel_btn.text = "Close"
+	cancel_btn.custom_minimum_size.x = 80
+	cancel_btn.pressed.connect(func() -> void: _json_editor_popup.visible = false)
+	btn_bar.add_child(cancel_btn)
+
+
+func _open_json_editor(map_name: String) -> void:
+	var path := "res://commons/maps/%s/map_data.json" % map_name
+	var abs_path: String = ProjectSettings.globalize_path(path)
+	var file := FileAccess.open(abs_path, FileAccess.READ)
+	if not file:
+		if _json_editor_status:
+			_json_editor_status.text = "Cannot open: %s" % path
+			_json_editor_status.add_theme_color_override("font_color", COLOR_CRITICAL)
+			_json_editor_popup.visible = true
+		return
+	_json_editor_path = abs_path
+	_json_editor_text.text = file.get_as_text()
+	_json_editor_title.text = "Edit: %s/map_data.json" % map_name
+	_json_editor_status.text = ""
+	_json_editor_status.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+	_json_editor_popup.visible = true
+
+
+func _save_json_editor() -> void:
+	# Validate JSON first
+	var json := JSON.new()
+	if json.parse(_json_editor_text.text) != OK:
+		_json_editor_status.text = "Invalid JSON: %s (line %d)" % [json.get_error_message(), json.get_error_line()]
+		_json_editor_status.add_theme_color_override("font_color", COLOR_CRITICAL)
+		return
+	# Write to file
+	var file := FileAccess.open(_json_editor_path, FileAccess.WRITE)
+	if not file:
+		_json_editor_status.text = "Cannot write: %s" % _json_editor_path
+		_json_editor_status.add_theme_color_override("font_color", COLOR_CRITICAL)
+		return
+	file.store_string(_json_editor_text.text)
+	_json_editor_status.text = "Saved"
+	_json_editor_status.add_theme_color_override("font_color", COLOR_COMPLETE)
+
+
+func _reload_json_editor() -> void:
+	if _json_editor_path == "":
+		return
+	var file := FileAccess.open(_json_editor_path, FileAccess.READ)
+	if not file:
+		_json_editor_status.text = "Cannot reload: %s" % _json_editor_path
+		_json_editor_status.add_theme_color_override("font_color", COLOR_CRITICAL)
+		return
+	_json_editor_text.text = file.get_as_text()
+	_json_editor_status.text = "Reloaded from disk"
+	_json_editor_status.add_theme_color_override("font_color", COLOR_ACCENT)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

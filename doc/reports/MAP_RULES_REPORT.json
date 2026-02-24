@@ -1,10 +1,10 @@
 {
-  "generated": "2026-02-24T10:59:30",
+  "generated": "2026-02-24T11:41:18",
   "summary": {
     "total_sequences": 50,
     "total_maps": 478,
-    "ok": 246,
-    "fail": 194,
+    "ok": 367,
+    "fail": 73,
     "missing": 38
   },
   "sequences": [
@@ -19,26 +19,15 @@
     {
       "id": "array_tutorial",
       "title": "Array Tutorial Sequence",
-      "ok": 4,
-      "fail": 3,
+      "ok": 6,
+      "fail": 1,
       "missing": 0,
       "maps": [
         {
           "name": "Array_Patterns",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,4) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,9) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**Array_Patterns**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Array_Patterns`\n  Manual: Artifact 'dark_sphere' at (5,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "Tutorial_Single",
@@ -59,11 +48,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,7) h=4 unreachable"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID]"
             },
             {
@@ -72,7 +56,7 @@
               "msg": "Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Tutorial_2D_Build**\n  Manual: Artifact 'dark_sphere' at (3,7) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Tutorial_2D_Build**\n  Manual: Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Tutorial_3D",
@@ -88,20 +72,9 @@
         },
         {
           "name": "Tutorial_Disco",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'standalone_disco' at (8,7) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (4,8) h=0 unreachable [on VOID]"
-            }
-          ],
-          "fix_text": "**Tutorial_Disco**\n  Manual: Artifact 'standalone_disco' at (8,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (4,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -130,14 +103,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'penrose_triangle' at (10,7) h=3 unreachable"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'magritte_pipe' at (5,10) h=3 unreachable"
             }
           ],
-          "fix_text": "**Escher_Impossible**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'escher_staircase' at (0,4) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'penrose_triangle' at (10,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'magritte_pipe' at (5,10) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Escher_Impossible**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'escher_staircase' at (0,4) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'penrose_triangle' at (10,7) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Escher_Tessellation",
@@ -192,8 +160,8 @@
     {
       "id": "biological_growth",
       "title": "Biological Growth: Life Finds a Way",
-      "ok": 0,
-      "fail": 4,
+      "ok": 2,
+      "fail": 2,
       "missing": 0,
       "maps": [
         {
@@ -209,48 +177,33 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,9) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**BG_Slime_Mold**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix BG_Slime_Mold`\n  Manual: Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
+          "fix_text": "**BG_Slime_Mold**\n  Manual: Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
         },
         {
           "name": "BG_Mushroom_Growth",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (9,9) — no structure row at z=10 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,9) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**BG_Mushroom_Growth**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix BG_Mushroom_Growth`\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
+          "fix_text": ""
         },
         {
           "name": "BG_Crack_Propagation",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (8,8) — no structure row at z=9 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,8) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**BG_Crack_Propagation**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix BG_Crack_Propagation`\n  Note: Teleport at (8,8) — no structure row at z=9 to catch player"
+          "fix_text": ""
         },
         {
           "name": "BG_Tree_Forms",
@@ -265,14 +218,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,9) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**BG_Tree_Forms**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix BG_Tree_Forms`\n  Manual: Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
+          "fix_text": "**BG_Tree_Forms**\n  Manual: Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,9) — no structure row at z=10 to catch player"
         }
       ]
     },
@@ -364,25 +312,15 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,2) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID]"
             },
             {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,0) has height 3, must be 0 (void)"
             }
           ],
-          "fix_text": "**CA_4**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix CA_4`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'dark_sphere' at (3,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**CA_4**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "CA_5",
@@ -589,45 +527,27 @@
     {
       "id": "constraint_solvers",
       "title": "Constraint Solvers: Rules Become Worlds",
-      "ok": 0,
-      "fail": 3,
+      "ok": 3,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralGeneration_Wave_Function_Collapse",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Wave_Function_Collapse**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Wave_Function_Collapse`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationWfcDungeonGenerator",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,1) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationWfcDungeonGenerator**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationWfcDungeonGenerator`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationBooleanPatterns",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationBooleanPatterns**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationBooleanPatterns`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -723,8 +643,8 @@
     {
       "id": "devexamples",
       "title": "Dev Examples",
-      "ok": 0,
-      "fail": 6,
+      "ok": 1,
+      "fail": 5,
       "missing": 0,
       "maps": [
         {
@@ -735,14 +655,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'gridagent' at (4,4) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,7) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**gridagent_puzzle01_copy**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix gridagent_puzzle01_copy`\n  Manual: Artifact 'gridagent' at (4,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**gridagent_puzzle01_copy**\n  Manual: Artifact 'gridagent' at (4,4) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "gridagent_puzzle02_translate",
@@ -752,14 +667,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (10,7) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**gridagent_puzzle02_translate**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix gridagent_puzzle02_translate`\n  Manual: Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**gridagent_puzzle02_translate**\n  Manual: Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "gridagent_puzzle03_rotate",
@@ -769,31 +679,21 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'gridagent' at (5,5) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (10,9) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**gridagent_puzzle03_rotate**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix gridagent_puzzle03_rotate`\n  Manual: Artifact 'gridagent' at (5,5) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**gridagent_puzzle03_rotate**\n  Manual: Artifact 'gridagent' at (5,5) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "InfoBoards_Example",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (2,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**InfoBoards_Example**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix InfoBoards_Example`\n  Note: Teleport at (2,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Structure_Examples",
@@ -849,8 +749,8 @@
     {
       "id": "forces",
       "title": "Vectors & Forces: From Direction to Dynamics",
-      "ok": 22,
-      "fail": 2,
+      "ok": 23,
+      "fail": 1,
       "missing": 0,
       "maps": [
         {
@@ -921,20 +821,15 @@
         },
         {
           "name": "VectorWorkbench",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**VectorWorkbench**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix VectorWorkbench`\n  Note: Teleport at (5,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Forces_1",
@@ -1094,8 +989,8 @@
     {
       "id": "fractals",
       "title": "Fractals: Infinite Within Finite",
-      "ok": 11,
-      "fail": 3,
+      "ok": 12,
+      "fail": 2,
       "missing": 0,
       "maps": [
         {
@@ -1122,20 +1017,15 @@
         },
         {
           "name": "Fractals_2",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (13,11) — no structure row at z=12 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (13,11) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Fractals_2**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Fractals_2`\n  Note: Teleport at (13,11) — no structure row at z=12 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Fractals_3",
@@ -1170,22 +1060,12 @@
               "msg": "Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID]"
             },
             {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (6,6) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,6) has height 1, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 2 teleports ((6,6), (11,11)) — normal case is 1"
             }
           ],
-          "fix_text": "**Fractals_6**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Fractals_6`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (6,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((6,6), (11,11)) — normal case is 1"
+          "fix_text": "**Fractals_6**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((6,6), (11,11)) — normal case is 1"
         },
         {
           "name": "Fractals_7",
@@ -1240,50 +1120,33 @@
     {
       "id": "grammar_systems",
       "title": "Grammar Systems: Rules Generate Structure",
-      "ok": 0,
-      "fail": 3,
+      "ok": 3,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralGeneration_Markov_Chains",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Markov_Chains**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Markov_Chains`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_N_grams",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_N_grams**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_N_grams`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "Voxel_Grammar",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (4,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Voxel_Grammar**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Voxel_Grammar`\n  Note: Teleport at (4,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         }
       ]
     },
@@ -1347,98 +1210,54 @@
     {
       "id": "higher_dimensions",
       "title": "Higher Dimensions: Beyond 3D",
-      "ok": 0,
-      "fail": 4,
+      "ok": 4,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralGenerationTesseractErrorTunnel",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationTesseractErrorTunnel**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationTesseractErrorTunnel`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationSixteenCellNet",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationSixteenCellNet**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationSixteenCellNet`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationNetSpace",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationNetSpace**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationNetSpace`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationPortals",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationPortals**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationPortals`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
     {
       "id": "isosurfaces",
       "title": "Isosurfaces: Implicit to Explicit",
-      "ok": 9,
-      "fail": 7,
+      "ok": 16,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ISO_Voxel_Cave_Struct",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) is NOT reachable from spawn"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,0) is NOT reachable from spawn"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,0) has height 2, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1"
             }
           ],
-          "fix_text": "**ISO_Voxel_Cave_Struct**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ISO_Voxel_Cave_Struct`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Note: Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ISO_Showcase_2",
@@ -1490,25 +1309,15 @@
         },
         {
           "name": "ISO_Showcase_10",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) is NOT reachable from spawn"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 2, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 2 teleports ((2,0), (11,8)) — normal case is 1"
             }
           ],
-          "fix_text": "**ISO_Showcase_10**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ISO_Showcase_10`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Note: Map has 2 teleports ((2,0), (11,8)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ISO_Showcase_11",
@@ -1518,63 +1327,33 @@
         },
         {
           "name": "ISO_Marching_Gyroid",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ISO_Marching_Gyroid**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ISO_Marching_Gyroid`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_MarchingCave",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_MarchingCave**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_MarchingCave`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingcubesPortalLandscape",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingcubesPortalLandscape**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingcubesPortalLandscape`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ISO_Metaballs",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ISO_Metaballs**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ISO_Metaballs`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ISO_Implicit_Modeling",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ISO_Implicit_Modeling**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ISO_Implicit_Modeling`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -1911,93 +1690,51 @@
     {
       "id": "lsystems",
       "title": "L-Systems: Rules Grow Structure",
-      "ok": 0,
-      "fail": 7,
+      "ok": 7,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "LSystems_Tree_L_Systems",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_Tree_L_Systems**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_Tree_L_Systems`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_AnimatedTree",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,4) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_AnimatedTree**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_AnimatedTree`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_ContextSensitiveTree",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,6) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_ContextSensitiveTree**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_ContextSensitiveTree`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_ForestCompetition",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,8) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_ForestCompetition**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_ForestCompetition`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_Context_Free_Grammars_CFG",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_Context_Free_Grammars_CFG**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_Context_Free_Grammars_CFG`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_CityGenerator",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,7) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_CityGenerator**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_CityGenerator`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "LSystems_Hilbert3D",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,6) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**LSystems_Hilbert3D**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix LSystems_Hilbert3D`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -2116,77 +1853,57 @@
     {
       "id": "meshes",
       "title": "Mesh Generation",
-      "ok": 0,
-      "fail": 4,
+      "ok": 4,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "Meshes_One",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Meshes_One**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Meshes_One`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Meshes_Two",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Meshes_Two**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Meshes_Two`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Meshes_Three",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Meshes_Three**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Meshes_Three`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Meshes_Four",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Meshes_Four**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Meshes_Four`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         }
       ]
     },
@@ -2269,20 +1986,10 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
             }
           ],
-          "fix_text": "**Noise_Inside_Noise**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Noise_Inside_Noise`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'dark_sphere' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player"
+          "fix_text": "**Noise_Inside_Noise**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player"
         },
         {
           "name": "Noise_Space_10",
@@ -2296,15 +2003,10 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,5) h=1 unreachable"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'noise_space' at (5,6) h=1 unreachable"
             }
           ],
-          "fix_text": "**Noise_Space_10**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'dark_sphere' at (5,5) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noise_space' at (5,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Noise_Space_10**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'noise_space' at (5,6) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Noise_Perlin_Simplex",
@@ -2328,11 +2030,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID]"
             },
             {
@@ -2341,7 +2038,7 @@
               "msg": "Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Noise_Perlin_Simplex**\n  Manual: Artifact 'simplex_noise' at (2,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise' at (7,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noise_terrain' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Noise_Perlin_Simplex**\n  Manual: Artifact 'simplex_noise' at (2,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise' at (7,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'noise_terrain' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Lab_Path",
@@ -2393,8 +2090,8 @@
     {
       "id": "patterngeneration",
       "title": "Shaders & Patterns: The Book of Shaders",
-      "ok": 17,
-      "fail": 1,
+      "ok": 18,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
@@ -2471,20 +2168,15 @@
         },
         {
           "name": "Pattern_Generation_Five",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Pattern_Generation_Five**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Pattern_Generation_Five`\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player"
+          "fix_text": ""
         },
         {
           "name": "PatternGeneration_Diffusion_Limited_Aggregation_DLA",
@@ -2521,89 +2213,63 @@
     {
       "id": "physicssimulation",
       "title": "Physics Simulation: The Engine Behind Reality",
-      "ok": 16,
-      "fail": 5,
+      "ok": 21,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "PhysicsSim_Foundations",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,8) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**PhysicsSim_Foundations**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PhysicsSim_Foundations`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "PhysicsSim_Bodies",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (4,8) — no structure row at z=9 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (4,8) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**PhysicsSim_Bodies**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PhysicsSim_Bodies`\n  Note: Teleport at (4,8) — no structure row at z=9 to catch player"
+          "fix_text": ""
         },
         {
           "name": "PhysicsSim_Springs",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (3,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**PhysicsSim_Springs**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PhysicsSim_Springs`\n  Note: Teleport at (3,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         },
         {
           "name": "PhysicsSim_Fields",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (4,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**PhysicsSim_Fields**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PhysicsSim_Fields`\n  Note: Teleport at (4,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         },
         {
           "name": "PhysicsSim_Continuum",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (4,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (4,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**PhysicsSim_Continuum**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PhysicsSim_Continuum`\n  Note: Teleport at (4,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         },
         {
           "name": "PhysicsSimulation_Bouncing_Ball_Physics",
@@ -2754,11 +2420,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,2) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'interactive_point_origin' at (1,3) h=1 unreachable"
             },
             {
@@ -2772,7 +2433,7 @@
               "msg": "Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Point_One**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'static_point' at (4,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (3,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'interactive_point_origin' at (1,3) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'frame_counter_display' at (0,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Point_One**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'static_point' at (4,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'interactive_point_origin' at (1,3) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'frame_counter_display' at (0,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Point_Lines",
@@ -2820,14 +2481,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,4) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Point_Line_Grid**\n  Manual: Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (3,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Point_Line_Grid**\n  Manual: Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Point_Triangle",
@@ -2904,113 +2560,65 @@
     {
       "id": "proceduralaudio",
       "title": "Procedural Audio",
-      "ok": 0,
-      "fail": 8,
+      "ok": 8,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralAudio_Additive_Synthesis",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Additive_Synthesis**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Additive_Synthesis`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Subtractive_Synthesis",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Subtractive_Synthesis**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Subtractive_Synthesis`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_FM_Synthesis",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_FM_Synthesis**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_FM_Synthesis`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Granular_Synthesis",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Granular_Synthesis**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Granular_Synthesis`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Audio_Effects",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Audio_Effects**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Audio_Effects`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Sound_Synthesis_Drone_Effects",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Sound_Synthesis_Drone_Effects**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Sound_Synthesis_Drone_Effects`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Generative_Music_Algorithms",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Generative_Music_Algorithms**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Generative_Music_Algorithms`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralAudio_Psychoacoustics",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralAudio_Psychoacoustics**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralAudio_Psychoacoustics`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
     {
       "id": "proceduralgeneration",
       "title": "Procedural Generation: Rules Build Worlds",
-      "ok": 6,
-      "fail": 1,
+      "ok": 7,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
@@ -3027,15 +2635,9 @@
         },
         {
           "name": "PG_Percolation_Network",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**PG_Percolation_Network**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix PG_Percolation_Network`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "PG_Branching_Growth",
@@ -3066,643 +2668,315 @@
     {
       "id": "proceduralgeneration_all",
       "title": "Procedural Generation (All Maps)",
-      "ok": 0,
-      "fail": 42,
+      "ok": 42,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralGeneration_21",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_21**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_21`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_BranchingGrowthAlgorithm",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_BranchingGrowthAlgorithm**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_BranchingGrowthAlgorithm`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_CaveRandomWalk",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_CaveRandomWalk**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_CaveRandomWalk`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_CubeMound",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_CubeMound**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_CubeMound`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Delaunay_Triangulation",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Delaunay_Triangulation**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Delaunay_Triangulation`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Dome",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Dome**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Dome`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Eight",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Eight**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Eight`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Eleven",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Eleven**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Eleven`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Five",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Five**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Five`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Four",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Four**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Four`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Genetic_Algorithms",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Genetic_Algorithms**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Genetic_Algorithms`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Genetic_Programming",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Genetic_Programming**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Genetic_Programming`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Marching_Cubes_Algorithm",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Marching_Cubes_Algorithm**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Marching_Cubes_Algorithm`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_MarchingCave",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_MarchingCave**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_MarchingCave`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_MarchingGallery",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_MarchingGallery**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_MarchingGallery`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Markov_Chains",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Markov_Chains**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Markov_Chains`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Maze",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (15,16) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 2 teleports ((2,0), (15,16)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Maze**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Maze`\n  Note: Map has 2 teleports ((2,0), (15,16)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_N_grams",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_N_grams**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_N_grams`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Poisson_Disk_Sampling",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Poisson_Disk_Sampling**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Poisson_Disk_Sampling`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Reaction_Diffusion_Systems**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Reaction_Diffusion_Systems`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Seven",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Seven**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Seven`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Space_Colonization_Algorithms",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Space_Colonization_Algorithms**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Space_Colonization_Algorithms`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Space_Partitioning",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (14,16) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Space_Partitioning**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Space_Partitioning`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Ten",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Ten**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Ten`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Three",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Three**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Three`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Two",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**ProceduralGeneration_Two**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Two`\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Voronoi_Diagrams",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Voronoi_Diagrams**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Voronoi_Diagrams`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Wave_Function_Collapse",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Wave_Function_Collapse**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Wave_Function_Collapse`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationBooleanPatterns",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationBooleanPatterns**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationBooleanPatterns`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationCaveExplorer3dUi",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationCaveExplorer3dUi**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationCaveExplorer3dUi`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationCrystalRandom",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationCrystalRandom**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationCrystalRandom`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingcubesFlatLandscape",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingcubesFlatLandscape**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingcubesFlatLandscape`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingCubesInsideCave",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingCubesInsideCave**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingCubesInsideCave`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingcubesPortalLandscape",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingcubesPortalLandscape**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingcubesPortalLandscape`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingCubesSculpture",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingCubesSculpture**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingCubesSculpture`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingcubesTorusSculpture",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingcubesTorusSculpture**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingcubesTorusSculpture`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationMarchingCubesVovelNoise",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (4,1) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationMarchingCubesVovelNoise**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationMarchingCubesVovelNoise`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationNetSpace",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationNetSpace**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationNetSpace`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationPortals",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationPortals**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationPortals`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationSixteenCellNet",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationSixteenCellNet**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationSixteenCellNet`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationTesseractErrorTunnel",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationTesseractErrorTunnel**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationTesseractErrorTunnel`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGenerationWfcDungeonGenerator",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,1) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGenerationWfcDungeonGenerator**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGenerationWfcDungeonGenerator`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -3934,8 +3208,8 @@
     {
       "id": "randomness",
       "title": "Randomness: Freedom from Pattern",
-      "ok": 8,
-      "fail": 5,
+      "ok": 9,
+      "fail": 4,
       "missing": 0,
       "maps": [
         {
@@ -3986,11 +3260,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID]"
             },
             {
@@ -3999,7 +3268,7 @@
               "msg": "Map has 2 teleports ((0,4), (10,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Random_Walk**\n  Manual: Artifact 'random_walk_128' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((0,4), (10,12)) — normal case is 1"
+          "fix_text": "**Random_Walk**\n  Manual: Artifact 'random_walk_128' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 2 teleports ((0,4), (10,12)) — normal case is 1"
         },
         {
           "name": "Random_Gaussian",
@@ -4009,14 +3278,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,2) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Random_Gaussian**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Random_Gaussian`\n  Manual: Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Random_Gaussian**\n  Manual: Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Random_Mushrooms",
@@ -4065,11 +3329,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (4,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID]"
             },
             {
@@ -4081,31 +3340,21 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,7) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Random_Pheromone**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Random_Pheromone`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'dark_sphere' at (4,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (2,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,7) — row z=8 has no floor cubes to catch player"
+          "fix_text": "**Random_Pheromone**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (2,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,7) — row z=8 has no floor cubes to catch player"
         },
         {
           "name": "Random_Space",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (6,14) — no structure row at z=15 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,14) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Random_Space**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Random_Space`\n  Note: Teleport at (6,14) — no structure row at z=15 to catch player"
+          "fix_text": ""
         },
         {
           "name": "Random_Game",
@@ -4300,8 +3549,8 @@
     {
       "id": "softbodies",
       "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
-      "ok": 7,
-      "fail": 2,
+      "ok": 9,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
@@ -4348,84 +3597,48 @@
         },
         {
           "name": "ProceduralGeneration_Reaction_Diffusion_Systems",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Reaction_Diffusion_Systems**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Reaction_Diffusion_Systems`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "Topology_Entropy_Morphogenesis",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,9) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**Topology_Entropy_Morphogenesis**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Topology_Entropy_Morphogenesis`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
     {
       "id": "spatial_partitioning",
       "title": "Spatial Partitioning: Dividing Space",
-      "ok": 0,
-      "fail": 4,
+      "ok": 4,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "ProceduralGeneration_Voronoi_Diagrams",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Voronoi_Diagrams**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Voronoi_Diagrams`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Delaunay_Triangulation",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Delaunay_Triangulation**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Delaunay_Triangulation`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Space_Partitioning",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (14,16) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Space_Partitioning**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Space_Partitioning`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "ProceduralGeneration_Poisson_Disk_Sampling",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**ProceduralGeneration_Poisson_Disk_Sampling**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix ProceduralGeneration_Poisson_Disk_Sampling`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -4557,93 +3770,51 @@
     {
       "id": "swarmintelligence",
       "title": "Swarm Intelligence: No Leader, Yet Coordinated",
-      "ok": 0,
-      "fail": 7,
+      "ok": 7,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
           "name": "SwarmIntelligence_PhysarumColony",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,7) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_PhysarumColony**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_PhysarumColony`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_FlowFeilds",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,6) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_FlowFeilds**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_FlowFeilds`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_Boids_Algorithm",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,9) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_Boids_Algorithm**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_Boids_Algorithm`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (6,6) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_Agent_Based_Modeling_ABM**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_Agent_Based_Modeling_ABM`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_Ant_Colony_Optimization",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,5) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_Ant_Colony_Optimization**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_Ant_Colony_Optimization`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_Particle_Swarm_Optimization",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,7) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_Particle_Swarm_Optimization**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_Particle_Swarm_Optimization`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,8) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**SwarmIntelligence_Swarm_Intelligence_Algorithms**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix SwarmIntelligence_Swarm_Intelligence_Algorithms`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         }
       ]
     },
@@ -4683,8 +3854,8 @@
     {
       "id": "testmaps",
       "title": "Unused Artifacts Test",
-      "ok": 0,
-      "fail": 22,
+      "ok": 6,
+      "fail": 16,
       "missing": 0,
       "maps": [
         {
@@ -4709,19 +3880,9 @@
               "msg": "Teleport at (9,11) — no structure row at z=12 to catch player"
             },
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 2, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -4729,7 +3890,7 @@
               "msg": "Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_2**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_2`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+          "fix_text": "**Test_2**\n  Manual: Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
         },
         {
           "name": "Test_3",
@@ -4751,39 +3912,9 @@
               "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
             },
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -4791,17 +3922,12 @@
               "msg": "Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_3**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_3`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_3**\n  Manual: Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_4",
           "status": "FAIL",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) is NOT reachable from spawn"
-            },
             {
               "rule": 3,
               "severity": "ERROR",
@@ -4823,32 +3949,12 @@
               "msg": "Artifact 'pathfinding3d' at (5,6) h=4 unreachable"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) has height 3, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 4, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 4, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 4, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_4**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_4`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_4**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_5",
@@ -4860,32 +3966,17 @@
               "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_5**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_5`\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_5**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_6",
           "status": "FAIL",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) is NOT reachable from spawn"
-            },
             {
               "rule": 3,
               "severity": "ERROR",
@@ -4912,56 +4003,21 @@
               "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 9, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_6**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_6`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_6**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_7",
           "status": "FAIL",
           "issues": [
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'random_plants' at (3,7) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -4969,31 +4025,16 @@
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_7**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_7`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_7**\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_8",
           "status": "FAIL",
           "issues": [
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'random_plants' at (3,7) h=1 unreachable"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -5001,7 +4042,7 @@
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_8**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_8`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_8**\n  Manual: Artifact 'random_plants' at (3,7) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_9",
@@ -5025,11 +4066,6 @@
               "msg": "Teleport at (9,11) — no structure row at z=12 to catch player"
             },
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID]"
@@ -5040,17 +4076,12 @@
               "msg": "Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID]"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,11) has height 2, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_10**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_10`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
+          "fix_text": "**Test_10**\n  Manual: Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (9,11) — no structure row at z=12 to catch player\n  Note: Map has 2 teleports ((1,1), (9,11)) — normal case is 1"
         },
         {
           "name": "Test_11",
@@ -5072,39 +4103,9 @@
               "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
             },
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) is NOT reachable from spawn"
-            },
-            {
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -5112,17 +4113,12 @@
               "msg": "Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_11**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_11`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_11**\n  Manual: Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_12",
           "status": "FAIL",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) is NOT reachable from spawn"
-            },
             {
               "rule": 3,
               "severity": "ERROR",
@@ -5144,32 +4140,12 @@
               "msg": "Artifact 'pathfinding3d' at (5,6) h=4 unreachable"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) has height 3, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 4, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 4, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 4, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_12**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_12`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_12**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding3d' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_13",
@@ -5181,32 +4157,17 @@
               "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_13**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_13`\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_13**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_14",
           "status": "FAIL",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) is NOT reachable from spawn"
-            },
             {
               "rule": 3,
               "severity": "ERROR",
@@ -5233,32 +4194,12 @@
               "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 9, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_14**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_14`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_14**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_15",
@@ -5270,32 +4211,17 @@
               "msg": "Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,0) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 1, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_15**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_15`\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_15**\n  Manual: Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_16",
           "status": "FAIL",
           "issues": [
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) is NOT reachable from spawn"
-            },
             {
               "rule": 3,
               "severity": "ERROR",
@@ -5322,36 +4248,16 @@
               "msg": "Artifact 'network_analysis' at (2,11) h=7 unreachable"
             },
             {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (2,0) has height 9, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 2, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_16**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_16`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": "**Test_16**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'network_analysis' at (2,11) h=7 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Note: Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1"
         },
         {
           "name": "Test_Scene_1",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
@@ -5367,31 +4273,6 @@
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
-            },
-            {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (0,1) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
             },
             {
               "rule": 6,
@@ -5399,11 +4280,11 @@
               "msg": "Map has 4 teleports ((0,1), (7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_Scene_1**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_Scene_1`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 4 teleports ((0,1), (7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "Test_Scene_2",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
@@ -5421,90 +4302,48 @@
               "msg": "Teleport at (9,12) — no structure row at z=13 to catch player"
             },
             {
-              "rule": 3,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) is NOT reachable from spawn"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (7,12) has height 2, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,12) has height 1, must be 0 (void)"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (9,12) has height 1, must be 0 (void)"
-            },
-            {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Test_Scene_2**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_Scene_2`\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Note: Teleport at (7,12) — no structure row at z=13 to catch player\n  Note: Teleport at (8,12) — no structure row at z=13 to catch player\n  Note: Teleport at (9,12) — no structure row at z=13 to catch player\n  Note: Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "test_cctv",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (3,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (3,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**test_cctv**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix test_cctv`\n  Note: Teleport at (3,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "test_gridagent",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (8,7) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**test_gridagent**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix test_gridagent`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "test_gridagent_algogun",
-          "status": "FAIL",
-          "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (10,9) has height 1, must be 0 (void)"
-            }
-          ],
-          "fix_text": "**test_gridagent_algogun**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix test_gridagent_algogun`"
+          "status": "OK",
+          "issues": [],
+          "fix_text": ""
         },
         {
           "name": "Test_Substrates",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,10) — no structure row at z=11 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,10) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Test_Substrates**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Test_Substrates`\n  Note: Teleport at (5,10) — no structure row at z=11 to catch player"
+          "fix_text": ""
         }
       ]
     },
@@ -5528,14 +4367,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'balance_puzzle' at (5,10) h=2 unreachable"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,14) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Trans_Intro**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'balance_puzzle' at (5,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (5,14) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Intro**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'balance_puzzle' at (5,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Trans_Translate_1",
@@ -5559,11 +4393,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,10) h=1 unreachable"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'y_translation_cube' at (1,11) h=1 unreachable"
             },
             {
@@ -5577,7 +4406,7 @@
               "msg": "Artifact 'pick_up_cube' at (4,12) h=2 unreachable"
             }
           ],
-          "fix_text": "**Trans_Translate_1**\n  Manual: Artifact 'player_trace' at (0,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (3,10) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'y_translation_cube' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,12) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (4,12) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Translate_1**\n  Manual: Artifact 'player_trace' at (0,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'y_translation_cube' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,12) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (4,12) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Trans_Translate_2",
@@ -5597,11 +4426,6 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,6) h=0 unreachable [on VOID]"
             },
             {
               "rule": 4,
@@ -5669,7 +4493,7 @@
               "msg": "Artifact 'cube_scene' at (2,15) h=1 unreachable"
             }
           ],
-          "fix_text": "**Trans_Translate_2**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (3,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'x_translation_cube' at (2,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pickup_gate' at (6,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'translation_cube_demo' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (1,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (1,15) h=5 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Translate_2**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'x_translation_cube' at (2,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pickup_gate' at (6,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'translation_cube_demo' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (1,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (1,15) h=5 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Trans_Rotation_1",
@@ -5684,11 +4508,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (3,6) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID]"
             },
             {
@@ -5697,7 +4516,7 @@
               "msg": "Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Trans_Rotation_2**\n  Manual: Artifact 'dark_sphere' at (3,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Rotation_2**\n  Manual: Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Trans_Scale",
@@ -5716,8 +4535,8 @@
     {
       "id": "unused",
       "title": "Unused",
-      "ok": 14,
-      "fail": 9,
+      "ok": 23,
+      "fail": 0,
       "missing": 0,
       "maps": [
         {
@@ -5728,139 +4547,99 @@
         },
         {
           "name": "Directionality_Examples",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (12,24) — no structure row at z=25 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (12,24) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**Directionality_Examples**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Directionality_Examples`\n  Note: Teleport at (12,24) — no structure row at z=25 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_1",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_1**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_1`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_2",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_2**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_2`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_3",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_3**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_3`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_4",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_4**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_4`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_5",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_5**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_5`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_6",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_6**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_6`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "One_Adapt_7",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
             {
               "rule": 2,
               "severity": "WARN",
               "msg": "Teleport at (5,6) — no structure row at z=7 to catch player"
-            },
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (5,6) has height 1, must be 0 (void)"
             }
           ],
-          "fix_text": "**One_Adapt_7**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix One_Adapt_7`\n  Note: Teleport at (5,6) — no structure row at z=7 to catch player"
+          "fix_text": ""
         },
         {
           "name": "oscillation_1",
@@ -5918,20 +4697,15 @@
         },
         {
           "name": "Pattern_Generation_Three",
-          "status": "FAIL",
+          "status": "OK",
           "issues": [
-            {
-              "rule": 5,
-              "severity": "ERROR",
-              "msg": "Teleport at (11,11) has height 1, must be 0 (void)"
-            },
             {
               "rule": 6,
               "severity": "WARN",
               "msg": "Map has 3 teleports ((11,10), (11,11), (9,12)) — normal case is 1"
             }
           ],
-          "fix_text": "**Pattern_Generation_Three**\nAuto-fix (Rule 5):\n  `python tools/map_pathfinder.py fix Pattern_Generation_Three`\n  Note: Map has 3 teleports ((11,10), (11,11), (9,12)) — normal case is 1"
+          "fix_text": ""
         },
         {
           "name": "Pattern_Generation_Four",
@@ -6008,11 +4782,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,13) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID]"
             },
             {
@@ -6021,7 +4790,7 @@
               "msg": "Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_Sine_Space**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'colorballs' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (5,13) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_Sine_Space**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'colorballs' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,12) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "WaveFunctions_Unit_Circle",
@@ -6036,14 +4805,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (6,13) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_Unit_Circle**\n  Manual: Artifact 'unit_circle_advanced' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (6,13) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_Unit_Circle**\n  Manual: Artifact 'unit_circle_advanced' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "WaveFunctions_3D_Wave_Propagation",
@@ -6057,11 +4821,6 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID]"
             },
             {
@@ -6070,7 +4829,7 @@
               "msg": "Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_3D_Wave_Propagation**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'dark_sphere' at (5,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_3D_Wave_Propagation**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "WaveFunctions_Effect_Sound",
@@ -6092,14 +4851,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_John_Cage**\n  Manual: Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (5,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_John_Cage**\n  Manual: Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "WaveFunctions_AirMusic",
@@ -6108,15 +4862,10 @@
             {
               "rule": 4,
               "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (4,4) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
               "msg": "Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_AirMusic**\n  Manual: Artifact 'dark_sphere' at (4,4) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_AirMusic**\n  Manual: Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Wavefunctions_Sky_Stairs",
@@ -6143,14 +4892,9 @@
               "rule": 4,
               "severity": "ERROR",
               "msg": "Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID]"
-            },
-            {
-              "rule": 4,
-              "severity": "ERROR",
-              "msg": "Artifact 'dark_sphere' at (4,7) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**WaveFunctions_TrigWalkingPath**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'dark_sphere' at (4,7) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**WaveFunctions_TrigWalkingPath**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "WaveFunctions_Synthesis_Lab",

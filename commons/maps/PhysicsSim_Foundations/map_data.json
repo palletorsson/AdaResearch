@@ -1,111 +1,335 @@
 {
-	"map_info": {
-		"name": "Physics Simulation: Foundations",
-		"lookup_name": "PhysicsSim_Foundations",
-		"description": "The mathematical bedrock of physics simulation — Newton's laws, numerical integration, and Verlet method. Three artifacts on a clean, minimal floor.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 7,
-			"depth": 9,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "beginner",
-			"category": "physics",
-			"estimated_time": "8-10 minutes",
-			"learning_objectives": [
-				"Newton's three laws as the basis for physics simulation",
-				"Euler vs Verlet integration for numerical stability",
-				"The pipeline from continuous math to discrete simulation"
-			]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"], 
-			["1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "an", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "an", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "newtons_laws:0:1", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "numerical_integration:0:1", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "verlet_integration:0:1", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "To Bodies Lab",
-			"description": "Continue to the collision arena",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
-	}
+  "map_info": {
+    "name": "Physics Simulation: Foundations",
+    "lookup_name": "PhysicsSim_Foundations",
+    "description": "The mathematical bedrock of physics simulation — Newton's laws, numerical integration, and Verlet method. Three artifacts on a clean, minimal floor.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 9,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "physics",
+      "estimated_time": "8-10 minutes",
+      "learning_objectives": [
+        "Newton's three laws as the basis for physics simulation",
+        "Euler vs Verlet integration for numerical stability",
+        "The pipeline from continuous math to discrete simulation"
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "newtons_laws:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "numerical_integration:0:1",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "verlet_integration:0:1",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "To Bodies Lab",
+      "description": "Continue to the collision arena",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
+  }
 }

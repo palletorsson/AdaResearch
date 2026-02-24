@@ -1,117 +1,381 @@
 {
-	"map_info": {
-		"name": "Physics Simulation: Springs & Cloth",
-		"lookup_name": "PhysicsSim_Springs",
-		"description": "Elastic connections. From single spring-damper oscillators to networks of springs that form cloth. Hooke's law generates surprising complexity.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 7,
-			"depth": 11,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "intermediate",
-			"category": "physics",
-			"estimated_time": "10-12 minutes",
-			"learning_objectives": [
-				"Hooke's law: F = -kx and damped harmonic oscillation",
-				"Spring-mass networks as building blocks for deformable objects",
-				"Cloth simulation from grid-connected springs",
-				"Damping and energy dissipation"
-			]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "an", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "an", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "mass_spring_damper:0:1", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "spring_mass_system:0:1", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "spring_system:0:1", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "cloth_simulation:0:1", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "To Fields Space",
-			"description": "Continue to force fields and many-body dynamics",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
-	}
+  "map_info": {
+    "name": "Physics Simulation: Springs & Cloth",
+    "lookup_name": "PhysicsSim_Springs",
+    "description": "Elastic connections. From single spring-damper oscillators to networks of springs that form cloth. Hooke's law generates surprising complexity.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 11,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "physics",
+      "estimated_time": "10-12 minutes",
+      "learning_objectives": [
+        "Hooke's law: F = -kx and damped harmonic oscillation",
+        "Spring-mass networks as building blocks for deformable objects",
+        "Cloth simulation from grid-connected springs",
+        "Damping and energy dissipation"
+      ]
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "mass_spring_damper:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "spring_mass_system:0:1",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "spring_system:0:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "cloth_simulation:0:1",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "To Fields Space",
+      "description": "Continue to force fields and many-body dynamics",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
+  }
 }
