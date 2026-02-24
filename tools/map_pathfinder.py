@@ -5,7 +5,7 @@ Enforces the map construction rules from doc/MAP_AGENT_ONBOARDING.md §7:
   Rule 1: Spawn must be plain 's' — always start at 1,1,1 (auto-fixable)
   Rule 2: Teleport needs +1 row in z with floor cubes behind it
   Rule 3: Teleport must be reachable from spawn
-  Rule 4: All interactable artifacts must be reachable from spawn
+  Rule 4: All interactable artifacts must be reachable from spawn (except exempt: dark_sphere)
   Rule 5: Teleport must stand on y=0 (void) in structure
   Rule 6: Only one teleport per map (warning if >1)
 
@@ -49,6 +49,9 @@ SEQUENCE_DIR = MAPS_DIR / "sequences"
 # Oversight task scheduler integration
 OVERSIGHT_URL = os.environ.get("OVERSIGHT_URL", "http://localhost:3000")
 OVERSIGHT_PROJECT = os.environ.get("OVERSIGHT_PROJECT", "ada-research")
+
+# Artifacts exempt from Rule 4 reachability — decorative/environmental only
+EXEMPT_ARTIFACTS = {"dark_sphere"}
 
 
 # ---------------------------------------------------------------------------
@@ -490,7 +493,11 @@ def check_rules(graph: MapGraph) -> list[dict]:
     # adjacent cell (4-connected).  This covers "table" layouts where the
     # artifact sits on an elevated pedestal and the player interacts from a
     # neighboring lower tile.
+    # Exempt: decorative/environmental artifacts (e.g. dark_sphere) that don't
+    # need player interaction — they're scene-level effects, not interactables.
     for art in graph.artifacts:
+        if art["name"] in EXEMPT_ARTIFACTS:
+            continue
         pos = (art["row"], art["col"])
         if pos in reachable:
             continue

@@ -1806,7 +1806,7 @@ func _add_map_rules_row(parent: VBoxContainer, map_name: String, status: String,
 			if iss_item is Dictionary:
 				var iss: Dictionary = iss_item as Dictionary
 				if str(iss.get("severity", "")) == "ERROR":
-					error_parts.append("R%s: %s" % [str(iss.get("rule", "")), str(iss.get("msg", ""))[:50]])
+					error_parts.append("R%s: %s" % [str(iss.get("rule", "")), str(iss.get("msg", "")).substr(0, 50)])
 		issue_str = "; ".join(error_parts)
 
 	var issue_label := Label.new()
