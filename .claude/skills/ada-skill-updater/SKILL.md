@@ -38,6 +38,7 @@ Located in `.claude/skills/`:
 | ada-dashboard | `/ada-dashboard` | Project completeness CLI — coverage status, recommendations, near-wins, per-map context gathering |
 | ada-task-manager | `/ada-task-manager` | Connects to Oversight server (192.168.0.112:3001) — view tasks, report work, mark done, add memories |
 | ada-bridge-listener | `/ada-bridge-listener` | Reads feedback from Godot via desktop_feedback.md — acts on bug reports, feature requests, artifact tasks |
+| ada-humanizer | `/ada-humanizer` | Removes AI writing patterns from map text files — ensures genuine voice in blurb/technical/critical/summary |
 
 ## How to Update a Skill
 
