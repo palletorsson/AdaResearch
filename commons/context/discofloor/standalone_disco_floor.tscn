@@ -7,8 +7,8 @@
 
 [node name="DiscoFloor" type="Node3D" parent="."]
 script = ExtResource("1_disco")
-grid_width = 10
-grid_depth = 10
+grid_width = 12
+grid_depth = 12
 tile_size = 0.5
 tile_gap = 0.02
 base_color = Color(1, 1, 1, 1)
