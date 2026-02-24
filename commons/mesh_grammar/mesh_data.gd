@@ -172,7 +172,8 @@ func to_array_mesh(options: Dictionary = {}) -> ArrayMesh:
 
 	if options.get("generate_normals", false):
 		st.generate_normals()
-	st.generate_tangents()
+	if options.get("generate_tangents", false):
+		st.generate_tangents()
 	return st.commit()
 
 # ---------------------------------------------------------------------------
