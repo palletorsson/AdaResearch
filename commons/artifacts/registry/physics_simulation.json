@@ -877,6 +877,41 @@
 				"forces"
 			],
 			"sequence": "forces"
+		},
+		"friction_ramp": {
+			"lookup_name": "friction_ramp",
+			"scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
+			"name": "Friction Ramp",
+			"description": "Inclined plane with adjustable friction coefficient and slope angle. A block slides or sticks based on whether mg·sin(θ) exceeds μ·mg·cos(θ). Force arrows show gravity, normal force, and friction in real time. VR sliders control μ (0–1.5) and angle (5°–60°).",
+			"qfep_connection": "Friction as the threshold between stasis and motion — a phase transition governed by a single inequality. The coefficient μ is the lambda that partitions all possible angles into two regimes: order (static) and entropy (sliding).",
+			"category": "physics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"friction",
+				"inclined_plane",
+				"static_vs_kinetic",
+				"force_balance"
+			],
+			"dev_category": "physics_foundations",
+			"tags": [
+				"friction",
+				"ramp",
+				"inclined_plane",
+				"normal_force",
+				"gravity",
+				"mu",
+				"coefficient",
+				"sliding",
+				"static",
+				"force_diagram",
+				"beginner"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
 		}
 	},
 	"sequence_mapping": {
