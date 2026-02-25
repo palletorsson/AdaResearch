@@ -63,6 +63,18 @@
 				"lsystems"
 			],
 			"sequence": "grammar_systems"
+		},
+		"parametric_lsystem": {
+			"name": "Parametric L-System",
+			"lookup_name": "parametric_lsystem",
+			"description": "L-system with continuous angle and length parameters — branch depth controls parametric decay for organic, naturalistic tree and plant forms. More organic than discrete rules.",
+			"scene": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		}
 	}
 }
