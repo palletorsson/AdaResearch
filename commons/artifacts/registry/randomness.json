@@ -1583,6 +1583,29 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"worley_noise": {
+			"name": "Worley Noise",
+			"lookup_name": "worley_noise",
+			"description": "Voronoi/cellular noise texture on a floor quad. Scatters random seed points and computes F2-F1 (second-nearest minus nearest distance) for the classic cell boundary look. Complement to Perlin/Simplex noise.",
+			"scene": "res://commons/artifacts/worley_noise/worley_noise.tscn",
+			"category": "procedural",
+			"complexity": "beginner",
+			"tags": [
+				"worley",
+				"voronoi",
+				"cellular",
+				"noise",
+				"distance_field",
+				"floor_display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
