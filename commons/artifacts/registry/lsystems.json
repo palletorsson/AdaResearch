@@ -87,6 +87,18 @@
 			"map_sequences": [
 				"lsystems"
 			]
+		},
+		"branching_coral": {
+			"name": "Branching Coral",
+			"lookup_name": "branching_coral",
+			"description": "Marine L-system coral colony — multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
+			"scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		}
 	}
 }

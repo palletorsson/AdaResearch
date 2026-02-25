@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/branching_coral/branching_coral.gd" id="1_script"]
+
+[node name="BranchingCoral" type="Node3D"]
+script = ExtResource("1_script")
