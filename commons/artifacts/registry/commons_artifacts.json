@@ -26,6 +26,28 @@
 				"wavefunctions"
 			]
 		},
+		"barnsley_fern": {
+			"lookup_name": "barnsley_fern",
+			"name": "Barnsley Fern",
+			"description": "Classic Barnsley fern rendered via iterated function system — four affine transforms with weighted probabilities produce the iconic fractal fern shape as a point cloud on a floor display. Density-based coloring reveals the self-similar structure.",
+			"scene": "res://commons/artifacts/barnsley_fern/barnsley_fern.tscn",
+			"category": "procedural",
+			"complexity": "beginner",
+			"tags": [
+				"barnsley",
+				"fern",
+				"fractal",
+				"ifs",
+				"iterated_function_system",
+				"point_cloud"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "fractals",
+			"map_sequences": [
+				"fractals"
+			]
+		},
 		"bias_visualizer": {
 			"lookup_name": "bias_visualizer",
 			"name": "Bias Visualizer",
