@@ -245,6 +245,30 @@
 				"cellularautomata"
 			]
 		},
+		"glitch_body": {
+			"lookup_name": "glitch_body",
+			"name": "Glitch Body",
+			"description": "Mesh that refuses stable form — a procedural sphere-like shape rebuilt every frame with time-varying noise perturbation and HSV hue cycling. Vertices oscillate, stretch, and collapse; the mesh is always transforming, never settling. A body in continuous becoming, resisting fixed categorization.",
+			"scene": "res://commons/artifacts/glitch_body/glitch_body.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"glitch",
+				"deformation",
+				"queer_theory",
+				"becoming",
+				"procedural",
+				"animated",
+				"speculative_computation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "speculativecomputation",
+			"map_sequences": [
+				"speculativecomputation",
+				"criticalalgorithms"
+			]
+		},
 		"harmonic_motion_demo": {
 			"lookup_name": "harmonic_motion_demo",
 			"name": "Harmonic Motion Demo",
