@@ -8,6 +8,8 @@ var info_label: Label3D
 
 func _ready():
 	super._ready()
+	# Match the compact exhibition presentation used by other advanced vector scenes.
+	scale = Vector3(0.5, 0.5, 0.5)
 	create_axes(1.5)
 	radius_vector = spawn_vector(Vector3.ZERO, Vector3(1.4, 0.8, 0.0), Color(1.0, 0.6, 0.2, 1.0), "r")
 	force_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.4, 1.0), Color(0.2, 0.8, 1.0, 1.0), "F")
@@ -16,7 +18,13 @@ func _ready():
 	var force_start = force_vector.get_node_or_null("lineContainer/GrabSphere")
 	if force_start:
 		_disable_grab_sphere(force_start)
-	info_label = create_info_panel("Torque", Vector3(0.5, 1.2, 0.0))
+	info_label = create_info_panel(
+		"Torque",
+		Vector3(0.0, 2.5, -0.8),
+		Vector2(2.4, 1.0),
+		"tau = r x F\n|tau| = |r||F|sin(theta)",
+		"Rotational force from cross product"
+	)
 
 func _process(_delta):
 	var r = get_vector(radius_vector)

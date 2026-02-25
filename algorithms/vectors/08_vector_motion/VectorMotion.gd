@@ -25,6 +25,8 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
+	# Match the compact exhibition presentation used by other advanced vector scenes.
+	scale = Vector3(0.5, 0.5, 0.5)
 	create_axes(1.5)
 	
 	# Ball at (0, 1, 0) scaled
@@ -37,7 +39,13 @@ func _ready():
 	velocity_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.3, 0.9, 1.0, 1.0), "Velocity", false)
 	position_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 1.0, 0.6, 1.0), "Position", false)
 	
-	info_label = create_info_panel("Motion Vectors", Vector3(0.5, 1.2, 0.0))
+	info_label = create_info_panel(
+		"Motion Vectors",
+		Vector3(0.0, 2.5, -0.8),
+		Vector2(2.4, 1.0),
+		"v += a * dt\np += v * dt",
+		"Acceleration drives velocity drives position"
+	)
 	
 	# Trail Setup
 	_create_trail_system()
@@ -159,7 +167,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	var start: Node3D = cache_dict.get("start")
 	var end: Node3D = cache_dict.get("end")
 	if start and end:
-		return (end.global_position - start.global_position) / SCENE_SCALE
+		return (end.global_position - start.global_position) / (SCENE_SCALE * scale.x)
 	if arrow.has_method("get_vector"):
 		return arrow.get_vector()
 	return Vector3.ZERO

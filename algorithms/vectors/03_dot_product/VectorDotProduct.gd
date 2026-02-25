@@ -75,13 +75,14 @@ func _process(delta):
 	var rej: Vector3 = a_vec - proj
 
 	# Visual updates must happen every frame for smoothness
+	var proj_scaled = proj * SCENE_SCALE
 	projection_vector.position = vector_a.position
 	_update_vector_fast(projection_vector, proj, _cached_proj_nodes)
 
-	rejection_vector.position = vector_a.position + proj
+	rejection_vector.position = vector_a.position + proj_scaled
 	_update_vector_fast(rejection_vector, rej, _cached_rej_nodes)
 	if _proj_dot:
-		_proj_dot.position = vector_a.position + proj
+		_proj_dot.position = vector_a.position + proj_scaled
 
 	var mid_dir: Vector3 = a_vec.normalized() + b_vec.normalized()
 	if mid_dir.length() == 0:
@@ -182,7 +183,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	var start: Node3D = cache_dict.get("start")
 	var end: Node3D = cache_dict.get("end")
 	if start and end:
-		return end.global_position - start.global_position
+		return (end.global_position - start.global_position) / (SCENE_SCALE * scale.x)
 	if arrow.has_method("get_vector"):
 		return arrow.get_vector()
 	return Vector3.ZERO
@@ -190,7 +191,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
-		end_node.position = vector
+		end_node.position = vector * SCENE_SCALE
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()

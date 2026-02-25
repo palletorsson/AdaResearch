@@ -2,6 +2,11 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const GRID_RANGE := 4
 const GRID_SPACING := 0.9
+const FIELD_VERTICAL_OSCILLATION := 0.3
+const FIELD_VERTICAL_FREQUENCY := 0.75
+const PARTICLE_FOLLOW := 0.35
+const PARTICLE_DAMPING := 0.985
+const PARTICLE_VERTICAL_LIMIT := 0.35
 
 var field_vectors: Array[Node3D] = []
 var particle: Node3D
@@ -12,11 +17,19 @@ var elapsed := 0.0
 
 func _ready():
 	super._ready()
+	# Match the compact exhibition presentation used by other advanced vector scenes.
+	scale = Vector3(0.5, 0.5, 0.5)
 	create_axes(4.5)
 	_create_field_vectors()
 	particle = _create_particle_marker()
 	reposition_particle(Vector3.ZERO)
-	info_label = create_info_panel("Vector Field Flow", Vector3(-3.5, 2.5, 0.0))
+	info_label = create_info_panel(
+		"Vector Field Flow",
+		Vector3(-3.5, 2.5, 0.0),
+		Vector2(2.4, 1.0),
+		"F(p) = swirl - radial",
+		"Particle follows field vectors"
+	)
 
 func _process(delta):
 	elapsed += delta
@@ -46,7 +59,11 @@ func _update_field_vectors():
 		update_vector(arrow, value)
 
 func _field_value(position: Vector3) -> Vector3:
-	var swirl = Vector3(-position.z, 0.6 * sin(elapsed), position.x)
+	var swirl = Vector3(
+		-position.z,
+		FIELD_VERTICAL_OSCILLATION * sin(elapsed * FIELD_VERTICAL_FREQUENCY),
+		position.x
+	)
 	var radial = position * 0.1
 	return (swirl - radial).limit_length(2.5)
 
@@ -70,8 +87,18 @@ func _create_particle_marker() -> Node3D:
 
 func _update_particle(delta: float):
 	var sample = _field_value(particle_position)
-	particle_velocity = particle_velocity.lerp(sample, 0.5)
+	# Keep vertical motion compact and readable in VR.
+	sample.y *= 0.5
+	particle_velocity = particle_velocity.lerp(sample, PARTICLE_FOLLOW)
+	particle_velocity *= PARTICLE_DAMPING
 	particle_position += particle_velocity * delta
+	if absf(particle_position.y) > PARTICLE_VERTICAL_LIMIT:
+		particle_position.y = clampf(
+			particle_position.y,
+			-PARTICLE_VERTICAL_LIMIT,
+			PARTICLE_VERTICAL_LIMIT
+		)
+		particle_velocity.y *= -0.25
 	reposition_particle(particle_position)
 
 func reposition_particle(position: Vector3):
