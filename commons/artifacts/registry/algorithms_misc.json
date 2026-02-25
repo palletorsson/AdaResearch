@@ -257,6 +257,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"small_world_network": {
+			"lookup_name": "small_world_network",
+			"scene": "res://commons/artifacts/small_world_network/small_world_network.tscn",
+			"name": "Small World Network",
+			"description": "Watts-Strogatz small-world model — 20 nodes in a ring lattice with k=4 neighbors. VR slider controls rewiring probability p: regular lattice at p=0, random graph at p=1. Watch how random shortcuts collapse average path length while clustering stays high. Gray edges are original, yellow edges are rewired shortcuts.",
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"tags": ["small_world", "watts_strogatz", "graph_theory", "network", "rewiring", "clustering", "path_length"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
