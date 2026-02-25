@@ -29,6 +29,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"lyapunov_fractal": {
+			"lookup_name": "lyapunov_fractal",
+			"scene": "res://commons/artifacts/lyapunov_fractal/lyapunov_fractal.tscn",
+			"name": "Lyapunov Fractal",
+			"description": "Lyapunov fractal from alternating logistic map parameters — for each point (a,b) in parameter space [2,4]x[2,4], iterate x=r*x*(1-x) alternating r between a and b in pattern AABB. The Lyapunov exponent λ colors the plane: blue for stable orbits (λ<0), yellow-red for chaos (λ>0), black at the boundary. The result resembles alien calligraphy.",
+			"category": "chaos",
+			"complexity": "intermediate",
+			"tags": ["lyapunov", "fractal", "logistic_map", "chaos", "stability", "parameter_space", "exponent"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
