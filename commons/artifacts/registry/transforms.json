@@ -153,6 +153,19 @@
 				"transformation"
 			],
 			"sequence": "transformation"
+		},
+		"transform_composition": {
+			"name": "Transform Composition",
+			"lookup_name": "transform_composition",
+			"description": "Transform composition demonstrator showing that matrix multiplication order matters. A simple house shape undergoes Rotate-then-Translate (blue) vs Translate-then-Rotate (red) — landing in different places. Displays R·T ≠ T·R with live 4x4 matrices. VR sliders control rotation angle and translation distance. Buttons toggle order A, order B, or both. Animated step-through shows intermediate states.",
+			"scene": "res://commons/artifacts/transform_composition/transform_composition.tscn",
+			"category": "transforms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		}
 	}
 }
