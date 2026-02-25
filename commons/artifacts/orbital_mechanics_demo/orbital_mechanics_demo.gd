@@ -9,12 +9,12 @@ extends Node3D
 class_name OrbitalMechanicsDemo
 
 ## Orbital parameters
-@export var central_mass: float = 5.0  # Arbitrary units
+@export var central_mass: float = 1.0  # Arbitrary units
 @export var gravitational_constant: float = 0.5
 
 ## Initial satellite conditions
 @export var initial_radius: float = 0.3
-@export var initial_velocity: float = 1.2  # Tangent velocity
+@export var initial_velocity: float = 0.0  # Tangent velocity, <= 0 means auto-circular
 
 ## Display
 @export var planet_radius: float = 0.08
@@ -190,25 +190,27 @@ func _create_vr_controls():
 	_control_panel.add_child(panel_back)
 
 	# Orbit preset buttons
-	var presets = [
-		["CIRCULAR", 0.3, 1.29],  # v = sqrt(GM/r)
-		["ELLIPSE", 0.2, 1.5],
-		["ESCAPE", 0.25, 2.0],
-		["DECAY", 0.35, 0.9]
-	]
+	var preset_labels: PackedStringArray = PackedStringArray([
+		"CIRCULAR",
+		"ELLIPSE",
+		"ESCAPE",
+		"DECAY"
+	])
+	var preset_radii: PackedFloat32Array = PackedFloat32Array([0.3, 0.3, 0.3, 0.3])
+	var preset_speed_factors: PackedFloat32Array = PackedFloat32Array([1.0, 0.88, 1.42, 0.72])
 
-	for i in range(presets.size()):
+	for i in range(preset_labels.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
 		btn.position = Vector3(-0.12 + i * 0.08, 0.03, 0)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
+		_add_button_label(btn, preset_labels[i])
 
-		var r = presets[i][1]
-		var v = presets[i][2]
+		var preset_radius: float = preset_radii[i]
+		var preset_speed_factor: float = preset_speed_factors[i]
 		# Connect to the push_button's own "pressed" signal (not internal InteractableAreaButton)
-		btn.pressed.connect(func(): _set_orbit(r, v))
+		btn.pressed.connect(_on_preset_pressed.bind(preset_radius, preset_speed_factor))
 
 	# Time scale slider — add to tree first, then configure via API
 	_time_slider = SLIDER_HORIZONTAL.instantiate()
@@ -239,18 +241,34 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
+func _on_preset_pressed(radius: float, speed_factor: float):
+	_set_orbit_preset(radius, speed_factor)
+
+func _set_orbit_preset(radius: float, speed_factor: float):
+	var circular_speed = _circular_velocity(radius)
+	_set_orbit(radius, circular_speed * speed_factor)
+
 func _set_orbit(r: float, v: float):
-	initial_radius = r
+	initial_radius = maxf(r, planet_radius + satellite_radius + 0.02)
 	initial_velocity = v
 	_reset_orbit()
 
 func _reset_orbit():
-	_satellite_pos = Vector3(initial_radius, 0, 0)
-	_satellite_vel = Vector3(0, 0, initial_velocity)
+	var start_radius = maxf(initial_radius, planet_radius + satellite_radius + 0.02)
+	var start_speed = initial_velocity
+	if start_speed <= 0.0:
+		start_speed = _circular_velocity(start_radius)
+
+	_satellite_pos = Vector3(start_radius, 0, 0)
+	_satellite_vel = Vector3(0, 0, start_speed)
 	_trail.clear()
 
+func _circular_velocity(radius: float) -> float:
+	var safe_radius = maxf(radius, 0.001)
+	return sqrt(maxf(gravitational_constant * central_mass / safe_radius, 0.0))
+
 func _physics_process(delta):
-	var dt = delta * time_scale
+	var dt = minf(delta * time_scale, 0.05)
 
 	# Gravitational acceleration: a = -GM/r² * r̂
 	var r = _satellite_pos.length()
@@ -275,7 +293,7 @@ func _physics_process(delta):
 	_satellite_pos = new_pos
 
 	# Escape detection — reset if satellite flies too far away
-	if r > 2.0:
+	if new_r > 2.0:
 		_reset_orbit()
 		return
 
@@ -336,16 +354,26 @@ func _update_info():
 
 	# Angular momentum
 	var h = _satellite_pos.cross(_satellite_vel).length()
+	var circular_speed = _circular_velocity(r)
+	var speed_ratio = v / maxf(circular_speed, 0.001)
 
-	_info_label.text = "ORBITAL MECHANICS\nr=%.3f v=%.3f E=%.3f\n%s  L=%.3f" % [r, v, energy, orbit_type, h]
+	_info_label.text = "ORBITAL MECHANICS\nr=%.3f v=%.3f vc=%.3f (x%.2f)\nE=%.3f  %s  L=%.3f" % [
+		r,
+		v,
+		circular_speed,
+		speed_ratio,
+		energy,
+		orbit_type,
+		h
+	]
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
-			KEY_1: _set_orbit(0.3, 1.29)
-			KEY_2: _set_orbit(0.2, 1.5)
-			KEY_3: _set_orbit(0.25, 2.0)
-			KEY_4: _set_orbit(0.35, 0.9)
+			KEY_1: _set_orbit_preset(0.3, 1.0)
+			KEY_2: _set_orbit_preset(0.3, 0.88)
+			KEY_3: _set_orbit_preset(0.3, 1.42)
+			KEY_4: _set_orbit_preset(0.3, 0.72)
 			KEY_R: _reset_orbit()
 			KEY_UP: time_scale = minf(time_scale + 0.2, 5.0)
 			KEY_DOWN: time_scale = maxf(time_scale - 0.2, 0.1)

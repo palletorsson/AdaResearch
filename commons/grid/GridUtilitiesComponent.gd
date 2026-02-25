@@ -374,6 +374,9 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 	var utility_object = scene_resource.instantiate()
 	if utility_object:
 		utility_object.position = position
+		if utility_type == "br":
+			# Bridges should sit slightly lower to align with surrounding walkable surfaces.
+			utility_object.position.y -= 0.1
 
 		# Apply parameters if supported
 		print("GridUtilitiesComponent: Utility type '%s' has %d parameters: %s" % [utility_type, parameters.size(), str(parameters)])

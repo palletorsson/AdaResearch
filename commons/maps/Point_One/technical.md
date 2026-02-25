@@ -1,4 +1,4 @@
-# Point One - Technical Tutorial
+# Point One
 
 This chapter focuses on one thing: how a point becomes manipulable in VR while staying mathematically minimal.
 

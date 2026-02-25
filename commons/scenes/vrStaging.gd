@@ -20,6 +20,8 @@ extends XRToolsStaging
 # Transition speed configuration
 @export var quick_transition_duration: float = 0.3  # Fast fades for in-sequence transitions
 @export var normal_transition_duration: float = 1.0  # Standard VR-comfortable fades
+@export var force_fast_transition_fade: bool = true
+@export var force_loading_screen_for_all_transitions: bool = true
 var _use_quick_transition: bool = false  # Set by AdaSceneManager for in-sequence transitions
 
 const VR_MAP_LOADER_KIOSK_SCENE_PATH := "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
@@ -292,22 +294,13 @@ func _show_loading_progress():
 	loading_screen.visible = false
 
 func _on_menu_start_game():
-	var menu = find_child("MainMenu3D", true, false)
-	if menu:
-		menu.visible = false
-		# Disable pointers on staging rig to avoid conflict with game rig
-		var left_pointer = find_child("FunctionPointerLeft", true, false)
-		var right_pointer = find_child("FunctionPointerRight", true, false)
-		if left_pointer: left_pointer.visible = false
-		if right_pointer: right_pointer.visible = false
+	# Disable pointers on staging rig to avoid conflict with game rig
+	var left_pointer = find_child("FunctionPointerLeft", true, false)
+	var right_pointer = find_child("FunctionPointerRight", true, false)
+	if left_pointer: left_pointer.visible = false
+	if right_pointer: right_pointer.visible = false
 
 	print("AdaVRStaging: Menu start requested")
-
-	# Check if preload is still in progress - if so, show loading screen
-	var status = ResourceLoader.load_threaded_get_status(main_lab_scene)
-	if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-		print("AdaVRStaging: Scene still loading, showing loading screen...")
-		await _show_loading_progress()
 
 	# Force prompt_for_continue to false just in case
 	prompt_for_continue = false
@@ -426,11 +419,13 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	var is_in_sequence = user_data is Dictionary and user_data.has("sequence_data")
 	_use_quick_transition = is_in_sequence
 	
-	var fade_duration = quick_transition_duration if _use_quick_transition else normal_transition_duration
+	var fade_duration = quick_transition_duration if (force_fast_transition_fade or _use_quick_transition) else normal_transition_duration
 	var tracking_delay = 0.02 if _use_quick_transition else 0.1  # Minimal delay for fast transitions
 	
-	if _use_quick_transition:
-		print("AdaVRStaging: âš¡ Quick transition mode (%.1fs fades)" % fade_duration)
+	if force_fast_transition_fade:
+		print("AdaVRStaging: Fast transition fades enabled (%.1fs)" % fade_duration)
+	elif _use_quick_transition:
+		print("AdaVRStaging: Quick transition mode (%.1fs fades)" % fade_duration)
 	
 	# Do not load if in the editor
 	if Engine.is_editor_hint():
@@ -441,20 +436,22 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	# Start threaded loading - if cached, returns immediately
 	ResourceLoader.load_threaded_request(p_scene_path)
 	
-	# If a current scene exists, fade it out
+	# If a current scene exists, notify it before transition
 	if current_scene:
 		# Call scene methods if they exist (XRToolsSceneBase compatibility)
 		if current_scene.has_method("scene_pre_exiting"):
 			current_scene.scene_pre_exiting(user_data)
 		_safe_remove_signals(current_scene)
-		
-		# Fade to black (quick or normal)
-		if _tween:
-			_tween.kill()
-		_tween = get_tree().create_tween()
-		_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
-		await _tween.finished
-		
+
+	# Always fade to black, including menu/startup transitions where current_scene is null
+	if _tween:
+		_tween.kill()
+	_tween = get_tree().create_tween()
+	_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
+	await _tween.finished
+
+	# Unload previous scene after fade-out
+	if current_scene:
 		emit_signal("scene_exiting", current_scene, user_data)
 		if current_scene.has_method("scene_exiting"):
 			current_scene.scene_exiting(user_data)
@@ -462,13 +459,15 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		current_scene.queue_free()
 		current_scene = null
 	
-	# Only show loading screen if needed (not for quick transitions with cached scenes)
-	var show_loading = prompt_for_continue or \
+	# Keep the menu hidden once a transition begins
+	var menu: Node = find_child("MainMenu3D", true, false)
+	if menu:
+		menu.visible = false
+
+	# Show loading for all transitions unless explicitly disabled
+	var show_loading = force_loading_screen_for_all_transitions or \
+		prompt_for_continue or \
 		ResourceLoader.load_threaded_get_status(p_scene_path) != ResourceLoader.THREAD_LOAD_LOADED
-	
-	# Skip loading screen entirely for quick transitions if scene is cached
-	if _use_quick_transition and ResourceLoader.load_threaded_get_status(p_scene_path) == ResourceLoader.THREAD_LOAD_LOADED:
-		show_loading = false
 	
 	if show_loading:
 		xr_origin.set_process_internal(true)
@@ -496,6 +495,9 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 				break
 			$LoadingScreen.progress = progress[0]
 			await get_tree().create_timer(0.05).timeout  # Faster polling
+
+		if res == ResourceLoader.THREAD_LOAD_LOADED:
+			$LoadingScreen.progress = 1.0
 		
 		if res != ResourceLoader.THREAD_LOAD_LOADED:
 			push_error("Error ", res, " loading resource ", p_scene_path)

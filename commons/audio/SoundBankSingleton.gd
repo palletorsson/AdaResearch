@@ -33,7 +33,8 @@ var active_buses: Dictionary = {}
 
 # Map transition state
 var _is_transitioning: bool = false
-var _paused_players: Array = []
+var _music_players: Array = []
+var _currently_paused_players: Array = []
 
 # Current ambient tracking (survives scene changes)
 var current_ambient_preset: String = ""
@@ -75,34 +76,63 @@ func _connect_scene_manager_signals():
 		_connect_scene_manager_signals()
 
 func _on_scene_transition_started(_from_scene: String, _to_scene: String, _transition_type):
-	"""Track transition state - actual pause handled by AmbientSoundController"""
+	"""Track transition state and pause registered music players."""
+	if _is_transitioning:
+		return
 	_is_transitioning = true
+	pause_all_music()
+	if _currently_paused_players.size() > 0:
+		print("SoundBank: ⏸️ Paused %d music player(s) for transition" % _currently_paused_players.size())
 
 func _on_scene_transition_completed(_scene_name: String, _user_data: Dictionary):
-	"""Track transition state - actual resume handled by AmbientSoundController"""
+	"""Track transition state and resume previously paused music players."""
+	if not _is_transitioning:
+		return
 	_is_transitioning = false
+	resume_all_music()
 
 func pause_all_music():
-	"""Pause tracked music players (called by AmbientSoundController if needed)"""
-	for player in _paused_players:
-		if is_instance_valid(player) and player.playing:
+	"""Pause registered music players that are actively playing."""
+	_prune_music_players()
+	_currently_paused_players.clear()
+	for player in _music_players:
+		if is_instance_valid(player) and player.playing and not player.stream_paused:
 			player.stream_paused = true
+			_currently_paused_players.append(player)
 
 func resume_all_music():
-	"""Resume tracked music players"""
-	for player in _paused_players:
+	"""Resume only players paused by pause_all_music()."""
+	for player in _currently_paused_players:
 		if is_instance_valid(player):
 			player.stream_paused = false
-	_paused_players.clear()
+	_currently_paused_players.clear()
+	_prune_music_players()
 
 func register_music_player(player: Node):
-	"""Register a player for pause/resume tracking (avoids tree walk)"""
-	if player not in _paused_players:
-		_paused_players.append(player)
+	"""Register a player for transition pause/resume tracking."""
+	if player == null:
+		return
+	if player not in _music_players:
+		_music_players.append(player)
 
 func unregister_music_player(player: Node):
-	"""Unregister a player from tracking"""
-	_paused_players.erase(player)
+	"""Unregister a player from transition pause/resume tracking."""
+	_music_players.erase(player)
+	_currently_paused_players.erase(player)
+
+func _prune_music_players():
+	"""Remove invalid player references from tracking arrays."""
+	var valid_music_players: Array = []
+	for player in _music_players:
+		if is_instance_valid(player):
+			valid_music_players.append(player)
+	_music_players = valid_music_players
+	
+	var valid_paused_players: Array = []
+	for player in _currently_paused_players:
+		if is_instance_valid(player):
+			valid_paused_players.append(player)
+	_currently_paused_players = valid_paused_players
 
 func set_current_ambient(preset_name: String, controller: Node = null):
 	"""Track the currently playing ambient preset"""

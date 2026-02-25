@@ -70,6 +70,11 @@ func _connect_scene_signals():
 			if not scene_manager.scene_transition_completed.is_connected(_on_scene_transition_completed):
 				scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
 		print("AmbientSoundController: Connected to SceneManager signals")
+	else:
+		print("AmbientSoundController: SceneManager not found, retrying...")
+		await get_tree().create_timer(0.5).timeout
+		if is_inside_tree():
+			call_deferred("_connect_scene_signals")
 
 func _on_scene_transition_started(_from_scene: String, _to_scene: String, _transition_type = null):
 	"""Pause ambient when transitioning between maps"""
@@ -91,6 +96,7 @@ func _on_global_ambient_request(new_preset: String):
 
 func _exit_tree():
 	# Clean up
+	_unregister_all_music_players()
 	stop_ambient()
 	_cleanup_players()
 	_cleanup_timers()
@@ -437,6 +443,7 @@ func _create_event_players():
 		player.volume_db = -15
 		add_child(player)
 		event_players.append(player)
+		_register_music_player(player)
 
 func _start_continuous_layers(preset: Dictionary):
 	"""Start continuous ambient layers"""
@@ -480,6 +487,7 @@ func _create_placeholder_player(config: Dictionary) -> AudioStreamPlayer:
 	player.volume_db = config.get("volume_db", -10) + volume_adjustment
 	player.bus = config.get("bus", "Master")
 	add_child(player)
+	_register_music_player(player)
 	
 	player.stream = stream
 	if stream is AudioStreamWAV:
@@ -525,6 +533,7 @@ func _create_continuous_player(config: Dictionary, placeholder_config = null) ->
 	player.volume_db = config.get("volume_db", -10) + volume_adjustment
 	player.bus = config.get("bus", "Master")
 	add_child(player)
+	_register_music_player(player)
 
 	if stream:
 		player.stream = stream
@@ -669,8 +678,27 @@ func _cleanup_players():
 
 	for player in continuous_players:
 		if player and is_instance_valid(player):
+			_unregister_music_player(player)
 			player.queue_free()
 	continuous_players.clear()
+
+func _register_music_player(player: AudioStreamPlayer) -> void:
+	if sound_bank and sound_bank.has_method("register_music_player"):
+		sound_bank.register_music_player(player)
+
+func _unregister_music_player(player: AudioStreamPlayer) -> void:
+	if sound_bank and sound_bank.has_method("unregister_music_player"):
+		sound_bank.unregister_music_player(player)
+
+func _unregister_all_music_players() -> void:
+	for player in continuous_players:
+		if player and is_instance_valid(player):
+			_unregister_music_player(player)
+	for player in event_players:
+		if player and is_instance_valid(player):
+			_unregister_music_player(player)
+	if _placeholder_player and is_instance_valid(_placeholder_player):
+		_unregister_music_player(_placeholder_player)
 
 func _cleanup_timers():
 	"""Clean up event timers"""
