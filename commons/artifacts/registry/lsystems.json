@@ -75,6 +75,18 @@
 			"map_sequences": [
 				"lsystems"
 			]
+		},
+		"space_filling_curve_gallery": {
+			"name": "Space-Filling Curve Gallery",
+			"lookup_name": "space_filling_curve_gallery",
+			"description": "Triptych of classic space-filling curves — Hilbert, Peano, and Moore — generated via L-system rules and turtle graphics on a floor display. Curves that visit every point in a 2D region.",
+			"scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		}
 	}
 }
