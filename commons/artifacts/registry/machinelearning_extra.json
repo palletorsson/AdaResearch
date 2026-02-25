@@ -282,6 +282,18 @@
 			"map_ready": true,
 			"map_sequences": ["machinelearning"]
 		},
+		"decision_boundary_viewer": {
+			"lookup_name": "decision_boundary_viewer",
+			"scene": "res://commons/artifacts/decision_boundary_viewer/decision_boundary_viewer.tscn",
+			"name": "Decision Boundary Viewer",
+			"description": "2D classification with live decision boundary — two clusters of points separated by a linear classifier (w1*x + w2*y + bias > 0). Background colored by classification region, data points as bright dots, yellow boundary line. VR sliders for w1, w2, bias with live accuracy display.",
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"tags": ["decision_boundary", "classification", "linear_classifier", "supervised_learning", "machine_learning"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["machinelearning"]
+		},
 		"gradient_descent_landscape": {
 			"lookup_name": "gradient_descent_landscape",
 			"scene": "res://commons/artifacts/gradient_descent_landscape/gradient_descent_landscape.tscn",
