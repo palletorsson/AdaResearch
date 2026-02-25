@@ -21,7 +21,7 @@
 	"summary": "Color_2 - Rainbow Walkway",
 	"layout": "7x17 suspended corridor with repeating rainbow emitters, mid-course dome, and transport return walkway.",
 	"objective": "Walk through animated rainbow pillars while interacting with pickups and walkway transport.",
-	"key_elements": [ "Series of `rainbow:0:0.5:0.1` emitters along the main lane", "Pickup cubes staggered mid-way for interaction resets", "Mid-corridor `dark_sphere` observation point", "Walkway `wp` and teleporter `t` with score cube `sp` at the far turnaround" ]
+	"key_elements": [ "Series of `rainbow:0:0.5:0.1` emitters along the main lane", "`mario_cube` that listens for next_cube signal to remove dark_sphere and reveal rainbow", "Mid-corridor `dark_sphere` observation point", "Walkway `wp` and teleporter `t` with score cube `sp` at the far turnaround" ]
   },
   "layers": {
 	"structure": [
@@ -65,7 +65,7 @@
 	  [ " ", " ", " ", " ", " ", " ", " " ]
 	],
 	"interactables": [
-	  [ " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", "mario_cube", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", "", "dark_sphere", " ", " ", " " ],
 	  [ " ", " ", " ", "rainbow:0:0.5:0.1", " ", " ", " " ],

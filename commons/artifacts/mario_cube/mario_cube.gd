@@ -33,6 +33,13 @@ func _find_next_cubes_recursive(node: Node) -> void:
 		_find_next_cubes_recursive(child)
 
 func _on_next_requested(_from_position: Vector3) -> void:
+	_activate()
+
+func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player") or body.is_in_group("vr_player") or body.is_in_group("player_body"):
+		_activate()
+
+func _activate() -> void:
 	if _activated:
 		return
 	_activated = true
