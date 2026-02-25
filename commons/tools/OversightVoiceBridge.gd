@@ -2,19 +2,24 @@ extends Node
 
 @export var enabled: bool = true
 @export var oversight_base_url: String = "http://localhost:3001"
-@export var voice_endpoint: String = "/api/audio" # Use "/api/voice" for direct retry/create without manual editing.
+@export var voice_endpoint: String = "/api/voice"
 @export var push_to_talk_action: StringName = &"oversight_push_to_talk"
 @export var secondary_push_to_talk_action: StringName = &"vr_button_a"
 @export var controller_push_to_talk_button: StringName = &"ax_button"
 @export var controller_push_to_talk_tracker: StringName = &"right_hand"
 @export var debug_controller_input: bool = true
 @export var controller_rescan_interval_sec: float = 2.0
-@export var default_mode: String = "auto" # auto | retry | create
+@export var default_mode: String = "session" # session | auto | retry | create
 @export var include_memories: bool = true
 @export var include_last_output: bool = true
 @export var auto_resume_queue: bool = false
 @export var default_priority: String = "high"
 @export var create_title_prefix: String = "Voice Debug"
+@export var session_title: String = "" # Blank uses "<create_title_prefix>: <scene>"
+@export var session_format: String = "md" # md | txt
+@export var session_max_items: int = 10
+@export var session_auto_reuse: bool = true
+@export var session_id_override: String = ""
 @export var scene_hint: String = ""
 @export var min_recording_seconds: float = 0.25
 @export var max_recording_seconds: float = 20.0
@@ -120,6 +125,7 @@ func send_transcript(transcript: String, extra: Dictionary = {}) -> void:
 	}
 	var context := _build_runtime_context()
 	payload.merge(context, true)
+	_append_session_options(payload)
 	payload.merge(extra, true)
 	_send_payload(payload)
 
@@ -435,6 +441,7 @@ func _stop_and_dispatch() -> void:
 	}
 	var context := _build_runtime_context()
 	payload.merge(context, true)
+	_append_session_options(payload)
 	_send_payload(payload)
 
 func _build_title(transcript: String) -> String:
@@ -442,6 +449,20 @@ func _build_title(transcript: String) -> String:
 		return "%s: %s" % [create_title_prefix, _resolve_scene_name()]
 	var short_text := transcript.substr(0, min(60, transcript.length())).strip_edges()
 	return "%s: %s" % [create_title_prefix, short_text]
+
+func _append_session_options(payload: Dictionary) -> void:
+	payload["session_format"] = session_format
+	payload["session_max_items"] = int(max(1, session_max_items))
+	payload["session_auto_reuse"] = session_auto_reuse
+
+	var session_id: String = session_id_override.strip_edges()
+	if not session_id.is_empty():
+		payload["session_id"] = session_id
+
+	var resolved_session_title: String = session_title.strip_edges()
+	if resolved_session_title.is_empty():
+		resolved_session_title = "%s: %s" % [create_title_prefix, _resolve_scene_name()]
+	payload["session_title"] = resolved_session_title
 
 func _resolve_scene_name() -> String:
 	if not scene_hint.strip_edges().is_empty():
