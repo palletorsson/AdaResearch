@@ -1654,6 +1654,31 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"noise_mixer": {
+			"name": "Noise Mixer",
+			"lookup_name": "noise_mixer",
+			"description": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
+			"scene": "res://commons/artifacts/noise_mixer/noise_mixer.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"noise",
+				"fbm",
+				"fractal",
+				"octaves",
+				"lacunarity",
+				"persistence",
+				"procedural",
+				"floor_display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
