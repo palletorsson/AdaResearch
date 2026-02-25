@@ -89,6 +89,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"cave_generator": {
+			"lookup_name": "cave_generator",
+			"scene": "res://commons/artifacts/cave_generator/cave_generator.tscn",
+			"name": "Cave Generator",
+			"description": "Cellular automaton cave generation with flood-fill connectivity — classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": ["cave", "cellular_automaton", "flood_fill", "roguelike", "procedural", "generation", "connectivity"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
