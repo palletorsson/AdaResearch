@@ -1606,6 +1606,29 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"rejection_sampling_demo": {
+			"name": "Rejection Sampling Demo",
+			"lookup_name": "rejection_sampling_demo",
+			"description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve — green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
+			"scene": "res://commons/artifacts/rejection_sampling_demo/rejection_sampling_demo.tscn",
+			"category": "randomness",
+			"complexity": "beginner",
+			"tags": [
+				"rejection_sampling",
+				"accept_reject",
+				"gaussian",
+				"distribution",
+				"monte_carlo",
+				"scatter_plot",
+				"floor_display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
