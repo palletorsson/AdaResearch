@@ -77,6 +77,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"color_space_navigator": {
+			"lookup_name": "color_space_navigator",
+			"scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+			"name": "Color Space Navigator",
+			"description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
+			"category": "color",
+			"complexity": "intermediate",
+			"tags": ["color", "rgb", "hsv", "color_space", "3d", "visualization"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
