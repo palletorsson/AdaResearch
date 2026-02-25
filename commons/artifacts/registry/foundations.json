@@ -402,6 +402,44 @@
 				"foundationscrisis"
 			],
 			"sequence": "foundationscrisis"
+		},
+		"hilbert_hotel": {
+			"lookup_name": "hilbert_hotel",
+			"scene": "res://commons/artifacts/hilbert_hotel/hilbert_hotel.tscn",
+			"class_name": "HilbertHotel",
+			"description": "Animated Hilbert's Hotel paradox - infinite rooms all occupied, yet a new guest always fits by shifting n to n+1",
+			"gamwell_reference": "Chapter 6: Cantor's transfinite numbers and Hilbert's Grand Hotel",
+			"qfep_connection": "Infinity is not a limit but a structure - countable infinity accommodates more without expanding",
+			"signals": [],
+			"interactions": [
+				"watch guests shift automatically"
+			],
+			"parameters": {
+				"num_rooms": "Number of visible rooms (default 10)",
+				"shift_duration": "Animation speed for guest shifting",
+				"pause_between_shifts": "Delay between animation cycles"
+			},
+			"dev_themes": [
+				"philosophy",
+				"set_theory"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"hilbert",
+				"infinity",
+				"paradox",
+				"set_theory",
+				"cantor",
+				"animated"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		}
 	},
 	"sequence_mapping": {
@@ -413,7 +451,8 @@
 			"euclid_postulates_plaque",
 			"penrose_triangle",
 			"poincare_disk",
-			"schrodinger_box"
+			"schrodinger_box",
+			"hilbert_hotel"
 		],
 		"artmathematics": [
 			"magritte_pipe",
@@ -445,6 +484,9 @@
 		],
 		"non_euclidean_artifacts": [
 			"poincare_disk"
+		],
+		"infinity_paradox_artifacts": [
+			"hilbert_hotel"
 		],
 		"foundations_artifacts": [
 			"euclid_postulates_plaque"
