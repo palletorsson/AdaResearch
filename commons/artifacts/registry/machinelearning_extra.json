@@ -269,6 +269,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": ["machinelearning"]
+		},
+		"perceptron_playground": {
+			"lookup_name": "perceptron_playground",
+			"scene": "res://commons/artifacts/perceptron_playground/perceptron_playground.tscn",
+			"name": "Perceptron Playground",
+			"description": "Single neuron with adjustable weights — the simplest possible neural network. Drag sliders to change w1, w2, and bias, watch the decision boundary shift on a 2D scatter plot. Misclassified points get white corners so you can see the perceptron learning.",
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"tags": ["perceptron", "neuron", "weights", "bias", "decision_boundary", "classification", "neural_network"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["machinelearning"]
 		}
 	}
 }

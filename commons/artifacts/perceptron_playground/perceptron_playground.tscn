@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/perceptron_playground/perceptron_playground.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdub" path="res://commons/interactables/slider_horizontal.tscn" id="2_slider"]
+
+[node name="PerceptronPlayground" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.0, 0.3)
+
+[node name="W1Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="W2Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="BiasSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="PanelLabel" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0.01)
+pixel_size = 0.001
+text = "PERCEPTRON WEIGHTS"
+font_size = 12
+outline_size = 2
+horizontal_alignment = 1
