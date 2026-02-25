@@ -1560,6 +1560,29 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"shannon_entropy_meter": {
+			"name": "Shannon Entropy Meter",
+			"lookup_name": "shannon_entropy_meter",
+			"description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+			"scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+			"category": "randomness",
+			"interaction": "observe",
+			"complexity": "beginner",
+			"tags": [
+				"entropy",
+				"shannon",
+				"information_theory",
+				"measurement",
+				"probability",
+				"wall_display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }
