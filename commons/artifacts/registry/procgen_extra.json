@@ -77,6 +77,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"terrain_erosion": {
+			"lookup_name": "terrain_erosion",
+			"scene": "res://commons/artifacts/terrain_erosion/terrain_erosion.tscn",
+			"name": "Terrain Erosion",
+			"description": "Hydraulic erosion on a procedural heightmap — layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": ["erosion", "hydraulic", "heightmap", "terrain", "procedural", "landscape", "sediment"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
