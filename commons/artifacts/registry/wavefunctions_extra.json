@@ -101,6 +101,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": ["wavefunctions"]
+		},
+		"doppler_effect_demo": {
+			"lookup_name": "doppler_effect_demo",
+			"scene": "res://commons/artifacts/doppler_effect_demo/doppler_effect_demo.tscn",
+			"name": "Doppler Effect Demo",
+			"description": "Moving source emits concentric wave rings — compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
+			"category": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": ["doppler", "wave", "frequency", "shift", "red_shift", "blue_shift", "motion"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["wavefunctions"]
 		}
 	}
 }
