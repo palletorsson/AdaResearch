@@ -490,6 +490,19 @@
 				"cellularautomata"
 			],
 			"sequence": "cellularautomata"
+		},
+		"lenia_continuous": {
+			"name": "Lenia Continuous",
+			"lookup_name": "lenia_continuous",
+			"description": "Continuous cellular automaton (Lenia) — smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
+			"scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
+			"category": "emergence",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"sequence": "cellularautomata"
 		}
 	}
 }
