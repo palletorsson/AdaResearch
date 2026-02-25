@@ -245,6 +245,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"graph_coloring": {
+			"lookup_name": "graph_coloring",
+			"scene": "res://commons/artifacts/graph_coloring/graph_coloring.tscn",
+			"name": "Graph Coloring",
+			"description": "Greedy chromatic number exploration on a Petersen graph — 10 nodes colored step-by-step with the lowest available color not used by any neighbor. The four color theorem made visible.",
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"tags": ["graph_coloring", "chromatic_number", "greedy", "petersen_graph", "graph_theory", "four_color"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
