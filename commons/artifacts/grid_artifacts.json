@@ -28,6 +28,32 @@
 				"swarmintelligence"
 			]
 		},
+		"flocking_controls": {
+			"name": "Flocking Controls",
+			"lookup_name": "flocking_controls",
+			"description": "Open-air boid swarm with five VR sliders — separation, alignment, cohesion, speed, and perception radius. One highlighted boid shows its force vectors in real-time so you can see exactly what drives each agent. Wrap-around boundaries, no tank.",
+			"scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn",
+			"category": "emergence",
+			"interaction": "slider",
+			"complexity": "intermediate",
+			"sequence": "swarmintelligence",
+			"qfep_connection": "Parameter exploration across the order-chaos spectrum — low separation = collapse, high separation = dispersion, the sweet spot is emergent flock behavior.",
+			"tags": [
+				"boids",
+				"flocking",
+				"swarm",
+				"separation",
+				"alignment",
+				"cohesion",
+				"sliders",
+				"force_vectors"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			]
+		},
 		"jelly_cube": {
 			"name": "Jelly Cube",
 			"lookup_name": "jelly_cube",
