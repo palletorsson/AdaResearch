@@ -477,6 +477,19 @@
 				"recursiveemergence"
 			],
 			"sequence": "cellularautomata"
+		},
+		"wireworld_circuit": {
+			"name": "Wireworld Circuit",
+			"lookup_name": "wireworld_circuit",
+			"description": "Wireworld cellular automaton — 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
+			"scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
+			"category": "emergence",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"sequence": "cellularautomata"
 		}
 	}
 }
