@@ -181,6 +181,30 @@
 			"include_in_map_data": false,
 			"map_ready": false,
 			"map_sequences": []
+		},
+		"waterbomb_hopper": {
+			"name": "Waterbomb Hopper",
+			"lookup_name": "waterbomb_hopper",
+			"description": "Bouncing waterbomb tessellation enemy. Origami-themed hazard with a waterbomb base shape built from triangular faces. Bounces sinusoidally with squash-and-stretch, fold angle oscillates for a breathing effect. Patrols a rectangular path, chases on detection.",
+			"scene": "res://commons/hazards/waterbomb_hopper/waterbomb_hopper.tscn",
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"becoming_catalyst": {
+			"name": "The Catalyst",
+			"lookup_name": "becoming_catalyst",
+			"description": "An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode — from slow cubes to calming fields to swarm intelligence.",
+			"scene": "res://commons/hazards/becoming_catalyst/becoming_catalyst.tscn",
+			"category": "tools",
+			"interaction": "immersive",
+			"complexity": "advanced",
+			"tags": ["tool", "catalyst", "becoming", "qfep", "vr", "pickable", "evolution", "hand_force"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"qfep_connection": "Embodies the full QFEP trajectory: from order (primitives) through entropy (randomness) to the edge of chaos (fractals, L-systems) and collective emergence (swarms). The catalyst IS the curriculum made tangible.",
+			"map_sequences": ["primitives"]
 		}
 	}
 }
