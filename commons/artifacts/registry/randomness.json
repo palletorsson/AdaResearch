@@ -1607,6 +1607,31 @@
 			],
 			"sequence": "randomness"
 		},
+		"curl_noise_particles": {
+			"name": "Curl Noise Particles",
+			"lookup_name": "curl_noise_particles",
+			"description": "Divergence-free curl noise driving 300 particles in smooth swirling ribbons. Cross product of two noise gradients guarantees incompressible flow. Particles color-shift from deep blue (slow) through cyan to white (fast), with trailing flow lines for visualization.",
+			"scene": "res://commons/artifacts/curl_noise_particles/curl_noise_particles.tscn",
+			"category": "procedural",
+			"complexity": "advanced",
+			"tags": [
+				"curl_noise",
+				"divergence_free",
+				"particles",
+				"flow",
+				"noise",
+				"incompressible",
+				"multimesh",
+				"3d_display"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"sequence": "randomness"
+		},
 		"rejection_sampling_demo": {
 			"name": "Rejection Sampling Demo",
 			"lookup_name": "rejection_sampling_demo",
