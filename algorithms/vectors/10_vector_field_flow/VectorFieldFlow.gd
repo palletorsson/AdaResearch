@@ -72,7 +72,8 @@ func _create_particle_marker() -> Node3D:
 	marker.name = "Particle"
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
-	sphere.radius = 0.12
+	sphere.radius = 0.06
+	sphere.height = 0.12
 	sphere.radial_segments = 24
 	sphere.rings = 16
 	mesh.mesh = sphere

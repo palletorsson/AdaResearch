@@ -259,9 +259,11 @@ func _calculate_field(pos: Vector3) -> Vector3:
 			var dist = r.length()
 			if dist < 0.01:
 				return Vector3.ZERO
-			# Tangent field: perpendicular to r
+			# Tangent field: cross(up, r) gives perpendicular direction (counterclockwise)
 			var tangent = Vector3(-r.z, 0, r.x).normalized()
-			return tangent * field_strength / (dist + 0.1)
+			# Strength peaks at mid-range, fades at center and edges (vortex profile)
+			var profile = dist / (dist * dist + 0.02)
+			return tangent * field_strength * profile
 		
 		_:
 			return Vector3.ZERO
@@ -286,6 +288,12 @@ func _orient_arrow(arrow: Node3D, field: Vector3):
 	var color: Color
 	if field_type == FieldType.GRAVITY:
 		color = color_negative  # Always down
+	elif field_type == FieldType.VORTEX:
+		# Vortex uses angular hue: green→cyan→blue around the circle
+		var r = arrow.position - source_position
+		var angle = atan2(r.x, r.z)  # 0..TAU
+		var hue = fmod((angle + PI) / TAU + 0.3, 1.0)
+		color = Color.from_hsv(hue, 0.7, 1.0)
 	else:
 		color = color_negative.lerp(color_positive, (alignment + 1) / 2.0)
 	
@@ -312,7 +320,19 @@ func _orient_arrow(arrow: Node3D, field: Vector3):
 
 func _update_info():
 	var type_names = ["GRAVITY", "POINT CHARGE", "DIPOLE", "VORTEX", "CUSTOM"]
-	_info_label.text = "%s FIELD\nStrength: %.1f" % [type_names[field_type], field_strength]
+	var desc := ""
+	match field_type:
+		FieldType.GRAVITY:
+			desc = "F = (0, -g, 0)  uniform downward"
+		FieldType.POINT_CHARGE:
+			desc = "F = k * r / |r|³  inverse-square"
+		FieldType.DIPOLE:
+			desc = "F = F₊ + F₋  two opposing charges"
+		FieldType.VORTEX:
+			desc = "F = tangent(r) × profile(|r|)  curl field"
+		_:
+			desc = ""
+	_info_label.text = "%s FIELD\nStrength: %.1f\n%s" % [type_names[field_type], field_strength, desc]
 
 func _input(event):
 	if event is InputEventKey and event.pressed:

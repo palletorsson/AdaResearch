@@ -10,6 +10,7 @@
 extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
+const GRAB_SPHERE_SCENE := preload("res://commons/primitives/math_gallery/GrabSphere.tscn")
 const MAT_BALL := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 const MAT_ATTRACTOR := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
 const MAT_LINE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -18,7 +19,7 @@ const MAT_LINE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_
 
 var _sim_root: Node3D
 var _ball: MeshInstance3D
-var _attractor: MeshInstance3D
+var _attractor_grab: Node3D  # GrabSphere for VR interaction
 var _position: Vector3 = Vector3(-0.3, 0.7, 0.2)
 var _velocity: Vector3 = Vector3(0.05, 0, 0.03)
 var _attractor_position: Vector3 = Vector3(0, 0.5, 0)
@@ -71,14 +72,13 @@ func _spawn_objects() -> void:
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)
 
-	_attractor = MeshInstance3D.new()
-	var attractor_sphere := SphereMesh.new()
-	attractor_sphere.radius = 0.04
-	attractor_sphere.height = 0.08
-	_attractor.mesh = attractor_sphere
-	_attractor.material_override = MAT_ATTRACTOR
-	_attractor.position = _attractor_position
-	_sim_root.add_child(_attractor)
+	# Grabbable attractor sphere — move it in VR to redirect the orbiting ball
+	_attractor_grab = GRAB_SPHERE_SCENE.instantiate()
+	_attractor_grab.base_color = Color(1.0, 0.4, 0.7)
+	_attractor_grab.object_scale = 0.08
+	_attractor_grab.snap_to_shelf = false
+	_attractor_grab.position = _attractor_position
+	_sim_root.add_child(_attractor_grab)
 
 func _setup_line() -> void:
 	_line_mesh = ImmediateMesh.new()
@@ -88,6 +88,10 @@ func _setup_line() -> void:
 	_sim_root.add_child(_line_instance)
 
 func _process(_delta: float) -> void:
+	# Track attractor position from the grabbable sphere (local to sim_root)
+	if _attractor_grab:
+		_attractor_position = _attractor_grab.position
+
 	var to_attractor := _attractor_position - _position
 	var distance := to_attractor.length()
 

@@ -3,9 +3,9 @@
 		"interactables": [
 			[" "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "],
-			[" "," ",""," "," "," "," "," "," "],
-			[" "," ","VectorBasics"," ","basis_vectors_rig:180:-0.5 "," "," "," "," "],
-			[" "," "," "," ","dark_sphere"," "," "," "," "],
+			[" "," ","exercise_1_5_solution_accelerate_and_decelerate_vr"," "," "," "," "," "," "],
+			[" "," "," "," ","exercise_1_8_solution_attraction_magnitude_vr"," "," "," "," "],
+			[" "," "," "," "," "," ","dark_sphere"," "," "],
 			[" "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," ",""," "," "],
 			[" "," "," "," "," "," "," "," "," "],
@@ -28,7 +28,7 @@
 			[" "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
+			[" "," "," "," ","sp"," "," "," "," "],
 			[" "," "," "," "," ","t"," "," "," "],
 			[" "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "]
@@ -45,7 +45,7 @@
 		}
 	},
 	"map_info": {
-		"description": "Vector Visualization - explore vector lines and coordinate systems",
+		"description": "Steering and attraction — interactive vector dynamics exercises",
 		"dimensions": {
 			"depth": 9,
 			"max_height": 2,
@@ -57,7 +57,7 @@
 			"category": "vectors",
 			"difficulty": "beginner",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["Vector representation","Coordinate systems","Visual vectors","Spatial orientation"]
+			"learning_objectives": ["Steering behavior","Attraction forces","Inverse-square law","Interactive dynamics"]
 		},
 		"name": "Vectors_6",
 		"version": "1.0"
