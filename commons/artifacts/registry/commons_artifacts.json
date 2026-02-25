@@ -618,6 +618,28 @@
 			"map_sequences": [
 				"wavefunctions"
 			]
+		},
+		"wave_equation_solver": {
+			"lookup_name": "wave_equation_solver",
+			"name": "Wave Equation Solver",
+			"description": "2D wave equation on a membrane — finite difference PDE solver simulating a struck drumhead. Gaussian pulse propagates and reflects off clamped boundaries with viscous damping. ImmediateMesh surface colored by displacement: blue positive, red negative, dark zero.",
+			"scene": "res://commons/artifacts/wave_equation_solver/wave_equation_solver.tscn",
+			"category": "waves",
+			"complexity": "advanced",
+			"tags": [
+				"wave_equation",
+				"pde",
+				"finite_difference",
+				"membrane",
+				"drum",
+				"vibration"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			]
 		}
 	}
 }
