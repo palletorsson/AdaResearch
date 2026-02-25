@@ -527,6 +527,31 @@
 				"physicssimulation"
 			]
 		},
+		"spring_network": {
+			"lookup_name": "spring_network",
+			"name": "Spring Network",
+			"description": "Mass-spring lattice — a 6x6 grid of masses connected by springs that deform and oscillate. Verlet integration for stability, strain-colored spring lines, and fixed corner anchors. Extends Hooke's law from single springs to 2D networks.",
+			"scene": "res://commons/artifacts/spring_network/spring_network.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"spring",
+				"mass_spring",
+				"lattice",
+				"verlet",
+				"hookes_law",
+				"network",
+				"forces",
+				"simulation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			]
+		},
 		"transform_matrix_cube": {
 			"lookup_name": "transform_matrix_cube",
 			"name": "Transform Matrix Cube",
