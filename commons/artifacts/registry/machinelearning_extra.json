@@ -281,6 +281,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": ["machinelearning"]
+		},
+		"gradient_descent_landscape": {
+			"lookup_name": "gradient_descent_landscape",
+			"scene": "res://commons/artifacts/gradient_descent_landscape/gradient_descent_landscape.tscn",
+			"name": "Gradient Descent Landscape",
+			"description": "3D loss surface with a ball rolling down to the minimum — gradient descent visualization. ImmediateMesh surface colored green at minima, red at peaks. Adjustable learning rate slider and reset button. Trail of breadcrumb spheres shows the optimization path.",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"tags": ["gradient_descent", "optimization", "loss_surface", "learning_rate", "gradient", "machine_learning"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["machinelearning"]
 		}
 	}
 }
