@@ -140,6 +140,19 @@
 				"transformation"
 			],
 			"sequence": "transformation"
+		},
+		"rotation_gimbal": {
+			"name": "Rotation Gimbal",
+			"lookup_name": "rotation_gimbal",
+			"description": "Gimbal lock demonstrator with 3 nested rotation rings (X=red, Y=green, Z=blue). VR sliders control each Euler angle (0-360 degrees). When Y approaches 90 degrees, X and Z rings align and 'GIMBAL LOCK!' flashes — showing why Euler angles lose a degree of freedom and why quaternions matter. Displays live rotation matrix decomposition.",
+			"scene": "res://commons/artifacts/rotation_gimbal/rotation_gimbal.tscn",
+			"category": "transforms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation"
 		}
 	}
 }
