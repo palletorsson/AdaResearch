@@ -54,6 +54,32 @@
 				"swarmintelligence"
 			]
 		},
+		"stigmergy_grid": {
+			"name": "Stigmergy Grid",
+			"lookup_name": "stigmergy_grid",
+			"description": "Ant pheromone grid with real-time evaporation — 15 invisible ants deposit trails on a 64x64 grid, pheromones fade and diffuse over time. Demonstrates stigmergy: indirect communication through the environment, the mechanism behind ant colony optimization.",
+			"scene": "res://commons/artifacts/stigmergy_grid/stigmergy_grid.tscn",
+			"category": "emergence",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "swarmintelligence",
+			"qfep_connection": "Stigmergy as distributed memory — information stored in the environment rather than in agents. Evaporation provides temporal decay, balancing exploitation with exploration.",
+			"tags": [
+				"stigmergy",
+				"pheromone",
+				"ants",
+				"swarm",
+				"evaporation",
+				"diffusion",
+				"indirect_communication",
+				"self_organization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			]
+		},
 		"jelly_cube": {
 			"name": "Jelly Cube",
 			"lookup_name": "jelly_cube",
