@@ -13,11 +13,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore the Computational Geometry wing",
-				"Access the Computational Geometry overview sequence",
-				"Navigate expanded lab space"
-			]
+			"learning_objectives": [ "Explore the Computational Geometry wing", "Access the Computational Geometry overview sequence", "Navigate expanded lab space" ]
 		}
 	},
 	"layers": {
@@ -118,10 +114,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -183,10 +176,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube",
-				"xyz_coordinates"
-			],
+			"initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
 			"unlock_on_sequence_completion": true
 		}
 	}

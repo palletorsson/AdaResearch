@@ -13,11 +13,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Mesh construction artifacts displayed",
-				"Vertices, edges, faces understood as building blocks",
-				"Procedural mesh generation demonstrated"
-			]
+			"learning_objectives": [ "Mesh construction artifacts displayed", "Vertices, edges, faces understood as building blocks", "Procedural mesh generation demonstrated" ]
 		}
 	},
 	"progression_delta": {
@@ -67,10 +63,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"utility_definitions": {
@@ -134,10 +127,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube",
-				"xyz_coordinates"
-			],
+			"initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
 			"unlock_on_sequence_completion": true
 		}
 	}

@@ -15,11 +15,7 @@
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
 			"status": "legacy_orphan",
-			"learning_objectives": [
-				"Vector operations demonstrated",
-				"Force concepts previewed",
-				"Legacy layout from early Lab design"
-			]
+			"learning_objectives": [ "Vector operations demonstrated", "Force concepts previewed", "Legacy layout from early Lab design" ]
 		}
 	},
 	"layers": {
@@ -67,10 +63,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -152,9 +145,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube"
-			],
+			"initial_artifacts": [ "rotating_cube" ],
 			"unlock_on_sequence_completion": true
 		}
 	}

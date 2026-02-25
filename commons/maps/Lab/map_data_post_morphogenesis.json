@@ -111,14 +111,7 @@
 		"floor_texture": "reaction_diffusion_subtle",
 		"lighting_mood": "warm_emergence"
 	},
-	"unlocked_artifacts": [
-		"turing_pattern_display",
-		"reaction_diffusion_mini",
-		"lambda_slider_artifact",
-		"zebra_stripe_cube",
-		"leopard_spot_sphere",
-		"emergence_badge"
-	],
+	"unlocked_artifacts": [ "turing_pattern_display", "reaction_diffusion_mini", "lambda_slider_artifact", "zebra_stripe_cube", "leopard_spot_sphere", "emergence_badge" ],
 	"new_portals": {
 		"cellularautomata": {
 			"position": [
@@ -143,9 +136,7 @@
 			],
 			"description": "The formula revealed",
 			"visual": "theory_glow",
-			"requires": [
-				"foundationscrisis"
-			]
+			"requires": [ "foundationscrisis" ]
 		}
 	},
 	"lighting": {

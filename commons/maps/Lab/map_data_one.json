@@ -13,11 +13,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore the Procedural Generation wing",
-				"Access the Procedural Generation overview sequence",
-				"Navigate expanded lab space grid_2d_4x4:0:0:0.1nail_color_controller:180"
-			]
+			"learning_objectives": [ "Explore the Procedural Generation wing", "Access the Procedural Generation overview sequence", "Navigate expanded lab space grid_2d_4x4:0:0:0.1nail_color_controller:180" ]
 		}
 	},
 	"audio": {
@@ -99,10 +95,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -164,10 +157,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube",
-				"xyz_coordinates"
-			],
+			"initial_artifacts": [ "rotating_cube", "xyz_coordinates" ],
 			"unlock_on_sequence_completion": true
 		},
 		"ceiling": {

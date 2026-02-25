@@ -14,10 +14,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Transport cube access to color sequence",
-				"Transformation artifacts displayed"
-			]
+			"learning_objectives": [ "Transport cube access to color sequence", "Transformation artifacts displayed" ]
 		}
 	},
 	"progression_delta": {
@@ -45,41 +42,38 @@
 	},
 	"layers": {
 		"structure": [
-			["6", "1", "6", "6", "6", "6", "6", "6", "6", "6"],
-			["6", "1", "1", "1", "1", "1", "2", "2", "0", "6"],
-			["6", "1", "2", "1", "1", "1", "2", "2", "2", "6"],
-			["6", "1", "2", "1", "1", "1", "6", "3", "3", "6"],
-			["6", "1", "0", "1", "1", "1", "3", "3", "3", "6"],
-			["6", "1", "1", "1", "1", "0", "3", "4", "0", "6"],
-			["6", "2", "6", "3", "3", "3", "6", "6", "6", "6"],
-			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]
+			[ "6", "1", "6", "6", "6", "6", "6", "6", "6", "6" ],
+			[ "6", "1", "1", "1", "1", "1", "2", "2", "0", "6" ],
+			[ "6", "1", "2", "1", "1", "1", "2", "2", "2", "6" ],
+			[ "6", "1", "2", "1", "1", "1", "6", "3", "3", "6" ],
+			[ "6", "1", "0", "1", "1", "1", "3", "3", "3", "6" ],
+			[ "6", "1", "1", "1", "1", "0", "3", "4", "0", "6" ],
+			[ "6", "2", "6", "3", "3", "3", "6", "6", "6", "6" ],
+			[ "6", "6", "6", "6", "6", "6", "6", "6", "6", "6" ]
 		],
 		"utilities": [
-			["s", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "wp:90", " ", " ", "t:transformation", " "],
-			[" ", " ", " ", "t:forces", "sub:Lab_One_Info", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "t:primitives:0:0:0.6", " ", "m:0.1", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "tc:2:y", " ", " ", "t:color", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[ "s", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", "wp:90", " ", " ", "t:transformation", " " ],
+			[ " ", " ", " ", "t:array_tutorial", "sub:Lab_One_Info", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", "t:primitives", " ", "m:0.1", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", "tc:2:y", " ", " ", "t:color", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " "],
-			[" ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " "],
-			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", "rainbow:90:0:0.05", " "],
-			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "smallcontainment:180:0:4", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " " ],
+			[ " ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " " ],
+			[ " ", " ", "pyramid_edit:45:0:0.4", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", "rainbow:90:0:0.05", " " ],
+			[ " ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", "smallcontainment:180:0:4", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
@@ -87,12 +81,12 @@
 			"position": [
 				0.5,
 				1.8,
-				6.0
+				6
 			],
 			"rotation": [
-				0.0,
-				180.0,
-				0.0
+				0,
+				180,
+				0
 			],
 			"description": "Main entrance - facing the central table"
 		}
@@ -101,7 +95,7 @@
 		"ambient_color": [
 			0.9,
 			0.9,
-			1.0
+			1
 		],
 		"ambient_energy": 0.3,
 		"directional_light": {
@@ -112,11 +106,11 @@
 				-0.2
 			],
 			"color": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
-			"energy": 1.0
+			"energy": 1
 		},
 		"lab_atmosphere": {
 			"mood": "bright_scientific"
@@ -124,8 +118,8 @@
 	},
 	"settings": {
 		"enter_type": "corridor",
-		"cube_size": 1.0,
-		"gutter": 0.0,
+		"cube_size": 1,
+		"gutter": 0,
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
@@ -139,9 +133,7 @@
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
-			"initial_artifacts": [
-				"rotating_cube"
-			],
+			"initial_artifacts": [ "rotating_cube" ],
 			"unlock_on_sequence_completion": true
 		}
 	}
