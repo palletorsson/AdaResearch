@@ -65,6 +65,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"room_grammar": {
+			"lookup_name": "room_grammar",
+			"scene": "res://commons/artifacts/room_grammar/room_grammar.tscn",
+			"name": "Room Grammar",
+			"description": "Shape grammar for architectural floor plans — binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": ["bsp", "room", "floor_plan", "shape_grammar", "procedural", "architecture", "partition"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
