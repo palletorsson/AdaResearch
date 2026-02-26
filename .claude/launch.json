@@ -6,6 +6,18 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-workbench.js"],
       "port": 3011
+    },
+    {
+      "name": "encyclopedia",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-encyclopedia.js"],
+      "port": 3003
+    },
+    {
+      "name": "claude-self",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-claude-self.js"],
+      "port": 3004
     }
   ]
 }

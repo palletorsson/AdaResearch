@@ -1,7 +1,7 @@
 # K-Pop Prog Kraftwerk Seq - crisp pulse/saw sequencer line
 
-class_name KPopProgKraftwerkSeq
 extends RefCounted
+class_name KPopProgKraftwerkSeq
 
 const LEVEL = 0.2
 

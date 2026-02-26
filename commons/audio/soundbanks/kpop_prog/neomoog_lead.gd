@@ -1,7 +1,7 @@
 # K-Pop Prog Neo-Moog Lead - bright expressive saw lead
 
-class_name KPopProgNeoMoogLead
 extends RefCounted
+class_name KPopProgNeoMoogLead
 
 const LEVEL = 0.24
 

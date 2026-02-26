@@ -205,6 +205,20 @@
 			"map_ready": true,
 			"qfep_connection": "Embodies the full QFEP trajectory: from order (primitives) through entropy (randomness) to the edge of chaos (fractals, L-systems) and collective emergence (swarms). The catalyst IS the curriculum made tangible.",
 			"map_sequences": ["primitives"]
+		},
+		"loving_triangle": {
+			"name": "Loving Triangle",
+			"lookup_name": "loving_triangle",
+			"description": "A triangle-shaped companion that dances with the Becoming Catalyst. Triangles are the atom of all 3D worlds — every mesh reduces to triangles. This entity makes that visible. Not an enemy — a relational partner. It responds to each catalyst mode with its own transformation: folding, tiling, compressing, expanding. Evolves through tiers as lab sequences complete.",
+			"scene": "res://commons/hazards/loving_triangle/loving_triangle.tscn",
+			"category": "companions",
+			"interaction": "immersive",
+			"complexity": "advanced",
+			"tags": ["companion", "catalyst", "becoming", "qfep", "vr", "evolution", "triangle", "folding", "tiling"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"qfep_connection": "The triangle embodies relational identity: the self constituted through encounter. Same potential (catalyst projectile), different relational context (triangle vs wall vs enemy), different manifestation. The simplest polygon that creates enclosure — the other that completes the becoming.",
+			"map_sequences": ["primitives"]
 		}
 	}
 }

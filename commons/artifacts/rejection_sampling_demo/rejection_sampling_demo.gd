@@ -50,7 +50,7 @@ func _ready() -> void:
 func _build_floor_quad() -> void:
 	_mesh_inst = MeshInstance3D.new()
 	_mesh_inst.name = "PlotMesh"
-	var quad := QuadMesh.new()
+	var quad = QuadMesh.new()
 	quad.size = plot_size
 	_mesh_inst.mesh = quad
 	_mesh_inst.rotation_degrees.x = -90
@@ -109,27 +109,27 @@ func _build_labels() -> void:
 ## Evaluate the target distribution (normalized Gaussian) at x in [-1, 1]
 ## Returns a value in [0, 1] where 1 = peak of the distribution.
 func _target_pdf(x: float) -> float:
-	var z := (x - _mu) / _sigma
+	var z = (x - _mu) / _sigma
 	return _amplitude * exp(-0.5 * z * z)
 
 
 func _generate_plot() -> void:
-	var img := Image.create(plot_resolution, plot_resolution, false, Image.FORMAT_RGBA8)
+	var img = Image.create(plot_resolution, plot_resolution, false, Image.FORMAT_RGBA8)
 	img.fill(BG_COLOR)
 
-	var res := plot_resolution
+	var res = plot_resolution
 
 	# Draw subtle grid lines
-	var grid_step := res / 8
+	var grid_step = res / 8
 	for i in range(1, 8):
-		var coord := i * grid_step
+		var coord = i * grid_step
 		for j in range(res):
 			img.set_pixel(coord, j, GRID_COLOR)
 			img.set_pixel(j, coord, GRID_COLOR)
 
 	# Draw axes (center horizontal and vertical)
-	var mid_x := res / 2
-	var bottom_y := res - 1
+	var mid_x = res / 2
+	var bottom_y = res - 1
 	# Vertical center axis
 	for py in range(res):
 		img.set_pixel(mid_x, py, AXIS_COLOR)
@@ -139,47 +139,47 @@ func _generate_plot() -> void:
 
 	# Draw the target distribution curve (2px thick)
 	for px in range(res):
-		var nx := remap(float(px), 0, res - 1, -1.0, 1.0)
-		var pdf_val := _target_pdf(nx)
+		var nx = remap(float(px), 0, res - 1, -1.0, 1.0)
+		var pdf_val = _target_pdf(nx)
 		# Map pdf_val [0, 1] to pixel y: 1.0 -> top, 0.0 -> bottom
-		var py_f := remap(pdf_val, 0.0, 1.0, float(res - 1), 0.0)
-		var py_i := clampi(int(py_f), 0, res - 1)
+		var py_f = remap(pdf_val, 0.0, 1.0, float(res - 1), 0.0)
+		var py_i = clampi(int(py_f), 0, res - 1)
 		# Draw 2px wide curve
 		for dy in range(-1, 2):
-			var cy := clampi(py_i + dy, 0, res - 1)
+			var cy = clampi(py_i + dy, 0, res - 1)
 			img.set_pixel(px, cy, CURVE_COLOR)
 
 	# Fill the area under the curve with a faint color
 	for px in range(res):
-		var nx := remap(float(px), 0, res - 1, -1.0, 1.0)
-		var pdf_val := _target_pdf(nx)
-		var py_curve := int(remap(pdf_val, 0.0, 1.0, float(res - 1), 0.0))
+		var nx = remap(float(px), 0, res - 1, -1.0, 1.0)
+		var pdf_val = _target_pdf(nx)
+		var py_curve = int(remap(pdf_val, 0.0, 1.0, float(res - 1), 0.0))
 		for py in range(py_curve + 2, res):
-			var existing := img.get_pixel(px, py)
+			var existing = img.get_pixel(px, py)
 			# Slight tint under the curve
-			var tint := Color(0.06, 0.12, 0.06)
+			var tint = Color(0.06, 0.12, 0.06)
 			img.set_pixel(px, py, existing + tint)
 
 	# Generate rejection samples and plot them
-	var accepted := 0
-	var total := num_samples
+	var accepted = 0
+	var total = num_samples
 
 	for i in range(total):
 		# Uniform random x in [-1, 1], y in [0, 1]
-		var rx := _rng.randf() * 2.0 - 1.0
-		var ry := _rng.randf()
+		var rx = _rng.randf() * 2.0 - 1.0
+		var ry = _rng.randf()
 
-		var pdf_val := _target_pdf(rx)
-		var is_accepted := ry < pdf_val
+		var pdf_val = _target_pdf(rx)
+		var is_accepted = ry < pdf_val
 
 		if is_accepted:
 			accepted += 1
 
 		# Map to pixel coordinates
-		var px_f := remap(rx, -1.0, 1.0, 0, res - 1)
-		var py_f := remap(ry, 0.0, 1.0, float(res - 1), 0.0)
-		var px_i := clampi(int(px_f), 0, res - 1)
-		var py_i := clampi(int(py_f), 0, res - 1)
+		var px_f = remap(rx, -1.0, 1.0, 0, res - 1)
+		var py_f = remap(ry, 0.0, 1.0, float(res - 1), 0.0)
+		var px_i = clampi(int(px_f), 0, res - 1)
+		var py_i = clampi(int(py_f), 0, res - 1)
 
 		var dot_color: Color
 		if is_accepted:
@@ -190,11 +190,11 @@ func _generate_plot() -> void:
 		# Draw single-pixel dot (dense scatter at 256x256 with 2000 points)
 		img.set_pixel(px_i, py_i, dot_color)
 
-	var texture := ImageTexture.create_from_image(img)
+	var texture = ImageTexture.create_from_image(img)
 	_material.albedo_texture = texture
 
 	# Update stats
-	var ratio := float(accepted) / max(1, total) * 100.0
+	var ratio = float(accepted) / max(1, total) * 100.0
 	if _stats_label:
 		_stats_label.text = "Accepted: %d/%d (%.1f%%)" % [accepted, total, ratio]
 

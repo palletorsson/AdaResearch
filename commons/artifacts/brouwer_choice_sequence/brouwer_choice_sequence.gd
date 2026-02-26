@@ -2,6 +2,7 @@
 # Brouwer's free choice sequences - unfinished infinite objects
 
 extends Node3D
+class_name BrouwerChoiceSequence
 
 var _dots: Array[MeshInstance3D] = []
 var _label: Label3D
@@ -58,3 +59,8 @@ func _process(delta):
 	for i in range(_dots.size()):
 		var dot = _dots[i]
 		dot.position.y = sin(_time * 2.0 + i * 0.5) * 0.02
+
+
+# --- Grid Integration ---
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

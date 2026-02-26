@@ -5,6 +5,8 @@
 			"status": "deferred",
 			"deferred_reason": "All 7 maps were env_one placeholders. No real content. Rebuild when content exists.",
 			"description": "Search algorithms, pathfinding, and optimization",
+			"qfep_term": "F",
+			"qfep_connection": "Search as F-landscape navigation — algorithms explore a space of possibilities, minimizing cost functions to find optimal paths. A* combines known cost (F) with heuristic prediction (estimated remaining E(S)).",
 			"difficulty": "intermediate",
 			"learning_objectives": [
 				"Gradient descent",

@@ -39,7 +39,7 @@
 	],
 	"interactables": [
 	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", "", " ", "rotating_cube:0:1:0.2", " " ],
+	  [ " ", " ", " ", "becoming_catalyst", " ", "loving_triangle", "", " ", "rotating_cube:0:1:0.2", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", "rainbow:90:0:0.05", " " ],
@@ -52,7 +52,7 @@
 	"Lab_One_Info": " Find First Simulation. "
   },
   "external_references": {
-	"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json" ],
+	"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json", "res://commons/artifacts/registry/hazards.json" ],
 	"utility_registry": "res://commons/utilities/utility_registry.json",
 	"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
   },

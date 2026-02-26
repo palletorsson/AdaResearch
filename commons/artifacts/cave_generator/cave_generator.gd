@@ -43,7 +43,7 @@ func _build_floor_quad() -> void:
 	_mesh_inst = MeshInstance3D.new()
 	_mesh_inst.name = "CaveDisplay"
 
-	var quad := QuadMesh.new()
+	var quad = QuadMesh.new()
 	quad.size = Vector2(display_size, display_size)
 	_mesh_inst.mesh = quad
 
@@ -69,12 +69,12 @@ func _generate_cave() -> void:
 		_ca_smooth_step()
 
 	# Step 3: Flood-fill to find all connected regions
-	var regions := _find_all_regions()
+	var regions = _find_all_regions()
 
 	# Step 4: Keep only the largest region, fill rest with walls
 	if regions.size() > 0:
-		var largest_idx := 0
-		var largest_size := 0
+		var largest_idx = 0
+		var largest_size = 0
 		for i in range(regions.size()):
 			if regions[i].size() > largest_size:
 				largest_size = regions[i].size()
@@ -83,12 +83,13 @@ func _generate_cave() -> void:
 		# Fill all non-largest regions with walls
 		for i in range(regions.size()):
 			if i != largest_idx:
-				for cell_idx in regions[i]:
+				for cell_idx_value in regions[i]:
+					var cell_idx: int = int(cell_idx_value)
 					_grid[cell_idx] = WALL_CELL
 
 		# Step 5: Place entrance and exit at extremes of largest region
-		var entrance_idx := _find_extreme(regions[largest_idx], true)
-		var exit_idx := _find_extreme(regions[largest_idx], false)
+		var entrance_idx = _find_extreme(regions[largest_idx], true)
+		var exit_idx = _find_extreme(regions[largest_idx], false)
 
 		# Step 6: Render to image
 		_render_to_texture(entrance_idx, exit_idx)
@@ -97,7 +98,7 @@ func _generate_cave() -> void:
 
 
 func _add_title_label() -> void:
-	var title := Label3D.new()
+	var title = Label3D.new()
 	title.text = "Cave Generator (CA)"
 	title.font_size = 28
 	title.pixel_size = 0.001
@@ -111,7 +112,7 @@ func _add_title_label() -> void:
 func _initialize_random() -> void:
 	for y in range(grid_size):
 		for x in range(grid_size):
-			var idx := y * grid_size + x
+			var idx = y * grid_size + x
 			# Border cells are always walls
 			if x == 0 or x == grid_size - 1 or y == 0 or y == grid_size - 1:
 				_grid[idx] = WALL_CELL
@@ -120,18 +121,18 @@ func _initialize_random() -> void:
 
 
 func _ca_smooth_step() -> void:
-	var next_grid := PackedInt32Array()
+	var next_grid = PackedInt32Array()
 	next_grid.resize(grid_size * grid_size)
 
 	for y in range(grid_size):
 		for x in range(grid_size):
-			var idx := y * grid_size + x
+			var idx = y * grid_size + x
 			# Border stays wall
 			if x == 0 or x == grid_size - 1 or y == 0 or y == grid_size - 1:
 				next_grid[idx] = WALL_CELL
 				continue
 
-			var wall_count := _count_wall_neighbors(x, y)
+			var wall_count = _count_wall_neighbors(x, y)
 			if wall_count >= wall_threshold:
 				next_grid[idx] = WALL_CELL
 			else:
@@ -141,13 +142,13 @@ func _ca_smooth_step() -> void:
 
 
 func _count_wall_neighbors(cx: int, cy: int) -> int:
-	var count := 0
+	var count = 0
 	for dy in range(-1, 2):
 		for dx in range(-1, 2):
 			if dx == 0 and dy == 0:
 				continue
-			var nx := cx + dx
-			var ny := cy + dy
+			var nx = cx + dx
+			var ny = cy + dy
 			if nx < 0 or nx >= grid_size or ny < 0 or ny >= grid_size:
 				count += 1  # Out of bounds counts as wall
 			elif _grid[ny * grid_size + nx] == WALL_CELL:
@@ -158,15 +159,15 @@ func _count_wall_neighbors(cx: int, cy: int) -> int:
 ## Flood-fill to find all connected floor regions.
 ## Returns an array of arrays, where each inner array contains cell indices.
 func _find_all_regions() -> Array:
-	var visited := PackedByteArray()
+	var visited = PackedByteArray()
 	visited.resize(grid_size * grid_size)
 	var regions: Array = []
 
 	for y in range(grid_size):
 		for x in range(grid_size):
-			var idx := y * grid_size + x
+			var idx = y * grid_size + x
 			if _grid[idx] == FLOOR_CELL and visited[idx] == 0:
-				var region := _flood_fill(x, y, visited)
+				var region = _flood_fill(x, y, visited)
 				if region.size() > 0:
 					regions.append(region)
 	return regions
@@ -178,14 +179,14 @@ func _flood_fill(start_x: int, start_y: int, visited: PackedByteArray) -> Array:
 	stack.append(Vector2i(start_x, start_y))
 
 	while stack.size() > 0:
-		var pos: Vector2i = stack.pop_back()
-		var px := pos.x
-		var py := pos.y
+		var pos: Vector2i = stack.pop_back() as Vector2i
+		var px = pos.x
+		var py = pos.y
 
 		if px < 0 or px >= grid_size or py < 0 or py >= grid_size:
 			continue
 
-		var idx := py * grid_size + px
+		var idx = py * grid_size + px
 		if visited[idx] != 0:
 			continue
 		if _grid[idx] != FLOOR_CELL:
@@ -205,12 +206,13 @@ func _flood_fill(start_x: int, start_y: int, visited: PackedByteArray) -> Array:
 
 ## Find the cell in a region closest to top-left (entrance) or bottom-right (exit).
 func _find_extreme(region: Array, top_left: bool) -> int:
-	var best_idx: int = region[0]
+	var best_idx: int = int(region[0])
 	var best_dist: float = INF
 
-	for cell_idx in region:
+	for cell_idx_value in region:
+		var cell_idx: int = int(cell_idx_value)
 		var cx: int = cell_idx % grid_size
-		var cy: int = cell_idx / grid_size
+		var cy: int = int(cell_idx / grid_size)
 
 		var target_x: float
 		var target_y: float
@@ -232,11 +234,11 @@ func _find_extreme(region: Array, top_left: bool) -> int:
 
 
 func _render_to_texture(entrance_idx: int, exit_idx: int) -> void:
-	var image := Image.create(grid_size, grid_size, false, Image.FORMAT_RGBA8)
+	var image = Image.create(grid_size, grid_size, false, Image.FORMAT_RGBA8)
 
 	for y in range(grid_size):
 		for x in range(grid_size):
-			var idx := y * grid_size + x
+			var idx = y * grid_size + x
 			if _grid[idx] == WALL_CELL:
 				image.set_pixel(x, y, COLOR_WALL)
 			else:
@@ -248,17 +250,17 @@ func _render_to_texture(entrance_idx: int, exit_idx: int) -> void:
 	if exit_idx >= 0:
 		_draw_marker(image, exit_idx, COLOR_EXIT)
 
-	var texture := ImageTexture.create_from_image(image)
+	var texture = ImageTexture.create_from_image(image)
 	_material.albedo_texture = texture
 
 
 func _draw_marker(image: Image, cell_idx: int, color: Color) -> void:
 	var cx: int = cell_idx % grid_size
-	var cy: int = cell_idx / grid_size
+	var cy: int = int(cell_idx / grid_size)
 	for dy in range(-1, 2):
 		for dx in range(-1, 2):
-			var px := cx + dx
-			var py := cy + dy
+			var px = cx + dx
+			var py = cy + dy
 			if px >= 0 and px < grid_size and py >= 0 and py < grid_size:
 				image.set_pixel(px, py, color)
 

@@ -3,6 +3,8 @@
         "meshes": {
             "name": "Mesh Generation",
             "description": "Procedural mesh generation and manipulation",
+            "qfep_term": "F",
+            "qfep_connection": "Mesh topology as structural order — vertices, edges, and faces encoding surface geometry. The mesh IS the F-model of a shape: minimum triangles to approximate maximum surface detail.",
             "difficulty": "intermediate",
             "estimated_time": "15-20 minutes",
             "learning_objectives": [

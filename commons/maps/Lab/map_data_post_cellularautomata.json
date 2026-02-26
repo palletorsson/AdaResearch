@@ -79,7 +79,7 @@
 		],
 		"interactables": [
 			[ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-			[ " ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " " ],
+			[ " ", " ", " ", "becoming_catalyst", " ", "loving_triangle", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " " ],
 			[ " ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " " ],
 			[ " ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " " ],
 			[ " ", " ", "cube_lines", "light_sphere", " ", "homagetothesquare:0:1:0.2", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " " ],
@@ -101,7 +101,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/hazards.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {

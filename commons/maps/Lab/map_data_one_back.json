@@ -18,39 +18,39 @@
 	},
 	"layers": {
 		"structure": [
-			["5", "5", "5", "5", "5", "0", "0", "0"],
-			["5", "1", "1", "1", "5", "0", "0", "0"],
-			["5", "1", "0", "1", "5", "0", "0", "0"],
-			["5", "0", "0", "0", "5", "0", "0", "0"],
-			["5", "5", "5", "5", "5", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0", "0"]
+			[ "5", "5", "5", "5", "5", "0", "0", "0" ],
+			[ "5", "1", "1", "1", "5", "0", "0", "0" ],
+			[ "5", "1", "0", "1", "5", "0", "0", "0" ],
+			[ "5", "0", "0", "0", "5", "0", "0", "0" ],
+			[ "5", "5", "5", "5", "5", "0", "0", "0" ],
+			[ "0", "0", "0", "0", "0", "0", "0", "0" ],
+			[ "0", "0", "0", "0", "0", "0", "0", "0" ]
 		],
 		"static_objects": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "t:randomness", " ", " ", "", " ", " "],
-			[" ", "t:noise", " ", "t:proceduralgeneration", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "", " ", " ", " "],
-			[" ", " ", " ", " ", "", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", "t:randomness", " ", " ", "", " ", " " ],
+			[ " ", "t:noise", " ", "t:proceduralgeneration", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", "", " ", " ", " " ],
+			[ " ", " ", " ", " ", "", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", "becoming_catalyst", " ", "loving_triangle", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", "", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ],
+			[ " ", " ", " ", " ", " ", " ", " ", " " ]
 		]
 	},
 	"external_references": {
-		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json" ],
+		"artifact_registries": [ "res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/hazards.json" ],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -78,13 +78,13 @@
 		"default": {
 			"position": [
 				2.5,
-				16.0,
+				16,
 				2.5
 			],
 			"rotation": [
-				0.0,
-				0.0,
-				0.0
+				0,
+				0,
+				0
 			],
 			"description": "Main entrance - elevated position"
 		}
@@ -93,7 +93,7 @@
 		"ambient_color": [
 			0.9,
 			0.9,
-			1.0
+			1
 		],
 		"ambient_energy": 0.3,
 		"directional_light": {
@@ -104,11 +104,11 @@
 				-0.2
 			],
 			"color": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
-			"energy": 1.0
+			"energy": 1
 		},
 		"lab_atmosphere": {
 			"enable_particle_effects": false,
@@ -118,8 +118,8 @@
 	},
 	"settings": {
 		"enter_type": "corridor",
-		"cube_size": 1.0,
-		"gutter": 0.0,
+		"cube_size": 1,
+		"gutter": 0,
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
@@ -132,7 +132,7 @@
 			]
 		},
 		"ceiling": {
-			"height": 4.0,
+			"height": 4,
 			"tile_size": 0.5,
 			"light_spacing": 2,
 			"light_intensity": 0.5,

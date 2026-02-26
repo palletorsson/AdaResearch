@@ -50,9 +50,21 @@ var _bullet_mat_template: StandardMaterial3D
 var _hit_mesh: SphereMesh
 var _hit_mat_template: StandardMaterial3D
 
+# Hit-flash MultiMesh pool (replaces per-hit MeshInstance3D creation)
+const HIT_POOL_SIZE := 8
+var _hit_mm: MultiMesh
+var _hit_mmi: MultiMeshInstance3D
+var _hit_timers: Array[float] = []  # remaining lifetime per slot
+const HIT_FLASH_DURATION := 0.1
+var _hit_next_slot: int = 0  # round-robin index
+# Hidden transform (move instance far away when inactive)
+var _hit_hidden_xf := Transform3D(Basis(), Vector3(0, -1000, 0))
+
 func _ready():
 	_init_shared_resources()
 	_build_turret()
+	# Hit-flash pool lives under scene root so positions are world-space
+	get_tree().root.call_deferred("add_child", _hit_mmi)
 	# Defer config parsing to allow metadata to be set by map loader
 	call_deferred("_parse_config")
 	add_to_group("turrets")
@@ -76,7 +88,7 @@ func _init_shared_resources():
 	_bullet_mat_template.emission = Color(1.0, 0.6, 0.2)
 	_bullet_mat_template.emission_energy_multiplier = 3.0
 
-	# Hit flash mesh + material
+	# Hit flash mesh + material (used as MultiMesh template)
 	_hit_mesh = SphereMesh.new()
 	_hit_mesh.radius = 0.08
 	_hit_mat_template = StandardMaterial3D.new()
@@ -84,6 +96,19 @@ func _init_shared_resources():
 	_hit_mat_template.emission_enabled = true
 	_hit_mat_template.emission = Color(1.0, 0.4, 0.1)
 	_hit_mat_template.emission_energy_multiplier = 4.0
+
+	# Hit-flash MultiMesh pool — 1 draw call for all hit effects
+	_hit_mm = MultiMesh.new()
+	_hit_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_hit_mm.mesh = _hit_mesh
+	_hit_mm.instance_count = HIT_POOL_SIZE
+	for i in HIT_POOL_SIZE:
+		_hit_mm.set_instance_transform(i, _hit_hidden_xf)
+	_hit_mmi = MultiMeshInstance3D.new()
+	_hit_mmi.multimesh = _hit_mm
+	_hit_mmi.material_override = _hit_mat_template
+	_hit_timers.resize(HIT_POOL_SIZE)
+	_hit_timers.fill(0.0)
 
 func _parse_config():
 	# Check config_target meta (set by map loader via #target:mode syntax)
@@ -228,6 +253,14 @@ func _process(delta):
 	_update_shooting(delta)
 	_update_bullets(delta)
 	_update_laser()
+	_update_hit_pool(delta)
+
+func _update_hit_pool(delta: float):
+	for i in HIT_POOL_SIZE:
+		if _hit_timers[i] > 0.0:
+			_hit_timers[i] -= delta
+			if _hit_timers[i] <= 0.0:
+				_hit_mm.set_instance_transform(i, _hit_hidden_xf)
 
 func _get_target_position(target: Node3D) -> Vector3:
 	"""Get actual position of target - handles ball structure with RigidBody child"""
@@ -569,26 +602,41 @@ func _spawn_explosion(pos: Vector3, color: Color):
 	ring.position = pos
 	get_tree().root.add_child(ring)
 	
-	# Sparks/fragments — shared mesh, duplicated material for per-spark alpha tween
+	# Sparks/fragments — MultiMesh for GPU instancing (8 sparks, 1 draw call)
 	var spark_color = color.lerp(Color.YELLOW, 0.5)
-	for i in range(8):
-		var spark = MeshInstance3D.new()
-		spark.mesh = _spark_mesh
-		var spark_mat = _spark_mat_template.duplicate() as StandardMaterial3D
-		spark_mat.albedo_color = spark_color
-		spark_mat.emission = spark_color
-		spark.material_override = spark_mat
-		spark.position = pos
-		get_tree().root.add_child(spark)
+	var spark_count := 8
+	var spark_mm := MultiMesh.new()
+	spark_mm.transform_format = MultiMesh.TRANSFORM_3D
+	spark_mm.instance_count = spark_count
+	spark_mm.mesh = _spark_mesh
+	var spark_mmi := MultiMeshInstance3D.new()
+	spark_mmi.multimesh = spark_mm
+	var spark_mat = _spark_mat_template.duplicate() as StandardMaterial3D
+	spark_mat.albedo_color = spark_color
+	spark_mat.emission = spark_color
+	spark_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	spark_mmi.material_override = spark_mat
+	get_tree().root.add_child(spark_mmi)
 
-		# Random direction
+	# Pre-compute random directions and end positions for each spark
+	var spark_starts: Array[Vector3] = []
+	var spark_ends: Array[Vector3] = []
+	for i in range(spark_count):
+		spark_starts.append(pos)
 		var dir = Vector3(randf_range(-1, 1), randf_range(0.2, 1), randf_range(-1, 1)).normalized()
-		var end_pos = pos + dir * randf_range(0.3, 0.6)
+		spark_ends.append(pos + dir * randf_range(0.3, 0.6))
+		spark_mm.set_instance_transform(i, Transform3D(Basis(), pos))
 
-		var spark_tween = get_tree().create_tween()
-		spark_tween.tween_property(spark, "position", end_pos, 0.3).set_ease(Tween.EASE_OUT)
-		spark_tween.parallel().tween_property(spark_mat, "albedo_color:a", 0.0, 0.3)
-		spark_tween.tween_callback(spark.queue_free)
+	# Animate all sparks via a single tween with method callback
+	var spark_tween = get_tree().create_tween()
+	spark_tween.tween_method(func(t: float):
+		for i in range(spark_count):
+			var ease_t = 1.0 - pow(1.0 - t, 2.0)  # ease-out quad
+			var p = spark_starts[i].lerp(spark_ends[i], ease_t)
+			spark_mm.set_instance_transform(i, Transform3D(Basis(), p))
+		spark_mat.albedo_color.a = 1.0 - t
+	, 0.0, 1.0, 0.3)
+	spark_tween.tween_callback(spark_mmi.queue_free)
 	
 	# Animate flash
 	var tween = get_tree().create_tween()
@@ -705,17 +753,10 @@ func _on_hit(target: Node3D, pos: Vector3):
 		var dir = (pos - muzzle_pos.global_position).normalized()
 		rb.apply_impulse(dir * 0.3)
 	
-	# Hit effect — shared mesh and material
-	var flash = MeshInstance3D.new()
-	flash.mesh = _hit_mesh
-	flash.material_override = _hit_mat_template
-	flash.position = pos
-	get_tree().root.add_child(flash)
-	
-	get_tree().create_timer(0.1).timeout.connect(func():
-		if is_instance_valid(flash):
-			flash.queue_free()
-	)
+	# Hit effect — MultiMesh pool (no node creation per hit)
+	_hit_mm.set_instance_transform(_hit_next_slot, Transform3D(Basis(), pos))
+	_hit_timers[_hit_next_slot] = HIT_FLASH_DURATION
+	_hit_next_slot = (_hit_next_slot + 1) % HIT_POOL_SIZE
 
 func _update_laser():
 	# Always show laser when targeting player

@@ -3,6 +3,7 @@
 		"enhanced_kmeans": {
 			"name": "Enhanced K-Means Clustering",
 			"description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
+			"qfep_connection": "K-means IS iterative F-minimization — centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a λ-like parameter: too few clusters = underfitting, too many = overfitting.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
 			"interaction": "observe",
@@ -31,6 +32,7 @@
 		"svm_visualization": {
 			"name": "Support Vector Machine Visualization",
 			"description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",
+			"qfep_connection": "SVM finds the maximum-margin boundary — the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
 			"interaction": "observe",
@@ -45,6 +47,7 @@
 		"9_3_smart_rockets_vr": {
 			"name": "Smart Rockets (Genetic Algorithm)",
 			"description": "Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
+			"qfep_connection": "Genetic algorithms as population-level F-minimization — fitness IS negative free energy. Mutation injects λ (entropy); selection reduces F (keeps what works). The population explores the edge of chaos between exploitation and exploration.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
 			"interaction": "observe",
@@ -73,6 +76,7 @@
 		"pca_visualization": {
 			"name": "PCA Visualization",
 			"description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
+			"qfep_connection": "PCA is pure F-minimization through dimensionality reduction — finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
 			"interaction": "observe",
@@ -87,6 +91,7 @@
 		"neural_network_visualization": {
 			"name": "Neural Network Visualization",
 			"description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
+			"qfep_connection": "Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional λ (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
 			"interaction": "observe",
@@ -101,6 +106,7 @@
 		"attention_mechanisms": {
 			"name": "Attention Mechanisms",
 			"description": "Transformer attention visualization — query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
+			"qfep_connection": "Attention IS selective F-allocation — the model learns which inputs to weight heavily (low F surprise) and which to ignore (high E(S) noise). Self-attention computes relevance dynamically, adapting the F-model to each input.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
 			"interaction": "observe",
@@ -129,6 +135,7 @@
 		"anomaly_detection": {
 			"name": "Anomaly Detection",
 			"description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
+			"qfep_connection": "Anomalies are high-F surprises — data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
 			"interaction": "observe",
@@ -143,6 +150,7 @@
 		"joint_learn_walk": {
 			"name": "Joint Learn Walk (Reinforcement Learning)",
 			"description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
+			"qfep_connection": "Reinforcement learning as embodied F-minimization — the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
 			"category": "machinelearning",
 			"scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
 			"interaction": "observe",
