@@ -42,11 +42,48 @@ var shots_in_burst: int = 0
 var bullets: Array[Dictionary] = []
 var is_laser_firing: bool = false
 
+# Shared effect resources (created once, reused for all effects)
+var _spark_mesh: SphereMesh
+var _spark_mat_template: StandardMaterial3D
+var _bullet_mesh: SphereMesh
+var _bullet_mat_template: StandardMaterial3D
+var _hit_mesh: SphereMesh
+var _hit_mat_template: StandardMaterial3D
+
 func _ready():
+	_init_shared_resources()
 	_build_turret()
 	# Defer config parsing to allow metadata to be set by map loader
 	call_deferred("_parse_config")
 	add_to_group("turrets")
+
+func _init_shared_resources():
+	# Spark effect mesh + material (shared across all explosion sparks)
+	_spark_mesh = SphereMesh.new()
+	_spark_mesh.radius = 0.04
+	_spark_mat_template = StandardMaterial3D.new()
+	_spark_mat_template.emission_enabled = true
+	_spark_mat_template.emission_energy_multiplier = 8.0
+	_spark_mat_template.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	# Bullet visual mesh + material
+	_bullet_mesh = SphereMesh.new()
+	_bullet_mesh.radius = 0.03
+	_bullet_mesh.height = 0.06
+	_bullet_mat_template = StandardMaterial3D.new()
+	_bullet_mat_template.albedo_color = Color(1.0, 0.8, 0.3)
+	_bullet_mat_template.emission_enabled = true
+	_bullet_mat_template.emission = Color(1.0, 0.6, 0.2)
+	_bullet_mat_template.emission_energy_multiplier = 3.0
+
+	# Hit flash mesh + material
+	_hit_mesh = SphereMesh.new()
+	_hit_mesh.radius = 0.08
+	_hit_mat_template = StandardMaterial3D.new()
+	_hit_mat_template.albedo_color = Color(1.0, 0.5, 0.2)
+	_hit_mat_template.emission_enabled = true
+	_hit_mat_template.emission = Color(1.0, 0.4, 0.1)
+	_hit_mat_template.emission_energy_multiplier = 4.0
 
 func _parse_config():
 	# Check config_target meta (set by map loader via #target:mode syntax)
@@ -532,26 +569,22 @@ func _spawn_explosion(pos: Vector3, color: Color):
 	ring.position = pos
 	get_tree().root.add_child(ring)
 	
-	# Sparks/fragments
+	# Sparks/fragments — shared mesh, duplicated material for per-spark alpha tween
+	var spark_color = color.lerp(Color.YELLOW, 0.5)
 	for i in range(8):
 		var spark = MeshInstance3D.new()
-		var spark_mesh = SphereMesh.new()
-		spark_mesh.radius = 0.04
-		spark.mesh = spark_mesh
-		var spark_mat = StandardMaterial3D.new()
-		spark_mat.albedo_color = color.lerp(Color.YELLOW, 0.5)
-		spark_mat.emission_enabled = true
-		spark_mat.emission = color.lerp(Color.YELLOW, 0.5)
-		spark_mat.emission_energy_multiplier = 8.0
-		spark_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		spark.mesh = _spark_mesh
+		var spark_mat = _spark_mat_template.duplicate() as StandardMaterial3D
+		spark_mat.albedo_color = spark_color
+		spark_mat.emission = spark_color
 		spark.material_override = spark_mat
 		spark.position = pos
 		get_tree().root.add_child(spark)
-		
+
 		# Random direction
 		var dir = Vector3(randf_range(-1, 1), randf_range(0.2, 1), randf_range(-1, 1)).normalized()
 		var end_pos = pos + dir * randf_range(0.3, 0.6)
-		
+
 		var spark_tween = get_tree().create_tween()
 		spark_tween.tween_property(spark, "position", end_pos, 0.3).set_ease(Tween.EASE_OUT)
 		spark_tween.parallel().tween_property(spark_mat, "albedo_color:a", 0.0, 0.3)
@@ -601,19 +634,9 @@ func _fire():
 
 func _create_bullet_visual(pos: Vector3) -> MeshInstance3D:
 	var mesh = MeshInstance3D.new()
-	var sphere = SphereMesh.new()
-	sphere.radius = 0.03
-	sphere.height = 0.06
-	mesh.mesh = sphere
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.8, 0.3)
-	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.6, 0.2)
-	mat.emission_energy_multiplier = 3.0
-	mesh.material_override = mat
+	mesh.mesh = _bullet_mesh
+	mesh.material_override = _bullet_mat_template
 	mesh.position = pos
-	
 	get_tree().root.add_child(mesh)
 	return mesh
 
@@ -682,17 +705,10 @@ func _on_hit(target: Node3D, pos: Vector3):
 		var dir = (pos - muzzle_pos.global_position).normalized()
 		rb.apply_impulse(dir * 0.3)
 	
-	# Hit effect
+	# Hit effect — shared mesh and material
 	var flash = MeshInstance3D.new()
-	var sphere = SphereMesh.new()
-	sphere.radius = 0.08
-	flash.mesh = sphere
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.5, 0.2)
-	mat.emission_enabled = true
-	mat.emission = Color(1.0, 0.4, 0.1)
-	mat.emission_energy_multiplier = 4.0
-	flash.material_override = mat
+	flash.mesh = _hit_mesh
+	flash.material_override = _hit_mat_template
 	flash.position = pos
 	get_tree().root.add_child(flash)
 	
