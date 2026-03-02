@@ -151,7 +151,7 @@ class EvolutionaryCreature:
 		social_connections = []
 	
 	func initialize_genes():
-		"""Initialize comprehensive genetic code"""
+		## Initialize comprehensive genetic code
 		genes = {
 			# Physical traits
 			"size": randf_range(0.5, 2.5),
@@ -202,7 +202,7 @@ class EvolutionaryCreature:
 		smell_range = 3.0 + genes.smell_sensitivity * 8.0
 	
 	func initialize_neural_network():
-		"""Create adaptive neural network based on genetic parameters"""
+		## Create adaptive neural network based on genetic parameters
 		var input_size = 12  # Sensory inputs
 		var hidden_layers = genes.neural_complexity
 		var neurons_per_layer = int(4 + genes.connection_density * 8)
@@ -220,7 +220,7 @@ class EvolutionaryCreature:
 		neural_network.set_genetic_biases(genes)
 	
 	func update(delta: float, environment_data: Dictionary):
-		"""Complex update with neural decision making"""
+		## Complex update with neural decision making
 		age += delta
 		
 		# Sensory processing
@@ -267,7 +267,7 @@ class EvolutionaryCreature:
 		calculate_fitness(delta, environment_data)
 	
 	func process_sensory_input(environment_data: Dictionary) -> Array:
-		"""Process environmental information through sensory systems"""
+		## Process environmental information through sensory systems
 		var inputs = []
 		
 		# Spatial awareness
@@ -295,7 +295,7 @@ class EvolutionaryCreature:
 		return inputs
 	
 	func detect_food_sources(environment_data: Dictionary) -> float:
-		"""Detect nearby food sources"""
+		## Detect nearby food sources
 		var food_signal = 0.0
 		var food_sources = environment_data.get("food_sources", [])
 		
@@ -307,7 +307,7 @@ class EvolutionaryCreature:
 		return clamp(food_signal, 0.0, 1.0)
 	
 	func detect_threats(environment_data: Dictionary) -> float:
-		"""Detect predators and hazards"""
+		## Detect predators and hazards
 		var threat_level = 0.0
 		var threats = environment_data.get("threats", [])
 		
@@ -319,7 +319,7 @@ class EvolutionaryCreature:
 		return clamp(threat_level, 0.0, 1.0)
 	
 	func detect_mates(environment_data: Dictionary) -> float:
-		"""Detect potential mates"""
+		## Detect potential mates
 		var mate_signal = 0.0
 		var creatures = environment_data.get("population", [])
 		
@@ -333,7 +333,7 @@ class EvolutionaryCreature:
 		return clamp(mate_signal, 0.0, 1.0)
 	
 	func detect_population_density(environment_data: Dictionary) -> float:
-		"""Assess local population density"""
+		## Assess local population density
 		var nearby_count = 0
 		var creatures = environment_data.get("population", [])
 		
@@ -344,7 +344,7 @@ class EvolutionaryCreature:
 		return clamp(float(nearby_count) / 10.0, 0.0, 1.0)
 	
 	func detect_pheromones(environment_data: Dictionary) -> float:
-		"""Detect chemical signals"""
+		## Detect chemical signals
 		var pheromone_strength = 0.0
 		var pheromones = environment_data.get("pheromones", {})
 		
@@ -358,7 +358,7 @@ class EvolutionaryCreature:
 		return clamp(pheromone_strength, 0.0, 1.0)
 	
 	func apply_movement(movement_vector: Vector3, desired_speed: float, turn_rate: float, delta: float, environment_data: Dictionary):
-		"""Apply physics-based movement with environmental constraints"""
+		## Apply physics-based movement with environmental constraints
 		
 		# Environmental forces
 		var environment_force = Vector3.ZERO
@@ -397,7 +397,7 @@ class EvolutionaryCreature:
 		angular_velocity = lerp(angular_velocity, 0.0, delta * 2.0)
 	
 	func update_behavior_state(neural_output: Array, environment_data: Dictionary):
-		"""Update behavioral state based on neural decisions and environment"""
+		## Update behavioral state based on neural decisions and environment
 		var behavior_weights = {
 			"exploring": neural_output[0] * genes.exploration,
 			"hunting": neural_output[1] * (1.0 - genes.social_tendency),
@@ -431,12 +431,12 @@ class EvolutionaryCreature:
 					release_pheromone("social", 0.4)
 	
 	func release_pheromone(_pheromone_type: String, intensity: float):
-		"""Release chemical signals"""
+		## Release chemical signals
 		# This would be handled by the main ecosystem
 		pass
 	
 	func update_energy(delta: float, action_intensity: float):
-		"""Complex energy management"""
+		## Complex energy management
 		var base_metabolism = genes.size * 0.5 + (1.0 - genes.energy_efficiency) * 0.3
 		var movement_cost = velocity.length() * genes.size * 0.1
 		var neural_cost = neural_network.get_processing_cost() * 0.05
@@ -452,7 +452,7 @@ class EvolutionaryCreature:
 			fitness *= 0.5  # Death penalty
 	
 	func calculate_fitness(delta: float, environment_data: Dictionary):
-		"""Advanced fitness calculation with multiple objectives"""
+		## Advanced fitness calculation with multiple objectives
 		var survival_fitness = age * 2.0
 		var energy_fitness = energy * 0.1
 		var reproduction_fitness = reproduction_count * 20.0
@@ -473,11 +473,11 @@ class EvolutionaryCreature:
 		fitness = max(0.0, fitness)
 	
 	func get_behavioral_diversity_score() -> float:
-		"""Calculate behavioral diversity metric"""
+		## Calculate behavioral diversity metric
 		return float(learned_behaviors.size()) * genes.learning_rate
 	
 	func crossover(partner) -> EvolutionaryCreature:
-		"""Advanced crossover with multiple inheritance patterns"""
+		## Advanced crossover with multiple inheritance patterns
 		var child = EvolutionaryCreature.new()
 		
 		# Genetic crossover with multiple patterns
@@ -503,7 +503,7 @@ class EvolutionaryCreature:
 		return child
 	
 	func inherit_learned_behaviors(parent1, parent2):
-		"""Inherit learned behaviors from parents"""
+		## Inherit learned behaviors from parents
 		# Combine learned behaviors from both parents
 		for behavior in parent1.learned_behaviors:
 			if randf() < 0.3:  # 30% chance to inherit
@@ -514,7 +514,7 @@ class EvolutionaryCreature:
 				learned_behaviors[behavior] = parent2.learned_behaviors[behavior]
 	
 	func mutate(mutation_rate: float, environmental_pressure: float):
-		"""Adaptive mutation based on environmental conditions"""
+		## Adaptive mutation based on environmental conditions
 		var adaptive_rate = mutation_rate * (1.0 + environmental_pressure)
 		
 		for gene in genes.keys():
@@ -532,7 +532,7 @@ class EvolutionaryCreature:
 			neural_network.mutate(adaptive_rate)
 	
 	func get_mutation_strength(gene: String) -> float:
-		"""Calculate mutation strength based on gene type and environmental pressure"""
+		## Calculate mutation strength based on gene type and environmental pressure
 		match gene:
 			"size", "speed", "strength":
 				return 0.2
@@ -544,7 +544,7 @@ class EvolutionaryCreature:
 				return 0.1
 	
 	func apply_gene_constraints(gene: String):
-		"""Apply realistic constraints to gene values"""
+		## Apply realistic constraints to gene values
 		match gene:
 			"size":
 				genes[gene] = clamp(genes[gene], 0.3, 3.0)
@@ -556,7 +556,7 @@ class EvolutionaryCreature:
 				genes[gene] = clamp(genes[gene], 0.0, 1.0)
 	
 	func process_social_interactions(environment_data: Dictionary):
-		"""Handle complex social behaviors"""
+		## Handle complex social behaviors
 		var creatures = environment_data.get("population", [])
 		
 		for creature in creatures:
@@ -572,7 +572,7 @@ class EvolutionaryCreature:
 					compete_for_resources(creature)
 	
 	func calculate_social_compatibility(other) -> float:
-		"""Calculate social compatibility between creatures"""
+		## Calculate social compatibility between creatures
 		var genetic_similarity = calculate_genetic_similarity(other)
 		var behavioral_similarity = calculate_behavioral_similarity(other)
 		var size_compatibility = 1.0 - abs(genes.size - other.genes.size) / 2.0
@@ -580,7 +580,7 @@ class EvolutionaryCreature:
 		return (genetic_similarity + behavioral_similarity + size_compatibility) / 3.0
 	
 	func calculate_genetic_similarity(other) -> float:
-		"""Calculate genetic similarity"""
+		## Calculate genetic similarity
 		var similarity = 0.0
 		var gene_count = 0
 		
@@ -592,7 +592,7 @@ class EvolutionaryCreature:
 		return similarity / float(gene_count) if gene_count > 0 else 0.0
 	
 	func calculate_behavioral_similarity(other) -> float:
-		"""Calculate behavioral similarity"""
+		## Calculate behavioral similarity
 		var behavior_match = 0.0
 		var total_behaviors = 0
 		
@@ -604,25 +604,25 @@ class EvolutionaryCreature:
 		return behavior_match / float(total_behaviors) if total_behaviors > 0 else 0.0
 	
 	func form_social_bond(other):
-		"""Form social connection"""
+		## Form social connection
 		if not other in social_connections:
 			social_connections.append(other)
 	
 	func share_information(other):
-		"""Share learned behaviors"""
+		## Share learned behaviors
 		if true:  # cultural_transmission enabled
 			for behavior in learned_behaviors:
 				if randf() < 0.1 and not other.learned_behaviors.has(behavior):
 					other.learned_behaviors[behavior] = learned_behaviors[behavior]
 	
 	func compete_for_resources(other):
-		"""Competition mechanics"""
+		## Competition mechanics
 		if genes.strength > other.genes.strength:
 			energy += 5.0
 			other.energy -= 2.0
 	
 	func update_memory(sensory_input: Array, neural_output: Array):
-		"""Update memory with current experience"""
+		## Update memory with current experience
 		var memory_entry = {
 			"timestamp": age,
 			"sensory_state": sensory_input.duplicate(),
@@ -639,7 +639,7 @@ class EvolutionaryCreature:
 			memory.pop_front()
 	
 	func get_learning_signals() -> Array:
-		"""Generate learning signals for neural network"""
+		## Generate learning signals for neural network
 		var signals = []
 		
 		# Fitness-based learning
@@ -685,7 +685,7 @@ class MyNeuralNetwork:
 		initialize_weights()
 	
 	func initialize_weights():
-		"""Initialize neural network weights"""
+		## Initialize neural network weights
 		weights = []
 		biases = []
 		
@@ -704,7 +704,7 @@ class MyNeuralNetwork:
 			biases.append(layer_biases)
 	
 	func forward_pass(inputs: Array) -> Array:
-		"""Forward propagation through network"""
+		## Forward propagation through network
 		var current_layer = inputs.duplicate()
 		
 		for layer_idx in range(weights.size()):
@@ -723,7 +723,7 @@ class MyNeuralNetwork:
 		return current_layer
 	
 	func activate(x: float) -> float:
-		"""Activation function"""
+		## Activation function
 		match activation_func:
 			"sigmoid":
 				return 1.0 / (1.0 + exp(-x))
@@ -737,7 +737,7 @@ class MyNeuralNetwork:
 				return tanh(x)
 	
 	func set_genetic_biases(genes: Dictionary):
-		"""Set initial biases based on genetic traits"""
+		## Set initial biases based on genetic traits
 		for layer_idx in range(biases.size()):
 			for neuron_idx in range(biases[layer_idx].size()):
 				var genetic_influence = 0.0
@@ -751,7 +751,7 @@ class MyNeuralNetwork:
 				biases[layer_idx][neuron_idx] += genetic_influence
 	
 	func crossover_with(partner: MyNeuralNetwork) -> MyNeuralNetwork:
-		"""Create offspring neural network"""
+		## Create offspring neural network
 		# Calculate proper parameters from parent network structure
 		var input_size = layers[0]
 		var output_size = layers[-1]
@@ -780,7 +780,7 @@ class MyNeuralNetwork:
 		return child
 	
 	func mutate(mutation_rate: float):
-		"""Mutate neural network"""
+		## Mutate neural network
 		# Mutate weights
 		for layer_idx in range(weights.size()):
 			for neuron_idx in range(weights[layer_idx].size()):
@@ -797,7 +797,7 @@ class MyNeuralNetwork:
 					biases[layer_idx][neuron_idx] = clamp(biases[layer_idx][neuron_idx], -1.0, 1.0)
 	
 	func update_weights(learning_signals: Array):
-		"""Update weights based on learning signals"""
+		## Update weights based on learning signals
 		if not learning_enabled or learning_signals.is_empty():
 			return
 		
@@ -814,7 +814,7 @@ class MyNeuralNetwork:
 					weights[layer_idx][neuron_idx][weight_idx] = clamp(weights[layer_idx][neuron_idx][weight_idx], -2.0, 2.0)
 	
 	func get_processing_cost() -> float:
-		"""Calculate computational cost of neural processing"""
+		## Calculate computational cost of neural processing
 		var cost = 0.0
 		for layer_size in layers:
 			cost += layer_size * 0.01
@@ -893,7 +893,7 @@ class Species:
 		analyze_species_traits()
 	
 	func analyze_species_traits():
-		"""Analyze common traits of species members"""
+		## Analyze common traits of species members
 		if members.is_empty():
 			return
 		
@@ -927,7 +927,7 @@ class Species:
 		return true
 	
 	func calculate_genetic_distance(creature: EvolutionaryCreature) -> float:
-		"""Calculate genetic distance from species representative"""
+		## Calculate genetic distance from species representative
 		var distance = 0.0
 		var gene_count = 0
 		
@@ -953,7 +953,7 @@ func _ready():
 		print("Queer forms detector initialized")
 
 func _build_3d_labels() -> void:
-	"""Create in-scene 3D labels for VR / immersive viewing."""
+	## Create in-scene 3D labels for VR / immersive viewing.
 	_title_label_3d = Label3D.new()
 	_title_label_3d.text = "Evolutionary Neural Network Ecosystem"
 	_title_label_3d.font_size = 64
@@ -979,7 +979,7 @@ func _process(delta):
 	update_ui()
 
 func setup_environment():
-	"""Setup the 3D environment"""
+	## Setup the 3D environment
 	environment = Node3D.new()
 	environment.name = "EcosystemEnvironment"
 	add_child(environment)
@@ -1019,7 +1019,7 @@ func setup_environment():
 		create_fitness_landscape()
 
 func create_terrain():
-	"""Create complex terrain with various features"""
+	## Create complex terrain with various features
 	# Main ground
 	var ground = MeshInstance3D.new()
 	ground.mesh = PlaneMesh.new()
@@ -1036,7 +1036,7 @@ func create_terrain():
 	create_terrain_features()
 
 func create_terrain_features():
-	"""Add rocks, hills, and other terrain features"""
+	## Add rocks, hills, and other terrain features
 	# Rocks and obstacles
 	for i in range(15):
 		var rock = MeshInstance3D.new()
@@ -1078,7 +1078,7 @@ func create_terrain_features():
 		environment.add_child(hill)
 
 func create_fitness_landscape():
-	"""Create visual representation of fitness landscape"""
+	## Create visual representation of fitness landscape
 	fitness_landscape_mesh = MeshInstance3D.new()
 	fitness_landscape_mesh.name = "FitnessLandscape"
 	
@@ -1100,7 +1100,7 @@ func create_fitness_landscape():
 	environment.add_child(fitness_landscape_mesh)
 
 func initialize_ecosystem():
-	"""Initialize food sources, predators, and environmental factors"""
+	## Initialize food sources, predators, and environmental factors
 	# Food sources
 	food_sources_array = []
 	for i in range(food_sources):
@@ -1178,7 +1178,7 @@ func initialize_ecosystem():
 	}
 
 func initialize_population():
-	"""Initialize the creature population with species diversity"""
+	## Initialize the creature population with species diversity
 	population = []
 	creatures = []
 	species_groups = []
@@ -1195,7 +1195,7 @@ func initialize_population():
 		create_creature_visual(creature)
 
 func assign_to_species(creature: EvolutionaryCreature):
-	"""Assign creature to appropriate species or create new one"""
+	## Assign creature to appropriate species or create new one
 	if not speciation_enabled:
 		creature.species_id = 0
 		return
@@ -1212,7 +1212,7 @@ func assign_to_species(creature: EvolutionaryCreature):
 	print("EcosystemEvolution: New species created - ID: %d, Members: %d" % [new_species.id, new_species.members.size()])
 
 func create_creature_visual(creature: EvolutionaryCreature):
-	"""Create sophisticated visual representation of creature"""
+	## Create sophisticated visual representation of creature
 	var mesh_instance = MeshInstance3D.new()
 	
 	# Create complex mesh based on genes
@@ -1266,7 +1266,7 @@ func create_creature_visual(creature: EvolutionaryCreature):
 		create_neural_visualization(creature)
 
 func create_creature_mesh(creature: EvolutionaryCreature) -> Mesh:
-	"""Create mesh based on creature's genetic traits"""
+	## Create mesh based on creature's genetic traits
 	var mesh
 	
 	# Body shape based on genes
@@ -1288,7 +1288,7 @@ func create_creature_mesh(creature: EvolutionaryCreature) -> Mesh:
 	return mesh
 
 func create_neural_visualization(creature: EvolutionaryCreature):
-	"""Create visualization of creature's neural network"""
+	## Create visualization of creature's neural network
 	var neural_display = Node3D.new()
 	neural_display.name = "NeuralDisplay"
 	
@@ -1348,7 +1348,7 @@ func create_neural_visualization(creature: EvolutionaryCreature):
 	creature.mesh_instance.add_child(neural_display)
 
 func update_environment(delta: float):
-	"""Update environmental conditions"""
+	## Update environmental conditions
 	# Seasonal cycle
 	environmental_factors.seasonal_cycle += delta * 0.1
 	if environmental_factors.seasonal_cycle > 2.0 * PI:
@@ -1364,7 +1364,7 @@ func update_environment(delta: float):
 	environmental_factors.predator_activity = 0.3 + sin(environmental_factors.seasonal_cycle * 2.0) * 0.2
 
 func update_ecosystem(delta: float):
-	"""Update ecosystem components"""
+	## Update ecosystem components
 	# Update food sources
 	for food in food_sources_array:
 		food.update(delta)
@@ -1390,7 +1390,7 @@ func update_ecosystem(delta: float):
 	update_pheromone_trails(delta)
 
 func update_pheromone_trails(delta: float):
-	"""Update pheromone trail decay and visualization"""
+	## Update pheromone trail decay and visualization
 	for trail_type in pheromone_trails:
 		var trails = pheromone_trails[trail_type]
 		for i in range(trails.size() - 1, -1, -1):
@@ -1404,7 +1404,7 @@ func update_pheromone_trails(delta: float):
 					trail.mesh_instance.queue_free()
 
 func update_creatures(delta: float):
-	"""Update all creatures with ecosystem context"""
+	## Update all creatures with ecosystem context
 	var environment_data = {
 		"food_sources": food_sources_array,
 		"threats": predators,
@@ -1448,7 +1448,7 @@ func update_creatures(delta: float):
 # Note: update_creature_trail function is implemented at line 2388
 
 func attempt_reproduction(creature: EvolutionaryCreature, environment_data: Dictionary):
-	"""Handle creature reproduction"""
+	## Handle creature reproduction
 	var potential_mates = []
 	
 	# Find potential mates
@@ -1474,7 +1474,7 @@ func attempt_reproduction(creature: EvolutionaryCreature, environment_data: Dict
 			print("EcosystemEvolution: Reproduction successful - Generation %d" % offspring.generation_born)
 
 func create_offspring(parent1: EvolutionaryCreature, parent2: EvolutionaryCreature) -> EvolutionaryCreature:
-	"""Create offspring from two parents"""
+	## Create offspring from two parents
 	if population.size() >= population_size * 2:  # Population limit
 		return null
 	
@@ -1496,7 +1496,7 @@ func create_offspring(parent1: EvolutionaryCreature, parent2: EvolutionaryCreatu
 	return offspring
 
 func handle_creature_death(creature: EvolutionaryCreature, index: int):
-	"""Handle creature death and cleanup"""
+	## Handle creature death and cleanup
 	# Remove from species
 	if creature.species_id < species_groups.size():
 		var species = species_groups[creature.species_id]
@@ -1515,7 +1515,7 @@ func handle_creature_death(creature: EvolutionaryCreature, index: int):
 	print("EcosystemEvolution: Creature died - Age: %.1f, Fitness: %.1f" % [creature.age, creature.fitness])
 
 func update_species_dynamics(_delta: float):
-	"""Update species-level dynamics"""
+	## Update species-level dynamics
 	if not speciation_enabled:
 		return
 	
@@ -1529,7 +1529,7 @@ func update_species_dynamics(_delta: float):
 		species.analyze_species_traits()
 
 func update_generation_timer(delta: float):
-	"""Update generation timer and trigger evolution"""
+	## Update generation timer and trigger evolution
 	generation_timer += delta
 	
 	if generation_timer >= generation_time:
@@ -1537,7 +1537,7 @@ func update_generation_timer(delta: float):
 		generation_timer = 0.0
 
 func evolve_population():
-	"""Advanced evolution with speciation and environmental pressure"""
+	## Advanced evolution with speciation and environmental pressure
 	print("EcosystemEvolution: Starting evolution - Generation %d" % generation)
 	
 	# Calculate fitness statistics
@@ -1566,7 +1566,7 @@ func evolve_population():
 		tw.tween_property(best.mesh_instance, "scale", Vector3.ONE * best.genes.size, 0.4).set_ease(Tween.EASE_IN_OUT)
 		var mat = best.mesh_instance.material_override as StandardMaterial3D
 		if mat:
-			var orig_emission := mat.emission
+			var orig_emission: Color = mat.emission
 			var tw2 := create_tween()
 			tw2.tween_property(mat, "emission", COLOR_SPECIAL * 1.5, 0.15)
 			tw2.tween_property(mat, "emission", orig_emission, 0.6)
@@ -1580,7 +1580,7 @@ func evolve_population():
 	print("EcosystemEvolution: Evolution complete - Generation %d, Species: %d, Best Fitness: %.2f" % [generation, species_groups.size(), best_fitness])
 
 func evolve_species():
-	"""Evolve each species separately"""
+	## Evolve each species separately
 	var new_population = []
 	
 	for species in species_groups:
@@ -1636,7 +1636,7 @@ func evolve_species():
 	replace_population(new_population)
 
 func evolve_traditional():
-	"""Traditional genetic algorithm evolution"""
+	## Traditional genetic algorithm evolution
 	# Sort by fitness
 	population.sort_custom(func(a, b): return a.fitness > b.fitness)
 	
@@ -1667,7 +1667,7 @@ func evolve_traditional():
 	replace_population(new_population)
 
 func select_parent_from_species(species: Species):
-	"""Select parent from specific species using tournament selection"""
+	## Select parent from specific species using tournament selection
 	if species.members.is_empty():
 		return null
 	
@@ -1684,7 +1684,7 @@ func select_parent_from_species(species: Species):
 	return best_candidate
 
 func select_parent_tournament():
-	"""Tournament selection from entire population"""
+	## Tournament selection from entire population
 	var tournament_size = min(5, population.size())
 	var best_candidate = null
 	var best_fitness = -1.0
@@ -1698,7 +1698,7 @@ func select_parent_tournament():
 	return best_candidate
 
 func get_adaptive_mutation_rate(species: Species) -> float:
-	"""Calculate adaptive mutation rate based on species diversity"""
+	## Calculate adaptive mutation rate based on species diversity
 	if not adaptive_mutation:
 		return mutation_rate
 	
@@ -1714,7 +1714,7 @@ func get_adaptive_mutation_rate(species: Species) -> float:
 	return base_rate
 
 func get_adaptive_mutation_rate_individual(parent1: EvolutionaryCreature, parent2: EvolutionaryCreature) -> float:
-	"""Calculate adaptive mutation rate for individual crossover"""
+	## Calculate adaptive mutation rate for individual crossover
 	if not adaptive_mutation:
 		return mutation_rate
 	
@@ -1730,7 +1730,7 @@ func get_adaptive_mutation_rate_individual(parent1: EvolutionaryCreature, parent
 	return base_rate
 
 func calculate_species_diversity(species: Species) -> float:
-	"""Calculate genetic diversity within species"""
+	## Calculate genetic diversity within species
 	if species.members.size() < 2:
 		return 0.0
 	
@@ -1745,7 +1745,7 @@ func calculate_species_diversity(species: Species) -> float:
 	return total_diversity / comparisons if comparisons > 0 else 0.0
 
 func calculate_genetic_distance(creature1: EvolutionaryCreature, creature2: EvolutionaryCreature) -> float:
-	"""Calculate genetic distance between two creatures"""
+	## Calculate genetic distance between two creatures
 	var distance = 0.0
 	var gene_count = 0
 	
@@ -1757,7 +1757,7 @@ func calculate_genetic_distance(creature1: EvolutionaryCreature, creature2: Evol
 	return distance / gene_count if gene_count > 0 else 0.0
 
 func replace_population(new_population: Array):
-	"""Replace old population with new one"""
+	## Replace old population with new one
 	# Clear old visuals
 	for creature in creatures:
 		if creature.mesh_instance:
@@ -1780,7 +1780,7 @@ func replace_population(new_population: Array):
 		create_creature_visual(creature)
 
 func calculate_fitness_stats():
-	"""Calculate comprehensive fitness statistics"""
+	## Calculate comprehensive fitness statistics
 	if population.is_empty():
 		return
 	
@@ -1808,7 +1808,7 @@ func calculate_fitness_stats():
 		calculate_species_stats()
 
 func calculate_population_diversity() -> float:
-	"""Calculate overall population genetic diversity"""
+	## Calculate overall population genetic diversity
 	if population.size() < 2:
 		return 0.0
 	
@@ -1830,7 +1830,7 @@ func calculate_population_diversity() -> float:
 	return total_diversity / comparisons if comparisons > 0 else 0.0
 
 func calculate_species_stats():
-	"""Calculate species-specific statistics"""
+	## Calculate species-specific statistics
 	for species in species_groups:
 		if species.members.is_empty():
 			continue
@@ -1844,7 +1844,7 @@ func calculate_species_stats():
 		species.traits["diversity"] = calculate_species_diversity(species)
 
 func record_performance_metrics():
-	"""Record performance metrics for analysis"""
+	## Record performance metrics for analysis
 	performance_metrics.generation_times.append(generation_timer)
 	performance_metrics.fitness_progression.append(best_fitness)
 	performance_metrics.species_count.append(species_groups.size())
@@ -1865,7 +1865,7 @@ func record_performance_metrics():
 		perform_queer_forms_analysis()
 
 func update_performance_graphs():
-	"""Update the real-time performance graphs with new data"""
+	## Update the real-time performance graphs with new data
 	# Update fitness progression graph
 	if ui_elements.has("fitness_graph"):
 		var fitness_graph = ui_elements["fitness_graph"]
@@ -1895,7 +1895,7 @@ func update_performance_graphs():
 			renderer.add_data_point(calculate_behavioral_diversity())
 
 func calculate_behavioral_diversity() -> float:
-	"""Calculate behavioral diversity across population"""
+	## Calculate behavioral diversity across population
 	var behavior_counts = {}
 	
 	for creature in creatures:
@@ -1915,7 +1915,7 @@ func calculate_behavioral_diversity() -> float:
 	return diversity
 
 func update_fitness_landscape():
-	"""Update fitness landscape based on environmental changes"""
+	## Update fitness landscape based on environmental changes
 	if not fitness_landscape_evolution:
 		return
 	
@@ -1928,7 +1928,7 @@ func update_fitness_landscape():
 	environmental_factors.resource_availability = clamp(environmental_factors.resource_availability, 0.3, 1.5)
 
 func setup_ui():
-	"""Setup comprehensive UI system"""
+	## Setup comprehensive UI system
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
@@ -2029,7 +2029,7 @@ func setup_ui():
 	setup_interactive_controls(canvas)
 
 func setup_performance_graphs(canvas: CanvasLayer):
-	"""Setup real-time performance graphs"""
+	## Setup real-time performance graphs
 	# Create graph panel
 	var graph_panel = Panel.new()
 	graph_panel.position = Vector2(350, 20)
@@ -2091,7 +2091,7 @@ func setup_performance_graphs(canvas: CanvasLayer):
 	ui_elements["fitness_trend"] = fitness_trend_label
 
 func create_line_graph(position: Vector2, size: Vector2, title: String, color: Color) -> Control:
-	"""Create a line graph control"""
+	## Create a line graph control
 	var graph_container = Control.new()
 	graph_container.position = position
 	graph_container.size = size
@@ -2131,7 +2131,7 @@ class GraphRenderer extends Control:
 		custom_minimum_size = Vector2(100, 50)
 	
 	func add_data_point(value: float):
-		"""Add a new data point to the graph"""
+		## Add a new data point to the graph
 		data_points.append(value)
 		
 		# Limit data points for performance
@@ -2152,7 +2152,7 @@ class GraphRenderer extends Control:
 		queue_redraw()
 	
 	func _draw():
-		"""Draw the graph lines"""
+		## Draw the graph lines
 		if data_points.size() < 2:
 			return
 		
@@ -2186,7 +2186,7 @@ class GraphRenderer extends Control:
 		draw_value_labels(graph_size)
 	
 	func draw_grid_lines(graph_size: Vector2):
-		"""Draw background grid lines"""
+		## Draw background grid lines
 		var grid_color = Color(0.3, 0.3, 0.3, 0.5)
 		
 		# Horizontal grid lines
@@ -2200,7 +2200,7 @@ class GraphRenderer extends Control:
 			draw_line(Vector2(x, 0), Vector2(x, graph_size.y), grid_color, 1.0)
 	
 	func draw_value_labels(graph_size: Vector2):
-		"""Draw value labels on the graph"""
+		## Draw value labels on the graph
 		var font = ThemeDB.fallback_font
 		var font_size = 10
 		
@@ -2218,7 +2218,7 @@ class GraphRenderer extends Control:
 			draw_string(font, Vector2(0, graph_size.y + 15), str(max(0, current_gen - max_data_points)), HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
 
 func setup_interactive_controls(canvas: CanvasLayer):
-	"""Setup interactive controls for real-time parameter adjustment"""
+	## Setup interactive controls for real-time parameter adjustment
 	# Controls panel
 	var control_panel = Panel.new()
 	control_panel.position = Vector2(20, 250)
@@ -2377,7 +2377,7 @@ func _on_reset_pressed():
 	reset_simulation()
 
 func reset_simulation():
-	"""Reset the simulation to initial state"""
+	## Reset the simulation to initial state
 	# Clear existing creatures
 	for creature in creatures:
 		if creature.mesh_instance:
@@ -2397,7 +2397,7 @@ func _on_force_evolve_pressed():
 	evolve_population()
 
 func setup_performance_tracking():
-	"""Initialize performance tracking systems"""
+	## Initialize performance tracking systems
 	performance_metrics = {
 		"generation_times": [],
 		"fitness_progression": [],
@@ -2410,7 +2410,7 @@ func setup_performance_tracking():
 	}
 
 func update_visualizations(_delta: float):
-	"""Update all visual elements"""
+	## Update all visual elements
 	# Update fitness landscape
 	if show_fitness_landscape and fitness_landscape_mesh:
 		update_fitness_landscape_visual()
@@ -2428,7 +2428,7 @@ func update_visualizations(_delta: float):
 		visualize_queer_forms()
 
 func update_fitness_landscape_visual():
-	"""Update fitness landscape visual representation"""
+	## Update fitness landscape visual representation
 	if not fitness_landscape_mesh:
 		return
 	
@@ -2440,13 +2440,13 @@ func update_fitness_landscape_visual():
 		material.albedo_color = Color(0.1, 0.3 + fitness_ratio * 0.5, 0.8, 0.3)
 
 func update_trail_visualizations():
-	"""Update creature trail visualizations"""
+	## Update creature trail visualizations
 	for creature in creatures:
 		if creature.mesh_instance:
 			update_creature_trail(creature)
 
 func update_creature_trail(creature: EvolutionaryCreature):
-	"""Update trail visualization for a single creature"""
+	## Update trail visualization for a single creature
 	# Add current position to trail
 	creature.trail_points.append(creature.position)
 	
@@ -2471,7 +2471,7 @@ func update_creature_trail(creature: EvolutionaryCreature):
 		update_trail_mesh(trail_renderer, creature)
 
 func create_trail_renderer(creature: EvolutionaryCreature) -> MeshInstance3D:
-	"""Create a trail renderer for a creature"""
+	## Create a trail renderer for a creature
 	var trail_renderer = MeshInstance3D.new()
 	trail_renderer.name = "TrailRenderer"
 	
@@ -2494,7 +2494,7 @@ func create_trail_renderer(creature: EvolutionaryCreature) -> MeshInstance3D:
 	return trail_renderer
 
 func update_trail_mesh(trail_renderer: MeshInstance3D, creature: EvolutionaryCreature):
-	"""Update the trail mesh based on creature's trail points"""
+	## Update the trail mesh based on creature's trail points
 	if creature.trail_points.size() < 2:
 		return
 	
@@ -2559,13 +2559,13 @@ func update_trail_mesh(trail_renderer: MeshInstance3D, creature: EvolutionaryCre
 	trail_renderer.mesh = mesh
 
 func update_neural_network_visualizations():
-	"""Update neural network visualizations"""
+	## Update neural network visualizations
 	for creature in creatures:
 		if creature.neural_display:
 			update_neural_visualization(creature)
 
 func update_neural_visualization(creature: EvolutionaryCreature):
-	"""Update neural network visualization for a creature"""
+	## Update neural network visualization for a creature
 	if not creature.neural_display:
 		return
 	
@@ -2629,7 +2629,7 @@ func update_neural_visualization(creature: EvolutionaryCreature):
 			create_neural_connections(layer_node, network, layer_idx, creature)
 
 func create_neural_connections(layer_node: Node3D, network: MyNeuralNetwork, layer_idx: int, creature: EvolutionaryCreature):
-	"""Create visual connections between neural layers"""
+	## Create visual connections between neural layers
 	var current_layer_size = network.layers[layer_idx]
 	var next_layer_size = network.layers[layer_idx + 1]
 	
@@ -2656,7 +2656,7 @@ func create_neural_connections(layer_node: Node3D, network: MyNeuralNetwork, lay
 			break
 
 func create_connection_line(from_pos: Vector3, to_pos: Vector3, weight: float) -> MeshInstance3D:
-	"""Create a line representing a neural connection"""
+	## Create a line representing a neural connection
 	var line_mesh = MeshInstance3D.new()
 	
 	# Create a simple cylinder for the connection
@@ -2686,7 +2686,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3, weight: float) -
 	return line_mesh
 
 func update_ui():
-	"""Update all UI elements"""
+	## Update all UI elements
 	if ui_elements.has("generation"):
 		ui_elements["generation"].text = "Generation: " + str(generation)
 	
@@ -2734,7 +2734,7 @@ func update_ui():
 			ui_elements["behavioral_entropy"].text = "Beh Entropy: " + str(snapped(current_queer_analysis.behavioral_entropy, 0.01))
 
 func get_environmental_state() -> String:
-	"""Get current environmental state description"""
+	## Get current environmental state description
 	var temp = environmental_factors.temperature
 	var resources = environmental_factors.resource_availability
 	var predator_activity = environmental_factors.predator_activity
@@ -2751,7 +2751,7 @@ func get_environmental_state() -> String:
 		return "Normal"
 
 func calculate_fitness_trend() -> String:
-	"""Calculate fitness trend over recent generations"""
+	## Calculate fitness trend over recent generations
 	var history = performance_metrics.fitness_progression
 	if history.size() < 5:
 		return "â†’"
@@ -2777,7 +2777,7 @@ func calculate_fitness_trend() -> String:
 
 # Debug and analysis functions
 func print_ecosystem_report():
-	"""Print comprehensive ecosystem analysis"""
+	## Print comprehensive ecosystem analysis
 	print("=== ECOSYSTEM EVOLUTION REPORT ===")
 	print("Generation: ", generation)
 	print("Population Size: ", population.size())
@@ -2804,7 +2804,7 @@ func print_ecosystem_report():
 		print("%s: %d creatures (%.1f%%)" % [behavior, behavior_counts[behavior], percentage])
 
 func export_evolution_data() -> Dictionary:
-	"""Export evolution data for analysis"""
+	## Export evolution data for analysis
 	var data = {
 		"generation": generation,
 		"population_size": population.size(),
@@ -2830,7 +2830,7 @@ func export_evolution_data() -> Dictionary:
 
 # Public API functions for external control
 func set_evolution_parameters(params: Dictionary):
-	"""Set evolution parameters from external source"""
+	## Set evolution parameters from external source
 	if params.has("mutation_rate"):
 		mutation_rate = params.mutation_rate
 	if params.has("population_size"):
@@ -2840,7 +2840,7 @@ func set_evolution_parameters(params: Dictionary):
 	# Add more parameter setters as needed
 
 func trigger_environmental_event(event_type: String, intensity: float = 1.0):
-	"""Trigger environmental events that affect evolution"""
+	## Trigger environmental events that affect evolution
 	match event_type:
 		"drought":
 			environmental_factors.resource_availability *= (1.0 - intensity * 0.5)
@@ -2854,7 +2854,7 @@ func trigger_environmental_event(event_type: String, intensity: float = 1.0):
 	print("EcosystemEvolution: Environmental event triggered - %s (intensity: %.2f)" % [event_type, intensity])
 
 func get_best_creature() -> EvolutionaryCreature:
-	"""Get the current best performing creature"""
+	## Get the current best performing creature
 	if population.is_empty():
 		return null
 	
@@ -2866,7 +2866,7 @@ func get_best_creature() -> EvolutionaryCreature:
 	return best_creature
 
 func get_ecosystem_state() -> Dictionary:
-	"""Get current ecosystem state"""
+	## Get current ecosystem state
 	return {
 		"generation": generation,
 		"population": population.size(),
@@ -2893,7 +2893,7 @@ class PersistentHomology:
 		max_filtration_value = max_filt
 	
 	func compute_persistent_homology(point_cloud: Array) -> Dictionary:
-		"""Compute persistent homology of a point cloud"""
+		## Compute persistent homology of a point cloud
 		var persistence_pairs = []
 		var betti_numbers = []
 		
@@ -2938,7 +2938,7 @@ class PersistentHomology:
 		}
 	
 	func count_connected_components(points: Array, threshold: float) -> int:
-		"""Count connected components at given threshold"""
+		## Count connected components at given threshold
 		var components = 0
 		var visited = []
 		
@@ -2953,7 +2953,7 @@ class PersistentHomology:
 		return components
 	
 	func dfs_component(points: Array, start: int, threshold: float, visited: Array):
-		"""Depth-first search for connected components"""
+		## Depth-first search for connected components
 		visited[start] = true
 		
 		for i in range(points.size()):
@@ -2963,7 +2963,7 @@ class PersistentHomology:
 					dfs_component(points, i, threshold, visited)
 	
 	func count_loops(points: Array, threshold: float) -> int:
-		"""Estimate number of loops (simplified)"""
+		## Estimate number of loops (simplified)
 		var edges = 0
 		var vertices = points.size()
 		
@@ -2979,7 +2979,7 @@ class PersistentHomology:
 		return max(0, edges - vertices + components)
 	
 	func detect_queer_topology(persistence_data: Dictionary) -> float:
-		"""Detect non-normative topological features"""
+		## Detect non-normative topological features
 		var queer_score = 0.0
 		var persistence_pairs = persistence_data.persistence_pairs
 		
@@ -3010,7 +3010,7 @@ class MapperAlgorithm:
 		num_intervals = intervals
 	
 	func compute_mapper_graph(data_points: Array, metadata: Array = []) -> Dictionary:
-		"""Compute Mapper graph from data points"""
+		## Compute Mapper graph from data points
 		# Step 1: Apply filter function
 		var filter_values = []
 		for point in data_points:
@@ -3075,7 +3075,7 @@ class MapperAlgorithm:
 		}
 	
 	func apply_filter_function(point: Vector3, all_points: Array) -> float:
-		"""Apply filter function to a point"""
+		## Apply filter function to a point
 		match filter_function:
 			"distance_to_center":
 				return point.distance_to(Vector3.ZERO)
@@ -3089,7 +3089,7 @@ class MapperAlgorithm:
 				return point.distance_to(Vector3.ZERO)
 	
 	func calculate_local_density(point: Vector3, all_points: Array, radius: float = 2.0) -> float:
-		"""Calculate local density around a point"""
+		## Calculate local density around a point
 		var count = 0
 		for p in all_points:
 			if point.distance_to(p) <= radius:
@@ -3097,14 +3097,14 @@ class MapperAlgorithm:
 		return float(count) / all_points.size()
 	
 	func calculate_eccentricity(point: Vector3, all_points: Array) -> float:
-		"""Calculate eccentricity (average distance to all other points)"""
+		## Calculate eccentricity (average distance to all other points)
 		var total_distance = 0.0
 		for p in all_points:
 			total_distance += point.distance_to(p)
 		return total_distance / all_points.size()
 	
 	func calculate_queer_divergence(point: Vector3, all_points: Array) -> float:
-		"""Calculate divergence from normative patterns"""
+		## Calculate divergence from normative patterns
 		var center = Vector3.ZERO
 		for p in all_points:
 			center += p
@@ -3134,7 +3134,7 @@ class MapperAlgorithm:
 		return distance_from_center * 0.7 + local_variance * 0.3
 	
 	func cluster_points(points: Array) -> Array:
-		"""Cluster points using simple single linkage"""
+		## Cluster points using simple single linkage
 		if points.size() <= 1:
 			return [points]
 		
@@ -3160,14 +3160,14 @@ class MapperAlgorithm:
 		return clusters
 	
 	func calculate_cluster_center(cluster: Array) -> Vector3:
-		"""Calculate center of a cluster"""
+		## Calculate center of a cluster
 		var center = Vector3.ZERO
 		for point in cluster:
 			center += point
 		return center / cluster.size()
 	
 	func nodes_overlap(node1: Dictionary, node2: Dictionary) -> bool:
-		"""Check if two nodes have overlapping points"""
+		## Check if two nodes have overlapping points
 		for idx1 in node1.indices:
 			for idx2 in node2.indices:
 				if idx1 == idx2:
@@ -3175,7 +3175,7 @@ class MapperAlgorithm:
 		return false
 	
 	func calculate_edge_weight(node1: Dictionary, node2: Dictionary) -> float:
-		"""Calculate weight of edge between nodes"""
+		## Calculate weight of edge between nodes
 		var overlap_count = 0
 		for idx1 in node1.indices:
 			for idx2 in node2.indices:
@@ -3185,7 +3185,7 @@ class MapperAlgorithm:
 		return float(overlap_count) / min(node1.size, node2.size)
 	
 	func detect_queer_patterns(mapper_graph: Dictionary) -> Dictionary:
-		"""Detect non-normative patterns in the mapper graph"""
+		## Detect non-normative patterns in the mapper graph
 		var nodes = mapper_graph.nodes
 		var edges = mapper_graph.edges
 		
@@ -3235,7 +3235,7 @@ class QueerFormsDetector:
 		entropy_calculator = EntropyCalculator.new()
 	
 	func analyze_population(population: Array) -> Dictionary:
-		"""Comprehensive analysis of population for queer forms"""
+		## Comprehensive analysis of population for queer forms
 		var positions = []
 		var genetic_vectors = []
 		var behavioral_vectors = []
@@ -3269,7 +3269,7 @@ class QueerFormsDetector:
 		}
 	
 	func encode_genetic_vector(genes: Dictionary) -> Array:
-		"""Encode genetic traits as vector"""
+		## Encode genetic traits as vector
 		return [
 			genes.get("size", 0.5),
 			genes.get("speed", 0.5),
@@ -3282,7 +3282,7 @@ class QueerFormsDetector:
 		]
 	
 	func encode_behavioral_vector(creature) -> Array:
-		"""Encode behavioral traits as vector"""
+		## Encode behavioral traits as vector
 		return [
 			creature.energy / 100.0,
 			creature.age / 60.0,
@@ -3292,7 +3292,7 @@ class QueerFormsDetector:
 		]
 	
 	func calculate_overall_queerness(topo_q: float, pattern_q: float, genetic_e: float, behavioral_e: float) -> float:
-		"""Calculate overall queerness score"""
+		## Calculate overall queerness score
 		# Weight different measures
 		var weights = [0.3, 0.25, 0.25, 0.2]  # topology, patterns, genetic entropy, behavioral entropy
 		var values = [topo_q, pattern_q, genetic_e, behavioral_e]
@@ -3306,7 +3306,7 @@ class QueerFormsDetector:
 # Entropy Calculator for measuring system complexity
 class EntropyCalculator:
 	func calculate_genetic_entropy(genetic_vectors: Array) -> float:
-		"""Calculate entropy of genetic diversity"""
+		## Calculate entropy of genetic diversity
 		if genetic_vectors.is_empty():
 			return 0.0
 		
@@ -3323,7 +3323,7 @@ class EntropyCalculator:
 		return total_entropy / dimensions
 	
 	func calculate_behavioral_entropy(behavioral_vectors: Array) -> float:
-		"""Calculate entropy of behavioral diversity"""
+		## Calculate entropy of behavioral diversity
 		if behavioral_vectors.is_empty():
 			return 0.0
 		
@@ -3340,7 +3340,7 @@ class EntropyCalculator:
 		return total_entropy / dimensions
 	
 	func calculate_shannon_entropy(values: Array) -> float:
-		"""Calculate Shannon entropy of a value array"""
+		## Calculate Shannon entropy of a value array
 		var bins = 10
 		var min_val = values.min()
 		var max_val = values.max()
@@ -3375,7 +3375,7 @@ class EntropyCalculator:
 # ==============================================================================
 
 func perform_queer_forms_analysis():
-	"""Perform queer forms analysis on current population"""
+	## Perform queer forms analysis on current population
 	if not queer_forms_detector or population.is_empty():
 		return
 	
@@ -3408,7 +3408,7 @@ func perform_queer_forms_analysis():
 		print_queer_forms_report()
 
 func apply_queer_forms_bias():
-	"""Apply bias towards non-normative forms in evolution"""
+	## Apply bias towards non-normative forms in evolution
 	# Boost fitness of creatures with high queerness scores
 	for creature in population:
 		var creature_queerness = calculate_individual_queerness(creature)
@@ -3419,7 +3419,7 @@ func apply_queer_forms_bias():
 				highlight_queer_creature(creature)
 
 func calculate_individual_queerness(creature) -> float:
-	"""Calculate queerness score for individual creature"""
+	## Calculate queerness score for individual creature
 	# Simplified individual analysis
 	var genetic_vector = queer_forms_detector.encode_genetic_vector(creature.genes)
 	var behavioral_vector = queer_forms_detector.encode_behavioral_vector(creature)
@@ -3447,7 +3447,7 @@ func calculate_individual_queerness(creature) -> float:
 	return (spatial_divergence + genetic_divergence + behavioral_divergence) / 3.0
 
 func highlight_queer_creature(creature):
-	"""Visually highlight creatures with high queerness"""
+	## Visually highlight creatures with high queerness
 	if creature.mesh_instance:
 		var material = creature.mesh_instance.material_override as StandardMaterial3D
 		if material:
@@ -3456,7 +3456,7 @@ func highlight_queer_creature(creature):
 			material.emission_energy = 0.5
 
 func print_queer_forms_report():
-	"""Print detailed queer forms analysis report"""
+	## Print detailed queer forms analysis report
 	if current_queer_analysis.is_empty():
 		return
 	
@@ -3478,7 +3478,7 @@ func print_queer_forms_report():
 	print("====================================")
 
 func visualize_queer_forms():
-	"""Create visualizations of detected queer forms"""
+	## Create visualizations of detected queer forms
 	if not current_queer_analysis or not show_fitness_landscape:
 		return
 	
@@ -3500,7 +3500,7 @@ func visualize_queer_forms():
 	visualize_topological_features(current_queer_analysis.topological_analysis, queer_viz)
 
 func visualize_mapper_graph(mapper_data: Dictionary, parent: Node3D):
-	"""Visualize the mapper graph structure"""
+	## Visualize the mapper graph structure
 	var nodes = mapper_data.get("nodes", [])
 	var edges = mapper_data.get("edges", [])
 	
@@ -3538,7 +3538,7 @@ func visualize_mapper_graph(mapper_data: Dictionary, parent: Node3D):
 			parent.add_child(edge_viz)
 
 func visualize_topological_features(tda_data: Dictionary, parent: Node3D):
-	"""Visualize persistent homology features"""
+	## Visualize persistent homology features
 	var persistence_pairs = tda_data.get("persistence_pairs", [])
 	
 	for pair in persistence_pairs:

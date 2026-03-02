@@ -54,7 +54,7 @@ func _pin_edges():
 	var mesh_data := soft_body.mesh
 	if mesh_data == null:
 		return
-	var arrays := mesh_data.get_mesh_arrays()
+	var arrays: Array = mesh_data.get_mesh_arrays()
 	if arrays.size() == 0:
 		return
 	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]

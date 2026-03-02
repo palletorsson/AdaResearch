@@ -90,7 +90,7 @@ func _build_network_root() -> void:
 	add_child(_network_root)
 
 func _rebuild_network() -> void:
-	"""Tear down and rebuild the entire network visualization."""
+	## Tear down and rebuild the entire network visualization.
 	# Clean up old meshes
 	if _network_root:
 		for child in _network_root.get_children():
@@ -155,18 +155,18 @@ func _rebuild_network() -> void:
 				_connection_meshes.append(conn)
 
 func _get_layer_color(layer_idx: int) -> Color:
-	"""Return a color based on layer position (input / hidden / output)."""
+	## Return a color based on layer position (input / hidden / output).
 	if layer_idx == 0:
 		return COLOR_DATA
 	elif layer_idx == layer_sizes.size() - 1:
 		return COLOR_POSITIVE
 	else:
 		# Interpolate hidden layers between purple and blue
-		var t := float(layer_idx) / max(1.0, layer_sizes.size() - 1.0)
+		var t: float = float(layer_idx) / max(1.0, layer_sizes.size() - 1.0)
 		return COLOR_HIDDEN.lerp(COLOR_DATA, t * 0.4)
 
 func _create_connection(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3D:
-	"""Create a thin cylinder connecting two neuron positions."""
+	## Create a thin cylinder connecting two neuron positions.
 	var mesh_inst := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
 	cyl.top_radius = 0.012
@@ -201,7 +201,7 @@ func _create_connection(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3D:
 # =============================================================================
 
 func _build_controls() -> void:
-	"""Build Label3D headers and live stats display in the scene."""
+	## Build Label3D headers and live stats display in the scene.
 	# Title label
 	var title := Label3D.new()
 	title.text = "Neural Network"
@@ -270,8 +270,8 @@ func _process(delta: float) -> void:
 			var pulse := 1.0 + sin(time * pulse_speed + phase) * 0.12
 
 			# Signal wave boost: neurons near the wave front glow brighter
-			var wave_dist := abs(float(layer_idx) - _signal_wave_pos)
-			var wave_boost := max(0.0, 1.0 - wave_dist * 1.5) * 0.6
+			var wave_dist: float = abs(float(layer_idx) - _signal_wave_pos)
+			var wave_boost: float = max(0.0, 1.0 - wave_dist * 1.5) * 0.6
 
 			# Scale pulse
 			mesh.scale = Vector3.ONE * pulse
@@ -286,8 +286,8 @@ func _process(delta: float) -> void:
 		var conn_idx := 0
 		for layer_idx in range(layer_sizes.size() - 1):
 			var wave_center := (float(layer_idx) + float(layer_idx + 1)) * 0.5
-			var wave_dist := abs(wave_center - _signal_wave_pos)
-			var brightness := max(0.0, 1.0 - wave_dist * 1.2) * 0.5
+			var wave_dist: float = abs(wave_center - _signal_wave_pos)
+			var brightness: float = max(0.0, 1.0 - wave_dist * 1.2) * 0.5
 			for _from in range(layer_sizes[layer_idx]):
 				for _to in range(layer_sizes[layer_idx + 1]):
 					if conn_idx < _connection_meshes.size():
