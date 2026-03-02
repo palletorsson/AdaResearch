@@ -77,8 +77,14 @@ start_with_grid_system = true
 main_lab_scene = "res://commons/scenes/lab.tscn"
 preferred_grid_map = "Lab"
 skip_menu = false
+spawn_map_loader_button_actions = PackedStringArray("by_button", "b_button", "vr_button_b")
+spawn_map_loader_keyboard_key = 66
+map_loader_spawn_distance = 1.8
+map_loader_spawn_height = 1.6
 quick_transition_duration = 0.3
 normal_transition_duration = 1.0
+force_fast_transition_fade = true
+force_loading_screen_for_all_transitions = true
 main_scene = "uid://cgrljkfrmkgda"
 
 [node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" unique_id=378771753 instance=ExtResource("5_pointer")]
