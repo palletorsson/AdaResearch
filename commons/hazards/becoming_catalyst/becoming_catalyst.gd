@@ -3,10 +3,9 @@
 # Not a weapon of destruction but a tool of transformation, becoming, and
 # boundary dissolution.  Each Lab sequence unlocks a new expressive mode.
 #
-# Extends XRToolsPickable (same pattern as StickTool):
-#   - Grip to pick up, trigger to fire
-#   - Thumbstick left/right to switch modes
-#   - Visual evolves as modes unlock
+# Pickup behavior: the crystal shrinks into the hand and vanishes.
+# The hand absorbs its power — trigger fires projectiles from the hand.
+# Releasing grip drops the crystal back into the world.
 #
 # QFEP arc: from order (primitives) through entropy (randomness) to the
 # edge of chaos (fractals, L-systems) and collective emergence (swarm).
@@ -101,9 +100,9 @@ func _physics_process(delta: float) -> void:
 		if _mode_label_timer <= 0.0 and _mode_label:
 			_mode_label.visible = false
 
-	# Held glow pulse
+	# Hand glow pulse — the absorbed power breathes
 	if is_held and _held_glow:
-		var pulse := 1.0 + sin(Time.get_ticks_msec() / 300.0) * 0.3
+		var pulse := 1.5 + sin(Time.get_ticks_msec() / 400.0) * 0.5
 		_held_glow.light_energy = pulse
 
 	# Mode switching (only when held)
@@ -132,8 +131,15 @@ func _fire() -> void:
 	if mode_def.is_empty():
 		return
 
-	var spawn_pos := _tip.global_position if _tip else global_position
-	var fire_dir := -global_transform.basis.z  # Forward
+	# Fire from the controller (hand), not the crystal
+	var spawn_pos: Vector3
+	var fire_dir: Vector3
+	if controller:
+		spawn_pos = controller.global_position + controller.global_transform.basis.z * -0.1
+		fire_dir = -controller.global_transform.basis.z
+	else:
+		spawn_pos = global_position
+		fire_dir = -global_transform.basis.z
 
 	# Load the mode script and call its factory
 	var mode_script: GDScript = load(mode_def["script"])
@@ -145,16 +151,13 @@ func _fire() -> void:
 	if projectile == null:
 		return
 
-	# Add to scene tree (top-level, not child of catalyst)
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = spawn_pos
 
-	# Fire rate from mode
 	fire_cooldown = mode_script.FIRE_RATE if "FIRE_RATE" in mode_script else 0.4
-
 	projectile_fired.emit(mode_def["id"], spawn_pos)
 
-	# Haptic feedback
+	# Haptic kick
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
 
@@ -380,36 +383,25 @@ func _on_picked_up(_pickable) -> void:
 			parent = parent.get_parent()
 		if parent is XRController3D:
 			controller = parent
-			# Direct trigger connection — reliable backup for FunctionPickup dispatch
 			if not controller.button_pressed.is_connected(_on_controller_button):
 				controller.button_pressed.connect(_on_controller_button)
 
-	# Pickup animation — crystal scales into the hand
+	# Absorb animation — crystal shrinks into the hand and vanishes
 	if _pickup_tween and _pickup_tween.is_running():
 		_pickup_tween.kill()
-	scale = Vector3(0.2, 0.2, 0.2)
 	_pickup_tween = create_tween()
-	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	_pickup_tween.tween_property(self, "scale", Vector3(0.01, 0.01, 0.01), 0.35) \
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 
-	# Activate held glow
+	# Glow transfers to the hand
 	if _held_glow:
 		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
 		_held_glow.light_color = mode_color
-		_held_glow.light_energy = 1.0
+		_held_glow.light_energy = 1.5
 
-	# Boost crystal emission
-	var crystal := get_node_or_null("CrystalCore") as MeshInstance3D
-	if crystal and crystal.material_override:
-		var mat := crystal.material_override as StandardMaterial3D
-		if mat:
-			mat.emission_energy_multiplier = 3.0
-
-	# Show current mode briefly
-	_show_mode_label()
-
-	# Haptic bump on pickup
+	# Haptic pulse — the hand absorbs the crystal's energy
 	if controller:
-		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.2, 0.0)
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.4, 0.0)
 
 func _on_dropped(_pickable) -> void:
 	is_held = false
@@ -419,22 +411,17 @@ func _on_dropped(_pickable) -> void:
 		controller.button_pressed.disconnect(_on_controller_button)
 	controller = null
 
-	# Drop animation — crystal shrinks away
+	# Reappear — crystal emerges from the hand back into the world
 	if _pickup_tween and _pickup_tween.is_running():
 		_pickup_tween.kill()
+	scale = Vector3(0.01, 0.01, 0.01)
 	_pickup_tween = create_tween()
-	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.15).from(Vector3(0.6, 0.6, 0.6))
+	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.3) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
-	# Deactivate glow
+	# Kill the hand glow
 	if _held_glow:
 		_held_glow.light_energy = 0.0
-
-	# Dim crystal emission
-	var crystal := get_node_or_null("CrystalCore") as MeshInstance3D
-	if crystal and crystal.material_override:
-		var mat := crystal.material_override as StandardMaterial3D
-		if mat:
-			mat.emission_energy_multiplier = 1.2
 
 	if _mode_label:
 		_mode_label.visible = false

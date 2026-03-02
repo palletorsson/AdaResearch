@@ -4,10 +4,10 @@ The player's evolving VR tool. Not a weapon of destruction but a tool of transfo
 
 ## Controls
 
-- **Grip**: Pick up / hold the crystal
-- **Trigger**: Fire (behavior depends on current mode)
+- **Grip**: Absorb the crystal — it shrinks into your hand, granting its power
+- **Trigger**: Fire from the hand (behavior depends on current mode)
 - **Thumbstick left/right**: Switch between unlocked modes
-- Mode name flashes briefly when switching
+- **Release grip**: Crystal re-emerges from the hand back into the world
 
 ## Modes
 
