@@ -133,12 +133,12 @@ func _fire() -> void:
 	if mode_def.is_empty():
 		return
 
-	# Fire from the controller (hand) in its pointing direction
+	# Fire where the controller points (local -Z, same axis as FunctionPointer ray)
 	var spawn_pos: Vector3
 	var fire_dir: Vector3
 	if controller:
-		fire_dir = -controller.global_transform.basis.y
-		spawn_pos = controller.global_position + fire_dir * 0.1
+		fire_dir = -controller.global_transform.basis.z
+		spawn_pos = controller.global_position + fire_dir * 0.15
 	else:
 		fire_dir = -global_transform.basis.z
 		spawn_pos = global_position
