@@ -3,9 +3,9 @@
 # Not a weapon of destruction but a tool of transformation, becoming, and
 # boundary dissolution.  Each Lab sequence unlocks a new expressive mode.
 #
-# Pickup behavior: the crystal shrinks into the hand and vanishes.
-# The hand absorbs its power — trigger fires projectiles from the hand.
-# Releasing grip drops the crystal back into the world.
+# Pickup behavior: the crystal shrinks into the hand and is absorbed.
+# The hand permanently gains its power — trigger fires projectiles.
+# The crystal is consumed. The hand is free to grab other things.
 #
 # QFEP arc: from order (primitives) through entropy (randomness) to the
 # edge of chaos (fractals, L-systems) and collective emergence (swarm).
@@ -32,6 +32,7 @@ var unlocked_modes: Array[String] = ["primitives"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
+var _absorbed: bool = false
 var controller: XRController3D = null
 
 # Mode switching debounce
@@ -113,12 +114,13 @@ func _physics_process(delta: float) -> void:
 # FIRING
 # ═════════════════════════════════════════════════════════════════════════
 
-## Called by XRToolsFunctionPickup when the trigger is pressed.
+## Called by XRToolsFunctionPickup when the trigger is pressed (pre-absorb only).
 func action() -> void:
 	super()
-	_fire()
+	if not _absorbed:
+		_fire()
 
-## Direct controller button handler — backup if FunctionPickup dispatch fails.
+## Direct controller button handler — the primary trigger path once absorbed.
 func _on_controller_button(button_name: String) -> void:
 	if button_name == "trigger_click":
 		_fire()
@@ -375,7 +377,7 @@ func _build_mode_label() -> void:
 func _on_picked_up(_pickable) -> void:
 	is_held = true
 
-	# Find controller reference for thumbstick + haptics + direct trigger
+	# Find controller
 	var pickup_node = get_picked_up_by()
 	if pickup_node:
 		var parent = pickup_node.get_parent()
@@ -386,43 +388,75 @@ func _on_picked_up(_pickable) -> void:
 			if not controller.button_pressed.is_connected(_on_controller_button):
 				controller.button_pressed.connect(_on_controller_button)
 
-	# Absorb animation — crystal shrinks into the hand and vanishes
+	# Shrink into hand, then absorb permanently
 	if _pickup_tween and _pickup_tween.is_running():
 		_pickup_tween.kill()
 	_pickup_tween = create_tween()
 	_pickup_tween.tween_property(self, "scale", Vector3(0.01, 0.01, 0.01), 0.35) \
 		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	_pickup_tween.tween_callback(_absorb_into_hand)
 
-	# Glow transfers to the hand
+	# Haptic pulse — absorbing the crystal
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.4, 0.0)
+
+## Crystal is consumed — reparent to controller, release FunctionPickup hold.
+func _absorb_into_hand() -> void:
+	_absorbed = true
+
+	# Remember controller before let_go triggers _on_dropped
+	var ctrl := controller
+
+	# Release from FunctionPickup so the hand is free to grab other things
+	if is_picked_up():
+		let_go(Vector3.ZERO, Vector3.ZERO)
+
+	# Restore state that _on_dropped cleared
+	controller = ctrl
+	is_held = true
+
+	# Kill physics — we're a ghost node now
+	freeze = true
+	collision_layer = 0
+	collision_mask = 0
+	if _collision_shape:
+		_collision_shape.disabled = true
+
+	# Reconnect trigger (let_go → _on_dropped may have disconnected it)
+	if controller and not controller.button_pressed.is_connected(_on_controller_button):
+		controller.button_pressed.connect(_on_controller_button)
+
+	# Reparent to the controller so we follow the hand
+	call_deferred("_deferred_reparent")
+
+	# Hand glow
 	if _held_glow:
 		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
 		_held_glow.light_color = mode_color
 		_held_glow.light_energy = 1.5
 
-	# Haptic pulse — the hand absorbs the crystal's energy
-	if controller:
-		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.4, 0.0)
+func _deferred_reparent() -> void:
+	if not is_instance_valid(controller):
+		return
+	var old_parent := get_parent()
+	if old_parent:
+		old_parent.remove_child(self)
+	controller.add_child(self)
+	position = Vector3.ZERO
+	scale = Vector3(0.01, 0.01, 0.01)
 
 func _on_dropped(_pickable) -> void:
-	is_held = false
+	if _absorbed:
+		# let_go() fired this during absorption — ignore it
+		return
 
-	# Disconnect direct trigger listener
+	is_held = false
 	if controller and controller.button_pressed.is_connected(_on_controller_button):
 		controller.button_pressed.disconnect(_on_controller_button)
 	controller = null
 
-	# Reappear — crystal emerges from the hand back into the world
-	if _pickup_tween and _pickup_tween.is_running():
-		_pickup_tween.kill()
-	scale = Vector3(0.01, 0.01, 0.01)
-	_pickup_tween = create_tween()
-	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.3) \
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-
-	# Kill the hand glow
 	if _held_glow:
 		_held_glow.light_energy = 0.0
-
 	if _mode_label:
 		_mode_label.visible = false
 

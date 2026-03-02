@@ -4,10 +4,10 @@ The player's evolving VR tool. Not a weapon of destruction but a tool of transfo
 
 ## Controls
 
-- **Grip**: Absorb the crystal — it shrinks into your hand, granting its power
+- **Grip the crystal**: It shrinks into your hand and is absorbed — the hand permanently gains its power
 - **Trigger**: Fire from the hand (behavior depends on current mode)
 - **Thumbstick left/right**: Switch between unlocked modes
-- **Release grip**: Crystal re-emerges from the hand back into the world
+- The crystal is consumed on pickup. The hand is free to grab other things while keeping the ability.
 
 ## Modes
 
