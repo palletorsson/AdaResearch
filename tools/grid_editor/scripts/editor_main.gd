@@ -53,6 +53,10 @@ func _cell_to_world(gx: int, gy: int) -> Vector3:
 	var gs = _get_grid_size()
 	return Vector3(gx * gs, gy * gs, 0)
 
+func _cell_to_world_f(gx: float, gy: float) -> Vector3:
+	var gs = _get_grid_size()
+	return Vector3(gx * gs, gy * gs, 0)
+
 func _world_to_cell(w: Vector3) -> Vector2i:
 	var gs = _get_grid_size()
 	if gs <= 0: return Vector2i(-1, -1)
@@ -247,6 +251,11 @@ func _show_box(mesh: MeshInstance3D, cell: Vector2i, w: float, h: float) -> void
 	box.size = Vector3(w, h, 0.002)
 	mesh.position = _cell_to_world(cell.x, cell.y) + Vector3(w / 2.0, h / 2.0, 0.001)
 
+func _show_box_f(mesh: MeshInstance3D, pos: Array, w: float, h: float) -> void:
+	var box = mesh.mesh as BoxMesh
+	box.size = Vector3(w, h, 0.002)
+	mesh.position = _cell_to_world_f(float(pos[0]), float(pos[1])) + Vector3(w / 2.0, h / 2.0, 0.001)
+
 func _update_hover(cell: Vector2i, sz: Array = [1, 1]) -> void:
 	if not _is_valid(cell): hover_mesh.visible = false; return
 	hover_mesh.visible = true
@@ -263,7 +272,7 @@ func _update_selection() -> void:
 	var p = placements[selected_index]; var pos = _safe_pos(p)
 	var elem = subset_loader.get_element(str(p.get("element", "")))
 	var sz = _rotated_size(elem, p.get("rotation", 0)); var gs = _get_grid_size()
-	_show_box(selection_mesh, Vector2i(int(pos[0]), int(pos[1])), sz[0] * gs, sz[1] * gs)
+	_show_box_f(selection_mesh, pos, sz[0] * gs, sz[1] * gs)
 
 
 # ── Input ──
@@ -400,12 +409,15 @@ func _can_place_at(cell: Vector2i, sz: Array) -> bool:
 	return true
 
 func _occupied(cell: Vector2i) -> int:
+	# Check if integer cell overlaps any element's bounding box (supports float positions)
 	for i in range(placements.size()):
 		var pos = _safe_pos(placements[i])
-		if pos[0] < 0: continue
+		if float(pos[0]) < 0: continue
 		var elem = subset_loader.get_element(str(placements[i].get("element", "")))
 		var sz = _rotated_size(elem, placements[i].get("rotation", 0))
-		if cell.x >= pos[0] and cell.x < pos[0] + int(sz[0]) and cell.y >= pos[1] and cell.y < pos[1] + int(sz[1]):
+		var px := float(pos[0]); var py := float(pos[1])
+		var sw := float(sz[0]); var sh := float(sz[1])
+		if float(cell.x) + 1.0 > px and float(cell.x) < px + sw and float(cell.y) + 1.0 > py and float(cell.y) < py + sh:
 			return i
 	return -1
 
@@ -441,7 +453,7 @@ func _instantiate(index: int) -> void:
 	var node = _create_element_3d(element, gs)
 	if not node: return
 
-	node.position = _cell_to_world(int(pos[0]), int(pos[1]))
+	node.position = _cell_to_world_f(float(pos[0]), float(pos[1]))
 	if rot != 0: node.rotate_z(deg_to_rad(rot))  # XY plane: rotate around Z
 
 	# Debug label
@@ -453,8 +465,58 @@ func _instantiate(index: int) -> void:
 	lbl.position = Vector3(sz[0] * gs * 0.5, sz[1] * gs + 0.02, 0)
 	node.add_child(lbl)
 
+	# Port dots
+	var ports = element.get("ports", [])
+	for port in ports:
+		if not port is Dictionary: continue
+		var cell = port.get("cell", [0, 0])
+		if not cell is Array or cell.size() < 2: continue
+		# Port coords are in cell-units (grid X, grid Y). Parent node is rotated PI/2 around Y
+		# so we place in YZ plane: X=offset for visibility, Y=cell_y, Z=cell_x
+		var port_world = Vector3(-0.005, float(cell[1]) * gs, float(cell[0]) * gs)
+		var dot = MeshInstance3D.new()
+		var sphere = SphereMesh.new()
+		sphere.radius = gs * 0.12; sphere.height = gs * 0.24
+		dot.mesh = sphere
+		var dot_mat = StandardMaterial3D.new()
+		dot_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		dot_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		var aligned = _is_port_aligned(index, port, gs)
+		dot_mat.albedo_color = Color(0.2, 0.9, 0.3, 0.8) if aligned else Color(0.9, 0.3, 0.2, 0.6)
+		dot.material_override = dot_mat
+		dot.position = port_world
+		node.add_child(dot)
+
 	preview_root.add_child(node)
 	placement_nodes[index] = node
+
+
+func _is_port_aligned(placement_index: int, port: Dictionary, gs: float) -> bool:
+	"""Check if a port has a matching port on a nearby element within tolerance."""
+	var p = placements[placement_index]
+	var pos = _safe_pos(p)
+	var cell = port.get("cell", [0, 0])
+	var world_x = float(pos[0]) * gs + float(cell[0]) * gs
+	var world_y = float(pos[1]) * gs + float(cell[1]) * gs
+	var tolerance = gs * 0.6  # Allow slightly more than half-cell tolerance
+
+	for i in range(placements.size()):
+		if i == placement_index: continue
+		var other_p = placements[i]
+		var other_pos = _safe_pos(other_p)
+		var other_elem = subset_loader.get_element(str(other_p.get("element", "")))
+		var other_ports = other_elem.get("ports", [])
+		for op in other_ports:
+			if not op is Dictionary: continue
+			var oc = op.get("cell", [0, 0])
+			if not oc is Array or oc.size() < 2: continue
+			var ox = float(other_pos[0]) * gs + float(oc[0]) * gs
+			var oy = float(other_pos[1]) * gs + float(oc[1]) * gs
+			var dist = sqrt((world_x - ox) ** 2 + (world_y - oy) ** 2)
+			if dist < tolerance:
+				return true
+	return false
+
 
 func _create_element_3d(element: Dictionary, grid_size: float) -> Node3D:
 	var node: Node3D = null
@@ -532,7 +594,7 @@ func _apply_preset(preset: Dictionary) -> void:
 		if not pos is Array or pos.size() < 2: continue
 		var rot = int(round(float(entry.get("rotation", 0)) / 90.0) * 90.0) % 360
 		if rot < 0: rot += 360
-		placements.append({"element": eid, "position": [int(pos[0]), int(pos[1])], "rotation": rot})
+		placements.append({"element": eid, "position": [float(pos[0]), float(pos[1])], "rotation": rot})
 	_rebuild_all(); camera_pan_offset = Vector3.ZERO; _fit_camera(); is_dirty = true
 	status_label.text = "Preset: %s (%d items)" % [preset.get("name", "?"), placements.size()]
 
@@ -604,17 +666,17 @@ func _create_glass_segment(element: Dictionary, grid_size: float) -> Node3D:
 
 	match segment_type:
 		"straight":
-			# Vertical tube: one grid unit longer, shifted -0.5 in y to meet bends
+			# Vertical tube: fits exactly in cell, centered at width/2
 			node = Node3D.new()
 			var mi = MeshInstance3D.new()
-			mi.mesh = _generate_tube_mesh(height + grid_size, tube_radius, 16, 2, 0.0, -grid_size * 0.5)
+			mi.mesh = _generate_tube_mesh(height, tube_radius, 16, 2, width / 2.0, 0.0)
 			mi.material_override = glass_mat
 			node.add_child(mi)
 		"straight_h":
-			# Horizontal tube: vertices along Z, on grid (center_y=0), extended by 1 grid unit
+			# Horizontal tube: fits exactly in cell, centered at height/2
 			node = Node3D.new()
 			var mi_h = MeshInstance3D.new()
-			mi_h.mesh = _generate_tube_mesh_horizontal(width + grid_size, tube_radius, 16, 2, 0.0, -grid_size * 0.5)
+			mi_h.mesh = _generate_tube_mesh_horizontal(width, tube_radius, 16, 2, height / 2.0, 0.0)
 			mi_h.material_override = glass_mat
 			node.add_child(mi_h)
 		"corner", "corner_bl":
@@ -731,7 +793,14 @@ func _create_glass_elbow_directed(width: float, height: float, radius: float, ma
 	var node = Node3D.new()
 	var mi = MeshInstance3D.new()
 	var arc_r = min(width, height) / 2.0
-	mi.mesh = _generate_directed_elbow_yz(arc_r, radius, height / 2.0, width / 2.0, direction, 16, 16)
+	# Center at the cell corner where the two port directions intersect (outward-curving arcs)
+	var cy: float; var cz: float
+	match direction:
+		0:   cy = 0.0;    cz = width   # corner_tr: bottom-right corner in YZ
+		90:  cy = 0.0;    cz = 0.0     # corner_tl: bottom-left corner in YZ
+		180: cy = height; cz = 0.0     # corner_bl: top-left corner in YZ
+		_:   cy = height; cz = width   # corner_br: top-right corner in YZ
+	mi.mesh = _generate_directed_elbow_yz(arc_r, radius, cy, cz, direction, 16, 16)
 	mi.material_override = mat
 	node.add_child(mi)
 	return node
@@ -741,10 +810,10 @@ func _generate_directed_elbow_yz(arc_radius: float, tube_radius: float, center_y
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var start_angle: float; var end_angle: float
 	match direction:
-		0: start_angle = -PI / 2.0; end_angle = 0.0
-		90: start_angle = -PI / 2.0; end_angle = -PI
-		180: start_angle = PI / 2.0; end_angle = PI
-		_: start_angle = PI / 2.0; end_angle = 0.0
+		0:   start_angle = PI;  end_angle = PI / 2.0           # corner_tr: bottom→right
+		90:  start_angle = 0.0; end_angle = PI / 2.0           # corner_tl: bottom→left
+		180: start_angle = 0.0; end_angle = -PI / 2.0          # corner_bl: top→left
+		_:   start_angle = PI;  end_angle = 3.0 * PI / 2.0    # corner_br: top→right
 	var prev_normal := Vector3.ZERO
 	for b in range(bend_segs + 1):
 		var t = float(b) / bend_segs

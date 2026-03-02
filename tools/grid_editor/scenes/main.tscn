@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddsc7yijku2d"]
+[gd_scene format=3 uid="uid://ddsc7yijku2d"]
 
 [ext_resource type="Script" uid="uid://sd2v22jiaan8" path="res://tools/grid_editor/scripts/editor_main.gd" id="1"]
 [ext_resource type="Script" uid="uid://1y7hxms35xbf" path="res://tools/grid_editor/scripts/subset_loader.gd" id="3"]
 
-[node name="EditorMain" type="Control"]
+[node name="EditorMain" type="Control" unique_id=662715745]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=319241616]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.08, 0.08, 0.1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1949998238]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,10 +29,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuBar" type="MenuBar" parent="VBoxContainer"]
+[node name="MenuBar" type="MenuBar" parent="VBoxContainer" unique_id=850289709]
 layout_mode = 2
 
-[node name="File" type="PopupMenu" parent="VBoxContainer/MenuBar"]
+[node name="File" type="PopupMenu" parent="VBoxContainer/MenuBar" unique_id=380588294]
 item_count = 5
 item_0/text = "New"
 item_0/id = 0
@@ -45,7 +45,7 @@ item_3/separator = true
 item_4/text = "Exit"
 item_4/id = 4
 
-[node name="Edit" type="PopupMenu" parent="VBoxContainer/MenuBar"]
+[node name="Edit" type="PopupMenu" parent="VBoxContainer/MenuBar" unique_id=1180179505]
 item_count = 3
 item_0/text = "Undo"
 item_0/id = 0
@@ -54,95 +54,95 @@ item_1/id = 1
 item_2/text = "Delete Selected"
 item_2/id = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer" unique_id=802575727]
 layout_mode = 2
 size_flags_vertical = 3
+split_offsets = PackedInt32Array(220)
 split_offset = 220
 
-[node name="LeftPanel" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+[node name="LeftPanel" type="VBoxContainer" parent="VBoxContainer/HSplitContainer" unique_id=490104418]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SubsetLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="SubsetLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=1761398353]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.62, 0.68, 1)
 theme_override_font_sizes/font_size = 11
 text = "SUBSET"
 
-[node name="SubsetSelector" type="OptionButton" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="SubsetSelector" type="OptionButton" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=1189206601]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PresetLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="PresetLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=1453427393]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.62, 0.68, 1)
 theme_override_font_sizes/font_size = 11
 text = "PRESET"
 
-[node name="PresetRow" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="PresetRow" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=2061428959]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="PresetSelector" type="OptionButton" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow"]
+[node name="PresetSelector" type="OptionButton" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow" unique_id=2013165464]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ApplyPresetButton" type="Button" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow"]
+[node name="ApplyPresetButton" type="Button" parent="VBoxContainer/HSplitContainer/LeftPanel/PresetRow" unique_id=952268909]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Apply"
 
-[node name="CategoryLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="CategoryLabel" type="Label" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=1655868746]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.62, 0.68, 1)
 theme_override_font_sizes/font_size = 11
 text = "ELEMENTS"
 
-[node name="ElementList" type="ItemList" parent="VBoxContainer/HSplitContainer/LeftPanel"]
+[node name="ElementList" type="ItemList" parent="VBoxContainer/HSplitContainer/LeftPanel" unique_id=1908272224]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 allow_search = false
 
-[node name="ViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer"]
+[node name="ViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer" unique_id=1083821612]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
-mouse_filter = 1
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HSplitContainer/ViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HSplitContainer/ViewportContainer" unique_id=2020886270]
 handle_input_locally = false
-size = Vector2i(800, 600)
+size = Vector2i(1568, 1138)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport" unique_id=1723018345]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0.5, 1, 1.5)
 fov = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport" unique_id=1675769234]
 transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 2, 3, 2)
 
-[node name="PreviewRoot" type="Node3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport"]
+[node name="PreviewRoot" type="Node3D" parent="VBoxContainer/HSplitContainer/ViewportContainer/SubViewport" unique_id=316269938]
 unique_name_in_owner = true
 
-[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer" unique_id=1368008010]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="VBoxContainer/StatusBar"]
+[node name="StatusLabel" type="Label" parent="VBoxContainer/StatusBar" unique_id=912963257]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ready"
 
-[node name="ZoomLabel" type="Label" parent="VBoxContainer/StatusBar"]
+[node name="ZoomLabel" type="Label" parent="VBoxContainer/StatusBar" unique_id=511470884]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Zoom: 100%"
 
-[node name="SubsetLoader" type="Node" parent="."]
+[node name="SubsetLoader" type="Node" parent="." unique_id=858656701]
 unique_name_in_owner = true
 script = ExtResource("3")
