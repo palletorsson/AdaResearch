@@ -48,6 +48,7 @@ var _collision_shape: CollisionShape3D = null
 
 # Held glow
 var _held_glow: OmniLight3D = null
+var _pickup_tween: Tween = null
 
 # ── Signals ───────────────────────────────────────────────────────────────
 signal mode_changed(mode_id: String)
@@ -88,7 +89,7 @@ func _ready() -> void:
 	# Try to connect to progression managers
 	call_deferred("_connect_progression_signals")
 
-	print("[Catalyst] Ready — %d modes unlocked" % unlocked_modes.size())
+	print("[Catalyst] Ready — modes: %s" % [unlocked_modes])
 
 func _physics_process(delta: float) -> void:
 	fire_cooldown = maxf(0.0, fire_cooldown - delta)
@@ -115,22 +116,24 @@ func _physics_process(delta: float) -> void:
 
 ## Called by XRToolsFunctionPickup when the trigger is pressed.
 func action() -> void:
-	print("[Catalyst] action() called — is_held=%s mode=%s cooldown=%.2f" % [is_held, unlocked_modes[current_mode_index] if current_mode_index < unlocked_modes.size() else "?", fire_cooldown])
-	super()  # emits action_pressed
+	super()
 	_fire()
 
+## Direct controller button handler — backup if FunctionPickup dispatch fails.
+func _on_controller_button(button_name: String) -> void:
+	if button_name == "trigger_click":
+		_fire()
+
 func _fire() -> void:
-	if fire_cooldown > 0.0:
-		print("[Catalyst] _fire() blocked by cooldown: %.2f" % fire_cooldown)
+	if not is_held or fire_cooldown > 0.0:
 		return
 
 	var mode_def := _get_current_mode_def()
 	if mode_def.is_empty():
-		print("[Catalyst] _fire() failed — no mode_def for index %d" % current_mode_index)
 		return
 
 	var spawn_pos := _tip.global_position if _tip else global_position
-	var direction := -global_transform.basis.z  # Forward
+	var fire_dir := -global_transform.basis.z  # Forward
 
 	# Load the mode script and call its factory
 	var mode_script: GDScript = load(mode_def["script"])
@@ -138,9 +141,8 @@ func _fire() -> void:
 		push_warning("[Catalyst] Could not load mode script: %s" % mode_def["script"])
 		return
 
-	var projectile: CatalystProjectile = mode_script.create_projectile(spawn_pos, direction)
+	var projectile: CatalystProjectile = mode_script.create_projectile(spawn_pos, fire_dir)
 	if projectile == null:
-		print("[Catalyst] _fire() failed — create_projectile returned null")
 		return
 
 	# Add to scene tree (top-level, not child of catalyst)
@@ -151,7 +153,6 @@ func _fire() -> void:
 	fire_cooldown = mode_script.FIRE_RATE if "FIRE_RATE" in mode_script else 0.4
 
 	projectile_fired.emit(mode_def["id"], spawn_pos)
-	print("[Catalyst] FIRED %s at %s" % [mode_def["id"], spawn_pos])
 
 	# Haptic feedback
 	if controller:
@@ -370,7 +371,8 @@ func _build_mode_label() -> void:
 
 func _on_picked_up(_pickable) -> void:
 	is_held = true
-	# Find controller reference for thumbstick + haptics
+
+	# Find controller reference for thumbstick + haptics + direct trigger
 	var pickup_node = get_picked_up_by()
 	if pickup_node:
 		var parent = pickup_node.get_parent()
@@ -378,6 +380,16 @@ func _on_picked_up(_pickable) -> void:
 			parent = parent.get_parent()
 		if parent is XRController3D:
 			controller = parent
+			# Direct trigger connection — reliable backup for FunctionPickup dispatch
+			if not controller.button_pressed.is_connected(_on_controller_button):
+				controller.button_pressed.connect(_on_controller_button)
+
+	# Pickup animation — crystal scales into the hand
+	if _pickup_tween and _pickup_tween.is_running():
+		_pickup_tween.kill()
+	scale = Vector3(0.2, 0.2, 0.2)
+	_pickup_tween = create_tween()
+	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 	# Activate held glow
 	if _held_glow:
@@ -399,11 +411,19 @@ func _on_picked_up(_pickable) -> void:
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.2, 0.0)
 
-	print("[Catalyst] Picked up — mode: %s controller: %s" % [unlocked_modes[current_mode_index], controller.name if controller else "none"])
-
 func _on_dropped(_pickable) -> void:
 	is_held = false
+
+	# Disconnect direct trigger listener
+	if controller and controller.button_pressed.is_connected(_on_controller_button):
+		controller.button_pressed.disconnect(_on_controller_button)
 	controller = null
+
+	# Drop animation — crystal shrinks away
+	if _pickup_tween and _pickup_tween.is_running():
+		_pickup_tween.kill()
+	_pickup_tween = create_tween()
+	_pickup_tween.tween_property(self, "scale", Vector3.ONE, 0.15).from(Vector3(0.6, 0.6, 0.6))
 
 	# Deactivate glow
 	if _held_glow:
@@ -418,7 +438,6 @@ func _on_dropped(_pickable) -> void:
 
 	if _mode_label:
 		_mode_label.visible = false
-	print("[Catalyst] Dropped")
 
 # ═════════════════════════════════════════════════════════════════════════
 # GRID INTEGRATION
