@@ -403,6 +403,41 @@
 			],
 			"sequence": "foundationscrisis"
 		},
+		"angle_sum_triangle": {
+			"lookup_name": "angle_sum_triangle",
+			"scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
+			"class_name": "AngleSumTriangle",
+			"description": "Demonstrates that triangle angles sum to 180° in Euclidean space — a fact that fails in non-Euclidean geometries",
+			"gamwell_reference": "Chapter 1-2: Euclidean Geometry",
+			"qfep_connection": "The angle sum property is axiomatic — it holds only when the parallel postulate is assumed",
+			"signals": [],
+			"interactions": [
+				"observe angle labels and sum"
+			],
+			"parameters": {
+				"size": "Triangle scale factor (default 0.4)"
+			},
+			"dev_themes": [
+				"geometry",
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "beginner",
+			"tags": [
+				"euclidean",
+				"geometry",
+				"angles",
+				"triangle",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
+		},
 		"hilbert_hotel": {
 			"lookup_name": "hilbert_hotel",
 			"scene": "res://commons/artifacts/hilbert_hotel/hilbert_hotel.tscn",
@@ -433,6 +468,38 @@
 				"set_theory",
 				"cantor",
 				"animated"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
+		},
+		"constructive_proof": {
+			"lookup_name": "constructive_proof",
+			"scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn",
+			"class_name": "ConstructiveProof",
+			"description": "Demonstrates constructive vs classical proof - constructive must exhibit the witness, classical can prove existence by contradiction",
+			"gamwell_reference": "Chapter 3-5: Constructivism and Intuitionism",
+			"qfep_connection": "Constructive proof demands the witness be built - existence without construction is insufficient",
+			"signals": [],
+			"interactions": [
+				"observe the contrast between constructive and classical proof"
+			],
+			"parameters": {},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"constructive",
+				"proof",
+				"intuitionism",
+				"foundations",
+				"witness"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,

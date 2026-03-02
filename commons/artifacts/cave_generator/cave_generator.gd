@@ -1,5 +1,5 @@
 extends Node3D
-class_name CaveGenerator
+class_name CaveGeneratorCA
 
 ## Cave Generator — cellular automaton cave generation with flood-fill connectivity.
 ## Classic roguelike technique: initialize ~45% walls, smooth with CA rules,

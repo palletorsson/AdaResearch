@@ -3,6 +3,7 @@
 # Constructive: must exhibit the thing. Classical: can prove existence by contradiction.
 
 extends Node3D
+class_name ConstructiveProof
 
 var _label: Label3D
 var _example_box: MeshInstance3D
@@ -36,3 +37,14 @@ func _create_label():
 	_label.text = "CONSTRUCTIVE PROOF\n\nClassical: \"∃x such that P(x)\"\n(existence by contradiction)\n\nConstructive: \"Here is x\"\n(must exhibit the witness)"
 	_label.position = Vector3(0, -0.35, 0)
 	add_child(_label)
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("color") and _example_box:
+		var c = config_data["color"]
+		if c is Color:
+			_example_box.material_override.albedo_color = c
+		elif c is String:
+			_example_box.material_override.albedo_color = Color(c)
+	if config_data.has("size") and _example_box:
+		var s = float(config_data["size"])
+		(_example_box.mesh as BoxMesh).size = Vector3(s, s, s)

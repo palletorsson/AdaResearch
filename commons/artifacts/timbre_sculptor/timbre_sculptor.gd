@@ -22,6 +22,7 @@
 #   The vowel presets are idealized formant approximations, not recordings.
 #
 extends Node3D
+class_name TimbreSculptor
 
 const _P = preload("res://commons/ui/ada_palette.gd")
 
@@ -42,6 +43,15 @@ const BUTTON_SPACING := 0.075    # Spacing between preset buttons
 const BUTTON_ROW_Y := -0.22     # Y offset for button row
 const DISPLAY_Y := 0.16          # Y offset for displays
 const DISPLAY_Z := 0.0
+
+# ── Audio processing constants ──
+const MIN_FRAMES_THRESHOLD := 256
+const MAX_FRAMES_PER_FILL := 512
+const AMP_SILENCE_THRESHOLD := 0.001
+const MORPH_ARRIVAL_THRESHOLD := 0.005
+const MASTER_GAIN := 0.5
+const AUDIO_BUFFER_SEC := 0.1
+const AUDIO_UNIT_SIZE := 2.0
 
 # ── Timbre presets ──
 # Each preset is an array of 8 amplitudes [h1, h2, h3, h4, h5, h6, h7, h8]
@@ -76,9 +86,9 @@ const PRESET_COLORS := {
 }
 
 ## Configuration
-@export var fundamental_freq: float = 220.0  # A3 — good audible fundamental
-@export var volume_db: float = -6.0
-@export var morph_speed: float = 4.0  # How fast presets morph (higher = faster)
+@export_range(50.0, 2000.0, 1.0) var fundamental_freq: float = 220.0  # A3 — good audible fundamental
+@export_range(-40.0, 6.0, 0.5) var volume_db: float = -6.0
+@export_range(0.5, 20.0, 0.5) var morph_speed: float = 4.0  # How fast presets morph (higher = faster)
 
 ## Internal state
 var harmonic_amplitudes: Array[float] = []  # Current amplitude for each harmonic
@@ -167,6 +177,7 @@ func _build_panel() -> void:
 	_add_section_label("HARMONICS", Vector3(SLIDER_START_X, 0.18, 0.005))
 	_add_section_label("PRESETS", Vector3(-0.24, BUTTON_ROW_Y + 0.06, 0.005))
 
+# Adds a small section header label at the given position.
 func _add_section_label(text: String, pos: Vector3) -> void:
 	var lbl = Label3D.new()
 	lbl.text = text
@@ -178,13 +189,15 @@ func _add_section_label(text: String, pos: Vector3) -> void:
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_components.add_child(lbl)
 
+# Creates NUM_HARMONICS vertical sliders with frequency labels.
 func _build_sliders() -> void:
+	sliders.resize(NUM_HARMONICS)
 	for i in range(NUM_HARMONICS):
 		var slider = SLIDER_V_SCENE.instantiate()
 		var x_pos = SLIDER_START_X + i * SLIDER_SPACING
 		slider.position = Vector3(x_pos, 0.0, 0.02)
 		_components.add_child(slider)
-		
+
 		# Configure slider
 		slider.set_range(0.0, 1.0)
 		var harmonic_num = i + 1
@@ -192,11 +205,11 @@ func _build_sliders() -> void:
 		if i == 0:
 			label_text = "FUND"
 		slider.set_param_name(label_text)
-		
+
 		# Connect slider signal
 		slider.slider_moved.connect(_on_slider_changed.bind(i))
-		
-		sliders.append(slider)
+
+		sliders[i] = slider
 		
 		# Frequency label below each slider
 		var freq_label = Label3D.new()
@@ -210,6 +223,7 @@ func _build_sliders() -> void:
 		freq_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_components.add_child(freq_label)
 
+# Lays out the row of preset buttons with color coding and labels.
 func _build_preset_buttons() -> void:
 	var total_presets = PRESET_ORDER.size()
 	var start_x = -float(total_presets - 1) * BUTTON_SPACING / 2.0
@@ -247,6 +261,7 @@ func _build_preset_buttons() -> void:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_components.add_child(label)
 
+# Instantiates the waveform and spectrum display panels.
 func _build_displays() -> void:
 	# Waveform display (left side of display row)
 	waveform_display = SIMPLE_WAVE_SCENE.instantiate()
@@ -268,12 +283,12 @@ func _build_displays() -> void:
 func _setup_audio() -> void:
 	var stream = AudioStreamGenerator.new()
 	stream.mix_rate = _sample_rate
-	stream.buffer_length = 0.1  # 100ms buffer
-	
+	stream.buffer_length = AUDIO_BUFFER_SEC
+
 	_audio_player = AudioStreamPlayer3D.new()
 	_audio_player.stream = stream
 	_audio_player.volume_db = volume_db
-	_audio_player.unit_size = 2.0
+	_audio_player.unit_size = AUDIO_UNIT_SIZE
 	add_child(_audio_player)
 	_audio_player.play()
 
@@ -290,6 +305,7 @@ func _on_slider_changed(_value, harmonic_idx: int) -> void:
 		target_amplitudes[harmonic_idx] = norm_val
 		is_morphing = false  # User interaction overrides morph
 
+# Starts morphing amplitudes toward the given preset.
 func _on_preset_pressed(preset_name: String) -> void:
 	if not PRESETS.has(preset_name):
 		return
@@ -319,7 +335,7 @@ func _process(delta: float) -> void:
 		for i in range(NUM_HARMONICS):
 			harmonic_amplitudes[i] = lerp(harmonic_amplitudes[i], target_amplitudes[i],
 				morph_speed * delta)
-			if absf(harmonic_amplitudes[i] - target_amplitudes[i]) > 0.005:
+			if absf(harmonic_amplitudes[i] - target_amplitudes[i]) > MORPH_ARRIVAL_THRESHOLD:
 				all_arrived = false
 		
 		if all_arrived:
@@ -342,10 +358,10 @@ func _generate_audio() -> void:
 		return
 	
 	var frames_available = playback.get_frames_available()
-	if frames_available < 256:
+	if frames_available < MIN_FRAMES_THRESHOLD:
 		return
-	
-	var frames_to_fill = mini(frames_available, 512)
+
+	var frames_to_fill = mini(frames_available, MAX_FRAMES_PER_FILL)
 	var waveform_write_idx := 0
 	
 	for _f in range(frames_to_fill):
@@ -355,7 +371,7 @@ func _generate_audio() -> void:
 		# Additive synthesis: sum of harmonics
 		for h in range(NUM_HARMONICS):
 			var amp = harmonic_amplitudes[h]
-			if amp < 0.001:
+			if amp < AMP_SILENCE_THRESHOLD:
 				continue
 			
 			var harmonic_freq = fundamental_freq * float(h + 1)
@@ -370,7 +386,7 @@ func _generate_audio() -> void:
 		if total_amp > 1.0:
 			sample /= total_amp
 		
-		sample *= 0.5  # Master gain
+		sample *= MASTER_GAIN
 		sample = clampf(sample, -1.0, 1.0)
 		
 		playback.push_frame(Vector2(sample, sample))
@@ -417,3 +433,21 @@ func set_harmonic_amplitude(index: int, value: float) -> void:
 		target_amplitudes[index] = harmonic_amplitudes[index]
 		if index < sliders.size():
 			sliders[index].set_normalized_value(harmonic_amplitudes[index])
+
+func _exit_tree() -> void:
+	# Stop audio playback
+	if _audio_player and _audio_player.playing:
+		_audio_player.stop()
+	# Disconnect slider signals
+	for i in range(sliders.size()):
+		var slider = sliders[i]
+		if is_instance_valid(slider) and slider.slider_moved.is_connected(_on_slider_changed):
+			slider.slider_moved.disconnect(_on_slider_changed)
+	# Disconnect preset button signals
+	for preset_name in buttons:
+		var btn = buttons[preset_name]
+		if is_instance_valid(btn) and btn.pressed.is_connected(_on_preset_pressed):
+			btn.pressed.disconnect(_on_preset_pressed)
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

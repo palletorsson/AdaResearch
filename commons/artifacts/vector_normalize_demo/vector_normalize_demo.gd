@@ -18,6 +18,9 @@ var unit_label: Label3D
 var _cached_vector_nodes: Dictionary = {}
 var _cached_unit_nodes: Dictionary = {}
 
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var _sphere_slider: Node3D
+
 func _ready():
 	super._ready()
 	create_axes(1.5)
@@ -49,6 +52,8 @@ func _ready():
 	_cache_vector_nodes(vector_v, _cached_vector_nodes)
 	_cache_vector_nodes(unit_vector, _cached_unit_nodes)
 
+	_setup_controls()
+
 func _create_unit_sphere():
 	unit_sphere = MeshInstance3D.new()
 	unit_sphere.name = "UnitSphere"
@@ -74,21 +79,41 @@ func _create_unit_sphere():
 	_create_wireframe_ring(Vector3.FORWARD, Color(0.4, 0.4, 0.5, 0.25))
 
 func _create_wireframe_ring(normal: Vector3, color: Color):
-	var ring = Node3D.new()
 	var segments = 48
 	var radius = 1.0 * SCENE_SCALE
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	
+
+	# All segments have the same chord length
+	var angle_step = TAU / segments
+	var sample_p1: Vector3
+	var sample_p2: Vector3
+	if normal == Vector3.UP:
+		sample_p1 = Vector3(1, 0, 0) * radius
+		sample_p2 = Vector3(cos(angle_step), 0, sin(angle_step)) * radius
+	elif normal == Vector3.RIGHT:
+		sample_p1 = Vector3(0, 1, 0) * radius
+		sample_p2 = Vector3(0, cos(angle_step), sin(angle_step)) * radius
+	else:
+		sample_p1 = Vector3(1, 0, 0) * radius
+		sample_p2 = Vector3(cos(angle_step), sin(angle_step), 0) * radius
+	var seg_length = (sample_p2 - sample_p1).length()
+
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = 0.003
+	cylinder.bottom_radius = 0.003
+	cylinder.height = seg_length
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = cylinder
+	mm.instance_count = segments
+
 	for i in range(segments):
 		var angle1 = TAU * i / segments
 		var angle2 = TAU * (i + 1) / segments
-		
+
 		var p1: Vector3
 		var p2: Vector3
-		
+
 		if normal == Vector3.UP:
 			p1 = Vector3(cos(angle1), 0, sin(angle1)) * radius
 			p2 = Vector3(cos(angle2), 0, sin(angle2)) * radius
@@ -98,31 +123,28 @@ func _create_wireframe_ring(normal: Vector3, color: Color):
 		else:
 			p1 = Vector3(cos(angle1), sin(angle1), 0) * radius
 			p2 = Vector3(cos(angle2), sin(angle2), 0) * radius
-		
-		var segment = MeshInstance3D.new()
-		var cylinder = CylinderMesh.new()
-		var length = (p2 - p1).length()
-		cylinder.top_radius = 0.003
-		cylinder.bottom_radius = 0.003
-		cylinder.height = length
-		segment.mesh = cylinder
-		segment.material_override = mat
-		segment.position = (p1 + p2) / 2.0
-		
-		# Orient segment along direction (without look_at - node not in tree)
+
+		var xf := Transform3D()
+		xf.origin = (p1 + p2) / 2.0
+
 		var direction = p2 - p1
 		if direction.length() > 0.001:
 			var up = Vector3.UP
 			if abs(direction.normalized().dot(up)) > 0.99:
 				up = Vector3.FORWARD
-			# Calculate rotation manually
-			var basis = Basis.looking_at(direction, up)
-			segment.basis = basis
-			segment.rotate_object_local(Vector3.RIGHT, PI/2)
-		
-		ring.add_child(segment)
-	
-	environment_root.add_child(ring)
+			xf.basis = Basis.looking_at(direction, up) * Basis(Vector3.RIGHT, PI / 2)
+
+		mm.set_instance_transform(i, xf)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mmi.material_override = mat
+
+	environment_root.add_child(mmi)
 
 func _process(_delta):
 	var vec = _get_vector_fast(vector_v, _cached_vector_nodes)
@@ -183,3 +205,20 @@ func _update_unit_label(vec: Vector3):
 		unit_label.visible = true
 	else:
 		unit_label.visible = false
+
+func _setup_controls():
+	var slider = SliderScene.instantiate()
+	slider.position = Vector3(0, 0.5, 0.6)
+	slider.set_param_name("Sphere")
+	slider.set_normalized_value(0.5)
+	slider.slider_moved.connect(_on_sphere_opacity_changed)
+	add_child(slider)
+	_sphere_slider = slider
+
+func _on_sphere_opacity_changed():
+	var val = _sphere_slider.get_normalized_value()
+	if unit_sphere and unit_sphere.material_override:
+		unit_sphere.material_override.albedo_color.a = val * 0.15
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

@@ -1,28 +1,41 @@
 # petri_dish_worms.gd
-# Petri dish with small oscillating sine worms
-# Biological creatures that move in sinusoidal patterns
-# Demonstrates oscillation in living systems
+## Simulates oscillating sine worms in a petri dish.
+## Each worm follows a random walk with sinusoidal lateral oscillation,
+## bouncing off the dish boundary to stay contained.
+## Key parameters: num_worms sets population, oscillation_speed/amplitude
+## control the sine wave, worm_speed sets forward crawling rate.
 extends Node3D
 
 class_name PetriDishWorms
 
-## Worm parameters
-@export var num_worms: int = 8
-@export var worm_length: int = 20
-@export var worm_speed: float = 0.3
-@export var oscillation_speed: float = 1.5
-@export var oscillation_amplitude: float = 0.02
-@export var worm_radius: float = 0.003
+## Number of worms in the dish (1–30)
+@export_range(1, 30) var num_worms: int = 8
+## Segments per worm body — higher values produce smoother curves (2–50)
+@export_range(2, 50) var worm_length: int = 20
+## Forward crawling speed in units per second (0.01–2.0)
+@export_range(0.01, 2.0, 0.01) var worm_speed: float = 0.3
+## Lateral sine oscillation frequency in Hz (0.1–10.0)
+@export_range(0.1, 10.0, 0.1) var oscillation_speed: float = 1.5
+## Lateral oscillation width in meters (0.001–0.1)
+@export_range(0.001, 0.1, 0.001) var oscillation_amplitude: float = 0.02
+## Radius of each worm line in meters (0.001–0.02)
+@export_range(0.001, 0.02, 0.001) var worm_radius: float = 0.003
 
-## Dish parameters
-@export var dish_radius: float = 0.15
-@export var dish_height: float = 0.02
-@export var medium_color: Color = Color(0.9, 0.85, 0.7, 0.4)  # Agar color
+## Radius of the petri dish in meters (0.05–0.5)
+@export_range(0.05, 0.5, 0.01) var dish_radius: float = 0.15
+## Height of the dish wall in meters (0.005–0.1)
+@export_range(0.005, 0.1, 0.005) var dish_height: float = 0.02
+## Color of the agar growth medium
+@export var medium_color: Color = Color(0.9, 0.85, 0.7, 0.4)
 
-## Internal
-var worms: Array[Dictionary] = []
-var worm_meshes: Array[MeshInstance3D] = []
-var time: float = 0.0
+var _worms: Array[Dictionary] = []
+var _worm_meshes: Array[MeshInstance3D] = []
+var _worm_ims: Array[ImmediateMesh] = []
+var _time: float = 0.0
+var _speed_scale: float = 1.0
+
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var _speed_slider: Node = null
 
 @onready var dish: MeshInstance3D = $Dish
 @onready var rim: MeshInstance3D = $Rim
@@ -32,9 +45,10 @@ var time: float = 0.0
 func _ready() -> void:
 	_setup_dish()
 	_spawn_worms()
+	_setup_controls()
 
+## Applies glass and agar materials to the dish, rim, and medium meshes.
 func _setup_dish() -> void:
-	# Dish material (glass)
 	if dish:
 		var dish_mat = StandardMaterial3D.new()
 		dish_mat.albedo_color = Color(0.95, 0.97, 1.0, 0.2)
@@ -42,8 +56,7 @@ func _setup_dish() -> void:
 		dish_mat.roughness = 0.0
 		dish_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		dish.material_override = dish_mat
-	
-	# Rim/lid material (glass, same as dish)
+
 	if rim:
 		var rim_mat = StandardMaterial3D.new()
 		rim_mat.albedo_color = Color(0.95, 0.97, 1.0, 0.15)
@@ -51,43 +64,43 @@ func _setup_dish() -> void:
 		rim_mat.roughness = 0.0
 		rim_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		rim.material_override = rim_mat
-	
-	# Medium (agar) material
+
 	if medium:
 		var medium_mat = StandardMaterial3D.new()
 		medium_mat.albedo_color = medium_color
 		medium_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		medium.material_override = medium_mat
 
+## Creates worm simulation data and pre-allocates reusable ImmediateMesh instances.
 func _spawn_worms() -> void:
 	if not worm_container:
 		worm_container = Node3D.new()
 		worm_container.name = "WormContainer"
 		add_child(worm_container)
-	
+
 	var worm_mat = StandardMaterial3D.new()
 	worm_mat.vertex_color_use_as_albedo = true
 	worm_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	
+
+	_worms.resize(num_worms)
+	_worm_meshes.resize(num_worms)
+	_worm_ims.resize(num_worms)
+
 	for i in range(num_worms):
-		# Random starting position within dish
 		var angle = randf() * TAU
 		var dist = randf() * dish_radius * 0.7
 		var start_pos = Vector3(cos(angle) * dist, 0.015, sin(angle) * dist)
-		
-		# Random direction
+
 		var dir_angle = randf() * TAU
 		var direction = Vector3(cos(dir_angle), 0, sin(dir_angle))
-		
-		# Random phase offset for variety
+
 		var phase = randf() * TAU
-		
-		# Random color (pinkish/reddish tones)
-		var hue = randf_range(0.95, 1.05)  # Red-pink range
+
+		var hue = randf_range(0.95, 1.05)
 		if hue > 1.0: hue -= 1.0
 		var worm_color = Color.from_hsv(hue, 0.6, 0.9)
-		
-		var worm_data = {
+
+		_worms[i] = {
 			"position": start_pos,
 			"direction": direction,
 			"phase": phase,
@@ -95,73 +108,89 @@ func _spawn_worms() -> void:
 			"color": worm_color,
 			"frequency": oscillation_speed * randf_range(0.8, 1.2)
 		}
-		worms.append(worm_data)
-		
-		# Create mesh instance for this worm
+
+		var im = ImmediateMesh.new()
 		var mesh_instance = MeshInstance3D.new()
+		mesh_instance.mesh = im
 		mesh_instance.material_override = worm_mat
 		worm_container.add_child(mesh_instance)
-		worm_meshes.append(mesh_instance)
+		_worm_meshes[i] = mesh_instance
+		_worm_ims[i] = im
+
+func _setup_controls() -> void:
+	var slider = SliderScene.instantiate()
+	slider.position = Vector3(0, 0.5, 0.6)
+	slider.set_param_name("Speed")
+	slider.set_normalized_value(0.5)
+	slider.slider_moved.connect(_on_speed_changed)
+	add_child(slider)
+	_speed_slider = slider
+
+func _on_speed_changed() -> void:
+	if _speed_slider:
+		_speed_scale = _speed_slider.get_normalized_value() * 2.0
 
 func _process(delta: float) -> void:
-	time += delta
-	
-	for i in range(worms.size()):
+	_time = wrapf(_time + delta, 0.0, 1000.0)
+
+	for i in range(_worms.size()):
 		_update_worm(i, delta)
 		_draw_worm(i)
 
+## Moves a worm forward, reflects off dish edges, and randomly turns.
 func _update_worm(index: int, delta: float) -> void:
-	var worm = worms[index]
-	
-	# Move forward slowly
-	var move_amount = worm.speed * delta * 0.1
+	var worm = _worms[index]
+
+	var move_amount = worm.speed * _speed_scale * delta * 0.1
 	worm.position += worm.direction * move_amount
-	
-	# Bounce off dish edges
+
 	var dist_from_center = Vector2(worm.position.x, worm.position.z).length()
 	if dist_from_center > dish_radius * 0.85:
-		# Reflect direction
 		var normal = Vector3(worm.position.x, 0, worm.position.z).normalized()
 		worm.direction = worm.direction - 2 * worm.direction.dot(normal) * normal
 		worm.direction = worm.direction.normalized()
-		
-		# Push back inside
 		worm.position = Vector3(normal.x, 0.015, normal.z) * dish_radius * 0.8
-	
-	# Occasionally change direction slightly
+
 	if randf() < 0.01:
 		var turn = randf_range(-0.3, 0.3)
 		worm.direction = worm.direction.rotated(Vector3.UP, turn)
 
+## Rebuilds a worm's line strip mesh with sine-wave oscillation.
 func _draw_worm(index: int) -> void:
-	var worm = worms[index]
-	var mesh_instance = worm_meshes[index]
-	
-	var mesh = ImmediateMesh.new()
-	
+	var worm = _worms[index]
+	var im = _worm_ims[index]
+
+	im.clear_surfaces()
+
 	if worm_length < 2:
-		mesh_instance.mesh = mesh
 		return
-	
-	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+
+	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+
 	var head_pos = worm.position
 	var dir = worm.direction
 	var perpendicular = Vector3(-dir.z, 0, dir.x)
-	
+
 	for j in range(worm_length):
 		var t = float(j) / (worm_length - 1)
-		var segment_pos = head_pos - dir * t * 0.05  # Trail behind
-		
-		# Sine wave oscillation perpendicular to movement
-		var wave_offset = sin(time * worm.frequency + worm.phase + t * 8.0) * oscillation_amplitude * (1.0 - t * 0.5)
+		var segment_pos = head_pos - dir * t * 0.05
+
+		var wave_offset = sin(_time * worm.frequency + worm.phase + t * 8.0) * oscillation_amplitude * (1.0 - t * 0.5)
 		segment_pos += perpendicular * wave_offset
-		
-		# Color fades toward tail
+
 		var alpha = 1.0 - t * 0.7
 		var color = Color(worm.color.r, worm.color.g, worm.color.b, alpha)
-		mesh.surface_set_color(color)
-		mesh.surface_add_vertex(segment_pos)
-	
-	mesh.surface_end()
-	mesh_instance.mesh = mesh
+		im.surface_set_color(color)
+		im.surface_add_vertex(segment_pos)
+
+	im.surface_end()
+
+func _exit_tree() -> void:
+	for mesh_instance in _worm_meshes:
+		if is_instance_valid(mesh_instance):
+			mesh_instance.queue_free()
+	_worm_meshes.clear()
+	_worm_ims.clear()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

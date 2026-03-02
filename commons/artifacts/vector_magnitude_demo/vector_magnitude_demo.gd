@@ -8,12 +8,21 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 class_name VectorMagnitudeDemo
 
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+
 var vector_v: Node3D
 var component_x: Node3D
 var component_y: Node3D
 var component_z: Node3D
 var info_label: Label3D
 var length_label: Label3D
+
+# VR controls
+var _scale_slider: Node3D
+var _base_direction := Vector3(0.8, 0.6, 0.4).normalized()
+
+# Node cleanup tracking
+var _created_nodes: Array[Node] = []
 
 # Cached references
 var _cached_vector_nodes: Dictionary = {}
@@ -45,7 +54,10 @@ func _ready():
 	length_label.outline_modulate = Color(0, 0, 0, 0.8)
 	length_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(length_label)
-	
+	_created_nodes.append(length_label)
+
+	_setup_controls()
+
 	# Cache nodes
 	_cache_vector_nodes(vector_v, _cached_vector_nodes)
 	_cache_vector_nodes(component_x, _cached_comp_x)
@@ -58,12 +70,14 @@ func _process(_delta):
 	_update_info(vec)
 	_update_length_label(vec)
 
+# Pre-fetch grab sphere and line container refs for fast per-frame access
 func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
 	cache_dict["line_container"] = arrow.get_node_or_null("lineContainer")
 
+# Read the current vector from cached grab sphere positions
 func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	var start: Node3D = cache_dict.get("start")
 	var end: Node3D = cache_dict.get("end")
@@ -73,6 +87,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
+# Set a vector's endpoint and refresh its visual line
 func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
@@ -81,12 +96,14 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
 
+# Sync the X/Y/Z component vectors to match the main vector's current value
 func _update_components(vec: Vector3):
 	# Update component vectors to show decomposition
 	_update_vector_fast(component_x, Vector3(vec.x, 0, 0), _cached_comp_x)
 	_update_vector_fast(component_y, Vector3(0, vec.y, 0), _cached_comp_y)
 	_update_vector_fast(component_z, Vector3(0, 0, vec.z), _cached_comp_z)
 
+# Rebuild the info panel text showing the magnitude formula step by step
 func _update_info(vec: Vector3):
 	var magnitude = vec.length()
 	var builder := []
@@ -103,3 +120,27 @@ func _update_length_label(vec: Vector3):
 	length_label.text = "|V| = %.2f" % magnitude
 	# Position at midpoint of vector, offset toward player (+Z)
 	length_label.position = vec * 0.5 * SCENE_SCALE + Vector3(0, 0.05, 0.08)
+
+func _setup_controls():
+	_scale_slider = SliderScene.instantiate()
+	_scale_slider.position = Vector3(0, 0.5, 0.6)
+	_scale_slider.set_param_name("Scale")
+	_scale_slider.set_normalized_value(0.5)
+	_scale_slider.slider_moved.connect(_on_scale_changed)
+	add_child(_scale_slider)
+	_created_nodes.append(_scale_slider)
+
+func _on_scale_changed():
+	var val = _scale_slider.get_normalized_value()
+	var magnitude = val * 2.0
+	var new_end = _base_direction * magnitude
+	_update_vector_fast(vector_v, new_end, _cached_vector_nodes)
+
+func _exit_tree():
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

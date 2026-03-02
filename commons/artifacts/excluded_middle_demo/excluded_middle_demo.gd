@@ -3,16 +3,21 @@
 # Brouwer rejected this for non-constructive proofs
 
 extends Node3D
+class_name ExcludedMiddleDemo
 
 @export var show_rejection: bool = true
+
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
 var _true_sphere: MeshInstance3D
 var _false_sphere: MeshInstance3D
 var _label: Label3D
+var _slider: Node3D
 
 func _ready():
 	_create_spheres()
 	_create_label()
+	_setup_controls()
 
 func _create_spheres():
 	# True state
@@ -75,3 +80,20 @@ func _create_label():
 		_label.text = "LAW OF EXCLUDED MIDDLE\nP ∨ ¬P\n\"Either true or false\""
 	_label.position = Vector3(0, -0.25, 0)
 	add_child(_label)
+
+func _setup_controls():
+	_slider = SliderScene.instantiate()
+	_slider.position = Vector3(0, 0.5, 0.6)
+	_slider.set_param_name("Rejection")
+	_slider.set_normalized_value(1.0 if show_rejection else 0.0)
+	_slider.slider_moved.connect(_on_rejection_changed)
+	add_child(_slider)
+
+func _on_rejection_changed():
+	var val = _slider.get_normalized_value()
+	show_rejection = val > 0.5
+	_label.queue_free()
+	_create_label()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

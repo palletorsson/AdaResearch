@@ -1,31 +1,38 @@
 # flow_field_painter.gd
-# Particles flowing through a Perlin noise field
-# Creates organic, paint-like patterns
-#
-# QFEP: Noise as structured randomness — not chaos, not order, but λ-edge
+## Implements Perlin noise flow-field advection to visualize particle dynamics.
+## Particles follow the gradient of a 2D+time noise field, leaving colored trails
+## that create organic, paint-like patterns. The noise field evolves continuously,
+## producing ever-changing flow structures.
+## Key parameters: noise_scale controls field frequency, particle_speed sets advection rate.
+##
+## QFEP: Noise as structured randomness — not chaos, not order, but λ-edge
 
 extends Node3D
 
 class_name FlowFieldPainter
 
-## Canvas size
+## Canvas dimensions in meters (width, height)
 @export var canvas_size: Vector2 = Vector2(0.6, 0.4)
 
-## Particle parameters
-@export var num_particles: int = 500
-@export var particle_speed: float = 0.1
-@export var trail_length: int = 50
+## Number of particles flowing through the field (1–2000)
+@export_range(1, 2000) var num_particles: int = 500
+## Particle movement speed in meters per second
+@export_range(0.01, 1.0, 0.01) var particle_speed: float = 0.1
+## Maximum trail length in samples per particle
+@export_range(1, 200) var trail_length: int = 50
+## Whether trails fade from transparent to opaque
 @export var trail_fade: bool = true
 
-## Noise parameters
-@export var noise_scale: float = 3.0:
+## Noise field frequency multiplier — higher values create tighter flow patterns
+@export_range(0.5, 10.0, 0.1) var noise_scale: float = 3.0:
 	set(value):
 		noise_scale = clampf(value, 0.5, 10.0)
 		_update_noise()
 
-@export var noise_speed: float = 0.1
+## How fast the noise field evolves over time
+@export_range(0.0, 1.0, 0.01) var noise_speed: float = 0.1
 
-## Colors
+## Color palette cycled across particles
 @export var palette: Array[Color] = [
 	Color(0.9, 0.2, 0.3),
 	Color(0.9, 0.5, 0.1),
@@ -42,12 +49,32 @@ var _time: float = 0.0
 # Visuals
 var _canvas_mesh: MeshInstance3D
 var _trail_mesh: MeshInstance3D
+var _im: ImmediateMesh
+var _trail_mat: StandardMaterial3D
 var _info_label: Label3D
 var _control_panel: Node3D
+
+# Node cleanup tracking
+var _created_nodes: Array[Node] = []
+
+# VR control references (for signal disconnect)
+var _scale_slider: Node
+var _speed_slider: Node
+var _reset_area: Node
+var _seed_area: Node
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
+const NOISE_BASE_FREQ := 0.01
+const NOISE_SAMPLE_SCALE := 100.0
+const NOISE_TIME_SCALE := 50.0
+const FRAME_ELEVATION := 0.005
+const FRAME_MARGIN := 0.02
+const TRAIL_ELEVATION := 0.002
+const TRAIL_ALPHA_SCALE := 0.6
+
+## Initialize noise, canvas, particles, labels, and VR controls.
 func _ready():
 	_setup_noise()
 	_create_canvas()
@@ -55,16 +82,28 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 
+	# Pre-create reusable ImmediateMesh and material for trails
+	_im = ImmediateMesh.new()
+	_trail_mat = StandardMaterial3D.new()
+	_trail_mat.vertex_color_use_as_albedo = true
+	_trail_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_trail_mesh.mesh = _im
+	_trail_mesh.material_override = _trail_mat
+
+## Configure the Perlin noise generator.
 func _setup_noise():
 	_noise = FastNoiseLite.new()
 	_noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	_noise.frequency = 0.01
+	_noise.frequency = NOISE_BASE_FREQ
 	_noise.seed = randi()
 
+## Update noise frequency when noise_scale changes.
 func _update_noise():
 	if _noise:
-		_noise.frequency = 0.01 * noise_scale
+		_noise.frequency = NOISE_BASE_FREQ * noise_scale
 
+## Build the canvas plane, frame edges (MultiMesh), and trail mesh node.
 func _create_canvas():
 	_canvas_mesh = MeshInstance3D.new()
 	_canvas_mesh.name = "Canvas"
@@ -72,65 +111,88 @@ func _create_canvas():
 	plane.size = canvas_size
 	_canvas_mesh.mesh = plane
 	_canvas_mesh.rotation_degrees.x = -90
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(0.02, 0.02, 0.03)
 	_canvas_mesh.material_override = mat
 	add_child(_canvas_mesh)
-	
-	# Frame
+	_created_nodes.append(_canvas_mesh)
+
+	# Frame — 4 edges via MultiMesh (2 horizontal, 2 vertical)
 	var frame_mat = StandardMaterial3D.new()
 	frame_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	
+
+	var box := BoxMesh.new()
+	box.size = Vector3(1.0, 1.0, 1.0)
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = false
+	mm.mesh = box
+	mm.instance_count = 4
+
 	for i in range(4):
-		var edge = MeshInstance3D.new()
 		var is_horizontal = i < 2
-		var box = BoxMesh.new()
+		var scale_vec: Vector3
 		if is_horizontal:
-			box.size = Vector3(canvas_size.x + 0.02, 0.01, 0.01)
+			scale_vec = Vector3(canvas_size.x + FRAME_MARGIN, 0.01, 0.01)
 		else:
-			box.size = Vector3(0.01, 0.01, canvas_size.y + 0.02)
-		edge.mesh = box
-		edge.material_override = frame_mat
-		
+			scale_vec = Vector3(0.01, 0.01, canvas_size.y + FRAME_MARGIN)
+
 		var offset = 0.5 if i % 2 == 0 else -0.5
+		var pos: Vector3
 		if is_horizontal:
-			edge.position = Vector3(0, 0.005, offset * canvas_size.y)
+			pos = Vector3(0, FRAME_ELEVATION, offset * canvas_size.y)
 		else:
-			edge.position = Vector3(offset * canvas_size.x, 0.005, 0)
-		add_child(edge)
-	
+			pos = Vector3(offset * canvas_size.x, FRAME_ELEVATION, 0)
+
+		var xf := Transform3D(Basis().scaled(scale_vec), pos)
+		mm.set_instance_transform(i, xf)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+	mmi.material_override = frame_mat
+	mmi.name = "Frame"
+	add_child(mmi)
+	_created_nodes.append(mmi)
+
 	_trail_mesh = MeshInstance3D.new()
 	_trail_mesh.name = "Trails"
 	add_child(_trail_mesh)
+	_created_nodes.append(_trail_mesh)
 
+## Spawn particles with random positions and assign palette colors.
 func _create_particles():
+	_particles.resize(num_particles)
 	for i in range(num_particles):
-		var particle = {
-			"x": randf() * canvas_size.x - canvas_size.x/2,
-			"y": randf() * canvas_size.y - canvas_size.y/2,
+		_particles[i] = {
+			"x": randf() * canvas_size.x - canvas_size.x / 2.0,
+			"y": randf() * canvas_size.y - canvas_size.y / 2.0,
 			"trail": PackedVector2Array(),
-			"color": palette[i % palette.size()],
+			"color": palette[i % maxi(palette.size(), 1)],
 			"hue_offset": randf() * 0.1 - 0.05
 		}
-		_particles.append(particle)
 
+## Create the title label above the canvas.
 func _create_labels():
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
 	_info_label.font_size = 16
-	_info_label.position = Vector3(0, 0.08, -canvas_size.y/2 - 0.05)
+	_info_label.position = Vector3(0, 0.08, -canvas_size.y / 2.0 - 0.05)
 	_info_label.text = "FLOW FIELD"
 	add_child(_info_label)
+	_created_nodes.append(_info_label)
 
+## Build the VR control panel with sliders and buttons.
 func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.05, canvas_size.y/2 + 0.12)
+	_control_panel.position = Vector3(0, -0.05, canvas_size.y / 2.0 + 0.12)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
+	_created_nodes.append(_control_panel)
+
 	# Panel
 	var panel_back = MeshInstance3D.new()
 	var panel_mesh = BoxMesh.new()
@@ -142,37 +204,31 @@ func _create_vr_controls():
 	panel_back.material_override = panel_mat
 	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
-	
+
 	# Scale slider
-	var scale_slider = SLIDER_HORIZONTAL.instantiate()
-	scale_slider.name = "ScaleSlider"
-	scale_slider.position = Vector3(-0.08, 0.025, 0)
-	scale_slider.rotation_degrees.x = -30
-	scale_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var scale_label = scale_slider.get_node_or_null("Frame/LabelName")
+	_scale_slider = SLIDER_HORIZONTAL.instantiate()
+	_scale_slider.name = "ScaleSlider"
+	_scale_slider.position = Vector3(-0.08, 0.025, 0)
+	_scale_slider.rotation_degrees.x = -30
+	_scale_slider.scale = Vector3(0.8, 0.8, 0.8)
+	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
 	if scale_label:
 		scale_label.text = "SCALE"
-	_control_panel.add_child(scale_slider)
-	scale_slider.slider_moved.connect(func(_pos):
-		if scale_slider.has_method("get_normalized_value"):
-			noise_scale = 0.5 + scale_slider.get_normalized_value() * 9.5
-	)
-	
+	_control_panel.add_child(_scale_slider)
+	_scale_slider.slider_moved.connect(_on_scale_slider_moved)
+
 	# Speed slider
-	var speed_slider = SLIDER_HORIZONTAL.instantiate()
-	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0.08, 0.025, 0)
-	speed_slider.rotation_degrees.x = -30
-	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
+	_speed_slider = SLIDER_HORIZONTAL.instantiate()
+	_speed_slider.name = "SpeedSlider"
+	_speed_slider.position = Vector3(0.08, 0.025, 0)
+	_speed_slider.rotation_degrees.x = -30
+	_speed_slider.scale = Vector3(0.8, 0.8, 0.8)
+	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
 		speed_label.text = "SPEED"
-	_control_panel.add_child(speed_slider)
-	speed_slider.slider_moved.connect(func(_pos):
-		if speed_slider.has_method("get_normalized_value"):
-			particle_speed = 0.02 + speed_slider.get_normalized_value() * 0.28
-	)
-	
+	_control_panel.add_child(_speed_slider)
+	_speed_slider.slider_moved.connect(_on_speed_slider_moved)
+
 	# Buttons
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
@@ -181,10 +237,10 @@ func _create_vr_controls():
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_reset_particles)
-	
+	_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+	if _reset_area:
+		_reset_area.button_pressed.connect(_reset_particles)
+
 	var seed_btn = PUSH_BUTTON.instantiate()
 	seed_btn.name = "SeedBtn"
 	seed_btn.position = Vector3(0.08, -0.025, 0)
@@ -192,10 +248,21 @@ func _create_vr_controls():
 	seed_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(seed_btn)
 	_add_button_label(seed_btn, "NEW SEED")
-	var seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
-	if seed_area:
-		seed_area.button_pressed.connect(_new_seed)
+	_seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
+	if _seed_area:
+		_seed_area.button_pressed.connect(_new_seed)
 
+## Handle scale slider movement.
+func _on_scale_slider_moved(_pos) -> void:
+	if _scale_slider and _scale_slider.has_method("get_normalized_value"):
+		noise_scale = 0.5 + _scale_slider.get_normalized_value() * 9.5
+
+## Handle speed slider movement.
+func _on_speed_slider_moved(_pos) -> void:
+	if _speed_slider and _speed_slider.has_method("get_normalized_value"):
+		particle_speed = 0.02 + _speed_slider.get_normalized_value() * 0.28
+
+## Add a small label below a button.
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()
 	lbl.text = text
@@ -204,69 +271,87 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
+## Randomize all particle positions and clear their trails.
 func _reset_particles(_button = null):  # Accept optional button arg
 	for p in _particles:
-		p.x = randf() * canvas_size.x - canvas_size.x/2
-		p.y = randf() * canvas_size.y - canvas_size.y/2
+		p.x = randf() * canvas_size.x - canvas_size.x / 2.0
+		p.y = randf() * canvas_size.y - canvas_size.y / 2.0
 		p.trail.clear()
 
+## Generate a new noise seed and reset particles.
 func _new_seed(_button = null):  # Accept optional button arg
 	_noise.seed = randi()
 	_reset_particles()
 
+## Advect particles through the noise field and update trails each frame.
 func _process(delta):
-	_time += delta * noise_speed
-	
+	_time = wrapf(_time + delta * noise_speed, 0.0, 1000.0)
+
+	var half_cx := canvas_size.x / 2.0
+	var half_cy := canvas_size.y / 2.0
+	var inv_cx := 1.0 / maxf(canvas_size.x, 0.0001)
+	var inv_cy := 1.0 / maxf(canvas_size.y, 0.0001)
+
 	for p in _particles:
 		# Get flow angle from noise
-		var nx = (p.x + canvas_size.x/2) / canvas_size.x * 100
-		var ny = (p.y + canvas_size.y/2) / canvas_size.y * 100
-		var angle = _noise.get_noise_3d(nx * noise_scale, ny * noise_scale, _time * 50) * TAU * 2
-		
+		var nx = (p.x + half_cx) * inv_cx * NOISE_SAMPLE_SCALE
+		var ny = (p.y + half_cy) * inv_cy * NOISE_SAMPLE_SCALE
+		var angle = _noise.get_noise_3d(nx * noise_scale, ny * noise_scale, _time * NOISE_TIME_SCALE) * TAU * 2.0
+
 		# Move particle
 		p.x += cos(angle) * particle_speed * delta
 		p.y += sin(angle) * particle_speed * delta
-		
+
 		# Wrap around
-		if p.x < -canvas_size.x/2: p.x += canvas_size.x
-		if p.x > canvas_size.x/2: p.x -= canvas_size.x
-		if p.y < -canvas_size.y/2: p.y += canvas_size.y
-		if p.y > canvas_size.y/2: p.y -= canvas_size.y
-		
+		if p.x < -half_cx: p.x += canvas_size.x
+		if p.x > half_cx: p.x -= canvas_size.x
+		if p.y < -half_cy: p.y += canvas_size.y
+		if p.y > half_cy: p.y -= canvas_size.y
+
 		# Record trail
 		p.trail.append(Vector2(p.x, p.y))
 		if p.trail.size() > trail_length:
-			p.trail = p.trail.slice(1)
-	
+			p.trail.remove_at(0)
+
 	_update_trail_mesh()
 
+## Rebuild trail line geometry from particle trails using the cached ImmediateMesh.
 func _update_trail_mesh():
-	var immediate_mesh = ImmediateMesh.new()
-	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	
+	_im.clear_surfaces()
+	_im.surface_begin(Mesh.PRIMITIVE_LINES)
+
 	for p in _particles:
 		if p.trail.size() < 2:
 			continue
-		
+
 		var base_color = p.color
-		
+		var inv_trail_size := 1.0 / float(p.trail.size())
+
 		for i in range(p.trail.size() - 1):
-			var alpha = float(i) / float(p.trail.size()) if trail_fade else 1.0
-			var color = Color(base_color.r, base_color.g, base_color.b, alpha * 0.6)
-			
-			immediate_mesh.surface_set_color(color)
-			immediate_mesh.surface_add_vertex(Vector3(p.trail[i].x, 0.002, p.trail[i].y))
-			immediate_mesh.surface_set_color(color)
-			immediate_mesh.surface_add_vertex(Vector3(p.trail[i+1].x, 0.002, p.trail[i+1].y))
-	
-	immediate_mesh.surface_end()
-	_trail_mesh.mesh = immediate_mesh
-	
-	var mat = StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	_trail_mesh.material_override = mat
+			var alpha = float(i) * inv_trail_size if trail_fade else 1.0
+			var color = Color(base_color.r, base_color.g, base_color.b, alpha * TRAIL_ALPHA_SCALE)
+
+			_im.surface_set_color(color)
+			_im.surface_add_vertex(Vector3(p.trail[i].x, TRAIL_ELEVATION, p.trail[i].y))
+			_im.surface_set_color(color)
+			_im.surface_add_vertex(Vector3(p.trail[i + 1].x, TRAIL_ELEVATION, p.trail[i + 1].y))
+
+	_im.surface_end()
+
+## Disconnect signals and free created nodes on cleanup.
+func _exit_tree():
+	if _scale_slider and _scale_slider.slider_moved.is_connected(_on_scale_slider_moved):
+		_scale_slider.slider_moved.disconnect(_on_scale_slider_moved)
+	if _speed_slider and _speed_slider.slider_moved.is_connected(_on_speed_slider_moved):
+		_speed_slider.slider_moved.disconnect(_on_speed_slider_moved)
+	if _reset_area and _reset_area.button_pressed.is_connected(_reset_particles):
+		_reset_area.button_pressed.disconnect(_reset_particles)
+	if _seed_area and _seed_area.button_pressed.is_connected(_new_seed):
+		_seed_area.button_pressed.disconnect(_new_seed)
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -276,8 +361,24 @@ func _input(event):
 			KEY_UP: noise_scale = minf(noise_scale + 0.5, 10.0)
 			KEY_DOWN: noise_scale = maxf(noise_scale - 0.5, 0.5)
 
-func set_noise_scale(s: float):
+func set_noise_scale(s: float) -> void:
 	noise_scale = s
 
-func reset():
+func reset() -> void:
 	_reset_particles()
+
+## Grid system integration hook.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("noise_scale"):
+		noise_scale = config_data["noise_scale"]
+	if config_data.has("particle_speed"):
+		particle_speed = clampf(config_data["particle_speed"], 0.01, 1.0)
+	if config_data.has("num_particles"):
+		num_particles = clampi(int(config_data["num_particles"]), 1, 2000)
+		_create_particles()
+	if config_data.has("trail_length"):
+		trail_length = clampi(int(config_data["trail_length"]), 1, 200)
+	if config_data.has("noise_speed"):
+		noise_speed = clampf(config_data["noise_speed"], 0.0, 1.0)
+	if config_data.has("trail_fade"):
+		trail_fade = config_data["trail_fade"]

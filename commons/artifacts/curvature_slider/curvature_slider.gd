@@ -2,6 +2,7 @@
 # Slider controlling curvature: negative (hyperbolic) ↔ zero (flat) ↔ positive (elliptic)
 
 extends Node3D
+class_name CurvatureSlider
 
 signal curvature_changed(value: float)
 
@@ -46,3 +47,7 @@ func _update_label():
 	elif curvature > 0.1:
 		type_str = "Elliptic"
 	_label.text = "CURVATURE: K = %.2f\n(%s)" % [curvature, type_str]
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

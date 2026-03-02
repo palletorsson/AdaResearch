@@ -20,6 +20,7 @@
 #   exactly (e.g., a 12-TET fifth is 700 cents vs. a pure 3:2 at ~702 cents).
 #
 extends Node3D
+class_name HarmonicDistanceTable
 
 const _P = preload("res://commons/ui/ada_palette.gd")
 
@@ -63,6 +64,9 @@ const SHARED_OVERTONES := {
 	8: 2, 9: 2, 10: 2, 11: 1,  # m6, M6, m7, M7
 }
 
+# Line base color (cyan from palette)
+const LINE_COLOR_BASE := Color(0.0, 0.78, 0.85)
+
 ## Configuration
 @export var circle_radius: float = 0.35   # Radius of the note circle
 @export var node_radius: float = 0.025     # Radius of each note sphere
@@ -71,8 +75,8 @@ const SHARED_OVERTONES := {
 @export var volume_db: float = -6.0        # Master volume
 
 ## Internal state
-var note_nodes: Array[Dictionary] = []  # {mesh, label, note_name, chromatic_idx, collision}
-var overtone_lines: Array[Dictionary] = []  # {mesh, from_idx, to_idx, shared}
+var note_nodes: Array[Dictionary] = []  # {label, area, note_name, chromatic_idx, angle, base_pos}
+var overtone_lines: Array[Dictionary] = []  # {mm_idx, from_idx, to_idx, shared}
 var active_tonal_center: int = -1  # Index into CIRCLE_OF_FIFTHS, -1 = none
 var selected_nodes: Array[int] = []  # Currently selected node indices (max 2)
 
@@ -85,10 +89,14 @@ var _audio_freqs: Array[float] = []
 var _sample_rate: float = 44100.0
 const MAX_VOICES := 2
 
-# Base node (the table surface)
+# Rendering
 var _base_mesh: MeshInstance3D
 var _nodes_container: Node3D
 var _lines_container: Node3D
+var _notes_mm: MultiMesh
+var _notes_mmi: MultiMeshInstance3D
+var _lines_mm: MultiMesh
+var _lines_mmi: MultiMeshInstance3D
 
 func _ready() -> void:
 	_build_base()
@@ -135,27 +143,44 @@ func _build_base() -> void:
 	add_child(_lines_container)
 
 func _build_note_nodes() -> void:
+	# Shared sphere mesh for all 12 note nodes (one draw call via MultiMesh)
+	var sphere := SphereMesh.new()
+	sphere.radius = node_radius
+	sphere.height = node_radius * 2.0
+	sphere.radial_segments = 24
+	sphere.rings = 12
+
+	_notes_mm = MultiMesh.new()
+	_notes_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_notes_mm.use_colors = true
+	_notes_mm.mesh = sphere
+	_notes_mm.instance_count = 12
+
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.metallic = 0.3
+	mat.roughness = 0.4
+	mat.emission_enabled = true
+	mat.emission = Color.WHITE
+	mat.emission_energy_multiplier = 0.4
+
+	_notes_mmi = MultiMeshInstance3D.new()
+	_notes_mmi.multimesh = _notes_mm
+	_notes_mmi.material_override = mat
+	_nodes_container.add_child(_notes_mmi)
+
 	for i in range(12):
 		var note_name = CIRCLE_OF_FIFTHS[i]
 		var chromatic_idx = CHROMATIC_NOTES.find(note_name)
-		
+
 		# Position: circle layout, starting at top (12 o'clock), going clockwise
 		var angle = -PI / 2.0 + (float(i) / 12.0) * TAU
 		var pos = Vector3(cos(angle) * circle_radius, 0.02, sin(angle) * circle_radius)
 
-		# Sphere mesh
-		var mesh_inst = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = node_radius
-		sphere.height = node_radius * 2.0
-		sphere.radial_segments = 24
-		sphere.rings = 12
-		mesh_inst.mesh = sphere
-		mesh_inst.position = pos
-		mesh_inst.material_override = _make_node_material(DEFAULT_NODE_COLOR)
-		_nodes_container.add_child(mesh_inst)
+		_notes_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos))
+		_notes_mm.set_instance_color(i, DEFAULT_NODE_COLOR)
 
-		# Collision for interaction (Area3D for detection)
+		# Collision for interaction (Area3D for detection — kept as individual nodes)
 		var area = Area3D.new()
 		area.position = pos
 		area.collision_layer = 262144  # XR interaction layer
@@ -166,7 +191,7 @@ func _build_note_nodes() -> void:
 		col.shape = col_shape
 		area.add_child(col)
 		_nodes_container.add_child(area)
-		
+
 		# Connect area signals for VR hand interaction
 		area.body_entered.connect(_on_node_touched.bind(i))
 		area.body_exited.connect(_on_node_released.bind(i))
@@ -184,7 +209,6 @@ func _build_note_nodes() -> void:
 		_nodes_container.add_child(label)
 
 		note_nodes.append({
-			"mesh": mesh_inst,
 			"label": label,
 			"area": area,
 			"note_name": note_name,
@@ -194,8 +218,8 @@ func _build_note_nodes() -> void:
 		})
 
 func _build_overtone_lines() -> void:
-	# Build lines between all pairs of notes
-	# Line thickness proportional to shared overtones
+	# First pass: collect all line data
+	var line_data_list: Array[Dictionary] = []
 	for i in range(12):
 		for j in range(i + 1, 12):
 			var idx_i = note_nodes[i].chromatic_idx
@@ -203,75 +227,76 @@ func _build_overtone_lines() -> void:
 			var interval = absi(idx_j - idx_i)
 			if interval > 6:
 				interval = 12 - interval  # Use shortest distance
-			
+
 			var shared = SHARED_OVERTONES.get(interval, 0)
 			if shared < 2:
 				continue  # Don't show very weak connections
-			
-			var pos_i = note_nodes[i].base_pos
-			var pos_j = note_nodes[j].base_pos
-			
-			# Create a cylinder between the two points
-			var line_mesh = _create_line_between(pos_i, pos_j, shared)
-			_lines_container.add_child(line_mesh)
-			
-			overtone_lines.append({
-				"mesh": line_mesh,
+			line_data_list.append({
 				"from_idx": i,
 				"to_idx": j,
 				"shared": shared,
 			})
 
-func _create_line_between(from: Vector3, to: Vector3, shared_count: int) -> MeshInstance3D:
-	var mesh_inst = MeshInstance3D.new()
-	var cyl = CylinderMesh.new()
-	
-	# Thickness scales with shared overtones (2-16 range mapped to thin-thick)
-	var thickness = remap(float(shared_count), 2.0, 16.0, 0.001, 0.006)
-	cyl.top_radius = thickness
-	cyl.bottom_radius = thickness
-	
-	var delta = to - from
-	var length = delta.length()
-	cyl.height = length
-	cyl.radial_segments = 8
-	mesh_inst.mesh = cyl
-	
-	# Material: emissive glow, brighter for more shared overtones
-	var intensity = remap(float(shared_count), 2.0, 16.0, 0.2, 1.0)
-	var line_color = Color(0.0, 0.78, 0.85, intensity)  # Cyan from palette
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = line_color
-	mat.emission_enabled = true
-	mat.emission = line_color
-	mat.emission_energy_multiplier = intensity * 1.5
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mesh_inst.material_override = mat
-	
-	# Position and orient the cylinder between the two points
-	var midpoint = (from + to) / 2.0
-	mesh_inst.position = midpoint
-	
-	# Orient: cylinder is Y-aligned by default, need to rotate to match from→to
-	# Build basis manually — node is not in tree yet so look_at() won't work
-	if delta.length() > 0.001:
-		var direction = delta.normalized()
-		if abs(direction.dot(Vector3.UP)) < 0.99:
-			var basis := Basis.looking_at(direction, Vector3.UP)
-			basis = basis * Basis(Vector3.RIGHT, PI / 2.0)
-			mesh_inst.basis = basis
-	
-	return mesh_inst
+	if line_data_list.is_empty():
+		return
 
-func _make_node_material(color: Color) -> StandardMaterial3D:
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.metallic = 0.3
-	mat.roughness = 0.4
+	# Unit cylinder — scaled per-instance for different thickness and length
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 1.0
+	cyl.bottom_radius = 1.0
+	cyl.height = 1.0
+	cyl.radial_segments = 8
+
+	_lines_mm = MultiMesh.new()
+	_lines_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_lines_mm.use_colors = true
+	_lines_mm.mesh = cyl
+	_lines_mm.instance_count = line_data_list.size()
+
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
-	mat.emission = color
-	mat.emission_energy_multiplier = 0.6
-	return mat
+	mat.emission = LINE_COLOR_BASE
+	mat.emission_energy_multiplier = 1.0
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+	_lines_mmi = MultiMeshInstance3D.new()
+	_lines_mmi.multimesh = _lines_mm
+	_lines_mmi.material_override = mat
+	_lines_container.add_child(_lines_mmi)
+
+	for idx in range(line_data_list.size()):
+		var data = line_data_list[idx]
+		var pos_from: Vector3 = note_nodes[data.from_idx].base_pos
+		var pos_to: Vector3 = note_nodes[data.to_idx].base_pos
+		var shared: int = data.shared
+
+		var thickness = remap(float(shared), 2.0, 16.0, 0.001, 0.006)
+		var delta = pos_to - pos_from
+		var length = delta.length()
+		var midpoint = (pos_from + pos_to) / 2.0
+
+		# Build transform: orient unit cylinder along from→to, scale for thickness/length
+		var xf := Transform3D()
+		if length > 0.001:
+			var direction = delta.normalized()
+			if abs(direction.dot(Vector3.UP)) < 0.99:
+				var look_basis := Basis.looking_at(direction, Vector3.UP)
+				look_basis = look_basis * Basis(Vector3.RIGHT, PI / 2.0)
+				xf.basis = look_basis
+		xf.basis = xf.basis.scaled(Vector3(thickness, length, thickness))
+		xf.origin = midpoint
+		_lines_mm.set_instance_transform(idx, xf)
+
+		var intensity = remap(float(shared), 2.0, 16.0, 0.2, 1.0)
+		_lines_mm.set_instance_color(idx, Color(LINE_COLOR_BASE.r, LINE_COLOR_BASE.g, LINE_COLOR_BASE.b, intensity))
+
+		overtone_lines.append({
+			"mm_idx": idx,
+			"from_idx": data.from_idx,
+			"to_idx": data.to_idx,
+			"shared": shared,
+		})
 
 # ═══════════════════════════════════════════
 #  AUDIO SETUP
@@ -282,14 +307,14 @@ func _setup_audio() -> void:
 		var stream = AudioStreamGenerator.new()
 		stream.mix_rate = _sample_rate
 		stream.buffer_length = 0.1
-		
+
 		var player = AudioStreamPlayer3D.new()
 		player.stream = stream
 		player.volume_db = volume_db
 		player.unit_size = 2.0
 		add_child(player)
 		player.play()
-		
+
 		_audio_players.append(player)
 		_audio_phases.append(0.0)
 		_audio_targets.append(0.0)
@@ -312,10 +337,10 @@ func _on_node_touched(_body: Node3D, node_idx: int) -> void:
 	if selected_nodes.size() >= 2:
 		# Deselect oldest
 		selected_nodes.pop_front()
-	
+
 	if not selected_nodes.has(node_idx):
 		selected_nodes.append(node_idx)
-	
+
 	_handle_selection_change()
 
 func _on_node_released(_body: Node3D, node_idx: int) -> void:
@@ -337,7 +362,7 @@ func _handle_selection_change() -> void:
 			note_nodes[selected_nodes[0]].note_name, base_octave))
 		_play_tone(1, _get_note_frequency(
 			note_nodes[selected_nodes[1]].note_name, base_octave))
-	
+
 	_update_visual_state()
 
 func _play_tone(voice_idx: int, freq: float) -> void:
@@ -370,45 +395,45 @@ func _unhandled_input(event: InputEvent) -> void:
 func _update_visual_state() -> void:
 	for i in range(12):
 		var node_data = note_nodes[i]
-		var mesh: MeshInstance3D = node_data.mesh
 		var is_selected = selected_nodes.has(i)
-		
+		var color: Color
+		var s: float = 1.0
+
 		if active_tonal_center >= 0:
 			# Color by harmonic function relative to tonal center
 			var center_chromatic = note_nodes[active_tonal_center].chromatic_idx
 			var this_chromatic = node_data.chromatic_idx
 			var interval = (this_chromatic - center_chromatic + 12) % 12
-			var color = FUNCTION_COLORS.get(interval, Color(0.5, 0.5, 0.5))
-			mesh.material_override = _make_node_material(color)
-			
+			color = FUNCTION_COLORS.get(interval, Color(0.5, 0.5, 0.5))
 			# Scale up selected nodes
-			mesh.scale = Vector3.ONE * (1.5 if is_selected else 1.0)
+			s = 1.5 if is_selected else 1.0
 		else:
-			mesh.material_override = _make_node_material(DEFAULT_NODE_COLOR)
-			mesh.scale = Vector3.ONE
-	
+			color = DEFAULT_NODE_COLOR
+
+		_notes_mm.set_instance_color(i, color)
+		var xf := Transform3D()
+		xf.basis = Basis.IDENTITY.scaled(Vector3(s, s, s))
+		xf.origin = node_data.base_pos
+		_notes_mm.set_instance_transform(i, xf)
+
 	# Update line visibility/brightness based on tonal center
 	_update_line_brightness()
 
 func _update_line_brightness() -> void:
+	if not _lines_mm:
+		return
 	for line_data in overtone_lines:
-		var mesh: MeshInstance3D = line_data.mesh
-		var mat = mesh.material_override as StandardMaterial3D
-		if not mat:
-			continue
-		
+		var idx: int = line_data.mm_idx
 		if active_tonal_center >= 0:
 			# Highlight lines connected to the tonal center
 			var connected = (line_data.from_idx == active_tonal_center or
 				line_data.to_idx == active_tonal_center)
 			var alpha = 0.8 if connected else 0.15
-			mat.albedo_color.a = alpha
-			mat.emission_energy_multiplier = 2.0 if connected else 0.3
+			_lines_mm.set_instance_color(idx, Color(LINE_COLOR_BASE.r, LINE_COLOR_BASE.g, LINE_COLOR_BASE.b, alpha))
 		else:
 			# Default: all lines visible at moderate brightness
 			var intensity = remap(float(line_data.shared), 2.0, 16.0, 0.2, 1.0)
-			mat.albedo_color.a = intensity
-			mat.emission_energy_multiplier = intensity * 1.5
+			_lines_mm.set_instance_color(idx, Color(LINE_COLOR_BASE.r, LINE_COLOR_BASE.g, LINE_COLOR_BASE.b, intensity))
 
 # ═══════════════════════════════════════════
 #  PROCESS — Audio generation + animations
@@ -421,53 +446,52 @@ func _process(delta: float) -> void:
 func _animate_nodes(delta: float) -> void:
 	# Gentle hover animation for selected nodes
 	for i in range(12):
-		var node_data = note_nodes[i]
-		var mesh: MeshInstance3D = node_data.mesh
-		var base_pos: Vector3 = node_data.base_pos
-		
+		var base_pos: Vector3 = note_nodes[i].base_pos
+		var xf := _notes_mm.get_instance_transform(i)
 		if selected_nodes.has(i):
 			# Gentle bob up and down
 			var bob = sin(Time.get_ticks_msec() * 0.003 + float(i)) * 0.005
-			mesh.position = base_pos + Vector3(0, bob + 0.005, 0)
+			xf.origin = base_pos + Vector3(0, bob + 0.005, 0)
 		else:
-			mesh.position = base_pos
+			xf.origin = base_pos
+		_notes_mm.set_instance_transform(i, xf)
 
 func _generate_audio() -> void:
 	for v in range(MAX_VOICES):
 		if not _audio_players[v] or not _audio_players[v].playing:
 			continue
-		
+
 		var playback = _audio_players[v].get_stream_playback()
 		if not playback:
 			continue
-		
+
 		var frames_available = playback.get_frames_available()
 		if frames_available < 256:
 			continue
-		
+
 		var frames_to_fill = mini(frames_available, 512)
-		
+
 		# Smooth amplitude envelope
 		var target = _audio_targets[v]
 		var current = _audio_current[v]
 		var freq = _audio_freqs[v]
 		var phase = _audio_phases[v]
-		
+
 		for _f in range(frames_to_fill):
 			# Envelope: smooth attack/release
 			current = lerp(current, target, 0.001)
-			
+
 			# Generate sample: fundamental + slight 2nd harmonic for warmth
 			var sample = sin(phase) * 0.8 + sin(phase * 2.0) * 0.15 + sin(phase * 3.0) * 0.05
 			sample *= current * 0.4  # Scale down to avoid clipping
 			sample = clampf(sample, -1.0, 1.0)
-			
+
 			phase += freq * TAU / _sample_rate
 			if phase > TAU:
 				phase -= TAU
-			
+
 			playback.push_frame(Vector2(sample, sample))
-		
+
 		_audio_current[v] = current
 		_audio_phases[v] = phase
 
@@ -493,3 +517,6 @@ func clear_selection() -> void:
 	_stop_tone(0)
 	_stop_tone(1)
 	_update_visual_state()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

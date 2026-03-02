@@ -21,6 +21,7 @@
 #   The springs show ONE theory of tension, not a universal law.
 #
 extends Node3D
+class_name ChordTensionSpring
 
 const _P = preload("res://commons/ui/ada_palette.gd")
 
@@ -86,7 +87,8 @@ var node_positions: Array[Vector3] = []         # Current 3D positions
 var node_velocities: Array[Vector3] = []        # Physics velocities
 var node_rest_positions: Array[Vector3] = []    # Where nodes want to be
 var node_dragging: Array[bool] = []             # Which nodes are being dragged
-var node_meshes: Array[MeshInstance3D] = []
+var _node_mm: MultiMesh
+var _node_mmi: MultiMeshInstance3D
 var node_labels: Array[Label3D] = []
 var node_areas: Array[Area3D] = []
 
@@ -102,6 +104,8 @@ var audio_playing: bool = true
 
 # Preset buttons
 var preset_buttons: Array = []
+var _btn_mm: MultiMesh
+var _btn_mmi: MultiMeshInstance3D
 var current_preset: String = "maj7"
 
 # Base plate
@@ -143,6 +147,19 @@ func _create_base_plate() -> void:
 	add_child(base_plate)
 
 func _create_nodes() -> void:
+	# Shared sphere mesh for all node visuals (MultiMesh)
+	var sphere_mesh := SphereMesh.new()
+	sphere_mesh.radius = 0.035
+	sphere_mesh.height = 0.07
+	sphere_mesh.radial_segments = 16
+	sphere_mesh.rings = 8
+
+	_node_mm = MultiMesh.new()
+	_node_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_node_mm.use_colors = true
+	_node_mm.mesh = sphere_mesh
+	_node_mm.instance_count = NUM_NODES
+
 	for i in NUM_NODES:
 		# Area3D for VR interaction
 		var area := Area3D.new()
@@ -151,24 +168,13 @@ func _create_nodes() -> void:
 		area.collision_mask = 262144  # XR hands
 		area.monitoring = true
 		area.input_ray_pickable = true
-		
+
 		var col := CollisionShape3D.new()
 		var sphere_shape := SphereShape3D.new()
 		sphere_shape.radius = 0.04
 		col.shape = sphere_shape
 		area.add_child(col)
-		
-		# Visual sphere
-		var mesh_inst := MeshInstance3D.new()
-		var sphere_mesh := SphereMesh.new()
-		sphere_mesh.radius = 0.035
-		sphere_mesh.height = 0.07
-		sphere_mesh.radial_segments = 16
-		sphere_mesh.rings = 8
-		mesh_inst.mesh = sphere_mesh
-		mesh_inst.material_override = _P.accent_material(_P.ACCENT_ORANGE)
-		area.add_child(mesh_inst)
-		
+
 		# Label
 		var label := Label3D.new()
 		label.text = NOTE_NAMES[node_pitches[i]]
@@ -180,9 +186,9 @@ func _create_nodes() -> void:
 		label.position = Vector3(0, 0.06, 0)
 		label.outline_size = 4
 		area.add_child(label)
-		
+
 		add_child(area)
-		
+
 		# Connect interaction
 		var idx := i
 		area.input_event.connect(func(_cam, event, _pos, _normal, _shape):
@@ -190,15 +196,25 @@ func _create_nodes() -> void:
 		)
 		area.mouse_entered.connect(func(): _on_node_hover(idx, true))
 		area.mouse_exited.connect(func(): _on_node_hover(idx, false))
-		
+
 		node_areas.append(area)
-		node_meshes.append(mesh_inst)
 		node_labels.append(label)
 		node_positions.append(Vector3.ZERO)
 		node_velocities.append(Vector3.ZERO)
 		node_rest_positions.append(Vector3.ZERO)
 		node_dragging.append(false)
 		audio_phases.append(0.0)
+
+		_node_mm.set_instance_color(i, _P.ACCENT_ORANGE)
+
+	_node_mmi = MultiMeshInstance3D.new()
+	_node_mmi.multimesh = _node_mm
+	var node_mat := StandardMaterial3D.new()
+	node_mat.vertex_color_use_as_albedo = true
+	node_mat.metallic = 0.2
+	node_mat.roughness = 0.45
+	_node_mmi.material_override = node_mat
+	add_child(_node_mmi)
 
 func _create_spring_pairs() -> void:
 	# Connect every pair of nodes with a spring
@@ -225,9 +241,19 @@ func _create_preset_buttons() -> void:
 		_P.ACCENT_YELLOW,  # sus4
 		Color(0.40, 0.40, 0.45),  # tritone — dark grey
 	]
-	
+
 	var start_x := -0.28
-	
+
+	# Shared box mesh for all preset buttons (MultiMesh)
+	var btn_box := BoxMesh.new()
+	btn_box.size = Vector3(0.06, 0.02, 0.03)
+
+	_btn_mm = MultiMesh.new()
+	_btn_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_btn_mm.use_colors = true
+	_btn_mm.mesh = btn_box
+	_btn_mm.instance_count = button_names.size()
+
 	for i in button_names.size():
 		var btn_area := Area3D.new()
 		btn_area.name = "PresetBtn_%s" % button_names[i]
@@ -235,22 +261,13 @@ func _create_preset_buttons() -> void:
 		btn_area.collision_mask = 262144
 		btn_area.monitoring = true
 		btn_area.input_ray_pickable = true
-		
+
 		var col := CollisionShape3D.new()
 		var box := BoxShape3D.new()
 		box.size = Vector3(0.06, 0.025, 0.03)
 		col.shape = box
 		btn_area.add_child(col)
-		
-		var btn_mesh := MeshInstance3D.new()
-		var btn_box := BoxMesh.new()
-		btn_box.size = Vector3(0.06, 0.02, 0.03)
-		btn_mesh.mesh = btn_box
-		btn_mesh.material_override = _P.make_material(
-			button_colors[i], 0.2, 0.5, _P.EMISSION_SUBTLE
-		)
-		btn_area.add_child(btn_mesh)
-		
+
 		var btn_label := Label3D.new()
 		btn_label.text = button_names[i].to_upper()
 		btn_label.font_size = 28
@@ -261,16 +278,29 @@ func _create_preset_buttons() -> void:
 		btn_label.no_depth_test = true
 		btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		btn_area.add_child(btn_label)
-		
-		btn_area.position = Vector3(start_x + i * 0.075, 0.02, -(BASE_RADIUS + 0.18))
+
+		var btn_pos := Vector3(start_x + i * 0.075, 0.02, -(BASE_RADIUS + 0.18))
+		btn_area.position = btn_pos
 		add_child(btn_area)
-		
+
+		_btn_mm.set_instance_transform(i, Transform3D(Basis(), btn_pos))
+		_btn_mm.set_instance_color(i, button_colors[i])
+
 		var preset_name: String = button_names[i]
 		btn_area.input_event.connect(func(_cam, event, _pos, _normal, _shape):
 			if event is InputEventMouseButton and event.pressed:
 				_apply_preset(preset_name)
 		)
 		preset_buttons.append(btn_area)
+
+	_btn_mmi = MultiMeshInstance3D.new()
+	_btn_mmi.multimesh = _btn_mm
+	var btn_mat := StandardMaterial3D.new()
+	btn_mat.vertex_color_use_as_albedo = true
+	btn_mat.metallic = 0.2
+	btn_mat.roughness = 0.5
+	_btn_mmi.material_override = btn_mat
+	add_child(_btn_mmi)
 
 func _create_labels() -> void:
 	# Tension meter label
@@ -406,7 +436,10 @@ func _update_node_visuals() -> void:
 		if i >= node_areas.size():
 			break
 		node_areas[i].position = node_positions[i]
-		
+
+		# Update MultiMesh transform to match Area3D position
+		_node_mm.set_instance_transform(i, Transform3D(Basis(), node_positions[i]))
+
 		# Color by individual tension contribution
 		var node_tension := _node_tension(i)
 		var color: Color
@@ -416,10 +449,9 @@ func _update_node_visuals() -> void:
 			color = _P.ACCENT_CYAN.lerp(_P.ACCENT_YELLOW, (node_tension - 0.2) / 0.3)
 		else:
 			color = _P.ACCENT_YELLOW.lerp(_P.ACCENT_RED, (node_tension - 0.5) / 0.5)
-		
-		var emission: float = lerpf(_P.EMISSION_SUBTLE, _P.EMISSION_HOT, node_tension)
-		node_meshes[i].material_override = _P.make_material(color, 0.2, 0.45, emission)
-		
+
+		_node_mm.set_instance_color(i, color)
+
 		# Update label
 		node_labels[i].text = NOTE_NAMES[node_pitches[i] % 12]
 
@@ -569,10 +601,9 @@ func _on_node_input(index: int, event: InputEvent) -> void:
 		_cycle_node_pitch(index, 1 if event.button_index == MOUSE_BUTTON_LEFT else -1)
 
 func _on_node_hover(index: int, hovering: bool) -> void:
-	if index < node_meshes.size():
-		var mesh := node_meshes[index]
+	if index < NUM_NODES:
 		if hovering:
-			mesh.material_override = _P.handle_glow_material(_P.ACCENT_ORANGE)
+			_node_mm.set_instance_color(index, _P.ACCENT_ORANGE)
 		else:
 			_update_node_visuals()  # Reset to tension-based color
 
@@ -717,3 +748,6 @@ func get_tension() -> float:
 
 func get_pitches() -> Array[int]:
 	return node_pitches.duplicate()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

@@ -2,16 +2,22 @@
 # Visual representation of quantum superposition |ψ⟩ = α|0⟩ + β|1⟩
 
 extends Node3D
+class_name SuperpositionDisplay
+
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
 var _state_0: MeshInstance3D
 var _state_1: MeshInstance3D
 var _superposition: MeshInstance3D
 var _label: Label3D
 var _time: float = 0.0
+var _speed: float = 2.0
+var _slider: Node3D
 
 func _ready():
 	_create_states()
 	_create_label()
+	_setup_controls()
 
 func _create_states():
 	# |0⟩ state
@@ -81,10 +87,25 @@ func _create_label():
 func _process(delta):
 	_time += delta
 	# Oscillate superposition
-	var alpha = 0.5 + 0.3 * sin(_time * 2.0)
+	var alpha = 0.5 + 0.3 * sin(_time * _speed)
 	var beta = 1.0 - alpha
 	
 	var mat0 = _state_0.material_override as StandardMaterial3D
 	var mat1 = _state_1.material_override as StandardMaterial3D
 	mat0.albedo_color.a = 0.3 + 0.4 * alpha
 	mat1.albedo_color.a = 0.3 + 0.4 * beta
+
+func _setup_controls():
+	_slider = SliderScene.instantiate()
+	_slider.position = Vector3(0, 0.5, 0.6)
+	_slider.set_param_name("Speed")
+	_slider.set_normalized_value(0.25)
+	_slider.slider_moved.connect(_on_speed_changed)
+	add_child(_slider)
+
+func _on_speed_changed():
+	var val = _slider.get_normalized_value()
+	_speed = 0.5 + val * 7.5
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

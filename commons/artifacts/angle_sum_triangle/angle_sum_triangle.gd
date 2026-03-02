@@ -2,6 +2,7 @@
 # Demonstrates that triangle angles sum to 180° (in Euclidean space)
 
 extends Node3D
+class_name AngleSumTriangle
 
 @export var size: float = 0.4
 var _triangle: MeshInstance3D
@@ -54,3 +55,6 @@ func _create_labels():
 	_sum_label.font_size = 12
 	_sum_label.position = Vector3(0, -size * 0.6, 0)
 	add_child(_sum_label)
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass
