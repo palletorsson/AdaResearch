@@ -22,11 +22,13 @@ extends XRToolsStaging
 @export var normal_transition_duration: float = 1.0  # Standard VR-comfortable fades
 @export var force_fast_transition_fade: bool = true
 @export var force_loading_screen_for_all_transitions: bool = true
+@export var wait_for_map_generation_before_reveal: bool = true
 var _use_quick_transition: bool = false  # Set by AdaSceneManager for in-sequence transitions
 
 const VR_MAP_LOADER_KIOSK_SCENE_PATH := "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
 const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
 const MAP_LOADER_SPAWN_COOLDOWN_MS := 250
+const MAP_READY_TIMEOUT_SEC := 20.0
 
 # Signal emitted when staging is complete
 signal staging_complete
@@ -470,6 +472,7 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		ResourceLoader.load_threaded_get_status(p_scene_path) != ResourceLoader.THREAD_LOAD_LOADED
 	
 	if show_loading:
+		_update_loading_screen_for_transition(p_scene_path, user_data, "Streaming shell")
 		xr_origin.set_process_internal(true)
 		xr_origin.current = true
 		xr_camera.current = true
@@ -486,7 +489,8 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		await _tween.finished
 	
 	# Wait for scene to load if not ready
-	if $LoadingScreen.visible:
+	var loading_screen_visible: bool = $LoadingScreen.visible
+	if loading_screen_visible:
 		var res: ResourceLoader.ThreadLoadStatus
 		while true:
 			var progress := []
@@ -498,6 +502,7 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 
 		if res == ResourceLoader.THREAD_LOAD_LOADED:
 			$LoadingScreen.progress = 1.0
+			_update_loading_screen_for_transition(p_scene_path, user_data, "Constructing destination")
 		
 		if res != ResourceLoader.THREAD_LOAD_LOADED:
 			push_error("Error ", res, " loading resource ", p_scene_path)
@@ -508,16 +513,6 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 			$LoadingScreen.enable_press_to_continue = true
 			await $LoadingScreen.continue_pressed
 		
-		if _tween:
-			_tween.kill()
-		_tween = get_tree().create_tween()
-		_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
-		await _tween.finished
-		
-		$LoadingScreen.follow_camera = false
-		$LoadingScreen.visible = false
-		xr_origin.set_process_internal(false)
-	
 	# Instantiate the new scene
 	var new_scene: PackedScene = ResourceLoader.load_threaded_get(p_scene_path)
 	current_scene = new_scene.instantiate()
@@ -530,6 +525,21 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	if current_scene.has_method("scene_loaded"):
 		current_scene.scene_loaded(user_data)
 	scene_loaded.emit(current_scene, user_data)
+
+	if loading_screen_visible and wait_for_map_generation_before_reveal:
+		await _await_scene_content_ready(current_scene, p_scene_path, user_data)
+
+	if loading_screen_visible:
+		_update_loading_screen_for_transition(p_scene_path, user_data, "Link established")
+		if _tween:
+			_tween.kill()
+		_tween = get_tree().create_tween()
+		_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
+		await _tween.finished
+		
+		$LoadingScreen.follow_camera = false
+		$LoadingScreen.visible = false
+		xr_origin.set_process_internal(false)
 	
 	# Fade in (quick or normal)
 	if _tween:
@@ -782,7 +792,8 @@ func _update_loading_screen_text(level_name: String, description: String = ""):
 	var text = "Loading: %s" % level_name
 	if not description.is_empty():
 		text += "\n%s" % description
-	text += "\n\nHold Trigger to Continue"
+	if prompt_for_continue:
+		text += "\n\nHold Trigger to Continue"
 	
 	label.text = text
 	print("AdaVRStaging: Updated loading screen text for: %s" % level_name)
@@ -791,3 +802,100 @@ func _update_loading_screen_text(level_name: String, description: String = ""):
 func set_loading_level_info(level_name: String, description: String = ""):
 	"""Public API to set loading screen level information"""
 	_update_loading_screen_text(level_name, description)
+
+func _await_scene_content_ready(scene: Node, scene_path: String, _user_data = null) -> void:
+	var readiness_node := _find_scene_readiness_node(scene)
+	if not readiness_node:
+		return
+
+	var started_wait_ms := Time.get_ticks_msec()
+	var loading_screen = find_child("LoadingScreen", true, false)
+	while is_instance_valid(readiness_node) and readiness_node.has_method("is_map_ready") and not readiness_node.is_map_ready():
+		var elapsed_sec := float(Time.get_ticks_msec() - started_wait_ms) / 1000.0
+		if elapsed_sec >= MAP_READY_TIMEOUT_SEC:
+			push_warning("AdaVRStaging: Timed out waiting for map readiness for %s" % scene_path)
+			break
+		if loading_screen and loading_screen.visible:
+			loading_screen.progress = 0.94 + (0.04 * abs(sin(elapsed_sec * 3.5)))
+		await get_tree().process_frame
+
+	if loading_screen and loading_screen.visible:
+		loading_screen.progress = 1.0
+
+func _find_scene_readiness_node(scene: Node) -> Node:
+	if not scene:
+		return null
+
+	var direct_grid := scene.find_child("GridSystem", true, false)
+	if direct_grid and direct_grid.has_method("is_map_ready"):
+		return direct_grid
+
+	var lab_grid := scene.find_child("LabGridSystem", true, false)
+	if lab_grid and lab_grid.has_method("is_map_ready"):
+		return lab_grid
+
+	for child in scene.find_children("*", "", true, false):
+		if child and child.has_method("is_map_ready"):
+			return child
+
+	return null
+
+func _update_loading_screen_for_transition(scene_path: String, user_data, stage_name: String) -> void:
+	var target_name := _get_loading_target_name(scene_path, user_data)
+	var process_lines := _build_loading_process_lines(scene_path, user_data)
+	var description := "%s\n\n%s" % [stage_name, "\n".join(process_lines)]
+	_update_loading_screen_text(target_name, description)
+
+func _coerce_transition_scene_data(user_data) -> Dictionary:
+	if user_data is Dictionary:
+		return user_data
+	return {}
+
+func _get_loading_target_name(scene_path: String, user_data) -> String:
+	var scene_data: Dictionary = _coerce_transition_scene_data(user_data)
+	var target_name := str(scene_data.get("map_name", scene_data.get("lab_map_override", scene_data.get("destination", ""))))
+
+	if target_name.is_empty() and scene_data.has("sequence_data"):
+		var sequence_data: Dictionary = scene_data.get("sequence_data", {})
+		var sequence_name := str(sequence_data.get("sequence_name", "")).strip_edges()
+		if not sequence_name.is_empty():
+			target_name = "Sequence: %s" % sequence_name.replace("_", " ")
+
+	if target_name.is_empty() and scene_path == main_lab_scene:
+		var completed_sequence := str(scene_data.get("completed_sequence", "")).strip_edges()
+		if not completed_sequence.is_empty():
+			target_name = "Lab after %s" % completed_sequence.replace("_", " ")
+		else:
+			target_name = "Lab hub"
+
+	if target_name.is_empty():
+		target_name = scene_path.get_file().get_basename().replace("_", " ")
+
+	return target_name.replace("Lab/", "Lab: ")
+
+func _build_loading_process_lines(scene_path: String, user_data) -> Array[String]:
+	var scene_data: Dictionary = _coerce_transition_scene_data(user_data)
+	var process_lines: Array[String] = []
+	var map_name := str(scene_data.get("map_name", scene_data.get("lab_map_override", ""))).strip_edges()
+
+	if scene_path == main_lab_scene or map_name.begins_with("Lab/"):
+		process_lines.append("- restoring lab state")
+		process_lines.append("- assembling geometry lattice")
+		process_lines.append("- waking unlocked artifacts")
+		process_lines.append("- stabilizing ambient light")
+	else:
+		process_lines.append("- reading map_data.json")
+		process_lines.append("- assembling structure grid")
+		process_lines.append("- placing utilities and spawn points")
+		process_lines.append("- instantiating artifacts")
+		process_lines.append("- warming ambient audio")
+
+	if scene_data.has("sequence_data"):
+		var sequence_data: Dictionary = scene_data.get("sequence_data", {})
+		var current_step := int(sequence_data.get("current_step", 0)) + 1
+		var sequence_maps: Array = sequence_data.get("maps", [])
+		var total_steps: int = sequence_maps.size()
+		if total_steps > 0:
+			process_lines.append("- sequence step %d of %d" % [current_step, total_steps])
+
+	return process_lines

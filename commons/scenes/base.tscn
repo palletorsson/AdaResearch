@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_5nlub"]
 [ext_resource type="PackedScene" uid="uid://kyhaogt0a4q8" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="10_5sk3y"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="12_jump"]
 [ext_resource type="PackedScene" uid="uid://b48aivfdv6q8h" path="res://commons/body/hands/right_hand.tscn" id="12_cwrn5"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
@@ -112,20 +113,23 @@ mode = 1
 
 [node name="MovementTurn" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="1" unique_id=579380756 instance=ExtResource("12_26qpu")]
 
-[node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="2" unique_id=1831217974 instance=ExtResource("8_5nlub")]
+[node name="MovementJump" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="2" unique_id=1972135051 instance=ExtResource("12_jump")]
+jump_button_action = "ax_button"
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=1831217974 instance=ExtResource("8_5nlub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
 ranged_distance = 10.0
 ranged_angle = 15.0
 
-[node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=339200772 instance=ExtResource("13_c1k2x")]
+[node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" unique_id=339200772 instance=ExtResource("13_c1k2x")]
 show_laser = 2
 laser_length = 1
 suppress_radius = 0.05
 collide_with_areas = true
 
-[node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" unique_id=1844701323 instance=ExtResource("10_5sk3y")]
+[node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" unique_id=1844701323 instance=ExtResource("10_5sk3y")]
 
-[node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" unique_id=1913051319 instance=ExtResource("12_cwrn5")]
+[node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="6" unique_id=1913051319 instance=ExtResource("12_cwrn5")]
 script = ExtResource("13_j7xni")
 hand_blend_tree = ExtResource("14_mjcnw")
 hand_material_override = null
@@ -202,3 +206,6 @@ script = ExtResource("19_bounds")
 
 [node name="OversightVoiceBridge" type="Node" parent="." index="8"]
 script = ExtResource("32_voice_bridge")
+secondary_push_to_talk_action = &""
+controller_push_to_talk_button = &"ax_button"
+controller_push_to_talk_tracker = &"left_hand"

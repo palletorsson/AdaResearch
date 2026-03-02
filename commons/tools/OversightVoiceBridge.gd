@@ -50,6 +50,7 @@ var _status_hide_at_msec := 0
 var _left_controller: XRController3D
 var _right_controller: XRController3D
 var _next_controller_scan_msec := 0
+var _missing_input_actions_reported: Dictionary = {}
 
 func _ready() -> void:
 	var root_singleton := get_node_or_null("/root/OversightVoiceBridge")
@@ -144,31 +145,47 @@ func _is_push_to_talk_pressed(event: InputEvent) -> bool:
 		return true
 	if secondary_push_to_talk_action != &"" and _event_is_action_pressed(event, secondary_push_to_talk_action):
 		return true
-	if _event_is_action_pressed(event, &"ax_button"):
+	if controller_push_to_talk_button != &"" and _event_is_action_pressed(event, controller_push_to_talk_button):
 		return true
 	if _event_is_action_pressed(event, &"primary_click"):
 		return true
 	return false
 
 func _is_push_to_talk_released(event: InputEvent) -> bool:
-	if event.is_action_released(push_to_talk_action):
+	if _event_is_action_released(event, push_to_talk_action):
 		return true
-	if secondary_push_to_talk_action != &"" and event.is_action_released(secondary_push_to_talk_action):
+	if secondary_push_to_talk_action != &"" and _event_is_action_released(event, secondary_push_to_talk_action):
 		return true
-	if event.is_action_released(&"ax_button"):
+	if controller_push_to_talk_button != &"" and _event_is_action_released(event, controller_push_to_talk_button):
 		return true
-	if event.is_action_released(&"primary_click"):
+	if _event_is_action_released(event, &"primary_click"):
 		return true
 	return false
 
 func _event_is_action_pressed(event: InputEvent, action_name: StringName) -> bool:
-	if action_name == &"":
+	if not _has_input_action(action_name):
 		return false
 	if not event.is_action_pressed(action_name):
 		return false
 	if event is InputEventKey and (event as InputEventKey).echo:
 		return false
 	return true
+
+func _event_is_action_released(event: InputEvent, action_name: StringName) -> bool:
+	if not _has_input_action(action_name):
+		return false
+	return event.is_action_released(action_name)
+
+func _has_input_action(action_name: StringName) -> bool:
+	if action_name == &"":
+		return false
+	if InputMap.has_action(action_name):
+		return true
+	if not _missing_input_actions_reported.has(action_name):
+		_missing_input_actions_reported[action_name] = true
+		if debug_controller_input:
+			print("OversightVoiceBridge: skipping undefined input action '%s'" % String(action_name))
+	return false
 
 func _connect_controller_signals() -> void:
 	var scene := get_tree().current_scene

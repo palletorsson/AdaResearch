@@ -12,9 +12,13 @@ signal quit_requested
 @onready var about_display = $AboutDisplay
 
 const MAP_BROWSER_SCENE = preload("res://commons/scenes/main_menu/components/MapBrowser3D.tscn")
+const DESKTOP_MENU_PIXELS_PER_UNIT := 1800.0
+const MOBILE_MENU_PIXELS_PER_UNIT := 1200.0
 var map_browser_instance: Node3D = null
 
 func _ready():
+	_configure_menu_rendering()
+
 	new_game_button.clicked.connect(_on_new_game_clicked)
 	load_game_button.clicked.connect(_on_load_game_clicked)
 	if browse_button:
@@ -27,6 +31,36 @@ func _ready():
 	
 	# Update Load Game button visibility based on save existence
 	_update_load_button()
+
+func _configure_menu_rendering() -> void:
+	var root_viewport := get_viewport()
+	if root_viewport:
+		var target_msaa := Viewport.MSAA_2X if OS.has_feature("android") else Viewport.MSAA_4X
+		if root_viewport.msaa_3d < target_msaa:
+			root_viewport.msaa_3d = target_msaa
+		if root_viewport.screen_space_aa == Viewport.SCREEN_SPACE_AA_DISABLED:
+			root_viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+
+	_configure_embedded_viewport_quality(about_display)
+
+func _configure_embedded_viewport_quality(root: Node) -> void:
+	if not root:
+		return
+
+	var viewport_2d = root.get_node_or_null("Viewport2Din3D")
+	if not viewport_2d:
+		return
+
+	var pixels_per_unit := MOBILE_MENU_PIXELS_PER_UNIT if OS.has_feature("android") else DESKTOP_MENU_PIXELS_PER_UNIT
+	var screen_size: Vector2 = viewport_2d.screen_size
+	viewport_2d.viewport_size = Vector2(
+		max(1.0, round(screen_size.x * pixels_per_unit)),
+		max(1.0, round(screen_size.y * pixels_per_unit))
+	)
+
+	var content_viewport: SubViewport = viewport_2d.get_node_or_null("Viewport")
+	if content_viewport:
+		content_viewport.msaa_2d = Viewport.MSAA_2X if OS.has_feature("android") else Viewport.MSAA_4X
 
 func _setup_about_text():
 	var about_text = """[center][font_size=48][b]THRESHOLD PROTOCOL[/b][/font_size][/center]
@@ -189,6 +223,7 @@ func _on_settings_clicked():
 	# Instantiate Settings UI
 	settings_instance = SETTINGS_SCENE.instantiate()
 	add_child(settings_instance)
+	_configure_embedded_viewport_quality(settings_instance)
 
 	# Swap in position: Use exact transform of About Display
 	if about_display:

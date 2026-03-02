@@ -10,8 +10,9 @@ button_scene = ExtResource("2_button")
 [node name="TitleLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 text = "Sequences"
-font_size = 32
-outline_size = 6
+font_size = 64
+outline_size = 12
+pixel_size = 0.0025
 
 [node name="ItemsContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
@@ -19,8 +20,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 [node name="PageLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0, 0)
 text = "Page 1 / 1"
-font_size = 18
-outline_size = 4
+font_size = 36
+outline_size = 8
+pixel_size = 0.0025
 
 [node name="NavButtons" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)

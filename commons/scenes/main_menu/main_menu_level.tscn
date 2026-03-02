@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://y2b0bdmt3oyc"]
+[gd_scene load_steps=47 format=3 uid="uid://y2b0bdmt3oyc"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="2_dark_sphere"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://bft3xyxs31ci3" path="res://addons/godot-xr-tools/functions/function_pose_detector.tscn" id="5_xgcrx"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="6_jump"]
 [ext_resource type="PackedScene" uid="uid://bwr0eqi231lf0" path="res://assets/meshes/control_pad/control_pad_location_left.tscn" id="7_kl172"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://ct3p5sgwvkmva" path="res://assets/meshes/control_pad/control_pad.tscn" id="8_gctxe"]
@@ -265,7 +266,10 @@ tree_root = SubResource("AnimationNodeBlendTree_6pgur")
 
 [node name="MovementTurn" parent="XROrigin3D/RightHand" index="3" instance=ExtResource("5")]
 
-[node name="ControlPadLocationRight" parent="XROrigin3D/RightHand" index="4" instance=ExtResource("12_pwgp0")]
+[node name="MovementJump" parent="XROrigin3D/RightHand" index="4" instance=ExtResource("6_jump")]
+jump_button_action = "ax_button"
+
+[node name="ControlPadLocationRight" parent="XROrigin3D/RightHand" index="5" instance=ExtResource("12_pwgp0")]
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("8")]
 

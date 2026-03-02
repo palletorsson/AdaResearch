@@ -5,6 +5,9 @@ class_name StepSequencer
 ## Wraps SequencerUI in Viewport2Din3D for VR/3D interaction
 ## Handles audio playback
 
+const AudioSynthesizer := preload("res://commons/audio/generators/AudioSynthesizer.gd")
+const CustomSoundGenerator := preload("res://commons/audio/generators/CustomSoundGenerator.gd")
+
 @export var num_tracks: int = 4
 @export var num_steps: int = 16
 @export var bpm: float = 120.0
@@ -19,118 +22,118 @@ signal playback_stopped()
 ## Sound presets mapping
 const SOUND_PRESETS: Dictionary = {
 	"808_kit": [
-		AudioSynthesizer.SoundType.DARK_808_KICK,
-		AudioSynthesizer.SoundType.TR909_KICK,
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,
-		AudioSynthesizer.SoundType.DARK_808_SUB_BASS
+		"DARK_808_KICK",
+		"TR909_KICK",
+		"ACID_606_HIHAT",
+		"DARK_808_SUB_BASS"
 	],
 	"trap_beats": [
-		AudioSynthesizer.SoundType.DARK_808_KICK,
-		AudioSynthesizer.SoundType.EXPLOSION,
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,
-		AudioSynthesizer.SoundType.SHIELD_HIT
+		"DARK_808_KICK",
+		"EXPLOSION",
+		"ACID_606_HIHAT",
+		"SHIELD_HIT"
 	],
 	"synth_kit": [
-		AudioSynthesizer.SoundType.TB303_ACID_BASS,
-		AudioSynthesizer.SoundType.MOOG_BASS_LEAD,
-		AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO,
-		AudioSynthesizer.SoundType.PPG_WAVE_PAD
+		"TB303_ACID_BASS",
+		"MOOG_BASS_LEAD",
+		"DX7_ELECTRIC_PIANO",
+		"PPG_WAVE_PAD"
 	],
 	"tech_noir": [
-		AudioSynthesizer.SoundType.MELODIC_DRONE,
-		AudioSynthesizer.SoundType.GHOST_DRONE,
-		AudioSynthesizer.SoundType.AMBIENT_WIND,
-		AudioSynthesizer.SoundType.TELEPORT_DRONE
+		"MELODIC_DRONE",
+		"GHOST_DRONE",
+		"AMBIENT_WIND",
+		"TELEPORT_DRONE"
 	],
 	"retro": [
-		AudioSynthesizer.SoundType.C64_SID_LEAD,
-		AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE,
-		AudioSynthesizer.SoundType.RETRO_JUMP,
-		AudioSynthesizer.SoundType.PICKUP_MARIO
+		"C64_SID_LEAD",
+		"AMIGA_MOD_SAMPLE",
+		"RETRO_JUMP",
+		"PICKUP_MARIO"
 	],
 	"90s_house": [
 		# Gypsy Woman / Crystal Waters style - Basement Boys production
-		AudioSynthesizer.SoundType.TR909_KICK,        # Punchy house kick
-		AudioSynthesizer.SoundType.KORG_M1_PIANO,     # The iconic M1 piano stab
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,    # Crisp hi-hats
-		AudioSynthesizer.SoundType.TB303_ACID_BASS    # Squelchy acid bassline
+		"TR909_KICK",        # Punchy house kick
+		"KORG_M1_PIANO",     # The iconic M1 piano stab
+		"ACID_606_HIHAT",    # Crisp hi-hats
+		"TB303_ACID_BASS"    # Squelchy acid bassline
 	],
 	"juno_pads": [
 		# Lush analog pad sounds - slow builds, atmospheric
-		AudioSynthesizer.SoundType.POP_JUNO_CHORUS_PAD,  # Roland Juno-106 lush pad
-		AudioSynthesizer.SoundType.JUPITER_8_STRINGS,    # Jupiter string ensemble
-		AudioSynthesizer.SoundType.PPG_WAVE_PAD,         # PPG wavetable warmth
-		AudioSynthesizer.SoundType.CINEMATIC_432HZ_PAD   # Deep cinematic pad
+		"POP_JUNO_CHORUS_PAD",  # Roland Juno-106 lush pad
+		"JUPITER_8_STRINGS",    # Jupiter string ensemble
+		"PPG_WAVE_PAD",         # PPG wavetable warmth
+		"CINEMATIC_432HZ_PAD"   # Deep cinematic pad
 	],
 	"kraftwerk": [
 		# 1970s Germany - Birth of electronic music, sequencers as instruments
-		AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER,  # The iconic sequencer pulse
-		AudioSynthesizer.SoundType.TR909_KICK,                # Clean electronic kick
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,            # Precise hi-hats
-		AudioSynthesizer.SoundType.MOOG_BASS_LEAD             # Analog bass
+		"MOOG_KRAFTWERK_SEQUENCER",  # The iconic sequencer pulse
+		"TR909_KICK",                # Clean electronic kick
+		"ACID_606_HIHAT",            # Precise hi-hats
+		"MOOG_BASS_LEAD"             # Analog bass
 	],
 	"disco": [
 		# 1970s - Groove, four-on-floor, funky percussion
-		AudioSynthesizer.SoundType.TR909_KICK,           # Punchy disco kick
-		AudioSynthesizer.SoundType.SYNARE_3_DISCO_TOM,   # Classic disco tom
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,       # Crisp hi-hats
-		AudioSynthesizer.SoundType.POP_FUNK_BASS         # Funky bass
+		"TR909_KICK",           # Punchy disco kick
+		"SYNARE_3_DISCO_TOM",   # Classic disco tom
+		"ACID_606_HIHAT",       # Crisp hi-hats
+		"POP_FUNK_BASS"         # Funky bass
 	],
 	"ambient_works": [
 		# 1990s Aphex Twin style - Texture, space, less-is-more
-		AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR,   # Complex modular textures
-		AudioSynthesizer.SoundType.PPG_WAVE_PAD,         # Wavetable warmth
-		AudioSynthesizer.SoundType.GHOST_DRONE,          # Ethereal atmosphere
-		AudioSynthesizer.SoundType.MELODIC_DRONE         # Melodic background
+		"APHEX_TWIN_MODULAR",   # Complex modular textures
+		"PPG_WAVE_PAD",         # Wavetable warmth
+		"GHOST_DRONE",          # Ethereal atmosphere
+		"MELODIC_DRONE"         # Melodic background
 	],
 	"jazz_fusion": [
 		# 1970s Herbie Hancock - Jazz meets electronics
-		AudioSynthesizer.SoundType.HERBIE_HANCOCK_MOOG_FUSION,  # Jazz-funk Moog
-		AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO,          # Rhodes-like FM piano
-		AudioSynthesizer.SoundType.POP_FUNK_BASS,               # Walking/funk bass
-		AudioSynthesizer.SoundType.TR909_KICK                   # Light percussion
+		"HERBIE_HANCOCK_MOOG_FUSION",  # Jazz-funk Moog
+		"DX7_ELECTRIC_PIANO",          # Rhodes-like FM piano
+		"POP_FUNK_BASS",               # Walking/funk bass
+		"TR909_KICK"                   # Light percussion
 	],
 	"chiptune": [
 		# 1980s - Constraints breed creativity, 8-bit aesthetics
-		AudioSynthesizer.SoundType.C64_SID_LEAD,         # Commodore 64 lead
-		AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE,     # Amiga tracker
-		AudioSynthesizer.SoundType.RETRO_JUMP,           # Classic jump sound
-		AudioSynthesizer.SoundType.PICKUP_MARIO          # Iconic pickup
+		"C64_SID_LEAD",         # Commodore 64 lead
+		"AMIGA_MOD_SAMPLE",     # Amiga tracker
+		"RETRO_JUMP",           # Classic jump sound
+		"PICKUP_MARIO"          # Iconic pickup
 	],
 	"sci_fi_lab": [
 		# Timeless - Sound design, atmosphere, world-building
-		AudioSynthesizer.SoundType.SCI_FI_LAB_HUM_CLEAN,     # Sterile lab hum
-		AudioSynthesizer.SoundType.SCI_FI_DATA_CHIRPS,       # Computer activity
-		AudioSynthesizer.SoundType.SCI_FI_ELECTROMAGNETIC,   # Tech interference
-		AudioSynthesizer.SoundType.SCI_FI_VENTILATION        # Air texture
+		"SCI_FI_LAB_HUM_CLEAN",     # Sterile lab hum
+		"SCI_FI_DATA_CHIRPS",       # Computer activity
+		"SCI_FI_ELECTROMAGNETIC",   # Tech interference
+		"SCI_FI_VENTILATION"        # Air texture
 	],
 	"cinematic": [
 		# 1980s+ Blade Runner - Film scoring, Vangelis influence
-		AudioSynthesizer.SoundType.CS80_BRASS_LEAD,          # Blade Runner brass
-		AudioSynthesizer.SoundType.CINEMATIC_432HZ_PAD,      # Deep cinematic pad
-		AudioSynthesizer.SoundType.JUPITER_8_STRINGS,        # Lush strings
-		AudioSynthesizer.SoundType.MELODIC_DRONE             # Tension drone
+		"CS80_BRASS_LEAD",          # Blade Runner brass
+		"CINEMATIC_432HZ_PAD",      # Deep cinematic pad
+		"JUPITER_8_STRINGS",        # Lush strings
+		"MELODIC_DRONE"             # Tension drone
 	],
 	"breakbeat": [
 		# 1990s - Syncopation, sampling culture, jungle/DnB
-		AudioSynthesizer.SoundType.DARK_808_KICK,        # Punchy kick
-		AudioSynthesizer.SoundType.TR909_KICK,           # Snare-like hit
-		AudioSynthesizer.SoundType.ACID_606_HIHAT,       # Fast hi-hats
-		AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER  # Chopped samples
+		"DARK_808_KICK",        # Punchy kick
+		"TR909_KICK",           # Snare-like hit
+		"ACID_606_HIHAT",       # Fast hi-hats
+		"FLYING_LOTUS_SAMPLER"  # Chopped samples
 	],
 	"cosmic": [
 		# 1970s-80s Space disco - Jean-Michel Jarre, Tangerine Dream
-		AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX,   # Cosmic percussion FX
-		AudioSynthesizer.SoundType.ARP_2600_LEAD,        # Classic ARP lead
-		AudioSynthesizer.SoundType.TELEPORT_DRONE,       # Space drone
-		AudioSynthesizer.SoundType.PPG_WAVE_PAD          # Wavetable pad
+		"SYNARE_3_COSMIC_FX",   # Cosmic percussion FX
+		"ARP_2600_LEAD",        # Classic ARP lead
+		"TELEPORT_DRONE",       # Space drone
+		"PPG_WAVE_PAD"          # Wavetable pad
 	],
 	"lo_fi": [
 		# 2010s+ - Nostalgia, imperfection as aesthetic
-		AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO,   # Warm FM piano
-		AudioSynthesizer.SoundType.DARK_808_KICK,        # Mellow kick
-		AudioSynthesizer.SoundType.AMBIENT_WIND,         # Vinyl crackle feel
-		AudioSynthesizer.SoundType.POP_JUNO_CHORUS_PAD   # Warm pad
+		"DX7_ELECTRIC_PIANO",   # Warm FM piano
+		"DARK_808_KICK",        # Mellow kick
+		"AMBIENT_WIND",         # Vinyl crackle feel
+		"POP_JUNO_CHORUS_PAD"   # Warm pad
 	]
 }
 
@@ -296,15 +299,22 @@ func _process(delta: float) -> void:
 		_advance_playhead()
 
 
+func _resolve_sound_type(sound_name: String) -> int:
+	if sound_name in AudioSynthesizer.SoundType:
+		return AudioSynthesizer.SoundType[sound_name]
+	return AudioSynthesizer.SoundType.BASIC_SINE_WAVE
+
+
 func _load_sound_preset(preset_name: String) -> void:
-	if preset_name in SOUND_PRESETS:
-		_track_sounds = SOUND_PRESETS[preset_name].duplicate()
-	else:
-		_track_sounds = SOUND_PRESETS["808_kit"].duplicate()
+	var preset_sound_names: Array = SOUND_PRESETS.get(preset_name, SOUND_PRESETS["808_kit"])
+	_track_sounds.clear()
+
+	for sound_name in preset_sound_names:
+		_track_sounds.append(_resolve_sound_type(str(sound_name)))
 
 	# Pad if needed
 	while _track_sounds.size() < num_tracks:
-		_track_sounds.append(_track_sounds[0] if _track_sounds.size() > 0 else AudioSynthesizer.SoundType.BASIC_SINE_WAVE)
+		_track_sounds.append(_track_sounds[0] if _track_sounds.size() > 0 else _resolve_sound_type("BASIC_SINE_WAVE"))
 
 
 func _create_audio_players() -> void:
