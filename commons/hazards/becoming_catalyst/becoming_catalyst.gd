@@ -408,8 +408,9 @@ func _absorb_into_hand() -> void:
 	var ctrl := controller
 
 	# Release from FunctionPickup so the hand is free to grab other things
-	if is_picked_up():
-		let_go(Vector3.ZERO, Vector3.ZERO)
+	var holder = get_picked_up_by()
+	if holder and is_picked_up():
+		let_go(holder, Vector3.ZERO, Vector3.ZERO)
 
 	# Restore state that _on_dropped cleared
 	controller = ctrl
