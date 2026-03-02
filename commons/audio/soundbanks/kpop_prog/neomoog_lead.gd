@@ -30,8 +30,8 @@ static func generate(t: float, freq: float, note_duration: float = 0.35, note_ti
 	var saw = phase * 2.0 - 1.0
 	var tri = 4.0 * absf(phase - 0.5) - 1.0
 	var bite = sin(TAU * f * 2.0 * t) * 0.2
-	var signal = tanh((saw * 0.62 + tri * 0.38 + bite) * 1.15)
-	return clampf(signal * env * LEVEL, -1.0, 1.0)
+	var sig = tanh((saw * 0.62 + tri * 0.38 + bite) * 1.15)
+	return clampf(sig * env * LEVEL, -1.0, 1.0)
 
 
 static func generate_sample(t: float, freq: float) -> float:
