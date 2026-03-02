@@ -1,0 +1,138 @@
+{
+  "page": "pattern_maker",
+  "version": 1,
+  "pattern_name": "Hex Rosette",
+  "domain": {
+    "size": 12,
+    "group": "P6M"
+  },
+  "panels": [
+    {
+      "id": "motif_library",
+      "role": "left",
+      "width_m": 0.35,
+      "height_m": 0.65,
+      "viewport_px": [256, 600],
+      "elements": [
+        {
+          "id": "period_selector",
+          "type": "dropdown",
+          "rect": [0, 0, 256, 40],
+          "metadata": { "data_path": "periodId" }
+        },
+        {
+          "id": "site_buttons",
+          "type": "button_group",
+          "rect": [0, 48, 256, 100],
+          "metadata": { "data_path": "siteId" }
+        },
+        {
+          "id": "motif_thumbnails",
+          "type": "thumbnail_grid",
+          "rect": [0, 156, 256, 444],
+          "metadata": { "data_path": "motifs" }
+        }
+      ]
+    },
+    {
+      "id": "pattern_editor",
+      "role": "center",
+      "width_m": 0.65,
+      "height_m": 0.65,
+      "viewport_px": [520, 640],
+      "elements": [
+        {
+          "id": "domain_editor",
+          "type": "color_grid",
+          "rect": [16, 16, 488, 488],
+          "overlay_3d": "mosaic_board",
+          "metadata": {
+            "rows": 12,
+            "cols": 12,
+            "cell_px": 40,
+            "palette_colors": [
+              "#f7f1e3", "#2c3e50", "#c0392b", "#27ae60",
+              "#2980b9", "#f39c12", "#8e44ad", "#e74c3c"
+            ],
+            "click_mode": "paint",
+            "data_path": "domain"
+          }
+        },
+        {
+          "id": "tiled_preview",
+          "type": "color_grid",
+          "rect": [16, 520, 488, 104],
+          "overlay_3d": "mosaic_floor",
+          "metadata": {
+            "rows": 12,
+            "cols": 48,
+            "cell_px": 4,
+            "palette_colors": [
+              "#f7f1e3", "#2c3e50", "#c0392b", "#27ae60",
+              "#2980b9", "#f39c12", "#8e44ad", "#e74c3c"
+            ],
+            "wallpaper_group": "P6M",
+            "read_only": true,
+            "data_path": "expandedGrid"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pattern_properties",
+      "role": "right",
+      "width_m": 0.40,
+      "height_m": 0.65,
+      "viewport_px": [288, 600],
+      "elements": [
+        {
+          "id": "group_selector",
+          "type": "button_grid",
+          "rect": [0, 0, 288, 220],
+          "metadata": {
+            "data_path": "group",
+            "current_group": "P6M"
+          }
+        },
+        {
+          "id": "domain_size_selector",
+          "type": "button_group",
+          "rect": [0, 228, 288, 40],
+          "metadata": {
+            "data_path": "domain.size",
+            "options": [2, 4, 6, 8, 12, 16]
+          }
+        },
+        {
+          "id": "zone_selector",
+          "type": "dropdown",
+          "rect": [0, 276, 288, 36],
+          "metadata": {
+            "data_path": "zone",
+            "current_zone": "field"
+          }
+        },
+        {
+          "id": "operations_bar",
+          "type": "button_group",
+          "rect": [0, 320, 288, 80],
+          "metadata": {
+            "actions": [
+              "mirror_x", "mirror_y",
+              "rotate_cw", "rotate_ccw",
+              "invert", "clear"
+            ]
+          }
+        },
+        {
+          "id": "export_bar",
+          "type": "button_group",
+          "rect": [0, 408, 288, 80],
+          "metadata": {
+            "actions": ["export_json", "export_png", "copy_array"]
+          }
+        }
+      ]
+    }
+  ]
+}

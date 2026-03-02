@@ -1,0 +1,31 @@
+{
+	"_comment": "Panel Bridge — 2D-in-3D VR panel system for loom simulator and pattern maker.",
+	"artifacts": {
+		"panel_bridge_loom": {
+			"name": "Panel Bridge — Loom Simulator",
+			"lookup_name": "panel_bridge_loom",
+			"description": "Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.",
+			"scene": "res://commons/ui/panel_bridge/test_panel_bridge.tscn",
+			"category": "textile",
+			"artifact_type": "interactive_tool",
+			"tags": [
+				"panel_bridge",
+				"loom",
+				"weaving",
+				"draft",
+				"threading",
+				"tieup",
+				"treadling",
+				"drawdown",
+				"2d_in_3d",
+				"vr_panel"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			]
+		}
+	}
+}
