@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://catalyst_scene01"]
+[gd_scene load_steps=3 format=3 uid="uid://catalyst_scene01"]
 
-[ext_resource type="Script" path="res://commons/hazards/becoming_catalyst/becoming_catalyst.gd" id="1_catalyst"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/hazards/becoming_catalyst/becoming_catalyst.gd" id="2_script"]
 
-[node name="BecomingCatalyst" type="RigidBody3D"]
+[node name="BecomingCatalyst" instance=ExtResource("1_base")]
 collision_layer = 4
-collision_mask = 1
+collision_mask = 196615
 freeze_mode = 1
-script = ExtResource("1_catalyst")
+script = ExtResource("2_script")

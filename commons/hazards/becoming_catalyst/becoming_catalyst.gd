@@ -46,6 +46,9 @@ var _mode_label: Label3D = null
 var _mode_label_timer: float = 0.0
 var _collision_shape: CollisionShape3D = null
 
+# Held glow
+var _held_glow: OmniLight3D = null
+
 # ── Signals ───────────────────────────────────────────────────────────────
 signal mode_changed(mode_id: String)
 signal mode_unlocked(mode_id: String)
@@ -70,6 +73,15 @@ func _ready() -> void:
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 
+	# Glow light (visible only when held)
+	_held_glow = OmniLight3D.new()
+	_held_glow.name = "HeldGlow"
+	_held_glow.light_color = Color(0.7, 0.7, 1.0)
+	_held_glow.light_energy = 0.0
+	_held_glow.omni_range = 0.8
+	_held_glow.omni_attenuation = 2.0
+	add_child(_held_glow)
+
 	# Build initial visual
 	_rebuild_visual()
 
@@ -88,6 +100,11 @@ func _physics_process(delta: float) -> void:
 		if _mode_label_timer <= 0.0 and _mode_label:
 			_mode_label.visible = false
 
+	# Held glow pulse
+	if is_held and _held_glow:
+		var pulse := 1.0 + sin(Time.get_ticks_msec() / 300.0) * 0.3
+		_held_glow.light_energy = pulse
+
 	# Mode switching (only when held)
 	if is_held:
 		_check_mode_switch()
@@ -98,15 +115,18 @@ func _physics_process(delta: float) -> void:
 
 ## Called by XRToolsFunctionPickup when the trigger is pressed.
 func action() -> void:
+	print("[Catalyst] action() called — is_held=%s mode=%s cooldown=%.2f" % [is_held, unlocked_modes[current_mode_index] if current_mode_index < unlocked_modes.size() else "?", fire_cooldown])
 	super()  # emits action_pressed
 	_fire()
 
 func _fire() -> void:
 	if fire_cooldown > 0.0:
+		print("[Catalyst] _fire() blocked by cooldown: %.2f" % fire_cooldown)
 		return
 
 	var mode_def := _get_current_mode_def()
 	if mode_def.is_empty():
+		print("[Catalyst] _fire() failed — no mode_def for index %d" % current_mode_index)
 		return
 
 	var spawn_pos := _tip.global_position if _tip else global_position
@@ -120,6 +140,7 @@ func _fire() -> void:
 
 	var projectile: CatalystProjectile = mode_script.create_projectile(spawn_pos, direction)
 	if projectile == null:
+		print("[Catalyst] _fire() failed — create_projectile returned null")
 		return
 
 	# Add to scene tree (top-level, not child of catalyst)
@@ -130,6 +151,7 @@ func _fire() -> void:
 	fire_cooldown = mode_script.FIRE_RATE if "FIRE_RATE" in mode_script else 0.4
 
 	projectile_fired.emit(mode_def["id"], spawn_pos)
+	print("[Catalyst] FIRED %s at %s" % [mode_def["id"], spawn_pos])
 
 	# Haptic feedback
 	if controller:
@@ -197,7 +219,7 @@ func _get_current_mode_def() -> Dictionary:
 func _connect_progression_signals() -> void:
 	# Try LabManager first (has is_sequence_completed)
 	var lab_mgr := _find_lab_manager()
-	if lab_mgr:
+	if lab_mgr and lab_mgr.has_method("is_sequence_completed"):
 		# Check already-completed sequences
 		for mode_def in MODE_DEFS:
 			if lab_mgr.is_sequence_completed(mode_def["sequence"]):
@@ -307,17 +329,22 @@ func _setup_physics() -> void:
 	linear_damp = 1.0
 	angular_damp = 2.0
 
-	_collision_shape = CollisionShape3D.new()
-	_collision_shape.name = "CatalystCollision"
-	var capsule := CapsuleShape3D.new()
-	capsule.radius = 0.06
-	capsule.height = 0.22
-	_collision_shape.shape = capsule
-	add_child(_collision_shape)
-
-	# Layer 3 (pickable) for XR Tools FunctionPickup
-	collision_layer = 0b0000_0000_0000_0000_0000_0000_0000_0100
-	collision_mask = 1  # Collide with world
+	# Configure the CollisionShape3D inherited from pickable.tscn
+	_collision_shape = get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if _collision_shape:
+		var capsule := CapsuleShape3D.new()
+		capsule.radius = 0.06
+		capsule.height = 0.22
+		_collision_shape.shape = capsule
+	else:
+		# Fallback: create one if not instanced from pickable.tscn
+		_collision_shape = CollisionShape3D.new()
+		_collision_shape.name = "CollisionShape3D"
+		var capsule := CapsuleShape3D.new()
+		capsule.radius = 0.06
+		capsule.height = 0.22
+		_collision_shape.shape = capsule
+		add_child(_collision_shape)
 
 func _build_tip() -> void:
 	_tip = Marker3D.new()
@@ -351,13 +378,44 @@ func _on_picked_up(_pickable) -> void:
 			parent = parent.get_parent()
 		if parent is XRController3D:
 			controller = parent
+
+	# Activate held glow
+	if _held_glow:
+		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
+		_held_glow.light_color = mode_color
+		_held_glow.light_energy = 1.0
+
+	# Boost crystal emission
+	var crystal := get_node_or_null("CrystalCore") as MeshInstance3D
+	if crystal and crystal.material_override:
+		var mat := crystal.material_override as StandardMaterial3D
+		if mat:
+			mat.emission_energy_multiplier = 3.0
+
 	# Show current mode briefly
 	_show_mode_label()
-	print("[Catalyst] Picked up — mode: %s" % unlocked_modes[current_mode_index])
+
+	# Haptic bump on pickup
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.2, 0.0)
+
+	print("[Catalyst] Picked up — mode: %s controller: %s" % [unlocked_modes[current_mode_index], controller.name if controller else "none"])
 
 func _on_dropped(_pickable) -> void:
 	is_held = false
 	controller = null
+
+	# Deactivate glow
+	if _held_glow:
+		_held_glow.light_energy = 0.0
+
+	# Dim crystal emission
+	var crystal := get_node_or_null("CrystalCore") as MeshInstance3D
+	if crystal and crystal.material_override:
+		var mat := crystal.material_override as StandardMaterial3D
+		if mat:
+			mat.emission_energy_multiplier = 1.2
+
 	if _mode_label:
 		_mode_label.visible = false
 	print("[Catalyst] Dropped")
