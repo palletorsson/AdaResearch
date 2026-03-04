@@ -600,6 +600,17 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"grid_editor_board": {
+			"name": "Grid Editor Board",
+			"lookup_name": "grid_editor_board",
+			"description": "Interactive grid layout editor — Godot VR mirror of the web grid-editor. Control Board subset with 34 elements across 9 categories, 4 presets (Mission Control, Server Rack, Comms Station). Place and arrange control panel components on a 24x14 grid.",
+			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board.tscn",
+			"category": "interactive",
+			"tags": ["grid_editor", "control_board", "layout", "interactive", "black_mesa"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
