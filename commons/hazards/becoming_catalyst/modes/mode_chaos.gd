@@ -12,6 +12,8 @@ const SEQUENCE := "randomness"
 
 static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
+	# set_script() FIRST — it reinitializes all variables
+	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd"))
 	proj.speed = 12.0
 	proj.lifetime = 3.5
 	proj.projectile_scale = 0.8
@@ -23,6 +25,4 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	random_dir = random_dir.rotated(Vector3.UP, randf_range(-0.4, 0.4))
 	random_dir = random_dir.rotated(Vector3.RIGHT, randf_range(-0.4, 0.4))
 	proj.direction = random_dir
-	proj.global_position = pos
-	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd"))
 	return proj

@@ -34,11 +34,12 @@ var fire_cooldown: float = 0.0
 var is_held: bool = false
 var _absorbed: bool = false
 var controller: XRController3D = null
+var _pickup_controller_name: String = ""  # Remember which controller picked us up
 
 # Mode switching debounce
 var _stick_debounce: float = 0.0
 const STICK_THRESHOLD := 0.7
-const STICK_COOLDOWN := 0.3
+const STICK_COOLDOWN := 0.8
 
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
@@ -106,9 +107,7 @@ func _physics_process(delta: float) -> void:
 		var pulse := 1.5 + sin(Time.get_ticks_msec() / 400.0) * 0.5
 		_held_glow.light_energy = pulse
 
-	# Mode switching (only when held)
-	if is_held:
-		_check_mode_switch()
+	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
 # ═════════════════════════════════════════════════════════════════════════
 # FIRING
@@ -194,11 +193,32 @@ func _switch_mode(direction: int) -> void:
 	_show_mode_label()
 	mode_changed.emit(mode_id)
 
+	# Keep bracelet in sync with thumbstick switching
+	var cap_mgr = get_node_or_null("/root/CatalystCapabilityManager")
+	if cap_mgr and cap_mgr.has_method("get_bracelet"):
+		var bracelet = cap_mgr.get_bracelet()
+		if bracelet and bracelet.has_method("sync_to_mode"):
+			bracelet.sync_to_mode(current_mode_index)
+
 	# Haptic tick
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
 
 	print("[Catalyst] Switched to mode: %s" % mode_id)
+
+## Set mode by absolute index (called by capacity bracelet).
+func set_mode_index(index: int) -> void:
+	if index < 0 or index >= unlocked_modes.size() or index == current_mode_index:
+		return
+	current_mode_index = index
+	var mode_id := unlocked_modes[current_mode_index]
+	_show_mode_label()
+	_rebuild_visual()
+	mode_changed.emit(mode_id)
+	# Don't call bracelet.sync_to_mode here — the bracelet initiated this change
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
+	print("[Catalyst] Set mode to: %s" % mode_id)
 
 func _show_mode_label() -> void:
 	if not _mode_label:
@@ -377,16 +397,15 @@ func _build_mode_label() -> void:
 func _on_picked_up(_pickable) -> void:
 	is_held = true
 
-	# Find controller
-	var pickup_node = get_picked_up_by()
-	if pickup_node:
-		var parent = pickup_node.get_parent()
-		while parent and not parent is XRController3D:
-			parent = parent.get_parent()
-		if parent is XRController3D:
-			controller = parent
-			if not controller.button_pressed.is_connected(_on_controller_button):
-				controller.button_pressed.connect(_on_controller_button)
+	# Find controller — walk up from the holder node
+	controller = _find_xr_controller()
+	if controller:
+		_pickup_controller_name = controller.name
+		print("[Catalyst] Picked up — controller: '%s' (path: %s)" % [controller.name, controller.get_path()])
+		if not controller.button_pressed.is_connected(_on_controller_button):
+			controller.button_pressed.connect(_on_controller_button)
+	else:
+		print("[Catalyst] WARNING: Could not find XRController3D in pickup hierarchy")
 
 	# Shrink into hand, then absorb permanently
 	if _pickup_tween and _pickup_tween.is_running():
@@ -403,6 +422,30 @@ func _on_picked_up(_pickable) -> void:
 ## Crystal is consumed — reparent to controller, release FunctionPickup hold.
 func _absorb_into_hand() -> void:
 	_absorbed = true
+
+	# If controller reference was lost, try to recover — prefer the SAME hand
+	if not is_instance_valid(controller):
+		print("[Catalyst] Controller lost since pickup, recovering...")
+		# Method A: Walk up from current holder (most reliable)
+		var holder = get_picked_up_by()
+		if holder:
+			var node = holder
+			while node:
+				if node is XRController3D:
+					controller = node
+					print("[Catalyst] Recovered controller from holder chain: '%s'" % controller.name)
+					break
+				node = node.get_parent()
+		# Method B: Find controller by saved name
+		if not is_instance_valid(controller) and not _pickup_controller_name.is_empty():
+			controller = _find_controller_by_name(_pickup_controller_name)
+			if controller:
+				print("[Catalyst] Recovered controller by saved name: '%s'" % controller.name)
+		# Method C: General fallback
+		if not is_instance_valid(controller):
+			controller = _find_xr_controller()
+			if controller:
+				print("[Catalyst] Fallback controller: '%s'" % controller.name)
 
 	# Remember controller before let_go triggers _on_dropped
 	var ctrl := controller
@@ -438,13 +481,24 @@ func _absorb_into_hand() -> void:
 
 func _deferred_reparent() -> void:
 	if not is_instance_valid(controller):
+		print("[Catalyst] _deferred_reparent: controller INVALID, aborting")
 		return
+	print("[Catalyst] _deferred_reparent: reparenting to controller '%s' (path: %s, global_pos: %s)" % [
+		controller.name, controller.get_path(), controller.global_position])
 	var old_parent := get_parent()
 	if old_parent:
 		old_parent.remove_child(self)
 	controller.add_child(self)
 	position = Vector3.ZERO
 	scale = Vector3(0.01, 0.01, 0.01)
+
+	# Notify the capability manager to spawn the bracelet on this controller
+	var cap_mgr = get_node_or_null("/root/CatalystCapabilityManager")
+	if cap_mgr and cap_mgr.has_method("spawn_bracelet_on_controller"):
+		print("[Catalyst] Requesting bracelet spawn on controller '%s'" % controller.name)
+		cap_mgr.spawn_bracelet_on_controller(controller)
+	else:
+		print("[Catalyst] WARNING: CatalystCapabilityManager not found or missing spawn method")
 
 func _on_dropped(_pickable) -> void:
 	if _absorbed:
@@ -460,6 +514,61 @@ func _on_dropped(_pickable) -> void:
 		_held_glow.light_energy = 0.0
 	if _mode_label:
 		_mode_label.visible = false
+
+# ═════════════════════════════════════════════════════════════════════════
+# CONTROLLER FINDING
+# ═════════════════════════════════════════════════════════════════════════
+
+func _find_xr_controller() -> XRController3D:
+	# Method 1: Walk up from the holder (FunctionPickup → ... → XRController3D)
+	var pickup_node = get_picked_up_by()
+	if pickup_node:
+		var node = pickup_node
+		while node:
+			if node is XRController3D:
+				return node
+			node = node.get_parent()
+
+	# Method 2: Walk up from self (pickable may already be reparented under controller)
+	var node = get_parent()
+	while node:
+		if node is XRController3D:
+			return node
+		node = node.get_parent()
+
+	# Method 3: Search the scene tree for any XRController3D
+	for child in get_tree().root.get_children():
+		var found := _find_controller_recursive(child)
+		if found:
+			return found
+
+	return null
+
+func _find_controller_recursive(node: Node) -> XRController3D:
+	if node is XRController3D:
+		return node
+	for child in node.get_children():
+		var found := _find_controller_recursive(child)
+		if found:
+			return found
+	return null
+
+## Find a specific controller by name (recursive search).
+func _find_controller_by_name(ctrl_name: String) -> XRController3D:
+	for child in get_tree().root.get_children():
+		var found := _find_named_controller_recursive(child, ctrl_name)
+		if found:
+			return found
+	return null
+
+func _find_named_controller_recursive(node: Node, ctrl_name: String) -> XRController3D:
+	if node is XRController3D and node.name == ctrl_name:
+		return node
+	for child in node.get_children():
+		var found := _find_named_controller_recursive(child, ctrl_name)
+		if found:
+			return found
+	return null
 
 # ═════════════════════════════════════════════════════════════════════════
 # GRID INTEGRATION

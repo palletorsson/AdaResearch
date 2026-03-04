@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://u5otwm8ausv2"]
+
+[ext_resource type="Script" uid="uid://8s1loon71x10" path="res://commons/hazards/becoming_catalyst/capacity_bracelet/capacity_bracelet.gd" id="1"]
+
+[node name="CapacityBracelet" type="Node3D" unique_id=421348491]
+script = ExtResource("1")

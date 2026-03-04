@@ -12,6 +12,8 @@ const SEQUENCE := "color"
 
 static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
+	# set_script() FIRST — it reinitializes all variables
+	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd"))
 	proj.speed = 15.0
 	proj.lifetime = 3.5
 	proj.projectile_scale = 0.7
@@ -21,6 +23,4 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	proj.color_secondary = Color.from_hsv(fmod(hue + 0.15, 1.0), 0.7, 0.9)
 	proj.emission_energy = 2.2
 	proj.direction = dir
-	proj.global_position = pos
-	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd"))
 	return proj

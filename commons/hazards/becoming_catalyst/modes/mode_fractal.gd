@@ -11,6 +11,8 @@ const SEQUENCE := "fractals"
 
 static func create_projectile(pos: Vector3, dir: Vector3, depth: int = 0) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
+	# set_script() FIRST — it reinitializes all variables
+	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd"))
 	var scale_factor := pow(0.6, depth)
 	proj.speed = 11.0
 	proj.lifetime = 3.5
@@ -21,8 +23,5 @@ static func create_projectile(pos: Vector3, dir: Vector3, depth: int = 0) -> Cat
 	proj.color_secondary = Color.from_hsv(fmod(hue + 0.1, 1.0), 0.5, 0.8)
 	proj.emission_energy = 1.8
 	proj.direction = dir
-	proj.global_position = pos
-	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd"))
-	# Store depth for split logic
 	proj.set_meta("fractal_depth", depth)
 	return proj

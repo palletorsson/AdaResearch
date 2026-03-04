@@ -22,5 +22,6 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	proj.color_secondary = Color(0.6, 0.6, 0.65)
 	proj.emission_energy = 1.2
 	proj.direction = dir
-	proj.global_position = pos
+	# Don't set global_position here — node is not in tree yet.
+	# _fire() sets it after add_child().
 	return proj

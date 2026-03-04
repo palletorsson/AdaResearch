@@ -12,6 +12,8 @@ const SEQUENCE := "lsystems"
 
 static func create_projectile(pos: Vector3, dir: Vector3, depth: int = 0) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
+	# set_script() FIRST — it reinitializes all variables
+	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd"))
 	var scale_factor := pow(0.7, depth)
 	proj.speed = 10.0
 	proj.lifetime = 3.5
@@ -20,7 +22,5 @@ static func create_projectile(pos: Vector3, dir: Vector3, depth: int = 0) -> Cat
 	proj.color_secondary = Color(0.25, 0.5, 0.15)
 	proj.emission_energy = 1.2
 	proj.direction = dir
-	proj.global_position = pos
-	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd"))
 	proj.set_meta("branch_depth", depth)
 	return proj

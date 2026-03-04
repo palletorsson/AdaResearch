@@ -1,0 +1,102 @@
+{
+	"map_info": {
+		"name": "Bracelet Zoo — Catalyst Modes",
+		"lookup_name": "Bracelet_Zoo",
+		"description": "Exhibition of all 10 catalyst forms. Each crystal is themed to its sequence — pick one up to see its unique identity.",
+		"version": "1.1",
+		"format": "json",
+		"dimensions": {
+			"width": 15,
+			"depth": 11,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "exhibition",
+			"category": "hazards",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"See each catalyst's unique themed visual identity",
+				"Test the Capacity Bracelet with different modes",
+				"Observe how each sequence produces a different crystal form"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+		],
+		"utilities": [
+			["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		],
+		"interactables": [
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			["tt:row_early:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," ","becoming_catalyst"," ","becoming_catalyst#start_mode:transformation"," ","becoming_catalyst#start_mode:chromatic"," ","becoming_catalyst#start_mode:forces"," ","becoming_catalyst#start_mode:waveform"," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			["tt:row_advanced:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," ","becoming_catalyst#start_mode:chaos"," ","becoming_catalyst#start_mode:cellular"," ","becoming_catalyst#start_mode:fractal"," ","becoming_catalyst#start_mode:branching"," ","becoming_catalyst#start_mode:swarm"," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		]
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0.5, 1.8, 0.5],
+			"rotation": [0.0, 180.0, 0.0],
+			"description": "Entrance — facing the catalyst rows"
+		}
+	},
+	"tutorial_text": {
+		"row_early": {
+			"title": "EARLY ARC",
+			"text": "Primitives (octahedron), Transformation (twisted purple), Chromatic (prism), Forces (gold sphere), Waveform (teal torus)"
+		},
+		"row_advanced": {
+			"title": "ADVANCED ARC",
+			"text": "Chaos (fractured sparks), Cellular (dark cube), Fractal (recursive blue), Branching (green tree), Swarm (golden flock)"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.7, 0.7, 0.85],
+		"ambient_energy": 0.4,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [1.0, 0.98, 0.95],
+			"energy": 0.8
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.08, 0.1, 0.18]
+		}
+	}
+}

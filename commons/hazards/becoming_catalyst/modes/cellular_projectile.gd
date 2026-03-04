@@ -1,6 +1,6 @@
 # CellularProjectile.gd
-# Fires a 3×3 grid of tiny cubes.  Alive cells collide, dead cells pass through.
-# Pattern determined by a CA rule (Rule 30 / random rule per shot).
+# A flying cube that reveals a 3×3 CA grid pattern on its faces.
+# Alive cells glow, dead cells are dark voids. The cube IS the automaton.
 extends CatalystProjectile
 
 const GRID_SIZE := 3
@@ -13,6 +13,23 @@ func _build_visual() -> void:
 	# Generate alive/dead pattern from a CA rule
 	_alive_cells = _generate_pattern()
 
+	# Main cube body — dark metallic frame
+	_mesh_instance = MeshInstance3D.new()
+	var box := BoxMesh.new()
+	var cube_size := 0.18 * projectile_scale
+	box.size = Vector3.ONE * cube_size
+	_mesh_instance.mesh = box
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.12, 0.12, 0.18)
+	frame_mat.emission_enabled = true
+	frame_mat.emission = color_secondary
+	frame_mat.emission_energy_multiplier = 0.3
+	frame_mat.metallic = 0.8
+	frame_mat.roughness = 0.15
+	_mesh_instance.material_override = frame_mat
+	add_child(_mesh_instance)
+
+	# Overlay alive cells as glowing cubelets on the front face
 	var forward := direction.normalized()
 	var right: Vector3
 	var up: Vector3
@@ -22,15 +39,18 @@ func _build_visual() -> void:
 		right = forward.cross(Vector3.RIGHT).normalized()
 	up = right.cross(forward).normalized()
 
+	var cell_size := cube_size * 0.28
+	var spacing := cube_size * 0.32
+
 	for row in GRID_SIZE:
 		for col in GRID_SIZE:
 			var idx := row * GRID_SIZE + col
 			var alive := _alive_cells[idx]
 
 			var cell := MeshInstance3D.new()
-			var box := BoxMesh.new()
-			box.size = Vector3.ONE * 0.035 * projectile_scale
-			cell.mesh = box
+			var cell_box := BoxMesh.new()
+			cell_box.size = Vector3.ONE * cell_size
+			cell.mesh = cell_box
 
 			var mat := StandardMaterial3D.new()
 			if alive:
@@ -39,47 +59,37 @@ func _build_visual() -> void:
 				mat.emission = color_primary
 				mat.emission_energy_multiplier = emission_energy
 			else:
-				mat.albedo_color = Color(0.3, 0.3, 0.4, 0.15)
-				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			mat.metallic = 0.1
-			mat.roughness = 0.5
+				mat.albedo_color = Color(0.05, 0.05, 0.08)
+				mat.emission_enabled = true
+				mat.emission = Color(0.1, 0.1, 0.15)
+				mat.emission_energy_multiplier = 0.2
+			mat.metallic = 0.3
+			mat.roughness = 0.4
 			cell.material_override = mat
 
-			# Position in grid
-			var offset_r := (col - 1) * CELL_SPACING * projectile_scale
-			var offset_u := (row - 1) * CELL_SPACING * projectile_scale
-			cell.position = right * offset_r + up * offset_u
+			# Position on front face of the cube
+			var offset_r := (col - 1) * spacing
+			var offset_u := (row - 1) * spacing
+			cell.position = right * offset_r + up * offset_u + forward * (cube_size * 0.52)
 			add_child(cell)
 			_cell_meshes.append(cell)
 
 func _build_collision() -> void:
-	# Only alive cells get collision
-	var forward := direction.normalized()
-	var right: Vector3
-	var up: Vector3
-	if abs(forward.dot(Vector3.UP)) < 0.99:
-		right = forward.cross(Vector3.UP).normalized()
-	else:
-		right = forward.cross(Vector3.RIGHT).normalized()
-	up = right.cross(forward).normalized()
+	_collision_shape = CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3.ONE * 0.2 * projectile_scale
+	_collision_shape.shape = box
+	add_child(_collision_shape)
 
-	for row in GRID_SIZE:
-		for col in GRID_SIZE:
-			var idx := row * GRID_SIZE + col
-			if not _alive_cells[idx]:
-				continue
-			var shape := CollisionShape3D.new()
-			var box := BoxShape3D.new()
-			box.size = Vector3.ONE * 0.04 * projectile_scale
-			shape.shape = box
-			var offset_r := (col - 1) * CELL_SPACING * projectile_scale
-			var offset_u := (row - 1) * CELL_SPACING * projectile_scale
-			shape.position = right * offset_r + up * offset_u
-			add_child(shape)
-
-func _update_trajectory(_delta: float) -> void:
-	# Keep grid formation — no extra movement
-	pass
+func _update_trajectory(delta: float) -> void:
+	# Slow deliberate rotation — the cube tumbles as it flies
+	if _mesh_instance:
+		_mesh_instance.rotate_y(delta * 1.5)
+		_mesh_instance.rotate_x(delta * 0.8)
+	# Rotate cell overlay with the cube
+	for cell in _cell_meshes:
+		cell.rotate_y(delta * 1.5)
+		cell.rotate_x(delta * 0.8)
 
 func _generate_pattern() -> Array[bool]:
 	# Use Rule 30 (or random rule) to generate a 3×3 pattern

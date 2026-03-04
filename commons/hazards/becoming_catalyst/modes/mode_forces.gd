@@ -12,6 +12,8 @@ const SEQUENCE := "forces"
 
 static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
+	# set_script() FIRST — it reinitializes all variables
+	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd"))
 	proj.speed = 10.0
 	proj.lifetime = 5.0
 	proj.projectile_scale = 1.3
@@ -19,6 +21,4 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	proj.color_secondary = Color(0.9, 0.5, 0.15)
 	proj.emission_energy = 1.6
 	proj.direction = dir
-	proj.global_position = pos
-	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd"))
 	return proj
