@@ -13,6 +13,7 @@ var _has_branched: bool = false
 var _trail_mesh: MeshInstance3D = null
 var _trail_im: ImmediateMesh = null
 var _prev_pos: Vector3 = Vector3.ZERO
+var _trail_points: PackedVector3Array = PackedVector3Array()
 
 func _build_visual() -> void:
 	_mesh_instance = MeshInstance3D.new()
@@ -54,16 +55,21 @@ func _update_trajectory(delta: float) -> void:
 	if has_hit:
 		return
 
-	# Draw trail line segment
+	# Draw trail — rebuild single surface from accumulated points
 	if _trail_im and _prev_pos != Vector3.ZERO:
 		var current := global_position
 		if current.distance_to(_prev_pos) > 0.02:
-			_trail_im.surface_begin(Mesh.PRIMITIVE_LINES)
-			_trail_im.surface_set_color(color_primary)
-			_trail_im.surface_add_vertex(_prev_pos)
-			_trail_im.surface_add_vertex(current)
-			_trail_im.surface_end()
+			_trail_points.append(_prev_pos)
+			_trail_points.append(current)
 			_prev_pos = current
+			# Rebuild single surface with all segments
+			_trail_im.clear_surfaces()
+			if _trail_points.size() >= 2:
+				_trail_im.surface_begin(Mesh.PRIMITIVE_LINES)
+				_trail_im.surface_set_color(color_primary)
+				for pt in _trail_points:
+					_trail_im.surface_add_vertex(pt)
+				_trail_im.surface_end()
 
 	# Branch timer
 	_branch_timer += delta

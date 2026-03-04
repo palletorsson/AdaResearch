@@ -14,8 +14,8 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
 	# set_script() FIRST — it reinitializes all variables
 	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/swarm_projectile.gd"))
-	proj.speed = 12.0
-	proj.lifetime = 4.0
+	proj.speed = 4.0
+	proj.lifetime = 6.0
 	proj.projectile_scale = 1.0
 	proj.color_primary = Color(1.0, 0.85, 0.4)
 	proj.color_secondary = Color(0.9, 0.65, 0.2)

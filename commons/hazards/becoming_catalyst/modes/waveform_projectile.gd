@@ -3,8 +3,8 @@
 # Wave-particle duality as identity — always oscillating, never fixed.
 extends CatalystProjectile
 
-var _wave_freq: float = 8.0
-var _wave_amp: float = 0.4
+var _wave_freq: float = 6.0
+var _wave_amp: float = 0.6
 var _local_right: Vector3 = Vector3.RIGHT
 var _local_up: Vector3 = Vector3.UP
 var _mesh_strand_b: MeshInstance3D = null  # Second helix strand

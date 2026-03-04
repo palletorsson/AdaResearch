@@ -13,8 +13,8 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
 	# set_script() FIRST — it reinitializes all variables
 	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/waveform_projectile.gd"))
-	proj.speed = 13.0
-	proj.lifetime = 4.0
+	proj.speed = 8.0
+	proj.lifetime = 6.0
 	proj.projectile_scale = 0.85
 	proj.color_primary = Color(0.3, 0.85, 0.85)
 	proj.color_secondary = Color(0.2, 0.6, 0.8)

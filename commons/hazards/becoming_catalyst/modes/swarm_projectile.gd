@@ -4,11 +4,11 @@
 extends CatalystProjectile
 
 const BOID_COUNT := 8
-const SEPARATION_WEIGHT := 1.5
-const ALIGNMENT_WEIGHT := 1.0
-const COHESION_WEIGHT := 0.8
-const FORWARD_WEIGHT := 2.0
-const MAX_SPEED := 6.0
+const SEPARATION_WEIGHT := 1.2
+const ALIGNMENT_WEIGHT := 1.2
+const COHESION_WEIGHT := 1.8
+const FORWARD_WEIGHT := 0.6
+const MAX_SPEED := 3.5
 const BOID_RADIUS := 0.012
 
 # Boid state
@@ -53,7 +53,7 @@ func _build_visual() -> void:
 			randf_range(-0.03, 0.03),
 			randf_range(-0.05, 0.05)
 		)
-		_boid_velocities[i] = direction.normalized() * speed * randf_range(0.8, 1.2)
+		_boid_velocities[i] = direction.normalized() * speed * randf_range(0.3, 0.6)
 		_boid_alive[i] = true
 		_multimesh.set_instance_color(i, color_primary.lerp(color_secondary, randf()))
 

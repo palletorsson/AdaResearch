@@ -28,7 +28,7 @@
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
 			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","0","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
 			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
@@ -42,7 +42,7 @@
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
@@ -52,16 +52,26 @@
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			["tt:row_early:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," ","becoming_catalyst"," ","becoming_catalyst#start_mode:transformation"," ","becoming_catalyst#start_mode:chromatic"," ","becoming_catalyst#start_mode:forces"," ","becoming_catalyst#start_mode:waveform"," "," "," "," "],
+			[" "," ","becoming_catalyst"," ","becoming_catalyst#start_mode:transformation"," ","becoming_catalyst#start_mode:chromatic"," ","becoming_catalyst#start_mode:forces"," ","becoming_catalyst#start_mode:waveform"," ","catalyst_target"," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," ","catalyst_target#moving:true"," "],
 			["tt:row_advanced:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," ","becoming_catalyst#start_mode:chaos"," ","becoming_catalyst#start_mode:cellular"," ","becoming_catalyst#start_mode:fractal"," ","becoming_catalyst#start_mode:branching"," ","becoming_catalyst#start_mode:swarm"," "," "," "," "],
+			[" "," ","becoming_catalyst#start_mode:chaos"," ","becoming_catalyst#start_mode:cellular"," ","becoming_catalyst#start_mode:fractal"," ","becoming_catalyst#start_mode:branching"," ","becoming_catalyst#start_mode:swarm"," ","catalyst_target#orbit:true"," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
+	  "utility_definitions": {
+		"t": {
+		  "type": "teleporter",
+		  "name": "Next",
+		  "description": "Continue to next step",
+		  "properties": {
+			"action": "next_in_sequence"
+		  }
+		}
+  },
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 0.5],
