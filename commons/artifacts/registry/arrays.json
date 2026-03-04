@@ -589,6 +589,17 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"pattern_maker_station": {
+			"name": "Pattern Maker Station",
+			"lookup_name": "pattern_maker_station",
+			"description": "Interactive wallpaper group station — paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.",
+			"scene": "res://commons/artifacts/pattern_maker_station/pattern_maker_station.tscn",
+			"category": "interactive",
+			"tags": ["pattern", "wallpaper_group", "symmetry", "tiling", "carpet", "painting"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
