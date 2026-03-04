@@ -80,6 +80,7 @@ func _ready() -> void:
 	_build_controls()
 	_build_carpet()
 	_build_touch_area()
+	_build_capture_camera()
 	_update_carpet()
 	print("[PatternMaker] Built — %dx%d domain, group %s, carpet %.1fm" % [
 		tile_size, tile_size,
@@ -364,6 +365,16 @@ func _build_carpet() -> void:
 	_carpet_mesh.material_override = _carpet_material
 
 	add_child(_carpet_mesh)
+
+func _build_capture_camera() -> void:
+	# Built-in camera for screenshot capture — positioned to show
+	# both the upright panel and the floor carpet in one shot.
+	var cam := Camera3D.new()
+	cam.name = "CaptureCamera"
+	cam.fov = 60.0
+	cam.position = Vector3(0.3, 1.4, 4.2)
+	cam.look_at(Vector3(-0.1, 0.25, 0.6), Vector3.UP)
+	add_child(cam)
 
 func _build_touch_area() -> void:
 	_touch_area = Area3D.new()
