@@ -68,7 +68,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 #   Y = (grid_h - gy) * 0.1   (grid Y=0 is top row, Godot Y up)
 
 func _xy(x: float, y: float, z: float = 0.0) -> Vector3:
-	return Vector3(x, y, -z)
+	return Vector3(x, y, z)  # positive z = forward (in front of panel)
 
 # ══════════════════════════════════════════════════════════════════════
 #  BACK PLATE — flat XY panel, everything mounts on its front face
@@ -80,7 +80,7 @@ func _build_back_plate() -> void:
 	mesh.size = Vector3(panel_width, panel_height, panel_depth)
 	plate.mesh = mesh
 	plate.material_override = _mat(COL_PANEL, 0.3, 0.7)
-	plate.position = _xy(0, panel_height * 0.5, panel_depth * 0.5)
+	plate.position = _xy(0, panel_height * 0.5, -panel_depth * 0.5)
 	add_child(plate)
 
 	# Side trim rails
@@ -90,7 +90,7 @@ func _build_back_plate() -> void:
 		rm.size = Vector3(0.03, panel_height, panel_depth + 0.02)
 		rail.mesh = rm
 		rail.material_override = _mat(COL_BEZEL, 0.5, 0.5)
-		rail.position = _xy(side * panel_width * 0.5, panel_height * 0.5, panel_depth * 0.5)
+		rail.position = _xy(side * panel_width * 0.5, panel_height * 0.5, -panel_depth * 0.5)
 		add_child(rail)
 
 # ══════════════════════════════════════════════════════════════════════
@@ -270,7 +270,7 @@ func _add_knob(pos: Vector3, label_text: String, radius: float) -> void:
 	knob.mesh = km
 	knob.material_override = _mat(COL_KNOB, 0.5, 0.4)
 	knob.position = pos
-	knob.rotation_degrees.x = 90  # Cylinder faces -Z (toward viewer)
+	knob.rotation_degrees.x = -90  # Cylinder faces +Z (toward viewer)
 	add_child(knob)
 
 	# Pointer line on face
@@ -313,8 +313,8 @@ func _build_speaker() -> void:
 	cm.radial_segments = 24
 	cone.mesh = cm
 	cone.material_override = _mat(Color(0.15, 0.15, 0.15), 0.1, 0.6)
-	cone.position = housing.position + Vector3(0, 0, -0.04)
-	cone.rotation_degrees.x = -90  # Face forward (-Z)
+	cone.position = housing.position + Vector3(0, 0, 0.04)
+	cone.rotation_degrees.x = -90  # Face forward (+Z)
 	add_child(cone)
 
 	# Grille
@@ -328,7 +328,7 @@ func _build_speaker() -> void:
 	gmat.metallic = 0.6
 	gmat.roughness = 0.3
 	grille.material_override = gmat
-	grille.position = housing.position + Vector3(0, 0, -0.045)
+	grille.position = housing.position + Vector3(0, 0, 0.045)
 	add_child(grille)
 
 # ══════════════════════════════════════════════════════════════════════
