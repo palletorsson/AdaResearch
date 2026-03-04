@@ -611,6 +611,17 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"grid_editor_board_3d": {
+			"name": "Grid Editor Board (3D)",
+			"lookup_name": "grid_editor_board_3d",
+			"description": "3D interactive version of the grid editor board. Same layout data as the shadow board but with real 3D elements — CRT monitors with phosphor flicker, VU meters with bouncing needles, interactive push buttons, slider faders, rotary knobs, toggle switches, speakers, and blinking LEDs.",
+			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board_3d.tscn",
+			"category": "interactive",
+			"tags": ["grid_editor", "control_board", "3d", "interactive", "black_mesa"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }
