@@ -6,6 +6,28 @@
 		"theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
 	},
 	"artifacts": {
+		"control_board": {
+			"lookup_name": "control_board",
+			"scene": "res://commons/artifacts/control_board/control_board.tscn",
+			"class_name": "ControlBoard",
+			"name": "Control Board",
+			"description": "Black Mesa-style mission control console with interactive CRT monitors, VU meters, push buttons, toggle switches, faders, rotary knobs, speaker and LED indicators. Screens flicker with phosphor glow, needles bounce to simulated signal, LEDs blink with activity.",
+			"category": "laboratory",
+			"complexity": "advanced",
+			"tags": ["lab", "control-panel", "interactive", "vr", "monitors", "buttons", "retro"],
+			"interactions": ["press buttons to toggle LEDs", "move faders to drive VU meters", "observe animated CRT screens and blinking indicators"],
+			"signals": [],
+			"parameters": {
+				"desk_width": "Console width in meters (default 2.4)",
+				"desk_depth": "Console depth in meters (default 0.8)",
+				"desk_height": "Console height in meters (default 0.85)",
+				"panel_tilt": "Surface angle in degrees (default 25)"
+			},
+			"include_in_map_data": true,
+			"map_ready": true,
+			"dev_themes": ["environment", "immersion", "retro-tech"],
+			"dev_category": "furniture"
+		},
 		"pipettedispenser": {
 			"lookup_name": "pipettedispenser",
 			"scene": "res://commons/lab/pipettedispenser/pipettedispenser.tscn",
