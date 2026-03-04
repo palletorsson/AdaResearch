@@ -479,6 +479,43 @@ func _absorb_into_hand() -> void:
 		_held_glow.light_color = mode_color
 		_held_glow.light_energy = 1.5
 
+## Auto-absorb onto a controller without pickup animation.
+## Used by CatalystCapabilityManager to restore catalyst after scene transitions.
+func auto_absorb(ctrl: XRController3D) -> void:
+	_absorbed = true
+	is_held = true
+	controller = ctrl
+	_pickup_controller_name = ctrl.name
+
+	# Kill physics
+	freeze = true
+	collision_layer = 0
+	collision_mask = 0
+	if _collision_shape:
+		_collision_shape.disabled = true
+
+	# Connect trigger
+	if not controller.button_pressed.is_connected(_on_controller_button):
+		controller.button_pressed.connect(_on_controller_button)
+
+	# Reparent to controller — tiny and invisible
+	var old_parent := get_parent()
+	if old_parent:
+		old_parent.remove_child(self)
+	controller.add_child(self)
+	position = Vector3.ZERO
+	scale = Vector3(0.01, 0.01, 0.01)
+	visible = false  # Absorbed crystals are invisible
+
+	# Hand glow
+	if _held_glow and current_mode_index < unlocked_modes.size():
+		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
+		_held_glow.light_color = mode_color
+		_held_glow.light_energy = 1.5
+
+	print("[Catalyst] Auto-absorbed onto '%s' with %d modes: %s" % [
+		controller.name, unlocked_modes.size(), unlocked_modes])
+
 func _deferred_reparent() -> void:
 	if not is_instance_valid(controller):
 		print("[Catalyst] _deferred_reparent: controller INVALID, aborting")

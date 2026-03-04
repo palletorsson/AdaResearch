@@ -372,8 +372,39 @@ func _try_respawn_bracelet_on_controller(controller: Node) -> void:
 		print("[BraceletMgr] _try_respawn: wrong hand '%s' (want '%s'), skip" % [ctrl_id, _bracelet_tracker])
 		return
 
-	print("[BraceletMgr] _try_respawn: re-spawning bracelet on '%s'" % ctrl_id)
+	print("[BraceletMgr] _try_respawn: re-spawning catalyst + bracelet on '%s'" % ctrl_id)
+
+	# Respawn absorbed catalyst first (so bracelet can link to it)
+	_respawn_absorbed_catalyst(controller as XRController3D)
+
+	# Then respawn bracelet
 	spawn_bracelet_on_controller(controller as XRController3D)
+
+## Silently re-create an absorbed catalyst on the controller after scene transition.
+## The catalyst loads its saved modes and auto-absorbs without pickup animation.
+func _respawn_absorbed_catalyst(ctrl: XRController3D) -> void:
+	# Check if there's already a catalyst absorbed on this controller
+	var existing_catalysts = get_tree().get_nodes_in_group("catalyst")
+	for cat in existing_catalysts:
+		if cat.get_parent() == ctrl:
+			print("[BraceletMgr] Catalyst already on controller '%s', skip respawn" % ctrl.name)
+			return
+
+	var catalyst_scene = load("res://commons/hazards/becoming_catalyst/becoming_catalyst.tscn")
+	if catalyst_scene == null:
+		push_error("[BraceletMgr] FAILED to load becoming_catalyst.tscn")
+		return
+
+	# Add to scene tree first so _ready() fires and loads saved modes
+	var catalyst = catalyst_scene.instantiate()
+	get_tree().current_scene.add_child(catalyst)
+
+	# Auto-absorb onto the controller
+	if catalyst.has_method("auto_absorb"):
+		catalyst.auto_absorb(ctrl)
+		print("[BraceletMgr] Catalyst respawned and auto-absorbed on '%s'" % ctrl.name)
+	else:
+		push_error("[BraceletMgr] Catalyst missing auto_absorb() method")
 
 # ---------------------------------------------------------------------------
 # State rebuild
