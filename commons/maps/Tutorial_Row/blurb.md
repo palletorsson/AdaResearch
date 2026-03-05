@@ -1,0 +1,7 @@
+# Tutorial Row
+
+A corridor. Seven columns wide, nine rows deep. One lane runs forward through the center — the rest is buffer, orientation, context. Movement here is linear. Forward and back along a single axis.
+
+The `column_3_z` rig teaches traversal by constraining it. Walk the row. Read the `xyz_coordinates` marker at the far end. Notice how position is just a number that increments. The score cube and teleporter wait at row seven — the end of the line, the proof that you moved through ordered space.
+
+A row is the simplest structure that isn't a point. One dimension of freedom, everything else held fixed. Before arrays become grids, before grids become worlds, there is this: a sequence. Each step forward is an index. Each index is a known address. No searching, no branching — just the next element, and the next.
