@@ -1,0 +1,7 @@
+# Russell_Paradox
+
+A set collects things. The set of even numbers. The set of red objects. Most sets don't contain themselves — the set of even numbers is not itself an even number. Now: gather all sets that don't contain themselves into one set. Call it R. Does R contain itself?
+
+If R contains itself, then by definition it doesn't. If it doesn't, then by definition it does. The question has no stable answer. It oscillates — yes, no, yes, no — forever. In 1901, this two-line argument broke the foundations of mathematics. Frege's life work, collapsed by a postcard.
+
+Three concentric rings spiral inward toward a box at the center. Each ring contains the next. The innermost box contains the question that cannot settle. Containment itself becomes the contradiction. Every formal system draws a boundary — and the boundary is where the system meets what it cannot hold.
