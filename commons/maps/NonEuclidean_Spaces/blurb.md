@@ -1,0 +1,7 @@
+# Non-Euclidean Spaces
+
+Euclid's fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don't behave? Two answers emerged — one where parallels diverge without limit, one where they always meet.
+
+The bowl on the left is hyperbolic space. Negative curvature. The Poincaré disk maps infinity into a finite circle — geodesics curve away from each other, triangles sum to less than 180°. Cross the bridge. The dome on the right is elliptic space. Positive curvature. On the Riemann sphere, every pair of lines intersects. Triangles sum to more than 180°. Drag the curvature slider at the midpoint and watch one geometry dissolve into the other.
+
+Geometry was never discovered. It was chosen. The parallel postulate is independent of the other four — not wrong, not right, just one option among several. Flatness is a special case. The ground itself is a variable.

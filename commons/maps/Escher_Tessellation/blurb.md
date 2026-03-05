@@ -1,3 +1,7 @@
-# Escher_Tessellation
+# Escher Tessellation
 
-A scaffold map in `artmathematics`. Replace this with the poetic entry point for the concept.
+A tessellation covers the plane. No gaps, no overlaps — every edge shared, every vertex locked. Wallpaper mathematics. Escher took the constraint and bent it. His tiles aren't squares or hexagons. They're lizards, birds, fish — figures that interlock because their boundaries are each other. The shape that fills space is also the shape that becomes something else.
+
+One finite tile, repeated, generates infinity. The rule is local — how one edge meets its neighbor. The result is global — a plane that never ends. Transformation hides inside repetition. Symmetry operations — rotation, reflection, glide — do the work invisibly. The pattern breathes because the constraint is generative, not restrictive.
+
+Finite means produce infinite coverage. The smallest unit already contains the whole. Every boundary is a shared becoming.

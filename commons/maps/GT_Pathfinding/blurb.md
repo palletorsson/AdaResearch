@@ -1,3 +1,7 @@
-# GT_Pathfinding
+# Pathfinding Maze
 
-A scaffold map in `graphtheory`. Replace this with the poetic entry point for the concept.
+A maze is a graph wearing walls. Every corridor is an edge. Every junction is a node. Every dead end is a branch that promised something and lied.
+
+Walk the maze. Hit a wall. Backtrack. Try another branch. This is not failure — this is depth-first search performed by a body. The algorithm doesn't know the layout either. It gropes forward, remembers where it's been, retreats when stuck. Dijkstra, A*, BFS — different strategies for the same blindness. The only difference between you and the algorithm is that you feel the frustration of a dead end. The algorithm just pops the stack.
+
+At the center, something heavy waits. The shortest path exists whether or not you find it. Structure precedes discovery — the route was always there, encoded in the topology. You just had to fail enough branches to prove it.

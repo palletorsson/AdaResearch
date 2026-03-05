@@ -1,3 +1,7 @@
-# GT_Matching
+# Perfect Matching
 
-A scaffold map in `graphtheory`. Replace this with the poetic entry point for the concept.
+A matching pairs nodes — each node claimed by at most one edge. A perfect matching claims every node. No leftovers, no loose ends. The problem sounds simple: pair things optimally. But in general graphs, with odd cycles and tangled structure, greedy approaches fail. Edmonds solved it in 1965 with a move no one expected — he shrank odd cycles into single nodes, matched the reduced graph, then expanded them back. Blossoms. The algorithm treats obstruction as compression.
+
+The room mirrors itself. Left reflects right across a central ridge. Alcoves correspond. The architecture is the problem — find the pairs, close the symmetry. Edmonds' blossom algorithm navigates the space, contracting what resists into something tractable, then restoring it whole.
+
+Pairing is not reduction. It is the discovery that two things were always incomplete alone.
