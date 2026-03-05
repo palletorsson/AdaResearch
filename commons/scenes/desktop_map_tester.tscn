@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://desktop_tester_001"]
+[gd_scene format=3 uid="uid://cjcyy5lmx6q8d"]
 
-[ext_resource type="Script" path="res://commons/scenes/DesktopMapTester.gd" id="1_tester"]
-[ext_resource type="PackedScene" uid="uid://desktop_player_001" path="res://commons/scenes/desktop_player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://bjq05uufiacel" path="res://commons/scenes/DesktopMapTester.gd" id="1_tester"]
+[ext_resource type="PackedScene" uid="uid://b33u6sl8s1ook" path="res://commons/scenes/desktop_player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="3_grid"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="4_shader"]
-[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
-[ext_resource type="Script" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="8_lab_evolution"]
+[ext_resource type="Script" uid="uid://ccnvftjwyddwq" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
+[ext_resource type="Script" uid="uid://3fvf1c2sfs8g" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
+[ext_resource type="Script" uid="uid://bxaoja1oejlkh" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
+[ext_resource type="Script" uid="uid://du6pe4s2nfxnp" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="8_lab_evolution"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
@@ -40,52 +40,47 @@ shader = ExtResource("4_shader")
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(100, 100)
 
-[node name="DesktopMapTester" type="Node3D"]
+[node name="DesktopMapTester" type="Node3D" unique_id=1260083495]
 script = ExtResource("1_tester")
-start_sequence = "wavefunctions"
-start_map_index = 0
-auto_load_on_ready = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2121602924]
 environment = SubResource("Environment_1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=877702044]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="DesktopPlayer" parent="." groups=["player_body"] instance=ExtResource("2_player")]
+[node name="DesktopPlayer" parent="." unique_id=128389222 instance=ExtResource("2_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 use_gravity = false
 allow_jump = false
 
-[node name="GridSystem" parent="." instance=ExtResource("3_grid")]
+[node name="GridSystem" parent="." unique_id=2023279570 instance=ExtResource("3_grid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 flatten_post_lab_structure_walls = true
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=134110195]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("ShaderMaterial_1")
 mesh = SubResource("PlaneMesh_1")
 
-[node name="HelpLabel" type="Label3D" parent="."]
+[node name="HelpLabel" type="Label3D" parent="." unique_id=2137789315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -3)
-pixel_size = 0.005
 text = "DESKTOP MAP TESTER
 WASD: Move | Mouse: Look | Shift: Sprint | No Gravity Preview
 Page Down: Next Map | Page Up: Previous Map | Home: Reload Map
 M: Map Switcher Overlay | L: Layer Editor | P: Project Dashboard
 K: Lab Evolution Editor | ESC: Toggle Mouse Capture"
-font_size = 32
 outline_size = 8
 
-[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
+[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="." unique_id=1913231214]
 script = ExtResource("5_overlay")
 
-[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="." unique_id=1474595530]
 script = ExtResource("6_layer_editor")
 
-[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="." unique_id=106081334]
 script = ExtResource("7_dashboard")
 
-[node name="LabEvolutionEditor" type="CanvasLayer" parent="."]
+[node name="LabEvolutionEditor" type="CanvasLayer" parent="." unique_id=1476251519]
 script = ExtResource("8_lab_evolution")

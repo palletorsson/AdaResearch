@@ -12,7 +12,7 @@ extends XRToolsStaging
 @export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
-@export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray(["by_button", "b_button", "vr_button_b"])
+@export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray(["primary_click"])
 @export var spawn_map_loader_keyboard_key: Key = KEY_B
 @export var map_loader_spawn_distance: float = 1.8
 @export var map_loader_spawn_height: float = 1.6

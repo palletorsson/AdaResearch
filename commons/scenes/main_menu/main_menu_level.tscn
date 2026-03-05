@@ -267,7 +267,7 @@ tree_root = SubResource("AnimationNodeBlendTree_6pgur")
 [node name="MovementTurn" parent="XROrigin3D/RightHand" index="3" instance=ExtResource("5")]
 
 [node name="MovementJump" parent="XROrigin3D/RightHand" index="4" instance=ExtResource("6_jump")]
-jump_button_action = "ax_button"
+jump_button_action = "_disabled"
 
 [node name="ControlPadLocationRight" parent="XROrigin3D/RightHand" index="5" instance=ExtResource("12_pwgp0")]
 

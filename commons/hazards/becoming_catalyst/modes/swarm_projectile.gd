@@ -1,15 +1,17 @@
 # SwarmProjectile.gd
-# 8 tiny boid spheres that flock using separation/alignment/cohesion.
-# The swarm moves as one — collective intelligence, mutual aid.
+# 8 boid spheres that flock and independently seek nearby targets.
+# Collective intelligence — the swarm hunts together.
 extends CatalystProjectile
 
 const BOID_COUNT := 8
 const SEPARATION_WEIGHT := 1.2
-const ALIGNMENT_WEIGHT := 1.2
-const COHESION_WEIGHT := 1.8
-const FORWARD_WEIGHT := 0.6
-const MAX_SPEED := 3.5
-const BOID_RADIUS := 0.012
+const ALIGNMENT_WEIGHT := 0.8
+const COHESION_WEIGHT := 1.0
+const SEEK_WEIGHT := 3.0
+const FORWARD_WEIGHT := 0.4
+const MAX_SPEED := 4.0
+const BOID_RADIUS := 0.015
+const SEEK_RANGE := 8.0  # How far boids detect targets
 
 # Boid state
 var _boid_positions: Array[Vector3] = []
@@ -17,9 +19,10 @@ var _boid_velocities: Array[Vector3] = []
 var _boid_alive: Array[bool] = []
 var _multimesh_instance: MultiMeshInstance3D = null
 var _multimesh: MultiMesh = null
+var _target_cache: Array[Node3D] = []
+var _target_scan_timer: float = 0.0
 
 func _build_visual() -> void:
-	# No single mesh — we use MultiMesh for the swarm
 	_mesh_instance = null
 
 	_multimesh = MultiMesh.new()
@@ -58,15 +61,13 @@ func _build_visual() -> void:
 		_multimesh.set_instance_color(i, color_primary.lerp(color_secondary, randf()))
 
 func _build_collision() -> void:
-	# Single collision shape for the whole swarm center
 	_collision_shape = CollisionShape3D.new()
 	var shape := SphereShape3D.new()
-	shape.radius = 0.1
+	shape.radius = 0.15
 	_collision_shape.shape = shape
 	add_child(_collision_shape)
 
 func _apply_initial_velocity() -> void:
-	# Swarm manages its own movement — disable RigidBody velocity
 	gravity_scale = 0.0
 	linear_velocity = Vector3.ZERO
 	freeze = true
@@ -75,10 +76,15 @@ func _update_trajectory(delta: float) -> void:
 	if has_hit:
 		return
 
+	# Periodically scan for targets
+	_target_scan_timer -= delta
+	if _target_scan_timer <= 0.0:
+		_target_scan_timer = 0.5
+		_scan_targets()
+
 	var alive_count := 0
 	var center := Vector3.ZERO
 
-	# Calculate swarm center
 	for i in BOID_COUNT:
 		if _boid_alive[i]:
 			center += _boid_positions[i]
@@ -90,8 +96,8 @@ func _update_trajectory(delta: float) -> void:
 
 	center /= alive_count
 
-	# Move the node with the swarm
-	global_position += direction.normalized() * speed * delta * 0.5
+	# Move the node forward slowly
+	global_position += direction.normalized() * speed * delta * 0.3
 
 	# Update each boid
 	for i in BOID_COUNT:
@@ -100,8 +106,9 @@ func _update_trajectory(delta: float) -> void:
 
 		var pos_i := _boid_positions[i]
 		var vel_i := _boid_velocities[i]
+		var world_pos := global_position + pos_i
 
-		# Boid rules
+		# Classic boid rules
 		var separation := Vector3.ZERO
 		var alignment := Vector3.ZERO
 		var cohesion := center - pos_i
@@ -112,22 +119,37 @@ func _update_trajectory(delta: float) -> void:
 				continue
 			var diff := pos_i - _boid_positions[j]
 			var dist := diff.length()
-			if dist < 0.08 and dist > 0.001:
-				separation += diff / dist  # Push away from close neighbors
+			if dist < 0.1 and dist > 0.001:
+				separation += diff / dist
 			alignment += _boid_velocities[j]
 			neighbor_count += 1
 
 		if neighbor_count > 0:
 			alignment /= neighbor_count
 
-		# Forward drive
+		# Target seeking — find nearest target for this boid
+		var seek := Vector3.ZERO
+		var best_dist := SEEK_RANGE
+		for target in _target_cache:
+			if not is_instance_valid(target):
+				continue
+			var to_target := target.global_position - world_pos
+			var d := to_target.length()
+			if d < best_dist:
+				best_dist = d
+				seek = to_target.normalized()
+
+		# Forward drive (weaker when targets exist)
 		var forward_pull := direction.normalized() * FORWARD_WEIGHT
+		if seek.length_squared() > 0.01:
+			forward_pull *= 0.2  # Let seeking dominate
 
 		# Combine forces
 		var acceleration := (
 			separation.normalized() * SEPARATION_WEIGHT +
 			alignment.normalized() * ALIGNMENT_WEIGHT +
 			cohesion.normalized() * COHESION_WEIGHT +
+			seek * SEEK_WEIGHT +
 			forward_pull
 		)
 
@@ -137,21 +159,49 @@ func _update_trajectory(delta: float) -> void:
 		_boid_velocities[i] = vel_i
 		_boid_positions[i] += vel_i * delta
 
-		# Update MultiMesh transform
-		var t := Transform3D()
-		t.origin = _boid_positions[i]
-		_multimesh.set_instance_transform(i, t)
+		# Check if boid hit a target
+		if best_dist < 0.2:
+			for target in _target_cache:
+				if is_instance_valid(target) and world_pos.distance_to(target.global_position) < 0.3:
+					if target.has_method("hit_by_projectile"):
+						target.hit_by_projectile(color_primary)
+					_boid_alive[i] = false
+					_multimesh.set_instance_color(i, Color(0, 0, 0, 0))
+					var t := Transform3D()
+					t.origin = Vector3(0, -100, 0)
+					_multimesh.set_instance_transform(i, t)
+					break
+
+		if _boid_alive[i]:
+			var t := Transform3D()
+			t.origin = _boid_positions[i]
+			_multimesh.set_instance_transform(i, t)
+
+	# Check if any alive
+	if not _boid_alive.any(func(v): return v):
+		has_hit = true
+		_cleanup()
+
+func _scan_targets() -> void:
+	_target_cache.clear()
+	if not is_inside_tree():
+		return
+	var targets := get_tree().get_nodes_in_group("catalyst_target")
+	for t in targets:
+		if t is Node3D and is_instance_valid(t):
+			if t.global_position.distance_to(global_position) < SEEK_RANGE:
+				_target_cache.append(t)
 
 func _on_hit(body: Node3D) -> void:
 	projectile_hit.emit(body, global_position)
-	# Kill boids near the hit point
-	var hit_pos := global_position
+	if body.has_method("hit_by_projectile"):
+		body.hit_by_projectile(color_primary)
+	# Kill nearby boids on collision
 	for i in BOID_COUNT:
 		if _boid_alive[i]:
 			var world_pos := global_position + _boid_positions[i]
-			if world_pos.distance_to(hit_pos) < 0.15:
+			if world_pos.distance_to(global_position) < 0.2:
 				_boid_alive[i] = false
 				_multimesh.set_instance_color(i, Color(0, 0, 0, 0))
-	# Check if any alive
 	if not _boid_alive.any(func(v): return v):
 		has_hit = true

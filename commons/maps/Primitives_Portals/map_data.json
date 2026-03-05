@@ -15,14 +15,14 @@
 	  "difficulty": "beginner",
 	  "category": "tutorial",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [ "Toroidal forms", "Circular approximation", "Continuity vs discretization" ]
+	  "learning_objectives": [ "Toroidal forms", "Circular approximation", "Continuity vs discretization", "Zeno's paradox — limits as asymptotic approach" ]
 	}
   },
   "documentation": {
 	"summary": "Primitives_Portals - Toroidal Corridor",
 	"layout": "7x35 longitudinal spine with narrowing walkway toward southern exit.",
 	"objective": "Experience circular approximation through toroidal portals; discrete rings approaching continuity.",
-	"key_elements": [ "`combine_portals` rig at (3,4)", "Mid-corridor `dark_sphere` enclosure at (3,18)", "Teleporter `t` at (4,33)" ]
+	"key_elements": [ "`combine_portals` rig at (3,4)", "`achilles_tortoise` at (5,5) — animated Zeno's paradox", "Mid-corridor `dark_sphere` enclosure at (3,18)", "Teleporter `t` at (4,33)" ]
   },
   "layers": {
 	"structure": [
@@ -105,7 +105,7 @@
 	  [ " ", " ", " ", " ", " ", "capsule", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", " ", "combine_portals:0:-0.2", " ", " ", " " ],
-	  [ " ", " ", " ", "", " ", " ", " " ],
+	  [ " ", " ", " ", "", " ", "achilles_tortoise:0:1", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " " ],

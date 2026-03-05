@@ -1,100 +1,130 @@
 # WaveformProjectile.gd
-# Teal double helix — two torus rings spiraling around each other.
+# Continuous double helix — two glowing trails spiral around the forward axis.
 # Wave-particle duality as identity — always oscillating, never fixed.
 extends CatalystProjectile
 
-var _wave_freq: float = 6.0
-var _wave_amp: float = 0.6
+var _wave_freq: float = 5.0
+var _wave_amp: float = 0.12
 var _local_right: Vector3 = Vector3.RIGHT
 var _local_up: Vector3 = Vector3.UP
-var _mesh_strand_b: MeshInstance3D = null  # Second helix strand
+
+# Helix trail rendering
+var _trail_a_im: ImmediateMesh
+var _trail_b_im: ImmediateMesh
+var _trail_a_mesh: MeshInstance3D
+var _trail_b_mesh: MeshInstance3D
+var _trail_a_points: PackedVector3Array = PackedVector3Array()
+var _trail_b_points: PackedVector3Array = PackedVector3Array()
+var _strand_b_node: MeshInstance3D
+const MAX_TRAIL_POINTS := 200
 
 func _build_visual() -> void:
-	# Strand A — primary color
+	# Strand A core
 	_mesh_instance = MeshInstance3D.new()
-	var torus_a := TorusMesh.new()
-	torus_a.inner_radius = 0.02 * projectile_scale
-	torus_a.outer_radius = 0.06 * projectile_scale
-	torus_a.rings = 12
-	torus_a.ring_segments = 8
-	_mesh_instance.mesh = torus_a
+	var sphere_a := SphereMesh.new()
+	sphere_a.radius = 0.03 * projectile_scale
+	sphere_a.height = 0.06 * projectile_scale
+	sphere_a.radial_segments = 8
+	_mesh_instance.mesh = sphere_a
 	_mesh_instance.material_override = _make_material(color_primary, emission_energy)
 	add_child(_mesh_instance)
 
-	# Strand B — secondary color, 180° phase offset
-	_mesh_strand_b = MeshInstance3D.new()
-	var torus_b := TorusMesh.new()
-	torus_b.inner_radius = 0.02 * projectile_scale
-	torus_b.outer_radius = 0.06 * projectile_scale
-	torus_b.rings = 12
-	torus_b.ring_segments = 8
-	_mesh_strand_b.mesh = torus_b
-	_mesh_strand_b.material_override = _make_material(color_secondary, emission_energy * 0.8)
-	add_child(_mesh_strand_b)
+	# Strand B core
+	_strand_b_node = MeshInstance3D.new()
+	_strand_b_node.name = "StrandB"
+	var sphere_b := SphereMesh.new()
+	sphere_b.radius = 0.03 * projectile_scale
+	sphere_b.height = 0.06 * projectile_scale
+	sphere_b.radial_segments = 8
+	_strand_b_node.mesh = sphere_b
+	_strand_b_node.material_override = _make_material(color_secondary, emission_energy * 0.8)
+	add_child(_strand_b_node)
 
-	# Trail
-	_particles = GPUParticles3D.new()
-	_particles.amount = 16
-	_particles.lifetime = 0.5
-	_particles.emitting = true
-	var pmat := ParticleProcessMaterial.new()
-	pmat.gravity = Vector3.ZERO
-	pmat.scale_min = 0.005
-	pmat.scale_max = 0.015
-	var grad := Gradient.new()
-	grad.add_point(0.0, Color(color_primary, 0.8))
-	grad.add_point(1.0, Color(color_secondary, 0.0))
-	var tex := GradientTexture1D.new()
-	tex.gradient = grad
-	pmat.color_ramp = tex
-	_particles.process_material = pmat
-	_particles.draw_pass_1 = QuadMesh.new()
-	add_child(_particles)
+	# Trail meshes (added to scene root so they persist)
+	_trail_a_im = ImmediateMesh.new()
+	_trail_a_mesh = MeshInstance3D.new()
+	_trail_a_mesh.mesh = _trail_a_im
+	var mat_a := StandardMaterial3D.new()
+	mat_a.albedo_color = color_primary
+	mat_a.emission_enabled = true
+	mat_a.emission = color_primary
+	mat_a.emission_energy_multiplier = emission_energy * 0.6
+	mat_a.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_a_mesh.material_override = mat_a
+
+	_trail_b_im = ImmediateMesh.new()
+	_trail_b_mesh = MeshInstance3D.new()
+	_trail_b_mesh.mesh = _trail_b_im
+	var mat_b := StandardMaterial3D.new()
+	mat_b.albedo_color = color_secondary
+	mat_b.emission_enabled = true
+	mat_b.emission = color_secondary
+	mat_b.emission_energy_multiplier = emission_energy * 0.5
+	mat_b.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_b_mesh.material_override = mat_b
+
+	call_deferred("_add_trails_to_scene")
+
+func _add_trails_to_scene() -> void:
+	if not is_inside_tree():
+		return
+	var scene := get_tree().current_scene
+	for trail in [_trail_a_mesh, _trail_b_mesh]:
+		if trail:
+			scene.add_child(trail)
+			var timer := Timer.new()
+			timer.wait_time = lifetime + 3.0
+			timer.one_shot = true
+			timer.timeout.connect(trail.queue_free)
+			trail.add_child(timer)
+			timer.start()
 
 func _apply_initial_velocity() -> void:
-	# Calculate local axes perpendicular to travel direction
 	var forward := direction.normalized()
 	if abs(forward.dot(Vector3.UP)) < 0.99:
 		_local_right = forward.cross(Vector3.UP).normalized()
 	else:
 		_local_right = forward.cross(Vector3.RIGHT).normalized()
 	_local_up = _local_right.cross(forward).normalized()
-
 	linear_velocity = forward * speed
 
-func _update_trajectory(delta: float) -> void:
+func _update_trajectory(_delta: float) -> void:
 	if has_hit:
 		return
 
-	# Double helix: strand A at phase 0, strand B at phase PI
 	var t := time_alive * _wave_freq
-	var amp := _wave_amp * delta
+	var offset_a := _local_right * sin(t) * _wave_amp + _local_up * cos(t) * _wave_amp
+	var offset_b := _local_right * sin(t + PI) * _wave_amp + _local_up * cos(t + PI) * _wave_amp
 
-	# Strand A displacement (applied to main body position)
-	var offset_right_a := sin(t) * amp
-	var offset_up_a := cos(t) * amp * 0.6
-	global_position += _local_right * offset_right_a + _local_up * offset_up_a
-
-	# Strand B offset relative to strand A (180° phase = opposite position)
-	if _mesh_strand_b:
-		var strand_sep := _wave_amp * 0.15  # Visual separation between strands
-		var phase_diff_right := (sin(t + PI) - sin(t)) * strand_sep
-		var phase_diff_up := (cos(t + PI) - cos(t)) * strand_sep * 0.6
-		_mesh_strand_b.position = _local_right * phase_diff_right + _local_up * phase_diff_up
-
-	# Counter-spin the two tori
 	if _mesh_instance:
-		_mesh_instance.rotate_z(delta * 6.0)
-	if _mesh_strand_b:
-		_mesh_strand_b.rotate_z(-delta * 6.0)
+		_mesh_instance.position = offset_a
+	if _strand_b_node:
+		_strand_b_node.position = offset_b
+
+	# Record world-space trail points
+	var center := global_position
+	_trail_a_points.append(center + offset_a)
+	_trail_b_points.append(center + offset_b)
+	if _trail_a_points.size() > MAX_TRAIL_POINTS:
+		_trail_a_points = _trail_a_points.slice(_trail_a_points.size() - MAX_TRAIL_POINTS)
+	if _trail_b_points.size() > MAX_TRAIL_POINTS:
+		_trail_b_points = _trail_b_points.slice(_trail_b_points.size() - MAX_TRAIL_POINTS)
+
+	# Rebuild trail lines
+	if _trail_a_im and _trail_a_points.size() >= 2:
+		_trail_a_im.clear_surfaces()
+		_trail_a_im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for pt in _trail_a_points:
+			_trail_a_im.surface_add_vertex(pt)
+		_trail_a_im.surface_end()
+	if _trail_b_im and _trail_b_points.size() >= 2:
+		_trail_b_im.clear_surfaces()
+		_trail_b_im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for pt in _trail_b_points:
+			_trail_b_im.surface_add_vertex(pt)
+		_trail_b_im.surface_end()
 
 func _on_hit(body: Node3D) -> void:
 	projectile_hit.emit(body, global_position)
-	# Brief oscillation on target
-	if body is Node3D:
-		var tween := body.create_tween()
-		var base_pos: Vector3 = body.position
-		for i in 5:
-			var offset := sin(i * 1.5) * 0.03
-			tween.tween_property(body, "position", base_pos + Vector3(offset, 0, 0), 0.06)
-		tween.tween_property(body, "position", base_pos, 0.1)
+	if body.has_method("hit_by_projectile"):
+		body.hit_by_projectile(color_primary)

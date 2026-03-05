@@ -84,8 +84,10 @@ func _update_trajectory(_delta: float) -> void:
 
 ## Called when projectile hits something — override for mode-specific effects.
 func _on_hit(body: Node3D) -> void:
-	# Base: just emit signal
 	projectile_hit.emit(body, global_position)
+	# Notify targets they've been hit
+	if body.has_method("hit_by_projectile"):
+		body.hit_by_projectile(color_primary)
 
 ## Called when projectile expires by lifetime.
 func _expire() -> void:

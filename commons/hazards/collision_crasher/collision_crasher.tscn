@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/collision_crasher/collision_crasher.gd" id="1"]
+
+[node name="CollisionCrasher" type="CharacterBody3D"]
+script = ExtResource("1")

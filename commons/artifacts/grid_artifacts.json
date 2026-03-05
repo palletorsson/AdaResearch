@@ -1459,6 +1459,24 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
+		"achilles_tortoise": {
+			"name": "achilles_tortoise",
+			"lookup_name": "achilles_tortoise",
+			"description": "Zeno's Achilles paradox — golden warrior chases green tortoise along a track, halving the gap each step, tick marks accumulating at the limit.",
+			"scene": "res://commons/primitives/combines/achilles_tortoise.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"genetic_tree_sculptor": {
+			"name": "genetic_tree_sculptor",
+			"lookup_name": "genetic_tree_sculptor",
+			"description": "DNA-to-tree workbench. Eight VR sliders control tree genes (depth, forks, angle, taper, leaves, tropism, twist, phyllotaxis). Live 3D preview regenerates via TreeMorphology. Press Plant to store DNA for the branching catalyst.",
+			"scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["lsystems"]
+		},
 		"combine_sphere": {
 			"name": "combine_sphere",
 			"lookup_name": "combine_sphere",

@@ -104,6 +104,70 @@
 			"map_sequences": [
 				"lsystems"
 			]
+		},
+		"lsystem_tree": {
+			"name": "L-System Tree",
+			"lookup_name": "lsystem_tree",
+			"description": "Classic deterministic L-system tree — the foundational teaching example showing how a simple grammar rule produces organic branching structure.",
+			"qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
+			"scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
+		},
+		"fractal_lsystem_string": {
+			"name": "L-System String Expansion",
+			"lookup_name": "fractal_lsystem_string",
+			"description": "Visualizes the L-system rewriting process — shows how the axiom string expands through each generation, making the grammar visible as text.",
+			"qfep_connection": "The F-description made visible: each generation shows the string growing exponentially from a tiny axiom. You see the compression ratio directly — one rule produces pages of instructions.",
+			"scene": "res://commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
+		},
+		"dark_sphere": {
+			"name": "Dark Sphere",
+			"lookup_name": "dark_sphere",
+			"description": "An atmospheric dark sphere with pulsing purple emission and slow rotation — serves as an ambient marker and catalyst preview station in maps.",
+			"scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
+		},
+		"lsystem_dungeon": {
+			"name": "L-System Dungeon",
+			"lookup_name": "lsystem_dungeon",
+			"description": "Procedural dungeon floor plan generated from L-system grammar rules — corridors and rooms emerge from string rewriting, rendered as a miniature architectural model.",
+			"qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string — spatial E(S) from textual F-description.",
+			"scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
+		},
+		"genetic_tree_sculptor": {
+			"name": "Genetic Tree Sculptor",
+			"lookup_name": "genetic_tree_sculptor",
+			"description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms — combines grammar-based growth with fitness-driven optimization.",
+			"qfep_connection": "Evolution as F-search: genetic algorithms explore the space of possible L-system parameters, selecting trees by fitness criteria. Natural selection as a meta-grammar operating on grammars.",
+			"scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			]
 		}
 	}
 }

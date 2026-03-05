@@ -6,7 +6,7 @@
 			"qfep_term": "Lambda_Edge",
 			"qfep_connection": "L-systems sit at the edge between deterministic rules (F) and emergent complexity (E). Simple rewriting rules produce infinite variation. The lambda parameter is iteration count — each generation pushes further toward the edge.",
 
-			"description": "From a single axiom, a tree grows. L-systems are string rewriting rules that generate branching structures — trees, cities, space-filling curves. Start by growing trees, then formalize the grammar, then see what rules can build.",
+			"description": "From a single axiom, a tree grows. L-systems are string rewriting rules that generate branching structures — trees, cities, space-filling curves. Start in the grammar lab, watch growth unfold, formalize the rules, build cities, compete for space, and finally watch the world come alive.",
 			"layer": "lambda_edge",
 			"prerequisites": ["fractals", "randomness"],
 			"unlocks": ["proceduralgeneration"],
@@ -18,29 +18,28 @@
 				"String rewriting as generative process",
 				"Turtle graphics interpretation of L-system strings",
 				"Context-sensitive vs context-free rules",
+				"Formal grammars and space-filling curves",
+				"L-systems beyond biology — architecture and space-filling",
 				"Emergence from competing growth systems",
-				"Formal grammars as computational tools",
-				"L-systems beyond biology — architecture and space-filling"
+				"Grammar as world-building principle — ecosystem transition"
 			],
 
 			"content": [
-				"LSystems_Tree_L_Systems: The hands-on intro — edit rules, grow trees, see the system respond",
-				"LSystems_AnimatedTree: Watch generation by generation — each step adds branches",
-				"LSystems_ContextSensitiveTree: Rules that look at their neighbors before applying",
-				"LSystems_ForestCompetition: Multiple trees competing for space — emergence from individual rules",
-				"LSystems_Context_Free_Grammars_CFG: Formalizing what we've been doing — production rules, derivations",
-				"LSystems_CityGenerator: Beyond nature — architectural structures from grammar rules",
-				"LSystems_Hilbert3D: Space-filling curves — rules that visit every point"
+				"LSystems_Grammar_Lab: The whole concept in miniature — axiom, rules, tree, string",
+				"LSystems_Growth: Watch generation by generation, see context change the outcome",
+				"LSystems_Grammars_And_Curves: Formal grammar meets space-filling — rules that visit every point",
+				"LSystems_Architecture: Beyond nature — grammar builds cities and dungeons",
+				"LSystems_Competition: Multiple trees, one world — ecology emerges, catalyst introduced",
+				"LSystems_Living: The world starts to grow — grammar becomes biology"
 			],
 
 			"maps": [
-				"LSystems_Tree_L_Systems",
-				"LSystems_AnimatedTree",
-				"LSystems_ContextSensitiveTree",
-				"LSystems_ForestCompetition",
-				"LSystems_Context_Free_Grammars_CFG",
-				"LSystems_CityGenerator",
-				"LSystems_Hilbert3D"
+				"LSystems_Grammar_Lab",
+				"LSystems_Growth",
+				"LSystems_Grammars_And_Curves",
+				"LSystems_Architecture",
+				"LSystems_Competition",
+				"LSystems_Living"
 			],
 
 			"audio": {
@@ -56,6 +55,13 @@
 			],
 
 			"deferred_maps": [
+				"LSystems_Tree_L_Systems",
+				"LSystems_AnimatedTree",
+				"LSystems_ContextSensitiveTree",
+				"LSystems_ForestCompetition",
+				"LSystems_Context_Free_Grammars_CFG",
+				"LSystems_CityGenerator",
+				"LSystems_Hilbert3D",
 				"LSystems_Different_Grammar_Types",
 				"LSystems_Shape_Grammars",
 				"LSystems_Stochastic_L_Systems",

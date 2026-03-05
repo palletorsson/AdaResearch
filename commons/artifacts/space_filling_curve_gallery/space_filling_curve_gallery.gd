@@ -6,10 +6,10 @@ class_name SpaceFillingCurveGallery
 
 # --- Configuration ---
 
-@export var quad_size: Vector2 = Vector2(0.9, 0.35)
+@export var quad_size: Vector2 = Vector2(2.4, 0.9)
 
-const PANEL_RES: int = 128
-const IMAGE_W: int = PANEL_RES * 3  # 384 pixels wide (3 panels)
+const PANEL_RES: int = 256
+const IMAGE_W: int = PANEL_RES * 3  # 768 pixels wide (3 panels)
 const IMAGE_H: int = PANEL_RES
 const BG_COLOR: Color = Color(0.06, 0.06, 0.08)
 const HILBERT_COLOR: Color = Color(0.0, 0.85, 0.9)   # Cyan
@@ -201,8 +201,8 @@ func _add_labels() -> void:
 	for i in range(3):
 		var label := Label3D.new()
 		label.text = names[i]
-		label.font_size = 28
-		label.pixel_size = 0.001
+		label.font_size = 42
+		label.pixel_size = 0.002
 		label.modulate = colors[i]
 		label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		# Position above the floor quad, centered over each panel

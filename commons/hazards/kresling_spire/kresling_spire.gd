@@ -275,8 +275,8 @@ func _build_collision() -> void:
 
 
 func _rebuild_mesh() -> void:
-	if _mesh_root:
-		_mesh_root.queue_free()
+	if _mesh_root and is_instance_valid(_mesh_root):
+		_mesh_root.free()
 	_face_meshes.clear()
 	_platform = null
 	_muzzle = null
@@ -334,14 +334,16 @@ func _update_mesh() -> void:
 	
 	# Update face meshes
 	for i in range(min(_face_meshes.size(), _geometry.faces.size())):
+		if not is_instance_valid(_face_meshes[i]):
+			continue
 		var face: PackedInt32Array = _geometry.faces[i]
 		if face.size() < 3:
 			continue
-		
+
 		var v0: Vector3 = _geometry.vertices[face[0]]
 		var v1: Vector3 = _geometry.vertices[face[1]]
 		var v2: Vector3 = _geometry.vertices[face[2]]
-		
+
 		_face_meshes[i].mesh = _create_triangle_mesh(v0, v1, v2)
 	
 	# Update platform position

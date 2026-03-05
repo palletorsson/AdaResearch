@@ -8,9 +8,9 @@ extends Node3D
 class_name ParametricLSystem
 
 ## Display settings
-@export var display_size: float = 0.8
-@export var trunk_color: Color = Color(0.45, 0.28, 0.12)
-@export var tip_color: Color = Color(0.2, 0.65, 0.15)
+@export var display_size: float = 1.2
+@export var trunk_color: Color = Color(0.55, 0.35, 0.15)
+@export var tip_color: Color = Color(0.3, 0.8, 0.2)
 
 ## Parametric L-system configuration
 @export var axiom: String = "F"
@@ -234,23 +234,33 @@ func _draw_tree() -> void:
 		max_depth = 1
 
 	# Draw all segments with depth-based coloring
+	# Multi-pass rendering: draw offset copies for thicker appearance
+	var offsets: Array[Vector3] = [
+		Vector3.ZERO,
+		Vector3(0.002, 0, 0),
+		Vector3(-0.002, 0, 0),
+		Vector3(0, 0, 0.002),
+		Vector3(0, 0, -0.002),
+	]
+
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
-	for seg in segments:
-		var p1: Vector3 = (seg[0] - center) * scale_factor
-		var p2: Vector3 = (seg[1] - center) * scale_factor
-		var d: int = seg[2]
+	for offset in offsets:
+		for seg in segments:
+			var p1: Vector3 = (seg[0] - center) * scale_factor + offset
+			var p2: Vector3 = (seg[1] - center) * scale_factor + offset
+			var d: int = seg[2]
 
-		var t: float = clampf(float(d) / float(max_depth), 0.0, 1.0)
-		# Brown trunk → green tips, brightness increases at tips
-		var col: Color = trunk_color.lerp(tip_color, t)
-		# Brighten tips slightly for implied "line width"
-		col = col.lightened(t * 0.15)
+			var t: float = clampf(float(d) / float(max_depth), 0.0, 1.0)
+			# Brown trunk → green tips, brightness increases at tips
+			var col: Color = trunk_color.lerp(tip_color, t)
+			# Brighten tips slightly for implied "line width"
+			col = col.lightened(t * 0.15)
 
-		_immediate_mesh.surface_set_color(col)
-		_immediate_mesh.surface_add_vertex(p1)
-		_immediate_mesh.surface_set_color(col)
-		_immediate_mesh.surface_add_vertex(p2)
+			_immediate_mesh.surface_set_color(col)
+			_immediate_mesh.surface_add_vertex(p1)
+			_immediate_mesh.surface_set_color(col)
+			_immediate_mesh.surface_add_vertex(p2)
 
 	_immediate_mesh.surface_end()
 

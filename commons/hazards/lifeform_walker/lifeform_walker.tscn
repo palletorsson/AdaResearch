@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/lifeform_walker/lifeform_walker.gd" id="1"]
+
+[node name="LifeformWalker" type="CharacterBody3D"]
+script = ExtResource("1")

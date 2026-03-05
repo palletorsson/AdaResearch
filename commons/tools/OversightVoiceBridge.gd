@@ -5,7 +5,7 @@ extends Node
 @export var voice_endpoint: String = "/api/voice"
 @export var push_to_talk_action: StringName = &"oversight_push_to_talk"
 @export var secondary_push_to_talk_action: StringName = &"vr_button_a"
-@export var controller_push_to_talk_button: StringName = &"ax_button"
+@export var controller_push_to_talk_button: StringName = &"by_button"
 @export var controller_push_to_talk_tracker: StringName = &"right_hand"
 @export var debug_controller_input: bool = true
 @export var controller_rescan_interval_sec: float = 2.0
@@ -288,6 +288,7 @@ func _controller_button_matches(button: String, controller: XRController3D) -> b
 	if controller_push_to_talk_tracker == &"":
 		return true
 	return controller != null and controller.tracker == controller_push_to_talk_tracker
+
 
 func _setup_status_label() -> void:
 	if not show_status_label:

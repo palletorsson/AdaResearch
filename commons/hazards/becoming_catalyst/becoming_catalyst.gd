@@ -113,16 +113,30 @@ func _physics_process(delta: float) -> void:
 # FIRING
 # ═════════════════════════════════════════════════════════════════════════
 
-## Called by XRToolsFunctionPickup when the trigger is pressed (pre-absorb only).
+## Called by XRToolsFunctionPickup when the trigger is pressed while held.
+## Pre-absorption: do nothing — the catalyst must absorb first before firing.
+## Post-absorption: never called because let_go() releases from FunctionPickup.
 func action() -> void:
 	super()
-	if not _absorbed:
+
+## Direct controller button handler — fires on A/X face button (ax_button).
+## Trigger is reserved for XRTools interactions (grab, poke, etc.).
+func _on_controller_button(button_name: String) -> void:
+	if button_name == "ax_button":
+		# Don't fire while the hand is busy holding/picking up another object
+		if _is_hand_busy():
+			return
 		_fire()
 
-## Direct controller button handler — the primary trigger path once absorbed.
-func _on_controller_button(button_name: String) -> void:
-	if button_name == "trigger_click":
-		_fire()
+## Check if FunctionPickup on this controller is currently holding a pickable.
+func _is_hand_busy() -> bool:
+	if not is_instance_valid(controller):
+		return false
+	for child in controller.get_children():
+		if child is XRToolsFunctionPickup:
+			if is_instance_valid(child.picked_up_object):
+				return true
+	return false
 
 func _fire() -> void:
 	if not is_held or fire_cooldown > 0.0:
@@ -419,6 +433,23 @@ func _on_picked_up(_pickable) -> void:
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.4, 0.0)
 
+## Remove any previously absorbed catalyst on the given controller.
+func _replace_existing_catalyst(ctrl: XRController3D) -> void:
+	if not is_instance_valid(ctrl):
+		return
+	var existing := get_tree().get_nodes_in_group("catalyst")
+	for cat in existing:
+		if cat == self:
+			continue
+		if not is_instance_valid(cat):
+			continue
+		if cat.get("_absorbed") and cat.get("controller") == ctrl:
+			# Disconnect old catalyst's button handler
+			if ctrl.button_pressed.is_connected(cat._on_controller_button):
+				ctrl.button_pressed.disconnect(cat._on_controller_button)
+			cat.queue_free()
+			print("[Catalyst] Replaced previous catalyst on '%s'" % ctrl.name)
+
 ## Crystal is consumed — reparent to controller, release FunctionPickup hold.
 func _absorb_into_hand() -> void:
 	_absorbed = true
@@ -446,6 +477,9 @@ func _absorb_into_hand() -> void:
 			controller = _find_xr_controller()
 			if controller:
 				print("[Catalyst] Fallback controller: '%s'" % controller.name)
+
+	# Remove any previous catalyst on this controller — only one at a time
+	_replace_existing_catalyst(controller)
 
 	# Remember controller before let_go triggers _on_dropped
 	var ctrl := controller
@@ -482,6 +516,9 @@ func _absorb_into_hand() -> void:
 ## Auto-absorb onto a controller without pickup animation.
 ## Used by CatalystCapabilityManager to restore catalyst after scene transitions.
 func auto_absorb(ctrl: XRController3D) -> void:
+	# Remove any previous catalyst on this controller — only one at a time
+	_replace_existing_catalyst(ctrl)
+
 	_absorbed = true
 	is_held = true
 	controller = ctrl

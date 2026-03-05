@@ -1,0 +1,60 @@
+{
+	"sequences": {
+		"hazards": {
+			"name": "Hazards: The Bestiary",
+			"description": "Every creature in the Ada world, assembled in one place. 69 entities across 16 themed sections. The original collection — origami folders, sphere rollers, wall-crawlers, grid agents, procedural legs, companions — now joined by 30 sequence-specific creatures. Each new creature embodies the algorithm of its home sequence through geometry and behavior: a binary search tree that walks on its leaves, a gradient descent predator stuck in local minima, an Escher figure on impossible stairs. Mathematics given teeth.",
+			"qfep_term": "E(S) ↔ F",
+			"qfep_connection": "Hazards embody the tension between entropy and form. Each creature is a topology — a body that folds, rolls, extends, or shapeshifts. The personality progression from foe to friend mirrors the Q-FEP insight: same potential, different relational context, different manifestation. The force field that burns also warms. The plasma that shocks also heals. Constraint determines outcome.",
+			"difficulty": "exhibition",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Origami mathematics made physical — Miura-ori, Kresling, waterbomb, kaleidocycle folds",
+				"Rigid-foldable tessellations as locomotion systems",
+				"Procedural creature generation — IK chains, limb variants, morphology",
+				"Procedural locomotion progression — from 1 leg to 8, watching gaits emerge",
+				"Grid agent modes — copy, random, CA, sine, array, color, rotate, scale, translate",
+				"Dual-nature design — every hazard contains its own medicine",
+				"Personality progression — foe, wary, neutral, curious, friend",
+				"HazardManager integration — type gating, spawn permission, befriending",
+				"Algorithm embodiment — data structures, physics simulation, growth patterns as creatures",
+				"Spatial field hazards — noise, Voronoi, isosurfaces, constraint satisfaction as zones",
+				"AI and stochastic systems — gradient descent, Markov chains, procedural generation as behavior"
+			],
+			"content": [
+				"Origami Folders: Miura crawler, Kresling spire, Kaleidocycle, Scissor stalker, Pyre plane — creatures built from folding mathematics",
+				"Sphere Rollers: Armadillo droideka, Eggling, Origami droideka, Waterbomb enemy, Sphere droideka — roll compressed, unfold to attack",
+				"Crawlers & Energy: Octapod crawler, Waterbomb hopper, Plasma critter, Force field — surface traversal and dual-nature forms",
+				"Grid Agents: 9 modes — Copy, Random, CA, Sine, Array, Color, Rotate, Scale, Translate",
+				"Procedural Legs: 1 through 8 legs — locomotion emerging from leg count",
+				"Special Creatures: Block Builder, Tech Strider, Tentacle Cube, Falling Blocks",
+				"Items & Companions: Edible mushroom, Stick tool, Proximity spawner, The Catalyst, Loving Triangle",
+				"Math & Data Structures: Index Sentinel (arrays), Data Tree Walker (BST), Graph Weaver (graph theory), Hull Crusher (convex geometry)",
+				"Physics & Simulation: Wave Rider (wave functions), Spring Mass Bouncer (soft bodies), Collision Crasher (impulse physics), Joint Articulator (constraints)",
+				"Nature & Growth: Lifeform Walker (cellular automata), Branching Vine (L-systems), Fractal Hydra (self-similarity), Recursion Spiral (Fibonacci), Swarm Hive (flocking)",
+				"AI & Stochastic: Gradient Hunter (ML descent), Grammar Markov (transition chains), Maze Spinner (PCG), Paradox Stalker (foundations crisis)",
+				"Spatial Fields: Noise Field (Perlin), Chromatic Field (RGB), Spatial Voronoi (partitions), Isosurface Trap (metaballs), Constraint Web (CSP)",
+				"Patterns & Sound: Pattern Mine (SDF contours), Resonance Chamber (standing waves), Particle Emitter (lifecycle pools)",
+				"Higher Math & Art: Tesseract Phaser (4D), Escher Stairwalker (impossible geometry), Mesh Morpher (topology), Bricoleur Golem (improvisation), QFEP Calibrator (parameter space)"
+			],
+			"maps": [
+				"Hazards_Zoo",
+				"Hazards_Zoo_2",
+				"Hazards_Zoo_3",
+				"Hazards_Zoo_4",
+				"Hazards_Zoo_5",
+				"Hazards_Zoo_6",
+				"Hazards_Zoo_7"
+			],
+			"audio": {
+				"ambient_preset": "dark_industrial",
+				"volume": -8.0
+			},
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"bestiary_badge",
+				"creature_observer_badge"
+			]
+		}
+	}
+}

@@ -123,7 +123,7 @@ func _build_falling_cube_body() -> RigidBody3D:
 	var rigid := RigidBody3D.new()
 	rigid.name = "FallingResetCube"
 	rigid.contact_monitor = true
-	rigid.max_max_contacts_reported = 8
+	rigid.max_contacts_reported = 8
 	rigid.mass = cube_mass
 	rigid.linear_damp = linear_damp
 	rigid.angular_damp = angular_damp

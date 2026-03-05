@@ -282,9 +282,10 @@ func _draw_lsystem():
 	var max_dim = maxf(maxf(bounds_size.x, bounds_size.y), bounds_size.z)
 	if max_dim < 0.001:
 		max_dim = 1.0
-	
+
 	var scale_factor = display_size * 0.8 / max_dim
-	var center = (min_bounds + max_bounds) / 2.0
+	# Anchor at bottom-center so tree grows upward from the base
+	var center = Vector3((min_bounds.x + max_bounds.x) / 2.0, min_bounds.y, (min_bounds.z + max_bounds.z) / 2.0)
 	
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	

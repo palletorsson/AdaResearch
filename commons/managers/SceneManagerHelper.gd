@@ -70,6 +70,8 @@ static func wait_for_scene_manager(from_node: Node) -> SceneManager:
 	if addon and addon.has_signal("scene_manager_ready"):
 		print("SceneManagerHelper: Waiting for BaseSceneAddon scene_manager_ready signal")
 		await addon.scene_manager_ready
+		if not is_instance_valid(from_node):
+			return null
 		return get_scene_manager(from_node)
 	
 	# Fallback: keep checking with timeout
@@ -77,8 +79,13 @@ static func wait_for_scene_manager(from_node: Node) -> SceneManager:
 	var attempts = 0
 	var max_attempts = 100  # 10 seconds at 10fps
 	
-	while not scene_manager and attempts < max_attempts:
-		await from_node.get_tree().process_frame
+	while not scene_manager and attempts < max_attempts and is_instance_valid(from_node):
+		var tree = from_node.get_tree()
+		if not tree:
+			break
+		await tree.process_frame
+		if not is_instance_valid(from_node):
+			break
 		scene_manager = get_scene_manager(from_node)
 		attempts += 1
 	

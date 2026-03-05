@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/spatial_voronoi/spatial_voronoi.gd" id="1"]
+
+[node name="SpatialVoronoi" type="Area3D"]
+script = ExtResource("1")

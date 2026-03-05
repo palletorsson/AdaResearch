@@ -8,24 +8,45 @@ extends Node3D
 
 class_name ForceFieldVisualizer
 
-## Field dimensions
-@export var field_size: float = 0.8
-@export var grid_resolution: int = 8
+## Visualizes vector force fields as directional arrow grids.
+## Computes field vectors (gravity, Coulomb, dipole, vortex) at each grid point
+## and renders scaled, colored arrows via MultiMesh showing magnitude and direction.
+## Key parameters: field_type selects the equation, field_strength scales magnitude,
+## source_position sets the charge/vortex center.
+
+# Arrow geometry constants
+const SHAFT_RADIUS := 0.004
+const SHAFT_HEIGHT := 0.05
+const SHAFT_OFFSET := 0.025
+const HEAD_BOTTOM_RADIUS := 0.012
+const HEAD_HEIGHT := 0.02
+const HEAD_OFFSET := 0.06
+const EMISSION_ENERGY := 0.3
+const SOURCE_RADIUS := 0.03
+const SOURCE_EMISSION_ENERGY := 0.5
+const LABEL_PIXEL_SIZE := 0.002
+const BUTTON_LABEL_PIXEL_SIZE := 0.0008
+
+## Size of the field grid in world units
+@export_range(0.1, 5.0, 0.1) var field_size: float = 0.8
+## Number of arrows per axis (total arrows = grid_resolution²)
+@export_range(2, 32) var grid_resolution: int = 8
 
 ## Field type
 enum FieldType { GRAVITY, POINT_CHARGE, DIPOLE, VORTEX, CUSTOM }
+## Which force field equation to visualize
 @export var field_type: FieldType = FieldType.POINT_CHARGE:
 	set(value):
 		field_type = value
 		_update_field()
 
-## Field parameters
-@export var field_strength: float = 1.0:
+## Multiplier for field magnitude (0.1–5.0)
+@export_range(0.1, 5.0, 0.1) var field_strength: float = 1.0:
 	set(value):
 		field_strength = clampf(value, 0.1, 5.0)
 		_update_field()
 
-## Source position (for point fields)
+## Source/charge position for point-based fields
 @export var source_position: Vector3 = Vector3.ZERO:
 	set(value):
 		source_position = value
@@ -33,22 +54,30 @@ enum FieldType { GRAVITY, POINT_CHARGE, DIPOLE, VORTEX, CUSTOM }
 			_source_marker.position = source_position
 		_update_field()
 
-## Colors
-@export var color_positive: Color = Color(1.0, 0.3, 0.3)  # Red - outward/positive
-@export var color_negative: Color = Color(0.3, 0.5, 1.0)  # Blue - inward/negative
-@export var color_source: Color = Color(1.0, 0.8, 0.3)    # Yellow - source
+## Color for outward/positive field directions
+@export var color_positive: Color = Color(1.0, 0.3, 0.3)
+## Color for inward/negative field directions
+@export var color_negative: Color = Color(0.3, 0.5, 1.0)
+## Color for field source markers
+@export var color_source: Color = Color(1.0, 0.8, 0.3)
 
-# Visuals
-var _arrows: Array[Node3D] = []
+# MultiMesh arrow rendering
+var _arrow_positions: Array[Vector3] = []
+var _shaft_mm: MultiMesh
+var _head_mm: MultiMesh
+var _arrow_count: int = 0
+
+# Scene nodes
 var _source_marker: MeshInstance3D
-var _source_2_marker: MeshInstance3D  # For dipole
+var _source_2_marker: MeshInstance3D
 var _info_label: Label3D
 var _control_panel: Node3D
+var _created_nodes: Array[Node] = []
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
-func _ready():
+func _ready() -> void:
 	_create_base()
 	_create_arrows()
 	_create_source_markers()
@@ -56,84 +85,102 @@ func _ready():
 	_create_vr_controls()
 	_update_field()
 
-func _create_base():
-	# Transparent base plane
+func _exit_tree() -> void:
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+func _create_base() -> void:
 	var base = MeshInstance3D.new()
 	base.name = "Base"
 	var plane = PlaneMesh.new()
 	plane.size = Vector2(field_size, field_size)
 	base.mesh = plane
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(0.1, 0.1, 0.12, 0.3)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	base.material_override = mat
 	base.position = Vector3(0, -0.01, 0)
 	add_child(base)
+	_created_nodes.append(base)
 
-func _create_arrows():
-	var cell_size = field_size / float(grid_resolution)
+func _create_arrows() -> void:
+	var cell_size = field_size / maxf(float(grid_resolution), 1.0)
 	var half_size = field_size / 2.0
-	
+	_arrow_count = grid_resolution * grid_resolution
+
+	# Pre-size position array
+	_arrow_positions.resize(_arrow_count)
+	var idx := 0
 	for j in range(grid_resolution):
 		for i in range(grid_resolution):
-			var arrow = _create_arrow()
 			var x = -half_size + (i + 0.5) * cell_size
 			var z = -half_size + (j + 0.5) * cell_size
-			arrow.position = Vector3(x, 0, z)
-			_arrows.append(arrow)
-			add_child(arrow)
+			_arrow_positions[idx] = Vector3(x, 0, z)
+			idx += 1
 
-func _create_arrow() -> Node3D:
-	var arrow = Node3D.new()
-	arrow.name = "FieldArrow"
-	
-	var shaft = MeshInstance3D.new()
-	shaft.name = "Shaft"
-	var cylinder = CylinderMesh.new()
-	cylinder.top_radius = 0.004
-	cylinder.bottom_radius = 0.004
-	cylinder.height = 0.05
-	shaft.mesh = cylinder
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color.WHITE
-	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 0.3
-	shaft.material_override = mat
-	shaft.position = Vector3(0, 0.025, 0)
-	arrow.add_child(shaft)
-	
-	var head = MeshInstance3D.new()
-	head.name = "Head"
-	var cone = CylinderMesh.new()
-	cone.top_radius = 0.0
-	cone.bottom_radius = 0.012
-	cone.height = 0.02
-	head.mesh = cone
-	head.material_override = mat
-	head.position = Vector3(0, 0.06, 0)
-	arrow.add_child(head)
-	
-	return arrow
+	# Shared material for all arrow instances
+	var arrow_mat := StandardMaterial3D.new()
+	arrow_mat.vertex_color_use_as_albedo = true
 
-func _create_source_markers():
+	# Shaft MultiMesh (cylinder bodies)
+	var shaft_mesh := CylinderMesh.new()
+	shaft_mesh.top_radius = SHAFT_RADIUS
+	shaft_mesh.bottom_radius = SHAFT_RADIUS
+	shaft_mesh.height = SHAFT_HEIGHT
+
+	_shaft_mm = MultiMesh.new()
+	_shaft_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_shaft_mm.use_colors = true
+	_shaft_mm.mesh = shaft_mesh
+	_shaft_mm.instance_count = _arrow_count
+
+	var shaft_mmi := MultiMeshInstance3D.new()
+	shaft_mmi.name = "ShaftMultiMesh"
+	shaft_mmi.multimesh = _shaft_mm
+	shaft_mmi.material_override = arrow_mat
+	add_child(shaft_mmi)
+	_created_nodes.append(shaft_mmi)
+
+	# Head MultiMesh (cone tips)
+	var head_mesh := CylinderMesh.new()
+	head_mesh.top_radius = 0.0
+	head_mesh.bottom_radius = HEAD_BOTTOM_RADIUS
+	head_mesh.height = HEAD_HEIGHT
+
+	_head_mm = MultiMesh.new()
+	_head_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_head_mm.use_colors = true
+	_head_mm.mesh = head_mesh
+	_head_mm.instance_count = _arrow_count
+
+	var head_mmi := MultiMeshInstance3D.new()
+	head_mmi.name = "HeadMultiMesh"
+	head_mmi.multimesh = _head_mm
+	head_mmi.material_override = arrow_mat
+	add_child(head_mmi)
+	_created_nodes.append(head_mmi)
+
+func _create_source_markers() -> void:
 	_source_marker = MeshInstance3D.new()
 	_source_marker.name = "SourceMarker"
 	var sphere = SphereMesh.new()
-	sphere.radius = 0.03
-	sphere.height = 0.06
+	sphere.radius = SOURCE_RADIUS
+	sphere.height = SOURCE_RADIUS * 2.0
 	_source_marker.mesh = sphere
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color_source
 	mat.emission_enabled = true
 	mat.emission = color_source
-	mat.emission_energy_multiplier = 0.5
+	mat.emission_energy_multiplier = SOURCE_EMISSION_ENERGY
 	_source_marker.material_override = mat
 	_source_marker.position = source_position
 	add_child(_source_marker)
-	
+	_created_nodes.append(_source_marker)
+
 	# Second source for dipole
 	_source_2_marker = MeshInstance3D.new()
 	_source_2_marker.name = "Source2Marker"
@@ -142,27 +189,30 @@ func _create_source_markers():
 	mat2.albedo_color = color_negative
 	mat2.emission_enabled = true
 	mat2.emission = color_negative
-	mat2.emission_energy_multiplier = 0.5
+	mat2.emission_energy_multiplier = SOURCE_EMISSION_ENERGY
 	_source_2_marker.material_override = mat2
 	_source_2_marker.visible = false
 	add_child(_source_2_marker)
+	_created_nodes.append(_source_2_marker)
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.002
+	_info_label.pixel_size = LABEL_PIXEL_SIZE
 	_info_label.font_size = 16
 	_info_label.position = Vector3(0, 0.2, 0)
 	_info_label.text = "FORCE FIELD"
 	add_child(_info_label)
+	_created_nodes.append(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.02, field_size/2 + 0.15)
+	_control_panel.position = Vector3(0, 0.02, field_size / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
+	_created_nodes.append(_control_panel)
+
 	# Panel backing
 	var panel_back = MeshInstance3D.new()
 	var panel_mesh = BoxMesh.new()
@@ -174,7 +224,7 @@ func _create_vr_controls():
 	panel_back.material_override = panel_mat
 	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
-	
+
 	# Field type buttons
 	var types = ["GRAVITY", "CHARGE", "DIPOLE", "VORTEX"]
 	for i in range(types.size()):
@@ -184,12 +234,12 @@ func _create_vr_controls():
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, types[i])
-		
+
 		var type_idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(func(_b): field_type = type_idx as FieldType)
-	
+
 	# Strength slider
 	var strength_slider = SLIDER_HORIZONTAL.instantiate()
 	strength_slider.name = "StrengthSlider"
@@ -200,38 +250,42 @@ func _create_vr_controls():
 	if strength_label:
 		strength_label.text = "STRENGTH"
 	_control_panel.add_child(strength_slider)
-	strength_slider.slider_moved.connect(func(_pos): 
+	strength_slider.slider_moved.connect(func(_pos):
 		if strength_slider.has_method("get_normalized_value"):
 			field_strength = 0.1 + strength_slider.get_normalized_value() * 4.9
 	)
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl = Label3D.new()
 	lbl.text = text
-	lbl.pixel_size = 0.0008
+	lbl.pixel_size = BUTTON_LABEL_PIXEL_SIZE
 	lbl.font_size = 6
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _update_field():
-	for arrow in _arrows:
-		var pos = arrow.position
+func _update_field() -> void:
+	if not _shaft_mm:
+		return
+	for i in _arrow_count:
+		var pos = _arrow_positions[i]
 		var field = _calculate_field(pos)
-		_orient_arrow(arrow, field)
-	
+		_orient_arrow(i, pos, field)
+
 	# Update source visibility
-	_source_marker.visible = field_type in [FieldType.POINT_CHARGE, FieldType.DIPOLE, FieldType.VORTEX]
-	_source_2_marker.visible = field_type == FieldType.DIPOLE
-	if field_type == FieldType.DIPOLE:
-		_source_2_marker.position = source_position + Vector3(0.2, 0, 0)
-	
+	if _source_marker:
+		_source_marker.visible = field_type in [FieldType.POINT_CHARGE, FieldType.DIPOLE, FieldType.VORTEX]
+	if _source_2_marker:
+		_source_2_marker.visible = field_type == FieldType.DIPOLE
+		if field_type == FieldType.DIPOLE:
+			_source_2_marker.position = source_position + Vector3(0.2, 0, 0)
+
 	_update_info()
 
 func _calculate_field(pos: Vector3) -> Vector3:
 	match field_type:
 		FieldType.GRAVITY:
 			return Vector3(0, -field_strength, 0)
-		
+
 		FieldType.POINT_CHARGE:
 			var r = pos - source_position
 			var dist = r.length()
@@ -239,21 +293,21 @@ func _calculate_field(pos: Vector3) -> Vector3:
 				return Vector3.ZERO
 			# Inverse square: F = k/r²
 			return r.normalized() * field_strength / (dist * dist + 0.01)
-		
+
 		FieldType.DIPOLE:
 			var pos1 = source_position
 			var pos2 = source_position + Vector3(0.2, 0, 0)
-			
+
 			var r1 = pos - pos1
 			var r2 = pos - pos2
 			var d1 = r1.length()
 			var d2 = r2.length()
-			
+
 			var field1 = r1.normalized() * field_strength / (d1 * d1 + 0.01) if d1 > 0.01 else Vector3.ZERO
 			var field2 = -r2.normalized() * field_strength / (d2 * d2 + 0.01) if d2 > 0.01 else Vector3.ZERO
-			
+
 			return field1 + field2
-		
+
 		FieldType.VORTEX:
 			var r = pos - source_position
 			var dist = r.length()
@@ -264,61 +318,63 @@ func _calculate_field(pos: Vector3) -> Vector3:
 			# Strength peaks at mid-range, fades at center and edges (vortex profile)
 			var profile = dist / (dist * dist + 0.02)
 			return tangent * field_strength * profile
-		
+
 		_:
 			return Vector3.ZERO
 
-func _orient_arrow(arrow: Node3D, field: Vector3):
+func _orient_arrow(idx: int, pos: Vector3, field: Vector3) -> void:
 	var magnitude = field.length()
-	
+
 	if magnitude < 0.001:
-		arrow.visible = false
+		# Hide instance by scaling to near-zero and moving off-screen
+		var hidden_xf := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * 0.001), Vector3(0, -100, 0))
+		_shaft_mm.set_instance_transform(idx, hidden_xf)
+		_head_mm.set_instance_transform(idx, hidden_xf)
 		return
-	arrow.visible = true
-	
+
 	# Scale arrow by field magnitude (clamped)
 	var scale_factor = clampf(magnitude * 0.5, 0.3, 2.0)
-	arrow.scale = Vector3(scale_factor, scale_factor, scale_factor)
-	
+
 	# Color by direction (outward=red, inward=blue)
 	var direction = field.normalized()
-	var from_source = (arrow.position - source_position).normalized()
+	var from_source = (pos - source_position).normalized()
 	var alignment = direction.dot(from_source)  # 1=outward, -1=inward
-	
+
 	var color: Color
 	if field_type == FieldType.GRAVITY:
 		color = color_negative  # Always down
 	elif field_type == FieldType.VORTEX:
 		# Vortex uses angular hue: green→cyan→blue around the circle
-		var r = arrow.position - source_position
-		var angle = atan2(r.x, r.z)  # 0..TAU
+		var r = pos - source_position
+		var angle = atan2(r.x, r.z)
 		var hue = fmod((angle + PI) / TAU + 0.3, 1.0)
 		color = Color.from_hsv(hue, 0.7, 1.0)
 	else:
-		color = color_negative.lerp(color_positive, (alignment + 1) / 2.0)
-	
-	var shaft = arrow.get_node("Shaft")
-	var head = arrow.get_node("Head")
-	
-	var mat = shaft.material_override as StandardMaterial3D
-	mat.albedo_color = color
-	mat.emission = color
-	
-	head.material_override = mat
-	
-	# Orient arrow
-	arrow.transform.basis = Basis.IDENTITY
-	
-	if field.length() > 0.001:
-		var target_pos = arrow.global_position + field
-		if arrow.global_position.distance_squared_to(target_pos) > 0.0001:
-			var up = Vector3.UP
-			if abs(direction.dot(up)) > 0.99:
-				up = Vector3.FORWARD
-			arrow.look_at(target_pos, up)
-			arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
+		color = color_negative.lerp(color_positive, (alignment + 1.0) / 2.0)
 
-func _update_info():
+	_shaft_mm.set_instance_color(idx, color)
+	_head_mm.set_instance_color(idx, color)
+
+	# Compute arrow orientation
+	var up := Vector3.UP
+	if abs(direction.dot(up)) > 0.99:
+		up = Vector3.FORWARD
+
+	var arrow_xf := Transform3D()
+	arrow_xf.origin = pos
+	arrow_xf = arrow_xf.looking_at(pos + field, up)
+	arrow_xf.basis = arrow_xf.basis * Basis(Vector3.RIGHT, -PI / 2.0)
+	arrow_xf.basis = arrow_xf.basis.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+
+	# Shaft at local offset
+	var shaft_origin = arrow_xf.origin + arrow_xf.basis * Vector3(0, SHAFT_OFFSET, 0)
+	_shaft_mm.set_instance_transform(idx, Transform3D(arrow_xf.basis, shaft_origin))
+
+	# Head at local offset
+	var head_origin = arrow_xf.origin + arrow_xf.basis * Vector3(0, HEAD_OFFSET, 0)
+	_head_mm.set_instance_transform(idx, Transform3D(arrow_xf.basis, head_origin))
+
+func _update_info() -> void:
 	var type_names = ["GRAVITY", "POINT CHARGE", "DIPOLE", "VORTEX", "CUSTOM"]
 	var desc := ""
 	match field_type:
@@ -334,7 +390,7 @@ func _update_info():
 			desc = ""
 	_info_label.text = "%s FIELD\nStrength: %.1f\n%s" % [type_names[field_type], field_strength, desc]
 
-func _input(event):
+func _input(event) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: field_type = FieldType.GRAVITY
@@ -344,11 +400,14 @@ func _input(event):
 			KEY_UP: field_strength = minf(field_strength + 0.2, 5.0)
 			KEY_DOWN: field_strength = maxf(field_strength - 0.2, 0.1)
 
-func set_field_type(type: FieldType):
+func set_field_type(type: FieldType) -> void:
 	field_type = type
 
-func set_strength(s: float):
+func set_strength(s: float) -> void:
 	field_strength = s
 
-func move_source(pos: Vector3):
+func move_source(pos: Vector3) -> void:
 	source_position = pos
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

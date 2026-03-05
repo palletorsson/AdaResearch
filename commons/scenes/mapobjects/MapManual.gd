@@ -199,9 +199,9 @@ func _process(delta: float) -> void:
 		if should_show_hint:
 			# Update text if needed
 			if map_name_for_hint != "":
-				hint_label.text = "(X) Info: %s" % map_name_for_hint
+				hint_label.text = "(Y) Info: %s" % map_name_for_hint
 			else:
-				hint_label.text = "(X) Info"
+				hint_label.text = "(Y) Info"
 			
 			# STRICT Position update (No smoothing for hint)
 			# Calculate position directly from camera
@@ -329,7 +329,7 @@ func _load_map_data() -> void:
 	
 	# Fallback: show default message if nothing found
 	print("MapManual: No map data found, using fallback")
-	pages.append("# Map Manual\n\nNo map data available.\n\nPress **X** to close.")
+	pages.append("# Map Manual\n\nNo map data available.\n\nPress **Y** to close.")
 	_update_display()
 
 func _parse_map_data(map_data: Dictionary) -> void:
@@ -586,8 +586,8 @@ func _connect_controller_signals() -> void:
 			right_controller.button_pressed.connect(_on_controller_button_pressed.bind(right_controller))
 
 func _on_controller_button_pressed(button: String, controller: XRController3D) -> void:
-	# Toggle only from left-hand AX button (X on Quest) so right-hand A stays free.
-	if button == "ax_button" and controller and controller.tracker == &"left_hand":
+	# Toggle from left-hand BY button (Y on Quest). X is now used for catalyst firing.
+	if button == "by_button" and controller and controller.tracker == &"left_hand":
 		toggle_manual()
 
 func _input(event: InputEvent) -> void:

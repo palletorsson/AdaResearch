@@ -1,0 +1,101 @@
+{
+	"map_info": {
+		"name": "Hazards Zoo — Physics & Nature",
+		"lookup_name": "Hazards_Zoo_5",
+		"description": "Physics simulation creatures and nature/growth pattern creatures. Part 5 of 7 in the Hazards bestiary.",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 15,
+			"depth": 11,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "exhibition",
+			"category": "hazards",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"See physical laws as creature behavior — wave functions, soft bodies, impulse physics, constraints",
+				"Watch biological patterns as combat — cellular automata, L-systems, fractals, flocking"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+		],
+		"utilities": [
+			["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		],
+		"interactables": [
+			[" "," "," "," "," ","soft_stage_dashboard:0:1.2"," "," "," ","progression_driver:0:0.8"," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			["tt:hazards_zoo_physics:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","wave_rider"," ","spring_mass_bouncer"," ","collision_crasher"," ","joint_articulator"," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			["tt:hazards_zoo_nature:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" ","lifeform_walker"," ","branching_vine"," ","fractal_hydra"," ","recursion_spiral"," ","swarm_hive"," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+		]
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0.5, 1.8, 0.5],
+			"rotation": [0.0, 180.0, 0.0],
+			"description": "Entrance — facing the zoo rows"
+		}
+	},
+	"tutorial_text": {
+		"hazards_zoo_physics": {
+			"title": "PHYSICS & SIMULATION",
+			"text": "Wave Rider (wave functions), Spring Mass Bouncer (soft bodies), Collision Crasher (impulse physics), Joint Articulator (constraint types). Physical laws as creature behavior."
+		},
+		"hazards_zoo_nature": {
+			"title": "NATURE & GROWTH",
+			"text": "Lifeform Walker (cellular automata), Branching Vine (L-systems), Fractal Hydra (self-similarity), Recursion Spiral (golden ratio), Swarm Hive (flocking). Biological patterns as combat."
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.7, 0.7, 0.85],
+		"ambient_energy": 0.4,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [1.0, 0.98, 0.95],
+			"energy": 0.8
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.08, 0.1, 0.18]
+		}
+	}
+}

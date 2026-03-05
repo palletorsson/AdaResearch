@@ -2,12 +2,12 @@
 	"map_info": {
 		"name": "Bracelet Zoo — Catalyst Modes",
 		"lookup_name": "Bracelet_Zoo",
-		"description": "Exhibition of all 10 catalyst forms. Each crystal is themed to its sequence — pick one up to see its unique identity.",
-		"version": "1.1",
+		"description": "Exhibition of all 10 catalyst forms with a target gallery. Pick up crystals, swap modes, and blast destructible targets.",
+		"version": "1.2",
 		"format": "json",
 		"dimensions": {
 			"width": 15,
-			"depth": 11,
+			"depth": 13,
 			"max_height": 3
 		},
 		"metadata": {
@@ -17,7 +17,7 @@
 			"learning_objectives": [
 				"See each catalyst's unique themed visual identity",
 				"Test the Capacity Bracelet with different modes",
-				"Observe how each sequence produces a different crystal form"
+				"Destroy varied targets with different projectiles"
 			]
 		}
 	},
@@ -33,6 +33,8 @@
 			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+			["1","1","2","1","2","1","2","1","2","1","2","1","2","1","1"],
 			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
 		],
 		"utilities": [
@@ -43,6 +45,8 @@
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
@@ -59,19 +63,21 @@
 			[" "," ","becoming_catalyst#start_mode:chaos"," ","becoming_catalyst#start_mode:cellular"," ","becoming_catalyst#start_mode:fractal"," ","becoming_catalyst#start_mode:branching"," ","becoming_catalyst#start_mode:swarm"," ","catalyst_target#orbit:true"," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			["tt:target_gallery:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+			[" "," ","catalyst_target#shape:cube"," ","catalyst_target#shape:fireball"," ","catalyst_target#shape:apple"," ","catalyst_target#shape:banana"," ","catalyst_target#shape:barrel"," ","catalyst_target#shape:crystal#hits:3"," "," "],
 			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 		]
 	},
-	  "utility_definitions": {
+	"utility_definitions": {
 		"t": {
-		  "type": "teleporter",
-		  "name": "Next",
-		  "description": "Continue to next step",
-		  "properties": {
-			"action": "next_in_sequence"
-		  }
+			"type": "teleporter",
+			"name": "Next",
+			"description": "Continue to next step",
+			"properties": {
+				"action": "next_in_sequence"
+			}
 		}
-  },
+	},
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 0.5],
@@ -87,6 +93,10 @@
 		"row_advanced": {
 			"title": "ADVANCED ARC",
 			"text": "Chaos (fractured sparks), Cellular (dark cube), Fractal (recursive blue), Branching (green tree), Swarm (golden flock)"
+		},
+		"target_gallery": {
+			"title": "TARGET GALLERY",
+			"text": "Blast these! Crate, Fireball, Apple, Banana, Barrel, Crystal (takes 3 hits). They respawn after a few seconds."
 		}
 	},
 	"lighting": {

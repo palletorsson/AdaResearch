@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/gradient_hunter/gradient_hunter.gd" id="1"]
+
+[node name="GradientHunter" type="CharacterBody3D"]
+script = ExtResource("1")

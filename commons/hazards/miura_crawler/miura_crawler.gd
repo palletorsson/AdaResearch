@@ -238,8 +238,8 @@ func _build_collision() -> void:
 
 
 func _rebuild_mesh() -> void:
-	if _mesh_root:
-		_mesh_root.queue_free()
+	if _mesh_root and is_instance_valid(_mesh_root):
+		_mesh_root.free()
 	_face_meshes.clear()
 	_crease_meshes.clear()
 	
@@ -291,26 +291,28 @@ func _update_mesh() -> void:
 	
 	# Update face meshes
 	for i in range(min(_face_meshes.size(), _geometry.faces.size())):
+		if not is_instance_valid(_face_meshes[i]):
+			continue
 		var face: PackedInt32Array = _geometry.faces[i]
 		if face.size() < 4:
 			continue
-		
+
 		var v0: Vector3 = _geometry.vertices[face[0]]
 		var v1: Vector3 = _geometry.vertices[face[1]]
 		var v2: Vector3 = _geometry.vertices[face[2]]
 		var v3: Vector3 = _geometry.vertices[face[3]]
-		
+
 		_face_meshes[i].mesh = _create_quad_mesh(v0, v1, v2, v3)
 	
 	# Update crease lines
 	var crease_idx: int = 0
 	for edge in _geometry.mountain_creases:
-		if crease_idx < _crease_meshes.size():
+		if crease_idx < _crease_meshes.size() and is_instance_valid(_crease_meshes[crease_idx]):
 			_update_crease_line(_crease_meshes[crease_idx], edge)
 			crease_idx += 1
-	
+
 	for edge in _geometry.valley_creases:
-		if crease_idx < _crease_meshes.size():
+		if crease_idx < _crease_meshes.size() and is_instance_valid(_crease_meshes[crease_idx]):
 			_update_crease_line(_crease_meshes[crease_idx], edge)
 			crease_idx += 1
 

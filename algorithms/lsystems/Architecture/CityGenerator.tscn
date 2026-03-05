@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://city_generator_scene"]
 
-[ext_resource type="Script" path="res://algorithms/l_systems/Architecture/CityGenerator.gd" id="1_script"]
+[ext_resource type="Script" path="res://algorithms/lsystems/Architecture/CityGenerator.gd" id="1_script"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.1, 0.1, 0.15, 1)

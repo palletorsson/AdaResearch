@@ -15,9 +15,9 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 	var proj := CatalystProjectile.new()
 	# set_script() FIRST — it reinitializes all variables
 	proj.set_script(load("res://commons/hazards/becoming_catalyst/modes/cellular_projectile.gd"))
-	proj.speed = 14.0
-	proj.lifetime = 3.0
-	proj.projectile_scale = 0.4
+	proj.speed = 5.0
+	proj.lifetime = 8.0
+	proj.projectile_scale = 0.6
 	proj.color_primary = Color(0.95, 0.95, 0.95)
 	proj.color_secondary = Color(0.4, 0.4, 0.5)
 	proj.emission_energy = 1.5

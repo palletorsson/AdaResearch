@@ -359,9 +359,11 @@ func _create_crease_line(v0: Vector3, v1: Vector3, fold_sign: float) -> MeshInst
 	var mid: Vector3 = (v0 + v1) * 0.5
 	mesh_instance.position = mid
 	
-	var up: Vector3 = direction.normalized()
-	if abs(up.dot(Vector3.UP)) < 0.99:
-		mesh_instance.look_at(mesh_instance.global_position + up, Vector3.UP)
+	var forward: Vector3 = direction.normalized()
+	if abs(forward.dot(Vector3.UP)) < 0.99:
+		var right_vec: Vector3 = forward.cross(Vector3.UP).normalized()
+		var local_up: Vector3 = right_vec.cross(forward).normalized()
+		mesh_instance.basis = Basis(right_vec, local_up, -forward)
 		mesh_instance.rotate_object_local(Vector3.RIGHT, PI * 0.5)
 	
 	return mesh_instance

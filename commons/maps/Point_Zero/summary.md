@@ -1,44 +1,47 @@
-# Point Zero - Map Summary
+# Point One - Map Summary
 
 ## Overview
-Point Zero introduces the origin not as a geometric object, but as an infrastructural prerequisite. The map stages the moment before geometry, where spatial measurement becomes possible only through the establishment of a shared reference frame.
+Point One isolates individuation: one marked position beyond origin. The map now stages both a fixed point and a grabbable point so the player can contrast stable reference with embodied repositioning.
 
 ## Spatial Layout
-- **Dimensions**: 7×8 grid
-- **Architecture**: L-shaped platform in northwest corner, mostly empty void
-- **Height**: Single level (height 1) with origin marker at 0.3m
+- **Dimensions**: 7x10 grid
+- **Architecture**: Continuous west platform (columns 0-2) plus one isolated cube at (4,0)
+- **Height**: Single-level field with selected interactables raised for readability
 
 ## Key Elements
 
 ### Interactables
-- **Origin marker** (0,0) height 0.3m, rotated 180° - The Vector3.ZERO reference point
-- **Dark sphere** (3,3) - Ambient darkness creating intimate space
-- **Coordinate System** (6,8) height 1m - 3D axes visualization
-- **Frame counter display** (0,8) - Performance metrics visible
+- **origin** at (0,0), lowered -0.5: rotating zero marker + alias text cycle
+- **folding_past** at (1,0), raised, scaled 0.5: temporal frame stack ambience
+- **static_point** at (4,0), raised 1: fixed "the one" on the isolated cube
+- **script_runner#point** at (0,1), raised 1: live Vector3 point code playback
+- **dark_sphere** at (3,2): ambient enclosure for focus
+- **interactive_point_origin** at (1,3), raised 1: grabbable point with position label and line-to-origin
+- **frame_counter_display** at (0,9) and **CoordinateSystem3M** at (6,9): peripheral instrumentation
 
 ### Utilities
-- **Teleporter** (2,1) - Exit to next map
-- **Floating text** (2,6) - "Point Zero"
-- **Annotation** (5,0) - Navigation marker
+- **Annotation board** `an:-90` near spawn lane
+- **Subtitle trigger** `sub:point_zero` at (1,2)
+- **Floating text** `3t:that_which_has_no_part` at (1,8)
+- **Teleporter** `t` at (1,5)
 
 ## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Audio**: "techno_noir_subtle" preset at -6dB
-- **Lighting**: Cool ambient with warm directional light
-- **Mood**: Contemplative, minimal, foundational
+- **Background**: sky color [0.2, 0.3, 0.7]
+- **Lighting**: ambient + directional warm key
+- **Mood**: sparse, reflective, with one high-contrast interaction focus
 
 ## Learning Sequence
-1. Player spawns into minimal space
-2. Encounters origin marker - the "already there" infrastructure
-3. Reads tutorial about thrownness and inheritance
-4. Observes frame counter - the renderer's continuous loop
-5. Sees coordinate axes - the abstract system made visible
-6. Exits via teleporter to continue sequence
+1. Enter from infrastructure residue (origin + temporal folding).
+2. Read/observe the fixed static point on the isolated cube.
+3. Grab the interactive point and move it; watch live coordinates and line-to-origin.
+4. Compare fixed point vs moved point as two modes of "one."
+5. Optional: trigger script runner to see Vector3 as code-level point representation.
+6. Exit through teleporter.
 
 ## Design Intent
-The sparse architecture emphasizes **absence** - what the player cannot see (rendering pipelines, update loops, memory systems) is more important than what appears. The origin exists as an effect of these invisible systems, not as their foundation.
+Point One should stay minimal but legible in VR. The added fixed point on the isolated cube gives a stable visual anchor, while the grabbable point carries embodiment and agency. Together they sharpen the concept without overloading the room.
 
 ## Connection to Sequence
-- **Position in primitives sequence**: 1/13
-- **Precedes**: Point_One (individual point instantiation)
-- **Establishes**: The infrastructure that makes all subsequent geometry possible
+- **Position in primitives sequence**: early foundation map
+- **Follows**: Point_Zero (origin/infrastructure)
+- **Prepares**: Point-Line style relations between multiple marked positions

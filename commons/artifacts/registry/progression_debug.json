@@ -1,0 +1,47 @@
+{
+	"registry_info": {
+		"name": "progression_debug",
+		"description": "Debug and scaffold artifacts for testing the soft-stage progression system — EcosystemManager, HazardManager, CatalystCapabilityManager.",
+		"category": "debug"
+	},
+	"artifacts": {
+		"soft_stage_dashboard": {
+			"lookup_name": "soft_stage_dashboard",
+			"name": "Soft Stage Dashboard",
+			"description": "Wall-mounted read-only panel showing live state from EcosystemManager, HazardManager, and CatalystCapabilityManager. Three-column layout with allow flags, hazard types and personalities, capacity level and hand verbs. Rolling signal log at the bottom captures all manager events with timestamps.",
+			"scene": "res://commons/artifacts/soft_stage_dashboard/soft_stage_dashboard.tscn",
+			"category": "debug",
+			"complexity": "intermediate",
+			"tags": [
+				"debug",
+				"progression",
+				"managers",
+				"scaffold",
+				"dashboard",
+				"monitor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"progression_driver": {
+			"lookup_name": "progression_driver",
+			"name": "Progression Driver",
+			"description": "Interactive VR control panel to advance through sequences, befriend hazards, and reset progression on all three managers. Slider selects sequence, buttons trigger force_advance_to or reset_progression. Dynamically generates befriend buttons for all hazard types found in soft_stages.json.",
+			"scene": "res://commons/artifacts/progression_driver/progression_driver.tscn",
+			"category": "debug",
+			"complexity": "intermediate",
+			"tags": [
+				"debug",
+				"progression",
+				"managers",
+				"scaffold",
+				"controller",
+				"driver"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		}
+	}
+}

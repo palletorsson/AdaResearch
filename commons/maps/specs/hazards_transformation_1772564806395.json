@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "generatedBy": "roadmap-pipeline",
+    "createdAt": "2026-03-03T19:07:26.746Z"
+  },
+  "spec": {
+    "token": "origami_pyre_plane",
+    "className": "OrigamiPyrePlane",
+    "description": "A flat origami rectangle that smolders with paper-fire beneath transport cubes. Its creased edges glow orange as it cycles through affine transformations — scaling, rotating, and translating — while preserving its rectangular identity. The invariant is the shape; the hazard is the heat. Players who fall from a transport cube onto the pyre plane are killed on contact.",
+    "category": "foe",
+    "registryEntry": {
+      "lookup_name": "origami_pyre_plane",
+      "name": "Pyre Plane",
+      "description": "A folded-paper rectangle of fire that sits beneath transport cubes. Its creased surface cycles through affine transformations — scale pulses, rotation sweeps, positional drift — while the rectangular shape remains invariant. Demonstrates that identity persists under transformation. Lethal on contact.",
+      "scene": "res://commons/hazards/origami_pyre_plane/origami_pyre_plane.tscn",
+      "tags": [
+        "origami",
+        "foe",
+        "floor_hazard",
+        "fire",
+        "transformation",
+        "invariant"
+      ],
+      "sequence": "transformation",
+      "map_sequences": [
+        "transformation"
+      ]
+    },
+    "gdScript": {
+      "path": "commons/hazards/origami_pyre_plane/origami_pyre_plane.gd",
+      "extendsClass": "Node3D",
+      "className": "OrigamiPyrePlane",
+      "behaviors": [
+        "kill_on_contact",
+        "affine_cycle",
+        "fold_crease_glow",
+        "ember_particles"
+      ],
+      "parameters": {
+        "base_width": "float — default 2.0, rectangle width in grid units",
+        "base_depth": "float — default 3.0, rectangle depth in grid units",
+        "scale_pulse_range": "Vector2 — default (0.8, 1.2), min/max scale multiplier",
+        "rotation_speed": "float — default 0.3, radians/sec yaw rotation during rotation phase",
+        "translation_drift": "float — default 0.5, max positional drift in grid units",
+        "cycle_duration": "float — default 4.0, seconds per transformation phase",
+        "damage_on_enter": "float — default 100.0, instant kill",
+        "crease_count": "int — default 4, number of visible fold lines",
+        "ember_color": "Color — default Color(1.0, 0.45, 0.05), orange-amber"
+      },
+      "methods": {
+        "_ready": "Procedurally generates rectangular MeshInstance3D with fold-crease geometry. Creates Area3D with CollisionShape3D for kill zone. Spawns GPUParticles3D for ember effect along crease lines. Starts affine_cycle timer.",
+        "apply_grid_config": "Accepts config_data: Dictionary. Sets grid position, base dimensions, and phase parameters from map data.",
+        "_process_affine_cycle": "Cycles through three phases: SCALE (pulse width/depth around invariant center), ROTATE (yaw around center preserving rectangle), TRANSLATE (drift position then return). Each phase lasts cycle_duration seconds. Visual crease lines update to show which transformation is active.",
+        "_on_body_entered": "Connected to Area3D. Detects player body. Emits kill signal / calls player.die(). Triggers flare particle burst.",
+        "fold_animate": "Subtle breathing animation — paper edges lift and settle like smoldering parchment. Crease lines brighten during active transformation phase."
+      }
+    },
+    "tscnFile": {
+      "path": "commons/hazards/origami_pyre_plane/origami_pyre_plane.tscn",
+      "nodeTree": {
+        "root": "OrigamiPyrePlane (Node3D, script: origami_pyre_plane.gd)",
+        "children": [
+          "PaperMesh (MeshInstance3D — procedural rectangle with crease subdivisions)",
+          "KillZone (Area3D → CollisionShape3D, BoxShape3D matching rectangle bounds)",
+          "EmberParticles (GPUParticles3D — fire particles along crease lines)",
+          "GlowLight (OmniLight3D — orange underglow, energy pulses with cycle)"
+        ]
+      }
+    },
+    "mapPlacements": [
+      {
+        "mapName": "Translate 1",
+        "gridPosition": [
+          4,
+          6
+        ],
+        "note": "Beneath the y_translation_cube. Player must use translation to move the cube across without falling onto the pyre plane below."
+      },
+      {
+        "mapName": "Translate 2",
+        "gridPosition": [
+          5,
+          7
+        ],
+        "note": "Larger pyre plane beneath the toruscylinder transport area. Drift-translation phase active — the fire rectangle slides back and forth, teaching that translation preserves shape."
+      },
+      {
+        "mapName": "Rotation One",
+        "gridPosition": [
+          3,
+          5
+        ],
+        "note": "Pyre plane with rotation phase dominant. The fire rectangle slowly yaws beneath the rotate_grid_cubes, showing rotation as shape-preserving transformation."
+      },
+      {
+        "mapName": "Scale",
+        "gridPosition": [
+          5,
+          4
+        ],
+        "note": "Pyre plane with scale-pulse phase dominant. Rectangle breathes between 0.6x and 1.4x scale beneath the chair_assembly_puzzle, demonstrating scale as the third affine invariant."
+      }
+    ],
+    "reasoning": "The user specifically requested a rectangle of fire beneath transport cubes that kills on contact. This spec grounds that idea in the sequence's mathematical theme — affine transformations — by making the hazard itself cycle through translation, rotation, and scale while preserving its rectangular shape. The rectangle IS the invariant: what stays the same when everything changes. The origami treatment (fold creases, parchment texture, ember glow along paper edges) keeps it consistent with the hazard aesthetic. Placed in 4 of the 6 maps, each placement emphasizes the transformation type that map teaches. The first map (Introduction) and fifth map (Rotation Two) are left clear to give the player breathing room at the start and a puzzle-focused break before the finale.",
+    "confidence": "high",
+    "id": "hazards_transformation_1772564806395",
+    "specKind": "hazard",
+    "trackKey": "hazards",
+    "sequenceId": "transformation",
+    "milestoneIndex": 1,
+    "generatedAt": "2026-03-03T19:06:46.395Z",
+    "status": "built"
+  }
+}

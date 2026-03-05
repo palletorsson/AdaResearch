@@ -46,7 +46,7 @@ strafe = true
 [node name="FunctionPickup" parent="XROrigin3D/LeftHand" index="1" instance=ExtResource("7_pickup")]
 
 [node name="MovementJump" parent="XROrigin3D/LeftHand" index="2" instance=ExtResource("8_jump")]
-jump_button_action = "ax_button"
+jump_button_action = "_disabled"
 
 [node name="MovementDirect" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("4_movement_direct")]
 
