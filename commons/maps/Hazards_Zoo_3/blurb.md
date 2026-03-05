@@ -1,0 +1,7 @@
+# Hazards Zoo — Legs & Specials
+
+One leg. A pogo stick finding ground. Two legs — the constant negotiation with falling. Three: the first stable polygon. Four pairs diagonals into trot and gallop. Five breaks bilateral symmetry entirely. Six discovers the alternating tripod. Eight legs and the gait problem dissolves into redundancy.
+
+Each critter builds itself at runtime. Skeleton, skin, inverse kinematics chain — constructed from code, not loaded from file. The same `_make_tapered_tube` function shapes every limb. Same potential, different constraint count, different creature. Add the block builder that eats and extrudes the grid. The tech strider whose legs ARE architecture. The tentacle cube — a rigid cell that grew soft appendages and forgot which kingdom it belonged to.
+
+Locomotion is not a feature. It is the first argument a body makes about what kind of space it deserves to move through.

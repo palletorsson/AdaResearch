@@ -1,0 +1,7 @@
+# Hazards Zoo — AI & Fields
+
+Gradient descent hunts. A sleek predator samples six points around itself, measures distance, moves toward the lowest — and gets stuck in local minima, thrashing until it anneals out with a random jump. Machine learning as locomotion strategy. The loss function is the space between its body and yours.
+
+A Markov chain attacks in grammar. Four colored faces on a floating tetrahedron — lunge, sweep, projectile, shield — each transition governed by visible probabilities that mutate over time. Perlin noise scrolls beneath your feet, raising and lowering a landscape of danger. Voronoi cells partition the ground into territories — safe, damage, slow, heal — whose borders drift as seed points wander. Metaball charges bulge toward you, implicit surfaces made lethal. A maze generates itself every eight seconds, DFS carving corridors that spin around a crystalline core. A constraint web flickers in superposition until you step on it — graph coloring as minefield.
+
+Computation is not neutral. Every optimization has a cost function. Every field encodes a politics of space. Every stochastic process is a bet on what comes next — and the house always drifts.

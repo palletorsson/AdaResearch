@@ -1,0 +1,5 @@
+# ISO Showcase 10 — MetaballWorld + Queer Cave
+
+Two systems share the same algorithm but inhabit different worlds. Metaballs merge and separate — soft spheres whose influence fields blend, the marching cubes extractor finding surfaces where density crosses threshold. Animated, collidable, alive. The cave does something stranger: layered noise fields carved into passages that resist straight lines, that bulge and twist through queer spatial logic.
+
+Both construct geometry from scalar fields. Both ask where inside becomes outside. But the metaball world builds bodies that fuse on contact — identity as proximity. The cave builds absence — hollowed density, navigable void. Same extraction algorithm. Same 256-case lookup table. One produces presence, the other produces passage. The boundary between solid and empty is never neutral. It encodes what gets to exist.

@@ -1,0 +1,7 @@
+# ISO Showcase 2 — Fountain + SDF Sculpt
+
+Two modes of summoning form from nothing. The fountain rises — marching cubes extract a vertical shape from a scalar field, geometry crystallizing where density crosses threshold. Seven sculptures rotate in a gallery, each a different configuration of noise and isolation. Mesh islands separate, recombine. The same algorithm, different parameters, different bodies.
+
+Then the sculpt tool. Place spherical blobs into empty space. Smooth union merges them — 500 discrete additions becoming one continuous surface. SDF fields don't add geometry. They add *influence*. The mesh follows.
+
+One process is automatic: the field dictates, the surface obeys. The other is manual: hand places intent, the field accommodates. Both extract boundary from potential. The difference is authorship — whether form is found or made. The surface doesn't care.
