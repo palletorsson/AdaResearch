@@ -1,4 +1,4 @@
-# Advanced Vector Fields
+# Vectors: Fields and Torque
 
 Torque is the cross product with leverage. A force applied at a distance from a pivot — the farther out, the more twist. Every wrench, every spinning top, every planet turning on its axis: r × F. The vector points perpendicular to the plane of rotation. Direction encodes the axis. Magnitude encodes the force of becoming.
 

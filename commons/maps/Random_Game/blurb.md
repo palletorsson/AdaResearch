@@ -1,4 +1,4 @@
-# Random Algorithms Arena
+# Random Game
 
 An 8x8 field of falling cubes. Each one sinks and rises on its own random timer — no pattern, no warning, no rhythm to learn. Cross the grid or get hit. The floor itself is probabilistic.
 

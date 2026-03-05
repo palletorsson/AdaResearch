@@ -1,4 +1,4 @@
-# Vectors 6
+# Vectors: Steering and Attraction
 
 Steering and attraction. Two exercises that close the loop between intention and physics.
 
