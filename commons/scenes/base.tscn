@@ -114,7 +114,7 @@ mode = 1
 [node name="MovementTurn" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="1" unique_id=579380756 instance=ExtResource("12_26qpu")]
 
 [node name="MovementJump" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="2" unique_id=1972135051 instance=ExtResource("12_jump")]
-jump_button_action = "ax_button"
+jump_button_action = "_disabled"
 
 [node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=1831217974 instance=ExtResource("8_5nlub")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
@@ -157,7 +157,7 @@ light_energy = 1.5
 visible = false
 
 [node name="WristStatsDisplay" type="Label3D" parent="XROrigin3D/RightHand" index="5" unique_id=519152311]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.03, 0.05, 0.08)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.06, 0.05, 0.08)
 pixel_size = 0.0008
 text = "Loading..."
 font_size = 48

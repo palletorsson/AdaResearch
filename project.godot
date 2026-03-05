@@ -31,6 +31,9 @@ XRToolsRumbleManager="*uid://by853dk86g1qw"
 GameManager="*res://commons/managers/GameManager.gd"
 TextManager="*res://commons/managers/TextManager.gd"
 MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
+EcosystemManager="*res://commons/managers/EcosystemManager.gd"
+HazardManager="*res://commons/managers/HazardManager.gd"
+CatalystCapabilityManager="*res://commons/managers/CatalystCapabilityManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
 SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 TraceData="*res://commons/globals/trace_data.gd"
@@ -39,6 +42,7 @@ Subtitles="*res://commons/ui/subtitles/SubtitleManager.gd"
 StuckDetector="*res://commons/player/stuck_detector.gd"
 DebugLogger="*res://commons/managers/DebugLogger.gd"
 OversightVoiceBridge="*res://commons/tools/OversightVoiceBridge.gd"
+ClaudeBridge="*res://commons/tools/ClaudeBridge.gd"
 
 [debug]
 
