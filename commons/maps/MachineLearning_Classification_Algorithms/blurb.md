@@ -1,0 +1,7 @@
+# Classification Algorithms
+
+Twelve algorithms. One grid. Each runs a different strategy for generating form from noise — random walks that trace drunk paths across an 8×8 field, Gaussian distributions that heap probability into bell-curved terrain, height maps that jitter surfaces into landscapes no designer drew.
+
+The arena is a laboratory for watching randomness work. Cubes rise, rotate, vanish. Profiles extrude from nothing. Walkers leave trails like evidence. Every algorithm shares the same constrained space but produces radically different geometry — same seed conditions, divergent outcomes.
+
+Randomness is not the absence of structure. It is structure's precondition. The walk doesn't know where it's going, but it always goes somewhere. The distribution doesn't choose a shape, but shape emerges. Order is what randomness looks like after enough iterations.

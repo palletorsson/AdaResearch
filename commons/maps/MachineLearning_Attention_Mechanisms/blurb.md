@@ -1,0 +1,7 @@
+# Attention Mechanisms
+
+Twelve algorithms. One grid. Each one reshapes the same 8×8 field through a different species of chance — Gaussian peaks, random walks, procedural erosion, cube removal by column or range. The arena makes randomness visible: height maps that breathe, walkers that carve trails, profiles that never repeat.
+
+Roll dice enough times and structure appears. A Gaussian distribution clusters toward center. A random walk traces territory through accumulation. Slope gradients encode direction as rotation. The grid remembers every stochastic decision as geometry — raised cubes, carved absences, scattered objects. Randomness is not the opposite of order. It is order's raw material, the substrate from which pattern self-organizes.
+
+Every algorithm here is a different answer to the same question: what happens when you let go of control and watch what emerges?

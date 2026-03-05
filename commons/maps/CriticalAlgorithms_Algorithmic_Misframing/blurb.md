@@ -1,0 +1,5 @@
+# Algorithmic Misframing
+
+A 12×12 grid. An 8×8 arena at its center. Algorithms enter, perform, dissolve. Gaussian distributions sculpt terrain into bell-curve mountains. Random walks trace drunk paths across the field — 128 steps, each one a coin flip. Cubes rise, rotate, vanish. Profiles generate and regenerate. The grid is a stage for processes that refuse to repeat.
+
+Randomness is not the absence of structure. It is structure's other face. Every algorithm here uses chance as a building material — height variation, object placement, removal patterns, walk trajectories. The same seed, different outputs. The same rules, different worlds. Watch long enough and patterns emerge from noise, then break apart again. The arena doesn't demonstrate randomness. It demonstrates that order was never the default.

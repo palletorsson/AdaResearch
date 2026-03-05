@@ -1,0 +1,7 @@
+# Transfer Learning
+
+Twelve algorithms. One grid. Each one reshapes the same 8×8 region through a different species of randomness — Gaussian distributions cluster toward centers, random walks wander without destination, height maps erode and accumulate, removal patterns punch holes in solid geometry. The arena is a laboratory for watching disorder construct.
+
+Cubes rise by coin flip. Profiles generate terrain no designer chose. A walker traces 128 drunken steps and leaves architecture behind. Objects spawn, scatter, vanish. Every algorithm shares the same constraint — a bounded grid, a maximum height of three — but randomness makes each run unrepeatable. Same rules, different world.
+
+Control is the illusion. The parameters are yours: sigma, step count, variation range. But the output belongs to the process. Authorship distributes across the dice.

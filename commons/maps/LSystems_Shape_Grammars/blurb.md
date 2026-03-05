@@ -1,0 +1,7 @@
+# Shape Grammars
+
+A 12×12 grid. An 8×8 region in the center where algorithms perform. Gaussian distributions raise terrain into bell curves. Random walks leave trails across the surface — drunk steps that accumulate into structure. Cubes spawn, rotate, dissolve. Height maps ripple with noise. Profiles generate from nothing but a seed and a range.
+
+Every algorithm here runs on the same engine: constrained randomness. A walk bounded by walls. A distribution shaped by sigma. A removal pattern filtered by range, row, column. The constraint is the form. Without it, randomness produces static — uniform, featureless, dead. With it, landscapes emerge. Slopes gradient. Sculptures drip and bubble.
+
+Order doesn't oppose chaos here. It curates it. The grid is the grammar. The dice are the vocabulary. Structure is what randomness looks like when it has somewhere to go.

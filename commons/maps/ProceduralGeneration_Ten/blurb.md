@@ -1,0 +1,7 @@
+# Procedural Generation 10
+
+Four generators share one stage. Context-free grammars rewrite symbols into structure — language that builds itself. Fibonacci sequences spiral through accumulation, each term the sum of its past. Julia sets fracture the complex plane into belonging and escape. Tree generation branches downward from axiom to canopy, forking at every decision.
+
+An 8×8 grid. Eight columns, eight rows, sixty-four cells where each algorithm performs its particular trick of making something from almost nothing. Grammars produce. Sequences grow. Fractals divide. Trees split.
+
+What connects them is the question underneath: how does local rule become global form? A grammar rule fires and cathedrals appear. A recurrence relation iterates and sunflowers emerge. The arena doesn't teach four algorithms. It teaches one principle — that complexity is not designed but generated, and the generator is always simpler than the thing it makes.

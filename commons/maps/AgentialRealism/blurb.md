@@ -1,3 +1,7 @@
 # AgentialRealism
 
-A scaffold map in `advanced_concepts`. Replace this with the poetic entry point for the concept.
+Karen Barad's proposition: things don't exist before they interact. There are no pre-given objects waiting to be measured. The apparatus and the phenomenon co-constitute each other. Cut here, not there — and different worlds materialize. The "agent" is not the human holding the instrument. The agent is the cut itself.
+
+Observation is not passive. Every measurement is an incision that produces what it claims to discover. Electrons don't have definite positions until the apparatus forces a resolution. The boundary between "observer" and "observed" is not found — it is enacted. Enacted differently each time.
+
+Walk the room. The artifacts shift depending on where the cut falls. What counts as data depends on what counts as apparatus. Identity is not a property. It is a performance — ongoing, material, never settled.

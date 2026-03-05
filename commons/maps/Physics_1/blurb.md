@@ -1,0 +1,7 @@
+# Physics 1
+
+Objects fall. This is the first law anyone learns — not from a textbook but from a body. Drop a box. It accelerates at 9.8 meters per second squared. Gravity is constant. The ground is inevitable. Rigidbody physics encodes this: mass, force, collision. The engine does the math sixty times a second so the illusion holds.
+
+A dark sphere pulses in the corner — purple light breathing slow. It marks the space but doesn't fall. Some objects obey gravity. Some refuse it. The difference is a single boolean.
+
+The grid is 7 by 9. Each cell has coordinates. Each coordinate holds a rule. X is horizontal. Y is vertical. Height is the dimension you forget exists until something drops through it. Arrays map space. Physics fills it with consequence. The box doesn't choose to fall — but someone chose the parameters that make it.

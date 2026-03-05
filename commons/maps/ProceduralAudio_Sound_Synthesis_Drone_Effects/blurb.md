@@ -1,0 +1,5 @@
+# Sound Synthesis Drone Effects
+
+A 12×12 grid. Eight columns, eight rows of contested space. Random walks trace paths through it — 128 steps, each blind to what comes next. Gaussian distributions sculpt height from bell curves. Cubes spawn, rotate, get removed by dice rolls. Profiles rise and fall from pure noise. Every algorithm here uses randomness differently: uniform, weighted, normal, sequential. Same grid, same cubes, radically different landscapes.
+
+The arena makes the invisible audible. Each step generates a pitch. Each height maps to frequency. Randomness becomes waveform — the walk sings its own trajectory. What sounds like chaos carries structure. What looks like structure dissolves on inspection. The random is not the opposite of order. It is order's raw material — the undifferentiated field from which every pattern must be carved.
