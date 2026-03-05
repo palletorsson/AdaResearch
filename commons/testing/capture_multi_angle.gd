@@ -34,11 +34,12 @@ const MAP_ANGLES: Array[Dictionary] = [
 ]
 
 ## Artifact angles: yaw, pitch (orbit around artifact center)
+## pitch is positive = above focus, negative = below focus
 const ARTIFACT_ANGLES: Array[Dictionary] = [
-	{ "name": "front",  "yaw": 0.4,    "pitch": -0.35 },  # hero shot (matches existing default)
-	{ "name": "left",   "yaw": 1.97,   "pitch": -0.3  },  # 90° left
-	{ "name": "right",  "yaw": -1.17,  "pitch": -0.3  },  # 90° right
-	{ "name": "top",    "yaw": 0.4,    "pitch": -1.2  },  # looking down
+	{ "name": "front",  "yaw": 0.4,    "pitch": 0.4   },  # hero shot — slightly above, looking down
+	{ "name": "left",   "yaw": 1.97,   "pitch": 0.35  },  # 90° left, slightly above
+	{ "name": "right",  "yaw": -1.17,  "pitch": 0.35  },  # 90° right, slightly above
+	{ "name": "top",    "yaw": 0.4,    "pitch": 1.2   },  # looking down from above
 ]
 
 # ── Initialization ────────────────────────────────────────────────
