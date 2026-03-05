@@ -1,3 +1,7 @@
-# ML_Evolution
+# Evolution Arena
 
-A scaffold map in `machinelearning`. Replace this with the poetic entry point for the concept.
+Darwin had no gradient. No loss function, no backpropagation. Just bodies in a world, and the ones that survived made more of themselves. This is optimization before calculus — blind, parallel, wasteful, and it works.
+
+Rockets evolve thrust sequences toward a target. Flowers breed based on proximity to a selector. Bloops wander, eat, reproduce, die — their DNA encoding the trade-off between size and speed. Karl Sims creatures stumble into locomotion, morphology and behavior entangled in the same genome. Five populations running simultaneously in a sunken arena. Watch from above.
+
+Mutation is the entropy injection. Selection is the compression. The population holds both — enough disorder to search, enough pressure to converge. No individual learns anything. The population learns everything. Design without a designer. Intelligence distributed across generations and death.

@@ -1,0 +1,7 @@
+# Soft Body Carousel
+
+Cloth hangs from a spinning carousel. Soft mushroom bodies dangle from arms, swinging outward as the ride turns — then slamming into obstacles. Walk through the straps. Feel them part around you. Watch the hanging forms deform on impact and recover their shape. Or not.
+
+This is physics as play. Centripetal force pulls the soft bodies taut. Collisions compress them. Elastic restoration fights back — springs inside a mesh, trying to remember a shape that keeps getting interrupted. The carousel doesn't care. It keeps spinning. The obstacles don't move. Everything that gives is soft.
+
+Deformation is not damage. The body that yields to force and returns is not weaker than the rigid one — it's more adaptive. Softness is a strategy. The material that remembers its shape through disruption has already solved a problem the rigid body can't even pose.
