@@ -1,0 +1,7 @@
+# Brouwer_Intuitionism
+
+Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.
+
+Brouwer refused. If you cannot construct it, it does not exist. No existence without witness. No truth without a hand that built it. The law of excluded middle — *either P or not-P* — falls away, and with it, whole cathedrals of proof dissolve into smoke. What remains is only what you can actually make.
+
+Walk the stepping stones. Each platform appears only as you approach — nothing is given in advance. The gaps between are not failures of the map. They are honest. Some things cannot be constructed, and the space will not pretend otherwise. After Gödel showed the wall, Brouwer asked: what if we never claimed to see past it?
