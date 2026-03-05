@@ -1,7 +1,7 @@
-# AdvancedLaboratory_Feedback_Cybernetics
+# Feedback Cybernetics
 
-An arena for randomness. A 12×12 grid, 8×8 interior — the stage where algorithms perform without rehearsal. Gaussian distributions raise terrain into bell-curve mountains. Random walks trace drunk paths across cubes, raising what they touch. Height maps shuffle. Objects spawn and vanish. Profiles generate jagged skylines from noise.
+Same arena. Same 8×8 grid. Same `env_one` — but two of them, facing each other across the space, rotated ninety degrees apart. Mirror and echo. Output of one becomes input of the other.
 
-Every algorithm here uses the same raw material — `randf()`, the coin flip at the bottom of all procedural generation. But constraint shapes outcome. A Gaussian focuses randomness into peaks. A walk accumulates it into trails. A removal pattern subtracts it into absence. Same entropy source, different relational structure, different world.
+That's the line of flight. The algorithms are identical. What changes is the topology — a loop where the system observes itself. Positive feedback amplifies: small perturbations become avalanches. Negative feedback stabilizes: oscillations dampen toward equilibrium. The corridor between the two instances is tighter here, more obstacles, narrower paths. The space forces you through its own feedback structure.
 
-The grid doesn't compute answers. It grows them. Randomness isn't the opposite of design — it's design's unnamed collaborator.
+Cybernetics asked: what happens when a system refers to itself? Two paired objects, one rotation apart, caught in mutual reference. Control is not command from outside. Control is what emerges when a loop closes.
