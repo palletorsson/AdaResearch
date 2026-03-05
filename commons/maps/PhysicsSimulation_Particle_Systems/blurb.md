@@ -1,0 +1,7 @@
+# Particle Systems
+
+A particle system is a managed death. Thousands of entities born from an emitter, each given position, velocity, lifetime — each already dying. The system doesn't simulate objects. It simulates populations. Birth rate, death rate, forces applied in between.
+
+Here the room is void-scattered, open. 3D cellular automata pulse through generations — each cell alive or dead by neighbor count, each generation a frame in a population's argument with extinction. The rules are simple. The behavior is not. Adjust birth thresholds and watch crystalline structures nucleate from nothing. Shift survival ranges and watch them dissolve.
+
+Particles don't persist. That's the point. Every frame, the system kills what it made and makes more. Identity is statistical, not individual. The emitter remembers the pattern. The particles forget themselves.

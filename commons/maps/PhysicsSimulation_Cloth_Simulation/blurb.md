@@ -1,0 +1,7 @@
+# Cloth Simulation
+
+A grid of particles connected by springs. Each node obeys gravity, obeys its neighbors, obeys the wind. No single thread knows the shape of the fabric — shape emerges from constraint. Hooke's law repeated a thousand times becomes silk.
+
+The spring-mass system is a lie about continuity. Real cloth is woven — warp and weft, friction and fiber. Simulated cloth is a lattice of tiny arguments between stiffness and collapse. Damping keeps the peace. Resolution sets the grain. Turn the stiffness up: cardboard. Turn it down: the fabric melts through itself.
+
+Stretch it. Pin corners and let gravity speak. Watch the drape find its rest — a surface that no equation describes directly but that ten thousand constraints produce. Cloth is not an object. It is a negotiation at every node, every frame, between holding together and falling apart.
