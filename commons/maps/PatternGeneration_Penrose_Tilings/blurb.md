@@ -1,0 +1,7 @@
+# Penrose Tilings
+
+A tiling that never repeats. Two shapes — kites and darts, or thick and thin rhombs — lock together under strict matching rules. Every patch looks local, almost familiar. But zoom out and no translation maps the pattern onto itself. Aperiodic. The floor has no period. It cannot be shifted to match its own image.
+
+Roger Penrose found these in 1974. Nature found them earlier — quasicrystals arrange atoms this way, forbidden by classical crystallography until Dan Shechtman proved they exist. Five-fold symmetry. Mathematically impossible in periodic lattices, trivially present here.
+
+The matching rules are local. Each tile only checks its neighbors. No tile knows the global pattern. Yet the global pattern emerges — ordered without repeating, structured without cycling. Not random, not periodic. A third category. Proof that determinism and repetition were never the same thing.
