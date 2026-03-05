@@ -38,6 +38,8 @@ signal voice_recorded(wav_path: String)
 var _bridge_dir: String
 var _last_message_id: int = -1
 var _current_message: String = ""
+var _message_history: Array[String] = []
+const MAX_CONSOLE_MESSAGES := 8
 var _panel: Label3D
 var _background: MeshInstance3D
 var _accent_line: MeshInstance3D
@@ -57,6 +59,7 @@ var _record_effect: AudioEffectRecord
 var _mic_player: AudioStreamPlayer
 var _is_recording := false
 var _record_start_msec: int = 0
+var _last_voice_tick: int = -1
 
 
 func _ready() -> void:
@@ -329,11 +332,15 @@ func _process(delta: float) -> void:
 				_reattach()
 				return
 
-	# Voice max duration enforcement
-	if _is_recording and voice_max_seconds > 0:
+	# Voice: update elapsed time display + enforce max duration
+	if _is_recording:
 		var elapsed := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
-		if elapsed >= voice_max_seconds:
+		if voice_max_seconds > 0 and elapsed >= voice_max_seconds:
 			_stop_voice_recording()
+		elif is_instance_valid(_panel) and int(elapsed * 2) != _last_voice_tick:
+			# Update display every 0.5s
+			_last_voice_tick = int(elapsed * 2)
+			_refresh_display_with_voice(elapsed)
 
 	if _stats_dirty and is_instance_valid(_panel):
 		_stats_dirty = false
@@ -371,10 +378,11 @@ func _refresh_display() -> void:
 		lines.append("%s  |  %d XP  |  %s %.0f%%" % [map_display, _cached_xp, health_bar, _cached_health_pct])
 		lines.append("───────────────────────────")
 
-	# Claude message
-	if not _current_message.is_empty():
+	# Claude messages (show history, max 8)
+	if _message_history.size() > 0:
 		lines.append("Claude:")
-		lines.append(_current_message)
+		for msg in _message_history:
+			lines.append(msg)
 	else:
 		lines.append("Claude: [awaiting]")
 
@@ -467,6 +475,10 @@ func _poll_outbox() -> void:
 
 	_last_message_id = msg_id
 	_current_message = str(data.get("text", ""))
+	var ts := Time.get_time_string_from_system().substr(0, 5)  # "HH:MM"
+	_message_history.append("[%s] %s" % [ts, _current_message])
+	if _message_history.size() > MAX_CONSOLE_MESSAGES:
+		_message_history = _message_history.slice(-MAX_CONSOLE_MESSAGES)
 	_refresh_display()
 
 	print("ClaudeBridge: message #%d → %s" % [msg_id, _current_message.substr(0, 80)])
@@ -595,11 +607,11 @@ func _start_voice_recording() -> void:
 			return
 
 	_record_start_msec = Time.get_ticks_msec()
+	_last_voice_tick = -1
 	_is_recording = true
 	_mic_player.play()
 	_record_effect.set_recording_active(true)
-	# Show REC indicator on console
-	_show_voice_status("REC...")
+	_refresh_display_with_voice(0.0)
 	print("ClaudeBridge: recording started")
 
 
@@ -612,6 +624,9 @@ func _stop_voice_recording() -> void:
 
 	var duration_sec := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
 	print("ClaudeBridge: recording stopped (%.2fs)" % duration_sec)
+	# Restore panel color from recording orange
+	if is_instance_valid(_panel):
+		_panel.modulate = Color(0.85, 0.92, 1.0, 0.95)
 
 	if duration_sec < voice_min_seconds:
 		_show_voice_status("Too short")
@@ -657,9 +672,30 @@ func _stop_voice_recording() -> void:
 		rf.store_string(JSON.stringify(payload))
 		rf.close()
 
-	_show_voice_status("Sent (%.1fs)" % duration_sec)
+	_show_voice_status("Recorded %.1fs" % duration_sec)
 	print("ClaudeBridge: voice saved %s (%d bytes, peak=%.4f)" % [wav_path, data.size(), peak])
 	voice_recorded.emit(wav_path)
+
+
+func _refresh_display_with_voice(elapsed: float) -> void:
+	if not is_instance_valid(_panel):
+		return
+	var lines: PackedStringArray = []
+	if show_stats:
+		var map_display := _cached_map if not _cached_map.is_empty() else "---"
+		var health_bar := _get_health_bar(_cached_health_pct)
+		lines.append("%s  |  %d XP  |  %s %.0f%%" % [map_display, _cached_xp, health_bar, _cached_health_pct])
+		lines.append("───────────────────────────")
+	if _message_history.size() > 0:
+		lines.append("Claude:")
+		for msg in _message_history:
+			lines.append(msg)
+	else:
+		lines.append("Claude: [awaiting]")
+	lines.append("Recording... %ds" % int(elapsed))
+	_panel.text = "\n".join(lines)
+	_panel.modulate = Color(1.0, 0.6, 0.3, 0.95)
+	_update_background()
 
 
 func _show_voice_status(msg: String) -> void:

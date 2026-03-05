@@ -54,34 +54,54 @@ All files live at `/sdcard/Android/data/com.example.adaresearchzeroone/files/cla
 
 ## PC-Side Usage
 
-The `claude_bridge_poll.py` script handles all PC-side operations:
+The `claude_bridge_poll.py` script handles all PC-side operations. All commands return JSON.
+
+### Primary: `interact` (one command per cycle)
 
 ```bash
-# Send a message to VR hand panel
-python commons/tools/claude_bridge_poll.py send "Walk to the pattern maker station"
+# Send message + wait for user response (button or voice)
+python claude_bridge_poll.py interact "Walk to the pattern maker station"
 
-# Poll for user response (button press or voice)
-python commons/tools/claude_bridge_poll.py poll --message-id 11 --timeout 120
+# Send message + wait + take screenshot after response
+python claude_bridge_poll.py interact "What do you see?" --screenshot
 
-# Take a screenshot (warns user first, saves with timestamp)
-python commons/tools/claude_bridge_poll.py screenshot
+# Fire-and-forget (no wait for response)
+python claude_bridge_poll.py interact "Looking good!" --no-wait
 
-# Pull and transcribe a voice message
-python commons/tools/claude_bridge_poll.py voice --message-id 3
+# Just take a screenshot, no message
+python claude_bridge_poll.py look
+```
+
+Returns structured JSON:
+```json
+{"status": "ok", "message_id": 12, "sent": "Walk to the station",
+ "response_type": "voice", "response": "I see the pattern maker",
+ "screenshot": "C:/.../bridge_screenshots/vr_20260305_100000.png"}
+```
+
+### Low-level commands
+
+```bash
+python claude_bridge_poll.py send "message"        # send only
+python claude_bridge_poll.py poll --timeout 120     # poll only (auto uses last ID)
+python claude_bridge_poll.py screenshot             # screenshot only
+python claude_bridge_poll.py voice                  # pull + transcribe voice
 ```
 
 ## VR-Side Behavior
 
 ### Left Hand Console
 - Dark background panel attached to left hand (like WristStatsDisplay on right hand)
-- Shows Claude's messages with auto-scroll
+- Shows last 8 messages with timestamps (e.g. `[10:32] Walk to the station`)
 - Also displays map name and XP stats at the top
-- Position: `(-0.03, 0.06, 0.08)` relative to LeftHand
+- Position: `(-0.02, 0.08, 0.05)` relative to LeftHand
 
 ### User Input
 - **X button (left controller)**: Confirm/acknowledge — writes `inbox.json` with `"done"`
 - **B button (right controller)**: Push-to-talk voice recording
   - Hold B to record, release to stop
+  - Console shows "Recording... Xs" with live elapsed time (orange text)
+  - On release: shows "Recorded X.Xs" briefly
   - Saves WAV to bridge directory + writes `voice_ready.json` flag
   - PC pulls WAV via adb, transcribes with Whisper API
 

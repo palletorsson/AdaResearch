@@ -1,12 +1,14 @@
 """Claude Bridge — PC-side helper for VR communication.
 
 Commands:
-  python claude_bridge_poll.py send "Walk to the pattern maker station"
-  python claude_bridge_poll.py poll [--message-id 3] [--timeout 60]
+  python claude_bridge_poll.py interact "Walk to the station" [--screenshot] [--no-wait] [--timeout 60]
+  python claude_bridge_poll.py look                           # screenshot only, no message
+  python claude_bridge_poll.py send "message"                 # send only, no wait
+  python claude_bridge_poll.py poll [--timeout 60]            # poll only (uses last sent ID)
   python claude_bridge_poll.py screenshot [--save path.png]
-  python claude_bridge_poll.py voice [--message-id 3]
+  python claude_bridge_poll.py voice
 
-All commands send acknowledgment messages to the user's VR hand panel.
+All commands output JSON to stdout and log to stderr.
 """
 import sys
 import time
@@ -24,12 +26,12 @@ SCREENSHOTS_DIR = Path(__file__).parent / "bridge_screenshots"
 TRANSCRIBE_SCRIPT = Path(__file__).parent / "transcribe_voice.py"
 OUTBOX_LOCAL = TEMP_DIR / "claude_outbox.json"
 
-# Tracks current message ID across calls in same process
 _message_id_file = TEMP_DIR / "claude_bridge_msg_id.txt"
 
 
+# ── helpers ──────────────────────────────────────────────────────────────────
+
 def _get_next_id() -> int:
-    """Increment and return the next message ID."""
     current = 0
     if _message_id_file.exists():
         try:
@@ -48,6 +50,11 @@ def _get_current_id() -> int:
         except ValueError:
             pass
     return 0
+
+
+def _out(data: dict) -> None:
+    """Print JSON result to stdout."""
+    print(json.dumps(data))
 
 
 def _adb(*args) -> subprocess.CompletedProcess:
@@ -70,8 +77,9 @@ def adb_rm(remote: str) -> None:
     _adb("shell", f"rm -f {remote}")
 
 
+# ── core operations ─────────────────────────────────────────────────────────
+
 def send_message(text: str, msg_id: int = -1) -> int:
-    """Send a message to VR hand panel. Returns the message ID."""
     if msg_id < 0:
         msg_id = _get_next_id()
     payload = {"id": msg_id, "text": text}
@@ -85,9 +93,8 @@ def send_message(text: str, msg_id: int = -1) -> int:
 
 
 def take_screenshot(save_path: str = None, warn_user: bool = True) -> str | None:
-    """Take a VR screenshot. Optionally warns user first. Returns local path."""
     if warn_user:
-        send_message("Taking screenshot in 2 sec...")
+        send_message("Taking screenshot in 2 sec...", msg_id=_get_current_id())
         time.sleep(2)
 
     r = _adb("shell", f"screencap -p {SCREEN_PATH}")
@@ -105,20 +112,16 @@ def take_screenshot(save_path: str = None, warn_user: bool = True) -> str | None
         print(f"[bridge] Screenshot too small ({size} bytes) — Quest may be sleeping", file=sys.stderr)
         return None
 
-    # Save with timestamp
+    SCREENSHOTS_DIR.mkdir(exist_ok=True)
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    dest = str(SCREENSHOTS_DIR / f"vr_{ts}.png")
     if save_path:
-        shutil.copy(local, save_path)
-        print(f"[bridge] Screenshot saved: {save_path}", file=sys.stderr)
-    else:
-        SCREENSHOTS_DIR.mkdir(exist_ok=True)
-        ts = time.strftime("%Y%m%d_%H%M%S")
-        dest = SCREENSHOTS_DIR / f"vr_{ts}.png"
-        shutil.copy(local, str(dest))
-        print(f"[bridge] Screenshot saved: {dest}", file=sys.stderr)
+        dest = save_path
+    shutil.copy(local, dest)
+    print(f"[bridge] Screenshot saved: {dest}", file=sys.stderr)
 
-    print(f"[bridge] Screenshot OK ({size} bytes)", file=sys.stderr)
-    send_message("Screenshot saved!")
-    return local
+    send_message("Screenshot saved!", msg_id=_get_current_id())
+    return dest
 
 
 def check_inbox(message_id: int) -> str | None:
@@ -147,10 +150,8 @@ def check_voice(message_id: int) -> str | None:
     except (json.JSONDecodeError, KeyError):
         return None
 
-    # Acknowledge to user
     send_message("Receiving voice message...", msg_id=_get_current_id())
 
-    # Pull WAV
     local_wav = str(TEMP_DIR / "claude_voice.wav")
     if not adb_pull(f"{BRIDGE_PATH}/voice.wav", local_wav):
         print("[bridge] Failed to pull voice.wav", file=sys.stderr)
@@ -161,7 +162,6 @@ def check_voice(message_id: int) -> str | None:
 
     adb_rm(f"{BRIDGE_PATH}/voice_ready.json")
 
-    # Transcribe
     send_message("Transcribing...", msg_id=_get_current_id())
     result = subprocess.run(
         [sys.executable, str(TRANSCRIBE_SCRIPT), local_wav],
@@ -177,80 +177,151 @@ def check_voice(message_id: int) -> str | None:
     return transcript if transcript else None
 
 
-def poll(message_id: int = -1, timeout: int = 120, interval: float = 2.0) -> str | None:
-    """Poll for response. Sends acknowledgments to VR."""
+def poll(message_id: int = -1, timeout: int = 120, interval: float = 2.0) -> tuple[str | None, str | None]:
+    """Poll for response. Returns (response_type, response_text)."""
+    if message_id < 0:
+        message_id = _get_current_id()
     start = time.time()
     print(f"[bridge] Polling for response (id={message_id}, timeout={timeout}s)...", file=sys.stderr)
 
-    last_inbox_id = None
-
     while time.time() - start < timeout:
-        # Check voice first
         voice = check_voice(message_id)
         if voice is not None:
-            return voice
+            return ("voice", voice)
 
-        # Check button confirm
         inbox = check_inbox(message_id)
-        if inbox is not None and inbox != last_inbox_id:
-            # Acknowledge the confirm
+        if inbox is not None:
             send_message("Claude live!", msg_id=_get_current_id())
-            return inbox
+            return ("button", inbox)
 
         time.sleep(interval)
 
     print("[bridge] Timeout", file=sys.stderr)
-    return None
+    return (None, None)
 
+
+# ── high-level commands ──────────────────────────────────────────────────────
+
+def interact(text: str = None, screenshot: bool = False, no_wait: bool = False,
+             timeout: int = 120) -> dict:
+    """Unified interaction: send → poll → optional screenshot. Returns result dict."""
+    result = {
+        "status": "ok",
+        "message_id": None,
+        "sent": text,
+        "response_type": None,
+        "response": None,
+        "screenshot": None,
+    }
+
+    # Send message if provided
+    if text:
+        msg_id = send_message(text)
+        result["message_id"] = msg_id
+    else:
+        result["message_id"] = _get_current_id()
+
+    # Fire-and-forget
+    if no_wait and not screenshot:
+        return result
+
+    # Poll for response
+    if not no_wait:
+        resp_type, resp_text = poll(timeout=timeout)
+        result["response_type"] = resp_type
+        result["response"] = resp_text
+        if resp_type is None:
+            result["status"] = "timeout"
+
+    # Screenshot
+    if screenshot:
+        path = take_screenshot(warn_user=True)
+        result["screenshot"] = path
+        if path is None:
+            result["status"] = "screenshot_failed" if result["status"] == "ok" else result["status"]
+
+    return result
+
+
+def look() -> dict:
+    """Screenshot only — no message, no wait."""
+    path = take_screenshot(warn_user=True)
+    return {
+        "status": "ok" if path else "screenshot_failed",
+        "screenshot": path,
+    }
+
+
+# ── CLI ──────────────────────────────────────────────────────────────────────
 
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Claude Bridge helper")
     sub = parser.add_subparsers(dest="command")
 
+    # interact (primary command)
+    p_interact = sub.add_parser("interact", help="Send + poll + optional screenshot")
+    p_interact.add_argument("text", nargs="?", default=None, help="Message to send")
+    p_interact.add_argument("--screenshot", action="store_true", help="Take screenshot after response")
+    p_interact.add_argument("--no-wait", action="store_true", help="Fire-and-forget, don't poll")
+    p_interact.add_argument("--timeout", type=int, default=120)
+
+    # look (screenshot shorthand)
+    sub.add_parser("look", help="Take screenshot only")
+
     # send
-    p_send = sub.add_parser("send", help="Send message to VR")
+    p_send = sub.add_parser("send", help="Send message to VR (no wait)")
     p_send.add_argument("text", help="Message text")
 
     # poll
     p_poll = sub.add_parser("poll", help="Poll for user response")
     p_poll.add_argument("--message-id", type=int, default=-1)
     p_poll.add_argument("--timeout", type=int, default=120)
-    p_poll.add_argument("--interval", type=float, default=2.0)
 
     # screenshot
     p_ss = sub.add_parser("screenshot", help="Take VR screenshot")
     p_ss.add_argument("--save", help="Save path", default=None)
     p_ss.add_argument("--no-warn", action="store_true", help="Skip 2s warning")
 
-    # voice (one-shot: pull + transcribe)
+    # voice
     p_voice = sub.add_parser("voice", help="Pull and transcribe voice")
     p_voice.add_argument("--message-id", type=int, default=-1)
 
     args = parser.parse_args()
 
-    if args.command == "send":
+    if args.command == "interact":
+        result = interact(args.text, args.screenshot, args.no_wait, args.timeout)
+        _out(result)
+
+    elif args.command == "look":
+        _out(look())
+
+    elif args.command == "send":
         msg_id = send_message(args.text)
-        print(msg_id)
+        _out({"status": "ok", "message_id": msg_id})
 
     elif args.command == "poll":
-        resp = poll(args.message_id, args.timeout, args.interval)
-        if resp is None:
+        msg_id = args.message_id if args.message_id >= 0 else _get_current_id()
+        resp_type, resp_text = poll(msg_id, args.timeout)
+        if resp_type is None:
+            _out({"status": "timeout", "response_type": None, "response": None})
             sys.exit(1)
-        print(resp)
+        _out({"status": "ok", "response_type": resp_type, "response": resp_text})
 
     elif args.command == "screenshot":
         path = take_screenshot(args.save, warn_user=not args.no_warn)
         if path is None:
+            _out({"status": "screenshot_failed", "screenshot": None})
             sys.exit(1)
-        print(path)
+        _out({"status": "ok", "screenshot": path})
 
     elif args.command == "voice":
-        transcript = check_voice(args.message_id)
+        mid = args.message_id if args.message_id >= 0 else _get_current_id()
+        transcript = check_voice(mid)
         if transcript is None:
-            print("No voice message ready", file=sys.stderr)
+            _out({"status": "no_voice", "response": None})
             sys.exit(1)
-        print(transcript)
+        _out({"status": "ok", "response_type": "voice", "response": transcript})
 
     else:
         parser.print_help()
