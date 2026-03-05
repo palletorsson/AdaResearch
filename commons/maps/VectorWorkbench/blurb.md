@@ -1,5 +1,3 @@
-# Vector Workbench
-
 Universal sandbox for exploring vector operations.
 
 ## What It Shows

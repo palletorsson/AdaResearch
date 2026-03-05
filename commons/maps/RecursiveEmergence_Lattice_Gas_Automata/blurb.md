@@ -1,5 +1,3 @@
-# Lattice Gas Fluid Room
-
 Particles on a grid. Six directions, binary occupation, deterministic collisions. Two particles meet head-on — they scatter perpendicular. That's the entire physics. No calculus, no partial differential equations, no continuum assumption.
 
 Run it long enough. The lattice forgets it's discrete. Vortices form. Turbulence cascades. The Navier-Stokes equations — among the hardest unsolved problems in mathematics — emerge from particles that can only count to one.

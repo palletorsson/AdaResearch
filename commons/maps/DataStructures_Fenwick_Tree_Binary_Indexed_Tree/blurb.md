@@ -1,5 +1,3 @@
-# Fenwick Tree Steps
-
 A Fenwick tree stores cumulative sums in a flat array. No pointers, no nodes — just indices whose binary representations encode their own reach. Flip the lowest set bit and you climb. Flip it again and you climb further. Each index knows exactly how much of the past it carries.
 
 Update one element and only log(n) entries change. Query a prefix sum and only log(n) lookups resolve. The trick is arithmetic: `i & (-i)` extracts the responsibility of each position. The tree hides inside the binary structure of counting itself.

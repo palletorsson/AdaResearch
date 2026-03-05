@@ -1,5 +1,3 @@
-# Iterated Function Systems Fractal Room
-
 A finite set of contractions. Apply them all. Take the output, apply them again. The attractor emerges — not drawn but converged upon. IFS encodes a fern in four affine maps. A forest in a handful of matrices. The whole shape lives inside its own pieces, and every piece contains the whole.
 
 Koch curves climb the walls here, their fractal edges folding inward at every scale. Three-dimensional geometry built from rules that fit in a single line. The platform repeats beneath your feet — smaller, rotated, translated — because the system that made it cannot stop making it.

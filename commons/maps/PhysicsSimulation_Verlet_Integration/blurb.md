@@ -1,5 +1,3 @@
-# Verlet Integration
-
 Forget velocity. Verlet integration remembers where you were and where you are — that's enough. The formula is almost too simple: take the current position, double it, subtract the previous position, add acceleration scaled by time squared. No velocity variable. No momentum tracking. Just positions and their ghosts.
 
 This is the method that holds cloth together, that keeps molecular dynamics honest, that runs inside every physics engine pretending to be continuous. It works because it's time-reversible — run the simulation backward and you arrive exactly where you started. Energy doesn't drift. The system doesn't slowly explode.

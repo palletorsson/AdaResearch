@@ -1,5 +1,3 @@
-# Fractional Brownian Motion
-
 One octave of noise is static. Layer it — half the amplitude, double the frequency, repeat — and terrain appears. FBM is accumulation. Each pass adds detail at a smaller scale, the way coastlines reveal more jaggedness the closer you look. The sum of simple disorder, structured by ratio.
 
 Ridged multifractal folds the noise back on itself — absolute value creates sharp creases, mountain ridges, lightning. Turbulence does the same without direction. Domain warping feeds the output back as input coordinates, bending space through its own texture. The procedural engine eating its own tail.

@@ -1,5 +1,3 @@
-# AgentialRealism
-
 Karen Barad's proposition: things don't exist before they interact. There are no pre-given objects waiting to be measured. The apparatus and the phenomenon co-constitute each other. Cut here, not there — and different worlds materialize. The "agent" is not the human holding the instrument. The agent is the cut itself.
 
 Observation is not passive. Every measurement is an incision that produces what it claims to discover. Electrons don't have definite positions until the apparatus forces a resolution. The boundary between "observer" and "observed" is not found — it is enacted. Enacted differently each time.

@@ -1,5 +1,3 @@
-# Cube Mound
-
 A 12×12 grid. An 8×8 region at its center. Cubes rise and fall according to algorithms that trade in chance — shuffle, sample, scatter. Each run produces different terrain from identical rules. The mound rebuilds itself every time.
 
 This is the laboratory where randomness becomes material. Spheres mark positions. Cubes stack into landscapes no one designed. The grid doesn't care about intention — it executes process and lets pattern emerge from probability. Deterministic code producing nondeterministic results.

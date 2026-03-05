@@ -1,5 +1,3 @@
-# Evolving Creatures
-
 Creatures learn to walk by failing. A population of bipedal bodies — torsos, limbs, hinge joints — thrash against a physics simulation. Each generation, the ones that stumble farthest forward survive. Their gait parameters mutate, recombine, get tested again. Karl Sims showed this in 1994: you don't design locomotion, you breed it. The algorithm doesn't know what walking looks like. It only knows distance.
 
 Beside them, a ball rolls downhill on a loss landscape. Gradient descent — the same engine that trains every neural network — follows the steepest slope toward a minimum. Learning rate controls the step size. Too large, it overshoots. Too small, it stalls. The surface is the problem; the path is the solution being discovered.

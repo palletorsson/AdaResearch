@@ -1,5 +1,3 @@
-# ISO Metaballs
-
 Each metaball is a point radiating influence. A distance field — strongest at center, fading outward. One sphere alone is trivial. But place two near each other and their fields sum. Where combined density crosses the threshold, a surface appears. Not two objects touching. One object, born from proximity.
 
 The marching algorithm traces this threshold — finds the skin where inside becomes outside. Move the sources closer: the surface bulges, stretches, merges. Pull them apart: it pinches, thins, splits. No mesh editing. No vertex welding. The geometry is a consequence of relationship.

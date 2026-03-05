@@ -1,5 +1,3 @@
-# Bridges and Islands
-
 Seven bridges. Four islands. One question: can you cross every bridge exactly once without retracing your steps? In 1736, Euler said no — and proved it by ignoring everything except connection. He threw away distance, shape, size. Kept only nodes and edges. The map dissolved into a diagram. Geography became topology.
 
 Walk the Königsberg problem in space. The islands float in void, linked by narrow bridges you must physically cross. Three artifacts wait on separate landmasses. To reach them all, you confront the same constraint Euler did — degree parity, the handshake at each node. Odd-degree vertices block the circuit. The bridges refuse to cooperate.

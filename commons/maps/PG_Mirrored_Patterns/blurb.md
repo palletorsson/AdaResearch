@@ -1,5 +1,3 @@
-# PG Mirrored Patterns
-
 A cellular automaton reflects across an axis. Each generation doubles — left mirrors right, top mirrors bottom. The result is not repetition but kaleidoscope. Symmetry imposed on chaos produces texture: organic, crystalline, impossible to predict from the rule alone.
 
 Beside it, a maze grows without center. Rhizomatic — no trunk, no root, no hierarchy. Branches fork and fork again, connecting laterally, refusing the tree. Every path is middle. Every node is equally far from authority.

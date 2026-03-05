@@ -1,5 +1,3 @@
-# Context Free Grammars CFG
-
 A grammar that draws. Context-free grammars define languages through recursive substitution — symbol becomes string becomes symbol becomes string. L-systems apply this to geometry. One axiom, a handful of rules, and the alphabet unfolds into branching structures that look like trees because they *are* trees, parsed spatially instead of syntactically.
 
 On the 8x8 grid, watch production rules fire. Each generation rewrites the previous. Simple seeds — F, +, −, [ , ] — iterate into complexity no single rule contains. Brackets push and pop state. The turtle remembers where it was, forgets, returns. Recursion as architecture.

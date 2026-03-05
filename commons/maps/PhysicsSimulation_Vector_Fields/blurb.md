@@ -1,5 +1,3 @@
-# Vector Fields
-
 Every point in space carries an instruction. A direction. A magnitude. The vector field is a continuous assignment of motion — not to objects, but to space itself.
 
 Arrows on a grid show the field's skeleton. Sources diverge; sinks converge; vortices curl matter into persistent rotation. Saddle points split flow like a decision. Particles released into the field trace streamlines — paths no one drew but the math implied. Thousands of them, reading local instructions, producing global structure.

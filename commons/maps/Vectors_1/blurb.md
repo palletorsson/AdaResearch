@@ -1,5 +1,3 @@
-# Vectors
-
 A point in space is a fiction until you say where you're standing. Three arrows — î, ĵ, k̂ — define the scaffold. Every position is a weighted sum: so much of this direction, so much of that, so much of the other. P = xî + yĵ + zk̂. Decomposition as origin story.
 
 Grab the basis vectors. Stretch them. Watch the target point rewrite itself as its components shift — dashed lines tracing the skeleton of a coordinate. Addition is geometric: place one arrow's tail at another's head. The resultant closes the triangle. No numbers needed. The algebra is already spatial.

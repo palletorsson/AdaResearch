@@ -1,5 +1,3 @@
-# Soft Body Gallery Part 2
-
 Twelve more tests. Twelve more ways matter refuses to behave.
 
 Pick up a cube — it deforms under grip pressure, bulges where fingers press, recovers when released. Grab the long stick — it flexes, oscillates, settles into a shape that remembers force. Every object here is a spring-mass system negotiating between what it was and what contact made it. Rounded geometry, configurable segments, soft meshes built vertex by vertex in code.

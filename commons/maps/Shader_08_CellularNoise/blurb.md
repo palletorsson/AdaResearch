@@ -1,5 +1,3 @@
-# Cellular Noise
-
 Scatter points across a plane. Now ask every pixel: which point is closest? The answer is a Voronoi diagram — space partitioned by proximity, each cell belonging to its nearest seed. Worley noise is the distance to that nearest point (F1): smooth hills rising from each center, ridges where territories collide.
 
 Subtract F1 from F2 — the second-nearest distance — and the ridges isolate into crackle patterns. Cell walls without cells. Structure defined entirely by boundaries.

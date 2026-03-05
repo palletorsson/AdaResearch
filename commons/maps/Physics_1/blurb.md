@@ -1,5 +1,3 @@
-# Physics 1
-
 Objects fall. This is the first law anyone learns — not from a textbook but from a body. Drop a box. It accelerates at 9.8 meters per second squared. Gravity is constant. The ground is inevitable. Rigidbody physics encodes this: mass, force, collision. The engine does the math sixty times a second so the illusion holds.
 
 A dark sphere pulses in the corner — purple light breathing slow. It marks the space but doesn't fall. Some objects obey gravity. Some refuse it. The difference is a single boolean.

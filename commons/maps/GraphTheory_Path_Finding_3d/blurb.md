@@ -1,5 +1,3 @@
-# Path Finding 3d
-
 A matching pairs vertices — each vertex claimed by at most one edge. Maximum matching finds the largest possible set. Greedy approaches fail. Bipartite graphs yield to simpler methods. General graphs resist.
 
 The problem is odd cycles. An augmenting path alternates matched and unmatched edges, but odd cycles create contradictions — a vertex that must be both free and taken. Edmonds' insight: shrink the cycle into a single supervertex. The blossom contracts. What was a cycle becomes a point. Solve the smaller graph, then expand. Recursion through collapse.

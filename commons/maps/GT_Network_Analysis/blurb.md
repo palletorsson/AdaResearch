@@ -1,5 +1,3 @@
-# Network Hub
-
 Every network has a center. Find it.
 
 Centrality measures ask: which node matters most? Degree counts connections. Betweenness counts how many shortest paths pass through. Eigenvector asks not just who you know, but who *they* know. Different questions, different answers — the most connected node is not always the most important one.

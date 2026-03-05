@@ -1,5 +1,3 @@
-# Spanning Tree Garden
-
 A graph has redundant paths. A spanning tree does not. Strip every cycle, keep every node reachable, minimize total weight — what remains is the skeleton. Kruskal sorts edges by cost and adds them greedily. Prim grows outward from a single root. Both arrive at the same minimum structure, built by opposite instincts.
 
 Scattered platforms float at different heights across an open void. Narrow walkways connect them — each one an edge you walk, each platform a node you stand on. The MST artifact sits on the central elevated island, the convergence point of least-cost connection. No redundancy. No shortcuts. Every path earns its place or doesn't exist.

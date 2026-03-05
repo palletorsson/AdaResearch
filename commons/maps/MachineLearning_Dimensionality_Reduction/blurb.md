@@ -1,5 +1,3 @@
-# Dimensionality Reduction
-
 A 12×12 grid. An 8×8 arena at its center. Algorithms compete here — not for correctness, but for what randomness can build.
 
 Gaussian distributions sculpt terrain into bell-curved landscapes. Random walks trace drunk paths across the grid, raising cubes where they stumble. Height maps stack and subtract. Profiles generate from noise. Objects appear, rotate, vanish. Each algorithm reshapes the same space differently — same grid, same cells, different logic, different world. The arena is a stage where chance performs construction.

@@ -1,5 +1,3 @@
-# Psychoacoustics
-
 Psychoacoustics maps the gap between signal and sensation. Sound is pressure waves — measurable, graphable, physical. Hearing is none of those things. The cochlea performs a Fourier transform in wet tissue. The brain fills in missing fundamentals, fabricates spatial position from timing differences measured in microseconds, perceives loudness on a logarithmic curve that compresses a trillionfold range into "quiet" and "loud."
 
 Equal-loudness contours. Critical bands. Masking — where one frequency renders another inaudible, not because it's gone but because perception has a budget. Beating, roughness, the uncanny zone between two tones too close to separate but too far to fuse.

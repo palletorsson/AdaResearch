@@ -1,5 +1,3 @@
-# Sequence Memory
-
 Order depends on what came before. Recurrent networks process sequences by carrying state forward — each output shaped by every prior input. But memory decays. Gradients vanish. The signal from ten steps ago dissolves into noise.
 
 LSTMs solve this with gates — forget, input, output — three learned filters that decide what to keep, what to discard, what to pass on. Memory becomes selective. A cell state runs like a conveyor belt through time, modified but never fully overwritten. Transformers abandon recurrence entirely. Attention lets every position in a sequence look at every other position simultaneously. No conveyor belt — a hall of mirrors. Time collapses into weighted relationships.

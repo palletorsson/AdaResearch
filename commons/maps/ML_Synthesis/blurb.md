@@ -1,5 +1,3 @@
-# ML Synthesis Arena
-
 Everything learned, gathered on floating platforms above a void. Three islands. Three problems. One question: what holds them together.
 
 A creature with random joints thrashes, fails, thrashes again — and walks. Reinforcement learning as bodily negotiation. The agent doesn't know its own shape until it moves. Policy gradient descent through a space of possible gaits, each trial burning a path between chaos and coordination. Reward is just surprise reduction with a direction.

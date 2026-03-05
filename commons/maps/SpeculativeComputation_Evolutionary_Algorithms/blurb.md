@@ -1,0 +1,3 @@
+A grid. Twelve by twelve. Eight by eight in the center where the action happens. Algorithms enter and reshape the terrain — random walks that wander without purpose, Gaussian distributions that cluster around a mean, height maps that rise and fall on dice rolls. Cubes appear, rotate, dissolve. Profiles generate from noise. A walker leaves a trail of raised geometry, composing architecture from coin flips.
+
+Randomness is not the absence of structure. It is structure's raw material. The arena doesn't produce chaos. It produces possibility constrained by rules. The same seed, different parameters, unrecognizable results. Control without determinism. Design without designers.

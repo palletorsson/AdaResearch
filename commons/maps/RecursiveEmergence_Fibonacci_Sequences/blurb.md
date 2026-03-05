@@ -1,5 +1,3 @@
-# Fibonacci Spiral Chamber
-
 1, 1, 2, 3, 5, 8, 13. Each number the sum of its two predecessors. The rule is trivial — addition. The result is not. Fibonacci sequences generate spirals that appear in sunflower heads, nautilus shells, hurricane arms. The golden ratio φ ≈ 1.618 emerges as the sequence's limit, an irrational number that rectangles and galaxies converge toward independently.
 
 The spiral chamber lays this bare. Proportions govern the room itself — walls, voids, trajectories all scaled to φ. The sequence unfolds spatially. What begins as simple accumulation curves into architecture.

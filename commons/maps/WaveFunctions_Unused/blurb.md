@@ -1,0 +1,5 @@
+Standing waves freeze motion into architecture. Two traveling waves, equal and opposite, produce nodes — points of perfect stillness — and antinodes — points of maximum displacement. Nothing moves forward. Everything oscillates in place. The wave goes nowhere and fills the room.
+
+The arena stages this paradox in body and field. Interference grids render superposition as visible terrain — peaks reinforce, troughs annihilate, and the resulting pattern holds still while its components never stop. A skeletal figure dances beside the array, sine functions cascading down its bone chain, phase-lagged joint by joint. Da Vinci's proportional body sweeps its arcs through Fourier decomposition. Anatomy becomes frequency spectrum.
+
+Stillness is not the absence of movement. It is movement perfectly opposed — two directions choosing the same place.

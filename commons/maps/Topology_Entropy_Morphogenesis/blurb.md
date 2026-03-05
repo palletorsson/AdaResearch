@@ -1,5 +1,3 @@
-# Edmonds' Algorithm: Maximum Matching
-
 Matching pairs nodes. Given a graph, find the largest set of edges where no vertex appears twice — every node matched at most once. In bipartite graphs this is straightforward. In general graphs, odd cycles break everything. A cycle of three, five, seven nodes — one is always left out. The matching can't close.
 
 Edmonds' blossom algorithm solves this by refusing the problem's terms. When it finds an odd cycle, it contracts the entire structure into a single vertex — collapses the impossible into a point. Solves the reduced graph. Then re-expands, restoring the blossom with its matching intact. The thing that couldn't pair doesn't disappear. It transforms.

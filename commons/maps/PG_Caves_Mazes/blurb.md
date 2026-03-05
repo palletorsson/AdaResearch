@@ -1,5 +1,3 @@
-# PG Caves and Mazes
-
 A wall splits the arena. Two worlds on either side, built from the same nothing.
 
 Left: the cave. A random walk staggers through solid rock — each step carves void from mass. No plan, no destination. The walk wanders until space appears. Organic, irregular, full of dead ends that feel like discoveries. The cave doesn't know its own shape until it's finished.

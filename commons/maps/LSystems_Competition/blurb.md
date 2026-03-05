@@ -1,5 +1,3 @@
-# 05 Competition
-
 One tree is a grammar. Two trees is a negotiation. A forest is a war fought in slow motion.
 
 Multiple L-systems share a single world — same light, same soil, finite resources. Each tree follows its own rewriting rules, its own growth strategy, but the canopy only has so much room. Health drops when branches collide. Some strategies dominate. Others find niches in the gaps. Ecology emerges not from a master plan but from local grammars pressing against each other's limits.

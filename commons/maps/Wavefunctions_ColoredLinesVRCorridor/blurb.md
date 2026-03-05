@@ -1,0 +1,5 @@
+A corridor of light. Sine waves extruded into glowing tubes — procedural meshes that breathe, deform, animate. The hallway itself is the function made spatial. Walk through it.
+
+ColoredLinesVR builds geometry from math: each tube traces a sine path through 3D space, phase-shifted, amplitude-modulated, rendered as metal catching light. Span waves arc across the ceiling. Arch waves climb the walls. The dark sphere pulses at the periphery — purple emission, slow rotation, ambient gravity pulling attention toward what hasn't been explained yet.
+
+This is what happens when a wavefunction stops being a graph. Plotted on paper, sine is a curve. Projected into a corridor, sine is an environment. The same equation, different dimensional constraint, produces different experience. A function doesn't describe space — inhabited, it *becomes* space.

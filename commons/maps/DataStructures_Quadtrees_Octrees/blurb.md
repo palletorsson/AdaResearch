@@ -1,5 +1,3 @@
-# Quadtree Quarters
-
 Divide space into four. If a quadrant holds too much, divide again. Recursive bisection along two axes — each split doubles resolution where density demands it. The octree extends this into three dimensions. Eight children instead of four. Same logic, another axis.
 
 The room is cut into quadrants with void boundaries. Procedural terrain rises and falls — random walks, gaussian peaks, height noise. Objects scatter across the grid. The quadtree decides where to pay attention. Dense clusters get subdivided; empty space stays coarse. One data structure, variable focus.

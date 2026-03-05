@@ -1,5 +1,3 @@
-# Lab
-
 The central room. Everything begins here and returns here.
 
 A hand force called the Catalyst grows with the learner — not a weapon but a becoming-tool. It fires slow cubes, then calming fields, then swarm particles. Each mode unlocked by completing a sequence elsewhere in the curriculum. A triangle follows. Not an enemy. A partner. It folds, tiles, compresses, expands — mirrors whatever the Catalyst throws. The simplest polygon that creates enclosure, responding to contact with transformation.

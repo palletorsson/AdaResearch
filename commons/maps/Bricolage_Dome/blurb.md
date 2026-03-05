@@ -1,3 +1,1 @@
-# Bricolage_Dome
-
 The dome appears engineered but was discovered. Struts arrayed radially. Triangles refusing to deform. Spherical topology emerging from local connections. Fuller did not invent the dome—he found what triangulated struts want to become. Bricolage scaled up and formalized.

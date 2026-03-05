@@ -1,5 +1,3 @@
-# Line Intersection
-
 Two corridors cross. The intersection point is the entire problem.
 
 Given two line segments, do they meet? The cross product answers: compute the signed area of the triangle formed by three points. If the signs differ, the segments straddle each other's supporting lines. Two straddle tests — one per segment — and the answer falls out. No quadratics, no special cases for slope. Just the sign of a determinant.

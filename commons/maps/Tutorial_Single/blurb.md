@@ -1,5 +1,3 @@
-# Tutorial Single
-
 One cube. One exit. The entire system reduced to its smallest possible act.
 
 A platform floats in space — four by three, barely enough to stand on. A single cube waits at its center. Reach out. Close your hand. Pick it up. The score node registers completion. The teleporter activates. Move forward.

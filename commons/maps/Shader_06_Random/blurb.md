@@ -1,5 +1,3 @@
-# GPU Randomness
-
 GPUs have no coin to flip. No `/dev/urandom`, no entropy pool, no thermal noise. So they fake it. `fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453)` — a one-liner older than most shader programmers. Feed it a coordinate, get back a number that *looks* random. Deterministic chaos from trigonometry and overflow.
 
 The trick is the `fract()`. Multiply sine by a huge number, keep only the decimal. High-frequency oscillation shatters into apparent disorder. Every pixel computes its own value, independently, simultaneously — millions of dice rolls that were never random at all.

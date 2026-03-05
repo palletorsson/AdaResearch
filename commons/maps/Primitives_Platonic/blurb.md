@@ -1,0 +1,3 @@
+Five shapes and no more. Euclid proved it. Every face identical, every edge the same length, every vertex equivalent. The tetrahedron: 4 triangles, the minimum solid. The cube: 6 squares, the obvious one. The octahedron: 8 triangles, the cube's dual. The dodecahedron: 12 pentagons, the one Plato assigned to the cosmos. The icosahedron: 20 triangles, the most sphere-like thing made of flat faces.
+
+That's the complete list. Three dimensions of infinite possibility, and only five perfect convex forms exist. Regularity is a brutal constraint — equal faces, equal angles, equal edges — and almost nothing survives it. What looks like purity is actually scarcity. Perfection doesn't proliferate. It isolates.

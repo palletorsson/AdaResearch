@@ -1,5 +1,3 @@
-# ISO Showcase 12
-
 Metaballs merge. Two spheres approach and their surfaces fuse — no seam, no joint, just continuous deformation. Marching cubes read a scalar field and decide, case by case, where solid becomes void. Fifteen canonical configurations. Every surface is a threshold decision.
 
 The queer cave grows differently. Rhizomatic branching — no trunk, no hierarchy, just proliferation through a density field. Deleuze's rootless network made literal in voxels. The cave doesn't follow a plan. It follows gradients, forks, thickens, hollows out. Growth as architecture.

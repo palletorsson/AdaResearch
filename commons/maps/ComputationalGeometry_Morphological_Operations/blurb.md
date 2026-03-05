@@ -1,5 +1,3 @@
-# Morphological Operations
-
 Erosion subtracts. Dilation adds. A structuring element — small kernel, simple shape — slides across a binary image and asks one question at every pixel: does the neighborhood fit? Erosion keeps only what the kernel fully covers. Dilation claims everything the kernel touches. Two operations, mirror-image logic, and between them the entire grammar of shape transformation.
 
 Walls bitten into by void. Patches eaten away where the structure couldn't sustain the kernel's demand for completeness. What remains after erosion is what was robust — geometry that could survive interrogation at every point. Dilation is the inverse impulse: borders thicken, gaps close, fragments merge into mass.

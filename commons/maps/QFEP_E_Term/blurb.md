@@ -1,5 +1,3 @@
-# E(S) Term: Entropy as Freedom
-
 *High entropy = many possible states = freedom.*
 
 Entropy is not just disorder. Entropy is the size of the possibility space. The number of configurations available to the system.

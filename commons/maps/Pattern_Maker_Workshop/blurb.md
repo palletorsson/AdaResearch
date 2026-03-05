@@ -1,5 +1,3 @@
-# Pattern Maker Workshop
-
 Paint a single tile on the upright panel. Choose a symmetry group. Watch the floor carpet fill itself — your small domain repeated, rotated, reflected, glided into a field that could, in principle, extend forever.
 
 Seventeen wallpaper groups. That's all. In 1891, Fedorov proved it: exactly seventeen distinct ways to tile a plane with symmetry. Not eighteen. Not twelve. Seventeen — a hard constraint the universe imposes on two-dimensional repetition. Every Islamic mosaic, every Escher tessellation, every honeycomb and crystal lattice obeys one of these seventeen laws.

@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region inside it where things happen. Gaussian distributions raise terrain into bell curves. Random walks leave trails across the surface — 128 steps, each one a coin flip in three dimensions. Cubes appear, rotate, dissolve. Profiles generate and regenerate, every iteration different.
+
+The algorithms here share a single engine: randomness. But randomness is not chaos. A Gaussian clusters around a mean. A random walk drifts but remembers where it stepped. Height variations obey bounds. Even removal follows selection modes — range, column, row. Structure everywhere, disguised as accident.
+
+Sculpt the grid. Watch terrain emerge from probability distributions. Remove pieces and see what remains. The arena demonstrates what randomness actually is — not the absence of pattern, but pattern's secret author.

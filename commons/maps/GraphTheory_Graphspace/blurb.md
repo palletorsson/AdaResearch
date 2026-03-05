@@ -1,5 +1,3 @@
-# Graphspace
-
 A matching pairs vertices so no vertex appears twice. Maximum matching finds the most pairs possible. Simple on bipartite graphs — König's theorem, alternating paths, done. General graphs break everything. Odd cycles create a problem no alternating-path method can solve.
 
 Jack Edmonds solved it in 1965 by inventing the blossom. When the algorithm hits an odd cycle, it contracts the entire cycle into a single vertex — a deliberate act of forgetting internal structure. The contracted graph is smaller, simpler. Find an augmenting path there, then expand the blossom back. Recursion through compression.

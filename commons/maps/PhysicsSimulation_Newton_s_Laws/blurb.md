@@ -1,5 +1,3 @@
-# Newton's Laws
-
 Three balls. Three rules. The entire mechanical universe.
 
 An object at rest stays at rest — until force arrives. Force applied to mass produces acceleration: F=ma, the shortest equation that governs everything from falling apples to orbital decay. Every action generates an equal and opposite reaction. These aren't abstractions. Point the arrow, scale the magnitude, watch the ball respond. Heavy objects resist. Light objects fly. The containment walls push back exactly as hard as they're hit.

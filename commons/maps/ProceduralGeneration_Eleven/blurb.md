@@ -1,5 +1,3 @@
-# Procedural Generation 11
-
 Eight cells wide. One bit to start. Two rules unfold across the grid — same mechanism, radically different worlds.
 
 Rule 30 takes a single black cell and detonates it into apparent randomness. Deterministic input, chaotic output. No compression, no shortcut — the only way to know row 500 is to compute every row before it. Wolfram used it to generate random numbers. A machine that produces what it cannot predict about itself.

@@ -1,5 +1,3 @@
-# Graphspace 3d
-
 A matching pairs vertices — no vertex claimed twice. In bipartite graphs, this is clean. In general graphs, odd cycles destroy every naive approach. Edmonds solved it in 1965 with a single brutal insight: when you find an odd cycle, crush it into a single vertex. The blossom. Contract, search, expand. The algorithm treats structure as disposable — collapsing identity to see further, then restoring it once the path is found.
 
 Augmenting paths thread through the graph like desire lines — connections that could exist but don't yet. Each one found increases the matching by one. When no more exist, the matching is maximum. Optimality proved by absence.

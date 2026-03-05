@@ -1,5 +1,3 @@
-# Generative Music Algorithms
-
 Generative music composes itself. Algorithms replace the composer — Markov chains choosing the next note based on probability, L-systems growing melodic phrases like branching plants, cellular automata turning grid states into pitch sequences. The machine doesn't perform. It decides.
 
 Every generative system encodes a tension: too much randomness produces noise, too much structure produces loops. The interesting music lives between — where pattern almost holds, where repetition almost breaks. Stochastic processes with memory. Constrained freedom.

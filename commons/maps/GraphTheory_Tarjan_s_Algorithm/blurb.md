@@ -1,5 +1,3 @@
-# Tarjan's Algorithm: Strongly Connected Components
-
 A directed graph hides structure. Nodes point forward, sideways, backward — cycles form, tangle, nest. Tarjan's algorithm walks the graph depth-first, numbering nodes as it goes, maintaining a stack of the unresolved. When it finds a node whose lowest reachable ancestor is itself, it peels off a component. One pass. Linear time. 1972.
 
 The key move: the lowlink. Each node tracks not just when it was discovered but the earliest node it can reach through its descendants. When discovery index equals lowlink, a boundary crystallizes — everything on the stack above belongs together. Mutual reachability becomes identity.

@@ -1,5 +1,3 @@
-# Phi Term: The Queer Signature
-
 *φ = sensitivity to the rate of change.*
 
 Lambda tells you where you are on the spectrum.

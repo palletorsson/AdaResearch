@@ -1,5 +1,3 @@
-# Julia Set Symmetry Chamber
-
 The Mandelbrot set asks: does this point escape? The Julia set asks the same question with the rules reversed. Fix the constant, vary the starting point. Every pixel tested against the same equation, the same threshold. What changes is not the law but the initial condition.
 
 A symmetric room split by a central void. On each side, fractal boundaries bloom — connected or dust, depending on a single parameter. The Sierpinski pyramid sits at the center, recursion made solid, the same shape eating itself at every scale. Rotate the constant through the complex plane and watch the Julia set shatter, reconnect, shatter again.

@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region inside it where things happen. Random walks trace drunk paths across cells. Gaussian distributions sculpt terrain into bell-curve mountains. Cubes rise, rotate, vanish — selected by coin flip, removed by dice roll. The arena is a sandbox for randomness made visible.
+
+Thirteen algorithms operate here. A walker staggers 128 steps, raising geometry wherever it lands. A height randomizer reshapes the grid into landscapes no one designed. A profile generator draws silhouettes from noise. Pickup cubes scatter in patterns — random, circular, gridded — each placement strategy a different relationship between intention and chance. Objects spawn, collide, disappear. The grid breathes.
+
+Every algorithm here converts uncertainty into form. Randomness is not the absence of structure — it is structure's first draft, written before anyone decides what order should look like.

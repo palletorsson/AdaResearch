@@ -1,5 +1,3 @@
-# Distance Fields (SDF)
-
 Every point in space knows how far it is from the boundary. That number — signed, positive outside, negative inside — is the entire field. No edges, no vertices, no topology. Just distance, everywhere, all at once.
 
 Concentric rings rise from center. Height encodes proximity. The closer to the source, the lower the terrain — a basin carved by pure measurement. Walk outward and the ground climbs in even steps, each ring one unit further from origin. The geometry is not built. It is *calculated*. Every cell interrogates its own position and answers with a scalar.

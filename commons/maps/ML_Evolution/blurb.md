@@ -1,5 +1,3 @@
-# Evolution Arena
-
 Darwin had no gradient. No loss function, no backpropagation. Just bodies in a world, and the ones that survived made more of themselves. This is optimization before calculus — blind, parallel, wasteful, and it works.
 
 Rockets evolve thrust sequences toward a target. Flowers breed based on proximity to a selector. Bloops wander, eat, reproduce, die — their DNA encoding the trade-off between size and speed. Karl Sims creatures stumble into locomotion, morphology and behavior entangled in the same genome. Five populations running simultaneously in a sunken arena. Watch from above.

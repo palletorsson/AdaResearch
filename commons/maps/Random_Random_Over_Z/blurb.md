@@ -1,0 +1,5 @@
+An 8×8 grid floats inside a 12×12 frame. The middle is the arena — the border is the buffer zone where nothing fires. Dark spheres pulse at the edges, purple halos breathing slow. Inside, algorithms compete for territory across 64 cells.
+
+Each algorithm claims space through a different strategy. Some scatter. Some cluster. Some overwrite what came before. Randomness is not one thing — it is a family of methods, each with a different relationship to control. Uniform distribution treats every cell equally. Weighted distribution plays favorites. Walk-based methods remember where they've been. The grid becomes a ledger of competing logics.
+
+Watch long enough and patterns emerge from patternlessness. That's the paradox: true randomness is expensive, rare, maybe impossible on deterministic hardware. Every "random" process encodes a decision about what disorder should look like.

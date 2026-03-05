@@ -1,0 +1,5 @@
+A grid. Twelve by twelve. The middle eight-by-eight is where the action happens — random walks carve trails across cubes, Gaussian distributions sculpt terrain into bell-curve mountains, objects spawn and vanish by coin flip. Every algorithm here runs on chance.
+
+Random walks step without memory. Height maps rise by noise. Profiles generate and regenerate — never the same shape twice. Cubes rotate through axes, slopes tilt along gradients, geometry assembles itself from procedural rules and weighted dice. The arena is a laboratory for processes that trade determinism for possibility.
+
+What emerges is the central paradox of computational randomness: structure from structurelessness. Enough random walks converge on predictable distributions. Enough noise produces recognizable landscapes. Order doesn't oppose chaos — it precipitates from it, given sufficient iterations and a grid to land on.

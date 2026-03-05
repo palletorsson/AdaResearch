@@ -1,5 +1,3 @@
-# PG: Cave Random Walk
-
 A drunk walks home. Each step: random direction, random length. The path carved is the cave.
 
 Random walk is the simplest tunneling algorithm. Start at a point. Pick a direction — north, south, east, west. Step forward. Carve floor where you stand. Repeat. No planning, no memory, no map. The walker doesn't know where it's been. The cave doesn't know what it will become. What emerges is organic, irregular, unpredictable — corridors that loop back on themselves, chambers that form by accident, dead ends that aren't designed but discovered.

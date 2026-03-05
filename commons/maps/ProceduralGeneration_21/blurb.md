@@ -1,5 +1,3 @@
-# Procedural Generation 21
-
 A 12×12 grid. An 8×8 region in the center where algorithms perform. The arena is a stage — each random process gets the same space, the same constraints, the same cells to fill. What differs is the rule.
 
 Randomness is not one thing. Uniform scatter. Weighted distribution. Constrained walks. Each algorithm claims to be "random" but encodes a different relationship to chance. The sixteen-cell net floats overhead — a polytope unfolded from four dimensions into three, proof that structure can arrive from spaces we cannot directly inhabit.

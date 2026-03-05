@@ -1,0 +1,5 @@
+A grid. Seven by seven. Spawn point at the northwest corner — orientation by convention, not by nature. The dark sphere pulses at the periphery, marking nothing, promising everything.
+
+Two dimensions means two degrees of freedom. X moves across, Y moves down. Every cell has an address. Every address implies a neighbor. The 4x4 grid widget sits at the center of the pad like a small country: bounded, navigable, fully enumerable. Touch a cell, read its coordinates, understand that position is just a pair of numbers agreeing to mean something.
+
+Walk south. The annotation cube names what you've done. The score cube confirms it. The teleporter takes you elsewhere — proof that coordinates are arbitrary. A grid doesn't describe space. It *decides* space. The first act of structure is the first act of constraint.

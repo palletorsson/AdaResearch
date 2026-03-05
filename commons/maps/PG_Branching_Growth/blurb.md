@@ -1,5 +1,3 @@
-# PG Branching Growth
-
 Two strategies for filling space. One follows rules. The other follows noise.
 
 The branching algorithm grows like a tree — a seed point extends, splits, extends again. Each fork is a decision encoded in geometry. The structure remembers every choice it made. Deterministic bones. In the void pit, the skeleton builds itself downward, each branch a frozen instruction.

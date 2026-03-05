@@ -1,5 +1,3 @@
-# Noise Functions
-
 Randomness is useless. Raw static has no structure, no memory, no terrain. Noise is randomness with continuity — values that change smoothly, that remember their neighbors. Value noise interpolates between random points on a grid. Gradient noise (Perlin's trick) interpolates between random *slopes*, producing smoother, more organic results. Simplex noise rewires the geometry entirely — triangles instead of squares, fewer multiplications, better in every dimension above two.
 
 Three algorithms, one question: how do you make chaos coherent? Each answers differently. Value noise quantizes. Perlin blurs. Simplex tessellates. Domain warping feeds the output back as input — noise distorting its own coordinate space — and the landscape begins to hallucinate.

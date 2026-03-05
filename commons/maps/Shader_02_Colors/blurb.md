@@ -1,5 +1,3 @@
-# Color Mixing & HSB
-
 RGB decomposes light into three channels. Additive — not pigment, not intuition. Red plus green equals yellow, which no painter would believe. The screen doesn't mix. It stacks intensities.
 
 `mix()` interpolates between two values. Two colors become a gradient — a continuous field of in-between states. Linear by default. Feed it `smoothstep()` and the transition bends. Feed it `sin(UV.x * TAU)` and the gradient repeats, wraps, breathes. A rainbow from arithmetic.

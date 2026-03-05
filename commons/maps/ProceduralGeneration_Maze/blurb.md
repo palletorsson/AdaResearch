@@ -1,5 +1,3 @@
-# PG: Maze Generation
-
 A perfect maze has exactly one path between any two points. No loops, no islands, no choices that don't matter. Depth-first search carves it: pick a wall, knock it down, move forward, backtrack when stuck. The algorithm remembers where it's been by forgetting where it hasn't.
 
 Recursive backtracking is a drunk walk with perfect memory. It staggers deep into unvisited territory, hits a dead end, rewinds to the last fork, tries again. The maze emerges not from design but from exhaustion — every cell visited, every wall questioned. What remains is structure born from constraint.

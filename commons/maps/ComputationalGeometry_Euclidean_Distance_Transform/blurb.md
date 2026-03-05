@@ -1,5 +1,3 @@
-# Euclidean Distance Transform
-
 Every cell knows how far it is from the nearest boundary. The EDT assigns each point in space a single number — its shortest distance to a source. Not Manhattan blocks. Not chessboard steps. True Euclidean: the straight-line gap between here and there, computed everywhere at once.
 
 The floor rises. Heights increase from center outward, each column's elevation encoding its distance value. Walk the gradient room and feel the field under your feet — a terrain shaped entirely by proximity. The 8×8 grid becomes a topographic map of absence, every summit marking the point most removed from origin.

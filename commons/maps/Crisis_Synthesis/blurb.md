@@ -1,5 +1,3 @@
-# Crisis Synthesis
-
 Gödel's plaque. Russell's boxes. Escher's staircase. Florensky's sphere. Four wings of a single argument, radiating from a summit where the formula stands complete: QFE = F - λE(S) + φΔE(S,t). Every artifact encountered across the sequence converges here — not resolved, but held.
 
 The lambda slider on the descent tunes between crystalline order and dissolution. The phi slider asks a harder question: does the system resist change or welcome it? Walk the bifurcation diagram at the exit threshold. Watch a single parameter split stable behavior into period-doubling, then chaos, then strange attractors. The edge of chaos is not a failure mode. It is the only region where computation, adaptation, and life occur.

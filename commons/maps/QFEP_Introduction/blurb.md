@@ -1,5 +1,3 @@
-# QFEP Introduction
-
 *The formula that unifies everything.*
 
 You've traveled through primitives, transformations, color, randomness, waves. Each sequence built a capacity. Each capacity prepared you for this.

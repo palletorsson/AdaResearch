@@ -1,5 +1,3 @@
-# Puzzle 01: Copy - The Duplicator
-
 A 9×9 grid. Gaps in a pattern. One agent that knows one operation: duplicate what's here and place it there.
 
 COPY is the most primitive creative act — not invention, but replication. Capture the grid agent, aim it, watch it read a cube and write an identical one into empty space. The pattern completes itself through directed repetition. No transformation, no novelty. Pure duplication.

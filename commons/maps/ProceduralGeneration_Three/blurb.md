@@ -1,5 +1,3 @@
-# Procedural Generation 3
-
 Voronoi diagrams partition space by proximity. Drop seed points onto a plane; every other point belongs to whichever seed is closest. The result: irregular cells, organic boundaries, territories defined not by what they contain but by what they're nearest to. No grid. No symmetry. Just distance and allegiance.
 
 The 8x8 arena makes the process visible. Seeds scatter. Boundaries emerge — not drawn but implied, computed from the gaps between. Each cell is a region of influence, a jurisdiction of nearness. Move a single seed and the entire map reorganizes. Identity here is relational, not intrinsic.

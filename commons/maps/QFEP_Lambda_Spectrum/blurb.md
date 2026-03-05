@@ -1,5 +1,3 @@
-# Lambda Spectrum: Walking the Edge
-
 *Your position IS the λ value.*
 
 This is not a lesson about λ. This IS λ.

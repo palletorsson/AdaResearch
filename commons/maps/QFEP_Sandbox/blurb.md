@@ -1,5 +1,3 @@
-# QFEP Sandbox: Full Control
-
 *You've earned the force.*
 
 No more guided tours. No locked sliders.

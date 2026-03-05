@@ -1,5 +1,3 @@
-# Euclid's Parallel Postulate
-
 Five axioms. Four are obvious. The fifth is not.
 
 Through a point not on a line, exactly one parallel can be drawn. Euclid stated it. Twenty-three centuries of mathematicians tried to prove it from the other four. None succeeded. The colonnade frames this certainty in stone — height-3 pillars running parallel, bilateral symmetry so total it feels inevitable. A plaque presents all five postulates. Cycle through them. The first four are terse, self-evident. The fifth is longer, more elaborate, almost defensive. It protests too much.

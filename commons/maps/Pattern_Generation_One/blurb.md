@@ -1,5 +1,3 @@
-# Pattern Generation 1
-
 A 12×12 grid. An 8×8 arena at its center. Algorithms compete here — not for speed, but for pattern. Checkerboards, degradation, tiling rules. Each one takes the same empty grid and fills it differently. Same input, different logic, different world.
 
 The dark sphere pulses at the edge. Purple light breathes across the field. It watches.

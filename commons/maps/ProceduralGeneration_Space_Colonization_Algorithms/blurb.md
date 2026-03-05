@@ -1,5 +1,3 @@
-# PG: Space Colonization
-
 Scatter points in empty space. These are attractors — destinations without paths. A seed node grows toward the nearest cluster, branching when pulled in competing directions. Each attractor is consumed when a branch arrives close enough. The tree emerges not from a blueprint but from hunger.
 
 The algorithm was designed to model leaf venation. Every vein in every leaf solves the same problem: reach all the tissue, waste nothing. No central planner. No recursion. Just local competition for resources, resolved into structure.

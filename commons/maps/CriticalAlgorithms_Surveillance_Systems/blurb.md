@@ -1,5 +1,3 @@
-# Surveillance Systems
-
 A 12×12 grid. An 8×8 arena at its center. Algorithms perform here — random walks trace drunk paths across cells, Gaussian distributions cluster height into bell-curve mountains, cubes spawn and vanish by coin flip. The grid is the stage. Randomness is the choreographer.
 
 Walk the arena. Watch a 128-step random walk sculpt terrain one raise at a time. See profiles generate from noise — no two alike. Remove cubes by range, row, column. Place pickups in patterns that dissolve into scatter. Rotate everything. Regenerate. The same grid, never the same result.

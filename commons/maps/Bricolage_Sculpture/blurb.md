@@ -1,3 +1,1 @@
-# Bricolage_Sculpture
-
 No function except standing. No blueprint except balance. Sculpture is frozen negotiation with gravity—counterweight, tension, visual mass. Meaning emerges from relations, not from plan. Tatlin was a bricoleur.

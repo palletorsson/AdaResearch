@@ -1,5 +1,3 @@
-# Perception Gallery
-
 A pixel is a number. A grid of pixels is a matrix. Vision starts there — raw arithmetic on light. Convolution slides a small window across the image, multiplying and summing, extracting edges, textures, shapes. Each layer sees more abstraction. Edges become contours. Contours become faces. The network learns its own features — no one tells it what an eye is.
 
 Attention changes the game. Instead of scanning left-to-right, the model asks: what matters here? It learns to weight regions, to focus. A computational gaze that decides where to look before it decides what to see.

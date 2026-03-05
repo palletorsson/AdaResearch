@@ -1,5 +1,3 @@
-# Playground of Joy
-
 No instructions. No objectives. Just a field of soft things waiting to be touched.
 
 Rounded bodies scatter across an open grid — jelly cubes, elastic spheres, capsules that deform under pressure and remember their shape. Push them. Stack them. Watch them bounce, settle, ripple. A branching growth algorithm seeds structures that sprout and spread between the toys, organic geometry threading through elastic matter. Grid agents wander the space, copying what they find, multiplying the playground's population without permission.

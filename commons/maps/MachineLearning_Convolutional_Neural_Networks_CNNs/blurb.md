@@ -1,5 +1,3 @@
-# Convolutional Neural Networks CNNs
-
 A 12×12 grid. An 8×8 arena at its center. Algorithms enter, perform, compete — not for accuracy but for visibility. Each process plays out in real time across the cells: sorting, searching, shuffling, transforming. The grid makes the invisible legible.
 
 Convolution slides a small window across structured data and asks: what's here? A kernel — three by three, five by five — drags across the field, multiplying, summing, collapsing local neighborhoods into single values. Edges sharpen. Features emerge. The network learns to see by learning what to ignore.

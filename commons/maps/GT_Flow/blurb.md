@@ -1,5 +1,3 @@
-# Flow Network
-
 Every network has a throat. Flow problems ask: how much can pass through? Not how fast — how much. The answer lives in the bottleneck, the narrowest passage between source and sink.
 
 Push-relabel works by flooding. Excess piles up at nodes, gets shoved downhill toward the drain. When it can't move forward, the node rises — relabels itself higher — and pushes back. A system that solves congestion through local panic. No global view. Just pressure and elevation and the desperate physics of too much trying to fit through too little.

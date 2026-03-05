@@ -1,0 +1,5 @@
+A grid lights up underfoot. Twenty-four by twenty-four — 576 tiles, each one addressable, each one a cell in a flat memory the body can walk. Dark spheres pulse at the edges, purple halos breathing in slow loops. The floor is the data structure. Step on a tile, it responds. Step on a sequence, a pattern emerges.
+
+Navigation here is indexing. Moving north increments one axis; moving east increments another. The body becomes the pointer — `array[row][col]` made flesh. Projectile spawners guard the exit, twin cubes firing in rhythm, teaching timing as a read operation. Dodge is lookup. Survival is traversal.
+
+Every spreadsheet, every pixel grid, every game board is this same flat plane pretending to have depth. Two indices and a value. The disco floor just makes the pretense visible — and danceable.

@@ -1,0 +1,5 @@
+A matching pairs vertices — no vertex claimed twice. In bipartite graphs, the problem is clean. In general graphs, odd cycles destroy everything. A cycle of length five has no perfect internal matching. One vertex is always left out.
+
+Edmonds' solution: pretend the cycle isn't there. Contract the odd cycle — the blossom — into a single pseudo-vertex. Search for augmenting paths in the simplified graph. If one exists, expand the blossom back and reroute. The contraction is temporary. The matching is real.
+
+Watch blossoms fold inward on the torus surface. Odd cycles collapse to points, paths reroute through compressed space, then everything unfolds again — structure recovered, matching improved. Each contraction is a strategic forgetting. Each expansion, a return with knowledge the graph couldn't hold in its original form. Identity dissolved and reconstituted — not lost, transformed.

@@ -1,5 +1,3 @@
-# PG: Poisson Disk Sampling
-
 Scatter points with a rule: no two closer than a minimum distance. Not random. Not grid. Something between — blue noise, the distribution that looks natural because it rejects both clustering and regularity.
 
 The dart-throwing algorithm proposes, tests, discards. Each candidate point survives only if it respects every neighbor's boundary. Rejection as generative method. The space fills through trial and exclusion, not placement.

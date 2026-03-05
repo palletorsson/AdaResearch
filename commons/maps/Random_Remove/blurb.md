@@ -1,5 +1,3 @@
-# Random Remove
-
 A 12×12 grid. An 8×8 region inside it. Cubes appear, stack, walk, vanish. The arena runs randomness as demolition — `RemoveRandom` picks cubes by range, column, row, or all-at-once and deletes them. Gaussian distribution clusters destruction around a center. Random walks trace drunk paths across the grid, raising terrain they touch. Height maps jitter. Profiles spike and dip without reason.
 
 What matters: nothing here follows a plan. The algorithms select, the algorithms remove, and what remains is not designed but *survived*. A grid after random removal is a landscape shaped by absence — defined not by what was placed but by what was taken away. Subtraction as authorship. Entropy as sculptor.

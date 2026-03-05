@@ -1,5 +1,3 @@
-# Numerical Integration
-
 Continuous reality doesn't fit in a computer. So we chop time into steps and hope the accumulation holds. Euler's method — the simplest guess — takes the slope at your feet and walks forward blind. It drifts. Energy leaks or explodes. Symplectic Euler fixes the energy but smears the path. RK4 samples the slope four times per step, averaging a more honest curve. Fourth-order accuracy. Four times the cost.
 
 Three balls launch from the same point. Three trails diverge. The blue one obeys Godot's engine — ground truth, or close enough. Red and green trace Euler and RK4, their curves peeling apart as error accumulates frame by frame. The gap between them is the tax on discretization.

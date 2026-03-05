@@ -1,5 +1,3 @@
-# Procedural Generation 10
-
 Four generators share one stage. Context-free grammars rewrite symbols into structure — language that builds itself. Fibonacci sequences spiral through accumulation, each term the sum of its past. Julia sets fracture the complex plane into belonging and escape. Tree generation branches downward from axiom to canopy, forking at every decision.
 
 An 8×8 grid. Eight columns, eight rows, sixty-four cells where each algorithm performs its particular trick of making something from almost nothing. Grammars produce. Sequences grow. Fractals divide. Trees split.

@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 region in the center where anything can happen. Random walks trace drunk paths across the surface. Gaussian distributions sculpt terrain into bell-curve mountains. Cubes appear, rotate, vanish — removed by column, by row, by range. Height maps ripple with noise. Profiles generate and regenerate, each one unrepeatable.
+
+Every algorithm here uses the same raw material: `randf()`, `randi()`, the pseudo-random number generator that isn't random at all. Deterministic chaos from a seed. The arena is a laboratory for controlled disorder — raise a cube, remove a cube, walk one step in a direction nobody chose. Kitbashing as method. Procedural generation as practice.
+
+Randomness is not the absence of structure. It is structure's other name — the one it uses when it doesn't want to be recognized.

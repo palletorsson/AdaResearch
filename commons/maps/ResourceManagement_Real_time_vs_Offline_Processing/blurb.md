@@ -1,0 +1,5 @@
+A 12×12 grid. An 8×8 arena at its center. Algorithms compete here — not for optimization, but for territory. Random walks trace drunk paths across the surface. Gaussian distributions raise geometry into bell-curve mountains. Height maps ripple. Cubes appear, rotate, dissolve. Every process reshapes the same shared space.
+
+The arena is a laboratory for controlled chaos. Walkers leave trails. Profiles generate landscapes from noise. Placement algorithms scatter objects by pattern or by chance — random, grid, circle, line. Removal algorithms erase what was built. The grid remembers every intervention as accumulated height, as absence, as scar.
+
+What emerges is never designed. Each algorithm operates locally, follows simple rules, knows nothing of the others. Yet the arena accumulates — a palimpsest of random processes writing over each other. Order is not given. It is what survives.

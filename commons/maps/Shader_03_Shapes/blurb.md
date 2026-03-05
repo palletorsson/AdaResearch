@@ -1,5 +1,3 @@
-# Signed Distance Fields
-
 Every point in space knows how far it is from a shape. That's the entire trick. A signed distance function returns a single number: negative inside, zero on the boundary, positive outside. The circle is the simplest — `length(uv) - radius`. The rectangle requires `max()` and `abs()`. From two operations, hard geometry.
 
 Boolean operations collapse to arithmetic. Union is `min()`. Intersection is `max()`. Subtraction is `max(a, -b)`. Combine any two shapes with a single line of code. No meshes, no vertices, no triangles — just inequalities evaluated per pixel.

@@ -1,5 +1,3 @@
-# Edge of Chaos: Where Life Happens
-
 *λ ≈ 0.3 - 0.5*
 
 You've seen order. You've seen chaos.

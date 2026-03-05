@@ -1,5 +1,3 @@
-# Tutorial Pattern
-
 Arrays hold data. Patterns are data that rhymes. A checkerboard — two values alternating: `grid[y][x] = (x + y) % 2`. A wave — one function swept across indices. Every pattern is an equation the eye solves before the mind catches up.
 
 Place colors on a tile grid. Watch them propagate — reflected, rotated, repeated across a carpet that builds itself from a single cell. The mirror tile turns four pixels into a kaleidoscope. The wallpaper group analyzer names the symmetry: p1, pm, p4m. Seventeen possibilities total. Every textile tradition on Earth discovered them by hand before mathematicians wrote them down.

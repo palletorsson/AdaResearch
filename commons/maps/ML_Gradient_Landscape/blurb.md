@@ -1,5 +1,3 @@
-# Gradient Landscape
-
 Every neural network learns by falling. Gradient descent drops a point onto a surface and lets gravity do the math — follow the steepest slope, step by step, toward the lowest valley. The learning rate decides how bold each step is. Too large, you overshoot. Too small, you never arrive. Momentum keeps you rolling through flat spots where the gradient whispers.
 
 The landscape is the loss function made physical. Ridges separate solutions. Valleys hold minima — some global, most local. The optimizer doesn't know which is which. It only knows *down*.

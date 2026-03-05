@@ -1,5 +1,3 @@
-# Vector Exhibition
-
 A cathedral-style gallery showcasing all vector mathematics demonstrations.
 
 ## Layout

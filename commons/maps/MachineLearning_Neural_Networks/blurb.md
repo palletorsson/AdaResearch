@@ -1,5 +1,3 @@
-# Neural Networks
-
 A 12×12 grid. An 8×8 arena at its center. Three machines live here: a neural network, a transformer, a variational autoencoder. Each learns differently. Each fails differently.
 
 The neural network adjusts weights through error — backpropagation is gradient descent through a landscape of wrong answers, converging toward less wrong ones. The transformer attends to everything at once, computing relevance between all positions simultaneously. No sequence. No locality. Pure relation. The VAE compresses reality into a latent space, then reconstructs it — what survives the bottleneck is what the model believes matters.

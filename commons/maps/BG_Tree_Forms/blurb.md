@@ -1,5 +1,3 @@
-# BG Tree Forms
-
 A grammar writes a tree. One axiom — `F` — becomes `F[+F]F[-F]F`, becomes branching, becomes canopy. L-systems encode growth as string rewriting: each generation applies production rules to every symbol simultaneously. The trunk doesn't know about the leaves. The leaves don't know about the wind.
 
 But wind knows about everything. Parametric branching adds angle, length, thickness as variables the environment can pressure. Seasons modulate: spring extends, autumn drops, winter holds. The same grammar produces oak and birch — only the parameters differ.

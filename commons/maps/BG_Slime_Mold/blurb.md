@@ -1,5 +1,3 @@
-# BG Slime Mold
-
 Physarum polycephalum has no brain. No neurons, no central nervous system, no plan. It spreads outward from a single point, depositing chemical trails, sensing gradients, reinforcing what works. Given food sources scattered across a surface, it connects them — and the network it builds rivals Tokyo's rail system for efficiency.
 
 The algorithm mirrors the organism. Virtual agents deposit attractant on a diffusion grid, turn toward concentration, move forward, repeat. No pathfinding. No global map. Just sniff, turn, step, mark. From this — transport networks, maze solutions, adaptive graphs that reroute when severed.

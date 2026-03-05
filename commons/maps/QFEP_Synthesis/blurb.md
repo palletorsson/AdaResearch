@@ -1,5 +1,3 @@
-# QFEP Synthesis: The Force Earned
-
 *You understand it now.*
 
 Not just intellectually — you've felt it, controlled it, lived it.

@@ -1,0 +1,5 @@
+A wave is a disturbance that carries energy without carrying matter. Sine, square, triangle, sawtooth — four shapes, four timbres, same underlying oscillation. Frequency determines pitch. Amplitude determines volume. Phase determines where in the cycle you enter. Every sound ever heard is a sum of these primitives.
+
+The dark sphere pulses. Its emission breathes between minimum and maximum, tracing a curve through time — the same curve that drives speakers, radio, light. Oscillation is not movement toward a destination. It is movement that *is* the destination. The wave never arrives. It repeats.
+
+Sound is pressure changing over time. Render that change visible and the ear becomes an eye. The curve on screen and the tone in the headphones are the same function, differently embodied — one photon pattern, one air compression. Representation splits; the signal stays whole.

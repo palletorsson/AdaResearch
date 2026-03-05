@@ -1,5 +1,3 @@
-# PG Genetic Evolution
-
 No one designs the creatures. A population spawns in the arena below — random geometries, meaningless limbs, bodies that can't even crawl. Then selection hits. The ones that move further survive. The ones that don't, vanish. Next generation inherits what worked, mutates what didn't. Repeat.
 
 Genetic programming treats form as code. Each creature is a syntax tree — nodes for joints, edges for limbs, parameters for muscle force. Crossover swaps subtrees between parents. Mutation rewrites single nodes. The fitness function is simple: distance traveled. Everything else emerges.

@@ -1,5 +1,3 @@
-# F Term: The Drive Toward Order
-
 *Systems minimize surprise.*
 
 F is Free Energy — the prediction error. Every adaptive system tries to reduce it. Find patterns. Predict better. Reduce surprise.

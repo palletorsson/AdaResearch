@@ -1,5 +1,3 @@
-# Spring-Mass Systems
-
 Hooke's law: force proportional to displacement. F = -kx. A spring pulls back exactly as hard as it's stretched. Connect a mass to a spring and it oscillates — forever, in theory. Add damping and it dies. Add a second mass and the system couples. Add a grid of them and something else happens entirely.
 
 The walkway spans a void. Beneath it, a lattice of point masses linked by springs forms a deformable mesh — pluck one node and watch the disturbance propagate. No node knows about the wave. Each spring computes only its own local tension, its own restoring force. Yet coherent patterns ripple across the whole structure. Stiffness and damping become dials between rigidity and collapse.

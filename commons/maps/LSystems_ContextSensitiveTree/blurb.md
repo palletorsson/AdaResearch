@@ -1,5 +1,3 @@
-# Context-Sensitive Tree
-
 L-systems grow by rewriting strings. Context-free grammars ignore surroundings — every symbol expands the same way regardless. Context-sensitive grammars read their neighbors. The production rule checks what came before, what comes after, and rewrites accordingly. The same symbol, different context, different growth.
 
 This tree knows its room. The left wall closes in — branches sense obstruction, prune themselves, redirect. The right side opens wide and growth explodes outward, unimpeded. One axiom, one grammar, two architectures. The constraint isn't damage. It's information.

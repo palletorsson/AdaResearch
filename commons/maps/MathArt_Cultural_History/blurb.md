@@ -1,5 +1,3 @@
-# Mathematics and Art: A Cultural History
-
 > "Mathematicians and artists have long been on a quest to understand the physical world they see before them and the abstract objects they know by thought alone."
 > — Lynn Gamwell
 

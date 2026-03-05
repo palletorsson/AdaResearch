@@ -1,5 +1,3 @@
-# ISO Implicit Modeling
-
 A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside. Positive means outside. Zero is the surface itself.
 
 Boolean operations become arithmetic. Union: take the minimum. Intersection: the maximum. Subtraction: negate one field, then intersect. No polygon clipping, no edge cases, no manifold repair. Sculpting reduced to inequalities.

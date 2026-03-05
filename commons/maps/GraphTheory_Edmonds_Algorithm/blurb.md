@@ -1,5 +1,3 @@
-# Edmonds' Algorithm
-
 A matching pairs vertices — each vertex claimed by at most one edge. The maximum matching claims as many as possible. Greedy approaches fail. Augmenting paths help, but only in bipartite graphs. General graphs contain odd cycles, and odd cycles break everything.
 
 Jack Edmonds saw the problem in 1965. An odd cycle looks like a trap — three vertices, five vertices, seven — where augmenting paths enter and cannot exit correctly. His solution: collapse the entire cycle into a single pseudo-vertex. A blossom. Contract it, search the simplified graph, expand it back. The blossom remembers what it consumed.

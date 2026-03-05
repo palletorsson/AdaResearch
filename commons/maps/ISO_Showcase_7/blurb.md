@@ -1,5 +1,3 @@
-# ISO Showcase 7 — Base MC + Animated Noise
-
 Noise evolves. The isosurface chases it.
 
 A scalar field fills the volume — dense here, hollow there. Marching cubes walks the grid, case by case, extracting geometry wherever the field crosses threshold. That's the base implementation: 256 configurations, one lookup table, mesh out. Static noise produces static caves.

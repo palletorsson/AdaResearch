@@ -1,5 +1,3 @@
-# ISO Showcase 9 — Nakama + Raymarched Metaballs
-
 Two methods. Same phenomenon. Sixty CPU-driven blobs approximate organic form through sphere deformation — Kouhei Nakama's approach, where geometry chases the field. Nine shader-driven balls bypass geometry entirely — SDF raymarching renders the implicit surface directly on the GPU, never extracting a mesh at all.
 
 Metaballs are isosurfaces of summed radial functions. Where influence overlaps, surfaces merge. Separation and fusion governed by a single threshold. The math doesn't distinguish between one blob and two — only whether the field exceeds the boundary.
