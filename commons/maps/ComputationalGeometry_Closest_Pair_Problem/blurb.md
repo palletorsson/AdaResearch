@@ -1,0 +1,7 @@
+# Closest Pair Problem
+
+Given *n* points, find the two nearest. Brute force checks every pair — O(n²). Divide and conquer splits the set, solves each half, then handles the strip where the answer might cross the boundary. The strip is the hard part. Only points within distance *d* of the dividing line matter, and a geometric argument limits comparisons to seven neighbors. O(n log n). The closest pair hides in the crowd.
+
+Scattered platforms dot the floor. Fibonacci sequences spiral through the arrangement — distance encoded in growth. The problem looks like search but operates like elimination. Most pairs don't matter. The algorithm's work is deciding what to ignore.
+
+Proximity is not a relationship between two points. It's a property that emerges only after every other distance has been ruled out. Closeness is what remains.

@@ -1,3 +1,7 @@
-# Dark_Room_Paradox
+# Dark Room Paradox
 
-A scaffold map in `artmathematics`. Replace this with the poetic entry point for the concept.
+The dark room is the simplest prediction machine. An agent that minimizes surprise should seek sensory deprivation — no input, no error, no update. A room with no light. The perfect Bayesian trap. Free energy drops to zero. The organism is technically optimal and functionally dead.
+
+Minimalism tried this with art. Judd's specific objects. Flavin's fluorescent tubes. Strip the work of metaphor, narrative, symbol. Evacuate meaning. What remains should be inert — just material, just presence. But the viewer keeps reading. The blank canvas generates interpretation. The empty room fills with projection. Signs signify despite every attempt to silence them.
+
+This is the paradox: the system that refuses to represent still communicates. Meaning is not deposited in objects — it emerges at the boundary between perceiver and perceived. The dark room fails because life is not an equilibrium-seeker. It is a difference-seeker. The attempt to evacuate meaning keeps generating it.
