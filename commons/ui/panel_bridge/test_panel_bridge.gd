@@ -25,6 +25,41 @@ var current_example: int = -1
 var _info_label: Label
 
 
+## Config injection for capture_with_config.gd audit loop.
+## Accepts a loom draft dictionary (same shape as loom_draft_data.json).
+func apply_grid_config(config_data: Dictionary) -> void:
+	# Write draft data to a temp file so PanelBridgeLoader can read it
+	var tmp_dir := "user://tmp"
+	if not DirAccess.dir_exists_absolute(tmp_dir):
+		DirAccess.make_dir_recursive_absolute(tmp_dir)
+
+	var tmp_path := tmp_dir + "/loom_capture_data.json"
+	var file := FileAccess.open(tmp_path, FileAccess.WRITE)
+	if not file:
+		push_error("test_panel_bridge: Cannot write temp data to %s" % tmp_path)
+		return
+	file.store_string(JSON.stringify(config_data))
+	file.close()
+
+	# Pick layout based on shaft count
+	var shaft_count: int = config_data.get("shafts", 4) as int
+	var layout_path: String
+	if shaft_count > 4:
+		layout_path = SAMPLE_DIR + "loom_overshot_layout.json"
+	else:
+		layout_path = SAMPLE_DIR + "loom_panel_layout.json"
+
+	panel_bridge.layout_json_path = layout_path
+	panel_bridge.data_json_path = tmp_path
+	panel_bridge.load_panels()
+
+	print("test_panel_bridge: apply_grid_config — %d shafts, %d warps, %d picks" % [
+		shaft_count,
+		config_data.get("warps", 0),
+		config_data.get("picks", 0),
+	])
+
+
 func _ready() -> void:
 	# Create an on-screen info label (visible in desktop mode)
 	_create_info_label()
