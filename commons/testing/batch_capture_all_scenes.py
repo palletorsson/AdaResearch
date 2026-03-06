@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 """
 Batch capture screenshots for all scenes in scene-catalog.json.
-Idempotent: skips scenes whose PNG already exists in the target directory.
+
+Uses batch_capture_inline.gd to run ALL captures in a single Godot process
+(no restart per scene — much faster than the old per-scene approach).
+
+The GDScript handles:
+  - Reading the catalog JSON
+  - Skipping scenes whose PNG already exists (idempotent)
+  - Building environment scaffold once, reusing for all scenes
+  - Capturing screenshots and saving directly to the output directory
+
+This Python wrapper:
+  - Validates paths and launches the single Godot process
+  - Updates scene-catalog.json hasScreenshot flags afterwards
 """
 
 import json
 import os
-import shutil
 import subprocess
 import sys
 import time
@@ -16,14 +27,12 @@ GODOT_EXE = r"C:\Users\palle\Desktop\Godot_v4.6-stable_win64_console.exe"
 PROJECT_DIR = r"C:\Users\palle\Documents\GitHub\AdaResearch_46"
 CATALOG_JSON = r"C:\Users\palle\Documents\GitHub\ada_encyclopedia\public\scene-catalog\scene-catalog.json"
 SCREENSHOT_DIR = r"C:\Users\palle\Documents\GitHub\ada_encyclopedia\public\scene-catalog"
-GODOT_USERDATA = r"C:\Users\palle\AppData\Roaming\Godot\app_userdata\Ada Research Zero One\scene_shots"
-CAPTURE_SCRIPT = "res://commons/testing/capture_tscn_shot.gd"
-WAIT_SECONDS = "1.5"
-TIMEOUT_SECONDS = 45
+BATCH_SCRIPT = "res://commons/testing/batch_capture_inline.gd"
+WAIT_SECONDS = "1.0"
 
 
 def main():
-    # Sanity checks
+    # ── Sanity checks ─────────────────────────────────────────────────────
     if not os.path.isfile(GODOT_EXE):
         print(f"ERROR: Godot executable not found: {GODOT_EXE}")
         sys.exit(1)
@@ -32,96 +41,94 @@ def main():
         sys.exit(1)
 
     os.makedirs(SCREENSHOT_DIR, exist_ok=True)
-    os.makedirs(GODOT_USERDATA, exist_ok=True)
 
-    # Load catalog
+    # Count how many need capturing vs already exist
     with open(CATALOG_JSON, "r", encoding="utf-8") as f:
         catalog = json.load(f)
 
     entries = catalog["entries"]
     total = len(entries)
+    existing = sum(
+        1 for e in entries
+        if os.path.isfile(os.path.join(SCREENSHOT_DIR, os.path.basename(e["screenshot"])))
+    )
 
-    print(f"=== Batch Scene Capture ===")
+    print(f"=== Batch Scene Capture (single-process) ===")
     print(f"Total scenes in catalog: {total}")
+    print(f"Already captured:        {existing}")
+    print(f"To capture:              {total - existing}")
     print()
 
-    captured = 0
-    skipped = 0
-    failed = 0
-    failed_list = []
+    if existing == total:
+        print("All screenshots already exist. Use --no-skip to recapture.")
+        print("To recapture, delete the PNGs first or pass --no-skip.")
+        # Still update catalog
+        _update_catalog(catalog, entries)
+        return
+
+    # ── Run single Godot process with batch_capture_inline.gd ─────────────
+    # Convert paths to forward slashes for Godot
+    catalog_path = CATALOG_JSON.replace("\\", "/")
+    output_dir = SCREENSHOT_DIR.replace("\\", "/")
+
+    skip_flag = "--skip-existing"
+    if "--no-skip" in sys.argv:
+        skip_flag = "--no-skip"
+
+    cmd = [
+        GODOT_EXE,
+        "--path", PROJECT_DIR,
+        "--xr-mode", "off",
+        "--no-window",
+        "--script", BATCH_SCRIPT,
+        "--",
+        f"--catalog={catalog_path}",
+        f"--outdir={output_dir}",
+        f"--wait={WAIT_SECONDS}",
+        skip_flag,
+    ]
+
+    print("Running Godot batch capture (single process, all scenes)...")
+    print(f"  Command: {' '.join(cmd[:7])} -- ...")
+    print()
+
     start_time = time.time()
 
-    for i, entry in enumerate(entries):
-        scene_path = entry["scenePath"]
-        screenshot = entry["screenshot"]
-        lookup = entry.get("lookupName") or ""
-        png_filename = os.path.basename(screenshot)
-        target_png = os.path.join(SCREENSHOT_DIR, png_filename)
-        label = lookup or png_filename
-        idx = i + 1
+    try:
+        # No timeout — the batch captures hundreds of scenes in one process
+        # and handles its own timing internally
+        result = subprocess.run(
+            cmd,
+            cwd=PROJECT_DIR,
+            timeout=7200,  # 2 hour safety timeout
+        )
+        print()
+        print(f"Godot process exited with code: {result.returncode}")
 
-        # Skip if already exists
-        if os.path.isfile(target_png):
-            # Only print every 100th skip to reduce noise
-            if idx % 100 == 0 or idx == total:
-                print(f"[{idx}/{total}] ... skipping (already captured)")
-            skipped += 1
-            continue
+    except subprocess.TimeoutExpired:
+        print("\nERROR: Godot process timed out after 2 hours")
+        sys.exit(1)
+    except Exception as e:
+        print(f"\nERROR: {e}")
+        sys.exit(1)
 
-        # Run Godot capture
-        userdata_out = f"user://scene_shots/{png_filename}"
-        print(f"[{idx}/{total}] {label} - capturing... ", end="", flush=True)
-
-        cmd = [
-            GODOT_EXE,
-            "--path", PROJECT_DIR,
-            "--xr-mode", "off",
-            "--no-window",
-            "--script", CAPTURE_SCRIPT,
-            "--",
-            f"--scene={scene_path}",
-            f"--out={userdata_out}",
-            f"--wait={WAIT_SECONDS}",
-        ]
-
-        try:
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=TIMEOUT_SECONDS,
-                cwd=PROJECT_DIR,
-            )
-
-            godot_output = os.path.join(GODOT_USERDATA, png_filename)
-
-            if os.path.isfile(godot_output):
-                shutil.copy2(godot_output, target_png)
-                print("OK")
-                captured += 1
-            else:
-                print("FAIL (no output PNG)")
-                failed += 1
-                failed_list.append(f"  - {label} ({scene_path})")
-
-        except subprocess.TimeoutExpired:
-            print("FAIL (timeout)")
-            failed += 1
-            failed_list.append(f"  - {label} ({scene_path}) [timeout]")
-        except Exception as e:
-            print(f"FAIL ({e})")
-            failed += 1
-            failed_list.append(f"  - {label} ({scene_path}) [{e}]")
-
-        # Print progress every 50 captures
-        if captured > 0 and captured % 50 == 0:
-            elapsed = time.time() - start_time
-            rate = captured / elapsed if elapsed > 0 else 0
-            remaining = (total - skipped - captured - failed) / rate if rate > 0 else 0
-            print(f"    --- Progress: {captured} captured, {failed} failed, ~{remaining/60:.0f} min remaining ---")
-
-    # ── Update catalog JSON ────────────────────────────────────────────────────
+    elapsed = time.time() - start_time
+    print(f"Total Godot time: {elapsed/60:.1f} minutes")
     print()
+
+    # ── Update catalog JSON ────────────────────────────────────────────────
+    # Re-read catalog in case it changed
+    with open(CATALOG_JSON, "r", encoding="utf-8") as f:
+        catalog = json.load(f)
+
+    _update_catalog(catalog, catalog["entries"])
+
+    print()
+    print("Done.")
+
+
+def _update_catalog(catalog, entries):
+    """Update hasScreenshot flags in scene-catalog.json."""
     print("=== Updating scene-catalog.json ===")
     updated = 0
     for entry in entries:
@@ -138,26 +145,9 @@ def main():
         json.dump(catalog, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
+    total_with = sum(1 for e in entries if e.get("hasScreenshot"))
     print(f"Updated {updated} entries to hasScreenshot=true")
-
-    # ── Summary ────────────────────────────────────────────────────────────────
-    elapsed = time.time() - start_time
-    print()
-    print(f"=== Capture Summary ===")
-    print(f"  Total:    {total}")
-    print(f"  Captured: {captured}")
-    print(f"  Skipped:  {skipped} (already existed)")
-    print(f"  Failed:   {failed}")
-    print(f"  Time:     {elapsed/60:.1f} minutes")
-
-    if failed_list:
-        print()
-        print("Failed scenes:")
-        for line in failed_list:
-            print(line)
-
-    print()
-    print("Done.")
+    print(f"Total with screenshots: {total_with}/{len(entries)}")
 
 
 if __name__ == "__main__":

@@ -13,7 +13,9 @@ var _output_path: String = "user://scene_shots/capture.png"
 var _wait_seconds: float = 3.0
 var _orbit_distance: float = 0.0  # 0 = auto from AABB
 var _orbit_yaw: float = 0.4
-var _orbit_pitch: float = -0.35
+var _orbit_pitch: float = 0.35  # positive = above looking down
+var _show_ground: bool = true  # false = skip scaffold ground plane
+var _lift_to_ground: bool = true  # shift instance up so AABB bottom sits at y=0
 
 func _initialize() -> void:
 	_parse_args()
@@ -51,6 +53,10 @@ func _parse_args() -> void:
 			"pitch":
 				if value.is_valid_float():
 					_orbit_pitch = float(value)
+			"ground":
+				_show_ground = (value.to_lower() != "false" and value != "0")
+			"lift":
+				_lift_to_ground = (value.to_lower() != "false" and value != "0")
 
 func _run_capture() -> void:
 	print("capture_tscn_shot: Loading scene '%s'..." % _scene_path)
@@ -98,15 +104,17 @@ func _run_capture() -> void:
 	fill.shadow_enabled = false
 	scene_root.add_child(fill)
 
-	# Ground plane
-	var ground := MeshInstance3D.new()
-	var ground_mesh := PlaneMesh.new()
-	ground_mesh.size = Vector2(20, 20)
-	ground.mesh = ground_mesh
-	var ground_mat := StandardMaterial3D.new()
-	ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	ground.material_override = ground_mat
-	scene_root.add_child(ground)
+	# Ground plane (optional via --ground=false)
+	var ground: MeshInstance3D = null
+	if _show_ground:
+		ground = MeshInstance3D.new()
+		var ground_mesh := PlaneMesh.new()
+		ground_mesh.size = Vector2(20, 20)
+		ground.mesh = ground_mesh
+		var ground_mat := StandardMaterial3D.new()
+		ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
+		ground.material_override = ground_mat
+		scene_root.add_child(ground)
 
 	# --- Load and instantiate the .tscn ---
 	var packed: PackedScene = ResourceLoader.load(_scene_path)
@@ -129,6 +137,15 @@ func _run_capture() -> void:
 	await process_frame
 	await process_frame
 
+	# --- Lift to ground: shift instance so AABB bottom sits at y=0 ---
+	if _lift_to_ground and instance is Node3D:
+		var lift_aabb: AABB = _get_combined_aabb(instance as Node3D)
+		if lift_aabb.size.length() > 0.01:
+			var min_y: float = lift_aabb.position.y
+			if abs(min_y) > 0.01:
+				(instance as Node3D).position.y -= min_y
+				print("capture_tscn_shot: Lifted by %.2f (AABB min_y was %.2f)" % [-min_y, min_y])
+
 	# --- Camera framing ---
 	# Check for built-in CaptureCamera
 	var capture_cam: Camera3D = null
@@ -144,7 +161,8 @@ func _run_capture() -> void:
 	if capture_cam:
 		capture_cam.current = true
 		camera.current = false
-		ground.visible = false
+		if ground:
+			ground.visible = false
 		print("capture_tscn_shot: Using built-in CaptureCamera")
 	else:
 		# Auto-fit from AABB
