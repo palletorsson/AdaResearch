@@ -73,6 +73,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			if p["id"] == preset_id:
 				_load_preset(p)
 				break
+	elif config_data.has("placements"):
+		# Accept web grid editor format: {placements: [{element, position: [x,y]}], grid_size: [w,h]}
+		_clear_board()
+		if config_data.has("grid_size"):
+			var gs: Array = config_data["grid_size"]
+			if gs.size() >= 2:
+				_init_occupancy(int(gs[0]), int(gs[1]))
+		var placements: Array = config_data["placements"]
+		for p in placements:
+			var pos: Array = p.get("position", [0, 0])
+			_place_element(str(p["element"]), int(pos[0]), int(pos[1]))
+		_update_status()
+		print("[GridEditorBoard3D] Loaded web layout — %d elements" % _placements.size())
 
 # ═══════════════════════════════════════════════════════════════════════
 # DATA
