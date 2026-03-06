@@ -372,8 +372,8 @@ func _build_capture_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
 	cam.fov = 60.0
-	cam.position = Vector3(0.0, 0.7, 1.6)
-	cam.look_at(Vector3(0.0, 0.2, 0.4), Vector3.UP)
+	cam.position = Vector3(0.0, 0.5, 2.0)
+	cam.look_at(Vector3(0.0, 0.2, 0.8), Vector3.UP)
 	add_child(cam)
 
 func _build_touch_area() -> void:
