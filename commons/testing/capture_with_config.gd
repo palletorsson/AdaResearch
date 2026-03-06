@@ -17,6 +17,8 @@ var _orbit_yaw: float = 0.4
 var _orbit_pitch: float = 0.35
 var _show_ground: bool = true
 var _lift_to_ground: bool = true
+var _ambient_energy: float = 0.6
+var _light_energy: float = 1.2
 
 func _initialize() -> void:
 	_parse_args()
@@ -60,6 +62,12 @@ func _parse_args() -> void:
 				_show_ground = (value.to_lower() != "false" and value != "0")
 			"lift":
 				_lift_to_ground = (value.to_lower() != "false" and value != "0")
+			"ambient":
+				if value.is_valid_float():
+					_ambient_energy = maxf(0.0, float(value))
+			"light":
+				if value.is_valid_float():
+					_light_energy = maxf(0.0, float(value))
 
 func _run_capture() -> void:
 	print("capture_with_config: Loading scene '%s'..." % _scene_path)
@@ -79,7 +87,7 @@ func _run_capture() -> void:
 	env.background_color = Color(0.12, 0.12, 0.16)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.5, 0.5, 0.55)
-	env.ambient_light_energy = 0.6
+	env.ambient_light_energy = _ambient_energy
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 
 	var world_env := WorldEnvironment.new()
@@ -93,7 +101,7 @@ func _run_capture() -> void:
 
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-45, -30, 0)
-	light.light_energy = 1.2
+	light.light_energy = _light_energy
 	light.shadow_enabled = true
 	scene_root.add_child(light)
 

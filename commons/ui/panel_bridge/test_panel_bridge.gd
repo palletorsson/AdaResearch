@@ -53,6 +53,15 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	panel_bridge.data_json_path = tmp_path
 	panel_bridge.load_panels()
 
+	# Add a CaptureCamera so capture_with_config.gd frames the panels properly
+	# Panels are at y=1.4, z=-0.65 in an arc arrangement
+	var cam := Camera3D.new()
+	cam.name = "CaptureCamera"
+	cam.fov = 55.0
+	cam.position = Vector3(0.0, 1.45, 0.9)
+	cam.look_at(Vector3(0.0, 1.35, -0.65), Vector3.UP)
+	add_child(cam)
+
 	print("test_panel_bridge: apply_grid_config — %d shafts, %d warps, %d picks" % [
 		shaft_count,
 		config_data.get("warps", 0),
