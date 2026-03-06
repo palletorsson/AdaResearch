@@ -1,9 +1,10 @@
 ## Orchestrator: loads Panel Layout JSON + Data JSON,
 ## creates the appropriate data model, spawns VRPanelInstances in a row.
 ##
-## Supports two page types:
+## Supports three page types:
 ##   "loom_simulator"  → DraftDataStore (binary matrices)
 ##   "pattern_maker"   → domain color data injected into color_grid metadata
+##   "grid_editor"     → placement data injected into color_grid metadata
 ##
 ## Attach this to a Node3D in your scene. Set the export paths
 ## to JSON files, then call load_panels() or let _ready() auto-load.
@@ -72,6 +73,8 @@ func load_panels() -> void:
 	match page_type:
 		"pattern_maker":
 			_load_pattern_maker(layout, data)
+		"grid_editor":
+			_load_grid_editor(layout, data)
 		_:
 			_load_loom(layout, data)
 
@@ -133,6 +136,60 @@ func _load_pattern_maker(layout: Dictionary, data: Dictionary) -> void:
 					metadata["palette_colors"] = palette_colors
 
 	# data_store stays null — pattern maker doesn't use DraftDataStore
+	for panel_def in panels:
+		_spawn_panel(panel_def, null)
+
+
+## Load panels for grid_editor page — injects placement data into color_grid metadata.
+func _load_grid_editor(layout: Dictionary, data: Dictionary) -> void:
+	# Extract placement data
+	var placements: Array = data.get("placements", [])
+	var grid_size: Array = data.get("grid_size", [16, 12])
+	var subset: String = data.get("subset", "")
+
+	# Convert placements into a 2D color index array for the color_grid widget
+	var cols: int = int(grid_size[0]) if grid_size.size() > 0 else 16
+	var rows: int = int(grid_size[1]) if grid_size.size() > 1 else 12
+
+	# Build a grid initialized to 0 (empty/background)
+	var grid_data: Array = []
+	for r in rows:
+		var row: Array = []
+		for c in cols:
+			row.append(0)
+		grid_data.append(row)
+
+	# Map element types to color indices for visual distinction
+	var element_color_map := {}
+	var next_color: int = 1  # 0 = background
+	for placement in placements:
+		var element_name: String = placement.get("element", "")
+		if not element_color_map.has(element_name):
+			element_color_map[element_name] = next_color
+			next_color = (next_color % 7) + 1  # cycle through indices 1-7
+
+		var pos: Array = placement.get("position", [0, 0])
+		var col: int = int(pos[0]) if pos.size() > 0 else 0
+		var row: int = int(pos[1]) if pos.size() > 1 else 0
+		if row >= 0 and row < rows and col >= 0 and col < cols:
+			grid_data[row][col] = element_color_map[element_name]
+
+	# Inject grid data into color_grid elements in the layout
+	var panels: Array = layout.get("panels", [])
+	for panel_def in panels:
+		var elements: Array = panel_def.get("elements", [])
+		for elem in elements:
+			var elem_type: String = elem.get("type", "")
+			var metadata: Dictionary = elem.get("metadata", {})
+
+			if elem_type == "color_grid":
+				var data_path: String = metadata.get("data_path", "")
+				if data_path == "placements":
+					metadata["data"] = grid_data
+					metadata["rows"] = rows
+					metadata["cols"] = cols
+
+	# data_store stays null — grid editor doesn't use DraftDataStore
 	for panel_def in panels:
 		_spawn_panel(panel_def, null)
 
