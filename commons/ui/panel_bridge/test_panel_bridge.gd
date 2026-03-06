@@ -26,14 +26,14 @@ var _info_label: Label
 
 
 ## Config injection for capture_with_config.gd audit loop.
-## Accepts a loom draft dictionary (same shape as loom_draft_data.json).
+## Detects tool type from config keys and loads the matching panel layout.
 func apply_grid_config(config_data: Dictionary) -> void:
-	# Write draft data to a temp file so PanelBridgeLoader can read it
+	# Write config to temp file for PanelBridgeLoader
 	var tmp_dir := "user://tmp"
 	if not DirAccess.dir_exists_absolute(tmp_dir):
 		DirAccess.make_dir_recursive_absolute(tmp_dir)
 
-	var tmp_path := tmp_dir + "/loom_capture_data.json"
+	var tmp_path := tmp_dir + "/capture_data.json"
 	var file := FileAccess.open(tmp_path, FileAccess.WRITE)
 	if not file:
 		push_error("test_panel_bridge: Cannot write temp data to %s" % tmp_path)
@@ -41,20 +41,43 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	file.store_string(JSON.stringify(config_data))
 	file.close()
 
-	# Pick layout based on shaft count
-	var shaft_count: int = config_data.get("shafts", 4) as int
+	# Detect tool type from config keys and pick layout
 	var layout_path: String
-	if shaft_count > 4:
-		layout_path = SAMPLE_DIR + "loom_overshot_layout.json"
+	var tool_name: String
+
+	if config_data.has("wallpaper_group") or config_data.has("tile_size"):
+		# --- Pattern Maker ---
+		tool_name = "pattern_maker"
+		layout_path = SAMPLE_DIR + "pattern_maker_layout.json"
+		print("test_panel_bridge: apply_grid_config [pattern_maker] group=%s size=%s" % [
+			config_data.get("wallpaper_group", "?"),
+			config_data.get("tile_size", "?"),
+		])
+	elif config_data.has("placements") or config_data.has("grid_size"):
+		# --- Grid Editor ---
+		tool_name = "grid_editor"
+		layout_path = SAMPLE_DIR + "grid_editor_layout.json"
+		var placements: Array = config_data.get("placements", [])
+		print("test_panel_bridge: apply_grid_config [grid_editor] %d placements" % placements.size())
 	else:
-		layout_path = SAMPLE_DIR + "loom_panel_layout.json"
+		# --- Loom (default) ---
+		tool_name = "loom"
+		var shaft_count: int = config_data.get("shafts", 4) as int
+		if shaft_count > 4:
+			layout_path = SAMPLE_DIR + "loom_overshot_layout.json"
+		else:
+			layout_path = SAMPLE_DIR + "loom_panel_layout.json"
+		print("test_panel_bridge: apply_grid_config [loom] %d shafts, %d warps, %d picks" % [
+			shaft_count,
+			config_data.get("warps", 0),
+			config_data.get("picks", 0),
+		])
 
 	panel_bridge.layout_json_path = layout_path
 	panel_bridge.data_json_path = tmp_path
 	panel_bridge.load_panels()
 
-	# Add a CaptureCamera so capture_with_config.gd frames the panels properly
-	# Panels are at y=1.4, z=-0.65 in an arc arrangement
+	# Add CaptureCamera — panels are at y=1.4, z=-0.65 in arc
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
 	cam.fov = 50.0
@@ -62,11 +85,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	cam.look_at(Vector3(0.0, 1.4, -0.65), Vector3.UP)
 	add_child(cam)
 
-	print("test_panel_bridge: apply_grid_config — %d shafts, %d warps, %d picks" % [
-		shaft_count,
-		config_data.get("warps", 0),
-		config_data.get("picks", 0),
-	])
+	print("test_panel_bridge: loaded %s layout" % tool_name)
 
 
 func _ready() -> void:
