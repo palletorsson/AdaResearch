@@ -2,13 +2,13 @@
   "map_info": {
 	"name": "03 Grammars and Curves",
 	"lookup_name": "LSystems_Grammars_And_Curves",
-	"description": "Production rules formalized. The same rewriting system that grows trees can fill every point in space. Walk a checkerboard of platforms that mirrors the Hilbert curve's recursive structure. Three space-filling curves on the floor show how different grammars visit different paths.",
+	"description": "Production rules formalized. The same rewriting system that grows trees can fill every point in space. A flat open floor gives clear sightlines to the 3D Hilbert curve on its raised platform. Three space-filling curves on the floor show how different grammars visit different paths.",
 	"version": "1.0",
 	"format": "json",
 	"dimensions": {
 	  "width": 8,
 	  "depth": 10,
-	  "max_height": 3
+	  "max_height": 2
 	},
 	"metadata": {
 	  "difficulty": "intermediate",
@@ -24,7 +24,7 @@
   },
   "documentation": {
 	"summary": "LSystems_Grammars_And_Curves — Formal grammar meets space-filling",
-	"layout": "8x10 with checkerboard h1/h3 platforms. Player walks an approximation of the Hilbert curve.",
+	"layout": "8x10 flat floor with h2 pedestal under Hilbert3D. Open sightlines to curves.",
 	"objective": "See grammar as computation. Production rules A→-BF+AFA+FB- produce paths that visit every point in a region.",
 	"key_elements": [
 	  "`Hilbert3D` at (3,3) — 3D space-filling curve",
@@ -33,12 +33,12 @@
   },
   "layers": {
 	"structure": [
-	  [ "1", "3", "1", "3", "1", "3", "1", "1" ],
-	  [ "3", "1", "3", "1", "3", "1", "3", "1" ],
-	  [ "1", "3", "1", "3", "1", "3", "1", "1" ],
-	  [ "3", "1", "1", "1", "1", "1", "3", "1" ],
-	  [ "1", "3", "1", "1", "1", "3", "1", "1" ],
-	  [ "3", "1", "1", "1", "1", "1", "3", "1" ],
+	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
+	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
+	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
+	  [ "1", "1", "1", "2", "1", "1", "1", "1" ],
+	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
+	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
 	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
 	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
 	  [ "1", "1", "1", "1", "0", "1", "1", "1" ],

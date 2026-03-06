@@ -1679,6 +1679,72 @@
 				"randomness"
 			],
 			"sequence": "randomness"
+		},
+		"noise_space": {
+			"name": "Noise Space Explorer",
+			"lookup_name": "noise_space",
+			"description": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise parameters.",
+			"scene": "res://commons/context/walkgrids/noise_space.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"sequence": "randomness"
+		},
+		"shader_07_noise": {
+			"name": "Shader Noise Functions",
+			"lookup_name": "shader_07_noise",
+			"description": "Book of Shaders chapter 7 — value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
+			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"sequence": "randomness"
+		},
+		"shader_08_cellularnoise": {
+			"name": "Cellular Noise Shader",
+			"lookup_name": "shader_08_cellularnoise",
+			"description": "Book of Shaders chapter 8 — Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
+			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"sequence": "randomness"
+		},
+		"MeltingBerniniScene": {
+			"name": "Melting Bernini Columns",
+			"lookup_name": "MeltingBerniniScene",
+			"description": "Noise-based vertex displacement applied to classical column geometry. Bernini's baroque forms dissolve under procedural noise fields.",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"sequence": "randomness"
+		},
+		"marchingcubes_voxel_noise_demo": {
+			"name": "Marching Cubes Voxel Noise",
+			"lookup_name": "marchingcubes_voxel_noise_demo",
+			"description": "Marching cubes algorithm applied to a 3D noise field. Generates smooth isosurface mesh from voxel density values.",
+			"scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"proceduralgeneration"
+			],
+			"sequence": "randomness"
 		}
 	}
 }

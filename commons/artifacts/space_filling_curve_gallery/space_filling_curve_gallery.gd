@@ -6,16 +6,17 @@ class_name SpaceFillingCurveGallery
 
 # --- Configuration ---
 
-@export var quad_size: Vector2 = Vector2(2.4, 0.9)
+@export var quad_size: Vector2 = Vector2(3.2, 1.2)
 
-const PANEL_RES: int = 256
-const IMAGE_W: int = PANEL_RES * 3  # 768 pixels wide (3 panels)
+const PANEL_RES: int = 512
+const IMAGE_W: int = PANEL_RES * 3  # 1536 pixels wide (3 panels)
 const IMAGE_H: int = PANEL_RES
-const BG_COLOR: Color = Color(0.06, 0.06, 0.08)
+const BG_COLOR: Color = Color(0.04, 0.04, 0.06)
 const HILBERT_COLOR: Color = Color(0.0, 0.85, 0.9)   # Cyan
 const PEANO_COLOR: Color = Color(0.9, 0.15, 0.85)     # Magenta
 const MOORE_COLOR: Color = Color(0.95, 0.85, 0.1)     # Yellow
-const MARGIN: int = 4
+const MARGIN: int = 12
+const LINE_THICKNESS: int = 3  # Draw lines 3 pixels wide
 
 var _mesh_inst: MeshInstance3D
 var _material: StandardMaterial3D
@@ -40,6 +41,8 @@ func _build_floor_quad() -> void:
 	_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	_material.roughness = 0.85
 	_material.metallic = 0.0
+	_material.emission_enabled = true
+	_material.emission_energy_multiplier = 0.6
 	_mesh_inst.material_override = _material
 	add_child(_mesh_inst)
 
@@ -65,6 +68,7 @@ func _generate_texture() -> void:
 
 	var texture := ImageTexture.create_from_image(image)
 	_material.albedo_texture = texture
+	_material.emission_texture = texture
 
 
 # --- L-System definitions ---
@@ -178,10 +182,16 @@ func _draw_line(image: Image, x0: int, y0: int, x1: int, y1: int, color: Color) 
 	var err := dx - dy
 	var cx := x0
 	var cy := y0
+	var half_t: int = LINE_THICKNESS / 2
 
 	while true:
-		if cx >= 0 and cx < IMAGE_W and cy >= 0 and cy < IMAGE_H:
-			image.set_pixel(cx, cy, color)
+		# Draw thick pixel (LINE_THICKNESS x LINE_THICKNESS block)
+		for ox in range(-half_t, half_t + 1):
+			for oy in range(-half_t, half_t + 1):
+				var px: int = cx + ox
+				var py: int = cy + oy
+				if px >= 0 and px < IMAGE_W and py >= 0 and py < IMAGE_H:
+					image.set_pixel(px, py, color)
 		if cx == x1 and cy == y1:
 			break
 		var e2 := 2 * err
@@ -201,8 +211,8 @@ func _add_labels() -> void:
 	for i in range(3):
 		var label := Label3D.new()
 		label.text = names[i]
-		label.font_size = 42
-		label.pixel_size = 0.002
+		label.font_size = 64
+		label.pixel_size = 0.003
 		label.modulate = colors[i]
 		label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		# Position above the floor quad, centered over each panel

@@ -29,6 +29,7 @@
 	"key_elements": [
 	  "`AnimatedTree` at (2,3) — step-by-step generation in constrained zone",
 	  "`ContextSensitiveTree` at (6,3) — environment-aware branching in open zone",
+	  "`lsystem_tree` at (4,5) — a static generated tree for comparison",
 	  "`parametric_lsystem` at (4,7) — tweak angle and length decay"
 	]
   },
@@ -63,7 +64,7 @@
 	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", "AnimatedTree", " ", " ", " ", "ContextSensitiveTree", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
+	  [ " ", " ", " ", " ", "lsystem_tree", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
 	  [ " ", " ", " ", " ", "parametric_lsystem", " ", " ", " " ],
 	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
