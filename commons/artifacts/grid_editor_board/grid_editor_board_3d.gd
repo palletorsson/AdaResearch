@@ -232,9 +232,9 @@ func _build_status_label() -> void:
 func _build_capture_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
-	cam.fov = 55.0
+	cam.fov = 60.0
 	add_child(cam)
-	cam.position = Vector3(0.2, 1.0, 3.0)
+	cam.position = Vector3(0.0, 0.65, 1.8)
 	cam.look_at(Vector3(0.0, 0.65, 0.0), Vector3.UP)
 
 # ═══════════════════════════════════════════════════════════════════════

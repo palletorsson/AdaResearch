@@ -57,9 +57,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Panels are at y=1.4, z=-0.65 in an arc arrangement
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
-	cam.fov = 55.0
-	cam.position = Vector3(0.0, 1.45, 0.9)
-	cam.look_at(Vector3(0.0, 1.35, -0.65), Vector3.UP)
+	cam.fov = 50.0
+	cam.position = Vector3(0.0, 1.4, 0.5)
+	cam.look_at(Vector3(0.0, 1.4, -0.65), Vector3.UP)
 	add_child(cam)
 
 	print("test_panel_bridge: apply_grid_config — %d shafts, %d warps, %d picks" % [
