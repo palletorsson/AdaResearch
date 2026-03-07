@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://1y7hxms35xbf" path="res://tools/grid_editor/scripts/subset_loader.gd" id="1"]
+[ext_resource type="Script" path="res://tools/grid_editor/scripts/grid_editor_capture.gd" id="2"]
+
+[node name="GridEditorCapture" type="Node3D"]
+script = ExtResource("2")
+
+[node name="SubsetLoader" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1")
