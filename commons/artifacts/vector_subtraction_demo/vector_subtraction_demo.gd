@@ -1,37 +1,41 @@
 # vector_subtraction_demo.gd
-# Interactive vector subtraction: A - B = A + (-B)
-# VR-enabled with grabbable arrow endpoints
-#
-# Visualizes subtraction as adding the opposite:
-# A - B = A + (-B), shown with tip-to-tail method
+## Visualizes vector subtraction using the identity A - B = A + (-B).
+## Shows vectors A and B from origin, the negation -B, and the tip-to-tail
+## construction where -B is placed at A's tip to produce the result A - B.
+## VR-enabled: grabbable arrow endpoints let learners drag vectors interactively.
 
 extends Node3D
 
 class_name VectorSubtractionDemo
 
-## Display settings
-@export var max_vector_length: float = 1.2
-@export var arrow_thickness: float = 0.006  # Small for exhibition
+## Maximum length any vector can reach before clamping
+@export_range(0.1, 5.0, 0.1) var max_vector_length: float = 1.2
+## Thickness of arrow shafts
+@export_range(0.001, 0.05, 0.001) var arrow_thickness: float = 0.006
 
-## Vector A
+## Vector A — draggable in VR
 @export var vector_a: Vector3 = Vector3(0.8, 0.4, -0.1):
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
 		if is_inside_tree():
 			_update_vectors()
 
-## Vector B  
+## Vector B — draggable in VR
 @export var vector_b: Vector3 = Vector3(0.2, 0.7, 0.3):
 	set(value):
 		vector_b = value.limit_length(max_vector_length)
 		if is_inside_tree():
 			_update_vectors()
 
-## Colors
-@export var color_a: Color = Color(1.0, 0.3, 0.3)  # Red
-@export var color_b: Color = Color(0.3, 0.5, 1.0)  # Blue
-@export var color_neg_b: Color = Color(0.5, 0.7, 1.0, 0.6)  # Light blue - negative B
-@export var color_result: Color = Color(0.3, 1.0, 0.4)  # Green
+## Color for vector A
+@export var color_a: Color = Color(1.0, 0.3, 0.3)
+## Color for vector B
+@export var color_b: Color = Color(0.3, 0.5, 1.0)
+## Color for the negated vector -B (ghost)
+@export var color_neg_b: Color = Color(0.5, 0.7, 1.0, 0.6)
+## Color for the result vector A - B
+@export var color_result: Color = Color(0.3, 1.0, 0.4)
+## Color for info panel backgrounds
 @export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
 
 var _arrow_a: Node3D
@@ -56,7 +60,18 @@ var _axes_container: Node3D
 # VR Controls
 var _control_panel: Node3D
 
+# Shared materials (created once, reused across nodes)
+var _frame_mat: StandardMaterial3D
+var _panel_backing_mat: StandardMaterial3D
+
+# Node tracking for cleanup
+var _created_nodes: Array[Node] = []
+
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
+func _add_tracked_child(node: Node) -> void:
+	add_child(node)
+	_created_nodes.append(node)
 
 ## Creates a text label with a backing panel frame
 func _create_text_panel(panel_name: String, text: String, pos: Vector3, 
@@ -73,11 +88,7 @@ func _create_text_panel(panel_name: String, text: String, pos: Vector3,
 	box.size = Vector3(size.x, size.y, 0.008)
 	backing.mesh = box
 	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = panel_color
-	mat.metallic = 0.2
-	mat.roughness = 0.8
-	backing.material_override = mat
+	backing.material_override = _panel_backing_mat
 	backing.position.z = -0.005
 	panel.add_child(backing)
 	
@@ -98,40 +109,43 @@ func _create_text_panel(panel_name: String, text: String, pos: Vector3,
 	return panel
 
 func _add_panel_frame(panel: Node3D, size: Vector2):
-	var frame_mat = StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.3, 0.32, 0.35)
-	frame_mat.metallic = 0.5
-	frame_mat.roughness = 0.4
-	
 	var thickness = 0.004
 	var depth = 0.01
 	var half_w = size.x / 2.0
 	var half_h = size.y / 2.0
-	
-	# Top and bottom edges
-	for y_mult in [-1.0, 1.0]:
-		var edge = MeshInstance3D.new()
-		var box = BoxMesh.new()
-		box.size = Vector3(size.x + thickness * 2, thickness, depth)
-		edge.mesh = box
-		edge.material_override = frame_mat
-		edge.position = Vector3(0, half_h * y_mult, -depth/2 + 0.002)
-		panel.add_child(edge)
-	
-	# Left and right edges
-	for x_mult in [-1.0, 1.0]:
-		var edge = MeshInstance3D.new()
-		var box = BoxMesh.new()
-		box.size = Vector3(thickness, size.y, depth)
-		edge.mesh = box
-		edge.material_override = frame_mat
-		edge.position = Vector3(half_w * x_mult, 0, -depth/2 + 0.002)
-		panel.add_child(edge)
+	var z_pos = -depth / 2.0 + 0.002
+
+	var unit_box := BoxMesh.new()
+	unit_box.size = Vector3(1, 1, 1)
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = unit_box
+	mm.instance_count = 4
+
+	# Top edge
+	var xf := Transform3D(Basis.IDENTITY.scaled(Vector3(size.x + thickness * 2, thickness, depth)), Vector3(0, half_h, z_pos))
+	mm.set_instance_transform(0, xf)
+	# Bottom edge
+	xf = Transform3D(Basis.IDENTITY.scaled(Vector3(size.x + thickness * 2, thickness, depth)), Vector3(0, -half_h, z_pos))
+	mm.set_instance_transform(1, xf)
+	# Left edge
+	xf = Transform3D(Basis.IDENTITY.scaled(Vector3(thickness, size.y, depth)), Vector3(-half_w, 0, z_pos))
+	mm.set_instance_transform(2, xf)
+	# Right edge
+	xf = Transform3D(Basis.IDENTITY.scaled(Vector3(thickness, size.y, depth)), Vector3(half_w, 0, z_pos))
+	mm.set_instance_transform(3, xf)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+	mmi.material_override = _frame_mat
+	panel.add_child(mmi)
 
 func _get_panel_label(panel: Node3D) -> Label3D:
 	return panel.get_node_or_null("Label") as Label3D
 
 func _ready():
+	_init_shared_materials()
 	_create_base()
 	_create_coordinate_axes()
 	_create_arrows()
@@ -140,6 +154,17 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_update_vectors()
+
+func _init_shared_materials():
+	_frame_mat = StandardMaterial3D.new()
+	_frame_mat.albedo_color = Color(0.3, 0.32, 0.35)
+	_frame_mat.metallic = 0.5
+	_frame_mat.roughness = 0.4
+
+	_panel_backing_mat = StandardMaterial3D.new()
+	_panel_backing_mat.albedo_color = panel_color
+	_panel_backing_mat.metallic = 0.2
+	_panel_backing_mat.roughness = 0.8
 
 func _create_base():
 	# Ground plane
@@ -155,8 +180,8 @@ func _create_base():
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	base.material_override = mat
 	base.position = Vector3(0, -0.01, 0)
-	add_child(base)
-	
+	_add_tracked_child(base)
+
 	# Origin marker
 	var origin = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -169,12 +194,12 @@ func _create_base():
 	origin_mat.emission = Color(1, 1, 1)
 	origin_mat.emission_energy_multiplier = 0.3
 	origin.material_override = origin_mat
-	add_child(origin)
+	_add_tracked_child(origin)
 
 func _create_coordinate_axes():
 	_axes_container = Node3D.new()
 	_axes_container.name = "Axes"
-	add_child(_axes_container)
+	_add_tracked_child(_axes_container)
 	
 	var axis_length = max_vector_length * 1.3
 	_create_axis_line(Vector3(axis_length, 0, 0), Color(1.0, 0.3, 0.3, 0.5), "X")
@@ -218,10 +243,10 @@ func _create_vector_labels():
 	_label_b = _create_vector_label("B", color_b)
 	_label_neg_b = _create_vector_label("-B", color_neg_b)
 	_label_result = _create_vector_label("A-B", color_result)
-	add_child(_label_a)
-	add_child(_label_b)
-	add_child(_label_neg_b)
-	add_child(_label_result)
+	_add_tracked_child(_label_a)
+	_add_tracked_child(_label_b)
+	_add_tracked_child(_label_neg_b)
+	_add_tracked_child(_label_result)
 
 func _create_vector_label(text: String, color: Color) -> Label3D:
 	var label = Label3D.new()
@@ -241,11 +266,11 @@ func _create_arrows():
 	_arrow_neg_b_tip = _create_arrow("ArrowNegBTip", color_neg_b, true)
 	_arrow_result = _create_arrow("ArrowResult", color_result)
 	
-	add_child(_arrow_a)
-	add_child(_arrow_b)
-	add_child(_arrow_neg_b)
-	add_child(_arrow_neg_b_tip)
-	add_child(_arrow_result)
+	_add_tracked_child(_arrow_a)
+	_add_tracked_child(_arrow_b)
+	_add_tracked_child(_arrow_neg_b)
+	_add_tracked_child(_arrow_neg_b_tip)
+	_add_tracked_child(_arrow_result)
 
 func _create_arrow(arrow_name: String, color: Color, ghost: bool = false) -> Node3D:
 	var arrow = Node3D.new()
@@ -288,12 +313,12 @@ func _create_handles():
 	# Grabbable handle for vector A tip
 	_handle_a = _create_handle("HandleA", color_a)
 	_handle_a.position = vector_a
-	add_child(_handle_a)
-	
+	_add_tracked_child(_handle_a)
+
 	# Grabbable handle for vector B tip
 	_handle_b = _create_handle("HandleB", color_b)
 	_handle_b.position = vector_b
-	add_child(_handle_b)
+	_add_tracked_child(_handle_b)
 
 func _create_handle(handle_name: String, color: Color) -> Node3D:
 	var handle = Node3D.new()
@@ -334,7 +359,7 @@ func _create_labels():
 		22
 	)
 	_title_panel.rotation_degrees = Vector3(0, 180, 0)
-	add_child(_title_panel)
+	_add_tracked_child(_title_panel)
 	
 	# Formula panel - to the side
 	_formula_panel = _create_text_panel(
@@ -345,14 +370,14 @@ func _create_labels():
 		13
 	)
 	_formula_panel.rotation_degrees = Vector3(0, 90, 0)
-	add_child(_formula_panel)
+	_add_tracked_child(_formula_panel)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, max_vector_length + 0.32)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	_add_tracked_child(_control_panel)
 	
 	# Panel backing
 	var panel_back = MeshInstance3D.new()
@@ -488,3 +513,12 @@ func set_vectors(a: Vector3, b: Vector3):
 
 func get_result() -> Vector3:
 	return vector_a - vector_b
+
+func _exit_tree():
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass
