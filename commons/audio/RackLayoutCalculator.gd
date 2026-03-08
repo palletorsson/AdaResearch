@@ -53,6 +53,10 @@ const CONTROL_SIZES_PX := {
 	"group": Vector2(200, 150),
 	"grp": Vector2(200, 150),
 
+	# Dividers
+	"divider": Vector2(4, 120),
+	"div": Vector2(4, 120),
+
 	# Default
 	"default": Vector2(80, 80)
 }
@@ -79,6 +83,7 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 	# Get layout parameters
 	var padding_px: float = layout_settings.get("padding_px", 20.0)
 	var gap_px: float = layout_settings.get("gap_px", 15.0)
+	var vr_scale: float = layout_settings.get("vr_scale", 1.0)
 
 	# Legacy support: convert meter-based values to pixels
 	if layout_settings.has("padding"):
@@ -94,7 +99,7 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 	for row_idx in range(grid.size()):
 		var row: Array = grid[row_idx]
 		num_cols = max(num_cols, row.size())
-		var max_height_px: float = 40.0  # Minimum row height
+		var max_height_px: float = 40.0 * vr_scale  # Minimum row height
 
 		for col_idx in range(row.size()):
 			var control_id: String = str(row[col_idx])
@@ -103,12 +108,12 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 
 			if control_defs.has(control_id):
 				var control_type: String = control_defs[control_id].get("type", "default")
-				var size_px: Vector2 = _get_control_size_px(control_type, control_defs[control_id])
+				var size_px: Vector2 = _get_control_size_px(control_type, control_defs[control_id]) * vr_scale
 				max_height_px = max(max_height_px, size_px.y)
 
-				# Expand col_widths array if needed
+				# Expand col_widths array if needed (size_px already scaled by vr_scale)
 				while col_widths_px.size() <= col_idx:
-					col_widths_px.append(40.0)  # Minimum column width
+					col_widths_px.append(40.0 * vr_scale)
 				col_widths_px[col_idx] = max(col_widths_px[col_idx], size_px.x)
 
 		row_heights_px.append(max_height_px)
@@ -150,7 +155,7 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 
 			if not control_id.is_empty() and control_id != " " and control_defs.has(control_id):
 				var control_type: String = control_defs[control_id].get("type", "default")
-				var size_px: Vector2 = _get_control_size_px(control_type, control_defs[control_id])
+				var size_px: Vector2 = _get_control_size_px(control_type, control_defs[control_id]) * vr_scale
 
 				# Center control within cell
 				var center_x_px: float = x_px + (col_width_px - size_px.x) / 2.0 + size_px.x / 2.0
@@ -283,5 +288,7 @@ static func _get_type_color(control_type: String) -> Color:
 			return Color(0.8, 0.8, 0.3, 0.8)  # Yellow for meters
 		"label", "lbl":
 			return Color(0.5, 0.5, 0.5, 0.6)  # Gray for labels
+		"divider", "div":
+			return Color(0.4, 0.4, 0.5, 0.4)  # Dim for dividers
 		_:
 			return Color(0.4, 0.4, 0.4, 0.7)
