@@ -42,9 +42,15 @@ const CURVE_POINTS = 100
 var oscillator_mat: StandardMaterial3D
 var trail_mat: StandardMaterial3D
 
+## Cached meshes (reused each frame to avoid GC pressure)
+var _trail_im: ImmediateMesh
+var _curve_im: ImmediateMesh
+
 signal parameters_changed(amp: float, freq: float, phase: float, damp: float)
 
 func _ready() -> void:
+	_trail_im = ImmediateMesh.new()
+	_curve_im = ImmediateMesh.new()
 	_setup_materials()
 	_setup_sliders()
 	_setup_curve()
@@ -95,9 +101,10 @@ func _setup_sliders() -> void:
 		damping_slider.slider_moved.connect(_on_damping_changed)
 
 func _setup_curve() -> void:
-	# Initialize curve mesh
 	if sine_curve:
-		sine_curve.mesh = ImmediateMesh.new()
+		sine_curve.mesh = _curve_im
+	if trail_mesh:
+		trail_mesh.mesh = _trail_im
 
 func _process(delta: float) -> void:
 	time += delta
@@ -133,48 +140,42 @@ func _update_trail(pos: Vector3) -> void:
 	
 	if not trail_mesh or trail_points.size() < 2:
 		return
-	
-	var mesh = ImmediateMesh.new()
-	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+
+	_trail_im.clear_surfaces()
+	_trail_im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+
 	for i in range(trail_points.size()):
 		var alpha = float(i) / trail_points.size()
-		mesh.surface_set_color(Color(0.0, 0.8, 1.0, alpha * 0.5))
+		_trail_im.surface_set_color(Color(0.0, 0.8, 1.0, alpha * 0.5))
 		# Map trail to show time history along Z
 		var p = trail_points[i]
-		mesh.surface_add_vertex(Vector3(p.x, 0, (i - trail_points.size()) * 0.02))
-	
-	mesh.surface_end()
-	trail_mesh.mesh = mesh
+		_trail_im.surface_add_vertex(Vector3(p.x, 0, (i - trail_points.size()) * 0.02))
+
+	_trail_im.surface_end()
 	trail_mesh.material_override = trail_mat
 
 func _update_sine_curve() -> void:
 	if not sine_curve:
 		return
-	
-	var mesh = sine_curve.mesh as ImmediateMesh
-	if not mesh:
-		mesh = ImmediateMesh.new()
-		sine_curve.mesh = mesh
-	
-	mesh.clear_surfaces()
-	
+
+	_curve_im.clear_surfaces()
+
 	if CURVE_POINTS < 2:
 		return
-	
-	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+
+	_curve_im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+
 	# Draw the full sine wave for reference
 	for i in range(CURVE_POINTS + 1):
 		var t = float(i) / CURVE_POINTS * TAU * 2.0
 		var x = amplitude * sin(t + deg_to_rad(phase))
-		var z = -t / (TAU * frequency) if frequency > 0 else -t
-		
+		var z = -t / maxf(TAU * frequency, 0.0001)
+
 		var progress = float(i) / CURVE_POINTS
-		mesh.surface_set_color(Color(0.3, 0.6, 0.8, 0.3 + progress * 0.3))
-		mesh.surface_add_vertex(Vector3(x, 0, z * 0.5))
-	
-	mesh.surface_end()
+		_curve_im.surface_set_color(Color(0.3, 0.6, 0.8, 0.3 + progress * 0.3))
+		_curve_im.surface_add_vertex(Vector3(x, 0, z * 0.5))
+
+	_curve_im.surface_end()
 
 func _update_labels(current_x: float, current_amp: float) -> void:
 	if formula_label:
@@ -231,3 +232,6 @@ func reset() -> void:
 func get_current_position() -> float:
 	var current_amp = amplitude * exp(-damping * time) if damping > 0 else amplitude
 	return current_amp * sin(TAU * frequency * time + deg_to_rad(phase))
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

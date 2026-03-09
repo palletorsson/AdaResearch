@@ -144,8 +144,8 @@ func increase_frequency():
 	
 	# Visual frequency change
 	var freq_tween = create_tween()
-	freq_tween.tween_property(field_visualization, 'material_override:emission_energy', 3.0, 0.2)
-	freq_tween.tween_property(field_visualization, 'material_override:emission_energy', 1.0, 0.8)
+	freq_tween.tween_property(field_visualization, 'material_override:emission_energy_multiplier', 3.0, 0.2)
+	freq_tween.tween_property(field_visualization, 'material_override:emission_energy_multiplier', 1.0, 0.8)
 
 func reverse_polarity():
 	field_polarity *= -1

@@ -432,10 +432,7 @@ func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: 
 	print("  Added ForceField (%s, intensity=%.1f) at (%d,%d,%d)" % [force_type_str, intensity, x, y, z])
 
 
-# Apply utility parameters
-
-# Add this to GridUtilitiesComponent.gd in the _apply_utility_parameters method
-
+# Apply utility-specific parameters parsed from map notation (e.g. "t:next:3", "jp:15:3:8")
 func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
 	var normalized_type = utility_type.to_lower()
 	match normalized_type:
@@ -689,6 +686,41 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if utility_object.has_method("set_bridge_parameters"):
 					utility_object.set_bridge_parameters(bridge_length, bridge_axis)
 				print("GridUtilitiesComponent: Set bridge path %d segments along %s" % [bridge_length, bridge_axis])
+		"jp":  # Jump Pad — parabolic arc launcher
+			# Format: jp:target_x:target_z[:arc_height]
+			if parameters.size() >= 2:
+				var target_x: int = int(parameters[0])
+				var target_z: int = int(parameters[1])
+				var arc_h: float = 6.0
+				if parameters.size() >= 3 and parameters[2].is_valid_float():
+					arc_h = float(parameters[2])
+
+				# Compute world-space target from grid coords
+				var ts: float = cube_size + gutter
+				var target_world := Vector3(
+					target_x * ts + ts * 0.5,
+					0.0,
+					target_z * ts + ts * 0.5
+				)
+				# Look up structure height at target for landing Y
+				if structure_component:
+					var struct_y: int = structure_component.find_highest_y_at(target_x, target_z)
+					target_world.y = (struct_y + 1) * ts  # land on top of highest cube
+
+				# Apply config via the standard apply_grid_config pattern
+				if utility_object.has_method("apply_grid_config"):
+					utility_object.apply_grid_config({
+						"target_x": target_x,
+						"target_z": target_z,
+						"arc_height": arc_h
+					})
+				# Also set the world target directly
+				if "target_world_pos" in utility_object:
+					utility_object.target_world_pos = target_world
+				if utility_object.has_method("set_grid_spacing"):
+					utility_object.set_grid_spacing(cube_size, gutter)
+
+				print("GridUtilitiesComponent: Jump pad -> target grid (%d,%d), arc=%.1f, world=%s" % [target_x, target_z, arc_h, target_world])
 		"rc":  # Rotation Cube
 			# Format: rc:angle:axis:pause:y_offset (e.g. "45:y:4:0.5")
 			if parameters.size() >= 1:

@@ -3,6 +3,7 @@ extends Node3D
 ## Called by capture_with_config.gd via apply_grid_config().
 
 const MeshFactory = preload("res://tools/grid_editor/scripts/glass_mesh_factory.gd")
+const UVAC_SCENE = preload("res://commons/audio/UniversalVRAudioController.tscn")
 
 @onready var subset_loader: GridEditorSubsetLoader = $SubsetLoader
 var elements_root: Node3D
@@ -48,6 +49,7 @@ func apply_grid_config(config: Dictionary) -> void:
 	var plane: String = orientation.get("plane", "XY")
 	var tube_radius: float = subset.get("defaults", {}).get("tube_radius", 0.015)
 	var config_bonds: Array = config.get("bonds", [])
+	var is_audio: bool = (subset_id == "audio_rack")
 	var is_glass: bool = (subset_id == "glass_rack")
 	var is_pipes: bool = (subset_id == "big_pipes")
 	var is_sticky: bool = (subset_id == "sticky_notes")
@@ -55,6 +57,16 @@ func apply_grid_config(config: Dictionary) -> void:
 	var is_periodic: bool = (subset_id == "periodic_table")
 
 	print("grid_editor_capture: subset=%s plane=%s gs=%.3f placements=%d" % [subset_id, plane, gs, placements.size()])
+
+	# Audio rack: build a real interactive synth instead of static meshes
+	if is_audio:
+		# Direct rack_config loading — bypasses preset, loads from commons/audio/rack_configs/
+		var rack_config_name: String = str(config.get("rack_config", ""))
+		if not rack_config_name.is_empty():
+			_build_audio_rack_from_config(rack_config_name, gs, plane)
+			return
+		_build_audio_rack(subset, placements, grid_dims, gs, plane)
+		return
 
 	# Clear previous
 	for c in elements_root.get_children():
@@ -689,3 +701,220 @@ func _compute_content_bounds(plane: String) -> AABB:
 		else:
 			result = result.expand(pos)
 	return result
+
+
+## --- Audio Rack bridge: converts grid editor preset → real interactive synth ---
+
+# Type normalization: grid editor control types → UVAC rack config types
+const AUDIO_TYPE_MAP := {
+	"slider_h": "slh",
+	"button": "btn",
+}
+
+# Display type normalization: grid editor display types → UVAC display types
+const DISPLAY_TYPE_MAP := {
+	"waveform": "simple_waveform",
+}
+
+
+func _build_audio_rack_from_config(config_name: String, gs: float, plane: String) -> void:
+	## Load a standalone rack config JSON and build UVAC directly.
+	var path := "res://commons/audio/rack_configs/%s.json" % config_name
+	if not ResourceLoader.exists(path) and not FileAccess.file_exists(path):
+		push_error("grid_editor_capture: Rack config not found: %s" % path)
+		return
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		push_error("grid_editor_capture: Could not open rack config: %s" % path)
+		return
+
+	var json := JSON.new()
+	if json.parse(file.get_as_text()) != OK:
+		push_error("grid_editor_capture: JSON parse error in %s" % path)
+		return
+
+	var rack_config: Dictionary = json.data if json.data is Dictionary else {}
+	if rack_config.is_empty():
+		push_error("grid_editor_capture: Empty rack config: %s" % path)
+		return
+
+	# Clear previous elements
+	for c in elements_root.get_children():
+		c.queue_free()
+
+	var uvac: Node3D = UVAC_SCENE.instantiate()
+	uvac.name = "AudioRack"
+	elements_root.add_child(uvac)
+	uvac.call_deferred("load_rack_config_from_dict", rack_config)
+
+	# Estimate grid dims from the config's grid array
+	var grid_array: Array = rack_config.get("grid", [])
+	var rows: int = grid_array.size()
+	var cols: int = 0
+	for row in grid_array:
+		if row is Array and row.size() > cols:
+			cols = row.size()
+	_add_capture_camera(plane, gs, [cols, rows])
+	print("grid_editor_capture: Built audio rack from config '%s' (%d controls)" % [config_name, rack_config.get("control_definitions", {}).size()])
+
+
+func _build_audio_rack(subset: Dictionary, placements: Array, grid_dims, gs: float, plane: String) -> void:
+	## Build a real interactive UniversalVRAudioController from grid editor audio_rack placements.
+	# Clear previous elements
+	for c in elements_root.get_children():
+		c.queue_free()
+
+	var rack_config := _convert_preset_to_rack_config(subset, placements, grid_dims)
+
+	var uvac: Node3D = UVAC_SCENE.instantiate()
+	uvac.name = "AudioRack"
+	elements_root.add_child(uvac)
+
+	# Load the converted config after the node is in the tree
+	uvac.call_deferred("load_rack_config_from_dict", rack_config)
+
+	# Add CaptureCamera
+	_add_capture_camera(plane, gs, grid_dims)
+	print("grid_editor_capture: Built audio rack with %d controls" % rack_config.get("control_definitions", {}).size())
+
+
+func _convert_preset_to_rack_config(subset: Dictionary, placements: Array, grid_dims) -> Dictionary:
+	## Convert grid editor audio_rack placements into a rack config Dictionary
+	## compatible with UniversalVRAudioController.load_rack_config_from_dict().
+	var cols: int = int(grid_dims[0]) if grid_dims is Array and grid_dims.size() > 0 else 16
+	var rows: int = int(grid_dims[1]) if grid_dims is Array and grid_dims.size() > 1 else 12
+	var elements_list: Array = subset.get("elements", [])
+	var audio_info: Dictionary = subset.get("audio", {})
+
+	# Build element lookup by ID
+	var elem_lookup: Dictionary = {}
+	for elem in elements_list:
+		elem_lookup[str(elem.get("id", ""))] = elem
+
+	# Initialize empty grid (rows x cols)
+	var grid: Array = []
+	for r in rows:
+		var row: Array = []
+		for c in cols:
+			row.append("")
+		grid.append(row)
+
+	var control_defs: Dictionary = {}
+	var sound_type: String = audio_info.get("sound_type", "basic_sine_wave")
+	var control_counter: int = 0
+
+	# Track controls per category for section auto-generation
+	var category_controls: Dictionary = {}  # category_id -> [ctrl_id, ...]
+
+	for placement in placements:
+		if not placement is Dictionary:
+			continue
+		var eid: String = str(placement.get("element", ""))
+		var pos: Array = placement.get("position", [0, 0])
+		var col: int = int(pos[0])
+		var row: int = int(pos[1])
+
+		var element: Dictionary = elem_lookup.get(eid, {})
+		if element.is_empty():
+			continue
+
+		# Source elements set sound_type but don't appear as controls
+		if element.has("source"):
+			var src: Dictionary = element["source"]
+			sound_type = src.get("sound_type", sound_type)
+			continue
+
+		# Generate unique control ID
+		var ctrl_id: String = "%s_%d" % [eid, control_counter]
+		control_counter += 1
+
+		# Build control definition
+		var ctrl_def: Dictionary = {}
+		if element.has("control"):
+			var ctrl: Dictionary = element["control"]
+			var raw_type: String = str(ctrl.get("type", "slider"))
+			ctrl_def["type"] = AUDIO_TYPE_MAP.get(raw_type, raw_type)
+			if ctrl.has("parameter"):
+				ctrl_def["parameter"] = ctrl["parameter"]
+			if ctrl.has("min"):
+				ctrl_def["min"] = ctrl["min"]
+			if ctrl.has("max"):
+				ctrl_def["max"] = ctrl["max"]
+			if ctrl.has("default"):
+				ctrl_def["default"] = ctrl["default"]
+			if ctrl.has("label"):
+				ctrl_def["label"] = ctrl["label"]
+			if ctrl.has("action"):
+				ctrl_def["action"] = ctrl["action"]
+			if ctrl.has("color"):
+				ctrl_def["color"] = ctrl["color"]
+		elif element.has("display"):
+			var disp: Dictionary = element["display"]
+			var raw_type: String = str(disp.get("type", "monitor"))
+			ctrl_def["type"] = DISPLAY_TYPE_MAP.get(raw_type, raw_type)
+			if disp.has("source"):
+				ctrl_def["source"] = disp["source"]
+			if disp.has("label"):
+				ctrl_def["label"] = disp["label"]
+			if disp.has("freq_param"):
+				ctrl_def["freq_param"] = disp["freq_param"]
+			if disp.has("amp_param"):
+				ctrl_def["amp_param"] = disp["amp_param"]
+		else:
+			continue
+
+		# Place control ID in the grid
+		if row >= 0 and row < rows and col >= 0 and col < cols:
+			grid[row][col] = ctrl_id
+
+		control_defs[ctrl_id] = ctrl_def
+
+		# Track category for section auto-generation
+		var cat_id: String = str(element.get("category", ""))
+		if not cat_id.is_empty() and cat_id != "sources":
+			if not category_controls.has(cat_id):
+				category_controls[cat_id] = []
+			category_controls[cat_id].append(ctrl_id)
+
+	# Build sections from category groups
+	var categories_list: Array = subset.get("categories", [])
+	var cat_lookup: Dictionary = {}
+	for cat in categories_list:
+		cat_lookup[str(cat.get("id", ""))] = cat
+
+	var sections: Array = []
+	# Section label & color per category
+	var section_labels: Dictionary = {
+		"controls": "CONTROLS",
+		"filters": "FILTER",
+		"effects": "EFFECTS",
+		"modulators": "ENVELOPE",
+		"displays": "MONITORING",
+		"buttons": "TRANSPORT"
+	}
+	for cat_id in category_controls.keys():
+		var cat_data: Dictionary = cat_lookup.get(cat_id, {})
+		var section := {
+			"label": section_labels.get(cat_id, cat_data.get("name", cat_id).to_upper()),
+			"color": str(cat_data.get("color", "#4CAF50")),
+			"controls": category_controls[cat_id]
+		}
+		sections.append(section)
+
+	return {
+		"rack_info": {
+			"name": subset.get("name", "Audio Rack"),
+			"sound_type": sound_type
+		},
+		"layout": {
+			"padding_px": 20,
+			"gap_px": 15,
+			"vr_scale": 1.5,
+			"hide_selection": true,
+			"hide_buttons": true
+		},
+		"grid": grid,
+		"control_definitions": control_defs,
+		"sections": sections
+	}

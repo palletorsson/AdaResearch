@@ -8,13 +8,21 @@ extends Node3D
 class_name RotationOscillationCube
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
-@export var cube_size: float = 0.3
-@export var amplitude_degrees: float = 45.0  # Max rotation angle
-@export var frequency: float = 0.8
+## Side length of the cube in meters
+@export_range(0.05, 2.0, 0.05) var cube_size: float = 0.3
+## Peak rotation angle in degrees (oscillating mode only)
+@export_range(1.0, 180.0, 1.0) var amplitude_degrees: float = 45.0
+## Oscillation / spin frequency in Hz
+@export_range(0.01, 5.0, 0.01) var frequency: float = 0.8
+## Base color applied to the cube wireframe shader
 @export var cube_color: Color = Color(0.8, 0.5, 0.2)
-@export var continuous_mode: bool = false  # If true: constant spin, else: oscillate
+## If true: constant spin (θ += ω·dt), else: oscillate (θ = A·sin(ωt))
+@export var continuous_mode: bool = false
+## Show the arc indicator on the ground plane
 @export var show_arc: bool = true
+## Show the directional arrow on the cube face
 @export var show_direction_arrow: bool = true
 
 var _cube_instance: Node3D
@@ -24,6 +32,8 @@ var _formula_label: Label3D
 var _arc_mesh: MeshInstance3D
 var _direction_arrow: MeshInstance3D
 var _center_marker: MeshInstance3D
+var _speed_slider: Node3D
+var _created_nodes: Array[Node] = []
 
 var _time: float = 0.0
 var _current_angle: float = 0.0  # In radians
@@ -35,13 +45,16 @@ func _ready():
 	_create_direction_arrow()
 	_create_labels()
 	_create_center_marker()
+	_setup_controls()
 
 
+## Instantiate the main cube from the shared cube scene and apply color
 func _create_cube():
 	_cube_instance = CUBE_SCENE.instantiate()
 	_cube_instance.scale = Vector3.ONE * cube_size
 	_cube_instance.position.y = cube_size / 2.0
 	add_child(_cube_instance)
+	_created_nodes.append(_cube_instance)
 	
 	# Get the mesh for color customization
 	var static_body = _cube_instance.get_node_or_null("CubeBaseStaticBody3D")
@@ -50,6 +63,7 @@ func _create_cube():
 		_apply_cube_color()
 
 
+## Set wireframe shader colors on the cube mesh material
 func _apply_cube_color():
 	if not _cube_mesh:
 		return
@@ -61,21 +75,23 @@ func _apply_cube_color():
 		mat.set_shader_parameter("modelColor", cube_color * 0.2)
 
 
+## Draw an arc on the ground plane showing the rotation range
 func _create_arc_indicator():
 	if not show_arc:
 		return
-	
-	# Arc on ground showing rotation range
+
 	_arc_mesh = MeshInstance3D.new()
 	var mesh = ImmediateMesh.new()
 	_arc_mesh.mesh = mesh
-	
+
 	_arc_mesh.position.y = 0.01
 	add_child(_arc_mesh)
+	_created_nodes.append(_arc_mesh)
 	
 	_update_arc_mesh()
 
 
+## Rebuild the arc ImmediateMesh geometry for current amplitude/mode
 func _update_arc_mesh():
 	if not _arc_mesh:
 		return
@@ -119,11 +135,11 @@ func _update_arc_mesh():
 	_arc_mesh.mesh = mesh
 
 
+## Create a prism arrow on the cube face indicating rotation direction
 func _create_direction_arrow():
 	if not show_direction_arrow:
 		return
-	
-	# Arrow on cube face showing current direction
+
 	_direction_arrow = MeshInstance3D.new()
 	
 	# Simple arrow using prism
@@ -142,10 +158,11 @@ func _create_direction_arrow():
 	_direction_arrow.position = Vector3(0, cube_size / 2.0, cube_size / 2.0 + 0.01)
 	_direction_arrow.rotation.x = -PI / 2  # Point outward
 	add_child(_direction_arrow)
+	_created_nodes.append(_direction_arrow)
 
 
+## Create real-time value, formula, and mode indicator labels
 func _create_labels():
-	# Real-time values
 	_label = Label3D.new()
 	_label.pixel_size = 0.001
 	_label.font_size = 56
@@ -155,6 +172,7 @@ func _create_labels():
 	_label.position = Vector3(-cube_size * 1.8, cube_size * 1.5, 0)
 	_label.modulate = Color(1.0, 0.9, 0.8)
 	add_child(_label)
+	_created_nodes.append(_label)
 	
 	# Formula label
 	_formula_label = Label3D.new()
@@ -172,6 +190,7 @@ func _create_labels():
 	_formula_label.rotation.x = -PI / 6
 	_formula_label.modulate = Color(1.0, 0.85, 0.6)
 	add_child(_formula_label)
+	_created_nodes.append(_formula_label)
 	
 	# Mode indicator
 	var mode_label = Label3D.new()
@@ -181,8 +200,10 @@ func _create_labels():
 	mode_label.position = Vector3(0, cube_size + 0.2, 0)
 	mode_label.modulate = Color(0.8, 0.7, 0.6) if continuous_mode else Color(0.6, 0.8, 0.7)
 	add_child(mode_label)
+	_created_nodes.append(mode_label)
 
 
+## Draw a small cylinder at the rotation origin
 func _create_center_marker():
 	_center_marker = MeshInstance3D.new()
 	var cylinder = CylinderMesh.new()
@@ -200,6 +221,7 @@ func _create_center_marker():
 	
 	_center_marker.position.y = 0.01
 	add_child(_center_marker)
+	_created_nodes.append(_center_marker)
 
 
 func _process(delta):
@@ -234,6 +256,7 @@ func _process(delta):
 	_update_color_feedback()
 
 
+## Refresh the real-time angle / sin / omega readout
 func _update_labels():
 	if _label:
 		var angle_deg = rad_to_deg(_current_angle)
@@ -253,6 +276,7 @@ func _update_labels():
 			]
 
 
+## Shift wireframe color based on current rotation intensity
 func _update_color_feedback():
 	if not _cube_mesh:
 		return
@@ -318,3 +342,30 @@ func reset() -> void:
 
 func get_cube_instance() -> Node3D:
 	return _cube_instance
+
+
+## Add a VR speed slider for interactive frequency control
+func _setup_controls():
+	_speed_slider = SliderScene.instantiate()
+	_speed_slider.position = Vector3(0, 0.5, 0.6)
+	_speed_slider.set_param_name("Speed")
+	_speed_slider.set_normalized_value(frequency / 5.0)
+	_speed_slider.slider_moved.connect(_on_speed_changed)
+	add_child(_speed_slider)
+	_created_nodes.append(_speed_slider)
+
+
+func _on_speed_changed():
+	var val = _speed_slider.get_normalized_value()
+	set_frequency(val * 5.0)
+
+
+func _exit_tree():
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

@@ -209,6 +209,13 @@ const UTILITY_TYPES = {
 		"description": "Transparent green grid bridge spanning voids on x/z axis",
 		"supports_parameters": true  # axis:length (e.g. "z:3", "-x:2")
 	},
+	"jp": {
+		"name": "jump_pad",
+		"file": "jump_pad.tscn",
+		"category": "transport",
+		"description": "Parabolic arc launcher to target grid position — player becomes the projectile",
+		"supports_parameters": true  # target_x:target_z[:arc_height] (e.g. "15:3", "15:3:8")
+	},
 	"rc": {
 		"name": "rotation_cube",
 		"file": "rotation_cube.tscn",

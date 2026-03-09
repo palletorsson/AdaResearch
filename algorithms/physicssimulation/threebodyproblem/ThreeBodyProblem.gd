@@ -33,31 +33,51 @@ func _ready():
 	trails_enabled = true
 
 func _create_star_field():
-	# Create a background star field for visual appeal
-	var star_material = StandardMaterial3D.new()
+	# Create a background star field using a single MultiMeshInstance3D
+	# instead of 200 individual CSGSphere3D nodes (saves ~200 RIDs).
+	var star_field := get_node_or_null("StarField")
+	if not star_field:
+		return
+
+	var star_mesh := SphereMesh.new()
+	star_mesh.radius = 0.03
+	star_mesh.height = 0.06
+	star_mesh.radial_segments = 4
+	star_mesh.rings = 2
+
+	var star_material := StandardMaterial3D.new()
 	star_material.albedo_color = Color.WHITE
 	star_material.emission_enabled = true
 	star_material.emission = Color.WHITE * 0.5
-	
+	star_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = star_mesh
+	mm.instance_count = 200
+
+	# Seed star positions and random sizes via per-instance transforms
 	for i in range(200):
-		var star = CSGSphere3D.new()
-		star.radius = randf_range(0.01, 0.05)
-		star.material = star_material
-		
-		# Random position in a large sphere
-		var angle1 = randf_range(0, 2 * PI)
-		var angle2 = randf_range(0, PI)
-		var radius = randf_range(50, 100)
-		
-		star.position = Vector3(
+		var angle1: float = randf_range(0, 2 * PI)
+		var angle2: float = randf_range(0, PI)
+		var radius: float = randf_range(50, 100)
+		var pos := Vector3(
 			radius * sin(angle2) * cos(angle1),
 			radius * sin(angle2) * sin(angle1),
 			radius * cos(angle2)
 		)
-		
-		var star_field = get_node_or_null("StarField")
-		if star_field:
-			star_field.add_child(star)
+		var s: float = randf_range(0.3, 1.5)  # Random scale variation
+		var t := Transform3D(Basis().scaled(Vector3(s, s, s)), pos)
+		mm.set_instance_transform(i, t)
+		# Slight color variation for visual depth
+		var brightness: float = randf_range(0.6, 1.0)
+		mm.set_instance_color(i, Color(brightness, brightness, brightness + 0.1, 1.0))
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+	mmi.material_override = star_material
+	star_field.add_child(mmi)
 
 func _initialize_bodies():
 	var celestial = get_node_or_null("CelestialBodies")
@@ -131,15 +151,10 @@ func _connect_ui():
 		mass_slider.value_changed.connect(_on_mass_changed)
 
 func _on_reset_pressed():
-	# Reset all bodies to initial positions
+	# Reset all bodies to initial positions (CelestialBody.reset_to_initial
+	# already clears trail_points and rebuilds the ImmediateMesh)
 	for body in bodies:
 		body.reset_to_initial()
-	
-	# Clear trails
-	var trails = get_node_or_null("Trails")
-	if trails:
-		for child in trails.get_children():
-			child.queue_free()
 
 func _on_pause_pressed():
 	paused = !paused
@@ -154,11 +169,10 @@ func _on_trail_toggle_pressed():
 		trail_btn.text = "Trails: " + ("ON" if trails_enabled else "OFF")
 	
 	if !trails_enabled:
-		# Clear all trails
-		var trails = get_node_or_null("Trails")
-		if trails:
-			for child in trails.get_children():
-				child.queue_free()
+		# Clear trails by resetting each body's trail data
+		for body in bodies:
+			body.trail_points.clear()
+			body._rebuild_trail_mesh()
 
 func _on_mass_changed(value: float):
 	# Update mass of all bodies
@@ -171,20 +185,11 @@ func _on_mass_changed(value: float):
 		mass_label.text = "Mass: " + str(int(value))
 
 func _apply_vibrant_colors():
-	# Apply vibrant queer colors to celestial bodies
+	# Apply vibrant queer colors to celestial bodies.
+	# CelestialBody.set_trail_color() handles both body mesh and trail material.
 	for i in range(bodies.size()):
-		var body = bodies[i]
-		var color = queer_colors[i % queer_colors.size()]
-
-		# Apply color to body mesh
-		if body.has_node("MeshInstance3D"):
-			var mesh_instance = body.get_node("MeshInstance3D")
-			if mesh_instance.material_override:
-				mesh_instance.material_override.albedo_color = color
-				mesh_instance.material_override.emission_enabled = true
-				mesh_instance.material_override.emission = color
-				mesh_instance.material_override.emission_energy_multiplier = 3.0
-
-		# Apply color to trail if available
-		if body.has_method("set_trail_color"):
-			body.set_trail_color(color)
+		var body: CelestialBody = bodies[i] as CelestialBody
+		if body == null:
+			continue
+		var color: Color = queer_colors[i % queer_colors.size()]
+		body.set_trail_color(color)

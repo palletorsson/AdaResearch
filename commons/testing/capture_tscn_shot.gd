@@ -16,6 +16,7 @@ var _orbit_yaw: float = 0.4
 var _orbit_pitch: float = 0.35  # positive = above looking down
 var _show_ground: bool = true  # false = skip scaffold ground plane
 var _lift_to_ground: bool = true  # shift instance up so AABB bottom sits at y=0
+var _orbit_focus_override: Vector3 = Vector3.INF  # INF = auto from AABB
 
 func _initialize() -> void:
 	_parse_args()
@@ -57,6 +58,15 @@ func _parse_args() -> void:
 				_show_ground = (value.to_lower() != "false" and value != "0")
 			"lift":
 				_lift_to_ground = (value.to_lower() != "false" and value != "0")
+			"focus":
+				# Format: "x,y,z" e.g. "0,0,0"
+				var parts = value.split(",")
+				if parts.size() == 3:
+					var px = parts[0].strip_edges()
+					var py = parts[1].strip_edges()
+					var pz = parts[2].strip_edges()
+					if px.is_valid_float() and py.is_valid_float() and pz.is_valid_float():
+						_orbit_focus_override = Vector3(float(px), float(py), float(pz))
 
 func _run_capture() -> void:
 	print("capture_tscn_shot: Loading scene '%s'..." % _scene_path)
@@ -194,6 +204,11 @@ func _run_capture() -> void:
 			if orbit_dist <= 0.01:
 				orbit_dist = 5.0
 
+		# Override focus if specified via --focus=x,y,z
+		if _orbit_focus_override != Vector3.INF:
+			orbit_focus = _orbit_focus_override
+			print("capture_tscn_shot: Focus overridden to %s" % orbit_focus)
+
 		var offset := Vector3(
 			sin(_orbit_yaw) * cos(_orbit_pitch),
 			sin(_orbit_pitch),
@@ -206,6 +221,7 @@ func _run_capture() -> void:
 	await create_timer(_wait_seconds).timeout
 	await process_frame
 	await process_frame
+
 
 	# --- Capture screenshot ---
 	var image: Image = root.get_texture().get_image()

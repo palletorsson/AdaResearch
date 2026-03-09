@@ -14,6 +14,7 @@ static var instance: AdaSceneManager
 # Scene references and paths
 const GRID_SCENE_PATH = "res://commons/scenes/grid.tscn"
 const LAB_SCENE_PATH = "res://commons/scenes/lab.tscn"
+const LANDSCAPE_SCENE_PATH = "res://commons/scenes/landscape.tscn"
 
 # Transition types
 enum TransitionType {
@@ -368,6 +369,8 @@ func request_transition(transition_request: Dictionary):
 			_handle_next_action(current_map)
 		"return_to_hub":
 			_return_to_hub(transition_request.get("completion_data", {}))
+		"load_landscape":
+			_load_landscape()
 		_:
 			if debug:
 				print("AdaSceneManager: Unknown action: %s" % action)
@@ -697,6 +700,16 @@ func _return_to_hub(completion_data: Dictionary = {}):
 	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
 
+
+func _load_landscape():
+	if debug:
+		print("AdaSceneManager: Loading open landscape scene")
+	var scene_data = {
+		"scene_manager": self,
+		"return_to": "lab",
+	}
+	_load_scene_with_data(LANDSCAPE_SCENE_PATH, scene_data)
+
 # Enhanced scene loading with lab map override support
 
 func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
@@ -706,7 +719,11 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 		return
 	
 	var from_scene = current_scene_type
-	var to_scene = "lab" if scene_path == LAB_SCENE_PATH else "grid"
+	var to_scene = "grid"
+	if scene_path == LAB_SCENE_PATH:
+		to_scene = "lab"
+	elif scene_path == LANDSCAPE_SCENE_PATH:
+		to_scene = "landscape"
 	
 	current_scene_type = to_scene
 	

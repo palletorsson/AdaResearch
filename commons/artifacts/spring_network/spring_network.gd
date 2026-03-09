@@ -1,17 +1,25 @@
 extends Node3D
 class_name SpringNetwork
 
-## Mass-spring lattice — a 6x6 grid of masses connected by springs.
-## Uses Verlet integration for stability. Corner masses are fixed anchors.
-## Random perturbation on _ready() so the network oscillates and settles.
+## Mass-spring lattice — a grid of masses connected by springs with Verlet integration.
+## Each mass point is connected to its horizontal, vertical, and diagonal neighbors via
+## springs with configurable stiffness and damping. Corner masses are fixed anchors.
+## The algorithm: (1) build lattice positions, (2) connect neighbors with rest-length springs,
+## (3) each frame run PBD constraint solving + Verlet integration for stable oscillation.
+## Random perturbation on _ready() kicks the network so it oscillates and settles.
 
 # --- Configuration ---
 
-@export var grid_size: int = 6
-@export var spacing: float = 0.1
-@export var stiffness: float = 80.0
-@export var damping: float = 0.97
-@export var mass_radius: float = 0.008
+## Number of masses along each axis (total masses = grid_size^2)
+@export_range(2, 20) var grid_size: int = 6
+## Distance between adjacent masses at rest
+@export_range(0.01, 1.0, 0.01) var spacing: float = 0.1
+## Spring stiffness — higher values make springs snap back faster
+@export_range(1.0, 500.0, 1.0) var stiffness: float = 80.0
+## Velocity damping per frame (0 = frozen, 1 = no damping)
+@export_range(0.8, 1.0, 0.01) var damping: float = 0.97
+## Radius of each mass sphere
+@export_range(0.002, 0.05, 0.001) var mass_radius: float = 0.008
 
 # --- Internal ---
 
@@ -22,11 +30,18 @@ var _anchored: Array = []        # Array[bool] — fixed masses
 # Spring connections: Array of [idx_a, idx_b, rest_length]
 var _springs: Array = []
 
-# Visual nodes
-var _mass_meshes: Array = []     # Array[MeshInstance3D]
+# Visual references
+var _mass_mm: MultiMesh              # MultiMesh for mass spheres
+var _mass_mmi: MultiMeshInstance3D   # MultiMeshInstance3D node
 var _spring_mesh: MeshInstance3D
 var _spring_mat: StandardMaterial3D
+var _im: ImmediateMesh               # Reused each frame for spring lines
 var _title_label: Label3D
+
+# VR interaction
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var _stiffness_slider: Node
+var _damping_slider: Node
 
 # Colors
 var _mass_color: Color = Color(0.95, 0.55, 0.2)
@@ -42,6 +57,7 @@ func _ready() -> void:
 	_create_mass_visuals()
 	_create_spring_visual()
 	_create_label()
+	_setup_controls()
 	_apply_perturbation()
 
 
@@ -49,16 +65,23 @@ func _ready() -> void:
 # Lattice construction
 # ------------------------------------------------------------------
 
+## Builds the NxN grid of mass positions and marks corners as anchored.
 func _build_lattice() -> void:
+	var total = grid_size * grid_size
+	_positions.resize(total)
+	_old_positions.resize(total)
+	_anchored.resize(total)
+
 	var half = (grid_size - 1) * spacing / 2.0
+	var idx := 0
 
 	for row in range(grid_size):
 		for col in range(grid_size):
 			var x = col * spacing - half
 			var y = row * spacing - half
 			var pos = Vector3(x, y, 0)
-			_positions.append(pos)
-			_old_positions.append(pos)
+			_positions[idx] = pos
+			_old_positions[idx] = pos
 
 			# Anchor corners
 			var is_corner = (
@@ -67,13 +90,16 @@ func _build_lattice() -> void:
 				(row == grid_size - 1 and col == 0) or
 				(row == grid_size - 1 and col == grid_size - 1)
 			)
-			_anchored.append(is_corner)
+			_anchored[idx] = is_corner
+			idx += 1
 
 
+## Converts row/col to flat array index.
 func _idx(row: int, col: int) -> int:
 	return row * grid_size + col
 
 
+## Connects each mass to its horizontal, vertical, and diagonal neighbors.
 func _create_springs() -> void:
 	for row in range(grid_size):
 		for col in range(grid_size):
@@ -105,44 +131,55 @@ func _create_springs() -> void:
 
 
 # ------------------------------------------------------------------
-# Visuals — mass spheres
+# Visuals — mass spheres (MultiMesh)
 # ------------------------------------------------------------------
 
+## Creates a MultiMesh with one instance per mass point for GPU instancing.
 func _create_mass_visuals() -> void:
-	var sphere = SphereMesh.new()
+	var sphere := SphereMesh.new()
 	sphere.radius = mass_radius
 	sphere.height = mass_radius * 2.0
 	sphere.radial_segments = 8
 	sphere.rings = 4
 
-	var mass_mat = StandardMaterial3D.new()
-	mass_mat.albedo_color = _mass_color
-	mass_mat.emission_enabled = true
-	mass_mat.emission = _mass_color
-	mass_mat.emission_energy_multiplier = 0.6
+	var count = _positions.size()
 
-	var anchor_mat = StandardMaterial3D.new()
-	anchor_mat.albedo_color = _anchor_color
-	anchor_mat.emission_enabled = true
-	anchor_mat.emission = _anchor_color
-	anchor_mat.emission_energy_multiplier = 1.0
+	_mass_mm = MultiMesh.new()
+	_mass_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_mass_mm.use_colors = true
+	_mass_mm.mesh = sphere
+	_mass_mm.instance_count = count
 
-	for i in range(_positions.size()):
-		var mi = MeshInstance3D.new()
-		mi.mesh = sphere
-		mi.position = _positions[i]
-		mi.material_override = anchor_mat if _anchored[i] else mass_mat
-		add_child(mi)
-		_mass_meshes.append(mi)
+	for i in range(count):
+		var xf := Transform3D()
+		xf.origin = _positions[i]
+		_mass_mm.set_instance_transform(i, xf)
+		_mass_mm.set_instance_color(i, _anchor_color if _anchored[i] else _mass_color)
+
+	_mass_mmi = MultiMeshInstance3D.new()
+	_mass_mmi.multimesh = _mass_mm
+
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = _mass_color
+	mat.emission_energy_multiplier = 0.6
+	_mass_mmi.material_override = mat
+
+	add_child(_mass_mmi)
 
 
 # ------------------------------------------------------------------
 # Visuals — spring lines (ImmediateMesh, rebuilt each frame)
 # ------------------------------------------------------------------
 
+## Creates the MeshInstance3D and reusable ImmediateMesh for spring lines.
 func _create_spring_visual() -> void:
 	_spring_mesh = MeshInstance3D.new()
 	_spring_mesh.name = "SpringLines"
+
+	_im = ImmediateMesh.new()
+	_spring_mesh.mesh = _im
 
 	_spring_mat = StandardMaterial3D.new()
 	_spring_mat.vertex_color_use_as_albedo = true
@@ -152,6 +189,7 @@ func _create_spring_visual() -> void:
 	add_child(_spring_mesh)
 
 
+## Creates the title label above the network.
 func _create_label() -> void:
 	_title_label = Label3D.new()
 	_title_label.name = "TitleLabel"
@@ -168,9 +206,39 @@ func _create_label() -> void:
 
 
 # ------------------------------------------------------------------
+# VR interaction
+# ------------------------------------------------------------------
+
+## Adds VR sliders for stiffness and damping control.
+func _setup_controls() -> void:
+	_stiffness_slider = SliderScene.instantiate()
+	_stiffness_slider.position = Vector3(-0.15, -0.2, 0.05)
+	_stiffness_slider.set_param_name("Stiffness")
+	_stiffness_slider.set_normalized_value(stiffness / 500.0)
+	_stiffness_slider.slider_moved.connect(_on_stiffness_changed)
+	add_child(_stiffness_slider)
+
+	_damping_slider = SliderScene.instantiate()
+	_damping_slider.position = Vector3(0.15, -0.2, 0.05)
+	_damping_slider.set_param_name("Damping")
+	_damping_slider.set_normalized_value((damping - 0.8) / 0.2)
+	_damping_slider.slider_moved.connect(_on_damping_changed)
+	add_child(_damping_slider)
+
+
+func _on_stiffness_changed() -> void:
+	stiffness = _stiffness_slider.get_normalized_value() * 500.0
+
+
+func _on_damping_changed() -> void:
+	damping = 0.8 + _damping_slider.get_normalized_value() * 0.2
+
+
+# ------------------------------------------------------------------
 # Perturbation — kick the lattice so it oscillates
 # ------------------------------------------------------------------
 
+## Applies random displacement to non-anchored masses to start oscillation.
 func _apply_perturbation() -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.seed = hash("spring_network_42")
@@ -194,8 +262,8 @@ func _apply_perturbation() -> void:
 
 func _process(delta: float) -> void:
 	# Substep for stability
-	var substeps = 3
-	var sub_dt = delta / substeps
+	var substeps := 3
+	var sub_dt = delta / maxi(substeps, 1)
 	for _s in range(substeps):
 		_verlet_step(sub_dt)
 
@@ -203,6 +271,7 @@ func _process(delta: float) -> void:
 	_update_spring_lines()
 
 
+## Runs one PBD constraint-solve + Verlet integration substep.
 func _verlet_step(dt: float) -> void:
 	# Position-based dynamics (PBD) spring constraints
 	# Stiffness controls how much of the error is corrected per step
@@ -237,14 +306,18 @@ func _verlet_step(dt: float) -> void:
 		_positions[i] += velocity
 
 
+## Updates MultiMesh transforms to match current mass positions.
 func _update_mass_visuals() -> void:
 	for i in range(_positions.size()):
-		_mass_meshes[i].position = _positions[i]
+		var xf := Transform3D()
+		xf.origin = _positions[i]
+		_mass_mm.set_instance_transform(i, xf)
 
 
+## Rebuilds spring line geometry from current positions with strain coloring.
 func _update_spring_lines() -> void:
-	var im = ImmediateMesh.new()
-	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	_im.clear_surfaces()
+	_im.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	for spring in _springs:
 		var ia: int = spring[0]
@@ -263,13 +336,22 @@ func _update_spring_lines() -> void:
 		else:
 			col = _spring_color.lerp(_spring_compressed, clampf(-strain * 8.0, 0.0, 1.0))
 
-		im.surface_set_color(col)
-		im.surface_add_vertex(a)
-		im.surface_set_color(col)
-		im.surface_add_vertex(b)
+		_im.surface_set_color(col)
+		_im.surface_add_vertex(a)
+		_im.surface_set_color(col)
+		_im.surface_add_vertex(b)
 
-	im.surface_end()
-	_spring_mesh.mesh = im
+	_im.surface_end()
+
+
+# ------------------------------------------------------------------
+# Cleanup
+# ------------------------------------------------------------------
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if is_instance_valid(child):
+			child.queue_free()
 
 
 # ------------------------------------------------------------------

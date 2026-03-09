@@ -15,8 +15,9 @@ class_name VRFacePlate
 ## Physical size in meters (auto-calculated from tokens if zero)
 @export var physical_size: Vector2 = Vector2.ZERO
 
-## How far behind the 3D mechanism the face plate sits
-const FACE_PLATE_Z := -0.005
+## Z offset for the face plate quad relative to the interactable origin.
+## Slightly forward so the 2D visual sits flush on the rack panel surface.
+const FACE_PLATE_Z := 0.002
 
 var _viewport: SubViewport
 var _face_mesh: MeshInstance3D
@@ -84,6 +85,19 @@ func _build() -> void:
 	_face_mesh.material_override = mat
 	_face_mesh.position.z = FACE_PLATE_Z
 	add_child(_face_mesh)
+
+	# Counter-rotate to cancel parent's rotation so face plate always faces forward
+	call_deferred("_counter_rotate")
+
+
+## Counter-rotate so the face plate always faces the viewer (Z+),
+## regardless of the parent interactable's rotation (e.g. wheel +90° X).
+func _counter_rotate() -> void:
+	var parent := get_parent()
+	if parent and parent is Node3D:
+		var parent_rot: Vector3 = (parent as Node3D).rotation
+		# Invert parent rotation on this node so the quad faces forward
+		rotation = -parent_rot
 
 
 ## Access the inner 2D control

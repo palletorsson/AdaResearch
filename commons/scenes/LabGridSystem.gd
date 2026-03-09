@@ -446,6 +446,19 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 
 		var destination = data.get("destination", "")
 
+		# Special destination: open landscape (endgame scene)
+		if destination == "landscape":
+			print("LabGridSystem: 🌄 Landscape teleporter activated — loading open landscape")
+			var scene_manager = _find_scene_manager()
+			if scene_manager:
+				scene_manager.request_transition({
+					"type": 1, # TransitionType.TELEPORTER
+					"action": "load_landscape",
+					"source": "lab_teleporter",
+					"position": position
+				})
+			return
+
 		# Check if destination is a sequence name (no map extension)
 		var sequence_name = ""
 		if _is_sequence_name(destination):

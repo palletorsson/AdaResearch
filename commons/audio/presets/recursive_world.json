@@ -1,0 +1,123 @@
+{
+    "description": "Stage 10-12: Self-similar melodies. Fractal layering. Echoes of echoes. Each sound contains smaller versions of itself.",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.CELLULAR_MELODY",
+            "volume_db": -14,
+            "bus": "Melody"
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -18,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -22,
+            "bus": "DeepAmbient",
+            "parameters": {
+                "entropy": 0.45,
+                "queer_factor": 0.4
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
+            "volume_db": -26,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.GENERATION_SWEEP"],
+            "interval_range": [10.0, 30.0],
+            "volume_range": [-20, -14],
+            "bus": "FX"
+        },
+        {
+            "sound_pool": ["SyntheticSoundGenerator.detection_sound"],
+            "interval_range": [12.0, 35.0],
+            "volume_range": [-24, -18],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 333,
+                    "feedback": 0.55,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 666,
+                    "feedback": 0.35,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.5,
+                    "damping": 0.3
+                },
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.3,
+                    "depth": 0.15,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.6,
+                    "damping": 0.25
+                }
+            ]
+        },
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 500,
+                    "feedback": 0.45,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6,
+                    "damping": 0.2
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 250,
+                    "feedback": 0.4,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 750,
+                    "feedback": 0.5,
+                    "wet": 0.35
+                }
+            ]
+        }
+    }
+}

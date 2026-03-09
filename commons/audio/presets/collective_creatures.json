@@ -1,0 +1,143 @@
+{
+    "description": "Stage 14: Flocking sounds. Many small voices becoming one. Emergence. Murmuration as music.",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.CELLULAR_MELODY",
+            "volume_db": -12,
+            "bus": "Melody"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AUTOMATA_RHYTHM",
+            "volume_db": -10,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -14,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -20,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.4,
+                "queer_factor": 0.5
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -28,
+            "bus": "DeepAmbient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.GENERATION_SWEEP"],
+            "interval_range": [8.0, 22.0],
+            "volume_range": [-18, -12],
+            "bus": "FX"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GRID_PULSE"],
+            "interval_range": [4.0, 14.0],
+            "volume_range": [-20, -14],
+            "bus": "Rhythm"
+        },
+        {
+            "sound_pool": ["SyntheticSoundGenerator.detection_sound"],
+            "interval_range": [6.0, 20.0],
+            "volume_range": [-22, -16],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.5,
+                    "depth": 0.3,
+                    "wet": 0.35
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 180,
+                    "feedback": 0.3,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -10.0,
+                    "ratio": 3.0
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": 2.0,
+                    "mid_gain_db": 0.0,
+                    "high_gain_db": -2.0
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.35,
+                    "depth": 0.2,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.45,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35,
+                    "damping": 0.4
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.5,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.55,
+                    "wet": 0.4,
+                    "damping": 0.35
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 120,
+                    "feedback": 0.2,
+                    "wet": 0.2
+                }
+            ]
+        }
+    }
+}

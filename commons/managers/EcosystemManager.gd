@@ -23,6 +23,7 @@ signal allow_flags_changed(flags: Array[String])
 signal vegetation_config_changed(config: Dictionary)
 signal terrain_mode_changed(new_mode: String)
 signal nature_kingdoms_changed(kingdoms: Array[String])
+signal ambient_preset_changed(preset_name: String)
 signal ecosystem_stage_advanced(sequence_name: String)
 
 func _ready():
@@ -153,6 +154,7 @@ func _advance_stage(sequence_name: String) -> void:
 func _rebuild_state() -> void:
 	var old_flags = _allowed_flags.duplicate()
 	var old_terrain = _current_terrain_mode
+	var old_ambient = _current_ambient_preset
 	var old_kingdoms = _current_kingdoms.duplicate()
 
 	_allowed_flags.clear()
@@ -190,10 +192,23 @@ func _rebuild_state() -> void:
 		allow_flags_changed.emit(get_all_allowed_flags())
 	if _current_terrain_mode != old_terrain:
 		terrain_mode_changed.emit(_current_terrain_mode)
+	if _current_ambient_preset != old_ambient:
+		ambient_preset_changed.emit(_current_ambient_preset)
+		_notify_soundbank_ambient_change()
 	if _current_kingdoms != old_kingdoms:
 		nature_kingdoms_changed.emit(_current_kingdoms)
 
 	vegetation_config_changed.emit(get_ecosystem_config())
+
+# ---------------------------------------------------------------------------
+# SoundBank ambient wiring
+# ---------------------------------------------------------------------------
+
+func _notify_soundbank_ambient_change() -> void:
+	var sound_bank = get_node_or_null("/root/SoundBank")
+	if sound_bank and sound_bank.has_method("trigger_ambient_change"):
+		sound_bank.trigger_ambient_change(_current_ambient_preset)
+		print("EcosystemManager: Ambient -> '%s'" % _current_ambient_preset)
 
 # ---------------------------------------------------------------------------
 # JSON loading

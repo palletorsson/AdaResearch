@@ -1,0 +1,122 @@
+{
+    "description": "Stage 13: Soft, breathing textures. Elastic sounds. Gentle deformation. The world is soft and alive.",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -18,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.3,
+                "queer_factor": 0.55
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.LIFE_HARMONY",
+            "volume_db": -15,
+            "bus": "Harmony"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -26,
+            "bus": "Wind"
+        },
+        {
+            "sound_id": "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+            "volume_db": -22,
+            "bus": "DeepAmbient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.CELLULAR_MELODY"],
+            "interval_range": [10.0, 30.0],
+            "volume_range": [-22, -16],
+            "bus": "Melody"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GRID_PULSE"],
+            "interval_range": [18.0, 45.0],
+            "volume_range": [-24, -18],
+            "bus": "Rhythm"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.15,
+                    "depth": 0.25,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.4,
+                    "damping": 0.4
+                }
+            ]
+        },
+        "Harmony": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.55,
+                    "wet": 0.45,
+                    "damping": 0.35
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": 3.0,
+                    "mid_gain_db": 1.0,
+                    "high_gain_db": -4.0
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.08,
+                    "depth": 0.3,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.5,
+                    "damping": 0.3
+                },
+                {
+                    "type": "Compressor",
+                    "threshold_db": -18.0,
+                    "ratio": 2.0
+                }
+            ]
+        },
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 300,
+                    "feedback": 0.2,
+                    "wet": 0.15
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3,
+                    "damping": 0.5
+                }
+            ]
+        }
+    }
+}

@@ -166,6 +166,19 @@
 				"softbodies"
 			],
 			"sequence": "softbodies"
+		},
+		"jelly_cube": {
+			"name": "Jelly Cube",
+			"lookup_name": "jelly_cube",
+			"description": "A soft, deformable cube that jiggles when touched. VR-enabled with physics parameter controls for stiffness, damping, and pressure.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"sequence": "softbodies"
 		}
 	}
 }

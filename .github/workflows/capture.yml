@@ -1,0 +1,94 @@
+name: Capture Screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'algorithms/**'
+      - 'commons/maps/**'
+      - 'commons/artifacts/**'
+  workflow_dispatch:
+    inputs:
+      sequence:
+        description: 'Sequence to capture (blank = all)'
+        required: false
+        default: ''
+      force_recapture:
+        description: 'Force re-capture everything'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  capture:
+    runs-on: self-hosted  # GPU-equipped Windows runner with Godot installed
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore capture cache
+        uses: actions/cache@v4
+        with:
+          path: capture_output/
+          key: capture-${{ hashFiles('algorithms/**', 'commons/maps/**/map_data.json', 'commons/artifacts/registry/**') }}
+          restore-keys: |
+            capture-
+
+      - name: Ensure output directory exists
+        run: |
+          if (!(Test-Path "capture_output")) {
+            New-Item -ItemType Directory -Path "capture_output"
+          }
+        shell: pwsh
+
+      - name: Run capture pipeline
+        run: |
+          $godot = "C:/Godot/Godot_v4.6-stable_win64.exe"
+          if (!(Test-Path $godot)) {
+            $godot = (Get-Command godot -ErrorAction SilentlyContinue).Source
+            if (!$godot) {
+              Write-Error "Godot executable not found"
+              exit 1
+            }
+          }
+
+          $args = @(
+            "--path", ".",
+            "--xr-mode", "off",
+            "--no-window",
+            "--script", "res://commons/testing/capture_all.gd",
+            "--",
+            "--outdir=capture_output",
+            "--manifest=capture_output/capture_manifest.json"
+          )
+
+          if ("${{ inputs.sequence }}" -ne "") {
+            $args += "--sequence=${{ inputs.sequence }}"
+          }
+
+          if ("${{ inputs.force_recapture }}" -eq "true") {
+            $args += "--no-skip"
+          } else {
+            $args += "--skip-unchanged"
+          }
+
+          & $godot @args
+        shell: pwsh
+
+      - name: Show capture report
+        if: always()
+        run: |
+          if (Test-Path "capture_output/capture_report.json") {
+            Get-Content "capture_output/capture_report.json" | ConvertFrom-Json | Format-List
+          } else {
+            Write-Warning "No capture report found"
+          }
+        shell: pwsh
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ github.sha }}
+          path: capture_output/
+          retention-days: 30

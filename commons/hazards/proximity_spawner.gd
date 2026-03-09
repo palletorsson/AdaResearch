@@ -87,19 +87,28 @@ func _spawn_enemy() -> void:
 		return
 	
 	_current_enemy.global_position = global_position + spawn_offset
-	
+
+	# Pass personality from HazardManager
+	var hm = get_node_or_null("/root/HazardManager")
+	if hm and _current_enemy.has_method("set_personality"):
+		var personality: String = hm.get_hazard_personality(enemy_type)
+		_current_enemy.set_personality(personality)
+
 	# Connect to death signal if available
 	if _current_enemy.has_signal("enemy_destroyed"):
 		_current_enemy.connect("enemy_destroyed", _on_enemy_destroyed)
-	
+
 	# Add to scene tree
 	var scene_root = get_tree().current_scene
 	if scene_root:
 		scene_root.add_child(_current_enemy)
 	else:
 		get_parent().add_child(_current_enemy)
-	
-	print("ProximitySpawner: ✅ Spawned %s at %s" % [enemy_type, _current_enemy.global_position])
+
+	var p_label: String = ""
+	if hm:
+		p_label = " [%s]" % hm.get_hazard_personality(enemy_type)
+	print("ProximitySpawner: Spawned %s%s at %s" % [enemy_type, p_label, _current_enemy.global_position])
 
 
 func _on_enemy_destroyed(_enemy: Node3D) -> void:

@@ -14,41 +14,50 @@ class_name BoidsAquarium
 
 ## Flocking parameters
 @export_group("Flocking")
-@export var separation_weight: float = 1.5:
+## How strongly boids push away from nearby neighbors (0=none, 5=max)
+@export_range(0.0, 5.0, 0.1) var separation_weight: float = 1.5:
 	set(value):
 		separation_weight = clampf(value, 0.0, 5.0)
 		_update_boid_params()
 		_sync_separation_slider()
 
-@export var alignment_weight: float = 1.0:
+## How strongly boids match neighbors' heading (0=none, 5=max)
+@export_range(0.0, 5.0, 0.1) var alignment_weight: float = 1.0:
 	set(value):
 		alignment_weight = clampf(value, 0.0, 5.0)
 		_update_boid_params()
 		_sync_alignment_slider()
 
-@export var cohesion_weight: float = 1.5:
+## How strongly boids steer toward the flock center (0=none, 5=max)
+@export_range(0.0, 5.0, 0.1) var cohesion_weight: float = 1.5:
 	set(value):
 		cohesion_weight = clampf(value, 0.0, 5.0)
 		_update_boid_params()
 		_sync_cohesion_slider()
 
-@export var max_speed: float = 0.5:
+## Maximum boid velocity in meters per second
+@export_range(0.1, 1.5, 0.1) var max_speed: float = 0.5:
 	set(value):
 		max_speed = clampf(value, 0.1, 1.5)
 		_update_boid_params()
 
-@export var perception_radius: float = 0.15
+## How far each boid can see neighbors (meters)
+@export_range(0.01, 0.5, 0.01) var perception_radius: float = 0.15
 
 ## Visual
 @export_group("Visual")
-@export var boid_size: Vector3 = Vector3(0.008, 0.008, 0.025)  # Elongated cube
-@export var boid_transparency: float = 0.7
-@export var tank_transparency: float = 0.15
+## Dimensions of each boid mesh (x, y, z in meters)
+@export var boid_size: Vector3 = Vector3(0.008, 0.008, 0.025)
+## Alpha transparency of boid meshes (0=invisible, 1=opaque)
+@export_range(0.0, 1.0, 0.05) var boid_transparency: float = 0.7
+## Alpha transparency of glass tank panels (0=invisible, 1=opaque)
+@export_range(0.0, 1.0, 0.05) var tank_transparency: float = 0.15
 
 var _boids: Array = []
 var _multimesh: MultiMesh
 var _multimesh_instance: MultiMeshInstance3D
 var _info_label: Label3D
+var _created_nodes: Array[Node] = []
 
 # VR Controls
 var _separation_slider: Node
@@ -100,6 +109,7 @@ func _create_tank():
 		panel.material_override = glass_mat
 		panel.position = panels[i][0]
 		add_child(panel)
+		_created_nodes.append(panel)
 	
 	# Frame
 	var frame_mat = StandardMaterial3D.new()
@@ -121,6 +131,7 @@ func _create_frame_edge(pos: Vector3, size: Vector3, mat: StandardMaterial3D):
 	edge.material_override = mat
 	edge.position = pos
 	add_child(edge)
+	_created_nodes.append(edge)
 
 func _create_multimesh():
 	_multimesh = MultiMesh.new()
@@ -144,6 +155,7 @@ func _create_multimesh():
 	_multimesh_instance.multimesh = _multimesh
 	_multimesh_instance.material_override = mat
 	add_child(_multimesh_instance)
+	_created_nodes.append(_multimesh_instance)
 
 func _create_labels():
 	_info_label = Label3D.new()
@@ -153,6 +165,7 @@ func _create_labels():
 	_info_label.position = Vector3(0, tank_size.y/2 + 0.08, 0)
 	_info_label.text = "BOIDS AQUARIUM\n%d agents" % boid_count
 	add_child(_info_label)
+	_created_nodes.append(_info_label)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -160,6 +173,7 @@ func _create_vr_controls():
 	_control_panel.position = Vector3(0, -tank_size.y/2 - 0.08, tank_size.z/2 + 0.12)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
+	_created_nodes.append(_control_panel)
 	
 	# Panel backing
 	var panel_back = MeshInstance3D.new()
@@ -277,6 +291,7 @@ func _spawn_boids():
 		Color(1.0, 0.6, 0.3),  # Orange
 	]
 	
+	_boids.resize(boid_count)
 	for i in range(boid_count):
 		var pos = Vector3(
 			randf_range(-half.x, half.x),
@@ -284,7 +299,7 @@ func _spawn_boids():
 			randf_range(-half.z, half.z)
 		)
 		var vel = Vector3(randf() - 0.5, randf() - 0.5, randf() - 0.5).normalized() * max_speed * 0.5
-		_boids.append(BoidData.new(pos, vel))
+		_boids[i] = BoidData.new(pos, vel)
 		
 		# Each boid gets a different color with transparency
 		var base_color = colors[i % colors.size()]
@@ -396,3 +411,20 @@ func _input(event):
 				cohesion_weight = clampf(cohesion_weight + 0.2, 0.0, 5.0)
 			KEY_R:
 				_respawn_boids()
+
+func _exit_tree():
+	# Disconnect slider signals
+	if _separation_slider and _separation_slider.slider_moved.is_connected(_on_separation_slider_moved):
+		_separation_slider.slider_moved.disconnect(_on_separation_slider_moved)
+	if _alignment_slider and _alignment_slider.slider_moved.is_connected(_on_alignment_slider_moved):
+		_alignment_slider.slider_moved.disconnect(_on_alignment_slider_moved)
+	if _cohesion_slider and _cohesion_slider.slider_moved.is_connected(_on_cohesion_slider_moved):
+		_cohesion_slider.slider_moved.disconnect(_on_cohesion_slider_moved)
+	# Free created nodes
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass
