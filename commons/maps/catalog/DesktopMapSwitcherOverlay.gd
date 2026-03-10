@@ -1257,7 +1257,7 @@ const SPINE_ORDER: Array[String] = [
 const BRANCH_ORDER: Array[String] = [
 	"speculativecomputation", "criticalalgorithms",
 	"physicssimulation", "datastructures", "searchpathfinding", "vectors",
-	"computationalgeometry", "meshes", "patterngeneration",
+	"computationalgeometry", "meshes", "patterngeneration", "mosaicanalysis",
 	"grammar_systems", "spatial_partitioning", "constraint_solvers",
 	"isosurfaces", "higher_dimensions", "biological_growth",
 	"artmathematics", "advancedlaboratory", "resourcemanagement", "bricolage",

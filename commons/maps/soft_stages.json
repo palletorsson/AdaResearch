@@ -447,6 +447,28 @@
 				"movement_abilities": ["teleport", "climb", "flight"]
 			}
 		},
+		"mosaicanalysis": {
+			"order": 20,
+			"ecosystem": {
+				"allow_flags": ["pattern_world", "mosaic_world"],
+				"nature_kingdoms": ["flower", "tree", "fungus"],
+				"vegetation_density": 0.6,
+				"terrain_mode": "stone_floor",
+				"ambient_preset": "mediterranean"
+			},
+			"hazards": {
+				"unlock_types": [],
+				"spawner_behavior": "passive",
+				"personality_shift": {},
+				"max_concurrent": 3
+			},
+			"capability": {
+				"capacity_level": 5,
+				"hand_verbs": ["analyze_pattern", "extract_motif", "classify_symmetry"],
+				"catalyst_mode": null,
+				"movement_abilities": ["teleport", "climb"]
+			}
+		},
 		"graphtheory": {
 			"order": 19,
 			"ecosystem": {

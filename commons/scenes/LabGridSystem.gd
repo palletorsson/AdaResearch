@@ -534,6 +534,7 @@ func _is_sequence_name(name: String) -> bool:
 		"lsystems",
 		"swarmintelligence",
 		"patterngeneration",
+		"mosaicanalysis",
 		"proceduralgeneration",
 		"searchpathfinding",
 		"topology",

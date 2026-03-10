@@ -41,6 +41,7 @@ var audio_component
 # State
 var is_initialized: bool = false
 var generation_in_progress: bool = false
+var _ecosystem_spawner: Node3D = null
 
 # Signals
 signal map_loaded(map_name: String, format: String)
@@ -232,11 +233,11 @@ func _is_sequence_name(name: String) -> bool:
 		"fractals", "cellularautomata", "joints", "noise", "forces",
 		"proceduralaudio", "physicssimulation", "softbodies",
 		"recursiveemergence", "lsystems", "swarmintelligence",
-		"patterngeneration", "proceduralgeneration", "searchpathfinding",
+		"patterngeneration", "mosaicanalysis", "proceduralgeneration", "searchpathfinding",
 		"topology", "graphtheory", "computationalgeometry",
 		"machinelearning", "criticalalgorithms", "speculativecomputation",
 		"resourcemanagement", "advancedlaboratory", "qfeplaboratory", "testmaps",
-		"grammar_systems", "spatial_partitioning", "constraint_solvers", 
+		"grammar_systems", "spatial_partitioning", "constraint_solvers",
 		"isosurfaces", "higher_dimensions", "morphogenesis"
 	]
 	return name in known_sequences
@@ -517,12 +518,59 @@ func _handle_player_spawn():
 func _on_spawn_complete(spawn_position: Vector3):
 	print("GridSystem: Spawn positioning complete at %s" % spawn_position)
 
+	# Spawn ecosystem organisms if configured (after terrain is built)
+	call_deferred("_handle_ecosystem_spawn")
+
 	# Start ambient audio after everything is set up
 	call_deferred("_handle_audio_start")
 
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")
 	emit_signal("map_generation_complete")
+
+# Handle ecosystem spawner creation from map settings
+func _handle_ecosystem_spawn():
+	var settings = data_component.get_settings()
+	var eco_config = settings.get("ecosystem", {})
+
+	if not eco_config.get("enabled", false):
+		return
+
+	# Clean up previous spawner if reloading
+	if _ecosystem_spawner and is_instance_valid(_ecosystem_spawner):
+		_ecosystem_spawner.queue_free()
+		_ecosystem_spawner = null
+
+	var spawner = EcosystemNatureSpawner.new()
+	spawner.name = "EcosystemNatureSpawner"
+
+	# Forward config from map_data.json → spawner exports
+	spawner.spawn_radius = eco_config.get("spawn_radius", 9.0)
+	spawner.max_population = eco_config.get("max_population", 50)
+	spawner.rng_seed = eco_config.get("rng_seed", -1)
+
+	# Center offset from config (array [x, y, z] → Vector3)
+	var offset = eco_config.get("center_offset", [0.0, 0.0, 0.0])
+	if offset is Array and offset.size() >= 3:
+		spawner.center_offset = Vector3(offset[0], offset[1], offset[2])
+
+	# Always use the chunk-based LOD system
+	spawner.use_chunk_system = eco_config.get("use_chunk_system", true)
+
+	# Test overrides — bypass progression-gated EcosystemManager values
+	spawner.override_density = eco_config.get("override_density", -1.0)
+	var kingdoms_override = eco_config.get("override_kingdoms", [])
+	if kingdoms_override is Array:
+		var typed_kingdoms: Array[String] = []
+		for k in kingdoms_override:
+			typed_kingdoms.append(str(k))
+		spawner.override_kingdoms = typed_kingdoms
+
+	add_child(spawner)
+	_ecosystem_spawner = spawner
+	print("GridSystem: Ecosystem spawner created (radius=%.1f, pop=%d, chunks=%s)" % [
+		spawner.spawn_radius, spawner.max_population, spawner.use_chunk_system
+	])
 
 # Handle audio start
 func _handle_audio_start():
@@ -587,7 +635,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
-		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
+		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "mosaicanalysis", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
 			action = "start_sequence"
 			sequence = destination
 			destination = ""
@@ -712,6 +760,10 @@ func _clear_all_components():
 
 	if audio_component:
 		audio_component.cleanup()
+
+	if _ecosystem_spawner and is_instance_valid(_ecosystem_spawner):
+		_ecosystem_spawner.queue_free()
+		_ecosystem_spawner = null
 
 	generation_in_progress = false
 

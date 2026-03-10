@@ -88,10 +88,10 @@ func _is_sequence_name(name: String) -> bool:
 		"wavefunctions", "noise", "vectors", "fractals", "forces", "softbodies",
 		"meshestextures", "joints", "cellularautomata", "particles", "oscillation",
 		"physics", "proceduralaudio", "physicssimulation", "recursiveemergence",
-		"lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration",
-		"searchpathfinding", "topology", "graphtheory", "computationalgeometry",
-		"machinelearning", "criticalalgorithms", "speculativecomputation",
-		"resourcemanagement", "advancedlaboratory", "testmaps"
+		"lsystems", "swarmintelligence", "patterngeneration", "mosaicanalysis",
+		"proceduralgeneration", "searchpathfinding", "topology", "graphtheory",
+		"computationalgeometry", "machinelearning", "criticalalgorithms",
+		"speculativecomputation", "resourcemanagement", "advancedlaboratory", "testmaps"
 	]
 	return name in known_sequences
 
