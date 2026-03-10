@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2premmjuix1n"]
+[gd_scene load_steps=2 format=3 uid="uid://ex75pacos6ul"]
 
-[ext_resource type="Script" uid="uid://dosrv4ukn2wgx" path="res://commons/audio/interfaces/ModularSoundDesignerInterface.gd" id="1_abc123"]
-[ext_resource type="Theme" uid="uid://ada_theme_main" path="res://commons/ui/ada_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://dunoqam3ujt2o" path="res://commons/audio/interfaces/SoundDesignerInterface.gd" id="1_abc123"]
 
 [node name="SoundDesignerInterface" type="Control"]
 layout_mode = 3
@@ -10,5 +9,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_theme")
 script = ExtResource("1_abc123")

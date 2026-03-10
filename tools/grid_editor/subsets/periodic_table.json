@@ -1,0 +1,3166 @@
+{
+  "id": "periodic_table",
+  "name": "Periodic Table",
+  "version": "1.0",
+  "description": "Element tiles for building periodic table layouts. Each tile shows symbol, atomic number, and group color.",
+  "orientation": {
+    "plane": "XY",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 0.12,
+    "comment": "Each grid cell = 12cm. Wall-mounted table, X=left/right (groups), Y=up/down (periods)."
+  },
+  "categories": [
+    {
+      "id": "alkali",
+      "name": "Alkali Metals",
+      "color": "#EF5350"
+    },
+    {
+      "id": "alkaline",
+      "name": "Alkaline Earth",
+      "color": "#FF7043"
+    },
+    {
+      "id": "transition",
+      "name": "Transition Metals",
+      "color": "#FFA726"
+    },
+    {
+      "id": "post_transition",
+      "name": "Post-Transition",
+      "color": "#66BB6A"
+    },
+    {
+      "id": "metalloid",
+      "name": "Metalloids",
+      "color": "#26A69A"
+    },
+    {
+      "id": "nonmetal",
+      "name": "Nonmetals",
+      "color": "#42A5F5"
+    },
+    {
+      "id": "halogen",
+      "name": "Halogens",
+      "color": "#5C6BC0"
+    },
+    {
+      "id": "noble",
+      "name": "Noble Gases",
+      "color": "#AB47BC"
+    },
+    {
+      "id": "lanthanide",
+      "name": "Lanthanides",
+      "color": "#EC407A"
+    },
+    {
+      "id": "actinide",
+      "name": "Actinides",
+      "color": "#F48FB1"
+    }
+  ],
+  "presets": [
+    {
+      "id": "first_three_periods",
+      "name": "Periods 1-3",
+      "description": "First 18 elements — hydrogen through argon. Core chemistry building blocks.",
+      "grid_size": [
+        18,
+        4
+      ],
+      "placements": [
+        {
+          "element": "el_H",
+          "position": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_He",
+          "position": [
+            17,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Li",
+          "position": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Be",
+          "position": [
+            1,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_B",
+          "position": [
+            12,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_C",
+          "position": [
+            13,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_N",
+          "position": [
+            14,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_O",
+          "position": [
+            15,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_F",
+          "position": [
+            16,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ne",
+          "position": [
+            17,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Na",
+          "position": [
+            0,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mg",
+          "position": [
+            1,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Al",
+          "position": [
+            12,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Si",
+          "position": [
+            13,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_P",
+          "position": [
+            14,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_S",
+          "position": [
+            15,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cl",
+          "position": [
+            16,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ar",
+          "position": [
+            17,
+            2
+          ],
+          "rotation": 0
+        }
+      ]
+    },
+    {
+      "id": "alkali_column",
+      "name": "Alkali Metals",
+      "description": "Group 1 column — Li, Na, K, Rb, Cs, Fr. Most reactive metals.",
+      "grid_size": [
+        3,
+        7
+      ],
+      "placements": [
+        {
+          "element": "el_H",
+          "position": [
+            1,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Li",
+          "position": [
+            1,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Na",
+          "position": [
+            1,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_K",
+          "position": [
+            1,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rb",
+          "position": [
+            1,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cs",
+          "position": [
+            1,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fr",
+          "position": [
+            1,
+            6
+          ],
+          "rotation": 0
+        }
+      ]
+    },
+    {
+      "id": "noble_gas_column",
+      "name": "Noble Gases",
+      "description": "Group 18 column — He, Ne, Ar, Kr, Xe, Rn. Chemically inert.",
+      "grid_size": [
+        3,
+        7
+      ],
+      "placements": [
+        {
+          "element": "el_He",
+          "position": [
+            1,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ne",
+          "position": [
+            1,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ar",
+          "position": [
+            1,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Kr",
+          "position": [
+            1,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Xe",
+          "position": [
+            1,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rn",
+          "position": [
+            1,
+            5
+          ],
+          "rotation": 0
+        }
+      ]
+    },
+    {
+      "id": "transition_row_4",
+      "name": "Transition Row (Period 4)",
+      "description": "First row of transition metals — Sc through Zn. The d-block.",
+      "grid_size": [
+        12,
+        3
+      ],
+      "placements": [
+        {
+          "element": "el_Sc",
+          "position": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ti",
+          "position": [
+            1,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_V",
+          "position": [
+            2,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cr",
+          "position": [
+            3,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mn",
+          "position": [
+            4,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fe",
+          "position": [
+            5,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Co",
+          "position": [
+            6,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ni",
+          "position": [
+            7,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cu",
+          "position": [
+            8,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Zn",
+          "position": [
+            9,
+            1
+          ],
+          "rotation": 0
+        }
+      ]
+    },
+    {
+      "id": "full_table",
+      "name": "Full Periodic Table",
+      "description": "Complete periodic table — all 118 elements in standard layout with lanthanide and actinide rows.",
+      "grid_size": [
+        18,
+        10
+      ],
+      "placements": [
+        {
+          "element": "el_H",
+          "position": [
+            0,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_He",
+          "position": [
+            17,
+            0
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Li",
+          "position": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Be",
+          "position": [
+            1,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_B",
+          "position": [
+            12,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_C",
+          "position": [
+            13,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_N",
+          "position": [
+            14,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_O",
+          "position": [
+            15,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_F",
+          "position": [
+            16,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ne",
+          "position": [
+            17,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Na",
+          "position": [
+            0,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mg",
+          "position": [
+            1,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Al",
+          "position": [
+            12,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Si",
+          "position": [
+            13,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_P",
+          "position": [
+            14,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_S",
+          "position": [
+            15,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cl",
+          "position": [
+            16,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ar",
+          "position": [
+            17,
+            2
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_K",
+          "position": [
+            0,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ca",
+          "position": [
+            1,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sc",
+          "position": [
+            2,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ti",
+          "position": [
+            3,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_V",
+          "position": [
+            4,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cr",
+          "position": [
+            5,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mn",
+          "position": [
+            6,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fe",
+          "position": [
+            7,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Co",
+          "position": [
+            8,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ni",
+          "position": [
+            9,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cu",
+          "position": [
+            10,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Zn",
+          "position": [
+            11,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ga",
+          "position": [
+            12,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ge",
+          "position": [
+            13,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_As",
+          "position": [
+            14,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Se",
+          "position": [
+            15,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Br",
+          "position": [
+            16,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Kr",
+          "position": [
+            17,
+            3
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rb",
+          "position": [
+            0,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sr",
+          "position": [
+            1,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Y",
+          "position": [
+            2,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Zr",
+          "position": [
+            3,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Nb",
+          "position": [
+            4,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mo",
+          "position": [
+            5,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Tc",
+          "position": [
+            6,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ru",
+          "position": [
+            7,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rh",
+          "position": [
+            8,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pd",
+          "position": [
+            9,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ag",
+          "position": [
+            10,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cd",
+          "position": [
+            11,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_In",
+          "position": [
+            12,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sn",
+          "position": [
+            13,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sb",
+          "position": [
+            14,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Te",
+          "position": [
+            15,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_I",
+          "position": [
+            16,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Xe",
+          "position": [
+            17,
+            4
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cs",
+          "position": [
+            0,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ba",
+          "position": [
+            1,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_La",
+          "position": [
+            2,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Hf",
+          "position": [
+            3,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ta",
+          "position": [
+            4,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_W",
+          "position": [
+            5,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Re",
+          "position": [
+            6,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Os",
+          "position": [
+            7,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ir",
+          "position": [
+            8,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pt",
+          "position": [
+            9,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Au",
+          "position": [
+            10,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Hg",
+          "position": [
+            11,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Tl",
+          "position": [
+            12,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pb",
+          "position": [
+            13,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Bi",
+          "position": [
+            14,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Po",
+          "position": [
+            15,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_At",
+          "position": [
+            16,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rn",
+          "position": [
+            17,
+            5
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fr",
+          "position": [
+            0,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ra",
+          "position": [
+            1,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ac",
+          "position": [
+            2,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rf",
+          "position": [
+            3,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Db",
+          "position": [
+            4,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sg",
+          "position": [
+            5,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Bh",
+          "position": [
+            6,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Hs",
+          "position": [
+            7,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mt",
+          "position": [
+            8,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ds",
+          "position": [
+            9,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Rg",
+          "position": [
+            10,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cn",
+          "position": [
+            11,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Nh",
+          "position": [
+            12,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fl",
+          "position": [
+            13,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Mc",
+          "position": [
+            14,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Lv",
+          "position": [
+            15,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ts",
+          "position": [
+            16,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Og",
+          "position": [
+            17,
+            6
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ce",
+          "position": [
+            3,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pr",
+          "position": [
+            4,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Nd",
+          "position": [
+            5,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pm",
+          "position": [
+            6,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Sm",
+          "position": [
+            7,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Eu",
+          "position": [
+            8,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Gd",
+          "position": [
+            9,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Tb",
+          "position": [
+            10,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Dy",
+          "position": [
+            11,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Ho",
+          "position": [
+            12,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Er",
+          "position": [
+            13,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Tm",
+          "position": [
+            14,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Yb",
+          "position": [
+            15,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Lu",
+          "position": [
+            16,
+            8
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Th",
+          "position": [
+            3,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pa",
+          "position": [
+            4,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_U",
+          "position": [
+            5,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Np",
+          "position": [
+            6,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Pu",
+          "position": [
+            7,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Am",
+          "position": [
+            8,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cm",
+          "position": [
+            9,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Bk",
+          "position": [
+            10,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Cf",
+          "position": [
+            11,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Es",
+          "position": [
+            12,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Fm",
+          "position": [
+            13,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Md",
+          "position": [
+            14,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_No",
+          "position": [
+            15,
+            9
+          ],
+          "rotation": 0
+        },
+        {
+          "element": "el_Lr",
+          "position": [
+            16,
+            9
+          ],
+          "rotation": 0
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "el_H",
+      "name": "Hydrogen",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "H",
+      "description": "1 - Hydrogen",
+      "atomic_number": 1,
+      "symbol": "H",
+      "atomic_mass": 1.008,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_He",
+      "name": "Helium",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "He",
+      "description": "2 - Helium",
+      "atomic_number": 2,
+      "symbol": "He",
+      "atomic_mass": 4.003,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_Li",
+      "name": "Lithium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Li",
+      "description": "3 - Lithium",
+      "atomic_number": 3,
+      "symbol": "Li",
+      "atomic_mass": 6.941,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Be",
+      "name": "Beryllium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Be",
+      "description": "4 - Beryllium",
+      "atomic_number": 4,
+      "symbol": "Be",
+      "atomic_mass": 9.012,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_B",
+      "name": "Boron",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "B",
+      "description": "5 - Boron",
+      "atomic_number": 5,
+      "symbol": "B",
+      "atomic_mass": 10.81,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_C",
+      "name": "Carbon",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "C",
+      "description": "6 - Carbon",
+      "atomic_number": 6,
+      "symbol": "C",
+      "atomic_mass": 12.01,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_N",
+      "name": "Nitrogen",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "N",
+      "description": "7 - Nitrogen",
+      "atomic_number": 7,
+      "symbol": "N",
+      "atomic_mass": 14.01,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_O",
+      "name": "Oxygen",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "O",
+      "description": "8 - Oxygen",
+      "atomic_number": 8,
+      "symbol": "O",
+      "atomic_mass": 16.0,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_F",
+      "name": "Fluorine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "F",
+      "description": "9 - Fluorine",
+      "atomic_number": 9,
+      "symbol": "F",
+      "atomic_mass": 19.0,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Ne",
+      "name": "Neon",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ne",
+      "description": "10 - Neon",
+      "atomic_number": 10,
+      "symbol": "Ne",
+      "atomic_mass": 20.18,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_Na",
+      "name": "Sodium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Na",
+      "description": "11 - Sodium",
+      "atomic_number": 11,
+      "symbol": "Na",
+      "atomic_mass": 22.99,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Mg",
+      "name": "Magnesium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Mg",
+      "description": "12 - Magnesium",
+      "atomic_number": 12,
+      "symbol": "Mg",
+      "atomic_mass": 24.31,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_Al",
+      "name": "Aluminium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Al",
+      "description": "13 - Aluminium",
+      "atomic_number": 13,
+      "symbol": "Al",
+      "atomic_mass": 26.98,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Si",
+      "name": "Silicon",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Si",
+      "description": "14 - Silicon",
+      "atomic_number": 14,
+      "symbol": "Si",
+      "atomic_mass": 28.09,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_P",
+      "name": "Phosphorus",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "P",
+      "description": "15 - Phosphorus",
+      "atomic_number": 15,
+      "symbol": "P",
+      "atomic_mass": 30.97,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_S",
+      "name": "Sulfur",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "S",
+      "description": "16 - Sulfur",
+      "atomic_number": 16,
+      "symbol": "S",
+      "atomic_mass": 32.07,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_Cl",
+      "name": "Chlorine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cl",
+      "description": "17 - Chlorine",
+      "atomic_number": 17,
+      "symbol": "Cl",
+      "atomic_mass": 35.45,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Ar",
+      "name": "Argon",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ar",
+      "description": "18 - Argon",
+      "atomic_number": 18,
+      "symbol": "Ar",
+      "atomic_mass": 39.95,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_K",
+      "name": "Potassium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "K",
+      "description": "19 - Potassium",
+      "atomic_number": 19,
+      "symbol": "K",
+      "atomic_mass": 39.1,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Ca",
+      "name": "Calcium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ca",
+      "description": "20 - Calcium",
+      "atomic_number": 20,
+      "symbol": "Ca",
+      "atomic_mass": 40.08,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_Sc",
+      "name": "Scandium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sc",
+      "description": "21 - Scandium",
+      "atomic_number": 21,
+      "symbol": "Sc",
+      "atomic_mass": 44.96,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ti",
+      "name": "Titanium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ti",
+      "description": "22 - Titanium",
+      "atomic_number": 22,
+      "symbol": "Ti",
+      "atomic_mass": 47.87,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_V",
+      "name": "Vanadium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "V",
+      "description": "23 - Vanadium",
+      "atomic_number": 23,
+      "symbol": "V",
+      "atomic_mass": 50.94,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Cr",
+      "name": "Chromium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cr",
+      "description": "24 - Chromium",
+      "atomic_number": 24,
+      "symbol": "Cr",
+      "atomic_mass": 52.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Mn",
+      "name": "Manganese",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Mn",
+      "description": "25 - Manganese",
+      "atomic_number": 25,
+      "symbol": "Mn",
+      "atomic_mass": 54.94,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Fe",
+      "name": "Iron",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Fe",
+      "description": "26 - Iron",
+      "atomic_number": 26,
+      "symbol": "Fe",
+      "atomic_mass": 55.85,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Co",
+      "name": "Cobalt",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Co",
+      "description": "27 - Cobalt",
+      "atomic_number": 27,
+      "symbol": "Co",
+      "atomic_mass": 58.93,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ni",
+      "name": "Nickel",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ni",
+      "description": "28 - Nickel",
+      "atomic_number": 28,
+      "symbol": "Ni",
+      "atomic_mass": 58.69,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Cu",
+      "name": "Copper",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cu",
+      "description": "29 - Copper",
+      "atomic_number": 29,
+      "symbol": "Cu",
+      "atomic_mass": 63.55,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Zn",
+      "name": "Zinc",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Zn",
+      "description": "30 - Zinc",
+      "atomic_number": 30,
+      "symbol": "Zn",
+      "atomic_mass": 65.38,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ga",
+      "name": "Gallium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ga",
+      "description": "31 - Gallium",
+      "atomic_number": 31,
+      "symbol": "Ga",
+      "atomic_mass": 69.72,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Ge",
+      "name": "Germanium",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ge",
+      "description": "32 - Germanium",
+      "atomic_number": 32,
+      "symbol": "Ge",
+      "atomic_mass": 72.63,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_As",
+      "name": "Arsenic",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "As",
+      "description": "33 - Arsenic",
+      "atomic_number": 33,
+      "symbol": "As",
+      "atomic_mass": 74.92,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_Se",
+      "name": "Selenium",
+      "category": "nonmetal",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Se",
+      "description": "34 - Selenium",
+      "atomic_number": 34,
+      "symbol": "Se",
+      "atomic_mass": 78.97,
+      "group_color": "#42A5F5"
+    },
+    {
+      "id": "el_Br",
+      "name": "Bromine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Br",
+      "description": "35 - Bromine",
+      "atomic_number": 35,
+      "symbol": "Br",
+      "atomic_mass": 79.9,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Kr",
+      "name": "Krypton",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Kr",
+      "description": "36 - Krypton",
+      "atomic_number": 36,
+      "symbol": "Kr",
+      "atomic_mass": 83.8,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_Rb",
+      "name": "Rubidium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Rb",
+      "description": "37 - Rubidium",
+      "atomic_number": 37,
+      "symbol": "Rb",
+      "atomic_mass": 85.47,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Sr",
+      "name": "Strontium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sr",
+      "description": "38 - Strontium",
+      "atomic_number": 38,
+      "symbol": "Sr",
+      "atomic_mass": 87.62,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_Y",
+      "name": "Yttrium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Y",
+      "description": "39 - Yttrium",
+      "atomic_number": 39,
+      "symbol": "Y",
+      "atomic_mass": 88.91,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Zr",
+      "name": "Zirconium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Zr",
+      "description": "40 - Zirconium",
+      "atomic_number": 40,
+      "symbol": "Zr",
+      "atomic_mass": 91.22,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Nb",
+      "name": "Niobium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Nb",
+      "description": "41 - Niobium",
+      "atomic_number": 41,
+      "symbol": "Nb",
+      "atomic_mass": 92.91,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Mo",
+      "name": "Molybdenum",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Mo",
+      "description": "42 - Molybdenum",
+      "atomic_number": 42,
+      "symbol": "Mo",
+      "atomic_mass": 95.95,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Tc",
+      "name": "Technetium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Tc",
+      "description": "43 - Technetium",
+      "atomic_number": 43,
+      "symbol": "Tc",
+      "atomic_mass": 98.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ru",
+      "name": "Ruthenium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ru",
+      "description": "44 - Ruthenium",
+      "atomic_number": 44,
+      "symbol": "Ru",
+      "atomic_mass": 101.07,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Rh",
+      "name": "Rhodium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Rh",
+      "description": "45 - Rhodium",
+      "atomic_number": 45,
+      "symbol": "Rh",
+      "atomic_mass": 102.91,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Pd",
+      "name": "Palladium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pd",
+      "description": "46 - Palladium",
+      "atomic_number": 46,
+      "symbol": "Pd",
+      "atomic_mass": 106.42,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ag",
+      "name": "Silver",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ag",
+      "description": "47 - Silver",
+      "atomic_number": 47,
+      "symbol": "Ag",
+      "atomic_mass": 107.87,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Cd",
+      "name": "Cadmium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cd",
+      "description": "48 - Cadmium",
+      "atomic_number": 48,
+      "symbol": "Cd",
+      "atomic_mass": 112.41,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_In",
+      "name": "Indium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "In",
+      "description": "49 - Indium",
+      "atomic_number": 49,
+      "symbol": "In",
+      "atomic_mass": 114.82,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Sn",
+      "name": "Tin",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sn",
+      "description": "50 - Tin",
+      "atomic_number": 50,
+      "symbol": "Sn",
+      "atomic_mass": 118.71,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Sb",
+      "name": "Antimony",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sb",
+      "description": "51 - Antimony",
+      "atomic_number": 51,
+      "symbol": "Sb",
+      "atomic_mass": 121.76,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_Te",
+      "name": "Tellurium",
+      "category": "metalloid",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Te",
+      "description": "52 - Tellurium",
+      "atomic_number": 52,
+      "symbol": "Te",
+      "atomic_mass": 127.6,
+      "group_color": "#26A69A"
+    },
+    {
+      "id": "el_I",
+      "name": "Iodine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "I",
+      "description": "53 - Iodine",
+      "atomic_number": 53,
+      "symbol": "I",
+      "atomic_mass": 126.9,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Xe",
+      "name": "Xenon",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Xe",
+      "description": "54 - Xenon",
+      "atomic_number": 54,
+      "symbol": "Xe",
+      "atomic_mass": 131.29,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_Cs",
+      "name": "Caesium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cs",
+      "description": "55 - Caesium",
+      "atomic_number": 55,
+      "symbol": "Cs",
+      "atomic_mass": 132.91,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Ba",
+      "name": "Barium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ba",
+      "description": "56 - Barium",
+      "atomic_number": 56,
+      "symbol": "Ba",
+      "atomic_mass": 137.33,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_La",
+      "name": "Lanthanum",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "La",
+      "description": "57 - Lanthanum",
+      "atomic_number": 57,
+      "symbol": "La",
+      "atomic_mass": 138.91,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Ce",
+      "name": "Cerium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ce",
+      "description": "58 - Cerium",
+      "atomic_number": 58,
+      "symbol": "Ce",
+      "atomic_mass": 140.12,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Pr",
+      "name": "Praseodymium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pr",
+      "description": "59 - Praseodymium",
+      "atomic_number": 59,
+      "symbol": "Pr",
+      "atomic_mass": 140.91,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Nd",
+      "name": "Neodymium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Nd",
+      "description": "60 - Neodymium",
+      "atomic_number": 60,
+      "symbol": "Nd",
+      "atomic_mass": 144.24,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Pm",
+      "name": "Promethium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pm",
+      "description": "61 - Promethium",
+      "atomic_number": 61,
+      "symbol": "Pm",
+      "atomic_mass": 145.0,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Sm",
+      "name": "Samarium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sm",
+      "description": "62 - Samarium",
+      "atomic_number": 62,
+      "symbol": "Sm",
+      "atomic_mass": 150.36,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Eu",
+      "name": "Europium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Eu",
+      "description": "63 - Europium",
+      "atomic_number": 63,
+      "symbol": "Eu",
+      "atomic_mass": 151.96,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Gd",
+      "name": "Gadolinium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Gd",
+      "description": "64 - Gadolinium",
+      "atomic_number": 64,
+      "symbol": "Gd",
+      "atomic_mass": 157.25,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Tb",
+      "name": "Terbium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Tb",
+      "description": "65 - Terbium",
+      "atomic_number": 65,
+      "symbol": "Tb",
+      "atomic_mass": 158.93,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Dy",
+      "name": "Dysprosium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Dy",
+      "description": "66 - Dysprosium",
+      "atomic_number": 66,
+      "symbol": "Dy",
+      "atomic_mass": 162.5,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Ho",
+      "name": "Holmium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ho",
+      "description": "67 - Holmium",
+      "atomic_number": 67,
+      "symbol": "Ho",
+      "atomic_mass": 164.93,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Er",
+      "name": "Erbium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Er",
+      "description": "68 - Erbium",
+      "atomic_number": 68,
+      "symbol": "Er",
+      "atomic_mass": 167.26,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Tm",
+      "name": "Thulium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Tm",
+      "description": "69 - Thulium",
+      "atomic_number": 69,
+      "symbol": "Tm",
+      "atomic_mass": 168.93,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Yb",
+      "name": "Ytterbium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Yb",
+      "description": "70 - Ytterbium",
+      "atomic_number": 70,
+      "symbol": "Yb",
+      "atomic_mass": 173.05,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Lu",
+      "name": "Lutetium",
+      "category": "lanthanide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Lu",
+      "description": "71 - Lutetium",
+      "atomic_number": 71,
+      "symbol": "Lu",
+      "atomic_mass": 174.97,
+      "group_color": "#EC407A"
+    },
+    {
+      "id": "el_Hf",
+      "name": "Hafnium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Hf",
+      "description": "72 - Hafnium",
+      "atomic_number": 72,
+      "symbol": "Hf",
+      "atomic_mass": 178.49,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ta",
+      "name": "Tantalum",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ta",
+      "description": "73 - Tantalum",
+      "atomic_number": 73,
+      "symbol": "Ta",
+      "atomic_mass": 180.95,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_W",
+      "name": "Tungsten",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "W",
+      "description": "74 - Tungsten",
+      "atomic_number": 74,
+      "symbol": "W",
+      "atomic_mass": 183.84,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Re",
+      "name": "Rhenium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Re",
+      "description": "75 - Rhenium",
+      "atomic_number": 75,
+      "symbol": "Re",
+      "atomic_mass": 186.21,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Os",
+      "name": "Osmium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Os",
+      "description": "76 - Osmium",
+      "atomic_number": 76,
+      "symbol": "Os",
+      "atomic_mass": 190.23,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ir",
+      "name": "Iridium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ir",
+      "description": "77 - Iridium",
+      "atomic_number": 77,
+      "symbol": "Ir",
+      "atomic_mass": 192.22,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Pt",
+      "name": "Platinum",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pt",
+      "description": "78 - Platinum",
+      "atomic_number": 78,
+      "symbol": "Pt",
+      "atomic_mass": 195.08,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Au",
+      "name": "Gold",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Au",
+      "description": "79 - Gold",
+      "atomic_number": 79,
+      "symbol": "Au",
+      "atomic_mass": 196.97,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Hg",
+      "name": "Mercury",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Hg",
+      "description": "80 - Mercury",
+      "atomic_number": 80,
+      "symbol": "Hg",
+      "atomic_mass": 200.59,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Tl",
+      "name": "Thallium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Tl",
+      "description": "81 - Thallium",
+      "atomic_number": 81,
+      "symbol": "Tl",
+      "atomic_mass": 204.38,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Pb",
+      "name": "Lead",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pb",
+      "description": "82 - Lead",
+      "atomic_number": 82,
+      "symbol": "Pb",
+      "atomic_mass": 207.2,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Bi",
+      "name": "Bismuth",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Bi",
+      "description": "83 - Bismuth",
+      "atomic_number": 83,
+      "symbol": "Bi",
+      "atomic_mass": 208.98,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Po",
+      "name": "Polonium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Po",
+      "description": "84 - Polonium",
+      "atomic_number": 84,
+      "symbol": "Po",
+      "atomic_mass": 209.0,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_At",
+      "name": "Astatine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "At",
+      "description": "85 - Astatine",
+      "atomic_number": 85,
+      "symbol": "At",
+      "atomic_mass": 210.0,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Rn",
+      "name": "Radon",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Rn",
+      "description": "86 - Radon",
+      "atomic_number": 86,
+      "symbol": "Rn",
+      "atomic_mass": 222.0,
+      "group_color": "#AB47BC"
+    },
+    {
+      "id": "el_Fr",
+      "name": "Francium",
+      "category": "alkali",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Fr",
+      "description": "87 - Francium",
+      "atomic_number": 87,
+      "symbol": "Fr",
+      "atomic_mass": 223.0,
+      "group_color": "#EF5350"
+    },
+    {
+      "id": "el_Ra",
+      "name": "Radium",
+      "category": "alkaline",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ra",
+      "description": "88 - Radium",
+      "atomic_number": 88,
+      "symbol": "Ra",
+      "atomic_mass": 226.0,
+      "group_color": "#FF7043"
+    },
+    {
+      "id": "el_Ac",
+      "name": "Actinium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ac",
+      "description": "89 - Actinium",
+      "atomic_number": 89,
+      "symbol": "Ac",
+      "atomic_mass": 227.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Th",
+      "name": "Thorium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Th",
+      "description": "90 - Thorium",
+      "atomic_number": 90,
+      "symbol": "Th",
+      "atomic_mass": 232.04,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Pa",
+      "name": "Protactinium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pa",
+      "description": "91 - Protactinium",
+      "atomic_number": 91,
+      "symbol": "Pa",
+      "atomic_mass": 231.04,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_U",
+      "name": "Uranium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "U",
+      "description": "92 - Uranium",
+      "atomic_number": 92,
+      "symbol": "U",
+      "atomic_mass": 238.03,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Np",
+      "name": "Neptunium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Np",
+      "description": "93 - Neptunium",
+      "atomic_number": 93,
+      "symbol": "Np",
+      "atomic_mass": 237.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Pu",
+      "name": "Plutonium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Pu",
+      "description": "94 - Plutonium",
+      "atomic_number": 94,
+      "symbol": "Pu",
+      "atomic_mass": 244.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Am",
+      "name": "Americium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Am",
+      "description": "95 - Americium",
+      "atomic_number": 95,
+      "symbol": "Am",
+      "atomic_mass": 243.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Cm",
+      "name": "Curium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cm",
+      "description": "96 - Curium",
+      "atomic_number": 96,
+      "symbol": "Cm",
+      "atomic_mass": 247.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Bk",
+      "name": "Berkelium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Bk",
+      "description": "97 - Berkelium",
+      "atomic_number": 97,
+      "symbol": "Bk",
+      "atomic_mass": 247.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Cf",
+      "name": "Californium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cf",
+      "description": "98 - Californium",
+      "atomic_number": 98,
+      "symbol": "Cf",
+      "atomic_mass": 251.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Es",
+      "name": "Einsteinium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Es",
+      "description": "99 - Einsteinium",
+      "atomic_number": 99,
+      "symbol": "Es",
+      "atomic_mass": 252.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Fm",
+      "name": "Fermium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Fm",
+      "description": "100 - Fermium",
+      "atomic_number": 100,
+      "symbol": "Fm",
+      "atomic_mass": 257.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Md",
+      "name": "Mendelevium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Md",
+      "description": "101 - Mendelevium",
+      "atomic_number": 101,
+      "symbol": "Md",
+      "atomic_mass": 258.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_No",
+      "name": "Nobelium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "No",
+      "description": "102 - Nobelium",
+      "atomic_number": 102,
+      "symbol": "No",
+      "atomic_mass": 259.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Lr",
+      "name": "Lawrencium",
+      "category": "actinide",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Lr",
+      "description": "103 - Lawrencium",
+      "atomic_number": 103,
+      "symbol": "Lr",
+      "atomic_mass": 266.0,
+      "group_color": "#F48FB1"
+    },
+    {
+      "id": "el_Rf",
+      "name": "Rutherfordium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Rf",
+      "description": "104 - Rutherfordium",
+      "atomic_number": 104,
+      "symbol": "Rf",
+      "atomic_mass": 267.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Db",
+      "name": "Dubnium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Db",
+      "description": "105 - Dubnium",
+      "atomic_number": 105,
+      "symbol": "Db",
+      "atomic_mass": 268.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Sg",
+      "name": "Seaborgium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Sg",
+      "description": "106 - Seaborgium",
+      "atomic_number": 106,
+      "symbol": "Sg",
+      "atomic_mass": 269.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Bh",
+      "name": "Bohrium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Bh",
+      "description": "107 - Bohrium",
+      "atomic_number": 107,
+      "symbol": "Bh",
+      "atomic_mass": 270.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Hs",
+      "name": "Hassium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Hs",
+      "description": "108 - Hassium",
+      "atomic_number": 108,
+      "symbol": "Hs",
+      "atomic_mass": 269.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Mt",
+      "name": "Meitnerium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Mt",
+      "description": "109 - Meitnerium",
+      "atomic_number": 109,
+      "symbol": "Mt",
+      "atomic_mass": 278.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Ds",
+      "name": "Darmstadtium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ds",
+      "description": "110 - Darmstadtium",
+      "atomic_number": 110,
+      "symbol": "Ds",
+      "atomic_mass": 281.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Rg",
+      "name": "Roentgenium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Rg",
+      "description": "111 - Roentgenium",
+      "atomic_number": 111,
+      "symbol": "Rg",
+      "atomic_mass": 282.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Cn",
+      "name": "Copernicium",
+      "category": "transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Cn",
+      "description": "112 - Copernicium",
+      "atomic_number": 112,
+      "symbol": "Cn",
+      "atomic_mass": 285.0,
+      "group_color": "#FFA726"
+    },
+    {
+      "id": "el_Nh",
+      "name": "Nihonium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Nh",
+      "description": "113 - Nihonium",
+      "atomic_number": 113,
+      "symbol": "Nh",
+      "atomic_mass": 286.0,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Fl",
+      "name": "Flerovium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Fl",
+      "description": "114 - Flerovium",
+      "atomic_number": 114,
+      "symbol": "Fl",
+      "atomic_mass": 289.0,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Mc",
+      "name": "Moscovium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Mc",
+      "description": "115 - Moscovium",
+      "atomic_number": 115,
+      "symbol": "Mc",
+      "atomic_mass": 290.0,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Lv",
+      "name": "Livermorium",
+      "category": "post_transition",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Lv",
+      "description": "116 - Livermorium",
+      "atomic_number": 116,
+      "symbol": "Lv",
+      "atomic_mass": 293.0,
+      "group_color": "#66BB6A"
+    },
+    {
+      "id": "el_Ts",
+      "name": "Tennessine",
+      "category": "halogen",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Ts",
+      "description": "117 - Tennessine",
+      "atomic_number": 117,
+      "symbol": "Ts",
+      "atomic_mass": 294.0,
+      "group_color": "#5C6BC0"
+    },
+    {
+      "id": "el_Og",
+      "name": "Oganesson",
+      "category": "noble",
+      "size": [
+        1,
+        1
+      ],
+      "icon": "Og",
+      "description": "118 - Oganesson",
+      "atomic_number": 118,
+      "symbol": "Og",
+      "atomic_mass": 294.0,
+      "group_color": "#AB47BC"
+    }
+  ]
+}

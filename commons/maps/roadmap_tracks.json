@@ -138,6 +138,38 @@
 					"Ambient preset changes not wired to SoundBank"
 				]
 			}
+		},
+		"instruments": {
+			"question": "What reusable tools does the player carry across sequences?",
+			"output": "Substrates, draw_dot variants, catalyst modes — tools that grow with the player",
+			"relationship": "The instruments layer. Substrates display algorithms, draw_dot records the player's movement, the catalyst transforms artifacts and hazards. All three are fixed physical objects whose meaning deepens through curriculum progression. They connect to Artifacts (substrates display them), Capability (hand_verbs determine what you can do with instruments), and Ecosystem (the world around the instrument changes).",
+			"discovery": {
+				"status": "built_partial",
+				"summary": "7 substrates registered (living_paper 35, grid2d 8, bar_array 9, grid3d 8, profile 16, walk_surface 6, mesh_grammar 20 recipes). draw_dot has 2 variants (spatial + time_domain). Catalyst has 10 modes. Mesh grammar registered as MeshArtifact substrate with 20 recipe artifacts across 9 sequences.",
+				"existing_systems": [
+					"substrates/living_paper/ — 35 PaperAlgorithm cartridges, grabbable texture paper",
+					"substrates/grid2d/ — 8 Grid2DCartridge implementations, MultiMesh petri dish",
+					"substrates/bar_array/ — 9 BarArrayCartridge implementations, sorting/histogram/sequence",
+					"substrates/grid3d/ — 8 Grid3DCartridge implementations, volumetric MultiMesh",
+					"substrates/profile/ — 16 ProfileCartridge implementations, ImmediateMesh ribbon",
+					"context/walkgrids/ — 6 TopologySpace implementations, walkable terrain",
+					"mesh_grammar/ — 18 operations, 20 registered recipes, composable selectors, generation history",
+					"artifacts/registry/mesh_grammar.json — 21 entries (1 generic + 20 recipes) across 9 sequences",
+					"primitives/point/draw_dot.gd — ImmediateMesh trace, tag-trigger unlock, XRToolsPickable",
+					"primitives/point/draw_dot_time_domain.gd — extends draw_dot, Z=time axis",
+					"hazards/becoming_catalyst/ — 10 mode factories + projectile behaviors",
+					"docs/design/SUBSTRATE_SYSTEM.md — 7 substrate architecture",
+					"docs/design/EVOLVING_TOOLS.md — unified instruments design doc"
+				],
+				"gaps": [
+					"Mesh grammar recipes not yet wired to apply_grid_config() — demo uses direct rule construction, need config-to-recipe bridge",
+					"draw_dot has only 2 of 8 planned variants (spatial, time_domain)",
+					"Catalyst modes cover 10 of 19 sequences",
+					"No InstrumentManager autoload — each system evolves independently",
+					"Catalyst-substrate interactions not wired (projectile → substrate.on_catalyst_hit())",
+					"draw_dot variants not gated by soft_stages capability"
+				]
+			}
 		}
 	},
 	"player_capability": {

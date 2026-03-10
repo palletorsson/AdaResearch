@@ -1,0 +1,137 @@
+{
+	"_meta": {
+		"description": "Project backlog — tracked gaps, next steps, and ongoing work items",
+		"version": "1.0",
+		"last_updated": "2026-03-06"
+	},
+	"items": [
+		{
+			"id": "inst-forces",
+			"text": "Add substrate instruments to forces sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "No substrates registered for forces yet"
+		},
+		{
+			"id": "inst-array-tutorial",
+			"text": "Add substrate instruments to array_tutorial sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "bar_array exists but not registered with map_sequences"
+		},
+		{
+			"id": "inst-color",
+			"text": "Add substrate instruments to color sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": ""
+		},
+		{
+			"id": "inst-swarm",
+			"text": "Add substrate instruments to swarmintelligence sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": ""
+		},
+		{
+			"id": "inst-foundations",
+			"text": "Add substrate instruments to foundationscrisis sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": ""
+		},
+		{
+			"id": "inst-qfep",
+			"text": "Add substrate instruments to qfeplaboratory sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": ""
+		},
+		{
+			"id": "inst-postfoundations",
+			"text": "Add substrate instruments to postfoundationscrisis sequence",
+			"category": "instruments",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": ""
+		},
+		{
+			"id": "drawdot-noise",
+			"text": "Build draw_dot_noise variant — Perlin displacement on trail",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for noise sequence. 2 of 8 variants built (spatial, time_domain)"
+		},
+		{
+			"id": "drawdot-cellular",
+			"text": "Build draw_dot_cellular variant — trail points as cells",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for cellularautomata sequence"
+		},
+		{
+			"id": "drawdot-fractal",
+			"text": "Build draw_dot_fractal variant — trail branches at depth",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for fractals sequence"
+		},
+		{
+			"id": "drawdot-lsystem",
+			"text": "Build draw_dot_lsystem variant — hand as turtle commands",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for lsystems sequence"
+		},
+		{
+			"id": "drawdot-spring",
+			"text": "Build draw_dot_spring variant — elastic trail",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for softbodies sequence"
+		},
+		{
+			"id": "drawdot-swarm",
+			"text": "Build draw_dot_swarm variant — followers flock around path",
+			"category": "draw_dot",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Planned for swarmintelligence sequence"
+		},
+		{
+			"id": "catalyst-substrate",
+			"text": "Wire catalyst-substrate interactions — projectile hits substrate",
+			"category": "wiring",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Need substrate.on_catalyst_hit() method and mode-specific effects"
+		},
+		{
+			"id": "mesh-recipe-bridge",
+			"text": "Build mesh grammar recipe → apply_grid_config() bridge",
+			"category": "wiring",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "Registered recipes can't be placed in maps yet — need lookup_name → rule construction"
+		},
+		{
+			"id": "drawdot-gating",
+			"text": "Gate draw_dot variants by soft_stages capability",
+			"category": "wiring",
+			"status": "todo",
+			"added": "2026-03-06",
+			"notes": "draw_dot variants exist but aren't gated by progression"
+		}
+	]
+}

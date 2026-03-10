@@ -73,6 +73,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			if p["id"] == preset_id:
 				_load_preset(p)
 				break
+	elif config_data.has("placements"):
+		# Accept web grid editor format: {placements: [{element, position: [x,y]}], grid_size: [w,h]}
+		_clear_board()
+		if config_data.has("grid_size"):
+			var gs: Array = config_data["grid_size"]
+			if gs.size() >= 2:
+				_init_occupancy(int(gs[0]), int(gs[1]))
+		var placements: Array = config_data["placements"]
+		for p in placements:
+			var pos: Array = p.get("position", [0, 0])
+			_place_element(str(p["element"]), int(pos[0]), int(pos[1]))
+		_update_status()
+		print("[GridEditorBoard3D] Loaded web layout — %d elements" % _placements.size())
 
 # ═══════════════════════════════════════════════════════════════════════
 # DATA
@@ -219,9 +232,9 @@ func _build_status_label() -> void:
 func _build_capture_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
-	cam.fov = 55.0
+	cam.fov = 60.0
 	add_child(cam)
-	cam.position = Vector3(0.2, 1.0, 3.0)
+	cam.position = Vector3(0.0, 0.65, 1.8)
 	cam.look_at(Vector3(0.0, 0.65, 0.0), Vector3.UP)
 
 # ═══════════════════════════════════════════════════════════════════════

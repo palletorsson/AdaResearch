@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdbac2kqyrfk4"]
+[gd_scene load_steps=2 format=3 uid="uid://bdh70lkbk5pvc"]
 
-[ext_resource type="Script" uid="uid://dosrv4ukn2wgx" path="res://commons/audio/interfaces/ModularSoundDesignerInterface.gd" id="1_modular"]
-[ext_resource type="Theme" uid="uid://ada_theme_main" path="res://commons/ui/ada_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://b0nx8c2k5fb2g" path="res://commons/audio/interfaces/ModularSoundDesignerInterface.gd" id="1_modular"]
 
 [node name="ModularSoundInterface" type="Control"]
 layout_mode = 3
@@ -10,7 +9,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_theme")
 script = ExtResource("1_modular")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -20,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.96, 0.96, 0.97, 1)
+color = Color(0.05, 0.05, 0.1, 1)
 
 [node name="InfoLabel" type="RichTextLabel" parent="."]
 visible = false

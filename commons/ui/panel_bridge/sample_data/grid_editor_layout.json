@@ -1,0 +1,111 @@
+{
+  "page": "grid_editor",
+  "version": 1,
+  "layout_name": "Grid Editor",
+  "subset": {
+    "id": "glass_rack",
+    "name": "Glass Rack"
+  },
+  "panels": [
+    {
+      "id": "element_palette",
+      "role": "left",
+      "width_m": 0.35,
+      "height_m": 0.65,
+      "viewport_px": [256, 600],
+      "elements": [
+        {
+          "id": "subset_selector",
+          "type": "dropdown",
+          "rect": [0, 0, 256, 40],
+          "metadata": { "data_path": "subset" }
+        },
+        {
+          "id": "preset_buttons",
+          "type": "button_group",
+          "rect": [0, 48, 256, 80],
+          "metadata": { "data_path": "preset" }
+        },
+        {
+          "id": "element_categories",
+          "type": "button_grid",
+          "rect": [0, 136, 256, 440],
+          "metadata": {
+            "data_path": "elements",
+            "columns": 2,
+            "cell_px": 120
+          }
+        }
+      ]
+    },
+    {
+      "id": "grid_canvas",
+      "role": "center",
+      "width_m": 0.65,
+      "height_m": 0.65,
+      "viewport_px": [480, 480],
+      "elements": [
+        {
+          "id": "toolbar",
+          "type": "form_group",
+          "rect": [0, 0, 480, 36],
+          "metadata": {
+            "fields": ["subset_name", "orientation", "zoom"]
+          }
+        },
+        {
+          "id": "placement_grid",
+          "type": "color_grid",
+          "rect": [16, 44, 448, 420],
+          "overlay_3d": "board_layout",
+          "metadata": {
+            "rows": 12,
+            "cols": 16,
+            "cell_px": 28,
+            "palette_colors": [
+              "#0a0a0a", "#06b6d4", "#f97316", "#22c55e",
+              "#a855f7", "#ef4444", "#eab308", "#6366f1"
+            ],
+            "data_path": "placements"
+          }
+        }
+      ]
+    },
+    {
+      "id": "properties_panel",
+      "role": "right",
+      "width_m": 0.40,
+      "height_m": 0.65,
+      "viewport_px": [288, 600],
+      "elements": [
+        {
+          "id": "grid_size_inputs",
+          "type": "form_group",
+          "rect": [0, 0, 288, 64],
+          "metadata": { "fields": ["grid_width", "grid_height"] }
+        },
+        {
+          "id": "port_alignment",
+          "type": "form_group",
+          "rect": [0, 72, 288, 48],
+          "metadata": { "data_path": "port_alignment" }
+        },
+        {
+          "id": "selected_element",
+          "type": "form_group",
+          "rect": [0, 128, 288, 280],
+          "metadata": {
+            "fields": ["element_name", "position", "rotation", "ports"],
+            "data_path": "selected"
+          }
+        },
+        {
+          "id": "export_bar",
+          "type": "button_group",
+          "rect": [0, 420, 288, 36],
+          "metadata": { "actions": ["export_json"] }
+        }
+      ]
+    }
+  ]
+}

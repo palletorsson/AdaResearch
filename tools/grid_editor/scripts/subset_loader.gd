@@ -22,6 +22,9 @@ const SUBSET_FILES: Array[String] = [
 	"res://tools/grid_editor/subsets/big_pipes.json",
 	"res://tools/grid_editor/subsets/glass_rack.json",
 	"res://tools/grid_editor/subsets/lab_items_horizontal.json",
+	"res://tools/grid_editor/subsets/sticky_notes.json",
+	"res://tools/grid_editor/subsets/chemical_models.json",
+	"res://tools/grid_editor/subsets/periodic_table.json",
 ]
 
 func load_all_subsets() -> void:

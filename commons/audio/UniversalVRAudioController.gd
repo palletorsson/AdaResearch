@@ -48,6 +48,8 @@ const CONTROL_SIZES = {
 	"meter": Vector2(0.04, 0.12),
 	"label": Vector2(0.20, 0.04),
 	"grp": Vector2(0.25, 0.20),
+	"divider": Vector2(0.004, 0.12),
+	"div": Vector2(0.004, 0.12),
 	"default": Vector2(0.10, 0.08)
 }
 
@@ -342,6 +344,36 @@ func load_rack_config(path: String):
 
 	print("Loaded rack config: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
 
+
+func load_rack_config_from_dict(data: Dictionary):
+	## Load a rack config from an in-memory Dictionary (e.g. converted from grid editor preset).
+	if not _validate_rack_config(data):
+		push_error("Invalid rack config dictionary")
+		return
+
+	rack_config = data
+	use_json_config = true
+
+	if rack_config.has("rack_info"):
+		var info = rack_config["rack_info"]
+		if info.has("sound_type"):
+			current_sound_key = info["sound_type"]
+
+	_clear_controls()
+	_spawn_controls_from_json()
+
+	var layout = rack_config.get("layout", {})
+	if layout.has("hide_selection"):
+		if has_node("SelectionPanel"):
+			$SelectionPanel.visible = not layout["hide_selection"]
+	if layout.has("hide_buttons"):
+		if has_node("Buttons"):
+			$Buttons.visible = not layout["hide_buttons"]
+
+	_configure_cable_case(layout)
+	print("Loaded rack config from dict: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
+
+
 func _configure_cable_case(layout: Dictionary):
 	"""Configure cable case decoration colors based on layout settings"""
 	var cable_case = get_node_or_null("CableCase")
@@ -398,7 +430,7 @@ func _validate_rack_config(data: Dictionary) -> bool:
 
 		# Visual/display controls don't need parameters
 		var type = control.get("type", "slider")
-		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "simple_waveform", "srcwave", "rack_wave", "lissajous", "liss", "xy_wave", "paramwave", "meter", "mtr", "vu", "level"]:
+		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "simple_waveform", "srcwave", "rack_wave", "lissajous", "liss", "xy_wave", "paramwave", "meter", "mtr", "vu", "level", "div", "divider"]:
 			continue
 			
 		# XY controls need parameter_x and parameter_y (or just parameter)
@@ -441,6 +473,9 @@ func _spawn_controls_from_json():
 		layout_result.positions.size()
 	])
 
+	# Resize backplate and cable case to match content
+	_resize_rack_panel(layout_result.total_width, layout_result.total_height)
+
 	# Spawn controls at calculated positions
 	for control_id in layout_result.positions.keys():
 		if not control_defs.has(control_id):
@@ -464,6 +499,12 @@ func _spawn_controls_from_json():
 		# Connect signals based on control type
 		_connect_control_signals(control, control_id, control_type, control_config)
 
+		# Attach face plate behind physical controls if enabled
+		if layout.get("face_plates", false) and not (control is VRRackControl):
+			var plate := _attach_face_plate(control, control_type)
+			if plate:
+				plate.set_param_name(control_config.get("label", ""))
+
 		# Store control with structure
 		active_controls[control_id] = {
 			"instance": control,
@@ -473,6 +514,9 @@ func _spawn_controls_from_json():
 			"config": control_config,
 			"type": control_type
 		}
+
+	# Build section backgrounds after all controls are placed
+	_build_sections(layout_result, control_defs)
 
 # Legacy spawn method for configs with explicit col_spacing/row_spacing
 func _spawn_controls_legacy():
@@ -561,169 +605,78 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 		"lissajous", "liss", "xy_wave", "paramwave":
 			control_scene = LISSAJOUS_DISPLAY_SCENE
 		"mtr", "meter", "vu", "level":
-			return _create_meter(control_id)
+			return _create_vr_control("res://commons/audio/rack_controls/RackMeter.tscn", control_id)
 		"lbl", "label", "text":
-			return _create_label(control_id)
+			return _create_vr_control("res://commons/audio/rack_controls/RackLabel.tscn", control_id)
 		"grp", "group", "container":
-			return _create_group(control_id)
+			return _create_vr_control("res://commons/audio/rack_controls/RackGroup.tscn", control_id)
+		"div", "divider":
+			return _create_vr_control("res://commons/audio/rack_controls/RackDivider.tscn", control_id)
 
 		_:
-			push_warning("Unknown control type '%s' for %s. Available: slider, slv, sls, slz, knob, wheel, xy, js, btn, lv, mon, spectrum, waveform, lissajous, mtr, lbl, grp" % [control_type, control_id])
+			push_warning("Unknown control type '%s' for %s. Available: slider, slv, sls, slz, knob, wheel, xy, js, btn, lv, mon, spectrum, waveform, lissajous, mtr, lbl, grp, div" % [control_type, control_id])
 			return null
 
 	if control_scene:
 		return control_scene.instantiate()
 	return null
 
-# Create a VU/level meter
-func _create_meter(control_id: String) -> Node3D:
-	var meter = Node3D.new()
-	meter.name = control_id
+# Create a VRRackControl wrapper for non-physical 2D controls
+func _create_vr_control(scene_path: String, control_id: String) -> Node3D:
+	var wrapper := VRRackControl.new()
+	wrapper.name = control_id
+	wrapper.control_scene_path = scene_path
+	return wrapper
 
-	# Background bar
-	var bg = MeshInstance3D.new()
-	var bg_mesh = BoxMesh.new()
-	bg_mesh.size = Vector3(0.03, 0.12, 0.01)
-	bg.mesh = bg_mesh
-	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.18, 0.18, 0.22, 1)
-	bg.material_override = bg_mat
-	meter.add_child(bg)
+# Face plate scene mapping: control type -> 2D RackControl scene path
+const FACE_PLATE_SCENES := {
+	"slider": "res://commons/audio/rack_controls/RackSliderV.tscn",
+	"slv": "res://commons/audio/rack_controls/RackSliderV.tscn",
+	"slh": "res://commons/audio/rack_controls/RackSliderH.tscn",
+	"sls": "res://commons/audio/rack_controls/RackSliderStepped.tscn",
+	"slz": "res://commons/audio/rack_controls/RackSliderBipolar.tscn",
+	"knob": "res://commons/audio/rack_controls/RackKnob.tscn",
+	"wheel": "res://commons/audio/rack_controls/RackWheel.tscn",
+	"xy": "res://commons/audio/rack_controls/RackXYPad.tscn",
+	"joystick": "res://commons/audio/rack_controls/RackJoystick.tscn",
+	"js": "res://commons/audio/rack_controls/RackJoystick.tscn",
+	"btn": "res://commons/audio/rack_controls/RackButton.tscn",
+	"lever": "res://commons/audio/rack_controls/RackLever.tscn",
+	"lv": "res://commons/audio/rack_controls/RackLever.tscn",
+}
 
-	# Level indicator (green to red gradient)
-	var level = MeshInstance3D.new()
-	level.name = "LevelBar"
-	var level_mesh = BoxMesh.new()
-	level_mesh.size = Vector3(0.025, 0.11, 0.015)
-	level.mesh = level_mesh
-	var level_mat = StandardMaterial3D.new()
-	level_mat.albedo_color = Color(0.25, 0.78, 0.35, 1)
-	level_mat.emission_enabled = true
-	level_mat.emission = Color(0.25, 0.78, 0.35, 1)
-	level_mat.emission_energy_multiplier = 0.5
-	level.material_override = level_mat
-	level.position.z = 0.005
-	meter.add_child(level)
+# Attach a 2D face plate behind a physical 3D control
+func _attach_face_plate(control: Node3D, control_type: String) -> VRFacePlate:
+	var base_type := control_type
+	match control_type:
+		"slider", "slider_vertical", "vfader", "fader":
+			base_type = "slv"
+		"slider_horizontal":
+			base_type = "slh"
+		"slider_snap", "stepped":
+			base_type = "sls"
+		"slider_zero", "bipolar":
+			base_type = "slz"
+		"dial", "nb", "rotary":
+			base_type = "knob"
+		"whl", "pitchbend":
+			base_type = "wheel"
+		"xypad", "2df", "pad":
+			base_type = "xy"
+		"button", "trigger":
+			base_type = "btn"
+		"throw":
+			base_type = "lever"
 
-	# Peak indicator
-	var peak = MeshInstance3D.new()
-	peak.name = "PeakIndicator"
-	var peak_mesh = BoxMesh.new()
-	peak_mesh.size = Vector3(0.025, 0.005, 0.02)
-	peak.mesh = peak_mesh
-	var peak_mat = StandardMaterial3D.new()
-	peak_mat.albedo_color = Color(0.90, 0.22, 0.22, 1)
-	peak_mat.emission_enabled = true
-	peak_mat.emission = Color(0.90, 0.22, 0.22, 1)
-	peak.material_override = peak_mat
-	peak.position = Vector3(0, 0.05, 0.01)
-	meter.add_child(peak)
+	var scene_path: String = FACE_PLATE_SCENES.get(base_type, "")
+	if scene_path.is_empty():
+		return null
 
-	# Add meter script for animation
-	var script = GDScript.new()
-	script.source_code = """
-extends Node3D
-
-var level: float = 0.0 : set = set_level
-var peak_level: float = 0.0
-var peak_hold_time: float = 0.0
-
-func set_level(val: float):
-	level = clamp(val, 0.0, 1.0)
-	if level > peak_level:
-		peak_level = level
-		peak_hold_time = 1.0
-	_update_display()
-
-func _process(delta):
-	peak_hold_time -= delta
-	if peak_hold_time <= 0:
-		peak_level = max(peak_level - delta * 0.5, level)
-	_update_display()
-
-func _update_display():
-	var level_bar = get_node_or_null(\"LevelBar\")
-	var peak_ind = get_node_or_null(\"PeakIndicator\")
-	if level_bar:
-		level_bar.scale.y = max(level, 0.01)
-		level_bar.position.y = -0.055 + (level * 0.055)
-		# Color gradient: green -> yellow -> red
-		var mat = level_bar.material_override
-		if mat:
-			var color = Color.GREEN.lerp(Color.YELLOW, clamp(level * 2, 0, 1))
-			color = color.lerp(Color.RED, clamp((level - 0.5) * 2, 0, 1))
-			mat.albedo_color = color
-			mat.emission = color
-	if peak_ind:
-		peak_ind.position.y = -0.055 + (peak_level * 0.11)
-"""
-	script.reload()
-	meter.set_script(script)
-
-	return meter
-
-# Create a text label
-func _create_label(control_id: String) -> Node3D:
-	var label_container = Node3D.new()
-	label_container.name = control_id
-
-	var label = Label3D.new()
-	label.name = "Text"
-	label.text = control_id.to_upper()
-	label.font_size = 32
-	label.pixel_size = 0.0008
-	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	label.modulate = Color(0.12, 0.12, 0.14, 1)
-	label.outline_size = 0
-	label_container.add_child(label)
-
-	return label_container
-
-# Create a group container with background
-func _create_group(control_id: String) -> Node3D:
-	var group = Node3D.new()
-	group.name = control_id
-
-	# Background panel
-	var bg = MeshInstance3D.new()
-	bg.name = "Background"
-	var bg_mesh = BoxMesh.new()
-	bg_mesh.size = Vector3(0.25, 0.2, 0.005)  # Will be resized based on contents
-	bg.mesh = bg_mesh
-	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.90, 0.90, 0.92, 0.95)
-	bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	bg.material_override = bg_mat
-	bg.position.z = -0.01
-	group.add_child(bg)
-
-	# Group label
-	var label = Label3D.new()
-	label.name = "GroupLabel"
-	label.text = control_id.to_upper()
-	label.font_size = 24
-	label.pixel_size = 0.0006
-	label.modulate = Color(0.40, 0.40, 0.44, 1)
-	label.outline_size = 0
-	label.position.y = 0.09
-	group.add_child(label)
-
-	# Border (top accent line)
-	var border = MeshInstance3D.new()
-	border.name = "Border"
-	var border_mesh = BoxMesh.new()
-	border_mesh.size = Vector3(0.25, 0.003, 0.008)
-	border.mesh = border_mesh
-	var border_mat = StandardMaterial3D.new()
-	border_mat.albedo_color = Color(0.95, 0.45, 0.15, 1)
-	border_mat.emission_enabled = true
-	border_mat.emission = Color(0.95, 0.45, 0.15, 1)
-	border_mat.emission_energy_multiplier = 0.3
-	border.material_override = border_mat
-	border.position = Vector3(0, 0.098, 0)
-	group.add_child(border)
-
-	return group
+	var plate := VRFacePlate.new()
+	plate.name = "FacePlate"
+	plate.control_scene_path = scene_path
+	control.add_child(plate)
+	return plate
 
 # Get control size for spacing calculations
 func _get_control_size(control_type: String) -> Vector2:
@@ -754,6 +707,8 @@ func _get_control_size(control_type: String) -> Vector2:
 			base_type = "meter"
 		"text", "lbl":
 			base_type = "label"
+		"div", "divider":
+			base_type = "divider"
 
 	return CONTROL_SIZES.get(base_type, CONTROL_SIZES["default"])
 
@@ -835,39 +790,49 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 			control.rotation_degrees.x = -90
 
 		"lbl", "label", "text":
-			# Label text configuration
-			var text_node = control.get_node_or_null("Text")
-			if text_node:
-				text_node.text = config.get("text", config.get("label", ""))
-				if config.has("font_size"):
-					text_node.font_size = int(config.get("font_size", 32))
-				if config.has("color"):
-					text_node.modulate = Color(config.get("color"))
+			# Label text configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				control.set_text(config.get("text", config.get("label", "")))
+				if config.has("subtitle"):
+					control.set_subtitle(config.get("subtitle", ""))
+			else:
+				var text_node = control.get_node_or_null("Text")
+				if text_node:
+					text_node.text = config.get("text", config.get("label", ""))
+					if config.has("font_size"):
+						text_node.font_size = int(config.get("font_size", 32))
+					if config.has("color"):
+						text_node.modulate = Color(config.get("color"))
 
 		"grp", "group", "container":
-			# Group configuration
-			var group_label = control.get_node_or_null("GroupLabel")
-			if group_label:
-				group_label.text = config.get("label", config.get("name", "")).to_upper()
+			# Group configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				control.set_group_title(config.get("label", config.get("name", "")).to_upper())
+			else:
+				var group_label = control.get_node_or_null("GroupLabel")
+				if group_label:
+					group_label.text = config.get("label", config.get("name", "")).to_upper()
+				if config.has("color"):
+					var border = control.get_node_or_null("Border")
+					if border and border.material_override:
+						var color = Color(config.get("color"))
+						border.material_override.albedo_color = color
+						border.material_override.emission = color
+				var bg = control.get_node_or_null("Background")
+				if bg and bg.mesh:
+					var width = config.get("width", 0.25)
+					var height = config.get("height", 0.2)
+					bg.mesh.size = Vector3(width, height, 0.005)
+					var border = control.get_node_or_null("Border")
+					if border and border.mesh:
+						border.mesh.size.x = width
 
-			# Set group color
-			if config.has("color"):
-				var border = control.get_node_or_null("Border")
-				if border and border.material_override:
-					var color = Color(config.get("color"))
-					border.material_override.albedo_color = color
-					border.material_override.emission = color
-
-			# Set group size
-			var bg = control.get_node_or_null("Background")
-			if bg and bg.mesh:
-				var width = config.get("width", 0.25)
-				var height = config.get("height", 0.2)
-				bg.mesh.size = Vector3(width, height, 0.005)
-				# Adjust border width
-				var border = control.get_node_or_null("Border")
-				if border and border.mesh:
-					border.mesh.size.x = width
+		"div", "divider":
+			# Divider configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				var inner = control.get_control()
+				if inner and "orientation" in inner:
+					inner.orientation = config.get("orientation", "vertical")
 
 		"mon", "monitor", "scope":
 			# Monitor configuration
@@ -1079,7 +1044,133 @@ func _clear_controls():
 	for child in parameter_container.get_children():
 		child.queue_free()
 	active_controls.clear()
+	# Also clear section panels
+	for child in get_children():
+		if child.is_in_group("rack_section"):
+			child.queue_free()
 
+
+func _resize_rack_panel(w: float, h: float) -> void:
+	## Resize the backplate and cable case to match the actual layout size.
+	var rack_mesh: MeshInstance3D = get_node_or_null("RackMesh")
+	if not rack_mesh:
+		return
+	var panel_mesh: MeshInstance3D = rack_mesh.get_node_or_null("PanelMesh")
+	var cable_case = get_node_or_null("CableCase")
+
+	# Resize outer frame (4cm padding around content)
+	var frame_w: float = w + 0.06
+	var frame_h: float = h + 0.06
+	rack_mesh.mesh = BoxMesh.new()
+	rack_mesh.mesh.size = Vector3(frame_w, frame_h, 0.05)
+
+	# Resize front panel (2cm padding)
+	if panel_mesh:
+		panel_mesh.mesh = BoxMesh.new()
+		panel_mesh.mesh.size = Vector3(frame_w - 0.02, frame_h - 0.02, 0.01)
+		panel_mesh.position = Vector3(0, 0, 0.026)
+
+	# Rebuild cable case to match
+	if cable_case and cable_case.has_method("rebuild"):
+		cable_case.rebuild(frame_w + 0.02, frame_h + 0.02)
+
+	print("UVAC: Resized rack panel to %.2fm x %.2fm" % [frame_w, frame_h])
+
+
+func _build_sections(layout_result, control_defs: Dictionary) -> void:
+	## Build visual section panels from the "sections" array in rack_config.
+	var sections: Array = rack_config.get("sections", [])
+	if sections.is_empty():
+		return
+
+	for section in sections:
+		if not section is Dictionary:
+			continue
+		var label_text: String = str(section.get("label", ""))
+		var color_hex: String = str(section.get("color", "#4CAF50"))
+		var ctrl_ids: Array = section.get("controls", [])
+		if ctrl_ids.is_empty():
+			continue
+
+		# Compute bounding box from control positions
+		var min_pos := Vector3(999, 999, 0)
+		var max_pos := Vector3(-999, -999, 0)
+		var found := false
+		for cid in ctrl_ids:
+			var cid_str: String = str(cid)
+			if layout_result.positions.has(cid_str):
+				var pos: Vector3 = layout_result.positions[cid_str]
+				var sz: Vector2 = layout_result.sizes.get(cid_str, Vector2(0.08, 0.08))
+				min_pos.x = min(min_pos.x, pos.x - sz.x / 2.0)
+				min_pos.y = min(min_pos.y, pos.y - sz.y / 2.0)
+				max_pos.x = max(max_pos.x, pos.x + sz.x / 2.0)
+				max_pos.y = max(max_pos.y, pos.y + sz.y / 2.0)
+				found = true
+		if not found:
+			continue
+
+		# Add padding around controls
+		var pad := 0.015
+		min_pos.x -= pad
+		min_pos.y -= pad
+		max_pos.x += pad
+		max_pos.y += pad
+
+		var section_w: float = max_pos.x - min_pos.x
+		var section_h: float = max_pos.y - min_pos.y
+		var center := Vector3(
+			(min_pos.x + max_pos.x) / 2.0,
+			(min_pos.y + max_pos.y) / 2.0,
+			0.025  # Just behind controls (controls at Z=0.03)
+		)
+
+		var section_node := Node3D.new()
+		section_node.name = "Section_%s" % label_text.replace(" ", "_")
+		section_node.add_to_group("rack_section")
+		section_node.position = center
+
+		# Dark background panel
+		var bg := MeshInstance3D.new()
+		var bg_mesh := BoxMesh.new()
+		bg_mesh.size = Vector3(section_w, section_h, 0.004)
+		bg.mesh = bg_mesh
+		var bg_mat := StandardMaterial3D.new()
+		bg_mat.albedo_color = Color(0.10, 0.10, 0.13, 0.9)
+		bg_mat.roughness = 0.6
+		bg_mat.metallic = 0.3
+		bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		bg.material_override = bg_mat
+		section_node.add_child(bg)
+
+		# Colored accent bar at top
+		var accent := MeshInstance3D.new()
+		var accent_mesh := BoxMesh.new()
+		accent_mesh.size = Vector3(section_w, 0.004, 0.006)
+		accent.mesh = accent_mesh
+		accent.position = Vector3(0, section_h / 2.0 + 0.002, 0.002)
+		var accent_mat := StandardMaterial3D.new()
+		var accent_color := Color(color_hex)
+		accent_mat.albedo_color = accent_color
+		accent_mat.emission_enabled = true
+		accent_mat.emission = accent_color
+		accent_mat.emission_energy_multiplier = 1.2
+		accent.material_override = accent_mat
+		section_node.add_child(accent)
+
+		# Section label
+		if not label_text.is_empty():
+			var label := Label3D.new()
+			label.text = label_text
+			label.position = Vector3(0, section_h / 2.0 + 0.012, 0.003)
+			label.pixel_size = 0.0005
+			label.font_size = 24
+			label.modulate = accent_color.lightened(0.3)
+			label.outline_size = 4
+			section_node.add_child(label)
+
+		parameter_container.add_child(section_node)
+
+	print("UVAC: Built %d section panels" % sections.size())
 
 
 var _update_timer: SceneTreeTimer = null
