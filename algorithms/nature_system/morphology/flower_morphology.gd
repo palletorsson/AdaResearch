@@ -212,10 +212,9 @@ static func _build_inflorescence(dna: CritterDNA, root: Node3D, mapper: CritterT
 			var sub_root := Node3D.new()
 			sub_root.name = "SubFlower_%d" % i
 			sub_root.position = head_origin + pos
-			# Point outward from center
-			sub_root.look_at(sub_root.position + pos.normalized(), Vector3.UP)
-
+			# Point outward from center (add to tree first so look_at works)
 			root.add_child(sub_root)
+			sub_root.look_at(sub_root.global_position + pos.normalized(), Vector3.UP)
 			_build_single_bloom(dna, sub_root, mapper, maxi(lod - 2, 0), sub_scale * 0.5)
 
 

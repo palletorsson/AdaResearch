@@ -42,6 +42,7 @@ size = Vector2(100, 100)
 
 [node name="DesktopMapTester" type="Node3D" unique_id=1260083495]
 script = ExtResource("1_tester")
+start_sequence = "testmaps"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2121602924]
 environment = SubResource("Environment_1")

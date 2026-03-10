@@ -192,7 +192,10 @@ Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 
 | Document | Purpose | Trust Level |
 |----------|---------|-------------|
+| `CLAUDE.md` | **AI quick reference** (auto-loaded by Claude Code) | Current |
 | `doc/ENTRY.md` | **You are here** | Current |
+| `doc/MAP_EDITING_PIPELINE.md` | End-to-end map editing flow (7 steps) | Current |
+| `doc/MAP_AGENT_ONBOARDING.md` | Map workflow, CLI tools, validation | Current |
 | `doc/ARCHITECTURE.md` | Technical systems | Mostly current |
 | `doc/TAXONOMY.md` | 8 generative paradigms | Current |
 | `doc/README.md` | Project overview | Mostly current |

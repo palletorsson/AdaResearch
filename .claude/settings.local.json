@@ -344,7 +344,14 @@
       "Bash(do echo \"=== Capturing $map ===\")",
       "Bash(\"/c/Users/palle/Desktop/Godot_v4.6-stable_win64.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_all.gd -- --outdir=user://capture_output --manifest=user://capture_manifest.json --sequence=forces --skip-unchanged --wait=1.5)",
       "Bash(\"/c/Users/palle/Desktop/Godot_v4.6-stable_win64.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_all.gd -- --outdir=user://capture_output --manifest=user://capture_manifest.json --sequence=forces --skip-unchanged --wait=1.5 --artifacts-only)",
-      "Bash(\"C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_desktop_vet.gd -- --sequence=forces --outdir=user://vet_shots --wait=2.5)"
+      "Bash(\"C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_desktop_vet.gd -- --sequence=forces --outdir=user://vet_shots --wait=2.5)",
+      "WebFetch(domain:www.marekvymazal.com)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(\"C:/Users/palle/Desktop/Godot_v4.6-stable_win64_console.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_multi_angle.gd -- --mode=map --target=Disposition_Test_Rooms)",
+      "Bash(\"C:/Users/palle/Desktop/Godot_v4.6-stable_win64_console.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_multi_angle.gd -- --mode=map --target=Disposition_Test_Hub)",
+      "Bash(\"C:/Users/palle/Desktop/Godot_v4.6-stable_win64_console.exe\" --path . --xr-mode off --no-window --script res://commons/testing/capture_multi_angle.gd -- --mode=map --target=Disposition_Test_Maze)",
+      "Bash(/tmp/search_summary.txt:*)",
+      "Read(//tmp/**)"
     ],
     "deny": [],
     "ask": []

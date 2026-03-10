@@ -1,0 +1,5 @@
+Concept: Vectors & Forces: ForcesSystems — 3D vector field visualization with arrow glyphs showing direction and magnitude at grid points; visualize gravitational, electric, and magnetic force fields in 3D using arrow glyphs and particle tracers.
+Sequence role: Map 7 of 9 in Vectors & Forces: From Direction to Dynamics; follows ForcesFoundations; leads to ForcesChaos.
+Technical angle: 3D vector field visualization with arrow glyphs showing direction and magnitude at grid points; Visualize gravitational, electric, and magnetic force fields in 3D using arrow glyphs and particle tracers; Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.
+Critical angle: Vectors define system states—the S in QFEP.
+Key artifacts: vector_fields, force_field_visualizer, VectorBasics, basis_vectors_rig, force_fields, dark_sphere, catalyst_target, proximity_spawner, particle_systems, mass_spring_damper, spring_system, firework_launcher, example_3_2_forces_with_arbitrary_angular_motion_vr, example_3_3_pointing_in_the_direction_of_motion_vr

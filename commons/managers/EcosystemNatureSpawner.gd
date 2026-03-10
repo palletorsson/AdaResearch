@@ -20,11 +20,23 @@ class_name EcosystemNatureSpawner
 ## Seed for deterministic placement (-1 = random).
 @export var rng_seed: int = -1
 
+## Use chunk-based LOD system (recommended for VR performance).
+## When true, a ChunkManager handles spatial LOD and visibility ranges.
+## When false, uses flat-circle spawning (legacy behavior).
+@export var use_chunk_system: bool = true
+
+## Override EcosystemManager density for testing (-1 = use progression).
+@export var override_density: float = -1.0
+
+## Override EcosystemManager kingdoms for testing (empty = use progression).
+@export var override_kingdoms: Array[String] = []
+
 # ── Runtime ───────────────────────────────────────────────────────────
 
 var _spawner: CritterSpawner = null
 var _nature_root: Node3D = null
 var _has_populated: bool = false
+var _chunk_manager: ChunkManager = null
 
 # Kingdom IDs matching CritterDNA
 const KINGDOM_FLOWER: int = 0
@@ -42,6 +54,22 @@ const KINGDOM_MAP: Dictionary = {
 
 
 func _ready() -> void:
+	if use_chunk_system:
+		# Delegate to ChunkManager for spatial LOD
+		_chunk_manager = ChunkManager.new()
+		_chunk_manager.name = "ChunkManager"
+		_chunk_manager.spawn_radius = spawn_radius
+		_chunk_manager.max_population = max_population
+		_chunk_manager.center_offset = center_offset
+		_chunk_manager.rng_seed = rng_seed
+		_chunk_manager.override_density = override_density
+		_chunk_manager.override_kingdoms = override_kingdoms
+		add_child(_chunk_manager)
+		# ChunkManager handles its own signals and lifecycle
+		print("EcosystemNatureSpawner: Using chunk-based LOD system")
+		return
+
+	# Legacy flat-circle spawning
 	_nature_root = Node3D.new()
 	_nature_root.name = "NaturePopulation"
 	add_child(_nature_root)

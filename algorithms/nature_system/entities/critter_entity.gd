@@ -331,3 +331,16 @@ func get_kingdom_name() -> String:
 ## How hybrid is this entity (0 = pure kingdom, 0.5 = max hybrid).
 func get_hybridity() -> float:
 	return dna.get_hybridity() if dna else 0.0
+
+
+# ═══════════════════════════════════════════════════════════════
+# LOD / CHUNK SYSTEM SUPPORT
+# ═══════════════════════════════════════════════════════════════
+
+## Whether this entity belongs to a static kingdom (tree, flower, fungus).
+## Static organisms don't move after spawn — their animation is purely shader-based.
+## Creatures (mobility >= 0.1) are mobile and need per-frame updates.
+func is_static_kingdom() -> bool:
+	if not dna:
+		return true
+	return dna.mobility < 0.1
