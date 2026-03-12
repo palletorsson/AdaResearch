@@ -43,6 +43,9 @@ var _r_min_slider: Node
 var _r_max_slider: Node
 var _control_panel: Node3D
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
@@ -190,7 +193,8 @@ func _create_vr_controls():
 		min_label.text = "R MIN"
 	_control_panel.add_child(_r_min_slider)
 	_r_min_slider.slider_moved.connect(_on_r_min_slider_moved)
-	
+	_signal_connections.append([_r_min_slider, &"slider_moved", _on_r_min_slider_moved])
+
 	# R max slider (r_min to 4.0)
 	_r_max_slider = SLIDER_HORIZONTAL.instantiate()
 	_r_max_slider.name = "RMaxSlider"
@@ -201,7 +205,8 @@ func _create_vr_controls():
 		max_label.text = "R MAX"
 	_control_panel.add_child(_r_max_slider)
 	_r_max_slider.slider_moved.connect(_on_r_max_slider_moved)
-	
+	_signal_connections.append([_r_max_slider, &"slider_moved", _on_r_max_slider_moved])
+
 	# Preset buttons
 	var preset_btn1 = PUSH_BUTTON.instantiate()
 	preset_btn1.name = "PresetFull"
@@ -211,7 +216,9 @@ func _create_vr_controls():
 	_add_button_label(preset_btn1, "FULL")
 	var area1 = preset_btn1.get_node_or_null("InteractableAreaButton")
 	if area1:
-		area1.button_pressed.connect(func(_b): _set_r_range(0.5, 4.0))
+		var cb1 := func(_b): _set_r_range(0.5, 4.0)
+		area1.button_pressed.connect(cb1)
+		_signal_connections.append([area1, &"button_pressed", cb1])
 	
 	var preset_btn2 = PUSH_BUTTON.instantiate()
 	preset_btn2.name = "PresetChaos"
@@ -221,7 +228,9 @@ func _create_vr_controls():
 	_add_button_label(preset_btn2, "CHAOS")
 	var area2 = preset_btn2.get_node_or_null("InteractableAreaButton")
 	if area2:
-		area2.button_pressed.connect(func(_b): _set_r_range(3.5, 4.0))
+		var cb2 := func(_b): _set_r_range(3.5, 4.0)
+		area2.button_pressed.connect(cb2)
+		_signal_connections.append([area2, &"button_pressed", cb2])
 	
 	var preset_btn3 = PUSH_BUTTON.instantiate()
 	preset_btn3.name = "PresetBifurc"
@@ -231,9 +240,17 @@ func _create_vr_controls():
 	_add_button_label(preset_btn3, "BIFUR")
 	var area3 = preset_btn3.get_node_or_null("InteractableAreaButton")
 	if area3:
-		area3.button_pressed.connect(func(_b): _set_r_range(2.8, 3.6))
-	
+		var cb3 := func(_b): _set_r_range(2.8, 3.6)
+		area3.button_pressed.connect(cb3)
+		_signal_connections.append([area3, &"button_pressed", cb3])
+
 	call_deferred("_sync_sliders_deferred")
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()

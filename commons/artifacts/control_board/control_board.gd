@@ -34,6 +34,9 @@ var _vu_needles: Array[MeshInstance3D] = []
 var _faders: Array[Node] = []
 var _time: float = 0.0
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 func _ready() -> void:
 	_build_back_plate()
 	_build_monitors()
@@ -52,6 +55,12 @@ func _process(delta: float) -> void:
 	_animate_screens(delta)
 	_animate_vu_meters(delta)
 	_animate_leds(delta)
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("panel_width"):
@@ -171,7 +180,9 @@ func _build_fader_bank() -> void:
 		slider.scale = Vector3(0.6, 0.6, 0.6)
 		add_child(slider)
 		slider.set_param_name("CH%d" % (i + 1))
-		slider.slider_moved.connect(_on_fader_moved.bind(i))
+		var cb := _on_fader_moved.bind(i)
+		slider.slider_moved.connect(cb)
+		_signal_connections.append([slider, &"slider_moved", cb])
 		_faders.append(slider)
 
 func _on_fader_moved(_pos: Variant, index: int) -> void:
@@ -208,7 +219,9 @@ func _build_button_array() -> void:
 		var area := btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			var idx := i
-			area.button_pressed.connect(func(_b): _on_board_button(idx))
+			var cb := func(_b): _on_board_button(idx)
+			area.button_pressed.connect(cb)
+			_signal_connections.append([area, &"button_pressed", cb])
 
 func _on_board_button(index: int) -> void:
 	if index < _led_indicators.size():

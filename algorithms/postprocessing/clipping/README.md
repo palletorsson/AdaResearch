@@ -67,7 +67,7 @@ float edge_factor = 1.0 - smoothstep(0.0, edge_glow, abs(distance - plane_distan
 ## Usage
 
 ```gdscript
-var clip = preload("res://algorithms/effects/clipping/clipping.tscn").instantiate()
+var clip = preload("res://algorithms/postprocessing/clipping/clipping.tscn").instantiate()
 clip.clipping_speed = 0.5  # Slower animation
 clip.num_objects = 12  # More objects
 add_child(clip)
@@ -95,4 +95,4 @@ Objects float in space, sliced by invisible planes that sweep through them. The 
 
 - `shaders/` — Other shader effects
 - `transformation/` — Geometric operations
-- `visualization/` — Data visibility
+- `datastructures/` — Data visibility

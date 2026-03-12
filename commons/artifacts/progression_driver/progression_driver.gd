@@ -34,6 +34,9 @@ var _control_panel: Node3D
 
 const STAGES_PATH := "res://commons/maps/soft_stages.json"
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 
 func _ready() -> void:
 	_load_stages_data()
@@ -156,6 +159,7 @@ func _build_sequence_section() -> void:
 		slider_label.text = "STAGE"
 	_control_panel.add_child(_sequence_slider)
 	_sequence_slider.slider_moved.connect(_on_sequence_slider_moved)
+	_signal_connections.append([_sequence_slider, &"slider_moved", _on_sequence_slider_moved])
 
 	# Current sequence label below slider
 	_sequence_label = _make_label("→ — (0/%d)" % _sequence_order.size(), 20, COL_VALUE,
@@ -199,6 +203,7 @@ func _build_action_buttons() -> void:
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(callbacks[i])
+			_signal_connections.append([area, &"button_pressed", callbacks[i]])
 
 
 func _on_advance(_b) -> void:
@@ -300,7 +305,9 @@ func _build_befriend_section() -> void:
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			var type_ref := hazard_type  # Capture for closure
-			area.button_pressed.connect(func(_b): _on_befriend(type_ref))
+			var cb := func(_b): _on_befriend(type_ref)
+			area.button_pressed.connect(cb)
+			_signal_connections.append([area, &"button_pressed", cb])
 
 
 func _on_befriend(hazard_type: String) -> void:
@@ -374,6 +381,12 @@ func _short_name(hazard_type: String) -> String:
 		return n.substr(0, 10) if n.length() > 10 else n
 	return hazard_type
 
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 ## Grid system integration
 func apply_grid_config(config_data: Dictionary) -> void:

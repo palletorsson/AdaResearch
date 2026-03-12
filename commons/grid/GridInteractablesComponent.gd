@@ -601,6 +601,9 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 		return false
 	
 	var agent_scene = load(scene_path)
+	if agent_scene == null or not (agent_scene is PackedScene):
+		print("GridInteractablesComponent: Failed to load grid agent scene: %s" % scene_path)
+		return false
 	var agent = agent_scene.instantiate()
 	
 	# Position

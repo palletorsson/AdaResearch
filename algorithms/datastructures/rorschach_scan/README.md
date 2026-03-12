@@ -79,7 +79,7 @@ Layers generate incrementally (`layers_per_frame = 2`) to avoid blocking. The ca
 ## Usage
 
 ```gdscript
-var scan = preload("res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn").instantiate()
+var scan = preload("res://algorithms/datastructures/rorschach_scan/rorschach_monitor.tscn").instantiate()
 scan.scan_mode = 2  # PET scan colors
 scan.scan_speed = 0.3  # Slower
 add_child(scan)

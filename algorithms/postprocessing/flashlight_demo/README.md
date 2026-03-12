@@ -4,8 +4,8 @@
 Configures a grabbable flashlight and applies color to beam/lens presentation.
 
 ## Key Files
-- `res://algorithms/effects/flashlight_demo/flashlight_demo.tscn`
-- `res://algorithms/effects/flashlight_demo/flashlight_color.gd`
+- `res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn`
+- `res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd`
 
 ## VR Notes
 - Uses XR pickable/grab-point behavior through scene composition.

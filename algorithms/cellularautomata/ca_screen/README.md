@@ -9,4 +9,4 @@ Screen CA makes **computation visible**. Rules execute (F, logic); patterns appe
 ## See Also
 
 - `cellularautomata/` — Other CA implementations
-- `visualization/` — Display techniques
+- `datastructures/` — Display techniques

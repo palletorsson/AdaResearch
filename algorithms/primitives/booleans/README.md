@@ -81,5 +81,5 @@ Walk through a grid of boolean combinations. Each cell shows different primitive
 ## See Also
 
 - `transformation/booleanTunnel/` — Boolean tunnels
-- `effects/clipping/` — Plane-based cutting
+- `postprocessing/clipping/` — Plane-based cutting
 - `proceduralgeneration/` — Complex shape generation
