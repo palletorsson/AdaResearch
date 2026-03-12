@@ -83,6 +83,18 @@
 			"map_ready": false,
 			"map_sequences": [],
 			"sequence": "swarmintelligence"
+		},
+		"stigmergy_grid": {
+			"name": "Stigmergy Grid",
+			"lookup_name": "stigmergy_grid",
+			"description": "Ant pheromone grid with real-time evaporation and diffusion — ants deposit trails that fade over time, demonstrating indirect communication (stigmergy).",
+			"scene": "res://commons/artifacts/stigmergy_grid/stigmergy_grid.tscn",
+			"category": "swarmintelligence",
+			"tags": ["stigmergy", "pheromone", "ants", "emergence", "indirect_communication", "swarm"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "swarmintelligence"
 		}
 	}
 }

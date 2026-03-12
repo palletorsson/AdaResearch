@@ -11,6 +11,18 @@
 			"map_ready": false,
 			"map_sequences": [],
 			"sequence": "quantumalgorithms"
+		},
+		"superposition_display": {
+			"name": "Superposition Display",
+			"lookup_name": "superposition_display",
+			"description": "Interactive visualization of quantum superposition |psi> = alpha|0> + beta|1> with VR slider to control the amplitude ratio between basis states.",
+			"scene": "res://commons/artifacts/superposition_display/superposition_display.tscn",
+			"category": "quantumalgorithms",
+			"tags": ["quantum", "superposition", "qubit", "amplitude", "interactive", "slider"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "quantumalgorithms"
 		}
 	}
 }

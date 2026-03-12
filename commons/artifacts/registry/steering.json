@@ -179,6 +179,18 @@
 			"map_ready": false,
 			"map_sequences": [],
 			"sequence": "steering"
+		},
+		"flocking_controls": {
+			"name": "Flocking Controls",
+			"lookup_name": "flocking_controls",
+			"description": "Interactive boid flocking with VR sliders for separation, alignment, cohesion, speed, and perception radius. Highlights one boid with visible force vectors.",
+			"scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn",
+			"category": "steering",
+			"tags": ["steering", "flocking", "boids", "sliders", "interactive", "emergence"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "steering"
 		}
 	}
 }

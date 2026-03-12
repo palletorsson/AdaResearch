@@ -507,6 +507,73 @@
 				"foundationscrisis"
 			],
 			"sequence": "foundationscrisis"
+		},
+		"brouwer_choice_sequence": {
+			"lookup_name": "brouwer_choice_sequence",
+			"scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+			"class_name": "BrouwerChoiceSequence",
+			"description": "Brouwer's free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an open-ended future",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and Brouwer",
+			"qfep_connection": "The sequence is never complete - knowledge is always in-progress, never finalized",
+			"signals": [],
+			"interactions": [
+				"observe the unfolding sequence with animated dots"
+			],
+			"parameters": {},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"choice_sequence",
+				"infinity",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
+		},
+		"excluded_middle_demo": {
+			"lookup_name": "excluded_middle_demo",
+			"scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+			"class_name": "ExcludedMiddleDemo",
+			"description": "Law of excluded middle (P or not-P) interactive demo - Brouwer rejected this for non-constructive proofs, slider controls the degree of rejection",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and the rejection of excluded middle",
+			"qfep_connection": "Not everything is decidable - the excluded middle assumes omniscience that constructivism rejects",
+			"signals": [],
+			"interactions": [
+				"use slider to toggle between classical and intuitionist views"
+			],
+			"parameters": {
+				"show_rejection": "Whether to display Brouwer's rejection of the law"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"excluded_middle",
+				"logic",
+				"foundations",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
 		}
 	},
 	"sequence_mapping": {
@@ -519,7 +586,9 @@
 			"penrose_triangle",
 			"poincare_disk",
 			"schrodinger_box",
-			"hilbert_hotel"
+			"hilbert_hotel",
+			"brouwer_choice_sequence",
+			"excluded_middle_demo"
 		],
 		"artmathematics": [
 			"magritte_pipe",

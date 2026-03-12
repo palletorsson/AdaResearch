@@ -53,6 +53,54 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": ["graphtheory"]
+		},
+		"curvature_slider": {
+			"lookup_name": "curvature_slider",
+			"scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+			"name": "Curvature Slider",
+			"description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
+			"category": "geometry",
+			"complexity": "beginner",
+			"tags": ["curvature", "non_euclidean", "slider", "interactive", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"elliptic_surface": {
+			"lookup_name": "elliptic_surface",
+			"scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+			"name": "Elliptic Surface",
+			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
+			"category": "geometry",
+			"complexity": "intermediate",
+			"tags": ["elliptic", "positive_curvature", "non_euclidean", "surface", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"hyperbolic_surface": {
+			"lookup_name": "hyperbolic_surface",
+			"scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+			"name": "Hyperbolic Surface",
+			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
+			"category": "geometry",
+			"complexity": "intermediate",
+			"tags": ["hyperbolic", "negative_curvature", "non_euclidean", "saddle", "surface", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"riemann_sphere": {
+			"lookup_name": "riemann_sphere",
+			"scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+			"name": "Riemann Sphere",
+			"description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
+			"category": "geometry",
+			"complexity": "advanced",
+			"tags": ["riemann", "complex_analysis", "stereographic", "projection", "sphere", "alternative_geometry"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

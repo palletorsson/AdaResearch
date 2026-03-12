@@ -42,6 +42,9 @@ const WAVE_LENGTH: float = 2.0  # Visual length in meters
 const NUM_HARMONICS: int = 5
 var _time: float = 0.0
 
+## Dirty flag — set when harmonic parameters change so labels are rebuilt
+var _dirty: bool = true
+
 ## Cached ImmediateMesh objects (reused each frame instead of allocating new ones)
 var _combined_im: ImmediateMesh
 var _component_ims: Array[ImmediateMesh] = []
@@ -118,7 +121,14 @@ func _setup_component_meshes() -> void:
 func _process(delta: float) -> void:
 	# Bound the accumulator to prevent floating-point precision loss over long sessions
 	_time = fmod(_time + delta * base_frequency, 1000.0)
-	_update_visualization()
+	# Meshes must rebuild every frame because the wave animates over time.
+	# Labels only need updating when harmonic parameters change (_dirty).
+	_draw_combined_wave()
+	if show_components:
+		_draw_component_waves()
+	if _dirty:
+		_update_labels()
+		_dirty = false
 
 ## Redraws combined and component waves, updates formula labels
 func _update_visualization() -> void:
@@ -244,6 +254,7 @@ func _detect_preset() -> String:
 func _on_harmonic_changed(_value, harmonic_index: int) -> void:
 	if harmonic_index < harmonic_sliders.size() and harmonic_sliders[harmonic_index]:
 		harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+		_dirty = true
 		waveform_changed.emit(harmonic_amplitudes)
 
 ## Cleans up dynamically created nodes when exiting the tree
@@ -278,10 +289,12 @@ func _set_amplitudes(amps: Array) -> void:
 		harmonic_amplitudes[i] = amps[i]
 		if i < harmonic_sliders.size() and harmonic_sliders[i]:
 			harmonic_sliders[i].set_normalized_value(amps[i])
+	_dirty = true
 
 ## Toggles visibility of individual harmonic component waves
 func toggle_components() -> void:
 	show_components = not show_components
+	_dirty = true
 
 ## Grid system integration
 func apply_grid_config(config_data: Dictionary) -> void:

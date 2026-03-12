@@ -3,9 +3,17 @@
 class_name OrganicLighting
 extends Node
 
+var _tweens: Array = []
+
 func setup_organic_lighting(container: Node3D, space_size: Vector3):
 	"""Create atmospheric lighting for the organic space"""
-	
+
+	# Kill any existing tweens to prevent accumulation on regenerate
+	for t in _tweens:
+		if t and t.is_valid():
+			t.kill()
+	_tweens.clear()
+
 	# Main ambient light
 	var ambient = DirectionalLight3D.new()
 	ambient.light_energy = 0.3
@@ -42,4 +50,11 @@ func setup_organic_lighting(container: Node3D, space_size: Vector3):
 		tween.set_loops()
 		tween.tween_property(accent_light, "light_energy", 0.8, 2.0 + i * 0.5)
 		tween.tween_property(accent_light, "light_energy", 0.2, 2.0 + i * 0.5)
+		_tweens.append(tween)
+
+func _exit_tree():
+	for t in _tweens:
+		if t and t.is_valid():
+			t.kill()
+	_tweens.clear()
 
