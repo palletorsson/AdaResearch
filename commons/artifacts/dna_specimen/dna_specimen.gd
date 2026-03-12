@@ -32,13 +32,11 @@ func _setup_materials() -> void:
 	# Jar glass material
 	if jar:
 		var jar_mat = StandardMaterial3D.new()
-		jar_mat.albedo_color = Color(0.9, 0.95, 1.0, 0.15)
+		jar_mat.albedo_color = Color(0.85, 0.92, 1.0, 0.12)
 		jar_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		jar_mat.roughness = 0.0
+		jar_mat.roughness = 0.05
 		jar_mat.metallic = 0.1
 		jar_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-		jar_mat.refraction_enabled = true
-		jar_mat.refraction_scale = 0.02
 		jar.material_override = jar_mat
 	
 	# Fluid material

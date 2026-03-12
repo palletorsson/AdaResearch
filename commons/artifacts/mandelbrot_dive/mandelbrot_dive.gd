@@ -91,7 +91,7 @@ const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 const MANDELBROT_SHADER = """
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled;
 
 uniform float zoom = 1.0;
 uniform vec2 center = vec2(-0.5, 0.0);
@@ -372,7 +372,8 @@ func _update_info_label() -> void:
 	if not _info_label:
 		return
 	var scheme_names = ["Classic", "Fire", "Ocean", "Neon", "Gray"]
-	_info_label.text = "MANDELBROT\nZoom: %.2e | %s" % [zoom, scheme_names[color_scheme]]
+	var zoom_text: String = "%.1f" % zoom if zoom < 1000 else "%.0f" % zoom
+	_info_label.text = "MANDELBROT\nZoom: %s | %s" % [zoom_text, scheme_names[color_scheme]]
 
 ## Drives the auto-zoom animation, smoothly approaching the target coordinates.
 func _process(delta: float) -> void:
