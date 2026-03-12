@@ -6116,14 +6116,14 @@
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Rorschach Brain Scan",
       "description": "Animated mirrored inkblot pattern like a brain CT scan",
-      "scene": "res://algorithms/visualization/rorschach_scan/rorschach_scan.tscn",
+      "scene": "res://algorithms/datastructures/rorschach_scan/rorschach_scan.tscn",
       "used_in": []
     },
     "rorschach_monitor": {
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Rorschach Monitor",
       "description": "Medical monitor displaying animated Rorschach brain scan layers",
-      "scene": "res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn",
+      "scene": "res://algorithms/datastructures/rorschach_scan/rorschach_monitor.tscn",
       "used_in": []
     },
     "radiolaria": {
@@ -8034,7 +8034,7 @@
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Clipping Planes",
       "description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
-      "scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
+      "scene": "res://algorithms/postprocessing/clipping/clippingplanes.tscn",
       "used_in": []
     },
     "raycastingpoints": {

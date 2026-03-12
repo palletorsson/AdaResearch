@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ifb5dbgkey5v"]
 
-[ext_resource type="Script" uid="uid://rorschachmon1gd" path="res://algorithms/visualization/rorschach_scan/rorschach_monitor.gd" id="1_monitor"]
+[ext_resource type="Script" uid="uid://rorschachmon1gd" path="res://algorithms/datastructures/rorschach_scan/rorschach_monitor.gd" id="1_monitor"]
 
 [node name="RorschachMonitor" type="Node3D"]
 script = ExtResource("1_monitor")

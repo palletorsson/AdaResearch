@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://gdfn5mwvwx1o"]
 
-[ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/effects/flashlight_demo/flashlight.tscn" id="1_flashlight"]
-[ext_resource type="Script" uid="uid://cqxta3kfrj1c2" path="res://algorithms/effects/flashlight_demo/flashlight_color.gd" id="2_color"]
+[ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/postprocessing/flashlight_demo/flashlight.tscn" id="1_flashlight"]
+[ext_resource type="Script" uid="uid://cqxta3kfrj1c2" path="res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd" id="2_color"]
 
 [sub_resource type="Environment" id="Environment_Dark"]
 background_mode = 1
