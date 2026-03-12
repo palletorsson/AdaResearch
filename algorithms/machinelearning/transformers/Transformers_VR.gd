@@ -160,6 +160,7 @@ func _create_token(index: int, is_encoder: bool) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = token_size
+	sphere.height = token_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -279,6 +280,7 @@ func _create_positional_encoding_viz():
 			var particle = MeshInstance3D.new()
 			var sphere = SphereMesh.new()
 			sphere.radius = 0.05
+			sphere.height = 0.1
 			particle.mesh = sphere
 
 			var mat = StandardMaterial3D.new()
@@ -326,6 +328,7 @@ func _create_qkv_visualization():
 		var qkv_sphere = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.4
+		sphere.height = 0.8
 		qkv_sphere.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

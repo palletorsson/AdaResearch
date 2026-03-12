@@ -337,6 +337,7 @@ static func create_cross(params: Dictionary, glass_mat: Material, liquid_mat: Ma
 	var center = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = tube_radius * 2.0
+	sphere.height = tube_radius * 2.0 * 2.0
 	center.mesh = sphere
 	center.material_override = glass_mat
 	group.add_child(center)

@@ -246,6 +246,7 @@ func spawn_test_ball():
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.04
+	sphere.height = 0.08
 	mesh_instance.mesh = sphere
 
 	var material = StandardMaterial3D.new()

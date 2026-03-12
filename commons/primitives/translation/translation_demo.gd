@@ -93,6 +93,7 @@ func _create_path_indicator() -> void:
 	goal.name = "Goal"
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.2
+	sphere_mesh.height = 0.4
 	goal.mesh = sphere_mesh
 
 	var material = StandardMaterial3D.new()

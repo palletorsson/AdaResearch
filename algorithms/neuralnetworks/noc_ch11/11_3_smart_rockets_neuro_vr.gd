@@ -87,6 +87,7 @@ func _spawn_target() -> void:
 	_target = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = target_radius
+	sphere.height = target_radius * 2.0
 	_target.mesh = sphere
 	_target.material_override = MAT_TARGET
 	_target.position = Vector3(0.35, 0.75, 0)

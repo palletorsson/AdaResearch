@@ -91,6 +91,7 @@ func create_emitter_visual(parent: Node3D):
 	var marker = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.03
+	sphere.height = 0.06
 	marker.mesh = sphere
 
 	var material = StandardMaterial3D.new()

@@ -266,6 +266,7 @@ func show_current_sample(sample: Array[float], mean_value: float):
 		var point = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.02
+		sphere_mesh.height = 0.04
 		point.mesh = sphere_mesh
 		
 		var material = StandardMaterial3D.new()
@@ -283,6 +284,7 @@ func show_current_sample(sample: Array[float], mean_value: float):
 	var mean_point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.04
+	sphere_mesh.height = 0.08
 	mean_point.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

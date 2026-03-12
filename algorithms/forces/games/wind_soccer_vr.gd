@@ -266,6 +266,7 @@ func create_score_effect(pos: Vector3, color: Color):
 	var effect := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.2
+	sphere.height = 0.4
 	effect.mesh = sphere
 	effect.position = pos
 

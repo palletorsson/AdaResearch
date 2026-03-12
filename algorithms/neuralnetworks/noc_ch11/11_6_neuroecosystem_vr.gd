@@ -315,6 +315,7 @@ class FoodItem:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
+		sphere.height = rad * 2.0
 		mesh.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.7, 0.95, 0.6)

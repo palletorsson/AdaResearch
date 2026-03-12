@@ -207,6 +207,7 @@ func show_sample_point(index: int):
 	var point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.02
+	sphere_mesh.height = 0.04
 	point.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

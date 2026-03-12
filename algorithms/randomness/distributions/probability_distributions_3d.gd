@@ -607,6 +607,7 @@ func create_distribution_point(x: float, y: float, z: float, value: float) -> Me
 	
 	# Size based on probability value
 	sphere.radius = 0.05 + value * 0.1
+	sphere.height = 0.05 + value * 0.1 * 2.0
 	point.mesh = sphere
 	
 	# Position
@@ -632,6 +633,7 @@ func create_center_marker(x: float, z: float) -> MeshInstance3D:
 	var sphere = SphereMesh.new()
 	
 	sphere.radius = 0.2
+	sphere.height = 0.4
 	marker.mesh = sphere
 	
 	marker.position = Vector3(x, 0.2, z)

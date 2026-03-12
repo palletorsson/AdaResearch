@@ -148,6 +148,7 @@ func _make_torso_visual():
 	var mesh := MeshInstance3D.new()
 	var m := SphereMesh.new()
 	m.radius = 0.5
+	m.height = 1.0
 	m.radial_segments = 24
 	m.rings = 24
 	mesh.mesh = m

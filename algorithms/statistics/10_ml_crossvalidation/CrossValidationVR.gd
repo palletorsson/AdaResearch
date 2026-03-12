@@ -583,6 +583,7 @@ func create_point_visual(position: Vector3, color: Color, radius: float) -> Node
 	var mesh_instance = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = radius
+	sphere_mesh.height = radius * 2.0
 	mesh_instance.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

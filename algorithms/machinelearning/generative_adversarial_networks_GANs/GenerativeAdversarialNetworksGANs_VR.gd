@@ -154,6 +154,7 @@ func _create_noise_particle(pos: Vector3) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = noise_particle_size
+	sphere.height = noise_particle_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -287,6 +288,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -383,6 +385,7 @@ func _create_feedback_loop():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.06
+		sphere.height = 0.12
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

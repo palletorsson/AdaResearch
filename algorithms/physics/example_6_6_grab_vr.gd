@@ -180,6 +180,7 @@ func create_simulated_controller():
 	var mesh_instance = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.03
+	sphere_mesh.height = 0.06
 	mesh_instance.mesh = sphere_mesh
 
 	var material = StandardMaterial3D.new()

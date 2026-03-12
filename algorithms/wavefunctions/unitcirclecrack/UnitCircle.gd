@@ -40,6 +40,7 @@ func setup_scene():
 	moving_point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.08
+	sphere_mesh.height = 0.16
 	moving_point.mesh = sphere_mesh
 	
 	var point_material = StandardMaterial3D.new()

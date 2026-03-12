@@ -143,6 +143,7 @@ class Bob:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		body.mesh = sphere
 		body.material_override = mat
 		root.add_child(body)

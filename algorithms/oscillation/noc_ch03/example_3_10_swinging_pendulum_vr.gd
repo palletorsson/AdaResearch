@@ -76,6 +76,7 @@ func _spawn_pendulum() -> void:
 	_bob = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
+	sphere.height = 0.08
 	_bob.mesh = sphere
 	_bob.material_override = MAT_BOB
 	_anchor.add_child(_bob)

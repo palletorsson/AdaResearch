@@ -184,6 +184,7 @@ class Bloop:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		body.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.6, 0.9, 0.8)
@@ -273,6 +274,7 @@ class FoodItem:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = radius * 2.0
 		mesh.mesh = sphere
 		# Glowing green food particles
 		var food_mat := StandardMaterial3D.new()

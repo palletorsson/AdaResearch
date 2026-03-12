@@ -38,6 +38,7 @@ class NeuroCreature extends VREntity:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.025
+		sphere.height = 0.05
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
@@ -146,6 +147,7 @@ class Goal extends Node3D:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = radius * 2.0
 		mesh_instance.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

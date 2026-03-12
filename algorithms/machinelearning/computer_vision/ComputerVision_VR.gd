@@ -302,6 +302,7 @@ func _create_feature_extraction_area():
 			var sphere = MeshInstance3D.new()
 			var sphere_mesh = SphereMesh.new()
 			sphere_mesh.radius = 0.15
+			sphere_mesh.height = 0.3
 			sphere.mesh = sphere_mesh
 
 			var mat = StandardMaterial3D.new()

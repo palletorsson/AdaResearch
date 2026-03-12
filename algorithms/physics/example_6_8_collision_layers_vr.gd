@@ -189,6 +189,7 @@ func create_object(pos: Vector3, color: Color, layer: int, mask: int) -> RigidBo
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		mesh_instance.mesh = sphere
 
 		var material = StandardMaterial3D.new()

@@ -135,6 +135,7 @@ func _init_shared_resources():
 	# Spark effect mesh + material (shared across all explosion sparks)
 	_spark_mesh = SphereMesh.new()
 	_spark_mesh.radius = 0.04
+	_spark_mesh.height = 0.08
 	_spark_mat_template = StandardMaterial3D.new()
 	_spark_mat_template.emission_enabled = true
 	_spark_mat_template.emission_energy_multiplier = 8.0
@@ -153,6 +154,7 @@ func _init_shared_resources():
 	# Hit flash mesh + material (used as MultiMesh template)
 	_hit_mesh = SphereMesh.new()
 	_hit_mesh.radius = 0.08
+	_hit_mesh.height = 0.16
 	_hit_mat_template = StandardMaterial3D.new()
 	_hit_mat_template.albedo_color = Color(1.0, 0.5, 0.2)
 	_hit_mat_template.emission_enabled = true
@@ -655,6 +657,7 @@ func _spawn_explosion_flash(pos: Vector3):
 	var flash = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.2
+	sphere.height = 0.4
 	flash.mesh = sphere
 	var mat = _explosion_mat_template.duplicate() as StandardMaterial3D
 	mat.albedo_color = Color.WHITE

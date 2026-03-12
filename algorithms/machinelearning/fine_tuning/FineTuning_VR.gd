@@ -145,6 +145,7 @@ func _create_layer(layer_index: int) -> Node3D:
 		var neuron = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.08
+		sphere.height = 0.16
 		neuron.mesh = sphere
 
 		var neuron_mat = StandardMaterial3D.new()
@@ -205,6 +206,7 @@ func _create_lock_object(layer_index: int) -> RigidBody3D:
 	var icon = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = lock_size * 0.3
+	sphere.height = lock_size * 0.3 * 2.0
 	icon.mesh = sphere
 	icon.material_override = mat
 	icon.position = Vector3(0, lock_size * 0.6, 0)
@@ -288,6 +290,7 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.12
+	sphere.height = 0.24
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -326,6 +329,7 @@ func _create_activation_flow():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -354,6 +358,7 @@ func _create_activation_flow():
 			var particle = MeshInstance3D.new()
 			var sphere = SphereMesh.new()
 			sphere.radius = 0.04
+			sphere.height = 0.08
 			particle.mesh = sphere
 
 			var mat = StandardMaterial3D.new()

@@ -67,6 +67,7 @@ func _spawn_baton() -> void:
 	_end_a = MeshInstance3D.new()
 	var sphere_a := SphereMesh.new()
 	sphere_a.radius = 0.025
+	sphere_a.height = 0.05
 	_end_a.mesh = sphere_a
 	_end_a.material_override = MAT_END
 	_end_a.position = Vector3(-baton_length / 2, 0, 0)
@@ -75,6 +76,7 @@ func _spawn_baton() -> void:
 	_end_b = MeshInstance3D.new()
 	var sphere_b := SphereMesh.new()
 	sphere_b.radius = 0.025
+	sphere_b.height = 0.05
 	_end_b.mesh = sphere_b
 	_end_b.material_override = MAT_END
 	_end_b.position = Vector3(baton_length / 2, 0, 0)

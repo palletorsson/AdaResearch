@@ -334,6 +334,7 @@ func create_iteration_point(position: Vector3, color: Color):
 	var point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	point.mesh = sphere
 	
 	var material = StandardMaterial3D.new()

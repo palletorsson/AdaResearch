@@ -103,6 +103,7 @@ func _spawn_targets() -> void:
 		var marker := MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		marker.mesh = sphere
 		marker.material_override = MAT_TARGET
 		marker.position = target_pos
@@ -223,6 +224,7 @@ class Agent:
 		sensor_mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		sensor_mesh.mesh = sphere
 		var smat := StandardMaterial3D.new()
 		smat.albedo_color = Color(1.0, 0.7, 1.0, 0.25)
@@ -352,6 +354,7 @@ class Hazard:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = radius_value
+		sphere.height = radius_value * 2.0
 		mesh.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.4, 0.7, 0.35)

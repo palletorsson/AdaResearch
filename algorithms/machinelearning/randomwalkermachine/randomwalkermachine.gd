@@ -159,6 +159,7 @@ func visualize_targets():
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.1
+		sphere.height = 0.2
 		mesh_instance.mesh = sphere
 		mesh_instance.material_override = target_material
 		mesh_instance.position = target_points[i]
@@ -248,6 +249,7 @@ func visualize_walkers():
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05 + walker.fitness * 0.05  # Higher fitness = larger
+		sphere.height = 0.05 + walker.fitness * 0.05  # Higher fitness = larger * 2.0
 		mesh_instance.mesh = sphere
 		
 		# Fitness gradient: red (low) → green (high)

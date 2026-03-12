@@ -179,6 +179,7 @@ func _build_fairy_lights() -> void:
 
 	var bulb_mesh := SphereMesh.new()
 	bulb_mesh.radius = bulb_radius
+	bulb_mesh.height = bulb_radius * 2.0
 	bulb_mesh.radial_segments = 14
 	bulb_mesh.rings = 8
 

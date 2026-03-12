@@ -1,61 +1,46 @@
 {
-	"map_info": {
-		"name": "WFC Mosaic Reconstruction",
-		"lookup_name": "Mosaic_WFC_Reconstruction",
-		"description": "Feed documented mosaic patterns into the Wave Function Collapse solver — constraint-based reconstruction of historical tiling logic.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 11,
-			"depth": 11,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "intermediate",
-			"category": "mosaicanalysis",
-			"estimated_time": "exploration based",
-			"learning_objectives": ["Use WFC to reconstruct mosaic patterns from adjacency rules","Compare algorithmic output to historical originals","Identify where constraint satisfaction matches and fails craft logic"]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"]
-		],
-		"utilities": [
-			["S"," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," ","T"," "]
-		],
-		"interactables": [
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," ","wfc_tile_mosaic"," ","pattern_tile_puzzle"," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "]
-		]
+  "map_info": {
+	"name": "WFC Mosaic Reconstruction",
+	"lookup_name": "Mosaic_WFC_Reconstruction",
+	"description": "Feed documented mosaic patterns into the Wave Function Collapse solver — constraint-based reconstruction.",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": { "width": 5, "depth": 4, "max_height": 3 },
+	"metadata": {
+	  "difficulty": "intermediate",
+	  "category": "mosaicanalysis",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": ["Use WFC to reconstruct mosaic patterns from adjacency rules","Compare algorithmic output to historical originals","Identify where constraint satisfaction matches and fails craft logic"]
 	}
+  },
+  "layers": {
+	"structure": [
+	  ["1","1","1","1","1"],
+	  ["1","1","1","1","1"],
+	  ["1","1","1","1","1"],
+	  ["1","1","0","1","1"]
+	],
+	"utilities": [
+	  ["S"," "," "," "," "],
+	  [" "," "," "," "," "],
+	  [" "," "," "," "," "],
+	  [" "," ","t"," "," "]
+	],
+	"interactables": [
+	  [" "," "," "," "," "],
+	  [" ","wfc_tile_mosaic"," ","pattern_tile_puzzle"," "],
+	  [" "," "," "," "," "],
+	  [" "," "," "," "," "]
+	]
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	}
+  }
 }

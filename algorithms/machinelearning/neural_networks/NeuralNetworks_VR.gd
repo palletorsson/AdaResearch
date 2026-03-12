@@ -137,6 +137,7 @@ func _create_neuron(layer_idx: int, neuron_idx: int) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = neuron_size
+	sphere.height = neuron_size * 2.0
 	mesh.mesh = sphere
 
 	# Color based on layer type
@@ -355,6 +356,7 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -393,6 +395,7 @@ func _create_activation_flow():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.06
+		sphere.height = 0.12
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -425,6 +428,7 @@ func _create_gradient_flow():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

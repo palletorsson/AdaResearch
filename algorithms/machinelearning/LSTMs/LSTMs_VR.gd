@@ -106,6 +106,7 @@ func _create_floor_grid():
 				var marker = MeshInstance3D.new()
 				var sphere = SphereMesh.new()
 				sphere.radius = 0.02
+				sphere.height = 0.04
 				marker.mesh = sphere
 
 				var mat = StandardMaterial3D.new()
@@ -164,6 +165,7 @@ func _create_gate_sphere(gate_name: String, pos: Vector3, color: Color, label: S
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = gate_size
+	sphere.height = gate_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -284,6 +286,7 @@ func _create_throwable_token(pos: Vector3, color: Color) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = token_size
+	sphere.height = token_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -321,6 +324,7 @@ func _create_memory_flow():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05
+		sphere.height = 0.1
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

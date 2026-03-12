@@ -180,6 +180,7 @@ func create_interactive_cursor():
 	var cursor = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.05
+	sphere_mesh.height = 0.1
 	cursor.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()
@@ -317,6 +318,7 @@ func create_data_point_visual(position: Vector3, index: int) -> Node3D:
 	var point_mesh = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.03
+	sphere_mesh.height = 0.06
 	point_mesh.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

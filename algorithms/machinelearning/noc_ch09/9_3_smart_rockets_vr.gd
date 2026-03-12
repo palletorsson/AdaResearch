@@ -332,6 +332,7 @@ class RocketTarget:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
+		sphere.height = rad * 2.0
 		mesh.mesh = sphere
 		# Glowing gold target material
 		var target_mat := StandardMaterial3D.new()

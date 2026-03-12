@@ -78,6 +78,7 @@ func _create_carved_sphere(sphere_index: int):
 		
 		var connection_carve = SphereMesh.new()
 		connection_carve.radius = walkway_radius * 1.1
+		connection_carve.height = walkway_radius * 1.1 * 2.0
 		carve_spheres.append(connection_carve)
 	
 	# If connected to next sphere, carve in that direction
@@ -88,6 +89,7 @@ func _create_carved_sphere(sphere_index: int):
 		
 		var connection_carve = SphereMesh.new()
 		connection_carve.radius = walkway_radius * 1.1
+		connection_carve.height = walkway_radius * 1.1 * 2.0
 		carve_spheres.append(connection_carve)
 	
 	# Create the carved sphere using CSG

@@ -374,6 +374,7 @@ func add_puffball_texture(puffball, color):
 		
 		var small_sphere = SphereMesh.new()
 		small_sphere.radius = 0.02
+		small_sphere.height = 0.04
 		small_sphere.radial_segments = 6
 		small_sphere.rings = 4
 		bump.mesh = small_sphere
@@ -775,6 +776,7 @@ func add_rocks():
 			0:
 				var sphere = SphereMesh.new()
 				sphere.radius = size_val  # SphereMesh uses a float radius
+				sphere.height = size_val  # SphereMesh uses a float radius * 2.0
 				rock.mesh = sphere
 			1:
 				var box = BoxMesh.new()

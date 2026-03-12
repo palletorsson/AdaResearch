@@ -168,6 +168,7 @@ func _create_highlight() -> void:
 	highlight.name = "StepHighlight"
 	var mesh = SphereMesh.new()
 	mesh.radius = 0.1
+	mesh.height = 0.2
 	highlight.mesh = mesh
 	
 	var mat = StandardMaterial3D.new()

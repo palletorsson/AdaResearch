@@ -184,6 +184,7 @@ func create_basic_plant_meshes():
 	# Create various bulb types
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.5
+	sphere.height = 1.0
 	bulb_meshes.append(sphere)
 	
 	var capsule = CapsuleMesh.new()
@@ -376,6 +377,7 @@ func add_decorative_elements(parent_node, rng):
 			0: # Small sphere
 				var sphere = SphereMesh.new()
 				sphere.radius = rng.randf_range(0.05, 0.15)
+				sphere.height = rng.randf_range(0.05, 0.15) * 2.0
 				element.mesh = sphere
 			1: # Small cube
 				var cube = BoxMesh.new()
@@ -509,6 +511,7 @@ func create_bubble_cluster(parent, rng):
 		var bubble = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = rng.randf_range(0.05, 0.2)
+		sphere.height = rng.randf_range(0.05, 0.2) * 2.0
 		bubble.mesh = sphere
 		
 		# Random position in cluster
@@ -834,6 +837,7 @@ static func create_hybrid_form(plant, rng):
 		0: # Bulbous base
 			var sphere = SphereMesh.new()
 			sphere.radius = rng.randf_range(0.2, 0.4)
+			sphere.height = rng.randf_range(0.2, 0.4) * 2.0
 			base_shape.mesh = sphere
 		1: # Elongated base
 			var capsule = CapsuleMesh.new()
@@ -885,6 +889,7 @@ static func create_hybrid_form(plant, rng):
 			2: # Bubble-like
 				var sphere = SphereMesh.new()
 				sphere.radius = rng.randf_range(0.1, 0.2)
+				sphere.height = rng.randf_range(0.1, 0.2) * 2.0
 				appendage.mesh = sphere
 			3: # Flat extension
 				var plane = PlaneMesh.new()
@@ -1020,6 +1025,7 @@ static func create_random_mesh(rng, type):
 			0: # Blob-like
 				var sphere = SphereMesh.new()
 				sphere.radius = rng.randf_range(0.1, 0.2)
+				sphere.height = rng.randf_range(0.1, 0.2) * 2.0
 				mesh_instance.mesh = sphere
 			1: # Elongated
 				var capsule = CapsuleMesh.new()
@@ -1118,6 +1124,7 @@ static func add_eyes(plant, rng):
 		var eyeball = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = rng.randf_range(0.08, 0.15)
+		sphere.height = rng.randf_range(0.08, 0.15) * 2.0
 		eyeball.mesh = sphere
 		
 		# Create eyeball material (white/off-white)
@@ -1135,6 +1142,7 @@ static func add_eyes(plant, rng):
 		var iris = MeshInstance3D.new()
 		var iris_mesh = SphereMesh.new()
 		iris_mesh.radius = sphere.radius * 0.6
+		iris_mesh.height = sphere.radius * 0.6 * 2.0
 		iris.mesh = iris_mesh
 		
 		# Position iris slightly forward of eyeball
@@ -1161,6 +1169,7 @@ static func add_eyes(plant, rng):
 		var pupil = MeshInstance3D.new()
 		var pupil_mesh = SphereMesh.new()
 		pupil_mesh.radius = iris_mesh.radius * 0.5
+		pupil_mesh.height = iris_mesh.radius * 0.5 * 2.0
 		pupil.mesh = pupil_mesh
 		
 		# Position pupil slightly forward of iris
@@ -1276,6 +1285,7 @@ static func add_eggs(plant, rng):
 		# Create egg shape
 		var sphere = SphereMesh.new()
 		sphere.radius = rng.randf_range(0.05, 0.12)
+		sphere.height = rng.randf_range(0.05, 0.12) * 2.0
 		egg.mesh = sphere
 		
 		# Position eggs in a cluster
@@ -1357,6 +1367,7 @@ static func create_animated_fruit(parent, rng):
 	var body = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = rng.randf_range(0.15, 0.25)
+	sphere.height = rng.randf_range(0.15, 0.25) * 2.0
 	body.mesh = sphere
 	
 	# Create material for fruit
@@ -1374,6 +1385,7 @@ static func create_animated_fruit(parent, rng):
 	var eye = MeshInstance3D.new()
 	var eye_mesh = SphereMesh.new()
 	eye_mesh.radius = sphere.radius * 0.15
+	eye_mesh.height = sphere.radius * 0.15 * 2.0
 	eye.mesh = eye_mesh
 	eye.position = Vector3(0, sphere.radius * 0.3, -sphere.radius * 0.8)
 	

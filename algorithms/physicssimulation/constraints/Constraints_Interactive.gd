@@ -433,6 +433,7 @@ func create_joint_visualization(pos: Vector3, color: Color) -> MeshInstance3D:
 	var viz = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.05
+	sphere.height = 0.1
 	viz.mesh = sphere
 	viz.position = pos
 

@@ -355,6 +355,7 @@ func update_observation_history():
 		var obs_visual = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.03
+		sphere_mesh.height = 0.06
 		obs_visual.mesh = sphere_mesh
 		
 		var material = StandardMaterial3D.new()

@@ -99,6 +99,7 @@ func create_emitter():
 	var marker = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.03
+	sphere.height = 0.06
 	marker.mesh = sphere
 
 	var material = StandardMaterial3D.new()
@@ -123,6 +124,7 @@ func create_repeller():
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = repeller_radius
+	sphere.height = repeller_radius * 2.0
 	mesh_instance.mesh = sphere
 
 	var material = StandardMaterial3D.new()

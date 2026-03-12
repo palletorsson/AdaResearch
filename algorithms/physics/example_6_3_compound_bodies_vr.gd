@@ -152,6 +152,7 @@ func spawn_dumbbell(pos: Vector3):
 	var left_mesh = MeshInstance3D.new()
 	var left_sphere = SphereMesh.new()
 	left_sphere.radius = 0.05
+	left_sphere.height = 0.1
 	left_mesh.mesh = left_sphere
 	left_mesh.position = Vector3(-0.075, 0, 0)
 	dumbbell.add_child(left_mesh)

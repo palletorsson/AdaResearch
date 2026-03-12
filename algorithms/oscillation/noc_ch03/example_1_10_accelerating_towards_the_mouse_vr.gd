@@ -62,6 +62,7 @@ func _spawn_scene() -> void:
 	_target = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.05
+	sphere.height = 0.1
 	_target.mesh = sphere
 	_target.material_override = MAT_TARGET
 	_target.position = Vector3(0.2, 0.6, 0)
@@ -114,6 +115,7 @@ class AccelMover:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		body.mesh = sphere
 		body.material_override = mat
 		root.add_child(body)

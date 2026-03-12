@@ -122,6 +122,7 @@ func spawn_heavy_object():
 	
 	var mesh = SphereMesh.new()
 	mesh.radius = 1.0
+	mesh.height = 2.0
 	var mi = MeshInstance3D.new()
 	mi.mesh = mesh
 	mi.material_override = StandardMaterial3D.new()

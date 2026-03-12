@@ -75,6 +75,7 @@ func _spawn_scene() -> void:
 	_particle = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.03
+	sphere.height = 0.06
 	_particle.mesh = sphere
 	_particle.material_override = MAT_PARTICLE
 	_sim_root.add_child(_particle)

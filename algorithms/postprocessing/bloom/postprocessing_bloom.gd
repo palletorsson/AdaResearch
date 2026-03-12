@@ -343,6 +343,7 @@ func update_dynamic_bloom():
 func add_bloom_object(position: Vector3, color: Color, intensity: float = 3.0):
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.6
+	sphere_mesh.height = 1.2
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = sphere_mesh

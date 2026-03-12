@@ -200,6 +200,7 @@ class FlowerEntity:
 
 		petal_mesh = SphereMesh.new()
 		petal_mesh.radius = 0.03
+		petal_mesh.height = 0.06
 
 		for i in range(16):
 			var petal := MeshInstance3D.new()
@@ -211,6 +212,7 @@ class FlowerEntity:
 		center = MeshInstance3D.new()
 		var center_mesh := SphereMesh.new()
 		center_mesh.radius = 0.05
+		center_mesh.height = 0.1
 		center.mesh = center_mesh
 		root.add_child(center)
 
@@ -242,6 +244,7 @@ class FlowerEntity:
 		petal_mat.emission = petal_color * 0.4
 
 		petal_mesh.radius = petal_size
+		petal_mesh.height = petal_size * 2.0
 
 		for i in range(petals.size()):
 			var petal := petals[i]

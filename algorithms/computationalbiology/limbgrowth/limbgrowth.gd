@@ -182,6 +182,7 @@ func start_new_growth_zone():
 	var marker = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.1
+	sphere_mesh.height = 0.2
 	marker.mesh = sphere_mesh
 	marker.position = current_growth_point
 	var mat = StandardMaterial3D.new()

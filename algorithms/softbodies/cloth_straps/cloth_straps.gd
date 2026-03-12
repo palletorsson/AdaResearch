@@ -117,6 +117,7 @@ func _input(event):
 		var ball = RigidBody3D.new()
 		var mesh = SphereMesh.new()
 		mesh.radius = 0.3
+		mesh.height = 0.6
 		var mi = MeshInstance3D.new()
 		mi.mesh = mesh
 		ball.add_child(mi)

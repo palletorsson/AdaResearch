@@ -115,7 +115,7 @@ func _run_capture() -> void:
 	if _show_ground:
 		ground = MeshInstance3D.new()
 		var ground_mesh := PlaneMesh.new()
-		ground_mesh.size = Vector2(20, 20)
+		ground_mesh.size = Vector2(100, 100)
 		ground.mesh = ground_mesh
 		var ground_mat := StandardMaterial3D.new()
 		ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
@@ -195,11 +195,29 @@ func _run_capture() -> void:
 
 		if target_node:
 			var aabb: AABB = _get_combined_aabb(target_node)
+			# Clamp AABB to absolute bounds — filters hidden instances (MultiMesh at Y=-1000 etc.)
+			if aabb.size.y > 50.0:
+				var clamped_min_y: float = max(aabb.position.y, -10.0)
+				var clamped_max_y: float = min(aabb.position.y + aabb.size.y, 50.0)
+				if clamped_max_y > clamped_min_y:
+					aabb.position.y = clamped_min_y
+					aabb.size.y = clamped_max_y - clamped_min_y
+				else:
+					aabb.position.y = -0.5
+					aabb.size.y = 1.0
+				print("capture_with_config: AABB clamped (hidden instances filtered)")
 			if aabb.size.length() > 0.01:
 				orbit_focus = aabb.get_center()
 				var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
+				var horiz_dim: float = max(aabb.size.x, aabb.size.z)
 				if orbit_dist <= 0.01:
 					orbit_dist = max_dim * 2.0
+				# Compensate for camera pitch on tall objects
+				if aabb.size.y > horiz_dim * 1.2:
+					var aspect_ratio: float = aabb.size.y / maxf(horiz_dim, 0.01)
+					var lift_amount: float = aabb.size.y * 0.15 * clampf(aspect_ratio - 1.0, 0.0, 2.0)
+					orbit_focus.y += lift_amount
+					print("capture_with_config: Tall object — focus lifted by %.2f" % lift_amount)
 				print("capture_with_config: AABB size=%s center=%s dist=%.1f" % [aabb.size, orbit_focus, orbit_dist])
 			else:
 				if orbit_dist <= 0.01:
@@ -319,6 +337,8 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
+				# Apply child's local transform so nested positions are correct
+				sub_aabb = child.transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false

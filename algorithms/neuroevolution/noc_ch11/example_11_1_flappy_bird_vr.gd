@@ -21,6 +21,7 @@ class Bird extends VREntity:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.03
+		sphere.height = 0.06
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 

@@ -102,6 +102,7 @@ func _spawn_scene() -> void:
 	_target_dot = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.015
+	sphere.height = 0.03
 	_target_dot.mesh = sphere
 	_target_dot.material_override = MAT_AGENT
 	_sim_root.add_child(_target_dot)

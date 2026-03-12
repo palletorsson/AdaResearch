@@ -54,6 +54,7 @@ func generate_chair():
 			var field_particle = MeshInstance3D.new()
 			field_particle.mesh = SphereMesh.new()
 			field_particle.mesh.radius = 0.002
+			field_particle.mesh.height = 0.004
 			var random_offset = Vector3(randf_range(-0.1, 0.1), randf_range(0, levitation_height), randf_range(-0.1, 0.1))
 			field_particle.position = pos + random_offset
 			field_particle.material_override = materials.get_material("holographic")

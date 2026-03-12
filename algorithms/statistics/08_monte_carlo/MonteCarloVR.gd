@@ -291,6 +291,7 @@ func create_sample_point(position: Vector3, is_inside: bool):
 	var point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.01
+	sphere_mesh.height = 0.02
 	point.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

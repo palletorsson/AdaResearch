@@ -656,6 +656,7 @@
 			"scene": "res://commons/primitives/sphere/light_sphere.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
+			"no_auto_ground": true,
 			"map_sequences": []
 		},
 		"dark_sphere": {
@@ -665,6 +666,7 @@
 			"scene": "res://commons/primitives/sphere/dark_sphere.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
+			"no_auto_ground": true,
 			"map_sequences": []
 		},
 		"point": {
@@ -6636,6 +6638,7 @@
 			"scene": "res://commons/primitives/cave/test.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
+			"no_auto_ground": true,
 			"map_sequences": []
 		},
 		"soundboxes": {

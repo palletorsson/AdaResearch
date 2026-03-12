@@ -73,6 +73,7 @@ func setup_visuals():
 	food_indicator = MeshInstance3D.new()
 	var food_shape = SphereMesh.new()
 	food_shape.radius = 0.07
+	food_shape.height = 0.14
 	food_indicator.mesh = food_shape
 	food_indicator.position = Vector3(0, 0.15, -0.1)
 	food_indicator.visible = false

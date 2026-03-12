@@ -211,6 +211,7 @@ func create_node_visuals():
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.6
+		sphere.height = 1.2
 		mesh_instance.mesh = sphere
 		
 		var material = StandardMaterial3D.new()
@@ -406,6 +407,7 @@ func create_flow_particle(edge: FlowEdge3D) -> FlowParticle:
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = particle_size
+	sphere.height = particle_size * 2.0
 	mesh_instance.mesh = sphere
 	
 	var material = StandardMaterial3D.new()

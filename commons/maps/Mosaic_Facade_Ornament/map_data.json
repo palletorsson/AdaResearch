@@ -1,61 +1,46 @@
 {
-	"map_info": {
-		"name": "Baroque Facade Ornament",
-		"lookup_name": "Mosaic_Facade_Ornament",
-		"description": "Neapolitan baroque scrollwork and volutes as recursive grammars — L-system logic in carved stone and stucco.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 11,
-			"depth": 11,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "intermediate",
-			"category": "mosaicanalysis",
-			"estimated_time": "exploration based",
-			"learning_objectives": ["Recognize recursive structure in baroque scrollwork","Model volutes and acanthus as L-system productions","Analyze how ornamental grammar scales across facade elements"]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1"]
-		],
-		"utilities": [
-			["S"," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," ","T"," "]
-		],
-		"interactables": [
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," ","pattern_tile_puzzle"," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "]
-		]
+  "map_info": {
+	"name": "Baroque Facade Ornament",
+	"lookup_name": "Mosaic_Facade_Ornament",
+	"description": "Neapolitan baroque scrollwork and volutes as recursive grammars — L-system logic in carved stone and stucco.",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": { "width": 5, "depth": 4, "max_height": 3 },
+	"metadata": {
+	  "difficulty": "intermediate",
+	  "category": "mosaicanalysis",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": ["Recognize recursive structure in baroque scrollwork","Model volutes and acanthus as L-system productions","Analyze how ornamental grammar scales across facade elements"]
 	}
+  },
+  "layers": {
+	"structure": [
+	  ["1","1","1","1","1"],
+	  ["1","1","1","1","1"],
+	  ["1","1","1","1","1"],
+	  ["1","1","0","1","1"]
+	],
+	"utilities": [
+	  ["S"," "," "," "," "],
+	  [" "," "," "," "," "],
+	  [" "," "," "," "," "],
+	  [" "," ","t"," "," "]
+	],
+	"interactables": [
+	  [" "," "," "," "," "],
+	  [" ","pattern_tile_puzzle"," ","tessellation_lattice_demo"," "],
+	  [" "," "," "," "," "],
+	  [" "," "," "," "," "]
+	]
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	}
+  }
 }

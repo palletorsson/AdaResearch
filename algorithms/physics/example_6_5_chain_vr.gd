@@ -116,6 +116,7 @@ func create_anchor():
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.03
+	sphere.height = 0.06
 	mesh_instance.mesh = sphere
 
 	var material = StandardMaterial3D.new()

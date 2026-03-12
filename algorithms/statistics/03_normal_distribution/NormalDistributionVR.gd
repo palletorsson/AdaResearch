@@ -185,6 +185,7 @@ func create_parameter_slider(name: String, value: float, min_val: float, max_val
 	var handle = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.03
+	sphere_mesh.height = 0.06
 	handle.mesh = sphere_mesh
 	
 	var handle_material = StandardMaterial3D.new()
@@ -282,6 +283,7 @@ func create_falling_particle(value: float):
 	
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.01
+	sphere_mesh.height = 0.02
 	particle.mesh = sphere_mesh
 	
 	var material = StandardMaterial3D.new()

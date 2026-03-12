@@ -139,6 +139,7 @@ func create_pole():
 	var hub = MeshInstance3D.new()
 	var hub_sphere = SphereMesh.new()
 	hub_sphere.radius = 0.03
+	hub_sphere.height = 0.06
 	hub.mesh = hub_sphere
 	hub.position = Vector3(0, 0.15, 0)
 	hub.material_override = material
@@ -172,6 +173,7 @@ func create_blades():
 	var center = MeshInstance3D.new()
 	var center_sphere = SphereMesh.new()
 	center_sphere.radius = 0.04
+	center_sphere.height = 0.08
 	center.mesh = center_sphere
 	center.material_override = blade_material
 	blades.add_child(center)

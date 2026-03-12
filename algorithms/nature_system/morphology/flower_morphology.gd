@@ -382,6 +382,7 @@ static func _generate_petal_mesh(dna: CritterDNA, lod: int) -> Mesh:
 		# Fallback
 		var fallback := SphereMesh.new()
 		fallback.radius = length * 0.1
+		fallback.height = length * 0.1 * 2.0
 		return fallback
 
 	return mesh

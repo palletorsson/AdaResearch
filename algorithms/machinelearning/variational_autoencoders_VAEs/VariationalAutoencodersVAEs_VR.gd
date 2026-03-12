@@ -191,6 +191,7 @@ func _create_latent_space():
 	var sphere_mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = latent_space_radius
+	sphere.height = latent_space_radius * 2.0
 	sphere_mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -244,6 +245,7 @@ func _create_latent_sample() -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = sample_point_size
+	sphere.height = sample_point_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -294,6 +296,7 @@ func _create_distribution_particles():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -408,6 +411,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.18
+	sphere.height = 0.36
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -460,6 +464,7 @@ func _create_reparameterization_viz():
 		var comp_sphere = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.3
+		sphere.height = 0.6
 		comp_sphere.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

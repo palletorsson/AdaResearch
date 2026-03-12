@@ -202,6 +202,7 @@ func _build_meshes() -> void:
 		var giz := MeshInstance3D.new()
 		var gmesh := SphereMesh.new()
 		gmesh.radius = cube_size * 0.4
+		gmesh.height = cube_size * 0.4 * 2.0
 		giz.mesh = gmesh
 		giz.modulate = Color(1.0, 0.2, 0.6, 1.0)
 		giz.transform.origin = Vector3(_center.x * cube_size, cube_size, _center.z * cube_size) + origin_offset

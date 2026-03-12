@@ -54,6 +54,7 @@ class EcoCreature extends VREntity:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.03
+		sphere.height = 0.06
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
@@ -211,6 +212,7 @@ class FoodOrb extends Node3D:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.02
+		sphere.height = 0.04
 		mesh_instance.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

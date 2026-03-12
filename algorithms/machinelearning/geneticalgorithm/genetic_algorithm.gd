@@ -1117,6 +1117,7 @@ func initialize_ecosystem():
 		var food_mesh = MeshInstance3D.new()
 		food_mesh.mesh = SphereMesh.new()
 		food_mesh.mesh.radius = 0.3
+		food_mesh.mesh.height = 0.6
 		
 		var food_material = StandardMaterial3D.new()
 		food_material.albedo_color = COLOR_SPECIAL
@@ -1301,6 +1302,7 @@ func create_neural_visualization(creature: EvolutionaryCreature):
 		var input_node = MeshInstance3D.new()
 		input_node.mesh = SphereMesh.new()
 		input_node.mesh.radius = 0.1
+		input_node.mesh.height = 0.2
 		
 		var node_material = StandardMaterial3D.new()
 		node_material.albedo_color = Color(0.2, 0.8, 0.2)
@@ -1316,6 +1318,7 @@ func create_neural_visualization(creature: EvolutionaryCreature):
 		var output_node = MeshInstance3D.new()
 		output_node.mesh = SphereMesh.new()
 		output_node.mesh.radius = 0.1
+		output_node.mesh.height = 0.2
 		
 		var node_material = StandardMaterial3D.new()
 		node_material.albedo_color = Color(0.8, 0.2, 0.2)
@@ -2595,6 +2598,7 @@ func update_neural_visualization(creature: EvolutionaryCreature):
 			var neuron_mesh = MeshInstance3D.new()
 			var sphere = SphereMesh.new()
 			sphere.radius = 0.1
+			sphere.height = 0.2
 			sphere.radial_segments = 8
 			sphere.rings = 4
 			neuron_mesh.mesh = sphere
@@ -3509,6 +3513,7 @@ func visualize_mapper_graph(mapper_data: Dictionary, parent: Node3D):
 		var node_viz = MeshInstance3D.new()
 		node_viz.mesh = SphereMesh.new()
 		node_viz.mesh.radius = 0.3 + node.size * 0.1
+		node_viz.mesh.height = 0.3 + node.size * 0.1 * 2.0
 		
 		var material = StandardMaterial3D.new()
 		material.albedo_color = Color(1.0, 0.3, 0.8, 0.7)

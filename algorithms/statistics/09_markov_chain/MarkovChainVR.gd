@@ -204,6 +204,7 @@ func create_state_nodes():
 		var mesh_instance = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.2
+		sphere_mesh.height = 0.4
 		mesh_instance.mesh = sphere_mesh
 		
 		var material = StandardMaterial3D.new()

@@ -293,6 +293,7 @@ func create_interactive_orb() -> RigidBody3D:
 	var mesh_instance = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.5
+	sphere_mesh.height = 1.0
 	mesh_instance.mesh = sphere_mesh
 	mesh_instance.material_override = material_manager.get_interactive_material()
 	

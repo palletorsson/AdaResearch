@@ -430,6 +430,7 @@ func _update_centroid_visuals() -> void:
 		return
 	var centroid_mesh := SphereMesh.new()
 	centroid_mesh.radius = POINT_RADIUS * 1.4
+	centroid_mesh.height = POINT_RADIUS * 1.4 * 2.0
 	for idx in range(_centroids.size()):
 		var centroid := _centroids[idx]
 		var mesh_instance := MeshInstance3D.new()

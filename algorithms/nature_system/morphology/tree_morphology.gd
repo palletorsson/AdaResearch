@@ -650,6 +650,7 @@ static func _create_leaf_mesh(dna: CritterDNA, lod: int) -> Mesh:
 		# Fallback
 		var fallback := SphereMesh.new()
 		fallback.radius = 0.5
+		fallback.height = 1.0
 		return fallback
 
 	return mesh

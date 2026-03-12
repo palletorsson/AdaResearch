@@ -62,6 +62,7 @@ func _spawn_ball() -> void:
 	_ball = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
+	sphere.height = 0.08
 	_ball.mesh = sphere
 	_ball.material_override = MAT_BALL
 	_sim_root.add_child(_ball)

@@ -73,6 +73,7 @@ func _spawn_scene() -> void:
 	_attractor = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.06
+	sphere.height = 0.12
 	_attractor.mesh = sphere
 	_attractor.material_override = MAT_ATTRACTOR
 	_attractor.position = Vector3(0, 0.5, 0)

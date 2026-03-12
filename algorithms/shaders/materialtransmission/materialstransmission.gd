@@ -337,6 +337,7 @@ func update_dynamic_transmission():
 func add_transmission_object(position: Vector3, material_type: String = "advanced"):
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.8
+	sphere_mesh.height = 1.6
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = sphere_mesh

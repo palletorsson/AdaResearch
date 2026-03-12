@@ -17,6 +17,7 @@ var _orbit_pitch: float = 0.35  # positive = above looking down
 var _show_ground: bool = true  # false = skip scaffold ground plane
 var _lift_to_ground: bool = true  # shift instance up so AABB bottom sits at y=0
 var _orbit_focus_override: Vector3 = Vector3.INF  # INF = auto from AABB
+var _frame_wait: int = 0  # >0 = use N await process_frame instead of OS.delay_msec
 
 func _initialize() -> void:
 	_parse_args()
@@ -58,6 +59,9 @@ func _parse_args() -> void:
 				_show_ground = (value.to_lower() != "false" and value != "0")
 			"lift":
 				_lift_to_ground = (value.to_lower() != "false" and value != "0")
+			"frames":
+				if value.is_valid_int():
+					_frame_wait = maxi(0, int(value))
 			"focus":
 				# Format: "x,y,z" e.g. "0,0,0"
 				var parts = value.split(",")
@@ -119,7 +123,7 @@ func _run_capture() -> void:
 	if _show_ground:
 		ground = MeshInstance3D.new()
 		var ground_mesh := PlaneMesh.new()
-		ground_mesh.size = Vector2(20, 20)
+		ground_mesh.size = Vector2(100, 100)
 		ground.mesh = ground_mesh
 		var ground_mat := StandardMaterial3D.new()
 		ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
@@ -142,14 +146,36 @@ func _run_capture() -> void:
 	scene_root.add_child(instance)
 	print("capture_tscn_shot: Instantiated %s" % _scene_path)
 
-	# Let _ready() and a few physics frames run
+	# Let _ready() run + 3 initial frames (safe for all scenes).
 	await process_frame
 	await process_frame
 	await process_frame
+	if _frame_wait > 0:
+		# Frame-based wait: lets _process() run each frame.
+		# Use for scenes that build geometry over multiple _process() calls.
+		print("capture_tscn_shot: Running %d process frames..." % _frame_wait)
+		for _i in range(_frame_wait):
+			await process_frame
+	elif _wait_seconds > 0.5:
+		# Time-based wait: blocks thread (no _process()). Fast for static scenes.
+		var sleep_ms: int = int((_wait_seconds - 0.5) * 1000.0)
+		print("capture_tscn_shot: Sleeping %dms for procedural content..." % sleep_ms)
+		OS.delay_msec(sleep_ms)
 
 	# --- Lift to ground: shift instance so AABB bottom sits at y=0 ---
 	if _lift_to_ground and instance is Node3D:
 		var lift_aabb: AABB = _get_combined_aabb(instance as Node3D)
+		# Filter hidden instances before lift (MultiMesh at Y=-1000 etc.)
+		if lift_aabb.size.y > 50.0:
+			var clamp_min: float = max(lift_aabb.position.y, -10.0)
+			var clamp_max: float = min(lift_aabb.position.y + lift_aabb.size.y, 50.0)
+			if clamp_max > clamp_min:
+				lift_aabb.position.y = clamp_min
+				lift_aabb.size.y = clamp_max - clamp_min
+				print("capture_tscn_shot: Lift AABB clamped to [%.1f, %.1f]" % [clamp_min, clamp_max])
+			else:
+				# All geometry is hidden — skip lift
+				lift_aabb = AABB()
 		if lift_aabb.size.length() > 0.01:
 			var min_y: float = lift_aabb.position.y
 			if abs(min_y) > 0.01:
@@ -175,7 +201,7 @@ func _run_capture() -> void:
 			ground.visible = false
 		print("capture_tscn_shot: Using built-in CaptureCamera")
 	else:
-		# Auto-fit from AABB
+		# Auto-fit from AABB (computed AFTER wait, so procedural geometry is ready)
 		var target_node: Node3D = instance as Node3D if instance is Node3D else null
 		if not target_node:
 			# Try to find the first Node3D child
@@ -189,11 +215,32 @@ func _run_capture() -> void:
 
 		if target_node:
 			var aabb: AABB = _get_combined_aabb(target_node)
+			# Clamp AABB to absolute bounds — filters hidden instances (MultiMesh at Y=-1000 etc.)
+			if aabb.size.y > 50.0:
+				var clamped_min_y: float = max(aabb.position.y, -10.0)
+				var clamped_max_y: float = min(aabb.position.y + aabb.size.y, 50.0)
+				if clamped_max_y > clamped_min_y:
+					aabb.position.y = clamped_min_y
+					aabb.size.y = clamped_max_y - clamped_min_y
+				else:
+					# Fallback: keep 1m range around y=0
+					aabb.position.y = -0.5
+					aabb.size.y = 1.0
+				print("capture_tscn_shot: AABB clamped (hidden instances filtered)")
 			if aabb.size.length() > 0.01:
 				orbit_focus = aabb.get_center()
 				var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
+				var horiz_dim: float = max(aabb.size.x, aabb.size.z)
 				if orbit_dist <= 0.01:
 					orbit_dist = max_dim * 2.0
+				# Compensate for camera pitch on tall objects:
+				# The downward pitch wastes the bottom of the frame on ground
+				# while clipping the top. Shift focus upward proportionally.
+				if aabb.size.y > horiz_dim * 1.2:
+					var aspect_ratio: float = aabb.size.y / maxf(horiz_dim, 0.01)
+					var lift_amount: float = aabb.size.y * 0.15 * clampf(aspect_ratio - 1.0, 0.0, 2.0)
+					orbit_focus.y += lift_amount
+					print("capture_tscn_shot: Tall object — focus lifted by %.2f" % lift_amount)
 				print("capture_tscn_shot: AABB size=%s center=%s dist=%.1f" % [aabb.size, orbit_focus, orbit_dist])
 			else:
 				print("capture_tscn_shot: Empty AABB, using defaults")
@@ -217,11 +264,11 @@ func _run_capture() -> void:
 		camera.global_position = orbit_focus + offset
 		camera.look_at(orbit_focus, Vector3.UP)
 
-	# Wait for rendering to settle
-	await create_timer(_wait_seconds).timeout
+	# Render frames with final camera position — OS.delay_msec doesn't render,
+	# so we must await process_frame to actually produce a frame from this angle.
 	await process_frame
 	await process_frame
-
+	await process_frame
 
 	# --- Capture screenshot ---
 	var image: Image = root.get_texture().get_image()
@@ -279,6 +326,8 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
+				# Apply child's local transform so nested positions are correct
+				sub_aabb = child.transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false

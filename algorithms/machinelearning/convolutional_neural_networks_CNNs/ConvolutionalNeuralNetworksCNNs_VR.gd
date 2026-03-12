@@ -311,6 +311,7 @@ func _create_dense_layers():
 			var neuron = MeshInstance3D.new()
 			var sphere = SphereMesh.new()
 			sphere.radius = 0.2
+			sphere.height = 0.4
 			neuron.mesh = sphere
 
 			var mat = StandardMaterial3D.new()
@@ -348,6 +349,7 @@ func _create_output_layer():
 		var neuron = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.25
+		sphere.height = 0.5
 		neuron.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -394,6 +396,7 @@ func _create_activation_flow():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.08
+		sphere.height = 0.16
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()

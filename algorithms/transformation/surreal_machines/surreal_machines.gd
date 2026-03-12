@@ -505,6 +505,7 @@ func create_happy_bouncing_blobs():
 		# Create blob mesh
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.8
+		sphere_mesh.height = 1.6
 		sphere_mesh.radial_segments = 16
 		sphere_mesh.rings = 12
 
@@ -817,6 +818,7 @@ func create_celebration_sphere(position: Vector3) -> RigidBody3D:
 
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.6
+	sphere_mesh.height = 1.2
 	sphere_mesh.radial_segments = 16
 	sphere_mesh.rings = 12
 

@@ -278,6 +278,7 @@ func create_flow_particles():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.06
+		sphere.height = 0.12
 		particle.mesh = sphere
 		
 		var material = StandardMaterial3D.new()

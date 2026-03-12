@@ -87,6 +87,7 @@ func _create_prediction_display():
 	var sphere = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 1.0
+	sphere_mesh.height = 2.0
 	sphere.mesh = sphere_mesh
 
 	var mat = StandardMaterial3D.new()
@@ -251,6 +252,7 @@ func _create_lime_zone():
 	var center_point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.3
+	sphere.height = 0.6
 	center_point.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -278,6 +280,7 @@ func _create_perturbation_point() -> MeshInstance3D:
 	var point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	point.mesh = sphere
 
 	# Random position in local neighborhood
@@ -426,6 +429,7 @@ func _create_counterfactual_explorer():
 		var sphere = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.2
+		sphere_mesh.height = 0.4
 		sphere.mesh = sphere_mesh
 
 		var t = float(i) / (num_steps - 1)

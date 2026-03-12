@@ -130,6 +130,7 @@ func _build_tortoise() -> void:
 	var head := MeshInstance3D.new()
 	var hm := SphereMesh.new()
 	hm.radius = 0.018
+	hm.height = 0.036
 	head.mesh = hm
 	head.set_surface_override_material(0, _mat(
 		Color(0.25, 0.6, 0.35), Color(0.1, 0.25, 0.1)))

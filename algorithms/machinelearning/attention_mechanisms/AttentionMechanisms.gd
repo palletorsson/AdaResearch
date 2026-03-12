@@ -162,6 +162,7 @@ func _setup_materials() -> void:
 	_mat_qkv.roughness = 0.35
 
 	_mesh_sphere.radius = 0.2
+	_mesh_sphere.height = 0.4
 	_mesh_cyl.top_radius = 0.01
 	_mesh_cyl.bottom_radius = 0.01
 	_mesh_cyl.height = 0.8
@@ -226,6 +227,7 @@ func _create_qkv_visuals() -> void:
 		if node:
 			var m := SphereMesh.new()
 			m.radius = 0.8
+			m.height = 1.6
 			node.mesh = m
 			node.material_override = _mat_qkv
 
@@ -235,6 +237,7 @@ func _create_attention_matrix_multimesh() -> void:
 	_matrix_mm.use_colors = true
 	var s := SphereMesh.new()
 	s.radius = 0.05
+	s.height = 0.1
 	_matrix_mm.mesh = s
 	_matrix_mm.instance_count = token_count * token_count
 

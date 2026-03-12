@@ -98,6 +98,7 @@ class SensorCreature extends VREntity:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 

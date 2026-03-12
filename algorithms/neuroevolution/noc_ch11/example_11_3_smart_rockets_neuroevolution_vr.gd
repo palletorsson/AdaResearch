@@ -163,6 +163,7 @@ class RocketTarget extends Node3D:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = radius * 2.0
 		mesh_instance.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
