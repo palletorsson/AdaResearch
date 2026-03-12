@@ -1442,7 +1442,11 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 		push_error("GridUtilitiesComponent: HandheldInfoBoard base scene not found")
 		return null
 
-	var board_3d = load(base_scene_path).instantiate()
+	var board_scene = load(base_scene_path)
+	if not board_scene:
+		push_error("GridUtilitiesComponent: Failed to load HandheldInfoBoard scene: " + base_scene_path)
+		return null
+	var board_3d = board_scene.instantiate()
 
 	# Configure the Viewport2Din3D script properties on the root node
 	# The script automatically loads the scene into the viewport
@@ -1706,6 +1710,9 @@ func _generate_border_frame(border_data: Dictionary):
 
 	# Load SimpleGrid shader
 	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+	if not shader:
+		push_error("GridUtilitiesComponent: Failed to load SimpleGrid shader")
+		return
 
 	# Create shader material with black model color and light blue outline
 	var wall_material = ShaderMaterial.new()

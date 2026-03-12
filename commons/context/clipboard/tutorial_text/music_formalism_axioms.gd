@@ -1,5 +1,5 @@
 extends Resource
-class_name tutorial_music_formalism
+class_name TutorialMusicFormalism
 
 const TEXT = """
 # 🎼 Music as Formal System

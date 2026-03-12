@@ -1,5 +1,5 @@
 extends Node
-class_name lSystem
+class_name AxiomGardenLSystem
 
 # The Axiom Garden - Iteration 1: The Seed
 # Handles the string rewriting logic for L-Systems.

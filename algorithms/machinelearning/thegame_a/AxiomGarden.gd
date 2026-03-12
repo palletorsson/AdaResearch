@@ -9,7 +9,7 @@ class_name AxiomGarden
 @export var angle: float = 25.0
 @export var max_segments: int = 2000
 
-var lsystem: lSystem
+var lsystem: AxiomGardenLSystem
 var turtle: Turtle
 var renderer: GardenRenderer
 
@@ -34,7 +34,7 @@ var current_solution_index: int = 0
 
 func _ready():
 	# Initialize components
-	lsystem = lSystem.new("F", {"F": "F[+F]F[-F]"})
+	lsystem = AxiomGardenLSystem.new("F", {"F": "F[+F]F[-F]"})
 	turtle = Turtle.new()
 	
 	# Find or create renderer
@@ -65,7 +65,7 @@ func load_solution(index: int):
 	
 	# Update System
 	var axiom = sol.get("axiom", "F")
-	lsystem = lSystem.new(axiom, {})
+	lsystem = AxiomGardenLSystem.new(axiom, {})
 	
 	# Parse rule string "A=B,C=D"
 	var rule_parts = sol["rule"].split(",")

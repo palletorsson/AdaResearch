@@ -1,5 +1,5 @@
 extends Resource
-class_name tutorial_git_timeline
+class_name TutorialGitTimeline
 
 const TEXT = """
 # 🐙 Music as Version Control

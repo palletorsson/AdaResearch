@@ -33,7 +33,7 @@ func fibonacci(n: int) -> int:
 [b]Example 2: Class Definition[/b]
 
 [code]
-class_name BloomFilter
+class BloomFilter
 
 var bit_array: PackedByteArray
 var m: int  # Size
