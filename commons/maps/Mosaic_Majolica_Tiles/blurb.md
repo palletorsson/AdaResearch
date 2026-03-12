@@ -1,0 +1,1 @@
+The Santa Chiara cloister in Naples is lined with hand-painted majolica tiles — landscapes, vines, and figures laid out on a strict square grid. This map sits at the tension between narrative imagery and geometric repetition, letting the player map baroque color palettes into procedural pattern generation. The grid holds; the painting inside it does not repeat cleanly.

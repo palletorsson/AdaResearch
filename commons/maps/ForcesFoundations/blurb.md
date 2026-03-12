@@ -1,0 +1,1 @@
+Three islands for the fundamentals: Newton's laws on one, projectile motion on another, friction and drag on the third. Learn parabolic trajectories by watching them, then become the projectile — the jump pad between islands launches you along the same arc you just studied. F=ma stops being abstract when you feel the acceleration.

@@ -1,0 +1,1 @@
+Two floating islands of nonlinear dynamics. One holds n-body and two-body gravitational simulations — orbits that decay, stabilize, or fly apart depending on initial conditions. The other hosts strange attractors and force-directed graphs. A jump pad across the void connects them, because chaos and complexity are never far apart.

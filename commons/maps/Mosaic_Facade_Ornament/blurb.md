@@ -1,0 +1,1 @@
+Neapolitan baroque facades are dense with scrollwork, volutes, and acanthus leaves that repeat at multiple scales. This map reads that ornamental logic as a recursive grammar — L-system production rules generating the same curling forms that stonecutters carved by hand. The question is whether the algorithmic description captures the craft, or just approximates its surface.

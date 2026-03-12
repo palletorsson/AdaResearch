@@ -1,0 +1,1 @@
+Roman floor mosaics from Pompeii, preserved under ash, use a surprisingly limited set of geometric motifs repeated across large surfaces. This map asks the player to identify which of the 17 wallpaper groups each floor pattern belongs to, then decompose it into its minimal repeating tile. Ancient craftspeople worked without group theory, but the symmetry is exact.

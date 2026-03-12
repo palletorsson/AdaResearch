@@ -1,0 +1,1 @@
+Three islands where vectors stop being static arrows and start moving. One holds vector field flow and force visualizations. Another pairs interactive basis vector rigs with force resultants. The third returns to fundamentals with fresh eyes — seeing the same VectorBasics artifact now means something different after watching fields push particles around.
