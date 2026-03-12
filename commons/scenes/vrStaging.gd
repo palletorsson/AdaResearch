@@ -506,7 +506,7 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		
 		if res != ResourceLoader.THREAD_LOAD_LOADED:
 			push_error("Error ", res, " loading resource ", p_scene_path)
-			breakpoint
+			push_error("Failed to load scene resource: ", p_scene_path, " (status: ", res, "). Shutting down.")
 			get_tree().quit(1)
 		
 		if prompt_for_continue and not _use_quick_transition:

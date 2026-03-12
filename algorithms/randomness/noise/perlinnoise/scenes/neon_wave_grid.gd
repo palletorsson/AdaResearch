@@ -29,6 +29,7 @@ var waves = []
 var noise : FastNoiseLite
 var materials = []
 var time_offset = 0.0
+var _pulse_tweens : Array = []
 
 func _ready():
 	# Create noise generator for random wave variations
@@ -303,11 +304,18 @@ func animate_wave(wave: MeshInstance3D, delta: float):
 	draw_curve_tube(immediate_mesh, curve, neon_thickness)
 
 func pulse_effect():
+	# Kill any still-running pulse tweens to prevent accumulation
+	for t in _pulse_tweens:
+		if t and t.is_valid():
+			t.kill()
+	_pulse_tweens.clear()
+
 	# Add a brief pulse of increased brightness to all neon materials
 	for material in materials:
 		var original_energy = material.emission_energy_multiplier
-		
+
 		# Create tween for pulse effect
 		var tween = create_tween()
 		tween.tween_property(material, "emission_energy_multiplier", original_energy * 1.5, 0.1)
 		tween.tween_property(material, "emission_energy_multiplier", original_energy, 0.3)
+		_pulse_tweens.append(tween)

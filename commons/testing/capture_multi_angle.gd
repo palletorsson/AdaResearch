@@ -218,6 +218,7 @@ func _run_artifact_capture() -> void:
 	var camera := Camera3D.new()
 	camera.current = true
 	camera.fov = 50.0
+	camera.add_to_group("capture_camera")
 	scene_root.add_child(camera)
 
 	# Directional light

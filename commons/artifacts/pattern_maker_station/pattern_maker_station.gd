@@ -379,8 +379,12 @@ func _build_capture_camera() -> void:
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
 	cam.fov = 60.0
-	cam.position = Vector3(0.0, 1.0, -2.5)
-	cam.look_at(Vector3(0.0, 0.4, 0.0), Vector3.UP)
+	# Position in front of panel, looking at center of station
+	# Panel faces -Z (panel_root rotated 180 on Y), carpet on floor
+	cam.position = Vector3(1.5, 1.8, 2.5)
+	# Set rotation manually (look_at requires being in tree)
+	# Looking from front-right toward origin at roughly y=0.3
+	cam.rotation_degrees = Vector3(-30, 20, 0)
 	add_child(cam)
 
 func _build_touch_area() -> void:

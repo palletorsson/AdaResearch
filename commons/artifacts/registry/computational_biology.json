@@ -77,6 +77,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"MolecularDesigner": {
+			"lookup_name": "MolecularDesigner",
+			"scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+			"name": "Molecular Designer",
+			"description": "Interactive molecular construction tool — atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.",
+			"category": "biology",
+			"complexity": "advanced",
+			"tags": ["molecular", "chemistry", "constraint_satisfaction", "valence", "biology", "interactive"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

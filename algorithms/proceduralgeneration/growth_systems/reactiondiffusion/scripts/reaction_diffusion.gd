@@ -30,6 +30,10 @@ extends Node3D
 var U = PackedFloat32Array()
 var V = PackedFloat32Array()
 
+# Scratch arrays reused every tick to avoid allocations
+var _U_next = PackedFloat32Array()
+var _V_next = PackedFloat32Array()
+
 # The image and texture we update each frame
 var img: Image
 var texture: ImageTexture
@@ -50,9 +54,12 @@ func _ready():
 		push_error("MeshInstance3D not found!")
 		return
 
-	# 1) Resize the U and V arrays
-	U.resize(width * height)
-	V.resize(width * height)
+	# 1) Resize the U, V, and scratch arrays
+	var total = width * height
+	U.resize(total)
+	V.resize(total)
+	_U_next.resize(total)
+	_V_next.resize(total)
 
 	# 2) Create an Image and fill it
 	img = Image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -88,13 +95,7 @@ func _ready():
 # ONE STEP OF REACTION–DIFFUSION
 # ==============================
 func _on_Timer_timeout():
-	# Create new arrays to hold the next state
-	var U_next = PackedFloat32Array()
-	U_next.resize(U.size())
-	var V_next = PackedFloat32Array()
-	V_next.resize(V.size())
-
-	# For each cell, compute Laplacian and update
+	# For each cell, compute Laplacian and update into scratch arrays
 	for y in range(height):
 		for x in range(width):
 			var idx = x + y * width
@@ -111,12 +112,16 @@ func _on_Timer_timeout():
 			var dv = Dv * lap_v + uvv - (feed + kill) * v
 
 			# Update with a time step = interval
-			U_next[idx] = clamp(u + du * interval, 0.0, 1.0)
-			V_next[idx] = clamp(v + dv * interval, 0.0, 1.0)
+			_U_next[idx] = clamp(u + du * interval, 0.0, 1.0)
+			_V_next[idx] = clamp(v + dv * interval, 0.0, 1.0)
 
-	# Swap in the new data
-	U = U_next
-	V = V_next
+	# Swap references (no allocation — just pointer swap)
+	var tmp_u = U
+	U = _U_next
+	_U_next = tmp_u
+	var tmp_v = V
+	V = _V_next
+	_V_next = tmp_v
 
 	# Update the image with vibrant colors by mapping the difference between U and V to a hue
 	for y in range(height):
@@ -126,7 +131,7 @@ func _on_Timer_timeout():
 			var hue = (U[idx] - V[idx] + 1.0) / 2.0
 			# Use full saturation and brightness for vibrancy
 			img.set_pixel(x, y, Color.from_hsv(hue, 1.0, 1.0, 1.0))
-	texture.set_image(img)
+	texture.update(img)
 
 # ==============================
 # HELPER FUNCTIONS
@@ -173,7 +178,7 @@ func _reset_fields_random():
 			var idx = x + y * width
 			var hue = (U[idx] - V[idx] + 1.0) / 2.0
 			img.set_pixel(x, y, Color.from_hsv(hue, 1.0, 1.0, 1.0))
-	texture.set_image(img)
+	texture.update(img)
 
 # Image-based initialization of U and V fields
 func _reset_fields_from_image(image_path: String):
@@ -198,7 +203,7 @@ func _reset_fields_from_image(image_path: String):
 			var idx = x + y * width
 			var hue = (U[idx] - V[idx] + 1.0) / 2.0
 			img.set_pixel(x, y, Color.from_hsv(hue, 1.0, 1.0, 1.0))
-	texture.set_image(img)
+	texture.update(img)
 
 # ==============================
 # RESET FUNCTION (EVERY reset_interval SECONDS)

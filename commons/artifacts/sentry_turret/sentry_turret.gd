@@ -416,11 +416,11 @@ func _find_player() -> Node3D:
 	if cameras.size() > 0:
 		return cameras[0]
 
-	# Fallback to any Camera3D
+	# Fallback to any Camera3D (skip capture/utility cameras)
 	var viewport = get_viewport()
 	if viewport:
 		var cam = viewport.get_camera_3d()
-		if cam:
+		if cam and not cam.is_in_group("capture_camera"):
 			return cam
 
 	return null

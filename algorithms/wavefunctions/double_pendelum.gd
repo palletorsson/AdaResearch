@@ -120,10 +120,8 @@ func draw_to_trace(position: Vector2):
 			if draw_pos.x >= 0 and draw_pos.y >= 0 and draw_pos.x < trace_image.get_width() and draw_pos.y < trace_image.get_height():
 				trace_image.set_pixelv(draw_pos, trace_color)
 
-	# Update the texture with the modified image
-	trace_texture_data = ImageTexture.create_from_image(trace_image)
-	
-	update_material(trace_texture_data)
+	# Update the existing texture with the modified image (avoid creating a new one each frame)
+	trace_texture_data.set_image(trace_image)
 # Function to update the material's albedo texture
 func update_material(tex: ImageTexture):
 	if drawtexture.material_override is ShaderMaterial:

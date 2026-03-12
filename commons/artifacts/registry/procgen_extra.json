@@ -18,6 +18,18 @@
 			"map_ready": true,
 			"map_sequences": []
 		},
+		"reaction_diffusion": {
+			"lookup_name": "reaction_diffusion",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
+			"name": "Reaction Diffusion",
+			"description": "Turing pattern generation using reaction-diffusion systems — the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": ["reaction_diffusion", "turing_pattern", "gray_scott", "morphogenesis", "growth"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
 		"reaction_diffusion_vr": {
 			"lookup_name": "reaction_diffusion_vr",
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",

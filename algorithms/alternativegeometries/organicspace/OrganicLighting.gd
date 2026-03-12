@@ -42,3 +42,4 @@ func setup_organic_lighting(container: Node3D, space_size: Vector3):
 		tween.set_loops()
 		tween.tween_property(accent_light, "light_energy", 0.8, 2.0 + i * 0.5)
 		tween.tween_property(accent_light, "light_energy", 0.2, 2.0 + i * 0.5)
+
