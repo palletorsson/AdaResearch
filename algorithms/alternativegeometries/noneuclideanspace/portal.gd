@@ -25,10 +25,10 @@ func _ready():
 	
 	# Link to another portal if specified
 	if !linked_portal_path.is_empty():
-		linked_portal = get_node(linked_portal_path)
-		
+		linked_portal = get_node_or_null(linked_portal_path)
+
 		# If two-way and the linked portal doesn't link back, set it up
-		if two_way and linked_portal and linked_portal.linked_portal != self:
+		if linked_portal and two_way and linked_portal.linked_portal != self:
 			linked_portal.linked_portal = self
 
 func create_portal_visuals():

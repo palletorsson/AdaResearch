@@ -45,16 +45,19 @@ func _setup_debug_overlay():
 func _on_portal_entered(portal: Portal, body: Node3D):
 	if body == player:
 		if debug_overlay:
-			var label = debug_overlay.get_node("DebugLabel")
-			label.text = "Entered portal: " + portal.name
+			var label = debug_overlay.get_node_or_null("DebugLabel")
+			if label:
+				label.text = "Entered portal: " + portal.name
 
 func _on_portal_exited(portal: Portal, body: Node3D):
 	if body == player:
 		if debug_overlay:
-			var label = debug_overlay.get_node("DebugLabel")
-			label.text = "Exited portal: " + portal.name
+			var label = debug_overlay.get_node_or_null("DebugLabel")
+			if label:
+				label.text = "Exited portal: " + portal.name
 
 func _process(_delta):
 	if player and debug_overlay:
-		var label = debug_overlay.get_node("DebugLabel")
-		label.text += "\nPlayer position: " + str(player.global_position)
+		var label = debug_overlay.get_node_or_null("DebugLabel")
+		if label:
+			label.text += "\nPlayer position: " + str(player.global_position)

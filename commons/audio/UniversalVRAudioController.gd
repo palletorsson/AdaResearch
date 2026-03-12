@@ -133,6 +133,13 @@ func get_dedicated_bus_name() -> String:
 	"""Return the dedicated bus name for this rack"""
 	return dedicated_bus_name
 
+func _exit_tree():
+	# Remove the dedicated audio bus to avoid leaking buses
+	if dedicated_bus_name != "":
+		var bus_idx = AudioServer.get_bus_index(dedicated_bus_name)
+		if bus_idx != -1:
+			AudioServer.remove_bus(bus_idx)
+
 func _setup_auto_save_timer():
 	_auto_save_timer = Timer.new()
 	_auto_save_timer.wait_time = _auto_save_interval

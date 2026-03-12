@@ -28,6 +28,10 @@ var active_strokes = []
 var max_active_strokes = 3
 var canvas_bounds = Rect2(-5, -3, 10, 6)  # Canvas boundaries in local space
 
+# Splat limit to prevent unbounded node accumulation
+@export var max_splats: int = 5000
+var _splat_nodes: Array = []
+
 # Animation tracking
 var time_elapsed: float = 0.0
 
@@ -305,6 +309,13 @@ func add_splat(parent: Node3D, position: Vector3, size: float, color: Color):
 	
 	parent.add_child(splat_instance)
 
+	# Track splat and enforce rolling window limit
+	_splat_nodes.append(splat_instance)
+	while _splat_nodes.size() > max_splats:
+		var oldest = _splat_nodes.pop_front()
+		if is_instance_valid(oldest):
+			oldest.queue_free()
+
 func random_point_on_canvas() -> Vector3:
 	# Generate a random point within canvas bounds
 	var x = randf_range(canvas_bounds.position.x, canvas_bounds.position.x + canvas_bounds.size.x)
@@ -321,6 +332,7 @@ func clear_canvas():
 	for child in paint_container.get_children():
 		child.queue_free()
 	active_strokes.clear()
+	_splat_nodes.clear()
 
 func randf_range(min_val: float, max_val: float) -> float:
 	return min_val + (max_val - min_val) * randf()

@@ -120,17 +120,19 @@ func _create_wall_collision(parent: Node, name: String, position: Vector3, size:
 func _on_player_entered(body: Node3D):
 	if body is XROrigin3D:
 		# When player enters, swap visibility
-		var outer_shell = get_node("OuterShell")
-		var inner_room = get_node("InnerRoom")
-		
-		outer_shell.visible = false
-		inner_room.visible = true
+		var outer_shell = get_node_or_null("OuterShell")
+		var inner_room = get_node_or_null("InnerRoom")
+
+		if outer_shell and inner_room:
+			outer_shell.visible = false
+			inner_room.visible = true
 
 func _on_player_exited(body: Node3D):
 	if body is XROrigin3D:
 		# When player exits, restore original visuals
-		var outer_shell = get_node("OuterShell")
-		var inner_room = get_node("InnerRoom")
-		
-		outer_shell.visible = true
-		inner_room.visible = false
+		var outer_shell = get_node_or_null("OuterShell")
+		var inner_room = get_node_or_null("InnerRoom")
+
+		if outer_shell and inner_room:
+			outer_shell.visible = true
+			inner_room.visible = false
