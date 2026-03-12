@@ -36,6 +36,9 @@ var is_running: bool = false
 var cube_heights: Dictionary = {}  # Track individual cube heights
 var audio_player: AudioStreamPlayer3D
 
+# Position lookup cache (avoids O(n) search per step)
+var _position_cache: Dictionary = {}
+
 # Signals
 signal algorithm_step_complete()
 signal algorithm_finished()
@@ -180,20 +183,26 @@ func reset_algorithm():
 		return
 	
 	print("HeightRandomnessAlgorithm: Resetting cubes to base level...")
-	
+
+	var mm = structure_component.multimesh
+	if not mm:
+		return
+
 	# Reset all cubes in the region back to their base positions
 	for x in range(region_min_x, region_max_x + 1):
 		for z in range(region_min_z, region_max_z + 1):
-			var cube = structure_component.get_cube_at(x, target_y_level, z)
-			if cube:
-				# Reset to original position using GridCommon utility
+			var instance_idx = _find_instance_index(structure_component, x, target_y_level, z)
+			if instance_idx >= 0:
 				var grid_pos = Vector3i(x, target_y_level, z)
 				var world_pos = GridCommon.grid_to_world_position(grid_pos, structure_component.cube_size, structure_component.gutter)
-				cube.position = world_pos
-	
+				var transform = mm.get_instance_transform(instance_idx)
+				transform.origin = world_pos
+				mm.set_instance_transform(instance_idx, transform)
+
 	# Reset counters and height tracking
 	total_raises = 0
 	cube_heights.clear()
+	_position_cache.clear()
 	
 	print("HeightRandomnessAlgorithm: Reset complete - ready to restart")
 
@@ -236,44 +245,50 @@ func set_grid_reference(grid_ref):
 func _raise_cube(x: int, z: int):
 	if not grid_reference:
 		return
-	
+
 	var structure_component = grid_reference.get_structure_component()
 	if not structure_component:
 		return
-	
-	# Get the cube at target Y level position
-	var cube = structure_component.get_cube_at(x, target_y_level, z)
-	if not cube:
+
+	# Find the MultiMesh instance for this cube position
+	var mm = structure_component.multimesh
+	if not mm:
 		return
-	
+
+	var instance_idx = _find_instance_index(structure_component, x, target_y_level, z)
+	if instance_idx < 0:
+		return
+
 	# Calculate current height for this cube
 	var cube_key = str(x) + "," + str(z)
 	var current_height = cube_heights.get(cube_key, 0.0)
-	
+
 	# Check height limits
 	if current_height >= max_height:
 		# Try to find a different cube to raise
 		_try_raise_different_cube()
 		return
-	
+
 	# Calculate raise amount with variation
 	var actual_raise = raise_amount + randf_range(-height_variation, height_variation)
 	actual_raise = max(0.1, actual_raise)  # Ensure minimum raise
-	
-	# Apply the raise
-	cube.position.y += actual_raise
+
+	# Apply the raise via MultiMesh transform
+	var transform = mm.get_instance_transform(instance_idx)
+	transform.origin.y += actual_raise
+	mm.set_instance_transform(instance_idx, transform)
 	cube_heights[cube_key] = current_height + actual_raise
-	
+
 	# Visual feedback
 	if enable_visual_feedback:
-		_add_visual_effect(cube.global_position)
-	
+		_add_visual_effect(transform.origin)
+
 	# Audio feedback
 	if enable_sound_feedback and audio_player:
-		audio_player.global_position = cube.global_position
+		audio_player.global_position = transform.origin
 		audio_player.pitch_scale = 0.8 + (current_height / max_height) * 0.4  # Higher pitch for higher cubes
 		audio_player.play()
-	
+
 	print("HeightRandomness: Raised cube at (%d, %d) to height %.2f" % [x, z, cube_heights[cube_key]])
 
 func _try_raise_different_cube():
@@ -327,6 +342,21 @@ func _add_visual_effect(position: Vector3):
 	tween.parallel().tween_property(effect, "global_position", effect.global_position + Vector3(0, 1.0, 0), 0.3)
 	tween.parallel().tween_property(material, "albedo_color:a", 0.0, 0.3)
 	tween.tween_callback(effect.queue_free)
+
+# Find the instance index for a given grid position (cached)
+func _find_instance_index(structure_component, x: int, y: int, z: int) -> int:
+	var target_pos := Vector3i(x, y, z)
+
+	if _position_cache.has(target_pos):
+		return _position_cache[target_pos]
+
+	# Build cache on first miss
+	if _position_cache.is_empty():
+		var cube_positions = structure_component.cube_positions
+		for i in range(cube_positions.size()):
+			_position_cache[cube_positions[i]] = i
+
+	return _position_cache.get(target_pos, -1)
 
 # Place a cube at specific 3D coordinates
 func _place_cube_at(x: int, y: int, z: int):
