@@ -17,6 +17,7 @@ signal parallel_highlighted
 @export var highlight_fifth: bool = true
 @export var plaque_size: Vector3 = Vector3(0.8, 1.0, 0.05)
 
+var _xr_active: bool = false
 var _plaque_mesh: MeshInstance3D
 var _title_label: Label3D
 var _text_label: Label3D
@@ -40,6 +41,7 @@ const POSTULATE_TITLES = [
 ]
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	_create_plaque()
 	_create_labels()
 	_create_highlight()
@@ -162,6 +164,8 @@ func previous_postulate():
 	current_postulate = (current_postulate + 4) % 5
 
 func _input(event):
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			next_postulate()

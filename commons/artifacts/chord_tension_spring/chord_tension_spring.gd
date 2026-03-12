@@ -82,6 +82,7 @@ const PRESETS := {
 }
 
 # ── State ──
+var _xr_active: bool = false
 var node_pitches: Array[int] = [0, 4, 7, 11]  # Semitone values (C, E, G, B = Cmaj7)
 var node_positions: Array[Vector3] = []         # Current 3D positions
 var node_velocities: Array[Vector3] = []        # Physics velocities
@@ -120,6 +121,7 @@ signal chord_changed(pitches: Array[int], tension: float)
 signal node_moved(index: int, new_pitch: int)
 
 func _ready() -> void:
+	_xr_active = XRServer.primary_interface != null
 	_create_base_plate()
 	_create_nodes()
 	_create_spring_pairs()
@@ -288,6 +290,8 @@ func _create_preset_buttons() -> void:
 
 		var preset_name: String = button_names[i]
 		btn_area.input_event.connect(func(_cam, event, _pos, _normal, _shape):
+			if _xr_active:
+				return
 			if event is InputEventMouseButton and event.pressed:
 				_apply_preset(preset_name)
 		)
@@ -596,6 +600,8 @@ func _pitch_to_freq(semitone: int) -> float:
 # ═══════════════════════════════════════════
 
 func _on_node_input(index: int, event: InputEvent) -> void:
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		# Cycle pitch: click to change note
 		_cycle_node_pitch(index, 1 if event.button_index == MOUSE_BUTTON_LEFT else -1)
@@ -696,6 +702,8 @@ func _update_chord_name() -> void:
 # ═══════════════════════════════════════════
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _xr_active:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			# Number keys cycle node pitches

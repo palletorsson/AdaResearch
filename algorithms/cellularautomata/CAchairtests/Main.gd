@@ -24,11 +24,13 @@ var step_timer: float = 0.0
 var step_interval: float = 0.5
 
 # Camera
+var _xr_active: bool = false
 var camera_rotation: Vector2 = Vector2.ZERO
 var camera_distance: float = 40.0
 var camera_target: Vector3 = Vector3(10, 12, 10)
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	setup_camera()
 	setup_ui()
 	reset_simulation()
@@ -88,10 +90,12 @@ func update_ui():
 	strategy_label.text = "Strategy: " + strategy_names[strategy_type]
 
 func handle_camera(delta):
+	if _xr_active:
+		return
 	# WASD movement
 	var move_speed = 20.0
 	var move = Vector3.ZERO
-	
+
 	if Input.is_key_pressed(KEY_W):
 		move.z -= 1
 	if Input.is_key_pressed(KEY_S):
@@ -100,12 +104,12 @@ func handle_camera(delta):
 		move.x -= 1
 	if Input.is_key_pressed(KEY_D):
 		move.x += 1
-	
+
 	if move != Vector3.ZERO:
 		camera_target += move.normalized() * move_speed * delta
 		camera.position = camera_target + Vector3(0, 20, -30)
 		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
-	
+
 	# Mouse wheel zoom
 	if Input.is_action_just_released("ui_page_up"):
 		camera_distance = max(20.0, camera_distance - 5.0)
@@ -120,6 +124,8 @@ func update_camera_position():
 	camera.look_at(camera_target)
 
 func _unhandled_input(event):
+	if _xr_active:
+		return
 	# Camera rotation with right mouse button
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		camera_rotation.x -= event.relative.y * 0.01
