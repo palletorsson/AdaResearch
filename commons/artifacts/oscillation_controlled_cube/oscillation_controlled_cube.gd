@@ -11,7 +11,7 @@ class_name OscillationControlledCube
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var cube_size: float = 0.3
-@export var translation_scale: float = 0.5
+@export var translation_scale: float = 0.2
 @export var rotation_scale: float = 2.0
 @export var scale_range: Vector2 = Vector2(0.8, 1.2)
 @export var show_guides: bool = true
