@@ -586,9 +586,17 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 		# Don't freeze completely - we want them grabbable but stable
 	
 	# Remove the default mesh from grab_cube and replace with our CSG object
-	var mesh_instance = grab_cube.get_node("MeshInstance3D")
+	var mesh_instance = grab_cube.get_node_or_null("MeshInstance3D")
 	if mesh_instance:
 		mesh_instance.queue_free()
+
+	# Remove HighlightRing immediately — the replacement stability script won't have
+	# XRToolsPickable's highlight_updated signal, so HighlightRing would error.
+	# Must use free() not queue_free() to prevent _ready() from running.
+	var highlight_ring = grab_cube.get_node_or_null("HighlightRing")
+	if highlight_ring:
+		grab_cube.remove_child(highlight_ring)
+		highlight_ring.free()
 	
 	# Add the CSG object as a child of the grab_cube
 	grab_cube.add_child(csg_object)
@@ -602,23 +610,24 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 		box_shape.size = Vector3(2.0, 2.0, 2.0)  # Adjust based on your CSG object size
 		collision_shape.shape = box_shape
 	
-	# Add a script to handle stability
+	# Add a script to handle stability.
+	# Must include highlight_updated signal so HighlightRing child doesn't error.
 	var stability_script = GDScript.new()
 	stability_script.source_code = """
 extends RigidBody3D
 
+signal highlight_updated(pickable, enable)
+
 func _ready():
-	# Ensure the object stays stable when not grabbed
 	gravity_scale = 0.0
 	linear_damp = 5.0
 	angular_damp = 5.0
 
 func _integrate_forces(_state):
-	# Apply additional stability
 	if linear_velocity.length() > 0.1:
-		linear_velocity *= 0.9  # Gradually slow down
+		linear_velocity *= 0.9
 	if angular_velocity.length() > 0.1:
-		angular_velocity *= 0.9  # Gradually slow down rotation
+		angular_velocity *= 0.9
 """
 	grab_cube.set_script(stability_script)
 	

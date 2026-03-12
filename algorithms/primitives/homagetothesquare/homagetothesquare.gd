@@ -9,9 +9,9 @@ const PLANE_SIZE = 10.0
 # Scale factor
 var scale_factor = 0.5
 
-# Translation offset - 0.4m to sit close to the 1m cube wall (at 0.5m)
-var x_offset = 0.5
-var z_offset = 0.4
+# Center the painting at the origin for proper grid placement
+var x_offset = 0.0
+var z_offset = 0.0
 
 # Colors from the Albers image (from outer to inner)
 var square_colors = [
@@ -45,21 +45,15 @@ func create_frame():
 	var outer_size = square_sizes[0] * PLANE_SIZE * 0.5 * scale_factor
 	var frame_size = outer_size + 0.15  # Slight border around painting
 	
-	# Frame depth: from 0.399 to 0.6 = 0.201m
-	var frame_front = 0.399  # Just behind the painting at 0.4
-	var frame_back = 0.6     # Into the wall
-	var frame_depth = frame_back - frame_front  # 0.201m
-	
+	# Frame depth behind the painting surface
+	var frame_depth = 0.1
+
 	var box = BoxMesh.new()
 	box.size = Vector3(frame_size, frame_size, frame_depth)
 	frame.mesh = box
-	
-	# Position frame: center at midpoint between front and back
-	var frame_center_z = (frame_front + frame_back) / 2.0  # 0.4995
-	frame.position = Vector3(x_offset, 0, frame_center_z)
-	
-	# Match the painting rotation
-	frame.rotation_degrees = Vector3(0, 90, 0)
+
+	# Position frame behind the painting (painting faces Z+, frame sits at Z-)
+	frame.position = Vector3(x_offset, 0, -(frame_depth * 0.5 + 0.005))
 	
 	# Dark wood frame material
 	var mat = StandardMaterial3D.new()
@@ -127,7 +121,7 @@ func create_albers_plane():
 		indices.append(base + 0)
 		indices.append(base + 1)
 		indices.append(base + 2)
-		
+
 		# Second triangle (bottom-left, top-right, top-left)
 		indices.append(base + 0)
 		indices.append(base + 2)
@@ -158,5 +152,4 @@ func create_albers_plane():
 	
 	mesh_instance.material_override = material
 	
-	# Rotate plane to face viewer better
-	mesh_instance.rotation_degrees = Vector3(0, 90, 0)
+	# Painting faces Z- direction (toward the viewer in the grid)

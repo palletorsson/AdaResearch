@@ -185,8 +185,8 @@ func _draw_component_waves() -> void:
 			var y = harmonic_amplitudes[h] * sin(phase * (h + 1))
 
 			im.surface_set_color(color)
-			# Offset each harmonic vertically for visibility
-			im.surface_add_vertex(Vector3(x, y * 0.3 - 0.5 - h * 0.25, 0.1))
+			# Offset each harmonic vertically — tighter spacing to keep compact
+			im.surface_add_vertex(Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1))
 
 		im.surface_end()
 
