@@ -4,7 +4,7 @@
 extends Node3D
 
 @export var panel_size: Vector2 = Vector2(4.0, 4.0)
-@export var panel_spacing: float = 2.0
+@export var panel_spacing: float = 3.0
 
 func _ready() -> void:
 	_create_environment()
@@ -46,9 +46,9 @@ func _create_environment() -> void:
 
 	# Camera — overhead angled view
 	var cam := Camera3D.new()
-	cam.position = Vector3(10, 12, 14)
+	cam.position = Vector3(6, 8, 10)
 	cam.rotation_degrees = Vector3(-45, 0, 0)
-	cam.fov = 50
+	cam.fov = 55
 	add_child(cam)
 
 
@@ -58,7 +58,7 @@ func _create_environment() -> void:
 func _create_floor() -> void:
 	var floor_mesh := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(40, 30)
+	plane.size = Vector2(14, 12)
 	floor_mesh.mesh = plane
 
 	var mat := StandardMaterial3D.new()
@@ -113,7 +113,7 @@ func _spawn_motif_panel(spec: Dictionary, pos: Vector3) -> void:
 	tiling.has_border = false
 	tiling.has_corners = false
 	tiling.has_medallion = false
-	tiling.cell_size = 0.04
+	tiling.cell_size = 0.12
 	tiling.position = pos
 	add_child(tiling)
 
@@ -183,7 +183,7 @@ func _spawn_composed_floor(spec: Dictionary, pos: Vector3) -> void:
 	tiling.has_border = true
 	tiling.has_corners = true
 	tiling.has_medallion = false
-	tiling.cell_size = 0.04
+	tiling.cell_size = 0.12
 	tiling.position = pos
 	add_child(tiling)
 
