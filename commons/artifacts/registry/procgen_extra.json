@@ -113,6 +113,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"genetic_programming": {
+			"lookup_name": "genetic_programming",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+			"name": "Genetic Programming",
+			"description": "Genetic programming interface for evolving 3D shapes — populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": ["genetic_programming", "evolution", "fitness", "crossover", "mutation", "3d_shape", "growth"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

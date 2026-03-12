@@ -44,19 +44,19 @@ func _create_magic_carpet():
 	
 	magic_carpet.add_child(shape)
 	
-	# Debug Mesh (Visual Confirmation)
-	# TODO: Remove or make invisible once confirmed working
+	# Debug Mesh (Visual Confirmation) — hidden by default
 	var mesh_inst = MeshInstance3D.new()
+	mesh_inst.visible = false
 	var mesh = CylinderMesh.new()
 	mesh.top_radius = 1.5
 	mesh.bottom_radius = 1.5
 	mesh.height = 0.05
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(1.0, 0.0, 0.0, 0.3) # Translucent Red
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	
+
 	mesh_inst.mesh = mesh
 	mesh_inst.material_override = mat
 	magic_carpet.add_child(mesh_inst)

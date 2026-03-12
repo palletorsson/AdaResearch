@@ -1745,6 +1745,19 @@
 				"proceduralgeneration"
 			],
 			"sequence": "randomness"
+		},
+		"bubble_particles": {
+			"name": "Bubble Particles",
+			"lookup_name": "bubble_particles",
+			"description": "Movement-based procedural bubble system — bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/bubbleparticles/bubble_particles.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness"
 		}
 	}
 }

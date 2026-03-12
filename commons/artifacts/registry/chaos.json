@@ -44,6 +44,20 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"mandelbrot_dive": {
+			"lookup_name": "mandelbrot_dive",
+			"scene": "res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn",
+			"name": "Mandelbrot Dive",
+			"description": "GPU-accelerated Mandelbrot set on a 1x1m table. Infinite zoom into self-similar fractal structure. 5 color schemes, auto-dive mode to famous coordinates. The boundary between order and chaos, infinitely complex.",
+			"qfep_connection": "The Mandelbrot boundary is exactly lambda_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
+			"category": "fractals",
+			"complexity": "intermediate",
+			"tags": ["mandelbrot", "fractal", "self_similarity", "infinite_detail", "shader", "interactive", "zoom"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["fractals"]
 		}
 	}
 }
+

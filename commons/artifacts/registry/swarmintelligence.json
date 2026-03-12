@@ -84,6 +84,18 @@
 			"map_sequences": [],
 			"sequence": "swarmintelligence"
 		},
+		"boids_aquarium": {
+			"name": "Boids Aquarium",
+			"lookup_name": "boids_aquarium",
+			"description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.",
+			"scene": "res://commons/artifacts/boids_aquarium/boids_aquarium.tscn",
+			"category": "emergence",
+			"tags": ["boids", "flocking", "emergence", "swarm", "reynolds", "collective_behavior", "self_organization"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["swarmintelligence"],
+			"sequence": "swarmintelligence"
+		},
 		"stigmergy_grid": {
 			"name": "Stigmergy Grid",
 			"lookup_name": "stigmergy_grid",
