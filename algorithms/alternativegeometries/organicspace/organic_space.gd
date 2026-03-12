@@ -40,19 +40,22 @@ func setup_components():
 
 func generate_organic_space():
 	print("Generating organic VR space...")
-	
+
 	# Generate base shell using marching cubes-style approach
 	generate_base_shell()
-	
+
 	# Add organic tunnels and chambers
 	generate_tunnel_system()
-	
+
 	# Create surface details and textures
 	generate_surface_details()
-	
+
+	# Bake CSG to static meshes (CSG is expensive to keep at runtime)
+	_bake_csg_to_meshes()
+
 	# Add atmospheric lighting
 	setup_atmospheric_lighting()
-	
+
 	# Add interactive elements
 	generate_interactive_elements()
 
@@ -268,6 +271,31 @@ func create_organic_growths():
 			growth.add_child(sub_growth)
 		
 		environment_container.add_child(growth)
+
+func _bake_csg_to_meshes():
+	"""Replace CSG nodes with baked static meshes for runtime performance.
+	CSG boolean operations are expensive to keep alive; baking converts
+	the computed geometry into lightweight MeshInstance3D nodes."""
+	var csg_roots: Array[CSGShape3D] = []
+	for child in environment_container.get_children():
+		if child is CSGShape3D:
+			csg_roots.append(child)
+
+	for csg_root in csg_roots:
+		# Force CSG to compute its final mesh
+		csg_root._update_shape()  # Ensure boolean tree is resolved
+		var baked_meshes := csg_root.get_meshes()
+		if baked_meshes.size() >= 2:
+			# get_meshes() returns [Transform3D, Mesh, Transform3D, Mesh, ...]
+			var mesh_node := MeshInstance3D.new()
+			mesh_node.transform = csg_root.transform * (baked_meshes[0] as Transform3D)
+			mesh_node.mesh = baked_meshes[1] as Mesh
+			# Preserve material from the CSG root if set
+			if csg_root.material:
+				mesh_node.material_override = csg_root.material
+			environment_container.add_child(mesh_node)
+		# Remove the CSG tree — no longer needed
+		csg_root.queue_free()
 
 func setup_atmospheric_lighting():
 	"""Create atmospheric lighting effects"""
