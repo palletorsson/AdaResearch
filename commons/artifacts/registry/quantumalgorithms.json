@@ -1,0 +1,16 @@
+{
+	"artifacts": {
+		"quantum_superposition": {
+			"name": "Quantum Superposition",
+			"lookup_name": "quantum_superposition",
+			"description": "Visualization of quantum superposition showing qubits in simultaneous states before measurement collapse.",
+			"scene": "res://algorithms/quantumalgorithms/superposition/quantum_superposition.tscn",
+			"category": "quantumalgorithms",
+			"tags": ["quantum", "superposition", "qubit", "measurement"],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "quantumalgorithms"
+		}
+	}
+}

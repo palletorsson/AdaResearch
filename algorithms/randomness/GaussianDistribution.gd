@@ -28,6 +28,13 @@ var center_z: float
 var timer: Timer
 var is_running: bool = false
 
+# Box-Muller spare value (persists across calls)
+var _has_spare: bool = false
+var _spare: float = 0.0
+
+# Position lookup cache (avoids O(n) search per step)
+var _position_cache: Dictionary = {}
+
 # Signals
 signal algorithm_step_complete()
 signal algorithm_finished()
@@ -152,18 +159,15 @@ func set_grid_reference(grid_ref):
 
 func _gaussian_random(mean: float, std_dev: float) -> float:
 	# Box-Muller transform to generate Gaussian random numbers
-	var has_spare = false
-	var spare = 0.0
-	
-	if has_spare:
-		has_spare = false
-		return spare * std_dev + mean
-	
-	has_spare = true
-	var u = randf_range(0.0, 1.0)
-	var v = randf_range(0.0, 1.0)
-	var mag = std_dev * sqrt(-2.0 * log(u))
-	spare = mag * cos(2.0 * PI * v)
+	if _has_spare:
+		_has_spare = false
+		return _spare * std_dev + mean
+
+	_has_spare = true
+	var u := maxf(randf(), 1e-10)  # Avoid log(0)
+	var v := randf()
+	var mag := std_dev * sqrt(-2.0 * log(u))
+	_spare = mag * cos(2.0 * PI * v)
 	return mag * sin(2.0 * PI * v) + mean
 
 func _raise_cube(x: int, z: int):
@@ -194,16 +198,20 @@ func _place_cube_at(_x: int, y: int, z: int):
 	# Cubes need to exist in the initial structure layout
 	pass
 
-# Find the instance index for a given grid position
+# Find the instance index for a given grid position (cached)
 func _find_instance_index(structure_component, x: int, y: int, z: int) -> int:
-	var cube_positions = structure_component.cube_positions
-	var target_pos = Vector3i(x, y, z)
+	var target_pos := Vector3i(x, y, z)
 
-	for i in range(cube_positions.size()):
-		if cube_positions[i] == target_pos:
-			return i
+	if _position_cache.has(target_pos):
+		return _position_cache[target_pos]
 
-	return -1
+	# Build cache on first miss
+	if _position_cache.is_empty():
+		var cube_positions = structure_component.cube_positions
+		for i in range(cube_positions.size()):
+			_position_cache[cube_positions[i]] = i
+
+	return _position_cache.get(target_pos, -1)
 
 # Get current region bounds for external access
 func get_region_bounds() -> Dictionary:
