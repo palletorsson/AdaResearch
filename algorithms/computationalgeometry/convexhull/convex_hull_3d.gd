@@ -61,6 +61,11 @@ var camera_pivot: Node3D
 var camera_distance: float = 25.0
 var camera_rotation: Vector2 = Vector2(-0.4, 0.5)
 
+# --- VR Support ---
+# In VR the headset IS the camera, so we must not create or move a camera.
+# Instead we rotate/scale the content node so the user can inspect the model.
+var _xr_active: bool = false
+
 # --- Materials ---
 var included_point_material: StandardMaterial3D
 var excluded_point_material: StandardMaterial3D
@@ -94,6 +99,7 @@ class Face:
 #=============================================================================
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	setup_materials()
 	generate_and_visualize()
 
@@ -104,7 +110,20 @@ func _process(delta):
 	if temporal_boundaries and not is_computing:
 		update_temporal_deformation(delta)
 
+# Dual input path:
+#   Desktop — mouse orbit/zoom moves the camera around the model (original behaviour).
+#   VR      — headset is the camera; we rotate/scale the _content_node instead so
+#             the model moves around the user. Mouse events are ignored in VR.
 func _input(event):
+	if _xr_active:
+		# In VR, skip mouse-based camera control entirely.
+		# The headset provides the camera; XR controller input (if wired up
+		# externally) can call rotate_model() / scale_model() on this node.
+		if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
+			generate_and_visualize()
+		return
+
+	# --- Desktop mouse orbit / zoom ---
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			get_viewport().set_input_as_handled()
@@ -114,13 +133,13 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance = min(100.0, camera_distance + 1.0)
 			update_camera()
-			
+
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		camera_rotation.x -= event.relative.y * 0.01
 		camera_rotation.y -= event.relative.x * 0.01
 		camera_rotation.x = clamp(camera_rotation.x, -PI / 2.1, PI / 2.1)
 		update_camera()
-		
+
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
 		generate_and_visualize()
 
@@ -509,6 +528,14 @@ func setup_environment():
 	add_child(light)
 
 func setup_camera():
+	if _xr_active:
+		# VR: don't create a camera — the headset provides one.
+		# We still create the pivot so update_camera() doesn't crash,
+		# but it stays at origin and is unused.
+		camera_pivot = Node3D.new()
+		camera_pivot.name = "CameraPivot"
+		add_child(camera_pivot)
+		return
 	var camera = Camera3D.new()
 	camera_pivot = Node3D.new()
 	camera_pivot.name = "CameraPivot"
@@ -590,3 +617,17 @@ func create_point_visuals():
 		mesh_inst.position = p
 		point_meshes.append(mesh_inst)
 		add_child(mesh_inst)
+
+#=============================================================================
+#  VR Model Manipulation (called by external XR controller scripts)
+#=============================================================================
+
+## Rotate the entire artifact around the user. delta is a Vector2 (pitch, yaw) in radians.
+func rotate_model(delta: Vector2) -> void:
+	rotation.y += delta.y
+	rotation.x = clamp(rotation.x + delta.x, -PI / 2.0, PI / 2.0)
+
+## Uniformly scale the artifact (for VR pinch-zoom). factor is a multiplier (e.g. 1.1 to grow).
+func scale_model(factor: float) -> void:
+	var s = clamp(scale.x * factor, 0.1, 10.0)
+	scale = Vector3(s, s, s)

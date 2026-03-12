@@ -4,8 +4,10 @@ extends Node3D
 
 var melting_geometry: Node3D
 var heat_source_marker: MeshInstance3D
+var _xr_active: bool = false
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	setup_scene()
 	setup_melting_geometry()
 	setup_heat_source_marker()
@@ -61,6 +63,8 @@ func setup_lighting():
 	light.rotation_degrees = Vector3(-45, 45, 0)
 
 func _input(event):
+	if _xr_active and event is InputEventMouseButton:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			# Add heat source at clicked position

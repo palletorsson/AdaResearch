@@ -6,6 +6,7 @@ extends Node3D
 
 var grid: FlowGrid
 var agents = []
+var _xr_active: bool = false
 
 var sequence_timer: float = 0.0
 var sequence_mode: int = 0
@@ -13,6 +14,8 @@ const DURATION = 10.0
 var current_target = Vector2i(20, 20)
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
+
 	# 1. Setup Grid
 	grid = FlowGrid.new(40, 40, 1.0)
 	
@@ -97,6 +100,9 @@ func update_field(target_x: int, target_y: int):
 	visualizer.update_visuals()
 
 func _unhandled_input(event):
+	# VR: interaction handled by XR controller raycasts
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		var result = raycast_from_mouse(event.position)
 		if result:

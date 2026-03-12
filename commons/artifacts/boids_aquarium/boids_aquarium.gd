@@ -59,6 +59,10 @@ var _multimesh_instance: MultiMeshInstance3D
 var _info_label: Label3D
 var _created_nodes: Array[Node] = []
 
+# Spatial hash grid for O(n) neighbor lookup
+var _grid: Dictionary = {}  # Vector3i -> Array[int] (boid indices)
+var _cell_size: float = 0.15  # Will be set to perception_radius
+
 # VR Controls
 var _separation_slider: Node
 var _alignment_slider: Node
@@ -315,57 +319,85 @@ func _process(delta):
 	_update_boids(delta)
 	_update_multimesh()
 
+func _pos_to_cell(pos: Vector3) -> Vector3i:
+	return Vector3i(
+		floori(pos.x / _cell_size),
+		floori(pos.y / _cell_size),
+		floori(pos.z / _cell_size)
+	)
+
+func _rebuild_spatial_grid():
+	_grid.clear()
+	for i in range(_boids.size()):
+		var cell = _pos_to_cell(_boids[i].position)
+		if not _grid.has(cell):
+			_grid[cell] = []
+		_grid[cell].append(i)
+
 func _update_boids(delta):
 	var half = tank_size * 0.45
-	
+	_cell_size = perception_radius if perception_radius > 0.001 else 0.15
+	var perception_sq = perception_radius * perception_radius
+	var min_dist_sq = 0.001 * 0.001
+
+	# Build spatial hash grid: each boid bucketed into its cell
+	_rebuild_spatial_grid()
+
 	for i in range(_boids.size()):
 		var boid = _boids[i]
 		var separation = Vector3.ZERO
 		var alignment = Vector3.ZERO
 		var cohesion = Vector3.ZERO
 		var neighbors = 0
-		
-		# Check neighbors
-		for j in range(_boids.size()):
-			if i == j:
-				continue
-			var other = _boids[j]
-			var dist = boid.position.distance_to(other.position)
-			
-			if dist < perception_radius:
-				neighbors += 1
-				
-				# Separation
-				if dist > 0.001:
-					var diff = boid.position - other.position
-					separation += diff / (dist * dist)
-				
-				# Alignment
-				alignment += other.velocity
-				
-				# Cohesion
-				cohesion += other.position
-		
+
+		# Only check boids in neighboring cells (3x3x3 neighborhood)
+		var center_cell = _pos_to_cell(boid.position)
+		for dx in range(-1, 2):
+			for dy in range(-1, 2):
+				for dz in range(-1, 2):
+					var check_cell = Vector3i(center_cell.x + dx, center_cell.y + dy, center_cell.z + dz)
+					if not _grid.has(check_cell):
+						continue
+					for j in _grid[check_cell]:
+						if i == j:
+							continue
+						var other = _boids[j]
+						var diff = boid.position - other.position
+						var dist_sq = diff.length_squared()
+
+						if dist_sq < perception_sq:
+							neighbors += 1
+
+							# Separation (uses dist_sq directly: diff / dist^2 = diff / dist_sq)
+							if dist_sq > min_dist_sq:
+								separation += diff / dist_sq
+
+							# Alignment
+							alignment += other.velocity
+
+							# Cohesion
+							cohesion += other.position
+
 		if neighbors > 0:
 			alignment /= neighbors
 			alignment = (alignment - boid.velocity) * alignment_weight
-			
+
 			cohesion /= neighbors
 			cohesion = (cohesion - boid.position) * cohesion_weight
-			
+
 			separation *= separation_weight
-		
+
 		# Apply forces
 		var acceleration = separation + alignment + cohesion
 		boid.velocity += acceleration * delta
-		
-		# Limit speed
-		if boid.velocity.length() > max_speed:
+
+		# Limit speed (use length_squared to avoid sqrt when possible)
+		if boid.velocity.length_squared() > max_speed * max_speed:
 			boid.velocity = boid.velocity.normalized() * max_speed
-		
+
 		# Move
 		boid.position += boid.velocity * delta
-		
+
 		# Boundary bounce
 		if abs(boid.position.x) > half.x:
 			boid.position.x = signf(boid.position.x) * half.x
