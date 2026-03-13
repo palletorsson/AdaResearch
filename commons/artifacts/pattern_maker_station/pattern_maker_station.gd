@@ -36,6 +36,16 @@ const COL_GRID_LINE := Color(0.3, 0.3, 0.35, 0.8)
 @export var panel_height: float = 0.9   # XY panel height
 @export var carpet_world_size: float = 4.0  # Carpet side length in meters
 @export var carpet_repeats: int = 10    # How many domain repeats across carpet
+@export var use_gpu_tiling: bool = true # Use GPU shader for carpet tiling (faster + grout/distort)
+@export var grout_width: float = 0.02   # Gap between tiles (GPU mode only)
+@export var noise_distort: float = 0.0  # Organic irregularity (GPU mode only)
+# Aging & Weathering (GPU mode only)
+@export var wear_amount: float = 0.0    # Edge erosion + surface scuffing
+@export var dust_amount: float = 0.0    # Accumulated dust/dirt in crevices
+@export var fade_amount: float = 0.0    # Sun/UV color fading (desaturation)
+@export var crack_density: float = 0.0  # Micro-fractures and crazing
+@export var stain_amount: float = 0.0   # Water/mineral staining
+@export var chip_amount: float = 0.0    # Missing tesserae / chipped areas
 
 # ── Groups ───────────────────────────────────────────────────────────
 const GROUP_ORDER: Array = [
@@ -61,7 +71,9 @@ var _panel_root: Node3D
 var _cell_meshes: Array = []        # 2D array of MeshInstance3D
 var _cell_materials: Array = []     # 2D array of StandardMaterial3D
 var _carpet_mesh: MeshInstance3D
-var _carpet_material: StandardMaterial3D
+var _carpet_material: StandardMaterial3D  # CPU fallback
+var _carpet_shader_material: ShaderMaterial  # GPU tiling
+var _domain_texture: ImageTexture  # Small domain texture for GPU shader
 var _group_label: Label3D
 var _size_label: Label3D
 var _palette_indicators: Array[MeshInstance3D] = []
@@ -109,6 +121,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("wallpaper_group"):
 		_group_index = clampi(int(config_data["wallpaper_group"]), 0, GROUP_ORDER.size() - 1)
 		_current_group = GROUP_ORDER[_group_index]
+	if config_data.has("use_gpu_tiling"):
+		use_gpu_tiling = bool(config_data["use_gpu_tiling"])
+	if config_data.has("grout_width"):
+		grout_width = clampf(float(config_data["grout_width"]), 0.0, 0.1)
+	if config_data.has("noise_distort"):
+		noise_distort = clampf(float(config_data["noise_distort"]), 0.0, 0.1)
+	if config_data.has("wear_amount"):
+		wear_amount = clampf(float(config_data["wear_amount"]), 0.0, 1.0)
+	if config_data.has("dust_amount"):
+		dust_amount = clampf(float(config_data["dust_amount"]), 0.0, 1.0)
+	if config_data.has("fade_amount"):
+		fade_amount = clampf(float(config_data["fade_amount"]), 0.0, 1.0)
+	if config_data.has("crack_density"):
+		crack_density = clampf(float(config_data["crack_density"]), 0.0, 1.0)
+	if config_data.has("stain_amount"):
+		stain_amount = clampf(float(config_data["stain_amount"]), 0.0, 1.0)
+	if config_data.has("chip_amount"):
+		chip_amount = clampf(float(config_data["chip_amount"]), 0.0, 1.0)
 
 # ═══════════════════════════════════════════════════════════════════
 # DATA
@@ -367,11 +397,38 @@ func _build_carpet() -> void:
 	_carpet_mesh.rotation_degrees.x = -90
 	_carpet_mesh.position = Vector3(0, 0.005, 0)
 
-	_carpet_material = StandardMaterial3D.new()
-	_carpet_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	_carpet_material.roughness = 0.9
-	_carpet_material.metallic = 0.0
-	_carpet_mesh.material_override = _carpet_material
+	if use_gpu_tiling:
+		# GPU path: shader does all tiling on the GPU
+		var shader := load("res://commons/resourses/shaders/wallpaper_tile.gdshader") as Shader
+		if shader:
+			_carpet_shader_material = ShaderMaterial.new()
+			_carpet_shader_material.shader = shader
+			_carpet_shader_material.set_shader_parameter("tile_scale", float(carpet_repeats))
+			_carpet_shader_material.set_shader_parameter("wallpaper_group", _group_index)
+			_carpet_shader_material.set_shader_parameter("grout_width", grout_width)
+			_carpet_shader_material.set_shader_parameter("grout_color", Vector3(0.1, 0.1, 0.1))
+			_carpet_shader_material.set_shader_parameter("grout_softness", 0.005)
+			_carpet_shader_material.set_shader_parameter("roughness", 0.9)
+			_carpet_shader_material.set_shader_parameter("noise_distort", noise_distort)
+			# Aging & Weathering
+			_carpet_shader_material.set_shader_parameter("wear_amount", wear_amount)
+			_carpet_shader_material.set_shader_parameter("dust_amount", dust_amount)
+			_carpet_shader_material.set_shader_parameter("fade_amount", fade_amount)
+			_carpet_shader_material.set_shader_parameter("crack_density", crack_density)
+			_carpet_shader_material.set_shader_parameter("stain_amount", stain_amount)
+			_carpet_shader_material.set_shader_parameter("chip_amount", chip_amount)
+			_carpet_mesh.material_override = _carpet_shader_material
+		else:
+			push_warning("[PatternMaker] GPU shader not found, falling back to CPU tiling")
+			use_gpu_tiling = false
+
+	if not use_gpu_tiling:
+		# CPU fallback: build full tiled texture per update
+		_carpet_material = StandardMaterial3D.new()
+		_carpet_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		_carpet_material.roughness = 0.9
+		_carpet_material.metallic = 0.0
+		_carpet_mesh.material_override = _carpet_material
 
 	add_child(_carpet_mesh)
 
@@ -508,7 +565,30 @@ func _refresh_grid_visuals() -> void:
 # CARPET TEXTURE
 # ═══════════════════════════════════════════════════════════════════
 
+func _update_domain_texture() -> void:
+	## Create a small NxN texture from the grid data and palette for GPU shader.
+	var image := Image.create(tile_size, tile_size, false, Image.FORMAT_RGBA8)
+	for y in tile_size:
+		for x in tile_size:
+			var color_idx: int = _grid_data[y][x] if y < _grid_data.size() and x < _grid_data[y].size() else 0
+			var color: Color = PALETTE[color_idx] if color_idx < PALETTE.size() else Color.WHITE
+			image.set_pixel(x, y, color)
+	if _domain_texture:
+		_domain_texture.update(image)
+	else:
+		_domain_texture = ImageTexture.create_from_image(image)
+	# Nearest-neighbor filtering for crisp pixel art tiles
+	_carpet_shader_material.set_shader_parameter("domain_texture", _domain_texture)
+
 func _update_carpet() -> void:
+	if use_gpu_tiling and _carpet_shader_material:
+		# GPU path: update domain texture + uniforms (fast!)
+		_update_domain_texture()
+		_carpet_shader_material.set_shader_parameter("wallpaper_group", _group_index)
+		_carpet_shader_material.set_shader_parameter("tile_scale", float(carpet_repeats))
+		return
+
+	# CPU fallback: rebuild full tiled texture
 	var tex_size: int = carpet_repeats * tile_size
 	if tex_size <= 0:
 		return
