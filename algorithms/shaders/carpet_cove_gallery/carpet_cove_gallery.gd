@@ -50,7 +50,7 @@ var _cove_count := 0
 
 func _ready() -> void:
 	_rng.seed = 77
-	_cove_scene = load("res://algorithms/shaders/carpet_cove_gallery/cove_display.tscn")
+	_cove_scene = load("res://commons/artifacts/cove_display/cove_display.tscn")
 	_build_floor()
 	_build_cove_rows()
 	_build_lighting()

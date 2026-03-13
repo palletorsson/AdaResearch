@@ -227,6 +227,42 @@
 			"map_ready": false,
 			"map_sequences": [],
 			"sequence": "shaders"
+		},
+		"cove_display": {
+			"name": "Cove Display",
+			"lookup_name": "cove_display",
+			"description": "Cyclorama/infinity cove surface — curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
+			"scene": "res://commons/artifacts/cove_display/cove_display.tscn",
+			"category": "shaders",
+			"tags": ["cove", "cyclorama", "surface_tool", "display", "shader", "configurable", "pattern"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration", "mosaicanalysis"],
+			"sequence": "patterngeneration"
+		},
+		"pixel_carpet_gallery": {
+			"name": "Pixel Carpet Gallery",
+			"lookup_name": "pixel_carpet_gallery",
+			"description": "30m corridor with 69 procedural carpet panels on floor, walls, and ceiling. Art to Eat-inspired installation using wallpaper_tile shader with 17 groups and 10 neon palettes.",
+			"scene": "res://algorithms/shaders/pixel_carpet_gallery/pixel_carpet_gallery.tscn",
+			"category": "shaders",
+			"tags": ["gallery", "carpet", "wallpaper_groups", "installation", "art_to_eat", "corridor"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
+		},
+		"carpet_cove_gallery": {
+			"name": "Carpet Cove Gallery",
+			"lookup_name": "carpet_cove_gallery",
+			"description": "Grid-based gallery of 24 cyclorama cove displays with wallpaper patterns. Coves in facing rows with 3m aisle, each showing a unique pattern on curved surfaces.",
+			"scene": "res://algorithms/shaders/carpet_cove_gallery/carpet_cove_gallery.tscn",
+			"category": "shaders",
+			"tags": ["gallery", "cove", "cyclorama", "wallpaper_groups", "installation", "grid_aligned"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
 		}
 	}
 }
