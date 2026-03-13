@@ -98,13 +98,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_bloom_environment()
 	create_bloom_objects()
 	create_bloom_particles()
 	start_bloom_animations()
 
-func setup_bloom_environment():
+func setup_bloom_environment() -> void:
 	# Create environment with bloom post-processing
 	bloom_environment = Environment.new()
 	bloom_environment.background_mode = Environment.BG_SKY
@@ -138,7 +138,7 @@ func setup_bloom_environment():
 	if camera_env:
 		camera_env.environment = bloom_environment
 
-func create_bloom_objects():
+func create_bloom_objects() -> void:
 	# Create various glowing geometric objects
 	var geometries = [
 		SphereMesh.new(),
@@ -213,7 +213,7 @@ func create_bloom_objects():
 		bloom_objects.append(mesh_instance)
 		bloom_materials.append(material)
 
-func create_bloom_particles():
+func create_bloom_particles() -> void:
 	# Create floating bright particles for additional bloom sources
 	var particles = GPUParticles3D.new()
 	particles.emitting = true
@@ -260,14 +260,14 @@ func create_bloom_particles():
 	
 	add_child(particles)
 
-func start_bloom_animations():
+func start_bloom_animations() -> void:
 	# Animate bloom objects
 	animate_bloom_objects()
 	
 	# Animate environment bloom settings
 	animate_bloom_settings()
 
-func animate_bloom_objects():
+func animate_bloom_objects() -> void:
 	for i in range(bloom_objects.size()):
 		var obj = bloom_objects[i]
 		
@@ -292,7 +292,7 @@ func animate_bloom_objects():
 			0.0, PI * 2.0, float_speed
 		)
 
-func animate_bloom_settings():
+func animate_bloom_settings() -> void:
 	# Animate global bloom intensity
 	var bloom_tween = create_tween()
 	bloom_tween.set_loops()
@@ -329,7 +329,7 @@ func _process(_delta):
 	# Optional: Update bloom based on user input or other factors
 	update_dynamic_bloom()
 
-func update_dynamic_bloom():
+func update_dynamic_bloom() -> void:
 	# Example: Pulse bloom with time
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 0.5) * 0.2 + 1.0
 	
@@ -340,7 +340,7 @@ func update_dynamic_bloom():
 		# material.set_shader_parameter("emission_intensity", base_emission * time_factor)
 
 # Function to add more bloom objects dynamically
-func add_bloom_object(position: Vector3, color: Color, intensity: float = 3.0):
+func add_bloom_object(position: Vector3, color: Color, intensity: float = 3.0) -> void:
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.6
 	sphere_mesh.height = 1.2
@@ -367,7 +367,7 @@ func add_bloom_object(position: Vector3, color: Color, intensity: float = 3.0):
 	bloom_materials.append(material)
 
 # Preset bloom configurations
-func set_bloom_preset(preset: String):
+func set_bloom_preset(preset: String) -> void:
 	match preset:
 		"subtle":
 			bloom_environment.glow_intensity = 0.8
@@ -391,3 +391,9 @@ func set_bloom_preset(preset: String):
 			bloom_environment.glow_intensity = bloom_intensity
 			bloom_environment.glow_bloom = bloom_threshold
 			bloom_environment.glow_strength = 1.2
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

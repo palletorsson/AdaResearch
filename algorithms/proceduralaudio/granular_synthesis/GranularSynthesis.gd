@@ -109,14 +109,14 @@ class Grain:
 	var amplitude: float
 	var source_position: float
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	initialize_waveform_data()
 	initialize_synthesis_parameters()
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	grain_timer += delta
 	synthesis_timer += delta
@@ -130,7 +130,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func initialize_waveform_data():
+func initialize_waveform_data() -> void:
 	# Create sample waveform data
 	waveform_data.clear()
 	for i in range(200):
@@ -138,14 +138,14 @@ func initialize_waveform_data():
 		var sample = sin(t * TAU * 3) + sin(t * TAU * 7) * 0.5 + sin(t * TAU * 11) * 0.25
 		waveform_data.append(sample)
 
-func initialize_synthesis_parameters():
+func initialize_synthesis_parameters() -> void:
 	grain_size = 0.08
 	grain_density = 12.0
 	grain_pitch = 1.0
 	grain_position = 0.0
 	grain_scatter = 0.03
 
-func update_grain_parameters():
+func update_grain_parameters() -> void:
 	# Animate parameters over time
 	grain_size = 0.05 + sin(time * 0.5) * 0.03
 	grain_density = 8.0 + cos(time * 0.7) * 4.0
@@ -153,7 +153,7 @@ func update_grain_parameters():
 	grain_position = fmod(time * 0.1, 1.0)
 	grain_scatter = 0.02 + sin(time * 1.2) * 0.01
 
-func spawn_new_grains(delta: float):
+func spawn_new_grains(delta: float) -> void:
 	# Calculate grain spawn rate
 	var spawn_rate = grain_density * delta
 	var grains_to_spawn = int(spawn_rate)
@@ -166,7 +166,7 @@ func spawn_new_grains(delta: float):
 	for i in range(grains_to_spawn):
 		spawn_grain()
 
-func spawn_grain():
+func spawn_grain() -> void:
 	var grain = Grain.new()
 	
 	# Random position in grain cluster
@@ -189,7 +189,7 @@ func spawn_grain():
 	
 	active_grains.append(grain)
 
-func animate_existing_grains(delta: float):
+func animate_existing_grains(delta: float) -> void:
 	var container = $GrainCluster
 	
 	# Clear previous grain visualization
@@ -236,7 +236,7 @@ func animate_existing_grains(delta: float):
 		
 		i += 1
 
-func visualize_waveform_source():
+func visualize_waveform_source() -> void:
 	var container = $WaveformSource
 	
 	# Clear previous visualization
@@ -300,7 +300,7 @@ func visualize_waveform_source():
 	
 	container.add_child(read_head)
 
-func show_granular_parameters():
+func show_granular_parameters() -> void:
 	var container = $GrainParameters
 	
 	# Clear previous visualization
@@ -346,7 +346,7 @@ func show_granular_parameters():
 		
 		container.add_child(label)
 
-func demonstrate_output_synthesis():
+func demonstrate_output_synthesis() -> void:
 	var container = $OutputSynthesis
 	
 	# Clear previous visualization
@@ -404,7 +404,7 @@ func demonstrate_output_synthesis():
 	
 	container.add_child(grain_contributions)
 
-func update_output_buffer():
+func update_output_buffer() -> void:
 	# Simulate granular synthesis output
 	output_buffer.clear()
 	
@@ -432,7 +432,7 @@ func update_output_buffer():
 		
 		output_buffer.append(sample)
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -460,12 +460,12 @@ func ensure_playback() -> bool:
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func reset_audio_state():
+func reset_audio_state() -> void:
 	audio_grains.clear()
 	audio_grain_accumulator = 0.0
 	audio_pad_phase = 0.0
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -493,17 +493,17 @@ func apply_theme_profile(theme_name: String):
 	reset_audio_state()
 	print("GranularSynthesis: activated %s theme" % theme_name)
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
-func spawn_audio_grain_audio():
+func spawn_audio_grain_audio() -> void:
 	if audio_waveform.is_empty():
 		return
 
@@ -532,7 +532,7 @@ func get_waveform_sample(index: float) -> float:
 	var frac = wrapped - float(i0)
 	return lerp(audio_waveform[i0], audio_waveform[i1], frac)
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if current_theme_profile.is_empty():
@@ -579,3 +579,9 @@ func generate_audio_samples():
 		var left_sample = clamp((left + pad + shimmer + noise) * audio_master_gain, -1.0, 1.0)
 		var right_sample = clamp((right + pad - shimmer + noise) * audio_master_gain, -1.0, 1.0)
 		audio_playback.push_frame(Vector2(left_sample, right_sample))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

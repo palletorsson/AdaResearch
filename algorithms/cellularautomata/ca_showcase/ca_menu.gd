@@ -15,10 +15,10 @@ var ca_scenes = {
 
 var current_scene: Node = null
 
-func _ready():
+func _ready() -> void:
 	create_menu_buttons()
 
-func create_menu_buttons():
+func create_menu_buttons() -> void:
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	add_child(vbox)
@@ -54,12 +54,12 @@ func create_menu_buttons():
 	back_button.pressed.connect(_on_back_pressed)
 	vbox.add_child(back_button)
 
-func _on_ca_selected(ca_name: String):
+func _on_ca_selected(ca_name: String) -> void:
 	var scene_path = ca_scenes[ca_name]
 	if scene_path:
 		load_ca_scene(scene_path)
 
-func load_ca_scene(scene_path: String):
+func load_ca_scene(scene_path: String) -> void:
 	# Remove current scene if exists
 	if current_scene:
 		current_scene.queue_free()
@@ -71,9 +71,15 @@ func load_ca_scene(scene_path: String):
 		add_child(current_scene)
 		print("Loaded CA scene: ", scene_path)
 
-func _on_back_pressed():
+func _on_back_pressed() -> void:
 	# Return to main menu or previous scene
 	if current_scene:
 		current_scene.queue_free()
 		current_scene = null
 	get_tree().change_scene_to_file("res://MainSceneLoader.tscn")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

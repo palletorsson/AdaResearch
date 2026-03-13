@@ -130,3 +130,9 @@ func _update_mesh() -> void:
 
 func _update_status() -> void:
 	_status_label.text = "Game of Life | Generation %d" % _generation
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

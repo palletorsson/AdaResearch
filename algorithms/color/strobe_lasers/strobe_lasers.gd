@@ -167,3 +167,9 @@ func _set_material_color(col: Color) -> void:
 		var mat = multimesh_instance.material_override as ShaderMaterial
 		if mat:
 			mat.set_shader_parameter("laser_color", col)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

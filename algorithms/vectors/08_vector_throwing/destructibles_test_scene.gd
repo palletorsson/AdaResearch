@@ -202,3 +202,9 @@ func _on_prism_destroyed(prism: Node3D, _impact_velocity: Vector3) -> void:
 func _update_info() -> void:
 	if info_label:
 		info_label.text = "Throws: %d | Destroyed: %d" % [throws_count, total_destroyed]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

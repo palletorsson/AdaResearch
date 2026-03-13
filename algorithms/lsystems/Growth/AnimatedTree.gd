@@ -20,7 +20,7 @@ var is_growing: bool = true
 var info_label: Label3D
 var generation_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Setup Turtle with better visual parameters
 	turtle = Turtle3D.new()
 	add_child(turtle)
@@ -40,7 +40,7 @@ func _ready():
 
 	print("AnimatedTree: L-System tree growth animation started")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not is_growing:
 		return
 
@@ -50,7 +50,7 @@ func _process(delta):
 		growth_timer = 0.0
 		grow_one_generation()
 
-func grow_one_generation():
+func grow_one_generation() -> void:
 	"""Grow one more generation of the L-System"""
 	if current_iteration >= max_iterations:
 		is_growing = false
@@ -72,7 +72,7 @@ func grow_one_generation():
 
 	print("AnimatedTree: Generation %d - %d instructions" % [current_iteration, instructions.length()])
 
-func create_ui():
+func create_ui() -> void:
 	"""Create info labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -91,7 +91,7 @@ func create_ui():
 	generation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(generation_label)
 
-func update_ui():
+func update_ui() -> void:
 	"""Update info display"""
 	if info_label:
 		var branch_count = turtle.branches.size()
@@ -108,7 +108,7 @@ func update_ui():
 			instructions.length()
 		]
 
-func restart():
+func restart() -> void:
 	"""Restart the growth animation"""
 	# Reset state
 	current_iteration = 0
@@ -126,3 +126,9 @@ func restart():
 	grow_one_generation()
 
 	print("AnimatedTree: Restarted growth animation")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

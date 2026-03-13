@@ -5,12 +5,12 @@ extends Node3D
 @export var strap_height: float = 3.5
 @export var strap_overlap: float = 0.05
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	setup_frame()
 	setup_straps()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Camera
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2, 6)
@@ -24,7 +24,7 @@ func setup_scene():
 	light.shadow_enabled = true
 	add_child(light)
 
-func setup_frame():
+func setup_frame() -> void:
 	var frame_width = (strap_width - strap_overlap) * strap_count + strap_overlap + 0.4
 	var frame_height = strap_height + 0.2
 	var frame_thickness = 0.5
@@ -73,7 +73,7 @@ func setup_frame():
 	# Actually, pinning to a NodePath is best.
 	frame.name = "Frame"
 
-func setup_straps():
+func setup_straps() -> void:
 	var template = $SoftBodyStrip
 	if not template:
 		print("SoftBodyStrip template not found!")
@@ -111,7 +111,7 @@ func setup_straps():
 		
 		add_child(new_strap)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		# Throw a ball to test interaction
 		var ball = RigidBody3D.new()
@@ -130,3 +130,9 @@ func _input(event):
 		ball.mass = 5.0
 		add_child(ball)
 		ball.apply_central_impulse(Vector3(0, 0, -20))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

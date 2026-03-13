@@ -32,11 +32,11 @@ var is_initialized: bool = false
 var edge_table: PackedInt32Array
 var triangle_table: PackedInt32Array
 
-func _init():
+func _init() -> void:
 	initialize_gpu_resources()
 	setup_marching_cubes_tables()
 
-func initialize_gpu_resources():
+func initialize_gpu_resources() -> void:
 	"""Initialize GPU resources for compute shader"""
 	# Try different rendering device creation methods for VR compatibility
 	rd = RenderingServer.create_local_rendering_device()
@@ -290,7 +290,7 @@ void main() {
 }
 """
 
-func setup_marching_cubes_tables():
+func setup_marching_cubes_tables() -> void:
 	"""Setup the marching cubes lookup tables"""
 	# Edge table - determines which edges are intersected (complete 256 entries)
 	edge_table = PackedInt32Array([
@@ -553,7 +553,7 @@ func create_mesh_from_gpu_results() -> ArrayMesh:
 	print("FixedGPUMarchingCubes: Mesh creation complete")
 	return mesh
 
-func cleanup():
+func cleanup() -> void:
 	"""Clean up GPU resources"""
 	if not is_initialized or not rd:
 		return
@@ -620,13 +620,13 @@ func create_terrain_density_field(size: Vector3i, world_bounds: AABB, terrain_he
 	return density_data
 
 # Public API functions
-func set_grid_parameters(size: Vector3i, scale: Vector3, offset: Vector3):
+func set_grid_parameters(size: Vector3i, scale: Vector3, offset: Vector3) -> void:
 	"""Set grid parameters"""
 	grid_size = size
 	voxel_scale = scale
 	grid_offset = offset
 
-func set_iso_level(level: float):
+func set_iso_level(level: float) -> void:
 	"""Set the iso level for surface extraction"""
 	iso_level = level
 
@@ -639,5 +639,5 @@ func get_performance_info() -> Dictionary:
 		"voxel_count": grid_size.x * grid_size.y * grid_size.z
 	}
 
-func _exit_tree():
+func _exit_tree() -> void:
 	cleanup()

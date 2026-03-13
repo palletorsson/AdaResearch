@@ -21,11 +21,11 @@ var deletion_index := 0
 var search_target := 0
 var search_index := 0
 
-func _ready():
+func _ready() -> void:
 	initialize_arrays()
 	create_array_visualizations()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -34,7 +34,7 @@ func _process(delta):
 	update_indexing_visualization()
 	show_access_patterns()
 
-func initialize_arrays():
+func initialize_arrays() -> void:
 	# 1D Array (10 elements)
 	array_1d = []
 	for i in range(10):
@@ -59,12 +59,12 @@ func initialize_arrays():
 			plane.append(row)
 		grid_3d.append(plane)
 
-func create_array_visualizations():
+func create_array_visualizations() -> void:
 	create_1d_array_visualization()
 	create_2d_grid_visualization()
 	create_3d_grid_visualization()
 
-func create_1d_array_visualization():
+func create_1d_array_visualization() -> void:
 	var container = $ArrayVisualization/OneDimensionalArray
 	
 	for i in range(array_1d.size()):
@@ -94,7 +94,7 @@ func create_1d_array_visualization():
 		
 		container.add_child(index_marker)
 
-func create_2d_grid_visualization():
+func create_2d_grid_visualization() -> void:
 	var container = $ArrayVisualization/TwoDimensionalGrid
 	
 	for i in range(grid_2d.size()):
@@ -116,7 +116,7 @@ func create_2d_grid_visualization():
 		
 		two_d_elements.append(row_elements)
 
-func create_3d_grid_visualization():
+func create_3d_grid_visualization() -> void:
 	var container = $ArrayVisualization/ThreeDimensionalGrid
 	
 	for i in range(grid_3d.size()):
@@ -142,7 +142,7 @@ func create_3d_grid_visualization():
 		
 		three_d_elements.append(plane_elements)
 
-func animate_arrays():
+func animate_arrays() -> void:
 	# Animate 1D array elements
 	for i in range(one_d_elements.size()):
 		var element = one_d_elements[i]
@@ -156,7 +156,7 @@ func animate_arrays():
 			var wave_height = sin(time + i * 0.3 + j * 0.3) * 0.4
 			element.position.y = wave_height
 
-func demonstrate_operations(_delta):
+func demonstrate_operations(_delta) -> void:
 	# Cycle through different operations
 	if operation_timer > 3.0:
 		operation_timer = 0.0
@@ -180,7 +180,7 @@ func demonstrate_operations(_delta):
 		"search":
 			demonstrate_search()
 
-func demonstrate_insertion():
+func demonstrate_insertion() -> void:
 	var container = $DataManipulation/InsertionDemo
 	
 	# Clear previous demonstration
@@ -208,7 +208,7 @@ func demonstrate_insertion():
 	# Update insertion index
 	insertion_index = (insertion_index + 1) % 8
 
-func demonstrate_deletion():
+func demonstrate_deletion() -> void:
 	var container = $DataManipulation/DeletionDemo
 	
 	# Clear previous demonstration
@@ -232,7 +232,7 @@ func demonstrate_deletion():
 	# Update deletion index
 	deletion_index = (deletion_index + 1) % 8
 
-func demonstrate_search():
+func demonstrate_search() -> void:
 	var container = $DataManipulation/SearchDemo
 	
 	# Clear previous demonstration
@@ -267,7 +267,7 @@ func demonstrate_search():
 	if search_index == 0:
 		search_target = randi() % 8
 
-func update_indexing_visualization():
+func update_indexing_visualization() -> void:
 	var container = $IndexingVisualization
 	
 	# Clear previous visualization
@@ -300,7 +300,7 @@ func update_indexing_visualization():
 		
 		container.add_child(pointer)
 
-func show_access_patterns():
+func show_access_patterns() -> void:
 	var container = $AccessPatterns
 	
 	# Clear previous visualization
@@ -361,3 +361,9 @@ func show_access_patterns():
 		label.material_override = label_material
 		
 		container.add_child(label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -38,7 +38,7 @@ var gradient_particles: Array = []
 # Data particles
 var training_data_particles: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[FineTuning_VR] Initializing transfer learning tower")
 	_initialize_layer_states()
 	_create_network_tower()
@@ -48,7 +48,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -60,7 +60,7 @@ func _process(delta):
 	_animate_gradients(delta)
 	_update_control_panel()
 
-func _initialize_layer_states():
+func _initialize_layer_states() -> void:
 	"""Initialize which layers are frozen vs trainable"""
 	for i in range(num_layers):
 		# Bottom layers frozen, top layers trainable
@@ -75,7 +75,7 @@ func _initialize_layer_states():
 			var lr = 0.001 * pow(2.0, float(i - num_frozen_layers))
 			layer_learning_rates.append(lr)
 
-func _create_network_tower():
+func _create_network_tower() -> void:
 	"""Create vertical stack of neural network layers"""
 	for i in range(num_layers):
 		var layer = _create_layer(i)
@@ -162,7 +162,7 @@ func _create_layer(layer_index: int) -> Node3D:
 
 	return layer
 
-func _create_lock_controls():
+func _create_lock_controls() -> void:
 	"""Create grabbable lock objects to freeze/unfreeze layers"""
 	if not enable_layer_locking:
 		return
@@ -234,7 +234,7 @@ func _create_lock_object(layer_index: int) -> RigidBody3D:
 
 	return body
 
-func _create_training_data_area():
+func _create_training_data_area() -> void:
 	"""Create area with throwable training data particles"""
 	if not enable_data_throwing:
 		return
@@ -315,7 +315,7 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 
 	return body
 
-func _create_activation_flow():
+func _create_activation_flow() -> void:
 	"""Create particles showing activation flowing up through layers"""
 	if not show_activation_flow:
 		return
@@ -377,7 +377,7 @@ func _create_activation_flow():
 				"progress": randf()
 			})
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -424,7 +424,7 @@ func _create_control_panel():
 	metrics.position = Vector3(0, -0.8, 0.1)
 	controls.add_child(metrics)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Bottom (frozen layers) explanation
 	_create_info_panel(
@@ -447,7 +447,7 @@ func _create_info_panels():
 		Color(0.6, 0.9, 0.6)
 	)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -459,7 +459,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_layers(delta):
+func _animate_layers(delta) -> void:
 	"""Animate layers based on frozen state"""
 	for i in range(layers.size()):
 		var layer = layers[i]
@@ -475,7 +475,7 @@ func _animate_layers(delta):
 				# Frozen layers barely move
 				disc.rotation.y += delta * 0.05
 
-func _animate_activations(delta):
+func _animate_activations(delta) -> void:
 	"""Animate activation flow particles moving upward"""
 	for particle_data in activation_particles:
 		var particle = particle_data.node
@@ -494,7 +494,7 @@ func _animate_activations(delta):
 
 		particle.position = Vector3(x, y, z)
 
-func _animate_gradients(delta):
+func _animate_gradients(delta) -> void:
 	"""Animate gradient particles flowing down through trainable layers"""
 	if not show_gradient_flow:
 		return
@@ -519,7 +519,7 @@ func _animate_gradients(delta):
 
 		particle.position = Vector3(x, y, z)
 
-func _update_control_panel():
+func _update_control_panel() -> void:
 	"""Update control panel displays"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -533,7 +533,7 @@ func _update_control_panel():
 		]
 
 # Public API
-func toggle_layer_freeze(layer_index: int):
+func toggle_layer_freeze(layer_index: int) -> void:
 	"""Toggle frozen state of a layer"""
 	if layer_index < 0 or layer_index >= num_layers:
 		return
@@ -557,10 +557,10 @@ func toggle_layer_freeze(layer_index: int):
 		add_child(new_layer)
 		layers[layer_index] = new_layer
 
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	fine_tune_loss = 1.0
 	time = 0.0
@@ -570,3 +570,9 @@ func get_frozen_count() -> int:
 
 func get_trainable_count() -> int:
 	return layer_frozen_states.count(false)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

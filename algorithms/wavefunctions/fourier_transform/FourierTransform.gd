@@ -26,7 +26,7 @@ var playback: AudioStreamGeneratorPlayback
 const SAMPLE_RATE = 44100.0
 var audio_phase: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Initialize Fourier Transform visualization
 	print("Fourier Transform Visualization initialized")
 	
@@ -39,7 +39,7 @@ func _ready():
 	create_flow_particles()
 	setup_fourier_metrics()
 
-func _setup_audio():
+func _setup_audio() -> void:
 	audio_player = AudioStreamPlayer3D.new()
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = SAMPLE_RATE
@@ -54,7 +54,7 @@ func _setup_audio():
 	audio_player.play()
 	playback = audio_player.get_stream_playback()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate transform progress
@@ -70,7 +70,7 @@ func _process(delta):
 	
 	_generate_audio_samples()
 
-func _generate_audio_samples():
+func _generate_audio_samples() -> void:
 	if not playback:
 		return
 
@@ -145,7 +145,7 @@ func _generate_audio_samples():
 
 
 
-func create_time_waveform():
+func create_time_waveform() -> void:
 	# Create time domain waveform points
 	var time_waveform_node = $TimeDomain/TimeWaveform
 	for i in range(sample_count):
@@ -169,7 +169,7 @@ func create_time_waveform():
 			"amplitude": 0.0
 		})
 
-func create_frequency_spectrum():
+func create_frequency_spectrum() -> void:
 	# Create frequency domain spectrum bars
 	var frequency_spectrum_node = $FrequencyDomain/FrequencySpectrum
 	for i in range(frequency_bins):
@@ -193,7 +193,7 @@ func create_frequency_spectrum():
 			"phase": 0.0
 		})
 
-func create_wave_components():
+func create_wave_components() -> void:
 	# Create sine wave components
 	var sine_waves_node = $WaveComponents/SineWaves
 	for i in range(harmonics.size()):
@@ -241,7 +241,7 @@ func create_wave_components():
 			"phase": PI/2  # Cosine is 90 degrees out of phase
 		})
 
-func create_complex_numbers():
+func create_complex_numbers() -> void:
 	# Create complex number representations
 	var complex_numbers_node = $WaveComponents/ComplexNumbers
 	for i in range(8):
@@ -268,7 +268,7 @@ func create_complex_numbers():
 			"phase": angle
 		})
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create transform flow particles
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(30):
@@ -288,7 +288,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_fourier_metrics():
+func setup_fourier_metrics() -> void:
 	# Initialize Fourier metrics
 	var resolution_indicator = $FourierMetrics/ResolutionMeter/ResolutionIndicator
 	var phase_indicator = $FourierMetrics/PhaseCoherenceMeter/PhaseIndicator
@@ -297,7 +297,7 @@ func setup_fourier_metrics():
 	if phase_indicator:
 		phase_indicator.position.x = 0  # Start at middle
 
-func update_waveforms(delta):
+func update_waveforms(delta) -> void:
 	# Update time domain waveform
 	for i in range(time_waveform.size()):
 		var point_data = time_waveform[i]
@@ -332,7 +332,7 @@ func update_waveforms(delta):
 	# Perform simplified FFT calculation for frequency domain
 	update_frequency_spectrum(delta)
 
-func update_frequency_spectrum(delta):
+func update_frequency_spectrum(delta) -> void:
 	# Simplified FFT calculation (for visualization purposes)
 	for i in range(frequency_spectrum.size()):
 		var spectrum_data = frequency_spectrum[i]
@@ -375,7 +375,7 @@ func update_frequency_spectrum(delta):
 			var phase_intensity = (sin(phase + time * 2.0) * 0.5 + 0.5) * intensity
 			bar.material_override.emission = bar.material_override.albedo_color * (0.3 + phase_intensity * 0.4)
 
-func animate_transform_engine(delta):
+func animate_transform_engine(delta) -> void:
 	# Animate transform engine core
 	var engine_core = $TransformEngine/EngineCore
 	if engine_core:
@@ -431,7 +431,7 @@ func animate_transform_engine(delta):
 			var intensity = 0.3 + ifft_activation * 0.7
 			ifft_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_wave_components(delta):
+func animate_wave_components(delta) -> void:
 	# Animate wave components core
 	var components_core = $WaveComponents/ComponentsCore
 	if components_core:
@@ -515,7 +515,7 @@ func animate_wave_components(delta):
 			var color = Color(val, val, val, 1)  # Simplified
 			representation.material_override.albedo_color = color
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -539,7 +539,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 3.0 + i * 0.3) * 0.2 * transform_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_fourier_metrics(delta):
+func update_fourier_metrics(delta) -> void:
 	# Update frequency resolution meter
 	var resolution_indicator = $FourierMetrics/ResolutionMeter/ResolutionIndicator
 	if resolution_indicator:
@@ -562,10 +562,10 @@ func update_fourier_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - phase_coherence)
 		phase_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_fundamental_frequency(freq: float):
+func set_fundamental_frequency(freq: float) -> void:
 	fundamental_freq = clamp(freq, 0.1, 5.0)
 
-func set_noise_level(noise: float):
+func set_noise_level(noise: float) -> void:
 	noise_level = clamp(noise, 0.0, 0.5)
 
 func get_transform_progress() -> float:
@@ -577,8 +577,14 @@ func get_frequency_resolution() -> float:
 func get_phase_coherence() -> float:
 	return phase_coherence
 
-func reset_transform():
+func reset_transform() -> void:
 	time = 0.0
 	transform_progress = 0.0
 	frequency_resolution = 0.0
 	phase_coherence = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

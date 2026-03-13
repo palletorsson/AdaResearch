@@ -18,7 +18,7 @@ var emitter: ParticleEmitter
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -31,7 +31,7 @@ func _ready():
 func _process(_delta):
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Emit burst of particles
@@ -46,7 +46,7 @@ func _input(event):
 		elif event.keycode == KEY_C:
 			emitter.clear_particles()
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -64,12 +64,12 @@ func create_info_label():
 	instructions.text = "[SPACE] Burst | [↑/↓] Rate | [C] Clear | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label and emitter:
 		info_label.text = "Particle Emitter\n%d particles (%.1f/s)" % [emitter.get_particle_count(), emitter.emission_rate]
 
-func create_emitter():
+func create_emitter() -> void:
 	"""Create particle emitter"""
 	emitter = ParticleEmitter.new()
 	emitter.position = Vector3(0, 0.3, 0)
@@ -86,7 +86,7 @@ func create_emitter():
 
 	add_child(emitter)
 
-func create_emitter_visual(parent: Node3D):
+func create_emitter_visual(parent: Node3D) -> void:
 	"""Create visual marker for emitter"""
 	var marker = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -104,8 +104,14 @@ func create_emitter_visual(parent: Node3D):
 
 	parent.add_child(marker)
 
-func reset():
+func reset() -> void:
 	"""Reset emitter"""
 	if emitter:
 		emitter.clear_particles()
 		emitter.emission_rate = 10.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -23,7 +23,7 @@ extends Node3D
 var portal_meshes : Array[MeshInstance3D] = []
 var terrain_mesh : MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	print("🌟 TerrainGeneratorPortals: Creating portal landscape...")
 	print("  - Portals: %d" % num_portals)
 	print("  - Spacing: %.1fm" % portal_spacing)
@@ -40,7 +40,7 @@ func _ready():
 	print("✅ TerrainGeneratorPortals: Complete!")
 	print("  - Check scene tree for Terrain and Portal_0 through Portal_%d nodes" % (num_portals - 1))
 
-func _create_terrain():
+func _create_terrain() -> void:
 	"""Create the base flat terrain"""
 	terrain_mesh = MeshInstance3D.new()
 	terrain_mesh.name = "Terrain"
@@ -65,7 +65,7 @@ func _create_terrain():
 	
 	print("✅ Terrain created")
 
-func _create_portals():
+func _create_portals() -> void:
 	"""Create 7 torus portals at different positions"""
 	# Arrange portals in a circle around the center
 	var angle_step = TAU / num_portals
@@ -115,7 +115,7 @@ func _create_portals():
 	
 	print("✅ Created %d portals" % num_portals)
 
-func _create_portal_label(portal: MeshInstance3D, index: int):
+func _create_portal_label(portal: MeshInstance3D, index: int) -> void:
 	"""Add a floating label above each portal"""
 	var label = Label3D.new()
 	label.name = "PortalLabel"
@@ -127,3 +127,9 @@ func _create_portal_label(portal: MeshInstance3D, index: int):
 	label.outline_size = 8
 	label.outline_modulate = Color.BLACK
 	portal.add_child(label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

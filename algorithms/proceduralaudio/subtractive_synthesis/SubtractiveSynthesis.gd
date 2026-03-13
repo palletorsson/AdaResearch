@@ -134,7 +134,7 @@ var theme_profiles := {
 	}
 }
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	create_oscillators()
 	create_filter_stage()
@@ -143,7 +143,7 @@ func _ready():
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func create_oscillators():
+func create_oscillators() -> void:
 	var osc_parent = $Oscillators
 	
 	for i in range(oscillator_count):
@@ -167,7 +167,7 @@ func create_oscillators():
 		
 		oscillator_nodes.append(osc_data)
 
-func create_filter_stage():
+func create_filter_stage() -> void:
 	var filter_parent = $FilterStage
 	
 	# Create filter visualization as a 3D surface
@@ -187,7 +187,7 @@ func create_filter_stage():
 			filter_parent.add_child(filter_node)
 			filter_nodes[x].append(filter_node)
 
-func create_spectrum_display():
+func create_spectrum_display() -> void:
 	var spectrum_parent = $SpectrumOutput
 	
 	for i in range(frequency_bands):
@@ -201,7 +201,7 @@ func create_spectrum_display():
 		spectrum_parent.add_child(band)
 		spectrum_nodes.append(band)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Oscillator materials
 	for i in range(oscillator_nodes.size()):
 		var color_intensity = i / float(oscillator_count)
@@ -256,7 +256,7 @@ func setup_materials():
 	type_material.emission = Color(0.2, 0.05, 0.3, 1.0)
 	$FilterType.material_override = type_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	filter_timer += delta
 
@@ -288,7 +288,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func animate_oscillators():
+func animate_oscillators() -> void:
 	# Animate each oscillator's harmonics
 	for i in range(oscillator_nodes.size()):
 		var osc_type = i % 4  # Cycle through oscillator types
@@ -336,7 +336,7 @@ func calculate_harmonic_amplitude(osc_type: int, harmonic: int) -> float:
 		_:
 			return 0.0
 
-func animate_filter():
+func animate_filter() -> void:
 	# Visualize filter response
 	for x in range(filter_nodes.size()):
 		for y in range(filter_nodes[x].size()):
@@ -417,7 +417,7 @@ func calculate_filter_response(frequency: float, amplitude_level: float) -> floa
 	
 	return clamp(response, 0.0, 1.0)
 
-func animate_spectrum():
+func animate_spectrum() -> void:
 	# Animate output spectrum
 	for i in range(spectrum_nodes.size()):
 		var band = spectrum_nodes[i]
@@ -459,7 +459,7 @@ func animate_spectrum():
 			)
 			material.emission = material.albedo_color * (0.3 + intensity * 0.7)
 
-func animate_controls():
+func animate_controls() -> void:
 	# Filter frequency control
 	var freq_height = (filter_frequency / 1000.0) * 1.5 + 0.5
 	$FilterFrequency.height = freq_height
@@ -509,7 +509,7 @@ func get_filter_name() -> String:
 		_:
 			return "Unknown"
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -532,7 +532,7 @@ func ensure_playback() -> bool:
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -560,7 +560,7 @@ func apply_theme_profile(theme_name: String):
 	theme_timer = 0.0
 	print("SubtractiveSynthesis: activated %s theme" % theme_name)
 
-func rebuild_audio_oscillators():
+func rebuild_audio_oscillators() -> void:
 	audio_oscillators.clear()
 	if current_theme_profile.is_empty():
 		return
@@ -580,22 +580,22 @@ func rebuild_audio_oscillators():
 		}
 		audio_oscillators.append(osc)
 
-func reset_filter_state():
+func reset_filter_state() -> void:
 	filter_lp = 0.0
 	filter_bp = 0.0
 	filter_hp = 0.0
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if current_theme_profile.is_empty():
@@ -674,3 +674,9 @@ func soft_clip(value: float, drive: float) -> float:
 	var amount = 1.0 + clamp(drive, 0.0, 1.0) * 5.0
 	var y = value * amount
 	return y / (1.0 + abs(y))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

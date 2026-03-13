@@ -9,10 +9,10 @@ extends Node3D
 var mesh_instance: MeshInstance3D
 var curve: Curve3D
 
-func _ready():
+func _ready() -> void:
 	generate_mesh()
 
-func generate_mesh():
+func generate_mesh() -> void:
 	create_path()
 	var mesh = extrude_along_path()
 	
@@ -30,7 +30,7 @@ func generate_mesh():
 	
 	add_child(mesh_instance)
 
-func create_path():
+func create_path() -> void:
 	curve = Curve3D.new()
 	
 	# Create spiral path
@@ -106,6 +106,12 @@ func extrude_along_path() -> ArrayMesh:
 	st.generate_normals()
 	return st.commit()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		generate_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

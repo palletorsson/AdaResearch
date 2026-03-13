@@ -6,11 +6,11 @@ extends Control
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	create_all_palette_sheets()
 
-func setup_ui():
+func setup_ui() -> void:
 	# Main setup
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
@@ -46,7 +46,7 @@ func setup_ui():
 	subtitle.modulate = Color(0.7, 0.7, 0.7)
 	main_container.add_child(subtitle)
 
-func create_all_palette_sheets():
+func create_all_palette_sheets() -> void:
 	# Create sheets in a grid layout (2 columns)
 	var grid_container = GridContainer.new()
 	grid_container.columns = 2
@@ -123,3 +123,9 @@ func create_palette_sheet(palette_data: Dictionary) -> Control:
 	sheet_container.add_child(info_label)
 	
 	return sheet_container
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

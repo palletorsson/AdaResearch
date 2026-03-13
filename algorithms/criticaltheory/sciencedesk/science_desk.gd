@@ -2,10 +2,10 @@ extends Node3D
 
 # This script creates a 3D science desk similar to a laboratory workstation
 
-func _ready():
+func _ready() -> void:
 	create_science_desk()
 
-func create_science_desk():
+func create_science_desk() -> void:
 	# Create the main desk structure
 	var desk_base = create_desk_base()
 	add_child(desk_base)
@@ -46,7 +46,7 @@ func create_desk_base():
 	
 	return desk_base
 
-func add_desk_legs(desk_base, desk_size):
+func add_desk_legs(desk_base, desk_size) -> void:
 	var leg_material = StandardMaterial3D.new()
 	leg_material.albedo_color = Color(0.85, 0.85, 0.85)  # Slightly darker than the desk
 	
@@ -94,7 +94,7 @@ func create_cabinets():
 	
 	return cabinets
 
-func add_cabinet_handle(cabinet, is_drawer):
+func add_cabinet_handle(cabinet, is_drawer) -> void:
 	var handle_material = StandardMaterial3D.new()
 	handle_material.albedo_color = Color(0.8, 0.8, 0.8)  # Light gray handles
 	
@@ -155,7 +155,7 @@ func create_countertop():
 	
 	return countertop
 
-func add_lab_equipment(countertop):
+func add_lab_equipment(countertop) -> void:
 	# Add a sink
 	var sink = CSGBox3D.new()
 	sink.name = "Sink"
@@ -210,7 +210,7 @@ func add_lab_equipment(countertop):
 	# Add some lab equipment (beakers, bottles, etc.)
 	add_beakers_and_bottles(countertop)
 
-func add_beakers_and_bottles(countertop):
+func add_beakers_and_bottles(countertop) -> void:
 	# Create a few beakers
 	var positions = [
 		Vector3(0.2, 0.05, 0.2),
@@ -365,7 +365,7 @@ func create_microscope():
 	
 	return microscope_node
 
-func add_lighting(desk_base):
+func add_lighting(desk_base) -> void:
 	# Add subtle lighting to illuminate the desk
 	var light = OmniLight3D.new()
 	light.name = "DeskLight"
@@ -375,3 +375,9 @@ func add_lighting(desk_base):
 	light.shadow_enabled = true
 	
 	desk_base.add_child(light)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

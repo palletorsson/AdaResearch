@@ -53,13 +53,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_clipping_objects()
 	create_clipping_planes()
 	start_animation()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Add ambient lighting
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -80,7 +80,7 @@ func setup_scene():
 	light.light_energy = 1.0
 	add_child(light)
 
-func create_clipping_objects():
+func create_clipping_objects() -> void:
 	# Create various geometric objects to be clipped
 	var geometries = [
 		SphereMesh.new(),
@@ -144,7 +144,7 @@ func create_clipping_objects():
 		clipped_objects.append(mesh_instance)
 		materials.append(material)
 
-func create_clipping_planes():
+func create_clipping_planes() -> void:
 	# Create invisible clipping plane controllers
 	for i in range(3):  # Three clipping planes for complex intersections
 		var plane_controller = Node3D.new()
@@ -161,11 +161,11 @@ func create_clipping_planes():
 			2:  # Diagonal plane
 				plane_controller.position = Vector3(0, 0, -8)
 
-func start_animation():
+func start_animation() -> void:
 	# Animate the clipping planes
 	animate_planes()
 
-func animate_planes():
+func animate_planes() -> void:
 	# Create tweens for each clipping plane
 	for i in range(clipping_planes.size()):
 		var plane = clipping_planes[i]
@@ -217,3 +217,9 @@ func _process(_delta):
 					material.set_shader_parameter("plane_position", plane.position)
 					material.set_shader_parameter("plane_normal", Vector3(0, 0, 1))
 					material.set_shader_parameter("plane_distance", 0.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

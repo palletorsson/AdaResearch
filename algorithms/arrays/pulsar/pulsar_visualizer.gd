@@ -144,3 +144,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	for child in get_children():
 		child.queue_free()
 	call_deferred("_create_visualization")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

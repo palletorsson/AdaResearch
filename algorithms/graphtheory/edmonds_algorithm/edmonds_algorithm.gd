@@ -38,7 +38,7 @@ var edge_lines: Dictionary = {}
 var info_label: Label3D
 var matching_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -46,7 +46,7 @@ func _ready():
 	if auto_start:
 		start_algorithm()
 
-func setup_environment():
+func setup_environment() -> void:
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-50.0, -35.0, 0.0)
 	light.light_energy = 1.2
@@ -66,7 +66,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	vertices.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -81,7 +81,7 @@ func initialize_graph():
 	for vertex in vertices:
 		matching[vertex] = null
 
-func generate_random_graph():
+func generate_random_graph() -> void:
 	# Create vertices
 	for i in range(graph_size):
 		var vertex = "v" + str(i)
@@ -114,7 +114,7 @@ func has_edge(from: String, to: String) -> bool:
 			return true
 	return false
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	for child in get_children():
 		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_"):
 			child.queue_free()
@@ -177,7 +177,7 @@ func create_visual_elements():
 	matching_label.modulate = Color(1, 1, 1, 0.9)
 	add_child(matching_label)
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	var from_pos = vertex_nodes[edge.from].position
 	var to_pos = vertex_nodes[edge.to].position
 	
@@ -212,7 +212,7 @@ func create_edge_visual(edge: Dictionary):
 	
 	edge_lines[edge.from + "_" + edge.to] = line_container
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -233,7 +233,7 @@ func start_algorithm():
 	update_info_text("Finding maximum matching...")
 	update_matching_display()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not algorithm_running:
 		return
 	
@@ -244,7 +244,7 @@ func _process(delta):
 	step_timer = 0.0
 	process_matching_step()
 
-func process_matching_step():
+func process_matching_step() -> void:
 	if current_edge_index >= edges.size():
 		# Algorithm complete
 		algorithm_running = false
@@ -285,7 +285,7 @@ func get_edge_key(u: String, v: String) -> String:
 		return key1
 	return key2
 
-func update_vertex_color(vertex: String, color: Color):
+func update_vertex_color(vertex: String, color: Color) -> void:
 	if vertex_nodes.has(vertex):
 		var material := StandardMaterial3D.new()
 		material.albedo_color = color
@@ -294,7 +294,7 @@ func update_vertex_color(vertex: String, color: Color):
 		material.emission_energy_multiplier = 1.5
 		vertex_nodes[vertex].material_override = material
 
-func update_edge_color_direct(edge_key: String, color: Color):
+func update_edge_color_direct(edge_key: String, color: Color) -> void:
 	if edge_lines.has(edge_key):
 		var line = edge_lines[edge_key].get_child(0)
 		var material := StandardMaterial3D.new()
@@ -305,15 +305,15 @@ func update_edge_color_direct(edge_key: String, color: Color):
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		line.material_override = material
 
-func update_info_text(text: String):
+func update_info_text(text: String) -> void:
 	if info_label:
 		info_label.text = text
 
-func update_matching_display():
+func update_matching_display() -> void:
 	if matching_label:
 		matching_label.text = "Matching Size: " + str(matching_size)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -322,13 +322,19 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_info_text("Paused - Press Space to resume")
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	current_edge_index = 0
 	initialize_graph()
 	create_visual_elements()
 	update_info_text("Maximum Matching - Press Space to Start")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -23,7 +23,7 @@ var _cached_pos_nodes: Dictionary = {}
 var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -55,7 +55,7 @@ func _ready():
 	_cache_vector_nodes(velocity_vector, _cached_vel_nodes)
 	_cache_vector_nodes(position_vector, _cached_pos_nodes)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not ball:
 		return
 	
@@ -94,7 +94,7 @@ func _physics_process(delta):
 		_time_since_last_text_update = 0.0
 		_update_info(accel_logical, vel_logical, pos_logical)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_ball()
@@ -102,7 +102,7 @@ func _input(event):
 			ball.linear_velocity = Vector3.ZERO
 			ball.angular_velocity = Vector3.ZERO
 
-func _reset_ball():
+func _reset_ball() -> void:
 	ball.global_position = Vector3(0.0, 1.0, 0.0) * SCENE_SCALE
 	ball.linear_velocity = Vector3.ZERO
 	ball.angular_velocity = Vector3.ZERO
@@ -118,7 +118,7 @@ func _reset_ball():
 	# Force update visual positions
 	_update_vector_fast(position_vector, ball_pos_scaled / SCENE_SCALE, _cached_pos_nodes)
 
-func _update_info(accel: Vector3, vel: Vector3, pos: Vector3):
+func _update_info(accel: Vector3, vel: Vector3, pos: Vector3) -> void:
 	var builder := []
 	builder.append("Acceleration = (%.2f, %.2f, %.2f)" % [accel.x, accel.y, accel.z])
 	builder.append("Velocity = (%.2f, %.2f, %.2f)" % [vel.x, vel.y, vel.z])
@@ -128,7 +128,7 @@ func _update_info(accel: Vector3, vel: Vector3, pos: Vector3):
 
 # --- Trail System ---
 
-func _create_trail_system():
+func _create_trail_system() -> void:
 	trail_mesh_instance = MeshInstance3D.new()
 	trail_mesh_instance.name = "MotionTrail"
 	var material = StandardMaterial3D.new()
@@ -143,7 +143,7 @@ func _create_trail_system():
 	trail_mesh_instance.mesh = mesh
 	environment_root.add_child(trail_mesh_instance)
 
-func _update_trail(current_pos: Vector3):
+func _update_trail(current_pos: Vector3) -> void:
 	trail_points.push_back(current_pos)
 	if trail_points.size() > MAX_TRAIL_POINTS:
 		trail_points.pop_front()
@@ -157,7 +157,7 @@ func _update_trail(current_pos: Vector3):
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -172,10 +172,16 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

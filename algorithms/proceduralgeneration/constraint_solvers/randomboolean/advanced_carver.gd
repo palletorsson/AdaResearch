@@ -52,12 +52,12 @@ var path_points : PackedVector3Array = []
 var all_branches : Array[PackedVector3Array] = []
 var occupied_positions : Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	if auto_generate:
 		# Defer one frame to ensure CSG system is ready
 		call_deferred("generate")
 
-func generate():
+func generate() -> void:
 	# Clear existing CSG shapes (but keep Label3D and other scene nodes)
 	for child in get_children():
 		if child is CSGShape3D or child is MeshInstance3D:
@@ -97,7 +97,7 @@ func generate():
 	
 	print("✅ Carving complete!")
 
-func _create_base_shape():
+func _create_base_shape() -> void:
 	var shape : CSGShape3D
 	
 	match base_shape_type:
@@ -119,7 +119,7 @@ func _create_base_shape():
 	shape.material = _create_material(base_material_color)
 	add_child(shape)  # Add as child of CSGCombiner3D
 
-func _generate_random_walk():
+func _generate_random_walk() -> void:
 	var current_pos = Vector3.ZERO
 	path_points.append(current_pos)
 	occupied_positions.append(current_pos)
@@ -145,7 +145,7 @@ func _generate_random_walk():
 				valid = true
 			attempts += 1
 
-func _generate_spiral():
+func _generate_spiral() -> void:
 	var vertical_segments = walk_steps
 	var height_per_step = (cube_size.y * 0.8) / vertical_segments
 	
@@ -163,7 +163,7 @@ func _generate_spiral():
 		path_points.append(pos)
 		occupied_positions.append(pos)
 
-func _generate_branching_path():
+func _generate_branching_path() -> void:
 	# Main trunk
 	var main_path = _create_branch(Vector3.ZERO, Vector3.UP, int(walk_steps * 0.6))
 	path_points = main_path
@@ -213,7 +213,7 @@ func _create_branch(start: Vector3, main_direction: Vector3, steps: int) -> Pack
 	
 	return branch
 
-func _generate_perlin_path():
+func _generate_perlin_path() -> void:
 	var current_pos = Vector3.ZERO
 	path_points.append(current_pos)
 	
@@ -231,7 +231,7 @@ func _generate_perlin_path():
 			path_points.append(current_pos)
 			occupied_positions.append(current_pos)
 
-func _generate_grid_tunnels():
+func _generate_grid_tunnels() -> void:
 	var grid_size = 3
 	var spacing = cube_size.x / (grid_size + 1)
 	
@@ -260,7 +260,7 @@ func _is_valid_position(pos: Vector3) -> bool:
 	
 	return true
 
-func _carve_all_paths():
+func _carve_all_paths() -> void:
 	var all_points = path_points.duplicate()
 	for branch in all_branches:
 		for point in branch:
@@ -290,7 +290,7 @@ func _carve_all_paths():
 	
 	print("✂️ Carved ", all_points.size(), " spheres (CSGCombiner3D will combine them)")
 
-func _create_path_visualization():
+func _create_path_visualization() -> void:
 	# Main path
 	if path_points.size() > 1:
 		_create_line_mesh(path_points, path_line_color, "MainPath")
@@ -301,7 +301,7 @@ func _create_path_visualization():
 			var branch_color = Color(randf(), randf(), randf(), 0.8)
 			_create_line_mesh(all_branches[i], branch_color, "Branch_%d" % i)
 
-func _create_line_mesh(points: PackedVector3Array, color: Color, name_str: String):
+func _create_line_mesh(points: PackedVector3Array, color: Color, name_str: String) -> void:
 	var line = MeshInstance3D.new()
 	line.name = name_str
 	
@@ -331,6 +331,12 @@ func _create_material(color: Color) -> StandardMaterial3D:
 	mat.roughness = 0.7
 	return mat
 
-func regenerate(new_seed: int = -1):
+func regenerate(new_seed: int = -1) -> void:
 	random_seed = new_seed if new_seed >= 0 else randi()
 	generate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

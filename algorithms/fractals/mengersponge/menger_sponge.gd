@@ -38,7 +38,7 @@ var keep_positions = [
 	24, 25, 26    # Back row
 ]
 
-func _ready():
+func _ready() -> void:
 	print("MengerSponge: Ready")
 	print("MengerSponge: Will create %d iterations" % max_iterations)
 
@@ -47,7 +47,7 @@ func _ready():
 		is_subdividing = true
 		print("MengerSponge: Auto-subdivision enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_subdividing:
 		return
 
@@ -60,7 +60,7 @@ func _process(delta: float):
 		perform_iteration()
 
 # Perform one Menger sponge iteration
-func perform_iteration():
+func perform_iteration() -> void:
 	# Check if we've reached the maximum
 	if current_iteration >= max_iterations:
 		print("MengerSponge: Reached maximum iterations (%d)" % max_iterations)
@@ -93,7 +93,7 @@ func find_all_cube_scenes() -> Array:
 	return cubes
 
 # Recursive function to find cube scenes
-func _find_cubes_recursive(node: Node, cubes: Array):
+func _find_cubes_recursive(node: Node, cubes: Array) -> void:
 	# Check if this node is a cube_scene (including "InitialCube")
 	if node.name == "CubeScene" or node.name.begins_with("CubeScene") or node.name == "InitialCube" or node.scene_file_path == "res://commons/primitives/cubes/cube_scene.tscn":
 		cubes.append(node)
@@ -103,7 +103,7 @@ func _find_cubes_recursive(node: Node, cubes: Array):
 		_find_cubes_recursive(child, cubes)
 
 # Subdivide a single cube into Menger sponge pattern
-func subdivide_cube_menger(cube: Node3D):
+func subdivide_cube_menger(cube: Node3D) -> void:
 	if not is_instance_valid(cube):
 		return
 
@@ -165,21 +165,21 @@ func subdivide_cube_menger(cube: Node3D):
 	cube.queue_free()
 
 # Manual control functions
-func start_subdivision():
+func start_subdivision() -> void:
 	is_subdividing = true
 	subdivision_timer = 0.0
 	print("MengerSponge: Started manually")
 
-func stop_subdivision():
+func stop_subdivision() -> void:
 	is_subdividing = false
 	print("MengerSponge: Stopped manually")
 
-func reset():
+func reset() -> void:
 	current_iteration = 0
 	subdivision_timer = 0.0
 	is_subdividing = false
 	print("MengerSponge: Reset")
 
 # Perform a single iteration step
-func step():
+func step() -> void:
 	perform_iteration()

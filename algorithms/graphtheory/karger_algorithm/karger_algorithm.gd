@@ -61,7 +61,7 @@ var iteration_label: Label3D
 var cut_label: Label3D
 var probability_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -69,7 +69,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Add lighting
 	var light := DirectionalLight3D.new()
 	light.name = "SunLight"
@@ -92,7 +92,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	vertices.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -111,7 +111,7 @@ func initialize_graph():
 	# Store original edges
 	original_edges = edges.duplicate(true)
 
-func generate_random_graph():
+func generate_random_graph() -> void:
 	# Create vertices
 	for i in range(graph_size):
 		var vertex = "v" + str(i)
@@ -132,7 +132,7 @@ func generate_random_graph():
 	# Ensure graph is connected
 	ensure_connectivity()
 
-func ensure_connectivity():
+func ensure_connectivity() -> void:
 	# Add edges to ensure connectivity
 	for i in range(graph_size - 1):
 		var from_vertex = "v" + str(i)
@@ -148,7 +148,7 @@ func has_edge(from: String, to: String) -> bool:
 			return true
 	return false
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	# Clear existing visuals
 	for child in get_children():
 		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_") or child.name.begins_with("Cut_"):
@@ -198,7 +198,7 @@ func create_visual_elements():
 	# Create info labels
 	create_info_labels()
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	var from_pos = vertex_nodes[edge.from].position
 	var to_pos = vertex_nodes[edge.to].position
 	
@@ -235,7 +235,7 @@ func create_line_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 	return mesh
 
-func create_info_labels():
+func create_info_labels() -> void:
 	info_label = Label3D.new()
 	info_label.text = "Karger's Algorithm: Minimum Cut"
 	info_label.font_size = 20
@@ -260,7 +260,7 @@ func create_info_labels():
 	probability_label.position = Vector3(0, 2.5, 0)
 	add_child(probability_label)
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -272,7 +272,7 @@ func start_algorithm():
 	
 	call_deferred("run_iterations")
 
-func run_iterations():
+func run_iterations() -> void:
 	if not algorithm_running or iteration >= num_iterations:
 		algorithm_running = false
 		show_final_result()
@@ -287,7 +287,7 @@ func run_iterations():
 	# Run contraction algorithm
 	call_deferred("contraction_algorithm")
 
-func reset_for_iteration():
+func reset_for_iteration() -> void:
 	# Reset contracted vertices
 	for vertex in vertices:
 		contracted_vertices[vertex] = [vertex]
@@ -303,7 +303,7 @@ func reset_for_iteration():
 	current_cut.clear()
 	algorithm_step = 0
 
-func contraction_algorithm():
+func contraction_algorithm() -> void:
 	if not algorithm_running:
 		return
 	
@@ -360,7 +360,7 @@ func get_vertex_component(vertex: String) -> String:
 			return comp
 	return vertex
 
-func contract_edge(edge: Dictionary, remaining_vertices: Array):
+func contract_edge(edge: Dictionary, remaining_vertices: Array) -> void:
 	var from_comp = get_vertex_component(edge.from)
 	var to_comp = get_vertex_component(edge.to)
 	
@@ -397,7 +397,7 @@ func get_cut_edges(_remaining_vertices: Array) -> Array:
 			cut_edges.append(edge)
 	return cut_edges
 
-func highlight_contracted_edge(from: String, to: String):
+func highlight_contracted_edge(from: String, to: String) -> void:
 	var edge_key = from + "_" + to
 	if not edge_lines.has(edge_key):
 		edge_key = to + "_" + from
@@ -408,7 +408,7 @@ func highlight_contracted_edge(from: String, to: String):
 		material.emission = cut_edge_color * 0.5
 		edge_lines[edge_key].material_override = material
 
-func highlight_best_cut():
+func highlight_best_cut() -> void:
 	# Reset all edges
 	for edge in original_edges:
 		update_edge_color(edge.from, edge.to, edge_color)
@@ -417,14 +417,14 @@ func highlight_best_cut():
 	for edge in best_cut:
 		update_edge_color(edge.from, edge.to, best_cut_color)
 
-func update_vertex_color(vertex: String, color: Color):
+func update_vertex_color(vertex: String, color: Color) -> void:
 	if vertex_nodes.has(vertex):
 		var material := StandardMaterial3D.new()
 		material.albedo_color = color
 		material.emission = color * 0.3
 		vertex_nodes[vertex].material_override = material
 
-func update_edge_color(from: String, to: String, color: Color):
+func update_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if not edge_lines.has(edge_key):
 		edge_key = to + "_" + from
@@ -435,25 +435,25 @@ func update_edge_color(from: String, to: String, color: Color):
 		material.emission = color * 0.2
 		edge_lines[edge_key].material_override = material
 
-func update_iteration_display():
+func update_iteration_display() -> void:
 	if iteration_label:
 		iteration_label.text = "Iteration: " + str(iteration) + "/" + str(num_iterations)
 
-func update_cut_display(cut_size: int):
+func update_cut_display(cut_size: int) -> void:
 	if cut_label:
 		cut_label.text = "Current Cut Size: " + str(cut_size)
 
-func update_probability_display():
+func update_probability_display() -> void:
 	var n = vertices.size()
 	var probability = 2.0 / (n * (n - 1)) * 100.0
 	if probability_label:
 		probability_label.text = "Success Probability: " + str(probability) + "%"
 
-func update_operation_display():
+func update_operation_display() -> void:
 	if info_label:
 		info_label.text = current_operation
 
-func show_final_result():
+func show_final_result() -> void:
 	update_operation_display()
 	update_cut_display(min_cut_size)
 	highlight_best_cut()
@@ -462,7 +462,7 @@ func show_final_result():
 	var final_message = "Algorithm completed! Minimum cut size: " + str(min_cut_size)
 	update_operation_display()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -471,11 +471,11 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_operation_display()
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	algorithm_step = 0
 	iteration = 0
@@ -493,3 +493,9 @@ func get_algorithm_info() -> Dictionary:
 		"current_iteration": iteration,
 		"success_probability": 2.0 / (vertices.size() * (vertices.size() - 1))
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

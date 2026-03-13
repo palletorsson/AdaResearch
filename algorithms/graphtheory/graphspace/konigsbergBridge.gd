@@ -69,7 +69,7 @@ func _ready() -> void:
 	
 	update_gizmos()
 
-func _setup_konigsberg_configuration():
+func _setup_konigsberg_configuration() -> void:
 	"""Setup configuration specific to Königsberg problem"""
 	historical_info = {
 		"problem_date": 1736,
@@ -172,7 +172,7 @@ func _get_landmass_info(index: int) -> String:
 	]
 	return info[index]
 
-func _layout_konigsberg():
+func _layout_konigsberg() -> void:
 	"""No force-directed layout needed - use fixed historical positions"""
 	pass  # Positions are already set in _build_konigsberg_graph
 
@@ -182,7 +182,7 @@ func _calculate_bridge_cost(from_id: int, to_id: int) -> float:
 	var to_pos = nodes[to_id]["pos"]
 	return from_pos.distance_to(to_pos)
 
-func _calculate_konigsberg_node_properties():
+func _calculate_konigsberg_node_properties() -> void:
 	"""Calculate node degrees for Königsberg analysis"""
 	# Calculate degrees
 	for i in range(nodes.size()):
@@ -258,7 +258,7 @@ func _instantiate_konigsberg_world() -> void:
 			add_child(portal)
 			edge["portal"] = portal
 
-func _create_bridge_nameplate(bridge: CSGBox3D, edge: Dictionary, position: Vector3):
+func _create_bridge_nameplate(bridge: CSGBox3D, edge: Dictionary, position: Vector3) -> void:
 	"""Create nameplate for historical bridge"""
 	var label = Label3D.new()
 	var nameplate_text = edge["bridge_name"]
@@ -275,7 +275,7 @@ func _create_bridge_nameplate(bridge: CSGBox3D, edge: Dictionary, position: Vect
 # ---------------------------
 # 3) Debug draw (use _process; Node3D has no update()/draw())
 # ---------------------------
-func _analyze_euler_properties():
+func _analyze_euler_properties() -> void:
 	"""Analyze the Königsberg graph for Eulerian path properties"""
 	euler_analysis.clear()
 	
@@ -303,7 +303,7 @@ func _analyze_euler_properties():
 	euler_analysis["euler_conclusion"] = "No Eulerian path exists - all 4 vertices have odd degree (3 each)"
 	euler_analysis["theorem"] = "A connected graph has an Eulerian path if and only if it has exactly 0 or 2 vertices of odd degree"
 
-func _setup_educational_ui():
+func _setup_educational_ui() -> void:
 	"""Setup educational UI for the Königsberg problem"""
 	analysis_ui = CanvasLayer.new()
 	analysis_ui.name = "KonigsbergAnalysisUI"
@@ -328,7 +328,7 @@ func _setup_educational_ui():
 	
 	_update_educational_display()
 
-func _update_educational_display():
+func _update_educational_display() -> void:
 	"""Update the educational information display"""
 	if not analysis_ui:
 		return
@@ -376,7 +376,7 @@ func _process(_delta: float) -> void:
 			var pb: Vector3 = nodes[e["b"]]["pos"]
 			# Note: Debug lines would be drawn here in a real implementation
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle educational interactions"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -391,7 +391,7 @@ func _input(event):
 				show_construction_dates = not show_construction_dates
 				_update_bridge_labels()
 
-func _update_bridge_labels():
+func _update_bridge_labels() -> void:
 	"""Update bridge name labels"""
 	# This would update bridge labels based on current settings
 	pass
@@ -406,3 +406,9 @@ func get_konigsberg_educational_info() -> Dictionary:
 		"mathematical_significance": "First application of graph theory to solve a real-world problem",
 		"modern_relevance": "Foundation for network analysis, routing algorithms, and topology"
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

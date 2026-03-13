@@ -25,14 +25,14 @@ var spawn_confetti_mode: bool = true
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
 
 	print("Example 4.5: Inheritance & Polymorphism - Mixed particle types")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn particles
 	spawn_timer += delta
 	while spawn_timer >= 1.0 / spawn_rate and particles.size() < max_particles:
@@ -48,7 +48,7 @@ func _process(delta):
 	# Update UI
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Spawn burst
@@ -64,7 +64,7 @@ func _input(event):
 		elif event.keycode == KEY_DOWN:
 			spawn_rate = max(spawn_rate - 2.0, 2.0)
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -82,7 +82,7 @@ func create_info_label():
 	instructions.text = "[SPACE] Burst | [C] Toggle Type | [↑/↓] Rate | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		var confetti_count = 0
@@ -97,7 +97,7 @@ func update_info_label():
 		var mode_text = "Confetti" if spawn_confetti_mode else "Spheres"
 		info_label.text = "Inheritance Demo\n%s | C:%d S:%d" % [mode_text, confetti_count, sphere_count]
 
-func spawn_particle():
+func spawn_particle() -> void:
 	"""Spawn a particle (either Particle or ConfettiParticle)"""
 	if particles.size() >= max_particles:
 		return
@@ -138,7 +138,7 @@ func spawn_particle():
 	add_child(particle)
 	particles.append(particle)
 
-func update_particles(delta: float):
+func update_particles(delta: float) -> void:
 	"""Update all particles (polymorphism!)"""
 	for particle in particles:
 		# Apply forces (same for all particle types)
@@ -153,7 +153,7 @@ func update_particles(delta: float):
 		# Update particle (calls appropriate update method)
 		particle.update(delta)
 
-func cleanup_dead_particles():
+func cleanup_dead_particles() -> void:
 	"""Remove dead particles"""
 	var dead_particles: Array = []
 
@@ -165,9 +165,15 @@ func cleanup_dead_particles():
 		particles.erase(particle)
 		particle.queue_free()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	for particle in particles:
 		particle.queue_free()
 	particles.clear()
 	spawn_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

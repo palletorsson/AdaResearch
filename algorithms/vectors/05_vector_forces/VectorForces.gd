@@ -22,7 +22,7 @@ var _cached_net_nodes: Dictionary = {}
 var _cached_velocity_nodes: Dictionary = {}
 var _cached_accel_nodes: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -54,7 +54,7 @@ func _ready():
 	_cache_vector_nodes(velocity_vector, _cached_velocity_nodes)
 	_cache_vector_nodes(accel_vector, _cached_accel_nodes)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not ball:
 		return
 	
@@ -105,7 +105,7 @@ func _physics_process(delta):
 		_update_info(gravity_force_logical, thrust_force_logical, drag_force_logical, net_force_logical, velocity_logical)
 		accumulator = 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_ball()
@@ -113,7 +113,7 @@ func _input(event):
 			ball.linear_velocity = Vector3.ZERO
 			ball.angular_velocity = Vector3.ZERO
 
-func _reset_ball():
+func _reset_ball() -> void:
 	# Reset to scaled position
 	ball.global_position = Vector3(0.0, 1.2, 0.0) * SCENE_SCALE
 	ball.linear_velocity = Vector3.ZERO
@@ -127,7 +127,7 @@ func _reset_ball():
 	velocity_vector.position = ball_pos_scaled
 	accel_vector.position = ball_pos_scaled
 
-func _update_info(gravity_force: Vector3, thrust_force: Vector3, drag_force: Vector3, net_force: Vector3, velocity: Vector3):
+func _update_info(gravity_force: Vector3, thrust_force: Vector3, drag_force: Vector3, net_force: Vector3, velocity: Vector3) -> void:
 	var builder := []
 	builder.append("Gravity = (%.2f, %.2f, %.2f)" % [gravity_force.x, gravity_force.y, gravity_force.z])
 	builder.append("Thrust = (%.2f, %.2f, %.2f)" % [thrust_force.x, thrust_force.y, thrust_force.z])
@@ -139,7 +139,7 @@ func _update_info(gravity_force: Vector3, thrust_force: Vector3, drag_force: Vec
 	builder.append("Velocity = (%.2f, %.2f, %.2f)" % [velocity.x, velocity.y, velocity.z])
 	info_label.text = "\n".join(builder)
 
-func _create_ground():
+func _create_ground() -> void:
 	var ground = StaticBody3D.new()
 	ground.name = "Ground"
 	var collider = CollisionShape3D.new()
@@ -151,7 +151,7 @@ func _create_ground():
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -166,10 +166,16 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

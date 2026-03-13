@@ -24,7 +24,7 @@ var is_initialized: bool = false
 var debug_timer: float = 0.0
 var _audio_setup_done: bool = false  # Prevent deferred setup from overriding explicit set_source_bus()
 
-func _ready():
+func _ready() -> void:
 	_initialize_waveform()
 	resized.connect(_on_resized)
 	print("WaveformDisplay: Initialized with %d samples" % sample_count)
@@ -38,14 +38,14 @@ func _ready():
 	if not _audio_setup_done:
 		_setup_audio_analysis()
 
-func _initialize_waveform():
+func _initialize_waveform() -> void:
 	"""Initialize waveform data arrays"""
 	waveform_data.resize(sample_count)
 	waveform_data.fill(0.0)
 	display_rect = Rect2(Vector2.ZERO, size)
 	is_initialized = true
 
-func _setup_audio_analysis():
+func _setup_audio_analysis() -> void:
 	"""Setup spectrum analyzer for audio analysis"""
 	audio_bus_index = AudioServer.get_bus_index(source_bus)
 
@@ -77,13 +77,13 @@ func _setup_audio_analysis():
 	spectrum_instance = AudioServer.get_bus_effect_instance(audio_bus_index, new_effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
 	print("WaveformDisplay: Created spectrum analyzer on '%s' bus" % source_bus)
 
-func set_source_bus(bus_name: String):
+func set_source_bus(bus_name: String) -> void:
 	"""Change the audio bus being monitored"""
 	source_bus = bus_name
 	_audio_setup_done = true  # Mark as explicitly configured
 	_setup_audio_analysis()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	"""Update waveform data and redraw"""
 	if not is_initialized:
 		return
@@ -92,7 +92,7 @@ func _process(delta: float):
 	_update_waveform_data()
 	queue_redraw()
 
-func _update_waveform_data():
+func _update_waveform_data() -> void:
 	"""Generate sine wave from spectral values over time"""
 	if not spectrum_instance:
 		# Generate test sine wave if no audio
@@ -151,7 +151,7 @@ func _update_waveform_data():
 		#print("WaveformDisplay: Avg magnitude: %.6f, Active bands: %d/%d, Max waveform: %.2f" % 
 			  #[avg_magnitude, active_bands, sample_count, max_waveform])
 
-func _generate_test_waveform():
+func _generate_test_waveform() -> void:
 	"""Generate test sine wave modulated by fake spectral values"""
 	for i in range(sample_count):
 		var time_position = float(i) / float(sample_count - 1)
@@ -167,7 +167,7 @@ func _generate_test_waveform():
 		var sine_phase = time_position * PI * 4.0  # 2 cycles across display
 		waveform_data[i] = sin(sine_phase + time_offset) * enhanced_magnitude * amplitude_scale
 
-func _draw():
+func _draw() -> void:
 	"""Draw the waveform"""
 	if not is_initialized:
 		return
@@ -193,7 +193,7 @@ func _draw():
 	# Draw title and time scale info
 	_draw_time_scale_info()
 
-func _draw_waveform_line():
+func _draw_waveform_line() -> void:
 	"""Draw the main waveform line"""
 	if waveform_data.size() < 2:
 		return
@@ -223,7 +223,7 @@ func _draw_waveform_line():
 	for i in range(points.size() - 1):
 		draw_line(points[i], points[i + 1], line_color, line_width)
 
-func _draw_grid():
+func _draw_grid() -> void:
 	"""Draw amplitude grid lines and time scale labels"""
 	var grid_color = Color(0.2, 0.4, 0.4, 0.5)
 	var text_color = Color(0.8, 1.0, 1.0, 0.9)
@@ -278,7 +278,7 @@ func _draw_grid():
 		draw_string(get_theme_default_font(), Vector2(x + 2, display_rect.position.y + display_rect.size.y - 5), 
 					time_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, text_color)
 
-func _draw_time_scale_info():
+func _draw_time_scale_info() -> void:
 	"""Draw title and current time information"""
 	var title_color = Color(0, 1, 1, 1)  # Bright cyan
 	var info_color = Color(0.7, 0.9, 0.9, 0.8)
@@ -294,7 +294,7 @@ func _draw_time_scale_info():
 	draw_string(get_theme_default_font(), Vector2(display_rect.position.x + 10, display_rect.position.y + 40), 
 				time_info, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, info_color)
 
-func _on_resized():
+func _on_resized() -> void:
 	"""Handle viewport resize"""
 	if is_initialized:
 		display_rect = Rect2(Vector2.ZERO, size)

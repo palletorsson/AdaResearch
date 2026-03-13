@@ -11,7 +11,7 @@
 var bucket_scenes = []
 var bucket_instances = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Set up visual environment
@@ -23,7 +23,7 @@ func _ready():
 	# Add camera controls
 	setup_camera_controls()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create enhanced lighting
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
@@ -72,7 +72,7 @@ func create_sky() -> Sky:
 	sky.sky_material = sky_material
 	return sky
 
-func create_ten_buckets():
+func create_ten_buckets() -> void:
 	# Load the bucket of tulips scene
 	var bucket_scene = preload("res://algorithms/computationalbiology/bucketoftulips/bucket_of_tulips.tscn")
 	
@@ -104,7 +104,7 @@ func create_ten_buckets():
 		add_child(bucket_instance)
 		bucket_instances.append(bucket_instance)
 
-func randomize_bucket_properties(bucket_instance, _index):
+func randomize_bucket_properties(bucket_instance, _index) -> void:
 	# Randomize scale slightly
 	var scale_factor = 0.8 + randf() * 0.4  # 0.8 to 1.2
 	bucket_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)
@@ -127,7 +127,7 @@ func randomize_bucket_properties(bucket_instance, _index):
 	if randomize_colors:
 		randomize_bucket_colors(bucket_instance)
 
-func randomize_bucket_colors(bucket_instance):
+func randomize_bucket_colors(bucket_instance) -> void:
 	# Find and randomize bucket material
 	var bucket_mesh = bucket_instance.get_node_or_null("FlowerBucket")
 	if bucket_mesh and bucket_mesh.material_override:
@@ -150,7 +150,7 @@ func randomize_bucket_colors(bucket_instance):
 		material.albedo_color = Color(0.1, 0.1, 0.1)  # Very dark for handle
 		handle.material_override = material
 
-func setup_camera_controls():
+func setup_camera_controls() -> void:
 	# Create camera controller
 	var camera_controller = Node3D.new()
 	camera_controller.name = "CameraController"
@@ -167,7 +167,7 @@ func setup_camera_controls():
 	# Add UI
 	setup_ui()
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create UI canvas
 	var ui_canvas = CanvasLayer.new()
 	ui_canvas.name = "UI"
@@ -214,7 +214,7 @@ func setup_ui():
 	random_button.pressed.connect(_on_toggle_randomization_pressed)
 	vbox.add_child(random_button)
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	# Clear existing buckets
 	for bucket in bucket_instances:
 		if bucket and is_instance_valid(bucket):
@@ -224,14 +224,14 @@ func _on_regenerate_pressed():
 	# Create new buckets
 	create_ten_buckets()
 
-func _on_toggle_randomization_pressed():
+func _on_toggle_randomization_pressed() -> void:
 	randomize_positions = !randomize_positions
 	randomize_colors = !randomize_colors
 	
 	# Regenerate with new settings
 	_on_regenerate_pressed()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Handle keyboard input
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -239,3 +239,9 @@ func _input(event):
 				_on_regenerate_pressed()
 			KEY_SPACE:
 				_on_toggle_randomization_pressed()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

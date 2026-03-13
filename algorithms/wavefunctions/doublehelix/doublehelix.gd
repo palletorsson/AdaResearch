@@ -353,3 +353,9 @@ func _assign_owner(node: Node) -> void:
 	var owner_node: Node = get_owner()
 	if owner_node:
 		node.owner = owner_node
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

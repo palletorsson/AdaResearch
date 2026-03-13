@@ -28,10 +28,10 @@ enum NetPattern {
 @export var show_edges: bool = true
 @export var transparency: float = 0.3
 
-func _ready():
+func _ready() -> void:
     generate_16cell_space()
 
-func generate_16cell_space():
+func generate_16cell_space() -> void:
     """Generate continuous hollow space from 16-cell nets"""
     # Clear existing
     for child in get_children():
@@ -102,7 +102,7 @@ func get_net_bounds() -> Vector3:
     
     return Vector3(3, 3, 3) * tetrahedron_size
 
-func create_16cell_net(pos: Vector3, rotation: Vector3, color: Color):
+func create_16cell_net(pos: Vector3, rotation: Vector3, color: Color) -> void:
     """Create a 16-cell net at the given position"""
     var net_node = Node3D.new()
     net_node.position = pos
@@ -119,7 +119,7 @@ func create_16cell_net(pos: Vector3, rotation: Vector3, color: Color):
         NetPattern.COMPACT_CLUSTER:
             create_compact_cluster_net(net_node, color)
 
-func create_octahedral_core_net(parent: Node3D, color: Color):
+func create_octahedral_core_net(parent: Node3D, color: Color) -> void:
     """16-cell net based on octahedral symmetry"""
     var s = tetrahedron_size
     
@@ -160,7 +160,7 @@ func create_octahedral_core_net(parent: Node3D, color: Color):
         
         create_tetrahedron(parent, tet_pos, tet_rot, tet_color)
 
-func create_double_pyramid_net(parent: Node3D, color: Color):
+func create_double_pyramid_net(parent: Node3D, color: Color) -> void:
     """Double square pyramid arrangement"""
     var s = tetrahedron_size
     
@@ -182,7 +182,7 @@ func create_double_pyramid_net(parent: Node3D, color: Color):
         var pos = Vector3(cos(angle), 1, sin(angle)) * s
         create_tetrahedron(parent, pos, Vector3(0, angle, PI), color.lerp(Color.WHITE, 0.6))
 
-func create_tetrahedral_star_net(parent: Node3D, color: Color):
+func create_tetrahedral_star_net(parent: Node3D, color: Color) -> void:
     """Star-like arrangement with tetrahedral symmetry"""
     var s = tetrahedron_size
     
@@ -201,7 +201,7 @@ func create_tetrahedral_star_net(parent: Node3D, color: Color):
             var col = color.lerp(Color.WHITE, dist / 6.0)
             create_tetrahedron(parent, pos, Vector3.ZERO, col)
 
-func create_compact_cluster_net(parent: Node3D, color: Color):
+func create_compact_cluster_net(parent: Node3D, color: Color) -> void:
     """Compact close-packed arrangement"""
     var s = tetrahedron_size * 0.8
     
@@ -226,7 +226,7 @@ func create_compact_cluster_net(parent: Node3D, color: Color):
         var col = color.lerp(Color.WHITE, float(i) / 20.0)
         create_tetrahedron(parent, positions[i], Vector3.ZERO, col)
 
-func create_tetrahedron(parent: Node3D, pos: Vector3, rot: Vector3, color: Color):
+func create_tetrahedron(parent: Node3D, pos: Vector3, rot: Vector3, color: Color) -> void:
     """Create a single tetrahedron"""
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.position = pos
@@ -317,7 +317,7 @@ func create_tetrahedron_edges(verts: Array, color: Color) -> MeshInstance3D:
     
     return mesh_instance
 
-func regenerate():
+func regenerate() -> void:
     generate_16cell_space()
 
 func get_16cell_space_stats() -> Dictionary:
@@ -346,23 +346,8 @@ func get_16cell_space_stats() -> Dictionary:
         "transparency": transparency
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

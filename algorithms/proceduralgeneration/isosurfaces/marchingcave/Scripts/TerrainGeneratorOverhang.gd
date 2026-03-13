@@ -6,12 +6,12 @@ func get_class_name() -> String:
 func get_compute_shader_path() -> String:
 	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesOverhangTerrain.glsl"
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGeneratorOverhang: Creating fallback flat landscape...")
 	_create_simple_flat_mesh()
 	print("✅ Fallback landscape created")
 
-func _create_simple_flat_mesh():
+func _create_simple_flat_mesh() -> void:
 	# Simple flat plane with hills (inherited logic from original file)
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()

@@ -37,7 +37,7 @@ var degree_counts: Dictionary = {}
 var theorem_display: CanvasLayer
 var analysis_panel: Panel
 
-func _ready():
+func _ready() -> void:
 	# Override parent _ready to use Königsberg topology
 	rng = RandomNumberGenerator.new()
 	rng.seed = 1736  # Historical date
@@ -50,7 +50,7 @@ func _ready():
 	if show_theorem_explanation:
 		_display_euler_theorem()
 
-func _setup_konigsberg_topology():
+func _setup_konigsberg_topology() -> void:
 	"""Setup the exact topology of the Königsberg bridge problem"""
 	nodes.clear()
 	edges.clear()
@@ -142,7 +142,7 @@ func calculate_historical_bridge_cost(bridge_data: Dictionary) -> float:
 	var traffic_factor = randf_range(0.8, 1.2)  # Random traffic variation
 	return base_cost * age_factor * traffic_factor
 
-func _calculate_konigsberg_degrees():
+func _calculate_konigsberg_degrees() -> void:
 	"""Calculate node degrees and analyze Eulerian properties"""
 	degree_counts.clear()
 	
@@ -157,7 +157,7 @@ func _calculate_konigsberg_degrees():
 	# Analyze for Eulerian path/circuit
 	_analyze_euler_properties()
 
-func _analyze_euler_properties():
+func _analyze_euler_properties() -> void:
 	"""Analyze the graph for Eulerian path and circuit properties"""
 	euler_analysis.clear()
 	
@@ -183,14 +183,14 @@ func _analyze_euler_properties():
 	euler_analysis["problem_solvable"] = false  # All 4 nodes have odd degree
 	euler_analysis["euler_conclusion"] = "Impossible - all four landmasses have odd degree"
 
-func _create_3d_konigsberg_world():
+func _create_3d_konigsberg_world() -> void:
 	"""Create the 3D world representation of historical Königsberg"""
 	_create_river_system()
 	_create_landmass_structures()
 	_create_historical_bridges()
 	_create_educational_markers()
 
-func _create_river_system():
+func _create_river_system() -> void:
 	"""Create the Pregel River system"""
 	if not river_visualization:
 		return
@@ -210,7 +210,7 @@ func _create_river_system():
 	
 	add_child(river)
 
-func _create_landmass_structures():
+func _create_landmass_structures() -> void:
 	"""Create structures representing the historical landmasses"""
 	for i in range(nodes.size()):
 		var node = nodes[i]
@@ -226,7 +226,7 @@ func _create_landmass_structures():
 		if show_degree_labels:
 			_create_degree_indicator(node, i)
 
-func _create_landmass_platform(node: Dictionary, index: int):
+func _create_landmass_platform(node: Dictionary, index: int) -> void:
 	"""Create a platform representing each landmass"""
 	var platform = CSGCylinder3D.new()
 	platform.name = "Landmass_" + node.landmass_name
@@ -249,7 +249,7 @@ func _create_landmass_platform(node: Dictionary, index: int):
 	add_child(platform)
 	node.inst = platform
 
-func _create_historical_building(node: Dictionary, index: int):
+func _create_historical_building(node: Dictionary, index: int) -> void:
 	"""Create historical building on landmass"""
 	if structure_scenes.is_empty():
 		return
@@ -262,7 +262,7 @@ func _create_historical_building(node: Dictionary, index: int):
 	add_child(building)
 	node.structure = building
 
-func _create_degree_indicator(node: Dictionary, index: int):
+func _create_degree_indicator(node: Dictionary, index: int) -> void:
 	"""Create visual indicator showing node degree"""
 	var label = Label3D.new()
 	label.text = "Degree: " + str(degree_counts[index]) + "\n" + node.landmass_name
@@ -278,7 +278,7 @@ func _create_degree_indicator(node: Dictionary, index: int):
 	
 	add_child(label)
 
-func _create_historical_bridges():
+func _create_historical_bridges() -> void:
 	"""Create the seven historical bridges with proper 3D representation"""
 	for i in range(edges.size()):
 		var edge = edges[i]
@@ -288,7 +288,7 @@ func _create_historical_bridges():
 		_create_arched_bridge(from_pos, to_pos, edge, i)
 		_create_bridge_nameplate(from_pos, to_pos, edge, i)
 
-func _create_arched_bridge(from_pos: Vector3, to_pos: Vector3, edge: Dictionary, bridge_index: int):
+func _create_arched_bridge(from_pos: Vector3, to_pos: Vector3, edge: Dictionary, bridge_index: int) -> void:
 	"""Create an arched stone bridge"""
 	var segments = 12
 	var arch_height = bridge_arch_height
@@ -327,7 +327,7 @@ func _bridge_arch_point(start: Vector3, end: Vector3, height: float, t: float) -
 	base_point.y += height * arch_factor
 	return base_point
 
-func _create_bridge_nameplate(from_pos: Vector3, to_pos: Vector3, edge: Dictionary, bridge_index: int):
+func _create_bridge_nameplate(from_pos: Vector3, to_pos: Vector3, edge: Dictionary, bridge_index: int) -> void:
 	"""Create nameplate for each historical bridge"""
 	var mid = (from_pos + to_pos) * 0.5
 	mid.y += bridge_arch_height + 1.0
@@ -341,7 +341,7 @@ func _create_bridge_nameplate(from_pos: Vector3, to_pos: Vector3, edge: Dictiona
 	
 	add_child(nameplate)
 
-func _create_educational_markers():
+func _create_educational_markers() -> void:
 	"""Create educational information markers"""
 	if not show_theorem_explanation:
 		return
@@ -371,7 +371,7 @@ func _create_educational_markers():
 	
 	add_child(theorem_label)
 
-func _setup_educational_ui():
+func _setup_educational_ui() -> void:
 	"""Setup educational UI overlay"""
 	theorem_display = CanvasLayer.new()
 	theorem_display.name = "KonigsbergUI"
@@ -395,7 +395,7 @@ func _setup_educational_ui():
 	
 	_update_analysis_ui()
 
-func _update_analysis_ui():
+func _update_analysis_ui() -> void:
 	"""Update the analysis UI with current state"""
 	if not analysis_panel:
 		return
@@ -428,7 +428,7 @@ func _update_analysis_ui():
 		labels[13].text = "Euler's Conclusion:"
 		labels[14].text = euler_analysis["euler_conclusion"]
 
-func attempt_eulerian_path():
+func attempt_eulerian_path() -> void:
 	"""Demonstrate why no Eulerian path exists"""
 	if not animate_path_attempts:
 		return
@@ -438,7 +438,7 @@ func attempt_eulerian_path():
 	print("Euler's theorem: A connected graph has an Eulerian path if and only if it has exactly 0 or 2 vertices of odd degree")
 	print("Since we have 4 odd-degree vertices, no Eulerian path exists!")
 
-func demonstrate_bridge_removal():
+func demonstrate_bridge_removal() -> void:
 	"""Show how removing bridges affects Eulerian properties"""
 	if not interactive_bridge_removal:
 		return
@@ -446,7 +446,7 @@ func demonstrate_bridge_removal():
 	print("Try removing bridges to create an Eulerian path...")
 	print("Need to reduce odd-degree vertices to exactly 2 or 0")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle educational interactions"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -461,13 +461,13 @@ func _input(event):
 			KEY_B:
 				demonstrate_bridge_removal()
 
-func _display_euler_theorem():
+func _display_euler_theorem() -> void:
 	"""Display or hide Euler theorem explanation"""
 	var theorem_pillar = get_node_or_null("EulerTheoremPillar")
 	if theorem_pillar:
 		theorem_pillar.visible = show_theorem_explanation
 
-func _toggle_degree_indicators():
+func _toggle_degree_indicators() -> void:
 	"""Toggle visibility of degree indicators"""
 	for child in get_children():
 		if child.name.begins_with("Label3D"):
@@ -491,3 +491,9 @@ func get_konigsberg_info() -> Dictionary:
 		"historical_context": "Solved by Euler in 1736, proving no solution exists",
 		"modern_relevance": "Foundation of graph theory and topology"
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -48,7 +48,7 @@ var wind_strength_controller: ParameterController3D
 var wind_strength: float = 0.5
 var show_wind_zones: bool = true
 
-func _ready():
+func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -61,7 +61,7 @@ func _ready():
 
 	print("Wind Soccer VR - Use controller triggers to push ball with wind!")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if game_active:
 		game_time += delta
 		if game_time >= MAX_GAME_TIME:
@@ -88,7 +88,7 @@ func _physics_process(_delta: float):
 	if ball.position_v.y < BALL_RESET_Y:
 		reset_ball()
 
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	# Try to find XR controllers in the scene
 	left_controller = get_node_or_null("/root/Main/XROrigin3D/LeftController")
 	right_controller = get_node_or_null("/root/Main/XROrigin3D/RightController")
@@ -101,7 +101,7 @@ func setup_vr_controllers():
 		right_controller.button_pressed.connect(_on_right_button_pressed)
 		right_controller.button_released.connect(_on_right_button_released)
 
-func update_vr_input():
+func update_vr_input() -> void:
 	# Update wind direction based on controller pointing
 	if left_controller_active and left_controller:
 		var forward = -left_controller.global_transform.basis.z
@@ -111,25 +111,25 @@ func update_vr_input():
 		var forward = -right_controller.global_transform.basis.z
 		right_wind = forward.normalized() * 1.2
 
-func _on_left_button_pressed(button: String):
+func _on_left_button_pressed(button: String) -> void:
 	if button == "trigger":
 		left_controller_active = true
 		create_wind_visual_effect(left_controller.global_position if left_controller else Vector3.ZERO, Color.CYAN)
 
-func _on_left_button_released(button: String):
+func _on_left_button_released(button: String) -> void:
 	if button == "trigger":
 		left_controller_active = false
 
-func _on_right_button_pressed(button: String):
+func _on_right_button_pressed(button: String) -> void:
 	if button == "trigger":
 		right_controller_active = true
 		create_wind_visual_effect(right_controller.global_position if right_controller else Vector3.ZERO, Color.ORANGE)
 
-func _on_right_button_released(button: String):
+func _on_right_button_released(button: String) -> void:
 	if button == "trigger":
 		right_controller_active = false
 
-func create_field():
+func create_field() -> void:
 	# Create floor
 	var floor_mesh := PlaneMesh.new()
 	floor_mesh.size = Vector2(1.5, 2.0)
@@ -149,7 +149,7 @@ func create_field():
 	create_wall(Vector3(0.75, 0, 0), Vector3(0.02, 0.4, 2.0))  # Right wall
 	create_wall(Vector3(-0.75, 0, 0), Vector3(0.02, 0.4, 2.0)) # Left wall
 
-func create_wall(pos: Vector3, size: Vector3):
+func create_wall(pos: Vector3, size: Vector3) -> void:
 	var wall := StaticBody3D.new()
 	var collider := CollisionShape3D.new()
 	var box := BoxShape3D.new()
@@ -171,7 +171,7 @@ func create_wall(pos: Vector3, size: Vector3):
 
 	add_child(wall)
 
-func create_goals():
+func create_goals() -> void:
 	# Left goal (blue)
 	left_goal = create_goal_area(Vector3(0, 0, -0.9), Color.BLUE)
 	left_goal.body_entered.connect(_on_left_goal_scored)
@@ -207,7 +207,7 @@ func create_goal_area(pos: Vector3, color: Color) -> Area3D:
 	add_child(goal)
 	return goal
 
-func create_wind_zones():
+func create_wind_zones() -> void:
 	# Create visible wind zones for visual feedback
 	var left_zone_pos := Vector3(-0.4, 0, 0)
 	var right_zone_pos := Vector3(0.4, 0, 0)
@@ -215,7 +215,7 @@ func create_wind_zones():
 	create_wind_zone_visual(left_zone_pos, Color.CYAN)
 	create_wind_zone_visual(right_zone_pos, Color.ORANGE)
 
-func create_wind_zone_visual(pos: Vector3, color: Color):
+func create_wind_zone_visual(pos: Vector3, color: Color) -> void:
 	var zone := MeshInstance3D.new()
 	var cylinder := CylinderMesh.new()
 	cylinder.height = 0.4
@@ -233,7 +233,7 @@ func create_wind_zone_visual(pos: Vector3, color: Color):
 
 	add_child(zone)
 
-func create_ball():
+func create_ball() -> void:
 	ball = Mover.new()
 	ball.mass = 0.8
 	ball.position_v = Vector3(0, 0.1, 0)
@@ -243,25 +243,25 @@ func create_ball():
 	ball.set_size(0.06)
 	ball.set_color(Color.WHITE)
 
-func reset_ball():
+func reset_ball() -> void:
 	if ball:
 		ball.position_v = Vector3(0, 0.1, 0)
 		ball.velocity = Vector3.ZERO
 		ball.acceleration = Vector3.ZERO
 
-func _on_left_goal_scored(body: Node):
+func _on_left_goal_scored(body: Node) -> void:
 	if body == ball:
 		score_left += GOAL_SCORE_POINTS
 		reset_ball()
 		create_score_effect(left_goal.position, Color.BLUE)
 
-func _on_right_goal_scored(body: Node):
+func _on_right_goal_scored(body: Node) -> void:
 	if body == ball:
 		score_right += GOAL_SCORE_POINTS
 		reset_ball()
 		create_score_effect(right_goal.position, Color.RED)
 
-func create_score_effect(pos: Vector3, color: Color):
+func create_score_effect(pos: Vector3, color: Color) -> void:
 	# Create temporary visual effect
 	var effect := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
@@ -285,7 +285,7 @@ func create_score_effect(pos: Vector3, color: Color):
 	tween.parallel().tween_property(mat, "albedo_color:a", 0.0, 0.5)
 	tween.tween_callback(effect.queue_free)
 
-func create_wind_visual_effect(pos: Vector3, color: Color):
+func create_wind_visual_effect(pos: Vector3, color: Color) -> void:
 	# Particle-like effect for wind
 	var particles := CPUParticles3D.new()
 	particles.emitting = true
@@ -311,7 +311,7 @@ func create_wind_visual_effect(pos: Vector3, color: Color):
 	if is_instance_valid(particles):
 		particles.queue_free()
 
-func create_ui():
+func create_ui() -> void:
 	info_label = Label3D.new()
 	FORCES_UI.style_title_label(info_label, Vector3(0, 0.8, 0), 32)
 	add_child(info_label)
@@ -343,7 +343,7 @@ func create_ui():
 	wind_strength_controller.value_changed.connect(_on_wind_strength_changed)
 	wind_strength_controller.set_value(wind_strength)
 
-func update_ui():
+func update_ui() -> void:
 	if info_label:
 		FORCES_UI.set_label_text(info_label, "WIND SOCCER VR")
 
@@ -354,10 +354,10 @@ func update_ui():
 		var time_left := MAX_GAME_TIME - game_time
 		FORCES_UI.set_label_text(timer_label, "Time: %d:%02d" % [int(time_left) / 60, int(time_left) % 60])
 
-func _on_wind_strength_changed(value: float):
+func _on_wind_strength_changed(value: float) -> void:
 	wind_strength = value
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -367,14 +367,14 @@ func _input(event: InputEvent):
 				if ball:
 					ball.apply_force(Vector3(0, 0, 1.0))
 
-func reset_game():
+func reset_game() -> void:
 	score_left = 0
 	score_right = 0
 	game_time = 0.0
 	game_active = true
 	reset_ball()
 
-func end_game():
+func end_game() -> void:
 	game_active = false
 	var winner := "Blue" if score_left > score_right else "Red"
 	if score_left == score_right:
@@ -386,3 +386,9 @@ func end_game():
 	# Auto-reset after 5 seconds
 	await get_tree().create_timer(5.0).timeout
 	reset_game()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

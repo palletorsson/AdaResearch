@@ -52,7 +52,7 @@ var standard_deviation_markers: Node3D
 # Random number generator
 var rng: RandomNumberGenerator
 
-func _ready():
+func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
@@ -65,7 +65,7 @@ func _ready():
 	if auto_generate:
 		generate_samples()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -88,7 +88,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create statistical information display"""
 	stats_display = Label3D.new()
 	stats_display.position = Vector3(-3.0, 2.0, -1.0)
@@ -97,7 +97,7 @@ func setup_ui():
 	update_stats_display()
 	add_child(stats_display)
 
-func create_theoretical_curve():
+func create_theoretical_curve() -> void:
 	"""Create the theoretical normal distribution curve"""
 	theoretical_curve = Node3D.new()
 	theoretical_curve.position = Vector3(0, 1.0, 0)
@@ -117,7 +117,7 @@ func create_theoretical_curve():
 	# Create curve mesh
 	create_curve_mesh(curve_points)
 
-func create_curve_mesh(points: Array[Vector3]):
+func create_curve_mesh(points: Array[Vector3]) -> void:
 	"""Create 3D mesh for the normal curve"""
 	var curve_mesh = MeshInstance3D.new()
 	
@@ -146,7 +146,7 @@ func create_curve_mesh(points: Array[Vector3]):
 	
 	theoretical_curve.add_child(curve_mesh)
 
-func setup_parameter_controls():
+func setup_parameter_controls() -> void:
 	"""Create interactive controls for distribution parameters"""
 	parameter_controls = Node3D.new()
 	parameter_controls.position = Vector3(3.0, 1.5, -1.0)
@@ -158,7 +158,7 @@ func setup_parameter_controls():
 	# Standard deviation control slider  
 	create_parameter_slider("Std Dev", std_dev, 0.1, 3.0, Vector3(0, 0, 0))
 
-func create_parameter_slider(name: String, value: float, min_val: float, max_val: float, position: Vector3):
+func create_parameter_slider(name: String, value: float, min_val: float, max_val: float, position: Vector3) -> void:
 	"""Create an interactive slider for parameter adjustment"""
 	var slider_group = Node3D.new()
 	slider_group.position = position
@@ -198,7 +198,7 @@ func create_parameter_slider(name: String, value: float, min_val: float, max_val
 	
 	parameter_controls.add_child(slider_group)
 
-func create_std_dev_markers():
+func create_std_dev_markers() -> void:
 	"""Create visual markers for standard deviation ranges"""
 	standard_deviation_markers = Node3D.new()
 	standard_deviation_markers.position = Vector3(0, 1.0, -0.1)
@@ -213,7 +213,7 @@ func create_std_dev_markers():
 		var std_range = std_ranges[i]
 		create_std_dev_region(std_range, colors[i], alphas[i])
 
-func create_std_dev_region(std_multiplier: int, color: Color, alpha: float):
+func create_std_dev_region(std_multiplier: int, color: Color, alpha: float) -> void:
 	"""Create shaded region for standard deviation range"""
 	var region = MeshInstance3D.new()
 	region.name = "std_region_" + str(std_multiplier)
@@ -230,14 +230,14 @@ func create_std_dev_region(std_multiplier: int, color: Color, alpha: float):
 	
 	standard_deviation_markers.add_child(region)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		generate_samples()
 	elif button_name == "grip_click":
 		clear_samples()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -247,7 +247,7 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			reset_parameters()
 
-func generate_samples():
+func generate_samples() -> void:
 	"""Generate random samples from normal distribution"""
 	clear_samples()
 	
@@ -277,7 +277,7 @@ func generate_normal_sample() -> float:
 	spare_value = mag * cos(2.0 * PI * v)
 	return mag * sin(2.0 * PI * v) + mean
 
-func create_falling_particle(value: float):
+func create_falling_particle(value: float) -> void:
 	"""Create a particle that falls to represent a sample"""
 	var particle = MeshInstance3D.new()
 	
@@ -303,7 +303,7 @@ func create_falling_particle(value: float):
 	tween.tween_property(particle, "position:y", 0.1, 1.0 / particle_speed)
 	tween.tween_callback(func(): particle.queue_free())
 
-func create_empirical_histogram():
+func create_empirical_histogram() -> void:
 	"""Create histogram from generated samples"""
 	if empirical_histogram:
 		empirical_histogram.queue_free()
@@ -338,7 +338,7 @@ func create_empirical_histogram():
 			
 			create_histogram_bar(i, height, x_pos, bin_width)
 
-func create_histogram_bar(index: int, height: float, x_pos: float, bin_width: float):
+func create_histogram_bar(index: int, height: float, x_pos: float, bin_width: float) -> void:
 	"""Create a single histogram bar"""
 	var bar = MeshInstance3D.new()
 	bar.name = "histogram_bar_" + str(index)
@@ -362,7 +362,7 @@ func normal_pdf(x: float, mu: float, sigma: float) -> float:
 	var exponent = -0.5 * pow((x - mu) / sigma, 2)
 	return coefficient * exp(exponent)
 
-func update_stats_display():
+func update_stats_display() -> void:
 	"""Update statistical information display"""
 	var text = "Normal Distribution\n"
 	text += "μ (mean): %.2f\n" % mean
@@ -422,7 +422,7 @@ func calculate_percentage_in_range(std_multiplier: int) -> float:
 	
 	return float(count_in_range) / float(samples.size()) * 100.0
 
-func clear_samples():
+func clear_samples() -> void:
 	"""Clear all generated samples and visualizations"""
 	samples.clear()
 	
@@ -438,7 +438,7 @@ func clear_samples():
 	
 	update_stats_display()
 
-func reset_parameters():
+func reset_parameters() -> void:
 	"""Reset distribution parameters to defaults"""
 	mean = 0.0
 	std_dev = 1.0
@@ -461,3 +461,9 @@ func get_statistics_summary() -> Dictionary:
 			"three_std": calculate_percentage_in_range(3)
 		}
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

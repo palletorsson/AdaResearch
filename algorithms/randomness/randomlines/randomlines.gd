@@ -5,11 +5,11 @@ extends Node3D
 
 var line_scene: PackedScene = preload("res://commons/primitives/line/line.tscn")
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	spawn_lines()
 
-func spawn_lines():
+func spawn_lines() -> void:
 	var half := area_size * 0.5
 	for i in range(num_lines):
 		var line_instance: Node3D = line_scene.instantiate()

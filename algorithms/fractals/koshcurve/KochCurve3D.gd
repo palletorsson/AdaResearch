@@ -12,29 +12,29 @@ extends Node3D
 var line_material: StandardMaterial3D
 var _time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	setup_material()
 	generate_portal()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if rotation_speed > 0:
 		_time += delta
 		rotation.y = _time * rotation_speed
 
-func setup_material():
+func setup_material() -> void:
 	line_material = StandardMaterial3D.new()
 	line_material.albedo_color = Color(0.9, 0.95, 1.0)
 	line_material.emission_enabled = true
 	line_material.emission = Color(0.6, 0.8, 1.0)
 	line_material.emission_energy_multiplier = 1.5
 
-func generate_portal():
+func generate_portal() -> void:
 	# Create multiple depth layers for volume
 	for layer in range(depth_layers):
 		var z_offset = (layer - depth_layers / 2.0) * layer_spacing
 		create_portal_layer(z_offset, layer)
 
-func create_portal_layer(z_offset: float, layer_index: int):
+func create_portal_layer(z_offset: float, layer_index: int) -> void:
 	var layer_node = Node3D.new()
 	layer_node.position.z = z_offset
 	add_child(layer_node)
@@ -45,7 +45,7 @@ func create_portal_layer(z_offset: float, layer_index: int):
 	# Create the base legs
 	create_legs(layer_node)
 
-func create_koch_arch(parent: Node3D):
+func create_koch_arch(parent: Node3D) -> void:
 	# Generate Koch points for a straight line
 	var koch_points = get_koch_points(iterations)
 	
@@ -86,7 +86,7 @@ func map_to_arch(points: Array[Vector3]) -> Array[Vector3]:
 	
 	return arch_points
 
-func create_legs(parent: Node3D):
+func create_legs(parent: Node3D) -> void:
 	var half_width = portal_width / 2.0
 	
 	# Left leg - Koch pattern going down
@@ -193,3 +193,9 @@ func create_line_segment(start: Vector3, end: Vector3) -> MeshInstance3D:
 		mesh_instance.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	return mesh_instance
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

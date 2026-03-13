@@ -49,7 +49,7 @@ var _btn_brush_down: Node3D
 var is_initialized: bool = false
 var blobs_painted: int = 0
 
-func _ready():
+func _ready() -> void:
 	print("MarchingCubesSculptVR: Initializing VR sculpting...")
 	_create_terrain_generator()
 	_create_brush_indicator()
@@ -61,7 +61,7 @@ func _ready():
 	_update_status_label()
 	print("MarchingCubesSculptVR: Ready! Use triggers to paint in 3D.")
 
-func _create_terrain_generator():
+func _create_terrain_generator() -> void:
 	# Load and instantiate the sculpt terrain generator
 	var sculpt_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd")
 	if not sculpt_script:
@@ -106,7 +106,7 @@ func _create_terrain_generator():
 		terrain_generator.add_blob(Vector3(0, 0, 0), 0.3)
 		blobs_painted += 1
 
-func _create_brush_indicator():
+func _create_brush_indicator() -> void:
 	brush_indicator = MeshInstance3D.new()
 	brush_indicator.name = "BrushIndicator"
 
@@ -129,7 +129,7 @@ func _create_brush_indicator():
 	brush_indicator.visible = false
 	add_child(brush_indicator)
 
-func _create_volume_bounds():
+func _create_volume_bounds() -> void:
 	# Visual indicator of the sculpting volume
 	volume_bounds = MeshInstance3D.new()
 	volume_bounds.name = "VolumeBounds"
@@ -146,7 +146,7 @@ func _create_volume_bounds():
 
 	add_child(volume_bounds)
 
-func _build_vr_controls():
+func _build_vr_controls() -> void:
 	# Create a control panel floating beside the sculpting volume
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
@@ -257,7 +257,7 @@ func _build_vr_controls():
 	title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_control_panel.add_child(title_label)
 
-func _build_status_label():
+func _build_status_label() -> void:
 	_status_label = Label3D.new()
 	_status_label.name = "StatusLabel"
 	_status_label.font_size = 28
@@ -268,14 +268,14 @@ func _build_status_label():
 	_status_label.text = "Initializing..."
 	add_child(_status_label)
 
-func _update_status_label():
+func _update_status_label() -> void:
 	if not _status_label:
 		return
 	var mode_str = "ERASE" if erase_mode else "PAINT"
 	var mode_color = "🔴" if erase_mode else "🟠"
 	_status_label.text = "%s %s | Brush: %.2f | Blobs: %d" % [mode_color, mode_str, brush_radius, blobs_painted]
 
-func _regenerate_sculpture():
+func _regenerate_sculpture() -> void:
 	# Clear everything and regenerate with a fresh starting blob
 	if terrain_generator and terrain_generator.has_method("clear_blobs"):
 		terrain_generator.clear_blobs()
@@ -297,7 +297,7 @@ func _regenerate_sculpture():
 			blobs_painted = 3
 		_update_status_label()
 
-func _toggle_erase():
+func _toggle_erase() -> void:
 	erase_mode = !erase_mode
 	_update_brush_color()
 	_update_status_label()
@@ -310,13 +310,13 @@ func _toggle_erase():
 				break
 	print("Erase mode: ", "ON" if erase_mode else "OFF")
 
-func _change_brush_size(delta: float):
+func _change_brush_size(delta: float) -> void:
 	brush_radius = clampf(brush_radius + delta, brush_radius_min, brush_radius_max)
 	_update_brush_size()
 	_update_status_label()
 	print("Brush radius: ", brush_radius)
 
-func _find_controllers():
+func _find_controllers() -> void:
 	# Try to find XR controllers in the scene tree
 	await get_tree().process_frame
 
@@ -350,7 +350,7 @@ func _find_node_recursive(node: Node, name_contains: String) -> Node3D:
 			return found
 	return null
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not is_initialized:
 		return
 
@@ -367,7 +367,7 @@ func _process(delta):
 	# Update brush indicator
 	_update_brush_indicator()
 
-func _handle_vr_input(_delta):
+func _handle_vr_input(_delta) -> void:
 	# Check for XR trigger actions
 	if left_controller:
 		var left_trigger: float = 0.0
@@ -391,11 +391,11 @@ func _handle_vr_input(_delta):
 			_paint_at_controller(right_controller)
 			right_paint_timer = 0.0
 
-func _handle_keyboard_input(_delta):
+func _handle_keyboard_input(_delta) -> void:
 	# Keyboard controls for desktop testing
 	pass  # Handled in _input for key events
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -428,7 +428,7 @@ func _input(event):
 			# Paint at a position based on mouse (simplified - center)
 			_paint_at_position(Vector3(randf_range(-0.3, 0.3), randf_range(-0.3, 0.3), randf_range(-0.3, 0.3)))
 
-func _paint_at_controller(controller: Node3D):
+func _paint_at_controller(controller: Node3D) -> void:
 	if not controller:
 		return
 
@@ -473,7 +473,7 @@ func _paint_at_position(local_pos: Vector3):
 			if mat:
 				mat.emission_energy_multiplier = 0.5
 
-func _update_brush_indicator():
+func _update_brush_indicator() -> void:
 	if not show_brush_indicator:
 		brush_indicator.visible = false
 		return
@@ -487,14 +487,14 @@ func _update_brush_indicator():
 	else:
 		brush_indicator.visible = false
 
-func _update_brush_size():
+func _update_brush_size() -> void:
 	if brush_indicator and brush_indicator.mesh:
 		var sphere = brush_indicator.mesh as SphereMesh
 		if sphere:
 			sphere.radius = brush_radius
 			sphere.height = brush_radius * 2.0
 
-func _update_brush_color():
+func _update_brush_color() -> void:
 	if brush_indicator and brush_indicator.material_override:
 		var mat = brush_indicator.material_override as StandardMaterial3D
 		if mat:
@@ -505,7 +505,7 @@ func _update_brush_color():
 				mat.albedo_color = Color(1.0, 0.5, 0.0, 0.4)  # Orange for paint
 				mat.emission = Color(1.0, 0.5, 0.0)
 
-func clear_sculpture():
+func clear_sculpture() -> void:
 	if terrain_generator and terrain_generator.has_method("clear_blobs"):
 		terrain_generator.clear_blobs()
 		blobs_painted = 0
@@ -521,7 +521,7 @@ func clear_sculpture():
 func get_blob_count() -> int:
 	return blobs_painted
 
-func reset():
+func reset() -> void:
 	clear_sculpture()
 	erase_mode = false
 	brush_radius = 0.15
@@ -535,3 +535,9 @@ func reset():
 				child.text = "ERASE: OFF"
 				child.modulate = Color(0.7, 0.7, 0.7)
 				break
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

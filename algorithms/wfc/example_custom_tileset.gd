@@ -14,7 +14,7 @@ extends Node3D
 
 @onready var wfc_grid = $WFCGrid3D
 
-func _ready():
+func _ready() -> void:
 	# Clear default tiles
 	wfc_grid.tile_types.clear()
 	wfc_grid.solver.tile_types.clear()
@@ -25,7 +25,7 @@ func _ready():
 	print("Custom tileset created with ", wfc_grid.tile_types.size(), " tile types")
 	print("Press SPACE to generate")
 
-func create_corridor_tileset():
+func create_corridor_tileset() -> void:
 	"""Create a tileset for generating corridor-like structures"""
 
 	# Straight corridor (horizontal X)
@@ -116,7 +116,7 @@ func create_corridor_tileset():
 	empty.set_compatible(Vector3(0, 0, -1), ["empty", "wall", "corridor_x", "corner_xz"])
 	wfc_grid.add_tile_type(empty)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			print("\n=== Generating Custom WFC Grid ===")

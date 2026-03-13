@@ -30,11 +30,11 @@ var square_colors = [
 # Square sizes (as ratios of the plane)
 var square_sizes = [1.0, 0.85, 0.7, 0.6, 0.5, 0.42, 0.35, 0.28, 0.22, 0.16]
 
-func _ready():
+func _ready() -> void:
 	create_frame()
 	create_albers_plane()
 
-func create_frame():
+func create_frame() -> void:
 	# Create a thick frame behind the painting
 	# Frame goes from 0.399m (just behind painting) to 0.6m (into the wall)
 	var frame = MeshInstance3D.new()
@@ -62,7 +62,7 @@ func create_frame():
 	mat.metallic = 0.0
 	frame.material_override = mat
 
-func create_albers_plane():
+func create_albers_plane() -> void:
 	# Create the base plane geometry
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "AlbersPlane"
@@ -153,3 +153,9 @@ func create_albers_plane():
 	mesh_instance.material_override = material
 	
 	# Painting faces Z- direction (toward the viewer in the grid)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

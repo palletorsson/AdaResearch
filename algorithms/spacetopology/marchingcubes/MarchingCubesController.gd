@@ -19,14 +19,14 @@ var generation_interval: float = 10.0  # Regenerate every 10 seconds
 var camera_rotation_speed: float = 0.2
 var camera: Camera3D
 
-func _ready():
+func _ready() -> void:
 	setup_terrain_generator()
 	setup_camera()
 	
 	# Generate initial terrain
 	call_deferred("generate_terrain_async")
 
-func setup_terrain_generator():
+func setup_terrain_generator() -> void:
 	"""Initialize terrain generation system"""
 	terrain_generator = TerrainGenerator.new()
 	terrain_generator.generation_progress.connect(_on_generation_progress)
@@ -37,12 +37,12 @@ func setup_terrain_generator():
 	
 	print("MarchingCubes: Terrain generator initialized")
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup camera system"""
 	camera = $Camera3D
 	print("MarchingCubes: Camera initialized")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera automatically for better viewing
 	if camera:
 		camera.rotate_y(camera_rotation_speed * delta)
@@ -53,7 +53,7 @@ func _process(delta):
 		generation_timer = 0.0
 		call_deferred("generate_terrain_async")
 
-func generate_terrain_async():
+func generate_terrain_async() -> void:
 	"""Generate terrain asynchronously"""
 	if not terrain_generator or not terrain_container:
 		return
@@ -75,12 +75,12 @@ func generate_terrain_async():
 		if mesh is MeshInstance3D:
 			terrain_container.add_child(mesh)
 
-func _on_generation_progress(progress: float):
+func _on_generation_progress(progress: float) -> void:
 	"""Handle generation progress updates"""
 	# Could add visual feedback here if needed
 	pass
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	"""Handle generation completion"""
 	print("MarchingCubes: Terrain generation complete")
 	
@@ -88,3 +88,9 @@ func _on_generation_complete():
 	terrain_size = randf_range(10.0, 20.0)
 	terrain_height = randf_range(5.0, 12.0)
 	noise_frequency = randf_range(0.03, 0.08)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

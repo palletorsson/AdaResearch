@@ -11,13 +11,13 @@ class_name PrismaticCrystalChair
 
 var materials: ModernistMaterials
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	var crystal_instance = MeshInstance3D.new()
 	add_child(crystal_instance)
 	
@@ -41,9 +41,14 @@ func generate_chair():
 	crystal_instance.add_child(base_box)
 	crystal_instance.material_override = materials.get_material("clear_acrylic")
 
-func regenerate_with_parameters(_params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary) -> void:
 	for child in get_children():
 		if child != materials:
 			child.queue_free()
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

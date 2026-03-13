@@ -13,7 +13,7 @@ var boundaries: Array = []
 var distance_indicators: Array = []
 var sweep_line_position: float = -5.0
 
-func _ready():
+func _ready() -> void:
 	# Initialize Voronoi Diagrams visualization
 	print("Voronoi Diagrams Visualization initialized")
 	create_seed_points()
@@ -22,7 +22,7 @@ func _ready():
 	create_distance_indicators()
 	setup_voronoi_metrics()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate generation progress
@@ -37,7 +37,7 @@ func _process(delta):
 	animate_sweep_line(delta)
 	update_voronoi_metrics(delta)
 
-func create_seed_points():
+func create_seed_points() -> void:
 	# Create Voronoi seed points
 	var seed_points_node = $VoronoiSpace/SeedPoints
 	for i in range(seed_count):
@@ -76,7 +76,7 @@ func create_seed_points():
 			"type": seed_type
 		})
 
-func create_voronoi_cells():
+func create_voronoi_cells() -> void:
 	# Create Voronoi cell representations
 	var voronoi_cells_node = $VoronoiSpace/VoronoiCells
 	for i in range(seed_count):
@@ -104,7 +104,7 @@ func create_voronoi_cells():
 			"neighbors": []
 		})
 
-func create_boundaries():
+func create_boundaries() -> void:
 	# Create Voronoi boundary lines
 	var boundaries_node = $VoronoiSpace/Boundaries
 	for i in range(30):  # Create boundary segments
@@ -135,7 +135,7 @@ func create_boundaries():
 			"separates": []
 		})
 
-func create_distance_indicators():
+func create_distance_indicators() -> void:
 	# Create distance field indicators
 	var distance_indicators_node = $DistanceFields/DistanceIndicators
 	for i in range(cell_resolution):
@@ -165,7 +165,7 @@ func create_distance_indicators():
 			"distance": 0.0
 		})
 
-func setup_voronoi_metrics():
+func setup_voronoi_metrics() -> void:
 	# Initialize Voronoi metrics
 	var uniformity_indicator = $VoronoiMetrics/UniformityMeter/UniformityIndicator
 	var coverage_indicator = $VoronoiMetrics/CoverageMeter/CoverageIndicator
@@ -174,7 +174,7 @@ func setup_voronoi_metrics():
 	if coverage_indicator:
 		coverage_indicator.position.x = 0  # Start at middle
 
-func animate_seed_points(delta):
+func animate_seed_points(delta) -> void:
 	# Animate seed points
 	for i in range(seed_points.size()):
 		var seed_data = seed_points[i]
@@ -204,7 +204,7 @@ func animate_seed_points(delta):
 				var intensity = 0.5 + activity * 0.5
 				seed.material_override.emission = seed.material_override.albedo_color * intensity
 
-func animate_voronoi_cells(delta):
+func animate_voronoi_cells(delta) -> void:
 	# Animate Voronoi cells
 	for i in range(voronoi_cells.size()):
 		var cell_data = voronoi_cells[i]
@@ -248,7 +248,7 @@ func calculate_average_neighbor_distance(seed_index: int) -> float:
 	
 	return total_distance / neighbor_count if neighbor_count > 0 else 1.0
 
-func animate_generation_engine(delta):
+func animate_generation_engine(delta) -> void:
 	# Animate generation engine core
 	var engine_core = $GenerationEngine/EngineCore
 	if engine_core:
@@ -304,7 +304,7 @@ func animate_generation_engine(delta):
 			var intensity = 0.3 + lloyd_activation * 0.7
 			lloyd_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_distance_fields(delta):
+func animate_distance_fields(delta) -> void:
 	# Animate distance field core
 	var field_core = $DistanceFields/FieldCore
 	if field_core:
@@ -351,7 +351,7 @@ func animate_distance_fields(delta):
 			var pulse = scale_factor + sin(time * 3.0 + i * 0.2) * 0.1 * generation_progress
 			indicator.scale = Vector3.ONE * pulse
 
-func animate_sweep_line(delta):
+func animate_sweep_line(delta) -> void:
 	# Animate Fortune's algorithm sweep line
 	var sweep_core = $SweepLine/SweepCore
 	if sweep_core:
@@ -400,7 +400,7 @@ func animate_sweep_line(delta):
 			color.a = 0.8 * visibility
 			boundary.material_override.albedo_color = color
 
-func update_voronoi_metrics(delta):
+func update_voronoi_metrics(delta) -> void:
 	# Update uniformity meter
 	var uniformity_indicator = $VoronoiMetrics/UniformityMeter/UniformityIndicator
 	if uniformity_indicator:
@@ -423,13 +423,13 @@ func update_voronoi_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - coverage_score)
 		coverage_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_generation_progress(progress: float):
+func set_generation_progress(progress: float) -> void:
 	generation_progress = clamp(progress, 0.0, 1.0)
 
-func set_uniformity_score(uniformity: float):
+func set_uniformity_score(uniformity: float) -> void:
 	uniformity_score = clamp(uniformity, 0.0, 1.0)
 
-func set_coverage_score(coverage: float):
+func set_coverage_score(coverage: float) -> void:
 	coverage_score = clamp(coverage, 0.0, 1.0)
 
 func get_generation_progress() -> float:
@@ -441,9 +441,15 @@ func get_uniformity_score() -> float:
 func get_coverage_score() -> float:
 	return coverage_score
 
-func reset_generation():
+func reset_generation() -> void:
 	time = 0.0
 	generation_progress = 0.0
 	uniformity_score = 0.0
 	coverage_score = 0.0
 	sweep_line_position = -5.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

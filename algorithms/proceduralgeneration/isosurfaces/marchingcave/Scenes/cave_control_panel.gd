@@ -15,10 +15,10 @@ signal previous_preset_pressed()
 @onready var scale_label : Label = $VBoxContainer/ChunkScale/Value
 @onready var preset_label : Label = $VBoxContainer/Presets/PresetName
 
-func _ready():
+func _ready() -> void:
 	setup_sliders()
 
-func setup_sliders():
+func setup_sliders() -> void:
 	# Noise Scale: 1.0 - 6.0
 	noise_slider.min_value = 1.0
 	noise_slider.max_value = 6.0
@@ -39,25 +39,25 @@ func setup_sliders():
 	
 	update_labels()
 
-func _on_noise_slider_value_changed(value):
+func _on_noise_slider_value_changed(value) -> void:
 	noise_label.text = "%.2f" % value
 	emit_signal("noise_scale_changed", value)
 
-func _on_iso_slider_value_changed(value):
+func _on_iso_slider_value_changed(value) -> void:
 	iso_label.text = "%.2f" % value
 	emit_signal("iso_level_changed", value)
 
-func _on_scale_slider_value_changed(value):
+func _on_scale_slider_value_changed(value) -> void:
 	scale_label.text = "%.0f" % value
 	emit_signal("chunk_scale_changed", value)
 
-func _on_prev_button_pressed():
+func _on_prev_button_pressed() -> void:
 	emit_signal("previous_preset_pressed")
 
-func _on_next_button_pressed():
+func _on_next_button_pressed() -> void:
 	emit_signal("next_preset_pressed")
 
-func update_labels():
+func update_labels() -> void:
 	if noise_label:
 		noise_label.text = "%.2f" % noise_slider.value
 	if iso_label:
@@ -65,11 +65,11 @@ func update_labels():
 	if scale_label:
 		scale_label.text = "%.0f" % scale_slider.value
 
-func update_preset_name(name: String):
+func update_preset_name(name: String) -> void:
 	if preset_label:
 		preset_label.text = name
 
-func set_values(noise: float, iso: float, scale: float):
+func set_values(noise: float, iso: float, scale: float) -> void:
 	if noise_slider:
 		noise_slider.value = noise
 	if iso_slider:

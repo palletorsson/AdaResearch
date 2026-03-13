@@ -552,3 +552,9 @@ func _reset_jar() -> void:
 	_is_held = false
 	_current_entropy = _measure_entropy()
 	_update_display()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

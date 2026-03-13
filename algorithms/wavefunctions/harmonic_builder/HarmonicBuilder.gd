@@ -392,3 +392,9 @@ func save_to_json(file_path: String) -> void:
 		file.store_string(json_string)
 		file.close()
 		print("HarmonicBuilder: Saved to %s" % file_path)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

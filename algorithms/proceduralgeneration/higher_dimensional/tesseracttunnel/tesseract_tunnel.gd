@@ -31,11 +31,11 @@ var time: float = 0.0
 var _mesh_instance: MeshInstance3D
 var _immediate_mesh: ImmediateMesh
 
-func _ready():
+func _ready() -> void:
 	_setup_mesh()
 	generate_tunnel()
 
-func _setup_mesh():
+func _setup_mesh() -> void:
 	# Clean up children first
 	for child in get_children():
 		child.queue_free()
@@ -58,7 +58,7 @@ func _setup_mesh():
 	_mesh_instance.material_override = material
 	add_child(_mesh_instance)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_w:
 		time += delta
 		w_offset = sin(time * w_speed) * 2.0
@@ -72,7 +72,7 @@ func _process(delta):
 			
 		generate_tunnel()
 
-func generate_tunnel():
+func generate_tunnel() -> void:
 	"""Generate tunnel from 4D tesseract tessellation"""
 	if not _mesh_instance:
 		_setup_mesh()
@@ -104,7 +104,7 @@ func generate_tunnel():
 				
 	_immediate_mesh.surface_end()
 
-func _add_tesseract_to_mesh(center_4d: Vector4D, edges: Array):
+func _add_tesseract_to_mesh(center_4d: Vector4D, edges: Array) -> void:
 	# Generate 16 vertices of tesseract in 4D
 	var vertices_3d = []
 	
@@ -141,12 +141,12 @@ func _add_tesseract_to_mesh(center_4d: Vector4D, edges: Array):
 		_immediate_mesh.surface_set_color(color)
 		_immediate_mesh.surface_add_vertex(vertices_3d[edge[1]])
 
-func regenerate():
+func regenerate() -> void:
 	"""Regenerate tunnel"""
 	_setup_mesh() # Reset mesh
 	generate_tunnel()
 
-func set_projection_type(type: ProjectionType):
+func set_projection_type(type: ProjectionType) -> void:
 	"""Change projection type and regenerate"""
 	projection_type = type
 	generate_tunnel()
@@ -233,8 +233,14 @@ class Vector4D:
 	var z: float
 	var w: float
 	
-	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0):
+	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0) -> void:
 		x = px
 		y = py
 		z = pz
 		w = pw
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

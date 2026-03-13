@@ -31,14 +31,14 @@ var angular_velocity: float = 0.0
 var angular_acceleration: float = 0.0
 var trail_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 	
 	# Initialize pendulum
 	angle = deg_to_rad(initial_angle)
 	_update_pendulum_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -54,7 +54,7 @@ func _setup_visuals():
 	rod.mesh.height = length
 	bob.position.y = -length
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# --- PHYSICS SIMULATION (The Driver) ---
 	# Simple Pendulum Equation: alpha = -(g/L) * sin(theta)
 	angular_acceleration = -(gravity / length) * sin(angle)
@@ -87,11 +87,11 @@ func _process(delta):
 	# Render
 	_draw_trail()
 
-func _update_pendulum_visuals():
+func _update_pendulum_visuals() -> void:
 	# Rotate pivot to match angle
 	pivot.rotation.z = angle
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	
 	if trail_points.is_empty():

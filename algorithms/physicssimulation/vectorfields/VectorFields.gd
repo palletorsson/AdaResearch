@@ -11,13 +11,13 @@ var arrow_multimesh: MultiMeshInstance3D
 var field_sources: Array[Area3D] = []
 var particles: Array[RigidBody3D] = []
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_field_sources()
 	_create_arrow_grid()
 	_create_test_particles()
 
-func _create_field_sources():
+func _create_field_sources() -> void:
 	# Attractor (pulls inward)
 	var attractor := Area3D.new()
 	attractor.name = "Attractor"
@@ -73,7 +73,7 @@ func _create_field_sources():
 	add_child(repulsor)
 	field_sources.append(repulsor)
 
-func _create_arrow_grid():
+func _create_arrow_grid() -> void:
 	arrow_multimesh = MultiMeshInstance3D.new()
 	arrow_multimesh.name = "ArrowGrid"
 
@@ -102,7 +102,7 @@ func _create_arrow_grid():
 	add_child(arrow_multimesh)
 	_update_arrows()
 
-func _create_test_particles():
+func _create_test_particles() -> void:
 	for i in range(particle_count):
 		var rb := RigidBody3D.new()
 		rb.mass = 0.1
@@ -148,7 +148,7 @@ func _physics_process(_delta: float):
 			)
 			rb.linear_velocity = Vector3.ZERO
 
-func _update_arrows():
+func _update_arrows() -> void:
 	var mm := arrow_multimesh.multimesh
 	var idx := 0
 	var half := (grid_resolution - 1) * grid_spacing * 0.5
@@ -194,3 +194,9 @@ func _update_arrows():
 				mm.set_instance_color(idx, color)
 
 				idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

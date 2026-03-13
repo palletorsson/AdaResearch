@@ -52,7 +52,7 @@ var statistics: Dictionary = {
 	"efficiency_gain": 0.0
 }
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_camera()
 	load_identity_preset()
@@ -62,14 +62,14 @@ func _ready():
 	if auto_animate:
 		start_boyer_moore_search()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_searching and auto_animate:
 		animation_timer += delta
 		if animation_timer >= animation_speed:
 			perform_search_step()
 			animation_timer = 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -86,7 +86,7 @@ func _input(event):
 			KEY_3:
 				load_identity_preset("Non_Binary_Recognition")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Dramatic lighting for text focus
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.5
@@ -104,7 +104,7 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func setup_camera():
+func setup_camera() -> void:
 	camera_controller = Node3D.new()
 	add_child(camera_controller)
 	
@@ -113,7 +113,7 @@ func setup_camera():
 	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
-func load_identity_preset(preset: String = ""):
+func load_identity_preset(preset: String = "") -> void:
 	if preset != "":
 		identity_preset = preset
 	
@@ -136,7 +136,7 @@ func load_identity_preset(preset: String = ""):
 	
 	restart_search()
 
-func preprocess_pattern():
+func preprocess_pattern() -> void:
 	"""Build Boyer-Moore preprocessing tables"""
 	pattern_array = []
 	for c in search_pattern:
@@ -144,7 +144,7 @@ func preprocess_pattern():
 	
 	build_bad_character_table()
 
-func build_bad_character_table():
+func build_bad_character_table() -> void:
 	"""Build bad character shift table"""
 	bad_character_table.clear()
 	
@@ -154,7 +154,7 @@ func build_bad_character_table():
 		# Distance from current position to rightmost occurrence
 		bad_character_table[char] = pattern_array.size() - i - 1
 
-func create_text_visualization():
+func create_text_visualization() -> void:
 	"""Create 3D visualization of text and search pattern"""
 	clear_previous_visualization()
 	
@@ -174,7 +174,7 @@ func create_text_visualization():
 	# Position camera for optimal viewing
 	adjust_camera_for_text()
 
-func create_text_meshes():
+func create_text_meshes() -> void:
 	"""Create 3D text characters"""
 	var chars_per_row = 20
 	var row_spacing = 2.0
@@ -188,7 +188,7 @@ func create_text_meshes():
 		text_meshes.append(char_mesh)
 		add_child(char_mesh)
 
-func create_pattern_overlay():
+func create_pattern_overlay() -> void:
 	"""Create pattern visualization overlay"""
 	for i in range(pattern_array.size()):
 		var char = pattern_array[i]
@@ -223,7 +223,7 @@ func create_character_mesh(character: String, position: Vector3, color: Color) -
 	
 	return mesh_instance
 
-func start_boyer_moore_search():
+func start_boyer_moore_search() -> void:
 	"""Initialize Boyer-Moore search algorithm"""
 	current_text_position = 0
 	current_pattern_position = pattern_array.size() - 1  # Start from end of pattern
@@ -238,7 +238,7 @@ func start_boyer_moore_search():
 	
 	print("Boyer-Moore search started for pattern: '", search_pattern, "'")
 
-func perform_search_step():
+func perform_search_step() -> void:
 	"""Perform one step of Boyer-Moore algorithm"""
 	if not is_searching:
 		return
@@ -301,7 +301,7 @@ func calculate_boyer_moore_skip(mismatched_char: String) -> int:
 	else:
 		return pattern_array.size()  # Character not in pattern
 
-func position_pattern_overlay():
+func position_pattern_overlay() -> void:
 	"""Position the pattern overlay at current search position"""
 	var chars_per_row = 20
 	var row_spacing = 2.0
@@ -317,7 +317,7 @@ func position_pattern_overlay():
 		else:
 			pattern_meshes[i].visible = false
 
-func highlight_comparison(text_pos: int, pattern_pos: int, is_match: bool):
+func highlight_comparison(text_pos: int, pattern_pos: int, is_match: bool) -> void:
 	"""Highlight the current character comparison"""
 	# Reset previous highlights
 	reset_highlights()
@@ -334,7 +334,7 @@ func highlight_comparison(text_pos: int, pattern_pos: int, is_match: bool):
 		material.albedo_color = match_color if is_match else mismatch_color
 		material.emission = material.albedo_color * 0.6
 
-func highlight_match(start_position: int):
+func highlight_match(start_position: int) -> void:
 	"""Highlight a complete pattern match"""
 	for i in range(pattern_array.size()):
 		var text_index = start_position + i
@@ -343,7 +343,7 @@ func highlight_match(start_position: int):
 			material.albedo_color = Color(0.2, 0.9, 0.2)  # Bright green
 			material.emission = material.albedo_color * 0.8
 
-func show_skip_visualization(skip_distance: int):
+func show_skip_visualization(skip_distance: int) -> void:
 	"""Visualize the Boyer-Moore skip"""
 	# Create temporary skip indicator
 	var skip_indicator = MeshInstance3D.new()
@@ -370,7 +370,7 @@ func show_skip_visualization(skip_distance: int):
 	var timer = get_tree().create_timer(1.0)
 	timer.timeout.connect(func(): skip_indicator.queue_free())
 
-func reset_highlights():
+func reset_highlights() -> void:
 	"""Reset all character highlights to default colors"""
 	for mesh in text_meshes:
 		var material = mesh.material_override as StandardMaterial3D
@@ -382,7 +382,7 @@ func reset_highlights():
 		material.albedo_color = pattern_color
 		material.emission = pattern_color * 0.4
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear previous visualization elements"""
 	for mesh in text_meshes:
 		mesh.queue_free()
@@ -392,14 +392,14 @@ func clear_previous_visualization():
 		mesh.queue_free()
 	pattern_meshes.clear()
 
-func adjust_camera_for_text():
+func adjust_camera_for_text() -> void:
 	"""Adjust camera position for optimal text viewing"""
 	var text_width = min(20, text_array.size()) * character_spacing
 	var text_height = (text_array.size() / 20 + 1) * 2.0
 	
 	camera_controller.position = Vector3(0, text_height / 2, max(text_width, text_height) * 1.2)
 
-func restart_search():
+func restart_search() -> void:
 	"""Restart the search with current parameters"""
 	clear_previous_visualization()
 	preprocess_pattern()
@@ -410,7 +410,7 @@ func restart_search():
 	statistics.skips = 0
 	update_ui()
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create user interface for algorithm information"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -440,7 +440,7 @@ func setup_ui():
 	
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update user interface with current algorithm state"""
 	if not ui_display:
 		return
@@ -463,4 +463,10 @@ func update_ui():
 		labels[8].text = "Matches Found: " + str(matches_found.size())
 		labels[9].text = ""
 		labels[10].text = "Controls: SPACE=Step, R=Restart, 1-3=Presets"
-		labels[11].text = "Pattern overlay shows search progress" 
+		labels[11].text = "Pattern overlay shows search progress"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

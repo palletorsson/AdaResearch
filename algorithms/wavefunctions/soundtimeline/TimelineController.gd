@@ -13,7 +13,7 @@ extends Control
 # Timeline visualizer
 var timeline_visualizer: SoundTimelineVisualizer
 
-func _ready():
+func _ready() -> void:
 	# Create the timeline visualizer
 	timeline_visualizer = SoundTimelineVisualizer.new()
 	timeline_area.add_child(timeline_visualizer)
@@ -24,7 +24,7 @@ func _ready():
 	# Start with recording enabled
 	timeline_visualizer.start_recording()
 
-func connect_ui_signals():
+func connect_ui_signals() -> void:
 	if record_button:
 		record_button.pressed.connect(_on_record_pressed)
 	if play_button:
@@ -38,7 +38,7 @@ func connect_ui_signals():
 	if scroll_slider:
 		scroll_slider.value_changed.connect(_on_scroll_changed)
 
-func _on_record_pressed():
+func _on_record_pressed() -> void:
 	if timeline_visualizer.is_recording:
 		timeline_visualizer.stop_recording()
 		record_button.text = "Record"
@@ -48,7 +48,7 @@ func _on_record_pressed():
 		record_button.text = "Stop Rec"
 		record_button.modulate = Color.RED
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	if timeline_visualizer.is_playing and not timeline_visualizer.is_recording:
 		timeline_visualizer.stop_playback()
 		play_button.text = "Play"
@@ -58,7 +58,7 @@ func _on_play_pressed():
 		play_button.text = "Pause"
 		play_button.modulate = Color.GREEN
 
-func _on_stop_pressed():
+func _on_stop_pressed() -> void:
 	timeline_visualizer.stop_playback()
 	timeline_visualizer.stop_recording()
 	
@@ -68,15 +68,15 @@ func _on_stop_pressed():
 	record_button.text = "Record"
 	record_button.modulate = Color.WHITE
 
-func _on_clear_pressed():
+func _on_clear_pressed() -> void:
 	timeline_visualizer.clear_timeline()
 	_on_stop_pressed()  # Also stop any current operations
 
-func _on_zoom_changed(value: float):
+func _on_zoom_changed(value: float) -> void:
 	if timeline_visualizer:
 		timeline_visualizer.set_zoom(value)
 
-func _on_scroll_changed(value: float):
+func _on_scroll_changed(value: float) -> void:
 	if timeline_visualizer:
 		timeline_visualizer.set_scroll(value)
 
@@ -87,3 +87,9 @@ func _process(_delta):
 		var timeline_duration = timeline_visualizer.get_timeline_duration()
 		if timeline_duration > 0 and scroll_slider:
 			scroll_slider.max_value = max(0.0, 1.0 - (timeline_visualizer.timeline_width / (timeline_duration * 60.0)))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

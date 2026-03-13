@@ -389,3 +389,9 @@ func get_population_summary() -> Dictionary:
 				summary[kn] += 1
 			summary["total"] += 1
 	return summary
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

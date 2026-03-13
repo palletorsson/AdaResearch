@@ -7,7 +7,7 @@ var fairness_score: float = 1.0
 var data_flow_rate: float = 2.0
 var particle_count: int = 25
 
-func _ready():
+func _ready() -> void:
 	# Initialize algorithmic bias visualization
 	print("Algorithmic Bias Visualization initialized")
 	create_data_groups()
@@ -15,7 +15,7 @@ func _ready():
 	create_impact_visualization()
 	setup_bias_metrics()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate bias dynamics
@@ -29,7 +29,7 @@ func _process(delta):
 	animate_impact_visualization(delta)
 	update_bias_metrics(delta)
 
-func create_data_groups():
+func create_data_groups() -> void:
 	# Create Group A particles
 	var group_a_particles = $DataGroups/GroupA/GroupAParticles
 	for i in range(particle_count):
@@ -66,7 +66,7 @@ func create_data_groups():
 		
 		group_b_particles.add_child(particle)
 
-func create_bias_indicators():
+func create_bias_indicators() -> void:
 	# Create bias arrows
 	var bias_arrows = $BiasIndicators/BiasArrows
 	for i in range(8):
@@ -88,7 +88,7 @@ func create_bias_indicators():
 		
 		bias_arrows.add_child(arrow)
 
-func create_impact_visualization():
+func create_impact_visualization() -> void:
 	# Create impact spheres
 	var impact_spheres = $ImpactVisualization/ImpactSpheres
 	for i in range(12):
@@ -108,7 +108,7 @@ func create_impact_visualization():
 		
 		impact_spheres.add_child(sphere)
 
-func setup_bias_metrics():
+func setup_bias_metrics() -> void:
 	# Initialize fairness and bias meters
 	var fairness_indicator = $BiasMetrics/FairnessScore/FairnessIndicator
 	var bias_indicator = $BiasMetrics/BiasScore/BiasIndicator
@@ -117,7 +117,7 @@ func setup_bias_metrics():
 	if bias_indicator:
 		bias_indicator.position.x = 0  # Start at middle
 
-func animate_data_groups(delta):
+func animate_data_groups(delta) -> void:
 	# Animate Group A particles
 	var group_a_particles = $DataGroups/GroupA/GroupAParticles
 	for i in range(group_a_particles.get_child_count()):
@@ -148,7 +148,7 @@ func animate_data_groups(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2
 			particle.scale = Vector3.ONE * pulse
 
-func animate_algorithm(delta):
+func animate_algorithm(delta) -> void:
 	# Animate algorithm core
 	var algorithm_core = $Algorithm/AlgorithmCore
 	if algorithm_core:
@@ -165,7 +165,7 @@ func animate_algorithm(delta):
 			var blue_component = 0.2 + bias_level * 0.6
 			algorithm_core.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_bias_indicators(_delta):
+func animate_bias_indicators(_delta) -> void:
 	# Animate bias arrows
 	var bias_arrows = $BiasIndicators/BiasArrows
 	for i in range(bias_arrows.get_child_count()):
@@ -180,7 +180,7 @@ func animate_bias_indicators(_delta):
 				var intensity = 0.3 + bias_level * 0.7
 				arrow.material_override.emission = Color(0.8, 0.2, 0.8, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate data flow particles
 	var flow_particles = $DataFlow/FlowParticles
 	if flow_particles:
@@ -202,7 +202,7 @@ func animate_data_flow(delta):
 				particle.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 				particle.material_override.emission = Color(red_component, green_component, 0.2, 1) * 0.3
 
-func animate_impact_visualization(delta):
+func animate_impact_visualization(delta) -> void:
 	# Animate impact spheres
 	var impact_spheres = $ImpactVisualization/ImpactSpheres
 	for i in range(impact_spheres.get_child_count()):
@@ -221,7 +221,7 @@ func animate_impact_visualization(delta):
 				var intensity = 0.3 + bias_level * 0.7
 				sphere.material_override.emission = Color(0.8, 0.8, 0.2, 1) * intensity
 
-func update_bias_metrics(delta):
+func update_bias_metrics(delta) -> void:
 	# Update fairness score meter
 	var fairness_indicator = $BiasMetrics/FairnessScore/FairnessIndicator
 	if fairness_indicator:
@@ -244,10 +244,10 @@ func update_bias_metrics(delta):
 		var green_component = 0.2 + 0.6 * (1.0 - bias_level)
 		bias_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_bias_level(level: float):
+func set_bias_level(level: float) -> void:
 	bias_level = clamp(level, 0.0, 1.0)
 
-func set_fairness_score(score: float):
+func set_fairness_score(score: float) -> void:
 	fairness_score = clamp(score, 0.1, 1.0)
 
 func get_bias_level() -> float:
@@ -256,7 +256,13 @@ func get_bias_level() -> float:
 func get_fairness_score() -> float:
 	return fairness_score
 
-func reset_bias():
+func reset_bias() -> void:
 	time = 0.0
 	bias_level = 0.0
 	fairness_score = 1.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

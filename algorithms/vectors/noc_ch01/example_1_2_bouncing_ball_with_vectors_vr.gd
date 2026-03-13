@@ -106,3 +106,9 @@ func _process(_delta: float) -> void:
 		_arrow.visible = false
 
 	_status_label.text = "Ball (Vectors) | Vel %.2f" % vel_length
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

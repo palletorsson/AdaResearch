@@ -27,14 +27,14 @@ var time: float = 0.0
 var trail_points1: Array[Vector3] = []
 var trail_points2: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 	
 	# Setup ball positions (180 degrees apart)
 	ball1.position.x = radius
 	ball2.position.x = -radius # Opposite side
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	# Trail 1
 	trail_mesh1 = ImmediateMesh.new()
 	trail_instance1.mesh = trail_mesh1
@@ -57,7 +57,7 @@ func _setup_visuals():
 	material2.point_size = trail_size
 	trail_instance2.material_override = material2
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# --- THE DRIVER (Rotation) ---
@@ -69,7 +69,7 @@ func _process(delta):
 	_update_trail(ball1, trail_points1, trail_mesh1, delta)
 	_update_trail(ball2, trail_points2, trail_mesh2, delta)
 
-func _update_trail(ball: Node3D, points: Array[Vector3], mesh: ImmediateMesh, delta: float):
+func _update_trail(ball: Node3D, points: Array[Vector3], mesh: ImmediateMesh, delta: float) -> void:
 	# Get local position relative to this DoubleHelix node
 	# ball is child of pivot, pivot is child of DoubleHelix
 	var ball_local_pos = pivot.transform * ball.position

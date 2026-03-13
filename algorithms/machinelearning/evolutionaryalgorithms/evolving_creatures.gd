@@ -67,7 +67,7 @@ var stats_label
 var _best_distance: float = 0.0
 var _distance_label_3d: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create the environment
@@ -99,7 +99,7 @@ func _ready():
 	# Start training
 	start_learning()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update timer
 	timer += delta
 	
@@ -123,7 +123,7 @@ func _process(delta):
 		timer = 0.0
 		update_learning()
 
-func create_environment():
+func create_environment() -> void:
 	# Create a floor
 	var floor_mesh = PlaneMesh.new()
 	floor_mesh.size = Vector2(50.0, 50.0)
@@ -160,7 +160,7 @@ func create_environment():
 	camera.rotation = Vector3(-0.2, 0, 0)
 	add_child(camera)
 
-func create_grid():
+func create_grid() -> void:
 	# Create a grid on the floor for distance reference
 	var grid_lines = ImmediateMesh.new()
 	var grid_instance = MeshInstance3D.new()
@@ -190,7 +190,7 @@ func create_grid():
 	grid_lines.surface_end()
 	add_child(grid_instance)
 
-func create_debug_visualization():
+func create_debug_visualization() -> void:
 	# Create a node for path visualization
 	path_instance = ImmediateMesh.new()
 	var path_mesh_instance = MeshInstance3D.new()
@@ -217,11 +217,11 @@ func create_debug_visualization():
 	
 	add_child(start_marker)
 
-func add_path_point(point):
+func add_path_point(point) -> void:
 	path_points.append(Vector3(point.x, 0.05, point.z))  # Keep y slightly above floor
 	update_path_visualization()
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	# Set start marker position
 	if start_marker:
 		start_marker.position = Vector3(starting_position.x, 0.2, starting_position.z)
@@ -236,7 +236,7 @@ func update_path_visualization():
 		
 		path_instance.surface_end()
 
-func create_ui():
+func create_ui() -> void:
 	ui_root = Control.new()
 	ui_root.name = "UI"
 	ui_root.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -258,7 +258,7 @@ func create_ui():
 	_distance_label_3d.text = "0.00m"
 	add_child(_distance_label_3d)
 
-func update_ui():
+func update_ui() -> void:
 	var text = "Episode: %d\n" % episode_count
 	text += "Distance: %.2f m\n" % current_distance
 	text += "Best Distance: %.2f m\n" % _best_distance
@@ -289,7 +289,7 @@ func update_ui():
 			_distance_label_3d.modulate = Color(0.3, 0.5, 0.9).lerp(Color(0.3, 0.85, 0.4), t)
 
 # Create a quadruped creature (4 legs)
-func create_quadruped():
+func create_quadruped() -> void:
 	# Create core body
 	core_body = create_core()
 	
@@ -305,7 +305,7 @@ func create_quadruped():
 		create_leg(core_body, leg_positions[i], i)
 
 # Create a biped creature (2 legs)
-func create_biped():
+func create_biped() -> void:
 	# Create core body
 	core_body = create_core()
 	
@@ -319,7 +319,7 @@ func create_biped():
 		create_leg(core_body, leg_positions[i], i)
 
 # Create a snake-like creature
-func create_snake():
+func create_snake() -> void:
 	# Create head segment
 	core_body = create_segment(null, Vector3(0, 0.5, 0), 0)
 	
@@ -548,7 +548,7 @@ func create_joint(body_a, body_b, joint_position, lower_limits, upper_limits):
 	add_child(joint)
 	return joint
 
-func initialize_learning():
+func initialize_learning() -> void:
 	# Initialize state vector (joint angles)
 	state = []
 	for joint in joints:
@@ -561,7 +561,7 @@ func initialize_learning():
 	for i in range(joints.size() * 3):  # 3 axes per joint
 		action.append(0.0)
 
-func start_learning():
+func start_learning() -> void:
 	# Initialize state
 	update_state()
 	
@@ -569,7 +569,7 @@ func start_learning():
 	exploration_rate = 1.0
 	choose_action()
 
-func update_state():
+func update_state() -> void:
 	# Update state vector with current joint angles
 	state = []
 	for joint in joints:
@@ -623,7 +623,7 @@ func get_state_key():
 	# Convert state vector to string key for q-table
 	return str(state)
 
-func choose_action():
+func choose_action() -> void:
 	var state_key = get_state_key()
 	
 	# Initialize state in q_table if not exists
@@ -645,7 +645,7 @@ func choose_action():
 	# Apply action (torques to joints)
 	apply_action()
 
-func apply_action():
+func apply_action() -> void:
 	# Apply torques to each joint based on action vector
 	var action_idx = 0
 	for joint_idx in range(joints.size()):
@@ -683,7 +683,7 @@ func apply_action():
 		
 		action_idx += 3
 
-func update_learning():
+func update_learning() -> void:
 	# Make sure core body exists
 	if not core_body or not is_instance_valid(core_body):
 		return
@@ -759,7 +759,7 @@ func is_stuck():
 	# Check if the creature is stuck (not moving for a while)
 	return current_distance < 0.1 and episode_reward > 5.0
 
-func end_episode():
+func end_episode() -> void:
 	episode_count += 1
 	_best_distance = max(_best_distance, current_distance)
 	print("Episode %d ended. Total reward: %.2f, Distance: %.2f, Best: %.2f" % [episode_count, episode_reward, current_distance, _best_distance])
@@ -802,7 +802,7 @@ func end_episode():
 	choose_action()
 
 # Input for debugging and control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_SPACE:
@@ -821,7 +821,7 @@ func _input(event):
 				# Switch to snake
 				change_creature_type(2)
 
-func change_creature_type(type):
+func change_creature_type(type) -> void:
 	# Clean up existing creature
 	for body in body_parts:
 		if is_instance_valid(body):
@@ -856,3 +856,9 @@ func change_creature_type(type):
 	
 	initialize_learning()
 	start_learning()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

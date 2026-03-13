@@ -10,7 +10,7 @@ var rotation_speed = 0.2
 var subtle_movement_amplitude = 0.1
 var swing_speed = 0.8
 
-func _ready():
+func _ready() -> void:
 	# Create a dark environment with appropriate lighting
 	setup_environment()
 	
@@ -25,7 +25,7 @@ func _ready():
 	
 
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create environment
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -61,7 +61,7 @@ func setup_environment():
 	spot_light.spot_angle = 30
 	add_child(spot_light)
 
-func create_suspended_frames():
+func create_suspended_frames() -> void:
 	# Parent node for all frames
 	var frames = Node3D.new()
 	frames.name = "SuspendedFrames"
@@ -120,7 +120,7 @@ func create_random_frame():
 			
 	return frame
 
-func create_bed_frame(parent):
+func create_bed_frame(parent) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = BoxMesh.new()
 	
@@ -147,7 +147,7 @@ func create_bed_frame(parent):
 			convert_to_wireframe(post)
 			parent.add_child(post)
 
-func create_chair_frame(parent):
+func create_chair_frame(parent) -> void:
 	# Chair seat
 	var seat = MeshInstance3D.new()
 	var seat_mesh = BoxMesh.new()
@@ -180,7 +180,7 @@ func create_chair_frame(parent):
 			convert_to_wireframe(leg)
 			parent.add_child(leg)
 
-func create_table_frame(parent):
+func create_table_frame(parent) -> void:
 	# Table top
 	var top = MeshInstance3D.new()
 	var top_mesh = BoxMesh.new()
@@ -203,7 +203,7 @@ func create_table_frame(parent):
 			convert_to_wireframe(leg)
 			parent.add_child(leg)
 
-func create_crib_frame(parent):
+func create_crib_frame(parent) -> void:
 	# Crib base
 	var base = MeshInstance3D.new()
 	var base_mesh = BoxMesh.new()
@@ -244,7 +244,7 @@ func create_crib_frame(parent):
 			convert_to_wireframe(leg)
 			parent.add_child(leg)
 
-func convert_to_wireframe(mesh_instance):
+func convert_to_wireframe(mesh_instance) -> void:
 	# This is a simplified approach to create a wireframe effect
 	# For a true wireframe, you would typically use a shader
 	var material = mesh_instance.material_override.duplicate()
@@ -257,7 +257,7 @@ func convert_to_wireframe(mesh_instance):
 	
 	mesh_instance.material_override = material
 
-func add_suspension_wires(frames_parent):
+func add_suspension_wires(frames_parent) -> void:
 	# Add thin suspension wires that go up to ceiling
 	var ceiling_height = 6.0
 	
@@ -300,7 +300,7 @@ func add_suspension_wires(frames_parent):
 			# Add to scene
 			add_child(wire)
 
-func create_swing_animation(_animation_player, frame):
+func create_swing_animation(_animation_player, frame) -> void:
 	# Create animation for subtle swinging motion
 	var animation = Animation.new()
 	
@@ -332,3 +332,9 @@ func create_swing_animation(_animation_player, frame):
 func _process(_delta):
 	# Add any global animations or interactions here
 	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

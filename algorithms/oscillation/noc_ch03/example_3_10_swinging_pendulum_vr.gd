@@ -92,3 +92,9 @@ func _process(_delta: float) -> void:
 	_bob.position = Vector3(0, -arm_length, 0)
 
 	_status_label.text = "Pendulum | %.1fÂ°" % rad_to_deg(_angle)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

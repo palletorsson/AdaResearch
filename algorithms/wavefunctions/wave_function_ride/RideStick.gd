@@ -28,7 +28,7 @@ var track_visual: MeshInstance3D
 # Magic Carpet (Invisible Floor)
 var magic_carpet: AnimatableBody3D
 
-func _create_magic_carpet():
+func _create_magic_carpet() -> void:
 	if magic_carpet:
 		return
 		
@@ -68,14 +68,14 @@ func _create_magic_carpet():
 	# Initial pos
 	_update_magic_carpet()
 
-func _update_magic_carpet():
+func _update_magic_carpet() -> void:
 	if magic_carpet:
 		# Place floor 1.2m below the stick (Reduced from 1.4m to be closer to feet)
 		magic_carpet.global_position = global_position - Vector3(0, 1.2, 0)
 		# Keep rotation flat
 		magic_carpet.global_rotation = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	
 	if Engine.is_editor_hint():
@@ -105,7 +105,7 @@ func _ready():
 	if has_signal("dropped"):
 		connect("dropped", _on_dropped)
 
-func _on_picked_up(_pickable):
+func _on_picked_up(_pickable) -> void:
 	# Disable collision to prevent "standing on held object" physics loops
 	collision_layer = 0
 	collision_mask = 0
@@ -130,7 +130,7 @@ func _on_picked_up(_pickable):
 		if player_body:
 			player_body.enabled = false
 
-func _on_dropped(_pickable):
+func _on_dropped(_pickable) -> void:
 	# Restore collision
 	collision_layer = 1
 	collision_mask = 1
@@ -142,7 +142,7 @@ func _on_dropped(_pickable):
 		player_body.enabled = true
 		player_body = null
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
@@ -184,7 +184,7 @@ func _get_oval_offset(angle: float) -> Vector3:
 	var z = sin(angle) * radius_z
 	return Vector3(x, 0, z)
 
-func _generate_track_visual():
+func _generate_track_visual() -> void:
 	# Create a static mesh for the track
 	var mesh_inst = MeshInstance3D.new()
 	var mesh = ImmediateMesh.new()
@@ -222,7 +222,7 @@ func _generate_track_visual():
 	mesh_inst.top_level = true
 	mesh_inst.global_position = center_pos
 
-func _generate_hanger_visual():
+func _generate_hanger_visual() -> void:
 	# Create a thin vertical cylinder connecting the stick to the track
 	# Height = track_height_offset
 	# Position.y = track_height_offset / 2.0 (since cylinder origin is center)
@@ -256,4 +256,8 @@ func _find_player_body(origin: Node3D) -> Node:
 				return child
 	return null
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

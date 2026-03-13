@@ -116,7 +116,7 @@ var labels: Array[Label3D] = []
 var meshes: Array[MeshInstance3D] = []
 var animation_time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	print("🔮 Marching Cubes: Demonstrating 15 unique surface cases...")
 	
 	# Get camera controller reference
@@ -128,12 +128,12 @@ func _ready():
 	if show_labels:
 		create_labels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_threshold:
 		animation_time += delta
 		animate_cases()
 
-func generate_fifteen_cases():
+func generate_fifteen_cases() -> void:
 	"""Generate visual representations of all 15 cases"""
 	var rows = 3
 	var cols = 5
@@ -151,7 +151,7 @@ func generate_fifteen_cases():
 		
 		generate_case_mesh(case_data, position, i)
 
-func generate_case_mesh(case_data: Dictionary, position: Vector3, case_index: int):
+func generate_case_mesh(case_data: Dictionary, position: Vector3, case_index: int) -> void:
 	"""Generate mesh for a specific marching cubes case using the advanced generator"""
 	
 	# Create a single-cube VoxelChunk for this case
@@ -313,7 +313,7 @@ func create_edge_line(start: Vector3, end: Vector3) -> MeshInstance3D:
 	
 	return mesh_instance
 
-func create_labels():
+func create_labels() -> void:
 	"""Create text labels for each case"""
 	for i in range(fifteen_cases.size()):
 		var case_data = fifteen_cases[i]
@@ -340,7 +340,7 @@ func get_case_color(case_index: int) -> Color:
 	var hue = float(case_index) / float(fifteen_cases.size())
 	return Color.from_hsv(hue, 0.8, 1.0)
 
-func animate_cases():
+func animate_cases() -> void:
 	"""Animate the threshold to show how surfaces change"""
 	var threshold = sin(animation_time) * 0.5 + 0.5  # Oscillate between 0 and 1
 	
@@ -351,7 +351,7 @@ func animate_cases():
 		if material:
 			material.emission_energy = 0.5 + threshold * 0.5
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for interactive features"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -391,7 +391,7 @@ func _input(event):
 					# Zoom out with mouse wheel
 					zoom_camera(zoom_speed)
 
-func zoom_camera(delta: float):
+func zoom_camera(delta: float) -> void:
 	"""Zoom the camera in or out"""
 	if camera_controller == null:
 		return
@@ -405,7 +405,7 @@ func zoom_camera(delta: float):
 	camera_controller.position = Vector3(0, base_height, base_distance)
 	print("Camera zoom: %.1f (distance: %.1f)" % [current_zoom, base_distance])
 
-func _enter_tree():
+func _enter_tree() -> void:
 	print("""
 🔮 Marching Cubes 15 Cases Demo
 =============================
@@ -420,4 +420,10 @@ Controls:
 This demonstrates the 15 fundamental surface cases that can occur
 in the Marching Cubes algorithm. Each case represents a unique
 surface topology configuration.
-""") 
+""")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

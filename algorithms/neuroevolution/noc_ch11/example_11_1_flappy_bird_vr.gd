@@ -17,7 +17,7 @@ class Bird extends VREntity:
 	var flap_force: float = 0.15
 	var gravity: Vector3 = Vector3(0, -0.5, 0)
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.03
@@ -25,7 +25,7 @@ class Bird extends VREntity:
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
-	func _physics_process(delta):
+	func _physics_process(delta: float) -> void:
 		# Apply gravity
 		apply_force(gravity)
 		super._physics_process(delta)
@@ -38,7 +38,7 @@ class Bird extends VREntity:
 			position_v.y = -0.45
 			velocity.y = 0
 
-	func flap():
+	func flap() -> void:
 		velocity.y = flap_force
 
 # Pipe obstacle
@@ -52,13 +52,13 @@ class Pipe extends Node3D:
 	var lower_mesh: MeshInstance3D
 	var secondary_pink: Color = Color(0.9, 0.5, 0.8, 0.5)  # Translucent
 
-	func _init(y_pos: float = 0.0):
+	func _init(y_pos: float = 0.0) -> void:
 		gap_y = y_pos
 
-	func _ready():
+	func _ready() -> void:
 		create_pipes()
 
-	func create_pipes():
+	func create_pipes() -> void:
 		# Upper pipe
 		upper_mesh = MeshInstance3D.new()
 		var upper_box = BoxMesh.new()
@@ -85,7 +85,7 @@ class Pipe extends Node3D:
 		lower_mesh.material_override = mat_lower
 		add_child(lower_mesh)
 
-	func _process(delta):
+	func _process(delta: float) -> void:
 		position.x -= speed * delta
 
 		# Check if pipe passed
@@ -114,7 +114,7 @@ var score_label: Label3D
 var game_over_label: Label3D
 var instruction_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create bird
 	bird = Bird.new()
@@ -127,7 +127,7 @@ func _ready():
 	# Spawn first pipe
 	spawn_pipe()
 
-func create_ui():
+func create_ui() -> void:
 	# Score label
 	score_label = Label3D.new()
 	score_label.text = "Score: 0"
@@ -157,7 +157,7 @@ func create_ui():
 	game_over_label.visible = false
 	add_child(game_over_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if game_over:
 		# Check for restart
 		if Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_R):
@@ -196,7 +196,7 @@ func _process(delta):
 		pipes.erase(pipe)
 		pipe.queue_free()
 
-func spawn_pipe():
+func spawn_pipe() -> void:
 	"""Spawn a new pipe at random height"""
 	var gap_y = randf_range(-0.2, 0.2)
 	var pipe = Pipe.new(gap_y)
@@ -204,13 +204,13 @@ func spawn_pipe():
 	add_child(pipe)
 	pipes.append(pipe)
 
-func end_game():
+func end_game() -> void:
 	"""End the game"""
 	game_over = true
 	game_over_label.visible = true
 	bird.velocity = Vector3.ZERO
 
-func restart_game():
+func restart_game() -> void:
 	"""Restart the game"""
 	game_over = false
 	game_over_label.visible = false
@@ -228,3 +228,9 @@ func restart_game():
 
 	spawn_timer = 0.0
 	spawn_pipe()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

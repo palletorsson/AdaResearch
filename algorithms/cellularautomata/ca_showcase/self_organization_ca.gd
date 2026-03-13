@@ -5,7 +5,7 @@ extends BaseCA
 const INTERACTION_STRENGTH = 0.1
 const RANDOMNESS = 0.05
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 3
 	var cube_size = CUBE_SIZE * step
@@ -24,12 +24,12 @@ func initialize_grid():
 			for z in range(GRID_SIZE):
 				grid[x][y][z] = randi() % 10  # Random state 0-9
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Evolve self-organizing patterns
 	evolve_self_organization()
 	# Note: update_visualization() is called by base_ca._process() after this
 
-func evolve_self_organization():
+func evolve_self_organization() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -57,7 +57,7 @@ func evolve_self_organization():
 	
 	grid = new_grid
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -114,7 +114,7 @@ func get_pattern_diversity() -> int:
 				unique_states[state] = true
 	return unique_states.size()
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0

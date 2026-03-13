@@ -49,7 +49,7 @@ var configs := [
 	},
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -62,7 +62,7 @@ func _ready():
 # ===========================================================================
 # VR controller wiring
 # ===========================================================================
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if not xr_origin:
 		return
@@ -80,7 +80,7 @@ func setup_vr_controllers():
 # ===========================================================================
 # Build three side-by-side spring-mass-damper setups
 # ===========================================================================
-func create_demonstrations():
+func create_demonstrations() -> void:
 	for cfg in configs:
 		var x_off: float = cfg["x"]
 		var k: float = cfg["k"]
@@ -188,7 +188,7 @@ func create_demonstrations():
 		lbl.modulate = col
 		add_child(lbl)
 
-func create_ui():
+func create_ui() -> void:
 	var title := Label3D.new()
 	title.text = "MASS-SPRING-DAMPER"
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -212,7 +212,7 @@ func _physics_process(_delta: float):
 	update_vr_grabbing()
 	update_spring_lines()
 
-func update_spring_lines():
+func update_spring_lines() -> void:
 	# Dynamically reposition the connecting cylinders between anchors and masses
 	for i in range(configs.size()):
 		var cfg = configs[i]
@@ -240,7 +240,7 @@ func update_spring_lines():
 # ===========================================================================
 # VR grab / release
 # ===========================================================================
-func update_vr_grabbing():
+func update_vr_grabbing() -> void:
 	# Attempt grab
 	if left_grab_active and left_controller and not grabbed_body:
 		attempt_grab(to_local(left_controller.global_position))
@@ -258,7 +258,7 @@ func update_vr_grabbing():
 		elif right_grab_active and right_controller:
 			grab_anchor.global_position = right_controller.global_position
 
-func attempt_grab(controller_pos: Vector3):
+func attempt_grab(controller_pos: Vector3) -> void:
 	var grab_radius := 0.3
 	for body in mass_bodies:
 		if not is_instance_valid(body):
@@ -287,7 +287,7 @@ func attempt_grab(controller_pos: Vector3):
 			add_child(grab_joint)
 			break
 
-func release_grab():
+func release_grab() -> void:
 	if grab_joint:
 		grab_joint.queue_free()
 		grab_joint = null
@@ -299,12 +299,12 @@ func release_grab():
 # ===========================================================================
 # Input: reset
 # ===========================================================================
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			reset_scene()
 
-func reset_scene():
+func reset_scene() -> void:
 	# Snap masses back to rest position
 	for i in range(mass_bodies.size()):
 		var body = mass_bodies[i]
@@ -316,18 +316,24 @@ func reset_scene():
 # ===========================================================================
 # Controller button callbacks
 # ===========================================================================
-func _on_left_button_pressed(button_name: String):
+func _on_left_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = true
 
-func _on_left_button_released(button_name: String):
+func _on_left_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = false
 
-func _on_right_button_pressed(button_name: String):
+func _on_right_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = true
 
-func _on_right_button_released(button_name: String):
+func _on_right_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

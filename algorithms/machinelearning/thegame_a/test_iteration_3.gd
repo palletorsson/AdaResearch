@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 3: Renderer Test ---")
 	
 	# We can't easily visual test in headless mode, but we can check if it crashes

@@ -2,11 +2,11 @@ extends Node3D
 
 class_name JointDemoBase
 
-func _ready():
+func _ready() -> void:
 	_setup_environment()
 	_build_demo()
 
-func _setup_environment():
+func _setup_environment() -> void:
 	var light := DirectionalLight3D.new()
 	light.name = "SunLight"
 	light.rotation_degrees = Vector3(-50.0, -35.0, 0.0)
@@ -25,7 +25,7 @@ func _setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func _build_demo():
+func _build_demo() -> void:
 	# To be implemented by subclasses.
 	pass
 
@@ -149,3 +149,9 @@ func get_arrow_end_position(arrow: Node) -> Vector3:
 	if node:
 		return node.global_position
 	return (arrow as Node3D).global_position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

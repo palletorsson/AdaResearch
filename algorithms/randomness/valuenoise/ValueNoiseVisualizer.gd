@@ -11,7 +11,7 @@ var grid_lines: Array[CSGBox3D] = []
 var random_values: Dictionary = {}
 var show_grid = true
 
-func _ready():
+func _ready() -> void:
 	# Initialize random values for the grid
 	randomize()
 	_generate_random_values()
@@ -20,14 +20,14 @@ func _ready():
 	create_noise_field()
 	create_grid_lines()
 
-func _generate_random_values():
+func _generate_random_values() -> void:
 	random_values.clear()
 	for x in range(-grid_size, grid_size + 1):
 		for z in range(-grid_size, grid_size + 1):
 			var key = Vector2(x, z)
 			random_values[key] = randf_range(-1.0, 1.0)
 
-func create_noise_field():
+func create_noise_field() -> void:
 	# Clear existing cubes
 	for cube in noise_cubes:
 		cube.queue_free()
@@ -62,7 +62,7 @@ func create_noise_field():
 			add_child(cube)
 			noise_cubes.append(cube)
 
-func create_grid_lines():
+func create_grid_lines() -> void:
 	# Clear existing grid lines
 	for line in grid_lines:
 		line.queue_free()
@@ -136,7 +136,7 @@ func generate_value_noise_at(x: float, z: float) -> float:
 	
 	return result
 
-func update_noise_field():
+func update_noise_field() -> void:
 	for i in range(noise_cubes.size()):
 		var cube = noise_cubes[i]
 		var x = (i % int(noise_field_size / noise_resolution) - noise_field_size / (2 * noise_resolution)) * noise_resolution
@@ -154,10 +154,16 @@ func update_noise_field():
 		if cube.material_override:
 			cube.material_override.albedo_color = color
 
-func regenerate_noise():
+func regenerate_noise() -> void:
 	_generate_random_values()
 	update_noise_field()
 
-func toggle_grid_lines():
+func toggle_grid_lines() -> void:
 	show_grid = !show_grid
 	create_grid_lines()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

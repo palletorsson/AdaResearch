@@ -27,7 +27,7 @@ var time_since_last_step: float = 0.0     # Timer for step interval
 
 @onready var mesh_instance: MeshInstance3D = $GrabPaper/RandomWalkPlanMesh
 
-func _ready():
+func _ready() -> void:
 	if not mesh_instance:
 		push_error("MeshInstance3D not found in RandomWalk node!")
 		return
@@ -74,7 +74,7 @@ func _ready():
 	else:
 		push_warning("Label3D node not found at path: GrabPaper/id_info_Label3D")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_walking:
 		time_since_last_step += delta
 		if time_since_last_step >= interval:

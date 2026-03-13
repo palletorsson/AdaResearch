@@ -41,7 +41,7 @@ class LSystemTree:
 	var health: float = 1.0
 	var color: Color
 
-	func _init(pos: Vector3, strat: int, col: Color):
+	func _init(pos: Vector3, strat: int, col: Color) -> void:
 		position = pos
 		strategy = strat
 		color = col
@@ -56,7 +56,7 @@ var current_tree_index: int = 0
 var info_label: Label3D
 var stats_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_forest()
 	create_ui()
 
@@ -68,7 +68,7 @@ func _ready():
 	update_info_label()
 	print("ForestCompetition: %d trees initialized" % num_trees)
 
-func setup_forest():
+func setup_forest() -> void:
 	"""Initialize the forest ecosystem"""
 	randomize()
 
@@ -167,7 +167,7 @@ func create_lsystem_for_strategy(strategy: int):
 
 	return lsys
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not is_growing:
 		return
 
@@ -177,7 +177,7 @@ func _process(delta):
 		growth_timer = 0.0
 		grow_next_generation()
 
-func grow_next_generation():
+func grow_next_generation() -> void:
 	"""Grow one generation for the current tree"""
 	if current_tree_index >= trees.size():
 		# All trees have grown this generation
@@ -217,7 +217,7 @@ func grow_next_generation():
 
 	current_tree_index += 1
 
-func apply_competition(tree: LSystemTree):
+func apply_competition(tree: LSystemTree) -> void:
 	"""Apply competition pressure based on neighboring trees"""
 	var crowding = 0.0
 
@@ -239,7 +239,7 @@ func apply_competition(tree: LSystemTree):
 	var health_color = tree.color.lerp(Color(0.4, 0.3, 0.2), 1.0 - tree.health)
 	tree.turtle.set_colors(health_color, health_color.lightened(0.3))
 
-func grow_all_trees():
+func grow_all_trees() -> void:
 	"""Grow all trees to full generations immediately"""
 	for tree in trees:
 		tree.lsystem.generate_n(tree_generations)
@@ -255,7 +255,7 @@ func grow_all_trees():
 
 	update_info_label()
 
-func create_ui():
+func create_ui() -> void:
 	"""Create info labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -274,7 +274,7 @@ func create_ui():
 	stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(stats_label)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info display"""
 	if info_label:
 		var total_branches = 0
@@ -314,7 +314,7 @@ func get_strategy_name(strategy: int) -> String:
 		TreeStrategy.CONSERVATIVE: return "Conservative"
 		_: return "Unknown"
 
-func reset_forest():
+func reset_forest() -> void:
 	"""Reset and regenerate the forest"""
 	for tree in trees:
 		tree.turtle.queue_free()
@@ -332,7 +332,13 @@ func reset_forest():
 
 	update_info_label()
 
-func toggle_competition():
+func toggle_competition() -> void:
 	"""Toggle competition mode"""
 	competition_enabled = !competition_enabled
 	reset_forest()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

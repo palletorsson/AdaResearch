@@ -32,7 +32,7 @@ var auto_spawn: bool = true
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -42,7 +42,7 @@ func _ready():
 
 	print("Example 6.7: Bridge - Chain of joints forming suspension bridge")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_spawn:
 		spawn_timer += delta
 		if spawn_timer >= 2.0:
@@ -54,7 +54,7 @@ func _process(delta):
 
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			spawn_test_ball()
@@ -63,7 +63,7 @@ func _input(event):
 		elif event.keycode == KEY_T:
 			auto_spawn = !auto_spawn
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -81,12 +81,12 @@ func create_info_label():
 	instructions.text = "[SPACE] Spawn Ball | [T] Toggle Auto | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		info_label.text = "Bridge (%d Planks)\nBalls: %d" % [num_planks, test_balls.size()]
 
-func create_bridge():
+func create_bridge() -> void:
 	"""Create suspension bridge"""
 	# Create anchors at both ends
 	create_anchors()
@@ -116,7 +116,7 @@ func create_bridge():
 	var final_joint = create_bridge_joint(previous_node, right_anchor, num_planks)
 	bridge_joints.append(final_joint)
 
-func create_anchors():
+func create_anchors() -> void:
 	"""Create fixed anchor points at both ends"""
 	var anchor_y = 0.25
 	var anchor_spacing = bridge_width / 2.0
@@ -235,7 +235,7 @@ func create_bridge_joint(node_a: Node3D, node_b: Node3D, index: int) -> Generic6
 	add_child(joint)
 	return joint
 
-func spawn_test_ball():
+func spawn_test_ball() -> void:
 	"""Spawn ball to test bridge"""
 	var ball = RigidBody3D.new()
 	ball.position = Vector3(randf_range(-0.3, 0.3), 0.5, 0)
@@ -266,7 +266,7 @@ func spawn_test_ball():
 
 	test_balls.append(ball)
 
-func cleanup_fallen_balls():
+func cleanup_fallen_balls() -> void:
 	"""Remove balls that fell too far"""
 	var to_remove: Array[RigidBody3D] = []
 
@@ -278,7 +278,7 @@ func cleanup_fallen_balls():
 		test_balls.erase(ball)
 		ball.queue_free()
 
-func reset():
+func reset() -> void:
 	"""Reset bridge and balls"""
 	# Remove test balls
 	for ball in test_balls:
@@ -302,3 +302,9 @@ func reset():
 	# Recreate bridge
 	spawn_timer = 0.0
 	create_bridge()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

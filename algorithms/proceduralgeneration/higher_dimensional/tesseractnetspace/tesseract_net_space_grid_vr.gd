@@ -20,11 +20,11 @@ const NET_TYPES = [
 var configurations = []
 var net_instances: Array = []
 
-func _ready():
+func _ready() -> void:
 	setup_configurations()
 	generate_grid()
 
-func setup_configurations():
+func setup_configurations() -> void:
 	"""Create a list of different configuration combinations"""
 	configurations.clear()
 	
@@ -82,7 +82,7 @@ func setup_configurations():
 			"name": NET_TYPES[net_type_idx] + " Complex"
 		})
 
-func generate_grid():
+func generate_grid() -> void:
 	print("Generating tesseract net space grid...")
 	
 	# Clear existing
@@ -158,7 +158,7 @@ func create_net_space(config: Dictionary, position: Vector3) -> Node3D:
 	
 	return net_node
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input"""
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
@@ -173,20 +173,8 @@ func _input(event):
 			print("Spacing: %.1f" % spacing_between)
 			generate_grid()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

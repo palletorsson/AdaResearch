@@ -26,10 +26,10 @@ var collision_body: StaticBody3D
 
 signal generation_complete()
 
-func _init():
+func _init() -> void:
 	setup_components()
 
-func setup_components():
+func setup_components() -> void:
 	"""Initialize marching cubes and noise"""
 	marching_cubes = MarchingCubesGenerator.new()
 	marching_cubes.threshold = 0.5  # We'll map gyroid to [0,1] range
@@ -223,3 +223,9 @@ void fragment() {
 	ALPHA_SCISSOR_THRESHOLD = 1.0;
 }
 """
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

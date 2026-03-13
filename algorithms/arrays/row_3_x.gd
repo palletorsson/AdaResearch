@@ -15,12 +15,12 @@ var _binary_table: Node3D = null
 # Track cube references by index
 var _cube_refs: Dictionary = {}  # index -> cube_instance
 
-func _ready():
+func _ready() -> void:
 	create_row()
 	if show_binary_table:
 		_create_binary_table()
 
-func create_row():
+func create_row() -> void:
 	# Load the pickup cube scene
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 
@@ -57,7 +57,7 @@ func create_row():
 
 		add_child(cube_instance)
 
-func _create_binary_table():
+func _create_binary_table() -> void:
 	# Load the binary table display scene
 	var table_scene = load("res://algorithms/arrays/binary_table/binary_table_display.tscn")
 	if not table_scene:
@@ -100,3 +100,9 @@ func _on_cube_removed(index: int) -> void:
 	# Remove from tracking
 	if _cube_refs.has(index):
 		_cube_refs.erase(index)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

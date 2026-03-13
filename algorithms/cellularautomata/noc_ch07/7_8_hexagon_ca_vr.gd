@@ -216,3 +216,9 @@ func _add_colliders_for_current_layer() -> void:
 
 func _update_status() -> void:
 	_status_label.text = "Hex Stack | Layer %d/%d" % [_generation, max_generations]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

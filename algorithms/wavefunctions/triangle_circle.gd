@@ -17,13 +17,13 @@ var trace_texture_data: ImageTexture
 @onready var drawtexture = $"../../DrawTexture"
 var x = 0 
 var y = 0
-func _ready():
+func _ready() -> void:
 	calculate_triangle_vertices()
 	trace_position = triangle_vertices[0]  # Start at the first vertex
 	set_process(true)
 	init_trace_image()
 
-func init_trace_image():
+func init_trace_image() -> void:
 	var width = 800
 	var height = 800
 	trace_image = Image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -31,7 +31,7 @@ func init_trace_image():
 	trace_texture_data = ImageTexture.create_from_image(trace_image)
 	update_material(trace_texture_data)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Move triangle around the circle
 	angle += angular_speed * delta
 	if angle >= TAU:
@@ -41,7 +41,7 @@ func _process(delta):
 	update_trace_step(delta)
 	queue_redraw()
 
-func _draw():
+func _draw() -> void:
 	var screen_center = get_viewport_rect().size / 2
 	var center = screen_center + Vector2(circle_radius * cos(angle), circle_radius * sin(angle))
 	var tangent = Vector2(-sin(angle), cos(angle))  # Tangent to the circle
@@ -64,7 +64,7 @@ func _draw():
 	# Draw the circle
 	draw_circle(screen_center, circle_radius, Color.GRAY)
 
-func calculate_triangle_vertices():
+func calculate_triangle_vertices() -> void:
 	var half_base = triangle_side / 2
 	var height = triangle_side * sqrt(3) / 2
 	triangle_vertices = [
@@ -73,7 +73,7 @@ func calculate_triangle_vertices():
 		Vector2(0, -height)      # Top
 	]
 
-func update_trace_step(delta):
+func update_trace_step(delta) -> void:
 	var progress_per_edge = delta * steps_per_edge
 	trace_step += progress_per_edge
 
@@ -98,14 +98,14 @@ func update_trace_step(delta):
 	update_material(trace_texture_data)
 
 
-func set_pixel_block(image: Image, position: Vector2, color: Color, block_size: int):
+func set_pixel_block(image: Image, position: Vector2, color: Color, block_size: int) -> void:
 	for y in range(-block_size / 2, block_size / 2):
 		for x in range(-block_size / 2, block_size / 2):
 			var block_position = position + Vector2(x, y)
 			if block_position.x >= 0 and block_position.y >= 0 and block_position.x < image.get_width() and block_position.y < image.get_height():
 				image.set_pixelv(block_position, color)
 
-func update_material(tex: ImageTexture):
+func update_material(tex: ImageTexture) -> void:
 	if drawtexture.material_override is ShaderMaterial:
 		var shader_material = drawtexture.material_override as ShaderMaterial
 		shader_material.set_shader_parameter("transparancy", 1)

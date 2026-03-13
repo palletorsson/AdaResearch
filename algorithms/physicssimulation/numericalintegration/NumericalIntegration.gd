@@ -27,14 +27,14 @@ var gravity := Vector3(0, -9.8, 0)
 var initial_pos := Vector3(-3, 4, 0)
 var initial_vel := Vector3(3, 5, 0)
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_godot_ball()
 	_create_trail_renderers()
 	_create_containment()
 	_reset_manual_particles()
 
-func _create_godot_ball():
+func _create_godot_ball() -> void:
 	godot_ball = RigidBody3D.new()
 	godot_ball.name = "GodotBall"
 	godot_ball.mass = 1.0
@@ -65,7 +65,7 @@ func _create_godot_ball():
 	godot_ball.linear_velocity = initial_vel
 	add_child(godot_ball)
 
-func _create_trail_renderers():
+func _create_trail_renderers() -> void:
 	# Euler trail (red)
 	euler_mesh = ImmediateMesh.new()
 	euler_inst = MeshInstance3D.new()
@@ -102,7 +102,7 @@ func _create_trail_renderers():
 	godot_inst.material_override = gmat
 	add_child(godot_inst)
 
-func _create_containment():
+func _create_containment() -> void:
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
 	var floor_shape := BoxShape3D.new()
@@ -115,7 +115,7 @@ func _create_containment():
 	floor_body.physics_material_override = phys_mat
 	add_child(floor_body)
 
-func _reset_manual_particles():
+func _reset_manual_particles() -> void:
 	euler_pos = initial_pos
 	euler_vel = initial_vel
 	rk4_pos = initial_pos
@@ -124,7 +124,7 @@ func _reset_manual_particles():
 	rk4_trail.clear()
 	godot_trail.clear()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	# Euler integration (manual)
 	euler_vel += gravity * delta
 	euler_pos += euler_vel * delta
@@ -160,12 +160,12 @@ func _physics_process(delta: float):
 
 	_draw_trails()
 
-func _draw_trails():
+func _draw_trails() -> void:
 	_draw_trail(euler_mesh, euler_trail)
 	_draw_trail(rk4_mesh, rk4_trail)
 	_draw_trail(godot_mesh, godot_trail)
 
-func _draw_trail(mesh: ImmediateMesh, trail: Array[Vector3]):
+func _draw_trail(mesh: ImmediateMesh, trail: Array[Vector3]) -> void:
 	mesh.clear_surfaces()
 	if trail.size() < 2:
 		return
@@ -174,8 +174,14 @@ func _draw_trail(mesh: ImmediateMesh, trail: Array[Vector3]):
 		mesh.surface_add_vertex(point)
 	mesh.surface_end()
 
-func reset():
+func reset() -> void:
 	godot_ball.position = initial_pos
 	godot_ball.linear_velocity = initial_vel
 	godot_ball.angular_velocity = Vector3.ZERO
 	_reset_manual_particles()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

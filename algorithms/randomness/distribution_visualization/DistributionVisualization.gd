@@ -22,13 +22,13 @@ var current_distribution = DistributionType.UNIFORM
 var param1 = 0.0  # Mean, Lambda, etc.
 var param2 = 1.0  # Std dev, etc.
 
-func _ready():
+func _ready() -> void:
 	create_histogram_bars()
 	create_statistical_curve()
 	setup_materials()
 	generate_distribution_samples()
 
-func create_histogram_bars():
+func create_histogram_bars() -> void:
 	var hist_parent = $HistogramBars
 	
 	for i in range(bin_count):
@@ -42,7 +42,7 @@ func create_histogram_bars():
 		hist_parent.add_child(bar)
 		histogram_bars.append(bar)
 
-func create_statistical_curve():
+func create_statistical_curve() -> void:
 	var curve_parent = $StatisticalCurve
 	
 	for i in range(50):
@@ -56,7 +56,7 @@ func create_statistical_curve():
 		curve_parent.add_child(point)
 		curve_points.append(point)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Distribution type material
 	var type_material = StandardMaterial3D.new()
 	type_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
@@ -102,7 +102,7 @@ func setup_materials():
 	for point in curve_points:
 		point.material_override = curve_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	distribution_timer += delta
 	
@@ -118,7 +118,7 @@ func _process(delta):
 	animate_distribution()
 	animate_indicators()
 
-func update_distribution_parameters():
+func update_distribution_parameters() -> void:
 	match current_distribution:
 		DistributionType.UNIFORM:
 			param1 = sin(time * 0.3) * 2.0  # Range min
@@ -140,7 +140,7 @@ func update_distribution_parameters():
 			param1 = 1.0 + sin(time * 0.3) * 1.5  # Alpha
 			param2 = 1.0 + cos(time * 0.25) * 1.5  # Beta
 
-func generate_distribution_samples():
+func generate_distribution_samples() -> void:
 	# Clear existing points
 	for point in distribution_points:
 		point.queue_free()
@@ -212,7 +212,7 @@ func beta_sample(alpha: float, beta: float) -> float:
 	
 	return randf()  # Fallback
 
-func create_sample_points(samples: Array):
+func create_sample_points(samples: Array) -> void:
 	var points_parent = $DistributionPoints
 	
 	# Normalize samples to display range
@@ -247,7 +247,7 @@ func create_sample_points(samples: Array):
 		points_parent.add_child(point)
 		distribution_points.append(point)
 
-func update_histogram(samples: Array):
+func update_histogram(samples: Array) -> void:
 	# Calculate histogram
 	var min_val = samples.min()
 	var max_val = samples.max()
@@ -285,7 +285,7 @@ func update_histogram(samples: Array):
 			)
 			material.emission = material.albedo_color * (0.3 + intensity * 0.7)
 
-func update_theoretical_curve():
+func update_theoretical_curve() -> void:
 	# Update theoretical probability density function
 	for i in range(curve_points.size()):
 		var point = curve_points[i]
@@ -344,13 +344,13 @@ func beta_function(a: float, b: float) -> float:
 	# Beta function approximation
 	return gamma_approx(a) * gamma_approx(b) / gamma_approx(a + b)
 
-func animate_distribution():
+func animate_distribution() -> void:
 	# Animate sample points
 	for point in distribution_points:
 		var pulse = 1.0 + sin(time * 3.0 + point.position.x * 0.5) * 0.2
 		point.scale = Vector3.ONE * pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Distribution type indicator
 	var type_scale = 1.0 + sin(time * 3.0) * 0.1
 	$DistributionType.scale = Vector3.ONE * type_scale
@@ -390,3 +390,9 @@ func animate_indicators():
 	var pulse = 1.0 + sin(time * 4.0) * 0.1
 	$Parameter1.scale.x = pulse
 	$Parameter2.scale.x = pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

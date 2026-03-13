@@ -16,10 +16,10 @@ extends MeshInstance3D
 		offset = val
 		if is_inside_tree(): generate_surface()
 
-func _ready():
+func _ready() -> void:
 	generate_surface()
 
-func generate_surface():
+func generate_surface() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -107,3 +107,9 @@ func generate_surface():
 		var col_shape = CollisionShape3D.new()
 		col_shape.shape = generated_mesh.create_trimesh_shape()
 		sb.add_child(col_shape)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

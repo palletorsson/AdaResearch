@@ -160,3 +160,9 @@ func _reset_demo() -> void:
 	if auto_spawn:
 		await get_tree().process_frame
 		_spawn_single_ball()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

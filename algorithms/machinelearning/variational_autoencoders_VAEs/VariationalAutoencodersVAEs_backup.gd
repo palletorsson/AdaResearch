@@ -8,7 +8,7 @@ var particle_count: int = 20
 var flow_particles: Array = []
 var latent_particles: Array = []
 
-func _ready():
+func _ready() -> void:
 	# Initialize VAE visualization
 	print("Variational Autoencoders Visualization initialized")
 	create_input_particles()
@@ -17,7 +17,7 @@ func _ready():
 	create_flow_particles()
 	setup_training_metrics()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate training progress
@@ -32,7 +32,7 @@ func _process(delta):
 	animate_data_flow(delta)
 	update_training_metrics(delta)
 
-func create_input_particles():
+func create_input_particles() -> void:
 	# Create input data particles
 	var input_particles = $InputData/InputParticles
 	for i in range(particle_count):
@@ -51,7 +51,7 @@ func create_input_particles():
 		
 		input_particles.add_child(particle)
 
-func create_output_particles():
+func create_output_particles() -> void:
 	# Create output data particles
 	var output_particles = $OutputData/OutputParticles
 	for i in range(particle_count):
@@ -70,7 +70,7 @@ func create_output_particles():
 		
 		output_particles.add_child(particle)
 
-func create_latent_particles():
+func create_latent_particles() -> void:
 	# Create latent space particles
 	var latent_particles_node = $LatentSpace/LatentParticles
 	for i in range(15):
@@ -95,7 +95,7 @@ func create_latent_particles():
 		latent_particles_node.add_child(particle)
 		latent_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create data flow particles
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(25):
@@ -115,7 +115,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_training_metrics():
+func setup_training_metrics() -> void:
 	# Initialize loss meters
 	var loss_indicator = $TrainingMetrics/ReconstructionLossMeter/LossIndicator
 	var kl_indicator = $TrainingMetrics/KLDivergenceMeter/KLIndicator
@@ -124,7 +124,7 @@ func setup_training_metrics():
 	if kl_indicator:
 		kl_indicator.position.x = 0  # Start at middle
 
-func animate_encoder(delta):
+func animate_encoder(delta) -> void:
 	# Animate encoder core
 	var encoder_core = $Encoder/EncoderCore
 	if encoder_core:
@@ -140,7 +140,7 @@ func animate_encoder(delta):
 			var intensity = 0.3 + training_progress * 0.7
 			encoder_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_latent_space(delta):
+func animate_latent_space(delta) -> void:
 	# Animate latent space core
 	var latent_core = $LatentSpace/LatentCore
 	if latent_core:
@@ -173,7 +173,7 @@ func animate_latent_space(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * training_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_decoder(delta):
+func animate_decoder(delta) -> void:
 	# Animate decoder core
 	var decoder_core = $Decoder/DecoderCore
 	if decoder_core:
@@ -189,7 +189,7 @@ func animate_decoder(delta):
 			var intensity = 0.3 + training_progress * 0.7
 			decoder_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_reconstruction_loss(delta):
+func animate_reconstruction_loss(delta) -> void:
 	# Animate reconstruction loss core
 	var loss_core = $ReconstructionLoss/LossCore
 	if loss_core:
@@ -205,7 +205,7 @@ func animate_reconstruction_loss(delta):
 			var intensity = 0.3 + (1.0 - reconstruction_loss) * 0.7
 			loss_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -229,7 +229,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * training_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_training_metrics(delta):
+func update_training_metrics(delta) -> void:
 	# Update reconstruction loss meter
 	var loss_indicator = $TrainingMetrics/ReconstructionLossMeter/LossIndicator
 	if loss_indicator:
@@ -252,13 +252,13 @@ func update_training_metrics(delta):
 		var red_component = 0.2 + 0.6 * kl_divergence
 		kl_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func set_reconstruction_loss(loss: float):
+func set_reconstruction_loss(loss: float) -> void:
 	reconstruction_loss = clamp(loss, 0.1, 1.0)
 
-func set_kl_divergence(kl: float):
+func set_kl_divergence(kl: float) -> void:
 	kl_divergence = clamp(kl, 0.1, 1.0)
 
 func get_training_progress() -> float:
@@ -270,8 +270,14 @@ func get_reconstruction_loss() -> float:
 func get_kl_divergence() -> float:
 	return kl_divergence
 
-func reset_training():
+func reset_training() -> void:
 	time = 0.0
 	training_progress = 0.0
 	reconstruction_loss = 1.0
 	kl_divergence = 1.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

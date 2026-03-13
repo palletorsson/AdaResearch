@@ -51,7 +51,7 @@ var waiting_for_compute : bool
 var waiting_for_meshthread : bool
 var thread
 
-func _ready():
+func _ready() -> void:
 	print("🏳️‍🌈 %s: Starting generation..." % get_class_name())
 	array_mesh = ArrayMesh.new()
 	mesh = array_mesh
@@ -80,7 +80,7 @@ func _ready():
 	
 var _initial_generation_done : bool = false
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Skip compute processing if we're using fallback or if rendering device is null
 	if use_fallback or not rendering_device:
 		return
@@ -203,7 +203,7 @@ func init_compute() -> bool:
 	print("✅ Compute initialization successful!")
 	return true
 	
-func run_compute():
+func run_compute() -> void:
 	# Safety check for null rendering device
 	if not rendering_device or not params_buffer.is_valid() or not counter_buffer.is_valid():
 		print("❌ run_compute: Invalid compute resources - using fallback")
@@ -230,7 +230,7 @@ func run_compute():
 	last_compute_dispatch_frame = frame
 	waiting_for_compute = true
 
-func fetch_and_process_compute_data():
+func fetch_and_process_compute_data() -> void:
 	# Safety check for null rendering device
 	if not rendering_device:
 		print("❌ fetch_and_process_compute_data: Null rendering device - using fallback")
@@ -251,7 +251,7 @@ func fetch_and_process_compute_data():
 	waiting_for_meshthread = true
 	last_meshthread_start_frame = frame
 	
-func process_mesh_data():
+func process_mesh_data() -> void:
 	print("%s: Processing mesh data..." % get_class_name())
 	var triangle_data = triangle_data_bytes.to_float32_array()
 	num_triangles = counter_data_bytes.to_int32_array()[0]
@@ -295,7 +295,7 @@ func process_mesh_data():
 		normals[tri_index * 3 + 2] = norm
 		
 	
-func create_mesh():
+func create_mesh() -> void:
 	if thread and thread.is_started():
 		thread.wait_to_finish()
 		thread = null
@@ -316,7 +316,7 @@ func create_mesh():
 		print("❌ No vertices generated - creating fallback")
 		_create_fallback_mesh()
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	# Override in subclass
 	pass
 
@@ -376,7 +376,7 @@ func get_embedded_lut() -> Array:
 	print("%s: Using embedded LUT data (%d indices)" % [get_class_name(), indices.size()])
 	return indices
 
-func _create_collision():
+func _create_collision() -> void:
 	"""Create collision shape for the terrain mesh"""
 	if not array_mesh or array_mesh.get_surface_count() == 0:
 		print("⚠️ Cannot create collision: No mesh surface available")
@@ -467,7 +467,7 @@ func _notification(type):
 	if type == NOTIFICATION_PREDELETE:
 		release()
 
-func release():
+func release() -> void:
 	if thread and thread.is_started():
 		thread.wait_to_finish()
 		thread = null
@@ -488,3 +488,9 @@ func release():
 			
 		rendering_device.free()
 		rendering_device = null
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

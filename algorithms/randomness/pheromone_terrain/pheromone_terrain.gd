@@ -34,7 +34,7 @@ var walkers: Array = []
 var mesh_instance: MeshInstance3D
 var time_accumulator: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	set_process(false)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -97,7 +97,7 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 			return result
 	return null
 
-func _initialize_grids():
+func _initialize_grids() -> void:
 	"""Initialize vertex and pheromone grids"""
 	# Use dimensions stored as metadata (set during initialization)
 	var plane_width: float = mesh_instance.get_meta("plane_width", 20.0)
@@ -131,7 +131,7 @@ func _initialize_grids():
 	# Build indices
 	_build_indices()
 
-func _build_indices():
+func _build_indices() -> void:
 	"""Build triangle indices"""
 	indices.clear()
 	for j in range(y_segments):
@@ -148,7 +148,7 @@ func _build_indices():
 			indices.append(c)
 			indices.append(d)
 
-func _create_walkers():
+func _create_walkers() -> void:
 	"""Create walkers at random positions (inside border)"""
 	walkers.clear()
 	var min_x = border_size
@@ -163,7 +163,7 @@ func _create_walkers():
 			"active": true
 		})
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not mesh_instance or vertex_grid.is_empty():
 		return
 	
@@ -183,7 +183,7 @@ func _process(delta: float):
 			_walk_step()
 		_update_mesh()
 
-func _decay_pheromones(delta: float):
+func _decay_pheromones(delta: float) -> void:
 	"""Decay all pheromones over time"""
 	var decay_amount = pheromone_decay_rate * delta
 	for j in range(y_segments + 1):
@@ -191,7 +191,7 @@ func _decay_pheromones(delta: float):
 			if pheromone_grid[j][i] > 0:
 				pheromone_grid[j][i] = max(0.0, pheromone_grid[j][i] - decay_amount)
 
-func _walk_step():
+func _walk_step() -> void:
 	"""Move walkers based on pheromone attraction"""
 	for walker in walkers:
 		if not walker.active:
@@ -262,7 +262,7 @@ func _choose_next_position(x: int, y: int) -> Vector2i:
 		var new_y = clamp(y + dir.y, 0, y_segments)
 		return Vector2i(new_x, new_y)
 
-func _update_mesh():
+func _update_mesh() -> void:
 	"""Update mesh with modified vertices, normals, and colors"""
 	if not mesh_instance:
 		return
@@ -323,7 +323,7 @@ func get_pheromone_at(x: int, y: int) -> float:
 		return 0.0
 	return pheromone_grid[y][x]
 
-func reset_terrain():
+func reset_terrain() -> void:
 	"""Reset terrain and pheromones"""
 	for j in range(y_segments + 1):
 		for i in range(x_segments + 1):

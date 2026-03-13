@@ -72,3 +72,9 @@ func _create_line(start: Vector3, width: float, depth: int) -> void:
 	mesh_instance.material_override = material
 
 	_sim_root.add_child(mesh_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

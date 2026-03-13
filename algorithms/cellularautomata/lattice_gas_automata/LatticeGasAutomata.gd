@@ -27,11 +27,11 @@ class LatticeCell:
 	var velocity: Vector2
 	var pressure: float
 
-func _ready():
+func _ready() -> void:
 	_setup_multimeshes()
 	initialize_lattice()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	step_timer += delta
 	
@@ -43,7 +43,7 @@ func _process(delta):
 		show_particle_flow()
 		display_macroscopic_properties()
 
-func _setup_multimeshes():
+func _setup_multimeshes() -> void:
 	# 1. Grid Base
 	mm_grid_base = _create_multimesh("MM_GridBase", BoxMesh.new(), grid_size * grid_size, "LatticeGrid")
 	mm_grid_base.multimesh.mesh.size = Vector3(0.9, 0.1, 0.9)
@@ -88,7 +88,7 @@ func _create_multimesh(name: String, mesh: Mesh, count: int, parent_name: String
 		
 	return mmi
 
-func initialize_lattice():
+func initialize_lattice() -> void:
 	lattice_grid.clear()
 	
 	for i in range(grid_size):
@@ -118,13 +118,13 @@ func initialize_lattice():
 			mm.set_instance_color(idx, Color(0.3, 0.3, 0.3))
 			idx += 1
 
-func update_lattice():
+func update_lattice() -> void:
 	# Two-step LGA update: collision then propagation
 	apply_collision_rules()
 	propagate_particles()
 	calculate_macroscopic_properties()
 
-func apply_collision_rules():
+func apply_collision_rules() -> void:
 	# Apply local collision rules (simplified)
 	for i in range(grid_size):
 		for j in range(grid_size):
@@ -145,7 +145,7 @@ func apply_collision_rules():
 				# Two particles: apply specific collision rules
 				apply_two_particle_collision(cell)
 
-func apply_two_particle_collision(cell: LatticeCell):
+func apply_two_particle_collision(cell: LatticeCell) -> void:
 	var active_directions = []
 	
 	for i in range(cell.particles.size()):
@@ -186,7 +186,7 @@ func get_perpendicular_directions(dir1: int, dir2: int) -> Array:
 	
 	return perp_dirs
 
-func propagate_particles():
+func propagate_particles() -> void:
 	var new_grid = []
 	
 	# Initialize new grid
@@ -215,7 +215,7 @@ func propagate_particles():
 	
 	lattice_grid = new_grid
 
-func calculate_macroscopic_properties():
+func calculate_macroscopic_properties() -> void:
 	for i in range(grid_size):
 		for j in range(grid_size):
 			var cell = lattice_grid[i][j]
@@ -239,7 +239,7 @@ func calculate_macroscopic_properties():
 			# Calculate pressure (simplified)
 			cell.pressure = cell.density * cell.density
 
-func visualize_lattice_grid():
+func visualize_lattice_grid() -> void:
 	var mm = mm_particles.multimesh
 	var idx = 0
 	
@@ -266,7 +266,7 @@ func visualize_lattice_grid():
 					mm.set_instance_color(idx, Color.from_hsv(dir_color, 0.8, 1.0))
 					idx += 1
 
-func show_particle_flow():
+func show_particle_flow() -> void:
 	var mm = mm_flow.multimesh
 	var idx = 0
 	
@@ -301,7 +301,7 @@ func show_particle_flow():
 				mm.set_instance_color(idx, Color(speed_ratio, 0.5, 1.0 - speed_ratio))
 				idx += 1
 
-func display_macroscopic_properties():
+func display_macroscopic_properties() -> void:
 	var mm = mm_density.multimesh
 	var idx = 0
 	
@@ -328,6 +328,12 @@ func display_macroscopic_properties():
 			mm.set_instance_color(idx, col)
 			idx += 1
 
-func demonstrate_collision_dynamics():
+func demonstrate_collision_dynamics() -> void:
 	# Removed for performance/simplicity in this refactor
 	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

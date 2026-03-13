@@ -226,3 +226,9 @@ class DNA:
 
 	func copy_from(other: DNA) -> void:
 		genes = other.genes.duplicate(true)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

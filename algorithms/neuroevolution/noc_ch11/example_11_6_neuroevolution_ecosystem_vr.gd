@@ -40,7 +40,7 @@ class EcoCreature extends VREntity:
 	var reproduction_threshold: float = 80.0
 	var reproduction_cost: float = 40.0
 
-	func _init():
+	func _init() -> void:
 		# Brain: num_sensors inputs, 8 hidden, 2 outputs (turn, speed)
 		brain = NeuralNetwork.new(num_sensors, 8, 2)
 
@@ -49,7 +49,7 @@ class EcoCreature extends VREntity:
 			var angle = (TAU / num_sensors) * i
 			sensors.append(Sensor.new(angle, sensor_range))
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		# Body
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
@@ -64,7 +64,7 @@ class EcoCreature extends VREntity:
 		trail_node.mesh = trail_mesh
 		add_child(trail_node)
 
-	func think(food_items: Array):
+	func think(food_items: Array) -> void:
 		if not alive:
 			return
 
@@ -87,7 +87,7 @@ class EcoCreature extends VREntity:
 		var move_forward = -global_transform.basis.z
 		velocity = move_forward * speed
 
-	func _physics_process(delta):
+	func _physics_process(delta: float) -> void:
 		if not alive:
 			return
 
@@ -111,7 +111,7 @@ class EcoCreature extends VREntity:
 		# Update color based on health
 		update_appearance()
 
-	func update_trail():
+	func update_trail() -> void:
 		"""Draw pink trail"""
 		if trail_points.size() < 2:
 			return
@@ -127,7 +127,7 @@ class EcoCreature extends VREntity:
 
 		trail_mesh.surface_end()
 
-	func update_appearance():
+	func update_appearance() -> void:
 		"""Update color and glow based on health"""
 		if not material:
 			return
@@ -144,7 +144,7 @@ class EcoCreature extends VREntity:
 		if health > 90.0:
 			material.emission_energy_multiplier = 2.0
 
-	func eat(food_value: float):
+	func eat(food_value: float) -> void:
 		"""Consume food and gain health"""
 		health += food_value
 		health = min(health, max_health)
@@ -167,7 +167,7 @@ class EcoCreature extends VREntity:
 
 		return child
 
-	func die():
+	func die() -> void:
 		"""Mark creature as dead"""
 		alive = false
 		if material:
@@ -178,7 +178,7 @@ class Sensor:
 	var angle: float
 	var max_distance: float
 
-	func _init(a: float, dist: float):
+	func _init(a: float, dist: float) -> void:
 		angle = a
 		max_distance = dist
 
@@ -208,7 +208,7 @@ class FoodOrb extends Node3D:
 	var grow_timer: float = 0.0
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 0.8)
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.02
@@ -224,7 +224,7 @@ class FoodOrb extends Node3D:
 
 		add_child(mesh_instance)
 
-	func _process(delta):
+	func _process(delta: float) -> void:
 		grow_timer += delta
 
 		# Pulse effect
@@ -254,7 +254,7 @@ var gen_label: Label3D
 # Energy fog plane (visual indicator)
 var energy_fog: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Create energy fog plane
 	create_energy_fog()
 
@@ -269,7 +269,7 @@ func _ready():
 	# Create UI
 	create_ui()
 
-func create_energy_fog():
+func create_energy_fog() -> void:
 	"""Pink fog plane at tank base to signal environment energy"""
 	energy_fog = MeshInstance3D.new()
 	var plane = PlaneMesh.new()
@@ -286,14 +286,14 @@ func create_energy_fog():
 
 	add_child(energy_fog)
 
-func spawn_creature(pos: Vector3):
+func spawn_creature(pos: Vector3) -> void:
 	"""Spawn a new creature"""
 	var creature = EcoCreature.new()
 	creature.position_v = pos
 	add_child(creature)
 	creatures.append(creature)
 
-func spawn_food():
+func spawn_food() -> void:
 	"""Spawn food in random location"""
 	if food_items.size() >= max_food:
 		return
@@ -307,7 +307,7 @@ func spawn_food():
 	add_child(food)
 	food_items.append(food)
 
-func create_ui():
+func create_ui() -> void:
 	pop_label = Label3D.new()
 	pop_label.text = "Population: " + str(initial_population)
 	pop_label.font_size = 26
@@ -332,7 +332,7 @@ func create_ui():
 	gen_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(gen_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn food periodically
 	spawn_timer += delta
 	if spawn_timer > food_spawn_rate:
@@ -388,3 +388,9 @@ func _process(delta):
 	pop_label.text = "Population: " + str(creatures.size())
 	food_label.text = "Food: " + str(food_items.size())
 	gen_label.text = "Births: " + str(generation_count)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

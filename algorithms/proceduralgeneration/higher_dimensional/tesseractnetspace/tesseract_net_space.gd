@@ -25,10 +25,10 @@ enum NetType {
 @export var emission_strength: float = 0.3
 @export var show_wireframe: bool = true
 
-func _ready():
+func _ready() -> void:
     generate_net_space()
 
-func generate_net_space():
+func generate_net_space() -> void:
     """Generate hollow 3D space from tesseract nets"""
     # Clear existing
     for child in get_children():
@@ -92,7 +92,7 @@ func get_net_bounds() -> Vector3:
     
     return Vector3(3, 4, 3) * cube_size
 
-func create_net_at_position(pos: Vector3, rotation_y: float, color: Color):
+func create_net_at_position(pos: Vector3, rotation_y: float, color: Color) -> void:
     """Create a tesseract net at the given position"""
     var net_node = Node3D.new()
     net_node.position = pos
@@ -109,7 +109,7 @@ func create_net_at_position(pos: Vector3, rotation_y: float, color: Color):
         NetType.DOUBLE_CROSS:
             create_double_cross(net_node, color)
 
-func create_dali_cross(parent: Node3D, color: Color):
+func create_dali_cross(parent: Node3D, color: Color) -> void:
     """Create the classic Dali cross tesseract net"""
     # 8 cubes in cross formation:
     # Center cube at origin
@@ -137,14 +137,14 @@ func create_dali_cross(parent: Node3D, color: Color):
         
         create_cube(parent, cube_pos, cube_color)
 
-func create_linear_chain(parent: Node3D, color: Color):
+func create_linear_chain(parent: Node3D, color: Color) -> void:
     """Create a linear chain of 8 cubes"""
     for i in range(8):
         var pos = Vector3((i - 3.5) * cube_size, 0, 0)
         var cube_color = color.lerp(Color.WHITE, float(i) / 12.0)
         create_cube(parent, pos, cube_color)
 
-func create_folded_chain(parent: Node3D, color: Color):
+func create_folded_chain(parent: Node3D, color: Color) -> void:
     """Create a folded/zigzag chain"""
     var positions = [
         Vector3(0, 0, 0),
@@ -162,7 +162,7 @@ func create_folded_chain(parent: Node3D, color: Color):
         var cube_color = color.lerp(Color.WHITE, float(i) / 12.0)
         create_cube(parent, pos, cube_color)
 
-func create_double_cross(parent: Node3D, color: Color):
+func create_double_cross(parent: Node3D, color: Color) -> void:
     """Create two perpendicular crosses"""
     # First cross (XY plane)
     var positions = [
@@ -182,7 +182,7 @@ func create_double_cross(parent: Node3D, color: Color):
         var cube_color = color.lerp(Color.WHITE, float(i) / 12.0)
         create_cube(parent, pos, cube_color)
 
-func create_cube(parent: Node3D, pos: Vector3, color: Color):
+func create_cube(parent: Node3D, pos: Vector3, color: Color) -> void:
     """Create a single cube mesh"""
     var mesh_instance = MeshInstance3D.new()
     
@@ -249,7 +249,7 @@ func create_cube_wireframe(pos: Vector3, color: Color) -> MeshInstance3D:
     
     return mesh_instance
 
-func regenerate():
+func regenerate() -> void:
     """Regenerate the space"""
     generate_net_space()
 
@@ -275,23 +275,8 @@ func get_net_space_stats() -> Dictionary:
         "offset_pattern": offset_pattern
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

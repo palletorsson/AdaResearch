@@ -334,3 +334,9 @@ static func apply_damage_to_ball(ball: Node3D, damage: float) -> bool:
 	ball.set_meta("health", health)
 	
 	return health <= 0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

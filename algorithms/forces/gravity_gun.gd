@@ -679,3 +679,9 @@ func release_all() -> void:
 
 func is_holding_objects() -> bool:
 	return not captured_objects.is_empty()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

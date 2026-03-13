@@ -8,10 +8,10 @@ extends Node3D
 
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	generate_mesh()
 
-func generate_mesh():
+func generate_mesh() -> void:
 	var scalar_field = generate_scalar_field()
 	var mesh = marching_cubes(scalar_field)
 	
@@ -101,7 +101,7 @@ func marching_cubes(field: Array) -> ArrayMesh:
 	st.generate_normals()
 	return st.commit()
 
-func add_cube_triangles(st: SurfaceTool, corners: Array, values: Array, case_idx: int):
+func add_cube_triangles(st: SurfaceTool, corners: Array, values: Array, case_idx: int) -> void:
 	# Simplified triangle generation (real implementation uses lookup tables)
 	# This creates basic geometry for demonstration
 	
@@ -116,6 +116,12 @@ func add_cube_triangles(st: SurfaceTool, corners: Array, values: Array, case_idx
 		st.add_vertex(corners[0] * cell_size)
 		st.add_vertex(corners[1] * cell_size)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		generate_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

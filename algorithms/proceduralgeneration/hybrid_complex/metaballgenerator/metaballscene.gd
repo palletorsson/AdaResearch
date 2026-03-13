@@ -4,7 +4,7 @@ extends Node3D
 
 @onready var metaball_generator: MetaballGenerator = $MetaballGenerator
 
-func _ready():
+func _ready() -> void:
 	# Just let the generator do its thing
 	if metaball_generator:
 		print("MetaballScene: Generator ready")

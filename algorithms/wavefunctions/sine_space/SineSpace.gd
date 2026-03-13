@@ -24,12 +24,12 @@ enum TopologyMode {
 
 var current_topology = TopologyMode.FLAT_SINE
 
-func _ready():
+func _ready() -> void:
 	instance_count = grid_size * grid_size
 	create_multimesh_surface()
 	setup_materials()
 
-func create_multimesh_surface():
+func create_multimesh_surface() -> void:
 	# Create the MultiMeshInstance3D as a child of SineSurface
 	multi_mesh_instance = MultiMeshInstance3D.new()
 	$SineSurface.add_child(multi_mesh_instance)
@@ -65,7 +65,7 @@ func create_multimesh_surface():
 		multi_mesh.set_instance_transform(i, Transform3D(Basis(), Vector3.ZERO))
 		multi_mesh.set_instance_color(i, Color.WHITE)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Control materials (unchanged — only 4 CSG nodes)
 	var freq_material = StandardMaterial3D.new()
 	freq_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
@@ -91,7 +91,7 @@ func setup_materials():
 	topology_material.emission = Color(0.3, 0.2, 0.05, 1.0)
 	$TopologyMode.material_override = topology_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	topology_timer += delta
 
@@ -108,7 +108,7 @@ func _process(delta):
 	update_sine_surface()
 	animate_controls()
 
-func update_sine_surface():
+func update_sine_surface() -> void:
 	match current_topology:
 		TopologyMode.FLAT_SINE:
 			update_flat_sine_surface()
@@ -140,7 +140,7 @@ func height_to_color(height_value: float) -> Color:
 
 # --- Topology update functions (MultiMesh) ---
 
-func update_flat_sine_surface():
+func update_flat_sine_surface() -> void:
 	for x in range(grid_size):
 		for z in range(grid_size):
 			var idx = x * grid_size + z
@@ -156,7 +156,7 @@ func update_flat_sine_surface():
 			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), Vector3(x_pos, height, z_pos)))
 			multi_mesh.set_instance_color(idx, height_to_color(height))
 
-func update_cylindrical_surface():
+func update_cylindrical_surface() -> void:
 	for x in range(grid_size):
 		for z in range(grid_size):
 			var idx = x * grid_size + z
@@ -174,7 +174,7 @@ func update_cylindrical_surface():
 			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
 			multi_mesh.set_instance_color(idx, height_to_color(radius - 3.0))
 
-func update_spherical_surface():
+func update_spherical_surface() -> void:
 	for x in range(grid_size):
 		for z in range(grid_size):
 			var idx = x * grid_size + z
@@ -192,7 +192,7 @@ func update_spherical_surface():
 			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
 			multi_mesh.set_instance_color(idx, height_to_color(radius - 3.0))
 
-func update_toroidal_surface():
+func update_toroidal_surface() -> void:
 	for x in range(grid_size):
 		for z in range(grid_size):
 			var idx = x * grid_size + z
@@ -211,7 +211,7 @@ func update_toroidal_surface():
 			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), pos))
 			multi_mesh.set_instance_color(idx, height_to_color(minor_radius - 1.0))
 
-func update_mobius_surface():
+func update_mobius_surface() -> void:
 	for x in range(grid_size):
 		for z in range(grid_size):
 			var idx = x * grid_size + z
@@ -232,7 +232,7 @@ func update_mobius_surface():
 
 # --- Control animations (unchanged) ---
 
-func animate_controls():
+func animate_controls() -> void:
 	# Frequency control
 	var freq_height = frequency * 0.8 + 0.5
 	$FrequencyControl.height = freq_height
@@ -307,3 +307,9 @@ func get_topology_equation() -> String:
 			return "Möbius with sine modulation"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

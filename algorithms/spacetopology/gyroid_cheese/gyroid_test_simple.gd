@@ -51,3 +51,9 @@ void fragment() {
 	print("  - Camera looking at the box from an angle")
 	print("")
 	print("If you see this, the basic setup works!")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

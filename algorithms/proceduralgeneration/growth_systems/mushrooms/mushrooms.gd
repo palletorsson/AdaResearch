@@ -24,7 +24,7 @@ var ground = null
 var ground_height_grid: PackedFloat32Array = PackedFloat32Array()
 var ground_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	if ground_seed == 0:
 		ground_rng.randomize()
 	else:
@@ -46,7 +46,7 @@ func _ready():
 	if add_ground_cover:
 		add_ground_details()
 
-func create_ground():
+func create_ground() -> void:
 	# Create a procedural ground
 	ground = Node3D.new()
 	ground.name = "Ground"
@@ -164,7 +164,7 @@ func _calculate_vertex_normals(vertices: PackedVector3Array, indices: PackedInt3
 
 	return normals
 
-func create_mushroom_templates():
+func create_mushroom_templates() -> void:
 	# Create different mushroom types
 	for i in range(mushroom_variety):
 		var template = create_mushroom_template(i)
@@ -190,7 +190,7 @@ func create_mushroom_template(type_index):
 	
 	return mushroom
 
-func create_standard_mushroom(mushroom, cap_size, stem_height, color):
+func create_standard_mushroom(mushroom, cap_size, stem_height, color) -> void:
 	# Create stem
 	var stem = MeshInstance3D.new()
 	stem.name = "Stem"
@@ -237,7 +237,7 @@ func create_standard_mushroom(mushroom, cap_size, stem_height, color):
 	# Add gills under cap
 	add_gills(mushroom, cap_size, stem_height, color)
 
-func add_gills(mushroom, cap_size, stem_height, color):
+func add_gills(mushroom, cap_size, stem_height, color) -> void:
 	var gills = MeshInstance3D.new()
 	gills.name = "Gills"
 	
@@ -257,7 +257,7 @@ func add_gills(mushroom, cap_size, stem_height, color):
 	
 	mushroom.add_child(gills)
 
-func create_flat_cap_mushroom(mushroom, cap_size, color):
+func create_flat_cap_mushroom(mushroom, cap_size, color) -> void:
 	# Create stem
 	var stem = MeshInstance3D.new()
 	stem.name = "Stem"
@@ -298,7 +298,7 @@ func create_flat_cap_mushroom(mushroom, cap_size, color):
 	mushroom.add_child(stem)
 	mushroom.add_child(cap)
 
-func create_tall_thin_mushroom(mushroom, height, color):
+func create_tall_thin_mushroom(mushroom, height, color) -> void:
 	# Create stem
 	var stem = MeshInstance3D.new()
 	stem.name = "Stem"
@@ -339,7 +339,7 @@ func create_tall_thin_mushroom(mushroom, height, color):
 	mushroom.add_child(stem)
 	mushroom.add_child(cap)
 
-func create_puffball_mushroom(mushroom, size, color):
+func create_puffball_mushroom(mushroom, size, color) -> void:
 	# Create just a simple sphere for puffball
 	var puffball = MeshInstance3D.new()
 	puffball.name = "Puffball"
@@ -364,7 +364,7 @@ func create_puffball_mushroom(mushroom, size, color):
 	# Add to mushroom
 	mushroom.add_child(puffball)
 
-func add_puffball_texture(puffball, color):
+func add_puffball_texture(puffball, color) -> void:
 	# Add small bumps on the puffball surface
 	var bump_count = 12
 	
@@ -461,7 +461,7 @@ func create_glowing_mushroom():
 	
 	return mushroom
 
-func generate_mushroom_field():
+func generate_mushroom_field() -> void:
 	# Create a container for all mushrooms
 	var field = Node3D.new()
 	field.name = "MushroomField"
@@ -562,7 +562,7 @@ func get_ground_height(x: float, z: float) -> float:
 	var h1: float = lerpf(h01, h11, tx)
 	return lerpf(h0, h1, tz)
 
-func create_mushroom_patterns():
+func create_mushroom_patterns() -> void:
 	# Create fairy rings
 	var ring_count = int(meadow_size / 5)
 	
@@ -575,7 +575,7 @@ func create_mushroom_patterns():
 	for _i in range(cluster_count):
 		create_mushroom_cluster()
 
-func create_fairy_ring():
+func create_fairy_ring() -> void:
 	# Choose a random center point
 	var center_x = randf() * meadow_size - meadow_size / 2
 	var center_z = randf() * meadow_size - meadow_size / 2
@@ -617,7 +617,7 @@ func create_fairy_ring():
 		get_node("MushroomField").add_child(mushroom)
 		mushrooms.append(mushroom)
 
-func create_mushroom_cluster():
+func create_mushroom_cluster() -> void:
 	# Choose a random center point
 	var center_x = randf() * meadow_size - meadow_size / 2
 	var center_z = randf() * meadow_size - meadow_size / 2
@@ -661,7 +661,7 @@ func create_mushroom_cluster():
 		get_node("MushroomField").add_child(mushroom)
 		mushrooms.append(mushroom)
 
-func create_ambient_lighting():
+func create_ambient_lighting() -> void:
 	# Add ambient light for the scene
 	var ambient = DirectionalLight3D.new()
 	ambient.name = "AmbientLight"
@@ -679,7 +679,7 @@ func create_ambient_lighting():
 	# Add some fog for atmosphere
 	add_atmospheric_fog()
 
-func add_atmospheric_fog():
+func add_atmospheric_fog() -> void:
 	# Add fog
 	var environment = WorldEnvironment.new()
 	environment.name = "Environment"
@@ -701,7 +701,7 @@ func add_atmospheric_fog():
 	environment.environment = env
 	add_child(environment)
 
-func add_ground_details():
+func add_ground_details() -> void:
 	# Add grass and small plants
 	add_grass()
 	
@@ -711,7 +711,7 @@ func add_ground_details():
 	# Add fallen leaves
 	add_fallen_leaves()
 
-func add_grass():
+func add_grass() -> void:
 	# Create a MultiMeshInstance for grass
 	var grass = MultiMeshInstance3D.new()
 	grass.name = "Grass"
@@ -759,7 +759,7 @@ func add_grass():
 	grass.multimesh = multi_mesh
 	add_child(grass)
 
-func add_rocks():
+func add_rocks() -> void:
 	# Add some rocks
 	var rock_count = int(meadow_size * 2)
 	var rocks = Node3D.new()
@@ -815,7 +815,7 @@ func add_rocks():
 	
 	add_child(rocks)
 
-func add_fallen_leaves():
+func add_fallen_leaves() -> void:
 	# Add fallen leaves
 	var leaf_count = int(meadow_size * meadow_size * 2)
 	var leaves = MultiMeshInstance3D.new()
@@ -859,3 +859,9 @@ func add_fallen_leaves():
 	
 	leaves.multimesh = multi_mesh
 	add_child(leaves)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

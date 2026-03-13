@@ -4,7 +4,7 @@ extends Camera3D
 var move_speed = 10.0
 var rotate_speed = 0.5
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotation
 	if Input.is_action_pressed("ui_left"):
 		rotate_y(rotate_speed * delta)

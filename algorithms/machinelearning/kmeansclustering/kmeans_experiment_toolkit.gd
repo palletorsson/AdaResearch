@@ -27,11 +27,11 @@ enum ExperimentType {
 	PERFORMANCE_BENCHMARK
 }
 
-func _ready():
+func _ready() -> void:
 	setup_experiment_ui()
 	connect_to_visualization()
 
-func setup_experiment_ui():
+func setup_experiment_ui() -> void:
 	# Main experiment panel
 	experiment_panel = Panel.new()
 	experiment_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -53,7 +53,7 @@ func setup_experiment_ui():
 	# Results display
 	setup_results_display()
 
-func create_elbow_method_tab():
+func create_elbow_method_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Elbow Method"
 	experiment_tabs.add_child(tab)
@@ -91,7 +91,7 @@ func create_elbow_method_tab():
 	chart_area.custom_minimum_size = Vector2(600, 300)
 	tab.add_child(chart_area)
 
-func create_initialization_tab():
+func create_initialization_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Initialization Comparison"
 	experiment_tabs.add_child(tab)
@@ -136,7 +136,7 @@ func create_initialization_tab():
 	run_button.pressed.connect(_on_run_initialization_comparison)
 	tab.add_child(run_button)
 
-func create_data_pattern_tab():
+func create_data_pattern_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Data Pattern Analysis"
 	experiment_tabs.add_child(tab)
@@ -171,7 +171,7 @@ func create_data_pattern_tab():
 		pattern_button.pressed.connect(_on_test_data_pattern.bind(pattern))
 		patterns_container.add_child(pattern_button)
 
-func create_convergence_tab():
+func create_convergence_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Convergence Study"
 	experiment_tabs.add_child(tab)
@@ -203,7 +203,7 @@ func create_convergence_tab():
 	run_button.pressed.connect(_on_run_convergence_study)
 	tab.add_child(run_button)
 
-func create_outlier_tab():
+func create_outlier_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Outlier Sensitivity"
 	experiment_tabs.add_child(tab)
@@ -247,7 +247,7 @@ func create_outlier_tab():
 		scenario_button.pressed.connect(_on_test_outlier_scenario.bind(scenario))
 		scenarios_container.add_child(scenario_button)
 
-func create_performance_tab():
+func create_performance_tab() -> void:
 	var tab = VBoxContainer.new()
 	tab.name = "Performance Benchmark"
 	experiment_tabs.add_child(tab)
@@ -287,7 +287,7 @@ func create_performance_tab():
 	benchmark_button.pressed.connect(_on_run_performance_benchmark)
 	tab.add_child(benchmark_button)
 
-func setup_results_display():
+func setup_results_display() -> void:
 	# Results panel at the bottom
 	var results_panel = Panel.new()
 	results_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
@@ -355,7 +355,7 @@ func create_number_input(label: String, default_val: float, min_val: float, max_
 	return container
 
 # Experiment implementations
-func _on_run_elbow_method():
+func _on_run_elbow_method() -> void:
 	current_experiment = "Elbow Method"
 	results_display.text = "🔍 Running Elbow Method Analysis...\n\n"
 	
@@ -397,7 +397,7 @@ func _on_run_elbow_method():
 		"timestamp": Time.get_datetime_string_from_system()
 	}
 
-func _on_run_initialization_comparison():
+func _on_run_initialization_comparison() -> void:
 	current_experiment = "Initialization Comparison"
 	results_display.text = "🎯 Comparing Initialization Methods...\n\n"
 	
@@ -441,7 +441,7 @@ func _on_run_initialization_comparison():
 	
 	experiment_results["initialization_comparison"] = results
 
-func _on_test_data_pattern(pattern: String):
+func _on_test_data_pattern(pattern: String) -> void:
 	current_experiment = "Data Pattern: " + pattern
 	results_display.text = "📊 Testing K-Means on %s...\n\n" % pattern
 	
@@ -466,7 +466,7 @@ func _on_test_data_pattern(pattern: String):
 		"timestamp": Time.get_datetime_string_from_system()
 	}
 
-func _on_run_convergence_study():
+func _on_run_convergence_study() -> void:
 	current_experiment = "Convergence Study"
 	results_display.text = "⏱️ Analyzing Convergence Patterns...\n\n"
 	
@@ -513,7 +513,7 @@ func _on_run_convergence_study():
 		}
 	}
 
-func _on_test_outlier_scenario(scenario: String):
+func _on_test_outlier_scenario(scenario: String) -> void:
 	current_experiment = "Outlier Test: " + scenario
 	results_display.text = "🎯 Testing Outlier Sensitivity: %s...\n\n" % scenario
 	
@@ -544,7 +544,7 @@ func _on_test_outlier_scenario(scenario: String):
 		"analysis": sensitivity_analysis
 	}
 
-func _on_run_performance_benchmark():
+func _on_run_performance_benchmark() -> void:
 	current_experiment = "Performance Benchmark"
 	results_display.text = "⚡ Running Performance Benchmark...\n\n"
 	
@@ -643,7 +643,7 @@ func find_best_initialization_method(results: Dictionary) -> String:
 	
 	return best_method
 
-func connect_to_visualization():
+func connect_to_visualization() -> void:
 	# Connect to the main K-Means visualization if available
 	if kmeans_visualization:
 		print("Connected to K-Means visualization")
@@ -996,7 +996,7 @@ func generate_educational_insights() -> Dictionary:
 	return insights
 
 # Real-time visualization integration
-func update_visualization_parameters():
+func update_visualization_parameters() -> void:
 	"""Update the main visualization with experiment parameters"""
 	if kmeans_visualization and kmeans_visualization.has_method("update_parameters"):
 		var params = {
@@ -1023,7 +1023,7 @@ func get_optimal_convergence_threshold() -> float:
 	return 0.1  # Default
 
 # Interactive learning features
-func start_guided_experiment():
+func start_guided_experiment() -> void:
 	"""Start a guided experiment sequence for educational purposes"""
 	var guided_sequence = [
 		"elbow_method",
@@ -1163,3 +1163,9 @@ func generate_final_report():
 	results_display.text += "Full report saved to file for detailed analysis.\n"
 	
 	return report
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

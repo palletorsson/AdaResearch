@@ -26,12 +26,12 @@ extends CSGCombiner3D
 var path_points : PackedVector3Array = []
 var occupied_positions : Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	if auto_generate:
 		# Defer one frame to ensure CSG system is ready
 		call_deferred("generate_carved_cube")
 
-func generate_carved_cube():
+func generate_carved_cube() -> void:
 	# Clear existing CSG shapes (but keep Label3D and other scene nodes)
 	for child in get_children():
 		if child is CSGShape3D or child is MeshInstance3D:
@@ -62,7 +62,7 @@ func generate_carved_cube():
 	print("✅ Carving complete! ", path_points.size(), " points in path")
 
 ## Create the base solid cube (as child of CSGCombiner3D - this node)
-func _create_base_cube():
+func _create_base_cube() -> void:
 	var cube = CSGBox3D.new()
 	cube.name = "BaseCube"
 	cube.size = cube_size
@@ -71,7 +71,7 @@ func _create_base_cube():
 	print("📦 Created base cube: ", cube_size)
 
 ## Generate a random walk path that avoids crossing itself
-func _generate_random_walk():
+func _generate_random_walk() -> void:
 	# Start at center
 	var current_pos = Vector3.ZERO
 	path_points.append(current_pos)
@@ -133,7 +133,7 @@ func _is_valid_move(pos: Vector3) -> bool:
 	return true
 
 ## Create carving spheres along the path (as siblings of base cube under CSGCombiner3D)
-func _carve_spheres_along_path():
+func _carve_spheres_along_path() -> void:
 	var sphere_count = 0
 	
 	print("🔨 Carving ", path_points.size(), " spheres...")
@@ -161,7 +161,7 @@ func _carve_spheres_along_path():
 	print("✂️ Carved ", sphere_count, " spheres (CSGCombiner3D will combine them)")
 
 ## Create visual line showing the path
-func _create_path_visualization():
+func _create_path_visualization() -> void:
 	if path_points.size() < 2:
 		return
 	
@@ -199,7 +199,7 @@ func _create_base_material() -> StandardMaterial3D:
 	return mat
 
 ## Public function to regenerate with new seed
-func regenerate(new_seed: int = -1):
+func regenerate(new_seed: int = -1) -> void:
 	if new_seed >= 0:
 		random_seed = new_seed
 	else:
@@ -210,3 +210,9 @@ func regenerate(new_seed: int = -1):
 ## Get the carving path for external use
 func get_carve_path() -> PackedVector3Array:
 	return path_points
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

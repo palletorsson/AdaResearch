@@ -32,7 +32,7 @@ var grab_joint: Generic6DOFJoint3D = null
 var grab_anchor: Node3D = null
 var controller_position: Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_ui_labels()
@@ -42,7 +42,7 @@ func _ready():
 
 	print("Example 6.5: Chain - Generic6DOFJoint3D flexible connections")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate controller position
 	animate_controller(delta)
 
@@ -52,7 +52,7 @@ func _process(delta):
 
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			if grabbed_link:
@@ -64,7 +64,7 @@ func _input(event):
 		elif event.keycode == KEY_M:
 			grab_middle_link()
 
-func create_ui_labels():
+func create_ui_labels() -> void:
 	"""Create UI labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -82,13 +82,13 @@ func create_ui_labels():
 	grab_label.text = "[SPACE] Grab End | [M] Grab Middle | [R] Reset"
 	add_child(grab_label)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		var status = "Swinging" if not grabbed_link else "Grabbed"
 		info_label.text = "Chain (%d Links)\n%s" % [num_links, status]
 
-func create_chain():
+func create_chain() -> void:
 	"""Create chain with joints"""
 	# Create anchor point at top
 	create_anchor()
@@ -106,7 +106,7 @@ func create_chain():
 
 		previous_link = link
 
-func create_anchor():
+func create_anchor() -> void:
 	"""Create static anchor point"""
 	anchor = StaticBody3D.new()
 	anchor.position = Vector3(0, 0.3, 0)
@@ -198,7 +198,7 @@ func create_joint(node_a: Node3D, node_b: Node3D, index: int) -> Generic6DOFJoin
 	add_child(joint)
 	return joint
 
-func animate_controller(_delta: float):
+func animate_controller(_delta: float) -> void:
 	"""Animate controller position (simulates VR hand movement)"""
 	var time = Time.get_ticks_msec() / 1000.0
 	controller_position = Vector3(
@@ -207,7 +207,7 @@ func animate_controller(_delta: float):
 		cos(time * 1.3) * 0.15
 	)
 
-func grab_chain_end():
+func grab_chain_end() -> void:
 	"""Grab the last chain link"""
 	if chain_links.is_empty():
 		return
@@ -215,7 +215,7 @@ func grab_chain_end():
 	grabbed_link = chain_links[chain_links.size() - 1]
 	create_grab_joint()
 
-func grab_middle_link():
+func grab_middle_link() -> void:
 	"""Grab middle chain link"""
 	if chain_links.is_empty():
 		return
@@ -224,7 +224,7 @@ func grab_middle_link():
 	grabbed_link = chain_links[middle_index]
 	create_grab_joint()
 
-func create_grab_joint():
+func create_grab_joint() -> void:
 	"""Create grab joint to controller"""
 	if not grabbed_link:
 		return
@@ -253,7 +253,7 @@ func create_grab_joint():
 		if mesh is MeshInstance3D and mesh.material_override:
 			mesh.material_override.emission_energy_multiplier = 1.5
 
-func release_chain():
+func release_chain() -> void:
 	"""Release grabbed chain"""
 	if grabbed_link:
 		# Reset highlight
@@ -272,7 +272,7 @@ func release_chain():
 
 	grabbed_link = null
 
-func reset():
+func reset() -> void:
 	"""Reset chain"""
 	release_chain()
 
@@ -290,3 +290,9 @@ func reset():
 
 	# Recreate chain
 	create_chain()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

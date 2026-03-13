@@ -16,7 +16,7 @@ var current_row_to_change = 0
 
 var cell_nodes = []
 
-func _ready():
+func _ready() -> void:
 	# Initialize the grid
 	current_gen.resize(grid_width)
 	cell_nodes.resize(grid_width)
@@ -45,14 +45,14 @@ func _ready():
 	for i in range(grid_width):
 		current_gen[i][0] = randi() % 2
 
-func _process(delta):
+func _process(delta: float) -> void:
 	rule_change_timer += delta
 	if rule_change_timer >= rule_change_interval:
 		rule_change_timer = 0.0
 		update_bridge()
 	animate_cells(delta)
 
-func update_bridge():
+func update_bridge() -> void:
 	if current_row_to_change < grid_height:
 		for i in range(grid_width):
 			var neighbors = count_neighbors(i, current_row_to_change)
@@ -69,7 +69,7 @@ func update_bridge():
 			turn_counter = 0
 			initialize_rules()
 
-func animate_cells(_delta):
+func animate_cells(_delta) -> void:
 	for i in range(grid_width):
 		for j in range(grid_height):
 			var cell = cell_nodes[i][j]
@@ -108,7 +108,7 @@ func count_neighbors(x, y):
 				count += 1
 	return count
 
-func initialize_rules():
+func initialize_rules() -> void:
 	"""Initialize or re-randomize the CA rules for each row"""
 	rules.clear()
 	rules.resize(grid_height)

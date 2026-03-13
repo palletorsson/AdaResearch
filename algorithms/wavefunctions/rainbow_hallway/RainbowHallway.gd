@@ -17,7 +17,7 @@ var shader_material: ShaderMaterial
 var gradient_texture: GradientTexture1D
 var segments_parent: Node3D
 
-func _ready():
+func _ready() -> void:
 	segments_parent = get_node_or_null("HallwaySegments")
 	if not segments_parent:
 		segments_parent = Node3D.new()
@@ -27,7 +27,7 @@ func _ready():
 	setup_hallway()
 	setup_environment()
 
-func setup_hallway():
+func setup_hallway() -> void:
 	# Clear existing segments
 	for child in segments_parent.get_children():
 		child.queue_free()
@@ -64,7 +64,7 @@ func setup_hallway():
 	# Set initial shader parameters
 	update_shader_parameters()
 
-func _generate_cone_segments():
+func _generate_cone_segments() -> void:
 	var total_length = num_segments * segment_length
 	
 	for i in range(num_segments):
@@ -128,7 +128,7 @@ func _create_tube_segment(radius: float, length: float, index: int) -> CSGCombin
 	
 	return combiner
 
-func setup_environment():
+func setup_environment() -> void:
 	var env = Environment.new()
 	
 	env.glow_enabled = true
@@ -151,7 +151,7 @@ func setup_environment():
 func _process(_delta):
 	update_shader_parameters()
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	if shader_material:
 		shader_material.set_shader_parameter("animation_speed", animation_speed)
 		shader_material.set_shader_parameter("gradient_offset", gradient_offset)
@@ -161,7 +161,7 @@ func update_shader_parameters():
 		shader_material.set_shader_parameter("gradient_start_z", 0.0)
 		shader_material.set_shader_parameter("gradient_length_m", total_length)
 
-func apply_grid_config(config: Dictionary):
+func apply_grid_config(config: Dictionary) -> void:
 	if config.has("start_radius"):
 		start_radius = float(config["start_radius"])
 	if config.has("end_radius"):
@@ -174,3 +174,9 @@ func apply_grid_config(config: Dictionary):
 		animation_speed = float(config["animation_speed"])
 	
 	setup_hallway()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

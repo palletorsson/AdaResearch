@@ -3,7 +3,7 @@ extends "res://algorithms/joint/shared/joint_demo_base.gd"
 var wheel: RigidBody3D
 var rod: RigidBody3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var base := StaticBody3D.new()
 	base.name = "AxleBlock"
 	base.position = Vector3(0.0, 2.0, 0.0)
@@ -59,3 +59,9 @@ func _build_demo():
 	add_child(guide)
 
 	add_label("Powered Hinge Crank", Vector3(1.5, 3.5, 2.5))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

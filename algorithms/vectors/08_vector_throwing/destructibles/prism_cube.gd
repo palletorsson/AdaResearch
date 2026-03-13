@@ -29,7 +29,7 @@ class PrismData:
 	var current_health: int
 	var grid_position: Vector3i
 
-	func _init(mesh: MeshInstance3D, area_node: Area3D, health: int, grid_pos: Vector3i):
+	func _init(mesh: MeshInstance3D, area_node: Area3D, health: int, grid_pos: Vector3i) -> void:
 		mesh_instance = mesh
 		area = area_node
 		current_health = health
@@ -294,3 +294,9 @@ func get_destruction_percentage() -> float:
 	if total == 0:
 		return 0.0
 	return (float(destroyed_count) / float(total)) * 100.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

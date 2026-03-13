@@ -10,11 +10,11 @@ var current_rule_state = 0  # 0: Rule 30, 1: Rule 110, 2: Rule 90, 3: Rule 150, 
 var generation_complete = false
 var delay_timer = 0.0
 
-func _ready():
+func _ready() -> void:
 	max_generations = 12
 	initialize_rules()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if generation_complete:
@@ -33,7 +33,7 @@ func _process(delta):
 		generation_timer = 0.0
 		advance_generation()
 
-func advance_generation():
+func advance_generation() -> void:
 	if current_rule_state == 4:
 		if not generation_complete:
 			visualize_pyramid()
@@ -84,7 +84,7 @@ var rule_150_grid := []
 var rule_90_seed := []
 var rule_150_seed := []
 
-func initialize_rules():
+func initialize_rules() -> void:
 	if current_rule_state == 4:
 		return
 	super.initialize_rules() # call parent
@@ -144,7 +144,7 @@ func apply_rule_150(current_row: Array) -> Array:
 		new_row.append(next_state)
 	return new_row
 
-func visualize_rule_30_gravity():
+func visualize_rule_30_gravity() -> void:
 	var container = $Rule30Visualization
 	for child in container.get_children():
 		child.queue_free()
@@ -158,7 +158,7 @@ func visualize_rule_30_gravity():
 				container.add_child(rigid_body)
 				rigid_bodies_30.append(rigid_body)
 
-func visualize_rule_110_gravity():
+func visualize_rule_110_gravity() -> void:
 	var container = $Rule110Visualization
 	for child in container.get_children():
 		child.queue_free()
@@ -172,7 +172,7 @@ func visualize_rule_110_gravity():
 				container.add_child(rigid_body)
 				rigid_bodies_110.append(rigid_body)
 
-func visualize_rule_90_gravity():
+func visualize_rule_90_gravity() -> void:
 	var container = get_node("Rule90Visualization")
 	if !container:
 		container = Node3D.new()
@@ -190,7 +190,7 @@ func visualize_rule_90_gravity():
 				container.add_child(rigid_body)
 				rigid_bodies_90.append(rigid_body)
 
-func visualize_rule_150_gravity():
+func visualize_rule_150_gravity() -> void:
 	var container = get_node("Rule150Visualization")
 	if !container:
 		container = Node3D.new()
@@ -208,7 +208,7 @@ func visualize_rule_150_gravity():
 				container.add_child(rigid_body)
 				rigid_bodies_150.append(rigid_body)
 
-func visualize_pyramid():
+func visualize_pyramid() -> void:
 	var container = get_node("PyramidVisualization")
 	if !container:
 		container = Node3D.new()
@@ -281,3 +281,9 @@ func create_falling_cube(gen, i, row_size, grid_size):
 	rigid_body.add_child(cell)
 	rigid_body.add_child(collision_shape)
 	return rigid_body
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

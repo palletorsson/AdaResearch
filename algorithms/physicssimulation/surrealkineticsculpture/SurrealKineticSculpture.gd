@@ -25,7 +25,7 @@ var material_system: SurrealMaterialSystem
 var sculpture_container: Node3D
 var lighting_system: Node3D
 
-func _ready():
+func _ready() -> void:
 	setup_sculpture_base()
 	create_material_system()
 	build_tanguy_mechanisms()
@@ -33,7 +33,7 @@ func _ready():
 	setup_kinetic_lighting()
 	start_kinetic_animation()
 
-func setup_sculpture_base():
+func setup_sculpture_base() -> void:
 	"""Create the main sculpture container and base platform"""
 	sculpture_container = Node3D.new()
 	sculpture_container.name = "SurrealSculpture"
@@ -47,7 +47,7 @@ func setup_sculpture_base():
 	
 	create_base_platform()
 
-func create_base_platform():
+func create_base_platform() -> void:
 	"""Create the dark, mechanical base inspired by Tanguy's landscapes"""
 	# Main platform
 	var platform = CSGCylinder3D.new()
@@ -78,12 +78,12 @@ func create_base_platform():
 		protrusion.material = base_material
 		base_platform.add_child(protrusion)
 
-func create_material_system():
+func create_material_system() -> void:
 	"""Initialize the surreal material system"""
 	material_system = SurrealMaterialSystem.new()
 	add_child(material_system)
 
-func build_tanguy_mechanisms():
+func build_tanguy_mechanisms() -> void:
 	"""Create the three black Tanguy-inspired piston/rotor mechanisms"""
 	tanguy_mechanisms.clear()
 	
@@ -113,7 +113,7 @@ func build_tanguy_mechanisms():
 		sculpture_container.add_child(mechanism)
 		tanguy_mechanisms.append(mechanism)
 
-func create_niki_extensions():
+func create_niki_extensions() -> void:
 	"""Create Niki de Saint Phalle-inspired organic forms attached to pistons"""
 	niki_objects.clear()
 	
@@ -137,7 +137,7 @@ func create_niki_extensions():
 		
 		niki_objects.append(niki_form)
 
-func setup_kinetic_lighting():
+func setup_kinetic_lighting() -> void:
 	"""Create dynamic lighting that responds to the kinetic motion"""
 	lighting_system = Node3D.new()
 	lighting_system.name = "KineticLighting"
@@ -167,13 +167,13 @@ func setup_kinetic_lighting():
 		# Attach to Niki object for dynamic lighting
 		niki_objects[i].add_child(accent_light)
 
-func start_kinetic_animation():
+func start_kinetic_animation() -> void:
 	"""Begin the kinetic animation sequence"""
 	for i in range(tanguy_mechanisms.size()):
 		var mechanism = tanguy_mechanisms[i]
 		mechanism.start_kinetic_motion()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Update the kinetic sculpture animation"""
 	# Update each mechanism
 	for mechanism in tanguy_mechanisms:
@@ -184,3 +184,9 @@ func _process(delta):
 		var niki_form = niki_objects[i]
 		var mechanism = tanguy_mechanisms[i]
 		niki_form.update_based_on_motion(mechanism.get_motion_data())
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

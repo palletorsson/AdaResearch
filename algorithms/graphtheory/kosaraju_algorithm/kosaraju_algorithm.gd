@@ -63,7 +63,7 @@ var scc_labels: Array = []
 var info_label: Label3D
 var phase_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -71,7 +71,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Add lighting
 	var light := DirectionalLight3D.new()
 	light.name = "SunLight"
@@ -94,7 +94,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	vertices.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -114,7 +114,7 @@ func initialize_graph():
 	for vertex in vertices:
 		visited[vertex] = false
 
-func generate_random_graph():
+func generate_random_graph() -> void:
 	# Create vertices
 	for i in range(graph_size):
 		var vertex = "v" + str(i)
@@ -148,7 +148,7 @@ func has_edge(from: String, to: String) -> bool:
 			return true
 	return false
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	# Clear existing visuals
 	for child in get_children():
 		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_") or child.name.begins_with("SCC_"):
@@ -209,7 +209,7 @@ func create_visual_elements():
 	phase_label.position = Vector3(0, 3.5, 0)
 	add_child(phase_label)
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	if not vertex_nodes.has(edge.from) or not vertex_nodes.has(edge.to):
 		return
 	var from_pos = vertex_nodes[edge.from].position
@@ -271,7 +271,7 @@ func create_arrow_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 	return mesh
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -291,7 +291,7 @@ func start_algorithm():
 	# Phase 1: First DFS pass to get finish times
 	call_deferred("first_dfs_pass")
 
-func first_dfs_pass():
+func first_dfs_pass() -> void:
 	if not algorithm_running:
 		return
 	
@@ -307,7 +307,7 @@ func first_dfs_pass():
 	await get_tree().create_timer(animation_delay * 2).timeout
 	call_deferred("second_dfs_pass")
 
-func dfs_first_pass(vertex: String):
+func dfs_first_pass(vertex: String) -> void:
 	if not algorithm_running or visited[vertex]:
 		return
 	
@@ -333,7 +333,7 @@ func dfs_first_pass(vertex: String):
 	update_vertex_color(vertex, finished_color)
 	update_info_text("Finished vertex: " + vertex + " (Added to finish times)")
 
-func second_dfs_pass():
+func second_dfs_pass() -> void:
 	if not algorithm_running:
 		return
 	
@@ -354,7 +354,7 @@ func second_dfs_pass():
 			call_deferred("dfs_second_pass", vertex)
 			scc_count += 1
 
-func dfs_second_pass(vertex: String):
+func dfs_second_pass(vertex: String) -> void:
 	if not algorithm_running or visited[vertex]:
 		return
 	
@@ -384,7 +384,7 @@ func dfs_second_pass(vertex: String):
 		sccs.append([])
 	sccs[scc_count - 1].append(vertex)
 
-func show_transpose_edges():
+func show_transpose_edges() -> void:
 	# Create transpose edge visuals
 	for edge in edges:
 		var transpose_key = edge.to + "_" + edge.from
@@ -410,14 +410,14 @@ func get_scc_color(index: int) -> Color:
 	var colors = [scc_color_1, scc_color_2, scc_color_3, scc_color_4, scc_color_5]
 	return colors[index % colors.size()]
 
-func update_vertex_color(vertex: String, color: Color):
+func update_vertex_color(vertex: String, color: Color) -> void:
 	if vertex_nodes.has(vertex):
 		var material := StandardMaterial3D.new()
 		material.albedo_color = color
 		material.emission = color * 0.3
 		vertex_nodes[vertex].material_override = material
 
-func update_edge_color(from: String, to: String, color: Color):
+func update_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if edge_lines.has(edge_key):
 		var material := StandardMaterial3D.new()
@@ -425,7 +425,7 @@ func update_edge_color(from: String, to: String, color: Color):
 		material.emission = color * 0.2
 		edge_lines[edge_key].material_override = material
 
-func update_transpose_edge_color(from: String, to: String, color: Color):
+func update_transpose_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if transpose_edge_lines.has(edge_key):
 		var material := StandardMaterial3D.new()
@@ -433,11 +433,11 @@ func update_transpose_edge_color(from: String, to: String, color: Color):
 		material.emission = color * 0.2
 		transpose_edge_lines[edge_key].material_override = material
 
-func update_info_text(text: String):
+func update_info_text(text: String) -> void:
 	if info_label:
 		info_label.text = text
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -446,12 +446,12 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_info_text("Algorithm completed. Found " + str(scc_count) + " strongly connected components.")
 	phase_label.text = "Algorithm Complete"
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	algorithm_step = 0
 	current_phase = "first_pass"
@@ -470,3 +470,9 @@ func get_algorithm_info() -> Dictionary:
 		"current_step": algorithm_step,
 		"current_phase": current_phase
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

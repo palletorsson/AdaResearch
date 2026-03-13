@@ -34,7 +34,7 @@ const TEXT_INTERVAL := 0.1
 #  LIFECYCLE
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _ready():
+func _ready() -> void:
 	_build_arena()
 	_build_station_crane()
 	_build_station_pistons()
@@ -43,7 +43,7 @@ func _ready():
 	_build_station_waterwheel()
 	_build_station_spring()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_text_timer += delta
 	var do_text := _text_timer >= TEXT_INTERVAL
 	if do_text:
@@ -60,7 +60,7 @@ func _process(delta):
 #  ARENA
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_arena():
+func _build_arena() -> void:
 	# Floor
 	var floor_body := StaticBody3D.new()
 	floor_body.name = "ArenaFloor"
@@ -93,7 +93,7 @@ func _build_arena():
 #  STATION 1: THE CRANE â€” Magnitude â†’ HingeJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_crane():
+func _build_station_crane() -> void:
 	var sd := _init_station("Crane", 0)
 	var h: Node3D = sd.helper  # GadgetBase instance
 
@@ -135,7 +135,7 @@ func _build_station_crane():
 	# Info panel
 	sd.info_label = _build_info_panel(sd.root, "THE CRANE", "|v| = sqrt(xÂ² + yÂ² + zÂ²)", "Magnitude controls arm angle", Vector3(0, 4.8, -1.0))
 
-func _update_crane(do_text: bool):
+func _update_crane(do_text: bool) -> void:
 	var sd: Dictionary = _stations[0]
 	var v := _get_vec(sd.vectors[0], sd.caches[0])
 	var mag := v.length()
@@ -153,7 +153,7 @@ func _update_crane(do_text: bool):
 #  STATION 2: THE PISTONS â€” Addition â†’ SliderJoint3D Ã—2
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_pistons():
+func _build_station_pistons() -> void:
 	var sd := _init_station("Pistons", 1)
 	var h: Node3D = sd.helper
 
@@ -192,7 +192,7 @@ func _build_station_pistons():
 
 	sd.info_label = _build_info_panel(sd.root, "THE PISTONS", "C = A + B", "Addition: each magnitude drives a piston", Vector3(0, 4.2, -1.0))
 
-func _update_pistons(do_text: bool):
+func _update_pistons(do_text: bool) -> void:
 	var sd: Dictionary = _stations[1]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -220,7 +220,7 @@ func _update_pistons(do_text: bool):
 #  STATION 3: THE DOOR â€” Dot Product â†’ HingeJoint3D Ã—2
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_door():
+func _build_station_door() -> void:
 	var sd := _init_station("Door", 2)
 	var h: Node3D = sd.helper
 
@@ -256,7 +256,7 @@ func _build_station_door():
 
 	sd.info_label = _build_info_panel(sd.root, "THE DOOR", "A Â· B = |A||B| cos Î¸", "Dot product angle opens the doors", Vector3(0, 4.2, -1.0))
 
-func _update_door(do_text: bool):
+func _update_door(do_text: bool) -> void:
 	var sd: Dictionary = _stations[2]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -285,7 +285,7 @@ func _update_door(do_text: bool):
 #  STATION 4: THE SEESAW â€” Subtraction â†’ HingeJoint3D + gravity
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_seesaw():
+func _build_station_seesaw() -> void:
 	var sd := _init_station("Seesaw", 3)
 	var h: Node3D = sd.helper
 
@@ -333,7 +333,7 @@ func _build_station_seesaw():
 
 	sd.info_label = _build_info_panel(sd.root, "THE SEESAW", "C = A âˆ’ B = A + (âˆ’B)", "Magnitudes as weights â€” gravity shows the difference", Vector3(0, 3.5, -1.0))
 
-func _update_seesaw(do_text: bool):
+func _update_seesaw(do_text: bool) -> void:
 	var sd: Dictionary = _stations[3]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -359,7 +359,7 @@ func _update_seesaw(do_text: bool):
 #  STATION 5: THE WATERWHEEL â€” Cross Product â†’ HingeJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_waterwheel():
+func _build_station_waterwheel() -> void:
 	var sd := _init_station("Waterwheel", 4)
 	var h: Node3D = sd.helper
 
@@ -409,7 +409,7 @@ func _build_station_waterwheel():
 
 	sd.info_label = _build_info_panel(sd.root, "THE WATERWHEEL", "A Ã— B = |A||B| sin Î¸  nÌ‚", "Cross product magnitude spins the wheel", Vector3(0, 3.8, -1.0))
 
-func _update_waterwheel(do_text: bool):
+func _update_waterwheel(do_text: bool) -> void:
 	var sd: Dictionary = _stations[4]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -431,7 +431,7 @@ func _update_waterwheel(do_text: bool):
 #  STATION 6: THE SPRING TOWER â€” Forces â†’ Generic6DOFJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_spring():
+func _build_station_spring() -> void:
 	var sd := _init_station("Spring", 5)
 	var h: Node3D = sd.helper
 
@@ -488,7 +488,7 @@ func _build_station_spring():
 
 	sd.info_label = _build_info_panel(sd.root, "THE SPRING TOWER", "F_net = Î£F_i", "Net force compresses or extends the spring", Vector3(0, 4.8, -1.0))
 
-func _update_spring(do_text: bool):
+func _update_spring(do_text: bool) -> void:
 	var sd: Dictionary = _stations[5]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -711,3 +711,9 @@ func _mat(color: Color, unlit: bool = false, transparent: bool = false) -> Stand
 		mat.render_priority = -10
 	_mat_cache[key] = mat
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

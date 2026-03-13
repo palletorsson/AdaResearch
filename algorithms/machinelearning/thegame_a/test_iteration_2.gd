@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 2: Turtle Graphics Test ---")
 	
 	var turtle = load("res://algorithms/machinelearning/thegame_a/Turtle.gd").new()

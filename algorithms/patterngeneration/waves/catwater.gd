@@ -31,10 +31,10 @@ class_name WaterSurface
 
 var water_material: ShaderMaterial
 
-func _ready():
+func _ready() -> void:
 	setup_water_material()
 
-func setup_water_material():
+func setup_water_material() -> void:
 	# Load the water shader
 	var water_shader = load("res://commons/resourses/shaders/catwater.gdshader") # Adjust path as needed
 	
@@ -56,7 +56,7 @@ func setup_water_material():
 		plane_mesh.subdivide_depth = 32
 		mesh = plane_mesh
 
-func update_material_properties():
+func update_material_properties() -> void:
 	if water_material == null:
 		return
 		
@@ -90,7 +90,7 @@ func update_material_properties():
 	water_material.set_shader_parameter("depth_fade_distance", depth_fade_distance)
 
 # Call this when you change properties at runtime
-func _set_property_changed():
+func _set_property_changed() -> void:
 	update_material_properties()
 
 # Example function to create flow map texture procedurally

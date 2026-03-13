@@ -7,12 +7,12 @@ var time := 0.0
 var demo_cubes := []
 var materials := []
 
-func _ready():
+func _ready() -> void:
 	setup_basic_scene()
 	create_glitch_cubes()
 	print("🚀 All-in-One Glitch Demo Ready!")
 
-func setup_basic_scene():
+func setup_basic_scene() -> void:
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 2, 8)
@@ -36,7 +36,7 @@ func setup_basic_scene():
 	world_env.environment = env
 	add_child(world_env)
 
-func create_glitch_cubes():
+func create_glitch_cubes() -> void:
 	# Create a grid of cubes with different glitch effects
 	for i in range(5):
 		for j in range(3):
@@ -53,7 +53,7 @@ func create_glitch_cubes():
 			materials.append(material)
 			add_child(cube)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Apply different glitch effects to each cube
@@ -181,3 +181,9 @@ func chromatic_glitch_color(t: float) -> Color:
 # - G: New random seed
 # - 1-5: Toggle effect layers
 # - ESC: Toggle UI
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -14,7 +14,7 @@ var decay_on = false
 var grid_elements: Array[Node3D] = []  # Stores references to all grid elements
 
 # --- Initialization ---
-func _ready():
+func _ready() -> void:
 	create_grid()
 
 func _process(_delta: float) -> void:

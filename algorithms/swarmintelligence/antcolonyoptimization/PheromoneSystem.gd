@@ -17,7 +17,7 @@ var visualization_instance: MultiMeshInstance3D
 var last_update_time = 0.0
 @export var update_interval: float = 0.1  # Time between visualization updates
 
-func _ready():
+func _ready() -> void:
 	# Get terrain reference
 	if terrain_reference:
 		terrain = get_node(terrain_reference)
@@ -29,7 +29,7 @@ func _ready():
 	setup_visualization()
 
 # Initialize the pheromone grid
-func initialize_pheromone_map():
+func initialize_pheromone_map() -> void:
 	pheromone_map = []
 	
 	for x in range(resolution + 1):
@@ -43,7 +43,7 @@ func initialize_pheromone_map():
 		pheromone_map.append(row)
 
 # Setup the visualization system
-func setup_visualization():
+func setup_visualization() -> void:
 	# Create a MultiMeshInstance for efficient rendering of particles
 	visualization_instance = MultiMeshInstance3D.new()
 	visualization_instance.name = "PheromoneVisualization"
@@ -64,7 +64,7 @@ func setup_visualization():
 	add_child(visualization_instance)
 
 # Add pheromone at a specific world position
-func add_pheromone(world_pos: Vector3, type: String, amount: float):
+func add_pheromone(world_pos: Vector3, type: String, amount: float) -> void:
 	var grid_pos = world_to_grid(world_pos)
 	var x = int(grid_pos.x)
 	var y = int(grid_pos.y)
@@ -135,7 +135,7 @@ func grid_to_world(grid_x: int, grid_z: int) -> Vector3:
 	return Vector3(world_x, world_y, world_z)
 
 # Process function called every frame
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update pheromones
 	process_pheromones(delta)
 	
@@ -145,7 +145,7 @@ func _process(delta):
 		last_update_time = Time.get_ticks_msec()
 
 # Process pheromone decay and diffusion
-func process_pheromones(_delta):
+func process_pheromones(_delta) -> void:
 	# Decay pheromones
 	for x in range(resolution + 1):
 		for z in range(resolution + 1):
@@ -191,7 +191,7 @@ func process_pheromones(_delta):
 	pheromone_map = diffused_map
 
 # Update the visualization of pheromones
-func update_visualization():
+func update_visualization() -> void:
 	if not visualization_instance or not terrain:
 		return
 	
@@ -251,5 +251,11 @@ func get_pheromone_value(world_pos: Vector3, type: String) -> float:
 	return 0.0
 
 # Clear all pheromones
-func clear_pheromones():
+func clear_pheromones() -> void:
 	initialize_pheromone_map()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

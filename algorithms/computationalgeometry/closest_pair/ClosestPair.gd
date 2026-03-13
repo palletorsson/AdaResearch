@@ -36,13 +36,13 @@ var step_names = [
 	"7. Show Final Result"
 ]
 
-func _ready():
+func _ready() -> void:
 	generate_random_points()
 	setup_materials()
 	setup_ui()
 	create_coordinate_grid()
 
-func generate_random_points():
+func generate_random_points() -> void:
 	points.clear()
 	for child in $Points.get_children():
 		child.queue_free()
@@ -71,7 +71,7 @@ func generate_random_points():
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		$Points.add_child(label)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Point materials - more vibrant and visible
 	var point_material = StandardMaterial3D.new()
 	point_material.albedo_color = Color(0.2, 0.6, 1.0, 1.0)
@@ -112,7 +112,7 @@ func setup_materials():
 	complexity_material.emission = Color(0.5, 0.3, 0.0, 1.0)
 	$ComplexityIndicator.material_override = complexity_material
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create step label
 	var step_label = Label3D.new()
 	step_label.text = step_names[algorithm_step]
@@ -131,7 +131,7 @@ func setup_ui():
 	add_child(distance_label)
 	step_labels.append(distance_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	step_timer += delta
 	comparison_timer += delta
@@ -149,7 +149,7 @@ func _process(delta):
 	animate_indicators()
 	update_ui()
 
-func advance_algorithm_step():
+func advance_algorithm_step() -> void:
 	algorithm_step = (algorithm_step + 1) % AlgorithmStep.size()
 	
 	match algorithm_step:
@@ -177,7 +177,7 @@ func advance_algorithm_step():
 		AlgorithmStep.SHOW_RESULT:
 			highlight_closest_pair()
 
-func sort_points_by_x():
+func sort_points_by_x() -> void:
 	# Sort points by x-coordinate
 	points.sort_custom(func(a, b): return a.x < b.x)
 	
@@ -186,14 +186,14 @@ func sort_points_by_x():
 		var target_pos = Vector3(points[i].x, points[i].y, 0.1)
 		point_objects[i].position = target_pos
 
-func reset_point_colors():
+func reset_point_colors() -> void:
 	# Reset all points to default color
 	for point_obj in point_objects:
 		var material = point_obj.material_override as StandardMaterial3D
 		material.albedo_color = Color(0.2, 0.6, 1.0, 1.0)
 		material.emission = Color(0.1, 0.3, 0.5, 1.0)
 
-func start_distance_comparison():
+func start_distance_comparison() -> void:
 	# Reset point colors
 	reset_point_colors()
 	
@@ -205,7 +205,7 @@ func start_distance_comparison():
 	current_comparison = [0, 1]
 	comparison_timer = 0.0
 
-func animate_distance_comparison():
+func animate_distance_comparison() -> void:
 	if current_comparison.size() < 2:
 		return
 	
@@ -244,7 +244,7 @@ func animate_distance_comparison():
 	else:
 		current_comparison = [i, j]
 
-func create_temporary_distance_line(i: int, j: int, distance: float):
+func create_temporary_distance_line(i: int, j: int, distance: float) -> void:
 	# Remove old temporary lines
 	for child in $DistanceLines.get_children():
 		child.queue_free()
@@ -277,7 +277,7 @@ func create_temporary_distance_line(i: int, j: int, distance: float):
 	
 	$DistanceLines.add_child(line)
 
-func update_ui():
+func update_ui() -> void:
 	if step_labels.size() >= 2:
 		step_labels[0].text = step_names[algorithm_step]
 		if min_distance != INF:
@@ -285,7 +285,7 @@ func update_ui():
 		else:
 			step_labels[1].text = "Min Distance: --"
 
-func create_coordinate_grid():
+func create_coordinate_grid() -> void:
 	# Clear existing grid
 	for child in $CoordinateGrid/GridLines.get_children():
 		child.queue_free()
@@ -313,13 +313,13 @@ func create_coordinate_grid():
 		line.material_override = grid_material
 		$CoordinateGrid/GridLines.add_child(line)
 
-func show_division():
+func show_division() -> void:
 	# Show division line at median x-coordinate
 	var median_x = points[points.size() / 2].x
 	$DivisionLine.position.x = median_x
 	$DivisionLine.visible = true
 
-func highlight_left_half():
+func highlight_left_half() -> void:
 	var median_x = points[points.size() / 2].x
 	
 	for i in range(point_objects.size()):
@@ -333,7 +333,7 @@ func highlight_left_half():
 			material.albedo_color = Color(0.3, 0.3, 0.3, 0.6)
 			material.emission = Color(0.05, 0.05, 0.05, 1.0)
 
-func highlight_right_half():
+func highlight_right_half() -> void:
 	var median_x = points[points.size() / 2].x
 	
 	for i in range(point_objects.size()):
@@ -348,7 +348,7 @@ func highlight_right_half():
 			material.emission = Color(0.05, 0.05, 0.05, 1.0)
 
 
-func highlight_closest_pair():
+func highlight_closest_pair() -> void:
 	# Clear temporary distance lines
 	for child in $DistanceLines.get_children():
 		child.queue_free()
@@ -392,14 +392,14 @@ func highlight_closest_pair():
 		
 		$ClosestPairLine.visible = true
 
-func clear_distance_lines():
+func clear_distance_lines() -> void:
 	for child in $DistanceLines.get_children():
 		child.queue_free()
 	distance_lines.clear()
 	$ClosestPairLine.visible = false
 	$DivisionLine.visible = false
 
-func animate_algorithm_visualization():
+func animate_algorithm_visualization() -> void:
 	# Animate division line with more prominent effect
 	if $DivisionLine.visible:
 		var pulse = 1.0 + sin(time * 6.0) * 0.2
@@ -425,7 +425,7 @@ func animate_algorithm_visualization():
 		if algorithm_step == AlgorithmStep.COMPARE_DISTANCES and i in current_comparison:
 			point_obj.rotation.y = time * 2.0
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Algorithm step indicator
 	var step_height = (algorithm_step + 1) * 0.3
 	$AlgorithmStepIndicator.size.y = step_height
@@ -440,3 +440,9 @@ func animate_indicators():
 	var pulse = 1.0 + sin(time * 3.0) * 0.1
 	$AlgorithmStepIndicator.scale.x = pulse
 	$ComplexityIndicator.scale.x = pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

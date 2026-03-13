@@ -24,7 +24,7 @@ var _traversal_node_materials: Array[StandardMaterial3D] = []
 var _traversal_edge_pool: Array[CSGCylinder3D] = []
 var _traversal_edge_materials: Array[StandardMaterial3D] = []
 
-func _ready():
+func _ready() -> void:
 	initialize_graphs()
 	setup_node_positions()
 	# Build static graphs once (they never change per-frame)
@@ -34,14 +34,14 @@ func _ready():
 	_build_undirected_graph_pool()
 	_build_traversal_pool()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	traversal_timer += delta
 
 	animate_undirected_graph()
 	demonstrate_graph_traversal()
 
-func initialize_graphs():
+func initialize_graphs() -> void:
 	# Initialize directed graph (adjacency list)
 	directed_graph = {
 		0: [1, 2],
@@ -78,7 +78,7 @@ func initialize_graphs():
 		7: []
 	}
 
-func setup_node_positions():
+func setup_node_positions() -> void:
 	# Create circular layout for nodes
 	var radius = 3.0
 	var node_count = 8
@@ -90,7 +90,7 @@ func setup_node_positions():
 
 # ── Static graphs (built once in _ready) ──────────────────────────────
 
-func _build_directed_graph():
+func _build_directed_graph() -> void:
 	var container = $DirectedGraph
 
 	# Create nodes
@@ -114,7 +114,7 @@ func _build_directed_graph():
 		for to_node in directed_graph[from_node]:
 			_create_directed_edge(container, node_positions[from_node], node_positions[to_node])
 
-func _build_weighted_graph():
+func _build_weighted_graph() -> void:
 	var container = $WeightedGraph
 
 	# Create nodes
@@ -140,7 +140,7 @@ func _build_weighted_graph():
 			var weight = edge_data[1]
 			_create_weighted_edge(container, node_positions[from_node], node_positions[to_node], weight)
 
-func _create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3):
+func _create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3) -> void:
 	var direction = (to_pos - from_pos).normalized()
 	var distance = from_pos.distance_to(to_pos)
 
@@ -175,7 +175,7 @@ func _create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3
 
 	container.add_child(arrow)
 
-func _create_weighted_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3, weight: float):
+func _create_weighted_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3, weight: float) -> void:
 	var distance = from_pos.distance_to(to_pos)
 	var thickness = weight * 0.03  # Scale thickness by weight
 
@@ -212,7 +212,7 @@ func _create_weighted_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3
 
 # ── Undirected graph pool (only radius pulses per-frame) ──────────────
 
-func _build_undirected_graph_pool():
+func _build_undirected_graph_pool() -> void:
 	var container = $UndirectedGraph
 
 	# Pre-create nodes
@@ -241,7 +241,7 @@ func _build_undirected_graph_pool():
 				_create_undirected_edge(container, node_positions[from_node], node_positions[to_node])
 				processed_edges[edge_key] = true
 
-func _create_undirected_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3):
+func _create_undirected_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3) -> void:
 	var distance = from_pos.distance_to(to_pos)
 
 	var edge = CSGCylinder3D.new()
@@ -261,7 +261,7 @@ func _create_undirected_edge(container: Node3D, from_pos: Vector3, to_pos: Vecto
 
 	container.add_child(edge)
 
-func animate_undirected_graph():
+func animate_undirected_graph() -> void:
 	# Only update the pulsing radius — no allocation needed
 	for i in range(_undirected_node_pool.size()):
 		var pulse = 1.0 + sin(time * 2 + i * 0.5) * 0.2
@@ -269,7 +269,7 @@ func animate_undirected_graph():
 
 # ── Traversal graph pool (node/edge colors change per-frame) ─────────
 
-func _build_traversal_pool():
+func _build_traversal_pool() -> void:
 	var container = $GraphTraversal
 
 	# Pre-create nodes with materials we can mutate
@@ -309,7 +309,7 @@ func _build_traversal_pool():
 				_traversal_edge_pool.append(edge)
 				_traversal_edge_materials.append(material)
 
-func demonstrate_graph_traversal():
+func demonstrate_graph_traversal() -> void:
 	# Update traversal state
 	if traversal_timer > 1.0:
 		traversal_timer = 0.0
@@ -325,12 +325,12 @@ func demonstrate_graph_traversal():
 	# Update traversal visuals (no allocation — just material changes)
 	_update_traversal_visuals()
 
-func simulate_breadth_first_search():
+func simulate_breadth_first_search() -> void:
 	if current_node not in visited_nodes:
 		visited_nodes[current_node] = true
 		traversal_order.append(current_node)
 
-func _update_traversal_visuals():
+func _update_traversal_visuals() -> void:
 	# Update node colors based on traversal state
 	for i in range(_traversal_node_pool.size()):
 		var mat = _traversal_node_materials[i]
@@ -368,3 +368,9 @@ func _update_traversal_visuals():
 					mat.emission_enabled = false
 
 				edge_idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

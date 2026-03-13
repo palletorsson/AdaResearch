@@ -47,7 +47,7 @@ var liquid_material: ShaderMaterial
 var bacterial_material: ShaderMaterial
 var metal_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	# Create materials
 	create_materials()
 	
@@ -68,7 +68,7 @@ func _ready():
 	if enable_interaction:
 		setup_interaction()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	if enable_animation:
@@ -81,7 +81,7 @@ func _process(delta):
 		# Update material properties
 		update_materials(delta)
 
-func create_materials():
+func create_materials() -> void:
 	# Glass material using custom shader
 	glass_material = ShaderMaterial.new()
 	glass_material.shader = load("res://commons/resourses/shaders/frosted_glass.gdshader")
@@ -142,7 +142,7 @@ func duplicate_shader_material(original_material: ShaderMaterial) -> ShaderMater
 	
 	return new_material
 
-func update_materials(_delta: float):
+func update_materials(_delta: float) -> void:
 	# Update liquid materials properties for a subtle dynamic effect
 	
 	# Update main material properties
@@ -163,7 +163,7 @@ func update_materials(_delta: float):
 			var drift_z = cos(time * fog_movement_speed * 0.7) * 0.1
 			process_material.direction = Vector3(drift_x, 0.1, drift_z).normalized()
 
-func create_bioreactors():
+func create_bioreactors() -> void:
 	var bioreactor_container = Node3D.new()
 	bioreactor_container.name = "Bioreactors"
 	
@@ -321,7 +321,7 @@ func create_bioreactors():
 	
 	add_child(bioreactor_container)
 
-func create_bacterial_entities():
+func create_bacterial_entities() -> void:
 	var bacteria_container = Node3D.new()
 	bacteria_container.name = "BacterialEntities"
 	
@@ -387,7 +387,7 @@ func create_bacterial_entities():
 	
 	add_child(bacteria_container)
 
-func create_fog_particles():
+func create_fog_particles() -> void:
 	fog_particles = GPUParticles3D.new()
 	fog_particles.name = "FogParticles"
 	
@@ -444,7 +444,7 @@ func create_fog_particles():
 	
 	add_child(fog_particles)
 
-func setup_interaction():
+func setup_interaction() -> void:
 	for equipment in lab_equipment:
 		var area = Area3D.new()
 		area.name = "InteractionArea"
@@ -463,7 +463,7 @@ func setup_interaction():
 		
 		equipment.add_child(area)
 
-func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape_idx, equipment):
+func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape_idx, equipment) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		# Handle interaction with the equipment
 		print("Interacted with: ", equipment.name)
@@ -475,7 +475,7 @@ func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape
 		# Show information about the equipment
 		show_equipment_info(equipment)
 
-func _on_area_mouse_entered(equipment):
+func _on_area_mouse_entered(equipment) -> void:
 	# Change cursor or provide visual feedback
 	print("Hover over: ", equipment.name)
 	
@@ -484,7 +484,7 @@ func _on_area_mouse_entered(equipment):
 	if material is ShaderMaterial:
 		material.set_shader_parameter("emission_energy", 0.5)
 
-func _on_area_mouse_exited(equipment):
+func _on_area_mouse_exited(equipment) -> void:
 	# Restore original state
 	print("Exit from: ", equipment.name)
 	
@@ -533,7 +533,7 @@ func create_highlight_effect(node: Node3D) -> Node3D:
 	
 	return highlight
 
-func show_equipment_info(equipment: Node3D):
+func show_equipment_info(equipment: Node3D) -> void:
 	# In a real implementation, this would show UI with information
 	# about the selected lab equipment
 	var equipment_type = equipment.name.split("_")[0]
@@ -552,7 +552,7 @@ func show_equipment_info(equipment: Node3D):
 	print("INFO: ", info)
 	# In a real implementation, display this in UI
 
-func animate_lab_equipment(delta: float):
+func animate_lab_equipment(delta: float) -> void:
 	# Subtle movement and effects for lab equipment
 	for i in range(lab_equipment.size()):
 		var equipment = lab_equipment[i]
@@ -595,7 +595,7 @@ func animate_lab_equipment(delta: float):
 						var pulse = (sin(time * pulsation_speed * 0.5 + i) + 1) / 2.0
 						material.set_shader_parameter("emission_energy", 0.3 + pulse * 0.2)
 
-func animate_bacterial_entities(delta: float):
+func animate_bacterial_entities(delta: float) -> void:
 	# Movement for floating bacterial entities
 	for i in range(bacterial_entities.size()):
 		var bacteria = bacterial_entities[i]
@@ -642,7 +642,7 @@ func animate_bacterial_entities(delta: float):
 			material.set_shader_parameter("albedo", base_color)
 			material.set_shader_parameter("emission_color", base_color)
 
-func create_lab_base():
+func create_lab_base() -> void:
 	var base = Node3D.new()
 	base.name = "LabBase"
 	
@@ -699,7 +699,7 @@ func create_lab_base():
 	
 	add_child(base)
 
-func create_decorative_pipes(parent: Node3D):
+func create_decorative_pipes(parent: Node3D) -> void:
 	# Create some interconnecting tubes and pipes for aesthetic
 	var pipes = Node3D.new()
 	pipes.name = "DecorativePipes"
@@ -774,7 +774,7 @@ func create_valve(position: Vector3, radius: float) -> MeshInstance3D:
 	
 	return valve
 
-func create_lab_equipment():
+func create_lab_equipment() -> void:
 	# Create various lab equipment and place on the table
 	
 	# Create petri dishes
@@ -789,7 +789,7 @@ func create_lab_equipment():
 	# Create bioreactors
 	create_bioreactors()
 
-func create_petri_dishes():
+func create_petri_dishes() -> void:
 	var petri_dish_container = Node3D.new()
 	petri_dish_container.name = "PetriDishes"
 	
@@ -895,7 +895,7 @@ func create_petri_dishes():
 	
 	add_child(petri_dish_container)
 
-func create_test_tubes():
+func create_test_tubes() -> void:
 	var test_tube_container = Node3D.new()
 	test_tube_container.name = "TestTubes"
 	
@@ -1020,7 +1020,7 @@ func create_test_tube_rack(tube_count: int) -> Node3D:
 	
 	return rack
 
-func create_flasks():
+func create_flasks() -> void:
 	var flask_container = Node3D.new()
 	flask_container.name = "Flasks"
 	
@@ -1205,3 +1205,9 @@ func create_flasks():
 		lab_equipment.append(flask)
 	
 	add_child(flask_container)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

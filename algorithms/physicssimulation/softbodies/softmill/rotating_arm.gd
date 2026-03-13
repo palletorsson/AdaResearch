@@ -11,10 +11,10 @@ var arm_mesh: MeshInstance3D
 var arm_collision: CollisionShape3D
 var pivot_sphere: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	create_centered_rotating_arm()
 
-func create_centered_rotating_arm():
+func create_centered_rotating_arm() -> void:
 	"""Create a rotating arm that rotates from its CENTER with visible pivot"""
 	
 	# Create the visual arm (box mesh) - CENTERED at origin
@@ -73,6 +73,12 @@ func create_centered_rotating_arm():
 	collision_layer = 2  # Pusher layer
 	collision_mask = 0   # StaticBody doesn't need to detect anything
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	"""Rotate the arm continuously around its center on Z-axis (negative direction)"""
 	rotation.z += deg_to_rad(rotation_speed) * delta  # Z-axis, negative direction
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

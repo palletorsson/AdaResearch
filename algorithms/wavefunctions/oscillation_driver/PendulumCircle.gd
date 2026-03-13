@@ -42,7 +42,7 @@ var pendulum_angle: float = 0.0
 var pendulum_velocity: float = 0.0
 var trail_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 	
 	# Initialize pendulum
@@ -57,7 +57,7 @@ func _ready():
 	# Enable raycast
 	raycast.enabled = true
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -68,7 +68,7 @@ func _setup_visuals():
 	material.point_size = 2.0
 	trail_instance.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# --- 1. PENDULUM PHYSICS ---
@@ -117,7 +117,7 @@ func _process(delta):
 	# --- 4. RAYCAST TO GROUND ---
 	_update_ground_interaction()
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	
 	if trail_points.is_empty():
@@ -128,7 +128,7 @@ func _draw_trail():
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
 
-func _update_ground_interaction():
+func _update_ground_interaction() -> void:
 	if raycast.is_colliding():
 		var hit_point = raycast.get_collision_point()
 		var collider = raycast.get_collider()

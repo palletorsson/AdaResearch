@@ -68,14 +68,14 @@ var results_display: Label3D
 # Animation
 var cv_tween: Tween
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	generate_dataset()
 	create_cv_splits()
 	setup_visualization()
 	setup_info_displays()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -98,7 +98,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func generate_dataset():
+func generate_dataset() -> void:
 	"""Generate dataset based on selected type"""
 	full_dataset.clear()
 	var rng = RandomNumberGenerator.new()
@@ -126,7 +126,7 @@ func generate_true_function(x: float) -> float:
 		_:
 			return 0.0
 
-func create_cv_splits():
+func create_cv_splits() -> void:
 	"""Create cross-validation splits"""
 	training_folds.clear()
 	validation_folds.clear()
@@ -160,7 +160,7 @@ func create_cv_splits():
 		CVType.TIME_SERIES:
 			create_time_series_splits(cv_data)
 
-func create_k_fold_splits(data: Array[Vector2]):
+func create_k_fold_splits(data: Array[Vector2]) -> void:
 	"""Create k-fold cross-validation splits"""
 	var fold_size = data.size() / k_folds
 	
@@ -183,7 +183,7 @@ func create_k_fold_splits(data: Array[Vector2]):
 		validation_folds.append(validation_fold)
 		training_folds.append(training_fold)
 
-func create_loo_splits(data: Array[Vector2]):
+func create_loo_splits(data: Array[Vector2]) -> void:
 	"""Create leave-one-out splits"""
 	k_folds = data.size()
 	
@@ -198,12 +198,12 @@ func create_loo_splits(data: Array[Vector2]):
 		validation_folds.append(validation_fold)
 		training_folds.append(training_fold)
 
-func create_stratified_splits(data: Array[Vector2]):
+func create_stratified_splits(data: Array[Vector2]) -> void:
 	"""Create stratified splits (simplified for regression)"""
 	# For simplicity, fall back to k-fold for regression
 	create_k_fold_splits(data)
 
-func create_time_series_splits(data: Array[Vector2]):
+func create_time_series_splits(data: Array[Vector2]) -> void:
 	"""Create time series splits (expanding window)"""
 	var min_train_size = data.size() / (k_folds + 1)
 	
@@ -226,7 +226,7 @@ func create_time_series_splits(data: Array[Vector2]):
 		training_folds.append(training_fold)
 		validation_folds.append(validation_fold)
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements"""
 	# Dataset visualization
 	dataset_display = Node3D.new()
@@ -250,7 +250,7 @@ func setup_visualization():
 	
 	update_dataset_display()
 
-func setup_info_displays():
+func setup_info_displays() -> void:
 	"""Create information displays"""
 	info_display = Label3D.new()
 	info_display.position = Vector3(-3.0, 2.5, 0)
@@ -266,7 +266,7 @@ func setup_info_displays():
 	
 	update_info_displays()
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		if is_running_cv:
@@ -276,7 +276,7 @@ func _on_controller_button(button_name: String):
 	elif button_name == "grip_click":
 		run_single_cv_step()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -291,7 +291,7 @@ func _input(event):
 		elif event.keycode == KEY_D:
 			change_dataset_type()
 
-func start_cross_validation():
+func start_cross_validation() -> void:
 	"""Start full cross-validation process"""
 	is_running_cv = true
 	reset_cv_results()
@@ -309,7 +309,7 @@ func start_cross_validation():
 	
 	cv_tween.tween_callback(complete_cross_validation)
 
-func run_cv_for_degree(degree: int):
+func run_cv_for_degree(degree: int) -> void:
 	"""Run cross-validation for specific polynomial degree"""
 	var fold_scores: Array[float] = []
 	
@@ -409,7 +409,7 @@ func evaluate_polynomial(x: float, coefficients: Array[float]) -> float:
 	
 	return result
 
-func calculate_cv_statistics():
+func calculate_cv_statistics() -> void:
 	"""Calculate mean and standard deviation of CV scores"""
 	mean_cv_scores.clear()
 	std_cv_scores.clear()
@@ -432,7 +432,7 @@ func calculate_cv_statistics():
 			variance /= scores.size()
 			std_cv_scores.append(sqrt(variance))
 
-func update_dataset_display():
+func update_dataset_display() -> void:
 	"""Update dataset visualization"""
 	# Clear existing
 	for child in dataset_display.get_children():
@@ -458,7 +458,7 @@ func update_dataset_display():
 	label.font_size = 16
 	dataset_display.add_child(label)
 
-func create_true_function_curve():
+func create_true_function_curve() -> void:
 	"""Create curve showing true underlying function"""
 	var curve_points: Array[Vector3] = []
 	
@@ -471,7 +471,7 @@ func create_true_function_curve():
 	create_line_mesh(curve_mesh, curve_points, Color.GREEN)
 	dataset_display.add_child(curve_mesh)
 
-func update_fold_display(fold_index: int, degree: int):
+func update_fold_display(fold_index: int, degree: int) -> void:
 	"""Update current fold visualization"""
 	# Clear existing
 	for child in fold_display.get_children():
@@ -504,7 +504,7 @@ func update_fold_display(fold_index: int, degree: int):
 	label.font_size = 16
 	fold_display.add_child(label)
 
-func create_model_curve(coefficients: Array[float], color: Color):
+func create_model_curve(coefficients: Array[float], color: Color) -> void:
 	"""Create curve for fitted model"""
 	if coefficients.is_empty():
 		return
@@ -520,7 +520,7 @@ func create_model_curve(coefficients: Array[float], color: Color):
 	create_line_mesh(curve_mesh, curve_points, color)
 	fold_display.add_child(curve_mesh)
 
-func update_model_comparison_display():
+func update_model_comparison_display() -> void:
 	"""Update model comparison chart"""
 	# Clear existing
 	for child in model_comparison_display.get_children():
@@ -627,7 +627,7 @@ func create_error_bar(position: Vector3, error_height: float, color: Color) -> N
 	
 	return error_bar
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -649,7 +649,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func run_single_cv_step():
+func run_single_cv_step() -> void:
 	"""Run single CV step manually"""
 	if current_fold >= k_folds:
 		current_fold = 0
@@ -664,7 +664,7 @@ func run_single_cv_step():
 	
 	current_fold += 1
 
-func complete_cross_validation():
+func complete_cross_validation() -> void:
 	"""Complete CV and show final results"""
 	is_running_cv = false
 	
@@ -692,7 +692,7 @@ func complete_cross_validation():
 	
 	update_info_displays()
 
-func update_info_displays():
+func update_info_displays() -> void:
 	"""Update information displays"""
 	var info_text = "Cross-Validation\n"
 	info_text += "Type: %s\n" % get_cv_type_name()
@@ -734,7 +734,7 @@ func update_info_displays():
 	
 	results_display.text = results_text
 
-func reset_cross_validation():
+func reset_cross_validation() -> void:
 	"""Reset CV state"""
 	stop_cross_validation()
 	reset_cv_results()
@@ -742,20 +742,20 @@ func reset_cross_validation():
 	current_degree = polynomial_degrees[0] if polynomial_degrees.size() > 0 else 1
 	update_info_displays()
 
-func reset_cv_results():
+func reset_cv_results() -> void:
 	"""Reset CV results"""
 	cv_scores.clear()
 	mean_cv_scores.clear()
 	std_cv_scores.clear()
 	test_scores.clear()
 
-func stop_cross_validation():
+func stop_cross_validation() -> void:
 	"""Stop running CV"""
 	is_running_cv = false
 	if cv_tween:
 		cv_tween.kill()
 
-func change_dataset_type():
+func change_dataset_type() -> void:
 	"""Change dataset type"""
 	var current_index = dataset_type as int
 	dataset_type = ((current_index + 1) % DatasetType.size()) as DatasetType
@@ -807,3 +807,9 @@ func get_statistics_summary() -> Dictionary:
 		"cv_scores": cv_scores.duplicate(),
 		"is_running": is_running_cv
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

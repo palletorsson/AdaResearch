@@ -35,19 +35,19 @@ var active_rider: Node3D = null
 var ride_distance: float = 0.0
 var saved_rider_processing: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	generate_slide()
 	_update_process_state()
 	set_physics_process(false)
 
-func _update_process_state():
+func _update_process_state() -> void:
 	set_process(auto_rotate and rotation_speed != 0.0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_rotate:
 		rotate_y(rotation_speed * delta)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not active_rider or ride_length <= 0.0:
 		return
 	ride_distance += ride_speed * delta
@@ -70,7 +70,7 @@ func _physics_process(delta):
 		active_rider.global_position = to_global(exit_point)
 		_stop_ride()
 
-func generate_slide():
+func generate_slide() -> void:
 	_clear_entry_pads()
 	path_points = PackedVector3Array()
 	path_normals = PackedVector3Array()
@@ -394,3 +394,9 @@ func _update_collision_shape(mesh: ArrayMesh) -> void:
 		shape.set_faces(faces)
 		collision_shape.shape = shape
 		collision_shape.disabled = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

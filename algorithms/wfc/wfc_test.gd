@@ -9,7 +9,7 @@ extends Node3D
 var camera_distance = 20.0
 var camera_angle = 0.0
 
-func _ready():
+func _ready() -> void:
 	print("=== WFC Test Scene ===")
 	print("Press SPACE to generate")
 	print("Press R to regenerate")
@@ -20,7 +20,7 @@ func _ready():
 	# Position camera
 	update_camera()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Camera rotation
 	if Input.is_action_pressed("ui_left"):
 		camera_angle -= delta * 2.0
@@ -29,7 +29,7 @@ func _process(delta):
 		camera_angle += delta * 2.0
 		update_camera()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -52,7 +52,7 @@ func _input(event):
 				camera_distance = min(50.0, camera_distance + 2.0)
 				update_camera()
 
-func update_camera():
+func update_camera() -> void:
 	var grid_center = Vector3(
 		wfc_grid.grid_width * wfc_grid.tile_size / 2.0,
 		wfc_grid.grid_height * wfc_grid.tile_size / 2.0,
@@ -67,12 +67,12 @@ func update_camera():
 
 	camera.look_at(grid_center, Vector3.UP)
 
-func _on_WFCGrid3D_generation_started():
+func _on_WFCGrid3D_generation_started() -> void:
 	print("WFC: Generation started")
 
-func _on_WFCGrid3D_generation_complete():
+func _on_WFCGrid3D_generation_complete() -> void:
 	print("WFC: Generation complete!")
 
-func _on_WFCGrid3D_tile_placed(position, tile_id):
+func _on_WFCGrid3D_tile_placed(position, tile_id) -> void:
 	if wfc_grid.animate_generation:
 		print("Placed tile '", tile_id, "' at ", position)

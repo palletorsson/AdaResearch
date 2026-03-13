@@ -18,7 +18,7 @@ extends Node3D
 var pattern_types = ["Spots", "Stripes", "Waves", "Mazes"]
 var is_simulation_running = false
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	feed_rate_slider.value_changed.connect(_on_feed_rate_changed)
 	kill_rate_slider.value_changed.connect(_on_kill_rate_changed)
@@ -32,50 +32,50 @@ func _ready():
 	# Initialize the pattern visualizer
 	_update_parameters()
 
-func _on_feed_rate_changed(value):
+func _on_feed_rate_changed(value) -> void:
 	feed_rate_label.text = "Feed Rate: " + str(value)
 	_update_parameters()
 
-func _on_kill_rate_changed(value):
+func _on_kill_rate_changed(value) -> void:
 	kill_rate_label.text = "Kill Rate: " + str(value)
 	_update_parameters()
 
-func _on_diffusion_a_changed(value):
+func _on_diffusion_a_changed(value) -> void:
 	diffusion_a_label.text = "Diffusion A: " + str(value)
 	_update_parameters()
 
-func _on_diffusion_b_changed(value):
+func _on_diffusion_b_changed(value) -> void:
 	diffusion_b_label.text = "Diffusion B: " + str(value)
 	_update_parameters()
 
-func _on_pattern_type_changed(value):
+func _on_pattern_type_changed(value) -> void:
 	var pattern_type = pattern_types[int(value)]
 	pattern_type_label.text = "Pattern Type: " + pattern_type
 	_update_parameters()
 
-func _on_start_pressed():
+func _on_start_pressed() -> void:
 	if is_simulation_running:
 		stop_simulation()
 	else:
 		start_simulation()
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	pattern_visualizer.reset_pattern()
 
-func _on_export_pressed():
+func _on_export_pressed() -> void:
 	pattern_visualizer.export_pattern()
 
-func start_simulation():
+func start_simulation() -> void:
 	is_simulation_running = true
 	start_button.text = "Stop Simulation"
 	pattern_visualizer.start_simulation()
 
-func stop_simulation():
+func stop_simulation() -> void:
 	is_simulation_running = false
 	start_button.text = "Start Simulation"
 	pattern_visualizer.stop_simulation()
 
-func _update_parameters():
+func _update_parameters() -> void:
 	if pattern_visualizer:
 		pattern_visualizer.feed_rate = feed_rate_slider.value
 		pattern_visualizer.kill_rate = kill_rate_slider.value

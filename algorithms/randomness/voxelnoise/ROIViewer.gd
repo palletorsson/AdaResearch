@@ -18,7 +18,7 @@ extends Node3D
 @export var async_generation := true
 @export var generation_delay := 0.1  # seconds between each sample
 
-func _ready():
+func _ready() -> void:
 	assert(voxel_field != NodePath(), "Assign voxel_field.")
 	assert(extractor_scene, "Assign extractor_scene (a scene with VoxelExtractor).")
 
@@ -30,7 +30,7 @@ func _ready():
 	else:
 		_generate_sync(field_node)
 
-func _generate_sync(field_node: VoxelField):
+func _generate_sync(field_node: VoxelField) -> void:
 	"""Generate all samples synchronously (blocking)"""
 	var rois = field_node.find_interesting_rois(search_aabb, coarse, keep)
 	print("ROIViewer: Found ", rois.size(), " ROIs (sync)")
@@ -39,7 +39,7 @@ func _generate_sync(field_node: VoxelField):
 		var r = rois[i]
 		_create_sample(field_node, r, i)
 
-func _generate_async(field_node: VoxelField):
+func _generate_async(field_node: VoxelField) -> void:
 	"""Generate samples asynchronously (non-blocking)"""
 	print("ROIViewer: Starting async generation...")
 	var rois = field_node.find_interesting_rois(search_aabb, coarse, keep)
@@ -48,7 +48,7 @@ func _generate_async(field_node: VoxelField):
 	# Start the async generation process
 	_generate_samples_gradually(field_node, rois)
 
-func _generate_samples_gradually(field_node: VoxelField, rois: Array):
+func _generate_samples_gradually(field_node: VoxelField, rois: Array) -> void:
 	"""Generate samples one by one with delays"""
 	for i in range(rois.size()):
 		var r = rois[i]
@@ -59,7 +59,7 @@ func _generate_samples_gradually(field_node: VoxelField, rois: Array):
 		if i < rois.size() - 1:  # Don't wait after the last one
 			await get_tree().create_timer(generation_delay).timeout
 
-func _create_sample(field_node: VoxelField, roi: Dictionary, index: int):
+func _create_sample(field_node: VoxelField, roi: Dictionary, index: int) -> void:
 	"""Create a single voxel sample"""
 	var r = roi
 	print("ROI ", index, ": score=", r.score, " center=", r.center)

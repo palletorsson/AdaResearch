@@ -47,7 +47,7 @@ var activation_particles: Array = []
 # Kernels (simplified, would be learned)
 var kernel_weights: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[CNNs_VR] Initializing CNN architecture walkthrough")
 	_initialize_kernels()
 	_create_input_layer()
@@ -59,7 +59,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -71,7 +71,7 @@ func _process(delta):
 	if animate_forward_pass:
 		_animate_activations(delta)
 
-func _initialize_kernels():
+func _initialize_kernels() -> void:
 	"""Initialize random kernel weights"""
 	for layer_idx in range(num_conv_layers):
 		var layer_kernels = []
@@ -86,7 +86,7 @@ func _initialize_kernels():
 			layer_kernels.append(kernel)
 		kernel_weights.append(layer_kernels)
 
-func _create_input_layer():
+func _create_input_layer() -> void:
 	"""Create input image plane"""
 	input_plane = Node3D.new()
 	input_plane.name = "InputLayer"
@@ -120,7 +120,7 @@ func _create_input_layer():
 	label.position = Vector3(0, feature_map_size / 2.0 + 1.0, 0)
 	input_plane.add_child(label)
 
-func _create_convolutional_layers():
+func _create_convolutional_layers() -> void:
 	"""Create convolution layer rooms"""
 	for layer_idx in range(num_conv_layers):
 		var layer_container = Node3D.new()
@@ -251,7 +251,7 @@ func _create_kernel_viz(layer_idx: int, filter_idx: int) -> Node3D:
 
 	return kernel_container
 
-func _create_pooling_layers():
+func _create_pooling_layers() -> void:
 	"""Create max pooling visualizations"""
 	for layer_idx in range(num_conv_layers):
 		var pool_container = Node3D.new()
@@ -291,7 +291,7 @@ func _create_pooling_layers():
 		label.position = Vector3(0, 2.0, 0)
 		pool_container.add_child(label)
 
-func _create_dense_layers():
+func _create_dense_layers() -> void:
 	"""Create fully connected layers"""
 	var dense_start_x = (num_conv_layers + 1) * layer_spacing
 
@@ -336,7 +336,7 @@ func _create_dense_layers():
 		label.position = Vector3(0, 5.0, 0)
 		dense_container.add_child(label)
 
-func _create_output_layer():
+func _create_output_layer() -> void:
 	"""Create output layer (classification)"""
 	var output_container = Node3D.new()
 	output_container.name = "OutputLayer"
@@ -383,7 +383,7 @@ func _create_output_layer():
 	layer_label.position = Vector3(0, 4.5, 0)
 	output_container.add_child(layer_label)
 
-func _create_activation_flow():
+func _create_activation_flow() -> void:
 	"""Create particles showing forward propagation"""
 	if not animate_forward_pass:
 		return
@@ -415,7 +415,7 @@ func _create_activation_flow():
 			"progress": randf()
 		})
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -467,7 +467,7 @@ func _create_control_panel():
 	metrics.position = Vector3(0, -1.8, 0.1)
 	controls.add_child(metrics)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Convolution explanation
 	_create_info_panel(
@@ -491,7 +491,7 @@ func _create_info_panels():
 		Color(0.9, 0.7, 0.3)
 	)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -503,7 +503,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_feature_maps(_delta):
+func _animate_feature_maps(_delta) -> void:
 	"""Animate feature map planes"""
 	for layer_idx in range(feature_maps.size()):
 		for filter_idx in range(feature_maps[layer_idx].size()):
@@ -515,12 +515,12 @@ func _animate_feature_maps(_delta):
 			var activation = 0.6 + sin(time * 1.5 + filter_idx) * 0.3 * training_progress
 			map.material_override.emission_energy_multiplier = activation
 
-func _animate_kernels(delta):
+func _animate_kernels(delta) -> void:
 	"""Animate kernel visualizations"""
 	for kernel_viz in kernel_visualizations:
 		kernel_viz.rotation.z += delta * 0.2
 
-func _animate_activations(delta):
+func _animate_activations(delta) -> void:
 	"""Animate forward propagation particles"""
 	var total_width = (num_conv_layers + 1) * layer_spacing + num_dense_layers * layer_spacing / 2.0 + layer_spacing / 2.0
 
@@ -540,13 +540,19 @@ func _animate_activations(delta):
 		particle.position = Vector3(x, y, z)
 
 # Public API
-func set_kernel_weight(layer: int, filter: int, x: int, y: int, value: float):
+func set_kernel_weight(layer: int, filter: int, x: int, y: int, value: float) -> void:
 	"""Set a kernel weight value"""
 	if layer >= 0 and layer < kernel_weights.size():
 		if filter >= 0 and filter < kernel_weights[layer].size():
 			if y >= 0 and y < kernel_dimensions and x >= 0 and x < kernel_dimensions:
 				kernel_weights[layer][filter][y][x] = clamp(value, -1.0, 1.0)
 
-func inspect_feature_map(layer: int, filter: int):
+func inspect_feature_map(layer: int, filter: int) -> void:
 	"""Highlight and inspect a specific feature map"""
 	print("[CNN] Inspecting layer %d, filter %d" % [layer, filter])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

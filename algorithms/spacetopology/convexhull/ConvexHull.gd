@@ -14,7 +14,7 @@ extends Node3D
 var distributions = ["Uniform", "Normal", "Clustered"]
 var algorithms = ["Graham Scan", "Jarvis March", "Quick Hull"]
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	point_count_slider.value_changed.connect(_on_point_count_changed)
 	distribution_slider.value_changed.connect(_on_distribution_changed)
@@ -26,30 +26,30 @@ func _ready():
 	# Initialize the visualizer
 	_update_parameters()
 
-func _on_point_count_changed(value):
+func _on_point_count_changed(value) -> void:
 	point_count_label.text = "Point Count: " + str(int(value))
 	_update_parameters()
 
-func _on_distribution_changed(value):
+func _on_distribution_changed(value) -> void:
 	var distribution = distributions[int(value)]
 	distribution_label.text = "Distribution: " + distribution
 	_update_parameters()
 
-func _on_algorithm_changed(value):
+func _on_algorithm_changed(value) -> void:
 	var algorithm = algorithms[int(value)]
 	algorithm_label.text = "Algorithm: " + algorithm
 	_update_parameters()
 
-func _on_generate_pressed():
+func _on_generate_pressed() -> void:
 	hull_visualizer.generate_points()
 
-func _on_compute_hull_pressed():
+func _on_compute_hull_pressed() -> void:
 	hull_visualizer.compute_convex_hull()
 
-func _on_clear_pressed():
+func _on_clear_pressed() -> void:
 	hull_visualizer.clear_all()
 
-func _update_parameters():
+func _update_parameters() -> void:
 	if hull_visualizer:
 		hull_visualizer.point_count = int(point_count_slider.value)
 		hull_visualizer.distribution_type = int(distribution_slider.value)

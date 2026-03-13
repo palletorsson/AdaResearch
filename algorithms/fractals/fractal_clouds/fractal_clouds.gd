@@ -35,17 +35,17 @@ var multimesh: MultiMesh
 var cloud_points: Array[Dictionary] = []  # {position, density}
 var time := 0.0
 
-func _ready():
+func _ready() -> void:
 	_setup_noise()
 	_generate_cloud()
 
-func _setup_noise():
+func _setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.seed = noise_seed if noise_seed != 0 else randi()
 	noise.frequency = noise_scale
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not animate:
 		return
 
@@ -55,7 +55,7 @@ func _process(delta: float):
 	if use_multimesh and multimesh:
 		_update_cloud_animation(delta)
 
-func _generate_cloud():
+func _generate_cloud() -> void:
 	"""Generate cloud points using fractal noise"""
 	cloud_points.clear()
 
@@ -127,7 +127,7 @@ func _calculate_distance_falloff(pos: Vector3, half_size: Vector3) -> float:
 	var falloff = 1.0 - pow(clamp(distance, 0.0, 1.0), density_falloff)
 	return falloff
 
-func _create_multimesh_cloud():
+func _create_multimesh_cloud() -> void:
 	"""Create cloud using MultiMesh for performance"""
 	if cloud_points.size() == 0:
 		return
@@ -174,7 +174,7 @@ func _create_multimesh_cloud():
 
 	add_child(multimesh_instance)
 
-func _create_mesh_cloud():
+func _create_mesh_cloud() -> void:
 	"""Create cloud using individual meshes (slower, for reference)"""
 	for i in range(cloud_points.size()):
 		var point = cloud_points[i]
@@ -209,7 +209,7 @@ func _calculate_point_color(point: Dictionary) -> Color:
 
 	return color
 
-func _update_cloud_animation(_delta: float):
+func _update_cloud_animation(_delta: float) -> void:
 	"""Animate cloud particles"""
 	if not multimesh:
 		return
@@ -237,7 +237,7 @@ func _update_cloud_animation(_delta: float):
 		multimesh.set_instance_transform(i, current_transform)
 
 # Public API
-func regenerate():
+func regenerate() -> void:
 	"""Clear and regenerate cloud"""
 	if multimesh_instance:
 		multimesh_instance.queue_free()
@@ -249,18 +249,18 @@ func regenerate():
 
 	_generate_cloud()
 
-func set_noise_seed(new_seed: int):
+func set_noise_seed(new_seed: int) -> void:
 	"""Set noise seed and regenerate"""
 	noise_seed = new_seed
 	noise.seed = new_seed
 	regenerate()
 
-func set_octaves(new_octaves: int):
+func set_octaves(new_octaves: int) -> void:
 	"""Set fractal detail level"""
 	octaves = clamp(new_octaves, 1, 8)
 	regenerate()
 
-func randomize_cloud():
+func randomize_cloud() -> void:
 	"""Generate new random cloud"""
 	noise_seed = randi()
 	noise.seed = noise_seed
@@ -287,7 +287,7 @@ func configure(data: Dictionary) -> void:
 	regenerate()
 
 # Presets
-func apply_preset(preset_name: String):
+func apply_preset(preset_name: String) -> void:
 	"""Apply a cloud preset"""
 	match preset_name:
 		"cumulus":
@@ -313,3 +313,9 @@ func apply_preset(preset_name: String):
 			shadow_color = Color(0.3, 0.3, 0.35, 0.8)
 
 	regenerate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -27,7 +27,7 @@ static var _dot_mesh: SphereMesh
 var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -70,7 +70,7 @@ func _ready():
 
 	info_label = create_info_panel("Vector Addition", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "C = A + B", "Parallelogram rule")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b = _get_vector_fast(vector_b, _cached_vector_b_nodes)
 	var result = a + b
@@ -91,7 +91,7 @@ func _process(delta):
 		_time_since_last_text_update = 0.0
 		_update_info(a, b, result)
 
-func _update_info(a: Vector3, b: Vector3, result: Vector3):
+func _update_info(a: Vector3, b: Vector3, result: Vector3) -> void:
 	var builder := []
 	builder.append("a = (%.2f, %.2f, %.2f)" % [a.x, a.y, a.z])
 	builder.append("b = (%.2f, %.2f, %.2f)" % [b.x, b.y, b.z])
@@ -116,7 +116,7 @@ func _create_dotted_line_multimesh(color: Color = Color(0.7, 0.7, 0.7, 0.5)) -> 
 
 	return mmi
 
-func _update_dotted_lines(a: Vector3, b: Vector3, result: Vector3):
+func _update_dotted_lines(a: Vector3, b: Vector3, result: Vector3) -> void:
 	# Dotted line from tip of a to result (showing b)
 	# Note: Inputs a, b, result are LOGICAL vectors.
 	# We need to scale them for visual position in _update_single_dotted_line_multimesh
@@ -124,7 +124,7 @@ func _update_dotted_lines(a: Vector3, b: Vector3, result: Vector3):
 	# Dotted line from tip of b to result (showing a)
 	_update_single_dotted_line_multimesh(dotted_line_b, b * SCENE_SCALE, result * SCENE_SCALE)
 
-func _update_single_dotted_line_multimesh(mmi: MultiMeshInstance3D, start: Vector3, end: Vector3):
+func _update_single_dotted_line_multimesh(mmi: MultiMeshInstance3D, start: Vector3, end: Vector3) -> void:
 	if mmi == null: return
 
 	var direction = end - start
@@ -161,7 +161,7 @@ func _create_floating_label(text: String, color: Color) -> Label3D:
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -177,7 +177,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		# Apply SCENE_SCALE to get visual position
@@ -185,3 +185,9 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

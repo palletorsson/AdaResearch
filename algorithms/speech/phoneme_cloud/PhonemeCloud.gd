@@ -22,7 +22,7 @@ var phonemes := {
 var _is_xr_active = false
 var _right_controller_path = "/root/Main/XROrigin3D/RightHand" # Adjust based on actual scene structure
 
-func _ready():
+func _ready() -> void:
 	_check_xr()
 	_initialize_players()
 	_start_all()
@@ -32,7 +32,7 @@ func _ready():
 		# If it's the grab sphere, we might want to set a visual mode
 		pass
 
-func _check_xr():
+func _check_xr() -> void:
 	var xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		_is_xr_active = true
@@ -46,7 +46,7 @@ func _process(_delta):
 
 # --------------------------------------------------
 
-func _initialize_players():
+func _initialize_players() -> void:
 	# Generate streams first
 	print("PhonemeCloud: Synthesizing phonemes...")
 	
@@ -75,14 +75,14 @@ func _initialize_players():
 		p.unit_size = 2.0 # Spatial blend size
 		p.max_distance = 10.0
 
-func _start_all():
+func _start_all() -> void:
 	for data in phonemes.values():
 		if data.player:
 			data.player.play()
 
 # --------------------------------------------------
 
-func _update_cursor():
+func _update_cursor() -> void:
 	if _is_xr_active:
 		# TODO: Implement XR hand tracking logic
 		pass
@@ -103,7 +103,7 @@ func _update_cursor():
 		# Only update if using mouse to debug, otherwise let physics/grab handle it
 		cursor.position = Vector3(world_x, world_y, 0.0)
 
-func _update_phoneme_weights():
+func _update_phoneme_weights() -> void:
 	# Logic space cursor (0..1)
 	var logic_cursor = (cursor.position / 2.0) + Vector3(0.5, 0.5, 0.0)
 	
@@ -123,3 +123,9 @@ func _falloff(distance: float) -> float:
 
 	var n := 1.0 - (distance / influence_radius)
 	return pow(n, fade_curve)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -8,13 +8,13 @@ extends Node3D
 var magnets: Array[RigidBody3D] = []
 var polarities: Array[float] = []  # +1 or -1
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_floor()
 	_create_magnets()
 	_create_field_particles()
 
-func _create_floor():
+func _create_floor() -> void:
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
 	var floor_shape := BoxShape3D.new()
@@ -24,7 +24,7 @@ func _create_floor():
 	floor_body.position = Vector3(0, -0.1, 0)
 	add_child(floor_body)
 
-func _create_magnets():
+func _create_magnets() -> void:
 	var positions := [
 		Vector3(-1, 1, -1), Vector3(1, 1, -1),
 		Vector3(-1, 1, 1), Vector3(1, 1, 1)
@@ -72,7 +72,7 @@ func _create_magnets():
 		add_child(rb)
 		magnets.append(rb)
 
-func _create_field_particles():
+func _create_field_particles() -> void:
 	# Iron filings effect using GPUParticles3D
 	var particles := GPUParticles3D.new()
 	particles.name = "FieldParticles"
@@ -120,3 +120,9 @@ func _physics_process(_delta: float):
 			# Opposite poles attract (force_mag negative when polarities differ)
 			a.apply_central_force(force)
 			b.apply_central_force(-force)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

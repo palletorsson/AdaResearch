@@ -31,7 +31,7 @@ class ModelVoxel:
 	var position: Vector3i
 	var synthesized: bool = false
 	
-	func _init(voxel_type: VoxelType, pos: Vector3i = Vector3i.ZERO):
+	func _init(voxel_type: VoxelType, pos: Vector3i = Vector3i.ZERO) -> void:
 		type = voxel_type
 		position = pos
 
@@ -40,11 +40,11 @@ class Neighborhood:
 	var center_position: Vector3i
 	var size: int
 	
-	func _init(center: Vector3i, neighborhood_size: int):
+	func _init(center: Vector3i, neighborhood_size: int) -> void:
 		center_position = center
 		size = neighborhood_size
 	
-	func add_voxel(voxel: ModelVoxel):
+	func add_voxel(voxel: ModelVoxel) -> void:
 		voxels.append(voxel)
 	
 	func get_pattern_hash() -> String:
@@ -80,7 +80,7 @@ class ModelSynthesis:
 	var coherence_map: Dictionary = {}  # Maps output positions to exemplar positions
 	var neighborhood_cache: Dictionary = {}  # Cache for neighborhood patterns
 	
-	func _init(ex_size: Vector3i, out_size: Vector3i, overlap: int, search: int, coherence: bool = true):
+	func _init(ex_size: Vector3i, out_size: Vector3i, overlap: int, search: int, coherence: bool = true) -> void:
 		exemplar_size = ex_size
 		output_size = out_size
 		overlap_size = overlap
@@ -88,7 +88,7 @@ class ModelSynthesis:
 		use_coherence = coherence
 		_initialize_arrays()
 	
-	func _initialize_arrays():
+	func _initialize_arrays() -> void:
 		# Initialize 3D arrays
 		exemplar = []
 		output = []
@@ -107,7 +107,7 @@ class ModelSynthesis:
 				for z in range(output_size.z):
 					output[x][y].append(ModelVoxel.new(VoxelType.ROCK, Vector3i(x, y, z)))
 	
-	func set_exemplar_voxel(pos: Vector3i, type: VoxelType):
+	func set_exemplar_voxel(pos: Vector3i, type: VoxelType) -> void:
 		if _is_valid_exemplar_pos(pos):
 			exemplar[pos.x][pos.y][pos.z] = type
 	
@@ -116,7 +116,7 @@ class ModelSynthesis:
 			return exemplar[pos.x][pos.y][pos.z]
 		return VoxelType.ROCK
 	
-	func set_output_voxel(pos: Vector3i, type: VoxelType):
+	func set_output_voxel(pos: Vector3i, type: VoxelType) -> void:
 		if _is_valid_output_pos(pos):
 			output[pos.x][pos.y][pos.z].type = type
 			output[pos.x][pos.y][pos.z].synthesized = true
@@ -268,13 +268,13 @@ var is_generating: bool = false
 var current_synthesis_pos: Vector3i = Vector3i.ZERO
 var synthesis_order: Array[Vector3i] = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_model_synthesis()
 	if auto_generate:
 		start_synthesis()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Rock material
 	var rock_material = StandardMaterial3D.new()
 	rock_material.albedo_color = Color(0.4, 0.3, 0.2)
@@ -297,7 +297,7 @@ func setup_materials():
 	entrance_material.roughness = 0.7
 	materials[VoxelType.ENTRANCE] = entrance_material
 
-func initialize_model_synthesis():
+func initialize_model_synthesis() -> void:
 	model_synthesis = ModelSynthesis.new(exemplar_size, output_size, overlap_size, search_neighborhood, use_coherence_search)
 	
 	if create_exemplar:
@@ -306,7 +306,7 @@ func initialize_model_synthesis():
 	create_output_visualization()
 	setup_synthesis_order()
 
-func create_cave_exemplar():
+func create_cave_exemplar() -> void:
 	# Create a small cave exemplar with interesting patterns
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -347,7 +347,7 @@ func create_cave_exemplar():
 					if randf() < 0.3:
 						model_synthesis.set_exemplar_voxel(pos, VoxelType.ENTRANCE)
 
-func create_output_visualization():
+func create_output_visualization() -> void:
 	# Clear existing visualization
 	for mesh_instance in mesh_instances:
 		if mesh_instance:
@@ -368,7 +368,7 @@ func create_output_visualization():
 				add_child(mesh_instance)
 				mesh_instances.append(mesh_instance)
 
-func setup_synthesis_order():
+func setup_synthesis_order() -> void:
 	# Create scanline order for synthesis (could be randomized)
 	synthesis_order.clear()
 	
@@ -383,19 +383,19 @@ func setup_synthesis_order():
 	current_synthesis_pos = Vector3i.ZERO
 	print("Setup synthesis order for ", synthesis_order.size(), " voxels")
 
-func start_synthesis():
+func start_synthesis() -> void:
 	is_generating = true
 	generation_timer = 0.0
 	current_synthesis_pos = Vector3i.ZERO
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating and synthesis_order.size() > 0:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
 			generation_timer = 0.0
 			synthesis_step()
 
-func synthesis_step():
+func synthesis_step() -> void:
 	if current_synthesis_pos.x >= synthesis_order.size():
 		is_generating = false
 		print("Model synthesis complete!")
@@ -416,7 +416,7 @@ func synthesis_step():
 	if debug_mode and current_synthesis_pos.x % 100 == 0:
 		print("Synthesized ", current_synthesis_pos.x, "/", synthesis_order.size(), " voxels")
 
-func update_voxel_visual(pos: Vector3i, voxel_type: VoxelType):
+func update_voxel_visual(pos: Vector3i, voxel_type: VoxelType) -> void:
 	var index = pos.x + pos.y * output_size.x + pos.z * output_size.x * output_size.y
 	
 	if index >= 0 and index < mesh_instances.size():
@@ -428,7 +428,7 @@ func update_voxel_visual(pos: Vector3i, voxel_type: VoxelType):
 			mesh_instance.visible = true
 			mesh_instance.material_override = materials[voxel_type]
 
-func restart_synthesis():
+func restart_synthesis() -> void:
 	current_synthesis_pos = Vector3i.ZERO
 	setup_synthesis_order()
 	
@@ -447,10 +447,10 @@ func restart_synthesis():
 	if auto_generate:
 		start_synthesis()
 
-func toggle_synthesis():
+func toggle_synthesis() -> void:
 	is_generating = not is_generating
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space
 		toggle_synthesis()
 	elif event.is_action_pressed("ui_cancel"):  # Escape
@@ -458,3 +458,9 @@ func _input(event):
 	elif event.is_action_pressed("ui_select"):  # Enter
 		if not is_generating:
 			synthesis_step()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

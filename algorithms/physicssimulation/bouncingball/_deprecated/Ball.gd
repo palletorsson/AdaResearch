@@ -22,11 +22,11 @@ var trail_colors = PackedColorArray()
 var trail_needs_update = false
 var trail_update_counter = 0
 
-func _ready():
+func _ready() -> void:
 	_create_ball_mesh()
 	_create_trail_system()
 
-func _create_ball_mesh():
+func _create_ball_mesh() -> void:
 	# Create the ball sphere once
 	ball_mesh = CSGSphere3D.new()
 	ball_mesh.radius = ball_radius
@@ -39,7 +39,7 @@ func _create_ball_mesh():
 	
 	add_child(ball_mesh)
 
-func _create_trail_system():
+func _create_trail_system() -> void:
 	# Use efficient MeshInstance3D instead of multiple CSG nodes
 	trail_mesh = MeshInstance3D.new()
 	trail_array_mesh = ArrayMesh.new()
@@ -60,13 +60,13 @@ func _create_trail_system():
 	trail_mesh.material_override = trail_material
 	add_child(trail_mesh)
 
-func initialize():
+func initialize() -> void:
 	position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
 	trail_needs_update = true
 
-func update_physics(delta: float, gravity: Vector3):
+func update_physics(delta: float, gravity: Vector3) -> void:
 	# Apply gravity
 	velocity += gravity * delta
 	
@@ -82,7 +82,7 @@ func update_physics(delta: float, gravity: Vector3):
 		trail_update_counter = 0
 		_add_trail_point(position)
 
-func _add_trail_point(point: Vector3):
+func _add_trail_point(point: Vector3) -> void:
 	trail_points.append(point)
 	
 	# Limit trail length
@@ -91,7 +91,7 @@ func _add_trail_point(point: Vector3):
 	
 	trail_needs_update = true
 
-func _update_trail_mesh():
+func _update_trail_mesh() -> void:
 	if not trail_needs_update or trail_points.size() < 2:
 		return
 	
@@ -144,10 +144,10 @@ func _update_trail_mesh():
 		trail_array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
 # Call this from the main game loop at a controlled frequency
-func update_trail_visualization():
+func update_trail_visualization() -> void:
 	_update_trail_mesh()
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
@@ -159,7 +159,7 @@ func get_radius() -> float:
 	return ball_radius
 
 # Optional: Reduce trail quality for performance
-func set_trail_quality(quality: int):
+func set_trail_quality(quality: int) -> void:
 	match quality:
 		0: # Low
 			max_trail_points = 20
@@ -169,5 +169,11 @@ func set_trail_quality(quality: int):
 			max_trail_points = 100
 
 # Optional: Enable/disable trail
-func set_trail_enabled(enabled: bool):
+func set_trail_enabled(enabled: bool) -> void:
 	trail_mesh.visible = enabled
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -12,7 +12,7 @@ var y_segments
 var mesh_instance
 var indices: PackedInt32Array
 
-func _ready():
+func _ready() -> void:
 	set_process(false)
 	# Wait a bit longer for the plane to be fully instantiated
 	await get_tree().process_frame
@@ -41,7 +41,7 @@ func _ready():
 		else:
 			push_error("No MeshInstance3D found in plane node and no mesh_built signal available")
 
-func _initialize_walk(mi: MeshInstance3D):
+func _initialize_walk(mi: MeshInstance3D) -> void:
 	mesh_instance = mi
 	# Try to read plane-like segmentation and size properties; otherwise, infer from mesh
 	var xs_prop = plane_node.get("x_segments")

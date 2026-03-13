@@ -21,12 +21,12 @@ const UPDATE_INTERVAL = 0.1
 # Force application point (offset from center)
 var force_offset: Vector3 = Vector3(0.15, 0, 0)
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	print("TorqueDemo: Ready - Apply force off-center!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup torque demonstration"""
 	# Position vector (from center to force application point) - Cyan
 	position_vector = create_force_vector(
@@ -62,7 +62,7 @@ func _setup_demo():
 		"τ = r × F"
 	])
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Get position and force (logical)
 	var r = _get_vector_fast_cached(_position_cache)
 	var f = _get_vector_fast_cached(_force_cache)
@@ -93,7 +93,7 @@ func _physics_process(delta):
 		_update_info(r, f, torque)
 		accumulator = 0.0
 
-func _update_info(r: Vector3, f: Vector3, torque: Vector3):
+func _update_info(r: Vector3, f: Vector3, torque: Vector3) -> void:
 	"""Update info display"""
 	var angular_vel = physics_ball.angular_velocity / SCENE_SCALE
 	
@@ -115,7 +115,7 @@ func _update_info(r: Vector3, f: Vector3, torque: Vector3):
 	]
 	update_info_text(lines)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -123,7 +123,7 @@ func _input(event):
 			physics_ball.linear_velocity = Vector3.ZERO
 			physics_ball.angular_velocity = Vector3.ZERO
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3.ZERO)
 	

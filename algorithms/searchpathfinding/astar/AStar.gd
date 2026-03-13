@@ -16,7 +16,7 @@ extends Node3D
 
 var heuristics = ["Manhattan", "Euclidean", "Chebyshev", "Octile"]
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	grid_size_slider.value_changed.connect(_on_grid_size_changed)
 	heuristic_slider.value_changed.connect(_on_heuristic_changed)
@@ -30,38 +30,38 @@ func _ready():
 	# Initialize the pathfinding visualizer
 	_update_parameters()
 
-func _on_grid_size_changed(value):
+func _on_grid_size_changed(value) -> void:
 	grid_size_label.text = "Grid Size: " + str(int(value)) + "x" + str(int(value))
 	_update_parameters()
 
-func _on_heuristic_changed(value):
+func _on_heuristic_changed(value) -> void:
 	var heuristic = heuristics[int(value)]
 	heuristic_label.text = "Heuristic: " + heuristic
 	_update_parameters()
 
-func _on_obstacle_density_changed(value):
+func _on_obstacle_density_changed(value) -> void:
 	var percentage = int(value * 100)
 	obstacle_density_label.text = "Obstacle Density: " + str(percentage) + "%"
 	_update_parameters()
 
-func _on_diagonal_movement_changed(value):
+func _on_diagonal_movement_changed(value) -> void:
 	var enabled = "Enabled" if value > 0.5 else "Disabled"
 	diagonal_movement_label.text = "Diagonal Movement: " + enabled
 	_update_parameters()
 
-func _on_generate_grid_pressed():
+func _on_generate_grid_pressed() -> void:
 	pathfinding_visualizer.generate_grid()
 
-func _on_find_path_pressed():
+func _on_find_path_pressed() -> void:
 	pathfinding_visualizer.find_path()
 
-func _on_clear_path_pressed():
+func _on_clear_path_pressed() -> void:
 	pathfinding_visualizer.clear_path()
 
-func _on_step_by_step_pressed():
+func _on_step_by_step_pressed() -> void:
 	pathfinding_visualizer.toggle_step_by_step()
 
-func _update_parameters():
+func _update_parameters() -> void:
 	if pathfinding_visualizer:
 		pathfinding_visualizer.grid_size = int(grid_size_slider.value)
 		pathfinding_visualizer.heuristic_type = int(heuristic_slider.value)

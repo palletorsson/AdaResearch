@@ -34,7 +34,7 @@ var camera_distance: float = 12.0
 var camera_angle: float = 0.0
 var camera_height: float = 8.0
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	projection_option.item_selected.connect(_on_projection_selected)
 	radius_slider.value_changed.connect(_on_radius_changed)
@@ -56,87 +56,87 @@ func _ready():
 	_update_ui()
 	_update_stats()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera around the tunnel
 	camera_angle += delta * 0.15
 	_update_camera_position()
 
-func _update_camera_position():
+func _update_camera_position() -> void:
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_projection_selected(index: int):
+func _on_projection_selected(index: int) -> void:
 	tunnel.projection_type = index
 	if projection_label:
 		projection_label.text = "Projection: " + projection_option.get_item_text(index)
 	_update_stats()
 
-func _on_radius_changed(value: float):
+func _on_radius_changed(value: float) -> void:
 	tunnel.tunnel_radius = value
 	if radius_label:
 		radius_label.text = "Tunnel Radius: " + "%.1f" % value
 	_update_stats()
 
-func _on_length_changed(value: float):
+func _on_length_changed(value: float) -> void:
 	tunnel.tunnel_length = value
 	if length_label:
 		length_label.text = "Tunnel Length: " + "%.1f" % value
 	_update_stats()
 
-func _on_density_changed(value: float):
+func _on_density_changed(value: float) -> void:
 	tunnel.tesseract_grid_density = int(value)
 	if density_label:
 		density_label.text = "Grid Density: " + str(int(value))
 	_update_stats()
 
-func _on_size_changed(value: float):
+func _on_size_changed(value: float) -> void:
 	tunnel.tesseract_size = value
 	if size_label:
 		size_label.text = "Tesseract Size: " + "%.1f" % value
 	_update_stats()
 
-func _on_w_offset_changed(value: float):
+func _on_w_offset_changed(value: float) -> void:
 	tunnel.w_offset = value
 	if w_offset_label:
 		w_offset_label.text = "W Offset: " + "%.1f" % value
 
-func _on_animation_toggled(pressed: bool):
+func _on_animation_toggled(pressed: bool) -> void:
 	tunnel.animate_w = pressed
 
-func _on_w_speed_changed(value: float):
+func _on_w_speed_changed(value: float) -> void:
 	tunnel.w_speed = value
 	if w_speed_label:
 		w_speed_label.text = "W Speed: " + "%.1f" % value
 
-func _on_rotation_changed(value: float):
+func _on_rotation_changed(value: float) -> void:
 	tunnel.rotation_4d = value
 	if rotation_label:
 		rotation_label.text = "4D Rotation: " + "%.1f" % value
 
-func _on_edge_color_changed(color: Color):
+func _on_edge_color_changed(color: Color) -> void:
 	tunnel.edge_color = color
 
-func _on_emission_changed(value: float):
+func _on_emission_changed(value: float) -> void:
 	tunnel.emission_strength = value
 	if emission_label:
 		emission_label.text = "Emission: " + "%.1f" % value
 
-func _on_inner_color_changed(color: Color):
+func _on_inner_color_changed(color: Color) -> void:
 	tunnel.inner_color = color
 
-func _on_outer_color_changed(color: Color):
+func _on_outer_color_changed(color: Color) -> void:
 	tunnel.outer_color = color
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	tunnel.regenerate()
 	_update_stats()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_randomize_parameters()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current tunnel settings"""
 	if projection_option:
 		projection_option.selected = tunnel.projection_type
@@ -165,7 +165,7 @@ func _update_ui():
 	if outer_color_picker:
 		outer_color_picker.color = tunnel.outer_color
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	if not stats_label:
 		return
@@ -178,7 +178,7 @@ func _update_stats():
 	stats_label.text += "W Offset: " + "%.1f" % stats["w_offset"] + "\n"
 	stats_label.text += "4D Rotation: " + "%.1f" % stats["rotation_4d"]
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize tunnel parameters for variety"""
 	tunnel.projection_type = randi() % 4
 	tunnel.tunnel_radius = randf_range(3.0, 12.0)
@@ -202,7 +202,7 @@ func _randomize_parameters():
 	_update_stats()
 
 # Input handling for camera control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance = max(5.0, camera_distance - 1.0)

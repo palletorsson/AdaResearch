@@ -17,10 +17,10 @@ var grammar_rules := {
 var derivation_history := []
 var parse_tree_nodes := []
 
-func _ready():
+func _ready() -> void:
 	initialize_grammar()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	if int(time * 0.5) != derivation_step:
@@ -35,15 +35,15 @@ func _process(delta):
 	demonstrate_derivation()
 	display_language_generation()
 
-func initialize_grammar():
+func initialize_grammar() -> void:
 	current_string = "S"
 	derivation_history = [current_string]
 	parse_tree_nodes.clear()
 
-func reset_derivation():
+func reset_derivation() -> void:
 	initialize_grammar()
 
-func apply_derivation_step():
+func apply_derivation_step() -> void:
 	var new_string = ""
 	var changed = false
 	
@@ -62,7 +62,7 @@ func apply_derivation_step():
 		current_string = new_string
 		derivation_history.append(current_string)
 
-func visualize_grammar_rules():
+func visualize_grammar_rules() -> void:
 	var container = $GrammarRules
 	
 	# Clear previous visualization
@@ -112,7 +112,7 @@ func visualize_grammar_rules():
 		
 		rule_index += 1
 
-func show_parse_tree():
+func show_parse_tree() -> void:
 	var container = $ParseTree
 	
 	# Clear previous visualization
@@ -122,7 +122,7 @@ func show_parse_tree():
 	# Create simplified parse tree
 	create_parse_tree_recursive(container, "S", Vector3.ZERO, 0, 3, 3.0)
 
-func create_parse_tree_recursive(container: Node3D, symbol: String, position: Vector3, depth: int, max_depth: int, spacing: float):
+func create_parse_tree_recursive(container: Node3D, symbol: String, position: Vector3, depth: int, max_depth: int, spacing: float) -> void:
 	if depth >= max_depth:
 		return
 	
@@ -176,7 +176,7 @@ func create_parse_tree_recursive(container: Node3D, symbol: String, position: Ve
 			# Recursive call
 			create_parse_tree_recursive(container, child_symbol, child_pos, depth + 1, max_depth, child_spacing)
 
-func demonstrate_derivation():
+func demonstrate_derivation() -> void:
 	var container = $DerivationProcess
 	
 	# Clear previous visualization
@@ -209,7 +209,7 @@ func demonstrate_derivation():
 			symbol_cube.material_override = material
 			container.add_child(symbol_cube)
 
-func display_language_generation():
+func display_language_generation() -> void:
 	var container = $LanguageGeneration
 	
 	# Clear previous visualization
@@ -278,3 +278,9 @@ func generate_string_from_grammar(start_symbol: String, max_steps: int) -> Strin
 			break
 	
 	return current
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

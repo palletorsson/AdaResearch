@@ -10,14 +10,14 @@ var time: float = 0.0
 var _dots: Array[MeshInstance3D] = []
 var _magenta_dots: Array[MeshInstance3D] = []
 
-func _ready():
+func _ready() -> void:
 	_create_spectrum()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	_animate()
 
-func _create_spectrum():
+func _create_spectrum() -> void:
 	for child in get_children():
 		child.queue_free()
 	_dots.clear()
@@ -61,7 +61,7 @@ func _create_dot(color: Color) -> MeshInstance3D:
 	
 	return mi
 
-func _animate():
+func _animate() -> void:
 	# 0.0 - 0.4: Linear Mode (Physics)
 	# 0.4 - 0.6: Transition
 	# 0.6 - 1.0: Circular Mode (Perception)
@@ -138,3 +138,9 @@ func _wavelength_to_color(lambda: float) -> Color:
 		b = 0.0
 		
 	return Color(r, g, b)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

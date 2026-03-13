@@ -50,17 +50,17 @@ var _vertex_angle: PackedFloat32Array   # angle around the circle
 var _vertex_cos_angle: PackedFloat32Array
 var _vertex_sin_angle: PackedFloat32Array
 
-func _ready():
+func _ready() -> void:
 	call_deferred("_initialize")
 
-func _initialize():
+func _initialize() -> void:
 	# Try to find skeleton in parent hierarchy
 	if follow_skeleton:
 		_find_skeleton()
 
 	create_dress_mesh()
 
-func _find_skeleton():
+func _find_skeleton() -> void:
 	var parent = get_parent()
 	while parent:
 		_skeleton = _find_skeleton_recursive(parent)
@@ -89,7 +89,7 @@ func _find_skeleton_recursive(node: Node) -> Skeleton3D:
 			return result
 	return null
 
-func create_dress_mesh():
+func create_dress_mesh() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -155,7 +155,7 @@ func create_dress_mesh():
 	_initialized = true
 	print("ElphabaDress: Mesh created with %d vertex rows, %d packed verts" % [_base_vertices.size(), _base_vertices_packed.size()])
 
-func _precompute_vertex_params():
+func _precompute_vertex_params() -> void:
 	# For each vertex in the packed array, figure out which (i, j) grid cell it came from
 	# and store the u/angle values so we don't recompute them every frame.
 	#
@@ -195,7 +195,7 @@ func _precompute_vertex_params():
 				_vertex_sin_angle[idx] = sin(angle)
 				idx += 1
 
-func _build_mesh_faces(surface_tool: SurfaceTool, vertices: Array):
+func _build_mesh_faces(surface_tool: SurfaceTool, vertices: Array) -> void:
 	for i in range(u_steps):
 		for j in range(v_steps):
 			var v0 = vertices[i][j]
@@ -236,7 +236,7 @@ func _build_mesh_faces(surface_tool: SurfaceTool, vertices: Array):
 			surface_tool.set_uv(uv3)
 			surface_tool.add_vertex(v3)
 
-func apply_material():
+func apply_material() -> void:
 	if not mesh_instance:
 		return
 
@@ -263,7 +263,7 @@ func apply_material():
 		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Double-sided
 		mesh_instance.mesh.surface_set_material(0, standard_material)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * animation_speed
 
 	# Animate the dress with flowing waves
@@ -273,7 +273,7 @@ func _process(delta):
 	if follow_skeleton and _skeleton and mesh_instance:
 		_follow_skeleton_position()
 
-func _animate_dress():
+func _animate_dress() -> void:
 	# Safety checks
 	if not _initialized:
 		return
@@ -329,7 +329,7 @@ func _animate_dress():
 	arr_mesh.clear_surfaces()
 	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
-func _follow_skeleton_position():
+func _follow_skeleton_position() -> void:
 	if not _skeleton:
 		return
 
@@ -350,13 +350,19 @@ func _follow_skeleton_position():
 	# global_rotation = attach_transform.basis.get_euler()
 
 # Public API to change dress appearance at runtime
-func set_colors(primary: Color, secondary: Color, wireframe: Color = Color.WHITE):
+func set_colors(primary: Color, secondary: Color, wireframe: Color = Color.WHITE) -> void:
 	primary_color = primary
 	secondary_color = secondary
 	wireframe_color = wireframe
 	apply_material()
 
-func set_wave_intensity(amplitude: float, flutter: float):
+func set_wave_intensity(amplitude: float, flutter: float) -> void:
 	wave_amplitude = amplitude
 	flutter_intensity = flutter
 	create_dress_mesh()  # Regenerate with new parameters
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

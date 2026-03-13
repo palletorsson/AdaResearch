@@ -9,14 +9,14 @@ extends Node3D
 @export var color_palette_resource: Resource
 @export var palette_resource_path: String = "res://algorithms/color/color_palettes.tres"
 
-func _ready():
+func _ready() -> void:
 	if color_palette_resource == null:
 		var loaded := load(palette_resource_path)
 		if loaded is Resource:
 			color_palette_resource = loaded
 	generate_wall()
 
-func generate_wall():
+func generate_wall() -> void:
 	for child in get_children():
 		child.queue_free()
 
@@ -54,3 +54,9 @@ func generate_wall():
 			add_child(brick)
 
 			color_index = (color_index + 1) % colors.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

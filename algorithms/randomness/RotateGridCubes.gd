@@ -32,7 +32,7 @@ const PATTERN = [
 var _cycle_length: int = 0
 var _section_starts: Array[int] = []
 
-func _ready():
+func _ready() -> void:
 	# Calculate cycle length and section starts
 	_calculate_pattern()
 	
@@ -57,7 +57,7 @@ func _ready():
 			# Rotate collision cubes after a short delay
 			call_deferred("_rotate_collision_cubes")
 
-func _calculate_pattern():
+func _calculate_pattern() -> void:
 	_cycle_length = 0
 	_section_starts.clear()
 	for section in PATTERN:
@@ -74,7 +74,7 @@ func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 			return result
 	return null
 
-func rotate_all_cubes():
+func rotate_all_cubes() -> void:
 	if not multimesh:
 		return
 
@@ -85,7 +85,7 @@ func rotate_all_cubes():
 	else:
 		apply_rotation()
 
-func apply_rotation():
+func apply_rotation() -> void:
 	for i in range(multimesh.instance_count):
 		var transform = initial_transforms[i] if i < initial_transforms.size() else multimesh.get_instance_transform(i)
 		var pos = transform.origin
@@ -141,7 +141,7 @@ func get_rotation_for_row(row: int) -> Vector3:
 		"flat", _:
 			return Vector3.ZERO
 
-func animate_rotation():
+func animate_rotation() -> void:
 	var tween = create_tween()
 	
 	tween.tween_method(func(progress: float):
@@ -163,7 +163,7 @@ func animate_rotation():
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 
-func _rotate_collision_cubes():
+func _rotate_collision_cubes() -> void:
 	# Find GridCollisions node
 	var collision_parent = get_parent().get_node_or_null("GridCollisions")
 	if not collision_parent:
@@ -195,3 +195,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	if multimesh and multimesh.instance_count > 0:
 		rotate_all_cubes()
 		_rotate_collision_cubes()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

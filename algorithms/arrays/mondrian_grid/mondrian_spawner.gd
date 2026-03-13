@@ -5,20 +5,20 @@ extends "res://commons/primitives/cubes/CubeSpawner.gd"
 # A slick, Mondrian-style implementation of the CubeSpawner.
 # minimal, geometric, and deadly.
 
-func _init():
+func _init() -> void:
 	# Default settings for Mondrian mode
 	spawn_interval = 3.0
 	projectile_speed = 8.0
 	max_projectiles = 5
 	auto_start = true
 
-func _ready():
+func _ready() -> void:
 	# Ensure projectile scene is loaded
 	if not projectile_scene:
 		projectile_scene = load("res://commons/primitives/cubes/projectile_cube.tscn")
 	super._ready()
 
-func _create_spawner_visual():
+func _create_spawner_visual() -> void:
 	"""Create a slick Mondrian-style visual"""
 	# Remove any existing visual
 	if mesh_instance:
@@ -91,7 +91,7 @@ func _create_spawner_visual():
 
 # Override to use the parent node for rotation, as our structure is slightly different
 # Override to use the parent node for rotation, as our structure is slightly different
-func _spawn_projectile():
+func _spawn_projectile() -> void:
 	super._spawn_projectile()
 	
 	# Tuning: Reduce impact for Mondrian scene
@@ -102,3 +102,9 @@ func _spawn_projectile():
 			# Drastically reduce force to prevent flinging player
 			projectile.my_knockback_force = 0.002 
 			# print("MondrianSpawner: Tuned projectile force to %f" % projectile.my_knockback_force)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

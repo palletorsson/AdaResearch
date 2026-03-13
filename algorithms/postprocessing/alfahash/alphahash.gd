@@ -136,12 +136,12 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_alpha_objects()
 	start_transparency_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create ethereal, ghostly environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -176,7 +176,7 @@ func setup_scene():
 	ambient_light.light_color = Color(0.8, 0.9, 1.0)
 	add_child(ambient_light)
 
-func create_alpha_objects():
+func create_alpha_objects() -> void:
 	# Create various geometric objects with alpha hash materials
 	var geometries = [
 		SphereMesh.new(),
@@ -239,7 +239,7 @@ func create_alpha_objects():
 		alpha_objects.append(mesh_instance)
 		alpha_materials.append(material)
 
-func setup_alpha_hash_material(material: ShaderMaterial, index: int):
+func setup_alpha_hash_material(material: ShaderMaterial, index: int) -> void:
 	# Configure alpha hash shader parameters
 	var hue_a = (float(index) / float(object_count)) * 360.0
 	var hue_b = hue_a + 180.0  # Complementary color
@@ -257,7 +257,7 @@ func setup_alpha_hash_material(material: ShaderMaterial, index: int):
 	material.set_shader_parameter("pulse_frequency", randf_range(0.8, 2.0))
 	material.set_shader_parameter("noise_scale", randf_range(0.5, 1.2))
 
-func setup_stipple_material(material: ShaderMaterial, index: int):
+func setup_stipple_material(material: ShaderMaterial, index: int) -> void:
 	# Configure stipple shader parameters
 	var hue_a = (float(index) / float(object_count)) * 360.0 + 60.0
 	var hue_b = hue_a + 120.0
@@ -273,12 +273,12 @@ func setup_stipple_material(material: ShaderMaterial, index: int):
 	material.set_shader_parameter("animation_speed", transparency_animation_speed)
 	material.set_shader_parameter("depth_fade", randf_range(0.1, 0.5))
 
-func start_transparency_animations():
+func start_transparency_animations() -> void:
 	# Animate transparency and ghostly effects
 	animate_alpha_waves()
 	animate_object_movements()
 
-func animate_alpha_waves():
+func animate_alpha_waves() -> void:
 	# Create waves of transparency that flow through objects
 	for i in range(alpha_materials.size()):
 		var material = alpha_materials[i]
@@ -313,7 +313,7 @@ func animate_alpha_waves():
 			wave_duration * 0.5
 		)
 
-func animate_object_movements():
+func animate_object_movements() -> void:
 	# Add gentle floating and rotation to enhance ghostly effect
 	for i in range(alpha_objects.size()):
 		var obj = alpha_objects[i]
@@ -345,7 +345,7 @@ func animate_object_movements():
 		if i % 4 == 0:
 			create_phase_animation(obj, i)
 
-func create_phase_animation(obj: Node3D, index: int):
+func create_phase_animation(obj: Node3D, index: int) -> void:
 	# Make some objects fade in and out completely
 	var phase_tween = create_tween()
 	phase_tween.set_loops()
@@ -528,7 +528,7 @@ func _process(_delta):
 	# Update dynamic transparency effects
 	update_transparency_waves()
 
-func update_transparency_waves():
+func update_transparency_waves() -> void:
 	# Create waves of transparency that move through the scene
 	var time = Time.get_time_dict_from_system()["second"]
 	
@@ -547,3 +547,9 @@ func update_transparency_waves():
 			material.set_shader_parameter("dither_size", wave_dither)
 		elif material.shader.code.contains("stipple_size"):
 			material.set_shader_parameter("stipple_size", wave_dither + 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

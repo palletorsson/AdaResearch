@@ -7,19 +7,19 @@ extends MeshInstance3D
 @export var corner_radius: float = 2.0 # Match BigPipeSystem radius/length logic
 @export var mirror: bool = false  ## Mirror to create left turn instead of right
 
-func _ready():
+func _ready() -> void:
 	generate_surface()
 
 # Setter to trigger regen in editor
-func set_pipe_radius(val):
+func set_pipe_radius(val) -> void:
 	pipe_radius = val
 	if is_inside_tree(): generate_surface()
 
-func set_corner_radius(val):
+func set_corner_radius(val) -> void:
 	corner_radius = val
 	if is_inside_tree(): generate_surface()
 
-func generate_surface():
+func generate_surface() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -103,3 +103,9 @@ func generate_surface():
 		var col_shape = CollisionShape3D.new()
 		col_shape.shape = generated_mesh.create_trimesh_shape()
 		sb.add_child(col_shape)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

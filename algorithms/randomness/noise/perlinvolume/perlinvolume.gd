@@ -7,12 +7,12 @@ extends Node3D
 
 var volume_mesh: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# The entire effect is driven by the shader. This script just sets up
 	# the mesh and provides a basic rotation.
 	setup_scene()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Find the MeshInstance3D in the scene
 	volume_mesh = $VolumeBox
 	if not volume_mesh:

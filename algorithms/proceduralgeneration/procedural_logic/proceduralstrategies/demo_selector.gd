@@ -34,10 +34,10 @@ var strategy_names = {
 	Strategy.CURVE_EXTRUSION: "Curve Extrusion"
 }
 
-func _ready():
+func _ready() -> void:
 	load_strategy(current_strategy)
 
-func load_strategy(strategy: Strategy):
+func load_strategy(strategy: Strategy) -> void:
 	if current_demo:
 		current_demo.queue_free()
 	
@@ -48,14 +48,14 @@ func load_strategy(strategy: Strategy):
 	
 	update_label()
 
-func update_label():
+func update_label() -> void:
 	label.text = "[%d/%d] %s\n\nNumber Keys 1-6: Switch strategy\nSPACE: Regenerate\nESC: Quit" % [
 		current_strategy + 1,
 		strategy_names.size(),
 		strategy_names[current_strategy]
 	]
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:
@@ -81,4 +81,10 @@ func _input(event):
 				load_strategy(current_strategy)
 			KEY_RIGHT:
 				current_strategy = (current_strategy + 1) % strategy_names.size()
-				load_strategy(current_strategy) 
+				load_strategy(current_strategy)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

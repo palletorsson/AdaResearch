@@ -3,7 +3,7 @@ extends Node
 
 var network_data: Dictionary = {}
 
-func set_network_data(data: Dictionary):
+func set_network_data(data: Dictionary) -> void:
 	network_data = data
 
 func get_all_connections() -> Array:

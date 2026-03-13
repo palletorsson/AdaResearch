@@ -18,7 +18,7 @@ var left_pos : Vector2
 # Initialize the trace texture
 @onready var drawtexture = get_node_or_null("../../DrawTexture")
 
-func _ready():
+func _ready() -> void:
 	# Initialize the trace image
 	if drawtexture and drawtexture is MeshInstance3D:
 		print("DrawTexture is a valid MeshInstance3D node.")
@@ -27,7 +27,7 @@ func _ready():
 	init_trace_image()
 	queue_redraw()
 
-func init_trace_image():
+func init_trace_image() -> void:
 	# Define the dimensions for the trace image
 	var width = 800  # Adjust to your desired size
 	var height = 800
@@ -38,7 +38,7 @@ func init_trace_image():
 	
 	update_material(trace_texture_data)
 	
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# Update angular motion
 	angle_velocity += angle_acceleration * delta
 	angle += angle_velocity * delta
@@ -59,7 +59,7 @@ func _process(delta: float):
 	# Trigger a redraw
 	queue_redraw()
 
-func draw_to_trace(position: Vector2):
+func draw_to_trace(position: Vector2) -> void:
 	# Map the position to the image coordinates
 	var image_center = Vector2(trace_image.get_width() / 2, trace_image.get_height() / 2)
 	var draw_pos = image_center + position
@@ -72,7 +72,7 @@ func draw_to_trace(position: Vector2):
 	
 	update_material(trace_texture_data)
 
-func _draw():
+func _draw() -> void:
 	# Get the center of the canvas
 	var canvas_center = get_viewport_rect().size / 2
 
@@ -103,7 +103,7 @@ func _draw():
 
 
 
-func update_material(tex: ImageTexture):
+func update_material(tex: ImageTexture) -> void:
 	if drawtexture.material_override is ShaderMaterial:
 		var shader_material = drawtexture.material_override as ShaderMaterial
 		shader_material.set_shader_parameter("transparency", 1)

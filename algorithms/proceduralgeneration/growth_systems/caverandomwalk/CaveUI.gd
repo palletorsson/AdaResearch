@@ -7,10 +7,10 @@ extends Control
 @onready var steps_slider = $Panel/VBoxContainer/StepsSlider
 @onready var seed_spin = $Panel/VBoxContainer/SeedSpinBox
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
-func _update_ui():
+func _update_ui() -> void:
 	if not cave_node: return
 	width_slider.value = cave_node.grid_size.x
 	height_slider.value = cave_node.grid_size.y
@@ -18,31 +18,31 @@ func _update_ui():
 	steps_slider.value = cave_node.steps_per_level
 	seed_spin.value = cave_node.seed
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	cave_node.seed = int(seed_spin.value) # Use current spinbox value
 	cave_node.regenerate()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	cave_node.seed = randi()
 	seed_spin.value = cave_node.seed
 	cave_node.regenerate()
 
-func _on_width_changed(value):
+func _on_width_changed(value) -> void:
 	cave_node.grid_size.x = int(value)
 	cave_node.grid_size.z = int(value) # Keep square for simplicity in UI
 	$Panel/VBoxContainer/WidthLabel.text = "Grid Width: %d" % int(value)
 
-func _on_height_changed(value):
+func _on_height_changed(value) -> void:
 	cave_node.grid_size.y = int(value)
 	$Panel/VBoxContainer/HeightLabel.text = "Grid Height: %d" % int(value)
 
-func _on_walkers_changed(value):
+func _on_walkers_changed(value) -> void:
 	cave_node.walkers = int(value)
 	$Panel/VBoxContainer/WalkersLabel.text = "Walkers: %d" % int(value)
 
-func _on_steps_changed(value):
+func _on_steps_changed(value) -> void:
 	cave_node.steps_per_level = int(value)
 	$Panel/VBoxContainer/StepsLabel.text = "Steps/Level: %d" % int(value)
 
-func _on_seed_changed(value):
+func _on_seed_changed(value) -> void:
 	cave_node.seed = int(value)

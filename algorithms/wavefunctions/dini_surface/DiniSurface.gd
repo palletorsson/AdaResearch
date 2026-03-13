@@ -31,10 +31,10 @@ extends MeshInstance3D
 
 @export var auto_update: bool = true
 
-func _ready():
+func _ready() -> void:
 	_generate_mesh()
 
-func _generate_mesh():
+func _generate_mesh() -> void:
 	if not auto_update and Engine.is_editor_hint(): return
 	
 	var st = SurfaceTool.new()

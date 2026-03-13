@@ -12,7 +12,7 @@ var multimesh_instance: MultiMeshInstance3D
 var cell_positions: PackedVector3Array = []
 var cell_colors: PackedColorArray = []
 
-func _ready():
+func _ready() -> void:
 	# Get or create MultiMeshInstance3D
 	if has_node("MultiMeshInstance3D"):
 		multimesh_instance = get_node("MultiMeshInstance3D")
@@ -24,7 +24,7 @@ func _ready():
 	setup_multimesh()
 	initialize_grid()
 
-func setup_multimesh():
+func setup_multimesh() -> void:
 	"""Setup MultiMesh for efficient rendering"""
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(0.8, 0.8, 0.8)
@@ -38,7 +38,7 @@ func setup_multimesh():
 	multimesh_instance.multimesh = multi_mesh
 	multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-func initialize_grid():
+func initialize_grid() -> void:
 	"""Initialize 3D cell grid"""
 	cells.clear()
 	cells.resize(grid_size.x * grid_size.y * grid_size.z)
@@ -62,7 +62,7 @@ func get_cell_by_index(idx: int) -> ChairCell:
 		return cells[idx]
 	return null
 
-func reset():
+func reset() -> void:
 	"""Clear all cells"""
 	generation = 0
 	for cell in cells:
@@ -70,7 +70,7 @@ func reset():
 			cell.clear()
 	update_visualization()
 
-func seed_chair_base():
+func seed_chair_base() -> void:
 	"""Seed initial 4 pillar positions"""
 	var center_x = grid_size.x / 2
 	var center_y = grid_size.y / 2
@@ -96,7 +96,7 @@ func seed_chair_base():
 		if cell:
 			cell.set_occupied(types[i], generation)
 
-func seed_floating_platform():
+func seed_floating_platform() -> void:
 	"""Seed 8x8 platform at height 6"""
 	var start_x = 6
 	var end_x = 13
@@ -117,7 +117,7 @@ func get_occupied_count() -> int:
 			count += 1
 	return count
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update MultiMesh with current cell states"""
 	cell_positions.clear()
 	cell_colors.clear()
@@ -149,3 +149,9 @@ func update_visualization():
 		var height_ratio = float(pos.z) / float(grid_size.z)
 		var color = Color(0.3 + height_ratio * 0.5, 0.5, 0.3 + height_ratio * 0.3)
 		mm.set_instance_color(i, color)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

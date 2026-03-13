@@ -8,7 +8,7 @@ var discriminator_loss: float = 1.0
 var competition_level: float = 0.0
 var particle_count: int = 20
 
-func _ready():
+func _ready() -> void:
 	# Initialize GAN visualization
 	print("Generative Adversarial Networks Visualization initialized")
 	create_noise_particles()
@@ -16,7 +16,7 @@ func _ready():
 	create_feedback_particles()
 	setup_training_metrics()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate training progress
@@ -34,7 +34,7 @@ func _process(delta):
 	animate_feedback_loop(delta)
 	update_training_metrics(delta)
 
-func create_noise_particles():
+func create_noise_particles() -> void:
 	# Create noise particles for generator input
 	var noise_particles = $Generator/GeneratorInput/NoiseParticles
 	for i in range(particle_count):
@@ -53,7 +53,7 @@ func create_noise_particles():
 		
 		noise_particles.add_child(particle)
 
-func create_data_particles():
+func create_data_particles() -> void:
 	# Create real data particles
 	var real_data = $Discriminator/DiscriminatorInput/RealData
 	for i in range(particle_count / 2):
@@ -90,7 +90,7 @@ func create_data_particles():
 		
 		generated_data.add_child(particle)
 
-func create_feedback_particles():
+func create_feedback_particles() -> void:
 	# Create feedback loop particles
 	var feedback_particles = $FeedbackLoop/FeedbackParticles
 	for i in range(particle_count):
@@ -110,7 +110,7 @@ func create_feedback_particles():
 		
 		feedback_particles.add_child(particle)
 
-func setup_training_metrics():
+func setup_training_metrics() -> void:
 	# Initialize loss meters
 	var gen_loss_indicator = $TrainingMetrics/GeneratorLoss/GenLossIndicator
 	var disc_loss_indicator = $TrainingMetrics/DiscriminatorLoss/DiscLossIndicator
@@ -119,7 +119,7 @@ func setup_training_metrics():
 	if disc_loss_indicator:
 		disc_loss_indicator.position.x = 0  # Start at middle
 
-func animate_generator(delta):
+func animate_generator(delta) -> void:
 	# Animate generator core
 	var generator_core = $Generator/GeneratorCore
 	if generator_core:
@@ -153,7 +153,7 @@ func animate_generator(delta):
 			var pulse = 1.0 + sin(time * 3.0 + i * 0.5) * 0.3
 			particle.scale = Vector3.ONE * pulse
 
-func animate_discriminator(delta):
+func animate_discriminator(delta) -> void:
 	# Animate discriminator core
 	var discriminator_core = $Discriminator/DiscriminatorCore
 	if discriminator_core:
@@ -193,7 +193,7 @@ func animate_discriminator(delta):
 			particle.position.x = lerp(particle.position.x, move_x, delta * 2.0)
 			particle.position.y = lerp(particle.position.y, move_y, delta * 2.0)
 
-func animate_competition(delta):
+func animate_competition(delta) -> void:
 	# Animate competition core
 	var competition_core = $Competition/CompetitionCore
 	if competition_core:
@@ -210,7 +210,7 @@ func animate_competition(delta):
 			var blue_component = 0.2 + competition_level * 0.6
 			competition_core.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_data_flow(_delta):
+func animate_data_flow(_delta) -> void:
 	# Animate data flowing from generator to competition
 	var generator_to_competition = $DataFlow/GeneratorToCompetition
 	# This would contain connection lines or particles showing data flow
@@ -219,7 +219,7 @@ func animate_data_flow(_delta):
 	var competition_to_discriminator = $DataFlow/CompetitionToDiscriminator
 	# This would contain connection lines or particles showing data flow
 
-func animate_feedback_loop(delta):
+func animate_feedback_loop(delta) -> void:
 	# Animate feedback particles
 	var feedback_particles = $FeedbackLoop/FeedbackParticles
 	for i in range(feedback_particles.get_child_count()):
@@ -246,7 +246,7 @@ func animate_feedback_loop(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2
 			particle.scale = Vector3.ONE * pulse
 
-func update_training_metrics(delta):
+func update_training_metrics(delta) -> void:
 	# Update generator loss meter
 	var gen_loss_indicator = $TrainingMetrics/GeneratorLoss/GenLossIndicator
 	if gen_loss_indicator:
@@ -269,13 +269,13 @@ func update_training_metrics(delta):
 		var red_component = 0.2 + 0.6 * discriminator_loss
 		disc_loss_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func set_generator_loss(loss: float):
+func set_generator_loss(loss: float) -> void:
 	generator_loss = clamp(loss, 0.1, 1.0)
 
-func set_discriminator_loss(loss: float):
+func set_discriminator_loss(loss: float) -> void:
 	discriminator_loss = clamp(loss, 0.1, 1.0)
 
 func get_training_progress() -> float:
@@ -287,9 +287,15 @@ func get_generator_loss() -> float:
 func get_discriminator_loss() -> float:
 	return discriminator_loss
 
-func reset_training():
+func reset_training() -> void:
 	time = 0.0
 	training_progress = 0.0
 	generator_loss = 1.0
 	discriminator_loss = 1.0
 	competition_level = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

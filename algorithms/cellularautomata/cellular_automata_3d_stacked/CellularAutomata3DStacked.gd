@@ -12,16 +12,16 @@ var current_layer = 0
 var grid = []
 var generation_timer = 0.0
 
-func _ready():
+func _ready() -> void:
 	initialize_grid()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	generation_timer += delta
 	if generation_timer >= generation_interval:
 		generation_timer = 0.0
 		generate_next_layer()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid.resize(grid_size)
 	for i in range(grid_size):
 		grid[i] = []
@@ -39,7 +39,7 @@ func initialize_grid():
 			grid[x][0][z] = 1
 			create_cube(x, 0, z)
 
-func generate_next_layer():
+func generate_next_layer() -> void:
 	generation += 1
 	if generation >= 10:
 		set_process(false)
@@ -54,7 +54,7 @@ func generate_next_layer():
 		GrowthPhase.UP:
 			grow_upward()
 
-func grow_outward():
+func grow_outward() -> void:
 	current_layer += 1
 	for x in range(grid_size):
 		for z in range(grid_size):
@@ -65,7 +65,7 @@ func grow_outward():
 			if new_state == 1:
 				create_cube(x, current_layer, z)
 
-func grow_upward():
+func grow_upward() -> void:
 	current_layer += 1
 	for x in range(grid_size):
 		for z in range(grid_size):
@@ -98,7 +98,7 @@ func apply_rules(current_state, neighbors):
 		else:
 			return 0
 
-func create_cube(x, y, z):
+func create_cube(x, y, z) -> void:
 	var cell = CUBE_SCENE.instantiate()
 	cell.name = "cell_" + str(x) + "_" + str(y) + "_" + str(z)
 	cell.scale = Vector3(0.5, 0.5, 0.5)

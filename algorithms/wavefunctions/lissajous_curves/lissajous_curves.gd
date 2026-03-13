@@ -209,3 +209,9 @@ func set_preset(preset_name: String) -> void:
 			phase_shift = 0.0
 
 	_generate_full_curve()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

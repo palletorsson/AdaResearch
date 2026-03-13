@@ -20,7 +20,7 @@ var camera_distance: float = 12.0
 var camera_angle: float = 0.0
 var camera_height: float = 8.0
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	steps_slider.value_changed.connect(_on_steps_changed)
 	branch_slider.value_changed.connect(_on_branch_changed)
@@ -42,12 +42,12 @@ func _ready():
 	# Ensure crystal is visible
 	_update_camera_position()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera around the crystal
 	camera_angle += delta * 0.3
 	_update_camera_position()
 
-func _update_camera_position():
+func _update_camera_position() -> void:
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
@@ -56,43 +56,43 @@ func _update_camera_position():
 	# Debug: Print camera position to help with troubleshooting
 	# print("Camera position: ", camera.position, " Distance: ", camera_distance)
 
-func _on_steps_changed(value: float):
+func _on_steps_changed(value: float) -> void:
 	crystal.steps = int(value)
 	steps_label.text = "Steps: " + str(int(value))
 	_update_stats()
 
-func _on_branch_changed(value: float):
+func _on_branch_changed(value: float) -> void:
 	crystal.branch_probability = value
 	branch_label.text = "Branch Probability: " + "%.2f" % value
 	_update_stats()
 
-func _on_taper_changed(value: float):
+func _on_taper_changed(value: float) -> void:
 	crystal.taper_amount = value
 	taper_label.text = "Taper Amount: " + "%.2f" % value
 	_update_stats()
 
-func _on_chaos_changed(value: float):
+func _on_chaos_changed(value: float) -> void:
 	crystal.rotation_chaos = value
 	chaos_label.text = "Rotation Chaos: " + "%.2f" % value
 	_update_stats()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	crystal.regenerate()
 	_update_stats()
 
-func _on_random_seed_pressed():
+func _on_random_seed_pressed() -> void:
 	var new_seed = randi()
 	crystal.set_seed(new_seed)
 	_update_stats()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current crystal settings"""
 	steps_slider.value = crystal.steps
 	branch_slider.value = crystal.branch_probability
 	taper_slider.value = crystal.taper_amount
 	chaos_slider.value = crystal.rotation_chaos
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	var stats = crystal.get_crystal_stats() if crystal.has_method("get_crystal_stats") else {}
 	var tetrahedra_count = crystal.transforms.size() if crystal.transforms else 0
@@ -107,7 +107,7 @@ func _update_stats():
 	stats_label.text += "Tetrahedron Size: " + "%.2f" % crystal.tetrahedron_size
 
 # Input handling for camera control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance = max(2.0, camera_distance - 0.5)
@@ -117,7 +117,7 @@ func _input(event):
 			# Click to regenerate with random parameters
 			_randomize_parameters()
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize crystal parameters for variety"""
 	crystal.steps = randi_range(15, 50)
 	crystal.branch_probability = randf_range(0.1, 0.5)

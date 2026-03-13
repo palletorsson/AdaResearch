@@ -175,3 +175,9 @@ func _stop_all_sounds() -> void:
 			player.stop()
 			player.queue_free()
 	_active_players.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -24,7 +24,7 @@ var _cached_component_nodes: Dictionary = {
 	"z": {}
 }
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -64,7 +64,7 @@ func _process(_delta):
 	if spring_gadget:
 		spring_gadget.update_from_vectors(vec, Vector3.ZERO)
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -81,7 +81,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector
@@ -89,7 +89,7 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
 
-func _update_unit_vector(vec: Vector3):
+func _update_unit_vector(vec: Vector3) -> void:
 	var magnitude = vec.length()
 	if magnitude > 0.001:
 		var hat = vec / magnitude
@@ -97,12 +97,12 @@ func _update_unit_vector(vec: Vector3):
 	else:
 		_update_vector_fast(unit_vector, Vector3.ZERO, _cached_unit_vector_nodes)
 
-func _update_components(vec: Vector3):
+func _update_components(vec: Vector3) -> void:
 	_update_vector_fast(component_vectors["x"], Vector3(vec.x, 0.0, 0.0), _cached_component_nodes["x"])
 	_update_vector_fast(component_vectors["y"], Vector3(0.0, vec.y, 0.0), _cached_component_nodes["y"])
 	_update_vector_fast(component_vectors["z"], Vector3(0.0, 0.0, vec.z), _cached_component_nodes["z"])
 
-func _update_info(vec: Vector3):
+func _update_info(vec: Vector3) -> void:
 	var magnitude = vec.length()
 	var hat = vec / magnitude if magnitude > 0.001 else Vector3.ZERO
 	var builder := []
@@ -148,7 +148,7 @@ func _create_mag_label() -> Label3D:
 	environment_root.add_child(label)
 	return label
 
-func _update_magnitude_arc(vec: Vector3):
+func _update_magnitude_arc(vec: Vector3) -> void:
 	var mag = vec.length()
 	if mag < 0.01:
 		_magnitude_dots.multimesh.visible_instance_count = 0
@@ -170,3 +170,9 @@ func _update_magnitude_arc(vec: Vector3):
 	var mid_dir = x_axis.slerp(dir, 0.5).normalized()
 	_magnitude_label.position = mid_dir * (arc_radius + 0.04)
 	_magnitude_label.text = "|a| = %.2f" % mag
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

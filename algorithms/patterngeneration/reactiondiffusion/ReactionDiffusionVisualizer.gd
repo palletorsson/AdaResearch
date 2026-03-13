@@ -14,17 +14,17 @@ var grid_b: Array[Array] = []  # Chemical B concentration
 var is_running = false
 var simulation_time = 0.0
 
-func _ready():
+func _ready() -> void:
 	initialize_grid()
 	create_visual_grid()
 	set_initial_conditions()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_running:
 		simulation_time += delta
 		update_simulation()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Initialize 2D arrays for chemical concentrations
 	grid_a.clear()
 	grid_b.clear()
@@ -36,7 +36,7 @@ func initialize_grid():
 			grid_a[x].append(1.0)
 			grid_b[x].append(0.0)
 
-func create_visual_grid():
+func create_visual_grid() -> void:
 	# Clear existing cubes
 	for cube in grid_cubes:
 		cube.queue_free()
@@ -63,7 +63,7 @@ func create_visual_grid():
 			add_child(cube)
 			grid_cubes.append(cube)
 
-func set_initial_conditions():
+func set_initial_conditions() -> void:
 	match pattern_type:
 		0:  # Spots
 			set_random_perturbations(0.1)
@@ -74,35 +74,35 @@ func set_initial_conditions():
 		3:  # Mazes
 			set_maze_perturbations()
 
-func set_random_perturbations(intensity: float):
+func set_random_perturbations(intensity: float) -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			if randf() < 0.1:  # 10% chance of perturbation
 				grid_a[x][y] += randf_range(-intensity, intensity)
 				grid_b[x][y] += randf_range(-intensity, intensity)
 
-func set_stripe_perturbations():
+func set_stripe_perturbations() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var stripe_factor = sin(x * PI / 8.0) * 0.1
 			grid_a[x][y] += stripe_factor
 			grid_b[x][y] += stripe_factor
 
-func set_wave_perturbations():
+func set_wave_perturbations() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var wave_factor = sin(x * PI / 16.0) * cos(y * PI / 16.0) * 0.1
 			grid_a[x][y] += wave_factor
 			grid_b[x][y] += wave_factor
 
-func set_maze_perturbations():
+func set_maze_perturbations() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var maze_factor = (sin(x * PI / 4.0) + cos(y * PI / 4.0)) * 0.05
 			grid_a[x][y] += maze_factor
 			grid_b[x][y] += maze_factor
 
-func update_simulation():
+func update_simulation() -> void:
 	# Create temporary arrays for the new state
 	var new_a = grid_a.duplicate(true)
 	var new_b = grid_b.duplicate(true)
@@ -145,7 +145,7 @@ func compute_laplacian(grid: Array, x: int, y: int) -> float:
 	
 	return sum
 
-func update_visualization():
+func update_visualization() -> void:
 	for i in range(grid_cubes.size()):
 		var x = i / grid_size
 		var y = i % grid_size
@@ -164,24 +164,29 @@ func update_visualization():
 			if cube.material_override:
 				cube.material_override.albedo_color = color
 
-func start_simulation():
+func start_simulation() -> void:
 	is_running = true
 
-func stop_simulation():
+func stop_simulation() -> void:
 	is_running = false
 
-func reset_pattern():
+func reset_pattern() -> void:
 	simulation_time = 0.0
 	initialize_grid()
 	set_initial_conditions()
 	update_visualization()
 
-func update_parameters():
+func update_parameters() -> void:
 	# This function is called when parameters change
 	# The simulation will use the new parameters on the next update
 	pass
 
-func export_pattern():
+func export_pattern() -> void:
 	# This could save the current pattern as an image or 3D model
 	print("Export functionality - could save pattern as image or 3D model")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

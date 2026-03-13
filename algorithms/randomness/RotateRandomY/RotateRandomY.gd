@@ -12,7 +12,7 @@ var rng := RandomNumberGenerator.new()
 var multimesh_instance: MultiMeshInstance3D = null
 var multimesh: MultiMesh = null
 
-func _ready():
+func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	rng.randomize()
@@ -43,7 +43,7 @@ func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 			return result
 	return null
 
-func rotate_random_y_safe():
+func rotate_random_y_safe() -> void:
 	if not multimesh:
 		return
 

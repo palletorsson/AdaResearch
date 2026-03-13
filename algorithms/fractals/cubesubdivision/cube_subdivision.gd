@@ -39,7 +39,7 @@ var iteration_colors: Array[Color] = [
 ]
 
 
-func _ready():
+func _ready() -> void:
 	print("CubeSubdivision: Ready - Single path recursive mode")
 
 	# Find and color the initial cube
@@ -60,7 +60,7 @@ func _ready():
 		print("CubeSubdivision: Auto-subdivision enabled, will run %d iterations" % max_subdivisions)
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_subdividing:
 		return
 
@@ -83,7 +83,7 @@ func _find_initial_cube() -> Node3D:
 	return null
 
 
-func perform_single_subdivision():
+func perform_single_subdivision() -> void:
 	# Check if we've reached the maximum
 	if subdivision_count >= max_subdivisions:
 		print("CubeSubdivision: Reached maximum subdivisions (%d)" % max_subdivisions)
@@ -219,18 +219,18 @@ func _highlight_target_cube(cube: Node3D) -> void:
 
 
 # Manual control functions
-func start_subdivision():
+func start_subdivision() -> void:
 	is_subdividing = true
 	subdivision_timer = 0.0
 	print("CubeSubdivision: Started manually")
 
 
-func stop_subdivision():
+func stop_subdivision() -> void:
 	is_subdividing = false
 	print("CubeSubdivision: Stopped manually")
 
 
-func reset():
+func reset() -> void:
 	# Remove all cubes except initial
 	for cube in all_cubes:
 		if is_instance_valid(cube):
@@ -245,19 +245,25 @@ func reset():
 	print("CubeSubdivision: Reset")
 
 
-func step():
+func step() -> void:
 	"""Perform a single subdivision step"""
 	perform_single_subdivision()
 
 
-func set_corner(index: int):
+func set_corner(index: int) -> void:
 	"""Change which corner gets subdivided (0-7), disables random"""
 	random_corner = false
 	fixed_corner_index = clamp(index, 0, 7)
 	print("CubeSubdivision: Now subdividing corner %d (random disabled)" % fixed_corner_index)
 
 
-func set_random(enabled: bool):
+func set_random(enabled: bool) -> void:
 	"""Enable or disable random corner selection"""
 	random_corner = enabled
 	print("CubeSubdivision: Random corner selection %s" % ("enabled" if enabled else "disabled"))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

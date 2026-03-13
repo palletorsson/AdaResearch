@@ -274,3 +274,9 @@ func reset() -> void:
 		pend.angular_velocity = 0.0
 	for trail in trail_points:
 		trail.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -180,3 +180,9 @@ func _get_closest_web_color_name(target: Color) -> String:
 			min_distance = distance
 			closest_name = color_name
 	return closest_name
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

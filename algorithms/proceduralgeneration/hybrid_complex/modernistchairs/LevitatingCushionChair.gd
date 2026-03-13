@@ -10,13 +10,13 @@ class_name LevitatingCushionChair
 
 var materials: ModernistMaterials
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	# Main floating cushion
 	var seat_cushion = MeshInstance3D.new()
 	seat_cushion.mesh = BoxMesh.new()
@@ -60,9 +60,14 @@ func generate_chair():
 			field_particle.material_override = materials.get_material("holographic")
 			add_child(field_particle)
 
-func regenerate_with_parameters(_params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary) -> void:
 	for child in get_children():
 		if child != materials:
 			child.queue_free()
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

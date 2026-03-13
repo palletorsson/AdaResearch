@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 10: Final Playthrough Simulation ---")
 	
 	# 1. Setup Game
@@ -44,3 +44,9 @@ func _run():
 		
 	assert(win == true, "Final playthrough failed.")
 	print("--- The Axiom Garden is Ready ---")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

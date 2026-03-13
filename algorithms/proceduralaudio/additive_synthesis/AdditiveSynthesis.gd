@@ -74,7 +74,7 @@ var theme_profiles := {
 }
 
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	create_harmonic_oscillators()
 	create_summation_stage()
@@ -83,7 +83,7 @@ func _ready():
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	# Create audio stream for real-time synthesis
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
@@ -103,7 +103,7 @@ func setup_audio_synthesis():
 	# Connect to audio generation callback
 	print("AdditiveSynthesis: Audio synthesis enabled - %d harmonics at %.1f Hz" % [harmonic_count, fundamental_freq])
 
-func create_harmonic_oscillators():
+func create_harmonic_oscillators() -> void:
 	var osc_parent = $HarmonicOscillators
 	
 	for i in range(harmonic_count):
@@ -153,7 +153,7 @@ func create_harmonic_oscillators():
 			"theme_gain": 1.0
 		})
 
-func create_summation_stage():
+func create_summation_stage() -> void:
 	var sum_parent = $SummationStage
 	
 	# Create nodes showing the summation process
@@ -168,7 +168,7 @@ func create_summation_stage():
 		sum_parent.add_child(sum_node)
 		summation_nodes.append(sum_node)
 
-func create_output_waveform():
+func create_output_waveform() -> void:
 	var wave_parent = $OutputWaveform
 	
 	for i in range(waveform_resolution):
@@ -186,7 +186,7 @@ func calculate_initial_amplitude(harmonic_number: int) -> float:
 	# Default to harmonic series (1/n)
 	return 1.0 / harmonic_number
 
-func setup_materials():
+func setup_materials() -> void:
 	# Harmonic oscillator materials
 	for i in range(harmonic_oscillators.size()):
 		var harmonic = harmonic_oscillators[i]
@@ -249,7 +249,7 @@ func setup_materials():
 	count_material.emission = Color(0.1, 0.1, 0.5, 1.0)
 	$HarmonicCount.material_override = count_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Update fundamental frequency based on theme
@@ -269,7 +269,7 @@ func _process(delta):
 	generate_audio_samples()
 	update_theme_cycle(delta)
 
-func animate_harmonic_oscillators():
+func animate_harmonic_oscillators() -> void:
 	for i in range(harmonic_oscillators.size()):
 		var harmonic = harmonic_oscillators[i]
 		var harmonic_freq = fundamental_freq * harmonic.harmonic_number * (1.0 + harmonic.detune)
@@ -301,7 +301,7 @@ func animate_harmonic_oscillators():
 			var intensity = (current_amplitude * sin(harmonic.phase) + 1.0) * 0.5
 			osc_material.emission = osc_material.albedo_color * (0.2 + intensity * 0.8)
 
-func animate_summation():
+func animate_summation() -> void:
 	# Show progressive summation
 	for i in range(summation_nodes.size()):
 		var sum_node = summation_nodes[i]
@@ -333,7 +333,7 @@ func animate_summation():
 				1.0
 			)
 
-func animate_output_waveform():
+func animate_output_waveform() -> void:
 	# Generate final waveform
 	for i in range(output_waveform.size()):
 		var wave_point = output_waveform[i]
@@ -370,7 +370,7 @@ func animate_output_waveform():
 			)
 			material.emission = material.albedo_color * (0.3 + intensity * 0.7)
 
-func animate_controls():
+func animate_controls() -> void:
 	# Fundamental frequency control
 	var fund_height = (fundamental_freq / 400.0) * 1.5 + 0.5
 	$FundamentalFreq.height = fund_height
@@ -394,7 +394,7 @@ func count_active_harmonics() -> int:
 			count += 1
 	return count
 
-func set_harmonic_series(series_type: String):
+func set_harmonic_series(series_type: String) -> void:
 	# Set different harmonic series
 	for i in range(harmonic_oscillators.size()):
 		var harmonic = harmonic_oscillators[i]
@@ -421,7 +421,7 @@ func set_harmonic_series(series_type: String):
 # Real-time audio generation
 # ============================================================================
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 
@@ -465,7 +465,7 @@ func generate_audio_samples():
 
 		playback.push_frame(Vector2(sample, sample))
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -486,24 +486,30 @@ func apply_theme_profile(theme_name: String):
 	theme_timer = 0.0
 	print("AdditiveSynthesis: activated %s theme" % theme_name)
 
-func apply_theme_to_harmonics():
+func apply_theme_to_harmonics() -> void:
 	var amplitude_map: Dictionary = current_theme_profile.get("amplitude_map", {})
 	for harmonic in harmonic_oscillators:
 		var multiplier = amplitude_map.get(harmonic.harmonic_number, 1.0)
 		harmonic.theme_gain = multiplier
 		harmonic.detune = randf_range(-harmonic_randomness, harmonic_randomness)
 
-func reset_audio_phases():
+func reset_audio_phases() -> void:
 	for i in range(audio_phase.size()):
 		audio_phase[i] = 0.0
 	vibrato_phase = 0.0
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -7,7 +7,7 @@ extends Node3D
 var test_results: Dictionary = {}
 var emitter: ParticleEmitter
 
-func _ready():
+func _ready() -> void:
 	print("\n" + "=".repeat(60))
 	print("PHASE 1 PARTICLE OPTIMIZATION VERIFICATION")
 	print("=".repeat(60) + "\n")
@@ -15,14 +15,14 @@ func _ready():
 	run_all_tests()
 	print_results()
 
-func run_all_tests():
+func run_all_tests() -> void:
 	"""Run all verification tests"""
 	test_cleanup_performance()
 	test_parametric_physics()
 	test_lifespan_frame_independence()
 	test_visual_regression()
 
-func test_cleanup_performance():
+func test_cleanup_performance() -> void:
 	"""Test: O(n) cleanup is faster than O(n²)"""
 	print("TEST 1: Cleanup Performance (O(n) vs O(n²))")
 	
@@ -53,7 +53,7 @@ func test_cleanup_performance():
 	print("  Cleanup time: %.3f ms" % cleanup_time)
 	print("  Status: %s\n" % ("✅ PASS" if passed else "❌ FAIL"))
 
-func test_parametric_physics():
+func test_parametric_physics() -> void:
 	"""Test: Parametric physics controls work correctly"""
 	print("TEST 2: Parametric Physics Controls")
 	
@@ -87,7 +87,7 @@ func test_parametric_physics():
 	
 	particle.queue_free()
 
-func test_lifespan_frame_independence():
+func test_lifespan_frame_independence() -> void:
 	"""Test: Lifespan decay is frame-rate independent"""
 	print("TEST 3: Frame-Rate Independent Lifespan")
 	
@@ -131,7 +131,7 @@ func test_lifespan_frame_independence():
 	particle_60fps.queue_free()
 	particle_30fps.queue_free()
 
-func test_visual_regression():
+func test_visual_regression() -> void:
 	"""Test: Visual appearance unchanged"""
 	print("TEST 4: Visual Regression Check")
 	
@@ -170,7 +170,7 @@ func test_visual_regression():
 	
 	particle.queue_free()
 
-func print_results():
+func print_results() -> void:
 	"""Print final test summary"""
 	print("=".repeat(60))
 	print("TEST SUMMARY")
@@ -204,3 +204,9 @@ func print_results():
 	# Clean up
 	if emitter:
 		emitter.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

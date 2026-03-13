@@ -19,7 +19,7 @@ var queer_colors = [
 	Color(1.0, 0.5, 0.3, 1.0)     # Coral
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -32,7 +32,7 @@ func _ready():
 	paused = false
 	trails_enabled = true
 
-func _create_star_field():
+func _create_star_field() -> void:
 	# Create a background star field using a single MultiMeshInstance3D
 	# instead of 200 individual CSGSphere3D nodes (saves ~200 RIDs).
 	var star_field := get_node_or_null("StarField")
@@ -79,7 +79,7 @@ func _create_star_field():
 	mmi.material_override = star_material
 	star_field.add_child(mmi)
 
-func _initialize_bodies():
+func _initialize_bodies() -> void:
 	var celestial = get_node_or_null("CelestialBodies")
 	if not celestial:
 		return
@@ -89,7 +89,7 @@ func _initialize_bodies():
 	for body in bodies:
 		body.initialize()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if paused:
 		return
 
@@ -108,7 +108,7 @@ func _physics_process(delta):
 	if trails_enabled:
 		_update_trails()
 
-func _apply_gravitational_forces(_delta):
+func _apply_gravitational_forces(_delta) -> void:
 	# Calculate gravitational forces between all pairs of bodies
 	for i in range(bodies.size()):
 		for j in range(i + 1, bodies.size()):
@@ -126,17 +126,17 @@ func _apply_gravitational_forces(_delta):
 				body1.apply_force(force_direction * force_magnitude)
 				body2.apply_force(-force_direction * force_magnitude)
 
-func _update_bodies(delta):
+func _update_bodies(delta) -> void:
 	# Update each body's physics
 	for body in bodies:
 		body.update_physics(delta * time_scale)
 
-func _update_trails():
+func _update_trails() -> void:
 	# Update trails for each body
 	for body in bodies:
 		body.update_trail()
 
-func _connect_ui():
+func _connect_ui() -> void:
 	var reset_btn = get_node_or_null("UI/VBoxContainer/ResetButton")
 	if reset_btn:
 		reset_btn.pressed.connect(_on_reset_pressed)
@@ -150,19 +150,19 @@ func _connect_ui():
 	if mass_slider:
 		mass_slider.value_changed.connect(_on_mass_changed)
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	# Reset all bodies to initial positions (CelestialBody.reset_to_initial
 	# already clears trail_points and rebuilds the ImmediateMesh)
 	for body in bodies:
 		body.reset_to_initial()
 
-func _on_pause_pressed():
+func _on_pause_pressed() -> void:
 	paused = !paused
 	var pause_btn = get_node_or_null("UI/VBoxContainer/PauseButton")
 	if pause_btn:
 		pause_btn.text = "Resume" if paused else "Pause"
 
-func _on_trail_toggle_pressed():
+func _on_trail_toggle_pressed() -> void:
 	trails_enabled = !trails_enabled
 	var trail_btn = get_node_or_null("UI/VBoxContainer/TrailToggle")
 	if trail_btn:
@@ -174,7 +174,7 @@ func _on_trail_toggle_pressed():
 			body.trail_points.clear()
 			body._rebuild_trail_mesh()
 
-func _on_mass_changed(value: float):
+func _on_mass_changed(value: float) -> void:
 	# Update mass of all bodies
 	for body in bodies:
 		body.body_mass = value
@@ -184,7 +184,7 @@ func _on_mass_changed(value: float):
 	if mass_label:
 		mass_label.text = "Mass: " + str(int(value))
 
-func _apply_vibrant_colors():
+func _apply_vibrant_colors() -> void:
 	# Apply vibrant queer colors to celestial bodies.
 	# CelestialBody.set_trail_color() handles both body mesh and trail material.
 	for i in range(bodies.size()):
@@ -193,3 +193,9 @@ func _apply_vibrant_colors():
 			continue
 		var color: Color = queer_colors[i % queer_colors.size()]
 		body.set_trail_color(color)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

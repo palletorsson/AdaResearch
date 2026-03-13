@@ -529,7 +529,7 @@ func _add_utility_cabinet(parent: Node3D, pos: Vector3) -> void:
 
 # ===== Utility Functions =====
 
-func _set_owner_recursive(node: Node, owner: Node):
+func _set_owner_recursive(node: Node, owner: Node) -> void:
 	for child in node.get_children():
 		child.owner = owner
 		_set_owner_recursive(child, owner)
@@ -598,3 +598,9 @@ func _add_preview_camera_and_light(root: Node3D) -> void:
 	env.environment = environment
 	root.add_child(env, true)
 	env.owner = root
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -16,7 +16,7 @@ var colony
 var food_sources = []
 var respawn_timer = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Get references
 	if terrain_path:
 		terrain = get_node(terrain_path)
@@ -28,12 +28,12 @@ func _ready():
 	for i in range(initial_food_sources):
 		create_food_source()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Handle food respawning
 	process_food_respawn(delta)
 
 # Process food respawning
-func process_food_respawn(delta):
+func process_food_respawn(delta) -> void:
 	respawn_timer -= delta
 	
 	if respawn_timer <= 0:
@@ -51,7 +51,7 @@ func process_food_respawn(delta):
 		respawn_timer = food_respawn_time
 
 # Create a new food source
-func create_food_source():
+func create_food_source() -> void:
 	var food_position = get_random_food_position()
 	
 	# Create food source data
@@ -177,7 +177,7 @@ func get_random_food_position() -> Vector3:
 	return position
 
 # Update food source visuals based on amount
-func update_food_visuals():
+func update_food_visuals() -> void:
 	for food in food_sources:
 		if food.visual:
 			# Update size based on amount
@@ -214,3 +214,9 @@ func take_food_from_source(source, amount: float = 1.0) -> float:
 			label.visible = source.amount > 0
 	
 	return taken
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

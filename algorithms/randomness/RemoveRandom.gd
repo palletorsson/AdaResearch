@@ -39,7 +39,7 @@ var _grid_step_z: float = 1.0
 var _use_node_mode: bool = false
 var _target_nodes: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	# Try MultiMesh first
 	if not multimesh_path.is_empty():
 		multimesh_instance = get_node_or_null(multimesh_path)
@@ -73,7 +73,7 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
-func _try_node_mode():
+func _try_node_mode() -> void:
 	"""Fallback: find individual StaticBody3D/MeshInstance3D nodes in range"""
 	_use_node_mode = true
 	_target_nodes.clear()
@@ -95,7 +95,7 @@ func _find_grid_scene() -> Node:
 		current = current.get_parent()
 	return null
 
-func _collect_nodes_in_range(root: Node):
+func _collect_nodes_in_range(root: Node) -> void:
 	"""Recursively find nodes in the target range"""
 	for child in root.get_children():
 		if child == self:
@@ -134,7 +134,7 @@ func _find_named_multimesh_instance(node: Node, target_name: String) -> MultiMes
 			return result
 	return null
 
-func find_all_instances():
+func find_all_instances() -> void:
 	"""Find all instances that match selection criteria"""
 	if not multimesh:
 		return
@@ -155,7 +155,7 @@ func find_all_instances():
 	initial_count = active_instances.size()
 	print("RemoveRandom: Selected %d instances based on mode '%s'" % [initial_count, selection_mode])
 
-func _refresh_selection_reference():
+func _refresh_selection_reference() -> void:
 	if not multimesh_instance or not multimesh:
 		return
 
@@ -209,7 +209,7 @@ func _should_include_instance(pos: Vector3) -> bool:
 					check_pos.z >= z_min and check_pos.z <= z_max)
 	return false
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	"""Called every 0.5 seconds to remove one instance"""
 	if _removal_in_progress:
 		return
@@ -220,7 +220,7 @@ func _on_timer_timeout():
 		await _remove_multimesh_instance()
 	_removal_in_progress = false
 
-func _remove_multimesh_instance():
+func _remove_multimesh_instance() -> void:
 	if active_instances.is_empty():
 		print("No more instances to remove!")
 		timer.stop()
@@ -249,7 +249,7 @@ func _remove_multimesh_instance():
 	var total = maxi(initial_count, 1)
 	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(total)) * 100.0])
 
-func _remove_node():
+func _remove_node() -> void:
 	# Clean up invalid references
 	_target_nodes = _target_nodes.filter(func(n): return is_instance_valid(n))
 	
@@ -290,7 +290,7 @@ func _remove_node():
 	var total = maxi(initial_count, 1)
 	print("Removed: %d/%d (%.1f%%)" % [removed_count, initial_count, (removed_count / float(total)) * 100.0])
 
-func highlight_instance_for_removal(instance_index: int):
+func highlight_instance_for_removal(instance_index: int) -> void:
 	"""Highlight an instance before removing it"""
 	if not multimesh or not multimesh.use_colors:
 		return
@@ -315,7 +315,7 @@ func highlight_instance_for_removal(instance_index: int):
 		multimesh.set_instance_transform(instance_index, t)
 	, 1.2, 1.0, highlight_duration / 4)
 
-func create_removal_effect(position: Vector3):
+func create_removal_effect(position: Vector3) -> void:
 	"""Create visual effect when an instance is removed"""
 	# Simple particle burst
 	var particles = GPUParticles3D.new()
@@ -339,7 +339,7 @@ func create_removal_effect(position: Vector3):
 	await get_tree().create_timer(1.0).timeout
 	particles.queue_free()
 
-func apply_grid_config(config_data: Dictionary):
+func apply_grid_config(config_data: Dictionary) -> void:
 	"""Allow map token config via #key:value syntax."""
 	if config_data.is_empty():
 		return
@@ -420,21 +420,27 @@ func _to_bool(value: Variant, fallback: bool) -> bool:
 	return fallback
 
 # Public API
-func start_removal():
+func start_removal() -> void:
 	"""Start removing instances"""
 	if timer:
 		timer.start()
 		print("Started instance removal")
 
-func stop_removal():
+func stop_removal() -> void:
 	"""Stop removing instances"""
 	if timer:
 		timer.stop()
 		print("Stopped instance removal")
 
-func reset_and_find_instances():
+func reset_and_find_instances() -> void:
 	"""Reset and find all instances again"""
 	stop_removal()
 	find_all_instances()
 	removed_count = 0
 	print("Reset complete. Found %d instances." % active_instances.size())
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

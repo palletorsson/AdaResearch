@@ -66,7 +66,7 @@ var optimization_stats: Dictionary = {
 class FunctionEvaluator:
 	var function_type: String
 	
-	func _init(f_type: String):
+	func _init(f_type: String) -> void:
 		function_type = f_type
 	
 	func evaluate(pos: Vector2) -> float:
@@ -87,7 +87,7 @@ class GradientComputer:
 	var function_eval: FunctionEvaluator
 	var epsilon: float = 0.0001
 	
-	func _init(func_evaluator: FunctionEvaluator):
+	func _init(func_evaluator: FunctionEvaluator) -> void:
 		function_eval = func_evaluator
 	
 	func compute_gradient(pos: Vector2) -> Vector2:
@@ -102,7 +102,7 @@ class GradientComputer:
 		
 		return Vector2(dx, dy)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_camera()
 	initialize_mathematical_components()
@@ -112,14 +112,14 @@ func _ready():
 	if animate_descent:
 		start_gradient_descent()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_optimizing and animate_descent:
 		animation_timer += delta
 		if animation_timer >= iteration_speed:
 			perform_descent_step()
 			animation_timer = 0.0
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -140,7 +140,7 @@ func _input(event):
 			KEY_P:
 				toggle_path_visibility()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Dramatic lighting for 3D surface visualization
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.8
@@ -164,7 +164,7 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func setup_camera():
+func setup_camera() -> void:
 	camera_controller = Node3D.new()
 	add_child(camera_controller)
 	
@@ -173,11 +173,11 @@ func setup_camera():
 	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
-func initialize_mathematical_components():
+func initialize_mathematical_components() -> void:
 	function_evaluator = FunctionEvaluator.new(function_preset)
 	gradient_computer = GradientComputer.new(function_evaluator)
 
-func load_function_preset(preset: String = ""):
+func load_function_preset(preset: String = "") -> void:
 	if preset != "":
 		function_preset = preset
 		objective_function = preset
@@ -200,7 +200,7 @@ func load_function_preset(preset: String = ""):
 	
 	restart_optimization()
 
-func create_surface_visualization():
+func create_surface_visualization() -> void:
 	"""Create 3D surface visualization of the objective function"""
 	clear_previous_visualization()
 	
@@ -213,7 +213,7 @@ func create_surface_visualization():
 	# Create current position marker
 	create_position_marker()
 
-func create_function_surface():
+func create_function_surface() -> void:
 	"""Generate 3D mesh for the objective function surface"""
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
@@ -276,7 +276,7 @@ func create_function_surface():
 	
 	add_child(surface_mesh)
 
-func mark_theoretical_minima():
+func mark_theoretical_minima() -> void:
 	"""Mark known theoretical minima for educational purposes"""
 	var minima_positions: Array[Vector2] = []
 	
@@ -293,7 +293,7 @@ func mark_theoretical_minima():
 		minimum_markers.append(marker)
 		add_child(marker)
 
-func create_position_marker():
+func create_position_marker() -> void:
 	"""Create marker for current optimization position"""
 	current_marker = create_sphere_marker(current_pos, current_position_color, 0.4)
 	add_child(current_marker)
@@ -317,7 +317,7 @@ func create_sphere_marker(pos_2d: Vector2, color: Color, size: float) -> MeshIns
 	
 	return sphere
 
-func start_gradient_descent():
+func start_gradient_descent() -> void:
 	"""Initialize gradient descent optimization"""
 	current_pos = initial_position
 	descent_path.clear()
@@ -342,7 +342,7 @@ func start_gradient_descent():
 	
 	print("Gradient descent started from position: ", current_pos)
 
-func perform_descent_step():
+func perform_descent_step() -> void:
 	"""Perform one step of gradient descent"""
 	if not is_optimizing:
 		return
@@ -395,19 +395,19 @@ func perform_descent_step():
 	
 	print("Step ", current_iteration, ": Position ", current_pos, " Value: ", new_value)
 
-func update_position_marker():
+func update_position_marker() -> void:
 	"""Update the current position marker"""
 	if current_marker:
 		var z_pos = function_evaluator.evaluate(current_pos) * z_scale + 0.5
 		current_marker.position = Vector3(current_pos.x, z_pos, current_pos.y)
 
-func create_gradient_arrow(pos: Vector2, gradient: Vector2):
+func create_gradient_arrow(pos: Vector2, gradient: Vector2) -> void:
 	"""Create visual arrow showing gradient direction"""
 	var arrow = create_arrow_mesh(pos, -gradient.normalized(), gradient_color)
 	gradient_arrows.append(arrow)
 	add_child(arrow)
 
-func create_path_segment(from_pos: Vector2, to_pos: Vector2):
+func create_path_segment(from_pos: Vector2, to_pos: Vector2) -> void:
 	"""Create visual segment of the optimization path"""
 	var segment = create_line_segment(from_pos, to_pos, path_color)
 	path_trail.append(segment)
@@ -469,7 +469,7 @@ func create_line_segment(from_pos: Vector2, to_pos: Vector2, color: Color) -> Me
 	
 	return line
 
-func clear_visualizations():
+func clear_visualizations() -> void:
 	"""Clear previous step visualizations"""
 	for arrow in gradient_arrows:
 		arrow.queue_free()
@@ -479,7 +479,7 @@ func clear_visualizations():
 		segment.queue_free()
 	path_trail.clear()
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear all previous visualization elements"""
 	if surface_mesh:
 		surface_mesh.queue_free()
@@ -493,7 +493,7 @@ func clear_previous_visualization():
 	
 	clear_visualizations()
 
-func restart_optimization():
+func restart_optimization() -> void:
 	"""Restart optimization with current parameters"""
 	clear_previous_visualization()
 	initialize_mathematical_components()
@@ -507,21 +507,21 @@ func restart_optimization():
 	optimization_stats.gradient_calls = 0
 	update_ui()
 
-func toggle_gradient_visibility():
+func toggle_gradient_visibility() -> void:
 	"""Toggle visibility of gradient vectors"""
 	show_gradient_vectors = !show_gradient_vectors
 	for arrow in gradient_arrows:
 		arrow.visible = show_gradient_vectors
 	update_ui()
 
-func toggle_path_visibility():
+func toggle_path_visibility() -> void:
 	"""Toggle visibility of path trail"""
 	show_path_trail = !show_path_trail
 	for segment in path_trail:
 		segment.visible = show_path_trail
 	update_ui()
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive user interface"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -551,7 +551,7 @@ func setup_ui():
 	
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update user interface with current optimization state"""
 	if not ui_display:
 		return
@@ -596,4 +596,10 @@ func update_ui():
 		labels[12].text = ""
 		labels[13].text = "Controls: SPACE=Step, R=Restart, 1-3=Functions"
 		labels[14].text = "G=Toggle Gradients, P=Toggle Path"
-		labels[15].text = "Following steepest descent toward optimal authenticity" 
+		labels[15].text = "Following steepest descent toward optimal authenticity"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

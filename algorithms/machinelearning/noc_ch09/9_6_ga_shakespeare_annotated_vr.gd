@@ -194,3 +194,9 @@ class DNA:
 	static func _random_character() -> String:
 		var code := randi_range(32, 126)
 		return char(code)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -21,20 +21,20 @@ extends Node3D
 var sculptures_data : Array[Dictionary] = []
 var current_sculptures : Array[WFCSculptureGenerator] = []
 
-func _ready():
+func _ready() -> void:
 	if auto_generate_on_start:
 		call_deferred("generate_gallery_page")
 
-func _regenerate(value):
+func _regenerate(value) -> void:
 	if value:
 		generate_gallery_page()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if enable_rotation:
 		for sculpture in current_sculptures:
 			sculpture.rotation.y += rotation_speed * delta
 
-func generate_gallery_page():
+func generate_gallery_page() -> void:
 	print("🎨 Generating sculpture gallery page ", current_page, "...")
 	
 	# Clear existing
@@ -45,13 +45,13 @@ func generate_gallery_page():
 	
 	print("✅ Gallery page ", current_page, " complete with ", current_sculptures.size(), " sculptures")
 
-func clear_gallery():
+func clear_gallery() -> void:
 	for child in get_children():
 		if child is WFCSculptureGenerator or child.has_meta("gallery_item"):
 			child.queue_free()
 	current_sculptures.clear()
 
-func generate_sculpture_variations():
+func generate_sculpture_variations() -> void:
 	var configs = get_page_configurations()
 	
 	for i in range(configs.size()):
@@ -236,7 +236,7 @@ func get_page_configurations() -> Array[Dictionary]:
 	
 	return all_configs
 
-func create_sculpture_from_config(config: Dictionary, pos: Vector3, index: int):
+func create_sculpture_from_config(config: Dictionary, pos: Vector3, index: int) -> void:
 	var sculpture = WFCSculptureGenerator.new()
 	sculpture.name = "Sculpture_%d_%s" % [index, config["name"]]
 	sculpture.position = pos
@@ -268,19 +268,19 @@ func create_sculpture_from_config(config: Dictionary, pos: Vector3, index: int):
 	await sculpture.create_hollow_sculpture()
 	print("  ✅ Complete: ", config["name"])
 
-func next_page():
+func next_page() -> void:
 	current_page += 1
 	if current_page > 1:  # Only 2 pages for now
 		current_page = 0
 	generate_gallery_page()
 
-func previous_page():
+func previous_page() -> void:
 	current_page -= 1
 	if current_page < 0:
 		current_page = 1
 	generate_gallery_page()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_right"):
 		next_page()
 	elif event.is_action_pressed("ui_left"):
@@ -304,3 +304,9 @@ func save_favorite(sculpture: WFCSculptureGenerator):
 
 func export_favorites_json() -> String:
 	return JSON.stringify(sculptures_data, "\t")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

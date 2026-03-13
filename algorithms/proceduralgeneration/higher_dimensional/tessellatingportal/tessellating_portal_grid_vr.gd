@@ -23,10 +23,10 @@ const PORTAL_TYPES = [
 
 var portals: Array = []
 
-func _ready():
+func _ready() -> void:
 	generate_portal_grid()
 
-func generate_portal_grid():
+func generate_portal_grid() -> void:
 	print("Generating %dx%d portal grid..." % [grid_size, grid_size])
 	
 	# Clear existing portals
@@ -109,7 +109,7 @@ func create_portal(type_index: int, position: Vector3, radius: float, thickness:
 	
 	return portal_node
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle regeneration input"""
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
@@ -132,20 +132,8 @@ func _input(event):
 			print("Spacing: %.1f" % spacing)
 			generate_portal_grid()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

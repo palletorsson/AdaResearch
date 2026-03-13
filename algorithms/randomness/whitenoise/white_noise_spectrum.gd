@@ -54,7 +54,7 @@ var _previous_white := 0.0
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
-func _ready():
+func _ready() -> void:
     _setup_multimesh()
     generate_spectrum()
     if Engine.is_editor_hint():
@@ -67,7 +67,7 @@ func _process(_delta):
         return
     _fill_audio_buffer()
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
     if _multi_mesh_instance:
         _multi_mesh_instance.queue_free()
     
@@ -87,7 +87,7 @@ func _setup_multimesh():
     _multi_mesh_instance.multimesh.transform_format = MultiMesh.TRANSFORM_3D
     _multi_mesh_instance.multimesh.use_colors = true
 
-func generate_spectrum():
+func generate_spectrum() -> void:
     if not _multi_mesh_instance:
         return
 
@@ -125,7 +125,7 @@ func generate_spectrum():
             _multi_mesh_instance.multimesh.set_instance_color(idx, color)
             idx += 1
 
-func _apply_seed_state():
+func _apply_seed_state() -> void:
     if seed_value == 0:
         _rng.randomize()
         _audio_rng.randomize()
@@ -133,7 +133,7 @@ func _apply_seed_state():
     _rng.seed = seed_value
     _audio_rng.seed = seed_value + 13579
 
-func _setup_audio_player():
+func _setup_audio_player() -> void:
     _audio_player = AudioStreamPlayer3D.new()
     _audio_player.name = "NoisePreviewPlayer3D"
     _audio_player.unit_size = 2.5
@@ -146,7 +146,7 @@ func _setup_audio_player():
     _audio_generator.buffer_length = audio_buffer_length
     _audio_player.stream = _audio_generator
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
     _control_panel = Node3D.new()
     _control_panel.name = "NoiseAudioControls"
     _control_panel.position = Vector3(0, 0.2, grid_size.y * spacing * 0.5 + 1.2)
@@ -221,7 +221,7 @@ func _add_panel_label(parent: Node3D, text: String, local_pos: Vector3, size: in
     parent.add_child(label)
     return label
 
-func _play_noise_preview(type: NoiseType):
+func _play_noise_preview(type: NoiseType) -> void:
     if not _audio_player:
         return
     _current_audio_noise = type
@@ -232,14 +232,14 @@ func _play_noise_preview(type: NoiseType):
     _audio_stream = _audio_player.get_stream_playback()
     _update_status_label()
 
-func _stop_audio_preview(_button = null):
+func _stop_audio_preview(_button = null) -> void:
     _audio_playing = false
     if _audio_player and _audio_player.playing:
         _audio_player.stop()
     _audio_stream = null
     _update_status_label("Audio: stopped")
 
-func _fill_audio_buffer():
+func _fill_audio_buffer() -> void:
     if not _audio_playing or not _audio_player:
         return
 
@@ -286,7 +286,7 @@ func _generate_noise_sample(type: NoiseType) -> float:
 
     return clampf(value * audio_gain, -0.95, 0.95)
 
-func _reset_audio_filter_state():
+func _reset_audio_filter_state() -> void:
     _pink_b0 = 0.0
     _pink_b1 = 0.0
     _pink_b2 = 0.0
@@ -312,7 +312,7 @@ func _noise_type_name(type: NoiseType) -> String:
             return "VIOLET"
     return "WHITE"
 
-func _update_status_label(forced_text: String = ""):
+func _update_status_label(forced_text: String = "") -> void:
     if not _status_label:
         return
     if forced_text != "":
@@ -322,6 +322,12 @@ func _update_status_label(forced_text: String = ""):
     else:
         _status_label.text = "Audio: stopped"
 
-func _notification(what):
+func _notification(what: int) -> void:
     if what == NOTIFICATION_EXIT_TREE:
         _stop_audio_preview()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -66,7 +66,7 @@ class Metaball:
 	var drift_amount: float
 	var phase_offset: float
 	
-	func _init(pos: Vector3, str: float, rad: float):
+	func _init(pos: Vector3, str: float, rad: float) -> void:
 		position = pos
 		strength = str
 		target_strength = str
@@ -86,7 +86,7 @@ class Metaball:
 			return strength * 10000.0
 		return strength * radius * radius / dist_sq
 	
-	func update(delta: float, bounds: Vector3):
+	func update(delta: float, bounds: Vector3) -> void:
 		animation_phase += delta
 		
 		# Vertical: full height bobbing like a lava lamp
@@ -101,7 +101,7 @@ class Metaball:
 		# Gentle strength pulsing
 		strength = target_strength * (0.92 + 0.08 * sin(animation_phase * 0.6 + phase_offset))
 
-func _ready():
+func _ready() -> void:
 	setup_marching_cubes_tables()
 	_precompute_grid_positions()
 	setup_scene()
@@ -113,7 +113,7 @@ func _ready():
 		if max_steps > 0:
 			start_stepping()
 
-func _precompute_grid_positions():
+func _precompute_grid_positions() -> void:
 	# Pre-compute axis positions once — no per-frame math for grid coords
 	grid_positions_x.resize(grid_size.x)
 	grid_positions_y.resize(grid_size.y)
@@ -128,7 +128,7 @@ func _precompute_grid_positions():
 	for i in grid_size.z:
 		grid_positions_z[i] = (i - half_z) * cell_size
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create mesh instance with reusable ArrayMesh
 	mesh_instance = MeshInstance3D.new()
 	array_mesh = ArrayMesh.new()
@@ -159,7 +159,7 @@ func setup_scene():
 			material.rim_tint = 0.4
 			mesh_instance.material_override = material
 
-func generate_metaballs():
+func generate_metaballs() -> void:
 	metaballs.clear()
 	influence_radius_sq.clear()
 	var bounds = Vector3(grid_size) * cell_size * 0.5
@@ -179,7 +179,7 @@ func generate_metaballs():
 	
 	_update_influence_radii()
 
-func _update_influence_radii():
+func _update_influence_radii() -> void:
 	# Max distance where a metaball's field > min_threshold
 	# Beyond this, the contribution is negligible
 	var min_threshold = iso_level * 0.05  # 5% of iso — anything less won't matter
@@ -190,7 +190,7 @@ func _update_influence_radii():
 		var max_dist = mb.radius * sqrt(mb.target_strength / min_threshold)
 		influence_radius_sq[i] = max_dist * max_dist
 
-func generate_mesh():
+func generate_mesh() -> void:
 	var start_time = Time.get_ticks_usec()
 	var num_metaballs = metaballs.size()
 	
@@ -263,7 +263,7 @@ func generate_mesh():
 	
 	generation_time = (Time.get_ticks_usec() - start_time) / 1000.0
 
-func _march_cube_fast(x: int, y: int, z: int, stride_y: int, stride_z: int, vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array):
+func _march_cube_fast(x: int, y: int, z: int, stride_y: int, stride_z: int, vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array) -> void:
 	# Inline field lookups — no function call overhead, no Vector3i allocations
 	var base_idx = z * stride_z + y * stride_y + x
 	var cv0 = field_values[base_idx]
@@ -358,7 +358,7 @@ const REGEN_MIN: float = 0.1
 const REGEN_MAX: float = 0.5
 const TIME_BUDGET_MS: float = 15.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if metaballs.size() == 0 or is_stopped:
 		return
 	
@@ -398,7 +398,7 @@ func _process(delta):
 
 # --- Public step API (for future player interface) ---
 
-func start_stepping():
+func start_stepping() -> void:
 	"""Begin stepping. Resets step counter."""
 	current_step = 0
 	stepping = true
@@ -406,7 +406,7 @@ func start_stepping():
 	step_timer = 0.0
 	print("Metaball stepping started (max %d steps)" % max_steps)
 
-func do_single_step():
+func do_single_step() -> void:
 	"""Execute one step on demand (for player button)."""
 	if metaballs.size() == 0:
 		return
@@ -418,7 +418,7 @@ func do_single_step():
 	current_step += 1
 	print("Metaball manual step %d" % current_step)
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset metaballs to fresh random positions."""
 	current_step = 0
 	stepping = false
@@ -434,7 +434,7 @@ func is_simulation_stopped() -> bool:
 	return is_stopped
 
 # Marching cubes lookup tables setup — complete Paul Bourke tables
-func setup_marching_cubes_tables():
+func setup_marching_cubes_tables() -> void:
 	edge_table = PackedInt32Array([
 		0x0,0x109,0x203,0x30a,0x406,0x50f,0x605,0x70c,0x80c,0x905,0xa0f,0xb06,0xc0a,0xd03,0xe09,0xf00,
 		0x190,0x99,0x393,0x29a,0x596,0x49f,0x795,0x69c,0x99c,0x895,0xb9f,0xa96,0xd9a,0xc93,0xf99,0xe90,
@@ -719,17 +719,23 @@ func setup_marching_cubes_tables():
 		tri_table.append(PackedInt32Array(t[i]))
 
 # Public interface functions
-func regenerate():
+func regenerate() -> void:
 	generate_metaballs()
 	generate_mesh()
 
-func set_metaball_count(count: int):
+func set_metaball_count(count: int) -> void:
 	metaball_count = count
 	regenerate()
 
-func set_iso_level(level: float):
+func set_iso_level(level: float) -> void:
 	iso_level = level
 	generate_mesh()
 
-func set_animation_speed(speed: float):
+func set_animation_speed(speed: float) -> void:
 	animation_speed = speed
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -6,19 +6,19 @@ var size = 5.0
 
 var pyramid_material: ShaderMaterial
 
-func _ready():
+func _ready() -> void:
 	_setup_material()
 	generate_sierpinski(Vector3(0, 0, 0), max_level, size)
 	# Unfreeze after a delay
 	var timer = get_tree().create_timer(2.0)
 	timer.timeout.connect(_on_Timer_timeout)
 
-func _setup_material():
+func _setup_material() -> void:
 	var shader = preload("res://algorithms/fractals/sierpinski_pyramid/pyramid_shader.gdshader")
 	pyramid_material = ShaderMaterial.new()
 	pyramid_material.shader = shader
 
-func generate_sierpinski(position, level, current_size):
+func generate_sierpinski(position, level, current_size) -> void:
 	if level == 0:
 		var rigid_body = RigidBody3D.new()
 		rigid_body.position = position
@@ -56,6 +56,12 @@ func generate_sierpinski(position, level, current_size):
 		var new_pos = position + positions[i] * new_size
 		generate_sierpinski(new_pos, new_level, new_size)
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	for body in bodies:
 		body.freeze = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

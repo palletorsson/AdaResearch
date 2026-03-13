@@ -34,7 +34,7 @@ const COLOR_SCALE = Color(0.2, 0.2, 0.8)      # Blue
 const COLOR_INACTIVE = Color(0.3, 0.3, 0.3)   # Gray
 const COLOR_HIGHLIGHT = Color(1.0, 0.9, 0.2)  # Yellow
 
-func _ready():
+func _ready() -> void:
 	# Create matrix labels dynamically
 	create_matrix_labels()
 	
@@ -47,7 +47,7 @@ func _ready():
 	matrix_display.visible = show_matrix
 	vector_display.visible = show_vectors
 
-func create_matrix_labels():
+func create_matrix_labels() -> void:
 	# Create 4x4 grid of labels for matrix display
 	var cell_size = 0.1
 	var start_x = -0.15
@@ -68,7 +68,7 @@ func create_matrix_labels():
 			matrix_display.add_child(label)
 			matrix_labels.append(label)
 
-func connect_mode_buttons():
+func connect_mode_buttons() -> void:
 	# Connect the push button signals
 	var button_t = mode_buttons.get_node_or_null("ButtonT/InteractableAreaButton")
 	var button_r = mode_buttons.get_node_or_null("ButtonR/InteractableAreaButton")
@@ -81,20 +81,20 @@ func connect_mode_buttons():
 	if button_s and button_s.has_signal("button_pressed"):
 		button_s.button_pressed.connect(_on_mode_scale)
 
-func _on_mode_translate():
+func _on_mode_translate() -> void:
 	set_mode(Mode.TRANSLATE)
 
-func _on_mode_rotate():
+func _on_mode_rotate() -> void:
 	set_mode(Mode.ROTATE)
 
-func _on_mode_scale():
+func _on_mode_scale() -> void:
 	set_mode(Mode.SCALE)
 
-func set_mode(mode: Mode):
+func set_mode(mode: Mode) -> void:
 	current_mode = mode
 	update_mode_visuals()
 
-func update_mode_visuals():
+func update_mode_visuals() -> void:
 	# Update grabbable object emission color
 	if cube_mesh and cube_mesh.material_override:
 		cube_mesh.material_override.emission = get_mode_color()
@@ -106,20 +106,20 @@ func get_mode_color() -> Color:
 		Mode.SCALE: return COLOR_SCALE
 	return Color.WHITE
 
-func _on_picked_up(_pickable):
+func _on_picked_up(_pickable) -> void:
 	is_grabbed = true
 	original_transform = grabbable_object.global_transform
 	ghost_object.global_transform = original_transform
 	ghost_object.visible = show_ghost
 
-func _on_dropped(_pickable):
+func _on_dropped(_pickable) -> void:
 	is_grabbed = false
 	
 	# Snap rotation if enabled
 	if snap_rotation_to_90 and current_mode == Mode.ROTATE:
 		snap_to_90_degrees()
 
-func snap_to_90_degrees():
+func snap_to_90_degrees() -> void:
 	var euler = grabbable_object.rotation_degrees
 	grabbable_object.rotation_degrees = Vector3(
 		snappedf(euler.x, 90.0),
@@ -131,7 +131,7 @@ func _process(_delta):
 	update_matrix_display()
 	update_vector_display()
 
-func update_matrix_display():
+func update_matrix_display() -> void:
 	if not show_matrix or matrix_labels.is_empty():
 		return
 	
@@ -193,7 +193,7 @@ func get_highlight_cells() -> Array[Vector2i]:
 	
 	return cells
 
-func update_vector_display():
+func update_vector_display() -> void:
 	if not show_vectors or not vector_label:
 		return
 	
@@ -253,3 +253,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	update_mode_visuals()
 	matrix_display.visible = show_matrix
 	vector_display.visible = show_vectors
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -159,3 +159,9 @@ func _canvas_pixel_to_world(pixel: Vector2, height_offset: float) -> Vector3:
 	var local_x: float = (pixel.x - half_w) * pixel_size
 	var local_y: float = (half_h - pixel.y) * pixel_size
 	return sprite_3d.to_global(Vector3(local_x, local_y, height_offset))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -5,7 +5,7 @@
 
 var time_offset: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Random start time for variety
 	time_offset = randf() * 10.0
 	

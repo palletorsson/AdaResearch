@@ -8,12 +8,12 @@ var demo_sounds: Array[Dictionary] = []
 @onready var timeline_scene = preload("res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn")
 var timeline_instance: Control
 
-func _ready():
+func _ready() -> void:
 	setup_demo_sounds()
 	create_timeline()
 	setup_demo_ui()
 
-func setup_demo_sounds():
+func setup_demo_sounds() -> void:
 	# Define some demo sound patterns
 	demo_sounds = [
 		{
@@ -43,14 +43,14 @@ func setup_demo_sounds():
 		}
 	]
 
-func create_timeline():
+func create_timeline() -> void:
 	timeline_instance = timeline_scene.instantiate()
 	add_child(timeline_instance)
 	
 	# Position the timeline
 	timeline_instance.position = Vector2(0, 100)
 
-func setup_demo_ui():
+func setup_demo_ui() -> void:
 	# Create demo control buttons
 	var demo_panel = VBoxContainer.new()
 	demo_panel.position = Vector2(20, 20)
@@ -77,11 +77,11 @@ func setup_demo_ui():
 		button.pressed.connect(_on_demo_button_pressed.bind(i))
 		button_container.add_child(button)
 
-func _on_demo_button_pressed(demo_index: int):
+func _on_demo_button_pressed(demo_index: int) -> void:
 	if demo_index < demo_sounds.size():
 		generate_demo_sound(demo_sounds[demo_index])
 
-func generate_demo_sound(sound_config: Dictionary):
+func generate_demo_sound(sound_config: Dictionary) -> void:
 	print("Generating demo sound: ", sound_config["name"])
 	
 	match sound_config["type"]:
@@ -94,7 +94,7 @@ func generate_demo_sound(sound_config: Dictionary):
 		"noise":
 			generate_noise_burst(sound_config)
 
-func generate_frequency_sweep(config: Dictionary):
+func generate_frequency_sweep(config: Dictionary) -> void:
 	var player = AudioStreamPlayer.new()
 	add_child(player)
 	
@@ -141,7 +141,7 @@ func generate_frequency_sweep(config: Dictionary):
 	timer.timeout.connect(_cleanup_player.bind(player, timer))
 	timer.start()
 
-func generate_drum_pattern(config: Dictionary):
+func generate_drum_pattern(config: Dictionary) -> void:
 	var pattern = config["pattern"]
 	var tempo = config["tempo"]
 	var beat_duration = 60.0 / tempo / 4.0  # 16th notes
@@ -151,7 +151,7 @@ func generate_drum_pattern(config: Dictionary):
 			var delay = i * beat_duration
 			call_deferred("_play_drum_hit", delay)
 
-func _play_drum_hit(delay: float):
+func _play_drum_hit(delay: float) -> void:
 	await get_tree().create_timer(delay).timeout
 	
 	var player = AudioStreamPlayer.new()
@@ -187,7 +187,7 @@ func _play_drum_hit(delay: float):
 	timer.timeout.connect(_cleanup_player.bind(player, timer))
 	timer.start()
 
-func generate_chord_progression(config: Dictionary):
+func generate_chord_progression(config: Dictionary) -> void:
 	var frequencies = config["frequencies"]
 	var duration = config["duration"]
 	
@@ -195,7 +195,7 @@ func generate_chord_progression(config: Dictionary):
 		var chord_delay = i * duration
 		call_deferred("_play_chord", frequencies[i], duration, chord_delay)
 
-func _play_chord(freqs: Array, duration: float, delay: float):
+func _play_chord(freqs: Array, duration: float, delay: float) -> void:
 	await get_tree().create_timer(delay).timeout
 	
 	# Play multiple frequencies simultaneously
@@ -234,7 +234,7 @@ func _play_chord(freqs: Array, duration: float, delay: float):
 	timer.timeout.connect(_cleanup_players.bind(players, timer))
 	timer.start()
 
-func generate_noise_burst(config: Dictionary):
+func generate_noise_burst(config: Dictionary) -> void:
 	var player = AudioStreamPlayer.new()
 	add_child(player)
 	
@@ -267,14 +267,14 @@ func generate_noise_burst(config: Dictionary):
 	timer.timeout.connect(_cleanup_player.bind(player, timer))
 	timer.start()
 
-func _cleanup_player(player: AudioStreamPlayer, timer: Timer):
+func _cleanup_player(player: AudioStreamPlayer, timer: Timer) -> void:
 	if player:
 		player.stop()
 		player.queue_free()
 	if timer:
 		timer.queue_free()
 
-func _cleanup_players(players: Array, timer: Timer):
+func _cleanup_players(players: Array, timer: Timer) -> void:
 	for player in players:
 		if player:
 			player.stop()
@@ -283,7 +283,7 @@ func _cleanup_players(players: Array, timer: Timer):
 		timer.queue_free()
 
 # Keyboard shortcuts for quick testing
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:
@@ -294,3 +294,9 @@ func _unhandled_input(event):
 				_on_demo_button_pressed(2)
 			KEY_4:
 				_on_demo_button_pressed(3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

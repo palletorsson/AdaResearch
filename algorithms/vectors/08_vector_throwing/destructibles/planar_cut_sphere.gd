@@ -24,7 +24,7 @@ class SphereData:
 	var vertices: PackedVector3Array
 	var center: Vector3
 
-	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, level: int, verts: PackedVector3Array, pos: Vector3):
+	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, level: int, verts: PackedVector3Array, pos: Vector3) -> void:
 		mesh_instance = mesh
 		rigid_body = rb
 		area = area_node
@@ -305,3 +305,9 @@ func _shatter_all_pieces(impact_velocity: Vector3, impact_point: Vector3) -> voi
 
 func get_pieces_count() -> int:
 	return pieces.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

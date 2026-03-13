@@ -21,7 +21,7 @@ signal generation_started
 signal generation_complete
 signal tile_placed(position, tile_id)
 
-func _ready():
+func _ready() -> void:
 	# Initialize solver
 	solver = WFCSolver.new(Vector3(grid_width, grid_height, grid_depth), generation_seed)
 
@@ -40,13 +40,13 @@ func _ready():
 	if auto_generate:
 		call_deferred("generate")
 
-func add_tile_type(tile: WFCTile):
+func add_tile_type(tile: WFCTile) -> void:
 	"""Add a tile type to the tileset"""
 	tile_types[tile.tile_id] = tile
 	if solver:
 		solver.add_tile_type(tile)
 
-func setup_default_tiles():
+func setup_default_tiles() -> void:
 	"""Create a simple default tileset for testing"""
 	# Empty tile
 	var empty = WFCTile.new("empty", 2.0)
@@ -101,14 +101,14 @@ func generate():
 
 	return success
 
-func clear_grid():
+func clear_grid() -> void:
 	"""Clear all existing tiles"""
 	for node in tile_nodes.values():
 		if is_instance_valid(node):
 			node.queue_free()
 	tile_nodes.clear()
 
-func _on_tile_collapsed(position: Vector3, tile_id: String):
+func _on_tile_collapsed(position: Vector3, tile_id: String) -> void:
 	"""Called when a tile is collapsed by the solver"""
 	emit_signal("tile_placed", position, tile_id)
 
@@ -118,12 +118,12 @@ func _on_tile_collapsed(position: Vector3, tile_id: String):
 		# Small delay for animation
 		await get_tree().create_timer(animation_speed).timeout
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	"""Called when generation is complete"""
 	emit_signal("generation_complete")
 	print("WFC: Generation complete - ", tile_nodes.size(), " tiles placed")
 
-func instantiate_all_tiles():
+func instantiate_all_tiles() -> void:
 	"""Instantiate all tiles from the solved grid"""
 	var collapsed_grid = solver.get_collapsed_grid()
 
@@ -131,7 +131,7 @@ func instantiate_all_tiles():
 		var tile_id = collapsed_grid[pos]
 		instantiate_tile(pos, tile_id)
 
-func instantiate_tile(pos: Vector3, tile_id: String):
+func instantiate_tile(pos: Vector3, tile_id: String) -> void:
 	"""Create a 3D tile at the given position"""
 	if not tile_types.has(tile_id):
 		return
@@ -152,6 +152,12 @@ func get_tile_at(pos: Vector3) -> WFCTile3D:
 		return tile_nodes[pos]
 	return null
 
-func regenerate():
+func regenerate() -> void:
 	"""Clear and regenerate the grid"""
 	generate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

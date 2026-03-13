@@ -13,7 +13,7 @@ var stop_timer: Timer
 var ui_label: Label
 var is_stopped: bool = false
 
-func _ready():
+func _ready() -> void:
 	find_target_soft_body()
 	setup_stop_timer()
 	setup_ui()
@@ -23,7 +23,7 @@ func _ready():
 	
 	print("ðŸŽ¯ SoftBody Stopper ready - target: ", target_soft_body.name if target_soft_body else "NOT FOUND")
 
-func find_target_soft_body():
+func find_target_soft_body() -> void:
 	"""Find the soft body to control"""
 	
 	# Method 1: Try to find by scene path
@@ -81,7 +81,7 @@ func find_nodes_of_type(node: Node, node_type) -> Array:
 	
 	return found_nodes
 
-func setup_stop_timer():
+func setup_stop_timer() -> void:
 	"""Setup the timer to stop the soft body"""
 	
 	stop_timer = Timer.new()
@@ -91,7 +91,7 @@ func setup_stop_timer():
 	stop_timer.timeout.connect(_on_stop_timeout)
 	add_child(stop_timer)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Setup UI display"""
 	
 	if not show_timer:
@@ -108,7 +108,7 @@ func setup_ui():
 	canvas.add_child(ui_label)
 	add_child(canvas)
 
-func start_timer():
+func start_timer() -> void:
 	"""Start the stop timer"""
 	
 	if not target_soft_body:
@@ -134,13 +134,13 @@ func _process(_delta):
 		else:
 			ui_label.add_theme_color_override("font_color", Color.WHITE)
 
-func _on_stop_timeout():
+func _on_stop_timeout() -> void:
 	"""Called when timer expires - stop the soft body"""
 	
 	print("â° TIMEOUT - Stopping soft body!")
 	stop_soft_body()
 
-func stop_soft_body():
+func stop_soft_body() -> void:
 	"""Stop the target soft body"""
 	
 	if not target_soft_body:
@@ -163,7 +163,7 @@ func stop_soft_body():
 		ui_label.text = "SoftBody STOPPED!"
 		ui_label.add_theme_color_override("font_color", Color.RED)
 
-func freeze_soft_body():
+func freeze_soft_body() -> void:
 	"""Stop the soft body using SoftBody3D-compatible methods"""
 	
 	# Method 1: Disable physics processing entirely
@@ -200,7 +200,7 @@ func _get_soft_body_material(soft_body: SoftBody3D, surface_index: int = 0) -> M
 	
 	return null
 
-func disable_soft_body():
+func disable_soft_body() -> void:
 	"""Alternative: Disable physics processing"""
 	
 	target_soft_body.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -213,7 +213,7 @@ func disable_soft_body():
 	
 	print("ðŸš« Soft body disabled!")
 
-func high_damping_stop():
+func high_damping_stop() -> void:
 	"""Alternative: Use high damping to gradually stop"""
 	
 	target_soft_body.damping_coefficient = 10.0
@@ -221,7 +221,7 @@ func high_damping_stop():
 	
 	print("ðŸŒ Applied high damping - soft body will slow down gradually")
 
-func restart_soft_body():
+func restart_soft_body() -> void:
 	"""Restart/unfreeze the soft body"""
 	
 	if not target_soft_body or not is_stopped:
@@ -265,7 +265,7 @@ func restart_soft_body():
 	
 	print("âœ… Soft body restarted!")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for manual control"""
 	
 	if event.is_action_pressed("ui_accept"):  # Space key
@@ -299,12 +299,12 @@ func _input(event):
 
 # Public functions for external control
 
-func stop_now():
+func stop_now() -> void:
 	"""Public function to stop immediately"""
 	stop_timer.stop()
 	stop_soft_body()
 
-func set_timer(seconds: float):
+func set_timer(seconds: float) -> void:
 	"""Public function to set timer duration"""
 	stop_after_seconds = seconds
 	if stop_timer:
@@ -313,3 +313,9 @@ func set_timer(seconds: float):
 func get_soft_body() -> SoftBody3D:
 	"""Public function to get reference to the soft body"""
 	return target_soft_body
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

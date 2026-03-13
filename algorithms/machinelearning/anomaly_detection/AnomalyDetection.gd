@@ -41,14 +41,14 @@ var _mean := Vector2.ZERO
 var _std := Vector2.ONE
 var _max_distance := 1.0
 
-func _ready():
+func _ready() -> void:
 	_rng.seed = dataset_seed
 	_generate_samples()
 	_build_points()
 	_refresh_statistics()
 	run_detection()
 
-func _generate_samples():
+func _generate_samples() -> void:
 	_samples.clear()
 	for i in range(max(10, normal_sample_count)):
 		var pos := Vector2(
@@ -70,7 +70,7 @@ func _generate_samples():
 			"tag": "seeded_anomaly"
 		})
 
-func _build_points():
+func _build_points() -> void:
 	for child in data_root.get_children():
 		child.queue_free()
 
@@ -95,7 +95,7 @@ func _build_points():
 		sample["mesh"] = mesh_instance
 		sample["material"] = material
 
-func run_detection():
+func run_detection() -> void:
 	_refresh_statistics()
 	var threshold := _active_threshold()
 	var anomaly_count := 0
@@ -154,7 +154,7 @@ func reset_dataset(new_seed: int = dataset_seed) -> void:
 	_refresh_statistics()
 	run_detection()
 
-func _refresh_statistics():
+func _refresh_statistics() -> void:
 	if _samples.is_empty():
 		_mean = Vector2.ZERO
 		_std = Vector2.ONE
@@ -281,3 +281,9 @@ func _mode_color() -> Color:
 
 func _total_samples() -> int:
 	return _samples.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

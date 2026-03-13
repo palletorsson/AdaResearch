@@ -20,11 +20,11 @@ var trace_image: Image = Image.new()  # Image to store the sine wave
 var trace_texture: ImageTexture = ImageTexture.new()  # Texture to render the sine wave
 @onready var drawtexture = $"../../DrawTexture"
 
-func _ready():
+func _ready() -> void:
 	# Initialize the trace image
 	init_trace_image()
 
-func init_trace_image():
+func init_trace_image() -> void:
 	# Define the dimensions for the trace image
 	var width = 800  # Adjust to your desired size
 	var height = 800
@@ -36,7 +36,7 @@ func init_trace_image():
 	
 	update_material(trace_texture)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# Update angular motion
 	angle_velocity += angle_acceleration * delta
 	angle += angular_velocity * delta
@@ -57,7 +57,7 @@ func _process(delta: float):
 	# Trigger a redraw for the _draw() function
 	queue_redraw()
 
-func _draw():
+func _draw() -> void:
 	# Translate to the center of the canvas
 	var center = Vector2(get_viewport_rect().size.x / 2, get_viewport_rect().size.y / 2)
 
@@ -80,7 +80,7 @@ func _draw():
 	draw_circle(right_pos, 5, circle_color)  # Right point
 	draw_circle(left_pos, 5, circle_color)  # Left point
 
-func draw_to_trace():
+func draw_to_trace() -> void:
 	# Map the image center
 	var image_center = Vector2(trace_image.get_width() / 2, trace_image.get_height() / 2)
 
@@ -97,14 +97,14 @@ func draw_to_trace():
 	trace_texture = ImageTexture.create_from_image(trace_image)
 	update_material(trace_texture)
 
-func draw_line_to_image(start: Vector2, end: Vector2, color: Color):
+func draw_line_to_image(start: Vector2, end: Vector2, color: Color) -> void:
 	var diff = end - start
 	var length = diff.length()
 	for i in range(int(length)):
 		var lerp_point = start + diff.normalized() * i
 		trace_image.set_pixelv(lerp_point, color)
 
-func update_material(tex: ImageTexture):
+func update_material(tex: ImageTexture) -> void:
 	if drawtexture.material_override is ShaderMaterial:
 		var shader_material = drawtexture.material_override as ShaderMaterial
 		shader_material.set_shader_parameter("texture_albedo", tex)

@@ -7,7 +7,7 @@
 var _label: Label3D
 var _player: Node3D
 
-func _ready():
+func _ready() -> void:
 	_create_label()
 
 func _process(_delta):
@@ -31,7 +31,7 @@ func _process(_delta):
 		
 		# Optional: Turn to face camera (billboard is on)
 
-func _create_label():
+func _create_label() -> void:
 	if _label:
 		_label.queue_free()
 		
@@ -43,3 +43,9 @@ func _create_label():
 	_label.modulate = text_color
 	_label.text = "Searching for Player..."
 	add_child(_label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

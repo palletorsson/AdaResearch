@@ -84,11 +84,11 @@ var flowchart_data = {
 var node_buttons = {}
 var connections = []
 
-func _ready():
+func _ready() -> void:
 	_setup_ui()
 	_create_flowchart()
 
-func _setup_ui():
+func _setup_ui() -> void:
 	# Set up the main control
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
@@ -109,7 +109,7 @@ func _setup_ui():
 	flow_container.parent_flowchart = self
 	scroll_container.add_child(flow_container)
 
-func _create_flowchart():
+func _create_flowchart() -> void:
 	# Create nodes
 	for node_id in flowchart_data.keys():
 		var node_data = flowchart_data[node_id]
@@ -195,14 +195,14 @@ func _create_pressed_style(base_color: Color) -> StyleBoxFlat:
 
 
 
-func _on_node_pressed(node_id: String):
+func _on_node_pressed(node_id: String) -> void:
 	print("Pressed node: %s" % node_id)
 	var node_data = flowchart_data.get(node_id, {})
 	
 	# Create info popup
 	_show_node_info(node_id, node_data)
 
-func _show_node_info(node_id: String, node_data: Dictionary):
+func _show_node_info(node_id: String, node_data: Dictionary) -> void:
 	var popup = AcceptDialog.new()
 	popup.title = "Algorithm Info"
 	
@@ -222,7 +222,7 @@ func _show_node_info(node_id: String, node_data: Dictionary):
 	# Auto-remove popup after showing
 	popup.confirmed.connect(popup.queue_free)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
@@ -242,7 +242,7 @@ class FlowChartCanvas:
 	
 	var parent_flowchart: AlgorithmFlowChart2D
 	
-	func _draw():
+	func _draw() -> void:
 		if not parent_flowchart:
 			return
 			
@@ -268,3 +268,9 @@ class FlowChartCanvas:
 				
 				draw_line(to_pos, arrow_point1, parent_flowchart.CONNECTION_COLOR, parent_flowchart.CONNECTION_WIDTH)
 				draw_line(to_pos, arrow_point2, parent_flowchart.CONNECTION_COLOR, parent_flowchart.CONNECTION_WIDTH)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

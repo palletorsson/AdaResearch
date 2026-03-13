@@ -89,3 +89,9 @@ func generate_copies() -> void:
 		if alternating_colors:
 			mm.set_instance_color(k, color_a if k % 2 == 0 else color_b)
 		k += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

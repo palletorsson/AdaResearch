@@ -162,3 +162,9 @@ func get_active_frequencies() -> Array[float]:
 		if bar.is_resonating:
 			active_freqs.append(bar.frequency)
 	return active_freqs
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

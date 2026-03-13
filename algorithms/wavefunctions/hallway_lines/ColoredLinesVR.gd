@@ -366,3 +366,9 @@ func _animate_shader_properties() -> void:
 func _set_shader_param(material: ShaderMaterial, param: StringName, value: float) -> void:
 	if is_instance_valid(material):
 		material.set_shader_parameter(param, value)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

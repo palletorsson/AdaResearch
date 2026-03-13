@@ -10,7 +10,7 @@ var dna: Dictionary
 var lifespan: float
 var age: float = 0.0
 
-func _init(pos: Vector2, dna_values: Dictionary = {}):
+func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
 	position = pos  # Using the built-in position property from Node2D
 	
 	# Default DNA values if none provided
@@ -43,7 +43,7 @@ func _process(_delta: float):
 	# Not needed since we'll handle updates through the ecosystem
 	pass
 
-func update(delta: float):
+func update(delta: float) -> void:
 	age += delta
 	health -= delta / lifespan  # Gradually lose health over lifespan
 	
@@ -57,7 +57,7 @@ func update(delta: float):
 	if position.x > viewport_size.x: position.x = 0
 	if position.y > viewport_size.y: position.y = 0
 
-func apply_force(force: Vector2):
+func apply_force(force: Vector2) -> void:
 	velocity += force
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed

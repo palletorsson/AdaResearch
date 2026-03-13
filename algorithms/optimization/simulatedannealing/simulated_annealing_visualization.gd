@@ -71,10 +71,10 @@ var accepted_moves: int = 0
 var rejected_moves: int = 0
 var improvements: int = 0
 
-func _init():
+func _init() -> void:
 	name = "SimulatedAnnealing_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	initialize_optimization_problem()
@@ -83,7 +83,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_optimization")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for Simulated Annealing visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -106,14 +106,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for optimization animation"""
 	optimization_timer = Timer.new()
 	optimization_timer.wait_time = step_delay
 	optimization_timer.timeout.connect(_on_optimization_timer_timeout)
 	add_child(optimization_timer)
 
-func initialize_optimization_problem():
+func initialize_optimization_problem() -> void:
 	"""Initialize the optimization problem"""
 	# Generate random starting solution
 	current_solution.clear()
@@ -227,7 +227,7 @@ func evaluate_custom_landscape(solution: Array) -> float:
 	
 	return energy
 
-func create_energy_landscape():
+func create_energy_landscape() -> void:
 	"""Create 3D visualization of the energy landscape"""
 	if not show_energy_landscape or problem_dimensions != 2:
 		return
@@ -320,7 +320,7 @@ func create_landscape_mesh() -> ArrayMesh:
 	
 	return array_mesh
 
-func start_optimization():
+func start_optimization() -> void:
 	"""Start the simulated annealing optimization"""
 	if is_optimizing:
 		return
@@ -338,7 +338,7 @@ func start_optimization():
 	
 	print("Starting simulated annealing optimization...")
 
-func create_solution_markers():
+func create_solution_markers() -> void:
 	"""Create visual markers for current and best solutions"""
 	# Current solution marker
 	if current_solution_marker:
@@ -378,19 +378,19 @@ func create_solution_markers():
 	update_best_marker_position()
 	add_child(best_solution_marker)
 
-func update_current_marker_position():
+func update_current_marker_position() -> void:
 	"""Update position of current solution marker"""
 	if current_solution_marker and current_solution.size() >= 2:
 		var z = -evaluate_objective_function(current_solution) * 0.1 + 1.0
 		current_solution_marker.position = Vector3(current_solution[0], current_solution[1], z)
 
-func update_best_marker_position():
+func update_best_marker_position() -> void:
 	"""Update position of best solution marker"""
 	if best_solution_marker and best_solution.size() >= 2:
 		var z = -evaluate_objective_function(best_solution) * 0.1 + 1.5
 		best_solution_marker.position = Vector3(best_solution[0], best_solution[1], z)
 
-func _on_optimization_timer_timeout():
+func _on_optimization_timer_timeout() -> void:
 	"""Handle optimization timer timeout"""
 	if not is_optimizing:
 		return
@@ -404,7 +404,7 @@ func _on_optimization_timer_timeout():
 	else:
 		update_ui()
 
-func perform_annealing_step():
+func perform_annealing_step() -> void:
 	"""Perform one step of the simulated annealing algorithm"""
 	# Generate neighbor solution
 	var neighbor_solution = generate_neighbor(current_solution)
@@ -477,7 +477,7 @@ func generate_neighbor(solution: Array) -> Array:
 	
 	return neighbor
 
-func update_temperature():
+func update_temperature() -> void:
 	"""Update temperature according to cooling schedule"""
 	match cooling_schedule:
 		"exponential":
@@ -492,7 +492,7 @@ func update_temperature():
 		_:
 			current_temperature *= cooling_rate
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	"""Update visualization of optimization path"""
 	if not show_optimization_path or optimization_path.size() < 2:
 		return
@@ -549,7 +549,7 @@ func create_path_mesh() -> ArrayMesh:
 	
 	return array_mesh
 
-func run_full_optimization():
+func run_full_optimization() -> void:
 	"""Run full optimization without animation"""
 	while current_temperature > final_temperature and current_iteration < max_iterations:
 		for step in range(equilibrium_steps):
@@ -557,7 +557,7 @@ func run_full_optimization():
 	
 	finalize_optimization()
 
-func finalize_optimization():
+func finalize_optimization() -> void:
 	"""Finalize the optimization process"""
 	is_optimizing = false
 	optimization_complete = true
@@ -582,7 +582,7 @@ func get_improvement_rate() -> float:
 		return 0.0
 	return float(improvements) / float(total_moves)
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current algorithm state"""
 	if not ui_display:
 		return
@@ -620,7 +620,7 @@ func update_ui():
 		labels[23].text = ""
 		labels[24].text = "🏳️‍🌈 Explores thermal resistance to local optima"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -646,12 +646,12 @@ func _input(event):
 				initial_temperature = max(initial_temperature / 1.5, 10.0)
 				reset_optimization()
 
-func stop_optimization():
+func stop_optimization() -> void:
 	"""Stop the optimization process"""
 	is_optimizing = false
 	optimization_timer.stop()
 
-func reset_optimization():
+func reset_optimization() -> void:
 	"""Reset the optimization"""
 	stop_optimization()
 	optimization_complete = false
@@ -667,7 +667,7 @@ func reset_optimization():
 	initialize_optimization_problem()
 	create_energy_landscape()
 
-func change_problem(new_problem: String):
+func change_problem(new_problem: String) -> void:
 	"""Change the optimization problem"""
 	problem_type = new_problem
 	reset_optimization()
@@ -704,4 +704,10 @@ func get_algorithm_info() -> Dictionary:
 			"acceptance_rate": get_acceptance_rate(),
 			"improvement_rate": get_improvement_rate()
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

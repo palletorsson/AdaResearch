@@ -48,7 +48,7 @@ var evolution_timer: Timer
 var is_evolving: bool = false
 var sphere_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	setup_material()
 	setup_mesh()
 	generate_initial_sphere()
@@ -56,7 +56,7 @@ func _ready():
 	initialize_algorithms()
 	setup_evolution_timer()
 
-func setup_material():
+func setup_material() -> void:
 	sphere_material = StandardMaterial3D.new()
 	sphere_material.albedo_color = Color(0.2, 0.6, 0.8, 1.0)
 	sphere_material.metallic = 0.3
@@ -64,12 +64,12 @@ func setup_material():
 	sphere_material.emission_enabled = true
 	sphere_material.emission = Color(0.1, 0.3, 0.4) * 0.2
 
-func setup_mesh():
+func setup_mesh() -> void:
 	mesh_instance = MeshInstance3D.new()
 	mesh_instance.material_override = sphere_material
 	add_child(mesh_instance)
 
-func setup_evolution_timer():
+func setup_evolution_timer() -> void:
 	evolution_timer = Timer.new()
 	evolution_timer.wait_time = 1.0 / evolution_speed
 	evolution_timer.timeout.connect(_on_evolution_step)
@@ -86,7 +86,7 @@ func surface_get_arrays_from_mesh(mesh: Mesh) -> Array:
 	a[Mesh.ARRAY_INDEX] = s_arr[Mesh.ARRAY_INDEX]
 	return a
 
-func generate_initial_sphere():
+func generate_initial_sphere() -> void:
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 1.0
 	sphere_mesh.height = 2.0
@@ -101,7 +101,7 @@ func generate_initial_sphere():
 	print("Generated sphere with ", vertices.size(), " vertices")
 	update_mesh()
 
-func build_neighbor_topology():
+func build_neighbor_topology() -> void:
 	var vertex_count = vertices.size()
 	vertex_neighbors.clear()
 	vertex_neighbors.resize(vertex_count)
@@ -121,11 +121,11 @@ func build_neighbor_topology():
 		add_unique_neighbor(v2, v0)
 		add_unique_neighbor(v2, v1)
 
-func add_unique_neighbor(vertex: int, neighbor: int):
+func add_unique_neighbor(vertex: int, neighbor: int) -> void:
 	if not vertex_neighbors[vertex].has(neighbor):
 		vertex_neighbors[vertex].append(neighbor)
 
-func initialize_algorithms():
+func initialize_algorithms() -> void:
 	var vertex_count = vertices.size()
 	
 	vertex_states.clear()
@@ -157,7 +157,7 @@ func initialize_algorithms():
 			randf_range(-1.5, 1.5)
 		)
 
-func evolve_cellular_automata():
+func evolve_cellular_automata() -> void:
 	var new_states = vertex_states.duplicate()
 	
 	for i in range(vertices.size()):
@@ -197,7 +197,7 @@ func count_alive_neighbors(vertex_index: int) -> int:
 			count += 1
 	return count
 
-func evolve_random_walk():
+func evolve_random_walk() -> void:
 	for i in range(vertices.size()):
 		var current_direction = walker_directions[i]
 		var direction_change = Vector3(
@@ -217,7 +217,7 @@ func evolve_random_walk():
 		
 		vertices[i] = original_pos + expansion + walk_offset
 
-func evolve_hill_seeking():
+func evolve_hill_seeking() -> void:
 	for i in range(vertices.size()):
 		var current_pos = vertices[i]
 		var total_force = Vector3.ZERO
@@ -241,7 +241,7 @@ func evolve_hill_seeking():
 			var radial_expansion = original_positions[i].normalized() * expansion_factor * 0.08
 			vertices[i] += radial_expansion
 
-func update_mesh():
+func update_mesh() -> void:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -257,7 +257,7 @@ func update_mesh():
 	st.generate_normals()
 	mesh_instance.mesh = st.commit()
 
-func start_evolution():
+func start_evolution() -> void:
 	if not is_evolving:
 		is_evolving = true
 		current_iteration = 0
@@ -266,13 +266,13 @@ func start_evolution():
 		var mode_names = ["Cellular Automata", "Random Walk", "Hill Seeking"]
 		print("Starting evolution: ", mode_names[evolution_mode])
 
-func stop_evolution():
+func stop_evolution() -> void:
 	if is_evolving:
 		is_evolving = false
 		evolution_timer.stop()
 		print("Evolution stopped at iteration: ", current_iteration)
 
-func reset_sphere():
+func reset_sphere() -> void:
 	vertices = original_positions.duplicate()
 	current_iteration = 0
 	initialize_algorithms()
@@ -280,7 +280,7 @@ func reset_sphere():
 	sphere_material.albedo_color = Color(0.2, 0.6, 0.8, 1.0)
 	print("Sphere reset")
 
-func single_evolution_step():
+func single_evolution_step() -> void:
 	if current_iteration < max_iterations:
 		match evolution_mode:
 			0:
@@ -304,16 +304,16 @@ func single_evolution_step():
 			stop_evolution()
 			print("Evolution complete!")
 
-func _on_evolution_step():
+func _on_evolution_step() -> void:
 	single_evolution_step()
 
-func set_evolution_mode(mode: int):
+func set_evolution_mode(mode: int) -> void:
 	evolution_mode = mode
 	reset_sphere()
 	var mode_names = ["Cellular Automata", "Random Walk", "Hill Seeking"]
 	print("Switched to: ", mode_names[evolution_mode])
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		single_evolution_step()
 	elif event.is_action_pressed("ui_cancel"):
@@ -329,3 +329,9 @@ func _input(event):
 	elif event.is_action_pressed("ui_down"):
 		evolution_mode = (evolution_mode - 1 + 3) % 3
 		set_evolution_mode(evolution_mode)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

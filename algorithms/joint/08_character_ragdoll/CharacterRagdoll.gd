@@ -2,7 +2,7 @@
 
 var leg: RigidBody3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var torso := create_box("Torso", Vector3(1.0, 2.0, 0.5), Vector3(0.0, 4.0, 0.0), 6.0, Color(0.35, 0.7, 0.6))
 	leg = create_box("Leg", Vector3(0.6, 2.0, 0.5), Vector3(0.0, 1.8, 0.0), 4.0, Color(0.7, 0.4, 0.4))
 
@@ -24,3 +24,9 @@ func _build_demo():
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		leg.apply_impulse(Vector3(2.0, 0.0, 1.5))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

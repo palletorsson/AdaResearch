@@ -115,3 +115,9 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = uniform_maps[i]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

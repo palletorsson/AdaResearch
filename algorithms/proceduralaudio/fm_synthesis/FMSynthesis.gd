@@ -96,7 +96,7 @@ var theme_profiles := {
 	}
 }
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	create_modulation_path()
 	create_output_spectrum()
@@ -104,7 +104,7 @@ func _ready():
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func create_modulation_path():
+func create_modulation_path() -> void:
 	var path_parent = $ModulationPath
 	
 	# Create visual connection between modulator and carrier
@@ -119,7 +119,7 @@ func create_modulation_path():
 		path_parent.add_child(path_node)
 		modulation_path_nodes.append(path_node)
 
-func create_output_spectrum():
+func create_output_spectrum() -> void:
 	var spectrum_parent = $OutputSpectrum
 	
 	for i in range(spectrum_resolution):
@@ -133,7 +133,7 @@ func create_output_spectrum():
 		spectrum_parent.add_child(spectrum_bar)
 		spectrum_nodes.append(spectrum_bar)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Carrier material
 	var carrier_material = StandardMaterial3D.new()
 	carrier_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
@@ -191,7 +191,7 @@ func setup_materials():
 	ratio_material.emission = Color(0.3, 0.2, 0.05, 1.0)
 	$FMRatio.material_override = ratio_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if current_theme_profile.is_empty():
@@ -222,7 +222,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func animate_fm_synthesis():
+func animate_fm_synthesis() -> void:
 	# Animate carrier oscillator
 	var carrier_phase = time * carrier_freq * 2.0 * PI
 	var carrier_scale = 1.0 + sin(carrier_phase) * 0.3
@@ -239,7 +239,7 @@ func animate_fm_synthesis():
 	# Calculate and display FM spectrum
 	calculate_fm_spectrum()
 
-func animate_modulation_path():
+func animate_modulation_path() -> void:
 	# Show modulation signal traveling from modulator to carrier
 	var wave_position = fmod(time * 2.0, 1.0)
 	
@@ -266,7 +266,7 @@ func animate_modulation_path():
 				1.0
 			)
 
-func calculate_fm_spectrum():
+func calculate_fm_spectrum() -> void:
 	# Calculate FM spectrum using Bessel functions approximation
 	for i in range(spectrum_nodes.size()):
 		var bar = spectrum_nodes[i]
@@ -344,7 +344,7 @@ func bessel_j2_approx(x: float) -> float:
 	else:
 		return sqrt(2.0 / (PI * abs(x))) * cos(abs(x) - 5.0*PI/4.0)
 
-func animate_controls():
+func animate_controls() -> void:
 	# Carrier frequency control
 	var carrier_height = (carrier_freq / 800.0) * 1.5 + 0.5
 	$CarrierFreq.height = carrier_height
@@ -383,7 +383,7 @@ func animate_controls():
 		var mod_intensity = (sin(time * modulator_freq * 2.0 * PI) + 1.0) * 0.5
 		modulator_material.emission = Color(0.1, 0.1, 0.5, 1.0) * (0.5 + mod_intensity)
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -405,13 +405,13 @@ func ensure_playback() -> bool:
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func reset_phases():
+func reset_phases() -> void:
 	carrier_phase = 0.0
 	modulator_phase = 0.0
 	vibrato_phase = 0.0
 	feedback_state = 0.0
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -429,17 +429,17 @@ func apply_theme_profile(theme_name: String):
 	theme_timer = 0.0
 	print("FMSynthesis: activated %s theme" % theme_name)
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if current_theme_profile.is_empty():
@@ -478,3 +478,9 @@ func soft_clip(value: float, drive: float) -> float:
 	var amount = 1.0 + clamp(drive, 0.0, 1.0) * 4.5
 	var y = value * amount
 	return clamp(y / (1.0 + abs(y)), -1.0, 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -67,7 +67,7 @@ var playback: AudioStreamGeneratorPlayback
 const SAMPLE_RATE = 44100.0
 var audio_phase: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
 	if abs(vertical_offset) > 0.001:
 		translate(Vector3(0, vertical_offset, 0))
@@ -77,7 +77,7 @@ func _ready():
 	if generate_on_ready:
 		generate_ultra_vivid_sculpture()
 
-func _setup_audio():
+func _setup_audio() -> void:
 	audio_player = AudioStreamPlayer3D.new()
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = SAMPLE_RATE
@@ -92,7 +92,7 @@ func _setup_audio():
 	audio_player.play()
 	playback = audio_player.get_stream_playback()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_intensity
 	color_time += delta * color_shift_speed
 	morph_time += delta * 0.7
@@ -101,7 +101,7 @@ func _process(delta):
 	animate_all_elements(delta)
 	_generate_audio_samples()
 
-func _generate_audio_samples():
+func _generate_audio_samples() -> void:
 	if not playback:
 		return
 
@@ -176,7 +176,7 @@ func _generate_audio_samples():
 		audio_phase -= SAMPLE_RATE * 10.0
 
 
-func generate_ultra_vivid_sculpture():
+func generate_ultra_vivid_sculpture() -> void:
 	# Create the hyper-dynamic center core
 	var core = create_ultra_vivid_core()
 	add_child(core)
@@ -241,7 +241,7 @@ func create_ultra_vivid_core():
 	
 	return core
 
-func create_morphing_petals():
+func create_morphing_petals() -> void:
 	dynamic_petals.clear()
 	
 	for i in range(num_petals):
@@ -350,7 +350,7 @@ func create_enhanced_petal_mesh(layer):
 	st.generate_normals()
 	return st.commit()
 
-func create_undulating_tendrils():
+func create_undulating_tendrils() -> void:
 	morphing_tendrils.clear()
 	
 	for i in range(num_tendrils):
@@ -406,7 +406,7 @@ func create_tendril_segment_mesh(segment_index, total_segments):
 	mesh.rings = max(4, int(round(8 * detail_scale_clamped)))
 	return mesh
 
-func create_orbital_rings():
+func create_orbital_rings() -> void:
 	orbital_elements.clear()
 	
 	for ring in range(num_orbital_rings):
@@ -457,7 +457,7 @@ func create_orbital_ring_system(ring_index):
 	
 	return orbital
 
-func create_harmonic_clusters():
+func create_harmonic_clusters() -> void:
 	harmonic_dots.clear()
 	
 	var cluster_count = max(3, int(round(6 * detail_scale_clamped)))
@@ -504,7 +504,7 @@ func create_harmonic_cluster(cluster_index):
 			cluster.add_child(dot_node)
 	return cluster
 
-func create_energy_streams():
+func create_energy_streams() -> void:
 	energy_streams.clear()
 	
 	var stream_count = max(4, int(round(8 * detail_scale_clamped)))
@@ -595,7 +595,7 @@ func create_harmonic_spiral(radius, harmonic_index):
 	
 	return spiral
 
-func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, invert_colors):
+func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, invert_colors) -> void:
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
 	var mesh_size = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
@@ -643,7 +643,7 @@ func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, inver
 		dot.position = surface_point.normalized() * (surface_point.length() + 0.02)
 		mesh_instance.add_child(dot)
 
-func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, layer):
+func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, layer) -> void:
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
 	var num_dots = max(8, int(round(25 * density * detail_scale_clamped)))
@@ -689,7 +689,7 @@ func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, la
 		dot.position = Vector3(x, y, z)
 		mesh_instance.add_child(dot)
 
-func add_sine_wave_dots(mesh_instance, base_color, density, segment_index):
+func add_sine_wave_dots(mesh_instance, base_color, density, segment_index) -> void:
 	var num_dots = max(6, int(round(20 * density * detail_scale_clamped)))
 	
 	for i in range(num_dots):
@@ -731,7 +731,7 @@ func add_sine_wave_dots(mesh_instance, base_color, density, segment_index):
 		
 		mesh_instance.add_child(dot)
 
-func animate_all_elements(_delta):
+func animate_all_elements(_delta) -> void:
 	animate_core_layers()
 	animate_morphing_petals()
 	animate_undulating_tendrils()
@@ -739,7 +739,7 @@ func animate_all_elements(_delta):
 	animate_harmonic_clusters()
 	animate_energy_streams()
 
-func animate_core_layers():
+func animate_core_layers() -> void:
 	var core = get_node_or_null("UltraVividCore")
 	if not core:
 		return
@@ -759,7 +759,7 @@ func animate_core_layers():
 				layer.material_override.albedo_color = new_color
 				layer.material_override.emission = new_color * 0.4
 
-func animate_morphing_petals():
+func animate_morphing_petals() -> void:
 	for i in range(dynamic_petals.size()):
 		var petal = dynamic_petals[i]
 		if not petal:
@@ -784,7 +784,7 @@ func animate_morphing_petals():
 		var scale_pulse = 1.0 + sin(pulse_time * 2 + i) * 0.15 * morphing_amplitude
 		petal.scale = Vector3.ONE * scale_pulse
 
-func animate_undulating_tendrils():
+func animate_undulating_tendrils() -> void:
 	if not include_tendrils or morphing_tendrils.is_empty():
 		return
 	for i in range(morphing_tendrils.size()):
@@ -823,7 +823,7 @@ func animate_undulating_tendrils():
 				var scale_factor = 1.0 + sin(time * 2 + j * 0.5) * 0.2 * morphing_amplitude
 				segment.scale = Vector3.ONE * scale_factor
 
-func animate_orbital_rings():
+func animate_orbital_rings() -> void:
 	if not include_orbital_rings or orbital_elements.is_empty():
 		return
 	for i in range(orbital_elements.size()):
@@ -855,7 +855,7 @@ func animate_orbital_rings():
 					orb.material_override.albedo_color = new_color
 					orb.material_override.emission = new_color * (0.8 + sin(time + j) * 0.4)
 
-func animate_harmonic_clusters():
+func animate_harmonic_clusters() -> void:
 	if not include_harmonic_clusters or harmonic_dots.is_empty():
 		return
 	for i in range(harmonic_dots.size()):
@@ -882,7 +882,7 @@ func animate_harmonic_clusters():
 					var base_emission = dot.material_override.albedo_color
 					dot.material_override.emission = base_emission * (brightness + 0.5)
 
-func animate_energy_streams():
+func animate_energy_streams() -> void:
 	if not include_energy_streams or energy_streams.is_empty():
 		return
 	for i in range(energy_streams.size()):
@@ -925,7 +925,7 @@ func animate_energy_streams():
 					particle.material_override.albedo_color = Color(stream_color.r, stream_color.g, stream_color.b, trail_alpha)
 					particle.material_override.emission = stream_color * (1.5 + sin(time * 4 + j) * 0.5)
 
-func setup_ultra_vivid_environment():
+func setup_ultra_vivid_environment() -> void:
 	# Create dynamic lighting system
 	create_dynamic_lighting()
 	
@@ -960,7 +960,7 @@ func setup_ultra_vivid_environment():
 	add_child(world_environment)
 	
 
-func create_dynamic_lighting():
+func create_dynamic_lighting() -> void:
 	# Primary directional light with animation
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "DynamicMainLight"
@@ -997,7 +997,7 @@ func create_dynamic_lighting():
 		
 		add_child(accent_light)
 
-func create_ultra_vivid_floor():
+func create_ultra_vivid_floor() -> void:
 	var floor_node = MeshInstance3D.new()
 	floor_node.name = "UltraVividFloor"
 	
@@ -1067,28 +1067,28 @@ func create_ultra_vivid_floor():
 	add_child(floor_node)
 
 # Enhanced control functions
-func set_animation_intensity(intensity: float):
+func set_animation_intensity(intensity: float) -> void:
 	animation_intensity = clamp(intensity, 0.0, 3.0)
 
-func set_color_shift_speed(speed: float):
+func set_color_shift_speed(speed: float) -> void:
 	color_shift_speed = clamp(speed, 0.0, 5.0)
 
-func set_morphing_amplitude(amplitude: float):
+func set_morphing_amplitude(amplitude: float) -> void:
 	morphing_amplitude = clamp(amplitude, 0.0, 1.0)
 
-func cycle_color_palette():
+func cycle_color_palette() -> void:
 	# Rotate through different color schemes
 	var temp = kusama_colors[0]
 	for i in range(kusama_colors.size() - 1):
 		kusama_colors[i] = kusama_colors[i + 1]
 	kusama_colors[-1] = temp
 
-func generate():
+func generate() -> void:
 	clear_children()
 	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
 	generate_ultra_vivid_sculpture()
 
-func clear_children():
+func clear_children() -> void:
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -1106,7 +1106,7 @@ class UltraVividPetalGenerator:
 	var thickness = 0.3
 	var harmonic_distortion = 0.2
 	
-	func _init(p0, p1, p2, p3, p_thickness = 0.3):
+	func _init(p0, p1, p2, p3, p_thickness = 0.3) -> void:
 		control_points = [p0, p1, p2, p3]
 		thickness = p_thickness
 	
@@ -1180,7 +1180,7 @@ class UltraVividPetalGenerator:
 		st.generate_tangents()
 		return st.commit()
 	
-	func add_quad_to_surface(st: SurfaceTool, v0, v1, v2, v3, segment, total_segments):
+	func add_quad_to_surface(st: SurfaceTool, v0, v1, v2, v3, segment, total_segments) -> void:
 		var u0 = 0.0
 		var u1 = 1.0
 		var v_coord = float(segment) / total_segments
@@ -1211,3 +1211,9 @@ class UltraVividPetalGenerator:
 		st.set_normal((v1 - v3).cross(v2 - v1).normalized())
 		st.set_uv(Vector2(u0, v_coord_next))
 		st.add_vertex(v2)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

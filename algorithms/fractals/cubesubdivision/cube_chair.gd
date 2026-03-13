@@ -20,7 +20,7 @@ var is_constructing: bool = false
 var chair_parts: Array[MeshInstance3D] = []
 
 
-func _ready():
+func _ready() -> void:
 	if show_construction:
 		is_constructing = true
 		construction_step = 0
@@ -28,7 +28,7 @@ func _ready():
 		_build_complete_chair()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -43,13 +43,13 @@ func _process(delta: float):
 			print("Chair construction complete!")
 
 
-func _build_complete_chair():
+func _build_complete_chair() -> void:
 	# Build all parts at once
 	for i in range(11):
 		_build_step(i)
 
 
-func _build_step(step: int):
+func _build_step(step: int) -> void:
 	match step:
 		0:
 			# Step 0: Create the seat (wide, flat cube)
@@ -141,7 +141,7 @@ func _build_step(step: int):
 			)
 
 
-func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
+func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -162,7 +162,7 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
 		print("Built: %s at %s with size %s" % [part_name, pos, size])
 
 
-func reset():
+func reset() -> void:
 	for part in chair_parts:
 		if is_instance_valid(part):
 			part.queue_free()
@@ -174,3 +174,9 @@ func reset():
 		is_constructing = true
 	else:
 		_build_complete_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

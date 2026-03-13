@@ -33,14 +33,14 @@ var next_viewport: SubViewport
 # UI
 var preset_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	_setup_viewports()
 	_setup_display()
 	_setup_shader()
 	_setup_ui()
 	_add_initial_seeds()
 
-func _setup_viewports():
+func _setup_viewports() -> void:
 	# Create SubViewport A
 	viewport_a = SubViewport.new()
 	viewport_a.name = "ViewportA"
@@ -76,7 +76,7 @@ func _setup_viewports():
 	current_viewport = viewport_a
 	next_viewport = viewport_b
 
-func _setup_display():
+func _setup_display() -> void:
 	# Create a 3D quad to display the pattern
 	display_mesh = MeshInstance3D.new()
 	display_mesh.name = "Display"
@@ -91,7 +91,7 @@ func _setup_display():
 
 	add_child(display_mesh)
 
-func _setup_shader():
+func _setup_shader() -> void:
 	# Load the GPU shader
 	var shader = load("res://algorithms/patterngeneration/reactiondiffusion/reactiondiffusion.gdshader")
 	if not shader:
@@ -141,7 +141,7 @@ void fragment() {
 	display_material.shader = display_shader
 	display_mesh.material_override = display_material
 
-func _setup_ui():
+func _setup_ui() -> void:
 	# Create 3D label for current preset
 	preset_label = Label3D.new()
 	preset_label.name = "PresetLabel"
@@ -152,7 +152,7 @@ func _setup_ui():
 	preset_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(preset_label)
 
-func _add_initial_seeds():
+func _add_initial_seeds() -> void:
 	# Add seed pattern after setup
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -206,15 +206,15 @@ func _process(_delta):
 	current_viewport = next_viewport
 	next_viewport = temp
 
-func next_preset():
+func next_preset() -> void:
 	current_preset = (current_preset + 1) % presets.size()
 	_apply_preset()
 
-func previous_preset():
+func previous_preset() -> void:
 	current_preset = (current_preset - 1 + presets.size()) % presets.size()
 	_apply_preset()
 
-func _apply_preset():
+func _apply_preset() -> void:
 	var preset = presets[current_preset]
 	feed_rate = preset.feed
 	kill_rate = preset.kill
@@ -226,7 +226,7 @@ func _apply_preset():
 	if preset_label:
 		preset_label.text = "Preset: " + preset.name
 
-func reset_simulation():
+func reset_simulation() -> void:
 	# Reset to initial state
 	var rect_a = viewport_a.get_node("ColorRect")
 	if rect_a:
@@ -238,7 +238,7 @@ func reset_simulation():
 	# Re-add seeds
 	_add_initial_seeds()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_RIGHT, KEY_D:
@@ -255,3 +255,9 @@ func _input(event):
 					next_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 					await get_tree().process_frame
 					sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

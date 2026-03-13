@@ -403,3 +403,9 @@ func get_hit_accuracy() -> float:
 	if throws_count == 0:
 		return 0.0
 	return (float(total_hits) / float(throws_count)) * 100.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

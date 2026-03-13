@@ -14,7 +14,7 @@ enum DistributionType {
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_color_with_text.tscn")
 
-func _ready():
+func _ready() -> void:
 	# Auto-detect type from node name if generic script is used
 	var n = name.to_lower()
 	if "gaussian" in n:
@@ -28,7 +28,7 @@ func _ready():
 	randomize()
 	spawn_points()
 
-func spawn_points():
+func spawn_points() -> void:
 	var points = []
 	var half_extents = area_size * 0.5
 	

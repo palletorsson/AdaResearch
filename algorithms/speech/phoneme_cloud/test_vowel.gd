@@ -3,7 +3,7 @@ extends Node3D
 @onready var synth = $VowelSynth3D
 @onready var label = $Label3D
 
-func _ready():
+func _ready() -> void:
 	print("--- Vowel Synth: Ada Research Lab One ---")
 	await get_tree().create_timer(1.0).timeout
 	
@@ -13,7 +13,7 @@ func _ready():
 	await get_tree().create_timer(0.4).timeout
 	say_lab_one()
 
-func say_lab_one():
+func say_lab_one() -> void:
 	label.text = "Lab One"
 	print("Saying 'Lab One'...")
 	
@@ -59,7 +59,7 @@ func say_lab_one():
 	synth.stop()
 	print("Finished 'Lab One'.")
 
-func say_alphabet():
+func say_alphabet() -> void:
 	print("Saying Alphabet (Vowel Cycle)...")
 	# Minimal Model Anchors
 	var vowels = ["i", "e", "a", "o", "u"]
@@ -77,13 +77,13 @@ func say_alphabet():
 	
 	print("Alphabet complete.")
 
-func move_field(t_f1, t_delta, duration):
+func move_field(t_f1, t_delta, duration) -> void:
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(synth, "f1", float(t_f1), duration)
 	tween.tween_property(synth, "delta", float(t_delta), duration)
 
-func say_ada():
+func say_ada() -> void:
 	label.text = "Ada"
 	# 1. Start "A" (850, 760)
 	synth.speak_vowel("a", 1.0)
@@ -112,7 +112,7 @@ func say_ada():
 	await get_tree().create_timer(0.5).timeout
 	synth.stop()
 
-func say_research():
+func say_research() -> void:
 	label.text = "Research"
 	print("Saying 'Research'...")
 	
@@ -158,3 +158,9 @@ func say_research():
 	# Reset mix for next time (handled by stop? need to ensure release)
 	synth.release_fricative()
 	print("Finished sequence.")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

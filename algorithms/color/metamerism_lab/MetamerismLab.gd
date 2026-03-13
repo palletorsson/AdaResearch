@@ -13,14 +13,14 @@ var _right_wave: Node3D
 var _left_result: MeshInstance3D
 var _right_result: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	_create_lab()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	_animate(delta)
 
-func _create_lab():
+func _create_lab() -> void:
 	for child in get_children():
 		child.queue_free()
 		
@@ -42,7 +42,7 @@ func _create_lab():
 	_create_wave_dots(_left_wave, 1) # Single yellow wave
 	_create_wave_dots(_right_wave, 2) # Red and Green waves
 
-func _create_wave_dots(parent: Node, count: int):
+func _create_wave_dots(parent: Node, count: int) -> void:
 	for i in range(20):
 		for c in range(count):
 			var dot = MeshInstance3D.new()
@@ -89,7 +89,7 @@ func _create_sphere(color: Color, pos: Vector3) -> MeshInstance3D:
 	add_child(mi)
 	return mi
 
-func _animate(_delta):
+func _animate(_delta) -> void:
 	# Animate Left Wave (Single Yellow Frequency)
 	for child in _left_wave.get_children():
 		var idx = child.get_meta("idx")
@@ -113,3 +113,9 @@ func _animate(_delta):
 		else:
 			var x_offset = sin(time * wave_speed * 1.2 + y_base * 5.0) * wave_amplitude
 			child.position = Vector3(x_offset + 0.2, y_base, 0) # Offset slightly right
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

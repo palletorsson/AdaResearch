@@ -243,3 +243,9 @@ func _fade_out_and_remove() -> void:
 
 	tween.tween_property(mesh_instance, "scale", Vector3.ZERO, 0.3)
 	tween.tween_callback(queue_free).set_delay(0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

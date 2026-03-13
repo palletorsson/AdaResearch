@@ -30,7 +30,7 @@ var time_series_particles: Array = []
 var forecast_particles: Array = []
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	# Initialize Time Series Analysis visualization
 	print("Time Series Analysis Visualization initialized")
 	create_time_series_particles()
@@ -39,7 +39,7 @@ func _ready():
 	setup_analysis_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# ── Auto-advance progress if enabled ─────────────────────────────────
@@ -56,7 +56,7 @@ func _process(delta):
 	update_analysis_metrics(delta)
 	_update_stats_label()
 
-func create_time_series_particles():
+func create_time_series_particles() -> void:
 	## Create time series data particles — blue spheres tracing temporal data patterns
 	var time_series_data = $InputTimeSeries/TimeSeriesData
 	for i in range(particle_count):
@@ -80,7 +80,7 @@ func create_time_series_particles():
 		time_series_data.add_child(particle)
 		time_series_particles.append(particle)
 
-func create_forecast_particles():
+func create_forecast_particles() -> void:
 	## Create forecast output particles — green spheres showing predicted future values
 	var forecast_data = $OutputForecast/ForecastData
 	for i in range(particle_count):
@@ -104,7 +104,7 @@ func create_forecast_particles():
 		forecast_data.add_child(particle)
 		forecast_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	## Create data flow particles — gold spheres flowing through the analysis pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(30):
@@ -127,7 +127,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_analysis_metrics():
+func setup_analysis_metrics() -> void:
 	# Initialize analysis metrics
 	var accuracy_indicator = $AnalysisMetrics/AccuracyMeter/AccuracyIndicator
 	var horizon_indicator = $AnalysisMetrics/ForecastHorizonMeter/HorizonIndicator
@@ -136,7 +136,7 @@ func setup_analysis_metrics():
 	if horizon_indicator:
 		horizon_indicator.position.x = 0  # Start at middle
 
-func animate_time_series_data(delta):
+func animate_time_series_data(delta) -> void:
 	# Animate time series particles
 	for i in range(time_series_particles.size()):
 		var particle = time_series_particles[i]
@@ -156,7 +156,7 @@ func animate_time_series_data(delta):
 			var pulse = 1.0 + sin(time * 2.0 + i * 0.2) * 0.2 * analysis_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_analysis_engine(delta):
+func animate_analysis_engine(delta) -> void:
 	# Animate analysis engine core
 	var engine_core = $AnalysisEngine/EngineCore
 	if engine_core:
@@ -212,7 +212,7 @@ func animate_analysis_engine(delta):
 			var intensity = 0.3 + forecasting_activation * 0.7
 			forecasting_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_forecast_output(delta):
+func animate_forecast_output(delta) -> void:
 	# Animate forecast particles
 	for i in range(forecast_particles.size()):
 		var particle = forecast_particles[i]
@@ -232,7 +232,7 @@ func animate_forecast_output(delta):
 			var pulse = 1.0 + sin(time * 2.2 + i * 0.15) * 0.2 * analysis_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_time_axis(delta):
+func animate_time_axis(delta) -> void:
 	# Animate time axis core
 	var time_axis_core = $TimeAxis/TimeAxisCore
 	if time_axis_core:
@@ -248,7 +248,7 @@ func animate_time_axis(delta):
 			var intensity = 0.3 + analysis_progress * 0.7
 			time_axis_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -272,7 +272,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * analysis_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_analysis_metrics(delta):
+func update_analysis_metrics(delta) -> void:
 	# Update accuracy meter
 	var accuracy_indicator = $AnalysisMetrics/AccuracyMeter/AccuracyIndicator
 	if accuracy_indicator:
@@ -297,13 +297,13 @@ func update_analysis_metrics(delta):
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-func set_analysis_progress(progress: float):
+func set_analysis_progress(progress: float) -> void:
 	analysis_progress = clamp(progress, 0.0, 1.0)
 
-func set_accuracy_score(accuracy: float):
+func set_accuracy_score(accuracy: float) -> void:
 	accuracy_score = clamp(accuracy, 0.0, 1.0)
 
-func set_forecast_horizon(horizon: float):
+func set_forecast_horizon(horizon: float) -> void:
 	forecast_horizon = clamp(horizon, 0.0, 1.0)
 
 func get_analysis_progress() -> float:
@@ -315,7 +315,7 @@ func get_accuracy_score() -> float:
 func get_forecast_horizon() -> float:
 	return forecast_horizon
 
-func reset_analysis():
+func reset_analysis() -> void:
 	time = 0.0
 	analysis_progress = 0.0
 	accuracy_score = 0.0
@@ -328,7 +328,7 @@ func reset_analysis():
 
 # ── Stats Label & Visual Feedback ────────────────────────────────────────────
 
-func _create_stats_label():
+func _create_stats_label() -> void:
 	## Creates a floating 3D label showing live time series stats
 	_stats_label = Label3D.new()
 	_stats_label.text = "Initializing..."
@@ -341,7 +341,7 @@ func _create_stats_label():
 	_stats_label.no_depth_test = true
 	add_child(_stats_label)
 
-func _update_stats_label():
+func _update_stats_label() -> void:
 	if _stats_label:
 		_stats_label.text = "Time Series Analysis\nProgress: %d%%  |  Accuracy: %.0f%%  |  Horizon: %.0f%%" % [
 			analysis_progress * 100,
@@ -349,7 +349,7 @@ func _update_stats_label():
 			forecast_horizon * 100
 		]
 
-func _on_progress_changed():
+func _on_progress_changed() -> void:
 	## Visual feedback — pulse engine core with gold glow
 	var engine_core = $AnalysisEngine/EngineCore
 	if engine_core and engine_core.material_override:
@@ -358,3 +358,9 @@ func _on_progress_changed():
 			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
 		tween.tween_property(engine_core.material_override, "emission",
 			Color(0.3, 0.85, 0.4) * (0.3 + analysis_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

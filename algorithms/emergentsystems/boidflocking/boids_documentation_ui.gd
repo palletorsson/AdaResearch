@@ -37,7 +37,7 @@ var panel_position: Vector2 = Vector2(100, 100)
 var dragging: bool = false
 var drag_start_pos: Vector2
 
-func _ready():
+func _ready() -> void:
 	# Don't show until requested if not set to show on start
 	if not show_on_start:
 		visible = false
@@ -73,7 +73,7 @@ func find_node_with_script(node, script_name):
 	
 	return null
 
-func setup_ui():
+func setup_ui() -> void:
 	# Main panel
 	main_panel = $Panel
 	main_panel.custom_minimum_size = Vector2(panel_width, panel_height)
@@ -97,7 +97,7 @@ func setup_ui():
 	# Generate content
 	generate_content()
 
-func generate_content():
+func generate_content() -> void:
 	clear_content()
 	
 	# Add custom description if provided
@@ -113,11 +113,11 @@ func generate_content():
 		add_algorithm_section()
 	
 
-func clear_content():
+func clear_content() -> void:
 	for child in content_container.get_children():
 		child.queue_free()
 
-func add_section(title, text):
+func add_section(title, text) -> void:
 	# Add heading
 	var heading = Label.new()
 	heading.text = title
@@ -143,7 +143,7 @@ func add_section(title, text):
 	bottom_spacer.custom_minimum_size = Vector2(0, 20)
 	content_container.add_child(bottom_spacer)
 
-func add_history_section():
+func add_history_section() -> void:
 	var history_text = """
 Craig Reynolds developed the Boids algorithm in 1986 while working at Symbolics, a computer manufacturer. The name "Boids" is a play on "bird-oid objects" and the New York/New Jersey accent pronunciation of "birds."
 
@@ -157,7 +157,7 @@ Boids represents an early example of artificial life simulation, where complex g
 """
 	add_section("Historical Context", history_text)
 
-func add_algorithm_section():
+func add_algorithm_section() -> void:
 	var algorithm_text = """
 The Boids algorithm simulates flocking behavior using three simple steering rules:
 
@@ -195,10 +195,10 @@ func get_param(node, param_name, default_value):
 		return node.get(param_name)
 	return default_value
 
-func _on_close_button_pressed():
+func _on_close_button_pressed() -> void:
 	hide()
 
-func _on_title_bar_input(event):
+func _on_title_bar_input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			dragging = event.pressed
@@ -230,14 +230,14 @@ func _process(_delta):
 			main_panel.position.y = clamp(main_panel.position.y, 0, get_viewport().size.y - panel_height)
 
 
-func toggle():
+func toggle() -> void:
 	if is_visible:
 		hide()
 	else:
 		show()
 
 # Public method to update a specific section
-func update_section(section_name, new_text):
+func update_section(section_name, new_text) -> void:
 	# Regenerate content with new text
 	match section_name:
 		"description":
@@ -245,3 +245,9 @@ func update_section(section_name, new_text):
 		# Add other section updates as needed
 	
 	generate_content()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

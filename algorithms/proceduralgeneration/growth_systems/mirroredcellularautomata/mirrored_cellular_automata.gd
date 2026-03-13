@@ -22,7 +22,7 @@ var half_size: int
 var update_timer: float = 0.0
 var render_texture: ImageTexture
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	half_size = grid_size / 2.0
 	
@@ -44,7 +44,7 @@ func _ready():
 	generate_initial_pattern()
 	create_render_texture()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_evolve:
 		update_timer += delta
 		if update_timer >= update_interval:
@@ -52,7 +52,7 @@ func _process(delta):
 			update_grid()
 			update_render_texture()
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			match event.keycode:
@@ -66,7 +66,7 @@ func _unhandled_input(event):
 				KEY_S:
 					save_texture()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid = []
 	for y in range(grid_size):
 		var row = []
@@ -74,7 +74,7 @@ func initialize_grid():
 			row.append(0)  # Initialize all cells as dead
 		grid.append(row)
 
-func generate_initial_pattern():
+func generate_initial_pattern() -> void:
 	# Only generate the core pattern, then apply symmetry
 	match symmetry_type:
 		0:  # Quad mirror (four quadrants)
@@ -84,21 +84,21 @@ func generate_initial_pattern():
 		2:  # Rotational symmetry
 			generate_rotational_pattern()
 
-func generate_quadrant_pattern():
+func generate_quadrant_pattern() -> void:
 	# Only generate the top-left quadrant
 	for y in range(half_size):
 		for x in range(half_size):
 			if randf() <= random_fill_percent:
 				set_cell_with_symmetry(x, y, 1)
 
-func generate_octant_pattern():
+func generate_octant_pattern() -> void:
 	# Only generate 1/8 of the pattern (top-left triangle)
 	for y in range(half_size):
 		for x in range(y + 1):  # Only fill cells where x <= y to create a triangle
 			if randf() <= random_fill_percent:
 				set_cell_with_symmetry(x, y, 1)
 
-func generate_rotational_pattern():
+func generate_rotational_pattern() -> void:
 	# Generate a pattern with rotational symmetry
 	# Start with a random core
 	var pattern_size = min(5, half_size)  # Size of the pattern to repeat
@@ -119,7 +119,7 @@ func generate_rotational_pattern():
 			var pattern_y = abs(y - half_size) % pattern_size
 			grid[y][x] = pattern[pattern_y][pattern_x]
 
-func set_cell_with_symmetry(x, y, value):
+func set_cell_with_symmetry(x, y, value) -> void:
 	match symmetry_type:
 		0:  # Quad mirror
 			# Set in all four quadrants
@@ -156,7 +156,7 @@ func set_cell_with_symmetry(x, y, value):
 				if new_x >= 0 and new_x < grid_size and new_y >= 0 and new_y < grid_size:
 					grid[new_y][new_x] = value
 
-func update_grid():
+func update_grid() -> void:
 	# Create a copy of the current grid
 	var new_grid = []
 	for y in range(grid_size):
@@ -206,7 +206,7 @@ func count_live_neighbors(x, y):
 				count += 1
 	return count
 
-func apply_quad_symmetry(new_grid):
+func apply_quad_symmetry(new_grid) -> void:
 	# Apply symmetry to the top-left quadrant only
 	for y in range(half_size):
 		for x in range(half_size):
@@ -215,7 +215,7 @@ func apply_quad_symmetry(new_grid):
 			new_grid[grid_size - 1 - y][x] = value
 			new_grid[grid_size - 1 - y][grid_size - 1 - x] = value
 
-func apply_eight_way_symmetry(new_grid):
+func apply_eight_way_symmetry(new_grid) -> void:
 	# Apply symmetry to the top-left octant only
 	for y in range(half_size):
 		for x in range(y + 1):  # Only process triangle where x <= y
@@ -228,7 +228,7 @@ func apply_eight_way_symmetry(new_grid):
 			new_grid[grid_size - 1 - x][y] = value
 			new_grid[grid_size - 1 - x][grid_size - 1 - y] = value
 
-func apply_rotational_symmetry(new_grid):
+func apply_rotational_symmetry(new_grid) -> void:
 	# Apply 4-fold rotational symmetry
 	var center_x = half_size
 	var center_y = half_size
@@ -256,14 +256,14 @@ func apply_rotational_symmetry(new_grid):
 				if new_x >= 0 and new_x < grid_size and new_y >= 0 and new_y < grid_size:
 					new_grid[new_y][new_x] = value
 
-func create_render_texture():
+func create_render_texture() -> void:
 	var img = Image.create(grid_size * cell_size, grid_size * cell_size, false, Image.FORMAT_RGBA8)
 	img.fill(Color(1, 1, 1, 1))  # White background
 	
 	render_texture = ImageTexture.create_from_image(img)
 	update_render_texture()
 
-func update_render_texture():
+func update_render_texture() -> void:
 	var img = Image.create(grid_size * cell_size, grid_size * cell_size, false, Image.FORMAT_RGBA8)
 	img.fill(Color(1, 1, 1, 1))  # White background
 	
@@ -297,50 +297,56 @@ func update_render_texture():
 	
 	queue_redraw()  # Request a redraw to update the display
 
-func save_texture():
+func save_texture() -> void:
 	var img = render_texture.get_image()
 	var datetime = Time.get_datetime_dict_from_system()
 	var filename = "res://cellular_pattern_%s.png" % [datetime.hour * 10000 + datetime.minute * 100 + datetime.second]
 	img.save_png(filename)
 	print("Saved texture to: " + filename)
 
-func _draw():
+func _draw() -> void:
 	if render_texture:
 		draw_texture(render_texture, Vector2.ZERO)
 
-func _on_random_button_pressed():
+func _on_random_button_pressed() -> void:
 	initialize_grid()
 	generate_initial_pattern()
 	update_render_texture()
 
-func _on_step_button_pressed():
+func _on_step_button_pressed() -> void:
 	update_grid()
 	update_render_texture()
 
-func _on_toggle_evolution_button_pressed():
+func _on_toggle_evolution_button_pressed() -> void:
 	auto_evolve = !auto_evolve
 	$UI/VBoxContainer/ToggleEvolutionButton.text = "Stop Evolution" if auto_evolve else "Start Evolution"
 
-func _on_save_button_pressed():
+func _on_save_button_pressed() -> void:
 	save_texture()
 
-func _on_symmetry_option_item_selected(index):
+func _on_symmetry_option_item_selected(index) -> void:
 	symmetry_type = index
 	initialize_grid()
 	generate_initial_pattern()
 	update_render_texture()
 
-func _on_fill_percent_slider_value_changed(value):
+func _on_fill_percent_slider_value_changed(value) -> void:
 	random_fill_percent = value / 100.0
 	$UI/SymmetryOptionsContainer/FillPercentLabel.text = "Fill Percent: %d%%" % value
 	initialize_grid()
 	generate_initial_pattern()
 	update_render_texture()
 
-func _on_birth_prob_slider_value_changed(value):
+func _on_birth_prob_slider_value_changed(value) -> void:
 	birth_probability = value
 	$UI/SymmetryOptionsContainer/BirthProbLabel.text = "Birth Probability: %d%%" % (value * 100)
 
-func _on_death_prob_slider_value_changed(value):
+func _on_death_prob_slider_value_changed(value) -> void:
 	death_probability = value
 	$UI/SymmetryOptionsContainer/DeathProbLabel.text = "Death Probability: %d%%" % (value * 100)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

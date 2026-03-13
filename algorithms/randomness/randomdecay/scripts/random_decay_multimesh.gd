@@ -494,3 +494,9 @@ func _build_custom_emission(base_color: Color, decay_amount: float) -> Color:
 	var t: float = clampf(decay_amount, 0.0, 1.0)
 	var emission: Color = base_color.lerp(decay_color.darkened(0.2), t).lightened(0.08)
 	return Color(emission.r, emission.g, emission.b, 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

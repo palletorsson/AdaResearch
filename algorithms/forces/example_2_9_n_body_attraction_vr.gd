@@ -246,3 +246,9 @@ func clear_bodies() -> void:
 	bodies.clear()
 	force_visuals.clear()
 	initial_states.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

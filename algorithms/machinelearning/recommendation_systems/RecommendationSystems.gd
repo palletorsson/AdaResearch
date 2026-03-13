@@ -31,7 +31,7 @@ var item_particles: Array = []
 var _stats_label: Label3D = null
 var _match_lines: Array = []  ## Lines connecting matched user-item pairs
 
-func _ready():
+func _ready() -> void:
 	# Initialize Recommendation Systems visualization
 	print("Recommendation Systems Visualization initialized")
 	create_user_particles()
@@ -40,7 +40,7 @@ func _ready():
 	setup_recommendation_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# ── Auto-advance progress if enabled ─────────────────────────────────
@@ -57,7 +57,7 @@ func _process(delta):
 	update_recommendation_metrics(delta)
 	_update_stats_label()
 
-func create_user_particles():
+func create_user_particles() -> void:
 	## Create user profile particles — purple spheres representing individual users
 	var user_profiles = $Users/UserProfiles
 	for i in range(particle_count):
@@ -80,7 +80,7 @@ func create_user_particles():
 		user_profiles.add_child(particle)
 		user_particles.append(particle)
 
-func create_item_particles():
+func create_item_particles() -> void:
 	## Create item catalog particles — cyan spheres representing available items
 	var item_catalog = $Items/ItemCatalog
 	for i in range(particle_count):
@@ -103,7 +103,7 @@ func create_item_particles():
 		item_catalog.add_child(particle)
 		item_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	## Create data flow particles — gold spheres flowing through the recommendation pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(30):
@@ -126,7 +126,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_recommendation_metrics():
+func setup_recommendation_metrics() -> void:
 	# Initialize recommendation metrics
 	var precision_indicator = $RecommendationMetrics/PrecisionMeter/PrecisionIndicator
 	var recall_indicator = $RecommendationMetrics/RecallMeter/RecallIndicator
@@ -137,7 +137,7 @@ func setup_recommendation_metrics():
 
 ## ── User & Item Animation ────────────────────────────────────────────────────
 
-func animate_users(delta):
+func animate_users(delta) -> void:
 	## Animate user particles in flowing cluster patterns with progress-based pulsing
 	for i in range(user_particles.size()):
 		var particle = user_particles[i]
@@ -157,7 +157,7 @@ func animate_users(delta):
 
 ## ── Recommendation Engine Animation ──────────────────────────────────────────
 
-func animate_recommendation_engine(delta):
+func animate_recommendation_engine(delta) -> void:
 	## Animate the central engine and its sub-method cores (collaborative, content-based, hybrid)
 	var engine_core = $RecommendationEngine/EngineCore
 	if engine_core:
@@ -213,7 +213,7 @@ func animate_recommendation_engine(delta):
 			var intensity = 0.3 + hybrid_activation * 0.7
 			hybrid_core.material_override.emission = Color(1.0, 0.85, 0.2, 1) * intensity  # Gold for hybrid
 
-func animate_items(delta):
+func animate_items(delta) -> void:
 	# Animate item particles
 	for i in range(item_particles.size()):
 		var particle = item_particles[i]
@@ -231,7 +231,7 @@ func animate_items(delta):
 			var pulse = 1.0 + sin(time * 2.2 + i * 0.15) * 0.2 * recommendation_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_user_item_matrix(delta):
+func animate_user_item_matrix(delta) -> void:
 	# Animate user-item matrix core
 	var matrix_core = $UserItemMatrix/MatrixCore
 	if matrix_core:
@@ -249,7 +249,7 @@ func animate_user_item_matrix(delta):
 
 ## ── Data Flow Animation ──────────────────────────────────────────────────────
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	## Animate gold flow particles traveling through the recommendation pipeline
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -275,7 +275,7 @@ func animate_data_flow(delta):
 
 ## ── Metrics Animation ────────────────────────────────────────────────────────
 
-func update_recommendation_metrics(delta):
+func update_recommendation_metrics(delta) -> void:
 	## Update precision and recall meter indicators with color-coded feedback
 	var precision_indicator = $RecommendationMetrics/PrecisionMeter/PrecisionIndicator
 	if precision_indicator:
@@ -300,13 +300,13 @@ func update_recommendation_metrics(delta):
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-func set_recommendation_progress(progress: float):
+func set_recommendation_progress(progress: float) -> void:
 	recommendation_progress = clamp(progress, 0.0, 1.0)
 
-func set_precision_score(precision: float):
+func set_precision_score(precision: float) -> void:
 	precision_score = clamp(precision, 0.0, 1.0)
 
-func set_recall_score(recall: float):
+func set_recall_score(recall: float) -> void:
 	recall_score = clamp(recall, 0.0, 1.0)
 
 func get_recommendation_progress() -> float:
@@ -318,7 +318,7 @@ func get_precision_score() -> float:
 func get_recall_score() -> float:
 	return recall_score
 
-func reset_recommendation():
+func reset_recommendation() -> void:
 	time = 0.0
 	recommendation_progress = 0.0
 	precision_score = 0.0
@@ -332,7 +332,7 @@ func reset_recommendation():
 
 # ── Stats Label & Visual Feedback ────────────────────────────────────────────
 
-func _create_stats_label():
+func _create_stats_label() -> void:
 	## Creates a floating 3D label that shows live recommendation stats
 	_stats_label = Label3D.new()
 	_stats_label.text = "Initializing..."
@@ -345,7 +345,7 @@ func _create_stats_label():
 	_stats_label.no_depth_test = true
 	add_child(_stats_label)
 
-func _update_stats_label():
+func _update_stats_label() -> void:
 	if _stats_label:
 		_stats_label.text = "Recommendation Systems\nProgress: %d%%  |  Precision: %.0f%%  |  Recall: %.0f%%" % [
 			recommendation_progress * 100,
@@ -353,7 +353,7 @@ func _update_stats_label():
 			recall_score * 100
 		]
 
-func _on_progress_changed():
+func _on_progress_changed() -> void:
 	## Visual feedback when progress changes — pulse the engine core with gold glow
 	var engine_core = $RecommendationEngine/EngineCore
 	if engine_core and engine_core.material_override:
@@ -362,3 +362,9 @@ func _on_progress_changed():
 			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
 		tween.tween_property(engine_core.material_override, "emission",
 			Color(0.3, 0.85, 0.4) * (0.3 + recommendation_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

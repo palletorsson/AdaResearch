@@ -17,7 +17,7 @@ extends Node3D
 var base_materials = []
 var spike_materials = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create materials
@@ -29,7 +29,7 @@ func _ready():
 	# Add camera and lighting
 	setup_environment()
 
-func create_materials():
+func create_materials() -> void:
 	# Create several base materials with different colors
 	var colors = [
 		Color(0.9, 0.9, 0.7),  # Cream
@@ -62,7 +62,7 @@ func create_materials():
 		material.roughness = 0.7
 		spike_materials.append(material)
 
-func generate_grid():
+func generate_grid() -> void:
 	var forms_container = Node3D.new()
 	forms_container.name = "BiologicalForms"
 	add_child(forms_container)
@@ -178,7 +178,7 @@ func create_spiky_radiolaria(parent, position):
 	parent.add_child(form)
 	return form
 
-func add_spike(parent, direction, material):
+func add_spike(parent, direction, material) -> void:
 	var spike = CSGCylinder3D.new()
 	spike.name = "Spike"
 	#spike.radius_bottom = randf_range(0.03, 0.08)
@@ -660,7 +660,7 @@ func generate_dodecahedron_vertices(radius):
 	
 	return vertices
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create a camera for viewing
 	var camera = Camera3D.new()
 	camera.name = "Camera"
@@ -691,3 +691,9 @@ func setup_environment():
 	var world_env = WorldEnvironment.new()
 	world_env.environment = environment
 	add_child(world_env)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

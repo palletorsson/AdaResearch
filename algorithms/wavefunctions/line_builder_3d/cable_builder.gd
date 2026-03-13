@@ -13,7 +13,7 @@ var control_points: Array[Node3D] = []
 var curve: Curve3D
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	curve = Curve3D.new()
 	mesh_instance = $CableMesh
 	_spawn_control_points()
@@ -22,7 +22,7 @@ func _ready():
 func _process(_delta):
 	_update_cable()
 
-func _spawn_control_points():
+func _spawn_control_points() -> void:
 	var parent = $ControlPoints
 	control_points.clear()
 
@@ -35,7 +35,7 @@ func _spawn_control_points():
 		parent.add_child(point)
 		control_points.append(point)
 
-func _update_cable():
+func _update_cable() -> void:
 	if control_points.size() < 2:
 		return
 
@@ -64,7 +64,7 @@ func _update_cable():
 	# Generate tube mesh from curve
 	_generate_tube_from_curve()
 
-func _generate_tube_from_curve():
+func _generate_tube_from_curve() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -140,3 +140,9 @@ func _create_cable_material() -> ShaderMaterial:
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

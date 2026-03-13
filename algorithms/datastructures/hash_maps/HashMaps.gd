@@ -26,7 +26,7 @@ class HashBucket:
 	var elements: Array = []
 	var chain_visuals: Array = []
 	
-	func _init(bucket_index: int):
+	func _init(bucket_index: int) -> void:
 		index = bucket_index
 
 # Key-value pair class
@@ -36,16 +36,16 @@ class KeyValuePair:
 	var visual_object: CSGSphere3D
 	var hash_value: int
 	
-	func _init(k: String, v: int):
+	func _init(k: String, v: int) -> void:
 		key = k
 		value = v
 
-func _ready():
+func _ready() -> void:
 	setup_hash_buckets()
 	setup_materials()
 	insert_initial_data()
 
-func setup_hash_buckets():
+func setup_hash_buckets() -> void:
 	var bucket_parent = $HashBuckets
 	
 	for i in range(bucket_count):
@@ -64,7 +64,7 @@ func setup_hash_buckets():
 		bucket.visual_container = container
 		buckets.append(bucket)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Bucket materials
 	var bucket_material = StandardMaterial3D.new()
 	bucket_material.albedo_color = Color(0.3, 0.3, 0.8, 0.7)
@@ -96,13 +96,13 @@ func setup_materials():
 	collision_material.emission = Color(0.5, 0.1, 0.1, 1.0)
 	$CollisionIndicator.material_override = collision_material
 
-func insert_initial_data():
+func insert_initial_data() -> void:
 	# Insert some initial key-value pairs
 	var initial_keys = ["apple", "banana", "cherry", "date", "elderberry"]
 	for i in range(initial_keys.size()):
 		insert_key_value(initial_keys[i], i * 10 + randi() % 50)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -113,7 +113,7 @@ func _process(delta):
 	animate_hash_map()
 	animate_indicators()
 
-func perform_operation():
+func perform_operation() -> void:
 	current_operation = (current_operation + 1) % HashOperation.size()
 	
 	match current_operation:
@@ -145,7 +145,7 @@ func hash_function(key: String) -> int:
 		hash_val = ((hash_val << 5) + hash_val) + key.unicode_at(i)
 	return abs(hash_val) % bucket_count
 
-func insert_key_value(key: String, value: int):
+func insert_key_value(key: String, value: int) -> void:
 	var pair = KeyValuePair.new(key, value)
 	pair.hash_value = hash_function(key)
 	
@@ -161,7 +161,7 @@ func insert_key_value(key: String, value: int):
 	
 	update_bucket_display(bucket)
 
-func create_visual_element(pair: KeyValuePair, bucket: HashBucket):
+func create_visual_element(pair: KeyValuePair, bucket: HashBucket) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.15
 	
@@ -193,7 +193,7 @@ func create_visual_element(pair: KeyValuePair, bucket: HashBucket):
 	if bucket.elements.size() > 1:
 		create_chain_connection(bucket, chain_position)
 
-func create_chain_connection(bucket: HashBucket, position: int):
+func create_chain_connection(bucket: HashBucket, position: int) -> void:
 	if position == 0:
 		return
 	
@@ -218,7 +218,7 @@ func create_chain_connection(bucket: HashBucket, position: int):
 	$CollisionChains.add_child(chain_link)
 	bucket.chain_visuals.append(chain_link)
 
-func update_bucket_display(bucket: HashBucket):
+func update_bucket_display(bucket: HashBucket) -> void:
 	# Update bucket color based on load
 	var load = bucket.elements.size()
 	var material = bucket.visual_container.material_override as StandardMaterial3D
@@ -234,11 +234,11 @@ func update_bucket_display(bucket: HashBucket):
 		
 		material.emission = material.albedo_color * 0.3
 
-func animate_search_operation():
+func animate_search_operation() -> void:
 	# Animate searching through a random bucket
 	pass
 
-func delete_random_element():
+func delete_random_element() -> void:
 	# Find a non-empty bucket and remove an element
 	var non_empty_buckets = []
 	for bucket in buckets:
@@ -260,7 +260,7 @@ func delete_random_element():
 		
 		update_bucket_display(bucket)
 
-func rehash_table():
+func rehash_table() -> void:
 	# Simple rehashing - double the bucket count
 	var old_elements = []
 	
@@ -304,7 +304,7 @@ func rehash_table():
 		element.visual_object.queue_free()
 		insert_key_value(element.key, element.value)
 
-func demonstrate_collision():
+func demonstrate_collision() -> void:
 	# Intentionally create collisions by inserting keys that hash to the same bucket
 	var target_bucket = randi() % bucket_count
 	
@@ -320,7 +320,7 @@ func demonstrate_collision():
 func get_load_factor() -> float:
 	return float(total_elements) / float(bucket_count)
 
-func animate_hash_map():
+func animate_hash_map() -> void:
 	# Animate hash function
 	var hash_pulse = 1.0 + sin(time * 4.0) * 0.2
 	$HashFunction.scale = Vector3.ONE * hash_pulse
@@ -346,14 +346,14 @@ func animate_hash_map():
 			var pulse = 1.0 + sin(time * 3.0 + i) * 0.3
 			chain.scale = Vector3(pulse, 1.0, pulse)
 
-func animate_insertion_highlighting():
+func animate_insertion_highlighting() -> void:
 	# Pulse newly inserted elements
 	for bucket in buckets:
 		for element in bucket.elements:
 			var pulse = 1.0 + sin(time * 6.0 + element.hash_value) * 0.3
 			element.visual_object.scale = Vector3.ONE * pulse
 
-func animate_search_highlighting():
+func animate_search_highlighting() -> void:
 	# Create search wave effect
 	var wave_position = fmod(time * 2.0, bucket_count)
 	
@@ -366,14 +366,14 @@ func animate_search_highlighting():
 			var scale = 1.0 + intensity * 0.5
 			element.visual_object.scale = Vector3.ONE * scale
 
-func animate_deletion_highlighting():
+func animate_deletion_highlighting() -> void:
 	# Red pulsing for deletion mode
 	for bucket in buckets:
 		for element in bucket.elements:
 			var pulse = 1.0 + sin(time * 8.0 + element.hash_value) * 0.2
 			element.visual_object.scale = Vector3.ONE * pulse
 
-func animate_collision_highlighting():
+func animate_collision_highlighting() -> void:
 	# Highlight buckets with collisions
 	for bucket in buckets:
 		if bucket.elements.size() > 1:
@@ -383,7 +383,7 @@ func animate_collision_highlighting():
 			for element in bucket.elements:
 				element.visual_object.scale = Vector3.ONE * pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Load factor indicator
 	var load_factor = get_load_factor()
 	var load_height = load_factor * 3.0 + 0.5
@@ -410,3 +410,9 @@ func animate_indicators():
 	# Hash function animation
 	var hash_rotation = time * 45.0
 	$HashFunction.rotation_degrees.y = hash_rotation
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

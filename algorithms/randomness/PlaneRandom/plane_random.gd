@@ -158,3 +158,9 @@ func _update_collider() -> void:
 
 	# Lower the collider slightly for safe walking clearance
 	body.transform.origin.y = -0.05
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

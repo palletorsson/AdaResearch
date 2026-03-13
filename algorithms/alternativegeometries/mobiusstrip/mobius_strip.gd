@@ -13,14 +13,14 @@ extends Node3D
 
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	generate_mobius_strip()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_rotate:
 		rotate_y(rotation_speed * delta)
 
-func generate_mobius_strip():
+func generate_mobius_strip() -> void:
 	# Create mesh instance if it doesn't exist
 	if not mesh_instance:
 		mesh_instance = MeshInstance3D.new()
@@ -109,3 +109,9 @@ func generate_mobius_strip():
 	material.emission_energy_multiplier = 0.2
 	mesh_instance.set_surface_override_material(0, material)
 	material.cull_mode = StandardMaterial3D.CULL_DISABLED
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

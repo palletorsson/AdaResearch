@@ -12,14 +12,14 @@ var _target_left: MeshInstance3D
 var _target_right: MeshInstance3D
 var _connector: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	_create_geometry()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	_animate()
 
-func _create_geometry():
+func _create_geometry() -> void:
 	# Clean up logic for tool mode updates
 	for child in get_children():
 		child.queue_free()
@@ -90,7 +90,7 @@ func _create_bar(color: Color) -> MeshInstance3D:
 	add_child(mi)
 	return mi
 
-func _animate():
+func _animate() -> void:
 	# 0.0 - 0.4: Targets move up/down
 	# 0.4 - 0.5: Targets align
 	# 0.5 - 0.9: Connector appears (Proof)
@@ -112,4 +112,9 @@ func _animate():
 		# Show connector to prove they are same color
 		if abs(_target_left.position.y) < 0.1:
 			_connector.visible = true
-			
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

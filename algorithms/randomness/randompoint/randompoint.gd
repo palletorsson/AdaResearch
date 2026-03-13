@@ -5,11 +5,11 @@
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
 var point_node: Node3D
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	_spawn_random_point_xy()
 
-func _spawn_random_point_xy():
+func _spawn_random_point_xy() -> void:
 	var p := point_scene.instantiate()
 	p.name = "RandomPoint"
 	add_child(p)
@@ -21,14 +21,14 @@ func _spawn_random_point_xy():
 	if p.has_signal("dropped"):
 		p.connect("dropped", _on_point_dropped)
 
-func _on_point_dropped(_pickable):
+func _on_point_dropped(_pickable) -> void:
 	var p: Node3D = _pickable
 	var x = clamp(p.position.x, -area_half_extent, area_half_extent)
 	var y = clamp(p.position.y, -area_half_extent, area_half_extent)
 	p.position = Vector3(x, y, 0.0)
 	_update_label(p)
 
-func _update_label(p: Node3D):
+func _update_label(p: Node3D) -> void:
 	var label: Label3D = p.get_node_or_null("XYLabel")
 	if label == null:
 		label = Label3D.new()
@@ -52,3 +52,9 @@ func _process(_delta):
 	if clamped != pos:
 		point_node.position = clamped
 		_update_label(point_node)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

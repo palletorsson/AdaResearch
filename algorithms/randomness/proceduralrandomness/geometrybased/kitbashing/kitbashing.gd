@@ -35,7 +35,7 @@ var modules = []
 var placed_modules = []
 var color_theme = null
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	color_theme = color_themes[randi() % color_themes.size()]
 	load_or_create_modules()
@@ -43,7 +43,7 @@ func _ready():
 	apply_lighting()
 	apply_atmosphere()
 
-func load_or_create_modules():
+func load_or_create_modules() -> void:
 	# Try to load existing modules
 	var dir = DirAccess.open(modules_path)
 	if dir and dir.list_dir_begin() == OK:
@@ -59,7 +59,7 @@ func load_or_create_modules():
 	if modules.size() == 0:
 		create_procedural_modules()
 
-func create_procedural_modules():
+func create_procedural_modules() -> void:
 	# Create module types based on the selected generation style
 	match generation_rules:
 		"surrealist":
@@ -71,7 +71,7 @@ func create_procedural_modules():
 		_:
 			create_mixed_modules()
 
-func create_surrealist_modules():
+func create_surrealist_modules() -> void:
 	# Create modules inspired by exquisite corpse and surrealist works
 	for i in range(10):
 		# Base objects
@@ -93,7 +93,7 @@ func create_surrealist_modules():
 		
 		modules.append(module)
 
-func create_mechanical_modules():
+func create_mechanical_modules() -> void:
 	# Create modules inspired by Vitaly Bulgarov's mechanical kit parts
 	for i in range(10):
 		var module = Node3D.new()
@@ -111,7 +111,7 @@ func create_mechanical_modules():
 				
 		modules.append(module)
 
-func create_organic_modules():
+func create_organic_modules() -> void:
 	# Create modules inspired by more organic forms
 	for i in range(10):
 		var module = Node3D.new()
@@ -129,14 +129,14 @@ func create_organic_modules():
 				
 		modules.append(module)
 
-func create_mixed_modules():
+func create_mixed_modules() -> void:
 	# Create some of each type for variety
 	create_surrealist_modules()
 	create_mechanical_modules()
 	create_organic_modules()
 
 # Helper functions to create different module types
-func add_stacked_primitives(parent):
+func add_stacked_primitives(parent) -> void:
 	var height = 0
 	var pieces = randi() % 5 + 2  # 2-6 pieces
 	
@@ -164,7 +164,7 @@ func add_stacked_primitives(parent):
 		
 		parent.add_child(mesh_instance)
 
-func add_floating_parts(parent):
+func add_floating_parts(parent) -> void:
 	var parts = randi() % 5 + 3  # 3-7 parts
 	
 	for i in range(parts):
@@ -194,7 +194,7 @@ func add_floating_parts(parent):
 		
 		parent.add_child(mesh_instance)
 
-func add_nonsensical_machine(parent):
+func add_nonsensical_machine(parent) -> void:
 	# Base
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -238,7 +238,7 @@ func add_nonsensical_machine(parent):
 		apply_random_material(attachment)
 		parent.add_child(attachment)
 
-func add_abstract_sculpture(parent):
+func add_abstract_sculpture(parent) -> void:
 	# Create a base
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -283,7 +283,7 @@ func add_abstract_sculpture(parent):
 	
 	parent.add_child(main_body)
 
-func add_composite_creature(parent):
+func add_composite_creature(parent) -> void:
 	# Inspired by exquisite corpse - create a creature with mismatched parts
 	
 	# Body
@@ -328,7 +328,7 @@ func add_composite_creature(parent):
 		apply_material(limb, "accent")
 		parent.add_child(limb)
 
-func add_mechanical_joint(parent):
+func add_mechanical_joint(parent) -> void:
 	# Base plate
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -371,7 +371,7 @@ func add_mechanical_joint(parent):
 		apply_material(detail, "metal")
 		parent.add_child(detail)
 
-func add_control_panel(parent):
+func add_control_panel(parent) -> void:
 	# Panel base
 	var panel = MeshInstance3D.new()
 	panel.mesh = BoxMesh.new()
@@ -414,7 +414,7 @@ func add_control_panel(parent):
 		
 		parent.add_child(control)
 
-func add_pipe_system(parent):
+func add_pipe_system(parent) -> void:
 	# Start and end points
 	var start_pos = Vector3(randf_range(-1.0, 1.0), 0, randf_range(-1.0, 1.0))
 	var end_pos = Vector3(randf_range(-1.0, 1.0), randf_range(1.0, 2.0), randf_range(-1.0, 1.0))
@@ -450,7 +450,7 @@ func add_pipe_system(parent):
 	apply_material(wheel, "metal")
 	parent.add_child(wheel)
 
-func create_pipe_segment(parent, start, end):
+func create_pipe_segment(parent, start, end) -> void:
 	var segment = MeshInstance3D.new()
 	segment.mesh = CylinderMesh.new()
 	
@@ -469,7 +469,7 @@ func create_pipe_segment(parent, start, end):
 	apply_material(segment, "metal")
 	parent.add_child(segment)
 
-func add_electronic_component(parent):
+func add_electronic_component(parent) -> void:
 	# Base board
 	var board = MeshInstance3D.new()
 	board.mesh = BoxMesh.new()
@@ -531,7 +531,7 @@ func add_electronic_component(parent):
 		parent.add_child(circuit)
 
 # Organic module builders
-func add_plant_structure(parent):
+func add_plant_structure(parent) -> void:
 	# Base/soil
 	var base = MeshInstance3D.new()
 	base.mesh = CylinderMesh.new()
@@ -584,7 +584,7 @@ func add_plant_structure(parent):
 		
 		parent.add_child(branch)
 
-func add_fluid_vessel(parent):
+func add_fluid_vessel(parent) -> void:
 	# Container
 	var container = MeshInstance3D.new()
 	container.mesh = SphereMesh.new()
@@ -628,7 +628,7 @@ func add_fluid_vessel(parent):
 	add_tube(parent, Vector3(0, 0.7, 0), Vector3(0, 1.2, 0.5))
 	add_tube(parent, Vector3(0, -0.7, 0), Vector3(0, -1.2, -0.5))
 
-func add_tube(parent, start, end):
+func add_tube(parent, start, end) -> void:
 	var tube = MeshInstance3D.new()
 	tube.mesh = CylinderMesh.new()
 	
@@ -650,7 +650,7 @@ func add_tube(parent, start, end):
 	
 	parent.add_child(tube)
 
-func add_coral_structure(parent):
+func add_coral_structure(parent) -> void:
 	# Base
 	var base = MeshInstance3D.new()
 	base.mesh = CylinderMesh.new()
@@ -666,7 +666,7 @@ func add_coral_structure(parent):
 	create_coral_branch(main_form, Vector3.ZERO, 0.7, 0)
 	
 	parent.add_child(main_form)
-func create_coral_branch(parent, position, size, depth, max_depth = 3):
+func create_coral_branch(parent, position, size, depth, max_depth = 3) -> void:
 	# Stop if we've reached max depth
 	if depth > max_depth:
 		return
@@ -705,7 +705,7 @@ func create_coral_branch(parent, position, size, depth, max_depth = 3):
 			var new_pos = position + branch_dir * size
 			create_coral_branch(parent, new_pos, size * 0.6, depth + 1, max_depth)
 
-func add_egg_structure(parent):
+func add_egg_structure(parent) -> void:
 	# Base structure
 	var base = MeshInstance3D.new()
 	base.mesh = SphereMesh.new()
@@ -782,7 +782,7 @@ func add_egg_structure(parent):
 		apply_organic_material(tendril, Color(0.6, 0.2, 0.5), 0.0, 0.6)
 		parent.add_child(tendril)
 
-func generate_space():
+func generate_space() -> void:
 	# Place modules in 3D space
 	for i in range(module_count):
 		place_random_module()
@@ -793,7 +793,7 @@ func generate_space():
 	# Add ambient objects like particles or floating elements
 	add_ambient_elements()
 
-func place_random_module():
+func place_random_module() -> void:
 	if modules.size() == 0:
 		push_error("No modules available!")
 		return
@@ -825,7 +825,7 @@ func place_random_module():
 	add_child(module_instance)
 	placed_modules.append(module_instance)
 
-func connect_modules():
+func connect_modules() -> void:
 	# Check if we have enough modules to connect
 	if placed_modules.size() < 2:
 		return
@@ -845,7 +845,7 @@ func connect_modules():
 		
 		create_connection(module_a, module_b)
 
-func create_connection(module_a, module_b):
+func create_connection(module_a, module_b) -> void:
 	# Choose connection type based on distance
 	var distance = module_a.global_position.distance_to(module_b.global_position)
 	
@@ -856,7 +856,7 @@ func create_connection(module_a, module_b):
 	else:
 		create_floating_connection(module_a, module_b)
 
-func create_mechanical_connection(module_a, module_b):
+func create_mechanical_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
@@ -867,7 +867,7 @@ func create_mechanical_connection(module_a, module_b):
 		# Solid connector
 		create_solid_connector(start_pos, end_pos)
 
-func create_pipe_path(start_pos, end_pos):
+func create_pipe_path(start_pos, end_pos) -> void:
 	var midpoint = (start_pos + end_pos) / 2
 	midpoint.y += randf_range(1.0, 3.0) # Arch up
 	
@@ -879,7 +879,7 @@ func create_pipe_path(start_pos, end_pos):
 								Vector3(end_pos.x, midpoint.y, end_pos.z))
 	create_pipe_segment_with_joint(Vector3(end_pos.x, midpoint.y, end_pos.z), end_pos)
 
-func create_pipe_segment_with_joint(start_pos, end_pos):
+func create_pipe_segment_with_joint(start_pos, end_pos) -> void:
 	# Create pipe segment
 	var pipe = MeshInstance3D.new()
 	pipe.mesh = CylinderMesh.new()
@@ -916,7 +916,7 @@ func create_pipe_segment_with_joint(start_pos, end_pos):
 		
 		add_child(joint)
 
-func create_solid_connector(start_pos, end_pos):
+func create_solid_connector(start_pos, end_pos) -> void:
 	# Create a solid bar between positions
 	var connector = MeshInstance3D.new()
 	connector.mesh = BoxMesh.new()
@@ -940,7 +940,7 @@ func create_solid_connector(start_pos, end_pos):
 	
 	add_child(connector)
 
-func create_beam_connection(module_a, module_b):
+func create_beam_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
@@ -972,7 +972,7 @@ func create_beam_connection(module_a, module_b):
 	if randf() > 0.3:
 		add_particles_along_beam(start_pos, end_pos, color_theme["accent"])
 
-func create_floating_connection(module_a, module_b):
+func create_floating_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
@@ -1014,7 +1014,7 @@ func create_floating_connection(module_a, module_b):
 		
 		add_child(floating_object)
 
-func add_particles_along_beam(start_pos, end_pos, color):
+func add_particles_along_beam(start_pos, end_pos, color) -> void:
 	# In an actual project, you would use a real particle system
 	# For this example, we'll create small spheres to simulate particles
 	var particle_count = randi() % 5 + 3
@@ -1037,7 +1037,7 @@ func add_particles_along_beam(start_pos, end_pos, color):
 		
 		add_child(particle)
 
-func add_ambient_elements():
+func add_ambient_elements() -> void:
 	# Add some ambient floating elements to the scene
 	for i in range(randi() % 20 + 10):
 		var element = MeshInstance3D.new()
@@ -1086,7 +1086,7 @@ func add_ambient_elements():
 		
 		add_child(element)
 
-func apply_lighting():
+func apply_lighting() -> void:
 	# Create a dynamic lighting setup
 	
 	# Environment light
@@ -1152,7 +1152,7 @@ func apply_lighting():
 		
 		add_child(spot_light)
 
-func apply_atmosphere():
+func apply_atmosphere() -> void:
 	# In Godot 4, we can add volumetric fog and other atmosphere effects
 	# For a more basic approach without full volumetrics, we'll use particles
 	
@@ -1162,7 +1162,7 @@ func apply_atmosphere():
 	# Add a skybox or environment texture if desired
 	# (This would require an actual texture resource)
 
-func create_atmosphere_particles():
+func create_atmosphere_particles() -> void:
 	# In a full implementation, you would use GPUParticles3D
 	# For simplicity in this example, we'll create a few static particles 
 	
@@ -1191,7 +1191,7 @@ func create_atmosphere_particles():
 
 # Utility functions for materials
 
-func apply_random_material(mesh_instance):
+func apply_random_material(mesh_instance) -> void:
 	var material_type = randi() % 4
 	
 	match material_type:
@@ -1200,7 +1200,7 @@ func apply_random_material(mesh_instance):
 		2: apply_material(mesh_instance, "accent")
 		3: apply_material(mesh_instance, "metal")
 
-func apply_material(mesh_instance, type):
+func apply_material(mesh_instance, type) -> void:
 	var material = StandardMaterial3D.new()
 	
 	match type:
@@ -1227,9 +1227,15 @@ func apply_material(mesh_instance, type):
 	
 	mesh_instance.material_override = material
 
-func apply_organic_material(mesh_instance, base_color, metallic_range, roughness):
+func apply_organic_material(mesh_instance, base_color, metallic_range, roughness) -> void:
 	var material = StandardMaterial3D.new()
 	material.albedo_color = base_color
 	material.metallic = metallic_range
 	material.roughness = roughness
 	mesh_instance.material_override = material
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

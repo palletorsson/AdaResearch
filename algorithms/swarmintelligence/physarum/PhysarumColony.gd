@@ -19,7 +19,7 @@ const DURATION = 20.0
 # Nodes
 @onready var result_mesh: MeshInstance3D = $ResultMesh
 
-func _ready():
+func _ready() -> void:
 	# 1. Setup Grid
 	grid = PhysarumGrid.new(grid_resolution, grid_resolution)
 	
@@ -49,7 +49,7 @@ func _ready():
 	# 5. Start Sequence
 	set_distribution(0)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Sequence Logic
 	dist_timer += delta
 	if dist_timer >= DURATION:
@@ -65,7 +65,7 @@ func _physics_process(delta):
 	p_image = grid.get_image()
 	p_texture.update(p_image)
 
-func set_distribution(mode: int):
+func set_distribution(mode: int) -> void:
 	# Clear old
 	emission_centers.clear()
 	for m in markers: m.queue_free()
@@ -92,12 +92,12 @@ func set_distribution(mode: int):
 				var pos = Vector3(randf_range(-20,20), 0, randf_range(-20,20))
 				add_attractor(pos, 6.0)
 
-func add_attractor(pos_world: Vector3, radius: float):
+func add_attractor(pos_world: Vector3, radius: float) -> void:
 	var grid_pos = _world_to_grid(pos_world)
 	emission_centers.append({"x": grid_pos.x, "y": grid_pos.y, "radius": radius, "amount": 2.0})
 	_spawn_marker(pos_world, radius)
 
-func _spawn_marker(pos: Vector3, radius: float):
+func _spawn_marker(pos: Vector3, radius: float) -> void:
 	var m = MeshInstance3D.new()
 	m.mesh = SphereMesh.new()
 	m.mesh.radius = radius * 0.4 # Scale visual to be slightly smaller than influence
@@ -114,3 +114,9 @@ func _world_to_grid(pos: Vector3) -> Vector2i:
 	var gx = int(remap(pos.x, -terrain_size.x/2, terrain_size.x/2, 0, grid.width))
 	var gy = int(remap(pos.z, -terrain_size.y/2, terrain_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

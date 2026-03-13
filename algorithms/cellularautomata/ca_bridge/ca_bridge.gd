@@ -25,19 +25,19 @@ var generated_cubes: Array = []
 var static_body: StaticBody3D
 var box_shape: BoxShape3D
 
-func _ready():
+func _ready() -> void:
 	_setup_collision()
 	if auto_generate:
 		start_generation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating:
 		timer += delta
 		if timer >= generation_speed:
 			timer = 0.0
 			step()
 
-func _setup_collision():
+func _setup_collision() -> void:
 	# Create a single StaticBody for the bridge to hold all shapes
 	if not static_body:
 		static_body = StaticBody3D.new()
@@ -50,16 +50,16 @@ func _setup_collision():
 		# Match the visual scale (0.5)
 		box_shape.size = Vector3(cell_size, cell_size, cell_size)
 
-func start_generation():
+func start_generation() -> void:
 	_clear_bridge()
 	_initialize_row()
 	current_z = 0
 	is_generating = true
 
-func stop_generation():
+func stop_generation() -> void:
 	is_generating = false
 
-func _clear_bridge():
+func _clear_bridge() -> void:
 	for cube in generated_cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
@@ -73,7 +73,7 @@ func _clear_bridge():
 	current_z = 0
 	is_generating = false
 
-func _initialize_row():
+func _initialize_row() -> void:
 	current_row = []
 	current_row.resize(width)
 	
@@ -86,7 +86,7 @@ func _initialize_row():
 			current_row[i] = 0
 		current_row[width / 2] = 1
 
-func step():
+func step() -> void:
 	if current_z >= length:
 		is_generating = false
 		return
@@ -95,7 +95,7 @@ func step():
 	current_row = _calculate_next_row(current_row)
 	current_z += 1
 
-func _spawn_row(row: Array, z_index: int):
+func _spawn_row(row: Array, z_index: int) -> void:
 	var offset_x = (width * cell_size) / 2.0
 	
 	for i in range(width):
@@ -139,3 +139,9 @@ func _apply_rule(a, b, c) -> int:
 		return 1
 	else:
 		return 0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

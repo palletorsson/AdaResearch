@@ -207,3 +207,9 @@ func apply_grid_config(config: Dictionary) -> void:
 		data = config["data"]
 
 	_rebuild_display()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

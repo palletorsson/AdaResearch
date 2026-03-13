@@ -23,7 +23,7 @@ var info_label: Label3D
 var speed_controller: ParameterController3D
 var motor_speed: float = 2.0
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -41,7 +41,7 @@ func _process(_delta):
 	if hinge_joint:
 		hinge_joint.set("motor/target_velocity", motor_speed)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_UP:
 			motor_speed = clamp(motor_speed + 0.5, -10.0, 10.0)
@@ -52,7 +52,7 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			motor_speed = 2.0
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -62,17 +62,17 @@ func create_info_label():
 	info_label.position = Vector3(0, 0.6, 0)
 	add_child(info_label)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		info_label.text = "Windmill (HingeJoint3D)\nMotor Speed: %.1f" % motor_speed
 
-func _on_speed_changed(new_speed: float):
+func _on_speed_changed(new_speed: float) -> void:
 	"""Update motor speed from controller"""
 	motor_speed = new_speed
 	print("Motor speed changed to: %.1f" % motor_speed)
 
-func create_speed_controller():
+func create_speed_controller() -> void:
 	"""Create 3D slider for motor speed"""
 	speed_controller = ParameterController3D.new()
 	speed_controller.parameter_name = "Motor Speed"
@@ -92,7 +92,7 @@ func create_speed_controller():
 	instructions.text = "[↑/↓] Speed | [SPACE] Stop | [R] Reset"
 	add_child(instructions)
 
-func create_windmill():
+func create_windmill() -> void:
 	"""Create windmill structure"""
 	windmill = Node3D.new()
 	windmill.position = Vector3(0, 0, 0)
@@ -107,7 +107,7 @@ func create_windmill():
 	# Create hinge joint connecting pole and blades
 	create_hinge()
 
-func create_pole():
+func create_pole() -> void:
 	"""Create static pole (base)"""
 	pole = StaticBody3D.new()
 	pole.position = Vector3(0, -0.1, 0)
@@ -145,7 +145,7 @@ func create_pole():
 	hub.material_override = material
 	pole.add_child(hub)
 
-func create_blades():
+func create_blades() -> void:
 	"""Create rotating blade assembly"""
 	blades = RigidBody3D.new()
 	blades.position = Vector3(0, 0.05, 0)  # At top of pole
@@ -185,7 +185,7 @@ func create_blades():
 	center_collision.shape = center_shape
 	blades.add_child(center_collision)
 
-func create_blade(parent: RigidBody3D, pos: Vector3, size: Vector3, mat: Material):
+func create_blade(parent: RigidBody3D, pos: Vector3, size: Vector3, mat: Material) -> void:
 	"""Create single blade"""
 	# Mesh
 	var mesh_instance = MeshInstance3D.new()
@@ -204,7 +204,7 @@ func create_blade(parent: RigidBody3D, pos: Vector3, size: Vector3, mat: Materia
 	collision.position = pos
 	parent.add_child(collision)
 
-func create_hinge():
+func create_hinge() -> void:
 	"""Create hinge joint connecting pole and blades"""
 	hinge_joint = HingeJoint3D.new()
 	hinge_joint.node_a = pole.get_path()
@@ -224,7 +224,7 @@ func create_hinge():
 
 	windmill.add_child(hinge_joint)
 
-func reset():
+func reset() -> void:
 	"""Reset windmill"""
 	if blades:
 		blades.angular_velocity = Vector3.ZERO
@@ -234,3 +234,9 @@ func reset():
 
 	if hinge_joint:
 		hinge_joint.set("motor/target_velocity", motor_speed)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

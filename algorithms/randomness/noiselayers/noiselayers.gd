@@ -50,7 +50,7 @@ var lod_levels: Array = []
 var current_lod: int = 0
 var player_position: Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	generate_terrain()
 	setup_collision()
@@ -64,7 +64,7 @@ func _process(_delta):
 	if enable_lod:
 		update_lod_level()
 
-func setup_noise():
+func setup_noise() -> void:
 	"""Setup optimized three-layer noise system for realistic terrain generation"""
 	var base_seed = randi()  # Use random seed for variety
 	
@@ -103,7 +103,7 @@ func setup_noise():
 	
 	print("Noise layers configured - Seed: %d" % base_seed)
 
-func generate_terrain():
+func generate_terrain() -> void:
 	"""Generate optimized terrain with human movement considerations"""
 	print("Generating terrain with %dx%d resolution..." % [terrain_size, terrain_size])
 	
@@ -346,7 +346,7 @@ func calculate_normals(vertices: PackedVector3Array, indices: PackedInt32Array) 
 	
 	return normals
 
-func setup_collision():
+func setup_collision() -> void:
 	"""Setup optimized collision for human movement"""
 	if not enable_collision_optimization:
 		setup_basic_collision()
@@ -377,7 +377,7 @@ func setup_collision():
 	
 	print("Collision setup complete")
 
-func setup_basic_collision():
+func setup_basic_collision() -> void:
 	"""Setup basic collision without optimization"""
 	var static_body = StaticBody3D.new()
 	add_child(static_body)
@@ -531,7 +531,7 @@ func create_fallback_walkable_mesh() -> ArrayMesh:
 
 # === UTILITY FUNCTIONS ===
 
-func regenerate_terrain():
+func regenerate_terrain() -> void:
 	"""Regenerate terrain with current settings"""
 	print("Regenerating terrain...")
 	setup_noise()
@@ -629,7 +629,7 @@ func get_terrain_slope_at_position(world_x: float, world_z: float) -> float:
 
 # === DEBUG FUNCTIONS ===
 
-func debug_show_walkable_areas():
+func debug_show_walkable_areas() -> void:
 	"""Debug function to visualize walkable areas"""
 	var static_body = get_child(0) as StaticBody3D
 	if static_body and static_body.has_meta("walkable_surface"):
@@ -638,7 +638,7 @@ func debug_show_walkable_areas():
 	else:
 		print("No walkable surface collision found")
 
-func debug_terrain_info():
+func debug_terrain_info() -> void:
 	"""Debug function to show terrain information"""
 	print("=== TERRAIN DEBUG INFO ===")
 	print("Terrain size: %dx%d" % [terrain_size, terrain_size])
@@ -649,7 +649,7 @@ func debug_terrain_info():
 	print("Collision optimization: %s" % ("Enabled" if enable_collision_optimization else "Disabled"))
 	print("=========================")
 
-func debug_collision_info():
+func debug_collision_info() -> void:
 	"""Debug function to show collision information"""
 	print("=== COLLISION DEBUG INFO ===")
 	var static_body = get_child(0) as StaticBody3D
@@ -673,7 +673,7 @@ func debug_collision_info():
 		print("No StaticBody3D found!")
 	print("=============================")
 
-func fix_collision_issues():
+func fix_collision_issues() -> void:
 	"""Fix common collision issues by regenerating with basic collision"""
 	print("Fixing collision issues...")
 	
@@ -696,7 +696,7 @@ func fix_collision_issues():
 
 # === LOD SYSTEM FUNCTIONS ===
 
-func setup_lod_system():
+func setup_lod_system() -> void:
 	"""Initialize Level of Detail system"""
 	print("Setting up LOD system...")
 	
@@ -714,7 +714,7 @@ func setup_lod_system():
 	
 	print("LOD system setup complete with %d levels" % lod_levels.size())
 
-func generate_lod_mesh(lod_index: int):
+func generate_lod_mesh(lod_index: int) -> void:
 	"""Generate mesh for specific LOD level"""
 	var lod_data = lod_levels[lod_index]
 	var resolution = lod_data.resolution
@@ -784,7 +784,7 @@ func generate_lod_mesh(lod_index: int):
 	
 	print("Generated LOD %d with %dx%d resolution (%d vertices)" % [lod_index, lod_terrain_size, lod_terrain_size, vertices.size()])
 
-func update_lod_level():
+func update_lod_level() -> void:
 	"""Update LOD level based on player distance"""
 	if lod_levels.size() == 0:
 		return
@@ -805,7 +805,7 @@ func update_lod_level():
 	if new_lod != current_lod:
 		switch_to_lod(new_lod)
 
-func switch_to_lod(lod_index: int):
+func switch_to_lod(lod_index: int) -> void:
 	"""Switch to specific LOD level"""
 	if lod_index < 0 or lod_index >= lod_levels.size():
 		return
@@ -824,7 +824,7 @@ func switch_to_lod(lod_index: int):
 	
 	print("Switched to LOD level %d" % lod_index)
 
-func update_collision_for_lod(lod_index: int):
+func update_collision_for_lod(lod_index: int) -> void:
 	"""Update collision shape for LOD level"""
 	var static_body = get_child(0) as StaticBody3D
 	if not static_body:
@@ -842,7 +842,7 @@ func update_collision_for_lod(lod_index: int):
 							collision_shape.shape = lod_data.mesh.create_trimesh_shape()
 							break
 
-func set_player_position(position: Vector3):
+func set_player_position(position: Vector3) -> void:
 	"""Set player position for LOD calculations"""
 	player_position = position
 
@@ -857,3 +857,9 @@ func get_current_lod_info() -> Dictionary:
 			"vertex_count": lod_data.mesh.get_faces().size() if lod_data.mesh else 0
 		}
 	return {}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -14,10 +14,10 @@ var current_query_index := 0
 var current_update_index := 0
 var update_value := 0
 
-func _ready():
+func _ready() -> void:
 	initialize_fenwick_tree()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	update_timer += delta
 	query_timer += delta
@@ -27,7 +27,7 @@ func _process(delta):
 	demonstrate_update_operation()
 	show_binary_representation()
 
-func initialize_fenwick_tree():
+func initialize_fenwick_tree() -> void:
 	var n = original_array.size()
 	fenwick_tree.resize(n + 1)  # 1-indexed
 	
@@ -39,7 +39,7 @@ func initialize_fenwick_tree():
 	for i in range(n):
 		update_fenwick(i + 1, original_array[i])  # Convert to 1-indexed
 
-func update_fenwick(index: int, delta: int):
+func update_fenwick(index: int, delta: int) -> void:
 	while index < fenwick_tree.size():
 		fenwick_tree[index] += delta
 		index += index & (-index)  # Add LSB
@@ -57,7 +57,7 @@ func range_query(left: int, right: int) -> int:
 	else:
 		return query_fenwick(right) - query_fenwick(left - 1)
 
-func visualize_binary_indexed_tree():
+func visualize_binary_indexed_tree() -> void:
 	var container = $BinaryIndexedTree
 	
 	# Clear previous visualization
@@ -98,7 +98,7 @@ func count_trailing_zeros(n: int) -> int:
 		count += 1
 	return count
 
-func show_responsibility_connections(container: Node3D, index: int):
+func show_responsibility_connections(container: Node3D, index: int) -> void:
 	var lsb = index & (-index)
 	var start = index - lsb + 1
 	var end = index
@@ -123,7 +123,7 @@ func show_responsibility_connections(container: Node3D, index: int):
 		
 		container.add_child(connection)
 
-func show_prefix_sum_calculation():
+func show_prefix_sum_calculation() -> void:
 	var container = $PrefixSums
 	
 	# Clear previous visualization
@@ -172,7 +172,7 @@ func show_prefix_sum_calculation():
 	
 	container.add_child(result_sphere)
 
-func demonstrate_update_operation():
+func demonstrate_update_operation() -> void:
 	var container = $UpdateVisualization
 	
 	# Clear previous visualization
@@ -226,7 +226,7 @@ func demonstrate_update_operation():
 		
 		container.add_child(element)
 
-func show_binary_representation():
+func show_binary_representation() -> void:
 	var container = $BinaryRepresentation
 	
 	# Clear previous visualization
@@ -267,7 +267,7 @@ func show_binary_representation():
 		# Show binary representation visually
 		show_binary_bits(container, index, Vector3(i * 0.8 - display_indices.size() * 0.4, -1.5, 0))
 
-func show_binary_bits(container: Node3D, number: int, position: Vector3):
+func show_binary_bits(container: Node3D, number: int, position: Vector3) -> void:
 	var bits = []
 	var temp = number
 	
@@ -292,3 +292,9 @@ func show_binary_bits(container: Node3D, number: int, position: Vector3):
 		
 		bit_cube.material_override = material
 		container.add_child(bit_cube)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

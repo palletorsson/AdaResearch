@@ -20,12 +20,12 @@ var _velocity_cache: Dictionary = {}
 var accumulator: float = 0.0
 const UPDATE_INTERVAL = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	print("CombinedForcesDemo: Ready - Drag the force vectors!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup combined forces demonstration"""
 	# Force 1 (user can drag) - Red
 	force1_vector = create_force_vector(
@@ -70,7 +70,7 @@ func _setup_demo():
 		"Forces add as vectors"
 	])
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	update_force_vector_position()
 	
 	# Get forces (logical units)
@@ -96,7 +96,7 @@ func _physics_process(delta):
 		_update_info(f1, f2, f_net, velocity)
 		accumulator = 0.0
 
-func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3):
+func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3) -> void:
 	"""Update info display"""
 	var lines = [
 		"Combined Forces Demo",
@@ -115,7 +115,7 @@ func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3):
 	]
 	update_info_text(lines)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -123,7 +123,7 @@ func _input(event):
 			physics_ball.linear_velocity = Vector3.ZERO
 			physics_ball.angular_velocity = Vector3.ZERO
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3.ZERO)
 	

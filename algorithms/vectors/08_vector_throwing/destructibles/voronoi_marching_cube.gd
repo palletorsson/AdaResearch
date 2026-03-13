@@ -13,10 +13,10 @@ var _fragments: Array[RigidBody3D] = []
 var _is_destroyed: bool = false
 var _hit_area: Area3D
 
-func _ready():
+func _ready() -> void:
 	call_deferred("_generate_voronoi_cube")
 
-func _generate_voronoi_cube():
+func _generate_voronoi_cube() -> void:
 	print("VoronoiMarchingCube: Generating cube with ", cell_count, " cells")
 
 	# Generate Voronoi seed points within the cube
@@ -45,7 +45,7 @@ func _generate_voronoi_seeds() -> Array[Vector3]:
 
 	return seeds
 
-func _create_voronoi_fragment(seed: Vector3, all_seeds: Array[Vector3], index: int):
+func _create_voronoi_fragment(seed: Vector3, all_seeds: Array[Vector3], index: int) -> void:
 	# Create a fragment using marching cubes
 	var fragment = RigidBody3D.new()
 	fragment.name = "Fragment_" + str(index)
@@ -190,7 +190,7 @@ func _simplex_noise_3d(p: Vector3) -> float:
 	# Simplified 3D noise - just use sin waves for now
 	return sin(p.x * 2.0) * 0.5 + sin(p.y * 3.0) * 0.3 + sin(p.z * 2.5) * 0.4
 
-func _add_box_to_surface(surface_tool: SurfaceTool, center: Vector3, size: float):
+func _add_box_to_surface(surface_tool: SurfaceTool, center: Vector3, size: float) -> void:
 	# Add a small box as a stand-in for proper marching cubes geometry
 	var hs = size * 0.5  # half size
 
@@ -226,7 +226,7 @@ func _add_box_to_surface(surface_tool: SurfaceTool, center: Vector3, size: float
 		for idx in face:
 			surface_tool.add_vertex(v[idx])
 
-func _setup_hit_detection():
+func _setup_hit_detection() -> void:
 	# Create an area that covers all fragments
 	_hit_area = Area3D.new()
 	_hit_area.name = "HitArea"
@@ -243,7 +243,7 @@ func _setup_hit_detection():
 
 	_hit_area.body_entered.connect(_on_body_entered)
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed:
 		return
 
@@ -258,7 +258,7 @@ func _on_body_entered(body: Node3D):
 
 	_destroy(impact_velocity)
 
-func _destroy(impact_velocity: Vector3):
+func _destroy(impact_velocity: Vector3) -> void:
 	if _is_destroyed:
 		return
 
@@ -297,7 +297,7 @@ func _destroy(impact_velocity: Vector3):
 	await get_tree().create_timer(6.0).timeout
 	queue_free()
 
-func _fade_fragment(fragment: RigidBody3D):
+func _fade_fragment(fragment: RigidBody3D) -> void:
 	await get_tree().create_timer(4.0).timeout
 
 	if not is_instance_valid(fragment):
@@ -307,3 +307,9 @@ func _fade_fragment(fragment: RigidBody3D):
 	if mesh_instance:
 		var tween = create_tween()
 		tween.tween_property(mesh_instance, "scale", Vector3.ZERO, 1.5)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -506,3 +506,9 @@ func _randomize_seed() -> void:
 	_anim_phase = 0
 	_seed_label.text = "seed: %d" % initial_seed
 	_update_display()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

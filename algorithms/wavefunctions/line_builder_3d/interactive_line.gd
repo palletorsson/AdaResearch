@@ -10,7 +10,7 @@ extends Node3D
 var points: Array[Node3D] = []
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	mesh_instance = $LineMesh
 	_spawn_points()
@@ -19,7 +19,7 @@ func _ready():
 func _process(_delta):
 	_update_line()
 
-func _spawn_points():
+func _spawn_points() -> void:
 	var parent = $Points
 	points.clear()
 	
@@ -34,7 +34,7 @@ func _spawn_points():
 		parent.add_child(p)
 		points.append(p)
 
-func _update_line():
+func _update_line() -> void:
 	if points.size() < 2:
 		return
 
@@ -102,3 +102,9 @@ func _create_line_material() -> ShaderMaterial:
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 	
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

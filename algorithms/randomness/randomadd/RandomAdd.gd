@@ -14,7 +14,7 @@ var cube_scene: PackedScene
 var added_cubes: Array = []
 var current_cube_count: int = 0
 
-func _ready():
+func _ready() -> void:
 	# Load the pickup cube scene (same as grid_3d_4x4x4.gd)
 	cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	
@@ -29,7 +29,7 @@ func _ready():
 	timer.start()
 	print("Started randomly adding cubes to grid. Bounding box: ", bounding_box_min, " to ", bounding_box_max)
 
-func _on_add_timer_timeout():
+func _on_add_timer_timeout() -> void:
 	"""Called every add_interval seconds to add a random cube"""
 	if current_cube_count >= max_cubes:
 		print("Maximum cube limit reached: ", max_cubes)
@@ -69,7 +69,7 @@ func is_position_occupied(pos: Vector3) -> bool:
 			return true
 	return false
 
-func add_cube_at_position(pos: Vector3):
+func add_cube_at_position(pos: Vector3) -> void:
 	"""Add a cube at the specified position"""
 	if not cube_scene:
 		print("Error: Cube scene not loaded")
@@ -86,37 +86,37 @@ func add_cube_at_position(pos: Vector3):
 	
 	print("Created cube: ", cube_instance.name, " at ", pos)
 
-func set_bounding_box(min_pos: Vector3, max_pos: Vector3):
+func set_bounding_box(min_pos: Vector3, max_pos: Vector3) -> void:
 	"""Set the bounding box for random cube placement"""
 	bounding_box_min = min_pos
 	bounding_box_max = max_pos
 	print("Updated bounding box: ", bounding_box_min, " to ", bounding_box_max)
 
-func set_add_interval(interval: float):
+func set_add_interval(interval: float) -> void:
 	"""Set how often to add cubes (in seconds)"""
 	add_interval = interval
 	if timer:
 		timer.wait_time = interval
 	print("Updated add interval to: ", interval, " seconds")
 
-func set_max_cubes(max: int):
+func set_max_cubes(max: int) -> void:
 	"""Set maximum number of cubes to add"""
 	max_cubes = max
 	print("Updated max cubes to: ", max)
 
-func stop_adding():
+func stop_adding() -> void:
 	"""Stop adding cubes"""
 	if timer:
 		timer.stop()
 	print("Stopped adding cubes. Total cubes: ", current_cube_count)
 
-func start_adding():
+func start_adding() -> void:
 	"""Start adding cubes"""
 	if timer:
 		timer.start()
 	print("Started adding cubes")
 
-func clear_all_cubes():
+func clear_all_cubes() -> void:
 	"""Remove all added cubes"""
 	for cube in added_cubes:
 		if is_instance_valid(cube):
@@ -136,3 +136,9 @@ func get_cube_positions() -> Array:
 		if is_instance_valid(cube):
 			positions.append(cube.position)
 	return positions
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -3,10 +3,10 @@ extends Node3D
 # Renaissance Painting Floor Pattern Recreation
 # Creates the geometric diamond and square pattern seen in the painting
 
-func _ready():
+func _ready() -> void:
 	create_renaissance_floor()
 
-func create_renaissance_floor():
+func create_renaissance_floor() -> void:
 	"""Create the complex geometric floor pattern from the Renaissance painting"""
 	
 	# Floor parameters
@@ -38,7 +38,7 @@ func create_renaissance_floor():
 	# Add perspective effect elements
 	create_perspective_elements(floor_container, floor_width, floor_height, base_tile_size, tile_thickness)
 
-func create_base_checkerboard(parent: Node3D, width: int, height: int, tile_size: float, thickness: float, dark_mat: Material, light_mat: Material):
+func create_base_checkerboard(parent: Node3D, width: int, height: int, tile_size: float, thickness: float, dark_mat: Material, light_mat: Material) -> void:
 	"""Create the base alternating checkerboard pattern"""
 	
 	var base_container = Node3D.new()
@@ -67,7 +67,7 @@ func create_base_checkerboard(parent: Node3D, width: int, height: int, tile_size
 			
 			base_container.add_child(tile)
 
-func create_diamond_pattern(parent: Node3D, width: int, height: int, tile_size: float, thickness: float, cream_mat: Material, red_mat: Material):
+func create_diamond_pattern(parent: Node3D, width: int, height: int, tile_size: float, thickness: float, cream_mat: Material, red_mat: Material) -> void:
 	"""Create diamond-shaped decorative elements"""
 	
 	var diamond_container = Node3D.new()
@@ -129,7 +129,7 @@ func create_diamond_tile(size: float, thickness: float) -> MeshInstance3D:
 	
 	return diamond_instance
 
-func create_decorative_borders(parent: Node3D, width: int, height: int, tile_size: float, thickness: float):
+func create_decorative_borders(parent: Node3D, width: int, height: int, tile_size: float, thickness: float) -> void:
 	"""Create decorative border strips"""
 	
 	var border_container = Node3D.new()
@@ -171,7 +171,7 @@ func create_border_strip(width: int, height: int, tile_size: float, border_width
 	
 	return strip_instance
 
-func create_perspective_elements(parent: Node3D, width: int, height: int, tile_size: float, thickness: float):
+func create_perspective_elements(parent: Node3D, width: int, height: int, tile_size: float, thickness: float) -> void:
 	"""Add elements that enhance the perspective effect"""
 	
 	var perspective_container = Node3D.new()
@@ -328,7 +328,7 @@ func create_perspective_line_material() -> StandardMaterial3D:
 	return material
 
 # Optional: Add Renaissance-style lighting
-func setup_renaissance_lighting():
+func setup_renaissance_lighting() -> void:
 	"""Setup warm, painterly lighting"""
 	
 	# Main light (window light)
@@ -356,3 +356,9 @@ func setup_renaissance_lighting():
 	accent_light.omni_range = 20.0
 	accent_light.position = Vector3(0, 6, 0)
 	add_child(accent_light)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

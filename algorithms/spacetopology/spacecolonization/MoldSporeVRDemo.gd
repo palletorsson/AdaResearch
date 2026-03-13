@@ -30,7 +30,7 @@ var environment_setup: bool = false
 # Progress visualization
 var progress_indicator: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	print("MoldSporeVRDemo: Starting initialization...")
 	
 	# Add error handling to prevent crashes
@@ -41,7 +41,7 @@ func _ready():
 	# Delay initial generation to ensure everything is ready
 	call_deferred("create_initial_generation")
 
-func try_setup_vr_scene():
+func try_setup_vr_scene() -> void:
 	"""Setup VR scene with error handling"""
 	# Check if we can load required resources
 	if not setup_vr_scene_safe():
@@ -50,7 +50,7 @@ func try_setup_vr_scene():
 	else:
 		print("MoldSporeVRDemo: VR scene setup completed")
 
-func try_setup_mold_generator():
+func try_setup_mold_generator() -> void:
 	"""Setup mold generator with error handling"""
 	if not setup_mold_generator_safe():
 		print("MoldSporeVRDemo: Error in mold generator setup")
@@ -58,7 +58,7 @@ func try_setup_mold_generator():
 	else:
 		print("MoldSporeVRDemo: Mold generator setup completed")
 
-func try_setup_auto_growth():
+func try_setup_auto_growth() -> void:
 	"""Setup auto growth with error handling"""
 	if not setup_auto_growth_safe():
 		print("MoldSporeVRDemo: Error in auto growth setup, disabling auto growth")
@@ -81,14 +81,14 @@ func setup_auto_growth_safe() -> bool:
 	setup_auto_growth()
 	return auto_growth_timer != null
 
-func fallback_scene_setup():
+func fallback_scene_setup() -> void:
 	"""Minimal scene setup in case of VR issues"""
 	# Just add basic lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
 	add_child(light)
 
-func setup_vr_scene():
+func setup_vr_scene() -> void:
 	"""Setup the VR scene environment without UI"""
 	name = "MoldSporeVRDemo"
 	
@@ -100,7 +100,7 @@ func setup_vr_scene():
 	
 	print("MoldSporeVRDemo: VR scene setup complete")
 
-func setup_vr_environment():
+func setup_vr_environment() -> void:
 	"""Create atmospheric environment optimized for VR"""
 	# World environment
 	var world_env = WorldEnvironment.new()
@@ -141,7 +141,7 @@ func setup_vr_environment():
 	# Create dramatic VR lighting
 	create_vr_accent_lighting()
 
-func create_vr_accent_lighting():
+func create_vr_accent_lighting() -> void:
 	"""Create atmospheric accent lighting optimized for VR"""
 	var colors = [
 		Color(0.3, 1.0, 0.4),  # Bright bioluminescent green
@@ -171,7 +171,7 @@ func create_vr_accent_lighting():
 	# Add subtle animated lighting variation
 	create_animated_lighting()
 
-func create_animated_lighting():
+func create_animated_lighting() -> void:
 	"""Create subtle animated lighting for living feel"""
 	var tween = create_tween()
 	tween.set_loops()
@@ -197,7 +197,7 @@ func create_animated_lighting():
 				randf_range(3.0, 6.0)
 			)
 
-func create_space_boundary():
+func create_space_boundary() -> void:
 	"""Create visual boundary for the 1x1x1 generation space"""
 	var boundary = MeshInstance3D.new()
 	boundary.mesh = BoxMesh.new()
@@ -221,7 +221,7 @@ func create_space_boundary():
 	# Create progress indicator
 	create_progress_indicator()
 
-func setup_mold_generator():
+func setup_mold_generator() -> void:
 	"""Initialize the mold spore generator"""
 	mold_generator = SpaceColonizationMoldSpore.new()
 	mold_generator.name = "MoldSporeGenerator"
@@ -238,7 +238,7 @@ func setup_mold_generator():
 	
 	print("MoldSporeVRDemo: Generator initialized with VR parameters")
 
-func setup_auto_growth():
+func setup_auto_growth() -> void:
 	"""Setup automatic growth cycling"""
 	# Try to use existing timer from scene first
 	auto_growth_timer = get_node_or_null("AutoGrowthTimer")
@@ -259,11 +259,11 @@ func setup_auto_growth():
 	
 	print("MoldSporeVRDemo: Auto-growth system initialized")
 
-func create_initial_generation():
+func create_initial_generation() -> void:
 	"""Create the first mold spore network"""
 	start_new_generation()
 
-func start_new_generation():
+func start_new_generation() -> void:
 	"""Start generating a new mold spore network (non-blocking)"""
 	if mold_generator.is_generating:
 		return
@@ -279,12 +279,12 @@ func start_new_generation():
 	
 	print("MoldSporeVRDemo: Non-blocking generation started with seed %d" % seed_value)
 
-func start_async_generation(seed_value: int):
+func start_async_generation(seed_value: int) -> void:
 	"""Start asynchronous, non-blocking generation"""
 	# Start the async generation coroutine
 	generate_async(seed_value)
 
-func generate_async(seed_value: int):
+func generate_async(seed_value: int) -> void:
 	"""Generate mold spore network asynchronously over multiple frames"""
 	print("MoldSporeVRDemo: Starting async generation...")
 	
@@ -337,7 +337,7 @@ func generate_async(seed_value: int):
 	
 	print("MoldSporeVRDemo: Async generation complete after %d iterations" % mold_generator.current_iteration)
 
-func create_progress_indicator():
+func create_progress_indicator() -> void:
 	"""Create a visual progress indicator for generation"""
 	progress_indicator = MeshInstance3D.new()
 	progress_indicator.mesh = SphereMesh.new()
@@ -358,7 +358,7 @@ func create_progress_indicator():
 	progress_indicator.visible = false  # Hidden by default
 	add_child(progress_indicator)
 
-func update_progress_visual(percentage: float):
+func update_progress_visual(percentage: float) -> void:
 	"""Update visual progress indicator"""
 	if not progress_indicator:
 		return
@@ -379,13 +379,13 @@ func update_progress_visual(percentage: float):
 	else:
 		progress_indicator.visible = false
 
-func _on_auto_growth_cycle():
+func _on_auto_growth_cycle() -> void:
 	"""Handle automatic growth cycling"""
 	if auto_growth_enabled:
 		start_new_generation()
 		print("MoldSporeVRDemo: Auto-growth cycle triggered")
 
-func _on_generation_progress(percentage: float):
+func _on_generation_progress(percentage: float) -> void:
 	"""Handle generation progress updates"""
 	# Less frequent logging for async generation
 	var progress_percent = int(percentage * 100)
@@ -395,7 +395,7 @@ func _on_generation_progress(percentage: float):
 	# Update any visual progress indicators here if needed
 	update_progress_visual(percentage)
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	"""Handle generation completion"""
 	var stats = mold_generator.get_generation_statistics()
 	print("MoldSporeVRDemo: Generation complete - %d branches, %d spore bodies" % [
@@ -410,7 +410,7 @@ func _on_generation_complete():
 	if auto_growth_enabled:
 		auto_growth_timer.start()
 
-func clear_current_generation():
+func clear_current_generation() -> void:
 	"""Clear the current generation"""
 	for mesh_instance in current_generation:
 		if mesh_instance and is_instance_valid(mesh_instance):
@@ -418,7 +418,7 @@ func clear_current_generation():
 	current_generation.clear()
 
 # VR-specific functions
-func enable_auto_growth():
+func enable_auto_growth() -> void:
 	"""Enable automatic growth cycling"""
 	auto_growth_enabled = true
 	if not auto_growth_timer.is_stopped():
@@ -426,19 +426,19 @@ func enable_auto_growth():
 	auto_growth_timer.start()
 	print("MoldSporeVRDemo: Auto-growth enabled")
 
-func disable_auto_growth():
+func disable_auto_growth() -> void:
 	"""Disable automatic growth cycling"""
 	auto_growth_enabled = false
 	auto_growth_timer.stop()
 	print("MoldSporeVRDemo: Auto-growth disabled")
 
-func set_growth_cycle_time(new_time: float):
+func set_growth_cycle_time(new_time: float) -> void:
 	"""Set the time between growth cycles"""
 	growth_cycle_time = new_time
 	auto_growth_timer.wait_time = growth_cycle_time
 	print("MoldSporeVRDemo: Growth cycle time set to %.1f seconds" % new_time)
 
-func trigger_manual_growth():
+func trigger_manual_growth() -> void:
 	"""Manually trigger a new growth cycle (for VR interaction)"""
 	start_new_generation()
 
@@ -485,7 +485,7 @@ func get_closest_spore_to_position(world_position: Vector3) -> MeshInstance3D:
 	
 	return closest_spore
 
-func highlight_spore_bodies(highlight: bool):
+func highlight_spore_bodies(highlight: bool) -> void:
 	"""Highlight all spore bodies for VR interaction feedback"""
 	for mesh_instance in current_generation:
 		if mesh_instance and mesh_instance.name == "SporeBody":
@@ -500,7 +500,7 @@ func highlight_spore_bodies(highlight: bool):
 				if material:
 					material.emission_energy = 0.7
 
-func add_spore_particles():
+func add_spore_particles() -> void:
 	"""Add particle effects around spore bodies for enhanced VR atmosphere"""
 	for mesh_instance in current_generation:
 		if mesh_instance and mesh_instance.name == "SporeBody":
@@ -529,7 +529,7 @@ func add_spore_particles():
 			
 			add_child(particles)
 
-func create_growth_animation():
+func create_growth_animation() -> void:
 	"""Create animated growth effect for new generations"""
 	for mesh_instance in current_generation:
 		if mesh_instance:
@@ -546,7 +546,7 @@ func create_growth_animation():
 			tween.tween_interval(delay)
 			tween.tween_property(mesh_instance, "scale", Vector3.ONE, 1.5)
 
-func pulse_spore_bodies():
+func pulse_spore_bodies() -> void:
 	"""Create pulsing animation on spore bodies"""
 	for mesh_instance in current_generation:
 		if mesh_instance and mesh_instance.name == "SporeBody":
@@ -587,7 +587,7 @@ func get_vr_demo_info() -> Dictionary:
 	}
 
 # Enhanced visual effects for VR
-func add_atmospheric_particles():
+func add_atmospheric_particles() -> void:
 	"""Add atmospheric spore particles floating in the air"""
 	var atmosphere_particles = GPUParticles3D.new()
 	atmosphere_particles.name = "AtmosphereParticles"
@@ -619,7 +619,7 @@ func add_atmospheric_particles():
 	add_child(atmosphere_particles)
 
 # Cleanup function
-func _exit_tree():
+func _exit_tree() -> void:
 	"""Cleanup when scene is removed"""
 	if auto_growth_timer:
 		auto_growth_timer.stop()

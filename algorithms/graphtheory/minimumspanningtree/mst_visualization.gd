@@ -76,10 +76,10 @@ var sorted_edges: Array = []
 var algorithm_steps: Array = []
 var current_step: int = 0
 
-func _init():
+func _init() -> void:
 	name = "MST_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	initialize_graph()
@@ -88,7 +88,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_mst_computation")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for MST visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -111,14 +111,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for step-by-step animation"""
 	computation_timer = Timer.new()
 	computation_timer.wait_time = animation_delay
 	computation_timer.timeout.connect(_on_computation_timer_timeout)
 	add_child(computation_timer)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	"""Initialize the graph with vertices and edges"""
 	vertices.clear()
 	edges.clear()
@@ -146,7 +146,7 @@ func initialize_graph():
 	
 	print("Initialized graph with ", vertices.size(), " vertices and ", edges.size(), " edges")
 
-func generate_vertex_positions():
+func generate_vertex_positions() -> void:
 	"""Generate positions for vertices"""
 	var radius = 8.0
 	
@@ -172,7 +172,7 @@ func generate_vertex_positions():
 			var z = randf_range(-0.5, 0.5)
 			vertices[i].position = Vector3(x, y, z)
 
-func generate_graph_edges():
+func generate_graph_edges() -> void:
 	"""Generate edges based on density and weight constraints"""
 	edges.clear()
 	
@@ -198,7 +198,7 @@ func generate_graph_edges():
 		if not has_edge(from_vertex, to_vertex):
 			add_edge(from_vertex, to_vertex)
 
-func ensure_connectivity():
+func ensure_connectivity() -> void:
 	"""Ensure graph is connected by creating a spanning tree"""
 	var connected_vertices = [0]  # Start with vertex 0
 	var remaining_vertices = []
@@ -222,7 +222,7 @@ func has_edge(from_vertex: int, to_vertex: int) -> bool:
 			return true
 	return false
 
-func add_edge(from_vertex: int, to_vertex: int):
+func add_edge(from_vertex: int, to_vertex: int) -> void:
 	"""Add an edge with calculated weight"""
 	var weight: float
 	
@@ -249,7 +249,7 @@ func add_edge(from_vertex: int, to_vertex: int):
 	edge_weights[str(from_vertex) + "_" + str(to_vertex)] = weight
 	edge_weights[str(to_vertex) + "_" + str(from_vertex)] = weight
 
-func reset_algorithm_state():
+func reset_algorithm_state() -> void:
 	"""Reset MST algorithm state"""
 	mst_edges.clear()
 	mst_cost = 0.0
@@ -279,13 +279,13 @@ func reset_algorithm_state():
 		in_mst.append(false)
 		key_values.append(INF)
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create 3D visualization of the graph"""
 	clear_visualization()
 	create_vertex_visualization()
 	create_edge_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	"""Clear existing visualization elements"""
 	for mesh in vertex_meshes:
 		if mesh:
@@ -305,7 +305,7 @@ func clear_visualization():
 	mst_edge_meshes.clear()
 	edge_labels.clear()
 
-func create_vertex_visualization():
+func create_vertex_visualization() -> void:
 	"""Create visual representation of vertices"""
 	for i in range(vertices.size()):
 		var vertex = vertices[i]
@@ -338,7 +338,7 @@ func create_vertex_visualization():
 		add_child(mesh_instance)
 		vertex_meshes.append(mesh_instance)
 
-func create_edge_visualization():
+func create_edge_visualization() -> void:
 	"""Create visual representation of edges"""
 	for i in range(edges.size()):
 		var edge = edges[i]
@@ -392,7 +392,7 @@ func create_line_mesh(from_pos: Vector3, to_pos: Vector3) -> ArrayMesh:
 	
 	return array_mesh
 
-func create_vertex_label(parent: MeshInstance3D, text: String, offset: Vector3):
+func create_vertex_label(parent: MeshInstance3D, text: String, offset: Vector3) -> void:
 	"""Create text label for vertex"""
 	var label = Label3D.new()
 	label.text = text
@@ -410,7 +410,7 @@ func create_edge_label(text: String, position: Vector3) -> Label3D:
 	label.modulate = Color.YELLOW
 	return label
 
-func start_mst_computation():
+func start_mst_computation() -> void:
 	"""Start the MST computation"""
 	if is_computing:
 		return
@@ -431,7 +431,7 @@ func start_mst_computation():
 	
 	print("Starting ", algorithm_type, " MST algorithm...")
 
-func start_kruskal():
+func start_kruskal() -> void:
 	"""Start Kruskal's algorithm"""
 	# Sort edges by weight
 	sorted_edges = edges.duplicate()
@@ -442,7 +442,7 @@ func start_kruskal():
 	else:
 		run_kruskal_complete()
 
-func run_kruskal_complete():
+func run_kruskal_complete() -> void:
 	"""Run complete Kruskal's algorithm"""
 	for edge in sorted_edges:
 		if mst_edges.size() >= graph_size - 1:
@@ -464,7 +464,7 @@ func run_kruskal_complete():
 	
 	finalize_computation()
 
-func start_prim():
+func start_prim() -> void:
 	"""Start Prim's algorithm"""
 	# Initialize starting vertex
 	key_values[prim_starting_vertex] = 0.0
@@ -474,7 +474,7 @@ func start_prim():
 	else:
 		run_prim_complete()
 
-func run_prim_complete():
+func run_prim_complete() -> void:
 	"""Run complete Prim's algorithm"""
 	for i in range(graph_size):
 		# Find minimum key vertex not in MST
@@ -513,7 +513,7 @@ func run_prim_complete():
 	
 	finalize_computation()
 
-func start_boruvka():
+func start_boruvka() -> void:
 	"""Start Boruvka's algorithm (simplified version)"""
 	# For now, use Kruskal's as placeholder
 	start_kruskal()
@@ -525,7 +525,7 @@ func find_union_find(vertex: int) -> int:
 		parent[vertex] = find_union_find(parent[vertex])
 	return parent[vertex]
 
-func union_union_find(vertex1: int, vertex2: int):
+func union_union_find(vertex1: int, vertex2: int) -> void:
 	"""Union two sets by rank"""
 	var root1 = find_union_find(vertex1)
 	var root2 = find_union_find(vertex2)
@@ -550,7 +550,7 @@ func get_edge_weight(from_vertex: int, to_vertex: int) -> float:
 	
 	return INF
 
-func _on_computation_timer_timeout():
+func _on_computation_timer_timeout() -> void:
 	"""Handle step-by-step computation timer"""
 	if not is_computing:
 		return
@@ -563,7 +563,7 @@ func _on_computation_timer_timeout():
 		_:
 			step_kruskal()
 
-func step_kruskal():
+func step_kruskal() -> void:
 	"""Perform one step of Kruskal's algorithm"""
 	if current_edge_index >= sorted_edges.size() or mst_edges.size() >= graph_size - 1:
 		finalize_computation()
@@ -592,7 +592,7 @@ func step_kruskal():
 	current_edge_index += 1
 	update_ui()
 
-func step_prim():
+func step_prim() -> void:
 	"""Perform one step of Prim's algorithm"""
 	# Find minimum key vertex not in MST
 	var min_key = INF
@@ -637,7 +637,7 @@ func step_prim():
 	
 	update_ui()
 
-func highlight_current_edge(edge):
+func highlight_current_edge(edge) -> void:
 	"""Highlight the currently considered edge"""
 	var edge_index = edges.find(edge)
 	if edge_index >= 0 and edge_index < edge_meshes.size():
@@ -648,7 +648,7 @@ func highlight_current_edge(edge):
 
  
 
-func create_mst_edge_visualization(edge):
+func create_mst_edge_visualization(edge) -> void:
 	"""Create visualization for MST edge"""
 	var from_pos = vertices[edge.from].position
 	var to_pos = vertices[edge.to].position
@@ -662,7 +662,7 @@ func create_mst_edge_visualization(edge):
 	add_child(mst_mesh)
 	mst_edge_meshes.append(mst_mesh)
 
-func finalize_computation():
+func finalize_computation() -> void:
 	"""Finalize the MST computation"""
 	is_computing = false
 	computation_complete = true
@@ -676,7 +676,7 @@ func finalize_computation():
 	
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current algorithm state"""
 	if not ui_display:
 		return
@@ -784,7 +784,7 @@ func get_min_key() -> float:
 			min_val = key_values[i]
 	return min_val
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -808,12 +808,12 @@ func _input(event):
 				step_by_step = not step_by_step
 				print("Step-by-step mode: ", step_by_step)
 
-func stop_computation():
+func stop_computation() -> void:
 	"""Stop the MST computation"""
 	is_computing = false
 	computation_timer.stop()
 
-func reset_graph():
+func reset_graph() -> void:
 	"""Reset the graph and computation"""
 	stop_computation()
 	computation_complete = false
@@ -821,7 +821,7 @@ func reset_graph():
 	initialize_graph()
 	create_visualization()
 
-func change_algorithm(new_algorithm: String):
+func change_algorithm(new_algorithm: String) -> void:
 	"""Change the MST algorithm"""
 	algorithm_type = new_algorithm
 	reset_graph()
@@ -854,4 +854,10 @@ func get_algorithm_info() -> Dictionary:
 			"current_step": current_step,
 			"progress": float(current_edge_index) / float(edges.size()) if edges.size() > 0 else 0.0
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

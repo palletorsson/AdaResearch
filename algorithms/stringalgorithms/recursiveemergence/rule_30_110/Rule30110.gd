@@ -18,10 +18,10 @@ var rule_110_grid := []
 var rule_30_seed := []
 var rule_110_seed := []
 
-func _ready():
+func _ready() -> void:
 	initialize_rules()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -34,7 +34,7 @@ func _process(delta):
 	show_rule_comparison()
 	demonstrate_emergent_patterns()
 
-func initialize_rules():
+func initialize_rules() -> void:
 	# Initialize Rule 30
 	rule_30_seed = []
 	for i in range(grid_width):
@@ -53,7 +53,7 @@ func initialize_rules():
 	rule_110_grid = [rule_110_seed.duplicate()]
 	current_generation = 0
 
-func advance_generation():
+func advance_generation() -> void:
 	if current_generation < max_generations:
 		current_generation += 1
 		
@@ -120,7 +120,7 @@ func apply_rule_110(current_row: Array) -> Array:
 	
 	return new_row
 
-func visualize_rule_30():
+func visualize_rule_30() -> void:
 	var container = $Rule30Visualization
 	
 	# Clear previous visualization
@@ -162,7 +162,7 @@ func visualize_rule_30():
 	
 	container.add_child(label)
 
-func visualize_rule_110():
+func visualize_rule_110() -> void:
 	var container = $Rule110Visualization
 	
 	# Clear previous visualization
@@ -204,7 +204,7 @@ func visualize_rule_110():
 	
 	container.add_child(label)
 
-func show_rule_comparison():
+func show_rule_comparison() -> void:
 	var container = $RuleComparison
 	
 	# Clear previous visualization
@@ -259,7 +259,7 @@ func show_rule_comparison():
 		rule_110_output.material_override = r110_material
 		container.add_child(rule_110_output)
 
-func demonstrate_emergent_patterns():
+func demonstrate_emergent_patterns() -> void:
 	var container = $EmergentPatterns
 	
 	# Clear previous visualization
@@ -270,7 +270,7 @@ func demonstrate_emergent_patterns():
 	analyze_rule_patterns(container, rule_30_grid, "Rule 30 (Chaotic)", Vector3(-3, 0, 0), Color(1.0, 0.5, 0.2))
 	analyze_rule_patterns(container, rule_110_grid, "Rule 110 (Complex)", Vector3(3, 0, 0), Color(0.2, 0.7, 1.0))
 
-func analyze_rule_patterns(container: Node3D, grid: Array, rule_name: String, offset: Vector3, color: Color):
+func analyze_rule_patterns(container: Node3D, grid: Array, rule_name: String, offset: Vector3, color: Color) -> void:
 	if grid.size() < 10:
 		return
 	
@@ -391,4 +391,9 @@ func arrays_equal(a: Array, b: Array) -> bool:
 			return false
 	
 	return true
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

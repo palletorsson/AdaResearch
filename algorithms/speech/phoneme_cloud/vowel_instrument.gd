@@ -22,7 +22,7 @@ extends Node3D
 var is_xr: bool = false
 var xr_controller: XRController3D
 
-func _ready():
+func _ready() -> void:
 	if hand_path and not hand:
 		hand = get_node(hand_path)
 	
@@ -31,7 +31,7 @@ func _ready():
 		xr_controller = hand
 		print("Vowel Instrument: Attached to XR Controller")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not vowel_synth or not head or not hand:
 		return
 		

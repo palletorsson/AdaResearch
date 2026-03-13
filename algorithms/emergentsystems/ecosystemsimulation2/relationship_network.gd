@@ -50,7 +50,7 @@ class Connection:
 	var visual: Node3D
 	var properties: Dictionary = {}
 	
-	func _init(e1, e2, t: String, s: float):
+	func _init(e1, e2, t: String, s: float) -> void:
 		entity1 = e1
 		entity2 = e2
 		type = t
@@ -59,7 +59,7 @@ class Connection:
 		last_interaction_time = formation_time
 		is_reciprocal = true  # Default, can be changed
 	
-	func add_interaction(interaction_data: Dictionary):
+	func add_interaction(interaction_data: Dictionary) -> void:
 		interactions.append({
 			"time": Time.get_ticks_msec(),
 			"data": interaction_data
@@ -95,14 +95,14 @@ class Community:
 	var boundary_permeability: float = 0.5
 	var visual: Node3D
 	
-	func _init(community_entities: Array, center_pos: Vector3, community_radius: float, main_type: String):
+	func _init(community_entities: Array, center_pos: Vector3, community_radius: float, main_type: String) -> void:
 		entities = community_entities
 		center = center_pos
 		radius = community_radius
 		primary_type = main_type
 		formation_time = Time.get_ticks_msec()
 	
-	func calculate_metrics(all_connections: Array):
+	func calculate_metrics(all_connections: Array) -> void:
 		# Calculate community metrics
 		
 		# Get all connections between community members
@@ -160,7 +160,7 @@ class Community:
 		boundary_permeability = clamp(float(external_connections) / max(1, entities.size()), 0.0, 1.0)
 
 # Initialization
-func _ready():
+func _ready() -> void:
 	# Create container for connection visuals
 	connection_visuals = Node3D.new()
 	connection_visuals.name = "ConnectionVisuals"
@@ -169,14 +169,14 @@ func _ready():
 	# Schedule community detection
 	_schedule_community_detection()
 
-func _schedule_community_detection():
+func _schedule_community_detection() -> void:
 	community_detection_timer = community_detection_interval
 
-func register_entity(entity: Object):
+func register_entity(entity: Object) -> void:
 	if not entities.has(entity):
 		entities[entity] = []
 
-func unregister_entity(entity: Object):
+func unregister_entity(entity: Object) -> void:
 	if entities.has(entity):
 		# Remove all connections involving this entity
 		var to_remove = []
@@ -233,7 +233,7 @@ func create_connection(entity1: Object, entity2: Object, type: String, strength:
 	
 	return connection
 
-func sever_connection(connection: Connection):
+func sever_connection(connection: Connection) -> void:
 	# Remove from connections list
 	connections.erase(connection)
 	
@@ -250,7 +250,7 @@ func sever_connection(connection: Connection):
 	# Emit signal
 	emit_signal("connection_severed", connection.entity1, connection.entity2)
 
-func _create_connection_visual(connection: Connection):
+func _create_connection_visual(connection: Connection) -> void:
 	var visual = Node3D.new()
 	visual.name = "Connection_" + connection.entity1.name + "_" + connection.entity2.name
 	
@@ -291,7 +291,7 @@ func _create_connection_visual(connection: Connection):
 	connection_visuals.add_child(visual)
 	connection.visual = visual
 
-func _update_connection_visual(connection: Connection):
+func _update_connection_visual(connection: Connection) -> void:
 	if not connection.visual:
 		_create_connection_visual(connection)
 		return
@@ -324,7 +324,7 @@ func _update_connection_visual(connection: Connection):
 		material.emission = connection_color
 		material.emission_energy = 0.5 * connection.strength
 
-func update(delta: float):
+func update(delta: float) -> void:
 	# Update connections
 	for connection in connections.duplicate():  # Duplicate to safely modify during iteration
 		var still_active = connection.update(delta, connection_decay_rate)
@@ -345,7 +345,7 @@ func update(delta: float):
 	for community in communities:
 		_update_community_visual(community)
 
-func _detect_communities():
+func _detect_communities() -> void:
 	# Simple community detection algorithm
 	# In a full implementation, this would use a more sophisticated algorithm like Louvain method
 	
@@ -421,7 +421,7 @@ func _detect_communities():
 			# Emit signal
 			emit_signal("community_formed", community_entities, center, radius)
 
-func _create_community_visual(community: Community):
+func _create_community_visual(community: Community) -> void:
 	if not enable_network_visualization:
 		return
 	
@@ -451,7 +451,7 @@ func _create_community_visual(community: Community):
 	connection_visuals.add_child(visual)
 	community.visual = visual
 
-func _update_community_visual(community: Community):
+func _update_community_visual(community: Community) -> void:
 	if not community.visual or not enable_network_visualization:
 		return
 	
@@ -480,7 +480,7 @@ func _update_community_visual(community: Community):
 		mesh.radius = community.radius
 		mesh.height = community.radius * 2
 
-func _detect_emergent_patterns():
+func _detect_emergent_patterns() -> void:
 	if not pattern_detection_enabled:
 		return
 	
@@ -493,7 +493,7 @@ func _detect_emergent_patterns():
 	_detect_cycles()
 	_detect_clusters()
 
-func _detect_stars():
+func _detect_stars() -> void:
 	# Look for star patterns (one central entity connected to many others)
 	var star_centers = []
 	
@@ -528,7 +528,7 @@ func _detect_stars():
 				# Emit signal
 				emit_signal("network_pattern_emerged", "star", [entity] + connected_entities)
 
-func _detect_chains():
+func _detect_chains() -> void:
 	# Look for chain patterns (linear sequences of connections)
 	var processed_entities = {}
 	
@@ -571,7 +571,7 @@ func _detect_chains():
 				# Emit signal
 				emit_signal("network_pattern_emerged", "chain", chain)
 
-func _detect_cycles():
+func _detect_cycles() -> void:
 	# Look for cycle patterns (loops of connections)
 	# This is a simplified cycle detection
 	var processed_connections = {}
@@ -583,7 +583,7 @@ func _detect_cycles():
 		
 		_find_cycles_dfs(start_entity, start_entity, visited, path, processed_connections)
 
-func _find_cycles_dfs(start_entity, current_entity, visited, path, processed_connections):
+func _find_cycles_dfs(start_entity, current_entity, visited, path, processed_connections) -> void:
 	visited[current_entity] = true
 	
 	for connection in entities[current_entity]:
@@ -628,7 +628,7 @@ func _find_cycles_dfs(start_entity, current_entity, visited, path, processed_con
 			_find_cycles_dfs(start_entity, next_entity, visited.duplicate(), path, processed_connections)
 			path.pop_back()
 
-func _detect_clusters():
+func _detect_clusters() -> void:
 	# Look for densely connected clusters
 	# We'll use the communities as clusters
 	for community in communities:
@@ -656,7 +656,7 @@ func get_connection_between(entity1: Object, entity2: Object) -> Connection:
 			return connection
 	return null
 
-func boost_connections(entity_group: Array, boost_amount: float):
+func boost_connections(entity_group: Array, boost_amount: float) -> void:
 	# Boost connections among a group of entities
 	for i in range(entity_group.size()):
 		for j in range(i + 1, entity_group.size()):
@@ -672,7 +672,7 @@ func boost_connections(entity_group: Array, boost_amount: float):
 				if connection_visual_enabled and connection.visual:
 					_update_connection_visual(connection)
 
-func create_random_connections(entity: Object, count: int):
+func create_random_connections(entity: Object, count: int) -> void:
 	# Create random connections from this entity to others
 	if not entities.has(entity) or entities.keys().size() <= 1:
 		return
@@ -728,3 +728,9 @@ func get_network_centrality(entity: Object) -> float:
 	
 	var centrality = (direct_connections * 0.7 + total_strength * 0.3) / max(1, entities.size() - 1)
 	return centrality
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

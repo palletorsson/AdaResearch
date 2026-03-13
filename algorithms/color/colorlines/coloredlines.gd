@@ -71,13 +71,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	generate_line_paths()
 	create_line_meshes()
 	start_line_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create atmospheric environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -103,7 +103,7 @@ func setup_scene():
 	if camera_env:
 		camera_env.environment = env
 
-func generate_line_paths():
+func generate_line_paths() -> void:
 	# Create various path types for visual variety
 	line_paths.clear()
 	
@@ -232,7 +232,7 @@ func create_dna_path(index: int) -> Array[Vector3]:
 	
 	return points
 
-func create_line_meshes():
+func create_line_meshes() -> void:
 	for i in range(line_count):
 		if i >= line_paths.size():
 			continue
@@ -338,20 +338,20 @@ func create_line_mesh_from_path(path: Array[Vector3]) -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
 
-func start_line_animations():
+func start_line_animations() -> void:
 	# Animate the line paths themselves
 	animate_line_paths()
 	
 	# Animate shader properties
 	animate_shader_properties()
 
-func animate_line_paths():
+func animate_line_paths() -> void:
 	# Deform the line paths over time for organic movement
 	var tween = create_tween()
 	tween.set_loops()
 	tween.tween_method(update_line_deformation, 0.0, PI * 2.0, 15.0 / animation_speed)
 
-func update_line_deformation(time: float):
+func update_line_deformation(time: float) -> void:
 	# Gently deform line paths over time
 	for i in range(line_meshes.size()):
 		if i >= line_paths.size():
@@ -377,7 +377,7 @@ func update_line_deformation(time: float):
 		var new_mesh = create_line_mesh_from_path(deformed_path)
 		line_meshes[i].mesh = new_mesh
 
-func animate_shader_properties():
+func animate_shader_properties() -> void:
 	# Animate shader uniforms for color flow effects
 	for i in range(line_materials.size()):
 		var material = line_materials[i]
@@ -437,7 +437,7 @@ func _process(_delta):
 	# Update time-based effects
 	update_time_uniforms()
 
-func update_time_uniforms():
+func update_time_uniforms() -> void:
 	# Update time-sensitive shader parameters
 	for material in line_materials:
 		# This lets the shader access current time for animations
@@ -445,7 +445,7 @@ func update_time_uniforms():
 		pass
 
 # Optional: Add more complex line types
-func add_advanced_lines():
+func add_advanced_lines() -> void:
 	# Add some mathematical art curves
 	for i in range(5):
 		# Lissajous curves
@@ -455,3 +455,9 @@ func add_advanced_lines():
 		# Torus knots
 		var knot_path = create_torus_knot(2 + i, 3, 3.0)
 		line_paths.append(knot_path)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -20,7 +20,7 @@ var rng: RandomNumberGenerator
 var cave_root: Node3D
 var noise: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	# Seed the random number generator
 	rng = RandomNumberGenerator.new()
 	rng.seed = cave_seed
@@ -39,7 +39,7 @@ func _ready():
 	# Generate the cave system
 	generate_cave_system()
 
-func generate_cave_system():
+func generate_cave_system() -> void:
 	# Create primary caverns
 	var caverns = generate_primary_caverns()
 	
@@ -79,7 +79,7 @@ func generate_primary_caverns() -> Array:
 	
 	return caverns
 
-func deform_cavern(cavern: CSGSphere3D):
+func deform_cavern(cavern: CSGSphere3D) -> void:
 	# Add multiple deformation spheres to create irregular shapes
 	for i in range(rng.randi_range(2, 5)):
 		var deformation_sphere = CSGSphere3D.new()
@@ -101,7 +101,7 @@ func deform_cavern(cavern: CSGSphere3D):
 		# Add deformation sphere as a child to create boolean operation
 		cavern.add_child(deformation_sphere)
 
-func connect_caverns(caverns: Array):
+func connect_caverns(caverns: Array) -> void:
 	if ensure_full_connectivity:
 		# Build a minimum spanning tree to ensure all caverns are connected
 		var edges = []
@@ -171,7 +171,7 @@ func connect_caverns(caverns: Array):
 				if rng.randf() < 0.6:  # 60% chance of tunnel
 					create_tunnel(caverns[i], caverns[j])
 
-func create_tunnel(start_cavern: CSGSphere3D, end_cavern: CSGSphere3D):
+func create_tunnel(start_cavern: CSGSphere3D, end_cavern: CSGSphere3D) -> void:
 	# Create a tunnel between two caverns
 	var tunnel = CSGCylinder3D.new()
 	
@@ -214,7 +214,7 @@ func create_tunnel(start_cavern: CSGSphere3D, end_cavern: CSGSphere3D):
 	if not tunnel.has_meta("connected_caverns"):
 		tunnel.set_meta("connected_caverns", [start_cavern, end_cavern])
 
-func add_tunnel_variations(tunnel: CSGCylinder3D):
+func add_tunnel_variations(tunnel: CSGCylinder3D) -> void:
 	# Add some organic variation to the tunnel
 	for i in range(rng.randi_range(2, 5)):
 		var variation_sphere = CSGSphere3D.new()
@@ -235,7 +235,7 @@ func add_tunnel_variations(tunnel: CSGCylinder3D):
 		# Add variation to tunnel
 		tunnel.add_child(variation_sphere)
 
-func add_cave_details():
+func add_cave_details() -> void:
 	# Add some additional details to make the cave more interesting
 	
 	# Create some rock formations
@@ -267,7 +267,7 @@ func add_cave_details():
 	# Add some stalactites and stalagmites
 	add_stalactites_stalagmites()
 
-func add_stalactites_stalagmites():
+func add_stalactites_stalagmites() -> void:
 	# Number of formations to create
 	var num_formations = rng.randi_range(15, 30)
 	
@@ -333,7 +333,7 @@ func generate_cave_texture() -> ImageTexture:
 	var texture = ImageTexture.create_from_image(image)
 	return texture
 
-func apply_cave_textures():
+func apply_cave_textures() -> void:
 	# Generate a unique texture
 	var cave_texture = generate_cave_texture()
 	
@@ -389,7 +389,7 @@ func generate_normal_map(base_texture: ImageTexture) -> ImageTexture:
 	var normal_texture = ImageTexture.create_from_image(normal_image)
 	return normal_texture
 
-func apply_material_recursive(node: Node, material: Material):
+func apply_material_recursive(node: Node, material: Material) -> void:
 	if node is CSGShape3D:
 		node.material_override = material
 	
@@ -464,7 +464,7 @@ func is_cave_system_connected() -> bool:
 	return true
 
 # Optional method to regenerate the entire cave system
-func regenerate_cave():
+func regenerate_cave() -> void:
 	# Clear existing children
 	for child in cave_root.get_children():
 		child.queue_free()
@@ -476,3 +476,9 @@ func regenerate_cave():
 	if ensure_full_connectivity and not is_cave_system_connected():
 		print("Warning: Cave system is not fully connected! Regenerating...")
 		regenerate_cave()  # Try again if not connected
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

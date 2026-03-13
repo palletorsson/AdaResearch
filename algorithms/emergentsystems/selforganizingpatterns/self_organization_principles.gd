@@ -83,7 +83,7 @@ var phase_descriptions = {
 	around attractors, creating emergent structures."""
 }
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create attractors
@@ -104,7 +104,7 @@ func _ready():
 	# Add environment
 	create_environment()
 
-func create_environment():
+func create_environment() -> void:
 	var env = WorldEnvironment.new()
 	var environment = Environment.new()
 	
@@ -127,7 +127,7 @@ func create_environment():
 	env.environment = environment
 	add_child(env)
 
-func create_info_display():
+func create_info_display() -> void:
 	# Create a panel for information
 	info_panel = Node3D.new()
 	info_panel.name = "InfoPanel"
@@ -171,7 +171,7 @@ func create_info_display():
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	info_panel.add_child(title)
 
-func create_attractors():
+func create_attractors() -> void:
 	# Clear any existing attractors
 	for attractor in attractors:
 		if is_instance_valid(attractor):
@@ -202,7 +202,7 @@ func create_attractors():
 		add_child(attractor)
 		attractors.append(attractor)
 
-func create_particles():
+func create_particles() -> void:
 	# Clear any existing particles
 	for particle in particles:
 		if is_instance_valid(particle):
@@ -236,7 +236,7 @@ func create_particles():
 		add_child(particle)
 		particles.append(particle)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Always update in VR mode (no pause)
 	
 	# Update phase timer if auto-progress is enabled
@@ -249,7 +249,7 @@ func _process(delta):
 	# Update particles based on current phase
 	update_particles(delta)
 
-func update_particles(delta):
+func update_particles(delta) -> void:
 	for i in range(particles.size()):
 		var particle = particles[i]
 		var velocity = Vector3.ZERO
@@ -308,15 +308,15 @@ func attraction_force(position: Vector3) -> Vector3:
 	
 	return force
 
-func advance_phase():
+func advance_phase() -> void:
 	current_phase = (current_phase + 1) % SimulationPhase.size()
 	update_phase_display()
 
-func update_phase_display():
+func update_phase_display() -> void:
 	if phase_label:
 		phase_label.text = phase_descriptions[current_phase]
 
-func reset_simulation():
+func reset_simulation() -> void:
 	# Recreate particles in random positions
 	create_particles()
 	
@@ -326,3 +326,9 @@ func reset_simulation():
 	# Reset phase
 	current_phase = SimulationPhase.RANDOM
 	update_phase_display()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

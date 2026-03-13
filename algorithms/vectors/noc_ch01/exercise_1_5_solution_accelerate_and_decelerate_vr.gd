@@ -78,3 +78,9 @@ func _process(delta: float) -> void:
 
 	_position += _velocity
 	_ball.position = _position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

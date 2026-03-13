@@ -305,3 +305,9 @@ func _move_player_to_safe_position(space_state: PhysicsDirectSpaceState3D, curre
 	# Apply the safe position
 	_xr_origin.global_position = safe_pos
 	print("ScaleMe: Moved player to safe position at ", safe_pos)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

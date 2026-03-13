@@ -2,7 +2,7 @@
 
 var bag: RigidBody3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var beam := create_static_box("Beam", Vector3(6.0, 0.3, 0.5), Vector3(0.0, 5.0, 0.0), Color(0.4, 0.4, 0.45))
 
 	var anchor := StaticBody3D.new()
@@ -39,7 +39,12 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		bag.apply_impulse((Vector3.FORWARD + Vector3.RIGHT) * 4.0)
 
-func _nudge():
+func _nudge() -> void:
 	if is_instance_valid(bag):
 		bag.apply_impulse(Vector3(1.0, 0.0, 1.2))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

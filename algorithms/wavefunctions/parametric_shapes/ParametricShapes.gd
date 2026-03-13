@@ -19,11 +19,11 @@ var current_shape = ShapeType.CIRCLE
 var shape_points = []
 var parameter_lines = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	generate_current_shape()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Shape indicator material
 	var shape_material = StandardMaterial3D.new()
 	shape_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
@@ -45,7 +45,7 @@ func setup_materials():
 	param_v_material.emission = Color(0.1, 0.1, 0.5, 1.0)
 	$ParameterV.material_override = param_v_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	shape_timer += delta
 	
@@ -57,7 +57,7 @@ func _process(delta):
 	animate_parametric_shapes()
 	animate_indicators()
 
-func generate_current_shape():
+func generate_current_shape() -> void:
 	clear_shape_points()
 	
 	match current_shape:
@@ -70,7 +70,7 @@ func generate_current_shape():
 		ShapeType.TORUS:
 			generate_torus()
 
-func clear_shape_points():
+func clear_shape_points() -> void:
 	for point in shape_points:
 		point.queue_free()
 	shape_points.clear()
@@ -79,7 +79,7 @@ func clear_shape_points():
 		line.queue_free()
 	parameter_lines.clear()
 
-func generate_circle():
+func generate_circle() -> void:
 	# Parametric circle: x = r*cos(t), y = r*sin(t), z = 0
 	var radius = 3.0
 	
@@ -93,7 +93,7 @@ func generate_circle():
 		
 		create_shape_point(pos, t, 0.0)
 
-func generate_cone():
+func generate_cone() -> void:
 	# Parametric cone: x = (h-v)*cos(u), y = (h-v)*sin(u), z = v
 	var height = 4.0
 	var base_radius = 2.0
@@ -112,7 +112,7 @@ func generate_cone():
 			
 			create_shape_point(pos, u, v)
 
-func generate_sphere():
+func generate_sphere() -> void:
 	# Parametric sphere: x = r*sin(v)*cos(u), y = r*sin(v)*sin(u), z = r*cos(v)
 	var radius = 2.5
 	
@@ -129,7 +129,7 @@ func generate_sphere():
 			
 			create_shape_point(pos, u, v)
 
-func generate_torus():
+func generate_torus() -> void:
 	# Parametric torus: x = (R+r*cos(v))*cos(u), y = (R+r*cos(v))*sin(u), z = r*sin(v)
 	var major_radius = 2.5  # R
 	var minor_radius = 1.0  # r
@@ -147,7 +147,7 @@ func generate_torus():
 			
 			create_shape_point(pos, u, v)
 
-func create_shape_point(position: Vector3, u_param: float, v_param: float):
+func create_shape_point(position: Vector3, u_param: float, v_param: float) -> void:
 	var point = CSGSphere3D.new()
 	point.radius = 0.08
 	point.position = position
@@ -174,7 +174,7 @@ func create_shape_point(position: Vector3, u_param: float, v_param: float):
 	$ShapePoints.add_child(point)
 	shape_points.append(point)
 
-func animate_parametric_shapes():
+func animate_parametric_shapes() -> void:
 	# Animate parameter sweep
 	current_u = fmod(time * 0.5, 2.0 * PI)
 	current_v = fmod(time * 0.3, 2.0 * PI)
@@ -217,7 +217,7 @@ func animate_parametric_shapes():
 		ShapeType.TORUS:
 			animate_torus_variations()
 
-func animate_circle_variations():
+func animate_circle_variations() -> void:
 	# Animate radius variation
 	var radius_variation = 1.0 + sin(time * 2.0) * 0.3
 	
@@ -232,7 +232,7 @@ func animate_circle_variations():
 				original_pos.z
 			)
 
-func animate_cone_variations():
+func animate_cone_variations() -> void:
 	# Animate cone opening angle
 	var angle_variation = 1.0 + sin(time * 1.5) * 0.4
 	
@@ -242,7 +242,7 @@ func animate_cone_variations():
 		point.position.x = original_pos.x * angle_variation
 		point.position.y = original_pos.y * angle_variation
 
-func animate_sphere_variations():
+func animate_sphere_variations() -> void:
 	# Animate sphere deformation
 	for point in shape_points:
 		var u_param = point.get_meta("u_param", 0.0)
@@ -251,7 +251,7 @@ func animate_sphere_variations():
 		var deformation = 1.0 + sin(u_param * 3.0 + time) * sin(v_param * 2.0 + time) * 0.2
 		point.position = point.position.normalized() * 2.5 * deformation
 
-func animate_torus_variations():
+func animate_torus_variations() -> void:
 	# Animate torus parameters
 	var major_variation = 1.0 + sin(time * 1.2) * 0.3
 	var minor_variation = 1.0 + cos(time * 1.8) * 0.2
@@ -269,7 +269,7 @@ func animate_torus_variations():
 			minor_radius * sin(v_param)
 		)
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Shape indicator
 	var shape_scale = 1.0 + sin(time * 3.0) * 0.1
 	$ShapeIndicator.scale = Vector3.ONE * shape_scale
@@ -329,3 +329,9 @@ func get_parametric_equation() -> String:
 			return "x = (R+r*cos(v))*cos(u), y = (R+r*cos(v))*sin(u), z = r*sin(v)"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

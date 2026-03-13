@@ -12,14 +12,14 @@ extends Node3D
 @export var horizontal_beam_size: Vector3 = Vector3(4.0, 0.6, 0.8)
 @export var create_l_shape: bool = true
 
-func _ready():
+func _ready() -> void:
 	print("Creating simple pink beam structure...")
 	create_basic_floor()
 	create_pink_beam_structure()
 	setup_simple_lighting()
 	print("Pink beam structure complete!")
 
-func create_basic_floor():
+func create_basic_floor() -> void:
 	"""Create a simple floor to stand on"""
 	
 	var floor_body = StaticBody3D.new()
@@ -46,7 +46,7 @@ func create_basic_floor():
 	
 	floor_body.position = Vector3(0, -0.1, 0)
 
-func create_pink_beam_structure():
+func create_pink_beam_structure() -> void:
 	"""Create the main abstract pink beam architecture"""
 	
 	# Main vertical beam (the prominent pink pillar)
@@ -67,7 +67,7 @@ func create_pink_beam_structure():
 	if create_l_shape:
 		create_l_shaped_structure()
 
-func create_beam(size: Vector3, pos: Vector3, name: String):
+func create_beam(size: Vector3, pos: Vector3, name: String) -> void:
 	"""Create a single pink beam with collision"""
 	
 	var beam_body = StaticBody3D.new()
@@ -104,7 +104,7 @@ func create_beam(size: Vector3, pos: Vector3, name: String):
 	
 	print("Created beam: ", name, " at position: ", pos)
 
-func create_l_shaped_structure():
+func create_l_shaped_structure() -> void:
 	"""Create an L-shaped architectural element"""
 	
 	# Vertical part of L
@@ -121,7 +121,7 @@ func create_l_shaped_structure():
 		"L_Horizontal"
 	)
 
-func setup_simple_lighting():
+func setup_simple_lighting() -> void:
 	"""Basic lighting for the beam structure"""
 	
 	# Main light
@@ -157,7 +157,7 @@ func setup_simple_lighting():
 
 
 # Function to add color scanner testing cubes
-func add_test_cubes():
+func add_test_cubes() -> void:
 	"""Add some colored cubes for scanner testing"""
 	
 	var test_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.CYAN]
@@ -188,6 +188,12 @@ func add_test_cubes():
 		cube_body.position = Vector3(i - 2, 0.5, -2)
 
 # Call this if you want test cubes
-func add_test_cubes_if_needed():
+func add_test_cubes_if_needed() -> void:
 	"""Add test cubes only when explicitly needed"""
 	call_deferred("add_test_cubes")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

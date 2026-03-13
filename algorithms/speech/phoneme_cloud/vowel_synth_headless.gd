@@ -14,12 +14,12 @@ var anchors = {
 	"d_locus": Vector2(200, 1600)
 }
 
-func _ready():
+func _ready() -> void:
 	print("HeadlessSynthesizer: Starting sequence in 1s...")
 	await get_tree().create_timer(1.0).timeout
 	_loop()
 
-func _loop():
+func _loop() -> void:
 	while true:
 		print("HeadlessSynthesizer: Ada")
 		await _play_ada()
@@ -32,7 +32,7 @@ func _loop():
 		print("HeadlessSynthesizer: Loop Pause 4s")
 		await get_tree().create_timer(4.0).timeout
 
-func _play_ada():
+func _play_ada() -> void:
 	# A (Silent move)
 	_set_params(anchors["a"])
 	synth.target_intensity = 0.0
@@ -60,7 +60,7 @@ func _play_ada():
 	synth.target_intensity = 0.0
 	await get_tree().create_timer(0.5).timeout
 
-func _play_research():
+func _play_research() -> void:
 	# R
 	_set_params(anchors["r"])
 	synth.target_intensity = 0.0
@@ -92,13 +92,19 @@ func _play_research():
 	await get_tree().create_timer(0.04).timeout
 	synth.trigger_plosive()
 
-func _set_params(p: Vector2):
+func _set_params(p: Vector2) -> void:
 	synth.f1 = p.x
 	synth.delta = p.y
 
-func _tween_params(p: Vector2, dur: float):
+func _tween_params(p: Vector2, dur: float) -> void:
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(synth, "f1", p.x, dur)
 	tween.tween_property(synth, "delta", p.y, dur)
 	await tween.finished
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

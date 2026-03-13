@@ -54,7 +54,7 @@ const COLOR_SUB := Color(0.7, 0.5, 0.9)     # Purple
 const COLOR_CROSS := Color(0.3, 0.95, 0.5)  # Green (perpendicular)
 const COLOR_PROJ := Color(0.95, 0.6, 0.8)   # Pink
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	create_axes(2.0)
 	create_floor(4.0)
@@ -98,7 +98,7 @@ func _process(_delta):
 	_update_projection(a, b)
 	_update_info(a, b)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_1:
@@ -119,7 +119,7 @@ func _input(event):
 			KEY_R:
 				_reset_vectors()
 
-func _update_visibility():
+func _update_visibility() -> void:
 	# Show/hide result vectors based on mode
 	var show_all = current_mode == Mode.ALL
 	
@@ -130,13 +130,13 @@ func _update_visibility():
 	parallelogram.visible = show_all or current_mode == Mode.CROSS_PRODUCT
 	result_proj.visible = show_all or current_mode == Mode.PROJECTION
 
-func _reset_vectors():
+func _reset_vectors() -> void:
 	_update_vector_fast(vector_a, Vector3(1.2, 0.8, 0.3), _cache_a)
 	_update_vector_fast(vector_b, Vector3(0.5, 0.3, 1.0), _cache_b)
 
 # === VECTOR OPERATIONS ===
 
-func _update_addition(a: Vector3, b: Vector3):
+func _update_addition(a: Vector3, b: Vector3) -> void:
 	var sum = a + b
 	var diff = a - b
 	
@@ -145,11 +145,11 @@ func _update_addition(a: Vector3, b: Vector3):
 	_update_vector_fast(result_add, sum, _cache_add)
 	_update_vector_fast(result_sub, diff, _cache_sub)
 
-func _update_subtraction(_a: Vector3, b: Vector3):
+func _update_subtraction(_a: Vector3, b: Vector3) -> void:
 	# Already handled in _update_addition
 	pass
 
-func _update_dot_product(a: Vector3, b: Vector3):
+func _update_dot_product(a: Vector3, b: Vector3) -> void:
 	# Update angle arc visualization
 	var mag_a = a.length()
 	var mag_b = b.length()
@@ -166,14 +166,14 @@ func _update_dot_product(a: Vector3, b: Vector3):
 	# Create arc mesh between vectors
 	_update_angle_arc_mesh(a.normalized(), b.normalized(), arc_radius, angle)
 
-func _update_cross_product(a: Vector3, b: Vector3):
+func _update_cross_product(a: Vector3, b: Vector3) -> void:
 	var cross = a.cross(b)
 	_update_vector_fast(result_cross, cross, _cache_cross)
 	
 	# Update parallelogram
 	_update_parallelogram_mesh(a, b)
 
-func _update_projection(a: Vector3, b: Vector3):
+func _update_projection(a: Vector3, b: Vector3) -> void:
 	var mag_b_sq = b.length_squared()
 	if mag_b_sq < 0.0001:
 		_update_vector_fast(result_proj, Vector3.ZERO, _cache_proj)
@@ -185,7 +185,7 @@ func _update_projection(a: Vector3, b: Vector3):
 
 # === VISUAL HELPERS ===
 
-func _create_angle_arc():
+func _create_angle_arc() -> void:
 	angle_arc = MeshInstance3D.new()
 	angle_arc.name = "AngleArc"
 	var mat = StandardMaterial3D.new()
@@ -196,7 +196,7 @@ func _create_angle_arc():
 	angle_arc.material_override = mat
 	add_child(angle_arc)
 
-func _create_parallelogram():
+func _create_parallelogram() -> void:
 	parallelogram = MeshInstance3D.new()
 	parallelogram.name = "Parallelogram"
 	var mat = StandardMaterial3D.new()
@@ -207,7 +207,7 @@ func _create_parallelogram():
 	parallelogram.material_override = mat
 	add_child(parallelogram)
 
-func _update_angle_arc_mesh(dir_a: Vector3, dir_b: Vector3, radius: float, angle: float):
+func _update_angle_arc_mesh(dir_a: Vector3, dir_b: Vector3, radius: float, angle: float) -> void:
 	if angle < 0.01:
 		angle_arc.mesh = null
 		return
@@ -233,7 +233,7 @@ func _update_angle_arc_mesh(dir_a: Vector3, dir_b: Vector3, radius: float, angle
 	im.surface_end()
 	angle_arc.mesh = im
 
-func _update_parallelogram_mesh(a: Vector3, b: Vector3):
+func _update_parallelogram_mesh(a: Vector3, b: Vector3) -> void:
 	if a.length() < 0.001 or b.length() < 0.001:
 		parallelogram.mesh = null
 		return
@@ -253,7 +253,7 @@ func _update_parallelogram_mesh(a: Vector3, b: Vector3):
 	im.surface_end()
 	parallelogram.mesh = im
 
-func _update_info(a: Vector3, b: Vector3):
+func _update_info(a: Vector3, b: Vector3) -> void:
 	var mag_a = a.length()
 	var mag_b = b.length()
 	var dot = a.dot(b)
@@ -284,7 +284,7 @@ func _update_info(a: Vector3, b: Vector3):
 
 # === CACHING (local copy for independence) ===
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -299,7 +299,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
@@ -309,7 +309,7 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 
 # === INTERACTABLES INTEGRATION ===
 
-func _setup_interactables():
+func _setup_interactables() -> void:
 	"""Connect to interactable sliders and buttons for VR control"""
 	# Find control panel
 	var panel = get_node_or_null("ControlPanel")
@@ -358,7 +358,7 @@ func _setup_interactables():
 	
 	print("VectorWorkbench: Interactables connected for VR control")
 
-func _connect_slider(slider: Node, callback: String, range_min: float, range_max: float, label: String):
+func _connect_slider(slider: Node, callback: String, range_min: float, range_max: float, label: String) -> void:
 	if not slider:
 		return
 	if slider.has_method("set_range"):
@@ -368,13 +368,13 @@ func _connect_slider(slider: Node, callback: String, range_min: float, range_max
 	if slider.has_signal("slider_moved"):
 		slider.slider_moved.connect(Callable(self, callback))
 
-func _connect_button(btn: Node, callback: String):
+func _connect_button(btn: Node, callback: String) -> void:
 	if not btn:
 		return
 	if btn.has_signal("pressed"):
 		btn.pressed.connect(Callable(self, callback))
 
-func _sync_sliders_to_vectors():
+func _sync_sliders_to_vectors() -> void:
 	"""Sync slider positions to current vector values"""
 	var a = _get_vector_fast(vector_a, _cache_a)
 	var b = _get_vector_fast(vector_b, _cache_b)
@@ -386,44 +386,44 @@ func _sync_sliders_to_vectors():
 	_set_slider_value(_slider_b_y, b.y, -2.0, 2.0)
 	_set_slider_value(_slider_b_z, b.z, -2.0, 2.0)
 
-func _set_slider_value(slider: Node, value: float, range_min: float, range_max: float):
+func _set_slider_value(slider: Node, value: float, range_min: float, range_max: float) -> void:
 	if not slider or not slider.has_method("set_normalized_value"):
 		return
 	var norm = remap(value, range_min, range_max, 0.0, 1.0)
 	slider.set_normalized_value(clamp(norm, 0.0, 1.0))
 
 # Slider callbacks
-func _on_slider_a_x(pos):
+func _on_slider_a_x(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_a_x, pos, -2.0, 2.0)
 	var a = _get_vector_fast(vector_a, _cache_a)
 	_update_vector_fast(vector_a, Vector3(val, a.y, a.z), _cache_a)
 
-func _on_slider_a_y(pos):
+func _on_slider_a_y(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_a_y, pos, -2.0, 2.0)
 	var a = _get_vector_fast(vector_a, _cache_a)
 	_update_vector_fast(vector_a, Vector3(a.x, val, a.z), _cache_a)
 
-func _on_slider_a_z(pos):
+func _on_slider_a_z(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_a_z, pos, -2.0, 2.0)
 	var a = _get_vector_fast(vector_a, _cache_a)
 	_update_vector_fast(vector_a, Vector3(a.x, a.y, val), _cache_a)
 
-func _on_slider_b_x(pos):
+func _on_slider_b_x(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_b_x, pos, -2.0, 2.0)
 	var b = _get_vector_fast(vector_b, _cache_b)
 	_update_vector_fast(vector_b, Vector3(val, b.y, b.z), _cache_b)
 
-func _on_slider_b_y(pos):
+func _on_slider_b_y(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_b_y, pos, -2.0, 2.0)
 	var b = _get_vector_fast(vector_b, _cache_b)
 	_update_vector_fast(vector_b, Vector3(b.x, val, b.z), _cache_b)
 
-func _on_slider_b_z(pos):
+func _on_slider_b_z(pos) -> void:
 	_use_sliders = true
 	var val = _slider_to_value(_slider_b_z, pos, -2.0, 2.0)
 	var b = _get_vector_fast(vector_b, _cache_b)
@@ -436,26 +436,32 @@ func _slider_to_value(slider: Node, pos, range_min: float, range_max: float) -> 
 	return lerp(range_min, range_max, norm)
 
 # Button callbacks
-func _on_btn_all():
+func _on_btn_all() -> void:
 	current_mode = Mode.ALL
 	_update_visibility()
 
-func _on_btn_add():
+func _on_btn_add() -> void:
 	current_mode = Mode.ADDITION
 	_update_visibility()
 
-func _on_btn_dot():
+func _on_btn_dot() -> void:
 	current_mode = Mode.DOT_PRODUCT
 	_update_visibility()
 
-func _on_btn_cross():
+func _on_btn_cross() -> void:
 	current_mode = Mode.CROSS_PRODUCT
 	_update_visibility()
 
-func _on_btn_proj():
+func _on_btn_proj() -> void:
 	current_mode = Mode.PROJECTION
 	_update_visibility()
 
-func _on_btn_reset():
+func _on_btn_reset() -> void:
 	_reset_vectors()
 	_sync_sliders_to_vectors()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

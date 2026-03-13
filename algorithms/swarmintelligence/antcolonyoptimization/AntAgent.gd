@@ -44,7 +44,7 @@ var collision_avoidance_timer = 0.0
 var food_indicator: MeshInstance3D
 var ant_body: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Set up visual representation
 	setup_visuals()
 	
@@ -52,7 +52,7 @@ func _ready():
 	setup_physics()
 
 # Set up visual representation of the ant
-func setup_visuals():
+func setup_visuals() -> void:
 	# Create ant body
 	ant_body = MeshInstance3D.new()
 	var ant_shape = CapsuleMesh.new()
@@ -86,7 +86,7 @@ func setup_visuals():
 	add_child(food_indicator)
 
 # Add antennae to the ant model
-func add_antennae():
+func add_antennae() -> void:
 	# Left antenna
 	var left_antenna = create_antenna()
 	left_antenna.position = Vector3(-0.05, 0.1, 0.1)
@@ -115,7 +115,7 @@ func create_antenna() -> MeshInstance3D:
 	return antenna
 
 # Set up physics for collision detection
-func setup_physics():
+func setup_physics() -> void:
 	# Create collision shape
 	var collision_shape = CollisionShape3D.new()
 	var shape = CapsuleShape3D.new()
@@ -129,7 +129,7 @@ func setup_physics():
 	collision_mask = 3   # Collide with world and other ants
 
 # Initialize ant with references to required systems
-func initialize(colony_ref, pheromone_sys_ref, terrain_ref, food_refs = []):
+func initialize(colony_ref, pheromone_sys_ref, terrain_ref, food_refs = []) -> void:
 	colony = colony_ref
 	pheromone_system = pheromone_sys_ref
 	terrain = terrain_ref
@@ -141,7 +141,7 @@ func initialize(colony_ref, pheromone_sys_ref, terrain_ref, food_refs = []):
 		last_pheromone_pos = position
 
 # Process function called every frame
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Handle ant behavior based on state
 	match state:
 		AntState.SEARCHING_FOOD:
@@ -167,7 +167,7 @@ func _physics_process(delta):
 	update_visuals()
 
 # Process behavior when searching for food
-func process_searching_food(delta):
+func process_searching_food(delta) -> void:
 	# Check if we found food
 	var found_food = check_for_food()
 	
@@ -204,7 +204,7 @@ func process_searching_food(delta):
 		direction = lerp(direction, target_dir.normalized(), turning_speed * delta)
 
 # Process behavior when returning home
-func process_returning_home(delta):
+func process_returning_home(delta) -> void:
 	# Check if we're back at the colony
 	if colony and position.distance_to(colony.position) < 1.0:
 		# Drop off food and switch state
@@ -249,7 +249,7 @@ func process_returning_home(delta):
 		direction = lerp(direction, target_dir.normalized(), turning_speed * delta)
 
 # Process idle behavior
-func process_idle(delta):
+func process_idle(delta) -> void:
 	# Just wander around the colony
 	var target_dir = Vector3.ZERO
 	
@@ -276,7 +276,7 @@ func process_idle(delta):
 		state = AntState.SEARCHING_FOOD
 
 # Process fighting behavior
-func process_fighting(delta):
+func process_fighting(delta) -> void:
 	# Simple fighting behavior - face the enemy and move toward it
 	if target_position:
 		var enemy_dir = (target_position - position).normalized()
@@ -291,7 +291,7 @@ func process_fighting(delta):
 		state = AntState.SEARCHING_FOOD
 
 # Process building behavior
-func process_building(delta):
+func process_building(delta) -> void:
 	# Building behavior - go to build site and work
 	if target_position:
 		var site_dir = (target_position - position).normalized()
@@ -308,7 +308,7 @@ func process_building(delta):
 		state = AntState.SEARCHING_FOOD
 
 # Move the ant
-func move_ant(delta):
+func move_ant(delta) -> void:
 	# Calculate velocity
 	velocity = direction * speed
 	
@@ -344,7 +344,7 @@ func move_ant(delta):
 					transform.basis = Basis(result_quat)
 
 # Drop pheromone
-func drop_pheromone():
+func drop_pheromone() -> void:
 	if not pheromone_system:
 		return
 		
@@ -360,7 +360,7 @@ func drop_pheromone():
 	last_pheromone_pos = position
 
 # Update visuals
-func update_visuals():
+func update_visuals() -> void:
 	# Update food indicator
 	if food_indicator:
 		food_indicator.visible = carrying_food > 0
@@ -380,7 +380,7 @@ func check_for_food():
 	return false
 
 # Align ant to terrain
-func align_to_terrain():
+func align_to_terrain() -> void:
 	if not terrain:
 		return
 		
@@ -478,5 +478,11 @@ func get_obstacle_avoidance_direction() -> Vector3:
 	return avoidance_dir
 
 # Update food sources known to this ant
-func update_food_sources(food_refs):
+func update_food_sources(food_refs) -> void:
 	food_sources = food_refs
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

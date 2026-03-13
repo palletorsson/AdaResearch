@@ -30,7 +30,7 @@ class CSGPieceData:
 	var split_level: int
 	var original_mesh: Mesh
 
-	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, level: int, mesh_data: Mesh):
+	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, level: int, mesh_data: Mesh) -> void:
 		mesh_instance = mesh
 		rigid_body = rb
 		area = area_node
@@ -330,3 +330,9 @@ func get_max_split_level_reached() -> int:
 			var data: CSGPieceData = piece_data[piece]
 			max_level = max(max_level, data.split_level)
 	return max_level
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

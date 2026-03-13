@@ -27,11 +27,11 @@ var time: float = 0.0
 var shader_material: ShaderMaterial
 var canvas: Sprite2D
 
-func _ready():
+func _ready() -> void:
 	# Set up the shader
 	setup_shader()
 
-func setup_shader():
+func setup_shader() -> void:
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = create_trans_queer_shader()
 	
@@ -44,7 +44,7 @@ func setup_shader():
 	
 	update_shader_parameters()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# Animate parameters for fluid movement
@@ -56,7 +56,7 @@ func _process(delta):
 	
 	update_shader_parameters()
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	shader_material.set_shader_parameter("time", time)
 	shader_material.set_shader_parameter("flow_intensity", flow_intensity)
 	shader_material.set_shader_parameter("swirl_scale", swirl_scale)
@@ -278,7 +278,7 @@ func create_trans_queer_shader() -> Shader:
 	return shader
 
 # Input handling for interactivity
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			match event.keycode:
@@ -317,3 +317,9 @@ func _input(event):
 				KEY_RIGHT:
 					flow_intensity += 0.5
 					update_shader_parameters()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

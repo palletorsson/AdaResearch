@@ -5,10 +5,10 @@ var arrow_mesh: MeshInstance3D
 var direction: Vector3 = Vector3.UP
 var magnitude: float = 1.0
 
-func _ready():
+func _ready() -> void:
 	create_arrow()
 
-func create_arrow():
+func create_arrow() -> void:
 	# Create a box mesh for the arrow head (cone-like when scaled)
 	var cone_mesh = BoxMesh.new()
 	cone_mesh.size = Vector3(0.1, 0.2, 0.1)
@@ -49,12 +49,12 @@ func create_arrow():
 	# Store reference to the arrow
 	arrow_mesh = arrow_head
 
-func set_direction(new_direction: Vector3):
+func set_direction(new_direction: Vector3) -> void:
 	direction = new_direction.normalized()
 	if direction != Vector3.ZERO:
 		look_at(global_position + direction, Vector3.UP)
 
-func set_magnitude(new_magnitude: float):
+func set_magnitude(new_magnitude: float) -> void:
 	magnitude = new_magnitude
 	# Scale based on magnitude
 	var scale_factor = clamp(magnitude / 2.0, 0.1, 2.0)
@@ -68,3 +68,9 @@ func set_magnitude(new_magnitude: float):
 		if child is MeshInstance3D and child.material_override:
 			child.material_override.albedo_color = color
 			child.material_override.emission = color * 0.3
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

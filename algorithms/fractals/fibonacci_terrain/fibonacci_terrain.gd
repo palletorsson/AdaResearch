@@ -41,14 +41,14 @@ var spiral_mesh_instance: MeshInstance3D
 signal iteration_complete(iteration: int)
 signal terrain_complete()
 
-func _ready():
+func _ready() -> void:
 	_initialize_terrain()
 	if animate_growth:
 		is_growing = true
 	else:
 		_generate_full_terrain()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not animate_growth or not is_growing:
 		return
 
@@ -57,7 +57,7 @@ func _process(delta: float):
 		growth_timer = 0.0
 		_perform_growth_iteration()
 
-func _initialize_terrain():
+func _initialize_terrain() -> void:
 	"""Create initial subdivided plane"""
 	faces.clear()
 
@@ -162,7 +162,7 @@ func _perform_growth_iteration():
 	iteration_complete.emit(current_iteration)
 	print("FibonacciTerrain: Iteration %d complete, %d faces" % [current_iteration, faces.size()])
 
-func _lift_and_subdivide_face(face_idx: int):
+func _lift_and_subdivide_face(face_idx: int) -> void:
 	"""Lift a face and optionally subdivide it"""
 	var face = faces[face_idx]
 
@@ -180,7 +180,7 @@ func _lift_and_subdivide_face(face_idx: int):
 	if face.subdivisions < subdivision_depth_per_lift + current_iteration:
 		_subdivide_face_golden(face_idx)
 
-func _subdivide_face_golden(face_idx: int):
+func _subdivide_face_golden(face_idx: int) -> void:
 	"""Subdivide a face using golden ratio proportions"""
 	var face = faces[face_idx]
 	var corners = face.corners
@@ -259,7 +259,7 @@ func _create_face_dict(corners: Array, height: float, subdivisions: int) -> Dict
 		"center": center
 	}
 
-func _subdivide_all_faces():
+func _subdivide_all_faces() -> void:
 	"""Subdivide all faces once"""
 	# IMPORTANT: Capture the count ONCE before subdividing
 	# Each subdivision replaces 1 face with 2, so we need to skip the new ones
@@ -273,7 +273,7 @@ func _subdivide_all_faces():
 		i += 2
 		faces_processed += 1
 
-func _recalculate_edges():
+func _recalculate_edges() -> void:
 	"""Determine which faces are on the edge of the terrain"""
 	# Find bounding box
 	var min_x = INF
@@ -300,7 +300,7 @@ func _recalculate_edges():
 				face.is_edge = true
 				break
 
-func _rebuild_mesh():
+func _rebuild_mesh() -> void:
 	"""Rebuild the terrain mesh from faces"""
 	# Remove old mesh
 	if mesh_instance:
@@ -361,7 +361,7 @@ func _rebuild_mesh():
 	if use_golden_spiral_overlay:
 		_update_spiral_overlay()
 
-func _add_face_sides(surface_tool: SurfaceTool, face: Dictionary, top_color: Color):
+func _add_face_sides(surface_tool: SurfaceTool, face: Dictionary, top_color: Color) -> void:
 	"""Add side walls for a lifted face"""
 	var corners = face.corners
 	var base_y = 0.0
@@ -389,7 +389,7 @@ func _add_face_sides(surface_tool: SurfaceTool, face: Dictionary, top_color: Col
 		surface_tool.add_vertex(c1)
 		surface_tool.add_vertex(b1)
 
-func _update_spiral_overlay():
+func _update_spiral_overlay() -> void:
 	"""Draw golden spiral overlay on terrain"""
 	if spiral_mesh_instance:
 		spiral_mesh_instance.queue_free()
@@ -446,14 +446,14 @@ func _point_in_face(point: Vector2, face: Dictionary) -> bool:
 
 	return point.x >= min_x and point.x <= max_x and point.y >= min_z and point.y <= max_z
 
-func _generate_full_terrain():
+func _generate_full_terrain() -> void:
 	"""Generate terrain without animation"""
 	for i in range(max_iterations):
 		_perform_growth_iteration()
 	is_growing = false
 
 # Public API
-func regenerate():
+func regenerate() -> void:
 	"""Reset and regenerate terrain"""
 	current_iteration = 0
 	growth_timer = 0.0
@@ -463,14 +463,14 @@ func regenerate():
 	else:
 		_generate_full_terrain()
 
-func set_iteration(iter: int):
+func set_iteration(iter: int) -> void:
 	"""Set terrain to specific iteration"""
 	current_iteration = 0
 	_initialize_terrain()
 	for i in range(min(iter, max_iterations)):
 		_perform_growth_iteration()
 
-func toggle_spiral():
+func toggle_spiral() -> void:
 	"""Toggle golden spiral overlay"""
 	use_golden_spiral_overlay = not use_golden_spiral_overlay
 	if use_golden_spiral_overlay:
@@ -503,7 +503,7 @@ func configure(data: Dictionary) -> void:
 	regenerate()
 
 # Presets
-func apply_preset(preset_name: String):
+func apply_preset(preset_name: String) -> void:
 	"""Apply terrain generation preset"""
 	match preset_name:
 		"gentle_hills":
@@ -535,3 +535,9 @@ func apply_preset(preset_name: String):
 			use_golden_spiral_overlay = true
 
 	regenerate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

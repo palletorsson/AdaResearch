@@ -39,7 +39,7 @@ class LayeredObject:
 	var animation_data: Dictionary = {}
 	var is_valid: bool = true
 	
-	func _init(parent: Node3D, name: String, position: Vector3, type: String):
+	func _init(parent: Node3D, name: String, position: Vector3, type: String) -> void:
 		container = Node3D.new()
 		container.name = name
 		container.position = position
@@ -57,7 +57,7 @@ class LayeredObject:
 	func is_container_valid() -> bool:
 		return container != null and is_instance_valid(container)
 	
-	func cleanup():
+	func cleanup() -> void:
 		if is_container_valid():
 			container.queue_free()
 		layers.clear()
@@ -73,7 +73,7 @@ class TextureLayer:
 	var layer_index: int
 	var blend_mode: BaseMaterial3D.BlendMode
 	
-	func _init(index: int, size: int):
+	func _init(index: int, size: int) -> void:
 		layer_index = index
 		buffer = PackedByteArray()
 		buffer.resize(size * size * 4)  # RGBA
@@ -112,7 +112,7 @@ class TextureLayer:
 		
 		return material
 	
-	func create_texture(size: int):
+	func create_texture(size: int) -> void:
 		var image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, buffer)
 		texture = ImageTexture.new()
 		texture.set_image(image)
@@ -121,7 +121,7 @@ class TextureLayer:
 			material.albedo_texture = texture
 			material.emission_texture = texture
 	
-	func update_texture(size: int):
+	func update_texture(size: int) -> void:
 		if texture and buffer.size() > 0:
 			var image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, buffer)
 			texture.set_image(image)
@@ -138,7 +138,7 @@ var objects: Array[LayeredObject] = []
 var noise_generator: FastNoiseLite
 var wave_patterns: Array[Dictionary] = []
 
-func _ready():
+func _ready() -> void:
 	initialize_system()
 	create_demo_objects()
 	setup_scene_environment()
@@ -148,7 +148,7 @@ func _ready():
 # SYSTEM INITIALIZATION
 # ===================
 
-func initialize_system():
+func initialize_system() -> void:
 	print("🔄 Initializing Layered Texture System...")
 	
 	# Setup noise generator
@@ -165,7 +165,7 @@ func initialize_system():
 			"speed": 0.8 + randf() * 1.4
 		})
 
-func create_demo_objects():
+func create_demo_objects() -> void:
 	var object_configs = [
 		{"name": "Datamosh Layers", "pos": Vector3(-9, 3, 0), "type": "datamosh"},
 		{"name": "Chromatic Split", "pos": Vector3(-3, 3, 0), "type": "chromatic"},
@@ -180,7 +180,7 @@ func create_demo_objects():
 	for config in object_configs:
 		create_layered_object(config.name, config.pos, config.type)
 
-func create_layered_object(name: String, pos: Vector3, glitch_type: String):
+func create_layered_object(name: String, pos: Vector3, glitch_type: String) -> void:
 	var obj = LayeredObject.new(self, name, pos, glitch_type)
 	
 	# Create layers
@@ -221,7 +221,7 @@ func create_layered_object(name: String, pos: Vector3, glitch_type: String):
 	
 	objects.append(obj)
 
-func setup_scene_environment():
+func setup_scene_environment() -> void:
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 4, 15)
@@ -237,7 +237,7 @@ func setup_scene_environment():
 	# Environment
 	setup_world_environment()
 
-func animate_camera(camera: Camera3D):
+func animate_camera(camera: Camera3D) -> void:
 	var tween = create_tween()
 	tween.set_loops()
 	
@@ -249,7 +249,7 @@ func animate_camera(camera: Camera3D):
 		0.0, PI * 2.0, 20.0
 	)
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
 	main_light.light_energy = 1.0
@@ -272,7 +272,7 @@ func setup_lighting():
 		add_child(light)
 		light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 
-func setup_world_environment():
+func setup_world_environment() -> void:
 	var world_env = WorldEnvironment.new()
 	var env = Environment.new()
 	
@@ -294,7 +294,7 @@ func setup_world_environment():
 # MAIN UPDATE LOOP
 # ===================
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	update_timer += delta
 	
@@ -306,14 +306,14 @@ func _process(delta):
 	# Update animations every frame
 	update_animations(delta)
 
-func update_all_objects():
+func update_all_objects() -> void:
 	for obj in objects:
 		if not obj.is_container_valid():
 			continue
 		
 		update_object_textures(obj)
 
-func update_object_textures(obj: LayeredObject):
+func update_object_textures(obj: LayeredObject) -> void:
 	for layer_idx in range(obj.layers.size()):
 		if layer_idx < obj.textures.size():
 			# Create new layer data
@@ -326,7 +326,7 @@ func update_object_textures(obj: LayeredObject):
 				var image = Image.create_from_data(texture_size, texture_size, false, Image.FORMAT_RGBA8, layer.buffer)
 				obj.textures[layer_idx].set_image(image)
 
-func update_animations(delta: float):
+func update_animations(delta: float) -> void:
 	for obj in objects:
 		if not obj.is_container_valid():
 			continue
@@ -334,7 +334,7 @@ func update_animations(delta: float):
 		update_layer_positions(obj, delta)
 		update_material_properties(obj, delta)
 
-func update_layer_positions(obj: LayeredObject, delta: float):
+func update_layer_positions(obj: LayeredObject, delta: float) -> void:
 	if not enable_layer_separation:
 		return
 	
@@ -382,7 +382,7 @@ func get_glitch_specific_movement(glitch_type: String, layer_idx: int, t: float)
 		_:
 			return Vector3.ZERO
 
-func update_material_properties(obj: LayeredObject, delta: float):
+func update_material_properties(obj: LayeredObject, delta: float) -> void:
 	for i in range(obj.materials.size()):
 		var material = obj.materials[i]
 		if not is_instance_valid(material):
@@ -401,7 +401,7 @@ func update_material_properties(obj: LayeredObject, delta: float):
 # TEXTURE GENERATION
 # ===================
 
-func generate_layer_texture(layer: TextureLayer, glitch_type: String, t: float):
+func generate_layer_texture(layer: TextureLayer, glitch_type: String, t: float) -> void:
 	var size = texture_size
 	
 	for y in range(size):
@@ -570,7 +570,7 @@ func generate_quantum_pattern(uv: Vector2, layer: int, t: float) -> Color:
 # EFFECT TRIGGERS
 # ===================
 
-func trigger_layer_explosion(obj_index: int):
+func trigger_layer_explosion(obj_index: int) -> void:
 	if obj_index >= objects.size():
 		return
 		
@@ -601,7 +601,7 @@ func trigger_layer_explosion(obj_index: int):
 		tween.parallel().tween_property(layer, "rotation", Vector3.ZERO, 1.0) 
 		tween.parallel().tween_property(layer, "scale", Vector3.ONE, 1.0)
 
-func trigger_chromatic_separation(obj_index: int):
+func trigger_chromatic_separation(obj_index: int) -> void:
 	if obj_index >= objects.size():
 		return
 		
@@ -628,7 +628,7 @@ func trigger_chromatic_separation(obj_index: int):
 		tween.tween_interval(2.0)
 		tween.tween_property(layer, "position", Vector3.ZERO, 1.0)
 
-func trigger_system_wide_glitch():
+func trigger_system_wide_glitch() -> void:
 	print("⚡ SYSTEM-WIDE GLITCH ACTIVATED!")
 	
 	for i in range(objects.size()):
@@ -640,7 +640,7 @@ func trigger_system_wide_glitch():
 # INPUT CONTROLS
 # ===================
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed:
 		return
 	
@@ -681,7 +681,7 @@ func _input(event):
 		KEY_H:
 			print_help()
 
-func print_help():
+func print_help() -> void:
 	print("\n🎮 LAYERED TEXTURE SYSTEM v2.0 CONTROLS")
 	print("════════════════════════════════════════")
 	print("  SPACE - Toggle layer separation")
@@ -698,7 +698,7 @@ func print_help():
 	print("  • Dynamic layer separation")
 	print("  • Advanced blending modes")
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_READY:
 		print("\n🚀 LAYERED TEXTURE SYSTEM v2.0 INITIALIZED")
 		print("📊 Objects: ", objects.size())
@@ -707,7 +707,7 @@ func _notification(what):
 		print("⚡ Update frequency: ", update_frequency, " FPS")
 		print("\nPress H for help!")
 
-func _exit_tree():
+func _exit_tree() -> void:
 	# Cleanup
 	for obj in objects:
 		obj.cleanup()

@@ -9,7 +9,7 @@ var noise_resolution = 0.5
 var noise_cubes: Array[CSGBox3D] = []
 var noise_generator: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	# Initialize noise generator (FastNoiseLite is Godot 4's noise implementation)
 	noise_generator = FastNoiseLite.new()
 	noise_generator.seed = randi()
@@ -21,7 +21,7 @@ func _ready():
 	# Create the noise field
 	create_noise_field()
 
-func create_noise_field():
+func create_noise_field() -> void:
 	# Clear existing cubes
 	for cube in noise_cubes:
 		cube.queue_free()
@@ -59,7 +59,7 @@ func create_noise_field():
 func generate_noise_at(x: float, z: float) -> float:
 	return noise_generator.get_noise_2d(x * frequency, z * frequency)
 
-func update_noise_field():
+func update_noise_field() -> void:
 	noise_generator.fractal_gain = persistence
 	
 	for i in range(noise_cubes.size()):
@@ -79,6 +79,12 @@ func update_noise_field():
 		if cube.material_override:
 			cube.material_override.albedo_color = color
 
-func regenerate_noise():
+func regenerate_noise() -> void:
 	noise_generator.seed = randi()
 	update_noise_field()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

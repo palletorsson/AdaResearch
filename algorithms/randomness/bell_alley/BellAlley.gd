@@ -9,10 +9,10 @@ extends Node3D
 @export var height_y: float = 0.0         # cube Y position (ground level)
 @export var cube_scene: PackedScene = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
-func _ready():
+func _ready() -> void:
 	create_bellcurve_alley()
 
-func create_bellcurve_alley():
+func create_bellcurve_alley() -> void:
 	var mid_z := grid_z / 2.0
 	var mid_x := 0.0
 	

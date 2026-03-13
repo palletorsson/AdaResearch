@@ -62,7 +62,7 @@ var rule_neighborhood: String = "M"
 # Optimization: Precomputed neighbor offsets
 var neighbor_offsets: Array[int] = []
 
-func _ready():
+func _ready() -> void:
 	# robustly find or create mesh instance
 	if not mesh_instance:
 		for child in get_children():
@@ -129,12 +129,12 @@ func _ready():
 	_initialize_grid()
 	_update_visuals()
 
-func _calculate_strides():
+func _calculate_strides() -> void:
 	stride_y = grid_size.x
 	stride_z = grid_size.x * grid_size.y
 	total_cells = grid_size.x * grid_size.y * grid_size.z
 
-func _precompute_neighbor_offsets():
+func _precompute_neighbor_offsets() -> void:
 	neighbor_offsets.clear()
 	for z in range(-1, 2):
 		for y in range(-1, 2):
@@ -144,7 +144,7 @@ func _precompute_neighbor_offsets():
 				var offset = x + (y * stride_y) + (z * stride_z)
 				neighbor_offsets.append(offset)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
@@ -166,7 +166,7 @@ func _process(delta):
 		time_accumulator = 0.0
 		_step()
 
-func _parse_rule(rule: String):
+func _parse_rule(rule: String) -> void:
 	var parts = rule.split("/")
 	if parts.size() < 2:
 		push_error("Invalid rule format. Expected S/B/C/N or S/B")
@@ -192,7 +192,7 @@ func _parse_rule(rule: String):
 	else:
 		rule_neighborhood = "M"
 
-func _parse_range_string(s: String, target_array: Array[bool]):
+func _parse_range_string(s: String, target_array: Array[bool]) -> void:
 	var groups = s.split(",")
 	for group in groups:
 		if "-" in group:
@@ -207,7 +207,7 @@ func _parse_range_string(s: String, target_array: Array[bool]):
 			if val < target_array.size():
 				target_array[val] = true
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	_calculate_strides()
 	current_state.resize(total_cells)
 	next_state.resize(total_cells)
@@ -237,7 +237,7 @@ func _initialize_grid():
 	mesh_instance.multimesh.instance_count = total_cells
 	mesh_instance.multimesh.visible_instance_count = 0
 
-func _step():
+func _step() -> void:
 	# Optimized step using 1D array and precomputed offsets
 	# We avoid boundary checks in the inner loop by iterating only the safe inner volume
 	# and handling boundaries separately (or just ignoring them for speed, treating as dead)
@@ -289,7 +289,7 @@ func _step():
 	generation += 1
 	_update_visuals()
 
-func _update_visuals():
+func _update_visuals() -> void:
 	var mm = mesh_instance.multimesh
 	var active_count = 0
 	
@@ -353,3 +353,9 @@ func _update_visuals():
 						active_count += 1
 	
 	mm.visible_instance_count = active_count
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

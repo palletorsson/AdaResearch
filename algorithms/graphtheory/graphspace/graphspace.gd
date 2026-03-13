@@ -416,7 +416,7 @@ func _dijkstra(src: int) -> PackedFloat32Array:
 # ---------------------------
 # Debug draw in-editor (Godot gizmos)
 # ---------------------------
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		update_gizmos()
 
@@ -437,3 +437,9 @@ func _draw() -> void:
 		var pa: Vector3 = nodes[e.a]["pos"]
 		var pb: Vector3 = nodes[e.b]["pos"]
 		get_viewport().debug_draw_line_3d(pa, pb, Color(0.3, 0.9, 1.0, 0.7))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

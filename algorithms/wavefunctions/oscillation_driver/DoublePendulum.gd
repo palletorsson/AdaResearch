@@ -40,7 +40,7 @@ var omega1: float = 0.0
 var omega2: float = 0.0
 var trail_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 
 	# Initialize angles
@@ -60,7 +60,7 @@ func _ready():
 	if raycast:
 		raycast.enabled = true
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -71,7 +71,7 @@ func _setup_visuals():
 	material.point_size = 2.0
 	trail_instance.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# --- PHYSICS SIMULATION ---
 	# Double Pendulum Equations of Motion
 	# Numerator/Denominator breakdown for readability
@@ -148,7 +148,7 @@ func _process(delta):
 	_draw_trail()
 	_update_drawing()
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	if trail_points.is_empty(): return
 	
@@ -162,7 +162,7 @@ var hue_timer: float = 0.0
 @export var color_cycle_speed: float = 0.01  # Slower = more color variation on canvas
 @onready var product_cube: MeshInstance3D = $ProductCube
 
-func _update_drawing():
+func _update_drawing() -> void:
 	if not raycast: return
 	
 	if raycast.is_colliding():
@@ -193,7 +193,7 @@ func _find_drawable(node: Node) -> Node:
 		if child.has_method("draw_at_world_position"): return child
 	return null
 
-func _update_cube_color(color: Color):
+func _update_cube_color(color: Color) -> void:
 	"""Update the ProductCube to match the current painting color"""
 	if not product_cube:
 		return

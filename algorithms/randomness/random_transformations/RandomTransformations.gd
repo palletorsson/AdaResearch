@@ -16,10 +16,10 @@ var scale_variance := 0.5
 var translation_variance := 2.0
 var noise_amplitude := 1.0
 
-func _ready():
+func _ready() -> void:
 	initialize_base_objects()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	transform_timer += delta
 	
@@ -28,7 +28,7 @@ func _process(delta):
 	show_random_matrices()
 	create_noise_based_distortion()
 
-func initialize_base_objects():
+func initialize_base_objects() -> void:
 	# Create base geometric objects for transformation
 	base_objects = [
 		{"type": "box", "size": Vector3(1, 1, 1)},
@@ -37,7 +37,7 @@ func initialize_base_objects():
 		{"type": "cone", "radius": 0.5, "height": 1.2}
 	]
 
-func apply_geometric_transforms():
+func apply_geometric_transforms() -> void:
 	var container = get_node_or_null("GeometricTransforms")
 	if container == null:
 		return
@@ -112,7 +112,7 @@ func create_object(obj_data: Dictionary) -> CSGPrimitive3D:
 		_:
 			return CSGBox3D.new()
 
-func apply_random_transform(object: Node3D, seed_offset: int):
+func apply_random_transform(object: Node3D, seed_offset: int) -> void:
 	# Seed random number generator for consistent but varied results
 	var rng = RandomNumberGenerator.new()
 	rng.seed = int(time * 10) + seed_offset
@@ -135,7 +135,7 @@ func apply_random_transform(object: Node3D, seed_offset: int):
 		rng.randf_range(-translation_variance, translation_variance)
 	) * 0.3
 
-func demonstrate_stochastic_operations():
+func demonstrate_stochastic_operations() -> void:
 	var container = get_node_or_null("StochasticOperations")
 	if container == null:
 		return
@@ -222,7 +222,7 @@ func poisson_random(lambda: float) -> int:
 	
 	return k - 1
 
-func show_random_matrices():
+func show_random_matrices() -> void:
 	var container = get_node_or_null("RandomMatrices")
 	if container == null:
 		return
@@ -272,7 +272,7 @@ func show_random_matrices():
 	
 	container.add_child(det_indicator)
 
-func create_noise_based_distortion():
+func create_noise_based_distortion() -> void:
 	var container = get_node_or_null("NoiseBasedDistortion")
 	if container == null:
 		return
@@ -379,3 +379,9 @@ func grad3d(hash: int, x: float, y: float, z: float) -> float:
 	var u = x if h < 8 else y
 	var v = y if h < 4 else (x if h == 12 or h == 14 else z)
 	return (u if (h & 1) == 0 else -u) + (v if (h & 2) == 0 else -v)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -28,13 +28,13 @@ var trace_image: Image = Image.new()  # Image to store the trace
 var trace_texture_data: ImageTexture
 @onready var drawtexture = $"../../DrawTexture"
 
-func _ready():
+func _ready() -> void:
 	# Initial positions
 	init_trace_image()
 	calculate_positions()
 	queue_redraw()
 
-func init_trace_image():
+func init_trace_image() -> void:
 	# Define the dimensions for the trace image
 	var width = 800  # Adjust to your desired size
 	var height = 800
@@ -49,7 +49,7 @@ func init_trace_image():
 	# Initialize the trace texture
 
 	
-func _process(delta: float):
+func _process(delta: float) -> void:
 	update_pendulum(delta)
 	calculate_positions()
 
@@ -66,7 +66,7 @@ func _process(delta: float):
 	# Trigger a redraw of the pendulum
 	queue_redraw()
 
-func _draw():
+func _draw() -> void:
 	# Draw the pendulum arms
 	draw_line(pivot, pos1, Color(1, 1, 1), 2)  # Line to the first pendulum
 	draw_line(pos1, pos2, Color(1, 1, 1), 2)  # Line to the second pendulum
@@ -79,7 +79,7 @@ func _draw():
 	for point in trail_points:
 		draw_circle(point, trail_radius, trail_color)
 
-func update_pendulum(delta: float):
+func update_pendulum(delta: float) -> void:
 	var num1 = -gravity * (2 * mass1 + mass2) * sin(angle1)
 	var num2 = -mass2 * gravity * sin(angle1 - 2 * angle2)
 	var num3 = -2 * sin(angle1 - angle2) * mass2
@@ -103,12 +103,12 @@ func update_pendulum(delta: float):
 	angle1 += angular_velocity1 * delta
 	angle2 += angular_velocity2 * delta
 
-func calculate_positions():
+func calculate_positions() -> void:
 	# Calculate the positions of the pendulum masses
 	pos1 = pivot + Vector2(length1 * sin(angle1), length1 * cos(angle1))
 	pos2 = pos1 + Vector2(length2 * sin(angle2), length2 * cos(angle2))
 
-func draw_to_trace(position: Vector2):
+func draw_to_trace(position: Vector2) -> void:
 	# Ensure position is within the bounds of the trace_image
 	if position.x < 0 or position.y < 0 or position.x >= trace_image.get_width() or position.y >= trace_image.get_height():
 		return
@@ -123,7 +123,7 @@ func draw_to_trace(position: Vector2):
 	# Update the existing texture with the modified image (avoid creating a new one each frame)
 	trace_texture_data.set_image(trace_image)
 # Function to update the material's albedo texture
-func update_material(tex: ImageTexture):
+func update_material(tex: ImageTexture) -> void:
 	if drawtexture.material_override is ShaderMaterial:
 		var shader_material = drawtexture.material_override as ShaderMaterial
 		shader_material.set_shader_parameter("transparancy", 1)

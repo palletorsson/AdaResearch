@@ -10,7 +10,7 @@ extends BaseCA
 
 var sphere_mesh: SphereMesh
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Replace default cube mesh with sphere
 	sphere_mesh = SphereMesh.new()
@@ -22,7 +22,7 @@ func _ready():
 	# Re-configure multimesh with sphere
 	configure_multimesh(sphere_mesh, GRID_SIZE * GRID_SIZE * GRID_SIZE) # Max possible
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid = create_3d_grid()
 	if demo_mode:
 		# Randomly populate grid for demo purposes
@@ -32,7 +32,7 @@ func initialize_grid():
 			var z = randi() % GRID_SIZE
 			grid[x][y][z] = 1
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance: return
 	
 	var mm = multi_mesh_instance.multimesh

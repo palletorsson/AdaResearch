@@ -7,13 +7,13 @@ extends Node3D
 var grid = []
 var multimesh_instance: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	multimesh_instance = $MultiMeshInstance3D
 	initialize_grid()
 	run_simulation()
 	update_multimesh()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid.resize(grid_size)
 	for x in range(grid_size):
 		grid[x] = []
@@ -27,7 +27,7 @@ func initialize_grid():
 				else:
 					grid[x][y][z] = 0
 
-func run_simulation():
+func run_simulation() -> void:
 	for i in range(generations):
 		var next_grid = []
 		next_grid.resize(grid_size)
@@ -66,7 +66,7 @@ func count_neighbors(x, y, z):
 						count += 1
 	return count
 
-func update_multimesh():
+func update_multimesh() -> void:
 	var cube_mesh = BoxMesh.new()
 	cube_mesh.size = Vector3(1, 1, 1)
 	var multimesh = MultiMesh.new()

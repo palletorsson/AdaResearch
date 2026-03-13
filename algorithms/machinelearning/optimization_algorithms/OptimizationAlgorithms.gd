@@ -36,7 +36,7 @@ var gradient_vectors: Array = []
 # ─── Stats overlay ────────────────────────────────────────────────────────────
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	create_landscape_particles()
 	create_convergence_particles()
 	create_gradient_vectors()
@@ -44,7 +44,7 @@ func _ready():
 	setup_optimization_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate optimization progress
@@ -90,7 +90,7 @@ func _rebuild_all_particles() -> void:
 	create_gradient_vectors()
 	create_flow_particles()
 
-func create_landscape_particles():
+func create_landscape_particles() -> void:
 	# Create loss landscape particles representing the loss surface
 	var landscape_particles_node = $LossLandscape/LandscapeParticles
 	for i in range(particle_count):
@@ -118,7 +118,7 @@ func create_landscape_particles():
 		landscape_particles_node.add_child(particle)
 		landscape_particles.append(particle)
 
-func create_convergence_particles():
+func create_convergence_particles() -> void:
 	# Create convergence particles showing the optimization path spiral
 	var convergence_particles_node = $Convergence/ConvergenceParticles
 	for i in range(20):
@@ -145,7 +145,7 @@ func create_convergence_particles():
 		convergence_particles_node.add_child(particle)
 		convergence_particles.append(particle)
 
-func create_gradient_vectors():
+func create_gradient_vectors() -> void:
 	# Create gradient vector arrows showing descent direction
 	var gradient_vectors_node = $GradientFlow/GradientVectors
 	for i in range(15):
@@ -175,7 +175,7 @@ func create_gradient_vectors():
 		gradient_vectors_node.add_child(vector)
 		gradient_vectors.append(vector)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create optimization flow particles along the gradient-descent pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	var flow_count := int(max(20, particle_count * 1.6))
@@ -200,7 +200,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_optimization_metrics():
+func setup_optimization_metrics() -> void:
 	# Initialize optimization metrics
 	var loss_indicator = $OptimizationMetrics/LossMeter/LossIndicator
 	var lr_indicator = $OptimizationMetrics/LearningRateMeter/LearningRateIndicator
@@ -209,7 +209,7 @@ func setup_optimization_metrics():
 	if lr_indicator:
 		lr_indicator.position.x = 0  # Start at middle
 
-func animate_loss_landscape(delta):
+func animate_loss_landscape(delta) -> void:
 	# Animate loss landscape particles
 	for i in range(landscape_particles.size()):
 		var particle = landscape_particles[i]
@@ -231,7 +231,7 @@ func animate_loss_landscape(delta):
 			var blue_component = 0.8 * (1.0 - local_loss)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_optimization_core(delta):
+func animate_optimization_core(delta) -> void:
 	# Animate optimizer hub
 	var optimizer_hub = $OptimizationCore/OptimizerHub
 	if optimizer_hub:
@@ -313,7 +313,7 @@ func animate_optimization_core(delta):
 			var intensity = 0.3 + momentum_activation * 0.7
 			momentum_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_convergence(delta):
+func animate_convergence(delta) -> void:
 	# Animate convergence particles
 	for i in range(convergence_particles.size()):
 		var particle = convergence_particles[i]
@@ -340,7 +340,7 @@ func animate_convergence(delta):
 			var red_component = 0.2 + 0.6 * (1.0 - convergence)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
 
-func animate_gradient_flow(delta):
+func animate_gradient_flow(delta) -> void:
 	# Animate gradient flow core
 	var gradient_core = $GradientFlow/GradientCore
 	if gradient_core:
@@ -377,7 +377,7 @@ func animate_gradient_flow(delta):
 			vector.material_override.albedo_color = gradient_color
 			vector.material_override.emission = Color(0.8, 0.8, 0.2, 1) * gradient_strength * 0.4
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -401,7 +401,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * optimization_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_optimization_metrics(delta):
+func update_optimization_metrics(delta) -> void:
 	# Update loss meter (inverted - lower loss is better, so higher on meter)
 	var loss_indicator = $OptimizationMetrics/LossMeter/LossIndicator
 	if loss_indicator:
@@ -425,13 +425,13 @@ func update_optimization_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - normalized_lr)
 		lr_indicator.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func set_optimization_progress(progress: float):
+func set_optimization_progress(progress: float) -> void:
 	optimization_progress = clamp(progress, 0.0, 1.0)
 
-func set_loss_value(loss: float):
+func set_loss_value(loss: float) -> void:
 	loss_value = clamp(loss, 0.0, 1.0)
 
-func set_learning_rate(rate: float):
+func set_learning_rate(rate: float) -> void:
 	learning_rate = clamp(rate, 0.01, 1.0)
 
 func get_optimization_progress() -> float:
@@ -443,7 +443,7 @@ func get_loss_value() -> float:
 func get_learning_rate() -> float:
 	return learning_rate
 
-func reset_optimization():
+func reset_optimization() -> void:
 	var had_progress := optimization_progress > 0.1
 	time = 0.0
 	optimization_progress = 0.0
@@ -459,3 +459,9 @@ func _flash_reset() -> void:
 		var tw := create_tween()
 		tw.tween_property(hub, "scale", Vector3.ONE * 1.5, 0.15)
 		tw.tween_property(hub, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

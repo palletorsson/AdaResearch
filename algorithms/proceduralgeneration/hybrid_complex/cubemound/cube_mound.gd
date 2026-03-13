@@ -16,11 +16,11 @@ var generated_mesh: MeshInstance3D = null
 
 @onready var ground = $Ground
 
-func _ready():
+func _ready() -> void:
 	if generate_on_start:
 		start_generation()
 
-func start_generation():
+func start_generation() -> void:
 	if state != "idle" and state != "done":
 		return
 	
@@ -32,7 +32,7 @@ func start_generation():
 	state = "dropping"
 	timer = 0.0
 
-func drop_cubes():
+func drop_cubes() -> void:
 	for i in range(num_cubes):
 		var cube = RigidBody3D.new()
 		
@@ -76,7 +76,7 @@ func drop_cubes():
 	
 	print("Cubes dropped! Waiting for settlement...")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if state == "dropping":
 		timer += delta
 		# Wait a moment for cubes to start falling
@@ -104,7 +104,7 @@ func _process(delta):
 			state = "done"
 			print("Mesh generation complete!")
 
-func generate_mesh_from_cubes():
+func generate_mesh_from_cubes() -> void:
 	# Get all cube positions (using global position for accuracy)
 	var positions = []
 	for cube in cubes:
@@ -224,7 +224,7 @@ func create_mesh_from_voxels(voxel_grid: Dictionary, min_bounds: Vector3, grid_s
 	st.generate_normals()
 	return st.commit()
 
-func add_voxel_face(st: SurfaceTool, voxel_pos: Vector3, normal: Vector3, min_bounds: Vector3):
+func add_voxel_face(st: SurfaceTool, voxel_pos: Vector3, normal: Vector3, min_bounds: Vector3) -> void:
 	# Convert voxel position to world position
 	var world_pos = min_bounds + voxel_pos * voxel_size
 	var half_size = voxel_size * 0.5
@@ -285,18 +285,18 @@ func add_voxel_face(st: SurfaceTool, voxel_pos: Vector3, normal: Vector3, min_bo
 	st.add_vertex(vertices[2])
 	st.add_vertex(vertices[3])
 
-func clear_cubes():
+func clear_cubes() -> void:
 	for cube in cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
 	cubes.clear()
 
-func clear_generated_mesh():
+func clear_generated_mesh() -> void:
 	if generated_mesh and is_instance_valid(generated_mesh):
 		generated_mesh.queue_free()
 	generated_mesh = null
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			start_generation()
@@ -310,6 +310,6 @@ func _input(event):
 			# Regenerate with different random positions
 			get_tree().reload_current_scene()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	clear_cubes()
 	clear_generated_mesh()

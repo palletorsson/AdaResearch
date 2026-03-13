@@ -13,7 +13,7 @@ var _is_destroyed: bool = false
 var _hit_area: Area3D
 var _collision_body: StaticBody3D
 
-func _ready():
+func _ready() -> void:
 	# Find the terrain generator (should be a child MeshInstance3D)
 	_terrain_mesh_instance = find_child("*", true, false) as MeshInstance3D
 
@@ -24,7 +24,7 @@ func _ready():
 	else:
 		push_error("DestructibleTerrainCube: No MeshInstance3D child found!")
 
-func _setup_after_generation():
+func _setup_after_generation() -> void:
 	# Wait a few frames for terrain to generate
 	await get_tree().create_timer(2.0).timeout
 
@@ -37,7 +37,7 @@ func _setup_after_generation():
 	else:
 		push_error("DestructibleTerrainCube: Terrain mesh not generated!")
 
-func _setup_collision():
+func _setup_collision() -> void:
 	# Create static body
 	_collision_body = StaticBody3D.new()
 	_collision_body.name = "CollisionBody"
@@ -51,7 +51,7 @@ func _setup_collision():
 		_collision_body.add_child(collision_shape)
 		print("DestructibleTerrainCube: Collision created")
 
-func _setup_hit_detection():
+func _setup_hit_detection() -> void:
 	# Create hit detection area
 	_hit_area = Area3D.new()
 	_hit_area.name = "HitArea"
@@ -70,7 +70,7 @@ func _setup_hit_detection():
 	_hit_area.body_entered.connect(_on_body_entered)
 	print("DestructibleTerrainCube: Hit detection ready")
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed or not body.is_in_group("throwable"):
 		return
 
@@ -84,7 +84,7 @@ func _on_body_entered(body: Node3D):
 	if health <= 0:
 		_destroy(impact_velocity)
 
-func _destroy(impact_velocity: Vector3):
+func _destroy(impact_velocity: Vector3) -> void:
 	if _is_destroyed:
 		return
 
@@ -102,7 +102,7 @@ func _destroy(impact_velocity: Vector3):
 	# Create fragments
 	_create_voronoi_fragments(impact_velocity)
 
-func _create_voronoi_fragments(impact_velocity: Vector3):
+func _create_voronoi_fragments(impact_velocity: Vector3) -> void:
 	if not _generated_mesh:
 		return
 
@@ -140,7 +140,7 @@ func _create_voronoi_fragments(impact_velocity: Vector3):
 	await get_tree().create_timer(6.0).timeout
 	queue_free()
 
-func _create_fragment(pos: Vector3, mesh_center: Vector3, impact_velocity: Vector3, index: int):
+func _create_fragment(pos: Vector3, mesh_center: Vector3, impact_velocity: Vector3, index: int) -> void:
 	var fragment = RigidBody3D.new()
 	fragment.name = "Fragment_" + str(index)
 	fragment.global_position = global_position + pos
@@ -183,3 +183,9 @@ func _create_fragment(pos: Vector3, mesh_center: Vector3, impact_velocity: Vecto
 	if is_instance_valid(mesh_instance):
 		var tween = create_tween()
 		tween.tween_property(mesh_instance, "scale", Vector3.ZERO, 1.5)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

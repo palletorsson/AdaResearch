@@ -23,16 +23,16 @@ var _best_fitness_ever: float = 0.0
 @onready var multimesh_instance: MultiMeshInstance2D = $MultiMeshInstance2D
 @onready var timer: Timer = $Timer
 
-func _ready():
+func _ready() -> void:
 	timer.wait_time = 0.1
 	create_target_shape()
 	initialize_population()
 	call_deferred("_start_ga")
 
-func _start_ga():
+func _start_ga() -> void:
 	await run_ga_loop()
 
-func run_ga_loop():
+func run_ga_loop() -> void:
 	while current_generation < generations:
 		await evaluate_population_async()
 		var best_fitness = fitness.max()
@@ -49,7 +49,7 @@ func run_ga_loop():
 		await get_tree().process_frame
 	set_process(false)
 
-func evaluate_population_async():
+func evaluate_population_async() -> void:
 	fitness.resize(population_size)
 	for i in range(population_size):
 		var rules = population[i]
@@ -58,13 +58,13 @@ func evaluate_population_async():
 		if i % 5 == 0:
 			await get_tree().process_frame
 
-func display_ca_sequence(grids):
+func display_ca_sequence(grids) -> void:
 	for grid in grids:
 		update_multimesh(grid)
 		timer.start()
 		await timer.timeout
 
-func create_target_shape():
+func create_target_shape() -> void:
 	target_shape.resize(grid_size)
 	for x in range(grid_size):
 		target_shape[x] = []
@@ -75,7 +75,7 @@ func create_target_shape():
 			else:
 				target_shape[x][y] = 0
 
-func initialize_population():
+func initialize_population() -> void:
 	population.resize(population_size)
 	for i in range(population_size):
 		population[i] = []
@@ -135,7 +135,7 @@ func calculate_fitness(grid):
 				score += 1
 	return float(score) / (grid_size * grid_size)
 
-func select_new_population():
+func select_new_population() -> void:
 	var new_population = []
 	new_population.resize(population_size)
 	for i in range(population_size):
@@ -167,12 +167,12 @@ func crossover(parent1, parent2):
 			child[i] = parent2[i]
 	return child
 
-func mutate(child):
+func mutate(child) -> void:
 	for i in range(10):
 		if randf() < mutation_rate:
 			child[i] = 1 - child[i]
 
-func update_multimesh(grid):
+func update_multimesh(grid) -> void:
 	var square_mesh = QuadMesh.new()
 	square_mesh.size = Vector2(10, 10)
 	var multimesh = MultiMesh.new()

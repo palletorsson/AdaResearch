@@ -9,7 +9,7 @@ extends Node3D
 
 var noise := FastNoiseLite.new()
 
-func _ready():
+func _ready() -> void:
 	# Configure noise
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN     # or TYPE_SIMPLEX, etc.
 	noise.frequency = frequency

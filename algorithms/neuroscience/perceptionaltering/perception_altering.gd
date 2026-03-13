@@ -42,7 +42,7 @@ var perception_state = {
 	"gravity_phase": 0.0
 }
 
-func _ready():
+func _ready() -> void:
 	# Find the player
 	player = find_child("XROrigin3D", true)
 	if player:
@@ -62,7 +62,7 @@ func _ready():
 	
 	print("Perception Altering Environment initialized")
 
-func _setup_environment():
+func _setup_environment() -> void:
 	# Create a world environment for global visual effects
 	world_environment = WorldEnvironment.new()
 	world_environment.name = "PerceptionEnvironment"
@@ -85,7 +85,7 @@ func _setup_environment():
 	ambient_light.shadow_enabled = true
 	add_child(ambient_light)
 
-func _create_grid():
+func _create_grid() -> void:
 	# Create a grid mesh
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = Vector2(environment_size.x, environment_size.z)
@@ -130,7 +130,7 @@ func _create_grid():
 	static_body.add_child(collision_shape)
 	grid_lines.add_child(static_body)
 
-func _setup_distortion_regions():
+func _setup_distortion_regions() -> void:
 	# Process predefined distortion regions
 	for region_path in distortion_regions:
 		var region = get_node(region_path)
@@ -141,7 +141,7 @@ func _setup_distortion_regions():
 	if regions.size() == 0:
 		_create_default_regions()
 
-func _create_default_regions():
+func _create_default_regions() -> void:
 	# Create several distortion regions with different effects
 	var region_configs = [
 		{
@@ -234,7 +234,7 @@ func _create_distortion_region(position: Vector3, size: Vector3, color: Color, t
 	add_child(region)
 	return region
 
-func _on_region_entered(body: Node3D, region: Node3D, type: String, intensity: float):
+func _on_region_entered(body: Node3D, region: Node3D, type: String, intensity: float) -> void:
 	if body == player:
 		print("Player entered " + type + " distortion region")
 		
@@ -248,7 +248,7 @@ func _on_region_entered(body: Node3D, region: Node3D, type: String, intensity: f
 		if not distortion_zones.has(region):
 			distortion_zones.append(region)
 
-func _on_region_exited(body: Node3D, region: Node3D, type: String):
+func _on_region_exited(body: Node3D, region: Node3D, type: String) -> void:
 	if body == player:
 		print("Player exited " + type + " distortion region")
 		
@@ -262,7 +262,7 @@ func _on_region_exited(body: Node3D, region: Node3D, type: String):
 		if distortion_zones.has(region):
 			distortion_zones.erase(region)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update perception phases
 	perception_state.color_phase += delta * color_shift_speed * speed_multiplier
 	perception_state.wobble_phase += delta * wobble_frequency * speed_multiplier
@@ -318,7 +318,7 @@ func _process(delta):
 	if player and (direction_effect > 0 or gravity_effect > 0):
 		_apply_movement_distortion(delta, direction_effect, gravity_effect)
 
-func _apply_movement_distortion(_delta: float, direction_effect: float, gravity_effect: float):
+func _apply_movement_distortion(_delta: float, direction_effect: float, gravity_effect: float) -> void:
 	# Get the player's XR camera
 	var camera = player.get_node("XRCamera3D")
 	if not camera:
@@ -351,7 +351,7 @@ func _apply_movement_distortion(_delta: float, direction_effect: float, gravity_
 		# Here we just simulate a visual tilt
 		camera.rotation.z = deg_to_rad(gravity_angle)
 
-func _add_instructions():
+func _add_instructions() -> void:
 	var instructions = Label3D.new()
 	instructions.name = "Instructions"
 	instructions.text = """
@@ -372,7 +372,7 @@ func _add_instructions():
 	instructions.billboard = true
 	add_child(instructions)
 
-func reset_player():
+func reset_player() -> void:
 	if player:
 		player.global_transform = original_transform
 		
@@ -475,11 +475,11 @@ var perception_distortion_angle = 0.0
 var original_controller_path = NodePath("")
 var is_perception_modified = false
 
-func _ready():
+func _ready() -> void:
 	# Store original controller path for reference
 	original_controller_path = get_path()
 
-func set_perception_distortion(angle: float):
+func set_perception_distortion(angle: float) -> void:
 	perception_distortion_angle = angle
 	is_perception_modified = true
 	
@@ -490,9 +490,15 @@ func set_perception_distortion(angle: float):
 	# Actual movement direction modification would require
 	# integrating with the locomotion system, which depends on implementation
 
-func clear_perception_distortion():
+func clear_perception_distortion() -> void:
 	if is_perception_modified:
 		rotation.y -= deg_to_rad(perception_distortion_angle)
 		perception_distortion_angle = 0.0
 		is_perception_modified = false
 """
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

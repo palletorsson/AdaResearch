@@ -11,7 +11,7 @@ const GyroscopeGadgetScript = preload("res://algorithms/vectors/shared/gadgets/g
 
 var gyroscope: Node3D
 
-func _ready():
+func _ready() -> void:
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
 
@@ -28,7 +28,7 @@ func _ready():
 		_add_info_frame()
 		_add_gyroscope()
 
-func _add_info_frame():
+func _add_info_frame() -> void:
 	var sc := 0.33  # Match SCENE_SCALE from VectorSceneBase
 	var panel_pos := Vector3(0, 1.2, -0.5) * sc
 	var panel_size := Vector2(1.4, 0.8) * sc
@@ -124,12 +124,12 @@ func _add_info_frame():
 	desc_label.position = Vector3(0, content_top - 0.12 * sc, 0.08 * sc)
 	panel.add_child(desc_label)
 
-func _add_gyroscope():
+func _add_gyroscope() -> void:
 	gyroscope = GyroscopeGadgetScript.new()
 	gyroscope.position = Vector3(-1.5, 0.5, 0)
 	add_child(gyroscope)
 
-func create_axis(direction: Vector3, color: Color, label_text: String):
+func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 	# 1. The Shaft (Cylinder)
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = CylinderMesh.new()
@@ -189,3 +189,9 @@ func create_axis(direction: Vector3, color: Color, label_text: String):
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.position = direction * (axis_length + 0.2)
 	add_child(label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

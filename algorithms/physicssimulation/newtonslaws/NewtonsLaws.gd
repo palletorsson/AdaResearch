@@ -18,12 +18,12 @@ var ball_colors := [
 	Color(0.3, 0.5, 1.0),  # Blue — oscillating force
 ]
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_balls()
 	_create_containment()
 
-func _create_balls():
+func _create_balls() -> void:
 	var positions := [Vector3(-2, 3, 0), Vector3(0, 3, 0), Vector3(2, 3, 0)]
 	var masses := [1.0, 1.5, 2.0]
 
@@ -78,7 +78,7 @@ func _create_balls():
 		add_child(vel_arrow)
 		velocity_arrows.append(vel_arrow)
 
-func _create_containment():
+func _create_containment() -> void:
 	# Floor
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
@@ -105,7 +105,7 @@ func _create_containment():
 		wall.position = wall_data[0]
 		add_child(wall)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	time += delta
 
 	# Ball 0: gravity only — no applied force needed, Godot handles it
@@ -124,7 +124,7 @@ func _physics_process(delta: float):
 
 	_update_arrows()
 
-func _update_arrows():
+func _update_arrows() -> void:
 	for i in range(balls.size()):
 		var rb := balls[i]
 		var vel := rb.linear_velocity
@@ -156,10 +156,16 @@ func _create_arrow(color: Color) -> MeshInstance3D:
 	arrow.visible = false
 	return arrow
 
-func reset():
+func reset() -> void:
 	var positions := [Vector3(-2, 3, 0), Vector3(0, 3, 0), Vector3(2, 3, 0)]
 	for i in range(balls.size()):
 		balls[i].linear_velocity = Vector3.ZERO
 		balls[i].angular_velocity = Vector3.ZERO
 		balls[i].position = positions[i]
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

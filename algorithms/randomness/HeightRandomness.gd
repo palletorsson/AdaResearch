@@ -43,12 +43,12 @@ var _position_cache: Dictionary = {}
 signal algorithm_step_complete()
 signal algorithm_finished()
 
-func _init():
+func _init() -> void:
 	algorithm_name = "Height Distribution (8x8 Region)"
 	algorithm_description = "Random height distribution in middle 8x8 area with auto-loop capability"
 	max_steps = max_raises
 
-func _ready():
+func _ready() -> void:
 	# Create timer for stepping
 	timer = Timer.new()
 	timer.wait_time = step_delay
@@ -71,7 +71,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func _find_and_connect_grid():
+func _find_and_connect_grid() -> void:
 	# Look for GridSystem in the scene
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
 	if not grid_system:
@@ -95,7 +95,7 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 	
 	return null
 
-func _setup_audio_player():
+func _setup_audio_player() -> void:
 	"""Setup audio player for cube raising feedback"""
 	if enable_sound_feedback:
 		audio_player = AudioStreamPlayer3D.new()
@@ -124,7 +124,7 @@ func _setup_audio_player():
 		stream.data = data
 		audio_player.stream = stream
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if not grid_reference:
 		print("HeightRandomnessAlgorithm: Cannot start - grid not ready")
 		return
@@ -134,13 +134,13 @@ func start_algorithm():
 	timer.start()
 	print("HeightRandomnessAlgorithm: Algorithm started")
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	is_running = false
 	timer.stop()
 	loop_timer.stop()  # Also stop the loop timer
 	print("HeightRandomnessAlgorithm: Algorithm stopped")
 
-func set_auto_loop(enabled: bool):
+func set_auto_loop(enabled: bool) -> void:
 	"""Enable or disable automatic looping"""
 	auto_loop = enabled
 	print("HeightRandomnessAlgorithm: Auto-loop %s" % ("enabled" if enabled else "disabled"))
@@ -163,17 +163,17 @@ func step_once():
 	
 	return result
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	if is_running:
 		step_once()
 
-func _on_loop_timer_timeout():
+func _on_loop_timer_timeout() -> void:
 	"""Called when it's time to restart the algorithm"""
 	if auto_loop:
 		reset_algorithm()
 		start_algorithm()
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	"""Reset the algorithm to its initial state"""
 	if not grid_reference:
 		return
@@ -206,7 +206,7 @@ func reset_algorithm():
 	
 	print("HeightRandomnessAlgorithm: Reset complete - ready to restart")
 
-func setup_initial_state():
+func setup_initial_state() -> void:
 	# Ensure there are base cubes in the 8x8 region
 	if not grid_reference:
 		return
@@ -239,10 +239,10 @@ func execute_step() -> bool:
 	return total_raises < max_raises
 
 # Set grid reference for the algorithm to work with
-func set_grid_reference(grid_ref):
+func set_grid_reference(grid_ref) -> void:
 	grid_reference = grid_ref
 
-func _raise_cube(x: int, z: int):
+func _raise_cube(x: int, z: int) -> void:
 	if not grid_reference:
 		return
 
@@ -291,7 +291,7 @@ func _raise_cube(x: int, z: int):
 
 	print("HeightRandomness: Raised cube at (%d, %d) to height %.2f" % [x, z, cube_heights[cube_key]])
 
-func _try_raise_different_cube():
+func _try_raise_different_cube() -> void:
 	"""Try to find a different cube that hasn't reached max height"""
 	var attempts = 0
 	var max_attempts = 20
@@ -312,7 +312,7 @@ func _try_raise_different_cube():
 	max_height = max(min_height + 1.0, max_height - 0.5)
 	print("HeightRandomness: Reduced max height to %.2f" % max_height)
 
-func _add_visual_effect(position: Vector3):
+func _add_visual_effect(position: Vector3) -> void:
 	"""Add a visual effect at the cube position"""
 	if not enable_visual_feedback:
 		return
@@ -359,7 +359,7 @@ func _find_instance_index(structure_component, x: int, y: int, z: int) -> int:
 	return _position_cache.get(target_pos, -1)
 
 # Place a cube at specific 3D coordinates
-func _place_cube_at(x: int, y: int, z: int):
+func _place_cube_at(x: int, y: int, z: int) -> void:
 	if not grid_reference:
 		return
 		
@@ -431,7 +431,7 @@ func get_height_statistics() -> Dictionary:
 	}
 
 # Manually continue the rising process (useful for external control)
-func continue_rising_process(steps: int = 10):
+func continue_rising_process(steps: int = 10) -> void:
 	"""Continue the rising process for a specific number of steps"""
 	if not is_running:
 		start_algorithm()
@@ -441,3 +441,9 @@ func continue_rising_process(steps: int = 10):
 			break
 		step_once()
 		await get_tree().create_timer(step_delay).timeout
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

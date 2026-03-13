@@ -45,7 +45,7 @@ var presets = [
 	{"name": "Maze", "dA": 1.0, "dB": 0.5, "f": 0.029, "k": 0.057}
 ]
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Initialize grid arrays
@@ -68,7 +68,7 @@ func _ready():
 	# Update texture
 	_update_texture()
 
-func _setup_ui():
+func _setup_ui() -> void:
 	# Create panel for controls
 	parameter_panel = Panel.new()
 	parameter_panel.position = Vector2(width + 70, 50)
@@ -214,7 +214,7 @@ func _setup_ui():
 	parameter_panel.add_child(clear_button)
 	clear_button.pressed.connect(_clear_simulation)
 
-func _initialize_grids():
+func _initialize_grids() -> void:
 	grid_a = []
 	grid_b = []
 	next_a = []
@@ -237,7 +237,7 @@ func _initialize_grids():
 		next_a.append(next_row_a)
 		next_b.append(next_row_b)
 
-func _add_random_seeds():
+func _add_random_seeds() -> void:
 	# Add some random seeds of chemical B
 	for i in range(5):
 		var x = randi() % width
@@ -253,11 +253,11 @@ func _add_random_seeds():
 					grid_b[pos_y][pos_x] = 1.0
 					grid_a[pos_y][pos_x] = 0.0
 
-func _clear_simulation():
+func _clear_simulation() -> void:
 	_initialize_grids()
 	_update_texture()
 
-func _load_next_preset():
+func _load_next_preset() -> void:
 	current_preset = (current_preset + 1) % presets.size()
 	var preset = presets[current_preset]
 	
@@ -279,7 +279,7 @@ func _load_next_preset():
 	# Add new seeds
 	_add_random_seeds()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Reduced sampling for VR performance - only update every few frames
 	var steps = int(time_scale * 3 * delta)  # Reduced from 10 to 3
 	for i in range(max(1, steps)):
@@ -290,7 +290,7 @@ func _process(delta):
 	if frame_counter % 3 == 0:  # Update every 3rd frame
 		_update_texture()
 
-func _update_texture():
+func _update_texture() -> void:
 	# Check if image is properly initialized
 	if image == null or image.get_width() == 0 or image.get_height() == 0:
 		print("Image not initialized, recreating...")
@@ -319,7 +319,7 @@ func _update_texture():
 	texture = ImageTexture.create_from_image(image)
 	sprite.texture = texture
 
-func _simulate_step(delta):
+func _simulate_step(delta) -> void:
 	# Apply the reaction-diffusion equations
 	for y in range(height):
 		for x in range(width):
@@ -371,7 +371,7 @@ func _calculate_laplacian(grid, x, y):
 	
 	return result
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Allow drawing patterns with mouse
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -380,7 +380,7 @@ func _input(event):
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			_add_pattern_at_mouse()
 
-func _add_pattern_at_mouse():
+func _add_pattern_at_mouse() -> void:
 	var mouse_pos = get_global_mouse_position() - sprite.position
 	var x = int(mouse_pos.x)
 	var y = int(mouse_pos.y)
@@ -397,3 +397,9 @@ func _add_pattern_at_mouse():
 				if dx*dx + dy*dy < size*size:
 					grid_b[pos_y][pos_x] = 1.0
 					grid_a[pos_y][pos_x] = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

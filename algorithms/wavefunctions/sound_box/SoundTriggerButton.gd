@@ -126,3 +126,9 @@ func _trigger_sound() -> void:
 		var tween = create_tween()
 		tween.tween_property(mesh_instance, "scale", _original_scale * 0.9, 0.05)
 		tween.tween_property(mesh_instance, "scale", _original_scale * 1.1, 0.05)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

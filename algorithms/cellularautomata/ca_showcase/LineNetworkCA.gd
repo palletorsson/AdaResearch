@@ -20,7 +20,7 @@ var cell_parents: Dictionary = {} # Vector3i -> Vector3i
 
 var frontier: Array = [] # Array of Vector3i
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Hide the default blocky mesh
 	if mesh_instance: mesh_instance.visible = false
@@ -28,7 +28,7 @@ func _ready():
 	
 	setup_line_renderer()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid = create_3d_grid()
 	frontier.clear()
 	
@@ -52,7 +52,7 @@ func initialize_grid():
 					grid[walker.x][walker.y][walker.z] = 1
 					frontier.append(walker)
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	if iteration_count >= max_generations:
 		return
 
@@ -79,7 +79,7 @@ func update_simulation(_delta):
 	# Optional: Remove "dead" frontier cells? 
 	# For now, keep them all to allow branching from old segments.
 
-func setup_line_renderer():
+func setup_line_renderer() -> void:
 	immediate_mesh = ImmediateMesh.new()
 	mesh_instance_lines = MeshInstance3D.new()
 	mesh_instance_lines.mesh = immediate_mesh
@@ -93,7 +93,7 @@ func setup_line_renderer():
 	
 	add_child(mesh_instance_lines)
 
-func update_visualization():
+func update_visualization() -> void:
 	# We override this to track births and build connections
 	# But BaseCA calls this *after* update_simulation.
 	# We need to know what changed.
@@ -117,7 +117,7 @@ func update_visualization():
 
 	_draw_lines()
 
-func _find_parent_and_connect(pos: Vector3i):
+func _find_parent_and_connect(pos: Vector3i) -> void:
 	# Find a neighbor that is ALREADY in cell_birth_times (older than me)
 	var neighbors = get_3d_neighbors(pos)
 	var best_parent = Vector3i(-1, -1, -1)
@@ -153,7 +153,7 @@ func _grid_to_world(pos: Vector3i) -> Vector3:
 		(pos.z - GRID_SIZE/2) * CUBE_SIZE * VISUALIZATION_STEP
 	)
 
-func _draw_lines():
+func _draw_lines() -> void:
 	if connections.is_empty():
 		return
 		
@@ -171,3 +171,9 @@ func _draw_lines():
 		immediate_mesh.surface_add_vertex(p2)
 	
 	immediate_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

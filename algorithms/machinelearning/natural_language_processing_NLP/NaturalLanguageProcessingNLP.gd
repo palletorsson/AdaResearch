@@ -30,7 +30,7 @@ var text_particles: Array = []
 var result_particles: Array = []
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	# Initialize NLP visualization
 	print("Natural Language Processing Visualization initialized")
 	create_text_particles()
@@ -39,7 +39,7 @@ func _ready():
 	setup_nlp_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# ── Auto-advance progress if enabled ─────────────────────────────────
@@ -56,7 +56,7 @@ func _process(delta):
 	update_nlp_metrics(delta)
 	_update_stats_label()
 
-func create_text_particles():
+func create_text_particles() -> void:
 	## Create text input particles — blue spheres representing words/tokens before processing
 	var text_particles_node = $InputText/TextParticles
 	for i in range(particle_count):
@@ -81,7 +81,7 @@ func create_text_particles():
 		text_particles_node.add_child(particle)
 		text_particles.append(particle)
 
-func create_result_particles():
+func create_result_particles() -> void:
 	## Create result output particles — green spheres representing processed NLP results
 	var result_particles_node = $OutputResults/ResultParticles
 	for i in range(20):
@@ -106,7 +106,7 @@ func create_result_particles():
 		result_particles_node.add_child(particle)
 		result_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	## Create data flow particles — gold spheres tracing the NLP processing pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(35):
@@ -129,7 +129,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_nlp_metrics():
+func setup_nlp_metrics() -> void:
 	# Initialize NLP metrics
 	var accuracy_indicator = $NLPMetrics/AccuracyMeter/AccuracyIndicator
 	var perplexity_indicator = $NLPMetrics/PerplexityMeter/PerplexityIndicator
@@ -138,7 +138,7 @@ func setup_nlp_metrics():
 	if perplexity_indicator:
 		perplexity_indicator.position.x = 0  # Start at middle
 
-func animate_input_text(delta):
+func animate_input_text(delta) -> void:
 	# Animate text particles
 	for i in range(text_particles.size()):
 		var particle = text_particles[i]
@@ -163,7 +163,7 @@ func animate_input_text(delta):
 			var blue_component = 0.8 * (0.5 + (1.0 - token_progress) * 0.5)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_processing_pipeline(delta):
+func animate_processing_pipeline(delta) -> void:
 	# Animate processing pipeline core
 	var pipeline_core = $ProcessingPipeline/PipelineCore
 	if pipeline_core:
@@ -245,7 +245,7 @@ func animate_processing_pipeline(delta):
 			var intensity = 0.3 + ner_activation * 0.7
 			ner_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_output_results(delta):
+func animate_output_results(delta) -> void:
 	# Animate result particles
 	for i in range(result_particles.size()):
 		var particle = result_particles[i]
@@ -270,7 +270,7 @@ func animate_output_results(delta):
 			var red_component = 0.2 + 0.6 * (1.0 - confidence)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
 
-func animate_language_model(delta):
+func animate_language_model(delta) -> void:
 	# Animate language model core
 	var model_core = $LanguageModel/ModelCore
 	if model_core:
@@ -286,7 +286,7 @@ func animate_language_model(delta):
 			var intensity = 0.3 + processing_progress * 0.7
 			model_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -310,7 +310,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * processing_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_nlp_metrics(delta):
+func update_nlp_metrics(delta) -> void:
 	# Update accuracy meter
 	var accuracy_indicator = $NLPMetrics/AccuracyMeter/AccuracyIndicator
 	if accuracy_indicator:
@@ -335,13 +335,13 @@ func update_nlp_metrics(delta):
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-func set_processing_progress(progress: float):
+func set_processing_progress(progress: float) -> void:
 	processing_progress = clamp(progress, 0.0, 1.0)
 
-func set_accuracy_score(accuracy: float):
+func set_accuracy_score(accuracy: float) -> void:
 	accuracy_score = clamp(accuracy, 0.0, 1.0)
 
-func set_perplexity_score(perplexity: float):
+func set_perplexity_score(perplexity: float) -> void:
 	perplexity_score = clamp(perplexity, 0.0, 1.0)
 
 func get_processing_progress() -> float:
@@ -353,7 +353,7 @@ func get_accuracy_score() -> float:
 func get_perplexity_score() -> float:
 	return perplexity_score
 
-func reset_processing():
+func reset_processing() -> void:
 	time = 0.0
 	processing_progress = 0.0
 	accuracy_score = 0.0
@@ -366,7 +366,7 @@ func reset_processing():
 
 # ── Stats Label & Visual Feedback ────────────────────────────────────────────
 
-func _create_stats_label():
+func _create_stats_label() -> void:
 	## Creates a floating 3D label showing live NLP stats
 	_stats_label = Label3D.new()
 	_stats_label.text = "Initializing..."
@@ -379,7 +379,7 @@ func _create_stats_label():
 	_stats_label.no_depth_test = true
 	add_child(_stats_label)
 
-func _update_stats_label():
+func _update_stats_label() -> void:
 	if _stats_label:
 		_stats_label.text = "Natural Language Processing\nProgress: %d%%  |  Accuracy: %.0f%%  |  Perplexity: %.0f%%" % [
 			processing_progress * 100,
@@ -387,7 +387,7 @@ func _update_stats_label():
 			perplexity_score * 100
 		]
 
-func _on_progress_changed():
+func _on_progress_changed() -> void:
 	## Visual feedback — pulse pipeline core with gold glow
 	var pipeline_core = $ProcessingPipeline/PipelineCore
 	if pipeline_core and pipeline_core.material_override:
@@ -396,3 +396,9 @@ func _on_progress_changed():
 			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
 		tween.tween_property(pipeline_core.material_override, "emission",
 			Color(0.3, 0.85, 0.4) * (0.3 + processing_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

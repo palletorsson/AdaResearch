@@ -456,3 +456,9 @@ static func _fallback_mesh(parent: Node3D = null) -> Node3D:
 		parent.add_child(root)
 
 	return root
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

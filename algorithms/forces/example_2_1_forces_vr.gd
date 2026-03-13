@@ -25,7 +25,7 @@ var _panel: ForcesRackPanel
 var _wind_readout: Label3D
 var _gravity_readout: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -49,7 +49,7 @@ func _physics_process(_delta):
 		if wind_enabled:
 			mover.apply_force(wind)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			wind_enabled = !wind_enabled
@@ -84,7 +84,7 @@ func _update_readouts() -> void:
 	if _gravity_readout:
 		_panel.update_readout("Gravity", "%.2f" % abs(gravity.y))
 
-func create_mover():
+func create_mover() -> void:
 	"""Create mover object"""
 	mover = Mover.new()
 	mover.position_v = Vector3(0, 0.3, 0)
@@ -93,7 +93,7 @@ func create_mover():
 	mover.primary_pink = Color(1.0, 0.6, 1.0)
 	add_child(mover)
 
-func reset():
+func reset() -> void:
 	"""Reset mover"""
 	if mover:
 		mover.queue_free()
@@ -102,3 +102,9 @@ func reset():
 	wind_enabled = true
 	wind = Vector3(0.3, 0, 0)
 	gravity = Vector3(0, -0.5, 0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

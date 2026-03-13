@@ -13,7 +13,7 @@ extends Node3D
 var is_animating = false
 var animation_time = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	frequency_slider.value_changed.connect(_on_frequency_changed)
 	amplitude_slider.value_changed.connect(_on_amplitude_changed)
@@ -24,34 +24,34 @@ func _ready():
 	# Initialize the noise field
 	_update_noise_parameters()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_animating:
 		animation_time += delta
 		noise_field.animation_offset = animation_time * 0.5
 
-func _on_frequency_changed(value):
+func _on_frequency_changed(value) -> void:
 	frequency_label.text = "Frequency: " + str(value)
 	_update_noise_parameters()
 
-func _on_amplitude_changed(value):
+func _on_amplitude_changed(value) -> void:
 	amplitude_label.text = "Amplitude: " + str(value)
 	_update_noise_parameters()
 
-func _on_octaves_changed(value):
+func _on_octaves_changed(value) -> void:
 	octaves_label.text = "Octaves: " + str(int(value))
 	_update_noise_parameters()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	noise_field.regenerate_noise()
 
-func _on_animation_pressed():
+func _on_animation_pressed() -> void:
 	is_animating = !is_animating
 	if is_animating:
 		animation_button.text = "Stop Animation"
 	else:
 		animation_button.text = "Animate Noise"
 
-func _update_noise_parameters():
+func _update_noise_parameters() -> void:
 	if noise_field:
 		noise_field.frequency = frequency_slider.value
 		noise_field.amplitude = amplitude_slider.value

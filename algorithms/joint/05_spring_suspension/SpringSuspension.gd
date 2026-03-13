@@ -3,7 +3,7 @@
 var wheel: RigidBody3D
 var suspension: Generic6DOFJoint3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var chassis := create_static_box("Chassis", Vector3(4.0, 0.4, 2.0), Vector3(0.0, 3.0, 0.0), Color(0.5, 0.5, 0.6))
 
 	wheel = create_cylinder("Wheel", 0.7, 0.4, Vector3(0.0, 1.6, 0.0), 2.0, Color(0.2, 0.2, 0.8))
@@ -48,3 +48,9 @@ func _build_demo():
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		wheel.apply_impulse(Vector3(0.0, 6.0, 0.0))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

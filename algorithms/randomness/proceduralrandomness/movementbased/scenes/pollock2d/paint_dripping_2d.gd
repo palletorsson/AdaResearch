@@ -45,7 +45,7 @@ var rng = RandomNumberGenerator.new()
 var painting_timer: Timer
 var _paint_elapsed_time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	
 	# Create the canvas
@@ -68,11 +68,11 @@ func _ready():
 	painting_timer.timeout.connect(add_new_painting_strokes)
 	painting_timer.start()
 
-func update_texture():
+func update_texture() -> void:
 	texture = ImageTexture.create_from_image(canvas)
 	$CanvasLayer/TextureRect.texture = texture
 	
-func create_initial_painting():
+func create_initial_painting() -> void:
 	_paint_elapsed_time = 0.0
 	var starting_ratio := clampf(initial_paint_ratio, 0.0, 1.0)
 	var initial_drips := maxi(1, int(round(float(drip_count) * starting_ratio)))
@@ -86,7 +86,7 @@ func create_initial_painting():
 	for i in range(initial_lines):
 		add_line()
 
-func add_new_painting_strokes():
+func add_new_painting_strokes() -> void:
 	# Gradually increase the amount of paint over time.
 	_paint_elapsed_time += paint_interval
 	var intensity := _get_paint_intensity()
@@ -108,7 +108,7 @@ func _get_paint_intensity() -> float:
 		return 1.0
 	return clampf(_paint_elapsed_time / paint_buildup_duration, 0.0, 1.0)
 
-func add_drip():
+func add_drip() -> void:
 	# Random position
 	var pos = Vector2(
 		rng.randf_range(0, canvas_size.x),
@@ -140,7 +140,7 @@ func add_drip():
 			
 			paint_circle(splatter_pos, splatter_size, color)
 
-func add_line():
+func add_line() -> void:
 	# Random starting position
 	var start_pos = Vector2(
 		rng.randf_range(0, canvas_size.x),
@@ -201,7 +201,7 @@ func add_line():
 
 	_emit_stroke_path(points, color, line_width)
 
-func paint_circle(center: Vector2, radius: float, color: Color):
+func paint_circle(center: Vector2, radius: float, color: Color) -> void:
 	# Make sure we're in bounds
 	if center.x < 0 or center.x >= canvas_size.x or center.y < 0 or center.y >= canvas_size.y:
 		return
@@ -223,7 +223,7 @@ func paint_circle(center: Vector2, radius: float, color: Color):
 				
 				canvas.set_pixel(x, y, color)
 
-func paint_line(from: Vector2, to: Vector2, color: Color, width: float):
+func paint_line(from: Vector2, to: Vector2, color: Color, width: float) -> void:
 	# Basic line drawing algorithm
 	var direction = (to - from).normalized()
 	var length = from.distance_to(to)
@@ -274,3 +274,9 @@ func _on_regenerate_button_pressed() -> void:
 func _on_save_button_pressed() -> void:
 	# Keep UI connection valid in map/VR contexts where export is optional.
 	update_texture()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

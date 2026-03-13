@@ -7,7 +7,7 @@ extends Node3D
 
 var time_elapsed: float = 0.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time_elapsed += delta
 	
 	# Rotate the torus around Y axis

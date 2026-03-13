@@ -15,7 +15,7 @@ var food_list = []
 # Debug label
 var debug_label: Label
 
-func _ready():
+func _ready() -> void:
 	# Add debug label
 	debug_label = Label.new()
 	debug_label.position = Vector2(10, 10)
@@ -34,7 +34,7 @@ func _ready():
 	
 	print("Ecosystem initialized with: ", prey_list.size(), " prey, ", predator_list.size(), " predators, and ", food_list.size(), " food")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update debug info
 	debug_label.text = "Prey: " + str(prey_list.size()) + "\n"
 	debug_label.text += "Predators: " + str(predator_list.size()) + "\n"
@@ -51,7 +51,7 @@ func _process(delta):
 	# Check for balance and adjust if necessary
 	balance_ecosystem()
 	
-func update_prey(delta):
+func update_prey(delta) -> void:
 	var prey_to_remove = []
 	
 	for prey in prey_list:
@@ -94,7 +94,7 @@ func update_prey(delta):
 		prey_list.erase(prey)
 		prey.queue_free()
 
-func update_predators(delta):
+func update_predators(delta) -> void:
 	var predators_to_remove = []
 	
 	for predator in predator_list:
@@ -134,7 +134,7 @@ func update_predators(delta):
 		predator_list.erase(predator)
 		predator.queue_free()
 
-func check_for_mate(creature, is_predator = false):
+func check_for_mate(creature, is_predator = false) -> void:
 	var creature_list = predator_list if is_predator else prey_list
 	
 	# Look for a potential mate nearby
@@ -220,7 +220,7 @@ func spawn_predator(pos, dna_values = {}):
 	add_child(predator)
 	return predator
 
-func spawn_food(amount: int):
+func spawn_food(amount: int) -> void:
 	for i in range(amount):
 		var pos = Vector2(randf_range(0, get_viewport_rect().size.x), 
 					randf_range(0, get_viewport_rect().size.y))
@@ -236,7 +236,7 @@ func spawn_food(amount: int):
 		
 		add_child(food)
 
-func balance_ecosystem():
+func balance_ecosystem() -> void:
 	# Implement techniques to achieve balance
 	
 	# If prey population is critically low, boost reproduction or add new prey
@@ -255,3 +255,9 @@ func balance_ecosystem():
 		for i in range(2):
 			spawn_predator(Vector2(randf_range(0, get_viewport_rect().size.x), 
 							 randf_range(0, get_viewport_rect().size.y)))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

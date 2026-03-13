@@ -8,7 +8,7 @@ const POROSITY = 0.6
 
 var flow_grid: Array = []
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 4
 	var cube_size = CUBE_SIZE * step
@@ -37,12 +37,12 @@ func initialize_grid():
 				grid[x][y][GRID_SIZE - 1] = 2  # Source
 				flow_grid[x][y][GRID_SIZE - 1] = 1.0
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Percolate fluid through connected sites
 	percolate_fluid()
 	update_visualization()
 
-func percolate_fluid():
+func percolate_fluid() -> void:
 	var new_flow = duplicate_3d_grid(flow_grid)
 	
 	for x in range(GRID_SIZE):
@@ -71,7 +71,7 @@ func calculate_neighbor_flow(x: int, y: int, z: int) -> float:
 	
 	return max_flow
 
-func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float):
+func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float) -> void:
 	var flow_amount = current_flow * FLOW_RATE
 	var neighbors = get_3d_neighbors(Vector3i(x, y, z))
 	
@@ -84,7 +84,7 @@ func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, curren
 					flow_amount * randf_range(0.7, 1.0)
 				)
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -128,7 +128,7 @@ func get_flow_count() -> int:
 					count += 1
 	return count
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	flow_grid = create_3d_grid()
 	initialize_grid()

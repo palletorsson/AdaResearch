@@ -23,14 +23,14 @@ var active := true
 # Distribution properties
 var vertical_spread := 100  # Range of vertical randomness
 
-func _init(p_width: int = DEFAULT_WIDTH, p_height: int = DEFAULT_HEIGHT, p_stddev: float = 60.0):
+func _init(p_width: int = DEFAULT_WIDTH, p_height: int = DEFAULT_HEIGHT, p_stddev: float = 60.0) -> void:
 	width = p_width
 	height = p_height
 	stddev = p_stddev
 	mean = width / 2
 	_initialize_image()
 
-func _ready():
+func _ready() -> void:
 	randomize()  # Initialize random number generator with different seed each run
 	_setup_timer()
 
@@ -150,3 +150,9 @@ func set_update_interval(interval: float) -> void:
 # Set the vertical spread of dots
 func set_vertical_spread(spread: int) -> void:
 	vertical_spread = spread
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

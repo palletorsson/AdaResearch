@@ -257,3 +257,9 @@ func _on_strength_slider_moved(_position) -> void:
 
 func _on_mass_slider_moved(_position) -> void:
 	attractor_mass = _panel.get_slider_value(1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

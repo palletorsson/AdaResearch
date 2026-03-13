@@ -21,7 +21,7 @@ var ground: StaticBody3D
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -34,7 +34,7 @@ func _ready():
 
 	print("Example 6.1: Basic RigidBody - Single falling box with gravity")
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -45,7 +45,7 @@ func create_info_label():
 	info_label.text = "Basic RigidBody Physics\nSingle Box Falling"
 	add_child(info_label)
 
-func create_ground():
+func create_ground() -> void:
 	"""Create static ground plane"""
 	ground = StaticBody3D.new()
 	ground.position = Vector3(0, -0.4, 0)
@@ -97,11 +97,11 @@ func create_box(position: Vector3, size: Vector3 = Vector3(0.1, 0.1, 0.1)):
 	add_child(box)
 	boxes.append(box)
 
-func _on_box_collision(body: Node, box: VRRigidBody):
+func _on_box_collision(body: Node, box: VRRigidBody) -> void:
 	"""Handle box collision"""
 	print("Box collided with: %s" % body.name)
 
-func spawn_box():
+func spawn_box() -> void:
 	"""Spawn a new box at random position"""
 	var x = randf_range(-0.2, 0.2)
 	var z = randf_range(-0.2, 0.2)
@@ -110,7 +110,7 @@ func spawn_box():
 	# Update label
 	info_label.text = "Basic RigidBody Physics\n%d Boxes" % boxes.size()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	for box in boxes:
 		box.queue_free()
@@ -119,3 +119,9 @@ func reset():
 	# Create single box again
 	create_box(Vector3(0, 0.3, 0))
 	info_label.text = "Basic RigidBody Physics\nSingle Box Falling"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

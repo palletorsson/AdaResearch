@@ -6,11 +6,11 @@ var center_x: int = 0
 var center_y: int = 0
 var radius: int = 0
 
-func initialize(new_fill_type: bool, new_radius: int):
+func initialize(new_fill_type: bool, new_radius: int) -> void:
 	fill_type = new_fill_type
 	radius = new_radius
 
-func set_center(x: int, y: int):
+func set_center(x: int, y: int) -> void:
 	center_x = x
 	center_y = y
 

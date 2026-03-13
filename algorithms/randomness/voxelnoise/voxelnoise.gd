@@ -26,13 +26,13 @@ var noise: FastNoiseLite
 var _generated_root: Node3D
 var _rebuild_queued: bool = false
 
-func _ready():
+func _ready() -> void:
 	add_to_group("voxelnoise_receivers")
 	_ensure_generated_root()
 	_queue_rebuild()
 
 
-func _generate_chunk(chunk_pos: Vector3i):
+func _generate_chunk(chunk_pos: Vector3i) -> void:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -176,7 +176,7 @@ func _rebuild_now() -> void:
 	_generate_chunk(Vector3i.ZERO)
 
 
-func _add_cube(st: SurfaceTool, pos: Vector3):
+func _add_cube(st: SurfaceTool, pos: Vector3) -> void:
 	var s = voxel_scale * 0.5
 	var verts = [
 		Vector3(-s, -s, -s), Vector3(s, -s, -s),
@@ -194,3 +194,9 @@ func _add_cube(st: SurfaceTool, pos: Vector3):
 	]
 	for i in idx:
 		st.add_vertex(pos + verts[i])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

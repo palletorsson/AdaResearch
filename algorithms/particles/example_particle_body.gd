@@ -12,7 +12,7 @@ extends Node3D
 var update_timer: float = 0.0
 const UPDATE_INTERVAL = 0.05  # Update body 20 times per second
 
-func _ready():
+func _ready() -> void:
 	# Configure emitter for blobfish
 	if particle_emitter:
 		particle_emitter.max_particles = 25
@@ -49,7 +49,7 @@ func _ready():
 	print("  Space: Random swim direction")
 	print("  +/-: Adjust connections")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	update_timer += delta
 	
 	# Hide all particles every frame by making them transparent
@@ -67,7 +67,7 @@ func _process(delta):
 		_update_blobfish()
 		update_timer = 0.0
 
-func _update_blobfish():
+func _update_blobfish() -> void:
 	"""Update the blobfish with current particles"""
 	if not particle_emitter or not particle_body or not blobfish_swarm:
 		return
@@ -85,7 +85,7 @@ func _update_blobfish():
 	particle_body.set_particles(alive_particles)
 	particle_body.update_body()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			# Connection modes

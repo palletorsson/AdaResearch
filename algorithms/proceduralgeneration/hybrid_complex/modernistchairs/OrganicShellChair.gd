@@ -17,28 +17,28 @@ var materials: ModernistMaterials
 var shell_instance: MeshInstance3D
 var legs_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	"""Generate the complete organic shell chair"""
 	clear_existing_geometry()
 	
 	generate_organic_shell()
 	generate_legs()
 
-func clear_existing_geometry():
+func clear_existing_geometry() -> void:
 	"""Remove existing chair geometry"""
 	if shell_instance:
 		shell_instance.queue_free()
 	if legs_instance:
 		legs_instance.queue_free()
 
-func generate_organic_shell():
+func generate_organic_shell() -> void:
 	"""Generate the curved organic shell"""
 	shell_instance = MeshInstance3D.new()
 	add_child(shell_instance)
@@ -154,7 +154,7 @@ func calculate_shell_normal(u: float, v: float) -> Vector3:
 	
 	return normal
 
-func generate_legs():
+func generate_legs() -> void:
 	"""Generate chair legs"""
 	legs_instance = MeshInstance3D.new()
 	add_child(legs_instance)
@@ -224,7 +224,7 @@ func add_tapered_leg(vertices: PackedVector3Array, normals: PackedVector3Array,
 			base_vertex_count + leg_sides + next_i
 		])
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(params: Dictionary) -> void:
 	"""Regenerate chair with new parameters"""
 	if params.has("shell_width"):
 		shell_width = params.shell_width
@@ -238,4 +238,9 @@ func regenerate_with_parameters(params: Dictionary):
 		curve_intensity = params.curve_intensity
 	
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

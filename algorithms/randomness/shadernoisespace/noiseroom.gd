@@ -22,13 +22,13 @@ var density_cycle_time: float = 0.0
 var original_room_params: Dictionary = {}
 var original_wall_params: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	"""Initialize the noise room animation system"""
 	_setup_materials()
 	_store_original_parameters()
 	_setup_ui()
 
-func _setup_materials():
+func _setup_materials() -> void:
 	"""Find and setup shader materials"""
 	# Find the main room sphere material
 	var room_sphere = get_node("RoomContainer/MainRoomBody/RoomShape")
@@ -42,7 +42,7 @@ func _setup_materials():
 	
 	print("Noise Room: Materials found - Room: ", room_material != null, ", Wall: ", wall_material != null)
 
-func _store_original_parameters():
+func _store_original_parameters() -> void:
 	"""Store original shader parameters for restoration"""
 	if room_material:
 		original_room_params = {
@@ -62,13 +62,13 @@ func _store_original_parameters():
 			"deep_pink": wall_material.get_shader_parameter("deep_pink")
 		}
 
-func _setup_ui():
+func _setup_ui() -> void:
 	"""Create UI controls for animation parameters"""
 	# This could be expanded to create runtime UI controls
 	# For now, we'll use the exported variables in the editor
 	pass
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Main animation loop"""
 	if not animation_enabled:
 		return
@@ -80,7 +80,7 @@ func _process(delta):
 	_update_room_animation()
 	_update_wall_animation()
 
-func _update_room_animation():
+func _update_room_animation() -> void:
 	"""Update the main room sphere animation"""
 	if not room_material:
 		return
@@ -103,7 +103,7 @@ func _update_room_animation():
 	if color_cycling:
 		_animate_room_colors()
 
-func _update_wall_animation():
+func _update_wall_animation() -> void:
 	"""Update the wall animation with different timing"""
 	if not wall_material:
 		return
@@ -127,7 +127,7 @@ func _update_wall_animation():
 	if color_cycling:
 		_animate_wall_colors()
 
-func _animate_room_colors():
+func _animate_room_colors() -> void:
 	"""Animate room colors with cycling effects"""
 	if not room_material:
 		return
@@ -162,7 +162,7 @@ func _animate_room_colors():
 	intensity += sin(color_cycle_time * 0.5) * 0.2
 	room_material.set_shader_parameter("pink_intensity", clamp(intensity, 0.0, 2.0))
 
-func _animate_wall_colors():
+func _animate_wall_colors() -> void:
 	"""Animate wall colors with different cycling effects"""
 	if not wall_material:
 		return
@@ -197,7 +197,7 @@ func _animate_wall_colors():
 	intensity += cos(color_cycle_time * 0.7) * 0.15
 	wall_material.set_shader_parameter("pink_intensity", clamp(intensity, 0.0, 2.0))
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for animation controls"""
 	if event.is_action_pressed("ui_accept"):  # Space key
 		animation_enabled = !animation_enabled
@@ -207,7 +207,7 @@ func _input(event):
 		_reset_to_original_parameters()
 		print("Noise Room: Reset to original parameters")
 
-func _reset_to_original_parameters():
+func _reset_to_original_parameters() -> void:
 	"""Reset shaders to their original parameters"""
 	if room_material and not original_room_params.is_empty():
 		for param in original_room_params:
@@ -221,15 +221,15 @@ func _reset_to_original_parameters():
 	color_cycle_time = 0.0
 	density_cycle_time = 0.0
 
-func set_animation_speed(speed: float):
+func set_animation_speed(speed: float) -> void:
 	"""Set the animation speed"""
 	animation_speed = clamp(speed, 0.0, 5.0)
 
-func set_color_cycling(enabled: bool):
+func set_color_cycling(enabled: bool) -> void:
 	"""Enable or disable color cycling"""
 	color_cycling = enabled
 
-func set_cloud_density_animation(enabled: bool):
+func set_cloud_density_animation(enabled: bool) -> void:
 	"""Enable or disable cloud density animation"""
 	cloud_density_animation = enabled
 

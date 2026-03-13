@@ -47,7 +47,7 @@ var input_data_particles: Array = []
 # Visual elements
 var weight_lines: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[NeuralNetworks_VR] Initializing interactive neural network")
 	_initialize_network()
 	_create_network_layers()
@@ -58,7 +58,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -76,7 +76,7 @@ func _process(delta):
 	_animate_weights(delta)
 	_update_control_panel()
 
-func _initialize_network():
+func _initialize_network() -> void:
 	"""Initialize network structure"""
 	# Initialize activations for each layer
 	for layer_size in layer_sizes:
@@ -96,7 +96,7 @@ func _initialize_network():
 			layer_weights.append(neuron_weights)
 		weights.append(layer_weights)
 
-func _create_network_layers():
+func _create_network_layers() -> void:
 	"""Create visual representation of all layers"""
 	for layer_idx in range(layer_sizes.size()):
 		var layer_container = Node3D.new()
@@ -185,7 +185,7 @@ func _create_neuron(layer_idx: int, neuron_idx: int) -> RigidBody3D:
 
 	return body
 
-func _create_layer_room(layer_container: Node3D, layer_idx: int):
+func _create_layer_room(layer_container: Node3D, layer_idx: int) -> void:
 	"""Create transparent room for each layer"""
 	# Floor
 	var floor_mesh = MeshInstance3D.new()
@@ -230,7 +230,7 @@ func _create_layer_room(layer_container: Node3D, layer_idx: int):
 		line.position = Vector3(float(i), -room_height / 2.0 - 0.5, 0)
 		layer_container.add_child(line)
 
-func _create_layer_label(layer_container: Node3D, layer_idx: int):
+func _create_layer_label(layer_container: Node3D, layer_idx: int) -> void:
 	"""Create floating label for layer"""
 	var label = Label3D.new()
 
@@ -251,7 +251,7 @@ func _create_layer_label(layer_container: Node3D, layer_idx: int):
 	label.position = Vector3(0, room_height / 2.0 + 1.5, 0)
 	layer_container.add_child(label)
 
-func _create_weight_connections():
+func _create_weight_connections() -> void:
 	"""Create visual lines showing weights between neurons"""
 	if not show_weights:
 		return
@@ -300,7 +300,7 @@ func _create_weight_connections():
 
 		weight_lines.append(layer_lines)
 
-func _create_data_input_area():
+func _create_data_input_area() -> void:
 	"""Create area with throwable data particles"""
 	if not enable_data_throwing:
 		return
@@ -381,7 +381,7 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 
 	return body
 
-func _create_activation_flow():
+func _create_activation_flow() -> void:
 	"""Create particles showing forward propagation"""
 	if not show_activations:
 		return
@@ -414,7 +414,7 @@ func _create_activation_flow():
 			"progress": randf()
 		})
 
-func _create_gradient_flow():
+func _create_gradient_flow() -> void:
 	"""Create particles showing backpropagation"""
 	if not show_backprop:
 		return
@@ -447,7 +447,7 @@ func _create_gradient_flow():
 			"progress": randf()
 		})
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -507,7 +507,7 @@ func _create_control_panel():
 	act_label.position = Vector3(0, -1.5, 0.1)
 	controls.add_child(act_label)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Forward propagation
 	_create_info_panel(
@@ -532,7 +532,7 @@ func _create_info_panels():
 			Color(0.6, 0.9, 0.6)
 		)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -544,7 +544,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_neurons(_delta):
+func _animate_neurons(_delta) -> void:
 	"""Animate neurons based on activation"""
 	for layer_idx in range(layers.size()):
 		for neuron_idx in range(layers[layer_idx].size()):
@@ -565,7 +565,7 @@ func _animate_neurons(_delta):
 			if mesh_instance and mesh_instance.material_override:
 				mesh_instance.material_override.emission_energy_multiplier = 0.3 + activation * 1.5
 
-func _animate_forward_prop(delta):
+func _animate_forward_prop(delta) -> void:
 	"""Animate forward propagation particles"""
 	var total_width = (layer_sizes.size() - 1) * layer_spacing
 
@@ -589,7 +589,7 @@ func _animate_forward_prop(delta):
 
 		particle.position = Vector3(x, y, z)
 
-func _animate_back_prop(delta):
+func _animate_back_prop(delta) -> void:
 	"""Animate backpropagation particles"""
 	var total_width = (layer_sizes.size() - 1) * layer_spacing
 
@@ -608,7 +608,7 @@ func _animate_back_prop(delta):
 
 		particle.position = Vector3(x, y, z)
 
-func _animate_weights(_delta):
+func _animate_weights(_delta) -> void:
 	"""Update weight line visualizations"""
 	if not show_weights:
 		return
@@ -629,7 +629,7 @@ func _animate_weights(_delta):
 
 			immediate_mesh.surface_end()
 
-func _update_control_panel():
+func _update_control_panel() -> void:
 	"""Update control panel displays"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -640,7 +640,7 @@ func _update_control_panel():
 		metrics.text = "Loss: %.3f\nEpoch: %d\nLR: %.3f" % [loss, epoch, learning_rate]
 
 # Public API
-func forward_propagation():
+func forward_propagation() -> void:
 	"""Simulate one forward pass"""
 	# Simple simulation
 	for layer_idx in range(1, layer_sizes.size()):
@@ -663,11 +663,17 @@ func _apply_activation(x: float) -> float:
 		_:
 			return x
 
-func set_learning_rate(lr: float):
+func set_learning_rate(lr: float) -> void:
 	learning_rate = clamp(lr, 0.001, 1.0)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	loss = 1.0
 	epoch = 0
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

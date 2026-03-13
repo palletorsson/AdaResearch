@@ -48,7 +48,7 @@ class FlowNode3D:
 	var pressure: float = 0.0
 	var visual_object: Node3D
 	
-	func _init(node_id: int, pos: Vector3):
+	func _init(node_id: int, pos: Vector3) -> void:
 		id = node_id
 		position = pos
 		elevation_level = int(pos.y / 5.0)  # Simple elevation grouping
@@ -63,7 +63,7 @@ class FlowEdge3D:
 	var visual_pipe: Node3D
 	var particles: Array = []
 	
-	func _init(from: int, to: int, cap: float, dist: float, elev_change: float):
+	func _init(from: int, to: int, cap: float, dist: float, elev_change: float) -> void:
 		from_id = from
 		to_id = to
 		capacity = cap
@@ -77,7 +77,7 @@ class FlowParticle:
 	var edge_id: int
 	var visual_object: Node3D
 	
-	func _init(start_pos: Vector3, edge_idx: int):
+	func _init(start_pos: Vector3, edge_idx: int) -> void:
 		position = start_pos
 		edge_id = edge_idx
 		progress = 0.0
@@ -96,7 +96,7 @@ var edges_container: Node3D
 var particles_container: Node3D
 var ui_container: CanvasLayer
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -104,19 +104,19 @@ func _ready():
 	create_visualization()
 	calculate_max_flow()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if show_flow_particles:
 		update_flow_particles(delta)
 	update_pressure_visualization()
 	update_ui()
 
-func setup_environment():
+func setup_environment() -> void:
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
 	light.rotation_degrees = Vector3(-45, 30, 0)
 	add_child(light)
 
-func setup_containers():
+func setup_containers() -> void:
 	nodes_container = Node3D.new()
 	nodes_container.name = "NodesContainer"
 	add_child(nodes_container)
@@ -129,7 +129,7 @@ func setup_containers():
 	particles_container.name = "ParticlesContainer"
 	add_child(particles_container)
 
-func setup_ui():
+func setup_ui() -> void:
 	ui_container = CanvasLayer.new()
 	add_child(ui_container)
 	
@@ -146,7 +146,7 @@ func setup_ui():
 		label.name = "flow_label_" + str(i)
 		vbox.add_child(label)
 
-func create_3d_network():
+func create_3d_network() -> void:
 	"""Create a 3D flow network with spatial positioning"""
 	flow_nodes.clear()
 	flow_edges.clear()
@@ -182,7 +182,7 @@ func generate_3d_node_position(node_id: int) -> Vector3:
 			randf_range(-spatial_bounds.z/2, spatial_bounds.z/2)
 		)
 
-func create_3d_edges():
+func create_3d_edges() -> void:
 	"""Create edges considering 3D distance and elevation"""
 	for i in range(network_size):
 		for j in range(i + 1, network_size):
@@ -200,12 +200,12 @@ func create_3d_edges():
 				var edge = FlowEdge3D.new(i, j, capacity, distance, elevation_change)
 				flow_edges.append(edge)
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create 3D visualization of the flow network"""
 	create_node_visuals()
 	create_edge_visuals()
 
-func create_node_visuals():
+func create_node_visuals() -> void:
 	"""Create visual representations for flow nodes"""
 	for node in flow_nodes:
 		var mesh_instance = MeshInstance3D.new()
@@ -233,7 +233,7 @@ func create_node_visuals():
 		nodes_container.add_child(mesh_instance)
 		node.visual_object = mesh_instance
 
-func create_edge_visuals():
+func create_edge_visuals() -> void:
 	"""Create visual representations for flow edges"""
 	for edge in flow_edges:
 		var from_pos = flow_nodes[edge.from_id].position
@@ -276,7 +276,7 @@ func create_flow_pipe(from_pos: Vector3, to_pos: Vector3, capacity: float) -> No
 	pipe_root.add_child(mesh_instance)
 	return pipe_root
 
-func calculate_max_flow():
+func calculate_max_flow() -> void:
 	"""Calculate maximum flow using selected algorithm"""
 	match flow_algorithm:
 		FlowAlgorithm.EDMONDS_KARP_3D:
@@ -368,7 +368,7 @@ func find_path_capacity(path: Array, residual_capacity: Dictionary) -> float:
 	
 	return min_capacity
 
-func update_edge_flows(path: Array, flow_amount: float):
+func update_edge_flows(path: Array, flow_amount: float) -> void:
 	"""Update edge flows for visualization"""
 	for i in range(path.size() - 1):
 		var u = path[i]
@@ -387,7 +387,7 @@ func run_gravity_flow() -> float:
 	"""Gravity-aware flow calculation"""
 	return run_edmonds_karp_3d()  # Simplified
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	"""Create particles to visualize flow"""
 	if not show_flow_particles:
 		return
@@ -422,7 +422,7 @@ func create_flow_particle(edge: FlowEdge3D) -> FlowParticle:
 	
 	return particle
 
-func update_flow_particles(delta: float):
+func update_flow_particles(delta: float) -> void:
 	"""Update particle positions along flow paths"""
 	for particle in flow_particles:
 		if particle.edge_id < flow_edges.size():
@@ -439,7 +439,7 @@ func update_flow_particles(delta: float):
 			particle.position = current_pos
 			particle.visual_object.position = current_pos
 
-func update_pressure_visualization():
+func update_pressure_visualization() -> void:
 	"""Update pressure-based coloring"""
 	if not show_pressure_colors:
 		return
@@ -463,7 +463,7 @@ func update_pressure_visualization():
 			var pressure_factor = clamp(node.pressure / max_capacity, 0.0, 1.0)
 			material.albedo_color = Color(0.4 + pressure_factor * 0.5, 0.6 - pressure_factor * 0.3, 0.9 - pressure_factor * 0.4)
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI statistics"""
 	var labels = []
 	for i in range(15):
@@ -488,7 +488,7 @@ func update_ui():
 		labels[13].text = "Controls: SPACE-Recalculate, R-Reset"
 		labels[14].text = "P-Toggle Particles, G-Toggle Gravity"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -505,7 +505,7 @@ func _input(event):
 				create_visualization()
 				calculate_max_flow()
 
-func reset_network():
+func reset_network() -> void:
 	"""Reset the entire network"""
 	# Clear visualizations
 	for child in nodes_container.get_children():
@@ -523,3 +523,9 @@ func reset_network():
 	calculate_max_flow()
 	
 	print("Network reset")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

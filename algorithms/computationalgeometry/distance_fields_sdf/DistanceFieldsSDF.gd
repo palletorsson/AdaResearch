@@ -6,12 +6,12 @@ var field_size = 8.0
 var sdf_points = []
 var primitive_shapes = []
 
-func _ready():
+func _ready() -> void:
 	create_primitive_shapes()
 	generate_sdf_field()
 	setup_materials()
 
-func create_primitive_shapes():
+func create_primitive_shapes() -> void:
 	# Create shapes that will generate the SDF
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 1.0
@@ -25,7 +25,7 @@ func create_primitive_shapes():
 	$PrimitiveShapes.add_child(box)
 	primitive_shapes.append({"type": "box", "position": Vector2(2, -1), "size": Vector2(0.75, 0.75), "object": box})
 
-func generate_sdf_field():
+func generate_sdf_field() -> void:
 	var field_parent = $SDFField
 	
 	for x in range(field_resolution):
@@ -60,7 +60,7 @@ func calculate_sdf_distance(pos: Vector2) -> float:
 	
 	return min_distance
 
-func setup_materials():
+func setup_materials() -> void:
 	# Setup primitive shape materials
 	for shape in primitive_shapes:
 		var material = StandardMaterial3D.new()
@@ -71,7 +71,7 @@ func setup_materials():
 	
 	update_sdf_visualization()
 
-func update_sdf_visualization():
+func update_sdf_visualization() -> void:
 	for point in sdf_points:
 		var material = StandardMaterial3D.new()
 		var distance = point.distance
@@ -94,7 +94,7 @@ func update_sdf_visualization():
 		material.emission = material.albedo_color * 0.4
 		point.object.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Animate primitive shapes
@@ -116,7 +116,7 @@ func _process(delta):
 	update_sdf_visualization()
 	animate_indicators()
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Field resolution indicator
 	var resolution_height = (field_resolution / 50.0) * 2.0 + 0.5
 	$FieldResolution.height = resolution_height
@@ -130,3 +130,9 @@ func animate_indicators():
 	var range_height = min(max_distance / 5.0, 1.0) * 2.0 + 0.5
 	$DistanceRange.size.y = range_height
 	$DistanceRange.position.y = -3 + range_height/2
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -599,3 +599,9 @@ func _reset_stats() -> void:
 	_roll_counts.fill(0)
 	_result_label.text = "?"
 	_stats_label.text = "Rolls: 0\n\nGrab & throw\nthe dice!"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

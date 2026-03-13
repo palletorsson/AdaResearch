@@ -51,14 +51,14 @@ var results_display: Label3D
 var coin_start_position: Vector3
 var is_flipping: bool = false
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	create_coin()
 	setup_ui()
 	setup_statistics_visualization()
 	coin_start_position = Vector3(0, 1.5, -0.5)
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		xr_interface = XRServer.find_interface("OpenXR")
@@ -89,7 +89,7 @@ func setup_vr():
 		right_controller.button_pressed.connect(_on_controller_button)
 		xr_origin.add_child(right_controller)
 
-func create_coin():
+func create_coin() -> void:
 	"""Create interactive 3D coin"""
 	coin_instance = RigidBody3D.new()
 	coin_instance.position = coin_start_position
@@ -129,7 +129,7 @@ func create_coin():
 	
 	add_child(coin_instance)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create VR-friendly UI for statistics display"""
 	# 3D Label for results
 	results_display = Label3D.new()
@@ -139,7 +139,7 @@ func setup_ui():
 	results_display.modulate = Color.WHITE
 	add_child(results_display)
 
-func setup_statistics_visualization():
+func setup_statistics_visualization() -> void:
 	"""Create real-time probability visualization"""
 	probability_chart = Node3D.new()
 	probability_chart.position = Vector3(1.5, 1.5, -1.0)
@@ -156,18 +156,18 @@ func setup_statistics_visualization():
 	chart_background.material_override = bg_material
 	probability_chart.add_child(chart_background)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click" or button_name == "grip_click":
 		flip_coin()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input for testing"""
 	if not enable_vr and event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			flip_coin()
 
-func flip_coin():
+func flip_coin() -> void:
 	"""Execute coin flip with physics simulation"""
 	if is_flipping or flip_count >= max_flips:
 		return
@@ -224,7 +224,7 @@ func determine_coin_result() -> bool:
 	
 	return is_heads
 
-func record_flip_result(is_heads: bool):
+func record_flip_result(is_heads: bool) -> void:
 	"""Record flip result and update statistics"""
 	flip_results.append(is_heads)
 	flip_count += 1
@@ -234,7 +234,7 @@ func record_flip_result(is_heads: bool):
 	else:
 		tails_count += 1
 
-func update_display():
+func update_display() -> void:
 	"""Update statistics display"""
 	var heads_probability = float(heads_count) / float(flip_count) if flip_count > 0 else 0.0
 	var tails_probability = float(tails_count) / float(flip_count) if flip_count > 0 else 0.0
@@ -253,7 +253,7 @@ func update_display():
 	
 	update_probability_chart(heads_probability)
 
-func update_probability_chart(heads_prob: float):
+func update_probability_chart(heads_prob: float) -> void:
 	"""Update visual probability chart"""
 	# Clear existing chart elements
 	for child in probability_chart.get_children():
@@ -270,7 +270,7 @@ func update_probability_chart(heads_prob: float):
 	# Expected probability line
 	create_probability_line(0.5, Color.RED)
 
-func create_probability_bar(name: String, probability: float, position: Vector3, color: Color):
+func create_probability_bar(name: String, probability: float, position: Vector3, color: Color) -> void:
 	"""Create 3D bar for probability visualization"""
 	var bar = MeshInstance3D.new()
 	bar.name = "bar_" + name
@@ -288,7 +288,7 @@ func create_probability_bar(name: String, probability: float, position: Vector3,
 	bar.position = position + Vector3(0, bar_height/2 - chart_size.y/2, 0)
 	probability_chart.add_child(bar)
 
-func create_probability_line(expected_prob: float, color: Color):
+func create_probability_line(expected_prob: float, color: Color) -> void:
 	"""Create line showing expected probability"""
 	var line = MeshInstance3D.new()
 	line.name = "expected_line"
@@ -306,7 +306,7 @@ func create_probability_line(expected_prob: float, color: Color):
 	line.position = Vector3(0, line_y, 0.02)
 	probability_chart.add_child(line)
 
-func reset_experiment():
+func reset_experiment() -> void:
 	"""Reset all statistics"""
 	flip_count = 0
 	heads_count = 0
@@ -332,3 +332,9 @@ func get_statistics_summary() -> Dictionary:
 		"deviation_from_expected": abs(heads_prob - 0.5),
 		"flip_sequence": flip_results.duplicate()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

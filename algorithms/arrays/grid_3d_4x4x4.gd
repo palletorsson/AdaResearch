@@ -3,10 +3,10 @@ extends Node3D
 # 4x4x4 3D grid of cubes arranged in X, Y, and Z directions
 # Each cube is spaced 1 units apart
 
-func _ready():
+func _ready() -> void:
 	create_grid_3d()
 
-func create_grid_3d():
+func create_grid_3d() -> void:
 	# Load the pickup cube scene
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	
@@ -36,3 +36,9 @@ func create_grid_3d():
 				cube_instance.add_child(label)
 				
 				add_child(cube_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

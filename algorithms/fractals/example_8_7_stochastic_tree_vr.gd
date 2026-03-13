@@ -120,3 +120,9 @@ func _create_branch(start: Vector3, end: Vector3, thickness: float, depth: int) 
 
 func _rotate_vector(vec: Vector3, axis: Vector3, angle: float) -> Vector3:
 	return Basis(axis.normalized(), angle) * vec
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

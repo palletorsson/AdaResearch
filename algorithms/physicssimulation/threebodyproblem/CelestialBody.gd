@@ -21,12 +21,12 @@ var _trail_immediate: ImmediateMesh
 var _label: Label3D
 
 
-func _ready():
+func _ready() -> void:
 	_create_body_mesh()
 	_create_trail_renderer()
 
 
-func _create_body_mesh():
+func _create_body_mesh() -> void:
 	# Use MeshInstance3D + SphereMesh instead of CSGSphere3D (much lighter)
 	_body_mesh = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
@@ -53,7 +53,7 @@ func _create_body_mesh():
 	add_child(_label)
 
 
-func _create_trail_renderer():
+func _create_trail_renderer() -> void:
 	## A single ImmediateMesh that draws the entire trail as line strips.
 	## Uses 1 RID total instead of 200+ CSGBox3D nodes per frame.
 	trail_material = StandardMaterial3D.new()
@@ -80,7 +80,7 @@ func _create_trail_renderer():
 		add_child(_trail_mesh)
 
 
-func initialize():
+func initialize() -> void:
 	position = initial_position
 	velocity = initial_velocity
 	current_force = Vector3.ZERO
@@ -88,17 +88,17 @@ func initialize():
 	_rebuild_trail_mesh()
 
 
-func apply_force(force: Vector3):
+func apply_force(force: Vector3) -> void:
 	current_force += force
 
 
-func update_physics(delta: float):
+func update_physics(delta: float) -> void:
 	velocity += current_force / body_mass * delta
 	position += velocity * delta
 	current_force = Vector3.ZERO
 
 
-func update_trail():
+func update_trail() -> void:
 	# Record position
 	trail_points.append(position)
 	if trail_points.size() > max_trail_points:
@@ -108,7 +108,7 @@ func update_trail():
 	_rebuild_trail_mesh()
 
 
-func _rebuild_trail_mesh():
+func _rebuild_trail_mesh() -> void:
 	if _trail_immediate == null:
 		return
 	_trail_immediate.clear_surfaces()
@@ -124,7 +124,7 @@ func _rebuild_trail_mesh():
 	_trail_immediate.surface_end()
 
 
-func set_trail_color(color: Color):
+func set_trail_color(color: Color) -> void:
 	body_color = color
 	if trail_material:
 		trail_material.albedo_color = Color(color.r, color.g, color.b, 0.7)
@@ -133,9 +133,15 @@ func set_trail_color(color: Color):
 		_body_mesh.material_override.emission = color * 0.3
 
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	position = initial_position
 	velocity = initial_velocity
 	current_force = Vector3.ZERO
 	trail_points.clear()
 	_rebuild_trail_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

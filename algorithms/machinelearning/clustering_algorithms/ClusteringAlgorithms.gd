@@ -521,3 +521,9 @@ func _recalculate_dataset_radius() -> void:
 	for sample in _samples:
 		max_dist = max(max_dist, sample["position"].distance_to(centre))
 	_max_radius = max(1.0, max_dist)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

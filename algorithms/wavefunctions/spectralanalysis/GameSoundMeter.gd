@@ -54,7 +54,7 @@ var bar_width: float
 var meter_rect: Rect2
 var is_initialized: bool = false
 
-func _ready():
+func _ready() -> void:
 	_initialize_meter()
 	_setup_audio_analysis()
 	_find_game_objects()
@@ -66,7 +66,7 @@ func _ready():
 		DisplayStyle.keys()[display_style], bar_count, update_fps
 	])
 
-func _initialize_meter():
+func _initialize_meter() -> void:
 	"""Initialize the meter arrays and settings"""
 	frequency_data.resize(bar_count)
 	smoothed_data.resize(bar_count)
@@ -83,7 +83,7 @@ func _initialize_meter():
 	resized.connect(_on_resized)
 	is_initialized = true
 
-func _setup_audio_analysis():
+func _setup_audio_analysis() -> void:
 	"""Setup spectrum analyzer for the target audio source"""
 	if monitor_master_bus:
 		# Monitor the master bus directly
@@ -129,7 +129,7 @@ func _setup_audio_analysis():
 			target_audio_player.bus = bus_name
 			print("GameSoundMeter: Connected audio player to analysis bus")
 
-func _find_game_objects():
+func _find_game_objects() -> void:
 	"""Auto-find teleport cube and audio components"""
 	if auto_find_teleport_audio:
 		# Look for teleport cube with CubeAudioPlayer
@@ -162,21 +162,21 @@ func _find_game_objects():
 			player_camera = cam
 			break
 
-func _setup_auto_sizing():
+func _setup_auto_sizing() -> void:
 	"""Setup automatic sizing to parent container"""
 	if get_parent() is Control:
 		var parent = get_parent() as Control
 		parent.resized.connect(_resize_to_parent)
 		_resize_to_parent()
 
-func _resize_to_parent():
+func _resize_to_parent() -> void:
 	"""Resize to fit parent container"""
 	if get_parent() is Control:
 		var parent = get_parent() as Control
 		size = parent.size
 		position = Vector2.ZERO
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_initialized or not spectrum_instance:
 		return
 	
@@ -207,7 +207,7 @@ func _should_cull_update() -> bool:
 	var distance = player_camera.global_position.distance_to(target_audio_player.global_position)
 	return distance > max_display_distance
 
-func _update_audio_data():
+func _update_audio_data() -> void:
 	"""Update audio data from spectrum analyzer"""
 	if not spectrum_instance:
 		return
@@ -220,7 +220,7 @@ func _update_audio_data():
 		DisplayStyle.WAVEFORM, DisplayStyle.OSCILLOSCOPE:
 			_update_waveform_data()
 
-func _update_spectrum_data():
+func _update_spectrum_data() -> void:
 	"""Update frequency spectrum data"""
 	for i in range(bar_count):
 		var freq_ratio = float(i) / float(bar_count - 1)
@@ -243,7 +243,7 @@ func _update_spectrum_data():
 		frequency_data[i] = normalized
 		peak_levels[i] = max(peak_levels[i] * 0.95, normalized)  # Peak hold
 
-func _update_vu_data():
+func _update_vu_data() -> void:
 	"""Update VU meter data"""
 	var total_magnitude = 0.0
 	for i in range(10):  # Sample lower frequencies for VU
@@ -258,7 +258,7 @@ func _update_vu_data():
 	
 	frequency_data[0] = normalized  # Use first element for VU level
 
-func _update_waveform_data():
+func _update_waveform_data() -> void:
 	"""Update waveform data (simplified)"""
 	# For waveform, we sample across the spectrum and create a time-like representation
 	for i in range(bar_count):
@@ -271,14 +271,14 @@ func _update_waveform_data():
 		
 		frequency_data[i] = magnitude * 100.0  # Scale for waveform display
 
-func _smooth_audio_data(delta: float):
+func _smooth_audio_data(delta: float) -> void:
 	"""Apply smoothing to audio data"""
 	var smooth_speed = 1.0 - pow(smoothing_factor, delta * 60.0)
 	
 	for i in range(bar_count):
 		smoothed_data[i] = lerp(smoothed_data[i], frequency_data[i], smooth_speed)
 
-func _draw():
+func _draw() -> void:
 	"""Draw the sound meter based on selected style"""
 	if not is_initialized:
 		return
@@ -304,7 +304,7 @@ func _draw():
 		DisplayStyle.OSCILLOSCOPE:
 			_draw_oscilloscope()
 
-func _draw_spectrum_line():
+func _draw_spectrum_line() -> void:
 	"""Draw spectrum as connected line with grid and labels"""
 	if smoothed_data.size() < 2:
 		return
@@ -341,7 +341,7 @@ func _draw_spectrum_line():
 	# Draw title and info (on top)
 	_draw_spectrum_info(draw_rect)
 
-func _draw_spectrum_bars():
+func _draw_spectrum_bars() -> void:
 	"""Draw spectrum as individual bars"""
 	for i in range(bar_count):
 		var x = meter_rect.position.x + i * bar_width
@@ -355,7 +355,7 @@ func _draw_spectrum_bars():
 		var peak_y = meter_rect.position.y + meter_rect.size.y - (peak_levels[i] * height_multiplier)
 		draw_line(Vector2(x, peak_y), Vector2(x + bar_width * 0.8, peak_y), Color.WHITE, 1.0)
 
-func _draw_vu_meter():
+func _draw_vu_meter() -> void:
 	"""Draw VU style meter"""
 	var level = smoothed_data[0] if smoothed_data.size() > 0 else 0.0
 	var fill_width = level * meter_rect.size.x
@@ -368,7 +368,7 @@ func _draw_vu_meter():
 	var level_color = Color.GREEN if level < 0.7 else (Color.YELLOW if level < 0.9 else Color.RED)
 	draw_rect(level_rect, level_color)
 
-func _draw_waveform():
+func _draw_waveform() -> void:
 	"""Draw waveform representation"""
 	var center_y = meter_rect.position.y + meter_rect.size.y * 0.5
 	var points: PackedVector2Array = []
@@ -382,7 +382,7 @@ func _draw_waveform():
 	for i in range(points.size() - 1):
 		draw_line(points[i], points[i + 1], line_color, line_width)
 
-func _draw_oscilloscope():
+func _draw_oscilloscope() -> void:
 	"""Draw oscilloscope style display"""
 	# Draw grid
 	var grid_color = Color(0, 0.3, 0, 0.5)
@@ -393,23 +393,23 @@ func _draw_oscilloscope():
 	
 	_draw_waveform()  # Use waveform drawing for oscilloscope
 
-func _update_cached_values():
+func _update_cached_values() -> void:
 	"""Update cached calculation values"""
 	meter_rect = Rect2(Vector2.ZERO, size)
 	bar_width = meter_rect.size.x / float(bar_count)
 	print("GameSoundMeter: Meter rect updated - ", meter_rect)
 
-func _on_resized():
+func _on_resized() -> void:
 	"""Handle control resize"""
 	_update_cached_values()
 
 # Public API
-func set_audio_target(player: AudioStreamPlayer3D):
+func set_audio_target(player: AudioStreamPlayer3D) -> void:
 	"""Set the target audio player"""
 	target_audio_player = player
 	_setup_audio_analysis()
 
-func set_display_style(style: DisplayStyle):
+func set_display_style(style: DisplayStyle) -> void:
 	"""Change the display style"""
 	display_style = style
 
@@ -424,7 +424,7 @@ func get_performance_stats() -> Dictionary:
 		"distance_culled": _should_cull_update() if enable_distance_culling else false
 	}
 
-func _draw_test_pattern():
+func _draw_test_pattern() -> void:
 	"""Draw a test pattern when no audio is available"""
 	var time = Time.get_time_dict_from_system()
 	var seconds = time.second + time.minute * 60.0
@@ -445,7 +445,7 @@ func _draw_test_pattern():
 	var text_pos = Vector2(meter_rect.size.x * 0.5 - 100, meter_rect.size.y * 0.5)
 	draw_string(get_theme_default_font(), text_pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, Color.WHITE)
 
-func _draw_spectrum_grid(rect: Rect2):
+func _draw_spectrum_grid(rect: Rect2) -> void:
 	"""Draw grid lines and frequency labels"""
 	var grid_color = Color(0.2, 0.5, 0.2, 0.6)  # Green grid to match spectrum color
 	var text_color = Color(0.8, 1.0, 0.8, 0.9)  # Light green text
@@ -480,7 +480,7 @@ func _draw_spectrum_grid(rect: Rect2):
 		draw_string(get_theme_default_font(), Vector2(x + 2, rect.position.y + rect.size.y - 5), 
 					freq_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, text_color)
 
-func _draw_spectrum_info(rect: Rect2):
+func _draw_spectrum_info(rect: Rect2) -> void:
 	"""Draw title and current info"""
 	var title_color = Color(0, 1, 0, 1)  # Bright green to match spectrum
 	var info_color = Color(0.7, 0.9, 0.7, 0.8)

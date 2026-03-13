@@ -41,7 +41,7 @@ var forget_gate_body: RigidBody3D
 var input_gate_body: RigidBody3D
 var output_gate_body: RigidBody3D
 
-func _ready():
+func _ready() -> void:
 	print("[LSTMs_VR] Initializing room-scale LSTM visualization")
 	_build_lstm_cell()
 	_create_input_zone()
@@ -51,7 +51,7 @@ func _ready():
 	_create_training_controls()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -64,7 +64,7 @@ func _process(delta):
 	_update_cell_state_visual(delta)
 	_update_training_metrics(delta)
 
-func _build_lstm_cell():
+func _build_lstm_cell() -> void:
 	"""Create the main LSTM cell structure - large enough to walk into"""
 	var cell_container = Node3D.new()
 	cell_container.name = "CellStructure"
@@ -95,7 +95,7 @@ func _build_lstm_cell():
 	# Create floor reference
 	_create_floor_grid()
 
-func _create_floor_grid():
+func _create_floor_grid() -> void:
 	"""Create a floor grid for spatial reference"""
 	var grid_size = 10
 	var grid_spacing = 0.5
@@ -119,7 +119,7 @@ func _create_floor_grid():
 				marker.position = Vector3(x * grid_spacing, 0, z * grid_spacing)
 				add_child(marker)
 
-func _create_interactive_gates():
+func _create_interactive_gates() -> void:
 	"""Create grabbable gate spheres positioned around the cell"""
 	var gates_container = Node3D.new()
 	gates_container.name = "InteractiveGates"
@@ -202,7 +202,7 @@ func _create_gate_sphere(gate_name: String, pos: Vector3, color: Color, label: S
 
 	return body
 
-func _create_input_zone():
+func _create_input_zone() -> void:
 	"""Create input token spawn zone (left side of room)"""
 	var input_zone = Node3D.new()
 	input_zone.name = "InputZone"
@@ -244,7 +244,7 @@ func _create_input_zone():
 		input_zone.add_child(token)
 		input_tokens.append(token)
 
-func _create_output_zone():
+func _create_output_zone() -> void:
 	"""Create output visualization zone (right side of room)"""
 	var output_zone = Node3D.new()
 	output_zone.name = "OutputZone"
@@ -311,7 +311,7 @@ func _create_throwable_token(pos: Vector3, color: Color) -> RigidBody3D:
 
 	return body
 
-func _create_memory_flow():
+func _create_memory_flow() -> void:
 	"""Create flowing memory particles through the cell"""
 	if not show_memory_particles:
 		return
@@ -344,7 +344,7 @@ func _create_memory_flow():
 			"height_offset": randf_range(-0.3, 0.3)
 		})
 
-func _create_training_controls():
+func _create_training_controls() -> void:
 	"""Create VR-accessible training control panel"""
 	var controls = Node3D.new()
 	controls.name = "TrainingControls"
@@ -374,7 +374,7 @@ func _create_training_controls():
 	title.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	controls.add_child(title)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create floating info panels explaining LSTM components"""
 	# Cell State info
 	_create_info_panel(
@@ -390,7 +390,7 @@ func _create_info_panels():
 		Color(0.2, 0.8, 0.2)
 	)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create a floating information panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -402,7 +402,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _update_gate_activations(_delta):
+func _update_gate_activations(_delta) -> void:
 	"""Update gate activations based on position or training"""
 	if enable_gate_grabbing:
 		# Gate activation based on how high the gate is raised
@@ -423,7 +423,7 @@ func _update_gate_activations(_delta):
 	_update_gate_visual(input_gate_body, input_gate_activation, Color(0.2, 0.4, 0.9))
 	_update_gate_visual(output_gate_body, output_gate_activation, Color(0.2, 0.9, 0.4))
 
-func _update_gate_visual(gate: RigidBody3D, activation: float, base_color: Color):
+func _update_gate_visual(gate: RigidBody3D, activation: float, base_color: Color) -> void:
 	"""Update gate sphere visual based on activation level"""
 	if not gate:
 		return
@@ -437,7 +437,7 @@ func _update_gate_visual(gate: RigidBody3D, activation: float, base_color: Color
 		var target_scale = 0.9 + activation * 0.3
 		gate.scale = gate.scale.lerp(Vector3.ONE * target_scale, 0.05)
 
-func _animate_memory_flow(delta):
+func _animate_memory_flow(delta) -> void:
 	"""Animate memory particles flowing through the cell"""
 	for particle_data in memory_particles:
 		var particle = particle_data.node
@@ -467,23 +467,23 @@ func _animate_memory_flow(delta):
 		particle.material_override.albedo_color = Color(r, 0.3, b, 0.8)
 		particle.material_override.emission = Color(r, 0.3, b)
 
-func _update_cell_state_visual(_delta):
+func _update_cell_state_visual(_delta) -> void:
 	"""Update main cell visual based on training state"""
 	var cell_core = get_node_or_null("CellStructure/CellCore")
 	if cell_core and cell_core.material_override:
 		var intensity = 0.3 + training_progress * 0.7
 		cell_core.material_override.emission_energy_multiplier = intensity
 
-func _update_training_metrics(_delta):
+func _update_training_metrics(_delta) -> void:
 	"""Update training metric displays"""
 	# This could control floating text displays showing loss and accuracy
 	pass
 
 # Public API for external control
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	loss_value = 1.0
 	accuracy = 0.0
@@ -495,3 +495,9 @@ func get_gate_activations() -> Dictionary:
 		"input": input_gate_activation,
 		"output": output_gate_activation
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

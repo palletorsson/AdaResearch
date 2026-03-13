@@ -10,13 +10,13 @@ class_name FloatingMembraneChair
 
 var materials: ModernistMaterials
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	# Create suspension points
 	var suspension_points = [
 		Vector3(-membrane_width/2, suspension_height, -membrane_depth/2),
@@ -48,9 +48,14 @@ func generate_chair():
 	membrane.material_override = materials.get_material("canvas")
 	add_child(membrane)
 
-func regenerate_with_parameters(_params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary) -> void:
 	for child in get_children():
 		if child != materials:
 			child.queue_free()
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

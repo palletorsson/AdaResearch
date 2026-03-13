@@ -104,3 +104,9 @@ func _update_spiral() -> void:
 	mesh.surface_end()
 	_spiral_mesh.mesh = mesh
 	_spiral_mesh.material_override = MAT_SPIRAL
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

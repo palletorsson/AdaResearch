@@ -49,7 +49,7 @@ var terrain_noise: FastNoiseLite
 var plant_position_noise: FastNoiseLite
 var plant_type_noise: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	# Set up noise generators
 	randomize()
 	terrain_seed = randi() if terrain_seed == 0 else terrain_seed
@@ -77,7 +77,7 @@ func _ready():
 	
 
 
-func generate_terrain():
+func generate_terrain() -> void:
 	# Create a gridmesh for the terrain
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = landscape_size
@@ -167,7 +167,7 @@ func generate_terrain():
 	
 	terrain.material_override = terrain_material
 
-func create_basic_plant_meshes():
+func create_basic_plant_meshes() -> void:
 	# Create various stem types
 	var cylinder = CylinderMesh.new()
 	cylinder.top_radius = 0.1
@@ -201,7 +201,7 @@ func create_basic_plant_meshes():
 	plane.size = Vector2(0.8, 0.4)
 	leaf_meshes.append(plane)
 
-func generate_plants():
+func generate_plants() -> void:
 	# Create a root node for all plants
 	var plants_root = Node3D.new()
 	plants_root.name = "Plants"
@@ -363,7 +363,7 @@ func create_strange_plant_template(template_id):
 	
 	return plant
 
-func add_decorative_elements(parent_node, rng):
+func add_decorative_elements(parent_node, rng) -> void:
 	# Add small decorative elements that reference Bosch's style
 	var num_elements = rng.randi_range(1, 3)
 	
@@ -428,7 +428,7 @@ func add_decorative_elements(parent_node, rng):
 		element.material_override = element_material
 		parent_node.add_child(element)
 
-func add_queer_form_elements(plant_node, rng):
+func add_queer_form_elements(plant_node, rng) -> void:
 	# Add elements that break from traditional plant forms
 	var num_elements = rng.randi_range(1, 4)
 	
@@ -461,7 +461,7 @@ func add_queer_form_elements(plant_node, rng):
 		
 		plant_node.add_child(element)
 
-func create_spiral_tubes(parent, rng):
+func create_spiral_tubes(parent, rng) -> void:
 	var num_tubes = rng.randi_range(3, 7)
 	var spiral_radius = rng.randf_range(0.2, 0.5)
 	var vertical_stretch = rng.randf_range(0.2, 0.8)
@@ -504,7 +504,7 @@ func create_spiral_tubes(parent, rng):
 		
 		parent.add_child(tube)
 
-func create_bubble_cluster(parent, rng):
+func create_bubble_cluster(parent, rng) -> void:
 	var num_bubbles = rng.randi_range(5, 12)
 	
 	for i in range(num_bubbles):
@@ -536,7 +536,7 @@ func create_bubble_cluster(parent, rng):
 		bubble.material_override = bubble_material
 		parent.add_child(bubble)
 
-func create_crystal_formation(parent, rng):
+func create_crystal_formation(parent, rng) -> void:
 	var num_crystals = rng.randi_range(3, 8)
 	
 	for i in range(num_crystals):
@@ -578,7 +578,7 @@ func create_crystal_formation(parent, rng):
 		crystal.material_override = crystal_material
 		parent.add_child(crystal)
 
-func create_membrane_sheets(parent, rng):
+func create_membrane_sheets(parent, rng) -> void:
 	var num_sheets = rng.randi_range(2, 5)
 	
 	for i in range(num_sheets):
@@ -618,7 +618,7 @@ func create_membrane_sheets(parent, rng):
 		sheet.material_override = sheet_material
 		parent.add_child(sheet)
 
-func create_starburst(parent, rng):
+func create_starburst(parent, rng) -> void:
 	var num_spikes = rng.randi_range(5, 12)
 	
 	for i in range(num_spikes):
@@ -658,7 +658,7 @@ func create_starburst(parent, rng):
 		spike.material_override = spike_material
 		parent.add_child(spike)
 
-func create_nested_rings(parent, rng):
+func create_nested_rings(parent, rng) -> void:
 	var num_rings = rng.randi_range(3, 6)
 	
 	for i in range(num_rings):
@@ -1396,3 +1396,9 @@ static func create_animated_fruit(parent, rng):
 	fruit.add_child(eye)
 	
 	parent.add_child(fruit)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

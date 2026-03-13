@@ -586,3 +586,9 @@ func _print_controls() -> void:
 	print("  ESC - Toggle mouse capture (engine default)")
 	print("===============================")
 	print("")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

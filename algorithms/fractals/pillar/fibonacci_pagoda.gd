@@ -286,3 +286,9 @@ func rebuild_pagoda() -> void:
 		finial.queue_free()
 	
 	_build_pagoda()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

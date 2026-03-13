@@ -46,3 +46,9 @@ func _spawn_butterfly() -> void:
 		var anim: AnimationPlayer = butterfly_node.find_child("AnimationPlayer", true, false) as AnimationPlayer
 		if anim:
 			anim.play("fly")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

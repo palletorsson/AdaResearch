@@ -28,15 +28,15 @@ var static_body: StaticBody3D
 
 signal world_ready
 
-func _ready():
+func _ready() -> void:
 	create_mobius_world()
 	emit_signal("world_ready")
 
-func create_mobius_world():
+func create_mobius_world() -> void:
 	create_mesh()
 	create_collision()
 
-func create_mesh():
+func create_mesh() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -121,7 +121,7 @@ func calculate_normal_at(u: float, v: float) -> Vector3:
 
 	return du.cross(dv).normalized()
 
-func apply_material():
+func apply_material() -> void:
 	if not mesh_instance:
 		return
 
@@ -144,7 +144,7 @@ func apply_material():
 		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 		mesh_instance.mesh.surface_set_material(0, standard_material)
 
-func create_collision():
+func create_collision() -> void:
 	static_body = StaticBody3D.new()
 	static_body.name = "MobiusCollision"
 	# Layer 4 for wall-walk, plus layer 1 for normal collisions
@@ -179,3 +179,9 @@ func configure(data: Dictionary) -> void:
 			child.queue_free()
 		await get_tree().process_frame
 		create_mobius_world()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

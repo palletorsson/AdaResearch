@@ -68,3 +68,9 @@ func _process(_delta: float) -> void:
 
 	var deg := rad_to_deg(fmod(_angle, TAU))
 	_status_label.text = "Angular Motion | %.1f°" % deg
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

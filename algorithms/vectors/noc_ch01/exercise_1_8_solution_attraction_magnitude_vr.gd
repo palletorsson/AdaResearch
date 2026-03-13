@@ -111,3 +111,9 @@ func _process(_delta: float) -> void:
 	_line_mesh.surface_end()
 
 	_status_label.text = "Attraction | dist: %.3f, force: %.4f" % [distance, force.length()]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

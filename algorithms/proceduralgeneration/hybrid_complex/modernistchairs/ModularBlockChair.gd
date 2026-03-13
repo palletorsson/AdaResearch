@@ -12,13 +12,13 @@ class_name ModularBlockChair
 
 var materials: ModernistMaterials
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	var primary_colors = materials.get_primary_color_set()
 	
 	# Horizontal seat plank
@@ -53,8 +53,14 @@ func generate_chair():
 		support.material_override = primary_colors[4] if i % 2 == 0 else primary_colors[3]  # Black/White
 		add_child(support)
 
-func regenerate_with_parameters(_params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary) -> void:
 	for child in get_children():
 		if child != materials:
 			child.queue_free()
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

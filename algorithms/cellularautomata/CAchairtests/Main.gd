@@ -29,24 +29,24 @@ var camera_rotation: Vector2 = Vector2.ZERO
 var camera_distance: float = 40.0
 var camera_target: Vector3 = Vector3(10, 12, 10)
 
-func _ready():
+func _ready() -> void:
 	_xr_active = XRServer.primary_interface != null
 	setup_camera()
 	setup_ui()
 	reset_simulation()
 
-func setup_camera():
+func setup_camera() -> void:
 	camera.position = camera_target + Vector3(0, 20, -30)
 	camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
-func setup_ui():
+func setup_ui() -> void:
 	btn_reset.pressed.connect(_on_reset_pressed)
 	btn_step.pressed.connect(_on_step_pressed)
 	btn_play.pressed.connect(_on_play_pressed)
 	btn_strategy.pressed.connect(_on_strategy_pressed)
 	speed_slider.value_changed.connect(_on_speed_changed)
 
-func reset_simulation():
+func reset_simulation() -> void:
 	ca_grid.reset()
 	
 	if strategy_type == CAStrategy.StrategyType.DOWNWARD_COLUMNS:
@@ -59,7 +59,7 @@ func reset_simulation():
 	update_ui()
 	ca_grid.update_visualization()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	handle_camera(delta)
 	
 	if is_playing:
@@ -68,7 +68,7 @@ func _process(delta):
 			step_timer = 0.0
 			step_simulation()
 
-func step_simulation():
+func step_simulation() -> void:
 	if ca_grid.generation < 30:
 		current_strategy.step()
 		update_ui()
@@ -76,7 +76,7 @@ func step_simulation():
 		is_playing = false
 		btn_play.text = "Play"
 
-func update_ui():
+func update_ui() -> void:
 	gen_label.text = "Generation: %d" % ca_grid.generation
 	cell_label.text = "Cells: %d" % ca_grid.get_occupied_count()
 	
@@ -89,7 +89,7 @@ func update_ui():
 	]
 	strategy_label.text = "Strategy: " + strategy_names[strategy_type]
 
-func handle_camera(delta):
+func handle_camera(delta) -> void:
 	if _xr_active:
 		return
 	# WASD movement
@@ -118,12 +118,12 @@ func handle_camera(delta):
 		camera_distance = min(100.0, camera_distance + 5.0)
 		update_camera_position()
 
-func update_camera_position():
+func update_camera_position() -> void:
 	var offset = Vector3(0, camera_distance * 0.5, -camera_distance)
 	camera.position = camera_target + offset
 	camera.look_at(camera_target)
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if _xr_active:
 		return
 	# Camera rotation with right mouse button
@@ -138,19 +138,19 @@ func _unhandled_input(event):
 		camera.position = camera_target + offset
 		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	reset_simulation()
 
-func _on_step_pressed():
+func _on_step_pressed() -> void:
 	step_simulation()
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	is_playing = !is_playing
 	btn_play.text = "Pause" if is_playing else "Play"
 
-func _on_strategy_pressed():
+func _on_strategy_pressed() -> void:
 	strategy_type = (strategy_type + 1) % 5
 	reset_simulation()
 
-func _on_speed_changed(value: float):
+func _on_speed_changed(value: float) -> void:
 	step_interval = 1.0 / value

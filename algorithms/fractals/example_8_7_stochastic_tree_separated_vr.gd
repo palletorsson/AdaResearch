@@ -49,7 +49,7 @@ class BranchData:
 	var parent: BranchData = null
 	var children: Array[BranchData] = []
 
-	func _init(mesh: MeshInstance3D, start: Vector3, end: Vector3, lvl: int, thick: float, length: float):
+	func _init(mesh: MeshInstance3D, start: Vector3, end: Vector3, lvl: int, thick: float, length: float) -> void:
 		mesh_instance = mesh
 		start_pos = start
 		end_pos = end
@@ -362,3 +362,9 @@ func _update_status() -> void:
 	else:
 		status += " | Separation Complete"
 	_status_label.text = status
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

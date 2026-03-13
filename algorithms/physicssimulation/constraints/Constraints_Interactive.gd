@@ -48,7 +48,7 @@ var colors = [
 	Color(0.3, 0.9, 0.9, 1.0),  # Cyan
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -58,7 +58,7 @@ func _ready():
 
 	print("Interactive Constraints - Grab and play with physics joints!")
 
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if xr_origin:
 		left_controller = xr_origin.get_node_or_null("LeftController")
@@ -72,7 +72,7 @@ func setup_vr_controllers():
 			right_controller.button_pressed.connect(_on_right_button_pressed)
 			right_controller.button_released.connect(_on_right_button_released)
 
-func create_all_demonstrations():
+func create_all_demonstrations() -> void:
 	create_pendulum_chain()
 	create_rope_bridge()
 	create_ragdoll()
@@ -83,7 +83,7 @@ func create_all_demonstrations():
 # ===========================================================================
 # 1. PENDULUM CHAIN - Multiple balls connected with PinJoint3D
 # ===========================================================================
-func create_pendulum_chain():
+func create_pendulum_chain() -> void:
 	var chain_length = 5
 	var start_pos = Vector3(-4, 3, 0)
 
@@ -123,7 +123,7 @@ func create_pendulum_chain():
 # ===========================================================================
 # 2. ROPE BRIDGE - Hanging bridge with multiple links
 # ===========================================================================
-func create_rope_bridge():
+func create_rope_bridge() -> void:
 	var bridge_length = 8
 	var start_pos = Vector3(0, 3, -3)
 	var end_pos = Vector3(4, 3, -3)
@@ -178,7 +178,7 @@ func create_rope_bridge():
 # ===========================================================================
 # 3. RAGDOLL - Simple character with ball and socket joints
 # ===========================================================================
-func create_ragdoll():
+func create_ragdoll() -> void:
 	var center = Vector3(4, 2, 0)
 
 	# Torso
@@ -240,7 +240,7 @@ func create_ragdoll():
 # ===========================================================================
 # 4. SLIDER RAILS - Objects constrained to linear motion
 # ===========================================================================
-func create_slider_rails():
+func create_slider_rails() -> void:
 	var rail_start = Vector3(-4, 1, 3)
 	var rail_end = Vector3(-4, 1, -1)
 
@@ -277,7 +277,7 @@ func create_slider_rails():
 # ===========================================================================
 # 5. SWINGING DOORS - HingeJoint3D demonstration
 # ===========================================================================
-func create_swinging_doors():
+func create_swinging_doors() -> void:
 	var door_pos = Vector3(0, 2, 3)
 
 	# Create door frame
@@ -312,7 +312,7 @@ func create_swinging_doors():
 # ===========================================================================
 # 6. SPRING DAMPER SYSTEM - Springy connections
 # ===========================================================================
-func create_spring_damper_system():
+func create_spring_damper_system() -> void:
 	var center = Vector3(4, 2, 3)
 
 	# Create anchor
@@ -465,7 +465,7 @@ func create_rail_visual(start: Vector3, end: Vector3) -> MeshInstance3D:
 
 	return rail
 
-func create_ui():
+func create_ui() -> void:
 	var title = Label3D.new()
 	title.text = "INTERACTIVE CONSTRAINTS"
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -485,7 +485,7 @@ func create_ui():
 func _process(_delta: float):
 	update_vr_grabbing()
 
-func update_vr_grabbing():
+func update_vr_grabbing() -> void:
 	if left_grab_active and left_controller and not grabbed_body:
 		attempt_grab(to_local(left_controller.global_position))
 	elif not left_grab_active and grabbed_body:
@@ -502,7 +502,7 @@ func update_vr_grabbing():
 	elif grabbed_body and grab_joint and right_controller and right_grab_active:
 		grab_anchor.global_position = right_controller.global_position
 
-func attempt_grab(controller_pos: Vector3):
+func attempt_grab(controller_pos: Vector3) -> void:
 	var grab_radius = 0.3
 	var all_bodies = pendulum_bodies + chain_links + ragdoll_parts + slider_blocks + hinge_doors + spring_objects
 
@@ -537,7 +537,7 @@ func attempt_grab(controller_pos: Vector3):
 			add_child(grab_joint)
 			break
 
-func release_grab():
+func release_grab() -> void:
 	if grab_joint:
 		grab_joint.queue_free()
 		grab_joint = null
@@ -546,23 +546,23 @@ func release_grab():
 		grab_anchor = null
 	grabbed_body = null
 
-func _on_left_button_pressed(button_name: String):
+func _on_left_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = true
 
-func _on_left_button_released(button_name: String):
+func _on_left_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = false
 
-func _on_right_button_pressed(button_name: String):
+func _on_right_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = true
 
-func _on_right_button_released(button_name: String):
+func _on_right_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = false
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -570,7 +570,7 @@ func _input(event: InputEvent):
 			KEY_G:
 				toggle_gravity()
 
-func reset_all_demonstrations():
+func reset_all_demonstrations() -> void:
 	# Clear and recreate all demos
 	for child in $Demonstrations.get_children():
 		for subchild in child.get_children():
@@ -586,10 +586,16 @@ func reset_all_demonstrations():
 	await get_tree().create_timer(0.1).timeout
 	create_all_demonstrations()
 
-func toggle_gravity():
+func toggle_gravity() -> void:
 	enable_gravity = !enable_gravity
 	var gravity_value = Vector3(0, -9.8, 0) if enable_gravity else Vector3.ZERO
 
 	for body in pendulum_bodies + chain_links + ragdoll_parts + slider_blocks + hinge_doors + spring_objects:
 		if is_instance_valid(body):
 			body.gravity_scale = 1.0 if enable_gravity else 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

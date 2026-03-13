@@ -112,13 +112,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_base_geometries()
 	create_wireframe_objects()
 	start_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create dark cyberpunk environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -156,7 +156,7 @@ func convert_mesh_to_array_mesh(mesh: Mesh) -> ArrayMesh:
 		# Fallback for other mesh types
 		return ArrayMesh.new()
 
-func create_base_geometries():
+func create_base_geometries() -> void:
 	# Create various geometric shapes for wireframe rendering
 	base_geometries = [
 		# Basic shapes - convert all to ArrayMesh for consistency
@@ -199,7 +199,7 @@ func create_base_geometries():
 	torus.outer_radius = 1.8
 	base_geometries[3] = convert_mesh_to_array_mesh(torus)
 
-func create_wireframe_objects():
+func create_wireframe_objects() -> void:
 	for i in range(object_count):
 		var mesh_instance = MeshInstance3D.new()
 		var geometry = base_geometries[i % base_geometries.size()]
@@ -285,13 +285,13 @@ func create_wireframe_objects():
 		wireframe_objects.append(mesh_instance)
 		wireframe_materials.append(material)
 
-func start_animations():
+func start_animations() -> void:
 	if auto_rotate:
 		animate_object_rotations()
 	
 	animate_wireframe_effects()
 
-func animate_object_rotations():
+func animate_object_rotations() -> void:
 	# Add rotation animations to each object
 	for i in range(wireframe_objects.size()):
 		var obj = wireframe_objects[i]
@@ -323,7 +323,7 @@ func animate_object_rotations():
 					0.0, PI * 4.0, 25.0 / animation_speed
 				)
 
-func animate_wireframe_effects():
+func animate_wireframe_effects() -> void:
 	# Animate shader properties for pulsing effects
 	for i in range(wireframe_materials.size()):
 		var material = wireframe_materials[i]
@@ -592,6 +592,12 @@ func _process(_delta):
 	# Update any time-based effects if needed
 	update_dynamic_effects()
 
-func update_dynamic_effects():
+func update_dynamic_effects() -> void:
 	# Optional: Add dynamic effects based on time or VR controller input
 	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

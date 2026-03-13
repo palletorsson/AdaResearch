@@ -186,3 +186,9 @@ func get_points_value() -> int:
 
 func get_current_health() -> int:
 	return current_health
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

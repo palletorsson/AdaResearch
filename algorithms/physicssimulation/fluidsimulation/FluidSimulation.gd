@@ -59,7 +59,7 @@ var visc_coeff: float
 # --- Container body (for VR grab) ---
 var container_body: RigidBody3D
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -77,7 +77,7 @@ func _ready():
 # INITIALIZATION
 # ===========================================================================
 
-func _precompute_kernels():
+func _precompute_kernels() -> void:
 	h = smoothing_radius
 	h2 = h * h
 	h6 = h2 * h2 * h2
@@ -90,7 +90,7 @@ func _precompute_kernels():
 	# Viscosity Laplacian
 	visc_coeff = 45.0 / (PI * h6)
 
-func _allocate_arrays():
+func _allocate_arrays() -> void:
 	pos.resize(particle_count)
 	vel.resize(particle_count)
 	acc.resize(particle_count)
@@ -103,7 +103,7 @@ func _allocate_arrays():
 		density[i] = 0.0
 		pressure[i] = 0.0
 
-func _init_particle_positions():
+func _init_particle_positions() -> void:
 	# Pack particles into a small cube inside the container
 	var spacing: float = h * 0.55
 	var side: int = ceili(pow(float(particle_count), 1.0 / 3.0))
@@ -119,7 +119,7 @@ func _init_particle_positions():
 				pos[idx] += Vector3(randf() - 0.5, randf() - 0.5, randf() - 0.5) * spacing * 0.1
 				idx += 1
 
-func _create_multimesh():
+func _create_multimesh() -> void:
 	multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.use_colors = true
@@ -153,7 +153,7 @@ func _create_multimesh():
 		multimesh.set_instance_transform(i, Transform3D(Basis(), pos[i]))
 		multimesh.set_instance_color(i, color_low_speed)
 
-func _create_container():
+func _create_container() -> void:
 	# RigidBody3D container — can be grabbed and tilted in VR
 	container_body = RigidBody3D.new()
 	container_body.mass = 10.0
@@ -203,7 +203,7 @@ func _create_container():
 # VR SETUP
 # ===========================================================================
 
-func _setup_vr():
+func _setup_vr() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if not xr_origin:
 		return
@@ -216,7 +216,7 @@ func _setup_vr():
 		right_controller.button_pressed.connect(_on_button_pressed.bind(right_controller))
 		right_controller.button_released.connect(_on_button_released.bind(right_controller))
 
-func _on_button_pressed(button: String, controller: XRController3D):
+func _on_button_pressed(button: String, controller: XRController3D) -> void:
 	if button != "grip_click" and button != "trigger_click":
 		return
 	if grabbed:
@@ -244,12 +244,12 @@ func _on_button_pressed(button: String, controller: XRController3D):
 		grab_joint.set_param_z(Generic6DOFJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, 200.0)
 		add_child(grab_joint)
 
-func _on_button_released(button: String, _controller: XRController3D):
+func _on_button_released(button: String, _controller: XRController3D) -> void:
 	if button != "grip_click" and button != "trigger_click":
 		return
 	_release_grab()
 
-func _release_grab():
+func _release_grab() -> void:
 	if not grabbed:
 		return
 	grabbed = false
@@ -265,7 +265,7 @@ func _release_grab():
 # PHYSICS — runs at fixed timestep
 # ===========================================================================
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	_build_spatial_hash()
 	_compute_density_pressure()
 	_compute_forces(delta)
@@ -274,7 +274,7 @@ func _physics_process(delta: float):
 	_update_multimesh()
 
 # --- Spatial hash ---
-func _build_spatial_hash():
+func _build_spatial_hash() -> void:
 	grid.clear()
 	var inv_cell := 1.0 / cell_size
 	for i in particle_count:
@@ -305,7 +305,7 @@ func _get_neighbors(idx: int) -> PackedInt32Array:
 	return result
 
 # --- Density & Pressure ---
-func _compute_density_pressure():
+func _compute_density_pressure() -> void:
 	for i in particle_count:
 		var rho: float = 0.0
 		var neighbors := _get_neighbors(i)
@@ -322,7 +322,7 @@ func _compute_density_pressure():
 		pressure[i] = pressure_stiffness * (density[i] - rest_density)
 
 # --- Forces ---
-func _compute_forces(delta: float):
+func _compute_forces(delta: float) -> void:
 	# Gravity in container's local space (allows tilting to slosh!)
 	var grav_world := Vector3(0, -gravity_strength, 0)
 	var container_basis := container_body.global_transform.basis
@@ -349,14 +349,14 @@ func _compute_forces(delta: float):
 		acc[i] = grav_local + f_pressure / maxf(density[i], 0.001) + f_viscosity * viscosity / maxf(density[i], 0.001)
 
 # --- Integration ---
-func _integrate(delta: float):
+func _integrate(delta: float) -> void:
 	for i in particle_count:
 		vel[i] += acc[i] * delta
 		vel[i] *= 0.998  # Tiny damping
 		pos[i] += vel[i] * delta
 
 # --- Boundaries (container-local) ---
-func _enforce_boundaries():
+func _enforce_boundaries() -> void:
 	var hs := container_half_size
 	var r := particle_radius
 	for i in particle_count:
@@ -384,7 +384,7 @@ func _enforce_boundaries():
 			vel[i].z *= -wall_restitution
 
 # --- MultiMesh update ---
-func _update_multimesh():
+func _update_multimesh() -> void:
 	var container_xform := container_body.global_transform
 	var inv_range := 1.0 / maxf(speed_color_range, 0.01)
 	for i in particle_count:
@@ -400,7 +400,7 @@ func _update_multimesh():
 # UI
 # ===========================================================================
 
-func _create_ui():
+func _create_ui() -> void:
 	var title := Label3D.new()
 	title.text = "SPH FLUID SIMULATION"
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -417,12 +417,12 @@ func _create_ui():
 	info.position = Vector3(0, container_half_size.y * 2.0, 0)
 	add_child(info)
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset()
 
-func _reset():
+func _reset() -> void:
 	_init_particle_positions()
 	for i in particle_count:
 		vel[i] = Vector3.ZERO
@@ -431,3 +431,9 @@ func _reset():
 		pressure[i] = 0.0
 	container_body.position = Vector3.ZERO
 	container_body.rotation = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

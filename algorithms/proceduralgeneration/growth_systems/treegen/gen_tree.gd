@@ -29,7 +29,7 @@ var generation_timer := 0.0
 var primary_material: StandardMaterial3D
 var secondary_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	# Create materials
 	create_materials()
 	
@@ -39,7 +39,7 @@ func _ready():
 	else:
 		print("Tree generator initialized with XR camera: " + vr_camera.name)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Skip processing if no camera reference
 	if not vr_camera:
 		return
@@ -52,7 +52,7 @@ func _process(delta):
 		generation_timer = 0.0
 		update_trees()
 
-func update_trees():
+func update_trees() -> void:
 	# Get camera position (player's viewpoint)
 	var camera_pos = vr_camera.global_position
 	
@@ -73,7 +73,7 @@ func update_trees():
 	if active_trees.size() < max_trees:
 		generate_trees_around_camera()
 
-func generate_trees_around_camera():
+func generate_trees_around_camera() -> void:
 	# Get camera position
 	var camera_pos = vr_camera.global_position
 	
@@ -113,7 +113,7 @@ func generate_trees_around_camera():
 		create_tree(new_pos)
 		trees_added += 1
 
-func create_tree(position: Vector3):
+func create_tree(position: Vector3) -> void:
 	# Create a tree at the specified position
 	var tree = Node3D.new()
 	var tree_id = next_tree_id
@@ -141,7 +141,7 @@ func create_tree(position: Vector3):
 	active_trees[tree_id] = tree
 	tree_positions[tree_id] = position
 
-func remove_tree(tree_id: int):
+func remove_tree(tree_id: int) -> void:
 	# Remove a tree
 	if active_trees.has(tree_id):
 		var tree = active_trees[tree_id]
@@ -149,7 +149,7 @@ func remove_tree(tree_id: int):
 		active_trees.erase(tree_id)
 		tree_positions.erase(tree_id)
 
-func create_materials():
+func create_materials() -> void:
 	# Primary material (most blocks)
 	primary_material = StandardMaterial3D.new()
 	primary_material.albedo_color = primary_color
@@ -168,7 +168,7 @@ func create_materials():
 	secondary_material.emission = secondary_color
 	secondary_material.emission_energy_multiplier = emission_strength * 0.7
 
-func generate_simple_block_tree(parent):
+func generate_simple_block_tree(parent) -> void:
 	# Create a simple geometric tree using blocks
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -246,7 +246,7 @@ func generate_simple_block_tree(parent):
 				
 				block.add_child(detail)
 
-func generate_complex_block_cluster(parent):
+func generate_complex_block_cluster(parent) -> void:
 	# Create a more complex block cluster similar to the reference image
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -402,3 +402,9 @@ func generate_complex_block_cluster(parent):
 		detail.material_override = secondary_material if rng.randf() > 0.5 else primary_material
 		
 		parent.add_child(detail)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

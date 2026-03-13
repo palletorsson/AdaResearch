@@ -25,7 +25,7 @@ class UFElement:
 	var visual_object: CSGSphere3D
 	var position_2d: Vector2
 	
-	func _init(element_id: int):
+	func _init(element_id: int) -> void:
 		id = element_id
 		parent = self  # Initially, each element is its own parent
 		rank = 0
@@ -34,11 +34,11 @@ var elements = []
 var connections = []
 var recent_union_pairs = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_union_find()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Component indicator material
 	var component_material = StandardMaterial3D.new()
 	component_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
@@ -53,7 +53,7 @@ func setup_materials():
 	union_material.emission = Color(0.3, 0.15, 0.05, 1.0)
 	$UnionOperationIndicator.material_override = union_material
 
-func initialize_union_find():
+func initialize_union_find() -> void:
 	# Create elements arranged in a circle
 	for i in range(element_count):
 		var element = UFElement.new(i)
@@ -68,7 +68,7 @@ func initialize_union_find():
 	
 	update_components_count()
 
-func create_visual_element(element: UFElement):
+func create_visual_element(element: UFElement) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.3
 	sphere.position = Vector3(element.position_2d.x, element.position_2d.y, 0)
@@ -81,7 +81,7 @@ func create_visual_element(element: UFElement):
 	$Elements.add_child(sphere)
 	element.visual_object = sphere
 
-func update_element_material(element: UFElement, material: StandardMaterial3D):
+func update_element_material(element: UFElement, material: StandardMaterial3D) -> void:
 	var root_id = find_root(element).id
 	var color_intensity = (root_id % element_count) / float(element_count)
 	
@@ -94,7 +94,7 @@ func update_element_material(element: UFElement, material: StandardMaterial3D):
 	material.emission_enabled = true
 	material.emission = material.albedo_color * 0.4
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -105,7 +105,7 @@ func _process(delta):
 	animate_union_find()
 	animate_indicators()
 
-func perform_union_find_operation():
+func perform_union_find_operation() -> void:
 	current_operation = (current_operation + 1) % UFOperation.size()
 	
 	match current_operation:
@@ -124,7 +124,7 @@ func perform_union_find_operation():
 		UFOperation.RANK_OPTIMIZATION:
 			demonstrate_rank_optimization()
 
-func reset_all_sets():
+func reset_all_sets() -> void:
 	# Reset each element to be its own set
 	for element in elements:
 		element.parent = element
@@ -135,7 +135,7 @@ func reset_all_sets():
 	update_all_materials()
 	update_components_count()
 
-func perform_random_union():
+func perform_random_union() -> void:
 	# Union two random elements from different sets
 	var available_pairs = []
 	
@@ -186,14 +186,14 @@ func find_root_with_path(element: UFElement) -> Array:
 	
 	return path
 
-func demonstrate_find_operation():
+func demonstrate_find_operation() -> void:
 	# Show find operation on a random element
 	if elements.size() > 0:
 		var random_element = elements[randi() % elements.size()]
 		var path = find_root_with_path(random_element)
 		# Path will be highlighted in animation
 
-func demonstrate_path_compression():
+func demonstrate_path_compression() -> void:
 	# Create a long chain and then compress it
 	if elements.size() >= 4:
 		# Create a chain
@@ -204,11 +204,11 @@ func demonstrate_path_compression():
 		find_root(elements[min(4, elements.size()-1)])
 		update_all_materials()
 
-func demonstrate_rank_optimization():
+func demonstrate_rank_optimization() -> void:
 	# Show how rank affects union operations
 	perform_random_union()
 
-func create_connection(element1: UFElement, element2: UFElement):
+func create_connection(element1: UFElement, element2: UFElement) -> void:
 	var connection = CSGCylinder3D.new()
 	var pos1 = element1.visual_object.position
 	var pos2 = element2.visual_object.position
@@ -239,17 +239,17 @@ func create_connection(element1: UFElement, element2: UFElement):
 	$Connections.add_child(connection)
 	connections.append(connection)
 
-func clear_connections():
+func clear_connections() -> void:
 	for connection in connections:
 		connection.queue_free()
 	connections.clear()
 
-func update_all_materials():
+func update_all_materials() -> void:
 	for element in elements:
 		var material = element.visual_object.material_override as StandardMaterial3D
 		update_element_material(element, material)
 
-func update_components_count():
+func update_components_count() -> void:
 	var roots = {}
 	for element in elements:
 		var root = find_root(element)
@@ -257,7 +257,7 @@ func update_components_count():
 	
 	components_count = roots.size()
 
-func animate_union_find():
+func animate_union_find() -> void:
 	match current_operation:
 		UFOperation.MAKE_SET:
 			animate_make_set()
@@ -274,20 +274,20 @@ func animate_union_find():
 		UFOperation.RANK_OPTIMIZATION:
 			animate_rank_optimization()
 
-func animate_make_set():
+func animate_make_set() -> void:
 	# Pulse all elements as they become individual sets
 	for element in elements:
 		var pulse = 1.0 + sin(time * 6.0 + element.id * 0.5) * 0.3
 		element.visual_object.scale = Vector3.ONE * pulse
 
-func animate_union_operation():
+func animate_union_operation() -> void:
 	# Highlight recently unioned elements
 	for i in recent_union_pairs:
 		if i < elements.size():
 			var pulse = 1.0 + sin(time * 8.0) * 0.5
 			elements[i].visual_object.scale = Vector3.ONE * pulse
 
-func animate_find_operation():
+func animate_find_operation() -> void:
 	# Create a wave effect showing path traversal
 	for i in range(elements.size()):
 		var element = elements[i]
@@ -296,14 +296,14 @@ func animate_find_operation():
 		var intensity = max(0.0, sin(wave_phase)) * 0.4
 		element.visual_object.scale = Vector3.ONE * (1.0 + intensity)
 
-func animate_path_compression():
+func animate_path_compression() -> void:
 	# Show compression effect with shrinking paths
 	for element in elements:
 		var path_length = get_path_to_root_length(element)
 		var compression_effect = 1.0 + (1.0 / max(1.0, path_length)) * sin(time * 6.0) * 0.3
 		element.visual_object.scale = Vector3.ONE * compression_effect
 
-func animate_rank_optimization():
+func animate_rank_optimization() -> void:
 	# Highlight elements based on their rank
 	for element in elements:
 		if element == find_root(element):  # Root elements
@@ -321,7 +321,7 @@ func get_path_to_root_length(element: UFElement) -> int:
 		length += 1
 	
 	return length
-func animate_indicators():
+func animate_indicators() -> void:
 	# Component count indicator
 	var component_height = components_count * 0.3 + 0.5
 	var componentindicator = get_node_or_null("ComponentIndicator")
@@ -360,3 +360,9 @@ func get_operation_name() -> String:
 			return "Rank Optimization"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -161,3 +161,9 @@ class Wall:
 		var dir := (end - start).normalized()
 		var normal := Vector3(-dir.y, dir.x, 0)
 		return (point - start).dot(normal)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

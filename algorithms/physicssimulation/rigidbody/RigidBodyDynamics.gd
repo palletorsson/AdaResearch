@@ -32,7 +32,7 @@ var colors = [
 	Color(1.0, 0.5, 0.3, 1.0),   # Coral
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 	
@@ -48,7 +48,7 @@ func _ready():
 # ===========================================================================
 # VR CONTROLLER SETUP
 # ===========================================================================
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if xr_origin:
 		left_controller = xr_origin.get_node_or_null("LeftController")
@@ -64,7 +64,7 @@ func setup_vr_controllers():
 # ===========================================================================
 # ENVIRONMENT - StaticBody3D walls and floor
 # ===========================================================================
-func create_environment():
+func create_environment() -> void:
 	var env = Node3D.new()
 	env.name = "Environment"
 	add_child(env)
@@ -103,7 +103,7 @@ func create_environment():
 	_create_wall(env, Vector3(10, 2, 0), Vector3(0.2, 5, 20))   # East
 	_create_wall(env, Vector3(-10, 2, 0), Vector3(0.2, 5, 20))  # West
 
-func _create_wall(parent: Node3D, pos: Vector3, size: Vector3):
+func _create_wall(parent: Node3D, pos: Vector3, size: Vector3) -> void:
 	var wall = StaticBody3D.new()
 	wall.position = pos
 	
@@ -127,7 +127,7 @@ func _create_wall(parent: Node3D, pos: Vector3, size: Vector3):
 # ===========================================================================
 # DEMO 1: STACKING - Blocks piled up, let Godot physics resolve
 # ===========================================================================
-func create_stacking_demo():
+func create_stacking_demo() -> void:
 	var demos = Node3D.new()
 	demos.name = "Demonstrations"
 	add_child(demos)
@@ -170,7 +170,7 @@ func create_stacking_demo():
 # ===========================================================================
 # DEMO 2: MASS VARIATION - Different sized/massed blocks
 # ===========================================================================
-func create_mass_variation_demo():
+func create_mass_variation_demo() -> void:
 	var mass_group = Node3D.new()
 	mass_group.name = "MassDemo"
 	$Demonstrations.add_child(mass_group)
@@ -233,7 +233,7 @@ func create_mass_variation_demo():
 # ===========================================================================
 # DEMO 3: RESTITUTION - Bouncy vs dead blocks
 # ===========================================================================
-func create_restitution_demo():
+func create_restitution_demo() -> void:
 	var bounce_group = Node3D.new()
 	bounce_group.name = "RestitutionDemo"
 	$Demonstrations.add_child(bounce_group)
@@ -322,7 +322,7 @@ func _create_physics_block(pos: Vector3, size: Vector3, mass: float, color: Colo
 # ===========================================================================
 # UI
 # ===========================================================================
-func create_ui():
+func create_ui() -> void:
 	var title = Label3D.new()
 	title.text = "RIGID BODY DYNAMICS"
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -345,7 +345,7 @@ func create_ui():
 func _process(_delta: float):
 	update_vr_grabbing()
 
-func update_vr_grabbing():
+func update_vr_grabbing() -> void:
 	if left_grab_active and left_controller and not grabbed_body:
 		attempt_grab(left_controller.global_position)
 	elif not left_grab_active and grabbed_body:
@@ -363,7 +363,7 @@ func update_vr_grabbing():
 		elif right_grab_active and right_controller:
 			grab_anchor.global_position = right_controller.global_position
 
-func attempt_grab(controller_global_pos: Vector3):
+func attempt_grab(controller_global_pos: Vector3) -> void:
 	var grab_radius = 0.4
 	
 	for body in blocks:
@@ -393,7 +393,7 @@ func attempt_grab(controller_global_pos: Vector3):
 			add_child(grab_joint)
 			break
 
-func release_grab():
+func release_grab() -> void:
 	if grab_joint:
 		grab_joint.queue_free()
 		grab_joint = null
@@ -405,26 +405,26 @@ func release_grab():
 # ===========================================================================
 # VR BUTTON HANDLERS
 # ===========================================================================
-func _on_left_button_pressed(button_name: String):
+func _on_left_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = true
 
-func _on_left_button_released(button_name: String):
+func _on_left_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = false
 
-func _on_right_button_pressed(button_name: String):
+func _on_right_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = true
 
-func _on_right_button_released(button_name: String):
+func _on_right_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = false
 
 # ===========================================================================
 # KEYBOARD INPUT
 # ===========================================================================
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -432,7 +432,7 @@ func _input(event: InputEvent):
 			KEY_A:
 				add_random_block()
 
-func reset_all():
+func reset_all() -> void:
 	# Remove all blocks and recreate
 	for block in blocks:
 		if is_instance_valid(block):
@@ -449,7 +449,7 @@ func reset_all():
 	create_mass_variation_demo()
 	create_restitution_demo()
 
-func add_random_block():
+func add_random_block() -> void:
 	var parent = $Demonstrations if has_node("Demonstrations") else self
 	
 	var size = Vector3(
@@ -469,3 +469,9 @@ func add_random_block():
 	var block = _create_physics_block(pos, size, mass, color, bounce)
 	parent.add_child(block)
 	blocks.append(block)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

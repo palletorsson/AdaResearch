@@ -54,7 +54,7 @@ class Branch:
 	var birth_time: float = 0.0  # ✨ For sparkly effects!
 	var personal_hue: float = 0.0  # 🌈 Each branch gets its own rainbow position!
 	
-	func _init(pos: Vector3, dir: Vector3, parent: int = -1, gen: int = 0, time: float = 0.0):
+	func _init(pos: Vector3, dir: Vector3, parent: int = -1, gen: int = 0, time: float = 0.0) -> void:
 		position = pos
 		direction = dir.normalized()
 		parent_index = parent
@@ -68,12 +68,12 @@ class Attractor:
 	var sparkle_phase: float = 0.0  # ✨ For twinkling attractors!
 	var attractor_hue: float = 0.0  # 🌈 Each attractor gets fabulous colors!
 	
-	func _init(pos: Vector3):
+	func _init(pos: Vector3) -> void:
 		position = pos
 		sparkle_phase = randf() * PI * 2
 		attractor_hue = randf()
 
-func _ready():
+func _ready() -> void:
 	print("Initializing VR Space Colonization...")
 	
 	# Set up simple mesh for VR performance
@@ -104,11 +104,11 @@ func _ready():
 	# Start growth process
 	start_growth()
 
-func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1, generation: int = 0, birth_time: float = 0.0):
+func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1, generation: int = 0, birth_time: float = 0.0) -> void:
 	var branch = Branch.new(position, direction, parent_index, generation, birth_time)
 	branches.append(branch)
 
-func generate_attractors_vr_optimized():
+func generate_attractors_vr_optimized() -> void:
 	attractors.clear()
 	
 	# Generate attractors in a more controlled pattern for VR
@@ -130,11 +130,11 @@ func generate_attractors_vr_optimized():
 		if pos.length() > 0.5:
 			attractors.append(Attractor.new(pos))
 
-func start_growth():
+func start_growth() -> void:
 	is_growing = true
 	growth_timer = 0.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# ✨ ALWAYS UPDATE QUEER TIMERS FOR FABULOUS EFFECTS! ✨
 	time_elapsed += delta
 	color_cycle_timer += delta * rainbow_speed
@@ -258,7 +258,7 @@ func grow_step() -> bool:
 	
 	return active_branches_found and new_branches.size() > 0
 
-func update_mesh_immediate():
+func update_mesh_immediate() -> void:
 	immediate_mesh.clear_surfaces()
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
@@ -312,14 +312,14 @@ func get_fabulous_color(branch: Branch) -> Color:
 	return hue_shifted
 
 # VR-specific functions
-func set_vr_start_point(position: Vector3):
+func set_vr_start_point(position: Vector3) -> void:
 	"""Set new starting point for VR interaction"""
 	clear_growth()
 	add_branch(position, Vector3.UP, -1, 0)
 	generate_attractors_around_point(position)
 	start_growth()
 
-func generate_attractors_around_point(center: Vector3, radius: float = 2.0):
+func generate_attractors_around_point(center: Vector3, radius: float = 2.0) -> void:
 	"""Generate attractors around a specific point for VR interaction"""
 	attractors.clear()
 	
@@ -336,22 +336,22 @@ func generate_attractors_around_point(center: Vector3, radius: float = 2.0):
 		
 		attractors.append(Attractor.new(center + offset))
 
-func add_attractor_at_position(position: Vector3):
+func add_attractor_at_position(position: Vector3) -> void:
 	"""Add single attractor at VR controller position"""
 	attractors.append(Attractor.new(position))
 
-func clear_growth():
+func clear_growth() -> void:
 	"""Reset the entire growth system"""
 	branches.clear()
 	attractors.clear()
 	is_growing = false
 	immediate_mesh.clear_surfaces()
 
-func pause_growth():
+func pause_growth() -> void:
 	"""Pause growth for VR menu interaction"""
 	is_growing = false
 
-func resume_growth():
+func resume_growth() -> void:
 	"""Resume growth after VR interaction"""
 	is_growing = true
 
@@ -377,7 +377,7 @@ func get_growth_stats() -> Dictionary:
 	}
 
 # Simplified cylinder rendering for VR (optional)
-func enable_cylinder_rendering(enable: bool = true):
+func enable_cylinder_rendering(enable: bool = true) -> void:
 	"""Enable/disable cylinder rendering - expensive for VR"""
 	if not enable:
 		return
@@ -422,7 +422,7 @@ func enable_cylinder_rendering(enable: bool = true):
 				break
 
 # 🌈 FABULOUS DEBUG FUNCTIONS! ✨
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
@@ -456,3 +456,9 @@ func _input(event):
 				# Toggle pride colors
 				enable_pride_colors = !enable_pride_colors
 				print("Pride colors: ", "FABULOUS 🌈" if enable_pride_colors else "Basic")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

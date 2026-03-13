@@ -54,13 +54,13 @@ var info_display: Label3D
 # Animation
 var sampling_tween: Tween
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	generate_population()
 	setup_displays()
 	update_info_display()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -83,7 +83,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func generate_population():
+func generate_population() -> void:
 	"""Generate population data based on selected distribution"""
 	population_data.clear()
 	var rng = RandomNumberGenerator.new()
@@ -119,7 +119,7 @@ func generate_population():
 		
 		population_data.append(value)
 
-func setup_displays():
+func setup_displays() -> void:
 	"""Create visual displays for population and samples"""
 	# Population display
 	population_display = Node3D.new()
@@ -144,7 +144,7 @@ func setup_displays():
 	info_display.modulate = Color.WHITE
 	add_child(info_display)
 
-func create_population_histogram():
+func create_population_histogram() -> void:
 	"""Create histogram of population distribution"""
 	# Clear existing
 	for child in population_display.get_children():
@@ -180,7 +180,7 @@ func create_population_histogram():
 	label.font_size = 20
 	population_display.add_child(label)
 
-func create_histogram_bar(parent: Node3D, x_pos: float, height: float, color: Color, name: String):
+func create_histogram_bar(parent: Node3D, x_pos: float, height: float, color: Color, name: String) -> void:
 	"""Create a single histogram bar"""
 	var bar = MeshInstance3D.new()
 	bar.name = name
@@ -197,14 +197,14 @@ func create_histogram_bar(parent: Node3D, x_pos: float, height: float, color: Co
 	bar.position = Vector3(x_pos, height/2, 0)
 	parent.add_child(bar)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		start_sampling_animation()
 	elif button_name == "grip_click":
 		change_population_type()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -214,7 +214,7 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			reset_sampling()
 
-func start_sampling_animation():
+func start_sampling_animation() -> void:
 	"""Start animated sampling process"""
 	if sampling_tween:
 		sampling_tween.kill()
@@ -234,7 +234,7 @@ func start_sampling_animation():
 	
 	sampling_tween.tween_callback(create_sample_means_histogram)
 
-func take_animated_sample(_sample_index: int):
+func take_animated_sample(_sample_index: int) -> void:
 	"""Take a single sample with animation"""
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -255,7 +255,7 @@ func take_animated_sample(_sample_index: int):
 	
 	update_info_display()
 
-func show_current_sample(sample: Array[float], mean_value: float):
+func show_current_sample(sample: Array[float], mean_value: float) -> void:
 	"""Visualize the current sample being taken"""
 	# Clear previous sample display
 	for child in sampling_display.get_children():
@@ -303,7 +303,7 @@ func show_current_sample(sample: Array[float], mean_value: float):
 	label.font_size = 18
 	sampling_display.add_child(label)
 
-func create_sample_means_histogram():
+func create_sample_means_histogram() -> void:
 	"""Create histogram of sample means (demonstrates CLT)"""
 	if sample_means.is_empty():
 		return
@@ -345,7 +345,7 @@ func create_sample_means_histogram():
 	label.font_size = 18
 	sample_means_display.add_child(label)
 
-func add_theoretical_normal_curve():
+func add_theoretical_normal_curve() -> void:
 	"""Add theoretical normal distribution curve for sample means"""
 	var pop_mean = calculate_mean(population_data)
 	var pop_variance = calculate_variance(population_data)
@@ -408,7 +408,7 @@ func normal_pdf(x: float, mu: float, sigma: float) -> float:
 	var exponent = -0.5 * pow((x - mu) / sigma, 2)
 	return coefficient * exp(exponent)
 
-func change_population_type():
+func change_population_type() -> void:
 	"""Cycle through different population distributions"""
 	var current_index = population_type as int
 	population_type = ((current_index + 1) % PopulationType.size()) as PopulationType
@@ -418,7 +418,7 @@ func change_population_type():
 	reset_sampling()
 	update_info_display()
 
-func reset_sampling():
+func reset_sampling() -> void:
 	"""Reset all sampling data"""
 	sample_means.clear()
 	current_samples.clear()
@@ -444,7 +444,7 @@ func get_distribution_name() -> String:
 		_:
 			return "Unknown"
 
-func update_info_display():
+func update_info_display() -> void:
 	"""Update information display"""
 	var text = "Central Limit Theorem Demo\n"
 	text += "Population: %s\n" % get_distribution_name()
@@ -481,3 +481,9 @@ func get_statistics_summary() -> Dictionary:
 		"sample_means_mean": calculate_mean(sample_means),
 		"sample_means_std": sqrt(calculate_variance(sample_means))
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

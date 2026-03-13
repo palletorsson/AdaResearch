@@ -8,11 +8,11 @@ extends Node3D
 var _walls: Array[SoftBody3D] = []
 var _time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	setup_room()
 
-func setup_scene():
+func setup_scene() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2, room_size.z/2.0 + 2)
 	cam.look_at(Vector3(0, 2, 0))
@@ -37,7 +37,7 @@ func setup_scene():
 	floor_body.add_child(fcol)
 	add_child(floor_body)
 
-func setup_room():
+func setup_room() -> void:
 	# Create 2 side walls as SoftBodies
 	# They need to be closed meshes (Boxes) to have pressure
 	
@@ -63,7 +63,7 @@ func setup_room():
 	ceiling.add_child(cmi)
 	add_child(ceiling)
 
-func create_breathing_wall(mesh: Mesh, pos: Vector3):
+func create_breathing_wall(mesh: Mesh, pos: Vector3) -> void:
 	var sb = SoftBody3D.new()
 	sb.mesh = mesh
 	sb.position = pos
@@ -92,7 +92,7 @@ func create_breathing_wall(mesh: Mesh, pos: Vector3):
 	# Or just pin top and bottom edges
 	call_deferred("_pin_wall_edges", sb)
 
-func _pin_wall_edges(sb: SoftBody3D):
+func _pin_wall_edges(sb: SoftBody3D) -> void:
 	if not is_instance_valid(sb): return
 	
 	var mdt = MeshDataTool.new()
@@ -118,7 +118,7 @@ func _pin_wall_edges(sb: SoftBody3D):
 	for idx in pinned_indices:
 		sb.set_point_pinned(idx, true, NodePath())
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * breath_speed
 	
 	# Oscillate pressure
@@ -127,3 +127,9 @@ func _process(delta):
 	
 	for sb in _walls:
 		sb.pressure_coefficient = p
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

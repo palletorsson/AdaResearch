@@ -32,7 +32,7 @@ var slime_material: StandardMaterial3D
 var tube_material: StandardMaterial3D
 var bubble_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	# Set up noise for organic deformation
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.seed = randi()
@@ -44,7 +44,7 @@ func _ready():
 	# Generate initial scene
 	generate_scene()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# Animate drips
@@ -56,7 +56,7 @@ func _process(delta):
 	# Slow continuous deformation of tubes
 	update_tubes(delta)
 
-func create_materials():
+func create_materials() -> void:
 	# Main slime material (pools)
 	slime_material = StandardMaterial3D.new()
 	slime_material.albedo_color = color_primary
@@ -96,7 +96,7 @@ func create_noise_texture() -> NoiseTexture2D:
 	texture.height = 512
 	return texture
 
-func generate_scene():
+func generate_scene() -> void:
 	clear_scene()
 	
 	# Generate pools at various positions
@@ -134,7 +134,7 @@ func generate_scene():
 	# Add bubbles
 	generate_bubbles()
 
-func generate_pool(position: Vector3):
+func generate_pool(position: Vector3) -> void:
 	var pool_size = randf_range(pool_size_min, pool_size_max)
 	
 	# Create base mesh for pool
@@ -186,7 +186,7 @@ func generate_pool(position: Vector3):
 	# Store reference
 	pools.append({"instance": pool_instance, "position": position, "size": pool_size})
 
-func connect_pools_with_tubes():
+func connect_pools_with_tubes() -> void:
 	# Create tubes that connect some pools
 	for i in range(pools.size()):
 		var start_pool = pools[i]
@@ -207,7 +207,7 @@ func connect_pools_with_tubes():
 				
 				generate_tube(start_pool, end_pool)
 
-func generate_tube(start_pool, end_pool):
+func generate_tube(start_pool, end_pool) -> void:
 	var start_pos = start_pool["position"]
 	var end_pos = end_pool["position"]
 	var start_radius = start_pool["size"] * 0.5
@@ -326,7 +326,7 @@ func create_tube_mesh(path: Curve3D, thickness: float) -> Mesh:
 	surface_tool.generate_normals()
 	return surface_tool.commit()
 
-func generate_drips():
+func generate_drips() -> void:
 	# Create drip effects hanging from pools and tubes
 	var drip_count = int(pool_count * drip_amount)
 	
@@ -359,7 +359,7 @@ func generate_drips():
 		
 		generate_drip(position)
 
-func generate_drip(position: Vector3):
+func generate_drip(position: Vector3) -> void:
 	var drip_length = randf_range(1.0, 3.0) * drip_amount
 	var drip_width = randf_range(0.2, 0.6)
 	
@@ -462,7 +462,7 @@ func create_drip_mesh(length: float, width: float) -> Mesh:
 	surface_tool.generate_normals()
 	return surface_tool.commit()
 
-func generate_bubbles():
+func generate_bubbles() -> void:
 	# Create bubbles inside pools and tubes
 	var bubble_count = int(15 * bubbles_amount)
 	
@@ -517,7 +517,7 @@ func generate_bubbles():
 			"source_index": randi() % pools.size() if source_type == "pool" else randi() % tubes.size()
 		})
 
-func update_drips(delta):
+func update_drips(delta) -> void:
 	for drip in drips:
 		drip["growth_factor"] += drip["growth_speed"] * delta
 		
@@ -549,7 +549,7 @@ func update_drips(delta):
 		var drip_mesh = create_drip_mesh(current_length, drip["width"])
 		drip["instance"].mesh = drip_mesh
 
-func update_bubbles(delta):
+func update_bubbles(delta) -> void:
 	for bubble in bubbles:
 		# Make bubbles rise and wobble
 		var old_pos = bubble["instance"].position
@@ -575,7 +575,7 @@ func update_bubbles(delta):
 			if old_pos.y > 5.0:
 				reset_bubble(bubble)
 
-func reset_bubble(bubble):
+func reset_bubble(bubble) -> void:
 	# Reset bubble to a new position
 	if randf() < 0.8 and pools.size() > 0:
 		var pool_index = randi() % pools.size()
@@ -612,13 +612,13 @@ func reset_bubble(bubble):
 	bubble_mesh.height = bubble["size"] * 2
 	bubble["instance"].mesh = bubble_mesh
 
-func update_tubes(_delta):
+func update_tubes(_delta) -> void:
 	for tube in tubes:
 		# Slowly deform tubes over time
 		var tube_mesh = create_tube_mesh(tube["path"], tube["thickness"])
 		tube["instance"].mesh = tube_mesh
 
-func clear_scene():
+func clear_scene() -> void:
 	# Clear existing elements
 	for child in get_children():
 		if child is MeshInstance3D:
@@ -629,8 +629,14 @@ func clear_scene():
 	drips = []
 	bubbles = []
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Regenerate scene
 			generate_scene()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

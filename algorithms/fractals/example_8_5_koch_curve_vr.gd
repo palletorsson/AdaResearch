@@ -115,3 +115,9 @@ func _create_line_segment(start: Vector3, end: Vector3) -> void:
 	mesh_instance.material_override = material
 
 	_sim_root.add_child(mesh_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -4,15 +4,15 @@ extends CharacterBody3D
 
 @export var percolation_network: Node3D
 
-func _ready():
+func _ready() -> void:
 	if not percolation_network:
 		percolation_network = get_parent().get_node("PercolationNetwork")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		debug_current_position()
 
-func debug_current_position():
+func debug_current_position() -> void:
 	var pos = global_position
 	var debug_info = percolation_network.debug_collision_at_position(pos)
 	

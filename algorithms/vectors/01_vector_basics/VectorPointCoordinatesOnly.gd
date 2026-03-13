@@ -82,3 +82,9 @@ func _clear_environment() -> void:
 	if info_root:
 		for child in info_root.get_children():
 			child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

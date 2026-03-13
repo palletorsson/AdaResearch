@@ -33,7 +33,7 @@ const ANCHORS = {
 var is_playing_sequence: bool = false
 var _time_elapsed: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Configure Mapper Range
 	mapper.output_x_min = DELTA_MIN
 	mapper.output_x_max = DELTA_MAX
@@ -53,7 +53,7 @@ func _ready():
 	# Start Background Loop
 	_start_ambient_loop()
 
-func apply_grid_config(data: Dictionary):
+func apply_grid_config(data: Dictionary) -> void:
 	# Support for grid-level overrides
 	if data.has("say"):
 		is_ambient_enabled = false
@@ -72,7 +72,7 @@ func apply_grid_config(data: Dictionary):
 		else:
 			await play_word(cleaned)
 
-func _start_ambient_loop():
+func _start_ambient_loop() -> void:
 	await get_tree().create_timer(1.0).timeout
 	while true:
 		if not is_inside_tree(): return
@@ -88,7 +88,7 @@ func _start_ambient_loop():
 		else:
 			await get_tree().create_timer(1.0).timeout
 
-func play_word(word: String, pitch: float = 130.0):
+func play_word(word: String, pitch: float = 130.0) -> void:
 	if is_playing_sequence: return
 	is_playing_sequence = true
 	label_word.text = word
@@ -111,7 +111,7 @@ func play_word(word: String, pitch: float = 130.0):
 
 # --- Speech Unit Implementations ---
 
-func _play_ada():
+func _play_ada() -> void:
 	_set_mapper_pos(ANCHORS["a"], 0.0)
 	await get_tree().create_timer(0.1).timeout
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
@@ -124,7 +124,7 @@ func _play_ada():
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 
-func _play_research():
+func _play_research() -> void:
 	_set_mapper_pos(ANCHORS["r"], 0.0)
 	_tween_mapper(ANCHORS["r"], 0.9, 0.1)
 	await get_tree().create_timer(0.2).timeout
@@ -141,7 +141,7 @@ func _play_research():
 	await get_tree().create_timer(0.1).timeout
 	synth.stop()
 
-func _play_iloveyou():
+func _play_iloveyou() -> void:
 	_set_mapper_pos(ANCHORS["a"], 0.0)
 	label_word.text = "I"
 	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
@@ -169,7 +169,7 @@ func _play_iloveyou():
 	await get_tree().create_timer(0.5).timeout
 	synth.stop()
 
-func _play_right_here_right_now():
+func _play_right_here_right_now() -> void:
 	await _play_right()
 	await get_tree().create_timer(0.2).timeout
 	await _play_here()
@@ -179,7 +179,7 @@ func _play_right_here_right_now():
 	await _play_now()
 	synth.stop()
 
-func _play_right():
+func _play_right() -> void:
 	_set_mapper_pos(ANCHORS["r"], 0.0)
 	_tween_mapper(ANCHORS["r"], 0.8, 0.1)
 	await get_tree().create_timer(0.15).timeout
@@ -191,7 +191,7 @@ func _play_right():
 	_tween_mapper(ANCHORS["i"], 0.0, 0.03) # FAST fade during closure
 	await get_tree().create_timer(0.2).timeout
 
-func _play_here():
+func _play_here() -> void:
 	synth.trigger_fricative("h", 100)
 	await get_tree().create_timer(0.05).timeout
 	_set_mapper_pos(ANCHORS["i"], 0.0)
@@ -203,7 +203,7 @@ func _play_here():
 	await get_tree().create_timer(0.2).timeout
 	_tween_mapper(ANCHORS["r"], 0.0, 0.1)
 
-func _play_now():
+func _play_now() -> void:
 	synth.trigger_nasal("n", 150)
 	await get_tree().create_timer(0.1).timeout
 	_set_mapper_pos(ANCHORS["a"], 0.0)
@@ -215,7 +215,7 @@ func _play_now():
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 
-func _play_funk():
+func _play_funk() -> void:
 	synth.trigger_fricative("f", 120)
 	await get_tree().create_timer(0.08).timeout
 	_set_mapper_pos(ANCHORS["a"], 0.0)
@@ -228,7 +228,7 @@ func _play_funk():
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 
-func _play_hello_world():
+func _play_hello_world() -> void:
 	synth.trigger_fricative("h", 100)
 	await get_tree().create_timer(0.05).timeout
 	_tween_mapper(ANCHORS["e"], 1.0, 0.2)
@@ -249,7 +249,7 @@ func _play_hello_world():
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 
-func _play_right_about_now():
+func _play_right_about_now() -> void:
 	await _play_right()
 	await get_tree().create_timer(0.1).timeout
 	await _play_about()
@@ -257,7 +257,7 @@ func _play_right_about_now():
 	await _play_now()
 	synth.stop()
 
-func _play_about():
+func _play_about() -> void:
 	_tween_mapper(ANCHORS["a"], 0.7, 0.1)
 	await get_tree().create_timer(0.1).timeout
 	synth.trigger_plosive("b")
@@ -268,7 +268,7 @@ func _play_about():
 	_tween_mapper(ANCHORS["u"], 0.0, 0.03) # FAST fade
 	await get_tree().create_timer(0.1).timeout
 
-func _play_soul_brother():
+func _play_soul_brother() -> void:
 	synth.trigger_fricative("s", 120)
 	await get_tree().create_timer(0.08).timeout
 	_tween_mapper(ANCHORS["o"], 1.0, 0.25)
@@ -292,7 +292,7 @@ func _play_soul_brother():
 	await get_tree().create_timer(0.1).timeout
 	synth.stop()
 
-func _play_check_it_out():
+func _play_check_it_out() -> void:
 	synth.trigger_affricate("ch")
 	await get_tree().create_timer(0.15).timeout
 	_set_mapper_pos(ANCHORS["e"], 1.0); await get_tree().create_timer(0.2).timeout
@@ -307,7 +307,7 @@ func _play_check_it_out():
 	await get_tree().create_timer(0.2).timeout
 	synth.stop()
 
-func _play_rockafeller():
+func _play_rockafeller() -> void:
 	await _play_right_about_now()
 	await get_tree().create_timer(0.2).timeout
 	var old_pitch = synth.pulse_hz
@@ -322,7 +322,7 @@ func _play_rockafeller():
 	await _play_now()
 	synth.stop()
 
-func _play_alphabet():
+func _play_alphabet() -> void:
 	# 1. Vowels
 	var vowels = ["i", "e", "a", "o", "u"]
 	for v in vowels:
@@ -362,16 +362,16 @@ func _play_alphabet():
 
 # --- Internal Core ---
 
-func _on_mapper_changed(delta_val: float, f1_val: float, intensity_val: float):
+func _on_mapper_changed(delta_val: float, f1_val: float, intensity_val: float) -> void:
 	synth.f1 = f1_val
 	synth.delta = delta_val
 	synth.target_intensity = intensity_val
 	synth.is_speaking = (intensity_val > 0.01)
 
-func _set_mapper_pos(target_field: Vector2, target_intensity: float):
+func _set_mapper_pos(target_field: Vector2, target_intensity: float) -> void:
 	mapper.set_values(target_field.y, target_field.x, target_intensity)
 
-func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float):
+func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float) -> void:
 	var tween = create_tween()
 	var start_val = mapper.get_values()
 	var update_lambda = func(val: float):
@@ -382,7 +382,7 @@ func _tween_mapper(target_field: Vector2, target_intensity: float, duration: flo
 	tween.tween_method(update_lambda, 0.0, 1.0, duration)
 	await tween.finished
 
-func _spawn_visual_anchors():
+func _spawn_visual_anchors() -> void:
 	# Simple coordinate labels in the graph
 	for vowel in ANCHORS:
 		var coords = ANCHORS[vowel]
@@ -397,3 +397,9 @@ func _spawn_visual_anchors():
 		viz.position = pos + Vector3(0.05, -0.05, 0)
 		viz.scale = Vector3.ONE * 0.08
 		mapper.add_child(viz)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

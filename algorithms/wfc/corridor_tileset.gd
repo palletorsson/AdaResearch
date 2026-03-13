@@ -5,7 +5,7 @@ extends Node3D
 
 @onready var wfc_grid = $WFCGrid3D
 
-func _ready():
+func _ready() -> void:
 	# Clear default tiles
 	wfc_grid.tile_types.clear()
 	wfc_grid.solver.tile_types.clear()
@@ -18,7 +18,7 @@ func _ready():
 	print("Press SPACE to generate")
 	print("================================")
 
-func create_corridor_tiles():
+func create_corridor_tiles() -> void:
 	"""Create a 6-tile corridor system with doorways"""
 
 	# Define which tiles can connect to which
@@ -114,7 +114,7 @@ func create_corridor_tiles():
 
 	print("Created tiles: corridor_1 through corridor_5, terminal, wall, floor, empty")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -127,9 +127,9 @@ func _input(event):
 				wfc_grid.animate_generation = not wfc_grid.animate_generation
 				print("Animation: ", "ON" if wfc_grid.animate_generation else "OFF")
 
-func _on_generation_started():
+func _on_generation_started() -> void:
 	print("Generation started...")
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	print("Generation complete!")
 	print("Total tiles placed: ", wfc_grid.tile_nodes.size())

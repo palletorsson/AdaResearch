@@ -495,7 +495,7 @@ func create_navigation_tile(grid_pos: Vector2i, tile_triangles: Array, parent_no
 	parent_node.add_child(nav_area)
 	return nav_area
 
-func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: Node3D):
+func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: Node3D) -> void:
 	"""Create visual markers for VR teleportation targets"""
 	print("CaveCollisionGenerator: Creating VR teleport markers...")
 	
@@ -602,4 +602,10 @@ func is_position_walkable(position: Vector3) -> bool:
 		var collider = result.collider
 		return collider.has_meta("vr_walkable")
 	
-	return false 
+	return false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

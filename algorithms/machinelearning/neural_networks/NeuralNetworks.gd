@@ -314,3 +314,9 @@ func _total_neurons() -> int:
 	for count in layer_sizes:
 		total += count
 	return total
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

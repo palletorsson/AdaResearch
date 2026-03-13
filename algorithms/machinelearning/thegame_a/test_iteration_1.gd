@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 1: L-System Logic Test ---")
 	
 	# Test Case 1: Algae (Lindenmayer's original)

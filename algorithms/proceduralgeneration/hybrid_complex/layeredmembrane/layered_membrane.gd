@@ -24,7 +24,7 @@ extends Node3D
 var noise = FastNoiseLite.new()
 var membrane_container
 
-func _ready():
+func _ready() -> void:
 	# Set up noise generator
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.seed = randi()
@@ -43,7 +43,7 @@ func _ready():
 	
 
 
-func generate_layered_membrane():
+func generate_layered_membrane() -> void:
 	# Create multiple layers of membranes
 	for i in range(num_layers):
 		var layer_progress = float(i) / num_layers
@@ -171,7 +171,7 @@ func create_membrane_material(layer_progress):
 	
 	return material
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create camera
 	var camera = Camera3D.new()
 	camera.name = "Camera"
@@ -205,7 +205,7 @@ func setup_environment():
 	world_environment.environment = environment
 	add_child(world_environment)
 
-func create_rotation_animation():
+func create_rotation_animation() -> void:
 	# Create animation player
 	var animation_player = AnimationPlayer.new()
 	add_child(animation_player)
@@ -229,7 +229,7 @@ func create_rotation_animation():
 	animation_player.play("rotate")
 
 # Regenerate the membrane with a new random seed
-func regenerate():
+func regenerate() -> void:
 	# Remove existing membrane
 	if membrane_container:
 		membrane_container.queue_free()
@@ -249,7 +249,13 @@ func regenerate():
 	create_rotation_animation()
 
 # Handle input for regeneration
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			regenerate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

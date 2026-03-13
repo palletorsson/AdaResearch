@@ -5,7 +5,7 @@ extends Node
 
 var _tweens: Array = []
 
-func setup_organic_lighting(container: Node3D, space_size: Vector3):
+func setup_organic_lighting(container: Node3D, space_size: Vector3) -> void:
 	"""Create atmospheric lighting for the organic space"""
 
 	# Kill any existing tweens to prevent accumulation on regenerate
@@ -52,7 +52,7 @@ func setup_organic_lighting(container: Node3D, space_size: Vector3):
 		tween.tween_property(accent_light, "light_energy", 0.2, 2.0 + i * 0.5)
 		_tweens.append(tween)
 
-func _exit_tree():
+func _exit_tree() -> void:
 	for t in _tweens:
 		if t and t.is_valid():
 			t.kill()

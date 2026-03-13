@@ -10,10 +10,10 @@ class_name CollisionObject
 var velocity: Vector3
 var object_size: Vector3 = Vector3(0.5, 0.5, 0.5)
 
-func _ready():
+func _ready() -> void:
 	_create_object_mesh()
 
-func _create_object_mesh():
+func _create_object_mesh() -> void:
 	var mesh: CSGShape3D
 	
 	match object_type:
@@ -37,11 +37,11 @@ func _create_object_mesh():
 	
 	add_child(mesh)
 
-func initialize():
+func initialize() -> void:
 	position = initial_position
 	velocity = initial_velocity
 
-func update_physics(delta: float):
+func update_physics(delta: float) -> void:
 	# Simple physics update
 	position += velocity * delta
 	
@@ -67,6 +67,12 @@ func update_physics(delta: float):
 func get_size() -> Vector3:
 	return object_size
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	position = initial_position
 	velocity = initial_velocity
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

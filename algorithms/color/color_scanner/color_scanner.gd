@@ -53,7 +53,7 @@ func _log(a = null, b = null, c = null, d = null, e = null, f = null, g = null, 
 	print(" ".join(parts))
 
 
-func _ready():
+func _ready() -> void:
 	_log("=== UV TEXTURE PIXEL SCANNER STARTING ===")
 	setup_components()
 	setup_optical_scanner()
@@ -63,7 +63,7 @@ func _ready():
 	_log("UV texture pixel scanner ready!")
 	update_display_screen(Color.BLACK, false)
 
-func setup_components():
+func setup_components() -> void:
 	"""Setup scanner components"""
 	
 	# RayCast3D
@@ -103,7 +103,7 @@ func setup_components():
 	else:
 		_log("Warning: Display Screen not found for Label attachment")
 
-func setup_display_screen():
+func setup_display_screen() -> void:
 	"""Setup display screen"""
 	
 	if not display_screen:
@@ -121,7 +121,7 @@ func setup_display_screen():
 	screen_material.albedo_color = screen_off_color
 	screen_material.emission = screen_off_color
 
-func setup_visual_ray():
+func setup_visual_ray() -> void:
 	"""Create visual ray"""
 	
 	if not show_ray:
@@ -145,7 +145,7 @@ func setup_visual_ray():
 	ray_material.albedo_color = ray_color_scanning
 	visual_ray.set_surface_override_material(0, ray_material)
 
-func setup_raycast():
+func setup_raycast() -> void:
 	"""Setup RayCast3D"""
 	
 	raycast.enabled = true
@@ -154,7 +154,7 @@ func setup_raycast():
 	raycast.collide_with_bodies = true
 	raycast.collide_with_areas = true
 
-func _process(delta):
+func _process(delta: float) -> void:
 	scan_timer += delta
 	
 	# Update Scan Camera to match RayCast/Scanner direction
@@ -166,7 +166,7 @@ func _process(delta):
 		perform_uv_texture_scan()
 		scan_timer = 0.0
 
-func perform_uv_texture_scan():
+func perform_uv_texture_scan() -> void:
 	"""Perform UV-based texture pixel sampling"""
 	
 	if not raycast:
@@ -268,7 +268,7 @@ func scan_actual_color() -> Color:
 		return img.get_pixel(1, 1)
 	return Color.BLACK
 
-func setup_optical_scanner():
+func setup_optical_scanner() -> void:
 	# Create a tiny viewport for fetching render data
 	scan_viewport = SubViewport.new()
 	scan_viewport.size = Vector2i(2, 2) # Very small for performance
@@ -635,7 +635,7 @@ func fallback_material_color(mesh_instance: MeshInstance3D) -> Color:
 	
 	return Color.BLACK
 
-func update_ray_for_hit(distance: float):
+func update_ray_for_hit(distance: float) -> void:
 	"""Update ray for hit"""
 	
 	if not visual_ray or not ray_material:
@@ -649,7 +649,7 @@ func update_ray_for_hit(distance: float):
 	ray_material.emission = ray_color_hit
 	ray_material.albedo_color = ray_color_hit
 
-func update_ray_for_miss():
+func update_ray_for_miss() -> void:
 	"""Update ray for miss"""
 	
 	if not visual_ray or not ray_material:
@@ -663,7 +663,7 @@ func update_ray_for_miss():
 	ray_material.emission = ray_color_scanning
 	ray_material.albedo_color = ray_color_scanning
 
-func update_display_hit(_hit_object: Node, distance: float):
+func update_display_hit(_hit_object: Node, distance: float) -> void:
 	"""Update display for hits"""
 	
 	if not color_data_label:
@@ -683,7 +683,7 @@ func update_display_hit(_hit_object: Node, distance: float):
 		display_color = display_color.lightened(0.5)
 	color_data_label.modulate = display_color
 
-func update_display_miss():
+func update_display_miss() -> void:
 	"""Update display for misses"""
 	
 	if not color_data_label:
@@ -693,7 +693,7 @@ func update_display_miss():
 	color_data_label.text = "---" 
 	color_data_label.modulate = Color.WHITE
 
-func update_display_screen(color: Color, is_active: bool):
+func update_display_screen(color: Color, is_active: bool) -> void:
 	"""Update display screen"""
 	
 	if not enable_screen_updates or not display_screen or not screen_material:
@@ -719,13 +719,13 @@ func get_texture_data() -> Dictionary:
 	"""Get detailed texture sampling data"""
 	return last_texture_data
 
-func toggle_uv_debug():
+func toggle_uv_debug() -> void:
 	"""Toggle UV calculation debug output"""
 	uv_debug = not uv_debug
 	texture_debug = not texture_debug
 	_log("UV/Texture debug: ", "enabled" if uv_debug else "disabled")
 
-func test_uv_calculation():
+func test_uv_calculation() -> void:
 	"""Test UV calculation with current hit"""
 	_log("=== UV CALCULATION TEST ===")
 	if raycast and raycast.is_colliding():
@@ -741,4 +741,9 @@ func test_uv_calculation():
 			_log("No mesh instance found for UV test")
 	else:
 		_log("No current hit to test UV calculation")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

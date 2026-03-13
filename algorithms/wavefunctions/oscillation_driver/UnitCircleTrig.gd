@@ -31,10 +31,10 @@ var angle: float = 0.0
 var sine_points: Array[Vector3] = []
 var cosine_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	# Sine Trail (Red)
 	sine_mesh = ImmediateMesh.new()
 	sine_trail.mesh = sine_mesh
@@ -62,7 +62,7 @@ func _setup_visuals():
 	connection_lines.material_override = mat_lines
 	connection_lines.mesh = ImmediateMesh.new()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	angle += rotation_speed * delta
 	
@@ -96,7 +96,7 @@ func _process(delta):
 	# --- VISUALIZATION LINES ---
 	_draw_connections()
 
-func _update_trail_points(points: Array[Vector3], delta: float):
+func _update_trail_points(points: Array[Vector3], delta: float) -> void:
 	# Move points along Z (Time)
 	for i in range(points.size()):
 		points[i].z -= time_speed * delta
@@ -104,7 +104,7 @@ func _update_trail_points(points: Array[Vector3], delta: float):
 	if points.size() > max_trail_length:
 		points.pop_back()
 
-func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]):
+func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]) -> void:
 	mesh.clear_surfaces()
 	if points.is_empty(): return
 	
@@ -113,7 +113,7 @@ func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]):
 		mesh.surface_add_vertex(p)
 	mesh.surface_end()
 
-func _draw_connections():
+func _draw_connections() -> void:
 	var mesh = connection_lines.mesh as ImmediateMesh
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)

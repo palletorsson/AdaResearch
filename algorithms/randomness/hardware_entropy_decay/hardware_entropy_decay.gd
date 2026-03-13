@@ -625,3 +625,9 @@ func _physics_process(delta: float) -> void:
 		mesh.rotation.y = _spin_time * speed
 		# Gentle bob
 		mesh.position.y = pedestal_height + 0.5 + sin(_spin_time * 0.5 + i * 1.2) * 0.03
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

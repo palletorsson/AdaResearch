@@ -4,11 +4,11 @@ var grid: FlowGrid
 var speed: float = 8.0
 var steers_force: float = 20.0
 
-func initialize(g: FlowGrid, start_pos: Vector3):
+func initialize(g: FlowGrid, start_pos: Vector3) -> void:
 	grid = g
 	position = start_pos
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# 1. Bounds Check (Force Return if off-map)
 	# Grid is roughly -20 to +20. If outside, turn back.
 	if position.length() > 22.0: 

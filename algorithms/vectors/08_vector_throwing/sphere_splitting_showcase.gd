@@ -264,3 +264,9 @@ func _update_dynamic_piece_counts() -> void:
 
 		if sphere_name != "":
 			_update_sphere_label(sphere_name)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

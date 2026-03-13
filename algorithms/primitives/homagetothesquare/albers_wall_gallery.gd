@@ -274,3 +274,9 @@ func _make_solid_material(color: Color, roughness: float) -> StandardMaterial3D:
 	mat.roughness = roughness
 	mat.metallic = 0.0
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

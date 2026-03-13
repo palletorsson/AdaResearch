@@ -7,10 +7,10 @@ var current_force: Vector3 = Vector3.ZERO
 var density: float = 0.0
 var mass: float = 1.0
 
-func _ready():
+func _ready() -> void:
 	_create_particle_mesh()
 
-func _create_particle_mesh():
+func _create_particle_mesh() -> void:
 	# Create the fluid particle sphere
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.15
@@ -24,10 +24,10 @@ func _create_particle_mesh():
 	sphere.material = material
 	add_child(sphere)
 
-func apply_force(force: Vector3):
+func apply_force(force: Vector3) -> void:
 	current_force += force
 
-func update_physics(delta: float, gravity: Vector3):
+func update_physics(delta: float, gravity: Vector3) -> void:
 	# Apply gravity
 	current_force += gravity * mass
 	
@@ -46,7 +46,7 @@ func update_physics(delta: float, gravity: Vector3):
 	# Update particle appearance based on density
 	_update_appearance()
 
-func _update_appearance():
+func _update_appearance() -> void:
 	# Change particle size and color based on density
 	var sphere = get_child(0) as CSGSphere3D
 	var material = sphere.material as StandardMaterial3D
@@ -67,3 +67,9 @@ func _update_appearance():
 	
 	material.albedo_color = color
 	material.emission = color * 0.3
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

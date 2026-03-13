@@ -20,16 +20,16 @@ class PenroseTile:
 	var visual_object: CSGMesh3D
 	var level: int
 	
-	func _init(tile_type: TileType, tile_vertices: Array, tile_level: int = 0):
+	func _init(tile_type: TileType, tile_vertices: Array, tile_level: int = 0) -> void:
 		type = tile_type
 		vertices = tile_vertices
 		level = tile_level
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_penrose_tiling()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Iteration control material
 	var iter_material = StandardMaterial3D.new()
 	iter_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
@@ -44,7 +44,7 @@ func setup_materials():
 	count_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$TileCount.material_override = count_material
 
-func initialize_penrose_tiling():
+func initialize_penrose_tiling() -> void:
 	# Start with initial sun pattern
 	tiles.clear()
 	clear_visual_tiles()
@@ -68,7 +68,7 @@ func initialize_penrose_tiling():
 	current_iteration = 0
 	update_visual_representation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	iteration_timer += delta
 	
@@ -85,7 +85,7 @@ func _process(delta):
 	animate_penrose_tiling()
 	animate_indicators()
 
-func subdivide_tiles():
+func subdivide_tiles() -> void:
 	var new_tiles = []
 	
 	for tile in tiles:
@@ -147,17 +147,17 @@ func subdivide_dart(dart: PenroseTile) -> Array:
 	
 	return [new_kite, new_dart]
 
-func clear_visual_tiles():
+func clear_visual_tiles() -> void:
 	for child in $PenroseTiles.get_children():
 		child.queue_free()
 
-func update_visual_representation():
+func update_visual_representation() -> void:
 	clear_visual_tiles()
 	
 	for tile in tiles:
 		create_visual_tile(tile)
 
-func create_visual_tile(tile: PenroseTile):
+func create_visual_tile(tile: PenroseTile) -> void:
 	var vertices = tile.vertices
 	if vertices.size() < 3:
 		return
@@ -226,7 +226,7 @@ func create_visual_tile(tile: PenroseTile):
 	
 	$PenroseTiles.add_child(tile_mesh)
 
-func animate_penrose_tiling():
+func animate_penrose_tiling() -> void:
 	# Animate tiles with subtle effects
 	for i in range($PenroseTiles.get_child_count()):
 		var tile_visual = $PenroseTiles.get_child(i)
@@ -238,7 +238,7 @@ func animate_penrose_tiling():
 		# Subtle rotation
 		tile_visual.rotation_degrees.z += 5.0 * get_process_delta_time()
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Iteration control
 	var iter_height = (current_iteration + 1) * 0.4 + 0.5
 	$IterationControl.height = iter_height
@@ -285,3 +285,9 @@ func get_tiling_info() -> Dictionary:
 		"darts": dart_count,
 		"golden_ratio": golden_ratio
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

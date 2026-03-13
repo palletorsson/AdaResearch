@@ -58,7 +58,7 @@ class GraphNode3D:
 	var stress_level: float = 0.0
 	var degree: int = 0
 	
-	func _init(node_id: int, pos: Vector3):
+	func _init(node_id: int, pos: Vector3) -> void:
 		id = node_id
 		position = pos
 		velocity = Vector3.ZERO
@@ -73,7 +73,7 @@ class GraphEdge3D:
 	var visual_object: Node3D
 	var force_line: Node3D
 	
-	func _init(from: int, to: int, length: float = 8.0, k: float = 0.1):
+	func _init(from: int, to: int, length: float = 8.0, k: float = 0.1) -> void:
 		from_id = from
 		to_id = to
 		rest_length = length
@@ -114,7 +114,7 @@ var controller_positions: Dictionary = {}
 var spatial_hash: Dictionary = {}
 var hash_cell_size: float = 10.0
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -124,14 +124,14 @@ func _ready():
 	if auto_run:
 		start_simulation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_running:
 		simulation_step(delta)
 		update_visualization()
 		update_ui_stats()
 		check_convergence()
 
-func setup_environment():
+func setup_environment() -> void:
 	"""Setup lighting and environment for 3D visualization"""
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
@@ -160,7 +160,7 @@ func setup_environment():
 	accent_light.omni_range = 40.0
 	add_child(accent_light)
 
-func setup_containers():
+func setup_containers() -> void:
 	"""Create containers for different visual elements"""
 	nodes_container = Node3D.new()
 	nodes_container.name = "NodesContainer"
@@ -174,7 +174,7 @@ func setup_containers():
 	forces_container.name = "ForcesContainer"
 	add_child(forces_container)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create UI overlay for statistics and controls"""
 	ui_container = CanvasLayer.new()
 	ui_container.name = "UIContainer"
@@ -197,7 +197,7 @@ func setup_ui():
 		label.text = ""
 		stats_vbox.add_child(label)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	"""Initialize the 3D graph structure"""
 	nodes.clear()
 	edges.clear()
@@ -263,7 +263,7 @@ func get_initial_position(node_id: int) -> Vector3:
 		_:
 			return Vector3.ZERO
 
-func create_edge(from_id: int, to_id: int):
+func create_edge(from_id: int, to_id: int) -> void:
 	"""Create an edge between two nodes"""
 	var distance = nodes[from_id].position.distance_to(nodes[to_id].position)
 	var edge = GraphEdge3D.new(from_id, to_id, distance, spring_constant)
@@ -273,7 +273,7 @@ func create_edge(from_id: int, to_id: int):
 	adjacency_list[from_id].append(to_id)
 	adjacency_list[to_id].append(from_id)
 
-func ensure_connectivity():
+func ensure_connectivity() -> void:
 	"""Ensure the graph is connected using minimum spanning tree approach"""
 	var connected = [0]  # Start with node 0
 	var unconnected = []
@@ -300,19 +300,19 @@ func ensure_connectivity():
 			connected.append(best_unconnected)
 			unconnected.erase(best_unconnected)
 
-func calculate_node_degrees():
+func calculate_node_degrees() -> void:
 	"""Calculate degree for each node"""
 	for node in nodes:
 		node.degree = adjacency_list[node.id].size()
 
-func create_visualization():
+func create_visualization() -> void:
 	"""Create 3D visual representations using MultiMesh for performance"""
 	create_node_visuals()
 	create_edge_visuals()
 	if show_forces:
 		create_force_visuals()
 
-func create_node_visuals():
+func create_node_visuals() -> void:
 	"""Create batched node spheres via MultiMesh + separate Label3D per node"""
 	var sphere_mesh := SphereMesh.new()
 	sphere_mesh.radius = 0.5
@@ -354,7 +354,7 @@ func create_node_visuals():
 		nodes_container.add_child(label)
 		_node_labels.append(label)
 
-func create_edge_visuals():
+func create_edge_visuals() -> void:
 	"""Create batched edge cylinders via MultiMesh"""
 	if not show_edges or edges.is_empty():
 		return
@@ -405,7 +405,7 @@ func _compute_edge_transform(from_pos: Vector3, to_pos: Vector3) -> Transform3D:
 	var basis := Basis(right, dir * dist, up)
 	return Transform3D(basis, mid)
 
-func create_force_visuals():
+func create_force_visuals() -> void:
 	"""Create batched force arrows via two MultiMesh (shafts + heads)"""
 	# Shaft — unit cylinder
 	var shaft_cyl := CylinderMesh.new()
@@ -450,19 +450,19 @@ func create_force_visuals():
 		shaft_mm.set_instance_transform(i, hidden)
 		head_mm.set_instance_transform(i, hidden)
 
-func start_simulation():
+func start_simulation() -> void:
 	"""Start the force-directed layout simulation"""
 	is_running = true
 	current_iteration = 0
 	temperature = 1.0
 	print("Starting 3D force-directed layout simulation")
 
-func stop_simulation():
+func stop_simulation() -> void:
 	"""Stop the simulation"""
 	is_running = false
 	print("Simulation stopped at iteration ", current_iteration)
 
-func simulation_step(delta: float):
+func simulation_step(delta: float) -> void:
 	"""Perform one step of the physics simulation"""
 	if current_iteration >= max_iterations:
 		stop_simulation()
@@ -493,7 +493,7 @@ func simulation_step(delta: float):
 	
 	current_iteration += 1
 
-func calculate_repulsion_forces():
+func calculate_repulsion_forces() -> void:
 	"""Calculate repulsion forces between all node pairs"""
 	for i in range(nodes.size()):
 		for j in range(i + 1, nodes.size()):
@@ -519,7 +519,7 @@ func calculate_repulsion_forces():
 			if not node2.is_fixed:
 				node2.force -= force / node2.mass
 
-func calculate_spring_forces():
+func calculate_spring_forces() -> void:
 	"""Calculate spring forces along edges"""
 	for edge in edges:
 		var node1 = nodes[edge.from_id]
@@ -542,13 +542,13 @@ func calculate_spring_forces():
 		if not node2.is_fixed:
 			node2.force -= force / node2.mass
 
-func apply_gravity():
+func apply_gravity() -> void:
 	"""Apply gravitational force"""
 	for node in nodes:
 		if not node.is_fixed:
 			node.force.y -= gravity_strength
 
-func integrate_motion(delta: float):
+func integrate_motion(delta: float) -> void:
 	"""Integrate forces to update positions and velocities"""
 	total_energy = 0.0
 	kinetic_energy = 0.0
@@ -581,7 +581,7 @@ func integrate_motion(delta: float):
 	
 	total_energy = kinetic_energy + potential_energy
 
-func apply_bounds_constraints(node: GraphNode3D):
+func apply_bounds_constraints(node: GraphNode3D) -> void:
 	"""Keep nodes within the layout bounds"""
 	# Soft bounds with spring-like force
 	var bounds_force = Vector3.ZERO
@@ -595,7 +595,7 @@ func apply_bounds_constraints(node: GraphNode3D):
 	
 	node.force += bounds_force
 
-func update_spatial_hash():
+func update_spatial_hash() -> void:
 	"""Update spatial hash for performance optimization"""
 	spatial_hash.clear()
 	
@@ -613,14 +613,14 @@ func get_spatial_hash_key(position: Vector3) -> Vector3i:
 		int(position.z / hash_cell_size)
 	)
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update visual elements based on current positions"""
 	update_node_visuals()
 	update_edge_visuals()
 	if show_forces:
 		update_force_visuals()
 
-func update_node_visuals():
+func update_node_visuals() -> void:
 	"""Update node positions and colors via MultiMesh"""
 	if not _node_multimesh_instance:
 		return
@@ -643,13 +643,13 @@ func update_node_visuals():
 		if show_node_trails:
 			update_node_trail(node)
 
-func update_node_trail(node: GraphNode3D):
+func update_node_trail(node: GraphNode3D) -> void:
 	"""Update particle trail for a node"""
 	node.trail_points.append(node.position)
 	if node.trail_points.size() > node_trail_length:
 		node.trail_points = node.trail_points.slice(1)
 
-func update_edge_visuals():
+func update_edge_visuals() -> void:
 	"""Update edge transforms via MultiMesh"""
 	if not show_edges or not _edge_multimesh_instance:
 		return
@@ -659,7 +659,7 @@ func update_edge_visuals():
 		var t := _compute_edge_transform(nodes[edge.from_id].position, nodes[edge.to_id].position)
 		mm.set_instance_transform(i, t)
 
-func update_force_visuals():
+func update_force_visuals() -> void:
 	"""Update force arrow transforms via MultiMesh"""
 	if not _force_shaft_multimesh_instance or not _force_head_multimesh_instance:
 		return
@@ -687,7 +687,7 @@ func update_force_visuals():
 			shaft_mm.set_instance_transform(i, hidden)
 			head_mm.set_instance_transform(i, hidden)
 
-func check_convergence():
+func check_convergence() -> void:
 	"""Check if the simulation has converged"""
 	if current_iteration < 10:  # Skip early iterations
 		return
@@ -702,7 +702,7 @@ func check_convergence():
 		stop_simulation()
 		print("Simulation converged at iteration ", current_iteration)
 
-func update_ui_stats():
+func update_ui_stats() -> void:
 	"""Update UI statistics display"""
 	if not ui_container:
 		return
@@ -727,7 +727,7 @@ func update_ui_stats():
 		labels[10].text = "Controls: SPACE-Start/Stop, R-Reset"
 		labels[11].text = "F-Toggle Forces, E-Toggle Edges"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input for simulation control"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -749,7 +749,7 @@ func _input(event):
 			KEY_S:
 				stress_color_mapping = not stress_color_mapping
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset the simulation to initial state"""
 	stop_simulation()
 
@@ -797,7 +797,7 @@ func grab_node(controller_id: int, world_position: Vector3) -> bool:
 	
 	return false
 
-func release_node(controller_id: int):
+func release_node(controller_id: int) -> void:
 	"""Release a grabbed node"""
 	if controller_id in grabbed_nodes:
 		var node_id = grabbed_nodes[controller_id]
@@ -805,7 +805,7 @@ func release_node(controller_id: int):
 		nodes[node_id].mass /= grabbed_node_mass_multiplier
 		grabbed_nodes.erase(controller_id)
 
-func update_grabbed_nodes():
+func update_grabbed_nodes() -> void:
 	"""Update positions of grabbed nodes"""
 	for controller_id in grabbed_nodes:
 		if controller_id in controller_positions:
@@ -841,3 +841,9 @@ func get_simulation_info() -> Dictionary:
 			"gravity_strength": gravity_strength
 		}
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

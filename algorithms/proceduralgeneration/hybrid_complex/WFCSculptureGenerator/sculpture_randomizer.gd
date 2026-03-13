@@ -11,16 +11,16 @@ var current_sculpture : WFCSculptureGenerator = null
 var generation_history : Array[Dictionary] = []
 var beautiful_finds : Array[Dictionary] = []
 
-func _generate(value):
+func _generate(value) -> void:
 	if value:
 		generate_random_sculpture()
 
-func _ready():
+func _ready() -> void:
 	print("🎲 Sculpture Randomizer Ready")
 	print("Press Space to generate random sculptures")
 	print("Press S to save current sculpture as 'beautiful'")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space
 		generate_random_sculpture()
 	elif event.is_action_pressed("ui_cancel"):  # Escape
@@ -28,7 +28,7 @@ func _input(event):
 	elif event.is_pressed() and event.keycode == KEY_S:
 		mark_as_beautiful()
 
-func generate_random_sculpture():
+func generate_random_sculpture() -> void:
 	clear_current()
 	
 	# Random parameters
@@ -104,12 +104,12 @@ func generate_random_parameters() -> Dictionary:
 	
 	return params
 
-func clear_current():
+func clear_current() -> void:
 	if current_sculpture:
 		current_sculpture.queue_free()
 		current_sculpture = null
 
-func mark_as_beautiful():
+func mark_as_beautiful() -> void:
 	if current_sculpture and generation_history.size() > 0:
 		var params = generation_history[generation_history.size() - 1]
 		params["marked_beautiful"] = true
@@ -124,7 +124,7 @@ func mark_as_beautiful():
 	else:
 		print("⚠️  No sculpture to mark")
 
-func export_beautiful_sculptures():
+func export_beautiful_sculptures() -> void:
 	if beautiful_finds.is_empty():
 		return
 	
@@ -145,7 +145,7 @@ func export_beautiful_sculptures():
 func get_beautiful_json() -> String:
 	return JSON.stringify(beautiful_finds, "\t")
 
-func print_statistics():
+func print_statistics() -> void:
 	if generation_history.is_empty():
 		print("No sculptures generated yet")
 		return
@@ -186,4 +186,9 @@ func print_statistics():
 		print("  Organic: %.2f" % avg_organic)
 	
 	print("📊 ============================== 📊\n")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

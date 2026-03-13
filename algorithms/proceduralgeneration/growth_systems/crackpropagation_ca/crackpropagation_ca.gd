@@ -43,7 +43,7 @@ const N8 := [
 	Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)
 ]
 
-func _ready():
+func _ready() -> void:
 	if SEED == 0: 
 		randomize() 
 	else: 
@@ -402,3 +402,9 @@ func get_stress_at(world_pos: Vector3) -> float:
 	if _in_bounds(gx, gz):
 		return stress_grid[gx][gz]
 	return 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

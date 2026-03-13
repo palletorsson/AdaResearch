@@ -2,14 +2,14 @@
 ## Shows different particle behaviors: fountain, fire, sparks, snow
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_fountain(Vector3(-2, 0, -1))
 	_create_fire(Vector3(2, 0, -1))
 	_create_sparks(Vector3(-2, 0, 2))
 	_create_snow(Vector3(2, 0, 2))
 
-func _create_fountain(pos: Vector3):
+func _create_fountain(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Fountain"
 	particles.amount = 200
@@ -35,7 +35,7 @@ func _create_fountain(pos: Vector3):
 
 	add_child(particles)
 
-func _create_fire(pos: Vector3):
+func _create_fire(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Fire"
 	particles.amount = 150
@@ -71,7 +71,7 @@ func _create_fire(pos: Vector3):
 
 	add_child(particles)
 
-func _create_sparks(pos: Vector3):
+func _create_sparks(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Sparks"
 	particles.amount = 80
@@ -95,7 +95,7 @@ func _create_sparks(pos: Vector3):
 
 	add_child(particles)
 
-func _create_snow(pos: Vector3):
+func _create_snow(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Snow"
 	particles.amount = 100
@@ -123,3 +123,9 @@ func _create_snow(pos: Vector3):
 	particles.draw_pass_1.height = 0.06
 
 	add_child(particles)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -2,10 +2,10 @@ extends Node3D
 
 # Single cube with index label [0]
 
-func _ready():
+func _ready() -> void:
 	create_single_cube()
 
-func create_single_cube():
+func create_single_cube() -> void:
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	var cube_instance = pickup_cube_scene.instantiate()
 	cube_instance.name = "Cube_Single"
@@ -22,3 +22,9 @@ func create_single_cube():
 	cube_instance.add_child(label)
 	
 	add_child(cube_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

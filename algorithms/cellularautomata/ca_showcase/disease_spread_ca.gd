@@ -6,7 +6,7 @@ const INFECTION_RATE = 0.2
 const RECOVERY_RATE = 0.1
 const INITIAL_INFECTED = 5
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure PulsingCA settings
 	pulse_speed = 3.0
 	pulse_amount = 0.2
@@ -30,11 +30,11 @@ func initialize_grid():
 		var z = randi() % GRID_SIZE
 		grid[x][y][z] = 1  # Infected
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	spread_disease()
 	update_visualization()
 
-func spread_disease():
+func spread_disease() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -64,7 +64,7 @@ func count_infected_neighbors(pos: Vector3i) -> int:
 			count += 1
 	return count
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -115,7 +115,7 @@ func get_disease_counts() -> Dictionary:
 	
 	return {"susceptible": susceptible, "infected": infected, "recovered": recovered}
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0

@@ -13,7 +13,7 @@ var sequence_mode: int = 0
 const DURATION = 10.0
 var current_target = Vector2i(20, 20)
 
-func _ready():
+func _ready() -> void:
 	_xr_active = XRServer.primary_interface != null
 
 	# 1. Setup Grid
@@ -28,7 +28,7 @@ func _ready():
 	# 4. Start Sequence
 	set_scenario(0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate Noise (if in final mode)
 	if sequence_mode == 5:
 		var time = Time.get_ticks_msec() / 1000.0
@@ -43,7 +43,7 @@ func _process(delta):
 		sequence_mode = (sequence_mode + 1) % 6
 		set_scenario(sequence_mode)
 
-func set_scenario(mode: int):
+func set_scenario(mode: int) -> void:
 	grid.reset_costs()
 	print("Changing Flow Field Scenario: ", mode)
 	
@@ -82,7 +82,7 @@ func set_scenario(mode: int):
 			
 	update_field(current_target.x, current_target.y)
 
-func spawn_agents(count: int):
+func spawn_agents(count: int) -> void:
 	for i in range(count):
 		var agent = agent_scene.instantiate()
 		add_child(agent)
@@ -92,14 +92,14 @@ func spawn_agents(count: int):
 		agent.initialize(grid, pos)
 		agents.append(agent)
 
-func update_field(target_x: int, target_y: int):
+func update_field(target_x: int, target_y: int) -> void:
 	# Recalculate Logic
 	grid.calculate_flow_field(target_x, target_y)
 	
 	# Update Arrows
 	visualizer.update_visuals()
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	# VR: interaction handled by XR controller raycasts
 	if _xr_active:
 		return

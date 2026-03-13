@@ -20,19 +20,19 @@ var sculpture_configs = [
 	{ "name": "Computer", "shape_type": 5, "color": Color(0.3, 0.3, 0.4) }
 ]
 
-func _ready():
+func _ready() -> void:
 	spacing = 15.0 # Distinct grid spacing
 	# sculpture_scale is used from export
 	if auto_generate:
 		call_deferred("generate_gallery")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if enable_rotation:
 		for sculpture in sculptures:
 			if sculpture:
 				sculpture.rotation.y += rotation_speed * delta
 
-func generate_gallery():
+func generate_gallery() -> void:
 	print("🎨 Generating Marching Cubes Gallery with SDF Shapes...")
 	
 	for i in range(sculpture_configs.size()):
@@ -54,7 +54,7 @@ func generate_gallery():
 	
 	print("✅ Gallery complete with ", sculptures.size(), " sculptures!")
 
-func create_sculpture(config: Dictionary, position: Vector3, index: int):
+func create_sculpture(config: Dictionary, position: Vector3, index: int) -> void:
 	# Load the SHAPES generator, not the base one
 	var terrain_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorShapes.gd")
 	
@@ -118,7 +118,7 @@ func create_sculpture(config: Dictionary, position: Vector3, index: int):
 	# Wait for next frame to avoid lag
 	await get_tree().process_frame
 
-func trace_all_elements():
+func trace_all_elements() -> void:
 	"""Extract and highlight individual connected components from each sculpture"""
 	print("\n🔍 Tracing individual elements in sculptures...")
 	
@@ -171,7 +171,7 @@ func extract_mesh_islands(mesh: Mesh) -> Array:
 	
 	return islands
 
-func _add_edge(adjacency: Dictionary, v1: int, v2: int):
+func _add_edge(adjacency: Dictionary, v1: int, v2: int) -> void:
 	if not adjacency.has(v1):
 		adjacency[v1] = []
 	if not adjacency.has(v2):
@@ -199,7 +199,7 @@ func _flood_fill(adjacency: Dictionary, start: int, visited: Dictionary) -> Arra
 	
 	return island
 
-func visualize_islands(sculpture: MeshInstance3D, islands: Array, sculpture_index: int):
+func visualize_islands(sculpture: MeshInstance3D, islands: Array, sculpture_index: int) -> void:
 	"""Show only the largest component as a single unified object"""
 	if islands.is_empty():
 		return
@@ -297,7 +297,7 @@ func create_island_mesh(original_mesh: Mesh, island_vertices: Array) -> ArrayMes
 	
 	return array_mesh
 
-func toggle_island_tracing():
+func toggle_island_tracing() -> void:
 	"""Toggle between showing full sculptures and traced islands"""
 	trace_individual_elements = not trace_individual_elements
 	
@@ -313,3 +313,9 @@ func toggle_island_tracing():
 				for child in parent.get_children():
 					if child.name.begins_with("Island_"):
 						child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

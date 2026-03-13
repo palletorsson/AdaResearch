@@ -31,14 +31,14 @@ var measurement_button: Button
 var reset_button: Button
 var qubit_controls: Array[HSlider] = []
 
-func _ready():
+func _ready() -> void:
     randomize()
     initialize_quantum_state()
     setup_visualization_components()
     setup_ui()
     create_initial_superposition()
 
-func initialize_quantum_state():
+func initialize_quantum_state() -> void:
     """Initialize quantum state in equal superposition"""
     var num_states = pow(2, num_qubits)
     quantum_state.clear()
@@ -48,7 +48,7 @@ func initialize_quantum_state():
     for i in range(num_states):
         quantum_state.append(Vector2(amplitude, 0.0))  # Real amplitude, no imaginary part initially
 
-func setup_visualization_components():
+func setup_visualization_components() -> void:
     """Create 3D visualization elements"""
     
     # Create materials
@@ -124,7 +124,7 @@ func setup_visualization_components():
     measurement_indicator.material_override = indicator_material
     add_child(measurement_indicator)
 
-func setup_ui():
+func setup_ui() -> void:
     """Create user interface controls"""
     ui_panel = Control.new()
     ui_panel.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
@@ -180,12 +180,12 @@ func setup_ui():
     
     add_child(ui_panel)
 
-func create_initial_superposition():
+func create_initial_superposition() -> void:
     """Create visual representation of initial superposition"""
     update_wave_function_visualization()
     update_probability_clouds()
 
-func _process(delta):
+func _process(delta: float) -> void:
     time += delta
     
     if not is_collapsed:
@@ -197,7 +197,7 @@ func _process(delta):
         # Animate collapsed state
         animate_collapsed_state(delta)
 
-func animate_superposition(delta):
+func animate_superposition(delta) -> void:
     """Animate the superposition state with quantum oscillations"""
     for i in range(quantum_state.size()):
         # Add small phase oscillations to demonstrate quantum dynamics
@@ -220,7 +220,7 @@ func animate_superposition(delta):
         var scale = 0.5 + probability * 1.5
         qubit.scale = Vector3.ONE * scale
 
-func animate_collapsed_state(_delta):
+func animate_collapsed_state(_delta) -> void:
     """Animate the state after measurement collapse"""
     # Flash measurement indicator
     measurement_indicator.visible = sin(time * 10.0) > 0
@@ -235,7 +235,7 @@ func animate_collapsed_state(_delta):
         else:
             qubit.material_override.emission = Color.BLUE * 0.1
 
-func update_wave_function_visualization():
+func update_wave_function_visualization() -> void:
     """Create 3D mesh showing wave function amplitude"""
     var surface_tool = SurfaceTool.new()
     surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -288,7 +288,7 @@ func update_wave_function_visualization():
     surface_tool.generate_normals()
     wave_function_mesh.mesh = surface_tool.commit()
 
-func update_probability_clouds():
+func update_probability_clouds() -> void:
     """Update visual representation of measurement probabilities"""
     for i in range(probability_clouds.size()):
         var cloud = probability_clouds[i]
@@ -314,7 +314,7 @@ func calculate_qubit_probability(qubit_index: int) -> float:
     
     return probability
 
-func _on_measurement_pressed():
+func _on_measurement_pressed() -> void:
     """Perform quantum measurement and collapse wave function"""
     if is_collapsed:
         return
@@ -345,7 +345,7 @@ func _on_measurement_pressed():
     
     print("Measurement collapsed to state: |", format_binary_state(collapsed_state), "âŸ©")
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
     """Reset to superposition state"""
     initialize_quantum_state()
     is_collapsed = false
@@ -358,7 +358,7 @@ func _on_reset_pressed():
     
     print("Reset to equal superposition")
 
-func _on_phase_changed(qubit_index: int, value: float):
+func _on_phase_changed(qubit_index: int, value: float) -> void:
     """Update quantum state when phase sliders change"""
     if is_collapsed:
         return
@@ -380,7 +380,7 @@ func format_binary_state(state_number: int) -> String:
         binary_string += str(bit)
     return binary_string
 
-func create_entanglement_visualization():
+func create_entanglement_visualization() -> void:
     """Create visual connections showing quantum entanglement"""
     # Clear existing connections
     for connection in entanglement_connections:
@@ -439,4 +439,10 @@ func create_connection_line(pos_a: Vector3, pos_b: Vector3, strength: float) -> 
     material.emission = Color.YELLOW * strength
     line.material_override = material
     
-    return line 
+    return line
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

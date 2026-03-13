@@ -3,7 +3,7 @@ extends "res://algorithms/joint/shared/joint_demo_base.gd"
 var seat: RigidBody3D
 var _t := 0.0
 
-func _build_demo():
+func _build_demo() -> void:
 	var frame_left := create_static_box("FrameLeft", Vector3(0.4, 4.0, 0.4), Vector3(-2.0, 3.0, -1.5), Color(0.5, 0.5, 0.55))
 	var frame_right := create_static_box("FrameRight", Vector3(0.4, 4.0, 0.4), Vector3(2.0, 3.0, -1.5), Color(0.5, 0.5, 0.55))
 
@@ -46,7 +46,7 @@ func _build_demo():
 	# Nudge to start swinging
 	call_deferred("_nudge")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_t += delta
 	if Input.is_action_pressed("ui_right"):
 		seat.apply_central_force(Vector3(5.0, 0.0, 0.0))
@@ -57,6 +57,12 @@ func _process(delta):
 		var f := sin(_t * 1.2) * 2.2
 		seat.apply_central_force(Vector3(f, 0.0, 0.0))
 
-func _nudge():
+func _nudge() -> void:
 	if is_instance_valid(seat):
 		seat.apply_impulse(Vector3(0.8, 0.0, 0.0))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -125,7 +125,7 @@ func init_compute() -> bool:
 	return true
 
 # --- OVERRIDE RUN_COMPUTE TO UPDATE BLOB BUFFER ---
-func run_compute():
+func run_compute() -> void:
 	if not rendering_device: return
 	
 	# Update Blob Buffer
@@ -164,7 +164,7 @@ func run_compute():
 	last_compute_dispatch_frame = frame
 	waiting_for_compute = true
 
-func release():
+func release() -> void:
 	if rendering_device:
 		rendering_device.free_rid(blob_buffer) # Release new buffer
 	super.release()

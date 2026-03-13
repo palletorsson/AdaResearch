@@ -5,11 +5,11 @@ extends Node3D
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_color_with_text.tscn")
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	spawn_points()
 
-func spawn_points():
+func spawn_points() -> void:
 	var half_extents := area_size * 0.5
 	for i in range(num_points):
 		var p := point_scene.instantiate()

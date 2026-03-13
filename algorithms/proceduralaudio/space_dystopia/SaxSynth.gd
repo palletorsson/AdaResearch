@@ -41,7 +41,7 @@ var hp_state = [0.0, 0.0] # Highpass for breath
 
 @export var output_bus: String = "Master"
 
-func _ready():
+func _ready() -> void:
 	add_child(player)
 	generator.mix_rate = sample_rate
 	generator.buffer_length = 0.1
@@ -53,7 +53,7 @@ func _ready():
 @export var growl_amount: float = 0.0 # 0.0 to 0.5
 var growl_phase: float = 0.0
 
-func play_note(freq: float, vel: float = 0.8):
+func play_note(freq: float, vel: float = 0.8) -> void:
 	target_freq = freq
 	velocity = vel
 	
@@ -69,20 +69,20 @@ func play_note(freq: float, vel: float = 0.8):
 		env_val = 0.0
 		reed_stiffness = 0.2 + randf() * 0.2 # New timbre
 
-func stop_note():
+func stop_note() -> void:
 	env_state = 4 # Release
 
 func _process(_delta):
 	_fill_buffer()
 
-func _fill_buffer():
+func _fill_buffer() -> void:
 	if not playback: return
 	var frames_available = playback.get_frames_available()
 	if frames_available < 1: return
 	
 	_process_audio_chunk(frames_available)
 
-func _process_audio_chunk(frames: int):
+func _process_audio_chunk(frames: int) -> void:
 	# Pre-calculate coeffs for static formants
 	var c1 = _get_bp_coeff(450.0, 4.0) 
 	var c2 = _get_bp_coeff(1900.0, 2.5) 
@@ -225,3 +225,9 @@ func _process_filter(x: float, s: Array, c: Array) -> float:
 	s[0] = c[1]*x - c[3]*y + s[1]
 	s[1] = c[2]*x - c[4]*y
 	return y
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

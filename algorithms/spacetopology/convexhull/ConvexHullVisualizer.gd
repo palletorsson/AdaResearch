@@ -10,10 +10,10 @@ var point_spheres: Array = []
 var hull_lines: Array = []
 var bounds = 10.0
 
-func _ready():
+func _ready() -> void:
 	generate_points()
 
-func generate_points():
+func generate_points() -> void:
 	clear_all()
 	
 	# Generate points based on distribution type
@@ -53,7 +53,7 @@ func generate_points():
 	# Create visual representations
 	create_point_visuals()
 
-func create_point_visuals():
+func create_point_visuals() -> void:
 	for point in points:
 		var sphere = CSGSphere3D.new()
 		sphere.radius = 0.3
@@ -68,7 +68,7 @@ func create_point_visuals():
 		add_child(sphere)
 		point_spheres.append(sphere)
 
-func compute_convex_hull():
+func compute_convex_hull() -> void:
 	# Clear previous hull
 	clear_hull_visuals()
 	
@@ -235,7 +235,7 @@ func is_point_in_hull(point: Vector3, hull: Array) -> bool:
 	
 	return true
 
-func create_hull_visuals():
+func create_hull_visuals() -> void:
 	if hull_points.size() < 2:
 		return
 	
@@ -273,7 +273,7 @@ func create_hull_visuals():
 	# Highlight hull points
 	highlight_hull_points()
 
-func highlight_hull_points():
+func highlight_hull_points() -> void:
 	for i in range(point_spheres.size()):
 		var sphere = point_spheres[i]
 		var point = points[i]
@@ -290,14 +290,14 @@ func highlight_hull_points():
 			material.albedo_color = Color(0.9, 0.4, 0.2)
 			material.emission_enabled = false
 
-func clear_hull_visuals():
+func clear_hull_visuals() -> void:
 	for line in hull_lines:
 		if is_instance_valid(line):
 			line.queue_free()
 	hull_lines.clear()
 	hull_points.clear()
 
-func clear_all():
+func clear_all() -> void:
 	clear_hull_visuals()
 	
 	for sphere in point_spheres:
@@ -307,15 +307,15 @@ func clear_all():
 	points.clear()
 
 # Public interface functions
-func set_point_count(count: int):
+func set_point_count(count: int) -> void:
 	point_count = max(3, count)
 	generate_points()
 
-func set_distribution_type(type: int):
+func set_distribution_type(type: int) -> void:
 	distribution_type = clamp(type, 0, 2)
 	generate_points()
 
-func set_algorithm_type(type: int):
+func set_algorithm_type(type: int) -> void:
 	algorithm_type = clamp(type, 0, 2)
 	if hull_points.size() > 0:
 		compute_convex_hull()
@@ -335,13 +335,13 @@ func get_hull_info() -> Dictionary:
 		"hull_percentage": (float(hull_points.size()) / points.size()) * 100.0 if points.size() > 0 else 0.0
 	}
 
-func animate_hull_computation():
+func animate_hull_computation() -> void:
 	clear_hull_visuals()
 	var tween = create_tween()
 	tween.tween_interval(0.5)
 	tween.tween_callback(compute_convex_hull)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -354,3 +354,9 @@ func _input(event):
 				set_algorithm_type(1)
 			KEY_3:
 				set_algorithm_type(2)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

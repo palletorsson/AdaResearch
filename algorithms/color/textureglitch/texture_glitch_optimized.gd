@@ -46,16 +46,16 @@ var GLITCH_TYPE_MAP = {
 	"quantum": 7
 }
 
-func _ready():
+func _ready() -> void:
 	print("🚀 Starting Optimized Glitch System")
 	initialize_layer_system()
 	create_demo_objects()
 	setup_glitch_controllers()
 
-func initialize_layer_system():
+func initialize_layer_system() -> void:
 	setup_scene_environment()
 
-func setup_scene_environment():
+func setup_scene_environment() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 3, 12)
 	add_child(camera)
@@ -68,13 +68,13 @@ func setup_scene_environment():
 	
 	setup_dynamic_lighting()
 
-func setup_dynamic_lighting():
+func setup_dynamic_lighting() -> void:
 	var key_light = DirectionalLight3D.new()
 	key_light.light_energy = 1.2
 	key_light.rotation_degrees = Vector3(-45, 30, 0)
 	add_child(key_light)
 
-func create_demo_objects():
+func create_demo_objects() -> void:
 	var object_configs = [
 		{"name": "Datamosh Layers", "pos": Vector3(-6, 2, 0), "type": "datamosh"},
 		{"name": "Chromatic Split", "pos": Vector3(-2, 2, 0), "type": "chromatic"},
@@ -89,7 +89,7 @@ func create_demo_objects():
 	for config in object_configs:
 		create_layered_object(config.name, config.pos, config.type)
 
-func create_layered_object(name: String, pos: Vector3, glitch_type: String):
+func create_layered_object(name: String, pos: Vector3, glitch_type: String) -> void:
 	var container = Node3D.new()
 	container.name = name
 	container.position = pos
@@ -111,7 +111,7 @@ func create_layered_object(name: String, pos: Vector3, glitch_type: String):
 	initialize_layer_animations(container, glitch_type)
 	add_object_label(container, name)
 
-func add_object_label(container: Node3D, text: String):
+func add_object_label(container: Node3D, text: String) -> void:
 	var label = Label3D.new()
 	label.text = text
 	label.font_size = 48
@@ -149,7 +149,7 @@ func create_layer_material(layer_index: int, glitch_type: String) -> ShaderMater
 	material.set_shader_parameter("layer_color", col)
 	return material
 
-func initialize_layer_animations(container: Node3D, glitch_type: String):
+func initialize_layer_animations(container: Node3D, glitch_type: String) -> void:
 	var anim_data = {
 		"type": glitch_type,
 		"layer_offsets": [],
@@ -163,16 +163,16 @@ func initialize_layer_animations(container: Node3D, glitch_type: String):
 	
 	layer_animations[container] = anim_data
 
-func setup_glitch_controllers():
+func setup_glitch_controllers() -> void:
 	for container in demo_objects:
 		glitch_controllers[container] = { "separation_active": false, "animation_active": true }
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	for container in demo_objects:
 		update_layered_object(container, delta)
 
-func update_layered_object(container: Node3D, delta: float):
+func update_layered_object(container: Node3D, delta: float) -> void:
 	if not texture_layers.has(container): return
 	
 	var layers = texture_layers[container]
@@ -188,7 +188,7 @@ func update_layered_object(container: Node3D, delta: float):
 		if mat is ShaderMaterial:
 			mat.set_shader_parameter("time", time)
 
-func update_layer_transforms(layers: Array, anim_data: Dictionary):
+func update_layer_transforms(layers: Array, anim_data: Dictionary) -> void:
 	for i in range(layers.size()):
 		var layer = layers[i]
 		var base_offset = anim_data.layer_offsets[i]
@@ -214,7 +214,7 @@ func update_layer_transforms(layers: Array, anim_data: Dictionary):
 			layer.rotation.z = time * rot_speed
 			layer.scale = Vector3.ONE * (s_fact + sin(time * 3.0 + i) * 0.1)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			enable_layer_separation = !enable_layer_separation
@@ -222,3 +222,9 @@ func _input(event):
 			animation_speed = min(animation_speed * 1.2, 3.0)
 		elif event.keycode == KEY_MINUS:
 			animation_speed = max(animation_speed * 0.8, 0.1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

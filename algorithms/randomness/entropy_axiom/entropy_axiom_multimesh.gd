@@ -21,13 +21,13 @@ extends Node3D
 var multimesh_instance: MultiMeshInstance3D
 var frame_root: Node3D
 
-func _ready():
+func _ready() -> void:
 	add_to_group("entropy_axiom")
 	create_multimesh()
 	generate_entropy_grid()
 	create_bounds_frame()
 
-func create_multimesh():
+func create_multimesh() -> void:
 	# Create MultiMeshInstance3D node
 	multimesh_instance = MultiMeshInstance3D.new()
 	add_child(multimesh_instance)
@@ -62,7 +62,7 @@ func create_multimesh():
 	material.emission_energy_multiplier = 0.8
 	multimesh_instance.material_override = material
 
-func generate_entropy_grid():
+func generate_entropy_grid() -> void:
 	var multimesh = multimesh_instance.multimesh
 	var instance_index = 0
 
@@ -116,7 +116,7 @@ func get_entropy_color(entropy_factor: float) -> Color:
 
 	return Color.from_hsv(hue, saturation, value)
 
-func create_bounds_frame():
+func create_bounds_frame() -> void:
 	if not show_bounds_frame:
 		return
 
@@ -140,7 +140,7 @@ func _get_bounds_max() -> Vector3:
 	var max_z = (grid_size_z - 1) * base_spacing + point_radius + frame_padding
 	return Vector3(max_x, max_y, max_z)
 
-func _build_frame_edges(min_corner: Vector3, max_corner: Vector3):
+func _build_frame_edges(min_corner: Vector3, max_corner: Vector3) -> void:
 	var thickness = max(frame_thickness, 0.001)
 	var size_x = max(max_corner.x - min_corner.x, thickness)
 	var size_y = max(max_corner.y - min_corner.y, thickness)
@@ -181,10 +181,16 @@ func _build_frame_edges(min_corner: Vector3, max_corner: Vector3):
 	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, min_corner.y, cz), Vector3(thickness, thickness, size_z))
 	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, max_corner.y, cz), Vector3(thickness, thickness, size_z))
 
-func _add_frame_edge(mesh: Mesh, material: Material, center: Vector3, size: Vector3):
+func _add_frame_edge(mesh: Mesh, material: Material, center: Vector3, size: Vector3) -> void:
 	var edge = MeshInstance3D.new()
 	edge.mesh = mesh
 	edge.material_override = material
 	edge.position = center
 	edge.scale = size
 	frame_root.add_child(edge)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

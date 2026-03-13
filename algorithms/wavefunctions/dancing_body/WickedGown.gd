@@ -48,10 +48,10 @@ var u_steps: int = 40
 var v_steps: int = 28
 var _initialized: bool = false
 
-func _ready():
+func _ready() -> void:
 	call_deferred("_create_all_layers")
 
-func _create_all_layers():
+func _create_all_layers() -> void:
 	_layers.clear()
 	_layer_base_vertices.clear()
 
@@ -152,7 +152,7 @@ func _dini_modulation(u: float, angle: float, _layer_idx: int) -> float:
 	var asymmetry = sin(angle + u * PI) * 0.02 * u  # Makes the back trail longer
 	return dini_twist + dini_flow + asymmetry
 
-func _build_faces(surface_tool: SurfaceTool, vertices: Array):
+func _build_faces(surface_tool: SurfaceTool, vertices: Array) -> void:
 	for i in range(u_steps):
 		for j in range(v_steps):
 			var v0 = vertices[i][j]
@@ -180,7 +180,7 @@ func _build_faces(surface_tool: SurfaceTool, vertices: Array):
 			surface_tool.set_normal(normal)
 			surface_tool.add_vertex(v3)
 
-func _apply_layer_material(mesh_instance: MeshInstance3D, color: Color):
+func _apply_layer_material(mesh_instance: MeshInstance3D, color: Color) -> void:
 	var material = ShaderMaterial.new()
 	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 
@@ -203,11 +203,11 @@ func _apply_layer_material(mesh_instance: MeshInstance3D, color: Color):
 		standard.albedo_color.a = 0.95
 		mesh_instance.mesh.surface_set_material(0, standard)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * animation_speed
 	_animate_all_layers()
 
-func _animate_all_layers():
+func _animate_all_layers() -> void:
 	# Safety check
 	if not _initialized:
 		return
@@ -272,14 +272,20 @@ func _animate_all_layers():
 			mesh_instance.material_override = old_material
 
 # API for runtime adjustments
-func set_wind(direction: Vector3, intensity: float):
+func set_wind(direction: Vector3, intensity: float) -> void:
 	wind_direction = direction
 	flutter_base = intensity
 
-func set_layer_colors(colors: Array[Color]):
+func set_layer_colors(colors: Array[Color]) -> void:
 	if colors.size() >= 1: color_layer1 = colors[0]
 	if colors.size() >= 2: color_layer2 = colors[1]
 	if colors.size() >= 3: color_layer3 = colors[2]
 
 	for i in range(min(_layers.size(), colors.size())):
 		_apply_layer_material(_layers[i], colors[i])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

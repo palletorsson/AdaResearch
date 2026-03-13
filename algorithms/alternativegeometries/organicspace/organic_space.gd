@@ -19,11 +19,11 @@ var material_manager: OrganicMaterials
 # Main container for generated geometry
 var environment_container: Node3D
 
-func _ready():
+func _ready() -> void:
 	setup_components()
 	generate_organic_space()
 
-func setup_components():
+func setup_components() -> void:
 	# Create main container
 	environment_container = Node3D.new()
 	environment_container.name = "OrganicEnvironment"
@@ -38,7 +38,7 @@ func setup_components():
 	add_child(lighting_system)
 	add_child(material_manager)
 
-func generate_organic_space():
+func generate_organic_space() -> void:
 	print("Generating organic VR space...")
 
 	# Generate base shell using marching cubes-style approach
@@ -59,7 +59,7 @@ func generate_organic_space():
 	# Add interactive elements
 	generate_interactive_elements()
 
-func generate_base_shell():
+func generate_base_shell() -> void:
 	"""Create the main hollow shell using CSG operations"""
 	var outer_shell = CSGSphere3D.new()
 	outer_shell.radius = space_size.x * 0.5
@@ -76,7 +76,7 @@ func generate_base_shell():
 	outer_shell.add_child(inner_cavity)
 	environment_container.add_child(outer_shell)
 
-func apply_organic_deformation(shape: CSGShape3D):
+func apply_organic_deformation(shape: CSGShape3D) -> void:
 	"""Apply procedural deformation to create organic feel"""
 	var noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
@@ -100,7 +100,7 @@ func apply_organic_deformation(shape: CSGShape3D):
 		
 		shape.add_child(deform_sphere)
 
-func generate_tunnel_system():
+func generate_tunnel_system() -> void:
 	"""Create interconnected organic tunnels"""
 	var tunnel_points = generate_tunnel_path()
 	
@@ -134,7 +134,7 @@ func generate_tunnel_path() -> Array[Vector3]:
 	
 	return points
 
-func create_tunnel_segment(start: Vector3, end: Vector3, index: int):
+func create_tunnel_segment(start: Vector3, end: Vector3, index: int) -> void:
 	"""Create a single tunnel segment with organic shape"""
 	var tunnel = CSGCylinder3D.new()
 	tunnel.height = start.distance_to(end)
@@ -153,7 +153,7 @@ func create_tunnel_segment(start: Vector3, end: Vector3, index: int):
 	
 	environment_container.add_child(tunnel)
 
-func add_tunnel_details(tunnel: CSGCylinder3D, index: int):
+func add_tunnel_details(tunnel: CSGCylinder3D, index: int) -> void:
 	"""Add organic surface details to tunnels"""
 	var detail_count = randi_range(3, 8)
 	
@@ -177,7 +177,7 @@ func add_tunnel_details(tunnel: CSGCylinder3D, index: int):
 		
 		tunnel.add_child(detail)
 
-func generate_surface_details():
+func generate_surface_details() -> void:
 	"""Add fine surface details and textures"""
 	# Create membrane-like structures
 	create_membrane_surfaces()
@@ -188,7 +188,7 @@ func generate_surface_details():
 	# Generate organic growths
 	create_organic_growths()
 
-func create_membrane_surfaces():
+func create_membrane_surfaces() -> void:
 	"""Create thin membrane surfaces spanning spaces"""
 	for i in range(randi_range(3, 6)):
 		var membrane = CSGCylinder3D.new()
@@ -211,7 +211,7 @@ func create_membrane_surfaces():
 		membrane.material = material_manager.get_membrane_material()
 		environment_container.add_child(membrane)
 
-func create_crystal_formations():
+func create_crystal_formations() -> void:
 	"""Add crystalline geometric structures"""
 	for i in range(randi_range(5, 10)):
 		var crystal = CSGBox3D.new()
@@ -242,7 +242,7 @@ func create_crystal_formations():
 		crystal.material = material_manager.get_crystal_material()
 		environment_container.add_child(crystal)
 
-func create_organic_growths():
+func create_organic_growths() -> void:
 	"""Add bulbous organic formations"""
 	for i in range(randi_range(8, 15)):
 		var growth = CSGSphere3D.new()
@@ -272,7 +272,7 @@ func create_organic_growths():
 		
 		environment_container.add_child(growth)
 
-func _bake_csg_to_meshes():
+func _bake_csg_to_meshes() -> void:
 	"""Replace CSG nodes with baked static meshes for runtime performance.
 	CSG boolean operations are expensive to keep alive; baking converts
 	the computed geometry into lightweight MeshInstance3D nodes."""
@@ -297,11 +297,11 @@ func _bake_csg_to_meshes():
 		# Remove the CSG tree — no longer needed
 		csg_root.queue_free()
 
-func setup_atmospheric_lighting():
+func setup_atmospheric_lighting() -> void:
 	"""Create atmospheric lighting effects"""
 	lighting_system.setup_organic_lighting(environment_container, space_size)
 
-func generate_interactive_elements():
+func generate_interactive_elements() -> void:
 	"""Add interactive elements for the space"""
 	# Create floating orbs that can be interacted with
 	for i in range(randi_range(3, 7)):
@@ -343,7 +343,7 @@ func create_interactive_orb() -> RigidBody3D:
 
 
 
-func regenerate_space():
+func regenerate_space() -> void:
 	"""Regenerate the entire space with new parameters"""
 	# Clear existing environment
 	if environment_container:
@@ -352,3 +352,9 @@ func regenerate_space():
 	# Regenerate with new seed
 	await get_tree().process_frame
 	generate_organic_space()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -82,3 +82,9 @@ func _update_cubes(max_angle: float) -> void:
 		# User request: "just in x (0° → Max → 0°)"
 		cube.rotation = Vector3.ZERO
 		cube.rotation.x = -angle_rad
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

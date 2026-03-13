@@ -80,13 +80,13 @@ class Face:
 	var centroid: Vector3
 	var points_outside: Array[Vector3] = []
 
-	func _init(p1: Vector3, p2: Vector3, p3: Vector3):
+	func _init(p1: Vector3, p2: Vector3, p3: Vector3) -> void:
 		self.vertices = [p1, p2, p3]
 		self.centroid = (p1 + p2 + p3) / 3.0
 		self.normal = (p2 - p1).cross(p3 - p1).normalized()
 
 	# Orient the face to point outwards from a reference point (e.g., tetrahedron center)
-	func orient_outward(reference_point: Vector3):
+	func orient_outward(reference_point: Vector3) -> void:
 		if (centroid - reference_point).dot(normal) < 0:
 			normal = -normal
 			vertices.reverse() # Maintain winding order
@@ -98,12 +98,12 @@ class Face:
 #  Engine Functions
 #=============================================================================
 
-func _ready():
+func _ready() -> void:
 	_xr_active = XRServer.primary_interface != null
 	setup_materials()
 	generate_and_visualize()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_computing and animate_construction:
 		update_construction_animation(delta)
 	
@@ -114,7 +114,7 @@ func _process(delta):
 #   Desktop — mouse orbit/zoom moves the camera around the model (original behaviour).
 #   VR      — headset is the camera; we rotate/scale the _content_node instead so
 #             the model moves around the user. Mouse events are ignored in VR.
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if _xr_active:
 		# In VR, skip mouse-based camera control entirely.
 		# The headset provides the camera; XR controller input (if wired up
@@ -147,7 +147,7 @@ func _input(event):
 #  Main Setup
 #=============================================================================
 
-func generate_and_visualize():
+func generate_and_visualize() -> void:
 	clear_scene()
 	setup_environment()
 	setup_camera()
@@ -162,7 +162,7 @@ func generate_and_visualize():
 	else:
 		compute_convex_hull_instant()
 
-func clear_scene():
+func clear_scene() -> void:
 	for child in get_children():
 		if child is MeshInstance3D or child is WorldEnvironment or child is DirectionalLight3D or child is CanvasLayer or child.name == "CameraPivot":
 			child.queue_free()
@@ -181,7 +181,7 @@ func clear_scene():
 #  Convex Hull Algorithm (Quickhull 3D)
 #=============================================================================
 
-func compute_convex_hull_instant():
+func compute_convex_hull_instant() -> void:
 	var points = input_points.duplicate()
 	if points.size() < 4:
 		print("Need at least 4 points for 3D convex hull")
@@ -197,7 +197,7 @@ func compute_convex_hull_instant():
 	is_computing = false
 	finalize_visualization()
 
-func start_animated_construction():
+func start_animated_construction() -> void:
 	var points = input_points.duplicate()
 	if points.size() < 4:
 		print("Need at least 4 points for 3D convex hull")
@@ -216,7 +216,7 @@ func start_animated_construction():
 		if not face.points_outside.is_empty():
 			construction_steps.append({"type": "process_face", "face": face})
 
-func update_construction_animation(delta: float):
+func update_construction_animation(delta: float) -> void:
 	construction_timer += delta * construction_speed
 	if construction_timer < 1.0:
 		return
@@ -243,7 +243,7 @@ func update_construction_animation(delta: float):
 	current_construction_step += 1
 	update_ui()
 
-func build_initial_tetrahedron(points: Array[Vector3]):
+func build_initial_tetrahedron(points: Array[Vector3]) -> void:
 	# Find 4 non-coplanar points to form the initial hull
 	var p1 = points.pop_front()
 	var p2 = points.pop_front()
@@ -376,12 +376,12 @@ func find_shared_edge_index(face: Face, other_faces: Array) -> int:
 #  Visualization
 #=============================================================================
 
-func finalize_visualization():
+func finalize_visualization() -> void:
 	classify_points()
 	visualize_hull_state(hull_faces)
 	update_ui()
 
-func visualize_hull_state(faces: Array[Face], highlighted_face: Face = null):
+func visualize_hull_state(faces: Array[Face], highlighted_face: Face = null) -> void:
 	# Clear previous visuals
 	for e in edge_meshes: e.queue_free()
 	edge_meshes.clear()
@@ -442,7 +442,7 @@ func create_edge_mesh(p1: Vector3, p2: Vector3) -> MeshInstance3D:
 	edge_mesh.rotate_object_local(Vector3.RIGHT, PI / 2.0) # Align cylinder height with direction
 	return edge_mesh
 
-func classify_points():
+func classify_points() -> void:
 	var boundary_points_set = {}
 	for v in hull_vertices:
 		boundary_points_set[v.snapped(Vector3.ONE * 0.001)] = true
@@ -459,7 +459,7 @@ func classify_points():
 			mesh.material_override = included_point_material
 			mesh.scale = Vector3.ONE
 
-func update_temporal_deformation(delta: float):
+func update_temporal_deformation(delta: float) -> void:
 	if not is_instance_valid(hull_mesh_instance) or not hull_mesh_instance.mesh:
 		return
 		
@@ -496,7 +496,7 @@ func update_temporal_deformation(delta: float):
 #  UI and Scene Setup
 #=============================================================================
 
-func setup_materials():
+func setup_materials() -> void:
 	included_point_material = StandardMaterial3D.new()
 	included_point_material.albedo_color = Color(0.2, 0.8, 0.4)
 	excluded_point_material = StandardMaterial3D.new()
@@ -514,7 +514,7 @@ func setup_materials():
 	permeable_material.emission_enabled = true
 	permeable_material.emission = Color(0.8, 0.6, 0.9)
 
-func setup_environment():
+func setup_environment() -> void:
 	var env = WorldEnvironment.new()
 	var environment = Environment.new()
 	environment.background_mode = Environment.BG_COLOR
@@ -527,7 +527,7 @@ func setup_environment():
 	light.transform.basis = Basis.from_euler(Vector3(-0.6, 0.5, 0))
 	add_child(light)
 
-func setup_camera():
+func setup_camera() -> void:
 	if _xr_active:
 		# VR: don't create a camera — the headset provides one.
 		# We still create the pivot so update_camera() doesn't crash,
@@ -543,14 +543,14 @@ func setup_camera():
 	camera_pivot.add_child(camera)
 	update_camera()
 
-func update_camera():
+func update_camera() -> void:
 	# FIX: Check if camera_pivot is valid and has a child before access.
 	if not is_instance_valid(camera_pivot) or camera_pivot.get_child_count() == 0:
 		return
 	camera_pivot.rotation = Vector3(camera_rotation.x, camera_rotation.y, 0)
 	camera_pivot.get_child(0).position = Vector3(0, 0, camera_distance)
 
-func setup_ui():
+func setup_ui() -> void:
 	var canvas = CanvasLayer.new()
 	var label = Label.new()
 	label.name = "InfoLabel"
@@ -560,7 +560,7 @@ func setup_ui():
 	add_child(canvas)
 	update_ui()
 
-func update_ui():
+func update_ui() -> void:
 	var label = get_node_or_null("CanvasLayer/InfoLabel") as Label
 	if not label: return
 	
@@ -579,7 +579,7 @@ func update_ui():
 #  Point Cloud Generation
 #=============================================================================
 
-func generate_point_cloud():
+func generate_point_cloud() -> void:
 	input_points.clear()
 	match distribution_type:
 		"random":
@@ -606,7 +606,7 @@ func generate_point_cloud():
 			for i in range(edge_points):
 				input_points.append(Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1)).normalized() * space_size * randf_range(0.4, 0.5))
 
-func create_point_visuals():
+func create_point_visuals() -> void:
 	for p in input_points:
 		var mesh_inst = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
@@ -631,3 +631,9 @@ func rotate_model(delta: Vector2) -> void:
 func scale_model(factor: float) -> void:
 	var s = clamp(scale.x * factor, 0.1, 10.0)
 	scale = Vector3(s, s, s)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

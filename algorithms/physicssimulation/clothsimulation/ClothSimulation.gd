@@ -15,7 +15,7 @@ class ClothNode:
 	var is_fixed: bool
 	var node: CSGSphere3D
 	
-	func _init(pos: Vector3, m: float, fixed: bool, n: CSGSphere3D):
+	func _init(pos: Vector3, m: float, fixed: bool, n: CSGSphere3D) -> void:
 		position = pos
 		velocity = Vector3.ZERO
 		force = Vector3.ZERO
@@ -23,11 +23,11 @@ class ClothNode:
 		is_fixed = fixed
 		node = n
 	
-	func apply_force(f: Vector3):
+	func apply_force(f: Vector3) -> void:
 		if not is_fixed:
 			force += f
 	
-	func update(delta: float):
+	func update(delta: float) -> void:
 		if is_fixed:
 			return
 		
@@ -46,13 +46,13 @@ class ClothPiece:
 	var size: Vector2
 	var position: Vector3
 	
-	func _init(cloth_size: Vector2, cloth_pos: Vector3, resolution: int):
+	func _init(cloth_size: Vector2, cloth_pos: Vector3, resolution: int) -> void:
 		size = cloth_size
 		position = cloth_pos
 		create_nodes(resolution)
 		create_springs(resolution)
 	
-	func create_nodes(resolution: int):
+	func create_nodes(resolution: int) -> void:
 		for i in range(resolution + 1):
 			for j in range(resolution + 1):
 				var x = (i - resolution / 2.0) * size.x / resolution
@@ -66,7 +66,7 @@ class ClothPiece:
 				var cloth_node = ClothNode.new(pos, 1.0, is_fixed, node_visual)
 				nodes.append(cloth_node)
 	
-	func create_springs(resolution: int):
+	func create_springs(resolution: int) -> void:
 		for i in range(resolution + 1):
 			for j in range(resolution + 1):
 				var idx = i * (resolution + 1) + j
@@ -110,7 +110,7 @@ var right_grab_active: bool = false
 var grabbed_nodes: Array[ClothNode] = []
 var grab_radius: float = 0.15
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -152,7 +152,7 @@ func _ready():
 
 	print("Interactive Cloth Simulation - VR Ready!")
 
-func create_wind_streams():
+func create_wind_streams() -> void:
 	# Create wind stream particles for each wind source
 	for i in range(wind_sources.size()):
 		var wind_stream = $WindStreams.get_child(i)
@@ -175,13 +175,13 @@ func create_wind_particle() -> CSGSphere3D:
 	particle.material.emission_energy_multiplier = 0.4
 	return particle
 
-func create_spring_visualizations():
+func create_spring_visualizations() -> void:
 	# Create spring lines for all cloth pieces
 	create_cloth_springs(hanging_cloth, $ClothPieces/HangingCloth/HangingClothNodes, Color.YELLOW)
 	create_cloth_springs(floating_cloth, $ClothPieces/FloatingCloth/FloatingClothNodes, Color.CYAN)
 	create_cloth_springs(draped_cloth, $ClothPieces/DrapedCloth/DrapedClothNodes, Color.MAGENTA)
 
-func create_cloth_springs(cloth: ClothPiece, parent: Node3D, color: Color):
+func create_cloth_springs(cloth: ClothPiece, parent: Node3D, color: Color) -> void:
 	for spring in cloth.springs:
 		var line = create_spring_line(color, 0.01)
 		parent.add_child(line)
@@ -197,7 +197,7 @@ func create_spring_line(color: Color, thickness: float) -> CSGCylinder3D:
 	line.material.emission_energy_multiplier = 0.2
 	return line
 
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	# Try to find VR controllers in the scene
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if xr_origin:
@@ -212,23 +212,23 @@ func setup_vr_controllers():
 			right_controller.button_pressed.connect(_on_right_button_pressed)
 			right_controller.button_released.connect(_on_right_button_released)
 
-func _on_left_button_pressed(button_name: String):
+func _on_left_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = true
 
-func _on_left_button_released(button_name: String):
+func _on_left_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = false
 
-func _on_right_button_pressed(button_name: String):
+func _on_right_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = true
 
-func _on_right_button_released(button_name: String):
+func _on_right_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = false
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	# Update VR grabbing
@@ -260,7 +260,7 @@ func _process(delta):
 	# Update cloth meshes
 	update_cloth_meshes()
 
-func update_vr_grabbing():
+func update_vr_grabbing() -> void:
 	# Update left controller grabbing
 	if left_grab_active and left_controller:
 		var controller_pos = to_local(left_controller.global_position)
@@ -271,7 +271,7 @@ func update_vr_grabbing():
 		var controller_pos = to_local(right_controller.global_position)
 		grab_nearby_cloth_nodes(controller_pos)
 
-func grab_nearby_cloth_nodes(controller_pos: Vector3):
+func grab_nearby_cloth_nodes(controller_pos: Vector3) -> void:
 	# Grab nodes from all cloth pieces
 	var all_cloths = [hanging_cloth, floating_cloth, draped_cloth]
 
@@ -287,7 +287,7 @@ func grab_nearby_cloth_nodes(controller_pos: Vector3):
 				node.apply_force(pull_direction * 50.0)
 				node.velocity *= 0.8  # Dampen grabbed nodes
 
-func apply_forces(cloth: ClothPiece):
+func apply_forces(cloth: ClothPiece) -> void:
 	for node in cloth.nodes:
 		# Apply gravity
 		node.apply_force(Vector3(0, -gravity_strength * node.mass, 0))
@@ -299,11 +299,11 @@ func apply_forces(cloth: ClothPiece):
 			var wind_force = wind_direction * wind_strength / (distance * distance + 0.1)
 			node.apply_force(wind_force)
 
-func update_cloth_physics(cloth: ClothPiece, delta: float):
+func update_cloth_physics(cloth: ClothPiece, delta: float) -> void:
 	for node in cloth.nodes:
 		node.update(delta)
 
-func handle_collisions(cloth: ClothPiece):
+func handle_collisions(cloth: ClothPiece) -> void:
 	for node in cloth.nodes:
 		if node.is_fixed:
 			continue
@@ -333,7 +333,7 @@ func handle_collisions(cloth: ClothPiece):
 					var push_distance = 0.1 - distance
 					node.position += push_direction * push_distance * 0.05
 
-func update_spring_constraints(cloth: ClothPiece):
+func update_spring_constraints(cloth: ClothPiece) -> void:
 	for spring in cloth.springs:
 		var node1 = cloth.nodes[spring[0]]
 		var node2 = cloth.nodes[spring[1]]
@@ -351,7 +351,7 @@ func update_spring_constraints(cloth: ClothPiece):
 			if not node2.is_fixed:
 				node2.position -= correction * 0.5
 
-func animate_wind_system(delta: float):
+func animate_wind_system(delta: float) -> void:
 	# Animate wind sources
 	for i in range(wind_sources.size()):
 		var wind_source = $WindSources.get_child(i)
@@ -371,13 +371,13 @@ func animate_wind_system(delta: float):
 			if particle.position.y < -2:
 				particle.position.y = 2
 
-func update_cloth_meshes():
+func update_cloth_meshes() -> void:
 	# Update hanging cloth mesh based on node positions
 	update_cloth_mesh(hanging_cloth, $ClothPieces/HangingCloth/HangingClothMesh)
 	update_cloth_mesh(floating_cloth, $ClothPieces/FloatingCloth/FloatingClothMesh)
 	update_cloth_mesh(draped_cloth, $ClothPieces/DrapedCloth/DrapedClothMesh)
 
-func update_cloth_mesh(cloth: ClothPiece, mesh: CSGBox3D):
+func update_cloth_mesh(cloth: ClothPiece, mesh: CSGBox3D) -> void:
 	# Calculate average position and deformation
 	var avg_pos = Vector3.ZERO
 	var max_deformation = 0.0
@@ -392,3 +392,9 @@ func update_cloth_mesh(cloth: ClothPiece, mesh: CSGBox3D):
 	# Update mesh position and scale
 	mesh.global_position = avg_pos
 	mesh.scale.y = 1.0 + max_deformation * 2.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

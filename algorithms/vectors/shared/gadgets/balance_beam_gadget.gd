@@ -22,7 +22,7 @@ const WEIGHT_BASE_SIZE := 0.015
 var _target_mass_a: float = 1.0
 var _target_mass_b: float = 1.0
 
-func _ready():
+func _ready() -> void:
 	# --- Fulcrum (triangle base) ---
 	fulcrum = create_static_body(
 		Vector3(0, 0, 0),
@@ -129,3 +129,9 @@ func _process(_delta):
 func update_from_vectors(a: Vector3, b: Vector3) -> void:
 	_target_mass_a = clamp(a.length(), 0.1, 5.0)
 	_target_mass_b = clamp(b.length(), 0.1, 5.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

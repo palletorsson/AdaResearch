@@ -20,7 +20,7 @@ var sphere_mesh_instance: MeshInstance3D
 var shader_mat: ShaderMaterial
 var attractors: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	_make_sphere()
 	_make_shader()
 	_spawn_attractors_fibonacci()
@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 	_push_attractor_positions_to_shader()
 
 # -- sphere setup -------------------------------------------------------------
-func _make_sphere():
+func _make_sphere() -> void:
 	sphere_mesh_instance = MeshInstance3D.new()
 	var sm := SphereMesh.new()
 	sm.radius = sphere_radius
@@ -41,7 +41,7 @@ func _make_sphere():
 	sphere_mesh_instance.mesh = sm
 	add_child(sphere_mesh_instance)
 
-func _make_shader():
+func _make_shader() -> void:
 	var shader_code := """
 shader_type spatial;
 
@@ -91,14 +91,14 @@ void fragment() {
 	shader_mat.shader = shader
 	sphere_mesh_instance.material_override = shader_mat
 
-func _update_shader_static_params():
+func _update_shader_static_params() -> void:
 	shader_mat.set_shader_parameter("u_strength", pull_strength)
 	shader_mat.set_shader_parameter("u_radius", pull_radius)
 	shader_mat.set_shader_parameter("u_max_displace", max_displace)
 	shader_mat.set_shader_parameter("u_color", blob_color)
 
 # -- attractors ---------------------------------------------------------------
-func _spawn_attractors_fibonacci():
+func _spawn_attractors_fibonacci() -> void:
 	var n = min(attractor_count, MAX_ATTRACTORS)
 	for i in range(n):
 		var dir := _fibonacci_on_unit_sphere(i, n)
@@ -118,7 +118,7 @@ func _fibonacci_on_unit_sphere(i: int, n: int) -> Vector3:
 	var z := r * sin(theta)
 	return Vector3(x, y, z).normalized()
 
-func _push_attractor_positions_to_shader():
+func _push_attractor_positions_to_shader() -> void:
 	# collect positions relative to sphere's local space (shader expects object space)
 	var local_positions := PackedVector3Array()
 	var count = min(attractors.size(), MAX_ATTRACTORS)
@@ -129,3 +129,9 @@ func _push_attractor_positions_to_shader():
 	shader_mat.set_shader_parameter("u_count", count)
 	# If count < MAX_ATTRACTORS, Godot is fine with shorter arrays
 	shader_mat.set_shader_parameter("u_points", local_positions)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

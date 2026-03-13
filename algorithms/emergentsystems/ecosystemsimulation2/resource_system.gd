@@ -53,7 +53,7 @@ class EcosystemResource extends Node3D:
 	var affinity_spectrum: Dictionary
 	var consumption_effect: Dictionary
 	
-	func _init():
+	func _init() -> void:
 		name = "EcosystemResource"
 	
 	func update(delta: float) -> bool:
@@ -96,7 +96,7 @@ class EcosystemResource extends Node3D:
 	var relationship_to_environment: float = 0.5  # 0 = parasitic, 1 = symbiotic
 
 # Initialization
-func _ready():
+func _ready() -> void:
 	# Create resource parent node
 	resource_node = Node3D.new()
 	resource_node.name = "Resources"
@@ -105,7 +105,7 @@ func _ready():
 	# Initialize quadrants
 	_initialize_quadrants()
 
-func _initialize_quadrants():
+func _initialize_quadrants() -> void:
 	# Create a spatial partitioning system for faster resource lookup
 	# Divide the space into quadrants
 	var bounds = 50.0  # Assuming environment is 100x100 centered at origin
@@ -120,7 +120,7 @@ func _get_quadrant_key(position: Vector3) -> String:
 	var qz = floor(position.z / quadrant_size)
 	return str(qx) + "," + str(qz)
 
-func register_resource(resource: EcosystemResource):
+func register_resource(resource: EcosystemResource) -> void:
 	resources.append(resource)
 	
 	# Add to quadrant
@@ -190,7 +190,7 @@ func _random_essence_subtype() -> String:
 	var subtypes = ["creative", "transformative", "connective", "transcendent", "liminal"]
 	return subtypes[randi() % subtypes.size()]
 
-func _create_energy_visual(resource: EcosystemResource):
+func _create_energy_visual(resource: EcosystemResource) -> void:
 	var visual = MeshInstance3D.new()
 	visual.name = "ResourceVisual"
 	
@@ -221,7 +221,7 @@ func _create_energy_visual(resource: EcosystemResource):
 	
 	resource.add_child(particles)
 
-func _create_material_visual(resource: EcosystemResource):
+func _create_material_visual(resource: EcosystemResource) -> void:
 	var visual = MeshInstance3D.new()
 	visual.name = "ResourceVisual"
 	
@@ -258,7 +258,7 @@ func _create_material_visual(resource: EcosystemResource):
 	resource.add_child(visual)
 	resource.visual = visual
 
-func _create_information_visual(resource: EcosystemResource):
+func _create_information_visual(resource: EcosystemResource) -> void:
 	var visual = MeshInstance3D.new()
 	visual.name = "ResourceVisual"
 	
@@ -282,7 +282,7 @@ func _create_information_visual(resource: EcosystemResource):
 	resource.add_child(visual)
 	resource.visual = visual
 
-func _create_essence_visual(resource: EcosystemResource):
+func _create_essence_visual(resource: EcosystemResource) -> void:
 	var visual = MeshInstance3D.new()
 	visual.name = "ResourceVisual"
 	
@@ -312,7 +312,7 @@ func _create_essence_visual(resource: EcosystemResource):
 	# Simplified particle setup
 	resource.add_child(particles)
 
-func update(delta: float, current_day: int):
+func update(delta: float, current_day: int) -> void:
 	# Update all resources
 	for resource in resources.duplicate():  # Duplicate array to safely modify during iteration
 		var still_active = resource.update(delta)
@@ -336,7 +336,7 @@ func update(delta: float, current_day: int):
 	# Update resource flows
 	_update_resource_flows(delta)
 
-func _deplete_resource(resource: EcosystemResource):
+func _deplete_resource(resource: EcosystemResource) -> void:
 	# Remove from tracking
 	resources.erase(resource)
 	
@@ -351,7 +351,7 @@ func _deplete_resource(resource: EcosystemResource):
 	# Remove from scene
 	resource.queue_free()
 
-func _transform_resource(resource: EcosystemResource):
+func _transform_resource(resource: EcosystemResource) -> void:
 	# Resources can transform to different types over time
 	var current_type = resource.type
 	var possible_types = ["energy", "material", "information", "essence"]
@@ -389,7 +389,7 @@ func _transform_resource(resource: EcosystemResource):
 	# Emit signal
 	emit_signal("resource_transformed", resource, new_type)
 
-func _spawn_random_resource(current_day: int):
+func _spawn_random_resource(current_day: int) -> void:
 	# Calculate probabilities based on day cycle, season, etc.
 	var resource_probs = {
 		"energy": 0.4,
@@ -434,7 +434,7 @@ func _spawn_random_resource(current_day: int):
 	# Spawn the resource
 	spawn_resource(chosen_type, position, value)
 
-func _update_resource_flows(delta: float):
+func _update_resource_flows(delta: float) -> void:
 	# Update all resource flows
 	for flow in resource_flow_connections.duplicate():
 		flow.time_remaining -= delta
@@ -475,7 +475,7 @@ func consume_resource(resource: EcosystemResource, entity, amount: float = 0.0) 
 	
 	return consumed_amount
 
-func create_resource_flow(start_position: Vector3, end_position: Vector3, resource_type: String, value: float, duration: float = 5.0):
+func create_resource_flow(start_position: Vector3, end_position: Vector3, resource_type: String, value: float, duration: float = 5.0) -> void:
 	# Create a flow of resources from one point to another
 	var flow = {
 		"start": start_position,
@@ -497,7 +497,7 @@ func create_resource_flow(start_position: Vector3, end_position: Vector3, resour
 	resource.origin_position = start_position
 	resource.destination_position = end_position
 
-func adjust_for_season(season: int):
+func adjust_for_season(season: int) -> void:
 	# Adjust resource generation based on season
 	if season < 0 or season >= season_modifiers.size():
 		return
@@ -516,7 +516,7 @@ func adjust_for_season(season: int):
 			if modifier < 0.8 and randf() < 0.1:
 				_transform_resource(resource)
 
-func recycle_entity_resources(position: Vector3, value: float):
+func recycle_entity_resources(position: Vector3, value: float) -> void:
 	# When an entity expires, it returns resources to the environment
 	if value <= 0:
 		return
@@ -561,3 +561,9 @@ func recycle_entity_resources(position: Vector3, value: float):
 			randf_range(-radius, radius)
 		)
 		spawn_resource("essence", essence_pos, essence_value)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

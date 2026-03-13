@@ -15,11 +15,11 @@ extends Node3D
 var multi_mesh_instance: MultiMeshInstance3D
 var rotation_speeds: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	setup_lighting()
 	setup_cubes()
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Create a simple environment for basic lighting and a dark background.
 	var env = WorldEnvironment.new()
 	var environment = Environment.new()
@@ -64,7 +64,7 @@ func create_grid_shader_material() -> ShaderMaterial:
 	
 	return material
 
-func setup_cubes():
+func setup_cubes() -> void:
 	# Use a MultiMesh for performance, which is ideal for drawing
 	# thousands of identical meshes.
 	multi_mesh_instance = MultiMeshInstance3D.new()
@@ -108,7 +108,7 @@ func setup_cubes():
 	# The cubes will all have the same Grid shader appearance for performance
 	print("VRCubes: Created %d cubes with Grid shader wireframe effect" % cube_count)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -135,3 +135,9 @@ func _process(delta):
 		transform.origin = original_position
 		
 		multimesh.set_instance_transform(i, transform)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

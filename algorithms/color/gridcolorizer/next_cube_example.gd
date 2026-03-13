@@ -8,7 +8,7 @@ extends Node3D
 # Array of next cubes in the scene
 var next_cubes: Array[NextCube] = []
 
-func _ready():
+func _ready() -> void:
 	# Find all NextCube nodes in the scene
 	find_next_cubes()
 	
@@ -17,12 +17,12 @@ func _ready():
 	
 	print("NextCubeExample: Ready with %d next cubes detected" % next_cubes.size())
 
-func find_next_cubes():
+func find_next_cubes() -> void:
 	"""Find all NextCube instances in the scene"""
 	next_cubes.clear()
 	find_next_cubes_recursive(get_tree().current_scene)
 
-func find_next_cubes_recursive(node: Node):
+func find_next_cubes_recursive(node: Node) -> void:
 	"""Recursively find NextCube nodes"""
 	if node is NextCube:
 		next_cubes.append(node as NextCube)
@@ -31,14 +31,14 @@ func find_next_cubes_recursive(node: Node):
 	for child in node.get_children():
 		find_next_cubes_recursive(child)
 
-func connect_next_cube_signals():
+func connect_next_cube_signals() -> void:
 	"""Connect to all next cube signals"""
 	for next_cube in next_cubes:
 		if not next_cube.next_requested.is_connected(_on_next_requested):
 			next_cube.next_requested.connect(_on_next_requested)
 			print("Connected to NextCube at %s" % next_cube.global_position)
 
-func _on_next_requested(from_position: Vector3):
+func _on_next_requested(from_position: Vector3) -> void:
 	"""Handle next pattern request from any next cube"""
 	print("🎨 Next pattern requested from position: %s" % from_position)
 	
@@ -49,7 +49,7 @@ func _on_next_requested(from_position: Vector3):
 		print("⚠️ GridColorizer not found or doesn't support pattern advancement")
 
 # Alternative: Manual pattern cycling
-func _on_next_cube_activated():
+func _on_next_cube_activated() -> void:
 	"""Alternative handler for simpler pattern cycling"""
 	if grid_colorizer:
 		# Manually advance the pattern index

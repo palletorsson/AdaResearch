@@ -152,9 +152,15 @@ func get_level_info(level: int) -> Dictionary:
 		"y_position": level * (block_height + vertical_offset)
 	}
 
-func reset_pagoda():
+func reset_pagoda() -> void:
 	"""Clear and rebuild the pagoda"""
 	for block in _blocks:
 		block.queue_free()
 	_blocks.clear()
 	_build_pagoda()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

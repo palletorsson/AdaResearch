@@ -49,7 +49,7 @@ var reset_timer: Timer
 # ==============================
 # INITIALIZATION
 # ==============================
-func _ready():
+func _ready() -> void:
 	if mesh_instance == null:
 		push_error("MeshInstance3D not found!")
 		return
@@ -94,7 +94,7 @@ func _ready():
 # ==============================
 # ONE STEP OF REACTION–DIFFUSION
 # ==============================
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	# For each cell, compute Laplacian and update into scratch arrays
 	for y in range(height):
 		for x in range(width):
@@ -137,7 +137,7 @@ func _on_Timer_timeout():
 # HELPER FUNCTIONS
 # ==============================
 # Simple material assignment
-func _assign_texture_to_mesh(mesh_inst: MeshInstance3D, tex: Texture2D):
+func _assign_texture_to_mesh(mesh_inst: MeshInstance3D, tex: Texture2D) -> void:
 	var mat = StandardMaterial3D.new()
 	mat.albedo_texture = tex
 	mesh_inst.material_override = mat
@@ -159,14 +159,14 @@ func _wrap_index(x: int, y: int) -> int:
 	return xx + yy * width
 
 # Re-initialize the U/V arrays with a classic Gray-Scott pattern
-func _reset_fields():
+func _reset_fields() -> void:
 	# Option to use a random pattern:
 	_reset_fields_random()
 	# Alternatively, use an image-based initialization:
 	#_reset_fields_from_image("res://icon.png")
 
 # Random initialization of U and V fields
-func _reset_fields_random():
+func _reset_fields_random() -> void:
 	# Fill U with random values between 0 and 1, and V with random values between 0 and 1
 	for i in range(width * height):
 		U[i] = randf()  # random U value
@@ -181,7 +181,7 @@ func _reset_fields_random():
 	texture.update(img)
 
 # Image-based initialization of U and V fields
-func _reset_fields_from_image(image_path: String):
+func _reset_fields_from_image(image_path: String) -> void:
 	# Load an image from disk
 	var pattern_img = Image.new()
 	var err = pattern_img.load(image_path)
@@ -208,6 +208,12 @@ func _reset_fields_from_image(image_path: String):
 # ==============================
 # RESET FUNCTION (EVERY reset_interval SECONDS)
 # ==============================
-func _on_Reset_Timer():
+func _on_Reset_Timer() -> void:
 	print("🔄 Resetting Reaction–Diffusion...")
 	_reset_fields()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

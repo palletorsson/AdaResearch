@@ -567,3 +567,9 @@ func _reset_stats() -> void:
 	_result_label.text = ""
 	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
 	_history_label.text = ""
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

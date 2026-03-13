@@ -31,7 +31,7 @@ var camera_distance: float = 18.0
 var camera_angle: float = 0.0
 var camera_height: float = 12.0
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	net_pattern_option.item_selected.connect(_on_net_pattern_selected)
 	space_size_x_slider.value_changed.connect(_on_space_size_x_changed)
@@ -57,7 +57,7 @@ func _ready():
 	_update_camera()
 	_update_stats()
 
-func _setup_ui():
+func _setup_ui() -> void:
 	"""Initialize UI with current net space settings"""
 	# Setup net pattern options
 	net_pattern_option.clear()
@@ -119,85 +119,85 @@ func _setup_ui():
 	# Setup color picker
 	base_color_picker.color = net_space.base_color
 
-func _update_camera():
+func _update_camera() -> void:
 	"""Update camera position for optimal viewing"""
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_net_pattern_selected(index: int):
+func _on_net_pattern_selected(index: int) -> void:
 	net_space.net_pattern = index
 	_update_stats()
 
-func _on_space_size_x_changed(value: float):
+func _on_space_size_x_changed(value: float) -> void:
 	net_space.space_size.x = int(value)
 	_update_stats()
 
-func _on_space_size_y_changed(value: float):
+func _on_space_size_y_changed(value: float) -> void:
 	net_space.space_size.y = int(value)
 	_update_stats()
 
-func _on_space_size_z_changed(value: float):
+func _on_space_size_z_changed(value: float) -> void:
 	net_space.space_size.z = int(value)
 	_update_stats()
 
-func _on_tetrahedron_size_changed(value: float):
+func _on_tetrahedron_size_changed(value: float) -> void:
 	net_space.tetrahedron_size = value
 	_update_stats()
 
-func _on_spacing_changed(value: float):
+func _on_spacing_changed(value: float) -> void:
 	net_space.spacing = value
 	_update_stats()
 
-func _on_hollow_center_toggled(pressed: bool):
+func _on_hollow_center_toggled(pressed: bool) -> void:
 	net_space.create_hollow_center = pressed
 	_update_stats()
 
-func _on_hollow_radius_changed(value: float):
+func _on_hollow_radius_changed(value: float) -> void:
 	net_space.hollow_radius = value
 	_update_stats()
 
-func _on_rotation_variety_toggled(pressed: bool):
+func _on_rotation_variety_toggled(pressed: bool) -> void:
 	net_space.rotation_variety = pressed
 	_update_stats()
 
-func _on_offset_pattern_toggled(pressed: bool):
+func _on_offset_pattern_toggled(pressed: bool) -> void:
 	net_space.offset_pattern = pressed
 	_update_stats()
 
-func _on_spiral_arrangement_toggled(pressed: bool):
+func _on_spiral_arrangement_toggled(pressed: bool) -> void:
 	net_space.spiral_arrangement = pressed
 	_update_stats()
 
-func _on_base_color_changed(color: Color):
+func _on_base_color_changed(color: Color) -> void:
 	net_space.base_color = color
 	_update_stats()
 
-func _on_rainbow_gradient_toggled(pressed: bool):
+func _on_rainbow_gradient_toggled(pressed: bool) -> void:
 	net_space.use_rainbow_gradient = pressed
 	_update_stats()
 
-func _on_emission_changed(value: float):
+func _on_emission_changed(value: float) -> void:
 	net_space.emission_strength = value
 	_update_stats()
 
-func _on_show_edges_toggled(pressed: bool):
+func _on_show_edges_toggled(pressed: bool) -> void:
 	net_space.show_edges = pressed
 	_update_stats()
 
-func _on_transparency_changed(value: float):
+func _on_transparency_changed(value: float) -> void:
 	net_space.transparency = value
 	_update_stats()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	net_space.regenerate()
 	_update_stats()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_randomize_parameters()
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	if not stats_label:
 		return
@@ -211,7 +211,7 @@ func _update_stats():
 	stats_label.text += "Hollow: " + ("Yes" if stats["hollow_center"] else "No") + "\n"
 	stats_label.text += "Rainbow: " + ("Yes" if stats["rainbow_gradient"] else "No")
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize net space parameters for variety"""
 	net_space.net_pattern = randi() % 4
 	net_space.space_size = Vector3i(
@@ -242,7 +242,7 @@ func _randomize_parameters():
 	net_space.regenerate()
 	_update_stats()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current net space settings"""
 	if net_pattern_option:
 		net_pattern_option.selected = net_space.net_pattern
@@ -277,7 +277,7 @@ func _update_ui():
 	if transparency_slider:
 		transparency_slider.value = net_space.transparency
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for camera control and interactions"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:

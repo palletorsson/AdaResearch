@@ -20,7 +20,7 @@ var max_blur_radius := 20.0  # Maximum blur kernel radius
 var current_blur_radius := 0.0
 var active := true
 
-func _ready():
+func _ready() -> void:
 	_initialize_image()
 	_setup_material()
 

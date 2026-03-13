@@ -66,7 +66,7 @@ var ikeda_params: Dictionary = {
 	"u": 0.918
 }
 
-func _ready():
+func _ready() -> void:
 	# Force immediate initialization
 	print("Initializing Strange Attractors...")
 	_reset_position()
@@ -77,12 +77,12 @@ func _ready():
 	# Start with a few points to see something immediately
 	_generate_initial_points()
 
-func _generate_initial_points():
+func _generate_initial_points() -> void:
 	# Generate some initial points so we see something right away
 	for i in range(min(100, max_points)):
 		_calculate_next_iteration()
 
-func _calculate_next_iteration():
+func _calculate_next_iteration() -> void:
 	if attractor_type == AttractorType.LORENZ:
 		# For Lorenz we use the 3D calculation
 		current_position = _lorenz_attractor(current_position)
@@ -111,7 +111,7 @@ func _process(_delta):
 	# Force redraw
 	queue_redraw()
 
-func _draw():
+func _draw() -> void:
 	if not is_initialized:
 		return
 		
@@ -169,7 +169,7 @@ func _draw():
 		Color(1, 1, 1, 0.6)
 	)
 
-func _reset_position():
+func _reset_position() -> void:
 	print("Resetting position for ", _get_attractor_name())
 	
 	match attractor_type:
@@ -287,13 +287,13 @@ func _get_attractor_name() -> String:
 		_:
 			return "Unknown Attractor"
 
-func _change_attractor(new_type: AttractorType):
+func _change_attractor(new_type: AttractorType) -> void:
 	print("Changing to attractor: ", new_type)
 	attractor_type = new_type
 	_reset_position()
 	_generate_initial_points()  # Generate some points immediately
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Handle input to change attractor type
 	if event is InputEventKey and event.pressed:
 		match event.keycode:

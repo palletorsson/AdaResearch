@@ -4,7 +4,7 @@ extends RigidBody3D
 @export var speed: float = 8.0
 @export var lifetime: float = 5.0
 
-func _ready():
+func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 1
 	body_entered.connect(_on_body_entered)
@@ -12,7 +12,7 @@ func _ready():
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
-func _on_body_entered(body: Node):
+func _on_body_entered(body: Node) -> void:
 	# Check if body is player or player part
 	# Often XR players are composed of multiple bodies (Head, Hands, etc.)
 	# We'll check for methods or groups, or fallback to GameManager if we hit a "Player" named thing

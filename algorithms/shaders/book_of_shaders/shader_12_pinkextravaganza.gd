@@ -165,3 +165,9 @@ func _process(delta: float) -> void:
 			# Gentle bobbing for the theatrical objects
 			if i != 3: # Not the water plane
 				objects[i].position.y += sin(Time.get_ticks_msec() * 0.001 + float(i) * 1.5) * 0.001
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

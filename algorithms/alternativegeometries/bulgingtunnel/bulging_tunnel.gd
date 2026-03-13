@@ -18,7 +18,7 @@ var tunnel_base: CSGCylinder3D
 var bulges: Array = []
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	# Create a CSG root node
 	csg_root = CSGCombiner3D.new()
 	csg_root.name = "BulgingTunnelCSG"
@@ -36,7 +36,7 @@ func _ready():
 	apply_material()
 
 # Creates the main tunnel structure with bulges
-func create_tunnel():
+func create_tunnel() -> void:
 	# Create the main tunnel cylinder (oriented along Z-axis)
 	tunnel_base = CSGCylinder3D.new()
 	tunnel_base.radius = tunnel_radius
@@ -53,7 +53,7 @@ func create_tunnel():
 	create_bulges()
 
 # Creates the bulging sections of the tunnel
-func create_bulges():
+func create_bulges() -> void:
 	# Calculate spacing between bulges
 	var spacing = tunnel_length / (num_bulges + 1)
 	
@@ -92,7 +92,7 @@ func create_single_bulge(position: float) -> CSGSphere3D:
 	return bulge
 
 # Apply material to all CSG shapes
-func apply_material():
+func apply_material() -> void:
 	# Create a new material
 	var material = StandardMaterial3D.new()
 	material.albedo_color = tunnel_color
@@ -107,7 +107,7 @@ func apply_material():
 		bulge.material = material
 
 # Optional: Expose a function to rebuild the tunnel with new parameters
-func rebuild_tunnel():
+func rebuild_tunnel() -> void:
 	# Remove existing bulges
 	for bulge in bulges:
 		bulge.queue_free()
@@ -125,7 +125,7 @@ func rebuild_tunnel():
 	apply_material()
 
 # Creates a hollow tunnel (subtract a smaller cylinder from the main one)
-func create_hollow_tunnel():
+func create_hollow_tunnel() -> void:
 	# Add the main base cylinder first
 	create_tunnel()
 	
@@ -145,7 +145,7 @@ func create_hollow_tunnel():
 	csg_root.add_child(inner_cylinder)
 
 # Creates a more complex bulging tunnel with multiple shapes
-func create_complex_tunnel():
+func create_complex_tunnel() -> void:
 	# Create basic tunnel as foundation
 	create_tunnel()
 	
@@ -192,3 +192,9 @@ func create_complex_tunnel():
 		
 	# Apply material
 	apply_material()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

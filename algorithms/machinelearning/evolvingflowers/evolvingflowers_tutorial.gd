@@ -16,7 +16,7 @@ This tutorial card summarizes how `res://algorithms/machinelearning/evolvingflow
 - `[code]crossover()[/code]` handles a key part of the simulation loop.
 [color=yellow]Code[/color]
 [code]
-func _init():
+func _init() -> void:
     # Core behaviour described in the tutorial
     pass
 [/code]

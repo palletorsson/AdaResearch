@@ -23,7 +23,7 @@ var timer: float = 0.0
 var is_animating: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	if show_animation:
 		is_animating = true
 		_step_0_initial_cube()
@@ -31,7 +31,7 @@ func _ready():
 		_build_instant()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_animating:
 		return
 
@@ -42,7 +42,7 @@ func _process(delta: float):
 		_execute_step(step)
 
 
-func _execute_step(s: int):
+func _execute_step(s: int) -> void:
 	match s:
 		1: _step_1_first_subdivision()
 		2: _step_2_shape_seat()
@@ -54,7 +54,7 @@ func _execute_step(s: int):
 			print("Recursive chair complete! Total parts: %d" % all_cubes.size())
 
 
-func _build_instant():
+func _build_instant() -> void:
 	_step_0_initial_cube()
 	_step_1_first_subdivision()
 	_step_2_shape_seat()
@@ -63,13 +63,13 @@ func _build_instant():
 	_step_5_add_details()
 
 
-func _step_0_initial_cube():
+func _step_0_initial_cube() -> void:
 	# Create the initial cube that will become the chair
 	_create_cube(Vector3(0, chair_size * 0.5, 0), Vector3(chair_size, chair_size, chair_size), 0, "base")
 	print("Step 0: Initial cube")
 
 
-func _step_1_first_subdivision():
+func _step_1_first_subdivision() -> void:
 	# Subdivide into 3x3x3 = 27 parts (like a Rubik's cube)
 	# Remove original, create grid
 	var base = _find_cubes_by_role("base")
@@ -116,7 +116,7 @@ func _step_1_first_subdivision():
 	print("Step 1: Subdivided into chair shape")
 
 
-func _step_2_shape_seat():
+func _step_2_shape_seat() -> void:
 	# Flatten the seat cubes - make thinner for plastic look
 	var seats = _find_cubes_by_role("seat")
 	for cube_data in seats:
@@ -131,7 +131,7 @@ func _step_2_shape_seat():
 	print("Step 2: Shaped seat (thin plastic)")
 
 
-func _step_3_create_legs():
+func _step_3_create_legs() -> void:
 	# Extend the leg cubes downward - thinner for plastic
 	var legs = _find_cubes_by_role("leg_top")
 	for cube_data in legs:
@@ -154,7 +154,7 @@ func _step_3_create_legs():
 	print("Step 3: Extended legs (thin plastic)")
 
 
-func _step_4_create_back():
+func _step_4_create_back() -> void:
 	# Make back taller - thinner for plastic
 	var backs = _find_cubes_by_role("back")
 	for cube_data in backs:
@@ -174,7 +174,7 @@ func _step_4_create_back():
 	print("Step 4: Extended back (thin plastic)")
 
 
-func _step_5_add_details():
+func _step_5_add_details() -> void:
 	# Add armrests by creating new small cubes - thinner for plastic
 	var arm_size = chair_size * 0.04
 	var arm_length = chair_size * 0.5
@@ -208,7 +208,7 @@ func _step_5_add_details():
 	print("Step 5: Added armrests (thin plastic)")
 
 
-func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String):
+func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -222,7 +222,7 @@ func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String):
 	all_cubes.append({"node": mesh_instance, "generation": generation, "role": role})
 
 
-func _apply_color(mesh: MeshInstance3D, color: Color):
+func _apply_color(mesh: MeshInstance3D, color: Color) -> void:
 	var material := StandardMaterial3D.new()
 	material.albedo_color = color
 	# Light plastic look - slightly shiny, smooth
@@ -240,13 +240,13 @@ func _find_cubes_by_role(role: String) -> Array:
 	return result
 
 
-func _remove_cube(cube_data: Dictionary):
+func _remove_cube(cube_data: Dictionary) -> void:
 	if cube_data.node and is_instance_valid(cube_data.node):
 		cube_data.node.queue_free()
 	all_cubes.erase(cube_data)
 
 
-func reset():
+func reset() -> void:
 	for cube_data in all_cubes:
 		if cube_data.node and is_instance_valid(cube_data.node):
 			cube_data.node.queue_free()
@@ -259,3 +259,9 @@ func reset():
 		_step_0_initial_cube()
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

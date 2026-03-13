@@ -35,14 +35,14 @@ class BSPNode:
 	var split_position: float = 0.0
 	var partition_probability: float = 1.0
 	
-	func _init(aabb: AABB, d: int = 0):
+	func _init(aabb: AABB, d: int = 0) -> void:
 		bounds = aabb
 		depth = d
 
-func _ready():
+func _ready() -> void:
 	generate_bsp()
 
-func generate_bsp():
+func generate_bsp() -> void:
 	clear_children()
 	all_cells.clear()
 
@@ -65,7 +65,7 @@ func generate_bsp():
 	if show_heatmap:
 		create_heatmap_mesh()
 
-func partition_node(node: BSPNode):
+func partition_node(node: BSPNode) -> void:
 	if node.depth >= max_depth:
 		return
 	
@@ -153,14 +153,14 @@ func get_split_ratio(position: Vector3, axis: int) -> float:
 	
 	return clamp(base_ratio + variation * center_influence, 0.3, 0.7)
 
-func collect_leaves(node: BSPNode):
+func collect_leaves(node: BSPNode) -> void:
 	if node.is_leaf:
 		all_cells.append(node)
 	else:
 		for child in node.children:
 			collect_leaves(child)
 
-func visualize_partitions():
+func visualize_partitions() -> void:
 	# Note: clear_children() is called in generate_bsp() before this
 	for cell in all_cells:
 		var color_intensity = cell.partition_probability
@@ -242,7 +242,7 @@ func _create_box_geo_nodes(bounds: AABB, color: Color) -> Node3D:
 	
 	return container
 
-func create_heatmap_mesh():
+func create_heatmap_mesh() -> void:
 	# Create a plane mesh showing the partition probability heatmap
 	var heatmap_mesh = MeshInstance3D.new()
 	add_child.call_deferred(heatmap_mesh)
@@ -280,7 +280,7 @@ func create_heatmap_mesh():
 	
 	heatmap_mesh.mesh = surface_tool.commit()
 
-func create_stage():
+func create_stage() -> void:
 	# Create an off-white platform/stage beneath the BSP sculpture
 	var stage = MeshInstance3D.new()
 	stage.name = "Stage"
@@ -316,6 +316,12 @@ func create_stage():
 	rim_mat.roughness = 0.7
 	rim.material_override = rim_mat
 
-func clear_children():
+func clear_children() -> void:
 	for child in get_children():
 		child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

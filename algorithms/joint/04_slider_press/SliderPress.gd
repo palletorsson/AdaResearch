@@ -5,7 +5,7 @@ var timer := 0.0
 var direction := 1.0
 var idle_osc := 0.0
 
-func _build_demo():
+func _build_demo() -> void:
 	var frame := StaticBody3D.new()
 	frame.name = "Frame"
 	frame.position = Vector3(0.0, 2.0, 0.0)
@@ -33,7 +33,7 @@ func _build_demo():
 	# Begin with motion
 	call_deferred("_kickstart")
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	timer += delta
 	if timer > 2.5:
 		timer = 0.0
@@ -43,6 +43,12 @@ func _physics_process(delta):
 		idle_osc += delta
 		var v := 0.4 * sin(idle_osc * 2.6)
 
-func _kickstart():
+func _kickstart() -> void:
 	if is_instance_valid(slider):
 		pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

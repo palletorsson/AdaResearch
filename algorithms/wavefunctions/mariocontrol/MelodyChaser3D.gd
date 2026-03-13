@@ -54,7 +54,7 @@ const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", 
 const A4_FREQ = 440.0
 const SAMPLE_RATE = 44100
 
-func _ready():
+func _ready() -> void:
 	_setup_note_positions()
 	_create_note_markers()
 	_create_leader_point()
@@ -64,7 +64,7 @@ func _ready():
 
 	next_note_time = Time.get_ticks_msec() / 1000.0 + 1.0  # Start after 1 second
 
-func apply_grid_config(data: Dictionary):
+func apply_grid_config(data: Dictionary) -> void:
 	if data.has("scale"):
 		var s = str(data["scale"]).to_lower().strip_edges()
 		# Accept various formats
@@ -86,7 +86,7 @@ func apply_grid_config(data: Dictionary):
 	_setup_note_positions()
 	_create_note_markers()
 
-func _setup_note_positions():
+func _setup_note_positions() -> void:
 	note_positions.clear()
 	note_data.clear()
 
@@ -109,7 +109,7 @@ func _setup_note_positions():
 	else:
 		_setup_radial_layout(pattern, space, center, num_notes)
 
-func _setup_radial_layout(pattern: Array, space: Vector3, center: Vector3, num_notes: int):
+func _setup_radial_layout(pattern: Array, space: Vector3, center: Vector3, num_notes: int) -> void:
 	# Position notes radially from center - like clock positions
 	for i in range(num_notes):
 		var semitone = pattern[i] % 12
@@ -137,7 +137,7 @@ func _setup_radial_layout(pattern: Array, space: Vector3, center: Vector3, num_n
 			"index": i
 		})
 
-func _setup_circle_of_fifths(pattern: Array, space: Vector3, center: Vector3, num_notes: int):
+func _setup_circle_of_fifths(pattern: Array, space: Vector3, center: Vector3, num_notes: int) -> void:
 	# Classic circle of fifths - flat circle where position = fifth order
 	# Each note is 30 degrees apart (360/12), but ordered by fifths
 	for i in range(num_notes):
@@ -163,7 +163,7 @@ func _setup_circle_of_fifths(pattern: Array, space: Vector3, center: Vector3, nu
 			"fifth_index": i  # Track position in circle
 		})
 
-func _setup_fifths_helix(pattern: Array, space: Vector3, center: Vector3, num_notes: int):
+func _setup_fifths_helix(pattern: Array, space: Vector3, center: Vector3, num_notes: int) -> void:
 	# 3D Helix of Fifths - spiral upward through octaves
 	# After 12 fifths, you're 7 octaves higher (Pythagorean spiral)
 	# This visualizes the "comma" - the spiral doesn't close!
@@ -196,7 +196,7 @@ func _setup_fifths_helix(pattern: Array, space: Vector3, center: Vector3, num_no
 			"fifth_index": i
 		})
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# Update cooldowns
 	var to_remove = []
 	for note_id in note_cooldowns:
@@ -218,7 +218,7 @@ func _process(delta: float):
 		var user_pos = grab_sphere.position
 		_check_note_proximity(user_pos)
 
-func _advance_leader():
+func _advance_leader() -> void:
 	# Move leader to the note that's ahead of current
 	var target_index = (current_note_index + int(leader_ahead_beats)) % note_data.size()
 
@@ -235,7 +235,7 @@ func _advance_leader():
 	# Highlight the current target note
 	_highlight_target_note(current_note_index)
 
-func _check_note_proximity(user_pos: Vector3):
+func _check_note_proximity(user_pos: Vector3) -> void:
 	for i in range(note_data.size()):
 		var note = note_data[i]
 		var distance = user_pos.distance_to(note.position)
@@ -247,7 +247,7 @@ func _check_note_proximity(user_pos: Vector3):
 				note_cooldowns[note_id] = 0.2  # Short cooldown per note
 				break  # Only one note at a time
 
-func _trigger_note(semitone: int, octave: int, note_index: int):
+func _trigger_note(semitone: int, octave: int, note_index: int) -> void:
 	var freq = _semitone_to_freq(semitone, octave)
 
 	# Update label
@@ -296,7 +296,7 @@ func _generate_sine_bell(freq: float) -> AudioStreamWAV:
 
 # --- Visuals ---
 
-func _create_leader_point():
+func _create_leader_point() -> void:
 	leader_point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.025
@@ -318,7 +318,7 @@ func _create_leader_point():
 
 	mapper.add_child(leader_point)
 
-func _create_note_markers():
+func _create_note_markers() -> void:
 	# Clear existing
 	for key in note_markers:
 		if is_instance_valid(note_markers[key]):
@@ -371,7 +371,7 @@ func _create_note_markers():
 		lbl.name = "NoteLabel_" + str(i)
 		mapper.add_child(lbl)
 
-func _create_fifth_connections():
+func _create_fifth_connections() -> void:
 	# Draw lines connecting consecutive notes to show the path
 	for i in range(note_data.size() - 1):
 		var start_pos = note_positions[i]
@@ -418,7 +418,7 @@ func _create_line_between(start: Vector3, end: Vector3, index: int) -> MeshInsta
 
 	return line
 
-func _highlight_target_note(index: int):
+func _highlight_target_note(index: int) -> void:
 	# Dim all notes, brighten target
 	for i in note_markers:
 		var marker = note_markers[i]
@@ -436,7 +436,7 @@ func _highlight_target_note(index: int):
 			mat.emission_energy_multiplier = 0.5
 			marker.scale = Vector3.ONE
 
-func _flash_note_marker(index: int):
+func _flash_note_marker(index: int) -> void:
 	if not note_markers.has(index):
 		return
 
@@ -457,3 +457,9 @@ func _flash_note_marker(index: int):
 	var tween2 = create_tween()
 	tween2.tween_property(marker, "scale", Vector3.ONE * 1.8, 0.05)
 	tween2.tween_property(marker, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

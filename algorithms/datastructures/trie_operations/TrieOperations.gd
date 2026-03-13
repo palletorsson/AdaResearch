@@ -28,7 +28,7 @@ class TrieNode:
 	var level: int = 0
 	var position_in_level: int = 0
 	
-	func _init(char: String = ""):
+	func _init(char: String = "") -> void:
 		character = char
 		children = {}
 		is_end_of_word = false
@@ -39,12 +39,12 @@ var all_nodes = []
 var trie_edges = []
 var inserted_words = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_trie()
 	insert_initial_words()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Root node material
 	var root_material = StandardMaterial3D.new()
 	root_material.albedo_color = Color(0.8, 0.8, 0.2, 1.0)
@@ -66,17 +66,17 @@ func setup_materials():
 	prefix_material.emission = Color(0.3, 0.15, 0.05, 1.0)
 	$PrefixIndicator.material_override = prefix_material
 
-func initialize_trie():
+func initialize_trie() -> void:
 	root = TrieNode.new("")
 	root.visual_object = $RootNode
 	all_nodes.append(root)
 
-func insert_initial_words():
+func insert_initial_words() -> void:
 	var initial_words = ["cat", "car", "card", "care", "careful", "cars", "carry"]
 	for word in initial_words:
 		insert_word(word)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -87,7 +87,7 @@ func _process(delta):
 	animate_trie()
 	animate_indicators()
 
-func perform_trie_operation():
+func perform_trie_operation() -> void:
 	current_operation = (current_operation + 1) % TrieOperation.size()
 	
 	match current_operation:
@@ -115,7 +115,7 @@ func perform_trie_operation():
 		TrieOperation.AUTOCOMPLETE:
 			demonstrate_autocomplete()
 
-func insert_word(word: String):
+func insert_word(word: String) -> void:
 	if word in inserted_words:
 		return
 	
@@ -188,7 +188,7 @@ func delete_word(word: String):
 	update_edges()
 	update_end_of_word_visuals()
 
-func delete_unnecessary_nodes(path: Array, word: String):
+func delete_unnecessary_nodes(path: Array, word: String) -> void:
 	# Start from the end and work backwards
 	for i in range(path.size() - 1, 0, -1):
 		var node = path[i]
@@ -205,7 +205,7 @@ func delete_unnecessary_nodes(path: Array, word: String):
 		node.visual_object.queue_free()
 		all_nodes.erase(node)
 
-func search_prefix(prefix: String):
+func search_prefix(prefix: String) -> void:
 	search_path.clear()
 	var current_node = root
 	search_path.append(current_node)
@@ -221,7 +221,7 @@ func search_prefix(prefix: String):
 	# Collect all words with this prefix
 	collect_words_with_prefix(current_node, prefix)
 
-func collect_words_with_prefix(node: TrieNode, current_prefix: String):
+func collect_words_with_prefix(node: TrieNode, current_prefix: String) -> void:
 	# This is used for prefix search visualization
 	if node.is_end_of_word:
 		# Found a complete word with the prefix
@@ -230,11 +230,11 @@ func collect_words_with_prefix(node: TrieNode, current_prefix: String):
 	for char in node.children:
 		collect_words_with_prefix(node.children[char], current_prefix + char)
 
-func demonstrate_autocomplete():
+func demonstrate_autocomplete() -> void:
 	# Show autocomplete for "car"
 	search_prefix("car")
 
-func create_visual_node(node: TrieNode):
+func create_visual_node(node: TrieNode) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.2
 	
@@ -258,7 +258,7 @@ func create_visual_node(node: TrieNode):
 	$TrieNodes.add_child(sphere)
 	node.visual_object = sphere
 
-func calculate_positions():
+func calculate_positions() -> void:
 	# Organize nodes by level
 	var levels = {}
 	for node in all_nodes:
@@ -282,7 +282,7 @@ func calculate_positions():
 			
 			node.visual_object.position = Vector3(x_offset, y_position, 0)
 
-func update_edges():
+func update_edges() -> void:
 	# Clear existing edges
 	for edge in trie_edges:
 		edge.queue_free()
@@ -293,7 +293,7 @@ func update_edges():
 		if node.parent and node != root:
 			create_trie_edge(node.parent, node)
 
-func create_trie_edge(parent: TrieNode, child: TrieNode):
+func create_trie_edge(parent: TrieNode, child: TrieNode) -> void:
 	var edge = CSGCylinder3D.new()
 	var parent_pos = parent.visual_object.position
 	var child_pos = child.visual_object.position
@@ -333,7 +333,7 @@ func create_trie_edge(parent: TrieNode, child: TrieNode):
 	$TrieEdges.add_child(edge)
 	trie_edges.append(edge)
 
-func update_end_of_word_visuals():
+func update_end_of_word_visuals() -> void:
 	# Update materials for end-of-word nodes
 	for node in all_nodes:
 		var material = node.visual_object.material_override as StandardMaterial3D
@@ -344,7 +344,7 @@ func update_end_of_word_visuals():
 			else:
 				material.emission = material.albedo_color * 0.3
 
-func animate_trie():
+func animate_trie() -> void:
 	match current_operation:
 		TrieOperation.INSERT_WORD:
 			animate_insertion()
@@ -361,14 +361,14 @@ func animate_trie():
 		TrieOperation.AUTOCOMPLETE:
 			animate_autocomplete()
 
-func animate_insertion():
+func animate_insertion() -> void:
 	# Pulse all end-of-word nodes
 	for node in all_nodes:
 		if node.is_end_of_word:
 			var pulse = 1.0 + sin(time * 6.0 + node.level) * 0.3
 			node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_word_search():
+func animate_word_search() -> void:
 	# Highlight search path
 	for i in range(search_path.size()):
 		var node = search_path[i]
@@ -376,24 +376,24 @@ func animate_word_search():
 		var intensity = max(0.0, sin(wave_phase)) * 0.5
 		node.visual_object.scale = Vector3.ONE * (1.0 + intensity)
 
-func animate_deletion():
+func animate_deletion() -> void:
 	# Red pulsing for nodes being considered for deletion
 	for node in all_nodes:
 		if not node.is_end_of_word and node.children.size() == 0 and node != root:
 			var pulse = 1.0 + sin(time * 8.0 + node.level) * 0.4
 			node.visual_object.scale = Vector3.ONE * pulse
 
-func animate_prefix_search():
+func animate_prefix_search() -> void:
 	# Highlight nodes in search path with blue glow
 	for node in search_path:
 		var glow = 1.0 + sin(time * 5.0) * 0.4
 		node.visual_object.scale = Vector3.ONE * glow
 
-func animate_autocomplete():
+func animate_autocomplete() -> void:
 	# Pulse nodes that match the autocomplete prefix
 	animate_prefix_search()
 	
-func animate_indicators():
+func animate_indicators() -> void:
 	# Word counter
 	var counter_height = word_count * 0.2 + 0.5
 	$WordCounter.size.y = counter_height
@@ -414,3 +414,9 @@ func animate_indicators():
 	# Root node special animation
 	var root_pulse = 1.0 + sin(time * 2.0) * 0.2
 	$RootNode.scale = Vector3.ONE * root_pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -24,7 +24,7 @@ var colony_entrance: Vector3
 var spawn_timer: float = 0.0
 var display_info: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Get references
 	if terrain_path:
 		terrain = get_node(terrain_path)
@@ -41,7 +41,7 @@ func _ready():
 	# Spawn initial ants
 	spawn_initial_ants()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Handle colony growth
 	process_colony_growth(delta)
 	
@@ -49,7 +49,7 @@ func _process(delta):
 	update_info_display()
 
 # Create the visual representation of the colony
-func create_colony_mesh():
+func create_colony_mesh() -> void:
 	# Main colony mound
 	var mound = MeshInstance3D.new()
 	var mound_mesh = SphereMesh.new()
@@ -92,7 +92,7 @@ func create_colony_mesh():
 	add_child(collision)
 
 # Create information display for the colony
-func create_info_display():
+func create_info_display() -> void:
 	display_info = Label3D.new()
 	display_info.position = Vector3(0, colony_size + 1, 0)
 	display_info.pixel_size = 0.01
@@ -105,7 +105,7 @@ func create_info_display():
 	add_child(display_info)
 
 # Update the colony information display
-func update_info_display():
+func update_info_display() -> void:
 	if display_info:
 		display_info.text = "Colony Stats:\n"
 		display_info.text += "Food: " + str(int(stored_food)) + " / " + str(int(max_food_capacity)) + "\n"
@@ -129,12 +129,12 @@ func update_info_display():
 		display_info.text += "Others: " + str(others)
 
 # Spawn the initial ants
-func spawn_initial_ants():
+func spawn_initial_ants() -> void:
 	for i in range(initial_ant_count):
 		spawn_ant()
 
 # Process colony growth
-func process_colony_growth(delta):
+func process_colony_growth(delta) -> void:
 	# Update spawn timer
 	spawn_timer -= delta
 	
@@ -145,7 +145,7 @@ func process_colony_growth(delta):
 		spawn_timer = 10.0  # 10 seconds between new ants
 
 # Spawn a new ant
-func spawn_ant():
+func spawn_ant() -> void:
 	var ant
 	
 	if ant_scene:
@@ -187,7 +187,7 @@ func get_spawn_position() -> Vector3:
 	return spawn_pos
 
 # Add a food source to the colony's knowledge
-func add_food_source(food_source):
+func add_food_source(food_source) -> void:
 	if not food_source in food_sources:
 		food_sources.append(food_source)
 		
@@ -197,11 +197,11 @@ func add_food_source(food_source):
 			ant.update_food_sources(food_sources)
 
 # Deposit food into the colony storage
-func deposit_food(amount: float):
+func deposit_food(amount: float) -> void:
 	stored_food = min(stored_food + amount, max_food_capacity)
 
 # Set the colony's terrain reference
-func set_terrain(terrain_ref):
+func set_terrain(terrain_ref) -> void:
 	terrain = terrain_ref
 	
 	# Update position height to match terrain
@@ -210,11 +210,17 @@ func set_terrain(terrain_ref):
 		position.y = height
 
 # Set the colony's pheromone system reference
-func set_pheromone_system(pheromone_sys):
+func set_pheromone_system(pheromone_sys) -> void:
 	pheromone_system = pheromone_sys
 
 # Remove an ant from the colony
-func remove_ant(ant):
+func remove_ant(ant) -> void:
 	if ant in ants:
 		ants.erase(ant)
 		ant.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

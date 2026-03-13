@@ -28,16 +28,16 @@ class ListNode:
 	var visual_object: CSGSphere3D
 	var position_index: int
 	
-	func _init(val: int):
+	func _init(val: int) -> void:
 		value = val
 		next_node = null
 		position_index = 0
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	initialize_list()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Head pointer material
 	var head_pointer = get_node_or_null("HeadPointer")
 	if head_pointer and (head_pointer is CSGShape3D or head_pointer is MeshInstance3D):
@@ -65,12 +65,12 @@ func setup_materials():
 		size_material.emission = Color(0.3, 0.2, 0.05, 1.0)
 		size_indicator.material_override = size_material
 
-func initialize_list():
+func initialize_list() -> void:
 	# Start with a few nodes
 	for i in range(3):
 		insert_at_tail(i + 1)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	operation_timer += delta
 	
@@ -81,7 +81,7 @@ func _process(delta):
 	animate_list()
 	animate_indicators()
 
-func perform_next_operation():
+func perform_next_operation() -> void:
 	# FIXED: Use int() cast for enum operations in Godot 4
 	current_operation = ListOperation.values()[(int(current_operation) + 1) % ListOperation.size()]
 	
@@ -112,7 +112,7 @@ func perform_next_operation():
 				search_target = nodes[randi() % nodes.size()].value
 				animate_search(search_target)
 
-func insert_at_head(value: int):
+func insert_at_head(value: int) -> void:
 	var new_node = ListNode.new(value)
 	create_visual_node(new_node)
 	
@@ -123,7 +123,7 @@ func insert_at_head(value: int):
 	update_node_positions()
 	update_pointers()
 
-func insert_at_tail(value: int):
+func insert_at_tail(value: int) -> void:
 	var new_node = ListNode.new(value)
 	create_visual_node(new_node)
 	
@@ -134,7 +134,7 @@ func insert_at_tail(value: int):
 	update_node_positions()
 	update_pointers()
 
-func delete_head():
+func delete_head() -> void:
 	if nodes.size() == 0:
 		return
 	
@@ -145,7 +145,7 @@ func delete_head():
 	update_node_positions()
 	update_pointers()
 
-func delete_tail():
+func delete_tail() -> void:
 	if nodes.size() == 0:
 		return
 	
@@ -160,7 +160,7 @@ func delete_tail():
 	update_node_positions()
 	update_pointers()
 
-func create_visual_node(node: ListNode):
+func create_visual_node(node: ListNode) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.4
 	
@@ -186,14 +186,14 @@ func create_visual_node(node: ListNode):
 	
 	node.visual_object = sphere
 
-func update_node_positions():
+func update_node_positions() -> void:
 	for i in range(nodes.size()):
 		var node = nodes[i]
 		node.position_index = i
 		var target_position = Vector3(-6 + i * node_spacing, 0, 0)
 		node.visual_object.position = target_position
 
-func update_pointers():
+func update_pointers() -> void:
 	# Clear existing pointers
 	var list_pointers = get_node_or_null("ListPointers")
 	if list_pointers:
@@ -213,7 +213,7 @@ func update_pointers():
 		else:
 			head_pointer.position = Vector3(-6, 1.5, 0)
 
-func create_pointer(from_index: int, to_index: int):
+func create_pointer(from_index: int, to_index: int) -> void:
 	var pointer = CSGCylinder3D.new()
 	pointer.radius = 0.05
 	pointer.height = node_spacing * 0.8
@@ -240,15 +240,15 @@ func create_pointer(from_index: int, to_index: int):
 	
 	pointers.append(pointer)
 
-func animate_traversal():
+func animate_traversal() -> void:
 	# This will be handled in the animate_list function
 	pass
 
-func animate_search(_target_value: int):
+func animate_search(_target_value: int) -> void:
 	# This will be handled in the animate_list function
 	pass
 
-func animate_list():
+func animate_list() -> void:
 	# Animate node pulsing based on operation
 	for i in range(nodes.size()):
 		var node = nodes[i]
@@ -293,7 +293,7 @@ func animate_list():
 		var head_pulse = 1.0 + sin(time * 5.0) * 0.2
 		head_pointer.scale = Vector3.ONE * head_pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Operation indicator - FIXED: Check if it's a Node3D before setting position
 	var op_height = (int(current_operation) + 1) * 0.3
 	var operation_indicator = get_node_or_null("OperationIndicator")
@@ -333,3 +333,9 @@ func get_operation_name() -> String:
 			return "Search"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

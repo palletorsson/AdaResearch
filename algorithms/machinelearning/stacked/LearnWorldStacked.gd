@@ -911,3 +911,9 @@ func _get_debug_info() -> Dictionary:
 		"success_episodes": success_episodes.size(),
 		"graph_edges": current_structure_graph.size()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

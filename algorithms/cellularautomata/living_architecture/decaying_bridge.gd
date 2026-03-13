@@ -25,7 +25,7 @@ var time_accumulator: float = 0.0
 
 var static_body: StaticBody3D
 
-func _ready():
+func _ready() -> void:
 	# Try to get existing StaticBody3D node, or create one
 	if has_node("StaticBody3D"):
 		static_body = get_node("StaticBody3D")
@@ -36,7 +36,7 @@ func _ready():
 
 	_initialize_bridge()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
@@ -52,7 +52,7 @@ func _process(delta):
 		time_accumulator = 0.0
 		_update_simulation(0.1)
 
-func _initialize_bridge():
+func _initialize_bridge() -> void:
 	# Clear old
 	for child in static_body.get_children():
 		child.queue_free()
@@ -92,7 +92,7 @@ func _initialize_bridge():
 			
 	_update_visuals()
 
-func _update_simulation(dt):
+func _update_simulation(dt) -> void:
 	var changed = false
 	
 	# 1. Decay from player
@@ -130,7 +130,7 @@ func _count_healthy_neighbors(coord: Vector2i) -> int:
 			count += 1
 	return count
 
-func _update_visuals():
+func _update_visuals() -> void:
 	for coord in grid.keys():
 		var health = grid[coord]
 		var mesh = mesh_instances[coord]
@@ -149,3 +149,9 @@ func _update_visuals():
 			col.disabled = true
 		else:
 			col.disabled = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

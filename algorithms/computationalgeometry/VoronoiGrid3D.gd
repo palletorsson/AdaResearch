@@ -20,7 +20,7 @@ var line_nodes: Array[MeshInstance3D] = []
 var sphere_mesh := SphereMesh.new()
 var cylinder_mesh := CylinderMesh.new()
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	# Setup meshes
 	sphere_mesh.radial_segments = 8
@@ -44,11 +44,11 @@ func _ready():
 
 	update_lines()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	update_flocking(delta)
 	update_geometry()
 
-func update_flocking(delta: float):
+func update_flocking(delta: float) -> void:
 	for i in range(points.size()):
 		var p = points[i]
 		var v = velocities[i]
@@ -89,7 +89,7 @@ func update_flocking(delta: float):
 		points[i] = p
 		velocities[i] = v
 
-func update_geometry():
+func update_geometry() -> void:
 	# Move spheres
 	for i in range(points.size()):
 		var p2d = points[i]
@@ -101,7 +101,7 @@ func update_geometry():
 	line_nodes.clear()
 	update_lines()
 
-func update_lines():
+func update_lines() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var i = x * grid_size + y
@@ -110,7 +110,7 @@ func update_lines():
 			if y < grid_size - 1:
 				add_line(points[i], points[i + 1])
 
-func add_line(p1: Vector2, p2: Vector2):
+func add_line(p1: Vector2, p2: Vector2) -> void:
 	var v1 = Vector3(p1.x, p1.y, 0)
 	var v2 = Vector3(p2.x, p2.y, 0)
 	var dir = v2 - v1
@@ -134,3 +134,9 @@ func add_line(p1: Vector2, p2: Vector2):
 	line.scale = Vector3(1.0, length, 1.0)
 	add_child(line)
 	line_nodes.append(line)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

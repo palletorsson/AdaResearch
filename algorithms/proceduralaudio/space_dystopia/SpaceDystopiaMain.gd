@@ -8,7 +8,7 @@ var synth: SciFiSynth
 var track_buttons: Array[Button] = []
 var info_label: Label
 
-func _ready():
+func _ready() -> void:
 	# 1. Setup Sound Engine
 	synth = SciFiSynth.new()
 	synth.name = "SciFiSynth"
@@ -20,7 +20,7 @@ func _ready():
 	# 3. Auto-play Track 1
 	_on_track_selected(1)
 
-func _setup_ui():
+func _setup_ui() -> void:
 	# Background
 	var bg = ColorRect.new()
 	bg.color = Color(0.05, 0.05, 0.08) # Dark SciFi Blue
@@ -79,7 +79,7 @@ func _setup_ui():
 		grid.add_child(btn)
 		track_buttons.append(btn)
 
-func _on_track_selected(id: int):
+func _on_track_selected(id: int) -> void:
 	# Update Synths
 	# Update Synths
 	if id >= 1 and id <= 10:
@@ -89,7 +89,7 @@ func _on_track_selected(id: int):
 		_update_ui_state(id, "Unknown Track")
 		synth.stop_all()
 
-func _update_ui_state(id: int, status: String):
+func _update_ui_state(id: int, status: String) -> void:
 	info_label.text = "Track %d Active\nStatus: %s" % [id, status]
 	
 	for i in range(track_buttons.size()):
@@ -98,3 +98,9 @@ func _update_ui_state(id: int, status: String):
 			btn.modulate = Color(1.0, 1.0, 1.0) # Active
 		else:
 			btn.modulate = Color(0.5, 0.5, 0.5) # Dim
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

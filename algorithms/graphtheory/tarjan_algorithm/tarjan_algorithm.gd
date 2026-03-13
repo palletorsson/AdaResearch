@@ -52,7 +52,7 @@ var edge_lines: Dictionary = {}
 var info_label: Label3D
 var step_timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -60,7 +60,7 @@ func _ready():
 	if auto_start:
 		start_algorithm()
 
-func setup_environment():
+func setup_environment() -> void:
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-50.0, -35.0, 0.0)
 	light.light_energy = 1.2
@@ -80,7 +80,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	vertices.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -102,7 +102,7 @@ func initialize_graph():
 		low_link[vertex] = -1
 		on_stack[vertex] = false
 
-func generate_random_graph():
+func generate_random_graph() -> void:
 	# Create vertices
 	for i in range(graph_size):
 		var vertex = "v" + str(i)
@@ -132,7 +132,7 @@ func has_edge(from: String, to: String) -> bool:
 			return true
 	return false
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	for child in get_children():
 		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_"):
 			child.queue_free()
@@ -186,7 +186,7 @@ func create_visual_elements():
 	info_label.modulate = Color(1, 1, 1, 0.95)
 	add_child(info_label)
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	var from_pos = vertex_nodes[edge.from].position
 	var to_pos = vertex_nodes[edge.to].position
 	
@@ -234,7 +234,7 @@ func create_edge_visual(edge: Dictionary):
 	
 	edge_lines[edge.from + "_" + edge.to] = line_container
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -256,7 +256,7 @@ func start_algorithm():
 	
 	update_info_text("Starting Tarjan's Algorithm...")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not algorithm_running:
 		return
 	
@@ -269,7 +269,7 @@ func _process(delta):
 	# Process one step of the algorithm
 	process_tarjan_step()
 
-func process_tarjan_step():
+func process_tarjan_step() -> void:
 	# If DFS stack is empty, try to start from next unvisited root
 	if dfs_stack.is_empty():
 		while current_root_index < vertices.size():
@@ -359,7 +359,7 @@ func process_tarjan_step():
 			var parent = parent_frame["vertex"]
 			low_link[parent] = min(low_link[parent], low_link[vertex])
 
-func start_dfs(vertex: String):
+func start_dfs(vertex: String) -> void:
 	dfs_stack.append({
 		"vertex": vertex,
 		"state": "INIT",
@@ -370,7 +370,7 @@ func get_scc_color(index: int) -> Color:
 	var colors = [scc_color_1, scc_color_2, scc_color_3, scc_color_4, scc_color_5]
 	return colors[index % colors.size()]
 
-func update_vertex_color(vertex: String, color: Color):
+func update_vertex_color(vertex: String, color: Color) -> void:
 	if vertex_nodes.has(vertex):
 		var material := StandardMaterial3D.new()
 		material.albedo_color = color
@@ -379,7 +379,7 @@ func update_vertex_color(vertex: String, color: Color):
 		material.emission_energy_multiplier = 1.5
 		vertex_nodes[vertex].material_override = material
 
-func update_edge_color(from: String, to: String, color: Color):
+func update_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if edge_lines.has(edge_key):
 		var line = edge_lines[edge_key].get_child(0)
@@ -391,11 +391,11 @@ func update_edge_color(from: String, to: String, color: Color):
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		line.material_override = material
 
-func update_info_text(text: String):
+func update_info_text(text: String) -> void:
 	if info_label:
 		info_label.text = text
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -404,14 +404,20 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_info_text("Paused - Press Space to resume")
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	dfs_stack.clear()
 	current_root_index = 0
 	initialize_graph()
 	create_visual_elements()
 	update_info_text("Tarjan's Algorithm - Press Space to Start")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

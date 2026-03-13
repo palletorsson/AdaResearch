@@ -51,14 +51,14 @@ class SculptureVoxel:
 	var mesh_variant: String = ""
 	var color_zone: Color = Color.WHITE
 	
-	func _init(t: MaterialZone, d: float, compatible: Array[MaterialZone], w: float = 1.0):
+	func _init(t: MaterialZone, d: float, compatible: Array[MaterialZone], w: float = 1.0) -> void:
 		type = t
 		density = d
 		neighbors = compatible.duplicate()
 		weight = w
 		_setup_visual_properties()
 	
-	func _setup_visual_properties():
+	func _setup_visual_properties() -> void:
 		match type:
 			MaterialZone.VOID:
 				color_zone = Color.TRANSPARENT
@@ -100,12 +100,12 @@ class SculptureCell:
 	var distance_to_center: float = 0.0
 	var distance_to_surface: float = 0.0
 	
-	func _init(pos: Vector3i, center: Vector3, bounds: Vector3):
+	func _init(pos: Vector3i, center: Vector3, bounds: Vector3) -> void:
 		position = pos
 		distance_to_center = (Vector3(pos) - center).length() / (bounds.length() * 0.5)
 		_calculate_surface_distance(center, bounds)
 	
-	func _calculate_surface_distance(center: Vector3, bounds: Vector3):
+	func _calculate_surface_distance(center: Vector3, bounds: Vector3) -> void:
 		var normalized_pos = (Vector3(position) - center) / bounds
 		var max_component = max(max(abs(normalized_pos.x), abs(normalized_pos.y)), abs(normalized_pos.z))
 		distance_to_surface = 1.0 - max_component
@@ -149,18 +149,18 @@ class SculptureCell:
 			_:
 				return 1.0
 
-func _ready():
+func _ready() -> void:
 	setup_sculpture_voxels()
 
-func _generate_sculpture(value):
+func _generate_sculpture(value) -> void:
 	if value:
 		create_hollow_sculpture()
 
-func _clear_sculpture(value):
+func _clear_sculpture(value) -> void:
 	if value:
 		clear_generated_sculpture()
 
-func setup_sculpture_voxels():
+func setup_sculpture_voxels() -> void:
 	voxel_types.clear()
 	
 	# Define voxel types with their adjacency rules
@@ -198,7 +198,7 @@ func setup_sculpture_voxels():
 		[MaterialZone.DETAIL_DEEP, MaterialZone.SURFACE_ROUGH, MaterialZone.DETAIL_FINE, MaterialZone.VOID],
 		0.6 * surface_complexity))
 
-func create_hollow_sculpture():
+func create_hollow_sculpture() -> void:
 	if sculpture_seed > 0:
 		seed(sculpture_seed)
 	
@@ -209,12 +209,12 @@ func create_hollow_sculpture():
 	generate_sculpture_mesh()
 	apply_post_processing()
 
-func clear_generated_sculpture():
+func clear_generated_sculpture() -> void:
 	for child in get_children():
 		if child.has_meta("sculpture_generated"):
 			child.queue_free()
 
-func initialize_sculpture_grid():
+func initialize_sculpture_grid() -> void:
 	sculpture_grid.clear()
 	sculpture_grid.resize(sculpture_size.x)
 	
@@ -231,7 +231,7 @@ func initialize_sculpture_grid():
 				cell.possible_voxels = voxel_types.duplicate()
 				sculpture_grid[x][y][z] = cell
 
-func apply_sculptural_constraints():
+func apply_sculptural_constraints() -> void:
 	var center = Vector3(sculpture_size) * 0.5
 	var max_radius = min(sculpture_size.x, min(sculpture_size.y, sculpture_size.z)) * 0.4
 	
@@ -268,7 +268,7 @@ func _organic_noise(pos: Vector3) -> float:
 	return (n1 + n2 + n3) * organic_flow
 
 # Sculpture type constraint functions
-func _apply_abstract_organic_constraints(center: Vector3, max_radius: float):
+func _apply_abstract_organic_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -294,7 +294,7 @@ func _apply_abstract_organic_constraints(center: Vector3, max_radius: float):
 				elif distance_to_center > effective_radius * 0.8:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_SMOOTH, MaterialZone.SURFACE_ROUGH, MaterialZone.SURFACE_POROUS])
 
-func _apply_geometric_crystal_constraints(center: Vector3, max_radius: float):
+func _apply_geometric_crystal_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -313,7 +313,7 @@ func _apply_geometric_crystal_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_SMOOTH, MaterialZone.DETAIL_FINE])
 
-func _apply_architectural_constraints(center: Vector3, max_radius: float):
+func _apply_architectural_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -335,7 +335,7 @@ func _apply_architectural_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.VOID, MaterialZone.TRANSITION])
 
-func _apply_biological_constraints(center: Vector3, max_radius: float):
+func _apply_biological_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -354,7 +354,7 @@ func _apply_biological_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_ROUGH, MaterialZone.SURFACE_POROUS, MaterialZone.DETAIL_FINE])
 
-func _apply_mineral_constraints(center: Vector3, max_radius: float):
+func _apply_mineral_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -373,7 +373,7 @@ func _apply_mineral_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_ROUGH, MaterialZone.DETAIL_DEEP])
 
-func _apply_fluid_constraints(center: Vector3, max_radius: float):
+func _apply_fluid_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -390,7 +390,7 @@ func _apply_fluid_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_SMOOTH, MaterialZone.TRANSITION, MaterialZone.DETAIL_FINE])
 
-func _apply_fibrous_constraints(center: Vector3, max_radius: float):
+func _apply_fibrous_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -408,7 +408,7 @@ func _apply_fibrous_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.VOID, MaterialZone.TRANSITION])
 
-func _apply_spiral_constraints(center: Vector3, max_radius: float):
+func _apply_spiral_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -425,7 +425,7 @@ func _apply_spiral_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.SURFACE_SMOOTH, MaterialZone.CORE_SOLID, MaterialZone.SUPPORT])
 
-func _apply_tree_constraints(center: Vector3, max_radius: float):
+func _apply_tree_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -445,7 +445,7 @@ func _apply_tree_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.VOID, MaterialZone.TRANSITION])
 
-func _apply_sphere_cluster_constraints(center: Vector3, max_radius: float):
+func _apply_sphere_cluster_constraints(center: Vector3, max_radius: float) -> void:
 	for x in sculpture_size.x:
 		for y in sculpture_size.y:
 			for z in sculpture_size.z:
@@ -463,7 +463,7 @@ func _apply_sphere_cluster_constraints(center: Vector3, max_radius: float):
 				else:
 					cell.possible_voxels = voxel_types.filter(func(v): return v.type in [MaterialZone.VOID, MaterialZone.TRANSITION])
 
-func _apply_default_constraints(center: Vector3, max_radius: float):
+func _apply_default_constraints(center: Vector3, max_radius: float) -> void:
 	# Default organic constraints (original behavior)
 	_apply_abstract_organic_constraints(center, max_radius)
 
@@ -510,7 +510,7 @@ func _sphere_cluster_noise(pos: Vector3, center: Vector3) -> float:
 	
 	return max_influence
 
-func run_sculpture_wfc():
+func run_sculpture_wfc() -> void:
 	var max_iterations = sculpture_size.x * sculpture_size.y * sculpture_size.z * 1  # Reduced from 2 to 1
 	var iterations = 0
 	
@@ -552,7 +552,7 @@ func find_sculpture_entropy_cell() -> SculptureCell:
 	
 	return candidates[randi() % candidates.size()] if not candidates.is_empty() else null
 
-func propagate_sculpture_constraints(collapsed_cell: SculptureCell):
+func propagate_sculpture_constraints(collapsed_cell: SculptureCell) -> void:
 	var propagation_stack: Array[SculptureCell] = [collapsed_cell]
 	
 	while not propagation_stack.is_empty():
@@ -605,12 +605,12 @@ func is_sculpture_collapsed() -> bool:
 					return false
 	return true
 
-func generate_sculpture_mesh():
+func generate_sculpture_mesh() -> void:
 	# Use marching cubes approach for smooth sculpture surface
 	create_instanced_voxel_representation()
 	create_smooth_surface_mesh()
 
-func create_instanced_voxel_representation():
+func create_instanced_voxel_representation() -> void:
 	# Create visual representation showing material zones
 	var material_groups = {}
 	
@@ -630,7 +630,7 @@ func create_instanced_voxel_representation():
 	for material_type in material_groups:
 		create_material_group_mesh(material_type, material_groups[material_type])
 
-func create_material_group_mesh(material_type: MaterialZone, cells: Array):
+func create_material_group_mesh(material_type: MaterialZone, cells: Array) -> void:
 	var multimesh_instance = MultiMeshInstance3D.new()
 	multimesh_instance.set_meta("sculpture_generated", true)
 	multimesh_instance.name = "SculptureMaterial_" + MaterialZone.keys()[material_type]
@@ -778,7 +778,7 @@ func create_detail_mesh(fine: bool) -> Mesh:
 		box.size = Vector3.ONE * voxel_size * 0.6
 		return box
 
-func create_smooth_surface_mesh():
+func create_smooth_surface_mesh() -> void:
 	# Create a smooth continuous surface using marching cubes concept
 	var surface_mesh_instance = MeshInstance3D.new()
 	surface_mesh_instance.set_meta("sculpture_generated", true)
@@ -858,7 +858,7 @@ func create_material_for_zone(zone: MaterialZone) -> StandardMaterial3D:
 	
 	return material
 
-func apply_post_processing():
+func apply_post_processing() -> void:
 	# Add final touches to the sculpture
 	print("Sculpture generation complete!")
 	print("Hollow areas: ", count_material_type(MaterialZone.VOID))
@@ -873,3 +873,9 @@ func count_material_type(material_type: MaterialZone) -> int:
 				if cell.collapsed and cell.chosen_voxel.type == material_type:
 					count += 1
 	return count
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

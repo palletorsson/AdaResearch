@@ -113,3 +113,9 @@ func _update_wave(wave: MeshInstance3D, lookup: PackedFloat32Array, offset: Vect
 	mesh.surface_end()
 	wave.mesh = mesh
 	wave.material_override = mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

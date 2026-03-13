@@ -65,7 +65,7 @@ func _ready() -> void:
 	
 	print("ðŸš€ Reaction-Diffusion system ready!")
 
-func add_initial_seed():
+func add_initial_seed() -> void:
 	print("ðŸŒ± Adding initial seed points...")
 	
 	# Wait a moment for everything to initialize
@@ -97,7 +97,7 @@ func add_initial_seed():
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
 	print("âœ¨ Initial seed points created!")
 
-func create_noise_texture():
+func create_noise_texture() -> void:
 	# Create a texture with random noise to initialize the system
 	var noise_image = Image.create(512, 512, false, Image.FORMAT_RGBA8)
 	
@@ -196,7 +196,7 @@ func _process(_delta: float) -> void:
 	current_buffer = next_buffer
 	next_buffer = temp
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_N:
@@ -224,7 +224,7 @@ func _input(event):
 				print("ðŸ§¬ Manual reaction test")
 				manual_reaction_test()
 
-func add_random_noise():
+func add_random_noise() -> void:
 	# Add multiple random V spots
 	for i in range(50):
 		var random_pos = Vector2(randf(), randf())
@@ -233,7 +233,7 @@ func add_random_noise():
 		await get_tree().process_frame
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
 
-func add_seed_points():
+func add_seed_points() -> void:
 	# Add a grid of seed points
 	for x in range(5):
 		for y in range(5):
@@ -243,14 +243,14 @@ func add_seed_points():
 			await get_tree().process_frame
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
 
-func reset_simulation():
+func reset_simulation() -> void:
 	# Reset to initial red state
 	if buffer_a.get_node("ColorRect"):
 		buffer_a.get_node("ColorRect").color = Color.RED
 	current_buffer = buffer_a
 	next_buffer = buffer_b
 
-func test_manual_seed():
+func test_manual_seed() -> void:
 	# Simple manual test - add one seed point in center
 	print("Adding single seed at center...")
 	if sim_material:
@@ -263,7 +263,7 @@ func test_manual_seed():
 		sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
 		print("Seed added! You should see a spot appear.")
 
-func big_seed_blast():
+func big_seed_blast() -> void:
 	# Very aggressive seeding to force visible patterns
 	print("Creating massive seed pattern...")
 	if sim_material:
@@ -285,7 +285,7 @@ func big_seed_blast():
 		sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
 		print("ðŸ’¥ Big seed blast complete! Patterns should definitely appear now.")
 
-func toggle_debug_mode():
+func toggle_debug_mode() -> void:
 	debug_mode = !debug_mode
 	if debug_mode:
 		print("ðŸ” Debug mode ON - will show V channel in green")
@@ -298,7 +298,7 @@ func toggle_debug_mode():
 			var shader = load("res://algorithms/patterngeneration/reactiondiffusion/reactiondiffusion.gdshader")
 			sim_material.shader = shader
 
-func create_debug_shader():
+func create_debug_shader() -> void:
 	# Create a shader that shows the V channel more clearly
 	var debug_shader = Shader.new()
 	debug_shader.code = '''
@@ -330,7 +330,7 @@ void fragment() {
 		sim_material.shader = debug_shader
 		print("ðŸ” Debug shader applied - V channel amplified 10x")
 
-func simple_visual_test():
+func simple_visual_test() -> void:
 	# Skip all the complex buffer logic and just set a simple pattern directly
 	print("ðŸŽ¨ Creating simple visual pattern...")
 	
@@ -362,7 +362,7 @@ void fragment() {
 		print("ðŸŽ¨ Test pattern applied directly to display")
 		print("   You should see a green wave pattern!")
 
-func manual_reaction_test():
+func manual_reaction_test() -> void:
 	# Create a working reaction-diffusion directly on the display
 	print("ðŸ§¬ Creating direct reaction-diffusion test...")
 	
@@ -416,3 +416,9 @@ func _set_shader_texture(param_name: String, texture: Texture2D) -> void:
 	"""Helper function to set shader texture parameters safely"""
 	if sim_material and sim_material.shader:
 		sim_material.set_shader_parameter(param_name, texture)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

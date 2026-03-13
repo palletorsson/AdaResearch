@@ -36,11 +36,11 @@ class JoyParticle:
 	var color: Color
 	var size: float
 
-func _ready():
+func _ready() -> void:
 	create_joyful_soft_bodies()
 	initialize_interaction_system()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	interaction_timer += delta
 	
@@ -50,7 +50,7 @@ func _process(delta):
 	create_playful_physics()
 	visualize_emotional_resonance()
 
-func create_joyful_soft_bodies():
+func create_joyful_soft_bodies() -> void:
 	# Create various playful soft body objects
 	for i in range(6):
 		var soft_obj = SoftObject.new()
@@ -77,7 +77,7 @@ func create_joyful_soft_bodies():
 		
 		soft_objects.append(soft_obj)
 
-func initialize_interaction_system():
+func initialize_interaction_system() -> void:
 	# Create virtual interaction points that move around
 	for i in range(3):
 		interaction_points.append({
@@ -86,7 +86,7 @@ func initialize_interaction_system():
 			"strength": randf_range(0.5, 1.5)
 		})
 
-func update_joy_level():
+func update_joy_level() -> void:
 	# Joy level influenced by interaction frequency and responsiveness
 	var interaction_activity = 0.0
 	
@@ -98,7 +98,7 @@ func update_joy_level():
 	
 	joy_level = lerp(joy_level, clamp(interaction_activity, 0.2, 1.0), 0.1)
 
-func simulate_tactile_interactions():
+func simulate_tactile_interactions() -> void:
 	var container = $TactileInteractions
 	
 	# Clear previous visualization
@@ -169,7 +169,7 @@ func simulate_tactile_interactions():
 		# Visualize soft body
 		create_soft_body_visualization(container, soft_obj)
 
-func create_joy_particle(pos: Vector3, hue: float):
+func create_joy_particle(pos: Vector3, hue: float) -> void:
 	var particle = JoyParticle.new()
 	particle.position = pos + Vector3(
 		randf_range(-0.5, 0.5),
@@ -187,7 +187,7 @@ func create_joy_particle(pos: Vector3, hue: float):
 	
 	joy_particles.append(particle)
 
-func create_soft_body_visualization(container: Node3D, soft_obj: SoftObject):
+func create_soft_body_visualization(container: Node3D, soft_obj: SoftObject) -> void:
 	# Create deformable soft body visualization
 	var squish_factor = 1.0 + sin(time * 5 + soft_obj.position.x) * 0.2 * joy_level
 	
@@ -213,7 +213,7 @@ func create_soft_body_visualization(container: Node3D, soft_obj: SoftObject):
 	
 	container.add_child(soft_sphere)
 
-func animate_joyful_responses():
+func animate_joyful_responses() -> void:
 	var container = $JoyfulResponses
 	
 	# Clear previous visualization
@@ -270,7 +270,7 @@ func animate_joyful_responses():
 		
 		container.add_child(joy_wave)
 
-func create_playful_physics():
+func create_playful_physics() -> void:
 	var container = $PlayfulPhysics
 	
 	# Clear previous visualization
@@ -286,7 +286,7 @@ func create_playful_physics():
 		
 		create_playground_element(container, element_name, base_pos, i)
 
-func create_playground_element(container: Node3D, element_name: String, base_pos: Vector3, index: int):
+func create_playground_element(container: Node3D, element_name: String, base_pos: Vector3, index: int) -> void:
 	match element_name:
 		"Trampoline":
 			var trampoline = CSGCylinder3D.new()
@@ -386,7 +386,7 @@ func create_playground_element(container: Node3D, element_name: String, base_pos
 			
 			container.add_child(fulcrum)
 
-func visualize_emotional_resonance():
+func visualize_emotional_resonance() -> void:
 	var container = $EmotionalResonance
 	
 	# Clear previous visualization
@@ -448,3 +448,9 @@ func visualize_emotional_resonance():
 	joy_core.material_override = core_material
 	
 	container.add_child(joy_core)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

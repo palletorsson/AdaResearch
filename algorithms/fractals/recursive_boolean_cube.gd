@@ -137,3 +137,9 @@ func _create_cube(center: Vector3, size: float, iteration: int) -> void:
 
 	_sim_root.add_child(mesh_instance)
 	_mesh_instances.append(mesh_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

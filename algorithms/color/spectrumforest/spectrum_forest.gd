@@ -29,11 +29,11 @@ extends Node3D
 var _mesh_instance: MeshInstance3D
 var _rng = RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	_setup_mesh_instance()
 	generate_forest()
 
-func _setup_mesh_instance():
+func _setup_mesh_instance() -> void:
 	if _mesh_instance:
 		_mesh_instance.queue_free()
 	
@@ -51,7 +51,7 @@ func _setup_mesh_instance():
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_mesh_instance.material_override = material
 
-func generate_forest():
+func generate_forest() -> void:
 	if not _mesh_instance:
 		return
 		
@@ -98,4 +98,9 @@ func generate_forest():
 		im.surface_add_vertex(bottom_pos)
 		
 	im.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

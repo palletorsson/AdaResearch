@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 8: Aesthetic Test ---")
 	var env = load("res://algorithms/machinelearning/thegame_a/AxiomEnvironment.gd").new()
 	env._ready()

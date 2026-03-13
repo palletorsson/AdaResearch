@@ -2,7 +2,7 @@
 
 var hinge: HingeJoint3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var tower := create_static_box("Tower", Vector3(4.0, 6.0, 2.0), Vector3(-2.0, 3.0, 0.0), Color(0.45, 0.45, 0.5))
 
 	var bridge := create_box("Bridge", Vector3(6.0, 0.4, 3.0), Vector3(1.5, 1.0, 0.0), 12.0, Color(0.5, 0.3, 0.2))
@@ -36,6 +36,12 @@ func _physics_process(_delta):
 		velocity = 0.4 * sin(t * 0.8)
 	hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, velocity)
 
-func _center_and_oscillate():
+func _center_and_oscillate() -> void:
 	if is_instance_valid(hinge):
 		pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

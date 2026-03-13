@@ -22,11 +22,11 @@ var rule_110_seed := []
 var mm_rule_30: MultiMeshInstance3D
 var mm_rule_110: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	_setup_multimeshes()
 	initialize_rules()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -37,7 +37,7 @@ func _process(delta):
 		visualize_rule_30()
 		visualize_rule_110()
 
-func _setup_multimeshes():
+func _setup_multimeshes() -> void:
 	# Setup Rule 30 MultiMesh
 	mm_rule_30 = MultiMeshInstance3D.new()
 	mm_rule_30.name = "MM_Rule30"
@@ -72,7 +72,7 @@ func _setup_multimeshes():
 	mm110.instance_count = grid_width * max_generations
 	mm_rule_110.multimesh = mm110
 
-func initialize_rules():
+func initialize_rules() -> void:
 	# Initialize Rule 30
 	rule_30_seed = []
 	for i in range(grid_width):
@@ -95,7 +95,7 @@ func initialize_rules():
 	visualize_rule_30()
 	visualize_rule_110()
 
-func advance_generation():
+func advance_generation() -> void:
 	if current_generation < max_generations:
 		current_generation += 1
 		
@@ -150,7 +150,7 @@ func apply_rule_110(current_row: Array) -> Array:
 		new_row.append(next_state)
 	return new_row
 
-func visualize_rule_30():
+func visualize_rule_30() -> void:
 	if not mm_rule_30 or not mm_rule_30.multimesh: return
 	
 	var mm = mm_rule_30.multimesh
@@ -176,7 +176,7 @@ func visualize_rule_30():
 				mm.set_instance_color(idx, col)
 				idx += 1
 
-func visualize_rule_110():
+func visualize_rule_110() -> void:
 	if not mm_rule_110 or not mm_rule_110.multimesh: return
 	
 	var mm = mm_rule_110.multimesh
@@ -202,12 +202,18 @@ func visualize_rule_110():
 				mm.set_instance_color(idx, col)
 				idx += 1
 
-func show_rule_comparison():
+func show_rule_comparison() -> void:
 	# Keep existing logic but optimize if needed. 
 	# For now, let's leave the comparison and emergent pattern parts as they are less intensive (few nodes)
 	# or we could rewrite them too. Given time constraints, I'll leave the helper visualizations as is
 	# but ensure they don't leak memory.
 	pass # The original code re-created nodes every frame. I should probably fix that too.
 
-func demonstrate_emergent_patterns():
+func demonstrate_emergent_patterns() -> void:
 	pass # Same here.
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

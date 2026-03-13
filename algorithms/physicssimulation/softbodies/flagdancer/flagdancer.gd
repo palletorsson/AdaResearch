@@ -248,3 +248,9 @@ func create_flag_parade() -> void:
 		flag_scene.position.x = i * 8.0 - 12.0
 		flag_scene.wind_strength = randf_range(0.8, 1.2)
 		add_child(flag_scene)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

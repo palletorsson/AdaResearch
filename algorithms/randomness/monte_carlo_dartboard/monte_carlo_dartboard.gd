@@ -425,3 +425,9 @@ func _reset() -> void:
 	_pi_label.modulate = color_pi
 	_stats_label.text = "darts: 0\ninside: 0\noutside: 0"
 	_accuracy_label.text = ""
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -115,3 +115,9 @@ func _input(event: InputEvent) -> void:
 				reset()
 			KEY_T:
 				set_auto_drop(not auto_drop)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

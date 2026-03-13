@@ -3,7 +3,7 @@ extends VoxelStencil
 
 var sqr_radius: int = 0
 
-func initialize(new_fill_type: bool, new_radius: int):
+func initialize(new_fill_type: bool, new_radius: int) -> void:
 	super.initialize(new_fill_type, new_radius)
 	sqr_radius = new_radius * new_radius
 

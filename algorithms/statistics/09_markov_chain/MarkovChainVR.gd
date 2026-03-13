@@ -56,14 +56,14 @@ var info_display: Label3D
 var simulation_tween: Tween
 var is_running: bool = false
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	initialize_chain_type()
 	setup_visualization()
 	setup_info_display()
 	calculate_steady_state()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -86,7 +86,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func initialize_chain_type():
+func initialize_chain_type() -> void:
 	"""Initialize chain based on selected type"""
 	match chain_type:
 		ChainType.WEATHER_MODEL:
@@ -98,7 +98,7 @@ func initialize_chain_type():
 		ChainType.MARKET_MODEL:
 			setup_market_model()
 
-func setup_weather_model():
+func setup_weather_model() -> void:
 	"""Setup 3-state weather model: Sunny, Cloudy, Rainy"""
 	num_states = 3
 	state_names = ["Sunny", "Cloudy", "Rainy"]
@@ -113,7 +113,7 @@ func setup_weather_model():
 	
 	current_state = 0  # Start sunny
 
-func setup_random_walk():
+func setup_random_walk() -> void:
 	"""Setup 1D random walk with absorbing barriers"""
 	num_states = 5
 	state_names = ["Barrier L", "Left", "Center", "Right", "Barrier R"]
@@ -130,7 +130,7 @@ func setup_random_walk():
 	
 	current_state = 2  # Start in center
 
-func setup_gene_expression():
+func setup_gene_expression() -> void:
 	"""Setup gene expression model: Off, Low, High"""
 	num_states = 3
 	state_names = ["Off", "Low", "High"]
@@ -145,7 +145,7 @@ func setup_gene_expression():
 	
 	current_state = 0  # Start off
 
-func setup_market_model():
+func setup_market_model() -> void:
 	"""Setup financial market model: Bull, Neutral, Bear"""
 	num_states = 3
 	state_names = ["Bull", "Neutral", "Bear"]
@@ -160,7 +160,7 @@ func setup_market_model():
 	
 	current_state = 1  # Start neutral
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements"""
 	# State display (circular arrangement)
 	state_display = Node3D.new()
@@ -188,7 +188,7 @@ func setup_visualization():
 	add_child(current_state_indicator)
 	update_current_state_indicator()
 
-func create_state_nodes():
+func create_state_nodes() -> void:
 	"""Create visual nodes for each state"""
 	var radius = 1.5
 	
@@ -224,14 +224,14 @@ func create_state_nodes():
 		
 		state_display.add_child(state_node)
 
-func create_transition_arrows():
+func create_transition_arrows() -> void:
 	"""Create arrows showing transition probabilities"""
 	for i in range(num_states):
 		for j in range(num_states):
 			if i != j and transition_matrix[i][j] > 0.01:  # Only show significant transitions
 				create_transition_arrow(i, j, transition_matrix[i][j])
 
-func create_transition_arrow(from_state: int, to_state: int, probability: float):
+func create_transition_arrow(from_state: int, to_state: int, probability: float) -> void:
 	"""Create arrow between two states"""
 	var from_node = state_display.get_child(from_state)
 	var to_node = state_display.get_child(to_state)
@@ -259,7 +259,7 @@ func create_transition_arrow(from_state: int, to_state: int, probability: float)
 	
 	transition_display.add_child(arrow)
 
-func create_matrix_visualization():
+func create_matrix_visualization() -> void:
 	"""Create visual representation of transition matrix"""
 	# Clear existing
 	for child in matrix_display.get_children():
@@ -304,7 +304,7 @@ func create_matrix_visualization():
 			
 			matrix_display.add_child(cell)
 
-func setup_info_display():
+func setup_info_display() -> void:
 	"""Create information display"""
 	info_display = Label3D.new()
 	info_display.position = Vector3(0, 2.5, 0)
@@ -313,7 +313,7 @@ func setup_info_display():
 	add_child(info_display)
 	update_info_display()
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		if is_running:
@@ -323,7 +323,7 @@ func _on_controller_button(button_name: String):
 	elif button_name == "grip_click":
 		step_once()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -338,7 +338,7 @@ func _input(event):
 		elif event.keycode == KEY_T:
 			change_chain_type()
 
-func start_simulation():
+func start_simulation() -> void:
 	"""Start continuous simulation"""
 	is_running = true
 	
@@ -353,13 +353,13 @@ func start_simulation():
 		simulation_tween.tween_callback(step_once)
 		simulation_tween.tween_interval(1.0 / animation_speed)
 
-func stop_simulation():
+func stop_simulation() -> void:
 	"""Stop continuous simulation"""
 	is_running = false
 	if simulation_tween:
 		simulation_tween.kill()
 
-func step_once():
+func step_once() -> void:
 	"""Perform single simulation step"""
 	# Choose next state based on transition probabilities
 	var rand_val = randf()
@@ -385,7 +385,7 @@ func step_once():
 	if state_history.size() > 1000:
 		state_history = state_history.slice(-500)
 
-func update_current_state_indicator():
+func update_current_state_indicator() -> void:
 	"""Update visual indicator of current state"""
 	# Clear existing indicator
 	for child in current_state_indicator.get_children():
@@ -410,7 +410,7 @@ func update_current_state_indicator():
 	indicator.add_child(ring_mesh)
 	current_state_indicator.add_child(indicator)
 
-func update_probability_chart():
+func update_probability_chart() -> void:
 	"""Update state probability distribution chart"""
 	# Clear existing chart
 	for child in probability_chart.get_children():
@@ -433,7 +433,7 @@ func update_probability_chart():
 	chart_label.font_size = 18
 	probability_chart.add_child(chart_label)
 
-func calculate_empirical_probabilities():
+func calculate_empirical_probabilities() -> void:
 	"""Calculate empirical state probabilities from history"""
 	state_probabilities.clear()
 	state_probabilities.resize(num_states)
@@ -452,7 +452,7 @@ func calculate_empirical_probabilities():
 	for i in range(num_states):
 		state_probabilities[i] /= total
 
-func create_probability_bar(state_index: int, empirical_prob: float, steady_prob: float):
+func create_probability_bar(state_index: int, empirical_prob: float, steady_prob: float) -> void:
 	"""Create probability bar for a state"""
 	var x_pos = (float(state_index) - float(num_states - 1) / 2.0) * 0.4
 	
@@ -493,7 +493,7 @@ func create_probability_bar(state_index: int, empirical_prob: float, steady_prob
 	state_label.modulate = state_colors[state_index]
 	probability_chart.add_child(state_label)
 
-func calculate_steady_state():
+func calculate_steady_state() -> void:
 	"""Calculate steady state probabilities"""
 	# Simplified calculation: solve π = πP where π is steady state
 	# For demonstration, use power method approximation
@@ -514,7 +514,7 @@ func calculate_steady_state():
 		
 		steady_state_probs = new_probs
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -536,7 +536,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func update_info_display():
+func update_info_display() -> void:
 	"""Update information display"""
 	var text = "Markov Chain Simulation\n"
 	text += "Type: %s\n" % get_chain_type_name()
@@ -557,7 +557,7 @@ func update_info_display():
 	
 	info_display.text = text
 
-func change_chain_type():
+func change_chain_type() -> void:
 	"""Change the type of Markov chain"""
 	var current_index = chain_type as int
 	chain_type = ((current_index + 1) % ChainType.size()) as ChainType
@@ -567,7 +567,7 @@ func change_chain_type():
 	setup_visualization()
 	calculate_steady_state()
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset simulation to initial state"""
 	stop_simulation()
 	current_state = 0
@@ -608,3 +608,9 @@ func get_statistics_summary() -> Dictionary:
 		"transition_matrix": transition_matrix.duplicate(),
 		"is_running": is_running
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

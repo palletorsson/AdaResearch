@@ -26,7 +26,7 @@ extends Node3D
 var velocity: Vector3 = Vector3.ZERO
 var last_lod_update: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	"""Initialize the terrain example"""
 	print("Initializing Terrain Example...")
 	
@@ -42,7 +42,7 @@ func _ready():
 	
 	print("Terrain Example initialized successfully!")
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup the camera for terrain viewing"""
 	camera = Camera3D.new()
 	camera.name = "MainCamera"
@@ -50,7 +50,7 @@ func setup_camera():
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func setup_terrain():
+func setup_terrain() -> void:
 	"""Setup the optimized terrain system"""
 	terrain = NoiseLayers.new()
 	terrain.name = "OptimizedTerrain"
@@ -83,7 +83,7 @@ func setup_terrain():
 	await get_tree().process_frame
 	print("Terrain generated successfully!")
 
-func setup_player():
+func setup_player() -> void:
 	"""Setup a simple player character"""
 	player = CharacterBody3D.new()
 	player.name = "Player"
@@ -118,7 +118,7 @@ func setup_player():
 	camera.position = player.position + Vector3(0, 5, 5)
 	camera.look_at(player.position, Vector3.UP)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Main game loop"""
 	if not terrain or not player:
 		return
@@ -133,7 +133,7 @@ func _process(delta):
 	# Update camera to follow player
 	update_camera()
 
-func handle_player_input(delta):
+func handle_player_input(delta) -> void:
 	"""Handle player movement input"""
 	# Get input direction
 	var input_dir = Vector2.ZERO
@@ -182,7 +182,7 @@ func handle_player_input(delta):
 			# You could add sliding or other effects here
 			pass
 
-func update_lod_system(delta):
+func update_lod_system(delta) -> void:
 	"""Update LOD system based on player position"""
 	last_lod_update += delta
 	
@@ -191,7 +191,7 @@ func update_lod_system(delta):
 		terrain.set_player_position(player.position)
 		last_lod_update = 0.0
 
-func update_camera():
+func update_camera() -> void:
 	"""Update camera to follow player"""
 	var target_position = player.position + Vector3(0, 5, 5)
 	var current_position = camera.position
@@ -200,7 +200,7 @@ func update_camera():
 	camera.position = current_position.lerp(target_position, 0.1)
 	camera.look_at(player.position, Vector3.UP)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle additional input events"""
 	if event.is_action_pressed("ui_cancel"):
 		# Regenerate terrain
@@ -227,7 +227,7 @@ func _input(event):
 				lod_info.vertex_count
 			])
 
-func _on_terrain_generation_complete():
+func _on_terrain_generation_complete() -> void:
 	"""Called when terrain generation is complete"""
 	print("Terrain generation complete!")
 	
@@ -256,3 +256,9 @@ func is_player_on_walkable_terrain() -> bool:
 		ground_position.y -= 1.0
 		return terrain.is_position_walkable(ground_position)
 	return false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

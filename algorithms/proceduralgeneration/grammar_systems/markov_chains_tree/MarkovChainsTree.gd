@@ -67,18 +67,18 @@ class Branch:
 var branches: Array[Branch] = []
 var active_branches: Array[Branch] = []
 
-func _ready():
+func _ready() -> void:
     setup_markov_chain()
     grow_tree()
 
-func _process(delta):
+func _process(delta: float) -> void:
     if animate_growth and active_branches.size() > 0:
         growth_timer += delta * growth_speed
         if growth_timer >= 0.1:
             growth_timer = 0.0
             grow_iteration()
 
-func setup_markov_chain():
+func setup_markov_chain() -> void:
     # Define transition probabilities for each state
     # Format: {current_state: {next_state: probability}}
     
@@ -131,7 +131,7 @@ func setup_markov_chain():
         }
     }
 
-func grow_tree():
+func grow_tree() -> void:
     clear_tree()
     current_iteration = 0
     
@@ -155,7 +155,7 @@ func grow_tree():
     # Visualize
     visualize_tree()
 
-func grow_iteration():
+func grow_iteration() -> void:
     if active_branches.size() == 0:
         return
     
@@ -354,14 +354,14 @@ func create_branch(parent: Branch, direction: Vector3, length: float, thickness:
     branches.append(new_branch)
     return new_branch
 
-func visualize_tree():
+func visualize_tree() -> void:
     clear_visualization()
     
     for branch in branches:
         if branch.parent != null:
             create_branch_mesh(branch)
 
-func create_branch_mesh(branch: Branch):
+func create_branch_mesh(branch: Branch) -> void:
     var mesh_instance = MeshInstance3D.new()
     add_child(mesh_instance)
     branch.mesh_instance = mesh_instance
@@ -429,7 +429,7 @@ func create_cylinder_mesh(start: Vector3, end: Vector3, start_radius: float, end
     surface_tool.generate_normals()
     return surface_tool.commit()
 
-func create_leaf(position: Vector3):
+func create_leaf(position: Vector3) -> void:
     var leaf = MeshInstance3D.new()
     add_child(leaf)
     
@@ -443,11 +443,17 @@ func create_leaf(position: Vector3):
     material.albedo_color = leaf_color
     leaf.material_override = material
 
-func clear_tree():
+func clear_tree() -> void:
     branches.clear()
     active_branches.clear()
     clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
     for child in get_children():
         child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

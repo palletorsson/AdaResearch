@@ -169,3 +169,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		iterations = int(config_data["iterations"])
 	if config_data.has("angle"):
 		angle = float(config_data["angle"])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

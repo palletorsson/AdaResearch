@@ -343,3 +343,9 @@ class FoodItem:
 			mesh.scale = Vector3.ONE * scale
 			if mesh.mesh is SphereMesh:
 				(mesh.mesh as SphereMesh).radius = radius
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -71,7 +71,7 @@ var interactive_point: Node3D
 var is_adding_points: bool = false
 var selected_point_index: int = -1
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	setup_visualization()
 	setup_info_displays()
@@ -79,7 +79,7 @@ func _ready():
 	if auto_fit:
 		fit_regression()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -102,7 +102,7 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements"""
 	# Scatter plot display
 	scatter_plot = Node3D.new()
@@ -124,7 +124,7 @@ func setup_visualization():
 	# Create coordinate axes
 	create_coordinate_axes()
 
-func create_coordinate_axes():
+func create_coordinate_axes() -> void:
 	"""Create 3D coordinate axes"""
 	var axes = Node3D.new()
 	add_child(axes)
@@ -151,7 +151,7 @@ func create_coordinate_axes():
 	# Add axis labels
 	add_axis_labels(axes)
 
-func add_axis_labels(parent: Node3D):
+func add_axis_labels(parent: Node3D) -> void:
 	"""Add labels to coordinate axes"""
 	var x_label = Label3D.new()
 	x_label.text = "X"
@@ -175,7 +175,7 @@ func add_axis_labels(parent: Node3D):
 		z_label.modulate = Color.BLUE
 		parent.add_child(z_label)
 
-func create_interactive_cursor():
+func create_interactive_cursor() -> void:
 	"""Create cursor for interactive point placement"""
 	var cursor = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
@@ -191,7 +191,7 @@ func create_interactive_cursor():
 	interactive_point.add_child(cursor)
 	interactive_point.visible = false
 
-func setup_info_displays():
+func setup_info_displays() -> void:
 	"""Create information displays"""
 	stats_display = Label3D.new()
 	stats_display.position = Vector3(-2.5, 2.0, 0)
@@ -205,7 +205,7 @@ func setup_info_displays():
 	equation_display.modulate = Color.CYAN
 	add_child(equation_display)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		if is_adding_points:
@@ -215,7 +215,7 @@ func _on_controller_button(button_name: String):
 	elif button_name == "grip_click":
 		toggle_point_adding_mode()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -227,7 +227,7 @@ func _input(event):
 		elif event.keycode == KEY_T:
 			change_regression_type()
 
-func generate_sample_data():
+func generate_sample_data() -> void:
 	"""Generate sample data with known relationship"""
 	data_points.clear()
 	data_points_3d.clear()
@@ -249,7 +249,7 @@ func generate_sample_data():
 	
 	update_scatter_plot()
 
-func generate_linear_data(rng: RandomNumberGenerator):
+func generate_linear_data(rng: RandomNumberGenerator) -> void:
 	"""Generate linear relationship data"""
 	for i in range(num_data_points):
 		var x = rng.randf_range(-2.0, 2.0)
@@ -257,7 +257,7 @@ func generate_linear_data(rng: RandomNumberGenerator):
 		var y = true_slope * x + true_intercept + noise
 		data_points.append(Vector2(x, y))
 
-func generate_polynomial_data(rng: RandomNumberGenerator):
+func generate_polynomial_data(rng: RandomNumberGenerator) -> void:
 	"""Generate polynomial relationship data"""
 	for i in range(num_data_points):
 		var x = rng.randf_range(-2.0, 2.0)
@@ -265,7 +265,7 @@ func generate_polynomial_data(rng: RandomNumberGenerator):
 		var y = 0.5 * x * x + true_slope * x + true_intercept + noise
 		data_points.append(Vector2(x, y))
 
-func generate_multiple_regression_data(rng: RandomNumberGenerator):
+func generate_multiple_regression_data(rng: RandomNumberGenerator) -> void:
 	"""Generate multiple regression data (3D)"""
 	for i in range(num_data_points):
 		var x1 = rng.randf_range(-2.0, 2.0)
@@ -274,7 +274,7 @@ func generate_multiple_regression_data(rng: RandomNumberGenerator):
 		var y = true_slope * x1 + true_intercept * x2 + 1.0 + noise
 		data_points_3d.append(Vector3(x1, y, x2))
 
-func generate_logistic_data(rng: RandomNumberGenerator):
+func generate_logistic_data(rng: RandomNumberGenerator) -> void:
 	"""Generate logistic regression data"""
 	for i in range(num_data_points):
 		var x = rng.randf_range(-3.0, 3.0)
@@ -283,7 +283,7 @@ func generate_logistic_data(rng: RandomNumberGenerator):
 		var y = 1.0 if rng.randf() < probability else 0.0
 		data_points.append(Vector2(x, y))
 
-func update_scatter_plot():
+func update_scatter_plot() -> void:
 	"""Update scatter plot visualization"""
 	# Clear existing points
 	for child in scatter_plot.get_children():
@@ -295,14 +295,14 @@ func update_scatter_plot():
 		_:
 			update_2d_scatter_plot()
 
-func update_2d_scatter_plot():
+func update_2d_scatter_plot() -> void:
 	"""Update 2D scatter plot"""
 	for i in range(data_points.size()):
 		var point = data_points[i]
 		var point_visual = create_data_point_visual(Vector3(point.x, point.y, 0), i)
 		scatter_plot.add_child(point_visual)
 
-func update_3d_scatter_plot():
+func update_3d_scatter_plot() -> void:
 	"""Update 3D scatter plot for multiple regression"""
 	for i in range(data_points_3d.size()):
 		var point = data_points_3d[i]
@@ -329,7 +329,7 @@ func create_data_point_visual(position: Vector3, index: int) -> Node3D:
 	point_node.add_child(point_mesh)
 	return point_node
 
-func toggle_point_adding_mode():
+func toggle_point_adding_mode() -> void:
 	"""Toggle interactive point adding mode"""
 	is_adding_points = !is_adding_points
 	interactive_point.visible = is_adding_points
@@ -339,7 +339,7 @@ func toggle_point_adding_mode():
 	else:
 		print("Point adding mode OFF")
 
-func add_data_point_at_cursor():
+func add_data_point_at_cursor() -> void:
 	"""Add data point at cursor position"""
 	var cursor_pos = interactive_point.position
 	
@@ -354,7 +354,7 @@ func add_data_point_at_cursor():
 	if auto_fit:
 		fit_regression()
 
-func fit_regression():
+func fit_regression() -> void:
 	"""Fit regression model to current data"""
 	match regression_type:
 		RegressionType.LINEAR:
@@ -373,7 +373,7 @@ func fit_regression():
 	update_regression_visualization()
 	update_info_displays()
 
-func fit_linear_regression():
+func fit_linear_regression() -> void:
 	"""Fit linear regression using least squares"""
 	if data_points.size() < 2:
 		return
@@ -403,7 +403,7 @@ func fit_linear_regression():
 	# Calculate residuals
 	calculate_residuals()
 
-func fit_polynomial_regression():
+func fit_polynomial_regression() -> void:
 	"""Fit polynomial regression (degree 2)"""
 	if data_points.size() < 3:
 		return
@@ -475,7 +475,7 @@ func fit_polynomial_regression():
 	# Calculate residuals for polynomial
 	calculate_polynomial_residuals()
 
-func fit_multiple_regression():
+func fit_multiple_regression() -> void:
 	"""Fit multiple regression (3D plane)"""
 	if data_points_3d.size() < 3:
 		return
@@ -540,7 +540,7 @@ func fit_multiple_regression():
 	# Calculate residuals for multiple regression
 	calculate_multiple_residuals()
 
-func fit_logistic_regression():
+func fit_logistic_regression() -> void:
 	"""Fit logistic regression using gradient descent"""
 	if data_points.size() < 2:
 		return
@@ -598,7 +598,7 @@ func sigmoid(x: float) -> float:
 	"""Sigmoid activation function"""
 	return 1.0 / (1.0 + exp(-clamp(x, -500, 500)))
 
-func fit_ridge_regression():
+func fit_ridge_regression() -> void:
 	"""Fit Ridge (L2 regularized) regression"""
 	if data_points.size() < 2:
 		return
@@ -651,7 +651,7 @@ func fit_ridge_regression():
 	calculate_r_squared()
 	calculate_residuals()
 
-func fit_lasso_regression():
+func fit_lasso_regression() -> void:
 	"""Fit Lasso (L1 regularized) regression using coordinate descent"""
 	if data_points.size() < 2:
 		return
@@ -724,7 +724,7 @@ func fit_lasso_regression():
 	calculate_r_squared()
 	calculate_residuals()
 
-func calculate_r_squared():
+func calculate_r_squared() -> void:
 	"""Calculate coefficient of determination"""
 	if data_points.size() < 2:
 		r_squared = 0.0
@@ -746,7 +746,7 @@ func calculate_r_squared():
 	r_squared = 1.0 - (ss_res / ss_tot) if ss_tot > 0 else 0.0
 	correlation = sqrt(abs(r_squared)) * sign(slope)
 
-func calculate_residuals():
+func calculate_residuals() -> void:
 	"""Calculate residuals for current model"""
 	residuals.clear()
 	
@@ -755,7 +755,7 @@ func calculate_residuals():
 		var residual = point.y - predicted_y
 		residuals.append(residual)
 
-func calculate_polynomial_r_squared():
+func calculate_polynomial_r_squared() -> void:
 	"""Calculate R-squared for polynomial regression"""
 	if data_points.size() < 2 or multiple_coefficients.size() < 3:
 		r_squared = 0.0
@@ -782,7 +782,7 @@ func calculate_polynomial_r_squared():
 	r_squared = 1.0 - (ss_res / ss_tot) if ss_tot > 0 else 0.0
 	correlation = sqrt(abs(r_squared)) * sign(poly_b)  # Use linear term for sign
 
-func calculate_polynomial_residuals():
+func calculate_polynomial_residuals() -> void:
 	"""Calculate residuals for polynomial model"""
 	residuals.clear()
 	
@@ -799,7 +799,7 @@ func calculate_polynomial_residuals():
 		var residual = point.y - predicted_y
 		residuals.append(residual)
 
-func calculate_multiple_r_squared():
+func calculate_multiple_r_squared() -> void:
 	"""Calculate R-squared for multiple regression"""
 	if data_points_3d.size() < 2 or multiple_coefficients.size() < 3:
 		r_squared = 0.0
@@ -830,7 +830,7 @@ func calculate_multiple_r_squared():
 	# For multiple regression, correlation is approximated
 	correlation = sqrt(abs(r_squared))
 
-func calculate_multiple_residuals():
+func calculate_multiple_residuals() -> void:
 	"""Calculate residuals for multiple regression model"""
 	residuals.clear()
 	
@@ -849,7 +849,7 @@ func calculate_multiple_residuals():
 		var residual = y - predicted_y
 		residuals.append(residual)
 
-func calculate_logistic_r_squared():
+func calculate_logistic_r_squared() -> void:
 	"""Calculate McFadden's pseudo R-squared for logistic regression"""
 	if data_points.size() < 2 or logistic_coefficients.size() < 2:
 		r_squared = 0.0
@@ -890,7 +890,7 @@ func calculate_logistic_r_squared():
 	# Approximate correlation for display
 	correlation = sqrt(abs(r_squared)) * sign(logistic_coefficients[1])
 
-func calculate_logistic_residuals():
+func calculate_logistic_residuals() -> void:
 	"""Calculate deviance residuals for logistic regression"""
 	residuals.clear()
 	
@@ -914,7 +914,7 @@ func calculate_logistic_residuals():
 		var deviance_residual = sign(y - predicted_prob) * sqrt(abs(deviance_component))
 		residuals.append(deviance_residual)
 
-func update_regression_visualization():
+func update_regression_visualization() -> void:
 	"""Update regression line and related visualizations"""
 	# Clear existing regression line
 	for child in regression_line.get_children():
@@ -932,7 +932,7 @@ func update_regression_visualization():
 	if show_confidence_intervals:
 		update_confidence_intervals()
 
-func create_regression_line():
+func create_regression_line() -> void:
 	"""Create visual regression line"""
 	match regression_type:
 		RegressionType.POLYNOMIAL:
@@ -945,7 +945,7 @@ func create_regression_line():
 		_:
 			create_linear_line()
 
-func create_linear_line():
+func create_linear_line() -> void:
 	"""Create linear regression line"""
 	if abs(slope) < 1e-10 and abs(intercept) < 1e-10:
 		return
@@ -960,7 +960,7 @@ func create_linear_line():
 	create_line_mesh(line_mesh, line_points, Color.RED)
 	regression_line.add_child(line_mesh)
 
-func create_polynomial_curve():
+func create_polynomial_curve() -> void:
 	"""Create polynomial regression curve"""
 	var poly_a = multiple_coefficients[0]
 	var poly_b = multiple_coefficients[1]
@@ -982,7 +982,7 @@ func create_polynomial_curve():
 	create_curve_mesh(curve_mesh, line_points, Color.RED)
 	regression_line.add_child(curve_mesh)
 
-func create_logistic_curve():
+func create_logistic_curve() -> void:
 	"""Create logistic regression sigmoid curve"""
 	if logistic_coefficients.size() < 2:
 		return
@@ -1007,7 +1007,7 @@ func create_logistic_curve():
 	create_curve_mesh(curve_mesh, line_points, Color.RED)
 	regression_line.add_child(curve_mesh)
 
-func create_regression_plane():
+func create_regression_plane() -> void:
 	"""Create regression plane for multiple regression"""
 	# Create a mesh representing the regression plane
 	var plane_mesh = MeshInstance3D.new()
@@ -1026,7 +1026,7 @@ func create_regression_plane():
 	
 	regression_line.add_child(plane_mesh)
 
-func update_residual_display():
+func update_residual_display() -> void:
 	"""Update residual lines visualization"""
 	# Clear existing residuals
 	for child in residual_display.get_children():
@@ -1046,7 +1046,7 @@ func update_residual_display():
 		create_line_mesh(residual_line, line_points, color)
 		residual_display.add_child(residual_line)
 
-func update_confidence_intervals():
+func update_confidence_intervals() -> void:
 	"""Update confidence interval visualization"""
 	# Clear existing confidence intervals
 	var confidence_display = get_node_or_null("ConfidenceDisplay")
@@ -1075,7 +1075,7 @@ func update_confidence_intervals():
 		RegressionType.POLYNOMIAL:
 			create_polynomial_confidence_bands(confidence_display, t_critical, rmse, n)
 
-func create_linear_confidence_bands(parent: Node3D, t_critical: float, rmse: float, n: int):
+func create_linear_confidence_bands(parent: Node3D, t_critical: float, rmse: float, n: int) -> void:
 	"""Create confidence bands for linear regression"""
 	var sum_x = 0.0
 	var sum_x2 = 0.0
@@ -1119,7 +1119,7 @@ func create_linear_confidence_bands(parent: Node3D, t_critical: float, rmse: flo
 	create_curve_mesh(lower_mesh, lower_points, Color(1, 0, 0, 0.3))
 	parent.add_child(lower_mesh)
 
-func create_polynomial_confidence_bands(parent: Node3D, t_critical: float, rmse: float, n: int):
+func create_polynomial_confidence_bands(parent: Node3D, t_critical: float, rmse: float, n: int) -> void:
 	"""Create confidence bands for polynomial regression"""
 	if multiple_coefficients.size() < 3:
 		return
@@ -1160,7 +1160,7 @@ func create_polynomial_confidence_bands(parent: Node3D, t_critical: float, rmse:
 	create_curve_mesh(lower_mesh, lower_points, Color(1, 0, 0, 0.3))
 	parent.add_child(lower_mesh)
 
-func update_info_displays():
+func update_info_displays() -> void:
 	"""Update statistical information displays"""
 	# Statistics display
 	var stats_text = "Regression Statistics\n\n"
@@ -1276,7 +1276,7 @@ func get_number_of_parameters() -> int:
 		_:
 			return 2
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -1298,7 +1298,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func create_curve_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_curve_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create curved line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -1321,7 +1321,7 @@ func create_curve_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], co
 	material.vertex_color_use_as_albedo = true
 	mesh_instance.material_override = material
 
-func change_regression_type():
+func change_regression_type() -> void:
 	"""Change the type of regression analysis"""
 	var current_index = regression_type as int
 	regression_type = ((current_index + 1) % RegressionType.size()) as RegressionType
@@ -1329,7 +1329,7 @@ func change_regression_type():
 	reset_data()
 	generate_sample_data()
 
-func reset_data():
+func reset_data() -> void:
 	"""Reset all data and visualizations"""
 	data_points.clear()
 	data_points_3d.clear()
@@ -1377,3 +1377,9 @@ func get_statistics_summary() -> Dictionary:
 		"mean_residual": calculate_mean_residual(),
 		"residuals": residuals.duplicate()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

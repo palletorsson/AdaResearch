@@ -589,3 +589,9 @@ func reset_drone() -> void:
 	_apply_material_color(base_color)
 	if visual_root:
 		visual_root.scale = Vector3.ONE
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

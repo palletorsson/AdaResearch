@@ -138,7 +138,7 @@ const MELODIES = {
 	],
 }
 
-func _ready():
+func _ready() -> void:
 	# Configure Mapper Range
 	mapper.output_x_min = DELTA_MIN
 	mapper.output_x_max = DELTA_MAX
@@ -154,7 +154,7 @@ func _ready():
 	_start_melody_loop()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# Apply vibrato to pitch
 	if vibrato_enabled and is_singing:
 		_vibrato_phase += delta * vibrato_rate * TAU
@@ -163,7 +163,7 @@ func _process(delta: float):
 		# (Applied in _sing_note instead for cleaner control)
 
 
-func _start_melody_loop():
+func _start_melody_loop() -> void:
 	await get_tree().create_timer(1.0).timeout
 	while true:
 		if not is_inside_tree(): return
@@ -181,7 +181,7 @@ func _start_melody_loop():
 			await get_tree().create_timer(1.0).timeout
 
 
-func sing_melody(melody: Array):
+func sing_melody(melody: Array) -> void:
 	"""Sing a melody sequence"""
 	is_singing = true
 	var beat_duration = 60.0 / tempo_bpm
@@ -207,7 +207,7 @@ func sing_melody(melody: Array):
 	is_singing = false
 
 
-func _sing_note(freq: float, vowel: String, consonant: String, duration: float, intensity: float = 1.0):
+func _sing_note(freq: float, vowel: String, consonant: String, duration: float, intensity: float = 1.0) -> void:
 	"""Sing a single note with optional consonant onset"""
 	
 	# Set pitch
@@ -268,7 +268,7 @@ func _sing_note(freq: float, vowel: String, consonant: String, duration: float, 
 	_tween_mapper(vowel_anchor, intensity * 0.3, 0.05)
 
 
-func _sustain_with_vibrato(base_freq: float, duration: float):
+func _sustain_with_vibrato(base_freq: float, duration: float) -> void:
 	"""Sustain a note with pitch vibrato"""
 	var elapsed = 0.0
 	var step = 0.016  # ~60fps
@@ -284,18 +284,18 @@ func _sustain_with_vibrato(base_freq: float, duration: float):
 
 # --- Core Functions (from VowelSoundBoard) ---
 
-func _on_mapper_changed(delta_val: float, f1_val: float, intensity_val: float):
+func _on_mapper_changed(delta_val: float, f1_val: float, intensity_val: float) -> void:
 	synth.f1 = f1_val
 	synth.delta = delta_val
 	synth.target_intensity = intensity_val
 	synth.is_speaking = (intensity_val > 0.01)
 
 
-func _set_mapper_pos(target_field: Vector2, target_intensity: float):
+func _set_mapper_pos(target_field: Vector2, target_intensity: float) -> void:
 	mapper.set_values(target_field.y, target_field.x, target_intensity)
 
 
-func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float):
+func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float) -> void:
 	var tween = create_tween()
 	var start_val = mapper.get_values()
 	var update_lambda = func(val: float):
@@ -309,7 +309,7 @@ func _tween_mapper(target_field: Vector2, target_intensity: float, duration: flo
 
 # --- Custom Melody API ---
 
-func sing_custom(notes: Array):
+func sing_custom(notes: Array) -> void:
 	"""
 	Sing a custom melody.
 	Format: [{"pitch": semitones, "duration": beats, "vowel": "a", "consonant": "l"}, ...]
@@ -317,7 +317,7 @@ func sing_custom(notes: Array):
 	await sing_melody(notes)
 
 
-func sing_text(text: String, pitches: Array = []):
+func sing_text(text: String, pitches: Array = []) -> void:
 	"""
 	Attempt to sing text with given pitches.
 	If no pitches provided, uses a simple ascending pattern.
@@ -355,3 +355,9 @@ func _text_to_syllables(text: String) -> Array:
 			current_consonant = c
 	
 	return syllables
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

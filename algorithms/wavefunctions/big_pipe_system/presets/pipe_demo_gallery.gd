@@ -329,3 +329,9 @@ func _build_editor_gallery() -> void:
 		add_child(label)
 		if Engine.is_editor_hint():
 			label.owner = get_tree().edited_scene_root
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

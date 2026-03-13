@@ -9,11 +9,11 @@ var current_force: Vector3 = Vector3.ZERO
 var damping: float = 0.8
 var mass: float = 1.0
 
-func _ready():
+func _ready() -> void:
 	initial_position = position
 	_create_mass_point_mesh()
 
-func _create_mass_point_mesh():
+func _create_mass_point_mesh() -> void:
 	# Create the mass point sphere
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.1
@@ -31,10 +31,10 @@ func _create_mass_point_mesh():
 	sphere.material = material
 	add_child(sphere)
 
-func apply_force(force: Vector3):
+func apply_force(force: Vector3) -> void:
 	current_force += force
 
-func update_physics(delta: float, gravity: Vector3):
+func update_physics(delta: float, gravity: Vector3) -> void:
 	if is_fixed:
 		return
 	
@@ -53,7 +53,13 @@ func update_physics(delta: float, gravity: Vector3):
 	# Reset force for next frame
 	current_force = Vector3.ZERO
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	position = initial_position
 	velocity = Vector3.ZERO
 	current_force = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

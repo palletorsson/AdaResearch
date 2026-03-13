@@ -848,3 +848,9 @@ func _reset_board() -> void:
 	# Clear bell curve
 	if _bell_curve_mesh:
 		_bell_curve_mesh.mesh = null
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -3,7 +3,7 @@ extends Node3D
 @export var trampoline_size: Vector2 = Vector2(8, 8)
 @export var trampoline_height: float = 3.0
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	setup_trampoline()
 	
@@ -11,7 +11,7 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 	spawn_heavy_object()
 
-func setup_scene():
+func setup_scene() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 6, 12)
 	cam.look_at(Vector3(0, 2, 0))
@@ -60,7 +60,7 @@ func setup_scene():
 			
 	add_child(frame)
 
-func setup_trampoline():
+func setup_trampoline() -> void:
 	var sb = SoftBody3D.new()
 	
 	var mesh = PlaneMesh.new()
@@ -93,7 +93,7 @@ func setup_trampoline():
 	# Pin the perimeter
 	call_deferred("_pin_perimeter", sb)
 
-func _pin_perimeter(sb: SoftBody3D):
+func _pin_perimeter(sb: SoftBody3D) -> void:
 	if not is_instance_valid(sb): return
 	
 	var mdt = MeshDataTool.new()
@@ -115,7 +115,7 @@ func _pin_perimeter(sb: SoftBody3D):
 	for idx in pinned_indices:
 		sb.set_point_pinned(idx, true, NodePath())
 
-func spawn_heavy_object():
+func spawn_heavy_object() -> void:
 	var rb = RigidBody3D.new()
 	rb.position = Vector3(0, trampoline_height + 5, 0)
 	rb.mass = 10.0
@@ -135,3 +135,9 @@ func spawn_heavy_object():
 	rb.add_child(col)
 	
 	add_child(rb)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

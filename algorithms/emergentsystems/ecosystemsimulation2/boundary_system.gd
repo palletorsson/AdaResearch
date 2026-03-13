@@ -69,7 +69,7 @@ class Boundary:
 	var entities_within: Array = []
 	var properties: Dictionary = {}
 	
-	func _init(b_type: String, pos: Vector3, rad: float, str: float, perm: float, stab: float):
+	func _init(b_type: String, pos: Vector3, rad: float, str: float, perm: float, stab: float) -> void:
 		type = b_type
 		position = pos
 		radius = rad
@@ -93,7 +93,7 @@ class Boundary:
 		
 		return base_difficulty * time_factor
 	
-	func register_challenge(entity: Object, success: bool, impact: float):
+	func register_challenge(entity: Object, success: bool, impact: float) -> void:
 		last_challenge_time = Time.get_ticks_msec()
 		
 		challenges.append({
@@ -115,7 +115,7 @@ class Boundary:
 		# If strength gets too low, boundary can dissolve
 		return strength > 0.1
 
-func _ready():
+func _ready() -> void:
 	# Create container for boundary visuals
 	boundary_visuals = Node3D.new()
 	boundary_visuals.name = "BoundaryVisuals"
@@ -152,7 +152,7 @@ func create_boundary(type: String, position: Vector3, radius: float, strength: f
 	
 	return boundary
 
-func _create_boundary_visual(boundary: Boundary):
+func _create_boundary_visual(boundary: Boundary) -> void:
 	var visual = Node3D.new()
 	visual.name = "Boundary_" + boundary.type
 	visual.position = boundary.position
@@ -182,7 +182,7 @@ func _create_boundary_visual(boundary: Boundary):
 	
 	boundary.visual = visual
 
-func update_boundary_visuals(boundary: Boundary):
+func update_boundary_visuals(boundary: Boundary) -> void:
 	if not boundary_visuals_enabled or not boundary.visual:
 		return
 	
@@ -205,7 +205,7 @@ func update_boundary_visuals(boundary: Boundary):
 	mesh.radius = boundary.radius
 	mesh.height = boundary.radius * 2
 
-func update(delta: float):
+func update(delta: float) -> void:
 	# Update all boundaries
 	for boundary in boundaries.duplicate():  # Duplicate to safely modify during iteration
 		if not boundary.update(delta, boundary_decay_rate):
@@ -221,7 +221,7 @@ func update(delta: float):
 	if enable_dynamic_boundaries:
 		_consider_creating_dynamic_boundary(delta)
 
-func _dissolve_boundary(boundary: Boundary):
+func _dissolve_boundary(boundary: Boundary) -> void:
 	# Remove boundary
 	boundaries.erase(boundary)
 	
@@ -232,7 +232,7 @@ func _dissolve_boundary(boundary: Boundary):
 	# Emit signal
 	emit_signal("boundary_dissolved", boundary.type, boundary.position, boundary.entities_within)
 
-func _consider_creating_dynamic_boundary(delta: float):
+func _consider_creating_dynamic_boundary(delta: float) -> void:
 	# Random chance to create a new boundary
 	# More likely with higher entropy
 	var creation_chance = 0.0001 * delta * (1.0 + current_entropy * 3.0)
@@ -396,7 +396,7 @@ func get_boundary_at_position(position: Vector3) -> Boundary:
 			return boundary
 	return null
 
-func set_entropy(value: float):
+func set_entropy(value: float) -> void:
 	current_entropy = clamp(value, 0.0, 1.0)
 
 func get_boundary_types() -> Array:
@@ -407,9 +407,15 @@ func get_entity_challenge_history(entity: Object) -> Array:
 		return challenge_results[entity].duplicate()
 	return []
 
-func set_boundary_visibility(value: float):
+func set_boundary_visibility(value: float) -> void:
 	boundary_visibility = clamp(value, 0.0, 1.0)
 	
 	# Update all boundary visuals
 	for boundary in boundaries:
 		update_boundary_visuals(boundary)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

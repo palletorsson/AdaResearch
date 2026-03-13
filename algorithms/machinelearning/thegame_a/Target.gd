@@ -8,7 +8,7 @@ signal target_reached
 
 @export var radius: float = 0.5
 
-func _ready():
+func _ready() -> void:
 	# Visual Debug
 	var mesh = MeshInstance3D.new()
 	mesh.mesh = SphereMesh.new()
@@ -20,3 +20,9 @@ func _ready():
 	mat.albedo_color.a = 0.5
 	mesh.material_override = mat
 	add_child(mesh)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

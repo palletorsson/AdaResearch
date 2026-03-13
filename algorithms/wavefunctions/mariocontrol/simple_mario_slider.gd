@@ -69,7 +69,7 @@ const DEFAULT_SPARKLE := true
 
 var rng := RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	setup_sliders()
 	connect_signals()
@@ -81,7 +81,7 @@ func _ready():
 	add_to_group("audio_emitters")
 	update_waveform()
 
-func setup_sliders():
+func setup_sliders() -> void:
 	if freq1_slider:
 		freq1_slider.min_value = 200.0
 		freq1_slider.max_value = 2000.0
@@ -120,7 +120,7 @@ func setup_sliders():
 	if sparkle_toggle:
 		sparkle_toggle.button_pressed = sparkle_enabled
 
-func setup_visualizations():
+func setup_visualizations() -> void:
 	waveform_points.resize(DISPLAY_SAMPLES)
 	spectrum_bins.resize(SPECTRUM_BINS)
 	if waveform_display and not waveform_display.draw.is_connected(_on_waveform_draw):
@@ -130,7 +130,7 @@ func setup_visualizations():
 		spectrum_display.custom_minimum_size = Vector2(420, 120)
 		spectrum_display.draw.connect(_on_spectrum_draw)
 
-func connect_signals():
+func connect_signals() -> void:
 	if freq1_slider:
 		freq1_slider.value_changed.connect(_on_freq1_changed)
 	if freq2_slider:
@@ -158,7 +158,7 @@ func connect_signals():
 	if load_dialog:
 		load_dialog.file_selected.connect(_on_sound_file_selected)
 
-func create_audio_player():
+func create_audio_player() -> void:
 	audio_player = AudioStreamPlayer.new()
 	add_child(audio_player)
 	audio_player.bus = "Master"
@@ -261,28 +261,28 @@ func _on_sound_file_selected(path: String) -> void:
 	_apply_stream_to_pickups(custom_stream)
 	update_waveform()
 
-func _on_freq1_changed(value: float):
+func _on_freq1_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	freq1 = value
 	if freq1_label:
 		freq1_label.text = "Frequency 1: %.0f Hz" % value
 	update_waveform()
 
-func _on_freq2_changed(value: float):
+func _on_freq2_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	freq2 = value
 	if freq2_label:
 		freq2_label.text = "Frequency 2: %.0f Hz" % value
 	update_waveform()
 
-func _on_volume_changed(value: float):
+func _on_volume_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	volume = value
 	if volume_label:
 		volume_label.text = "Volume: %.2f" % value
 	update_waveform()
 
-func _on_length_changed(value: float):
+func _on_length_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	sound_length = clamp(value, 0.05, 1.0)
 	if length_label:
@@ -290,7 +290,7 @@ func _on_length_changed(value: float):
 	_ensure_envelope_within_bounds()
 	update_waveform()
 
-func _on_attack_changed(value: float):
+func _on_attack_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	attack_time = clamp(value, 0.0, 0.2)
 	if attack_label:
@@ -298,7 +298,7 @@ func _on_attack_changed(value: float):
 	_adjust_release_if_needed()
 	update_waveform()
 
-func _on_release_changed(value: float):
+func _on_release_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	release_time = clamp(value, 0.0, 0.5)
 	if release_label:
@@ -306,25 +306,25 @@ func _on_release_changed(value: float):
 	_adjust_attack_if_needed()
 	update_waveform()
 
-func _on_noise_changed(value: float):
+func _on_noise_changed(value: float) -> void:
 	_clear_custom_stream_if_needed()
 	noise_amount = clamp(value, 0.0, 1.0)
 	if noise_label:
 		noise_label.text = "Noise Sparkle: %d%%" % int(round(noise_amount * 100.0))
 	update_waveform()
 
-func _on_sparkle_toggled(pressed: bool):
+func _on_sparkle_toggled(pressed: bool) -> void:
 	_clear_custom_stream_if_needed()
 	sparkle_enabled = pressed
 	update_waveform()
 
-func _on_test_pressed():
+func _on_test_pressed() -> void:
 	var stream = _get_active_stream()
 	_apply_stream_to_audio_player(stream)
 	audio_player.play()
 	_apply_stream_to_pickups(stream)
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_clear_custom_stream_if_needed()
 	rng.randomize()
 	freq1_slider.value = rng.randf_range(420.0, 980.0)
@@ -336,7 +336,7 @@ func _on_randomize_pressed():
 	noise_slider.value = rng.randf_range(0.02, 0.14)
 	sparkle_toggle.button_pressed = rng.randf() > 0.2
 
-func _ensure_envelope_within_bounds():
+func _ensure_envelope_within_bounds() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	var total = attack_time + release_time
 	if total <= max_total:
@@ -345,7 +345,7 @@ func _ensure_envelope_within_bounds():
 	if release_slider:
 		release_slider.value = release_time
 
-func shutdown_audio():
+func shutdown_audio() -> void:
 	if audio_player:
 		audio_player.stop()
 	for player in external_players.duplicate():
@@ -360,7 +360,7 @@ func shutdown_audio():
 	if spectrum_display:
 		spectrum_display.queue_redraw()
 
-func _register_external_player(player: AudioStreamPlayer):
+func _register_external_player(player: AudioStreamPlayer) -> void:
 	if player == null or not is_instance_valid(player):
 		return
 	if player in external_players:
@@ -369,10 +369,10 @@ func _register_external_player(player: AudioStreamPlayer):
 	if player.has_signal("finished"):
 		player.finished.connect(Callable(self, "_on_external_player_finished").bind(player), CONNECT_ONE_SHOT)
 
-func _on_external_player_finished(player: AudioStreamPlayer):
+func _on_external_player_finished(player: AudioStreamPlayer) -> void:
 	_unregister_external_player(player)
 
-func _unregister_external_player(player: AudioStreamPlayer):
+func _unregister_external_player(player: AudioStreamPlayer) -> void:
 	if player == null:
 		return
 	if player in external_players:
@@ -380,7 +380,7 @@ func _unregister_external_player(player: AudioStreamPlayer):
 	if is_instance_valid(player):
 		player.queue_free()
 
-func _adjust_release_if_needed():
+func _adjust_release_if_needed() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	if attack_time + release_time > max_total:
 		release_time = clamp(max_total - attack_time, 0.0, max_total)
@@ -389,7 +389,7 @@ func _adjust_release_if_needed():
 			if release_label:
 				release_label.text = "Release: %s" % _format_ms(release_time)
 
-func _adjust_attack_if_needed():
+func _adjust_attack_if_needed() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	if attack_time + release_time > max_total:
 		attack_time = clamp(max_total - release_time, 0.0, max_total)
@@ -398,7 +398,7 @@ func _adjust_attack_if_needed():
 			if attack_label:
 				attack_label.text = "Attack: %s" % _format_ms(attack_time)
 
-func update_waveform():
+func update_waveform() -> void:
 	if use_custom_stream and custom_stream:
 		for i in range(waveform_points.size()):
 			waveform_points[i] = 0.0
@@ -434,7 +434,7 @@ func update_waveform():
 	if spectrum_display:
 		spectrum_display.queue_redraw()
 
-func _update_spectrum_from_samples():
+func _update_spectrum_from_samples() -> void:
 	var sample_count = min(raw_samples.size(), SPECTRUM_SOURCE_SAMPLES)
 	if sample_count <= 1:
 		for i in range(SPECTRUM_BINS):
@@ -466,7 +466,7 @@ func _update_spectrum_from_samples():
 	if spectrum_label:
 		spectrum_label.text = "Spectrum (%.0f Hz - %.0f Hz)" % [SPECTRUM_FREQ_MIN, SPECTRUM_FREQ_MAX]
 
-func _on_waveform_draw():
+func _on_waveform_draw() -> void:
 	if not waveform_display or waveform_points.is_empty():
 		return
 	var rect = waveform_display.get_rect()
@@ -517,7 +517,7 @@ func _on_waveform_draw():
 	waveform_display.draw_string(font, Vector2(10, 20), "Sweep %.0f ? %.0f Hz" % [freq1, freq2], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.9, 0.95, 1.0))
 	waveform_display.draw_string(font, Vector2(10, rect.size.y - 10), "Attack %s  �  Release %s" % [_format_ms(attack_time), _format_ms(release_time)], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.7, 0.85, 1.0))
 
-func _on_spectrum_draw():
+func _on_spectrum_draw() -> void:
 	if not spectrum_display or spectrum_bins.is_empty():
 		return
 	var rect = spectrum_display.get_rect()
@@ -536,7 +536,7 @@ func _on_spectrum_draw():
 	_draw_frequency_marker(freq1, Color(1.0, 0.65, 0.3, 1.0), rect)
 	_draw_frequency_marker(freq2, Color(0.4, 0.85, 1.0, 1.0), rect)
 
-func _draw_frequency_marker(freq: float, color: Color, rect: Rect2):
+func _draw_frequency_marker(freq: float, color: Color, rect: Rect2) -> void:
 	var ratio = clamp((freq - SPECTRUM_FREQ_MIN) / (SPECTRUM_FREQ_MAX - SPECTRUM_FREQ_MIN), 0.0, 1.0)
 	var x = rect.size.x * ratio
 	spectrum_display.draw_line(Vector2(x, rect.size.y), Vector2(x, -4), color, 1.6)
@@ -544,7 +544,7 @@ func _draw_frequency_marker(freq: float, color: Color, rect: Rect2):
 	var font_size = 11
 	spectrum_display.draw_string(font, Vector2(clamp(x - 40, 4, rect.size.x - 60), 14), "%.0f Hz" % freq, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
 
-func update_all_labels():
+func update_all_labels() -> void:
 	if freq1_slider:
 		_on_freq1_changed(freq1_slider.value)
 	if freq2_slider:
@@ -714,7 +714,7 @@ class SimpleMarioPickupCube:
 		return PickupCube.get_default_pickup_stream()
 
 
-	func _play_collection_effect():
+	func _play_collection_effect() -> void:
 		var mesh_instance = find_child("CubeBaseMesh", true, false)
 		if mesh_instance:
 			var tween = create_tween()
@@ -727,3 +727,9 @@ class SimpleMarioPickupCube:
 	
 	func _is_player(body: Node3D) -> bool:
 		return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

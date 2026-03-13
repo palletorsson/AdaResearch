@@ -2,12 +2,12 @@ extends Node3D
 
 # Main controller for the ant colony ecosystem simulation
 
-func _ready():
+func _ready() -> void:
 	# Setup the simulation
 	setup_scene()
 
 # Set up the entire simulation scene
-func setup_scene():
+func setup_scene() -> void:
 	# Create terrain
 	var terrain = create_terrain()
 	
@@ -124,7 +124,7 @@ func find_suitable_colony_position(terrain):
 	return suitable_pos
 
 # Set up environment, lighting, and sky
-func setup_environment():
+func setup_environment() -> void:
 	# Create WorldEnvironment node
 	var world_env = WorldEnvironment.new()
 	var env = Environment.new()
@@ -167,7 +167,7 @@ func setup_environment():
 	add_child(sun)
 
 # Set up camera and controls
-func setup_camera():
+func setup_camera() -> void:
 	# Create a camera and orbit controller
 	var camera = Camera3D.new()
 	camera.name = "Camera"
@@ -194,10 +194,10 @@ var target_position = Vector3.ZERO
 var orbit_angle_x = -45.0
 var orbit_angle_y = 0.0
 
-func _ready():
+func _ready() -> void:
 	update_camera_position()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		# Rotate camera
 		orbit_angle_y -= event.relative.x * rotation_speed * 50.0
@@ -215,7 +215,7 @@ func _input(event):
 			camera_distance = min(max_zoom, camera_distance + zoom_speed * 5.0)
 			update_camera_position()
 
-func update_camera_position():
+func update_camera_position() -> void:
 	var direction = Vector3()
 	direction.x = sin(deg_to_rad(orbit_angle_y)) * cos(deg_to_rad(orbit_angle_x))
 	direction.y = -sin(deg_to_rad(orbit_angle_x))
@@ -231,7 +231,7 @@ func update_camera_position():
 	camera.set_script(script)
 
 # Set up UI
-func setup_ui():
+func setup_ui() -> void:
 	# Create control node
 	var ui = Control.new()
 	ui.name = "UI"
@@ -286,10 +286,16 @@ func create_control_panel():
 	return panel
 
 # Signal handler for speed slider
-func _on_speed_changed(value):
+func _on_speed_changed(value) -> void:
 	Engine.time_scale = value
 
 # Signal handler for reset button
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	# Restart the simulation
 	get_tree().reload_current_scene()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -16,12 +16,12 @@ var _binary_table: Node3D = null
 # Track cube references by coordinate
 var _cube_refs: Dictionary = {}  # "x_z" -> cube_instance
 
-func _ready():
+func _ready() -> void:
 	create_grid_2d()
 	if show_binary_table:
 		_create_binary_table()
 
-func create_grid_2d():
+func create_grid_2d() -> void:
 	# Load the pickup cube scene
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 
@@ -67,7 +67,7 @@ func create_grid_2d():
 
 			add_child(cube_instance)
 
-func _create_binary_table():
+func _create_binary_table() -> void:
 	# Load the binary table display scene
 	var table_scene = load("res://algorithms/arrays/binary_table/binary_table_display.tscn")
 	if not table_scene:
@@ -112,3 +112,9 @@ func _on_cube_removed(x: int, z: int) -> void:
 	var key = "%d_%d" % [x, z]
 	if _cube_refs.has(key):
 		_cube_refs.erase(key)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

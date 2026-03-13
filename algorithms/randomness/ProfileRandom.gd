@@ -12,7 +12,7 @@ var rng = RandomNumberGenerator.new()
 var profile_points: Array[Vector3] = []
 var profile_mesh: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Initialize random generator
 	rng.randomize()
 	
@@ -27,7 +27,7 @@ func _ready():
 	
 	print("SimpleRandomProfile: Created profile with %d points using RandomPlane" % point_count)
 
-func generate_random_profile():
+func generate_random_profile() -> void:
 	"""Generate a random height profile using pure randomness"""
 	profile_points.clear()
 	
@@ -70,7 +70,7 @@ func _calculate_random_height_at_index(index: int) -> float:
 	
 	return base_height + (random_variation * edge_factor)
 
-func _create_profile_mesh():
+func _create_profile_mesh() -> void:
 	"""Create a visual mesh representation of the profile using vertices"""
 	if profile_points.size() < 2:
 		return
@@ -144,7 +144,7 @@ func _create_profile_mesh():
 	
 	print("Profile mesh created with %d points" % profile_points.size())
 
-func _add_quad(surface_tool: SurfaceTool, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3):
+func _add_quad(surface_tool: SurfaceTool, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3) -> void:
 	"""Helper function to add a quad as two triangles"""
 	# Calculate UVs based on position
 	surface_tool.set_uv(Vector2(0, 0))
@@ -166,16 +166,16 @@ func _add_quad(surface_tool: SurfaceTool, p1: Vector3, p2: Vector3, p3: Vector3,
 	surface_tool.set_uv(Vector2(0, 1))
 	surface_tool.add_vertex(p4)
 
-func regenerate_profile():
+func regenerate_profile() -> void:
 	"""Generate a new random profile"""
 	generate_random_profile()
 
-func set_point_count(new_count: int):
+func set_point_count(new_count: int) -> void:
 	"""Change the number of points in the profile"""
 	point_count = max(3, new_count)  # Minimum 3 points
 	generate_random_profile()
 
-func set_height_variation(variation: float):
+func set_height_variation(variation: float) -> void:
 	"""Change the maximum height variation"""
 	max_height_variation = max(0.0, variation)
 	generate_random_profile()

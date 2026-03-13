@@ -46,11 +46,11 @@ class TouchResponse:
 	var ripple_radius: float
 	var age: float
 
-func _ready():
+func _ready() -> void:
 	initialize_emotional_bodies()
 	initialize_affective_system()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	affect_timer += delta
 	
@@ -60,7 +60,7 @@ func _process(delta):
 	demonstrate_intensity_flows()
 	show_digital_touch_responses()
 
-func initialize_emotional_bodies():
+func initialize_emotional_bodies() -> void:
 	# Create emotional bodies with different affective capacities
 	for i in range(6):
 		var body = EmotionalBody.new()
@@ -78,12 +78,12 @@ func initialize_emotional_bodies():
 		
 		emotional_bodies.append(body)
 
-func initialize_affective_system():
+func initialize_affective_system() -> void:
 	# Initialize intensity tracking for different affects
 	for affect in affects:
 		intensity_levels[affect.name] = {"current": affect.intensity, "target": affect.intensity}
 
-func update_emotional_states():
+func update_emotional_states() -> void:
 	# Update affect intensities over time
 	for affect_name in intensity_levels:
 		var level = intensity_levels[affect_name]
@@ -97,7 +97,7 @@ func update_emotional_states():
 		# Smooth interpolation towards target
 		level.current = lerp(level.current, level.target, 0.1)
 
-func simulate_emotional_bodies():
+func simulate_emotional_bodies() -> void:
 	var container = $EmotionalBodies
 	
 	# Clear previous visualization
@@ -116,7 +116,7 @@ func simulate_emotional_bodies():
 		# Visualize emotional body
 		create_emotional_body_visualization(container, body, i)
 
-func update_affective_influence(body: EmotionalBody, body_index: int):
+func update_affective_influence(body: EmotionalBody, body_index: int) -> void:
 	# Affect transmission between bodies
 	for j in range(emotional_bodies.size()):
 		if j == body_index:
@@ -143,7 +143,7 @@ func update_affective_influence(body: EmotionalBody, body_index: int):
 			if randf() < 0.05:
 				create_affective_flow(other_body.position, body.position, other_body.current_affect.name)
 
-func apply_emotional_physics(body: EmotionalBody):
+func apply_emotional_physics(body: EmotionalBody) -> void:
 	# Emotional state affects physical behavior
 	var emotional_force = Vector3.ZERO
 	
@@ -194,7 +194,7 @@ func apply_emotional_physics(body: EmotionalBody):
 	body.position.y = clamp(body.position.y, 0.5, 8)
 	body.position.z = clamp(body.position.z, -5, 5)
 
-func create_affective_flow(source: Vector3, target: Vector3, affect_type: String):
+func create_affective_flow(source: Vector3, target: Vector3, affect_type: String) -> void:
 	var flow = AffectiveFlow.new()
 	flow.source = source
 	flow.target = target
@@ -213,7 +213,7 @@ func create_affective_flow(source: Vector3, target: Vector3, affect_type: String
 	
 	affective_flows.append(flow)
 
-func create_emotional_body_visualization(container: Node3D, body: EmotionalBody, index: int):
+func create_emotional_body_visualization(container: Node3D, body: EmotionalBody, index: int) -> void:
 	# Create soft, deformable emotional body
 	var body_sphere = CSGSphere3D.new()
 	
@@ -294,7 +294,7 @@ func get_emotional_deformation(affect_name: String, index: int) -> Vector3:
 		_:
 			return base_scale
 
-func visualize_affective_transmission():
+func visualize_affective_transmission() -> void:
 	var container = $AffectiveTransmission
 	
 	# Clear previous visualization
@@ -336,7 +336,7 @@ func visualize_affective_transmission():
 		else:
 			i += 1
 
-func demonstrate_intensity_flows():
+func demonstrate_intensity_flows() -> void:
 	var container = $IntensityFlows
 	
 	# Clear previous visualization
@@ -386,7 +386,7 @@ func demonstrate_intensity_flows():
 				
 				container.add_child(intensity_pillar)
 
-func show_digital_touch_responses():
+func show_digital_touch_responses() -> void:
 	var container = $DigitalTouch
 	
 	# Clear previous visualization
@@ -446,7 +446,7 @@ func show_digital_touch_responses():
 		
 		i += 1
 
-func create_touch_response():
+func create_touch_response() -> void:
 	var response = TouchResponse.new()
 	response.position = Vector3(
 		randf_range(-4, 4),
@@ -469,3 +469,9 @@ func create_touch_response():
 				body.current_affect.intensity + influence * 0.2,
 				0.0, 1.0
 			)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

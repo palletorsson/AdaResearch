@@ -26,15 +26,15 @@ enum PortalType {
 var transforms: Array[Transform3D] = []
 var current_mesh: Mesh
 
-func _ready():
+func _ready() -> void:
 	if auto_generate:
 		generate_portal()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_rotation:
 		rotate_y(rotation_speed * delta)
 
-func generate_portal():
+func generate_portal() -> void:
 	"""Generate the portal structure"""
 	transforms.clear()
 	
@@ -62,7 +62,7 @@ func generate_portal():
 	
 	create_multimesh()
 
-func build_cube_portal():
+func build_cube_portal() -> void:
 	"""Classic brick arch portal"""
 	var angle_step = deg_to_rad(15)
 	var total_angle = PI  # Semi-circle arch
@@ -97,7 +97,7 @@ func build_cube_portal():
 				t = t.scaled(Vector3.ONE * block_size)
 				transforms.append(t)
 
-func build_truncated_octahedron_portal():
+func build_truncated_octahedron_portal() -> void:
 	"""Sci-fi honeycomb portal"""
 	var positions = []
 	
@@ -128,7 +128,7 @@ func build_truncated_octahedron_portal():
 		t = t.scaled(Vector3.ONE * block_size)
 		transforms.append(t)
 
-func build_rhombic_dodecahedron_portal():
+func build_rhombic_dodecahedron_portal() -> void:
 	"""Organic crystal portal"""
 	# Hexagonal ring pattern (rhombic dodecahedrons pack like this)
 	var num_segments = 10
@@ -167,7 +167,7 @@ func build_rhombic_dodecahedron_portal():
 			t = t.scaled(Vector3.ONE * block_size)
 			transforms.append(t)
 
-func build_triangular_prism_portal():
+func build_triangular_prism_portal() -> void:
 	"""Angular geometric portal"""
 	# Triangular pattern
 	var num_prisms = 18
@@ -185,7 +185,7 @@ func build_triangular_prism_portal():
 		t = t.scaled(Vector3.ONE * block_size)
 		transforms.append(t)
 
-func build_hexagonal_prism_portal():
+func build_hexagonal_prism_portal() -> void:
 	"""Honeycomb portal"""
 	# Hexagonal grid wrapped into circle
 	var num_around = 12
@@ -206,7 +206,7 @@ func build_hexagonal_prism_portal():
 			t = t.scaled(Vector3.ONE * block_size * 0.8)
 			transforms.append(t)
 
-func build_gyrobifastigium_portal():
+func build_gyrobifastigium_portal() -> void:
 	"""Twisted dual-prism portal"""
 	var num_pairs = 10
 	
@@ -358,7 +358,7 @@ func create_gyrobifastigium_mesh() -> Mesh:
 	"""Two triangular prisms joined with twist"""
 	return create_triangular_prism_mesh()
 
-func create_multimesh():
+func create_multimesh() -> void:
 	"""Create MultiMeshInstance3D"""
 	var mmi = MultiMeshInstance3D.new()
 	var mm = MultiMesh.new()
@@ -386,11 +386,11 @@ func create_multimesh():
 	add_child(mmi)
 	print("Portal generated with ", transforms.size(), " blocks")
 
-func regenerate():
+func regenerate() -> void:
 	"""Regenerate portal"""
 	generate_portal()
 
-func set_portal_type(type: PortalType):
+func set_portal_type(type: PortalType) -> void:
 	"""Change portal type and regenerate"""
 	portal_type = type
 	generate_portal()
@@ -405,14 +405,8 @@ func get_portal_stats() -> Dictionary:
 		"portal_thickness": portal_thickness
 	}
 
-
-
-
-
-
-
-
-
-
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

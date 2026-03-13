@@ -20,7 +20,7 @@ const MAX_EXTENSION := 0.15
 var _target_a: float = 0.0
 var _target_b: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Frame (L-shaped anchor) ---
 	frame = StaticBody3D.new()
 	frame.name = "Frame"
@@ -140,3 +140,9 @@ func update_from_vectors(a: Vector3, b: Vector3) -> void:
 
 	piston_a.apply_central_force(Vector3(force_a, 0, 0))
 	piston_b.apply_central_force(Vector3(0, force_b, 0))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

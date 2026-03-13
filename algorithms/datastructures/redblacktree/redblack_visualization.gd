@@ -72,7 +72,7 @@ class RBNode:
 	var mesh_instance: MeshInstance3D = null
 	var is_nil: bool = false  # Sentinel NIL nodes
 	
-	func _init(val: int = 0, node_color: NodeColor = NodeColor.RED):
+	func _init(val: int = 0, node_color: NodeColor = NodeColor.RED) -> void:
 		value = val
 		color = node_color
 	
@@ -135,10 +135,10 @@ var demo_values: Array = []
 var current_demo_index: int = 0
 var search_path: Array = []
 
-func _init():
+func _init() -> void:
 	name = "RedBlackTree_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	initialize_tree()
@@ -146,7 +146,7 @@ func _ready():
 	if auto_demo:
 		call_deferred("start_demo")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for Red-Black Tree visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -169,14 +169,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for step-by-step operations"""
 	operation_timer = Timer.new()
 	operation_timer.wait_time = operation_delay
 	operation_timer.timeout.connect(_on_operation_timer_timeout)
 	add_child(operation_timer)
 
-func initialize_tree():
+func initialize_tree() -> void:
 	"""Initialize empty Red-Black Tree with NIL sentinel"""
 	# Create NIL sentinel node (always black)
 	nil_node = RBNode.new(0, NodeColor.BLACK)
@@ -189,7 +189,7 @@ func initialize_tree():
 	
 	print("Red-Black Tree initialized with NIL sentinel")
 
-func start_demo():
+func start_demo() -> void:
 	"""Start comprehensive Red-Black Tree demonstration"""
 	generate_demo_data()
 	current_demo_index = 0
@@ -199,7 +199,7 @@ func start_demo():
 	else:
 		perform_bulk_demo()
 
-func generate_demo_data():
+func generate_demo_data() -> void:
 	"""Generate demonstration dataset"""
 	demo_values.clear()
 	
@@ -217,7 +217,7 @@ func generate_demo_data():
 	
 	print("Generated demo data: ", demo_values)
 
-func perform_bulk_demo():
+func perform_bulk_demo() -> void:
 	"""Perform bulk operations without animation"""
 	for value in demo_values:
 		insert_value(value)
@@ -226,7 +226,7 @@ func perform_bulk_demo():
 	update_visualization()
 	update_ui()
 
-func insert_value(value: int):
+func insert_value(value: int) -> void:
 	"""Insert value into Red-Black Tree"""
 	print("Inserting value: ", value)
 	current_operation = "Inserting " + str(value)
@@ -253,7 +253,7 @@ func insert_value(value: int):
 	update_tree_layout()
 	update_visualization()
 
-func insert_bst(new_node: RBNode):
+func insert_bst(new_node: RBNode) -> void:
 	"""Perform standard BST insertion"""
 	var current = root
 	var parent = nil_node
@@ -274,7 +274,7 @@ func insert_bst(new_node: RBNode):
 	else:
 		parent.right = new_node
 
-func fix_insert_violations(node: RBNode):
+func fix_insert_violations(node: RBNode) -> void:
 	"""Fix Red-Black Tree property violations after insertion"""
 	while node != root and node.parent.is_red():
 		if node.parent == node.parent.parent.left:
@@ -325,7 +325,7 @@ func fix_insert_violations(node: RBNode):
 	# Root is always black
 	root.color = NodeColor.BLACK
 
-func rotate_left(node: RBNode):
+func rotate_left(node: RBNode) -> void:
 	"""Perform left rotation around node"""
 	if not node or node.right == nil_node:
 		return
@@ -355,7 +355,7 @@ func rotate_left(node: RBNode):
 	if show_rotation_animations:
 		queue_rotation_animation(node, right_child, "left")
 
-func rotate_right(node: RBNode):
+func rotate_right(node: RBNode) -> void:
 	"""Perform right rotation around node"""
 	if not node or node.left == nil_node:
 		return
@@ -385,7 +385,7 @@ func rotate_right(node: RBNode):
 	if show_rotation_animations:
 		queue_rotation_animation(node, left_child, "right")
 
-func queue_rotation_animation(old_parent: RBNode, new_parent: RBNode, direction: String):
+func queue_rotation_animation(old_parent: RBNode, new_parent: RBNode, direction: String) -> void:
 	"""Queue rotation animation for visualization"""
 	var animation_data = {
 		"type": "rotation",
@@ -415,7 +415,7 @@ func delete_value(value: int) -> bool:
 	update_visualization()
 	return true
 
-func delete_node(node: RBNode):
+func delete_node(node: RBNode) -> void:
 	"""Delete node from Red-Black Tree"""
 	var original_color = node.color
 	var replacement_node: RBNode
@@ -448,7 +448,7 @@ func delete_node(node: RBNode):
 	if original_color == NodeColor.BLACK:
 		fix_delete_violations(replacement_node)
 
-func transplant(old_node: RBNode, new_node: RBNode):
+func transplant(old_node: RBNode, new_node: RBNode) -> void:
 	"""Replace old_node with new_node in the tree"""
 	if old_node.parent == nil_node:
 		root = new_node
@@ -459,7 +459,7 @@ func transplant(old_node: RBNode, new_node: RBNode):
 	
 	new_node.parent = old_node.parent
 
-func fix_delete_violations(node: RBNode):
+func fix_delete_violations(node: RBNode) -> void:
 	"""Fix Red-Black Tree property violations after deletion"""
 	while node != root and node.is_black():
 		if node == node.parent.left:
@@ -539,7 +539,7 @@ func find_minimum(node: RBNode) -> RBNode:
 		node = node.left
 	return node
 
-func calculate_tree_metrics():
+func calculate_tree_metrics() -> void:
 	"""Calculate tree height and black height"""
 	tree_height = calculate_height(root)
 	black_height = calculate_black_height(root)
@@ -585,7 +585,7 @@ func validate_rb_properties() -> Array:
 	
 	return property_violations
 
-func check_red_property(node: RBNode):
+func check_red_property(node: RBNode) -> void:
 	"""Check that red nodes have black children"""
 	if node == nil_node:
 		return
@@ -610,7 +610,7 @@ func get_black_height_to_nil(node: RBNode) -> int:
 	else:
 		return left_height
 
-func check_black_height_property(node: RBNode, current_black_height: int, reference_height: int):
+func check_black_height_property(node: RBNode, current_black_height: int, reference_height: int) -> void:
 	"""Check that all paths have same black height"""
 	if node == nil_node:
 		if current_black_height + 1 != reference_height:
@@ -624,7 +624,7 @@ func check_black_height_property(node: RBNode, current_black_height: int, refere
 	check_black_height_property(node.left, new_height, reference_height)
 	check_black_height_property(node.right, new_height, reference_height)
 
-func update_tree_layout():
+func update_tree_layout() -> void:
 	"""Update 3D positions of all nodes"""
 	if root == nil_node:
 		return
@@ -662,7 +662,7 @@ func assign_positions(node: RBNode, x: float, width: float, level: int):
 	
 	return x
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update 3D visualization of Red-Black Tree"""
 	clear_visualization()
 	
@@ -675,7 +675,7 @@ func update_visualization():
 	if validate_properties:
 		validate_rb_properties()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	"""Clear existing visualization elements"""
 	for mesh in node_meshes:
 		if mesh and is_instance_valid(mesh):
@@ -687,7 +687,7 @@ func clear_visualization():
 			mesh.queue_free()
 	connection_meshes.clear()
 
-func visualize_tree(node: RBNode):
+func visualize_tree(node: RBNode) -> void:
 	"""Recursively visualize tree nodes"""
 	if node == nil_node:
 		return
@@ -698,7 +698,7 @@ func visualize_tree(node: RBNode):
 	visualize_tree(node.left)
 	visualize_tree(node.right)
 
-func create_node_visualization(node: RBNode):
+func create_node_visualization(node: RBNode) -> void:
 	"""Create 3D visualization for a node"""
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
@@ -728,14 +728,14 @@ func create_node_visualization(node: RBNode):
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	mesh_instance.add_child(label)
 
-func create_connections():
+func create_connections() -> void:
 	"""Create visual connections between parent and child nodes"""
 	if root == nil_node:
 		return
 	
 	create_node_connections(root)
 
-func create_node_connections(node: RBNode):
+func create_node_connections(node: RBNode) -> void:
 	"""Create connections for a specific node"""
 	if node == nil_node:
 		return
@@ -775,7 +775,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3
 	
 	return mesh_instance
 
-func _on_operation_timer_timeout():
+func _on_operation_timer_timeout() -> void:
 	"""Handle animation timer for step-by-step operations"""
 	if current_demo_index < demo_values.size():
 		insert_value(demo_values[current_demo_index])
@@ -785,7 +785,7 @@ func _on_operation_timer_timeout():
 		operation_timer.stop()
 		print("Demo complete!")
 
-func highlight_search_path():
+func highlight_search_path() -> void:
 	"""Highlight the search path in visualization"""
 	for node in search_path:
 		if node.mesh_instance:
@@ -798,7 +798,7 @@ func highlight_search_path():
 	await get_tree().create_timer(highlight_duration).timeout
 	update_visualization()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current Red-Black Tree state"""
 	if not ui_display:
 		return
@@ -981,7 +981,7 @@ func get_access_equality_index() -> String:
 	var equality = float(black_height) / float(tree_height) * 100.0
 	return str(int(equality)) + "%"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -1010,7 +1010,7 @@ func _input(event):
 				else:
 					operation_timer.stop()
 
-func reset_tree():
+func reset_tree() -> void:
 	"""Reset Red-Black Tree to initial state"""
 	clear_visualization()
 	insertions_count = 0
@@ -1047,4 +1047,10 @@ func get_algorithm_info() -> Dictionary:
 			"delete": "O(log n)",
 			"space": "O(n)"
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

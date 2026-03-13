@@ -91,3 +91,9 @@ func _update_trail() -> void:
 	for point in _trail_points:
 		_trail_mesh.surface_add_vertex(point)
 	_trail_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

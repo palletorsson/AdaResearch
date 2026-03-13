@@ -24,18 +24,18 @@ var pendulum_angular_velocity = 0.0
 var pendulum_length = 3.0
 var pendulum_damping = 0.98
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
 	_connect_ui()
 	_initialize_constraints()
 
-func _initialize_constraints():
+func _initialize_constraints() -> void:
 	# Initialize all constraint systems
 	_update_constraint_visualization()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if paused:
 		return
 	
@@ -53,7 +53,7 @@ func _physics_process(delta):
 	# Update constraint visualization
 	_update_constraint_visualization()
 
-func _update_hinge_system(delta):
+func _update_hinge_system(delta) -> void:
 	# Update hinge angle
 	hinge_angle += hinge_angular_velocity * delta
 	
@@ -63,7 +63,7 @@ func _update_hinge_system(delta):
 	# Keep angular velocity reasonable
 	hinge_angular_velocity = clamp(hinge_angular_velocity, -3.0, 3.0)
 
-func _update_slider_system(delta):
+func _update_slider_system(delta) -> void:
 	# Update slider position
 	slider_position += slider_velocity * delta
 	
@@ -78,7 +78,7 @@ func _update_slider_system(delta):
 	# Add some oscillation
 	slider_velocity += sin(time * 0.3) * 0.1
 
-func _update_pendulum_system(delta):
+func _update_pendulum_system(delta) -> void:
 	# Simple pendulum physics
 	var g = gravity.y
 	pendulum_angular_velocity += (g / pendulum_length) * sin(pendulum_angle) * delta
@@ -87,7 +87,7 @@ func _update_pendulum_system(delta):
 	# Apply damping
 	pendulum_angular_velocity *= pendulum_damping
 
-func _update_constraint_visualization():
+func _update_constraint_visualization() -> void:
 	# Update hinge system
 	var hinge_system = $ConstraintSystems/HingeSystem
 	var arm1 = hinge_system.get_node("HingeJoint/Arm1")
@@ -110,12 +110,12 @@ func _update_constraint_visualization():
 	var bob_y = -pendulum_length * cos(pendulum_angle)
 	pendulum_bob.position = Vector3(bob_x, bob_y, 0)
 
-func _connect_ui():
+func _connect_ui() -> void:
 	$UI/VBoxContainer/ResetButton.pressed.connect(_on_reset_pressed)
 	$UI/VBoxContainer/PauseButton.pressed.connect(_on_pause_pressed)
 	$UI/VBoxContainer/ConstraintTypeButton.pressed.connect(_on_constraint_type_pressed)
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	# Reset all constraint systems
 	hinge_angle = 0.0
 	hinge_angular_velocity = 2.0
@@ -125,11 +125,11 @@ func _on_reset_pressed():
 	pendulum_angular_velocity = 0.0
 	time = 0.0
 
-func _on_pause_pressed():
+func _on_pause_pressed() -> void:
 	paused = !paused
 	$UI/VBoxContainer/PauseButton.text = "Resume" if paused else "Pause"
 
-func _on_constraint_type_pressed():
+func _on_constraint_type_pressed() -> void:
 	current_constraint_type = (current_constraint_type + 1) % ConstraintType.size()
 	
 	# Update UI text

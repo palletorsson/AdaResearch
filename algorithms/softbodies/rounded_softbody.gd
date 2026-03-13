@@ -21,14 +21,14 @@ extends SoftBody3D
 		base_color = value
 		if is_inside_tree(): _update_material()
 
-func _ready():
+func _ready() -> void:
 	ray_pickable = false # Disable ray picking to prevent interference
 	simulation_precision = 10 # Higher precision for better collision
 	collision_layer = 1
 	collision_mask = 1
 	_build_mesh()
 
-func _build_mesh():
+func _build_mesh() -> void:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -153,7 +153,7 @@ func _build_mesh():
 	
 	_update_material()
 
-func _update_material():
+func _update_material() -> void:
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = base_color
 	# Add a grid texture or something if desired, but color is fine

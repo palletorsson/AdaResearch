@@ -44,7 +44,7 @@ var sine_steps: Array[Node3D] = []
 var cosine_steps: Array[Node3D] = []
 var step_phase: float = 0.0  # Escalator phase offset
 
-func _ready():
+func _ready() -> void:
 	# If no step scene is provided, we'll create a simple mesh instance programmatically
 	_generate_initial_path()
 	if add_end_platforms:
@@ -61,7 +61,7 @@ func _ready():
 var sine_lights: Array[OmniLight3D] = []
 var cosine_lights: Array[OmniLight3D] = []
 
-func _generate_initial_path():
+func _generate_initial_path() -> void:
 	for i in range(path_length):
 		_add_step_pair(i)
 		current_z -= step_distance
@@ -70,7 +70,7 @@ func _generate_initial_path():
 		if i % light_interval == 0:
 			_add_stair_lights(i)
 
-func _add_step_pair(index: int):
+func _add_step_pair(index: int) -> void:
 	# Initial z position based on index
 	var z_pos: float = -index * step_distance
 	
@@ -123,7 +123,7 @@ func _create_step(color: Color) -> Node3D:
 	
 	return body
 
-func _add_stair_lights(step_index: int):
+func _add_stair_lights(step_index: int) -> void:
 	var z_pos = -step_index * step_distance
 	var t = step_index * step_distance * frequency
 	var total_length = path_length * step_distance
@@ -155,11 +155,11 @@ func _add_stair_lights(step_index: int):
 	cosine_path.add_child(cos_light)
 	cosine_lights.append(cos_light)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if escalator_mode:
 		_update_escalator(delta)
 
-func _update_escalator(delta: float):
+func _update_escalator(delta: float) -> void:
 	# Advance the phase
 	step_phase += escalator_speed * delta
 	
@@ -256,3 +256,9 @@ func _process(_delta: float):
 	if generation_speed > 0 and not escalator_mode:
 		# Implement endless runner style generation here if needed
 		pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

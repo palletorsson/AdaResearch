@@ -64,7 +64,7 @@ class VoronoiSite:
 	var territory_area: float = 0.0
 	var mesh_instance: MeshInstance3D = null
 	
-	func _init(pos: Vector2, idx: int):
+	func _init(pos: Vector2, idx: int) -> void:
 		position = pos
 		index = idx
 
@@ -94,10 +94,10 @@ var base_time: float = 0.0
 var construction_time: float = 0.0
 var spatial_equity_index: float = 0.0
 
-func _init():
+func _init() -> void:
 	name = "Voronoi_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_visual_environment()
 	setup_animation_system()
 	
@@ -110,7 +110,7 @@ func _ready():
 		call_deferred("construct_voronoi_cells")
 		call_deferred("update_visualization")
 
-func setup_visual_environment():
+func setup_visual_environment() -> void:
 	"""Set up enhanced visual environment"""
 	var main_light = DirectionalLight3D.new()
 	main_light.transform.basis = Basis.from_euler(Vector3(-0.3, 0.5, 0))
@@ -131,14 +131,14 @@ func setup_visual_environment():
 	camera.fov = 60.0
 	add_child(camera)
 
-func setup_animation_system():
+func setup_animation_system() -> void:
 	"""Set up animation system"""
 	construction_timer = Timer.new()
 	construction_timer.wait_time = 0.1
 	construction_timer.timeout.connect(_on_construction_timer_timeout)
 	add_child(construction_timer)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create UI for Voronoi visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -160,7 +160,7 @@ func setup_ui():
 	
 	update_ui()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Update animations and effects"""
 	base_time += delta
 	
@@ -176,7 +176,7 @@ func _process(delta):
 	if enable_pulsing:
 		update_pulsing_animation()
 
-func update_floating_animation():
+func update_floating_animation() -> void:
 	"""Update floating animation for sites"""
 	for i in range(site_meshes.size()):
 		var mesh = site_meshes[i]
@@ -185,11 +185,11 @@ func update_floating_animation():
 			var float_offset = sin(base_time * floating_frequency + i * 0.5) * floating_amplitude
 			mesh.position.y = original_y + float_offset
 
-func update_rotation_animation(delta):
+func update_rotation_animation(delta) -> void:
 	"""Update rotation animation for the entire diagram"""
 	rotation.y += rotation_speed * delta
 
-func update_pulsing_animation():
+func update_pulsing_animation() -> void:
 	"""Update pulsing animation for sites"""
 	for i in range(site_meshes.size()):
 		var mesh = site_meshes[i]
@@ -197,7 +197,7 @@ func update_pulsing_animation():
 			var pulse_scale = 1.0 + sin(base_time * 2.0 + i * 0.3) * 0.1
 			mesh.scale = Vector3(pulse_scale, pulse_scale, pulse_scale)
 
-func generate_random_sites():
+func generate_random_sites() -> void:
 	"""Generate random site points"""
 	sites.clear()
 	var bounds = diagram_bounds
@@ -213,7 +213,7 @@ func generate_random_sites():
 	print("Generated ", sites.size(), " random sites")
 	visualize_sites()
 
-func construct_voronoi_cells():
+func construct_voronoi_cells() -> void:
 	"""Construct proper Voronoi cells using a more robust method"""
 	cells.clear()
 	var bounds = Rect2(-diagram_bounds/2, diagram_bounds)
@@ -411,7 +411,7 @@ func clip_polygon_by_line(polygon: Array[Vector2], line_start: Vector2, line_end
 	
 	return result
 
-func validate_voronoi_structure():
+func validate_voronoi_structure() -> void:
 	"""Validate that the Voronoi structure is mathematically correct"""
 	print("Validating Voronoi structure...")
 	
@@ -452,7 +452,7 @@ func calculate_polygon_area(vertices: Array[Vector2]) -> float:
 	
 	return abs(area) / 2.0
 
-func calculate_spatial_metrics():
+func calculate_spatial_metrics() -> void:
 	"""Calculate spatial equity and territorial metrics"""
 	if sites.is_empty():
 		return
@@ -470,13 +470,13 @@ func calculate_spatial_metrics():
 	spatial_equity_index = 1.0 - (std_dev / average_area)
 	spatial_equity_index = max(0.0, min(1.0, spatial_equity_index))
 
-func animate_construction_process():
+func animate_construction_process() -> void:
 	"""Animate the construction of the Voronoi diagram"""
 	animation_phase = 0
 	construction_timer.start()
 	clear_all_meshes()
 
-func _on_construction_timer_timeout():
+func _on_construction_timer_timeout() -> void:
 	"""Handle construction timer for animated building"""
 	match animation_phase:
 		0:  # Animate sites appearing
@@ -487,7 +487,7 @@ func _on_construction_timer_timeout():
 			construction_timer.stop()
 			animation_phase = 3
 
-func animate_sites_construction():
+func animate_sites_construction() -> void:
 	"""Animate sites appearing one by one"""
 	if sites.is_empty():
 		animation_phase = 1
@@ -505,7 +505,7 @@ func animate_sites_construction():
 	site_meshes.append(mesh_instance)
 	site.mesh_instance = mesh_instance
 
-func animate_cells_construction():
+func animate_cells_construction() -> void:
 	"""Animate cells appearing"""
 	if not animate_construction:
 		construct_voronoi_cells()
@@ -550,7 +550,7 @@ func create_animated_site(site: VoronoiSite, index: int) -> MeshInstance3D:
 	animation_tweens.append(tween)
 	return mesh_instance
 
-func animate_cells_appearing():
+func animate_cells_appearing() -> void:
 	"""Animate cells appearing with fade-in effect"""
 	clear_cell_meshes()
 	
@@ -575,7 +575,7 @@ func animate_cells_appearing():
 			
 			animation_tweens.append(tween)
 
-func visualize_sites():
+func visualize_sites() -> void:
 	"""Create 3D visualization of sites"""
 	clear_site_meshes()
 	
@@ -586,7 +586,7 @@ func visualize_sites():
 		site_meshes.append(mesh_instance)
 		site.mesh_instance = mesh_instance
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update complete Voronoi visualization"""
 	clear_all_meshes()
 	visualize_sites()
@@ -598,7 +598,7 @@ func update_visualization():
 		visualize_territories_detailed()
 		visualize_voronoi_edges()
 
-func visualize_territories_detailed():
+func visualize_territories_detailed() -> void:
 	"""Create detailed territory visualization using grid-based approach"""
 	print("Creating detailed territory visualization...")
 	
@@ -643,7 +643,7 @@ func visualize_territories_detailed():
 				cell.mesh_instance = mesh_instance
 				print("Created detailed cell ", i, " with ", hull_vertices.size(), " vertices")
 
-func visualize_delaunay():
+func visualize_delaunay() -> void:
 	"""Visualize Delaunay triangulation (dual of Voronoi)"""
 	for i in range(sites.size()):
 		for j in range(i + 1, sites.size()):
@@ -673,7 +673,7 @@ func are_sites_adjacent(site1: VoronoiSite, site2: VoronoiSite) -> bool:
 	
 	return true
 
-func visualize_territories():
+func visualize_territories() -> void:
 	"""Visualize territorial areas"""
 	print("Visualizing ", cells.size(), " territories...")
 	
@@ -715,7 +715,7 @@ func sort_vertices_counterclockwise(vertices: Array[Vector2], center: Vector2) -
 	
 	return vertices
 
-func visualize_voronoi_edges():
+func visualize_voronoi_edges() -> void:
 	"""Visualize Voronoi cell edges"""
 	print("Visualizing Voronoi edges...")
 	
@@ -811,31 +811,31 @@ func create_territory_polygon_mesh(cell: VoronoiCell, color: Color) -> MeshInsta
 	
 	return mesh_instance
 
-func clear_all_meshes():
+func clear_all_meshes() -> void:
 	"""Clear all visualization meshes"""
 	clear_site_meshes()
 	clear_cell_meshes()
 	clear_delaunay_meshes()
 
-func clear_site_meshes():
+func clear_site_meshes() -> void:
 	for mesh in site_meshes:
 		if mesh and is_instance_valid(mesh):
 			mesh.queue_free()
 	site_meshes.clear()
 
-func clear_cell_meshes():
+func clear_cell_meshes() -> void:
 	for mesh in cell_meshes:
 		if mesh and is_instance_valid(mesh):
 			mesh.queue_free()
 	cell_meshes.clear()
 
-func clear_delaunay_meshes():
+func clear_delaunay_meshes() -> void:
 	for mesh in delaunay_meshes:
 		if mesh and is_instance_valid(mesh):
 			mesh.queue_free()
 	delaunay_meshes.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with Voronoi diagram information"""
 	if not ui_display:
 		return
@@ -932,7 +932,7 @@ func get_power_concentration_level() -> String:
 	else:
 		return "High"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -973,7 +973,7 @@ func _input(event):
 					construct_voronoi_cells()
 					update_visualization()
 
-func reset_diagram():
+func reset_diagram() -> void:
 	"""Reset Voronoi diagram"""
 	clear_all_meshes()
 	sites.clear()
@@ -1001,4 +1001,10 @@ func get_algorithm_info() -> Dictionary:
 			"time": "O(n²)",
 			"space": "O(n)"
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

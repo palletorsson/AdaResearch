@@ -89,3 +89,9 @@ func _process(_delta: float) -> void:
 	_ball.position = Vector3(_x, _y, _z)
 
 	_status_label.text = "Ball (No Vectors) | Y %.2f" % _y
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

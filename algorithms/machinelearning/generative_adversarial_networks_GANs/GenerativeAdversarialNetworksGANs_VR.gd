@@ -41,7 +41,7 @@ var generator_zone: Node3D
 var discriminator_zone: Node3D
 var competition_arena: Node3D
 
-func _ready():
+func _ready() -> void:
 	print("[GANs_VR] Initializing adversarial training arena")
 	_create_generator_zone()
 	_create_discriminator_zone()
@@ -50,7 +50,7 @@ func _ready():
 	_create_training_controls()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -68,7 +68,7 @@ func _process(delta):
 	_animate_data_flow(delta)
 	_animate_feedback_loop(delta)
 
-func _create_generator_zone():
+func _create_generator_zone() -> void:
 	"""Create the Generator zone (left side)"""
 	generator_zone = Node3D.new()
 	generator_zone.name = "GeneratorZone"
@@ -112,7 +112,7 @@ func _create_generator_zone():
 	# Output fake data area
 	_create_fake_data_spawn()
 
-func _create_noise_input_platform():
+func _create_noise_input_platform() -> void:
 	"""Create a platform where users can place/throw noise"""
 	var platform = MeshInstance3D.new()
 	platform.name = "NoiseInputPlatform"
@@ -179,7 +179,7 @@ func _create_noise_particle(pos: Vector3) -> RigidBody3D:
 
 	return body
 
-func _create_fake_data_spawn():
+func _create_fake_data_spawn() -> void:
 	"""Area where generated fake data appears"""
 	var spawn_zone = Node3D.new()
 	spawn_zone.name = "FakeDataSpawn"
@@ -199,7 +199,7 @@ func _create_fake_data_spawn():
 			"spawn_zone": spawn_zone
 		})
 
-func _create_discriminator_zone():
+func _create_discriminator_zone() -> void:
 	"""Create the Discriminator zone (right side)"""
 	discriminator_zone = Node3D.new()
 	discriminator_zone.name = "DiscriminatorZone"
@@ -240,7 +240,7 @@ func _create_discriminator_zone():
 	# Real data area (green particles)
 	_create_real_data_area()
 
-func _create_real_data_area():
+func _create_real_data_area() -> void:
 	"""Area showing real training data"""
 	var real_zone = Node3D.new()
 	real_zone.name = "RealDataZone"
@@ -313,7 +313,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 
 	return mesh
 
-func _create_competition_arena():
+func _create_competition_arena() -> void:
 	"""Create central competition arena"""
 	competition_arena = Node3D.new()
 	competition_arena.name = "CompetitionArena"
@@ -371,7 +371,7 @@ func _create_competition_arena():
 	label.position = Vector3(0, 3.5, 0)
 	competition_arena.add_child(label)
 
-func _create_feedback_loop():
+func _create_feedback_loop() -> void:
 	"""Create visible feedback path connecting all components"""
 	if not show_feedback_loop:
 		return
@@ -404,7 +404,7 @@ func _create_feedback_loop():
 			"progress": float(i) / particle_count
 		})
 
-func _create_training_controls():
+func _create_training_controls() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "TrainingControls"
@@ -442,7 +442,7 @@ func _create_training_controls():
 	metrics.position = Vector3(0, -0.3, 0.1)
 	controls.add_child(metrics)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Generator explanation
 	_create_info_panel(
@@ -465,7 +465,7 @@ func _create_info_panels():
 		Color(0.9, 0.5, 0.2)
 	)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -477,7 +477,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_generator(delta):
+func _animate_generator(delta) -> void:
 	"""Animate generator core"""
 	var core = generator_zone.get_node_or_null("GeneratorCore")
 	if core:
@@ -485,7 +485,7 @@ func _animate_generator(delta):
 		var pulse = 1.0 + sin(time * 2.0) * 0.2 * training_progress
 		core.scale = Vector3.ONE * pulse
 
-func _animate_discriminator(delta):
+func _animate_discriminator(delta) -> void:
 	"""Animate discriminator core"""
 	var core = discriminator_zone.get_node_or_null("DiscriminatorCore")
 	if core:
@@ -493,7 +493,7 @@ func _animate_discriminator(delta):
 		var pulse = 1.0 + cos(time * 2.2) * 0.2 * training_progress
 		core.scale = Vector3.ONE * pulse
 
-func _animate_competition(delta):
+func _animate_competition(delta) -> void:
 	"""Animate competition arena pillar"""
 	var pillar = competition_arena.get_node_or_null("CompetitionPillar")
 	if pillar:
@@ -506,7 +506,7 @@ func _animate_competition(delta):
 		# Rotate
 		pillar.rotation.y += delta * competition_level * 2.0
 
-func _animate_data_flow(delta):
+func _animate_data_flow(delta) -> void:
 	"""Animate fake data flowing from generator to discriminator"""
 	for fake_data in fake_data_particles:
 		var node = fake_data.node
@@ -514,7 +514,7 @@ func _animate_data_flow(delta):
 		var target_pos = Vector3(room_separation * 0.5, 2.0, 0)
 		node.position = node.position.lerp(target_pos, delta * 0.3 * generation_quality)
 
-func _animate_feedback_loop(delta):
+func _animate_feedback_loop(delta) -> void:
 	"""Animate feedback particles circling the system"""
 	for particle_data in feedback_particles:
 		var particle = particle_data.node
@@ -534,10 +534,10 @@ func _animate_feedback_loop(delta):
 		particle.position = Vector3(x, y, z)
 
 # Public API
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	generator_loss = 1.0
 	discriminator_loss = 1.0
@@ -551,3 +551,9 @@ func get_metrics() -> Dictionary:
 		"competition": competition_level,
 		"quality": generation_quality
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

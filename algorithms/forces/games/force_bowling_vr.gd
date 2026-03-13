@@ -46,7 +46,7 @@ var throw_power_controller: ParameterController3D
 var ball_mass: float = 2.5
 var throw_power_multiplier: float = 1.0
 
-func _ready():
+func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -70,7 +70,7 @@ func _physics_process(_delta: float):
 	if bowling_ball and not ball_grabbed:
 		update_throw_state()
 
-func create_bowling_lane():
+func create_bowling_lane() -> void:
 	# Create bowling lane floor
 	var lane_mesh := BoxMesh.new()
 	lane_mesh.size = Vector3(0.6, 0.02, 2.0)
@@ -94,7 +94,7 @@ func create_bowling_lane():
 	create_gutter(Vector3(0.35, -0.25, 0))
 	create_gutter(Vector3(-0.35, -0.25, 0))
 
-func create_lane_marker(pos: Vector3):
+func create_lane_marker(pos: Vector3) -> void:
 	var marker := MeshInstance3D.new()
 	var cylinder := CylinderMesh.new()
 	cylinder.height = 0.01
@@ -108,7 +108,7 @@ func create_lane_marker(pos: Vector3):
 	marker.material_override = mat
 	add_child(marker)
 
-func create_gutter(pos: Vector3):
+func create_gutter(pos: Vector3) -> void:
 	var gutter := StaticBody3D.new()
 	var collider := CollisionShape3D.new()
 	var box := BoxShape3D.new()
@@ -130,7 +130,7 @@ func create_gutter(pos: Vector3):
 
 	add_child(gutter)
 
-func create_pins():
+func create_pins() -> void:
 	# Create bowling pins in traditional 10-pin arrangement
 	var pin_positions := [
 		Vector3(0, 0, PIN_AREA_START_Z),  # Front pin
@@ -168,7 +168,7 @@ func create_pin(pos: Vector3, index: int) -> Mover:
 
 	return pin
 
-func create_bowling_ball():
+func create_bowling_ball() -> void:
 	bowling_ball = Mover.new()
 	bowling_ball.mass = ball_mass
 	bowling_ball.position_v = BALL_START_POS
@@ -180,7 +180,7 @@ func create_bowling_ball():
 
 	last_ball_position = BALL_START_POS
 
-func apply_physics_to_ball():
+func apply_physics_to_ball() -> void:
 	if not bowling_ball or ball_grabbed:
 		return
 
@@ -194,7 +194,7 @@ func apply_physics_to_ball():
 		var friction_force: Vector3 = friction_dir * floor_friction * normal_force
 		bowling_ball.apply_force(friction_force)
 
-func apply_physics_to_pins():
+func apply_physics_to_pins() -> void:
 	for pin in pins:
 		if not is_instance_valid(pin):
 			continue
@@ -217,13 +217,13 @@ func apply_physics_to_pins():
 				pins_knocked += 1
 				create_pin_knock_effect(pin.position_v)
 
-func update_throw_state():
+func update_throw_state() -> void:
 	if not is_throwing and bowling_ball:
 		# Check if ball is moving (throw initiated)
 		if bowling_ball.velocity.length() > 0.5:
 			is_throwing = true
 
-func check_throw_complete():
+func check_throw_complete() -> void:
 	if not is_throwing or not bowling_ball:
 		return
 
@@ -234,7 +234,7 @@ func check_throw_complete():
 	if ball_stopped or ball_out_of_bounds:
 		complete_throw()
 
-func complete_throw():
+func complete_throw() -> void:
 	is_throwing = false
 	current_throw += 1
 
@@ -246,7 +246,7 @@ func complete_throw():
 	await get_tree().create_timer(2.0).timeout
 	reset_for_next_throw()
 
-func reset_for_next_throw():
+func reset_for_next_throw() -> void:
 	pins_knocked = 0
 
 	# Remove and recreate pins
@@ -266,7 +266,7 @@ func reset_for_next_throw():
 	if current_throw >= MAX_THROWS:
 		end_game()
 
-func create_pin_knock_effect(pos: Vector3):
+func create_pin_knock_effect(pos: Vector3) -> void:
 	var effect := CPUParticles3D.new()
 	effect.emitting = true
 	effect.one_shot = true
@@ -288,7 +288,7 @@ func create_pin_knock_effect(pos: Vector3):
 	if is_instance_valid(effect):
 		effect.queue_free()
 
-func create_ui():
+func create_ui() -> void:
 	info_label = Label3D.new()
 	FORCES_UI.style_title_label(info_label, Vector3(0, 0.75, -0.5), 32)
 	add_child(info_label)
@@ -329,22 +329,22 @@ func create_ui():
 	throw_power_controller.value_changed.connect(_on_power_changed)
 	throw_power_controller.set_value(throw_power_multiplier)
 
-func update_ui():
+func update_ui() -> void:
 	if info_label:
 		FORCES_UI.set_label_text(info_label, "FORCE BOWLING VR")
 
 	if score_label:
 		FORCES_UI.set_label_text(score_label, "Score: %d | Throw: %d/%d" % [total_score, current_throw, MAX_THROWS])
 
-func _on_ball_mass_changed(value: float):
+func _on_ball_mass_changed(value: float) -> void:
 	ball_mass = value
 	if bowling_ball:
 		bowling_ball.mass = ball_mass
 
-func _on_power_changed(value: float):
+func _on_power_changed(value: float) -> void:
 	throw_power_multiplier = value
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -355,16 +355,22 @@ func _input(event: InputEvent):
 					bowling_ball.velocity = Vector3(0, 0, 2.5) * throw_power_multiplier
 					is_throwing = true
 
-func reset_game():
+func reset_game() -> void:
 	total_score = 0
 	current_throw = 0
 	pins_knocked = 0
 	is_throwing = false
 	reset_for_next_throw()
 
-func end_game():
+func end_game() -> void:
 	if info_label:
 		FORCES_UI.set_label_text(info_label, "GAME OVER! Final Score: %d" % total_score)
 
 	await get_tree().create_timer(5.0).timeout
 	reset_game()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

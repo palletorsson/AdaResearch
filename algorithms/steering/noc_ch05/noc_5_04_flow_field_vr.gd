@@ -85,7 +85,7 @@ class FlowField:
 	var field: Array[Vector3] = []
 	var noise_obj: FastNoiseLite
 
-	func _init():
+	func _init() -> void:
 		noise_obj = FastNoiseLite.new()
 		noise_obj.seed = randi()
 		noise_obj.frequency = 0.1
@@ -189,3 +189,9 @@ class Vehicle:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

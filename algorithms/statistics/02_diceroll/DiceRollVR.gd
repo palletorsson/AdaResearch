@@ -48,7 +48,7 @@ var expected_value_line: Node3D
 var dice_spawn_area: Vector3 = Vector3(1.0, 0, 1.0)
 var table_surface: StaticBody3D
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	create_dice_set()
 	setup_table()
@@ -56,7 +56,7 @@ func _ready():
 	setup_histogram_display()
 	initialize_statistics()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -82,7 +82,7 @@ func setup_vr():
 		right_controller.button_pressed.connect(_on_controller_button)
 		xr_origin.add_child(right_controller)
 
-func create_dice_set():
+func create_dice_set() -> void:
 	"""Create set of interactive dice"""
 	for i in range(dice_count):
 		var die = create_single_die(i)
@@ -124,7 +124,7 @@ func create_single_die(index: int) -> RigidBody3D:
 	
 	return die
 
-func add_die_face_numbers(die: RigidBody3D):
+func add_die_face_numbers(die: RigidBody3D) -> void:
 	"""Add number labels to each face of the die"""
 	var face_positions = [
 		Vector3(0, 0, dice_size/2),    # Front (1)
@@ -145,7 +145,7 @@ func add_die_face_numbers(die: RigidBody3D):
 		label.modulate = Color.BLACK
 		die.add_child(label)
 
-func setup_table():
+func setup_table() -> void:
 	"""Create table surface for dice to land on"""
 	table_surface = StaticBody3D.new()
 	
@@ -169,7 +169,7 @@ func setup_table():
 	
 	add_child(table_surface)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create statistics display"""
 	stats_display = Label3D.new()
 	stats_display.position = Vector3(-2.0, 2.0, -1.0)
@@ -178,7 +178,7 @@ func setup_ui():
 	stats_display.modulate = Color.WHITE
 	add_child(stats_display)
 
-func setup_histogram_display():
+func setup_histogram_display() -> void:
 	"""Create histogram for distribution visualization"""
 	histogram_display = Node3D.new()
 	histogram_display.position = Vector3(2.0, 1.0, -1.0)
@@ -196,23 +196,23 @@ func setup_histogram_display():
 	
 	histogram_display.add_child(bg)
 
-func initialize_statistics():
+func initialize_statistics() -> void:
 	"""Initialize statistical tracking arrays"""
 	for i in range(dice_count):
 		individual_face_counts.append([0, 0, 0, 0, 0, 0])  # 6 faces per die
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		roll_dice()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			roll_dice()
 
-func roll_dice():
+func roll_dice() -> void:
 	"""Execute dice roll with physics"""
 	if roll_count >= max_rolls:
 		return
@@ -290,7 +290,7 @@ func determine_face_up(die: RigidBody3D) -> int:
 	
 	return best_face
 
-func record_roll_result(result: Array[int]):
+func record_roll_result(result: Array[int]) -> void:
 	"""Record roll results and update statistics"""
 	roll_results.append(result)
 	roll_count += 1
@@ -306,7 +306,7 @@ func record_roll_result(result: Array[int]):
 	
 	sum_results.append(sum_value)
 
-func update_display():
+func update_display() -> void:
 	"""Update statistics display and visualizations"""
 	var display_text = "Dice Roll Statistics\n"
 	display_text += "Rolls: %d/%d\n\n" % [roll_count, max_rolls]
@@ -355,7 +355,7 @@ func calculate_sum_variance() -> float:
 	
 	return variance_sum / float(sum_results.size() - 1)
 
-func update_histogram():
+func update_histogram() -> void:
 	"""Update histogram display for sum distribution"""
 	# Clear existing bars
 	for child in histogram_display.get_children():
@@ -393,7 +393,7 @@ func update_histogram():
 		
 		create_histogram_bar(sum_val, height, bar_width, min_sum, max_sum)
 
-func create_histogram_bar(sum_value: int, height: float, width: float, min_sum: int, max_sum: int):
+func create_histogram_bar(sum_value: int, height: float, width: float, min_sum: int, max_sum: int) -> void:
 	"""Create a single histogram bar"""
 	var bar = MeshInstance3D.new()
 	bar.name = "bar_" + str(sum_value)
@@ -441,3 +441,9 @@ func get_statistics_summary() -> Dictionary:
 		"expected_sum": float(dice_count) * 3.5,
 		"sum_variance": calculate_sum_variance()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

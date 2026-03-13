@@ -35,12 +35,12 @@ enum CAType {
 const DendriteGrowthCA = preload("res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd")
 const DiseaseSpreadCA = preload("res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd")
 
-func _ready():
+func _ready() -> void:
  
 	initialize_ca_showcases()
 	start_showcase_cycle()
 
-func create_info_panel(index: int, pos: Vector3):
+func create_info_panel(index: int, pos: Vector3) -> void:
 	var panel = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(2.5, 1.5, 0.1)
@@ -70,7 +70,7 @@ func create_info_panel(index: int, pos: Vector3):
 	add_child(panel)
 	info_panels.append(panel)
 
-func initialize_ca_showcases():
+func initialize_ca_showcases() -> void:
 	showcases.clear()
 	info_panels.clear()
 	
@@ -128,7 +128,7 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 	
 	return showcase
 
-func create_recrystallization_ca(parent: Node3D):
+func create_recrystallization_ca(parent: Node3D) -> void:
 	# Metal recrystallization simulation
 	var grid = create_3d_grid(parent, "Recrystallization")
 	var nucleation_sites = []
@@ -166,7 +166,7 @@ func create_recrystallization_ca(parent: Node3D):
 
 
 
-func create_percolation_ca(parent: Node3D):
+func create_percolation_ca(parent: Node3D) -> void:
 	# Fluid percolation through porous medium
 	var grid = create_3d_grid(parent, "Percolation")
 	
@@ -193,7 +193,7 @@ func create_percolation_ca(parent: Node3D):
 	parent.set_meta("porosity", 0.6)
 	parent.set_meta("flow_rate", 0.1)
 
-func create_crack_propagation_ca(parent: Node3D):
+func create_crack_propagation_ca(parent: Node3D) -> void:
 	# Material crack propagation
 	var grid = create_3d_grid(parent, "Crack Propagation")
 	var stress_points = []
@@ -224,7 +224,7 @@ func create_crack_propagation_ca(parent: Node3D):
 	parent.set_meta("stress_points", stress_points)
 	parent.set_meta("crack_threshold", 0.4)
 
-func create_avalanche_ca(parent: Node3D):
+func create_avalanche_ca(parent: Node3D) -> void:
 	# Sand pile avalanche model (Bak-Tang-Wiesenfeld)
 	var grid = create_2d_grid_on_platform(parent, "Avalanche Model")
 	
@@ -245,7 +245,7 @@ func create_avalanche_ca(parent: Node3D):
 	parent.set_meta("critical_slope", 4)
 	parent.set_meta("sand_drop_rate", 0.1)
 
-func create_traffic_flow_ca(parent: Node3D):
+func create_traffic_flow_ca(parent: Node3D) -> void:
 	# Highway traffic flow simulation
 	var road_segments = create_road_network(parent)
 	
@@ -254,7 +254,7 @@ func create_traffic_flow_ca(parent: Node3D):
 	parent.set_meta("car_density", 0.3)
 	parent.set_meta("max_velocity", 3)
 
-func create_flood_propagation_ca(parent: Node3D):
+func create_flood_propagation_ca(parent: Node3D) -> void:
 	# Flood water propagation
 	var terrain = create_terrain_grid(parent, "Flood Simulation")
 	
@@ -263,7 +263,7 @@ func create_flood_propagation_ca(parent: Node3D):
 	parent.set_meta("water_sources", [Vector3i(10, 50, 10)])
 	parent.set_meta("flow_rate", 0.08)
 
-func create_ecosystem_ca(parent: Node3D):
+func create_ecosystem_ca(parent: Node3D) -> void:
 	# Predator-prey ecosystem
 	var grid = create_3d_grid(parent, "Ecosystem")
 	
@@ -295,7 +295,7 @@ func create_ecosystem_ca(parent: Node3D):
 
 
 
-func create_blood_flow_ca(parent: Node3D):
+func create_blood_flow_ca(parent: Node3D) -> void:
 	# Lattice Boltzmann blood flow
 	var vessel_network = create_vessel_network(parent)
 	
@@ -304,7 +304,7 @@ func create_blood_flow_ca(parent: Node3D):
 	parent.set_meta("viscosity", 0.004)
 	parent.set_meta("pressure_gradient", 0.1)
 
-func create_droplet_behavior_ca(parent: Node3D):
+func create_droplet_behavior_ca(parent: Node3D) -> void:
 	# Surface tension and droplet dynamics
 	var surface_grid = create_surface_grid(parent)
 	
@@ -333,7 +333,7 @@ func create_droplet_behavior_ca(parent: Node3D):
 	parent.set_meta("surface_tension", 0.7)
 	parent.set_meta("contact_angle", 45.0)
 
-func create_self_organization_ca(parent: Node3D):
+func create_self_organization_ca(parent: Node3D) -> void:
 	# Self-organizing patterns and emergence
 	var grid = create_3d_grid(parent, "Self-Organization")
 	
@@ -403,7 +403,7 @@ func create_3d_grid(parent: Node3D, label: String) -> Array:
 	
 	return cells
 
-func activate_cell(showcase: Node3D, x: int, y: int, z: int, color: Color):
+func activate_cell(showcase: Node3D, x: int, y: int, z: int, color: Color) -> void:
 	"""Activate a cell with a growing animation"""
 	if not showcase.has_meta("visual_multimesh"):
 		return
@@ -541,11 +541,11 @@ func create_surface_grid(parent: Node3D) -> Array:
 	
 	return surface
 
-func start_showcase_cycle():
+func start_showcase_cycle() -> void:
 	print("VR CA Showcase initialized with ", SHOWCASE_COUNT, " demonstrations")
 	highlight_current_showcase()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	transition_time += delta
 	
 	if auto_cycle and transition_time >= cycle_interval:
@@ -555,7 +555,7 @@ func _process(delta):
 	# Update only the currently visible showcase (non-blocking)
 	update_current_showcase(delta)
 
-func update_current_showcase(delta):
+func update_current_showcase(delta) -> void:
 	"""Update only the currently visible showcase for better performance"""
 	if current_showcase < 0 or current_showcase >= showcases.size():
 		return
@@ -589,7 +589,7 @@ func update_current_showcase(delta):
 		"self_org":
 			update_self_organization(showcase, delta)
 
-func update_all_showcases(delta):
+func update_all_showcases(delta) -> void:
 	"""Legacy function - updates all showcases (more expensive)"""
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
@@ -621,7 +621,7 @@ func update_all_showcases(delta):
 			"self_org":
 				update_self_organization(showcase, delta)
 
-func update_recrystallization(showcase: Node3D, delta):
+func update_recrystallization(showcase: Node3D, delta) -> void:
 	"""Growing crystals - Orange spheres expanding from centers"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -650,7 +650,7 @@ func update_recrystallization(showcase: Node3D, delta):
 
 
 
-func update_percolation(showcase: Node3D, delta):
+func update_percolation(showcase: Node3D, delta) -> void:
 	"""Water flowing down - Green/aqua droplets"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -674,7 +674,7 @@ func update_percolation(showcase: Node3D, delta):
 					var color = Color(0.0, 0.7 + randf() * 0.3, 0.9)
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_crack_propagation(showcase: Node3D, delta):
+func update_crack_propagation(showcase: Node3D, delta) -> void:
 	"""Cracks spreading - Red lightning bolts"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -689,7 +689,7 @@ func update_crack_propagation(showcase: Node3D, delta):
 					var color = Color(1.0, 0.1 + randf() * 0.2, 0.0)  # Red
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_avalanche(showcase: Node3D, delta):
+func update_avalanche(showcase: Node3D, delta) -> void:
 	"""Sand avalanche - Yellow/brown particles falling"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -702,7 +702,7 @@ func update_avalanche(showcase: Node3D, delta):
 			var color = Color(1.0, 0.8 + randf() * 0.2, 0.2)  # Sandy
 			activate_cell(showcase, x, GRID_SIZE-1, z, color)
 
-func update_traffic_flow(showcase: Node3D, delta):
+func update_traffic_flow(showcase: Node3D, delta) -> void:
 	"""Traffic - Moving white/yellow lights"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -713,7 +713,7 @@ func update_traffic_flow(showcase: Node3D, delta):
 			var color = Color(1.0, 1.0, randf() * 0.5)  # White/yellow
 			activate_cell(showcase, GRID_SIZE/2, 0, z, color)
 
-func update_flood_propagation(showcase: Node3D, delta):
+func update_flood_propagation(showcase: Node3D, delta) -> void:
 	"""Flood spreading - Blue waves expanding outward"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -728,7 +728,7 @@ func update_flood_propagation(showcase: Node3D, delta):
 					var color = Color(0.0, 0.3 + randf() * 0.3, 1.0)  # Deep blue
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_ecosystem(showcase: Node3D, delta):
+func update_ecosystem(showcase: Node3D, delta) -> void:
 	"""Ecosystem - Green/brown organic growth"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -743,7 +743,7 @@ func update_ecosystem(showcase: Node3D, delta):
 
 
 
-func update_blood_flow(showcase: Node3D, delta):
+func update_blood_flow(showcase: Node3D, delta) -> void:
 	"""Blood flow - Dark red pulsing"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -755,7 +755,7 @@ func update_blood_flow(showcase: Node3D, delta):
 				var color = Color(0.7 + randf() * 0.3, 0.0, 0.1)  # Dark red
 				activate_cell(showcase, pos.x, pos.y, pos.z, color)
 
-func update_droplet_behavior(showcase: Node3D, delta):
+func update_droplet_behavior(showcase: Node3D, delta) -> void:
 	"""Droplets - Silvery spheres forming and falling"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -767,7 +767,7 @@ func update_droplet_behavior(showcase: Node3D, delta):
 			var color = Color(0.8 + randf() * 0.2, 0.9 + randf() * 0.1, 1.0)  # Silver/white
 			activate_cell(showcase, x, GRID_SIZE-1, z, color)
 
-func update_self_organization(showcase: Node3D, delta):
+func update_self_organization(showcase: Node3D, delta) -> void:
 	"""Self-organization - Rainbow spiral emerging from chaos"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -783,12 +783,12 @@ func update_self_organization(showcase: Node3D, delta):
 				var color = Color.from_hsv(randf(), 0.8 + randf() * 0.2, 1.0)  # Rainbow
 				activate_cell(showcase, x, y, z, color)
 
-func cycle_to_next_showcase():
+func cycle_to_next_showcase() -> void:
 	current_showcase = (current_showcase + 1) % SHOWCASE_COUNT
 	highlight_current_showcase()
 	print("Switched to showcase: ", current_showcase, " - ", get_ca_name(current_showcase))
 
-func highlight_current_showcase():
+func highlight_current_showcase() -> void:
 	# Hide all showcases except the current one
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
@@ -815,7 +815,7 @@ func get_ca_name(index: int) -> String:
 	return names[index] if index < names.size() else "Unknown"
 
 # Simplified CA update functions (implement detailed logic as needed)
-func grow_crystal_at_site(grid: Array, site: Vector3i):
+func grow_crystal_at_site(grid: Array, site: Vector3i) -> void:
 	# Implement crystal growth logic - expand from nucleation sites
 	var neighbors = get_3d_neighbors(site)
 	for neighbor in neighbors:
@@ -824,7 +824,7 @@ func grow_crystal_at_site(grid: Array, site: Vector3i):
 
 
 
-func percolate_fluid(grid: Array, rate: float):
+func percolate_fluid(grid: Array, rate: float) -> void:
 	# Implement percolation logic - fluid flow through connected sites
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -835,7 +835,7 @@ func percolate_fluid(grid: Array, rate: float):
 						if is_valid_3d_position(neighbor) and grid[neighbor.x][neighbor.y][neighbor.z] == 1:
 							grid[neighbor.x][neighbor.y][neighbor.z] = 3  # Fluid state
 
-func propagate_cracks(grid: Array, stress_points: Array, threshold: float):
+func propagate_cracks(grid: Array, stress_points: Array, threshold: float) -> void:
 	# Implement crack propagation from stress concentrators
 	for stress_point in stress_points:
 		var neighbors = get_3d_neighbors(stress_point)
@@ -843,13 +843,13 @@ func propagate_cracks(grid: Array, stress_points: Array, threshold: float):
 			if is_valid_3d_position(neighbor) and randf() < 0.05:
 				grid[neighbor.x][neighbor.y][neighbor.z] = 4  # Cracked state
 
-func add_sand_grain(grid: Array):
+func add_sand_grain(grid: Array) -> void:
 	# Add sand grain to random location
 	var x = randi() % GRID_SIZE
 	var y = randi() % GRID_SIZE
 	grid[x][y] += 1
 
-func check_avalanche_conditions(grid: Array, critical_slope: int):
+func check_avalanche_conditions(grid: Array, critical_slope: int) -> void:
 	# Check for avalanche conditions and redistribute sand
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -863,7 +863,7 @@ func check_avalanche_conditions(grid: Array, critical_slope: int):
 					if is_valid_2d_position(neighbor):
 						grid[neighbor.x][neighbor.y] += excess / neighbors.size()
 
-func update_traffic_on_roads(roads: Array, max_velocity: int):
+func update_traffic_on_roads(roads: Array, max_velocity: int) -> void:
 	# Update traffic flow using cellular automaton rules
 	for road in roads:
 		var cars = road["cars"]
@@ -873,7 +873,7 @@ func update_traffic_on_roads(roads: Array, max_velocity: int):
 				car["position"] += min(car["velocity"], max_velocity) * 0.1
 			car["velocity"] = min(car["velocity"] + 1, max_velocity)
 
-func propagate_flood_water(terrain: Array, sources: Array, rate: float):
+func propagate_flood_water(terrain: Array, sources: Array, rate: float) -> void:
 	# Implement flood water spread across terrain
 	for source in sources:
 		if is_valid_2d_position(Vector2i(source.x, source.z)):
@@ -889,7 +889,7 @@ func propagate_flood_water(terrain: Array, sources: Array, rate: float):
 						terrain[source.x][source.z]["water_level"] -= water_flow
 						terrain[neighbor.x][neighbor.y]["water_level"] += water_flow
 
-func update_population_dynamics(grid: Array, birth_rate: float, death_rate: float):
+func update_population_dynamics(grid: Array, birth_rate: float, death_rate: float) -> void:
 	# Update ecosystem dynamics - predator-prey interactions
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -909,7 +909,7 @@ func update_population_dynamics(grid: Array, birth_rate: float, death_rate: floa
 
 
 
-func simulate_blood_flow(vessels: Array, viscosity: float):
+func simulate_blood_flow(vessels: Array, viscosity: float) -> void:
 	# Implement lattice Boltzmann flow simulation
 	for vessel in vessels:
 		# Simplified flow visualization - animate vessel materials
@@ -918,12 +918,12 @@ func simulate_blood_flow(vessels: Array, viscosity: float):
 		var flow_intensity = 0.5 + 0.3 * sin(time_factor * 2.0)
 		material.emission = Color(0.8, 0.2, 0.2) * flow_intensity
 
-func update_droplet_dynamics(surface: Array, tension: float):
+func update_droplet_dynamics(surface: Array, tension: float) -> void:
 	# Implement droplet behavior with surface tension
 	# This would involve complex fluid dynamics - simplified here
 	pass
 
-func evolve_self_organization(grid: Array, interaction: float):
+func evolve_self_organization(grid: Array, interaction: float) -> void:
 	# Implement self-organizing patterns
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -979,14 +979,14 @@ func duplicate_3d_grid(grid: Array) -> Array:
 
 
 # VR Interaction handlers
-func on_vr_controller_input(_controller_id: int, input_type: String):
+func on_vr_controller_input(_controller_id: int, input_type: String) -> void:
 	if input_type == "trigger_pressed":
 		cycle_to_next_showcase()
 	elif input_type == "grip_pressed":
 		auto_cycle = not auto_cycle
 		print("Auto-cycle: ", auto_cycle)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle keyboard input for testing and control"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -1014,7 +1014,7 @@ func _input(event):
 				print_help()
 
 # Public method to focus on specific CA type
-func focus_on_ca_type(ca_type: CAType):
+func focus_on_ca_type(ca_type: CAType) -> void:
 	current_showcase = ca_type as int
 	highlight_current_showcase()
 	transition_time = 0.0
@@ -1032,7 +1032,7 @@ func get_showcase_statistics() -> Dictionary:
 		}
 	return stats
 
-func reset_all_showcases():
+func reset_all_showcases() -> void:
 	# Reset all CA systems to initial state
 	var central_position = Vector3(0, 0, 0)
 	
@@ -1047,11 +1047,11 @@ func reset_all_showcases():
 		# Recreate with fresh parameters at central position
 		create_ca_showcase(ca_type, central_position)
 
-func set_auto_cycle_interval(seconds: float):
+func set_auto_cycle_interval(seconds: float) -> void:
 	cycle_interval = max(5.0, seconds)  # Minimum 5 seconds
 	print("Auto-cycle interval set to: ", cycle_interval, " seconds")
 
-func print_help():
+func print_help() -> void:
 	"""Print help information for controls"""
 	print("=== CA Showcase Controls ===")
 	print("SPACE - Cycle to next showcase")
@@ -1064,3 +1064,9 @@ func print_help():
 	print("Current showcase: ", get_ca_name(current_showcase))
 	print("Auto-cycle: ", auto_cycle)
 	print("Cycle interval: ", cycle_interval, " seconds")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

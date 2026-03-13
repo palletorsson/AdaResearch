@@ -168,7 +168,7 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	print("=== WATERFLOWERSVR SCRIPT IS RUNNING! ===")
 	print("WaterFlowersVR: Starting setup...")
 	
@@ -203,7 +203,7 @@ func _ready():
 	print("=== WATERFLOWERSVR SETUP COMPLETE! ===")
 	# Animations are now handled entirely by the physics process.
 
-func create_test_cube():
+func create_test_cube() -> void:
 	var test_cube = MeshInstance3D.new()
 	var cube_mesh = BoxMesh.new()
 	cube_mesh.size = Vector3(1.0, 1.0, 1.0)
@@ -219,7 +219,7 @@ func create_test_cube():
 	add_child(test_cube)
 	print("Test cube added at position: ", test_cube.position)
 
-func setup_scene():
+func setup_scene() -> void:
 	# (Function remains unchanged)
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -242,7 +242,7 @@ func setup_scene():
 	sun_light.light_color = Color(1.0, 0.95, 0.8)
 	add_child(sun_light)
 
-func create_water_surface():
+func create_water_surface() -> void:
 	var water_plane = PlaneMesh.new()
 	water_plane.size = Vector2(water_size, water_size)
 	water_plane.subdivide_width = 100
@@ -274,14 +274,14 @@ func create_water_surface():
 	# shader.code = WATER_SHADER
 	# water_material.shader = shader
 
-func create_floating_flowers():
+func create_floating_flowers() -> void:
 	# (Function remains mostly unchanged)
 	var flower_types = [ "lotus", "lily", "rose", "daisy", "cherry_blossom", "water_lily" ]
 	var flower_colors = [ Color(1.0, 0.7, 0.8), Color(0.9, 0.9, 1.0), Color(1.0, 0.3, 0.5), Color(1.0, 1.0, 0.4), Color(0.8, 0.5, 1.0), Color(0.5, 0.9, 0.6) ]
 	for i in range(flower_count):
 		create_floating_flower(i, flower_colors[i % flower_colors.size()], flower_types[i % flower_types.size()])
 
-func create_floating_flower(index: int, color: Color, flower_type: String):
+func create_floating_flower(index: int, color: Color, flower_type: String) -> void:
 	var flower_body = RigidBody3D.new()
 	flower_body.name = "Flower_" + str(index) + "_" + flower_type
 	flower_body.mass = 0.1
@@ -315,7 +315,7 @@ func create_floating_flower(index: int, color: Color, flower_type: String):
 	
 	print("Created flower ", index, " at position: ", flower_body.position)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Use physics process for all interactions
 	var time = Time.get_ticks_msec() / 1000.0
 	
@@ -356,11 +356,11 @@ func _physics_process(delta):
 			flower.apply_central_force(Vector3(center_force.x, 0, center_force.y))
 
 # Add a simple _process function to handle flower water interactions
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update flower water interactions
 	update_flower_water_interaction(delta)
 
-func update_flower_water_interaction(delta):
+func update_flower_water_interaction(delta) -> void:
 	# Keep flowers floating on water surface
 	for flower in flowers:
 		if flower and is_instance_valid(flower):
@@ -524,3 +524,9 @@ func create_water_lily_mesh(_index: int) -> ArrayMesh:
 		st.set_uv(Vector2(0.5+0.15*cos(angle-0.1),0.5+0.15*sin(angle-0.1))); st.add_vertex(Vector3(cos(angle-0.1)*0.15,0,sin(angle-0.1)*0.15))
 		st.set_uv(Vector2(0.5+0.5*cos(angle),0.5+0.5*sin(angle))); st.add_vertex(Vector3(cos(angle)*0.7,0.01,sin(angle)*0.7))
 	st.generate_normals(); return st.commit()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

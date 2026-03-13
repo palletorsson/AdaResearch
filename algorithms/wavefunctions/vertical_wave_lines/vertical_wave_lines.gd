@@ -139,3 +139,9 @@ func set_frequency(val: float) -> void:
 func set_amplitude(val: float) -> void:
 	amplitude = val
 	_update_uniforms()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

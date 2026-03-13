@@ -11,7 +11,7 @@ var _timer: float = 0.0
 var _fourier_body_scene = preload("res://algorithms/wavefunctions/vitruvian_man/FourierBody.tscn")
 var _current_body: Node3D
 
-func _ready():
+func _ready() -> void:
 	if recording_node_path:
 		_recording_node = get_node(recording_node_path)
 	else:
@@ -21,7 +21,7 @@ func _ready():
 		start_recording()
 
 
-func start_recording():
+func start_recording() -> void:
 	_points.clear()
 	_is_recording = true
 	_timer = 0.0
@@ -29,13 +29,13 @@ func start_recording():
 		_current_body.queue_free()
 		_current_body = null
 
-func stop_recording():
+func stop_recording() -> void:
 	_is_recording = false
 	if _points.size() > 2:
 		var descriptors = calculate_dft(_points, max_harmonics)
 		spawn_body(descriptors)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if _is_recording:
 		_timer += delta
 		if _timer >= sample_rate:
@@ -118,7 +118,7 @@ func calculate_dft(path_points: Array[Vector3], num_harmonics: int) -> Array:
 	
 	return descriptors
 
-func spawn_body(descriptors):
+func spawn_body(descriptors) -> void:
 	if _current_body and is_instance_valid(_current_body):
 		_current_body.configure(descriptors)
 	elif _fourier_body_scene:

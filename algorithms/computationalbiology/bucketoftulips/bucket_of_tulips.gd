@@ -10,12 +10,12 @@ extends Node3D
 var tulips = []
 var tulip_positions = []
 
-func _ready():
+func _ready() -> void:
 	# Create the bucket and tulips
 	create_bucket()
 	create_tulips()
 
-func create_bucket():
+func create_bucket() -> void:
 	# Create the bucket container
 	var bucket = MeshInstance3D.new()
 	bucket.name = "FlowerBucket"
@@ -55,7 +55,7 @@ func create_bucket():
 	# Add to scene
 	add_child(bucket)
 
-func create_bucket_handle(bucket):
+func create_bucket_handle(bucket) -> void:
 	# Create handle for the bucket
 	var handle = MeshInstance3D.new()
 	handle.name = "BucketHandle"
@@ -80,7 +80,7 @@ func create_bucket_handle(bucket):
 	# Add to bucket
 	bucket.add_child(handle)
 
-func create_tulips():
+func create_tulips() -> void:
 	# Generate a few tulip templates to clone
 	var tulip_templates = []
 	
@@ -124,7 +124,7 @@ func create_tulip_template(style_index):
 	
 	return tulip
 
-func create_tulip_stem(tulip):
+func create_tulip_stem(tulip) -> void:
 	# Create the stem
 	var stem = MeshInstance3D.new()
 	stem.name = "Stem"
@@ -148,7 +148,7 @@ func create_tulip_stem(tulip):
 	# Add to tulip
 	tulip.add_child(stem)
 
-func create_tulip_flower_closed(tulip):
+func create_tulip_flower_closed(tulip) -> void:
 	# Create a closed tulip flower (pointed)
 	var flower = MeshInstance3D.new()
 	flower.name = "FlowerHead"
@@ -172,7 +172,7 @@ func create_tulip_flower_closed(tulip):
 	# Add to tulip
 	tulip.add_child(flower)
 
-func create_tulip_flower_open(tulip):
+func create_tulip_flower_open(tulip) -> void:
 	# Create an open tulip flower
 	var flower = Node3D.new()
 	flower.name = "FlowerHead"
@@ -208,7 +208,7 @@ func create_tulip_flower_open(tulip):
 	# Add to tulip
 	tulip.add_child(flower)
 
-func create_tulip_flower_drooping(tulip):
+func create_tulip_flower_drooping(tulip) -> void:
 	# Create a tulip with drooping flower
 	var flower = MeshInstance3D.new()
 	flower.name = "FlowerHead"
@@ -231,7 +231,7 @@ func create_tulip_flower_drooping(tulip):
 	# Add to tulip
 	tulip.add_child(flower)
 
-func create_tulip_leaves(tulip):
+func create_tulip_leaves(tulip) -> void:
 	# Add 1-2 leaves to the tulip stem
 	var leaf_count = 1 + randi() % 2  # 1 or 2 leaves
 	
@@ -263,7 +263,7 @@ func create_tulip_leaves(tulip):
 		# Add to tulip
 		tulip.add_child(leaf)
 
-func generate_tulip_positions():
+func generate_tulip_positions() -> void:
 	# Generate positions for tulips within the bucket
 	for i in range(tulip_count):
 		# Random position within bucket
@@ -278,7 +278,7 @@ func generate_tulip_positions():
 		
 		tulip_positions.append(Vector3(pos_x, pos_y, pos_z))
 
-func randomize_tulip(tulip, index):
+func randomize_tulip(tulip, index) -> void:
 	# Position the tulip
 	tulip.position = tulip_positions[index]
 	
@@ -298,7 +298,7 @@ func randomize_tulip(tulip, index):
 	if color_variation:
 		randomize_flower_color(tulip)
 
-func randomize_flower_color(tulip):
+func randomize_flower_color(tulip) -> void:
 	# Find the flower head
 	var flower_head = tulip.get_node("FlowerHead")
 	
@@ -341,3 +341,9 @@ func get_random_tulip_color():
 	chosen_color.b = clamp(chosen_color.b, 0, 1)
 	
 	return chosen_color
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

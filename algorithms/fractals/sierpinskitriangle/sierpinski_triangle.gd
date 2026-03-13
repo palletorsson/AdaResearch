@@ -21,7 +21,7 @@ var subdivision_timer: float = 0.0
 var is_subdividing: bool = false
 var current_triangles: Array = []  # Array of triangle data
 
-func _ready():
+func _ready() -> void:
 	print("SierpinskiTriangle: Ready")
 	print("SierpinskiTriangle: Will subdivide to %d iterations" % max_iterations)
 
@@ -37,7 +37,7 @@ func _ready():
 		is_subdividing = true
 		print("SierpinskiTriangle: Auto-subdivision enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_subdividing:
 		return
 
@@ -50,7 +50,7 @@ func _process(delta: float):
 		perform_subdivision()
 
 # Create the initial 1-meter equilateral triangle
-func create_initial_triangle():
+func create_initial_triangle() -> void:
 	# Create equilateral triangle vertices (1 meter)
 	var height = triangle_size * sqrt(3.0) / 2.0  # Height of equilateral triangle
 
@@ -72,7 +72,7 @@ func create_initial_triangle():
 	print("SierpinskiTriangle: Created initial triangle")
 
 # Perform one subdivision iteration
-func perform_subdivision():
+func perform_subdivision() -> void:
 	if current_iteration >= max_iterations:
 		print("SierpinskiTriangle: Reached maximum iterations (%d)" % max_iterations)
 		is_subdividing = false
@@ -152,7 +152,7 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 	return triangles
 
 # Create a 3D mesh for a triangle
-func create_triangle_mesh(triangle: Dictionary):
+func create_triangle_mesh(triangle: Dictionary) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = create_extruded_triangle_mesh(triangle)
 	mesh_instance.mesh = mesh
@@ -300,16 +300,16 @@ func create_extruded_triangle_mesh(triangle: Dictionary) -> ArrayMesh:
 	return mesh
 
 # Manual control functions
-func start_subdivision():
+func start_subdivision() -> void:
 	is_subdividing = true
 	subdivision_timer = 0.0
 	print("SierpinskiTriangle: Started manually")
 
-func stop_subdivision():
+func stop_subdivision() -> void:
 	is_subdividing = false
 	print("SierpinskiTriangle: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all meshes
 	for child in get_children():
 		if child is MeshInstance3D:
@@ -325,5 +325,11 @@ func reset():
 
 	print("SierpinskiTriangle: Reset")
 
-func step():
+func step() -> void:
 	perform_subdivision()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

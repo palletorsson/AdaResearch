@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	# Allow time for children to be ready?
 	# Just call generate
 	if $SystemTest:

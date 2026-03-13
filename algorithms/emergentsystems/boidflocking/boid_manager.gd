@@ -30,7 +30,7 @@ var right_controller = null
 var left_trigger_pressed = false
 var right_trigger_pressed = false
 
-func _ready():
+func _ready() -> void:
 	# Get VR references
 	if vr_player_path:
 		vr_player = get_node_or_null(vr_player_path)
@@ -47,7 +47,7 @@ func _ready():
 	# Connect controller input signals
 	_connect_controller_signals()
 
-func spawn_boids():
+func spawn_boids() -> void:
 	for i in range(num_boids):
 		var boid_instance = boid_scene.instantiate()
 		add_child(boid_instance)
@@ -66,7 +66,7 @@ func spawn_boids():
 		
 		boids.append(boid_instance)
 
-func _connect_controller_signals():
+func _connect_controller_signals() -> void:
 	# Connect controller input signals if using OpenXR
 	if left_controller:
 		# For OpenXR plugin
@@ -83,7 +83,7 @@ func _physics_process(_delta):
 	# Handle controller interaction with boids
 	_process_controller_interaction()
 
-func _process_controller_interaction():
+func _process_controller_interaction() -> void:
 	# Process left controller
 	if left_controller and left_trigger_pressed:
 		var controller_pos = left_controller.global_position
@@ -96,7 +96,7 @@ func _process_controller_interaction():
 		var controller_forward = -right_controller.global_transform.basis.z.normalized()
 		_interact_with_nearby_boids(controller_pos, controller_forward, false)  # false for repel
 
-func _interact_with_nearby_boids(controller_pos, _direction, attract):
+func _interact_with_nearby_boids(controller_pos, _direction, attract) -> void:
 	for boid in boids:
 		var distance = controller_pos.distance_to(boid.global_position)
 		
@@ -114,24 +114,24 @@ func _interact_with_nearby_boids(controller_pos, _direction, attract):
 				boid.apply_force_from_vr(force_dir, repulsion_strength * influence, 0.5)
 
 # Controller input handlers for OpenXR
-func _on_left_controller_button_pressed(button_name):
+func _on_left_controller_button_pressed(button_name) -> void:
 	if button_name == "trigger_click" or button_name == "trigger":
 		left_trigger_pressed = true
 
-func _on_left_controller_button_released(button_name):
+func _on_left_controller_button_released(button_name) -> void:
 	if button_name == "trigger_click" or button_name == "trigger":
 		left_trigger_pressed = false
 
-func _on_right_controller_button_pressed(button_name):
+func _on_right_controller_button_pressed(button_name) -> void:
 	if button_name == "trigger_click" or button_name == "trigger":
 		right_trigger_pressed = true
 
-func _on_right_controller_button_released(button_name):
+func _on_right_controller_button_released(button_name) -> void:
 	if button_name == "trigger_click" or button_name == "trigger":
 		right_trigger_pressed = false
 
 # Alternative input method for desktop testing
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# For testing without VR hardware
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:

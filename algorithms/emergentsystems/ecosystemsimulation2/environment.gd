@@ -32,7 +32,7 @@ var directional_light: DirectionalLight3D
 var ambient_sound: AudioStreamPlayer3D
 var particles_manager: Node3D
 
-func _ready():
+func _ready() -> void:
 	# Generate the basic environment
 	_create_terrain()
 	_setup_sky()
@@ -45,7 +45,7 @@ func _ready():
 	
 	print("Environment initialized with size: ", size)
 
-func _create_terrain():
+func _create_terrain() -> void:
 	# Create a terrain mesh
 	terrain_mesh = MeshInstance3D.new()
 	terrain_mesh.name = "Terrain"
@@ -153,7 +153,7 @@ func _generate_terrain_height(x: float, z: float) -> float:
 	
 	return height
 
-func _setup_sky():
+func _setup_sky() -> void:
 	# Create sky environment
 	sky_environment = WorldEnvironment.new()
 	sky_environment.name = "SkyEnvironment"
@@ -185,7 +185,7 @@ func _setup_sky():
 	
 	sky_environment.environment = environment
 
-func _setup_lighting():
+func _setup_lighting() -> void:
 	# Create directional light (sun)
 	directional_light = DirectionalLight3D.new()
 	directional_light.name = "DirectionalLight"
@@ -198,7 +198,7 @@ func _setup_lighting():
 	# Position for noon
 	directional_light.rotation = Vector3(deg_to_rad(-50), deg_to_rad(45), 0)
 
-func _setup_environment_features():
+func _setup_environment_features() -> void:
 	# Create a root node for features
 	env_features = Node3D.new()
 	env_features.name = "EnvironmentFeatures"
@@ -222,7 +222,7 @@ func _setup_environment_features():
 	ambient_sound.unit_size = 20.0  # Makes the sound audible from further away
 	add_child(ambient_sound)
 
-func _create_environment_regions():
+func _create_environment_regions() -> void:
 	# Create different biome-like regions in the environment
 	var region_count = 4 + randi() % 3  # 4-6 regions
 	
@@ -265,7 +265,7 @@ func _get_random_region_type() -> String:
 	]
 	return types[randi() % types.size()]
 
-func _create_natural_features():
+func _create_natural_features() -> void:
 	# Create various natural features like trees, rocks, etc.
 	
 	# Number of features based on size
@@ -332,7 +332,7 @@ func _get_feature_type_for_location(position: Vector3) -> String:
 	else:
 		return "rock" if randf() < 0.7 else "crystal"
 
-func _create_tree(position: Vector3):
+func _create_tree(position: Vector3) -> void:
 	var tree = Node3D.new()
 	tree.name = "Tree"
 	tree.position = position
@@ -372,7 +372,7 @@ func _create_tree(position: Vector3):
 	
 	env_features.add_child(tree)
 
-func _create_rock(position: Vector3):
+func _create_rock(position: Vector3) -> void:
 	var rock = MeshInstance3D.new()
 	rock.name = "Rock"
 	rock.position = position
@@ -421,7 +421,7 @@ func _create_rock(position: Vector3):
 	
 	env_features.add_child(rock)
 
-func _create_crystal(position: Vector3):
+func _create_crystal(position: Vector3) -> void:
 	var crystal = MeshInstance3D.new()
 	crystal.name = "Crystal"
 	crystal.position = position
@@ -463,7 +463,7 @@ func _create_crystal(position: Vector3):
 	
 	env_features.add_child(crystal)
 
-func _create_plant(position: Vector3):
+func _create_plant(position: Vector3) -> void:
 	var plant = Node3D.new()
 	plant.name = "Plant"
 	plant.position = position
@@ -515,7 +515,7 @@ func _create_plant(position: Vector3):
 	
 	env_features.add_child(plant)
 
-func _create_water_feature(position: Vector3):
+func _create_water_feature(position: Vector3) -> void:
 	var water = MeshInstance3D.new()
 	water.name = "WaterFeature"
 	water.position = position
@@ -539,7 +539,7 @@ func _create_water_feature(position: Vector3):
 	
 	env_features.add_child(water)
 
-func update(delta: float, current_day: int):
+func update(delta: float, current_day: int) -> void:
 	# Update time of day
 	if enable_day_night_cycle:
 		current_time = fmod(current_time + delta / day_duration, 1.0)
@@ -562,7 +562,7 @@ func update(delta: float, current_day: int):
 
 
 
-func set_season(season: int):
+func set_season(season: int) -> void:
 	current_season = season
 	
 	# Update environment based on season
@@ -581,7 +581,7 @@ func set_season(season: int):
 	# Emit signal for other systems to respond
 	emit_signal("season_changed", current_season)
 
-func _update_weather(delta: float):
+func _update_weather(delta: float) -> void:
 	# Simple weather system
 	# In a full implementation, this would include more complex logic
 	# for transitions between weather states
@@ -594,7 +594,7 @@ func _update_weather(delta: float):
 		if new_weather != current_weather:
 			set_weather(new_weather)
 
-func set_weather(weather: String):
+func set_weather(weather: String) -> void:
 	current_weather = weather
 	
 	# Update sky and lighting based on weather
@@ -625,7 +625,7 @@ func set_weather(weather: String):
 	# Update ambient sound based on weather
 	_update_ambient_sound()
 
-func _start_rain_particles():
+func _start_rain_particles() -> void:
 	# Clear existing particles
 	for child in particles_manager.get_children():
 		child.queue_free()
@@ -639,7 +639,7 @@ func _start_rain_particles():
 	
 	particles_manager.add_child(rain)
 
-func _start_storm_particles():
+func _start_storm_particles() -> void:
 	# Similar to rain but with different parameters and
 	# additional lightning effects
 	_start_rain_particles()  # Reuse rain for simplicity
@@ -647,14 +647,14 @@ func _start_storm_particles():
 	# Add lightning flashes
 	# In a full implementation, you would add a timer for random flashes
 
-func _update_ambient_sound():
+func _update_ambient_sound() -> void:
 	# Update ambient sound based on weather and time of day
 	
 	# In a full implementation, you would load different audio streams
 	# based on current conditions
 	pass
 
-func _update_entropy_effects(delta: float):
+func _update_entropy_effects(delta: float) -> void:
 	# Apply entropy-based distortions to the environment
 	
 	# Skip if entropy influence is disabled
@@ -680,7 +680,7 @@ func _update_entropy_effects(delta: float):
 		if randf() < 0.005 * delta * current_entropy:
 			_create_reality_distortion()
 
-func _create_reality_distortion():
+func _create_reality_distortion() -> void:
 	# Create a temporary visual distortion in the environment
 	# In a full implementation, this would include shader effects
 	# and more complex distortions
@@ -722,7 +722,7 @@ func _create_reality_distortion():
 	# Emit signal about environment change
 	emit_signal("environment_changed", "distortion", position, duration)
 
-func set_entropy(value: float):
+func set_entropy(value: float) -> void:
 	current_entropy = clamp(value, 0.0, 1.0)
 
 func get_current_entropy() -> float:
@@ -789,3 +789,9 @@ func create_custom_region(position: Vector3, radius: float, type: String, intens
 	regions.append(region)
 	
 	return region
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -18,7 +18,7 @@ class RhizomeVoxelChunk:
 	var world_position: Vector3 = Vector3.ZERO
 	var density_data: Array  # 3D array [x][y][z] of floats
 
-	func _init(size: Vector3i, scale: float):
+	func _init(size: Vector3i, scale: float) -> void:
 		chunk_size = size
 		voxel_scale = scale
 		# Initialize 3D array
@@ -37,7 +37,7 @@ class RhizomeVoxelChunk:
 			return density_data[pos.x][pos.y][pos.z]
 		return 1.0
 	
-	func set_density(pos: Vector3i, value: float):
+	func set_density(pos: Vector3i, value: float) -> void:
 		if pos.x >= 0 and pos.x < chunk_size.x and \
 		   pos.y >= 0 and pos.y < chunk_size.y and \
 		   pos.z >= 0 and pos.z < chunk_size.z:
@@ -425,3 +425,9 @@ func get_cave_info() -> Dictionary:
 			info.collision_bodies += 1
 
 	return info
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

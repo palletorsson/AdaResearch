@@ -76,7 +76,7 @@ var demo_timer: Timer
 var demo_mode: int = 0
 var is_demo_running: bool = false
 
-func _ready():
+func _ready() -> void:
 	set_physics_process(true)#
 	setup_mesh()
 	setup_material()
@@ -95,11 +95,11 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 	start_demo()
 
-func print_current_mode():
+func print_current_mode() -> void:
 	var mode_names = ["Ordered Spikes", "Random Spikes", "Random Walk", "Hill Seeking", "Gaussian Bumps", "Noise Deformation", "Cellular Automata"]
 	print("Current Mode: ", mode_names[modifier_mode])
 
-func print_controls():
+func print_controls() -> void:
 	print("Controls:")
 	print("  Space - Single step")
 	print("  Enter - Toggle auto-evolution")  
@@ -109,12 +109,12 @@ func print_controls():
 	print("  Home - Start demo sequence (all modes, 5 sec each)")
 	print("  End - Stop demo sequence")
 
-func setup_mesh():
+func setup_mesh() -> void:
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 	generate_initial_sphere()
 
-func generate_initial_sphere():
+func generate_initial_sphere() -> void:
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 1.0
 	sphere_mesh.height = 2.0
@@ -164,7 +164,7 @@ func calculate_normals() -> PackedVector3Array:
 	
 	return normals
 
-func setup_material():
+func setup_material() -> void:
 	# Create fallback material first
 	sphere_material = StandardMaterial3D.new()
 	sphere_material.albedo_color = Color(0.3, 0.7, 0.9, 1.0)
@@ -193,7 +193,7 @@ func setup_material():
 	print("Shader material created: %s" % shader_material)
 	print("Shader resource: %s" % shader)
 
-func setup_mode_label():
+func setup_mode_label() -> void:
 	"""Create 3D labels to display the current mode and measurements"""
 	# Mode label
 	mode_label = Label3D.new()
@@ -221,7 +221,7 @@ func get_mode_name() -> String:
 	var mode_names = ["Ordered Spikes", "Random Spikes", "Random Walk", "Hill Seeking", "Gaussian Bumps", "Noise Deformation", "Cellular Automata"]
 	return mode_names[modifier_mode]
 
-func update_mode_label():
+func update_mode_label() -> void:
 	"""Update the label with current mode and iteration"""
 	if mode_label != null:
 		mode_label.text = "%s\nStep: %d/%d" % [get_mode_name(), current_iteration, iterations]
@@ -251,7 +251,7 @@ func calculate_total_displacement() -> float:
 	
 	return total_displacement / vertices.size()  # Average displacement
 
-func measure_sphere_change():
+func measure_sphere_change() -> void:
 	"""Measure and update the overall change in the sphere"""
 	if vertices.size() == 0:
 		return
@@ -272,7 +272,7 @@ func measure_sphere_change():
 	# Print detailed measurements
 	print("Sphere Change - Volume: %.1f%% | Avg Displacement: %.3f" % [volume_change, total_displacement])
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	"""Update shader parameters with current values"""
 	if shader_material == null or not shader_material is ShaderMaterial:
 		print("Warning: Shader material not available for parameter update")
@@ -322,7 +322,7 @@ func update_shader_parameters():
 	shader_material.set_shader_parameter("ca_neighbor_threshold", float(ca_neighbor_threshold))
 	shader_material.set_shader_parameter("ca_growth_rate", ca_growth_rate)
 
-func setup_evolution_timer():
+func setup_evolution_timer() -> void:
 	evolution_timer = Timer.new()
 	evolution_timer.wait_time = 1.0 / evolution_speed
 	evolution_timer.timeout.connect(_on_evolution_step)
@@ -334,7 +334,7 @@ func setup_evolution_timer():
 	# Initial uniform setup
 	update_shader_parameters()
 
-func update_material_color():
+func update_material_color() -> void:
 	var progress = float(current_iteration) / iterations
 	var colors = [
 		Color.RED,    # Ordered spikes
@@ -356,7 +356,7 @@ func update_material_color():
 	elif sphere_material != null and sphere_material is StandardMaterial3D:
 		sphere_material.albedo_color = current_color
 	
-func single_evolution_step():
+func single_evolution_step() -> void:
 	print("DEBUG: single_evolution_step - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
 	if current_iteration < iterations:
 		current_iteration += 1
@@ -369,18 +369,18 @@ func single_evolution_step():
 	else:
 		print("DEBUG: single_evolution_step - iteration limit reached, not incrementing")
 
-func start_evolution():
+func start_evolution() -> void:
 	if not is_evolving:
 		is_evolving = true
 		evolution_timer.start()
 		print("Starting evolution...")
 
-func stop_evolution():
+func stop_evolution() -> void:
 	if is_evolving:
 		is_evolving = false
 		evolution_timer.stop()
 
-func reset_sphere():
+func reset_sphere() -> void:
 	current_iteration = 0
 	update_shader_parameters()
 	
@@ -396,13 +396,13 @@ func reset_sphere():
 	
 	print("Sphere reset")
 
-func change_mode(new_mode: int):
+func change_mode(new_mode: int) -> void:
 	modifier_mode = new_mode
 	reset_sphere()
 	update_mode_label()
 	print_current_mode()
 
-func _on_evolution_step():
+func _on_evolution_step() -> void:
 	print("DEBUG: _on_evolution_step called - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
 	single_evolution_step()
 	print("DEBUG: After single_evolution_step - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
@@ -415,7 +415,7 @@ func _on_evolution_step():
 
 # Demo timer not needed - using iteration-based progression
 
-func start_demo():
+func start_demo() -> void:
 	if is_demo_running:
 		return
 		
@@ -433,7 +433,7 @@ func start_demo():
 	
 	start_evolution()
 
-func next_demo_mode():
+func next_demo_mode() -> void:
 	demo_mode += 1
 	
 	if demo_mode >= 7:
@@ -450,14 +450,14 @@ func next_demo_mode():
 	start_evolution()
 	
 
-func stop_demo():
+func stop_demo() -> void:
 	if is_demo_running:
 		is_demo_running = false
 		stop_evolution()
 		print("Demo stopped")
 
 # INPUT HANDLING
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		single_evolution_step()
 	elif event.is_action_pressed("ui_cancel"):
@@ -485,3 +485,9 @@ func _input(event):
 		start_demo()
 	elif event.is_action_pressed("ui_end"):
 		stop_demo()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

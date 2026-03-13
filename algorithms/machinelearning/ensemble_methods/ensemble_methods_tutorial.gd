@@ -16,7 +16,7 @@ This tutorial card summarizes how `res://algorithms/machinelearning/ensemble_met
 - `[code]create_model_particles()[/code]` handles a key part of the simulation loop.
 [color=yellow]Code[/color]
 [code]
-func _ready():
+func _ready() -> void:
     # Core behaviour described in the tutorial
     pass
 [/code]

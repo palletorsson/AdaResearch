@@ -7,28 +7,28 @@ extends Control
 @onready var reset_btn = $Panel/VBoxContainer/ResetButton
 @onready var status_label = $Panel/VBoxContainer/StatusLabel
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
 func _process(_delta):
 	if cfg_node:
 		status_label.text = "Step: %d\nString Length: %d" % [cfg_node.derivation_step, cfg_node.current_string.length()]
 
-func _update_ui():
+func _update_ui() -> void:
 	if not cfg_node: return
 	auto_check.button_pressed = cfg_node.auto_play
 	speed_slider.value = cfg_node.speed
 
-func _on_auto_toggled(button_pressed):
+func _on_auto_toggled(button_pressed) -> void:
 	cfg_node.auto_play = button_pressed
 	step_btn.disabled = button_pressed
 
-func _on_speed_changed(value):
+func _on_speed_changed(value) -> void:
 	cfg_node.speed = value
 	$Panel/VBoxContainer/SpeedLabel.text = "Speed: %.1f" % value
 
-func _on_step_pressed():
+func _on_step_pressed() -> void:
 	cfg_node.next_step()
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	cfg_node.reset_derivation()

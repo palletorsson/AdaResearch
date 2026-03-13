@@ -25,7 +25,7 @@ var environment: Node3D
 var _generation_count: int = 0
 var _status_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Setup VR
 	setup_vr()
 	
@@ -53,7 +53,7 @@ func _ready():
 	_status_label.text = "Generation 0 | Pop %d" % population_size
 	add_child(_status_label)
 
-func setup_vr():
+func setup_vr() -> void:
 	var xr_interface = XRServer.find_interface("OpenXR")
 	if xr_interface and xr_interface.is_initialized():
 		get_viewport().use_xr = true
@@ -76,7 +76,7 @@ func setup_vr():
 	left_controller.button_pressed.connect(Callable(self, "_on_controller_button_pressed").bind(left_controller))
 	right_controller.button_pressed.connect(Callable(self, "_on_controller_button_pressed").bind(right_controller))
 
-func setup_environment():
+func setup_environment() -> void:
 	environment = Node3D.new()
 	environment.name = "Environment"
 	add_child(environment)
@@ -108,7 +108,7 @@ func setup_environment():
 	light.rotation_degrees = Vector3(-45, 45, 0)
 	environment.add_child(light)
 
-func initialize_population():
+func initialize_population() -> void:
 	for i in range(population_size):
 		var creature = spawn_random_creature()
 		creatures.append(creature)
@@ -128,10 +128,10 @@ func spawn_random_creature() -> Node3D:
 	environment.add_child(creature)
 	return creature
 
-func _on_evolution_timer_timeout():
+func _on_evolution_timer_timeout() -> void:
 	evolve_population()
 
-func evolve_population():
+func evolve_population() -> void:
 	_generation_count += 1
 	
 	# Sort creatures by fitness
@@ -255,7 +255,7 @@ func clone(parent):
 	environment.add_child(child)
 	return child
 
-func mutate(genes):
+func mutate(genes) -> void:
 	for key in genes.keys():
 		if randf() < mutation_rate:
 			# If it's a numeric value, mutate by adding/subtracting a small amount
@@ -272,7 +272,7 @@ func mutate(genes):
 func _sort_by_fitness(a, b):
 	return a.get_fitness() > b.get_fitness()
 
-func _on_controller_button_pressed(button_name, controller):
+func _on_controller_button_pressed(button_name, controller) -> void:
 	if button_name == "trigger_click":
 		# Raycast from controller to identify creature
 		var from = controller.global_transform.origin
@@ -285,3 +285,9 @@ func _on_controller_button_pressed(button_name, controller):
 		if result and result.collider.get_parent() in creatures:
 			var creature = result.collider.get_parent()
 			creature.interact()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

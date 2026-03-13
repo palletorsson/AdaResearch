@@ -9,12 +9,12 @@ var tile_type: WFCTile = null
 var grid_position: Vector3 = Vector3.ZERO
 var mesh_instance: MeshInstance3D = null
 
-func _init():
+func _init() -> void:
 	# Create mesh instance when tile is instantiated
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 
-func setup(tile: WFCTile, pos: Vector3, tile_size: float = 1.0):
+func setup(tile: WFCTile, pos: Vector3, tile_size: float = 1.0) -> void:
 	"""Initialize the 3D tile with a tile type and position"""
 	tile_id = tile.tile_id
 	tile_type = tile
@@ -29,7 +29,7 @@ func setup(tile: WFCTile, pos: Vector3, tile_size: float = 1.0):
 	# Apply color/material
 	apply_material()
 
-func create_mesh(tile_size: float = 1.0):
+func create_mesh(tile_size: float = 1.0) -> void:
 	"""Create the mesh for this tile"""
 	if tile_type and tile_type.mesh_scene != "":
 		# Load custom mesh scene if specified
@@ -53,7 +53,7 @@ func create_mesh(tile_size: float = 1.0):
 	box_mesh.size = Vector3(tile_size, tile_size, tile_size)
 	mesh_instance.mesh = box_mesh
 
-func apply_material():
+func apply_material() -> void:
 	"""Apply material/color to the mesh"""
 	if not mesh_instance or not mesh_instance.mesh:
 		return
@@ -70,7 +70,7 @@ func apply_material():
 
 	mesh_instance.set_surface_override_material(0, material)
 
-func highlight():
+func highlight() -> void:
 	"""Highlight this tile (for debugging/visualization)"""
 	if mesh_instance and mesh_instance.get_surface_override_material(0):
 		var mat = mesh_instance.get_surface_override_material(0)
@@ -78,8 +78,14 @@ func highlight():
 		mat.emission = Color.YELLOW
 		mat.emission_energy = 0.5
 
-func unhighlight():
+func unhighlight() -> void:
 	"""Remove highlight from this tile"""
 	if mesh_instance and mesh_instance.get_surface_override_material(0):
 		var mat = mesh_instance.get_surface_override_material(0)
 		mat.emission_enabled = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

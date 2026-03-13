@@ -73,18 +73,18 @@ class Mass:
 	var mesh_instance: MeshInstance3D
 	var connected_springs: Array = []
 	
-	func _init(pos: Vector3, m: float, r: float):
+	func _init(pos: Vector3, m: float, r: float) -> void:
 		position = pos
 		velocity = Vector3.ZERO
 		acceleration = Vector3.ZERO
 		mass = m
 		radius = r
 	
-	func apply_force(force: Vector3):
+	func apply_force(force: Vector3) -> void:
 		if not is_fixed:
 			acceleration += force / mass
 	
-	func update(delta: float):
+	func update(delta: float) -> void:
 		if not is_fixed:
 			# Verlet integration
 			velocity += acceleration * delta
@@ -93,7 +93,7 @@ class Mass:
 			# Reset acceleration
 			acceleration = Vector3.ZERO
 	
-	func set_fixed(fixed: bool):
+	func set_fixed(fixed: bool) -> void:
 		is_fixed = fixed
 		if is_fixed:
 			velocity = Vector3.ZERO
@@ -108,7 +108,7 @@ class Spring:
 	var tension: float
 	var line_mesh: MeshInstance3D
 	
-	func _init(m1: Mass, m2: Mass, length: float, k: float):
+	func _init(m1: Mass, m2: Mass, length: float, k: float) -> void:
 		mass1 = m1
 		mass2 = m2
 		rest_length = length
@@ -118,7 +118,7 @@ class Spring:
 		mass1.connected_springs.append(self)
 		mass2.connected_springs.append(self)
 	
-	func update_physics():
+	func update_physics() -> void:
 		var direction = mass2.position - mass1.position
 		current_length = direction.length()
 		
@@ -134,7 +134,7 @@ class Spring:
 			mass1.apply_force(force)
 			mass2.apply_force(-force)
 	
-	func update_visual():
+	func update_visual() -> void:
 		if line_mesh:
 			# Update line position and orientation
 			var center = (mass1.position + mass2.position) / 2
@@ -162,13 +162,13 @@ class Spring:
 				material.emission = base_color * 0.6
 				material.emission_energy_multiplier = 1.5
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_system()
 	create_visuals()
 	setup_camera()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	simulate_physics(delta)
 	update_wind_force(delta)
 	update_visuals()
@@ -190,7 +190,7 @@ func _process(delta):
 	if enable_mouse_interaction:
 		handle_mouse_interaction()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -212,7 +212,7 @@ func setup_environment():
 	system_container.name = "SpringSystem"
 	add_child(system_container)
 
-func initialize_system():
+func initialize_system() -> void:
 	masses.clear()
 	springs.clear()
 	anchors.clear()
@@ -257,7 +257,7 @@ func initialize_system():
 				var spring = Spring.new(masses[i], masses[j], rest_length, spring_stiffness)
 				springs.append(spring)
 
-func create_visuals():
+func create_visuals() -> void:
 	mass_meshes.clear()
 	spring_lines.clear()
 
@@ -338,13 +338,13 @@ func _compute_spring_transform(from_pos: Vector3, to_pos: Vector3) -> Transform3
 	var basis := Basis(right, dir * dist, up)
 	return Transform3D(basis, mid)
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
 	add_child(camera)
 	camera.look_at_from_position(camera.position, Vector3(0, 3, 0), Vector3.UP)
 
-func simulate_physics(_delta):
+func simulate_physics(_delta) -> void:
 	var fixed_delta = time_step
 	
 	# Apply gravity to all masses
@@ -370,7 +370,7 @@ func simulate_physics(_delta):
 			mass.position.y = -5
 			mass.velocity.y = abs(mass.velocity.y) * 0.5
 
-func update_wind_force(delta):
+func update_wind_force(delta) -> void:
 	if enable_wind_force:
 		wind_time += delta
 		
@@ -385,7 +385,7 @@ func update_wind_force(delta):
 			if not mass.is_fixed:
 				mass.apply_force(wind_direction)
 
-func handle_mouse_interaction():
+func handle_mouse_interaction() -> void:
 	# This is a simplified version - in a real implementation you'd use proper mouse raycasting
 	# For now, we'll just apply a random force to simulate interaction
 	if Input.is_action_pressed("ui_accept"):  # Space bar
@@ -399,7 +399,7 @@ func handle_mouse_interaction():
 				)
 				random_mass.apply_force(random_force)
 
-func update_visuals():
+func update_visuals() -> void:
 	# Update mass positions and colors via MultiMesh
 	if _mass_multimesh_instance:
 		var mm := _mass_multimesh_instance.multimesh
@@ -434,7 +434,7 @@ func update_visuals():
 				)
 				smm.set_instance_color(i, c)
 
-func _apply_auto_force():
+func _apply_auto_force() -> void:
 	# Apply random forces to create automatic interaction
 	if masses.size() > 0:
 		var random_indices = []
@@ -449,4 +449,10 @@ func _apply_auto_force():
 					randf_range(-mouse_force_strength, mouse_force_strength),
 					randf_range(-mouse_force_strength, mouse_force_strength)
 				)
-				mass.apply_force(random_force) 
+				mass.apply_force(random_force)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

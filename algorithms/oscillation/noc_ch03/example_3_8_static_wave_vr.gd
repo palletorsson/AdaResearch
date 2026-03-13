@@ -90,3 +90,9 @@ func _update_wave() -> void:
 	mesh.surface_end()
 	_wave_mesh.mesh = mesh
 	_wave_mesh.material_override = MAT_WAVE
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

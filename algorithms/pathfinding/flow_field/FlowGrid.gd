@@ -18,7 +18,7 @@ var vector_field: PackedVector2Array
 # Constants
 const MAX_COST = 65535
 
-func _init(w: int, h: int, c_size: float):
+func _init(w: int, h: int, c_size: float) -> void:
 	width = w
 	height = h
 	size = w * h
@@ -48,22 +48,22 @@ func grid_to_world(x: int, y: int) -> Vector3:
 	return Vector3(wx, 0, wz)
 
 # Set Cost (Wall = 255)
-func set_cost(x: int, y: int, cost: int):
+func set_cost(x: int, y: int, cost: int) -> void:
 	if x >= 0 and x < width and y >= 0 and y < height:
 		cost_field[y * width + x] = cost
 
 # Reset all costs to default (1)
-func reset_costs():
+func reset_costs() -> void:
 	cost_field.fill(1)
 
 # Fill a rectangle with a specific cost
-func fill_rect(x: int, y: int, w: int, h: int, cost: int):
+func fill_rect(x: int, y: int, w: int, h: int, cost: int) -> void:
 	for j in range(h):
 		for i in range(w):
 			set_cost(x + i, y + j, cost)
 
 # CORE ALGORITHM: Generate Flow Field from Target
-func calculate_flow_field(target_x: int, target_y: int):
+func calculate_flow_field(target_x: int, target_y: int) -> void:
 	# 1. Integration Field (BFS / Dijkstra)
 	integration_field.fill(MAX_COST)
 	
@@ -143,7 +143,7 @@ func get_vector(world_pos: Vector3) -> Vector3:
 	return Vector3(v2.x, 0, v2.y)
 
 # Generate a Perlin Noise Vector Field
-func generate_noise_field(seed_val: int, time_offset: float = 0.0):
+func generate_noise_field(seed_val: int, time_offset: float = 0.0) -> void:
 	var noise = FastNoiseLite.new()
 	noise.seed = seed_val
 	noise.frequency = 0.05
@@ -159,6 +159,6 @@ func generate_noise_field(seed_val: int, time_offset: float = 0.0):
 		vector_field[i] = Vector2(cos(angle), sin(angle))
 
 # Generate a Constant Linear Field
-func generate_linear_field(dir: Vector2):
+func generate_linear_field(dir: Vector2) -> void:
 	var v = dir.normalized()
 	vector_field.fill(v)

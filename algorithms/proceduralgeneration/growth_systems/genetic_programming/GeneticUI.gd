@@ -8,10 +8,10 @@ extends Control
 @onready var evolve_btn = $Panel/VBoxContainer/EvolveButton
 @onready var generation_label = $Panel/VBoxContainer/GenerationLabel
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
-func _update_ui():
+func _update_ui() -> void:
 	if not gp_node: return
 	pop_slider.value = gp_node.population_size
 	gen_slider.value = gp_node.max_generations
@@ -24,19 +24,19 @@ func _process(_delta):
 		if gp_node.best_genome:
 			generation_label.text += "\nBest Fitness: %.2f" % gp_node.best_genome.fitness
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	gp_node.population_size = int(pop_slider.value)
 	gp_node.max_generations = int(gen_slider.value)
 	gp_node.genome_type = type_option.selected
 	gp_node.auto_evolve = auto_check.button_pressed
 	gp_node.initialize_population()
 
-func _on_evolve_pressed():
+func _on_evolve_pressed() -> void:
 	gp_node.evolve_generation()
 
-func _on_auto_toggled(button_pressed):
+func _on_auto_toggled(button_pressed) -> void:
 	gp_node.auto_evolve = button_pressed
 	evolve_btn.disabled = button_pressed
 
-func _on_pop_changed(value):
+func _on_pop_changed(value) -> void:
 	$Panel/VBoxContainer/PopLabel.text = "Population: %d" % int(value)

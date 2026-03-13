@@ -22,7 +22,7 @@ var repeller_radius: float = 0.3
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -35,7 +35,7 @@ func _ready():
 
 	print("Example 4.6: Particle Repeller - Repulsion force demonstration")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate repeller position
 	animate_repeller(delta)
 
@@ -45,7 +45,7 @@ func _process(delta):
 	# Update UI
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Emit burst
@@ -60,7 +60,7 @@ func _input(event):
 		elif event.keycode == KEY_C:
 			emitter.clear_particles()
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -78,12 +78,12 @@ func create_info_label():
 	instructions.text = "[SPACE] Burst | [â†‘/â†“] Strength | [C] Clear | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label and emitter:
 		info_label.text = "Particle Repeller\n%d particles | Strength: %.1f" % [emitter.get_particle_count(), repeller_strength]
 
-func create_emitter():
+func create_emitter() -> void:
 	"""Create particle emitter at top"""
 	emitter = ParticleEmitter.new()
 	emitter.position = Vector3(0, 0.4, 0)
@@ -113,7 +113,7 @@ func create_emitter():
 
 	add_child(emitter)
 
-func create_repeller():
+func create_repeller() -> void:
 	"""Create repeller object"""
 	repeller = Node3D.new()
 	repeller_position = Vector3(0, 0, 0)
@@ -153,7 +153,7 @@ func create_repeller():
 
 	repeller.add_child(ring)
 
-func animate_repeller(_delta: float):
+func animate_repeller(_delta: float) -> void:
 	"""Move repeller in circular pattern"""
 	var time = Time.get_ticks_msec() / 1000.0
 
@@ -169,7 +169,7 @@ func animate_repeller(_delta: float):
 	var pulse = 1.0 + sin(time * 4.0) * 0.15
 	repeller.scale = Vector3.ONE * pulse
 
-func apply_repeller_forces():
+func apply_repeller_forces() -> void:
 	"""Apply repulsion force to all particles"""
 	if not emitter:
 		return
@@ -205,10 +205,16 @@ func calculate_repulsion_force(particle: Particle) -> Vector3:
 
 	return force
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	if emitter:
 		emitter.clear_particles()
 		emitter.emission_rate = 15.0
 
 	repeller_strength = 2.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

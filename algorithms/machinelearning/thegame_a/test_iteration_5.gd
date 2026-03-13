@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 5: Goal Test ---")
 	
 	var garden = load("res://algorithms/machinelearning/thegame_a/AxiomGarden.gd").new()
@@ -42,3 +42,9 @@ func _run():
 		push_error("Goal logic failed.")
 		
 	print("--- Iteration 5 Complete ---")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

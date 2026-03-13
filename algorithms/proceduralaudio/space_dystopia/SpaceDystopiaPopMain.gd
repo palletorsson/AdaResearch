@@ -20,13 +20,13 @@ var _stop_btn: Button
 var _concept_label: RichTextLabel
 
 
-func _ready():
+func _ready() -> void:
 	get_tree().root.title = "SPACE DYSTOPIA — A Procedural Album"
 	_setup_audio()
 	_setup_ui()
 
 
-func _setup_audio():
+func _setup_audio() -> void:
 	var bus_name = "SpaceReverb"
 	var idx = AudioServer.get_bus_index(bus_name)
 	if idx == -1:
@@ -53,7 +53,7 @@ func _setup_audio():
 	add_child(_player)
 
 
-func _setup_ui():
+func _setup_ui() -> void:
 	var bg = ColorRect.new()
 	bg.color = Color(0.02, 0.02, 0.04)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -152,7 +152,7 @@ func _setup_ui():
 	right_panel.add_child(_concept_label)
 
 
-func _style_track_button(btn: Button):
+func _style_track_button(btn: Button) -> void:
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0.08, 0.08, 0.12)
 	style.set_corner_radius_all(3)
@@ -171,7 +171,7 @@ func _style_track_button(btn: Button):
 	btn.add_theme_stylebox_override("pressed", pressed)
 
 
-func _style_button(btn: Button, color: Color):
+func _style_button(btn: Button, color: Color) -> void:
 	var style = StyleBoxFlat.new()
 	style.bg_color = color
 	style.set_corner_radius_all(4)
@@ -182,7 +182,7 @@ func _style_button(btn: Button, color: Color):
 	btn.add_theme_stylebox_override("normal", style)
 
 
-func _update_concept_text(track_id: int):
+func _update_concept_text(track_id: int) -> void:
 	var concepts = {
 		0: "[color=#4080cc]SPACE DYSTOPIA[/color]\n\nA journey through post-human consciousness.\n\n[i]Select a track to begin...[/i]",
 		1: "[color=#6090dd]01 — POST-SINGULARITY DRIFT[/color]\n\n[i]\"The machines have awakened. In the silence that follows, something new begins to dream.\"[/i]\n\n• Deep sub-bass foundation\n• Sparse piano notes floating in void\n• Ghostly choir emerging from static\n• Progression: Cm → Ab → Eb → Bb",
@@ -199,7 +199,7 @@ func _update_concept_text(track_id: int):
 	_concept_label.text = concepts.get(track_id, concepts[0])
 
 
-func _on_track_selected(track_id: int):
+func _on_track_selected(track_id: int) -> void:
 	if _is_generating:
 		return
 	
@@ -217,7 +217,7 @@ func _on_track_selected(track_id: int):
 	call_deferred("_generate_and_play", track_id)
 
 
-func _generate_and_play(track_id: int):
+func _generate_and_play(track_id: int) -> void:
 	var stream: AudioStreamInteractive = null
 	
 	match track_id:
@@ -246,7 +246,7 @@ func _generate_and_play(track_id: int):
 		_track_buttons[i].modulate = Color(0.5, 0.5, 0.5) if (i + 1) != track_id else Color(1.0, 1.0, 1.0)
 
 
-func _stop_track():
+func _stop_track() -> void:
 	_player.stop()
 	_stop_btn.disabled = true
 	_status_label.text = ""
@@ -254,7 +254,7 @@ func _stop_track():
 		btn.modulate = Color(1.0, 1.0, 1.0)
 
 
-func _on_track_finished():
+func _on_track_finished() -> void:
 	_status_label.text = "Finished"
 	_stop_btn.disabled = true
 
@@ -1240,19 +1240,19 @@ func _chord_freqs(scale: Array, degree: int) -> Array:
 	]
 
 
-func _mix_chunk(mix: PackedFloat32Array, chunk: PackedFloat32Array, offset: int):
+func _mix_chunk(mix: PackedFloat32Array, chunk: PackedFloat32Array, offset: int) -> void:
 	for j in range(chunk.size()):
 		if offset + j < mix.size():
 			mix[offset + j] = clampf(mix[offset + j] + chunk[j], -1.0, 1.0)
 
 
-func _set_auto_advance(p: AudioStreamInteractive, count: int):
+func _set_auto_advance(p: AudioStreamInteractive, count: int) -> void:
 	for i in range(count):
 		p.set_clip_auto_advance(i, AudioStreamInteractive.AUTO_ADVANCE_ENABLED)
 		p.set_clip_auto_advance_next_clip(i, (i + 1) % count)
 
 
-func _add_xfades(p: AudioStreamInteractive, count: int, dur: float):
+func _add_xfades(p: AudioStreamInteractive, count: int, dur: float) -> void:
 	for i in range(count):
 		var next = (i + 1) % count
 		p.add_transition(i, next,
@@ -1284,3 +1284,9 @@ func _create_wav(data: PackedFloat32Array) -> AudioStreamWAV:
 	
 	stream.data = bytes
 	return stream
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

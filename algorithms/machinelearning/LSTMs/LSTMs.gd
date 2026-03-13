@@ -46,7 +46,7 @@ func _set_sequence_length(v: int) -> void:
 	create_input_tokens()
 	create_output_tokens()
 
-func _ready():
+func _ready() -> void:
 	print("LSTM Networks Visualization initialized")
 	create_input_tokens()
 	create_output_tokens()
@@ -55,7 +55,7 @@ func _ready():
 	setup_training_metrics()
 	_create_stats_labels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var scaled_delta = delta * animation_speed
 	time += scaled_delta
 	
@@ -76,7 +76,7 @@ func _process(delta):
 # Token Creation — Input/Output sequence with metallic materials
 # ============================================================================
 
-func create_input_tokens():
+func create_input_tokens() -> void:
 	## Create input sequence tokens with gold metallic materials
 	var input_tokens = $InputSequence/InputTokens
 	for i in range(sequence_length):
@@ -99,7 +99,7 @@ func create_input_tokens():
 		var tween = create_tween()
 		tween.tween_property(token, "scale", Vector3.ONE, 0.3).set_delay(i * 0.05).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-func create_output_tokens():
+func create_output_tokens() -> void:
 	## Create output sequence tokens with blue metallic materials
 	var output_tokens = $OutputSequence/OutputTokens
 	for i in range(sequence_length):
@@ -125,7 +125,7 @@ func create_output_tokens():
 # Memory & Gate Particles
 # ============================================================================
 
-func create_memory_particles():
+func create_memory_particles() -> void:
 	## Create glowing memory flow particles with transparency
 	var memory_particles_node = $MemoryFlow/MemoryParticles
 	for i in range(15):
@@ -149,7 +149,7 @@ func create_memory_particles():
 		memory_particles_node.add_child(particle)
 		memory_particles.append(particle)
 
-func create_gate_activations():
+func create_gate_activations() -> void:
 	## Create gate activation indicators with cyan glow
 	var activation_indicators = $GateActivations/ActivationIndicators
 	for i in range(6):
@@ -173,7 +173,7 @@ func create_gate_activations():
 		
 		activation_indicators.add_child(indicator)
 
-func setup_training_metrics():
+func setup_training_metrics() -> void:
 	## Initialize loss and accuracy meter positions
 	var loss_indicator = $TrainingMetrics/LossMeter/LossIndicator
 	var accuracy_indicator = $TrainingMetrics/AccuracyMeter/AccuracyIndicator
@@ -186,7 +186,7 @@ func setup_training_metrics():
 # Animation — LSTM Cell, Gates, Memory Flow
 # ============================================================================
 
-func animate_lstm_cell(delta):
+func animate_lstm_cell(delta) -> void:
 	## Animate LSTM cell core — green glow intensifies with training
 	var cell_core = $LSTMCell/CellCore
 	if cell_core:
@@ -219,7 +219,7 @@ func animate_lstm_cell(delta):
 			var intensity = 0.3 + info_flow * 0.7
 			hidden_core.material_override.emission = color_cell * intensity
 
-func animate_gates(delta):
+func animate_gates(delta) -> void:
 	## Animate forget gate — controls what to discard from cell state
 	var forget_core = $LSTMCell/Gates/ForgetGate/ForgetCore
 	var forget_val := 0.0
@@ -269,7 +269,7 @@ func animate_gates(delta):
 	if _gate_label:
 		_gate_label.text = "Forget: %.2f | Input: %.2f | Output: %.2f" % [forget_val, input_val, output_val]
 
-func animate_memory_flow(delta):
+func animate_memory_flow(delta) -> void:
 	## Animate memory particles flowing through the LSTM pipeline
 	for i in range(memory_particles.size()):
 		var particle = memory_particles[i]
@@ -291,7 +291,7 @@ func animate_memory_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * training_progress * pulse_intensity
 			particle.scale = Vector3.ONE * pulse
 
-func animate_gate_activations(_delta):
+func animate_gate_activations(_delta) -> void:
 	## Animate gate activation indicator ring
 	var activation_indicators = $GateActivations/ActivationIndicators
 	for i in range(activation_indicators.get_child_count()):
@@ -316,7 +316,7 @@ func animate_gate_activations(_delta):
 # Training Metrics — Loss and accuracy meters
 # ============================================================================
 
-func update_training_metrics(delta):
+func update_training_metrics(delta) -> void:
 	## Update loss meter position and color
 	var loss_indicator = $TrainingMetrics/LossMeter/LossIndicator
 	if loss_indicator:
@@ -339,13 +339,13 @@ func update_training_metrics(delta):
 # Public API
 # ============================================================================
 
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func set_loss_value(loss: float):
+func set_loss_value(loss: float) -> void:
 	loss_value = clamp(loss, 0.1, 1.0)
 
-func set_accuracy(acc: float):
+func set_accuracy(acc: float) -> void:
 	accuracy = clamp(acc, 0.0, 1.0)
 
 func get_training_progress() -> float:
@@ -357,7 +357,7 @@ func get_loss_value() -> float:
 func get_accuracy() -> float:
 	return accuracy
 
-func reset_training():
+func reset_training() -> void:
 	## Reset all training state with visual feedback
 	time = 0.0
 	training_progress = 0.0
@@ -408,3 +408,9 @@ func _update_stats_labels() -> void:
 func _clear_children(parent: Node) -> void:
 	for c in parent.get_children():
 		c.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -30,11 +30,11 @@ var bubble_elements := []
 var merge_elements := []
 var quick_elements := []
 
-func _ready():
+func _ready() -> void:
 	initialize_arrays()
 	create_visual_elements()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animation_timer += delta
 	
@@ -43,7 +43,7 @@ func _process(delta):
 	visualize_swaps()
 	update_performance_metrics()
 
-func initialize_arrays():
+func initialize_arrays() -> void:
 	# Initialize random arrays for each algorithm
 	bubble_array = generate_random_array(8)
 	merge_array = generate_random_array(8)
@@ -55,12 +55,12 @@ func generate_random_array(size: int) -> Array:
 		array.append(randi() % 20 + 1)
 	return array
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	create_bubble_sort_elements()
 	create_merge_sort_elements()
 	create_quick_sort_elements()
 
-func create_bubble_sort_elements():
+func create_bubble_sort_elements() -> void:
 	var container = $BubbleSortArea
 	
 	for i in range(bubble_array.size()):
@@ -79,7 +79,7 @@ func create_bubble_sort_elements():
 		container.add_child(element)
 		bubble_elements.append(element)
 
-func create_merge_sort_elements():
+func create_merge_sort_elements() -> void:
 	var container = $MergeSortArea
 	
 	for i in range(merge_array.size()):
@@ -100,7 +100,7 @@ func create_merge_sort_elements():
 		container.add_child(element)
 		merge_elements.append(element)
 
-func create_quick_sort_elements():
+func create_quick_sort_elements() -> void:
 	var container = $QuickSortArea
 	
 	for i in range(quick_array.size()):
@@ -119,7 +119,7 @@ func create_quick_sort_elements():
 		container.add_child(element)
 		quick_elements.append(element)
 
-func animate_sorting_algorithms():
+func animate_sorting_algorithms() -> void:
 	if animation_timer > 1.0:
 		animation_timer = 0.0
 		
@@ -134,7 +134,7 @@ func animate_sorting_algorithms():
 				step_quick_sort()
 				current_algorithm = "bubble"
 
-func step_bubble_sort():
+func step_bubble_sort() -> void:
 	# Bubble sort step
 	if bubble_j < bubble_array.size() - bubble_i - 1:
 		bubble_comparisons += 1
@@ -159,7 +159,7 @@ func step_bubble_sort():
 			bubble_array = generate_random_array(8)
 			recreate_bubble_elements()
 
-func step_merge_sort():
+func step_merge_sort() -> void:
 	# Simplified merge sort visualization (showing merge phases)
 	var size = bubble_array.size()
 	var step_size = 1 << merge_level
@@ -188,7 +188,7 @@ func step_merge_sort():
 		merge_step = 0
 		merge_level += 1
 
-func step_quick_sort():
+func step_quick_sort() -> void:
 	# Simplified quick sort visualization (showing partitioning)
 	if quick_high - quick_low <= 1:
 		# Reset for new partition
@@ -233,12 +233,12 @@ func step_quick_sort():
 	else:
 		quick_low = new_pivot_pos + 1
 
-func swap_elements(array: Array, i: int, j: int):
+func swap_elements(array: Array, i: int, j: int) -> void:
 	var temp = array[i]
 	array[i] = array[j]
 	array[j] = temp
 
-func swap_visual_elements(elements: Array, i: int, j: int):
+func swap_visual_elements(elements: Array, i: int, j: int) -> void:
 	# Animate element swap
 	var pos_i = elements[i].position
 	var pos_j = elements[j].position
@@ -251,7 +251,7 @@ func swap_visual_elements(elements: Array, i: int, j: int):
 	elements[i] = elements[j]
 	elements[j] = temp
 
-func highlight_elements(elements: Array, indices: Array, color: Color):
+func highlight_elements(elements: Array, indices: Array, color: Color) -> void:
 	# Reset all elements to default color
 	for element in elements:
 		var material = element.material_override as StandardMaterial3D
@@ -272,7 +272,7 @@ func highlight_elements(elements: Array, indices: Array, color: Color):
 			material.emission_enabled = true
 			material.emission = color * 0.4
 
-func recreate_bubble_elements():
+func recreate_bubble_elements() -> void:
 	var container = $BubbleSortArea
 	
 	# Clear existing elements
@@ -297,7 +297,7 @@ func recreate_bubble_elements():
 		container.add_child(element)
 		bubble_elements.append(element)
 
-func recreate_merge_elements():
+func recreate_merge_elements() -> void:
 	var container = $MergeSortArea
 	
 	# Clear existing elements
@@ -324,7 +324,7 @@ func recreate_merge_elements():
 		container.add_child(element)
 		merge_elements.append(element)
 
-func recreate_quick_elements():
+func recreate_quick_elements() -> void:
 	var container = $QuickSortArea
 	
 	# Clear existing elements
@@ -349,7 +349,7 @@ func recreate_quick_elements():
 		container.add_child(element)
 		quick_elements.append(element)
 
-func visualize_comparisons():
+func visualize_comparisons() -> void:
 	var container = $ComparisonVisualizer
 	
 	# Clear previous visualization
@@ -371,7 +371,7 @@ func visualize_comparisons():
 	
 	container.add_child(comparison_bar)
 
-func visualize_swaps():
+func visualize_swaps() -> void:
 	var container = $SwapVisualizer
 	
 	# Clear previous visualization
@@ -393,7 +393,7 @@ func visualize_swaps():
 	
 	container.add_child(swap_bar)
 
-func update_performance_metrics():
+func update_performance_metrics() -> void:
 	var container = $PerformanceMetrics
 	
 	# Clear previous visualization
@@ -417,4 +417,9 @@ func update_performance_metrics():
 		metric_box.material_override = material
 		
 		container.add_child(metric_box)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

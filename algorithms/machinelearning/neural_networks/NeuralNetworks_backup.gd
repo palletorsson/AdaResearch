@@ -5,11 +5,11 @@ var neurons = []
 var connections = []
 var training_loss = 1.0
 
-func _ready():
+func _ready() -> void:
 	create_network()
 	setup_materials()
 
-func create_network():
+func create_network() -> void:
 	# Create simple 3-layer network visualization
 	var layers = [4, 3, 2]  # Input, Hidden, Output
 	
@@ -23,7 +23,7 @@ func create_network():
 			$NetworkLayers.add_child(neuron)
 			neurons.append(neuron)
 
-func setup_materials():
+func setup_materials() -> void:
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.2, 0.8, 1.0)
 	material.emission_enabled = true
@@ -32,7 +32,7 @@ func setup_materials():
 	for neuron in neurons:
 		neuron.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	training_loss = exp(-time / 10.0) + 0.1
 	
@@ -43,3 +43,9 @@ func _process(delta):
 	
 	# Update loss indicator
 	$TrainingLoss.size.y = training_loss * 2.0 + 0.5
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

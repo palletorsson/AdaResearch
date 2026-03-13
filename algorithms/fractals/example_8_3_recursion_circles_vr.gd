@@ -112,3 +112,9 @@ func _process(delta: float) -> void:
 			if depth == max_depth:  # Check the outermost/first created circle
 				_is_paused = true
 				_pause_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

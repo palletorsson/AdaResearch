@@ -42,7 +42,7 @@ var symmetry_types = ["radial", "bilateral", "asymmetric", "fractal", "nested", 
 # Mutation types
 var mutation_types = ["color_shift", "component_growth", "texture_evolution", "symmetry_breaking", "merging", "splitting", "dimensional_shift", "form_inversion"]
 
-func _ready():
+func _ready() -> void:
 	# Initialize libraries
 	_initialize_component_library()
 	_initialize_mutation_library()
@@ -50,7 +50,7 @@ func _ready():
 	
 	print("Morphology Generator initialized")
 
-func _initialize_component_library():
+func _initialize_component_library() -> void:
 	# Basic shapes
 	component_library["shapes"] = {
 		"sphere": preload("res://algorithms/emergentsystems/ecosystemsimulation2/components/sphere.tscn") if ResourceLoader.exists("res://algorithms/emergentsystems/ecosystemsimulation2/components/sphere.tscn") else null,
@@ -69,7 +69,7 @@ func _initialize_component_library():
 	component_library["animations"] = {}
 	component_library["effects"] = {}
 
-func _initialize_mutation_library():
+func _initialize_mutation_library() -> void:
 	mutation_library = [
 		{
 			"name": "color_shift",
@@ -113,7 +113,7 @@ func _initialize_mutation_library():
 		}
 	]
 
-func _initialize_form_library():
+func _initialize_form_library() -> void:
 	# Create some base form templates
 	form_library["fluid_sphere"] = {
 		"body_type": "spherical",
@@ -195,7 +195,7 @@ func _initialize_form_library():
 	
 	# Add more base forms as needed
 
-func set_entropy(value: float):
+func set_entropy(value: float) -> void:
 	current_entropy = clamp(value, 0.0, 1.0)
 
 func generate_morphology(entity: Object) -> Dictionary:
@@ -1043,7 +1043,7 @@ func _transform_existing_form(current_form: Dictionary, traits: Dictionary, entr
 	
 	return new_form
 
-func _apply_form_to_entity(entity: Object, form_data: Dictionary):
+func _apply_form_to_entity(entity: Object, form_data: Dictionary) -> void:
 	# Clear existing visual representation
 	var visual_node = entity.get_node_or_null("VisualForm")
 	if visual_node:
@@ -1131,7 +1131,7 @@ func _create_procedural_component(component_data: Dictionary) -> Node3D:
 	component.mesh = mesh
 	return component
 
-func _apply_component_material(component: Node3D, component_data: Dictionary):
+func _apply_component_material(component: Node3D, component_data: Dictionary) -> void:
 	# Find the mesh instance to apply material to
 	var mesh_instance: MeshInstance3D
 	
@@ -1195,7 +1195,7 @@ func _apply_component_material(component: Node3D, component_data: Dictionary):
 	# Apply material
 	mesh_instance.material_override = material
 
-func _setup_animations(visual_node: Node3D, form_data: Dictionary):
+func _setup_animations(visual_node: Node3D, form_data: Dictionary) -> void:
 	# Add animation player if needed
 	var anim_player = visual_node.get_node_or_null("AnimationPlayer")
 	if not anim_player:
@@ -1241,7 +1241,7 @@ func _setup_animations(visual_node: Node3D, form_data: Dictionary):
 	lib.add_animation(anim_name, anim)
 	anim_player.play(anim_name)
 
-func _create_pulsing_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
+func _create_pulsing_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary) -> void:
 	# Create a pulsing animation where components scale up and down
 	
 	# Set up animation
@@ -1278,7 +1278,7 @@ func _create_pulsing_animation(anim: Animation, visual_node: Node3D, form_data: 
 			
 			anim.track_insert_key(track_idx, t, new_scale)
 
-func _create_undulating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
+func _create_undulating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary) -> void:
 	# Create a wave-like animation where components move in sinusoidal patterns
 	
 	# Set up animation
@@ -1324,7 +1324,7 @@ func _create_undulating_animation(anim: Animation, visual_node: Node3D, form_dat
 			var new_pos = base_pos + offset
 			anim.track_insert_key(track_idx, t, new_pos)
 
-func _create_vibrating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
+func _create_vibrating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary) -> void:
 	# Create rapid, small movements in random directions
 	
 	# Set up animation
@@ -1367,7 +1367,7 @@ func _create_vibrating_animation(anim: Animation, visual_node: Node3D, form_data
 			var new_pos = base_pos + offset
 			anim.track_insert_key(track_idx, t, new_pos)
 
-func _create_gliding_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
+func _create_gliding_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary) -> void:
 	# Create a smooth, flowing movement animation
 	
 	# Set up animation
@@ -1434,7 +1434,7 @@ func _create_gliding_animation(anim: Animation, visual_node: Node3D, form_data: 
 		)
 		anim.track_insert_key(rotation_track_idx, t, base_rot + rot_offset)
 
-func _create_rotating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
+func _create_rotating_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary) -> void:
 	# Create rotation animations for components
 	
 	# Set up animation
@@ -1577,3 +1577,9 @@ func generate_hybrid_form(entity1: Object, entity2: Object) -> Dictionary:
 	hybrid_form.trait_modifiers["fluidity"] = (hybrid_form.trait_modifiers.get("fluidity", 0.0) + 0.1)
 	
 	return hybrid_form
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

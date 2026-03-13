@@ -17,7 +17,7 @@ var p_image: Image
 
 var emission_centers = []
 
-func _ready():
+func _ready() -> void:
 	# Ensure Home Area detects Ants (Layer 2)
 	var home_area = $HomeArea
 	if home_area:
@@ -54,7 +54,7 @@ func _ready():
 	_spawn_food_cluster(Vector3(15, 0, 15), 10)
 	_spawn_food_cluster(Vector3(-15, 0, -10), 10)
 
-func _spawn_food_cluster(pos: Vector3, radius: float):
+func _spawn_food_cluster(pos: Vector3, radius: float) -> void:
 	# Add to emission centers (Type 1 = Food)
 	var grid_pos = _world_to_grid(pos)
 	emission_centers.append({
@@ -86,7 +86,7 @@ func _spawn_food_cluster(pos: Vector3, radius: float):
 	area.body_entered.connect(_on_food_entered)
 	add_child(area)
 
-func _on_food_entered(body):
+func _on_food_entered(body) -> void:
 	if body is SimpleAnt:
 		# print("Food found!")
 		body.set_found_food()
@@ -107,7 +107,7 @@ func _physics_process(_delta):
 	p_texture.update(p_image)
 
 # Home Area (Implicit at 0,0,0)
-func _on_home_area_entered(body):
+func _on_home_area_entered(body) -> void:
 	if body is SimpleAnt:
 		# print("Home reached!")
 		body.set_reached_home()
@@ -116,3 +116,9 @@ func _world_to_grid(pos: Vector3) -> Vector2i:
 	var gx = int(remap(pos.x, -terrain_size.x/2, terrain_size.x/2, 0, grid.width))
 	var gy = int(remap(pos.z, -terrain_size.y/2, terrain_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

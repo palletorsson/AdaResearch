@@ -21,7 +21,7 @@ var camera_angle: float = 0.0
 var camera_height: float = 15.0
 var is_paused: bool = false
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	cube_button.pressed.connect(_on_cube_pressed)
 	octahedron_button.pressed.connect(_on_octahedron_pressed)
@@ -37,7 +37,7 @@ func _ready():
 	_update_ui()
 	_update_camera_position()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera around the lattice
 	camera_angle += delta * 0.2
 	_update_camera_position()
@@ -46,37 +46,37 @@ func _process(delta):
 	if Engine.get_frames_drawn() % 30 == 0:
 		_update_stats()
 
-func _update_camera_position():
+func _update_camera_position() -> void:
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_cube_pressed():
+func _on_cube_pressed() -> void:
 	lattice.set_tessellation_type(TessellationLatticeWalk.TessellationType.CUBE)
 	_update_ui()
 	_update_stats()
 
-func _on_octahedron_pressed():
+func _on_octahedron_pressed() -> void:
 	lattice.set_tessellation_type(TessellationLatticeWalk.TessellationType.OCTAHEDRON)
 	_update_ui()
 	_update_stats()
 
-func _on_rhombic_pressed():
+func _on_rhombic_pressed() -> void:
 	lattice.set_tessellation_type(TessellationLatticeWalk.TessellationType.RHOMBIC_DODECAHEDRON)
 	_update_ui()
 	_update_stats()
 
-func _on_truncated_pressed():
+func _on_truncated_pressed() -> void:
 	lattice.set_tessellation_type(TessellationLatticeWalk.TessellationType.TRUNCATED_OCTAHEDRON)
 	_update_ui()
 	_update_stats()
 
-func _on_speed_changed(value: float):
+func _on_speed_changed(value: float) -> void:
 	lattice.walk_speed = value
 	speed_label.text = "Speed: %.1f cells/sec" % value
 
-func _on_pause_pressed():
+func _on_pause_pressed() -> void:
 	is_paused = !is_paused
 	if is_paused:
 		lattice.pause_walk()
@@ -85,24 +85,24 @@ func _on_pause_pressed():
 		lattice.resume_walk()
 		pause_button.text = "Pause"
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	lattice.reset_walk()
 	is_paused = false
 	pause_button.text = "Pause"
 	lattice.auto_walk = true
 	_update_stats()
 
-func _on_reveal_all_pressed():
+func _on_reveal_all_pressed() -> void:
 	lattice.reveal_all()
 	_update_stats()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current settings"""
 	var type_name = TessellationLatticeWalk.TessellationType.keys()[lattice.tessellation_type]
 	type_label.text = "Type: " + type_name.replace("_", " ").capitalize()
 	speed_label.text = "Speed: %.1f cells/sec" % lattice.walk_speed
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	var stats = lattice.get_stats()
 	stats_label.text = ""
@@ -115,7 +115,7 @@ func _update_stats():
 	stats_label.text += "Progress: %.1f%%" % progress
 
 # Input handling for camera control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance = max(10.0, camera_distance - 2.0)

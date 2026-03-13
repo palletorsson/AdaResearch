@@ -10,18 +10,18 @@ extends Node3D
 var mesh_instance: MeshInstance3D
 var noise: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	generate_mesh()
 
-func setup_noise():
+func setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.frequency = noise_frequency
 	noise.fractal_octaves = octaves
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 
-func generate_mesh():
+func generate_mesh() -> void:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -67,8 +67,14 @@ func get_vertex(x: int, z: int, cell_size: float) -> Vector3:
 	var height = noise.get_noise_2d(x, z) * height_scale
 	return Vector3(world_x, height, world_z)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			setup_noise()
 			generate_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

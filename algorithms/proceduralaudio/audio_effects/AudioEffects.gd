@@ -106,13 +106,13 @@ var theme_profiles := {
 }
 
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	initialize_audio_buffers()
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	effect_timer += delta
 	
@@ -127,7 +127,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func initialize_audio_buffers():
+func initialize_audio_buffers() -> void:
 	# Initialize buffers for audio processing simulation
 	input_signal.resize(128)
 	reverb_buffer.resize(256)
@@ -144,7 +144,7 @@ func initialize_audio_buffers():
 	for i in range(output_signal.size()):
 		output_signal[i] = 0.0
 
-func update_effect_parameters():
+func update_effect_parameters() -> void:
 	if current_theme_profile.is_empty():
 		return
 	
@@ -157,7 +157,7 @@ func update_effect_parameters():
 	chorus_depth = clamp(profile.get("chorus_depth", 0.003) + cos(time * 0.8) * 0.0015, 0.0005, 0.02)
 	distortion_drive = clamp(profile.get("distortion_drive", 0.4) + sin(time * 0.9) * 0.06, 0.0, 1.0)
 
-func generate_input_signal():
+func generate_input_signal() -> void:
 	if current_theme_profile.is_empty():
 		return
 	
@@ -174,7 +174,7 @@ func generate_input_signal():
 		var noise = randf_range(-1.0, 1.0) * noise_amount * 0.2
 		input_signal[i] = (fundamental + harmonic + shimmer + noise) * 0.8
 
-func visualize_reverb_effect():
+func visualize_reverb_effect() -> void:
 	var container = $ReverbVisualization
 	
 	# Clear previous visualization
@@ -222,7 +222,7 @@ func visualize_reverb_effect():
 	
 	container.add_child(chamber)
 
-func visualize_delay_effect():
+func visualize_delay_effect() -> void:
 	var container = $DelayVisualization
 	
 	# Clear previous visualization
@@ -265,7 +265,7 @@ func visualize_delay_effect():
 	
 	container.add_child(delay_line)
 
-func visualize_chorus_effect():
+func visualize_chorus_effect() -> void:
 	var container = $ChorusVisualization
 	
 	# Clear previous visualization
@@ -316,7 +316,7 @@ func visualize_chorus_effect():
 			
 			container.add_child(connection)
 
-func visualize_distortion_effect():
+func visualize_distortion_effect() -> void:
 	var container = $DistortionVisualization
 	
 	# Clear previous visualization
@@ -379,7 +379,7 @@ func visualize_distortion_effect():
 	
 	container.add_child(curve_display)
 
-func show_effect_chain():
+func show_effect_chain() -> void:
 	var container = $EffectChain
 	
 	# Clear previous visualization
@@ -433,7 +433,7 @@ func show_effect_chain():
 			
 			container.add_child(arrow)
 
-func show_frequency_analysis():
+func show_frequency_analysis() -> void:
 	var container = $FrequencyAnalysis
 	
 	# Clear previous visualization
@@ -474,7 +474,7 @@ func show_frequency_analysis():
 		
 		container.add_child(spectrum_bar)
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -492,7 +492,7 @@ func setup_audio_synthesis():
 	audio_reverb_buffer.resize(int(sample_rate * 2.0))
 	reset_audio_delay_lines()
 
-func reset_audio_delay_lines():
+func reset_audio_delay_lines() -> void:
 	audio_chorus_index = 0
 	audio_delay_index = 0
 	audio_reverb_index = 0
@@ -504,7 +504,7 @@ func reset_audio_delay_lines():
 	for i in range(audio_reverb_buffer.size()):
 		audio_reverb_buffer[i] = 0.0
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -525,13 +525,13 @@ func apply_theme_profile(theme_name: String):
 	reset_audio_delay_lines()
 	print("AudioEffects: activated %s theme" % theme_name)
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
@@ -543,7 +543,7 @@ func ensure_playback():
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if current_theme_profile.is_empty():
@@ -614,3 +614,9 @@ func soft_clip(value: float, drive: float) -> float:
 	var drive_amount = 1.0 + clamp(drive, 0.0, 1.0) * 6.0
 	var y = value * drive_amount
 	return y / (1.0 + abs(y))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

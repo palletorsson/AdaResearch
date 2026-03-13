@@ -20,7 +20,7 @@ var is_growing: bool = false
 # Golden angle for Fibonacci spiral
 const GOLDEN_ANGLE = 137.508  # degrees
 
-func _ready():
+func _ready() -> void:
 	print("Romanesco: Ready")
 	print("Romanesco: Will grow to depth %d" % max_depth)
 
@@ -32,7 +32,7 @@ func _ready():
 		is_growing = true
 		print("Romanesco: Auto-growth enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_growing:
 		return
 
@@ -45,13 +45,13 @@ func _process(delta: float):
 		perform_growth_iteration()
 
 # Create the initial central cone
-func create_central_cone():
+func create_central_cone() -> void:
 	var cone = create_cone(Vector3.ZERO, base_cone_size, 0)
 	cone.name = "CentralCone"
 	print("Romanesco: Created central cone")
 
 # Perform one growth iteration
-func perform_growth_iteration():
+func perform_growth_iteration() -> void:
 	if current_depth >= max_depth:
 		print("Romanesco: Reached maximum depth (%d)" % max_depth)
 		is_growing = false
@@ -82,7 +82,7 @@ func find_cones_at_depth(depth: int) -> Array:
 	_find_cones_recursive(self, depth, cones)
 	return cones
 
-func _find_cones_recursive(node: Node, target_depth: int, cones: Array):
+func _find_cones_recursive(node: Node, target_depth: int, cones: Array) -> void:
 	if node.has_meta("cone_depth"):
 		if node.get_meta("cone_depth") == target_depth:
 			cones.append(node)
@@ -91,7 +91,7 @@ func _find_cones_recursive(node: Node, target_depth: int, cones: Array):
 		_find_cones_recursive(child, target_depth, cones)
 
 # Add spiral buds around a cone using Fibonacci spiral pattern
-func add_spiral_buds(parent_cone: Node3D, depth: int):
+func add_spiral_buds(parent_cone: Node3D, depth: int) -> void:
 	var parent_size = parent_cone.get_meta("cone_size", base_cone_size)
 	var new_size = parent_size * scale_factor
 
@@ -215,16 +215,16 @@ func create_cone_mesh(size: float) -> ArrayMesh:
 	return mesh
 
 # Manual control functions
-func start_growth():
+func start_growth() -> void:
 	is_growing = true
 	growth_timer = 0.0
 	print("Romanesco: Started manually")
 
-func stop_growth():
+func stop_growth() -> void:
 	is_growing = false
 	print("Romanesco: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all cones
 	for child in get_children():
 		child.queue_free()
@@ -239,5 +239,11 @@ func reset():
 	print("Romanesco: Reset")
 
 # Perform a single growth step
-func step():
+func step() -> void:
 	perform_growth_iteration()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

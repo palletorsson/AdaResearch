@@ -48,14 +48,14 @@ var rng: RandomNumberGenerator
 var cloud_cubes: Array = []
 var animation_time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.seed = random_seed
 
 	create_materials()
 	build_inverted_tree()
 
-func create_materials():
+func create_materials() -> void:
 	"""Create materials matching the original tree style"""
 	# Primary material
 	primary_material = StandardMaterial3D.new()
@@ -93,7 +93,7 @@ func create_materials():
 	cloud_material.emission_energy_multiplier = 1.0
 	cloud_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 
-func build_inverted_tree():
+func build_inverted_tree() -> void:
 	"""Build the inverted tree structure"""
 	var tree_root = Node3D.new()
 	tree_root.name = "InvertedGeometricTree"
@@ -156,7 +156,7 @@ func create_inverted_trunk() -> Node3D:
 
 	return trunk_node
 
-func generate_inverted_branches(parent: Node, origin_point: Vector3, num_branches: int, current_depth: int, max_depth: int):
+func generate_inverted_branches(parent: Node, origin_point: Vector3, num_branches: int, current_depth: int, max_depth: int) -> void:
 	"""Recursively generate branches pointing downward"""
 	if current_depth >= max_depth:
 		return
@@ -213,7 +213,7 @@ func generate_inverted_branches(parent: Node, origin_point: Vector3, num_branche
 
 		generate_inverted_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
 
-func add_inverted_detail_blocks(parent_node: Node, branch_instance: MeshInstance3D, branch_size: Vector3):
+func add_inverted_detail_blocks(parent_node: Node, branch_instance: MeshInstance3D, branch_size: Vector3) -> void:
 	"""Add detail blocks to inverted branches"""
 	var num_details = rng.randi() % 3 + 1
 
@@ -256,7 +256,7 @@ func add_inverted_detail_blocks(parent_node: Node, branch_instance: MeshInstance
 		detail.material_override = secondary_material if rng.randf() > 0.4 else primary_material
 		parent_node.add_child(detail)
 
-func create_cube_cloud():
+func create_cube_cloud() -> void:
 	"""Create animated cube cloud above the tree"""
 	var cloud_root = Node3D.new()
 	cloud_root.name = "CubeCloud"
@@ -318,7 +318,7 @@ func create_cloud_cube(size: float) -> MeshInstance3D:
 
 	return cube
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	animation_time += delta
 
 	# Animate cube cloud with timeline
@@ -378,7 +378,7 @@ func _process(delta: float):
 				sin(current_angle) * orbit_radius
 			)
 
-func rebuild():
+func rebuild() -> void:
 	"""Clear and rebuild the entire structure"""
 	for child in get_children():
 		child.queue_free()
@@ -388,3 +388,9 @@ func rebuild():
 
 	create_materials()
 	build_inverted_tree()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

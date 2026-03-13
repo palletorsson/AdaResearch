@@ -4,7 +4,7 @@ extends MeshInstance3D
 @export var viewport_node_path: NodePath = "../AudioDisplay"
 var viewport: SubViewport
 
-func _ready():
+func _ready() -> void:
 	# Get the viewport
 	print("SpectralDisplayController [%s]: Looking for viewport at path: %s" % [name, viewport_node_path])
 	viewport = get_node(viewport_node_path) as SubViewport

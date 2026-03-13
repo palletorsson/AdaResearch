@@ -7,7 +7,7 @@
 # Main scene structure (to be saved as main_scene.tscn)
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	# Set up environment
 	setup_environment()
 	# Create terrain
@@ -21,7 +21,7 @@ func _ready():
 	# Set up camera and lighting
 	setup_camera_and_lighting()
 	
-func setup_environment():
+func setup_environment() -> void:
 	# Create WorldEnvironment node
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -55,7 +55,7 @@ func setup_environment():
 
 
 # --- STEP 2: TERRAIN CREATION ---
-func create_terrain():
+func create_terrain() -> void:
 	# Base terrain
 	var terrain_mesh = PlaneMesh.new()
 	terrain_mesh.size = Vector2(50, 50)
@@ -109,7 +109,7 @@ func create_terrain():
 
 
 # --- STEP 3: CENTRAL FORMATIONS ---
-func create_central_formations():
+func create_central_formations() -> void:
 	# Create the tall spiral/floral formations
 	for i in range(3):
 		var spiral = create_spiral_formation()
@@ -224,7 +224,7 @@ func create_crystal_formation():
 
 
 # --- STEP 4: ROCK FORMATIONS ---
-func create_rock_formations():
+func create_rock_formations() -> void:
 	for i in range(15):
 		var rock = create_rock()
 		var pos_x = randf_range(-20, 20)
@@ -266,7 +266,7 @@ func create_rock():
 
 
 # --- STEP 5: WATER FEATURES ---
-func add_water():
+func add_water() -> void:
 	# Create water plane
 	var water_mesh = PlaneMesh.new()
 	water_mesh.size = Vector2(50, 50)
@@ -290,7 +290,7 @@ func add_water():
 	add_boats()
 
 
-func add_boats():
+func add_boats() -> void:
 	for i in range(3):
 		var boat = create_boat()
 		var pos_x = randf_range(-15, 15)
@@ -340,7 +340,7 @@ func create_boat():
 
 
 # --- STEP 6: STRUCTURES ---
-func add_structures():
+func add_structures() -> void:
 	# Add the cabin/house
 	var cabin = create_cabin()
 	cabin.position = Vector3(randf_range(-5, 5), 4.0, randf_range(-5, 5))
@@ -420,7 +420,7 @@ func create_cabin():
 	return cabin
 
 
-func add_window(parent, position):
+func add_window(parent, position) -> void:
 	var window_mesh = BoxMesh.new()
 	window_mesh.size = Vector3(0.4, 0.4, 0.05)
 	
@@ -440,7 +440,7 @@ func add_window(parent, position):
 
 
 # --- STEP 7: DECORATIVE ELEMENTS ---
-func add_decorative_elements():
+func add_decorative_elements() -> void:
 	# Add trees
 	add_trees()
 	
@@ -448,7 +448,7 @@ func add_decorative_elements():
 	add_clouds()
 
 
-func add_trees():
+func add_trees() -> void:
 	for i in range(20):
 		var tree = create_tree()
 		var pos_x = randf_range(-20, 20)
@@ -506,7 +506,7 @@ func create_tree():
 	return tree
 
 
-func add_clouds():
+func add_clouds() -> void:
 	for i in range(8):
 		var cloud = create_cloud()
 		cloud.position = Vector3(randf_range(-20, 20), randf_range(10, 15), randf_range(-20, 20))
@@ -545,7 +545,7 @@ func create_cloud():
 
 
 # --- STEP 8: CAMERA AND LIGHTING ---
-func setup_camera_and_lighting():
+func setup_camera_and_lighting() -> void:
 	# Create camera
 	var camera = Camera3D.new()
 	camera.name = "MainCamera"
@@ -581,3 +581,9 @@ func setup_camera_and_lighting():
 	ambient_light.omni_range = 30
 	
 	add_child(ambient_light)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

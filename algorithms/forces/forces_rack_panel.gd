@@ -260,3 +260,9 @@ func _get_slider_slot_position(index: int) -> Vector3:
 	var z: float = PANEL_DEPTH * 0.5 + 0.002
 
 	return Vector3(x, y, z)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -312,3 +312,9 @@ func _on_gravity_slider_moved(_position) -> void:
 func _on_depth_slider_moved(_position) -> void:
 	fluid_depth = _panel.get_slider_value(2)
 	update_fluid_volume()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

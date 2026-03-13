@@ -139,7 +139,7 @@ var all_patterns = []
 var grid_container: GridContainer
 var pattern_cells = []
 
-func _ready():
+func _ready() -> void:
 	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ TartanGrid10x10: Initializing tartan pattern gallery...")
 	
 	# Combine traditional and custom patterns
@@ -154,7 +154,7 @@ func _ready():
 	
 	print("âœ… Generated ", all_patterns.size(), " tartan patterns in 10x10 grid")
 
-func setup_grid():
+func setup_grid() -> void:
 	# Create grid container
 	grid_container = GridContainer.new()
 	grid_container.columns = GRID_SIZE
@@ -170,7 +170,7 @@ func setup_grid():
 	
 	add_child(grid_container)
 
-func generate_tartan_grid():
+func generate_tartan_grid() -> void:
 	for i in range(GRID_SIZE * GRID_SIZE):
 		var pattern_index = i % all_patterns.size()
 		var pattern = all_patterns[pattern_index]
@@ -242,7 +242,7 @@ func generate_random_tartan() -> Dictionary:
 		"pattern": pattern
 	}
 
-func _on_tartan_clicked(pattern: Dictionary, index: int):
+func _on_tartan_clicked(pattern: Dictionary, index: int) -> void:
 	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ Clicked tartan: ", pattern.name)
 	print("  Colors: ", pattern.colors.size())
 	print("  Pattern: ", pattern.pattern)
@@ -251,7 +251,7 @@ func _on_tartan_clicked(pattern: Dictionary, index: int):
 	# Could add popup with detailed pattern information
 	show_pattern_details(pattern, index)
 
-func show_pattern_details(pattern: Dictionary, index: int):
+func show_pattern_details(pattern: Dictionary, index: int) -> void:
 	# Create a simple popup with pattern details
 	var popup = AcceptDialog.new()
 	popup.title = pattern.name + " Tartan"
@@ -286,7 +286,7 @@ func show_pattern_details(pattern: Dictionary, index: int):
 	# Remove popup after showing
 	popup.confirmed.connect(popup.queue_free)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
 			print("ðŸ”„ Regenerating random patterns...")
@@ -295,7 +295,7 @@ func _input(event):
 			print("ðŸ’¾ Saving tartan gallery screenshot...")
 			save_screenshot()
 
-func regenerate_random_patterns():
+func regenerate_random_patterns() -> void:
 	# Replace some patterns with new random ones
 	var start_index = tartan_patterns.size()
 	for i in range(start_index, all_patterns.size()):
@@ -312,7 +312,7 @@ func regenerate_random_patterns():
 		label.text = pattern.name
 		cell.tooltip_text = pattern.name
 
-func save_screenshot():
+func save_screenshot() -> void:
 	# Simple screenshot functionality
 	var viewport = get_viewport()
 	var img = viewport.get_texture().get_image()
@@ -323,3 +323,9 @@ func save_screenshot():
 	var path = OS.get_user_data_dir() + "/" + filename
 	img.save_png(path)
 	print("ðŸ“¸ Tartan gallery saved: ", path)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

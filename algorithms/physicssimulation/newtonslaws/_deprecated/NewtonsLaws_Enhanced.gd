@@ -20,7 +20,7 @@ class PhysicsBall:
 	var trail_mesh: ImmediateMesh
 	var trail_node: MeshInstance3D
 
-	func _init(n: CSGSphere3D, pos: Vector3, m: float, c: Color):
+	func _init(n: CSGSphere3D, pos: Vector3, m: float, c: Color) -> void:
 		node = n
 		position = pos
 		velocity = Vector3.ZERO
@@ -61,7 +61,7 @@ var ball_colors = [
 	Color(0.3, 0.5, 1.0, 1.0),  # Blue - Ball 3 (oscillating force)
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -72,7 +72,7 @@ func _ready():
 
 	print("Newton's Laws Enhanced - Beautiful Physics Visualization!")
 
-func create_balls():
+func create_balls() -> void:
 	var initial_positions = [
 		Vector3(-3, 2, 0),
 		Vector3(0, 2, 0),
@@ -108,7 +108,7 @@ func create_balls():
 		balls.append(ball)
 		ball_nodes.append(ball_node)
 
-func create_trail_for_ball(ball: PhysicsBall, index: int):
+func create_trail_for_ball(ball: PhysicsBall, index: int) -> void:
 	# Create trail visualization
 	ball.trail_mesh = ImmediateMesh.new()
 	ball.trail_node = MeshInstance3D.new()
@@ -125,7 +125,7 @@ func create_trail_for_ball(ball: PhysicsBall, index: int):
 	ball.trail_node.material_override = trail_mat
 	$Objects.add_child(ball.trail_node)
 
-func create_force_visualization_system():
+func create_force_visualization_system() -> void:
 	# Create force arrow containers
 	for i in range(balls.size()):
 		# Applied force arrow
@@ -188,7 +188,7 @@ func create_arrow(color: Color, label_text: String) -> Node3D:
 	arrow.visible = false
 	return arrow
 
-func create_ground_visual():
+func create_ground_visual() -> void:
 	# Create a grid ground
 	var grid_size = 20
 	var grid_spacing = 1.0
@@ -205,7 +205,7 @@ func create_ground_visual():
 			Vector3(grid_size * grid_spacing, 0, z * grid_spacing)
 		)
 
-func create_grid_line(from: Vector3, to: Vector3):
+func create_grid_line(from: Vector3, to: Vector3) -> void:
 	var line = MeshInstance3D.new()
 	var mesh = ImmediateMesh.new()
 	line.mesh = mesh
@@ -223,7 +223,7 @@ func create_grid_line(from: Vector3, to: Vector3):
 
 	$Ground.add_child(line)
 
-func create_ui():
+func create_ui() -> void:
 	# Create info labels for each ball
 	for i in range(balls.size()):
 		var label = Label3D.new()
@@ -255,7 +255,7 @@ func create_ui():
 	instructions.position = Vector3(0, 4.3, 0)
 	add_child(instructions)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if paused:
 		return
 
@@ -270,7 +270,7 @@ func _process(delta: float):
 	update_trails()
 	update_info_labels()
 
-func update_ball_physics(index: int, delta: float):
+func update_ball_physics(index: int, delta: float) -> void:
 	var ball = balls[index]
 
 	# Reset acceleration
@@ -339,7 +339,7 @@ func update_ball_physics(index: int, delta: float):
 	var pulse = 1.0 + sin(time * 10) * 0.1 * clamp(speed / 5.0, 0, 1)
 	ball.node.scale = Vector3.ONE * pulse
 
-func create_bounce_effect(pos: Vector3, color: Color):
+func create_bounce_effect(pos: Vector3, color: Color) -> void:
 	# Create particle ring on bounce
 	var ring = CPUParticles3D.new()
 	ring.emitting = true
@@ -363,7 +363,7 @@ func create_bounce_effect(pos: Vector3, color: Color):
 	if is_instance_valid(ring):
 		ring.queue_free()
 
-func update_force_vectors():
+func update_force_vectors() -> void:
 	if not show_force_vectors:
 		for arrow in force_arrows.values():
 			arrow.visible = false
@@ -403,7 +403,7 @@ func update_force_vectors():
 		g_arrow.look_at(ball.position + Vector3(0.4, 0, 0) + gravity.normalized(), Vector3.UP)
 		g_arrow.scale = Vector3.ONE * 0.5
 
-func update_trails():
+func update_trails() -> void:
 	if not show_trails:
 		for ball in balls:
 			ball.trail_node.visible = false
@@ -431,7 +431,7 @@ func update_trails():
 
 			ball.trail_mesh.surface_end()
 
-func update_info_labels():
+func update_info_labels() -> void:
 	for i in range(balls.size()):
 		var ball = balls[i]
 		var label = info_labels[i]
@@ -450,7 +450,7 @@ func update_info_labels():
 			2:
 				label.text = "Ball 3: Oscillating Force\nF=%.1f N | v=%.1f m/s\nKE: %.1f J" % [force, speed, ke]
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -464,7 +464,7 @@ func _input(event: InputEvent):
 			KEY_V:
 				show_velocity_vectors = !show_velocity_vectors
 
-func reset_simulation():
+func reset_simulation() -> void:
 	var initial_positions = [
 		Vector3(-3, 2, 0),
 		Vector3(0, 2, 0),
@@ -479,3 +479,9 @@ func reset_simulation():
 		balls[i].node.position = initial_positions[i]
 
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

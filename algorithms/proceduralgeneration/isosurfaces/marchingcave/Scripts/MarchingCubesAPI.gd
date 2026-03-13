@@ -186,3 +186,9 @@ static func _try_set_property(obj: Object, prop: String, value) -> void:
 		if typeof(p) == TYPE_DICTIONARY and p.has("name") and str(p["name"]) == prop:
 			obj.set(prop, value)
 			return
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

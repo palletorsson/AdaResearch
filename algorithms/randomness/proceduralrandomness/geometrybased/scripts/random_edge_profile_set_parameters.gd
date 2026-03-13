@@ -5,6 +5,6 @@ extends Node3D
 @onready var profile = $GrabPaper/RandomEdgeProfile  # Get child node
 @onready var info = $GrabPaper/id_info_Label3D # Get child node
 
-func _ready():
+func _ready() -> void:
 	if profile:
 		profile.set_height(profile_height)  # Call method to set height

@@ -41,12 +41,12 @@ var compartment_texts: Dictionary = {}
 var compartment_snap_points: Dictionary = {}
 var extra_snap_points: Array = []
 
-func _ready():
+func _ready() -> void:
 	create_shelf_with_csg()
 	# Offset the entire shelf
 	#position = Vector3(0, 0, -0.1)
 
-func create_shelf_with_csg():
+func create_shelf_with_csg() -> void:
 	# Create wood material
 	var wood_material = StandardMaterial3D.new()
 	wood_material.albedo_color = Color(0.8, 0.6, 0.4)  # Light wood color
@@ -85,7 +85,7 @@ func create_shelf_with_csg():
 	print("Total shelf size: ", SHELF_SIZE * 100, "cm")
 	print("Shelf depth: ", SHELF_DEPTH * 100, "cm")
 	print("Colliders enabled for shelf and individual compartments")
-func create_compartment_cutouts(parent_combiner: CSGCombiner3D):
+func create_compartment_cutouts(parent_combiner: CSGCombiner3D) -> void:
 	# Calculate starting position for compartments
 	var start_x = -SHELF_SIZE/2 + WALL_THICKNESS + COMPARTMENT_SIZE/2
 	var start_y = SHELF_SIZE/2 - WALL_THICKNESS - COMPARTMENT_SIZE/2
@@ -109,7 +109,7 @@ func create_compartment_cutouts(parent_combiner: CSGCombiner3D):
 			cutout.position = Vector3(x_pos, y_pos, z_pos)
 			parent_combiner.add_child(cutout)
 
-func create_compartment_colliders():
+func create_compartment_colliders() -> void:
 	# Create thin floor colliders for each compartment so items can rest inside the shelf.
 	for child in get_children():
 		if child.name.begins_with("compartment_collider_"):
@@ -143,7 +143,7 @@ func create_compartment_colliders():
 			
 			add_child(compartment_body)
 			compartment_floors[Vector2i(row, col)] = compartment_body
-func create_compartment_markers():
+func create_compartment_markers() -> void:
 	# Create invisible markers and snap points at the center of each compartment
 	for child in get_children():
 		if child.name.begins_with("compartment_marker_"):
@@ -358,7 +358,7 @@ func place_object_in_compartment(node: Node3D, row: int, col: int, vertical_offs
 	var scale = node.global_transform.basis.get_scale()
 	var basis := Basis.IDENTITY.scaled(scale)
 	node.global_transform = Transform3D(basis, target)
-func create_marker_toggle():
+func create_marker_toggle() -> void:
 	# Add a simple way to toggle marker visibility for debugging
 	var toggle_markers_func = func():
 		for child in get_children():
@@ -370,3 +370,9 @@ func create_marker_toggle():
 	
 	# Store the function reference for external access
 	set_meta("toggle_markers", toggle_markers_func)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

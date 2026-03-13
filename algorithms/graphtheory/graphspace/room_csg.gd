@@ -30,3 +30,9 @@ func carve_door_facing(dir: Vector3) -> void:
 	
 	shell.add_child(cut)
 	print("Carved door facing direction: ", d)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

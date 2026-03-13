@@ -54,7 +54,7 @@ var _launch_arrow: Node3D
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
-func _ready():
+func _ready() -> void:
 	_create_base()
 	_create_arm_mechanism()
 	_create_platform_with_detection()
@@ -64,7 +64,7 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 
-func _create_base():
+func _create_base() -> void:
 	# Heavy base block
 	_base_mesh = MeshInstance3D.new()
 	_base_mesh.name = "Base"
@@ -92,7 +92,7 @@ func _create_base():
 	housing.position = Vector3(0, 0.45, 0)
 	add_child(housing)
 
-func _create_arm_mechanism():
+func _create_arm_mechanism() -> void:
 	# Pivot point for the arm
 	_arm_pivot = Node3D.new()
 	_arm_pivot.name = "ArmPivot"
@@ -114,7 +114,7 @@ func _create_arm_mechanism():
 	_arm_mesh.position = Vector3(0, arm_length / 2.0, 0)
 	_arm_pivot.add_child(_arm_mesh)
 
-func _create_platform_with_detection():
+func _create_platform_with_detection() -> void:
 	# Platform at the end of the arm
 	_platform_mesh = MeshInstance3D.new()
 	_platform_mesh.name = "Platform"
@@ -149,7 +149,7 @@ func _create_platform_with_detection():
 	_detection_area.body_exited.connect(_on_body_exited)
 	_arm_pivot.add_child(_detection_area)
 
-func _create_charge_indicator():
+func _create_charge_indicator() -> void:
 	# Ring around platform that fills as it charges
 	_charge_ring = MeshInstance3D.new()
 	_charge_ring.name = "ChargeRing"
@@ -170,7 +170,7 @@ func _create_charge_indicator():
 	_charge_ring.position = Vector3(0, arm_length + platform_height + 0.01, 0)
 	_arm_pivot.add_child(_charge_ring)
 
-func _create_launch_arrow():
+func _create_launch_arrow() -> void:
 	_launch_arrow = Node3D.new()
 	_launch_arrow.name = "LaunchArrow"
 
@@ -210,7 +210,7 @@ func _create_launch_arrow():
 	_launch_arrow.position = Vector3(0, arm_length + 0.2, 0)
 	_arm_pivot.add_child(_launch_arrow)
 
-func _update_launch_arrow():
+func _update_launch_arrow() -> void:
 	var angle_rad := deg_to_rad(launch_angle_deg)
 	var dir := Vector3(0, sin(angle_rad), -cos(angle_rad)).normalized()
 	_launch_arrow.transform.basis = Basis.IDENTITY
@@ -219,13 +219,13 @@ func _update_launch_arrow():
 		_launch_arrow.look_at(_launch_arrow.position + dir, up)
 		_launch_arrow.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
 
-func _create_trajectory_preview():
+func _create_trajectory_preview() -> void:
 	_trajectory_mesh = MeshInstance3D.new()
 	_trajectory_mesh.name = "TrajectoryPreview"
 	add_child(_trajectory_mesh)
 	_update_trajectory()
 
-func _update_trajectory():
+func _update_trajectory() -> void:
 	# Show predicted parabolic arc
 	var angle_rad := deg_to_rad(launch_angle_deg)
 	var vx := launch_force * cos(angle_rad)
@@ -257,13 +257,13 @@ func _update_trajectory():
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_trajectory_mesh.material_override = mat
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	if _is_player(body) and _state == State.IDLE:
 		_player_on_platform = true
 		_state = State.CHARGING
 		_charge_progress = 0.0
 
-func _on_body_exited(body: Node3D):
+func _on_body_exited(body: Node3D) -> void:
 	if _is_player(body):
 		_player_on_platform = false
 		if _state == State.CHARGING:
@@ -274,7 +274,7 @@ func _is_player(body: Node3D) -> bool:
 	return body.is_in_group("player") or body.is_in_group("player_body") or \
 		   "player" in body.name.to_lower()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	match _state:
 		State.IDLE:
 			_update_charge_visual(0.0)
@@ -289,7 +289,7 @@ func _physics_process(delta: float):
 			if _launch_timer <= 0:
 				_state = State.IDLE
 
-func _launch():
+func _launch() -> void:
 	_state = State.LAUNCHING
 	_launch_timer = 1.0
 
@@ -319,7 +319,7 @@ func _launch():
 	# Also launch some visual test balls for the physics demo
 	_launch_demo_balls()
 
-func _launch_demo_balls():
+func _launch_demo_balls() -> void:
 	# Fire 3 colored balls along the trajectory so the physics is visible
 	for i in range(3):
 		var rb := RigidBody3D.new()
@@ -361,7 +361,7 @@ func _launch_demo_balls():
 		rb.add_child(timer)
 		timer.start()
 
-func _update_charge_visual(progress: float):
+func _update_charge_visual(progress: float) -> void:
 	progress = clampf(progress, 0, 1)
 	var ring_mat := _charge_ring.material_override as StandardMaterial3D
 	if ring_mat:
@@ -377,7 +377,7 @@ func _update_charge_visual(progress: float):
 		plat_mat.emission = color * (0.3 + progress * 0.7)
 		plat_mat.emission_energy_multiplier = 0.5 + progress * 2.5
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -389,7 +389,7 @@ func _create_labels():
 	_info_label.text = "SLINGSHOT LAUNCHER\nStep on the platform!"
 	add_child(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0.7, 0.8, 0)
@@ -458,7 +458,7 @@ func _create_vr_controls():
 			_update_launch_arrow()
 	)
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
@@ -466,7 +466,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -476,6 +476,12 @@ func _input(event: InputEvent):
 			KEY_UP: launch_force = minf(launch_force + 2.0, 40.0); _update_trajectory()
 			KEY_DOWN: launch_force = maxf(launch_force - 2.0, 5.0); _update_trajectory()
 
-func reset():
+func reset() -> void:
 	_state = State.IDLE
 	_charge_progress = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

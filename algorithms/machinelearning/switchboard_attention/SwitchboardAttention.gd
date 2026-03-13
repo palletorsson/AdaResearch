@@ -9,7 +9,7 @@ var output_nodes: Array[Node3D] = []
 
 var query_index: int = 0
 
-func _ready():
+func _ready() -> void:
 	# Create input and output nodes
 	for i in range(5):
 		var input_node = MeshInstance3D.new()
@@ -26,7 +26,7 @@ func _ready():
 	
 	_update_connection()
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
 		query_index = (query_index + 1) % input_nodes.size()
 		_update_connection()
@@ -34,7 +34,7 @@ func _input(event: InputEvent):
 		query_index = (query_index - 1 + input_nodes.size()) % input_nodes.size()
 		_update_connection()
 
-func _update_connection():
+func _update_connection() -> void:
 	# Clear existing connections
 	for child in connections_parent.get_children():
 		child.queue_free()
@@ -64,3 +64,9 @@ func _update_connection():
 	cable.look_at(from, Vector3.UP)
 	
 	connections_parent.add_child(cable)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

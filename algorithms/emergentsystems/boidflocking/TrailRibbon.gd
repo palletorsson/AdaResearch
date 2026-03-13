@@ -6,7 +6,7 @@
 
 var history = []
 
-func _ready():
+func _ready() -> void:
 	mesh = ImmediateMesh.new()
 	
 	var mat = StandardMaterial3D.new()
@@ -34,7 +34,7 @@ func _process(_delta):
 	
 	_draw_ribbon()
 
-func _draw_ribbon():
+func _draw_ribbon() -> void:
 	mesh.clear_surfaces()
 	if history.size() < 2: return
 	

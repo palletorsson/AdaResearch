@@ -3,7 +3,7 @@
 var yaw_hinge: HingeJoint3D
 var pitch_hinge: HingeJoint3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var pedestal := create_static_box("Pedestal", Vector3(1.0, 1.5, 1.0), Vector3(0.0, 0.75, 0.0), Color(0.3, 0.3, 0.35))
 
 	var yaw_frame := create_box("YawFrame", Vector3(0.4, 2.5, 2.5), Vector3(0.0, 2.8, 0.0), 5.0, Color(0.6, 0.6, 0.7))
@@ -71,3 +71,9 @@ func _physics_process(_delta):
 		pitch_velocity = 1.2
 	elif Input.is_action_pressed("ui_down"):
 		pitch_velocity = -1.2
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -15,11 +15,11 @@ var wall_thickness: float = 0.1
 var inner_rooms = []
 var portals = []
 
-func _ready():
+func _ready() -> void:
 	# Create the main room
 	_create_room(0, Vector3.ONE, Vector3.ZERO)
 
-func _create_room(depth: int, scale_vec: Vector3, position_offset: Vector3):
+func _create_room(depth: int, scale_vec: Vector3, position_offset: Vector3) -> void:
 	var room_node = Node3D.new()
 	room_node.name = "Room_Depth_" + str(depth)
 	room_node.scale = scale_vec
@@ -44,7 +44,7 @@ func _create_room(depth: int, scale_vec: Vector3, position_offset: Vector3):
 		_create_recursive_portal(room_node, depth, Vector3(-room_size.x/2, 0, 0), Vector3(-1, 0, 0), next_scale) # West
 		_create_recursive_portal(room_node, depth, Vector3(room_size.x/2, 0, 0), Vector3(1, 0, 0), next_scale)   # East
 
-func _create_room_geometry(room_node: Node3D, depth: int):
+func _create_room_geometry(room_node: Node3D, depth: int) -> void:
 	# Create the room walls
 	var walls = CSGBox3D.new()
 	walls.name = "Walls"
@@ -106,7 +106,7 @@ func _create_room_geometry(room_node: Node3D, depth: int):
 	label.position = Vector3(0, room_size.y/2 - 0.5, 0)
 	room_node.add_child(label)
 
-func _create_wall_collision(parent: Node, name: String, position: Vector3, size: Vector3):
+func _create_wall_collision(parent: Node, name: String, position: Vector3, size: Vector3) -> void:
 	var collision = CollisionShape3D.new()
 	collision.name = name
 	collision.transform.origin = position
@@ -117,7 +117,7 @@ func _create_wall_collision(parent: Node, name: String, position: Vector3, size:
 	
 	parent.add_child(collision)
 
-func _create_recursive_portal(parent: Node3D, current_depth: int, position: Vector3, normal: Vector3, next_scale: Vector3):
+func _create_recursive_portal(parent: Node3D, current_depth: int, position: Vector3, normal: Vector3, next_scale: Vector3) -> void:
 	# Create a portal in the wall
 	var portal_cutout = CSGBox3D.new()
 	portal_cutout.name = "PortalCutout_" + str(current_depth) + "_" + str(position)
@@ -198,14 +198,14 @@ func _create_recursive_portal(parent: Node3D, current_depth: int, position: Vect
 	var next_position = position + normal * (room_size.z * scale_factor * 2)
 	_create_room(current_depth + 1, next_scale, next_position)
 
-func _on_portal_entered(body: Node3D, depth: int, normal: Vector3, next_scale: Vector3):
+func _on_portal_entered(body: Node3D, depth: int, normal: Vector3, next_scale: Vector3) -> void:
 	if body is XROrigin3D:
 		print("Player entered portal at depth: " + str(depth))
 		
 		# Create the teleport effect
 		_teleport_player(body, depth, normal, next_scale)
 
-func _teleport_player(player: XROrigin3D, depth: int, normal: Vector3, next_scale: Vector3):
+func _teleport_player(player: XROrigin3D, depth: int, normal: Vector3, next_scale: Vector3) -> void:
 	# Calculate the destination position
 	var destination = normal * (room_size.z * scale_factor * 1.5)
 	
@@ -222,6 +222,12 @@ func _teleport_player(player: XROrigin3D, depth: int, normal: Vector3, next_scal
 		player.apply_impulse(normal * 2.0)
 
 # This method can be called to reset the player to the original room
-func reset_player(player: XROrigin3D):
+func reset_player(player: XROrigin3D) -> void:
 	player.scale = Vector3.ONE
 	player.global_position = global_position + Vector3(0, 1, 0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

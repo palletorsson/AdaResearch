@@ -45,7 +45,7 @@ var _grid_normals: PackedVector3Array
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
-func _ready():
+func _ready() -> void:
 	_create_sheet()
 	_create_mass_marker()
 	_create_particles()
@@ -53,12 +53,12 @@ func _ready():
 	_create_vr_controls()
 	_update_sheet()
 
-func _create_sheet():
+func _create_sheet() -> void:
 	_sheet_mesh = MeshInstance3D.new()
 	_sheet_mesh.name = "GravitySheet"
 	add_child(_sheet_mesh)
 
-func _create_mass_marker():
+func _create_mass_marker() -> void:
 	_mass_marker = MeshInstance3D.new()
 	_mass_marker.name = "MassMarker"
 	var sphere := SphereMesh.new()
@@ -74,7 +74,7 @@ func _create_mass_marker():
 	_mass_marker.material_override = mat
 	add_child(_mass_marker)
 
-func _create_particles():
+func _create_particles() -> void:
 	for i in range(particle_count):
 		var mesh := MeshInstance3D.new()
 		mesh.name = "Particle_%d" % i
@@ -107,7 +107,7 @@ func _create_particles():
 			"mesh": mesh,
 		})
 
-func _update_sheet():
+func _update_sheet() -> void:
 	# Build a grid mesh that deforms around the mass position
 	var surface_tool := SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -195,7 +195,7 @@ func _compute_gradient(x: float, z: float) -> Vector3:
 	# Gradient points downhill on the surface
 	return Vector3(dy_dx, 0, dy_dz)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var half := grid_size / 2.0
 	var damping := 0.995
 
@@ -220,11 +220,11 @@ func _physics_process(delta: float):
 		var y := _compute_well_depth(p["pos"].x, p["pos"].z)
 		p["mesh"].position = Vector3(p["pos"].x, y + 0.015, p["pos"].z)
 
-func _move_mass(new_pos: Vector3):
+func _move_mass(new_pos: Vector3) -> void:
 	_mass_pos = Vector3(clampf(new_pos.x, -grid_size * 0.3, grid_size * 0.3), 0, clampf(new_pos.z, -grid_size * 0.3, grid_size * 0.3))
 	_update_sheet()
 
-func _scatter_particles():
+func _scatter_particles() -> void:
 	for p in _particles:
 		var angle := randf() * TAU
 		var r := grid_size * randf_range(0.2, 0.4)
@@ -232,7 +232,7 @@ func _scatter_particles():
 		var tangent := Vector3(-sin(angle), 0, cos(angle))
 		p["vel"] = tangent * randf_range(0.1, 0.3)
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -242,7 +242,7 @@ func _create_labels():
 	_info_label.text = "GRAVITY WELL\nMass warps space — balls follow the curve"
 	add_child(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.1, grid_size / 2.0 + 0.2)
@@ -298,7 +298,7 @@ func _create_vr_controls():
 			mass_strength = 0.1 + strength_slider.get_normalized_value() * 2.9
 	)
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.0008
@@ -306,7 +306,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE: _scatter_particles()
@@ -314,6 +314,12 @@ func _input(event: InputEvent):
 			KEY_UP: mass_strength = minf(mass_strength + 0.2, 3.0)
 			KEY_DOWN: mass_strength = maxf(mass_strength - 0.2, 0.1)
 
-func reset():
+func reset() -> void:
 	_move_mass(Vector3.ZERO)
 	_scatter_particles()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

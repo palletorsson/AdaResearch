@@ -20,14 +20,14 @@ class_name GravitationalSimulation
 var bodies = []
 var viewport_size = Vector2.ZERO
 
-func _ready():
+func _ready() -> void:
 	randomize()  # Initialize random number generator
 	viewport_size = get_viewport_rect().size
 	
 	# Create initial bodies
 	create_bodies(num_bodies)
 
-func create_bodies(count):
+func create_bodies(count) -> void:
 	# Remove any existing bodies
 	for body in bodies:
 		body.queue_free()
@@ -61,7 +61,7 @@ func _process(_delta):
 		body.update()
 
 # Handle input for interaction
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			# Reset simulation with new random bodies
@@ -81,12 +81,12 @@ class Body extends Node2D:
 	var mass = 8.0
 	var radius = 0.0
 	
-	func _init(x, y, m):
+	func _init(x, y, m) -> void:
 		position = Vector2(x, y)  # Using Node2D's built-in position property
 		mass = m
 		radius = sqrt(mass) * 2
 	
-	func attract(body, G):
+	func attract(body, G) -> void:
 		# Calculate gravitational force
 		var force = position - body.position
 		var distance = force.length()
@@ -100,19 +100,19 @@ class Body extends Node2D:
 		# Apply force to the other body
 		body.apply_force(force)
 	
-	func apply_force(force):
+	func apply_force(force) -> void:
 		# F = ma, so a = F/m
 		var f = force / mass
 		acceleration += f
 	
-	func update():
+	func update() -> void:
 		# Update velocity, position, and reset acceleration
 		velocity += acceleration
 		position += velocity  # Using Node2D's built-in position property
 		acceleration = Vector2.ZERO
 		queue_redraw()  # Request redraw to update the visual
 	
-	func _draw():
+	func _draw() -> void:
 		# Draw the body as a circle
 		draw_circle(Vector2.ZERO, radius * 2, Color(0.5, 0.5, 0.5, 0.4))
 		draw_arc(Vector2.ZERO, radius * 2, 0, TAU, 32, Color(0, 0, 0), 2.0)

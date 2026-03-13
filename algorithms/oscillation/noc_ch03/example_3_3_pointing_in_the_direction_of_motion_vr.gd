@@ -144,3 +144,9 @@ class DirectionalMover:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

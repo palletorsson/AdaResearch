@@ -47,13 +47,13 @@ var is_recording: bool = false
 var rainbow_colors: Array[Color] = []
 var time_markers: Array[float] = []
 
-func _ready():
+func _ready() -> void:
 	setup_audio_system()
 	setup_visualization()
 	setup_ui()
 	generate_rainbow_palette()
 	
-func setup_audio_system():
+func setup_audio_system() -> void:
 	# Create audio stream player
 	audio_stream_player = AudioStreamPlayer.new()
 	add_child(audio_stream_player)
@@ -73,7 +73,7 @@ func setup_audio_system():
 	
 	print("Audio system initialized - Bus index: ", audio_bus_index)
 
-func setup_visualization():
+func setup_visualization() -> void:
 	# Set up the timeline rectangle
 	timeline_rect = Rect2(50, 50, timeline_width, timeline_height)
 	
@@ -84,19 +84,19 @@ func setup_visualization():
 	for i in range(frequency_bands):
 		timeline_data.append(PackedFloat32Array())
 
-func setup_ui():
+func setup_ui() -> void:
 	# Enable drawing
 	set_process(true)
 	queue_redraw()
 
-func generate_rainbow_palette():
+func generate_rainbow_palette() -> void:
 	rainbow_colors.clear()
 	for i in range(frequency_bands):
 		var hue = float(i) / frequency_bands
 		var color = Color.from_hsv(hue, 0.8, 1.0)
 		rainbow_colors.append(color)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_recording:
 		capture_audio_data()
 	
@@ -106,7 +106,7 @@ func _process(delta):
 	update_visualization(delta)
 	queue_redraw()
 
-func capture_audio_data():
+func capture_audio_data() -> void:
 	if not audio_effect_capture:
 		return
 		
@@ -127,7 +127,7 @@ func capture_audio_data():
 		# Perform FFT analysis
 		perform_fft_analysis()
 
-func perform_fft_analysis():
+func perform_fft_analysis() -> void:
 	if audio_buffer.size() < fft_size:
 		return
 	
@@ -160,7 +160,7 @@ func perform_fft_analysis():
 		if timeline_data[band].size() > max_timeline_length:
 			timeline_data[band] = timeline_data[band].slice(1)
 
-func update_playback_position(delta):
+func update_playback_position(delta) -> void:
 	playback_position += delta
 	
 	if auto_scroll:
@@ -169,7 +169,7 @@ func update_playback_position(delta):
 		if timeline_duration > 0:
 			scroll_position = playback_position / timeline_duration
 
-func update_visualization(_delta):
+func update_visualization(_delta) -> void:
 	# Update playhead position
 	var timeline_duration = get_timeline_duration()
 	if timeline_duration > 0:
@@ -180,7 +180,7 @@ func get_timeline_duration() -> float:
 		return 1.0
 	return timeline_data[0].size() / 60.0  # Assuming ~60 FPS capture rate
 
-func _draw():
+func _draw() -> void:
 	draw_background()
 	draw_grid()
 	draw_waveform()
@@ -189,14 +189,14 @@ func _draw():
 	draw_playhead()
 	draw_ui_elements()
 
-func draw_background():
+func draw_background() -> void:
 	# Draw main background
 	draw_rect(timeline_rect, background_color)
 	
 	# Draw border
 	draw_rect(timeline_rect, Color.WHITE, false, 2.0)
 
-func draw_grid():
+func draw_grid() -> void:
 	var grid_spacing_x = timeline_width / 10
 	var grid_spacing_y = timeline_height / 8
 	
@@ -220,7 +220,7 @@ func draw_grid():
 			1.0
 		)
 
-func draw_waveform():
+func draw_waveform() -> void:
 	if audio_buffer.is_empty():
 		return
 	
@@ -241,7 +241,7 @@ func draw_waveform():
 		for i in range(points.size() - 1):
 			draw_line(points[i], points[i + 1], waveform_color, 2.0)
 
-func draw_frequency_spectrum():
+func draw_frequency_spectrum() -> void:
 	if timeline_data.is_empty():
 		return
 	
@@ -285,7 +285,7 @@ func get_max_timeline_length() -> int:
 		max_length = max(max_length, band_data.size())
 	return max_length
 
-func draw_timeline_markers():
+func draw_timeline_markers() -> void:
 	var timeline_duration = get_timeline_duration()
 	var marker_interval = 1.0  # 1 second intervals
 	
@@ -318,7 +318,7 @@ func draw_timeline_markers():
 				Color.YELLOW
 			)
 
-func draw_playhead():
+func draw_playhead() -> void:
 	if is_playing:
 		var x = timeline_rect.position.x + playhead_position
 		
@@ -338,7 +338,7 @@ func draw_playhead():
 		])
 		draw_colored_polygon(triangle_points, playhead_color)
 
-func draw_ui_elements():
+func draw_ui_elements() -> void:
 	var font = ThemeDB.fallback_font
 	var font_size = 14
 	
@@ -374,25 +374,25 @@ func draw_ui_elements():
 		)
 
 # Control functions
-func start_recording():
+func start_recording() -> void:
 	is_recording = true
 	is_playing = true
 	playback_position = 0.0
 	print("Started recording audio timeline")
 
-func stop_recording():
+func stop_recording() -> void:
 	is_recording = false
 	print("Stopped recording audio timeline")
 
-func start_playback():
+func start_playback() -> void:
 	is_playing = true
 	print("Started timeline playback")
 
-func stop_playback():
+func stop_playback() -> void:
 	is_playing = false
 	print("Stopped timeline playback")
 
-func clear_timeline():
+func clear_timeline() -> void:
 	audio_buffer.clear()
 	for band_data in timeline_data:
 		band_data.clear()
@@ -400,16 +400,16 @@ func clear_timeline():
 	scroll_position = 0.0
 	print("Cleared timeline data")
 
-func set_zoom(new_zoom: float):
+func set_zoom(new_zoom: float) -> void:
 	zoom_level = clamp(new_zoom, 0.1, 10.0)
 	queue_redraw()
 
-func set_scroll(new_scroll: float):
+func set_scroll(new_scroll: float) -> void:
 	scroll_position = clamp(new_scroll, 0.0, 1.0)
 	queue_redraw()
 
 # Audio file loading
-func load_audio_file(file_path: String):
+func load_audio_file(file_path: String) -> void:
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if not file:
 		print("Failed to open audio file: ", file_path)
@@ -430,7 +430,7 @@ func export_timeline_data() -> Dictionary:
 	}
 	return export_data
 
-func import_timeline_data(data: Dictionary):
+func import_timeline_data(data: Dictionary) -> void:
 	if data.has("audio_buffer"):
 		audio_buffer = data["audio_buffer"]
 	if data.has("timeline_data"):
@@ -438,7 +438,7 @@ func import_timeline_data(data: Dictionary):
 	queue_redraw()
 
 # Input handling
-func _gui_input(event):
+func _gui_input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and timeline_rect.has_point(event.position):
 			# Click to set playback position
@@ -458,7 +458,7 @@ func _gui_input(event):
 			queue_redraw()
 
 # Keyboard shortcuts
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
@@ -476,3 +476,9 @@ func _unhandled_input(event):
 			KEY_ESCAPE:
 				stop_playback()
 				stop_recording()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

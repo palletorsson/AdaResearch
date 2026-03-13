@@ -22,19 +22,19 @@ var soundscape: Node3D
 var base_tile_color := Color(0.15, 0.35, 0.65, 1.0)  # Darker blue base
 var peak_tile_color := Color(1.0, 0.9, 0.3, 1.0)  # Brighter yellow peak
 
-func _ready():
+func _ready() -> void:
 	create_wave_surface()
 	create_wave_rings() # Enable rings for the soundscape
 	setup_materials()
 	setup_soundscape()
 
-func setup_soundscape():
+func setup_soundscape() -> void:
 	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
 	soundscape = WaveSoundscape.new()
 	add_child(soundscape)
 	print("WavePropagation: Soundscape component initialized.")
 
-func create_wave_surface():
+func create_wave_surface() -> void:
 	var surface_parent = $WaveSurface
 	var instance = MultiMeshInstance3D.new()
 	tile_multimesh_instance = instance
@@ -65,7 +65,7 @@ func create_wave_surface():
 			tile_multimesh.set_instance_color(index, base_tile_color)
 			index += 1
 
-func create_wave_rings():
+func create_wave_rings() -> void:
 	var rings_parent = $WaveRings
 	wave_rings.clear()
 	var ring_count = 4
@@ -77,7 +77,7 @@ func create_wave_rings():
 		rings_parent.add_child(ring)
 		wave_rings.append(ring)
 
-func setup_materials():
+func setup_materials() -> void:
 	var tile_material = StandardMaterial3D.new()
 	tile_material.vertex_color_use_as_albedo = true
 	tile_material.metallic = 0.0
@@ -112,7 +112,7 @@ func setup_materials():
 	amp_material.emission = Color(0.2, 0.32, 0.08)
 	$AmplitudeControl.material_override = amp_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animate_3d_wave_propagation()
 	animate_wave_rings()
@@ -121,7 +121,7 @@ func _process(delta):
 	if soundscape:
 		soundscape.update_parameters(frequency, amplitude, time, wave_rings)
 
-func animate_3d_wave_propagation():
+func animate_3d_wave_propagation() -> void:
 	if tile_multimesh == null:
 		return
 	var instance_index = 0
@@ -144,7 +144,7 @@ func animate_3d_wave_propagation():
 		
 		instance_index += 1
 
-func animate_wave_rings():
+func animate_wave_rings() -> void:
 	if wave_rings.is_empty():
 		return
 	var travel_rate = max(wave_speed * 1.8, 0.01)
@@ -164,7 +164,7 @@ func animate_wave_rings():
 			ring_material.albedo_color.a = fade * 0.35
 			ring_material.emission = Color(0.22 * fade, 0.22 * fade, 0.45 * fade, 1.0)
 
-func animate_controls():
+func animate_controls() -> void:
 	var freq_height = frequency * 0.8
 	var freq_size = $FrequencyControl.size
 	freq_size.y = max(0.2, freq_height)
@@ -180,7 +180,7 @@ func animate_controls():
 	wave_speed = 0.5 + sin(time * 0.09) * 0.18
 	$WaveSource.radius = 0.28 + sin(time * frequency * 2.4) * 0.05
 
-func _create_tile_collision_bodies(surface_parent: Node3D):
+func _create_tile_collision_bodies(surface_parent: Node3D) -> void:
 	"""Create collision bodies for each tile"""
 	tile_collision_bodies.clear()
 	
@@ -208,3 +208,9 @@ func _create_tile_collision_bodies(surface_parent: Node3D):
 			
 			# Store reference for animation
 			tile_collision_bodies.append(collision_body)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

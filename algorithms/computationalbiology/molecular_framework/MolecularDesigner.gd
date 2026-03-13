@@ -481,3 +481,9 @@ func is_assembled() -> bool:
 func get_current_assembly_name() -> String:
 	"""Get the name of the current assembly"""
 	return current_assembly if assembled else ""
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

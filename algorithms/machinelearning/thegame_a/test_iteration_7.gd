@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 7: Collision Test ---")
 	# This test is hard to run headless because it requires PhysicsServer3D to be active and populated.
 	# EditorScript might not have a fully active physics world.

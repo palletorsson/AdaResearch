@@ -23,11 +23,11 @@ var step: int = 0
 var seed_val: int = 12345
 
 # --- Setup ---
-func _ready():
+func _ready() -> void:
 	_setup_reverb()
 	_setup_instruments()
 	
-func _setup_reverb():
+func _setup_reverb() -> void:
 	var bus_name = "SpaceReverb"
 	var idx = AudioServer.get_bus_index(bus_name)
 	if idx == -1:
@@ -46,7 +46,7 @@ func _setup_reverb():
 		AudioServer.add_bus_effect(idx, reverb)
 
 	
-func _setup_instruments():
+func _setup_instruments() -> void:
 	# 1. Saxophone (Custom DSP)
 	sax = SaxSynth.new()
 	sax.name = "SaxSynth"
@@ -92,7 +92,7 @@ func _setup_instruments():
 
 # --- Track Control ---
 
-func play_track(bgm_index: int):
+func play_track(bgm_index: int) -> void:
 	stop_all()
 	current_track_idx = bgm_index
 	time = 0.0
@@ -114,7 +114,7 @@ func play_track(bgm_index: int):
 		10: _setup_track_10_singularity()
 		# Add others...
 
-func stop_all():
+func stop_all() -> void:
 	sequencer_active = false
 	if sax: sax.stop_note()
 	if pad_player_l: pad_player_l.stop()
@@ -122,7 +122,7 @@ func stop_all():
 	if noise_player: noise_player.stop()
 	if wave_synth: wave_synth.stop_note()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not sequencer_active: return
 	time += delta
 	
@@ -140,7 +140,7 @@ func _process(delta):
 
 # --- TRACK 1: Post-Singularity Drift ---
 # Concept: Deep SubBass Drone + Random Sparse Piano + Wind
-func _setup_track_1_drift():
+func _setup_track_1_drift() -> void:
 	# 1. Start Drone (Infinite SubBass)
 	var drone_params = {"freq": 55.0, "duration": 600.0} # 10 mins
 	var stream = EpicSynthEngine.generate_patch("sub_bass", drone_params)
@@ -151,7 +151,7 @@ func _setup_track_1_drift():
 	wind_gen.grain_density = 60.0 # Heavy storm
 	wind_gen.grain_pitch_base = 1.5 # Higher pitch whistling
 
-func _seq_track_1_drift(_delta):
+func _seq_track_1_drift(_delta) -> void:
 	# Sparse Piano Logic (Markov Chain Lite)
 	# Play a note every 5-10 seconds
 	if randf() < 0.005: # approx once per 3-4 sec at 60fps
@@ -166,11 +166,11 @@ func _seq_track_1_drift(_delta):
 
 # --- TRACK 2: Interdimensional ---
 # Concept: Evolving Wavetable Pad + Cold Digital Arp
-func _setup_track_2_interdimensional():
+func _setup_track_2_interdimensional() -> void:
 	# Start evolving drone
 	wave_synth.play_note(55.0, 0.4, 0.0) # A1 drone
 
-func _seq_track_2_interdimensional(_delta):
+func _seq_track_2_interdimensional(_delta) -> void:
 	# Automation: Slowly sweep wavetable position
 	# 0 = Sine, 1 = Tri, 2 = Saw, 3 = Square, 4 = Pulse
 	var sweep = (sin(time * 0.1) + 1.0) * 2.0 # 0 to 4 slow sweep
@@ -188,7 +188,7 @@ func _seq_track_2_interdimensional(_delta):
 	
 # --- TRACK 3: The Automated Foundry ---
 # Concept: Industrial Clanking Loops + Dissonant Drone
-func _setup_track_3_foundry():
+func _setup_track_3_foundry() -> void:
 	# 1. Low Dissonant Drone
 	var drone_params = {"freq": 40.0, "duration": 600.0}
 	var stream = EpicSynthEngine.generate_patch("sub_bass", drone_params)
@@ -202,7 +202,7 @@ func _setup_track_3_foundry():
 	# We'll use the 'noise_player' to trigger hits or re-purpose a player.
 	pass
 
-func _seq_track_3_foundry(_delta):
+func _seq_track_3_foundry(_delta) -> void:
 	# Industrial Rhythm (Slow, heavy)
 	# BPM ~ 60
 	var t_int = int(time * 1000)
@@ -232,7 +232,7 @@ func _seq_track_3_foundry(_delta):
 
 # --- TRACK 4: Augmented Noir ---
 # Concept: Saxophone Solo (SaxSynth) + Warm Pad (EpicSynth CS80)
-func _setup_track_4_noir():
+func _setup_track_4_noir() -> void:
 	# 1. Warm Pad Background
 	var pad_params = {"freq": 110.0, "duration": 600.0}
 	var stream = EpicSynthEngine.generate_patch("cs80_pad_1", pad_params)
@@ -240,7 +240,7 @@ func _setup_track_4_noir():
 	pad_player_l.volume_db = -6.0
 	pad_player_l.play()
 
-func _seq_track_4_noir(_delta):
+func _seq_track_4_noir(_delta) -> void:
 	# Saxophone "Human" Player Logic
 	# Phrases: Play for 2-4 sec, Rest for 3-6 sec
 	
@@ -271,7 +271,7 @@ func _seq_track_4_noir(_delta):
 
 # --- TRACK 5: Stellar Shadowing ---
 # Concept: Analog Pad + Sacred Choir + Cold Wavetable
-func _setup_track_5_stellar():
+func _setup_track_5_stellar() -> void:
 	# 1. Deep Analog Pad (Root)
 	var pad_params = {"freq": 146.83, "duration": 600.0} # D3
 	var stream = EpicSynthEngine.generate_patch("cs80_pad_1", pad_params)
@@ -295,7 +295,7 @@ func _setup_track_5_stellar():
 	
 	wave_synth.play_note(293.66, 0.3, 3.0) # D4, Square wave start
 
-func _seq_track_5_stellar(_delta):
+func _seq_track_5_stellar(_delta) -> void:
 	# Very slow morph
 	var morph = (sin(time * 0.05) + 1.0) * 2.0 # 0 to 4
 	wave_synth.set_shape_pos(morph)
@@ -304,7 +304,7 @@ func _seq_track_5_stellar(_delta):
 
 # --- TRACK 6: Neon Rain ---
 # Concept: Jazz Noir, Sax Solo, Rain Ambience
-func _setup_track_6_neon():
+func _setup_track_6_neon() -> void:
 	# 1. Rain/Traffic Ambience (Using Wind Gen as Rain)
 	wind_gen.grain_density = 80.0 # Dense drops
 	wind_gen.grain_pitch_base = 4.0 # High pitch hiss
@@ -316,7 +316,7 @@ func _setup_track_6_neon():
 	pad_player_l.volume_db = -6.0
 	pad_player_l.play()
 
-func _seq_track_6_neon(_delta):
+func _seq_track_6_neon(_delta) -> void:
 	# Generative Jazz Quintet Logic
 	var t_int = int(time * 1000)
 	
@@ -349,7 +349,7 @@ func _seq_track_6_neon(_delta):
 
 # --- TRACK 7: The Elegiac Skyline ---
 # Concept: Pedal Steel Guitar Swells + Post-Rock Piano
-func _setup_track_7_skyline():
+func _setup_track_7_skyline() -> void:
 	# 1. Pedal Steel Chord Drone (Root)
 	var ps_params = {"freq": 220.0, "duration": 600.0} # A3
 	var stream = EpicSynthEngine.generate_patch("pedal_steel", ps_params)
@@ -364,7 +364,7 @@ func _setup_track_7_skyline():
 	pad_player_r.volume_db = -6.0
 	pad_player_r.play()
 
-func _seq_track_7_skyline(_delta):
+func _seq_track_7_skyline(_delta) -> void:
 	# Mournful Piano (High reverb)
 	if randf() < 0.005:
 		if piano:
@@ -377,7 +377,7 @@ func _seq_track_7_skyline(_delta):
 
 # --- TRACK 8: Martian Market Pulse ---
 # Concept: Analog Step Sequence + Industrial Clank
-func _setup_track_8_market():
+func _setup_track_8_market() -> void:
 	# 1. Background Hiss/Wind (Market atmosphere)
 	wind_gen.grain_density = 40.0
 	wind_gen.grain_pitch_base = 0.5 # Low rumble
@@ -385,7 +385,7 @@ func _setup_track_8_market():
 	# 2. Simple Beat (Using Metallic Hits on off-beats for industrial feel)
 	# Done in sequencer
 
-func _seq_track_8_market(_delta):
+func _seq_track_8_market(_delta) -> void:
 	# 120 BPM = 500ms per beat. 16th note = 125ms
 	var t_int = int(time * 1000)
 	var beat_16 = (t_int / 125) % 16
@@ -423,7 +423,7 @@ func _seq_track_8_market(_delta):
 
 # --- TRACK 9: Celestial Symphony ---
 # Concept: Solina String Machine Chords + High Lead
-func _setup_track_9_celestial():
+func _setup_track_9_celestial() -> void:
 	# 1. String Machine Chords (Root + 5th)
 	var chord_root = 196.0 # G3
 	var str_params_1 = {"freq": chord_root, "duration": 600.0}
@@ -438,7 +438,7 @@ func _setup_track_9_celestial():
 	pad_player_r.volume_db = -5.0
 	pad_player_r.play()
 
-func _seq_track_9_celestial(_delta):
+func _seq_track_9_celestial(_delta) -> void:
 	# Lead melody using FMPiano (Bell-like)
 	if randf() < 0.01:
 		if piano:
@@ -449,7 +449,7 @@ func _seq_track_9_celestial(_delta):
 
 # --- TRACK 10: The Singularity Event ---
 # Concept: Final Merge - All Drones + Glitch
-func _setup_track_10_singularity():
+func _setup_track_10_singularity() -> void:
 	# 1. Sub Bass Foundation
 	var bass_params = {"freq": 40.0, "duration": 600.0}
 	var stream1 = EpicSynthEngine.generate_patch("sub_bass", bass_params)
@@ -473,7 +473,7 @@ func _setup_track_10_singularity():
 	
 	wave_synth.play_note(110.0, 0.2, 0.0)
 
-func _seq_track_10_singularity(_delta):
+func _seq_track_10_singularity(_delta) -> void:
 	# Chaos Engine
 	# Randomly morph wavetable fast
 	var warp = (sin(time * 10.0) + 1.0) * 2.0
@@ -484,3 +484,9 @@ func _seq_track_10_singularity(_delta):
 		if piano:
 			var freq = 2000.0 + randf() * 2000.0
 			piano.play_note(freq, 0.2, 0.1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

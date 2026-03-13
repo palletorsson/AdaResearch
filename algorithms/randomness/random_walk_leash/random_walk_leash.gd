@@ -459,3 +459,9 @@ func _reset() -> void:
 	_trail_points.clear()
 	_is_held = false
 	_stats_label.text = "Tugs: 0\n\nGrab the orb!"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

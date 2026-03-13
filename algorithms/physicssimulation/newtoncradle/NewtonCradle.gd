@@ -38,7 +38,7 @@ var _control_panel: Node3D
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
-func _ready():
+func _ready() -> void:
 	_pivot_y = string_length + ball_radius + 0.1
 	_create_frame()
 	_create_balls()
@@ -46,7 +46,7 @@ func _ready():
 	_create_vr_controls()
 	_release_left(1)  # Start with 1 ball pulled back
 
-func _create_frame():
+func _create_frame() -> void:
 	# Top bar
 	var bar := MeshInstance3D.new()
 	bar.name = "TopBar"
@@ -89,7 +89,7 @@ func _create_frame():
 	base.position = Vector3(0, -0.01, 0)
 	add_child(base)
 
-func _create_balls():
+func _create_balls() -> void:
 	var spacing := ball_radius * 2.0
 	var start_x := -(ball_count - 1) * spacing / 2.0
 
@@ -137,7 +137,7 @@ func _create_balls():
 
 	_update_ball_positions()
 
-func _update_ball_positions():
+func _update_ball_positions() -> void:
 	var spacing := ball_radius * 2.0
 	var start_x := -(ball_count - 1) * spacing / 2.0
 
@@ -164,7 +164,7 @@ func _update_ball_positions():
 			_strings[i].look_at(_strings[i].global_position + dir, up)
 			_strings[i].rotate_object_local(Vector3.RIGHT, PI / 2.0)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	# Pendulum physics for each ball
 	for i in range(ball_count):
 		# Angular acceleration from gravity: alpha = -(g/L) * sin(theta)
@@ -189,29 +189,29 @@ func _physics_process(delta: float):
 	_update_ball_positions()
 	_update_info()
 
-func _release_left(count: int = 1):
+func _release_left(count: int = 1) -> void:
 	_reset_all()
 	count = clampi(count, 1, ball_count - 1)
 	for i in range(count):
 		_angles[i] = -0.8  # Pull left ball(s) back ~45 degrees
 
-func _release_right(count: int = 1):
+func _release_right(count: int = 1) -> void:
 	_reset_all()
 	count = clampi(count, 1, ball_count - 1)
 	for i in range(ball_count - count, ball_count):
 		_angles[i] = 0.8
 
-func _release_both():
+func _release_both() -> void:
 	_reset_all()
 	_angles[0] = -0.8
 	_angles[ball_count - 1] = 0.8
 
-func _reset_all():
+func _reset_all() -> void:
 	for i in range(ball_count):
 		_angles[i] = 0.0
 		_angular_velocities[i] = 0.0
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -221,7 +221,7 @@ func _create_labels():
 	_info_label.text = "NEWTON'S CRADLE"
 	add_child(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.05, 0.35)
@@ -261,7 +261,7 @@ func _create_vr_controls():
 					3: _reset_all()
 			)
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.0008
@@ -269,7 +269,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _update_info():
+func _update_info() -> void:
 	var total_ke := 0.0
 	var total_pe := 0.0
 	for i in range(ball_count):
@@ -279,7 +279,7 @@ func _update_info():
 		total_pe += ball_mass * gravity * h
 	_info_label.text = "NEWTON'S CRADLE\nKE=%.3f  PE=%.3f  Total=%.3f" % [total_ke, total_pe, total_ke + total_pe]
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: _release_left(1)
@@ -287,5 +287,11 @@ func _input(event: InputEvent):
 			KEY_3: _release_both()
 			KEY_R: _reset_all()
 
-func reset():
+func reset() -> void:
 	_reset_all()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

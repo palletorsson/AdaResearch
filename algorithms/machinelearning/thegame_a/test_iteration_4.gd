@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 4: Integration Test ---")
 	
 	# Simulate the Main Scene
@@ -47,3 +47,9 @@ func _run():
 	assert(count == 16, "Expected 16 segments, got " + str(count))
 	
 	print("--- Iteration 4 Complete ---")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

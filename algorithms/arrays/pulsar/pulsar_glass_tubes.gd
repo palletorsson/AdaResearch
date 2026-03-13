@@ -236,3 +236,9 @@ func _process(delta: float) -> void:
 				var base_energy = 0.4
 				var wave = sin(_time * 2.0 + tube.position.x * 10.0) * 0.2
 				glow.material_override.emission_energy_multiplier = base_energy + wave
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

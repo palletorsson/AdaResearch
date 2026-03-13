@@ -39,7 +39,7 @@ var directions = [
 	Vector2i(-2, 0)   # West
 ]
 
-func _ready():
+func _ready() -> void:
 	# Removed setup_environment() as it's now in the scene
 	# setup_environment() 
 	initialize_maze()
@@ -48,7 +48,7 @@ func _ready():
 	if show_generation:
 		start_generation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if generating:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
@@ -57,7 +57,7 @@ func _process(delta):
 
 # setup_environment removed - scene file handles this
 
-func initialize_maze():
+func initialize_maze() -> void:
 	# Initialize maze grid - true = wall, false = path
 	maze.clear()
 	visited.clear()
@@ -77,7 +77,7 @@ func initialize_maze():
 		for x in range(1, maze_width, 2):
 			maze[y][x] = false  # Create path cell
 
-func create_maze_visuals():
+func create_maze_visuals() -> void:
 	# Clear existing visuals cleanly
 	for child in get_children():
 		if child is MeshInstance3D or child is StaticBody3D:
@@ -165,7 +165,7 @@ func create_floor_collider(x: int, y: int) -> StaticBody3D:
 	
 	return static_body
 
-func start_generation():
+func start_generation() -> void:
 	# Start from top-left path cell
 	current_cell = Vector2i(1, 1)
 	visited[1][1] = true
@@ -175,7 +175,7 @@ func start_generation():
 	update_cell_visual(current_cell, current_color)
 	print("Starting maze generation...")
 
-func generation_step():
+func generation_step() -> void:
 	var neighbors = get_unvisited_neighbors(current_cell)
 	
 	if neighbors.size() > 0:
@@ -231,13 +231,13 @@ func get_unvisited_neighbors(cell: Vector2i) -> Array:
 	
 	return neighbors
 
-func update_cell_visual(cell: Vector2i, color: Color):
+func update_cell_visual(cell: Vector2i, color: Color) -> void:
 	if cell.y < cell_meshes.size() and cell.x < cell_meshes[cell.y].size():
 		var mesh_instance = cell_meshes[cell.y][cell.x]
 		if mesh_instance and mesh_instance.material_override:
 			mesh_instance.material_override.albedo_color = color
 
-func update_wall_visual(x: int, y: int):
+func update_wall_visual(x: int, y: int) -> void:
 	# Convert wall to path
 	maze[y][x] = false
 	
@@ -264,7 +264,7 @@ func update_wall_visual(x: int, y: int):
 	floor_colliders[y][x] = floor_collider
 	add_child(floor_collider)
 
-func create_entrance_exit():
+func create_entrance_exit() -> void:
 	# Create entrance at top
 	maze[0][1] = false
 	update_entrance_exit_visual(1, 0)
@@ -273,7 +273,7 @@ func create_entrance_exit():
 	maze[maze_height - 1][maze_width - 2] = false
 	update_entrance_exit_visual(maze_width - 2, maze_height - 1)
 
-func update_entrance_exit_visual(x: int, y: int):
+func update_entrance_exit_visual(x: int, y: int) -> void:
 	var mesh_instance = cell_meshes[y][x]
 	
 	# Change to path
@@ -365,3 +365,9 @@ func debug_collision_info() -> Dictionary:
 		"cell_size": cell_size,
 		"wall_height": wall_height
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

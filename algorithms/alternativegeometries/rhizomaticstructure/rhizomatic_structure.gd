@@ -19,12 +19,12 @@ var nodes: Array[Vector3] = []
 var connections: Array[Array] = []
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	generate_structure()
 	draw_structure()
 
 # Generate the rhizomatic structure
-func generate_structure():
+func generate_structure() -> void:
 	# Clear previous data
 	nodes.clear()
 	connections.clear()
@@ -75,7 +75,7 @@ func generate_structure():
 					connections.append([j, nodes.size() - 1])
 
 # Draw the structure using MeshInstances
-func draw_structure():
+func draw_structure() -> void:
 	for i in range(connections.size()):
 		var start_idx = connections[i][0]
 		var end_idx = connections[i][1]
@@ -86,7 +86,7 @@ func draw_structure():
 		create_branch(start_pos, end_pos)
 
 # Create a cylindrical branch between two points
-func create_branch(start: Vector3, end: Vector3):
+func create_branch(start: Vector3, end: Vector3) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 	
@@ -123,7 +123,7 @@ func create_branch(start: Vector3, end: Vector3):
 		mesh_instance.transform.basis = Basis(axis, angle)
 
 # Clear the structure
-func clear():
+func clear() -> void:
 	for child in get_children():
 		child.queue_free()
 	
@@ -131,7 +131,13 @@ func clear():
 	connections.clear()
 	
 # Regenerate the structure
-func regenerate():
+func regenerate() -> void:
 	clear()
 	generate_structure()
 	draw_structure()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

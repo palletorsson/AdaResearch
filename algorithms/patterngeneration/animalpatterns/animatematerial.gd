@@ -11,10 +11,10 @@ extends Node3D
 
 @onready var mat: ShaderMaterial = $".".material_override
 
-func _ready():
+func _ready() -> void:
 	apply_preset()
 
-func apply_preset():
+func apply_preset() -> void:
 	if not mat:
 		return
 

@@ -62,3 +62,9 @@ func _clear_cubes() -> void:
 		if is_instance_valid(cube):
 			cube.queue_free()
 	_generated_cubes.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

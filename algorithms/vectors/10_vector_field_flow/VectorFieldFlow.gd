@@ -21,7 +21,7 @@ var _field_head_mm_instance: MultiMeshInstance3D
 var _field_origins: PackedVector3Array = PackedVector3Array()
 var _field_count: int = 0
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -37,13 +37,13 @@ func _ready():
 		"Particle follows field vectors"
 	)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	elapsed += delta
 	_update_field_vectors()
 	_update_particle(delta)
 	_update_info()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			reposition_particle(Vector3.ZERO)
@@ -51,7 +51,7 @@ func _input(event):
 		if event.keycode == KEY_SPACE:
 			particle_velocity = Vector3.ZERO
 
-func _create_field_vectors():
+func _create_field_vectors() -> void:
 	# Compute grid origins
 	_field_origins.clear()
 	for x in range(-GRID_RANGE, GRID_RANGE + 1):
@@ -103,7 +103,7 @@ func _create_field_vectors():
 	_field_head_mm_instance.multimesh = head_mm
 	add_child(_field_head_mm_instance)
 
-func _update_field_vectors():
+func _update_field_vectors() -> void:
 	if not _field_shaft_mm_instance or not _field_head_mm_instance:
 		return
 	var shaft_mm := _field_shaft_mm_instance.multimesh
@@ -172,7 +172,7 @@ func _create_particle_marker() -> Node3D:
 	add_child(marker)
 	return marker
 
-func _update_particle(delta: float):
+func _update_particle(delta: float) -> void:
 	var sample = _field_value(particle_position)
 	# Keep vertical motion compact and readable in VR.
 	sample.y *= 0.5
@@ -188,15 +188,15 @@ func _update_particle(delta: float):
 		particle_velocity.y *= -0.25
 	reposition_particle(particle_position)
 
-func reposition_particle(position: Vector3):
+func reposition_particle(position: Vector3) -> void:
 	particle_position = position
 	if particle:
 		particle.position = particle_position
 
-func restart_particle():
+func restart_particle() -> void:
 	particle_velocity = Vector3.ZERO
 
-func _update_info():
+func _update_info() -> void:
 	var field_here = _field_value(particle_position)
 	var builder := []
 	builder.append("Position = (%.2f, %.2f, %.2f)" % [particle_position.x, particle_position.y, particle_position.z])
@@ -204,5 +204,8 @@ func _update_info():
 	builder.append("Field(position) = (%.2f, %.2f, %.2f)" % [field_here.x, field_here.y, field_here.z])
 	info_label.text = "\n".join(builder)
 
-
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 

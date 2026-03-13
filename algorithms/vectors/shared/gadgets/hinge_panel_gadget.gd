@@ -17,7 +17,7 @@ const HINGE_HEIGHT := 0.03
 var _target_angle: float = PI / 4.0  # radians
 var _current_angle: float = PI / 4.0
 
-func _ready():
+func _ready() -> void:
 	# --- Central hinge post ---
 	anchor = create_static_body(
 		Vector3(0, 0, 0),
@@ -81,7 +81,7 @@ func _ready():
 	# --- Angle label ---
 	angle_label = create_label("0°", Vector3(0, 0.06, 0), 16, Color.WHITE)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_current_angle = lerp(_current_angle, _target_angle, delta * 6.0)
 
 	# Drive panels to half the angle each (symmetric opening)

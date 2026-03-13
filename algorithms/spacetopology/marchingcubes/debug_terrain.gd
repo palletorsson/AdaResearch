@@ -3,7 +3,7 @@
 
 extends SceneTree
 
-func _ready():
+func _ready() -> void:
 	print("🔍 DETAILED MARCHING CUBES DIAGNOSTIC")
  
 	
@@ -13,7 +13,7 @@ func _ready():
  
 	quit()
 
-func test_density_consistency():
+func test_density_consistency() -> void:
 	print("\n🧪 TEST 1: Density Calculation Consistency")
  
 	
@@ -42,7 +42,7 @@ func test_density_consistency():
 		else:
 			print("  ✅ Valid density")
 
-func test_marching_cubes_basic():
+func test_marching_cubes_basic() -> void:
 	print("\n🧪 TEST 2: Basic Marching Cubes Algorithm")
  
 	
@@ -94,7 +94,7 @@ func test_marching_cubes_basic():
 			else:
 				print("    ✅ Triangle %d valid" % i)
 
-func test_chunk_boundaries():
+func test_chunk_boundaries() -> void:
 	print("\n🧪 TEST 3: Chunk Boundary Analysis")
  
 	

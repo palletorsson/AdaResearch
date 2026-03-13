@@ -39,10 +39,10 @@ var grid: Dictionary = {}
 var cell_size: float
 var grid_dimensions: Vector3i
 
-func _ready():
+func _ready() -> void:
     generate_samples()
 
-func generate_samples():
+func generate_samples() -> void:
     clear_samples()
     
     if seed_value != 0:
@@ -178,7 +178,7 @@ func world_to_grid(point: Vector3) -> Vector3i:
 func grid_key(grid_pos: Vector3i) -> String:
     return "%d,%d,%d" % [grid_pos.x, grid_pos.y, grid_pos.z]
 
-func add_to_grid(point: Vector3):
+func add_to_grid(point: Vector3) -> void:
     var grid_pos = world_to_grid(point)
     var key = grid_key(grid_pos)
     
@@ -187,7 +187,7 @@ func add_to_grid(point: Vector3):
     
     grid[key].append(point)
 
-func visualize_samples():
+func visualize_samples() -> void:
     clear_visualization()
 
     # Draw sample points
@@ -210,7 +210,7 @@ func visualize_samples():
     if show_label:
         create_explanation_label()
 
-func create_sample_visual(point: Vector3):
+func create_sample_visual(point: Vector3) -> void:
     var instance = MeshInstance3D.new()
     add_child(instance)
     instance.position = point
@@ -246,7 +246,7 @@ func create_sample_visual(point: Vector3):
     material.roughness = 0.7
     instance.material_override = material
 
-func create_radius_visual():
+func create_radius_visual() -> void:
     # Create wireframe spheres showing min_distance radius
     for i in range(min(sample_points.size(), 50)): # Limit for performance
         var point = sample_points[i]
@@ -294,7 +294,7 @@ func create_wireframe_sphere(center: Vector3, radius: float) -> MeshInstance3D:
     
     return mesh_instance
 
-func create_grid_visual():
+func create_grid_visual() -> void:
     var grid_mesh = MeshInstance3D.new()
     add_child(grid_mesh)
     
@@ -332,7 +332,7 @@ func create_grid_visual():
     material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     grid_mesh.material_override = material
 
-func create_distance_lines_visual():
+func create_distance_lines_visual() -> void:
     # Draw lines between nearby points to show the minimum distance constraint
     var line_mesh = MeshInstance3D.new()
     line_mesh.name = "DistanceLines"
@@ -368,7 +368,7 @@ func create_distance_lines_visual():
     material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
     line_mesh.material_override = material
 
-func create_explanation_label():
+func create_explanation_label() -> void:
     # Main explanation
     var label = Label3D.new()
     label.name = "ExplanationLabel"
@@ -390,7 +390,7 @@ func create_explanation_label():
     dist_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
     add_child(dist_label)
 
-func print_sample_points():
+func print_sample_points() -> void:
     print("\n=== Poisson Disk Sample Points ===")
     print("Total points: ", sample_points.size())
     print("Density: ", sample_points.size() / (sample_region.x * sample_region.y * sample_region.z), " points per cubic unit")
@@ -403,11 +403,17 @@ func print_sample_points():
 func get_sample_points() -> Array[Vector3]:
     return sample_points
 
-func clear_samples():
+func clear_samples() -> void:
     sample_points.clear()
     grid.clear()
     clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
     for child in get_children():
         child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

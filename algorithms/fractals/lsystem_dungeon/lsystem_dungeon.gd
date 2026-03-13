@@ -57,7 +57,7 @@ var presets := {
 	"spiral": {"axiom": "F", "rules": {"F": "F+F"}, "iterations": 6},
 }
 
-func _ready():
+func _ready() -> void:
 	if random_seed != 0:
 		seed(random_seed)
 	else:
@@ -71,7 +71,7 @@ func _ready():
 	else:
 		_build_instant()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -80,7 +80,7 @@ func _process(delta: float):
 		timer = 0.0
 		_build_step()
 
-func generate_lsystem():
+func generate_lsystem() -> void:
 	"""Generate the L-system string from axiom and rules"""
 	lsystem_string = axiom
 
@@ -96,7 +96,7 @@ func generate_lsystem():
 	print("L-System Dungeon: Generated string length: %d" % lsystem_string.length())
 	print("L-System: %s..." % lsystem_string.substr(0, min(50, lsystem_string.length())))
 
-func _build_instant():
+func _build_instant() -> void:
 	"""Build entire dungeon at once"""
 	turtle_pos = Vector3.ZERO
 	turtle_dir = Vector3.FORWARD
@@ -107,7 +107,7 @@ func _build_instant():
 
 	print("L-System Dungeon: Built %d parts" % all_parts.size())
 
-func _build_step():
+func _build_step() -> void:
 	"""Build one symbol at a time"""
 	if step_index >= lsystem_string.length():
 		is_constructing = false
@@ -118,7 +118,7 @@ func _build_step():
 	_interpret_symbol(c)
 	step_index += 1
 
-func _interpret_symbol(symbol: String):
+func _interpret_symbol(symbol: String) -> void:
 	"""Interpret L-system symbol and build geometry"""
 	match symbol:
 		"F":
@@ -159,7 +159,7 @@ func _interpret_symbol(symbol: String):
 			# Create a large room
 			_create_room(RoomType.LARGE_ROOM)
 
-func _create_corridor():
+func _create_corridor() -> void:
 	"""Create a corridor segment"""
 	var corridor_width = room_size * 0.6
 	var corridor_height = room_size * 0.8
@@ -177,7 +177,7 @@ func _create_corridor():
 	else:
 		_create_mesh_corridor(midpoint, corridor_width, corridor_height)
 
-func _create_mesh_corridor(pos: Vector3, width: float, height: float):
+func _create_mesh_corridor(pos: Vector3, width: float, height: float) -> void:
 	"""Create corridor using simple meshes"""
 	var corridor = Node3D.new()
 	corridor.name = "Corridor_%d" % all_parts.size()
@@ -220,7 +220,7 @@ func _create_mesh_corridor(pos: Vector3, width: float, height: float):
 	add_child(corridor)
 	all_parts.append(corridor)
 
-func _create_csg_corridor(pos: Vector3, width: float, height: float):
+func _create_csg_corridor(pos: Vector3, width: float, height: float) -> void:
 	"""Create corridor using CSG for carving effect"""
 	var combiner = CSGCombiner3D.new()
 	combiner.name = "CSGCorridor_%d" % all_parts.size()
@@ -247,7 +247,7 @@ func _create_csg_corridor(pos: Vector3, width: float, height: float):
 	add_child(combiner)
 	all_parts.append(combiner)
 
-func _create_room(type: RoomType):
+func _create_room(type: RoomType) -> void:
 	"""Create a room at current turtle position"""
 	var size_multiplier = 1.0
 	match type:
@@ -332,7 +332,7 @@ func _create_room(type: RoomType):
 	add_child(room)
 	all_parts.append(room)
 
-func _add_pillars(room: Node3D, size: float, height: float):
+func _add_pillars(room: Node3D, size: float, height: float) -> void:
 	"""Add decorative pillars to large rooms"""
 	var pillar_size = 0.4
 	var inset = size * 0.35
@@ -372,7 +372,7 @@ func _check_overlap(pos: Vector3) -> bool:
 	return false
 
 # Public API
-func use_preset(preset_name: String):
+func use_preset(preset_name: String) -> void:
 	"""Apply a preset L-system pattern"""
 	if presets.has(preset_name):
 		var preset = presets[preset_name]
@@ -381,7 +381,7 @@ func use_preset(preset_name: String):
 		iterations = preset.iterations
 		reset()
 
-func reset():
+func reset() -> void:
 	"""Clear and regenerate dungeon"""
 	for part in all_parts:
 		if is_instance_valid(part):
@@ -402,7 +402,7 @@ func reset():
 	else:
 		_build_instant()
 
-func set_rules_from_string(rule_string: String):
+func set_rules_from_string(rule_string: String) -> void:
 	"""Parse rules from string format like 'F:F[+F][-F]F,X:FX'"""
 	rules.clear()
 	var pairs = rule_string.split(",")
@@ -411,3 +411,9 @@ func set_rules_from_string(rule_string: String):
 		if parts.size() == 2:
 			rules[parts[0].strip_edges()] = parts[1].strip_edges()
 	reset()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

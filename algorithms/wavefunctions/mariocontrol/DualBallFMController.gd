@@ -301,3 +301,9 @@ func get_current_params() -> Dictionary:
 		"mod_index": mod_index,
 		"mod_decay": mod_decay
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -216,3 +216,9 @@ func _on_gravity_slider_moved(_position) -> void:
 	for mover in movers:
 		if is_instance_valid(mover):
 			mover.acceleration = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

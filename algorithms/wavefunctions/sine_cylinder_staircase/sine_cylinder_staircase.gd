@@ -210,3 +210,9 @@ func _make_plane_mat() -> StandardMaterial3D:
 	m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
 	m.render_priority = 1
 	return m
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -6,16 +6,16 @@ extends Control
 @onready var seed_spin = $Panel/VBoxContainer/SeedSpinBox
 @onready var status_label = $Panel/VBoxContainer/StatusLabel
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
-func _update_ui():
+func _update_ui() -> void:
 	if not wfc_node: return
 	width_slider.value = wfc_node.grid_width
 	height_slider.value = wfc_node.grid_height
 	seed_spin.value = wfc_node.generation_seed
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	status_label.text = "Generating..."
 	# Wait one frame to let UI update
 	await get_tree().process_frame
@@ -28,17 +28,17 @@ func _on_regenerate_pressed():
 	else:
 		status_label.text = "Status: Failed (Contradiction)"
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	seed_spin.value = randi()
 	_on_regenerate_pressed()
 
-func _on_width_changed(value):
+func _on_width_changed(value) -> void:
 	wfc_node.grid_width = int(value)
 	$Panel/VBoxContainer/WidthLabel.text = "Width: %d" % int(value)
 
-func _on_height_changed(value):
+func _on_height_changed(value) -> void:
 	wfc_node.grid_height = int(value)
 	$Panel/VBoxContainer/HeightLabel.text = "Height: %d" % int(value)
 
-func _on_seed_changed(value):
+func _on_seed_changed(value) -> void:
 	wfc_node.generation_seed = int(value)

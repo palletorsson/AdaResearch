@@ -44,12 +44,12 @@ var mode_colors = {
 	3: { "ink": Color(1.0, 0.9, 0.2), "bg": Color(0.1, 0.0, 0.15), "glow": Color(1.0, 0.4, 0.8) }
 }
 
-func _ready():
+func _ready() -> void:
 	_setup_noise()
 	_build_monitor()
 	_start_incremental_generation()
 
-func _setup_noise():
+func _setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = 0.015
@@ -59,7 +59,7 @@ func _setup_noise():
 	noise.fractal_gain = 0.45
 	noise.seed = randi()
 
-func _build_monitor():
+func _build_monitor() -> void:
 	# Create frame
 	frame_mesh = MeshInstance3D.new()
 	frame_mesh.name = "Frame"
@@ -109,7 +109,7 @@ func _build_monitor():
 
 	_add_status_leds()
 
-func _add_status_leds():
+func _add_status_leds() -> void:
 	var led_positions = [
 		Vector3(-monitor_size.x/2 - 0.04, monitor_size.y/2 + 0.04, 0.04),
 		Vector3(monitor_size.x/2 + 0.04, monitor_size.y/2 + 0.04, 0.04)
@@ -132,14 +132,14 @@ func _add_status_leds():
 		led.material_override = led_mat
 		add_child(led)
 
-func _start_incremental_generation():
+func _start_incremental_generation() -> void:
 	layers_cache.clear()
 	layers_cache.resize(layer_count)
 	_generation_index = 0
 	_is_generating = true
 	_is_ready = false
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Incremental generation
 	if _is_generating:
 		var layers_this_frame = mini(layers_per_frame, layer_count - _generation_index)
@@ -221,7 +221,7 @@ func _generate_layer(layer_idx: int, colors: Dictionary) -> Image:
 	_add_artifacts(img, layer_idx)
 	return img
 
-func _add_artifacts(img: Image, layer_idx: int):
+func _add_artifacts(img: Image, layer_idx: int) -> void:
 	# Sparse scan lines
 	for y in range(0, resolution, 6):
 		var intensity = 0.015
@@ -237,7 +237,7 @@ func _add_artifacts(img: Image, layer_idx: int):
 		var speckle = Color(0.4, 0.5, 0.6, 0.2)
 		img.set_pixel(sx, sy, img.get_pixel(sx, sy).blend(speckle))
 
-func _update_display():
+func _update_display() -> void:
 	if layers_cache.is_empty() or not _is_ready:
 		return
 
@@ -247,13 +247,13 @@ func _update_display():
 		texture.update(layer_image)
 		info_label.text = "LAYER: %02d/%02d" % [idx + 1, layer_count]
 
-func set_mode(mode_idx: int):
+func set_mode(mode_idx: int) -> void:
 	scan_mode = clamp(mode_idx, 0, 3)
 	if info_label:
 		info_label.modulate = mode_colors[scan_mode]["glow"]
 	_start_incremental_generation()
 
-func regenerate():
+func regenerate() -> void:
 	noise.seed = randi()
 	_start_incremental_generation()
 
@@ -265,6 +265,12 @@ func get_generation_progress() -> float:
 		return 1.0
 	return float(_generation_index) / float(layer_count)
 
-func apply_grid_config(config: Dictionary):
+func apply_grid_config(config: Dictionary) -> void:
 	if config.has("scan_mode"):
 		set_mode(int(config["scan_mode"]))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

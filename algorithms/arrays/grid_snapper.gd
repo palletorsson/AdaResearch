@@ -69,7 +69,7 @@ func _calculate_snapped_position(pos: Vector3) -> Vector3:
 		
 	return snapped
 
-func _setup_visualization():
+func _setup_visualization() -> void:
 	_debug_mesh = MultiMeshInstance3D.new()
 	_debug_mesh.name = "GridPoints"
 	
@@ -93,7 +93,7 @@ func _setup_visualization():
 	_debug_mesh.multimesh = multimesh
 	add_child(_debug_mesh)
 
-func _update_visualization():
+func _update_visualization() -> void:
 	if not _xr_origin or not _debug_mesh:
 		return
 		
@@ -142,3 +142,9 @@ func _search_for_xr_origin(node: Node) -> Node3D:
 		if found:
 			return found
 	return null
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

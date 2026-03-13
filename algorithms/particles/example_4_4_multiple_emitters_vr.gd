@@ -26,7 +26,7 @@ var emitter_colors: Array[Color] = [
 	Color(1.0, 1.0, 0.5, 1.0),   # Yellow
 ]
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -39,7 +39,7 @@ func _ready():
 func _process(_delta):
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			# Emit burst from all emitters
@@ -59,7 +59,7 @@ func _input(event):
 		elif event.keycode == KEY_4:
 			toggle_emitter(3)
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -77,7 +77,7 @@ func create_info_label():
 	instructions.text = "[SPACE] Burst | [1-4] Toggle | [C] Clear | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		var total_particles = 0
@@ -86,7 +86,7 @@ func update_info_label():
 
 		info_label.text = "Multiple Emitters\n%d total particles (%d emitters)" % [total_particles, emitters.size()]
 
-func create_emitters():
+func create_emitters() -> void:
 	"""Create 4 emitters in corners"""
 	var positions = [
 		Vector3(-0.25, 0.3, -0.25),  # Front-left
@@ -120,7 +120,7 @@ func create_emitters():
 		add_child(emitter)
 		emitters.append(emitter)
 
-func create_emitter_visual(parent: Node3D, color: Color):
+func create_emitter_visual(parent: Node3D, color: Color) -> void:
 	"""Create visual marker for emitter"""
 	var marker = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -142,20 +142,26 @@ func create_emitter_visual(parent: Node3D, color: Color):
 	tween.tween_property(marker, "scale", Vector3.ONE * 1.3, 0.8)
 	tween.tween_property(marker, "scale", Vector3.ONE * 0.7, 0.8)
 
-func toggle_emitter(index: int):
+func toggle_emitter(index: int) -> void:
 	"""Toggle emitter on/off"""
 	if index < emitters.size():
 		var emitter = emitters[index]
 		emitter.emission_rate = 0.0 if emitter.emission_rate > 0 else 5.0 + index * 2.0
 		print("Emitter %d: %s" % [index + 1, "OFF" if emitter.emission_rate == 0 else "ON"])
 
-func clear_all():
+func clear_all() -> void:
 	"""Clear all particles"""
 	for emitter in emitters:
 		emitter.clear_particles()
 
-func reset():
+func reset() -> void:
 	"""Reset all emitters"""
 	for i in range(emitters.size()):
 		emitters[i].clear_particles()
 		emitters[i].emission_rate = 5.0 + i * 2.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

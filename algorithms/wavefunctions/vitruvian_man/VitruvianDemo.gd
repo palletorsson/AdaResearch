@@ -21,7 +21,7 @@ const NOISE_SCALE = 0.05
 var _last_left_base: Vector3
 var _last_right_base: Vector3
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not demo_mode:
 		return
 		
@@ -100,7 +100,7 @@ func _process(delta):
 	if right_hand:
 		right_hand.position = right_target + right_perturbation
 
-func _ready():
+func _ready() -> void:
 	if left_hand:
 		_initial_left_pos = left_hand.position
 	if right_hand:

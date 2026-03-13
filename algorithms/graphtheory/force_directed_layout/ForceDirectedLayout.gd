@@ -17,7 +17,7 @@ class ForceGraphNode:
 	var force: Vector2
 	var visual_object: CSGSphere3D
 	
-	func _init(node_id: int, pos: Vector2):
+	func _init(node_id: int, pos: Vector2) -> void:
 		id = node_id
 		position = pos
 		velocity = Vector2.ZERO
@@ -28,15 +28,15 @@ class ForceGraphEdge:
 	var to_id: int
 	var visual_object: CSGCylinder3D
 	
-	func _init(from: int, to: int):
+	func _init(from: int, to: int) -> void:
 		from_id = from
 		to_id = to
 
-func _ready():
+func _ready() -> void:
 	create_graph()
 	setup_materials()
 
-func create_graph():
+func create_graph() -> void:
 	# Create nodes with random positions
 	for i in range(node_count):
 		var angle = i * 2.0 * PI / node_count
@@ -75,7 +75,7 @@ func get_or_create_container(container_name: String) -> Node3D:
 		add_child(container)
 	return container
 
-func create_edge_visual(edge: ForceGraphEdge):
+func create_edge_visual(edge: ForceGraphEdge) -> void:
 	var from_node = nodes[edge.from_id]
 	var to_node = nodes[edge.to_id]
 	
@@ -89,7 +89,7 @@ func create_edge_visual(edge: ForceGraphEdge):
 	
 	update_edge_visual(edge)
 
-func update_edge_visual(edge: ForceGraphEdge):
+func update_edge_visual(edge: ForceGraphEdge) -> void:
 	var from_pos = nodes[edge.from_id].position
 	var to_pos = nodes[edge.to_id].position
 	var distance = from_pos.distance_to(to_pos)
@@ -101,7 +101,7 @@ func update_edge_visual(edge: ForceGraphEdge):
 	var angle = atan2(direction.y, direction.x)
 	edge.visual_object.rotation_degrees = Vector3(0, 0, angle * 180.0 / PI - 90)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Node materials
 	for node in nodes:
 		var material = StandardMaterial3D.new()
@@ -123,7 +123,7 @@ func setup_materials():
 	# Create and setup indicator materials
 	setup_indicator_materials()
 
-func setup_indicator_materials():
+func setup_indicator_materials() -> void:
 	# Force indicator
 	var force_indicator = get_or_create_box_indicator("ForceIndicator", Vector3(0.3, 1.0, 0.3))
 	var force_material = StandardMaterial3D.new()
@@ -166,7 +166,7 @@ func get_or_create_cylinder_indicator(indicator_name: String, radius: float, hei
 		add_child(indicator)
 	return indicator
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Calculate forces
@@ -180,7 +180,7 @@ func _process(delta):
 	
 	animate_indicators()
 
-func calculate_forces():
+func calculate_forces() -> void:
 	total_energy = 0.0
 	
 	# Reset forces
@@ -226,7 +226,7 @@ func calculate_forces():
 				
 				total_energy += repulsion_strength / distance
 
-func update_positions(delta):
+func update_positions(delta) -> void:
 	for node in nodes:
 		# Update velocity with force
 		node.velocity += node.force * delta
@@ -247,7 +247,7 @@ func update_positions(delta):
 		node.position.x = clamp(node.position.x, -bound, bound)
 		node.position.y = clamp(node.position.y, -bound, bound)
 
-func update_visuals():
+func update_visuals() -> void:
 	# Update node positions
 	for node in nodes:
 		if node.visual_object and is_instance_valid(node.visual_object):
@@ -263,7 +263,7 @@ func update_visuals():
 		if edge.visual_object and is_instance_valid(edge.visual_object):
 			update_edge_visual(edge)
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Force indicator (average force magnitude)
 	var avg_force = 0.0
 	for node in nodes:
@@ -295,7 +295,7 @@ func animate_indicators():
 		energy_indicator.scale.z = pulse  # FIXED: Also animate Z scale for better effect
 
 # FIXED: Added utility functions for better debugging
-func print_debug_info():
+func print_debug_info() -> void:
 	"""Print debug information about the graph state"""
 	print("=== Graph Debug Info ===")
 	print("Node count: ", nodes.size())
@@ -310,7 +310,7 @@ func get_average_force() -> float:
 		avg_force += node.force.length()
 	return avg_force / nodes.size() if nodes.size() > 0 else 0.0
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset the simulation to initial state"""
 	# Clear existing objects
 	for node in nodes:
@@ -329,3 +329,9 @@ func reset_simulation():
 	# Recreate graph
 	create_graph()
 	setup_materials()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

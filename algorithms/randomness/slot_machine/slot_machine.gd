@@ -602,3 +602,9 @@ func _reset_stats() -> void:
 	_stats_label.text = "Pulls: 0\n\nPull the lever!"
 	_auto_spin = false
 	_auto_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -9,13 +9,13 @@ class_name GeneticProgrammingInterface
 var engine: Node3D
 var selected_genome_index: int = -1
 
-func _ready():
+func _ready() -> void:
     if evolution_engine:
         engine = get_node(evolution_engine)
     
     setup_ui()
 
-func setup_ui():
+func setup_ui() -> void:
     # Create UI for interactive selection
     var vbox = VBoxContainer.new()
     add_child(vbox)
@@ -43,16 +43,22 @@ func setup_ui():
     stats.name = "Stats"
     vbox.add_child(stats)
 
-func _on_evolve_selected():
+func _on_evolve_selected() -> void:
     if engine and selected_genome_index >= 0:
         # Breed from selected genome
         print("Evolving from selected genome")
 
-func _on_random_evolution():
+func _on_random_evolution() -> void:
     if engine:
         engine.evolve_one_generation = true
 
-func _input(event):
+func _input(event: InputEvent) -> void:
     if event is InputEventMouseButton and event.pressed:
         # Raycast to select genome
         pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

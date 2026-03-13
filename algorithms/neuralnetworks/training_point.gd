@@ -15,12 +15,12 @@ var incorrect_color: Color = Color(1.0, 0.3, 0.3, 1.0) # Red (misclassified)
 
 var is_classified_correctly: bool = false
 
-func _init(pos: Vector3, target_label: int):
+func _init(pos: Vector3, target_label: int) -> void:
 	position_v = pos
 	label = target_label
 	inputs = [pos.x, pos.y, 1.0]  # Bias term included
 
-func setup_mesh():
+func setup_mesh() -> void:
 	"""Create small sphere for data point"""
 	mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -29,7 +29,7 @@ func setup_mesh():
 	mesh_instance.mesh = sphere
 	add_child(mesh_instance)
 
-func setup_material():
+func setup_material() -> void:
 	"""Color based on label"""
 	material = StandardMaterial3D.new()
 	material.albedo_color = positive_color if label == 1 else negative_color
@@ -40,7 +40,7 @@ func setup_material():
 	if mesh_instance:
 		mesh_instance.material_override = material
 
-func update_classification(predicted_label: int):
+func update_classification(predicted_label: int) -> void:
 	"""Update visual based on whether classification is correct"""
 	is_classified_correctly = (predicted_label == label)
 
@@ -52,12 +52,18 @@ func update_classification(predicted_label: int):
 			material.albedo_color = incorrect_color
 			material.emission = incorrect_color * 0.5
 
-func reset_color():
+func reset_color() -> void:
 	"""Reset to original label color"""
 	if material:
 		material.albedo_color = positive_color if label == 1 else negative_color
 		material.emission = material.albedo_color * 0.5
 
-func check_boundaries():
+func check_boundaries() -> void:
 	"""Override - don't constrain to tank, points are static"""
 	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

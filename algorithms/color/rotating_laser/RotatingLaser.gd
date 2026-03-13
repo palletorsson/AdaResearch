@@ -38,11 +38,11 @@ var _current_color_index: int = 0
 
 const COLOR_SEQUENCE = [Color.GREEN, Color.WHITE, Color.HOT_PINK]
 
-func _ready():
+func _ready() -> void:
 	_setup_rig()
 	_setup_multimesh()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if color_change_interval == null: return
 	if _time == null: _time = 0.0
 	if _color_timer == null: _color_timer = 0.0
@@ -57,7 +57,7 @@ func _process(delta):
 
 	_update_lasers(delta)
 
-func _setup_rig():
+func _setup_rig() -> void:
 	# Build visible rig bars (dark metal truss look)
 	if _rig_mesh_instance: _rig_mesh_instance.queue_free()
 
@@ -81,7 +81,7 @@ func _setup_rig():
 		bar.position = Vector3(0, rig_height, z_off)
 		rig_node.add_child(bar)
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	if _multimesh_instance: _multimesh_instance.queue_free()
 	_multimesh_instance = MultiMeshInstance3D.new()
 	_multimesh_instance.name = "LaserArray"
@@ -95,7 +95,7 @@ func _setup_multimesh():
 	add_child(_multimesh_instance)
 	_setup_mesh_resource()
 
-func _setup_mesh_resource():
+func _setup_mesh_resource() -> void:
 	if not _multimesh_instance or not _multimesh_instance.multimesh: return
 	var mesh = CylinderMesh.new()
 	mesh.top_radius = beam_thickness * 0.5
@@ -115,7 +115,7 @@ func _setup_mesh_resource():
 	_multimesh_instance.multimesh.mesh = mesh
 	_multimesh_instance.material_override = mat
 
-func _update_lasers(_delta):
+func _update_lasers(_delta) -> void:
 	if not _multimesh_instance or not _multimesh_instance.multimesh: return
 	var mm = _multimesh_instance.multimesh
 	var count = array_rows * array_cols
@@ -176,3 +176,9 @@ func _update_lasers(_delta):
 
 			mm.set_instance_transform(index, t_base * t_gimbal * t_laser)
 			mm.set_instance_color(index, target_color)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

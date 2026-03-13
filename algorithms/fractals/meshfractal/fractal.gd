@@ -42,10 +42,10 @@ const ROTATIONS = [
 	Quaternion(Vector3.RIGHT, -PI * 0.5)
 ]
 
-func _ready():
+func _ready() -> void:
 	generate_fractal()
 
-func generate_fractal():
+func generate_fractal() -> void:
 	clear_fractal()
 	
 	# Initialize parts arrays for each level
@@ -80,7 +80,7 @@ func create_part(child_index: int) -> Dictionary:
 		"max_sag_angle": deg_to_rad(randf_range(max_sag_angle_a, max_sag_angle_b))
 	}
 
-func create_multi_mesh_instances():
+func create_multi_mesh_instances() -> void:
 	multi_mesh_instances.clear()
 	
 	for i in range(depth):
@@ -101,10 +101,10 @@ func create_multi_mesh_instances():
 		add_child(mmi)
 		multi_mesh_instances.append(mmi)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	update_fractal(delta)
 
-func update_fractal(delta: float):
+func update_fractal(delta: float) -> void:
 	# Update root part
 	var root_part = parts[0][0]
 	root_part.spin_angle += root_part.spin_velocity * delta
@@ -162,7 +162,7 @@ func update_fractal(delta: float):
 	# Update colors
 	update_colors()
 
-func update_colors():
+func update_colors() -> void:
 	if not material:
 		return
 	
@@ -191,11 +191,11 @@ func update_colors():
 func fmod_wrap(value: float) -> float:
 	return value - floor(value)
 
-func clear_fractal():
+func clear_fractal() -> void:
 	for mmi in multi_mesh_instances:
 		mmi.queue_free()
 	multi_mesh_instances.clear()
 	parts.clear()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	clear_fractal()

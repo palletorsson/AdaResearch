@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-func _run():
+func _run() -> void:
 	print("--- Iteration 6: Withering Test ---")
 	
 	var garden = load("res://algorithms/machinelearning/thegame_a/AxiomGarden.gd").new()
@@ -34,3 +34,9 @@ func _run():
 	assert(garden.renderer.multi_mesh_instance.multimesh.instance_count == 0, "Should have withered (0 instances).")
 	
 	print("--- Iteration 6 Complete ---")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

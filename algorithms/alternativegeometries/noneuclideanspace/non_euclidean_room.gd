@@ -10,14 +10,14 @@ extends Node3D
 var room_mesh: MeshInstance3D
 var wall_thickness: float = 0.1
 
-func _ready():
+func _ready() -> void:
 	# Create the room mesh
 	if inner_bigger_than_outer:
 		_create_bigger_inside_room()
 	else:
 		_create_normal_room()
 
-func _create_normal_room():
+func _create_normal_room() -> void:
 	# Create a simple box room
 	room_mesh = MeshInstance3D.new()
 	room_mesh.name = "RoomMesh"
@@ -48,7 +48,7 @@ func _create_normal_room():
 	add_child(room_mesh)
 	room_mesh.add_child(inner_mesh)
 
-func _create_bigger_inside_room():
+func _create_bigger_inside_room() -> void:
 	# Create the outer shell
 	var outer_shell = CSGBox3D.new()
 	outer_shell.name = "OuterShell"
@@ -92,7 +92,7 @@ func _create_bigger_inside_room():
 	# Add collisions for the walls
 	_add_wall_collisions()
 
-func _add_wall_collisions():
+func _add_wall_collisions() -> void:
 	# Add a static body for collisions
 	var static_body = StaticBody3D.new()
 	static_body.name = "WallCollisions"
@@ -106,7 +106,7 @@ func _add_wall_collisions():
 	_create_wall_collision(static_body, "WallE", Vector3(room_size.x/2 - wall_thickness/2, 0, 0), Vector3(wall_thickness, room_size.y, room_size.z))
 	_create_wall_collision(static_body, "WallW", Vector3(-room_size.x/2 + wall_thickness/2, 0, 0), Vector3(wall_thickness, room_size.y, room_size.z))
 
-func _create_wall_collision(parent: Node, name: String, position: Vector3, size: Vector3):
+func _create_wall_collision(parent: Node, name: String, position: Vector3, size: Vector3) -> void:
 	var collision = CollisionShape3D.new()
 	collision.name = name
 	collision.transform.origin = position
@@ -117,7 +117,7 @@ func _create_wall_collision(parent: Node, name: String, position: Vector3, size:
 	
 	parent.add_child(collision)
 
-func _on_player_entered(body: Node3D):
+func _on_player_entered(body: Node3D) -> void:
 	if body is XROrigin3D:
 		# When player enters, swap visibility
 		var outer_shell = get_node_or_null("OuterShell")
@@ -127,7 +127,7 @@ func _on_player_entered(body: Node3D):
 			outer_shell.visible = false
 			inner_room.visible = true
 
-func _on_player_exited(body: Node3D):
+func _on_player_exited(body: Node3D) -> void:
 	if body is XROrigin3D:
 		# When player exits, restore original visuals
 		var outer_shell = get_node_or_null("OuterShell")
@@ -136,3 +136,9 @@ func _on_player_exited(body: Node3D):
 		if outer_shell and inner_room:
 			outer_shell.visible = true
 			inner_room.visible = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

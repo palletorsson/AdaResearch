@@ -43,7 +43,7 @@ var audio_player: AudioStreamPlayer3D
 signal walk_step_complete(position: Vector2i, height: float)
 signal walk_finished(total_steps: int)
 
-func _ready():
+func _ready() -> void:
 	print("RandomWalk128: Initializing 128x128 random walk system")
 	print("Grid size: %dx%d cubes" % [GRID_SIZE, GRID_SIZE])
 	print("Area size: %.1fx%.1f meters" % [GRID_AREA_SIZE, GRID_AREA_SIZE])
@@ -80,7 +80,7 @@ func _ready():
 	else:
 		print("RandomWalk128: Auto-start disabled. Use Space to start manually.")
 
-func _setup_audio():
+func _setup_audio() -> void:
 	"""Setup procedural audio for steps"""
 	audio_player = AudioStreamPlayer3D.new()
 	audio_player.unit_size = 5.0
@@ -112,7 +112,7 @@ func _generate_step_sound() -> AudioStreamWAV:
 	stream.data = data
 	return stream
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	"""Initialize the 128x128 grid arrays"""
 	print("RandomWalk128: Initializing grid arrays...")
 	
@@ -131,7 +131,7 @@ func _initialize_grid():
 	
 	print("RandomWalk128: Grid initialized (%d x %d)" % [GRID_SIZE, GRID_SIZE])
 
-func _create_walker_indicator():
+func _create_walker_indicator() -> void:
 	"""Create a visual indicator for the walker position"""
 	walker_cube = cube_scene_resource.instantiate()
 	walker_cube.name = "Walker"
@@ -152,7 +152,7 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 	
 	return null
 
-func start_walk():
+func start_walk() -> void:
 	"""Start the random walk algorithm"""
 	if is_running:
 		return
@@ -167,13 +167,13 @@ func start_walk():
 	
 	step_timer.start()
 
-func stop_walk():
+func stop_walk() -> void:
 	"""Stop the random walk"""
 	is_running = false
 	step_timer.stop()
 	print("RandomWalk128: Walk stopped at step %d" % current_step)
 
-func _step_walk():
+func _step_walk() -> void:
 	"""Execute multiple walk steps per frame for performance"""
 	if not is_running:
 		return
@@ -225,7 +225,7 @@ func _execute_single_step() -> float:
 	
 	return height
 
-func _raise_cube_at(x: int, z: int):
+func _raise_cube_at(x: int, z: int) -> void:
 	"""Raise the cube at the specified grid position"""
 	# Increase height in grid
 	grid[x][z] += RAISE_AMOUNT
@@ -236,7 +236,7 @@ func _raise_cube_at(x: int, z: int):
 	else:
 		_update_cube_height(x, z)
 
-func _create_cube_at(x: int, z: int):
+func _create_cube_at(x: int, z: int) -> void:
 	"""Create a new cube at the specified grid position"""
 	var cube = cube_scene_resource.instantiate()
 	cube.name = "Cube_%d_%d" % [x, z]
@@ -252,7 +252,7 @@ func _create_cube_at(x: int, z: int):
 	cube_instances[x][z] = cube
 	add_child(cube)
 
-func _update_cube_height(x: int, z: int):
+func _update_cube_height(x: int, z: int) -> void:
 	"""Update the height of an existing cube"""
 	var cube = cube_instances[x][z]
 	if cube:
@@ -266,7 +266,7 @@ func _grid_to_world_position(grid_x: int, grid_z: int) -> Vector2:
 	var world_z = offset + grid_z * CUBE_SIZE
 	return Vector2(world_x, world_z)
 
-func _update_walker_position():
+func _update_walker_position() -> void:
 	"""Update the visual walker indicator position"""
 	if walker_cube:
 		var world_pos = _grid_to_world_position(walker_position.x, walker_position.y)
@@ -276,7 +276,7 @@ func _update_walker_position():
 		if audio_player:
 			audio_player.position = walker_cube.position
 
-func _finish_walk():
+func _finish_walk() -> void:
 	"""Complete the random walk"""
 	is_running = false
 	step_timer.stop()
@@ -299,7 +299,7 @@ func _count_created_cubes() -> int:
 
 # === PUBLIC API ===
 
-func restart_walk():
+func restart_walk() -> void:
 	"""Restart the walk from the beginning"""
 	stop_walk()
 	_clear_all_cubes()
@@ -307,7 +307,7 @@ func restart_walk():
 	walker_position = Vector2i(GRID_SIZE / 2, GRID_SIZE / 2)
 	start_walk()
 
-func _clear_all_cubes():
+func _clear_all_cubes() -> void:
 	"""Clear all created cubes"""
 	for x in range(GRID_SIZE):
 		for z in range(GRID_SIZE):
@@ -316,7 +316,7 @@ func _clear_all_cubes():
 				cube_instances[x][z] = null
 			grid[x][z] = 0.0
 
-func set_walk_speed(new_steps_per_frame: int):
+func set_walk_speed(new_steps_per_frame: int) -> void:
 	"""Change the walking speed"""
 	steps_per_frame = clamp(new_steps_per_frame, 1, 100)
 	print("RandomWalk128: Speed set to %d steps per frame" % steps_per_frame)
@@ -334,7 +334,7 @@ func get_walk_info() -> Dictionary:
 		"grid_area_meters": GRID_AREA_SIZE
 	}
 
-func print_walk_status():
+func print_walk_status() -> void:
 	"""Print current walk status"""
 	var info = get_walk_info()
 	print("=== RANDOM WALK 128x128 STATUS ===")
@@ -345,3 +345,9 @@ func print_walk_status():
 	print("Cubes created: %d" % info.cubes_created)
 	print("Running: %s" % info.is_running)
 	print("=================================")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

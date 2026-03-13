@@ -510,3 +510,9 @@ func _input(event: InputEvent) -> void:
 		clear_all_balls()
 	elif event.is_action_pressed("ui_page_up"):  # Page Up key
 		create_ball_at_y(7.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

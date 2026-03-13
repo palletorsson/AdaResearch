@@ -101,7 +101,7 @@ func _process(delta: float) -> void:
 # Attention Score Computation — Softmax over inverse-distance scores
 # ============================================================================
 
-func _calculate_attention_scores():
+func _calculate_attention_scores() -> void:
 	_attention_scores.clear()
 	if not _query_token or _key_tokens.is_empty():
 		return
@@ -184,7 +184,7 @@ func _create_input_tokens() -> void:
 	
 	_update_query_and_keys()
 
-func _update_query_and_keys():
+func _update_query_and_keys() -> void:
 	if _input_tokens.get_child_count() == 0:
 		return
 
@@ -440,3 +440,9 @@ func _update_stats_label() -> void:
 func _clear_children(parent: Node) -> void:
 	for c in parent.get_children():
 		c.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

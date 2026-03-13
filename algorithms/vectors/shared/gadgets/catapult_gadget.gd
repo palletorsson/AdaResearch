@@ -16,7 +16,7 @@ const UPRIGHT_SIZE := Vector3(0.008, 0.04, 0.04)
 var _target_angle: float = 0.0
 var _target_strength: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Base ---
 	base_body = create_static_body(
 		Vector3.ZERO,

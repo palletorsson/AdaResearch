@@ -12,17 +12,17 @@ class DataPoint:
 	var actual: bool
 	var visual_object: CSGSphere3D
 	
-	func _init(pos: Vector2, grp: String, act: bool):
+	func _init(pos: Vector2, grp: String, act: bool) -> void:
 		position = pos
 		group = grp
 		actual = act
 		prediction = false
 
-func _ready():
+func _ready() -> void:
 	create_biased_dataset()
 	setup_materials()
 
-func create_biased_dataset():
+func create_biased_dataset() -> void:
 	# Create dataset with systematic bias
 	for i in range(100):
 		var pos = Vector2(randf() * 8 - 4, randf() * 6 - 3)
@@ -45,7 +45,7 @@ func create_biased_dataset():
 		
 		data_points.append(point)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Update data point materials based on bias
 	for point in data_points:
 		var material = StandardMaterial3D.new()
@@ -66,7 +66,7 @@ func setup_materials():
 		material.emission = material.albedo_color * 0.4
 		point.visual_object.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Calculate bias metrics
@@ -75,7 +75,7 @@ func _process(delta):
 	animate_bias_visualization()
 	animate_indicators()
 
-func calculate_bias_metrics():
+func calculate_bias_metrics() -> void:
 	var group_a_correct = 0
 	var group_a_total = 0
 	var group_b_correct = 0
@@ -97,7 +97,7 @@ func calculate_bias_metrics():
 	bias_level = abs(accuracy_a - accuracy_b)
 	fairness_score = 1.0 - bias_level
 
-func animate_bias_visualization():
+func animate_bias_visualization() -> void:
 	# Animate data points to show bias
 	for i in range(data_points.size()):
 		var point = data_points[i]
@@ -114,7 +114,7 @@ func animate_bias_visualization():
 		
 		point.visual_object.position.z = confidence * 0.5
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Bias indicator
 	var bias_height = bias_level * 2.0 + 0.5
 	$BiasIndicator.height  = bias_height 
@@ -142,3 +142,9 @@ func animate_indicators():
 	var pulse = 1.0 + sin(time * 4.0) * 0.1
 	$BiasIndicator.scale.x = pulse
 	$FairnessMetric.scale.x = pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

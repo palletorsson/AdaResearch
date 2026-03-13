@@ -35,7 +35,7 @@ var points_data = []
 
 var pattern_timer = null
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	generate_points_data()
 	
@@ -46,7 +46,7 @@ func _ready():
 	pattern_timer.connect("timeout", Callable(self, "shift_patterns_down"))
 	pattern_timer.start()
 
-func _draw():
+func _draw() -> void:
 	var window_size = get_viewport_rect().size
 	var m = min(window_size.x, window_size.y) * 0.85
 	var canvas_offset = Vector2((window_size.x - m) / 2, (window_size.y - m) / 2)
@@ -152,7 +152,7 @@ func get_points():
 	
 	return {"points": points, "edges": edges, "colors": colors}
 
-func quadrant(points, colors, size, offset):
+func quadrant(points, colors, size, offset) -> void:
 	var step = size / P.innerGrid
 	
 	for i in range(1, points.size()):
@@ -179,7 +179,7 @@ func quadrant(points, colors, size, offset):
 			3.0
 		)
 
-func draw_mirrored_quadrants(points_data, size, offset):
+func draw_mirrored_quadrants(points_data, size, offset) -> void:
 	var points = points_data.points
 	var colors = points_data.colors
 	var step = size / 2
@@ -250,13 +250,13 @@ func draw_mirrored_quadrants(points_data, size, offset):
 				rotated_points.append(Vector2(p.y, -p.x))
 		quadrant(rotated_points, colors, step, center)
 
-func generate_points_data():
+func generate_points_data() -> void:
 	points_data = []
 	for i in range(P.tiles * P.tiles):
 		points_data.append(get_points())
 	queue_redraw()
 	
-func shift_patterns_down():
+func shift_patterns_down() -> void:
 	# Save the current points data size
 	var grid_width = P.tiles
 	var grid_height = P.tiles
@@ -278,10 +278,16 @@ func shift_patterns_down():
 	points_data = new_points_data
 	queue_redraw()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		generate_points_data()
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_SIZE_CHANGED:
 		queue_redraw()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

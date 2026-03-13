@@ -16,14 +16,14 @@ var ada_image_data = []
 var original_colors = []
 var quantized_results = {}
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	create_sample_image_data()
 	populate_row1_quantization_comparison()
 	populate_row2_pixel_resolution()
 	populate_row3_color_palettes()
 
-func setup_ui():
+func setup_ui() -> void:
 	# Main container setup
 	add_child(main_container)
 	main_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -40,7 +40,7 @@ func setup_ui():
 		container.add_theme_constant_override("separation", 15)
 		main_container.add_child(container)
 
-func create_sample_image_data():
+func create_sample_image_data() -> void:
 	# Create simplified Ada Lovelace portrait data (32x32 for demo)
 	# In a real implementation, you'd load an actual image
 	var width = 32
@@ -97,7 +97,7 @@ func generate_portrait_pixel(x: int, y: int, width: int, height: int) -> Color:
 		]
 		return dress_colors[randi() % dress_colors.size()]
 
-func populate_row1_quantization_comparison():
+func populate_row1_quantization_comparison() -> void:
 	# Row 1: Original image vs different k-means quantization levels
 	var row_label = Label.new()
 	row_label.text = "Row 1: K-Means Color Quantization Levels"
@@ -115,7 +115,7 @@ func populate_row1_quantization_comparison():
 		quantized_results[k] = {"data": quantized_data, "palette": palette}
 		add_image_panel(row1_container, str(k) + " colors", quantized_data, palette)
 
-func populate_row2_pixel_resolution():
+func populate_row2_pixel_resolution() -> void:
 	# Row 2: Pixel resolution effects with quantization
 	var row_label = Label.new()
 	row_label.text = "Row 2: Pixel Resolution & Color Quantization"
@@ -129,7 +129,7 @@ func populate_row2_pixel_resolution():
 		var quantized_data = apply_kmeans_quantization(scaled_data, 5)
 		add_image_panel(row2_container, str(res) + "x" + str(res) + "\n5 colors", quantized_data, quantized_results[5].palette)
 
-func populate_row3_color_palettes():
+func populate_row3_color_palettes() -> void:
 	# Row 3: Color palette extraction visualization
 	var row_label = Label.new()
 	row_label.text = "Row 3: Extracted Color Palettes (K-Means Centroids)"
@@ -141,7 +141,7 @@ func populate_row3_color_palettes():
 		if quantized_results.has(k):
 			add_palette_panel(row3_container, str(k) + " Colors", quantized_results[k].palette)
 
-func add_image_panel(parent: Control, label_text: String, image_data: Array, palette: Array):
+func add_image_panel(parent: Control, label_text: String, image_data: Array, palette: Array) -> void:
 	var panel = VBoxContainer.new()
 	
 	# Label
@@ -172,7 +172,7 @@ func add_image_panel(parent: Control, label_text: String, image_data: Array, pal
 	
 	parent.add_child(panel)
 
-func add_palette_panel(parent: Control, label_text: String, palette: Array):
+func add_palette_panel(parent: Control, label_text: String, palette: Array) -> void:
 	var panel = VBoxContainer.new()
 	
 	# Label
@@ -308,3 +308,9 @@ func scale_image_data(original_data: Array, original_size: int, new_size: int) -
 				scaled_data.append(Color.BLACK)
 	
 	return scaled_data
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

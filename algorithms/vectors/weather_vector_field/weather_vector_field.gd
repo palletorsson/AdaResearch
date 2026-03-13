@@ -85,7 +85,7 @@ var pressure_slider: Node3D
 var status_label: Label3D
 
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	scale = Vector3(0.5, 0.5, 0.5)
 
@@ -110,7 +110,7 @@ func _ready():
 	_apply_mode(0)
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	# Read grabbable vectors
 	var a := _get_vector_fast(wind_a, _cached_a)
 	var b := _get_vector_fast(wind_b, _cached_b)
@@ -149,7 +149,7 @@ func _process(delta: float):
 		_update_info_text(a, b, sum)
 
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_W:
@@ -180,7 +180,7 @@ func _input(event: InputEvent):
 #  SETUP
 # ════════════════════════════════════════════════════════════════════
 
-func _build_ground_plane():
+func _build_ground_plane() -> void:
 	var floor_mesh := MeshInstance3D.new()
 	floor_mesh.name = "Ground"
 	var plane := PlaneMesh.new()
@@ -205,7 +205,7 @@ func _build_ground_plane():
 						  Color(0.2, 0.25, 0.35, 0.3))
 
 
-func _draw_ground_line(from: Vector3, to: Vector3, color: Color):
+func _draw_ground_line(from: Vector3, to: Vector3, color: Color) -> void:
 	var mesh_inst := MeshInstance3D.new()
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
@@ -223,7 +223,7 @@ func _draw_ground_line(from: Vector3, to: Vector3, color: Color):
 	environment_root.add_child(mesh_inst)
 
 
-func _spawn_wind_vectors():
+func _spawn_wind_vectors() -> void:
 	# Wind A — cyan, grabbable
 	wind_a = spawn_vector(
 		Vector3(-1.0, 0.3, 0.0),
@@ -255,7 +255,7 @@ func _spawn_wind_vectors():
 	_cache_vector_nodes(resultant, _cached_sum)
 
 
-func _build_parallelogram():
+func _build_parallelogram() -> void:
 	if _dot_mesh == null:
 		_dot_mesh = SphereMesh.new()
 		_dot_mesh.radius = 0.015 * SCENE_SCALE
@@ -274,7 +274,7 @@ func _build_parallelogram():
 	label_b_copy = _create_floating_label("B (copy)", Color(0.9, 0.3, 0.8, 0.6))
 
 
-func _build_grid_arrows():
+func _build_grid_arrows() -> void:
 	var half := float(GRID_SIZE - 1) * 0.5
 	for gx in range(GRID_SIZE):
 		for gz in range(GRID_SIZE):
@@ -320,7 +320,7 @@ func _build_small_arrow(pos: Vector3) -> Dictionary:
 	return {"root": root, "shaft": shaft, "cone": cone}
 
 
-func _build_rain_particles():
+func _build_rain_particles() -> void:
 	var rain_mat := _get_shared_material(Color(0.5, 0.7, 1.0, 0.8), true)
 	for i in range(PARTICLE_COUNT):
 		var mesh := MeshInstance3D.new()
@@ -344,7 +344,7 @@ func _build_rain_particles():
 		})
 
 
-func _build_pressure_zones():
+func _build_pressure_zones() -> void:
 	# High pressure — blue translucent sphere, pushes outward
 	high_pressure = _create_pressure_sphere(Color(0.2, 0.4, 0.9, 0.12), "HighPressure")
 	high_pressure.position = Vector3(1.5, 0.3, -1.0) * SCENE_SCALE
@@ -390,7 +390,7 @@ func _create_pressure_sphere(color: Color, sphere_name: String) -> Node3D:
 	return root
 
 
-func _build_decomposition_display():
+func _build_decomposition_display() -> void:
 	# Shows wind + gravity = trajectory at a sample point
 	decomp_root = Node3D.new()
 	decomp_root.name = "Decomposition"
@@ -428,7 +428,7 @@ func _create_decomp_arrow(color: Color) -> MeshInstance3D:
 	return mesh
 
 
-func _build_controls():
+func _build_controls() -> void:
 	var sc := SCENE_SCALE
 	var control_base := Vector3(-3.5, 1.5, -2.5)
 
@@ -520,7 +520,7 @@ func _wind_at(pos: Vector3, base_a: Vector3, base_b: Vector3) -> Vector3:
 	return base_wind
 
 
-func _update_grid_arrows(a: Vector3, b: Vector3):
+func _update_grid_arrows(a: Vector3, b: Vector3) -> void:
 	var sc := SCENE_SCALE
 	for arrow_data in grid_arrows:
 		var root: Node3D = arrow_data["root"]
@@ -564,7 +564,7 @@ func _update_grid_arrows(a: Vector3, b: Vector3):
 		cone.material_override = _get_shared_material(color, true)
 
 
-func _move_particles(delta: float, a: Vector3, b: Vector3):
+func _move_particles(delta: float, a: Vector3, b: Vector3) -> void:
 	var sc := SCENE_SCALE
 	var grav := Vector3(0, -gravity_strength, 0)
 
@@ -592,7 +592,7 @@ func _move_particles(delta: float, a: Vector3, b: Vector3):
 		node.position = pos * sc
 
 
-func _update_pressure_zones():
+func _update_pressure_zones() -> void:
 	# Slowly drift pressure zones
 	var hp_x: float = 1.5 + sin(pressure_time) * 0.5
 	var hp_z: float = -1.0 + cos(pressure_time * 0.7) * 0.3
@@ -603,7 +603,7 @@ func _update_pressure_zones():
 	low_pressure.position = Vector3(lp_x, 0.3, lp_z) * SCENE_SCALE
 
 
-func _update_decomposition(sum: Vector3):
+func _update_decomposition(sum: Vector3) -> void:
 	if decomp_root == null:
 		return
 
@@ -620,7 +620,7 @@ func _update_decomposition(sum: Vector3):
 	_orient_decomp_arrow(decomp_result_arrow, result_vec, sc)
 
 
-func _orient_decomp_arrow(mesh: MeshInstance3D, vec: Vector3, sc: float):
+func _orient_decomp_arrow(mesh: MeshInstance3D, vec: Vector3, sc: float) -> void:
 	var mag := vec.length()
 	if mag < 0.01:
 		mesh.visible = false
@@ -633,7 +633,7 @@ func _orient_decomp_arrow(mesh: MeshInstance3D, vec: Vector3, sc: float):
 	mesh.position = dir * arrow_len * 0.5
 
 
-func _update_info_text(a: Vector3, b: Vector3, sum: Vector3):
+func _update_info_text(a: Vector3, b: Vector3, sum: Vector3) -> void:
 	if info_label == null:
 		return
 
@@ -676,14 +676,14 @@ func _create_dotted_line_multimesh(color: Color) -> MultiMeshInstance3D:
 	return mmi
 
 
-func _update_dotted_lines(a: Vector3, b: Vector3, _result: Vector3):
+func _update_dotted_lines(a: Vector3, b: Vector3, _result: Vector3) -> void:
 	# Line from tip of A to A+B (showing B's copy)
 	_update_single_dotted_line(dotted_line_b, a * SCENE_SCALE, (a + b) * SCENE_SCALE)
 	# Line from tip of B to A+B (showing A's copy)
 	_update_single_dotted_line(dotted_line_a, b * SCENE_SCALE, (a + b) * SCENE_SCALE)
 
 
-func _update_single_dotted_line(mmi: MultiMeshInstance3D, start: Vector3, end: Vector3):
+func _update_single_dotted_line(mmi: MultiMeshInstance3D, start: Vector3, end: Vector3) -> void:
 	if mmi == null:
 		return
 	var direction := end - start
@@ -718,7 +718,7 @@ func _create_floating_label(text: String, color: Color) -> Label3D:
 #  CACHING (from VectorAddition pattern)
 # ════════════════════════════════════════════════════════════════════
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null:
 		return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
@@ -736,7 +736,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	return Vector3.ZERO
 
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
@@ -749,12 +749,12 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 #  WEATHER MODES
 # ════════════════════════════════════════════════════════════════════
 
-func _cycle_mode():
+func _cycle_mode() -> void:
 	current_mode = (current_mode + 1) % MODE_NAMES.size()
 	_apply_mode(current_mode)
 
 
-func _apply_mode(mode_idx: int):
+func _apply_mode(mode_idx: int) -> void:
 	current_mode = mode_idx
 	var vec_a: Vector3 = MODE_VECTORS_A[mode_idx]
 	var vec_b: Vector3 = MODE_VECTORS_B[mode_idx]
@@ -779,14 +779,14 @@ func _apply_mode(mode_idx: int):
 	_reset_particles()
 
 
-func _toggle_grid():
+func _toggle_grid() -> void:
 	grid_visible = not grid_visible
 	for arrow_data in grid_arrows:
 		var root: Node3D = arrow_data["root"]
 		root.visible = grid_visible
 
 
-func reset():
+func reset() -> void:
 	_apply_mode(0)
 	gravity_strength = 1.0
 	pressure_intensity = 0.5
@@ -794,7 +794,7 @@ func reset():
 	_reset_particles()
 
 
-func _reset_particles():
+func _reset_particles() -> void:
 	for p in particles:
 		p["position"] = _random_rain_start()
 		p["velocity"] = Vector3.ZERO
@@ -812,19 +812,19 @@ func _random_rain_start() -> Vector3:
 #  VR BUTTON CALLBACKS
 # ════════════════════════════════════════════════════════════════════
 
-func _on_mode_pressed():
+func _on_mode_pressed() -> void:
 	_cycle_mode()
 
-func _on_grid_pressed():
+func _on_grid_pressed() -> void:
 	_toggle_grid()
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	reset()
 
-func _on_gravity_changed(value: float):
+func _on_gravity_changed(value: float) -> void:
 	gravity_strength = lerpf(0.0, 2.0, value)
 
-func _on_pressure_changed(value: float):
+func _on_pressure_changed(value: float) -> void:
 	pressure_intensity = lerpf(0.0, 1.0, value)
 
 
@@ -832,7 +832,7 @@ func _on_pressure_changed(value: float):
 #  BUTTON/SLIDER HELPERS
 # ════════════════════════════════════════════════════════════════════
 
-func _set_button_label(button: Node3D, text: String):
+func _set_button_label(button: Node3D, text: String) -> void:
 	var label := button.get_node_or_null("Label3D")
 	if label:
 		label.text = text
@@ -842,10 +842,16 @@ func _set_button_label(button: Node3D, text: String):
 			button.set_button_text(text)
 
 
-func _set_slider_label(slider: Node3D, text: String):
+func _set_slider_label(slider: Node3D, text: String) -> void:
 	var label := slider.get_node_or_null("Label3D")
 	if label:
 		label.text = text
 	else:
 		if slider.has_method("set_slider_text"):
 			slider.set_slider_text(text)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

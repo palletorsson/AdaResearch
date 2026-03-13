@@ -28,17 +28,17 @@ extends Node3D
 var platforms: Array[Node3D] = []
 var time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	generate_platforms()
 	setup_camera()
 	create_environment()
 	print("SimpleOscillatingBridge: Created %d platforms" % num_platforms)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	time += delta * oscillation_speed
 	update_platform_positions()
 
-func generate_platforms():
+func generate_platforms() -> void:
 	"""Create individual platform cubes"""
 	platforms.clear()
 
@@ -94,7 +94,7 @@ func create_platform(index: int) -> Node3D:
 
 	return platform_node
 
-func update_platform_positions():
+func update_platform_positions() -> void:
 	"""Update positions of all platforms based on sine/cosine"""
 	for platform in platforms:
 		if not is_instance_valid(platform):
@@ -113,7 +113,7 @@ func update_platform_positions():
 		var base_z = platform.position.z
 		platform.position = Vector3(x_offset, y_offset, base_z)
 
-func setup_camera():
+func setup_camera() -> void:
 	"""Setup camera for good overview"""
 	var camera = Camera3D.new()
 	camera.name = "Camera3D"
@@ -124,7 +124,7 @@ func setup_camera():
 	camera.position = Vector3(-camera_distance, camera_height, bridge_center_z)
 	camera.look_at_from_position(camera.position, Vector3(0, 0, bridge_center_z), Vector3.UP)
 
-func create_environment():
+func create_environment() -> void:
 	"""Create lighting"""
 	var light = DirectionalLight3D.new()
 	light.name = "DirectionalLight3D"
@@ -152,23 +152,29 @@ func get_gradient_color(progress: float) -> Color:
 
 # Public API
 
-func reset():
+func reset() -> void:
 	"""Reset the bridge animation"""
 	time = 0.0
 
-func set_oscillation_speed(speed: float):
+func set_oscillation_speed(speed: float) -> void:
 	"""Change oscillation speed"""
 	oscillation_speed = speed
 
-func set_amplitudes(x_amp: float, y_amp: float):
+func set_amplitudes(x_amp: float, y_amp: float) -> void:
 	"""Change oscillation amplitudes"""
 	oscillation_amplitude_x = x_amp
 	oscillation_amplitude_y = y_amp
 
-func pause():
+func pause() -> void:
 	"""Pause oscillation"""
 	set_process(false)
 
-func resume():
+func resume() -> void:
 	"""Resume oscillation"""
 	set_process(true)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

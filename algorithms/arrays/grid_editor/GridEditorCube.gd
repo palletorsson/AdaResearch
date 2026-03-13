@@ -226,3 +226,9 @@ func set_paired_cube(cube: GridEditorCube) -> void:
 func set_grid_origin(origin: Vector3) -> void:
 	grid_origin = origin
 	update_position_from_grid()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

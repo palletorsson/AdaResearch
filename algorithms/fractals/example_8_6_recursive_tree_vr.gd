@@ -39,7 +39,7 @@ var trunk_color: Color = Color(0.8, 0.5, 0.7, 1.0)  # Purple-pink trunk
 var branch_color: Color = Color(1.0, 0.7, 0.9, 1.0)  # Pink branches
 var tip_color: Color = Color(1.0, 0.6, 1.0, 1.0)     # Bright pink tips
 
-func _ready():
+func _ready() -> void:
 	# Create UI
 	create_info_label()
 	create_angle_controller()
@@ -55,7 +55,7 @@ func _ready():
 	update_info_label()
 	print("Example 8.6: Recursive Tree - Depth: %d, Angle: %.1f°" % [recursion_depth, branch_angle])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_growth and current_growth_depth < recursion_depth:
 		growth_timer += delta
 		if growth_timer >= growth_speed:
@@ -65,7 +65,7 @@ func _process(delta):
 			grow_tree(Vector3.ZERO, Vector3.UP, initial_length, initial_thickness, current_growth_depth)
 			update_info_label()
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -75,7 +75,7 @@ func create_info_label():
 	info_label.position = Vector3(0, 0.7, 0)
 	add_child(info_label)
 
-func create_angle_controller():
+func create_angle_controller() -> void:
 	"""Create 3D controller for branch angle"""
 	angle_controller = ParameterController3D.new()
 	angle_controller.parameter_name = "Branch Angle"
@@ -87,20 +87,20 @@ func create_angle_controller():
 	angle_controller.value_changed.connect(_on_angle_changed)
 	add_child(angle_controller)
 
-func _on_angle_changed(new_angle: float):
+func _on_angle_changed(new_angle: float) -> void:
 	"""Update branch angle and redraw tree"""
 	branch_angle = new_angle
 	clear_branches()
 	grow_tree(Vector3.ZERO, Vector3.UP, initial_length, initial_thickness, current_growth_depth)
 	print("Branch angle changed to: %.1f°" % branch_angle)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		var branch_count = branches.size()
 		info_label.text = "Recursive Tree\nDepth: %d\nBranches: %d" % [current_growth_depth, branch_count]
 
-func grow_tree(start_pos: Vector3, direction: Vector3, length: float, thickness: float, depth: int):
+func grow_tree(start_pos: Vector3, direction: Vector3, length: float, thickness: float, depth: int) -> void:
 	"""Recursively grow the tree"""
 	if depth <= 0 or length < 0.01:
 		return
@@ -128,7 +128,7 @@ func grow_tree(start_pos: Vector3, direction: Vector3, length: float, thickness:
 		if depth > 2:
 			grow_tree(end_pos, direction, length * length_reduction * 0.8, thickness * thickness_reduction, depth - 2)
 
-func create_branch(start: Vector3, end: Vector3, thickness: float, depth: int):
+func create_branch(start: Vector3, end: Vector3, thickness: float, depth: int) -> void:
 	"""Create a cylindrical branch"""
 	var branch = MeshInstance3D.new()
 
@@ -180,13 +180,13 @@ func rotate_vector_around_axis(vec: Vector3, axis: Vector3, angle: float) -> Vec
 	var rotation_basis = Basis(axis.normalized(), angle)
 	return rotation_basis * vec
 
-func clear_branches():
+func clear_branches() -> void:
 	"""Clear all branches"""
 	for branch in branches:
 		branch.queue_free()
 	branches.clear()
 
-func increase_depth():
+func increase_depth() -> void:
 	"""Increase recursion depth"""
 	recursion_depth += 1
 	current_growth_depth = recursion_depth
@@ -195,7 +195,7 @@ func increase_depth():
 	update_info_label()
 	print("Recursion depth increased to: %d" % recursion_depth)
 
-func decrease_depth():
+func decrease_depth() -> void:
 	"""Decrease recursion depth"""
 	if recursion_depth > 1:
 		recursion_depth -= 1
@@ -205,10 +205,16 @@ func decrease_depth():
 		update_info_label()
 		print("Recursion depth decreased to: %d" % recursion_depth)
 
-func reset():
+func reset() -> void:
 	"""Reset growth animation"""
 	current_growth_depth = 0
 	growth_timer = 0.0
 	clear_branches()
 	update_info_label()
 	print("Tree reset")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

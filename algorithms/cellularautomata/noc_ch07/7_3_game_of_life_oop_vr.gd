@@ -174,3 +174,9 @@ class OopCell:
 		x = ix
 		y = iy
 		alive = state
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

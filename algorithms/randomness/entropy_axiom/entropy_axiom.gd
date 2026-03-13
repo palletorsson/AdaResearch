@@ -14,10 +14,10 @@ extends Node3D
 
 var point_scene = preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
 
-func _ready():
+func _ready() -> void:
 	generate_entropy_grid()
 
-func generate_entropy_grid():
+func generate_entropy_grid() -> void:
 	for z in range(grid_size_z):
 		for y in range(grid_size_y):
 			for x in range(grid_size_x):

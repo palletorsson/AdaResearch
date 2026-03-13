@@ -20,7 +20,7 @@ var is_running: bool = false
 var cells_collapsed_count: int = 0
 var total_cells: int = 0
 
-func _ready():
+func _ready() -> void:
 	width = grid_size.x
 	height = grid_size.y
 	depth = grid_size.z
@@ -105,7 +105,7 @@ func _load_prototypes() -> bool:
 	print("Loaded %d prototypes." % prototypes.size())
 	return true
 
-func _init_grid():
+func _init_grid() -> void:
 	wave = []
 	collapsed = []
 	wave.resize(total_cells)
@@ -154,7 +154,7 @@ func _run_rest_of_wfc_instant() -> bool:
 			return false
 	return true
 
-func _generate_base_terrain():
+func _generate_base_terrain() -> void:
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.frequency = 0.08
@@ -297,7 +297,7 @@ func _spawn_tile(idx: int, proto_idx: int):
 	tile.name = "Tile_%d_%d_%d" % [pos_i.x, pos_i.y, pos_i.z]
 	add_child(tile)
 
-func _collapse_cell(idx: int):
+func _collapse_cell(idx: int) -> void:
 	var options = wave[idx]
 	var total_weight = 0.0
 	for opt in options:
@@ -424,3 +424,9 @@ func _check_socket(tile_a: int, tile_b: int, dir_a: String, dir_b: String) -> bo
 	var socket_b = meta_b[dir_b]
 	
 	return socket_a == socket_b
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

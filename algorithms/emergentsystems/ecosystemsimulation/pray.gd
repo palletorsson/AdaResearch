@@ -3,14 +3,14 @@ class_name Prey
 
 var food_collected: float = 0.0
 
-func _init(pos: Vector2, dna_values: Dictionary = {}):
+func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
 	super._init(pos, dna_values)
 
-func eat_food(amount: float):
+func eat_food(amount: float) -> void:
 	food_collected += amount
 	health = min(health + amount * 0.1, 1.0)  # Eating food restores health
 
-func update(delta: float):
+func update(delta: float) -> void:
 	super.update(delta)
 	
 	# Metabolism - slowly consume collected food

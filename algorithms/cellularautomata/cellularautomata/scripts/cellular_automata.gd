@@ -27,7 +27,7 @@ var scroll_on = false  # Ensures scrolling happens only when grabbed
 # INITIALIZATION
 # ==============================
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	_set_rules(start_rule)
 	
@@ -53,7 +53,7 @@ func _ready():
 # AUTOMATA UPDATE LOGIC
 # ==============================
 
-func _set_rules(rule_value: int):
+func _set_rules(rule_value: int) -> void:
 	""" Converts the rule number to an 8-bit binary array. """
 	rule_set.clear()
 	var binary_string = _int_to_binary(rule_value, 8)
@@ -76,7 +76,7 @@ func _update_automaton():
 # ROW GENERATION
 # ==============================
 
-func _generate_next_row():
+func _generate_next_row() -> void:
 	""" Generates the next row of the automaton and scrolls the history. """
 	history.append(current_row.duplicate())
 	if history.size() > img_height:

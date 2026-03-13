@@ -23,24 +23,24 @@ class Ant:
 	var visual_object: CSGSphere3D
 	var speed: float = 2.0
 	
-	func _init(start_pos: Vector2):
+	func _init(start_pos: Vector2) -> void:
 		position = start_pos
 		target = start_pos
 		path = []
 
-func _ready():
+func _ready() -> void:
 	create_pheromone_grid()
 	create_food_sources()
 	create_ants()
 	setup_materials()
 
-func create_pheromone_grid():
+func create_pheromone_grid() -> void:
 	for x in range(grid_size):
 		pheromone_grid.append([])
 		for y in range(grid_size):
 			pheromone_grid[x].append(0.0)
 
-func create_food_sources():
+func create_food_sources() -> void:
 	var food_parent = $FoodSources
 	var food_positions = [
 		Vector2(3, 3),
@@ -56,7 +56,7 @@ func create_food_sources():
 		food_parent.add_child(food)
 		food_sources.append(pos)
 
-func create_ants():
+func create_ants() -> void:
 	var ant_parent = $Ants
 	
 	for i in range(ant_count):
@@ -71,7 +71,7 @@ func create_ants():
 		
 		ants.append(ant)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Nest material
 	var nest_material = StandardMaterial3D.new()
 	nest_material.albedo_color = Color(0.6, 0.4, 0.2, 1.0)
@@ -110,7 +110,7 @@ func setup_materials():
 	count_material.emission = Color(0.05, 0.2, 0.3, 1.0)
 	$AntCount.material_override = count_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	update_ants(delta)
@@ -119,7 +119,7 @@ func _process(delta):
 	animate_swarm()
 	animate_indicators()
 
-func update_ants(delta):
+func update_ants(delta) -> void:
 	for ant in ants:
 		if ant.has_food:
 			# Return to nest
@@ -145,7 +145,7 @@ func update_ants(delta):
 					ant.target = Vector2.ZERO
 					break
 
-func move_ant_towards_target(ant: Ant, delta):
+func move_ant_towards_target(ant: Ant, delta) -> void:
 	var direction = (ant.target - ant.position).normalized()
 	var movement = direction * ant.speed * delta
 	ant.position += movement
@@ -154,7 +154,7 @@ func move_ant_towards_target(ant: Ant, delta):
 	# Update visual position
 	ant.visual_object.position = Vector3(ant.position.x, ant.position.y, 0.1)
 
-func choose_next_target(ant: Ant):
+func choose_next_target(ant: Ant) -> void:
 	# Use ACO algorithm to choose next target
 	var possible_targets = []
 	var probabilities = []
@@ -213,7 +213,7 @@ func get_pheromone_at_position(pos: Vector2) -> float:
 	
 	return pheromone_grid[grid_x][grid_y]
 
-func deposit_pheromone_on_path(ant: Ant):
+func deposit_pheromone_on_path(ant: Ant) -> void:
 	for point in ant.path:
 		var grid_x = int((point.x + 4.0) / 8.0 * grid_size)
 		var grid_y = int((point.y + 4.0) / 8.0 * grid_size)
@@ -223,12 +223,12 @@ func deposit_pheromone_on_path(ant: Ant):
 		
 		pheromone_grid[grid_x][grid_y] += pheromone_deposit / ant.path.size()
 
-func evaporate_pheromones():
+func evaporate_pheromones() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			pheromone_grid[x][y] *= pheromone_evaporation
 
-func update_pheromone_visualization():
+func update_pheromone_visualization() -> void:
 	# Clear existing trails
 	for trail in pheromone_trails:
 		trail.queue_free()
@@ -266,7 +266,7 @@ func update_pheromone_visualization():
 				trail_parent.add_child(trail_point)
 				pheromone_trails.append(trail_point)
 
-func animate_swarm():
+func animate_swarm() -> void:
 	# Animate ants
 	for i in range(ants.size()):
 		var ant = ants[i]
@@ -293,7 +293,7 @@ func animate_swarm():
 		var trail_pulse = 1.0 + sin(time * 8.0 + trail.position.x + trail.position.y) * 0.4
 		trail.scale = Vector3.ONE * trail_pulse
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Pheromone strength indicator
 	var total_pheromone = 0.0
 	for x in range(grid_size):
@@ -319,3 +319,9 @@ func animate_indicators():
 	var pulse = 1.0 + sin(time * 4.0) * 0.1
 	$PheromoneStrength.scale.x = pulse
 	$AntCount.scale.x = pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

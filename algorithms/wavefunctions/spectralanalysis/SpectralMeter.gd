@@ -29,7 +29,7 @@ var player_camera: Camera3D
 var bar_width: float
 var meter_size: Vector2
 
-func _ready():
+func _ready() -> void:
 	# Initialize arrays
 	frequency_heights.resize(bar_count)
 	target_heights.resize(bar_count)
@@ -54,7 +54,7 @@ func _ready():
 	
 	print("SpectralMeter: Initialized with %d bars at %d fps" % [bar_count, update_rate])
 
-func _setup_spectrum_analyzer():
+func _setup_spectrum_analyzer() -> void:
 	"""Setup the spectrum analyzer on the target audio player"""
 	if not target_audio_player:
 		print("SpectralMeter: No target audio player assigned")
@@ -86,7 +86,7 @@ func _setup_spectrum_analyzer():
 	# Get the effect instance for reading spectrum data
 	spectrum_instance = AudioServer.get_bus_effect_instance(bus_index, 0)
 
-func _find_player_camera():
+func _find_player_camera() -> void:
 	"""Find the player camera for distance-based optimization"""
 	# Try multiple common camera locations
 	var potential_cameras = [
@@ -101,7 +101,7 @@ func _find_player_camera():
 			print("SpectralMeter: Found player camera - %s" % camera.name)
 			break
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not enabled or not spectrum_instance:
 		return
 	
@@ -129,7 +129,7 @@ func _should_skip_update() -> bool:
 	var distance = player_camera.global_position.distance_to(target_audio_player.global_position)
 	return distance > max_distance_from_player
 
-func _update_spectrum_data():
+func _update_spectrum_data() -> void:
 	"""Update the spectrum data from the audio analyzer"""
 	if not spectrum_instance:
 		return
@@ -154,12 +154,12 @@ func _update_spectrum_data():
 		
 		target_heights[i] = normalized * height_multiplier
 
-func _smooth_heights(delta: float):
+func _smooth_heights(delta: float) -> void:
 	"""Smooth the height transitions for better visuals"""
 	for i in range(bar_count):
 		frequency_heights[i] = lerp(frequency_heights[i], target_heights[i], 1.0 - pow(smoothing_factor, delta * 60.0))
 
-func _draw():
+func _draw() -> void:
 	"""Draw the spectrum meter"""
 	if not enabled:
 		return
@@ -189,28 +189,28 @@ func _draw():
 				var y = meter_size.y - frequency_heights[i]
 				draw_circle(Vector2(x, y), line_width * 0.5, line_color)
 
-func _on_resized():
+func _on_resized() -> void:
 	"""Handle meter resize"""
 	meter_size = size
 	bar_width = meter_size.x / float(bar_count)
 
 # Public API
-func set_target_audio_player(player: AudioStreamPlayer3D):
+func set_target_audio_player(player: AudioStreamPlayer3D) -> void:
 	"""Set the audio player to analyze"""
 	target_audio_player = player
 	_setup_spectrum_analyzer()
 
-func set_enabled(state: bool):
+func set_enabled(state: bool) -> void:
 	"""Enable or disable the meter"""
 	enabled = state
 	if not enabled:
 		queue_redraw()  # Clear the display
 
-func set_line_color(color: Color):
+func set_line_color(color: Color) -> void:
 	"""Change the line color"""
 	line_color = color
 
-func set_update_rate(fps: float):
+func set_update_rate(fps: float) -> void:
 	"""Change the update rate"""
 	update_rate = clamp(fps, 10.0, 60.0)
 	update_interval = 1.0 / update_rate

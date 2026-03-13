@@ -29,7 +29,7 @@ var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/telep
 var _config_applied := false
 var _generated := false
 
-func _ready():
+func _ready() -> void:
 	# Wait multiple frames for apply_grid_config to potentially be called (it uses call_deferred)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -39,7 +39,7 @@ func _ready():
 		print("BooleanTunnel: No config received, generating with defaults")
 		generate_tunnel()
 
-func apply_grid_config(config: Dictionary):
+func apply_grid_config(config: Dictionary) -> void:
 	print("BooleanTunnel: Applying grid config: %s" % str(config))
 	_config_applied = true
 	
@@ -93,7 +93,7 @@ func apply_grid_config(config: Dictionary):
 	# Regenerate with new config
 	generate_tunnel()
 
-func generate_tunnel():
+func generate_tunnel() -> void:
 	_generated = true
 	print("BooleanTunnel: Generating tunnel with settings:")
 	print("  - num_segments: %d" % num_segments)
@@ -179,7 +179,7 @@ func generate_tunnel():
 	if enable_teleporter:
 		_create_end_teleporter()
 
-func _create_end_teleporter():
+func _create_end_teleporter() -> void:
 	var teleporter = teleport_scene.instantiate()
 	teleporter.name = "EndTeleporter"
 	
@@ -214,7 +214,7 @@ func _create_end_teleporter():
 	add_child(teleporter)
 	print("BooleanTunnel: Created end teleporter at z=%.1f, destination=%s" % [last_cube_z, teleport_destination])
 
-func _on_teleporter_activated():
+func _on_teleporter_activated() -> void:
 	# Find and teleport the player
 	var player_root = _find_player_in_scene()
 	if player_root:

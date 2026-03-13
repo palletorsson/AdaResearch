@@ -267,3 +267,9 @@ func _get_noise_3d(x: float, z: float, t: float) -> float:
 	n += cos(x * freq3 + t * 0.9) * cos(z * freq3 - t * 0.6) * 0.25
 
 	return n / 1.75
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -16,14 +16,14 @@ var particle_multi_mesh: MultiMeshInstance3D
 var scatter_positions: PackedVector3Array = []
 var scatter_normals: PackedVector3Array = []
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_surface_mesh()
 	generate_scatter_points()
 	create_instanced_objects()
 	start_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -44,7 +44,7 @@ func setup_scene():
 	# Add multiple colored lights for ambiance
 	create_ambient_lights()
 
-func create_ambient_lights():
+func create_ambient_lights() -> void:
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
 	main_light.position = Vector3(10, 15, 10)
@@ -64,7 +64,7 @@ func create_ambient_lights():
 		light.omni_range = 15.0
 		add_child(light)
 
-func create_surface_mesh():
+func create_surface_mesh() -> void:
 	# Create a complex surface for scattering - like terrain or organic shapes
 	var noise = FastNoiseLite.new()
 	noise.seed = 12345
@@ -120,7 +120,7 @@ func create_surface_mesh():
 	# Add collision to terrain
 	create_terrain_collision()
 
-func create_terrain_collision():
+func create_terrain_collision() -> void:
 	# Create collision shape from terrain mesh
 	var static_body = StaticBody3D.new()
 	static_body.name = "TerrainCollision"
@@ -150,7 +150,7 @@ func create_terrain_collision():
 
 	print("Terrain collision created with ", faces.size() / 3, " triangles")
 
-func generate_scatter_points():
+func generate_scatter_points() -> void:
 	# Sample points across the surface mesh
 	scatter_positions.clear()
 	scatter_normals.clear()
@@ -187,7 +187,7 @@ func generate_scatter_points():
 		scatter_positions.append(point)
 		scatter_normals.append(normal)
 
-func create_instanced_objects():
+func create_instanced_objects() -> void:
 	# Create crystals
 	create_crystal_instances()
 	
@@ -197,7 +197,7 @@ func create_instanced_objects():
 	# Create particle effects
 	create_particle_instances()
 
-func create_crystal_instances():
+func create_crystal_instances() -> void:
 	crystal_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
 	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
@@ -241,7 +241,7 @@ func create_crystal_instances():
 			
 			multi_mesh.set_instance_transform(i, transform)
 
-func create_flower_instances():
+func create_flower_instances() -> void:
 	flower_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
 	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
@@ -276,7 +276,7 @@ func create_flower_instances():
 			
 			multi_mesh.set_instance_transform(i, transform)
 
-func create_particle_instances():
+func create_particle_instances() -> void:
 	particle_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
 	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
@@ -421,7 +421,7 @@ func create_flower_mesh() -> ArrayMesh:
 	
 	return mesh
 
-func start_animations():
+func start_animations() -> void:
 	# Gentle swaying animation for crystals
 	if crystal_multi_mesh and crystal_multi_mesh.multimesh:
 		var tween = create_tween()
@@ -434,7 +434,7 @@ func start_animations():
 		tween.set_loops()
 		tween.tween_method(animate_particles, 0.0, PI * 2.0, 6.0 / animation_speed)
 
-func animate_crystals(time: float):
+func animate_crystals(time: float) -> void:
 	if not crystal_multi_mesh or not crystal_multi_mesh.multimesh:
 		return
 		
@@ -445,7 +445,7 @@ func animate_crystals(time: float):
 		var new_transform = original_transform.rotated_local(Vector3.RIGHT, sway)
 		multi_mesh.set_instance_transform(i, new_transform)
 
-func animate_particles(time: float):
+func animate_particles(time: float) -> void:
 	if not particle_multi_mesh or not particle_multi_mesh.multimesh:
 		return
 		
@@ -465,3 +465,9 @@ func animate_particles(time: float):
 			transform = transform.scaled_local(Vector3(scale, scale, scale))
 			
 			multi_mesh.set_instance_transform(i, transform)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

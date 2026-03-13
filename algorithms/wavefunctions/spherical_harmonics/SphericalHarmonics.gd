@@ -296,3 +296,9 @@ func set_position_spherical(new_theta: float, new_phi: float) -> void:
 func toggle_auto_orbit() -> void:
 	auto_orbit = !auto_orbit
 	print("SphericalHarmonics: Auto-orbit %s" % ("ON" if auto_orbit else "OFF"))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

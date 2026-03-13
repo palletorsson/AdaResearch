@@ -13,15 +13,15 @@ var time_resolution = 0.5
 var animation_time = 0.0
 var show_frequency_domain = false
 
-func _ready():
+func _ready() -> void:
 	create_time_domain_display()
 	create_frequency_domain_display()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	animation_time += delta
 	update_time_domain_signal()
 
-func create_time_domain_display():
+func create_time_domain_display() -> void:
 	# Clear existing points
 	for point in time_domain_points:
 		point.queue_free()
@@ -42,7 +42,7 @@ func create_time_domain_display():
 		add_child(point)
 		time_domain_points.append(point)
 
-func create_frequency_domain_display():
+func create_frequency_domain_display() -> void:
 	# Clear existing bars
 	for bar in frequency_domain_bars:
 		bar.queue_free()
@@ -66,7 +66,7 @@ func create_frequency_domain_display():
 	# Initially hide frequency domain
 	set_frequency_domain_visible(false)
 
-func update_time_domain_signal():
+func update_time_domain_signal() -> void:
 	for i in range(time_domain_points.size()):
 		var point = time_domain_points[i]
 		var x = (i - time_domain_points.size()/2) * time_resolution
@@ -114,7 +114,7 @@ func generate_signal_at_time(t: float) -> float:
 	
 	return signal_value
 
-func compute_fft():
+func compute_fft() -> void:
 	# Simple FFT-like visualization
 	# In a real implementation, you'd use a proper FFT algorithm
 	var signal_samples = []
@@ -141,15 +141,21 @@ func compute_fft():
 	# Show frequency domain
 	set_frequency_domain_visible(true)
 
-func reset_signal():
+func reset_signal() -> void:
 	animation_time = 0.0
 	set_frequency_domain_visible(false)
 	update_time_domain_signal()
 
-func set_frequency_domain_visible(visible: bool):
+func set_frequency_domain_visible(visible: bool) -> void:
 	for bar in frequency_domain_bars:
 		bar.visible = visible
 
-func update_signal():
+func update_signal() -> void:
 	# This function is called when parameters change
 	update_time_domain_signal()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

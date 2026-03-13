@@ -32,7 +32,7 @@ var solutions = [
 
 var current_solution_index: int = 0
 
-func _ready():
+func _ready() -> void:
 	# Initialize components
 	lsystem = AxiomGardenLSystem.new("F", {"F": "F[+F]F[-F]"})
 	turtle = Turtle.new()
@@ -52,7 +52,7 @@ func _ready():
 	# Load first solution
 	load_solution(0)
 
-func load_solution(index: int):
+func load_solution(index: int) -> void:
 	if index < 0: index = solutions.size() - 1
 	if index >= solutions.size(): index = 0
 	
@@ -79,14 +79,14 @@ func load_solution(index: int):
 	
 	grow_garden()
 
-func _on_next_pressed():
+func _on_next_pressed() -> void:
 	load_solution(current_solution_index + 1)
 
-func _on_prev_pressed():
+func _on_prev_pressed() -> void:
 	load_solution(current_solution_index - 1)
 
 
-func grow_garden():
+func grow_garden() -> void:
 	# 1. Generate String
 	var sequence = lsystem.generate(generations)
 	print("Generated sequence length: " + str(sequence.length()))
@@ -139,7 +139,7 @@ func check_collisions(lines: Array) -> bool:
 	return false
 
 
-func check_goals(lines: Array):
+func check_goals(lines: Array) -> void:
 	var targets = get_tree().get_nodes_in_group("targets")
 	if targets.is_empty():
 		return
@@ -160,7 +160,7 @@ func check_goals(lines: Array):
 			target.emit_signal("target_reached")
 
 
-func _on_grow_pressed():
+func _on_grow_pressed() -> void:
 	if rule_input:
 		var text = rule_input.text
 		# Parse rule: "F=F[+F]"
@@ -171,3 +171,9 @@ func _on_grow_pressed():
 			lsystem.set_rule(predecessor, successor)
 			print("Rule updated: " + predecessor + " -> " + successor)
 			grow_garden()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

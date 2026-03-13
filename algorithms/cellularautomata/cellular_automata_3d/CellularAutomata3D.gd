@@ -24,12 +24,12 @@ var alive_count = 0
 
 @onready var multi_mesh_instance: MultiMeshInstance3D = $MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	_setup_multimesh()
 	setup_materials()
 	initialize_3d_automaton()
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	# Create MultiMesh if not exists
 	if not has_node("MultiMeshInstance3D"):
 		multi_mesh_instance = MultiMeshInstance3D.new()
@@ -56,7 +56,7 @@ func _setup_multimesh():
 		
 	multi_mesh_instance.multimesh = multimesh
 
-func setup_materials():
+func setup_materials() -> void:
 	# Generation control material
 	var gen_material = StandardMaterial3D.new()
 	gen_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
@@ -73,7 +73,7 @@ func setup_materials():
 	if has_node("DensityIndicator"):
 		$DensityIndicator.material_override = density_material
 
-func initialize_3d_automaton():
+func initialize_3d_automaton() -> void:
 	current_state = []
 	# Initialize grid
 	for x in range(grid_size):
@@ -114,7 +114,7 @@ func initialize_3d_automaton():
 	current_generation = 0
 	update_cell_display()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if !is_simulation_running:
 		return
 
@@ -135,10 +135,10 @@ func _process(delta):
 	
 	animate_indicators()
 
-func stop_simulation():
+func stop_simulation() -> void:
 	is_simulation_running = false
 
-func generate_next_3d_generation():
+func generate_next_3d_generation() -> void:
 	if current_generation >= max_generations:
 		stop_simulation()
 		return
@@ -221,11 +221,11 @@ func apply_3d_rule(current_cell: int, neighbors: int) -> int:
 		_:
 			return current_cell
 
-func switch_3d_rule():
+func switch_3d_rule() -> void:
 	current_rule = (current_rule + 1) % Rule3D.size()
 	initialize_3d_automaton()
 
-func update_cell_display():
+func update_cell_display() -> void:
 	alive_count = 0
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh: return
 	
@@ -268,7 +268,7 @@ func update_cell_display():
 				
 				idx += 1
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Generation control
 	if has_node("GenerationControl"):
 		var gen_height = (current_generation % 20) * 0.15 + 0.5
@@ -321,3 +321,9 @@ func get_rule_name() -> String:
 			return "Diffusion"
 		_:
 			return "Unknown"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

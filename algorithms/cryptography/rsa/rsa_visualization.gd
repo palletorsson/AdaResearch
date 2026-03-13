@@ -84,10 +84,10 @@ var key_generation_time: float = 0.0
 var encryption_time: float = 0.0
 var decryption_time: float = 0.0
 
-func _init():
+func _init() -> void:
 	name = "RSA_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	
@@ -97,7 +97,7 @@ func _ready():
 	if auto_start_demo:
 		call_deferred("start_demo_encryption")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for RSA visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -120,14 +120,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for step-by-step operations"""
 	operation_timer = Timer.new()
 	operation_timer.wait_time = calculation_delay
 	operation_timer.timeout.connect(_on_operation_timer_timeout)
 	add_child(operation_timer)
 
-func start_key_generation():
+func start_key_generation() -> void:
 	"""Start RSA key generation process"""
 	if is_generating_keys:
 		return
@@ -144,7 +144,7 @@ func start_key_generation():
 	else:
 		generate_keys_complete()
 
-func generate_keys_complete():
+func generate_keys_complete() -> void:
 	"""Generate complete RSA key pair"""
 	# Step 1: Generate two large primes
 	var prime_bit_size = key_size_bits / 2
@@ -304,7 +304,7 @@ func mod_exp(base: int, exponent: int, modulus: int) -> int:
 	
 	return result
 
-func finalize_key_generation():
+func finalize_key_generation() -> void:
 	"""Finalize key generation and update visualization"""
 	is_generating_keys = false
 	key_generation_complete = true
@@ -321,7 +321,7 @@ func finalize_key_generation():
 	create_key_visualization()
 	update_ui()
 
-func start_demo_encryption():
+func start_demo_encryption() -> void:
 	"""Start demonstration encryption"""
 	if not key_generation_complete:
 		print("Keys not generated yet, waiting...")
@@ -330,7 +330,7 @@ func start_demo_encryption():
 	plaintext_message = demo_message
 	start_encryption(plaintext_message)
 
-func start_encryption(message: String):
+func start_encryption(message: String) -> void:
 	"""Start encryption process"""
 	if is_encrypting or not key_generation_complete:
 		return
@@ -367,7 +367,7 @@ func message_to_numbers(message: String) -> Array:
 		numbers.append(char_code)
 	return numbers
 
-func encrypt_complete():
+func encrypt_complete() -> void:
 	"""Perform complete encryption"""
 	ciphertext_numbers.clear()
 	
@@ -378,7 +378,7 @@ func encrypt_complete():
 	
 	finalize_encryption()
 
-func finalize_encryption():
+func finalize_encryption() -> void:
 	"""Finalize encryption process"""
 	is_encrypting = false
 	encryption_time = Time.get_ticks_msec() - encryption_time
@@ -391,7 +391,7 @@ func finalize_encryption():
 	create_encryption_visualization()
 	update_ui()
 
-func start_decryption():
+func start_decryption() -> void:
 	"""Start decryption process"""
 	if is_decrypting or ciphertext_numbers.is_empty():
 		return
@@ -408,7 +408,7 @@ func start_decryption():
 	else:
 		decrypt_complete()
 
-func decrypt_complete():
+func decrypt_complete() -> void:
 	"""Perform complete decryption"""
 	decrypted_numbers.clear()
 	
@@ -432,7 +432,7 @@ func numbers_to_message(numbers: Array) -> String:
 		message += char(num)
 	return message
 
-func finalize_decryption():
+func finalize_decryption() -> void:
 	"""Finalize decryption process"""
 	is_decrypting = false
 	decryption_time = Time.get_ticks_msec() - decryption_time
@@ -450,7 +450,7 @@ func finalize_decryption():
 	create_decryption_visualization()
 	update_ui()
 
-func _on_operation_timer_timeout():
+func _on_operation_timer_timeout() -> void:
 	"""Handle step-by-step operation timer"""
 	if is_generating_keys:
 		step_key_generation()
@@ -459,7 +459,7 @@ func _on_operation_timer_timeout():
 	elif is_decrypting:
 		step_decryption()
 
-func step_key_generation():
+func step_key_generation() -> void:
 	"""Perform one step of key generation"""
 	match current_operation_step:
 		0:
@@ -487,7 +487,7 @@ func step_key_generation():
 			d = mod_inverse(e, phi_n)
 			finalize_key_generation()
 
-func step_encryption():
+func step_encryption() -> void:
 	"""Perform one step of encryption"""
 	if current_operation_step < plaintext_numbers.size():
 		var plaintext_num = plaintext_numbers[current_operation_step]
@@ -499,7 +499,7 @@ func step_encryption():
 	else:
 		finalize_encryption()
 
-func step_decryption():
+func step_decryption() -> void:
 	"""Perform one step of decryption"""
 	if current_operation_step < ciphertext_numbers.size():
 		var ciphertext_num = ciphertext_numbers[current_operation_step]
@@ -515,7 +515,7 @@ func step_decryption():
 			decrypted_message = str(decrypted_numbers[0])
 		finalize_decryption()
 
-func create_key_visualization():
+func create_key_visualization() -> void:
 	"""Create 3D visualization of RSA keys"""
 	clear_key_visualization()
 	
@@ -538,7 +538,7 @@ func create_key_visualization():
 	add_child(prime_q_mesh)
 	key_display_meshes.append(prime_q_mesh)
 
-func create_encryption_visualization():
+func create_encryption_visualization() -> void:
 	"""Create visualization of encryption process"""
 	clear_message_visualization()
 	
@@ -557,7 +557,7 @@ func create_encryption_visualization():
 	add_child(arrow_mesh)
 	message_display_meshes.append(arrow_mesh)
 
-func create_decryption_visualization():
+func create_decryption_visualization() -> void:
 	"""Create visualization of decryption process"""
 	# Add decrypted text display
 	var decrypted_mesh = create_message_display("DECRYPTED", Vector3(0, 0, -2), plaintext_color)
@@ -660,21 +660,21 @@ func create_arrow_display(from_pos: Vector3, to_pos: Vector3, color: Color) -> M
 	
 	return mesh_instance
 
-func clear_key_visualization():
+func clear_key_visualization() -> void:
 	"""Clear key visualization elements"""
 	for mesh in key_display_meshes:
 		if mesh:
 			mesh.queue_free()
 	key_display_meshes.clear()
 
-func clear_message_visualization():
+func clear_message_visualization() -> void:
 	"""Clear message visualization elements"""
 	for mesh in message_display_meshes:
 		if mesh:
 			mesh.queue_free()
 	message_display_meshes.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current RSA state"""
 	if not ui_display:
 		return
@@ -774,7 +774,7 @@ func get_factorization_difficulty() -> String:
 	else:
 		return "HARD (" + str(num_digits) + " digits)"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -802,7 +802,7 @@ func _input(event):
 				step_by_step_mode = not step_by_step_mode
 				print("Step-by-step mode: ", step_by_step_mode)
 
-func reset_rsa():
+func reset_rsa() -> void:
 	"""Reset RSA system"""
 	is_generating_keys = false
 	is_encrypting = false
@@ -830,14 +830,14 @@ func reset_rsa():
 	print("RSA system reset")
 	update_ui()
 
-func change_demo_message():
+func change_demo_message() -> void:
 	"""Change demonstration message"""
 	var messages = ["HELLO", "SECRET", "CRYPTO", "SECURE", "PRIVACY"]
 	demo_message = messages[randi() % messages.size()]
 	plaintext_message = demo_message
 	print("Changed demo message to: ", demo_message)
 
-func change_key_size(new_size: int):
+func change_key_size(new_size: int) -> void:
 	"""Change RSA key size"""
 	key_size_bits = new_size
 	reset_rsa()
@@ -875,4 +875,10 @@ func get_algorithm_info() -> Dictionary:
 			"plaintext_message": plaintext_message,
 			"decrypted_message": decrypted_message
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

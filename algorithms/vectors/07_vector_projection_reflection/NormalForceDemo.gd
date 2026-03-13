@@ -22,13 +22,13 @@ const UPDATE_INTERVAL = 0.1
 var surface_angle: float = 30.0  # degrees
 var surface_normal: Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	_update_surface_normal()
 	print("NormalForceDemo: Ready - See force decomposition!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup normal force demonstration"""
 	# Create angled surface
 	_create_surface()
@@ -67,7 +67,7 @@ func _setup_demo():
 		"Parallel (∥ surface)"
 	])
 
-func _create_surface():
+func _create_surface() -> void:
 	"""Create angled surface plane"""
 	surface_plane = MeshInstance3D.new()
 	var plane_mesh = PlaneMesh.new()
@@ -86,12 +86,12 @@ func _create_surface():
 	
 	add_child(surface_plane)
 
-func _update_surface_normal():
+func _update_surface_normal() -> void:
 	"""Calculate surface normal from angle"""
 	var angle_rad = deg_to_rad(surface_angle)
 	surface_normal = Vector3(0, cos(angle_rad), sin(angle_rad)).normalized()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	update_force_vector_position()
 	
 	# Gravity force (constant)
@@ -118,7 +118,7 @@ func _physics_process(delta):
 		_update_info(gravity, f_normal, f_parallel)
 		accumulator = 0.0
 
-func _update_info(gravity: Vector3, f_normal: Vector3, f_parallel: Vector3):
+func _update_info(gravity: Vector3, f_normal: Vector3, f_parallel: Vector3) -> void:
 	"""Update info display"""
 	var lines = [
 		"Normal Force Demo",
@@ -137,7 +137,7 @@ func _update_info(gravity: Vector3, f_normal: Vector3, f_parallel: Vector3):
 	]
 	update_info_text(lines)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -151,13 +151,19 @@ func _input(event):
 			surface_angle = clamp(surface_angle - 5.0, 0.0, 60.0)
 			_update_surface_angle()
 
-func _update_surface_angle():
+func _update_surface_angle() -> void:
 	"""Update surface angle and normal"""
 	surface_plane.rotation_degrees = Vector3(-surface_angle, 0, 0)
 	_update_surface_normal()
 	print("NormalForceDemo: Angle = %.1f°" % surface_angle)
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3(0, 0.1, 0))
 	print("NormalForceDemo: Reset")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

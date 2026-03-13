@@ -102,7 +102,7 @@ func generate_tiles() -> void:
 
 # ===== helpers =====
 
-func _set_owner_recursive(node: Node, owner: Node):
+func _set_owner_recursive(node: Node, owner: Node) -> void:
 	"""Set owner for node and all descendants (required for PackedScene.pack())"""
 	for child in node.get_children():
 		child.owner = owner
@@ -268,3 +268,9 @@ func _add_preview_camera_and_light(root: Node3D) -> void:
 	light.rotation_degrees = Vector3(-45, 45, 0)
 	root.add_child(light, true)  # Keep internal mode
 	light.owner = root  # Set owner so it saves
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

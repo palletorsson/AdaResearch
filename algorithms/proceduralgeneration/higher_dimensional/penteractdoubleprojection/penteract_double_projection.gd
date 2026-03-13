@@ -31,10 +31,10 @@ enum ProjectionMode {
 
 var time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	generate_penteract()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_rotation:
 		time += delta
 		rotation_5d_vw = time * rotation_speed * 0.7
@@ -43,7 +43,7 @@ func _process(delta):
 		rotation_4d_zw = time * rotation_speed * 0.3
 		generate_penteract()
 
-func generate_penteract():
+func generate_penteract() -> void:
 	"""Generate and double-project a 5D penteract"""
 	# Clear existing
 	for child in get_children():
@@ -188,7 +188,7 @@ func get_penteract_edges() -> Array:
 	
 	return edges
 
-func create_edge_mesh(vertices: Array, edges: Array, vertices_5d: Array):
+func create_edge_mesh(vertices: Array, edges: Array, vertices_5d: Array) -> void:
 	"""Create wireframe from edges"""
 	var immediate_mesh = ImmediateMesh.new()
 	var mesh_instance = MeshInstance3D.new()
@@ -234,10 +234,10 @@ func create_edge_mesh(vertices: Array, edges: Array, vertices_5d: Array):
 	
 	print("Penteract double-projected: 32 vertices, 80 edges")
 
-func regenerate():
+func regenerate() -> void:
 	generate_penteract()
 
-func set_projection_mode(mode: ProjectionMode):
+func set_projection_mode(mode: ProjectionMode) -> void:
 	"""Change projection mode and regenerate"""
 	projection_mode = mode
 	generate_penteract()
@@ -264,7 +264,7 @@ class Vector4D:
 	var z: float
 	var w: float
 	
-	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0):
+	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0) -> void:
 		x = px
 		y = py
 		z = pz
@@ -280,7 +280,7 @@ class Vector5:
 	var w: float
 	var v: float
 	
-	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0, pv: float = 0):
+	func _init(px: float = 0, py: float = 0, pz: float = 0, pw: float = 0, pv: float = 0) -> void:
 		x = px
 		y = py
 		z = pz
@@ -295,3 +295,9 @@ class Vector5:
 			w * scalar,
 			v * scalar
 		)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

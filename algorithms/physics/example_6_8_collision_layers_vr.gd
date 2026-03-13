@@ -35,7 +35,7 @@ var legend_label: Label3D
 # Current spawn mode
 var spawn_mode: int = 0  # 0=A, 1=B, 2=C
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_ui_labels()
@@ -50,7 +50,7 @@ func _ready():
 
 	print("Example 6.8: Collision Layers - Selective collision demonstration")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_spawn:
 		spawn_timer += delta
 		if spawn_timer >= 1.5:
@@ -60,7 +60,7 @@ func _process(delta):
 	cleanup_fallen_objects()
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_1:
 			spawn_mode = 0
@@ -76,7 +76,7 @@ func _input(event):
 		elif event.keycode == KEY_T:
 			auto_spawn = !auto_spawn
 
-func create_ui_labels():
+func create_ui_labels() -> void:
 	"""Create UI labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -97,12 +97,12 @@ GREEN: Collides with Ground only
 [1/2/3] Spawn | [R] Reset"""
 	add_child(legend_label)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		info_label.text = "Collision Layers\nP:%d B:%d G:%d" % [group_a_objects.size(), group_b_objects.size(), group_c_objects.size()]
 
-func create_ground():
+func create_ground() -> void:
 	"""Create ground with layer 1"""
 	ground = StaticBody3D.new()
 	ground.position = Vector3(0, -0.45, 0)
@@ -127,7 +127,7 @@ func create_ground():
 	collision.shape = box_shape
 	ground.add_child(collision)
 
-func spawn_random_object():
+func spawn_random_object() -> void:
 	"""Spawn random object type"""
 	var x = randf_range(-0.25, 0.25)
 	var z = randf_range(-0.25, 0.25)
@@ -139,7 +139,7 @@ func spawn_random_object():
 		1: spawn_object_b(pos)
 		2: spawn_object_c(pos)
 
-func spawn_object_a(pos: Vector3):
+func spawn_object_a(pos: Vector3) -> void:
 	"""Spawn Group A (Pink) - Collides with Ground + Group A only"""
 	var obj = create_object(
 		pos,
@@ -149,7 +149,7 @@ func spawn_object_a(pos: Vector3):
 	)
 	group_a_objects.append(obj)
 
-func spawn_object_b(pos: Vector3):
+func spawn_object_b(pos: Vector3) -> void:
 	"""Spawn Group B (Blue) - Collides with Ground + Group B only"""
 	var obj = create_object(
 		pos,
@@ -159,7 +159,7 @@ func spawn_object_b(pos: Vector3):
 	)
 	group_b_objects.append(obj)
 
-func spawn_object_c(pos: Vector3):
+func spawn_object_c(pos: Vector3) -> void:
 	"""Spawn Group C (Green) - Collides with Ground ONLY (passes through all objects)"""
 	var obj = create_object(
 		pos,
@@ -234,7 +234,7 @@ func create_object(pos: Vector3, color: Color, layer: int, mask: int) -> RigidBo
 
 	return obj
 
-func cleanup_fallen_objects():
+func cleanup_fallen_objects() -> void:
 	"""Remove objects that fell too far"""
 	var all_objects = group_a_objects + group_b_objects + group_c_objects
 	var to_remove: Array[RigidBody3D] = []
@@ -249,7 +249,7 @@ func cleanup_fallen_objects():
 		group_c_objects.erase(obj)
 		obj.queue_free()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	# Clear all objects
 	for obj in group_a_objects:
@@ -270,3 +270,9 @@ func reset():
 	spawn_object_a(Vector3(-0.2, 0.3, 0))
 	spawn_object_b(Vector3(0, 0.3, 0))
 	spawn_object_c(Vector3(0.2, 0.3, 0))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

@@ -2,7 +2,7 @@
 
 var bob: RigidBody3D
 
-func _build_demo():
+func _build_demo() -> void:
 	var anchor := StaticBody3D.new()
 	anchor.name = "Anchor"
 	anchor.position = Vector3(0.0, 5.0, 0.0)
@@ -40,6 +40,12 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		bob.apply_impulse(Vector3.RIGHT * 1.5 + Vector3.FORWARD * 0.8)
 
-func _nudge():
+func _nudge() -> void:
 	if is_instance_valid(bob):
 		bob.apply_impulse(Vector3(0.6, 0.0, 0.3))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

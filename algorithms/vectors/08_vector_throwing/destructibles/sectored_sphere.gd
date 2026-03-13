@@ -24,7 +24,7 @@ class SectorData:
 	var end_angle: float
 	var subdivision_level: int
 
-	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, start: float, end: float, level: int):
+	func _init(mesh: MeshInstance3D, rb: RigidBody3D, area_node: Area3D, start: float, end: float, level: int) -> void:
 		mesh_instance = mesh
 		rigid_body = rb
 		area = area_node
@@ -360,3 +360,9 @@ func _fade_out_sector(sector: RigidBody3D, mesh: MeshInstance3D) -> void:
 
 func get_sectors_count() -> int:
 	return sectors.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

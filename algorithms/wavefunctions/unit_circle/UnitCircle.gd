@@ -243,3 +243,9 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 func _get_wheel_color(theta: float, value: float) -> Color:
 	var hue = fposmod(theta / TAU, 1.0)
 	return Color.from_hsv(hue, wheel_saturation, value)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

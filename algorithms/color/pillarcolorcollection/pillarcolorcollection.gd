@@ -183,3 +183,9 @@ func get_current_palette_name() -> String:
 		return "No Palette"
 	var current_key = palette_keys[current_palette_index % palette_keys.size()]
 	return _get_palette_title(current_key)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

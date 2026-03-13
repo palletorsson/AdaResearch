@@ -27,12 +27,12 @@ var _generation_index: int = 0
 var _is_generating: bool = false
 var _is_ready: bool = false
 
-func _ready():
+func _ready() -> void:
 	_setup_noise()
 	_setup_display()
 	_start_incremental_generation()
 
-func _setup_noise():
+func _setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = 0.02
@@ -41,7 +41,7 @@ func _setup_noise():
 	noise.fractal_lacunarity = 2.0
 	noise.fractal_gain = 0.5
 
-func _setup_display():
+func _setup_display() -> void:
 	sprite = Sprite3D.new()
 	sprite.name = "RorschachDisplay"
 	sprite.pixel_size = 0.004
@@ -55,14 +55,14 @@ func _setup_display():
 	texture = ImageTexture.create_from_image(image)
 	sprite.texture = texture
 
-func _start_incremental_generation():
+func _start_incremental_generation() -> void:
 	layers_cache.clear()
 	layers_cache.resize(layer_count)
 	_generation_index = 0
 	_is_generating = true
 	_is_ready = false
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Incremental generation - generate a few layers per frame
 	if _is_generating:
 		var layers_this_frame = mini(layers_per_frame, layer_count - _generation_index)
@@ -164,7 +164,7 @@ func _add_scan_artifacts(img: Image, layer_idx: int) -> void:
 		var speckle_color = Color(0.5, 0.6, 0.7, 0.3)
 		img.set_pixel(sx, sy, img.get_pixel(sx, sy).blend(speckle_color))
 
-func _update_display():
+func _update_display() -> void:
 	if layers_cache.is_empty() or not _is_ready:
 		return
 
@@ -173,14 +173,14 @@ func _update_display():
 	if layer_image:
 		texture.update(layer_image)
 
-func set_scan_speed(speed: float):
+func set_scan_speed(speed: float) -> void:
 	scan_speed = speed
 
-func set_layer(layer_idx: int):
+func set_layer(layer_idx: int) -> void:
 	current_layer = clamp(layer_idx, 0, layer_count - 1)
 	_update_display()
 
-func regenerate():
+func regenerate() -> void:
 	_setup_noise()
 	noise.seed = randi()
 	_start_incremental_generation()
@@ -192,3 +192,9 @@ func get_generation_progress() -> float:
 	if layer_count == 0:
 		return 1.0
 	return float(_generation_index) / float(layer_count)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

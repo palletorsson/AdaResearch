@@ -18,7 +18,7 @@ var particle: Particle = null
 # UI
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -31,7 +31,7 @@ func _ready():
 func _process(_delta):
 	update_info_label()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE or event.keycode == KEY_ENTER:
 			spawn_particle()
@@ -41,7 +41,7 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		spawn_particle()
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -59,7 +59,7 @@ func create_info_label():
 	instructions.text = "[SPACE/CLICK] Spawn Particle | [R] Reset"
 	add_child(instructions)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		if particle and not particle.is_dead():
@@ -68,7 +68,7 @@ func update_info_label():
 		else:
 			info_label.text = "Single Particle\n(Click to spawn)"
 
-func spawn_particle():
+func spawn_particle() -> void:
 	"""Spawn a new particle at center"""
 	# Remove old particle if exists
 	if particle:
@@ -98,10 +98,16 @@ func spawn_particle():
 		if is_inside_tree():
 			spawn_particle()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	if particle:
 		particle.queue_free()
 		particle = null
 
 	spawn_particle()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

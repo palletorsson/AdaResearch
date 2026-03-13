@@ -145,7 +145,7 @@ func _update_status() -> void:
 class DNA:
 	var gene: float
 
-	func _init():
+	func _init() -> void:
 		gene = clamp(randf(), 0.0, 1.0)
 
 	func copy() -> DNA:
@@ -298,3 +298,9 @@ class FoodItem:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

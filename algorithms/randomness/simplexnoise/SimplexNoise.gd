@@ -10,7 +10,7 @@ extends Node3D
 @onready var regenerate_button = $UI/VBoxContainer/RegenerateButton
 @onready var compare_button = $UI/VBoxContainer/CompareButton
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	frequency_slider.value_changed.connect(_on_frequency_changed)
 	amplitude_slider.value_changed.connect(_on_amplitude_changed)
@@ -21,26 +21,26 @@ func _ready():
 	# Initialize the noise field
 	_update_noise_parameters()
 
-func _on_frequency_changed(value):
+func _on_frequency_changed(value) -> void:
 	frequency_label.text = "Frequency: " + str(value)
 	_update_noise_parameters()
 
-func _on_amplitude_changed(value):
+func _on_amplitude_changed(value) -> void:
 	amplitude_label.text = "Amplitude: " + str(value)
 	_update_noise_parameters()
 
-func _on_persistence_changed(value):
+func _on_persistence_changed(value) -> void:
 	persistence_label.text = "Persistence: " + str(value)
 	_update_noise_parameters()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	noise_field.regenerate_noise()
 
-func _on_compare_pressed():
+func _on_compare_pressed() -> void:
 	# This could open a comparison scene or overlay
 	print("Comparison feature - could show Perlin vs Simplex side by side")
 
-func _update_noise_parameters():
+func _update_noise_parameters() -> void:
 	if noise_field:
 		noise_field.frequency = frequency_slider.value
 		noise_field.amplitude = amplitude_slider.value

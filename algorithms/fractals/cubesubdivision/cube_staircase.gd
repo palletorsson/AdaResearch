@@ -21,7 +21,7 @@ var timer: float = 0.0
 var is_constructing: bool = false
 var build_phase: int = 0  # 0=steps, 1=sides, 2=rails
 
-func _ready():
+func _ready() -> void:
 	if show_construction:
 		is_constructing = true
 		current_step = 0
@@ -29,7 +29,7 @@ func _ready():
 	else:
 		_build_instant()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -38,7 +38,7 @@ func _process(delta: float):
 		timer = 0.0
 		_execute_build()
 
-func _execute_build():
+func _execute_build() -> void:
 	match build_phase:
 		0:  # Building steps
 			if current_step < step_count:
@@ -55,13 +55,13 @@ func _execute_build():
 			is_constructing = false
 			print("Staircase complete! %d parts" % all_parts.size())
 
-func _build_instant():
+func _build_instant() -> void:
 	for i in range(step_count):
 		_build_single_step(i)
 	_build_sides()
 	_build_handrail()
 
-func _build_single_step(index: int):
+func _build_single_step(index: int) -> void:
 	var step_width = stair_size
 	var step_depth = stair_size / step_count
 	var step_height = stair_size / step_count
@@ -93,7 +93,7 @@ func _build_single_step(index: int):
 
 	print("Step %d: Built tread and riser" % index)
 
-func _build_sides():
+func _build_sides() -> void:
 	# Create side walls (stringers) that follow the stair profile
 	var total_height = stair_size
 	var total_depth = stair_size
@@ -120,7 +120,7 @@ func _build_sides():
 
 	print("Built side stringers")
 
-func _build_handrail():
+func _build_handrail() -> void:
 	var rail_radius = stair_size * 0.025
 	var post_height = stair_size * 0.4
 	var rail_offset = stair_size * 0.52
@@ -178,7 +178,7 @@ func _build_handrail():
 
 	print("Built handrail with %d balusters" % (step_count - 1))
 
-func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
+func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -195,7 +195,7 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
 	add_child(mesh_instance)
 	all_parts.append(mesh_instance)
 
-func reset():
+func reset() -> void:
 	for part in all_parts:
 		if is_instance_valid(part):
 			part.queue_free()
@@ -208,3 +208,9 @@ func reset():
 		is_constructing = true
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

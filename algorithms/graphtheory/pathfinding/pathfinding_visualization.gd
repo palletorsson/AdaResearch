@@ -69,7 +69,7 @@ class GridCell:
 	var visited: bool = false
 	var in_frontier: bool = false
 	
-	func _init(grid_x: int, grid_y: int, cell_type: CellType = CellType.EMPTY):
+	func _init(grid_x: int, grid_y: int, cell_type: CellType = CellType.EMPTY) -> void:
 		x = grid_x
 		y = grid_y
 		type = cell_type
@@ -77,14 +77,14 @@ class GridCell:
 	func get_position() -> Vector2i:
 		return Vector2i(x, y)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_grid()
 	create_grid_visuals()
 	setup_ui()
 	start_pathfinding()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if algorithm_running and animate_search:
 		algorithm_timer += delta
 		if algorithm_timer >= algorithm_speed:
@@ -93,7 +93,7 @@ func _process(delta):
 	
 	update_ui()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -116,7 +116,7 @@ func setup_environment():
 	camera.look_at_from_position(camera.position, Vector3(grid_width * cell_size / 2.0, 0, grid_height * cell_size / 2.0), Vector3.UP)
 	add_child(camera)
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid.clear()
 	distances.clear()
 	previous.clear()
@@ -148,7 +148,7 @@ func initialize_grid():
 			previous[x].append(null)
 			visited[x].append(false)
 
-func create_grid_visuals():
+func create_grid_visuals() -> void:
 	# Container for all grid visuals
 	grid_container = Node3D.new()
 	grid_container.name = "GridContainer"
@@ -186,7 +186,7 @@ func create_cell_mesh(cell: GridCell) -> MeshInstance3D:
 	
 	return mesh_instance
 
-func start_pathfinding():
+func start_pathfinding() -> void:
 	if start_pos.x < 0 or start_pos.x >= grid_width or start_pos.y < 0 or start_pos.y >= grid_height:
 		print("Invalid start position")
 		return
@@ -202,7 +202,7 @@ func start_pathfinding():
 	
 	print("Starting pathfinding from ", start_pos, " to ", goal_pos)
 
-func pathfinding_step():
+func pathfinding_step() -> void:
 	if frontier.is_empty():
 		algorithm_running = false
 		print("No path found!")
@@ -285,7 +285,7 @@ func get_neighbors(pos: Vector2i) -> Array:
 	
 	return neighbors
 
-func reconstruct_path():
+func reconstruct_path() -> void:
 	path.clear()
 	var current = goal_pos
 	
@@ -305,7 +305,7 @@ func reconstruct_path():
 			grid[pos.x][pos.y].type = CellType.PATH
 			update_cell_visual(pos.x, pos.y)
 
-func update_cell_visual(x: int, y: int):
+func update_cell_visual(x: int, y: int) -> void:
 	var cell = grid[x][y]
 	var material = cell.mesh_instance.material_override
 	material.albedo_color = cell_colors[cell.type]
@@ -317,7 +317,7 @@ func update_cell_visual(x: int, y: int):
 		material.emission_enabled = true
 		material.emission = Color(0.4, 0.3, 0.1)
 
-func setup_ui():
+func setup_ui() -> void:
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
@@ -333,7 +333,7 @@ func setup_ui():
 	canvas.add_child(stats_label)
 	ui_labels.append(stats_label)
 
-func update_ui():
+func update_ui() -> void:
 	if ui_labels.size() >= 1:
 		if algorithm_running:
 			ui_labels[0].text = "Searching for path..."
@@ -350,4 +350,10 @@ func update_ui():
 				if visited[x][y]:
 					visited_count += 1
 		
-		ui_labels[1].text = "Frontier: " + str(frontier.size()) + " | Visited: " + str(visited_count) 
+		ui_labels[1].text = "Frontier: " + str(frontier.size()) + " | Visited: " + str(visited_count)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

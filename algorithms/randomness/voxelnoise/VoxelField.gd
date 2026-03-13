@@ -8,7 +8,7 @@ class_name VoxelField
 
 var noise := FastNoiseLite.new()
 
-func _ready():
+func _ready() -> void:
 	noise.seed = seed
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.frequency = 0.08

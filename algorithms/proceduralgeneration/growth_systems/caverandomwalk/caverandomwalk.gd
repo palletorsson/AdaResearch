@@ -207,3 +207,9 @@ func _build_meshes() -> void:
 		giz.modulate = Color(1.0, 0.2, 0.6, 1.0)
 		giz.transform.origin = Vector3(_center.x * cube_size, cube_size, _center.z * cube_size) + origin_offset
 		add_child(giz)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
