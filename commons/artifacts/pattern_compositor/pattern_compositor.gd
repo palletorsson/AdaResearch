@@ -93,8 +93,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		emission_strength = clampf(float(config_data["emission_strength"]), 0.0, 5.0)
 
 func _build_composition() -> void:
-	# Call static via preloaded script reference
-	_composition = SC.get_preset(preset_name, grid_width, grid_height)
+	# Try art history presets first, then basic presets
+	var ahp = load("res://commons/composition/art_history_presets.gd")
+	if preset_name in ahp.PRESET_NAMES:
+		_composition = ahp.get_preset(preset_name, grid_width, grid_height)
+	else:
+		_composition = SC.get_preset(preset_name, grid_width, grid_height)
 
 func _render() -> void:
 	for gy in grid_height:

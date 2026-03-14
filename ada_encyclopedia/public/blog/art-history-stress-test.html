@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Art History Presets: Stress-Testing the Composition System | Ada Research</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent-pink: #E91E63;
+    --accent-blue: #4A90D9;
+    --accent-purple: #9B59B6;
+    --accent-green: #2ECC71;
+    --accent-orange: #F39C12;
+    --accent-gold: #D4A017;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent-pink); }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent-purple); }
+  p { margin-bottom: 1rem; }
+  .date { color: var(--text-dim); margin-bottom: 2rem; }
+  .hero-img { width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid var(--border); }
+  .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .img-grid img { width: 100%; border-radius: 6px; border: 1px solid var(--border); }
+  .caption { color: var(--text-dim); font-size: 0.85rem; text-align: center; margin-top: 0.3rem; }
+  code { background: var(--surface2); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; color: var(--accent-green); }
+  pre { background: var(--surface); padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 3px solid var(--accent-purple); padding: 0.5rem 1rem; margin: 1rem 0; background: var(--surface); border-radius: 0 6px 6px 0; }
+  a { color: var(--accent-blue); }
+
+  .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; margin: 1.5rem 0; }
+  .preset-card {
+    background: var(--surface);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .preset-card:hover { border-color: var(--accent-pink); }
+  .preset-card .num { color: var(--accent-pink); font-weight: bold; font-size: 0.85rem; }
+  .preset-card .name { color: var(--text); font-weight: 600; display: block; margin: 0.2rem 0; }
+  .preset-card .origin { color: var(--accent-gold); font-size: 0.8rem; }
+  .preset-card .detail { color: var(--text-dim); font-size: 0.8rem; margin-top: 0.3rem; }
+
+  .stat-row { display: flex; gap: 1.5rem; margin: 1rem 0; flex-wrap: wrap; }
+  .stat {
+    background: var(--surface);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat .value { font-size: 1.8rem; font-weight: bold; color: var(--accent-pink); display: block; }
+  .stat .label { color: var(--text-dim); font-size: 0.8rem; }
+
+  .region-badge {
+    display: inline-block;
+    background: var(--surface2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin: 0.1rem;
+    color: var(--accent-green);
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<h1>20 Art History Presets</h1>
+<p class="date">March 14, 2026</p>
+
+<p>Yesterday we built a reusable <a href="pattern-composition-system.html">Spatial Composition System</a> &mdash; CSS grid thinking for VR pattern arrangement. Today we stress-tested it with 20 composition presets drawn from art history traditions spanning five continents and three millennia.</p>
+
+<p>Each preset maps a different cultural pattern tradition into the same zone-based system. Persian carpets and Aztec calendars, Celtic knots and Kente cloth &mdash; all rendered through the same eight region primitives and four modifiers.</p>
+
+<img src="art_history_gallery/gallery_top.png" class="hero-img" alt="Art history gallery from above showing Persian Carpet, Islamic Geometric, De Stijl, and other compositions as floor tiles">
+<p class="caption">The gallery from above &mdash; each tile is an entire composition with its own zone structure, wallpaper groups, and palettes. 3,920 shader quads total.</p>
+
+<div class="stat-row">
+  <div class="stat"><span class="value">20</span><span class="label">Compositions</span></div>
+  <div class="stat"><span class="value">3,920</span><span class="label">Shader Quads</span></div>
+  <div class="stat"><span class="value">8</span><span class="label">Region Types Used</span></div>
+  <div class="stat"><span class="value">4</span><span class="label">Modifier Types</span></div>
+</div>
+
+<h2>The Gallery</h2>
+
+<div class="img-grid">
+  <div>
+    <img src="art_history_gallery/gallery_front.png" alt="Gallery front view showing compositions on floor">
+    <p class="caption">Front perspective &mdash; compositions as floor tiles</p>
+  </div>
+  <div>
+    <img src="../composition_system/carpet_top.png" alt="Carpet composition close-up from above">
+    <p class="caption">Carpet preset close-up &mdash; border, gutter, field, medallion</p>
+  </div>
+</div>
+
+<h2>The 20 Presets</h2>
+
+<div class="preset-grid">
+  <div class="preset-card">
+    <span class="num">#1</span>
+    <span class="name">Persian Carpet</span>
+    <span class="origin">Isfahan &bull; Tabriz &bull; Kashan</span>
+    <div class="detail">Nested borders, ellipse medallion, pendants, corners. Kaleidoscope modifier. 10 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#2</span>
+    <span class="name">Islamic Geometric</span>
+    <span class="origin">Alhambra &bull; C&oacute;rdoba</span>
+    <div class="detail">Concentric rings like a rose window. Star center, corner stars. Kaleidoscope. 7 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#3</span>
+    <span class="name">Roman Mosaic</span>
+    <span class="origin">Pompeii &bull; Antioch</span>
+    <div class="detail">Opus tessellatum with central emblema, surrounding panels, guilloche border. 12+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#4</span>
+    <span class="name">Art Deco</span>
+    <span class="origin">Chrysler Building &bull; 1920s</span>
+    <div class="detail">Pilaster columns, horizontal friezes, sunburst center. Mirror_x. 8 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#5</span>
+    <span class="name">De Stijl</span>
+    <span class="origin">Mondrian &bull; Van Doesburg</span>
+    <div class="detail">Asymmetric grid lines with primary color blocks. No modifiers. 10 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#6</span>
+    <span class="name">Bauhaus</span>
+    <span class="origin">Klee &bull; Albers &bull; Kandinsky</span>
+    <div class="detail">Dense 4&times;4 block grid with circle overlay. Rotate_180. 10+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#7</span>
+    <span class="name">Celtic Knot</span>
+    <span class="origin">Book of Kells &bull; Irish crosses</span>
+    <div class="detail">Deep nested border interlaces, central cross, knot. Mirror_x + mirror_y. 9 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#8</span>
+    <span class="name">Sashiko</span>
+    <span class="origin">Edo period &bull; Hitomezashi</span>
+    <div class="detail">Stitch grid &mdash; 20+ thin stripe zones on indigo ground. Corner patches. Highest zone count by stripe.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#9</span>
+    <span class="name">Byzantine</span>
+    <span class="origin">Hagia Sophia &bull; Ravenna</span>
+    <div class="detail">Gold ground, icon frame, halo ellipse, predella panels, inscription band. 10+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#10</span>
+    <span class="name">Navajo Weaving</span>
+    <span class="origin">Chief&rsquo;s blankets &bull; Eye Dazzler</span>
+    <div class="detail">Horizontal bands with nested diamond. Edge stripes. Mirror_y. 10+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#11</span>
+    <span class="name">Chinese Lattice</span>
+    <span class="origin">Ming dynasty &bull; Ice-ray</span>
+    <div class="detail">Dense lattice grid with central rosette ring. Corner ornaments. Kaleidoscope. 15+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#12</span>
+    <span class="name">Gothic Rose</span>
+    <span class="origin">Notre-Dame &bull; Chartres</span>
+    <div class="detail">5 concentric ring/tracery layers with central oculus. Spandrel corners. Kaleidoscope. 8 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#13</span>
+    <span class="name">Kente Cloth</span>
+    <span class="origin">Ashanti &bull; Ewe &bull; Ghana</span>
+    <div class="detail">Vertical warp strips with weft accent bands. Separator lines. 15+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#14</span>
+    <span class="name">Zellige</span>
+    <span class="origin">Fez &bull; Marrakech</span>
+    <div class="detail">Star-and-cross tile pattern. Central star, corner stars, cross arms. Kaleidoscope. 10 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#15</span>
+    <span class="name">Aztec Calendar</span>
+    <span class="origin">Sun Stone &bull; Mesoamerican</span>
+    <div class="detail">6 concentric rings with sun face center. Cardinal point markers. 10 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#16</span>
+    <span class="name">Victorian Tile</span>
+    <span class="origin">Minton &bull; Gothic Revival</span>
+    <div class="detail">Encaustic tile grid with 3 alternating types. Feature center. Kaleidoscope. 15+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#17</span>
+    <span class="name">Log Cabin Quilt</span>
+    <span class="origin">Amish &bull; American folk</span>
+    <div class="detail">7 concentric log borders radiating from hearth center. 10 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#18</span>
+    <span class="name">Mud Cloth</span>
+    <span class="origin">Malian B&ograve;g&ograve;lanfini</span>
+    <div class="detail">Horizontal bands with symbolic block grid. Edge trim stripes. No modifiers. 20+ zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#19</span>
+    <span class="name">Palazzo Floor</span>
+    <span class="origin">Siena &bull; Cosmati &bull; Renaissance</span>
+    <div class="detail">Central rondel with ring, Cosmati corner panels, axis lines. Mirror_x + mirror_y. 12 zones.</div>
+  </div>
+  <div class="preset-card">
+    <span class="num">#20</span>
+    <span class="name">Pixel Quilt</span>
+    <span class="origin">Art to Eat &bull; 8-bit &bull; Digital</span>
+    <div class="detail">Maximum density: 100 individual 2&times;2 blocks. Highest zone count. No modifiers.</div>
+  </div>
+</div>
+
+<h2>What Got Stress-Tested</h2>
+
+<h3>Region Primitives</h3>
+<p>All eight region types appear across the 20 presets:</p>
+<p>
+  <span class="region-badge">FILL</span>
+  <span class="region-badge">BORDER</span>
+  <span class="region-badge">RECT</span>
+  <span class="region-badge">ELLIPSE</span>
+  <span class="region-badge">CORNERS</span>
+  <span class="region-badge">STRIPE</span>
+  <span class="region-badge">COLUMNS</span>
+  <span class="region-badge">RING</span>
+</p>
+
+<h3>Modifiers</h3>
+<p>Each modifier gets exercised:</p>
+<ul style="margin: 0.5rem 0 1rem 1.5rem; color: var(--text-dim);">
+  <li><code>kaleidoscope</code> &mdash; Persian Carpet, Islamic Geometric, Chinese Lattice, Gothic Rose, Zellige, Victorian Tile</li>
+  <li><code>mirror_x</code> &mdash; Art Deco, Palazzo Floor</li>
+  <li><code>mirror_y</code> &mdash; Navajo Weaving, Palazzo Floor</li>
+  <li><code>rotate_180</code> &mdash; Bauhaus</li>
+  <li><em>No modifier</em> &mdash; De Stijl, Sashiko, Mud Cloth, Pixel Quilt (asymmetric traditions)</li>
+</ul>
+
+<h3>Zone Count Extremes</h3>
+<p>From 7 zones (Islamic Geometric &mdash; clean rings) to 100+ zones (Pixel Quilt &mdash; every 2&times;2 block is its own zone). Sashiko creates 22+ stripe zones. Mud Cloth generates 30+ symbolic blocks. The system handles all of them through the same priority-ordered hit-testing.</p>
+
+<h3>Priority Layering</h3>
+<p>Complex overlap hierarchies: the Persian Carpet layers 10 zones from priority 0 (field) to priority 30 (medallion). The Aztec Calendar stacks 6 rings with cardinal markers at priority 40 punching through all layers. The Gothic Rose alternates tracery (priority 15) and glass (priority 20+) in concentric bands.</p>
+
+<h2>The Composition System in Action</h2>
+
+<div class="img-grid">
+  <div>
+    <img src="../composition_system/carpet_front.png" alt="Carpet composition from front angle">
+    <p class="caption">Carpet preset &mdash; 6 zones visible as distinct patterns</p>
+  </div>
+  <div>
+    <img src="../composition_system/tunnel_front.png" alt="Shader arch tunnel">
+    <p class="caption">Shader arch gallery &mdash; 400 unique tile cubes</p>
+  </div>
+</div>
+
+<blockquote>The same eight region primitives that describe a Persian carpet also describe a Gothic rose window. The difference isn&rsquo;t in the system &mdash; it&rsquo;s in how zones are arranged. Layout is a universal language.</blockquote>
+
+<h2>Usage</h2>
+
+<pre><code># Any art history preset via pattern_compositor
+pattern_compositor#preset:persian_carpet#width:24#height:32
+
+# The full gallery of all 20
+art_history_gallery#columns:5#tile_resolution:14
+
+# Or build your own composition in code
+var comp = ArtHistoryPresets.gothic_rose(24, 24)
+var zone = comp.resolve_zone(12, 12)  # &rarr; "oculus"</code></pre>
+
+<h2>What&rsquo;s Next</h2>
+
+<p>These 20 presets prove the composition system is genuinely content-agnostic. The same <code>SpatialComposition</code> that renders wallpaper group shaders on a virtual carpet could drive architectural element placement on a facade, or widget layout on a control board. The region primitives and modifiers are universal &mdash; what changes is only what each zone <em>contains</em>.</p>
+
+</body>
+</html>
