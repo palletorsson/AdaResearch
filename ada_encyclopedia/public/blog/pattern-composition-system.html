@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pattern Composition System: CSS Grid Thinking for VR | Ada Research</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent-pink: #E91E63;
+    --accent-blue: #4A90D9;
+    --accent-purple: #9B59B6;
+    --accent-green: #2ECC71;
+    --accent-orange: #F39C12;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent-pink); }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent-purple); }
+  p { margin-bottom: 1rem; }
+  .date { color: var(--text-dim); margin-bottom: 2rem; }
+  .hero-img { width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid var(--border); }
+  .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .img-grid img { width: 100%; border-radius: 6px; border: 1px solid var(--border); }
+  .caption { color: var(--text-dim); font-size: 0.85rem; text-align: center; margin-top: 0.3rem; }
+  code { background: var(--surface2); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; color: var(--accent-green); }
+  pre { background: var(--surface); padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+  pre code { background: none; padding: 0; }
+  .zone-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
+  .zone-chip { background: var(--surface2); padding: 0.5rem 0.8rem; border-radius: 6px; border-left: 3px solid var(--accent-pink); font-size: 0.9rem; }
+  .zone-chip strong { display: block; color: var(--accent-pink); }
+  .zone-chip span { color: var(--text-dim); font-size: 0.8rem; }
+  blockquote { border-left: 3px solid var(--accent-purple); padding: 0.5rem 1rem; margin: 1rem 0; background: var(--surface); border-radius: 0 6px 6px 0; }
+  a { color: var(--accent-blue); }
+</style>
+</head>
+<body>
+
+<h1>Pattern Composition System</h1>
+<p class="date">March 14, 2026</p>
+
+<p>How do you arrange patterns in space? A carpet has a border, a field, a medallion, corner ornaments. A building facade has a base, columns, windows, a cornice. These are spatial compositions &mdash; and they follow the same logic as CSS grid layouts on the web.</p>
+
+<p>Today we built a reusable <strong>Spatial Composition System</strong> that transposes CSS layout thinking into VR pattern arrangement. The system is content-agnostic: it maps grid positions to named zones. Different consumers fill zones with different content &mdash; wallpaper group shaders for carpets, architectural elements for facades, UI widgets for control boards.</p>
+
+<img src="composition_system/carpet_top.png" class="hero-img" alt="Carpet composition from above showing border, gutter, field, medallion, and corner zones">
+<p class="caption">Carpet preset: border, gutter, field, medallion, and corner zones &mdash; each with a distinct wallpaper group pattern. The kaleidoscope modifier creates 4-way symmetry.</p>
+
+<h2>The Architecture</h2>
+
+<p>The core lives in <code>commons/composition/spatial_composition.gd</code> &mdash; a single file with inner classes for Region (hit-testing primitives) and Zone (named region + properties). Static presets generate common layouts.</p>
+
+<pre><code>SpatialComposition (generic, reusable)
+  Region primitives: fill, border, rect, ellipse, corners, stripe, columns, ring
+  Zone resolution: position &rarr; zone_id (priority-ordered)
+  Modifiers: mirror_x, mirror_y, rotate_180, kaleidoscope
+  Serialization: to/from JSON
+
+PatternCompositor (wallpaper shaders)
+  uses SpatialComposition to know which zone each cell belongs to
+  applies wallpaper_tile shader with zone-specific parameters</code></pre>
+
+<h2>Region Primitives</h2>
+
+<p>Eight region types handle all spatial hit-testing. Each answers one question: does this grid cell belong to this region?</p>
+
+<div class="zone-list">
+  <div class="zone-chip"><strong>FILL</strong><span>Covers everything (background)</span></div>
+  <div class="zone-chip"><strong>BORDER</strong><span>Ring at inset + thickness</span></div>
+  <div class="zone-chip"><strong>RECT</strong><span>Arbitrary rectangle</span></div>
+  <div class="zone-chip"><strong>ELLIPSE</strong><span>cx, cy, rx, ry</span></div>
+  <div class="zone-chip"><strong>CORNERS</strong><span>Four corner squares</span></div>
+  <div class="zone-chip"><strong>STRIPE</strong><span>Horizontal or vertical band</span></div>
+  <div class="zone-chip"><strong>COLUMNS</strong><span>Repeating vertical strips</span></div>
+  <div class="zone-chip"><strong>RING</strong><span>Circular annulus</span></div>
+</div>
+
+<h2>Carpet Composition</h2>
+
+<div class="img-grid">
+  <div>
+    <img src="composition_system/carpet_front.png" alt="Carpet from front angle">
+    <p class="caption">Front view &mdash; zones clearly visible</p>
+  </div>
+  <div>
+    <img src="composition_system/carpet_top.png" alt="Carpet from above">
+    <p class="caption">Top view &mdash; 4-way symmetry via kaleidoscope modifier</p>
+  </div>
+</div>
+
+<p>The carpet preset creates six zones: outer border (wallpaper group P4M), gutter (simple stripes), inner border (PMM), field (P6M), medallion (P4MM), and corner ornaments (P4). Each gets a different neon palette and domain texture. The kaleidoscope modifier folds all coordinates into the top-left quadrant, creating perfect 4-way symmetry.</p>
+
+<h2>Shader Arch Gallery</h2>
+
+<p>Before the composition system, we built the <strong>Shader Arch Gallery</strong> &mdash; a walk-through tunnel of 400 cubes, each with a unique wallpaper group tile pattern. Every cube gets its own ShaderMaterial with a different wallpaper group, palette, and procedurally generated 8x8 domain texture.</p>
+
+<div class="img-grid">
+  <div>
+    <img src="composition_system/tunnel_front.png" alt="Shader tunnel from front">
+    <p class="caption">400 unique tile pattern cubes</p>
+  </div>
+  <div>
+    <img src="composition_system/tunnel_top.png" alt="Shader tunnel from above">
+    <p class="caption">Top view &mdash; patchwork of all 17 wallpaper groups</p>
+  </div>
+</div>
+
+<blockquote>Inspired by Art to Eat installations &mdash; each tile a distinct artwork, the whole greater than its parts.</blockquote>
+
+<h2>Cove Display Gallery</h2>
+
+<p>The <strong>Cove Display Gallery</strong> uses SurfaceTool-built half-cove slopes with GPU shaders tiling across curved surfaces. Six wall coves line a corridor, each showcasing a different shader &mdash; voronoi, tartan, rothko, truchet, reaction-diffusion, and wallpaper tiles.</p>
+
+<div class="img-grid">
+  <div>
+    <img src="composition_system/cove_gallery_front.png" alt="Cove gallery front">
+    <p class="caption">Corridor with shader coves on both walls</p>
+  </div>
+  <div>
+    <img src="composition_system/cove_gallery_left.png" alt="Cove gallery left wall">
+    <p class="caption">Left wall &mdash; voronoi, tartan, reaction-diffusion</p>
+  </div>
+</div>
+
+<h2>New Artifacts</h2>
+
+<h3>wall_cove</h3>
+<p>Half-cove slope: floor-to-wall curved transition built with SurfaceTool. 24-segment quarter-circle curve with continuous UV mapping for seamless shader tiling. Supports any GPU shader via config.</p>
+
+<h3>shader_arch_gallery</h3>
+<p>Walk-through tunnel of individual BoxMesh cubes, each with a unique wallpaper_tile ShaderMaterial. 10 neon palettes, 10 domain pattern generators, all 17 wallpaper groups.</p>
+
+<h3>wall_shader_showcase</h3>
+<p>Swaps the GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on the grid cubes themselves.</p>
+
+<h3>pattern_compositor</h3>
+<p>Zone-based pattern composition using the SpatialComposition library. Presets: carpet, facade, mosaic, quilt. Each zone gets a different wallpaper group shader with its own palette and domain texture.</p>
+
+<h2>The Composition Library</h2>
+
+<p>The real breakthrough is the reusable <code>SpatialComposition</code> class. It knows nothing about shaders or patterns &mdash; it just maps grid positions to zone IDs. Any system can use it:</p>
+
+<pre><code>var comp = SC.preset_carpet(20, 20)
+var zone = comp.resolve_zone(5, 5)  # &rarr; "field"
+var zone = comp.resolve_zone(0, 0)  # &rarr; "border_outer"
+var zone = comp.resolve_zone(10, 10) # &rarr; "medallion"</code></pre>
+
+<p>Facade, mosaic, and quilt presets follow &mdash; same system, different zone definitions, different content.</p>
+
+</body>
+</html>

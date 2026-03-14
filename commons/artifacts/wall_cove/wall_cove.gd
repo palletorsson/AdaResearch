@@ -1,44 +1,34 @@
-## CoveDisplay — Cyclorama/infinity cove surface for any shader
-##
-## A reusable display form: flat floor → smooth curved cove → vertical back wall.
-## Like a photo studio backdrop. The curve eliminates the hard edge so any shader
-## tiles seamlessly across the whole surface.
-##
-## This is a GENERIC form — it accepts any shader via apply_grid_config():
-##   "cove_display#shader:wallpaper_tile#tile_scale:6#wallpaper_group:5"
-##   "cove_display#shader:tartanshader#pattern_scale:4"
-##   "cove_display#shader:my_custom_shader#my_param:0.5"
-##
-## The shader path resolves from commons/resourses/shaders/<name>.gdshader
-## Any extra config keys become shader parameters via set_shader_parameter().
-##
-## Grid system artifact — placed by GridInteractablesComponent.
-## Uses SurfaceTool for full UV control. UV.x: 0..1 across width.
-## UV.y: continuous from floor front edge through curve to wall top.
+@tool
 extends Node3D
-class_name CoveDisplay
+class_name WallCove
+## Half-cove slope artifact — curved floor-to-wall transition.
+##
+## Sits at the base of a wall, curving from the floor plane up into the
+## vertical wall surface. Built with SurfaceTool for clean continuous UVs
+## so wallpaper_tile (or any spatial shader) tiles seamlessly across the
+## curved surface.
+##
+## Grid config keys:
+##   cove_width     – width along the wall (default 1.0 = one grid cell)
+##   cove_radius    – radius of the quarter-circle curve (default 0.3)
+##   curve_segments – number of segments in the curve (default 24, high-res)
+##   wall_extend    – how far up the wall the mesh continues above the curve (default 0.0)
+##   shader         – name of .gdshader in commons/resourses/shaders/
+##   pattern_seed   – seed for procedural domain texture generation
+##   Any other key  → set_shader_parameter()
 
-## Width of the display (X axis) in meters
-@export var cove_width: float = 2.0
-## Depth of the floor section (Z axis) in meters
-@export var floor_depth: float = 1.5
-## Height of the back wall (Y axis) in meters
-@export var wall_height: float = 2.0
-## Radius of the curved cove transition in meters
-@export var cove_radius: float = 0.4
-## Number of segments in the curve (more = smoother)
-@export var curve_segments: int = 12
+@export var cove_width: float = 1.0
+@export var cove_radius: float = 0.3
+@export var curve_segments: int = 24
+@export var wall_extend: float = 0.0
 
-# Shader configuration
-var _shader_path: String = ""
-var _shader_params: Dictionary = {}
 var _mesh_instance: MeshInstance3D
 var _material: Material
+var _shader_path: String = ""
 
-# Known geometry keys — everything else is a shader parameter
 const GEOMETRY_KEYS: Array = [
-	"cove_width", "floor_depth", "wall_height", "cove_radius",
-	"curve_segments", "shader", "color", "albedo_color", "pattern_seed"
+	"cove_width", "cove_radius", "curve_segments", "wall_extend",
+	"shader", "color", "albedo_color", "pattern_seed"
 ]
 
 # Neon palettes for procedural domain generation
@@ -57,63 +47,31 @@ func _ready() -> void:
 	if not _mesh_instance:
 		_build()
 
-## Build (or rebuild) the cove mesh and apply material
 func _build() -> void:
 	if _mesh_instance:
 		_mesh_instance.queue_free()
-
 	_mesh_instance = MeshInstance3D.new()
 	_mesh_instance.mesh = _build_cove_mesh()
 	add_child(_mesh_instance)
-
-	# Apply material if configured
 	if _material:
 		_mesh_instance.material_override = _material
 
-## Apply a ShaderMaterial to the cove surface
-func apply_shader_material(mat: ShaderMaterial) -> void:
-	_material = mat
-	if _mesh_instance:
-		_mesh_instance.material_override = mat
-
-## Apply a StandardMaterial3D to the cove surface
-func apply_standard_material(mat: StandardMaterial3D) -> void:
-	_material = mat
-	if _mesh_instance:
-		_mesh_instance.material_override = mat
-
-func get_mesh_instance() -> MeshInstance3D:
-	return _mesh_instance
-
 # ═══════════════════════════════════════════════════════════════════
-# GRID SYSTEM INTEGRATION
+# GRID CONFIG
 # ═══════════════════════════════════════════════════════════════════
-#
-# Called by GridInteractablesComponent when placed on a map.
-# Config syntax in map_data.json interactables layer:
-#
-#   "cove_display#shader:wallpaper_tile#tile_scale:6#wallpaper_group:10"
-#
-# Geometry keys (cove_width, floor_depth, etc.) configure the mesh.
-# "shader" key loads a .gdshader from commons/resourses/shaders/.
-# All other keys become shader parameters via set_shader_parameter().
-#
-# If no shader is specified, applies a plain white StandardMaterial3D.
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	# ── 1. Geometry parameters ──
+	# ── 1. Geometry ──
 	if config_data.has("cove_width"):
-		cove_width = clampf(float(config_data["cove_width"]), 0.5, 10.0)
-	if config_data.has("floor_depth"):
-		floor_depth = clampf(float(config_data["floor_depth"]), 0.5, 10.0)
-	if config_data.has("wall_height"):
-		wall_height = clampf(float(config_data["wall_height"]), 0.5, 10.0)
+		cove_width = clampf(float(config_data["cove_width"]), 0.1, 10.0)
 	if config_data.has("cove_radius"):
-		cove_radius = clampf(float(config_data["cove_radius"]), 0.1, 2.0)
+		cove_radius = clampf(float(config_data["cove_radius"]), 0.05, 1.0)
 	if config_data.has("curve_segments"):
-		curve_segments = clampi(int(config_data["curve_segments"]), 4, 32)
+		curve_segments = clampi(int(config_data["curve_segments"]), 8, 64)
+	if config_data.has("wall_extend"):
+		wall_extend = clampf(float(config_data["wall_extend"]), 0.0, 5.0)
 
-	# ── 2. Rebuild mesh with new geometry ──
+	# ── 2. Rebuild mesh ──
 	_build()
 
 	# ── 3. Shader or plain material ──
@@ -125,39 +83,37 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			var mat := ShaderMaterial.new()
 			mat.shader = shader
 
-			# ── 4. Generate domain texture if wallpaper_tile + pattern_seed ──
+			# Generate domain texture for wallpaper_tile
 			if _shader_path == "wallpaper_tile":
 				var seed_val: int = 0
 				if config_data.has("pattern_seed"):
 					seed_val = int(config_data["pattern_seed"])
 				else:
-					seed_val = hash(str(position))  # Derive from grid position
-				var domain_tex: ImageTexture = _generate_domain_texture(seed_val)
-				mat.set_shader_parameter("domain_texture", domain_tex)
+					seed_val = hash(str(global_position))
+				var dtex: ImageTexture = _generate_domain_texture(seed_val)
+				mat.set_shader_parameter("domain_texture", dtex)
 
-			# ── 5. All non-geometry keys become shader parameters ──
+			# All non-geometry keys → shader parameters
 			for key: String in config_data:
 				if key in GEOMETRY_KEYS:
 					continue
-				var s: String = str(config_data[key])
-				_set_shader_param(mat, key, s)
+				_set_shader_param(mat, key, str(config_data[key]))
 
 			_material = mat
 			_mesh_instance.material_override = mat
 
-			# ── 6. Add spot light so the shader is visible ──
+			# Add light so spatial shader is visible
 			_add_display_light()
-			print("[CoveDisplay] Applied shader: %s" % _shader_path)
+			print("[WallCove] Applied shader: %s" % _shader_path)
 		else:
-			push_warning("[CoveDisplay] Could not load shader: %s" % full_path)
-			_apply_fallback_material(config_data)
+			push_warning("[WallCove] Could not load shader: %s" % full_path)
+			_apply_fallback(config_data)
 	elif config_data.has("color") or config_data.has("albedo_color"):
-		_apply_fallback_material(config_data)
+		_apply_fallback(config_data)
 	else:
-		# No shader specified — plain white surface
-		_apply_fallback_material(config_data)
+		_apply_fallback(config_data)
 
-func _apply_fallback_material(config_data: Dictionary) -> void:
+func _apply_fallback(config_data: Dictionary) -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color.WHITE
 	if config_data.has("color"):
@@ -169,55 +125,49 @@ func _apply_fallback_material(config_data: Dictionary) -> void:
 	if _mesh_instance:
 		_mesh_instance.material_override = mat
 
-## Parse a string value and set it as a shader parameter with correct type.
 func _set_shader_param(mat: ShaderMaterial, key: String, s: String) -> void:
-	# Try int first (important: shader int uniforms need int, not float)
+	# Int first (shader int uniforms need int, not float)
 	if s.is_valid_int():
 		mat.set_shader_parameter(key, s.to_int())
 		return
-	# Try float
 	if s.is_valid_float():
 		mat.set_shader_parameter(key, s.to_float())
 		return
-	# Try Vector3 "x,y,z" (for grout_color etc.)
+	# Try comma-separated as Vector3
 	var parts: PackedStringArray = s.split(",")
 	if parts.size() == 3 and parts[0].strip_edges().is_valid_float():
 		mat.set_shader_parameter(key, Vector3(
 			parts[0].strip_edges().to_float(),
 			parts[1].strip_edges().to_float(),
-			parts[2].strip_edges().to_float()
-		))
+			parts[2].strip_edges().to_float()))
 		return
-	# Fallback: pass as string
+	# Boolean
+	if s.to_lower() == "true":
+		mat.set_shader_parameter(key, true)
+		return
+	if s.to_lower() == "false":
+		mat.set_shader_parameter(key, false)
+		return
+	# String fallback
 	mat.set_shader_parameter(key, s)
 
-## Add a spot light pointing at the cove surface so spatial shaders are visible
 func _add_display_light() -> void:
 	var light := SpotLight3D.new()
-	light.position = Vector3(0, wall_height * 0.8, floor_depth * 0.8)
-	light.rotation_degrees.x = -45
-	light.light_energy = 5.0
+	light.position = Vector3(0, cove_radius + wall_extend + 0.5, cove_radius * 0.6)
+	light.rotation_degrees.x = -60
+	light.light_energy = 4.0
 	light.light_color = Color(0.98, 0.96, 0.92)
-	light.spot_range = cove_width * 2.0
-	light.spot_angle = 55.0
+	light.spot_range = cove_width * 1.5
+	light.spot_angle = 50.0
 	light.shadow_enabled = false
 	add_child(light)
 
 # ═══════════════════════════════════════════════════════════════════
-# MESH CONSTRUCTION via SurfaceTool
+# MESH — half-cove: floor strip → high-res quarter-circle curve → optional wall strip
+#
+# UV.x = 0..1 across width
+# UV.y = continuous from floor front through curve to wall top
 # ═══════════════════════════════════════════════════════════════════
-#
-# The cove has 3 zones stitched into one continuous mesh:
-#
-#   WALL (vertical)     ← UV.y goes from curve_end to top
-#       |
-#       ) CURVE          ← UV.y goes through the cove radius
-#       |
-#   FLOOR (horizontal)  ← UV.y goes from 0 to floor_depth
-#
-# UV.x spans 0..1 across the width. UV.y is continuous from
-# floor front edge through curve to wall top — so any shader
-# tiles seamlessly across the whole surface.
 
 func _build_cove_mesh() -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -225,53 +175,54 @@ func _build_cove_mesh() -> ArrayMesh:
 
 	var half_w: float = cove_width * 0.5
 
-	# Total UV.y length for proportional mapping
-	var curve_arc_len: float = cove_radius * PI * 0.5  # Quarter circle
-	var total_v: float = floor_depth + curve_arc_len + wall_height
+	# Arc length of quarter circle
+	var arc_len: float = cove_radius * PI * 0.5
+	# Small floor lip (10cm) so the cove blends into the grid floor
+	var floor_lip: float = 0.1
+	var total_v: float = floor_lip + arc_len + wall_extend
 
-	var points: Array = []  # Array of {pos: Vector3, uv_v: float, normal: Vector3}
+	var points: Array = []  # {pos: Vector3, uv_v: float, normal: Vector3}
 
-	# ── FLOOR STRIP: z goes from +floor_depth to 0 (front to back) ──
-	var floor_steps := 4
-	for i in range(floor_steps + 1):
-		var t: float = float(i) / float(floor_steps)
-		var z: float = floor_depth * (1.0 - t)
-		var uv_v: float = floor_depth * t
+	# ── FLOOR LIP: small strip on the floor before the curve starts ──
+	var lip_steps: int = 2
+	for i in range(lip_steps + 1):
+		var t: float = float(i) / float(lip_steps)
+		var z: float = floor_lip * (1.0 - t)  # z goes from +lip to 0
 		points.append({
 			"pos": Vector3(0, 0, z),
-			"uv_v": uv_v,
+			"uv_v": floor_lip * t,
 			"normal": Vector3(0, 1, 0)
 		})
 
-	# ── CURVE STRIP: quarter circle from floor to wall ──
+	# ── CURVE: quarter circle, high resolution ──
 	for i in range(1, curve_segments + 1):
 		var t: float = float(i) / float(curve_segments)
 		var angle: float = (PI * 0.5) * t
-		var pos_z: float = cove_radius * cos(angle)
-		var pos_y: float = cove_radius - cove_radius * sin(angle)
-		var ny: float = -sin(angle)
+		var pz: float = cove_radius * cos(angle)
+		var py: float = cove_radius - cove_radius * sin(angle)
+		# Normal points outward from curve center
+		var ny: float = sin(angle)
 		var nz: float = cos(angle)
 
-		var uv_v: float = floor_depth + curve_arc_len * t
 		points.append({
-			"pos": Vector3(0, pos_y, pos_z),
-			"uv_v": uv_v,
-			"normal": Vector3(0, -ny, nz).normalized()
+			"pos": Vector3(0, py, pz),
+			"uv_v": floor_lip + arc_len * t,
+			"normal": Vector3(0, ny, nz).normalized()
 		})
 
-	# ── WALL STRIP: y goes from cove_radius up to cove_radius + wall_height ──
-	var wall_steps := 4
-	for i in range(1, wall_steps + 1):
-		var t: float = float(i) / float(wall_steps)
-		var y: float = cove_radius + wall_height * t
-		var uv_v: float = floor_depth + curve_arc_len + wall_height * t
-		points.append({
-			"pos": Vector3(0, y, 0),
-			"uv_v": uv_v,
-			"normal": Vector3(0, 0, 1)
-		})
+	# ── WALL EXTENSION: vertical strip above the curve ──
+	if wall_extend > 0.01:
+		var wall_steps: int = maxi(2, int(wall_extend * 4))
+		for i in range(1, wall_steps + 1):
+			var t: float = float(i) / float(wall_steps)
+			var y: float = cove_radius + wall_extend * t
+			points.append({
+				"pos": Vector3(0, y, 0),
+				"uv_v": floor_lip + arc_len + wall_extend * t,
+				"normal": Vector3(0, 0, 1)
+			})
 
-	# ── BUILD TRIANGLES: 2 columns (left, right) × N rows ──
+	# ── BUILD TRIANGLES ──
 	for i in range(points.size() - 1):
 		var p0: Dictionary = points[i]
 		var p1: Dictionary = points[i + 1]
@@ -286,12 +237,12 @@ func _build_cove_mesh() -> ArrayMesh:
 		var n0: Vector3 = p0["normal"]
 		var n1: Vector3 = p1["normal"]
 
-		# Triangle 1: bl, tl, br
+		# Triangle 1: bl → tl → br
 		st.set_normal(n0); st.set_uv(Vector2(0, uv_v0)); st.add_vertex(bl)
 		st.set_normal(n1); st.set_uv(Vector2(0, uv_v1)); st.add_vertex(tl)
 		st.set_normal(n0); st.set_uv(Vector2(1, uv_v0)); st.add_vertex(br)
 
-		# Triangle 2: br, tl, tr
+		# Triangle 2: br → tl → tr
 		st.set_normal(n0); st.set_uv(Vector2(1, uv_v0)); st.add_vertex(br)
 		st.set_normal(n1); st.set_uv(Vector2(0, uv_v1)); st.add_vertex(tl)
 		st.set_normal(n1); st.set_uv(Vector2(1, uv_v1)); st.add_vertex(tr)
@@ -300,7 +251,7 @@ func _build_cove_mesh() -> ArrayMesh:
 	return st.commit()
 
 # ═══════════════════════════════════════════════════════════════════
-# PROCEDURAL DOMAIN TEXTURE GENERATION
+# PROCEDURAL DOMAIN TEXTURE
 # ═══════════════════════════════════════════════════════════════════
 
 func _generate_domain_texture(seed_val: int) -> ImageTexture:

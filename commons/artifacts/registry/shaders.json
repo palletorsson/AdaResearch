@@ -263,6 +263,78 @@
 			"map_ready": true,
 			"map_sequences": ["patterngeneration"],
 			"sequence": "patterngeneration"
+		},
+		"wall_cove": {
+			"name": "Wall Cove",
+			"lookup_name": "wall_cove",
+			"description": "Half-cove slope artifact — curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
+			"scene": "res://commons/artifacts/wall_cove/wall_cove.tscn",
+			"category": "shaders",
+			"tags": ["cove", "slope", "surface_tool", "shader", "configurable", "wall", "transition", "architectural"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration", "array_tutorial"],
+			"sequence": "patterngeneration"
+		},
+		"wall_pattern_colorizer": {
+			"name": "Wall Pattern Colorizer",
+			"lookup_name": "wall_pattern_colorizer",
+			"description": "Colors wall cubes in the GridSystem MultiMesh using wallpaper group tiling math. Each wall cube becomes a pixel in the pattern. Uses per-instance colors like GridColorizer.",
+			"scene": "res://commons/artifacts/wall_pattern_colorizer/wall_pattern_colorizer.tscn",
+			"category": "shaders",
+			"tags": ["colorizer", "wallpaper_groups", "multimesh", "wall", "pattern", "configurable"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration", "array_tutorial"],
+			"sequence": "patterngeneration"
+		},
+		"wall_shader_showcase": {
+			"name": "Wall Shader Showcase",
+			"lookup_name": "wall_shader_showcase",
+			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes — voronoi, tartan, rothko, truchet, etc.",
+			"scene": "res://commons/artifacts/wall_shader_showcase/wall_shader_showcase.tscn",
+			"category": "shaders",
+			"tags": ["shader", "showcase", "multimesh", "wall", "configurable", "cycling"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
+		},
+		"shader_arch_gallery": {
+			"name": "Shader Arch Gallery",
+			"lookup_name": "shader_arch_gallery",
+			"description": "A barrel-vault arch tunnel where each section has a different GPU shader. Walk through to see 20 shaders on curved walls, ceiling, and floor.",
+			"scene": "res://commons/artifacts/shader_arch_gallery/shader_arch_gallery.tscn",
+			"category": "shaders",
+			"tags": ["shader", "gallery", "arch", "tunnel", "surfacetool", "showcase"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
+		},
+		"wall_pattern_gallery": {
+			"name": "Wall Pattern Gallery",
+			"lookup_name": "wall_pattern_gallery",
+			"description": "Overlays wallpaper group shader patterns on grid wall cubes in clusters. Like the catalyst chromatic mode but with all 17 wallpaper groups as GPU shaders.",
+			"scene": "res://commons/artifacts/wall_pattern_gallery/wall_pattern_gallery.tscn",
+			"category": "shaders",
+			"tags": ["shader", "wallpaper", "pattern", "gallery", "grid", "catalyst"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
+		},
+		"pattern_compositor": {
+			"name": "Pattern Compositor",
+			"lookup_name": "pattern_compositor",
+			"description": "Zone-based pattern composition using the SpatialComposition library. Presets: carpet (border/field/medallion), facade (base/columns/windows/cornice), mosaic, quilt, tunnel. Each zone gets a different wallpaper group shader.",
+			"scene": "res://commons/artifacts/pattern_compositor/pattern_compositor.tscn",
+			"category": "shaders",
+			"tags": ["compositor", "pattern", "zones", "carpet", "facade", "wallpaper_groups", "composition", "reusable"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
 		}
 	}
 }

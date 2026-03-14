@@ -39,6 +39,16 @@ const CONFIG_PARAM_NAMES = [
 	"algorithm", "interval", "auto_play", "grid_width", "grid_height", "nodes", "samples",
 	# Living paper params
 	"paper", "texture", "fold", "orientation",
+	# Shader / cove / wallpaper params
+	"shader", "pattern_seed", "wallpaper_group", "tile_scale", "grout_width",
+	"grout_color", "noise_distort", "emission_strength", "metallic", "roughness",
+	"wear_amount", "dust_amount", "fade_amount", "crack_density", "stain_amount", "chip_amount",
+	"cove_width", "cove_radius", "curve_segments", "wall_extend", "wall_height",
+	"floor_depth", "albedo_color", "shader_list", "cycle_interval", "auto_cycle",
+	# Composition params
+	"preset", "tile_size", "surface", "composition_type", "composition_json",
+	"grid_resolution", "tunnel_width", "tunnel_height", "tunnel_length", "arch_radius",
+	"arch_segments", "section_length", "cube_size",
 ]
 
 # References
