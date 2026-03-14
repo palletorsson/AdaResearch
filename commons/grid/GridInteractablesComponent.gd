@@ -49,6 +49,8 @@ const CONFIG_PARAM_NAMES = [
 	"preset", "tile_size", "surface", "composition_type", "composition_json",
 	"grid_resolution", "tunnel_width", "tunnel_height", "tunnel_length", "arch_radius",
 	"arch_segments", "section_length", "cube_size",
+	# Art history gallery params
+	"tile_resolution", "tile_world_size", "columns",
 ]
 
 # References

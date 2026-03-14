@@ -335,6 +335,18 @@
 			"map_ready": true,
 			"map_sequences": ["patterngeneration"],
 			"sequence": "patterngeneration"
+		},
+		"art_history_gallery": {
+			"name": "Art History Gallery",
+			"lookup_name": "art_history_gallery",
+			"description": "Walk-through exhibition of 20 art history composition presets. Persian carpet, Islamic geometric, Roman mosaic, Art Deco, De Stijl, Bauhaus, Celtic knot, Sashiko, Byzantine, Navajo, Chinese lattice, Gothic rose, Kente, Zellige, Aztec, Victorian, Log cabin quilt, Mud cloth, Palazzo, Pixel quilt.",
+			"scene": "res://commons/artifacts/art_history_gallery/art_history_gallery.tscn",
+			"category": "shaders",
+			"tags": ["gallery", "art_history", "composition", "stress_test", "wallpaper_groups", "installation", "20_presets"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["patterngeneration"],
+			"sequence": "patterngeneration"
 		}
 	}
 }
