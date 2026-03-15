@@ -1,3 +1,4 @@
+class_name LaserTurret
 extends Node3D
 
 # Laser Turret - Tracks and destroys balls using vector math

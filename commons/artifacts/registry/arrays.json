@@ -633,6 +633,17 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"facade_builder": {
+			"name": "Facade Builder",
+			"lookup_name": "facade_builder",
+			"description": "Interactive architectural facade composer. Five presets (classical, gothic, palazzo, arcade, minimal) with configurable bays, stories, symmetry, and colors. Uses SpatialComposition zones and SurfaceTool geometry.",
+			"scene": "res://commons/artifacts/facade_builder/facade_builder.tscn",
+			"category": "primitives",
+			"tags": ["facade", "architecture", "builder", "classical", "gothic", "palazzo"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

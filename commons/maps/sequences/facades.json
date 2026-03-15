@@ -1,0 +1,70 @@
+{
+	"sequences": {
+		"facades": {
+			"name": "Facades: Grammar Builds Architecture",
+			"truth": "A wall is never just a wall. Every facade negotiates inside and outside.",
+			"qfep_term": "Boundary_Edge",
+			"qfep_connection": "Facades sit at the boundary between public and private, ornament and structure, inside and outside. Each architectural order is a grammar (F) that generates infinite variation (E). The facade is where identity meets the world -- the lambda parameter is the degree of openness.",
+
+			"description": "From a plain wall, architecture grows. Facades are grammar systems that compose base, wall, columns, openings, and crown into coherent wholes. Start with horizontal zoning, learn rhythm through columns, master the classical orders, punctuate with windows and doors, study Italian presets, then compose your own.",
+			"layer": "lambda_edge",
+			"prerequisites": ["patterngeneration"],
+			"unlocks": ["grammar_systems"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+
+			"learning_objectives": [
+				"Horizontal zoning as compositional grammar",
+				"Columnar rhythm and bay divisions",
+				"Classical orders as proportional systems",
+				"Openings as negative space and hierarchy",
+				"Cultural context in architectural vocabulary",
+				"Free-form facade composition as creative synthesis"
+			],
+
+			"content": [
+				"Facade_Wall_Basics: Horizontal zones -- base, wall, cornice. The simplest facade grammar.",
+				"Facade_Columns_Rhythm: Columns create rhythm. Bay divisions and bilateral symmetry.",
+				"Facade_Classical_Orders: Tuscan, Doric, Ionic, Corinthian -- proportional systems evolve.",
+				"Facade_Windows_Doors: Openings negotiate inside/outside. Framing and hierarchy.",
+				"Facade_Italian_Presets: Full facades from the Italian study pack. Cultural grammar.",
+				"Facade_Custom_Composition: Your facade. Free-form builder with all elements available."
+			],
+
+			"maps": [
+				"Facade_Wall_Basics",
+				"Facade_Columns_Rhythm",
+				"Facade_Classical_Orders",
+				"Facade_Windows_Doors",
+				"Facade_Italian_Presets",
+				"Facade_Custom_Composition"
+			],
+
+			"audio": {
+				"ambient_preset": "stone_hall",
+				"volume": -8.0
+			},
+
+			"return_to": "lab",
+
+			"completion_rewards": [
+				"architect_badge"
+			],
+
+			"deferred_maps": [
+				"Facade_Gothic_Arches",
+				"Facade_Islamic_Geometry",
+				"Facade_Japanese_Temple",
+				"Facade_Art_Deco",
+				"Facade_Brutalist",
+				"Facade_Parametric"
+			],
+
+			"references": {
+				"key_texts": ["Summerson: The Classical Language of Architecture", "Ching: Architecture: Form, Space, and Order"],
+				"related_algorithms": ["commons/mesh_grammar/", "commons/composition/"]
+			}
+		}
+	}
+}

@@ -517,6 +517,248 @@ static func pixel_quilt(w: int = 20, h: int = 20):
 	return comp
 
 # ═══════════════════════════════════════════════════════════════════
+# 21. ISLAMIC HEX — Hexagonal geometric tessellation
+#     Inspired by: Islamic zellige with hex lattice, beehive patterns
+#     Tests: HexCS coordinate system, hex mesh rendering
+#     Tiling: HEX
+# ═══════════════════════════════════════════════════════════════════
+
+static func islamic_hex(w: int = 16, h: int = 16):
+	var sc = _sc()
+	var comp = sc._make(w, h)
+	comp.add_zone("ground", sc.Region.fill(), {}, 0)
+	comp.add_zone("border_outer", sc.Region.border(0, 1), {}, 10)
+	comp.add_zone("border_inner", sc.Region.border(1, 1), {}, 12)
+	var cx := float(w) / 2.0; var cy := float(h) / 2.0
+	# Interlocking star rosette — concentric rings with alternating tracery/fill
+	comp.add_zone("rosette_outer", sc.Region.ring(cx, cy, 6.0, 7.5), {"palette_index": 0}, 15)
+	comp.add_zone("star_band", sc.Region.ring(cx, cy, 4.5, 6.0), {"palette_index": 1}, 18)
+	comp.add_zone("interlock_ring", sc.Region.ring(cx, cy, 3.5, 4.5), {"palette_index": 2}, 22)
+	comp.add_zone("inner_rosette", sc.Region.ring(cx, cy, 2.0, 3.5), {"palette_index": 3}, 25)
+	comp.add_zone("star_center", sc.Region.ellipse(cx, cy, 2.0, 2.0), {"palette_index": 4}, 30)
+	# Corner hexagonal rosettes (smaller stars echoing the center)
+	comp.add_zone("corner_stars", sc.Region.corners(0, 3), {"palette_index": 5}, 20)
+	# Cross-axis stripes evoking the girih lattice framework
+	comp.add_zone("girih_h", sc.Region.stripe("y", int(cy), 1), {"palette_index": 6}, 14)
+	comp.add_zone("girih_v", sc.Region.stripe("x", int(cx), 1), {"palette_index": 6}, 14)
+	# Secondary corner accent ellipses (midpoint rosettes along edges)
+	comp.add_zone("edge_star_top", sc.Region.ellipse(cx, 2.0, 1.5, 1.5), {"palette_index": 7}, 16)
+	comp.add_zone("edge_star_bottom", sc.Region.ellipse(cx, float(h) - 2.0, 1.5, 1.5), {"palette_index": 7}, 16)
+	comp.add_zone("edge_star_left", sc.Region.ellipse(2.0, cy, 1.5, 1.5), {"palette_index": 7}, 16)
+	comp.add_zone("edge_star_right", sc.Region.ellipse(float(w) - 2.0, cy, 1.5, 1.5), {"palette_index": 7}, 16)
+	comp.add_modifier("kaleidoscope")
+	comp.setup_tiling("hex", 0.5)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
+# 22. GOTHIC ROSE POLAR — Radial rose window
+#     Inspired by: Notre-Dame, Chartres — true polar layout
+#     Tests: PolarCS coordinate system, wedge mesh rendering
+#     Tiling: POLAR
+# ═══════════════════════════════════════════════════════════════════
+
+static func gothic_rose_polar(w: int = 12, h: int = 24):
+	# w = num_rings (radial subdivisions), h = sectors (angular subdivisions)
+	var sc = _sc()
+	var comp = sc._make(w, h)
+	comp.add_zone("stone_surround", sc.Region.fill(), {"palette_index": 0}, 0)
+	var cx := float(w) / 2.0; var cy := float(h) / 2.0
+	# Outer frame — the stone arch enclosing the window
+	comp.add_zone("frame_outer", sc.Region.border(0, 1), {"palette_index": 1}, 10)
+	# Alternating tracery (stone mullions) and glass rings, outer to inner
+	# Ring 1: outer glass panels (large lancet-like panes)
+	comp.add_zone("glass_outer", sc.Region.border(1, 2), {"palette_index": 2}, 18)
+	# Ring 2: primary tracery ring (thick stone divider)
+	comp.add_zone("tracery_primary", sc.Region.border(3, 1), {"palette_index": 3}, 25)
+	# Ring 3: middle glass panels (quatrefoil zone)
+	comp.add_zone("glass_mid", sc.Region.border(4, 2), {"palette_index": 4}, 20)
+	# Ring 4: secondary tracery (thinner stone mullions)
+	comp.add_zone("tracery_secondary", sc.Region.border(6, 1), {"palette_index": 5}, 25)
+	# Ring 5: inner glass panels (trefoil zone near hub)
+	comp.add_zone("glass_inner", sc.Region.border(7, 1), {"palette_index": 6}, 22)
+	# Ring 6: hub tracery (the small ring around the oculus)
+	comp.add_zone("tracery_hub", sc.Region.border(8, 1), {"palette_index": 7}, 28)
+	# Oculus — the central circular opening
+	comp.add_zone("oculus", sc.Region.ellipse(cx, cy, 2.0, 8.0), {"palette_index": 8}, 35)
+	# Radiating spokes — vertical and horizontal stripes simulate major mullions
+	# These create the cross-shaped armature typical of rose windows
+	comp.add_zone("spoke_vertical", sc.Region.stripe("x", int(cx), 1), {"palette_index": 9}, 30)
+	comp.add_zone("spoke_horizontal", sc.Region.stripe("y", int(cy), 1), {"palette_index": 9}, 30)
+	# Diagonal spokes at quarter-sector boundaries
+	var q1 := int(float(h) * 0.25)
+	var q3 := int(float(h) * 0.75)
+	comp.add_zone("spoke_diag_a", sc.Region.stripe("y", q1, 1), {"palette_index": 9}, 28)
+	comp.add_zone("spoke_diag_b", sc.Region.stripe("y", q3, 1), {"palette_index": 9}, 28)
+	comp.setup_tiling("polar", 1.0)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
+# 23. AZTEC POLAR — Sun Stone with true radial layout
+#     Inspired by: Aztec Sun Stone — concentric rings + cardinal glyphs
+#     Tests: PolarCS with many rings, radial symmetry
+#     Tiling: POLAR
+# ═══════════════════════════════════════════════════════════════════
+
+static func aztec_polar(w: int = 12, h: int = 20):
+	# w = num_rings (radial bands), h = sectors (angular divisions — 20 for day signs)
+	var sc = _sc()
+	var comp = sc._make(w, h)
+	comp.add_zone("stone_base", sc.Region.fill(), {"palette_index": 0}, 0)
+	var cx := float(w) / 2.0; var cy := float(h) / 2.0
+	# Outer serpent border — the fire serpents (Xiuhcoatl) encircling the stone
+	comp.add_zone("serpent_ring", sc.Region.border(0, 1), {"palette_index": 1}, 10)
+	# Ring of turquoise/jade — decorative band
+	comp.add_zone("jade_band", sc.Region.border(1, 1), {"palette_index": 2}, 14)
+	# Sunray ring — triangular solar rays pointing outward
+	comp.add_zone("sunray_ring", sc.Region.border(2, 1), {"palette_index": 3}, 16)
+	# Ring 4: 20 day-sign glyphs band (widest ring, the calendar proper)
+	comp.add_zone("day_signs", sc.Region.border(3, 2), {"palette_index": 4}, 20)
+	# Ring 5: ornamental divider
+	comp.add_zone("divider_outer", sc.Region.border(5, 1), {"palette_index": 5}, 24)
+	# Ring 6: Four previous suns / eras (Nahui Ollin quadrants)
+	comp.add_zone("four_suns", sc.Region.border(6, 2), {"palette_index": 6}, 28)
+	# Ring 7: inner ornamental band
+	comp.add_zone("divider_inner", sc.Region.border(8, 1), {"palette_index": 7}, 32)
+	# Ring 8: innermost ring around the face
+	comp.add_zone("tongue_ring", sc.Region.border(9, 1), {"palette_index": 8}, 36)
+	# Central sun face — Tonatiuh
+	comp.add_zone("sun_face", sc.Region.ellipse(cx, cy, 2.0, 5.0), {"palette_index": 9}, 50)
+	# Cardinal direction markers — the 4 previous world ages at NSEW
+	comp.add_zone("cardinal_n", sc.Region.stripe("y", 0, 1), {"palette_index": 10}, 45)
+	comp.add_zone("cardinal_s", sc.Region.stripe("y", h - 1, 1), {"palette_index": 10}, 45)
+	comp.add_zone("cardinal_e", sc.Region.stripe("x", w - 1, 1), {"palette_index": 10}, 45)
+	comp.add_zone("cardinal_w", sc.Region.stripe("x", 0, 1), {"palette_index": 10}, 45)
+	# Inter-cardinal markers — wind, rain, jaguar, water at diagonal positions
+	var q1 := int(float(h) * 0.25)
+	var q3 := int(float(h) * 0.75)
+	comp.add_zone("glyph_ne", sc.Region.stripe("y", q1, 1), {"palette_index": 11}, 42)
+	comp.add_zone("glyph_se", sc.Region.stripe("y", q3, 1), {"palette_index": 11}, 42)
+	# Blood/sacrifice pointers (rect glyphs in the day-sign ring)
+	comp.add_zone("blood_point_top", sc.Region.make_rect(int(cx) - 1, 0, 2, 3), {"palette_index": 12}, 48)
+	comp.add_zone("blood_point_bottom", sc.Region.make_rect(int(cx) - 1, h - 3, 2, 3), {"palette_index": 12}, 48)
+	comp.setup_tiling("polar", 0.8)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
+# 24. CELTIC TRUCHET — Interlace via Truchet rotations
+#     Inspired by: Book of Kells knotwork, Islamic interlace
+#     Tests: TruchetCS with rotation state, emergent curves
+#     Tiling: TRUCHET
+# ═══════════════════════════════════════════════════════════════════
+
+static func celtic_truchet(w: int = 16, h: int = 16):
+	var sc = _sc()
+	var comp = sc._make(w, h)
+	comp.add_zone("vellum", sc.Region.fill(), {"palette_index": 0}, 0)
+	var cx := float(w) / 2.0; var cy := float(h) / 2.0
+	# Illuminated manuscript border — layered like Book of Kells page frames
+	comp.add_zone("border_outer", sc.Region.border(0, 1), {"palette_index": 1}, 10)
+	comp.add_zone("interlace_band_outer", sc.Region.border(1, 2), {"palette_index": 2}, 15)
+	comp.add_zone("border_mid", sc.Region.border(3, 1), {"palette_index": 3}, 12)
+	comp.add_zone("interlace_band_inner", sc.Region.border(4, 1), {"palette_index": 4}, 18)
+	# Central knotwork medallion — concentric rings for over/under pattern
+	comp.add_zone("knot_ring_outer", sc.Region.ring(cx, cy, 4.0, 5.5), {"palette_index": 5}, 22)
+	comp.add_zone("knot_ring_mid", sc.Region.ring(cx, cy, 2.5, 4.0), {"palette_index": 6}, 25)
+	comp.add_zone("knot_ring_inner", sc.Region.ring(cx, cy, 1.0, 2.5), {"palette_index": 7}, 28)
+	comp.add_zone("knot_core", sc.Region.ellipse(cx, cy, 1.0, 1.0), {"palette_index": 8}, 35)
+	# Interlace crossing stripes — the warp/weft of the knotwork grid
+	comp.add_zone("crossing_h", sc.Region.stripe("y", int(cy), 1), {"palette_index": 9}, 20)
+	comp.add_zone("crossing_v", sc.Region.stripe("x", int(cx), 1), {"palette_index": 9}, 20)
+	# Corner spirals — triskele-like corner ornaments
+	comp.add_zone("corner_spirals", sc.Region.corners(1, 4), {"palette_index": 10}, 16)
+	# Secondary interlace nodes at midpoints of edges
+	comp.add_zone("node_top", sc.Region.ellipse(cx, 2.0, 1.5, 1.0), {"palette_index": 11}, 19)
+	comp.add_zone("node_bottom", sc.Region.ellipse(cx, float(h) - 2.0, 1.5, 1.0), {"palette_index": 11}, 19)
+	comp.add_zone("node_left", sc.Region.ellipse(2.0, cy, 1.0, 1.5), {"palette_index": 11}, 19)
+	comp.add_zone("node_right", sc.Region.ellipse(float(w) - 2.0, cy, 1.0, 1.5), {"palette_index": 11}, 19)
+	# Mirror modifiers create the fourfold symmetry of Celtic interlace
+	comp.add_modifier("mirror_x")
+	comp.add_modifier("mirror_y")
+	comp.setup_tiling("truchet", 0.5)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
+# 25. STAINED GLASS — Cathedral window with Voronoi panels
+#     Inspired by: Chartres Cathedral, Sainte-Chapelle
+#     Tests: VoronoiCS with irregular cells, organic shapes
+#     Tiling: VORONOI
+# ═══════════════════════════════════════════════════════════════════
+
+static func stained_glass(w: int = 30, h: int = 16):
+	# w = seed_count, h = bound_size
+	var sc = _sc()
+	var comp = sc._make(h, h)  # Use bound_size for composition dimensions
+	var cx := float(h) / 2.0; var cy := float(h) / 2.0
+	comp.add_zone("lead_came", sc.Region.fill(), {"palette_index": 0}, 0)
+	# Stone frame — the architectural surround of the window
+	comp.add_zone("stone_frame", sc.Region.border(0, 1), {"palette_index": 1}, 10)
+	comp.add_zone("lead_border", sc.Region.border(1, 1), {"palette_index": 2}, 12)
+	# Outer glass panels — large irregular panes typical of Gothic lancets
+	comp.add_zone("glass_canopy", sc.Region.ring(cx, cy, 6.0, 7.5), {"palette_index": 3}, 14)
+	# Sky/background glass ring
+	comp.add_zone("glass_sky", sc.Region.ring(cx, cy, 4.5, 6.0), {"palette_index": 4}, 16)
+	# Architectural tracery ring (lead divider between outer and inner panels)
+	comp.add_zone("tracery_ring", sc.Region.ring(cx, cy, 3.8, 4.5), {"palette_index": 5}, 22)
+	# Inner narrative panels — the storytelling zone
+	comp.add_zone("glass_narrative", sc.Region.ring(cx, cy, 2.0, 3.8), {"palette_index": 6}, 18)
+	# Central figure area — the prominent saint/virgin/Christ figure
+	comp.add_zone("figure_halo", sc.Region.ring(cx, cy, 1.2, 2.0), {"palette_index": 7}, 25)
+	comp.add_zone("figure_center", sc.Region.ellipse(cx, cy, 1.2, 1.2), {"palette_index": 8}, 35)
+	# Corner spandrel panels — triangular areas between round window and square frame
+	comp.add_zone("spandrel_panels", sc.Region.corners(1, 3), {"palette_index": 9}, 13)
+	# Horizontal lead line (structural bar across the window)
+	comp.add_zone("lead_bar_h", sc.Region.stripe("y", int(cy), 1), {"palette_index": 10}, 20)
+	# Vertical lead line
+	comp.add_zone("lead_bar_v", sc.Region.stripe("x", int(cx), 1), {"palette_index": 10}, 20)
+	# Accent medallions — small circular panels at compass points
+	comp.add_zone("medallion_top", sc.Region.ellipse(cx, 2.5, 1.0, 1.0), {"palette_index": 11}, 24)
+	comp.add_zone("medallion_bottom", sc.Region.ellipse(cx, float(h) - 2.5, 1.0, 1.0), {"palette_index": 11}, 24)
+	comp.add_zone("medallion_left", sc.Region.ellipse(2.5, cy, 1.0, 1.0), {"palette_index": 11}, 24)
+	comp.add_zone("medallion_right", sc.Region.ellipse(float(h) - 2.5, cy, 1.0, 1.0), {"palette_index": 11}, 24)
+	comp.setup_tiling("voronoi", 1.0)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
+# 26. JAPANESE GARDEN — Organic stone path layout
+#     Inspired by: Zen garden stepping stones, Japanese rock gardens
+#     Tests: VoronoiCS with blue noise distribution
+#     Tiling: VORONOI
+# ═══════════════════════════════════════════════════════════════════
+
+static func japanese_garden(w: int = 20, h: int = 14):
+	# w = seed_count, h = bound_size
+	var sc = _sc()
+	var comp = sc._make(h, h)
+	var cx := float(h) / 2.0; var cy := float(h) / 2.0
+	# Raked gravel (karesansui) — the base dry landscape
+	comp.add_zone("gravel_raked", sc.Region.fill(), {"palette_index": 0}, 0)
+	# Bamboo fence border (asymmetric — thicker on north/west for windbreak)
+	comp.add_zone("fence_outer", sc.Region.border(0, 1), {"palette_index": 1}, 10)
+	# Moss ground — an organic ring of moss around the central stones
+	comp.add_zone("moss_carpet", sc.Region.ring(cx, cy, 3.5, 5.5), {"palette_index": 2}, 12)
+	# Main rock grouping — placed off-center (shifted right, as in asymmetric balance)
+	var rock_cx := cx + 1.5
+	var rock_cy := cy - 0.5
+	comp.add_zone("rock_group_outer", sc.Region.ellipse(rock_cx, rock_cy, 2.5, 2.0), {"palette_index": 3}, 22)
+	comp.add_zone("rock_group_core", sc.Region.ellipse(rock_cx, rock_cy, 1.2, 1.0), {"palette_index": 4}, 28)
+	# Tsukubai (stone water basin) — lower-left area
+	comp.add_zone("tsukubai", sc.Region.ellipse(3.0, float(h) - 3.5, 1.5, 1.5), {"palette_index": 5}, 25)
+	# Stone lantern (toro) — upper-right corner area
+	comp.add_zone("toro_area", sc.Region.ellipse(float(h) - 3.0, 3.0, 1.2, 1.2), {"palette_index": 6}, 24)
+	# Stepping stone path — a diagonal path from entry to viewing stone
+	comp.add_zone("path_entry", sc.Region.stripe("y", h - 2, 1), {"palette_index": 7}, 14)
+	comp.add_zone("path_turn", sc.Region.make_rect(int(cx) - 1, int(cy) + 1, 2, 2), {"palette_index": 7}, 16)
+	# Island of moss/plants — lower-right (asymmetric counterweight)
+	comp.add_zone("plant_island", sc.Region.ellipse(float(h) - 4.0, float(h) - 4.0, 2.0, 1.5), {"palette_index": 8}, 18)
+	# Gravel rake pattern accent — subtle stripe suggesting raked lines
+	comp.add_zone("rake_line_1", sc.Region.stripe("y", 3, 1), {"palette_index": 9}, 6)
+	comp.add_zone("rake_line_2", sc.Region.stripe("y", h - 4, 1), {"palette_index": 9}, 6)
+	# Viewing stone (flat stone for seated meditation) — bottom-center
+	comp.add_zone("viewing_stone", sc.Region.ellipse(cx - 1.0, float(h) - 2.0, 1.0, 0.8), {"palette_index": 10}, 20)
+	comp.setup_tiling("voronoi", 1.0)
+	return comp
+
+# ═══════════════════════════════════════════════════════════════════
 # CATALOG & LOOKUP
 # ═══════════════════════════════════════════════════════════════════
 
@@ -526,6 +768,8 @@ const PRESET_NAMES: Array = [
 	"byzantine", "navajo_weaving", "chinese_lattice", "gothic_rose",
 	"kente_cloth", "zellige", "aztec_calendar", "victorian_tile",
 	"log_cabin_quilt", "mud_cloth", "palazzo_floor", "pixel_quilt",
+	"islamic_hex", "gothic_rose_polar", "aztec_polar",
+	"celtic_truchet", "stained_glass", "japanese_garden",
 ]
 
 static func get_preset(name: String, w: int = 20, h: int = 20):
@@ -550,6 +794,12 @@ static func get_preset(name: String, w: int = 20, h: int = 20):
 		"mud_cloth": return mud_cloth(w, h)
 		"palazzo_floor": return palazzo_floor(w, h)
 		"pixel_quilt": return pixel_quilt(w, h)
+		"islamic_hex": return islamic_hex(w, h)
+		"gothic_rose_polar": return gothic_rose_polar(w, h)
+		"aztec_polar": return aztec_polar(w, h)
+		"celtic_truchet": return celtic_truchet(w, h)
+		"stained_glass": return stained_glass(w, h)
+		"japanese_garden": return japanese_garden(w, h)
 		_:
 			push_warning("[ArtHistoryPresets] Unknown preset: %s" % name)
 			return persian_carpet(w, h)

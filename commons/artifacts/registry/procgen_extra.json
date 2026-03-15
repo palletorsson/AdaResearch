@@ -1,7 +1,7 @@
 {
 	"registry_info": {
 		"name": "procgen_extra",
-		"description": "Additional procedural generation artifacts — wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
+		"description": "Additional procedural generation artifacts â€” wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
 		"category": "proceduralgeneration",
 		"theoretical_grounding": "Constraint satisfaction (WFC), higher-dimensional geometry (tesseracts, penteracts), Turing patterns, maze generation algorithms"
 	},
@@ -10,10 +10,17 @@
 			"lookup_name": "wfc",
 			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFC.tscn",
 			"name": "Wave Function Collapse",
-			"description": "Wave Function Collapse algorithm — generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
+			"description": "Wave Function Collapse algorithm â€” generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
 			"category": "proceduralgeneration",
 			"complexity": "advanced",
-			"tags": ["wfc", "wave_function_collapse", "constraint", "procedural", "generation", "tile"],
+			"tags": [
+				"wfc",
+				"wave_function_collapse",
+				"constraint",
+				"procedural",
+				"generation",
+				"tile"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -22,10 +29,16 @@
 			"lookup_name": "reaction_diffusion",
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
 			"name": "Reaction Diffusion",
-			"description": "Turing pattern generation using reaction-diffusion systems — the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
+			"description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
 			"category": "proceduralgeneration",
 			"complexity": "intermediate",
-			"tags": ["reaction_diffusion", "turing_pattern", "gray_scott", "morphogenesis", "growth"],
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"gray_scott",
+				"morphogenesis",
+				"growth"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -34,10 +47,16 @@
 			"lookup_name": "reaction_diffusion_vr",
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",
 			"name": "Reaction Diffusion (VR)",
-			"description": "Turing reaction-diffusion patterns in VR — two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
+			"description": "Turing reaction-diffusion patterns in VR â€” two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
 			"category": "proceduralgeneration",
 			"complexity": "intermediate",
-			"tags": ["reaction_diffusion", "turing_pattern", "morphogenesis", "vr", "growth"],
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"morphogenesis",
+				"vr",
+				"growth"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -46,10 +65,17 @@
 			"lookup_name": "tesseract_tunnel",
 			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel.tscn",
 			"name": "Tesseract Tunnel",
-			"description": "Fly through a tunnel of rotating tesseracts — 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
+			"description": "Fly through a tunnel of rotating tesseracts â€” 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
 			"category": "proceduralgeneration",
 			"complexity": "advanced",
-			"tags": ["tesseract", "4d", "hypercube", "tunnel", "projection", "higher_dimensional"],
+			"tags": [
+				"tesseract",
+				"4d",
+				"hypercube",
+				"tunnel",
+				"projection",
+				"higher_dimensional"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -58,10 +84,16 @@
 			"lookup_name": "penteract_double_projection",
 			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/penteract_double_projection.tscn",
 			"name": "Penteract Double Projection",
-			"description": "5D hypercube (penteract) projected twice — from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
+			"description": "5D hypercube (penteract) projected twice â€” from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
 			"category": "proceduralgeneration",
 			"complexity": "advanced",
-			"tags": ["penteract", "5d", "projection", "hypercube", "higher_dimensional"],
+			"tags": [
+				"penteract",
+				"5d",
+				"projection",
+				"hypercube",
+				"higher_dimensional"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -70,10 +102,17 @@
 			"lookup_name": "maze_generator",
 			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn",
 			"name": "Maze Generator",
-			"description": "Procedural maze generation — watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
+			"description": "Procedural maze generation â€” watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
 			"category": "proceduralgeneration",
 			"complexity": "beginner",
-			"tags": ["maze", "generation", "dfs", "backtracking", "spanning_tree", "procedural"],
+			"tags": [
+				"maze",
+				"generation",
+				"dfs",
+				"backtracking",
+				"spanning_tree",
+				"procedural"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -82,10 +121,18 @@
 			"lookup_name": "room_grammar",
 			"scene": "res://commons/artifacts/room_grammar/room_grammar.tscn",
 			"name": "Room Grammar",
-			"description": "Shape grammar for architectural floor plans — binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
+			"description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
 			"category": "proceduralgeneration",
 			"complexity": "intermediate",
-			"tags": ["bsp", "room", "floor_plan", "shape_grammar", "procedural", "architecture", "partition"],
+			"tags": [
+				"bsp",
+				"room",
+				"floor_plan",
+				"shape_grammar",
+				"procedural",
+				"architecture",
+				"partition"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -94,10 +141,18 @@
 			"lookup_name": "terrain_erosion",
 			"scene": "res://commons/artifacts/terrain_erosion/terrain_erosion.tscn",
 			"name": "Terrain Erosion",
-			"description": "Hydraulic erosion on a procedural heightmap — layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
+			"description": "Hydraulic erosion on a procedural heightmap â€” layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
 			"category": "proceduralgeneration",
 			"complexity": "advanced",
-			"tags": ["erosion", "hydraulic", "heightmap", "terrain", "procedural", "landscape", "sediment"],
+			"tags": [
+				"erosion",
+				"hydraulic",
+				"heightmap",
+				"terrain",
+				"procedural",
+				"landscape",
+				"sediment"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -106,10 +161,18 @@
 			"lookup_name": "cave_generator",
 			"scene": "res://commons/artifacts/cave_generator/cave_generator.tscn",
 			"name": "Cave Generator",
-			"description": "Cellular automaton cave generation with flood-fill connectivity — classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
+			"description": "Cellular automaton cave generation with flood-fill connectivity â€” classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
 			"category": "proceduralgeneration",
 			"complexity": "intermediate",
-			"tags": ["cave", "cellular_automaton", "flood_fill", "roguelike", "procedural", "generation", "connectivity"],
+			"tags": [
+				"cave",
+				"cellular_automaton",
+				"flood_fill",
+				"roguelike",
+				"procedural",
+				"generation",
+				"connectivity"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -118,10 +181,18 @@
 			"lookup_name": "genetic_programming",
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
 			"name": "Genetic Programming",
-			"description": "Genetic programming interface for evolving 3D shapes — populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
+			"description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
 			"category": "proceduralgeneration",
 			"complexity": "advanced",
-			"tags": ["genetic_programming", "evolution", "fitness", "crossover", "mutation", "3d_shape", "growth"],
+			"tags": [
+				"genetic_programming",
+				"evolution",
+				"fitness",
+				"crossover",
+				"mutation",
+				"3d_shape",
+				"growth"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -130,10 +201,162 @@
 			"lookup_name": "flower_lab",
 			"scene": "res://commons/artifacts/flower_lab/flower_lab.tscn",
 			"name": "Flower Lab",
-			"description": "Interactive botanical laboratory — VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
+			"description": "Interactive botanical laboratory â€” VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
 			"category": "proceduralgeneration",
 			"complexity": "beginner",
-			"tags": ["flower", "procedural", "interactive", "botanical", "morphology", "vr", "sliders"],
+			"tags": [
+				"flower",
+				"procedural",
+				"interactive",
+				"botanical",
+				"morphology",
+				"vr",
+				"sliders"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"ik_arm_demo": {
+			"lookup_name": "ik_arm_demo",
+			"scene": "res://commons/artifacts/ik_arm_demo/ik_arm_demo.tscn",
+			"name": "IK Arm Demo",
+			"description": "Standalone TwoBoneIK3D arm demonstration — two procedural arms with animated targets tracing figure-8 patterns. Shows the same inverse kinematics solver used for VR body tracking.",
+			"category": "body",
+			"complexity": "intermediate",
+			"tags": [
+				"ik",
+				"inverse_kinematics",
+				"two_bone_ik",
+				"arm",
+				"body",
+				"skeleton",
+				"procedural_mesh"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"torso_estimation_vis": {
+			"lookup_name": "torso_estimation_vis",
+			"scene": "res://commons/artifacts/torso_estimation_vis/torso_estimation_vis.tscn",
+			"name": "Torso Estimation Visualization",
+			"description": "3-point torso estimation demo — shows how head + two hand positions estimate torso orientation. Animated tracking points with visible shoulder computation and forward direction.",
+			"category": "body",
+			"complexity": "intermediate",
+			"tags": [
+				"torso",
+				"estimation",
+				"tracking",
+				"body",
+				"vr",
+				"3point",
+				"ik"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"mirror_artifact": {
+			"lookup_name": "mirror_artifact",
+			"scene": "res://commons/artifacts/mirror_artifact/mirror_artifact.tscn",
+			"name": "Mirror Artifact",
+			"description": "Reflective mirror panel showing the player what their hands look like. A large vertical mirror surface with metallic material and decorative wooden frame.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"mirror",
+				"body",
+				"reflection",
+				"hands",
+				"self"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"necklace_anchor": {
+			"lookup_name": "necklace_anchor",
+			"scene": "res://commons/artifacts/necklace_anchor/necklace_anchor.tscn",
+			"name": "Necklace Anchor",
+			"description": "Pendant necklace display on a stand showing the concept of an identity anchor point. A vertical stand with torus ring, glowing gem pendant that slowly rotates.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"necklace",
+				"pendant",
+				"anchor",
+				"identity",
+				"body",
+				"jewelry"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"dress_selector": {
+			"lookup_name": "dress_selector",
+			"scene": "res://commons/artifacts/dress_selector/dress_selector.tscn",
+			"name": "Dress Selector",
+			"description": "Outfit selection interface with three mannequin display forms in Classic, Wicked, and Custom styles. Each mannequin has a selection button for choosing an outfit.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"dress",
+				"outfit",
+				"selector",
+				"mannequin",
+				"body",
+				"fashion",
+				"customization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"botanical_flower": {
+			"lookup_name": "botanical_flower",
+			"scene": "res://commons/artifacts/botanical_flower/botanical_flower.tscn",
+			"name": "Botanical Flower",
+			"description": "Standalone procedural flower — configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": [
+				"flower",
+				"procedural",
+				"botanical",
+				"morphology",
+				"growth"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"water_flowers": {
+			"lookup_name": "water_flowers",
+			"scene": "res://commons/artifacts/water_flowers/water_flowers.tscn",
+			"name": "Water Flowers",
+			"description": "Floating flowers on physically simulated Gerstner waves — buoyancy, wave alignment, and drift create a mesmerizing water garden. Configurable flower count, water size, wave strength, and drift speed.",
+			"category": "physicssimulation",
+			"complexity": "intermediate",
+			"tags": [
+				"water",
+				"flower",
+				"physics",
+				"buoyancy",
+				"waves",
+				"simulation"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []

@@ -16,9 +16,9 @@ const SC := preload("res://commons/composition/spatial_composition.gd")
 const AHP := preload("res://commons/composition/art_history_presets.gd")
 const WALLPAPER_SHADER = preload("res://commons/resourses/shaders/wallpaper_tile.gdshader")
 
-@export var tile_resolution: int = 14
+@export var tile_resolution: int = 16
 @export var tile_world_size: float = 4.0
-@export var columns: int = 4
+@export var columns: int = 7
 @export var emission_strength: float = 1.0
 
 var _total_tiles: int = 0
@@ -43,7 +43,7 @@ func _ready() -> void:
 	_build_gallery()
 	_add_lights()
 	_add_labels()
-	print("[ArtHistoryGallery] Rendered 20 compositions, %d total quads" % _total_tiles)
+	print("[ArtHistoryGallery] Rendered %d compositions, %d total quads" % [AHP.PRESET_NAMES.size(), _total_tiles])
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("tile_resolution"):
@@ -83,31 +83,122 @@ func _build_gallery() -> void:
 		var cell_size := tile_world_size / float(tile_resolution)
 		_rng.seed = idx * 7919 + 31
 
-		for gy in comp.height:
-			for gx in comp.width:
-				var zone = comp.resolve_zone(gx, gy)  # untyped return
+		if comp.coord_system:
+			# Non-rectangular tiling — hex, polar, truchet, voronoi
+			var cs = comp.coord_system
+			var cells = cs.iterate_cells()
+			# Scale uniformly to fit the tile_world_size, preserving aspect ratio.
+			# For polar (circular), width == height so this fills cleanly.
+			# For hex/voronoi with differing width/height, the larger axis fits
+			# exactly and the smaller is centered with margin.
+			var cs_w: float = cs.get_world_width()
+			var cs_h: float = cs.get_world_height()
+			var scale_factor: float = tile_world_size / maxf(cs_w, cs_h)
+			# Offset to center smaller axis within the tile
+			var offset_x: float = (tile_world_size - cs_w * scale_factor) * 0.5
+			var offset_z: float = (tile_world_size - cs_h * scale_factor) * 0.5
+			# Per-CS grout width — finer meshes benefit from thinner grout
+			var cs_grout: float = _get_cs_grout_width(cs.type)
+
+			for cell_key in cells:
+				var zone = comp.resolve_zone_for_cell(cell_key)
 				if not zone:
 					continue
-
-				var quad := QuadMesh.new()
-				quad.size = Vector2(cell_size * 0.96, cell_size * 0.96)
-
+				var cell_mesh: Mesh = cs.create_cell_mesh(cell_key)
+				if not cell_mesh:
+					continue
 				var mesh_inst := MeshInstance3D.new()
-				mesh_inst.mesh = quad
-				mesh_inst.name = "C_%d_%d" % [gx, gy]
+				mesh_inst.mesh = cell_mesh
+				mesh_inst.name = "C_%s" % str(cell_key)
 
-				# Floor placement
-				var local_x := (float(gx) - float(comp.width) / 2.0 + 0.5) * cell_size
-				var local_z := (float(gy) - float(comp.height) / 2.0 + 0.5) * cell_size
-				mesh_inst.position = Vector3(local_x, 0.01, local_z)
-				mesh_inst.rotation_degrees.x = -90.0
+				var world_pos: Vector3 = cs.cell_to_world(cell_key)
+				# Position: scale world coords, center within tile, slight Y lift
+				mesh_inst.position = Vector3(
+					world_pos.x * scale_factor + offset_x,
+					0.01,
+					world_pos.z * scale_factor + offset_z
+				)
+				mesh_inst.scale = Vector3(scale_factor, scale_factor, scale_factor)
 
-				# Create material for this zone
-				var mat := _create_material(zone, idx)
+				# Mesh orientation per CS type:
+				# - HEX (1), POLAR (2), VORONOI (4): meshes built in XZ plane
+				#   with Y-up normals — already correct for floor display.
+				# - RECTANGULAR (0), TRUCHET (3): use QuadMesh in XY plane —
+				#   must rotate -90 on X to lay flat on the floor.
+				if cs.type == 0 or cs.type == 3:
+					mesh_inst.rotation_degrees.x = -90.0
+
+				# Truchet per-cell rotation — applied around local Y after
+				# the X rotation flips the quad onto the floor plane.
+				# rotation_degrees.z on a -90-X-rotated quad rotates in the
+				# floor plane, matching the pattern compositor's approach.
+				if cs.type == 3:
+					var rot_deg: float = cs.get_rotation_degrees(cell_key)
+					mesh_inst.rotation_degrees.z = rot_deg
+
+				var mat = _create_material_for_cs(zone, idx, cs.type, cs_grout)
 				mesh_inst.material_override = mat
-
 				container.add_child(mesh_inst)
 				_total_tiles += 1
+		else:
+			# Standard rectangular rendering
+			for gy in comp.height:
+				for gx in comp.width:
+					var zone = comp.resolve_zone(gx, gy)
+					if not zone:
+						continue
+
+					var quad := QuadMesh.new()
+					quad.size = Vector2(cell_size * 0.96, cell_size * 0.96)
+
+					var mesh_inst := MeshInstance3D.new()
+					mesh_inst.mesh = quad
+					mesh_inst.name = "C_%d_%d" % [gx, gy]
+
+					var local_x := (float(gx) - float(comp.width) / 2.0 + 0.5) * cell_size
+					var local_z := (float(gy) - float(comp.height) / 2.0 + 0.5) * cell_size
+					mesh_inst.position = Vector3(local_x, 0.01, local_z)
+					mesh_inst.rotation_degrees.x = -90.0
+
+					var mat := _create_material(zone, idx)
+					mesh_inst.material_override = mat
+
+					container.add_child(mesh_inst)
+					_total_tiles += 1
+
+## Returns grout width tuned per coordinate system type.
+## Hex tiles look best with slightly wider grout to show the honeycomb.
+## Voronoi cells are irregular and need thin grout to avoid visual noise.
+## Polar wedges use medium grout for clean ring separation.
+func _get_cs_grout_width(cs_type: int) -> float:
+	match cs_type:
+		1:  # HEX — wider grout highlights the hexagonal grid
+			return 0.02
+		2:  # POLAR — medium grout for clean ring/sector separation
+			return 0.015
+		3:  # TRUCHET — standard, same as rectangular
+			return 0.01
+		4:  # VORONOI — thin grout, irregular edges already provide visual separation
+			return 0.005
+		_:
+			return 0.01
+
+## Creates a material with per-CS-type adjustments (grout, tile_scale).
+func _create_material_for_cs(zone, comp_index: int, cs_type: int, grout: float) -> ShaderMaterial:
+	var mat = _create_material(zone, comp_index)
+	mat.set_shader_parameter("grout_width", grout)
+	# Adjust tile_scale per CS type for better pattern density
+	match cs_type:
+		1:  # HEX — slightly larger pattern scale suits hex cells
+			var base_scale: float = mat.get_shader_parameter("tile_scale")
+			mat.set_shader_parameter("tile_scale", base_scale * 0.8)
+		2:  # POLAR — reduce scale so pattern detail is visible in wedges
+			var base_scale: float = mat.get_shader_parameter("tile_scale")
+			mat.set_shader_parameter("tile_scale", base_scale * 0.6)
+		4:  # VORONOI — varied cell sizes, keep scale moderate
+			var base_scale: float = mat.get_shader_parameter("tile_scale")
+			mat.set_shader_parameter("tile_scale", base_scale * 0.7)
+	return mat
 
 func _create_material(zone, comp_index: int) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
@@ -253,14 +344,19 @@ func _add_labels() -> void:
 		var col := idx % columns
 		var row := idx / columns
 		var world_x := float(col) * (tile_world_size + gap)
-		var world_z := float(row) * (tile_world_size + gap) - tile_world_size * 0.55
+		# Place labels further from the tile edge to avoid overlap with
+		# non-rectangular tiles (polar tiles are circular, hex grids can
+		# extend slightly beyond the rectangular bounding box).
+		var world_z := float(row) * (tile_world_size + gap) - tile_world_size * 0.62
 
 		var label := Label3D.new()
 		label.text = "%d. %s" % [idx + 1, preset_name.replace("_", " ").capitalize()]
-		label.font_size = 48
+		label.font_size = 42
+		label.pixel_size = 0.005
 		label.position = Vector3(world_x, 0.02, world_z)
 		label.rotation_degrees.x = -90.0
-		label.modulate = Color(1.0, 1.0, 1.0, 0.9)
-		label.outline_size = 4
+		label.modulate = Color(1.0, 1.0, 1.0, 0.95)
+		label.outline_size = 6
+		label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 		label.name = "Label_%d" % idx
 		add_child(label)

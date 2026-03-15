@@ -1,3 +1,4 @@
+class_name BallDropper
 extends Node3D
 
 # Ball Dropper - Drops colorful balls one at a time, reuses them

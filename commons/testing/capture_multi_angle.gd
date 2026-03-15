@@ -39,7 +39,7 @@ const ARTIFACT_ANGLES: Array[Dictionary] = [
 	{ "name": "front",  "yaw": 0.4,    "pitch": 0.4   },  # hero shot — slightly above, looking down
 	{ "name": "left",   "yaw": 1.97,   "pitch": 0.35  },  # 90° left, slightly above
 	{ "name": "right",  "yaw": -1.17,  "pitch": 0.35  },  # 90° right, slightly above
-	{ "name": "top",    "yaw": 0.4,    "pitch": 1.2   },  # looking down from above
+	{ "name": "top",    "yaw": 0.001,  "pitch": 1.5607 },  # straight down (near PI/2)
 ]
 
 # ── Initialization ────────────────────────────────────────────────
@@ -238,7 +238,7 @@ func _run_artifact_capture() -> void:
 	# Ground plane
 	var ground := MeshInstance3D.new()
 	var ground_mesh := PlaneMesh.new()
-	ground_mesh.size = Vector2(20, 20)
+	ground_mesh.size = Vector2(80, 80)
 	ground.mesh = ground_mesh
 	var ground_mat := StandardMaterial3D.new()
 	ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
@@ -288,7 +288,7 @@ func _run_artifact_capture() -> void:
 	if aabb.size.length() > 0:
 		orbit_focus = aabb.get_center()
 		var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-		orbit_distance = max_dim * 2.0
+		orbit_distance = max_dim * 1.2
 		print("capture_multi_angle [artifact]: AABB size=%s center=%s distance=%.1f" % [
 			aabb.size, orbit_focus, orbit_distance
 		])
@@ -476,6 +476,8 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
+				# Transform sub-AABB into parent's space
+				sub_aabb = (child as Node3D).transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false

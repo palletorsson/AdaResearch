@@ -19,6 +19,8 @@ var width: int = 20
 var height: int = 20
 var zones: Array = []
 var modifiers: Array = []
+var coord_system = null  # Optional CoordinateSystem — when set, renderers use it for tiling
+var tiling_type: String = "rect"  # "rect", "hex", "polar", "truchet", "voronoi"
 
 # ═══════════════════════════════════════════════════════════════════
 # INNER CLASS: Region — spatial hit-testing primitive
@@ -200,18 +202,69 @@ func _apply_modifiers(gx: int, gy: int) -> Vector2i:
 	return Vector2i(x, y)
 
 # ═══════════════════════════════════════════════════════════════════
+# COORDINATE SYSTEM INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+## Set a CoordinateSystem for non-rectangular tiling.
+## Renderers should use iterate/cell_to_world/create_cell_mesh from the CS,
+## and resolve_zone_for_cell() for zone lookup.
+func set_coordinate_system(cs, tiling: String = "") -> void:
+	coord_system = cs
+	if tiling != "":
+		tiling_type = tiling
+
+## Resolve zone for a generic cell key using normalized coordinates.
+## Works with any CoordinateSystem — maps cell position to fractional
+## coordinates, then tests against region primitives.
+func resolve_zone_for_cell(cell_key):
+	if not coord_system:
+		# Fallback: treat as rectangular
+		if cell_key is Vector2i:
+			return resolve_zone(cell_key.x, cell_key.y)
+		return null
+
+	var norm: Vector2 = coord_system.cell_to_normalized(cell_key)
+	# Map normalized (0..1) to grid coordinates for region hit-testing
+	var gx := int(norm.x * float(width))
+	var gy := int(norm.y * float(height))
+	gx = clampi(gx, 0, width - 1)
+	gy = clampi(gy, 0, height - 1)
+	return resolve_zone(gx, gy)
+
+## Set up coordinate system from tiling type string.
+## Call after setting width/height.
+func setup_tiling(tiling: String, cs_cell_size: float = 1.0) -> void:
+	tiling_type = tiling
+	var CS = load("res://commons/composition/coordinate_system.gd")
+	match tiling.to_lower():
+		"hex":
+			coord_system = CS.create_hex(width, height, cs_cell_size)
+		"polar":
+			coord_system = CS.create_polar(width, height, cs_cell_size)
+		"truchet":
+			coord_system = CS.create_truchet(width, height, cs_cell_size)
+		"voronoi":
+			coord_system = CS.create_voronoi(width, height, cs_cell_size)
+		_:
+			coord_system = null
+			tiling_type = "rect"
+
+# ═══════════════════════════════════════════════════════════════════
 # SERIALIZATION
 # ═══════════════════════════════════════════════════════════════════
 
 func to_dict() -> Dictionary:
 	var zone_dicts: Array = []
 	for z in zones: zone_dicts.append(z.to_dict())
-	return {"width": width, "height": height, "zones": zone_dicts, "modifiers": modifiers}
+	return {"width": width, "height": height, "zones": zone_dicts, "modifiers": modifiers, "tiling": tiling_type}
 
 static func from_dict(data: Dictionary) :
 	var comp = _make(int(data.get("width", 20)), int(data.get("height", 20)))
 	for zd in data.get("zones", []): comp.zones.append(Zone.from_dict(zd))
 	comp.modifiers = data.get("modifiers", [])
+	var tiling: String = str(data.get("tiling", "rect"))
+	if tiling != "rect" and tiling != "":
+		comp.setup_tiling(tiling)
 	return comp
 
 # ═══════════════════════════════════════════════════════════════════

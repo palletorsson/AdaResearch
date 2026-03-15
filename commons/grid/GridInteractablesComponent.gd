@@ -51,6 +51,8 @@ const CONFIG_PARAM_NAMES = [
 	"arch_segments", "section_length", "cube_size",
 	# Art history gallery params
 	"tile_resolution", "tile_world_size", "columns",
+	# Tiling coordinate system
+	"tiling",
 ]
 
 # References

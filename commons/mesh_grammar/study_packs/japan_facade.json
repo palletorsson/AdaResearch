@@ -1,0 +1,255 @@
+{
+	"name": "japan",
+	"display_name": "Japanese Traditional Architecture",
+	"orders": {
+		"hashira": {
+			"display": "Hashira (Posts)",
+			"column_ratio": 6.0,
+			"capital_height": 0.3,
+			"base_height": 0.4,
+			"fluting": false,
+			"taper": 0.95,
+			"section": "circular"
+		},
+		"nageshi": {
+			"display": "Nageshi (Tie Beams)",
+			"column_ratio": 8.0,
+			"capital_height": 0.2,
+			"base_height": 0.3,
+			"fluting": false,
+			"taper": 1.0,
+			"section": "rectangular",
+			"penetrating": true
+		},
+		"taruki": {
+			"display": "Taruki (Rafters)",
+			"column_ratio": 12.0,
+			"capital_height": 0.1,
+			"base_height": 0.0,
+			"fluting": false,
+			"taper": 0.9,
+			"section": "circular",
+			"fan_pattern": true
+		},
+		"ken_standard": {
+			"display": "Ken Standard (6 shaku)",
+			"column_ratio": 7.0,
+			"capital_height": 0.25,
+			"base_height": 0.35,
+			"fluting": false,
+			"taper": 0.97,
+			"ken_width": 1.818
+		},
+		"ken_kyoma": {
+			"display": "Ken Kyoma (6.5 shaku)",
+			"column_ratio": 7.5,
+			"capital_height": 0.25,
+			"base_height": 0.35,
+			"fluting": false,
+			"taper": 0.97,
+			"ken_width": 1.970
+		}
+	},
+	"zone_templates": {
+		"kiso": {
+			"display": "Kiso (Foundation)",
+			"height_fraction": 0.08,
+			"depth_offset": 0.04,
+			"elements": ["stone_plinth"],
+			"material": "foundation_stone"
+		},
+		"engawa": {
+			"display": "Engawa (Veranda)",
+			"height_fraction": 0.06,
+			"depth_offset": -0.6,
+			"elements": ["deck_boards", "edge_beam"],
+			"material": "aged_wood"
+		},
+		"hashira_zone": {
+			"display": "Hashira Zone (Post & Beam)",
+			"height_fraction": 0.35,
+			"depth_offset": 0.0,
+			"elements": ["column", "nageshi_beam"],
+			"material": "hinoki_wood"
+		},
+		"shoji_zone": {
+			"display": "Shoji Zone (Screens)",
+			"height_fraction": 0.30,
+			"depth_offset": -0.05,
+			"elements": ["shoji_panel", "kumiko_lattice"],
+			"material": "shoji_paper"
+		},
+		"ranma": {
+			"display": "Ranma (Transom)",
+			"height_fraction": 0.06,
+			"depth_offset": 0.0,
+			"elements": ["carved_transom", "lattice_panel"],
+			"material": "carved_wood"
+		},
+		"noki": {
+			"display": "Noki (Eaves)",
+			"height_fraction": 0.10,
+			"depth_offset": -0.8,
+			"elements": ["taruki_rafters", "kayaoi_fascia"],
+			"material": "dark_wood"
+		},
+		"irimoya": {
+			"display": "Irimoya (Hip-and-Gable Roof)",
+			"height_fraction": 0.20,
+			"depth_offset": 0.0,
+			"shape": "hip_gable",
+			"elements": ["kawara_tile", "onigawara_finial"],
+			"material": "dark_tile"
+		}
+	},
+	"presets": {
+		"kinkakuji": {
+			"display": "Kinkaku-ji (Golden Pavilion), Kyoto",
+			"description": "Three-story lakeside pavilion blending shinden, samurai, and Zen styles with gold leaf upper floors",
+			"bays": 5,
+			"symmetry": "bilateral",
+			"order": "ken_standard",
+			"zones": [
+				{ "template": "kiso" },
+				{ "template": "hashira_zone", "height_fraction": 0.25 },
+				{ "template": "ranma" },
+				{ "template": "hashira_zone", "height_fraction": 0.25 },
+				{ "template": "noki" },
+				{ "template": "irimoya" }
+			],
+			"bay_pattern": [0.15, 0.2, 0.3, 0.2, 0.15]
+		},
+		"todaiji": {
+			"display": "Todai-ji (Great Buddha Hall), Nara",
+			"description": "Massive daibutsu-yo construction with enormous bracket sets and irimoya roof",
+			"bays": 7,
+			"symmetry": "bilateral",
+			"order": "hashira",
+			"zones": [
+				{ "template": "kiso", "height_fraction": 0.10 },
+				{ "template": "hashira_zone", "height_fraction": 0.40 },
+				{ "template": "ranma", "height_fraction": 0.04 },
+				{ "template": "noki", "height_fraction": 0.12 },
+				{ "template": "irimoya", "height_fraction": 0.25 }
+			],
+			"bay_pattern": [0.10, 0.12, 0.15, 0.26, 0.15, 0.12, 0.10]
+		},
+		"byodoin": {
+			"display": "Byodo-in (Phoenix Hall), Uji",
+			"description": "Symmetrical winged hall with central amida-do, open corridors, and upturned eaves",
+			"bays": 9,
+			"symmetry": "bilateral",
+			"order": "ken_standard",
+			"zones": [
+				{ "template": "kiso" },
+				{ "template": "engawa" },
+				{ "template": "hashira_zone", "height_fraction": 0.30 },
+				{ "template": "ranma" },
+				{ "template": "noki", "height_fraction": 0.12 },
+				{ "template": "irimoya", "height_fraction": 0.18 }
+			]
+		},
+		"machiya": {
+			"display": "Machiya (Kyoto Townhouse)",
+			"description": "Narrow street-front timber facade with lattice screens, noren curtain bay, and low eaves",
+			"bays": 3,
+			"symmetry": "hierarchical",
+			"order": "ken_kyoma",
+			"zones": [
+				{ "template": "kiso", "height_fraction": 0.05 },
+				{ "template": "shoji_zone", "height_fraction": 0.35 },
+				{ "template": "ranma" },
+				{ "template": "hashira_zone", "height_fraction": 0.25 },
+				{ "template": "noki", "height_fraction": 0.08 },
+				{ "template": "irimoya", "height_fraction": 0.15 }
+			],
+			"bay_pattern": [0.30, 0.40, 0.30]
+		},
+		"sukiya": {
+			"display": "Sukiya (Tea House Style)",
+			"description": "Rustic refinement with irregular post spacing, natural timber, and deeply recessed nijiriguchi",
+			"bays": 3,
+			"symmetry": "asymmetric",
+			"order": "hashira",
+			"zones": [
+				{ "template": "kiso", "height_fraction": 0.06 },
+				{ "template": "engawa" },
+				{ "template": "shoji_zone", "height_fraction": 0.38 },
+				{ "template": "ranma", "height_fraction": 0.05 },
+				{ "template": "noki", "height_fraction": 0.10 },
+				{ "template": "irimoya", "height_fraction": 0.15 }
+			],
+			"bay_pattern": [0.35, 0.40, 0.25]
+		},
+		"himeji": {
+			"display": "Himeji Castle, Hyogo",
+			"description": "Five-story tenshu keep with white plaster walls, undulating karahafu gables, and stone ishigaki base",
+			"bays": 5,
+			"symmetry": "bilateral",
+			"order": "ken_standard",
+			"zones": [
+				{ "template": "kiso", "height_fraction": 0.15, "material": "castle_stone" },
+				{ "template": "hashira_zone", "height_fraction": 0.18 },
+				{ "template": "noki", "height_fraction": 0.06 },
+				{ "template": "hashira_zone", "height_fraction": 0.18 },
+				{ "template": "noki", "height_fraction": 0.06 },
+				{ "template": "hashira_zone", "height_fraction": 0.14 },
+				{ "template": "irimoya", "height_fraction": 0.15 }
+			],
+			"bay_pattern": [0.15, 0.2, 0.3, 0.2, 0.15]
+		},
+		"nijojo": {
+			"display": "Nijo-jo (Ninomaru Palace), Kyoto",
+			"description": "Shoin-style palace with elaborate carved transoms, fusuma partitions, and nightingale floors",
+			"bays": 7,
+			"symmetry": "bilateral",
+			"order": "ken_kyoma",
+			"zones": [
+				{ "template": "kiso" },
+				{ "template": "engawa" },
+				{ "template": "shoji_zone", "height_fraction": 0.32 },
+				{ "template": "ranma", "height_fraction": 0.08, "elements": ["carved_transom"] },
+				{ "template": "noki", "height_fraction": 0.10 },
+				{ "template": "irimoya", "height_fraction": 0.18 }
+			]
+		}
+	},
+	"materials": {
+		"foundation_stone": {
+			"color": "#6B6358",
+			"roughness": 0.95
+		},
+		"castle_stone": {
+			"color": "#7A7568",
+			"roughness": 0.92
+		},
+		"hinoki_wood": {
+			"color": "#C8A87A",
+			"roughness": 0.65
+		},
+		"aged_wood": {
+			"color": "#8B7355",
+			"roughness": 0.75
+		},
+		"dark_wood": {
+			"color": "#3D2E1F",
+			"roughness": 0.7
+		},
+		"carved_wood": {
+			"color": "#6B5240",
+			"roughness": 0.6
+		},
+		"shoji_paper": {
+			"color": "#F0E8D8",
+			"roughness": 0.4
+		},
+		"white_plaster": {
+			"color": "#F2EDE5",
+			"roughness": 0.5
+		},
+		"dark_tile": {
+			"color": "#2A2520",
+			"roughness": 0.8
+		}
+	}
+}

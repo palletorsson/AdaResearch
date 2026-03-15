@@ -1,0 +1,253 @@
+{
+	"name": "islamic",
+	"display_name": "Islamic Geometric Architecture",
+	"orders": {
+		"root2_proportion": {
+			"display": "Root-2 Proportion",
+			"column_ratio": 8.0,
+			"capital_height": 0.6,
+			"base_height": 0.5,
+			"fluting": false,
+			"taper": 0.92,
+			"ratio": 1.4142,
+			"arch_type": "pointed"
+		},
+		"golden_ratio": {
+			"display": "Golden Ratio (Phi)",
+			"column_ratio": 9.0,
+			"capital_height": 0.7,
+			"base_height": 0.55,
+			"fluting": false,
+			"taper": 0.90,
+			"ratio": 1.6180,
+			"arch_type": "pointed"
+		},
+		"pointed_arch": {
+			"display": "Pointed Arch (Two-Centre)",
+			"column_ratio": 7.5,
+			"capital_height": 0.5,
+			"base_height": 0.45,
+			"fluting": false,
+			"taper": 0.88,
+			"arch_type": "pointed_two_centre"
+		},
+		"horseshoe_arch": {
+			"display": "Horseshoe Arch",
+			"column_ratio": 7.0,
+			"capital_height": 0.55,
+			"base_height": 0.5,
+			"fluting": false,
+			"taper": 0.90,
+			"arch_type": "horseshoe"
+		},
+		"multifoil_arch": {
+			"display": "Multifoil Arch",
+			"column_ratio": 8.5,
+			"capital_height": 0.6,
+			"base_height": 0.5,
+			"fluting": false,
+			"taper": 0.88,
+			"arch_type": "multifoil",
+			"foil_count": 9
+		}
+	},
+	"zone_templates": {
+		"qaidah": {
+			"display": "Qaidah (Base Platform)",
+			"height_fraction": 0.06,
+			"depth_offset": 0.04,
+			"elements": ["stone_plinth"],
+			"material": "marble_base"
+		},
+		"arcade_zone": {
+			"display": "Arcade Zone",
+			"height_fraction": 0.30,
+			"depth_offset": -0.4,
+			"elements": ["column", "pointed_arch", "spandrel_geometric"],
+			"material": "carved_stone"
+		},
+		"geometric_band": {
+			"display": "Geometric Band",
+			"height_fraction": 0.05,
+			"depth_offset": 0.02,
+			"elements": ["star_pattern", "interlace"],
+			"material": "glazed_tile"
+		},
+		"muqarnas_cornice": {
+			"display": "Muqarnas Cornice",
+			"height_fraction": 0.08,
+			"depth_offset": -0.15,
+			"elements": ["muqarnas_cells"],
+			"profile": "stalactite",
+			"material": "carved_stucco"
+		},
+		"mashrabiya": {
+			"display": "Mashrabiya (Lattice Screen)",
+			"height_fraction": 0.20,
+			"depth_offset": -0.3,
+			"elements": ["turned_wood_lattice", "opening_screened"],
+			"material": "carved_wood"
+		},
+		"iwan": {
+			"display": "Iwan (Vaulted Portal)",
+			"height_fraction": 0.45,
+			"depth_offset": -0.8,
+			"elements": ["pointed_vault", "muqarnas_half_dome"],
+			"material": "glazed_tile"
+		},
+		"calligraphy_frieze": {
+			"display": "Calligraphy Frieze",
+			"height_fraction": 0.04,
+			"depth_offset": 0.01,
+			"elements": ["thuluth_inscription", "horizontal_band"],
+			"material": "carved_stucco"
+		},
+		"minaret_zone": {
+			"display": "Minaret Zone",
+			"height_fraction": 0.12,
+			"depth_offset": 0.0,
+			"elements": ["minaret_shaft", "balcony_muqarnas"],
+			"material": "brick"
+		}
+	},
+	"presets": {
+		"alhambra": {
+			"display": "Alhambra, Granada",
+			"description": "Nasrid palace with muqarnas vaults, sebka panels, and Court of the Lions colonnade",
+			"bays": 7,
+			"symmetry": "bilateral",
+			"order": "multifoil_arch",
+			"zones": [
+				{ "template": "qaidah" },
+				{ "template": "arcade_zone", "height_fraction": 0.35 },
+				{ "template": "geometric_band" },
+				{ "template": "muqarnas_cornice", "height_fraction": 0.10 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "mashrabiya", "height_fraction": 0.15 }
+			],
+			"bay_pattern": [0.10, 0.13, 0.15, 0.24, 0.15, 0.13, 0.10]
+		},
+		"sultan_hassan": {
+			"display": "Sultan Hassan Mosque, Cairo",
+			"description": "Monumental Mamluk mosque with towering iwan portals and carved stone geometric panels",
+			"bays": 5,
+			"symmetry": "bilateral",
+			"order": "pointed_arch",
+			"zones": [
+				{ "template": "qaidah", "height_fraction": 0.08 },
+				{ "template": "iwan", "height_fraction": 0.50 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "muqarnas_cornice" },
+				{ "template": "geometric_band" }
+			],
+			"bay_pattern": [0.15, 0.2, 0.3, 0.2, 0.15]
+		},
+		"taj_mahal": {
+			"display": "Taj Mahal, Agra",
+			"description": "Mughal mausoleum with pietra dura inlay, recessed iwan arches, and bulbous dome",
+			"bays": 5,
+			"symmetry": "bilateral",
+			"order": "golden_ratio",
+			"zones": [
+				{ "template": "qaidah", "height_fraction": 0.10 },
+				{ "template": "arcade_zone", "height_fraction": 0.20 },
+				{ "template": "iwan", "height_fraction": 0.35 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "geometric_band" },
+				{ "template": "muqarnas_cornice", "height_fraction": 0.06 }
+			],
+			"bay_pattern": [0.15, 0.2, 0.3, 0.2, 0.15]
+		},
+		"isfahan_shah_mosque": {
+			"display": "Shah Mosque (Masjed-e Shah), Isfahan",
+			"description": "Safavid masterpiece with polychrome tile mosaic, twin minarets, and monumental iwan",
+			"bays": 7,
+			"symmetry": "bilateral",
+			"order": "pointed_arch",
+			"zones": [
+				{ "template": "qaidah" },
+				{ "template": "arcade_zone", "height_fraction": 0.25 },
+				{ "template": "geometric_band" },
+				{ "template": "iwan", "height_fraction": 0.30 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "minaret_zone" }
+			]
+		},
+		"cordoba_mezquita": {
+			"display": "Mezquita, Cordoba",
+			"description": "Umayyad hypostyle hall with double-tiered horseshoe arches and red-white voussoirs",
+			"bays": 9,
+			"symmetry": "bilateral",
+			"order": "horseshoe_arch",
+			"zones": [
+				{ "template": "qaidah", "height_fraction": 0.05 },
+				{ "template": "arcade_zone", "height_fraction": 0.30, "elements": ["column", "horseshoe_arch", "double_tier"] },
+				{ "template": "arcade_zone", "height_fraction": 0.25, "elements": ["column", "horseshoe_arch"] },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "muqarnas_cornice", "height_fraction": 0.06 }
+			]
+		},
+		"al_azhar": {
+			"display": "Al-Azhar Mosque, Cairo",
+			"description": "Fatimid congregational mosque with stucco carved mihrab, keel arches, and layered minarets",
+			"bays": 7,
+			"symmetry": "bilateral",
+			"order": "pointed_arch",
+			"zones": [
+				{ "template": "qaidah" },
+				{ "template": "arcade_zone", "height_fraction": 0.32 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "geometric_band" },
+				{ "template": "muqarnas_cornice" },
+				{ "template": "minaret_zone", "height_fraction": 0.10 }
+			]
+		},
+		"samarkand_registan": {
+			"display": "Registan, Samarkand",
+			"description": "Timurid ensemble with three madrasas, colossal iwan portals, and polychrome tile facades",
+			"bays": 9,
+			"symmetry": "bilateral",
+			"order": "root2_proportion",
+			"zones": [
+				{ "template": "qaidah", "height_fraction": 0.05 },
+				{ "template": "arcade_zone", "height_fraction": 0.20 },
+				{ "template": "geometric_band" },
+				{ "template": "iwan", "height_fraction": 0.35 },
+				{ "template": "calligraphy_frieze" },
+				{ "template": "muqarnas_cornice", "height_fraction": 0.06 },
+				{ "template": "minaret_zone" }
+			],
+			"bay_pattern": [0.08, 0.10, 0.11, 0.12, 0.18, 0.12, 0.11, 0.10, 0.08]
+		}
+	},
+	"materials": {
+		"marble_base": {
+			"color": "#D8CFC4",
+			"roughness": 0.75
+		},
+		"carved_stone": {
+			"color": "#C2B5A0",
+			"roughness": 0.8
+		},
+		"glazed_tile": {
+			"color": "#1A5F7A",
+			"roughness": 0.3
+		},
+		"carved_stucco": {
+			"color": "#E8DED0",
+			"roughness": 0.55
+		},
+		"carved_wood": {
+			"color": "#5C3D2E",
+			"roughness": 0.65
+		},
+		"brick": {
+			"color": "#A0704C",
+			"roughness": 0.9
+		},
+		"white_marble": {
+			"color": "#F0EAE0",
+			"roughness": 0.4
+		}
+	}
+}
