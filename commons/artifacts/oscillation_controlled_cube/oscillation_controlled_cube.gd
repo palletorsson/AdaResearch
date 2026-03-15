@@ -275,3 +275,8 @@ func _process(_delta):
 		var ang_vel = cos(t * 2.0) * 1.5
 		var amp = (sin(t * 0.5) + 1.0) * 0.5
 		_on_oscillation_updated(y_offset, ang_vel, amp)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

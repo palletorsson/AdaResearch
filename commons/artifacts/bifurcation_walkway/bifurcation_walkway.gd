@@ -363,3 +363,8 @@ func _input(event):
 
 func set_range(new_min: float, new_max: float):
 	_set_r_range(new_min, new_max)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

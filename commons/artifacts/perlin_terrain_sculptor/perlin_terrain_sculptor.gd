@@ -341,3 +341,8 @@ func _broadcast_controls_to_voxelnoise() -> void:
 
 	if get_tree():
 		get_tree().call_group("voxelnoise_receivers", "apply_perlin_terrain_controls", payload)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

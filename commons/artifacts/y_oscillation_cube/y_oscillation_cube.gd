@@ -276,3 +276,8 @@ func get_sin_value() -> float:
 func reset() -> void:
 	_time = 0.0
 	_trail_history.clear()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

@@ -81,3 +81,8 @@ func _process(delta: float) -> void:
 func set_specimen_label(text: String) -> void:
 	if label:
 		label.text = text
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

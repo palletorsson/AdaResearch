@@ -100,3 +100,8 @@ func _create_label():
 	_label.text = "RIEMANN SPHERE\nComplex plane + ∞"
 	_label.position = Vector3(0, -radius - 0.2, 0)
 	add_child(_label)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

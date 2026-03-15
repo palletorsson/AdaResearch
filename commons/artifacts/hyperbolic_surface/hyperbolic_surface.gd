@@ -63,3 +63,8 @@ func _create_label():
 	_label.text = "HYPERBOLIC SURFACE\nNegative curvature\nK < 0"
 	_label.position = Vector3(0, -size - 0.1, 0)
 	add_child(_label)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

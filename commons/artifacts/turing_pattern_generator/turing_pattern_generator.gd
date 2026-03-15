@@ -377,3 +377,8 @@ func set_gradient(gradient: Gradient):
 
 func reset():
 	_init_simulation()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

@@ -132,3 +132,8 @@ func check_viewer_position(viewer_pos: Vector3) -> bool:
 		_info_label.text = "PENROSE TRIANGLE\nLocally coherent\nGlobally impossible"
 	
 	return _is_at_sweet_spot
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

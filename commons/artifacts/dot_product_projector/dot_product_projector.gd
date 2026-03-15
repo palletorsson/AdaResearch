@@ -349,3 +349,8 @@ func get_dot_product() -> float:
 func get_projection() -> Vector3:
 	var dot = vector_a.dot(vector_b)
 	return vector_b.normalized() * (dot / vector_b.length()) if vector_b.length() > 0.001 else Vector3.ZERO
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

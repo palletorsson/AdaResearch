@@ -219,3 +219,8 @@ func set_angle_from_position(world_pos: Vector3):
 	_angle = atan2(local_pos.x, -local_pos.y)
 	_angle = clampf(_angle, -PI * 0.45, PI * 0.45)
 	_update_bob_position()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

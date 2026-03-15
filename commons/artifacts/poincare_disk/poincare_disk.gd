@@ -168,3 +168,8 @@ func _process(delta):
 			var mat = line.material_override as StandardMaterial3D
 			var pulse = 0.5 + 0.5 * sin(_time + i * 0.5)
 			mat.albedo_color.a = 0.4 + 0.4 * pulse
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

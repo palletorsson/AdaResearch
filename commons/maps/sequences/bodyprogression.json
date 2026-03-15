@@ -1,0 +1,66 @@
+{
+	"sequences": {
+		"bodyprogression": {
+			"name": "Body Progression: Assembling the Self",
+			"truth": "The body is never given whole. It is assembled, fragment by fragment, each piece a choice.",
+			"qfep_term": "Embodiment_Lambda",
+			"qfep_connection": "The body in VR begins as absence -- floating hands in void. Each progression step accretes identity onto the avatar: an anchor, a reach, a shape, an outfit. QFEP's lambda parameter governs how much of the self is performed versus given. Drag as performed identity makes the body a canvas, not a container.",
+
+			"description": "From disembodied hands to a full outfit, experience how VR bodies are constructed piece by piece. Each map adds a new layer of embodiment -- hands, anchor point, arms, torso, dress -- revealing the body as an ongoing act of assembly rather than a fixed given.",
+			"layer": "lambda_edge",
+			"prerequisites": [],
+			"unlocks": ["avatar_customization"],
+
+			"difficulty": "beginner",
+			"estimated_time": "15-25 minutes",
+
+			"learning_objectives": [
+				"Understand VR embodiment as progressive assembly",
+				"Learn hand tracking and nail color customization",
+				"Explore body anchoring through accessories",
+				"See inverse kinematics as boundary negotiation",
+				"Understand torso estimation from sparse tracking points",
+				"Experience outfit selection as performed identity"
+			],
+
+			"content": [
+				"BodyProg_Hands: Floating in Void -- Mirror artifact showing player's floating hands. Learn nail color customization. The body begins as fragments.",
+				"BodyProg_Necklace: First Anchor -- A necklace/pendant appears at neck point. First body anchor beyond hands. Identity accretes around a center.",
+				"BodyProg_Arms: Reaching Out -- IK arms connect hands to shoulders. TwoBoneIK3D demo. Extending the boundary between self and world.",
+				"BodyProg_Torso: Taking Shape -- Torso mesh appears via 3-point estimation. The body as estimated, not given.",
+				"BodyProg_Dress: Dressed to Kill -- Full outfit unlocks (ElphabaDress). Drag as performed identity, the body as canvas."
+			],
+
+			"maps": [
+				"BodyProg_Hands",
+				"BodyProg_Necklace",
+				"BodyProg_Arms",
+				"BodyProg_Torso",
+				"BodyProg_Dress"
+			],
+
+			"audio": {
+				"ambient_preset": "void_hum",
+				"volume": -10.0
+			},
+
+			"return_to": "lab",
+
+			"completion_rewards": [
+				"embodiment_badge"
+			],
+
+			"deferred_maps": [
+				"BodyProg_Fingers",
+				"BodyProg_Face",
+				"BodyProg_Hair",
+				"BodyProg_Shoes"
+			],
+
+			"references": {
+				"key_texts": ["Butler: Bodies That Matter", "Haraway: A Cyborg Manifesto"],
+				"related_algorithms": ["commons/avatar/", "commons/ik/"]
+			}
+		}
+	}
+}

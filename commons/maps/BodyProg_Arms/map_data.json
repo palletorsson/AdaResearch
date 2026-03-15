@@ -1,0 +1,73 @@
+{
+  "map_info": {
+    "name": "Reaching Out",
+    "lookup_name": "BodyProg_Arms",
+    "description": "IK arms connect hands to shoulders. TwoBoneIK3D demo. QFEP: extending the boundary between self and world.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": { "width": 10, "depth": 10, "max_height": 2 },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "bodyprogression",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["Inverse kinematics basics", "TwoBoneIK3D in Godot", "Arm-to-hand connection"]
+    }
+  },
+  "documentation": {
+    "summary": "BodyProg_Arms - IK arms extend the avatar boundary",
+    "layout": "Open room with central IK arm demonstration",
+    "objective": "See IK arms connect your floating hands to shoulder joints. Reach out and watch the boundary between self and world extend.",
+    "key_elements": ["ik_arm_demo - TwoBoneIK3D arm visualization"]
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","t"," "," "," "," "," "," ","s"," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","ik_arm_demo"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ]
+  },
+  "utility_definitions": {
+    "s": { "type": "spawn", "properties": { "height": 1.5 } },
+    "t": { "type": "teleporter", "name": "Next", "description": "Continue to Taking Shape", "properties": { "action": "next_in_sequence" } }
+  },
+  "lighting": {
+    "ambient_color": [0.2, 0.2, 0.3],
+    "ambient_energy": 0.6,
+    "directional_light": { "enabled": true, "direction": [-0.2, -0.9, -0.3], "color": [0.9, 0.85, 1.0], "energy": 0.8 }
+  },
+  "settings": {
+    "cube_size": 1.0, "gutter": 0.0, "show_grid": false, "enable_physics": true,
+    "background": { "type": "sky", "color": [0.1, 0.06, 0.15] }
+  }
+}

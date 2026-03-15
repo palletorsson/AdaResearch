@@ -116,3 +116,8 @@ func get_cube_instance() -> Node3D:
 
 func get_cube_mesh() -> MeshInstance3D:
 	return _cube_mesh
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

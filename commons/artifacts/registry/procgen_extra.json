@@ -125,6 +125,18 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
+		},
+		"flower_lab": {
+			"lookup_name": "flower_lab",
+			"scene": "res://commons/artifacts/flower_lab/flower_lab.tscn",
+			"name": "Flower Lab",
+			"description": "Interactive botanical laboratory — VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": ["flower", "procedural", "interactive", "botanical", "morphology", "vr", "sliders"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
 		}
 	}
 }

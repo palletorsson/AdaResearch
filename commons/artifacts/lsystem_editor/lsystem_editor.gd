@@ -340,3 +340,8 @@ func set_rules(new_axiom: String, new_rules: Dictionary, new_angle: float = 25.0
 
 func get_string() -> String:
 	return _current_string
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

@@ -171,3 +171,8 @@ func _input(event):
 			next_postulate()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			previous_postulate()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

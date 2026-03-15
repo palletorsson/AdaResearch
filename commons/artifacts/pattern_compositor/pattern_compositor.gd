@@ -22,6 +22,7 @@ const SC := preload("res://commons/composition/spatial_composition.gd")
 @export var tile_size: float = 0.5
 @export var surface: String = "floor"  # "floor" or "wall"
 @export var emission_strength: float = 0.8
+@export var tiling: String = "rect"  # "rect", "hex", "polar", "truchet", "voronoi"
 
 const WALLPAPER_SHADER = preload("res://commons/resourses/shaders/wallpaper_tile.gdshader")
 
@@ -91,6 +92,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		surface = str(config_data["surface"])
 	if config_data.has("emission_strength"):
 		emission_strength = clampf(float(config_data["emission_strength"]), 0.0, 5.0)
+	if config_data.has("tiling"):
+		tiling = str(config_data["tiling"])
 
 func _build_composition() -> void:
 	# Try art history presets first, then basic presets
@@ -100,7 +103,21 @@ func _build_composition() -> void:
 	else:
 		_composition = SC.get_preset(preset_name, grid_width, grid_height)
 
+	# Set up coordinate system if non-rectangular tiling requested
+	# Art history presets may set their own tiling_type
+	var effective_tiling: String = tiling
+	if _composition.tiling_type != "rect" and _composition.tiling_type != "":
+		effective_tiling = _composition.tiling_type
+	if effective_tiling != "rect":
+		_composition.setup_tiling(effective_tiling, tile_size)
+
 func _render() -> void:
+	if _composition.coord_system:
+		_render_with_coord_system()
+	else:
+		_render_rectangular()
+
+func _render_rectangular() -> void:
 	for gy in grid_height:
 		for gx in grid_width:
 			var zone = _composition.resolve_zone(gx, gy)
@@ -108,28 +125,65 @@ func _render() -> void:
 				continue
 
 			var quad := QuadMesh.new()
-			quad.size = Vector2(tile_size * 0.98, tile_size * 0.98)  # Tiny gap between tiles
+			quad.size = Vector2(tile_size * 0.98, tile_size * 0.98)
 
 			var mesh_inst := MeshInstance3D.new()
 			mesh_inst.mesh = quad
 			mesh_inst.name = "T_%d_%d" % [gx, gy]
 
-			# Position based on surface orientation
 			var world_x := (float(gx) - float(grid_width) / 2.0 + 0.5) * tile_size
 			var world_y := (float(gy) - float(grid_height) / 2.0 + 0.5) * tile_size
 			if surface == "floor":
 				mesh_inst.position = Vector3(world_x, 0.01, world_y)
 				mesh_inst.rotation_degrees.x = -90.0
-			else:  # wall
+			else:
 				mesh_inst.position = Vector3(world_x, -world_y + float(grid_height) * tile_size, 0.01)
 
-			# Get zone pattern properties
 			var props := _get_zone_pattern(zone)
 			var mat := _create_zone_material(props)
 			mesh_inst.material_override = mat
 
 			add_child(mesh_inst)
 			_tile_count += 1
+
+func _render_with_coord_system() -> void:
+	var cs = _composition.coord_system
+	var cells = cs.iterate_cells()
+
+	for cell_key in cells:
+		var zone = _composition.resolve_zone_for_cell(cell_key)
+		if not zone:
+			continue
+
+		var cell_mesh: Mesh = cs.create_cell_mesh(cell_key)
+		if not cell_mesh:
+			continue
+
+		var mesh_inst := MeshInstance3D.new()
+		mesh_inst.mesh = cell_mesh
+		mesh_inst.name = "T_%s" % str(cell_key)
+
+		var world_pos: Vector3 = cs.cell_to_world(cell_key)
+		if surface == "floor":
+			mesh_inst.position = Vector3(world_pos.x, 0.01, world_pos.z)
+			# Hex/Voronoi/Polar meshes are already in XZ plane (Y=up normal)
+			# Only QuadMesh (rect/truchet) needs rotation
+			if cs.type == 0 or cs.type == 3:  # RECTANGULAR or TRUCHET
+				mesh_inst.rotation_degrees.x = -90.0
+		else:
+			mesh_inst.position = Vector3(world_pos.x, -world_pos.z + cs.get_world_height() * 0.5, 0.01)
+
+		# Apply Truchet rotation if applicable
+		if cs.type == 3:  # TRUCHET
+			var rot_deg: float = cs.get_rotation_degrees(cell_key)
+			mesh_inst.rotation_degrees.z = rot_deg
+
+		var props := _get_zone_pattern(zone)
+		var mat := _create_zone_material(props)
+		mesh_inst.material_override = mat
+
+		add_child(mesh_inst)
+		_tile_count += 1
 
 func _get_zone_pattern(zone) -> Dictionary:
 	# Start with zone's own properties, fall back to defaults by zone ID

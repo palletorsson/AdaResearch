@@ -212,3 +212,8 @@ func drop_ball_now() -> void:
 
 func get_destroyed_count() -> int:
 	return balls_destroyed
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

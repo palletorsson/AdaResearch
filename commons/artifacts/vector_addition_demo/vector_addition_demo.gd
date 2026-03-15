@@ -232,3 +232,8 @@ func set_vectors(a: Vector3, b: Vector3):
 
 func get_result() -> Vector3:
 	return vector_a + vector_b
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

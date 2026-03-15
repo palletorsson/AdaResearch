@@ -211,3 +211,8 @@ func is_underdamped() -> bool:
 	# Critical damping: c_crit = 2*sqrt(k*m)
 	var c_crit = 2.0 * sqrt(spring_k * mass)
 	return damping_c < c_crit
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

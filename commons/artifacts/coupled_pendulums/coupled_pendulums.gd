@@ -369,3 +369,8 @@ func set_coupling(k: float):
 
 func reset():
 	_reset_simulation()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

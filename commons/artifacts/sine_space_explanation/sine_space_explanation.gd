@@ -267,3 +267,8 @@ func _refresh_static() -> void:
 	_time = 0.0
 	_update_surface_mesh(_time)
 	_update_wireframe_mesh(_time)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])
