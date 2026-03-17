@@ -2,23 +2,25 @@
 	"sequences": {
 		"physicssimulation": {
 			"name": "Physics Simulation: The Engine Behind Reality",
-			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous — and knowing where the illusion breaks.",
+			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous \u00e2\u20ac\u201d and knowing where the illusion breaks.",
 			"qfep_term": "dynamics",
-			"qfep_connection": "Physics simulation is the computational engine of emergence (φ). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden λ — the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
-			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)·dt²",
+			"qfep_connection": "Physics simulation is the computational engine of emergence (\u00cf\u2020). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden \u00ce\u00bb \u00e2\u20ac\u201d the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
+			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)\u00c2\u00b7dt\u00c2\u00b2",
 			"demonstration": "Feel Newton's laws pull you. Watch rigid bodies collide and scatter. Stretch springs until they oscillate. See force fields push particles into orbits. Pour fluid into a simulated world.",
-
-			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity — and a new way the simulation can break.",
+			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity \u00e2\u20ac\u201d and a new way the simulation can break.",
 			"layer": "dynamics",
-			"prerequisites": ["forces"],
-			"unlocks": ["softbodies", "swarmintelligence"],
-
+			"prerequisites": [
+				"forces"
+			],
+			"unlocks": [
+				"softbodies",
+				"swarmintelligence"
+			],
 			"ambient_preset": "ambient_drone",
 			"difficulty": "advanced",
 			"estimated_time": "40-50 minutes",
-
 			"learning_objectives": [
-				"Numerical integration: Euler, Verlet, RK4 — and why the method matters",
+				"Numerical integration: Euler, Verlet, RK4 \u00e2\u20ac\u201d and why the method matters",
 				"Rigid body dynamics: rotation, angular momentum, inertia tensors",
 				"Collision detection: broad phase (spatial hashing) and narrow phase (GJK/SAT)",
 				"Constraints: joints, hinges, and how physics engines solve them",
@@ -29,15 +31,13 @@
 				"Finite Element Method: engineering simulation for deformable bodies",
 				"Soft body physics: the compromise between rigid and fluid"
 			],
-
 			"content": [
-				"PhysicsSim_Foundations: Newton's laws → numerical integration → Verlet. The math that makes simulation possible.",
-				"PhysicsSim_Bodies: Rigid bodies → collision detection → constraints → bouncing ball. Solid things interacting.",
-				"PhysicsSim_Springs: Mass-spring-damper → spring networks → cloth. Elastic connections and emergent softness.",
-				"PhysicsSim_Fields: Force fields → vector fields → particles → n-body → three-body problem. Invisible forces, visible chaos.",
-				"PhysicsSim_Continuum: Fluid (SPH) → FEM → soft bodies → magnetic fields → kinetic sculpture. Continuous matter, discrete approximation."
+				"PhysicsSim_Foundations: Newton's laws \u00e2\u2020\u2019 numerical integration \u00e2\u2020\u2019 Verlet. The math that makes simulation possible.",
+				"PhysicsSim_Bodies: Rigid bodies \u00e2\u2020\u2019 collision detection \u00e2\u2020\u2019 constraints \u00e2\u2020\u2019 bouncing ball. Solid things interacting.",
+				"PhysicsSim_Springs: Mass-spring-damper \u00e2\u2020\u2019 spring networks \u00e2\u2020\u2019 cloth. Elastic connections and emergent softness.",
+				"PhysicsSim_Fields: Force fields \u00e2\u2020\u2019 vector fields \u00e2\u2020\u2019 particles \u00e2\u2020\u2019 n-body \u00e2\u2020\u2019 three-body problem. Invisible forces, visible chaos.",
+				"PhysicsSim_Continuum: Fluid (SPH) \u00e2\u2020\u2019 FEM \u00e2\u2020\u2019 soft bodies \u00e2\u2020\u2019 magnetic fields \u00e2\u2020\u2019 kinetic sculpture. Continuous matter, discrete approximation."
 			],
-
 			"maps": [
 				"PhysicsSim_Foundations",
 				"PhysicsSim_Bodies",
@@ -61,12 +61,10 @@
 				"PhysicsSimulation_Vector_Fields",
 				"PhysicsSimulation_Verlet_Integration"
 			],
-
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/newtons_laws.md"
 			],
-
 			"algorithm_paths": {
 				"PhysicsSim_Foundations": "res://algorithms/physicssimulation/newtonslaws/",
 				"PhysicsSim_Bodies": "res://algorithms/physicssimulation/rigidbody/",
@@ -74,15 +72,226 @@
 				"PhysicsSim_Fields": "res://algorithms/physicssimulation/forcefields/",
 				"PhysicsSim_Continuum": "res://algorithms/physicssimulation/fluidsimulation/"
 			},
-
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_physicssimulation",
-			"unlock_requirements": ["forces"],
+			"unlock_requirements": [
+				"forces"
+			],
 			"completion_rewards": [
 				"physics_engine_badge",
 				"numerical_methods_badge",
 				"simulation_master_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "PhysicsSim_Foundations",
+					"position": "intro",
+					"artifacts": [
+						"newtons_laws",
+						"numerical_integration",
+						"verlet_integration"
+					],
+					"size_budget": "environment",
+					"rationale": "Introduction with 3 artifacts"
+				},
+				{
+					"map": "PhysicsSim_Bodies",
+					"position": "intro",
+					"artifacts": [
+						"bouncing_ball",
+						"collision_detection",
+						"constraints",
+						"rigid_body"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 4 artifacts"
+				},
+				{
+					"map": "PhysicsSim_Springs",
+					"position": "intro",
+					"artifacts": [
+						"cloth_simulation",
+						"mass_spring_damper",
+						"spring_mass_system",
+						"spring_system"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 4 artifacts"
+				},
+				{
+					"map": "PhysicsSim_Fields",
+					"position": "intro",
+					"artifacts": [
+						"force_fields",
+						"nbody_simulation",
+						"particle_systems",
+						"three_body_problem",
+						"vector_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 5 artifacts"
+				},
+				{
+					"map": "PhysicsSim_Continuum",
+					"position": "foundation",
+					"artifacts": [
+						"fem_simulation",
+						"fluid_simulation",
+						"magnetic_simulation",
+						"soft_bodies",
+						"surreal_kinetic_sculpture"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 5 artifacts"
+				},
+				{
+					"map": "PhysicsSimulation_Bouncing_Ball_Physics",
+					"position": "foundation",
+					"artifacts": [
+						"bouncing_ball"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Cloth_Simulation",
+					"position": "foundation",
+					"artifacts": [
+						"cloth_simulation"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Collision_Detection",
+					"position": "foundation",
+					"artifacts": [
+						"collision_detection"
+					],
+					"size_budget": "environment",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Constraints",
+					"position": "exploration",
+					"artifacts": [
+						"constraints"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Finite_Element_Method_FEM",
+					"position": "exploration",
+					"artifacts": [
+						"fem_simulation"
+					],
+					"size_budget": "environment",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Fluid_Simulation_SPH",
+					"position": "exploration",
+					"artifacts": [
+						"lattice_gas_automata"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Force_Fields",
+					"position": "exploration",
+					"artifacts": [
+						"force_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Mass_Spring_Damper",
+					"position": "exploration",
+					"artifacts": [
+						"mass_spring_damper"
+					],
+					"size_budget": "environment",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Newton_s_Laws",
+					"position": "integration",
+					"artifacts": [
+						"newtons_laws"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Numerical_Integration",
+					"position": "integration",
+					"artifacts": [
+						"numerical_integration"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Particle_Systems",
+					"position": "integration",
+					"artifacts": [
+						"cellular_automata_3d"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Rigid_Body_Dynamics",
+					"position": "integration",
+					"artifacts": [
+						"rigid_body"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Spring_Mass_Systems",
+					"position": "integration",
+					"artifacts": [
+						"spring_mass_system"
+					],
+					"size_budget": "mixed",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Three_Body_Problem",
+					"position": "synthesis",
+					"artifacts": [
+						"cellular_automata_1d"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "PhysicsSimulation_Vector_Fields",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"vector_fields"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "PhysicsSimulation_Verlet_Integration",
+					"position": "synthesis",
+					"artifacts": [
+						"verlet_integration"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 1 artifact"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
 }

@@ -25,7 +25,144 @@
 			"name": "Structure Grammar: Spatial Formulas",
 			"prerequisites": [],
 			"truth": "Space is authored, not found. Every room is an argument.",
-			"unlocks": []
+			"unlocks": [],
+			"artifact_groups": [
+				{
+					"map": "F1_Pedestal",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "F2_Corridor",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "F4_Amphitheater",
+					"position": "intro",
+					"artifacts": [
+						"light_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "F8_The_Drop",
+					"position": "foundation",
+					"artifacts": [
+						"unit_circle"
+					],
+					"size_budget": "environment",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "F9_Frame",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "F11_Comparison",
+					"position": "foundation",
+					"artifacts": [
+						"animated_cube",
+						"cube_scene"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "F12_Cathedral",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "F13_Observation",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "F14_Lab_Bench",
+					"position": "exploration",
+					"artifacts": [
+						"cube_scene",
+						"homagetothesquare",
+						"platonicsolids",
+						"rainbow"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 4 artifacts"
+				},
+				{
+					"map": "F17_Zen_Garden",
+					"position": "exploration",
+					"artifacts": [
+						"fourier_transform",
+						"noisetorus",
+						"probability_sphere",
+						"unit_circle"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 4 artifacts"
+				},
+				{
+					"map": "F20_Well",
+					"position": "integration",
+					"artifacts": [
+						"spectrum_display"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "F26_Portal_Chamber",
+					"position": "integration",
+					"artifacts": [
+						"crystal_ball"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "F30_Ramp_Walkpath",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "F31_Transport_Cube",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "F32_Teleporter",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "F33_Bridge",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

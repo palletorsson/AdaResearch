@@ -5,7 +5,9 @@
 			"description": "Gallery of unused artifacts from Randomness and Wavefunctions",
 			"difficulty": "testing",
 			"estimated_time": "variable",
-			"learning_objectives": ["Inspection"],
+			"learning_objectives": [
+				"Inspection"
+			],
 			"maps": [
 				"Template_Basic",
 				"Template_Medium",
@@ -15,7 +17,39 @@
 			"return_to": "lab",
 			"lab_map": "Lab/map_data",
 			"unlock_requirements": [],
-			"completion_rewards": []
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Template_Basic",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Template_Medium",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Template_Large",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Template_Land",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

@@ -2,11 +2,11 @@
 	"sequences": {
 		"artmathematics": {
 			"name": "Art & Mathematics: Visual Philosophy",
-			"truth": "Art makes visible what mathematics proves. The impossible staircase is Gödel you can climb.",
+			"truth": "Art makes visible what mathematics proves. The impossible staircase is G\u00c3\u00b6del you can climb.",
 			"qfep_term": "Visualization",
-			"qfep_connection": "Artists have visualized QFEP dynamics for centuries—Escher's impossible objects (edge of formal systems), Magritte's sign/signified gap, Minimalism's dark room paradox. Art embodies theory before theory names itself.",
+			"qfep_connection": "Artists have visualized QFEP dynamics for centuries\u00e2\u20ac\u201dEscher's impossible objects (edge of formal systems), Magritte's sign/signified gap, Minimalism's dark room paradox. Art embodies theory before theory names itself.",
 			"formula": "Ceci n'est pas une pipe",
-			"description": "From Escher's impossible staircases to Magritte's treachery of images to Minimalism's meaning-evacuation paradox. Art as visual epistemology—making mathematical and philosophical limits tangible.",
+			"description": "From Escher's impossible staircases to Magritte's treachery of images to Minimalism's meaning-evacuation paradox. Art as visual epistemology\u00e2\u20ac\u201dmaking mathematical and philosophical limits tangible.",
 			"layer": "cross_cutting",
 			"prerequisites": [
 				"primitives",
@@ -18,8 +18,8 @@
 			"difficulty": "intermediate",
 			"estimated_time": "20-25 minutes",
 			"learning_objectives": [
-				"Escher: locally coherent, globally impossible—visual Gödel",
-				"Magritte: the sign is not the signified—representation has limits",
+				"Escher: locally coherent, globally impossible\u00e2\u20ac\u201dvisual G\u00c3\u00b6del",
+				"Magritte: the sign is not the signified\u00e2\u20ac\u201drepresentation has limits",
 				"Constructivism: meaning-free elements in autonomous arrangements",
 				"Minimalism paradox: signs signify despite meaning-evacuation",
 				"Art as visual philosophy"
@@ -27,10 +27,10 @@
 			"content": [
 				"Escher_Impossible: Staircases that go up by going down",
 				"Escher_Tessellation: Infinity in finite space",
-				"Magritte_Pipe: This is not a pipe—representation's gap",
+				"Magritte_Pipe: This is not a pipe\u00e2\u20ac\u201drepresentation's gap",
 				"Magritte_Windows: The frame that lies",
-				"Rodchenko_Monochrome: Pure Red, Pure Yellow, Pure Blue—meaning-free?",
-				"Judd_Minimalism: What you see is what you see—but is it?",
+				"Rodchenko_Monochrome: Pure Red, Pure Yellow, Pure Blue\u00e2\u20ac\u201dmeaning-free?",
+				"Judd_Minimalism: What you see is what you see\u00e2\u20ac\u201dbut is it?",
 				"Dark_Room_Paradox: The attempt to evacuate meaning keeps generating it",
 				"Art_Synthesis: Why artists see what mathematicians prove"
 			],
@@ -56,13 +56,13 @@
 			],
 			"references": {
 				"gamwell_chapters": [
-					"Ch 9: Gödel (Escher/Magritte)",
+					"Ch 9: G\u00c3\u00b6del (Escher/Magritte)",
 					"Ch 4: Formalism (Constructivism)",
 					"Ch 13: Postmodernism (Minimalism)"
 				],
 				"key_figures": [
 					"M.C. Escher",
-					"René Magritte",
+					"Ren\u00c3\u00a9 Magritte",
 					"Alexander Rodchenko",
 					"Donald Judd",
 					"Robert Morris"
@@ -79,7 +79,80 @@
 				"visual_philosopher_badge",
 				"impossible_object_badge",
 				"escher_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Escher_Impossible",
+					"position": "intro",
+					"artifacts": [
+						"escher_staircase",
+						"magritte_pipe",
+						"penrose_triangle"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 3 artifacts"
+				},
+				{
+					"map": "Escher_Tessellation",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Magritte_Pipe",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Magritte_Windows",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Rodchenko_Monochrome",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Judd_Minimalism",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Dark_Room_Paradox",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Art_Synthesis",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "MathArt_Cultural_History",
+					"position": "synthesis",
+					"artifacts": [
+						"penrose_tilings"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

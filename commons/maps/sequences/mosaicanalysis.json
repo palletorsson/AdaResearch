@@ -6,16 +6,15 @@
 			"qfep_term": "cultural_computation",
 			"qfep_connection": "Classical mosaics are frozen algorithms. Roman opus tessellatum follows constraint-satisfaction rules indistinguishable from Wave Function Collapse. Byzantine gold-ground mosaics use wallpaper group symmetries that predate their mathematical formalization by a millennium. The lambda parameter lives in the tension between geometric perfection and material irregularity: hand-cut tesserae introduce noise that no shader replicates. QFEP reads this as the productive gap between F (the intended pattern) and E (the entropy of craft).",
 			"formula": "pattern = symmetry_group(motif, lattice) + material_noise(hand, stone, light)",
-			"demonstration": "Photograph a Roman mosaic floor. Identify the wallpaper group. Decompose the motif tile. Feed it to the pattern maker. Watch the algorithm reconstruct what craftsmen built by hand two thousand years ago — and see where it fails.",
-
+			"demonstration": "Photograph a Roman mosaic floor. Identify the wallpaper group. Decompose the motif tile. Feed it to the pattern maker. Watch the algorithm reconstruct what craftsmen built by hand two thousand years ago \u00e2\u20ac\u201d and see where it fails.",
 			"description": "Field study sequence connecting Italian mosaics, facade patterns, and ornamental systems to algorithmic pattern generation. From Pompeii's geometric floors through Byzantine gold-ground to baroque majolica, each map isolates a pattern system, identifies its underlying computational logic, and transforms it through the existing wallpaper group, WFC, and tessellation tools in Ada Research.",
 			"layer": "cultural_computation",
-			"prerequisites": ["patterngeneration"],
+			"prerequisites": [
+				"patterngeneration"
+			],
 			"unlocks": [],
-
 			"difficulty": "intermediate",
 			"estimated_time": "45-60 minutes",
-
 			"learning_objectives": [
 				"Wallpaper group identification: recognizing the 17 groups in physical mosaics",
 				"Motif decomposition: extracting the fundamental domain from a repeating pattern",
@@ -26,17 +25,15 @@
 				"Baroque ornament as recursive grammar: L-system logic in scrollwork and volutes",
 				"Scale and viewing distance: how mosaic resolution maps to pixel density"
 			],
-
 			"content": [
-				"Mosaic_Pompeii_Floors: Geometric opus tessellatum — wallpaper groups in Roman floors (Casa del Fauno, Casa dei Vettii)",
-				"Mosaic_Byzantine_Gold: Gold-ground technique — reflective tesserae, viewing angle, light as variable",
-				"Mosaic_Majolica_Tiles: Santa Chiara cloister — majolica tile patterns, painted grid logic, baroque color",
-				"Mosaic_Facade_Ornament: Neapolitan baroque facades — scrollwork as recursive grammar, volutes as L-systems",
-				"Mosaic_Capri_Villa: Villa San Michele — Axel Munthe's collected fragments, mixed period analysis",
-				"Mosaic_WFC_Reconstruction: Constraint reconstruction — feeding documented patterns into WFC solver",
-				"Mosaic_Pattern_Maker: Wallpaper group workshop — using pattern_maker_station with field-captured motifs"
+				"Mosaic_Pompeii_Floors: Geometric opus tessellatum \u00e2\u20ac\u201d wallpaper groups in Roman floors (Casa del Fauno, Casa dei Vettii)",
+				"Mosaic_Byzantine_Gold: Gold-ground technique \u00e2\u20ac\u201d reflective tesserae, viewing angle, light as variable",
+				"Mosaic_Majolica_Tiles: Santa Chiara cloister \u00e2\u20ac\u201d majolica tile patterns, painted grid logic, baroque color",
+				"Mosaic_Facade_Ornament: Neapolitan baroque facades \u00e2\u20ac\u201d scrollwork as recursive grammar, volutes as L-systems",
+				"Mosaic_Capri_Villa: Villa San Michele \u00e2\u20ac\u201d Axel Munthe's collected fragments, mixed period analysis",
+				"Mosaic_WFC_Reconstruction: Constraint reconstruction \u00e2\u20ac\u201d feeding documented patterns into WFC solver",
+				"Mosaic_Pattern_Maker: Wallpaper group workshop \u00e2\u20ac\u201d using pattern_maker_station with field-captured motifs"
 			],
-
 			"maps": [
 				"Mosaic_Pompeii_Floors",
 				"Mosaic_Byzantine_Gold",
@@ -46,7 +43,6 @@
 				"Mosaic_WFC_Reconstruction",
 				"Mosaic_Pattern_Maker"
 			],
-
 			"algorithm_paths": {
 				"Mosaic_Pompeii_Floors": "res://commons/primitives/arrays/",
 				"Mosaic_Byzantine_Gold": "res://algorithms/shaders/book_of_shaders/",
@@ -56,7 +52,6 @@
 				"Mosaic_WFC_Reconstruction": "res://algorithms/wfc/",
 				"Mosaic_Pattern_Maker": "res://commons/artifacts/pattern_maker_station/"
 			},
-
 			"return_to": "lab",
 			"lab_map": null,
 			"unlock_requirements": [
@@ -66,10 +61,85 @@
 				"mosaic_analyst_badge",
 				"field_researcher_badge"
 			],
-
 			"phase": "lambda_edge",
 			"isSpine": false,
-			"spineOrder": null
+			"spineOrder": null,
+			"artifact_groups": [
+				{
+					"map": "Mosaic_Pompeii_Floors",
+					"position": "intro",
+					"artifacts": [
+						"pattern_tile_puzzle",
+						"tessellation_lattice_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "Mosaic_Byzantine_Gold",
+					"position": "foundation",
+					"artifacts": [
+						"pattern_tile_puzzle",
+						"tessellation_lattice_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "Mosaic_Majolica_Tiles",
+					"position": "foundation",
+					"artifacts": [
+						"pattern_maker_station",
+						"pattern_tile_puzzle"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "Mosaic_Facade_Ornament",
+					"position": "exploration",
+					"artifacts": [
+						"pattern_tile_puzzle",
+						"tessellation_lattice_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Mosaic_Capri_Villa",
+					"position": "integration",
+					"artifacts": [
+						"pattern_maker_station",
+						"pattern_tile_puzzle",
+						"tessellation_lattice_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Mosaic_WFC_Reconstruction",
+					"position": "integration",
+					"artifacts": [
+						"pattern_tile_puzzle",
+						"wfc_tile_mosaic"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Mosaic_Pattern_Maker",
+					"position": "synthesis",
+					"artifacts": [
+						"pattern_maker_station",
+						"pattern_tile_puzzle",
+						"tessellation_lattice_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 3 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "transition",
+	"artifact_groups": []
 }

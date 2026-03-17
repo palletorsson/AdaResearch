@@ -5,15 +5,14 @@
 			"truth": "A flower is never just decoration. It is a negotiation between organism and environment, beauty and survival.",
 			"qfep_term": "Boundary_Edge",
 			"qfep_connection": "Flowers sit at the boundary between organism and environment, beauty and function, natural and artificial. Petal count is a parameter (lambda) that evolution tunes. What we call beautiful is a fitness landscape shaped by pollinators -- aesthetics as selection pressure. The garden is where cultivation meets wildness.",
-
 			"description": "From a single bloom, ecology grows. Flowers are procedural systems that compose petals, stamens, and pistils into functional wholes. Start with anatomy, learn parameter tuning, explore evolution through aesthetic selection, experience physics through water dynamics, then compose your own garden.",
 			"layer": "lambda_edge",
 			"prerequisites": [],
-			"unlocks": ["procedural_nature"],
-
+			"unlocks": [
+				"procedural_nature"
+			],
 			"difficulty": "beginner",
 			"estimated_time": "20-30 minutes",
-
 			"learning_objectives": [
 				"Flower anatomy as compositional parts",
 				"Procedural parameters and their visual effects",
@@ -21,7 +20,6 @@
 				"Physics simulation with buoyancy and waves",
 				"Spatial composition through garden arrangement"
 			],
-
 			"content": [
 				"Flower_Anatomy: Petal, Stamen, Pistil -- the parts of a flower as procedural components.",
 				"Flower_Parameters: Tuning Growth -- VR sliders control petal count, length, and curve.",
@@ -29,7 +27,6 @@
 				"Flower_Physics: Floating -- water flowers on Gerstner waves, buoyancy and drift.",
 				"Flower_Garden: Composition -- free-form garden building, spatial arrangement."
 			],
-
 			"maps": [
 				"Flower_Anatomy",
 				"Flower_Parameters",
@@ -37,29 +34,80 @@
 				"Flower_Physics",
 				"Flower_Garden"
 			],
-
 			"audio": {
 				"ambient_preset": "garden",
 				"volume": -6.0
 			},
-
 			"return_to": "lab",
-
 			"completion_rewards": [
 				"botanist_badge"
 			],
-
 			"deferred_maps": [
 				"Flower_Pollination",
 				"Flower_Fractals",
 				"Flower_Arrangements",
 				"Flower_Seasons"
 			],
-
 			"references": {
-				"key_texts": ["Thompson: On Growth and Form", "Prusinkiewicz: The Algorithmic Beauty of Plants"],
-				"related_algorithms": ["commons/artifacts/botanical_flower/", "commons/artifacts/evolving_flowers/", "commons/artifacts/water_flowers/"]
-			}
+				"key_texts": [
+					"Thompson: On Growth and Form",
+					"Prusinkiewicz: The Algorithmic Beauty of Plants"
+				],
+				"related_algorithms": [
+					"commons/artifacts/botanical_flower/",
+					"commons/artifacts/evolving_flowers/",
+					"commons/artifacts/water_flowers/"
+				]
+			},
+			"artifact_groups": [
+				{
+					"map": "Flower_Anatomy",
+					"position": "intro",
+					"artifacts": [
+						"botanical_flower"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "Flower_Parameters",
+					"position": "foundation",
+					"artifacts": [
+						"botanical_flower"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "Flower_Evolution",
+					"position": "exploration",
+					"artifacts": [
+						"evolving_flowers"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Flower_Physics",
+					"position": "integration",
+					"artifacts": [
+						"water_flowers"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "Flower_Garden",
+					"position": "synthesis",
+					"artifacts": [
+						"botanical_flower"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 1 artifact"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
 }

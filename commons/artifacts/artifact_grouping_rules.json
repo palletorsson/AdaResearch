@@ -1,0 +1,191 @@
+{
+	"schema": "adaresearch.artifact_grouping_rules.v1",
+	"title": "Artifact Grouping Rules",
+	"description": "Rules engine for grouping artifacts into maps across a sequence. Generates suggested groupings based on tag affinity, size compatibility, complexity gradient, and pedagogical arc. Sequence files store the accepted result as artifact_groups.",
+
+	"sequence_arc": {
+		"description": "Defines how artifact density and complexity change across a sequence's maps. Position is normalized 0.0 (first map) to 1.0 (last map).",
+		"positions": [
+			{
+				"name": "intro",
+				"position_range": [0.0, 0.15],
+				"max_artifacts": 5,
+				"preferred_complexity": ["basic"],
+				"preferred_size_groups": ["compact", "room_scale"],
+				"allow_hazards": false,
+				"allow_callbacks": false,
+				"role": "Introduce core concept with minimal artifacts. One main artifact, supporting context objects."
+			},
+			{
+				"name": "foundation",
+				"position_range": [0.15, 0.35],
+				"max_artifacts": 7,
+				"preferred_complexity": ["basic", "intermediate"],
+				"preferred_size_groups": ["compact", "room_scale"],
+				"allow_hazards": false,
+				"allow_callbacks": false,
+				"role": "Build on intro with related variations. Multiple artifacts from same concept family."
+			},
+			{
+				"name": "exploration",
+				"position_range": [0.35, 0.6],
+				"max_artifacts": 10,
+				"preferred_complexity": ["intermediate"],
+				"preferred_size_groups": ["compact", "room_scale", "environment"],
+				"allow_hazards": true,
+				"allow_callbacks": false,
+				"role": "Deeper engagement. Mix sizes, introduce interactive challenges. Algorithm isolation maps."
+			},
+			{
+				"name": "integration",
+				"position_range": [0.6, 0.85],
+				"max_artifacts": 12,
+				"preferred_complexity": ["intermediate", "advanced"],
+				"preferred_size_groups": ["room_scale", "environment", "world_scale"],
+				"allow_hazards": true,
+				"allow_callbacks": true,
+				"role": "Combine concepts. Cross-reference earlier artifacts. Hazards test understanding."
+			},
+			{
+				"name": "synthesis",
+				"position_range": [0.85, 1.0],
+				"max_artifacts": 18,
+				"preferred_complexity": ["basic", "intermediate", "advanced"],
+				"preferred_size_groups": ["compact", "room_scale", "environment", "world_scale"],
+				"allow_hazards": true,
+				"allow_callbacks": true,
+				"role": "Culmination. Callbacks to key artifacts from entire sequence. Large maps, dense placement, thematic resolution."
+			}
+		]
+	},
+
+	"grouping_factors": {
+		"description": "Weights for computing artifact affinity when suggesting groups.",
+		"tag_overlap": {
+			"weight": 0.35,
+			"description": "Artifacts sharing tags belong together. More shared tags = stronger affinity.",
+			"min_overlap": 1
+		},
+		"size_compatibility": {
+			"weight": 0.25,
+			"description": "Artifacts of similar size_group display well together. Mixing world_scale with compact creates visual imbalance.",
+			"compatibility_matrix": {
+				"compact":      { "compact": 1.0, "room_scale": 0.7, "environment": 0.3, "world_scale": 0.1 },
+				"room_scale":   { "compact": 0.7, "room_scale": 1.0, "environment": 0.7, "world_scale": 0.3 },
+				"environment":  { "compact": 0.3, "room_scale": 0.7, "environment": 1.0, "world_scale": 0.7 },
+				"world_scale":  { "compact": 0.1, "room_scale": 0.3, "environment": 0.7, "world_scale": 1.0 }
+			}
+		},
+		"complexity_gradient": {
+			"weight": 0.2,
+			"description": "Within a map, complexity should be homogeneous. Mixing basic and advanced creates cognitive dissonance.",
+			"levels": ["basic", "intermediate", "advanced"],
+			"max_span": 1
+		},
+		"interaction_compatibility": {
+			"weight": 0.1,
+			"description": "Maps work best with a dominant interaction mode. Too many modes competing = spatial confusion.",
+			"dominant_threshold": 0.6
+		},
+		"sequence_affinity": {
+			"weight": 0.1,
+			"description": "Artifacts from the same sequence naturally group. Cross-sequence artifacts appear in synthesis maps.",
+			"same_sequence_bonus": 0.3,
+			"cross_sequence_penalty": -0.1
+		}
+	},
+
+	"spatial_constraints": {
+		"description": "Hard constraints that override affinity scores.",
+		"rules": [
+			{
+				"id": "footprint_budget",
+				"description": "Total footprint area of grouped artifacts must not exceed map usable area minus clearance.",
+				"formula": "sum(w*d for each artifact) + sum(clearance^2 for each artifact) <= map_width * map_depth * 0.6"
+			},
+			{
+				"id": "height_clearance",
+				"description": "Tallest artifact height must not exceed map max_height.",
+				"formula": "max(footprint[1] for each artifact) <= map_max_height"
+			},
+			{
+				"id": "scene_embed_isolation",
+				"description": "scene_embed artifacts get their own map. They cannot share with grid-placed artifacts.",
+				"rule": "if any artifact has placement=scene_embed, it must be alone in its map"
+			},
+			{
+				"id": "world_scale_limit",
+				"description": "At most 1 world_scale artifact per standard map. Large Exhibition can hold 2-3.",
+				"max_per_standard": 1,
+				"max_per_large": 3
+			},
+			{
+				"id": "dark_sphere_anchor",
+				"description": "Every map should include one dark_sphere as a consistent navigational/thematic anchor.",
+				"auto_include": "dark_sphere",
+				"exceptions": ["synthesis"]
+			}
+		]
+	},
+
+	"callback_rules": {
+		"description": "Rules for when artifacts from earlier maps reappear in later maps.",
+		"rules": [
+			{
+				"id": "synthesis_callbacks",
+				"description": "Synthesis maps should reference at least 3 artifacts from earlier maps in the sequence.",
+				"min_callbacks": 3,
+				"max_callbacks": 8,
+				"selection": "Pick the most representative artifact from each earlier arc position (intro, foundation, exploration)."
+			},
+			{
+				"id": "cross_sequence_callbacks",
+				"description": "Integration and synthesis maps may reference artifacts from prerequisite sequences.",
+				"condition": "Only if sequence has declared prerequisites",
+				"max_cross_callbacks": 2
+			},
+			{
+				"id": "callback_rescale",
+				"description": "Callback artifacts may be presented at different scale or context than original appearance.",
+				"allow_rescale": true,
+				"note": "A random_walk_terrarium in its home map is full-size exploration. As a callback in Crisis_Synthesis, it might appear as a miniature citation."
+			}
+		]
+	},
+
+	"map_templates_by_group": {
+		"description": "Which map template to use based on the group's aggregate footprint and artifact count.",
+		"rules": [
+			{
+				"condition": "all artifacts compact, count <= 5",
+				"template": "Template_Basic",
+				"note": "Small focused teaching maps"
+			},
+			{
+				"condition": "mixed sizes, count <= 8",
+				"template": "Template_Basic",
+				"note": "Standard gallery maps"
+			},
+			{
+				"condition": "any environment-scale, count <= 10",
+				"template": "Template_Basic",
+				"note": "Environment artifacts need open space but Template_Basic suffices"
+			},
+			{
+				"condition": "any world_scale (non-embed), count <= 5",
+				"template": "Template_Large_Exhibition",
+				"note": "World-scale needs large exhibition space"
+			},
+			{
+				"condition": "synthesis map, count > 10",
+				"template": "Template_Large_Exhibition",
+				"note": "Dense synthesis maps need maximum space"
+			},
+			{
+				"condition": "scene_embed artifact",
+				"template": "scene_embed",
+				"note": "No grid map needed, artifact is the world"
+			}
+		]
+	}
+}

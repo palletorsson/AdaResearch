@@ -2,10 +2,9 @@
 	"sequences": {
 		"lab": {
 			"name": "Lab Evolution States",
-			"description": "The Lab evolves after each completed sequence. These are all Lab states — from initial empty lab through post-sequence transformations. Each map shows the lab with artifacts unlocked up to that point in the curriculum.",
+			"description": "The Lab evolves after each completed sequence. These are all Lab states \u00e2\u20ac\u201d from initial empty lab through post-sequence transformations. Each map shows the lab with artifacts unlocked up to that point in the curriculum.",
 			"layer": "integration",
 			"difficulty": "beginner",
-
 			"maps": [
 				"Lab",
 				"Lab/map_data_init",
@@ -48,12 +47,305 @@
 				"Lab/map_data_post_resourcemanagement",
 				"Lab/map_data_post_geometric"
 			],
-
 			"return_to": "lab",
 			"audio": {
 				"ambient_preset": "minimal_drone",
 				"volume": -10.0
-			}
+			},
+			"artifact_groups": [
+				{
+					"map": "Lab",
+					"position": "intro",
+					"artifacts": [
+						"becoming_catalyst",
+						"cube_lines",
+						"cube_scene",
+						"light_sphere",
+						"loving_triangle",
+						"progression_driver",
+						"rainbow",
+						"rotating_cube",
+						"world_map_tablet"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 9 artifacts"
+				},
+				{
+					"map": "Lab/map_data_init",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_one",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_one_back",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_back",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_primitives",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_transformation",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_color",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_forces",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_array_tutorial",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_wavefunctions",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_randomness",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_noise",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_cellularautomata",
+					"position": "foundation",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_fractals",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_lsystems",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_proceduralgeneration",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_softbodies",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_swarmintelligence",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_morphogenesis",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_machinelearning",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_foundationscrisis",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_qfeplaboratory",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_vectors",
+					"position": "exploration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_physicssimulation",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_datastructures",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_searchpathfinding",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_computationalgeometry",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_meshes",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_patterngeneration",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_mosaicanalysis",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_criticalalgorithms",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_speculativecomputation",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_recursiveemergence",
+					"position": "integration",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_artmathematics",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_proceduralaudio",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_graphtheory",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_advancedlaboratory",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_resourcemanagement",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				},
+				{
+					"map": "Lab/map_data_post_geometric",
+					"position": "synthesis",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 0 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

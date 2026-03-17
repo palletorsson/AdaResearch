@@ -3,18 +3,20 @@
 		"constraint_solvers": {
 			"name": "Constraint Solvers: Rules Become Worlds",
 			"truth": "Define the rules, let emergence do the rest. Wave Function Collapse: observe and propagate until the world resolves.",
-			"qfep_term": "λ",
-			"qfep_connection": "Constraint propagation is F (rules) meeting E(S) (random selection). WFC collapses superposition into specific states—quantum mechanics as world-building.",
-			"formula": "constraints + entropy → coherent structure",
-
+			"qfep_term": "\u00ce\u00bb",
+			"qfep_connection": "Constraint propagation is F (rules) meeting E(S) (random selection). WFC collapses superposition into specific states\u00e2\u20ac\u201dquantum mechanics as world-building.",
+			"formula": "constraints + entropy \u00e2\u2020\u2019 coherent structure",
 			"description": "Algorithms that generate content by satisfying constraints. Wave Function Collapse propagates adjacency rules, Boolean patterns combine logical operations, Model Synthesis builds 3D structures from examples.",
 			"layer": "systems",
-			"prerequisites": ["randomness", "cellularautomata"],
-			"unlocks": ["proceduralgeneration_advanced"],
-
+			"prerequisites": [
+				"randomness",
+				"cellularautomata"
+			],
+			"unlocks": [
+				"proceduralgeneration_advanced"
+			],
 			"difficulty": "intermediate",
 			"estimated_time": "30-35 minutes",
-
 			"learning_objectives": [
 				"Wave Function Collapse: entropy-based cell selection",
 				"Constraint propagation: local rules, global coherence",
@@ -22,26 +24,56 @@
 				"Backtracking: recovering from contradictions",
 				"3D WFC: dungeons, buildings, sculptures"
 			],
-
 			"maps": [
-			"ProceduralGeneration_Wave_Function_Collapse",
-			"ProceduralGenerationWfcDungeonGenerator",
-			"ProceduralGenerationBooleanPatterns"
+				"ProceduralGeneration_Wave_Function_Collapse",
+				"ProceduralGenerationWfcDungeonGenerator",
+				"ProceduralGenerationBooleanPatterns"
 			],
-
 			"algorithm_paths": {
 				"wfc": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/",
 				"wfc_3d": "res://algorithms/proceduralgeneration/constraint_solvers/wfc3D/",
 				"wfc_dungeon": "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/",
 				"boolean": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/"
 			},
-
 			"return_to": "lab",
-            "lab_map": "Lab/map_data_post_constraint_solvers",
+			"lab_map": "Lab/map_data_post_constraint_solvers",
 			"completion_rewards": [
 				"constraint_master_badge",
 				"wfc_architect_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralGeneration_Wave_Function_Collapse",
+					"position": "intro",
+					"artifacts": [
+						"wave_function_collapse",
+						"wfc_3d_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationWfcDungeonGenerator",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"wfc_dungeon_generator"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationBooleanPatterns",
+					"position": "synthesis",
+					"artifacts": [
+						"boolean_patterns"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "transition",
+	"artifact_groups": []
 }

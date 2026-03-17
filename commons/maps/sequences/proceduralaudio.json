@@ -1,36 +1,112 @@
 {
-    "sequences": {
-        "proceduralaudio": {
-            "name": "Procedural Audio",
-            "description": "Generative sound synthesis and audio effects",
-            "qfep_term": "dynamics",
-            "qfep_connection": "Sound synthesis as wavefunction manipulation — building audio from oscillators, filters, and envelopes. Each parameter shapes the E(S) spectrum: frequency content, harmonic structure, temporal evolution.",
-            "difficulty": "advanced",
-            "estimated_time": "30-40 minutes",
-            "learning_objectives": [
-                "Synthesis types (FM, Subtractive, Additive)",
-                "Granular synthesis",
-                "Generative music",
-                "Psychoacoustics"
-            ],
-            "maps": [
-                "ProceduralAudio_Additive_Synthesis",
-                "ProceduralAudio_Subtractive_Synthesis",
-                "ProceduralAudio_FM_Synthesis",
-                "ProceduralAudio_Granular_Synthesis",
-                "ProceduralAudio_Audio_Effects",
-                "ProceduralAudio_Sound_Synthesis_Drone_Effects",
-                "ProceduralAudio_Generative_Music_Algorithms",
-                "ProceduralAudio_Psychoacoustics"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_proceduralaudio",
-            "unlock_requirements": [
-                "wavefunctions"
-            ],
-            "completion_rewards": [
-                "audio_alchemist_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"proceduralaudio": {
+			"name": "Procedural Audio",
+			"description": "Generative sound synthesis and audio effects",
+			"qfep_term": "dynamics",
+			"qfep_connection": "Sound synthesis as wavefunction manipulation \u00e2\u20ac\u201d building audio from oscillators, filters, and envelopes. Each parameter shapes the E(S) spectrum: frequency content, harmonic structure, temporal evolution.",
+			"difficulty": "advanced",
+			"estimated_time": "30-40 minutes",
+			"learning_objectives": [
+				"Synthesis types (FM, Subtractive, Additive)",
+				"Granular synthesis",
+				"Generative music",
+				"Psychoacoustics"
+			],
+			"maps": [
+				"ProceduralAudio_Additive_Synthesis",
+				"ProceduralAudio_Subtractive_Synthesis",
+				"ProceduralAudio_FM_Synthesis",
+				"ProceduralAudio_Granular_Synthesis",
+				"ProceduralAudio_Audio_Effects",
+				"ProceduralAudio_Sound_Synthesis_Drone_Effects",
+				"ProceduralAudio_Generative_Music_Algorithms",
+				"ProceduralAudio_Psychoacoustics"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_proceduralaudio",
+			"unlock_requirements": [
+				"wavefunctions"
+			],
+			"completion_rewards": [
+				"audio_alchemist_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralAudio_Additive_Synthesis",
+					"position": "intro",
+					"artifacts": [
+						"additive_synthesis"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduces synthesis by building sound from sine wave harmonics"
+				},
+				{
+					"map": "ProceduralAudio_Subtractive_Synthesis",
+					"position": "intro",
+					"artifacts": [
+						"subtractive_synthesis"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Complementary approach: sculpting sound by filtering rich waveforms"
+				},
+				{
+					"map": "ProceduralAudio_FM_Synthesis",
+					"position": "foundation",
+					"artifacts": [
+						"fm_synthesis"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Frequency modulation: oscillators modulating oscillators for complex timbres"
+				},
+				{
+					"map": "ProceduralAudio_Granular_Synthesis",
+					"position": "exploration",
+					"artifacts": [
+						"granular_synthesis"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Micro-sound: breaking audio into grains for texture manipulation"
+				},
+				{
+					"map": "ProceduralAudio_Audio_Effects",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Audio effects processing: reverb, delay, filtering applied to synthesized sound"
+				},
+				{
+					"map": "ProceduralAudio_Sound_Synthesis_Drone_Effects",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Drone synthesis: sustained tones with evolving timbral modulation"
+				},
+				{
+					"map": "ProceduralAudio_Generative_Music_Algorithms",
+					"position": "synthesis",
+					"artifacts": [
+						"generative_music"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Algorithmic composition: combining synthesis types into self-generating music systems"
+				},
+				{
+					"map": "ProceduralAudio_Psychoacoustics",
+					"position": "synthesis",
+					"artifacts": [
+						"psychoacoustics"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Perceptual audio phenomena: auditory illusions and perception-driven sound design"
+				}
+			]
+		}
+	},
+	"world_phase": "transition",
+	"artifact_groups": []
 }

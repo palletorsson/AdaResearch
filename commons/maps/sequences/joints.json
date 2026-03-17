@@ -21,7 +21,81 @@
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_init",
 			"unlock_requirements": [],
-			"completion_rewards": []
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Joints_1",
+					"position": "intro",
+					"artifacts": [
+						"DoublePendulum",
+						"PendulumPin"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "Joints_2",
+					"position": "foundation",
+					"artifacts": [
+						"CharacterRagdoll",
+						"HingeCrank"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "Joints_3",
+					"position": "foundation",
+					"artifacts": [
+						"ConeTwistBag",
+						"SpringSuspension"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "Joints_4",
+					"position": "exploration",
+					"artifacts": [
+						"ChainSwing",
+						"CharacterRagdoll"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Joints_5",
+					"position": "integration",
+					"artifacts": [
+						"DrawbridgeHinge",
+						"PendulumPin"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Joints_6",
+					"position": "integration",
+					"artifacts": [
+						"GimbalStabilizer",
+						"tscn_joint"
+					],
+					"size_budget": "mixed",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Joints_7",
+					"position": "synthesis",
+					"artifacts": [
+						"DoublePendulum",
+						"PendulumPin"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 2 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

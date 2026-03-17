@@ -4,33 +4,34 @@
 			"name": "Higher Dimensions: Beyond 3D",
 			"truth": "We are 3D creatures projecting 4D shadows. The tesseract rotates through dimensions we cannot directly perceive.",
 			"qfep_term": "F",
-			"qfep_connection": "Higher-dimensional geometry extends F (order) into spaces we cannot inhabit. Pure structure, revealed through projection—the Platonic forms casting shadows into our world.",
-			"formula": "4D → 3D projection → perception",
-
-			"description": "Explore geometry beyond three dimensions. Tesseracts, penteracts, 16-cells—polytopes that exist in 4D and 5D space, visualized through projection into 3D. Walk through the nets, see rotations through the fourth dimension.",
+			"qfep_connection": "Higher-dimensional geometry extends F (order) into spaces we cannot inhabit. Pure structure, revealed through projection\u00e2\u20ac\u201dthe Platonic forms casting shadows into our world.",
+			"formula": "4D \u00e2\u2020\u2019 3D projection \u00e2\u2020\u2019 perception",
+			"description": "Explore geometry beyond three dimensions. Tesseracts, penteracts, 16-cells\u00e2\u20ac\u201dpolytopes that exist in 4D and 5D space, visualized through projection into 3D. Walk through the nets, see rotations through the fourth dimension.",
 			"layer": "systems",
-			"prerequisites": ["primitives", "transformation", "vectors"],
-			"unlocks": ["speculativecomputation"],
-
+			"prerequisites": [
+				"primitives",
+				"transformation",
+				"vectors"
+			],
+			"unlocks": [
+				"speculativecomputation"
+			],
 			"difficulty": "advanced",
 			"estimated_time": "25-30 minutes",
-
 			"learning_objectives": [
-				"Dimensional analogy: point→line→square→cube→tesseract",
+				"Dimensional analogy: point\u00e2\u2020\u2019line\u00e2\u2020\u2019square\u00e2\u2020\u2019cube\u00e2\u2020\u2019tesseract",
 				"Projection: how higher-D casts shadows into lower-D",
 				"Tesseract (4D hypercube): 8 cubic cells",
 				"16-cell: 4D analog of octahedron",
 				"Penteract (5D hypercube): 10 tesseract cells",
 				"Nets: unfolding higher-D shapes into 3D"
 			],
-
-		"maps": [
-			"ProceduralGenerationTesseractErrorTunnel",
-			"ProceduralGenerationSixteenCellNet",
-			"ProceduralGenerationNetSpace",
-			"ProceduralGenerationPortals"
-		],
-
+			"maps": [
+				"ProceduralGenerationTesseractErrorTunnel",
+				"ProceduralGenerationSixteenCellNet",
+				"ProceduralGenerationNetSpace",
+				"ProceduralGenerationPortals"
+			],
 			"algorithm_paths": {
 				"tesseract": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/",
 				"tesseract_tunnel": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/",
@@ -38,13 +39,52 @@
 				"penteract": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/",
 				"portals": "res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/"
 			},
-
 			"return_to": "lab",
-            "lab_map": "Lab/map_data_post_higher_dimensions",
+			"lab_map": "Lab/map_data_post_higher_dimensions",
 			"completion_rewards": [
 				"fourth_dimension_badge",
 				"hypercube_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralGenerationTesseractErrorTunnel",
+					"position": "intro",
+					"artifacts": [
+						"tesseract_tunnel_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationSixteenCellNet",
+					"position": "foundation",
+					"artifacts": [
+						"sixteen_cell_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationNetSpace",
+					"position": "integration",
+					"artifacts": [
+						"tesseract_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationPortals",
+					"position": "synthesis",
+					"artifacts": [
+						"tessellating_portal_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Synthesis with 1 artifact"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

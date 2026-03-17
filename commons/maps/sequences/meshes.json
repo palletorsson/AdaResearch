@@ -1,31 +1,71 @@
 {
-    "sequences": {
-        "meshes": {
-            "name": "Mesh Generation",
-            "description": "Procedural mesh generation and manipulation",
-            "qfep_term": "F",
-            "qfep_connection": "Mesh topology as structural order — vertices, edges, and faces encoding surface geometry. The mesh IS the F-model of a shape: minimum triangles to approximate maximum surface detail.",
-            "difficulty": "intermediate",
-            "estimated_time": "15-20 minutes",
-            "learning_objectives": [
-                "Vertex manipulation",
-                "Mesh topology",
-                "Procedural geometry"
-            ],
-            "maps": [
-                "Meshes_One",
-                "Meshes_Two",
-                "Meshes_Three",
-                "Meshes_Four"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_meshes",
-            "unlock_requirements": [
-                "computationalgeometry"
-            ],
-            "completion_rewards": [
-                "mesh_weaver_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"meshes": {
+			"name": "Mesh Generation",
+			"description": "Procedural mesh generation and manipulation",
+			"qfep_term": "F",
+			"qfep_connection": "Mesh topology as structural order \u00e2\u20ac\u201d vertices, edges, and faces encoding surface geometry. The mesh IS the F-model of a shape: minimum triangles to approximate maximum surface detail.",
+			"difficulty": "intermediate",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Vertex manipulation",
+				"Mesh topology",
+				"Procedural geometry"
+			],
+			"maps": [
+				"Meshes_One",
+				"Meshes_Two",
+				"Meshes_Three",
+				"Meshes_Four"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_meshes",
+			"unlock_requirements": [
+				"computationalgeometry"
+			],
+			"completion_rewards": [
+				"mesh_weaver_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Meshes_One",
+					"position": "intro",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "Meshes_Two",
+					"position": "foundation",
+					"artifacts": [
+						"noisesphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "Meshes_Three",
+					"position": "integration",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "Meshes_Four",
+					"position": "synthesis",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				}
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

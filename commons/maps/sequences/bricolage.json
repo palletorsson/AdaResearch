@@ -2,9 +2,9 @@
 	"sequences": {
 		"bricolage": {
 			"name": "Bricolage: From Parts to Structures",
-			"description": "Construction without blueprint—discover structures by recombining primitives until constraints are satisfied",
-			"qfep_term": "λ",
-			"qfep_connection": "Working with available parts rather than ideal materials — constraint as λ-bound. Bricolage accepts imperfection and limitation as generative, creating from what exists rather than what's optimal.",
+			"description": "Construction without blueprint\u00e2\u20ac\u201ddiscover structures by recombining primitives until constraints are satisfied",
+			"qfep_term": "\u00ce\u00bb",
+			"qfep_connection": "Working with available parts rather than ideal materials \u00e2\u20ac\u201d constraint as \u00ce\u00bb-bound. Bricolage accepts imperfection and limitation as generative, creating from what exists rather than what's optimal.",
 			"difficulty": "intermediate",
 			"estimated_time": "30-40 minutes",
 			"learning_objectives": [
@@ -31,7 +31,116 @@
 			"completion_rewards": [
 				"bricoleur_badge",
 				"structural_intuition_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Bricolage_Inventory",
+					"position": "intro",
+					"artifacts": [
+						"clipboard",
+						"cube_specimen",
+						"cylinder_specimen",
+						"dark_sphere",
+						"inventory_workbench",
+						"line_specimen",
+						"plane_specimen",
+						"point_specimen",
+						"sphere_specimen",
+						"torus_specimen",
+						"triangle_specimen"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 11 artifacts"
+				},
+				{
+					"map": "Bricolage_Affordances",
+					"position": "foundation",
+					"artifacts": [
+						"clipboard",
+						"cylinder_as_axle",
+						"cylinder_as_column",
+						"dark_sphere",
+						"plane_as_seat",
+						"plane_as_wall",
+						"sphere_as_hub",
+						"sphere_as_joint"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 8 artifacts"
+				},
+				{
+					"map": "Bricolage_Arrays_as_Probes",
+					"position": "foundation",
+					"artifacts": [
+						"clipboard",
+						"dark_sphere",
+						"grid_array_demo",
+						"linear_array_demo",
+						"radial_array_demo",
+						"stack_array_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 6 artifacts"
+				},
+				{
+					"map": "Bricolage_Constraints",
+					"position": "exploration",
+					"artifacts": [
+						"balance_fail_demo",
+						"balance_pass_demo",
+						"clipboard",
+						"dark_sphere",
+						"gravity_fail_demo",
+						"gravity_pass_demo",
+						"triangulation_fail_demo",
+						"triangulation_pass_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 8 artifacts"
+				},
+				{
+					"map": "Bricolage_Chair",
+					"position": "integration",
+					"artifacts": [
+						"chair_assembled",
+						"chair_builder",
+						"chair_parts_inventory",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 4 artifacts"
+				},
+				{
+					"map": "Bricolage_Sculpture",
+					"position": "integration",
+					"artifacts": [
+						"balanced_sculpture_1",
+						"balanced_sculpture_2",
+						"counterweight_demo",
+						"dark_sphere",
+						"sculpture_builder",
+						"tension_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 6 artifacts"
+				},
+				{
+					"map": "Bricolage_Dome",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"dome_builder",
+						"geodesic_dome",
+						"icosahedron_base",
+						"strut_inventory",
+						"subdivision_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 6 artifacts"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

@@ -4,39 +4,40 @@
 			"name": "Fractals: Infinite Within Finite",
 			"truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
 			"qfep_term": "E(S) + F",
-			"qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + λE(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaos—infinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
-			"formula": "D = log(N)/log(S), z_{n+1} = z_n² + c",
+			"qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + \u00ce\u00bbE(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaos\u00e2\u20ac\u201dinfinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+			"formula": "D = log(N)/log(S), z_{n+1} = z_n\u00c2\u00b2 + c",
 			"demonstration": "Walk inside the Menger sponge. Watch the stochastic tree grow with random variation. Zoom into the Mandelbrot boundary and see infinite detail.",
-
-			"description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions—they exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+			"description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions\u00e2\u20ac\u201dthey exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
 			"layer": "emergence",
-			"prerequisites": ["primitives", "transformation"],
-			"unlocks": ["proceduralgeneration", "lsystems"],
-
+			"prerequisites": [
+				"primitives",
+				"transformation"
+			],
+			"unlocks": [
+				"proceduralgeneration",
+				"lsystems"
+			],
 			"difficulty": "intermediate",
 			"estimated_time": "30-40 minutes",
-
 			"learning_objectives": [
 				"Self-similarity: the whole contains copies of itself",
-				"Fractal dimension: D = log(N)/log(S) — between integers",
+				"Fractal dimension: D = log(N)/log(S) \u00e2\u20ac\u201d between integers",
 				"Recursion as emergence: simple rules, infinite complexity",
 				"Edge of chaos: Mandelbrot boundary, Julia variations",
 				"Natural fractals: trees, coastlines, romanesco"
 			],
-
 			"content": [
-				"Fractals_1: Recursion Introduction — the function that calls itself",
-				"Fractals_2: Recursive Trees — branching structures, deterministic vs stochastic",
-				"Fractals_3: Cantor Set — infinite subdivision, existence without extension",
-				"Fractals_4: Koch Curve — infinite perimeter enclosing finite area",
-				"Fractals_5: Sierpinski — triangles and pyramids, D ≈ 1.585",
-				"Fractals_6: Menger Sponge — walkable 3D fractal, D ≈ 2.727",
-				"Fractals_7: Golden Spiral — Fibonacci, 137.5°, romanesco",
-				"Fractals_8: Julia Set — parameter space, connected vs disconnected",
-				"Fractals_9: Mandelbrot Set — the master fractal, infinite boundary",
-				"Fractals_10: Synthesis — fractals as edge of chaos, QFEP complete"
+				"Fractals_1: Recursion Introduction \u00e2\u20ac\u201d the function that calls itself",
+				"Fractals_2: Recursive Trees \u00e2\u20ac\u201d branching structures, deterministic vs stochastic",
+				"Fractals_3: Cantor Set \u00e2\u20ac\u201d infinite subdivision, existence without extension",
+				"Fractals_4: Koch Curve \u00e2\u20ac\u201d infinite perimeter enclosing finite area",
+				"Fractals_5: Sierpinski \u00e2\u20ac\u201d triangles and pyramids, D \u00e2\u2030\u02c6 1.585",
+				"Fractals_6: Menger Sponge \u00e2\u20ac\u201d walkable 3D fractal, D \u00e2\u2030\u02c6 2.727",
+				"Fractals_7: Golden Spiral \u00e2\u20ac\u201d Fibonacci, 137.5\u00c2\u00b0, romanesco",
+				"Fractals_8: Julia Set \u00e2\u20ac\u201d parameter space, connected vs disconnected",
+				"Fractals_9: Mandelbrot Set \u00e2\u20ac\u201d the master fractal, infinite boundary",
+				"Fractals_10: Synthesis \u00e2\u20ac\u201d fractals as edge of chaos, QFEP complete"
 			],
-
 			"maps": [
 				"Fractals_1",
 				"Fractals_2",
@@ -53,13 +54,11 @@
 				"Fractals_13",
 				"Fractals_14"
 			],
-
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/recursion_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/mandelbrot_axioms.md"
 			],
-
 			"algorithm_paths": {
 				"Fractals_1": "res://algorithms/fractals/cubesubdivision/",
 				"Fractals_2": "res://algorithms/fractals/recursivetree/",
@@ -71,17 +70,377 @@
 				"Fractals_8": "res://algorithms/fractals/julia_set/",
 				"Fractals_9": "res://algorithms/fractals/mandelbrot_set/"
 			},
-
 			"audio": {
 				"ambient_preset": "recursive_depths",
-				"interactive_sounds": { "teleport": "AudioSynthesizer.FRACTAL_ZOOM" },
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.FRACTAL_ZOOM"
+				},
 				"volume": -10.0
 			},
-
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_fractals",
-			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": ["fractal_explorer_badge", "dimensional_rebel_badge", "self_similarity_badge", "mandelbrot_master_badge"]
+			"unlock_requirements": [
+				"array_tutorial"
+			],
+			"completion_rewards": [
+				"fractal_explorer_badge",
+				"dimensional_rebel_badge",
+				"self_similarity_badge",
+				"mandelbrot_master_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Fractals_1",
+					"position": "intro",
+					"artifacts": [
+						"cube_staircase",
+						"cube_subdivision",
+						"dark_sphere",
+						"example_8_3_recursion_circles_vr",
+						"fibonacci_pagoda",
+						"fractal_recursion_2",
+						"recursive_boolean_cube",
+						"recursive_chair",
+						"recursive_table"
+					],
+					"size_budget": "environment",
+					"rationale": "Introduction with 9 artifacts"
+				},
+				{
+					"map": "Fractals_2",
+					"position": "intro",
+					"artifacts": [
+						"cube_desk",
+						"dark_sphere",
+						"inverted_tree_cloud",
+						"mobius_world",
+						"small_subdivision_cube"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 5 artifacts"
+				},
+				{
+					"map": "Fractals_3",
+					"position": "foundation",
+					"artifacts": [
+						"cantor_set",
+						"dark_sphere",
+						"example_8_4_cantor_pagoda_vr",
+						"example_8_4_cantor_set_vr",
+						"stochastic_tree_separated"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 5 artifacts"
+				},
+				{
+					"map": "Fractals_4",
+					"position": "foundation",
+					"artifacts": [
+						"cube_cabin",
+						"dark_sphere",
+						"fractal_koch_curve",
+						"koch_curve_3d",
+						"sierpinski_pyramid"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 5 artifacts"
+				},
+				{
+					"map": "Fractals_5",
+					"position": "foundation",
+					"artifacts": [
+						"cube_bookshelf",
+						"dark_sphere",
+						"sierpinski_triangle"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 3 artifacts"
+				},
+				{
+					"map": "Fractals_6",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"menger_sponge"
+					],
+					"size_budget": "environment",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Fractals_7",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"fibonacci_sequences",
+						"fibonacci_terrain",
+						"golden_rectangle",
+						"romanesco"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 5 artifacts"
+				},
+				{
+					"map": "Fractals_8",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"fibonacci_terrain",
+						"julia_set",
+						"julia_set_explorer"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 4 artifacts"
+				},
+				{
+					"map": "Fractals_9",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"mandelbrot_dive",
+						"mandelbrot_set"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Fractals_10",
+					"position": "integration",
+					"artifacts": [
+						"cantor_set",
+						"dark_sphere",
+						"fibonacci_sequences",
+						"fractal_recursion_1",
+						"koch_curve",
+						"recursive_tree",
+						"romanesco",
+						"sierpinski_triangle"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 8 artifacts"
+				},
+				{
+					"map": "Fractals_11",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"inverted_tree_cloud",
+						"living_paper",
+						"recursive_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 4 artifacts"
+				},
+				{
+					"map": "Fractals_12",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"fractal_scene",
+						"recursive_tree_2"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 3 artifacts"
+				},
+				{
+					"map": "Fractals_13",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"mandelbrot_set"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "Fractals_14",
+					"position": "synthesis",
+					"artifacts": [
+						"cellular_automata_3d_stacked",
+						"dark_sphere",
+						"evolutionary_algorithms",
+						"fractal_stochastic_tree"
+					],
+					"size_budget": "mixed",
+					"rationale": "Synthesis with 4 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"artifact_groups": [
+		{
+			"map": "Fractals_1",
+			"position": "intro",
+			"artifacts": [
+				"fibonacci_pagoda",
+				"recursive_chair",
+				"recursive_table",
+				"dark_sphere",
+				"example_8_3_recursion_circles_vr",
+				"cube_subdivision",
+				"recursive_boolean_cube",
+				"cube_staircase",
+				"fractal_recursion_2"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Introduces recursion with compact subdivision and furniture artifacts. First map, beginner difficulty."
+		},
+		{
+			"map": "Fractals_2",
+			"position": "intro",
+			"artifacts": [
+				"small_subdivision_cube",
+				"inverted_tree_cloud",
+				"dark_sphere",
+				"cube_desk",
+				"mobius_world"
+			],
+			"size_budget": "mixed",
+			"rationale": "Branching structures in nature. Large map (30x40) but early in sequence with beginner difficulty."
+		},
+		{
+			"map": "Fractals_3",
+			"position": "foundation",
+			"artifacts": [
+				"cantor_set",
+				"dark_sphere",
+				"example_8_4_cantor_set_vr",
+				"example_8_4_cantor_pagoda_vr",
+				"stochastic_tree_separated"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Cantor set and infinite subdivision. Intermediate difficulty, building on recursion basics."
+		},
+		{
+			"map": "Fractals_4",
+			"position": "foundation",
+			"artifacts": [
+				"cube_cabin",
+				"dark_sphere",
+				"fractal_koch_curve",
+				"koch_curve_3d",
+				"sierpinski_pyramid"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Koch curve and early Sierpinski. Intermediate, second foundation map."
+		},
+		{
+			"map": "Fractals_5",
+			"position": "exploration",
+			"artifacts": [
+				"sierpinski_triangle",
+				"dark_sphere",
+				"cube_bookshelf"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Dedicated Sierpinski map with raised platform. Intermediate difficulty, exploring fractal dimension."
+		},
+		{
+			"map": "Fractals_6",
+			"position": "exploration",
+			"artifacts": [
+				"menger_sponge",
+				"dark_sphere"
+			],
+			"size_budget": "environment",
+			"rationale": "Walkable 3D fractal in void space. Scene-embed-like experience with the sponge filling the room."
+		},
+		{
+			"map": "Fractals_7",
+			"position": "exploration",
+			"artifacts": [
+				"fibonacci_sequences",
+				"golden_rectangle",
+				"dark_sphere",
+				"fibonacci_terrain",
+				"romanesco"
+			],
+			"size_budget": "mixed",
+			"rationale": "Golden ratio and Fibonacci. Mid-sequence exploration of natural fractal patterns."
+		},
+		{
+			"map": "Fractals_8",
+			"position": "integration",
+			"artifacts": [
+				"julia_set",
+				"dark_sphere",
+				"julia_set_explorer",
+				"fibonacci_terrain"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Julia sets with parameter space exploration. Advanced difficulty, integrating complex dynamics."
+		},
+		{
+			"map": "Fractals_9",
+			"position": "integration",
+			"artifacts": [
+				"mandelbrot_set",
+				"dark_sphere",
+				"mandelbrot_dive"
+			],
+			"size_budget": "compact_only",
+			"rationale": "The master fractal. Advanced, connects Julia parameter space to Mandelbrot boundary."
+		},
+		{
+			"map": "Fractals_10",
+			"position": "synthesis",
+			"artifacts": [
+				"fractal_recursion_1",
+				"koch_curve",
+				"cantor_set",
+				"dark_sphere",
+				"recursive_tree",
+				"fibonacci_sequences",
+				"sierpinski_triangle",
+				"romanesco"
+			],
+			"size_budget": "mixed",
+			"rationale": "Synthesis map with callbacks to intro (recursion), foundation (Koch, Cantor), exploration (Sierpinski, Fibonacci), and integration (romanesco). QFEP complete."
+		},
+		{
+			"map": "Fractals_11",
+			"position": "integration",
+			"artifacts": [
+				"living_paper",
+				"dark_sphere",
+				"inverted_tree_cloud",
+				"recursive_tree"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Stochastic recursion with living paper Mandelbrot variant and recursive trees."
+		},
+		{
+			"map": "Fractals_12",
+			"position": "integration",
+			"artifacts": [
+				"fractal_scene",
+				"dark_sphere",
+				"recursive_tree_2"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Advanced fractal scene exploration with second-generation recursive tree."
+		},
+		{
+			"map": "Fractals_13",
+			"position": "integration",
+			"artifacts": [
+				"dark_sphere",
+				"mandelbrot_set"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Focused Mandelbrot revisit in compact format."
+		},
+		{
+			"map": "Fractals_14",
+			"position": "synthesis",
+			"artifacts": [
+				"dark_sphere",
+				"fractal_stochastic_tree",
+				"evolutionary_algorithms",
+				"cellular_automata_3d_stacked"
+			],
+			"size_budget": "compact_only",
+			"rationale": "Cross-sequence synthesis: stochastic fractals meet evolution and CA. Bridges to machinelearning and cellularautomata sequences."
+		}
+	],
+	"world_phase": "organic"
 }

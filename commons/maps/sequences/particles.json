@@ -3,8 +3,8 @@
 		"particles": {
 			"name": "Particle Systems",
 			"description": "Explore the emergent behavior of particle systems, from single particles to complex emitters and repellers.",
-			"qfep_term": "λE(S)",
-			"qfep_connection": "Particles as controlled entropy — emission, diffusion, decay. Each particle system manages the λ parameter: how much disorder to allow, how quickly to let structures dissolve.",
+			"qfep_term": "\u00ce\u00bbE(S)",
+			"qfep_connection": "Particles as controlled entropy \u00e2\u20ac\u201d emission, diffusion, decay. Each particle system manages the \u00ce\u00bb parameter: how much disorder to allow, how quickly to let structures dissolve.",
 			"difficulty": "intermediate",
 			"estimated_time": "45-60 minutes",
 			"learning_objectives": [
@@ -30,11 +30,71 @@
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_particles",
-			"unlock_requirements": ["vectors"],
+			"unlock_requirements": [
+				"vectors"
+			],
 			"completion_rewards": [
 				"system_architect_badge",
 				"chaos_theory_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Particles_1",
+					"position": "intro",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_1_single_particle_vr",
+						"example_4_2_array_particles_vr",
+						"vector_field"
+					],
+					"size_budget": "environment",
+					"rationale": "Introduction with 4 artifacts"
+				},
+				{
+					"map": "Particles_2",
+					"position": "foundation",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_3_particle_emitter_vr",
+						"example_particle_body"
+					],
+					"size_budget": "mixed",
+					"rationale": "Building foundations with 3 artifacts"
+				},
+				{
+					"map": "Particles_3",
+					"position": "exploration",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_4_multiple_emitters_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Particles_4",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"example_4_5_inheritance_polymorphism_vr"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Particles_5",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"evolutionary_algorithms",
+						"example_4_6_particle_repeller_vr"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 3 artifacts"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

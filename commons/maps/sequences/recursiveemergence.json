@@ -1,39 +1,147 @@
 {
-    "sequences": {
-        "recursiveemergence": {
-            "name": "Recursive Emergence",
-            "description": "Fractals, cellular automata, and emergent complexity",
-            "qfep_term": "E(S)+F",
-            "qfep_connection": "Fractals and cellular automata — complexity from simplicity. Recursive rules generate infinite E(S) from finite F-description. The edge of chaos where simple rules produce unbounded complexity.",
-            "difficulty": "advanced",
-            "estimated_time": "40-50 minutes",
-            "learning_objectives": [
-                "Cellular Automata",
-                "Fractals (Mandelbrot, Julia)",
-                "Recursive systems",
-                "Emergent behavior"
-            ],
-            "maps": [
-                "RecursiveEmergence_Cellular_Automata_1D",
-                "RecursiveEmergence_Cellular_Automata_2D",
-                "RecursiveEmergence_Cellular_Automata_3D",
-                "RecursiveEmergence_Rule_30_110",
-                "RecursiveEmergence_Lattice_Gas_Automata",
-                "RecursiveEmergence_Fibonacci_Sequences",
-                "RecursiveEmergence_Tail_Recursion_Memoization",
-                "RecursiveEmergence_Iterated_Function_Systems_IFS",
-                "RecursiveEmergence_Koch_Curve",
-                "RecursiveEmergence_Mandelbrot_Set",
-                "RecursiveEmergence_Julia_Set"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_recursiveemergence",
-            "unlock_requirements": [
-                "patterngeneration"
-            ],
-            "completion_rewards": [
-                "complexity_theorist_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"recursiveemergence": {
+			"name": "Recursive Emergence",
+			"description": "Fractals, cellular automata, and emergent complexity",
+			"qfep_term": "E(S)+F",
+			"qfep_connection": "Fractals and cellular automata \u00e2\u20ac\u201d complexity from simplicity. Recursive rules generate infinite E(S) from finite F-description. The edge of chaos where simple rules produce unbounded complexity.",
+			"difficulty": "advanced",
+			"estimated_time": "40-50 minutes",
+			"learning_objectives": [
+				"Cellular Automata",
+				"Fractals (Mandelbrot, Julia)",
+				"Recursive systems",
+				"Emergent behavior"
+			],
+			"maps": [
+				"RecursiveEmergence_Cellular_Automata_1D",
+				"RecursiveEmergence_Cellular_Automata_2D",
+				"RecursiveEmergence_Cellular_Automata_3D",
+				"RecursiveEmergence_Rule_30_110",
+				"RecursiveEmergence_Lattice_Gas_Automata",
+				"RecursiveEmergence_Fibonacci_Sequences",
+				"RecursiveEmergence_Tail_Recursion_Memoization",
+				"RecursiveEmergence_Iterated_Function_Systems_IFS",
+				"RecursiveEmergence_Koch_Curve",
+				"RecursiveEmergence_Mandelbrot_Set",
+				"RecursiveEmergence_Julia_Set"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_recursiveemergence",
+			"unlock_requirements": [
+				"patterngeneration"
+			],
+			"completion_rewards": [
+				"complexity_theorist_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "RecursiveEmergence_Cellular_Automata_1D",
+					"position": "intro",
+					"artifacts": [
+						"cellular_automata_grabable",
+						"evolutionary_algorithms",
+						"mirror_cellular_texture_for_3d"
+					],
+					"size_budget": "environment",
+					"rationale": "Introduction with 3 artifacts"
+				},
+				{
+					"map": "RecursiveEmergence_Cellular_Automata_2D",
+					"position": "intro",
+					"artifacts": [
+						"cellular_automata_2d",
+						"lattice_gas_automata"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "RecursiveEmergence_Cellular_Automata_3D",
+					"position": "foundation",
+					"artifacts": [
+						"cellular_automata_3d",
+						"cellular_automata_3d_stacked"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "RecursiveEmergence_Rule_30_110",
+					"position": "foundation",
+					"artifacts": [
+						"rule_30_110_gravity"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Lattice_Gas_Automata",
+					"position": "exploration",
+					"artifacts": [
+						"lattice_gas_automata"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Fibonacci_Sequences",
+					"position": "exploration",
+					"artifacts": [
+						"fibonacci_sequences"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Tail_Recursion_Memoization",
+					"position": "exploration",
+					"artifacts": [
+						"recursive_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Iterated_Function_Systems_IFS",
+					"position": "integration",
+					"artifacts": [
+						"koch_curve_3d"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Koch_Curve",
+					"position": "integration",
+					"artifacts": [
+						"koch_curve"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Mandelbrot_Set",
+					"position": "synthesis",
+					"artifacts": [
+						"mandelbrot_set"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "RecursiveEmergence_Julia_Set",
+					"position": "synthesis",
+					"artifacts": [
+						"julia_set",
+						"sierpinski_pyramid"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 2 artifacts"
+				}
+			]
+		}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
 }

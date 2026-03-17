@@ -6,7 +6,7 @@
 			"deferred_reason": "All 7 maps were env_one placeholders. No real content. Rebuild when content exists.",
 			"description": "Search algorithms, pathfinding, and optimization",
 			"qfep_term": "F",
-			"qfep_connection": "Search as F-landscape navigation — algorithms explore a space of possibilities, minimizing cost functions to find optimal paths. A* combines known cost (F) with heuristic prediction (estimated remaining E(S)).",
+			"qfep_connection": "Search as F-landscape navigation \u00e2\u20ac\u201d algorithms explore a space of possibilities, minimizing cost functions to find optimal paths. A* combines known cost (F) with heuristic prediction (estimated remaining E(S)).",
 			"difficulty": "intermediate",
 			"learning_objectives": [
 				"Gradient descent",
@@ -25,7 +25,10 @@
 				"SearchPathfinding_Depth_First_Search_DFS",
 				"SearchPathfinding_Simulated_Annealing",
 				"SearchPathfinding_Particle_Swarm_Optimization"
-			]
+			],
+			"artifact_groups": []
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }
