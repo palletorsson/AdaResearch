@@ -1,942 +1,986 @@
-class_name CsgFacadeElements
+class_name CSGFacadeElements
 extends RefCounted
 
-## CSG-based facade element generators for real-time 3D preview.
-## Each static method creates a Node3D containing CSG node trees
-## for a specific architectural element type.
+## Static library that generates CSG node trees for architectural facade elements.
+## Each method takes cell_width, cell_height, and a params Dictionary,
+## returning a Node3D subtree of CSGShape3D nodes ready to be added to a scene.
 ##
-## Complements the MeshData-based FacadeElementLibrary: CSG is used
-## for interactive editing (FacadePlanImporter), while MeshData is
-## used for the procedural grammar pipeline.
+## Cell origin (0,0,0) = bottom-left-front of the cell.
+## +X = right, +Y = up, +Z = toward viewer (out of wall face).
+##
+## Naming convention: every CSG node gets a descriptive name.
+## All CSGShape3D nodes have use_collision = false for performance.
+
+# ==========================================================================
+# Internal helpers
+# ==========================================================================
+
+## Create a CSGBox3D with common defaults.
+static func _box(bname: String, size: Vector3, pos: Vector3 = Vector3.ZERO,
+		op: CSGShape3D.Operation = CSGShape3D.OPERATION_UNION) -> CSGBox3D:
+	var b := CSGBox3D.new()
+	b.name = bname
+	b.size = size
+	b.position = pos
+	b.operation = op
+	b.use_collision = false
+	return b
 
 
-# ─── COLUMNS ───────────────────────────────────────────────────────────────
+## Create a CSGCylinder3D with common defaults.
+static func _cyl(cname: String, radius: float, height: float,
+		pos: Vector3 = Vector3.ZERO, sides: int = 16,
+		op: CSGShape3D.Operation = CSGShape3D.OPERATION_UNION) -> CSGCylinder3D:
+	var c := CSGCylinder3D.new()
+	c.name = cname
+	c.radius = radius
+	c.height = height
+	c.sides = sides
+	c.position = pos
+	c.operation = op
+	c.use_collision = false
+	return c
 
-## Generate a classical column with shaft, base, and capital.
-## params: taper, flutes, capital_style ("simple", "volute", "acanthus")
-static func column(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Column"
 
-	var taper: float = params.get("taper", 0.85)
-	var flutes: int = params.get("flutes", 0)
-	var capital_style: String = params.get("capital_style", "simple")
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
+## Create a CSGCombiner3D for boolean groups.
+static func _combiner(cname: String,
+		op: CSGShape3D.Operation = CSGShape3D.OPERATION_UNION) -> CSGCombiner3D:
+	var c := CSGCombiner3D.new()
+	c.name = cname
+	c.operation = op
+	c.use_collision = false
+	return c
 
-	var radius := cell_width * 0.2
-	var shaft_height := cell_height * 0.75
-	var base_height := cell_height * 0.1
-	var capital_height := cell_height * 0.15
 
-	# Material
-	var mat := FacadeMaterials.stone_material(color)
+## Create a CSGPolygon3D extruded along Z with given 2D profile points.
+static func _polygon(pname: String, profile: PackedVector2Array, depth: float,
+		pos: Vector3 = Vector3.ZERO,
+		op: CSGShape3D.Operation = CSGShape3D.OPERATION_UNION) -> CSGPolygon3D:
+	var p := CSGPolygon3D.new()
+	p.name = pname
+	p.polygon = profile
+	p.depth = depth
+	p.mode = CSGPolygon3D.MODE_DEPTH
+	p.position = pos
+	p.operation = op
+	p.use_collision = false
+	return p
 
-	# --- Base (torus-like stepped base) ---
-	var base_node := CSGBox3D.new()
-	base_node.name = "Base"
-	base_node.size = Vector3(radius * 2.4, base_height, radius * 2.4)
-	base_node.position.y = base_height * 0.5
-	base_node.material = mat
-	root.add_child(base_node)
 
-	var base_step := CSGBox3D.new()
-	base_step.name = "BaseStep"
-	base_step.size = Vector3(radius * 2.8, base_height * 0.3, radius * 2.8)
-	base_step.position.y = base_height * 0.15
-	base_step.material = mat
-	root.add_child(base_step)
+## Wrap children under a plain Node3D root.
+static func _root(rname: String) -> Node3D:
+	var r := Node3D.new()
+	r.name = rname
+	return r
 
-	# --- Shaft ---
-	var shaft := CSGCylinder3D.new()
-	shaft.name = "Shaft"
-	shaft.radius = radius
-	shaft.height = shaft_height
-	shaft.sides = 24
-	shaft.cone = true  # Enables taper
-	# CSGCylinder3D cone mode tapers to a point; we need to simulate taper
-	# by using two stacked cylinders or adjusting manually.
-	# Actually in Godot 4, CSGCylinder3D doesn't have a taper property directly.
-	# We'll use a full cylinder and note that proper entasis needs CSGPolygon3D.
+
+## Add fluting (subtractive thin cylinders around a shaft).
+static func _add_flutes(parent: Node3D, shaft_radius: float, shaft_height: float,
+		flute_count: int, shaft_center: Vector3) -> void:
+	var combiner := _combiner("Flutes", CSGShape3D.OPERATION_SUBTRACTION)
+	combiner.position = shaft_center
+	parent.add_child(combiner)
+
+	var flute_radius := shaft_radius * 0.08
+	var flute_orbit := shaft_radius * 0.92
+
+	for i in range(flute_count):
+		var angle := TAU * float(i) / float(flute_count)
+		var fx := cos(angle) * flute_orbit
+		var fz := sin(angle) * flute_orbit
+		var flute := _cyl("Flute_%d" % i, flute_radius, shaft_height * 1.02,
+			Vector3(fx, 0.0, fz), 6, CSGShape3D.OPERATION_UNION)
+		combiner.add_child(flute)
+
+
+# ==========================================================================
+# COLUMNS
+# ==========================================================================
+
+## Tuscan column: plain shaft with taper=0.8, simple base and capital.
+static func col_tuscan(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ColTuscan")
+	var taper: float = p.get("taper", 0.8)
+	var radius: float = w * 0.12
+	var base_h: float = h * 0.05
+	var capital_h: float = h * 0.04
+	var shaft_h: float = h - base_h - capital_h
+	var cx := w * 0.5
+
+	# Base — simple torus-like cylinder wider than shaft
+	var base := _cyl("Base", radius * 1.3, base_h,
+		Vector3(cx, base_h * 0.5, 0.0), 16)
+	root.add_child(base)
+
+	# Shaft
+	var shaft := _cyl("Shaft", radius, shaft_h,
+		Vector3(cx, base_h + shaft_h * 0.5, 0.0), 16)
+	shaft.cone = true
+	# CSGCylinder3D cone mode tapers to 0; we simulate taper by stacking
+	# Actually in Godot 4, cone just makes it pointy. We'll use a non-cone cylinder.
 	shaft.cone = false
-	shaft.radius = radius
-	shaft.height = shaft_height
-	shaft.position.y = base_height + shaft_height * 0.5
-	shaft.material = mat
 	root.add_child(shaft)
 
-	# --- Fluting (subtraction cylinders around the shaft) ---
-	if flutes > 0:
-		var flute_combiner := CSGCombiner3D.new()
-		flute_combiner.name = "FluteCombiner"
-		flute_combiner.operation = CSGShape3D.OPERATION_SUBTRACTION
-		flute_combiner.position = shaft.position
-		root.add_child(flute_combiner)
-
-		# Add the shaft shape inside the combiner for boolean context
-		var shaft_copy := CSGCylinder3D.new()
-		shaft_copy.name = "ShaftBody"
-		shaft_copy.radius = radius
-		shaft_copy.height = shaft_height
-		shaft_copy.sides = 24
-		shaft_copy.operation = CSGShape3D.OPERATION_UNION
-		shaft_copy.material = mat
-		flute_combiner.add_child(shaft_copy)
-
-		var flute_radius := radius * 0.12
-		var flute_depth := radius * 0.08
-		for i in range(flutes):
-			var angle := TAU * float(i) / float(flutes)
-			var flute_cyl := CSGCylinder3D.new()
-			flute_cyl.name = "Flute_%d" % i
-			flute_cyl.radius = flute_radius
-			flute_cyl.height = shaft_height * 0.95
-			flute_cyl.sides = 6
-			flute_cyl.operation = CSGShape3D.OPERATION_SUBTRACTION
-			var fx := cos(angle) * (radius - flute_depth)
-			var fz := sin(angle) * (radius - flute_depth)
-			flute_cyl.position = Vector3(fx, 0, fz)
-			flute_combiner.add_child(flute_cyl)
-
-		# Remove the separate shaft since the combiner has its own
-		root.remove_child(shaft)
-		shaft.queue_free()
-
-	# --- Capital ---
-	var capital_y := base_height + shaft_height
-
-	# Echinus (curved part)
-	var echinus := CSGCylinder3D.new()
-	echinus.name = "Echinus"
-	echinus.radius = radius * 1.3
-	echinus.height = capital_height * 0.6
-	echinus.sides = 24
-	echinus.position.y = capital_y + capital_height * 0.3
-	echinus.material = mat
+	# Capital — echinus (rounded cushion) + abacus (flat slab)
+	var echinus_h := capital_h * 0.5
+	var abacus_h := capital_h * 0.5
+	var echinus := _cyl("Echinus", radius * 1.15, echinus_h,
+		Vector3(cx, base_h + shaft_h + echinus_h * 0.5, 0.0), 16)
 	root.add_child(echinus)
 
-	# Abacus (flat slab on top)
-	var abacus := CSGBox3D.new()
-	abacus.name = "Abacus"
-	abacus.size = Vector3(radius * 2.8, capital_height * 0.4, radius * 2.8)
-	abacus.position.y = capital_y + capital_height * 0.8
-	abacus.material = mat
+	var abacus := _box("Abacus", Vector3(radius * 2.6, abacus_h, radius * 2.6),
+		Vector3(cx, base_h + shaft_h + echinus_h + abacus_h * 0.5, 0.0))
 	root.add_child(abacus)
-
-	# Volutes for Ionic
-	if capital_style == "volute":
-		for side in [-1, 1]:
-			var volute := CSGCylinder3D.new()
-			volute.name = "Volute_%s" % ("L" if side < 0 else "R")
-			volute.radius = radius * 0.4
-			volute.height = radius * 0.3
-			volute.sides = 16
-			volute.rotation_degrees.x = 90
-			volute.position = Vector3(float(side) * radius * 1.1, capital_y + capital_height * 0.3, 0)
-			volute.material = mat
-			root.add_child(volute)
-
-	# Acanthus decoration for Corinthian (simplified as extra cylinders)
-	if capital_style == "acanthus":
-		for ring in range(2):
-			var ring_y := capital_y + capital_height * (0.15 + float(ring) * 0.25)
-			for i in range(8):
-				var angle := TAU * float(i) / 8.0 + float(ring) * TAU / 16.0
-				var leaf := CSGCylinder3D.new()
-				leaf.name = "Leaf_%d_%d" % [ring, i]
-				leaf.radius = radius * 0.18
-				leaf.height = capital_height * 0.25
-				leaf.sides = 6
-				leaf.position = Vector3(
-					cos(angle) * radius * 0.9,
-					ring_y,
-					sin(angle) * radius * 0.9
-				)
-				leaf.material = mat
-				root.add_child(leaf)
 
 	return root
 
 
-## Tuscan column: simple, no fluting, strong taper.
-static func col_tuscan(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var p := params.duplicate()
-	p["taper"] = 0.8
-	p["flutes"] = 0
-	p["capital_style"] = "simple"
-	var node := column(cell_width, cell_height, p)
-	node.name = "ColTuscan"
-	return node
-
-
-## Doric column: 20 flutes, moderate taper.
-static func col_doric(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var p := params.duplicate()
-	p["taper"] = 0.83
-	p["flutes"] = 20
-	p["capital_style"] = "simple"
-	var node := column(cell_width, cell_height, p)
-	node.name = "ColDoric"
-	return node
-
-
-## Ionic column: 24 flutes, volute capital.
-static func col_ionic(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var p := params.duplicate()
-	p["taper"] = 0.85
-	p["flutes"] = 24
-	p["capital_style"] = "volute"
-	var node := column(cell_width, cell_height, p)
-	node.name = "ColIonic"
-	return node
-
-
-## Corinthian column: 24 flutes, acanthus capital.
-static func col_corinthian(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var p := params.duplicate()
-	p["taper"] = 0.87
-	p["flutes"] = 24
-	p["capital_style"] = "acanthus"
-	var node := column(cell_width, cell_height, p)
-	node.name = "ColCorinthian"
-	return node
-
-
-## Pilaster: flat column projecting slightly from the wall.
-static func pilaster(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Pilaster"
-
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-
-	var depth := cell_width * 0.08
-	var width := cell_width * 0.35
-	var base_h := cell_height * 0.1
-	var shaft_h := cell_height * 0.75
-	var cap_h := cell_height * 0.15
+## Doric column: taper=0.83, 20 flutes, plain capital.
+static func col_doric(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ColDoric")
+	var radius: float = w * 0.12
+	var base_h: float = h * 0.04
+	var capital_h: float = h * 0.045
+	var shaft_h: float = h - base_h - capital_h
+	var cx := w * 0.5
+	var flute_count: int = p.get("flute_count", 20)
 
 	# Base
-	var base_box := CSGBox3D.new()
-	base_box.name = "PilasterBase"
-	base_box.size = Vector3(width * 1.3, base_h, depth * 1.5)
-	base_box.position = Vector3(0, base_h * 0.5, depth * 0.75)
-	base_box.material = mat
-	root.add_child(base_box)
+	var base := _cyl("Base", radius * 1.2, base_h,
+		Vector3(cx, base_h * 0.5, 0.0), 20)
+	root.add_child(base)
 
 	# Shaft
-	var shaft := CSGBox3D.new()
-	shaft.name = "PilasterShaft"
-	shaft.size = Vector3(width, shaft_h, depth)
-	shaft.position = Vector3(0, base_h + shaft_h * 0.5, depth * 0.5)
-	shaft.material = mat
+	var shaft := _cyl("Shaft", radius, shaft_h,
+		Vector3(cx, base_h + shaft_h * 0.5, 0.0), 20)
+	root.add_child(shaft)
+
+	# Flutes
+	_add_flutes(root, radius, shaft_h,
+		flute_count, Vector3(cx, base_h + shaft_h * 0.5, 0.0))
+
+	# Capital — necking ring + echinus + abacus
+	var necking_h := capital_h * 0.2
+	var echinus_h := capital_h * 0.35
+	var abacus_h := capital_h * 0.45
+	var y_base := base_h + shaft_h
+
+	var necking := _cyl("Necking", radius * 0.95, necking_h,
+		Vector3(cx, y_base + necking_h * 0.5, 0.0), 20)
+	root.add_child(necking)
+
+	var echinus := _cyl("Echinus", radius * 1.2, echinus_h,
+		Vector3(cx, y_base + necking_h + echinus_h * 0.5, 0.0), 20)
+	root.add_child(echinus)
+
+	var abacus := _box("Abacus", Vector3(radius * 2.8, abacus_h, radius * 2.8),
+		Vector3(cx, y_base + necking_h + echinus_h + abacus_h * 0.5, 0.0))
+	root.add_child(abacus)
+
+	return root
+
+
+## Ionic column: taper=0.85, 24 flutes, volute capital with scrolls.
+static func col_ionic(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ColIonic")
+	var radius: float = w * 0.11
+	var base_h: float = h * 0.06
+	var capital_h: float = h * 0.06
+	var shaft_h: float = h - base_h - capital_h
+	var cx := w * 0.5
+	var flute_count: int = p.get("flute_count", 24)
+
+	# Attic base — two torus-like stacked cylinders + plinth
+	var plinth_h := base_h * 0.3
+	var torus_h := base_h * 0.35
+	var plinth := _box("BasePlinth", Vector3(radius * 2.8, plinth_h, radius * 2.8),
+		Vector3(cx, plinth_h * 0.5, 0.0))
+	root.add_child(plinth)
+
+	var lower_torus := _cyl("LowerTorus", radius * 1.35, torus_h,
+		Vector3(cx, plinth_h + torus_h * 0.5, 0.0), 24)
+	root.add_child(lower_torus)
+
+	var upper_torus := _cyl("UpperTorus", radius * 1.2, torus_h,
+		Vector3(cx, plinth_h + torus_h + torus_h * 0.5, 0.0), 24)
+	root.add_child(upper_torus)
+
+	# Shaft
+	var shaft := _cyl("Shaft", radius, shaft_h,
+		Vector3(cx, base_h + shaft_h * 0.5, 0.0), 24)
+	root.add_child(shaft)
+
+	# Flutes
+	_add_flutes(root, radius, shaft_h,
+		flute_count, Vector3(cx, base_h + shaft_h * 0.5, 0.0))
+
+	# Ionic capital — abacus + echinus + two volute scrolls
+	var cap_y := base_h + shaft_h
+	var abacus_h := capital_h * 0.25
+	var echinus_h := capital_h * 0.3
+	var volute_h := capital_h * 0.45
+
+	# Echinus (egg-and-dart band)
+	var echinus := _cyl("Echinus", radius * 1.15, echinus_h,
+		Vector3(cx, cap_y + echinus_h * 0.5, 0.0), 24)
+	root.add_child(echinus)
+
+	# Volute scrolls — two cylinders on each side (simplified spiral)
+	var scroll_r := radius * 0.45
+	var scroll_y := cap_y + echinus_h + volute_h * 0.4
+
+	var scroll_left := _cyl("VoluteLeft", scroll_r, volute_h * 0.6,
+		Vector3(cx - radius * 1.3, scroll_y, 0.0), 16)
+	scroll_left.rotation_degrees.z = 90.0
+	root.add_child(scroll_left)
+
+	var scroll_right := _cyl("VoluteRight", scroll_r, volute_h * 0.6,
+		Vector3(cx + radius * 1.3, scroll_y, 0.0), 16)
+	scroll_right.rotation_degrees.z = 90.0
+	root.add_child(scroll_right)
+
+	# Connecting cushion between volutes
+	var cushion := _box("VolyteCushion", Vector3(radius * 2.6, volute_h * 0.5, radius * 1.8),
+		Vector3(cx, cap_y + echinus_h + volute_h * 0.25, 0.0))
+	root.add_child(cushion)
+
+	# Abacus
+	var abacus := _box("Abacus", Vector3(radius * 2.8, abacus_h, radius * 2.8),
+		Vector3(cx, cap_y + echinus_h + volute_h + abacus_h * 0.5, 0.0))
+	root.add_child(abacus)
+
+	return root
+
+
+## Corinthian column: taper=0.87, 24 flutes, bell capital with acanthus layers.
+static func col_corinthian(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ColCorinthian")
+	var radius: float = w * 0.11
+	var base_h: float = h * 0.06
+	var capital_h: float = h * 0.09
+	var shaft_h: float = h - base_h - capital_h
+	var cx := w * 0.5
+	var flute_count: int = p.get("flute_count", 24)
+
+	# Attic base (same as Ionic)
+	var plinth_h := base_h * 0.3
+	var torus_h := base_h * 0.35
+	var plinth := _box("BasePlinth", Vector3(radius * 2.8, plinth_h, radius * 2.8),
+		Vector3(cx, plinth_h * 0.5, 0.0))
+	root.add_child(plinth)
+
+	var lower_torus := _cyl("LowerTorus", radius * 1.35, torus_h,
+		Vector3(cx, plinth_h + torus_h * 0.5, 0.0), 24)
+	root.add_child(lower_torus)
+
+	var upper_torus := _cyl("UpperTorus", radius * 1.2, torus_h,
+		Vector3(cx, plinth_h + torus_h + torus_h * 0.5, 0.0), 24)
+	root.add_child(upper_torus)
+
+	# Shaft
+	var shaft := _cyl("Shaft", radius, shaft_h,
+		Vector3(cx, base_h + shaft_h * 0.5, 0.0), 24)
+	root.add_child(shaft)
+
+	# Flutes
+	_add_flutes(root, radius, shaft_h,
+		flute_count, Vector3(cx, base_h + shaft_h * 0.5, 0.0))
+
+	# Corinthian capital — bell shape with acanthus leaf layers
+	var cap_y := base_h + shaft_h
+	var bell_h := capital_h * 0.7
+	var abacus_h := capital_h * 0.15
+	var lip_h := capital_h * 0.15
+
+	# Lower acanthus row (wider ring)
+	var acanthus_lower := _cyl("AcanthusLower", radius * 1.3, bell_h * 0.35,
+		Vector3(cx, cap_y + bell_h * 0.175, 0.0), 24)
+	root.add_child(acanthus_lower)
+
+	# Upper acanthus row (slightly narrower, taller)
+	var acanthus_upper := _cyl("AcanthusUpper", radius * 1.5, bell_h * 0.35,
+		Vector3(cx, cap_y + bell_h * 0.5, 0.0), 24)
+	root.add_child(acanthus_upper)
+
+	# Bell top / caulicoli zone
+	var bell_top := _cyl("BellTop", radius * 1.2, bell_h * 0.3,
+		Vector3(cx, cap_y + bell_h * 0.85, 0.0), 24)
+	root.add_child(bell_top)
+
+	# Lip (flared ring at top of bell)
+	var lip := _cyl("Lip", radius * 1.6, lip_h,
+		Vector3(cx, cap_y + bell_h + lip_h * 0.5, 0.0), 24)
+	root.add_child(lip)
+
+	# Abacus (concave-sided square — approximated with box)
+	var abacus := _box("Abacus", Vector3(radius * 3.0, abacus_h, radius * 3.0),
+		Vector3(cx, cap_y + bell_h + lip_h + abacus_h * 0.5, 0.0))
+	root.add_child(abacus)
+
+	return root
+
+
+## Pilaster: flat column, CSGBox3D shaft with small capital box on top.
+static func pilaster(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("Pilaster")
+	var depth: float = p.get("depth", 0.08)
+	var pilaster_w: float = w * 0.25
+	var capital_h: float = h * 0.04
+	var base_h: float = h * 0.03
+	var shaft_h: float = h - capital_h - base_h
+	var cx := w * 0.5
+
+	# Base
+	var base := _box("Base", Vector3(pilaster_w * 1.2, base_h, depth * 1.3),
+		Vector3(cx, base_h * 0.5, depth * 0.5))
+	root.add_child(base)
+
+	# Shaft
+	var shaft := _box("Shaft", Vector3(pilaster_w, shaft_h, depth),
+		Vector3(cx, base_h + shaft_h * 0.5, depth * 0.5))
 	root.add_child(shaft)
 
 	# Capital
-	var cap := CSGBox3D.new()
-	cap.name = "PilasterCapital"
-	cap.size = Vector3(width * 1.3, cap_h, depth * 1.5)
-	cap.position = Vector3(0, base_h + shaft_h + cap_h * 0.5, depth * 0.75)
-	cap.material = mat
-	root.add_child(cap)
+	var capital := _box("Capital", Vector3(pilaster_w * 1.3, capital_h, depth * 1.4),
+		Vector3(cx, base_h + shaft_h + capital_h * 0.5, depth * 0.5))
+	root.add_child(capital)
 
 	return root
 
 
-# ─── OPENINGS ──────────────────────────────────────────────────────────────
+# ==========================================================================
+# OPENINGS
+# ==========================================================================
 
-## Rectangular window: wall void with frame surround.
-static func rect_window(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "RectWindow"
+## Rectangular window with frame, optional mullion and transom.
+static func rect_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("RectWindow")
+	var inset: float = p.get("inset", 0.15)
+	var frame_t: float = p.get("frame_thickness", 0.04)
+	var wall_depth: float = p.get("wall_depth", 0.25)
+	var has_mullion: bool = p.get("mullion", false)
+	var has_transom: bool = p.get("transom", false)
+	var margin_x: float = w * inset
+	var margin_y: float = h * 0.1
+	var opening_w: float = w - margin_x * 2.0
+	var opening_h: float = h - margin_y * 2.0
+	var cx := w * 0.5
+	var cy := h * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-	var glass_mat := FacadeMaterials.glass_material()
+	# Wall with void cut out (CSGCombiner SUBTRACTION)
+	var subtractor := _combiner("WallCut", CSGShape3D.OPERATION_SUBTRACTION)
+	root.add_child(subtractor)
 
-	var frame_width := cell_width * 0.08
-	var void_w := cell_width * 0.6
-	var void_h := cell_height * 0.7
-	var wall_depth := params.get("wall_depth", 0.3) as float
+	var void_box := _box("Void", Vector3(opening_w, opening_h, wall_depth * 1.5),
+		Vector3(cx, cy, 0.0), CSGShape3D.OPERATION_UNION)
+	subtractor.add_child(void_box)
 
-	# Window void (subtraction from wall — placed as a visual marker)
-	var void_box := CSGBox3D.new()
-	void_box.name = "WindowVoid"
-	void_box.size = Vector3(void_w, void_h, wall_depth * 1.2)
-	void_box.position = Vector3(0, cell_height * 0.55, 0)
-	void_box.operation = CSGShape3D.OPERATION_SUBTRACTION
-	void_box.material = glass_mat
-	root.add_child(void_box)
+	# Frame strips (lintel, sill, left jamb, right jamb)
+	var lintel := _box("Lintel", Vector3(opening_w + frame_t * 2.0, frame_t, wall_depth * 0.3),
+		Vector3(cx, cy + opening_h * 0.5 + frame_t * 0.5, wall_depth * 0.15))
+	root.add_child(lintel)
 
-	# Glass pane
-	var glass := CSGBox3D.new()
-	glass.name = "Glass"
-	glass.size = Vector3(void_w - 0.02, void_h - 0.02, 0.02)
-	glass.position = Vector3(0, cell_height * 0.55, 0)
-	glass.material = glass_mat
-	root.add_child(glass)
-
-	# Frame — 4 strips
-	_add_frame_strips(root, void_w, void_h, frame_width, wall_depth * 0.15,
-		Vector3(0, cell_height * 0.55, wall_depth * 0.5), mat)
-
-	# Sill
-	var sill := CSGBox3D.new()
-	sill.name = "Sill"
-	sill.size = Vector3(void_w + frame_width * 2, frame_width * 0.6, wall_depth * 0.3)
-	sill.position = Vector3(0, cell_height * 0.55 - void_h * 0.5 - frame_width * 0.3, wall_depth * 0.35)
-	sill.material = mat
+	var sill := _box("Sill", Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
+		Vector3(cx, cy - opening_h * 0.5 - frame_t * 0.5, wall_depth * 0.2))
 	root.add_child(sill)
 
-	return root
+	var jamb_left := _box("JambLeft", Vector3(frame_t, opening_h, wall_depth * 0.3),
+		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, cy, wall_depth * 0.15))
+	root.add_child(jamb_left)
 
+	var jamb_right := _box("JambRight", Vector3(frame_t, opening_h, wall_depth * 0.3),
+		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, cy, wall_depth * 0.15))
+	root.add_child(jamb_right)
 
-## Arched window: semicircular top with frame.
-static func arched_window(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "ArchedWindow"
+	# Optional mullion (vertical bar)
+	if has_mullion:
+		var mullion := _box("Mullion", Vector3(frame_t * 0.7, opening_h, wall_depth * 0.2),
+			Vector3(cx, cy, wall_depth * 0.1))
+		root.add_child(mullion)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-	var glass_mat := FacadeMaterials.glass_material()
-
-	var void_w := cell_width * 0.55
-	var void_h := cell_height * 0.6
-	var wall_depth := params.get("wall_depth", 0.3) as float
-	var frame_width := cell_width * 0.07
-	var arch_radius := void_w * 0.5
-
-	# Rectangular void part
-	var rect_void := CSGBox3D.new()
-	rect_void.name = "RectVoid"
-	rect_void.size = Vector3(void_w, void_h, wall_depth * 1.2)
-	rect_void.position = Vector3(0, cell_height * 0.4, 0)
-	rect_void.operation = CSGShape3D.OPERATION_SUBTRACTION
-	root.add_child(rect_void)
-
-	# Arch void (half cylinder at top)
-	var arch_void := CSGCylinder3D.new()
-	arch_void.name = "ArchVoid"
-	arch_void.radius = arch_radius
-	arch_void.height = wall_depth * 1.2
-	arch_void.sides = 16
-	arch_void.rotation_degrees.x = 90
-	arch_void.position = Vector3(0, cell_height * 0.4 + void_h * 0.5, 0)
-	arch_void.operation = CSGShape3D.OPERATION_SUBTRACTION
-	root.add_child(arch_void)
-
-	# Glass pane
-	var glass := CSGBox3D.new()
-	glass.name = "Glass"
-	glass.size = Vector3(void_w - 0.02, void_h - 0.02, 0.02)
-	glass.position = Vector3(0, cell_height * 0.4, 0)
-	glass.material = glass_mat
-	root.add_child(glass)
-
-	# Archivolt (arch frame)
-	var archivolt := CSGCylinder3D.new()
-	archivolt.name = "Archivolt"
-	archivolt.radius = arch_radius + frame_width
-	archivolt.height = frame_width * 1.5
-	archivolt.sides = 16
-	archivolt.rotation_degrees.x = 90
-	archivolt.position = Vector3(0, cell_height * 0.4 + void_h * 0.5, wall_depth * 0.5)
-	archivolt.material = mat
-	root.add_child(archivolt)
-
-	# Frame strips (sides and bottom)
-	_add_frame_strips(root, void_w, void_h, frame_width, wall_depth * 0.15,
-		Vector3(0, cell_height * 0.4, wall_depth * 0.5), mat)
+	# Optional transom (horizontal bar)
+	if has_transom:
+		var transom := _box("Transom", Vector3(opening_w, frame_t * 0.7, wall_depth * 0.2),
+			Vector3(cx, cy + opening_h * 0.15, wall_depth * 0.1))
+		root.add_child(transom)
 
 	return root
 
 
-## Door: rectangular opening with paneled door insert.
-static func door(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Door"
+## Arched window: rectangular lower portion + semicircular arch at top, keystone.
+static func arched_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ArchedWindow")
+	var inset: float = p.get("inset", 0.12)
+	var frame_t: float = p.get("frame_thickness", 0.04)
+	var wall_depth: float = p.get("wall_depth", 0.25)
+	var margin_x: float = w * inset
+	var margin_y: float = h * 0.08
+	var opening_w: float = w - margin_x * 2.0
+	var arch_r: float = opening_w * 0.5
+	var rect_h: float = h - margin_y * 2.0 - arch_r
+	var cx := w * 0.5
+	var rect_cy := margin_y + rect_h * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-	var wood_mat := FacadeMaterials.wood_material()
+	# Subtraction combiner for the void
+	var subtractor := _combiner("WallCut", CSGShape3D.OPERATION_SUBTRACTION)
+	root.add_child(subtractor)
 
-	var door_w := cell_width * 0.55
-	var door_h := cell_height * 0.85
-	var wall_depth := params.get("wall_depth", 0.3) as float
-	var frame_width := cell_width * 0.1
+	# Rectangular void
+	var rect_void := _box("RectVoid", Vector3(opening_w, rect_h, wall_depth * 1.5),
+		Vector3(cx, rect_cy, 0.0), CSGShape3D.OPERATION_UNION)
+	subtractor.add_child(rect_void)
 
-	# Door void
-	var void_box := CSGBox3D.new()
-	void_box.name = "DoorVoid"
-	void_box.size = Vector3(door_w, door_h, wall_depth * 1.2)
-	void_box.position = Vector3(0, door_h * 0.5, 0)
-	void_box.operation = CSGShape3D.OPERATION_SUBTRACTION
-	root.add_child(void_box)
+	# Arch void — half cylinder (rotate to cut semicircle)
+	var arch_void := _cyl("ArchVoid", arch_r, wall_depth * 1.5,
+		Vector3(cx, margin_y + rect_h, 0.0), 24, CSGShape3D.OPERATION_UNION)
+	arch_void.rotation_degrees.x = 90.0
+	# Only top half — we place it at the spring line; the bottom half will be
+	# coincident with rect_void, so it effectively creates the arch shape.
+	subtractor.add_child(arch_void)
 
-	# Door panel (wood)
-	var panel := CSGBox3D.new()
-	panel.name = "DoorPanel"
-	panel.size = Vector3(door_w - 0.04, door_h - 0.02, 0.06)
-	panel.position = Vector3(0, door_h * 0.5, -0.02)
-	panel.material = wood_mat
-	root.add_child(panel)
+	# Frame — sill
+	var sill := _box("Sill", Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
+		Vector3(cx, margin_y - frame_t * 0.5, wall_depth * 0.2))
+	root.add_child(sill)
 
-	# Frame
-	_add_frame_strips(root, door_w, door_h, frame_width, wall_depth * 0.15,
-		Vector3(0, door_h * 0.5, wall_depth * 0.5), mat)
+	# Frame — jambs
+	var jamb_left := _box("JambLeft", Vector3(frame_t, rect_h, wall_depth * 0.3),
+		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, rect_cy, wall_depth * 0.15))
+	root.add_child(jamb_left)
 
-	# Threshold
-	var threshold := CSGBox3D.new()
-	threshold.name = "Threshold"
-	threshold.size = Vector3(door_w + frame_width * 2, 0.05, wall_depth * 0.4)
-	threshold.position = Vector3(0, 0.025, wall_depth * 0.2)
-	threshold.material = mat
-	root.add_child(threshold)
+	var jamb_right := _box("JambRight", Vector3(frame_t, rect_h, wall_depth * 0.3),
+		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, rect_cy, wall_depth * 0.15))
+	root.add_child(jamb_right)
+
+	# Keystone at arch crown
+	var keystone_h := arch_r * 0.25
+	var keystone := _box("Keystone",
+		Vector3(frame_t * 2.0, keystone_h, wall_depth * 0.35),
+		Vector3(cx, margin_y + rect_h + arch_r - keystone_h * 0.3, wall_depth * 0.18))
+	root.add_child(keystone)
 
 	return root
 
 
-## Arcade arch: full arch with supporting piers.
-static func arcade_arch(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "ArcadeArch"
+## Door: taller opening reaching ground, two panels inside, handle.
+static func door(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("Door")
+	var wall_depth: float = p.get("wall_depth", 0.25)
+	var frame_t: float = p.get("frame_thickness", 0.05)
+	var margin_x: float = w * 0.15
+	var opening_w: float = w - margin_x * 2.0
+	var opening_h: float = h * 0.92  # Almost full height, small lintel gap at top
+	var cx := w * 0.5
+	var cy := opening_h * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# Subtraction for door void
+	var subtractor := _combiner("WallCut", CSGShape3D.OPERATION_SUBTRACTION)
+	root.add_child(subtractor)
 
-	var pier_w := cell_width * 0.15
-	var arch_span := cell_width - pier_w * 2
-	var arch_radius := arch_span * 0.5
-	var pier_h := cell_height - arch_radius
-	var depth := cell_width * 0.2
+	var void_box := _box("Void", Vector3(opening_w, opening_h, wall_depth * 1.5),
+		Vector3(cx, cy, 0.0), CSGShape3D.OPERATION_UNION)
+	subtractor.add_child(void_box)
+
+	# Lintel
+	var lintel := _box("Lintel", Vector3(opening_w + frame_t * 2.5, frame_t * 1.5, wall_depth * 0.35),
+		Vector3(cx, opening_h + frame_t * 0.75, wall_depth * 0.18))
+	root.add_child(lintel)
+
+	# Jambs
+	var jamb_left := _box("JambLeft", Vector3(frame_t, opening_h, wall_depth * 0.3),
+		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, cy, wall_depth * 0.15))
+	root.add_child(jamb_left)
+
+	var jamb_right := _box("JambRight", Vector3(frame_t, opening_h, wall_depth * 0.3),
+		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, cy, wall_depth * 0.15))
+	root.add_child(jamb_right)
+
+	# Two panels inside the door (upper and lower)
+	var panel_w := opening_w * 0.8
+	var panel_gap := opening_h * 0.05
+	var panel_h := (opening_h - panel_gap * 3.0) * 0.5
+	var panel_depth := 0.02
+
+	var upper_panel := _box("UpperPanel", Vector3(panel_w, panel_h, panel_depth),
+		Vector3(cx, opening_h - panel_gap - panel_h * 0.5, wall_depth * 0.08))
+	root.add_child(upper_panel)
+
+	var lower_panel := _box("LowerPanel", Vector3(panel_w, panel_h, panel_depth),
+		Vector3(cx, panel_gap + panel_h * 0.5, wall_depth * 0.08))
+	root.add_child(lower_panel)
+
+	# Door handle
+	var handle := _cyl("Handle", 0.015, 0.04,
+		Vector3(cx + opening_w * 0.3, opening_h * 0.45, wall_depth * 0.12), 8)
+	handle.rotation_degrees.x = 90.0
+	root.add_child(handle)
+
+	return root
+
+
+## Arcade arch: two piers with a spanning arch and impost blocks.
+static func arcade_arch(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ArcadeArch")
+	var pier_w: float = w * 0.12
+	var pier_depth: float = p.get("pier_depth", 0.2)
+	var impost_h: float = h * 0.03
+	var arch_spring_y: float = h * 0.55  # Spring line height
+	var arch_r: float = (w - pier_w * 2.0) * 0.5
+	var cx := w * 0.5
 
 	# Left pier
-	var left_pier := CSGBox3D.new()
-	left_pier.name = "LeftPier"
-	left_pier.size = Vector3(pier_w, pier_h, depth)
-	left_pier.position = Vector3(-cell_width * 0.5 + pier_w * 0.5, pier_h * 0.5, depth * 0.5)
-	left_pier.material = mat
-	root.add_child(left_pier)
+	var pier_left := _box("PierLeft", Vector3(pier_w, arch_spring_y, pier_depth),
+		Vector3(pier_w * 0.5, arch_spring_y * 0.5, pier_depth * 0.5))
+	root.add_child(pier_left)
 
 	# Right pier
-	var right_pier := CSGBox3D.new()
-	right_pier.name = "RightPier"
-	right_pier.size = Vector3(pier_w, pier_h, depth)
-	right_pier.position = Vector3(cell_width * 0.5 - pier_w * 0.5, pier_h * 0.5, depth * 0.5)
-	right_pier.material = mat
-	root.add_child(right_pier)
+	var pier_right := _box("PierRight", Vector3(pier_w, arch_spring_y, pier_depth),
+		Vector3(w - pier_w * 0.5, arch_spring_y * 0.5, pier_depth * 0.5))
+	root.add_child(pier_right)
 
-	# Arch (cylinder that we'll use as the archivolt)
-	var arch := CSGCylinder3D.new()
-	arch.name = "Arch"
-	arch.radius = arch_radius + pier_w * 0.5
-	arch.height = depth
-	arch.sides = 24
-	arch.rotation_degrees.x = 90
-	arch.position = Vector3(0, pier_h, depth * 0.5)
-	arch.material = mat
+	# Impost blocks at spring line
+	var impost_left := _box("ImpostLeft",
+		Vector3(pier_w * 1.3, impost_h, pier_depth * 1.2),
+		Vector3(pier_w * 0.5, arch_spring_y + impost_h * 0.5, pier_depth * 0.5))
+	root.add_child(impost_left)
+
+	var impost_right := _box("ImpostRight",
+		Vector3(pier_w * 1.3, impost_h, pier_depth * 1.2),
+		Vector3(w - pier_w * 0.5, arch_spring_y + impost_h * 0.5, pier_depth * 0.5))
+	root.add_child(impost_right)
+
+	# Arch — half cylinder spanning between piers
+	var arch := _cyl("Arch", arch_r, pier_depth,
+		Vector3(cx, arch_spring_y + impost_h, pier_depth * 0.5), 24)
+	arch.rotation_degrees.x = 90.0
 	root.add_child(arch)
 
-	# Arch void (to hollow it out)
-	var arch_void := CSGCylinder3D.new()
-	arch_void.name = "ArchVoid"
-	arch_void.radius = arch_radius
-	arch_void.height = depth * 1.2
-	arch_void.sides = 24
-	arch_void.rotation_degrees.x = 90
-	arch_void.position = Vector3(0, pier_h, depth * 0.5)
-	arch_void.operation = CSGShape3D.OPERATION_SUBTRACTION
-	root.add_child(arch_void)
+	# Subtract the interior void below the arch to leave just the ring
+	var arch_inner := _cyl("ArchInner", arch_r - pier_w * 0.6, pier_depth * 1.5,
+		Vector3(cx, arch_spring_y + impost_h, pier_depth * 0.5), 24,
+		CSGShape3D.OPERATION_SUBTRACTION)
+	arch_inner.rotation_degrees.x = 90.0
+	root.add_child(arch_inner)
 
 	return root
 
 
-# ─── BANDS & CORNICES ──────────────────────────────────────────────────────
+# ==========================================================================
+# BANDS & CORNICES
+# ==========================================================================
 
-## Dentil course: repeated small tooth-like blocks.
-static func dentil(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Dentil"
+## Dentil course: row of small cube blocks on a backing strip.
+static func dentil(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("DentilCourse")
+	var block_size: float = h * 0.5
+	var count: int = p.get("count", maxi(int(w / (block_size * 2.0)), 4))
+	var spacing: float = w / float(count)
+	var backing_depth: float = h * 0.3
+	var cy := h * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# Backing strip
+	var backing := _box("Backing", Vector3(w, h, backing_depth),
+		Vector3(w * 0.5, cy, backing_depth * 0.5))
+	root.add_child(backing)
 
-	var tooth_count: int = maxi(int(cell_width / (cell_height * 0.4)), 4)
-	var tooth_w := cell_width / float(tooth_count) * 0.6
-	var tooth_h := cell_height * 0.6
-	var tooth_d := cell_height * 0.4
-	var spacing := cell_width / float(tooth_count)
-
-	# Base band
-	var band := CSGBox3D.new()
-	band.name = "DentilBand"
-	band.size = Vector3(cell_width, cell_height * 0.3, tooth_d * 0.5)
-	band.position = Vector3(0, cell_height * 0.15, tooth_d * 0.25)
-	band.material = mat
-	root.add_child(band)
-
-	# Individual teeth
-	for i in range(tooth_count):
-		var tooth := CSGBox3D.new()
-		tooth.name = "Tooth_%d" % i
-		tooth.size = Vector3(tooth_w, tooth_h, tooth_d)
-		var x := -cell_width * 0.5 + spacing * 0.5 + float(i) * spacing
-		tooth.position = Vector3(x, cell_height * 0.3 + tooth_h * 0.5, tooth_d * 0.5)
-		tooth.material = mat
-		root.add_child(tooth)
+	# Dentil blocks
+	for i in range(count):
+		var bx := spacing * 0.5 + spacing * float(i)
+		var block := _box("Dentil_%d" % i,
+			Vector3(spacing * 0.5, block_size, block_size * 0.8),
+			Vector3(bx, cy, backing_depth + block_size * 0.4))
+		root.add_child(block)
 
 	return root
 
 
-## Cyma recta molding: S-curved cornice profile (approximated with stacked boxes).
-static func cyma_recta(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "CymaRecta"
+## Cyma recta: S-curve profile extruded along width.
+static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("CymaRecta")
+	var depth: float = p.get("depth", h * 0.6)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# S-curve profile in Y-Z plane (2D cross-section)
+	var profile := PackedVector2Array()
+	var steps: int = 12
+	for i in range(steps + 1):
+		var t := float(i) / float(steps)
+		# Cyma recta: concave at top, convex at bottom
+		var y_val := t * h
+		var z_val: float
+		if t < 0.5:
+			# Lower convex curve
+			z_val = depth * (2.0 * t * t)
+		else:
+			# Upper concave curve
+			z_val = depth * (1.0 - 2.0 * (1.0 - t) * (1.0 - t))
+		profile.append(Vector2(y_val, z_val))
 
-	var depth := cell_height * 0.5
-	var layers := 5
-	var layer_h := cell_height / float(layers)
+	# Close the profile back to the wall
+	profile.append(Vector2(h, 0.0))
+	profile.append(Vector2(0.0, 0.0))
 
-	for i in range(layers):
-		var t := float(i) / float(layers - 1)
-		# S-curve profile: sin gives the outward projection
-		var proj := sin(t * PI) * depth
-		var layer := CSGBox3D.new()
-		layer.name = "Layer_%d" % i
-		layer.size = Vector3(cell_width, layer_h * 0.95, maxf(proj, depth * 0.15))
-		layer.position = Vector3(0, float(i) * layer_h + layer_h * 0.5, layer.size.z * 0.5)
-		layer.material = mat
-		root.add_child(layer)
+	var poly := _polygon("CymaProfile", profile, w, Vector3(0.0, 0.0, 0.0))
+	# CSGPolygon3D extrudes along local Z by default in DEPTH mode;
+	# we want it along X (width). Rotate accordingly.
+	poly.rotation_degrees.y = -90.0
+	poly.position = Vector3(w, 0.0, 0.0)
+	root.add_child(poly)
 
 	return root
 
 
-## String course: thin horizontal dividing band.
-static func string_course(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "StringCourse"
+## String course: simple horizontal band with slight projection.
+static func string_course(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("StringCourse")
+	var depth: float = p.get("depth", 0.03)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-
-	var band_depth := cell_height * 0.3
-
-	var band := CSGBox3D.new()
-	band.name = "Band"
-	band.size = Vector3(cell_width, cell_height * 0.7, band_depth)
-	band.position = Vector3(0, cell_height * 0.5, band_depth * 0.5)
-	band.material = mat
+	var band := _box("Band", Vector3(w, h, depth),
+		Vector3(w * 0.5, h * 0.5, depth * 0.5))
 	root.add_child(band)
 
 	return root
 
 
-## Fascia: flat horizontal band (simpler than string course).
-static func fascia(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Fascia"
+## Fascia: flat band flush with wall surface.
+static func fascia(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("Fascia")
+	var depth: float = p.get("depth", 0.005)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
-
-	var band := CSGBox3D.new()
-	band.name = "FasciaBand"
-	band.size = Vector3(cell_width, cell_height * 0.8, cell_height * 0.15)
-	band.position = Vector3(0, cell_height * 0.5, cell_height * 0.075)
-	band.material = mat
+	var band := _box("Band", Vector3(w, h, depth),
+		Vector3(w * 0.5, h * 0.5, depth * 0.5))
 	root.add_child(band)
 
 	return root
 
 
-# ─── SURFACE TREATMENTS ───────────────────────────────────────────────────
+# ==========================================================================
+# SURFACES
+# ==========================================================================
 
-## Rusticated blocks: grid of offset stone blocks.
-static func rusticated_block(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "RusticatedBlock"
+## Rusticated blocks: grid of slightly offset blocks with gaps.
+static func rusticated_block(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("RusticatedBlock")
+	var rows: int = p.get("rows", 4)
+	var cols: int = p.get("cols", 2)
+	var gap: float = p.get("gap", 0.005)
+	var base_depth: float = p.get("depth", 0.02)
+	var block_w: float = (w - gap * float(cols + 1)) / float(cols)
+	var block_h: float = (h - gap * float(rows + 1)) / float(rows)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.75, 0.7, 0.62))
-	var mat := FacadeMaterials.stone_material(color, 0.92)
-
-	var cols: int = params.get("block_cols", 2) as int
-	var rows: int = params.get("block_rows", 3) as int
-	var gap := 0.02
-	var max_offset := 0.04
-
-	var block_w := (cell_width - gap * float(cols + 1)) / float(cols)
-	var block_h := (cell_height - gap * float(rows + 1)) / float(rows)
-	var block_d := cell_height * 0.12
-
-	# Use a deterministic seed based on params for consistent look
-	var rng := RandomNumberGenerator.new()
-	rng.seed = hash(str(params.get("col", 0)) + str(params.get("row", 0)))
-
-	for r in range(rows):
-		for c in range(cols):
-			var offset := rng.randf_range(-max_offset, max_offset)
-			var depth_var := rng.randf_range(0.8, 1.0) * block_d
-
-			var block := CSGBox3D.new()
-			block.name = "Block_%d_%d" % [r, c]
-			block.size = Vector3(block_w - 0.005, block_h - 0.005, depth_var)
-
-			var x := -cell_width * 0.5 + gap + block_w * 0.5 + float(c) * (block_w + gap)
-			var y := gap + block_h * 0.5 + float(r) * (block_h + gap)
-			block.position = Vector3(x + offset, y, depth_var * 0.5)
-			block.material = mat
+	for row in range(rows):
+		for col in range(cols):
+			var bx := gap + block_w * 0.5 + float(col) * (block_w + gap)
+			var by := gap + block_h * 0.5 + float(row) * (block_h + gap)
+			# Alternating depth for texture
+			var depth_offset: float
+			if (row + col) % 2 == 0:
+				depth_offset = base_depth
+			else:
+				depth_offset = base_depth * 0.5
+			var block := _box("Block_%d_%d" % [row, col],
+				Vector3(block_w, block_h, depth_offset),
+				Vector3(bx, by, depth_offset * 0.5))
 			root.add_child(block)
 
 	return root
 
 
-## Balustrade: repeated balusters with top rail and bottom rail.
-static func balustrade(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Balustrade"
-
-	var color: Color = _parse_color(params.get("color", ""), Color(0.85, 0.8, 0.72))
-	var mat := FacadeMaterials.stone_material(color)
-
-	var count: int = maxi(params.get("baluster_count", 6) as int, 2)
-	var rail_h := cell_height * 0.1
-	var baluster_h := cell_height - rail_h * 2
-	var baluster_r := cell_width / float(count) * 0.2
-	var spacing := cell_width / float(count)
-	var depth := cell_width * 0.08
+## Balustrade: top rail, bottom rail, tapered balusters, end posts.
+static func balustrade(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("Balustrade")
+	var count: int = p.get("baluster_count", clampi(int(w / (h * 0.3)), 5, 7))
+	var rail_h: float = h * 0.08
+	var post_w: float = w * 0.04
+	var rail_depth: float = h * 0.4
+	var cx := w * 0.5
 
 	# Bottom rail
-	var bottom_rail := CSGBox3D.new()
-	bottom_rail.name = "BottomRail"
-	bottom_rail.size = Vector3(cell_width, rail_h, depth)
-	bottom_rail.position = Vector3(0, rail_h * 0.5, depth * 0.5)
-	bottom_rail.material = mat
+	var bottom_rail := _box("BottomRail", Vector3(w, rail_h, rail_depth),
+		Vector3(cx, rail_h * 0.5, rail_depth * 0.5))
 	root.add_child(bottom_rail)
 
 	# Top rail
-	var top_rail := CSGBox3D.new()
-	top_rail.name = "TopRail"
-	top_rail.size = Vector3(cell_width, rail_h, depth * 1.2)
-	top_rail.position = Vector3(0, cell_height - rail_h * 0.5, depth * 0.6)
-	top_rail.material = mat
+	var top_rail := _box("TopRail", Vector3(w, rail_h, rail_depth),
+		Vector3(cx, h - rail_h * 0.5, rail_depth * 0.5))
 	root.add_child(top_rail)
 
-	# Balusters
+	# End posts
+	var left_post := _box("PostLeft", Vector3(post_w, h, rail_depth),
+		Vector3(post_w * 0.5, h * 0.5, rail_depth * 0.5))
+	root.add_child(left_post)
+
+	var right_post := _box("PostRight", Vector3(post_w, h, rail_depth),
+		Vector3(w - post_w * 0.5, h * 0.5, rail_depth * 0.5))
+	root.add_child(right_post)
+
+	# Balusters (tapered: wider at middle)
+	var baluster_h: float = h - rail_h * 2.0
+	var inner_w: float = w - post_w * 2.0
+	var spacing: float = inner_w / float(count + 1)
+	var baluster_r: float = spacing * 0.2
+
 	for i in range(count):
-		var bal := CSGCylinder3D.new()
-		bal.name = "Baluster_%d" % i
-		bal.radius = baluster_r
-		bal.height = baluster_h
-		bal.sides = 8
-		var x := -cell_width * 0.5 + spacing * 0.5 + float(i) * spacing
-		bal.position = Vector3(x, rail_h + baluster_h * 0.5, depth * 0.5)
-		bal.material = mat
+		var bx := post_w + spacing * float(i + 1)
+		var by := rail_h + baluster_h * 0.5
+
+		# Main baluster shaft (slightly tapered)
+		var bal := _cyl("Baluster_%d" % i, baluster_r, baluster_h,
+			Vector3(bx, by, rail_depth * 0.5), 8)
 		root.add_child(bal)
 
+		# Belly — wider middle portion
+		var belly := _cyl("Belly_%d" % i, baluster_r * 1.5, baluster_h * 0.25,
+			Vector3(bx, by, rail_depth * 0.5), 8)
+		root.add_child(belly)
+
 	return root
 
 
-## Plain wall: no additional geometry (wall shows through).
-static func plain_wall(_cell_width: float, _cell_height: float, _params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "PlainWall"
-	# No geometry — the base wall is visible
+## Plain wall: returns empty Node3D (wall surface shows through).
+static func plain_wall(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("PlainWall")
+	# Intentionally empty — the wall surface behind is the visual
 	return root
 
 
-# ─── CROWNING ELEMENTS ─────────────────────────────────────────────────────
+# ==========================================================================
+# CROWNS
+# ==========================================================================
 
-## Triangular pediment: classical gable.
-static func triangular_pediment(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "TriangularPediment"
+## Triangular pediment with oculus in tympanum.
+static func triangular_pediment(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("TriangularPediment")
+	var depth: float = p.get("depth", 0.08)
+	var peak_h: float = p.get("peak_height", h * 0.8)
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# Triangular cross-section via CSGPolygon3D
+	var profile := PackedVector2Array()
+	profile.append(Vector2(0.0, 0.0))           # Bottom-left
+	profile.append(Vector2(w, 0.0))              # Bottom-right
+	profile.append(Vector2(w * 0.5, peak_h))     # Peak
+	# Profile is in X-Y, extruded along local Z
 
-	var depth := cell_height * 0.3
-	var peak_h := cell_height * 0.7
+	var triangle := _polygon("Tympanum", profile, depth, Vector3(0.0, 0.0, 0.0))
+	root.add_child(triangle)
 
-	# Use CSGPolygon3D for the triangular cross-section
-	var polygon := CSGPolygon3D.new()
-	polygon.name = "PedimentShape"
-	var pts := PackedVector2Array([
-		Vector2(-cell_width * 0.5, 0),
-		Vector2(0, peak_h),
-		Vector2(cell_width * 0.5, 0),
-	])
-	polygon.polygon = pts
-	polygon.depth = depth
-	polygon.position = Vector3(0, cell_height * 0.1, 0)
-	polygon.material = mat
-	root.add_child(polygon)
-
-	# Cornice band at the base of the pediment
-	var cornice := CSGBox3D.new()
-	cornice.name = "PedimentCornice"
-	cornice.size = Vector3(cell_width * 1.05, cell_height * 0.12, depth * 1.1)
-	cornice.position = Vector3(0, cell_height * 0.06, depth * 0.5)
-	cornice.material = mat
+	# Cornice line along bottom
+	var cornice := _box("Cornice", Vector3(w * 1.05, h * 0.12, depth * 1.3),
+		Vector3(w * 0.5, h * 0.06, depth * 0.5))
 	root.add_child(cornice)
 
+	# Oculus — small cylinder in the center of the tympanum
+	var oculus_r := minf(w, peak_h) * 0.08
+	var oculus := _cyl("Oculus", oculus_r, depth * 2.0,
+		Vector3(w * 0.5, peak_h * 0.35, depth * 0.5), 16,
+		CSGShape3D.OPERATION_SUBTRACTION)
+	oculus.rotation_degrees.x = 90.0
+	root.add_child(oculus)
+
 	return root
 
 
-## Broken pediment: pediment with center gap and optional finial.
-static func broken_pediment(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "BrokenPediment"
+## Broken pediment: two halves with gap, finial/urn in center.
+static func broken_pediment(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("BrokenPediment")
+	var depth: float = p.get("depth", 0.08)
+	var peak_h: float = p.get("peak_height", h * 0.8)
+	var gap_w: float = w * 0.2
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# Left half triangle
+	var left_profile := PackedVector2Array()
+	left_profile.append(Vector2(0.0, 0.0))
+	left_profile.append(Vector2(w * 0.5 - gap_w * 0.5, 0.0))
+	left_profile.append(Vector2(w * 0.5 - gap_w * 0.5, peak_h * 0.7))
+	left_profile.append(Vector2(0.0, 0.0))  # back to origin via slope
 
-	var depth := cell_height * 0.3
-	var peak_h := cell_height * 0.65
-	var gap_w := cell_width * 0.25
+	# Simplified: use proper triangle slope
+	var left_profile2 := PackedVector2Array()
+	left_profile2.append(Vector2(0.0, 0.0))
+	left_profile2.append(Vector2(w * 0.5 - gap_w * 0.5, 0.0))
+	var left_peak_y := peak_h * (w * 0.5 - gap_w * 0.5) / (w * 0.5)
+	left_profile2.append(Vector2(w * 0.5 - gap_w * 0.5, left_peak_y))
 
-	# Left ramp
-	var left_poly := CSGPolygon3D.new()
-	left_poly.name = "LeftRamp"
-	var left_pts := PackedVector2Array([
-		Vector2(-cell_width * 0.5, 0),
-		Vector2(-gap_w * 0.5, peak_h * 0.8),
-		Vector2(-gap_w * 0.5, 0),
-	])
-	left_poly.polygon = left_pts
-	left_poly.depth = depth
-	left_poly.position = Vector3(0, cell_height * 0.1, 0)
-	left_poly.material = mat
-	root.add_child(left_poly)
+	var left_tri := _polygon("LeftHalf", left_profile2, depth, Vector3(0.0, 0.0, 0.0))
+	root.add_child(left_tri)
 
-	# Right ramp
-	var right_poly := CSGPolygon3D.new()
-	right_poly.name = "RightRamp"
-	var right_pts := PackedVector2Array([
-		Vector2(gap_w * 0.5, 0),
-		Vector2(gap_w * 0.5, peak_h * 0.8),
-		Vector2(cell_width * 0.5, 0),
-	])
-	right_poly.polygon = right_pts
-	right_poly.depth = depth
-	right_poly.position = Vector3(0, cell_height * 0.1, 0)
-	right_poly.material = mat
-	root.add_child(right_poly)
+	# Right half triangle (mirrored)
+	var right_start := w * 0.5 + gap_w * 0.5
+	var right_profile := PackedVector2Array()
+	right_profile.append(Vector2(right_start, left_peak_y))
+	right_profile.append(Vector2(right_start, 0.0))
+	right_profile.append(Vector2(w, 0.0))
 
-	# Center finial (decorative sphere/urn)
-	var finial := CSGCylinder3D.new()
-	finial.name = "Finial"
-	finial.radius = gap_w * 0.3
-	finial.height = peak_h * 0.4
-	finial.sides = 12
-	finial.position = Vector3(0, cell_height * 0.1 + peak_h * 0.9, depth * 0.5)
-	finial.material = mat
-	root.add_child(finial)
+	var right_tri := _polygon("RightHalf", right_profile, depth, Vector3(0.0, 0.0, 0.0))
+	root.add_child(right_tri)
 
-	# Base cornice band
-	var cornice := CSGBox3D.new()
-	cornice.name = "PedimentCornice"
-	cornice.size = Vector3(cell_width * 1.05, cell_height * 0.12, depth * 1.1)
-	cornice.position = Vector3(0, cell_height * 0.06, depth * 0.5)
-	cornice.material = mat
+	# Cornice along bottom
+	var cornice := _box("Cornice", Vector3(w * 1.05, h * 0.12, depth * 1.3),
+		Vector3(w * 0.5, h * 0.06, depth * 0.5))
 	root.add_child(cornice)
 
+	# Finial / urn in the gap
+	var finial_r := gap_w * 0.25
+	var finial_h := peak_h * 0.5
+
+	# Urn body
+	var urn_body := _cyl("UrnBody", finial_r, finial_h * 0.6,
+		Vector3(w * 0.5, left_peak_y + finial_h * 0.3, depth * 0.5), 12)
+	root.add_child(urn_body)
+
+	# Urn lip
+	var urn_lip := _cyl("UrnLip", finial_r * 1.3, finial_h * 0.1,
+		Vector3(w * 0.5, left_peak_y + finial_h * 0.65, depth * 0.5), 12)
+	root.add_child(urn_lip)
+
+	# Urn base
+	var urn_base := _box("UrnBase", Vector3(finial_r * 2.0, finial_h * 0.1, finial_r * 2.0),
+		Vector3(w * 0.5, left_peak_y - finial_h * 0.05, depth * 0.5))
+	root.add_child(urn_base)
+
 	return root
 
 
-# ─── ZONE MARKERS ──────────────────────────────────────────────────────────
+# ==========================================================================
+# ZONE PANELS
+# ==========================================================================
 
-## Plinth: stepped base at the bottom of the facade.
-static func plinth_element(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Plinth"
+## Plinth zone: stepped base, slightly wider than wall.
+static func plinth_zone(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("PlinthZone")
+	var overhang: float = p.get("overhang", 0.02)
+	var step_count: int = p.get("steps", 2)
+	var total_depth: float = p.get("depth", 0.04)
+	var cx := w * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.7, 0.65, 0.58))
-	var mat := FacadeMaterials.stone_material(color, 0.9)
-
-	var steps := 3
-	var step_h := cell_height / float(steps)
-	var max_depth := cell_height * 0.4
-
-	for i in range(steps):
-		var t := 1.0 - float(i) / float(steps)
-		var step := CSGBox3D.new()
-		step.name = "Step_%d" % i
-		step.size = Vector3(cell_width, step_h * 0.9, max_depth * t)
-		step.position = Vector3(0, float(i) * step_h + step_h * 0.5, step.size.z * 0.5)
-		step.material = mat
+	for i in range(step_count):
+		var t := float(i) / float(step_count)
+		var step_h := h / float(step_count)
+		var step_overhang := overhang * (1.0 - t)
+		var step_depth := total_depth * (1.0 - t * 0.3)
+		var step := _box("Step_%d" % i,
+			Vector3(w + step_overhang * 2.0, step_h, step_depth),
+			Vector3(cx, step_h * 0.5 + step_h * float(i), step_depth * 0.5))
 		root.add_child(step)
 
 	return root
 
 
-## Piano nobile zone marker: taller proportions signifier (decorative band).
-static func piano_nobile(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "PianoNobile"
-
-	var color: Color = _parse_color(params.get("color", ""), Color(0.85, 0.8, 0.72))
-	var mat := FacadeMaterials.stone_material(color)
-
-	# Subtle projecting band at top and bottom of zone
-	var band_h := cell_height * 0.06
-	var band_d := cell_height * 0.08
-
-	var top_band := CSGBox3D.new()
-	top_band.name = "TopBand"
-	top_band.size = Vector3(cell_width, band_h, band_d)
-	top_band.position = Vector3(0, cell_height - band_h * 0.5, band_d * 0.5)
-	top_band.material = mat
-	root.add_child(top_band)
-
-	var bottom_band := CSGBox3D.new()
-	bottom_band.name = "BottomBand"
-	bottom_band.size = Vector3(cell_width, band_h, band_d)
-	bottom_band.position = Vector3(0, band_h * 0.5, band_d * 0.5)
-	bottom_band.material = mat
-	root.add_child(bottom_band)
-
+## Piano nobile zone: empty Node3D (proportions handled by layout).
+static func piano_nobile_zone(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("PianoNobileZone")
+	# Intentionally empty — proportions and elements placed by the layout system
 	return root
 
 
-## Entablature: tripartite horizontal band (architrave + frieze + cornice).
-static func entablature(cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	var root := Node3D.new()
-	root.name = "Entablature"
+## Entablature zone: three stacked strips (architrave, frieze, cornice).
+static func entablature_zone(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("EntablatureZone")
+	var cx := w * 0.5
 
-	var color: Color = _parse_color(params.get("color", ""), Color(0.82, 0.76, 0.66))
-	var mat := FacadeMaterials.stone_material(color)
+	# Classical proportions: architrave ~40%, frieze ~30%, cornice ~30%
+	var arch_h := h * 0.4
+	var frieze_h := h * 0.3
+	var cornice_h := h * 0.3
 
-	var architrave_h := cell_height * 0.3
-	var frieze_h := cell_height * 0.4
-	var cornice_h := cell_height * 0.3
-	var depth := cell_height * 0.25
+	# Increasing projection from bottom to top
+	var arch_depth: float = p.get("architrave_depth", 0.02)
+	var frieze_depth: float = p.get("frieze_depth", 0.025)
+	var cornice_depth: float = p.get("cornice_depth", 0.05)
 
-	# Architrave (bottom band)
-	var architrave := CSGBox3D.new()
-	architrave.name = "Architrave"
-	architrave.size = Vector3(cell_width, architrave_h, depth * 0.8)
-	architrave.position = Vector3(0, architrave_h * 0.5, depth * 0.4)
-	architrave.material = mat
+	# Architrave — lowest band, minimal projection
+	var architrave := _box("Architrave", Vector3(w, arch_h, arch_depth),
+		Vector3(cx, arch_h * 0.5, arch_depth * 0.5))
 	root.add_child(architrave)
 
-	# Frieze (middle band — slightly recessed)
-	var frieze := CSGBox3D.new()
-	frieze.name = "Frieze"
-	frieze.size = Vector3(cell_width, frieze_h, depth * 0.6)
-	frieze.position = Vector3(0, architrave_h + frieze_h * 0.5, depth * 0.3)
-	frieze.material = mat
+	# Frieze — middle band, slightly more projection
+	var frieze := _box("Frieze", Vector3(w, frieze_h, frieze_depth),
+		Vector3(cx, arch_h + frieze_h * 0.5, frieze_depth * 0.5))
 	root.add_child(frieze)
 
-	# Cornice (top band — projecting)
-	var cornice := CSGBox3D.new()
-	cornice.name = "Cornice"
-	cornice.size = Vector3(cell_width * 1.05, cornice_h, depth * 1.2)
-	cornice.position = Vector3(0, architrave_h + frieze_h + cornice_h * 0.5, depth * 0.6)
-	cornice.material = mat
+	# Cornice — top band, most projection (with drip edge)
+	var cornice := _box("Cornice", Vector3(w + 0.02, cornice_h, cornice_depth),
+		Vector3(cx, arch_h + frieze_h + cornice_h * 0.5, cornice_depth * 0.5))
 	root.add_child(cornice)
 
 	return root
 
 
-# ─── ELEMENT FACTORY ──────────────────────────────────────────────────────
+# ==========================================================================
+# ELEMENT FACTORY
+# ==========================================================================
 
-## Generate the CSG element for a given element type ID.
-## Returns a Node3D containing the CSG assembly, or an empty Node3D for unknown types.
-static func create_element(element_type: String, cell_width: float, cell_height: float, params: Dictionary = {}) -> Node3D:
-	match element_type:
+## Look up and create a CSG element by name.
+## Returns a Node3D subtree, or an empty Node3D if unknown.
+static func create(element_name: String, w: float, h: float, p: Dictionary = {}) -> Node3D:
+	match element_name:
+		# Columns
 		"col_tuscan":
-			return col_tuscan(cell_width, cell_height, params)
+			return col_tuscan(w, h, p)
 		"col_doric":
-			return col_doric(cell_width, cell_height, params)
+			return col_doric(w, h, p)
 		"col_ionic":
-			return col_ionic(cell_width, cell_height, params)
+			return col_ionic(w, h, p)
 		"col_corinthian":
-			return col_corinthian(cell_width, cell_height, params)
+			return col_corinthian(w, h, p)
 		"pilaster":
-			return pilaster(cell_width, cell_height, params)
+			return pilaster(w, h, p)
+		# Openings
 		"rect_window":
-			return rect_window(cell_width, cell_height, params)
+			return rect_window(w, h, p)
 		"arched_window":
-			return arched_window(cell_width, cell_height, params)
+			return arched_window(w, h, p)
 		"door":
-			return door(cell_width, cell_height, params)
+			return door(w, h, p)
 		"arcade_arch":
-			return arcade_arch(cell_width, cell_height, params)
+			return arcade_arch(w, h, p)
+		# Bands & Cornices
 		"dentil":
-			return dentil(cell_width, cell_height, params)
+			return dentil(w, h, p)
 		"cyma_recta":
-			return cyma_recta(cell_width, cell_height, params)
+			return cyma_recta(w, h, p)
 		"string_course":
-			return string_course(cell_width, cell_height, params)
+			return string_course(w, h, p)
 		"fascia":
-			return fascia(cell_width, cell_height, params)
+			return fascia(w, h, p)
+		# Surfaces
 		"rusticated_block":
-			return rusticated_block(cell_width, cell_height, params)
+			return rusticated_block(w, h, p)
 		"balustrade":
-			return balustrade(cell_width, cell_height, params)
+			return balustrade(w, h, p)
 		"plain_wall":
-			return plain_wall(cell_width, cell_height, params)
+			return plain_wall(w, h, p)
+		# Crowns
 		"triangular_pediment":
-			return triangular_pediment(cell_width, cell_height, params)
+			return triangular_pediment(w, h, p)
 		"broken_pediment":
-			return broken_pediment(cell_width, cell_height, params)
-		"plinth":
-			return plinth_element(cell_width, cell_height, params)
-		"piano_nobile":
-			return piano_nobile(cell_width, cell_height, params)
-		"entablature":
-			return entablature(cell_width, cell_height, params)
+			return broken_pediment(w, h, p)
+		# Zone panels
+		"plinth_zone":
+			return plinth_zone(w, h, p)
+		"piano_nobile_zone":
+			return piano_nobile_zone(w, h, p)
+		"entablature_zone":
+			return entablature_zone(w, h, p)
 		_:
-			push_warning("CsgFacadeElements: Unknown element type '%s'" % element_type)
-			var empty := Node3D.new()
-			empty.name = "Unknown_%s" % element_type
-			return empty
+			push_warning("CSGFacadeElements: Unknown element '%s'" % element_name)
+			var fallback := Node3D.new()
+			fallback.name = "Unknown_%s" % element_name
+			return fallback
 
 
-# ─── HELPERS ───────────────────────────────────────────────────────────────
-
-## Parse a color from hex string or return default.
-static func _parse_color(hex: String, fallback: Color = Color(0.82, 0.76, 0.66)) -> Color:
-	if hex is String and hex.begins_with("#") and hex.length() >= 7:
-		return Color.html(hex)
-	return fallback
-
-
-## Add window/door frame strips around a void.
-static func _add_frame_strips(
-	parent: Node3D, void_w: float, void_h: float,
-	frame_w: float, frame_d: float, center: Vector3, mat: Material
-) -> void:
-	# Left strip
-	var left := CSGBox3D.new()
-	left.name = "FrameLeft"
-	left.size = Vector3(frame_w, void_h + frame_w * 2, frame_d)
-	left.position = center + Vector3(-void_w * 0.5 - frame_w * 0.5, 0, 0)
-	left.material = mat
-	parent.add_child(left)
-
-	# Right strip
-	var right := CSGBox3D.new()
-	right.name = "FrameRight"
-	right.size = Vector3(frame_w, void_h + frame_w * 2, frame_d)
-	right.position = center + Vector3(void_w * 0.5 + frame_w * 0.5, 0, 0)
-	right.material = mat
-	parent.add_child(right)
-
-	# Top strip
-	var top := CSGBox3D.new()
-	top.name = "FrameTop"
-	top.size = Vector3(void_w + frame_w * 2, frame_w, frame_d)
-	top.position = center + Vector3(0, void_h * 0.5 + frame_w * 0.5, 0)
-	top.material = mat
-	parent.add_child(top)
-
-	# Bottom strip
-	var bottom := CSGBox3D.new()
-	bottom.name = "FrameBottom"
-	bottom.size = Vector3(void_w + frame_w * 2, frame_w, frame_d)
-	bottom.position = center + Vector3(0, -void_h * 0.5 - frame_w * 0.5, 0)
-	bottom.material = mat
-	parent.add_child(bottom)
+## Get all available element names.
+static func get_element_names() -> PackedStringArray:
+	return PackedStringArray([
+		# Columns
+		"col_tuscan", "col_doric", "col_ionic", "col_corinthian", "pilaster",
+		# Openings
+		"rect_window", "arched_window", "door", "arcade_arch",
+		# Bands & Cornices
+		"dentil", "cyma_recta", "string_course", "fascia",
+		# Surfaces
+		"rusticated_block", "balustrade", "plain_wall",
+		# Crowns
+		"triangular_pediment", "broken_pediment",
+		# Zone panels
+		"plinth_zone", "piano_nobile_zone", "entablature_zone",
+	])
