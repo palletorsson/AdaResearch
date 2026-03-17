@@ -40,7 +40,8 @@ uniform float noise_distort : hint_range(0.0, 0.1) = 0.0;
 // 2 = quad_split: 4 triangles per cell (both diagonals, like an X)
 // 3 = diamond: 45° rotated square inscribed in cell (Victorian encaustic)
 // 4 = diagonal_split_alt: 2 triangles (top-right / bottom-left diagonal)
-uniform int tile_shape : hint_range(0, 4, 1) = 0;
+// 5 = tumbling_blocks: 3 rhombi per hex cell (Pompeii opus sectile 3D cubes)
+uniform int tile_shape : hint_range(0, 5, 1) = 0;
 
 // ── Aging & Weathering ──────────────────────────────────────────────
 // Simulates centuries of wear on Roman/Italian mosaics and textiles.
@@ -206,6 +207,35 @@ vec3 apply_tile_shape(vec2 local, int shape, int tile_x, int tile_y) {
 		} else {
 			return vec3(local, 1.0);
 		}
+	}
+
+	if (shape == 5) {
+		// Tumbling blocks: 3 rhombi forming a cube illusion
+		// Map square cell to hex-like coordinates, then split into 3 sectors at 120°
+		// Each sector = one face of the "cube" (top, left, right)
+		vec2 c = local - vec2(0.5);
+
+		// Offset every other row by half for hex packing
+		float row_offset = mod(float(tile_y), 2.0) * 0.5;
+		// Not needed in local coords, but helps with alignment
+
+		// Convert to angular sectors (3 sectors of 120°)
+		float angle = atan(c.y, c.x); // -PI to PI
+		// Shift so sectors align to cube faces
+		angle += 1.5707963; // +PI/2 so top face is centered at top
+		if (angle < 0.0) angle += 6.2831853;
+
+		// 3 sectors: 0-120° = top face, 120-240° = left face, 240-360° = right face
+		float sector = angle / 2.0943951; // divide by 2PI/3
+		float region;
+		if (sector < 1.0) {
+			region = 0.0; // top face (lightest)
+		} else if (sector < 2.0) {
+			region = 1.0; // left face (medium)
+		} else {
+			region = 2.0; // right face (darkest)
+		}
+		return vec3(local, region);
 	}
 
 	return vec3(local, 0.0);
@@ -472,6 +502,17 @@ void fragment() {
 		float cy = shape_local.y - 0.5;
 		float diamond_edge = abs(abs(cx) + abs(cy) - 0.5);
 		diag_dist = diamond_edge;
+	}
+	if (tile_shape == 5) {
+		// Tumbling blocks: 3 lines from center at 120° apart
+		vec2 c = shape_local - vec2(0.5);
+		// Distance to line at 90° (vertical from center): |x|
+		float d1 = abs(c.x);
+		// Distance to line at 210° (30° below horizontal-left)
+		float d2 = abs(c.x * 0.866 + c.y * 0.5);
+		// Distance to line at 330° (30° below horizontal-right)
+		float d3 = abs(-c.x * 0.866 + c.y * 0.5);
+		diag_dist = min(d1, min(d2, d3));
 	}
 
 	if (tile_shape > 0) {
