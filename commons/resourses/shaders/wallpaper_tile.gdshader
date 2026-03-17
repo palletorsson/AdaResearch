@@ -33,6 +33,15 @@ uniform float emission_strength : hint_range(0.0, 2.0) = 0.0;
 // Noise distortion for organic feel (opus vermiculatum style)
 uniform float noise_distort : hint_range(0.0, 0.1) = 0.0;
 
+// ── Tile Shape ──────────────────────────────────────────────────
+// Subdivides each square cell into geometric shapes before sampling.
+// 0 = square (default, no subdivision)
+// 1 = diagonal_split: 2 triangles per cell (top-left / bottom-right diagonal)
+// 2 = quad_split: 4 triangles per cell (both diagonals, like an X)
+// 3 = diamond: 45° rotated square inscribed in cell (Victorian encaustic)
+// 4 = diagonal_split_alt: 2 triangles (top-right / bottom-left diagonal)
+uniform int tile_shape : hint_range(0, 4, 1) = 0;
+
 // ── Aging & Weathering ──────────────────────────────────────────────
 // Simulates centuries of wear on Roman/Italian mosaics and textiles.
 // Each effect uses procedural noise to create natural-looking variation.
@@ -113,6 +122,93 @@ float voronoi_cracks(vec2 p) {
 	}
 	// Edge distance (thin lines where cells meet)
 	return second_dist - min_dist;
+}
+
+// ── Tile Shape Subdivision ───────────────────────────────────────
+// Subdivides the cell and returns a sub-region index (0-3) plus
+// remapped local coordinates. The sub-region index gets added to the
+// domain texture lookup, so different triangles can have different colors.
+//
+// Returns: vec3(remapped_x, remapped_y, sub_region_index)
+
+vec3 apply_tile_shape(vec2 local, int shape, int tile_x, int tile_y) {
+	if (shape == 0) {
+		// Square — no subdivision
+		return vec3(local, 0.0);
+	}
+
+	if (shape == 1) {
+		// Diagonal split: TL-BR diagonal → 2 triangles
+		// Triangle 0: above diagonal (local.y < local.x)
+		// Triangle 1: below diagonal (local.y >= local.x)
+		if (local.y < local.x) {
+			return vec3(local, 0.0);
+		} else {
+			return vec3(local, 1.0);
+		}
+	}
+
+	if (shape == 2) {
+		// Quad split: both diagonals → 4 triangles (X shape)
+		// Like Victorian encaustic — the heart of the Ballarat pattern
+		//   Triangle 0 (top):    y < x  AND  y < 1-x   → top wedge
+		//   Triangle 1 (right):  y < x  AND  y >= 1-x  → right wedge
+		//   Triangle 2 (bottom): y >= x AND  y >= 1-x  → bottom wedge
+		//   Triangle 3 (left):   y >= x AND  y < 1-x   → left wedge
+		bool above_main = local.y < local.x;        // above TL-BR diagonal
+		bool above_anti = local.y < (1.0 - local.x); // above TR-BL diagonal
+		float region;
+		if (above_main && above_anti) {
+			region = 0.0; // top
+		} else if (above_main && !above_anti) {
+			region = 1.0; // right
+		} else if (!above_main && !above_anti) {
+			region = 2.0; // bottom
+		} else {
+			region = 3.0; // left
+		}
+		return vec3(local, region);
+	}
+
+	if (shape == 3) {
+		// Diamond: 45° rotated square inscribed in the cell
+		// Manhattan distance from center determines inside vs outside
+		float cx = local.x - 0.5;
+		float cy = local.y - 0.5;
+		float manhattan = abs(cx) + abs(cy);
+		if (manhattan < 0.5) {
+			// Inside diamond — region 0, remap to fill [0,1]
+			vec2 remapped = vec2(cx + 0.5, cy + 0.5);
+			return vec3(remapped, 0.0);
+		} else {
+			// Outside diamond — in one of 4 corner triangles
+			// Use the same quad-split logic for the corners
+			bool above_main = local.y < local.x;
+			bool above_anti = local.y < (1.0 - local.x);
+			float region;
+			if (above_main && above_anti) {
+				region = 1.0; // top corner
+			} else if (above_main && !above_anti) {
+				region = 2.0; // right corner
+			} else if (!above_main && !above_anti) {
+				region = 3.0; // bottom corner
+			} else {
+				region = 4.0; // left corner (uses region 4 → wraps in domain)
+			}
+			return vec3(local, region);
+		}
+	}
+
+	if (shape == 4) {
+		// Diagonal split alt: TR-BL diagonal → 2 triangles
+		if (local.y < (1.0 - local.x)) {
+			return vec3(local, 0.0);
+		} else {
+			return vec3(local, 1.0);
+		}
+	}
+
+	return vec3(local, 0.0);
 }
 
 // -- Core: apply wallpaper group symmetry to get domain UV --
@@ -330,16 +426,59 @@ void fragment() {
 	// Get the symmetry-transformed UV within the domain
 	vec2 domain_uv = get_symmetric_uv(uv, wallpaper_group);
 
+	// Apply tile shape subdivision
+	vec2 st_shape = uv * tile_scale;
+	int shape_tx = int(floor(st_shape.x));
+	int shape_ty = int(floor(st_shape.y));
+	vec2 shape_local = fract(st_shape);
+	vec3 shape_result = apply_tile_shape(shape_local, tile_shape, shape_tx, shape_ty);
+	float sub_region = shape_result.z;
+
+	// Offset domain UV by sub-region to get different colors per triangle
+	// The offset shifts the lookup within the domain texture so each sub-region
+	// samples a different part of the color grid
+	vec2 region_offset = vec2(0.0);
+	if (tile_shape > 0 && sub_region > 0.0) {
+		// Shift by fraction of domain texture per sub-region
+		float domain_texel_size = 1.0 / max(textureSize(domain_texture, 0).x, 1);
+		region_offset = vec2(sub_region * domain_texel_size * 2.0, sub_region * domain_texel_size);
+		domain_uv = fract(domain_uv + region_offset);
+	}
+
 	// Sample the domain texture
 	vec3 color = texture(domain_texture, domain_uv).rgb;
 
 	// Grout lines at tile boundaries
 	float edge_dist = 1.0;
+	vec2 st_grout = uv * tile_scale;
+	vec2 f_grout = fract(st_grout);
+	vec2 d_grout = min(f_grout, 1.0 - f_grout);
+	edge_dist = min(d_grout.x, d_grout.y);
+
+	// Additional grout along diagonals for triangle shapes
+	float diag_dist = 1.0;
+	if (tile_shape == 1 || tile_shape == 2) {
+		// Distance to TL-BR diagonal: |x - y| / sqrt(2)
+		diag_dist = abs(shape_local.x - shape_local.y) * 0.7071;
+	}
+	if (tile_shape == 2 || tile_shape == 4) {
+		// Distance to TR-BL diagonal: |x + y - 1| / sqrt(2)
+		float anti_diag = abs(shape_local.x + shape_local.y - 1.0) * 0.7071;
+		diag_dist = min(diag_dist, anti_diag);
+	}
+	if (tile_shape == 3) {
+		// Diamond edges: manhattan distance boundary
+		float cx = shape_local.x - 0.5;
+		float cy = shape_local.y - 0.5;
+		float diamond_edge = abs(abs(cx) + abs(cy) - 0.5);
+		diag_dist = diamond_edge;
+	}
+
+	if (tile_shape > 0) {
+		edge_dist = min(edge_dist, diag_dist);
+	}
+
 	if (grout_width > 0.001) {
-		vec2 st = uv * tile_scale;
-		vec2 f = fract(st);
-		vec2 d = min(f, 1.0 - f);
-		edge_dist = min(d.x, d.y);
 		float grout_mask = 1.0 - smoothstep(grout_width - grout_softness, grout_width, edge_dist);
 		color = mix(color, grout_color, grout_mask);
 	}

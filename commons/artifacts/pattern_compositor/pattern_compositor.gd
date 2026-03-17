@@ -143,10 +143,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		elif g is float or g is int:
 			_override_group = clampi(int(g), 0, 16)
 
-	# Weathering overrides
+	# Weathering overrides (includes tile_shape)
 	for key in ["wear_amount", "dust_amount", "fade_amount", "crack_density",
 				"stain_amount", "chip_amount", "grout_width", "noise_distort",
-				"tile_scale"]:
+				"tile_scale", "tile_shape"]:
 		if config_data.has(key):
 			_override_weathering[key] = float(config_data[key])
 
@@ -335,6 +335,7 @@ func _create_zone_material(props: Dictionary) -> ShaderMaterial:
 	mat.set_shader_parameter("domain_texture", tex)
 	mat.set_shader_parameter("wallpaper_group", group_id)
 	mat.set_shader_parameter("tile_scale", t_scale)
+	mat.set_shader_parameter("tile_shape", int(_override_weathering.get("tile_shape", props.get("tile_shape", 0))))
 
 	# Merge weathering: zone props as base, web editor overrides on top
 	var grout_w := float(_override_weathering.get("grout_width", props.get("grout_width", 0.01)))
