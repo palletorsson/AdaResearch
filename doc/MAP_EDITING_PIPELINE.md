@@ -68,6 +68,25 @@ POST /api/game/generate
 Body: { topology, artifactTokens, complexity, dimensions, ... }
 ```
 
+### Option D: Map Pipeline Wizard (guided)
+
+`localhost:3003/map-pipeline` — 7-stage guided wizard that walks through map generation end-to-end:
+
+1. **Configure** — Choose sequence + map position, or manual topology (corridor, rooms-and-corridors, hub-spoke, maze, open-field, bridged-islands)
+2. **Dream** — Select artifacts from map-aware groups (highlights current map, dims others), AI theme clustering, manual search
+3. **Generate** — Runs the full pipeline:
+   - **Footprint** — Verify artifact footprints fit within map area
+   - **Walkability** — BFS flood-fill ensures player can reach all artifacts from spawn
+   - **Distribute** — Spatial fit scoring across 8 dimensions (staging, enclosure, clearance, view distance, directionality, sequence affinity, archetype bonus, rule bias)
+   - **Spatial Design** — Structure fixer carves alcoves/rooms for unplaced artifacts
+   - **Rules** — Placement rules modify structure around artifacts (pedestals, walls, clearance). See `doc/PLACEMENT_RULES.md`
+   - **Ordering** — Complexity gradient from spawn
+   - **Entropy** — Randomness tuning
+4. **Analyze** — Topology detection, coverage stats
+5. **Simulate** — AI pathfinding playthrough
+6. **Review** — Visual inspection
+7. **Export** — Download `map_data.json` or copy to clipboard
+
 ---
 
 ## Step 3: Validate

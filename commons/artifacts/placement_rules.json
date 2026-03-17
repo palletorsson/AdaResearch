@@ -1,0 +1,170 @@
+{
+  "schema": "adaresearch.placement_rules.v1",
+  "title": "Placement Rules",
+  "description": "Rules that modify structure around artifact positions during map generation. Each rule has conditions (matching artifact properties) and actions (structure modifications with probabilities).",
+  "exemptTokens": [
+    "dark_sphere",
+    "cube_scene"
+  ],
+  "rules": [
+    {
+      "id": "pedestal_compact",
+      "name": "Pedestal for compact artifacts",
+      "description": "Place compact artifacts on elevated tile (code 2) 60% of the time so players can see them at eye level.",
+      "condition": {
+        "size_group": ["compact"],
+        "interaction": ["observe", "manipulate", "grab"]
+      },
+      "actions": [
+        {
+          "type": "structure_modify",
+          "offset": [0, 0],
+          "value": 2,
+          "probability": 0.6,
+          "description": "Elevate the tile under the artifact"
+        }
+      ],
+      "priority": 10,
+      "enabled": true,
+      "source": "extracted",
+      "notes": "Pedestals create better visibility for small objects. Applies to all compact interaction types."
+    },
+    {
+      "id": "wall_behind_compact",
+      "name": "Wall behind small artifacts",
+      "description": "Place a wall (code 3) behind compact artifacts 50% of the time for visual framing. 'Behind' means row-1 (north) relative to player approach from spawn.",
+      "condition": {
+        "size_group": ["compact"],
+        "interaction": ["observe", "grab", "manipulate"]
+      },
+      "actions": [
+        {
+          "type": "structure_modify",
+          "offset": [-1, 0],
+          "value": 3,
+          "probability": 0.5,
+          "description": "Place dark wall behind artifact"
+        }
+      ],
+      "priority": 8,
+      "enabled": true,
+      "source": "extracted",
+      "notes": "From map analysis: 43% of artifacts have a wall directly north. This creates an alcove/backing effect."
+    },
+    {
+      "id": "alcove_grab",
+      "name": "Alcove framing for grab artifacts",
+      "description": "Frame grab artifacts with walls on three sides (behind + left + right) 30% of the time to create a niche/alcove effect.",
+      "condition": {
+        "size_group": ["compact"],
+        "interaction": ["grab"]
+      },
+      "actions": [
+        {
+          "type": "structure_modify",
+          "offset": [-1, 0],
+          "value": 2,
+          "probability": 0.3,
+          "description": "Wall behind"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [0, -1],
+          "value": 2,
+          "probability": 0.3,
+          "description": "Wall left"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [0, 1],
+          "value": 2,
+          "probability": 0.3,
+          "description": "Wall right"
+        }
+      ],
+      "priority": 6,
+      "enabled": true,
+      "source": "extracted",
+      "notes": "From map analysis: 71% of artifacts have at least one adjacent wall. Alcove pattern creates intimate interaction space."
+    },
+    {
+      "id": "clearance_manipulate",
+      "name": "Extra clearance for manipulate artifacts",
+      "description": "Ensure manipulate artifacts have at least 2 cells of floor around them by clearing adjacent walls.",
+      "condition": {
+        "size_group": ["compact", "room_scale"],
+        "interaction": ["manipulate"]
+      },
+      "actions": [
+        {
+          "type": "structure_modify",
+          "offset": [1, 0],
+          "value": 1,
+          "probability": 0.9,
+          "description": "Clear floor in front"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [0, -1],
+          "value": 1,
+          "probability": 0.8,
+          "description": "Clear floor left"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [0, 1],
+          "value": 1,
+          "probability": 0.8,
+          "description": "Clear floor right"
+        }
+      ],
+      "priority": 12,
+      "enabled": true,
+      "source": "manual",
+      "notes": "Manipulate artifacts need space for player movement during interaction."
+    },
+    {
+      "id": "elevated_room_scale",
+      "name": "Raised platform for room-scale artifacts",
+      "description": "Place room-scale artifacts on a small elevated platform (2x2 or 3x3 of code 4) 40% of the time.",
+      "condition": {
+        "size_group": ["room_scale"],
+        "interaction": ["observe", "manipulate"]
+      },
+      "actions": [
+        {
+          "type": "structure_modify",
+          "offset": [0, 0],
+          "value": 4,
+          "probability": 0.4,
+          "description": "Elevate center"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [0, 1],
+          "value": 4,
+          "probability": 0.4,
+          "description": "Elevate right"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [1, 0],
+          "value": 4,
+          "probability": 0.4,
+          "description": "Elevate front"
+        },
+        {
+          "type": "structure_modify",
+          "offset": [1, 1],
+          "value": 4,
+          "probability": 0.4,
+          "description": "Elevate front-right"
+        }
+      ],
+      "priority": 7,
+      "enabled": true,
+      "source": "manual",
+      "notes": "Creates a raised stage effect for larger artifacts. Uses amber code 4 (decorative elevation)."
+    }
+  ]
+}
