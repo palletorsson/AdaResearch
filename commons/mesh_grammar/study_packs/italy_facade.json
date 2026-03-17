@@ -121,18 +121,29 @@
 	},
 	"presets": {
 		"villa_san_michele": {
-			"display": "Villa San Michele, Capri",
-			"description": "Open loggia with columns, arched openings, Mediterranean proportions",
+			"display": "Villa San Michele, Anacapri",
+			"description": "Asymmetric Mediterranean villa with open loggia arcade on Tuscan columns, plain white upper walls, flat roofline. Based on Axel Munthe's villa as depicted in Bengt Böckman's 1992 watercolor.",
 			"bays": 7,
-			"symmetry": "bilateral",
-			"order": "ionic",
+			"symmetry": "none",
+			"order": "tuscan",
 			"zones": [
-				{ "template": "plinth" },
-				{ "template": "arcade", "height_fraction": 0.45 },
-				{ "template": "entablature" },
-				{ "template": "attic", "height_fraction": 0.05 }
+				{ "template": "plinth", "height_fraction": 0.05 },
+				{ "template": "arcade", "height_fraction": 0.40 },
+				{ "template": "upper_story", "height_fraction": 0.25, "elements": ["opening_rectangular"], "material": "plaster" },
+				{ "template": "entablature", "height_fraction": 0.05 }
 			],
-			"bay_pattern": [0.12, 0.14, 0.14, 0.2, 0.14, 0.14, 0.12]
+			"bay_pattern": [0.10, 0.10, 0.16, 0.16, 0.16, 0.10, 0.10, 0.12],
+			"notes": {
+				"character": "Organic, asymmetric Mediterranean — NOT a classical palazzo",
+				"arcade_bays": "Arches in bays 2-4, Tuscan columns flanking",
+				"upper_windows": "Small rectangular windows with green shutters (persiane), irregularly placed",
+				"colors": {
+					"upper_wall": "#f5f0e8",
+					"arcade_stone": "#d4c5a9",
+					"plinth": "#b8ae9e",
+					"shutters": "#4a6741"
+				}
+			}
 		},
 		"certosa_di_san_giacomo": {
 			"display": "Certosa di San Giacomo, Capri",
