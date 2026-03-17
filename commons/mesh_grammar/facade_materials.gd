@@ -100,35 +100,35 @@ static func from_zone(zone_name: String, zone_color: String = "") -> Material:
 
 	match zone_name:
 		"stone_base":
-			var c := color_override if has_override else Color(0.55, 0.52, 0.47)
+			var c: Color = color_override if has_override else Color(0.55, 0.52, 0.47)
 			return stone(c, 0.9)
 		"rusticated_stone":
-			var c := color_override if has_override else Color(0.66, 0.62, 0.56)
+			var c: Color = color_override if has_override else Color(0.66, 0.62, 0.56)
 			return stone(c, 0.95)
 		"dressed_stone":
-			var c := color_override if has_override else Color(0.77, 0.72, 0.66)
+			var c: Color = color_override if has_override else Color(0.77, 0.72, 0.66)
 			return stone(c, 0.8)
 		"stone_cornice":
-			var c := color_override if has_override else Color(0.83, 0.78, 0.72)
+			var c: Color = color_override if has_override else Color(0.83, 0.78, 0.72)
 			return stone(c, 0.75)
 		"stone":
-			var c := color_override if has_override else Color(0.72, 0.68, 0.62)
+			var c: Color = color_override if has_override else Color(0.72, 0.68, 0.62)
 			return stone(c, 0.85)
 		"plaster":
-			var c := color_override if has_override else Color(0.91, 0.88, 0.82)
+			var c: Color = color_override if has_override else Color(0.91, 0.88, 0.82)
 			return plaster(c, 0.7)
 		"decorated":
-			var c := color_override if has_override else Color(0.83, 0.77, 0.66)
+			var c: Color = color_override if has_override else Color(0.83, 0.77, 0.66)
 			return plaster(c, 0.6)
 		"marble":
 			if has_override:
 				return marble(color_override, color_override.darkened(0.5))
 			return marble()
 		"wood":
-			var c := color_override if has_override else Color(0.45, 0.32, 0.2)
+			var c: Color = color_override if has_override else Color(0.45, 0.32, 0.2)
 			return wood(c)
 		"metal":
-			var c := color_override if has_override else Color(0.3, 0.3, 0.32)
+			var c: Color = color_override if has_override else Color(0.3, 0.3, 0.32)
 			return metal(c)
 		_:
 			# Fallback: generic stone with optional color

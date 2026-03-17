@@ -118,7 +118,7 @@ static func import_from_dict(data: Dictionary) -> Node3D:
 				row_y_bottoms[row] + row_heights[row] * 0.5,
 				WALL_DEPTH * 0.5 + 0.006  # Slightly in front of wall
 			)
-			zone_bg.material = FacadeMaterials.stone_material(
+			zone_bg.material = FacadeMaterials.stone(
 				Color.html(zone_color_hex), 0.8
 			)
 			zone_container.add_child(zone_bg)
@@ -141,7 +141,7 @@ static func import_from_dict(data: Dictionary) -> Node3D:
 		if element_type == "" or element_type == "plain_wall":
 			continue
 
-		var ch := row_heights[row] if row < row_heights.size() else (total_height / float(stories))
+		var ch: float = row_heights[row] if row < row_heights.size() else (total_height / float(stories))
 
 		# Build element params
 		var elem_params := {
@@ -157,8 +157,8 @@ static func import_from_dict(data: Dictionary) -> Node3D:
 		elif secondary_color != "":
 			elem_params["color"] = secondary_color
 
-		# Generate the CSG element via CsgFacadeElements dispatcher
-		var element_node := CsgFacadeElements.create_element(element_type, cell_width, ch, elem_params)
+		# Generate the CSG element via CSGFacadeElements dispatcher
+		var element_node := CSGFacadeElements.create(element_type, cell_width, ch, elem_params)
 
 		# Position: cell center X, cell bottom Y, slightly in front of wall
 		var cell_x := float(col) * cell_width + cell_width * 0.5
@@ -249,7 +249,7 @@ static func _create_base_wall(width: float, height: float, depth: float, color_h
 	if color_hex.begins_with("#"):
 		color = Color.html(color_hex)
 
-	wall.material = FacadeMaterials.stone_material(color)
+	wall.material = FacadeMaterials.stone(color)
 	return wall
 
 

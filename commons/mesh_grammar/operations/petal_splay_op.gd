@@ -75,7 +75,7 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 				var w: float = width * sin(PI * t) if t > 0.0 else width * 0.3
 				# Slight twist
 				var twist_angle: float = twist_amount * t
-				var side := (petal_right * cos(twist_angle) + petal_up.cross(petal_right).normalized() * sin(twist_angle)) if twist_amount != 0.0 else petal_right
+				var side: Vector3 = (petal_right * cos(twist_angle) + petal_up.cross(petal_right).normalized() * sin(twist_angle)) if twist_amount != 0.0 else petal_right
 
 				var left_pos := center_pos - side * w * 0.5
 				var right_pos := center_pos + side * w * 0.5

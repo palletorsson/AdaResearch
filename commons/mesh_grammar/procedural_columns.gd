@@ -621,8 +621,12 @@ static func profile_column(w: float, h: float, params: Dictionary = {}) -> Node3
 	root.add_child(shaft)
 
 	# Cap the top and bottom if the profile doesn't close to zero radius
-	var bottom_r := profile[0].x * radius if profile.size() > 0 else radius
-	var top_r := profile[profile.size() - 1].x * radius if profile.size() > 0 else radius
+	var bottom_r: float = radius
+	if profile.size() > 0:
+		bottom_r = profile[0].x * radius
+	var top_r: float = radius
+	if profile.size() > 0:
+		top_r = profile[profile.size() - 1].x * radius
 
 	if bottom_r > 0.01:
 		var bottom_cap := _disk_mesh(bottom_r, base_height, segments, material, false)

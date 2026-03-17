@@ -486,13 +486,13 @@ func _st_quad(st: SurfaceTool, normal: Vector3, v0: Vector3, v1: Vector3, v2: Ve
 func _build_column(ratio: float, capital_fraction: float, taper: float) -> void:
 	var col_width := element_width
 	var col_height := element_height
-	var actual_taper := _taper if _taper != 0.85 else taper
+	var actual_taper: float = _taper if _taper != 0.85 else taper
 	_add_column_with_capital(Vector3(0, 0, 0), col_width, col_height, actual_taper, _order, 1.0, primary_color)
 
 
 func _build_pilaster() -> void:
-	var depth := element_depth if element_depth != 0.2 else 0.08
-	var pilaster_taper := _taper if _taper != 0.85 else 0.95
+	var depth: float = element_depth if element_depth != 0.2 else 0.08
+	var pilaster_taper: float = _taper if _taper != 0.85 else 0.95
 	_add_column_with_capital(Vector3(0, 0, 0), element_width, element_height, pilaster_taper, _order, depth / (element_width * 0.5), primary_color)
 
 
@@ -634,8 +634,8 @@ func _build_rusticated_block() -> void:
 			var x := -w * 0.5 + gap + block_w * 0.5 + float(col) * (block_w + gap)
 			var y := -h * 0.5 + gap + block_h * 0.5 + float(row) * (block_h + gap)
 			# Alternate extrusion depth for rustication effect
-			var offset_z := d * 0.5 if (row + col) % 2 == 0 else d * 0.3
-			var block_color := primary_color if (row + col) % 2 == 0 else primary_color.darkened(0.05)
+			var offset_z: float = d * 0.5 if (row + col) % 2 == 0 else d * 0.3
+			var block_color: Color = primary_color if (row + col) % 2 == 0 else primary_color.darkened(0.05)
 			_add_box(Vector3(x, y, offset_z), Vector3(block_w, block_h, d), block_color)
 
 
@@ -686,7 +686,7 @@ func _build_triangular_pediment() -> void:
 	var peak_y := base_y + peak_h
 
 	# If broken pediment, leave gap at apex
-	var gap_w := w * 0.15 if _broken else 0.0
+	var gap_w: float = w * 0.15 if _broken else 0.0
 
 	if _broken:
 		# Left slope - front

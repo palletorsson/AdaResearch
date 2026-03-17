@@ -64,7 +64,7 @@ func _setup_environment() -> void:
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.4, 0.38, 0.35)
 	env.ambient_light_energy = 0.3
-	env.tonemap_mode = Environment.TONE_MAP_ACES
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	var world_env := WorldEnvironment.new()
 	world_env.name = "WorldEnvironment"
 	world_env.environment = env
@@ -77,7 +77,7 @@ func _create_row_1() -> void:
 	var row_z := 0.0
 
 	for i in range(types.size()):
-		var col_type := types[i]
+		var col_type: String = types[i]
 		var x := float(i) * SPACING
 		var params := {}
 
