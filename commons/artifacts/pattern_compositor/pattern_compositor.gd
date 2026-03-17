@@ -10,6 +10,12 @@
 ##   tile_size        – world size per tile in meters (default 0.5)
 ##   surface          – "floor" or "wall" (default "floor")
 ##   emission_strength – emission for visibility (default 0.8)
+##
+## Web editor override keys (from ada_encyclopedia):
+##   domain           – 2D array of color indices (overrides procedural generation)
+##   domain_size      – size of domain grid
+##   palette          – array of hex color strings (e.g. ["#ff0000", "#00ff00"])
+##   group            – wallpaper group name (e.g. "P6M") or int index
 
 extends Node3D
 class_name PatternCompositor
@@ -29,6 +35,21 @@ const WALLPAPER_SHADER = preload("res://commons/resourses/shaders/wallpaper_tile
 var _composition
 var _tile_count: int = 0
 var _rng := RandomNumberGenerator.new()
+
+# Web editor overrides — when set, all tiles use these instead of zone defaults
+var _override_domain: Array = []       # Flat or 2D array of color indices
+var _override_domain_size: int = 0     # Width/height of override domain
+var _override_palette: Array = []      # Array of Color values from hex strings
+var _override_group: int = -1          # Wallpaper group index (-1 = no override)
+var _override_weathering: Dictionary = {}  # wear_amount, dust_amount, etc.
+
+# Wallpaper group name → shader index
+const GROUP_NAME_TO_INDEX: Dictionary = {
+	"P1": 0, "P2": 1, "PM": 2, "PG": 3, "CM": 4,
+	"PMM": 5, "PMG": 6, "PGG": 7, "CMM": 8,
+	"P4": 9, "P4M": 10, "P4G": 11,
+	"P3": 12, "P3M1": 13, "P31M": 14, "P6": 15, "P6M": 16,
+}
 
 # Neon palettes: [background, primary, secondary, accent1, accent2]
 const PALETTES: Array = [
@@ -94,6 +115,40 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		emission_strength = clampf(float(config_data["emission_strength"]), 0.0, 5.0)
 	if config_data.has("tiling"):
 		tiling = str(config_data["tiling"])
+
+	# Web editor overrides — domain, palette, group from ada_encyclopedia
+	if config_data.has("domain") and config_data["domain"] is Array:
+		var raw_domain = config_data["domain"]
+		_override_domain_size = int(config_data.get("domain_size", 0))
+		# Flatten 2D array to 1D if needed
+		if raw_domain.size() > 0 and raw_domain[0] is Array:
+			_override_domain = []
+			_override_domain_size = raw_domain.size() if _override_domain_size == 0 else _override_domain_size
+			for row in raw_domain:
+				_override_domain.append_array(row)
+		else:
+			_override_domain = raw_domain
+			if _override_domain_size == 0:
+				_override_domain_size = int(sqrt(_override_domain.size()))
+
+	if config_data.has("palette") and config_data["palette"] is Array:
+		_override_palette = []
+		for hex_str in config_data["palette"]:
+			_override_palette.append(_hex_to_color(str(hex_str)))
+
+	if config_data.has("group"):
+		var g = config_data["group"]
+		if g is String and GROUP_NAME_TO_INDEX.has(g):
+			_override_group = GROUP_NAME_TO_INDEX[g]
+		elif g is float or g is int:
+			_override_group = clampi(int(g), 0, 16)
+
+	# Weathering overrides
+	for key in ["wear_amount", "dust_amount", "fade_amount", "crack_density",
+				"stain_amount", "chip_amount", "grout_width", "noise_distort",
+				"tile_scale"]:
+		if config_data.has(key):
+			_override_weathering[key] = float(config_data[key])
 
 func _build_composition() -> void:
 	# Try art history presets first, then basic presets
@@ -231,6 +286,15 @@ func _get_zone_pattern(zone) -> Dictionary:
 
 	return props
 
+func _hex_to_color(hex: String) -> Color:
+	var h := hex.strip_edges().replace("#", "")
+	if h.length() == 6:
+		var r := float(("0x" + h.substr(0, 2)).hex_to_int()) / 255.0
+		var g := float(("0x" + h.substr(2, 2)).hex_to_int()) / 255.0
+		var b := float(("0x" + h.substr(4, 2)).hex_to_int()) / 255.0
+		return Color(r, g, b)
+	return Color.WHITE
+
 func _create_zone_material(props: Dictionary) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
 	mat.shader = WALLPAPER_SHADER
@@ -240,32 +304,60 @@ func _create_zone_material(props: Dictionary) -> ShaderMaterial:
 	var seed_val: int = int(props.get("seed", 1))
 	var t_scale: float = float(props.get("tile_scale", 5.0))
 
+	# Check for web editor overrides
+	var use_override := _override_domain.size() > 0 and _override_palette.size() > 0
+
+	if use_override:
+		if _override_group >= 0:
+			group_id = _override_group
+		t_scale = float(_override_weathering.get("tile_scale", t_scale))
+
 	# Generate domain texture
-	var palette: Array = PALETTES[palette_idx]
-	var domain := _generate_domain(seed_val)
-	var img := Image.create(8, 8, false, Image.FORMAT_RGBA8)
-	for y in 8:
-		for x in 8:
-			var idx: int = domain[y * 8 + x]
-			var color: Color = palette[idx] if idx < palette.size() else Color.WHITE
+	var palette: Array = _override_palette if use_override else PALETTES[palette_idx]
+	var domain_flat: Array
+	var domain_size: int
+	if use_override:
+		domain_flat = _override_domain
+		domain_size = _override_domain_size
+	else:
+		domain_flat = _generate_domain(seed_val)
+		domain_size = 8
+
+	var img := Image.create(domain_size, domain_size, false, Image.FORMAT_RGBA8)
+	for y in domain_size:
+		for x in domain_size:
+			var flat_idx := y * domain_size + x
+			var color_idx: int = int(domain_flat[flat_idx]) if flat_idx < domain_flat.size() else 0
+			var color: Color = palette[color_idx] if color_idx < palette.size() else Color.WHITE
 			img.set_pixel(x, y, color)
 	var tex := ImageTexture.create_from_image(img)
 
 	mat.set_shader_parameter("domain_texture", tex)
 	mat.set_shader_parameter("wallpaper_group", group_id)
 	mat.set_shader_parameter("tile_scale", t_scale)
-	mat.set_shader_parameter("grout_width", float(props.get("grout_width", 0.01)))
+
+	# Merge weathering: zone props as base, web editor overrides on top
+	var grout_w := float(_override_weathering.get("grout_width", props.get("grout_width", 0.01)))
+	var noise_d := float(_override_weathering.get("noise_distort", props.get("noise_distort", 0.0)))
+	var wear_a := float(_override_weathering.get("wear_amount", props.get("wear_amount", 0.0)))
+	var dust_a := float(_override_weathering.get("dust_amount", props.get("dust_amount", 0.0)))
+	var fade_a := float(_override_weathering.get("fade_amount", props.get("fade_amount", 0.0)))
+	var crack_d := float(_override_weathering.get("crack_density", props.get("crack_density", 0.0)))
+	var stain_a := float(_override_weathering.get("stain_amount", props.get("stain_amount", 0.0)))
+	var chip_a := float(_override_weathering.get("chip_amount", props.get("chip_amount", 0.0)))
+
+	mat.set_shader_parameter("grout_width", grout_w)
 	mat.set_shader_parameter("grout_color", Vector3(0.05, 0.05, 0.06))
-	mat.set_shader_parameter("noise_distort", float(props.get("noise_distort", 0.0)))
+	mat.set_shader_parameter("noise_distort", noise_d)
 	mat.set_shader_parameter("emission_strength", emission_strength)
 	mat.set_shader_parameter("metallic", float(props.get("metallic", 0.0)))
 	mat.set_shader_parameter("roughness", float(props.get("roughness", 0.8)))
-	mat.set_shader_parameter("wear_amount", float(props.get("wear_amount", 0.0)))
-	mat.set_shader_parameter("dust_amount", float(props.get("dust_amount", 0.0)))
-	mat.set_shader_parameter("fade_amount", float(props.get("fade_amount", 0.0)))
-	mat.set_shader_parameter("crack_density", float(props.get("crack_density", 0.0)))
-	mat.set_shader_parameter("stain_amount", float(props.get("stain_amount", 0.0)))
-	mat.set_shader_parameter("chip_amount", float(props.get("chip_amount", 0.0)))
+	mat.set_shader_parameter("wear_amount", wear_a)
+	mat.set_shader_parameter("dust_amount", dust_a)
+	mat.set_shader_parameter("fade_amount", fade_a)
+	mat.set_shader_parameter("crack_density", crack_d)
+	mat.set_shader_parameter("stain_amount", stain_a)
+	mat.set_shader_parameter("chip_amount", chip_a)
 
 	return mat
 
