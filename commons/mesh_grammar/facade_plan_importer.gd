@@ -9,12 +9,18 @@ extends RefCounted
 ## - FacadeGrammar uses MeshData for the procedural grammar pipeline
 ##
 ## Usage:
-##   var facade := FacadePlanImporter.import_plan("res://path/to/facade_plan.json")
+##   var facade := FacadePlanImporter.import_from_file("res://path/to/plan.json")
 ##   add_child(facade)
+##
+##   var facade2 := FacadePlanImporter.import_from_dict(my_dict)
+##   add_child(facade2)
 
 
-## Zone height multipliers matching the web editor.
-const ZONE_HEIGHT_MULTIPLIERS := {
+## Default wall depth for the base CSGBox3D slab.
+const WALL_DEPTH := 0.25
+
+## Default zone height multipliers (fallback when zones lack height_multiplier).
+const DEFAULT_ZONE_MULTIPLIERS := {
 	"Cornice": 0.5,
 	"Upper": 1.0,
 	"Piano Nobile": 1.4,
@@ -23,20 +29,17 @@ const ZONE_HEIGHT_MULTIPLIERS := {
 }
 
 
-## Import a facade plan JSON file and build the 3D scene.
-## Returns a Node3D containing the complete CSG facade.
-static func import_plan(json_path: String) -> Node3D:
+## Import from a file path. Returns the assembled Node3D.
+static func import_from_file(json_path: String) -> Node3D:
 	var data := _load_json(json_path)
 	if data.is_empty():
 		push_error("FacadePlanImporter: Failed to load plan from '%s'" % json_path)
-		return Node3D.new()
+		return _empty_facade("EmptyFacade")
+	return import_from_dict(data)
 
-	return build_from_dict(data)
 
-
-## Build a facade from an already-parsed Dictionary.
-## Useful when the JSON is loaded externally or constructed programmatically.
-static func build_from_dict(data: Dictionary) -> Node3D:
+## Import from a Dictionary (already parsed JSON). Returns Node3D.
+static func import_from_dict(data: Dictionary) -> Node3D:
 	# Validate version
 	var version: int = data.get("version", 0) as int
 	if version != 1:
@@ -47,7 +50,7 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 	var placements_data: Array = data.get("placements", [])
 	var zone_colors: Dictionary = data.get("zone_colors", {})
 
-	# Extract facade dimensions
+	# ── Extract facade dimensions ──
 	var bays: int = facade_data.get("bays", 5) as int
 	var stories: int = facade_data.get("stories", 5) as int
 	var total_width: float = facade_data.get("total_width", 15.0) as float
@@ -55,18 +58,19 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 	var primary_color: String = str(facade_data.get("primary_color", "#d4c5a9"))
 	var secondary_color: String = str(facade_data.get("secondary_color", "#8d8d8d"))
 
-	# Build the scene
 	var root := Node3D.new()
 	root.name = "FacadePlan"
 
-	# ── Compute row heights ──
+	# ── Build zone map and compute row heights ──
 	var zone_for_row := _build_zone_map(zones_data)
+	var zone_multipliers := _build_zone_multiplier_map(zones_data)
 	var row_heights: Array[float] = []
 	var raw_total := 0.0
 
 	for r in range(stories):
 		var zone_name: String = zone_for_row.get(r, "")
-		var mult: float = ZONE_HEIGHT_MULTIPLIERS.get(zone_name, 1.0) as float
+		# Prefer multiplier from JSON, fall back to defaults
+		var mult: float = zone_multipliers.get(r, DEFAULT_ZONE_MULTIPLIERS.get(zone_name, 1.0))
 		row_heights.append(mult)
 		raw_total += mult
 
@@ -75,15 +79,12 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		for i in range(row_heights.size()):
 			row_heights[i] = (row_heights[i] / raw_total) * total_height
 
-	# Cumulative Y offsets (row 0 = top of facade, so we go top-down)
-	# In 3D: row 0 is at the TOP, row stories-1 is at the BOTTOM
+	# ── Cumulative Y offsets ──
+	# Row 0 is at the TOP of the facade, row (stories-1) is at the BOTTOM.
+	# In world space: bottom of facade = y=0, top = y=total_height.
 	var row_y_bottoms: Array[float] = []
+	row_y_bottoms.resize(stories)
 	var cum_y := 0.0
-	for r in range(stories):
-		# Row 0 starts at the top
-		row_y_bottoms.append(0.0)  # placeholder
-	# Compute from bottom up: row (stories-1) starts at y=0
-	cum_y = 0.0
 	for r in range(stories - 1, -1, -1):
 		row_y_bottoms[r] = cum_y
 		cum_y += row_heights[r]
@@ -91,10 +92,10 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 	var cell_width := total_width / float(bays)
 
 	# ── Base wall ──
-	var wall := _create_base_wall(total_width, total_height, 0.25, primary_color)
+	var wall := _create_base_wall(total_width, total_height, WALL_DEPTH, primary_color)
 	root.add_child(wall)
 
-	# ── Zone backgrounds ──
+	# ── Zone background overlays ──
 	var zone_container := Node3D.new()
 	zone_container.name = "Zones"
 	root.add_child(zone_container)
@@ -115,7 +116,7 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 			zone_bg.position = Vector3(
 				total_width * 0.5,
 				row_y_bottoms[row] + row_heights[row] * 0.5,
-				0.126  # Slightly in front of wall
+				WALL_DEPTH * 0.5 + 0.006  # Slightly in front of wall
 			)
 			zone_bg.material = FacadeMaterials.stone_material(
 				Color.html(zone_color_hex), 0.8
@@ -146,7 +147,7 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		var elem_params := {
 			"col": col,
 			"row": row,
-			"wall_depth": 0.25,
+			"wall_depth": WALL_DEPTH,
 		}
 
 		# Pass zone color as element color hint
@@ -156,13 +157,13 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		elif secondary_color != "":
 			elem_params["color"] = secondary_color
 
-		# Generate the CSG element
+		# Generate the CSG element via CsgFacadeElements dispatcher
 		var element_node := CsgFacadeElements.create_element(element_type, cell_width, ch, elem_params)
 
-		# Position: cell origin at bottom-left of the cell
+		# Position: cell center X, cell bottom Y, slightly in front of wall
 		var cell_x := float(col) * cell_width + cell_width * 0.5
 		var cell_y := row_y_bottoms[row]
-		element_node.position = Vector3(cell_x, cell_y, 0.125)
+		element_node.position = Vector3(cell_x, cell_y, WALL_DEPTH * 0.5)
 		element_node.name = "%s_c%d_r%d" % [element_type, col, row]
 		elements_container.add_child(element_node)
 
@@ -173,7 +174,18 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 	return root
 
 
+## Legacy alias — kept for backwards compatibility.
+static func import_plan(json_path: String) -> Node3D:
+	return import_from_file(json_path)
+
+
+## Legacy alias — kept for backwards compatibility.
+static func build_from_dict(data: Dictionary) -> Node3D:
+	return import_from_dict(data)
+
+
 # ─── INTERNAL HELPERS ──────────────────────────────────────────────────────
+
 
 ## Load and parse a JSON file.
 static func _load_json(path: String) -> Dictionary:
@@ -208,9 +220,20 @@ static func _build_zone_map(zones_data: Array) -> Dictionary:
 	for entry in zones_data:
 		if entry is Dictionary:
 			var row: int = entry.get("row", -1) as int
-			var name: String = str(entry.get("name", ""))
-			if row >= 0 and name != "":
-				result[row] = name
+			var zname: String = str(entry.get("name", ""))
+			if row >= 0 and zname != "":
+				result[row] = zname
+	return result
+
+
+## Build a map from row index → height_multiplier (read from JSON data).
+static func _build_zone_multiplier_map(zones_data: Array) -> Dictionary:
+	var result := {}
+	for entry in zones_data:
+		if entry is Dictionary:
+			var row: int = entry.get("row", -1) as int
+			if row >= 0 and entry.has("height_multiplier"):
+				result[row] = float(entry["height_multiplier"])
 	return result
 
 
@@ -219,7 +242,8 @@ static func _create_base_wall(width: float, height: float, depth: float, color_h
 	var wall := CSGBox3D.new()
 	wall.name = "BaseWall"
 	wall.size = Vector3(width, height, depth)
-	wall.position = Vector3(width * 0.5, height * 0.5, 0)
+	# Center the wall so that bottom-left is at the origin
+	wall.position = Vector3(width * 0.5, height * 0.5, 0.0)
 
 	var color := Color(0.83, 0.77, 0.66)
 	if color_hex.begins_with("#"):
@@ -227,3 +251,10 @@ static func _create_base_wall(width: float, height: float, depth: float, color_h
 
 	wall.material = FacadeMaterials.stone_material(color)
 	return wall
+
+
+## Return an empty placeholder Node3D with a given name.
+static func _empty_facade(node_name: String) -> Node3D:
+	var n := Node3D.new()
+	n.name = node_name
+	return n
