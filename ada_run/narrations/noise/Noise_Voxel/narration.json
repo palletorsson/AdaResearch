@@ -1,0 +1,264 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 11,
+				"name": "voxelnoise",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 12,
+				"name": "perlin_terrain_sculptor",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				4
+			],
+			[
+				2,
+				0,
+				0
+			]
+		],
+		"issues": [],
+		"map_name": "Noise_Voxel",
+		"pacing": {
+			"density": 4.0,
+			"reachable_artifacts": 3,
+			"total_artifacts": 3,
+			"walkable_tiles": 178
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			10,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 7,
+			"pos": [
+				3,
+				0,
+				0
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Noise_Voxel",
+	"sequence": "noise",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "perlin_terrain_sculptor",
+				"pos": [
+					1,
+					1,
+					1
+				]
+			},
+			{
+				"name": "voxelnoise",
+				"pos": [
+					1,
+					1,
+					2
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					6
+				]
+			}
+		],
+		"dimensions": [
+			40,
+			40,
+			40
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 178,
+			"ground_pct": 11.125,
+			"void": 1420,
+			"walls": 2
+		},
+		"map_name": "Noise_Voxel",
+		"rooms": [
+			{
+				"artifacts": [
+					"perlin_terrain_sculptor",
+					"voxelnoise",
+					"dark_sphere"
+				],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 178
+			}
+		],
+		"spawn": [
+			10,
+			1,
+			0
+		],
+		"teleporter": [
+			3,
+			0,
+			0
+		]
+	},
+	"timestamp": "2026-03-16T12:13:56",
+	"walkthrough": {
+		"map_name": "Noise_Voxel",
+		"stops": [
+			{
+				"facing": "west",
+				"look_at": [
+					1,
+					1,
+					1
+				],
+				"pos": [
+					10,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "west",
+						"dist": 11,
+						"name": "voxelnoise"
+					},
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "south",
+				"name": "perlin_terrain_sculptor",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"steps_from_prev": 10,
+				"total_steps": 10,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "voxelnoise"
+					},
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southeast",
+				"name": "voxelnoise",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"steps_from_prev": 1,
+				"total_steps": 11,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "perlin_terrain_sculptor"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "north",
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"steps_from_prev": 8,
+				"total_steps": 19,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 8,
+						"name": "voxelnoise"
+					},
+					{
+						"direction": "northwest",
+						"dist": 9,
+						"name": "perlin_terrain_sculptor"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"pos": [
+					3,
+					0,
+					0
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 19,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 3,
+			"total_steps": 19,
+			"total_stops": 5
+		}
+	}
+}

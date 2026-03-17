@@ -1,0 +1,205 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "tarjan_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "kosaraju_algorithm",
+				"pos": [
+					5,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				4,
+				0,
+				3
+			],
+			[
+				8,
+				0,
+				3
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (10,0,6) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "kosaraju_algorithm at (5,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "GT_Connectivity",
+		"pacing": {
+			"density": 4.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 2,
+			"walkable_tiles": 49
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				10,
+				0,
+				6
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "GT_Connectivity",
+	"sequence": "graphtheory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "tarjan_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			},
+			{
+				"name": "kosaraju_algorithm",
+				"pos": [
+					5,
+					2,
+					4
+				]
+			}
+		],
+		"dimensions": [
+			12,
+			5,
+			8
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 49,
+			"ground_pct": 51.0416666666667,
+			"void": 1,
+			"walls": 46
+		},
+		"map_name": "GT_Connectivity",
+		"rooms": [
+			{
+				"artifacts": [
+					"tarjan_algorithm"
+				],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 25
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "east",
+				"tiles": 24
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			10,
+			0,
+			6
+		]
+	},
+	"timestamp": "2026-03-16T12:16:37",
+	"walkthrough": {
+		"map_name": "GT_Connectivity",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					2,
+					1,
+					2
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "tarjan_algorithm"
+					},
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "kosaraju_algorithm"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "tarjan_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "kosaraju_algorithm"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					10,
+					0,
+					6
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 4,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 4,
+			"total_stops": 3
+		}
+	}
+}

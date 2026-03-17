@@ -1,0 +1,147 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 8,
+				"name": "PhysarumColony",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "SwarmIntelligence_PhysarumColony",
+		"pacing": {
+			"density": 8.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 1,
+			"walkable_tiles": 80
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 12,
+			"pos": [
+				5,
+				0,
+				7
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "SwarmIntelligence_PhysarumColony",
+	"sequence": "swarmintelligence",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "PhysarumColony",
+				"pos": [
+					4,
+					1,
+					4
+				]
+			}
+		],
+		"dimensions": [
+			9,
+			1,
+			9
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 80,
+			"ground_pct": 98.7654320987654,
+			"void": 1,
+			"walls": 0
+		},
+		"map_name": "SwarmIntelligence_PhysarumColony",
+		"rooms": [
+			{
+				"artifacts": [
+					"PhysarumColony"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 80
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			5,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:15:45",
+	"walkthrough": {
+		"map_name": "SwarmIntelligence_PhysarumColony",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					4,
+					1,
+					4
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "PhysarumColony"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "south",
+				"name": "PhysarumColony",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"steps_from_prev": 8,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					7
+				],
+				"reachable": true,
+				"steps_from_prev": 4,
+				"total_steps": 12,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 12,
+			"total_stops": 3
+		}
+	}
+}

@@ -1,0 +1,281 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 5,
+				"name": "parallel_lines",
+				"pos": [
+					3,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 5,
+				"name": "angle_sum_triangle",
+				"pos": [
+					7,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 5,
+				"name": "euclid_postulates_plaque",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				3,
+				0,
+				3
+			],
+			[
+				3,
+				0,
+				14
+			],
+			[
+				7,
+				0,
+				3
+			],
+			[
+				7,
+				0,
+				14
+			]
+		],
+		"issues": [
+			{
+				"description": "4 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			}
+		],
+		"map_name": "Euclid_Parallel",
+		"pacing": {
+			"density": 1.66666666666667,
+			"reachable_artifacts": 3,
+			"total_artifacts": 3,
+			"walkable_tiles": 85
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			1,
+			2
+		],
+		"teleporter": {
+			"dist": 11,
+			"pos": [
+				5,
+				0,
+				13
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Euclid_Parallel",
+	"sequence": "foundationscrisis",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "parallel_lines",
+				"pos": [
+					3,
+					1,
+					5
+				]
+			},
+			{
+				"name": "angle_sum_triangle",
+				"pos": [
+					7,
+					1,
+					5
+				]
+			},
+			{
+				"name": "euclid_postulates_plaque",
+				"pos": [
+					5,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			11,
+			3,
+			15
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 85,
+			"ground_pct": 51.5151515151515,
+			"void": 46,
+			"walls": 34
+		},
+		"map_name": "Euclid_Parallel",
+		"rooms": [
+			{
+				"artifacts": [
+					"parallel_lines",
+					"angle_sum_triangle",
+					"euclid_postulates_plaque"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 79
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south",
+				"tiles": 5
+			}
+		],
+		"spawn": [
+			5,
+			1,
+			2
+		],
+		"teleporter": [
+			5,
+			0,
+			13
+		]
+	},
+	"timestamp": "2026-03-16T12:16:06",
+	"walkthrough": {
+		"map_name": "Euclid_Parallel",
+		"stops": [
+			{
+				"facing": "southwest",
+				"look_at": [
+					3,
+					1,
+					5
+				],
+				"pos": [
+					5,
+					1,
+					2
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "euclid_postulates_plaque"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "east",
+				"name": "parallel_lines",
+				"pos": [
+					3,
+					1,
+					5
+				],
+				"steps_from_prev": 5,
+				"total_steps": 5,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "angle_sum_triangle"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "euclid_postulates_plaque"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southwest",
+				"name": "angle_sum_triangle",
+				"pos": [
+					7,
+					1,
+					5
+				],
+				"steps_from_prev": 4,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "parallel_lines"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "euclid_postulates_plaque"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "south",
+				"name": "euclid_postulates_plaque",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"steps_from_prev": 4,
+				"total_steps": 13,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "parallel_lines"
+					},
+					{
+						"direction": "northeast",
+						"dist": 4,
+						"name": "angle_sum_triangle"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					13
+				],
+				"reachable": true,
+				"steps_from_prev": 6,
+				"total_steps": 19,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 3,
+			"total_steps": 19,
+			"total_stops": 5
+		}
+	}
+}

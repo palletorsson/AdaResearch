@@ -1,0 +1,101 @@
+[
+  {
+    "map_name": "CA_4",
+    "sequence": "cellularautomata",
+    "issues": [
+      {
+        "description": "Teleporter at (6,0,0) unreachable from spawn",
+        "severity": "critical",
+        "type": "unreachable_teleporter"
+      },
+      {
+        "description": "5 dead ends found",
+        "severity": "low",
+        "type": "high_dead_ends"
+      },
+      {
+        "description": "dark_sphere at (3,1,2) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      },
+      {
+        "description": "hexagon_ca_vr at (3,1,3) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      },
+      {
+        "description": "ca_growth_network at (2,1,4) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      }
+    ],
+    "suggested_actions": [
+      "Check teleporter placement and adjacent walkable tiles",
+      "Consider adding connecting corridors to reduce dead ends",
+      "Verify artifact tile has walkable floor (h=1) or is adjacent to walkable"
+    ]
+  },
+  {
+    "map_name": "CA_7",
+    "sequence": "cellularautomata",
+    "issues": [
+      {
+        "description": "9.0 steps per artifact (sparse)",
+        "severity": "low",
+        "type": "sparse_pacing"
+      }
+    ],
+    "suggested_actions": [
+      "Add more artifacts or reduce map size for better density"
+    ]
+  },
+  {
+    "map_name": "CA_10",
+    "sequence": "cellularautomata",
+    "issues": [
+      {
+        "description": "9.0 steps per artifact (sparse)",
+        "severity": "low",
+        "type": "sparse_pacing"
+      }
+    ],
+    "suggested_actions": [
+      "Add more artifacts or reduce map size for better density"
+    ]
+  },
+  {
+    "map_name": "CA_12",
+    "sequence": "cellularautomata",
+    "issues": [
+      {
+        "description": "Teleporter at (5,0,6) unreachable from spawn",
+        "severity": "critical",
+        "type": "unreachable_teleporter"
+      },
+      {
+        "description": "ca_screen at (2,1,2) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      },
+      {
+        "description": "self_organization_ca at (4,1,2) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      },
+      {
+        "description": "disease_spread_ca at (6,1,2) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      },
+      {
+        "description": "volumetric_fog_ca at (3,1,3) unreachable",
+        "severity": "high",
+        "type": "unreachable_artifact"
+      }
+    ],
+    "suggested_actions": [
+      "Check teleporter placement and adjacent walkable tiles",
+      "Verify artifact tile has walkable floor (h=1) or is adjacent to walkable"
+    ]
+  }
+]

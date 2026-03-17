@@ -1,0 +1,280 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "animatedcubebuilder",
+				"pos": [
+					2,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "animatedcubebuilder",
+				"pos": [
+					4,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "animatedcubebuilder",
+				"pos": [
+					2,
+					2,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "animatedcubebuilder",
+				"pos": [
+					4,
+					2,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "polyhedron_nets_cube",
+				"pos": [
+					3,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "Teleporter at (5,0,12) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "animatedcubebuilder at (2,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (3,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "animatedcubebuilder at (4,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "animatedcubebuilder at (2,2,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "animatedcubebuilder at (4,2,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "polyhedron_nets_cube at (3,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Point_Animatedcube",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 6,
+			"walkable_tiles": 86
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			6,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				5,
+				0,
+				12
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "Point_Animatedcube",
+	"sequence": "primitives",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "animatedcubebuilder",
+				"pos": [
+					2,
+					2,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					4
+				]
+			},
+			{
+				"name": "animatedcubebuilder",
+				"pos": [
+					4,
+					2,
+					4
+				]
+			},
+			{
+				"name": "animatedcubebuilder",
+				"pos": [
+					2,
+					2,
+					8
+				]
+			},
+			{
+				"name": "animatedcubebuilder",
+				"pos": [
+					4,
+					2,
+					8
+				]
+			},
+			{
+				"name": "polyhedron_nets_cube",
+				"pos": [
+					3,
+					1,
+					10
+				]
+			}
+		],
+		"dimensions": [
+			7,
+			2,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 86,
+			"ground_pct": 87.7551020408163,
+			"void": 8,
+			"walls": 4
+		},
+		"map_name": "Point_Animatedcube",
+		"rooms": [
+			{
+				"artifacts": [
+					"dark_sphere",
+					"polyhedron_nets_cube"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 85
+			}
+		],
+		"spawn": [
+			6,
+			1,
+			0
+		],
+		"teleporter": [
+			5,
+			0,
+			12
+		]
+	},
+	"timestamp": "2026-03-16T12:12:22",
+	"walkthrough": {
+		"map_name": "Point_Animatedcube",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					5,
+					0,
+					12
+				],
+				"pos": [
+					6,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "animatedcubebuilder"
+					},
+					{
+						"direction": "southwest",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "animatedcubebuilder"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "animatedcubebuilder"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					12
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

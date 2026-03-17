@@ -1,0 +1,568 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 0,
+				"name": "origin",
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 1,
+				"name": "folding_past",
+				"pos": [
+					1,
+					1,
+					0
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 1,
+				"name": "script_runner",
+				"pos": [
+					0,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 4,
+				"name": "interactive_point_origin",
+				"pos": [
+					1,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 5,
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 9,
+				"name": "frame_counter_display",
+				"pos": [
+					0,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "static_point",
+				"pos": [
+					4,
+					1,
+					0
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "CoordinateSystem3M",
+				"pos": [
+					6,
+					1,
+					9
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				3,
+				0,
+				2
+			]
+		],
+		"issues": [
+			{
+				"description": "static_point at (4,1,0) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "CoordinateSystem3M at (6,1,9) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Point_One",
+		"pacing": {
+			"density": 1.5,
+			"reachable_artifacts": 6,
+			"total_artifacts": 8,
+			"walkable_tiles": 32
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 6,
+			"pos": [
+				1,
+				0,
+				5
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Point_One",
+	"sequence": "primitives",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "origin",
+				"pos": [
+					0,
+					1,
+					0
+				]
+			},
+			{
+				"name": "folding_past",
+				"pos": [
+					1,
+					1,
+					0
+				]
+			},
+			{
+				"name": "static_point",
+				"pos": [
+					4,
+					1,
+					0
+				]
+			},
+			{
+				"name": "script_runner",
+				"pos": [
+					0,
+					1,
+					1
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					2
+				]
+			},
+			{
+				"name": "interactive_point_origin",
+				"pos": [
+					1,
+					1,
+					3
+				]
+			},
+			{
+				"name": "frame_counter_display",
+				"pos": [
+					0,
+					1,
+					9
+				]
+			},
+			{
+				"name": "CoordinateSystem3M",
+				"pos": [
+					6,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			7,
+			2,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 32,
+			"ground_pct": 45.7142857142857,
+			"void": 38,
+			"walls": 0
+		},
+		"map_name": "Point_One",
+		"rooms": [
+			{
+				"artifacts": [
+					"origin",
+					"folding_past",
+					"script_runner",
+					"dark_sphere",
+					"interactive_point_origin",
+					"frame_counter_display"
+				],
+				"label": "A",
+				"region": "west",
+				"tiles": 30
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			1,
+			0,
+			5
+		]
+	},
+	"timestamp": "2026-03-16T12:12:12",
+	"walkthrough": {
+		"map_name": "Point_One",
+		"stops": [
+			{
+				"facing": "here",
+				"look_at": [
+					0,
+					1,
+					0
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "east",
+						"dist": 1,
+						"name": "folding_past"
+					},
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "script_runner"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "static_point"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "interactive_point_origin"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "frame_counter_display"
+					},
+					{
+						"direction": "southeast",
+						"dist": 15,
+						"name": "CoordinateSystem3M"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southwest",
+				"name": "folding_past",
+				"pos": [
+					1,
+					1,
+					0
+				],
+				"steps_from_prev": 1,
+				"total_steps": 1,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 1,
+						"name": "origin"
+					},
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "script_runner"
+					},
+					{
+						"direction": "east",
+						"dist": 3,
+						"name": "static_point"
+					},
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "interactive_point_origin"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "frame_counter_display"
+					},
+					{
+						"direction": "southeast",
+						"dist": 14,
+						"name": "CoordinateSystem3M"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "southeast",
+				"name": "script_runner",
+				"pos": [
+					0,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "origin"
+					},
+					{
+						"direction": "northeast",
+						"dist": 2,
+						"name": "folding_past"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "interactive_point_origin"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "static_point"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "frame_counter_display"
+					},
+					{
+						"direction": "southeast",
+						"dist": 14,
+						"name": "CoordinateSystem3M"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "northeast",
+				"name": "interactive_point_origin",
+				"pos": [
+					1,
+					1,
+					3
+				],
+				"steps_from_prev": 3,
+				"total_steps": 6,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 3,
+						"name": "folding_past"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "script_runner"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "origin"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "static_point"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "frame_counter_display"
+					},
+					{
+						"direction": "southeast",
+						"dist": 11,
+						"name": "CoordinateSystem3M"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "southwest",
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					2
+				],
+				"steps_from_prev": 3,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "static_point"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "interactive_point_origin"
+					},
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "folding_past"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "script_runner"
+					},
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "origin"
+					},
+					{
+						"direction": "southwest",
+						"dist": 10,
+						"name": "frame_counter_display"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "CoordinateSystem3M"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "north",
+				"name": "frame_counter_display",
+				"pos": [
+					0,
+					1,
+					9
+				],
+				"steps_from_prev": 10,
+				"total_steps": 19,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 6,
+						"name": "CoordinateSystem3M"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "interactive_point_origin"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "script_runner"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "origin"
+					},
+					{
+						"direction": "north",
+						"dist": 10,
+						"name": "folding_past"
+					},
+					{
+						"direction": "northeast",
+						"dist": 10,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 13,
+						"name": "static_point"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"pos": [
+					1,
+					0,
+					5
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 19,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 6,
+			"total_steps": 19,
+			"total_stops": 7
+		}
+	}
+}

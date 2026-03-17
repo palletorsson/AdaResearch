@@ -1,0 +1,177 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "TrigWalkingPath",
+				"pos": [
+					6,
+					1,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					7
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				1,
+				0,
+				13
+			],
+			[
+				11,
+				0,
+				13
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (10,0,2) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "TrigWalkingPath at (6,1,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (4,1,7) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "WaveFunctions_TrigWalkingPath",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 2,
+			"walkable_tiles": 41
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			3,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				10,
+				0,
+				2
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "WaveFunctions_TrigWalkingPath",
+	"sequence": "wavefunctions",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "TrigWalkingPath",
+				"pos": [
+					6,
+					1,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			14,
+			4,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 40,
+			"ground_pct": 20.4081632653061,
+			"void": 102,
+			"walls": 54
+		},
+		"map_name": "WaveFunctions_TrigWalkingPath",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "west",
+				"tiles": 19
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "east",
+				"tiles": 18
+			}
+		],
+		"spawn": [
+			0,
+			3,
+			0
+		],
+		"teleporter": [
+			10,
+			0,
+			2
+		]
+	},
+	"timestamp": "2026-03-16T12:13:28",
+	"walkthrough": {
+		"map_name": "WaveFunctions_TrigWalkingPath",
+		"stops": [
+			{
+				"facing": "east",
+				"look_at": [
+					10,
+					0,
+					2
+				],
+				"pos": [
+					0,
+					3,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": []
+			},
+			{
+				"approach_from": "east",
+				"pos": [
+					10,
+					0,
+					2
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

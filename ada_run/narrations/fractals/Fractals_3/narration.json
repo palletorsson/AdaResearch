@@ -1,0 +1,385 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 3,
+				"name": "cantor_set",
+				"pos": [
+					5,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 3,
+				"name": "example_8_4_cantor_set_vr",
+				"pos": [
+					6,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 5,
+				"name": "dark_sphere",
+				"pos": [
+					7,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 17,
+				"name": "stochastic_tree_separated",
+				"pos": [
+					3,
+					1,
+					17
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 22,
+				"name": "stochastic_tree_separated",
+				"pos": [
+					8,
+					1,
+					17
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 26,
+				"name": "stochastic_tree_separated",
+				"pos": [
+					12,
+					1,
+					17
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "example_8_4_cantor_pagoda_vr",
+				"pos": [
+					8,
+					2,
+					11
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "example_8_4_cantor_pagoda_vr at (8,2,11) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Fractals_3",
+		"pacing": {
+			"density": 4.33333333333333,
+			"reachable_artifacts": 6,
+			"total_artifacts": 7,
+			"walkable_tiles": 185
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			4,
+			1,
+			5
+		],
+		"teleporter": {
+			"dist": 29,
+			"pos": [
+				13,
+				0,
+				19
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Fractals_3",
+	"sequence": "fractals",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "cantor_set",
+				"pos": [
+					5,
+					1,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					7,
+					1,
+					3
+				]
+			},
+			{
+				"name": "example_8_4_cantor_set_vr",
+				"pos": [
+					6,
+					1,
+					4
+				]
+			},
+			{
+				"name": "example_8_4_cantor_pagoda_vr",
+				"pos": [
+					8,
+					2,
+					11
+				]
+			},
+			{
+				"name": "stochastic_tree_separated",
+				"pos": [
+					3,
+					1,
+					17
+				]
+			},
+			{
+				"name": "stochastic_tree_separated",
+				"pos": [
+					8,
+					1,
+					17
+				]
+			},
+			{
+				"name": "stochastic_tree_separated",
+				"pos": [
+					12,
+					1,
+					17
+				]
+			}
+		],
+		"dimensions": [
+			15,
+			2,
+			23
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 185,
+			"ground_pct": 53.6231884057971,
+			"void": 43,
+			"walls": 117
+		},
+		"map_name": "Fractals_3",
+		"rooms": [
+			{
+				"artifacts": [
+					"cantor_set",
+					"dark_sphere",
+					"example_8_4_cantor_set_vr",
+					"stochastic_tree_separated",
+					"stochastic_tree_separated",
+					"stochastic_tree_separated"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 185
+			}
+		],
+		"spawn": [
+			4,
+			1,
+			5
+		],
+		"teleporter": [
+			13,
+			0,
+			19
+		]
+	},
+	"timestamp": "2026-03-16T12:14:51",
+	"walkthrough": {
+		"map_name": "Fractals_3",
+		"stops": [
+			{
+				"facing": "northeast",
+				"look_at": [
+					5,
+					1,
+					3
+				],
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "cantor_set"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "example_8_4_cantor_set_vr"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "east",
+				"name": "cantor_set",
+				"pos": [
+					5,
+					1,
+					3
+				],
+				"steps_from_prev": 3,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "example_8_4_cantor_set_vr"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southwest",
+				"name": "dark_sphere",
+				"pos": [
+					7,
+					1,
+					3
+				],
+				"steps_from_prev": 2,
+				"total_steps": 5,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "cantor_set"
+					},
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "example_8_4_cantor_set_vr"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "south",
+				"name": "example_8_4_cantor_set_vr",
+				"pos": [
+					6,
+					1,
+					4
+				],
+				"steps_from_prev": 2,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "cantor_set"
+					},
+					{
+						"direction": "northeast",
+						"dist": 2,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "stochastic_tree_separated",
+				"pos": [
+					8,
+					1,
+					17
+				],
+				"steps_from_prev": 15,
+				"total_steps": 22,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "east",
+				"facing": "west",
+				"name": "stochastic_tree_separated",
+				"pos": [
+					12,
+					1,
+					17
+				],
+				"steps_from_prev": 4,
+				"total_steps": 26,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "west",
+				"facing": "east",
+				"name": "stochastic_tree_separated",
+				"pos": [
+					3,
+					1,
+					17
+				],
+				"steps_from_prev": 9,
+				"total_steps": 35,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "east",
+				"pos": [
+					13,
+					0,
+					19
+				],
+				"reachable": true,
+				"steps_from_prev": 12,
+				"total_steps": 47,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 6,
+			"total_steps": 47,
+			"total_stops": 8
+		}
+	}
+}

@@ -1,0 +1,147 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "push_relabel_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "GT_Flow",
+		"pacing": {
+			"density": 4.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 1,
+			"walkable_tiles": 56
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 13,
+			"pos": [
+				5,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "GT_Flow",
+	"sequence": "graphtheory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "push_relabel_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			5,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 56,
+			"ground_pct": 56.0,
+			"void": 1,
+			"walls": 43
+		},
+		"map_name": "GT_Flow",
+		"rooms": [
+			{
+				"artifacts": [
+					"push_relabel_algorithm"
+				],
+				"label": "A",
+				"region": "north",
+				"tiles": 56
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			5,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:16:40",
+	"walkthrough": {
+		"map_name": "GT_Flow",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					2,
+					1,
+					2
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "push_relabel_algorithm"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "push_relabel_algorithm",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					5,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 9,
+				"total_steps": 13,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 13,
+			"total_stops": 3
+		}
+	}
+}

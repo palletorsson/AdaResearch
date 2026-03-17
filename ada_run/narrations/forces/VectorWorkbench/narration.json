@@ -1,0 +1,441 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 8,
+				"name": "proximity_spawner",
+				"pos": [
+					3,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 9,
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 14,
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "VectorBasics",
+				"pos": [
+					5,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "basis_vectors_rig",
+				"pos": [
+					7,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					6,
+					2,
+					7
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "VectorBasics at (5,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "basis_vectors_rig at (7,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (6,2,7) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "VectorWorkbench",
+		"pacing": {
+			"density": 2.8,
+			"reachable_artifacts": 5,
+			"total_artifacts": 8,
+			"walkable_tiles": 146
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			10,
+			1,
+			9
+		],
+		"teleporter": {
+			"dist": 6,
+			"pos": [
+				6,
+				0,
+				11
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "VectorWorkbench",
+	"sequence": "forces",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					4
+				]
+			},
+			{
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					4
+				]
+			},
+			{
+				"name": "VectorBasics",
+				"pos": [
+					5,
+					2,
+					5
+				]
+			},
+			{
+				"name": "basis_vectors_rig",
+				"pos": [
+					7,
+					2,
+					5
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					6,
+					2,
+					7
+				]
+			},
+			{
+				"name": "proximity_spawner",
+				"pos": [
+					3,
+					1,
+					8
+				]
+			},
+			{
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					9
+				]
+			},
+			{
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			14,
+			3,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 146,
+			"ground_pct": 74.4897959183673,
+			"void": 1,
+			"walls": 49
+		},
+		"map_name": "VectorWorkbench",
+		"rooms": [
+			{
+				"artifacts": [
+					"catalyst_target",
+					"catalyst_target",
+					"proximity_spawner",
+					"catalyst_target",
+					"catalyst_target"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 146
+			}
+		],
+		"spawn": [
+			10,
+			1,
+			9
+		],
+		"teleporter": [
+			6,
+			0,
+			11
+		]
+	},
+	"timestamp": "2026-03-16T12:12:51",
+	"walkthrough": {
+		"map_name": "VectorWorkbench",
+		"stops": [
+			{
+				"facing": "east",
+				"look_at": [
+					12,
+					1,
+					9
+				],
+				"pos": [
+					10,
+					1,
+					9
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "catalyst_target"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "catalyst_target"
+					},
+					{
+						"direction": "northwest",
+						"dist": 7,
+						"name": "basis_vectors_rig"
+					},
+					{
+						"direction": "west",
+						"dist": 8,
+						"name": "proximity_spawner"
+					},
+					{
+						"direction": "west",
+						"dist": 9,
+						"name": "catalyst_target"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "north",
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					9
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 9,
+						"name": "basis_vectors_rig"
+					},
+					{
+						"direction": "west",
+						"dist": 10,
+						"name": "proximity_spawner"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "west",
+				"name": "catalyst_target",
+				"pos": [
+					12,
+					1,
+					4
+				],
+				"steps_from_prev": 5,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "basis_vectors_rig"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "south",
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					4
+				],
+				"steps_from_prev": 11,
+				"total_steps": 18,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "VectorBasics"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "proximity_spawner"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "northeast",
+				"name": "catalyst_target",
+				"pos": [
+					1,
+					1,
+					9
+				],
+				"steps_from_prev": 5,
+				"total_steps": 23,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "proximity_spawner"
+					},
+					{
+						"direction": "northeast",
+						"dist": 8,
+						"name": "VectorBasics"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "southeast",
+				"name": "proximity_spawner",
+				"pos": [
+					3,
+					1,
+					8
+				],
+				"steps_from_prev": 3,
+				"total_steps": 26,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "catalyst_target"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "VectorBasics"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "catalyst_target"
+					},
+					{
+						"direction": "east",
+						"dist": 10,
+						"name": "catalyst_target"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					6,
+					0,
+					11
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 26,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 5,
+			"total_steps": 26,
+			"total_stops": 7
+		}
+	}
+}

@@ -1,0 +1,837 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "GlassRack",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 3,
+				"name": "lab_table",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 9,
+				"name": "RackAmbientDrone",
+				"pos": [
+					1,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 10,
+				"name": "GlassRack",
+				"pos": [
+					9,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 11,
+				"name": "lab_table",
+				"pos": [
+					9,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "air_music_display_case",
+				"pos": [
+					3,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 14,
+				"name": "resonating_metallophone",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 15,
+				"name": "BigPipeSystem",
+				"pos": [
+					7,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "SystemsMusicTest",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				4,
+				0,
+				4
+			],
+			[
+				5,
+				0,
+				5
+			],
+			[
+				9,
+				0,
+				10
+			]
+		],
+		"issues": [
+			{
+				"description": "dark_sphere at (4,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "SystemsMusicTest at (5,1,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "WaveFunctions_AirMusic",
+		"pacing": {
+			"density": 1.875,
+			"reachable_artifacts": 8,
+			"total_artifacts": 10,
+			"walkable_tiles": 71
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			0,
+			0
+		],
+		"teleporter": {
+			"dist": 18,
+			"pos": [
+				8,
+				0,
+				10
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "WaveFunctions_AirMusic",
+	"sequence": "wavefunctions",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "GlassRack",
+				"pos": [
+					1,
+					1,
+					1
+				]
+			},
+			{
+				"name": "GlassRack",
+				"pos": [
+					9,
+					1,
+					1
+				]
+			},
+			{
+				"name": "lab_table",
+				"pos": [
+					1,
+					1,
+					2
+				]
+			},
+			{
+				"name": "lab_table",
+				"pos": [
+					9,
+					1,
+					2
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					4
+				]
+			},
+			{
+				"name": "SystemsMusicTest",
+				"pos": [
+					5,
+					1,
+					5
+				]
+			},
+			{
+				"name": "RackAmbientDrone",
+				"pos": [
+					1,
+					1,
+					8
+				]
+			},
+			{
+				"name": "BigPipeSystem",
+				"pos": [
+					7,
+					1,
+					8
+				]
+			},
+			{
+				"name": "air_music_display_case",
+				"pos": [
+					3,
+					1,
+					9
+				]
+			},
+			{
+				"name": "resonating_metallophone",
+				"pos": [
+					5,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			14,
+			4,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 70,
+			"ground_pct": 35.7142857142857,
+			"void": 87,
+			"walls": 39
+		},
+		"map_name": "WaveFunctions_AirMusic",
+		"rooms": [
+			{
+				"artifacts": [
+					"GlassRack",
+					"GlassRack",
+					"lab_table",
+					"lab_table",
+					"RackAmbientDrone",
+					"BigPipeSystem",
+					"air_music_display_case",
+					"resonating_metallophone"
+				],
+				"label": "A",
+				"region": "west",
+				"tiles": 66
+			},
+			{
+				"artifacts": [
+					"dark_sphere",
+					"SystemsMusicTest"
+				],
+				"label": "B",
+				"region": "north, west",
+				"tiles": 3
+			}
+		],
+		"spawn": [
+			0,
+			0,
+			0
+		],
+		"teleporter": [
+			8,
+			0,
+			10
+		]
+	},
+	"timestamp": "2026-03-16T12:13:25",
+	"walkthrough": {
+		"map_name": "WaveFunctions_AirMusic",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					1,
+					1,
+					1
+				],
+				"pos": [
+					0,
+					0,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "lab_table"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "southeast",
+						"dist": 14,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "southeast",
+						"dist": 15,
+						"name": "BigPipeSystem"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "south",
+				"name": "GlassRack",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "lab_table"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "RackAmbientDrone"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "east",
+						"dist": 9,
+						"name": "lab_table"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "southeast",
+						"dist": 12,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "southeast",
+						"dist": 13,
+						"name": "BigPipeSystem"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "lab_table",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"steps_from_prev": 1,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "RackAmbientDrone"
+					},
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "east",
+						"dist": 9,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "southeast",
+						"dist": 11,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "southeast",
+						"dist": 12,
+						"name": "BigPipeSystem"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southeast",
+				"name": "RackAmbientDrone",
+				"pos": [
+					1,
+					1,
+					8
+				],
+				"steps_from_prev": 6,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "lab_table"
+					},
+					{
+						"direction": "east",
+						"dist": 6,
+						"name": "BigPipeSystem"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "northeast",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 7,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "northeast",
+						"dist": 14,
+						"name": "lab_table"
+					},
+					{
+						"direction": "northeast",
+						"dist": 15,
+						"name": "GlassRack"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "east",
+				"name": "air_music_display_case",
+				"pos": [
+					3,
+					1,
+					9
+				],
+				"steps_from_prev": 3,
+				"total_steps": 12,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "RackAmbientDrone"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "BigPipeSystem"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "lab_table"
+					},
+					{
+						"direction": "north",
+						"dist": 10,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "northeast",
+						"dist": 13,
+						"name": "lab_table"
+					},
+					{
+						"direction": "northeast",
+						"dist": 14,
+						"name": "GlassRack"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "northeast",
+				"name": "resonating_metallophone",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"steps_from_prev": 2,
+				"total_steps": 14,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "BigPipeSystem"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "RackAmbientDrone"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northwest",
+						"dist": 11,
+						"name": "lab_table"
+					},
+					{
+						"direction": "northeast",
+						"dist": 11,
+						"name": "lab_table"
+					},
+					{
+						"direction": "northwest",
+						"dist": 12,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "northeast",
+						"dist": 12,
+						"name": "GlassRack"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "north",
+				"name": "BigPipeSystem",
+				"pos": [
+					7,
+					1,
+					8
+				],
+				"steps_from_prev": 3,
+				"total_steps": 17,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "RackAmbientDrone"
+					},
+					{
+						"direction": "northwest",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "lab_table"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "northwest",
+						"dist": 12,
+						"name": "lab_table"
+					},
+					{
+						"direction": "northwest",
+						"dist": 13,
+						"name": "GlassRack"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "lab_table",
+				"pos": [
+					9,
+					1,
+					2
+				],
+				"steps_from_prev": 8,
+				"total_steps": 25,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 7,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "BigPipeSystem"
+					},
+					{
+						"direction": "west",
+						"dist": 9,
+						"name": "GlassRack"
+					},
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "southwest",
+						"dist": 13,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "southwest",
+						"dist": 14,
+						"name": "RackAmbientDrone"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "south",
+				"name": "GlassRack",
+				"pos": [
+					9,
+					1,
+					1
+				],
+				"steps_from_prev": 1,
+				"total_steps": 26,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "lab_table"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "SystemsMusicTest"
+					},
+					{
+						"direction": "west",
+						"dist": 9,
+						"name": "lab_table"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "BigPipeSystem"
+					},
+					{
+						"direction": "southwest",
+						"dist": 12,
+						"name": "resonating_metallophone"
+					},
+					{
+						"direction": "southwest",
+						"dist": 14,
+						"name": "air_music_display_case"
+					},
+					{
+						"direction": "southwest",
+						"dist": 15,
+						"name": "RackAmbientDrone"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					8,
+					0,
+					10
+				],
+				"reachable": true,
+				"steps_from_prev": 8,
+				"total_steps": 34,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 8,
+			"total_steps": 34,
+			"total_stops": 10
+		}
+	}
+}

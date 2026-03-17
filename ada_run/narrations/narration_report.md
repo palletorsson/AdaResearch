@@ -1,0 +1,606 @@
+# Narration Report
+Generated: 2026-03-16T13:16:41
+
+## Summary
+- Total maps: 163
+- Narrated: 163
+- Failed: 0
+- Skipped: 0
+- Maps with issues: 114
+
+## Sequences
+
+| Sequence | Maps | Issues | Status |
+|----------|------|--------|--------|
+| primitives | 11 | 82 | 82 issues |
+| transformation | 6 | 47 | 47 issues |
+| color | 7 | 24 | 24 issues |
+| forces | 9 | 110 | 110 issues |
+| array_tutorial | 7 | 20 | 20 issues |
+| wavefunctions | 12 | 100 | 100 issues |
+| randomness | 13 | 42 | 42 issues |
+| noise | 9 | 25 | 25 issues |
+| cellularautomata | 12 | 12 | 12 issues |
+| fractals | 14 | 23 | 23 issues |
+| lsystems | 6 | 2 | 2 issues |
+| proceduralgeneration | 7 | 6 | 6 issues |
+| softbodies | 9 | 1 | 1 issues |
+| swarmintelligence | 7 | 0 | OK |
+| machinelearning | 8 | 24 | 24 issues |
+| foundationscrisis | 7 | 18 | 18 issues |
+| qfeplaboratory | 8 | 21 | 21 issues |
+| postfoundationscrisis | 3 | 0 | OK |
+| graphtheory | 8 | 13 | 13 issues |
+
+## Issues
+
+- **CRITICAL** [primitives/Point_Triangle] Teleporter at (3,1,7) unreachable from spawn
+- **CRITICAL** [primitives/Point_Triangle_Context] Teleporter at (5,0,8) unreachable from spawn
+- **CRITICAL** [primitives/Primitives_Polythedra] Teleporter at (5,0,6) unreachable from spawn
+- **CRITICAL** [primitives/Point_Animatedcube] Teleporter at (5,0,12) unreachable from spawn
+- **CRITICAL** [primitives/Primitives_Melencolia] Teleporter at (1,0,8) unreachable from spawn
+- **CRITICAL** [transformation/Trans_Intro] Teleporter at (5,1,14) unreachable from spawn
+- **CRITICAL** [transformation/Trans_Translate_2] Teleporter at (7,0,8) unreachable from spawn
+- **CRITICAL** [transformation/Trans_Scale] Teleporter at (1,0,14) unreachable from spawn
+- **CRITICAL** [color/Color_Rainbow] Teleporter at (5,0,13) unreachable from spawn
+- **CRITICAL** [forces/VectorFoundations] Teleporter at (17,0,14) unreachable from spawn
+- **CRITICAL** [forces/VectorOperations] Teleporter at (17,0,15) unreachable from spawn
+- **CRITICAL** [forces/VectorDynamics] Teleporter at (17,0,17) unreachable from spawn
+- **CRITICAL** [forces/VectorAdvanced] Teleporter at (17,0,17) unreachable from spawn
+- **CRITICAL** [forces/ForcesFoundations] Teleporter at (19,1,15) unreachable from spawn
+- **CRITICAL** [forces/ForcesSystems] Teleporter at (5,0,15) unreachable from spawn
+- **CRITICAL** [forces/ForcesChaos] Teleporter at (19,0,17) unreachable from spawn
+- **CRITICAL** [forces/ForcesArena] Teleporter at (6,0,32) unreachable from spawn
+- **CRITICAL** [array_tutorial/Tutorial_Row] Teleporter at (1,0,7) unreachable from spawn
+- **CRITICAL** [array_tutorial/Tutorial_2D_Build] Teleporter at (6,0,18) unreachable from spawn
+- **CRITICAL** [array_tutorial/Tutorial_3D] Teleporter at (5,0,6) unreachable from spawn
+- **CRITICAL** [wavefunctions/WaveFunctions_Sine_Space] Teleporter at (10,0,26) unreachable from spawn
+- **CRITICAL** [wavefunctions/WaveFunctions_3D_Wave_Propagation] Teleporter at (13,0,16) unreachable from spawn
+- **CRITICAL** [wavefunctions/WaveFunctions_Effect_Sound] Teleporter at (6,0,12) unreachable from spawn
+- **CRITICAL** [wavefunctions/Wavefunctions_Bernini] Teleporter at (7,0,13) unreachable from spawn
+- **CRITICAL** [wavefunctions/WaveFunctions_TrigWalkingPath] Teleporter at (10,0,2) unreachable from spawn
+- **CRITICAL** [randomness/Random_Walk] Teleporter at (0,0,4) unreachable from spawn
+- **CRITICAL** [randomness/Random_Gaussian] Teleporter at (9,0,2) unreachable from spawn
+- **CRITICAL** [randomness/Random_Mushrooms] Teleporter at (8,0,12) unreachable from spawn
+- **CRITICAL** [randomness/Random_Space] Teleporter at (6,0,14) unreachable from spawn
+- **CRITICAL** [noise/Noise_Columns] Teleporter at (9,0,12) unreachable from spawn
+- **CRITICAL** [noise/Noise_One] Teleporter at (8,0,9) unreachable from spawn
+- **CRITICAL** [noise/Noise_6_Wall] Teleporter at (8,0,9) unreachable from spawn
+- **CRITICAL** [noise/Noise_Inside_Noise] Teleporter at (7,0,12) unreachable from spawn
+- **CRITICAL** [noise/Noise_Space_10] Teleporter at (10,0,12) unreachable from spawn
+- **CRITICAL** [cellularautomata/CA_4] Teleporter at (6,0,0) unreachable from spawn
+- **CRITICAL** [cellularautomata/CA_12] Teleporter at (5,0,6) unreachable from spawn
+- **CRITICAL** [fractals/Fractals_6] Teleporter at (6,1,6) unreachable from spawn
+- **CRITICAL** [proceduralgeneration/PG_Genetic_Evolution] Teleporter at (8,0,10) unreachable from spawn
+- **CRITICAL** [proceduralgeneration/PG_Percolation_Network] Teleporter at (9,0,12) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Evolution] Teleporter at (10,0,8) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Classification] Teleporter at (8,0,6) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Neural_Networks] Teleporter at (3,0,12) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Perception] Teleporter at (4,0,6) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Sequence_Memory] Teleporter at (2,0,10) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Generative] Teleporter at (6,0,6) unreachable from spawn
+- **CRITICAL** [machinelearning/ML_Synthesis] Teleporter at (8,0,8) unreachable from spawn
+- **CRITICAL** [foundationscrisis/NonEuclidean_Spaces] Teleporter at (7,0,11) unreachable from spawn
+- **CRITICAL** [foundationscrisis/Brouwer_Intuitionism] Teleporter at (5,0,12) unreachable from spawn
+- **CRITICAL** [qfeplaboratory/QFEP_F_Term] Teleporter at (4,0,11) unreachable from spawn
+- **CRITICAL** [graphtheory/GT_Foundations] Teleporter at (8,0,8) unreachable from spawn
+- **CRITICAL** [graphtheory/GT_Network_Analysis] Teleporter at (9,0,9) unreachable from spawn
+- **CRITICAL** [graphtheory/GT_Connectivity] Teleporter at (10,0,6) unreachable from spawn
+- **CRITICAL** [graphtheory/GT_Spanning_Trees] Teleporter at (7,0,7) unreachable from spawn
+- **HIGH** [primitives/Point_One] static_point at (4,1,0) unreachable
+- **HIGH** [primitives/Point_One] CoordinateSystem3M at (6,1,9) unreachable
+- **HIGH** [primitives/Point_Lines] dark_sphere at (3,2,12) unreachable
+- **HIGH** [primitives/Point_Lines] perspective_lines at (1,1,23) unreachable
+- **HIGH** [primitives/Point_Lines] scale_lines at (3,1,23) unreachable
+- **HIGH** [primitives/Point_Lines] perspective_lines at (5,1,23) unreachable
+- **HIGH** [primitives/Point_Lines] lightrod at (3,1,25) unreachable
+- **HIGH** [primitives/Point_Lines] dgrid at (6,1,26) unreachable
+- **HIGH** [primitives/Point_Trace] cube_scene at (2,2,5) unreachable
+- **HIGH** [primitives/Point_Trace] cube_scene at (4,2,5) unreachable
+- **HIGH** [primitives/Point_Line_Grid] grid_lines at (4,1,3) unreachable
+- **HIGH** [primitives/Point_Line_Grid] dark_sphere at (3,1,4) unreachable
+- **HIGH** [primitives/Point_Line_Grid] grab_sphere_point_snap at (2,2,8) unreachable
+- **HIGH** [primitives/Point_Triangle] triangle_line_puzzle at (3,1,3) unreachable
+- **HIGH** [primitives/Point_Triangle] dark_sphere at (3,1,4) unreachable
+- **HIGH** [primitives/Point_Triangle] cube_scene at (3,1,5) unreachable
+- **HIGH** [primitives/Point_Triangle] triangle at (3,1,6) unreachable
+- **HIGH** [primitives/Point_Triangle] triangleprofiles at (3,1,7) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] folded_strip at (6,2,1) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] draw_triangle_faces at (3,1,3) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] dark_sphere at (3,1,5) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] interactivetriangle at (0,2,6) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] pythagorean_triangle_angles at (1,2,6) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] quad_line_puzzle at (4,2,6) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] quad at (5,2,6) unreachable
+- **HIGH** [primitives/Point_Triangle_Context] cube_scene at (3,1,7) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] grab_trihedron at (2,2,2) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] snap_tetrahedron_puzzle at (3,1,2) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] dark_sphere at (3,1,3) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] cube_scene at (2,1,4) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] cube_scene at (3,1,4) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] cube_scene at (4,1,4) unreachable
+- **HIGH** [primitives/Primitives_Polythedra] pyramid_edit at (1,2,7) unreachable
+- **HIGH** [primitives/Point_Animatedcube] animatedcubebuilder at (2,2,4) unreachable
+- **HIGH** [primitives/Point_Animatedcube] dark_sphere at (3,1,4) unreachable
+- **HIGH** [primitives/Point_Animatedcube] animatedcubebuilder at (4,2,4) unreachable
+- **HIGH** [primitives/Point_Animatedcube] animatedcubebuilder at (2,2,8) unreachable
+- **HIGH** [primitives/Point_Animatedcube] animatedcubebuilder at (4,2,8) unreachable
+- **HIGH** [primitives/Point_Animatedcube] polyhedron_nets_cube at (3,1,10) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] platonic_grabbables at (3,2,4) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_high at (3,2,11) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_high at (5,2,11) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] star_primitive at (7,2,11) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] righttriangle at (1,2,13) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_mid at (3,2,13) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_mid at (5,2,13) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] truncatedtetrahedron at (7,2,13) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] roughrock at (1,2,15) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_low at (3,2,15) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] sphere_low at (5,2,15) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] capsule at (7,2,15) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] grab_octahedron at (2,2,17) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] grab_octahedron at (6,2,17) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] plus at (1,1,25) unreachable
+- **HIGH** [primitives/Primitives_Ignorance] plus at (7,1,25) unreachable
+- **HIGH** [primitives/Primitives_Portals] capsule at (5,1,2) unreachable
+- **HIGH** [primitives/Primitives_Portals] combine_portals at (3,1,4) unreachable
+- **HIGH** [primitives/Primitives_Portals] achilles_tortoise at (5,1,5) unreachable
+- **HIGH** [primitives/Primitives_Portals] dark_sphere at (3,1,18) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] pyramid at (1,2,1) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] snap_pyramid_puzzle at (3,2,1) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] pyramid at (5,2,1) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] cube_scene at (3,2,2) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] cube_scene at (2,2,3) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] pyramidlong at (3,2,3) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] cube_scene at (4,2,3) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] cube_scene at (3,2,4) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] pyramid at (1,2,5) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] dark_sphere at (2,2,5) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] pyramid at (5,2,5) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] bigframe at (0,1,8) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] diamondtoruscollection at (3,3,10) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] durer_scene at (3,3,12) unreachable
+- **HIGH** [primitives/Primitives_Melencolia] code_display at (3,1,13) unreachable
+- **HIGH** [transformation/Trans_Intro] balance_puzzle at (5,2,10) unreachable
+- **HIGH** [transformation/Trans_Intro] dark_sphere at (5,1,14) unreachable
+- **HIGH** [transformation/Trans_Translate_1] player_trace at (0,1,0) unreachable
+- **HIGH** [transformation/Trans_Translate_1] z_translation_cube at (6,1,2) unreachable
+- **HIGH** [transformation/Trans_Translate_1] pick_up_cube at (5,1,3) unreachable
+- **HIGH** [transformation/Trans_Translate_1] dark_sphere at (3,1,10) unreachable
+- **HIGH** [transformation/Trans_Translate_1] y_translation_cube at (1,1,11) unreachable
+- **HIGH** [transformation/Trans_Translate_1] pick_up_cube at (2,3,12) unreachable
+- **HIGH** [transformation/Trans_Translate_1] pick_up_cube at (4,2,12) unreachable
+- **HIGH** [transformation/Trans_Translate_2] toruscylinder at (5,1,2) unreachable
+- **HIGH** [transformation/Trans_Translate_2] z_translation_cube at (0,1,5) unreachable
+- **HIGH** [transformation/Trans_Translate_2] dark_sphere at (3,1,6) unreachable
+- **HIGH** [transformation/Trans_Translate_2] x_translation_cube at (2,1,8) unreachable
+- **HIGH** [transformation/Trans_Translate_2] pickup_gate at (6,1,9) unreachable
+- **HIGH** [transformation/Trans_Translate_2] translation_cube_demo at (1,1,11) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (0,1,12) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (1,1,12) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (2,1,12) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (0,1,13) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (2,1,13) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (0,1,14) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (2,1,14) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (0,1,15) unreachable
+- **HIGH** [transformation/Trans_Translate_2] pick_up_cube at (1,5,15) unreachable
+- **HIGH** [transformation/Trans_Translate_2] cube_scene at (2,1,15) unreachable
+- **HIGH** [transformation/Trans_Rotation_2] righttriangle at (0,2,4) unreachable
+- **HIGH** [transformation/Trans_Rotation_2] dark_sphere at (3,1,6) unreachable
+- **HIGH** [transformation/Trans_Rotation_2] pick_up_cube at (2,1,51) unreachable
+- **HIGH** [transformation/Trans_Rotation_2] carousel_cake at (3,1,53) unreachable
+- **HIGH** [transformation/Trans_Scale] chair_assembly_puzzle at (3,2,4) unreachable
+- **HIGH** [transformation/Trans_Scale] clipboard at (4,2,4) unreachable
+- **HIGH** [transformation/Trans_Scale] scale_me at (3,1,8) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (0,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (1,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] cube_scene at (2,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] cube_scene at (3,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] cube_scene at (4,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (5,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (6,1,10) unreachable
+- **HIGH** [transformation/Trans_Scale] dark_sphere at (2,1,13) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (1,1,15) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (5,1,15) unreachable
+- **HIGH** [transformation/Trans_Scale] prism_block at (3,1,16) unreachable
+- **HIGH** [color/Color_Nails] nail_color_controller at (2,2,5) unreachable
+- **HIGH** [color/Color_Nails] hand_model at (3,2,5) unreachable
+- **HIGH** [color/Color_Nails] hand_color_controller at (4,2,5) unreachable
+- **HIGH** [color/Color_Nails] dark_side_prism at (3,2,7) unreachable
+- **HIGH** [color/Color_Nails] brick_wall_factory at (0,2,9) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,5) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,6) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,7) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,8) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,9) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,10) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,11) unreachable
+- **HIGH** [color/Color_Rainbow] rainbow at (3,2,12) unreachable
+- **HIGH** [color/Color_Rainbow] pick_up_cube at (3,1,17) unreachable
+- **HIGH** [color/Color_Pillar] visual_color_mixing at (3,2,5) unreachable
+- **HIGH** [color/Color_Pillar] grab_rainbow_stick at (2,2,18) unreachable
+- **HIGH** [color/Color_Pillar] grab_rainbow_stick at (4,2,18) unreachable
+- **HIGH** [color/Color_Pillar] SpectrumVisualizer at (3,2,20) unreachable
+- **HIGH** [color/Color_Flashlight] flashlight_demo at (5,2,4) unreachable
+- **HIGH** [forces/VectorFoundations] VectorAddition at (16,1,1) unreachable
+- **HIGH** [forces/VectorFoundations] VectorBasics at (2,2,3) unreachable
+- **HIGH** [forces/VectorFoundations] basis_vectors_rig at (5,2,3) unreachable
+- **HIGH** [forces/VectorFoundations] vector_addition_demo at (16,1,3) unreachable
+- **HIGH** [forces/VectorFoundations] ForceMagnitudeDemo at (19,1,3) unreachable
+- **HIGH** [forces/VectorFoundations] dark_sphere at (4,3,4) unreachable
+- **HIGH** [forces/VectorFoundations] catalyst_target at (16,1,5) unreachable
+- **HIGH** [forces/VectorFoundations] catalyst_target at (19,1,5) unreachable
+- **HIGH** [forces/VectorFoundations] VectorSubtraction at (16,2,10) unreachable
+- **HIGH** [forces/VectorFoundations] vector_subtraction_demo at (18,2,11) unreachable
+- **HIGH** [forces/VectorFoundations] dark_sphere at (17,1,12) unreachable
+- **HIGH** [forces/VectorOperations] VectorBasics at (16,2,3) unreachable
+- **HIGH** [forces/VectorOperations] basis_vectors_rig at (18,2,3) unreachable
+- **HIGH** [forces/VectorOperations] dark_sphere at (18,1,4) unreachable
+- **HIGH** [forces/VectorOperations] catalyst_target at (17,1,10) unreachable
+- **HIGH** [forces/VectorOperations] VectorBasics at (16,2,12) unreachable
+- **HIGH** [forces/VectorOperations] basis_vectors_rig at (18,2,12) unreachable
+- **HIGH** [forces/VectorOperations] dark_sphere at (18,1,13) unreachable
+- **HIGH** [forces/VectorOperations] proximity_spawner at (15,1,14) unreachable
+- **HIGH** [forces/VectorDynamics] VectorForces at (16,2,2) unreachable
+- **HIGH** [forces/VectorDynamics] force_field_visualizer at (18,2,3) unreachable
+- **HIGH** [forces/VectorDynamics] dark_sphere at (20,1,4) unreachable
+- **HIGH** [forces/VectorDynamics] proximity_spawner at (15,1,5) unreachable
+- **HIGH** [forces/VectorDynamics] VectorBasics at (15,2,13) unreachable
+- **HIGH** [forces/VectorDynamics] basis_vectors_rig at (17,2,13) unreachable
+- **HIGH** [forces/VectorDynamics] dark_sphere at (17,1,14) unreachable
+- **HIGH** [forces/VectorDynamics] catalyst_target at (16,1,15) unreachable
+- **HIGH** [forces/VectorAdvanced] VectorFieldFlow at (16,1,1) unreachable
+- **HIGH** [forces/VectorAdvanced] VectorTorque at (3,2,2) unreachable
+- **HIGH** [forces/VectorAdvanced] VectorTorque at (18,1,3) unreachable
+- **HIGH** [forces/VectorAdvanced] dark_sphere at (3,2,4) unreachable
+- **HIGH** [forces/VectorAdvanced] exercise_1_3_solution_3_d_bouncing_ball_vr at (16,1,4) unreachable
+- **HIGH** [forces/VectorAdvanced] dark_sphere at (18,1,4) unreachable
+- **HIGH** [forces/VectorAdvanced] proximity_spawner at (15,2,5) unreachable
+- **HIGH** [forces/VectorAdvanced] example_1_9_motion_101_velocity_and_random_acceleration_vr at (18,1,5) unreachable
+- **HIGH** [forces/VectorAdvanced] catalyst_target at (16,1,10) unreachable
+- **HIGH** [forces/VectorAdvanced] exercise_1_5_solution_accelerate_and_decelerate_vr at (2,1,11) unreachable
+- **HIGH** [forces/VectorAdvanced] exercise_1_8_solution_attraction_magnitude_vr at (4,2,12) unreachable
+- **HIGH** [forces/VectorAdvanced] VectorThrowing at (17,1,12) unreachable
+- **HIGH** [forces/VectorAdvanced] dark_sphere at (6,1,13) unreachable
+- **HIGH** [forces/VectorAdvanced] dark_sphere at (17,1,14) unreachable
+- **HIGH** [forces/VectorAdvanced] catalyst_target at (19,1,15) unreachable
+- **HIGH** [forces/VectorAdvanced] proximity_spawner at (15,1,16) unreachable
+- **HIGH** [forces/VectorWorkbench] VectorBasics at (5,2,5) unreachable
+- **HIGH** [forces/VectorWorkbench] basis_vectors_rig at (7,2,5) unreachable
+- **HIGH** [forces/VectorWorkbench] dark_sphere at (6,2,7) unreachable
+- **HIGH** [forces/ForcesFoundations] proximity_spawner at (15,1,2) unreachable
+- **HIGH** [forces/ForcesFoundations] VectorBasics at (16,1,3) unreachable
+- **HIGH** [forces/ForcesFoundations] basis_vectors_rig at (18,1,3) unreachable
+- **HIGH** [forces/ForcesFoundations] dark_sphere at (4,2,4) unreachable
+- **HIGH** [forces/ForcesFoundations] dark_sphere at (18,2,4) unreachable
+- **HIGH** [forces/ForcesFoundations] catalyst_target at (15,1,11) unreachable
+- **HIGH** [forces/ForcesFoundations] catalyst_target at (20,1,11) unreachable
+- **HIGH** [forces/ForcesFoundations] VectorBasics at (16,1,12) unreachable
+- **HIGH** [forces/ForcesFoundations] basis_vectors_rig at (18,1,12) unreachable
+- **HIGH** [forces/ForcesFoundations] dark_sphere at (18,2,13) unreachable
+- **HIGH** [forces/ForcesFoundations] catalyst_target at (17,1,14) unreachable
+- **HIGH** [forces/ForcesFoundations] proximity_spawner at (19,1,15) unreachable
+- **HIGH** [forces/ForcesSystems] vector_fields at (16,1,1) unreachable
+- **HIGH** [forces/ForcesSystems] force_field_visualizer at (18,1,1) unreachable
+- **HIGH** [forces/ForcesSystems] force_fields at (17,2,3) unreachable
+- **HIGH** [forces/ForcesSystems] catalyst_target at (15,1,4) unreachable
+- **HIGH** [forces/ForcesSystems] proximity_spawner at (20,1,5) unreachable
+- **HIGH** [forces/ForcesSystems] particle_systems at (2,2,10) unreachable
+- **HIGH** [forces/ForcesSystems] force_fields at (4,1,10) unreachable
+- **HIGH** [forces/ForcesSystems] mass_spring_damper at (16,2,10) unreachable
+- **HIGH** [forces/ForcesSystems] spring_system at (18,1,10) unreachable
+- **HIGH** [forces/ForcesSystems] catalyst_target at (1,1,12) unreachable
+- **HIGH** [forces/ForcesSystems] catalyst_target at (6,1,12) unreachable
+- **HIGH** [forces/ForcesSystems] catalyst_target at (15,1,12) unreachable
+- **HIGH** [forces/ForcesSystems] catalyst_target at (20,1,12) unreachable
+- **HIGH** [forces/ForcesSystems] firework_launcher at (2,1,13) unreachable
+- **HIGH** [forces/ForcesSystems] example_3_2_forces_with_arbitrary_angular_motion_vr at (16,1,13) unreachable
+- **HIGH** [forces/ForcesSystems] example_3_3_pointing_in_the_direction_of_motion_vr at (18,2,13) unreachable
+- **HIGH** [forces/ForcesSystems] proximity_spawner at (5,1,14) unreachable
+- **HIGH** [forces/ForcesChaos] three_body_problem at (2,2,1) unreachable
+- **HIGH** [forces/ForcesChaos] chaos_attractor at (16,2,12) unreachable
+- **HIGH** [forces/ForcesChaos] forcedirected3d at (18,1,12) unreachable
+- **HIGH** [forces/ForcesChaos] catalyst_target at (16,1,14) unreachable
+- **HIGH** [forces/ForcesChaos] catalyst_target at (18,1,14) unreachable
+- **HIGH** [forces/ForcesChaos] example_2_9_n_body_attraction_vr at (18,2,15) unreachable
+- **HIGH** [forces/ForcesChaos] proximity_spawner at (19,1,16) unreachable
+- **HIGH** [forces/ForcesArena] hits_reset_display at (5,4,0) unreachable
+- **HIGH** [forces/ForcesArena] health_display at (7,4,0) unreachable
+- **HIGH** [forces/ForcesArena] destructibles_test_scene at (15,1,14) unreachable
+- **HIGH** [forces/ForcesArena] VectorThrowing at (20,1,14) unreachable
+- **HIGH** [forces/ForcesArena] catalyst_target at (16,1,16) unreachable
+- **HIGH** [forces/ForcesArena] catalyst_target at (20,1,16) unreachable
+- **HIGH** [forces/ForcesArena] throw_ball at (17,1,18) unreachable
+- **HIGH** [forces/ForcesArena] grab_sphere_point at (19,1,18) unreachable
+- **HIGH** [forces/ForcesArena] sphere_splitting_showcase at (15,1,20) unreachable
+- **HIGH** [forces/ForcesArena] gravity_gun_test_scene at (20,1,20) unreachable
+- **HIGH** [forces/ForcesArena] proximity_spawner at (18,1,21) unreachable
+- **HIGH** [forces/ForcesArena] VectorBasics at (2,2,26) unreachable
+- **HIGH** [forces/ForcesArena] VectorAddition at (4,2,26) unreachable
+- **HIGH** [forces/ForcesArena] VectorSubtraction at (5,2,26) unreachable
+- **HIGH** [forces/ForcesArena] vector_magnitude_demo at (7,2,26) unreachable
+- **HIGH** [forces/ForcesArena] vector_normalize_demo at (9,2,26) unreachable
+- **HIGH** [forces/ForcesArena] VectorCrossProduct at (10,2,26) unreachable
+- **HIGH** [forces/ForcesArena] catalyst_target at (3,1,28) unreachable
+- **HIGH** [forces/ForcesArena] catalyst_target at (11,1,28) unreachable
+- **HIGH** [forces/ForcesArena] proximity_spawner at (12,1,30) unreachable
+- **HIGH** [array_tutorial/Array_Patterns] tiling_demo at (3,2,3) unreachable
+- **HIGH** [array_tutorial/Array_Patterns] dark_sphere at (5,1,4) unreachable
+- **HIGH** [array_tutorial/Tutorial_Single] pick_up_cube at (1,1,1) unreachable
+- **HIGH** [array_tutorial/Tutorial_Single] dark_sphere at (0,2,2) unreachable
+- **HIGH** [array_tutorial/Tutorial_Single] xyz_coordinates at (2,2,2) unreachable
+- **HIGH** [array_tutorial/Tutorial_Row] column_3_z at (1,1,2) unreachable
+- **HIGH** [array_tutorial/Tutorial_Row] dark_sphere at (2,2,4) unreachable
+- **HIGH** [array_tutorial/Tutorial_Row] xyz_coordinates at (2,2,7) unreachable
+- **HIGH** [array_tutorial/Tutorial_2D_Build] GridAgent at (1,1,21) unreachable
+- **HIGH** [array_tutorial/Tutorial_3D] grid_3d_4x4x4 at (1,1,2) unreachable
+- **HIGH** [array_tutorial/Tutorial_3D] dark_sphere at (2,1,3) unreachable
+- **HIGH** [array_tutorial/Tutorial_Pattern] pattern_tile_puzzle at (2,2,4) unreachable
+- **HIGH** [array_tutorial/Tutorial_Pattern] pattern_tile_puzzle at (3,2,4) unreachable
+- **HIGH** [array_tutorial/Tutorial_Pattern] pattern_tile_mirror at (4,2,4) unreachable
+- **HIGH** [array_tutorial/Tutorial_Disco] step_sequencer at (4,4,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] cube_scene at (2,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] transformation_cube at (3,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] rotating_cube at (5,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] y_oscillation_cube at (3,2,5) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] rotating_cube_demo at (5,2,5) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] pick_up_cube at (4,2,11) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] pick_up_cube at (4,2,12) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] pick_up_cube at (4,2,13) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] pick_up_cube at (4,2,14) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Intro] pick_up_cube at (4,2,15) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Pendulum] draw_dot_time_domain at (1,2,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Pendulum] dark_sphere at (4,4,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Pendulum] WavePaintings at (5,2,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] sine_wall_explanation at (1,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] sine_space_explanation at (8,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] colorballs at (5,1,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] colorballs at (5,1,12) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] dark_sphere at (5,1,13) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] sine_space at (5,1,15) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Sine_Space] colorballs at (5,1,17) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] cube_scene at (2,3,0) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] cube_scene at (10,3,0) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] unit_circle_advanced at (6,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] colorballs at (5,1,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] SimpleOscillatingBridge at (0,2,13) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] dark_sphere at (6,1,13) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Unit_Circle] SimpleOscillatingBridge at (12,2,13) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_3D_Wave_Propagation] dark_sphere at (5,1,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_3D_Wave_Propagation] kusama_sine at (5,1,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_3D_Wave_Propagation] wave_propagation_3d at (7,1,8) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] AudioContr at (2,2,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] pick_up_cube at (4,1,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] pick_up_cube at (9,1,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] GlassRack at (10,2,1) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] AudioContr at (2,4,2) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] RackSineBasic at (4,2,2) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] cable_builder at (9,1,2) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] VRAudioMonitor at (10,2,2) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] pick_up_cube at (6,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] pick_up_cube at (7,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] pick_up_cube at (8,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] dark_sphere at (9,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] AudioContr at (10,2,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] Rack303Acid at (4,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] RackMoogBass at (6,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] RackDX7Piano at (7,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] AudioContr at (8,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] audio_catalog_tablet at (9,1,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] AudioContr at (10,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] harmonic_distance_table at (2,2,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] chord_tension_spring at (4,2,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] timbre_sculptor at (8,2,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] GlassRack at (2,1,8) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] MarioSoundController at (1,2,9) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] mario_test_sound_ui at (8,2,9) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] MarioSoundController at (1,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] MelodyChaser3D at (4,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] interactable_demo at (10,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] MarioSoundController at (1,2,11) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] lab_table at (3,1,11) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Effect_Sound] BigPipeSystem at (6,1,11) unreachable
+- **HIGH** [wavefunctions/Wavefunctions_Bernini] ElphabaDress at (7,1,4) unreachable
+- **HIGH** [wavefunctions/Wavefunctions_Bernini] dark_sphere at (6,1,6) unreachable
+- **HIGH** [wavefunctions/Wavefunctions_Bernini] bernini_columns at (7,1,6) unreachable
+- **HIGH** [wavefunctions/Wavefunctions_Bernini] vowel_sound_board at (7,1,12) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_John_Cage] ruth_asawa_sculpture at (6,1,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_John_Cage] dark_sphere at (5,1,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_AirMusic] dark_sphere at (4,1,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_AirMusic] SystemsMusicTest at (5,1,5) unreachable
+- **HIGH** [wavefunctions/Wavefunctions_Sky_Stairs] math_objects at (6,8,11) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_TrigWalkingPath] TrigWalkingPath at (6,1,3) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_TrigWalkingPath] dark_sphere at (4,1,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] coloredlines at (6,4,0) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] hallway_scene at (7,4,0) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] dark_sphere at (5,4,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] holographicdisplay at (7,2,4) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] multimeter at (4,2,5) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] lissajous_curves at (7,2,5) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] oscilloscope at (8,2,5) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] samplevialrack at (2,2,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] electronicscales at (4,2,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] additive_wave_demo at (7,2,6) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] electronicscales at (4,2,7) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] atmosphericmonitoring at (5,4,8) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] double_helix_scene at (0,4,9) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] GlassRack at (2,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] ibomagneticresonator at (3,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] spring_demo at (7,2,10) unreachable
+- **HIGH** [wavefunctions/WaveFunctions_Synthesis_Lab] SoundscapeRadioRack at (2,4,11) unreachable
+- **HIGH** [randomness/Random_Definition] clipboard at (4,2,13) unreachable
+- **HIGH** [randomness/Random_Definition] digital_materiality_glitch at (0,2,15) unreachable
+- **HIGH** [randomness/Random_Definition] trng_vs_prng at (4,2,15) unreachable
+- **HIGH** [randomness/Random_Definition] random_number_book_page_1955 at (2,0,31) unreachable
+- **HIGH** [randomness/Random_Definition] random_number_book_page_1955 at (2,0,33) unreachable
+- **HIGH** [randomness/Random_Definition] random_number_book_page_1955 at (2,0,35) unreachable
+- **HIGH** [randomness/Random_Definition] random_number_book_page_1955 at (2,0,37) unreachable
+- **HIGH** [randomness/Random_Definition] random_number_book_page_1955 at (2,0,39) unreachable
+- **HIGH** [randomness/Randomness_10_PRINT_Algorithm] clipboard at (6,3,4) unreachable
+- **HIGH** [randomness/Random_Cubes] random_object_spawner at (5,2,6) unreachable
+- **HIGH** [randomness/Random_Cubes] random_object_spawner at (6,2,6) unreachable
+- **HIGH** [randomness/Random_Walk] random_walk_terrarium at (4,3,1) unreachable
+- **HIGH** [randomness/Random_Walk] random_walk_collection at (5,3,1) unreachable
+- **HIGH** [randomness/Random_Walk] pixel_cloud at (12,2,1) unreachable
+- **HIGH** [randomness/Random_Walk] random_walk_128 at (6,1,6) unreachable
+- **HIGH** [randomness/Random_Walk] dark_sphere at (5,1,7) unreachable
+- **HIGH** [randomness/Random_Walk] random_walk_leash at (8,1,8) unreachable
+- **HIGH** [randomness/Random_Walk] pixel_cloud at (0,2,11) unreachable
+- **HIGH** [randomness/Random_Walk] pixel_cloud at (12,2,11) unreachable
+- **HIGH** [randomness/Random_Gaussian] galton_board at (5,1,3) unreachable
+- **HIGH** [randomness/Random_Gaussian] dark_sphere at (5,1,5) unreachable
+- **HIGH** [randomness/Random_Gaussian] GaussianPaintSplatter at (5,1,6) unreachable
+- **HIGH** [randomness/Random_Gaussian] distribution_sampler at (9,1,6) unreachable
+- **HIGH** [randomness/Random_Gaussian] GaussianBlurShader at (2,1,8) unreachable
+- **HIGH** [randomness/Random_Gaussian] GaussianBlurShader at (9,1,8) unreachable
+- **HIGH** [randomness/Random_Gaussian] gaussian_random at (3,1,11) unreachable
+- **HIGH** [randomness/Random_Gaussian] random_bell_curve at (6,1,20) unreachable
+- **HIGH** [randomness/Random_Mushrooms] dark_sphere at (5,1,5) unreachable
+- **HIGH** [randomness/Random_Mushrooms] mushrooms at (4,1,6) unreachable
+- **HIGH** [randomness/Random_Mushrooms] bubbles_random at (5,1,6) unreachable
+- **HIGH** [randomness/Random_Mushrooms] random_number_book_page_collection at (5,2,12) unreachable
+- **HIGH** [randomness/Randomness_Examples_of_Randomness] extreme_randomness at (5,2,10) unreachable
+- **HIGH** [randomness/Random_Space] random_space at (6,1,6) unreachable
+- **HIGH** [randomness/Random_Space] dark_sphere at (5,1,7) unreachable
+- **HIGH** [noise/Random_Noise_Types] randompoints at (1,2,3) unreachable
+- **HIGH** [noise/Random_Noise_Types] WhiteNoiseGallery at (3,2,3) unreachable
+- **HIGH** [noise/Random_Noise_Types] NoiseColors3D at (5,2,3) unreachable
+- **HIGH** [noise/Noise_Columns] dark_sphere at (5,1,4) unreachable
+- **HIGH** [noise/Noise_Columns] MeltingBerniniScene at (5,1,6) unreachable
+- **HIGH** [noise/Noise_One] noisetorus at (5,1,5) unreachable
+- **HIGH** [noise/Noise_One] noiselayers at (5,1,6) unreachable
+- **HIGH** [noise/Noise_One] dark_sphere at (5,1,7) unreachable
+- **HIGH** [noise/Noise_6_Wall] shader_noise_space at (5,1,5) unreachable
+- **HIGH** [noise/Noise_6_Wall] dark_sphere at (5,1,7) unreachable
+- **HIGH** [noise/Noise_Inside_Noise] dark_sphere at (5,1,5) unreachable
+- **HIGH** [noise/Noise_Inside_Noise] noisesphere at (5,1,6) unreachable
+- **HIGH** [noise/Noise_Space_10] dark_sphere at (5,1,5) unreachable
+- **HIGH** [noise/Noise_Space_10] noise_space at (5,1,6) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] simplex_noise at (2,1,3) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] perlin_noise at (7,1,3) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] noise_terrain at (5,1,6) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] dark_sphere at (5,1,7) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] perlin_noise_terrain at (5,1,10) unreachable
+- **HIGH** [noise/Noise_Perlin_Simplex] configurable_portal at (8,1,12) unreachable
+- **HIGH** [cellularautomata/CA_4] dark_sphere at (3,1,2) unreachable
+- **HIGH** [cellularautomata/CA_4] hexagon_ca_vr at (3,1,3) unreachable
+- **HIGH** [cellularautomata/CA_4] ca_growth_network at (2,1,4) unreachable
+- **HIGH** [cellularautomata/CA_12] ca_screen at (2,1,2) unreachable
+- **HIGH** [cellularautomata/CA_12] self_organization_ca at (4,1,2) unreachable
+- **HIGH** [cellularautomata/CA_12] disease_spread_ca at (6,1,2) unreachable
+- **HIGH** [cellularautomata/CA_12] volumetric_fog_ca at (3,1,3) unreachable
+- **HIGH** [fractals/Fractals_1] recursive_chair at (2,2,2) unreachable
+- **HIGH** [fractals/Fractals_1] recursive_table at (2,2,3) unreachable
+- **HIGH** [fractals/Fractals_1] cube_subdivision at (3,2,5) unreachable
+- **HIGH** [fractals/Fractals_1] cube_subdivision at (4,2,5) unreachable
+- **HIGH** [fractals/Fractals_1] cube_subdivision at (5,2,5) unreachable
+- **HIGH** [fractals/Fractals_2] small_subdivision_cube at (1,2,3) unreachable
+- **HIGH** [fractals/Fractals_2] small_subdivision_cube at (2,2,3) unreachable
+- **HIGH** [fractals/Fractals_2] inverted_tree_cloud at (10,3,3) unreachable
+- **HIGH** [fractals/Fractals_2] dark_sphere at (7,1,5) unreachable
+- **HIGH** [fractals/Fractals_2] inverted_tree_cloud at (10,3,7) unreachable
+- **HIGH** [fractals/Fractals_3] example_8_4_cantor_pagoda_vr at (8,2,11) unreachable
+- **HIGH** [fractals/Fractals_4] fractal_koch_curve at (5,2,3) unreachable
+- **HIGH** [fractals/Fractals_5] dark_sphere at (8,2,5) unreachable
+- **HIGH** [fractals/Fractals_6] menger_sponge at (6,1,5) unreachable
+- **HIGH** [fractals/Fractals_6] dark_sphere at (6,1,6) unreachable
+- **HIGH** [fractals/Fractals_7] dark_sphere at (7,2,5) unreachable
+- **HIGH** [fractals/Fractals_8] dark_sphere at (4,2,3) unreachable
+- **HIGH** [fractals/Fractals_9] dark_sphere at (4,2,3) unreachable
+- **HIGH** [fractals/Fractals_10] dark_sphere at (10,2,6) unreachable
+- **HIGH** [fractals/Fractals_11] inverted_tree_cloud at (3,2,3) unreachable
+- **HIGH** [fractals/Fractals_13] mandelbrot_set at (3,2,3) unreachable
+- **HIGH** [fractals/Fractals_14] fractal_stochastic_tree at (3,2,3) unreachable
+- **HIGH** [lsystems/LSystems_Grammars_And_Curves] Hilbert3D at (3,2,3) unreachable
+- **HIGH** [lsystems/LSystems_Living] branching_coral at (2,3,6) unreachable
+- **HIGH** [proceduralgeneration/PG_Genetic_Evolution] GeneticProgramming at (4,3,3) unreachable
+- **HIGH** [proceduralgeneration/PG_Percolation_Network] dark_sphere at (5,2,5) unreachable
+- **HIGH** [proceduralgeneration/PG_Percolation_Network] percolationnetwork_ca at (4,2,10) unreachable
+- **HIGH** [proceduralgeneration/PG_Sculpted_Forms] layered_membrane at (6,2,6) unreachable
+- **HIGH** [softbodies/SoftBodies_Cloth_Physics] softstopscene at (1,2,3) unreachable
+- **HIGH** [machinelearning/ML_Evolution] evolved_creatures at (3,2,1) unreachable
+- **HIGH** [machinelearning/ML_Evolution] evolvingflowers at (10,2,2) unreachable
+- **HIGH** [machinelearning/ML_Evolution] 9_3_smart_rockets_vr at (1,2,4) unreachable
+- **HIGH** [machinelearning/ML_Evolution] 9_5_evolving_bloops_vr at (1,2,6) unreachable
+- **HIGH** [machinelearning/ML_Evolution] gradient_descent_visualization at (3,2,7) unreachable
+- **HIGH** [machinelearning/ML_Classification] svm_visualization at (4,2,2) unreachable
+- **HIGH** [machinelearning/ML_Classification] random_forest_visualization at (8,2,3) unreachable
+- **HIGH** [machinelearning/ML_Neural_Networks] neural_network_visualization at (2,2,5) unreachable
+- **HIGH** [machinelearning/ML_Neural_Networks] learn_world_stacked at (1,2,10) unreachable
+- **HIGH** [machinelearning/ML_Perception] computer_vision_vr at (5,2,1) unreachable
+- **HIGH** [machinelearning/ML_Perception] convolutional_neural_networks_cnns_vr at (1,2,3) unreachable
+- **HIGH** [machinelearning/ML_Sequence_Memory] lstms_vr at (1,2,2) unreachable
+- **HIGH** [machinelearning/ML_Sequence_Memory] transformers_vr at (1,2,6) unreachable
+- **HIGH** [machinelearning/ML_Synthesis] joint_learn_walk at (7,2,1) unreachable
+- **HIGH** [machinelearning/ML_Synthesis] explainable_ai_xai_vr at (5,2,5) unreachable
+- **HIGH** [machinelearning/ML_Synthesis] anomaly_detection at (0,2,9) unreachable
+- **HIGH** [foundationscrisis/NonEuclidean_Spaces] poincare_disk at (3,2,8) unreachable
+- **HIGH** [foundationscrisis/NonEuclidean_Spaces] riemann_sphere at (11,2,8) unreachable
+- **HIGH** [foundationscrisis/Brouwer_Intuitionism] excluded_middle_demo at (2,1,4) unreachable
+- **HIGH** [foundationscrisis/Brouwer_Intuitionism] constructive_proof at (9,1,4) unreachable
+- **HIGH** [foundationscrisis/Brouwer_Intuitionism] brouwer_choice_sequence at (5,1,7) unreachable
+- **HIGH** [foundationscrisis/Florensky_Paraconsistent] florensky_sphere at (6,3,5) unreachable
+- **HIGH** [foundationscrisis/Crisis_Synthesis] qfep_formula_3d at (8,3,8) unreachable
+- **HIGH** [foundationscrisis/Crisis_Synthesis] lambda_slider at (6,2,11) unreachable
+- **HIGH** [foundationscrisis/Crisis_Synthesis] phi_slider at (10,2,11) unreachable
+- **HIGH** [qfeplaboratory/QFEP_F_Term] crystal_cluster at (4,2,4) unreachable
+- **HIGH** [qfeplaboratory/QFEP_F_Term] dark_sphere at (4,2,10) unreachable
+- **HIGH** [qfeplaboratory/QFEP_E_Term] random_cubes at (4,3,3) unreachable
+- **HIGH** [qfeplaboratory/QFEP_E_Term] random_cubes at (7,3,3) unreachable
+- **HIGH** [qfeplaboratory/QFEP_E_Term] particle_chaos at (5,3,5) unreachable
+- **HIGH** [qfeplaboratory/QFEP_E_Term] random_cubes at (4,3,7) unreachable
+- **HIGH** [qfeplaboratory/QFEP_E_Term] random_cubes at (7,3,7) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Lambda_Spectrum] bifurcation_walkway at (0,2,6) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Phi_Term] phi_slider at (4,2,4) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] turing_pattern at (4,3,3) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] turing_pattern at (8,3,3) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] edge_core at (6,4,6) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] emergence_zone at (4,3,9) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] emergence_zone at (8,3,9) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Edge_Of_Chaos] tt at (9,2,11) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Sandbox] qfep_reactor at (6,3,5) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Sandbox] reactive_particles at (4,3,7) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Sandbox] reactive_particles at (8,3,7) unreachable
+- **HIGH** [qfeplaboratory/QFEP_Synthesis] qfep_formula_3d at (5,3,5) unreachable
+- **HIGH** [graphtheory/GT_Foundations] KonigsbergBridge at (5,1,5) unreachable
+- **HIGH** [graphtheory/GT_Network_Analysis] networkflow3d at (5,2,4) unreachable
+- **HIGH** [graphtheory/GT_Network_Analysis] rhizomatic_structure at (9,1,5) unreachable
+- **HIGH** [graphtheory/GT_Network_Analysis] network_analysis at (5,2,6) unreachable
+- **HIGH** [graphtheory/GT_Connectivity] kosaraju_algorithm at (5,2,4) unreachable
+- **HIGH** [graphtheory/GT_Spanning_Trees] mst_visualization at (5,3,4) unreachable
+- low [primitives/Point_Line_Grid] 0.0 steps per artifact (very dense)
+- low [primitives/Primitives_Portals] 7 dead ends found
+- low [primitives/Primitives_Melencolia] 4 dead ends found
+- low [transformation/Trans_Translate_1] 8 dead ends found
+- low [color/Color_Nails] 4 dead ends found
+- low [color/Color_Rainbow] 4 dead ends found
+- low [color/Color_Rainbow] 0.8 steps per artifact (very dense)
+- low [color/Color_Pillar] 4 dead ends found
+- low [array_tutorial/Tutorial_2D_Build] 6 dead ends found
+- low [array_tutorial/Tutorial_Disco] 4 dead ends found
+- low [wavefunctions/WaveFunctions_Sine_Space] 4 dead ends found
+- low [wavefunctions/WaveFunctions_Unit_Circle] 8 dead ends found
+- low [wavefunctions/WaveFunctions_3D_Wave_Propagation] 9 dead ends found
+- low [wavefunctions/Wavefunctions_Sky_Stairs] 5 dead ends found
+- low [wavefunctions/Wavefunctions_Sky_Stairs] 0.9 steps per artifact (very dense)
+- low [wavefunctions/WaveFunctions_Synthesis_Lab] 8 dead ends found
+- low [randomness/Random_Cubes] 0.5 steps per artifact (very dense)
+- low [randomness/Random_Space_Geometry] 5 dead ends found
+- low [randomness/Random_Space] 7 dead ends found
+- low [randomness/Random_Game] 0.9 steps per artifact (very dense)
+- low [cellularautomata/CA_4] 5 dead ends found
+- low [cellularautomata/CA_7] 9.0 steps per artifact (sparse)
+- low [cellularautomata/CA_10] 9.0 steps per artifact (sparse)
+- low [machinelearning/ML_Classification] 4 dead ends found
+- low [foundationscrisis/Euclid_Parallel] 4 dead ends found
+- low [foundationscrisis/NonEuclidean_Spaces] 4 dead ends found
+- low [foundationscrisis/Russell_Paradox] 5 dead ends found
+- low [foundationscrisis/Godel_Incompleteness] 9.0 steps per artifact (sparse)
+- low [foundationscrisis/Brouwer_Intuitionism] 13 dead ends found
+- low [foundationscrisis/Florensky_Paraconsistent] 4 dead ends found
+- low [foundationscrisis/Crisis_Synthesis] 6 dead ends found
+- low [qfeplaboratory/QFEP_Edge_Of_Chaos] 11.0 steps per artifact (sparse)
+- low [graphtheory/GT_Foundations] 4 dead ends found
+- low [graphtheory/GT_Pathfinding] 12.0 steps per artifact (sparse)
+- low [graphtheory/GT_Network_Analysis] 7 dead ends found

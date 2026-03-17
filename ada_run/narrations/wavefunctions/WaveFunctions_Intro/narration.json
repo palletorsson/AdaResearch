@@ -1,0 +1,1186 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 0,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 1,
+				"name": "pickup_cube_rotating",
+				"pos": [
+					4,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 2,
+				"name": "pickup_cube_transforming",
+				"pos": [
+					4,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 4,
+				"name": "control_pendulum",
+				"pos": [
+					2,
+					1,
+					11
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 6,
+				"name": "oscillation_controlled_cube",
+				"pos": [
+					2,
+					1,
+					13
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 6,
+				"name": "mario_cube_time_trace",
+				"pos": [
+					6,
+					1,
+					13
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 7,
+				"name": "pickup_cube_static",
+				"pos": [
+					4,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 8,
+				"name": "rotatescalecubes",
+				"pos": [
+					4,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 12,
+				"name": "SphericalHarmonics",
+				"pos": [
+					1,
+					1,
+					18
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "SphericalHarmonics",
+				"pos": [
+					7,
+					1,
+					18
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "cube_scene",
+				"pos": [
+					2,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "transformation_cube",
+				"pos": [
+					3,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "rotating_cube",
+				"pos": [
+					5,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "y_oscillation_cube",
+				"pos": [
+					3,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "rotating_cube_demo",
+				"pos": [
+					5,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					11
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					12
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					13
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					14
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				4,
+				0,
+				20
+			],
+			[
+				4,
+				0,
+				21
+			]
+		],
+		"issues": [
+			{
+				"description": "cube_scene at (2,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "transformation_cube at (3,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "rotating_cube at (5,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "y_oscillation_cube at (3,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "rotating_cube_demo at (5,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pick_up_cube at (4,2,11) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pick_up_cube at (4,2,12) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pick_up_cube at (4,2,13) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pick_up_cube at (4,2,14) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pick_up_cube at (4,2,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "WaveFunctions_Intro",
+		"pacing": {
+			"density": 1.2,
+			"reachable_artifacts": 10,
+			"total_artifacts": 20,
+			"walkable_tiles": 123
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			4,
+			1,
+			9
+		],
+		"teleporter": {
+			"dist": 12,
+			"pos": [
+				4,
+				0,
+				19
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "WaveFunctions_Intro",
+	"sequence": "wavefunctions",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "rotatescalecubes",
+				"pos": [
+					4,
+					1,
+					1
+				]
+			},
+			{
+				"name": "pickup_cube_static",
+				"pos": [
+					4,
+					1,
+					2
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					2,
+					2,
+					4
+				]
+			},
+			{
+				"name": "transformation_cube",
+				"pos": [
+					3,
+					2,
+					4
+				]
+			},
+			{
+				"name": "rotating_cube",
+				"pos": [
+					5,
+					2,
+					4
+				]
+			},
+			{
+				"name": "y_oscillation_cube",
+				"pos": [
+					3,
+					2,
+					5
+				]
+			},
+			{
+				"name": "rotating_cube_demo",
+				"pos": [
+					5,
+					2,
+					5
+				]
+			},
+			{
+				"name": "pickup_cube_transforming",
+				"pos": [
+					4,
+					1,
+					7
+				]
+			},
+			{
+				"name": "pickup_cube_rotating",
+				"pos": [
+					4,
+					1,
+					8
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					9
+				]
+			},
+			{
+				"name": "control_pendulum",
+				"pos": [
+					2,
+					1,
+					11
+				]
+			},
+			{
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					11
+				]
+			},
+			{
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					12
+				]
+			},
+			{
+				"name": "oscillation_controlled_cube",
+				"pos": [
+					2,
+					1,
+					13
+				]
+			},
+			{
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					13
+				]
+			},
+			{
+				"name": "mario_cube_time_trace",
+				"pos": [
+					6,
+					1,
+					13
+				]
+			},
+			{
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					14
+				]
+			},
+			{
+				"name": "pick_up_cube",
+				"pos": [
+					4,
+					2,
+					15
+				]
+			},
+			{
+				"name": "SphericalHarmonics",
+				"pos": [
+					1,
+					1,
+					18
+				]
+			},
+			{
+				"name": "SphericalHarmonics",
+				"pos": [
+					7,
+					1,
+					18
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			3,
+			22
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 123,
+			"ground_pct": 55.9090909090909,
+			"void": 23,
+			"walls": 74
+		},
+		"map_name": "WaveFunctions_Intro",
+		"rooms": [
+			{
+				"artifacts": [
+					"rotatescalecubes",
+					"pickup_cube_static",
+					"pickup_cube_transforming",
+					"pickup_cube_rotating",
+					"dark_sphere",
+					"control_pendulum",
+					"oscillation_controlled_cube",
+					"mario_cube_time_trace",
+					"SphericalHarmonics",
+					"SphericalHarmonics"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 121
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south",
+				"tiles": 2
+			}
+		],
+		"spawn": [
+			4,
+			1,
+			9
+		],
+		"teleporter": [
+			4,
+			0,
+			19
+		]
+	},
+	"timestamp": "2026-03-16T12:13:09",
+	"walkthrough": {
+		"map_name": "WaveFunctions_Intro",
+		"stops": [
+			{
+				"facing": "here",
+				"look_at": [
+					4,
+					1,
+					9
+				],
+				"pos": [
+					4,
+					1,
+					9
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "control_pendulum"
+					},
+					{
+						"direction": "north",
+						"dist": 5,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 5,
+						"name": "rotating_cube_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "pickup_cube_static"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "rotatescalecubes"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "pickup_cube_rotating",
+				"pos": [
+					4,
+					1,
+					8
+				],
+				"steps_from_prev": 1,
+				"total_steps": 1,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "rotating_cube_demo"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "control_pendulum"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "pickup_cube_static"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "rotatescalecubes"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "oscillation_controlled_cube"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "mario_cube_time_trace"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "SphericalHarmonics"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "SphericalHarmonics"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "pickup_cube_transforming",
+				"pos": [
+					4,
+					1,
+					7
+				],
+				"steps_from_prev": 1,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "rotating_cube_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 5,
+						"name": "pickup_cube_static"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "rotatescalecubes"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "control_pendulum"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "oscillation_controlled_cube"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "mario_cube_time_trace"
+					},
+					{
+						"direction": "south",
+						"dist": 14,
+						"name": "SphericalHarmonics"
+					},
+					{
+						"direction": "south",
+						"dist": 14,
+						"name": "SphericalHarmonics"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "pickup_cube_static",
+				"pos": [
+					4,
+					1,
+					2
+				],
+				"steps_from_prev": 5,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "rotatescalecubes"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "transformation_cube"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "rotating_cube"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "south",
+				"name": "rotatescalecubes",
+				"pos": [
+					4,
+					1,
+					1
+				],
+				"steps_from_prev": 1,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "pickup_cube_static"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "transformation_cube"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "rotating_cube"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "control_pendulum",
+				"pos": [
+					2,
+					1,
+					11
+				],
+				"steps_from_prev": 12,
+				"total_steps": 20,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "oscillation_controlled_cube"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 4,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "SphericalHarmonics"
+					},
+					{
+						"direction": "northeast",
+						"dist": 9,
+						"name": "rotating_cube_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "oscillation_controlled_cube",
+				"pos": [
+					2,
+					1,
+					13
+				],
+				"steps_from_prev": 2,
+				"total_steps": 22,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "control_pendulum"
+					},
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 4,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "SphericalHarmonics"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "rotating_cube_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "mario_cube_time_trace",
+				"pos": [
+					6,
+					1,
+					13
+				],
+				"steps_from_prev": 4,
+				"total_steps": 26,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "SphericalHarmonics"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "rotating_cube_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "y_oscillation_cube"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "west",
+				"name": "SphericalHarmonics",
+				"pos": [
+					7,
+					1,
+					18
+				],
+				"steps_from_prev": 6,
+				"total_steps": 32,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "mario_cube_time_trace"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 7,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 8,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northwest",
+						"dist": 9,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 13,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "north",
+						"dist": 14,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "north",
+						"dist": 15,
+						"name": "rotating_cube_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 17,
+						"name": "y_oscillation_cube"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "east",
+				"name": "SphericalHarmonics",
+				"pos": [
+					1,
+					1,
+					18
+				],
+				"steps_from_prev": 6,
+				"total_steps": 38,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "oscillation_controlled_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 7,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "control_pendulum"
+					},
+					{
+						"direction": "northeast",
+						"dist": 8,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 9,
+						"name": "pick_up_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 13,
+						"name": "pickup_cube_rotating"
+					},
+					{
+						"direction": "north",
+						"dist": 14,
+						"name": "pickup_cube_transforming"
+					},
+					{
+						"direction": "north",
+						"dist": 15,
+						"name": "y_oscillation_cube"
+					},
+					{
+						"direction": "north",
+						"dist": 17,
+						"name": "rotating_cube_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"pos": [
+					4,
+					0,
+					19
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 38,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 10,
+			"total_steps": 38,
+			"total_stops": 11
+		}
+	}
+}

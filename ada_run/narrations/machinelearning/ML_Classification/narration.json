@@ -1,0 +1,239 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "enhanced_kmeans",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "svm_visualization",
+				"pos": [
+					4,
+					2,
+					2
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "random_forest_visualization",
+				"pos": [
+					8,
+					2,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				2,
+				0,
+				4
+			],
+			[
+				3,
+				0,
+				2
+			],
+			[
+				7,
+				0,
+				7
+			],
+			[
+				9,
+				0,
+				7
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (8,0,6) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "4 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "svm_visualization at (4,2,2) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_forest_visualization at (8,2,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "ML_Classification",
+		"pacing": {
+			"density": 2.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 3,
+			"walkable_tiles": 17
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				8,
+				0,
+				6
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "ML_Classification",
+	"sequence": "machinelearning",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "enhanced_kmeans",
+				"pos": [
+					1,
+					1,
+					1
+				]
+			},
+			{
+				"name": "svm_visualization",
+				"pos": [
+					4,
+					2,
+					2
+				]
+			},
+			{
+				"name": "random_forest_visualization",
+				"pos": [
+					8,
+					2,
+					3
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			3,
+			8
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 17,
+			"ground_pct": 21.25,
+			"void": 1,
+			"walls": 62
+		},
+		"map_name": "ML_Classification",
+		"rooms": [
+			{
+				"artifacts": [
+					"enhanced_kmeans"
+				],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 14
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south, east",
+				"tiles": 3
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			8,
+			0,
+			6
+		]
+	},
+	"timestamp": "2026-03-16T12:15:58",
+	"walkthrough": {
+		"map_name": "ML_Classification",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					1,
+					1,
+					1
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "enhanced_kmeans"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "enhanced_kmeans",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "svm_visualization"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					8,
+					0,
+					6
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 2,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 2,
+			"total_stops": 3
+		}
+	}
+}

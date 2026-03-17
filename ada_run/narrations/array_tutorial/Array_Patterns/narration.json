@@ -1,0 +1,475 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "pattern_tile_4x4",
+				"pos": [
+					3,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 6,
+				"name": "vr_tile_editor_mirror",
+				"pos": [
+					5,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 8,
+				"name": "pattern_tile_mirror",
+				"pos": [
+					7,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "pattern_tile_brick",
+				"pos": [
+					3,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 16,
+				"name": "pattern_tile_herringbone",
+				"pos": [
+					7,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 17,
+				"name": "facade_grammar_demo",
+				"pos": [
+					9,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "tiling_demo",
+				"pos": [
+					3,
+					2,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "tiling_demo at (3,2,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (5,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Array_Patterns",
+		"pacing": {
+			"density": 2.83333333333333,
+			"reachable_artifacts": 6,
+			"total_artifacts": 8,
+			"walkable_tiles": 70
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			0,
+			0
+		],
+		"teleporter": {
+			"dist": 17,
+			"pos": [
+				8,
+				0,
+				9
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Array_Patterns",
+	"sequence": "array_tutorial",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "pattern_tile_4x4",
+				"pos": [
+					3,
+					1,
+					1
+				]
+			},
+			{
+				"name": "vr_tile_editor_mirror",
+				"pos": [
+					5,
+					1,
+					1
+				]
+			},
+			{
+				"name": "pattern_tile_mirror",
+				"pos": [
+					7,
+					1,
+					1
+				]
+			},
+			{
+				"name": "tiling_demo",
+				"pos": [
+					3,
+					2,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					4
+				]
+			},
+			{
+				"name": "facade_grammar_demo",
+				"pos": [
+					9,
+					1,
+					8
+				]
+			},
+			{
+				"name": "pattern_tile_brick",
+				"pos": [
+					3,
+					1,
+					9
+				]
+			},
+			{
+				"name": "pattern_tile_herringbone",
+				"pos": [
+					7,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			11,
+			2,
+			11
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 70,
+			"ground_pct": 57.8512396694215,
+			"void": 1,
+			"walls": 50
+		},
+		"map_name": "Array_Patterns",
+		"rooms": [
+			{
+				"artifacts": [
+					"pattern_tile_4x4",
+					"vr_tile_editor_mirror",
+					"pattern_tile_mirror",
+					"facade_grammar_demo",
+					"pattern_tile_brick",
+					"pattern_tile_herringbone"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 61
+			},
+			{
+				"artifacts": [
+					"dark_sphere"
+				],
+				"label": "B",
+				"region": "center",
+				"tiles": 9
+			}
+		],
+		"spawn": [
+			0,
+			0,
+			0
+		],
+		"teleporter": [
+			8,
+			0,
+			9
+		]
+	},
+	"timestamp": "2026-03-16T12:12:59",
+	"walkthrough": {
+		"map_name": "Array_Patterns",
+		"stops": [
+			{
+				"facing": "east",
+				"look_at": [
+					3,
+					1,
+					1
+				],
+				"pos": [
+					0,
+					0,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "pattern_tile_4x4"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "tiling_demo"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "pattern_tile_brick"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "east",
+				"name": "pattern_tile_4x4",
+				"pos": [
+					3,
+					1,
+					1
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "vr_tile_editor_mirror"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "tiling_demo"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "pattern_tile_mirror"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "east",
+				"name": "vr_tile_editor_mirror",
+				"pos": [
+					5,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 6,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "pattern_tile_4x4"
+					},
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "pattern_tile_mirror"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "tiling_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "pattern_tile_mirror",
+				"pos": [
+					7,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "vr_tile_editor_mirror"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "pattern_tile_4x4"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "tiling_demo"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "facade_grammar_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "northeast",
+				"name": "pattern_tile_herringbone",
+				"pos": [
+					7,
+					1,
+					9
+				],
+				"steps_from_prev": 8,
+				"total_steps": 16,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "facade_grammar_demo"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "pattern_tile_brick"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "west",
+				"name": "facade_grammar_demo",
+				"pos": [
+					9,
+					1,
+					8
+				],
+				"steps_from_prev": 3,
+				"total_steps": 19,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "pattern_tile_herringbone"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "pattern_tile_brick"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "pattern_tile_mirror"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "east",
+				"name": "pattern_tile_brick",
+				"pos": [
+					3,
+					1,
+					9
+				],
+				"steps_from_prev": 7,
+				"total_steps": 26,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "pattern_tile_herringbone"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "facade_grammar_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"pos": [
+					8,
+					0,
+					9
+				],
+				"reachable": true,
+				"steps_from_prev": 5,
+				"total_steps": 31,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 6,
+			"total_steps": 31,
+			"total_stops": 8
+		}
+	}
+}

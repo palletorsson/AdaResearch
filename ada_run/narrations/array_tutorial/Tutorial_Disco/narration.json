@@ -1,0 +1,260 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 12,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 15,
+				"name": "standalone_disco",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "step_sequencer",
+				"pos": [
+					4,
+					4,
+					1
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				0
+			],
+			[
+				4,
+				0,
+				0
+			],
+			[
+				5,
+				0,
+				0
+			],
+			[
+				15,
+				0,
+				15
+			]
+		],
+		"issues": [
+			{
+				"description": "4 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "step_sequencer at (4,4,1) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Tutorial_Disco",
+		"pacing": {
+			"density": 7.5,
+			"reachable_artifacts": 2,
+			"total_artifacts": 3,
+			"walkable_tiles": 133
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 29,
+			"pos": [
+				14,
+				0,
+				15
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Tutorial_Disco",
+	"sequence": "array_tutorial",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "step_sequencer",
+				"pos": [
+					4,
+					4,
+					1
+				]
+			},
+			{
+				"name": "standalone_disco",
+				"pos": [
+					8,
+					1,
+					7
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					8
+				]
+			}
+		],
+		"dimensions": [
+			17,
+			4,
+			17
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 133,
+			"ground_pct": 46.0207612456747,
+			"void": 66,
+			"walls": 90
+		},
+		"map_name": "Tutorial_Disco",
+		"rooms": [
+			{
+				"artifacts": [
+					"standalone_disco",
+					"dark_sphere"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 131
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "north, west",
+				"tiles": 2
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			14,
+			0,
+			15
+		]
+	},
+	"timestamp": "2026-03-16T12:13:08",
+	"walkthrough": {
+		"map_name": "Tutorial_Disco",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					4,
+					1,
+					8
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 15,
+						"name": "standalone_disco"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "east",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					8
+				],
+				"steps_from_prev": 12,
+				"total_steps": 12,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "standalone_disco"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "step_sequencer"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southeast",
+				"name": "standalone_disco",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"steps_from_prev": 5,
+				"total_steps": 17,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northwest",
+						"dist": 10,
+						"name": "step_sequencer"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					14,
+					0,
+					15
+				],
+				"reachable": true,
+				"steps_from_prev": 14,
+				"total_steps": 31,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 31,
+			"total_stops": 4
+		}
+	}
+}

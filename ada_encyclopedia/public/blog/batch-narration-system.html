@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batch Map Narration: Teaching a Machine to Walk Every Room | Ada Research</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent-pink: #E91E63;
+    --accent-blue: #4A90D9;
+    --accent-purple: #9B59B6;
+    --accent-green: #2ECC71;
+    --accent-orange: #F39C12;
+    --accent-red: #E74C3C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent-pink); }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent-purple); }
+  p { margin-bottom: 1rem; }
+  .date { color: var(--text-dim); margin-bottom: 2rem; }
+  code { background: var(--surface2); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; color: var(--accent-green); }
+  pre { background: var(--surface); padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 3px solid var(--accent-purple); padding: 0.5rem 1rem; margin: 1rem 0; background: var(--surface); border-radius: 0 6px 6px 0; }
+  a { color: var(--accent-blue); }
+  .pipeline { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin: 1.5rem 0; }
+  .pipeline-step { background: var(--surface); padding: 0.8rem 1rem; border-radius: 6px; border-left: 3px solid var(--accent-blue); display: flex; align-items: center; gap: 0.8rem; }
+  .pipeline-step .num { background: var(--accent-blue); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 600; flex-shrink: 0; }
+  .pipeline-step.critical { border-left-color: var(--accent-red); }
+  .pipeline-step.critical .num { background: var(--accent-red); }
+  .pipeline-step.ok { border-left-color: var(--accent-green); }
+  .pipeline-step.ok .num { background: var(--accent-green); }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; margin: 1.5rem 0; }
+  .stat { background: var(--surface); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid var(--border); }
+  .stat .value { font-size: 1.8rem; font-weight: 700; color: var(--accent-pink); }
+  .stat .label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  .issue-list { margin: 1rem 0; }
+  .issue { background: var(--surface); padding: 0.6rem 1rem; border-radius: 6px; margin: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem; }
+  .issue .severity { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.15rem 0.5rem; border-radius: 3px; }
+  .severity.critical { background: var(--accent-red); color: #fff; }
+  .severity.high { background: var(--accent-orange); color: #000; }
+  .severity.low { background: var(--surface2); color: var(--text-dim); }
+  .json-sample { font-size: 0.85rem; }
+  .architecture { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .arch-box { background: var(--surface); padding: 1rem; border-radius: 6px; border: 1px solid var(--border); }
+  .arch-box h4 { color: var(--accent-orange); margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .arch-box ul { list-style: none; font-size: 0.9rem; }
+  .arch-box ul li { padding: 0.15rem 0; color: var(--text-dim); }
+  .arch-box ul li::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-right: 0.5rem; }
+  @media (max-width: 600px) {
+    .architecture { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Batch Map Narration</h1>
+<p class="date">March 16, 2026</p>
+
+<p>Ada Research has around 500 maps spread across 19 curriculum sequences. Each map is a hand-authored grid of walkable tiles, walls, artifacts, and a teleporter to the next level. Until now, the only way to know if a map actually <em>worked</em> &mdash; if the player could reach every artifact, find the exit, and not get stuck in a dead end &mdash; was to load it in VR and walk it yourself.</p>
+
+<p>Today we built a system that walks every map automatically, narrates what it sees, and reports problems across the entire curriculum.</p>
+
+<h2>What SceneNarrator Already Did</h2>
+
+<p>We had an autoload called <code>SceneNarrator</code> &mdash; a perception system that watches the active GridSystem and produces two documents when a map loads:</p>
+
+<blockquote>
+<strong>Spatial Analysis</strong> &mdash; the geometry. Dimensions, room detection, height profile, where artifacts sit in space.<br>
+<strong>Journey Narrative</strong> &mdash; the experience. BFS from spawn, which artifacts you hit in what order, pacing density, dead-end analysis.
+</blockquote>
+
+<p>This worked well for one map at a time. Load a map in the editor, SceneNarrator generates its markdown report. But running it on 500 maps by hand? That's not a workflow, it's a punishment.</p>
+
+<h2>The Batch Runner</h2>
+
+<p>The new <code>narrate_all.gd</code> script extends <code>SceneTree</code> (the same pattern as our existing screenshot capture pipeline) and iterates the entire curriculum spine automatically:</p>
+
+<pre><code>godot --path . --xr-mode off --no-window \
+  --script res://commons/testing/narrate_all.gd -- \
+  --outdir=res://ada_run/narrations \
+  --sequence=cellularautomata \
+  --wait=3</code></pre>
+
+<h3>Per-Map Pipeline</h3>
+
+<div class="pipeline">
+  <div class="pipeline-step"><span class="num">1</span> Read <code>curriculum_spine.json</code> &rarr; ordered sequence list</div>
+  <div class="pipeline-step"><span class="num">2</span> For each sequence, load <code>sequences/&lt;name&gt;.json</code> &rarr; ordered map list</div>
+  <div class="pipeline-step"><span class="num">3</span> Instantiate GridSystem, connect generation signal, add to tree</div>
+  <div class="pipeline-step"><span class="num">4</span> Wait for <code>map_generation_complete</code> signal (with timeout fallback)</div>
+  <div class="pipeline-step"><span class="num">5</span> Disable artifact processing (prevent simulation loops from starving timers)</div>
+  <div class="pipeline-step"><span class="num">6</span> Force SceneNarrator to reconnect, collect spatial + journey data</div>
+  <div class="pipeline-step"><span class="num">7</span> Write per-map files, tear down GridSystem, move to next</div>
+</div>
+
+<p>For each map, the runner writes three files into <code>ada_run/narrations/&lt;sequence&gt;/&lt;map&gt;/</code>:</p>
+
+<div class="architecture">
+  <div class="arch-box">
+    <h4>Markdown (Human)</h4>
+    <ul>
+      <li>scene_spatial.md</li>
+      <li>journey_narrative.md</li>
+    </ul>
+  </div>
+  <div class="arch-box">
+    <h4>JSON (Machine)</h4>
+    <ul>
+      <li>narration.json</li>
+      <li>narration_report.json (global)</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Issue Detection</h2>
+
+<p>The journey analysis doesn't just describe &mdash; it diagnoses. BFS from spawn classifies every tile as reachable or unreachable, and flags five categories of problem:</p>
+
+<div class="issue-list">
+  <div class="issue"><span class="severity critical">critical</span> No spawn point found</div>
+  <div class="issue"><span class="severity critical">critical</span> Teleporter unreachable from spawn</div>
+  <div class="issue"><span class="severity high">high</span> Artifact unreachable from spawn</div>
+  <div class="issue"><span class="severity low">low</span> High dead-end count (&gt;3)</div>
+  <div class="issue"><span class="severity low">low</span> Poor pacing density (too sparse or too dense)</div>
+</div>
+
+<p>These get aggregated into a global report: which sequences have the most issues, which maps need attention first, and a cross-curriculum health score.</p>
+
+<h2>The Timer Starvation Bug</h2>
+
+<p>The hardest problem was invisible. Maps CA_1 through CA_10 narrated fine. CA_12 hung forever.</p>
+
+<p>The culprit: three cellular automata artifacts in CA_12 &mdash; <code>disease_spread_ca</code>, <code>self_organization_ca</code>, and <code>ca_screen</code> &mdash; each running a 64&times;64&times;64 grid simulation in their <code>_process()</code> callback. Every frame, they iterate 262,144 cells. The frame budget exploded to seconds. Godot's <code>SceneTreeTimer</code> couldn't fire because the frame never finished fast enough for the timer resolution to matter.</p>
+
+<p>The fix was blunt but effective: after grid generation completes, recursively disable <code>_process()</code> and <code>_physics_process()</code> on every child node of the GridSystem. The narrator only needs the static geometry and artifact positions &mdash; it doesn't need simulations running.</p>
+
+<pre><code>func _disable_processing_recursive(node: Node) -> void:
+    node.set_process(false)
+    node.set_physics_process(false)
+    node.set_process_internal(false)
+    node.set_physics_process_internal(false)
+    for child in node.get_children():
+        _disable_processing_recursive(child)</code></pre>
+
+<h2>The Phantom Spawn Problem</h2>
+
+<p>After fixing the timer starvation, the next run completed all 12 CA maps. But the results were wrong: CA_1 found 3 artifacts, CA_2 through CA_12 found zero. Every map after the first reported "No spawn point found" as a critical issue.</p>
+
+<p>SceneNarrator detects the spawn by looking through <code>utility_objects</code> &mdash; the instantiated scene nodes that represent spawn markers, teleporters, and other gameplay utilities. It searches for anything with "spawn", "move", or "start" in the name. The problem: most maps in Ada Research don't have an explicit spawn utility. Players arrive via teleporter from the previous map. Only the first map in a sequence has a <code>m:</code> (MovePlayer) entry in its utilities layer.</p>
+
+<p>Without a spawn position, the BFS can't start. No BFS means no reachability analysis, no artifact distances, no pacing density. The entire journey narrative collapses.</p>
+
+<p>The fix was a three-tier fallback chain:</p>
+
+<div class="pipeline">
+  <div class="pipeline-step ok"><span class="num">1</span> Check instantiated utility nodes for spawn/move/start names</div>
+  <div class="pipeline-step"><span class="num">2</span> Read raw map_data utilities layer for <code>m:</code> or <code>s:</code> tokens</div>
+  <div class="pipeline-step"><span class="num">3</span> Fall back to the first walkable floor tile in the grid</div>
+</div>
+
+<p>The same pattern was applied to teleporter detection &mdash; check instantiated nodes first, then fall back to reading <code>t:</code> tokens from the raw utilities layer. This matters because in batch mode, the narrator often runs before all utility nodes have finished initializing, but the raw map data is always available immediately after the data component loads.</p>
+
+<p>After adding these fallbacks, the results transformed: CA_2 went from 0 artifacts to 4. Maps that were invisible to the system became fully analyzable.</p>
+
+<h2>The Signal Timing Bug</h2>
+
+<p>A subtler problem: the generation wait loop was counting elapsed time by incrementing a counter each time a <code>create_timer(0.5)</code> fired. Normally fine. But when a CA artifact's <code>_process()</code> takes 10 seconds per frame, a 0.5-second timer fires once per frame &mdash; but the counter only increments by 0.5, not by 10. A 15-second timeout could take 300 real seconds to trigger.</p>
+
+<p>The fix was to use wall-clock time instead:</p>
+
+<pre><code>var wait_start: int = Time.get_ticks_msec()
+var timeout_ms: int = 10000
+while not _map_generated and (Time.get_ticks_msec() - wait_start) < timeout_ms:
+    await create_timer(0.25).timeout</code></pre>
+
+<p>There was also a lambda capture issue &mdash; GDScript lambdas captured the <code>generated</code> boolean but the signal callback wasn't reliably modifying it across coroutine boundaries. Switching to a member variable (<code>_map_generated</code>) with a named callback method fixed it. Total run time dropped from 200 seconds to 44.</p>
+
+<h2>First Real Results</h2>
+
+<p>The cellularautomata sequence &mdash; 12 maps, our test case:</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="value">12</div><div class="label">Maps Narrated</div></div>
+  <div class="stat"><div class="value">44s</div><div class="label">Total Time</div></div>
+  <div class="stat"><div class="value">4</div><div class="label">Maps with Issues</div></div>
+  <div class="stat"><div class="value">29</div><div class="label">Artifacts Found</div></div>
+</div>
+
+<p>The system found two critical problems: CA_4 and CA_12 both have teleporters that are unreachable from the spawn position. CA_4 also has three unreachable artifacts. These are real level design bugs &mdash; a player entering these maps from the previous level could get stuck.</p>
+
+<div class="issue-list">
+  <div class="issue"><span class="severity critical">critical</span> CA_4 &mdash; Teleporter unreachable from spawn</div>
+  <div class="issue"><span class="severity critical">critical</span> CA_12 &mdash; Teleporter unreachable from spawn</div>
+  <div class="issue"><span class="severity high">high</span> CA_4 &mdash; 3 artifacts unreachable (dark_sphere, hexagon_ca_vr, ca_growth_network)</div>
+  <div class="issue"><span class="severity high">high</span> CA_12 &mdash; 4 artifacts unreachable (ca_screen, self_organization_ca, disease_spread_ca, volumetric_fog_ca)</div>
+  <div class="issue"><span class="severity low">low</span> CA_7, CA_10 &mdash; Sparse pacing (9 steps per artifact)</div>
+</div>
+
+<p>Eight maps came back clean. That's the point &mdash; we now know which maps need attention and which don't, without loading a headset.</p>
+
+<h2>Encyclopedia Bridge</h2>
+
+<p>The narration report isn't a dead document. A Python bridge script reads the JSON report and connects it to the Ada Encyclopedia:</p>
+
+<pre><code># Read report, generate improvement proposals
+python tools/narration_to_encyclopedia.py \
+  --report ada_run/narrations/narration_report.json \
+  --encyclopedia http://localhost:3003</code></pre>
+
+<p>The encyclopedia exposes a <code>GET /api/game/narration-report</code> endpoint that serves the latest batch narration data. The bridge script reads the report, maps each issue type to a concrete improvement action, and can POST proposals back to the encyclopedia for map-by-map refinement.</p>
+
+<div class="architecture">
+  <div class="arch-box">
+    <h4>Issue &rarr; Action</h4>
+    <ul>
+      <li>unreachable_teleporter &rarr; add path or ramp</li>
+      <li>unreachable_artifact &rarr; add floor tiles</li>
+      <li>sparse_pacing &rarr; add more artifacts</li>
+      <li>high_dead_ends &rarr; add connecting corridors</li>
+    </ul>
+  </div>
+  <div class="arch-box">
+    <h4>Data Flow</h4>
+    <ul>
+      <li>Godot &rarr; narration_report.json</li>
+      <li>Python &rarr; improvement_proposals.json</li>
+      <li>Encyclopedia &rarr; GET /api/game/narration-report</li>
+      <li>Encyclopedia &rarr; POST /api/game/narration-report</li>
+    </ul>
+  </div>
+</div>
+
+<h2>What This Unlocks</h2>
+
+<p>Batch narration is foundation work. With structured per-map data across the entire curriculum, we can now:</p>
+
+<p><strong>Regression testing.</strong> Run narrate_all after every batch of map edits. If a previously clean map develops an unreachable teleporter, the report catches it immediately.</p>
+
+<p><strong>Curriculum analytics.</strong> How does pacing density vary across the spine? Are early sequences too dense and late ones too sparse? The aggregated data answers questions we couldn't ask before.</p>
+
+<p><strong>AI-assisted map repair.</strong> The improvement proposals feed directly into the encyclopedia's map generation API. An AI agent can read the issues, propose fixes, and validate them through the same pipeline &mdash; closing the loop.</p>
+
+<p><strong>Progress tracking.</strong> A daily narration run becomes a health dashboard. The report JSON is machine-readable; any CI system or monitoring tool can parse it.</p>
+
+<h2>Architecture</h2>
+
+<pre><code>narrate_all.gd (Godot headless)
+  &darr; iterates curriculum_spine.json
+  &darr; per map: instantiate GridSystem, collect SceneNarrator data
+  &darr; writes: ada_run/narrations/&lt;seq&gt;/&lt;map&gt;/{*.md, *.json}
+  &darr; writes: ada_run/narrations/narration_report.json
+
+narration_to_encyclopedia.py (Python bridge)
+  &darr; reads narration_report.json
+  &darr; generates improvement_proposals.json
+  &darr; optional: POST to encyclopedia API
+
+Encyclopedia API
+  GET  /api/game/narration-report &rarr; serves report JSON
+  POST /api/game/narration-report &rarr; stores improvement proposals</code></pre>
+
+<p>Three new files, two modified. No new dependencies. The entire system runs headless on a machine without a display. The hardest part wasn't the architecture &mdash; it was learning how Godot's frame loop behaves when an artifact decides to simulate 262,144 cells every tick.</p>
+
+</body>
+</html>

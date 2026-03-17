@@ -1,0 +1,241 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 0,
+				"name": "player_trace",
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "grid_lines",
+				"pos": [
+					4,
+					1,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "grab_sphere_point_snap",
+				"pos": [
+					2,
+					2,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				3,
+				0,
+				4
+			],
+			[
+				4,
+				0,
+				3
+			]
+		],
+		"issues": [
+			{
+				"description": "0.0 steps per artifact (very dense)",
+				"severity": "low",
+				"type": "dense_pacing"
+			},
+			{
+				"description": "grid_lines at (4,1,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (3,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "grab_sphere_point_snap at (2,2,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Point_Line_Grid",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 4,
+			"walkable_tiles": 49
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 12,
+			"pos": [
+				4,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Point_Line_Grid",
+	"sequence": "primitives",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "player_trace",
+				"pos": [
+					0,
+					1,
+					0
+				]
+			},
+			{
+				"name": "grid_lines",
+				"pos": [
+					4,
+					1,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					4
+				]
+			},
+			{
+				"name": "grab_sphere_point_snap",
+				"pos": [
+					2,
+					2,
+					8
+				]
+			}
+		],
+		"dimensions": [
+			8,
+			3,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 49,
+			"ground_pct": 43.75,
+			"void": 62,
+			"walls": 1
+		},
+		"map_name": "Point_Line_Grid",
+		"rooms": [
+			{
+				"artifacts": [
+					"player_trace"
+				],
+				"label": "A",
+				"region": "north",
+				"tiles": 45
+			},
+			{
+				"artifacts": [
+					"grid_lines",
+					"dark_sphere"
+				],
+				"label": "B",
+				"region": "north",
+				"tiles": 3
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			4,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:12:16",
+	"walkthrough": {
+		"map_name": "Point_Line_Grid",
+		"stops": [
+			{
+				"facing": "here",
+				"look_at": [
+					0,
+					1,
+					0
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "grid_lines"
+					},
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "grab_sphere_point_snap"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					4,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 12,
+				"total_steps": 12,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 12,
+			"total_stops": 2
+		}
+	}
+}

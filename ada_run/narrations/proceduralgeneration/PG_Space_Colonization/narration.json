@@ -1,0 +1,147 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 8,
+				"name": "space_colonization_algorithm",
+				"pos": [
+					2,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "PG_Space_Colonization",
+		"pacing": {
+			"density": 8.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 1,
+			"walkable_tiles": 65
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 18,
+			"pos": [
+				6,
+				0,
+				12
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "PG_Space_Colonization",
+	"sequence": "proceduralgeneration",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "space_colonization_algorithm",
+				"pos": [
+					2,
+					1,
+					6
+				]
+			}
+		],
+		"dimensions": [
+			8,
+			4,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 65,
+			"ground_pct": 58.0357142857143,
+			"void": 43,
+			"walls": 4
+		},
+		"map_name": "PG_Space_Colonization",
+		"rooms": [
+			{
+				"artifacts": [
+					"space_colonization_algorithm"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 65
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			6,
+			0,
+			12
+		]
+	},
+	"timestamp": "2026-03-16T12:15:18",
+	"walkthrough": {
+		"map_name": "PG_Space_Colonization",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					2,
+					1,
+					6
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "space_colonization_algorithm"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southeast",
+				"name": "space_colonization_algorithm",
+				"pos": [
+					2,
+					1,
+					6
+				],
+				"steps_from_prev": 8,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					6,
+					0,
+					12
+				],
+				"reachable": true,
+				"steps_from_prev": 10,
+				"total_steps": 18,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 18,
+			"total_stops": 3
+		}
+	}
+}

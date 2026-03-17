@@ -1,0 +1,769 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 3,
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "fibonacci_pagoda",
+				"pos": [
+					2,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 8,
+				"name": "example_8_3_recursion_circles_vr",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 12,
+				"name": "cube_staircase",
+				"pos": [
+					3,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 13,
+				"name": "recursive_boolean_cube",
+				"pos": [
+					1,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "recursive_chair",
+				"pos": [
+					2,
+					2,
+					2
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "recursive_table",
+				"pos": [
+					2,
+					2,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "cube_subdivision",
+				"pos": [
+					3,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "cube_subdivision",
+				"pos": [
+					4,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "cube_subdivision",
+				"pos": [
+					5,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "recursive_chair at (2,2,2) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "recursive_table at (2,2,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_subdivision at (3,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_subdivision at (4,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_subdivision at (5,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Fractals_1",
+		"pacing": {
+			"density": 1.85714285714286,
+			"reachable_artifacts": 7,
+			"total_artifacts": 12,
+			"walkable_tiles": 69
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			8,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 8,
+			"pos": [
+				7,
+				0,
+				7
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Fractals_1",
+	"sequence": "fractals",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "fibonacci_pagoda",
+				"pos": [
+					2,
+					1,
+					1
+				]
+			},
+			{
+				"name": "recursive_chair",
+				"pos": [
+					2,
+					2,
+					2
+				]
+			},
+			{
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					2
+				]
+			},
+			{
+				"name": "recursive_table",
+				"pos": [
+					2,
+					2,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					3
+				]
+			},
+			{
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					3
+				]
+			},
+			{
+				"name": "example_8_3_recursion_circles_vr",
+				"pos": [
+					4,
+					1,
+					4
+				]
+			},
+			{
+				"name": "cube_subdivision",
+				"pos": [
+					3,
+					2,
+					5
+				]
+			},
+			{
+				"name": "cube_subdivision",
+				"pos": [
+					4,
+					2,
+					5
+				]
+			},
+			{
+				"name": "cube_subdivision",
+				"pos": [
+					5,
+					2,
+					5
+				]
+			},
+			{
+				"name": "recursive_boolean_cube",
+				"pos": [
+					1,
+					1,
+					6
+				]
+			},
+			{
+				"name": "cube_staircase",
+				"pos": [
+					3,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			9,
+			2,
+			22
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 69,
+			"ground_pct": 34.8484848484849,
+			"void": 124,
+			"walls": 5
+		},
+		"map_name": "Fractals_1",
+		"rooms": [
+			{
+				"artifacts": [
+					"fibonacci_pagoda",
+					"fractal_recursion_2",
+					"dark_sphere",
+					"fractal_recursion_2",
+					"example_8_3_recursion_circles_vr",
+					"recursive_boolean_cube",
+					"cube_staircase"
+				],
+				"label": "A",
+				"region": "north",
+				"tiles": 69
+			}
+		],
+		"spawn": [
+			8,
+			1,
+			0
+		],
+		"teleporter": [
+			7,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:14:48",
+	"walkthrough": {
+		"map_name": "Fractals_1",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					8,
+					1,
+					2
+				],
+				"pos": [
+					8,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "fibonacci_pagoda"
+					},
+					{
+						"direction": "southwest",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "west",
+						"dist": 8,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "example_8_3_recursion_circles_vr"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southwest",
+						"dist": 9,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "southwest",
+						"dist": 9,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southwest",
+						"dist": 10,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southwest",
+						"dist": 13,
+						"name": "recursive_boolean_cube"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					2
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "example_8_3_recursion_circles_vr"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "fibonacci_pagoda"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "southwest",
+						"dist": 7,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "cube_subdivision"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "west",
+				"name": "fractal_recursion_2",
+				"pos": [
+					8,
+					1,
+					3
+				],
+				"steps_from_prev": 1,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "example_8_3_recursion_circles_vr"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "west",
+						"dist": 8,
+						"name": "fibonacci_pagoda"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "south",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					3
+				],
+				"steps_from_prev": 4,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "example_8_3_recursion_circles_vr"
+					},
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "fibonacci_pagoda"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "recursive_boolean_cube"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "example_8_3_recursion_circles_vr",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"steps_from_prev": 1,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "fibonacci_pagoda"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "fractal_recursion_2"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "northwest",
+				"name": "cube_staircase",
+				"pos": [
+					3,
+					1,
+					7
+				],
+				"steps_from_prev": 4,
+				"total_steps": 12,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "recursive_boolean_cube"
+					},
+					{
+						"direction": "northeast",
+						"dist": 4,
+						"name": "cube_subdivision"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"facing": "north",
+				"name": "recursive_boolean_cube",
+				"pos": [
+					1,
+					1,
+					6
+				],
+				"steps_from_prev": 3,
+				"total_steps": 15,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "cube_staircase"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "recursive_table"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "southeast",
+				"name": "fibonacci_pagoda",
+				"pos": [
+					2,
+					1,
+					1
+				],
+				"steps_from_prev": 6,
+				"total_steps": 21,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "recursive_chair"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "example_8_3_recursion_circles_vr"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "fractal_recursion_2"
+					},
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "cube_subdivision"
+					},
+					{
+						"direction": "east",
+						"dist": 8,
+						"name": "fractal_recursion_2"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					7,
+					0,
+					7
+				],
+				"reachable": true,
+				"steps_from_prev": 1,
+				"total_steps": 22,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 7,
+			"total_steps": 22,
+			"total_stops": 9
+		}
+	}
+}
