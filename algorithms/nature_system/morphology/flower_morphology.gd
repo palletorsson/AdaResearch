@@ -434,8 +434,4 @@ static func _width_at_t(t: float, taper: float) -> float:
 
 	return clampf(base_width, 0.01, 1.0)
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

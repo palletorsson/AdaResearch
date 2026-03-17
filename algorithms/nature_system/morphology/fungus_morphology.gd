@@ -588,8 +588,4 @@ static func _build_colony(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 			var sub_scale: float = rng.randf_range(0.3, 1.0)
 			_build_single_mushroom(dna, sub_root, mapper, base_seed + i * 100, sub_scale, maxi(lod - 1, 0))
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

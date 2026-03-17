@@ -931,6 +931,8 @@ func _set_overlay_visible(is_visible: bool) -> void:
 		_camera_bar.visible = is_visible
 	if _rating_panel:
 		_rating_panel.visible = is_visible
+	if _comment_panel:
+		_comment_panel.visible = is_visible
 
 	if is_visible and refresh_on_open:
 		_reload_data()

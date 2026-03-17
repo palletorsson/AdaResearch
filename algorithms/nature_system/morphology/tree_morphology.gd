@@ -740,8 +740,4 @@ static func _build_roots(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapp
 			mid_pos, end_pos, root_radius * 0.8, root_radius * 0.3,
 			tube_sides, 1)
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 
