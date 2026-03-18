@@ -1,4 +1,4 @@
-class_name FacadeMaterials
+class_name FacadePartMaterials
 extends RefCounted
 
 ## Factory methods for architectural facade materials.
@@ -6,7 +6,7 @@ extends RefCounted
 ## and a ShaderMaterial for marble veining.
 ## Use from_zone() to map zone/material names from study packs to Materials.
 
-const MARBLE_SHADER_PATH := "res://commons/mesh_grammar/shaders/marble.gdshader"
+const MARBLE_SHADER_PATH := "res://commons/facade_parts/shaders/marble.gdshader"
 
 # ---------------------------------------------------------------------------
 # Stone — rough, matte, natural rock surface
@@ -51,7 +51,7 @@ static func marble(base_color: Color = Color(0.92, 0.9, 0.87), vein_color: Color
 		mat.set_shader_parameter("roughness", 0.3)
 		mat.set_shader_parameter("normal_strength", 0.5)
 	else:
-		push_warning("FacadeMaterials: Could not load marble shader at %s" % MARBLE_SHADER_PATH)
+		push_warning("FacadePartMaterials: Could not load marble shader at %s" % MARBLE_SHADER_PATH)
 	return mat
 
 

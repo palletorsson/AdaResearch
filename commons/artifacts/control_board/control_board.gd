@@ -47,6 +47,7 @@ func _ready() -> void:
 	_build_knob_cluster()
 	_build_speaker()
 	_build_led_strip()
+	_build_lighting()
 	print("[ControlBoard] Built on XY plane — %d CRTs, %d LEDs, %d faders" % [
 		_crt_screens.size(), _led_indicators.size(), _faders.size()])
 
@@ -88,7 +89,7 @@ func _build_back_plate() -> void:
 	var mesh := BoxMesh.new()
 	mesh.size = Vector3(panel_width, panel_height, panel_depth)
 	plate.mesh = mesh
-	plate.material_override = _mat(COL_PANEL, 0.3, 0.7)
+	plate.material_override = _mat(COL_PANEL, 0.6, 0.35)
 	plate.position = _xy(0, panel_height * 0.5, -panel_depth * 0.5)
 	add_child(plate)
 
@@ -120,7 +121,7 @@ func _add_crt(pos: Vector3, size: Vector3) -> void:
 	var hmesh := BoxMesh.new()
 	hmesh.size = Vector3(size.x + 0.04, size.y + 0.04, size.z)
 	housing.mesh = hmesh
-	housing.material_override = _mat(COL_BEZEL, 0.3, 0.8)
+	housing.material_override = _mat(COL_BEZEL, 0.5, 0.4)
 	housing.position = pos
 	add_child(housing)
 
@@ -132,8 +133,8 @@ func _add_crt(pos: Vector3, size: Vector3) -> void:
 	var smat := StandardMaterial3D.new()
 	smat.albedo_color = COL_SCREEN_BG
 	smat.emission_enabled = true
-	smat.emission = COL_SCREEN_FG * 0.3
-	smat.emission_energy_multiplier = 0.8
+	smat.emission = COL_SCREEN_FG * 0.5
+	smat.emission_energy_multiplier = 1.2
 	smat.roughness = 0.2
 	screen.material_override = smat
 	screen.position = pos + Vector3(0, 0, size.z * 0.5 + 0.003)
@@ -382,6 +383,53 @@ func _build_led_strip() -> void:
 			"color_off": off_color,
 			"state": initially_on,
 		})
+
+# ══════════════════════════════════════════════════════════════════════
+#  LIGHTING — dramatic CRT/LED glow
+# ══════════════════════════════════════════════════════════════════════
+
+func _build_lighting() -> void:
+	# Overhead key light — warm, angled down
+	var key_light := OmniLight3D.new()
+	key_light.name = "KeyLight"
+	key_light.light_color = Color(1.0, 0.95, 0.88)
+	key_light.light_energy = 0.6
+	key_light.omni_range = 3.0
+	key_light.omni_attenuation = 1.5
+	key_light.shadow_enabled = true
+	key_light.position = _xy(0.0, panel_height + 0.5, 0.8)
+	add_child(key_light)
+
+	# CRT screen glow lights
+	var crt_positions := [
+		_xy(-0.55, 1.15, 0.15),
+		_xy(0.10, 1.15, 0.15),
+		_xy(0.70, 1.12, 0.12),
+	]
+	var crt_ranges := [0.4, 0.4, 0.3]
+	for i in crt_positions.size():
+		var glow := OmniLight3D.new()
+		glow.name = "CRTGlow_%d" % i
+		glow.light_color = COL_SCREEN_FG
+		glow.light_energy = 0.35
+		glow.omni_range = crt_ranges[i]
+		glow.omni_attenuation = 2.0
+		glow.position = crt_positions[i]
+		add_child(glow)
+
+	# LED glow lights — one shared small light per pair
+	for i in range(0, _led_indicators.size(), 2):
+		var led_data: Dictionary = _led_indicators[i]
+		var led_mesh: MeshInstance3D = led_data["mesh"]
+		if is_instance_valid(led_mesh):
+			var led_glow := OmniLight3D.new()
+			led_glow.name = "LEDGlow_%d" % i
+			led_glow.light_color = led_data["color_on"]
+			led_glow.light_energy = 0.15
+			led_glow.omni_range = 0.08
+			led_glow.omni_attenuation = 2.0
+			led_glow.position = led_mesh.position + Vector3(0, 0, 0.02)
+			add_child(led_glow)
 
 # ══════════════════════════════════════════════════════════════════════
 #  ANIMATION

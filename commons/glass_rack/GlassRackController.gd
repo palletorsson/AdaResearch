@@ -33,24 +33,31 @@ func _ready() -> void:
 	super._ready()
 
 func _setup_materials() -> void:
-	# Glass material
+	# Glass material — enhanced borosilicate look
 	glass_material = StandardMaterial3D.new()
 	glass_material.albedo_color = glass_color
 	glass_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	glass_material.metallic = 0.0
-	glass_material.roughness = glass_roughness
+	glass_material.metallic = 0.05
+	glass_material.roughness = max(glass_roughness, 0.02)
+	glass_material.specular = 0.8
 	glass_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	glass_material.rim_enabled = true
+	glass_material.rim = 0.3
+	glass_material.rim_tint = 0.2
 	if use_refraction:
 		glass_material.refraction_enabled = true
-		glass_material.refraction_scale = 0.05
+		glass_material.refraction_scale = 0.08
 
-	# Liquid material (glowing)
+	# Liquid material — vivid chemical glow
 	liquid_material = StandardMaterial3D.new()
 	liquid_material.albedo_color = liquid_color
 	liquid_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	liquid_material.emission_enabled = true
 	liquid_material.emission = liquid_color
-	liquid_material.emission_energy_multiplier = 0.5
+	liquid_material.emission_energy_multiplier = 1.0
+	liquid_material.rim_enabled = true
+	liquid_material.rim = 0.15
+	liquid_material.rim_tint = 0.5
 
 # =============================================================================
 # COMMAND REGISTRATION
@@ -813,9 +820,10 @@ func _build_frame(frame_config: Dictionary) -> void:
 		frame_material.metallic = mat.get("metallic", 0.8)
 		frame_material.roughness = mat.get("roughness", 0.3)
 	else:
-		frame_material.albedo_color = Color(0.3, 0.3, 0.35, 1.0)
-		frame_material.metallic = 0.8
-		frame_material.roughness = 0.3
+		frame_material.albedo_color = Color(0.22, 0.22, 0.26, 1.0)
+		frame_material.metallic = 0.85
+		frame_material.roughness = 0.2
+		frame_material.specular = 0.7
 	
 	var height = frame_config.get("height", 0.8)
 	var width = frame_config.get("width", 0.4)

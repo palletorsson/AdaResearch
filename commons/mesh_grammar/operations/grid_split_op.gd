@@ -43,6 +43,13 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 		var old_depth: int = 0
 		if face_idx < mesh.face_depth.size():
 			old_depth = mesh.face_depth[face_idx]
+		
+		# Preserve zone tags from original face
+		var inherited_tags := PackedStringArray()
+		if face_idx < mesh.face_tags.size():
+			for t in mesh.face_tags[face_idx]:
+				if t.begins_with("zone_"):
+					inherited_tags.append(t)
 
 		# Get face normal for consistent orientation
 		var normal := mesh.get_face_normal(face_idx)
@@ -98,9 +105,10 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 				var i01: int = vert_indices[r + 1][c]
 				var i11: int = vert_indices[r + 1][c + 1]
 
-				# Build tags for this cell
+				# Build tags for this cell (preserving zone tags)
 				var cell_tags := PackedStringArray()
 				cell_tags.append("%s_%d_%d" % [tag_prefix, r, c])
+				cell_tags.append_array(inherited_tags)
 				if r < row_tags.size():
 					cell_tags.append(str(row_tags[r]))
 				if c < col_tags.size():

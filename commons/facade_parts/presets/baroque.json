@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "generator": "ada_facade_builder",
+  "facade": {
+    "bays": 7,
+    "stories": 5,
+    "symmetry": "bilateral",
+    "total_width": 24.0,
+    "total_height": 18.0,
+    "wall_depth": 0.30
+  },
+  "zones": [
+    { "row": 0, "name": "Crown", "height_multiplier": 0.5 },
+    { "row": 1, "name": "Attic", "height_multiplier": 0.7 },
+    { "row": 2, "name": "Piano Nobile", "height_multiplier": 1.5 },
+    { "row": 3, "name": "Ground", "height_multiplier": 1.2 },
+    { "row": 4, "name": "Base", "height_multiplier": 0.6 }
+  ],
+  "materials": {
+    "wall": "#f0e8d8",
+    "zones": {
+      "Crown": { "color": "#c9a96e", "type": "stone_cornice" },
+      "Attic": { "color": "#e0d8c8", "type": "plaster" },
+      "Piano Nobile": { "color": "#f0e8d8", "type": "dressed_stone" },
+      "Ground": { "color": "#d4c5a9", "type": "dressed_stone" },
+      "Base": { "color": "#8c7e6a", "type": "rusticated_stone" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "modillion", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "modillion", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 0, "part": "modillion", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 0, "part": "pediment_broken", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 1, "part": "cartouche", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 1, "part": "cartouche", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 2, "part": "col_composite", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 2, "part": "projecting_balcony", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 3, "part": "col_solomonic", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 3, "part": "arched_door", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 3, "part": "portal", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 3, "part": "arched_door", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 4, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} }
+  ]
+}

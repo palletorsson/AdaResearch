@@ -1,17 +1,15 @@
 ## FacadeBuilder — Interactive architectural facade composer artifact.
-## Combines SpatialComposition zone layout with SurfaceTool geometry
-## to build 3D facades from presets (classical, gothic, palazzo, arcade, minimal).
-##
-## Each preset defines horizontal zones with distinct architectural elements.
-## FacadeGrammar integration loads study packs for region-specific detailing.
+## Builds 3D facades from v2 plan JSON or from preset-based zone/element config.
+## Uses FacadeComposer (part-based system) when a plan file is available,
+## falls back to built-in SurfaceTool geometry for preset-based builds.
 ##
 ## Config keys:
 ##   preset          - "classical", "gothic", "palazzo", "arcade", "minimal"
+##   plan_path       - path to v2 facade plan JSON (overrides preset if set)
 ##   bay_count       - number of vertical bay divisions (1-20)
 ##   story_count     - number of horizontal story divisions (1-10)
 ##   facade_width    - total width in meters
 ##   facade_height   - total height in meters
-##   study_pack      - FacadeGrammar study pack name (e.g., "italy")
 ##   symmetry        - 0=None, 1=Bilateral, 2=Axial, 3=Hierarchical
 ##   primary_color   - hex color string for primary surfaces
 ##   secondary_color - hex color string for accent/trim surfaces
@@ -20,13 +18,14 @@ extends Node3D
 class_name FacadeBuilder
 
 const SC := preload("res://commons/composition/spatial_composition.gd")
+const FacadeComposerScript := preload("res://commons/facade_parts/facade_composer.gd")
 
 @export var preset: String = "classical"
+@export var plan_path: String = ""
 @export var bay_count: int = 5
 @export var story_count: int = 3
 @export var facade_width: float = 15.0
 @export var facade_height: float = 10.0
-@export var study_pack: String = "italy"
 @export_enum("None", "Bilateral", "Axial Rhythm", "Hierarchical")
 var symmetry: int = 1
 @export var primary_color: Color = Color(0.82, 0.78, 0.70)
@@ -34,7 +33,6 @@ var symmetry: int = 1
 
 # Internal state
 var _composition = null
-var _facade_grammar: FacadeGrammar = null
 var _mesh_instance: MeshInstance3D = null
 var _primary_material: StandardMaterial3D = null
 var _secondary_material: StandardMaterial3D = null
@@ -109,8 +107,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		facade_width = clampf(float(config_data["facade_width"]), 2.0, 100.0)
 	if config_data.has("facade_height"):
 		facade_height = clampf(float(config_data["facade_height"]), 2.0, 60.0)
-	if config_data.has("study_pack"):
-		study_pack = str(config_data["study_pack"])
+	if config_data.has("plan_path"):
+		plan_path = str(config_data["plan_path"])
 	if config_data.has("symmetry"):
 		var sym_val = config_data["symmetry"]
 		if sym_val is int or sym_val is float:
@@ -142,24 +140,33 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func build_facade() -> void:
 	_clear_children()
-	_setup_materials()
 
-	# Build spatial composition for zone layout
+	# If a plan_path is set, try the new FacadeComposer system first
+	if plan_path != "":
+		var facade_node := FacadeComposerScript.build_from_file(plan_path)
+		if facade_node and facade_node.get_child_count() > 0:
+			add_child(facade_node)
+			_add_facade_lights()
+			print("[FacadeBuilder] Built from plan: %s" % plan_path)
+			return
+
+	# Also check ada_run/facade_plan.json for web editor sync
+	var sync_path := "user://facade_plan.json"
+	if FileAccess.file_exists(sync_path):
+		var facade_node := FacadeComposerScript.build_from_file(sync_path)
+		if facade_node and facade_node.get_child_count() > 0:
+			add_child(facade_node)
+			_add_facade_lights()
+			print("[FacadeBuilder] Built from synced plan")
+			return
+
+	# Fallback: built-in preset-based geometry
+	_setup_materials()
 	_composition = _build_composition()
 
-	# Attempt to load FacadeGrammar study pack for element details
-	_facade_grammar = FacadeGrammar.new()
-	if study_pack != "":
-		_facade_grammar.load_study_pack(study_pack)
-
-	# Get preset definition
 	var preset_def: Dictionary = PRESET_DEFS.get(preset, PRESET_DEFS["classical"])
 	var zone_defs: Array = preset_def.get("zones", [])
-
-	# Build geometry for each zone
 	_build_zone_geometry(zone_defs)
-
-	# Add subtle lighting
 	_add_facade_lights()
 
 	print("[FacadeBuilder] Built '%s' facade: %d bays x %d stories, %.1f x %.1f m" % [

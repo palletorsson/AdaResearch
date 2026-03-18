@@ -467,6 +467,23 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 			if mm and mm.instance_count > 0:
 				child_aabb = child.transform * mm.get_aabb()
 				has_aabb = true
+		elif child is CSGShape3D:
+			# CSG nodes have get_meshes() which returns [Transform3D, Mesh] pairs
+			var meshes = (child as CSGShape3D).get_meshes()
+			if meshes.size() >= 2 and meshes[1] is Mesh:
+				child_aabb = child.transform * (meshes[1] as Mesh).get_aabb()
+				has_aabb = true
+			elif child is CSGPrimitive3D:
+				# Fallback: estimate from position + size for CSGBox3D etc.
+				var sz := Vector3(1, 1, 1)
+				if child is CSGBox3D:
+					sz = (child as CSGBox3D).size
+				elif child is CSGCylinder3D:
+					var r: float = (child as CSGCylinder3D).radius
+					var h: float = (child as CSGCylinder3D).height
+					sz = Vector3(r * 2, h, r * 2)
+				child_aabb = child.transform * AABB(-sz * 0.5, sz)
+				has_aabb = true
 		if has_aabb and child_aabb.size.length() > 0:
 			if first:
 				result = child_aabb
