@@ -1,608 +1,934 @@
 extends Node3D
 
-# Gradient Descent: Optimization & the Journey to Authenticity
-# Demonstrates iterative optimization by following gradients down to minima
-# Shows the beautiful process of finding optimal states through guided descent
+# Gradient Descent — Optimizer Variants & Convergence Analysis
+# Compares SGD, Momentum, Nesterov, Adam on 3D loss surfaces
+# Shows convergence behavior, learning rate sensitivity, Hessian structure
 
-@export_category("Optimization Configuration")
-@export var objective_function: String = "x^2 + y^2"  # Function to minimize
-@export var initial_position: Vector2 = Vector2(3.0, 2.0)
-@export var learning_rate: float = 0.1
-@export var tolerance: float = 0.001
-@export var max_iterations: int = 50
-@export var iteration_speed: float = 1.0  # Seconds between steps
+enum Mode { OPTIMIZERS, CONVERGENCE, HESSIAN }
 
-@export_category("Visualization")
-@export var surface_resolution: int = 100
-@export var x_range: Vector2 = Vector2(-5, 5)
-@export var y_range: Vector2 = Vector2(-5, 5)
-@export var z_scale: float = 2.0
-@export var show_gradient_vectors: bool = true
-@export var show_path_trail: bool = true
-@export var animate_descent: bool = true
+# ── constants ──────────────────────────────────────────────────────────
+const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
+const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
-@export_category("Visual Style")
-@export var surface_color: Color = Color(0.3, 0.6, 0.9)
-@export var gradient_color: Color = Color(0.9, 0.3, 0.3)
-@export var path_color: Color = Color(0.9, 0.9, 0.3)
-@export var minimum_color: Color = Color(0.3, 0.9, 0.3)
-@export var current_position_color: Color = Color(0.9, 0.3, 0.9)
+const COL_SGD       := Color(0.9, 0.3, 0.3, 1.0)   # red
+const COL_MOMENTUM  := Color(0.3, 0.9, 0.3, 1.0)   # green
+const COL_NESTEROV  := Color(0.3, 0.5, 0.9, 1.0)   # blue
+const COL_ADAM      := Color(0.9, 0.7, 0.1, 1.0)   # gold
+const COL_SURFACE   := Color(0.15, 0.12, 0.25, 0.6)
+const COL_SURFACE_HI := Color(0.5, 0.3, 0.7, 0.6)
+const COL_MINIMUM   := Color(0.2, 0.9, 0.4, 1.0)
+const COL_HESSIAN_P := Color(0.1, 0.6, 0.9, 0.9)   # positive eigenvalue
+const COL_HESSIAN_N := Color(0.9, 0.2, 0.2, 0.9)   # negative eigenvalue
+const COL_GRID      := Color(0.3, 0.3, 0.4, 0.3)
+const COL_LR_COLORS : Array = [
+	Color(0.9, 0.2, 0.2), Color(0.2, 0.8, 0.3), Color(0.2, 0.5, 0.9),
+	Color(0.9, 0.6, 0.1), Color(0.7, 0.2, 0.8),
+]
 
-@export_category("Optimization Presets")
-@export var function_preset: String = "Quadratic Bowl"  # Quadratic Bowl, Rosenbrock Valley, Himmelblau Function
+const SURFACE_RES := 40
+const TRAIL_MAX   := 200
+const ADAM_EPS     := 1e-8
 
-# Algorithm state
-var current_pos: Vector2
-var descent_path: Array[Vector2] = []
-var gradient_history: Array[Vector2] = []
-var function_values: Array[float] = []
-var current_iteration: int = 0
-var is_optimizing: bool = false
-var animation_timer: float = 0.0
-var algorithm_step: String = "starting"
+# ── exported params ────────────────────────────────────────────────────
+@export var function_preset: int = 0  # 0=Quadratic, 1=Rosenbrock, 2=Himmelblau
+@export var learning_rate: float = 0.05
+@export var momentum_beta: float = 0.9
+@export var adam_beta1: float = 0.9
+@export var adam_beta2: float = 0.999
+@export var step_speed: float = 2.0
 
-# Visual elements
-var surface_mesh: MeshInstance3D
-var gradient_arrows: Array[MeshInstance3D] = []
-var path_trail: Array[MeshInstance3D] = []
-var current_marker: MeshInstance3D
-var minimum_markers: Array[MeshInstance3D] = []
-var ui_display: CanvasLayer
-var camera_controller: Node3D
+# ── internal state ─────────────────────────────────────────────────────
+var _mode: int = Mode.OPTIMIZERS
+var _time: float = 0.0
+var _stepping: bool = false
+var _step_count: int = 0
 
-# Mathematical components
-var function_evaluator: FunctionEvaluator
-var gradient_computer: GradientComputer
+# surface range
+var _x_range := Vector2(-4.0, 4.0)
+var _z_range := Vector2(-4.0, 4.0)
+var _y_scale := 0.4  # height scaling for function values
 
-# Educational statistics
-var optimization_stats: Dictionary = {
-	"iterations": 0,
-	"function_calls": 0,
-	"gradient_calls": 0,
-	"final_value": 0.0,
-	"convergence_rate": 0.0
-}
+# optimizer states (arrays of dicts)
+var _optimizers: Array = []  # each: {name, color, pos, vel, m, v, path, converged, value}
 
-class FunctionEvaluator:
-	var function_type: String
-	
-	func _init(f_type: String) -> void:
-		function_type = f_type
-	
-	func evaluate(pos: Vector2) -> float:
-		var x = pos.x
-		var y = pos.y
-		
-		match function_type:
-			"Quadratic Bowl":
-				return x*x + y*y
-			"Rosenbrock Valley":
-				return (1 - x)*(1 - x) + 100*(y - x*x)*(y - x*x)
-			"Himmelblau Function":
-				return (x*x + y - 11)*(x*x + y - 11) + (x + y*y - 7)*(x + y*y - 7)
-			_:
-				return x*x + y*y  # Default to simple quadratic
+# convergence mode
+var _conv_runs: Array = []  # array of {lr, paths (array of arrays per optimizer)}
 
-class GradientComputer:
-	var function_eval: FunctionEvaluator
-	var epsilon: float = 0.0001
-	
-	func _init(func_evaluator: FunctionEvaluator) -> void:
-		function_eval = func_evaluator
-	
-	func compute_gradient(pos: Vector2) -> Vector2:
-		var x = pos.x
-		var y = pos.y
-		
-		# Numerical gradient computation using finite differences
-		var dx = (function_eval.evaluate(Vector2(x + epsilon, y)) - 
-				 function_eval.evaluate(Vector2(x - epsilon, y))) / (2 * epsilon)
-		var dy = (function_eval.evaluate(Vector2(x, y + epsilon)) - 
-				 function_eval.evaluate(Vector2(x, y - epsilon))) / (2 * epsilon)
-		
-		return Vector2(dx, dy)
+# hessian mode
+var _hessian_grid: Array = []  # array of {pos, eigenvalues, eigenvectors}
+
+# ── mesh instances ─────────────────────────────────────────────────────
+var _surface_im: ImmediateMesh
+var _surface_mi: MeshInstance3D
+var _trails_im: ImmediateMesh
+var _trails_mi: MeshInstance3D
+var _arrows_im: ImmediateMesh
+var _arrows_mi: MeshInstance3D
+var _hessian_im: ImmediateMesh
+var _hessian_mi: MeshInstance3D
+var _markers_im: ImmediateMesh
+var _markers_mi: MeshInstance3D
+
+var _mat_unshaded: StandardMaterial3D
+var _mat_alpha: StandardMaterial3D
+
+# ── labels ─────────────────────────────────────────────────────────────
+var _title_label: Label3D
+var _info_label: Label3D
+var _legend_label: Label3D
+
+# ── controls ───────────────────────────────────────────────────────────
+var _mode_button: Node3D
+var _lr_slider: Node3D
+var _beta_slider: Node3D
+var _speed_slider: Node3D
+var _fn_button: Node3D
+
+# ════════════════════════════════════════════════════════════════════════
+#  LIFECYCLE
+# ════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
-	setup_environment()
-	setup_camera()
-	initialize_mathematical_components()
-	load_function_preset()
-	create_surface_visualization()
-	setup_ui()
-	if animate_descent:
-		start_gradient_descent()
+	_create_materials()
+	_create_mesh_instances()
+	_create_labels()
+	_create_controls()
+	_init_mode()
 
 func _process(delta: float) -> void:
-	if is_optimizing and animate_descent:
-		animation_timer += delta
-		if animation_timer >= iteration_speed:
-			perform_descent_step()
-			animation_timer = 0.0
+	_time += delta
+	if _stepping:
+		var steps_per_frame := int(ceil(step_speed * delta * 30.0))
+		for i in steps_per_frame:
+			if _step_count >= TRAIL_MAX:
+				_stepping = false
+				break
+			match _mode:
+				Mode.OPTIMIZERS:
+					_step_optimizers()
+				Mode.CONVERGENCE:
+					_step_convergence()
+			_step_count += 1
+	_draw_all()
+	_update_labels()
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_SPACE:
-				if not is_optimizing:
-					start_gradient_descent()
-				else:
-					perform_descent_step()
-			KEY_R:
-				restart_optimization()
-			KEY_1:
-				load_function_preset("Quadratic Bowl")
-			KEY_2:
-				load_function_preset("Rosenbrock Valley")
-			KEY_3:
-				load_function_preset("Himmelblau Function")
-			KEY_G:
-				toggle_gradient_visibility()
-			KEY_P:
-				toggle_path_visibility()
+# ════════════════════════════════════════════════════════════════════════
+#  MATERIALS & MESH SETUP
+# ════════════════════════════════════════════════════════════════════════
 
-func setup_environment() -> void:
-	# Dramatic lighting for 3D surface visualization
-	var light = DirectionalLight3D.new()
-	light.light_energy = 1.8
-	light.rotation_degrees = Vector3(-45, 30, 0)
-	add_child(light)
-	
-	# Additional light for better surface definition
-	var fill_light = DirectionalLight3D.new()
-	fill_light.light_energy = 0.6
-	fill_light.rotation_degrees = Vector3(45, -60, 0)
-	add_child(fill_light)
-	
-	# Environment for depth perception
-	var env = WorldEnvironment.new()
-	var environment = Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color(0.05, 0.05, 0.1)
-	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color(0.2, 0.2, 0.3)
-	environment.ambient_light_energy = 0.4
-	env.environment = environment
-	add_child(env)
+func _create_materials() -> void:
+	_mat_unshaded = StandardMaterial3D.new()
+	_mat_unshaded.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mat_unshaded.vertex_color_use_as_albedo = true
+	_mat_unshaded.cull_mode = BaseMaterial3D.CULL_DISABLED
 
-func setup_camera() -> void:
-	camera_controller = Node3D.new()
-	add_child(camera_controller)
-	
-	var camera = Camera3D.new()
-	camera.position = Vector3(8, 12, 8)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
-	camera_controller.add_child(camera)
+	_mat_alpha = _mat_unshaded.duplicate()
+	_mat_alpha.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 
-func initialize_mathematical_components() -> void:
-	function_evaluator = FunctionEvaluator.new(function_preset)
-	gradient_computer = GradientComputer.new(function_evaluator)
+func _create_mesh_instances() -> void:
+	_surface_im = ImmediateMesh.new()
+	_surface_mi = MeshInstance3D.new()
+	_surface_mi.mesh = _surface_im
+	_surface_mi.material_override = _mat_alpha
+	add_child(_surface_mi)
 
-func load_function_preset(preset: String = "") -> void:
-	if preset != "":
-		function_preset = preset
-		objective_function = preset
-	
+	_trails_im = ImmediateMesh.new()
+	_trails_mi = MeshInstance3D.new()
+	_trails_mi.mesh = _trails_im
+	_trails_mi.material_override = _mat_unshaded
+	add_child(_trails_mi)
+
+	_arrows_im = ImmediateMesh.new()
+	_arrows_mi = MeshInstance3D.new()
+	_arrows_mi.mesh = _arrows_im
+	_arrows_mi.material_override = _mat_unshaded
+	add_child(_arrows_mi)
+
+	_hessian_im = ImmediateMesh.new()
+	_hessian_mi = MeshInstance3D.new()
+	_hessian_mi.mesh = _hessian_im
+	_hessian_mi.material_override = _mat_alpha
+	add_child(_hessian_mi)
+
+	_markers_im = ImmediateMesh.new()
+	_markers_mi = MeshInstance3D.new()
+	_markers_mi.mesh = _markers_im
+	_markers_mi.material_override = _mat_unshaded
+	add_child(_markers_mi)
+
+# ════════════════════════════════════════════════════════════════════════
+#  LABELS
+# ════════════════════════════════════════════════════════════════════════
+
+func _create_labels() -> void:
+	_title_label = Label3D.new()
+	_title_label.font_size = 28
+	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_title_label.position = Vector3(0, 3.2, 0)
+	_title_label.modulate = Color.WHITE
+	add_child(_title_label)
+
+	_info_label = Label3D.new()
+	_info_label.font_size = 18
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_info_label.position = Vector3(0, 2.8, 0)
+	_info_label.modulate = Color(0.8, 0.8, 0.9)
+	add_child(_info_label)
+
+	_legend_label = Label3D.new()
+	_legend_label.font_size = 16
+	_legend_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_legend_label.position = Vector3(0, -1.6, 0)
+	_legend_label.modulate = Color(0.7, 0.7, 0.8)
+	add_child(_legend_label)
+
+# ════════════════════════════════════════════════════════════════════════
+#  CONTROLS
+# ════════════════════════════════════════════════════════════════════════
+
+func _create_controls() -> void:
+	# Mode button
+	_mode_button = BUTTON_SCENE.instantiate()
+	_mode_button.position = Vector3(-2.4, -1.0, 0)
+	add_child(_mode_button)
+	var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
+	if btn_area:
+		btn_area.button_pressed.connect(_cycle_mode)
+	var btn_label = _mode_button.get_node_or_null("Frame/LabelName")
+	if btn_label:
+		btn_label.text = "Mode"
+
+	# Function preset button
+	_fn_button = BUTTON_SCENE.instantiate()
+	_fn_button.position = Vector3(-1.6, -1.0, 0)
+	add_child(_fn_button)
+	var fn_area = _fn_button.get_node_or_null("InteractableAreaButton")
+	if fn_area:
+		fn_area.button_pressed.connect(_cycle_function)
+	var fn_label = _fn_button.get_node_or_null("Frame/LabelName")
+	if fn_label:
+		fn_label.text = "Function"
+
+	# Learning rate slider
+	_lr_slider = SLIDER_SCENE.instantiate()
+	_lr_slider.position = Vector3(-0.4, -1.0, 0)
+	add_child(_lr_slider)
+	_lr_slider.set_param_name("Learn Rate")
+	_lr_slider.set_normalized_value(learning_rate / 0.2)
+	_lr_slider.slider_moved.connect(_on_lr_changed)
+
+	# Momentum beta slider
+	_beta_slider = SLIDER_SCENE.instantiate()
+	_beta_slider.position = Vector3(0.8, -1.0, 0)
+	add_child(_beta_slider)
+	_beta_slider.set_param_name("Momentum β")
+	_beta_slider.set_normalized_value(momentum_beta)
+	_beta_slider.slider_moved.connect(_on_beta_changed)
+
+	# Speed slider
+	_speed_slider = SLIDER_SCENE.instantiate()
+	_speed_slider.position = Vector3(2.0, -1.0, 0)
+	add_child(_speed_slider)
+	_speed_slider.set_param_name("Speed")
+	_speed_slider.set_normalized_value(step_speed / 5.0)
+	_speed_slider.slider_moved.connect(_on_speed_changed)
+
+func _cycle_mode() -> void:
+	_mode = (_mode + 1) % 3
+	_init_mode()
+
+func _cycle_function() -> void:
+	function_preset = (function_preset + 1) % 3
+	_init_mode()
+
+func _on_lr_changed(_v: float) -> void:
+	learning_rate = clampf(_lr_slider.get_normalized_value() * 0.2, 0.001, 0.2)
+	_init_mode()
+
+func _on_beta_changed(_v: float) -> void:
+	momentum_beta = clampf(_beta_slider.get_normalized_value(), 0.0, 0.99)
+	adam_beta1 = momentum_beta
+	_init_mode()
+
+func _on_speed_changed(_v: float) -> void:
+	step_speed = clampf(_speed_slider.get_normalized_value() * 5.0, 0.1, 5.0)
+
+# ════════════════════════════════════════════════════════════════════════
+#  FUNCTION EVALUATION
+# ════════════════════════════════════════════════════════════════════════
+
+func _fn_name() -> String:
 	match function_preset:
-		"Quadratic Bowl":
-			initial_position = Vector2(3.0, 2.0)
-			learning_rate = 0.1
-			
-		"Rosenbrock Valley":
-			initial_position = Vector2(-1.0, 1.0)
-			learning_rate = 0.001  # Smaller learning rate for more complex function
-			
-		"Himmelblau Function":
-			initial_position = Vector2(0.0, 0.0)
-			learning_rate = 0.01
-	
-	if function_evaluator:
-		function_evaluator.function_type = function_preset
-	
-	restart_optimization()
+		0: return "Quadratic Bowl"
+		1: return "Rosenbrock Valley"
+		2: return "Himmelblau"
+		_: return "Quadratic Bowl"
 
-func create_surface_visualization() -> void:
-	"""Create 3D surface visualization of the objective function"""
-	clear_previous_visualization()
-	
-	# Create surface mesh
-	create_function_surface()
-	
-	# Mark known minima for some functions
-	mark_theoretical_minima()
-	
-	# Create current position marker
-	create_position_marker()
-
-func create_function_surface() -> void:
-	"""Generate 3D mesh for the objective function surface"""
-	var vertices = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var colors = PackedColorArray()
-	
-	var x_step = (x_range.y - x_range.x) / surface_resolution
-	var y_step = (y_range.y - y_range.x) / surface_resolution
-	
-	# Generate vertices
-	for i in range(surface_resolution + 1):
-		for j in range(surface_resolution + 1):
-			var x = x_range.x + i * x_step
-			var y = y_range.x + j * y_step
-			var z = function_evaluator.evaluate(Vector2(x, y)) * z_scale
-			
-			vertices.append(Vector3(x, z, y))  # Note: z up, y depth
-			
-			# Color based on height (function value)
-			var normalized_height = clamp(z / 10.0, 0.0, 1.0)
-			var color = surface_color.lerp(Color.WHITE, normalized_height)
-			colors.append(color)
-	
-	# Generate indices for triangular faces
-	for i in range(surface_resolution):
-		for j in range(surface_resolution):
-			var top_left = i * (surface_resolution + 1) + j
-			var top_right = top_left + 1
-			var bottom_left = (i + 1) * (surface_resolution + 1) + j
-			var bottom_right = bottom_left + 1
-			
-			# First triangle
-			indices.append(top_left)
-			indices.append(bottom_left)
-			indices.append(top_right)
-			
-			# Second triangle
-			indices.append(top_right)
-			indices.append(bottom_left)
-			indices.append(bottom_right)
-	
-	# Create mesh
-	var array_mesh = ArrayMesh.new()
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_INDEX] = indices
-	arrays[Mesh.ARRAY_COLOR] = colors
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	
-	surface_mesh = MeshInstance3D.new()
-	surface_mesh.mesh = array_mesh
-	
-	var material = StandardMaterial3D.new()
-	material.vertex_color_use_as_albedo = true
-	material.metallic = 0.1
-	material.roughness = 0.8
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.albedo_color.a = 0.8
-	surface_mesh.material_override = material
-	
-	add_child(surface_mesh)
-
-func mark_theoretical_minima() -> void:
-	"""Mark known theoretical minima for educational purposes"""
-	var minima_positions: Array[Vector2] = []
-	
+func _eval(p: Vector2) -> float:
+	var x := p.x
+	var y := p.y
 	match function_preset:
-		"Quadratic Bowl":
-			minima_positions = [Vector2(0, 0)]
-		"Rosenbrock Valley":
-			minima_positions = [Vector2(1, 1)]
-		"Himmelblau Function":
-			minima_positions = [Vector2(3, 2), Vector2(-2.8, 3.1), Vector2(-3.8, -3.3), Vector2(3.6, -1.8)]
-	
-	for pos in minima_positions:
-		var marker = create_sphere_marker(pos, minimum_color, 0.3)
-		minimum_markers.append(marker)
-		add_child(marker)
+		0:  # Quadratic bowl: x² + y²
+			return x * x + y * y
+		1:  # Rosenbrock: (1-x)² + 100(y-x²)²
+			return (1.0 - x) * (1.0 - x) + 100.0 * (y - x * x) * (y - x * x)
+		2:  # Himmelblau: (x²+y-11)² + (x+y²-7)²
+			return (x*x + y - 11.0) * (x*x + y - 11.0) + (x + y*y - 7.0) * (x + y*y - 7.0)
+		_:
+			return x * x + y * y
 
-func create_position_marker() -> void:
-	"""Create marker for current optimization position"""
-	current_marker = create_sphere_marker(current_pos, current_position_color, 0.4)
-	add_child(current_marker)
+func _gradient(p: Vector2) -> Vector2:
+	var eps := 0.0001
+	var dx := (_eval(Vector2(p.x + eps, p.y)) - _eval(Vector2(p.x - eps, p.y))) / (2.0 * eps)
+	var dy := (_eval(Vector2(p.x, p.y + eps)) - _eval(Vector2(p.x, p.y - eps))) / (2.0 * eps)
+	return Vector2(dx, dy)
 
-func create_sphere_marker(pos_2d: Vector2, color: Color, size: float) -> MeshInstance3D:
-	"""Create a sphere marker at given 2D position"""
-	var sphere = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = size
-	sphere_mesh.height = size * 2
-	sphere.mesh = sphere_mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.6
-	sphere.material_override = material
-	
-	var z_pos = function_evaluator.evaluate(pos_2d) * z_scale + 0.5
-	sphere.position = Vector3(pos_2d.x, z_pos, pos_2d.y)
-	
-	return sphere
+func _hessian(p: Vector2) -> Array:
+	# Returns [fxx, fxy, fyx, fyy] via finite differences
+	var eps := 0.001
+	var f00 := _eval(p)
+	var fxx := (_eval(Vector2(p.x + eps, p.y)) - 2.0 * f00 + _eval(Vector2(p.x - eps, p.y))) / (eps * eps)
+	var fyy := (_eval(Vector2(p.x, p.y + eps)) - 2.0 * f00 + _eval(Vector2(p.x, p.y - eps))) / (eps * eps)
+	var fxy := (_eval(Vector2(p.x + eps, p.y + eps)) - _eval(Vector2(p.x + eps, p.y - eps))
+		- _eval(Vector2(p.x - eps, p.y + eps)) + _eval(Vector2(p.x - eps, p.y - eps))) / (4.0 * eps * eps)
+	return [fxx, fxy, fxy, fyy]
 
-func start_gradient_descent() -> void:
-	"""Initialize gradient descent optimization"""
-	current_pos = initial_position
-	descent_path.clear()
-	gradient_history.clear()
-	function_values.clear()
-	current_iteration = 0
-	is_optimizing = true
-	algorithm_step = "initializing"
-	
-	# Record starting position
-	descent_path.append(current_pos)
-	function_values.append(function_evaluator.evaluate(current_pos))
-	
-	# Reset statistics
-	optimization_stats.iterations = 0
-	optimization_stats.function_calls = 1
-	optimization_stats.gradient_calls = 0
-	
-	update_position_marker()
-	clear_visualizations()
-	update_ui()
-	
-	print("Gradient descent started from position: ", current_pos)
+func _hessian_eigen(p: Vector2) -> Dictionary:
+	# 2x2 eigenvalue decomposition
+	var h := _hessian(p)
+	var a: float = h[0]
+	var b: float = h[1]
+	var d: float = h[3]
+	var trace := a + d
+	var det := a * d - b * b
+	var disc := trace * trace - 4.0 * det
+	if disc < 0.0:
+		disc = 0.0
+	var sqrt_disc := sqrt(disc)
+	var l1 := (trace + sqrt_disc) / 2.0
+	var l2 := (trace - sqrt_disc) / 2.0
+	# eigenvectors
+	var v1 := Vector2(1, 0)
+	var v2 := Vector2(0, 1)
+	if abs(b) > 1e-8:
+		v1 = Vector2(l1 - d, b).normalized()
+		v2 = Vector2(l2 - d, b).normalized()
+	elif abs(a - d) > 1e-8:
+		v1 = Vector2(1, 0)
+		v2 = Vector2(0, 1)
+	return {"l1": l1, "l2": l2, "v1": v1, "v2": v2}
 
-func perform_descent_step() -> void:
-	"""Perform one step of gradient descent"""
-	if not is_optimizing:
+func _start_pos() -> Vector2:
+	match function_preset:
+		0: return Vector2(3.5, 2.5)
+		1: return Vector2(-1.5, 1.5)
+		2: return Vector2(0.5, 0.5)
+		_: return Vector2(3.0, 2.0)
+
+func _y_scale_for_fn() -> float:
+	match function_preset:
+		0: return 0.15
+		1: return 0.0005  # Rosenbrock has huge values
+		2: return 0.003
+		_: return 0.15
+
+# ════════════════════════════════════════════════════════════════════════
+#  MODE INIT
+# ════════════════════════════════════════════════════════════════════════
+
+func _init_mode() -> void:
+	_stepping = false
+	_step_count = 0
+	_y_scale = _y_scale_for_fn()
+
+	_surface_mi.visible = true
+	_trails_mi.visible = (_mode != Mode.HESSIAN)
+	_arrows_mi.visible = (_mode == Mode.OPTIMIZERS)
+	_hessian_mi.visible = (_mode == Mode.HESSIAN)
+	_markers_mi.visible = true
+
+	match _mode:
+		Mode.OPTIMIZERS:
+			_init_optimizers()
+		Mode.CONVERGENCE:
+			_init_convergence()
+		Mode.HESSIAN:
+			_init_hessian()
+
+	_stepping = true
+
+func _init_optimizers() -> void:
+	_optimizers.clear()
+	var start := _start_pos()
+	var lr := learning_rate
+
+	# SGD (vanilla)
+	_optimizers.append({
+		"name": "SGD",
+		"color": COL_SGD,
+		"pos": start,
+		"vel": Vector2.ZERO,
+		"m": Vector2.ZERO,
+		"v_adam": Vector2.ZERO,
+		"t": 0,
+		"path": [start],
+		"converged": false,
+		"value": _eval(start),
+		"type": "sgd",
+	})
+
+	# Momentum
+	_optimizers.append({
+		"name": "Momentum",
+		"color": COL_MOMENTUM,
+		"pos": start,
+		"vel": Vector2.ZERO,
+		"m": Vector2.ZERO,
+		"v_adam": Vector2.ZERO,
+		"t": 0,
+		"path": [start],
+		"converged": false,
+		"value": _eval(start),
+		"type": "momentum",
+	})
+
+	# Nesterov
+	_optimizers.append({
+		"name": "Nesterov",
+		"color": COL_NESTEROV,
+		"pos": start,
+		"vel": Vector2.ZERO,
+		"m": Vector2.ZERO,
+		"v_adam": Vector2.ZERO,
+		"t": 0,
+		"path": [start],
+		"converged": false,
+		"value": _eval(start),
+		"type": "nesterov",
+	})
+
+	# Adam
+	_optimizers.append({
+		"name": "Adam",
+		"color": COL_ADAM,
+		"pos": start,
+		"vel": Vector2.ZERO,
+		"m": Vector2.ZERO,
+		"v_adam": Vector2.ZERO,
+		"t": 0,
+		"path": [start],
+		"converged": false,
+		"value": _eval(start),
+		"type": "adam",
+	})
+
+func _init_convergence() -> void:
+	_conv_runs.clear()
+	var lrs := [0.001, 0.01, 0.05, 0.1, 0.15]
+	var start := _start_pos()
+	for i in lrs.size():
+		var run := {
+			"lr": lrs[i],
+			"color": COL_LR_COLORS[i],
+			"pos": start,
+			"vel": Vector2.ZERO,
+			"m": Vector2.ZERO,
+			"v_adam": Vector2.ZERO,
+			"t": 0,
+			"path": [start],
+			"values": [_eval(start)],
+			"converged": false,
+		}
+		_conv_runs.append(run)
+
+func _init_hessian() -> void:
+	_hessian_grid.clear()
+	var res := 8
+	var dx := (_x_range.y - _x_range.x) / float(res)
+	var dz := (_z_range.y - _z_range.x) / float(res)
+	for i in range(res + 1):
+		for j in range(res + 1):
+			var px := _x_range.x + i * dx
+			var pz := _z_range.x + j * dz
+			var p := Vector2(px, pz)
+			var eigen := _hessian_eigen(p)
+			_hessian_grid.append({
+				"pos": p,
+				"l1": eigen.l1,
+				"l2": eigen.l2,
+				"v1": eigen.v1,
+				"v2": eigen.v2,
+			})
+
+# ════════════════════════════════════════════════════════════════════════
+#  STEPPING
+# ════════════════════════════════════════════════════════════════════════
+
+func _step_optimizers() -> void:
+	for opt in _optimizers:
+		if opt.converged:
+			continue
+		var pos: Vector2 = opt.pos
+		var grad := _gradient(pos)
+
+		if grad.length() < 0.0005:
+			opt.converged = true
+			continue
+
+		var new_pos := pos
+		match opt.type:
+			"sgd":
+				new_pos = pos - learning_rate * grad
+
+			"momentum":
+				opt.vel = momentum_beta * (opt.vel as Vector2) - learning_rate * grad
+				new_pos = pos + (opt.vel as Vector2)
+
+			"nesterov":
+				var look_ahead := pos + momentum_beta * (opt.vel as Vector2)
+				var look_grad := _gradient(look_ahead)
+				opt.vel = momentum_beta * (opt.vel as Vector2) - learning_rate * look_grad
+				new_pos = pos + (opt.vel as Vector2)
+
+			"adam":
+				opt.t = (opt.t as int) + 1
+				var t_f := float(opt.t as int)
+				opt.m = adam_beta1 * (opt.m as Vector2) + (1.0 - adam_beta1) * grad
+				opt.v_adam = adam_beta2 * (opt.v_adam as Vector2) + (1.0 - adam_beta2) * Vector2(grad.x * grad.x, grad.y * grad.y)
+				var m_hat: Vector2 = (opt.m as Vector2) / (1.0 - pow(adam_beta1, t_f))
+				var v_hat: Vector2 = (opt.v_adam as Vector2) / (1.0 - pow(adam_beta2, t_f))
+				new_pos = pos - learning_rate * Vector2(
+					m_hat.x / (sqrt(v_hat.x) + ADAM_EPS),
+					m_hat.y / (sqrt(v_hat.y) + ADAM_EPS)
+				)
+
+		# Clamp to range
+		new_pos.x = clampf(new_pos.x, _x_range.x, _x_range.y)
+		new_pos.y = clampf(new_pos.y, _z_range.x, _z_range.y)
+		opt.pos = new_pos
+		opt.value = _eval(new_pos)
+		(opt.path as Array).append(new_pos)
+
+func _step_convergence() -> void:
+	for run in _conv_runs:
+		if run.converged:
+			continue
+		var pos: Vector2 = run.pos
+		var grad := _gradient(pos)
+		if grad.length() < 0.0005:
+			run.converged = true
+			continue
+
+		# Adam with this run's lr
+		run.t = (run.t as int) + 1
+		var t_f := float(run.t as int)
+		var lr_r: float = run.lr
+		run.m = adam_beta1 * (run.m as Vector2) + (1.0 - adam_beta1) * grad
+		run.v_adam = adam_beta2 * (run.v_adam as Vector2) + (1.0 - adam_beta2) * Vector2(grad.x * grad.x, grad.y * grad.y)
+		var m_hat: Vector2 = (run.m as Vector2) / (1.0 - pow(adam_beta1, t_f))
+		var v_hat: Vector2 = (run.v_adam as Vector2) / (1.0 - pow(adam_beta2, t_f))
+		var new_pos := pos - lr_r * Vector2(
+			m_hat.x / (sqrt(v_hat.x) + ADAM_EPS),
+			m_hat.y / (sqrt(v_hat.y) + ADAM_EPS)
+		)
+		new_pos.x = clampf(new_pos.x, _x_range.x, _x_range.y)
+		new_pos.y = clampf(new_pos.y, _z_range.x, _z_range.y)
+		run.pos = new_pos
+		(run.path as Array).append(new_pos)
+		(run.values as Array).append(_eval(new_pos))
+
+# ════════════════════════════════════════════════════════════════════════
+#  DRAWING
+# ════════════════════════════════════════════════════════════════════════
+
+func _draw_all() -> void:
+	_draw_surface()
+	match _mode:
+		Mode.OPTIMIZERS:
+			_draw_optimizer_trails()
+			_draw_optimizer_markers()
+			_hessian_im.clear_surfaces()
+		Mode.CONVERGENCE:
+			_draw_convergence_trails()
+			_draw_convergence_chart()
+			_hessian_im.clear_surfaces()
+		Mode.HESSIAN:
+			_trails_im.clear_surfaces()
+			_arrows_im.clear_surfaces()
+			_draw_hessian()
+			_draw_hessian_markers()
+
+func _draw_surface() -> void:
+	_surface_im.clear_surfaces()
+	_surface_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var dx := (_x_range.y - _x_range.x) / float(SURFACE_RES)
+	var dz := (_z_range.y - _z_range.x) / float(SURFACE_RES)
+
+	# Find max for normalization
+	var max_val := 1.0
+	for i in range(SURFACE_RES + 1):
+		for j in range(SURFACE_RES + 1):
+			var px := _x_range.x + i * dx
+			var pz := _z_range.x + j * dz
+			var val := _eval(Vector2(px, pz)) * _y_scale
+			if val > max_val:
+				max_val = val
+
+	for i in range(SURFACE_RES):
+		for j in range(SURFACE_RES):
+			var x0 := _x_range.x + i * dx
+			var x1 := x0 + dx
+			var z0 := _z_range.x + j * dz
+			var z1 := z0 + dz
+
+			var y00 := _eval(Vector2(x0, z0)) * _y_scale
+			var y10 := _eval(Vector2(x1, z0)) * _y_scale
+			var y01 := _eval(Vector2(x0, z1)) * _y_scale
+			var y11 := _eval(Vector2(x1, z1)) * _y_scale
+
+			# Cap height for visualization
+			y00 = minf(y00, 4.0)
+			y10 = minf(y10, 4.0)
+			y01 = minf(y01, 4.0)
+			y11 = minf(y11, 4.0)
+
+			var c00 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y00 / 3.0, 0.0, 1.0))
+			var c10 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y10 / 3.0, 0.0, 1.0))
+			var c01 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y01 / 3.0, 0.0, 1.0))
+			var c11 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y11 / 3.0, 0.0, 1.0))
+
+			var n := Vector3.UP
+
+			# Tri 1
+			_surface_im.surface_set_color(c00)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x0, y00, z0))
+			_surface_im.surface_set_color(c10)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
+			_surface_im.surface_set_color(c01)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
+
+			# Tri 2
+			_surface_im.surface_set_color(c10)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
+			_surface_im.surface_set_color(c11)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x1, y11, z1))
+			_surface_im.surface_set_color(c01)
+			_surface_im.surface_set_normal(n)
+			_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
+
+	_surface_im.surface_end()
+
+func _draw_optimizer_trails() -> void:
+	_trails_im.clear_surfaces()
+	_trails_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for opt in _optimizers:
+		var path: Array = opt.path
+		var col: Color = opt.color
+		for k in range(1, path.size()):
+			var p0: Vector2 = path[k - 1]
+			var p1: Vector2 = path[k]
+			var y0 := minf(_eval(p0) * _y_scale + 0.05, 4.05)
+			var y1 := minf(_eval(p1) * _y_scale + 0.05, 4.05)
+			_im_line_3d(_trails_im, Vector3(p0.x, y0, p0.y), Vector3(p1.x, y1, p1.y), col, 0.03)
+
+	_trails_im.surface_end()
+
+func _draw_optimizer_markers() -> void:
+	_arrows_im.clear_surfaces()
+	_markers_im.clear_surfaces()
+	_markers_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for opt in _optimizers:
+		var pos: Vector2 = opt.pos
+		var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
+		var col: Color = opt.color
+		_im_diamond(_markers_im, Vector3(pos.x, y, pos.y), 0.15, col)
+
+	_markers_im.surface_end()
+
+	# Draw gradient arrows at current positions
+	_arrows_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for opt in _optimizers:
+		if opt.converged:
+			continue
+		var pos: Vector2 = opt.pos
+		var grad := _gradient(pos)
+		var dir := -grad.normalized()
+		var y := minf(_eval(pos) * _y_scale + 0.15, 4.15)
+		var tip := Vector3(pos.x + dir.x * 0.4, y, pos.y + dir.y * 0.4)
+		var base := Vector3(pos.x, y, pos.y)
+		_im_line_3d(_arrows_im, base, tip, opt.color as Color, 0.02)
+	_arrows_im.surface_end()
+
+func _draw_convergence_trails() -> void:
+	_trails_im.clear_surfaces()
+	_trails_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for run in _conv_runs:
+		var path: Array = run.path
+		var col: Color = run.color
+		for k in range(1, path.size()):
+			var p0: Vector2 = path[k - 1]
+			var p1: Vector2 = path[k]
+			var y0 := minf(_eval(p0) * _y_scale + 0.05, 4.05)
+			var y1 := minf(_eval(p1) * _y_scale + 0.05, 4.05)
+			_im_line_3d(_trails_im, Vector3(p0.x, y0, p0.y), Vector3(p1.x, y1, p1.y), col, 0.025)
+
+	_trails_im.surface_end()
+
+	# Markers
+	_markers_im.clear_surfaces()
+	_markers_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for run in _conv_runs:
+		var pos: Vector2 = run.pos
+		var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
+		_im_diamond(_markers_im, Vector3(pos.x, y, pos.y), 0.12, run.color as Color)
+	_markers_im.surface_end()
+
+func _draw_convergence_chart() -> void:
+	# Draw f(x) over iterations as small chart using arrows mesh
+	_arrows_im.clear_surfaces()
+	_arrows_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var chart_origin := Vector3(_x_range.y + 1.0, 0.0, _z_range.x)
+	var chart_w := 2.5
+	var chart_h := 2.5
+
+	# Axes
+	_im_line_3d(_arrows_im, chart_origin, chart_origin + Vector3(chart_w, 0, 0), COL_GRID, 0.02)
+	_im_line_3d(_arrows_im, chart_origin, chart_origin + Vector3(0, chart_h, 0), COL_GRID, 0.02)
+
+	for run in _conv_runs:
+		var vals: Array = run.values
+		if vals.size() < 2:
+			continue
+		var max_v := 0.001
+		for v_item in vals:
+			var vf: float = v_item
+			if vf > max_v:
+				max_v = vf
+		for k in range(1, vals.size()):
+			var x0 := chart_origin.x + (float(k - 1) / float(TRAIL_MAX)) * chart_w
+			var x1 := chart_origin.x + (float(k) / float(TRAIL_MAX)) * chart_w
+			var y0_val: float = vals[k - 1]
+			var y1_val: float = vals[k]
+			var y0 := chart_origin.y + clampf(log(y0_val + 1.0) / log(max_v + 1.0), 0.0, 1.0) * chart_h
+			var y1 := chart_origin.y + clampf(log(y1_val + 1.0) / log(max_v + 1.0), 0.0, 1.0) * chart_h
+			_im_line_3d(_arrows_im, Vector3(x0, y0, chart_origin.z), Vector3(x1, y1, chart_origin.z), run.color as Color, 0.015)
+
+	_arrows_im.surface_end()
+
+func _draw_hessian() -> void:
+	_hessian_im.clear_surfaces()
+	_hessian_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for h in _hessian_grid:
+		var pos: Vector2 = h.pos
+		var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
+		var center := Vector3(pos.x, y, pos.y)
+		var l1: float = h.l1
+		var l2: float = h.l2
+		var v1: Vector2 = h.v1
+		var v2: Vector2 = h.v2
+
+		# Scale eigenvalue visualization
+		var scale := 0.3
+		var len1 := clampf(abs(l1) * _y_scale * 2.0, 0.05, 0.8) * scale
+		var len2 := clampf(abs(l2) * _y_scale * 2.0, 0.05, 0.8) * scale
+
+		var c1 := COL_HESSIAN_P if l1 >= 0 else COL_HESSIAN_N
+		var c2 := COL_HESSIAN_P if l2 >= 0 else COL_HESSIAN_N
+
+		# Draw eigenvector 1
+		var e1a := center + Vector3(v1.x, 0, v1.y) * len1
+		var e1b := center - Vector3(v1.x, 0, v1.y) * len1
+		_im_line_3d(_hessian_im, e1a, e1b, c1, 0.025)
+
+		# Draw eigenvector 2
+		var e2a := center + Vector3(v2.x, 0, v2.y) * len2
+		var e2b := center - Vector3(v2.x, 0, v2.y) * len2
+		_im_line_3d(_hessian_im, e2a, e2b, c2, 0.025)
+
+	_hessian_im.surface_end()
+
+func _draw_hessian_markers() -> void:
+	_markers_im.clear_surfaces()
+	_markers_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for h in _hessian_grid:
+		var pos: Vector2 = h.pos
+		var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
+		var l1: float = h.l1
+		var l2: float = h.l2
+		# Color by definiteness: both positive = blue, mixed = yellow, both negative = red
+		var col: Color
+		if l1 >= 0 and l2 >= 0:
+			col = COL_HESSIAN_P
+		elif l1 < 0 and l2 < 0:
+			col = COL_HESSIAN_N
+		else:
+			col = Color(0.9, 0.8, 0.2, 0.9)  # saddle = yellow
+		_im_diamond(_markers_im, Vector3(pos.x, y, pos.y), 0.06, col)
+
+	_markers_im.surface_end()
+
+# ════════════════════════════════════════════════════════════════════════
+#  IMMEDIATE MESH HELPERS
+# ════════════════════════════════════════════════════════════════════════
+
+func _im_line_3d(im: ImmediateMesh, a: Vector3, b: Vector3, col: Color, w: float) -> void:
+	var dir := (b - a)
+	if dir.length_squared() < 1e-8:
 		return
-	
-	if current_iteration >= max_iterations:
-		# Optimization complete
-		is_optimizing = false
-		algorithm_step = "converged"
-		optimization_stats.final_value = function_evaluator.evaluate(current_pos)
-		print("Optimization complete after ", current_iteration, " iterations")
-		update_ui()
-		return
-	
-	# Compute gradient at current position
-	var gradient = gradient_computer.compute_gradient(current_pos)
-	gradient_history.append(gradient)
-	optimization_stats.gradient_calls += 1
-	
-	# Check for convergence
-	if gradient.length() < tolerance:
-		is_optimizing = false
-		algorithm_step = "converged"
-		optimization_stats.final_value = function_evaluator.evaluate(current_pos)
-		print("Converged! Gradient magnitude: ", gradient.length())
-		update_ui()
-		return
-	
-	# Perform gradient descent step
-	var old_pos = current_pos
-	current_pos = current_pos - learning_rate * gradient
-	
-	# Record new position
-	descent_path.append(current_pos)
-	var new_value = function_evaluator.evaluate(current_pos)
-	function_values.append(new_value)
-	optimization_stats.function_calls += 1
-	
-	current_iteration += 1
-	optimization_stats.iterations = current_iteration
-	algorithm_step = "descending"
-	
-	# Update visualizations
-	update_position_marker()
-	if show_gradient_vectors:
-		create_gradient_arrow(old_pos, gradient)
-	if show_path_trail:
-		create_path_segment(old_pos, current_pos)
-	
-	update_ui()
-	
-	print("Step ", current_iteration, ": Position ", current_pos, " Value: ", new_value)
+	dir = dir.normalized()
+	var up := Vector3.UP
+	if abs(dir.dot(up)) > 0.99:
+		up = Vector3.FORWARD
+	var side := dir.cross(up).normalized() * w * 0.5
+	var u := up.cross(dir).normalized() * w * 0.5
 
-func update_position_marker() -> void:
-	"""Update the current position marker"""
-	if current_marker:
-		var z_pos = function_evaluator.evaluate(current_pos) * z_scale + 0.5
-		current_marker.position = Vector3(current_pos.x, z_pos, current_pos.y)
+	# Quad 1 (horizontal)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(a - side)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(a + side)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(b + side)
 
-func create_gradient_arrow(pos: Vector2, gradient: Vector2) -> void:
-	"""Create visual arrow showing gradient direction"""
-	var arrow = create_arrow_mesh(pos, -gradient.normalized(), gradient_color)
-	gradient_arrows.append(arrow)
-	add_child(arrow)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(a - side)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(b + side)
+	im.surface_set_color(col)
+	im.surface_set_normal(up)
+	im.surface_add_vertex(b - side)
 
-func create_path_segment(from_pos: Vector2, to_pos: Vector2) -> void:
-	"""Create visual segment of the optimization path"""
-	var segment = create_line_segment(from_pos, to_pos, path_color)
-	path_trail.append(segment)
-	add_child(segment)
+	# Quad 2 (vertical)
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(a - u)
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(a + u)
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(b + u)
 
-func create_arrow_mesh(pos_2d: Vector2, direction: Vector2, color: Color) -> MeshInstance3D:
-	"""Create an arrow mesh showing direction"""
-	var arrow = MeshInstance3D.new()
-	var cylinder = CylinderMesh.new()
-	cylinder.height = 1.0
-	cylinder.top_radius = 0.05
-	cylinder.bottom_radius = 0.05
-	arrow.mesh = cylinder
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.5
-	arrow.material_override = material
-	
-	var z_pos = function_evaluator.evaluate(pos_2d) * z_scale + 1.0
-	arrow.position = Vector3(pos_2d.x, z_pos, pos_2d.y)
-	
-	# Orient arrow in gradient direction
-	var angle = atan2(direction.y, direction.x)
-	arrow.rotation = Vector3(0, -angle + PI/2, PI/2)
-	
-	return arrow
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(a - u)
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(b + u)
+	im.surface_set_color(col)
+	im.surface_set_normal(side.normalized())
+	im.surface_add_vertex(b - u)
 
-func create_line_segment(from_pos: Vector2, to_pos: Vector2, color: Color) -> MeshInstance3D:
-	"""Create a line segment between two positions"""
-	var line = MeshInstance3D.new()
-	var cylinder = CylinderMesh.new()
-	
-	var distance = from_pos.distance_to(to_pos)
-	cylinder.height = distance
-	cylinder.top_radius = 0.02
-	cylinder.bottom_radius = 0.02
-	line.mesh = cylinder
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.4
-	line.material_override = material
-	
-	# Position at midpoint between from and to
-	var midpoint = (from_pos + to_pos) / 2
-	var from_z = function_evaluator.evaluate(from_pos) * z_scale + 0.3
-	var to_z = function_evaluator.evaluate(to_pos) * z_scale + 0.3
-	var mid_z = (from_z + to_z) / 2
-	
-	line.position = Vector3(midpoint.x, mid_z, midpoint.y)
-	
-	# Orient line between points
-	var direction = to_pos - from_pos
-	var angle = atan2(direction.y, direction.x)
-	line.rotation = Vector3(0, -angle + PI/2, 0)
-	
-	return line
+func _im_diamond(im: ImmediateMesh, center: Vector3, size: float, col: Color) -> void:
+	var s := size
+	var top := center + Vector3(0, s, 0)
+	var bot := center - Vector3(0, s * 0.5, 0)
+	var pts := [
+		center + Vector3(s, 0, 0),
+		center + Vector3(0, 0, s),
+		center + Vector3(-s, 0, 0),
+		center + Vector3(0, 0, -s),
+	]
+	for i in 4:
+		var next := (i + 1) % 4
+		# Upper face
+		im.surface_set_color(col)
+		im.surface_set_normal(Vector3.UP)
+		im.surface_add_vertex(top)
+		im.surface_set_color(col)
+		im.surface_set_normal(Vector3.UP)
+		im.surface_add_vertex(pts[i])
+		im.surface_set_color(col)
+		im.surface_set_normal(Vector3.UP)
+		im.surface_add_vertex(pts[next])
+		# Lower face
+		im.surface_set_color(col * 0.7)
+		im.surface_set_normal(-Vector3.UP)
+		im.surface_add_vertex(bot)
+		im.surface_set_color(col * 0.7)
+		im.surface_set_normal(-Vector3.UP)
+		im.surface_add_vertex(pts[next])
+		im.surface_set_color(col * 0.7)
+		im.surface_set_normal(-Vector3.UP)
+		im.surface_add_vertex(pts[i])
 
-func clear_visualizations() -> void:
-	"""Clear previous step visualizations"""
-	for arrow in gradient_arrows:
-		arrow.queue_free()
-	gradient_arrows.clear()
-	
-	for segment in path_trail:
-		segment.queue_free()
-	path_trail.clear()
+# ════════════════════════════════════════════════════════════════════════
+#  LABELS
+# ════════════════════════════════════════════════════════════════════════
 
-func clear_previous_visualization() -> void:
-	"""Clear all previous visualization elements"""
-	if surface_mesh:
-		surface_mesh.queue_free()
-	
-	for marker in minimum_markers:
-		marker.queue_free()
-	minimum_markers.clear()
-	
-	if current_marker:
-		current_marker.queue_free()
-	
-	clear_visualizations()
+func _update_labels() -> void:
+	var mode_names := ["Optimizer Variants", "Convergence Analysis", "Hessian Eigenvalues"]
+	_title_label.text = "Gradient Descent — " + mode_names[_mode]
 
-func restart_optimization() -> void:
-	"""Restart optimization with current parameters"""
-	clear_previous_visualization()
-	initialize_mathematical_components()
-	create_surface_visualization()
-	is_optimizing = false
-	current_iteration = 0
-	descent_path.clear()
-	gradient_history.clear()
-	function_values.clear()
-	optimization_stats.function_calls = 0
-	optimization_stats.gradient_calls = 0
-	update_ui()
+	match _mode:
+		Mode.OPTIMIZERS:
+			var lines := "f(x,y) = %s  |  lr=%.4f  β=%.2f  step=%d" % [_fn_name(), learning_rate, momentum_beta, _step_count]
+			for opt in _optimizers:
+				var status := "converged" if opt.converged else "f=%.4f" % [opt.value as float]
+				lines += "\n%s: (%.2f, %.2f) %s" % [opt.name, (opt.pos as Vector2).x, (opt.pos as Vector2).y, status]
+			_info_label.text = lines
+			_legend_label.text = "Red=SGD  Green=Momentum  Blue=Nesterov  Gold=Adam"
 
-func toggle_gradient_visibility() -> void:
-	"""Toggle visibility of gradient vectors"""
-	show_gradient_vectors = !show_gradient_vectors
-	for arrow in gradient_arrows:
-		arrow.visible = show_gradient_vectors
-	update_ui()
+		Mode.CONVERGENCE:
+			var lines := "Adam on %s  |  β₁=%.2f  β₂=%.3f  step=%d" % [_fn_name(), adam_beta1, adam_beta2, _step_count]
+			for run in _conv_runs:
+				var val := _eval(run.pos as Vector2)
+				lines += "\nlr=%.3f: f=%.4f%s" % [run.lr as float, val, " ✓" if run.converged else ""]
+			_info_label.text = lines
+			_legend_label.text = "5 learning rates compared — log(f) chart on right"
 
-func toggle_path_visibility() -> void:
-	"""Toggle visibility of path trail"""
-	show_path_trail = !show_path_trail
-	for segment in path_trail:
-		segment.visible = show_path_trail
-	update_ui()
+		Mode.HESSIAN:
+			_info_label.text = "f(x,y) = %s  |  Hessian at %d×%d grid points\nBlue=positive definite  Red=negative  Yellow=saddle" % [_fn_name(), 9, 9]
+			_legend_label.text = "Line length ~ |eigenvalue|  Direction = eigenvector"
 
-func setup_ui() -> void:
-	"""Create comprehensive user interface"""
-	ui_display = CanvasLayer.new()
-	add_child(ui_display)
-	
-	var panel = Panel.new()
-	panel.custom_minimum_size = Vector2(400, 550)
-	panel.position = Vector2(20, 20)
-	ui_display.add_child(panel)
-	
-	var vbox = VBoxContainer.new()
-	vbox.position = Vector2(15, 15)
-	vbox.custom_minimum_size = Vector2(370, 520)
-	panel.add_child(vbox)
-	
-	# Title
-	var title = Label.new()
-	title.text = "Gradient Descent: Journey to Optimality"
-	title.add_theme_font_size_override("font_size", 16)
-	vbox.add_child(title)
-	
-	# Information labels
-	for i in range(16):
-		var label = Label.new()
-		label.name = "info_label_" + str(i)
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		vbox.add_child(label)
-	
-	update_ui()
-
-func update_ui() -> void:
-	"""Update user interface with current optimization state"""
-	if not ui_display:
-		return
-	
-	# Check if the UI structure exists
-	var panel = ui_display.get_node_or_null("Panel")
-	if not panel:
-		return
-	var vbox = panel.get_node("VBoxContainer")
-	if not vbox:
-		return
-	
-	var labels = []
-	for i in range(16):
-		var label = vbox.get_node("info_label_" + str(i))
-		if label:
-			labels.append(label)
-	
-	if labels.size() >= 16:
-		labels[0].text = "Function: " + function_preset
-		labels[1].text = "Current Position: (" + str(current_pos.x).pad_decimals(3) + ", " + str(current_pos.y).pad_decimals(3) + ")"
-		
-		var current_value = 0.0
-		if function_evaluator:
-			current_value = function_evaluator.evaluate(current_pos)
-		labels[2].text = "Function Value: " + str(current_value).pad_decimals(4)
-		
-		labels[3].text = "Learning Rate: " + str(learning_rate)
-		labels[4].text = ""
-		labels[5].text = "Iterations: " + str(optimization_stats.iterations) + "/" + str(max_iterations)
-		labels[6].text = "Function Evaluations: " + str(optimization_stats.function_calls)
-		labels[7].text = "Gradient Evaluations: " + str(optimization_stats.gradient_calls)
-		labels[8].text = ""
-		labels[9].text = "Status: " + algorithm_step.replace("_", " ").capitalize()
-		labels[10].text = "Path Length: " + str(descent_path.size()) + " points"
-		
-		var gradient_magnitude = 0.0
-		if gradient_history.size() > 0:
-			gradient_magnitude = gradient_history[-1].length()
-		labels[11].text = "Gradient Magnitude: " + str(gradient_magnitude).pad_decimals(4)
-		
-		labels[12].text = ""
-		labels[13].text = "Controls: SPACE=Step, R=Restart, 1-3=Functions"
-		labels[14].text = "G=Toggle Gradients, P=Toggle Path"
-		labels[15].text = "Following steepest descent toward optimal authenticity"
-
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
-
+# ════════════════════════════════════════════════════════════════════════
+#  GRID CONFIG
+# ════════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("function_preset"):
+		var fp = config["function_preset"]
+		if fp is int:
+			function_preset = clampi(fp, 0, 2)
+		elif fp is String:
+			match (fp as String).to_lower():
+				"quadratic", "bowl": function_preset = 0
+				"rosenbrock": function_preset = 1
+				"himmelblau": function_preset = 2
+
+	if config.has("learning_rate"):
+		learning_rate = clampf(float(config["learning_rate"]), 0.0001, 0.5)
+	if config.has("momentum_beta"):
+		momentum_beta = clampf(float(config["momentum_beta"]), 0.0, 0.999)
+	if config.has("adam_beta1"):
+		adam_beta1 = clampf(float(config["adam_beta1"]), 0.0, 0.999)
+	if config.has("adam_beta2"):
+		adam_beta2 = clampf(float(config["adam_beta2"]), 0.0, 0.9999)
+	if config.has("step_speed"):
+		step_speed = clampf(float(config["step_speed"]), 0.1, 10.0)
+
+	if config.has("mode"):
+		var m := str(config["mode"]).to_upper()
+		match m:
+			"OPTIMIZERS": _mode = Mode.OPTIMIZERS
+			"CONVERGENCE": _mode = Mode.CONVERGENCE
+			"HESSIAN": _mode = Mode.HESSIAN
+
+	_init_mode()
