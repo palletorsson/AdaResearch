@@ -33,7 +33,13 @@
 					19
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"modulor_man": {
 			"lookup_name": "modulor_man",
@@ -52,7 +58,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"modulor_man_interactive": {
 			"lookup_name": "modulor_man_interactive",
@@ -70,7 +81,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_space": {
 			"lookup_name": "sine_space",
@@ -99,7 +115,12 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_wall": {
 			"lookup_name": "sine_wall",
@@ -128,7 +149,12 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_oscillation": {
 			"lookup_name": "sine_oscillation",
@@ -149,6 +175,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		},
 		"sound_timeline": {
@@ -170,6 +201,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		},
 		"vertical_wave_lines": {
@@ -191,6 +228,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		},
 		"doppler_effect_demo": {
@@ -213,6 +255,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		}
 	}

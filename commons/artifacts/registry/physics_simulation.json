@@ -1087,7 +1087,15 @@
 					2
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"softstopscene": {
 			"lookup_name": "softstopscene",
@@ -1113,7 +1121,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"PendulumPin": {
 			"lookup_name": "PendulumPin",
@@ -1139,7 +1155,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"HingeCrank": {
 			"lookup_name": "HingeCrank",
@@ -1165,7 +1189,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"CharacterRagdoll": {
 			"lookup_name": "CharacterRagdoll",
@@ -1191,7 +1223,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"SpringSuspension": {
 			"lookup_name": "SpringSuspension",
@@ -1217,7 +1257,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"ConeTwistBag": {
 			"lookup_name": "ConeTwistBag",
@@ -1243,7 +1291,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"ChainSwing": {
 			"lookup_name": "ChainSwing",
@@ -1269,7 +1325,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"DrawbridgeHinge": {
 			"lookup_name": "DrawbridgeHinge",
@@ -1295,7 +1359,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"GimbalStabilizer": {
 			"lookup_name": "GimbalStabilizer",
@@ -1321,7 +1393,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"tscn_joint": {
 			"lookup_name": "tscn_joint",
@@ -1347,7 +1427,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"raycastingpoints": {
 			"lookup_name": "raycastingpoints",
@@ -1371,7 +1459,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"waterone": {
 			"lookup_name": "waterone",
@@ -1395,7 +1491,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"waterflowers": {
 			"lookup_name": "waterflowers",
@@ -1421,7 +1525,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_2_2_forces_mass_variation_vr": {
 			"lookup_name": "example_2_2_forces_mass_variation_vr",
@@ -1447,7 +1560,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_2_3_gravity_scaled_by_mass_vr": {
 			"lookup_name": "example_2_3_gravity_scaled_by_mass_vr",
@@ -1473,7 +1594,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_2_4_friction_vr": {
 			"lookup_name": "example_2_4_friction_vr",
@@ -1497,7 +1626,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_2_5_fluid_resistance_vr": {
 			"lookup_name": "example_2_5_fluid_resistance_vr",
@@ -1523,7 +1660,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_2_6_single_attractor_vr": {
 			"lookup_name": "example_2_6_single_attractor_vr",
@@ -1549,7 +1694,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_2_7_multiple_attractors_vr": {
 			"lookup_name": "example_2_7_multiple_attractors_vr",
@@ -1575,7 +1729,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_2_8_two_body_attraction_vr": {
 			"lookup_name": "example_2_8_two_body_attraction_vr",
@@ -1602,7 +1764,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_2_9_n_body_attraction_vr": {
 			"lookup_name": "example_2_9_n_body_attraction_vr",
@@ -1629,7 +1799,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_1_10_accelerating_towards_the_mouse_vr": {
 			"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",
@@ -1653,7 +1831,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_3_1_angular_motion_using_rotate_vr": {
 			"lookup_name": "example_3_1_angular_motion_using_rotate_vr",
@@ -1679,7 +1865,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_10_swinging_pendulum_vr": {
 			"lookup_name": "example_3_10_swinging_pendulum_vr",
@@ -1705,7 +1899,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"pendulum",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_11_a_spring_connection_vr": {
 			"lookup_name": "example_3_11_a_spring_connection_vr",
@@ -1731,7 +1934,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics",
+				"spring"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
 			"lookup_name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
@@ -1757,7 +1969,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_3_pointing_in_the_direction_of_motion_vr": {
 			"lookup_name": "example_3_3_pointing_in_the_direction_of_motion_vr",
@@ -1783,7 +2003,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_4_polar_to_cartesian_vr": {
 			"lookup_name": "example_3_4_polar_to_cartesian_vr",
@@ -1807,7 +2035,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_3_5_simple_harmonic_motion_vr": {
 			"lookup_name": "example_3_5_simple_harmonic_motion_vr",
@@ -1833,7 +2069,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_6_simple_harmonic_motion_ii_vr": {
 			"lookup_name": "example_3_6_simple_harmonic_motion_ii_vr",
@@ -1859,7 +2104,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_7_oscillator_objects_vr": {
 			"lookup_name": "example_3_7_oscillator_objects_vr",
@@ -1885,7 +2139,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_3_8_static_wave_vr": {
 			"lookup_name": "example_3_8_static_wave_vr",
@@ -1911,7 +2173,15 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_3_9_the_wave_vr": {
 			"lookup_name": "example_3_9_the_wave_vr",
@@ -1937,7 +2207,15 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"exercise_3_1_baton_vr": {
 			"lookup_name": "exercise_3_1_baton_vr",
@@ -1963,7 +2241,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"exercise_3_11_oop_wave_vr": {
 			"lookup_name": "exercise_3_11_oop_wave_vr",
@@ -1989,7 +2275,15 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"exercise_3_12_additive_wave_vr": {
 			"lookup_name": "exercise_3_12_additive_wave_vr",
@@ -2015,7 +2309,15 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"exercise_3_15_double_pendulum_vr": {
 			"lookup_name": "exercise_3_15_double_pendulum_vr",
@@ -2041,7 +2343,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"pendulum",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"exercise_3_5_spiral_vr": {
 			"lookup_name": "exercise_3_5_spiral_vr",
@@ -2067,7 +2378,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"spiral"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"exercise_3_6_asteroids_vr": {
 			"lookup_name": "exercise_3_6_asteroids_vr",
@@ -2093,7 +2412,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"tags": [
+				"physics"
+			]
 		},
 		"example_4_1_single_particle_vr": {
 			"lookup_name": "example_4_1_single_particle_vr",
@@ -2119,7 +2446,17 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_4_2_array_particles_vr": {
 			"lookup_name": "example_4_2_array_particles_vr",
@@ -2145,7 +2482,17 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"array",
+				"simulation",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_4_3_particle_emitter_vr": {
 			"lookup_name": "example_4_3_particle_emitter_vr",
@@ -2171,7 +2518,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_4_4_multiple_emitters_vr": {
 			"lookup_name": "example_4_4_multiple_emitters_vr",
@@ -2197,7 +2554,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_4_5_inheritance_polymorphism_vr": {
 			"lookup_name": "example_4_5_inheritance_polymorphism_vr",
@@ -2223,7 +2588,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_4_6_particle_repeller_vr": {
 			"lookup_name": "example_4_6_particle_repeller_vr",
@@ -2249,7 +2622,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_particle_body": {
 			"lookup_name": "example_particle_body",
@@ -2275,7 +2658,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"particle"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_1_basic_rigidbody_vr": {
 			"lookup_name": "example_6_1_basic_rigidbody_vr",
@@ -2299,7 +2690,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_2_falling_boxes_vr": {
 			"lookup_name": "example_6_2_falling_boxes_vr",
@@ -2323,7 +2722,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_3_compound_bodies_vr": {
 			"lookup_name": "example_6_3_compound_bodies_vr",
@@ -2347,7 +2754,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_4_windmill_vr": {
 			"lookup_name": "example_6_4_windmill_vr",
@@ -2371,7 +2786,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_5_chain_vr": {
 			"lookup_name": "example_6_5_chain_vr",
@@ -2395,7 +2818,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_6_grab_vr": {
 			"lookup_name": "example_6_6_grab_vr",
@@ -2419,7 +2850,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"interactive",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_7_bridge_vr": {
 			"lookup_name": "example_6_7_bridge_vr",
@@ -2443,7 +2883,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"example_6_8_collision_layers_vr": {
 			"lookup_name": "example_6_8_collision_layers_vr",
@@ -2467,7 +2915,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics",
+				"vr"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		},
 		"algo_gun": {
 			"lookup_name": "algo_gun",
@@ -2494,7 +2951,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"interactive",
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"simulation"
+			]
 		}
 	},
 	"sequence_mapping": {

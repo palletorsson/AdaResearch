@@ -813,7 +813,16 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"ForceMagnitudeDemo": {
 			"lookup_name": "ForceMagnitudeDemo",
@@ -839,7 +848,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"CoordinateSystem3M": {
 			"lookup_name": "CoordinateSystem3M",
@@ -866,7 +884,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"vectorpoint": {
 			"lookup_name": "vectorpoint",
@@ -890,7 +917,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"geometry",
+				"interactive",
+				"linear_algebra",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"VectorBasics": {
 			"lookup_name": "VectorBasics",
@@ -917,7 +957,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorAddition": {
 			"lookup_name": "VectorAddition",
@@ -944,7 +993,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorDotProduct": {
 			"lookup_name": "VectorDotProduct",
@@ -970,7 +1028,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorSubtraction": {
 			"lookup_name": "VectorSubtraction",
@@ -997,7 +1064,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorForces": {
 			"lookup_name": "VectorForces",
@@ -1023,7 +1099,16 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorCrossProduct": {
 			"lookup_name": "VectorCrossProduct",
@@ -1050,7 +1135,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorProjectionReflection": {
 			"lookup_name": "VectorProjectionReflection",
@@ -1074,7 +1168,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorMotion": {
 			"lookup_name": "VectorMotion",
@@ -1098,7 +1201,16 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorTorque": {
 			"lookup_name": "VectorTorque",
@@ -1124,7 +1236,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorFieldFlow": {
 			"lookup_name": "VectorFieldFlow",
@@ -1151,7 +1272,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"VectorWorkbench": {
 			"lookup_name": "VectorWorkbench",
@@ -1193,7 +1323,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"vectorline": {
 			"lookup_name": "vectorline",
@@ -1217,7 +1352,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"linear_algebra"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"vector_drone": {
 			"lookup_name": "vector_drone",
@@ -1243,7 +1387,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"vector"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_1_bouncing_ball_with_no_vectors_vr": {
 			"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
@@ -1269,7 +1422,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_2_bouncing_ball_with_vectors_vr": {
 			"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
@@ -1293,7 +1457,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_3_vector_subtraction_vr": {
 			"lookup_name": "example_1_3_vector_subtraction_vr",
@@ -1319,7 +1494,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_4_vector_multiplication_vr": {
 			"lookup_name": "example_1_4_vector_multiplication_vr",
@@ -1345,7 +1531,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_5_vector_magnitude_vr": {
 			"lookup_name": "example_1_5_vector_magnitude_vr",
@@ -1371,7 +1568,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_6_vector_normalize_vr": {
 			"lookup_name": "example_1_6_vector_normalize_vr",
@@ -1397,7 +1605,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_7_motion_101_velocity_vr": {
 			"lookup_name": "example_1_7_motion_101_velocity_vr",
@@ -1423,7 +1642,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
 			"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
@@ -1449,7 +1679,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
 			"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
@@ -1476,7 +1717,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"probability",
+				"procedural",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
 			"lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
@@ -1503,7 +1757,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
 			"lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
@@ -1530,7 +1794,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"exercise_1_8_solution_attraction_magnitude_vr": {
 			"lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
@@ -1557,7 +1830,16 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"VectorThrowing": {
 			"lookup_name": "VectorThrowing",
@@ -1583,7 +1865,16 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"throw_ball": {
 			"lookup_name": "throw_ball",
@@ -1609,7 +1900,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"sphere_splitting_showcase": {
 			"lookup_name": "sphere_splitting_showcase",
@@ -1635,7 +1935,16 @@
 					18
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"destructibles_test_scene": {
 			"lookup_name": "destructibles_test_scene",
@@ -1661,7 +1970,16 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"destructible_marching_cube": {
 			"lookup_name": "destructible_marching_cube",
@@ -1685,7 +2003,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		},
 		"gravity_gun_test_scene": {
 			"lookup_name": "gravity_gun_test_scene",
@@ -1711,7 +2038,16 @@
 					2
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"tags": [
+				"vector"
+			]
 		}
 	},
 	"sequence_mapping": {

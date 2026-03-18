@@ -15,7 +15,12 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"dynamic_cubemap": {
 			"name": "Dynamic Cubemap",
@@ -32,7 +37,12 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "beginner",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"materials_transmission": {
 			"name": "Materials Transmission",
@@ -49,7 +59,12 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "beginner",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"tiles_explained": {
 			"name": "Tiles Explained",
@@ -76,7 +91,12 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"degrading_shader_demo": {
 			"name": "Degrading Shader Demo",
@@ -103,7 +123,12 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"queer_collection_gallery_a": {
 			"name": "Queer Collection Gallery A",
@@ -129,7 +154,13 @@
 					7
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_gallery": {
 			"name": "Shader Gallery",
@@ -153,7 +184,13 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_01_shaping": {
 			"name": "Shader 01 — Shaping Functions",
@@ -173,7 +210,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_02_colors": {
 			"name": "Shader 02 — Colors",
@@ -192,7 +234,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_03_shapes": {
 			"name": "Shader 03 — Shapes",
@@ -211,7 +258,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_04_matrices": {
 			"name": "Shader 04 — Matrices",
@@ -230,7 +282,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_05_patterns": {
 			"name": "Shader 05 — Patterns",
@@ -249,7 +306,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_06_random": {
 			"name": "Shader 06 — Random",
@@ -268,7 +330,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_07_noise": {
 			"name": "Shader 07 — Noise",
@@ -287,7 +354,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_08_cellularnoise": {
 			"name": "Shader 08 — Cellular Noise",
@@ -306,7 +378,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"biology",
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_09_fbm": {
 			"name": "Shader 09 — Fractal Brownian Motion",
@@ -326,7 +404,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_10_reactiondiffusion": {
 			"name": "Shader 10 — Reaction Diffusion",
@@ -345,7 +428,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_11_queerrubber": {
 			"name": "Shader 11 — Queer Rubber",
@@ -365,7 +453,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_12_pinkextravaganza": {
 			"name": "Shader 12 — Pink Extravaganza",
@@ -384,7 +478,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders"
+			"sequence": "shaders",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"cove_display": {
 			"name": "Cove Display",
@@ -407,7 +506,12 @@
 				"patterngeneration",
 				"mosaicanalysis"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"pixel_carpet_gallery": {
 			"name": "Pixel Carpet Gallery",
@@ -428,7 +532,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"carpet_cove_gallery": {
 			"name": "Carpet Cove Gallery",
@@ -449,7 +559,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"wall_cove": {
 			"name": "Wall Cove",
@@ -473,7 +589,13 @@
 				"patterngeneration",
 				"array_tutorial"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"wall_pattern_colorizer": {
 			"name": "Wall Pattern Colorizer",
@@ -495,7 +617,12 @@
 				"patterngeneration",
 				"array_tutorial"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"wall_shader_showcase": {
 			"name": "Wall Shader Showcase",
@@ -516,7 +643,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"shader_arch_gallery": {
 			"name": "Shader Arch Gallery",
@@ -537,7 +669,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"wall_pattern_gallery": {
 			"name": "Wall Pattern Gallery",
@@ -558,7 +696,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"pattern_compositor": {
 			"name": "Pattern Compositor",
@@ -581,7 +725,12 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"art_history_gallery": {
 			"name": "Art History Gallery",
@@ -603,7 +752,13 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "patterngeneration"
+			"sequence": "patterngeneration",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"Shader_Gallery": {
 			"lookup_name": "Shader_Gallery",
@@ -629,7 +784,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"shader"
+			],
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			]
 		},
 		"flashlight_demo": {
 			"lookup_name": "flashlight_demo",
@@ -655,7 +819,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"tags": [
+				"shader"
+			]
 		},
 		"clippingplanes": {
 			"lookup_name": "clippingplanes",
@@ -681,7 +853,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"tags": [
+				"shader"
+			]
 		},
 		"alphahash": {
 			"lookup_name": "alphahash",
@@ -707,7 +887,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cryptography"
+			],
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"postprocessing_bloom": {
 			"lookup_name": "postprocessing_bloom",
@@ -733,7 +921,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"tags": [
+				"shader"
+			]
 		},
 		"buffergeometryparticles": {
 			"lookup_name": "buffergeometryparticles",
@@ -759,7 +955,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"dynamiccubemap": {
 			"lookup_name": "dynamiccubemap",
@@ -783,7 +987,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation"
+			],
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		},
 		"materialstransmission": {
 			"lookup_name": "materialstransmission",
@@ -807,7 +1019,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"tags": [
+				"shader"
+			]
 		}
 	}
 }

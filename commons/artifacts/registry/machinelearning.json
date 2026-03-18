@@ -29,7 +29,11 @@
 					30
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"kmeans_simple": {
 			"lookup_name": "kmeans_simple",
@@ -58,7 +62,11 @@
 					25
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"random_forest_visualization": {
 			"lookup_name": "random_forest_visualization",
@@ -87,7 +95,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"svm_visualization": {
 			"lookup_name": "svm_visualization",
@@ -118,7 +130,11 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"9_1_ga_shakespeare_vr": {
 			"lookup_name": "9_1_ga_shakespeare_vr",
@@ -139,7 +155,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"9_2_smart_rockets_basic_vr": {
 			"lookup_name": "9_2_smart_rockets_basic_vr",
@@ -160,7 +181,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"9_3_smart_rockets_vr": {
 			"lookup_name": "9_3_smart_rockets_vr",
@@ -183,7 +209,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"9_4_interactive_selection_vr": {
 			"lookup_name": "9_4_interactive_selection_vr",
@@ -205,7 +236,13 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"art",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"9_5_evolving_bloops_vr": {
 			"lookup_name": "9_5_evolving_bloops_vr",
@@ -227,7 +264,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"9_6_ga_shakespeare_annotated_vr": {
 			"lookup_name": "9_6_ga_shakespeare_annotated_vr",
@@ -248,7 +290,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"pca_visualization": {
 			"lookup_name": "pca_visualization",
@@ -278,7 +325,11 @@
 					12
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"neural_network_visualization": {
 			"lookup_name": "neural_network_visualization",
@@ -301,7 +352,11 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"attention_mechanisms": {
 			"lookup_name": "attention_mechanisms",
@@ -331,7 +386,11 @@
 					14
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"time_series_analysis": {
 			"lookup_name": "time_series_analysis",
@@ -360,7 +419,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"anomaly_detection": {
 			"lookup_name": "anomaly_detection",
@@ -390,7 +454,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"joint_learn_walk": {
 			"lookup_name": "joint_learn_walk",
@@ -412,7 +480,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"evolved_creatures": {
 			"lookup_name": "evolved_creatures",
@@ -442,7 +515,13 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			]
 		},
 		"clustering_algorithms": {
 			"lookup_name": "clustering_algorithms",
@@ -472,7 +551,11 @@
 					18
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"shape_learner_2d": {
 			"lookup_name": "shape_learner_2d",
@@ -494,7 +577,13 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			]
 		},
 		"genetic_algorithm": {
 			"lookup_name": "genetic_algorithm",
@@ -523,7 +612,12 @@
 					30
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"neural_networks": {
 			"lookup_name": "neural_networks",
@@ -553,7 +647,11 @@
 					8
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"shape_learner_3d": {
 			"lookup_name": "shape_learner_3d",
@@ -575,7 +673,13 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			]
 		},
 		"spotlight_attention": {
 			"lookup_name": "spotlight_attention",
@@ -605,7 +709,11 @@
 					25
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"switchboard_attention": {
 			"lookup_name": "switchboard_attention",
@@ -626,7 +734,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"axiom_garden": {
 			"lookup_name": "axiom_garden",
@@ -657,7 +770,11 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"lstms": {
 			"lookup_name": "lstms",
@@ -687,7 +804,11 @@
 					14
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"gans": {
 			"lookup_name": "gans",
@@ -717,7 +838,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"vaes": {
 			"lookup_name": "vaes",
@@ -747,7 +872,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning",
+				"qfep"
+			]
 		},
 		"transformers": {
 			"lookup_name": "transformers",
@@ -776,7 +906,12 @@
 					14
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"reinforcement_learning": {
 			"lookup_name": "reinforcement_learning",
@@ -805,7 +940,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"dimensionality_reduction": {
 			"lookup_name": "dimensionality_reduction",
@@ -835,7 +975,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"ensemble_methods": {
 			"lookup_name": "ensemble_methods",
@@ -864,7 +1008,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"optimization_algorithms": {
 			"lookup_name": "optimization_algorithms",
@@ -894,7 +1043,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"computer_vision": {
 			"lookup_name": "computer_vision",
@@ -923,7 +1076,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"nlp": {
 			"lookup_name": "nlp",
@@ -953,7 +1111,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"feature_engineering": {
 			"lookup_name": "feature_engineering",
@@ -981,7 +1143,12 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"art",
+				"machine_learning"
+			]
 		},
 		"recommendation_systems": {
 			"lookup_name": "recommendation_systems",
@@ -1009,7 +1176,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"explainable_ai": {
 			"lookup_name": "explainable_ai",
@@ -1038,7 +1209,11 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"convolutional_neural_networks": {
 			"lookup_name": "convolutional_neural_networks",
@@ -1068,7 +1243,12 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"fine_tuning": {
 			"lookup_name": "fine_tuning",
@@ -1089,7 +1269,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"gradient_descent": {
 			"lookup_name": "gradient_descent",
@@ -1117,7 +1302,12 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"evolving_creatures_ea": {
 			"lookup_name": "evolving_creatures_ea",
@@ -1137,7 +1327,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"evolved_creatures_v2": {
 			"lookup_name": "evolved_creatures_v2",
@@ -1158,7 +1353,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"evolving_flowers": {
 			"lookup_name": "evolving_flowers",
@@ -1179,7 +1379,13 @@
 			"map_sequences": [
 				"flowers"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"art",
+				"biology",
+				"machine_learning"
+			]
 		},
 		"random_walker_machine": {
 			"lookup_name": "random_walker_machine",
@@ -1207,7 +1413,11 @@
 					25
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"learn_world_stacked": {
 			"lookup_name": "learn_world_stacked",
@@ -1235,7 +1445,12 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"perceptron_playground": {
 			"lookup_name": "perceptron_playground",
@@ -1270,7 +1485,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"decision_boundary_viewer": {
 			"lookup_name": "decision_boundary_viewer",
@@ -1291,7 +1511,11 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"gradient_descent_landscape": {
 			"lookup_name": "gradient_descent_landscape",
@@ -1313,7 +1537,12 @@
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"sequence": "machinelearning",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		},
 		"evolvingflowers": {
 			"lookup_name": "evolvingflowers",
@@ -1339,7 +1568,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"neural_networks_vr": {
 			"lookup_name": "neural_networks_vr",
@@ -1365,7 +1602,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"graph"
+			],
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			]
 		},
 		"transformers_vr": {
 			"lookup_name": "transformers_vr",
@@ -1391,7 +1636,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"variational_autoencoders_vaes_vr": {
 			"lookup_name": "variational_autoencoders_vaes_vr",
@@ -1415,7 +1668,16 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning",
+				"qfep"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"fine_tuning_vr": {
 			"lookup_name": "fine_tuning_vr",
@@ -1439,7 +1701,16 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"lstms_vr": {
 			"lookup_name": "lstms_vr",
@@ -1465,7 +1736,16 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"generative_adversarial_networks_gans_vr": {
 			"lookup_name": "generative_adversarial_networks_gans_vr",
@@ -1491,7 +1771,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"computer_vision_vr": {
 			"lookup_name": "computer_vision_vr",
@@ -1517,7 +1805,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"convolutional_neural_networks_cnns_vr": {
 			"lookup_name": "convolutional_neural_networks_cnns_vr",
@@ -1543,7 +1839,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		},
 		"explainable_ai_xai_vr": {
 			"lookup_name": "explainable_ai_xai_vr",
@@ -1569,7 +1873,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"tags": [
+				"machine_learning"
+			]
 		}
 	}
 }

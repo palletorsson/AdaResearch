@@ -31,7 +31,11 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"dijkstra_algorithm": {
 			"lookup_name": "dijkstra_algorithm",
@@ -60,7 +64,11 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"konigsberg_bridge": {
 			"lookup_name": "konigsberg_bridge",
@@ -89,7 +97,11 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"network_flow_visualization": {
 			"lookup_name": "network_flow_visualization",
@@ -118,7 +130,11 @@
 					17
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"levenshtein_distance": {
 			"lookup_name": "levenshtein_distance",
@@ -136,7 +152,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"biology",
+				"misc"
+			]
 		},
 		"boyer_moore": {
 			"lookup_name": "boyer_moore",
@@ -154,7 +175,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"gradient_descent_visualization": {
 			"lookup_name": "gradient_descent_visualization",
@@ -183,7 +208,12 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			]
 		},
 		"newton_raphson_visualization": {
 			"lookup_name": "newton_raphson_visualization",
@@ -202,7 +232,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"simulated_annealing": {
 			"lookup_name": "simulated_annealing",
@@ -228,7 +262,11 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"rsa_visualization": {
 			"lookup_name": "rsa_visualization",
@@ -255,7 +293,11 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"algorithmic_bias": {
 			"lookup_name": "algorithmic_bias",
@@ -281,7 +323,12 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			]
 		},
 		"algorithmic_bias_visualization": {
 			"lookup_name": "algorithmic_bias_visualization",
@@ -307,7 +354,11 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"remains_to_be_seen": {
 			"lookup_name": "remains_to_be_seen",
@@ -325,7 +376,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"art",
+				"misc"
+			]
 		},
 		"running_text_display": {
 			"lookup_name": "running_text_display",
@@ -343,7 +399,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"fluid_simulation": {
 			"lookup_name": "fluid_simulation",
@@ -372,7 +432,12 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"physics"
+			]
 		},
 		"affect_theory_visualization": {
 			"lookup_name": "affect_theory_visualization",
@@ -399,7 +464,11 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"playground_of_joy": {
 			"lookup_name": "playground_of_joy",
@@ -426,7 +495,12 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"physics"
+			]
 		},
 		"entropy_axiom": {
 			"lookup_name": "entropy_axiom",
@@ -448,6 +522,10 @@
 			"map_sequences": [
 				"randomness",
 				"testmaps"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
 			]
 		},
 		"cave_system": {
@@ -467,7 +545,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"kitbashing": {
 			"lookup_name": "kitbashing",
@@ -486,7 +568,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"graph_coloring": {
 			"lookup_name": "graph_coloring",
@@ -505,7 +591,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"small_world_network": {
 			"lookup_name": "small_world_network",
@@ -527,6 +617,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
 			]
 		},
 		"diamondtoruscollection": {
@@ -553,7 +647,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"geometric_transformations": {
 			"lookup_name": "geometric_transformations",
@@ -580,7 +682,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"scale_me": {
 			"lookup_name": "scale_me",
@@ -606,7 +716,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"rorschach_scan": {
 			"lookup_name": "rorschach_scan",
@@ -630,7 +748,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pattern"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"rorschach_monitor": {
 			"lookup_name": "rorschach_monitor",
@@ -654,7 +780,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"tartan_demo": {
 			"lookup_name": "tartan_demo",
@@ -680,7 +814,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"rainbow": {
 			"lookup_name": "rainbow",
@@ -709,7 +851,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"color"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"homagetothesquare": {
 			"lookup_name": "homagetothesquare",
@@ -736,7 +886,15 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"albers_wall_gallery": {
 			"lookup_name": "albers_wall_gallery",
@@ -762,7 +920,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"art",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"platonicsolids": {
 			"lookup_name": "platonicsolids",
@@ -790,7 +957,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"additive_synthesis": {
 			"lookup_name": "additive_synthesis",
@@ -816,7 +991,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"audio_effects": {
 			"lookup_name": "audio_effects",
@@ -840,7 +1023,16 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"music"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"fm_synthesis": {
 			"lookup_name": "fm_synthesis",
@@ -866,7 +1058,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"generative_music": {
 			"lookup_name": "generative_music",
@@ -892,7 +1092,15 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"granular_synthesis": {
 			"lookup_name": "granular_synthesis",
@@ -918,7 +1126,15 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"psychoacoustics": {
 			"lookup_name": "psychoacoustics",
@@ -944,7 +1160,15 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"subtractive_synthesis": {
 			"lookup_name": "subtractive_synthesis",
@@ -970,7 +1194,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"boid_flocking": {
 			"lookup_name": "boid_flocking",
@@ -996,7 +1228,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"boid",
+				"swarm"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"ecosystem_simulation": {
 			"lookup_name": "ecosystem_simulation",
@@ -1022,7 +1263,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"ecosystem_simulation_2": {
 			"lookup_name": "ecosystem_simulation_2",
@@ -1046,7 +1295,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"FlowFieldMain": {
 			"lookup_name": "FlowFieldMain",
@@ -1072,7 +1329,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"self_organizing_patterns": {
 			"lookup_name": "self_organizing_patterns",
@@ -1099,7 +1364,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pattern"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"fibonacci_sequences": {
 			"lookup_name": "fibonacci_sequences",
@@ -1129,7 +1402,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"recursion"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"koch_curve": {
 			"lookup_name": "koch_curve",
@@ -1157,7 +1438,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"context_free_grammars": {
 			"lookup_name": "context_free_grammars",
@@ -1185,7 +1474,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"simulation"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"tree_generation": {
 			"lookup_name": "tree_generation",
@@ -1211,7 +1509,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"force_directed_layout": {
 			"lookup_name": "force_directed_layout",
@@ -1237,7 +1546,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"graphspace": {
 			"lookup_name": "graphspace",
@@ -1264,7 +1581,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"KonigsbergBridge": {
 			"lookup_name": "KonigsbergBridge",
@@ -1291,7 +1616,15 @@
 					31
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"graphspace3d": {
 			"lookup_name": "graphspace3d",
@@ -1317,7 +1650,15 @@
 					36
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"mst_visualization": {
 			"lookup_name": "mst_visualization",
@@ -1343,7 +1684,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"pathfinding_visualization": {
 			"lookup_name": "pathfinding_visualization",
@@ -1369,7 +1718,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"pathfinding3d": {
 			"lookup_name": "pathfinding3d",
@@ -1396,7 +1753,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"network_analysis": {
 			"lookup_name": "network_analysis",
@@ -1423,7 +1788,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"fetishtorus": {
 			"lookup_name": "fetishtorus",
@@ -1447,7 +1820,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"booleans": {
 			"lookup_name": "booleans",
@@ -1471,7 +1852,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"booleanvariations": {
 			"lookup_name": "booleanvariations",
@@ -1495,7 +1884,15 @@
 					19
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"algorithm_overview": {
 			"lookup_name": "algorithm_overview",
@@ -1521,7 +1918,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			]
 		},
 		"ChengSimulationScaled": {
 			"lookup_name": "ChengSimulationScaled",
@@ -1547,7 +1953,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"closest_pair": {
 			"lookup_name": "closest_pair",
@@ -1573,7 +1987,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"distance_fields_sdf": {
 			"lookup_name": "distance_fields_sdf",
@@ -1599,7 +2021,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"voronoi_visualization": {
 			"lookup_name": "voronoi_visualization",
@@ -1623,7 +2053,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"boids_2d_in_3d": {
 			"lookup_name": "boids_2d_in_3d",
@@ -1649,7 +2087,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"boid_manager": {
 			"lookup_name": "boid_manager",
@@ -1675,7 +2121,15 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"boid"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"edmonds_algorithm": {
 			"lookup_name": "edmonds_algorithm",
@@ -1701,7 +2155,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"karger_algorithm": {
 			"lookup_name": "karger_algorithm",
@@ -1725,7 +2187,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"kosaraju_algorithm": {
 			"lookup_name": "kosaraju_algorithm",
@@ -1751,7 +2221,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"topology"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"push_relabel_algorithm": {
 			"lookup_name": "push_relabel_algorithm",
@@ -1777,7 +2255,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"tarjan_algorithm": {
 			"lookup_name": "tarjan_algorithm",
@@ -1803,7 +2289,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"topology"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"topological_sort_algorithm": {
 			"lookup_name": "topological_sort_algorithm",
@@ -1827,7 +2321,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"sort",
+				"sorting"
+			],
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			]
 		},
 		"forcedirected3d": {
 			"lookup_name": "forcedirected3d",
@@ -1853,7 +2356,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		},
 		"networkflow3d": {
 			"lookup_name": "networkflow3d",
@@ -1879,7 +2390,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"tags": [
+				"algorithm"
+			]
 		}
 	}
 }

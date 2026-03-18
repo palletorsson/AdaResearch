@@ -16,7 +16,14 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "swarmintelligence"
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"ant_agent": {
 			"name": "Ant Agent",
@@ -32,7 +39,13 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "swarmintelligence"
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"particle_swarm_optimization_legacy": {
 			"name": "Particle Swarm Optimization (Legacy)",
@@ -49,7 +62,13 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "swarmintelligence"
+			"sequence": "swarmintelligence",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"ant_colony_v2": {
 			"name": "Ant Colony V2",
@@ -75,7 +94,13 @@
 					6
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"physarum_colony": {
 			"name": "Physarum Colony",
@@ -101,7 +126,13 @@
 					1
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"ant_colony_optimization": {
 			"name": "Ant Colony Optimization",
@@ -129,7 +160,13 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"particle_swarm_optimization": {
 			"name": "Particle Swarm Optimization",
@@ -155,7 +192,13 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"boids_aquarium": {
 			"name": "Boids Aquarium",
@@ -191,7 +234,12 @@
 			},
 			"interaction": "observe",
 			"qfep_connection": "Emergence at Î»â‰ˆ0.4 â€” simple rules create complex, unpredictable behavior without central control",
-			"complexity": "intermediate"
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"stigmergy_grid": {
 			"name": "Stigmergy Grid",
@@ -210,7 +258,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [],
-			"sequence": "swarmintelligence"
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
 		},
 		"AntColonyV2": {
 			"lookup_name": "AntColonyV2",
@@ -236,7 +290,16 @@
 					6
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			],
+			"tags": [
+				"swarm"
+			]
 		},
 		"PhysarumColony": {
 			"lookup_name": "PhysarumColony",
@@ -262,7 +325,16 @@
 					1
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			],
+			"tags": [
+				"swarm"
+			]
 		}
 	}
 }

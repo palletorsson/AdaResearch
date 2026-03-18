@@ -22,7 +22,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"mobius_strip_altgeo": {
 			"lookup_name": "mobius_strip_altgeo",
@@ -40,7 +44,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"non_euclidean_space": {
 			"lookup_name": "non_euclidean_space",
@@ -66,7 +74,11 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"rhizomatic_structure": {
 			"lookup_name": "rhizomatic_structure",
@@ -87,6 +99,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
+			],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
 			]
 		},
 		"curvature_slider": {
@@ -116,7 +132,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"elliptic_surface": {
 			"lookup_name": "elliptic_surface",
@@ -144,7 +164,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"hyperbolic_surface": {
 			"lookup_name": "hyperbolic_surface",
@@ -173,7 +197,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"riemann_sphere": {
 			"lookup_name": "riemann_sphere",
@@ -202,7 +230,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"mobius_world": {
 			"lookup_name": "mobius_world",
@@ -228,7 +260,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"physics"
+			],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"marching_cubes": {
 			"lookup_name": "marching_cubes",
@@ -254,7 +295,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"riemann_pi": {
 			"lookup_name": "riemann_pi",
@@ -278,7 +327,15 @@
 					4
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"tags": [
+				"geometry"
+			]
 		},
 		"riemann_torus": {
 			"lookup_name": "riemann_torus",
@@ -302,7 +359,15 @@
 					2
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"tags": [
+				"geometry"
+			]
 		},
 		"gyroid_cheese": {
 			"lookup_name": "gyroid_cheese",
@@ -326,7 +391,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"tags": [
+				"geometry"
+			]
 		},
 		"entropy_morphogenesis": {
 			"lookup_name": "entropy_morphogenesis",
@@ -352,7 +425,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"tags": [
+				"geometry"
+			]
 		},
 		"organic_space": {
 			"lookup_name": "organic_space",
@@ -379,7 +460,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			]
 		},
 		"rhizomatic_maze_space": {
 			"lookup_name": "rhizomatic_maze_space",
@@ -406,7 +495,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"tags": [
+				"geometry"
+			]
 		}
 	}
 }

@@ -23,7 +23,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"reaction_diffusion": {
 			"lookup_name": "reaction_diffusion",
@@ -52,7 +56,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"reaction_diffusion_vr": {
 			"lookup_name": "reaction_diffusion_vr",
@@ -70,7 +78,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"tesseract_tunnel": {
 			"lookup_name": "tesseract_tunnel",
@@ -89,7 +101,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"penteract_double_projection": {
 			"lookup_name": "penteract_double_projection",
@@ -107,7 +123,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"maze_generator": {
 			"lookup_name": "maze_generator",
@@ -134,7 +154,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"room_grammar": {
 			"lookup_name": "room_grammar",
@@ -154,7 +178,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"terrain_erosion": {
 			"lookup_name": "terrain_erosion",
@@ -174,7 +202,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"cave_generator": {
 			"lookup_name": "cave_generator",
@@ -194,7 +226,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"generation",
+				"procedural"
+			]
 		},
 		"genetic_programming": {
 			"lookup_name": "genetic_programming",
@@ -214,7 +251,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"generation",
+				"procedural"
+			]
 		},
 		"flower_lab": {
 			"lookup_name": "flower_lab",
@@ -234,7 +276,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"education",
+				"generation",
+				"procedural"
+			]
 		},
 		"ik_arm_demo": {
 			"lookup_name": "ik_arm_demo",
@@ -256,6 +303,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"bodyprogression"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"torso_estimation_vis": {
@@ -278,6 +329,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"bodyprogression"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"mirror_artifact": {
@@ -298,6 +353,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"bodyprogression"
+			],
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
 			]
 		},
 		"necklace_anchor": {
@@ -319,6 +379,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"bodyprogression"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"dress_selector": {
@@ -341,6 +405,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"bodyprogression"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"botanical_flower": {
@@ -361,6 +429,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"flowers"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"water_flowers": {
@@ -382,6 +454,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"flowers"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
 			]
 		},
 		"example_8_6_recursive_tree_vr": {
@@ -406,7 +482,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"example_8_3_recursion_circles_vr": {
 			"lookup_name": "example_8_3_recursion_circles_vr",
@@ -432,7 +516,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"fibonacci_pagoda": {
 			"lookup_name": "fibonacci_pagoda",
@@ -458,7 +550,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"test_scene_3": {
 			"lookup_name": "test_scene_3",
@@ -482,7 +582,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"test_scene_4": {
 			"lookup_name": "test_scene_4",
@@ -506,7 +614,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"test_scene_5": {
 			"lookup_name": "test_scene_5",
@@ -530,7 +646,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"test_scene_6": {
 			"lookup_name": "test_scene_6",
@@ -554,7 +678,15 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marching_cubes_sculpt_vr": {
 			"lookup_name": "marching_cubes_sculpt_vr",
@@ -580,7 +712,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"vr"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"koch_curve_3d": {
 			"lookup_name": "koch_curve_3d",
@@ -607,7 +748,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"cantor_set": {
 			"lookup_name": "cantor_set",
@@ -633,7 +782,15 @@
 					14
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"romanesco": {
 			"lookup_name": "romanesco",
@@ -659,7 +816,15 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"sierpinski_triangle": {
 			"lookup_name": "sierpinski_triangle",
@@ -685,7 +850,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cube_subdivision": {
 			"lookup_name": "cube_subdivision",
@@ -711,7 +884,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"recursive_chair": {
 			"lookup_name": "recursive_chair",
@@ -737,7 +918,15 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"recursive_table": {
 			"lookup_name": "recursive_table",
@@ -763,7 +952,15 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"koch_curve_1": {
 			"lookup_name": "koch_curve_1",
@@ -787,7 +984,15 @@
 					3
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"recursive_tree": {
 			"lookup_name": "recursive_tree",
@@ -817,7 +1022,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"crackpropagation_ca": {
 			"lookup_name": "crackpropagation_ca",
@@ -843,7 +1056,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"dewcoveredfol": {
 			"lookup_name": "dewcoveredfol",
@@ -867,7 +1088,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"percolationnetwork_ca": {
 			"lookup_name": "percolationnetwork_ca",
@@ -893,7 +1122,15 @@
 					18
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"mandelbrot_set": {
 			"lookup_name": "mandelbrot_set",
@@ -920,7 +1157,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"julia_set": {
 			"lookup_name": "julia_set",
@@ -949,7 +1194,15 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"SierpinskiPyramid": {
 			"lookup_name": "SierpinskiPyramid",
@@ -973,7 +1226,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"CaveGenerator": {
 			"lookup_name": "CaveGenerator",
@@ -997,7 +1258,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"wave_function_collapse": {
 			"lookup_name": "wave_function_collapse",
@@ -1024,7 +1293,16 @@
 					1
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"procedural",
+				"wave"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"WFCCav": {
 			"lookup_name": "WFCCav",
@@ -1048,7 +1326,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"wfc_3d_demo": {
 			"lookup_name": "wfc_3d_demo",
@@ -1075,7 +1361,15 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"voronoi_diagrams": {
 			"lookup_name": "voronoi_diagrams",
@@ -1102,7 +1396,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"tree_gen": {
 			"lookup_name": "tree_gen",
@@ -1130,7 +1432,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"gridscheckers": {
 			"lookup_name": "gridscheckers",
@@ -1156,7 +1467,15 @@
 					7
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"animalpatterns": {
 			"lookup_name": "animalpatterns",
@@ -1182,7 +1501,15 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"fabrics": {
 			"lookup_name": "fabrics",
@@ -1208,7 +1535,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"truchettiles": {
 			"lookup_name": "truchettiles",
@@ -1234,7 +1569,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"waves": {
 			"lookup_name": "waves",
@@ -1260,7 +1603,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"glassdivider": {
 			"lookup_name": "glassdivider",
@@ -1286,7 +1637,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"tile_patterns": {
 			"lookup_name": "tile_patterns",
@@ -1310,7 +1669,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"GeneticProgramming": {
 			"lookup_name": "GeneticProgramming",
@@ -1337,7 +1706,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"liquid_simulation": {
 			"lookup_name": "liquid_simulation",
@@ -1361,7 +1738,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"mushrooms": {
 			"lookup_name": "mushrooms",
@@ -1388,7 +1773,15 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"metaballs": {
 			"lookup_name": "metaballs",
@@ -1414,7 +1807,15 @@
 					12
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"maze_generation": {
 			"lookup_name": "maze_generation",
@@ -1441,7 +1842,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"layered_membrane": {
 			"lookup_name": "layered_membrane",
@@ -1468,7 +1877,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"implicit_surface_modeling": {
 			"lookup_name": "implicit_surface_modeling",
@@ -1496,7 +1913,15 @@
 					12
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"WFCSculptureGenerator": {
 			"lookup_name": "WFCSculptureGenerator",
@@ -1522,7 +1947,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"WFC3DGenerator": {
 			"lookup_name": "WFC3DGenerator",
@@ -1548,7 +1982,15 @@
 					45
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"modelsynthesis": {
 			"lookup_name": "modelsynthesis",
@@ -1574,7 +2016,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"spherenetwork": {
 			"lookup_name": "spherenetwork",
@@ -1598,7 +2048,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"branching_growth_algorithm": {
 			"lookup_name": "branching_growth_algorithm",
@@ -1626,7 +2084,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"branching_growth_algorithm_continued": {
 			"lookup_name": "branching_growth_algorithm_continued",
@@ -1650,7 +2116,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"marchingcave": {
 			"lookup_name": "marchingcave",
@@ -1677,7 +2152,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marchingcubes_cave": {
 			"lookup_name": "marchingcubes_cave",
@@ -1704,7 +2187,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marchingcubes_flat_landscape": {
 			"lookup_name": "marchingcubes_flat_landscape",
@@ -1731,7 +2222,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marchingcubes_torus_sculpture": {
 			"lookup_name": "marchingcubes_torus_sculpture",
@@ -1758,7 +2257,16 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marchingcubes_inside_cave": {
 			"lookup_name": "marchingcubes_inside_cave",
@@ -1785,7 +2293,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"wfc_dungeon_generator": {
 			"lookup_name": "wfc_dungeon_generator",
@@ -1812,7 +2328,15 @@
 					18
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"boolean_patterns": {
 			"lookup_name": "boolean_patterns",
@@ -1839,7 +2363,15 @@
 					41
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marching_cubes_gallery": {
 			"lookup_name": "marching_cubes_gallery",
@@ -1863,7 +2395,16 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cave_explorer_3d_ui": {
 			"lookup_name": "cave_explorer_3d_ui",
@@ -1889,7 +2430,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marchingcubes_portal_landscape": {
 			"lookup_name": "marchingcubes_portal_landscape",
@@ -1916,7 +2465,15 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"GyroidDemo": {
 			"lookup_name": "GyroidDemo",
@@ -1943,7 +2500,15 @@
 					41
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"marching_cubes_cave_gallery": {
 			"lookup_name": "marching_cubes_cave_gallery",
@@ -1967,7 +2532,16 @@
 					41
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"modernistchairgallery": {
 			"lookup_name": "modernistchairgallery",
@@ -1991,7 +2565,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"tesseract_net_space_showcase": {
 			"lookup_name": "tesseract_net_space_showcase",
@@ -2018,7 +2601,15 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"sixteen_cell_net_space_showcase": {
 			"lookup_name": "sixteen_cell_net_space_showcase",
@@ -2046,7 +2637,16 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"cell"
+			],
+			"dev_themes": [
+				"biology",
+				"generation",
+				"procedural"
+			]
 		},
 		"tessellating_portal_demo": {
 			"lookup_name": "tessellating_portal_demo",
@@ -2073,7 +2673,15 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"tesseract_tunnel_demo": {
 			"lookup_name": "tesseract_tunnel_demo",
@@ -2100,7 +2708,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"binary_space_partitioning": {
 			"lookup_name": "binary_space_partitioning",
@@ -2127,7 +2743,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"poisson_disk_sampling_3d": {
 			"lookup_name": "poisson_disk_sampling_3d",
@@ -2154,7 +2778,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"space_colonization_algorithm": {
 			"lookup_name": "space_colonization_algorithm",
@@ -2181,7 +2813,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"voronoi_diagram_3d": {
 			"lookup_name": "voronoi_diagram_3d",
@@ -2208,7 +2848,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"delaunay_triangulation_3d_cell": {
 			"lookup_name": "delaunay_triangulation_3d_cell",
@@ -2235,7 +2883,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"cell"
+			],
+			"dev_themes": [
+				"biology",
+				"generation",
+				"procedural"
+			]
 		},
 		"cube_mound_scene": {
 			"lookup_name": "cube_mound_scene",
@@ -2262,7 +2919,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cube_mound_scene_sphere": {
 			"lookup_name": "cube_mound_scene_sphere",
@@ -2288,7 +2953,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"caverandomwalk": {
 			"lookup_name": "caverandomwalk",
@@ -2315,7 +2988,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"mirror_cellular_texture_for_3d": {
 			"lookup_name": "mirror_cellular_texture_for_3d",
@@ -2343,7 +3024,17 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"cellular_automata"
+			],
+			"dev_themes": [
+				"biology",
+				"generation",
+				"procedural"
+			]
 		},
 		"slime_mold": {
 			"lookup_name": "slime_mold",
@@ -2367,7 +3058,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"diffusion_limited_aggregation": {
 			"lookup_name": "diffusion_limited_aggregation",
@@ -2391,7 +3090,15 @@
 					5
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"penrose_tilings": {
 			"lookup_name": "penrose_tilings",
@@ -2417,7 +3124,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"color_pattern_mate_texture_for_3d": {
 			"lookup_name": "color_pattern_mate_texture_for_3d",
@@ -2443,7 +3158,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"color",
+				"pattern",
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"color_pattern_texture_for_3d": {
 			"lookup_name": "color_pattern_texture_for_3d",
@@ -2467,7 +3193,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"color",
+				"pattern",
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fatwireframe": {
 			"lookup_name": "fatwireframe",
@@ -2493,7 +3230,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"voronoi_grid_3d": {
 			"lookup_name": "voronoi_grid_3d",
@@ -2519,7 +3264,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_recursion_1": {
 			"lookup_name": "fractal_recursion_1",
@@ -2545,7 +3298,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_recursion_2": {
 			"lookup_name": "fractal_recursion_2",
@@ -2571,7 +3332,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_recursion_circles": {
 			"lookup_name": "fractal_recursion_circles",
@@ -2595,7 +3364,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"recursive_boolean_cube": {
 			"lookup_name": "recursive_boolean_cube",
@@ -2621,7 +3398,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"fractal_cantor_set": {
 			"lookup_name": "fractal_cantor_set",
@@ -2645,7 +3430,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"cantor_pagoda_vr": {
 			"lookup_name": "cantor_pagoda_vr",
@@ -2669,7 +3462,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"example_8_4_cantor_set_vr": {
 			"lookup_name": "example_8_4_cantor_set_vr",
@@ -2695,7 +3496,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"example_8_4_cantor_pagoda_vr": {
 			"lookup_name": "example_8_4_cantor_pagoda_vr",
@@ -2721,7 +3530,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"inverted_tree_cloud": {
 			"lookup_name": "inverted_tree_cloud",
@@ -2747,7 +3564,15 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_koch_curve": {
 			"lookup_name": "fractal_koch_curve",
@@ -2773,7 +3598,16 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal",
+				"graph"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_recursive_tree": {
 			"lookup_name": "fractal_recursive_tree",
@@ -2797,7 +3631,16 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal",
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_stochastic_tree": {
 			"lookup_name": "fractal_stochastic_tree",
@@ -2823,7 +3666,17 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal",
+				"probability",
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"stochastic_tree_separated": {
 			"lookup_name": "stochastic_tree_separated",
@@ -2849,7 +3702,15 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_lsystem_tree": {
 			"lookup_name": "fractal_lsystem_tree",
@@ -2873,7 +3734,18 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal",
+				"l_system",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"recursive_tree_2": {
 			"lookup_name": "recursive_tree_2",
@@ -2899,7 +3771,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"fractal_scene": {
 			"lookup_name": "fractal_scene",
@@ -2925,7 +3805,15 @@
 					26
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"menger_sponge": {
 			"lookup_name": "menger_sponge",
@@ -2951,7 +3839,15 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cube_bookshelf": {
 			"lookup_name": "cube_bookshelf",
@@ -2977,7 +3873,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"cube_staircase": {
 			"lookup_name": "cube_staircase",
@@ -3003,7 +3907,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cube_desk": {
 			"lookup_name": "cube_desk",
@@ -3029,7 +3941,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"cube_cabin": {
 			"lookup_name": "cube_cabin",
@@ -3055,7 +3975,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"fractal_clouds": {
 			"lookup_name": "fractal_clouds",
@@ -3079,7 +4007,17 @@
 					15
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"fractal",
+				"procedural"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"cube_chair": {
 			"lookup_name": "cube_chair",
@@ -3103,7 +4041,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"generation",
+				"procedural"
+			],
+			"tags": [
+				"procedural"
+			]
 		},
 		"fibonacci_terrain": {
 			"lookup_name": "fibonacci_terrain",
@@ -3127,7 +4073,19 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"graph",
+				"probability",
+				"procedural",
+				"recursion",
+				"terrain"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		},
 		"golden_rectangle": {
 			"lookup_name": "golden_rectangle",
@@ -3151,7 +4109,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"recursion"
+			],
+			"dev_themes": [
+				"generation",
+				"procedural"
+			]
 		}
 	}
 }

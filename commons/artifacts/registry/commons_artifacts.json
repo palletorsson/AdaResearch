@@ -37,7 +37,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"waves"
+			]
 		},
 		"barnsley_fern": {
 			"lookup_name": "barnsley_fern",
@@ -59,6 +64,11 @@
 			"sequence": "fractals",
 			"map_sequences": [
 				"fractals"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"procedural"
 			]
 		},
 		"bias_visualizer": {
@@ -93,7 +103,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Bias is frozen E(S) â€” entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical Ï†: questioning whose data, whose categories."
+			"qfep_connection": "Bias is frozen E(S) â€” entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical Ï†: questioning whose data, whose categories.",
+			"dev_themes": [
+				"art",
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"ca_rule_explorer": {
 			"lookup_name": "ca_rule_explorer",
@@ -127,7 +143,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Rule 110 is Turing complete â€” proof that simple local rules can produce universal computation. Edge of chaos territory."
+			"qfep_connection": "Rule 110 is Turing complete â€” proof that simple local rules can produce universal computation. Edge of chaos territory.",
+			"dev_themes": [
+				"biology",
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"control_pendulum": {
 			"lookup_name": "control_pendulum",
@@ -156,7 +178,12 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"waves"
+			]
 		},
 		"coupled_pendulums": {
 			"lookup_name": "coupled_pendulums",
@@ -191,7 +218,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Energy oscillates between subsystems. Î» = coupling strength. At edge of chaos, unpredictable transfer patterns emerge."
+			"qfep_connection": "Energy oscillates between subsystems. Î» = coupling strength. At edge of chaos, unpredictable transfer patterns emerge.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"waves"
+			]
 		},
 		"distribution_sampler": {
 			"lookup_name": "distribution_sampler",
@@ -225,7 +257,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Distributions as 'shape of randomness' â€” entropy has structure. Different distributions = different Î» signatures."
+			"qfep_connection": "Distributions as 'shape of randomness' â€” entropy has structure. Different distributions = different Î» signatures.",
+			"dev_themes": [
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"dna_specimen": {
 			"lookup_name": "dna_specimen",
@@ -258,7 +295,13 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"biology",
+				"commons",
+				"mixed",
+				"waves"
+			]
 		},
 		"flow_field_painter": {
 			"lookup_name": "flow_field_painter",
@@ -292,7 +335,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure."
+			"qfep_connection": "Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure.",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed",
+				"procedural"
+			]
 		},
 		"force_field_visualizer": {
 			"lookup_name": "force_field_visualizer",
@@ -327,7 +376,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything."
+			"qfep_connection": "Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"game_of_life_petri": {
 			"lookup_name": "game_of_life_petri",
@@ -361,7 +415,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Game of Life operates at the edge of chaos â€” simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules."
+			"qfep_connection": "Game of Life operates at the edge of chaos â€” simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules.",
+			"dev_themes": [
+				"biology",
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"glitch_body": {
 			"lookup_name": "glitch_body",
@@ -397,7 +457,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"harmonic_motion_demo": {
 			"lookup_name": "harmonic_motion_demo",
@@ -431,7 +496,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"waves"
+			]
 		},
 		"jelly_variants": {
 			"lookup_name": "jelly_variants",
@@ -465,7 +535,12 @@
 				"size_group": "room_scale"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Parameter space exploration â€” stiffness, pressure, damping create different morphological behaviors"
+			"qfep_connection": "Parameter space exploration â€” stiffness, pressure, damping create different morphological behaviors",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"julia_set_explorer": {
 			"lookup_name": "julia_set_explorer",
@@ -499,7 +574,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a Î»-like dial."
+			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a Î»-like dial.",
+			"dev_themes": [
+				"biology",
+				"commons",
+				"mixed",
+				"procedural"
+			]
 		},
 		"lsystem_editor": {
 			"lookup_name": "lsystem_editor",
@@ -534,7 +615,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like Î» â€” more iterations reveal more detail at the edge of legibility."
+			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like Î» â€” more iterations reveal more detail at the edge of legibility.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"procedural"
+			]
 		},
 		"mario_cube": {
 			"lookup_name": "mario_cube",
@@ -563,7 +649,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"monte_carlo_estimator": {
 			"lookup_name": "monte_carlo_estimator",
@@ -597,7 +687,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Order (Ï€) emerges from randomness through accumulation. Law of large numbers as F-minimization."
+			"qfep_connection": "Order (Ï€) emerges from randomness through accumulation. Law of large numbers as F-minimization.",
+			"dev_themes": [
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"orbital_mechanics_demo": {
 			"lookup_name": "orbital_mechanics_demo",
@@ -632,7 +727,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Orbit as dynamic equilibrium â€” perpetual falling, never landing. Balance between kinetic and potential. Stability from motion."
+			"qfep_connection": "Orbit as dynamic equilibrium â€” perpetual falling, never landing. Balance between kinetic and potential. Stability from motion.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"oscilloscope_artifact": {
 			"lookup_name": "oscilloscope_artifact",
@@ -661,7 +761,13 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music",
+				"waves"
+			]
 		},
 		"perlin_terrain_sculptor": {
 			"lookup_name": "perlin_terrain_sculptor",
@@ -695,7 +801,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Noise is E(S) made visible. The threshold is a Î»-like parameter â€” where you draw the line between solid and void."
+			"qfep_connection": "Noise is E(S) made visible. The threshold is a Î»-like parameter â€” where you draw the line between solid and void.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"procedural"
+			]
 		},
 		"petri_dish_worms": {
 			"lookup_name": "petri_dish_worms",
@@ -728,7 +839,13 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"biology",
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"queer_morphology_specimen": {
 			"lookup_name": "queer_morphology_specimen",
@@ -763,7 +880,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "THIS IS QFEP EMBODIED. Î» drives orderâ†’chaos transition in soft body physics. Ï† encodes resistance/embrace of change. At Î»â‰ˆ0.5, specimen breathes at edge of chaos â€” where life emerges. Queer morphology = form as process, not fixed state."
+			"qfep_connection": "THIS IS QFEP EMBODIED. Î» drives orderâ†’chaos transition in soft body physics. Ï† encodes resistance/embrace of change. At Î»â‰ˆ0.5, specimen breathes at edge of chaos â€” where life emerges. Queer morphology = form as process, not fixed state.",
+			"dev_themes": [
+				"art",
+				"biology",
+				"commons",
+				"emergence"
+			]
 		},
 		"random_walk_terrarium": {
 			"lookup_name": "random_walk_terrarium",
@@ -798,7 +921,12 @@
 				"size_group": "world_scale"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Random walk as pure E(S) â€” no memory, no direction, maximum entropy. LÃ©vy flights: structured randomness."
+			"qfep_connection": "Random walk as pure E(S) â€” no memory, no direction, maximum entropy. LÃ©vy flights: structured randomness.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"procedural"
+			]
 		},
 		"spring_demo": {
 			"lookup_name": "spring_demo",
@@ -831,7 +959,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"spring_network": {
 			"lookup_name": "spring_network",
@@ -856,6 +989,11 @@
 			"map_sequences": [
 				"forces",
 				"physicssimulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
 			]
 		},
 		"transform_matrix_cube": {
@@ -891,7 +1029,11 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Matrix as transformation rule â€” how one space maps to another. det(M) shows information preservation/loss."
+			"qfep_connection": "Matrix as transformation rule â€” how one space maps to another. det(M) shows information preservation/loss.",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"turing_pattern_generator": {
 			"lookup_name": "turing_pattern_generator",
@@ -926,7 +1068,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios â€” another Î» parameter space. Order (uniform) vs chaos (noise) with patterns at the edge."
+			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios â€” another Î» parameter space. Order (uniform) vs chaos (noise) with patterns at the edge.",
+			"dev_themes": [
+				"commons",
+				"emergence",
+				"mixed"
+			]
 		},
 		"wave_interference_tank": {
 			"lookup_name": "wave_interference_tank",
@@ -960,7 +1107,13 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"qfep_connection": "Superposition â€” waves don't fight, they add. Patterns emerge from phase relationships. Information through interference."
+			"qfep_connection": "Superposition â€” waves don't fight, they add. Patterns emerge from phase relationships. Information through interference.",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music",
+				"waves"
+			]
 		},
 		"wave_equation_solver": {
 			"lookup_name": "wave_equation_solver",
@@ -982,6 +1135,11 @@
 			"sequence": "wavefunctions",
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"waves"
 			]
 		},
 		"oscilloscope": {
@@ -1023,7 +1181,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"player_presence_indicator": {
 			"lookup_name": "player_presence_indicator",
@@ -1047,7 +1210,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"portal": {
 			"lookup_name": "portal",
@@ -1074,7 +1245,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"cctv": {
 			"lookup_name": "cctv",
@@ -1098,7 +1277,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"text_display": {
 			"lookup_name": "text_display",
@@ -1122,7 +1309,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"point_is": {
 			"lookup_name": "point_is",
@@ -1146,7 +1341,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"infokiosk": {
 			"lookup_name": "infokiosk",
@@ -1172,7 +1375,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"3d"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"player_position_to_console": {
 			"lookup_name": "player_position_to_console",
@@ -1196,7 +1408,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"line_interface": {
 			"lookup_name": "line_interface",
@@ -1220,7 +1440,18 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"interactive",
+				"visualization",
+				"vr"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"ConnectedTriangles": {
 			"lookup_name": "ConnectedTriangles",
@@ -1244,7 +1475,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"interactable_demo": {
 			"lookup_name": "interactable_demo",
@@ -1271,7 +1510,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"pickable_showcase": {
 			"lookup_name": "pickable_showcase",
@@ -1295,7 +1542,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"polyhedron_nets_cube": {
 			"lookup_name": "polyhedron_nets_cube",
@@ -1321,7 +1576,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"origami"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"durer_scene": {
 			"lookup_name": "durer_scene",
@@ -1347,7 +1610,15 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"xyz_coordinates": {
 			"lookup_name": "xyz_coordinates",
@@ -1373,7 +1644,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"value_mapper_example": {
 			"lookup_name": "value_mapper_example",
@@ -1397,7 +1676,20 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"3d",
+				"color",
+				"geometry",
+				"sound"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music"
+			]
 		},
 		"settings_ui": {
 			"lookup_name": "settings_ui",
@@ -1421,7 +1713,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"pop_music_demo": {
 			"lookup_name": "pop_music_demo",
@@ -1445,7 +1745,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"sound"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music"
+			]
 		},
 		"reset_cube": {
 			"lookup_name": "reset_cube",
@@ -1469,7 +1779,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"reset_area": {
 			"lookup_name": "reset_area",
@@ -1493,7 +1811,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"pick_up_cube": {
 			"lookup_name": "pick_up_cube",
@@ -1524,7 +1850,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"mario_cube_time_trace": {
 			"lookup_name": "mario_cube_time_trace",
@@ -1550,7 +1884,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"pickup_gate": {
 			"lookup_name": "pickup_gate",
@@ -1574,7 +1916,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"color"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"agent_spawner": {
 			"lookup_name": "agent_spawner",
@@ -1598,7 +1948,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"agent",
+				"simulation",
+				"string"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"nail_color_controller": {
 			"lookup_name": "nail_color_controller",
@@ -1624,7 +1984,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"vr"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"hand_color_controller": {
 			"lookup_name": "hand_color_controller",
@@ -1650,7 +2019,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"vr"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"hand_model": {
 			"lookup_name": "hand_model",
@@ -1676,7 +2054,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"disco_floor": {
 			"lookup_name": "disco_floor",
@@ -1700,7 +2086,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"standalone_disco": {
 			"lookup_name": "standalone_disco",
@@ -1724,7 +2118,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"monitorsystem": {
 			"lookup_name": "monitorsystem",
@@ -1748,7 +2151,15 @@
 					8
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"random_space": {
 			"lookup_name": "random_space",
@@ -1774,7 +2185,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"chaos"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"sine_wave_controller": {
 			"lookup_name": "sine_wave_controller",
@@ -1798,7 +2217,17 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"sound",
+				"wave"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"AudioContr": {
 			"lookup_name": "AudioContr",
@@ -1824,7 +2253,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"HandheldInfoBoard": {
 			"lookup_name": "HandheldInfoBoard",
@@ -1848,7 +2286,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"2d_in_3d_vectors_vis": {
 			"lookup_name": "2d_in_3d_vectors_vis",
@@ -1872,7 +2318,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"2d_in_3d_point_vis": {
 			"lookup_name": "2d_in_3d_point_vis",
@@ -1896,7 +2350,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"VRBrush": {
 			"lookup_name": "VRBrush",
@@ -1920,7 +2382,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"info_display": {
 			"lookup_name": "info_display",
@@ -1944,7 +2414,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"voronoi_space": {
 			"lookup_name": "voronoi_space",
@@ -1971,7 +2449,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"topology"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"mondrian_2d": {
 			"lookup_name": "mondrian_2d",
@@ -1995,7 +2481,18 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"color",
+				"visualization"
+			],
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"ball_painting_demo": {
 			"lookup_name": "ball_painting_demo",
@@ -2021,7 +2518,16 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"mondrian_3d_display": {
 			"lookup_name": "mondrian_3d_display",
@@ -2045,7 +2551,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"grabable_mondrian": {
 			"lookup_name": "grabable_mondrian",
@@ -2069,7 +2584,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"tts_test": {
 			"lookup_name": "tts_test",
@@ -2093,7 +2616,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"agnes_grid": {
 			"lookup_name": "agnes_grid",
@@ -2117,7 +2648,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid",
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"agnes_grid_2d": {
 			"lookup_name": "agnes_grid_2d",
@@ -2141,7 +2682,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid",
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"grabable_agnes": {
 			"lookup_name": "grabable_agnes",
@@ -2165,7 +2716,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"camera_context": {
 			"lookup_name": "camera_context",
@@ -2189,7 +2748,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"clipboard": {
 			"lookup_name": "clipboard",
@@ -2215,7 +2782,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"clipboard_large": {
 			"lookup_name": "clipboard_large",
@@ -2239,7 +2814,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"spit_text_3d": {
 			"lookup_name": "spit_text_3d",
@@ -2263,7 +2846,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"player_position": {
 			"lookup_name": "player_position",
@@ -2287,7 +2878,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"game_time_display": {
 			"lookup_name": "game_time_display",
@@ -2311,7 +2910,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"frame_counter_display": {
 			"lookup_name": "frame_counter_display",
@@ -2338,7 +2945,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"speed_display": {
 			"lookup_name": "speed_display",
@@ -2362,7 +2977,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"frames_display": {
 			"lookup_name": "frames_display",
@@ -2386,7 +3009,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"memory_display": {
 			"lookup_name": "memory_display",
@@ -2410,7 +3041,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"draw_calls_display": {
 			"lookup_name": "draw_calls_display",
@@ -2434,7 +3073,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"health_display": {
 			"lookup_name": "health_display",
@@ -2460,7 +3107,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"hits_reset_display": {
 			"lookup_name": "hits_reset_display",
@@ -2486,7 +3141,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"code": {
 			"lookup_name": "code",
@@ -2510,7 +3173,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"code_display": {
 			"lookup_name": "code_display",
@@ -2537,7 +3208,17 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"simulation",
+				"string",
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"graphics_slideshow": {
 			"lookup_name": "graphics_slideshow",
@@ -2561,7 +3242,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"visualization"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"graphics_monitor": {
 			"lookup_name": "graphics_monitor",
@@ -2585,7 +3275,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"procedural"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"graphics_slideshow_all": {
 			"lookup_name": "graphics_slideshow_all",
@@ -2609,7 +3308,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"graphics_slideshow_2d": {
 			"lookup_name": "graphics_slideshow_2d",
@@ -2633,7 +3340,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"interactive"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"crystal_ball": {
 			"lookup_name": "crystal_ball",
@@ -2660,7 +3376,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"cube_create": {
 			"lookup_name": "cube_create",
@@ -2684,7 +3408,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"drawing_paper": {
 			"lookup_name": "drawing_paper",
@@ -2708,7 +3440,17 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"origami"
+			],
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"drawing_pen": {
 			"lookup_name": "drawing_pen",
@@ -2732,7 +3474,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"grid_eye": {
 			"lookup_name": "grid_eye",
@@ -2756,7 +3506,16 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"magnifying_glass": {
 			"lookup_name": "magnifying_glass",
@@ -2780,7 +3539,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"magnifying_glass_red": {
 			"lookup_name": "magnifying_glass_red",
@@ -2804,7 +3571,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"magnifying_glass_tool": {
 			"lookup_name": "magnifying_glass_tool",
@@ -2828,7 +3603,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"sequencer": {
 			"lookup_name": "sequencer",
@@ -2852,7 +3635,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"sound"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"music"
+			]
 		},
 		"helper_arm": {
 			"lookup_name": "helper_arm",
@@ -2876,7 +3668,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"tesla_sparks": {
 			"lookup_name": "tesla_sparks",
@@ -2900,7 +3700,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			],
+			"tags": [
+				"commons"
+			]
 		},
 		"tesla_sphere": {
 			"lookup_name": "tesla_sphere",
@@ -2924,7 +3732,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"zelda_tilemap_2d": {
 			"lookup_name": "zelda_tilemap_2d",
@@ -2948,7 +3764,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"zelda_tilemap": {
 			"lookup_name": "zelda_tilemap",
@@ -2972,7 +3797,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"zelda_tiles_3d": {
 			"lookup_name": "zelda_tiles_3d",
@@ -2996,7 +3829,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"fractal_space": {
 			"lookup_name": "fractal_space",
@@ -3020,7 +3861,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"sparse_array_demo": {
 			"lookup_name": "sparse_array_demo",
@@ -3061,7 +3910,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"circular_buffer": {
 			"lookup_name": "circular_buffer",
@@ -3101,7 +3954,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"matrix_multiply_visual": {
 			"lookup_name": "matrix_multiply_visual",
@@ -3140,7 +3997,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"index_map_puzzle": {
 			"lookup_name": "index_map_puzzle",
@@ -3180,7 +4041,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"spring_chain": {
 			"lookup_name": "spring_chain",
@@ -3220,7 +4085,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"drag_coefficient_wind_tunnel": {
 			"lookup_name": "drag_coefficient_wind_tunnel",
@@ -3259,7 +4129,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"impulse_collision_demo": {
 			"lookup_name": "impulse_collision_demo",
@@ -3298,7 +4173,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"centripetal_force_demo": {
 			"lookup_name": "centripetal_force_demo",
@@ -3337,7 +4217,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"surveillance_panopticon": {
 			"lookup_name": "surveillance_panopticon",
@@ -3375,7 +4260,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "walk_through"
+			"interaction": "walk_through",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"attention_economy_sim": {
 			"lookup_name": "attention_economy_sim",
@@ -3413,7 +4302,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"filter_bubble_demo": {
 			"lookup_name": "filter_bubble_demo",
@@ -3450,7 +4343,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"data_labor_counter": {
 			"lookup_name": "data_labor_counter",
@@ -3487,7 +4384,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"big_o_race": {
 			"lookup_name": "big_o_race",
@@ -3525,7 +4426,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"cache_hit_visualizer": {
 			"lookup_name": "cache_hit_visualizer",
@@ -3563,7 +4468,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"garbage_collector_demo": {
 			"lookup_name": "garbage_collector_demo",
@@ -3600,7 +4509,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"profiler_flame_graph": {
 			"lookup_name": "profiler_flame_graph",
@@ -3637,7 +4550,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"non_binary_classifier": {
 			"lookup_name": "non_binary_classifier",
@@ -3675,7 +4592,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"fluid_taxonomy_tree": {
 			"lookup_name": "fluid_taxonomy_tree",
@@ -3713,7 +4634,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"rhizome_navigator": {
 			"lookup_name": "rhizome_navigator",
@@ -3751,7 +4676,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "walk_through"
+			"interaction": "walk_through",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"sol_lewitt_wall_drawing": {
 			"lookup_name": "sol_lewitt_wall_drawing",
@@ -3788,7 +4717,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"bridget_riley_op_art": {
 			"lookup_name": "bridget_riley_op_art",
@@ -3825,7 +4758,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"vera_molnar_des_ordres": {
 			"lookup_name": "vera_molnar_des_ordres",
@@ -3863,7 +4801,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"agnes_martin_grid_painting": {
 			"lookup_name": "agnes_martin_grid_painting",
@@ -3900,7 +4842,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"kitbash_station": {
 			"lookup_name": "kitbash_station",
@@ -3937,7 +4884,12 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"art",
+				"commons",
+				"mixed"
+			]
 		},
 		"constraint_sculptor": {
 			"lookup_name": "constraint_sculptor",
@@ -3974,7 +4926,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"found_object_assembler": {
 			"lookup_name": "found_object_assembler",
@@ -4011,7 +4967,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"backpropagation_flow": {
 			"lookup_name": "backpropagation_flow",
@@ -4048,7 +5008,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"overfitting_demo": {
 			"lookup_name": "overfitting_demo",
@@ -4085,7 +5049,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"latent_space_walk": {
 			"lookup_name": "latent_space_walk",
@@ -4123,7 +5091,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "walk_through"
+			"interaction": "walk_through",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"hypercube_rotation": {
 			"lookup_name": "hypercube_rotation",
@@ -4161,7 +5133,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"dimensional_analogy": {
 			"lookup_name": "dimensional_analogy",
@@ -4199,7 +5175,11 @@
 				],
 				"size_group": "room_scale"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"schlegel_diagram": {
 			"lookup_name": "schlegel_diagram",
@@ -4237,7 +5217,11 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe"
+			"interaction": "observe",
+			"dev_themes": [
+				"commons",
+				"mixed"
+			]
 		},
 		"pressure_soft_body": {
 			"lookup_name": "pressure_soft_body",
@@ -4274,7 +5258,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"soft_body_slicer": {
 			"lookup_name": "soft_body_slicer",
@@ -4311,7 +5300,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		},
 		"viscous_fluid_blob": {
 			"lookup_name": "viscous_fluid_blob",
@@ -4349,7 +5343,12 @@
 				],
 				"size_group": "compact"
 			},
-			"interaction": "grab"
+			"interaction": "grab",
+			"dev_themes": [
+				"commons",
+				"mixed",
+				"physics"
+			]
 		}
 	}
 }

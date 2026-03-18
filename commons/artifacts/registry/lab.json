@@ -63,7 +63,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab",
+				"music"
+			]
 		},
 		"quantumentanglementmeter": {
 			"lookup_name": "quantumentanglementmeter",
@@ -81,7 +86,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"resonancechamber": {
 			"lookup_name": "resonancechamber",
@@ -107,7 +116,11 @@
 					4
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"fluxdetector": {
 			"lookup_name": "fluxdetector",
@@ -133,7 +146,11 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"cryogenicpreservation": {
 			"lookup_name": "cryogenicpreservation",
@@ -159,7 +176,11 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"robotarm": {
 			"lookup_name": "robotarm",
@@ -185,7 +206,12 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"art",
+				"interactive",
+				"lab"
+			]
 		},
 		"circularradarmonitor": {
 			"lookup_name": "circularradarmonitor",
@@ -203,7 +229,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"datatablet": {
 			"lookup_name": "datatablet",
@@ -221,7 +251,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"electromagneticfieldgenerator": {
 			"lookup_name": "electromagneticfieldgenerator",
@@ -247,7 +281,11 @@
 					7
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"terminal": {
 			"lookup_name": "terminal",
@@ -265,7 +303,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"smallcontainment": {
 			"lookup_name": "smallcontainment",
@@ -289,7 +331,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
 		},
 		"chair2": {
 			"lookup_name": "chair2",
@@ -313,7 +363,15 @@
 					3
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
 		},
 		"entropy_visualization": {
 			"lookup_name": "entropy_visualization",
@@ -337,7 +395,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
 		}
 	}
 }

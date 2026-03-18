@@ -20,7 +20,19 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"graph",
+				"l_system",
+				"procedural",
+				"simulation"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"Hilbert3D": {
 			"name": "3D Hilbert Curve",
@@ -41,7 +53,17 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"procedural"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"AnimatedTree": {
 			"name": "Animated Tree Growth",
@@ -62,7 +84,19 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"ForestCompetition": {
 			"name": "Forest Ecosystem",
@@ -83,7 +117,18 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"ContextSensitiveTree": {
 			"name": "Context-Sensitive Tree",
@@ -98,7 +143,19 @@
 				"grammar_systems",
 				"lsystems"
 			],
-			"sequence": "grammar_systems"
+			"sequence": "grammar_systems",
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"parametric_lsystem": {
 			"name": "Parametric L-System",
@@ -110,6 +167,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
 			]
 		},
 		"space_filling_curve_gallery": {
@@ -123,6 +192,20 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"l_system",
+				"procedural",
+				"simulation",
+				"visualization"
+			],
+			"dev_themes": [
+				"art",
+				"grammar",
+				"l_systems",
+				"procedural"
 			]
 		},
 		"branching_coral": {
@@ -135,6 +218,19 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"color",
+				"l_system",
+				"procedural",
+				"simulation",
+				"swarm"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
 			]
 		},
 		"lsystem_tree": {
@@ -158,7 +254,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
+			],
+			"dev_themes": [
+				"education",
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"fractal_lsystem_string": {
 			"name": "L-System String Expansion",
@@ -179,7 +288,20 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"fractal",
+				"l_system",
+				"procedural",
+				"simulation",
+				"string"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"dark_sphere": {
 			"name": "Dark Sphere",
@@ -220,7 +342,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"geometry",
+				"procedural"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"lsystem_dungeon": {
 			"name": "L-System Dungeon",
@@ -241,7 +373,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"l_system",
+				"procedural",
+				"simulation",
+				"string"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural"
+			]
 		},
 		"genetic_tree_sculptor": {
 			"name": "Genetic Tree Sculptor",
@@ -254,6 +399,20 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"simulation",
+				"sorting",
+				"tree"
+			],
+			"dev_themes": [
+				"biology",
+				"grammar",
+				"l_systems",
+				"procedural"
 			]
 		}
 	}

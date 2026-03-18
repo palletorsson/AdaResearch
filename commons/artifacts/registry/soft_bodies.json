@@ -22,7 +22,15 @@
 					10
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"flagdancer": {
 			"name": "Flag Dancer",
@@ -43,7 +51,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody3d": {
 			"name": "SoftBody 3D",
@@ -61,7 +77,17 @@
 					19
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"graph",
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"squishy_ball_pit": {
 			"name": "Squishy Ball Pit",
@@ -71,7 +97,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"soft_trampoline": {
 			"name": "Soft Trampoline",
@@ -81,7 +115,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"breathing_room": {
 			"name": "Breathing Room",
@@ -102,7 +144,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"soft_mushrooms": {
 			"name": "Soft Mushrooms",
@@ -112,7 +162,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"cloth_straps": {
 			"name": "Cloth Straps",
@@ -133,7 +191,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"revolving_joy_ride": {
 			"name": "Revolving Joy Ride",
@@ -154,7 +220,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"pendulum_slap": {
 			"name": "Pendulum Slap",
@@ -172,7 +246,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"physics",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part1": {
 			"name": "SoftBody Gallery Part 1",
@@ -190,7 +274,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part2": {
 			"name": "SoftBody Gallery Part 2",
@@ -211,7 +304,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part3": {
 			"name": "SoftBody Gallery Part 3",
@@ -232,7 +334,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"rounded_softbody_test": {
 			"name": "Rounded SoftBody Test",
@@ -253,7 +364,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"jelly_cube": {
 			"name": "Jelly Cube",
@@ -288,6 +407,10 @@
 				"jelly",
 				"queer_morphology",
 				"interactive"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
 			]
 		},
 		"softbodytest": {
@@ -312,7 +435,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			],
+			"tags": [
+				"soft_body"
+			]
 		},
 		"soft_mushroom": {
 			"lookup_name": "soft_mushroom",
@@ -338,7 +469,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			],
+			"tags": [
+				"soft_body"
+			]
 		}
 	}
 }

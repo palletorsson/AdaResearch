@@ -33,7 +33,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "noise"
+			"sequence": "noise",
+			"complexity": "intermediate",
+			"tags": [
+				"mapobjects"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"chair_assembly_puzzle": {
 			"name": "Chair Assembly Puzzle",
@@ -47,7 +55,15 @@
 				"testmaps",
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"scalable_wood_cube": {
 			"name": "Scalable Wood Cube",
@@ -57,7 +73,15 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"attachable_wood_cube": {
 			"name": "Attachable Wood Cube",
@@ -67,7 +91,15 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"snappable_wood_cube": {
 			"name": "Snappable Wood Cube",
@@ -77,7 +109,16 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"stool_assembly_puzzle": {
 			"name": "Stool Assembly Puzzle",
@@ -92,6 +133,14 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
 			]
 		},
 		"table_assembly_puzzle": {
@@ -105,7 +154,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"shelf_assembly_puzzle": {
 			"name": "Shelf Assembly Puzzle",
@@ -118,7 +175,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"biederman_relief": {
 			"name": "Biederman Relief Puzzle",
@@ -128,7 +193,15 @@
 			"category": "puzzles",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"mondrian_relief": {
 			"name": "Mondrian Relief Puzzle",
@@ -141,7 +214,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"albers_relief": {
 			"name": "Albers Relief Puzzle",
@@ -154,7 +236,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"color",
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"constructivist_relief": {
 			"name": "Constructivist Relief Puzzle",
@@ -167,7 +258,17 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"puzzles",
+				"visualization"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"assembly_line_puzzle": {
 			"name": "Assembly Line Puzzle",
@@ -177,7 +278,16 @@
 			"category": "puzzles",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"l_system",
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"lab_assembly_puzzle": {
 			"name": "Lab Assembly Puzzle",
@@ -190,7 +300,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"scientific_assembly_puzzle": {
 			"name": "Scientific Equipment Assembly",
@@ -203,7 +321,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"score_display": {
 			"name": "Score Display",
@@ -213,7 +339,16 @@
 			"category": "tools",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"tools",
+				"visualization"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"balance_puzzle": {
 			"name": "Balance Puzzle",
@@ -226,7 +361,15 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "intermediate",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"equipment_assembly_puzzle": {
 			"name": "Equipment Assembly Puzzle",
@@ -236,7 +379,15 @@
 			"category": "puzzles",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"analysis_station_puzzle": {
 			"name": "Analysis Station Assembly",
@@ -249,7 +400,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"measurement_station_puzzle": {
 			"name": "Measurement Station Assembly",
@@ -262,7 +421,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"storage_station_puzzle": {
 			"name": "Storage Station Assembly",
@@ -275,7 +442,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"diagnostic_station_puzzle": {
 			"name": "Diagnostic Station Assembly",
@@ -288,7 +463,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"puzzles"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment"
+			]
 		},
 		"world_map_tablet": {
 			"name": "World Map Tablet",
@@ -309,7 +492,18 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"navigation",
+				"qfep"
+			],
+			"dev_themes": [
+				"decoration",
+				"education",
+				"environment",
+				"qfep"
+			]
 		},
 		"audio_catalog_tablet": {
 			"name": "Audio Catalog Tablet",
@@ -330,7 +524,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"audio",
+				"sound",
+				"vr"
+			],
+			"dev_themes": [
+				"decoration",
+				"environment",
+				"music"
+			]
 		},
 		"artifact_catalog_kiosk": {
 			"name": "Artifact Catalog Kiosk",
@@ -340,7 +545,18 @@
 			"category": "navigation",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"navigation",
+				"searching",
+				"vr"
+			],
+			"dev_themes": [
+				"art",
+				"decoration",
+				"environment"
+			]
 		},
 		"laser_exploding_sphere": {
 			"name": "Laser Exploding Sphere",
@@ -358,7 +574,14 @@
 			"map_sequences": [
 				"primitives"
 			],
-			"sequence": "primitives"
+			"sequence": "primitives",
+			"tags": [
+				"geometry",
+				"interactive",
+				"procedural",
+				"sound",
+				"vr"
+			]
 		},
 		"vr_component_demo": {
 			"name": "VR Component Demo",
@@ -385,7 +608,14 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"tags": [
+				"interactive",
+				"sound",
+				"tools",
+				"visualization",
+				"vr"
+			]
 		}
 	}
 }

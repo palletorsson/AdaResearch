@@ -33,7 +33,11 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"color",
+				"perception"
+			]
 		},
 		"color_scanner": {
 			"lookup_name": "color_scanner",
@@ -61,7 +65,11 @@
 					10
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"dev_themes": [
+				"color",
+				"perception"
+			]
 		},
 		"colorsheets": {
 			"lookup_name": "colorsheets",
@@ -82,6 +90,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"color"
+			],
+			"dev_themes": [
+				"color",
+				"perception"
 			]
 		},
 		"glitchcolor": {
@@ -102,6 +114,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"color"
+			],
+			"dev_themes": [
+				"color",
+				"perception"
 			]
 		},
 		"k_means_color": {
@@ -122,6 +138,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"color"
+			],
+			"dev_themes": [
+				"art",
+				"color",
+				"education",
+				"perception"
 			]
 		},
 		"minimalglitch": {
@@ -142,6 +164,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"color"
+			],
+			"dev_themes": [
+				"art",
+				"color",
+				"perception"
 			]
 		},
 		"color_space_navigator": {
@@ -161,7 +188,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"color",
+				"perception"
+			]
 		},
 		"gridcolorizer": {
 			"lookup_name": "gridcolorizer",
@@ -187,7 +218,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"color"
+			],
+			"dev_themes": [
+				"color",
+				"perception"
+			]
 		},
 		"RotatingLaser": {
 			"lookup_name": "RotatingLaser",
@@ -213,7 +253,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"spectrum_forest": {
 			"lookup_name": "spectrum_forest",
@@ -239,7 +287,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"pillarcolorcollection": {
 			"lookup_name": "pillarcolorcollection",
@@ -265,7 +321,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"color"
+			],
+			"dev_themes": [
+				"color",
+				"perception"
+			]
 		},
 		"strobe_lasers": {
 			"lookup_name": "strobe_lasers",
@@ -291,7 +356,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"colortrails": {
 			"lookup_name": "colortrails",
@@ -318,7 +391,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"colorballs": {
 			"lookup_name": "colorballs",
@@ -345,7 +426,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"visual_color_mixing": {
 			"lookup_name": "visual_color_mixing",
@@ -371,7 +460,15 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"color_constellation_office": {
 			"lookup_name": "color_constellation_office",
@@ -397,7 +494,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"grab_stick": {
 			"lookup_name": "grab_stick",
@@ -425,7 +530,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"grab_stick_scanner": {
 			"lookup_name": "grab_stick_scanner",
@@ -451,7 +564,15 @@
 					2
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"dark_side_prism": {
 			"lookup_name": "dark_side_prism",
@@ -477,7 +598,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"coloredlines": {
 			"lookup_name": "coloredlines",
@@ -505,7 +634,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"brick_wall_factory": {
 			"lookup_name": "brick_wall_factory",
@@ -531,7 +668,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"SimultaneousContrast": {
 			"lookup_name": "SimultaneousContrast",
@@ -557,7 +702,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"MetamerismLab": {
 			"lookup_name": "MetamerismLab",
@@ -583,7 +736,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"SpectrumVisualizer": {
 			"lookup_name": "SpectrumVisualizer",
@@ -609,7 +770,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"grabcolorcollection": {
 			"lookup_name": "grabcolorcollection",
@@ -635,7 +804,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"shelf": {
 			"lookup_name": "shelf",
@@ -661,7 +838,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"shelf_with_stickers": {
 			"lookup_name": "shelf_with_stickers",
@@ -687,7 +872,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"disco_lights": {
 			"lookup_name": "disco_lights",
@@ -713,7 +906,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"advancedglitch": {
 			"lookup_name": "advancedglitch",
@@ -739,7 +940,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"spherecolors": {
 			"lookup_name": "spherecolors",
@@ -765,7 +974,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		},
 		"textureglitch": {
 			"lookup_name": "textureglitch",
@@ -791,7 +1008,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"tags": [
+				"color"
+			]
 		}
 	}
 }

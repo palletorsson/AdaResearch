@@ -6,11 +6,21 @@
 			"description": "Basic seek steering behavior where agents move toward a target.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_01_seek_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "seek", "autonomous_agents", "nature_of_code"],
+			"tags": [
+				"steering",
+				"seek",
+				"autonomous_agents",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_02_arrive": {
 			"name": "Arrive Steering Behavior",
@@ -18,11 +28,21 @@
 			"description": "Arrive steering behavior with deceleration as agents approach target.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_02_arrive_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "arrive", "deceleration", "nature_of_code"],
+			"tags": [
+				"steering",
+				"arrive",
+				"deceleration",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_03_stay_within_walls": {
 			"name": "Stay Within Walls",
@@ -30,11 +50,21 @@
 			"description": "Boundary avoidance steering where agents stay within defined walls.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_03_stay_within_walls_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "boundaries", "avoidance", "nature_of_code"],
+			"tags": [
+				"steering",
+				"boundaries",
+				"avoidance",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_04_flow_field": {
 			"name": "Flow Field Following",
@@ -42,11 +72,21 @@
 			"description": "Agents navigate by following a vector flow field.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "flow_field", "vectors", "nature_of_code"],
+			"tags": [
+				"steering",
+				"flow_field",
+				"vectors",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_05_path_following_simple": {
 			"name": "Simple Path Following",
@@ -54,11 +94,20 @@
 			"description": "Basic path following where agents track along a simple path.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_05_path_following_simple_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "path_following", "nature_of_code"],
+			"tags": [
+				"steering",
+				"path_following",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_07_separation": {
 			"name": "Separation Steering",
@@ -66,11 +115,21 @@
 			"description": "Separation steering behavior keeping agents apart from each other.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_07_separation_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "separation", "avoidance", "nature_of_code"],
+			"tags": [
+				"steering",
+				"separation",
+				"avoidance",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_08_path_following": {
 			"name": "Path Following",
@@ -78,11 +137,21 @@
 			"description": "Advanced path following with prediction and normal point projection.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_08_path_following_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "path_following", "prediction", "nature_of_code"],
+			"tags": [
+				"steering",
+				"path_following",
+				"prediction",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"noc_5_08_separation_and_seek": {
 			"name": "Separation and Seek",
@@ -90,11 +159,22 @@
 			"description": "Combined separation and seek behaviors for balanced group movement.",
 			"scene": "res://algorithms/steering/noc_ch05/noc_5_08_separation_and_seek_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "separation", "seek", "combined", "nature_of_code"],
+			"tags": [
+				"steering",
+				"separation",
+				"seek",
+				"combined",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"example_5_9_flocking": {
 			"name": "Flocking Simulation",
@@ -102,11 +182,22 @@
 			"description": "Classic flocking with separation, alignment, and cohesion (Reynolds boids).",
 			"scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "flocking", "boids", "emergence", "nature_of_code"],
+			"tags": [
+				"steering",
+				"flocking",
+				"boids",
+				"emergence",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "advanced",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"example_5_9_flocking_with_binning": {
 			"name": "Flocking with Spatial Binning",
@@ -114,11 +205,22 @@
 			"description": "Optimized flocking using spatial binning for neighbor lookups.",
 			"scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_with_binning_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "flocking", "optimization", "spatial_hash", "nature_of_code"],
+			"tags": [
+				"steering",
+				"flocking",
+				"optimization",
+				"spatial_hash",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"example_5_12_sine_cosine_lookup": {
 			"name": "Sine Cosine Lookup Table",
@@ -126,11 +228,22 @@
 			"description": "Steering example using sine/cosine lookup tables for efficient movement.",
 			"scene": "res://algorithms/steering/noc_ch05/example_5_12_sine_cosine_lookup_table_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "trigonometry", "lookup_table", "optimization", "nature_of_code"],
+			"tags": [
+				"steering",
+				"trigonometry",
+				"lookup_table",
+				"optimization",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"exercise_5_2_pursuit": {
 			"name": "Pursuit Exercise",
@@ -138,11 +251,21 @@
 			"description": "Exercise implementing pursuit steering behavior.",
 			"scene": "res://algorithms/steering/noc_ch05/exercise_5_2_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "pursuit", "exercise", "nature_of_code"],
+			"tags": [
+				"steering",
+				"pursuit",
+				"exercise",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"exercise_5_4_wander": {
 			"name": "Wander Steering",
@@ -150,11 +273,21 @@
 			"description": "Wander steering behavior with random but smooth directional changes.",
 			"scene": "res://algorithms/steering/noc_ch05/exercise_5_4_wander_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "wander", "random", "nature_of_code"],
+			"tags": [
+				"steering",
+				"wander",
+				"random",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"exercise_5_9_angle_between": {
 			"name": "Angle Between Vectors",
@@ -162,11 +295,22 @@
 			"description": "Exercise exploring angle calculations between steering vectors.",
 			"scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "angle", "vectors", "exercise", "nature_of_code"],
+			"tags": [
+				"steering",
+				"angle",
+				"vectors",
+				"exercise",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"exercise_5_13_crowd_path_following": {
 			"name": "Crowd Path Following",
@@ -174,11 +318,22 @@
 			"description": "Multiple agents following a shared path with crowd dynamics.",
 			"scene": "res://algorithms/steering/noc_ch05/exercise_5_13_crowd_path_following_vr.tscn",
 			"category": "steering",
-			"tags": ["steering", "crowd", "path_following", "exercise", "nature_of_code"],
+			"tags": [
+				"steering",
+				"crowd",
+				"path_following",
+				"exercise",
+				"nature_of_code"
+			],
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		},
 		"flocking_controls": {
 			"name": "Flocking Controls",
@@ -186,11 +341,23 @@
 			"description": "Interactive boid flocking with VR sliders for separation, alignment, cohesion, speed, and perception radius. Highlights one boid with visible force vectors.",
 			"scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn",
 			"category": "steering",
-			"tags": ["steering", "flocking", "boids", "sliders", "interactive", "emergence"],
+			"tags": [
+				"steering",
+				"flocking",
+				"boids",
+				"sliders",
+				"interactive",
+				"emergence"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [],
-			"sequence": "steering"
+			"sequence": "steering",
+			"complexity": "advanced",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			]
 		}
 	}
 }

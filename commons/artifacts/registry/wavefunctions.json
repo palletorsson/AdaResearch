@@ -12,7 +12,24 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"animation",
+				"chaos",
+				"color",
+				"interactive",
+				"visualization",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"foucault_pendulum": {
 			"name": "Foucault Pendulum",
@@ -34,7 +51,21 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"math",
+				"pendulum",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"VitruvianMan": {
 			"name": "Vitruvian Man",
@@ -52,7 +83,17 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SoundBoxLong": {
 			"name": "Sound Box (Long)",
@@ -70,7 +111,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"biology",
+				"music",
+				"oscillation",
+				"physics"
+			]
 		},
 		"SoundBoxShort": {
 			"name": "Sound Box (Short)",
@@ -88,7 +140,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"linear_algebra",
+				"sound",
+				"string",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"seismograph": {
 			"name": "seismograph",
@@ -109,7 +174,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"spectral_analyzer": {
 			"name": "Spectral Analyzer",
@@ -127,7 +201,19 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"spectrum_display": {
 			"name": "Frequency Spectrum Analyzer",
@@ -141,7 +227,18 @@
 				"devexamples",
 				"structure"
 			],
-			"sequence": "devexamples"
+			"sequence": "devexamples",
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"spectral_sine_wave": {
 			"name": "Spectral Sine Wave",
@@ -159,7 +256,17 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"walkable_sine_bridge": {
 			"name": "walkable_sine_bridge",
@@ -169,7 +276,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"DancingBody": {
 			"name": "Dancing Body",
@@ -179,7 +295,19 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"procedural",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"OscillatingWave": {
 			"name": "Oscillating Wave",
@@ -198,7 +326,19 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"animation",
+				"sound",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"HarmonicBuilder": {
 			"name": "Harmonic Builder",
@@ -217,7 +357,16 @@
 					1
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BeatFrequencies": {
 			"name": "Beat Frequencies",
@@ -236,7 +385,17 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"ColoredLinesVR": {
 			"name": "ColoredLinesVR",
@@ -246,7 +405,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"StaticCables": {
 			"name": "StaticCables",
@@ -264,7 +434,16 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"pylon_cables": {
 			"name": "Electric Pylon Cables",
@@ -274,7 +453,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"doublehelix": {
 			"name": "doublehelix",
@@ -284,7 +472,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"dual_display_test": {
 			"name": "dual_display_test",
@@ -305,7 +503,17 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"fourier_transform": {
 			"name": "Fourier Transform",
@@ -328,7 +536,17 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"resonance_frequencies_visualizer": {
 			"name": "Resonance Frequencies Visualizer",
@@ -339,7 +557,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"unit_circle": {
 			"name": "Unit Circle",
@@ -362,7 +589,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"tech_noir_audio": {
 			"name": "Tech Noir Audio",
@@ -372,7 +608,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"liturgicalambientgen": {
 			"name": "liturgicalambientgenera",
@@ -390,7 +637,16 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"resonance_frequencies": {
 			"name": "Resonance Frequencies",
@@ -400,7 +656,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"noir_sequencer": {
 			"name": "Noir Sequencer",
@@ -410,7 +676,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SphericalHarmonics": {
 			"name": "Spherical Harmonics",
@@ -432,7 +709,20 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"geometry",
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"kusama_sine": {
 			"name": "Kusama Sine",
@@ -445,7 +735,16 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"john_cage_tech_noir": {
 			"name": "john_cage_tech_noir",
@@ -458,7 +757,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"probability",
+				"procedural",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"mario_test_sound_ui": {
 			"name": "mario_test_sound_ui",
@@ -471,7 +781,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"vr",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"vr_map_loader_kiosk": {
 			"name": "VR Map Loader Kiosk",
@@ -481,7 +802,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"vr",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"MarioSoundController": {
 			"name": "MarioSoundController",
@@ -494,7 +825,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"DualBallFMController": {
 			"name": "Dual Ball FM Synth",
@@ -515,7 +856,19 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"hazard",
+				"sound",
+				"vr",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"coshlea": {
 			"name": "coshlea",
@@ -533,7 +886,18 @@
 					19
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"geometry",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_cylinder_staircase": {
 			"name": "sine_cylinder_staircase",
@@ -554,7 +918,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_wall_static": {
 			"name": "Sine Wall (Static)",
@@ -572,7 +945,19 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"pattern",
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_art_monitor": {
 			"name": "Sine Art Monitor",
@@ -590,7 +975,19 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"art",
+				"music",
+				"oscillation",
+				"physics"
+			]
 		},
 		"sine_wall_corridor": {
 			"name": "Sine Wall Corridor",
@@ -611,7 +1008,16 @@
 					14
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SplineCables": {
 			"name": "Spline Cables",
@@ -629,7 +1035,17 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"spring_network": {
 			"name": "SpringNetwork",
@@ -639,7 +1055,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"spring",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"lissajous_curves": {
 			"name": "LissajousCurves",
@@ -653,7 +1080,16 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"coupled_oscillator_lattice": {
 			"name": "CoupledOscillatorLattice",
@@ -664,7 +1100,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"parametric_pendulum_waves": {
 			"name": "ParametricPendulumWaves",
@@ -674,7 +1120,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"rainbow_hallway": {
 			"name": "rainbow_hallway",
@@ -695,7 +1151,16 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"hallway_scene": {
 			"name": "hallway_scene",
@@ -716,7 +1181,16 @@
 					26
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"segment_slide": {
 			"name": "Segment Slide",
@@ -726,7 +1200,19 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"wave"
+			],
+			"dev_themes": [
+				"education",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"resonating_metallophone": {
 			"name": "Resonating Metallophone",
@@ -739,7 +1225,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"bernini_columns": {
 			"name": "Bernini Columns",
@@ -752,7 +1249,16 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"line_builder_3d": {
 			"name": "Line Builder 3D",
@@ -765,7 +1271,19 @@
 			"map_sequences": [
 				"primitives"
 			],
-			"sequence": "primitives"
+			"sequence": "primitives",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"graph",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"cable_builder": {
 			"name": "Cable Builder",
@@ -778,7 +1296,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"physics",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"fourier_transform_advanced": {
 			"name": "Advanced Fourier Transform",
@@ -796,7 +1324,17 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"parametric_shapes": {
 			"name": "Parametric Shapes",
@@ -814,7 +1352,17 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"DoublePendulum": {
 			"name": "Double Pendulum",
@@ -836,7 +1384,19 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"chaos",
+				"topology",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"PendulumGrid3x3": {
 			"name": "Pendulum Grid 3x3",
@@ -854,7 +1414,18 @@
 					19
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"swarm",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"math_objects": {
 			"name": "Mathematical Objects",
@@ -867,7 +1438,16 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"CircleSpiral": {
 			"name": "Circle Spiral",
@@ -885,7 +1465,19 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"waves"
+			],
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"standing_waves": {
 			"name": "Standing Waves",
@@ -904,7 +1496,17 @@
 					13
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"pattern",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"unit_circle_advanced": {
 			"name": "Advanced Unit Circle",
@@ -925,7 +1527,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SimpleOscillatingBridge": {
 			"name": "Simple Oscillating Bridge",
@@ -938,7 +1549,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"animation",
+				"wave"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SystemsMusicTest": {
 			"name": "Systems Music Test",
@@ -959,7 +1582,21 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"simulation",
+				"sound",
+				"vr",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"ruth_asawa_sculpture": {
 			"name": "Ruth Asawa Sculpture",
@@ -980,7 +1617,17 @@
 					7
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"ElphabaDemo": {
 			"name": "Elphaba Demo",
@@ -998,7 +1645,18 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"string",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"ElphabaDress": {
 			"name": "Elphaba Dress",
@@ -1011,7 +1669,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"wave_interference": {
 			"name": "Wave Interference",
@@ -1030,7 +1698,16 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"fouriertransformshape": {
 			"name": "fouriertransformshape",
@@ -1048,7 +1725,16 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"wave_propagation_3d": {
 			"name": "3D Wave Propagation",
@@ -1070,7 +1756,17 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"MelodySoundBoard": {
 			"name": "MelodySoundBoard",
@@ -1080,7 +1776,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"MelodyChaser3D": {
 			"name": "MelodyChaser3D",
@@ -1093,7 +1800,20 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"sound",
+				"vr",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"SoundscapeRadioRack": {
 			"name": "SoundscapeRadioRack",
@@ -1106,7 +1826,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"water_land_ride": {
 			"name": "water_land_ride",
@@ -1116,7 +1846,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"OscillationDriver": {
 			"name": "OscillationDriver",
@@ -1134,7 +1873,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"double_helix_scene": {
 			"name": "double_helix_scene",
@@ -1155,7 +1903,16 @@
 					1
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"circle_spiral_scene": {
 			"name": "circle_spiral_scene",
@@ -1165,7 +1922,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"spiral",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"OscillationCurve": {
 			"name": "OscillationCurve",
@@ -1186,7 +1953,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"UnitCircleTrig": {
 			"name": "UnitCircleTrig",
@@ -1207,7 +1983,16 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"PendulumWave": {
 			"name": "PendulumWave",
@@ -1228,7 +2013,16 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"TrigWalkingPath": {
 			"name": "TrigWalkingPath",
@@ -1249,7 +2043,16 @@
 					26
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"double_helix_oscillator": {
 			"name": "Double Helix Oscillator",
@@ -1267,7 +2070,17 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"Lissajous3D": {
 			"name": "Lissajous3D",
@@ -1285,7 +2098,17 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"PendulumCircle": {
 			"name": "PendulumCircle",
@@ -1303,7 +2126,17 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"WaveRideScene": {
 			"name": "WaveRideScene",
@@ -1321,7 +2154,16 @@
 					1
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"PhonemeCloud": {
 			"name": "PhonemeCloud",
@@ -1339,7 +2181,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"air_music_display_case": {
 			"name": "Air Music Display Case",
@@ -1352,7 +2203,21 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"simulation",
+				"sound",
+				"visualization",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"chladni_plate": {
 			"name": "Chladni Plate",
@@ -1388,6 +2253,12 @@
 				"resonance",
 				"sand",
 				"patterns"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		},
 		"GlassRack": {
@@ -1423,6 +2294,11 @@
 				"chemistry",
 				"apparatus",
 				"modular"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			]
 		},
 		"multimeter": {
@@ -1436,7 +2312,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"chemicalapparatus": {
 			"name": "Chemical Apparatus",
@@ -1449,7 +2335,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"samplevialrack": {
 			"name": "Sample Vial Rack",
@@ -1462,7 +2359,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"linear_algebra",
+				"probability",
+				"procedural",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"electronicscales": {
 			"name": "Electronic Scales",
@@ -1475,7 +2384,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"microscope": {
 			"name": "Microscope",
@@ -1488,7 +2408,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"color",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"atmosphericmonitoring": {
 			"name": "Atmospheric Monitoring Station",
@@ -1501,7 +2432,17 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"probability",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"holographicdisplay": {
 			"name": "Holographic Display",
@@ -1514,7 +2455,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"visualization",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"biomagneticresonator": {
 			"name": "Biomagnetic Resonator",
@@ -1524,7 +2476,19 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"static_reference_cube": {
 			"name": "Static Reference Cube",
@@ -1534,7 +2498,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"rotating_cube_demo": {
 			"name": "Rotating Cube Demo",
@@ -1547,7 +2521,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"y_oscillation_cube": {
 			"name": "Y-Oscillation Cube",
@@ -1560,7 +2545,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"visualization",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"rotation_oscillation_cube": {
 			"name": "Rotation Oscillation Cube",
@@ -1578,7 +2574,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"oscillation_controlled_cube": {
 			"name": "Oscillation Controlled Cube",
@@ -1599,7 +2605,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"qfep",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"qfep",
+				"waves"
+			]
 		},
 		"sine_wall_explanation": {
 			"name": "Sine Wall Explanation",
@@ -1612,7 +2631,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_space_explanation": {
 			"name": "Sine Space Explanation",
@@ -1625,7 +2655,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"3d",
+				"visualization",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"RackSineBasic": {
 			"name": "Sine Wave Rack",
@@ -1646,7 +2688,21 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"Rack303Acid": {
 			"name": "303 Acid Rack",
@@ -1659,7 +2715,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"Rack808Drums": {
 			"name": "808 Kick Rack",
@@ -1669,7 +2736,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"wave"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"RackMario": {
 			"name": "Mario Pickup Rack",
@@ -1679,7 +2757,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"RackDX7Piano": {
 			"name": "DX7 Piano Rack",
@@ -1692,7 +2781,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"hazard",
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"RackMoogBass": {
 			"name": "Moog Bass Rack",
@@ -1705,7 +2806,18 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"sound",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"RackAmbientDrone": {
 			"name": "Ambient Drone Rack",
@@ -1718,7 +2830,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"sound",
+				"visualization",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"VRAudioMonitor": {
 			"name": "VR Audio Monitor",
@@ -1739,7 +2863,20 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"harmonic_distance_table": {
 			"name": "Harmonic Distance Table",
@@ -1753,7 +2890,22 @@
 				"testmaps",
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "advanced",
+			"tags": [
+				"graph",
+				"interactive",
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"art",
+				"music",
+				"oscillation",
+				"physics"
+			]
 		},
 		"timbre_sculptor": {
 			"name": "Timbre Sculptor",
@@ -1766,7 +2918,20 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "expert",
+			"tags": [
+				"animation",
+				"interactive",
+				"visualization",
+				"vr",
+				"wave"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_BranchingCondenser": {
 			"name": "Glass Rack: Branching Condenser",
@@ -1776,7 +2941,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_BreakingBadCoffee": {
 			"name": "Glass Rack: Breaking Bad Coffee",
@@ -1786,7 +2960,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_ComplexApparatus": {
 			"name": "Glass Rack: Complex Apparatus",
@@ -1796,7 +2979,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_DistillationRack": {
 			"name": "Glass Rack: Distillation Rack",
@@ -1806,7 +2998,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_DistillationY": {
 			"name": "Glass Rack: Y-Branch Distillation",
@@ -1816,7 +3017,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_FractionalDistillation": {
 			"name": "Glass Rack: Fractional Distillation",
@@ -1826,7 +3036,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_RefluxApparatus": {
 			"name": "Glass Rack: Reflux Apparatus",
@@ -1836,7 +3055,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_SbendManifold": {
 			"name": "Glass Rack: S-Bend Manifold",
@@ -1846,7 +3074,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "expert",
+			"tags": [
+				"geometry",
+				"topology",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_SimpleTube": {
 			"name": "Glass Rack: Simple Tube",
@@ -1856,7 +3095,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_SpiralCondenser": {
 			"name": "Glass Rack: Spiral Condenser",
@@ -1866,7 +3114,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"GlassRack_SpiralTube": {
 			"name": "Glass Rack: Spiral Tube",
@@ -1876,7 +3133,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_StraightRun": {
 			"name": "Big Pipe: Straight Run",
@@ -1886,7 +3152,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_LBend": {
 			"name": "Big Pipe: L-Bend",
@@ -1896,7 +3171,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_TDistribution": {
 			"name": "Big Pipe: T-Distribution",
@@ -1906,7 +3190,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_Serpentine": {
 			"name": "Big Pipe: Serpentine",
@@ -1916,7 +3209,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_VerticalBypass": {
 			"name": "Big Pipe: Vertical Bypass",
@@ -1926,7 +3229,17 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_CrossManifold": {
 			"name": "Big Pipe: Cross Manifold",
@@ -1936,7 +3249,18 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "expert",
+			"tags": [
+				"geometry",
+				"topology",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipe_IndustrialBranch": {
 			"name": "Big Pipe: Industrial Branch",
@@ -1946,7 +3270,16 @@
 			"category": "waves",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"BigPipeSystem": {
 			"name": "Big Pipe System",
@@ -1959,7 +3292,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"graph",
+				"simulation",
+				"waves"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"lab_table": {
 			"name": "Lab Table",
@@ -1972,7 +3317,19 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"procedural",
+				"waves"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"chord_tension_spring": {
 			"name": "Chord Tension Spring",
@@ -2027,7 +3384,16 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"tags": [
+				"wave"
+			]
 		},
 		"BigPipe": {
 			"lookup_name": "BigPipe",
@@ -2051,7 +3417,16 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"soundboxes": {
 			"lookup_name": "soundboxes",
@@ -2075,7 +3450,19 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"procedural",
+				"sound"
+			],
+			"dev_themes": [
+				"art",
+				"music",
+				"oscillation",
+				"physics"
+			]
 		}
 	}
 }

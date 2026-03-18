@@ -23,7 +23,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"limbgrowth": {
 			"lookup_name": "limbgrowth",
@@ -42,7 +46,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"monte_carlo_protein": {
 			"lookup_name": "monte_carlo_protein",
@@ -61,7 +69,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"morphobody": {
 			"lookup_name": "morphobody",
@@ -79,7 +91,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"radiolaria": {
 			"lookup_name": "radiolaria",
@@ -108,7 +124,12 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"dev_themes": [
+				"art",
+				"biology",
+				"simulation"
+			]
 		},
 		"ten_tulip_buckets": {
 			"lookup_name": "ten_tulip_buckets",
@@ -127,7 +148,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"MolecularDesigner": {
 			"lookup_name": "MolecularDesigner",
@@ -156,7 +181,11 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"dev_themes": [
+				"biology",
+				"simulation"
+			]
 		},
 		"attractorsphere": {
 			"lookup_name": "attractorsphere",
@@ -182,7 +211,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"biology",
+				"simulation"
+			],
+			"tags": [
+				"biology"
+			]
 		}
 	}
 }

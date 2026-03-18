@@ -24,7 +24,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"chaos",
+				"dynamical_systems"
+			]
 		},
 		"strange_attractors": {
 			"lookup_name": "strange_attractors",
@@ -44,7 +48,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"art",
+				"chaos",
+				"dynamical_systems"
+			]
 		},
 		"lyapunov_fractal": {
 			"lookup_name": "lyapunov_fractal",
@@ -65,7 +74,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"chaos",
+				"dynamical_systems"
+			]
 		},
 		"mandelbrot_dive": {
 			"lookup_name": "mandelbrot_dive",
@@ -101,7 +114,12 @@
 				"size_group": "compact"
 			},
 			"interaction": "observe",
-			"sequence": "fractals"
+			"sequence": "fractals",
+			"dev_themes": [
+				"chaos",
+				"dynamical_systems",
+				"fractals"
+			]
 		}
 	}
 }

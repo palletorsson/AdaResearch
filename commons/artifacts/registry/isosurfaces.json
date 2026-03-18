@@ -42,7 +42,13 @@
 				"isosurfaces"
 			],
 			"sequence": "isosurfaces",
-			"name": "voxel_noise_demo"
+			"name": "voxel_noise_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"gyroid_demo": {
 			"lookup_name": "gyroid_demo",
@@ -79,7 +85,14 @@
 				"isosurfaces"
 			],
 			"sequence": "isosurfaces",
-			"name": "gyroid_demo"
+			"name": "gyroid_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"fountain_demo": {
 			"lookup_name": "fountain_demo",
@@ -111,7 +124,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "fountain_demo"
+			"name": "fountain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_sculpt_vr": {
 			"lookup_name": "mc_sculpt_vr",
@@ -141,7 +160,13 @@
 			"map_sequences": [
 				"isosurfaces"
 			],
-			"sequence": "isosurfaces"
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_portal_landscape": {
 			"lookup_name": "mc_portal_landscape",
@@ -174,7 +199,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_portal_landscape"
+			"name": "mc_portal_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_cave": {
 			"lookup_name": "mc_cave",
@@ -206,7 +237,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_cave"
+			"name": "mc_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_torus_sculpture": {
 			"lookup_name": "mc_torus_sculpture",
@@ -239,7 +276,14 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_torus_sculpture"
+			"name": "mc_torus_sculpture",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_shapes_gallery": {
 			"lookup_name": "mc_shapes_gallery",
@@ -272,7 +316,14 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_shapes_gallery"
+			"name": "mc_shapes_gallery",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_inside_cave": {
 			"lookup_name": "mc_inside_cave",
@@ -301,7 +352,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_inside_cave"
+			"name": "mc_inside_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_flat_landscape": {
 			"lookup_name": "mc_flat_landscape",
@@ -331,7 +388,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_flat_landscape"
+			"name": "mc_flat_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_overhang_landscape": {
 			"lookup_name": "mc_overhang_landscape",
@@ -361,7 +424,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_overhang_landscape"
+			"name": "mc_overhang_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"animated_noise_explorer": {
 			"lookup_name": "animated_noise_explorer",
@@ -391,7 +460,13 @@
 				],
 				"size_group": "environment"
 			},
-			"name": "animated_noise_explorer"
+			"name": "animated_noise_explorer",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_base": {
 			"lookup_name": "mc_base",
@@ -419,7 +494,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_base"
+			"name": "mc_base",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"nakama_metaballs": {
 			"lookup_name": "nakama_metaballs",
@@ -452,7 +533,13 @@
 				"isosurfaces"
 			],
 			"sequence": "isosurfaces",
-			"name": "nakama_metaballs"
+			"name": "nakama_metaballs",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"raymarched_metaballs": {
 			"lookup_name": "raymarched_metaballs",
@@ -479,7 +566,13 @@
 			"map_sequences": [
 				"isosurfaces"
 			],
-			"sequence": "isosurfaces"
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"metaball_world": {
 			"lookup_name": "metaball_world",
@@ -515,7 +608,13 @@
 				"isosurfaces"
 			],
 			"sequence": "isosurfaces",
-			"name": "metaball_world"
+			"name": "metaball_world",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"fifteen_cases_demo": {
 			"lookup_name": "fifteen_cases_demo",
@@ -545,7 +644,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "fifteen_cases_demo"
+			"name": "fifteen_cases_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"rhizome_cave_demo": {
 			"lookup_name": "rhizome_cave_demo",
@@ -576,7 +681,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "rhizome_cave_demo"
+			"name": "rhizome_cave_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"mc_terrain_demo": {
 			"lookup_name": "mc_terrain_demo",
@@ -605,7 +716,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "mc_terrain_demo"
+			"name": "mc_terrain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"queer_marching_cave": {
 			"lookup_name": "queer_marching_cave",
@@ -636,7 +753,13 @@
 				],
 				"size_group": "world_scale"
 			},
-			"name": "queer_marching_cave"
+			"name": "queer_marching_cave",
+			"complexity": "expert",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"rhizome_cave_system": {
 			"lookup_name": "rhizome_cave_system",
@@ -660,7 +783,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			]
 		},
 		"marching_cubes_static": {
 			"lookup_name": "marching_cubes_static",
@@ -684,7 +816,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"tags": [
+				"isosurface"
+			]
 		}
 	},
 	"sequence_mapping": {

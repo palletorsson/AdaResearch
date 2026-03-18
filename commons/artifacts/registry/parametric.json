@@ -23,7 +23,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"catenoid": {
 			"lookup_name": "catenoid",
@@ -42,7 +47,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric",
+				"qfep"
+			]
 		},
 		"dini_surface": {
 			"lookup_name": "dini_surface",
@@ -61,7 +72,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"double_enneper": {
 			"lookup_name": "double_enneper",
@@ -79,7 +95,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"enneper_order3": {
 			"lookup_name": "enneper_order3",
@@ -97,7 +118,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"figure_eight_knot": {
 			"lookup_name": "figure_eight_knot",
@@ -116,7 +142,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"helicoid": {
 			"lookup_name": "helicoid",
@@ -134,7 +166,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"klein_bottle": {
 			"lookup_name": "klein_bottle",
@@ -153,7 +190,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"mobius_strip_parametric": {
 			"lookup_name": "mobius_strip_parametric",
@@ -172,7 +214,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"seashell": {
 			"lookup_name": "seashell",
@@ -192,7 +239,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"torus_knot": {
 			"lookup_name": "torus_knot",
@@ -211,7 +264,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"trefoil_knot": {
 			"lookup_name": "trefoil_knot",
@@ -230,7 +288,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"art",
+				"biology",
+				"curves",
+				"math"
+			]
 		},
 		"wave_torus": {
 			"lookup_name": "wave_torus",
@@ -249,7 +313,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"math_objects_gallery": {
 			"lookup_name": "math_objects_gallery",
@@ -267,7 +336,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"art",
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"renaissancepaintingfloorrattern": {
 			"lookup_name": "renaissancepaintingfloorrattern",
@@ -291,7 +366,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"curves",
+				"math",
+				"parametric"
+			],
+			"tags": [
+				"parametric"
+			]
 		}
 	}
 }

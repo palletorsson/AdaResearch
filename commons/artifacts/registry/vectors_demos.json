@@ -25,6 +25,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			]
 		},
 		"work_energy_demo": {
@@ -46,6 +51,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			]
 		},
 		"torque_demo": {
@@ -67,6 +77,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			]
 		},
 		"normal_force_demo": {
@@ -88,6 +103,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			]
 		},
 		"turret_targeting": {
@@ -117,7 +137,12 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"weather_vector_field": {
 			"lookup_name": "weather_vector_field",
@@ -140,6 +165,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			]
 		}
 	}

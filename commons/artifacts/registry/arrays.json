@@ -12,7 +12,18 @@
 				"mosaicanalysis",
 				"testmaps"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"pattern_tile_4x4": {
 			"name": "4x4 Pattern Tile",
@@ -29,7 +40,17 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_mirror": {
 			"name": "Mirror Pattern Tile",
@@ -47,7 +68,17 @@
 				"array_tutorial",
 				"testmaps"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_8x8": {
 			"name": "8x8 Pattern Tile",
@@ -61,7 +92,17 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_brick": {
 			"name": "Brick Pattern Tile",
@@ -79,7 +120,17 @@
 				"array_tutorial",
 				"transformation"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_herringbone": {
 			"name": "Herringbone Pattern Tile",
@@ -96,7 +147,17 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"index_visualizer": {
 			"name": "Index Visualizer",
@@ -106,7 +167,16 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_cube": {
 			"name": "Pattern Tile Cube",
@@ -116,7 +186,19 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"color",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"biology",
+				"data_structures"
+			]
 		},
 		"step_sequencer": {
 			"name": "Step Sequencer",
@@ -129,7 +211,19 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"interactive",
+				"primitives",
+				"sound"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_trap": {
 			"name": "Trap Sequencer",
@@ -173,7 +267,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_house": {
 			"name": "90s House Sequencer",
@@ -218,7 +321,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives",
+				"wave"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_kraftwerk": {
 			"name": "Kraftwerk Sequencer",
@@ -264,7 +376,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_ambient": {
 			"name": "Ambient Works Sequencer",
@@ -338,7 +459,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_scifi": {
 			"name": "Sci-Fi Lab Sequencer",
@@ -354,7 +484,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_cinematic": {
 			"name": "Cinematic Sequencer",
@@ -370,7 +508,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_breakbeat": {
 			"name": "Breakbeat Sequencer",
@@ -386,7 +532,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_cosmic": {
 			"name": "Cosmic Sequencer",
@@ -402,7 +556,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_lofi": {
 			"name": "Lo-Fi Sequencer",
@@ -418,7 +580,17 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives",
+				"sound"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"binary_table": {
 			"name": "Binary Table Display",
@@ -428,7 +600,17 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"primitives",
+				"visualization"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_glass_tubes": {
 			"name": "Pulsar Glass Tubes",
@@ -438,7 +620,17 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"pulsar_visualizer": {
 			"name": "Pulsar B1919+21 Visualizer",
@@ -459,7 +651,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_compact": {
 			"name": "Pulsar Compact",
@@ -474,7 +675,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_lines": {
 			"name": "Pulsar Lines",
@@ -489,7 +698,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"tiling_demo": {
 			"name": "Tiling System Demo",
@@ -510,7 +727,13 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"facade_grammar_demo": {
 			"name": "Facade Grammar Demo",
@@ -532,7 +755,13 @@
 				"array_tutorial",
 				"facades"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"vr_tile_editor": {
 			"name": "VR Tile Editor",
@@ -550,7 +779,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"vr_tile_editor_mirror": {
 			"name": "VR Tile Editor Mirror",
@@ -576,7 +810,12 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"array_carpet": {
 			"name": "Array Carpet",
@@ -589,7 +828,19 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"array",
+				"pattern",
+				"showcase"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"education"
+			]
 		},
 		"wfc_tile_mosaic": {
 			"name": "WFC Tile Mosaic",
@@ -609,6 +860,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"mosaicanalysis"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"arrays",
+				"biology",
+				"data_structures"
 			]
 		},
 		"pattern_maker_station": {
@@ -630,6 +887,11 @@
 			"map_sequences": [
 				"mosaicanalysis",
 				"patterngeneration"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
 			]
 		},
 		"grid_editor_board": {
@@ -649,6 +911,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
+			],
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
 			]
 		},
 		"grid_editor_board_3d": {
@@ -666,7 +933,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_3d_capture": {
 			"name": "Grid Editor 3D Capture",
@@ -683,7 +955,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"facade_builder": {
 			"name": "Facade Builder",
@@ -703,6 +980,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"facades"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
 			]
 		},
 		"row_3_x": {
@@ -729,7 +1011,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
 		},
 		"column_3_z": {
 			"lookup_name": "column_3_z",
@@ -755,7 +1045,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
 		},
 		"grid_2d_4x4": {
 			"lookup_name": "grid_2d_4x4",
@@ -781,7 +1079,16 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_3d_4x4x4": {
 			"lookup_name": "grid_3d_4x4x4",
@@ -807,7 +1114,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_snapper": {
 			"lookup_name": "grid_snapper",
@@ -831,7 +1146,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"mondrian_run": {
 			"lookup_name": "mondrian_run",
@@ -855,7 +1178,15 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
 		},
 		"grid_editor_main": {
 			"lookup_name": "grid_editor_main",
@@ -879,7 +1210,15 @@
 					8
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"IndexVisualizer": {
 			"lookup_name": "IndexVisualizer",
@@ -903,7 +1242,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		}
 	}
 }

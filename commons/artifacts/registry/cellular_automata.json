@@ -17,7 +17,18 @@
 					7
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"persian_rug": {
 			"name": "Persian Rug",
@@ -39,7 +50,19 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ca_columns": {
 			"name": "CA Columns",
@@ -60,7 +83,18 @@
 					8
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"cellular_automata",
+				"computation"
+			]
 		},
 		"ca_bridge": {
 			"name": "CA Bridge",
@@ -82,7 +116,18 @@
 					50
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ca_screen": {
 			"name": "CA Screen",
@@ -95,7 +140,18 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"crack_propagation_ca": {
 			"name": "Crack Propagation CA",
@@ -105,7 +161,16 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"dendrite_growth_ca": {
 			"name": "Dendrite Growth CA",
@@ -115,7 +180,16 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ca_growth_network": {
 			"name": "CA Growth Network",
@@ -128,7 +202,19 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"graph"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"disease_spread_ca": {
 			"name": "Disease Spread CA",
@@ -142,7 +228,17 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "advanced",
+			"tags": [
+				"emergence",
+				"simulation"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ecosystem_ca": {
 			"name": "Ecosystem CA",
@@ -152,7 +248,16 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"percolation_ca": {
 			"name": "Percolation CA",
@@ -162,7 +267,16 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"recrystallization_ca": {
 			"name": "Recrystallization CA",
@@ -172,7 +286,16 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"self_organization_ca": {
 			"name": "Self Organization CA",
@@ -186,7 +309,16 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "advanced",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"elementary_ca_vr": {
 			"name": "Elementary CA VR",
@@ -205,7 +337,19 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"game_of_life_vr": {
 			"name": "Game of Life VR",
@@ -216,7 +360,18 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"game_of_life_oop_vr": {
 			"name": "Game of Life OOP VR",
@@ -226,7 +381,18 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"hexagon_ca_vr": {
 			"name": "Hexagon CA VR",
@@ -239,7 +405,20 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"vr"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"hexagon_cave_vr": {
 			"name": "Hexagon Cave VR",
@@ -249,7 +428,18 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_3d": {
 			"name": "Cellular Automata 3D",
@@ -271,7 +461,19 @@
 					12
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"mold_network": {
 			"name": "Mold Network",
@@ -284,7 +486,17 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"emergence",
+				"graph"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"structure_growth": {
 			"name": "Structure Growth",
@@ -305,7 +517,17 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_3d_tree": {
 			"name": "Cellular Automata 3D Tree",
@@ -327,7 +549,20 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence",
+				"tree"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"crossway_ca": {
 			"name": "Crossway CA",
@@ -348,7 +583,18 @@
 					1
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"lattice_gas_automata": {
 			"name": "Lattice Gas Automata",
@@ -371,7 +617,16 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"rule_30_110": {
 			"name": "Rule 30/110",
@@ -394,7 +649,17 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"rule_30_110_gravity": {
 			"name": "Rule 30/110 Gravity",
@@ -416,7 +681,18 @@
 					29
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"physics"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ca_sphere": {
 			"name": "CA Sphere",
@@ -429,7 +705,20 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence",
+				"geometry"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"ca_chair_test": {
 			"name": "CA Chair Test",
@@ -450,7 +739,18 @@
 					31
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_1d": {
 			"name": "Cellular Automata 1D",
@@ -471,7 +771,18 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_2d": {
 			"name": "Cellular Automata 2D",
@@ -492,7 +803,19 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_3d_stacked": {
 			"name": "Cellular Automata 3D Stacked",
@@ -506,7 +829,19 @@
 				"fractals",
 				"recursiveemergence"
 			],
-			"sequence": "fractals"
+			"sequence": "fractals",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_basic": {
 			"name": "Cellular Automata Basic",
@@ -516,7 +851,18 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"cellular_automata_grabable": {
 			"name": "Cellular Automata Grabable",
@@ -537,7 +883,18 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"mirrored_cellular_automata": {
 			"name": "Mirrored Cellular Automata",
@@ -558,7 +915,19 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"pattern"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"decaying_bridge": {
 			"name": "Decaying Bridge",
@@ -571,7 +940,16 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "beginner",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"volumetric_fog_ca": {
 			"name": "Volumetric Fog CA",
@@ -584,7 +962,19 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"line_network_ca": {
 			"name": "Line Network CA",
@@ -597,7 +987,19 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"graph"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"pulsing_ca": {
 			"name": "Pulsing CA",
@@ -607,7 +1009,19 @@
 			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"geometry"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"sierpinski_pyramid": {
 			"name": "Sierpinski Pyramid",
@@ -631,7 +1045,16 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"emergence"
+			],
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"wireworld_circuit": {
 			"name": "Wireworld Circuit",
@@ -645,7 +1068,20 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"visualization"
+			],
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			]
 		},
 		"lenia_continuous": {
 			"name": "Lenia Continuous",
@@ -659,7 +1095,20 @@
 			"map_sequences": [
 				"cellularautomata"
 			],
-			"sequence": "cellularautomata"
+			"sequence": "cellularautomata",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"visualization"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"cellular_automata",
+				"computation"
+			]
 		},
 		"CrosswayCA": {
 			"lookup_name": "CrosswayCA",
@@ -683,7 +1132,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"7_1_elementary_ca_vr": {
 			"lookup_name": "7_1_elementary_ca_vr",
@@ -707,7 +1165,16 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"7_2_game_of_life_vr": {
 			"lookup_name": "7_2_game_of_life_vr",
@@ -731,7 +1198,16 @@
 					22
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"7_3_game_of_life_oop_vr": {
 			"lookup_name": "7_3_game_of_life_oop_vr",
@@ -755,7 +1231,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"7_8_hexagon_ca_vr": {
 			"lookup_name": "7_8_hexagon_ca_vr",
@@ -779,7 +1264,16 @@
 					32
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"CellularAutomata3DStacked": {
 			"lookup_name": "CellularAutomata3DStacked",
@@ -805,7 +1299,17 @@
 					20
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"CellularAutomata3DTree": {
 			"lookup_name": "CellularAutomata3DTree",
@@ -829,7 +1333,17 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		},
 		"CA_sphere": {
 			"lookup_name": "CA_sphere",
@@ -853,7 +1367,16 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"tags": [
+				"cellular_automata"
+			]
 		}
 	}
 }

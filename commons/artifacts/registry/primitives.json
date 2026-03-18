@@ -27,7 +27,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"probability",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"menu": {
 			"lookup_name": "menu",
@@ -51,7 +60,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"origin": {
 			"lookup_name": "origin",
@@ -78,7 +95,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"folding_past": {
 			"lookup_name": "folding_past",
@@ -105,7 +130,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"origami"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"arrow": {
 			"lookup_name": "arrow",
@@ -129,7 +162,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"dgrid": {
 			"lookup_name": "dgrid",
@@ -155,7 +196,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"lightrod": {
 			"lookup_name": "lightrod",
@@ -181,7 +230,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"tetrahedron_edit": {
 			"lookup_name": "tetrahedron_edit",
@@ -205,7 +262,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"graph"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"light_sphere": {
 			"lookup_name": "light_sphere",
@@ -233,7 +299,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"point": {
 			"lookup_name": "point",
@@ -257,7 +331,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"static_point": {
 			"lookup_name": "static_point",
@@ -283,7 +365,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_sphere_point": {
 			"lookup_name": "grab_sphere_point",
@@ -309,7 +399,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_sphere_point_with_color": {
 			"lookup_name": "grab_sphere_point_with_color",
@@ -333,7 +432,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_sphere_point_with_text": {
 			"lookup_name": "grab_sphere_point_with_text",
@@ -357,7 +464,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_sphere_point_snap": {
 			"lookup_name": "grab_sphere_point_snap",
@@ -383,7 +498,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_sphere_point_color_with_text": {
 			"lookup_name": "grab_sphere_point_color_with_text",
@@ -407,7 +530,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"color",
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"interactive_point_origin": {
 			"lookup_name": "interactive_point_origin",
@@ -433,7 +565,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"draw_dot": {
 			"lookup_name": "draw_dot",
@@ -459,7 +599,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"draw_dot_time_domain": {
 			"lookup_name": "draw_dot_time_domain",
@@ -485,7 +633,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"snap_demo": {
 			"lookup_name": "snap_demo",
@@ -509,7 +665,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"snap_wedge_puzzle": {
 			"lookup_name": "snap_wedge_puzzle",
@@ -533,7 +697,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"snap_octahedron_puzzle": {
 			"lookup_name": "snap_octahedron_puzzle",
@@ -559,7 +731,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"snap_tetrahedron_puzzle": {
 			"lookup_name": "snap_tetrahedron_puzzle",
@@ -585,7 +765,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"snap_pyramid_puzzle": {
 			"lookup_name": "snap_pyramid_puzzle",
@@ -611,7 +799,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"snap_triangle_puzzle": {
 			"lookup_name": "snap_triangle_puzzle",
@@ -635,7 +831,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cross_line_puzzle": {
 			"lookup_name": "cross_line_puzzle",
@@ -659,7 +863,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"plus_line_puzzle": {
 			"lookup_name": "plus_line_puzzle",
@@ -685,7 +897,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"parallel_line_puzzle": {
 			"lookup_name": "parallel_line_puzzle",
@@ -711,7 +931,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"triangle_line_puzzle": {
 			"lookup_name": "triangle_line_puzzle",
@@ -737,7 +965,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"quad_line_puzzle": {
 			"lookup_name": "quad_line_puzzle",
@@ -761,7 +997,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"line_demo": {
 			"lookup_name": "line_demo",
@@ -787,7 +1031,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"player_trace": {
 			"lookup_name": "player_trace",
@@ -814,7 +1066,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"dome": {
 			"lookup_name": "dome",
@@ -841,7 +1101,15 @@
 					11
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pythagorean_proof": {
 			"lookup_name": "pythagorean_proof",
@@ -865,7 +1133,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"math"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"draw_triangle_faces": {
 			"lookup_name": "draw_triangle_faces",
@@ -891,7 +1167,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"point_collection": {
 			"lookup_name": "point_collection",
@@ -915,7 +1199,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"line": {
 			"lookup_name": "line",
@@ -941,7 +1233,17 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"interactive",
+				"string",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cross_lines": {
 			"lookup_name": "cross_lines",
@@ -965,7 +1267,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"parallel_lines": {
 			"lookup_name": "parallel_lines",
@@ -991,7 +1301,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"coordinate_lines": {
 			"lookup_name": "coordinate_lines",
@@ -1015,7 +1333,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"plus_lines": {
 			"lookup_name": "plus_lines",
@@ -1039,7 +1365,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cube_lines": {
 			"lookup_name": "cube_lines",
@@ -1065,7 +1399,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grid_lines": {
 			"lookup_name": "grid_lines",
@@ -1091,7 +1433,15 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"line_collection": {
 			"lookup_name": "line_collection",
@@ -1115,7 +1465,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_line": {
 			"lookup_name": "grab_line",
@@ -1139,7 +1497,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_line_pusher": {
 			"lookup_name": "grab_line_pusher",
@@ -1163,7 +1529,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_line_drawer": {
 			"lookup_name": "grab_line_drawer",
@@ -1187,7 +1561,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_line_music": {
 			"lookup_name": "grab_line_music",
@@ -1211,7 +1593,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"sound"
+			],
+			"dev_themes": [
+				"core",
+				"music",
+				"primitives"
+			]
 		},
 		"perspective_lines": {
 			"lookup_name": "perspective_lines",
@@ -1237,7 +1629,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"one_meter_line": {
 			"lookup_name": "one_meter_line",
@@ -1261,7 +1661,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"horizon_plumb_lines": {
 			"lookup_name": "horizon_plumb_lines",
@@ -1285,7 +1693,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"scale_lines": {
 			"lookup_name": "scale_lines",
@@ -1311,7 +1727,15 @@
 					21
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"right_triangle_lines": {
 			"lookup_name": "right_triangle_lines",
@@ -1335,7 +1759,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"animatedcubebuilder": {
 			"lookup_name": "animatedcubebuilder",
@@ -1361,7 +1793,17 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"interactive",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cube_scene": {
 			"lookup_name": "cube_scene",
@@ -1393,7 +1835,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			]
 		},
 		"triangle": {
 			"lookup_name": "triangle",
@@ -1419,7 +1870,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"pythagorean_triangle": {
 			"lookup_name": "pythagorean_triangle",
@@ -1443,7 +1902,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"righttriangle": {
 			"lookup_name": "righttriangle",
@@ -1470,7 +1937,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"lefttriangle": {
 			"lookup_name": "lefttriangle",
@@ -1494,7 +1969,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"sphere_low": {
 			"lookup_name": "sphere_low",
@@ -1520,7 +2003,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"sphere_mid": {
 			"lookup_name": "sphere_mid",
@@ -1546,7 +2037,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"sphere_high": {
 			"lookup_name": "sphere_high",
@@ -1572,7 +2071,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cylinder_low": {
 			"lookup_name": "cylinder_low",
@@ -1596,7 +2103,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cylinder_mid": {
 			"lookup_name": "cylinder_mid",
@@ -1620,7 +2135,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"torus_low": {
 			"lookup_name": "torus_low",
@@ -1644,7 +2167,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"square_pyramid": {
 			"lookup_name": "square_pyramid",
@@ -1668,7 +2199,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"triangular_cupola": {
 			"lookup_name": "triangular_cupola",
@@ -1692,7 +2231,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"interactivetriangle": {
 			"lookup_name": "interactivetriangle",
@@ -1718,7 +2265,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"interactive",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"triangleprofiles": {
 			"lookup_name": "triangleprofiles",
@@ -1744,7 +2300,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"pythagorean_triangle_angles": {
 			"lookup_name": "pythagorean_triangle_angles",
@@ -1770,7 +2334,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"folded_strip": {
 			"lookup_name": "folded_strip",
@@ -1796,7 +2368,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"zigzagprofile": {
 			"lookup_name": "zigzagprofile",
@@ -1820,7 +2400,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"foldedpaper": {
 			"lookup_name": "foldedpaper",
@@ -1844,7 +2433,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"origami"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"quad": {
 			"lookup_name": "quad",
@@ -1870,7 +2468,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"plane": {
 			"lookup_name": "plane",
@@ -1894,7 +2500,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cube": {
 			"lookup_name": "cube",
@@ -1920,7 +2535,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_cube_show": {
 			"lookup_name": "grab_cube_show",
@@ -1944,7 +2567,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"sphere": {
 			"lookup_name": "sphere",
@@ -1970,7 +2601,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"prism": {
 			"lookup_name": "prism",
@@ -1996,7 +2636,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"prism_block": {
 			"lookup_name": "prism_block",
@@ -2024,7 +2673,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"physics"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cylinder": {
 			"lookup_name": "cylinder",
@@ -2048,7 +2706,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"sorting"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cylinder_radials_rings": {
 			"lookup_name": "cylinder_radials_rings",
@@ -2072,7 +2739,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"capsule": {
 			"lookup_name": "capsule",
@@ -2098,7 +2773,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"capsules": {
 			"lookup_name": "capsules",
@@ -2122,7 +2805,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"capsule_radials_rings": {
 			"lookup_name": "capsule_radials_rings",
@@ -2148,7 +2839,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"torus": {
 			"lookup_name": "torus",
@@ -2172,7 +2871,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"torus_radials_rings": {
 			"lookup_name": "torus_radials_rings",
@@ -2198,7 +2906,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"combine_primitives": {
 			"lookup_name": "combine_primitives",
@@ -2222,7 +2938,16 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"combine_torus": {
 			"lookup_name": "combine_torus",
@@ -2246,7 +2971,16 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"combine_portals": {
 			"lookup_name": "combine_portals",
@@ -2272,7 +3006,15 @@
 					10
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"combine_sphere": {
 			"lookup_name": "combine_sphere",
@@ -2296,7 +3038,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"combine_capsule": {
 			"lookup_name": "combine_capsule",
@@ -2320,7 +3070,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"linear_algebra"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"trihedron": {
 			"lookup_name": "trihedron",
@@ -2344,7 +3102,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_trihedron": {
 			"lookup_name": "grab_trihedron",
@@ -2370,7 +3136,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pyramid": {
 			"lookup_name": "pyramid",
@@ -2397,7 +3171,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"pyramid_edit": {
 			"lookup_name": "pyramid_edit",
@@ -2423,7 +3206,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"interactive",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"tetrahedron": {
 			"lookup_name": "tetrahedron",
@@ -2447,7 +3239,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"3d",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_tetrahedron": {
 			"lookup_name": "grab_tetrahedron",
@@ -2471,7 +3273,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"octahedron": {
 			"lookup_name": "octahedron",
@@ -2497,7 +3307,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_octahedron": {
 			"lookup_name": "grab_octahedron",
@@ -2523,7 +3341,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"dodecahedron": {
 			"lookup_name": "dodecahedron",
@@ -2549,7 +3375,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"icosahedron": {
 			"lookup_name": "icosahedron",
@@ -2575,7 +3410,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_dodecahedron": {
 			"lookup_name": "grab_dodecahedron",
@@ -2599,7 +3443,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_icosahedron": {
 			"lookup_name": "grab_icosahedron",
@@ -2623,7 +3475,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"platonic_grabbables": {
 			"lookup_name": "platonic_grabbables",
@@ -2649,7 +3509,15 @@
 					3
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"aalto_vase": {
 			"lookup_name": "aalto_vase",
@@ -2673,7 +3541,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_aalto_vase": {
 			"lookup_name": "grab_aalto_vase",
@@ -2697,7 +3573,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"alessi_tree": {
 			"lookup_name": "alessi_tree",
@@ -2721,7 +3605,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"tree"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_alessi_tree": {
 			"lookup_name": "grab_alessi_tree",
@@ -2745,7 +3638,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"tree"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"editable_curve": {
 			"lookup_name": "editable_curve",
@@ -2769,7 +3670,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"linear_algebra"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"editable_bezier": {
 			"lookup_name": "editable_bezier",
@@ -2793,7 +3702,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"editable_catmull_rom": {
 			"lookup_name": "editable_catmull_rom",
@@ -2817,7 +3734,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"array_translate": {
 			"lookup_name": "array_translate",
@@ -2841,7 +3766,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"array"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"array_rotate": {
 			"lookup_name": "array_rotate",
@@ -2865,7 +3798,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"array"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"array_scale": {
 			"lookup_name": "array_scale",
@@ -2889,7 +3830,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"array"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"glass_planes_empty": {
 			"lookup_name": "glass_planes_empty",
@@ -2913,7 +3862,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"glass_planes_2_5d": {
 			"lookup_name": "glass_planes_2_5d",
@@ -2937,7 +3894,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"folding_cube": {
 			"lookup_name": "folding_cube",
@@ -2961,7 +3927,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"topology"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"folding_cube_interactive": {
 			"lookup_name": "folding_cube_interactive",
@@ -2985,7 +3960,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"origami",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"transform_staircase_spiral": {
 			"lookup_name": "transform_staircase_spiral",
@@ -3009,7 +3994,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"spiral"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"transform_staircase_dna": {
 			"lookup_name": "transform_staircase_dna",
@@ -3033,7 +4026,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"dna"
+			],
+			"dev_themes": [
+				"biology",
+				"core",
+				"primitives"
+			]
 		},
 		"transform_staircase_fibonacci": {
 			"lookup_name": "transform_staircase_fibonacci",
@@ -3057,7 +4059,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"recursion"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"transform_staircase_mobius": {
 			"lookup_name": "transform_staircase_mobius",
@@ -3081,7 +4092,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "expert",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"transform_staircase_showcase": {
 			"lookup_name": "transform_staircase_showcase",
@@ -3105,7 +4124,17 @@
 					5
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"linear_algebra",
+				"recursion"
+			],
+			"dev_themes": [
+				"biology",
+				"core",
+				"primitives"
+			]
 		},
 		"platonic_demo": {
 			"lookup_name": "platonic_demo",
@@ -3129,7 +4158,15 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"diamond": {
 			"lookup_name": "diamond",
@@ -3153,7 +4190,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"bipyramid": {
 			"lookup_name": "bipyramid",
@@ -3179,7 +4225,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"crystalcluster": {
 			"lookup_name": "crystalcluster",
@@ -3203,7 +4257,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"triangularblock": {
 			"lookup_name": "triangularblock",
@@ -3227,7 +4289,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"physics"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"SDFDrawTool": {
 			"lookup_name": "SDFDrawTool",
@@ -3251,7 +4322,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"prismblock": {
 			"lookup_name": "prismblock",
@@ -3275,7 +4354,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"physics"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"truncatedtetrahedron": {
 			"lookup_name": "truncatedtetrahedron",
@@ -3302,7 +4390,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"modernpolysolid": {
 			"lookup_name": "modernpolysolid",
@@ -3326,7 +4422,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"roughrock": {
 			"lookup_name": "roughrock",
@@ -3353,7 +4458,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"crystal": {
 			"lookup_name": "crystal",
@@ -3377,7 +4490,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"diamonds": {
 			"lookup_name": "diamonds",
@@ -3403,7 +4524,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pyramidlong": {
 			"lookup_name": "pyramidlong",
@@ -3429,7 +4559,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"transformation_cube": {
 			"lookup_name": "transformation_cube",
@@ -3456,7 +4594,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"rotating_cube": {
 			"lookup_name": "rotating_cube",
@@ -3485,7 +4632,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"animated_cube": {
 			"lookup_name": "animated_cube",
@@ -3512,7 +4668,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"oscillation_cube": {
 			"lookup_name": "oscillation_cube",
@@ -3536,7 +4700,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"pickup_cube_static": {
 			"lookup_name": "pickup_cube_static",
@@ -3562,7 +4734,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pickup_cube_transforming": {
 			"lookup_name": "pickup_cube_transforming",
@@ -3588,7 +4768,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pickup_cube_rotating": {
 			"lookup_name": "pickup_cube_rotating",
@@ -3614,7 +4802,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"pickup_cube_scaling": {
 			"lookup_name": "pickup_cube_scaling",
@@ -3638,7 +4834,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"combo_cube_visual": {
 			"lookup_name": "combo_cube_visual",
@@ -3662,7 +4866,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"pickup_cube_combo": {
 			"lookup_name": "pickup_cube_combo",
@@ -3686,7 +4898,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cube_with_shader": {
 			"lookup_name": "cube_with_shader",
@@ -3710,7 +4930,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"shader",
+				"simulation"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"scifi_panel_wall": {
 			"lookup_name": "scifi_panel_wall",
@@ -3734,7 +4963,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"level_entrance": {
 			"lookup_name": "level_entrance",
@@ -3758,7 +4995,16 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"string"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"probability_sphere": {
 			"lookup_name": "probability_sphere",
@@ -3785,7 +5031,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"coordinate_axes_xy": {
 			"lookup_name": "coordinate_axes_xy",
@@ -3809,7 +5063,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"sorting"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"cube_projectile_spawner": {
 			"lookup_name": "cube_projectile_spawner",
@@ -3833,7 +5095,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"hazard"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"noisetorus_ex_1": {
 			"lookup_name": "noisetorus_ex_1",
@@ -3857,7 +5127,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"geometry",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"random_object_spawner": {
 			"lookup_name": "random_object_spawner",
@@ -3883,7 +5163,16 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"probability",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"PipeLayout": {
 			"lookup_name": "PipeLayout",
@@ -3907,7 +5196,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"graph",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"kochsnowflake": {
 			"lookup_name": "kochsnowflake",
@@ -3931,7 +5229,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"geometric_crystal": {
 			"lookup_name": "geometric_crystal",
@@ -3955,7 +5261,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"array_visualizer": {
 			"lookup_name": "array_visualizer",
@@ -3982,7 +5296,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"array"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"quantum_dice": {
 			"lookup_name": "quantum_dice",
@@ -4006,7 +5328,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "expert",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"chaos_attractor": {
 			"lookup_name": "chaos_attractor",
@@ -4032,7 +5362,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"tags": [
+				"chaos"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"spatial_compass": {
 			"lookup_name": "spatial_compass",
@@ -4056,7 +5394,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"dimension_lens": {
 			"lookup_name": "dimension_lens",
@@ -4080,7 +5426,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"knowledge_prism": {
 			"lookup_name": "knowledge_prism",
@@ -4104,7 +5458,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"reality_modifier": {
 			"lookup_name": "reality_modifier",
@@ -4128,7 +5490,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"concept_synthesizer": {
 			"lookup_name": "concept_synthesizer",
@@ -4152,7 +5522,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"bucket_of_tulips": {
 			"lookup_name": "bucket_of_tulips",
@@ -4176,7 +5554,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_long_stick": {
 			"lookup_name": "grab_long_stick",
@@ -4202,7 +5588,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"grab_rainbow_stick": {
 			"lookup_name": "grab_rainbow_stick",
@@ -4228,7 +5622,15 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"doublestick": {
 			"lookup_name": "doublestick",
@@ -4252,7 +5654,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cube_scene_drag_points": {
 			"lookup_name": "cube_scene_drag_points",
@@ -4276,7 +5686,15 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"laser_measure": {
 			"lookup_name": "laser_measure",
@@ -4302,7 +5720,15 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"grab_cube": {
 			"lookup_name": "grab_cube",
@@ -4326,7 +5752,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"small_subdivision_cube": {
 			"lookup_name": "small_subdivision_cube",
@@ -4352,7 +5786,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"wood_cube": {
 			"lookup_name": "wood_cube",
@@ -4376,7 +5818,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"queer_cylinder_target": {
 			"lookup_name": "queer_cylinder_target",
@@ -4402,7 +5852,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"lshape": {
 			"lookup_name": "lshape",
@@ -4429,7 +5887,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"arch": {
 			"lookup_name": "arch",
@@ -4453,7 +5919,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"profile_chair": {
 			"lookup_name": "profile_chair",
@@ -4477,7 +5951,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"portal_frame": {
 			"lookup_name": "portal_frame",
@@ -4501,7 +5983,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"rectcube": {
 			"lookup_name": "rectcube",
@@ -4525,7 +6015,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"halocube": {
 			"lookup_name": "halocube",
@@ -4551,7 +6049,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"unitcube": {
 			"lookup_name": "unitcube",
@@ -4575,7 +6081,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"graph"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"star_primitive": {
 			"lookup_name": "star_primitive",
@@ -4601,7 +6116,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"rock_primitive": {
 			"lookup_name": "rock_primitive",
@@ -4625,7 +6148,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"parametric_surface": {
 			"lookup_name": "parametric_surface",
@@ -4649,7 +6180,15 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"mengersponge": {
 			"lookup_name": "mengersponge",
@@ -4673,7 +6212,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"fractal"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"steppedpyramid": {
 			"lookup_name": "steppedpyramid",
@@ -4697,7 +6244,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"bigframe": {
 			"lookup_name": "bigframe",
@@ -4723,7 +6278,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"proceduralrock": {
 			"lookup_name": "proceduralrock",
@@ -4747,7 +6310,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"hollowrock": {
 			"lookup_name": "hollowrock",
@@ -4771,7 +6342,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"rockfactory": {
 			"lookup_name": "rockfactory",
@@ -4795,7 +6374,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"physics",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"rockfactory_gravity": {
 			"lookup_name": "rockfactory_gravity",
@@ -4819,7 +6408,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"dynamic_rock": {
 			"lookup_name": "dynamic_rock",
@@ -4843,7 +6440,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"animation",
+				"physics",
+				"procedural"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"falling_cube": {
 			"lookup_name": "falling_cube",
@@ -4867,7 +6474,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"simple_rock": {
 			"lookup_name": "simple_rock",
@@ -4891,7 +6506,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"geometry"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"rock_scanner": {
 			"lookup_name": "rock_scanner",
@@ -4915,7 +6539,16 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"3d"
+			],
+			"dev_themes": [
+				"core",
+				"primitives"
+			]
 		},
 		"rock_spawner": {
 			"lookup_name": "rock_spawner",
@@ -4939,7 +6572,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"modernchair": {
 			"lookup_name": "modernchair",
@@ -4963,7 +6604,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"cavetest": {
 			"lookup_name": "cavetest",
@@ -4987,7 +6636,15 @@
 					9
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"plus": {
 			"lookup_name": "plus",
@@ -5013,7 +6670,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"trafficcone": {
 			"lookup_name": "trafficcone",
@@ -5037,7 +6702,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"hole_with_cones": {
 			"lookup_name": "hole_with_cones",
@@ -5063,7 +6736,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		},
 		"quest_controller": {
 			"lookup_name": "quest_controller",
@@ -5087,7 +6768,19 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"interactive",
+				"procedural",
+				"simulation",
+				"vr"
+			],
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			]
 		},
 		"sliding_door": {
 			"lookup_name": "sliding_door",
@@ -5111,7 +6804,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"visualization"
+			],
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			]
 		},
 		"elevator_platform": {
 			"lookup_name": "elevator_platform",
@@ -5135,7 +6837,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			]
 		},
 		"translation_demo": {
 			"lookup_name": "translation_demo",
@@ -5159,7 +6870,15 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"tags": [
+				"primitive"
+			]
 		}
 	}
 }

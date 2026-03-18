@@ -23,7 +23,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			]
 		},
 		"vowel_instrument": {
 			"lookup_name": "vowel_instrument",
@@ -42,7 +48,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			]
 		},
 		"vowel_synth": {
 			"lookup_name": "vowel_synth",
@@ -62,7 +74,13 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			]
 		},
 		"vowel_sound_board": {
 			"lookup_name": "vowel_sound_board",
@@ -88,7 +106,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			],
+			"tags": [
+				"speech"
+			]
 		}
 	}
 }

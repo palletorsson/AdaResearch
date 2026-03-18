@@ -8,11 +8,21 @@
 			"scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
-			"tags": ["substrate", "mesh_grammar", "procedural", "universal"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"procedural",
+				"universal"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_seed": {
 			"name": "MeshGrammar — Seed Icosahedron",
@@ -22,11 +32,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "primitives",
-			"tags": ["substrate", "mesh_grammar", "seed", "icosahedron", "primitives"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"seed",
+				"icosahedron",
+				"primitives"
+			],
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives"]
+			"map_sequences": [
+				"primitives"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_extruded_spire": {
 			"name": "MeshGrammar — Extruded Spire",
@@ -36,11 +59,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "primitives",
-			"tags": ["substrate", "mesh_grammar", "extrude", "spire", "primitives"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"extrude",
+				"spire",
+				"primitives"
+			],
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation"]
+			"map_sequences": [
+				"primitives",
+				"transformation"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_inset_pattern": {
 			"name": "MeshGrammar — Inset Pattern",
@@ -50,11 +87,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "primitives",
-			"tags": ["substrate", "mesh_grammar", "inset", "pattern", "primitives"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"inset",
+				"pattern",
+				"primitives"
+			],
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives"]
+			"map_sequences": [
+				"primitives"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_subdivided": {
 			"name": "MeshGrammar — Subdivided Sphere",
@@ -64,11 +114,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "primitives",
-			"tags": ["substrate", "mesh_grammar", "split", "subdivision", "primitives"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"split",
+				"subdivision",
+				"primitives"
+			],
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives", "transformation"]
+			"map_sequences": [
+				"primitives",
+				"transformation"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_nodule_sphere": {
 			"name": "MeshGrammar — Nodule Sphere",
@@ -78,11 +142,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "mesh_grammar", "bulge", "organic", "randomness"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"bulge",
+				"organic",
+				"randomness"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["randomness"]
+			"map_sequences": [
+				"randomness"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_coral_fingers": {
 			"name": "MeshGrammar — Coral Fingers",
@@ -92,11 +169,26 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "mesh_grammar", "tube_branch", "coral", "organic", "lsystems"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"tube_branch",
+				"coral",
+				"organic",
+				"lsystems"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems", "proceduralgeneration"]
+			"map_sequences": [
+				"lsystems",
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_crumpled": {
 			"name": "MeshGrammar — Crumpled Form",
@@ -106,11 +198,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "noise",
-			"tags": ["substrate", "mesh_grammar", "noise", "displacement", "organic"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"noise",
+				"displacement",
+				"organic"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["noise"]
+			"map_sequences": [
+				"noise"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_budding": {
 			"name": "MeshGrammar — Budding Sphere",
@@ -120,11 +225,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "proceduralgeneration",
-			"tags": ["substrate", "mesh_grammar", "extrude", "delete", "composition", "proceduralgeneration"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"extrude",
+				"delete",
+				"composition",
+				"proceduralgeneration"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["proceduralgeneration"]
+			"map_sequences": [
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_branching_coral": {
 			"name": "MeshGrammar — Branching Coral",
@@ -134,11 +253,26 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "fractals",
-			"tags": ["substrate", "mesh_grammar", "recursive", "branching", "coral", "fractals"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"recursive",
+				"branching",
+				"coral",
+				"fractals"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["fractals", "lsystems"]
+			"map_sequences": [
+				"fractals",
+				"lsystems"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_inset_towers": {
 			"name": "MeshGrammar — Inset Towers",
@@ -148,11 +282,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "proceduralgeneration",
-			"tags": ["substrate", "mesh_grammar", "inset", "extrude", "architectural", "proceduralgeneration"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"inset",
+				"extrude",
+				"architectural",
+				"proceduralgeneration"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["proceduralgeneration"]
+			"map_sequences": [
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_detailed_bulge": {
 			"name": "MeshGrammar — Detailed Bulge",
@@ -162,11 +310,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "softbodies",
-			"tags": ["substrate", "mesh_grammar", "split", "bulge", "organic", "softbodies"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"split",
+				"bulge",
+				"organic",
+				"softbodies"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["softbodies"]
+			"map_sequences": [
+				"softbodies"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_noise_sculpture": {
 			"name": "MeshGrammar — Noise Sculpture",
@@ -176,11 +338,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "noise",
-			"tags": ["substrate", "mesh_grammar", "noise", "cellular", "sculpture"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"noise",
+				"cellular",
+				"sculpture"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["noise"]
+			"map_sequences": [
+				"noise"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"grammar",
+				"mesh"
+			]
 		},
 		"mesh_grammar_petal_flower": {
 			"name": "MeshGrammar — Petal Flower",
@@ -190,11 +366,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "mesh_grammar", "petal", "flower", "decoration", "lsystems"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"petal",
+				"flower",
+				"decoration",
+				"lsystems"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems"]
+			"map_sequences": [
+				"lsystems"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_scale_armor": {
 			"name": "MeshGrammar — Scale Armor",
@@ -204,11 +394,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "proceduralgeneration",
-			"tags": ["substrate", "mesh_grammar", "scale_tile", "armor", "decoration", "proceduralgeneration"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"scale_tile",
+				"armor",
+				"decoration",
+				"proceduralgeneration"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["proceduralgeneration"]
+			"map_sequences": [
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_riveted": {
 			"name": "MeshGrammar — Riveted Sphere",
@@ -218,11 +422,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "proceduralgeneration",
-			"tags": ["substrate", "mesh_grammar", "edge_decorate", "composition", "proceduralgeneration"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"edge_decorate",
+				"composition",
+				"proceduralgeneration"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["proceduralgeneration"]
+			"map_sequences": [
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"art",
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_barnacle": {
 			"name": "MeshGrammar — Barnacle Sphere",
@@ -232,11 +450,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "mesh_grammar", "scatter", "barnacle", "randomness"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"scatter",
+				"barnacle",
+				"randomness"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["randomness"]
+			"map_sequences": [
+				"randomness"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_lsystem_tree": {
 			"name": "MeshGrammar — L-System Tree",
@@ -246,11 +477,26 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "mesh_grammar", "lsystem", "tree", "branching", "lsystems"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"lsystem",
+				"tree",
+				"branching",
+				"lsystems"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems", "fractals"]
+			"map_sequences": [
+				"lsystems",
+				"fractals"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_ca_growth": {
 			"name": "MeshGrammar — CA Growth",
@@ -260,11 +506,25 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "cellularautomata",
-			"tags": ["substrate", "mesh_grammar", "cellular_automata", "growth", "cellularautomata"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"cellular_automata",
+				"growth",
+				"cellularautomata"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["cellularautomata"]
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"dev_themes": [
+				"biology",
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_spike_ball": {
 			"name": "MeshGrammar — Spike Ball",
@@ -274,11 +534,24 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "randomness",
-			"tags": ["substrate", "mesh_grammar", "scatter", "spike", "randomness"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"scatter",
+				"spike",
+				"randomness"
+			],
 			"complexity": "intermediate",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["randomness"]
+			"map_sequences": [
+				"randomness"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		},
 		"mesh_grammar_blooming_bulge": {
 			"name": "MeshGrammar — Blooming Bulge",
@@ -288,22 +561,70 @@
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
 			"sequence": "lsystems",
-			"tags": ["substrate", "mesh_grammar", "bulge", "petal", "compound", "lsystems"],
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"bulge",
+				"petal",
+				"compound",
+				"lsystems"
+			],
 			"complexity": "advanced",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["lsystems", "proceduralgeneration"]
+			"map_sequences": [
+				"lsystems",
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural"
+			]
 		}
 	},
 	"sequence_mapping": {
-		"primitives": ["mesh_grammar_seed", "mesh_grammar_extruded_spire", "mesh_grammar_inset_pattern", "mesh_grammar_subdivided"],
-		"transformation": ["mesh_grammar_extruded_spire", "mesh_grammar_subdivided"],
-		"noise": ["mesh_grammar_crumpled", "mesh_grammar_noise_sculpture"],
-		"randomness": ["mesh_grammar_nodule_sphere", "mesh_grammar_barnacle", "mesh_grammar_spike_ball"],
-		"cellularautomata": ["mesh_grammar_ca_growth"],
-		"fractals": ["mesh_grammar_branching_coral", "mesh_grammar_lsystem_tree"],
-		"lsystems": ["mesh_grammar_coral_fingers", "mesh_grammar_petal_flower", "mesh_grammar_blooming_bulge", "mesh_grammar_lsystem_tree"],
-		"proceduralgeneration": ["mesh_grammar_budding", "mesh_grammar_inset_towers", "mesh_grammar_scale_armor", "mesh_grammar_riveted", "mesh_grammar_blooming_bulge"],
-		"softbodies": ["mesh_grammar_detailed_bulge"]
+		"primitives": [
+			"mesh_grammar_seed",
+			"mesh_grammar_extruded_spire",
+			"mesh_grammar_inset_pattern",
+			"mesh_grammar_subdivided"
+		],
+		"transformation": [
+			"mesh_grammar_extruded_spire",
+			"mesh_grammar_subdivided"
+		],
+		"noise": [
+			"mesh_grammar_crumpled",
+			"mesh_grammar_noise_sculpture"
+		],
+		"randomness": [
+			"mesh_grammar_nodule_sphere",
+			"mesh_grammar_barnacle",
+			"mesh_grammar_spike_ball"
+		],
+		"cellularautomata": [
+			"mesh_grammar_ca_growth"
+		],
+		"fractals": [
+			"mesh_grammar_branching_coral",
+			"mesh_grammar_lsystem_tree"
+		],
+		"lsystems": [
+			"mesh_grammar_coral_fingers",
+			"mesh_grammar_petal_flower",
+			"mesh_grammar_blooming_bulge",
+			"mesh_grammar_lsystem_tree"
+		],
+		"proceduralgeneration": [
+			"mesh_grammar_budding",
+			"mesh_grammar_inset_towers",
+			"mesh_grammar_scale_armor",
+			"mesh_grammar_riveted",
+			"mesh_grammar_blooming_bulge"
+		],
+		"softbodies": [
+			"mesh_grammar_detailed_bulge"
+		]
 	}
 }

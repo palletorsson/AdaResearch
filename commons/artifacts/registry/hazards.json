@@ -20,6 +20,11 @@
 			],
 			"map_sequences": [
 				"hazards"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
 			]
 		},
 		"gridagent": {
@@ -36,6 +41,16 @@
 				"hazards",
 				"softbodies",
 				"testmaps"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"hazard",
+				"simulation"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"armadillo_droideka": {
@@ -47,6 +62,15 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"hazard",
+				"physics"
+			],
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -62,7 +86,16 @@
 				"hazards",
 				"testmaps"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "intermediate",
+			"tags": [
+				"hazards",
+				"swarm"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"origami_droideka": {
 			"name": "Origami Droideka",
@@ -75,7 +108,16 @@
 			"map_sequences": [
 				"hazards"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "intermediate",
+			"tags": [
+				"hazards",
+				"origami"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"waterbomb_enemy": {
 			"name": "Waterbomb Enemy",
@@ -86,6 +128,16 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"hazard",
+				"origami",
+				"physics"
+			],
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -102,7 +154,15 @@
 				"randomness",
 				"testmaps"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "intermediate",
+			"tags": [
+				"hazard"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"kresling_spire": {
 			"name": "Kresling Spire",
@@ -116,7 +176,16 @@
 				"hazards",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "beginner",
+			"tags": [
+				"hazards",
+				"origami"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"scissor_stalker": {
 			"name": "Scissor Stalker",
@@ -130,7 +199,15 @@
 				"hazards",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "intermediate",
+			"tags": [
+				"hazard"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"kaleidocycle_enemy": {
 			"name": "Kaleidocycle",
@@ -144,7 +221,16 @@
 				"hazards",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"complexity": "intermediate",
+			"tags": [
+				"color",
+				"hazard"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"proximity_spawner": {
 			"name": "Proximity Spawner",
@@ -155,6 +241,14 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"hazard"
+			],
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -168,6 +262,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"geometry",
+				"hazards"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"plasma_critter": {
@@ -180,6 +283,16 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"hazards",
+				"interactive"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
 			]
 		},
 		"stick_tool": {
@@ -191,6 +304,16 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"tools",
+				"vr"
+			],
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -204,6 +327,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"hazards",
+				"procedural"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"hazards_demo": {
@@ -216,6 +348,15 @@
 			"map_ready": false,
 			"map_sequences": [
 				"randomness"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"demos",
+				"hazard"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"waterbomb_hopper": {
@@ -227,6 +368,15 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"hazard",
+				"origami"
+			],
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -248,6 +398,10 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"becoming_catalyst": {
@@ -275,6 +429,10 @@
 				"hazards",
 				"lab",
 				"testmaps"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"loving_triangle": {
@@ -302,6 +460,10 @@
 			"map_sequences": [
 				"hazards",
 				"lab"
+			],
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"origami_pyre_plane": {
@@ -322,6 +484,11 @@
 			"map_ready": true,
 			"sequence": "transformation",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -349,7 +516,12 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"two_leg_critter": {
 			"name": "Two Leg Critter",
@@ -376,7 +548,12 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"three_leg_critter": {
 			"name": "Three Leg Critter",
@@ -403,7 +580,12 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"four_leg_critter": {
 			"name": "Four Leg Critter",
@@ -430,7 +612,12 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"five_leg_critter": {
 			"name": "Five Leg Critter",
@@ -457,7 +644,12 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"six_leg_critter": {
 			"name": "Six Leg Critter",
@@ -484,7 +676,13 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"art",
+				"gameplay",
+				"hazards"
+			]
 		},
 		"octapod_ik": {
 			"name": "Octapod IK",
@@ -511,7 +709,12 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"blockbuilderentity": {
 			"name": "Block Builder Entity",
@@ -536,7 +739,12 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"techstrider": {
 			"name": "Tech Strider",
@@ -562,7 +770,13 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"art",
+				"gameplay",
+				"hazards"
+			]
 		},
 		"tentacle_cube": {
 			"name": "Tentacle Cube",
@@ -579,6 +793,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -606,7 +826,12 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			]
 		},
 		"edible_mushroom": {
 			"name": "Edible Mushroom",
@@ -624,6 +849,11 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -644,6 +874,13 @@
 			"sequence": "array_tutorial",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"education",
+				"gameplay",
+				"hazards"
 			]
 		},
 		"chromatic_field": {
@@ -662,6 +899,12 @@
 			"map_ready": true,
 			"sequence": "color",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"education",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -682,6 +925,11 @@
 			"sequence": "swarmintelligence",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"bricoleur_golem": {
@@ -700,6 +948,12 @@
 			"map_ready": true,
 			"sequence": "bricolage",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "beginner",
+			"dev_themes": [
+				"education",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -720,6 +974,12 @@
 			"sequence": "cellularautomata",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"gameplay",
+				"hazards"
 			]
 		},
 		"hull_crusher": {
@@ -739,6 +999,12 @@
 			"sequence": "computationalgeometry",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "beginner",
+			"dev_themes": [
+				"education",
+				"gameplay",
+				"hazards"
 			]
 		},
 		"data_tree_walker": {
@@ -757,6 +1023,11 @@
 			"map_ready": true,
 			"sequence": "datastructures",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -778,6 +1049,12 @@
 			"sequence": "foundationscrisis",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"philosophy"
 			]
 		},
 		"fractal_hydra": {
@@ -797,6 +1074,11 @@
 			"sequence": "fractals",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "beginner",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"grammar_markov": {
@@ -815,6 +1097,11 @@
 			"map_ready": true,
 			"sequence": "grammar_systems",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -836,6 +1123,11 @@
 			"sequence": "graphtheory",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"tesseract_phaser": {
@@ -856,6 +1148,11 @@
 			"sequence": "higher_dimensions",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"joint_articulator": {
@@ -874,6 +1171,12 @@
 			"map_ready": true,
 			"sequence": "joints",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -895,6 +1198,11 @@
 			"sequence": "lsystems",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"gradient_hunter": {
@@ -913,6 +1221,12 @@
 			"map_ready": true,
 			"sequence": "machinelearning",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"education",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -934,6 +1248,11 @@
 			"sequence": "wavefunctions",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"escher_stairwalker": {
@@ -954,6 +1273,11 @@
 			"sequence": "artmathematics",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"mesh_morpher": {
@@ -972,6 +1296,11 @@
 			"map_ready": true,
 			"sequence": "meshes",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "expert",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -993,6 +1322,11 @@
 			"sequence": "softbodies",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"collision_crasher": {
@@ -1012,6 +1346,11 @@
 			"map_ready": true,
 			"sequence": "physicssimulation",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -1033,6 +1372,11 @@
 			"sequence": "recursiveemergence",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"maze_spinner": {
@@ -1053,6 +1397,11 @@
 			"sequence": "proceduralgeneration",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"constraint_web": {
@@ -1071,6 +1420,11 @@
 			"map_ready": true,
 			"sequence": "constraint_solvers",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -1091,6 +1445,11 @@
 			"sequence": "isosurfaces",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"noise_field": {
@@ -1109,6 +1468,11 @@
 			"map_ready": true,
 			"sequence": "noise",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -1130,6 +1494,11 @@
 			"sequence": "patterngeneration",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"resonance_chamber": {
@@ -1150,6 +1519,12 @@
 			"sequence": "proceduralaudio",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"music"
 			]
 		},
 		"spatial_voronoi": {
@@ -1169,6 +1544,12 @@
 			"map_ready": true,
 			"sequence": "spatial_partitioning",
 			"map_sequences": [
+				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"biology",
+				"gameplay",
 				"hazards"
 			]
 		},
@@ -1190,6 +1571,11 @@
 			"sequence": "particles",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
 			]
 		},
 		"qfep_calibrator": {
@@ -1210,6 +1596,12 @@
 			"sequence": "qfeplaboratory",
 			"map_sequences": [
 				"hazards"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
 			]
 		}
 	}

@@ -12,7 +12,17 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "beginner",
+			"tags": [
+				"transforms",
+				"visualization"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"y_translation_cube": {
 			"name": "Y-Translation Cube",
@@ -25,7 +35,18 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"transforms",
+				"visualization"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"z_translation_cube": {
 			"name": "Z-Translation Cube",
@@ -38,7 +59,18 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"transforms",
+				"visualization"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"axis_translation_cube": {
 			"name": "Axis Translation Cube",
@@ -49,7 +81,17 @@
 			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"pattern",
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"translation_cube_demo": {
 			"name": "Translation Cube Demo",
@@ -70,7 +112,17 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "beginner",
+			"tags": [
+				"3d",
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"boolean_tunnel": {
 			"name": "Boolean Tunnel",
@@ -98,7 +150,16 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "beginner",
+			"tags": [
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"transformation_workbench": {
 			"name": "Transformation Workbench",
@@ -122,7 +183,19 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "advanced",
+			"tags": [
+				"linear_algebra",
+				"transforms",
+				"vr"
+			],
+			"dev_themes": [
+				"biology",
+				"education",
+				"geometry",
+				"math"
+			]
 		},
 		"rotatescalecubes": {
 			"name": "Rotate Scale Cubes",
@@ -143,7 +216,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"shear_matrix_demo": {
 			"name": "Shear Matrix Demo",
@@ -157,7 +239,18 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "advanced",
+			"tags": [
+				"linear_algebra",
+				"matrix",
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"homogeneous_coordinates": {
 			"name": "Homogeneous Coordinates",
@@ -171,7 +264,19 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"color",
+				"linear_algebra",
+				"transforms"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"rotation_gimbal": {
 			"name": "Rotation Gimbal",
@@ -185,7 +290,19 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "advanced",
+			"tags": [
+				"linear_algebra",
+				"topology",
+				"transforms",
+				"vr"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"transform_composition": {
 			"name": "Transform Composition",
@@ -199,7 +316,19 @@
 			"map_sequences": [
 				"transformation"
 			],
-			"sequence": "transformation"
+			"sequence": "transformation",
+			"complexity": "advanced",
+			"tags": [
+				"interactive",
+				"linear_algebra",
+				"transforms",
+				"vr"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"spin": {
 			"lookup_name": "spin",
@@ -225,7 +354,16 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"tags": [
+				"transform"
+			]
 		},
 		"toruscylinder": {
 			"lookup_name": "toruscylinder",
@@ -251,7 +389,16 @@
 					6
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		},
 		"floor_tiles": {
 			"lookup_name": "floor_tiles",
@@ -275,7 +422,16 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"tags": [
+				"transform"
+			]
 		},
 		"carousel_cake": {
 			"lookup_name": "carousel_cake",
@@ -301,7 +457,16 @@
 					9
 				],
 				"size_group": "environment"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"tags": [
+				"transform"
+			]
 		},
 		"scaleme": {
 			"lookup_name": "scaleme",
@@ -325,7 +490,16 @@
 					1
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
+			"tags": [
+				"transform"
+			]
 		},
 		"vector_field": {
 			"lookup_name": "vector_field",
@@ -351,7 +525,16 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"vector"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			]
 		}
 	}
 }
