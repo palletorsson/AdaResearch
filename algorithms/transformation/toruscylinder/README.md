@@ -1,36 +1,39 @@
 # Torus Cylinder
 
-A minimal animated scene pairing a spinning torus with a vertically oscillating cylinder. The artifact teaches **basic 3D transformations in motion** -- continuous rotation around an axis and sinusoidal translation -- as the two simplest building blocks of procedural animation.
+Animated 3D transformation demonstration pairing a continuously rotating torus with a sinusoidally oscillating cylinder. An ImmediateMesh motion trail traces the cylinder's path, making the sine wave visible in space.
 
 ## Concept Taught
 
-**Rotation and periodic translation** are the two most fundamental animated transformations. The torus demonstrates constant angular velocity around the Y-axis (`rotation.y += delta * speed`), while the cylinder demonstrates simple harmonic motion along the Y-axis (`sin(time * speed) * range`). Together they show how a static scene becomes dynamic through per-frame transform updates.
+**Rotation, periodic translation, and optional scale pulsing** are the fundamental animated transformations. The torus demonstrates constant angular velocity around the Y-axis, the cylinder demonstrates simple harmonic motion, and the motion trail shows the accumulated trajectory as a fading line strip. Together they show how per-frame transform updates create dynamic scenes.
 
 ## How It Works
 
-1. The scene expects two child `MeshInstance3D` nodes: `TorusMesh` and `CylinderMesh`, plus a `WorldEnvironment` node.
-2. Each frame, the torus's Y-rotation is incremented by `delta * 0.5` radians, producing smooth continuous spin.
-3. The cylinder's Y-position is set to `sin(time * 1.5) * 3.0`, making it bob up and down with a period of roughly 4 seconds and an amplitude of 3 units.
-4. `time_elapsed` accumulates delta to drive the sine function.
+1. `_ready()` procedurally creates a `TorusMesh` and a `CylinderMesh` with configurable sizes and colors.
+2. Each frame, the torus rotates by `delta * torus_rotation_speed` and optionally pulses its scale.
+3. The cylinder's Y-position follows `sin(time * cylinder_osc_speed) * cylinder_osc_range`.
+4. When `show_trail` is enabled, the cylinder's position is recorded and drawn as a fading `PRIMITIVE_LINE_STRIP` using ImmediateMesh with per-vertex alpha for a fade-in effect.
 
 ## Parameters
 
-This script has no `@export` parameters. Constants are hard-coded:
-
-| Constant | Value | Description |
-|----------|-------|-------------|
-| Torus rotation speed | `0.5` rad/s | How fast the torus spins |
-| Cylinder oscillation speed | `1.5` | Frequency multiplier for the sine wave |
-| Cylinder oscillation range | `3.0` | Peak amplitude of the vertical bob |
-
-## Features
-
-- Continuous Y-axis rotation on the torus mesh.
-- Sinusoidal vertical oscillation on the cylinder mesh.
-- Minimal code demonstrating the core `_process(delta)` animation pattern.
-- Scene-tree-based setup using `@onready` node references.
+| Export | Type | Default | Description |
+|--------|------|---------|-------------|
+| `torus_rotation_speed` | float | 0.5 | Torus Y-rotation speed (rad/s) |
+| `torus_scale_pulse` | float | 0.0 | Scale breathing amplitude (0 = off) |
+| `torus_scale_pulse_speed` | float | 1.0 | Scale breathing frequency |
+| `torus_color` | Color | pink | Torus material color |
+| `torus_radius` | float | 1.0 | Torus outer size factor |
+| `cylinder_osc_speed` | float | 1.5 | Oscillation frequency multiplier |
+| `cylinder_osc_range` | float | 1.5 | Peak vertical amplitude |
+| `cylinder_color` | Color | purple | Cylinder material color |
+| `cylinder_radius` | float | 0.3 | Cylinder top radius |
+| `cylinder_height` | float | 1.2 | Cylinder height |
+| `show_trail` | bool | true | Draw the motion trail |
+| `trail_length` | int | 120 | Number of trail sample points |
+| `trail_color` | Color | light blue | Trail line color with alpha |
 
 ## Files
 
-- `toruscylinder.gd` -- Main script: torus rotation and cylinder oscillation.
-- `toruscylinder.tscn` -- Scene file containing TorusMesh, CylinderMesh, and WorldEnvironment nodes.
+| File | Description |
+|------|-------------|
+| `toruscylinder.gd` | Main script: mesh creation, animation, ImmediateMesh trail |
+| `toruscylinder.tscn` | Minimal scene wrapping the script |

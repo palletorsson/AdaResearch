@@ -1,39 +1,45 @@
 # Random Lines
 
-A simple visualization that spawns a set of lines with randomly positioned endpoints within a 3D volume. Each line uses the project's shared interactive line primitive, making the endpoints grabbable in VR. The artifact demonstrates random line segment generation in three-dimensional space.
+Self-contained random line segment generator using ImmediateMesh. Supports three spatial distributions (uniform, Gaussian, clustered) and three color modes (solid, golden-ratio rainbow, length gradient) to demonstrate how probability distributions shape geometric configurations.
 
 ## Concept Taught
 
-Random line segments are a fundamental geometric primitive in computational geometry and stochastic geometry. This artifact teaches how random geometric objects are constructed by sampling their defining parameters -- in this case, two independent random points that determine a line segment. The result illustrates concepts like random graphs (connecting random points), spatial density, and the visual difference between structured and unstructured geometric arrangements. In VR, learners can grab and rearrange the endpoints, exploring how individual changes affect the overall random configuration.
+**Random geometric sampling and probability distributions.** Line segments are constructed by sampling two independent random points. Switching between uniform, Gaussian, and clustered distributions shows how the underlying probability distribution dramatically changes the visual density and structure of the result. The length-gradient color mode reveals the statistical distribution of segment lengths.
 
 ## How It Works
 
-1. **Line scene loading** -- The script preloads `line.tscn` from the commons primitives library, which provides an interactive line with two grabbable endpoint spheres connected by a visual segment.
-2. **Random endpoint generation** -- For each of `num_lines` lines:
-   - The line scene is instantiated and added as a child
-   - The `lineContainer` node is accessed, containing two endpoint nodes (`GrabSphere` and `GrabSphere2`)
-   - Each endpoint receives a random position uniformly distributed within the volume defined by `area_size`, centered at the origin
-3. **Connection refresh** -- If the line container has a `refresh_connections` method, it is called (deferred) to update the visual connection between the newly positioned endpoints.
-4. **Initialization** -- `randomize()` is called to seed the RNG, ensuring different configurations each run.
+1. `_ready()` creates an `ImmediateMesh` and generates `num_lines` line segments.
+2. Each line's endpoints are sampled according to the selected `distribution`:
+   - **Uniform (0):** endpoints uniformly distributed within `area_size`.
+   - **Gaussian (1):** endpoints drawn from a centered normal distribution (sigma = area_size/4), clamped to bounds.
+   - **Clustered (2):** `cluster_count` random centers are chosen, then endpoints are sampled near a randomly picked center with spread controlled by `cluster_spread`.
+3. Colors are assigned per `color_mode`:
+   - **Single (0):** all lines use `base_color`.
+   - **Rainbow (1):** golden-ratio hue spacing for perceptually distinct colors.
+   - **Length gradient (2):** short lines are green (`short_color`), long lines are red (`long_color`).
+4. When `animate` is enabled, endpoints drift with random velocities and bounce off the bounding box walls.
+5. An optional wireframe bounding box shows the sampling volume.
 
 ## Parameters
 
 | Export | Type | Default | Description |
 |--------|------|---------|-------------|
-| `num_lines` | int | 20 | Number of random lines to spawn |
-| `area_size` | Vector3 | (2.0, 2.0, 2.0) | Size of the volume for random endpoint placement |
-
-## Features
-
-- Configurable number of random line segments
-- Each line uses the shared interactive line primitive with grabbable endpoints
-- Endpoints are independently randomized within a configurable 3D volume
-- VR-interactive: endpoints can be grabbed and repositioned
-- Deferred connection refresh ensures proper visual updates
+| `num_lines` | int | 40 | Number of line segments |
+| `area_size` | Vector3 | (2, 2, 2) | Bounding volume for endpoint sampling |
+| `distribution` | int | 0 | 0=uniform, 1=Gaussian, 2=clustered |
+| `cluster_count` | int | 3 | Number of cluster centers (distribution=2) |
+| `cluster_spread` | float | 0.4 | Gaussian spread around cluster centers |
+| `color_mode` | int | 2 | 0=single, 1=rainbow, 2=length gradient |
+| `base_color` | Color | light blue | Color for single-color mode |
+| `short_color` | Color | green | Short-line color in gradient mode |
+| `long_color` | Color | red | Long-line color in gradient mode |
+| `animate` | bool | false | Enable drifting endpoint animation |
+| `drift_speed` | float | 0.15 | Endpoint drift velocity |
+| `show_bounding_box` | bool | true | Draw wireframe bounding box |
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `randomlines.gd` | Main script -- line instantiation and random endpoint placement |
-| `randomlines.tscn` | Scene file |
+| `randomlines.gd` | Main script: ImmediateMesh line generation, distributions, animation |
+| `randomlines.tscn` | Minimal scene wrapping the script |

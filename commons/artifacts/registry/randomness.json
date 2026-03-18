@@ -307,27 +307,42 @@
 			]
 		},
 		"randomlines": {
-			"name": "randomlines",
+			"name": "Random Lines",
 			"lookup_name": "randomlines",
-			"description": "Spawns multiple interactive line rigs and randomly positions their grab endpoints in 3D space.",
+			"description": "ImmediateMesh random line segments with 3 distributions (uniform/Gaussian/clustered), 3 color modes (solid/golden-ratio/length-gradient), optional drift animation and bounding box. Config: num_lines, area_size_x/y/z, distribution, cluster_count, cluster_spread, color_mode, animate, drift_speed, show_bounding_box",
 			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
-			"category": "primitives",
+			"category": "procedural",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
 			],
 			"sequence": "randomness",
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			},
 			"complexity": "beginner",
 			"tags": [
 				"3d",
-				"interactive",
-				"primitives",
-				"vr"
+				"procedural",
+				"probability",
+				"visualization"
 			],
 			"dev_themes": [
 				"probability",
-				"randomness"
+				"randomness",
+				"statistics"
 			]
 		},
 		"bubbles_random": {

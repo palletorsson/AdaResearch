@@ -1800,34 +1800,37 @@
 		},
 		"fetishtorus": {
 			"lookup_name": "fetishtorus",
-			"name": "fetishtorus",
-			"description": "fetishtorus",
+			"name": "Fetish Torus",
+			"description": "Parametric dual-torus with fluid shader-driven color cycling and mirror-black contrast. Config: major_radius, minor_radius, ring_count, segment_count, rotation_speed, inner_color_speed, outer_color_speed, gradient_spread, surface_metallic, surface_roughness, dual_torus, second_torus_tilt",
 			"scene": "res://algorithms/primitives/fetishtorus/fetishtorus.tscn",
-			"category": "unknown",
+			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [],
 			"footprint": [
-				1,
-				7,
-				13
+				2,
+				2,
+				2
 			],
-			"size_group": "world_scale",
+			"size_group": "compact",
 			"parameters": {
 				"footprint": [
-					1,
-					7,
-					13
+					2,
+					2,
+					2
 				],
-				"size_group": "world_scale"
+				"size_group": "compact"
 			},
-			"complexity": "beginner",
+			"complexity": "intermediate",
 			"dev_themes": [
-				"algorithms",
-				"misc"
+				"geometry",
+				"shaders",
+				"primitives"
 			],
 			"tags": [
-				"algorithm"
+				"procedural",
+				"shader",
+				"animation"
 			]
 		},
 		"booleans": {

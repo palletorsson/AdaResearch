@@ -367,32 +367,35 @@
 		},
 		"toruscylinder": {
 			"lookup_name": "toruscylinder",
-			"name": "toruscylinder",
-			"description": "Cartesian coordinate system, x y z godot",
+			"name": "Torus Cylinder",
+			"description": "Animated transformation demo: rotating torus + oscillating cylinder with ImmediateMesh sine-wave motion trail. Config: torus_rotation_speed, torus_scale_pulse, torus_color, torus_radius, cylinder_osc_speed, cylinder_osc_range, cylinder_color, show_trail, trail_length",
 			"scene": "res://algorithms/transformation/toruscylinder/toruscylinder.tscn",
-			"category": "unknown",
+			"category": "transforms",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
 				"transformation"
 			],
+			"sequence": "transformation",
 			"footprint": [
 				3,
-				5,
-				6
+				3,
+				3
 			],
-			"size_group": "environment",
+			"size_group": "standard",
 			"parameters": {
 				"footprint": [
 					3,
-					5,
-					6
+					3,
+					3
 				],
-				"size_group": "environment"
+				"size_group": "standard"
 			},
-			"complexity": "intermediate",
+			"complexity": "beginner",
 			"tags": [
-				"simulation"
+				"animation",
+				"transforms",
+				"visualization"
 			],
 			"dev_themes": [
 				"geometry",
