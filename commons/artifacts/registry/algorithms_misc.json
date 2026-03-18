@@ -242,7 +242,7 @@
 			"lookup_name": "simulated_annealing",
 			"scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
 			"name": "Simulated Annealing",
-			"description": "Optimization inspired by metallurgy — accept worse solutions early (high temperature) to escape local minima, then cool down to converge. Random exploration becoming focused refinement.",
+			"description": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
 			"category": "algorithms",
 			"complexity": "intermediate",
 			"tags": [
@@ -250,7 +250,10 @@
 				"optimization",
 				"temperature",
 				"metaheuristic",
-				"local_minimum"
+				"local_minimum",
+				"adaptive_cooling",
+				"basin_hopping",
+				"acceptance_probability"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -261,7 +264,18 @@
 					18,
 					13
 				],
-				"size_group": "world_scale"
+				"size_group": "world_scale",
+				"configurable": [
+					"initial_temperature",
+					"cooling_rate",
+					"cooling_schedule",
+					"problem_type",
+					"adaptive_enabled",
+					"target_acceptance_rate",
+					"basin_hop_enabled",
+					"hop_strength",
+					"step_interval"
+				]
 			},
 			"dev_themes": [
 				"algorithms",
