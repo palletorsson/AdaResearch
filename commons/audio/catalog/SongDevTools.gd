@@ -50,6 +50,7 @@ var _stop_btn: Button
 var _loop_btn: Button
 var _export_wav_btn: Button
 var _export_midi_btn: Button
+var _validate_btn: Button
 var _section_dropdown: OptionButton
 var _reference_mix_toggle: CheckBox
 var _reference_mix_mode: bool = true
@@ -713,7 +714,25 @@ func _setup_ui():
 	analyze_btn.pressed.connect(_analyze_current_track)
 	_style_button_modern(analyze_btn, Color(0.25, 0.35, 0.45))
 	transport.add_child(analyze_btn)
-	
+
+	# Validate button (current song)
+	var validate_btn = Button.new()
+	validate_btn.text = "✓ Validate"
+	validate_btn.disabled = true
+	validate_btn.custom_minimum_size = Vector2(80, 36)
+	validate_btn.pressed.connect(_validate_current_song)
+	_style_button_modern(validate_btn, Color(0.3, 0.4, 0.5))
+	transport.add_child(validate_btn)
+	_validate_btn = validate_btn
+
+	# Validate All button
+	var validate_all_btn = Button.new()
+	validate_all_btn.text = "✓ All"
+	validate_all_btn.custom_minimum_size = Vector2(60, 36)
+	validate_all_btn.pressed.connect(_validate_all_songs)
+	_style_button_modern(validate_all_btn, Color(0.25, 0.35, 0.45))
+	transport.add_child(validate_all_btn)
+
 	# Export WAV button
 	_export_wav_btn = Button.new()
 	_export_wav_btn.text = "💾 WAV"
@@ -3369,8 +3388,9 @@ func _generate_and_play(song_id: String):
 	_stop_btn.disabled = false
 	_export_wav_btn.disabled = false
 	_export_midi_btn.disabled = false
+	_validate_btn.disabled = false
 	_enable_buttons()
-	
+
 	# Load timeline metadata
 	_load_timeline_for_song(song_id, stream)
 
@@ -3538,6 +3558,37 @@ func _stop_song():
 	_timeline.set_playing(false)
 	_update_layer_mix_perf_label()
 	_dispatch_transport_state(false, 0.0)
+
+
+func _validate_current_song() -> void:
+	"""Validate the current song's soundbank parity"""
+	if _current_song.is_empty():
+		_status_label.text = "No song selected"
+		return
+
+	var result := SongSpecValidator.validate_song(_current_song)
+	if result.valid:
+		_status_label.text = "Validation PASS: %s" % _current_song
+	else:
+		var errors := ", ".join(result.errors)
+		_status_label.text = "Validation FAIL: %s" % errors
+	print(result.summary())
+
+
+func _validate_all_songs() -> void:
+	"""Validate all songs and print report"""
+	_status_label.text = "Validating all songs..."
+	var report := SongSpecValidator.generate_report()
+	print(report)
+	var results := SongSpecValidator.validate_all_songs()
+	var pass_count := 0
+	var fail_count := 0
+	for r in results:
+		if r.valid:
+			pass_count += 1
+		else:
+			fail_count += 1
+	_status_label.text = "Validation: %d PASS, %d FAIL (see console)" % [pass_count, fail_count]
 
 
 func _analyze_current_track():
