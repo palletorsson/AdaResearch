@@ -19,10 +19,20 @@
 				"sequence_length": "Steps to generate (default 20)",
 				"step_interval": "Time between transitions (default 1.5s)"
 			},
-			"tags": ["markov", "probability", "stochastic", "grammar", "procedural"],
+			"tags": [
+				"markov",
+				"probability",
+				"stochastic",
+				"grammar",
+				"procedural"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["grammar_systems"]
+			"map_sequences": [
+				"grammar_systems",
+				"patterngeneration",
+				"proceduralgeneration_all"
+			]
 		},
 		"markov_chains_tree": {
 			"lookup_name": "markov_chains_tree",
@@ -44,17 +54,34 @@
 				"animate_growth": "Show growth animation",
 				"add_leaves": "Add leaf meshes at branch tips"
 			},
-			"tags": ["markov", "tree", "growth", "procedural", "organic", "grammar"],
+			"tags": [
+				"markov",
+				"tree",
+				"growth",
+				"procedural",
+				"organic",
+				"grammar"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["grammar_systems"]
+			"map_sequences": [
+				"grammar_systems",
+				"proceduralgeneration_all"
+			]
 		}
 	},
 	"sequence_mapping": {
-		"grammar_systems": ["markov_chains", "markov_chains_tree"]
+		"grammar_systems": [
+			"markov_chains",
+			"markov_chains_tree"
+		]
 	},
 	"theoretical_connections": {
-		"stochastic_processes": ["markov_chains"],
-		"organic_generation": ["markov_chains_tree"]
+		"stochastic_processes": [
+			"markov_chains"
+		],
+		"organic_generation": [
+			"markov_chains_tree"
+		]
 	}
 }

@@ -97,7 +97,10 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "foundationscrisis",
+        "testmaps"
+      ]
     },
     "elliptic_surface": {
       "lookup_name": "elliptic_surface",
@@ -115,7 +118,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "foundationscrisis"
+      ]
     },
     "hyperbolic_surface": {
       "lookup_name": "hyperbolic_surface",
@@ -134,7 +139,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "foundationscrisis"
+      ]
     },
     "riemann_sphere": {
       "lookup_name": "riemann_sphere",
@@ -153,7 +160,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "foundationscrisis"
+      ]
     },
     "mobius_world": {
       "lookup_name": "mobius_world",
@@ -163,7 +172,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "fractals"
+      ],
       "footprint": [
         1,
         1,
@@ -179,7 +190,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralgeneration_all"
+      ],
       "footprint": [
         1,
         21,
@@ -243,7 +256,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "softbodies"
+      ],
       "footprint": [
         1,
         1,
@@ -259,7 +274,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralgeneration",
+        "proceduralgeneration_all"
+      ],
       "footprint": [
         1,
         6,
@@ -275,7 +293,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralgeneration",
+        "proceduralgeneration_all"
+      ],
       "footprint": [
         50,
         21,

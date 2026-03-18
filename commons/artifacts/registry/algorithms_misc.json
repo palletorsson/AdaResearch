@@ -42,7 +42,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "testmaps"
+      ]
     },
     "konigsberg_bridge": {
       "lookup_name": "konigsberg_bridge",
@@ -61,7 +63,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "testmaps"
+      ]
     },
     "network_flow_visualization": {
       "lookup_name": "network_flow_visualization",
@@ -80,7 +84,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "testmaps"
+      ]
     },
     "levenshtein_distance": {
       "lookup_name": "levenshtein_distance",
@@ -134,7 +140,10 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "machinelearning",
+        "testmaps"
+      ]
     },
     "newton_raphson_visualization": {
       "lookup_name": "newton_raphson_visualization",
@@ -341,7 +350,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "randomness"
+        "randomness",
+        "testmaps"
       ]
     },
     "cave_system": {
@@ -419,7 +429,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "testmaps"
+      ]
     },
     "diamondtoruscollection": {
       "lookup_name": "diamondtoruscollection",
@@ -429,7 +441,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "primitives"
+      ],
       "footprint": [
         1,
         1,
@@ -445,7 +459,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "meshes",
+        "unused"
+      ],
       "footprint": [
         13,
         16,
@@ -461,7 +478,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -509,7 +528,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -525,7 +546,12 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "color",
+        "devexamples",
+        "lab",
+        "structure"
+      ],
       "footprint": [
         1,
         21,
@@ -541,7 +567,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "devexamples",
+        "structure"
+      ],
       "footprint": [
         3,
         9,
@@ -557,7 +586,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "color"
+      ],
       "footprint": [
         1,
         1,
@@ -573,7 +604,11 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "devexamples",
+        "structure",
+        "unused"
+      ],
       "footprint": [
         21,
         16,
@@ -589,7 +624,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         17,
         19,
@@ -621,7 +658,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         15,
         19,
@@ -637,7 +676,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         17,
         16,
@@ -653,7 +694,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         17,
         24,
@@ -669,7 +712,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         17,
         24,
@@ -685,7 +730,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "proceduralaudio"
+      ],
       "footprint": [
         17,
         19,
@@ -701,7 +748,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "swarmintelligence"
+      ],
       "footprint": [
         1,
         1,
@@ -717,7 +766,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "swarmintelligence"
+      ],
       "footprint": [
         1,
         1,
@@ -749,7 +800,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "swarmintelligence"
+      ],
       "footprint": [
         11,
         36,
@@ -765,7 +818,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "patterngeneration",
+        "swarmintelligence"
+      ],
       "footprint": [
         16,
         16,
@@ -781,7 +837,13 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "computationalgeometry",
+        "fractals",
+        "proceduralgeneration",
+        "proceduralgeneration_all",
+        "recursiveemergence"
+      ],
       "footprint": [
         1,
         1,
@@ -797,7 +859,11 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "fractals",
+        "patterngeneration",
+        "recursiveemergence"
+      ],
       "footprint": [
         1,
         1,
@@ -813,7 +879,11 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "lsystems",
+        "proceduralgeneration",
+        "proceduralgeneration_all"
+      ],
       "footprint": [
         1,
         1,
@@ -829,7 +899,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "lsystems"
+      ],
       "footprint": [
         1,
         1,
@@ -845,7 +917,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         17,
         19,
@@ -861,7 +935,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory",
+        "testmaps"
+      ],
       "footprint": [
         1,
         1,
@@ -877,7 +954,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory",
+        "testmaps"
+      ],
       "footprint": [
         26,
         1,
@@ -893,7 +973,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "testmaps"
+      ],
       "footprint": [
         16,
         11,
@@ -909,7 +991,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         11,
         23,
@@ -925,7 +1009,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "testmaps"
+      ],
       "footprint": [
         1,
         1,
@@ -941,7 +1027,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory",
+        "testmaps"
+      ],
       "footprint": [
         1,
         1,
@@ -957,7 +1046,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory",
+        "testmaps"
+      ],
       "footprint": [
         17,
         21,
@@ -1021,7 +1113,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1037,7 +1131,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "testmaps"
+      ],
       "footprint": [
         1,
         2,
@@ -1053,7 +1149,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "testmaps"
+      ],
       "footprint": [
         17,
         20,
@@ -1069,7 +1167,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "testmaps"
+      ],
       "footprint": [
         17,
         19,
@@ -1101,7 +1201,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "swarmintelligence"
+      ],
       "footprint": [
         1,
         1,
@@ -1117,7 +1219,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "swarmintelligence"
+      ],
       "footprint": [
         20,
         10,
@@ -1133,7 +1237,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         6,
         1,
@@ -1165,7 +1271,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         4,
         1,
@@ -1181,7 +1289,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         4,
         1,
@@ -1197,7 +1307,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         6,
         1,
@@ -1229,7 +1341,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -1245,7 +1359,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "graphtheory"
+      ],
       "footprint": [
         1,
         1,

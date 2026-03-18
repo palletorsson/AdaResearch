@@ -125,7 +125,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "forces"
+      ]
     },
     "vector_magnitude_demo": {
       "lookup_name": "vector_magnitude_demo",
@@ -150,7 +152,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces"
+        "forces",
+        "transformation"
       ],
       "sequence": "forces"
     },
@@ -177,7 +180,9 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces"
+        "forces",
+        "testmaps",
+        "transformation"
       ],
       "sequence": "forces"
     },
@@ -338,7 +343,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces"
+        "forces",
+        "testmaps"
       ],
       "sequence": "forces"
     },
@@ -438,7 +444,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "color"
+      ]
     },
     "ball_dropper": {
       "lookup_name": "ball_dropper",
@@ -531,7 +539,7 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces"
+        "testmaps"
       ],
       "sequence": "forces"
     },
@@ -706,7 +714,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -722,7 +732,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "primitives",
+        "testmaps"
+      ],
       "footprint": [
         1,
         1,
@@ -754,7 +767,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -770,7 +786,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -786,7 +805,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -802,7 +823,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -818,7 +842,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         20,
         1,
@@ -834,7 +860,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -882,7 +911,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -898,7 +929,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "noise"
+      ],
       "footprint": [
         1,
         1,
@@ -963,7 +997,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -979,7 +1015,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1011,7 +1049,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1027,7 +1067,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1043,7 +1085,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1059,7 +1103,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1075,7 +1121,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1091,7 +1139,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1107,7 +1157,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1123,7 +1176,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1139,7 +1195,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1155,7 +1214,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         5,
         5,
@@ -1171,7 +1233,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         4,
@@ -1187,7 +1251,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -1203,7 +1269,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         18,
         18,
@@ -1219,7 +1287,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         20,
         20,
@@ -1251,7 +1321,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         5,
         1,

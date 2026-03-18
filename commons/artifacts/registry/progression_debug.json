@@ -22,7 +22,9 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"hazards"
+			]
 		},
 		"progression_driver": {
 			"lookup_name": "progression_driver",
@@ -41,7 +43,10 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"hazards",
+				"lab"
+			]
 		}
 	}
 }

@@ -20,7 +20,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "cellularautomata"
+        "cellularautomata",
+        "testmaps"
       ],
       "sequence": "cellularautomata"
     },
@@ -46,7 +47,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "cellularautomata"
+        "cellularautomata",
+        "testmaps"
       ],
       "sequence": "cellularautomata"
     },
@@ -301,6 +303,7 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
+        "proceduralgeneration",
         "proceduralgeneration_all"
       ],
       "sequence": "proceduralgeneration_all"
@@ -602,7 +605,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "cellularautomata"
+      ],
       "footprint": [
         20,
         1,

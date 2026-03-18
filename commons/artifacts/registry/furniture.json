@@ -44,6 +44,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"testmaps",
 				"transformation"
 			],
 			"sequence": "transformation"
@@ -89,7 +90,9 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"testmaps"
+			]
 		},
 		"table_assembly_puzzle": {
 			"name": "Table Assembly Puzzle",

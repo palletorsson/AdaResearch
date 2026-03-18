@@ -9,7 +9,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "array_tutorial"
+        "mosaicanalysis",
+        "testmaps"
       ],
       "sequence": "array_tutorial"
     },
@@ -43,7 +44,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "array_tutorial"
+        "array_tutorial",
+        "testmaps"
       ],
       "sequence": "array_tutorial"
     },
@@ -74,7 +76,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "array_tutorial"
+        "array_tutorial",
+        "transformation"
       ],
       "sequence": "array_tutorial"
     },
@@ -518,7 +521,8 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "array_tutorial"
+        "array_tutorial",
+        "facades"
       ],
       "sequence": "array_tutorial"
     },
@@ -595,7 +599,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "mosaicanalysis"
+      ]
     },
     "pattern_maker_station": {
       "name": "Pattern Maker Station",
@@ -613,7 +619,10 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "mosaicanalysis",
+        "patterngeneration"
+      ]
     },
     "grid_editor_board": {
       "name": "Grid Editor Board",
@@ -630,7 +639,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "testmaps"
+      ]
     },
     "grid_editor_board_3d": {
       "name": "Grid Editor Board (3D)",
@@ -682,7 +693,9 @@
       ],
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": []
+      "map_sequences": [
+        "facades"
+      ]
     },
     "row_3_x": {
       "lookup_name": "row_3_x",
@@ -692,7 +705,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "array_tutorial"
+      ],
       "footprint": [
         4,
         1,
@@ -708,7 +723,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "array_tutorial"
+      ],
       "footprint": [
         1,
         1,
@@ -724,7 +741,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "array_tutorial"
+      ],
       "footprint": [
         4,
         1,
@@ -740,7 +759,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "array_tutorial"
+      ],
       "footprint": [
         4,
         4,

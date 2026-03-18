@@ -1282,6 +1282,7 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
+        "testmaps",
         "wavefunctions"
       ],
       "sequence": "wavefunctions"
@@ -1529,6 +1530,7 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
+        "testmaps",
         "wavefunctions"
       ],
       "sequence": "wavefunctions"
@@ -1541,7 +1543,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "primitives"
+      ],
       "footprint": [
         3,
         4,

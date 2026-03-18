@@ -115,7 +115,9 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"lsystems"
+				"lsystems",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
 			]
 		},
 		"fractal_lsystem_string": {
@@ -140,7 +142,28 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"lsystems"
+				"array_tutorial",
+				"bricolage",
+				"cellularautomata",
+				"color",
+				"constraint_solvers",
+				"forces",
+				"fractals",
+				"isosurfaces",
+				"lsystems",
+				"noise",
+				"particles",
+				"patterngeneration",
+				"physicssimulation",
+				"primitives",
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"qfeplaboratory",
+				"randomness",
+				"testmaps",
+				"transformation",
+				"unused",
+				"wavefunctions"
 			]
 		},
 		"lsystem_dungeon": {

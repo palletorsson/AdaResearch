@@ -36,7 +36,6 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces",
         "physicssimulation"
       ],
       "sequence": "forces"
@@ -234,7 +233,6 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [
-        "forces",
         "physicssimulation"
       ],
       "sequence": "forces"
@@ -921,7 +919,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "softbodies"
+      ],
       "footprint": [
         5,
         1,
@@ -937,7 +937,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "softbodies"
+      ],
       "footprint": [
         1,
         1,
@@ -953,7 +955,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -969,7 +973,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -985,7 +991,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1001,7 +1009,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1017,7 +1027,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1033,7 +1045,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1049,7 +1063,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1065,7 +1081,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         1,
         1,
@@ -1081,7 +1099,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "joints"
+      ],
       "footprint": [
         3,
         1,
@@ -1129,7 +1149,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1145,7 +1167,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1161,7 +1185,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1193,7 +1219,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1209,7 +1237,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1225,7 +1255,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1241,7 +1273,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1257,7 +1292,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces",
+        "transformation"
+      ],
       "footprint": [
         1,
         1,
@@ -1289,7 +1327,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1305,7 +1345,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1321,7 +1363,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1337,7 +1381,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -1353,7 +1399,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "forces"
+      ],
       "footprint": [
         1,
         1,
@@ -1385,7 +1433,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1401,7 +1451,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1417,7 +1469,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1433,7 +1487,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         22,
         22,
@@ -1449,7 +1505,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         22,
         22,
@@ -1465,7 +1523,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1481,7 +1541,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         22,
         22,
@@ -1497,7 +1559,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         22,
         22,
@@ -1513,7 +1577,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1529,7 +1595,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1545,7 +1613,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "unused"
+      ],
       "footprint": [
         1,
         1,
@@ -1561,7 +1631,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         2,
         2,
@@ -1577,7 +1649,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         5,
         5,
@@ -1593,7 +1667,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         1,
         1,
@@ -1609,7 +1685,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         1,
         1,
@@ -1625,7 +1703,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         5,
         5,
@@ -1641,7 +1721,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         1,
         1,
@@ -1657,7 +1739,9 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "particles"
+      ],
       "footprint": [
         1,
         4,
@@ -1801,7 +1885,10 @@
       "category": "unknown",
       "include_in_map_data": true,
       "map_ready": true,
-      "map_sequences": [],
+      "map_sequences": [
+        "devexamples",
+        "testmaps"
+      ],
       "footprint": [
         1,
         1,

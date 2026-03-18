@@ -22,7 +22,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"transformation"
 			],
 			"sequence": "randomness"
@@ -49,7 +48,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness"
+				"randomness",
+				"testmaps"
 			],
 			"sequence": "randomness"
 		},
@@ -126,8 +126,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -192,8 +191,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -389,7 +387,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
 				"randomness"
 			],
 			"sequence": "randomness"
@@ -521,8 +518,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -535,8 +531,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -549,8 +544,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -565,7 +559,6 @@
 			"map_sequences": [
 				"devexamples",
 				"noise",
-				"randomness",
 				"structure"
 			],
 			"sequence": "randomness"
@@ -594,8 +587,7 @@
 			"map_ready": true,
 			"map_sequences": [
 				"meshes",
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -623,6 +615,9 @@
 			"map_sequences": [
 				"computationalgeometry",
 				"datastructures",
+				"graphtheory",
+				"lsystems",
+				"machinelearning",
 				"patterngeneration",
 				"proceduralaudio",
 				"randomness"
@@ -771,8 +766,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -813,7 +807,6 @@
 			"map_sequences": [
 				"fractals",
 				"particles",
-				"randomness",
 				"recursiveemergence"
 			],
 			"sequence": "randomness"
@@ -853,8 +846,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"proceduralgeneration_all",
-				"randomness"
+				"proceduralgeneration_all"
 			],
 			"sequence": "randomness"
 		},
@@ -867,7 +859,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness"
+				"mosaicanalysis"
 			],
 			"sequence": "randomness"
 		},
@@ -934,8 +926,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -948,8 +939,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1040,7 +1030,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"testmaps"
 			],
 			"sequence": "randomness"
@@ -1054,7 +1043,15 @@
 			"interaction": "touch",
 			"complexity": "beginner",
 			"qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
-			"tags": ["random_digits", "cascade", "interactive", "touch", "RAND_corporation", "stock_ticker", "freeze"],
+			"tags": [
+				"random_digits",
+				"cascade",
+				"interactive",
+				"touch",
+				"RAND_corporation",
+				"stock_ticker",
+				"freeze"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -1084,8 +1081,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1136,7 +1132,13 @@
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
 			"category": "procedural",
 			"interaction": "touch",
-			"tags": ["random_digits", "cascade", "interactive", "touch", "RAND_corporation"],
+			"tags": [
+				"random_digits",
+				"cascade",
+				"interactive",
+				"touch",
+				"RAND_corporation"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -1180,7 +1182,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"testmaps"
 			],
 			"sequence": "randomness"
@@ -1207,8 +1208,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1222,8 +1222,7 @@
 			"map_ready": true,
 			"map_sequences": [
 				"grammar_systems",
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1237,8 +1236,7 @@
 			"map_ready": true,
 			"map_sequences": [
 				"grammar_systems",
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1251,8 +1249,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness"
+				"noise"
 			],
 			"sequence": "randomness"
 		},
@@ -1293,8 +1290,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness",
 				"unused"
 			],
 			"sequence": "randomness"
@@ -1308,8 +1303,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness",
 				"unused"
 			],
 			"sequence": "randomness"
@@ -1323,8 +1316,6 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"randomness",
 				"unused"
 			],
 			"sequence": "randomness"
@@ -1702,7 +1693,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise"
+				"patterngeneration"
 			],
 			"sequence": "randomness"
 		},
@@ -1715,7 +1706,7 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise"
+				"patterngeneration"
 			],
 			"sequence": "randomness"
 		},
@@ -1741,8 +1732,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"noise",
-				"proceduralgeneration"
+				"isosurfaces",
+				"proceduralgeneration_all"
 			],
 			"sequence": "randomness"
 		},
