@@ -1,123 +1,194 @@
-extends Node2D
+extends Node3D
 
-@export var angle_acceleration: float = 0.0001  # Angular acceleration
-@export var angle_velocity: float = 0.0  # Angular velocity
-@export var angle: float = 0.0  # Current angle
+## Sine Oscillation — 3D VR version
+## Unit circle in YZ plane with rotating point, sine wave along X axis,
+## and a projection line connecting the two.
 
-@export var radius: float = 100.0  # Radius of the unit circle
-@export var angular_velocity: float = 2 * PI  # Angular speed in radians per second
-@export var wave_amplitude: float = 100.0  # Amplitude of the sine wave
-@export var wave_length: float = 200.0  # Distance between peaks of the sine wave
-@export var wave_speed: float = 50.0  # Horizontal speed of the wave
-@export var line_color: Color = Color(0.0, 1.0, 0.0)  # Color of the sine wave
-@export var circle_color: Color = Color(1.0, 0.0, 0.0)  # Color of the point
+@export var angular_velocity: float = 2.0 * PI  # radians per second
+@export var circle_radius: float = 0.15
+@export var wave_amplitude: float = 0.15
+@export var wave_x_start: float = -0.1
+@export var wave_x_end: float = 0.4
+@export var wave_samples: int = 200
+@export var circle_segments: int = 64
+@export var circle_x_offset: float = -0.2
 
-var time: float = 0.0  # Time tracker for wave progression
-var wave_points: Array[Vector2] = []  # Stores points for the sine wave
+@export var wave_color: Color = Color(0.0, 1.0, 0.0)
+@export var circle_color: Color = Color(0.5, 0.5, 0.5)
+@export var point_color: Color = Color(1.0, 0.0, 0.0)
+@export var projection_color: Color = Color(1.0, 1.0, 0.0, 0.6)
 
-# Texture-related variables
-var trace_image: Image = Image.new()  # Image to store the sine wave
-var trace_texture: ImageTexture = ImageTexture.new()  # Texture to render the sine wave
+var angle: float = 0.0
+
+# Mesh instances
+var _wave_mesh_instance: MeshInstance3D
+var _circle_mesh_instance: MeshInstance3D
+var _projection_mesh_instance: MeshInstance3D
+var _point_mesh_instance: MeshInstance3D
+var _label: Label3D
+
 
 func _ready() -> void:
-	# Initialize the trace image
-	init_trace_image()
+	_create_circle()
+	_create_wave()
+	_create_projection_line()
+	_create_point()
+	_create_label()
 
-func init_trace_image() -> void:
-	# Define the dimensions for the trace image
-	var width = 800  # Adjust to your desired size
-	var height = 800
-
-	# Initialize the trace image
-	trace_image = Image.create(width, height, false, Image.FORMAT_RGBA8)
-	trace_image.fill(Color(0, 0, 0, 0))  # Transparent background
-	trace_texture = ImageTexture.create_from_image(trace_image)
 
 func _process(delta: float) -> void:
-	# Update angular motion
-	angle_velocity += angle_acceleration * delta
 	angle += angular_velocity * delta
+	if angle > TAU:
+		angle -= TAU
 
-	# Calculate the sine wave progression
-	time += wave_speed * delta
-	if time >= wave_length:
-		time -= wave_length
+	_update_wave()
+	_update_point()
+	_update_projection_line()
 
-	var y = wave_amplitude * sin(angle)
-	wave_points.append(Vector2(time, y))
-	if wave_points.size() > trace_image.get_width():
-		wave_points.pop_front()
 
-	# Update the sine wave on the texture
-	draw_to_trace()
+func _create_label() -> void:
+	_label = Label3D.new()
+	_label.text = "Sine Oscillation"
+	_label.font_size = 32
+	_label.position = Vector3(0.15, -0.25, 0.0)
+	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_label.modulate = Color(1.0, 1.0, 1.0)
+	add_child(_label)
 
-	# Trigger a redraw for the _draw() function
-	queue_redraw()
 
-func _draw() -> void:
-	# Translate to the center of the canvas
-	var center = Vector2(get_viewport_rect().size.x / 2, get_viewport_rect().size.y / 2)
+func _create_circle() -> void:
+	_circle_mesh_instance = MeshInstance3D.new()
+	var mesh := ImmediateMesh.new()
+	_circle_mesh_instance.mesh = mesh
 
-	# Draw the unit circle
-	for angle_step in range(0, 360, 5):
-		var radians = deg_to_rad(angle_step)
-		var circle_point = center + Vector2(radius * cos(radians), radius * sin(radians))
-		draw_circle(circle_point, 1, Color(0.5, 0.5, 0.5))  # Small gray dots for the circle
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = circle_color
+	mat.no_depth_test = false
+	_circle_mesh_instance.material_override = mat
 
-	# Draw the sine wave
-	if wave_points.size() > 1:
-		for i in range(wave_points.size() - 1):
-			var p1 = center + wave_points[i]
-			var p2 = center + wave_points[i + 1]
-			draw_line(p1, p2, line_color, 2)
+	# Draw circle ring in YZ plane at x = circle_x_offset
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(circle_segments):
+		var a0 := TAU * float(i) / float(circle_segments)
+		var a1 := TAU * float(i + 1) / float(circle_segments)
+		var p0 := Vector3(circle_x_offset, circle_radius * sin(a0), circle_radius * cos(a0))
+		var p1 := Vector3(circle_x_offset, circle_radius * sin(a1), circle_radius * cos(a1))
+		mesh.surface_set_color(circle_color)
+		mesh.surface_add_vertex(p0)
+		mesh.surface_set_color(circle_color)
+		mesh.surface_add_vertex(p1)
+	mesh.surface_end()
 
-	# Draw the rotating points
-	var right_pos = center + Vector2(cos(angle), sin(angle)) * radius
-	var left_pos = center + Vector2(-cos(angle), -sin(angle)) * radius
-	draw_circle(right_pos, 5, circle_color)  # Right point
-	draw_circle(left_pos, 5, circle_color)  # Left point
+	add_child(_circle_mesh_instance)
 
-func draw_to_trace() -> void:
-	# Map the image center
-	var image_center = Vector2(trace_image.get_width() / 2, trace_image.get_height() / 2)
 
-	# Clear the image
-	trace_image.fill(Color(0, 0, 0, 0))  # Clear the image
+func _create_wave() -> void:
+	_wave_mesh_instance = MeshInstance3D.new()
+	_wave_mesh_instance.mesh = ImmediateMesh.new()
 
-	# Draw the sine wave onto the texture
-	for i in range(wave_points.size() - 1):
-		var p1 = image_center + wave_points[i]
-		var p2 = image_center + wave_points[i + 1]
-		draw_line_to_image(p1, p2, line_color)
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = wave_color
+	_wave_mesh_instance.material_override = mat
 
-	# Update the texture with the modified image
-	trace_texture = ImageTexture.create_from_image(trace_image)
+	add_child(_wave_mesh_instance)
+	_update_wave()
 
-func draw_line_to_image(start: Vector2, end: Vector2, color: Color) -> void:
-	# Bresenham's line algorithm for drawing lines on the image
-	var x0 = int(start.x)
-	var y0 = int(start.y)
-	var x1 = int(end.x)
-	var y1 = int(end.y)
-	
-	var dx = abs(x1 - x0)
-	var dy = abs(y1 - y0)
-	var sx = 1 if x0 < x1 else -1
-	var sy = 1 if y0 < y1 else -1
-	var err = dx - dy
-	
-	while true:
-		# Set pixel if within bounds
-		if x0 >= 0 and x0 < trace_image.get_width() and y0 >= 0 and y0 < trace_image.get_height():
-			trace_image.set_pixel(x0, y0, color)
-		
-		if x0 == x1 and y0 == y1:
-			break
-		
-		var e2 = 2 * err
-		if e2 > -dy:
-			err -= dy
-			x0 += sx
-		if e2 < dx:
-			err += dx
-			y0 += sy
+
+func _update_wave() -> void:
+	var mesh: ImmediateMesh = _wave_mesh_instance.mesh
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	var dx := (wave_x_end - wave_x_start) / float(wave_samples)
+	for i in range(wave_samples):
+		var x0 := wave_x_start + dx * float(i)
+		var x1 := wave_x_start + dx * float(i + 1)
+		# Map x position to an angle offset from the current angle
+		var phase0 := angle - (x0 - wave_x_start) / (wave_x_end - wave_x_start) * TAU * 2.0
+		var phase1 := angle - (x1 - wave_x_start) / (wave_x_end - wave_x_start) * TAU * 2.0
+		var y0 := wave_amplitude * sin(phase0)
+		var y1 := wave_amplitude * sin(phase1)
+
+		mesh.surface_set_color(wave_color)
+		mesh.surface_add_vertex(Vector3(x0, y0, 0.0))
+		mesh.surface_set_color(wave_color)
+		mesh.surface_add_vertex(Vector3(x1, y1, 0.0))
+
+	mesh.surface_end()
+
+
+func _create_point() -> void:
+	_point_mesh_instance = MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.01
+	sphere.height = 0.02
+	sphere.radial_segments = 12
+	sphere.rings = 6
+	_point_mesh_instance.mesh = sphere
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = point_color
+	mat.emission_enabled = true
+	mat.emission = point_color
+	_point_mesh_instance.material_override = mat
+
+	add_child(_point_mesh_instance)
+
+
+func _update_point() -> void:
+	var y := circle_radius * sin(angle)
+	var z := circle_radius * cos(angle)
+	_point_mesh_instance.position = Vector3(circle_x_offset, y, z)
+
+
+func _create_projection_line() -> void:
+	_projection_mesh_instance = MeshInstance3D.new()
+	_projection_mesh_instance.mesh = ImmediateMesh.new()
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = projection_color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_projection_mesh_instance.material_override = mat
+
+	add_child(_projection_mesh_instance)
+
+
+func _update_projection_line() -> void:
+	var mesh: ImmediateMesh = _projection_mesh_instance.mesh
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	var circle_y := circle_radius * sin(angle)
+	var circle_z := circle_radius * cos(angle)
+	var circle_pos := Vector3(circle_x_offset, circle_y, circle_z)
+
+	# The wave value at x = wave_x_start corresponds to the current angle
+	var wave_y := wave_amplitude * sin(angle)
+	var wave_pos := Vector3(wave_x_start, wave_y, 0.0)
+
+	mesh.surface_set_color(projection_color)
+	mesh.surface_add_vertex(circle_pos)
+	mesh.surface_set_color(projection_color)
+	mesh.surface_add_vertex(wave_pos)
+
+	mesh.surface_end()
+
+
+func _exit_tree() -> void:
+	for child in get_children():
+		child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

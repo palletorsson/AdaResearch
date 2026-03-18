@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://s4gh4d0kbi6y"]
+[gd_scene load_steps=2 format=3 uid="uid://s4gh4d0kbi6y"]
 
 [ext_resource type="Script" uid="uid://cemmyvooi5hdv" path="res://algorithms/chaos/strangeattractors/strange_attractors.gd" id="1_alenl"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bow0h"]
-
-[node name="StrangeAttractors" type="Node2D"]
-material = SubResource("CanvasItemMaterial_bow0h")
+[node name="StrangeAttractors" type="Node3D"]
 script = ExtResource("1_alenl")

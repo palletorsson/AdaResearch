@@ -1,114 +1,158 @@
-extends Node2D
+extends Node3D
 
-@export var angle_acceleration: float = 0.01  # Angular acceleration
-@export var angle_velocity: float = 0.0  # Angular velocity
-@export var angle: float = 0.0  # Current angle
+## Angular Motion — accelerating rotation with spiral trail
+## A rod spins around Y with increasing angular velocity.
+## One endpoint traces an ImmediateMesh spiral trail.
 
-@export var line_length: float = 60.0  # Length of the line on both sides
-@export var circle_radius: float = 12.0  # Radius of the circles
+@export var angle_acceleration: float = 0.01
+@export var angle_velocity: float = 0.0
+@export var angle: float = 0.0
 
-var trail_points: Array[Vector2] = []  # Stores the trail points
-@export var max_trail_points: int = 20  # Maximum number of trail points
+@export var rod_base_length: float = 0.1  # half-length, grows over time
+@export var endpoint_radius: float = 0.01
+@export var rod_radius: float = 0.004
+@export var max_trail_points: int = 2000
 
-var trace_image: Image = Image.new()  # Image to store the trace
+var trail_points: PackedVector3Array = PackedVector3Array()
+var trail_mesh: ImmediateMesh
+var trail_instance: MeshInstance3D
+var trail_material: StandardMaterial3D
 
-var trace_texture_data: ImageTexture
-var right_pos : Vector2
-var left_pos : Vector2
-# Initialize the trace texture
-@onready var drawtexture = get_node_or_null("../../DrawTexture")
+var rod_instance: MeshInstance3D
+var rod_mesh: CylinderMesh
+
+var sphere_right: MeshInstance3D
+var sphere_left: MeshInstance3D
+
+var label: Label3D
 
 func _ready() -> void:
-	# Initialize the trace image
-	if drawtexture and drawtexture is MeshInstance3D:
-		print("DrawTexture is a valid MeshInstance3D node.")
-	else:
-		print("DrawTexture is not found or has the wrong type.")
-	init_trace_image()
-	queue_redraw()
+	_build_trail()
+	_build_rod()
+	_build_endpoints()
+	_build_label()
 
-func init_trace_image() -> void:
-	# Define the dimensions for the trace image
-	var width = 800  # Adjust to your desired size
-	var height = 800
+func _build_trail() -> void:
+	trail_mesh = ImmediateMesh.new()
+	trail_instance = MeshInstance3D.new()
+	trail_instance.mesh = trail_mesh
+	trail_material = StandardMaterial3D.new()
+	trail_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	trail_material.vertex_color_use_as_albedo = true
+	trail_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	trail_material.no_depth_test = true
+	add_child(trail_instance)
 
-	trace_image = Image.create(width, height, false, Image.FORMAT_RGBA8)
-	trace_image.fill(Color(0, 0, 0, 0))  # Transparent background
-	trace_texture_data = ImageTexture.create_from_image(trace_image)
-	
-	update_material(trace_texture_data)
-	
+func _build_rod() -> void:
+	rod_mesh = CylinderMesh.new()
+	rod_mesh.top_radius = rod_radius
+	rod_mesh.bottom_radius = rod_radius
+	rod_mesh.height = rod_base_length * 2.0
+	rod_instance = MeshInstance3D.new()
+	rod_instance.mesh = rod_mesh
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(0.8, 0.8, 0.8)
+	mat.emission_enabled = true
+	mat.emission = Color(0.8, 0.8, 0.8)
+	mat.emission_energy_multiplier = 0.5
+	rod_instance.material_override = mat
+	add_child(rod_instance)
+
+func _build_endpoints() -> void:
+	var sphere_mesh := SphereMesh.new()
+	sphere_mesh.radius = endpoint_radius
+	sphere_mesh.height = endpoint_radius * 2.0
+	sphere_mesh.radial_segments = 12
+	sphere_mesh.rings = 6
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(0.6, 0.6, 0.6)
+	mat.emission_enabled = true
+	mat.emission = Color(0.6, 0.6, 0.6)
+	mat.emission_energy_multiplier = 0.5
+
+	sphere_right = MeshInstance3D.new()
+	sphere_right.mesh = sphere_mesh
+	sphere_right.material_override = mat
+	add_child(sphere_right)
+
+	sphere_left = MeshInstance3D.new()
+	sphere_left.mesh = sphere_mesh.duplicate()
+	sphere_left.material_override = mat
+	add_child(sphere_left)
+
+func _build_label() -> void:
+	label = Label3D.new()
+	label.text = "Angular Motion"
+	label.font_size = 32
+	label.pixel_size = 0.001
+	label.position = Vector3(0.0, 0.45, 0.0)
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.modulate = Color(1.0, 1.0, 1.0, 0.9)
+	label.no_depth_test = true
+	add_child(label)
+
 func _process(delta: float) -> void:
-	# Update angular motion
+	# Accelerating angular motion
 	angle_velocity += angle_acceleration * delta
 	angle += angle_velocity * delta
 
+	# Grow rod length slowly (original: 0.01 px/frame → scaled)
+	rod_base_length += 0.00002
 
-	# Calculate the position of the circles
-	right_pos = Vector2(cos(angle), sin(angle)) * line_length
-	left_pos = Vector2(-cos(angle), -sin(angle)) * line_length
+	# Clamp so it stays within ~0.4m radius
+	rod_base_length = minf(rod_base_length, 0.38)
 
-	# Add the trail point (one of the circles)
+	# Endpoint positions in XZ plane (rotation around Y)
+	var cos_a := cos(angle)
+	var sin_a := sin(angle)
+	var right_pos := Vector3(cos_a * rod_base_length, 0.0, sin_a * rod_base_length)
+	var left_pos := Vector3(-cos_a * rod_base_length, 0.0, -sin_a * rod_base_length)
+
+	# Update endpoint spheres
+	sphere_right.position = right_pos
+	sphere_left.position = left_pos
+
+	# Update rod: orient along the line between endpoints
+	# CylinderMesh is along Y by default, so we rotate it to lie in XZ
+	rod_mesh.height = rod_base_length * 2.0
+	rod_instance.position = Vector3.ZERO
+	rod_instance.rotation = Vector3.ZERO
+	# Rotate: first rotate -90° around X to lay flat, then rotate around Y by angle
+	rod_instance.transform.basis = Basis(Vector3.UP, angle) * Basis(Vector3.RIGHT, -PI / 2.0)
+
+	# Add trail point
 	trail_points.append(right_pos)
 	if trail_points.size() > max_trail_points:
-		trail_points.pop_front()
+		trail_points = trail_points.slice(1)
 
-	# Draw to the trace image
-	draw_to_trace(right_pos)
-	line_length = line_length + 0.01
-	# Trigger a redraw
-	queue_redraw()
+	# Rebuild trail mesh
+	_draw_trail()
 
-func draw_to_trace(position: Vector2) -> void:
-	# Map the position to the image coordinates
-	var image_center = Vector2(trace_image.get_width() / 2, trace_image.get_height() / 2)
-	var draw_pos = image_center + position
+func _draw_trail() -> void:
+	trail_mesh.clear_surfaces()
+	var count := trail_points.size()
+	if count < 2:
+		return
 
-	# Ensure the position is within the image bounds
-	if draw_pos.x >= 0 and draw_pos.y >= 0 and draw_pos.x < trace_image.get_width() and draw_pos.y < trace_image.get_height():
-		trace_image.set_pixelv(draw_pos, Color(0.0, 1.0, 0.0, 1.0))  # Green trail dot
+	trail_mesh.surface_begin(Mesh.PRIMITIVE_LINES, trail_material)
+	for i in range(count - 1):
+		var age_0 := float(i) / float(count - 1)
+		var age_1 := float(i + 1) / float(count - 1)
+		var color_0 := Color(0.0, 1.0, 0.2, age_0 * 0.8)
+		var color_1 := Color(0.0, 1.0, 0.2, age_1 * 0.8)
+		trail_mesh.surface_set_color(color_0)
+		trail_mesh.surface_add_vertex(trail_points[i])
+		trail_mesh.surface_set_color(color_1)
+		trail_mesh.surface_add_vertex(trail_points[i + 1])
+	trail_mesh.surface_end()
 
-	trace_texture_data = ImageTexture.create_from_image(trace_image)
-	
-	update_material(trace_texture_data)
+func _exit_tree() -> void:
+	trail_points.clear()
+	if trail_mesh:
+		trail_mesh.clear_surfaces()
 
-func _draw() -> void:
-	# Get the center of the canvas
-	var canvas_center = get_viewport_rect().size / 2
-
-	# Manually calculate the translated positions
-	var translated_right_pos = canvas_center + right_pos
-	var translated_left_pos = canvas_center + left_pos
-
-	# Rotate around the center by applying rotation to positions
-	var cos_angle = cos(angle)
-	var sin_angle = sin(angle)
-
-	translated_right_pos = canvas_center + Vector2(
-	cos_angle * right_pos.x - sin_angle * right_pos.y,
-	sin_angle * right_pos.x + cos_angle * right_pos.y
-	)
-
-	translated_left_pos = canvas_center + Vector2(
-	cos_angle * left_pos.x - sin_angle * left_pos.y,
-	sin_angle * left_pos.x + cos_angle * left_pos.y
-	)
-
-	# Draw the main line
-	draw_line(translated_right_pos, translated_left_pos, Color(0, 0, 0), 2)
-
-	# Draw the circles
-	draw_circle(translated_right_pos, circle_radius, Color(0.5, 0.5, 0.5))  # Right circle
-	draw_circle(translated_left_pos, circle_radius, Color(0.5, 0.5, 0.5))  # Left circle
-
-
-
-func update_material(tex: ImageTexture) -> void:
-	if drawtexture.material_override is ShaderMaterial:
-		var shader_material = drawtexture.material_override as ShaderMaterial
-		shader_material.set_shader_parameter("transparency", 1)
-		shader_material.set_shader_parameter("texture_albedo", tex)
-	else:
-		var material = StandardMaterial3D.new()
-		material.albedo_texture = tex
-		drawtexture.material_override = material
+func apply_grid_config(config: Dictionary) -> void:
+	pass

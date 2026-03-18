@@ -1,13 +1,12 @@
-extends Node2D
+extends Node3D
 
-# Mirrored Cellular Automata Texture Generator
+# Mirrored Cellular Automata — 3D floor display
 # Creates symmetrical patterns that evolve according to cellular automata rules
 
 @export_category("Grid Settings")
 @export var grid_size: int = 21  # Use odd number for center symmetry
-@export var cell_size: int = 20   # Pixel size of each cell
-@export var update_interval: float = 0.2  # Time between updates
-@export var auto_evolve: bool = true  # Whether to evolve automatically
+@export var update_interval: float = 0.2
+@export var auto_evolve: bool = true
 
 @export_category("Pattern Settings")
 @export_enum("Quad Mirror", "Eight-Way Mirror", "Rotational") var symmetry_type: int = 0
@@ -20,115 +19,156 @@ extends Node2D
 var grid = []
 var half_size: int
 var update_timer: float = 0.0
-var render_texture: ImageTexture
+var mesh_instance: MeshInstance3D = null
+var cell_material: StandardMaterial3D = null
+
+# Display fits within 0.8 x 0.8 meters on XZ plane
+var display_size: float = 0.8
+var cell_world_size: float = 0.0
+
+# Colors for alive cells — cycle through for visual interest
+var alive_colors = [
+	Color(0.1, 0.9, 0.4),
+	Color(0.2, 0.6, 1.0),
+	Color(1.0, 0.4, 0.2),
+	Color(0.9, 0.8, 0.1),
+]
+var generation: int = 0
 
 func _ready() -> void:
 	randomize()
-	half_size = grid_size / 2.0
-	
-	# Create the TextureRect node if it doesn't exist
-	if not has_node("TextureRect"):
-		var texture_rect = TextureRect.new()
-		texture_rect.name = "TextureRect"
-		texture_rect.expand = true
-		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		add_child(texture_rect)
-	
-	# Initialize UI elements
-	if has_node("UI"):
-		var toggle_button = $UI/VBoxContainer/ToggleEvolutionButton
-		if toggle_button:
-			toggle_button.text = "Stop Evolution" if auto_evolve else "Start Evolution"
-	
+	half_size = grid_size / 2
+	cell_world_size = display_size / float(grid_size)
+
+	# Create material — unshaded with vertex colors
+	cell_material = StandardMaterial3D.new()
+	cell_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	cell_material.vertex_color_use_as_albedo = true
+	cell_material.emission_enabled = true
+	cell_material.emission = Color.WHITE
+	cell_material.emission_energy_multiplier = 0.5
+
+	# Mesh instance for alive-cell quads
+	mesh_instance = MeshInstance3D.new()
+	mesh_instance.name = "CAMesh"
+	add_child(mesh_instance)
+
+	# Label
+	var label = Label3D.new()
+	label.text = "Mirrored Cellular Automata"
+	label.font_size = 48
+	label.pixel_size = 0.001
+	label.position = Vector3(0.0, 0.0, -display_size * 0.5 - 0.04)
+	label.rotation_degrees = Vector3(-90, 0, 0)
+	label.modulate = Color.WHITE
+	add_child(label)
+
 	initialize_grid()
 	generate_initial_pattern()
-	create_render_texture()
+	_rebuild_mesh()
 
 func _process(delta: float) -> void:
 	if auto_evolve:
 		update_timer += delta
 		if update_timer >= update_interval:
-			update_timer = 0
+			update_timer = 0.0
 			update_grid()
-			update_render_texture()
+			generation += 1
+			_rebuild_mesh()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed:
-			match event.keycode:
-				KEY_SPACE:
-					update_grid()
-					update_render_texture()
-				KEY_R:
-					initialize_grid()
-					generate_initial_pattern()
-					update_render_texture()
-				KEY_S:
-					save_texture()
+func _rebuild_mesh() -> void:
+	var im = ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES, cell_material)
+
+	var half_display = display_size * 0.5
+	var color_idx = generation % alive_colors.size()
+	var base_color = alive_colors[color_idx]
+
+	for y in range(grid_size):
+		for x in range(grid_size):
+			if grid[y][x] != 1:
+				continue
+
+			# Map grid cell to world XZ coordinates, centred on origin
+			var wx = -half_display + x * cell_world_size
+			var wz = -half_display + y * cell_world_size
+			var wy = 0.01  # Slightly above floor
+
+			# Slight colour variation per cell
+			var c = base_color
+			c = c.lerp(Color.WHITE, float(x + y) / float(grid_size * 2) * 0.3)
+
+			# Two triangles forming a quad
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx, wy, wz))
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx + cell_world_size, wy, wz))
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx + cell_world_size, wy, wz + cell_world_size))
+
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx, wy, wz))
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx + cell_world_size, wy, wz + cell_world_size))
+			im.surface_set_color(c)
+			im.surface_add_vertex(Vector3(wx, wy, wz + cell_world_size))
+
+	im.surface_end()
+	mesh_instance.mesh = im
 
 func initialize_grid() -> void:
 	grid = []
 	for y in range(grid_size):
 		var row = []
 		for x in range(grid_size):
-			row.append(0)  # Initialize all cells as dead
+			row.append(0)
 		grid.append(row)
 
 func generate_initial_pattern() -> void:
-	# Only generate the core pattern, then apply symmetry
 	match symmetry_type:
-		0:  # Quad mirror (four quadrants)
+		0:
 			generate_quadrant_pattern()
-		1:  # Eight-way mirror
+		1:
 			generate_octant_pattern()
-		2:  # Rotational symmetry
+		2:
 			generate_rotational_pattern()
 
 func generate_quadrant_pattern() -> void:
-	# Only generate the top-left quadrant
 	for y in range(half_size):
 		for x in range(half_size):
 			if randf() <= random_fill_percent:
 				set_cell_with_symmetry(x, y, 1)
 
 func generate_octant_pattern() -> void:
-	# Only generate 1/8 of the pattern (top-left triangle)
 	for y in range(half_size):
-		for x in range(y + 1):  # Only fill cells where x <= y to create a triangle
+		for x in range(y + 1):
 			if randf() <= random_fill_percent:
 				set_cell_with_symmetry(x, y, 1)
 
 func generate_rotational_pattern() -> void:
-	# Generate a pattern with rotational symmetry
-	# Start with a random core
-	var pattern_size = min(5, half_size)  # Size of the pattern to repeat
-	
-	# Generate a small random pattern
+	var pattern_size = min(5, half_size)
+
 	var pattern = []
 	for y in range(pattern_size):
 		var row = []
 		for x in range(pattern_size):
 			row.append(1 if randf() <= random_fill_percent else 0)
 		pattern.append(row)
-	
-	# Apply the pattern with rotational symmetry
+
 	for y in range(grid_size):
 		for x in range(grid_size):
-			# Map to pattern coordinates (mod pattern_size)
 			var pattern_x = abs(x - half_size) % pattern_size
 			var pattern_y = abs(y - half_size) % pattern_size
 			grid[y][x] = pattern[pattern_y][pattern_x]
 
-func set_cell_with_symmetry(x, y, value) -> void:
+func set_cell_with_symmetry(x: int, y: int, value: int) -> void:
 	match symmetry_type:
-		0:  # Quad mirror
-			# Set in all four quadrants
+		0:
 			grid[y][x] = value
 			grid[y][grid_size - 1 - x] = value
 			grid[grid_size - 1 - y][x] = value
 			grid[grid_size - 1 - y][grid_size - 1 - x] = value
-		1:  # Eight-way mirror
-			# Set in all eight octants
+		1:
 			grid[y][x] = value
 			grid[y][grid_size - 1 - x] = value
 			grid[grid_size - 1 - y][x] = value
@@ -137,77 +177,66 @@ func set_cell_with_symmetry(x, y, value) -> void:
 			grid[x][grid_size - 1 - y] = value
 			grid[grid_size - 1 - x][y] = value
 			grid[grid_size - 1 - x][grid_size - 1 - y] = value
-		2:  # Rotational
-			# Calculate distance and angle from center
+		2:
 			var center_x = half_size
 			var center_y = half_size
 			var dx = x - center_x
 			var dy = y - center_y
-			var distance = sqrt(dx*dx + dy*dy)
+			var distance = sqrt(dx * dx + dy * dy)
 			var angle = atan2(dy, dx)
-			
-			# Set in a circular pattern
-			for rot in range(4):  # 4-fold rotation
-				var new_angle = angle + rot * PI/2
+
+			for rot in range(4):
+				var new_angle = angle + rot * PI / 2
 				var new_x = center_x + int(cos(new_angle) * distance)
 				var new_y = center_y + int(sin(new_angle) * distance)
-				
-				# Make sure coordinates are within bounds
+
 				if new_x >= 0 and new_x < grid_size and new_y >= 0 and new_y < grid_size:
 					grid[new_y][new_x] = value
 
 func update_grid() -> void:
-	# Create a copy of the current grid
 	var new_grid = []
 	for y in range(grid_size):
 		var row = []
 		for x in range(grid_size):
 			row.append(grid[y][x])
 		new_grid.append(row)
-	
-	# Update each cell based on its neighbors
+
 	for y in range(grid_size):
 		for x in range(grid_size):
-			# Skip border cells if fixed_border is true
 			if fixed_border and (x == 0 or y == 0 or x == grid_size - 1 or y == grid_size - 1):
 				continue
-				
+
 			var live_neighbors = count_live_neighbors(x, y)
-			
-			if grid[y][x] == 1:  # Cell is alive
-				# Die if too few or too many neighbors
+
+			if grid[y][x] == 1:
 				if live_neighbors < 2 or live_neighbors > 3:
 					if randf() <= death_probability:
 						new_grid[y][x] = 0
-			else:  # Cell is dead
-				# Become alive if exactly 3 neighbors are alive
+			else:
 				if live_neighbors == 3:
 					if randf() <= birth_probability:
 						new_grid[y][x] = 1
-	
-	# Apply symmetry to the new grid
-	if symmetry_type == 0:  # Quad mirror
+
+	if symmetry_type == 0:
 		apply_quad_symmetry(new_grid)
-	elif symmetry_type == 1:  # Eight-way mirror
+	elif symmetry_type == 1:
 		apply_eight_way_symmetry(new_grid)
-	elif symmetry_type == 2:  # Rotational
+	elif symmetry_type == 2:
 		apply_rotational_symmetry(new_grid)
-	
-	# Update the main grid
+
 	grid = new_grid
 
-func count_live_neighbors(x, y):
+func count_live_neighbors(x: int, y: int) -> int:
 	var count = 0
 	for ny in range(max(0, y - 1), min(grid_size, y + 2)):
 		for nx in range(max(0, x - 1), min(grid_size, x + 2)):
 			if nx == x and ny == y:
-				continue  # Skip the cell itself
+				continue
 			if grid[ny][nx] == 1:
 				count += 1
 	return count
 
-func apply_quad_symmetry(new_grid) -> void:
-	# Apply symmetry to the top-left quadrant only
+func apply_quad_symmetry(new_grid: Array) -> void:
 	for y in range(half_size):
 		for x in range(half_size):
 			var value = new_grid[y][x]
@@ -215,10 +244,9 @@ func apply_quad_symmetry(new_grid) -> void:
 			new_grid[grid_size - 1 - y][x] = value
 			new_grid[grid_size - 1 - y][grid_size - 1 - x] = value
 
-func apply_eight_way_symmetry(new_grid) -> void:
-	# Apply symmetry to the top-left octant only
+func apply_eight_way_symmetry(new_grid: Array) -> void:
 	for y in range(half_size):
-		for x in range(y + 1):  # Only process triangle where x <= y
+		for x in range(y + 1):
 			var value = new_grid[y][x]
 			new_grid[y][grid_size - 1 - x] = value
 			new_grid[grid_size - 1 - y][x] = value
@@ -228,125 +256,34 @@ func apply_eight_way_symmetry(new_grid) -> void:
 			new_grid[grid_size - 1 - x][y] = value
 			new_grid[grid_size - 1 - x][grid_size - 1 - y] = value
 
-func apply_rotational_symmetry(new_grid) -> void:
-	# Apply 4-fold rotational symmetry
+func apply_rotational_symmetry(new_grid: Array) -> void:
 	var center_x = half_size
 	var center_y = half_size
-	
+
 	for y in range(center_y + 1):
 		for x in range(center_x + 1):
-			# Skip the center cell
 			if x == center_x and y == center_y:
 				continue
-				
+
 			var dx = x - center_x
 			var dy = y - center_y
-			var distance = sqrt(dx*dx + dy*dy)
+			var distance = sqrt(dx * dx + dy * dy)
 			var angle = atan2(dy, dx)
-			
+
 			var value = new_grid[y][x]
-			
-			# Apply to all four quadrants
-			for rot in range(1, 4):  # Skip the first rotation (already set)
-				var new_angle = angle + rot * PI/2
+
+			for rot in range(1, 4):
+				var new_angle = angle + rot * PI / 2
 				var new_x = center_x + int(cos(new_angle) * distance)
 				var new_y = center_y + int(sin(new_angle) * distance)
-				
-				# Make sure coordinates are within bounds
+
 				if new_x >= 0 and new_x < grid_size and new_y >= 0 and new_y < grid_size:
 					new_grid[new_y][new_x] = value
 
-func create_render_texture() -> void:
-	var img = Image.create(grid_size * cell_size, grid_size * cell_size, false, Image.FORMAT_RGBA8)
-	img.fill(Color(1, 1, 1, 1))  # White background
-	
-	render_texture = ImageTexture.create_from_image(img)
-	update_render_texture()
-
-func update_render_texture() -> void:
-	var img = Image.create(grid_size * cell_size, grid_size * cell_size, false, Image.FORMAT_RGBA8)
-	img.fill(Color(1, 1, 1, 1))  # White background
-	
-	# Draw the grid
-	for y in range(grid_size):
-		for x in range(grid_size):
-			if grid[y][x] == 1:
-				# Draw a filled cell
-				for py in range(cell_size):
-					for px in range(cell_size):
-						img.set_pixel(x * cell_size + px, y * cell_size + py, Color(0, 0, 0, 1))
-	
-	# Draw grid lines
-	for y in range(grid_size):
-		for x in range(grid_size * cell_size):
-			img.set_pixel(x, y * cell_size, Color(0.7, 0.7, 0.7, 1))
-	
-	for x in range(grid_size):
-		for y in range(grid_size * cell_size):
-			img.set_pixel(x * cell_size, y, Color(0.7, 0.7, 0.7, 1))
-	
-	# Update the texture
-	render_texture = ImageTexture.create_from_image(img)
-	
-	# Make sure TextureRect exists before assigning the texture
-	if has_node("TextureRect"):
-		$TextureRect.texture = render_texture
-		
-		# Update size of TextureRect to match the texture
-		$TextureRect.size = Vector2(grid_size * cell_size, grid_size * cell_size)
-	
-	queue_redraw()  # Request a redraw to update the display
-
-func save_texture() -> void:
-	var img = render_texture.get_image()
-	var datetime = Time.get_datetime_dict_from_system()
-	var filename = "res://cellular_pattern_%s.png" % [datetime.hour * 10000 + datetime.minute * 100 + datetime.second]
-	img.save_png(filename)
-	print("Saved texture to: " + filename)
-
-func _draw() -> void:
-	if render_texture:
-		draw_texture(render_texture, Vector2.ZERO)
-
-func _on_random_button_pressed() -> void:
-	initialize_grid()
-	generate_initial_pattern()
-	update_render_texture()
-
-func _on_step_button_pressed() -> void:
-	update_grid()
-	update_render_texture()
-
-func _on_toggle_evolution_button_pressed() -> void:
-	auto_evolve = !auto_evolve
-	$UI/VBoxContainer/ToggleEvolutionButton.text = "Stop Evolution" if auto_evolve else "Start Evolution"
-
-func _on_save_button_pressed() -> void:
-	save_texture()
-
-func _on_symmetry_option_item_selected(index) -> void:
-	symmetry_type = index
-	initialize_grid()
-	generate_initial_pattern()
-	update_render_texture()
-
-func _on_fill_percent_slider_value_changed(value) -> void:
-	random_fill_percent = value / 100.0
-	$UI/SymmetryOptionsContainer/FillPercentLabel.text = "Fill Percent: %d%%" % value
-	initialize_grid()
-	generate_initial_pattern()
-	update_render_texture()
-
-func _on_birth_prob_slider_value_changed(value) -> void:
-	birth_probability = value
-	$UI/SymmetryOptionsContainer/BirthProbLabel.text = "Birth Probability: %d%%" % (value * 100)
-
-func _on_death_prob_slider_value_changed(value) -> void:
-	death_probability = value
-	$UI/SymmetryOptionsContainer/DeathProbLabel.text = "Death Probability: %d%%" % (value * 100)
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-

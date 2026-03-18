@@ -1,282 +1,201 @@
-extends Node2D
+extends Node3D
 
-# PollockPainting.gd
-# A dynamic simulation of Jackson Pollock's action painting technique
+# Pollock Action Painting — 3D VR Version
+# Paints to an Image texture applied to a wall-mounted QuadMesh canvas.
+
 signal stroke_path_generated(path: PackedVector2Array, stroke_color: Color, stroke_width: float, duration: float)
 
-@export var canvas_size: Vector2 = Vector2(1200, 800)  # Size of the canvas
-@export var background_color: Color = Color(0.85, 0.82, 0.73)  # Tan/beige background
+@export var canvas_size: Vector2 = Vector2(1200, 800)
+@export var background_color: Color = Color(0.85, 0.82, 0.73)
 
-# Drip parameters
 @export var min_drip_size: float = 1.0
 @export var max_drip_size: float = 15.0
-@export var drip_count: int = 50  # Reduced for continuous addition
-@export var splatter_chance: float = 0.3  # Chance of creating additional splatter
-@export var max_splatter_count: int = 10  # Max number of splatter drops per drip
+@export var drip_count: int = 50
+@export var splatter_chance: float = 0.3
+@export var max_splatter_count: int = 10
 
-# Line parameters
 @export var min_line_width: float = 0.8
 @export var max_line_width: float = 6.0
-@export var line_segment_length: float = 10.0  # Length of each line segment
-@export var line_curviness: float = 0.3  # How much the line can curve
-@export var line_count: int = 20  # Reduced for continuous addition
+@export var line_segment_length: float = 10.0
+@export var line_curviness: float = 0.3
+@export var line_count: int = 20
 @export var min_line_points: int = 10
 @export var max_line_points: int = 100
 
-# Continuous painting parameters
-@export var paint_interval: float = 4.0  # Add new strokes every 4 seconds
+@export var paint_interval: float = 4.0
 @export_range(0.0, 1.0, 0.01) var initial_paint_ratio: float = 0.15
-@export var paint_buildup_duration: float = 80.0  # Seconds to reach full density
+@export var paint_buildup_duration: float = 80.0
 
-# Color palette (Pollock-inspired)
-var colors = [
-	Color(0.0, 0.0, 0.0),       # Black
-	Color(0.2, 0.2, 0.2),       # Dark gray
-	Color(1.0, 1.0, 1.0),       # White
-	Color(0.55, 0.27, 0.07),    # Brown
-	Color(0.0, 0.2, 0.4),       # Deep blue
-	Color(0.7, 0.1, 0.1)        # Dark red
+var colors: Array = [
+	Color(0.0, 0.0, 0.0),
+	Color(0.2, 0.2, 0.2),
+	Color(1.0, 1.0, 1.0),
+	Color(0.55, 0.27, 0.07),
+	Color(0.0, 0.2, 0.4),
+	Color(0.7, 0.1, 0.1)
 ]
 
-# Storage for our generated artwork
 var canvas: Image
 var texture: ImageTexture
-var rng = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var painting_timer: Timer
 var _paint_elapsed_time: float = 0.0
 
+var _mesh_instance: MeshInstance3D
+var _material: StandardMaterial3D
+var _label: Label3D
+
 func _ready() -> void:
 	rng.randomize()
-	
-	# Create the canvas
+
+	# Create wall-mounted canvas
+	_mesh_instance = MeshInstance3D.new()
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.8, 0.53)
+	_mesh_instance.mesh = quad
+	_mesh_instance.position = Vector3(0, 0.3, 0)
+
+	_material = StandardMaterial3D.new()
+	_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mesh_instance.material_override = _material
+	add_child(_mesh_instance)
+
+	_label = Label3D.new()
+	_label.text = "Pollock Action Painting"
+	_label.font_size = 28
+	_label.position = Vector3(0, -0.02, 0)
+	_label.modulate = Color(1, 1, 1, 0.8)
+	add_child(_label)
+
+	# Create canvas image
 	canvas = Image.create(int(canvas_size.x), int(canvas_size.y), false, Image.FORMAT_RGBA8)
-	
-	# Fill background
 	canvas.fill(background_color)
-	
-	# Create initial painting
-	create_initial_painting()
-	
-	# Update texture
-	update_texture()
-	
-	# Create and setup continuous painting timer
+	_create_initial_painting()
+	_update_texture()
+
+	# Timer for continuous painting
 	painting_timer = Timer.new()
 	add_child(painting_timer)
 	painting_timer.wait_time = paint_interval
 	painting_timer.one_shot = false
-	painting_timer.timeout.connect(add_new_painting_strokes)
+	painting_timer.timeout.connect(_add_new_painting_strokes)
 	painting_timer.start()
 
-func update_texture() -> void:
+func _update_texture() -> void:
 	texture = ImageTexture.create_from_image(canvas)
-	$CanvasLayer/TextureRect.texture = texture
-	
-func create_initial_painting() -> void:
+	_material.albedo_texture = texture
+
+func _create_initial_painting() -> void:
 	_paint_elapsed_time = 0.0
 	var starting_ratio := clampf(initial_paint_ratio, 0.0, 1.0)
 	var initial_drips := maxi(1, int(round(float(drip_count) * starting_ratio)))
 	var initial_lines := maxi(1, int(round(float(line_count) * starting_ratio)))
-
-	# Add initial drip marks
 	for i in range(initial_drips):
-		add_drip()
-	
-	# Add initial flowing lines
+		_add_drip()
 	for i in range(initial_lines):
-		add_line()
+		_add_line()
 
-func add_new_painting_strokes() -> void:
-	# Gradually increase the amount of paint over time.
+func _add_new_painting_strokes() -> void:
 	_paint_elapsed_time += paint_interval
 	var intensity := _get_paint_intensity()
-
 	var max_drips_now := maxi(1, int(round(lerpf(2.0, 6.0, intensity))))
 	var max_lines_now := maxi(1, int(round(lerpf(1.0, 4.0, intensity))))
-
 	for i in range(rng.randi_range(1, max_drips_now)):
-		add_drip()
-	
+		_add_drip()
 	for i in range(rng.randi_range(1, max_lines_now)):
-		add_line()
-	
-	# Update the texture to show new strokes
-	update_texture()
+		_add_line()
+	_update_texture()
 
 func _get_paint_intensity() -> float:
 	if paint_buildup_duration <= 0.0:
 		return 1.0
 	return clampf(_paint_elapsed_time / paint_buildup_duration, 0.0, 1.0)
 
-func add_drip() -> void:
-	# Random position
-	var pos = Vector2(
-		rng.randf_range(0, canvas_size.x),
-		rng.randf_range(0, canvas_size.y)
-	)
-	
-	# Random color from palette
-	var color = colors[rng.randi() % colors.size()]
-	
-	# Random size
-	var size = rng.randf_range(min_drip_size, max_drip_size)
-	
-	# Draw the drip (circle)
-	paint_circle(pos, size, color)
-	
-	# Chance to add splatter
+func _add_drip() -> void:
+	var pos := Vector2(rng.randf_range(0, canvas_size.x), rng.randf_range(0, canvas_size.y))
+	var color: Color = colors[rng.randi() % colors.size()]
+	var sz := rng.randf_range(min_drip_size, max_drip_size)
+	_paint_circle(pos, sz, color)
 	if rng.randf() < splatter_chance:
-		var splatter_count = rng.randi_range(1, max_splatter_count)
-		
+		var splatter_count := rng.randi_range(1, max_splatter_count)
 		for j in range(splatter_count):
-			var direction = Vector2(
-				rng.randf_range(-1, 1),
-				rng.randf_range(-1, 1)
-			).normalized()
-			
-			var distance = rng.randf_range(size, size * 4)
-			var splatter_pos = pos + direction * distance
-			var splatter_size = size * rng.randf_range(0.1, 0.5)
-			
-			paint_circle(splatter_pos, splatter_size, color)
+			var direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+			var distance := rng.randf_range(sz, sz * 4)
+			var splatter_pos := pos + direction * distance
+			var splatter_size := sz * rng.randf_range(0.1, 0.5)
+			_paint_circle(splatter_pos, splatter_size, color)
 
-func add_line() -> void:
-	# Random starting position
-	var start_pos = Vector2(
-		rng.randf_range(0, canvas_size.x),
-		rng.randf_range(0, canvas_size.y)
-	)
-	
-	# Random color
-	var color = colors[rng.randi() % colors.size()]
-	
-	# Random line width
-	var line_width = rng.randf_range(min_line_width, max_line_width)
-	
-	# Generate a flowing line (Pollock's characteristic gesture)
-	var points = []
-	points.append(start_pos)
-	
-	# Random direction
-	var direction = Vector2(
-		rng.randf_range(-1, 1),
-		rng.randf_range(-1, 1)
-	).normalized()
-	
-	# Random number of points
-	var point_count = rng.randi_range(min_line_points, max_line_points)
-	
+func _add_line() -> void:
+	var start_pos := Vector2(rng.randf_range(0, canvas_size.x), rng.randf_range(0, canvas_size.y))
+	var color: Color = colors[rng.randi() % colors.size()]
+	var lw := rng.randf_range(min_line_width, max_line_width)
+	var points: Array = [start_pos]
+	var direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+	var point_count := rng.randi_range(min_line_points, max_line_points)
+
 	for i in range(point_count):
-		# Add some randomness to direction (creates the Pollock flow)
-		direction = direction.rotated(
-			rng.randf_range(-line_curviness, line_curviness)
-		).normalized()
-		
-		# Calculate next point
-		var next_pos = points[-1] + direction * line_segment_length
-		
-		# Ensure we stay within canvas
+		direction = direction.rotated(rng.randf_range(-line_curviness, line_curviness)).normalized()
+		var next_pos: Vector2 = points[-1] + direction * line_segment_length
 		if next_pos.x < 0 or next_pos.x >= canvas_size.x or next_pos.y < 0 or next_pos.y >= canvas_size.y:
-			# Bounce off the edges
 			if next_pos.x < 0 or next_pos.x >= canvas_size.x:
 				direction.x *= -1
 			if next_pos.y < 0 or next_pos.y >= canvas_size.y:
 				direction.y *= -1
-				
 			next_pos = points[-1] + direction * line_segment_length
-			
-			# Still out of bounds? Break the line
 			if next_pos.x < 0 or next_pos.x >= canvas_size.x or next_pos.y < 0 or next_pos.y >= canvas_size.y:
 				break
-		
 		points.append(next_pos)
-		
-		# Add drips along the line sometimes
-		if rng.randf() < 0.1: # 10% chance per point
-			paint_circle(next_pos, line_width * rng.randf_range(1.0, 3.0), color)
-	
-	# Draw the line
+		if rng.randf() < 0.1:
+			_paint_circle(next_pos, lw * rng.randf_range(1.0, 3.0), color)
+
 	for i in range(1, points.size()):
-		paint_line(points[i-1], points[i], color, line_width)
+		_paint_line(points[i - 1], points[i], color, lw)
 
-	_emit_stroke_path(points, color, line_width)
+	_emit_stroke_path(points, color, lw)
 
-func paint_circle(center: Vector2, radius: float, color: Color) -> void:
-	# Make sure we're in bounds
+func _paint_circle(center: Vector2, radius: float, color: Color) -> void:
 	if center.x < 0 or center.x >= canvas_size.x or center.y < 0 or center.y >= canvas_size.y:
 		return
-		
-	# Calculate bounds for the circle
-	var x_min = max(0, center.x - radius - 1)
-	var x_max = min(canvas_size.x - 1, center.x + radius + 1)
-	var y_min = max(0, center.y - radius - 1)
-	var y_max = min(canvas_size.y - 1, center.y + radius + 1)
-	
-	# Draw filled circle pixel by pixel
+	var x_min := int(max(0, center.x - radius - 1))
+	var x_max := int(min(canvas_size.x - 1, center.x + radius + 1))
+	var y_min := int(max(0, center.y - radius - 1))
+	var y_max := int(min(canvas_size.y - 1, center.y + radius + 1))
 	for x in range(x_min, x_max + 1):
 		for y in range(y_min, y_max + 1):
-			var dist = Vector2(x, y).distance_to(center)
+			var dist := Vector2(x, y).distance_to(center)
 			if dist <= radius:
-				# Add some noise to the edges
 				if dist > radius * 0.8 and rng.randf() < 0.5:
 					continue
-				
 				canvas.set_pixel(x, y, color)
 
-func paint_line(from: Vector2, to: Vector2, color: Color, width: float) -> void:
-	# Basic line drawing algorithm
-	var direction = (to - from).normalized()
-	var length = from.distance_to(to)
-	
-	# Draw the line as a series of circles
-	var step_size = width * 0.5  # Overlap circles to make a smooth line
-	var steps = max(2, int(length / step_size))
-	
+func _paint_line(from: Vector2, to: Vector2, color: Color, line_width: float) -> void:
+	var direction := (to - from).normalized()
+	var length := from.distance_to(to)
+	var step_size := line_width * 0.5
+	var steps := maxi(2, int(length / step_size))
 	for i in range(steps + 1):
-		var t = float(i) / steps
-		var pos = from.lerp(to, t)
-		
-		# Calculate fade for the ends
-		var fade = 1.0
-		if i == 0 or i == steps:
-			fade = 0.7
-			
-		# Apply width variation (drips get thinner at the ends)
-		var adjusted_width = width * fade
-		
-		# Add some random variation to make it look more natural
-		adjusted_width *= rng.randf_range(0.8, 1.2)
-		
-		paint_circle(pos, adjusted_width, color)
+		var t := float(i) / steps
+		var pos := from.lerp(to, t)
+		var fade := 0.7 if (i == 0 or i == steps) else 1.0
+		var adjusted_width := line_width * fade * rng.randf_range(0.8, 1.2)
+		_paint_circle(pos, adjusted_width, color)
 
 func _emit_stroke_path(points: Array, stroke_color: Color, stroke_width: float) -> void:
 	if points.size() < 2:
 		return
-
 	var packed_path := PackedVector2Array()
 	for p in points:
 		if p is Vector2:
 			packed_path.append(p)
-
 	if packed_path.size() < 2:
 		return
-
-	var duration: float = clampf(float(packed_path.size()) * 0.03, 0.25, 2.4)
+	var duration := clampf(float(packed_path.size()) * 0.03, 0.25, 2.4)
 	emit_signal("stroke_path_generated", packed_path, stroke_color, stroke_width, duration)
 
-func _on_regenerate_button_pressed() -> void:
-	if canvas == null:
-		return
-	canvas.fill(background_color)
-	create_initial_painting()
-	update_texture()
-
-func _on_save_button_pressed() -> void:
-	# Keep UI connection valid in map/VR contexts where export is optional.
-	update_texture()
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-

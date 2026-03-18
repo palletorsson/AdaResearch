@@ -1,7 +1,7 @@
-﻿extends Node2D
+extends Node3D
 class_name Creature
 
-var velocity: Vector2 = Vector2.ZERO
+var velocity: Vector3 = Vector3.ZERO
 var max_speed: float
 var max_force: float
 var size: float
@@ -10,19 +10,23 @@ var dna: Dictionary
 var lifespan: float
 var age: float = 0.0
 
-func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
-	position = pos  # Using the built-in position property from Node2D
-	
+# Bounding box for wraparound (half-extents)
+const BOUNDS_X: float = 0.4
+const BOUNDS_Y: float = 0.2
+const BOUNDS_Z: float = 0.4
+
+func _init(pos: Vector3, dna_values: Dictionary = {}) -> void:
+	position = pos
+
 	# Default DNA values if none provided
 	if dna_values.size() == 0:
 		dna = {
-			"max_speed": randf_range(2.0, 4.0),
-			"max_force": randf_range(0.1, 0.5),
-			"size": randf_range(5.0, 15.0),
-			"perception_radius": randf_range(50.0, 150.0),
+			"max_speed": randf_range(0.05, 0.15),
+			"max_force": randf_range(0.005, 0.02),
+			"size": randf_range(0.005, 0.015),
+			"perception_radius": randf_range(0.05, 0.15),
 			"lifespan": randf_range(10.0, 30.0),
 			"reproduction_rate": randf_range(0.001, 0.005),
-			# Steering weights
 			"separation_weight": randf_range(1.0, 2.0),
 			"alignment_weight": randf_range(1.0, 2.0),
 			"cohesion_weight": randf_range(1.0, 2.0),
@@ -31,33 +35,28 @@ func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
 		}
 	else:
 		dna = dna_values
-	
-	# Apply DNA to properties
+
 	max_speed = dna["max_speed"]
 	max_force = dna["max_force"]
 	size = dna["size"]
 	lifespan = dna["lifespan"]
-	health = 1.0  # Full health at birth
-
-func _process(_delta: float):
-	# Not needed since we'll handle updates through the ecosystem
-	pass
+	health = 1.0
 
 func update(delta: float) -> void:
 	age += delta
-	health -= delta / lifespan  # Gradually lose health over lifespan
-	
-	# Apply forces and move
-	position += velocity * delta
-	
-	# Wrap around edges of screen
-	var viewport_size = get_viewport_rect().size
-	if position.x < 0: position.x = viewport_size.x
-	if position.y < 0: position.y = viewport_size.y
-	if position.x > viewport_size.x: position.x = 0
-	if position.y > viewport_size.y: position.y = 0
+	health -= delta / lifespan
 
-func apply_force(force: Vector2) -> void:
+	position += velocity * delta
+
+	# Wrap around 3D bounding box (0.8 x 0.4 x 0.8)
+	if position.x < -BOUNDS_X: position.x = BOUNDS_X
+	if position.x > BOUNDS_X: position.x = -BOUNDS_X
+	if position.y < 0.0: position.y = BOUNDS_Y * 2.0
+	if position.y > BOUNDS_Y * 2.0: position.y = 0.0
+	if position.z < -BOUNDS_Z: position.z = BOUNDS_Z
+	if position.z > BOUNDS_Z: position.z = -BOUNDS_Z
+
+func apply_force(force: Vector3) -> void:
 	velocity += force
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed
@@ -66,16 +65,21 @@ func is_dead() -> bool:
 	return health <= 0
 
 func can_reproduce() -> bool:
-	# Can reproduce if mature and has enough health
 	return age > lifespan * 0.3 and health > 0.5
 
-# Implement steering behaviors
-func seek(target: Vector2) -> Vector2:
+func seek(target: Vector3) -> Vector3:
 	var desired = target - position
 	desired = desired.normalized() * max_speed
 	var steer = desired - velocity
-	steer = steer.limit_length(max_force)
+	if steer.length() > max_force:
+		steer = steer.normalized() * max_force
 	return steer
 
-func flee(target: Vector2) -> Vector2:
+func flee(target: Vector3) -> Vector3:
 	return -seek(target)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+func _exit_tree() -> void:
+	pass

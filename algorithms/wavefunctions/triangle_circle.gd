@@ -1,116 +1,251 @@
-extends Node2D
+extends Node3D
 
-@export var circle_radius: float = 200.0  # Radius of the circle
-@export var triangle_side: float = 100.0  # Side length of the triangle
-@export var angular_speed: float = 0.5  # Speed of the triangle's rotation around the circle
+## Triangle Circle Trace — 3D VR version
+## An equilateral triangle rolls around a circle, a trace point on the triangle
+## draws an epitrochoid pattern.
+
+@export var circle_radius: float = 0.2  # Radius of the base circle
+@export var triangle_side: float = 0.1  # Side length of the rolling triangle
+@export var angular_speed: float = 0.5  # Speed of the triangle rolling around the circle
+@export var trace_speed: float = 3.0  # How fast the trace point moves along the triangle edges
+@export var max_trail_points: int = 2000
 @export var trace_color: Color = Color(0.0, 1.0, 0.0, 1.0)
-@export var steps_per_edge: float = 20  # Steps to divide each triangle edge
+@export var triangle_color: Color = Color(0.3, 0.3, 1.0)
+@export var circle_color: Color = Color(0.5, 0.5, 0.5)
+@export var point_color: Color = Color(1.0, 0.0, 0.0)
 
-var angle: float = 0.0  # Current angle of rotation
-var trace_step: float = 0.0  # Progress of the dot along the triangle's outline
-var edge_index: int = 0  # Current edge the dot is tracing
+var angle: float = 0.0  # Current rotation angle around the circle
+var trace_step: float = 0.0  # Progress along current edge [0, 1)
+var edge_index: int = 0  # Which edge the trace point is on
 
-var triangle_vertices: Array[Vector2]  # Triangle vertices
-var trace_position: Vector2  # Position of the trace dot
-var trace_image: Image = Image.new()  # Image to store the trace
-var trace_texture_data: ImageTexture
-@onready var drawtexture = $"../../DrawTexture"
-var x = 0 
-var y = 0
+var triangle_vertices: Array[Vector3] = []  # Local triangle vertices (XZ plane)
+var trail_points: Array[Vector3] = []  # World positions of the trace trail
+var trail_ages: Array[float] = []  # Age of each trail point for color fading
+
+# Mesh instances
+var _circle_mesh_instance: MeshInstance3D
+var _triangle_mesh_instance: MeshInstance3D
+var _trail_mesh_instance: MeshInstance3D
+var _trace_point_instance: MeshInstance3D
+var _label: Label3D
+
+var _elapsed: float = 0.0
+
+
 func _ready() -> void:
-	calculate_triangle_vertices()
-	trace_position = triangle_vertices[0]  # Start at the first vertex
-	set_process(true)
-	init_trace_image()
+	_calculate_triangle_vertices()
+	_create_circle()
+	_create_triangle()
+	_create_trail()
+	_create_trace_point()
+	_create_label()
 
-func init_trace_image() -> void:
-	var width = 800
-	var height = 800
-	trace_image = Image.create(width, height, false, Image.FORMAT_RGBA8)
-	trace_image.fill(Color(0, 0, 0, 0))  # Transparent background
-	trace_texture_data = ImageTexture.create_from_image(trace_image)
-	update_material(trace_texture_data)
 
 func _process(delta: float) -> void:
-	# Move triangle around the circle
+	_elapsed += delta
+
+	# Rotate triangle around the circle
 	angle += angular_speed * delta
 	if angle >= TAU:
 		angle -= TAU
 
-	# Move dot along the triangle's outline
-	update_trace_step(delta)
-	queue_redraw()
+	# Move trace point along triangle edges
+	_update_trace_step(delta)
 
-func _draw() -> void:
-	var screen_center = get_viewport_rect().size / 2
-	var center = screen_center + Vector2(circle_radius * cos(angle), circle_radius * sin(angle))
-	var tangent = Vector2(-sin(angle), cos(angle))  # Tangent to the circle
+	# Compute world position of trace point
+	var local_pos := _get_trace_local_position()
+	var world_pos := _transform_to_world(local_pos)
 
-	# Rotate and translate triangle vertices
-	var transformed_vertices = []
-	for vertex in triangle_vertices:
-		var rotated_vertex = vertex.rotated(angle)
-		var translated_vertex = center + tangent * rotated_vertex.x + Vector2(-tangent.y, tangent.x) * rotated_vertex.y
-		transformed_vertices.append(translated_vertex)
+	# Add to trail
+	trail_points.append(world_pos)
+	trail_ages.append(_elapsed)
+	while trail_points.size() > max_trail_points:
+		trail_points.pop_front()
+		trail_ages.pop_front()
 
-	# Draw the triangle
-	draw_line(transformed_vertices[0], transformed_vertices[1], Color.BLUE, 2)
-	draw_line(transformed_vertices[1], transformed_vertices[2], Color.BLUE, 2)
-	draw_line(transformed_vertices[2], transformed_vertices[0], Color.BLUE, 2)
+	# Update visuals
+	_update_triangle()
+	_update_trail()
+	_trace_point_instance.position = world_pos
 
-	# Draw the trace dot
-	draw_circle(trace_position, 5, Color.RED)
 
-	# Draw the circle
-	draw_circle(screen_center, circle_radius, Color.GRAY)
-
-func calculate_triangle_vertices() -> void:
-	var half_base = triangle_side / 2
-	var height = triangle_side * sqrt(3) / 2
+func _calculate_triangle_vertices() -> void:
+	var half_base := triangle_side / 2.0
+	var h := triangle_side * sqrt(3.0) / 2.0
+	# Triangle in local XZ plane, centered at origin
 	triangle_vertices = [
-		Vector2(-half_base, 0),  # Bottom left
-		Vector2(half_base, 0),   # Bottom right
-		Vector2(0, -height)      # Top
+		Vector3(-half_base, 0.0, 0.0),
+		Vector3(half_base, 0.0, 0.0),
+		Vector3(0.0, 0.0, -h)
 	]
 
-func update_trace_step(delta) -> void:
-	var progress_per_edge = delta * steps_per_edge
-	trace_step += progress_per_edge
 
-	if trace_step >= 1.0:
+func _transform_to_world(local_pos: Vector3) -> Vector3:
+	# Place on the circle in XZ plane at y=0
+	var center_on_circle := Vector3(
+		circle_radius * cos(angle),
+		0.0,
+		circle_radius * sin(angle)
+	)
+	# Rotate local position by the rolling angle
+	var rotated := Vector3(
+		local_pos.x * cos(angle) - local_pos.z * sin(angle),
+		local_pos.y,
+		local_pos.x * sin(angle) + local_pos.z * cos(angle)
+	)
+	return center_on_circle + rotated
+
+
+func _get_trace_local_position() -> Vector3:
+	var v0 := triangle_vertices[edge_index]
+	var v1 := triangle_vertices[(edge_index + 1) % triangle_vertices.size()]
+	return v0.lerp(v1, trace_step)
+
+
+func _update_trace_step(delta: float) -> void:
+	trace_step += trace_speed * delta
+	while trace_step >= 1.0:
 		trace_step -= 1.0
-		edge_index = (edge_index + 1) % triangle_vertices.size()  # Ensure index wraps around
-
-	# Calculate current edge
-	var current_vertex = triangle_vertices[edge_index]
-	var next_vertex = triangle_vertices[(edge_index + 1) % triangle_vertices.size()]  # Wrap to the first vertex if needed
-
-	# Interpolate along the edge
-	trace_position = current_vertex.lerp(next_vertex, trace_step)
-	trace_position += Vector2(circle_radius * cos(angle), circle_radius * sin(angle)) * 200
-
-		 
-	# Add trace to the image
-	set_pixel_block(trace_image, trace_position / Vector2(1000,1000)+ Vector2(300,300), trace_color, 3)
-	print(trace_position)
-	# Update texture
-	trace_texture_data = ImageTexture.create_from_image(trace_image)
-	update_material(trace_texture_data)
+		edge_index = (edge_index + 1) % triangle_vertices.size()
 
 
-func set_pixel_block(image: Image, position: Vector2, color: Color, block_size: int) -> void:
-	for y in range(-block_size / 2, block_size / 2):
-		for x in range(-block_size / 2, block_size / 2):
-			var block_position = position + Vector2(x, y)
-			if block_position.x >= 0 and block_position.y >= 0 and block_position.x < image.get_width() and block_position.y < image.get_height():
-				image.set_pixelv(block_position, color)
+func _create_label() -> void:
+	_label = Label3D.new()
+	_label.text = "Triangle Circle Trace"
+	_label.font_size = 32
+	_label.position = Vector3(0.0, -0.3, 0.0)
+	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_label.modulate = Color(1.0, 1.0, 1.0)
+	add_child(_label)
 
-func update_material(tex: ImageTexture) -> void:
-	if drawtexture.material_override is ShaderMaterial:
-		var shader_material = drawtexture.material_override as ShaderMaterial
-		shader_material.set_shader_parameter("transparancy", 1)
-		shader_material.set_shader_parameter("texture_albedo", tex)
-	else:
-		var material = StandardMaterial3D.new()
-		material.albedo_texture = tex
-		drawtexture.material_override = material
+
+func _create_circle() -> void:
+	_circle_mesh_instance = MeshInstance3D.new()
+	var mesh := ImmediateMesh.new()
+	_circle_mesh_instance.mesh = mesh
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = circle_color
+	_circle_mesh_instance.material_override = mat
+
+	# Draw circle in XZ plane at y=0
+	var segments := 64
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(segments):
+		var a0 := TAU * float(i) / float(segments)
+		var a1 := TAU * float(i + 1) / float(segments)
+		mesh.surface_set_color(circle_color)
+		mesh.surface_add_vertex(Vector3(circle_radius * cos(a0), 0.0, circle_radius * sin(a0)))
+		mesh.surface_set_color(circle_color)
+		mesh.surface_add_vertex(Vector3(circle_radius * cos(a1), 0.0, circle_radius * sin(a1)))
+	mesh.surface_end()
+
+	add_child(_circle_mesh_instance)
+
+
+func _create_triangle() -> void:
+	_triangle_mesh_instance = MeshInstance3D.new()
+	_triangle_mesh_instance.mesh = ImmediateMesh.new()
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = triangle_color
+	_triangle_mesh_instance.material_override = mat
+
+	add_child(_triangle_mesh_instance)
+
+
+func _update_triangle() -> void:
+	var mesh: ImmediateMesh = _triangle_mesh_instance.mesh
+	mesh.clear_surfaces()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	# Transform each vertex to world and draw edges
+	var world_verts: Array[Vector3] = []
+	for v in triangle_vertices:
+		world_verts.append(_transform_to_world(v))
+
+	for i in range(world_verts.size()):
+		var j := (i + 1) % world_verts.size()
+		mesh.surface_set_color(triangle_color)
+		mesh.surface_add_vertex(world_verts[i])
+		mesh.surface_set_color(triangle_color)
+		mesh.surface_add_vertex(world_verts[j])
+
+	mesh.surface_end()
+
+
+func _create_trail() -> void:
+	_trail_mesh_instance = MeshInstance3D.new()
+	_trail_mesh_instance.mesh = ImmediateMesh.new()
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = trace_color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_trail_mesh_instance.material_override = mat
+
+	add_child(_trail_mesh_instance)
+
+
+func _update_trail() -> void:
+	var mesh: ImmediateMesh = _trail_mesh_instance.mesh
+	mesh.clear_surfaces()
+
+	if trail_points.size() < 2:
+		return
+
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	var oldest_age := trail_ages[0]
+	var newest_age := trail_ages[trail_ages.size() - 1]
+	var age_range := newest_age - oldest_age
+	if age_range < 0.001:
+		age_range = 1.0
+
+	for i in range(trail_points.size() - 1):
+		var t := (trail_ages[i] - oldest_age) / age_range  # 0 = oldest, 1 = newest
+		var alpha := t  # Fade: old = transparent, new = opaque
+		var c := Color(trace_color.r, trace_color.g, trace_color.b, alpha * trace_color.a)
+		mesh.surface_set_color(c)
+		mesh.surface_add_vertex(trail_points[i])
+		mesh.surface_set_color(c)
+		mesh.surface_add_vertex(trail_points[i + 1])
+
+	mesh.surface_end()
+
+
+func _create_trace_point() -> void:
+	_trace_point_instance = MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.008
+	sphere.height = 0.016
+	sphere.radial_segments = 10
+	sphere.rings = 5
+	_trace_point_instance.mesh = sphere
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = point_color
+	mat.emission_enabled = true
+	mat.emission = point_color
+	_trace_point_instance.material_override = mat
+
+	add_child(_trace_point_instance)
+
+
+func _exit_tree() -> void:
+	for child in get_children():
+		child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
