@@ -2048,9 +2048,9 @@
 		"example_3_5_simple_harmonic_motion_vr": {
 			"lookup_name": "example_3_5_simple_harmonic_motion_vr",
 			"name": "example_3_5_simple_harmonic_motion_vr",
-			"description": "Simple harmonic motion demonstration",
+			"description": "Damped harmonic motion with coupled oscillators, beats/resonance detection, energy bars (KE/PE/total), decay envelope, and VR slider controls",
 			"scene": "res://algorithms/oscillation/noc_ch03/example_3_5_simple_harmonic_motion_vr.tscn",
-			"category": "unknown",
+			"category": "oscillation",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2068,16 +2068,27 @@
 					1,
 					1
 				],
-				"size_group": "compact"
+				"size_group": "compact",
+				"amplitude": 0.2,
+				"frequency_a": 1.5,
+				"frequency_b": 1.8,
+				"damping": 0.15,
+				"coupling": 0.3,
+				"show_coupled": true
 			},
-			"complexity": "beginner",
+			"complexity": "intermediate",
 			"tags": [
 				"animation",
-				"wave"
+				"wave",
+				"damping",
+				"coupled-oscillators",
+				"energy",
+				"resonance"
 			],
 			"dev_themes": [
 				"physics",
-				"simulation"
+				"simulation",
+				"oscillation"
 			]
 		},
 		"example_3_6_simple_harmonic_motion_ii_vr": {
