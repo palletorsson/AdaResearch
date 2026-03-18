@@ -105,3 +105,6 @@ func _ready() -> void:
 		_initial_left_pos = left_hand.position
 	if right_hand:
 		_initial_right_pos = right_hand.position
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

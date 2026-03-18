@@ -130,3 +130,6 @@ func _reset_demo() -> void:
 		line_container.refresh_connections()
 	
 	print("ForceMagnitudeDemo: Reset")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

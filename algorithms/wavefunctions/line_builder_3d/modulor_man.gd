@@ -237,3 +237,6 @@ func _create_line_material() -> ShaderMaterial:
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 
 	return mat
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -93,3 +93,6 @@ func _update_trail(ball: Node3D, points: Array[Vector3], mesh: ImmediateMesh, de
 	for p in points:
 		mesh.surface_add_vertex(p)
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

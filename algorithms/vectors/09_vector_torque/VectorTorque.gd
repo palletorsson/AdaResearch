@@ -58,3 +58,6 @@ func _update_info(r: Vector3, f: Vector3, torque: Vector3) -> void:
 
 
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

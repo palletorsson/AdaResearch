@@ -711,3 +711,6 @@ func _exit_tree() -> void:
 	# Cleanup
 	for obj in objects:
 		obj.cleanup()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

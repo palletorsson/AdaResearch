@@ -17,3 +17,6 @@ func _process(delta: float) -> void:
 	var cylinder_speed = 1.5
 	var cylinder_range = 3.0
 	cylinder_mesh_instance.position.y = sin(time_elapsed * cylinder_speed) * cylinder_range
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

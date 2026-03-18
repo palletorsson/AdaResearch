@@ -15,3 +15,6 @@ func _unhandled_input(event: InputEvent) -> void:
 					bv.regenerate()
 			KEY_ESCAPE:
 				get_tree().quit()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

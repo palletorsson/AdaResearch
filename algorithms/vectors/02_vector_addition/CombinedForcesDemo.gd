@@ -144,3 +144,6 @@ func _reset_demo() -> void:
 		line2.refresh_connections()
 	
 	print("CombinedForcesDemo: Reset")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

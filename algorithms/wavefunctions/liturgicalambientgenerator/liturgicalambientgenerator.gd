@@ -980,3 +980,6 @@ func _on_sacred_generation_complete() -> void:
 	is_initialized = true
 	is_generating = false
 	print("The liturgical atmosphere now surrounds you...")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

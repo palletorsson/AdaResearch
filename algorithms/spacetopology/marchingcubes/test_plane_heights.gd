@@ -76,3 +76,6 @@ func simulate_terrain_generation(plane_offset: float) -> int:
 func _ready() -> void:
 	print("🎛️ Plane Height Tester Ready")
 	print("Click 'test_different_heights' in inspector to run tests") 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

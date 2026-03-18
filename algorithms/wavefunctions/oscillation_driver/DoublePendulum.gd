@@ -207,3 +207,6 @@ func _update_cube_color(color: Color) -> void:
 		material.albedo_color = color
 		material.emission_enabled = true
 		material.emission = color * 0.5
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

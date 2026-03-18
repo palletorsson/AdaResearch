@@ -519,3 +519,6 @@ func format_number(num: int) -> String:
 		count += 1
 	
 	return result
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

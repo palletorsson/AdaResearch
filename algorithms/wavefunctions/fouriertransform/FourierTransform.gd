@@ -57,3 +57,6 @@ func _update_signal_parameters() -> void:
 		signal_generator.amplitude = amplitude_slider.value
 		signal_generator.harmonics = int(harmonics_slider.value)
 		signal_generator.update_signal()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

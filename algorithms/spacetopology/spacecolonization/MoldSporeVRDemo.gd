@@ -625,3 +625,6 @@ func _exit_tree() -> void:
 		auto_growth_timer.stop()
 	clear_current_generation()
 	print("MoldSporeVRDemo: VR demo cleaned up")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

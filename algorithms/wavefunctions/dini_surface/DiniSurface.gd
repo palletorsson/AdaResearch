@@ -112,3 +112,6 @@ func _get_u_ratio(i: int) -> float:
 
 func _get_v_ratio(j: int) -> float:
 	return float(j) / float(v_segments - 1)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

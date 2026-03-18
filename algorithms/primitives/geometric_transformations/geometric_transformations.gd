@@ -258,3 +258,6 @@ func get_transformation_name() -> String:
 			return "Shearing"
 		_:
 			return "Unknown"
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

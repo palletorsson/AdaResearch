@@ -593,3 +593,6 @@ func get_triangulation(x: int, y: int, z: int, voxel_grid: VoxelGrid) -> Array:
 		return TRIANGULATIONS[idx]
 	else:
 		return [] 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

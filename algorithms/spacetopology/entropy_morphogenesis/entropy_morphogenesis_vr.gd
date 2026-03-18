@@ -160,3 +160,6 @@ func get_entropy() -> float:
 func regenerate_now() -> void:
 	"""Manually trigger regeneration at current entropy"""
 	_regenerate()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

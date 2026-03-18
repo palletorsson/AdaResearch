@@ -200,3 +200,6 @@ func set_animation_speed(speed: float) -> void:
 
 func set_arm_amplitude(amplitude: float) -> void:
 	arm_amplitude = amplitude
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

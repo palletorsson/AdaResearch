@@ -69,3 +69,6 @@ func _on_next_cube_activated() -> void:
 #   ...
 # ]
 # This would place a next cube in the center of the grid
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

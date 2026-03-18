@@ -125,3 +125,6 @@ func spawn_body(descriptors) -> void:
 		_current_body = _fourier_body_scene.instantiate()
 		add_child(_current_body)
 		_current_body.configure(descriptors)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

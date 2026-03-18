@@ -61,3 +61,6 @@ func _handle_teleport(body: XROrigin3D, source_portal: Portal, target_portal: Po
 	# Emit signal and reset teleporting flag
 	teleport_complete.emit(target_portal, body)
 	teleporting = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -191,3 +191,6 @@ func toggle_display_style() -> void:
 		var new_style = (current_style + 1) % 5  # Cycle through all display styles
 		game_sound_meter.display_style = new_style
 		print("SpectralAnalyzer: Display style changed to %d" % new_style) 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

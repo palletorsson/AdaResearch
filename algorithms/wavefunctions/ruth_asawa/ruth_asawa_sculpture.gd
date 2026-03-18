@@ -327,3 +327,6 @@ func generate_audio_reactive_surface() -> void:
 
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -54,3 +54,6 @@ func _update_parameters() -> void:
 		hull_visualizer.point_count = int(point_count_slider.value)
 		hull_visualizer.distribution_type = int(distribution_slider.value)
 		hull_visualizer.algorithm_type = int(algorithm_slider.value)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

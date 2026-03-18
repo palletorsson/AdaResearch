@@ -108,3 +108,6 @@ func _write_log(message: String) -> void:
 	_last_log = message
 	if _log_label:
 		_log_label.text = message
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

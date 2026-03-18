@@ -83,3 +83,6 @@ func _draw_trail() -> void:
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

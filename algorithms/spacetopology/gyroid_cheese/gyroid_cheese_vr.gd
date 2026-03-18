@@ -135,3 +135,6 @@ func set_noise_amplitude(a: float) -> void:
 	noise_amp = a
 	if gyroid_generator != null:
 		gyroid_generator.noise_amp = a
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

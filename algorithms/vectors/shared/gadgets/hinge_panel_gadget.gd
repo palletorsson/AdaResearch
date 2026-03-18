@@ -110,3 +110,6 @@ func update_from_vectors(a: Vector3, b: Vector3) -> void:
 		_target_angle = acos(cos_theta)
 	else:
 		_target_angle = 0.0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

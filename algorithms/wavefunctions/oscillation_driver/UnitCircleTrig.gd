@@ -133,3 +133,6 @@ func _draw_connections() -> void:
 	mesh.surface_add_vertex(center)
 	
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -16,3 +16,6 @@ func _ready() -> void:
     if _screen_mesh and screen_material:
         var mat := screen_material.duplicate() as ShaderMaterial
         _screen_mesh.material_override = mat
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

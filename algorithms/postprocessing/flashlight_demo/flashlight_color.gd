@@ -59,3 +59,6 @@ func _find_lens_mesh(node: Node) -> MeshInstance3D:
 		if found:
 			return found
 	return null
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

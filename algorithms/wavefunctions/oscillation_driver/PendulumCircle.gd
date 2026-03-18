@@ -161,3 +161,6 @@ func _find_drawable(node: Node) -> Node:
 			return child
 	return null
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

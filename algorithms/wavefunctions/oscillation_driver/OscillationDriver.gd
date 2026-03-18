@@ -70,3 +70,6 @@ func _update_connection() -> void:
 	mesh.surface_add_vertex(product_cube.position)
 	
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

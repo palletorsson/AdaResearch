@@ -37,3 +37,6 @@ func _ready() -> void:
 		print("SpectralDisplayController [%s]: Texture size: %s" % [name, viewport_texture.get_size()])
 	else:
 		print("SpectralDisplayController: No StandardMaterial3D found") 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
