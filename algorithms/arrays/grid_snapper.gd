@@ -150,4 +150,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("grid_size_x"):
+		grid_size.x = float(config["grid_size_x"])
+	if config.has("grid_size_y"):
+		grid_size.y = float(config["grid_size_y"])
+	if config.has("grid_size_z"):
+		grid_size.z = float(config["grid_size_z"])
+	if config.has("snap_enabled"):
+		snap_enabled = config["snap_enabled"] is bool and config["snap_enabled"]
+	if config.has("smooth_snap"):
+		smooth_snap = config["smooth_snap"] is bool and config["smooth_snap"]
+	if config.has("snap_speed"):
+		snap_speed = float(config["snap_speed"])
+	if config.has("show_grid_points"):
+		show_grid_points = config["show_grid_points"] is bool and config["show_grid_points"]
+	if config.has("point_color"):
+		point_color = Color.from_string(config["point_color"], point_color)
+	if config.has("grid_points_range"):
+		grid_points_range = int(config["grid_points_range"])
+	# Rebuild visualization with updated settings
+	if _debug_mesh:
+		_debug_mesh.queue_free()
+		_debug_mesh = null
+	if show_grid_points:
+		_setup_visualization()

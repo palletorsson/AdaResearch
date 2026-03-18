@@ -51,4 +51,14 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("font_size"):
+		font_size = int(config["font_size"])
+	if config.has("text_color"):
+		text_color = Color.from_string(config["text_color"], text_color)
+	if config.has("tracked_node_name"):
+		tracked_node_name = str(config["tracked_node_name"])
+		_player = null  # Force re-search on next frame
+	# Rebuild label with updated settings
+	_create_label()

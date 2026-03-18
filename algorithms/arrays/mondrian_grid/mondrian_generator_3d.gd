@@ -367,4 +367,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("grid_width"):
+		grid_width = int(config["grid_width"])
+	if config.has("grid_depth"):
+		grid_depth = int(config["grid_depth"])
+	if config.has("min_block_size"):
+		min_block_size = int(config["min_block_size"])
+	if config.has("line_thickness"):
+		line_thickness = float(config["line_thickness"])
+	if config.has("block_height"):
+		block_height = float(config["block_height"])
+	if config.has("split_probability"):
+		split_probability = clampf(float(config["split_probability"]), 0.0, 1.0)
+	if config.has("colored_section_probability"):
+		colored_section_probability = clampf(float(config["colored_section_probability"]), 0.0, 1.0)
+	if config.has("seed"):
+		random_seed = int(config["seed"])
+	# Clear cached materials so they regenerate
+	_mat_white = null
+	_mat_black = null
+	_mat_red = null
+	_mat_blue = null
+	_mat_yellow = null
+	# Regenerate the grid
+	generate_grid()

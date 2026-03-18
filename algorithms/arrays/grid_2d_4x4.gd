@@ -120,4 +120,55 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	var cols = int(config["cols"]) if config.has("cols") else 4
+	var rows = int(config["rows"]) if config.has("rows") else 4
+	var spacing = float(config["spacing"]) if config.has("spacing") else 1.0
+	var label_size = int(config["label_size"]) if config.has("label_size") else 32
+	var label_color = Color.from_string(config["label_color"], Color.WHITE) if config.has("label_color") else Color.WHITE
+	if config.has("show_binary_table"):
+		show_binary_table = config["show_binary_table"] is bool and config["show_binary_table"]
+
+	# Rebuild
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+	_cube_refs.clear()
+	_binary_table = null
+	await get_tree().process_frame
+
+	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
+	grid_data = []
+	for x in range(cols):
+		var row: Array = []
+		for z in range(rows):
+			row.append(1)
+		grid_data.append(row)
+
+	for x in range(cols):
+		for z in range(rows):
+			var cube_instance = pickup_cube_scene.instantiate()
+			cube_instance.name = "Cube_%d_%d" % [x, z]
+			cube_instance.position = Vector3(x * spacing, 0, z * spacing)
+			cube_instance.set_meta("grid_x", x)
+			cube_instance.set_meta("grid_z", z)
+			cube_instance.tree_exiting.connect(_on_cube_removed.bind(x, z))
+			_cube_refs["%d_%d" % [x, z]] = cube_instance
+
+			var label = Label3D.new()
+			label.text = "[%d, %d]" % [x, z]
+			label.font_size = label_size
+			label.pixel_size = 0.003
+			label.outline_size = 6
+			label.outline_modulate = Color(0, 0, 0, 1)
+			label.position = Vector3(0, 1.0, 0)
+			label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			label.no_depth_test = true
+			label.modulate = label_color
+			cube_instance.add_child(label)
+
+			add_child(cube_instance)
+
+	if show_binary_table:
+		_create_binary_table()
