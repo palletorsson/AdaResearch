@@ -1,0 +1,90 @@
+{
+    "_metadata": {
+        "sound_type": "hybrid_song",
+        "display_name": "Chicago to Düsseldorf",
+        "description": "Chicago House × Kraftwerk - soul becomes machine. Warehouse piano meets robotic precision.",
+        "category": "songs",
+        "tags": ["hybrid", "house", "kraftwerk", "chicago", "electronic", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Marshall Jefferson", "Kraftwerk", "Mr. Fingers", "Florian Schneider"],
+        "reference_tracks": ["Move Your Body", "Trans-Europe Express", "Can You Feel It", "The Robots"]
+    },
+    "identity": {
+        "emotion": "joyful_precision",
+        "era": "transatlantic_electronic",
+        "character": ["soulful", "mechanical", "driving", "euphoric"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 480.0, "value": 320.0, "step": 60.0 },
+        "bpm": { "min": 118, "max": 126, "value": 122, "step": 1 },
+        "key": { "options": ["C", "Am", "F", "G"], "value": "Am" },
+        "soul_machine_blend": { "min": 0.0, "max": 1.0, "value": 0.5, "step": 0.1, "description": "Chicago↔Düsseldorf balance" }
+    },
+    "hybrid_config": {
+        "primary_bank": "gypsy_woman_house",
+        "secondary_bank": "kraftwerk",
+        "sound_sources": {
+            "piano": "gypsy_woman_house",
+            "organ": "gypsy_woman_house",
+            "vocal_sample": "gypsy_woman_house",
+            "kick": "gypsy_woman_house",
+            "clap": "gypsy_woman_house",
+            "shaker": "gypsy_woman_house",
+            "synth_bass": "kraftwerk",
+            "vocoder": "kraftwerk",
+            "sequence": "kraftwerk",
+            "hihat": "kraftwerk",
+            "pad": "kraftwerk"
+        },
+        "section_sounds": {
+            "intro": ["sequence", "pad"],
+            "build": ["piano", "sequence", "kick"],
+            "main": ["kick", "clap", "piano", "synth_bass", "hihat"],
+            "breakdown": ["organ", "vocoder", "pad"],
+            "climax": ["kick", "clap", "piano", "synth_bass", "sequence", "vocal_sample"],
+            "outro": ["sequence", "pad", "shaker"]
+        }
+    },
+    "sound_design": {
+        "piano": {
+            "style": "chicago_house",
+            "voicing": "stabby_chords",
+            "velocity_variation": 0.2,
+            "reverb": "warehouse"
+        },
+        "drums": {
+            "kick": { "machine": "TR-909", "character": "chicago_thump", "decay": "punchy" },
+            "clap": { "style": "house_snap", "reverb": "tight" },
+            "hihat": { "style": "kraftwerk_metallic", "pattern": "precise_16th" }
+        },
+        "synth_bass": {
+            "style": "kraftwerk_pulse",
+            "waveform": "square",
+            "filter_cutoff_hz": 500,
+            "glide_ms": 20
+        },
+        "vocoder": {
+            "carrier": "sawtooth",
+            "bands": 16,
+            "character": "robotic_choir"
+        },
+        "sequences": {
+            "style": "motorik_arpeggio",
+            "waveform": "pulse",
+            "filter_envelope": "subtle"
+        }
+    },
+    "arrangement": {
+        "structure": "house_journey",
+        "sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
+        "builds": "layer_stack",
+        "breakdowns": "piano_solo"
+    },
+    "mix": {
+        "kick_level_db": -3,
+        "piano_level_db": -6,
+        "sequence_level_db": -9,
+        "reverb": "warehouse_medium",
+        "stereo_width": 1.1
+    }
+}

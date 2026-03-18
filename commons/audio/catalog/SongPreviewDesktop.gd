@@ -85,29 +85,71 @@ func _setup_ui():
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(grid)
 	
-	# Song buttons - 18 full songs including hybrids!
+	# Song buttons - 44 full songs including hybrids and soundbank variants
 	var songs = [
+		# === FEATURED / ORIGINAL ===
 		["chromatic_story", "🎹 Chromatic Story", "Jazz → Pop emotional journey"],
 		["nineties_rnb", "🎵 90s R&B", "Dm slow jam - Rhodes + 808"],
-		["computer_love", "🤖 Computer Love", "Kraftwerk - robotic romance"],
-		["aphex_twin_digital_amber", "💛 Digital Amber", "Aphex Twin - SAW meets Syro"],
 		["ada_theme", "🎤 Ada Theme", "Warm backing for Ada voice"],
-		["prog_synth_70s", "🎸 70s Prog", "ELP, Kraftwerk, Yes"],
-		["kpop_prog", "🎤 K-Pop Prog", "70s Prog × K-Pop - Moog kill parts"],
 		["pop_generative", "🎤 Pop Gen", "Verse-Chorus structure"],
+		["pop_madonna", "👸 Madonna", "80s pop - Material Girl era"],
+		["pop_v2", "🎤 Pop V2", "Enhanced pop structure"],
+
+		# === PROG / EXPERIMENTAL ===
+		["prog_synth_70s", "🎸 70s Prog", "ELP, Kraftwerk, Yes"],
+		["prog_synth_v2", "🎸 Prog V2", "Enhanced 70s synth prog"],
+		["prog_odyssey", "🚀 Prog Odyssey", "Extended synth journey"],
+		["kpop_prog", "🎤 K-Pop Prog", "70s Prog × K-Pop - Moog kill parts"],
+
+		# === AMBIENT / TEXTURAL ===
 		["ambient_works", "🌊 Ambient", "Aphex Twin style"],
-		["i_feel_love", "💜 I Feel Love", "Donna Summer + synth voice"],
+		["ambient_techno", "🌌 Ambient Techno", "Floating machine textures"],
+		["aphex_twin_digital_amber", "💛 Digital Amber", "Aphex Twin - SAW meets Syro"],
+		["boards_of_canada", "📼 BoC", "Warp-era nostalgia"],
+		["boards_of_canada_v2", "📼 BoC V2", "Enhanced tape degradation"],
+		["boc_sb", "📼 BoC SB", "Soundbank nostalgic textures"],
+		["burial", "🌧️ Burial", "South London rain - Untrue style"],
+		["burial_v2", "🌧️ Burial V2", "Deeper into the night"],
+
+		# === DETROIT / TECHNO ===
 		["detroit_techno", "🔩 Detroit", "Cold machine funk"],
 		["midnight_metroplex", "🌃 Metroplex", "909 + 808 researched"],
+		["acid_house", "🟡 Acid House", "303 squelch - Chicago warehouse"],
+		["acid_techno_303", "🔊 Acid 303", "Relentless machine acid"],
+
+		# === KRAFTWERK / ELECTRONIC ===
+		["computer_love", "🤖 Computer Love", "Kraftwerk - robotic romance"],
+		["kraftwerk", "🤖 Kraftwerk", "Trans-Europe Express style"],
+		["kraftwerk_v2", "🤖 Kraftwerk V2", "Enhanced robotic precision"],
+		["dark_kraftwerk_ambience", "🌑 Dark Kraft", "Ambient robotic meditation"],
+
+		# === SYNTHWAVE / 80s ===
 		["synthwave", "🌆 Synthwave", "80s gated drums"],
+		["synthwave_sb", "🌆 Synth SB", "Soundbank synthwave"],
+		["blade_runner", "🦾 Blade Runner", "Vangelis CS-80 dreams"],
+		["moroder_disco", "🪩 Moroder", "Instrumental version"],
+		["i_feel_love", "💜 I Feel Love", "Donna Summer + synth voice"],
+
+		# === HOUSE / DANCE ===
+		["french_touch", "🇫🇷 French Touch", "Daft Punk era filters"],
+		["lofi_house", "📻 Lo-Fi House", "Dusty samples + swing"],
+		["gypsy_woman_house", "💃 Gypsy House", "Chicago piano house"],
+		["dub_house_sb", "🎚️ Dub House", "Dub chord stabs + tape space"],
+
+		# === RAVE / JUNGLE ===
 		["rave", "⚡ Rave", "Breakbeats + hoover"],
+		["rave_sb", "⚡ Rave SB", "Soundbank rave generation"],
+		["supersaw_trance", "🔺 Trance", "Supersaw euphoria"],
+		["reese_jungle", "🌴 Jungle", "Reese bass + amen"],
+		["k_bass", "🇰🇷 K-Bass", "Seoul jungle/DnB - sub pressure"],
+
+		# === HYBRID CROSSOVERS ===
 		["replicants_dawn", "🌅 Replicant", "Vangelis × Detroit"],
 		["foggy_frequencies", "🌫️ Foggy", "BoC × Burial"],
 		["chicago_dusseldorf", "🚂 Chi→Düss", "House × Kraftwerk"],
-		["dub_house_sb", "Dub House", "Dub chord stabs + tape space"],
-		["moroder_disco", "🪩 Moroder", "Instrumental version"],
-		["k_bass", "🇰🇷 K-Bass", "Seoul jungle/DnB - sub pressure"],
-		["dark_wave_cathedral", "🦇 Cathedral", "Dark wave post-punk ritual"]
+
+		# === DARK / WAVE ===
+		["dark_wave_cathedral", "🦇 Cathedral", "Dark wave post-punk ritual"],
 	]
 	
 	for song in songs:
@@ -356,50 +398,111 @@ func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
 	
 	match song_id:
+		# === FEATURED / ORIGINAL ===
 		"chromatic_story":
 			stream = SoundbankGenerator.generate_song("chromatic_story", {"bpm": 100})
 		"nineties_rnb":
 			stream = SoundbankGenerator.generate_song("nineties_rnb", {"bpm": 92})
-		"computer_love":
-			stream = SoundbankGenerator.generate_song("kraftwerk", {"bpm": 129})
-		"aphex_twin_digital_amber":
-			stream = SoundbankGenerator.generate_song("aphex_twin", {"bpm": 108})
 		"ada_theme":
 			stream = SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
-		"prog_synth_70s":
-			stream = AudioSynthesizer.generate_prog_synth_song({})
-		"kpop_prog":
-			stream = AudioSynthesizer.generate_kpop_prog_song({})
 		"pop_generative":
 			stream = AudioSynthesizer.generate_pop_interactive_song({})
+		"pop_madonna":
+			stream = AudioSynthesizer.generate_pop_madonna_song({})
+		"pop_v2":
+			stream = AudioSynthesizer.generate_pop_v2_song({})
+
+		# === PROG / EXPERIMENTAL ===
+		"prog_synth_70s":
+			stream = AudioSynthesizer.generate_prog_synth_song({})
+		"prog_synth_v2":
+			stream = AudioSynthesizer.generate_prog_synth_v2_song({})
+		"prog_odyssey":
+			stream = AudioSynthesizer.generate_prog_odyssey_song({})
+		"kpop_prog":
+			stream = AudioSynthesizer.generate_kpop_prog_song({})
+
+		# === AMBIENT / TEXTURAL ===
 		"ambient_works":
 			stream = AudioSynthesizer.generate_ambient_works_song({})
-		"moroder_disco":
-			stream = AudioSynthesizer.generate_moroder_disco_song({})
+		"ambient_techno":
+			stream = AudioSynthesizer.generate_ambient_techno_song({})
+		"aphex_twin_digital_amber":
+			stream = SoundbankGenerator.generate_song("aphex_twin", {"bpm": 108})
+		"boards_of_canada":
+			stream = AudioSynthesizer.generate_boards_of_canada_song({})
+		"boards_of_canada_v2":
+			stream = AudioSynthesizer.generate_boards_of_canada_v2_song({})
+		"boc_sb":
+			stream = SoundbankGenerator.generate_song("boards_of_canada", {"bpm": 100})
+		"burial":
+			stream = AudioSynthesizer.generate_burial_song({})
+		"burial_v2":
+			stream = AudioSynthesizer.generate_burial_v2_song({})
+
+		# === DETROIT / TECHNO ===
 		"detroit_techno":
 			stream = AudioSynthesizer.generate_detroit_techno_song({})
 		"midnight_metroplex":
 			stream = SoundbankGenerator.generate_song("detroit_techno", {})
+		"acid_house":
+			stream = AudioSynthesizer.generate_acid_house_song({})
+		"acid_techno_303":
+			stream = AudioSynthesizer.generate_acid_house_song({"hardness": 0.9})
+
+		# === KRAFTWERK / ELECTRONIC ===
+		"computer_love":
+			stream = SoundbankGenerator.generate_song("kraftwerk", {"bpm": 129})
+		"kraftwerk":
+			stream = AudioSynthesizer.generate_kraftwerk_song({})
+		"kraftwerk_v2":
+			stream = AudioSynthesizer.generate_kraftwerk_v2_song({})
+		"dark_kraftwerk_ambience":
+			stream = AudioSynthesizer.generate_dark_kraftwerk_ambience_song({})
+
+		# === SYNTHWAVE / 80s ===
 		"synthwave":
 			stream = AudioSynthesizer.generate_synthwave_song({})
-		"rave":
-			stream = AudioSynthesizer.generate_rave_song({})
-		# === NEW: I Feel Love with singing ===
+		"synthwave_sb":
+			stream = SoundbankGenerator.generate_song("synthwave", {"bpm": 118})
+		"blade_runner":
+			stream = AudioSynthesizer.generate_blade_runner_song({})
+		"moroder_disco":
+			stream = AudioSynthesizer.generate_moroder_disco_song({})
 		"i_feel_love":
 			stream = SoundbankGenerator.generate_song("moroder_disco", {"bpm": 126})
-		"moroder_disco":
-			stream = SoundbankGenerator.generate_song("moroder_disco", {"bpm": 126})
-		# === HYBRID SONGS ===
+
+		# === HOUSE / DANCE ===
+		"french_touch":
+			stream = AudioSynthesizer.generate_french_touch_song({})
+		"lofi_house":
+			stream = AudioSynthesizer.generate_lofi_house_song({})
+		"gypsy_woman_house":
+			stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
+		"dub_house_sb":
+			stream = SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
+
+		# === RAVE / JUNGLE ===
+		"rave":
+			stream = AudioSynthesizer.generate_rave_song({})
+		"rave_sb":
+			stream = SoundbankGenerator.generate_song("rave", {"bpm": 145})
+		"supersaw_trance":
+			stream = AudioSynthesizer.generate_supersaw_trance_song({})
+		"reese_jungle":
+			stream = AudioSynthesizer.generate_reese_jungle_song({})
+		"k_bass":
+			stream = SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
+
+		# === HYBRID CROSSOVERS ===
 		"replicants_dawn":
 			stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
 		"foggy_frequencies":
 			stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
 		"chicago_dusseldorf":
 			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
-		"dub_house_sb":
-			stream = SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
-		"k_bass":
-			stream = SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
+
+		# === DARK / WAVE ===
 		"dark_wave_cathedral":
 			stream = SoundbankGenerator.generate_song("dark_wave", {"bpm": 118})
 	

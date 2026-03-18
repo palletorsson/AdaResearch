@@ -1,0 +1,82 @@
+{
+    "_metadata": {
+        "sound_type": "hybrid_song",
+        "display_name": "Replicants Dawn",
+        "description": "Vangelis × Detroit - existential machine awakening. CS-80 pads meet 909 machine rhythms.",
+        "category": "songs",
+        "tags": ["hybrid", "vangelis", "detroit", "cinematic", "cyberpunk", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Vangelis", "Underground Resistance", "Jeff Mills"],
+        "reference_tracks": ["Blade Runner Blues", "Galaxy 2 Galaxy", "The Bells"]
+    },
+    "identity": {
+        "emotion": "existential_awakening",
+        "era": "cyberpunk_future_past",
+        "character": ["cinematic", "mechanical", "emotional", "vast"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 480.0, "value": 300.0, "step": 60.0 },
+        "bpm": { "min": 115, "max": 125, "value": 120, "step": 1 },
+        "key": { "options": ["Am", "Dm", "Em", "Fm"], "value": "Am" },
+        "blend": { "min": 0.0, "max": 1.0, "value": 0.5, "step": 0.1, "description": "Vangelis↔Detroit balance" }
+    },
+    "hybrid_config": {
+        "primary_bank": "vangelis_cs80",
+        "secondary_bank": "detroit_techno",
+        "sound_sources": {
+            "vp330_choir": "vangelis_cs80",
+            "prophet_pad": "vangelis_cs80",
+            "cs80_strings": "vangelis_cs80",
+            "cs80_brass": "vangelis_cs80",
+            "cs80_lead": "vangelis_cs80",
+            "jupiter_arp": "vangelis_cs80",
+            "kick": "detroit_techno",
+            "snare": "detroit_techno",
+            "hihat": "detroit_techno",
+            "clap": "detroit_techno",
+            "bass": "detroit_techno",
+            "stab": "detroit_techno"
+        },
+        "section_sounds": {
+            "intro": ["vp330_choir", "prophet_pad"],
+            "build": ["cs80_strings", "jupiter_arp", "prophet_pad"],
+            "main": ["kick", "hihat", "bass", "cs80_brass", "prophet_pad"],
+            "breakdown": ["prophet_pad", "snare"],
+            "climax": ["kick", "snare", "hihat", "clap", "bass", "cs80_lead", "cs80_strings", "vp330_choir"],
+            "outro": ["vp330_choir", "prophet_pad"]
+        }
+    },
+    "sound_design": {
+        "pads": {
+            "source": "cs80_polysynth",
+            "character": "lush_cinematic",
+            "chorus_depth": 0.6,
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": 2000,
+            "release_ms": 3000
+        },
+        "drums": {
+            "machine": "TR-909",
+            "kick": { "character": "detroit_punch", "decay": "medium" },
+            "snare": { "style": "crisp_909", "reverb": "short" },
+            "hihats": { "style": "mechanical_16th" }
+        },
+        "bass": {
+            "style": "detroit_sub",
+            "waveform": "saw",
+            "filter_cutoff_hz": 300
+        }
+    },
+    "arrangement": {
+        "structure": "cinematic_arc",
+        "sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
+        "builds": "gradual_layer_addition",
+        "drops": "full_hybrid_fusion"
+    },
+    "mix": {
+        "reverb": "large_hall",
+        "pad_level_db": -6,
+        "drum_level_db": -3,
+        "stereo_width": 1.2
+    }
+}

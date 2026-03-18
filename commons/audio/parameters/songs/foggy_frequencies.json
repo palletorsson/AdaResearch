@@ -1,0 +1,84 @@
+{
+    "_metadata": {
+        "sound_type": "hybrid_song",
+        "display_name": "Foggy Frequencies",
+        "description": "BoC × Burial - nostalgic nocturne. Warp-era textures meet South London rain.",
+        "category": "songs",
+        "tags": ["hybrid", "boards_of_canada", "burial", "ambient", "uk_garage", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Boards of Canada", "Burial"],
+        "reference_tracks": ["Music Has The Right To Children", "Archangel", "Roygbiv", "Untrue"]
+    },
+    "identity": {
+        "emotion": "nostalgic_melancholy",
+        "era": "warp_meets_hyperdub",
+        "character": ["hazy", "crackly", "ghostly", "warm"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 420.0, "value": 280.0, "step": 60.0 },
+        "bpm": { "min": 125, "max": 135, "value": 130, "step": 1 },
+        "key": { "options": ["Am", "Dm", "Fm", "Gm"], "value": "Dm" },
+        "fog_density": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "Texture haziness" }
+    },
+    "hybrid_config": {
+        "primary_bank": "boards_of_canada",
+        "secondary_bank": "burial",
+        "sound_sources": {
+            "texture": "boards_of_canada",
+            "sequence": "boards_of_canada",
+            "pad": "boards_of_canada",
+            "bass": "boards_of_canada",
+            "kick": "burial",
+            "snare": "burial",
+            "hihat": "burial",
+            "sub": "burial",
+            "crackle": "burial",
+            "atmosphere": "burial",
+            "vocal": "burial"
+        },
+        "section_sounds": {
+            "intro": ["texture", "crackle"],
+            "build": ["sequence", "pad", "atmosphere"],
+            "main": ["kick", "snare", "hihat", "pad", "bass"],
+            "breakdown": ["vocal", "sequence", "crackle"],
+            "outro": ["texture", "crackle"]
+        }
+    },
+    "sound_design": {
+        "textures": {
+            "source": "degraded_tape",
+            "filter_type": "bandpass",
+            "filter_center_hz": 800,
+            "wow_flutter": 0.3,
+            "saturation": 0.4
+        },
+        "drums": {
+            "style": "2step_shuffled",
+            "kick": { "character": "subby_garage", "reverb": "cavernous" },
+            "snare": { "style": "ghostly_crack", "reverb": "long_tail" },
+            "hihats": { "style": "scattered_garage" }
+        },
+        "crackle": {
+            "density": 0.006,
+            "style": "vinyl_rain",
+            "filter_cutoff_hz": 4000
+        },
+        "vocals": {
+            "style": "pitched_fragments",
+            "pitch_shift_semitones": -5,
+            "reverb": "infinite"
+        }
+    },
+    "arrangement": {
+        "structure": "dreamlike_drift",
+        "sections": ["intro", "build", "main", "breakdown", "outro"],
+        "transitions": "fog_dissolve"
+    },
+    "mix": {
+        "reverb": "cavernous_hall",
+        "low_cut_hz": 30,
+        "high_cut_hz": 14000,
+        "stereo_width": 1.4,
+        "crackle_level_db": -18
+    }
+}
