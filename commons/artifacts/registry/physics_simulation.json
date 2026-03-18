@@ -2163,35 +2163,48 @@
 		"example_3_8_static_wave_vr": {
 			"lookup_name": "example_3_8_static_wave_vr",
 			"name": "example_3_8_static_wave_vr",
-			"description": "Static wave demonstration",
+			"description": "Wave superposition with two traveling waves, constructive/destructive interference coloring, and 2D wave equation membrane (finite difference PDE with boundary reflection)",
 			"scene": "res://algorithms/oscillation/noc_ch03/example_3_8_static_wave_vr.tscn",
-			"category": "unknown",
+			"category": "oscillation",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
 				"unused"
 			],
 			"footprint": [
-				22,
-				22,
-				22
+				1,
+				1,
+				1
 			],
-			"size_group": "world_scale",
+			"size_group": "compact",
 			"parameters": {
 				"footprint": [
-					22,
-					22,
-					22
+					1,
+					1,
+					1
 				],
-				"size_group": "world_scale"
+				"size_group": "compact",
+				"wavelength_a": 0.12,
+				"wavelength_b": 0.18,
+				"amplitude_a": 0.08,
+				"amplitude_b": 0.06,
+				"wave_speed": 0.3,
+				"damping": 0.003,
+				"grid_res": 40,
+				"membrane_size": 0.55
 			},
-			"complexity": "beginner",
+			"complexity": "intermediate",
 			"tags": [
-				"wave"
+				"wave",
+				"superposition",
+				"interference",
+				"pde",
+				"membrane"
 			],
 			"dev_themes": [
 				"physics",
-				"simulation"
+				"simulation",
+				"wave-equation"
 			]
 		},
 		"example_3_9_the_wave_vr": {
