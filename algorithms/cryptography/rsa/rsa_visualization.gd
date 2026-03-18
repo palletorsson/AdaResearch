@@ -1,887 +1,791 @@
-﻿class_name RSAVisualization
+class_name RSAVisualization
 extends Node3D
 
-# RSA Encryption: Cryptographic Authority & Digital Trust
-# Visualizes public-key cryptography, prime factorization security
-# Explores digital sovereignty and cryptographic power structures
+# RSA Encryption — Show the Math Visually
+# Prime search grid, modular exponentiation tree, live encrypt/decrypt timeline
+# Color-coded public vs private key components with educational labels
 
-@export_category("RSA Configuration")
-@export var key_size_bits: int = 512  # Key size in bits (128, 256, 512, 1024)
-@export var auto_generate_keys: bool = true
-@export var demo_message: String = "HELLO WORLD"
-@export var use_text_mode: bool = true  # Text vs numeric input
-@export var show_intermediate_steps: bool = true
+# ── constants ────────────────────────────────────────────────────────
+const COL_PUBLIC   := Color(0.25, 0.85, 0.4)      # green — public key
+const COL_PRIVATE  := Color(0.9, 0.25, 0.35)      # red — private key
+const COL_PLAIN    := Color(0.35, 0.55, 0.95)      # blue — plaintext
+const COL_CIPHER   := Color(0.95, 0.6, 0.15)       # orange — ciphertext
+const COL_PRIME    := Color(0.85, 0.3, 0.9)        # magenta — primes
+const COL_COMPUTE  := Color(0.95, 0.9, 0.2)        # yellow — computation
+const COL_GRID_BG  := Color(0.12, 0.13, 0.18, 0.7) # dark panel background
+const COL_COMPOSITE := Color(0.2, 0.22, 0.28, 0.4) # dim — composite numbers
+const COL_LABEL    := Color(0.92, 0.92, 0.96)
+const COL_DIM      := Color(0.5, 0.5, 0.55)
 
-@export_category("Prime Generation")
-@export var primality_test_rounds: int = 10  # Miller-Rabin rounds
-@export var prime_search_method: String = "random"  # random, sequential
-@export var show_prime_generation: bool = true
-@export var animate_prime_search: bool = true
+const GRID_COLS    := 10
+const GRID_ROWS    := 10
+const CELL_SIZE    := 0.055
+const CELL_GAP     := 0.005
+const MSG_CHARS    := 5          # message length for demo
 
-@export_category("Visualization")
-@export var show_key_components: bool = true
-@export var show_encryption_steps: bool = true
-@export var show_mathematical_operations: bool = true
-@export var animate_modular_exponentiation: bool = true
-@export var display_binary_representation: bool = false
+# ── state ────────────────────────────────────────────────────────────
+var _time           := 0.0
+var _phase          := 0         # 0=prime_search, 1=key_display, 2=encrypt, 3=decrypt, 4=done
+var _phase_timer    := 0.0
+var _is_init        := false
 
-@export_category("Security Analysis")
-@export var show_factorization_challenge: bool = true
-@export var demonstrate_key_vulnerabilities: bool = true
-@export var show_timing_analysis: bool = false
-@export var educational_warnings: bool = true
-
-@export_category("Animation")
-@export var auto_start_demo: bool = true
-@export var step_by_step_mode: bool = true
-@export var animation_speed: float = 1.0
-@export var calculation_delay: float = 0.8
-
-# Colors for visualization
-@export var public_key_color: Color = Color(0.2, 0.8, 0.3, 1.0)    # Green
-@export var private_key_color: Color = Color(0.8, 0.2, 0.3, 1.0)   # Red
-@export var plaintext_color: Color = Color(0.3, 0.5, 0.9, 1.0)     # Blue
-@export var ciphertext_color: Color = Color(0.9, 0.6, 0.2, 1.0)    # Orange
-@export var prime_color: Color = Color(0.9, 0.2, 0.9, 1.0)         # Magenta
-@export var calculation_color: Color = Color(0.9, 0.9, 0.2, 1.0)   # Yellow
+# prime search state
+var _grid_start     := 101       # first number in sieve grid
+var _search_idx     := 0         # how far the search cursor has advanced
+var _grid_primes    : Array[bool] = []   # true if prime
+var _prime_p        := 0
+var _prime_q        := 0
+var _search_speed   := 40.0      # cells per second
 
 # RSA key components
-var p: int = 0  # First prime
-var q: int = 0  # Second prime
-var n: int = 0  # Modulus (p * q)
-var phi_n: int = 0  # Euler's totient function Ï†(n) = (p-1)(q-1)
-var e: int = 65537  # Public exponent (commonly used)
-var d: int = 0  # Private exponent
+var _n              := 0
+var _phi            := 0
+var _e              := 65537
+var _d              := 0
 
-# Current encryption state
-var plaintext_message: String = ""
-var plaintext_numbers: Array = []
-var ciphertext_numbers: Array = []
-var decrypted_numbers: Array = []
-var decrypted_message: String = ""
+# message & encryption
+var _message        := "HELLO"
+var _plain_nums     : Array[int] = []
+var _cipher_nums    : Array[int] = []
+var _decrypt_nums   : Array[int] = []
+var _enc_step       := 0         # which char being encrypted
+var _dec_step       := 0
+var _enc_progress   := 0.0       # 0→1 animation within current char
+var _dec_progress   := 0.0
 
-# Algorithm state
-var is_generating_keys: bool = false
-var is_encrypting: bool = false
-var is_decrypting: bool = false
-var key_generation_complete: bool = false
-var current_operation_step: int = 0
+# mod-exp tree state (for current step)
+var _modexp_steps   : Array[Dictionary] = []  # [{base, exp, result}]
 
-# Visualization elements
-var key_display_meshes: Array = []
-var message_display_meshes: Array = []
-var calculation_display_meshes: Array = []
-var ui_display: CanvasLayer
-var operation_timer: Timer
+# animation speed
+var _anim_speed     := 1.0
 
-# Prime generation tracking
-var prime_candidates: Array = []
-var current_prime_candidate: int = 0
-var prime_generation_attempts: int = 0
+# ── meshes ───────────────────────────────────────────────────────────
+var _grid_im        : ImmediateMesh    # prime search grid
+var _grid_mi        : MeshInstance3D
+var _tree_im        : ImmediateMesh    # mod-exp tree
+var _tree_mi        : MeshInstance3D
+var _timeline_im    : ImmediateMesh    # encrypt/decrypt timeline
+var _timeline_mi    : MeshInstance3D
+var _key_im         : ImmediateMesh    # key component display
+var _key_mi         : MeshInstance3D
 
-# Performance metrics
-var key_generation_time: float = 0.0
-var encryption_time: float = 0.0
-var decryption_time: float = 0.0
+var _mat            : StandardMaterial3D
 
-func _init() -> void:
-	name = "RSA_Visualization"
+# labels
+var _title_label    : Label3D
+var _phase_label    : Label3D
+var _key_label      : Label3D
+var _formula_label  : Label3D
+var _step_label     : Label3D
+
+# VR controllers
+var _speed_ctrl     : ParameterController3D
+var _msg_ctrl       : ParameterController3D
+var _prime_ctrl     : ParameterController3D
+
+# ── known small primes for demo range ────────────────────────────────
+var _known_primes : Array[int] = []
 
 func _ready() -> void:
-	setup_ui()
-	setup_timer()
-	
-	if auto_generate_keys:
-		call_deferred("start_key_generation")
-	
-	if auto_start_demo:
-		call_deferred("start_demo_encryption")
+	_build_known_primes()
+	_create_material()
+	_create_meshes()
+	_create_labels()
+	_create_controllers()
+	_init_prime_grid()
+	_pick_message()
+	_is_init = true
 
-func setup_ui() -> void:
-	"""Create comprehensive UI for RSA visualization"""
-	ui_display = CanvasLayer.new()
-	add_child(ui_display)
-	
-	var panel = Panel.new()
-	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	panel.size = Vector2(600, 1000)
-	panel.position = Vector2(10, 10)
-	ui_display.add_child(panel)
-	
-	var vbox = VBoxContainer.new()
-	panel.add_child(vbox)
-	
-	# Create labels for RSA information
-	for i in range(40):
-		var label = Label.new()
-		label.name = "info_label_" + str(i)
-		label.text = ""
-		vbox.add_child(label)
-	
-	update_ui()
+func _build_known_primes() -> void:
+	# Sieve of Eratosthenes up to 1200
+	var sieve : Array[bool] = []
+	sieve.resize(1201)
+	for i in range(1201):
+		sieve[i] = true
+	sieve[0] = false
+	sieve[1] = false
+	for i in range(2, 35):
+		if sieve[i]:
+			var j := i * i
+			while j <= 1200:
+				sieve[j] = false
+				j += i
+	_known_primes.clear()
+	for i in range(2, 1201):
+		if sieve[i]:
+			_known_primes.append(i)
 
-func setup_timer() -> void:
-	"""Setup timer for step-by-step operations"""
-	operation_timer = Timer.new()
-	operation_timer.wait_time = calculation_delay
-	operation_timer.timeout.connect(_on_operation_timer_timeout)
-	add_child(operation_timer)
+func _is_known_prime(val: int) -> bool:
+	return _known_primes.has(val)
 
-func start_key_generation() -> void:
-	"""Start RSA key generation process"""
-	if is_generating_keys:
+func _create_material() -> void:
+	_mat = StandardMaterial3D.new()
+	_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mat.vertex_color_use_as_albedo = true
+	_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+func _create_meshes() -> void:
+	# Prime search grid
+	_grid_im = ImmediateMesh.new()
+	_grid_mi = MeshInstance3D.new()
+	_grid_mi.mesh = _grid_im
+	_grid_mi.material_override = _mat
+	_grid_mi.position = Vector3(-0.35, 0.15, 0.0)
+	add_child(_grid_mi)
+
+	# Key component display
+	_key_im = ImmediateMesh.new()
+	_key_mi = MeshInstance3D.new()
+	_key_mi.mesh = _key_im
+	_key_mi.material_override = _mat
+	_key_mi.position = Vector3(0.0, 0.0, 0.0)
+	add_child(_key_mi)
+
+	# Mod-exp tree
+	_tree_im = ImmediateMesh.new()
+	_tree_mi = MeshInstance3D.new()
+	_tree_mi.mesh = _tree_im
+	_tree_mi.material_override = _mat
+	_tree_mi.position = Vector3(0.2, 0.15, 0.0)
+	add_child(_tree_mi)
+
+	# Encryption/decryption timeline
+	_timeline_im = ImmediateMesh.new()
+	_timeline_mi = MeshInstance3D.new()
+	_timeline_mi.mesh = _timeline_im
+	_timeline_mi.material_override = _mat
+	_timeline_mi.position = Vector3(0.0, -0.15, 0.0)
+	add_child(_timeline_mi)
+
+func _create_labels() -> void:
+	_title_label = _make_label(Vector3(0.0, 0.42, 0.0), 28)
+	_title_label.text = "RSA Encryption"
+	_title_label.modulate = COL_LABEL
+
+	_phase_label = _make_label(Vector3(0.0, 0.37, 0.0), 20)
+	_phase_label.modulate = COL_COMPUTE
+
+	_key_label = _make_label(Vector3(0.0, 0.05, 0.0), 18)
+	_key_label.modulate = COL_LABEL
+
+	_formula_label = _make_label(Vector3(0.2, 0.32, 0.0), 16)
+	_formula_label.modulate = COL_COMPUTE
+
+	_step_label = _make_label(Vector3(0.0, -0.28, 0.0), 16)
+	_step_label.modulate = COL_DIM
+
+func _make_label(pos: Vector3, size: int) -> Label3D:
+	var lbl := Label3D.new()
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lbl.font_size = size
+	lbl.outline_size = 4
+	lbl.position = pos
+	add_child(lbl)
+	return lbl
+
+func _create_controllers() -> void:
+	var y_base := -0.38
+
+	_speed_ctrl = ParameterController3D.new()
+	_speed_ctrl.parameter_name = "Speed"
+	_speed_ctrl.min_value = 0.2
+	_speed_ctrl.max_value = 3.0
+	_speed_ctrl.default_value = 1.0
+	_speed_ctrl.step_size = 0.1
+	_speed_ctrl.position = Vector3(-0.25, y_base, 0.0)
+	_speed_ctrl.value_changed.connect(func(v: float) -> void: _anim_speed = v)
+	add_child(_speed_ctrl)
+
+	_msg_ctrl = ParameterController3D.new()
+	_msg_ctrl.parameter_name = "Message"
+	_msg_ctrl.min_value = 0.0
+	_msg_ctrl.max_value = 4.0
+	_msg_ctrl.default_value = 0.0
+	_msg_ctrl.step_size = 1.0
+	_msg_ctrl.position = Vector3(0.0, y_base, 0.0)
+	_msg_ctrl.value_changed.connect(func(v: float) -> void: _pick_message_by_index(int(v)); _restart())
+	add_child(_msg_ctrl)
+
+	_prime_ctrl = ParameterController3D.new()
+	_prime_ctrl.parameter_name = "Prime Range"
+	_prime_ctrl.min_value = 0.0
+	_prime_ctrl.max_value = 3.0
+	_prime_ctrl.default_value = 0.0
+	_prime_ctrl.step_size = 1.0
+	_prime_ctrl.position = Vector3(0.25, y_base, 0.0)
+	_prime_ctrl.value_changed.connect(func(v: float) -> void: _set_prime_range(int(v)); _restart())
+	add_child(_prime_ctrl)
+
+# ── initialization helpers ───────────────────────────────────────────
+func _init_prime_grid() -> void:
+	_grid_primes.clear()
+	_grid_primes.resize(GRID_COLS * GRID_ROWS)
+	for i in range(GRID_COLS * GRID_ROWS):
+		var val := _grid_start + i
+		_grid_primes[i] = _is_known_prime(val)
+	_search_idx = 0
+	_prime_p = 0
+	_prime_q = 0
+
+func _pick_message() -> void:
+	_pick_message_by_index(0)
+
+func _pick_message_by_index(idx: int) -> void:
+	var msgs := ["HELLO", "CRYPT", "QUEER", "TRUST", "POWER"]
+	idx = clampi(idx, 0, msgs.size() - 1)
+	_message = msgs[idx]
+
+func _set_prime_range(idx: int) -> void:
+	var ranges := [101, 211, 401, 701]
+	idx = clampi(idx, 0, ranges.size() - 1)
+	_grid_start = ranges[idx]
+	_init_prime_grid()
+
+func _restart() -> void:
+	_phase = 0
+	_phase_timer = 0.0
+	_search_idx = 0
+	_prime_p = 0
+	_prime_q = 0
+	_n = 0
+	_phi = 0
+	_d = 0
+	_enc_step = 0
+	_dec_step = 0
+	_enc_progress = 0.0
+	_dec_progress = 0.0
+	_plain_nums.clear()
+	_cipher_nums.clear()
+	_decrypt_nums.clear()
+	_modexp_steps.clear()
+	_init_prime_grid()
+
+# ── process ──────────────────────────────────────────────────────────
+func _process(delta: float) -> void:
+	if not _is_init:
 		return
-	
-	print("Starting RSA key generation with ", key_size_bits, " bit keys...")
-	is_generating_keys = true
-	key_generation_complete = false
-	var start_time = Time.get_time_dict_from_system()
-	key_generation_time = Time.get_ticks_msec()
-	
-	if step_by_step_mode:
-		current_operation_step = 0
-		operation_timer.start()
-	else:
-		generate_keys_complete()
+	_time += delta
+	var dt := delta * _anim_speed
 
-func generate_keys_complete() -> void:
-	"""Generate complete RSA key pair"""
-	# Step 1: Generate two large primes
-	var prime_bit_size = key_size_bits / 2
-	p = generate_large_prime(prime_bit_size)
-	q = generate_large_prime(prime_bit_size)
-	
-	# Ensure p != q
-	while q == p:
-		q = generate_large_prime(prime_bit_size)
-	
-	# Step 2: Compute n = p * q
-	n = p * q
-	
-	# Step 3: Compute Ï†(n) = (p-1)(q-1)
-	phi_n = (p - 1) * (q - 1)
-	
-	# Step 4: Choose e (commonly 65537)
-	e = 65537
-	
-	# Ensure gcd(e, Ï†(n)) = 1
-	while gcd(e, phi_n) != 1:
-		e += 2
-	
-	# Step 5: Compute d = e^(-1) mod Ï†(n)
-	d = mod_inverse(e, phi_n)
-	
-	finalize_key_generation()
+	match _phase:
+		0: _update_prime_search(dt)
+		1: _update_key_display(dt)
+		2: _update_encryption(dt)
+		3: _update_decryption(dt)
+		4: _update_done(dt)
 
-func generate_large_prime(bit_size: int) -> int:
-	"""Generate a large prime number"""
-	var min_value = pow(2, bit_size - 1)
-	var max_value = pow(2, bit_size) - 1
-	
-	# Clamp to reasonable values for demonstration
-	min_value = max(min_value, 100)
-	max_value = min(max_value, 1000000)
-	
-	var candidate = randi_range(min_value, max_value)
-	
-	# Ensure odd number
-	if candidate % 2 == 0:
-		candidate += 1
-	
-	# Search for prime
-	while not is_prime(candidate):
-		candidate += 2
-		prime_generation_attempts += 1
-		
-		# Prevent infinite loops with fallback
-		if prime_generation_attempts > 10000:
-			candidate = get_known_prime(bit_size)
-			break
-	
-	print("Generated prime: ", candidate, " (", bit_size, " bit equivalent)")
-	return candidate
+	_rebuild_grid()
+	_rebuild_key_display()
+	_rebuild_tree()
+	_rebuild_timeline()
+	_update_labels()
 
-func get_known_prime(_bit_size: int) -> int:
-	"""Get a known prime for the given bit size range"""
-	var known_primes = [
-		101, 103, 107, 109, 113, 127, 131, 137, 139, 149,
-		151, 157, 163, 167, 173, 179, 181, 191, 193, 197,
-		199, 211, 223, 227, 229, 233, 239, 241, 251, 257,
-		263, 269, 271, 277, 281, 283, 293, 307, 311, 313,
-		317, 331, 337, 347, 349, 353, 359, 367, 373, 379,
-		383, 389, 397, 401, 409, 419, 421, 431, 433, 439,
-		443, 449, 457, 461, 463, 467, 479, 487, 491, 499,
-		503, 509, 521, 523, 541, 547, 557, 563, 569, 571,
-		577, 587, 593, 599, 601, 607, 613, 617, 619, 631,
-		641, 643, 647, 653, 659, 661, 673, 677, 683, 691,
-		701, 709, 719, 727, 733, 739, 743, 751, 757, 761,
-		769, 773, 787, 797, 809, 811, 821, 823, 827, 829,
-		839, 853, 857, 859, 863, 877, 881, 883, 887, 907
-	]
-	
-	return known_primes[randi() % known_primes.size()]
+# ── phase logic ──────────────────────────────────────────────────────
+func _update_prime_search(dt: float) -> void:
+	_phase_timer += dt
+	var advance := dt * _search_speed
+	_search_idx = mini(_search_idx + int(advance) + 1, GRID_COLS * GRID_ROWS)
 
-func is_prime(n: int) -> bool:
-	"""Miller-Rabin primality test"""
-	if n < 2:
-		return false
-	if n == 2 or n == 3:
-		return true
-	if n % 2 == 0:
-		return false
-	
-	# Write n-1 as d * 2^r
-	var d = n - 1
-	var r = 0
-	while d % 2 == 0:
-		d = d / 2
-		r += 1
-	
-	# Perform Miller-Rabin test
-	for i in range(primality_test_rounds):
-		var a = randi_range(2, n - 2)
-		var x = mod_exp(a, d, n)
-		
-		if x == 1 or x == n - 1:
-			continue
-		
-		var composite = true
-		for j in range(r - 1):
-			x = (x * x) % n
-			if x == n - 1:
-				composite = false
-				break
-		
-		if composite:
-			return false
-	
-	return true
+	# Find first two primes in scanned region
+	if _prime_p == 0 or _prime_q == 0:
+		for i in range(_search_idx):
+			var val := _grid_start + i
+			if _grid_primes[i]:
+				if _prime_p == 0:
+					_prime_p = val
+				elif _prime_q == 0 and val != _prime_p:
+					_prime_q = val
+					break
 
-func gcd(a: int, b: int) -> int:
-	"""Greatest Common Divisor using Euclidean algorithm"""
+	# Transition when grid fully scanned
+	if _search_idx >= GRID_COLS * GRID_ROWS:
+		# Ensure we have two primes
+		if _prime_p == 0 or _prime_q == 0:
+			_pick_fallback_primes()
+		_compute_keys()
+		_phase = 1
+		_phase_timer = 0.0
+
+func _pick_fallback_primes() -> void:
+	# Find two primes near our grid range
+	for pr in _known_primes:
+		if pr >= _grid_start:
+			if _prime_p == 0:
+				_prime_p = pr
+			elif pr != _prime_p:
+				_prime_q = pr
+				return
+
+func _compute_keys() -> void:
+	_n = _prime_p * _prime_q
+	_phi = (_prime_p - 1) * (_prime_q - 1)
+	_e = 65537
+	# Need e < phi and gcd(e, phi) == 1
+	if _e >= _phi:
+		_e = 3
+	while _gcd(_e, _phi) != 1:
+		_e += 2
+	_d = _mod_inverse(_e, _phi)
+	# Prepare message numbers
+	_plain_nums.clear()
+	for i in range(_message.length()):
+		var c := _message.unicode_at(i)
+		if c >= _n:
+			c = c % (_n - 1) + 1
+		_plain_nums.append(c)
+	_cipher_nums.clear()
+	_cipher_nums.resize(_plain_nums.size())
+	for i in range(_cipher_nums.size()):
+		_cipher_nums[i] = 0
+	_decrypt_nums.clear()
+	_decrypt_nums.resize(_plain_nums.size())
+	for i in range(_decrypt_nums.size()):
+		_decrypt_nums[i] = 0
+	_enc_step = 0
+	_dec_step = 0
+	_enc_progress = 0.0
+	_dec_progress = 0.0
+
+func _update_key_display(dt: float) -> void:
+	_phase_timer += dt
+	if _phase_timer > 3.0:
+		_phase = 2
+		_phase_timer = 0.0
+		_compute_modexp_steps(_plain_nums[0], _e, _n)
+
+func _update_encryption(dt: float) -> void:
+	_enc_progress += dt * 0.8
+	if _enc_progress >= 1.0:
+		_enc_progress = 0.0
+		# Complete this character encryption
+		var pn := _plain_nums[_enc_step]
+		_cipher_nums[_enc_step] = _mod_exp(pn, _e, _n)
+		_enc_step += 1
+		if _enc_step >= _plain_nums.size():
+			_phase = 3
+			_phase_timer = 0.0
+			_dec_step = 0
+			_dec_progress = 0.0
+			if _cipher_nums.size() > 0:
+				_compute_modexp_steps(_cipher_nums[0], _d, _n)
+		else:
+			_compute_modexp_steps(_plain_nums[_enc_step], _e, _n)
+
+func _update_decryption(dt: float) -> void:
+	_dec_progress += dt * 0.8
+	if _dec_progress >= 1.0:
+		_dec_progress = 0.0
+		var cn := _cipher_nums[_dec_step]
+		_decrypt_nums[_dec_step] = _mod_exp(cn, _d, _n)
+		_dec_step += 1
+		if _dec_step >= _cipher_nums.size():
+			_phase = 4
+			_phase_timer = 0.0
+			_modexp_steps.clear()
+		else:
+			_compute_modexp_steps(_cipher_nums[_dec_step], _d, _n)
+
+func _update_done(dt: float) -> void:
+	_phase_timer += dt
+	if _phase_timer > 5.0:
+		_restart()
+
+# ── modular exponentiation steps ─────────────────────────────────────
+func _compute_modexp_steps(base_val: int, exp_val: int, mod_val: int) -> void:
+	_modexp_steps.clear()
+	if mod_val <= 1:
+		return
+	var b := base_val % mod_val
+	var bits : Array[int] = []
+	var tmp := exp_val
+	while tmp > 0:
+		bits.append(tmp & 1)
+		tmp >>= 1
+	# Repeated squaring: track each step
+	var current := 1
+	for i in range(bits.size()):
+		# Square step
+		var squared := (current * current) % mod_val if i > 0 else current
+		if i > 0:
+			_modexp_steps.append({"op": "sq", "val": squared, "bit": bits[i], "exp_so_far": i})
+			current = squared
+		# Multiply if bit is 1
+		if bits[i] == 1:
+			var multiplied := (current * b) % mod_val
+			_modexp_steps.append({"op": "mul", "val": multiplied, "bit": 1, "exp_so_far": i})
+			current = multiplied
+	# Limit display
+	if _modexp_steps.size() > 12:
+		_modexp_steps.resize(12)
+
+# ── rebuild: prime search grid ───────────────────────────────────────
+func _rebuild_grid() -> void:
+	_grid_im.clear_surfaces()
+	if _phase > 1 and _phase_timer > 1.0:
+		return  # Hide grid after key generation done
+
+	_grid_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var total := CELL_SIZE + CELL_GAP
+	var grid_w := GRID_COLS * total
+	var grid_h := GRID_ROWS * total
+
+	# Background panel
+	_add_quad_local(_grid_im, Vector3(-0.01, -0.01, -0.001),
+		Vector3(grid_w + 0.02, 0, 0), Vector3(0, grid_h + 0.02, 0), COL_GRID_BG)
+
+	for row in range(GRID_ROWS):
+		for col in range(GRID_COLS):
+			var idx := row * GRID_COLS + col
+			var val := _grid_start + idx
+			var x := col * total
+			var y := (GRID_ROWS - 1 - row) * total
+
+			var scanned := idx < _search_idx
+			var is_p := _grid_primes[idx] if idx < _grid_primes.size() else false
+			var is_selected_p := (val == _prime_p)
+			var is_selected_q := (val == _prime_q)
+
+			var col_cell : Color
+			if not scanned:
+				col_cell = Color(0.25, 0.27, 0.32, 0.3)
+			elif is_selected_p or is_selected_q:
+				var pulse := 0.7 + 0.3 * sin(_time * 5.0)
+				col_cell = COL_PRIME.lerp(Color.WHITE, pulse * 0.3)
+			elif is_p:
+				col_cell = COL_PRIME.lerp(COL_COMPUTE, 0.3)
+				col_cell.a = 0.85
+			else:
+				col_cell = COL_COMPOSITE
+
+			_add_quad_local(_grid_im, Vector3(x, y, 0),
+				Vector3(CELL_SIZE, 0, 0), Vector3(0, CELL_SIZE, 0), col_cell)
+
+	# Search cursor line
+	if _phase == 0 and _search_idx < GRID_COLS * GRID_ROWS:
+		var cursor_row := _search_idx / GRID_COLS
+		var cursor_col := _search_idx % GRID_COLS
+		var cx := cursor_col * total
+		var cy := (GRID_ROWS - 1 - cursor_row) * total
+		var scan_col := COL_COMPUTE
+		scan_col.a = 0.6 + 0.4 * sin(_time * 8.0)
+		# Highlight cursor cell
+		_add_quad_local(_grid_im, Vector3(cx - 0.003, cy - 0.003, 0.001),
+			Vector3(CELL_SIZE + 0.006, 0, 0), Vector3(0, CELL_SIZE + 0.006, 0), scan_col)
+
+	_grid_im.surface_end()
+
+# ── rebuild: key component display ───────────────────────────────────
+func _rebuild_key_display() -> void:
+	_key_im.clear_surfaces()
+	if _phase < 1:
+		return
+
+	_key_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Layout: two panels side by side — public key (left), private key (right)
+	var panel_w := 0.28
+	var panel_h := 0.18
+	var gap := 0.04
+
+	# Public key panel (green)
+	var pub_x := -panel_w - gap * 0.5
+	var pub_col := COL_PUBLIC
+	pub_col.a = 0.15
+	_add_quad_local(_key_im, Vector3(pub_x, -panel_h * 0.5, -0.001),
+		Vector3(panel_w, 0, 0), Vector3(0, panel_h, 0), pub_col)
+	# Public key border
+	var border_pub := COL_PUBLIC
+	border_pub.a = 0.6
+	_add_border(_key_im, Vector3(pub_x, -panel_h * 0.5, 0.0), panel_w, panel_h, 0.003, border_pub)
+
+	# Private key panel (red)
+	var priv_x := gap * 0.5
+	var priv_col := COL_PRIVATE
+	priv_col.a = 0.15
+	_add_quad_local(_key_im, Vector3(priv_x, -panel_h * 0.5, -0.001),
+		Vector3(panel_w, 0, 0), Vector3(0, panel_h, 0), priv_col)
+	var border_priv := COL_PRIVATE
+	border_priv.a = 0.6
+	_add_border(_key_im, Vector3(priv_x, -panel_h * 0.5, 0.0), panel_w, panel_h, 0.003, border_priv)
+
+	# Shared n bar (center, spanning both)
+	var n_bar_col := COL_COMPUTE
+	n_bar_col.a = 0.25
+	var n_bar_w := panel_w * 2.0 + gap
+	_add_quad_local(_key_im, Vector3(-panel_w - gap * 0.5, -panel_h * 0.5 - 0.04, -0.001),
+		Vector3(n_bar_w, 0, 0), Vector3(0, 0.03, 0), n_bar_col)
+
+	_key_im.surface_end()
+
+# ── rebuild: modular exponentiation tree ─────────────────────────────
+func _rebuild_tree() -> void:
+	_tree_im.clear_surfaces()
+	if _modexp_steps.is_empty():
+		return
+
+	_tree_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var step_count := _modexp_steps.size()
+	var node_r := 0.012
+	var spacing_y := 0.035
+	var tree_h := step_count * spacing_y
+
+	# Background
+	var bg_col := COL_GRID_BG
+	_add_quad_local(_tree_im, Vector3(-0.08, -tree_h * 0.5 - 0.02, -0.001),
+		Vector3(0.16, 0, 0), Vector3(0, tree_h + 0.04, 0), bg_col)
+
+	for i in range(step_count):
+		var step : Dictionary = _modexp_steps[i]
+		var y_pos := tree_h * 0.5 - i * spacing_y
+		var is_sq := step["op"] == "sq"
+		var x_off := -0.03 if is_sq else 0.03
+
+		# Color by operation type
+		var node_col : Color
+		if is_sq:
+			node_col = COL_COMPUTE  # yellow for squaring
+		else:
+			node_col = COL_PUBLIC   # green for multiply
+
+		# Animate: fade in based on progress
+		var active_step := _enc_step if _phase == 2 else _dec_step
+		var progress := _enc_progress if _phase == 2 else _dec_progress
+		var reveal := clampf(float(i) / maxf(step_count, 1) - (1.0 - progress), -0.5, 1.0)
+		node_col.a = clampf(reveal * 3.0 + 0.4, 0.2, 1.0)
+
+		# Draw node circle (approximated with small quad)
+		_add_quad_local(_tree_im, Vector3(x_off - node_r, y_pos - node_r, 0),
+			Vector3(node_r * 2, 0, 0), Vector3(0, node_r * 2, 0), node_col)
+
+		# Connection line to previous
+		if i > 0:
+			var prev_is_sq := _modexp_steps[i - 1]["op"] == "sq"
+			var prev_x := -0.03 if prev_is_sq else 0.03
+			var prev_y := tree_h * 0.5 - (i - 1) * spacing_y
+			var line_col := COL_DIM
+			line_col.a = node_col.a * 0.5
+			_add_line_quad(_tree_im, Vector3(prev_x, prev_y, 0),
+				Vector3(x_off, y_pos, 0), 0.002, line_col)
+
+	_tree_im.surface_end()
+
+# ── rebuild: encryption/decryption timeline ──────────────────────────
+func _rebuild_timeline() -> void:
+	_timeline_im.clear_surfaces()
+	if _phase < 2:
+		return
+
+	_timeline_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var char_count := _plain_nums.size()
+	var slot_w := 0.09
+	var slot_h := 0.06
+	var gap := 0.015
+	var total_w := char_count * (slot_w + gap) - gap
+	var start_x := -total_w * 0.5
+	var row_spacing := 0.085
+
+	# Three rows: plaintext (top), ciphertext (mid), decrypted (bottom)
+	# Row labels
+	# Plaintext row — blue
+	for i in range(char_count):
+		var x := start_x + i * (slot_w + gap)
+		var y_top := row_spacing
+
+		# Plaintext cell
+		var p_col := COL_PLAIN
+		p_col.a = 0.75
+		_add_quad_local(_timeline_im, Vector3(x, y_top, 0),
+			Vector3(slot_w, 0, 0), Vector3(0, slot_h, 0), p_col)
+
+		# Ciphertext cell
+		var c_col := COL_CIPHER
+		var encrypted := (_phase >= 2 and i < _enc_step) or (_phase >= 3)
+		if not encrypted and _phase == 2 and i == _enc_step:
+			# Currently encrypting — pulse
+			var pulse := _enc_progress
+			c_col = COL_PLAIN.lerp(COL_CIPHER, pulse)
+			c_col.a = 0.5 + pulse * 0.4
+		elif encrypted:
+			c_col.a = 0.75
+		else:
+			c_col.a = 0.2
+		_add_quad_local(_timeline_im, Vector3(x, 0.0, 0),
+			Vector3(slot_w, 0, 0), Vector3(0, slot_h, 0), c_col)
+
+		# Arrow between plain and cipher
+		if encrypted or (_phase == 2 and i == _enc_step):
+			var arrow_col := COL_COMPUTE
+			arrow_col.a = 0.5
+			_add_line_quad(_timeline_im,
+				Vector3(x + slot_w * 0.5, y_top, 0),
+				Vector3(x + slot_w * 0.5, slot_h, 0),
+				0.003, arrow_col)
+
+		# Decrypted cell
+		var d_col := COL_PLAIN
+		var decrypted := (_phase >= 3 and i < _dec_step) or _phase >= 4
+		if not decrypted and _phase == 3 and i == _dec_step:
+			var pulse := _dec_progress
+			d_col = COL_CIPHER.lerp(COL_PLAIN, pulse)
+			d_col.a = 0.5 + pulse * 0.4
+		elif decrypted:
+			d_col.a = 0.75
+			# Flash green if matches original
+			if i < _decrypt_nums.size() and i < _plain_nums.size():
+				if _decrypt_nums[i] == _plain_nums[i]:
+					d_col = COL_PUBLIC
+					d_col.a = 0.8
+		else:
+			d_col.a = 0.2
+		_add_quad_local(_timeline_im, Vector3(x, -row_spacing, 0),
+			Vector3(slot_w, 0, 0), Vector3(0, slot_h, 0), d_col)
+
+		# Arrow between cipher and decrypted
+		if decrypted or (_phase == 3 and i == _dec_step):
+			var arrow_col2 := COL_COMPUTE
+			arrow_col2.a = 0.5
+			_add_line_quad(_timeline_im,
+				Vector3(x + slot_w * 0.5, 0.0, 0),
+				Vector3(x + slot_w * 0.5, -row_spacing + slot_h, 0),
+				0.003, arrow_col2)
+
+	_timeline_im.surface_end()
+
+# ── label updates ────────────────────────────────────────────────────
+func _update_labels() -> void:
+	match _phase:
+		0:
+			_phase_label.text = "Searching for primes..."
+			var found := ""
+			if _prime_p > 0:
+				found = "p = %d" % _prime_p
+			if _prime_q > 0:
+				found += "  q = %d" % _prime_q
+			_key_label.text = found if found != "" else "Scanning %d..." % (_grid_start + _search_idx)
+			_formula_label.text = "Testing primality"
+			_step_label.text = "Grid: %d – %d | Scanned: %d/%d" % [
+				_grid_start, _grid_start + GRID_COLS * GRID_ROWS - 1,
+				_search_idx, GRID_COLS * GRID_ROWS]
+		1:
+			_phase_label.text = "Key Generation Complete"
+			_key_label.text = "Public (e,n) = (%d, %d)  |  Private (d,n) = (%d, %d)" % [_e, _n, _d, _n]
+			_formula_label.text = "n = p*q = %d*%d = %d   phi = %d" % [_prime_p, _prime_q, _n, _phi]
+			_step_label.text = "p = %d (prime)  q = %d (prime)  e = %d  d = e^-1 mod phi = %d" % [_prime_p, _prime_q, _e, _d]
+		2:
+			var ch := _message[_enc_step] if _enc_step < _message.length() else "?"
+			_phase_label.text = "Encrypting: '%s'  [%d/%d]" % [_message, _enc_step + 1, _plain_nums.size()]
+			_key_label.text = "C = M^e mod n  |  '%s' (%d) ^ %d mod %d" % [ch, _plain_nums[_enc_step] if _enc_step < _plain_nums.size() else 0, _e, _n]
+			_formula_label.text = "Repeated squaring"
+			_step_label.text = "Using PUBLIC key (e=%d)" % _e
+			_step_label.modulate = COL_PUBLIC
+		3:
+			var idx := mini(_dec_step, _cipher_nums.size() - 1)
+			_phase_label.text = "Decrypting  [%d/%d]" % [_dec_step + 1, _cipher_nums.size()]
+			_key_label.text = "M = C^d mod n  |  %d ^ %d mod %d" % [_cipher_nums[idx] if idx >= 0 else 0, _d, _n]
+			_formula_label.text = "Repeated squaring"
+			_step_label.text = "Using PRIVATE key (d=%d)" % _d
+			_step_label.modulate = COL_PRIVATE
+		4:
+			_phase_label.text = "Decryption Complete!"
+			var decrypted_msg := ""
+			for dn in _decrypt_nums:
+				decrypted_msg += char(dn)
+			_key_label.text = "'%s' -> encrypt -> decrypt -> '%s'" % [_message, decrypted_msg]
+			var match_ok := (decrypted_msg == _message)
+			_formula_label.text = "Match: %s" % ("YES" if match_ok else "NO")
+			_formula_label.modulate = COL_PUBLIC if match_ok else COL_PRIVATE
+			_step_label.text = "Restarting in %.0fs..." % maxf(5.0 - _phase_timer, 0.0)
+			_step_label.modulate = COL_DIM
+
+# ── geometry helpers ─────────────────────────────────────────────────
+func _add_quad_local(im: ImmediateMesh, origin: Vector3, right: Vector3, up: Vector3, col: Color) -> void:
+	im.surface_set_color(col)
+	im.surface_add_vertex(origin)
+	im.surface_add_vertex(origin + right)
+	im.surface_add_vertex(origin + right + up)
+	im.surface_add_vertex(origin)
+	im.surface_add_vertex(origin + right + up)
+	im.surface_add_vertex(origin + up)
+
+func _add_line_quad(im: ImmediateMesh, a: Vector3, b: Vector3, width: float, col: Color) -> void:
+	var dir := (b - a).normalized()
+	var perp := Vector3(-dir.y, dir.x, 0).normalized() * width * 0.5
+	if perp.length() < 0.0001:
+		perp = Vector3(width * 0.5, 0, 0)
+	im.surface_set_color(col)
+	im.surface_add_vertex(a - perp)
+	im.surface_add_vertex(b - perp)
+	im.surface_add_vertex(b + perp)
+	im.surface_add_vertex(a - perp)
+	im.surface_add_vertex(b + perp)
+	im.surface_add_vertex(a + perp)
+
+func _add_border(im: ImmediateMesh, origin: Vector3, w: float, h: float, thickness: float, col: Color) -> void:
+	# Bottom
+	_add_quad_local(im, origin, Vector3(w, 0, 0), Vector3(0, thickness, 0), col)
+	# Top
+	_add_quad_local(im, origin + Vector3(0, h - thickness, 0), Vector3(w, 0, 0), Vector3(0, thickness, 0), col)
+	# Left
+	_add_quad_local(im, origin, Vector3(thickness, 0, 0), Vector3(0, h, 0), col)
+	# Right
+	_add_quad_local(im, origin + Vector3(w - thickness, 0, 0), Vector3(thickness, 0, 0), Vector3(0, h, 0), col)
+
+# ── math utilities ───────────────────────────────────────────────────
+func _gcd(a: int, b: int) -> int:
 	while b != 0:
-		var temp = b
+		var t := b
 		b = a % b
-		a = temp
+		a = t
 	return a
 
-func mod_inverse(a: int, m: int) -> int:
-	"""Modular multiplicative inverse using Extended Euclidean Algorithm"""
-	if gcd(a, m) != 1:
-		return -1  # No inverse exists
-	
-	var m0 = m
-	var x0 = 0
-	var x1 = 1
-	
+func _mod_inverse(a: int, m: int) -> int:
+	var m0 := m
+	var x0 := 0
+	var x1 := 1
+	if m == 1:
+		return 0
 	while a > 1:
-		var q = a / m
-		var t = m
+		var q := a / m
+		var t := m
 		m = a % m
 		a = t
 		t = x0
 		x0 = x1 - q * x0
 		x1 = t
-	
 	if x1 < 0:
 		x1 += m0
-	
 	return x1
 
-func mod_exp(base: int, exponent: int, modulus: int) -> int:
-	"""Fast modular exponentiation using binary method"""
-	if modulus == 1:
+func _mod_exp(base_val: int, exp_val: int, mod_val: int) -> int:
+	if mod_val <= 1:
 		return 0
-	
-	var result = 1
-	base = base % modulus
-	
-	while exponent > 0:
-		if exponent % 2 == 1:
-			result = (result * base) % modulus
-		exponent = exponent >> 1
-		base = (base * base) % modulus
-	
+	var result := 1
+	var b := base_val % mod_val
+	var ex := exp_val
+	while ex > 0:
+		if ex % 2 == 1:
+			result = (result * b) % mod_val
+		ex >>= 1
+		b = (b * b) % mod_val
 	return result
 
-func finalize_key_generation() -> void:
-	"""Finalize key generation and update visualization"""
-	is_generating_keys = false
-	key_generation_complete = true
-	key_generation_time = Time.get_ticks_msec() - key_generation_time
-	operation_timer.stop()
-	
-	print("RSA Key Generation Complete!")
-	print("Public Key (e, n): (", e, ", ", n, ")")
-	print("Private Key (d, n): (", d, ", ", n, ")")
-	print("Primes: p =", p, ", q =", q)
-	print("Ï†(n) =", phi_n)
-	print("Generation time: ", key_generation_time, " ms")
-	
-	create_key_visualization()
-	update_ui()
-
-func start_demo_encryption() -> void:
-	"""Start demonstration encryption"""
-	if not key_generation_complete:
-		print("Keys not generated yet, waiting...")
-		return
-	
-	plaintext_message = demo_message
-	start_encryption(plaintext_message)
-
-func start_encryption(message: String) -> void:
-	"""Start encryption process"""
-	if is_encrypting or not key_generation_complete:
-		return
-	
-	is_encrypting = true
-	plaintext_message = message
-	ciphertext_numbers.clear()
-	var start_time = Time.get_ticks_msec()
-	
-	# Convert message to numbers
-	if use_text_mode:
-		plaintext_numbers = message_to_numbers(message)
-	else:
-		# Parse numeric input
-		plaintext_numbers = [int(message)]
-	
-	print("Starting encryption of: '", message, "'")
-	print("Plaintext numbers: ", plaintext_numbers)
-	
-	if step_by_step_mode:
-		current_operation_step = 0
-		operation_timer.start()
-	else:
-		encrypt_complete()
-
-func message_to_numbers(message: String) -> Array:
-	"""Convert text message to array of numbers"""
-	var numbers = []
-	for i in range(message.length()):
-		var char_code = message.unicode_at(i)
-		# Ensure number is smaller than n for encryption
-		if char_code >= n:
-			char_code = char_code % (n - 1) + 1
-		numbers.append(char_code)
-	return numbers
-
-func encrypt_complete() -> void:
-	"""Perform complete encryption"""
-	ciphertext_numbers.clear()
-	
-	for plaintext_num in plaintext_numbers:
-		# C = M^e mod n
-		var ciphertext_num = mod_exp(plaintext_num, e, n)
-		ciphertext_numbers.append(ciphertext_num)
-	
-	finalize_encryption()
-
-func finalize_encryption() -> void:
-	"""Finalize encryption process"""
-	is_encrypting = false
-	encryption_time = Time.get_ticks_msec() - encryption_time
-	operation_timer.stop()
-	
-	print("Encryption complete!")
-	print("Ciphertext numbers: ", ciphertext_numbers)
-	print("Encryption time: ", encryption_time, " ms")
-	
-	create_encryption_visualization()
-	update_ui()
-
-func start_decryption() -> void:
-	"""Start decryption process"""
-	if is_decrypting or ciphertext_numbers.is_empty():
-		return
-	
-	is_decrypting = true
-	decrypted_numbers.clear()
-	var start_time = Time.get_ticks_msec()
-	
-	print("Starting decryption...")
-	
-	if step_by_step_mode:
-		current_operation_step = 0
-		operation_timer.start()
-	else:
-		decrypt_complete()
-
-func decrypt_complete() -> void:
-	"""Perform complete decryption"""
-	decrypted_numbers.clear()
-	
-	for ciphertext_num in ciphertext_numbers:
-		# M = C^d mod n
-		var decrypted_num = mod_exp(ciphertext_num, d, n)
-		decrypted_numbers.append(decrypted_num)
-	
-	# Convert back to text
-	if use_text_mode:
-		decrypted_message = numbers_to_message(decrypted_numbers)
-	else:
-		decrypted_message = str(decrypted_numbers[0])
-	
-	finalize_decryption()
-
-func numbers_to_message(numbers: Array) -> String:
-	"""Convert array of numbers back to text message"""
-	var message = ""
-	for num in numbers:
-		message += char(num)
-	return message
-
-func finalize_decryption() -> void:
-	"""Finalize decryption process"""
-	is_decrypting = false
-	decryption_time = Time.get_ticks_msec() - decryption_time
-	operation_timer.stop()
-	
-	print("Decryption complete!")
-	print("Decrypted numbers: ", decrypted_numbers)
-	print("Decrypted message: '", decrypted_message, "'")
-	print("Decryption time: ", decryption_time, " ms")
-	
-	# Verify correctness
-	var is_correct = (decrypted_message == plaintext_message)
-	print("Decryption correct: ", is_correct)
-	
-	create_decryption_visualization()
-	update_ui()
-
-func _on_operation_timer_timeout() -> void:
-	"""Handle step-by-step operation timer"""
-	if is_generating_keys:
-		step_key_generation()
-	elif is_encrypting:
-		step_encryption()
-	elif is_decrypting:
-		step_decryption()
-
-func step_key_generation() -> void:
-	"""Perform one step of key generation"""
-	match current_operation_step:
-		0:
-			print("Step 1: Generating prime p...")
-			var prime_bit_size = key_size_bits / 2
-			p = generate_large_prime(prime_bit_size)
-			current_operation_step += 1
-		1:
-			print("Step 2: Generating prime q...")
-			var prime_bit_size = key_size_bits / 2
-			q = generate_large_prime(prime_bit_size)
-			while q == p:
-				q = generate_large_prime(prime_bit_size)
-			current_operation_step += 1
-		2:
-			print("Step 3: Computing n = p * q...")
-			n = p * q
-			current_operation_step += 1
-		3:
-			print("Step 4: Computing Ï†(n) = (p-1)(q-1)...")
-			phi_n = (p - 1) * (q - 1)
-			current_operation_step += 1
-		4:
-			print("Step 5: Computing private exponent d...")
-			d = mod_inverse(e, phi_n)
-			finalize_key_generation()
-
-func step_encryption() -> void:
-	"""Perform one step of encryption"""
-	if current_operation_step < plaintext_numbers.size():
-		var plaintext_num = plaintext_numbers[current_operation_step]
-		var ciphertext_num = mod_exp(plaintext_num, e, n)
-		ciphertext_numbers.append(ciphertext_num)
-		
-		print("Encrypting ", plaintext_num, " -> ", ciphertext_num)
-		current_operation_step += 1
-	else:
-		finalize_encryption()
-
-func step_decryption() -> void:
-	"""Perform one step of decryption"""
-	if current_operation_step < ciphertext_numbers.size():
-		var ciphertext_num = ciphertext_numbers[current_operation_step]
-		var decrypted_num = mod_exp(ciphertext_num, d, n)
-		decrypted_numbers.append(decrypted_num)
-		
-		print("Decrypting ", ciphertext_num, " -> ", decrypted_num)
-		current_operation_step += 1
-	else:
-		if use_text_mode:
-			decrypted_message = numbers_to_message(decrypted_numbers)
-		else:
-			decrypted_message = str(decrypted_numbers[0])
-		finalize_decryption()
-
-func create_key_visualization() -> void:
-	"""Create 3D visualization of RSA keys"""
-	clear_key_visualization()
-	
-	# Public key visualization (green)
-	var public_key_mesh = create_key_display("PUBLIC KEY", Vector3(-3, 2, 0), public_key_color)
-	add_child(public_key_mesh)
-	key_display_meshes.append(public_key_mesh)
-	
-	# Private key visualization (red)
-	var private_key_mesh = create_key_display("PRIVATE KEY", Vector3(3, 2, 0), private_key_color)
-	add_child(private_key_mesh)
-	key_display_meshes.append(private_key_mesh)
-	
-	# Prime factors visualization (magenta)
-	var prime_p_mesh = create_number_display("p=" + str(p), Vector3(-2, -1, 0), prime_color)
-	add_child(prime_p_mesh)
-	key_display_meshes.append(prime_p_mesh)
-	
-	var prime_q_mesh = create_number_display("q=" + str(q), Vector3(2, -1, 0), prime_color)
-	add_child(prime_q_mesh)
-	key_display_meshes.append(prime_q_mesh)
-
-func create_encryption_visualization() -> void:
-	"""Create visualization of encryption process"""
-	clear_message_visualization()
-	
-	# Plaintext visualization
-	var plaintext_mesh = create_message_display("PLAINTEXT", Vector3(-4, 0, 2), plaintext_color)
-	add_child(plaintext_mesh)
-	message_display_meshes.append(plaintext_mesh)
-	
-	# Ciphertext visualization
-	var ciphertext_mesh = create_message_display("CIPHERTEXT", Vector3(4, 0, 2), ciphertext_color)
-	add_child(ciphertext_mesh)
-	message_display_meshes.append(ciphertext_mesh)
-	
-	# Arrow showing encryption direction
-	var arrow_mesh = create_arrow_display(Vector3(-2, 0, 2), Vector3(2, 0, 2), calculation_color)
-	add_child(arrow_mesh)
-	message_display_meshes.append(arrow_mesh)
-
-func create_decryption_visualization() -> void:
-	"""Create visualization of decryption process"""
-	# Add decrypted text display
-	var decrypted_mesh = create_message_display("DECRYPTED", Vector3(0, 0, -2), plaintext_color)
-	add_child(decrypted_mesh)
-	message_display_meshes.append(decrypted_mesh)
-
-func create_key_display(text: String, position: Vector3, color: Color) -> MeshInstance3D:
-	"""Create visual display for cryptographic keys"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = BoxMesh.new()
-	mesh.size = Vector3(2, 1, 0.2)
-	mesh_instance.mesh = mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.4
-	mesh_instance.material_override = material
-	
-	mesh_instance.position = position
-	
-	# Add text label
-	var label = Label3D.new()
-	label.text = text
-	label.position = Vector3(0, 0.8, 0)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	mesh_instance.add_child(label)
-	
-	return mesh_instance
-
-func create_number_display(text: String, position: Vector3, color: Color) -> MeshInstance3D:
-	"""Create visual display for numbers"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = SphereMesh.new()
-	mesh.radius = 0.5
-	mesh.height = 1.0
-	mesh_instance.mesh = mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.3
-	mesh_instance.material_override = material
-	
-	mesh_instance.position = position
-	
-	# Add number label
-	var label = Label3D.new()
-	label.text = text
-	label.position = Vector3(0, 1.2, 0)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	mesh_instance.add_child(label)
-	
-	return mesh_instance
-
-func create_message_display(text: String, position: Vector3, color: Color) -> MeshInstance3D:
-	"""Create visual display for messages"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = CylinderMesh.new()
-	mesh.top_radius = 0.8
-	mesh.bottom_radius = 0.8
-	mesh.height = 0.5
-	mesh_instance.mesh = mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.3
-	mesh_instance.material_override = material
-	
-	mesh_instance.position = position
-	
-	# Add message label
-	var label = Label3D.new()
-	label.text = text
-	label.position = Vector3(0, 1.0, 0)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	mesh_instance.add_child(label)
-	
-	return mesh_instance
-
-func create_arrow_display(from_pos: Vector3, to_pos: Vector3, color: Color) -> MeshInstance3D:
-	"""Create arrow visualization"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = CylinderMesh.new()
-	mesh.top_radius = 0.1
-	mesh.bottom_radius = 0.1
-	mesh.height = from_pos.distance_to(to_pos)
-	mesh_instance.mesh = mesh
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.4
-	mesh_instance.material_override = material
-	
-	var mid_pos = (from_pos + to_pos) / 2.0
-	mesh_instance.position = mid_pos
-	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
-	
-	return mesh_instance
-
-func clear_key_visualization() -> void:
-	"""Clear key visualization elements"""
-	for mesh in key_display_meshes:
-		if mesh:
-			mesh.queue_free()
-	key_display_meshes.clear()
-
-func clear_message_visualization() -> void:
-	"""Clear message visualization elements"""
-	for mesh in message_display_meshes:
-		if mesh:
-			mesh.queue_free()
-	message_display_meshes.clear()
-
-func update_ui() -> void:
-	"""Update UI with current RSA state"""
-	if not ui_display:
-		return
-	
-	# Check if the UI structure exists
-	var panel = ui_display.get_node("Panel")
-	if not panel:
-		return
-	var vbox = panel.get_node("VBoxContainer")
-	if not vbox:
-		return
-	
-	var labels = []
-	for i in range(40):
-		var label = vbox.get_node("info_label_" + str(i))
-		if label:
-			labels.append(label)
-	
-	if labels.size() >= 40:
-		labels[0].text = "ðŸ” RSA Encryption - Cryptographic Authority"
-		labels[1].text = "Key Size: " + str(key_size_bits) + " bits"
-		labels[2].text = "Primality Tests: " + str(primality_test_rounds) + " rounds"
-		labels[3].text = ""
-		labels[4].text = "Status: " + get_current_status()
-		labels[5].text = "Key Generation: " + ("Complete" if key_generation_complete else "Pending")
-		labels[6].text = "Generation Time: " + str(key_generation_time) + " ms"
-		labels[7].text = ""
-		labels[8].text = "RSA Key Components:"
-		labels[9].text = "Prime p: " + str(p) if p > 0 else "Prime p: Not generated"
-		labels[10].text = "Prime q: " + str(q) if q > 0 else "Prime q: Not generated"
-		labels[11].text = "Modulus n: " + str(n) if n > 0 else "Modulus n: Not computed"
-		labels[12].text = "Ï†(n): " + str(phi_n) if phi_n > 0 else "Ï†(n): Not computed"
-		labels[13].text = "Public exp e: " + str(e) if e > 0 else "Public exp e: Not set"
-		labels[14].text = "Private exp d: " + str(d) if d > 0 else "Private exp d: Not computed"
-		labels[15].text = ""
-		labels[16].text = "Current Operation:"
-		labels[17].text = "Message: '" + plaintext_message + "'"
-		labels[18].text = "Plaintext nums: " + str(plaintext_numbers)
-		labels[19].text = "Ciphertext nums: " + str(ciphertext_numbers)
-		labels[20].text = "Decrypted nums: " + str(decrypted_numbers)
-		labels[21].text = "Decrypted msg: '" + decrypted_message + "'"
-		labels[22].text = ""
-		labels[23].text = "Cryptographic Properties:"
-		labels[24].text = "Security Level: " + get_security_level()
-		labels[25].text = "Factorization Difficulty: " + get_factorization_difficulty()
-		labels[26].text = "Public Key (e,n): (" + str(e) + "," + str(n) + ")"
-		labels[27].text = "Private Key (d,n): (" + str(d) + "," + str(n) + ")"
-		labels[28].text = ""
-		labels[29].text = "Performance Metrics:"
-		labels[30].text = "Key Gen Time: " + str(key_generation_time) + " ms"
-		labels[31].text = "Encryption Time: " + str(encryption_time) + " ms"
-		labels[32].text = "Decryption Time: " + str(decryption_time) + " ms"
-		labels[33].text = "Prime Gen Attempts: " + str(prime_generation_attempts)
-		labels[34].text = ""
-		labels[35].text = "Controls:"
-		labels[36].text = "SPACE - Encrypt, D - Decrypt, G - Generate Keys"
-		labels[37].text = "R - Reset, M - Change Message, 1-4 - Key Sizes"
-		labels[38].text = ""
-		labels[39].text = "ðŸ³ï¸â€ðŸŒˆ Explores cryptographic power & digital sovereignty"
-
-func get_current_status() -> String:
-	"""Get current operation status"""
-	if is_generating_keys:
-		return "Generating Keys..."
-	elif is_encrypting:
-		return "Encrypting..."
-	elif is_decrypting:
-		return "Decrypting..."
-	elif key_generation_complete:
-		return "Ready"
-	else:
-		return "Idle"
-
-func get_security_level() -> String:
-	"""Assess security level based on key size"""
-	match key_size_bits:
-		128:
-			return "DEMO ONLY - Easily breakable"
-		256:
-			return "WEAK - Educational purposes"
-		512:
-			return "MODERATE - Short-term security"
-		1024:
-			return "GOOD - Legacy standard"
-		_:
-			return "UNKNOWN"
-
-func get_factorization_difficulty() -> String:
-	"""Estimate factorization difficulty"""
-	var num_digits = str(n).length()
-	if num_digits < 10:
-		return "TRIVIAL (" + str(num_digits) + " digits)"
-	elif num_digits < 20:
-		return "EASY (" + str(num_digits) + " digits)"
-	elif num_digits < 50:
-		return "MODERATE (" + str(num_digits) + " digits)"
-	else:
-		return "HARD (" + str(num_digits) + " digits)"
-
-func _input(event: InputEvent) -> void:
-	"""Handle user input"""
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_SPACE:
-				if key_generation_complete and not is_encrypting:
-					start_encryption(demo_message)
-			KEY_D:
-				if not ciphertext_numbers.is_empty() and not is_decrypting:
-					start_decryption()
-			KEY_G:
-				start_key_generation()
-			KEY_R:
-				reset_rsa()
-			KEY_M:
-				change_demo_message()
-			KEY_1:
-				change_key_size(128)
-			KEY_2:
-				change_key_size(256)
-			KEY_3:
-				change_key_size(512)
-			KEY_4:
-				change_key_size(1024)
-			KEY_S:
-				step_by_step_mode = not step_by_step_mode
-				print("Step-by-step mode: ", step_by_step_mode)
-
-func reset_rsa() -> void:
-	"""Reset RSA system"""
-	is_generating_keys = false
-	is_encrypting = false
-	is_decrypting = false
-	key_generation_complete = false
-	operation_timer.stop()
-	
-	# Clear key components
-	p = 0
-	q = 0
-	n = 0
-	phi_n = 0
-	d = 0
-	
-	# Clear messages
-	plaintext_numbers.clear()
-	ciphertext_numbers.clear()
-	decrypted_numbers.clear()
-	decrypted_message = ""
-	
-	# Clear visualizations
-	clear_key_visualization()
-	clear_message_visualization()
-	
-	print("RSA system reset")
-	update_ui()
-
-func change_demo_message() -> void:
-	"""Change demonstration message"""
-	var messages = ["HELLO", "SECRET", "CRYPTO", "SECURE", "PRIVACY"]
-	demo_message = messages[randi() % messages.size()]
-	plaintext_message = demo_message
-	print("Changed demo message to: ", demo_message)
-
-func change_key_size(new_size: int) -> void:
-	"""Change RSA key size"""
-	key_size_bits = new_size
-	reset_rsa()
-	print("Changed key size to ", new_size, " bits")
-
-func get_algorithm_info() -> Dictionary:
-	"""Get comprehensive RSA algorithm information"""
-	return {
-		"name": "RSA Encryption",
-		"description": "Public-key cryptography with prime factorization security",
-		"key_properties": {
-			"key_size_bits": key_size_bits,
-			"prime_p": p,
-			"prime_q": q,
-			"modulus_n": n,
-			"euler_totient": phi_n,
-			"public_exponent": e,
-			"private_exponent": d
-		},
-		"security_analysis": {
-			"security_level": get_security_level(),
-			"factorization_difficulty": get_factorization_difficulty(),
-			"prime_generation_attempts": prime_generation_attempts
-		},
-		"performance": {
-			"key_generation_time_ms": key_generation_time,
-			"encryption_time_ms": encryption_time,
-			"decryption_time_ms": decryption_time
-		},
-		"current_state": {
-			"is_generating_keys": is_generating_keys,
-			"is_encrypting": is_encrypting,
-			"is_decrypting": is_decrypting,
-			"key_generation_complete": key_generation_complete,
-			"plaintext_message": plaintext_message,
-			"decrypted_message": decrypted_message
-		}
-	}
-
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
-
-
+# ── apply_grid_config ────────────────────────────────────────────────
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("message_index"):
+		var idx := clampi(int(config.message_index), 0, 4)
+		_pick_message_by_index(idx)
+		if _msg_ctrl:
+			_msg_ctrl.set_value(float(idx))
+	if config.has("prime_range"):
+		var idx := clampi(int(config.prime_range), 0, 3)
+		_set_prime_range(idx)
+		if _prime_ctrl:
+			_prime_ctrl.set_value(float(idx))
+	if config.has("animation_speed"):
+		_anim_speed = clampf(float(config.animation_speed), 0.2, 3.0)
+		if _speed_ctrl:
+			_speed_ctrl.set_value(_anim_speed)
+	_restart()
