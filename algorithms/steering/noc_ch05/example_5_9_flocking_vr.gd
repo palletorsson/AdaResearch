@@ -1,258 +1,748 @@
 # ===========================================================================
-# NOC Example 5.9: Flocking
+# NOC Example 5.9: Flocking — Neighborhood Viz & Predator/Prey
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
 # Translation: AI-assisted Processing → GDScript, 2025
 #
-# This is a translation adapted for VR where the original algorithm and logic are maintained.
+# Elevated: neighborhood radius visualization per agent, predictive avoidance
+# via velocity-projected future positions, predator/prey dynamics with role
+# coloring, ImmediateMesh connection lines, MultiMesh boid rendering,
+# VR sliders for live parameter exploration.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
 
 extends Node3D
 
+## Example 5.9: Flocking — Neighborhood & Predator/Prey
+## Boids with visible influence radii, velocity-based avoidance, and chase/flee roles
+## Chapter 05: Autonomous Agents
+
+
+# ── Constants ──────────────────────────────────────────────────────────
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
-const MAT_AGENT := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
-@export var num_boids: int = 30
-@export var alignment_weight: float = 1.0
-@export var cohesion_weight: float = 1.0
-@export var separation_weight: float = 1.5
+# ── Tunable parameters ────────────────────────────────────────────────
+var num_boids: int = 40
+var num_predators: int = 3
+var alignment_weight: float = 1.0
+var cohesion_weight: float = 1.0
+var separation_weight: float = 1.5
+var neighbor_radius: float = 0.15
+var separation_radius: float = 0.06
+var predator_speed_mult: float = 1.15
+var prey_speed_mult: float = 1.0
+var avoidance_lookahead: float = 0.3   # seconds of velocity projection
+var show_neighborhoods: bool = true
 
-var _sim_root: Node3D
-var _flock: Flock
-var _status_label: Label3D
-var _controller_root: Node3D
+# ── Boid state arrays ─────────────────────────────────────────────────
+enum Role { PREY, PREDATOR }
+var _positions: Array[Vector3] = []
+var _velocities: Array[Vector3] = []
+var _accelerations: Array[Vector3] = []
+var _roles: Array[int] = []         # Role enum
+var _max_speeds: Array[float] = []
+var _max_forces: Array[float] = []
+var _neighbor_counts: Array[int] = []
+
+# ── Visual nodes ─────────────────────────────────────────────────────
+var _boid_mm: MultiMesh
+var _boid_mmi: MultiMeshInstance3D
+
+# Neighborhood rings + connections
+var _hood_im: ImmediateMesh
+var _hood_mi: MeshInstance3D
+
+# Velocity vectors + avoidance lines
+var _vel_im: ImmediateMesh
+var _vel_mi: MeshInstance3D
+
+# Predator chase/prey flee lines
+var _chase_im: ImmediateMesh
+var _chase_mi: MeshInstance3D
+
+# Info label
+var _info_label: Label3D
+
+# VR controllers
+var _sep_ctrl: Node3D
+var _predator_ctrl: Node3D
+var _radius_ctrl: Node3D
+var _speed_ctrl: Node3D
+
+# ── Bounds ───────────────────────────────────────────────────────────
+var _bounds_x := 0.45
+var _bounds_y_lo := 0.05
+var _bounds_y_hi := 0.95
+var _bounds_z := 0.35
+
+# ── Colors ───────────────────────────────────────────────────────────
+var _prey_color := Color(0.3, 0.85, 0.95)     # cyan
+var _predator_color := Color(1.0, 0.35, 0.2)  # red-orange
+var _flee_color := Color(0.95, 0.9, 0.3)      # yellow flash when fleeing
+var _hunt_color := Color(1.0, 0.15, 0.05)     # deep red when hunting
+
 
 func _ready() -> void:
-	_setup_environment()
-	_spawn_flock()
-	set_process(true)
+	_init_boids()
+	_setup_multimesh()
+	_setup_hood_mesh()
+	_setup_vel_mesh()
+	_setup_chase_mesh()
+	_setup_labels()
+	_setup_controllers()
 
-func _setup_environment() -> void:
-	_sim_root = Node3D.new()
-	add_child(_sim_root)
+
+# ── Boid initialization ──────────────────────────────────────────────
+
+func _init_boids() -> void:
+	var total := num_boids + num_predators
+	_positions.resize(total)
+	_velocities.resize(total)
+	_accelerations.resize(total)
+	_roles.resize(total)
+	_max_speeds.resize(total)
+	_max_forces.resize(total)
+	_neighbor_counts.resize(total)
+
+	for i in total:
+		_positions[i] = Vector3(
+			randf_range(-_bounds_x, _bounds_x),
+			randf_range(_bounds_y_lo + 0.1, _bounds_y_hi - 0.1),
+			randf_range(-_bounds_z, _bounds_z)
+		)
+		_velocities[i] = Vector3(
+			randf_range(-0.1, 0.1),
+			randf_range(-0.1, 0.1),
+			randf_range(-0.05, 0.05)
+		)
+		_accelerations[i] = Vector3.ZERO
+		_neighbor_counts[i] = 0
+
+		if i < num_boids:
+			_roles[i] = Role.PREY
+			_max_speeds[i] = 0.25 * prey_speed_mult
+			_max_forces[i] = 0.04
+		else:
+			_roles[i] = Role.PREDATOR
+			_max_speeds[i] = 0.25 * predator_speed_mult
+			_max_forces[i] = 0.06
 
 
-	_status_label = Label3D.new()
-	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_status_label.font_size = 22
-	_status_label.modulate = Color(1.0, 0.85, 1.0)
-	_status_label.position = Vector3(0, 0.82, 0)
-	_sim_root.add_child(_status_label)
+# ── MultiMesh for boid bodies ────────────────────────────────────────
 
-	_controller_root = Node3D.new()
-	_controller_root.position = Vector3(0.75, 0.5, 0)
-	add_child(_controller_root)
+func _setup_multimesh() -> void:
+	_boid_mm = MultiMesh.new()
+	_boid_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_boid_mm.use_colors = true
+	_boid_mm.instance_count = _positions.size()
 
-	var align_controller := CONTROLLER_SCENE.instantiate()
-	align_controller.parameter_name = "Alignment"
-	align_controller.min_value = 0.0
-	align_controller.max_value = 3.0
-	align_controller.default_value = alignment_weight
-	align_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(align_controller)
-	align_controller.value_changed.connect(func(v: float) -> void:
-		alignment_weight = v
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.0
+	cone.bottom_radius = 0.02
+	cone.height = 0.06
+	cone.radial_segments = 6
+	_boid_mm.mesh = cone
+
+	_boid_mmi = MultiMeshInstance3D.new()
+	_boid_mmi.multimesh = _boid_mm
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission = Color(0.5, 0.5, 0.5)
+	mat.emission_energy_multiplier = 1.5
+	_boid_mmi.material_override = mat
+	add_child(_boid_mmi)
+
+
+# ── ImmediateMesh setups ─────────────────────────────────────────────
+
+func _create_im_pair(alpha_transparent: bool = true) -> Array:
+	var im := ImmediateMesh.new()
+	var mi := MeshInstance3D.new()
+	mi.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	if alpha_transparent:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mi.material_override = mat
+	add_child(mi)
+	return [im, mi]
+
+
+func _setup_hood_mesh() -> void:
+	var pair := _create_im_pair()
+	_hood_im = pair[0]
+	_hood_mi = pair[1]
+
+
+func _setup_vel_mesh() -> void:
+	var pair := _create_im_pair()
+	_vel_im = pair[0]
+	_vel_mi = pair[1]
+
+
+func _setup_chase_mesh() -> void:
+	var pair := _create_im_pair()
+	_chase_im = pair[0]
+	_chase_mi = pair[1]
+
+
+# ── Labels ───────────────────────────────────────────────────────────
+
+func _setup_labels() -> void:
+	_info_label = Label3D.new()
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_info_label.font_size = 22
+	_info_label.outline_size = 4
+	_info_label.modulate = Color(1.0, 0.85, 1.0)
+	_info_label.position = Vector3(0, 1.0, 0)
+	add_child(_info_label)
+
+
+# ── VR controllers ───────────────────────────────────────────────────
+
+func _setup_controllers() -> void:
+	var y_pos := -0.6
+
+	_sep_ctrl = CONTROLLER_SCENE.instantiate()
+	_sep_ctrl.parameter_name = "Separation"
+	_sep_ctrl.min_value = 0.0
+	_sep_ctrl.max_value = 4.0
+	_sep_ctrl.default_value = separation_weight
+	_sep_ctrl.step_size = 0.1
+	_sep_ctrl.position = Vector3(-0.3, y_pos, 0)
+	_sep_ctrl.value_changed.connect(func(v: float) -> void: separation_weight = v)
+	add_child(_sep_ctrl)
+
+	_predator_ctrl = CONTROLLER_SCENE.instantiate()
+	_predator_ctrl.parameter_name = "Predators"
+	_predator_ctrl.min_value = 0.0
+	_predator_ctrl.max_value = 8.0
+	_predator_ctrl.default_value = float(num_predators)
+	_predator_ctrl.step_size = 1.0
+	_predator_ctrl.position = Vector3(-0.1, y_pos, 0)
+	_predator_ctrl.value_changed.connect(func(v: float) -> void: _adjust_predator_count(int(v)))
+	add_child(_predator_ctrl)
+
+	_radius_ctrl = CONTROLLER_SCENE.instantiate()
+	_radius_ctrl.parameter_name = "Neighborhood"
+	_radius_ctrl.min_value = 0.05
+	_radius_ctrl.max_value = 0.35
+	_radius_ctrl.default_value = neighbor_radius
+	_radius_ctrl.step_size = 0.01
+	_radius_ctrl.position = Vector3(0.1, y_pos, 0)
+	_radius_ctrl.value_changed.connect(func(v: float) -> void:
+		neighbor_radius = v
+		separation_radius = v * 0.4
 	)
-	align_controller.set_value(alignment_weight)
+	add_child(_radius_ctrl)
 
-	var cohesion_controller := CONTROLLER_SCENE.instantiate()
-	cohesion_controller.parameter_name = "Cohesion"
-	cohesion_controller.min_value = 0.0
-	cohesion_controller.max_value = 3.0
-	cohesion_controller.default_value = cohesion_weight
-	cohesion_controller.position = Vector3(0, -0.18, 0)
-	cohesion_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(cohesion_controller)
-	cohesion_controller.value_changed.connect(func(v: float) -> void:
-		cohesion_weight = v
+	_speed_ctrl = CONTROLLER_SCENE.instantiate()
+	_speed_ctrl.parameter_name = "Pred Speed"
+	_speed_ctrl.min_value = 0.8
+	_speed_ctrl.max_value = 1.6
+	_speed_ctrl.default_value = predator_speed_mult
+	_speed_ctrl.step_size = 0.05
+	_speed_ctrl.position = Vector3(0.3, y_pos, 0)
+	_speed_ctrl.value_changed.connect(func(v: float) -> void:
+		predator_speed_mult = v
+		_update_speeds()
 	)
-	cohesion_controller.set_value(cohesion_weight)
+	add_child(_speed_ctrl)
 
-	var separation_controller := CONTROLLER_SCENE.instantiate()
-	separation_controller.parameter_name = "Separation"
-	separation_controller.min_value = 0.0
-	separation_controller.max_value = 3.0
-	separation_controller.default_value = separation_weight
-	separation_controller.position = Vector3(0, -0.36, 0)
-	separation_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(separation_controller)
-	separation_controller.value_changed.connect(func(v: float) -> void:
-		separation_weight = v
-	)
-	separation_controller.set_value(separation_weight)
 
-func _spawn_flock() -> void:
-	_flock = Flock.new(_sim_root, MAT_AGENT, num_boids)
+# ── Main loop ────────────────────────────────────────────────────────
 
 func _process(delta: float) -> void:
-	_flock.run(delta, alignment_weight, cohesion_weight, separation_weight)
-	_status_label.text = "Flocking | %d boids" % _flock.boids.size()
+	var total := _positions.size()
+	if total == 0:
+		return
+
+	# Reset neighbor counts
+	for i in total:
+		_neighbor_counts[i] = 0
+
+	# Compute steering forces
+	for i in total:
+		if _roles[i] == Role.PREY:
+			_flock_prey(i)
+		else:
+			_flock_predator(i)
+
+	# Integrate
+	for i in total:
+		_velocities[i] += _accelerations[i]
+		_velocities[i] = _velocities[i].limit_length(_max_speeds[i])
+		_positions[i] += _velocities[i] * delta * 60.0
+		_accelerations[i] = Vector3.ZERO
+		_wrap_bounds(i)
+
+	# Update visuals
+	_update_multimesh()
+	_draw_neighborhoods()
+	_draw_velocity_vectors()
+	_draw_chase_lines()
+	_update_label()
+
+
+# ── Prey flocking (classic boids + flee from predators) ──────────────
+
+func _flock_prey(idx: int) -> void:
+	var pos := _positions[idx]
+	var vel := _velocities[idx]
+	var total := _positions.size()
+
+	var sep_sum := Vector3.ZERO
+	var sep_count := 0
+	var ali_sum := Vector3.ZERO
+	var ali_count := 0
+	var coh_sum := Vector3.ZERO
+	var coh_count := 0
+
+	# Flee from predators
+	var flee_sum := Vector3.ZERO
+	var flee_count := 0
+
+	for j in total:
+		if j == idx:
+			continue
+		var d := pos.distance_to(_positions[j])
+
+		if _roles[j] == Role.PREDATOR:
+			# Flee radius is larger than neighbor radius
+			var flee_radius := neighbor_radius * 2.0
+			if d > 0 and d < flee_radius:
+				# Predictive avoidance: project predator future position
+				var future_pred := _positions[j] + _velocities[j] * avoidance_lookahead * 60.0
+				var future_self := pos + vel * avoidance_lookahead * 60.0
+				var future_d := future_self.distance_to(future_pred)
+				if future_d < flee_radius:
+					var diff := (pos - future_pred).normalized() / maxf(d, 0.01)
+					flee_sum += diff
+					flee_count += 1
+		else:
+			# Normal flocking with same-role neighbors
+			if d > 0 and d < separation_radius:
+				var diff := (pos - _positions[j]).normalized() / maxf(d, 0.01)
+				sep_sum += diff
+				sep_count += 1
+
+			if d > 0 and d < neighbor_radius:
+				ali_sum += _velocities[j]
+				coh_sum += _positions[j]
+				ali_count += 1
+				coh_count += 1
+				_neighbor_counts[idx] += 1
+
+	# Separation
+	if sep_count > 0:
+		sep_sum = (sep_sum / float(sep_count)).normalized() * _max_speeds[idx]
+		sep_sum = (sep_sum - vel).limit_length(_max_forces[idx])
+		_accelerations[idx] += sep_sum * separation_weight
+
+	# Alignment
+	if ali_count > 0:
+		ali_sum = (ali_sum / float(ali_count)).normalized() * _max_speeds[idx]
+		ali_sum = (ali_sum - vel).limit_length(_max_forces[idx])
+		_accelerations[idx] += ali_sum * alignment_weight
+
+	# Cohesion
+	if coh_count > 0:
+		var target := coh_sum / float(coh_count)
+		var desired := (target - pos).normalized() * _max_speeds[idx]
+		var steer := (desired - vel).limit_length(_max_forces[idx])
+		_accelerations[idx] += steer * cohesion_weight
+
+	# Flee
+	if flee_count > 0:
+		flee_sum = (flee_sum / float(flee_count)).normalized() * _max_speeds[idx]
+		flee_sum = (flee_sum - vel).limit_length(_max_forces[idx] * 2.0)
+		_accelerations[idx] += flee_sum * 2.5
+
+
+# ── Predator steering (chase nearest prey + avoid other predators) ───
+
+func _flock_predator(idx: int) -> void:
+	var pos := _positions[idx]
+	var vel := _velocities[idx]
+	var total := _positions.size()
+
+	# Find nearest prey using predictive interception
+	var nearest_prey := -1
+	var nearest_d := INF
+	for j in total:
+		if _roles[j] != Role.PREY:
+			continue
+		# Predict where prey will be
+		var future_prey := _positions[j] + _velocities[j] * avoidance_lookahead * 60.0
+		var d := pos.distance_to(future_prey)
+		if d < nearest_d:
+			nearest_d = d
+			nearest_prey = j
+
+	# Chase nearest prey
+	if nearest_prey >= 0:
+		var target := _positions[nearest_prey] + _velocities[nearest_prey] * avoidance_lookahead * 30.0
+		var desired := (target - pos).normalized() * _max_speeds[idx]
+		var steer := (desired - vel).limit_length(_max_forces[idx])
+		_accelerations[idx] += steer * 1.5
+		_neighbor_counts[idx] = 1  # show as "tracking"
+
+	# Separate from other predators
+	var sep_sum := Vector3.ZERO
+	var sep_count := 0
+	for j in total:
+		if j == idx or _roles[j] != Role.PREDATOR:
+			continue
+		var d := pos.distance_to(_positions[j])
+		if d > 0 and d < separation_radius * 2.0:
+			var diff := (pos - _positions[j]).normalized() / maxf(d, 0.01)
+			sep_sum += diff
+			sep_count += 1
+
+	if sep_count > 0:
+		sep_sum = (sep_sum / float(sep_count)).normalized() * _max_speeds[idx]
+		sep_sum = (sep_sum - vel).limit_length(_max_forces[idx])
+		_accelerations[idx] += sep_sum * 1.5
+
+
+# ── Bounds wrapping ──────────────────────────────────────────────────
+
+func _wrap_bounds(idx: int) -> void:
+	var p := _positions[idx]
+	if p.x < -_bounds_x:
+		p.x = _bounds_x
+	elif p.x > _bounds_x:
+		p.x = -_bounds_x
+	if p.y < _bounds_y_lo:
+		p.y = _bounds_y_hi
+	elif p.y > _bounds_y_hi:
+		p.y = _bounds_y_lo
+	if p.z < -_bounds_z:
+		p.z = _bounds_z
+	elif p.z > _bounds_z:
+		p.z = -_bounds_z
+	_positions[idx] = p
+
+
+# ── MultiMesh update ─────────────────────────────────────────────────
+
+func _update_multimesh() -> void:
+	var total := _positions.size()
+	if _boid_mm.instance_count != total:
+		_boid_mm.instance_count = total
+
+	for i in total:
+		var pos := _positions[i]
+		var vel := _velocities[i]
+
+		# Orient cone to face velocity direction
+		var t := Transform3D()
+		t.origin = pos
+		if vel.length() > 0.001:
+			var dir := vel.normalized()
+			var up := Vector3.UP
+			if absf(dir.dot(up)) > 0.99:
+				up = Vector3.FORWARD
+			t = t.looking_at(pos + dir, up)
+			t.basis = t.basis * Basis(Vector3.RIGHT, -PI / 2.0)
+		_boid_mm.set_instance_transform(i, t)
+
+		# Color by role and state
+		var color: Color
+		if _roles[i] == Role.PREDATOR:
+			# Pulse red based on speed (hunting intensity)
+			var speed_t := clampf(vel.length() / _max_speeds[i], 0, 1)
+			color = _predator_color.lerp(_hunt_color, speed_t * 0.5)
+			color.a = 1.0
+		else:
+			# Prey: cyan when calm, yellow flash when fleeing fast
+			var speed_t := clampf(vel.length() / _max_speeds[i], 0, 1)
+			color = _prey_color.lerp(_flee_color, speed_t * 0.4)
+			# Brighten slightly based on neighbor count
+			var hood_t := clampf(float(_neighbor_counts[i]) / 6.0, 0, 1)
+			color = color.lerp(Color(0.6, 1.0, 0.8), hood_t * 0.2)
+			color.a = 1.0
+		_boid_mm.set_instance_color(i, color)
+
+
+# ── Neighborhood ring visualization ──────────────────────────────────
+
+func _draw_neighborhoods() -> void:
+	_hood_im.clear_surfaces()
+	if not show_neighborhoods:
+		return
+
+	var total := _positions.size()
+	_hood_im.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	var ring_segments := 16
+	for i in total:
+		# Only draw rings for prey (predators have different viz)
+		if _roles[i] != Role.PREY:
+			continue
+		# Only draw if boid has neighbors (to avoid visual clutter)
+		if _neighbor_counts[i] == 0:
+			continue
+
+		var pos := _positions[i]
+		var hood_t := clampf(float(_neighbor_counts[i]) / 6.0, 0, 1)
+		var alpha := 0.08 + 0.15 * hood_t
+		var ring_color := Color(0.3, 0.8, 0.9, alpha)
+
+		# Draw ring in XY plane around boid
+		for s in ring_segments:
+			var a0 := float(s) / float(ring_segments) * TAU
+			var a1 := float(s + 1) / float(ring_segments) * TAU
+			var p0 := pos + Vector3(cos(a0) * neighbor_radius, sin(a0) * neighbor_radius, 0)
+			var p1 := pos + Vector3(cos(a1) * neighbor_radius, sin(a1) * neighbor_radius, 0)
+			_hood_im.surface_set_color(ring_color)
+			_hood_im.surface_add_vertex(p0)
+			_hood_im.surface_set_color(ring_color)
+			_hood_im.surface_add_vertex(p1)
+
+		# Draw connection lines to neighbors
+		for j in total:
+			if j <= i or _roles[j] != Role.PREY:
+				continue
+			var d := pos.distance_to(_positions[j])
+			if d > 0 and d < neighbor_radius:
+				var conn_alpha := (1.0 - d / neighbor_radius) * 0.2
+				var conn_color := Color(0.4, 0.9, 1.0, conn_alpha)
+				_hood_im.surface_set_color(conn_color)
+				_hood_im.surface_add_vertex(pos)
+				_hood_im.surface_set_color(conn_color)
+				_hood_im.surface_add_vertex(_positions[j])
+
+	_hood_im.surface_end()
+
+
+# ── Velocity vector visualization ────────────────────────────────────
+
+func _draw_velocity_vectors() -> void:
+	_vel_im.clear_surfaces()
+	var total := _positions.size()
+	_vel_im.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	for i in total:
+		var pos := _positions[i]
+		var vel := _velocities[i]
+		if vel.length() < 0.001:
+			continue
+
+		# Short velocity arrow
+		var tip := pos + vel.normalized() * 0.05
+		var color: Color
+		if _roles[i] == Role.PREDATOR:
+			color = Color(1.0, 0.4, 0.2, 0.5)
+		else:
+			color = Color(0.3, 0.8, 0.9, 0.35)
+
+		_vel_im.surface_set_color(color)
+		_vel_im.surface_add_vertex(pos)
+		_vel_im.surface_set_color(color)
+		_vel_im.surface_add_vertex(tip)
+
+		# Predictive avoidance projection (faint dotted look — just longer line)
+		if _roles[i] == Role.PREY:
+			var future_pos := pos + vel * avoidance_lookahead * 60.0
+			var proj_color := Color(0.5, 0.9, 1.0, 0.1)
+			_vel_im.surface_set_color(proj_color)
+			_vel_im.surface_add_vertex(tip)
+			_vel_im.surface_set_color(Color(0.5, 0.9, 1.0, 0.02))
+			_vel_im.surface_add_vertex(future_pos)
+
+	_vel_im.surface_end()
+
+
+# ── Predator chase lines ─────────────────────────────────────────────
+
+func _draw_chase_lines() -> void:
+	_chase_im.clear_surfaces()
+	var total := _positions.size()
+	_chase_im.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	for i in total:
+		if _roles[i] != Role.PREDATOR:
+			continue
+
+		var pos := _positions[i]
+		var nearest_prey := -1
+		var nearest_d := INF
+
+		for j in total:
+			if _roles[j] != Role.PREY:
+				continue
+			var d := pos.distance_to(_positions[j])
+			if d < nearest_d:
+				nearest_d = d
+				nearest_prey = j
+
+		if nearest_prey >= 0 and nearest_d < neighbor_radius * 3.0:
+			# Chase line: red fading with distance
+			var alpha := (1.0 - nearest_d / (neighbor_radius * 3.0)) * 0.4
+			var chase_color := Color(1.0, 0.2, 0.1, alpha)
+			_chase_im.surface_set_color(chase_color)
+			_chase_im.surface_add_vertex(pos)
+			_chase_im.surface_set_color(Color(1.0, 0.2, 0.1, alpha * 0.3))
+			_chase_im.surface_add_vertex(_positions[nearest_prey])
+
+			# Danger ring around targeted prey
+			var prey_pos := _positions[nearest_prey]
+			var danger_color := Color(1.0, 0.3, 0.15, alpha * 0.5)
+			var segs := 12
+			var r := 0.03
+			for s in segs:
+				var a0 := float(s) / float(segs) * TAU
+				var a1 := float(s + 1) / float(segs) * TAU
+				_chase_im.surface_set_color(danger_color)
+				_chase_im.surface_add_vertex(prey_pos + Vector3(cos(a0) * r, sin(a0) * r, 0))
+				_chase_im.surface_set_color(danger_color)
+				_chase_im.surface_add_vertex(prey_pos + Vector3(cos(a1) * r, sin(a1) * r, 0))
+
+	_chase_im.surface_end()
+
+
+# ── Info label ───────────────────────────────────────────────────────
+
+func _update_label() -> void:
+	var prey_count := 0
+	var pred_count := 0
+	for r in _roles:
+		if r == Role.PREY:
+			prey_count += 1
+		else:
+			pred_count += 1
+	_info_label.text = "Flocking | %d prey  %d predators | radius %.2f" % [
+		prey_count, pred_count, neighbor_radius
+	]
+
+
+# ── Predator count adjustment ────────────────────────────────────────
+
+func _adjust_predator_count(new_count: int) -> void:
+	new_count = clampi(new_count, 0, 8)
+	var current_pred := 0
+	for r in _roles:
+		if r == Role.PREDATOR:
+			current_pred += 1
+
+	if new_count == current_pred:
+		return
+
+	if new_count > current_pred:
+		# Add predators
+		var to_add := new_count - current_pred
+		for _k in to_add:
+			_positions.append(Vector3(
+				randf_range(-_bounds_x, _bounds_x),
+				randf_range(_bounds_y_lo + 0.1, _bounds_y_hi - 0.1),
+				randf_range(-_bounds_z, _bounds_z)
+			))
+			_velocities.append(Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), randf_range(-0.05, 0.05)))
+			_accelerations.append(Vector3.ZERO)
+			_roles.append(Role.PREDATOR)
+			_max_speeds.append(0.25 * predator_speed_mult)
+			_max_forces.append(0.06)
+			_neighbor_counts.append(0)
+	else:
+		# Remove predators from end
+		var to_remove := current_pred - new_count
+		var removed := 0
+		for i in range(_positions.size() - 1, -1, -1):
+			if removed >= to_remove:
+				break
+			if _roles[i] == Role.PREDATOR:
+				_positions.remove_at(i)
+				_velocities.remove_at(i)
+				_accelerations.remove_at(i)
+				_roles.remove_at(i)
+				_max_speeds.remove_at(i)
+				_max_forces.remove_at(i)
+				_neighbor_counts.remove_at(i)
+				removed += 1
+
+	num_predators = new_count
+	_boid_mm.instance_count = _positions.size()
+
+
+func _update_speeds() -> void:
+	for i in _positions.size():
+		if _roles[i] == Role.PREDATOR:
+			_max_speeds[i] = 0.25 * predator_speed_mult
+		else:
+			_max_speeds[i] = 0.25 * prey_speed_mult
+
+
+# ── Input ────────────────────────────────────────────────────────────
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_N:
+			show_neighborhoods = not show_neighborhoods
+		elif event.keycode == KEY_R:
+			_reset_all()
+
+
+func _reset_all() -> void:
+	_positions.clear()
+	_velocities.clear()
+	_accelerations.clear()
+	_roles.clear()
+	_max_speeds.clear()
+	_max_forces.clear()
+	_neighbor_counts.clear()
+	_init_boids()
+	_boid_mm.instance_count = _positions.size()
+
+
+# ── Cleanup ──────────────────────────────────────────────────────────
 
 func _exit_tree() -> void:
-	if _flock:
-		_flock.queue_free()
+	if _hood_im:
+		_hood_im.clear_surfaces()
+	if _vel_im:
+		_vel_im.clear_surfaces()
+	if _chase_im:
+		_chase_im.clear_surfaces()
 
-class Flock:
-	var boids: Array[FlockingBoid] = []
 
-	func _init(parent: Node3D, mat: Material, count: int) -> void:
-		for i in count:
-			var b := FlockingBoid.new()
-			b.init(parent, mat)
-			b.position = Vector3(
-				randf_range(-0.4, 0.4),
-				randf_range(0.1, 0.9),
-				0
-			)
-			b.velocity = Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), 0)
-			boids.append(b)
-
-	func run(delta: float, align_w: float, cohesion_w: float, sep_w: float) -> void:
-		for boid in boids:
-			boid.flock(boids, align_w, cohesion_w, sep_w)
-			boid.update(delta)
-			boid.wrap_bounds()
-
-	func queue_free() -> void:
-		for b in boids:
-			b.queue_free()
-
-class FlockingBoid:
-	var root: Node3D
-	var body: MeshInstance3D
-	var velocity: Vector3 = Vector3.ZERO
-	var acceleration: Vector3 = Vector3.ZERO
-	var max_speed: float = 0.25
-	var max_force: float = 0.04
-	var neighbor_dist: float = 0.15
-	var desired_separation: float = 0.08
-
-	var position: Vector3:
-		get:
-			return root.global_position
-		set(value):
-			root.global_position = value
-
-	func init(parent: Node3D, mat: Material) -> void:
-		root = Node3D.new()
-		root.name = "Boid"
-		parent.add_child(root)
-
-		body = MeshInstance3D.new()
-		var cone := CylinderMesh.new()
-		cone.top_radius = 0.025
-		cone.bottom_radius = 0.025
-		cone.height = 0.08
-		body.mesh = cone
-		body.material_override = mat
-		body.rotation_degrees = Vector3(0, 0, -90)
-		root.add_child(body)
-
-	func flock(boids: Array[FlockingBoid], align_w: float, cohesion_w: float, sep_w: float) -> void:
-		var sep := separate(boids) * sep_w
-		var ali := align(boids) * align_w
-		var coh := cohesion(boids) * cohesion_w
-		apply_force(sep)
-		apply_force(ali)
-		apply_force(coh)
-
-	func separate(boids: Array[FlockingBoid]) -> Vector3:
-		var steer := Vector3.ZERO
-		var count := 0
-		for other in boids:
-			if other == self:
-				continue
-			var d := position.distance_to(other.position)
-			if d > 0 and d < desired_separation:
-				var diff := position - other.position
-				diff.z = 0
-				diff = diff.normalized() / d
-				steer += diff
-				count += 1
-
-		if count > 0:
-			steer /= float(count)
-
-		if steer.length() > 0:
-			steer = steer.normalized() * max_speed
-			steer -= velocity
-			steer = steer.limit_length(max_force)
-
-		return steer
-
-	func align(boids: Array[FlockingBoid]) -> Vector3:
-		var sum := Vector3.ZERO
-		var count := 0
-		for other in boids:
-			if other == self:
-				continue
-			var d := position.distance_to(other.position)
-			if d > 0 and d < neighbor_dist:
-				sum += other.velocity
-				count += 1
-
-		if count > 0:
-			sum /= float(count)
-			sum = sum.normalized() * max_speed
-			var steer := sum - velocity
-			steer = steer.limit_length(max_force)
-			return steer
-
-		return Vector3.ZERO
-
-	func cohesion(boids: Array[FlockingBoid]) -> Vector3:
-		var sum := Vector3.ZERO
-		var count := 0
-		for other in boids:
-			if other == self:
-				continue
-			var d := position.distance_to(other.position)
-			if d > 0 and d < neighbor_dist:
-				sum += other.position
-				count += 1
-
-		if count > 0:
-			sum /= float(count)
-			return seek(sum)
-
-		return Vector3.ZERO
-
-	func seek(target: Vector3) -> Vector3:
-		var desired := target - position
-		desired.z = 0
-		if desired.length() > 0:
-			desired = desired.normalized() * max_speed
-		var steer := desired - velocity
-		steer = steer.limit_length(max_force)
-		return steer
-
-	func apply_force(force: Vector3) -> void:
-		acceleration += force
-
-	func update(delta: float) -> void:
-		velocity += acceleration
-		velocity = velocity.limit_length(max_speed)
-		position += velocity * delta * 60.0
-		acceleration = Vector3.ZERO
-		if velocity.length() > 0.01:
-			var angle := atan2(velocity.y, velocity.x)
-			root.rotation = Vector3(0, 0, angle)
-
-	func wrap_bounds() -> void:
-		var pos := position
-		if pos.x < -0.45:
-			pos.x = 0.45
-		elif pos.x > 0.45:
-			pos.x = -0.45
-		if pos.y < 0.05:
-			pos.y = 0.95
-		elif pos.y > 0.95:
-			pos.y = 0.05
-		position = pos
-
-	func queue_free() -> void:
-		if is_instance_valid(root):
-			root.queue_free()
+# ── Grid config ──────────────────────────────────────────────────────
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("num_boids"):
+		num_boids = clampi(int(config.num_boids), 5, 80)
+
+	if config.has("num_predators"):
+		num_predators = clampi(int(config.num_predators), 0, 8)
+
+	if config.has("alignment_weight"):
+		alignment_weight = clampf(float(config.alignment_weight), 0.0, 4.0)
+
+	if config.has("cohesion_weight"):
+		cohesion_weight = clampf(float(config.cohesion_weight), 0.0, 4.0)
+
+	if config.has("separation_weight"):
+		separation_weight = clampf(float(config.separation_weight), 0.0, 4.0)
+		if _sep_ctrl:
+			_sep_ctrl.set_value(separation_weight)
+
+	if config.has("neighbor_radius"):
+		neighbor_radius = clampf(float(config.neighbor_radius), 0.05, 0.35)
+		separation_radius = neighbor_radius * 0.4
+		if _radius_ctrl:
+			_radius_ctrl.set_value(neighbor_radius)
+
+	if config.has("predator_speed"):
+		predator_speed_mult = clampf(float(config.predator_speed), 0.8, 1.6)
+		if _speed_ctrl:
+			_speed_ctrl.set_value(predator_speed_mult)
+
+	if config.has("avoidance_lookahead"):
+		avoidance_lookahead = clampf(float(config.avoidance_lookahead), 0.1, 1.0)
+
+	if config.has("show_neighborhoods"):
+		show_neighborhoods = bool(config.show_neighborhoods)
+
+	_reset_all()
