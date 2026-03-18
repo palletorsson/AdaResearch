@@ -110,3 +110,6 @@ func _input(event: InputEvent) -> void:
 		for child in get_children():
 			child.queue_free()
 		generate_pixel_cloud()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

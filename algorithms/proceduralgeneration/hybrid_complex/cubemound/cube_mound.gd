@@ -313,3 +313,6 @@ func _input(event: InputEvent) -> void:
 func _exit_tree() -> void:
 	clear_cubes()
 	clear_generated_mesh()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

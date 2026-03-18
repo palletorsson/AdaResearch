@@ -199,3 +199,6 @@ func clear_fractal() -> void:
 
 func _exit_tree() -> void:
 	clear_fractal()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

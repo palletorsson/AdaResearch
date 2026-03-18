@@ -92,3 +92,6 @@ func update_multimesh() -> void:
 					instance_index += 1
 
 	multimesh_instance.multimesh = multimesh
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -31,3 +31,6 @@ func _process(delta: float) -> void:
 			var sun_direction = -sun_light.global_transform.basis.z
 			material.set_shader_parameter("sun_direction", sun_direction)
 			material.set_shader_parameter("camera_position", camera.global_position)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

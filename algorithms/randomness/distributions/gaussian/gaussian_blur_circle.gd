@@ -174,3 +174,6 @@ func set_blur_duration(duration: float) -> void:
 func set_max_blur_radius(radius: float) -> void:
 	"""Set the maximum blur radius"""
 	max_blur_radius = radius
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

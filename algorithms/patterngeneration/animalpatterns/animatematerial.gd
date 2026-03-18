@@ -68,3 +68,6 @@ func apply_preset() -> void:
 			mat.set_shader_parameter("rough", 0.45)
 			mat.set_shader_parameter("metallic_amt", 0.05)
 			mat.set_shader_parameter("normal_amount", 0.4)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

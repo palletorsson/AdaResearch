@@ -113,3 +113,6 @@ func _get_wiggly_path(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 			path.append(current)
 			
 	return path
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

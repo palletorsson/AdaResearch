@@ -12,3 +12,6 @@ func _ready() -> void:
 		print("Camera positioned at: ", camera.global_position)
 	else:
 		push_error("ViewPortCamera3D not found!")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

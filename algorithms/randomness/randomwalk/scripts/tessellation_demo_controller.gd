@@ -121,3 +121,6 @@ func _input(event: InputEvent) -> void:
 			camera_distance = max(10.0, camera_distance - 2.0)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance = min(50.0, camera_distance + 2.0)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

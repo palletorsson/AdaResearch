@@ -335,3 +335,6 @@ func _is_in_border(x: int, y: int) -> bool:
 	"""Check if position is in the border area"""
 	return x < border_size or x > x_segments - border_size or \
 		   y < border_size or y > y_segments - border_size
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

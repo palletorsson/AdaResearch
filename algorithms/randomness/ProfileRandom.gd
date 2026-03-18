@@ -217,3 +217,6 @@ func get_profile_as_string() -> String:
 		if i < profile_points.size() - 1:
 			result += ", "
 	return result
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

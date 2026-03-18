@@ -55,3 +55,6 @@ func _create_simple_flat_mesh() -> void:
 	array_mesh.clear_surfaces()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

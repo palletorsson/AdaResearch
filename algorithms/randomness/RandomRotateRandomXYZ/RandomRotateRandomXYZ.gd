@@ -165,3 +165,6 @@ func _process(delta: float) -> void:
 
 	# Update the instance transform
 	multimesh.set_instance_transform(chosen_index, transform)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

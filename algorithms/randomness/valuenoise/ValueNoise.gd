@@ -48,3 +48,6 @@ func _update_noise_parameters() -> void:
 		noise_field.grid_size = int(grid_size_slider.value)
 		noise_field.amplitude = amplitude_slider.value
 		noise_field.update_noise_field()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

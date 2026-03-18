@@ -239,3 +239,6 @@ func get_pickup_info() -> Dictionary:
 		"grid_bounds": grid_bounds,
 		"positions": pickup_cubes.map(func(cube): return cube.position)
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -51,3 +51,6 @@ func _physics_process(_delta):
 	
 	velocity = input_dir * 5.0
 	move_and_slide()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -150,3 +150,6 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Click to randomize parameters
 			_randomize_parameters()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

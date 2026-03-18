@@ -220,3 +220,6 @@ func _input(event: InputEvent) -> void:
 			if projection_label:
 				projection_label.text = "Projection: " + projection_option.get_item_text(next_projection)
 			_update_stats()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

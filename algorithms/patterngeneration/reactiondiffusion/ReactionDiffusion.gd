@@ -84,3 +84,6 @@ func _update_parameters() -> void:
 		pattern_visualizer.pattern_type = int(pattern_type_slider.value)
 		pattern_visualizer.update_parameters()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

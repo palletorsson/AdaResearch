@@ -90,3 +90,6 @@ func get_total_sand() -> int:
 func reset_simulation() -> void:
 	grid = create_2d_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -109,3 +109,6 @@ func _create_simple_cave_mesh() -> void:
 	
 	print("✅ Created double-sided cave tunnel with ", vertices.size(), " vertices, ", indices.size() / 3, " triangles")
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

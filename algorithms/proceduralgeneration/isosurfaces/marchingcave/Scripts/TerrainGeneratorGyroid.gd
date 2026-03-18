@@ -19,3 +19,6 @@ func _create_fallback_mesh() -> void:
 	sphere.height = 40.0
 	mesh = sphere
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

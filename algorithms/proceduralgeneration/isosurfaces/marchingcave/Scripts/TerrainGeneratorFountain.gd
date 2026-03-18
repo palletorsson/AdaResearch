@@ -19,3 +19,6 @@ func _create_simple_cylinder_mesh() -> void:
 	cylinder.height = 100.0
 	mesh = cylinder
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

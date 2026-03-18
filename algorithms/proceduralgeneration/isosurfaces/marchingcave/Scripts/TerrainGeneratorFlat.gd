@@ -69,3 +69,6 @@ func _create_simple_flat_mesh() -> void:
 	print("✅ Created flat landscape with ", vertices.size(), " vertices, ", indices.size() / 3, " triangles")
 	_create_collision()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

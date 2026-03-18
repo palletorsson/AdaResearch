@@ -76,3 +76,6 @@ func _on_WFCGrid3D_generation_complete() -> void:
 func _on_WFCGrid3D_tile_placed(position, tile_id) -> void:
 	if wfc_grid.animate_generation:
 		print("Placed tile '", tile_id, "' at ", position)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

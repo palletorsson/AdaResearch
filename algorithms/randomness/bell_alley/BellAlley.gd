@@ -41,3 +41,6 @@ func create_bellcurve_alley() -> void:
 			var cube := cube_scene.instantiate()
 			cube.position = Vector3(x * cube_spacing, height_y, z * cube_spacing)
 			add_child(cube)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

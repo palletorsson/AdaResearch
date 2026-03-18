@@ -340,3 +340,6 @@ func _input(event: InputEvent) -> void:
 
 
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -57,3 +57,6 @@ func _update_noise_parameters() -> void:
 		noise_field.amplitude = amplitude_slider.value
 		noise_field.octaves = int(octaves_slider.value)
 		noise_field.update_noise_field()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

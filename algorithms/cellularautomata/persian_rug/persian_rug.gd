@@ -286,3 +286,6 @@ func _update_texture_slice(rows: int) -> void:
 	texture.update(image)
 	
 	current_row = end_row
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

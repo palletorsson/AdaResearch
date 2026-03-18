@@ -31,3 +31,6 @@ func spawn_lines() -> void:
 		if container.has_method("refresh_connections"):
 			container.call_deferred("refresh_connections")
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

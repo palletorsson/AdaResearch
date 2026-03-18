@@ -67,3 +67,6 @@ func _grid_to_world(pos: Vector3i) -> Vector3:
 		(pos.y - GRID_SIZE/2) * CUBE_SIZE * VISUALIZATION_STEP,
 		(pos.z - GRID_SIZE/2) * CUBE_SIZE * VISUALIZATION_STEP
 	)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

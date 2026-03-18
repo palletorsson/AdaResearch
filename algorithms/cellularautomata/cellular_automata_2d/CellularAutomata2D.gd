@@ -287,3 +287,6 @@ func reset_automata() -> void:
 	generation_time = 0.0
 	time = 0.0
 	initialize_grid()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

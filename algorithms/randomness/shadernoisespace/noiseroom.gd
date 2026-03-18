@@ -244,3 +244,6 @@ func get_animation_info() -> Dictionary:
 		"room_material_active": room_material != null,
 		"wall_material_active": wall_material != null
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -133,3 +133,6 @@ func _on_generation_started() -> void:
 func _on_generation_complete() -> void:
 	print("Generation complete!")
 	print("Total tiles placed: ", wfc_grid.tile_nodes.size())
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

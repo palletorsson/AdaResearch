@@ -107,3 +107,6 @@ func create_cube(x, y, z) -> void:
 	var pos_z = (z - grid_size / 2.0) * 0.5
 	cell.position = Vector3(pos_x, pos_y, pos_z)
 	add_child(cell)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

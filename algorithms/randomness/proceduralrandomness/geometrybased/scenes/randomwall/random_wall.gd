@@ -72,3 +72,6 @@ func regenerate() -> void:
 	# Generate a new wall
 	random_seed = randi()  # New random seed
 	generate_wall()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

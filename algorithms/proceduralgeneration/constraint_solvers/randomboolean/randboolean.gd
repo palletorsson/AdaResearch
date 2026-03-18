@@ -28,3 +28,6 @@ func _ready() -> void:
 		print("  ✓ Duplicated sphere at x=", x_pos, " radius=", sphere_radius)
 		
 	print("✅ Created ", num_spheres, " carving spheres in a row")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

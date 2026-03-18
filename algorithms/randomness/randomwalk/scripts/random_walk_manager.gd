@@ -94,3 +94,6 @@ func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	print("Item dropped, stopping random walk")
 	is_walking = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

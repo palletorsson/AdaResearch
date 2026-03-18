@@ -154,3 +154,6 @@ func _on_strategy_pressed() -> void:
 
 func _on_speed_changed(value: float) -> void:
 	step_interval = 1.0 / value
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

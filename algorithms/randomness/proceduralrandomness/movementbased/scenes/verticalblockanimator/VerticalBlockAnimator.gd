@@ -31,3 +31,6 @@ func _stop_animation() -> void:
 		mesh_instance.material_override.set_shader_parameter("custom_time", random_time)
 		
 		print("Animation stopped with random pattern (time value: ", random_time, ")")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

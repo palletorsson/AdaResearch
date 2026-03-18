@@ -88,3 +88,6 @@ func reset_simulation() -> void:
 	nucleation_sites.clear()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -133,3 +133,6 @@ func reset_simulation() -> void:
 	flow_grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -117,3 +117,6 @@ func _randn(mean: float, std: float) -> float:
 	var u2 = randf()
 	var z = sqrt(-2.0 * log(u1)) * cos(TAU * u2)
 	return mean + std * z
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

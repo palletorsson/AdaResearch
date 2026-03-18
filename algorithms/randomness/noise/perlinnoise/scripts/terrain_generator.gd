@@ -27,3 +27,6 @@ func generate_terrain() -> void:
 	var new_mesh = MeshHelper.apply_noise_to_mesh(noise_plane, fnoise, time_offset, use_fade, use_edges)
 	if new_mesh:
 		noise_plane.mesh = new_mesh
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

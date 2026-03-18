@@ -121,3 +121,6 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_SPACE:
 			print("\n=== Generating Custom WFC Grid ===")
 			wfc_grid.generate()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

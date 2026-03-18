@@ -226,3 +226,6 @@ func _input(event: InputEvent) -> void:
 			stop_animation()
 		else:
 			start_animation()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

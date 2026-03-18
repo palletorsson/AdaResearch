@@ -13,3 +13,6 @@ func apply(x: int, y: int, voxel: bool) -> bool:
 	if dx * dx + dy * dy <= sqr_radius:
 		return fill_type
 	return voxel
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

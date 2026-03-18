@@ -89,3 +89,6 @@ func reset_simulation() -> void:
 	stress_points.clear()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -64,3 +64,6 @@ func _create_label_grid() -> void:
 		# Add extra spacing after every 5 rows to simulate a page break
 		if (row + 1) % 5 == 0:
 			current_y_offset += number_spacing_y * 1.2  # Larger spacing after every 5 rows
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

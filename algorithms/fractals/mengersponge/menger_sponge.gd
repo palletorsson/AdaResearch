@@ -183,3 +183,6 @@ func reset() -> void:
 # Perform a single iteration step
 func step() -> void:
 	perform_iteration()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

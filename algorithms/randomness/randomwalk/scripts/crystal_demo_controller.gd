@@ -135,3 +135,6 @@ func _randomize_parameters() -> void:
 	crystal.regenerate()
 	_update_ui()
 	_update_stats()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

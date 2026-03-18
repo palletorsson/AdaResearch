@@ -145,3 +145,6 @@ func create_simple_derivative_height_texture(size: int = 512) -> ImageTexture:
 	var texture = ImageTexture.new()
 	texture.set_image(image)
 	return texture
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

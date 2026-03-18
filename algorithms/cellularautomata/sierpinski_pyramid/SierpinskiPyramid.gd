@@ -137,3 +137,6 @@ func _spawn_cube(pos: Vector3) -> void:
 	# And the offsets are based on that.
 	
 	cube.scale = Vector3(size, size, size)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

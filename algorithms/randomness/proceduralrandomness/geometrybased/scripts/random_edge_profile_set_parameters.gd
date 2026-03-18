@@ -8,3 +8,6 @@ extends Node3D
 func _ready() -> void:
 	if profile:
 		profile.set_height(profile_height)  # Call method to set height
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

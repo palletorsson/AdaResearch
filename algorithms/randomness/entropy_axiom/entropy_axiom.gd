@@ -78,3 +78,6 @@ func get_entropy_color(entropy_factor: float) -> Color:
 	var value = 1.0
 
 	return Color.from_hsv(hue, saturation, value)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

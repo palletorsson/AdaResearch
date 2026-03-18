@@ -44,3 +44,6 @@ func _sample_centered_volume() -> PackedFloat32Array:
 				i += 1
 
 	return data
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -46,3 +46,6 @@ func modify_top_edge_vertices() -> void:
 
 func set_height(new_height: float) -> void:
 	profile_height = new_height  # Adjust height	
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

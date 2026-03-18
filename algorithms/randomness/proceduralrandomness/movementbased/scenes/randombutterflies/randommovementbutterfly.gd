@@ -283,3 +283,6 @@ func _physics_process(_delta: float) -> void:
 			is_sitting = true
 			sitting_timer = entropy_sit_duration if _seeking_entropy else sitting_duration
 			$AnimationPlayer.stop()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

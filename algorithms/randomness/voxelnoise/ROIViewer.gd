@@ -95,3 +95,6 @@ func _get_grid_position(index: int) -> Vector3:
 	
 	# Linear interpolation from start to end
 	return start_pos.lerp(end_pos, t)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

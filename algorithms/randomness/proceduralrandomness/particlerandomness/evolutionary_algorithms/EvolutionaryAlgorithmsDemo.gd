@@ -11,3 +11,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_evolutionary_algorithms(delta)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

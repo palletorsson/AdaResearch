@@ -40,3 +40,6 @@ func modify_top_edge_vertices() -> void:
 	noise_plane.mesh = new_mesh
 
 	print("✅ Top edge modified successfully!")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -131,3 +131,6 @@ func add_pentagon_c(i: int) -> void:
 
 func add_pentagon_d(i: int) -> void:
 	add_pentagon(corners_max[i + 1], corners_max[i], y_edge_max, x_edges_min[i], corners_min[i + 1])
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
