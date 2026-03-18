@@ -310,6 +310,33 @@ func _create_pegs() -> void:
 	var row_height := peg_spacing * 0.866
 	var first_peg_y := board_height - 0.06
 
+	# Count total pegs for MultiMesh visual
+	var total_pegs := 0
+	for row in range(peg_rows):
+		total_pegs += row + 1
+
+	# Create MultiMesh for peg visuals
+	var cyl_mesh := CylinderMesh.new()
+	cyl_mesh.top_radius = peg_radius
+	cyl_mesh.bottom_radius = peg_radius
+	cyl_mesh.height = board_depth * 0.9
+	cyl_mesh.radial_segments = 12
+
+	var peg_mat := StandardMaterial3D.new()
+	peg_mat.albedo_color = color_peg
+	peg_mat.metallic = 0.6
+	peg_mat.roughness = 0.3
+	peg_mat.emission_enabled = true
+	peg_mat.emission = color_peg * 0.3
+	peg_mat.emission_energy_multiplier = 0.2
+	cyl_mesh.material = peg_mat
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = total_pegs
+	mm.mesh = cyl_mesh
+
+	var peg_idx := 0
 	for row in range(peg_rows):
 		var pegs_in_row := row + 1
 		var row_width := (pegs_in_row - 1) * peg_spacing
@@ -317,40 +344,35 @@ func _create_pegs() -> void:
 
 		for col in range(pegs_in_row):
 			var x := -row_width / 2.0 + col * peg_spacing
-			_create_single_peg(Vector3(x, y, 0))
+			var pos := Vector3(x, y, 0)
+
+			# MultiMesh visual transform (rotated 90 on X to align along Z)
+			var t := Transform3D()
+			t.basis = Basis(Vector3(1, 0, 0), deg_to_rad(90))
+			t.origin = pos
+			mm.set_instance_transform(peg_idx, t)
+			peg_idx += 1
+
+			# Still need individual StaticBody3D for collision
+			_create_single_peg_collision(pos)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Pegs_MM"
+	mmi.multimesh = mm
+	add_child(mmi)
 
 
-func _create_single_peg(pos: Vector3) -> void:
+func _create_single_peg_collision(pos: Vector3) -> void:
+	# Collision-only StaticBody3D (visuals handled by MultiMesh)
 	var body := StaticBody3D.new()
 
-	# Collision — cylinder spanning board depth
 	var col := CollisionShape3D.new()
 	var cyl_shape := CylinderShape3D.new()
 	cyl_shape.radius = peg_radius
 	cyl_shape.height = board_depth * 0.9
 	col.shape = cyl_shape
-	col.rotation_degrees.x = 90  # Align along Z axis
+	col.rotation_degrees.x = 90
 	body.add_child(col)
-
-	# Mesh
-	var mesh_inst := MeshInstance3D.new()
-	var cyl_mesh := CylinderMesh.new()
-	cyl_mesh.top_radius = peg_radius
-	cyl_mesh.bottom_radius = peg_radius
-	cyl_mesh.height = board_depth * 0.9
-	cyl_mesh.radial_segments = 12
-	mesh_inst.mesh = cyl_mesh
-	mesh_inst.rotation_degrees.x = 90
-
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color_peg
-	mat.metallic = 0.6
-	mat.roughness = 0.3
-	mat.emission_enabled = true
-	mat.emission = color_peg * 0.3
-	mat.emission_energy_multiplier = 0.2
-	mesh_inst.material_override = mat
-	body.add_child(mesh_inst)
 
 	body.position = pos
 	add_child(body)

@@ -372,17 +372,22 @@ func _build_station_waterwheel() -> void:
 	wheel.rotation_degrees.x = 90  # Lay axle along Z
 	wheel.angular_damp = 0.5
 
-	# 6 blades
+	# 6 blades — MultiMesh
+	var blade_base := BoxMesh.new()
+	blade_base.size = Vector3(0.5, 0.03, 0.2)
+	blade_base.material = h.get_material(Color(0.3, 0.5, 1.0))
+	var blade_mm := MultiMesh.new()
+	blade_mm.transform_format = MultiMesh.TRANSFORM_3D
+	blade_mm.instance_count = 6
+	blade_mm.mesh = blade_base
 	for i in range(6):
 		var angle := float(i) * TAU / 6.0
-		var blade := MeshInstance3D.new()
-		var blade_mesh := BoxMesh.new()
-		blade_mesh.size = Vector3(0.5, 0.03, 0.2)
-		blade.mesh = blade_mesh
-		blade.material_override = h.get_material(Color(0.3, 0.5, 1.0))
-		blade.position = Vector3(cos(angle) * 0.55, sin(angle) * 0.55, 0)
-		blade.rotation.z = angle
-		wheel.add_child(blade)
+		var pos := Vector3(cos(angle) * 0.55, sin(angle) * 0.55, 0)
+		var basis := Basis(Vector3.FORWARD, angle)
+		blade_mm.set_instance_transform(i, Transform3D(basis, pos))
+	var blade_mmi := MultiMeshInstance3D.new()
+	blade_mmi.multimesh = blade_mm
+	wheel.add_child(blade_mmi)
 
 	# Hub ring (visual)
 	var ring := MeshInstance3D.new()
@@ -438,13 +443,19 @@ func _build_station_spring() -> void:
 	# Base plate (static)
 	var base = h.create_static_body(Vector3(0, 0.075, 0), h.make_box_mesh(Vector3(1.0, 0.15, 1.0)), COLOR_FRAME, "Base")
 
-	# Guide columns
-	for offset in [Vector3(-0.4, 1.75, -0.4), Vector3(0.4, 1.75, -0.4), Vector3(-0.4, 1.75, 0.4), Vector3(0.4, 1.75, 0.4)]:
-		var col := MeshInstance3D.new()
-		col.mesh = h.make_cylinder_mesh(0.04, 3.5)
-		col.material_override = h.get_material(COLOR_METAL)
-		col.position = offset
-		sd.root.add_child(col)
+	# Guide columns — MultiMesh
+	var col_cyl := h.make_cylinder_mesh(0.04, 3.5)
+	col_cyl.material = h.get_material(COLOR_METAL)
+	var col_offsets := [Vector3(-0.4, 1.75, -0.4), Vector3(0.4, 1.75, -0.4), Vector3(-0.4, 1.75, 0.4), Vector3(0.4, 1.75, 0.4)]
+	var col_mm := MultiMesh.new()
+	col_mm.transform_format = MultiMesh.TRANSFORM_3D
+	col_mm.instance_count = 4
+	col_mm.mesh = col_cyl
+	for i in range(4):
+		col_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, col_offsets[i]))
+	var col_mmi := MultiMeshInstance3D.new()
+	col_mmi.multimesh = col_mm
+	sd.root.add_child(col_mmi)
 
 	# Platform (rigid)
 	var platform = h.create_rigid_body(Vector3(0, 0.6, 0), h.make_box_mesh(Vector3(0.8, 0.12, 0.8)), COLOR_RESULT, 2.0, "Platform")
@@ -454,20 +465,23 @@ func _build_station_spring() -> void:
 	# Spring joint
 	var spring = h.create_spring_joint(base, platform, Vector3(0, 0.4, 0), "y", 25.0, 4.0, 0.0, 3.0, "TowerSpring")
 
-	# Visual coil springs (8 toruses along guides)
-	var coils: Array[MeshInstance3D] = []
+	# Visual coil springs (8 toruses along guides) — MultiMesh for VR perf
+	var coil_torus := TorusMesh.new()
+	coil_torus.inner_radius = 0.02
+	coil_torus.outer_radius = 0.12
+	coil_torus.ring_segments = 16
+	coil_torus.rings = 8
+	coil_torus.material = h.get_emissive_material(Color(0.4, 0.7, 1.0), 1.0)
+	var coil_mm := MultiMesh.new()
+	coil_mm.transform_format = MultiMesh.TRANSFORM_3D
+	coil_mm.instance_count = 8
+	coil_mm.mesh = coil_torus
+	var coil_basis := Basis(Vector3.RIGHT, deg_to_rad(90))
 	for i in range(8):
-		var coil := MeshInstance3D.new()
-		var t := TorusMesh.new()
-		t.inner_radius = 0.02
-		t.outer_radius = 0.12
-		t.ring_segments = 16
-		t.rings = 8
-		coil.mesh = t
-		coil.material_override = h.get_emissive_material(Color(0.4, 0.7, 1.0), 1.0)
-		coil.rotation_degrees.x = 90
-		sd.root.add_child(coil)
-		coils.append(coil)
+		coil_mm.set_instance_transform(i, Transform3D(coil_basis, Vector3.ZERO))
+	var coil_mmi := MultiMeshInstance3D.new()
+	coil_mmi.multimesh = coil_mm
+	sd.root.add_child(coil_mmi)
 
 	# Indicator sphere on platform
 	var ind := MeshInstance3D.new()
@@ -478,7 +492,8 @@ func _build_station_spring() -> void:
 
 	sd.joints = [spring]
 	sd.bodies = [platform]
-	sd["coils"] = coils
+	sd["coil_mm"] = coil_mm
+	sd["coil_basis"] = coil_basis
 
 	# Two force vectors
 	var vec_a := _spawn_vector(sd.root, Vector3(-2.0, 1.0, 1.5), Vector3(-2.0, 2.5, 1.5), COLOR_A, "Thrust")
@@ -500,15 +515,17 @@ func _update_spring(do_text: bool) -> void:
 	var platform: RigidBody3D = sd.bodies[0]
 	platform.apply_central_force(Vector3(0, force_up, 0))
 
-	# Redistribute coil springs between base and platform
-	var coils: Array = sd.get("coils", [])
-	var plat_y: float = platform.global_position.y - sd.root.global_position.y
-	var base_y := 0.15
-	var span := maxf(plat_y - base_y, 0.1)
-	for i in range(coils.size()):
-		var t := (float(i) + 0.5) / float(coils.size())
-		var cy := base_y + t * span
-		coils[i].position = Vector3(0, cy, 0)
+	# Redistribute coil springs between base and platform via MultiMesh
+	var coil_mm: MultiMesh = sd.get("coil_mm")
+	var coil_basis: Basis = sd.get("coil_basis", Basis(Vector3.RIGHT, deg_to_rad(90)))
+	if coil_mm:
+		var plat_y: float = platform.global_position.y - sd.root.global_position.y
+		var base_y := 0.15
+		var span := maxf(plat_y - base_y, 0.1)
+		for i in range(coil_mm.instance_count):
+			var t := (float(i) + 0.5) / float(coil_mm.instance_count)
+			var cy := base_y + t * span
+			coil_mm.set_instance_transform(i, Transform3D(coil_basis, Vector3(0, cy, 0)))
 
 	if do_text and sd.info_label:
 		sd.info_label.text = "Thrust = (%.1f, %.1f, %.1f)\nGravity = (%.1f, %.1f, %.1f)\nF_net = (%.1f, %.1f, %.1f)\n|F_net| = %.2f" % [a.x, a.y, a.z, b.x, b.y, b.z, net.x, net.y, net.z, net.length()]

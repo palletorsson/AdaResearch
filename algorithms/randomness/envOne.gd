@@ -54,7 +54,7 @@ func _clear_current_geometry() -> void:
 	for child in get_children():
 		if child is Camera3D:
 			continue
-		if child is MeshInstance3D or child is CSGPrimitive3D or child is GPUParticles3D:
+		if child is MeshInstance3D or child is MultiMeshInstance3D or child is CSGPrimitive3D or child is GPUParticles3D:
 			to_remove.append(child)
 		elif child is WorldEnvironment or child is Light3D or child is SpotLight3D or child is OmniLight3D or child is DirectionalLight3D:
 			to_remove.append(child)
@@ -1042,116 +1042,148 @@ func create_beam_connection(module_a, module_b) -> void:
 func create_floating_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
-	
-	# Create floating objects along the path
 	var steps = randi() % 5 + 3
+
+	var sphere_data: Array[Transform3D] = []
+	var box_data: Array[Transform3D] = []
+
 	for i in range(steps):
-		var t = float(i) / float(steps - 1)
-		var pos = start_pos.lerp(end_pos, t)
-		
-		# Add some randomness to position
-		pos += Vector3(
-			randf_range(-1.0, 1.0),
-			randf_range(-1.0, 1.0),
-			randf_range(-1.0, 1.0)
-		)
-		
-		var floating_object = MeshInstance3D.new()
-		
+		var t_val = float(i) / float(steps - 1)
+		var pos = start_pos.lerp(end_pos, t_val)
+		pos += Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+
 		if randf() > 0.6:
-			floating_object.mesh = SphereMesh.new()
-			floating_object.scale = Vector3(0.2, 0.2, 0.2)
+			sphere_data.append(Transform3D(Basis.IDENTITY.scaled(Vector3(0.2, 0.2, 0.2)), pos))
 		else:
-			floating_object.mesh = BoxMesh.new()
-			floating_object.scale = Vector3(0.15, 0.15, 0.15)
-			floating_object.rotation_degrees = Vector3(
-				randf_range(0, 360),
-				randf_range(0, 360),
-				randf_range(0, 360)
-			)
-		
-		floating_object.position = pos
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color_theme["primary"]
-		material.emission_enabled = true
-		material.emission = color_theme["primary"]
-		material.emission_energy = 0.5
-		floating_object.material_override = material
-		
-		add_child(floating_object)
+			var rot = Basis.from_euler(Vector3(deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360))))
+			box_data.append(Transform3D(rot.scaled(Vector3(0.15, 0.15, 0.15)), pos))
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color_theme["primary"]
+	mat.emission_enabled = true
+	mat.emission = color_theme["primary"]
+	mat.emission_energy = 0.5
+
+	if not sphere_data.is_empty():
+		var sphere = SphereMesh.new()
+		sphere.radius = 1.0
+		sphere.height = 2.0
+		sphere.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = sphere_data.size()
+		mm.mesh = sphere
+		for i in range(sphere_data.size()):
+			mm.set_instance_transform(i, sphere_data[i])
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "FloatingSphereMM"
+		mmi.multimesh = mm
+		add_child(mmi)
+
+	if not box_data.is_empty():
+		var box = BoxMesh.new()
+		box.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = box_data.size()
+		mm.mesh = box
+		for i in range(box_data.size()):
+			mm.set_instance_transform(i, box_data[i])
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "FloatingBoxMM"
+		mmi.multimesh = mm
+		add_child(mmi)
 
 func add_particles_along_beam(start_pos, end_pos, color) -> void:
-	# In an actual project, you would use a real particle system
-	# For this example, we'll create small spheres to simulate particles
 	var particle_count = randi() % 5 + 3
-	
+
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.05
+	sphere.height = 0.1
+	sphere.radial_segments = 6
+	sphere.rings = 4
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy = 3.0
+	sphere.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = particle_count
+	mm.mesh = sphere
+
 	for i in range(particle_count):
-		var t = randf()  # Random position along the beam
+		var t = randf()
 		var pos = start_pos.lerp(end_pos, t)
-		
-		var particle = MeshInstance3D.new()
-		particle.mesh = SphereMesh.new()
-		particle.position = pos
-		particle.scale = Vector3(0.05, 0.05, 0.05)
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color
-		material.emission_enabled = true
-		material.emission = color
-		material.emission_energy = 3.0
-		particle.material_override = material
-		
-		add_child(particle)
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY.scaled(Vector3(1, 1, 1)), pos))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "BeamParticlesMM"
+	mmi.multimesh = mm
+	add_child(mmi)
 
 func add_ambient_elements() -> void:
-	# Add some ambient floating elements to the scene
-	for i in range(randi() % 20 + 10):
-		var element = MeshInstance3D.new()
-		
-		# Random mesh type
-		match randi() % 5:
-			0: element.mesh = SphereMesh.new()
-			1: element.mesh = BoxMesh.new()
-			2: element.mesh = CylinderMesh.new()
-			3: element.mesh = PrismMesh.new()
-			4: element.mesh = TorusMesh.new()
-		
-		# Random position within space
-		element.position = Vector3(
+	var total = randi() % 20 + 10
+	# Pre-generate per-type data
+	var type_data: Array[Array] = [[], [], [], [], []]  # sphere, box, cyl, prism, torus
+
+	for i in range(total):
+		var type_idx = randi() % 5
+		var scale_factor = randf_range(0.1, 0.5)
+		var pos = Vector3(
 			randf_range(-space_size.x, space_size.x),
 			randf_range(-space_size.y, space_size.y),
 			randf_range(-space_size.z, space_size.z)
 		)
-		
-		# Random rotation
-		element.rotation_degrees = Vector3(
-			randf_range(0, 360),
-			randf_range(0, 360),
-			randf_range(0, 360)
-		)
-		
-		# Small scale
-		var scale_factor = randf_range(0.1, 0.5)
-		element.scale = Vector3(scale_factor, scale_factor, scale_factor)
-		
-		# Random material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(
-			randf_range(0.3, 1.0),
-			randf_range(0.3, 1.0),
-			randf_range(0.3, 1.0)
-		)
-		
-		# Sometimes add emission
-		if randf() > 0.7:
-			material.emission_enabled = true
-			material.emission = material.albedo_color
-			material.emission_energy = randf_range(0.5, 2.0)
-		
-		element.material_override = material
-		
-		add_child(element)
+		var rot = Vector3(randf_range(0, 360), randf_range(0, 360), randf_range(0, 360))
+		var col = Color(randf_range(0.3, 1.0), randf_range(0.3, 1.0), randf_range(0.3, 1.0))
+		var emit = randf() > 0.7
+		type_data[type_idx].append({"pos": pos, "rot": rot, "scale": scale_factor, "color": col, "emit": emit})
+
+	var meshes: Array[Mesh] = []
+	meshes.append(SphereMesh.new())
+	meshes.append(BoxMesh.new())
+	meshes.append(CylinderMesh.new())
+	meshes.append(PrismMesh.new())
+	meshes.append(TorusMesh.new())
+
+	for type_idx in range(5):
+		var entries = type_data[type_idx]
+		if entries.is_empty():
+			continue
+
+		# Use average color for the material
+		var avg_col = Color.BLACK
+		for e in entries:
+			avg_col += e["color"]
+		avg_col /= entries.size()
+
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = avg_col
+		mat.emission_enabled = true
+		mat.emission = avg_col
+		mat.emission_energy = 1.0
+		meshes[type_idx].material = mat
+
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = entries.size()
+		mm.mesh = meshes[type_idx]
+
+		for i in range(entries.size()):
+			var e = entries[i]
+			var t = Transform3D()
+			t.basis = Basis.from_euler(Vector3(deg_to_rad(e["rot"].x), deg_to_rad(e["rot"].y), deg_to_rad(e["rot"].z)))
+			t.basis = t.basis.scaled(Vector3(e["scale"], e["scale"], e["scale"]))
+			t.origin = e["pos"]
+			mm.set_instance_transform(i, t)
+
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "AmbientElementsMM_" + str(type_idx)
+		mmi.multimesh = mm
+		add_child(mmi)
 
 func apply_lighting() -> void:
 	# Create a dynamic lighting setup
@@ -1230,31 +1262,37 @@ func apply_atmosphere() -> void:
 	# (This would require an actual texture resource)
 
 func create_atmosphere_particles() -> void:
-	# In a full implementation, you would use GPUParticles3D
-	# For simplicity in this example, we'll create a few static particles 
-	
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.06  # average size
+	sphere_mesh.height = 0.12
+	sphere_mesh.radial_segments = 6
+	sphere_mesh.rings = 4
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.7, 0.7, 0.8, 0.2)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	sphere_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = 100
+	mm.mesh = sphere_mesh
+
 	for i in range(100):
-		var particle = MeshInstance3D.new()
-		particle.mesh = SphereMesh.new()
-		
-		# Position randomly in space
-		particle.position = Vector3(
+		var t = Transform3D()
+		var scale_factor = randf_range(0.02, 0.1) / 0.06  # normalize to base radius
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3(
 			randf_range(-space_size.x, space_size.x),
 			randf_range(-space_size.y, space_size.y),
 			randf_range(-space_size.z, space_size.z)
 		)
-		
-		# Very small scale for dust-like particles
-		var scale_factor = randf_range(0.02, 0.1)
-		particle.scale = Vector3(scale_factor, scale_factor, scale_factor)
-		
-		# Semi-transparent material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.7, 0.7, 0.8, randf_range(0.1, 0.3))
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		particle.material_override = material
-		
-		add_child(particle)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "AtmosphereParticlesMM"
+	mmi.multimesh = mm
+	add_child(mmi)
 
 # Utility functions for materials
 

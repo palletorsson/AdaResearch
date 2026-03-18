@@ -417,44 +417,52 @@ func create_orbital_rings() -> void:
 func create_orbital_ring_system(ring_index):
 	var orbital = Node3D.new()
 	orbital.name = "OrbitalRing_" + str(ring_index)
-	
+
 	var ring_radius = 3.0 + ring_index * 0.8
 	var base_orbs = 8 + ring_index * 2
 	var num_orbs = max(6, int(round(base_orbs * detail_scale_clamped)))
 	var ring_color = aurora_colors[ring_index % aurora_colors.size()]
-	
+
+	# Use MultiMesh for orbital orbs
+	var orb_mesh = SphereMesh.new()
+	orb_mesh.radius = 0.15
+	orb_mesh.height = 0.30
+	orb_mesh.radial_segments = max(8, int(round(12 * detail_scale_clamped)))
+	orb_mesh.rings = max(4, int(round(8 * detail_scale_clamped)))
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = ring_color
+	mat.roughness = 0.0
+	mat.metallic = 0.8
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = ring_color * 0.8
+	orb_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = num_orbs
+	mm.mesh = orb_mesh
+
 	for orb in range(num_orbs):
-		var orb_node = MeshInstance3D.new()
-		orb_node.name = "Orb_" + str(orb)
-		
-		var orb_mesh = SphereMesh.new()
-		orb_mesh.radius = 0.15 + sin(orb * 0.5) * 0.05
-		orb_mesh.height = orb_mesh.radius * 2
-		orb_mesh.radial_segments = max(8, int(round(12 * detail_scale_clamped)))
-		orb_mesh.rings = max(4, int(round(8 * detail_scale_clamped)))
-		orb_node.mesh = orb_mesh
-		
-		# Create glowing material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = ring_color
-		material.roughness = 0.0
-		material.metallic = 0.8
-		material.metallic_specular = 1.0
-		material.emission_enabled = true
-		material.emission = ring_color * 0.8
-		
-		orb_node.material_override = material
-		
-		# Position in ring
+		var orb_radius = 0.15 + sin(orb * 0.5) * 0.05
+		var scale_factor = orb_radius / 0.15
 		var angle = (2 * PI * orb) / num_orbs
-		orb_node.position = Vector3(
+
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3(
 			cos(angle) * ring_radius,
 			sin(ring_index * 2) * 0.5,
 			sin(angle) * ring_radius
 		)
-		
-		orbital.add_child(orb_node)
-	
+		mm.set_instance_transform(orb, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "OrbitalOrbs_MM"
+	mmi.multimesh = mm
+	orbital.add_child(mmi)
+
 	return orbital
 
 func create_harmonic_clusters() -> void:
@@ -469,39 +477,54 @@ func create_harmonic_clusters() -> void:
 func create_harmonic_cluster(cluster_index):
 	var cluster = Node3D.new()
 	cluster.name = "HarmonicCluster_" + str(cluster_index)
-	
+
 	var base_radius = 4.0 + cluster_index * 0.5
 	var cluster_color = plasma_spectrum[cluster_index % plasma_spectrum.size()]
 	var harmonic_count = max(3, int(round(5 * detail_scale_clamped)))
 	var dots_per_harmonic = max(6, int(round(12 * detail_scale_clamped)))
+	var total_dots = harmonic_count * dots_per_harmonic
 
+	# Use MultiMesh for all harmonic cluster dots
+	var dot_mesh = SphereMesh.new()
+	dot_mesh.radius = 0.08
+	dot_mesh.height = 0.16
+	dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
+	dot_mesh.rings = max(3, int(round(4 * detail_scale_clamped)))
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = cluster_color
+	mat.roughness = 0.0
+	mat.metallic = 1.0
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = cluster_color * 1.2
+	dot_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = total_dots
+	mm.mesh = dot_mesh
+
+	var idx = 0
 	for harmonic in range(harmonic_count):
 		for dot in range(dots_per_harmonic):
-			var dot_node = MeshInstance3D.new()
-			dot_node.name = "HarmonicDot_" + str(harmonic) + "_" + str(dot)
-			var dot_mesh = SphereMesh.new()
-			dot_mesh.radius = 0.08 + sin(harmonic) * 0.02
-			dot_mesh.height = dot_mesh.radius * 2
-			dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
-			dot_mesh.rings = max(3, int(round(4 * detail_scale_clamped)))
-			dot_node.mesh = dot_mesh
-			var material = StandardMaterial3D.new()
-			material.albedo_color = cluster_color
-			material.roughness = 0.0
-			material.metallic = 1.0
-			material.metallic_specular = 1.0
-			material.emission_enabled = true
-			material.emission = cluster_color * 1.2
-			dot_node.material_override = material
+			var dot_radius = 0.08 + sin(harmonic) * 0.02
+			var scale_factor = dot_radius / 0.08
 			var angle = (2 * PI * dot) / float(dots_per_harmonic)
 			var radius = base_radius + sin(harmonic * PI) * 0.8
 			var height = cos(harmonic * PI * 0.5) * 2.0
-			dot_node.position = Vector3(
-				cos(angle) * radius,
-				height,
-				sin(angle) * radius
-			)
-			cluster.add_child(dot_node)
+
+			var t = Transform3D()
+			t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+			t.origin = Vector3(cos(angle) * radius, height, sin(angle) * radius)
+			mm.set_instance_transform(idx, t)
+			idx += 1
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "HarmonicClusterDots_MM"
+	mmi.multimesh = mm
+	cluster.add_child(mmi)
+
 	return cluster
 
 func create_energy_streams() -> void:
@@ -516,83 +539,99 @@ func create_energy_streams() -> void:
 func create_energy_stream(stream_index):
 	var stream = Node3D.new()
 	stream.name = "EnergyStream_" + str(stream_index)
-	
+
 	var stream_color = aurora_colors[stream_index % aurora_colors.size()]
 	var segments = max(10, int(round(20 * detail_scale_clamped)))
-	
+
+	# Use MultiMesh for energy stream particles
+	var particle_mesh = SphereMesh.new()
+	particle_mesh.radius = 0.05
+	particle_mesh.height = 0.10
+	particle_mesh.radial_segments = 6
+	particle_mesh.rings = 4
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = stream_color
+	mat.roughness = 0.0
+	mat.metallic = 0.9
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = stream_color * 1.5
+	particle_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = segments
+	mm.mesh = particle_mesh
+
+	# Store MultiMesh ref for _process() animation updates
+	stream.set_meta("multimesh", mm)
+	stream.set_meta("segment_count", segments)
+
 	for segment in range(segments):
-		var particle = MeshInstance3D.new()
-		particle.name = "StreamParticle_" + str(segment)
-		
-		var particle_mesh = SphereMesh.new()
-		particle_mesh.radius = 0.05 + sin(segment * 0.3) * 0.02
-		particle_mesh.height = particle_mesh.radius * 2
-		particle_mesh.radial_segments = 6
-		particle_mesh.rings = 4
-		particle.mesh = particle_mesh
-		
-		# Ultra-bright streaming material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = stream_color
-		material.roughness = 0.0
-		material.metallic = 0.9
-		material.metallic_specular = 1.0
-		material.emission_enabled = true
-		material.emission = stream_color * 1.5
-		
-		particle.material_override = material
-		
-		stream.add_child(particle)
-	
+		var particle_radius = 0.05 + sin(segment * 0.3) * 0.02
+		var scale_factor = particle_radius / 0.05
+
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3.ZERO  # Will be positioned by animation
+		mm.set_instance_transform(segment, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "EnergyStream_MM"
+	mmi.multimesh = mm
+	stream.add_child(mmi)
+
 	return stream
 
 func create_harmonic_spiral(radius, harmonic_index):
 	var spiral = Node3D.new()
 	spiral.name = "HarmonicSpiral_" + str(harmonic_index)
-	
+
 	var segments = max(18, int(round((48 + harmonic_index * 8) * detail_scale_clamped)))
 	var spiral_color = kusama_colors[harmonic_index % kusama_colors.size()]
-	
+
+	# Use MultiMesh for spiral segments (all same BoxMesh)
+	var cube = BoxMesh.new()
+	cube.size = Vector3(0.1, 0.05, 0.1)
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = spiral_color
+	mat.roughness = 0.1
+	mat.metallic = 0.6
+	mat.metallic_specular = 0.9
+	mat.emission_enabled = true
+	mat.emission = spiral_color * 0.4
+	cube.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = segments
+	mm.mesh = cube
+
 	for i in range(segments):
-		var segment = MeshInstance3D.new()
-		segment.name = "SpiralSegment_" + str(i)
-		
-		var cube = BoxMesh.new()
 		var size_factor = 1.0 + sin(i * 0.2) * 0.3
-		cube.size = Vector3(0.1, 0.05, 0.1) * size_factor
-		segment.mesh = cube
-		
-		# Calculate spiral position using sine and cosine
-		var angle = (2 * PI * i * 3) / segments  # Multiple turns
+		var angle = (2 * PI * i * 3) / segments
 		var spiral_radius = radius * (1.0 - float(i) / segments * 0.5)
 		var height = sin(i * 0.1) * 0.3
-		
-		segment.position = Vector3(
-			cos(angle) * spiral_radius,
-			height,
-			sin(angle) * spiral_radius
-		)
-		
-		# Dynamic rotation
-		segment.rotation_degrees = Vector3(
+
+		var rot = Vector3(
 			sin(i * 0.1) * 30,
 			rad_to_deg(angle),
 			cos(i * 0.1) * 15
 		)
-		
-		# Ultra-vivid material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = spiral_color
-		material.roughness = 0.1
-		material.metallic = 0.6
-		material.metallic_specular = 0.9
-		material.emission_enabled = true
-		material.emission = spiral_color * 0.4
-		
-		segment.material_override = material
-		
-		spiral.add_child(segment)
-	
+
+		var t = Transform3D()
+		t.basis = Basis.from_euler(Vector3(deg_to_rad(rot.x), deg_to_rad(rot.y), deg_to_rad(rot.z)))
+		t.basis = t.basis.scaled(Vector3(size_factor, size_factor, size_factor))
+		t.origin = Vector3(cos(angle) * spiral_radius, height, sin(angle) * spiral_radius)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "HarmonicSpiral_MM"
+	mmi.multimesh = mm
+	spiral.add_child(mmi)
+
 	return spiral
 
 func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, invert_colors) -> void:
@@ -600,136 +639,155 @@ func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, inver
 	var aabb = mesh.get_aabb()
 	var mesh_size = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
 	var num_dots = int(30 * mesh_size * density_factor)
-	
+	if num_dots < 1:
+		return
+
+	# Use MultiMesh for all dots (same sphere geometry, varied transforms)
+	var dot_mesh = SphereMesh.new()
+	dot_mesh.radius = 0.04  # Average size
+	dot_mesh.height = 0.08
+	dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
+	dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
+
+	var dot_color = aurora_colors[0] if invert_colors else base_color.inverted()
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = dot_color
+	mat.roughness = 0.0
+	mat.metallic = 0.8
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = dot_color * 0.8
+	dot_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = num_dots
+	mm.mesh = dot_mesh
+
 	for i in range(num_dots):
-		var dot = MeshInstance3D.new()
-		dot.name = "UltraVividDot_" + str(i)
-		
-		# Create dynamic dot sizes using sine
 		var size_variation = 0.03 + sin(i * 0.5) * 0.05
-		var dot_mesh = SphereMesh.new()
-		dot_mesh.radius = size_variation
-		dot_mesh.height = size_variation * 2
-		dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
-		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
-		dot.mesh = dot_mesh
-		
-		# Ultra-bright dot material
-		var material = StandardMaterial3D.new()
-		var dot_color = aurora_colors[i % aurora_colors.size()] if invert_colors else base_color.inverted()
-		material.albedo_color = dot_color
-		material.roughness = 0.0
-		material.metallic = 0.8
-		material.metallic_specular = 1.0
-		material.emission_enabled = true
-		material.emission = dot_color * 0.8
-		
-		dot.material_override = material
-		
+		var scale_factor = size_variation / 0.04  # Relative to base radius
+
 		# Distribute dots using sine-based patterns
 		var theta = sin(i * 0.3) * PI
 		var phi = cos(i * 0.7) * 2 * PI
-		
+
 		var surface_point = Vector3(
 			sin(theta) * cos(phi),
 			sin(theta) * sin(phi),
 			cos(theta)
 		)
-		
+
 		surface_point.x *= aabb.size.x * 0.5
 		surface_point.y *= aabb.size.y * 0.5
 		surface_point.z *= aabb.size.z * 0.5
-		
-		dot.position = surface_point.normalized() * (surface_point.length() + 0.02)
-		mesh_instance.add_child(dot)
+
+		var pos = surface_point.normalized() * (surface_point.length() + 0.02)
+
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = pos
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "UltraVividDots_MM"
+	mmi.multimesh = mm
+	mesh_instance.add_child(mmi)
 
 func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, layer) -> void:
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
 	var num_dots = max(8, int(round(25 * density * detail_scale_clamped)))
-	
+
+	# Use MultiMesh for harmonic dots
+	var dot_mesh = SphereMesh.new()
+	dot_mesh.radius = 0.03  # Base size
+	dot_mesh.height = 0.06
+	dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
+	dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
+
+	var hue_shift = sin(0.1 + petal_index + layer) * 0.5
+	var dot_color = base_color.lerp(plasma_spectrum[0], hue_shift)
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = dot_color
+	mat.roughness = 0.0
+	mat.metallic = 0.9
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = dot_color * 1.0
+	dot_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = num_dots
+	mm.mesh = dot_mesh
+
 	for i in range(num_dots):
-		var dot = MeshInstance3D.new()
-		dot.name = "HarmonicDot_" + str(i)
-		
-		# Size based on harmonic series
 		var harmonic_factor = 1.0 / (i + 1)
 		var dot_size = 0.04 * harmonic_factor * (1.0 + sin(i * 0.8) * 0.5)
-		
-		var dot_mesh = SphereMesh.new()
-		dot_mesh.radius = dot_size
-		dot_mesh.height = dot_size * 2
-		dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
-		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
-		dot.mesh = dot_mesh
-		
-		# Harmonic color shifting
-		var hue_shift = sin(i * 0.1 + petal_index + layer) * 0.5
-		var dot_color = base_color.lerp(plasma_spectrum[i % plasma_spectrum.size()], hue_shift)
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = dot_color
-		material.roughness = 0.0
-		material.metallic = 0.9
-		material.metallic_specular = 1.0
-		material.emission_enabled = true
-		material.emission = dot_color * 1.0
-		
-		dot.material_override = material
-		
-		# Position using golden ratio and sine waves
-		var golden_angle = 2.4  # Golden angle approximation
+		var scale_factor = dot_size / 0.03
+
+		var golden_angle = 2.4
 		var radius_factor = sqrt(float(i) / num_dots)
 		var angle = i * golden_angle + sin(i * 0.2) * 0.5
-		
+
 		var x = cos(angle) * radius_factor * aabb.size.x * 0.4
 		var y = sin(i * 0.3) * aabb.size.y * 0.3
 		var z = sin(angle) * radius_factor * aabb.size.z * 0.4
-		
-		dot.position = Vector3(x, y, z)
-		mesh_instance.add_child(dot)
+
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3(x, y, z)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "HarmonicDots_MM"
+	mmi.multimesh = mm
+	mesh_instance.add_child(mmi)
 
 func add_sine_wave_dots(mesh_instance, base_color, density, segment_index) -> void:
 	var num_dots = max(6, int(round(20 * density * detail_scale_clamped)))
-	
+
+	# Use MultiMesh for sine wave dots
+	var dot_mesh = SphereMesh.new()
+	dot_mesh.radius = 0.03  # Base size
+	dot_mesh.height = 0.06
+	dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
+	dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
+
+	var color_phase = sin(0.2 + segment_index * 0.5) * 0.5 + 0.5
+	var dot_color = base_color.lerp(kusama_colors[0], color_phase)
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = dot_color
+	mat.roughness = 0.0
+	mat.metallic = 0.8
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = dot_color * 0.9
+	dot_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = num_dots
+	mm.mesh = dot_mesh
+
 	for i in range(num_dots):
-		var dot = MeshInstance3D.new()
-		dot.name = "SineWaveDot_" + str(i)
-		
 		var dot_size = 0.03 + sin(i * 0.4 + segment_index) * 0.02
-		var dot_mesh = SphereMesh.new()
-		dot_mesh.radius = dot_size
-		dot_mesh.height = dot_size * 2
-		dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
-		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
-		dot.mesh = dot_mesh
-		
-		# Sine-based color variation
-		var color_phase = sin(i * 0.2 + segment_index * 0.5) * 0.5 + 0.5
-		var dot_color = base_color.lerp(kusama_colors[i % kusama_colors.size()], color_phase)
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = dot_color
-		material.roughness = 0.0
-		material.metallic = 0.8
-		material.metallic_specular = 1.0
-		material.emission_enabled = true
-		material.emission = dot_color * 0.9
-		
-		dot.material_override = material
-		
-		# Sine wave positioning
+		var scale_factor = dot_size / 0.03
+
 		var angle = (2 * PI * i) / num_dots
 		var wave_radius = 0.2 + sin(i * 0.3) * 0.1
 		var wave_height = cos(i * 0.4) * 0.1
-		
-		dot.position = Vector3(
-			cos(angle) * wave_radius,
-			wave_height,
-			sin(angle) * wave_radius
-		)
-		
-		mesh_instance.add_child(dot)
+
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3(cos(angle) * wave_radius, wave_height, sin(angle) * wave_radius)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "SineWaveDots_MM"
+	mmi.multimesh = mm
+	mesh_instance.add_child(mmi)
 
 func animate_all_elements(_delta) -> void:
 	animate_core_layers()
@@ -830,30 +888,14 @@ func animate_orbital_rings() -> void:
 		var orbital = orbital_elements[i]
 		if not orbital:
 			continue
-		
+
 		# Orbital rotation with sine modulation
 		var rotation_speed = 0.5 + i * 0.2
 		var wobble = sin(time * 0.3 + i) * 5 * morphing_amplitude
-		
+
 		orbital.rotation_degrees.y += rotation_speed
 		orbital.rotation_degrees.x = wobble
 		orbital.rotation_degrees.z = cos(time * 0.4 + i) * 3 * morphing_amplitude
-		
-		# Animate individual orbs
-		for j in range(orbital.get_child_count()):
-			var orb = orbital.get_child(j)
-			if orb is MeshInstance3D:
-				# Pulsing scale
-				var pulse = 1.0 + sin(pulse_time * 3 + j + i) * 0.3 * morphing_amplitude
-				orb.scale = Vector3.ONE * pulse
-				
-				# Color cycling
-				if orb.material_override:
-					var color_shift = sin(color_time * 2 + j) * 0.5 + 0.5
-					var base_color = aurora_colors[i % aurora_colors.size()]
-					var new_color = base_color.lerp(plasma_spectrum[j % plasma_spectrum.size()], color_shift)
-					orb.material_override.albedo_color = new_color
-					orb.material_override.emission = new_color * (0.8 + sin(time + j) * 0.4)
 
 func animate_harmonic_clusters() -> void:
 	if not include_harmonic_clusters or harmonic_dots.is_empty():
@@ -862,25 +904,10 @@ func animate_harmonic_clusters() -> void:
 		var cluster = harmonic_dots[i]
 		if not cluster:
 			continue
-		
+
 		# Cluster rotation with harmonic frequencies
 		cluster.rotation_degrees.y += (i + 1) * 0.3
 		cluster.rotation_degrees.x = sin(time * 0.6 + i) * 10 * morphing_amplitude
-		
-		# Animate individual dots
-		for j in range(cluster.get_child_count()):
-			var dot = cluster.get_child(j)
-			if dot is MeshInstance3D:
-				# Harmonic pulsing
-				var harmonic_freq = (j % 5) + 1
-				var pulse = 1.0 + sin(pulse_time * harmonic_freq + i) * 0.4 * morphing_amplitude
-				dot.scale = Vector3.ONE * pulse
-				
-				# Brightness modulation
-				if dot.material_override:
-					var brightness = 0.5 + sin(time * 2 + j * 0.1) * 0.5
-					var base_emission = dot.material_override.albedo_color
-					dot.material_override.emission = base_emission * (brightness + 0.5)
 
 func animate_energy_streams() -> void:
 	if not include_energy_streams or energy_streams.is_empty():
@@ -889,41 +916,34 @@ func animate_energy_streams() -> void:
 		var stream = energy_streams[i]
 		if not stream:
 			continue
-		
-		# Stream flow animation
-		for j in range(stream.get_child_count()):
-			var particle = stream.get_child(j)
-			if particle is MeshInstance3D:
-				# Flowing motion using sine waves
-				var flow_progress = fmod((time * 2.0 + float(j) * 0.1), 1.0)
-				var stream_angle = (2 * PI * i) / energy_streams.size()
-				
-				# Create flowing path
-				var path_radius = 5.0 + sin(flow_progress * PI * 4) * 1.5
-				var path_height = sin(flow_progress * PI * 6) * 3.0 + cos(time + i) * 0.5
-				var path_angle = stream_angle + flow_progress * PI * 8
-				
-				particle.position = Vector3(
-					cos(path_angle) * path_radius,
-					path_height,
-					sin(path_angle) * path_radius
-				)
-				
-				# Particle pulsing
-				var pulse = 1.0 + sin(time * 8 + j * 0.3) * 0.6 * morphing_amplitude
-				particle.scale = Vector3.ONE * pulse
-				
-				# Trail effect with transparency
-				if particle.material_override:
-					var trail_alpha = sin(flow_progress * PI) * 0.8 + 0.2
-					particle.material_override.albedo_color.a = trail_alpha
-					
-					# Color shifting along stream
-					var color_shift = sin(flow_progress * PI * 2 + time) * 0.5 + 0.5
-					var base_color = aurora_colors[i % aurora_colors.size()]
-					var stream_color = base_color.lerp(plasma_spectrum[j % plasma_spectrum.size()], color_shift)
-					particle.material_override.albedo_color = Color(stream_color.r, stream_color.g, stream_color.b, trail_alpha)
-					particle.material_override.emission = stream_color * (1.5 + sin(time * 4 + j) * 0.5)
+
+		# Use stored MultiMesh for animation
+		if not stream.has_meta("multimesh"):
+			continue
+		var mm: MultiMesh = stream.get_meta("multimesh")
+		var segment_count: int = stream.get_meta("segment_count")
+
+		var stream_angle = (2 * PI * i) / energy_streams.size()
+
+		for j in range(segment_count):
+			var flow_progress = fmod((time * 2.0 + float(j) * 0.1), 1.0)
+
+			var path_radius = 5.0 + sin(flow_progress * PI * 4) * 1.5
+			var path_height = sin(flow_progress * PI * 6) * 3.0 + cos(time + i) * 0.5
+			var path_angle = stream_angle + flow_progress * PI * 8
+
+			var pulse = 1.0 + sin(time * 8 + j * 0.3) * 0.6 * morphing_amplitude
+			var particle_radius = 0.05 + sin(j * 0.3) * 0.02
+			var base_scale = particle_radius / 0.05 * pulse
+
+			var t = Transform3D()
+			t.basis = Basis.IDENTITY.scaled(Vector3(base_scale, base_scale, base_scale))
+			t.origin = Vector3(
+				cos(path_angle) * path_radius,
+				path_height,
+				sin(path_angle) * path_radius
+			)
+			mm.set_instance_transform(j, t)
 
 func setup_ultra_vivid_environment() -> void:
 	# Create dynamic lighting system

@@ -296,36 +296,59 @@ func update_scatter_plot() -> void:
 			update_2d_scatter_plot()
 
 func update_2d_scatter_plot() -> void:
-	"""Update 2D scatter plot"""
+	"""Update 2D scatter plot using MultiMesh for VR performance"""
+	if data_points.size() == 0:
+		return
+	var positions: Array[Vector3] = []
 	for i in range(data_points.size()):
 		var point = data_points[i]
-		var point_visual = create_data_point_visual(Vector3(point.x, point.y, 0), i)
-		scatter_plot.add_child(point_visual)
+		positions.append(Vector3(point.x, point.y, 0))
+	_create_scatter_multimesh(positions)
 
 func update_3d_scatter_plot() -> void:
-	"""Update 3D scatter plot for multiple regression"""
+	"""Update 3D scatter plot using MultiMesh for VR performance"""
+	if data_points_3d.size() == 0:
+		return
+	var positions: Array[Vector3] = []
 	for i in range(data_points_3d.size()):
-		var point = data_points_3d[i]
-		var point_visual = create_data_point_visual(point, i)
-		scatter_plot.add_child(point_visual)
+		positions.append(data_points_3d[i])
+	_create_scatter_multimesh(positions)
 
-func create_data_point_visual(position: Vector3, index: int) -> Node3D:
-	"""Create visual representation of a data point"""
+func _create_scatter_multimesh(positions: Array[Vector3]) -> void:
+	"""Create a MultiMesh scatter plot from position array"""
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.03
+	sphere.height = 0.06
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color.BLUE
+	mat.emission_enabled = true
+	mat.emission = Color.BLUE * 0.3
+	sphere.material = mat
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = positions.size()
+	mm.mesh = sphere
+	for i in range(positions.size()):
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, positions[i]))
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "ScatterPoints"
+	mmi.multimesh = mm
+	scatter_plot.add_child(mmi)
+
+func create_data_point_visual(pos: Vector3, index: int) -> Node3D:
+	"""Create visual representation of a single data point (fallback for interactive use)"""
 	var point_node = Node3D.new()
-	point_node.position = position
+	point_node.position = pos
 	point_node.name = "data_point_" + str(index)
-	
 	var point_mesh = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.03
 	sphere_mesh.height = 0.06
 	point_mesh.mesh = sphere_mesh
-	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color.BLUE
 	material.emission = Color.BLUE * 0.3
 	point_mesh.material_override = material
-	
 	point_node.add_child(point_mesh)
 	return point_node
 
@@ -1027,24 +1050,34 @@ func create_regression_plane() -> void:
 	regression_line.add_child(plane_mesh)
 
 func update_residual_display() -> void:
-	"""Update residual lines visualization"""
+	"""Update residual lines visualization using ImmediateMesh"""
 	# Clear existing residuals
 	for child in residual_display.get_children():
 		child.queue_free()
-	
-	for i in range(min(data_points.size(), residuals.size())):
+
+	var count = min(data_points.size(), residuals.size())
+	if count == 0:
+		return
+
+	var im = ImmediateMesh.new()
+	var mmi = MeshInstance3D.new()
+	mmi.mesh = im
+	var mat = StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mmi.material_override = mat
+	im.clear_surfaces()
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(count):
 		var point = data_points[i]
 		var predicted_y = slope * point.x + intercept
-		var residual_line = MeshInstance3D.new()
-		
-		var line_points = [
-			Vector3(point.x, point.y, 0.01),
-			Vector3(point.x, predicted_y, 0.01)
-		]
-		
 		var color = Color.GREEN if residuals[i] >= 0 else Color.ORANGE
-		create_line_mesh(residual_line, line_points, color)
-		residual_display.add_child(residual_line)
+		im.surface_set_color(color)
+		im.surface_add_vertex(Vector3(point.x, point.y, 0.01))
+		im.surface_set_color(color)
+		im.surface_add_vertex(Vector3(point.x, predicted_y, 0.01))
+	im.surface_end()
+	residual_display.add_child(mmi)
 
 func update_confidence_intervals() -> void:
 	"""Update confidence interval visualization"""

@@ -464,36 +464,47 @@ func create_resource_points() -> void:
 	
 	var resource_count = int(complexity_level * 15)
 	
+	# Create resource points using MultiMesh
+	var resource_mesh = SphereMesh.new()
+	resource_mesh.radius = 0.3
+	resource_mesh.height = 0.6
+
+	var resource_material = StandardMaterial3D.new()
+	resource_material.albedo_color = Color(0.0, 0.8, 0.5)
+	resource_material.emission_enabled = true
+	resource_material.emission = Color(0.0, 0.5, 0.3)
+	resource_material.emission_energy_multiplier = 0.8
+	resource_mesh.material = resource_material
+
+	var res_mm = MultiMesh.new()
+	res_mm.transform_format = MultiMesh.TRANSFORM_3D
+	res_mm.instance_count = resource_count
+	res_mm.mesh = resource_mesh
+
 	for i in range(resource_count):
-		var resource = MeshInstance3D.new()
-		resource.name = "Resource_" + str(i)
-		
-		var resource_mesh = SphereMesh.new()
-		resource_mesh.radius = 0.3
-		resource_mesh.height = 0.6
-		
-		var resource_material = StandardMaterial3D.new()
-		resource_material.albedo_color = Color(0.0, 0.8, 0.5)
-		resource_material.emission_enabled = true
-		resource_material.emission = Color(0.0, 0.5, 0.3)
-		resource_material.emission_energy_multiplier = 0.8
-		
-		resource.mesh = resource_mesh
-		resource.material_override = resource_material
-		
 		var x = rng.randf_range(-environment_size.x/2 + 1, environment_size.x/2 - 1)
 		var z = rng.randf_range(-environment_size.z/2 + 1, environment_size.z/2 - 1)
-		var y = 0.3  # Just above ground level
-		resource.position = Vector3(x, y, z)
-		
-		resource_container.add_child(resource)
+		var y = 0.3
+		var pos = Vector3(x, y, z)
+
+		var t = Transform3D()
+		t.origin = pos
+		res_mm.set_instance_transform(i, t)
+
 		resource_points.append({
-			"node": resource,
-			"position": resource.position,
+			"node": null,
+			"mm_index": i,
+			"position": pos,
 			"energy": 100.0,
 			"type": "standard",
 			"last_used": 0.0
 		})
+
+	var res_mmi = MultiMeshInstance3D.new()
+	res_mmi.name = "Resources_MM"
+	res_mmi.multimesh = res_mm
+	resource_container.add_child(res_mmi)
+	resource_container.set_meta("multimesh", res_mm)
 
 # Create a random entity
 func create_random_entity() -> void:
@@ -700,18 +711,16 @@ func create_entity_visual(entity: SimulationEntity) -> void:
 
 func update_environment(delta: float) -> void:
 	# Process resource points
+	var res_container = get_node_or_null("ResourcePoints")
+	var res_mm: MultiMesh = null
+	if res_container and res_container.has_meta("multimesh"):
+		res_mm = res_container.get_meta("multimesh")
+
 	for resource in resource_points:
 		# Regenerate energy slowly
 		if resource.energy < 100.0:
 			resource.energy += delta * 2.0
-			
-			# Visual feedback for regeneration
-			if resource.node:
-				var material = resource.node.material_override as StandardMaterial3D
-				if material:
-					var energy_ratio = resource.energy / 100.0
-					material.emission_energy_multiplier = 0.3 + energy_ratio * 0.5
-		
+
 		# Slowly move resources
 		if rng.randf() < delta * 0.05:
 			var movement = Vector3(
@@ -719,11 +728,14 @@ func update_environment(delta: float) -> void:
 				0,
 				rng.randf_range(-0.5, 0.5)
 			) * delta
-			
+
 			resource.position += movement
-			
-			if resource.node:
-				resource.node.position = resource.position
+
+			# Update MultiMesh transform
+			if res_mm and resource.has("mm_index"):
+				var t = Transform3D()
+				t.origin = resource.position
+				res_mm.set_instance_transform(resource.mm_index, t)
 
 func handle_entity_interactions() -> void:
 	# Handle interactions between entities that are close to each other

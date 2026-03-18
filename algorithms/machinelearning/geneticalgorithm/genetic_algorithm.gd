@@ -1037,45 +1037,56 @@ func create_terrain() -> void:
 
 func create_terrain_features() -> void:
 	## Add rocks, hills, and other terrain features
-	# Rocks and obstacles
+	# Rocks and obstacles — MultiMesh with per-instance scale via transform
+	var rock_base = SphereMesh.new()
+	rock_base.radius = 1.0
+	rock_base.height = 2.0
+	var rock_material = StandardMaterial3D.new()
+	rock_material.albedo_color = Color(0.3, 0.3, 0.3)
+	rock_material.roughness = 0.9
+	rock_base.material = rock_material
+	var rock_mm = MultiMesh.new()
+	rock_mm.transform_format = MultiMesh.TRANSFORM_3D
+	rock_mm.instance_count = 15
+	rock_mm.mesh = rock_base
 	for i in range(15):
-		var rock = MeshInstance3D.new()
-		rock.mesh = SphereMesh.new()
-		rock.mesh.radius = randf_range(0.5, 2.0)
-		rock.mesh.height = rock.mesh.radius * 2
-		
-		var rock_material = StandardMaterial3D.new()
-		rock_material.albedo_color = Color(0.3, 0.3, 0.3)
-		rock_material.roughness = 0.9
-		rock.material_override = rock_material
-		
-		rock.position = Vector3(
+		var r = randf_range(0.5, 2.0)
+		var pos = Vector3(
 			randf_range(-environment_size/2 + 3, environment_size/2 - 3),
-			rock.mesh.radius,
+			r,
 			randf_range(-environment_size/2 + 3, environment_size/2 - 3)
 		)
-		
-		environment.add_child(rock)
-	
-	# Hills
+		var basis = Basis.IDENTITY.scaled(Vector3(r, r, r))
+		rock_mm.set_instance_transform(i, Transform3D(basis, pos))
+	var rock_mmi = MultiMeshInstance3D.new()
+	rock_mmi.multimesh = rock_mm
+	environment.add_child(rock_mmi)
+
+	# Hills — MultiMesh with per-instance scale
+	var hill_base = SphereMesh.new()
+	hill_base.radius = 1.0
+	hill_base.height = 2.0
+	var hill_material = StandardMaterial3D.new()
+	hill_material.albedo_color = Color(0.15, 0.35, 0.15)
+	hill_material.roughness = 0.7
+	hill_base.material = hill_material
+	var hill_mm = MultiMesh.new()
+	hill_mm.transform_format = MultiMesh.TRANSFORM_3D
+	hill_mm.instance_count = 8
+	hill_mm.mesh = hill_base
 	for i in range(8):
-		var hill = MeshInstance3D.new()
-		hill.mesh = SphereMesh.new()
-		hill.mesh.radius = randf_range(3.0, 6.0)
-		hill.mesh.height = hill.mesh.radius * 0.5
-		
-		var hill_material = StandardMaterial3D.new()
-		hill_material.albedo_color = Color(0.15, 0.35, 0.15)
-		hill_material.roughness = 0.7
-		hill.material_override = hill_material
-		
-		hill.position = Vector3(
+		var r = randf_range(3.0, 6.0)
+		var h = r * 0.5
+		var pos = Vector3(
 			randf_range(-environment_size/2 + 5, environment_size/2 - 5),
-			hill.mesh.height * 0.3,
+			h * 0.3,
 			randf_range(-environment_size/2 + 5, environment_size/2 - 5)
 		)
-		
-		environment.add_child(hill)
+		var basis = Basis.IDENTITY.scaled(Vector3(r, h / 2.0, r))
+		hill_mm.set_instance_transform(i, Transform3D(basis, pos))
+	var hill_mmi = MultiMeshInstance3D.new()
+	hill_mmi.multimesh = hill_mm
+	environment.add_child(hill_mmi)
 
 func create_fitness_landscape() -> void:
 	## Create visual representation of fitness landscape
@@ -1297,55 +1308,69 @@ func create_neural_visualization(creature: EvolutionaryCreature) -> void:
 	var input_layer_pos = Vector3(0, 2, 0)
 	var output_layer_pos = Vector3(0, 2, 2)
 	
-	# Input nodes
-	for i in range(3):  # Simplified - show only 3 input nodes
-		var input_node = MeshInstance3D.new()
-		input_node.mesh = SphereMesh.new()
-		input_node.mesh.radius = 0.1
-		input_node.mesh.height = 0.2
-		
-		var node_material = StandardMaterial3D.new()
-		node_material.albedo_color = Color(0.2, 0.8, 0.2)
-		node_material.emission_enabled = true
-		node_material.emission = Color(0.1, 0.4, 0.1)
-		input_node.material_override = node_material
-		
-		input_node.position = input_layer_pos + Vector3(i * 0.3 - 0.3, 0, 0)
-		neural_display.add_child(input_node)
-	
-	# Output nodes
-	for i in range(3):  # Simplified - show only 3 output nodes
-		var output_node = MeshInstance3D.new()
-		output_node.mesh = SphereMesh.new()
-		output_node.mesh.radius = 0.1
-		output_node.mesh.height = 0.2
-		
-		var node_material = StandardMaterial3D.new()
-		node_material.albedo_color = Color(0.8, 0.2, 0.2)
-		node_material.emission_enabled = true
-		node_material.emission = Color(0.4, 0.1, 0.1)
-		output_node.material_override = node_material
-		
-		output_node.position = output_layer_pos + Vector3(i * 0.3 - 0.3, 0, 0)
-		neural_display.add_child(output_node)
-	
-	# Neural connections (simplified representation)
+	# Input nodes — MultiMesh
+	var input_sphere = SphereMesh.new()
+	input_sphere.radius = 0.1
+	input_sphere.height = 0.2
+	var input_mat = StandardMaterial3D.new()
+	input_mat.albedo_color = Color(0.2, 0.8, 0.2)
+	input_mat.emission_enabled = true
+	input_mat.emission = Color(0.1, 0.4, 0.1)
+	input_sphere.material = input_mat
+	var input_mm = MultiMesh.new()
+	input_mm.transform_format = MultiMesh.TRANSFORM_3D
+	input_mm.instance_count = 3
+	input_mm.mesh = input_sphere
+	for i in range(3):
+		var pos = input_layer_pos + Vector3(i * 0.3 - 0.3, 0, 0)
+		input_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos))
+	var input_mmi = MultiMeshInstance3D.new()
+	input_mmi.multimesh = input_mm
+	neural_display.add_child(input_mmi)
+
+	# Output nodes — MultiMesh
+	var output_sphere = SphereMesh.new()
+	output_sphere.radius = 0.1
+	output_sphere.height = 0.2
+	var output_mat = StandardMaterial3D.new()
+	output_mat.albedo_color = Color(0.8, 0.2, 0.2)
+	output_mat.emission_enabled = true
+	output_mat.emission = Color(0.4, 0.1, 0.1)
+	output_sphere.material = output_mat
+	var output_mm = MultiMesh.new()
+	output_mm.transform_format = MultiMesh.TRANSFORM_3D
+	output_mm.instance_count = 3
+	output_mm.mesh = output_sphere
+	for i in range(3):
+		var pos = output_layer_pos + Vector3(i * 0.3 - 0.3, 0, 0)
+		output_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos))
+	var output_mmi = MultiMeshInstance3D.new()
+	output_mmi.multimesh = output_mm
+	neural_display.add_child(output_mmi)
+
+	# Neural connections (simplified representation) — MultiMesh
+	var conn_cyl = CylinderMesh.new()
+	conn_cyl.height = 2.0
+	conn_cyl.top_radius = 0.02
+	conn_cyl.bottom_radius = 0.02
+	var conn_mat = StandardMaterial3D.new()
+	conn_mat.albedo_color = Color(0.5, 0.5, 1.0, 0.6)
+	conn_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	conn_cyl.material = conn_mat
+	var conn_mm = MultiMesh.new()
+	conn_mm.transform_format = MultiMesh.TRANSFORM_3D
+	conn_mm.instance_count = 9
+	conn_mm.mesh = conn_cyl
+	var conn_idx := 0
 	for i in range(3):
 		for j in range(3):
-			var connection = MeshInstance3D.new()
-			connection.mesh = CylinderMesh.new()
-			connection.mesh.height = 2.0
-			connection.mesh.top_radius = 0.02
-			connection.mesh.bottom_radius = 0.02
-			
-			var connection_material = StandardMaterial3D.new()
-			connection_material.albedo_color = Color(0.5, 0.5, 1.0, 0.6)
-			connection_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			connection.material_override = connection_material
-			
-			connection.position = (input_layer_pos + output_layer_pos) / 2 + Vector3(i * 0.1, 0, 0)
-			connection.rotation_degrees = Vector3(0, 0, 45)
-			neural_display.add_child(connection)
+			var pos = (input_layer_pos + output_layer_pos) / 2 + Vector3(i * 0.1, 0, 0)
+			var basis = Basis(Vector3.RIGHT, deg_to_rad(45))
+			conn_mm.set_instance_transform(conn_idx, Transform3D(basis, pos))
+			conn_idx += 1
+	var conn_mmi = MultiMeshInstance3D.new()
+	conn_mmi.multimesh = conn_mm
+	neural_display.add_child(conn_mmi)
 	
 	creature.neural_display = neural_display
 	creature.mesh_instance.add_child(neural_display)
@@ -3034,21 +3059,29 @@ func visualize_mapper_graph(mapper_data: Dictionary, parent: Node3D) -> void:
 	## Visualize the mapper graph structure
 	var nodes = mapper_data.get("nodes", [])
 	var edges = mapper_data.get("edges", [])
-	
-	# Create node visualizations
-	for node in nodes:
-		var node_viz = MeshInstance3D.new()
-		node_viz.mesh = SphereMesh.new()
-		node_viz.mesh.radius = 0.3 + node.size * 0.1
-		node_viz.mesh.height = 0.3 + node.size * 0.1 * 2.0
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(1.0, 0.3, 0.8, 0.7)
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		node_viz.material_override = material
-		
-		node_viz.position = node.center + Vector3(0, 10, 0)  # Elevated view
-		parent.add_child(node_viz)
+
+	# Create node visualizations — MultiMesh with per-instance scale
+	if nodes.size() > 0:
+		var node_sphere = SphereMesh.new()
+		node_sphere.radius = 1.0
+		node_sphere.height = 2.0
+		var node_mat = StandardMaterial3D.new()
+		node_mat.albedo_color = Color(1.0, 0.3, 0.8, 0.7)
+		node_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		node_sphere.material = node_mat
+		var node_mm = MultiMesh.new()
+		node_mm.transform_format = MultiMesh.TRANSFORM_3D
+		node_mm.instance_count = nodes.size()
+		node_mm.mesh = node_sphere
+		for i in range(nodes.size()):
+			var node = nodes[i]
+			var r = 0.3 + node.size * 0.1
+			var pos = node.center + Vector3(0, 10, 0)
+			var basis = Basis.IDENTITY.scaled(Vector3(r, r, r))
+			node_mm.set_instance_transform(i, Transform3D(basis, pos))
+		var node_mmi = MultiMeshInstance3D.new()
+		node_mmi.multimesh = node_mm
+		parent.add_child(node_mmi)
 	
 	# Create edge visualizations
 	for edge in edges:

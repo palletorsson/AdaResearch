@@ -365,36 +365,37 @@ func create_puffball_mushroom(mushroom, size, color) -> void:
 	mushroom.add_child(puffball)
 
 func add_puffball_texture(puffball, color) -> void:
-	# Add small bumps on the puffball surface
+	# Add small bumps on the puffball surface using MultiMesh
 	var bump_count = 12
-	
+	var small_sphere = SphereMesh.new()
+	small_sphere.radius = 0.02
+	small_sphere.height = 0.04
+	small_sphere.radial_segments = 6
+	small_sphere.rings = 4
+	var bump_material = StandardMaterial3D.new()
+	bump_material.albedo_color = color.darkened(0.1)
+	small_sphere.material = bump_material
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = bump_count
+	mm.mesh = small_sphere
+
 	for i in range(bump_count):
-		var bump = MeshInstance3D.new()
-		bump.name = "Bump_" + str(i)
-		
-		var small_sphere = SphereMesh.new()
-		small_sphere.radius = 0.02
-		small_sphere.height = 0.04
-		small_sphere.radial_segments = 6
-		small_sphere.rings = 4
-		bump.mesh = small_sphere
-		
-		# Random position on the puffball surface
 		var phi = randf() * PI * 2
 		var theta = randf() * PI
-		var radius = 0.12  # Puffball radius
-		
-		var pos_x = radius * sin(theta) * cos(phi)
-		var pos_y = radius * sin(theta) * sin(phi)
-		var pos_z = radius * cos(theta)
-		
-		bump.position = Vector3(pos_x, pos_y, pos_z)
-		
-		var bump_material = StandardMaterial3D.new()
-		bump_material.albedo_color = color.darkened(0.1)
-		bump.material_override = bump_material
-		
-		puffball.add_child(bump)
+		var radius = 0.12
+		var pos = Vector3(
+			radius * sin(theta) * cos(phi),
+			radius * sin(theta) * sin(phi),
+			radius * cos(theta)
+		)
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "PuffballBumpsMM"
+	mmi.multimesh = mm
+	puffball.add_child(mmi)
 
 func create_glowing_mushroom():
 	# Create a special glowing mushroom
@@ -760,60 +761,103 @@ func add_grass() -> void:
 	add_child(grass)
 
 func add_rocks() -> void:
-	# Add some rocks
+	# Add some rocks using MultiMesh (one per mesh type)
 	var rock_count = int(meadow_size * 2)
-	var rocks = Node3D.new()
-	rocks.name = "Rocks"
-	
+	# Pre-sort by mesh type
+	var sphere_rocks: Array[Dictionary] = []
+	var box_rocks: Array[Dictionary] = []
+	var prism_rocks: Array[Dictionary] = []
+
 	for i in range(rock_count):
-		var rock = MeshInstance3D.new()
-		rock.name = "Rock_" + str(i)
-		
 		var mesh_type = randi() % 3
 		var size_val = 0.1 + randf() * 0.3
-
-		match mesh_type:
-			0:
-				var sphere = SphereMesh.new()
-				sphere.radius = size_val  # SphereMesh uses a float radius
-				sphere.height = size_val  # SphereMesh uses a float radius * 2.0
-				rock.mesh = sphere
-			1:
-				var box = BoxMesh.new()
-				box.size = Vector3(size_val, size_val * 0.7, size_val)
-				rock.mesh = box
-			2:
-				var prism = PrismMesh.new()
-				prism.size = Vector3(size_val, size_val * 0.7, size_val)       # PrismMesh expects a float for its base size
-			
-				rock.mesh = prism
-
-				# Random rotation
-				rock.rotation_degrees = Vector3(
-					randf() * 30,
-					randf() * 360,
-					randf() * 30
-				)
-		
-		# Create rock material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.5, 0.5, 0.5).darkened(randf() * 0.3)
-		material.roughness = 0.9
-		rock.material_override = material
-
 		var pos_x = randf() * meadow_size - meadow_size / 2
 		var pos_z = randf() * meadow_size - meadow_size / 2
 		var ground_height = get_ground_height(pos_x, pos_z)
-		rock.position = Vector3(pos_x, ground_height + size_val * 0.35, pos_z)
-		rock.rotation_degrees = Vector3(
-			randf() * 30,
-			randf() * 360,
-			randf() * 30
-		)
-		
-		rocks.add_child(rock)
-	
-	add_child(rocks)
+		var pos = Vector3(pos_x, ground_height + size_val * 0.35, pos_z)
+		var rot = Vector3(randf() * 30, randf() * 360, randf() * 30)
+		var entry = {"pos": pos, "rot": rot, "size": size_val}
+		match mesh_type:
+			0: sphere_rocks.append(entry)
+			1: box_rocks.append(entry)
+			2: prism_rocks.append(entry)
+
+	var rocks_container = Node3D.new()
+	rocks_container.name = "Rocks"
+
+	# Sphere rocks
+	if not sphere_rocks.is_empty():
+		var mesh = SphereMesh.new()
+		mesh.radius = 0.2
+		mesh.height = 0.2
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(0.5, 0.5, 0.5).darkened(0.15)
+		mat.roughness = 0.9
+		mesh.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = sphere_rocks.size()
+		mm.mesh = mesh
+		for i in range(sphere_rocks.size()):
+			var e = sphere_rocks[i]
+			var t = Transform3D()
+			t.basis = Basis.from_euler(Vector3(deg_to_rad(e["rot"].x), deg_to_rad(e["rot"].y), deg_to_rad(e["rot"].z)))
+			var s = e["size"] / 0.2  # normalize to base size
+			t.basis = t.basis.scaled(Vector3(s, s * 0.7, s))
+			t.origin = e["pos"]
+			mm.set_instance_transform(i, t)
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "SphereRocksMM"
+		mmi.multimesh = mm
+		rocks_container.add_child(mmi)
+
+	# Box rocks
+	if not box_rocks.is_empty():
+		var mesh = BoxMesh.new()
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(0.5, 0.5, 0.5).darkened(0.15)
+		mat.roughness = 0.9
+		mesh.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = box_rocks.size()
+		mm.mesh = mesh
+		for i in range(box_rocks.size()):
+			var e = box_rocks[i]
+			var t = Transform3D()
+			t.basis = Basis.from_euler(Vector3(deg_to_rad(e["rot"].x), deg_to_rad(e["rot"].y), deg_to_rad(e["rot"].z)))
+			t.basis = t.basis.scaled(Vector3(e["size"], e["size"] * 0.7, e["size"]))
+			t.origin = e["pos"]
+			mm.set_instance_transform(i, t)
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "BoxRocksMM"
+		mmi.multimesh = mm
+		rocks_container.add_child(mmi)
+
+	# Prism rocks
+	if not prism_rocks.is_empty():
+		var mesh = PrismMesh.new()
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(0.5, 0.5, 0.5).darkened(0.15)
+		mat.roughness = 0.9
+		mesh.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = prism_rocks.size()
+		mm.mesh = mesh
+		for i in range(prism_rocks.size()):
+			var e = prism_rocks[i]
+			var t = Transform3D()
+			t.basis = Basis.from_euler(Vector3(deg_to_rad(e["rot"].x), deg_to_rad(e["rot"].y), deg_to_rad(e["rot"].z)))
+			t.basis = t.basis.scaled(Vector3(e["size"], e["size"] * 0.7, e["size"]))
+			t.origin = e["pos"]
+			mm.set_instance_transform(i, t)
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "PrismRocksMM"
+		mmi.multimesh = mm
+		rocks_container.add_child(mmi)
+
+	add_child(rocks_container)
 
 func add_fallen_leaves() -> void:
 	# Add fallen leaves

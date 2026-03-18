@@ -506,77 +506,96 @@ func create_spiral_tubes(parent, rng) -> void:
 
 func create_bubble_cluster(parent, rng) -> void:
 	var num_bubbles = rng.randi_range(5, 12)
-	
+
+	# Use MultiMesh for bubble cluster
+	var base_sphere = SphereMesh.new()
+	base_sphere.radius = 0.1
+	base_sphere.height = 0.2
+	var bubble_material = StandardMaterial3D.new()
+	bubble_material.albedo_color = Color(0.85, 0.85, 0.85, 0.45)
+	bubble_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	bubble_material.metallic = 0.3
+	bubble_material.roughness = 0.15
+	bubble_material.vertex_color_use_as_albedo = true
+	base_sphere.material = bubble_material
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = num_bubbles
+	mm.mesh = base_sphere
+
 	for i in range(num_bubbles):
-		var bubble = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = rng.randf_range(0.05, 0.2)
-		sphere.height = rng.randf_range(0.05, 0.2) * 2.0
-		bubble.mesh = sphere
-		
-		# Random position in cluster
-		bubble.position = Vector3(
+		var bubble_size = rng.randf_range(0.05, 0.2)
+		var s = bubble_size / 0.1  # normalize to base radius
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(s, s, s))
+		t.origin = Vector3(
 			rng.randf_range(-0.3, 0.3),
 			rng.randf_range(-0.3, 0.3),
 			rng.randf_range(-0.3, 0.3)
 		)
-		
-		# Create translucent material
-		var bubble_material = StandardMaterial3D.new()
-		bubble_material.albedo_color = Color(
+		mm.set_instance_transform(i, t)
+		mm.set_instance_color(i, Color(
 			rng.randf_range(0.7, 1.0),
 			rng.randf_range(0.7, 1.0),
 			rng.randf_range(0.7, 1.0),
-			rng.randf_range(0.2, 0.7) # Alpha
-		)
-		bubble_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		bubble_material.metallic = rng.randf_range(0.1, 0.5)
-		bubble_material.roughness = rng.randf_range(0.0, 0.3)
-		
-		bubble.material_override = bubble_material
-		parent.add_child(bubble)
+			rng.randf_range(0.2, 0.7)
+		))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "BubbleClusterMM"
+	mmi.multimesh = mm
+	parent.add_child(mmi)
 
 func create_crystal_formation(parent, rng) -> void:
 	var num_crystals = rng.randi_range(3, 8)
-	
+
+	# Use MultiMesh for crystal formation
+	var base_prism = PrismMesh.new()
+	base_prism.size = Vector3(0.1, 0.35, 0.1)
+	var crystal_material = StandardMaterial3D.new()
+	crystal_material.albedo_color = Color(0.65, 0.65, 0.65)
+	crystal_material.metallic = 0.55
+	crystal_material.roughness = 0.1
+	crystal_material.vertex_color_use_as_albedo = true
+	base_prism.material = crystal_material
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = num_crystals
+	mm.mesh = base_prism
+
 	for i in range(num_crystals):
-		var crystal = MeshInstance3D.new()
-		var prism = PrismMesh.new()
-		prism.size = Vector3(
-			rng.randf_range(0.05, 0.15),
-			rng.randf_range(0.2, 0.5),
-			rng.randf_range(0.05, 0.15)
-		)
-		crystal.mesh = prism
-		
-		# Position around central point
+		var sx = rng.randf_range(0.05, 0.15) / 0.1
+		var sy = rng.randf_range(0.2, 0.5) / 0.35
+		var sz = rng.randf_range(0.05, 0.15) / 0.1
 		var angle = rng.randf_range(0, TAU)
 		var radius = rng.randf_range(0.0, 0.2)
-		crystal.position = Vector3(
+		var t = Transform3D()
+		t.basis = Basis.from_euler(Vector3(
+			rng.randf_range(-0.3, 0.3),
+			angle + PI,
+			rng.randf_range(-0.3, 0.3)
+		))
+		t.basis = t.basis.scaled(Vector3(sx, sy, sz))
+		t.origin = Vector3(
 			cos(angle) * radius,
 			rng.randf_range(-0.1, 0.3),
 			sin(angle) * radius
 		)
-		
-		# Orient outward from center
-		crystal.rotation = Vector3(
-			rng.randf_range(-0.3, 0.3),
-			angle + PI,
-			rng.randf_range(-0.3, 0.3)
-		)
-		
-		# Create material with shiny, crystalline properties
-		var crystal_material = StandardMaterial3D.new()
-		crystal_material.albedo_color = Color(
+		mm.set_instance_transform(i, t)
+		mm.set_instance_color(i, Color(
 			rng.randf_range(0.4, 0.9),
 			rng.randf_range(0.4, 0.9),
 			rng.randf_range(0.4, 0.9)
-		)
-		crystal_material.metallic = rng.randf_range(0.3, 0.8)
-		crystal_material.roughness = rng.randf_range(0.0, 0.2)
-		
-		crystal.material_override = crystal_material
-		parent.add_child(crystal)
+		))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "CrystalFormationMM"
+	mmi.multimesh = mm
+	parent.add_child(mmi)
 
 func create_membrane_sheets(parent, rng) -> void:
 	var num_sheets = rng.randi_range(2, 5)
@@ -620,43 +639,63 @@ func create_membrane_sheets(parent, rng) -> void:
 
 func create_starburst(parent, rng) -> void:
 	var num_spikes = rng.randi_range(5, 12)
-	
+
+	# Use MultiMesh for starburst spikes
+	var base_cylinder = CylinderMesh.new()
+	base_cylinder.top_radius = 0.01
+	base_cylinder.bottom_radius = 0.05
+	base_cylinder.height = 0.4
+	var spike_material = StandardMaterial3D.new()
+	spike_material.albedo_color = Color(0.75, 0.55, 0.65)
+	spike_material.emission_enabled = true
+	spike_material.emission = Color(0.75, 0.55, 0.65)
+	spike_material.emission_energy_multiplier = 0.7
+	spike_material.vertex_color_use_as_albedo = true
+	base_cylinder.material = spike_material
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = num_spikes
+	mm.mesh = base_cylinder
+
 	for i in range(num_spikes):
-		var spike = MeshInstance3D.new()
-		var cylinder = CylinderMesh.new()
-		cylinder.top_radius = 0.01
-		cylinder.bottom_radius = rng.randf_range(0.03, 0.07)
-		cylinder.height = rng.randf_range(0.2, 0.6)
-		spike.mesh = cylinder
-		
-		# Position in starburst pattern
+		var bottom_r = rng.randf_range(0.03, 0.07)
+		var spike_h = rng.randf_range(0.2, 0.6)
+		var sx = bottom_r / 0.05
+		var sy = spike_h / 0.4
+		var sz = bottom_r / 0.05
+
+		# Direction in starburst pattern
 		var phi = rng.randf_range(0, PI)
 		var theta = float(i) / float(num_spikes) * TAU
-		
-		var x = sin(phi) * cos(theta)
-		var y = sin(phi) * sin(theta)
-		var z = cos(phi)
-		
-		spike.position = Vector3.ZERO
-		spike.look_at_from_position(spike.position, Vector3(x, y, z), Vector3.UP)
-		spike.rotation_degrees.x += 90 # Correct cylinder orientation
-		
-		# Create material
-		var spike_material = StandardMaterial3D.new()
-		spike_material.albedo_color = Color(
+		var dir_x = sin(phi) * cos(theta)
+		var dir_y = sin(phi) * sin(theta)
+		var dir_z = cos(phi)
+		var direction = Vector3(dir_x, dir_y, dir_z).normalized()
+
+		# Build orientation basis: cylinder points along local Y,
+		# so we need to rotate local Y to match direction
+		var up = Vector3.UP
+		if abs(direction.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+		var side = direction.cross(up).normalized()
+		var forward = side.cross(direction).normalized()
+		var t = Transform3D()
+		t.basis = Basis(side, direction, forward)
+		t.basis = t.basis.scaled(Vector3(sx, sy, sz))
+		t.origin = Vector3.ZERO
+		mm.set_instance_transform(i, t)
+		mm.set_instance_color(i, Color(
 			rng.randf_range(0.5, 1.0),
 			rng.randf_range(0.3, 0.8),
 			rng.randf_range(0.3, 1.0)
-		)
-		
-		# Sometimes add emission
-		if rng.randf() > 0.5:
-			spike_material.emission_enabled = true
-			spike_material.emission = spike_material.albedo_color
-			spike_material.emission_energy_multiplier = rng.randf_range(0.3, 1.5)
-		
-		spike.material_override = spike_material
-		parent.add_child(spike)
+		))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "StarburstMM"
+	mmi.multimesh = mm
+	parent.add_child(mmi)
 
 func create_nested_rings(parent, rng) -> void:
 	var num_rings = rng.randi_range(3, 6)
@@ -1267,45 +1306,54 @@ static func add_fins(plant, rng):
 	plant.add_child(fin_parent)
 
 static func add_eggs(plant, rng):
-	# Add egg or pod-like structures
+	# Add egg or pod-like structures using MultiMesh
 	var num_eggs = rng.randi_range(3, 7)
 	var egg_parent = Node3D.new()
 	egg_parent.name = "Eggs"
-	
+
 	# Position on plant
 	egg_parent.position = Vector3(
 		rng.randf_range(-0.3, 0.3),
 		rng.randf_range(0.2, 0.8),
 		rng.randf_range(-0.3, 0.3)
 	)
-	
+
+	var base_sphere = SphereMesh.new()
+	base_sphere.radius = 0.085
+	base_sphere.height = 0.17
+	var egg_material = StandardMaterial3D.new()
+	egg_material.albedo_color = Color(0.75, 0.75, 0.75)
+	egg_material.vertex_color_use_as_albedo = true
+	base_sphere.material = egg_material
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = num_eggs
+	mm.mesh = base_sphere
+
 	for i in range(num_eggs):
-		var egg = MeshInstance3D.new()
-		
-		# Create egg shape
-		var sphere = SphereMesh.new()
-		sphere.radius = rng.randf_range(0.05, 0.12)
-		sphere.height = rng.randf_range(0.05, 0.12) * 2.0
-		egg.mesh = sphere
-		
-		# Position eggs in a cluster
-		egg.position = Vector3(
+		var egg_r = rng.randf_range(0.05, 0.12)
+		var s = egg_r / 0.085
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(s, s, s))
+		t.origin = Vector3(
 			rng.randf_range(-0.2, 0.2),
 			rng.randf_range(-0.1, 0.1),
 			rng.randf_range(-0.2, 0.2)
 		)
-		
-		# Create material for egg
-		var egg_material = StandardMaterial3D.new()
-		egg_material.albedo_color = Color(
+		mm.set_instance_transform(i, t)
+		mm.set_instance_color(i, Color(
 			rng.randf_range(0.6, 0.9),
 			rng.randf_range(0.6, 0.9),
 			rng.randf_range(0.6, 0.9)
-		)
-		
-		egg.material_override = egg_material
-		egg_parent.add_child(egg)
-	
+		))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "EggsMM"
+	mmi.multimesh = mm
+	egg_parent.add_child(mmi)
+
 	plant.add_child(egg_parent)
 
 static func create_architectural_element(parent, rng):

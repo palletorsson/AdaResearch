@@ -380,29 +380,38 @@ func _create_feedback_loop() -> void:
 	loop_container.name = "FeedbackLoop"
 	add_child(loop_container)
 
-	# Create particles that move in a circle through the system
+	# Create feedback particles using MultiMesh
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.06
+	sphere.height = 0.12
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.3, 0.9, 0.9, 0.7)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(0.3, 0.9, 0.9)
+	mat.emission_energy_multiplier = 1.0
+	mat.metallic = 0.0
+	mat.roughness = 1.0
+	sphere.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = particle_count
+	mm.mesh = sphere
+
 	for i in range(particle_count):
-		var particle = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = 0.06
-		sphere.height = 0.12
-		particle.mesh = sphere
-
-		var mat = StandardMaterial3D.new()
-		mat.albedo_color = Color(0.3, 0.9, 0.9, 0.7)
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mat.emission_enabled = true
-		mat.emission = Color(0.3, 0.9, 0.9)
-		mat.emission_energy_multiplier = 1.0
-		mat.metallic = 0.0
-		mat.roughness = 1.0
-		particle.material_override = mat
-
-		loop_container.add_child(particle)
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3.ZERO))
 		feedback_particles.append({
-			"node": particle,
+			"index": i,
 			"progress": float(i) / particle_count
 		})
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "FeedbackParticles_MM"
+	mmi.multimesh = mm
+	loop_container.add_child(mmi)
+	loop_container.set_meta("multimesh", mm)
 
 func _create_training_controls() -> void:
 	"""Create VR-accessible control panel"""
@@ -515,23 +524,26 @@ func _animate_data_flow(delta) -> void:
 		node.position = node.position.lerp(target_pos, delta * 0.3 * generation_quality)
 
 func _animate_feedback_loop(delta) -> void:
-	"""Animate feedback particles circling the system"""
+	"""Animate feedback particles circling the system via MultiMesh"""
+	var loop_container = get_node_or_null("FeedbackLoop")
+	if not loop_container or not loop_container.has_meta("multimesh"):
+		return
+	var mm: MultiMesh = loop_container.get_meta("multimesh")
+
 	for particle_data in feedback_particles:
-		var particle = particle_data.node
+		var idx = particle_data.index
 		var progress = particle_data.progress
 
-		# Update progress
 		progress = fmod(progress + delta * 0.2, 1.0)
 		particle_data.progress = progress
 
-		# Circular path connecting all three zones
 		var angle = progress * TAU
 		var radius = room_separation * 0.7
 		var x = cos(angle) * radius
 		var z = sin(angle) * radius
 		var y = 1.5 + sin(progress * PI * 4) * 0.5
 
-		particle.position = Vector3(x, y, z)
+		mm.set_instance_transform(idx, Transform3D(Basis.IDENTITY, Vector3(x, y, z)))
 
 # Public API
 func set_training_progress(progress: float) -> void:
