@@ -538,6 +538,32 @@
 				"math",
 				"transforms"
 			]
+		},
+		"quantum_field": {
+			"name": "Quantum Field",
+			"lookup_name": "quantum_field",
+			"description": "Quantum field theory visualization with three modes: scalar field dynamics (φ⁴ theory with Klein-Gordon equation on lattice), particle creation/annihilation (pair production, worldlines, charge conservation), and Feynman diagram rendering (QED scatter, pair production, gluon loop, Compton). VR controls for coupling strength and mass parameter.",
+			"scene": "res://algorithms/transformation/quantum_field/quantum_field.tscn",
+			"category": "transforms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"sequence": "transformation",
+			"complexity": "advanced",
+			"tags": [
+				"quantum",
+				"field-theory",
+				"feynman-diagrams",
+				"particle-physics",
+				"visualization"
+			],
+			"dev_themes": [
+				"physics",
+				"quantum",
+				"transforms"
+			]
 		}
 	}
 }
