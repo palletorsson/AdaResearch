@@ -137,18 +137,20 @@
 		"ant_colony_optimization": {
 			"name": "Ant Colony Optimization",
 			"lookup_name": "ant_colony_optimization",
-			"description": "Ant colony optimization algorithm solving shortest path problems with pheromone-based communication.",
+			"description": "Ant colony optimization with pheromone evaporation gradient heatmap, multi-source quality-weighted foraging, tandem running communication, and 3 modes (Colony/Communication/Multi-Source).",
 			"scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
 			"category": "swarmintelligence",
 			"tags": [
 				"ants",
 				"optimization",
 				"pheromone",
-				"shortest_path",
+				"heatmap",
+				"foraging",
+				"communication",
 				"swarm"
 			],
 			"include_in_map_data": true,
-			"map_ready": false,
+			"map_ready": true,
 			"map_sequences": [
 				"swarmintelligence"
 			],
@@ -159,13 +161,25 @@
 					19,
 					9
 				],
-				"size_group": "world_scale"
+				"size_group": "world_scale",
+				"config_schema": {
+					"ant_count": {"type": "int", "default": 40, "min": 5, "max": 80},
+					"evaporation_rate": {"type": "float", "default": 0.02, "min": 0.001, "max": 0.1},
+					"pheromone_deposit": {"type": "float", "default": 5.0, "min": 1.0, "max": 20.0},
+					"alpha_weight": {"type": "float", "default": 1.0, "min": 0.1, "max": 5.0},
+					"beta_weight": {"type": "float", "default": 2.0, "min": 0.1, "max": 5.0},
+					"ant_speed": {"type": "float", "default": 3.0, "min": 1.0, "max": 8.0},
+					"field_size": {"type": "float", "default": 6.0, "min": 3.0, "max": 10.0},
+					"food_source_count": {"type": "int", "default": 4, "min": 1, "max": 8},
+					"mode": {"type": "string", "default": "COLONY", "enum": ["COLONY", "COMMUNICATION", "MULTI_SOURCE"]}
+				}
 			},
 			"complexity": "advanced",
 			"dev_themes": [
 				"collective",
 				"emergence",
-				"swarm"
+				"swarm",
+				"communication"
 			]
 		},
 		"particle_swarm_optimization": {
