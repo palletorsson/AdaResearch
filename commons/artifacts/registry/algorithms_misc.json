@@ -1982,10 +1982,10 @@
 		},
 		"closest_pair": {
 			"lookup_name": "closest_pair",
-			"name": "closest_pair",
-			"description": "closest_pair",
+			"name": "Closest Pair of Points",
+			"description": "Closest pair algorithms with divide-and-conquer vs sweep line comparison, dynamic point maintenance, and empirical performance graph",
 			"scene": "res://algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
-			"category": "unknown",
+			"category": "algorithms",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2003,15 +2003,28 @@
 					20,
 					13
 				],
-				"size_group": "world_scale"
+				"size_group": "world_scale",
+				"configurable": [
+					"point_count",
+					"field_width",
+					"field_height",
+					"step_speed",
+					"show_grid",
+					"show_performance",
+					"mode"
+				]
 			},
-			"complexity": "beginner",
+			"complexity": "intermediate",
 			"dev_themes": [
 				"algorithms",
-				"misc"
+				"computational_geometry"
 			],
 			"tags": [
-				"algorithm"
+				"algorithm",
+				"computational_geometry",
+				"divide_and_conquer",
+				"sweep_line",
+				"closest_pair"
 			]
 		},
 		"distance_fields_sdf": {
