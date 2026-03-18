@@ -1,1401 +1,1773 @@
 {
-  "registry_info": {
-    "name": "vectors",
-    "description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
-    "category": "mathematics",
-    "theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
-  },
-  "artifacts": {
-    "hl_turret_vectors": {
-      "lookup_name": "hl_turret_vectors",
-      "scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
-      "class_name": "HLTurretVectors",
-      "name": "Half-Life Turret - Vector Compendium",
-      "description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
-      "qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
-      "signals": [
-        "target_acquired",
-        "target_lost",
-        "bullet_fired",
-        "bullet_hit"
-      ],
-      "interactions": [
-        "grab target sphere to move it",
-        "preset buttons for scenarios",
-        "SPACE to manual fire",
-        "F to toggle auto-fire"
-      ],
-      "parameters": {
-        "turret_height": "Height of turret barrel (default 0.4)",
-        "barrel_length": "Length of gun barrel (default 0.25)",
-        "field_of_view_degrees": "Total FOV cone in degrees (default 90)",
-        "max_range": "Maximum targeting range (default 2.5)",
-        "tracking_speed": "How fast turret tracks target (default 2.0)",
-        "target_position": "Initial target position Vector3",
-        "shooting_enabled": "Enable automatic firing (default true)",
-        "fire_rate": "Shots per second (default 3.0)",
-        "bullet_speed": "Bullet velocity in units/sec (default 4.0)",
-        "show_bullet_vectors": "Show velocity arrows on bullets (default true)"
-      },
-      "dev_themes": [
-        "vectors",
-        "game_mechanics",
-        "applied_math",
-        "physics"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "all_operations",
-        "turret",
-        "game",
-        "interactive",
-        "subtraction",
-        "magnitude",
-        "normalize",
-        "dot_product",
-        "cross_product",
-        "projection",
-        "addition",
-        "scalar_multiplication",
-        "velocity",
-        "physics",
-        "shooting"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vector_addition_demo": {
-      "lookup_name": "vector_addition_demo",
-      "scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
-      "class_name": "VectorAdditionDemo",
-      "name": "Vector Addition",
-      "description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
-      "qfep_connection": "Composition - how separate movements combine into a single displacement",
-      "signals": [],
-      "interactions": [
-        "grab handle spheres to adjust vectors",
-        "preset buttons"
-      ],
-      "parameters": {
-        "vector_a": "First vector",
-        "vector_b": "Second vector",
-        "max_vector_length": "Maximum allowed vector length"
-      },
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "addition",
-        "parallelogram",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "sequence": "forces"
-    },
-    "vector_subtraction_demo": {
-      "lookup_name": "vector_subtraction_demo",
-      "scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
-      "class_name": "VectorSubtractionDemo",
-      "name": "Vector Subtraction",
-      "description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
-      "qfep_connection": "Difference and direction - finding what separates two states",
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "subtraction",
-        "direction",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ]
-    },
-    "vector_magnitude_demo": {
-      "lookup_name": "vector_magnitude_demo",
-      "scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
-      "class_name": "VectorMagnitudeDemo",
-      "name": "Vector Magnitude",
-      "description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
-      "qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "magnitude",
-        "length",
-        "pythagorean",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "sequence": "forces"
-    },
-    "vector_normalize_demo": {
-      "lookup_name": "vector_normalize_demo",
-      "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
-      "class_name": "VectorNormalizeDemo",
-      "name": "Vector Normalization",
-      "description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
-      "qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "normalize",
-        "unit_vector",
-        "direction",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "testmaps",
-        "transformation"
-      ],
-      "sequence": "forces"
-    },
-    "dot_product_projector": {
-      "lookup_name": "dot_product_projector",
-      "scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
-      "class_name": "DotProductProjector",
-      "name": "Dot Product Projector",
-      "description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
-      "qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
-      "signals": [],
-      "interactions": [
-        "grab handle spheres",
-        "preset configurations"
-      ],
-      "parameters": {
-        "vector_a": "Vector being projected",
-        "vector_b": "Vector projected onto"
-      },
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "dot_product",
-        "projection",
-        "angle",
-        "cosine",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "sequence": "forces"
-    },
-    "cross_product_demo": {
-      "lookup_name": "cross_product_demo",
-      "scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
-      "class_name": "CrossProductDemo",
-      "name": "Cross Product Demo",
-      "description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
-      "qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
-      "signals": [],
-      "interactions": [
-        "grab handle spheres",
-        "preset configurations"
-      ],
-      "parameters": {
-        "vector_a": "First vector",
-        "vector_b": "Second vector"
-      },
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "cross_product",
-        "perpendicular",
-        "area",
-        "right_hand_rule",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "sequence": "forces"
-    },
-    "vector_projection_demo": {
-      "lookup_name": "vector_projection_demo",
-      "scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
-      "class_name": "VectorProjectionDemo",
-      "name": "Vector Projection",
-      "description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
-      "qfep_connection": "Projection as filtering - extracting the component in a particular direction",
-      "dev_themes": [
-        "vectors"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "projection",
-        "shadow",
-        "component",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vector_translation_demo": {
-      "lookup_name": "vector_translation_demo",
-      "scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
-      "class_name": "VectorTranslationDemo",
-      "name": "Vector Translation",
-      "description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
-      "qfep_connection": "Translation as movement - vectors as instructions for displacement",
-      "dev_themes": [
-        "vectors",
-        "transforms"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "translation",
-        "displacement",
-        "position",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "basis_vectors_rig": {
-      "lookup_name": "basis_vectors_rig",
-      "scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
-      "class_name": "BasisVectorsRig",
-      "name": "Basis Vectors Rig",
-      "description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
-      "qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
-      "signals": [],
-      "interactions": [
-        "grab and rotate basis",
-        "move target point",
-        "preset configurations"
-      ],
-      "parameters": {
-        "target_point": "Point to decompose into basis components",
-        "axis_length": "Length of basis arrows"
-      },
-      "dev_themes": [
-        "vectors",
-        "linear_algebra"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "basis",
-        "coordinate_system",
-        "linear_combination",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "testmaps"
-      ],
-      "sequence": "forces"
-    },
-    "turret_targeting": {
-      "lookup_name": "turret_targeting",
-      "scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
-      "class_name": "TurretTargeting",
-      "name": "Turret Targeting (Combined)",
-      "description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
-      "qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
-      "signals": [
-        "ball_destroyed",
-        "target_acquired",
-        "target_lost"
-      ],
-      "interactions": [
-        "DROP BALL button",
-        "RESET button",
-        "AUTO toggle"
-      ],
-      "parameters": {
-        "turret_position": "Position of turret base (default 0,0,0)",
-        "dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
-        "drop_interval": "Seconds between ball drops (default 2.5)",
-        "max_balls": "Maximum balls alive at once (default 4)",
-        "detection_range": "Turret targeting range (default 8.0)",
-        "burn_time": "Time laser burns before explosion (default 0.3)",
-        "laser_color": "Color of laser beam (default red)",
-        "show_controls": "Show VR control panel (default true)"
-      },
-      "dev_themes": [
-        "vectors",
-        "game_mechanics",
-        "applied_math"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "subtraction",
-        "magnitude",
-        "normalize",
-        "dot_product",
-        "turret",
-        "targeting",
-        "interactive",
-        "game",
-        "laser",
-        "vr"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "laser_turret": {
-      "lookup_name": "laser_turret",
-      "scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
-      "class_name": "LaserTurret",
-      "name": "Laser Turret",
-      "description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
-      "qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
-      "signals": [
-        "ball_destroyed",
-        "target_acquired",
-        "target_lost"
-      ],
-      "interactions": [
-        "Automatic targeting - no direct interaction needed"
-      ],
-      "parameters": {
-        "rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
-        "detection_range": "Maximum targeting range (default 10.0)",
-        "fire_delay": "Lock time before firing (default 0.25)",
-        "burn_time": "Laser burn time before explosion (default 0.35)",
-        "laser_color": "Color of laser beam (default red)",
-        "auto_target": "Auto-acquire targets (default true)",
-        "target_closest": "Prioritize closest target (default true)"
-      },
-      "dev_themes": [
-        "vectors",
-        "game_mechanics",
-        "applied_math"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "subtraction",
-        "magnitude",
-        "normalize",
-        "dot_product",
-        "turret",
-        "laser",
-        "standalone"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "color"
-      ]
-    },
-    "ball_dropper": {
-      "lookup_name": "ball_dropper",
-      "scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
-      "class_name": "BallDropper",
-      "name": "Ball Dropper",
-      "description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
-      "qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
-      "signals": [
-        "ball_spawned",
-        "ball_destroyed"
-      ],
-      "interactions": [
-        "Automatic dropping - configure via parameters"
-      ],
-      "parameters": {
-        "drop_interval": "Seconds between drops (default 3.0)",
-        "auto_drop": "Enable automatic dropping (default true)",
-        "max_balls": "Maximum balls alive at once (default 5)",
-        "ball_radius": "Size of balls (default 0.1)",
-        "ball_mass": "Mass for physics (default 0.5)",
-        "ball_bounce": "Bounciness (default 0.7)",
-        "spawn_spread": "Random XZ spread (default 0.3)",
-        "initial_velocity": "Starting velocity Vector3"
-      },
-      "dev_themes": [
-        "vectors",
-        "physics",
-        "spawning"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "balls",
-        "physics",
-        "spawner",
-        "dropper",
-        "colorful",
-        "standalone"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "sequence": "forces"
-    },
-    "sentry_turret": {
-      "lookup_name": "sentry_turret",
-      "scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
-      "class_name": "SentryTurret",
-      "name": "Sentry Turret",
-      "description": "Half-Life style sentry turret. Targets balls and/or player. Simple reliable targeting with bullet physics. Emits signals for hits.",
-      "qfep_connection": "The turret as autonomous agent - continuously computing vectors to track and engage targets.",
-      "signals": [
-        "target_acquired",
-        "target_lost",
-        "fired",
-        "hit_target"
-      ],
-      "interactions": [
-        "Automatic - targets balls and player"
-      ],
-      "parameters": {
-        "rotation_speed": "Turret rotation speed (default 5.0)",
-        "detection_range": "Maximum targeting range (default 15.0)",
-        "fire_rate": "Shots per second (default 5.0)",
-        "bullet_speed": "Bullet velocity (default 20.0)",
-        "target_player": "Target the player/camera (default true)",
-        "target_balls": "Target balls from droppers (default true)"
-      },
-      "dev_themes": [
-        "vectors",
-        "game_mechanics",
-        "targeting"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "turret",
-        "sentry",
-        "targeting",
-        "bullets",
-        "halflife",
-        "player",
-        "balls"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "testmaps"
-      ],
-      "sequence": "forces"
-    },
-    "turret_boll_infoboard": {
-      "lookup_name": "turret_boll_infoboard",
-      "scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
-      "class_name": "TurretBollInfoBoard",
-      "name": "Turret-Boll Vector Diagram",
-      "description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
-      "qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
-      "signals": [],
-      "interactions": [
-        "Static display - no interaction"
-      ],
-      "parameters": {},
-      "dev_themes": [
-        "vectors",
-        "infoboard",
-        "reference"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "beginner",
-      "tags": [
-        "vectors",
-        "infoboard",
-        "2d_in_3d",
-        "subtraction",
-        "magnitude",
-        "normalize",
-        "dot_product",
-        "projection",
-        "turret",
-        "reference",
-        "diagram"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "sequence": "forces"
-    },
-    "vector_joint_playground": {
-      "lookup_name": "vector_joint_playground",
-      "scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
-      "class_name": "VectorJointPlayground",
-      "name": "Vector-Joint Playground",
-      "description": "Human-scale VR playground with 6 interactive stations. Each station pairs draggable vectors with a large physics joint mechanism: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces). Drag a vector, watch the machine respond.",
-      "qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
-      "signals": [],
-      "interactions": [
-        "grab vector endpoints to manipulate",
-        "observe mechanism responses",
-        "read live math on info panels"
-      ],
-      "parameters": {},
-      "dev_themes": [
-        "vectors",
-        "joints",
-        "physics",
-        "interactive"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "joints",
-        "playground",
-        "magnitude",
-        "addition",
-        "dot_product",
-        "subtraction",
-        "cross_product",
-        "forces",
-        "interactive",
-        "vr",
-        "human_scale"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vector_field_visualizer": {
-      "lookup_name": "vector_field_visualizer",
-      "scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
-      "class_name": "VectorFieldVisualizer",
-      "name": "Vector Field Visualizer",
-      "description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
-      "qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
-      "dev_themes": [
-        "vectors",
-        "fields",
-        "visualization"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "vector_field",
-        "flow",
-        "vortex",
-        "dipole",
-        "source",
-        "sink",
-        "arrows",
-        "3d",
-        "magnitude",
-        "direction"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ]
-    },
-    "coordinate_system_switcher": {
-      "lookup_name": "coordinate_system_switcher",
-      "scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
-      "class_name": "CoordinateSystemSwitcher",
-      "name": "Coordinate System Switcher",
-      "description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
-      "qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
-      "dev_themes": [
-        "vectors",
-        "coordinate_systems",
-        "visualization"
-      ],
-      "dev_category": "vector_operations",
-      "category": "mathematics",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "coordinates",
-        "cartesian",
-        "cylindrical",
-        "spherical",
-        "polar",
-        "conversion",
-        "3d",
-        "visualization"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "vectors"
-      ]
-    },
-    "coordinates": {
-      "lookup_name": "coordinates",
-      "name": "coordinates",
-      "description": "coordinates",
-      "scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        5,
-        5,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "ForceMagnitudeDemo": {
-      "lookup_name": "ForceMagnitudeDemo",
-      "name": "ForceMagnitudeDemo",
-      "description": "ForceMagnitudeDemo",
-      "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "CoordinateSystem3M": {
-      "lookup_name": "CoordinateSystem3M",
-      "name": "CoordinateSystem3M",
-      "description": "CoordinateSystem3M",
-      "scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "primitives",
-        "testmaps"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "vectorpoint": {
-      "lookup_name": "vectorpoint",
-      "name": "VectorPoint",
-      "description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
-      "scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorBasics": {
-      "lookup_name": "VectorBasics",
-      "name": "VectorBasics",
-      "description": "VectorBasics",
-      "scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorAddition": {
-      "lookup_name": "VectorAddition",
-      "name": "VectorAddition",
-      "description": "VectorAddition",
-      "scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorDotProduct": {
-      "lookup_name": "VectorDotProduct",
-      "name": "VectorDotProduct",
-      "description": "VectorDotProduct",
-      "scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorSubtraction": {
-      "lookup_name": "VectorSubtraction",
-      "name": "VectorSubtraction",
-      "description": "VectorSubtraction",
-      "scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorForces": {
-      "lookup_name": "VectorForces",
-      "name": "VectorForces",
-      "description": "VectorForces",
-      "scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        20,
-        1,
-        20
-      ],
-      "size_group": "world_scale"
-    },
-    "VectorCrossProduct": {
-      "lookup_name": "VectorCrossProduct",
-      "name": "VectorCrossProduct",
-      "description": "VectorCrossProduct",
-      "scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorProjectionReflection": {
-      "lookup_name": "VectorProjectionReflection",
-      "name": "VectorProjectionReflection",
-      "description": "VectorProjectionReflection",
-      "scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorMotion": {
-      "lookup_name": "VectorMotion",
-      "name": "VectorMotion",
-      "description": "VectorMotion",
-      "scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        4,
-        4,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "VectorTorque": {
-      "lookup_name": "VectorTorque",
-      "name": "VectorTorque",
-      "description": "VectorTorque",
-      "scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorFieldFlow": {
-      "lookup_name": "VectorFieldFlow",
-      "name": "VectorFieldFlow",
-      "description": "VectorFieldFlow",
-      "scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "noise"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VectorWorkbench": {
-      "lookup_name": "VectorWorkbench",
-      "name": "Vector Workbench",
-      "description": "Universal vector sandbox - two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live",
-      "scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
-      "category": "vectors",
-      "complexity": "intermediate",
-      "tags": [
-        "vectors",
-        "addition",
-        "subtraction",
-        "dot_product",
-        "cross_product",
-        "projection",
-        "sandbox"
-      ],
-      "sequence": "vectors",
-      "qfep_connection": "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "vectors"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        4,
-        2,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "vectorline": {
-      "lookup_name": "vectorline",
-      "name": "vectorline",
-      "description": "Interactive vector line with arrowhead",
-      "scene": "res://algorithms/vectors/vectorline/vectorline.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "vector_drone": {
-      "lookup_name": "vector_drone",
-      "name": "vector_drone",
-      "description": "vector_drone",
-      "scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_1_bouncing_ball_with_no_vectors_vr": {
-      "lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
-      "name": "Bouncing Ball with No Vectors VR",
-      "description": "Bouncing ball demonstration without vector math",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_2_bouncing_ball_with_vectors_vr": {
-      "lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
-      "name": "Bouncing Ball with Vectors VR",
-      "description": "Bouncing ball demonstration using vector math",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_2_bouncing_ball_with_vectors_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_3_vector_subtraction_vr": {
-      "lookup_name": "example_1_3_vector_subtraction_vr",
-      "name": "Vector Subtraction VR",
-      "description": "Vector subtraction demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_4_vector_multiplication_vr": {
-      "lookup_name": "example_1_4_vector_multiplication_vr",
-      "name": "Vector Multiplication VR",
-      "description": "Vector multiplication demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_5_vector_magnitude_vr": {
-      "lookup_name": "example_1_5_vector_magnitude_vr",
-      "name": "Vector Magnitude VR",
-      "description": "Vector magnitude calculation demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_6_vector_normalize_vr": {
-      "lookup_name": "example_1_6_vector_normalize_vr",
-      "name": "Vector Normalize VR",
-      "description": "Vector normalization demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_7_motion_101_velocity_vr": {
-      "lookup_name": "example_1_7_motion_101_velocity_vr",
-      "name": "Motion 101 Velocity VR",
-      "description": "Basic velocity motion demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
-      "lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
-      "name": "Motion 101 Velocity and Constant Acceleration VR",
-      "description": "Velocity and constant acceleration demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "example_1_9_motion_101_velocity_and_random_acceleration_vr": {
-      "lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
-      "name": "Motion 101 Velocity and Random Acceleration VR",
-      "description": "Velocity and random acceleration demonstration",
-      "scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "exercise_1_3_solution_3_d_bouncing_ball_vr": {
-      "lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
-      "name": "Exercise 1.3 Solution 3D Bouncing Ball VR",
-      "description": "3D bouncing ball exercise solution",
-      "scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "exercise_1_5_solution_accelerate_and_decelerate_vr": {
-      "lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
-      "name": "Exercise 1.5 Solution Accelerate and Decelerate VR",
-      "description": "Acceleration and deceleration exercise solution",
-      "scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "exercise_1_8_solution_attraction_magnitude_vr": {
-      "lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
-      "name": "Exercise 1.8 Solution Attraction Magnitude VR",
-      "description": "Attraction magnitude exercise solution",
-      "scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces",
-        "transformation"
-      ],
-      "footprint": [
-        5,
-        5,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "VectorThrowing": {
-      "lookup_name": "VectorThrowing",
-      "name": "VectorThrowing",
-      "description": "VectorThrowing",
-      "scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        4,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "throw_ball": {
-      "lookup_name": "throw_ball",
-      "name": "throw_ball",
-      "description": "throw_ball.",
-      "scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "sphere_splitting_showcase": {
-      "lookup_name": "sphere_splitting_showcase",
-      "name": "sphere_splitting_showcase",
-      "description": "sphere_splitting_showcase.",
-      "scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        18,
-        18,
-        18
-      ],
-      "size_group": "world_scale"
-    },
-    "destructibles_test_scene": {
-      "lookup_name": "destructibles_test_scene",
-      "name": "destructibles_test_scene",
-      "description": "destructibles_test_scene",
-      "scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        20,
-        20,
-        20
-      ],
-      "size_group": "world_scale"
-    },
-    "destructible_marching_cube": {
-      "lookup_name": "destructible_marching_cube",
-      "name": "destructible_marching_cube",
-      "description": "destructible_marching_cube",
-      "scene": "res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube_test.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "gravity_gun_test_scene": {
-      "lookup_name": "gravity_gun_test_scene",
-      "name": "gravity_gun_test_scene",
-      "description": "gravity_gun_test_scene",
-      "scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        5,
-        1,
-        2
-      ],
-      "size_group": "environment"
-    }
-  },
-  "sequence_mapping": {
-    "vector_fundamentals": [
-      "vector_addition_demo",
-      "vector_subtraction_demo",
-      "vector_magnitude_demo",
-      "vector_normalize_demo"
-    ],
-    "vector_products": [
-      "dot_product_projector",
-      "cross_product_demo",
-      "vector_projection_demo"
-    ],
-    "vector_applications": [
-      "hl_turret_vectors",
-      "turret_targeting",
-      "laser_turret",
-      "ball_dropper",
-      "turret_boll_infoboard",
-      "basis_vectors_rig",
-      "vector_joint_playground",
-      "vector_field_visualizer"
-    ],
-    "all_vectors": [
-      "vector_addition_demo",
-      "vector_subtraction_demo",
-      "vector_magnitude_demo",
-      "vector_normalize_demo",
-      "dot_product_projector",
-      "cross_product_demo",
-      "vector_projection_demo",
-      "hl_turret_vectors",
-      "turret_targeting",
-      "laser_turret",
-      "ball_dropper",
-      "turret_boll_infoboard",
-      "basis_vectors_rig",
-      "vector_joint_playground",
-      "vector_field_visualizer",
-      "coordinate_system_switcher"
-    ]
-  },
-  "theoretical_connections": {
-    "basic_operations": [
-      "vector_addition_demo",
-      "vector_subtraction_demo",
-      "vector_magnitude_demo",
-      "vector_normalize_demo"
-    ],
-    "product_operations": [
-      "dot_product_projector",
-      "cross_product_demo"
-    ],
-    "applied_examples": [
-      "hl_turret_vectors",
-      "turret_targeting",
-      "laser_turret",
-      "ball_dropper",
-      "turret_boll_infoboard",
-      "vector_field_visualizer"
-    ],
-    "coordinate_systems": [
-      "basis_vectors_rig",
-      "vector_translation_demo",
-      "coordinate_system_switcher"
-    ]
-  }
+	"registry_info": {
+		"name": "vectors",
+		"description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
+		"category": "mathematics",
+		"theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
+	},
+	"artifacts": {
+		"hl_turret_vectors": {
+			"lookup_name": "hl_turret_vectors",
+			"scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+			"class_name": "HLTurretVectors",
+			"name": "Half-Life Turret - Vector Compendium",
+			"description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
+			"qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
+			"signals": [
+				"target_acquired",
+				"target_lost",
+				"bullet_fired",
+				"bullet_hit"
+			],
+			"interactions": [
+				"grab target sphere to move it",
+				"preset buttons for scenarios",
+				"SPACE to manual fire",
+				"F to toggle auto-fire"
+			],
+			"parameters": {
+				"turret_height": "Height of turret barrel (default 0.4)",
+				"barrel_length": "Length of gun barrel (default 0.25)",
+				"field_of_view_degrees": "Total FOV cone in degrees (default 90)",
+				"max_range": "Maximum targeting range (default 2.5)",
+				"tracking_speed": "How fast turret tracks target (default 2.0)",
+				"target_position": "Initial target position Vector3",
+				"shooting_enabled": "Enable automatic firing (default true)",
+				"fire_rate": "Shots per second (default 3.0)",
+				"bullet_speed": "Bullet velocity in units/sec (default 4.0)",
+				"show_bullet_vectors": "Show velocity arrows on bullets (default true)",
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math",
+				"physics"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"all_operations",
+				"turret",
+				"game",
+				"interactive",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"cross_product",
+				"projection",
+				"addition",
+				"scalar_multiplication",
+				"velocity",
+				"physics",
+				"shooting"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vector_addition_demo": {
+			"lookup_name": "vector_addition_demo",
+			"scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+			"class_name": "VectorAdditionDemo",
+			"name": "Vector Addition",
+			"description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
+			"qfep_connection": "Composition - how separate movements combine into a single displacement",
+			"signals": [],
+			"interactions": [
+				"grab handle spheres to adjust vectors",
+				"preset buttons"
+			],
+			"parameters": {
+				"vector_a": "First vector",
+				"vector_b": "Second vector",
+				"max_vector_length": "Maximum allowed vector length",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"addition",
+				"parallelogram",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"vector_subtraction_demo": {
+			"lookup_name": "vector_subtraction_demo",
+			"scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+			"class_name": "VectorSubtractionDemo",
+			"name": "Vector Subtraction",
+			"description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
+			"qfep_connection": "Difference and direction - finding what separates two states",
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"subtraction",
+				"direction",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vector_magnitude_demo": {
+			"lookup_name": "vector_magnitude_demo",
+			"scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+			"class_name": "VectorMagnitudeDemo",
+			"name": "Vector Magnitude",
+			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
+			"qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"magnitude",
+				"length",
+				"pythagorean",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"sequence": "forces",
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vector_normalize_demo": {
+			"lookup_name": "vector_normalize_demo",
+			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+			"class_name": "VectorNormalizeDemo",
+			"name": "Vector Normalization",
+			"description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
+			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"normalize",
+				"unit_vector",
+				"direction",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps",
+				"transformation"
+			],
+			"sequence": "forces",
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"dot_product_projector": {
+			"lookup_name": "dot_product_projector",
+			"scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+			"class_name": "DotProductProjector",
+			"name": "Dot Product Projector",
+			"description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
+			"qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
+			"signals": [],
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"parameters": {
+				"vector_a": "Vector being projected",
+				"vector_b": "Vector projected onto",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"dot_product",
+				"projection",
+				"angle",
+				"cosine",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"cross_product_demo": {
+			"lookup_name": "cross_product_demo",
+			"scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
+			"class_name": "CrossProductDemo",
+			"name": "Cross Product Demo",
+			"description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+			"qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
+			"signals": [],
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"parameters": {
+				"vector_a": "First vector",
+				"vector_b": "Second vector",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"cross_product",
+				"perpendicular",
+				"area",
+				"right_hand_rule",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"vector_projection_demo": {
+			"lookup_name": "vector_projection_demo",
+			"scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+			"class_name": "VectorProjectionDemo",
+			"name": "Vector Projection",
+			"description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
+			"qfep_connection": "Projection as filtering - extracting the component in a particular direction",
+			"dev_themes": [
+				"vectors"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"projection",
+				"shadow",
+				"component",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vector_translation_demo": {
+			"lookup_name": "vector_translation_demo",
+			"scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+			"class_name": "VectorTranslationDemo",
+			"name": "Vector Translation",
+			"description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
+			"qfep_connection": "Translation as movement - vectors as instructions for displacement",
+			"dev_themes": [
+				"vectors",
+				"transforms"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"translation",
+				"displacement",
+				"position",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"basis_vectors_rig": {
+			"lookup_name": "basis_vectors_rig",
+			"scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+			"class_name": "BasisVectorsRig",
+			"name": "Basis Vectors Rig",
+			"description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
+			"qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
+			"signals": [],
+			"interactions": [
+				"grab and rotate basis",
+				"move target point",
+				"preset configurations"
+			],
+			"parameters": {
+				"target_point": "Point to decompose into basis components",
+				"axis_length": "Length of basis arrows",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"vectors",
+				"linear_algebra"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"basis",
+				"coordinate_system",
+				"linear_combination",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps"
+			],
+			"sequence": "forces"
+		},
+		"turret_targeting": {
+			"lookup_name": "turret_targeting",
+			"scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
+			"class_name": "TurretTargeting",
+			"name": "Turret Targeting (Combined)",
+			"description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
+			"qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
+			],
+			"interactions": [
+				"DROP BALL button",
+				"RESET button",
+				"AUTO toggle"
+			],
+			"parameters": {
+				"turret_position": "Position of turret base (default 0,0,0)",
+				"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
+				"drop_interval": "Seconds between ball drops (default 2.5)",
+				"max_balls": "Maximum balls alive at once (default 4)",
+				"detection_range": "Turret targeting range (default 8.0)",
+				"burn_time": "Time laser burns before explosion (default 0.3)",
+				"laser_color": "Color of laser beam (default red)",
+				"show_controls": "Show VR control panel (default true)",
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"turret",
+				"targeting",
+				"interactive",
+				"game",
+				"laser",
+				"vr"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"laser_turret": {
+			"lookup_name": "laser_turret",
+			"scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
+			"class_name": "LaserTurret",
+			"name": "Laser Turret",
+			"description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
+			"qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
+			],
+			"interactions": [
+				"Automatic targeting - no direct interaction needed"
+			],
+			"parameters": {
+				"rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
+				"detection_range": "Maximum targeting range (default 10.0)",
+				"fire_delay": "Lock time before firing (default 0.25)",
+				"burn_time": "Laser burn time before explosion (default 0.35)",
+				"laser_color": "Color of laser beam (default red)",
+				"auto_target": "Auto-acquire targets (default true)",
+				"target_closest": "Prioritize closest target (default true)"
+			},
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"turret",
+				"laser",
+				"standalone"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			]
+		},
+		"ball_dropper": {
+			"lookup_name": "ball_dropper",
+			"scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
+			"class_name": "BallDropper",
+			"name": "Ball Dropper",
+			"description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
+			"qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
+			"signals": [
+				"ball_spawned",
+				"ball_destroyed"
+			],
+			"interactions": [
+				"Automatic dropping - configure via parameters"
+			],
+			"parameters": {
+				"drop_interval": "Seconds between drops (default 3.0)",
+				"auto_drop": "Enable automatic dropping (default true)",
+				"max_balls": "Maximum balls alive at once (default 5)",
+				"ball_radius": "Size of balls (default 0.1)",
+				"ball_mass": "Mass for physics (default 0.5)",
+				"ball_bounce": "Bounciness (default 0.7)",
+				"spawn_spread": "Random XZ spread (default 0.3)",
+				"initial_velocity": "Starting velocity Vector3"
+			},
+			"dev_themes": [
+				"vectors",
+				"physics",
+				"spawning"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"balls",
+				"physics",
+				"spawner",
+				"dropper",
+				"colorful",
+				"standalone"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"sentry_turret": {
+			"lookup_name": "sentry_turret",
+			"scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+			"class_name": "SentryTurret",
+			"name": "Sentry Turret",
+			"description": "Half-Life style sentry turret. Targets balls and/or player. Simple reliable targeting with bullet physics. Emits signals for hits.",
+			"qfep_connection": "The turret as autonomous agent - continuously computing vectors to track and engage targets.",
+			"signals": [
+				"target_acquired",
+				"target_lost",
+				"fired",
+				"hit_target"
+			],
+			"interactions": [
+				"Automatic - targets balls and player"
+			],
+			"parameters": {
+				"rotation_speed": "Turret rotation speed (default 5.0)",
+				"detection_range": "Maximum targeting range (default 15.0)",
+				"fire_rate": "Shots per second (default 5.0)",
+				"bullet_speed": "Bullet velocity (default 20.0)",
+				"target_player": "Target the player/camera (default true)",
+				"target_balls": "Target balls from droppers (default true)"
+			},
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"targeting"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"turret",
+				"sentry",
+				"targeting",
+				"bullets",
+				"halflife",
+				"player",
+				"balls"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"sequence": "forces"
+		},
+		"turret_boll_infoboard": {
+			"lookup_name": "turret_boll_infoboard",
+			"scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+			"class_name": "TurretBollInfoBoard",
+			"name": "Turret-Boll Vector Diagram",
+			"description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
+			"qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
+			"signals": [],
+			"interactions": [
+				"Static display - no interaction"
+			],
+			"parameters": {},
+			"dev_themes": [
+				"vectors",
+				"infoboard",
+				"reference"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": [
+				"vectors",
+				"infoboard",
+				"2d_in_3d",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"projection",
+				"turret",
+				"reference",
+				"diagram"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"sequence": "forces"
+		},
+		"vector_joint_playground": {
+			"lookup_name": "vector_joint_playground",
+			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+			"class_name": "VectorJointPlayground",
+			"name": "Vector-Joint Playground",
+			"description": "Human-scale VR playground with 6 interactive stations. Each station pairs draggable vectors with a large physics joint mechanism: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces). Drag a vector, watch the machine respond.",
+			"qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+			"signals": [],
+			"interactions": [
+				"grab vector endpoints to manipulate",
+				"observe mechanism responses",
+				"read live math on info panels"
+			],
+			"parameters": {
+				"footprint": [
+					18,
+					2,
+					18
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"vectors",
+				"joints",
+				"physics",
+				"interactive"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"joints",
+				"playground",
+				"magnitude",
+				"addition",
+				"dot_product",
+				"subtraction",
+				"cross_product",
+				"forces",
+				"interactive",
+				"vr",
+				"human_scale"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vector_field_visualizer": {
+			"lookup_name": "vector_field_visualizer",
+			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
+			"class_name": "VectorFieldVisualizer",
+			"name": "Vector Field Visualizer",
+			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
+			"dev_themes": [
+				"vectors",
+				"fields",
+				"visualization"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"vector_field",
+				"flow",
+				"vortex",
+				"dipole",
+				"source",
+				"sink",
+				"arrows",
+				"3d",
+				"magnitude",
+				"direction"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			]
+		},
+		"coordinate_system_switcher": {
+			"lookup_name": "coordinate_system_switcher",
+			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+			"class_name": "CoordinateSystemSwitcher",
+			"name": "Coordinate System Switcher",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
+			"dev_themes": [
+				"vectors",
+				"coordinate_systems",
+				"visualization"
+			],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"coordinates",
+				"cartesian",
+				"cylindrical",
+				"spherical",
+				"polar",
+				"conversion",
+				"3d",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			]
+		},
+		"coordinates": {
+			"lookup_name": "coordinates",
+			"name": "coordinates",
+			"description": "coordinates",
+			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				5,
+				5,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"ForceMagnitudeDemo": {
+			"lookup_name": "ForceMagnitudeDemo",
+			"name": "ForceMagnitudeDemo",
+			"description": "ForceMagnitudeDemo",
+			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"CoordinateSystem3M": {
+			"lookup_name": "CoordinateSystem3M",
+			"name": "CoordinateSystem3M",
+			"description": "CoordinateSystem3M",
+			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vectorpoint": {
+			"lookup_name": "vectorpoint",
+			"name": "VectorPoint",
+			"description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorBasics": {
+			"lookup_name": "VectorBasics",
+			"name": "VectorBasics",
+			"description": "VectorBasics",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorAddition": {
+			"lookup_name": "VectorAddition",
+			"name": "VectorAddition",
+			"description": "VectorAddition",
+			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorDotProduct": {
+			"lookup_name": "VectorDotProduct",
+			"name": "VectorDotProduct",
+			"description": "VectorDotProduct",
+			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorSubtraction": {
+			"lookup_name": "VectorSubtraction",
+			"name": "VectorSubtraction",
+			"description": "VectorSubtraction",
+			"scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorForces": {
+			"lookup_name": "VectorForces",
+			"name": "VectorForces",
+			"description": "VectorForces",
+			"scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				20,
+				1,
+				20
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					20,
+					1,
+					20
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"VectorCrossProduct": {
+			"lookup_name": "VectorCrossProduct",
+			"name": "VectorCrossProduct",
+			"description": "VectorCrossProduct",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorProjectionReflection": {
+			"lookup_name": "VectorProjectionReflection",
+			"name": "VectorProjectionReflection",
+			"description": "VectorProjectionReflection",
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorMotion": {
+			"lookup_name": "VectorMotion",
+			"name": "VectorMotion",
+			"description": "VectorMotion",
+			"scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				4,
+				4,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"VectorTorque": {
+			"lookup_name": "VectorTorque",
+			"name": "VectorTorque",
+			"description": "VectorTorque",
+			"scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorFieldFlow": {
+			"lookup_name": "VectorFieldFlow",
+			"name": "VectorFieldFlow",
+			"description": "VectorFieldFlow",
+			"scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"noise"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VectorWorkbench": {
+			"lookup_name": "VectorWorkbench",
+			"name": "Vector Workbench",
+			"description": "Universal vector sandbox - two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live",
+			"scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+			"category": "vectors",
+			"complexity": "intermediate",
+			"tags": [
+				"vectors",
+				"addition",
+				"subtraction",
+				"dot_product",
+				"cross_product",
+				"projection",
+				"sandbox"
+			],
+			"sequence": "vectors",
+			"qfep_connection": "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				4,
+				2,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"vectorline": {
+			"lookup_name": "vectorline",
+			"name": "vectorline",
+			"description": "Interactive vector line with arrowhead",
+			"scene": "res://algorithms/vectors/vectorline/vectorline.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vector_drone": {
+			"lookup_name": "vector_drone",
+			"name": "vector_drone",
+			"description": "vector_drone",
+			"scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_1_bouncing_ball_with_no_vectors_vr": {
+			"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
+			"name": "Bouncing Ball with No Vectors VR",
+			"description": "Bouncing ball demonstration without vector math",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_2_bouncing_ball_with_vectors_vr": {
+			"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
+			"name": "Bouncing Ball with Vectors VR",
+			"description": "Bouncing ball demonstration using vector math",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_2_bouncing_ball_with_vectors_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_3_vector_subtraction_vr": {
+			"lookup_name": "example_1_3_vector_subtraction_vr",
+			"name": "Vector Subtraction VR",
+			"description": "Vector subtraction demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_4_vector_multiplication_vr": {
+			"lookup_name": "example_1_4_vector_multiplication_vr",
+			"name": "Vector Multiplication VR",
+			"description": "Vector multiplication demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_5_vector_magnitude_vr": {
+			"lookup_name": "example_1_5_vector_magnitude_vr",
+			"name": "Vector Magnitude VR",
+			"description": "Vector magnitude calculation demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_6_vector_normalize_vr": {
+			"lookup_name": "example_1_6_vector_normalize_vr",
+			"name": "Vector Normalize VR",
+			"description": "Vector normalization demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_7_motion_101_velocity_vr": {
+			"lookup_name": "example_1_7_motion_101_velocity_vr",
+			"name": "Motion 101 Velocity VR",
+			"description": "Basic velocity motion demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
+			"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+			"name": "Motion 101 Velocity and Constant Acceleration VR",
+			"description": "Velocity and constant acceleration demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
+			"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+			"name": "Motion 101 Velocity and Random Acceleration VR",
+			"description": "Velocity and random acceleration demonstration",
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
+			"lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+			"name": "Exercise 1.3 Solution 3D Bouncing Ball VR",
+			"description": "3D bouncing ball exercise solution",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
+			"lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+			"name": "Exercise 1.5 Solution Accelerate and Decelerate VR",
+			"description": "Acceleration and deceleration exercise solution",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"exercise_1_8_solution_attraction_magnitude_vr": {
+			"lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
+			"name": "Exercise 1.8 Solution Attraction Magnitude VR",
+			"description": "Attraction magnitude exercise solution",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"footprint": [
+				5,
+				5,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"VectorThrowing": {
+			"lookup_name": "VectorThrowing",
+			"name": "VectorThrowing",
+			"description": "VectorThrowing",
+			"scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				4,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"throw_ball": {
+			"lookup_name": "throw_ball",
+			"name": "throw_ball",
+			"description": "throw_ball.",
+			"scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"sphere_splitting_showcase": {
+			"lookup_name": "sphere_splitting_showcase",
+			"name": "sphere_splitting_showcase",
+			"description": "sphere_splitting_showcase.",
+			"scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				18,
+				18,
+				18
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					18,
+					18,
+					18
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"destructibles_test_scene": {
+			"lookup_name": "destructibles_test_scene",
+			"name": "destructibles_test_scene",
+			"description": "destructibles_test_scene",
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				20,
+				20,
+				20
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					20,
+					20,
+					20
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"destructible_marching_cube": {
+			"lookup_name": "destructible_marching_cube",
+			"name": "destructible_marching_cube",
+			"description": "destructible_marching_cube",
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube_test.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"gravity_gun_test_scene": {
+			"lookup_name": "gravity_gun_test_scene",
+			"name": "gravity_gun_test_scene",
+			"description": "gravity_gun_test_scene",
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				5,
+				1,
+				2
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					1,
+					2
+				],
+				"size_group": "environment"
+			}
+		}
+	},
+	"sequence_mapping": {
+		"vector_fundamentals": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo"
+		],
+		"vector_products": [
+			"dot_product_projector",
+			"cross_product_demo",
+			"vector_projection_demo"
+		],
+		"vector_applications": [
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"basis_vectors_rig",
+			"vector_joint_playground",
+			"vector_field_visualizer"
+		],
+		"all_vectors": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo",
+			"dot_product_projector",
+			"cross_product_demo",
+			"vector_projection_demo",
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"basis_vectors_rig",
+			"vector_joint_playground",
+			"vector_field_visualizer",
+			"coordinate_system_switcher"
+		]
+	},
+	"theoretical_connections": {
+		"basic_operations": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo"
+		],
+		"product_operations": [
+			"dot_product_projector",
+			"cross_product_demo"
+		],
+		"applied_examples": [
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"vector_field_visualizer"
+		],
+		"coordinate_systems": [
+			"basis_vectors_rig",
+			"vector_translation_demo",
+			"coordinate_system_switcher"
+		]
+	}
 }

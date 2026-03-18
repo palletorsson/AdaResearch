@@ -1,86 +1,94 @@
 {
-  "registry_info": {
-    "name": "speech",
-    "description": "Speech and phoneme artifacts — vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
-    "category": "speech",
-    "theoretical_grounding": "Phonetics, formant theory, vowel space geometry, sound synthesis, speech perception"
-  },
-  "artifacts": {
-    "singing_board": {
-      "lookup_name": "singing_board",
-      "scene": "res://algorithms/speech/phoneme_cloud/singing_board.tscn",
-      "name": "Singing Board",
-      "description": "Interactive singing surface — touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
-      "category": "speech",
-      "complexity": "beginner",
-      "tags": [
-        "singing",
-        "instrument",
-        "spatial",
-        "sound",
-        "interaction",
-        "speech"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vowel_instrument": {
-      "lookup_name": "vowel_instrument",
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_instrument.tscn",
-      "name": "Vowel Instrument",
-      "description": "Vowel space as musical instrument — navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
-      "category": "speech",
-      "complexity": "intermediate",
-      "tags": [
-        "vowel",
-        "formant",
-        "instrument",
-        "phoneme",
-        "synthesis",
-        "speech"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vowel_synth": {
-      "lookup_name": "vowel_synth",
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_synth.tscn",
-      "name": "Vowel Synthesizer",
-      "description": "Real-time vowel synthesis from formant parameters — adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
-      "category": "speech",
-      "complexity": "intermediate",
-      "tags": [
-        "vowel",
-        "synthesizer",
-        "formant",
-        "f1",
-        "f2",
-        "speech",
-        "synthesis"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "vowel_sound_board": {
-      "lookup_name": "vowel_sound_board",
-      "name": "vowel_sound_board",
-      "description": "vowel_sound_board",
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "wavefunctions"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    }
-  }
+	"registry_info": {
+		"name": "speech",
+		"description": "Speech and phoneme artifacts — vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
+		"category": "speech",
+		"theoretical_grounding": "Phonetics, formant theory, vowel space geometry, sound synthesis, speech perception"
+	},
+	"artifacts": {
+		"singing_board": {
+			"lookup_name": "singing_board",
+			"scene": "res://algorithms/speech/phoneme_cloud/singing_board.tscn",
+			"name": "Singing Board",
+			"description": "Interactive singing surface — touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
+			"category": "speech",
+			"complexity": "beginner",
+			"tags": [
+				"singing",
+				"instrument",
+				"spatial",
+				"sound",
+				"interaction",
+				"speech"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vowel_instrument": {
+			"lookup_name": "vowel_instrument",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_instrument.tscn",
+			"name": "Vowel Instrument",
+			"description": "Vowel space as musical instrument — navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
+			"category": "speech",
+			"complexity": "intermediate",
+			"tags": [
+				"vowel",
+				"formant",
+				"instrument",
+				"phoneme",
+				"synthesis",
+				"speech"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vowel_synth": {
+			"lookup_name": "vowel_synth",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_synth.tscn",
+			"name": "Vowel Synthesizer",
+			"description": "Real-time vowel synthesis from formant parameters — adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
+			"category": "speech",
+			"complexity": "intermediate",
+			"tags": [
+				"vowel",
+				"synthesizer",
+				"formant",
+				"f1",
+				"f2",
+				"speech",
+				"synthesis"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"vowel_sound_board": {
+			"lookup_name": "vowel_sound_board",
+			"name": "vowel_sound_board",
+			"description": "vowel_sound_board",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		}
+	}
 }

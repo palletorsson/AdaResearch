@@ -341,7 +341,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					1
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"two_leg_critter": {
 			"name": "Two Leg Critter",
@@ -360,7 +368,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"three_leg_critter": {
 			"name": "Three Leg Critter",
@@ -379,7 +395,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"four_leg_critter": {
 			"name": "Four Leg Critter",
@@ -398,7 +422,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"five_leg_critter": {
 			"name": "Five Leg Critter",
@@ -417,7 +449,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"six_leg_critter": {
 			"name": "Six Leg Critter",
@@ -436,7 +476,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"octapod_ik": {
 			"name": "Octapod IK",
@@ -455,7 +503,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"blockbuilderentity": {
 			"name": "Block Builder Entity",
@@ -472,7 +528,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"techstrider": {
 			"name": "Tech Strider",
@@ -490,7 +554,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"tentacle_cube": {
 			"name": "Tentacle Cube",
@@ -526,7 +598,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"hazards"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"edible_mushroom": {
 			"name": "Edible Mushroom",

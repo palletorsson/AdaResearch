@@ -1,3053 +1,4277 @@
 {
-  "registry_info": {
-    "name": "commons_artifacts",
-    "description": "Standalone museum-style artifacts living in commons/artifacts/ — interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
-    "category": "artifacts"
-  },
-  "artifacts": {
-    "additive_wave_demo": {
-      "lookup_name": "additive_wave_demo",
-      "name": "Additive Wave Demo",
-      "description": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
-      "scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
-      "category": "waves",
-      "complexity": "intermediate",
-      "tags": [
-        "waves",
-        "fourier",
-        "additive_synthesis",
-        "sine",
-        "frequency"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "testmaps",
-        "wavefunctions"
-      ]
-    },
-    "barnsley_fern": {
-      "lookup_name": "barnsley_fern",
-      "name": "Barnsley Fern",
-      "description": "Classic Barnsley fern rendered via iterated function system — four affine transforms with weighted probabilities produce the iconic fractal fern shape as a point cloud on a floor display. Density-based coloring reveals the self-similar structure.",
-      "scene": "res://commons/artifacts/barnsley_fern/barnsley_fern.tscn",
-      "category": "procedural",
-      "complexity": "beginner",
-      "tags": [
-        "barnsley",
-        "fern",
-        "fractal",
-        "ifs",
-        "iterated_function_system",
-        "point_cloud"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "fractals",
-      "map_sequences": [
-        "fractals"
-      ]
-    },
-    "bias_visualizer": {
-      "lookup_name": "bias_visualizer",
-      "name": "Bias Visualizer",
-      "description": "Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
-      "scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
-      "category": "emergence",
-      "complexity": "intermediate",
-      "tags": [
-        "bias",
-        "statistics",
-        "critical_theory",
-        "visualization",
-        "fairness"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "postfoundationscrisis",
-      "map_sequences": [
-        "postfoundationscrisis"
-      ]
-    },
-    "ca_rule_explorer": {
-      "lookup_name": "ca_rule_explorer",
-      "name": "Cellular Automata Rule Explorer",
-      "description": "Browse and experiment with different cellular automata rule sets in real-time. Dial through Wolfram's elementary rules or configure custom neighborhood and transition tables to discover the full spectrum from dead stillness to chaotic noise, with complexity emerging at the edge.",
-      "scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
-      "category": "emergence",
-      "complexity": "intermediate",
-      "tags": [
-        "cellular_automata",
-        "rules",
-        "wolfram",
-        "exploration",
-        "edge_of_chaos"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "cellularautomata",
-      "map_sequences": [
-        "cellularautomata"
-      ]
-    },
-    "control_pendulum": {
-      "lookup_name": "control_pendulum",
-      "name": "Control Pendulum",
-      "description": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
-      "scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn",
-      "category": "waves",
-      "complexity": "intermediate",
-      "tags": [
-        "pendulum",
-        "control",
-        "damping",
-        "chaos",
-        "nonlinear_dynamics"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "coupled_pendulums": {
-      "lookup_name": "coupled_pendulums",
-      "name": "Coupled Pendulums",
-      "description": "Two or more pendulums connected by springs or shared supports, demonstrating energy transfer, normal modes, and synchronization. Watch energy slosh back and forth between pendulums — the physical basis of beat frequencies and resonance coupling.",
-      "scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
-      "category": "waves",
-      "complexity": "intermediate",
-      "tags": [
-        "pendulum",
-        "coupled",
-        "synchronization",
-        "normal_modes",
-        "energy_transfer"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions",
-        "forces"
-      ]
-    },
-    "distribution_sampler": {
-      "lookup_name": "distribution_sampler",
-      "name": "Distribution Sampler",
-      "description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
-      "scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
-      "category": "emergence",
-      "complexity": "beginner",
-      "tags": [
-        "probability",
-        "distribution",
-        "sampling",
-        "histogram",
-        "statistics"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "randomness",
-      "map_sequences": [
-        "randomness"
-      ]
-    },
-    "dna_specimen": {
-      "lookup_name": "dna_specimen",
-      "name": "DNA Specimen",
-      "description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.",
-      "scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
-      "category": "waves",
-      "complexity": "beginner",
-      "tags": [
-        "dna",
-        "biology",
-        "helix",
-        "specimen",
-        "molecular"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "flow_field_painter": {
-      "lookup_name": "flow_field_painter",
-      "name": "Flow Field Painter",
-      "description": "Paint with vector fields — particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
-      "scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
-      "category": "procedural",
-      "complexity": "intermediate",
-      "tags": [
-        "flow_field",
-        "painting",
-        "particles",
-        "streamlines",
-        "interactive_art"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "noise",
-      "map_sequences": [
-        "testmaps"
-      ]
-    },
-    "force_field_visualizer": {
-      "lookup_name": "force_field_visualizer",
-      "name": "Force Field Visualizer",
-      "description": "Visualize gravitational, electric, and magnetic force fields in 3D using arrow glyphs and particle tracers. Place sources and sinks to sculpt the field landscape, then release test particles to see how forces guide motion through space.",
-      "scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "force_field",
-        "visualization",
-        "gravity",
-        "electric",
-        "magnetic",
-        "3d"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "forces",
-      "map_sequences": [
-        "forces"
-      ]
-    },
-    "game_of_life_petri": {
-      "lookup_name": "game_of_life_petri",
-      "name": "Game of Life Petri Dish",
-      "description": "Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
-      "scene": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
-      "category": "emergence",
-      "complexity": "beginner",
-      "tags": [
-        "game_of_life",
-        "cellular_automata",
-        "petri_dish",
-        "emergence",
-        "conway"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "cellularautomata",
-      "map_sequences": [
-        "cellularautomata"
-      ]
-    },
-    "glitch_body": {
-      "lookup_name": "glitch_body",
-      "name": "Glitch Body",
-      "description": "Mesh that refuses stable form — a procedural sphere-like shape rebuilt every frame with time-varying noise perturbation and HSV hue cycling. Vertices oscillate, stretch, and collapse; the mesh is always transforming, never settling. A body in continuous becoming, resisting fixed categorization.",
-      "scene": "res://commons/artifacts/glitch_body/glitch_body.tscn",
-      "category": "emergence",
-      "complexity": "intermediate",
-      "tags": [
-        "glitch",
-        "deformation",
-        "queer_theory",
-        "becoming",
-        "procedural",
-        "animated",
-        "speculative_computation"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "speculativecomputation",
-      "map_sequences": [
-        "speculativecomputation",
-        "criticalalgorithms"
-      ]
-    },
-    "harmonic_motion_demo": {
-      "lookup_name": "harmonic_motion_demo",
-      "name": "Harmonic Motion Demo",
-      "description": "Interactive simple harmonic motion demonstration — a mass oscillating on a spring with real-time graphs of position, velocity, and acceleration. Adjust spring constant and mass to see how frequency depends on physical parameters.",
-      "scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
-      "category": "waves",
-      "complexity": "beginner",
-      "tags": [
-        "harmonic_motion",
-        "spring",
-        "oscillation",
-        "shm",
-        "physics"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions",
-        "forces"
-      ]
-    },
-    "jelly_variants": {
-      "lookup_name": "jelly_variants",
-      "name": "Jelly Cube Variants",
-      "description": "A collection of soft body jelly cubes with different material properties — varying stiffness, damping, and viscosity. Poke, squeeze, and throw them to feel how parameters shape deformation behavior. A tactile physics playground.",
-      "scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
-      "category": "physics",
-      "complexity": "beginner",
-      "tags": [
-        "jelly",
-        "soft_body",
-        "variants",
-        "deformation",
-        "tactile"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "softbodies",
-      "map_sequences": [
-        "softbodies"
-      ]
-    },
-    "julia_set_explorer": {
-      "lookup_name": "julia_set_explorer",
-      "name": "Julia Set Explorer",
-      "description": "Navigate the infinite complexity of Julia sets — zoom into fractal boundaries where order and chaos interweave at every scale. Adjust the complex parameter c to morph between connected and disconnected Julia sets, watching the Mandelbrot set's DNA unfold.",
-      "scene": "res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn",
-      "category": "procedural",
-      "complexity": "intermediate",
-      "tags": [
-        "julia_set",
-        "fractal",
-        "complex_numbers",
-        "exploration",
-        "mandelbrot"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "fractals",
-      "map_sequences": [
-        "fractals"
-      ]
-    },
-    "lsystem_editor": {
-      "lookup_name": "lsystem_editor",
-      "name": "L-System Editor",
-      "description": "Edit L-system grammars in real-time and watch procedural plants, fractals, and branching structures grow from simple rewriting rules. Adjust axiom, production rules, angle, and iteration depth to explore the space of formal grammars made visible.",
-      "scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
-      "category": "procedural",
-      "complexity": "intermediate",
-      "tags": [
-        "lsystem",
-        "grammar",
-        "procedural",
-        "plants",
-        "fractals",
-        "editor"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "lsystems",
-      "map_sequences": [
-        "lsystems"
-      ]
-    },
-    "mario_cube": {
-      "lookup_name": "mario_cube",
-      "name": "Mario Cube",
-      "description": "An interactive surprise cube inspired by classic platformer mechanics — hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.",
-      "scene": "res://commons/artifacts/mario_cube/mario_cube.tscn",
-      "category": "primitives",
-      "complexity": "beginner",
-      "tags": [
-        "mario",
-        "cube",
-        "interactive",
-        "signal",
-        "game_design"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "primitives",
-      "map_sequences": [
-        "color"
-      ]
-    },
-    "monte_carlo_estimator": {
-      "lookup_name": "monte_carlo_estimator",
-      "name": "Monte Carlo Estimator",
-      "description": "Estimate mathematical quantities through random sampling — watch as dart throws approximate pi, random walks estimate integrals, and stochastic processes converge to deterministic values. The power of randomness as a computational tool.",
-      "scene": "res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.tscn",
-      "category": "emergence",
-      "complexity": "intermediate",
-      "tags": [
-        "monte_carlo",
-        "estimation",
-        "random_sampling",
-        "pi",
-        "stochastic"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "randomness",
-      "map_sequences": [
-        "randomness"
-      ]
-    },
-    "orbital_mechanics_demo": {
-      "lookup_name": "orbital_mechanics_demo",
-      "name": "Orbital Mechanics Demo",
-      "description": "Interactive orbital mechanics simulation — launch satellites, adjust velocity and angle, and watch Kepler's laws emerge from Newton's gravity. Explore circular, elliptical, parabolic, and hyperbolic orbits by tuning initial conditions.",
-      "scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "orbital_mechanics",
-        "kepler",
-        "gravity",
-        "satellite",
-        "trajectories"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "forces",
-      "map_sequences": [
-        "forces",
-        "physicssimulation"
-      ]
-    },
-    "oscilloscope_artifact": {
-      "lookup_name": "oscilloscope_artifact",
-      "name": "Oscilloscope",
-      "description": "A virtual oscilloscope displaying real-time waveforms — connect it to audio sources or mathematical functions to visualize signals in the time domain. Adjust timebase, amplitude, and trigger settings like its real-world counterpart.",
-      "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
-      "category": "waves",
-      "complexity": "intermediate",
-      "tags": [
-        "oscilloscope",
-        "waveform",
-        "signal",
-        "time_domain",
-        "measurement"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "perlin_terrain_sculptor": {
-      "lookup_name": "perlin_terrain_sculptor",
-      "name": "Perlin Terrain Sculptor",
-      "description": "Sculpt terrain using Perlin noise parameters — adjust octaves, persistence, lacunarity, and scale to shape landscapes from smooth rolling hills to jagged mountain ranges. Real-time terrain generation making noise mathematics tangible.",
-      "scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
-      "category": "procedural",
-      "complexity": "intermediate",
-      "tags": [
-        "perlin_noise",
-        "terrain",
-        "sculpting",
-        "procedural",
-        "landscape"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "noise",
-      "map_sequences": [
-        "noise"
-      ]
-    },
-    "petri_dish_worms": {
-      "lookup_name": "petri_dish_worms",
-      "name": "Petri Dish Worms",
-      "description": "Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
-      "scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
-      "category": "emergence",
-      "complexity": "intermediate",
-      "tags": [
-        "worms",
-        "petri_dish",
-        "steering",
-        "biological",
-        "procedural_animation"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "queer_morphology_specimen": {
-      "lookup_name": "queer_morphology_specimen",
-      "name": "Queer Morphology Specimen",
-      "description": "A procedural specimen that defies binary classification — its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework's challenge to normative boundaries in biological and computational classification.",
-      "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
-      "category": "emergence",
-      "complexity": "advanced",
-      "tags": [
-        "queer_theory",
-        "morphology",
-        "specimen",
-        "critical_theory",
-        "qfep",
-        "taxonomy"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "qfeplaboratory",
-      "map_sequences": [
-        "qfeplaboratory"
-      ]
-    },
-    "random_walk_terrarium": {
-      "lookup_name": "random_walk_terrarium",
-      "name": "Random Walk Terrarium",
-      "description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
-      "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
-      "category": "procedural",
-      "complexity": "intermediate",
-      "tags": [
-        "random_walk",
-        "terrarium",
-        "terrain",
-        "stochastic",
-        "emergence"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "randomness",
-      "map_sequences": [
-        "randomness",
-        "testmaps"
-      ]
-    },
-    "spring_demo": {
-      "lookup_name": "spring_demo",
-      "name": "Spring Demo",
-      "description": "A hands-on spring physics demonstration — stretch, compress, and release springs to feel Hooke's law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.",
-      "scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
-      "category": "physics",
-      "complexity": "beginner",
-      "tags": [
-        "spring",
-        "hookes_law",
-        "physics",
-        "oscillation",
-        "force"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "spring_network": {
-      "lookup_name": "spring_network",
-      "name": "Spring Network",
-      "description": "Mass-spring lattice — a 6x6 grid of masses connected by springs that deform and oscillate. Verlet integration for stability, strain-colored spring lines, and fixed corner anchors. Extends Hooke's law from single springs to 2D networks.",
-      "scene": "res://commons/artifacts/spring_network/spring_network.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "spring",
-        "mass_spring",
-        "lattice",
-        "verlet",
-        "hookes_law",
-        "network",
-        "forces",
-        "simulation"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "forces",
-      "map_sequences": [
-        "forces",
-        "physicssimulation"
-      ]
-    },
-    "transform_matrix_cube": {
-      "lookup_name": "transform_matrix_cube",
-      "name": "Transform Matrix Cube",
-      "description": "Interactive 3D cube with its transformation matrix displayed in real-time. Rotate, scale, and translate the cube while watching the 4x4 matrix update — making the abstract algebra of linear transformations concrete and visual.",
-      "scene": "res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.tscn",
-      "category": "primitives",
-      "complexity": "intermediate",
-      "tags": [
-        "transform",
-        "matrix",
-        "linear_algebra",
-        "rotation",
-        "scale",
-        "translation"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "transformation",
-      "map_sequences": [
-        "transformation"
-      ]
-    },
-    "turing_pattern_generator": {
-      "lookup_name": "turing_pattern_generator",
-      "name": "Turing Pattern Generator",
-      "description": "Generate reaction-diffusion Turing patterns in real-time — spots, stripes, and labyrinthine structures emerge from the interplay of activator and inhibitor chemicals diffusing at different rates. Alan Turing's morphogenesis made visible.",
-      "scene": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
-      "category": "emergence",
-      "complexity": "advanced",
-      "tags": [
-        "turing_patterns",
-        "reaction_diffusion",
-        "morphogenesis",
-        "spots",
-        "stripes"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "softbodies",
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "softbodies"
-      ]
-    },
-    "wave_interference_tank": {
-      "lookup_name": "wave_interference_tank",
-      "name": "Wave Interference Tank",
-      "description": "A ripple tank simulation showing wave interference patterns — place point sources and watch circular waves superpose, creating constructive and destructive interference. The physical demonstration that reveals the wave nature of light, sound, and quantum mechanics.",
-      "scene": "res://commons/artifacts/wave_interference_tank/wave_interference_tank.tscn",
-      "category": "waves",
-      "complexity": "intermediate",
-      "tags": [
-        "wave_interference",
-        "ripple_tank",
-        "superposition",
-        "constructive",
-        "destructive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "wave_equation_solver": {
-      "lookup_name": "wave_equation_solver",
-      "name": "Wave Equation Solver",
-      "description": "2D wave equation on a membrane — finite difference PDE solver simulating a struck drumhead. Gaussian pulse propagates and reflects off clamped boundaries with viscous damping. ImmediateMesh surface colored by displacement: blue positive, red negative, dark zero.",
-      "scene": "res://commons/artifacts/wave_equation_solver/wave_equation_solver.tscn",
-      "category": "waves",
-      "complexity": "advanced",
-      "tags": [
-        "wave_equation",
-        "pde",
-        "finite_difference",
-        "membrane",
-        "drum",
-        "vibration"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "sequence": "wavefunctions",
-      "map_sequences": [
-        "wavefunctions"
-      ]
-    },
-    "oscilloscope": {
-      "lookup_name": "oscilloscope",
-      "name": "Oscilloscope",
-      "description": "Multi-mode oscilloscope with VR sliders. Shows waveform, Lissajous patterns, and XY plots. Classic green phosphor CRT aesthetic. Controls: FREQ A/B, Amplitude, Phase, Time/Div.",
-      "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
-      "category": "wavefunctions",
-      "complexity": "intermediate",
-      "tags": [
-        "oscilloscope",
-        "waveform",
-        "lissajous",
-        "audio",
-        "visualization",
-        "interactive",
-        "slider"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused",
-        "wavefunctions"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "player_presence_indicator": {
-      "lookup_name": "player_presence_indicator",
-      "name": "player_presence_indicator",
-      "description": "player_presence_indicator.",
-      "scene": "res://commons/interfaces/player_presence_indicator.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "portal": {
-      "lookup_name": "portal",
-      "name": "Portal",
-      "description": "A vertical portal frame that teleports the player to a destination.",
-      "scene": "res://commons/scenes/mapobjects/portal.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        3,
-        4,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "cctv": {
-      "lookup_name": "cctv",
-      "name": "CCTV Monitor",
-      "description": "Security camera monitor. Use cctv:rotation:ytrans:scale to configure.",
-      "scene": "res://commons/monitor/cctv.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "text_display": {
-      "lookup_name": "text_display",
-      "name": "text_display",
-      "description": "text_display",
-      "scene": "res://commons/context/book/ada_notes.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "point_is": {
-      "lookup_name": "point_is",
-      "name": "point_is",
-      "description": "point_is.",
-      "scene": "res://commons/text/point_is.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "infokiosk": {
-      "lookup_name": "infokiosk",
-      "name": "infokiosk",
-      "description": "Freestanding kiosk combining a 2D-in-3D message console with a vertical status monitor for lab readouts.",
-      "scene": "res://commons/monitor/infokiosk.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "player_position_to_console": {
-      "lookup_name": "player_position_to_console",
-      "name": "player_position_to_console",
-      "description": "player_position_to_console.",
-      "scene": "res://commons/displays/player_position_to_console.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "line_interface": {
-      "lookup_name": "line_interface",
-      "name": "line_interface",
-      "description": "Interactive line tool packaged for interface use with grab spheres and dynamic length display.",
-      "scene": "res://commons/interface/line.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "ConnectedTriangles": {
-      "lookup_name": "ConnectedTriangles",
-      "name": "ConnectedTriangles",
-      "description": "ConnectedTriangles.",
-      "scene": "res://commons/scenes/experiments/ConnectedTriangles.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "interactable_demo": {
-      "lookup_name": "interactable_demo",
-      "name": "interactable_demo",
-      "description": "interactable_demo.",
-      "scene": "res://commons/interactables/interactable_demo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "wavefunctions"
-      ],
-      "footprint": [
-        2,
-        3,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "pickable_showcase": {
-      "lookup_name": "pickable_showcase",
-      "name": "pickable_showcase",
-      "description": "pickable_showcase.",
-      "scene": "res://commons/scenes/pickable_showcase.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        11,
-        9,
-        9
-      ],
-      "size_group": "world_scale"
-    },
-    "polyhedron_nets_cube": {
-      "lookup_name": "polyhedron_nets_cube",
-      "name": "polyhedron_nets_cube",
-      "description": "Cube net visualization with fold animation. Configurable via #fold_duration, #fold_delay, #auto_fold.",
-      "scene": "res://commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "primitives"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "durer_scene": {
-      "lookup_name": "durer_scene",
-      "name": "DÃ¼rer Melencolia Scene",
-      "description": "DÃ¼rer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
-      "scene": "res://commons/scenes/demos/durer/DurerScene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "primitives"
-      ],
-      "footprint": [
-        8,
-        9,
-        10
-      ],
-      "size_group": "environment"
-    },
-    "xyz_coordinates": {
-      "lookup_name": "xyz_coordinates",
-      "name": "XYZ coordinates",
-      "description": "Cartesian coordinate system, x y z godot",
-      "scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "value_mapper_example": {
-      "lookup_name": "value_mapper_example",
-      "name": "value_mapper_example",
-      "description": "Demonstrates 1D, 2D, and 3D value mappers driving sphere scale, position, color, and audio hooks.",
-      "scene": "res://commons/interfaces/value_mapper_example.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        5,
-        3,
-        4
-      ],
-      "size_group": "environment"
-    },
-    "settings_ui": {
-      "lookup_name": "settings_ui",
-      "name": "settings_ui",
-      "description": "settings_ui",
-      "scene": "res://commons/scenes/main_menu/objects/settings_ui.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "pop_music_demo": {
-      "lookup_name": "pop_music_demo",
-      "name": "Pop Music Demo",
-      "description": "Interactive generative pop music sequencer with dynamic chord progressions.",
-      "scene": "res://commons/scenes/demos/PopMusicDemo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "reset_cube": {
-      "lookup_name": "reset_cube",
-      "name": "Cube with shader",
-      "description": "Cartesian coordinate system, x y z godot",
-      "scene": "res://commons/scenes/mapobjects/reset_scene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "reset_area": {
-      "lookup_name": "reset_area",
-      "name": "Cube with shader",
-      "description": "Cartesian coordinate system, x y z godot",
-      "scene": "res://commons/scenes/reset_area.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "pick_up_cube": {
-      "lookup_name": "pick_up_cube",
-      "name": "Pick Up Cube",
-      "description": "Cartesian coordinate system, x y z godot",
-      "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial",
-        "color",
-        "softbodies",
-        "transformation",
-        "unused",
-        "wavefunctions"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "mario_cube_time_trace": {
-      "lookup_name": "mario_cube_time_trace",
-      "name": "Mario Cube Time Trace",
-      "description": "Pick-up cube with time-domain trace in +Z, like pendulum trail.",
-      "scene": "res://commons/scenes/mapobjects/mario_cube_time_trace.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "wavefunctions"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "pickup_gate": {
-      "lookup_name": "pickup_gate",
-      "name": "Pickup Gate",
-      "description": "A blocking gate that opens when a specified number of pickup cubes are collected. Use pickup_gate#pickups:5 or pickup_gate#count:3#color:blue",
-      "scene": "res://commons/portals/pickup_gate.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "agent_spawner": {
-      "lookup_name": "agent_spawner",
-      "name": "Cube Agent Spawner",
-      "description": "Spawns a walking cube-based agent character built from agent_data.json. Use agent_spawner#direction:1,0,0 to set walk direction.",
-      "scene": "res://commons/agent/agent_spawner.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "nail_color_controller": {
-      "lookup_name": "nail_color_controller",
-      "name": "nail_color_controller",
-      "description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
-      "scene": "res://commons/interfaces/nail_color_controller.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "color"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "hand_color_controller": {
-      "lookup_name": "hand_color_controller",
-      "name": "hand_color_controller",
-      "description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
-      "scene": "res://commons/interfaces/hand_color_controller.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "color"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "hand_model": {
-      "lookup_name": "hand_model",
-      "name": "hand_model",
-      "description": "hand_model.",
-      "scene": "res://commons/visualaid/hand_model/hand_model.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "color"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "disco_floor": {
-      "lookup_name": "disco_floor",
-      "name": "Disco Grid",
-      "description": "A shimmering grid that pulses with disco energy",
-      "scene": "res://commons/context/discofloor/discofloor.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "standalone_disco": {
-      "lookup_name": "standalone_disco",
-      "name": "Standalone Disco Floor",
-      "description": "Self-contained disco floor with white tiles and pattern control. Config: width:8, depth:8, tile_size:0.5, show_controls:true",
-      "scene": "res://commons/context/discofloor/standalone_disco_floor.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "monitorsystem": {
-      "lookup_name": "monitorsystem",
-      "name": "monitorsystem",
-      "description": "Builds four monitor kiosks with dedicated cameras and viewports for overhead, third-person, mirror, and side views.",
-      "scene": "res://commons/monitor/monitorsystem.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        11,
-        4,
-        8
-      ],
-      "size_group": "world_scale"
-    },
-    "random_space": {
-      "lookup_name": "random_space",
-      "name": "random_space",
-      "description": "A crystal that contains mathematical chaos algorithms",
-      "scene": "res://commons/context/walkgrids/random_space.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "randomness"
-      ],
-      "footprint": [
-        1,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "sine_wave_controller": {
-      "lookup_name": "sine_wave_controller",
-      "name": "sine_wave_controller",
-      "description": "Pair of value mappers that expose sine-wave frequency, amplitude, and phase and optionally drive the Mario slider rig.",
-      "scene": "res://commons/interfaces/sine_wave_controller.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        3,
-        3,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "AudioContr": {
-      "lookup_name": "AudioContr",
-      "name": "AudioContr",
-      "description": "UniversalVRAudioController",
-      "scene": "res://commons/audio/UniversalVRAudioController.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "wavefunctions"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "HandheldInfoBoard": {
-      "lookup_name": "HandheldInfoBoard",
-      "name": "HandheldInfoBoard",
-      "description": "HandheldInfoBoard",
-      "scene": "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "2d_in_3d_vectors_vis": {
-      "lookup_name": "2d_in_3d_vectors_vis",
-      "name": "2d_in_3d_vectors_vis",
-      "description": "2d_in_3d_vectors_vis",
-      "scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "2d_in_3d_point_vis": {
-      "lookup_name": "2d_in_3d_point_vis",
-      "name": "2d_in_3d_point_vis",
-      "description": "2d_in_3d_point_vis",
-      "scene": "res://commons/infoboards_3d/boards/Point/2d_in_3d_point_vis.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "VRBrush": {
-      "lookup_name": "VRBrush",
-      "name": "VRBrush",
-      "description": "VRBrush",
-      "scene": "res://tools/VRBrush.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "info_display": {
-      "lookup_name": "info_display",
-      "name": "info_display",
-      "description": "info Display",
-      "scene": "res://commons/scenes/mapobjects/infodisplay.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "voronoi_space": {
-      "lookup_name": "voronoi_space",
-      "name": "voronoi_space",
-      "description": "A crystal that contains territorial boundary algorithms",
-      "scene": "res://commons/context/walkgrids/voronoi_space.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "mondrian_2d": {
-      "lookup_name": "mondrian_2d",
-      "name": "Mondrian 2D Canvas",
-      "description": "A classic Mondrian composition rendered in 2D with geometric precision and De Stijl color palette",
-      "scene": "res://commons/context/mondrian2d/mondrian_2d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        7,
-        10
-      ],
-      "size_group": "environment"
-    },
-    "ball_painting_demo": {
-      "lookup_name": "ball_painting_demo",
-      "name": "ball_painting_demo",
-      "description": "ball_painting_demo",
-      "scene": "res://commons/context/drawingboard/ball_painting_demo_v2.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "color"
-      ],
-      "footprint": [
-        5,
-        5,
-        4
-      ],
-      "size_group": "environment"
-    },
-    "mondrian_3d_display": {
-      "lookup_name": "mondrian_3d_display",
-      "name": "Mondrian 3D Display",
-      "description": "3D representation of Mondrian compositions with depth and spatial presentation",
-      "scene": "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "grabable_mondrian": {
-      "lookup_name": "grabable_mondrian",
-      "name": "Grabable Mondrian",
-      "description": "Interactive Mondrian composition that can be picked up, manipulated, and examined in VR space",
-      "scene": "res://commons/context/mondrian2d/grabable_mondrian.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "tts_test": {
-      "lookup_name": "tts_test",
-      "name": "TTS Test",
-      "description": "Test scene for TTS",
-      "scene": "res://commons/grid/tts_test.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "agnes_grid": {
-      "lookup_name": "agnes_grid",
-      "name": "Agnes Grid",
-      "description": "Agnes grid system for spatial arrangement and interaction",
-      "scene": "res://commons/context/agnesnatringrid/agnes_grid_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "agnes_grid_2d": {
-      "lookup_name": "agnes_grid_2d",
-      "name": "Agnes Grid 2D",
-      "description": "2D version of Agnes grid system",
-      "scene": "res://commons/context/agnesnatringrid/agnes_grid.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "grabable_agnes": {
-      "lookup_name": "grabable_agnes",
-      "name": "Grabable Agnes",
-      "description": "Interactive grabable Agnes grid component",
-      "scene": "res://commons/context/agnesnatringrid/grabable_agnes.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "camera_context": {
-      "lookup_name": "camera_context",
-      "name": "Camera Context",
-      "description": "Camera system for viewing and perspective control",
-      "scene": "res://commons/context/camera/camera.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "clipboard": {
-      "lookup_name": "clipboard",
-      "name": "Clipboard",
-      "description": "Clipboard for copy-paste operations and data transfer",
-      "scene": "res://commons/context/clipboard/clipboard.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "clipboard_large": {
-      "lookup_name": "clipboard_large",
-      "name": "clipboard_large",
-      "description": "clipboard_large",
-      "scene": "res://commons/context/clipboard/clipboard_large.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "spit_text_3d": {
-      "lookup_name": "spit_text_3d",
-      "name": "spit_text_3d",
-      "description": "spit_text_3d",
-      "scene": "res://commons/visualaid/spittext/spit_text_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "player_position": {
-      "lookup_name": "player_position",
-      "name": "player_position",
-      "description": "player_position",
-      "scene": "res://commons/visualaid/playerposition/player_position.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "game_time_display": {
-      "lookup_name": "game_time_display",
-      "name": "game_time_display",
-      "description": "game_time_display",
-      "scene": "res://commons/visualaid/time/game_time_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "frame_counter_display": {
-      "lookup_name": "frame_counter_display",
-      "name": "frame_counter_display",
-      "description": "frame_counter_display",
-      "scene": "res://commons/visualaid/frame_counter/frame_counter_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "primitives",
-        "testmaps"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "speed_display": {
-      "lookup_name": "speed_display",
-      "name": "speed_display",
-      "description": "speed_display",
-      "scene": "res://commons/visualaid/speed/speed_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "frames_display": {
-      "lookup_name": "frames_display",
-      "name": "frames_display",
-      "description": "frames_displayy",
-      "scene": "res://commons/visualaid/frames/frames_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "memory_display": {
-      "lookup_name": "memory_display",
-      "name": "memory_display",
-      "description": "Display memory usage",
-      "scene": "res://commons/visualaid/memory/memory_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "draw_calls_display": {
-      "lookup_name": "draw_calls_display",
-      "name": "draw_calls_display",
-      "description": "Display draw calls",
-      "scene": "res://commons/visualaid/performance/draw_calls_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "health_display": {
-      "lookup_name": "health_display",
-      "name": "health_display",
-      "description": "Dealth_display",
-      "scene": "res://commons/visualaid/gameplay/health_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "hits_reset_display": {
-      "lookup_name": "hits_reset_display",
-      "name": "hits_reset_display",
-      "description": "hits_reset_display",
-      "scene": "res://commons/visualaid/gameplay/hits_reset_display.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "code": {
-      "lookup_name": "code",
-      "name": "code",
-      "description": "code",
-      "scene": "res://commons/displays/code.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "code_display": {
-      "lookup_name": "code_display",
-      "name": "Code Display",
-      "description": "Display system for showing code and text content",
-      "scene": "res://commons/context/clipboard/codeDisplay.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "primitives",
-        "unused"
-      ],
-      "footprint": [
-        1,
-        4,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "graphics_slideshow": {
-      "lookup_name": "graphics_slideshow",
-      "name": "Graphics Slideshow",
-      "description": "Non-interactive visualization display that cycles through frames every 5 seconds. Use #topic:vectors, forces, arrays, waves, randomness, or procedural",
-      "scene": "res://commons/infoboards_3d/graphics_slideshow.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "graphics_monitor": {
-      "lookup_name": "graphics_monitor",
-      "name": "Graphics Monitor",
-      "description": "3D monitor with frame displaying visualization graphics. Use #vectors, #forces, #arrays, #waves, #randomness, or #procedural",
-      "scene": "res://commons/infoboards_3d/graphics_monitor.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "graphics_slideshow_all": {
-      "lookup_name": "graphics_slideshow_all",
-      "name": "Graphics Slideshow All",
-      "description": "Navigate through all graphics boards - use keyboard (A/D or Left/Right arrows) to flip through topics",
-      "scene": "res://commons/infoboards_3d/graphics_slideshow_all.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "graphics_slideshow_2d": {
-      "lookup_name": "graphics_slideshow_2d",
-      "name": "Graphics Slideshow 2D",
-      "description": "2D fullscreen slideshow - navigate with A/D, Left/Right, or Space. Press ESC to close",
-      "scene": "res://commons/infoboards_3d/graphics_slideshow_2d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "crystal_ball": {
-      "lookup_name": "crystal_ball",
-      "name": "Crystal Ball",
-      "description": "Interactive crystal ball for mystical interactions and predictions",
-      "scene": "res://commons/context/cristalball/cristalball.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "devexamples",
-        "structure"
-      ],
-      "footprint": [
-        1,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "cube_create": {
-      "lookup_name": "cube_create",
-      "name": "Cube Creator",
-      "description": "Tool for creating and manipulating cubes in 3D space",
-      "scene": "res://commons/context/cubecreate/cubecreate.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "drawing_paper": {
-      "lookup_name": "drawing_paper",
-      "name": "Drawing Paper",
-      "description": "Paper surface for drawing and artistic creation",
-      "scene": "res://commons/context/drawingboard/drawing_paper.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        3,
-        3,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "drawing_pen": {
-      "lookup_name": "drawing_pen",
-      "name": "Drawing Pen",
-      "description": "Pen tool for drawing on surfaces",
-      "scene": "res://commons/context/drawingboard/pen.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "grid_eye": {
-      "lookup_name": "grid_eye",
-      "name": "Grid Eye",
-      "description": "Grid point visualization for spatial awareness",
-      "scene": "res://commons/context/grideye/the_grid_point.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        3,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "magnifying_glass": {
-      "lookup_name": "magnifying_glass",
-      "name": "Magnifying Glass",
-      "description": "Magnifying glass for detailed examination",
-      "scene": "res://commons/context/magnifyer/magnifying_glass.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "magnifying_glass_red": {
-      "lookup_name": "magnifying_glass_red",
-      "name": "Magnifying Glass Red",
-      "description": "Red variant of magnifying glass for specialized viewing",
-      "scene": "res://commons/context/magnifyer/magnifying_glass_red.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "magnifying_glass_tool": {
-      "lookup_name": "magnifying_glass_tool",
-      "name": "Magnifying Glass Tool",
-      "description": "Advanced magnifying glass tool with additional features",
-      "scene": "res://commons/context/magnifyer/magnifying_glass_tool.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "sequencer": {
-      "lookup_name": "sequencer",
-      "name": "Sequencer",
-      "description": "Music and audio sequencer for algorithmic composition",
-      "scene": "res://commons/context/sequencer/seqencer.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "helper_arm": {
-      "lookup_name": "helper_arm",
-      "name": "Helper Arm",
-      "description": "Mechanical helper arm for assistance and manipulation",
-      "scene": "res://commons/context/swing/helper_arm.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        3,
-        1,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "tesla_sparks": {
-      "lookup_name": "tesla_sparks",
-      "name": "Tesla Sparks",
-      "description": "Tesla coil spark effects for electrical visualization",
-      "scene": "res://commons/context/teslasparks/tesla_sparks.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "tesla_sphere": {
-      "lookup_name": "tesla_sphere",
-      "name": "Tesla Sphere",
-      "description": "Tesla sphere for electrical field interaction",
-      "scene": "res://commons/context/teslasparks/tesla_sphere.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "zelda_tilemap_2d": {
-      "lookup_name": "zelda_tilemap_2d",
-      "name": "Zelda Tilemap 2D",
-      "description": "2D Zelda-style tilemap for retro game aesthetics",
-      "scene": "res://commons/context/zeldatilemap/zelda_tilemap_2d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "zelda_tilemap": {
-      "lookup_name": "zelda_tilemap",
-      "name": "Zelda Tilemap",
-      "description": "Zelda-style tilemap system for game-like environments",
-      "scene": "res://commons/context/zeldatilemap/zelda_tilemap.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "zelda_tiles_3d": {
-      "lookup_name": "zelda_tiles_3d",
-      "name": "Zelda Tiles 3D",
-      "description": "3D Zelda-style tiles for dimensional game environments",
-      "scene": "res://commons/context/zeldatilemap/zelda_tiles_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "fractal_space": {
-      "lookup_name": "fractal_space",
-      "name": "fractal_space",
-      "description": "fractal_space",
-      "scene": "res://commons/context/walkgrids/fractal_space.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "sparse_array_demo": {
-      "lookup_name": "sparse_array_demo",
-      "name": "Sparse Array Demo",
-      "description": "Visualizes sparse vs dense 2D array storage. Toggle between full grid and sparse representation.",
-      "scene": "res://commons/artifacts/sparse_array_demo/sparse_array_demo.tscn",
-      "category": "arrays",
-      "complexity": "intermediate",
-      "tags": [
-        "array",
-        "sparse",
-        "dense",
-        "memory",
-        "optimization",
-        "grid"
-      ],
-      "sequence": "array_tutorial",
-      "qfep_connection": "Sparse arrays encode absence as information.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "circular_buffer": {
-      "lookup_name": "circular_buffer",
-      "name": "Circular Buffer",
-      "description": "Ring buffer visualization. Elements enter from one end and wrap around.",
-      "scene": "res://commons/artifacts/circular_buffer/circular_buffer.tscn",
-      "category": "arrays",
-      "complexity": "intermediate",
-      "tags": [
-        "array",
-        "circular",
-        "buffer",
-        "ring",
-        "modular"
-      ],
-      "sequence": "array_tutorial",
-      "qfep_connection": "Circular indexing turns linear arrays into loops.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "matrix_multiply_visual": {
-      "lookup_name": "matrix_multiply_visual",
-      "name": "Matrix Multiply Visual",
-      "description": "Physical row-times-column dot product. Two matrices float in space.",
-      "scene": "res://commons/artifacts/matrix_multiply_visual/matrix_multiply_visual.tscn",
-      "category": "arrays",
-      "complexity": "advanced",
-      "tags": [
-        "matrix",
-        "multiply",
-        "dot_product",
-        "linear_algebra"
-      ],
-      "sequence": "array_tutorial",
-      "qfep_connection": "Matrix multiplication composes transformations.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        3,
-        1,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "index_map_puzzle": {
-      "lookup_name": "index_map_puzzle",
-      "name": "Index Map Puzzle",
-      "description": "Puzzle where you remap array indices to achieve target patterns.",
-      "scene": "res://commons/artifacts/index_map_puzzle/index_map_puzzle.tscn",
-      "category": "arrays",
-      "complexity": "intermediate",
-      "tags": [
-        "array",
-        "index",
-        "remap",
-        "transpose",
-        "puzzle"
-      ],
-      "sequence": "array_tutorial",
-      "qfep_connection": "Index remapping is a discrete transformation.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "spring_chain": {
-      "lookup_name": "spring_chain",
-      "name": "Spring Chain",
-      "description": "Chain of masses connected by springs. Drag one end and watch the wave propagate.",
-      "scene": "res://commons/artifacts/spring_chain/spring_chain.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "spring",
-        "chain",
-        "wave",
-        "propagation",
-        "forces"
-      ],
-      "sequence": "forces",
-      "qfep_connection": "Spring chains are the discrete skeleton of wave equations.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        3,
-        1,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "drag_coefficient_wind_tunnel": {
-      "lookup_name": "drag_coefficient_wind_tunnel",
-      "name": "Drag Coefficient Wind Tunnel",
-      "description": "Virtual wind tunnel with swappable shapes. Particle streamlines show flow.",
-      "scene": "res://commons/artifacts/drag_coefficient_wind_tunnel/drag_coefficient_wind_tunnel.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "drag",
-        "wind_tunnel",
-        "aerodynamics",
-        "forces"
-      ],
-      "sequence": "forces",
-      "qfep_connection": "Drag is the environment pushing back.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        3,
-        1,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "impulse_collision_demo": {
-      "lookup_name": "impulse_collision_demo",
-      "name": "Impulse Collision Demo",
-      "description": "Two masses on a rail collide. Adjustable mass ratio and initial velocities.",
-      "scene": "res://commons/artifacts/impulse_collision_demo/impulse_collision_demo.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "impulse",
-        "collision",
-        "momentum",
-        "forces"
-      ],
-      "sequence": "forces",
-      "qfep_connection": "Collisions are instantaneous force.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        3,
-        1,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "centripetal_force_demo": {
-      "lookup_name": "centripetal_force_demo",
-      "name": "Centripetal Force Demo",
-      "description": "Ball on a string in circular motion. Cut the string to see tangential escape.",
-      "scene": "res://commons/artifacts/centripetal_force_demo/centripetal_force_demo.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "centripetal",
-        "circular",
-        "rotation",
-        "forces"
-      ],
-      "sequence": "forces",
-      "qfep_connection": "Circular motion requires constant redirection.",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "forces"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "surveillance_panopticon": {
-      "lookup_name": "surveillance_panopticon",
-      "name": "Surveillance Panopticon",
-      "description": "Foucault panopticon. Central tower with CCTV cones.",
-      "scene": "res://commons/artifacts/surveillance_panopticon/surveillance_panopticon.tscn",
-      "category": "critical",
-      "complexity": "advanced",
-      "tags": [
-        "surveillance",
-        "panopticon",
-        "foucault",
-        "critical"
-      ],
-      "sequence": "criticalalgorithms",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "criticalalgorithms"
-      ],
-      "interactions": [
-        "walk_through"
-      ],
-      "footprint": [
-        4,
-        3,
-        4
-      ],
-      "size_group": "room_scale"
-    },
-    "attention_economy_sim": {
-      "lookup_name": "attention_economy_sim",
-      "name": "Attention Economy Sim",
-      "description": "Multiple competing content streams fight for a single attention bar.",
-      "scene": "res://commons/artifacts/attention_economy_sim/attention_economy_sim.tscn",
-      "category": "critical",
-      "complexity": "advanced",
-      "tags": [
-        "attention",
-        "economy",
-        "engagement",
-        "critical"
-      ],
-      "sequence": "criticalalgorithms",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "criticalalgorithms"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "filter_bubble_demo": {
-      "lookup_name": "filter_bubble_demo",
-      "name": "Filter Bubble Demo",
-      "description": "Recommendation engine that narrows content over time.",
-      "scene": "res://commons/artifacts/filter_bubble_demo/filter_bubble_demo.tscn",
-      "category": "critical",
-      "complexity": "intermediate",
-      "tags": [
-        "filter_bubble",
-        "recommendation",
-        "critical"
-      ],
-      "sequence": "criticalalgorithms",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "criticalalgorithms"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "data_labor_counter": {
-      "lookup_name": "data_labor_counter",
-      "name": "Data Labor Counter",
-      "description": "Visualizes hidden human labor behind AI systems.",
-      "scene": "res://commons/artifacts/data_labor_counter/data_labor_counter.tscn",
-      "category": "critical",
-      "complexity": "advanced",
-      "tags": [
-        "labor",
-        "ghost_work",
-        "critical"
-      ],
-      "sequence": "criticalalgorithms",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "criticalalgorithms"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "big_o_race": {
-      "lookup_name": "big_o_race",
-      "name": "Big O Race",
-      "description": "Algorithms race visually on parallel tracks.",
-      "scene": "res://commons/artifacts/big_o_race/big_o_race.tscn",
-      "category": "algorithms",
-      "complexity": "intermediate",
-      "tags": [
-        "big_o",
-        "complexity",
-        "algorithm",
-        "race"
-      ],
-      "sequence": "resourcemanagement",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "resourcemanagement"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        4,
-        1,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "cache_hit_visualizer": {
-      "lookup_name": "cache_hit_visualizer",
-      "name": "Cache Hit Visualizer",
-      "description": "Memory hierarchy visualization: L1, L2, L3 cache and RAM.",
-      "scene": "res://commons/artifacts/cache_hit_visualizer/cache_hit_visualizer.tscn",
-      "category": "algorithms",
-      "complexity": "advanced",
-      "tags": [
-        "cache",
-        "memory",
-        "hierarchy",
-        "performance"
-      ],
-      "sequence": "resourcemanagement",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "resourcemanagement"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "garbage_collector_demo": {
-      "lookup_name": "garbage_collector_demo",
-      "name": "Garbage Collector Demo",
-      "description": "Mark-and-sweep garbage collection animated.",
-      "scene": "res://commons/artifacts/garbage_collector_demo/garbage_collector_demo.tscn",
-      "category": "algorithms",
-      "complexity": "advanced",
-      "tags": [
-        "garbage_collection",
-        "memory",
-        "mark_sweep"
-      ],
-      "sequence": "resourcemanagement",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "resourcemanagement"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "profiler_flame_graph": {
-      "lookup_name": "profiler_flame_graph",
-      "name": "Profiler Flame Graph",
-      "description": "Interactive flame graph of nested function calls.",
-      "scene": "res://commons/artifacts/profiler_flame_graph/profiler_flame_graph.tscn",
-      "category": "algorithms",
-      "complexity": "advanced",
-      "tags": [
-        "profiler",
-        "flame_graph",
-        "performance"
-      ],
-      "sequence": "resourcemanagement",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "resourcemanagement"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "non_binary_classifier": {
-      "lookup_name": "non_binary_classifier",
-      "name": "Non-Binary Classifier",
-      "description": "ML classifier that resists binary convergence.",
-      "scene": "res://commons/artifacts/non_binary_classifier/non_binary_classifier.tscn",
-      "category": "speculative",
-      "complexity": "advanced",
-      "tags": [
-        "classifier",
-        "non_binary",
-        "queer",
-        "speculative"
-      ],
-      "sequence": "speculativecomputation",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "speculativecomputation"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "fluid_taxonomy_tree": {
-      "lookup_name": "fluid_taxonomy_tree",
-      "name": "Fluid Taxonomy Tree",
-      "description": "A taxonomy that morphs. Categories branch, merge, dissolve.",
-      "scene": "res://commons/artifacts/fluid_taxonomy_tree/fluid_taxonomy_tree.tscn",
-      "category": "speculative",
-      "complexity": "advanced",
-      "tags": [
-        "taxonomy",
-        "fluid",
-        "deleuze",
-        "speculative"
-      ],
-      "sequence": "speculativecomputation",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "speculativecomputation"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        2,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "rhizome_navigator": {
-      "lookup_name": "rhizome_navigator",
-      "name": "Rhizome Navigator",
-      "description": "Deleuze and Guattari rhizome as navigable graph.",
-      "scene": "res://commons/artifacts/rhizome_navigator/rhizome_navigator.tscn",
-      "category": "speculative",
-      "complexity": "advanced",
-      "tags": [
-        "rhizome",
-        "deleuze",
-        "graph",
-        "speculative"
-      ],
-      "sequence": "speculativecomputation",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "speculativecomputation"
-      ],
-      "interactions": [
-        "walk_through"
-      ],
-      "footprint": [
-        3,
-        1,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "sol_lewitt_wall_drawing": {
-      "lookup_name": "sol_lewitt_wall_drawing",
-      "name": "Sol LeWitt Wall Drawing",
-      "description": "Procedural wall drawings from text instructions.",
-      "scene": "res://commons/artifacts/sol_lewitt_wall_drawing/sol_lewitt_wall_drawing.tscn",
-      "category": "art",
-      "complexity": "intermediate",
-      "tags": [
-        "sol_lewitt",
-        "wall_drawing",
-        "conceptual_art"
-      ],
-      "sequence": "artmathematics",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "bridget_riley_op_art": {
-      "lookup_name": "bridget_riley_op_art",
-      "name": "Bridget Riley Op Art",
-      "description": "Optical illusion pattern generator.",
-      "scene": "res://commons/artifacts/bridget_riley_op_art/bridget_riley_op_art.tscn",
-      "category": "art",
-      "complexity": "intermediate",
-      "tags": [
-        "riley",
-        "op_art",
-        "optical_illusion"
-      ],
-      "sequence": "artmathematics",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "vera_molnar_des_ordres": {
-      "lookup_name": "vera_molnar_des_ordres",
-      "name": "Vera Molnar Des-Ordres",
-      "description": "Grid of squares with controlled randomness. Disorder slider.",
-      "scene": "res://commons/artifacts/vera_molnar_des_ordres/vera_molnar_des_ordres.tscn",
-      "category": "art",
-      "complexity": "intermediate",
-      "tags": [
-        "molnar",
-        "generative_art",
-        "grid",
-        "randomness"
-      ],
-      "sequence": "artmathematics",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "agnes_martin_grid_painting": {
-      "lookup_name": "agnes_martin_grid_painting",
-      "name": "Agnes Martin Grid Painting",
-      "description": "Subtle grids with micro-imperfections.",
-      "scene": "res://commons/artifacts/agnes_martin_grid_painting/agnes_martin_grid_painting.tscn",
-      "category": "art",
-      "complexity": "beginner",
-      "tags": [
-        "agnes_martin",
-        "grid",
-        "minimalism"
-      ],
-      "sequence": "artmathematics",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        2,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "kitbash_station": {
-      "lookup_name": "kitbash_station",
-      "name": "Kitbash Station",
-      "description": "Combine random artifact fragments into new forms.",
-      "scene": "res://commons/artifacts/kitbash_station/kitbash_station.tscn",
-      "category": "design",
-      "complexity": "beginner",
-      "tags": [
-        "kitbash",
-        "bricolage",
-        "assembly"
-      ],
-      "sequence": "bricolage",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bricolage"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        3,
-        1,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "constraint_sculptor": {
-      "lookup_name": "constraint_sculptor",
-      "name": "Constraint Sculptor",
-      "description": "Sculpt within randomized constraints.",
-      "scene": "res://commons/artifacts/constraint_sculptor/constraint_sculptor.tscn",
-      "category": "design",
-      "complexity": "intermediate",
-      "tags": [
-        "constraint",
-        "sculpture",
-        "bricolage"
-      ],
-      "sequence": "bricolage",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bricolage"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "found_object_assembler": {
-      "lookup_name": "found_object_assembler",
-      "name": "Found Object Assembler",
-      "description": "Grab scene fragments from a junk pile and compose freely.",
-      "scene": "res://commons/artifacts/found_object_assembler/found_object_assembler.tscn",
-      "category": "design",
-      "complexity": "beginner",
-      "tags": [
-        "found_object",
-        "duchamp",
-        "bricolage"
-      ],
-      "sequence": "bricolage",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bricolage"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        3,
-        1,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "backpropagation_flow": {
-      "lookup_name": "backpropagation_flow",
-      "name": "Backpropagation Flow",
-      "description": "Gradient flowing backward through network layers.",
-      "scene": "res://commons/artifacts/backpropagation_flow/backpropagation_flow.tscn",
-      "category": "machinelearning",
-      "complexity": "advanced",
-      "tags": [
-        "backpropagation",
-        "gradient",
-        "machine_learning"
-      ],
-      "sequence": "machinelearning",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "machinelearning"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        3,
-        1,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "overfitting_demo": {
-      "lookup_name": "overfitting_demo",
-      "name": "Overfitting Demo",
-      "description": "Polynomial fitting with complexity slider.",
-      "scene": "res://commons/artifacts/overfitting_demo/overfitting_demo.tscn",
-      "category": "machinelearning",
-      "complexity": "intermediate",
-      "tags": [
-        "overfitting",
-        "bias_variance",
-        "machine_learning"
-      ],
-      "sequence": "machinelearning",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "machinelearning"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "latent_space_walk": {
-      "lookup_name": "latent_space_walk",
-      "name": "Latent Space Walk",
-      "description": "Walk through a VAE/GAN latent space.",
-      "scene": "res://commons/artifacts/latent_space_walk/latent_space_walk.tscn",
-      "category": "machinelearning",
-      "complexity": "advanced",
-      "tags": [
-        "latent_space",
-        "vae",
-        "gan",
-        "machine_learning"
-      ],
-      "sequence": "machinelearning",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "machinelearning"
-      ],
-      "interactions": [
-        "walk_through"
-      ],
-      "footprint": [
-        3,
-        1,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "hypercube_rotation": {
-      "lookup_name": "hypercube_rotation",
-      "name": "Hypercube Rotation",
-      "description": "4D tesseract projected to 3D with rotation controls.",
-      "scene": "res://commons/artifacts/hypercube_rotation/hypercube_rotation.tscn",
-      "category": "higher_dimensional",
-      "complexity": "advanced",
-      "tags": [
-        "hypercube",
-        "tesseract",
-        "4d",
-        "higher_dimensions"
-      ],
-      "sequence": "higher_dimensions",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "dimensional_analogy": {
-      "lookup_name": "dimensional_analogy",
-      "name": "Dimensional Analogy",
-      "description": "Step-by-step: point to line to square to cube to tesseract.",
-      "scene": "res://commons/artifacts/dimensional_analogy/dimensional_analogy.tscn",
-      "category": "higher_dimensional",
-      "complexity": "beginner",
-      "tags": [
-        "dimension",
-        "analogy",
-        "flatland",
-        "higher_dimensions"
-      ],
-      "sequence": "higher_dimensions",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        3,
-        1,
-        1
-      ],
-      "size_group": "room_scale"
-    },
-    "schlegel_diagram": {
-      "lookup_name": "schlegel_diagram",
-      "name": "Schlegel Diagram",
-      "description": "Transparent polytope projections.",
-      "scene": "res://commons/artifacts/schlegel_diagram/schlegel_diagram.tscn",
-      "category": "higher_dimensional",
-      "complexity": "advanced",
-      "tags": [
-        "schlegel",
-        "polytope",
-        "4d",
-        "higher_dimensions"
-      ],
-      "sequence": "higher_dimensions",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions"
-      ],
-      "interactions": [
-        "observe"
-      ],
-      "footprint": [
-        2,
-        1,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "pressure_soft_body": {
-      "lookup_name": "pressure_soft_body",
-      "name": "Pressure Soft Body",
-      "description": "Inflatable soft body with internal pressure control.",
-      "scene": "res://commons/artifacts/pressure_soft_body/pressure_soft_body.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "pressure",
-        "soft_body",
-        "inflatable"
-      ],
-      "sequence": "softbodies",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "softbodies"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "soft_body_slicer": {
-      "lookup_name": "soft_body_slicer",
-      "name": "Soft Body Slicer",
-      "description": "Cut soft bodies with a laser plane.",
-      "scene": "res://commons/artifacts/soft_body_slicer/soft_body_slicer.tscn",
-      "category": "physics",
-      "complexity": "advanced",
-      "tags": [
-        "soft_body",
-        "cutting",
-        "topology"
-      ],
-      "sequence": "softbodies",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "softbodies"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        2,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "viscous_fluid_blob": {
-      "lookup_name": "viscous_fluid_blob",
-      "name": "Viscous Fluid Blob",
-      "description": "High-viscosity non-Newtonian fluid demo.",
-      "scene": "res://commons/artifacts/viscous_fluid_blob/viscous_fluid_blob.tscn",
-      "category": "physics",
-      "complexity": "intermediate",
-      "tags": [
-        "viscous",
-        "non_newtonian",
-        "fluid",
-        "soft_body"
-      ],
-      "sequence": "softbodies",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "softbodies"
-      ],
-      "interactions": [
-        "grab"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    }
-  }
+	"registry_info": {
+		"name": "commons_artifacts",
+		"description": "Standalone museum-style artifacts living in commons/artifacts/ — interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
+		"category": "artifacts"
+	},
+	"artifacts": {
+		"additive_wave_demo": {
+			"lookup_name": "additive_wave_demo",
+			"name": "Additive Wave Demo",
+			"description": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
+			"scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"waves",
+				"fourier",
+				"additive_synthesis",
+				"sine",
+				"frequency"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"testmaps",
+				"wavefunctions"
+			],
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"barnsley_fern": {
+			"lookup_name": "barnsley_fern",
+			"name": "Barnsley Fern",
+			"description": "Classic Barnsley fern rendered via iterated function system — four affine transforms with weighted probabilities produce the iconic fractal fern shape as a point cloud on a floor display. Density-based coloring reveals the self-similar structure.",
+			"scene": "res://commons/artifacts/barnsley_fern/barnsley_fern.tscn",
+			"category": "procedural",
+			"complexity": "beginner",
+			"tags": [
+				"barnsley",
+				"fern",
+				"fractal",
+				"ifs",
+				"iterated_function_system",
+				"point_cloud"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "fractals",
+			"map_sequences": [
+				"fractals"
+			]
+		},
+		"bias_visualizer": {
+			"lookup_name": "bias_visualizer",
+			"name": "Bias Visualizer",
+			"description": "Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
+			"scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"bias",
+				"statistics",
+				"critical_theory",
+				"visualization",
+				"fairness"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "postfoundationscrisis",
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"ca_rule_explorer": {
+			"lookup_name": "ca_rule_explorer",
+			"name": "Cellular Automata Rule Explorer",
+			"description": "Browse and experiment with different cellular automata rule sets in real-time. Dial through Wolfram's elementary rules or configure custom neighborhood and transition tables to discover the full spectrum from dead stillness to chaotic noise, with complexity emerging at the edge.",
+			"scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"cellular_automata",
+				"rules",
+				"wolfram",
+				"exploration",
+				"edge_of_chaos"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "cellularautomata",
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"control_pendulum": {
+			"lookup_name": "control_pendulum",
+			"name": "Control Pendulum",
+			"description": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
+			"scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"control",
+				"damping",
+				"chaos",
+				"nonlinear_dynamics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"coupled_pendulums": {
+			"lookup_name": "coupled_pendulums",
+			"name": "Coupled Pendulums",
+			"description": "Two or more pendulums connected by springs or shared supports, demonstrating energy transfer, normal modes, and synchronization. Watch energy slosh back and forth between pendulums — the physical basis of beat frequencies and resonance coupling.",
+			"scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"coupled",
+				"synchronization",
+				"normal_modes",
+				"energy_transfer"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"distribution_sampler": {
+			"lookup_name": "distribution_sampler",
+			"name": "Distribution Sampler",
+			"description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
+			"scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+			"category": "emergence",
+			"complexity": "beginner",
+			"tags": [
+				"probability",
+				"distribution",
+				"sampling",
+				"histogram",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"dna_specimen": {
+			"lookup_name": "dna_specimen",
+			"name": "DNA Specimen",
+			"description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.",
+			"scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"dna",
+				"biology",
+				"helix",
+				"specimen",
+				"molecular"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"flow_field_painter": {
+			"lookup_name": "flow_field_painter",
+			"name": "Flow Field Painter",
+			"description": "Paint with vector fields — particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
+			"scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"flow_field",
+				"painting",
+				"particles",
+				"streamlines",
+				"interactive_art"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "noise",
+			"map_sequences": [
+				"testmaps"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"force_field_visualizer": {
+			"lookup_name": "force_field_visualizer",
+			"name": "Force Field Visualizer",
+			"description": "Visualize gravitational, electric, and magnetic force fields in 3D using arrow glyphs and particle tracers. Place sources and sinks to sculpt the field landscape, then release test particles to see how forces guide motion through space.",
+			"scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"force_field",
+				"visualization",
+				"gravity",
+				"electric",
+				"magnetic",
+				"3d"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"game_of_life_petri": {
+			"lookup_name": "game_of_life_petri",
+			"name": "Game of Life Petri Dish",
+			"description": "Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
+			"scene": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
+			"category": "emergence",
+			"complexity": "beginner",
+			"tags": [
+				"game_of_life",
+				"cellular_automata",
+				"petri_dish",
+				"emergence",
+				"conway"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "cellularautomata",
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"glitch_body": {
+			"lookup_name": "glitch_body",
+			"name": "Glitch Body",
+			"description": "Mesh that refuses stable form — a procedural sphere-like shape rebuilt every frame with time-varying noise perturbation and HSV hue cycling. Vertices oscillate, stretch, and collapse; the mesh is always transforming, never settling. A body in continuous becoming, resisting fixed categorization.",
+			"scene": "res://commons/artifacts/glitch_body/glitch_body.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"glitch",
+				"deformation",
+				"queer_theory",
+				"becoming",
+				"procedural",
+				"animated",
+				"speculative_computation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "speculativecomputation",
+			"map_sequences": [
+				"speculativecomputation",
+				"criticalalgorithms"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"harmonic_motion_demo": {
+			"lookup_name": "harmonic_motion_demo",
+			"name": "Harmonic Motion Demo",
+			"description": "Interactive simple harmonic motion demonstration — a mass oscillating on a spring with real-time graphs of position, velocity, and acceleration. Adjust spring constant and mass to see how frequency depends on physical parameters.",
+			"scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"harmonic_motion",
+				"spring",
+				"oscillation",
+				"shm",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions",
+				"forces"
+			],
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"jelly_variants": {
+			"lookup_name": "jelly_variants",
+			"name": "Jelly Cube Variants",
+			"description": "A collection of soft body jelly cubes with different material properties — varying stiffness, damping, and viscosity. Poke, squeeze, and throw them to feel how parameters shape deformation behavior. A tactile physics playground.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
+			"category": "physics",
+			"complexity": "beginner",
+			"tags": [
+				"jelly",
+				"soft_body",
+				"variants",
+				"deformation",
+				"tactile"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "softbodies",
+			"map_sequences": [
+				"softbodies"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"julia_set_explorer": {
+			"lookup_name": "julia_set_explorer",
+			"name": "Julia Set Explorer",
+			"description": "Navigate the infinite complexity of Julia sets — zoom into fractal boundaries where order and chaos interweave at every scale. Adjust the complex parameter c to morph between connected and disconnected Julia sets, watching the Mandelbrot set's DNA unfold.",
+			"scene": "res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"julia_set",
+				"fractal",
+				"complex_numbers",
+				"exploration",
+				"mandelbrot"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "fractals",
+			"map_sequences": [
+				"fractals"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"lsystem_editor": {
+			"lookup_name": "lsystem_editor",
+			"name": "L-System Editor",
+			"description": "Edit L-system grammars in real-time and watch procedural plants, fractals, and branching structures grow from simple rewriting rules. Adjust axiom, production rules, angle, and iteration depth to explore the space of formal grammars made visible.",
+			"scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"lsystem",
+				"grammar",
+				"procedural",
+				"plants",
+				"fractals",
+				"editor"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "lsystems",
+			"map_sequences": [
+				"lsystems"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"mario_cube": {
+			"lookup_name": "mario_cube",
+			"name": "Mario Cube",
+			"description": "An interactive surprise cube inspired by classic platformer mechanics — hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.",
+			"scene": "res://commons/artifacts/mario_cube/mario_cube.tscn",
+			"category": "primitives",
+			"complexity": "beginner",
+			"tags": [
+				"mario",
+				"cube",
+				"interactive",
+				"signal",
+				"game_design"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "primitives",
+			"map_sequences": [
+				"color"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"monte_carlo_estimator": {
+			"lookup_name": "monte_carlo_estimator",
+			"name": "Monte Carlo Estimator",
+			"description": "Estimate mathematical quantities through random sampling — watch as dart throws approximate pi, random walks estimate integrals, and stochastic processes converge to deterministic values. The power of randomness as a computational tool.",
+			"scene": "res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"monte_carlo",
+				"estimation",
+				"random_sampling",
+				"pi",
+				"stochastic"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"orbital_mechanics_demo": {
+			"lookup_name": "orbital_mechanics_demo",
+			"name": "Orbital Mechanics Demo",
+			"description": "Interactive orbital mechanics simulation — launch satellites, adjust velocity and angle, and watch Kepler's laws emerge from Newton's gravity. Explore circular, elliptical, parabolic, and hyperbolic orbits by tuning initial conditions.",
+			"scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"orbital_mechanics",
+				"kepler",
+				"gravity",
+				"satellite",
+				"trajectories"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"oscilloscope_artifact": {
+			"lookup_name": "oscilloscope_artifact",
+			"name": "Oscilloscope",
+			"description": "A virtual oscilloscope displaying real-time waveforms — connect it to audio sources or mathematical functions to visualize signals in the time domain. Adjust timebase, amplitude, and trigger settings like its real-world counterpart.",
+			"scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"oscilloscope",
+				"waveform",
+				"signal",
+				"time_domain",
+				"measurement"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"perlin_terrain_sculptor": {
+			"lookup_name": "perlin_terrain_sculptor",
+			"name": "Perlin Terrain Sculptor",
+			"description": "Sculpt terrain using Perlin noise parameters — adjust octaves, persistence, lacunarity, and scale to shape landscapes from smooth rolling hills to jagged mountain ranges. Real-time terrain generation making noise mathematics tangible.",
+			"scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"perlin_noise",
+				"terrain",
+				"sculpting",
+				"procedural",
+				"landscape"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "noise",
+			"map_sequences": [
+				"noise"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"petri_dish_worms": {
+			"lookup_name": "petri_dish_worms",
+			"name": "Petri Dish Worms",
+			"description": "Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
+			"scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
+			"category": "emergence",
+			"complexity": "intermediate",
+			"tags": [
+				"worms",
+				"petri_dish",
+				"steering",
+				"biological",
+				"procedural_animation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"queer_morphology_specimen": {
+			"lookup_name": "queer_morphology_specimen",
+			"name": "Queer Morphology Specimen",
+			"description": "A procedural specimen that defies binary classification — its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework's challenge to normative boundaries in biological and computational classification.",
+			"scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+			"category": "emergence",
+			"complexity": "advanced",
+			"tags": [
+				"queer_theory",
+				"morphology",
+				"specimen",
+				"critical_theory",
+				"qfep",
+				"taxonomy"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "qfeplaboratory",
+			"map_sequences": [
+				"qfeplaboratory"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"random_walk_terrarium": {
+			"lookup_name": "random_walk_terrarium",
+			"name": "Random Walk Terrarium",
+			"description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
+			"scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"tags": [
+				"random_walk",
+				"terrarium",
+				"terrain",
+				"stochastic",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness",
+				"testmaps"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					16,
+					16,
+					16
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"spring_demo": {
+			"lookup_name": "spring_demo",
+			"name": "Spring Demo",
+			"description": "A hands-on spring physics demonstration — stretch, compress, and release springs to feel Hooke's law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.",
+			"scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
+			"category": "physics",
+			"complexity": "beginner",
+			"tags": [
+				"spring",
+				"hookes_law",
+				"physics",
+				"oscillation",
+				"force"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"spring_network": {
+			"lookup_name": "spring_network",
+			"name": "Spring Network",
+			"description": "Mass-spring lattice — a 6x6 grid of masses connected by springs that deform and oscillate. Verlet integration for stability, strain-colored spring lines, and fixed corner anchors. Extends Hooke's law from single springs to 2D networks.",
+			"scene": "res://commons/artifacts/spring_network/spring_network.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"spring",
+				"mass_spring",
+				"lattice",
+				"verlet",
+				"hookes_law",
+				"network",
+				"forces",
+				"simulation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "forces",
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			]
+		},
+		"transform_matrix_cube": {
+			"lookup_name": "transform_matrix_cube",
+			"name": "Transform Matrix Cube",
+			"description": "Interactive 3D cube with its transformation matrix displayed in real-time. Rotate, scale, and translate the cube while watching the 4x4 matrix update — making the abstract algebra of linear transformations concrete and visual.",
+			"scene": "res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.tscn",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"tags": [
+				"transform",
+				"matrix",
+				"linear_algebra",
+				"rotation",
+				"scale",
+				"translation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "transformation",
+			"map_sequences": [
+				"transformation"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"turing_pattern_generator": {
+			"lookup_name": "turing_pattern_generator",
+			"name": "Turing Pattern Generator",
+			"description": "Generate reaction-diffusion Turing patterns in real-time — spots, stripes, and labyrinthine structures emerge from the interplay of activator and inhibitor chemicals diffusing at different rates. Alan Turing's morphogenesis made visible.",
+			"scene": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
+			"category": "emergence",
+			"complexity": "advanced",
+			"tags": [
+				"turing_patterns",
+				"reaction_diffusion",
+				"morphogenesis",
+				"spots",
+				"stripes"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "softbodies",
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"softbodies"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"wave_interference_tank": {
+			"lookup_name": "wave_interference_tank",
+			"name": "Wave Interference Tank",
+			"description": "A ripple tank simulation showing wave interference patterns — place point sources and watch circular waves superpose, creating constructive and destructive interference. The physical demonstration that reveals the wave nature of light, sound, and quantum mechanics.",
+			"scene": "res://commons/artifacts/wave_interference_tank/wave_interference_tank.tscn",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"wave_interference",
+				"ripple_tank",
+				"superposition",
+				"constructive",
+				"destructive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"wave_equation_solver": {
+			"lookup_name": "wave_equation_solver",
+			"name": "Wave Equation Solver",
+			"description": "2D wave equation on a membrane — finite difference PDE solver simulating a struck drumhead. Gaussian pulse propagates and reflects off clamped boundaries with viscous damping. ImmediateMesh surface colored by displacement: blue positive, red negative, dark zero.",
+			"scene": "res://commons/artifacts/wave_equation_solver/wave_equation_solver.tscn",
+			"category": "waves",
+			"complexity": "advanced",
+			"tags": [
+				"wave_equation",
+				"pde",
+				"finite_difference",
+				"membrane",
+				"drum",
+				"vibration"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "wavefunctions",
+			"map_sequences": [
+				"wavefunctions"
+			]
+		},
+		"oscilloscope": {
+			"lookup_name": "oscilloscope",
+			"name": "Oscilloscope",
+			"description": "Multi-mode oscilloscope with VR sliders. Shows waveform, Lissajous patterns, and XY plots. Classic green phosphor CRT aesthetic. Controls: FREQ A/B, Amplitude, Phase, Time/Div.",
+			"scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+			"category": "wavefunctions",
+			"complexity": "intermediate",
+			"tags": [
+				"oscilloscope",
+				"waveform",
+				"lissajous",
+				"audio",
+				"visualization",
+				"interactive",
+				"slider"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused",
+				"wavefunctions"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"player_presence_indicator": {
+			"lookup_name": "player_presence_indicator",
+			"name": "player_presence_indicator",
+			"description": "player_presence_indicator.",
+			"scene": "res://commons/interfaces/player_presence_indicator.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"portal": {
+			"lookup_name": "portal",
+			"name": "Portal",
+			"description": "A vertical portal frame that teleports the player to a destination.",
+			"scene": "res://commons/scenes/mapobjects/portal.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				3,
+				4,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					4,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"cctv": {
+			"lookup_name": "cctv",
+			"name": "CCTV Monitor",
+			"description": "Security camera monitor. Use cctv:rotation:ytrans:scale to configure.",
+			"scene": "res://commons/monitor/cctv.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"text_display": {
+			"lookup_name": "text_display",
+			"name": "text_display",
+			"description": "text_display",
+			"scene": "res://commons/context/book/ada_notes.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"point_is": {
+			"lookup_name": "point_is",
+			"name": "point_is",
+			"description": "point_is.",
+			"scene": "res://commons/text/point_is.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"infokiosk": {
+			"lookup_name": "infokiosk",
+			"name": "infokiosk",
+			"description": "Freestanding kiosk combining a 2D-in-3D message console with a vertical status monitor for lab readouts.",
+			"scene": "res://commons/monitor/infokiosk.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"player_position_to_console": {
+			"lookup_name": "player_position_to_console",
+			"name": "player_position_to_console",
+			"description": "player_position_to_console.",
+			"scene": "res://commons/displays/player_position_to_console.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"line_interface": {
+			"lookup_name": "line_interface",
+			"name": "line_interface",
+			"description": "Interactive line tool packaged for interface use with grab spheres and dynamic length display.",
+			"scene": "res://commons/interface/line.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"ConnectedTriangles": {
+			"lookup_name": "ConnectedTriangles",
+			"name": "ConnectedTriangles",
+			"description": "ConnectedTriangles.",
+			"scene": "res://commons/scenes/experiments/ConnectedTriangles.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"interactable_demo": {
+			"lookup_name": "interactable_demo",
+			"name": "interactable_demo",
+			"description": "interactable_demo.",
+			"scene": "res://commons/interactables/interactable_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"wavefunctions"
+			],
+			"footprint": [
+				2,
+				3,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"pickable_showcase": {
+			"lookup_name": "pickable_showcase",
+			"name": "pickable_showcase",
+			"description": "pickable_showcase.",
+			"scene": "res://commons/scenes/pickable_showcase.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				11,
+				9,
+				9
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					11,
+					9,
+					9
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"polyhedron_nets_cube": {
+			"lookup_name": "polyhedron_nets_cube",
+			"name": "polyhedron_nets_cube",
+			"description": "Cube net visualization with fold animation. Configurable via #fold_duration, #fold_delay, #auto_fold.",
+			"scene": "res://commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"durer_scene": {
+			"lookup_name": "durer_scene",
+			"name": "DÃ¼rer Melencolia Scene",
+			"description": "DÃ¼rer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
+			"scene": "res://commons/scenes/demos/durer/DurerScene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"footprint": [
+				8,
+				9,
+				10
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					8,
+					9,
+					10
+				],
+				"size_group": "environment"
+			}
+		},
+		"xyz_coordinates": {
+			"lookup_name": "xyz_coordinates",
+			"name": "XYZ coordinates",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"value_mapper_example": {
+			"lookup_name": "value_mapper_example",
+			"name": "value_mapper_example",
+			"description": "Demonstrates 1D, 2D, and 3D value mappers driving sphere scale, position, color, and audio hooks.",
+			"scene": "res://commons/interfaces/value_mapper_example.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				5,
+				3,
+				4
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					4
+				],
+				"size_group": "environment"
+			}
+		},
+		"settings_ui": {
+			"lookup_name": "settings_ui",
+			"name": "settings_ui",
+			"description": "settings_ui",
+			"scene": "res://commons/scenes/main_menu/objects/settings_ui.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"pop_music_demo": {
+			"lookup_name": "pop_music_demo",
+			"name": "Pop Music Demo",
+			"description": "Interactive generative pop music sequencer with dynamic chord progressions.",
+			"scene": "res://commons/scenes/demos/PopMusicDemo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"reset_cube": {
+			"lookup_name": "reset_cube",
+			"name": "Cube with shader",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/scenes/mapobjects/reset_scene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"reset_area": {
+			"lookup_name": "reset_area",
+			"name": "Cube with shader",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/scenes/reset_area.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"pick_up_cube": {
+			"lookup_name": "pick_up_cube",
+			"name": "Pick Up Cube",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial",
+				"color",
+				"softbodies",
+				"transformation",
+				"unused",
+				"wavefunctions"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"mario_cube_time_trace": {
+			"lookup_name": "mario_cube_time_trace",
+			"name": "Mario Cube Time Trace",
+			"description": "Pick-up cube with time-domain trace in +Z, like pendulum trail.",
+			"scene": "res://commons/scenes/mapobjects/mario_cube_time_trace.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"pickup_gate": {
+			"lookup_name": "pickup_gate",
+			"name": "Pickup Gate",
+			"description": "A blocking gate that opens when a specified number of pickup cubes are collected. Use pickup_gate#pickups:5 or pickup_gate#count:3#color:blue",
+			"scene": "res://commons/portals/pickup_gate.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"agent_spawner": {
+			"lookup_name": "agent_spawner",
+			"name": "Cube Agent Spawner",
+			"description": "Spawns a walking cube-based agent character built from agent_data.json. Use agent_spawner#direction:1,0,0 to set walk direction.",
+			"scene": "res://commons/agent/agent_spawner.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"nail_color_controller": {
+			"lookup_name": "nail_color_controller",
+			"name": "nail_color_controller",
+			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
+			"scene": "res://commons/interfaces/nail_color_controller.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"hand_color_controller": {
+			"lookup_name": "hand_color_controller",
+			"name": "hand_color_controller",
+			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
+			"scene": "res://commons/interfaces/hand_color_controller.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"hand_model": {
+			"lookup_name": "hand_model",
+			"name": "hand_model",
+			"description": "hand_model.",
+			"scene": "res://commons/visualaid/hand_model/hand_model.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"disco_floor": {
+			"lookup_name": "disco_floor",
+			"name": "Disco Grid",
+			"description": "A shimmering grid that pulses with disco energy",
+			"scene": "res://commons/context/discofloor/discofloor.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"standalone_disco": {
+			"lookup_name": "standalone_disco",
+			"name": "Standalone Disco Floor",
+			"description": "Self-contained disco floor with white tiles and pattern control. Config: width:8, depth:8, tile_size:0.5, show_controls:true",
+			"scene": "res://commons/context/discofloor/standalone_disco_floor.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"monitorsystem": {
+			"lookup_name": "monitorsystem",
+			"name": "monitorsystem",
+			"description": "Builds four monitor kiosks with dedicated cameras and viewports for overhead, third-person, mirror, and side views.",
+			"scene": "res://commons/monitor/monitorsystem.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				11,
+				4,
+				8
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					11,
+					4,
+					8
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"random_space": {
+			"lookup_name": "random_space",
+			"name": "random_space",
+			"description": "A crystal that contains mathematical chaos algorithms",
+			"scene": "res://commons/context/walkgrids/random_space.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"footprint": [
+				1,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"sine_wave_controller": {
+			"lookup_name": "sine_wave_controller",
+			"name": "sine_wave_controller",
+			"description": "Pair of value mappers that expose sine-wave frequency, amplitude, and phase and optionally drive the Mario slider rig.",
+			"scene": "res://commons/interfaces/sine_wave_controller.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"AudioContr": {
+			"lookup_name": "AudioContr",
+			"name": "AudioContr",
+			"description": "UniversalVRAudioController",
+			"scene": "res://commons/audio/UniversalVRAudioController.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"HandheldInfoBoard": {
+			"lookup_name": "HandheldInfoBoard",
+			"name": "HandheldInfoBoard",
+			"description": "HandheldInfoBoard",
+			"scene": "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"2d_in_3d_vectors_vis": {
+			"lookup_name": "2d_in_3d_vectors_vis",
+			"name": "2d_in_3d_vectors_vis",
+			"description": "2d_in_3d_vectors_vis",
+			"scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"2d_in_3d_point_vis": {
+			"lookup_name": "2d_in_3d_point_vis",
+			"name": "2d_in_3d_point_vis",
+			"description": "2d_in_3d_point_vis",
+			"scene": "res://commons/infoboards_3d/boards/Point/2d_in_3d_point_vis.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"VRBrush": {
+			"lookup_name": "VRBrush",
+			"name": "VRBrush",
+			"description": "VRBrush",
+			"scene": "res://tools/VRBrush.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"info_display": {
+			"lookup_name": "info_display",
+			"name": "info_display",
+			"description": "info Display",
+			"scene": "res://commons/scenes/mapobjects/infodisplay.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"voronoi_space": {
+			"lookup_name": "voronoi_space",
+			"name": "voronoi_space",
+			"description": "A crystal that contains territorial boundary algorithms",
+			"scene": "res://commons/context/walkgrids/voronoi_space.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"mondrian_2d": {
+			"lookup_name": "mondrian_2d",
+			"name": "Mondrian 2D Canvas",
+			"description": "A classic Mondrian composition rendered in 2D with geometric precision and De Stijl color palette",
+			"scene": "res://commons/context/mondrian2d/mondrian_2d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				7,
+				10
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					7,
+					10
+				],
+				"size_group": "environment"
+			}
+		},
+		"ball_painting_demo": {
+			"lookup_name": "ball_painting_demo",
+			"name": "ball_painting_demo",
+			"description": "ball_painting_demo",
+			"scene": "res://commons/context/drawingboard/ball_painting_demo_v2.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"footprint": [
+				5,
+				5,
+				4
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					4
+				],
+				"size_group": "environment"
+			}
+		},
+		"mondrian_3d_display": {
+			"lookup_name": "mondrian_3d_display",
+			"name": "Mondrian 3D Display",
+			"description": "3D representation of Mondrian compositions with depth and spatial presentation",
+			"scene": "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"grabable_mondrian": {
+			"lookup_name": "grabable_mondrian",
+			"name": "Grabable Mondrian",
+			"description": "Interactive Mondrian composition that can be picked up, manipulated, and examined in VR space",
+			"scene": "res://commons/context/mondrian2d/grabable_mondrian.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"tts_test": {
+			"lookup_name": "tts_test",
+			"name": "TTS Test",
+			"description": "Test scene for TTS",
+			"scene": "res://commons/grid/tts_test.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"agnes_grid": {
+			"lookup_name": "agnes_grid",
+			"name": "Agnes Grid",
+			"description": "Agnes grid system for spatial arrangement and interaction",
+			"scene": "res://commons/context/agnesnatringrid/agnes_grid_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"agnes_grid_2d": {
+			"lookup_name": "agnes_grid_2d",
+			"name": "Agnes Grid 2D",
+			"description": "2D version of Agnes grid system",
+			"scene": "res://commons/context/agnesnatringrid/agnes_grid.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"grabable_agnes": {
+			"lookup_name": "grabable_agnes",
+			"name": "Grabable Agnes",
+			"description": "Interactive grabable Agnes grid component",
+			"scene": "res://commons/context/agnesnatringrid/grabable_agnes.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"camera_context": {
+			"lookup_name": "camera_context",
+			"name": "Camera Context",
+			"description": "Camera system for viewing and perspective control",
+			"scene": "res://commons/context/camera/camera.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"clipboard": {
+			"lookup_name": "clipboard",
+			"name": "Clipboard",
+			"description": "Clipboard for copy-paste operations and data transfer",
+			"scene": "res://commons/context/clipboard/clipboard.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"clipboard_large": {
+			"lookup_name": "clipboard_large",
+			"name": "clipboard_large",
+			"description": "clipboard_large",
+			"scene": "res://commons/context/clipboard/clipboard_large.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"spit_text_3d": {
+			"lookup_name": "spit_text_3d",
+			"name": "spit_text_3d",
+			"description": "spit_text_3d",
+			"scene": "res://commons/visualaid/spittext/spit_text_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"player_position": {
+			"lookup_name": "player_position",
+			"name": "player_position",
+			"description": "player_position",
+			"scene": "res://commons/visualaid/playerposition/player_position.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"game_time_display": {
+			"lookup_name": "game_time_display",
+			"name": "game_time_display",
+			"description": "game_time_display",
+			"scene": "res://commons/visualaid/time/game_time_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"frame_counter_display": {
+			"lookup_name": "frame_counter_display",
+			"name": "frame_counter_display",
+			"description": "frame_counter_display",
+			"scene": "res://commons/visualaid/frame_counter/frame_counter_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"speed_display": {
+			"lookup_name": "speed_display",
+			"name": "speed_display",
+			"description": "speed_display",
+			"scene": "res://commons/visualaid/speed/speed_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"frames_display": {
+			"lookup_name": "frames_display",
+			"name": "frames_display",
+			"description": "frames_displayy",
+			"scene": "res://commons/visualaid/frames/frames_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"memory_display": {
+			"lookup_name": "memory_display",
+			"name": "memory_display",
+			"description": "Display memory usage",
+			"scene": "res://commons/visualaid/memory/memory_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"draw_calls_display": {
+			"lookup_name": "draw_calls_display",
+			"name": "draw_calls_display",
+			"description": "Display draw calls",
+			"scene": "res://commons/visualaid/performance/draw_calls_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"health_display": {
+			"lookup_name": "health_display",
+			"name": "health_display",
+			"description": "Dealth_display",
+			"scene": "res://commons/visualaid/gameplay/health_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"hits_reset_display": {
+			"lookup_name": "hits_reset_display",
+			"name": "hits_reset_display",
+			"description": "hits_reset_display",
+			"scene": "res://commons/visualaid/gameplay/hits_reset_display.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"code": {
+			"lookup_name": "code",
+			"name": "code",
+			"description": "code",
+			"scene": "res://commons/displays/code.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"code_display": {
+			"lookup_name": "code_display",
+			"name": "Code Display",
+			"description": "Display system for showing code and text content",
+			"scene": "res://commons/context/clipboard/codeDisplay.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"unused"
+			],
+			"footprint": [
+				1,
+				4,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"graphics_slideshow": {
+			"lookup_name": "graphics_slideshow",
+			"name": "Graphics Slideshow",
+			"description": "Non-interactive visualization display that cycles through frames every 5 seconds. Use #topic:vectors, forces, arrays, waves, randomness, or procedural",
+			"scene": "res://commons/infoboards_3d/graphics_slideshow.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"graphics_monitor": {
+			"lookup_name": "graphics_monitor",
+			"name": "Graphics Monitor",
+			"description": "3D monitor with frame displaying visualization graphics. Use #vectors, #forces, #arrays, #waves, #randomness, or #procedural",
+			"scene": "res://commons/infoboards_3d/graphics_monitor.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"graphics_slideshow_all": {
+			"lookup_name": "graphics_slideshow_all",
+			"name": "Graphics Slideshow All",
+			"description": "Navigate through all graphics boards - use keyboard (A/D or Left/Right arrows) to flip through topics",
+			"scene": "res://commons/infoboards_3d/graphics_slideshow_all.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"graphics_slideshow_2d": {
+			"lookup_name": "graphics_slideshow_2d",
+			"name": "Graphics Slideshow 2D",
+			"description": "2D fullscreen slideshow - navigate with A/D, Left/Right, or Space. Press ESC to close",
+			"scene": "res://commons/infoboards_3d/graphics_slideshow_2d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"crystal_ball": {
+			"lookup_name": "crystal_ball",
+			"name": "Crystal Ball",
+			"description": "Interactive crystal ball for mystical interactions and predictions",
+			"scene": "res://commons/context/cristalball/cristalball.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_create": {
+			"lookup_name": "cube_create",
+			"name": "Cube Creator",
+			"description": "Tool for creating and manipulating cubes in 3D space",
+			"scene": "res://commons/context/cubecreate/cubecreate.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"drawing_paper": {
+			"lookup_name": "drawing_paper",
+			"name": "Drawing Paper",
+			"description": "Paper surface for drawing and artistic creation",
+			"scene": "res://commons/context/drawingboard/drawing_paper.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"drawing_pen": {
+			"lookup_name": "drawing_pen",
+			"name": "Drawing Pen",
+			"description": "Pen tool for drawing on surfaces",
+			"scene": "res://commons/context/drawingboard/pen.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"grid_eye": {
+			"lookup_name": "grid_eye",
+			"name": "Grid Eye",
+			"description": "Grid point visualization for spatial awareness",
+			"scene": "res://commons/context/grideye/the_grid_point.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"magnifying_glass": {
+			"lookup_name": "magnifying_glass",
+			"name": "Magnifying Glass",
+			"description": "Magnifying glass for detailed examination",
+			"scene": "res://commons/context/magnifyer/magnifying_glass.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"magnifying_glass_red": {
+			"lookup_name": "magnifying_glass_red",
+			"name": "Magnifying Glass Red",
+			"description": "Red variant of magnifying glass for specialized viewing",
+			"scene": "res://commons/context/magnifyer/magnifying_glass_red.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"magnifying_glass_tool": {
+			"lookup_name": "magnifying_glass_tool",
+			"name": "Magnifying Glass Tool",
+			"description": "Advanced magnifying glass tool with additional features",
+			"scene": "res://commons/context/magnifyer/magnifying_glass_tool.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"sequencer": {
+			"lookup_name": "sequencer",
+			"name": "Sequencer",
+			"description": "Music and audio sequencer for algorithmic composition",
+			"scene": "res://commons/context/sequencer/seqencer.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"helper_arm": {
+			"lookup_name": "helper_arm",
+			"name": "Helper Arm",
+			"description": "Mechanical helper arm for assistance and manipulation",
+			"scene": "res://commons/context/swing/helper_arm.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"tesla_sparks": {
+			"lookup_name": "tesla_sparks",
+			"name": "Tesla Sparks",
+			"description": "Tesla coil spark effects for electrical visualization",
+			"scene": "res://commons/context/teslasparks/tesla_sparks.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"tesla_sphere": {
+			"lookup_name": "tesla_sphere",
+			"name": "Tesla Sphere",
+			"description": "Tesla sphere for electrical field interaction",
+			"scene": "res://commons/context/teslasparks/tesla_sphere.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"zelda_tilemap_2d": {
+			"lookup_name": "zelda_tilemap_2d",
+			"name": "Zelda Tilemap 2D",
+			"description": "2D Zelda-style tilemap for retro game aesthetics",
+			"scene": "res://commons/context/zeldatilemap/zelda_tilemap_2d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"zelda_tilemap": {
+			"lookup_name": "zelda_tilemap",
+			"name": "Zelda Tilemap",
+			"description": "Zelda-style tilemap system for game-like environments",
+			"scene": "res://commons/context/zeldatilemap/zelda_tilemap.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"zelda_tiles_3d": {
+			"lookup_name": "zelda_tiles_3d",
+			"name": "Zelda Tiles 3D",
+			"description": "3D Zelda-style tiles for dimensional game environments",
+			"scene": "res://commons/context/zeldatilemap/zelda_tiles_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"fractal_space": {
+			"lookup_name": "fractal_space",
+			"name": "fractal_space",
+			"description": "fractal_space",
+			"scene": "res://commons/context/walkgrids/fractal_space.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"sparse_array_demo": {
+			"lookup_name": "sparse_array_demo",
+			"name": "Sparse Array Demo",
+			"description": "Visualizes sparse vs dense 2D array storage. Toggle between full grid and sparse representation.",
+			"scene": "res://commons/artifacts/sparse_array_demo/sparse_array_demo.tscn",
+			"category": "arrays",
+			"complexity": "intermediate",
+			"tags": [
+				"array",
+				"sparse",
+				"dense",
+				"memory",
+				"optimization",
+				"grid"
+			],
+			"sequence": "array_tutorial",
+			"qfep_connection": "Sparse arrays encode absence as information.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"circular_buffer": {
+			"lookup_name": "circular_buffer",
+			"name": "Circular Buffer",
+			"description": "Ring buffer visualization. Elements enter from one end and wrap around.",
+			"scene": "res://commons/artifacts/circular_buffer/circular_buffer.tscn",
+			"category": "arrays",
+			"complexity": "intermediate",
+			"tags": [
+				"array",
+				"circular",
+				"buffer",
+				"ring",
+				"modular"
+			],
+			"sequence": "array_tutorial",
+			"qfep_connection": "Circular indexing turns linear arrays into loops.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"matrix_multiply_visual": {
+			"lookup_name": "matrix_multiply_visual",
+			"name": "Matrix Multiply Visual",
+			"description": "Physical row-times-column dot product. Two matrices float in space.",
+			"scene": "res://commons/artifacts/matrix_multiply_visual/matrix_multiply_visual.tscn",
+			"category": "arrays",
+			"complexity": "advanced",
+			"tags": [
+				"matrix",
+				"multiply",
+				"dot_product",
+				"linear_algebra"
+			],
+			"sequence": "array_tutorial",
+			"qfep_connection": "Matrix multiplication composes transformations.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				3,
+				1,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"index_map_puzzle": {
+			"lookup_name": "index_map_puzzle",
+			"name": "Index Map Puzzle",
+			"description": "Puzzle where you remap array indices to achieve target patterns.",
+			"scene": "res://commons/artifacts/index_map_puzzle/index_map_puzzle.tscn",
+			"category": "arrays",
+			"complexity": "intermediate",
+			"tags": [
+				"array",
+				"index",
+				"remap",
+				"transpose",
+				"puzzle"
+			],
+			"sequence": "array_tutorial",
+			"qfep_connection": "Index remapping is a discrete transformation.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"spring_chain": {
+			"lookup_name": "spring_chain",
+			"name": "Spring Chain",
+			"description": "Chain of masses connected by springs. Drag one end and watch the wave propagate.",
+			"scene": "res://commons/artifacts/spring_chain/spring_chain.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"spring",
+				"chain",
+				"wave",
+				"propagation",
+				"forces"
+			],
+			"sequence": "forces",
+			"qfep_connection": "Spring chains are the discrete skeleton of wave equations.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				3,
+				1,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"drag_coefficient_wind_tunnel": {
+			"lookup_name": "drag_coefficient_wind_tunnel",
+			"name": "Drag Coefficient Wind Tunnel",
+			"description": "Virtual wind tunnel with swappable shapes. Particle streamlines show flow.",
+			"scene": "res://commons/artifacts/drag_coefficient_wind_tunnel/drag_coefficient_wind_tunnel.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"drag",
+				"wind_tunnel",
+				"aerodynamics",
+				"forces"
+			],
+			"sequence": "forces",
+			"qfep_connection": "Drag is the environment pushing back.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				3,
+				1,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"impulse_collision_demo": {
+			"lookup_name": "impulse_collision_demo",
+			"name": "Impulse Collision Demo",
+			"description": "Two masses on a rail collide. Adjustable mass ratio and initial velocities.",
+			"scene": "res://commons/artifacts/impulse_collision_demo/impulse_collision_demo.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"impulse",
+				"collision",
+				"momentum",
+				"forces"
+			],
+			"sequence": "forces",
+			"qfep_connection": "Collisions are instantaneous force.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				3,
+				1,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"centripetal_force_demo": {
+			"lookup_name": "centripetal_force_demo",
+			"name": "Centripetal Force Demo",
+			"description": "Ball on a string in circular motion. Cut the string to see tangential escape.",
+			"scene": "res://commons/artifacts/centripetal_force_demo/centripetal_force_demo.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"centripetal",
+				"circular",
+				"rotation",
+				"forces"
+			],
+			"sequence": "forces",
+			"qfep_connection": "Circular motion requires constant redirection.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"surveillance_panopticon": {
+			"lookup_name": "surveillance_panopticon",
+			"name": "Surveillance Panopticon",
+			"description": "Foucault panopticon. Central tower with CCTV cones.",
+			"scene": "res://commons/artifacts/surveillance_panopticon/surveillance_panopticon.tscn",
+			"category": "critical",
+			"complexity": "advanced",
+			"tags": [
+				"surveillance",
+				"panopticon",
+				"foucault",
+				"critical"
+			],
+			"sequence": "criticalalgorithms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"interactions": [
+				"walk_through"
+			],
+			"footprint": [
+				4,
+				3,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					4
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"attention_economy_sim": {
+			"lookup_name": "attention_economy_sim",
+			"name": "Attention Economy Sim",
+			"description": "Multiple competing content streams fight for a single attention bar.",
+			"scene": "res://commons/artifacts/attention_economy_sim/attention_economy_sim.tscn",
+			"category": "critical",
+			"complexity": "advanced",
+			"tags": [
+				"attention",
+				"economy",
+				"engagement",
+				"critical"
+			],
+			"sequence": "criticalalgorithms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"filter_bubble_demo": {
+			"lookup_name": "filter_bubble_demo",
+			"name": "Filter Bubble Demo",
+			"description": "Recommendation engine that narrows content over time.",
+			"scene": "res://commons/artifacts/filter_bubble_demo/filter_bubble_demo.tscn",
+			"category": "critical",
+			"complexity": "intermediate",
+			"tags": [
+				"filter_bubble",
+				"recommendation",
+				"critical"
+			],
+			"sequence": "criticalalgorithms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"data_labor_counter": {
+			"lookup_name": "data_labor_counter",
+			"name": "Data Labor Counter",
+			"description": "Visualizes hidden human labor behind AI systems.",
+			"scene": "res://commons/artifacts/data_labor_counter/data_labor_counter.tscn",
+			"category": "critical",
+			"complexity": "advanced",
+			"tags": [
+				"labor",
+				"ghost_work",
+				"critical"
+			],
+			"sequence": "criticalalgorithms",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"big_o_race": {
+			"lookup_name": "big_o_race",
+			"name": "Big O Race",
+			"description": "Algorithms race visually on parallel tracks.",
+			"scene": "res://commons/artifacts/big_o_race/big_o_race.tscn",
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"tags": [
+				"big_o",
+				"complexity",
+				"algorithm",
+				"race"
+			],
+			"sequence": "resourcemanagement",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"resourcemanagement"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				4,
+				1,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"cache_hit_visualizer": {
+			"lookup_name": "cache_hit_visualizer",
+			"name": "Cache Hit Visualizer",
+			"description": "Memory hierarchy visualization: L1, L2, L3 cache and RAM.",
+			"scene": "res://commons/artifacts/cache_hit_visualizer/cache_hit_visualizer.tscn",
+			"category": "algorithms",
+			"complexity": "advanced",
+			"tags": [
+				"cache",
+				"memory",
+				"hierarchy",
+				"performance"
+			],
+			"sequence": "resourcemanagement",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"resourcemanagement"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"garbage_collector_demo": {
+			"lookup_name": "garbage_collector_demo",
+			"name": "Garbage Collector Demo",
+			"description": "Mark-and-sweep garbage collection animated.",
+			"scene": "res://commons/artifacts/garbage_collector_demo/garbage_collector_demo.tscn",
+			"category": "algorithms",
+			"complexity": "advanced",
+			"tags": [
+				"garbage_collection",
+				"memory",
+				"mark_sweep"
+			],
+			"sequence": "resourcemanagement",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"resourcemanagement"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"profiler_flame_graph": {
+			"lookup_name": "profiler_flame_graph",
+			"name": "Profiler Flame Graph",
+			"description": "Interactive flame graph of nested function calls.",
+			"scene": "res://commons/artifacts/profiler_flame_graph/profiler_flame_graph.tscn",
+			"category": "algorithms",
+			"complexity": "advanced",
+			"tags": [
+				"profiler",
+				"flame_graph",
+				"performance"
+			],
+			"sequence": "resourcemanagement",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"resourcemanagement"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"non_binary_classifier": {
+			"lookup_name": "non_binary_classifier",
+			"name": "Non-Binary Classifier",
+			"description": "ML classifier that resists binary convergence.",
+			"scene": "res://commons/artifacts/non_binary_classifier/non_binary_classifier.tscn",
+			"category": "speculative",
+			"complexity": "advanced",
+			"tags": [
+				"classifier",
+				"non_binary",
+				"queer",
+				"speculative"
+			],
+			"sequence": "speculativecomputation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"speculativecomputation"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"fluid_taxonomy_tree": {
+			"lookup_name": "fluid_taxonomy_tree",
+			"name": "Fluid Taxonomy Tree",
+			"description": "A taxonomy that morphs. Categories branch, merge, dissolve.",
+			"scene": "res://commons/artifacts/fluid_taxonomy_tree/fluid_taxonomy_tree.tscn",
+			"category": "speculative",
+			"complexity": "advanced",
+			"tags": [
+				"taxonomy",
+				"fluid",
+				"deleuze",
+				"speculative"
+			],
+			"sequence": "speculativecomputation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"speculativecomputation"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"rhizome_navigator": {
+			"lookup_name": "rhizome_navigator",
+			"name": "Rhizome Navigator",
+			"description": "Deleuze and Guattari rhizome as navigable graph.",
+			"scene": "res://commons/artifacts/rhizome_navigator/rhizome_navigator.tscn",
+			"category": "speculative",
+			"complexity": "advanced",
+			"tags": [
+				"rhizome",
+				"deleuze",
+				"graph",
+				"speculative"
+			],
+			"sequence": "speculativecomputation",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"speculativecomputation"
+			],
+			"interactions": [
+				"walk_through"
+			],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"sol_lewitt_wall_drawing": {
+			"lookup_name": "sol_lewitt_wall_drawing",
+			"name": "Sol LeWitt Wall Drawing",
+			"description": "Procedural wall drawings from text instructions.",
+			"scene": "res://commons/artifacts/sol_lewitt_wall_drawing/sol_lewitt_wall_drawing.tscn",
+			"category": "art",
+			"complexity": "intermediate",
+			"tags": [
+				"sol_lewitt",
+				"wall_drawing",
+				"conceptual_art"
+			],
+			"sequence": "artmathematics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"bridget_riley_op_art": {
+			"lookup_name": "bridget_riley_op_art",
+			"name": "Bridget Riley Op Art",
+			"description": "Optical illusion pattern generator.",
+			"scene": "res://commons/artifacts/bridget_riley_op_art/bridget_riley_op_art.tscn",
+			"category": "art",
+			"complexity": "intermediate",
+			"tags": [
+				"riley",
+				"op_art",
+				"optical_illusion"
+			],
+			"sequence": "artmathematics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"vera_molnar_des_ordres": {
+			"lookup_name": "vera_molnar_des_ordres",
+			"name": "Vera Molnar Des-Ordres",
+			"description": "Grid of squares with controlled randomness. Disorder slider.",
+			"scene": "res://commons/artifacts/vera_molnar_des_ordres/vera_molnar_des_ordres.tscn",
+			"category": "art",
+			"complexity": "intermediate",
+			"tags": [
+				"molnar",
+				"generative_art",
+				"grid",
+				"randomness"
+			],
+			"sequence": "artmathematics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"agnes_martin_grid_painting": {
+			"lookup_name": "agnes_martin_grid_painting",
+			"name": "Agnes Martin Grid Painting",
+			"description": "Subtle grids with micro-imperfections.",
+			"scene": "res://commons/artifacts/agnes_martin_grid_painting/agnes_martin_grid_painting.tscn",
+			"category": "art",
+			"complexity": "beginner",
+			"tags": [
+				"agnes_martin",
+				"grid",
+				"minimalism"
+			],
+			"sequence": "artmathematics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"kitbash_station": {
+			"lookup_name": "kitbash_station",
+			"name": "Kitbash Station",
+			"description": "Combine random artifact fragments into new forms.",
+			"scene": "res://commons/artifacts/kitbash_station/kitbash_station.tscn",
+			"category": "design",
+			"complexity": "beginner",
+			"tags": [
+				"kitbash",
+				"bricolage",
+				"assembly"
+			],
+			"sequence": "bricolage",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"constraint_sculptor": {
+			"lookup_name": "constraint_sculptor",
+			"name": "Constraint Sculptor",
+			"description": "Sculpt within randomized constraints.",
+			"scene": "res://commons/artifacts/constraint_sculptor/constraint_sculptor.tscn",
+			"category": "design",
+			"complexity": "intermediate",
+			"tags": [
+				"constraint",
+				"sculpture",
+				"bricolage"
+			],
+			"sequence": "bricolage",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"found_object_assembler": {
+			"lookup_name": "found_object_assembler",
+			"name": "Found Object Assembler",
+			"description": "Grab scene fragments from a junk pile and compose freely.",
+			"scene": "res://commons/artifacts/found_object_assembler/found_object_assembler.tscn",
+			"category": "design",
+			"complexity": "beginner",
+			"tags": [
+				"found_object",
+				"duchamp",
+				"bricolage"
+			],
+			"sequence": "bricolage",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"backpropagation_flow": {
+			"lookup_name": "backpropagation_flow",
+			"name": "Backpropagation Flow",
+			"description": "Gradient flowing backward through network layers.",
+			"scene": "res://commons/artifacts/backpropagation_flow/backpropagation_flow.tscn",
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"tags": [
+				"backpropagation",
+				"gradient",
+				"machine_learning"
+			],
+			"sequence": "machinelearning",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				3,
+				1,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"overfitting_demo": {
+			"lookup_name": "overfitting_demo",
+			"name": "Overfitting Demo",
+			"description": "Polynomial fitting with complexity slider.",
+			"scene": "res://commons/artifacts/overfitting_demo/overfitting_demo.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"tags": [
+				"overfitting",
+				"bias_variance",
+				"machine_learning"
+			],
+			"sequence": "machinelearning",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"latent_space_walk": {
+			"lookup_name": "latent_space_walk",
+			"name": "Latent Space Walk",
+			"description": "Walk through a VAE/GAN latent space.",
+			"scene": "res://commons/artifacts/latent_space_walk/latent_space_walk.tscn",
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"tags": [
+				"latent_space",
+				"vae",
+				"gan",
+				"machine_learning"
+			],
+			"sequence": "machinelearning",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"interactions": [
+				"walk_through"
+			],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"hypercube_rotation": {
+			"lookup_name": "hypercube_rotation",
+			"name": "Hypercube Rotation",
+			"description": "4D tesseract projected to 3D with rotation controls.",
+			"scene": "res://commons/artifacts/hypercube_rotation/hypercube_rotation.tscn",
+			"category": "higher_dimensional",
+			"complexity": "advanced",
+			"tags": [
+				"hypercube",
+				"tesseract",
+				"4d",
+				"higher_dimensions"
+			],
+			"sequence": "higher_dimensions",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"dimensional_analogy": {
+			"lookup_name": "dimensional_analogy",
+			"name": "Dimensional Analogy",
+			"description": "Step-by-step: point to line to square to cube to tesseract.",
+			"scene": "res://commons/artifacts/dimensional_analogy/dimensional_analogy.tscn",
+			"category": "higher_dimensional",
+			"complexity": "beginner",
+			"tags": [
+				"dimension",
+				"analogy",
+				"flatland",
+				"higher_dimensions"
+			],
+			"sequence": "higher_dimensions",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				3,
+				1,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"schlegel_diagram": {
+			"lookup_name": "schlegel_diagram",
+			"name": "Schlegel Diagram",
+			"description": "Transparent polytope projections.",
+			"scene": "res://commons/artifacts/schlegel_diagram/schlegel_diagram.tscn",
+			"category": "higher_dimensional",
+			"complexity": "advanced",
+			"tags": [
+				"schlegel",
+				"polytope",
+				"4d",
+				"higher_dimensions"
+			],
+			"sequence": "higher_dimensions",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions"
+			],
+			"interactions": [
+				"observe"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"pressure_soft_body": {
+			"lookup_name": "pressure_soft_body",
+			"name": "Pressure Soft Body",
+			"description": "Inflatable soft body with internal pressure control.",
+			"scene": "res://commons/artifacts/pressure_soft_body/pressure_soft_body.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"pressure",
+				"soft_body",
+				"inflatable"
+			],
+			"sequence": "softbodies",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"soft_body_slicer": {
+			"lookup_name": "soft_body_slicer",
+			"name": "Soft Body Slicer",
+			"description": "Cut soft bodies with a laser plane.",
+			"scene": "res://commons/artifacts/soft_body_slicer/soft_body_slicer.tscn",
+			"category": "physics",
+			"complexity": "advanced",
+			"tags": [
+				"soft_body",
+				"cutting",
+				"topology"
+			],
+			"sequence": "softbodies",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"viscous_fluid_blob": {
+			"lookup_name": "viscous_fluid_blob",
+			"name": "Viscous Fluid Blob",
+			"description": "High-viscosity non-Newtonian fluid demo.",
+			"scene": "res://commons/artifacts/viscous_fluid_blob/viscous_fluid_blob.tscn",
+			"category": "physics",
+			"complexity": "intermediate",
+			"tags": [
+				"viscous",
+				"non_newtonian",
+				"fluid",
+				"soft_body"
+			],
+			"sequence": "softbodies",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"interactions": [
+				"grab"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		}
+	}
 }

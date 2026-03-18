@@ -23,7 +23,13 @@
 			],
 			"parameters": {
 				"current_index": "Starting statement (0-8)",
-				"grabbable": "Enable XR grab interaction"
+				"grabbable": "Enable XR grab interaction",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -64,7 +70,13 @@
 			],
 			"parameters": {
 				"max_visible_depth": "How many nested boxes before infinite indicator",
-				"size": "Outer box dimensions"
+				"size": "Outer box dimensions",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -102,7 +114,13 @@
 				"click to cycle through meta-layers of representation"
 			],
 			"parameters": {
-				"current_layer": "Current level of representation questioning (0-5)"
+				"current_layer": "Current level of representation questioning (0-5)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy"
@@ -141,7 +159,13 @@
 			],
 			"parameters": {
 				"steps_per_side": "Number of steps on each side of the square",
-				"rotate_view": "Auto-rotate for viewing"
+				"rotate_view": "Auto-rotate for viewing",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -183,7 +207,13 @@
 			],
 			"parameters": {
 				"current_state": "A, NOT_A, BOTH, or NEITHER",
-				"allow_observation": "Whether observation collapses superposition"
+				"allow_observation": "Whether observation collapses superposition",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -224,7 +254,13 @@
 			"parameters": {
 				"current_r": "Current r value (2.5-4.0)",
 				"r_steps": "Resolution of diagram",
-				"width": "Physical width of visualization"
+				"width": "Physical width of visualization",
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
 			},
 			"dev_themes": [
 				"qfep",
@@ -262,7 +298,13 @@
 			],
 			"parameters": {
 				"current_postulate": "Current postulate (0-4)",
-				"highlight_fifth": "Emphasize the parallel postulate"
+				"highlight_fifth": "Emphasize the parallel postulate",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -301,7 +343,13 @@
 			],
 			"parameters": {
 				"size": "Triangle size",
-				"auto_rotate": "Slowly rotate to reveal impossibility"
+				"auto_rotate": "Slowly rotate to reveal impossibility",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -341,7 +389,13 @@
 			"parameters": {
 				"disk_radius": "Size of the disk",
 				"line_count": "Number of geodesic lines",
-				"show_triangle": "Display hyperbolic triangle"
+				"show_triangle": "Display hyperbolic triangle",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"geometry",
@@ -382,7 +436,13 @@
 			],
 			"parameters": {
 				"box_size": "Physical dimensions",
-				"auto_reset_time": "Seconds before returning to superposition"
+				"auto_reset_time": "Seconds before returning to superposition",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -417,7 +477,13 @@
 				"observe angle labels and sum"
 			],
 			"parameters": {
-				"size": "Triangle scale factor (default 0.4)"
+				"size": "Triangle scale factor (default 0.4)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"geometry",
@@ -490,7 +556,14 @@
 			"interactions": [
 				"observe the contrast between constructive and classical proof"
 			],
-			"parameters": {},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"dev_themes": [
 				"philosophy"
 			],
@@ -523,7 +596,14 @@
 			"interactions": [
 				"observe the unfolding sequence with animated dots"
 			],
-			"parameters": {},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"dev_themes": [
 				"philosophy"
 			],
@@ -556,7 +636,13 @@
 				"use slider to toggle between classical and intuitionist views"
 			],
 			"parameters": {
-				"show_rejection": "Whether to display Brouwer's rejection of the law"
+				"show_rejection": "Whether to display Brouwer's rejection of the law",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy"

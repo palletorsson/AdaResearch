@@ -25,7 +25,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }

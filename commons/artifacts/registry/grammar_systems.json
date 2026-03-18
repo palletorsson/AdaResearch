@@ -17,7 +17,13 @@
 			"parameters": {
 				"state_count": "Number of states (default 5)",
 				"sequence_length": "Steps to generate (default 20)",
-				"step_interval": "Time between transitions (default 1.5s)"
+				"step_interval": "Time between transitions (default 1.5s)",
+				"footprint": [
+					17,
+					29,
+					1
+				],
+				"size_group": "world_scale"
 			},
 			"tags": [
 				"markov",
@@ -52,7 +58,13 @@
 				"terminate_probability": "Chance of stopping a branch (0-1)",
 				"vertical_bias": "How much branches prefer growing upward (0-1)",
 				"animate_growth": "Show growth animation",
-				"add_leaves": "Add leaf meshes at branch tips"
+				"add_leaves": "Add leaf meshes at branch tips",
+				"footprint": [
+					10,
+					11,
+					1
+				],
+				"size_group": "world_scale"
 			},
 			"tags": [
 				"markov",

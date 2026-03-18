@@ -15,7 +15,15 @@
 			"include_in_map_data": true,
 			"map_ready": false,
 			"map_sequences": [],
-			"sequence": "quantumalgorithms"
+			"sequence": "quantumalgorithms",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					13
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"superposition_display": {
 			"name": "Superposition Display",
@@ -37,7 +45,15 @@
 				"foundationscrisis",
 				"testmaps"
 			],
-			"sequence": "quantumalgorithms"
+			"sequence": "quantumalgorithms",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }

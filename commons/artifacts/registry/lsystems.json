@@ -12,7 +12,15 @@
 				"grammar_systems",
 				"lsystems"
 			],
-			"sequence": "grammar_systems"
+			"sequence": "grammar_systems",
+			"parameters": {
+				"footprint": [
+					1,
+					6,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"Hilbert3D": {
 			"name": "3D Hilbert Curve",
@@ -25,7 +33,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"AnimatedTree": {
 			"name": "Animated Tree Growth",
@@ -38,7 +54,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					8,
+					9
+				],
+				"size_group": "environment"
+			}
 		},
 		"ForestCompetition": {
 			"name": "Forest Ecosystem",
@@ -51,7 +75,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					6,
+					6
+				],
+				"size_group": "environment"
+			}
 		},
 		"ContextSensitiveTree": {
 			"name": "Context-Sensitive Tree",
@@ -118,7 +150,15 @@
 				"lsystems",
 				"proceduralgeneration",
 				"proceduralgeneration_all"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"fractal_lsystem_string": {
 			"name": "L-System String Expansion",
@@ -131,7 +171,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"dark_sphere": {
 			"name": "Dark Sphere",
@@ -164,7 +212,15 @@
 				"transformation",
 				"unused",
 				"wavefunctions"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"lsystem_dungeon": {
 			"name": "L-System Dungeon",
@@ -177,7 +233,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"genetic_tree_sculptor": {
 			"name": "Genetic Tree Sculptor",

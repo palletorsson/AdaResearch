@@ -14,10 +14,27 @@
 			"qfep_connection": "Trees as hierarchical F-structures — each node's position encodes a decision, each traversal order reveals different information. The tree IS a compressed representation of sorted data: O(log n) access through recursive bisection.",
 			"category": "datastructures",
 			"complexity": "beginner",
-			"tags": ["binary_tree", "traversal", "recursion", "tree", "data_structure", "beginner"],
+			"tags": [
+				"binary_tree",
+				"traversal",
+				"recursion",
+				"tree",
+				"data_structure",
+				"beginner"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					20,
+					9
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"bst_visualization": {
 			"lookup_name": "bst_visualization",
@@ -26,10 +43,19 @@
 			"description": "Binary search tree with dynamic insertion maintaining the BST invariant: left child < parent < right child. Watch how ordered insertion creates degenerate trees while balanced insertion creates efficient ones.",
 			"category": "datastructures",
 			"complexity": "beginner",
-			"tags": ["bst", "binary_search_tree", "search", "ordered", "tree", "data_structure"],
+			"tags": [
+				"bst",
+				"binary_search_tree",
+				"search",
+				"ordered",
+				"tree",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			]
 		},
 		"bsp_trees": {
 			"lookup_name": "bsp_trees",
@@ -38,10 +64,27 @@
 			"description": "Binary Space Partitioning tree visualization — recursive halfplane splits dividing space into convex regions. The algorithm behind Doom's rendering and modern collision detection.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["bsp", "space_partitioning", "spatial", "rendering", "tree", "data_structure"],
+			"tags": [
+				"bsp",
+				"space_partitioning",
+				"spatial",
+				"rendering",
+				"tree",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					13,
+					19
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"btree_visualization": {
 			"lookup_name": "btree_visualization",
@@ -50,10 +93,27 @@
 			"description": "B-tree visualization showing multi-key nodes that split and merge to maintain balance. The data structure behind databases and filesystems — every query you've ever run touched one.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["btree", "database", "balanced", "multi_key", "tree", "data_structure"],
+			"tags": [
+				"btree",
+				"database",
+				"balanced",
+				"multi_key",
+				"tree",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					18,
+					22
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"fenwick_tree": {
 			"lookup_name": "fenwick_tree",
@@ -62,10 +122,26 @@
 			"description": "Binary Indexed Tree for efficient prefix sum queries. Shows how clever bit manipulation enables O(log n) range queries and updates — compact elegance in a tree that isn't really a tree.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["fenwick", "binary_indexed_tree", "prefix_sum", "range_query", "data_structure"],
+			"tags": [
+				"fenwick",
+				"binary_indexed_tree",
+				"prefix_sum",
+				"range_query",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					9,
+					19,
+					19
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"graph_structures": {
 			"lookup_name": "graph_structures",
@@ -75,10 +151,27 @@
 			"qfep_connection": "Graphs are the most general F-structure — any relationship between any entities. Directed edges encode asymmetric information flow; undirected edges encode mutual coupling. The graph IS the topology of E(S) propagation.",
 			"category": "datastructures",
 			"complexity": "beginner",
-			"tags": ["graph", "directed", "undirected", "adjacency", "network", "data_structure"],
+			"tags": [
+				"graph",
+				"directed",
+				"undirected",
+				"adjacency",
+				"network",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"hash_maps": {
 			"lookup_name": "hash_maps",
@@ -88,10 +181,27 @@
 			"qfep_connection": "Hash maps trade space-entropy for time-order — using a hash function to scatter keys uniformly across buckets achieves O(1) access at the cost of memory overhead. A good hash maximizes E(S) in the bucket distribution to minimize F in the lookup.",
 			"category": "datastructures",
 			"complexity": "intermediate",
-			"tags": ["hash_map", "hash_table", "hashing", "collision", "bucket", "data_structure"],
+			"tags": [
+				"hash_map",
+				"hash_table",
+				"hashing",
+				"collision",
+				"bucket",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					16,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"heap_operations": {
 			"lookup_name": "heap_operations",
@@ -101,10 +211,27 @@
 			"qfep_connection": "Heaps maintain partial order at the edge of chaos — not fully sorted (low λ), not random (high λ), but just ordered enough to know the extremum in O(1). The minimum viable F-structure for priority access.",
 			"category": "datastructures",
 			"complexity": "intermediate",
-			"tags": ["heap", "priority_queue", "sift", "min_heap", "max_heap", "data_structure"],
+			"tags": [
+				"heap",
+				"priority_queue",
+				"sift",
+				"min_heap",
+				"max_heap",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					20,
+					9
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"linked_lists": {
 			"lookup_name": "linked_lists",
@@ -113,10 +240,28 @@
 			"description": "Singly and doubly linked list visualization with node insertion, deletion, and pointer traversal. The simplest dynamic data structure — nodes connected by references, not memory layout.",
 			"category": "datastructures",
 			"complexity": "beginner",
-			"tags": ["linked_list", "pointer", "node", "dynamic", "linear", "data_structure", "beginner"],
+			"tags": [
+				"linked_list",
+				"pointer",
+				"node",
+				"dynamic",
+				"linear",
+				"data_structure",
+				"beginner"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					14,
+					9
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"quadtrees_octrees": {
 			"lookup_name": "quadtrees_octrees",
@@ -126,10 +271,27 @@
 			"qfep_connection": "Adaptive spatial partitioning — subdivide only where complexity accumulates. Dense regions get finer cells (higher F resolution), sparse regions stay coarse (lower F cost). The structure adapts its own resolution to match local E(S) density.",
 			"category": "datastructures",
 			"complexity": "intermediate",
-			"tags": ["quadtree", "octree", "spatial", "partitioning", "collision", "data_structure"],
+			"tags": [
+				"quadtree",
+				"octree",
+				"spatial",
+				"partitioning",
+				"collision",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"redblack_visualization": {
 			"lookup_name": "redblack_visualization",
@@ -139,10 +301,27 @@
 			"qfep_connection": "Self-balancing as continuous F-minimization — rotations and recolorings restore balance after every insertion, keeping the tree at its F-optimal O(log n) height. The invariants ARE the F-model: constraints that prevent entropy accumulation.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["red_black_tree", "self_balancing", "rotation", "invariant", "tree", "data_structure"],
+			"tags": [
+				"red_black_tree",
+				"self_balancing",
+				"rotation",
+				"invariant",
+				"tree",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					16,
+					24,
+					27
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"segment_tree": {
 			"lookup_name": "segment_tree",
@@ -151,10 +330,26 @@
 			"description": "Segment tree for range queries (min, max, sum) with lazy propagation. Each node stores an aggregate of its interval — answer any range query in O(log n) after O(n) construction.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["segment_tree", "range_query", "lazy_propagation", "interval", "data_structure"],
+			"tags": [
+				"segment_tree",
+				"range_query",
+				"lazy_propagation",
+				"interval",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					9,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"suffix_array_tree": {
 			"lookup_name": "suffix_array_tree",
@@ -163,10 +358,27 @@
 			"description": "Side-by-side suffix array and suffix tree for string indexing. The structures that make text search instantaneous — every substring query answered in O(m) regardless of text length.",
 			"category": "datastructures",
 			"complexity": "advanced",
-			"tags": ["suffix_array", "suffix_tree", "string", "text_search", "index", "data_structure"],
+			"tags": [
+				"suffix_array",
+				"suffix_tree",
+				"string",
+				"text_search",
+				"index",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"trie_operations": {
 			"lookup_name": "trie_operations",
@@ -176,10 +388,27 @@
 			"qfep_connection": "Tries achieve F-minimization through prefix sharing — common beginnings are stored once, branching only where strings diverge. The trie IS a compression of the string set: minimum redundancy, maximum structural reuse.",
 			"category": "datastructures",
 			"complexity": "intermediate",
-			"tags": ["trie", "prefix_tree", "autocomplete", "string", "search", "data_structure"],
+			"tags": [
+				"trie",
+				"prefix_tree",
+				"autocomplete",
+				"string",
+				"search",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					22,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"union_find": {
 			"lookup_name": "union_find",
@@ -189,10 +418,26 @@
 			"qfep_connection": "Path compression as F-minimization in real-time — every find operation flattens the tree, making future operations faster. The structure optimizes itself through use, reducing its own entropy cost with each query.",
 			"category": "datastructures",
 			"complexity": "intermediate",
-			"tags": ["union_find", "disjoint_set", "path_compression", "component", "data_structure"],
+			"tags": [
+				"union_find",
+				"disjoint_set",
+				"path_compression",
+				"component",
+				"data_structure"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["datastructures"]
+			"map_sequences": [
+				"datastructures"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					20,
+					13
+				],
+				"size_group": "world_scale"
+			}
 		}
 	}
 }

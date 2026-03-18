@@ -180,7 +180,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					5,
+					8,
+					5
+				],
+				"size_group": "environment"
+			}
 		},
 		"randompoint": {
 			"name": "randompoint",
@@ -219,7 +227,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					7,
+					6,
+					7
+				],
+				"size_group": "environment"
+			}
 		},
 		"random_walk_128": {
 			"name": "Random Walk 128x128",
@@ -285,7 +301,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"distribution_visualization": {
 			"name": "Distribution Visualization",
@@ -298,7 +322,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					7,
+					4,
+					2
+				],
+				"size_group": "environment"
+			}
 		},
 		"pickup_cube_placer": {
 			"name": "pickup_cube_placer",
@@ -467,7 +499,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					1
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"RandomGaussianTexture": {
 			"name": "Random Gaussian Texture",
@@ -481,7 +521,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"GaussianBlurCircle": {
 			"name": "Gaussian Blur Circle",
@@ -494,7 +542,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"GaussianBlurShader": {
 			"name": "Gaussian Blur Shader",
@@ -520,7 +576,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					3,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"NoiseColors3D": {
 			"name": "Noise Colors 3D",
@@ -533,7 +597,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					6,
+					7
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"blue_noise": {
 			"name": "Blue Noise",
@@ -546,7 +618,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					21,
+					21,
+					1
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"noisetorus": {
 			"name": "noisetorus",
@@ -561,7 +641,15 @@
 				"noise",
 				"structure"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					6,
+					9,
+					6
+				],
+				"size_group": "environment"
+			}
 		},
 		"noisetext": {
 			"name": "noisetext",
@@ -575,7 +663,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"noisesphere": {
 			"name": "noisesphere",
@@ -637,7 +733,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					11,
+					5,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"random_transformations_stochastic": {
 			"name": "Random Transformations - Stochastic",
@@ -652,7 +756,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					11,
+					13,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"random_transformations_matrices": {
 			"name": "Random Transformations - Matrices",
@@ -667,7 +779,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					11,
+					13,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"random_transformations_noise": {
 			"name": "Random Transformations - Noise",
@@ -683,7 +803,15 @@
 			"map_sequences": [
 				"noise",
 				"randomness"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					11,
+					5,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"particle_randomness_pure": {
 			"name": "Particle Randomness - Pure",
@@ -768,7 +896,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					50,
+					13,
+					50
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"2d_in_3d_randomness_vis": {
 			"name": "2D in 3D Randomness Visualization",
@@ -781,7 +917,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					1
+				],
+				"size_group": "room_scale"
+			}
 		},
 		"walkingsphere": {
 			"name": "walkingsphere",
@@ -822,7 +966,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"random_walk_grab_paper": {
 			"name": "Random Walk Grab Paper",
@@ -848,7 +1000,15 @@
 			"map_sequences": [
 				"proceduralgeneration_all"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					7,
+					7,
+					7
+				],
+				"size_group": "environment"
+			}
 		},
 		"tessellation_lattice_demo": {
 			"name": "Tessellation Lattice Demo",
@@ -861,7 +1021,15 @@
 			"map_sequences": [
 				"mosaicanalysis"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					17,
+					17,
+					17
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"random_gaussian_texture": {
 			"name": "Random Gaussian Texture",
@@ -874,7 +1042,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"probability_distributions_3d": {
 			"name": "Probability Distributions 3D",
@@ -901,7 +1077,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"neon_wave_grid": {
 			"name": "Neon Wave Grid",
@@ -928,7 +1112,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"perlin_noise": {
 			"name": "Perlin Noise",
@@ -941,7 +1133,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					6,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"pollock_painting_in_3d": {
 			"name": "Pollock Painting in 3D",
@@ -967,7 +1167,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					21,
+					6,
+					50
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"pollock_3d": {
 			"name": "Pollock 3D",
@@ -1006,7 +1214,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"random_decay_multimesh": {
 			"name": "Random Decay MultiMesh",
@@ -1019,7 +1235,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					6,
+					5,
+					2
+				],
+				"size_group": "environment"
+			}
 		},
 		"random_color_book_page_collection": {
 			"name": "Random Color Book Page Collection",
@@ -1032,7 +1256,15 @@
 			"map_sequences": [
 				"testmaps"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					9,
+					5,
+					2
+				],
+				"size_group": "environment"
+			}
 		},
 		"random_number_book_page_collection": {
 			"name": "Random Number Book — Live Cascade",
@@ -1070,7 +1302,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"simplex_noise": {
 			"name": "Simplex Noise",
@@ -1083,7 +1323,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					6,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"ten_print": {
 			"name": "10 PRINT",
@@ -1096,7 +1344,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					3,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"trng_vs_prng": {
 			"name": "TRNG vs PRNG",
@@ -1109,7 +1365,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					17,
+					24,
+					21
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"value_noise": {
 			"name": "Value Noise",
@@ -1123,7 +1387,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					11,
+					6,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"random_number_book_page_1955": {
 			"name": "Random Number Book Page 1955",
@@ -1144,7 +1416,15 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					2,
+					5,
+					1
+				],
+				"size_group": "environment"
+			}
 		},
 		"random_butterflies": {
 			"name": "Random Butterflies",
@@ -1210,7 +1490,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					15,
+					4,
+					11
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"voxelnoise": {
 			"name": "Voxel Noise",
@@ -1238,7 +1526,15 @@
 				"grammar_systems",
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					25,
+					25,
+					25
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"noise_terrain": {
 			"name": "Noise Terrain",
@@ -1251,7 +1547,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					50,
+					6,
+					50
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"perlin_noise_clouds": {
 			"name": "Perlin Noise Clouds",
@@ -1265,7 +1569,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					50,
+					21,
+					50
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"noise_terrain_with_blobs": {
 			"name": "Noise Terrain with Animated Blobs",
@@ -1279,7 +1591,15 @@
 				"noise",
 				"randomness"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					50,
+					25,
+					50
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"cloudvolume": {
 			"name": "Cloud Volume",
@@ -1292,7 +1612,15 @@
 			"map_sequences": [
 				"unused"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			}
 		},
 		"perlinvolume": {
 			"name": "Perlin Volume",
@@ -1305,7 +1633,15 @@
 			"map_sequences": [
 				"unused"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			}
 		},
 		"instancingscatter": {
 			"name": "Instancing Scatter",
@@ -1682,7 +2018,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					20,
+					5,
+					20
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"shader_07_noise": {
 			"name": "Shader Noise Functions",
@@ -1721,7 +2065,15 @@
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					10,
+					1,
+					10
+				],
+				"size_group": "environment"
+			}
 		},
 		"marchingcubes_voxel_noise_demo": {
 			"name": "Marching Cubes Voxel Noise",
@@ -1735,7 +2087,15 @@
 				"isosurfaces",
 				"proceduralgeneration_all"
 			],
-			"sequence": "randomness"
+			"sequence": "randomness",
+			"parameters": {
+				"footprint": [
+					33,
+					33,
+					33
+				],
+				"size_group": "world_scale"
+			}
 		},
 		"bubble_particles": {
 			"name": "Bubble Particles",

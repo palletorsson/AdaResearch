@@ -14,7 +14,14 @@
 			"qfep_connection": "Lyapunov exponents measure φΔE(S,t) — the rate at which nearby trajectories diverge. Positive exponent = high sensitivity, the system amplifies small differences. This IS the sensitivity term: how fast entropy changes.",
 			"category": "chaos",
 			"complexity": "advanced",
-			"tags": ["lyapunov", "chaos", "divergence", "sensitivity", "dynamical_systems", "exponent"],
+			"tags": [
+				"lyapunov",
+				"chaos",
+				"divergence",
+				"sensitivity",
+				"dynamical_systems",
+				"exponent"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -27,7 +34,14 @@
 			"qfep_connection": "Systems that never repeat but never escape — bounded chaos. The attractor IS the edge of chaos geometry: infinite complexity E(S) confined to finite structure F. Same equations, different initial conditions yield different trajectories but the same attractor shape.",
 			"category": "chaos",
 			"complexity": "intermediate",
-			"tags": ["strange_attractor", "lorenz", "rossler", "chaos", "fractal", "phase_space"],
+			"tags": [
+				"strange_attractor",
+				"lorenz",
+				"rossler",
+				"chaos",
+				"fractal",
+				"phase_space"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -40,7 +54,15 @@
 			"qfep_connection": "Maps regions of parameter space by stability — blue = ordered (λ→0), warm = chaotic (λ→1). The fractal boundary between them IS the edge of chaos rendered as image. The alien calligraphy traces exactly where F-minimization fails.",
 			"category": "chaos",
 			"complexity": "intermediate",
-			"tags": ["lyapunov", "fractal", "logistic_map", "chaos", "stability", "parameter_space", "exponent"],
+			"tags": [
+				"lyapunov",
+				"fractal",
+				"logistic_map",
+				"chaos",
+				"stability",
+				"parameter_space",
+				"exponent"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": []
@@ -53,11 +75,31 @@
 			"qfep_connection": "The Mandelbrot boundary is exactly lambda_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
 			"category": "fractals",
 			"complexity": "intermediate",
-			"tags": ["mandelbrot", "fractal", "self_similarity", "infinite_detail", "shader", "interactive", "zoom"],
+			"tags": [
+				"mandelbrot",
+				"fractal",
+				"self_similarity",
+				"infinite_detail",
+				"shader",
+				"interactive",
+				"zoom"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["fractals"]
+			"map_sequences": [
+				"fractals"
+			],
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }
-

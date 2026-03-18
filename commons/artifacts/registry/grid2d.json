@@ -17,7 +17,15 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_life": {
 			"name": "Grid2D — Game of Life",
@@ -39,7 +47,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_seeds": {
 			"name": "Grid2D — Seeds",
@@ -60,7 +76,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_brians_brain": {
 			"name": "Grid2D — Brian's Brain",
@@ -81,7 +105,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_rule30": {
 			"name": "Grid2D — Rule 30",
@@ -103,7 +135,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_rule110": {
 			"name": "Grid2D — Rule 110",
@@ -126,7 +166,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_rule90": {
 			"name": "Grid2D — Rule 90",
@@ -149,7 +197,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_bfs": {
 			"name": "Grid2D — BFS Flood Fill",
@@ -172,7 +228,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_dfs_maze": {
 			"name": "Grid2D — DFS Maze Generator",
@@ -195,7 +259,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"searchpathfinding"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_wireworld": {
 			"name": "Grid2D — Wireworld",
@@ -217,7 +289,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"grid2d_langtons_ant": {
 			"name": "Grid2D — Langton's Ant",
@@ -239,7 +319,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }

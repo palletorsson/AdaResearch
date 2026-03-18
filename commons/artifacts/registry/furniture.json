@@ -301,7 +301,15 @@
 			"map_sequences": [
 				"lab"
 			],
-			"sequence": "lab"
+			"sequence": "lab",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
 		},
 		"audio_catalog_tablet": {
 			"name": "Audio Catalog Tablet",
@@ -314,7 +322,15 @@
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions"
+			"sequence": "wavefunctions",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"artifact_catalog_kiosk": {
 			"name": "Artifact Catalog Kiosk",
@@ -361,7 +377,15 @@
 			"map_sequences": [
 				"lab"
 			],
-			"sequence": "lab"
+			"sequence": "lab",
+			"parameters": {
+				"footprint": [
+					2,
+					4,
+					5
+				],
+				"size_group": "environment"
+			}
 		}
 	}
 }

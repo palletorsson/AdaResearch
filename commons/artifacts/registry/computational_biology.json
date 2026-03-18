@@ -1,164 +1,188 @@
 {
-  "registry_info": {
-    "name": "computational_biology",
-    "description": "Computational biology artifacts — limb growth, morphogenesis, protein folding, and radiolarian skeletons. Algorithms that model how living systems build themselves.",
-    "category": "biology",
-    "theoretical_grounding": "Morphogenesis (Turing), developmental biology, Monte Carlo methods in biochemistry, radiolarian geometry, procedural growth"
-  },
-  "artifacts": {
-    "growslimbs": {
-      "lookup_name": "growslimbs",
-      "scene": "res://algorithms/computationalbiology/growslimbs/growslimbs.tscn",
-      "name": "Growing Limbs",
-      "description": "Procedural limb growth simulation — branching structures emerge from growth rules, mimicking how organisms develop appendages through iterative cell division and differentiation.",
-      "category": "biology",
-      "complexity": "intermediate",
-      "tags": [
-        "growth",
-        "limb",
-        "branching",
-        "morphogenesis",
-        "biology",
-        "procedural"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "limbgrowth": {
-      "lookup_name": "limbgrowth",
-      "scene": "res://algorithms/computationalbiology/limbgrowth/limbgrowth.tscn",
-      "name": "Limb Growth",
-      "description": "Detailed limb growth and segmentation model — joints, proportions, and symmetry emerging from simple growth parameters. Biology's recipe for building bodies.",
-      "category": "biology",
-      "complexity": "intermediate",
-      "tags": [
-        "limb",
-        "growth",
-        "segmentation",
-        "joints",
-        "biology",
-        "morphogenesis"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "monte_carlo_protein": {
-      "lookup_name": "monte_carlo_protein",
-      "scene": "res://algorithms/computationalbiology/montecarloproteinchain/monte_carl_methods_protein.tscn",
-      "name": "Monte Carlo Protein Folding",
-      "description": "Protein chain folding using Monte Carlo methods — random conformational changes accepted or rejected by energy minimization. The computational approach to understanding how amino acid sequences become functional 3D shapes.",
-      "category": "biology",
-      "complexity": "advanced",
-      "tags": [
-        "monte_carlo",
-        "protein",
-        "folding",
-        "energy_minimization",
-        "bioinformatics",
-        "biology"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "morphobody": {
-      "lookup_name": "morphobody",
-      "scene": "res://algorithms/computationalbiology/morphobody/morphobody.tscn",
-      "name": "Morpho Body",
-      "description": "Morphogenetic body construction — how body plans emerge from developmental rules. From simple gradients to complex anatomies through Turing-like pattern formation.",
-      "category": "biology",
-      "complexity": "intermediate",
-      "tags": [
-        "morphogenesis",
-        "body_plan",
-        "turing_pattern",
-        "development",
-        "biology"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "radiolaria": {
-      "lookup_name": "radiolaria",
-      "scene": "res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn",
-      "name": "Radiolaria",
-      "description": "Procedural radiolarian skeleton generation — the impossibly intricate silica structures of single-celled organisms. Geometry so perfect it inspired Ernst Haeckel's 'Art Forms in Nature'.",
-      "category": "biology",
-      "complexity": "intermediate",
-      "tags": [
-        "radiolaria",
-        "skeleton",
-        "haeckel",
-        "geometry",
-        "biology",
-        "procedural"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "softbodies"
-      ]
-    },
-    "ten_tulip_buckets": {
-      "lookup_name": "ten_tulip_buckets",
-      "scene": "res://algorithms/computationalbiology/bucketoftulips/ten_tulip_buckets.tscn",
-      "name": "Ten Tulip Buckets",
-      "description": "Array of procedurally generated tulip bouquets — each bucket grows tulips from parametric curves with randomized variations. Botanical algorithms producing natural beauty.",
-      "category": "biology",
-      "complexity": "beginner",
-      "tags": [
-        "tulip",
-        "plant",
-        "procedural",
-        "botanical",
-        "biology",
-        "array"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "MolecularDesigner": {
-      "lookup_name": "MolecularDesigner",
-      "scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
-      "name": "Molecular Designer",
-      "description": "Interactive molecular construction tool — atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.",
-      "category": "biology",
-      "complexity": "advanced",
-      "tags": [
-        "molecular",
-        "chemistry",
-        "constraint_satisfaction",
-        "valence",
-        "biology",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "postfoundationscrisis"
-      ]
-    },
-    "attractorsphere": {
-      "lookup_name": "attractorsphere",
-      "name": "attractorsphere",
-      "description": "attractorsphere",
-      "scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "transformation"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    }
-  }
+	"registry_info": {
+		"name": "computational_biology",
+		"description": "Computational biology artifacts — limb growth, morphogenesis, protein folding, and radiolarian skeletons. Algorithms that model how living systems build themselves.",
+		"category": "biology",
+		"theoretical_grounding": "Morphogenesis (Turing), developmental biology, Monte Carlo methods in biochemistry, radiolarian geometry, procedural growth"
+	},
+	"artifacts": {
+		"growslimbs": {
+			"lookup_name": "growslimbs",
+			"scene": "res://algorithms/computationalbiology/growslimbs/growslimbs.tscn",
+			"name": "Growing Limbs",
+			"description": "Procedural limb growth simulation — branching structures emerge from growth rules, mimicking how organisms develop appendages through iterative cell division and differentiation.",
+			"category": "biology",
+			"complexity": "intermediate",
+			"tags": [
+				"growth",
+				"limb",
+				"branching",
+				"morphogenesis",
+				"biology",
+				"procedural"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"limbgrowth": {
+			"lookup_name": "limbgrowth",
+			"scene": "res://algorithms/computationalbiology/limbgrowth/limbgrowth.tscn",
+			"name": "Limb Growth",
+			"description": "Detailed limb growth and segmentation model — joints, proportions, and symmetry emerging from simple growth parameters. Biology's recipe for building bodies.",
+			"category": "biology",
+			"complexity": "intermediate",
+			"tags": [
+				"limb",
+				"growth",
+				"segmentation",
+				"joints",
+				"biology",
+				"morphogenesis"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"monte_carlo_protein": {
+			"lookup_name": "monte_carlo_protein",
+			"scene": "res://algorithms/computationalbiology/montecarloproteinchain/monte_carl_methods_protein.tscn",
+			"name": "Monte Carlo Protein Folding",
+			"description": "Protein chain folding using Monte Carlo methods — random conformational changes accepted or rejected by energy minimization. The computational approach to understanding how amino acid sequences become functional 3D shapes.",
+			"category": "biology",
+			"complexity": "advanced",
+			"tags": [
+				"monte_carlo",
+				"protein",
+				"folding",
+				"energy_minimization",
+				"bioinformatics",
+				"biology"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"morphobody": {
+			"lookup_name": "morphobody",
+			"scene": "res://algorithms/computationalbiology/morphobody/morphobody.tscn",
+			"name": "Morpho Body",
+			"description": "Morphogenetic body construction — how body plans emerge from developmental rules. From simple gradients to complex anatomies through Turing-like pattern formation.",
+			"category": "biology",
+			"complexity": "intermediate",
+			"tags": [
+				"morphogenesis",
+				"body_plan",
+				"turing_pattern",
+				"development",
+				"biology"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"radiolaria": {
+			"lookup_name": "radiolaria",
+			"scene": "res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn",
+			"name": "Radiolaria",
+			"description": "Procedural radiolarian skeleton generation — the impossibly intricate silica structures of single-celled organisms. Geometry so perfect it inspired Ernst Haeckel's 'Art Forms in Nature'.",
+			"category": "biology",
+			"complexity": "intermediate",
+			"tags": [
+				"radiolaria",
+				"skeleton",
+				"haeckel",
+				"geometry",
+				"biology",
+				"procedural"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"ten_tulip_buckets": {
+			"lookup_name": "ten_tulip_buckets",
+			"scene": "res://algorithms/computationalbiology/bucketoftulips/ten_tulip_buckets.tscn",
+			"name": "Ten Tulip Buckets",
+			"description": "Array of procedurally generated tulip bouquets — each bucket grows tulips from parametric curves with randomized variations. Botanical algorithms producing natural beauty.",
+			"category": "biology",
+			"complexity": "beginner",
+			"tags": [
+				"tulip",
+				"plant",
+				"procedural",
+				"botanical",
+				"biology",
+				"array"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"MolecularDesigner": {
+			"lookup_name": "MolecularDesigner",
+			"scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+			"name": "Molecular Designer",
+			"description": "Interactive molecular construction tool — atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.",
+			"category": "biology",
+			"complexity": "advanced",
+			"tags": [
+				"molecular",
+				"chemistry",
+				"constraint_satisfaction",
+				"valence",
+				"biology",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					6,
+					8
+				],
+				"size_group": "environment"
+			}
+		},
+		"attractorsphere": {
+			"lookup_name": "attractorsphere",
+			"name": "attractorsphere",
+			"description": "attractorsphere",
+			"scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		}
+	}
 }

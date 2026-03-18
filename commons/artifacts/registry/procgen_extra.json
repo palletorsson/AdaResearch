@@ -1,2285 +1,3157 @@
 {
-  "registry_info": {
-    "name": "procgen_extra",
-    "description": "Additional procedural generation artifacts â€” wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
-    "category": "proceduralgeneration",
-    "theoretical_grounding": "Constraint satisfaction (WFC), higher-dimensional geometry (tesseracts, penteracts), Turing patterns, maze generation algorithms"
-  },
-  "artifacts": {
-    "wfc": {
-      "lookup_name": "wfc",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFC.tscn",
-      "name": "Wave Function Collapse",
-      "description": "Wave Function Collapse algorithm â€” generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
-      "category": "proceduralgeneration",
-      "complexity": "advanced",
-      "tags": [
-        "wfc",
-        "wave_function_collapse",
-        "constraint",
-        "procedural",
-        "generation",
-        "tile"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "reaction_diffusion": {
-      "lookup_name": "reaction_diffusion",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
-      "name": "Reaction Diffusion",
-      "description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
-      "category": "proceduralgeneration",
-      "complexity": "intermediate",
-      "tags": [
-        "reaction_diffusion",
-        "turing_pattern",
-        "gray_scott",
-        "morphogenesis",
-        "growth"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "softbodies"
-      ]
-    },
-    "reaction_diffusion_vr": {
-      "lookup_name": "reaction_diffusion_vr",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",
-      "name": "Reaction Diffusion (VR)",
-      "description": "Turing reaction-diffusion patterns in VR â€” two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
-      "category": "proceduralgeneration",
-      "complexity": "intermediate",
-      "tags": [
-        "reaction_diffusion",
-        "turing_pattern",
-        "morphogenesis",
-        "vr",
-        "growth"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "tesseract_tunnel": {
-      "lookup_name": "tesseract_tunnel",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel.tscn",
-      "name": "Tesseract Tunnel",
-      "description": "Fly through a tunnel of rotating tesseracts â€” 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
-      "category": "proceduralgeneration",
-      "complexity": "advanced",
-      "tags": [
-        "tesseract",
-        "4d",
-        "hypercube",
-        "tunnel",
-        "projection",
-        "higher_dimensional"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "penteract_double_projection": {
-      "lookup_name": "penteract_double_projection",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/penteract_double_projection.tscn",
-      "name": "Penteract Double Projection",
-      "description": "5D hypercube (penteract) projected twice â€” from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
-      "category": "proceduralgeneration",
-      "complexity": "advanced",
-      "tags": [
-        "penteract",
-        "5d",
-        "projection",
-        "hypercube",
-        "higher_dimensional"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "maze_generator": {
-      "lookup_name": "maze_generator",
-      "scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn",
-      "name": "Maze Generator",
-      "description": "Procedural maze generation â€” watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
-      "category": "proceduralgeneration",
-      "complexity": "beginner",
-      "tags": [
-        "maze",
-        "generation",
-        "dfs",
-        "backtracking",
-        "spanning_tree",
-        "procedural"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "room_grammar": {
-      "lookup_name": "room_grammar",
-      "scene": "res://commons/artifacts/room_grammar/room_grammar.tscn",
-      "name": "Room Grammar",
-      "description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
-      "category": "proceduralgeneration",
-      "complexity": "intermediate",
-      "tags": [
-        "bsp",
-        "room",
-        "floor_plan",
-        "shape_grammar",
-        "procedural",
-        "architecture",
-        "partition"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "terrain_erosion": {
-      "lookup_name": "terrain_erosion",
-      "scene": "res://commons/artifacts/terrain_erosion/terrain_erosion.tscn",
-      "name": "Terrain Erosion",
-      "description": "Hydraulic erosion on a procedural heightmap â€” layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
-      "category": "proceduralgeneration",
-      "complexity": "advanced",
-      "tags": [
-        "erosion",
-        "hydraulic",
-        "heightmap",
-        "terrain",
-        "procedural",
-        "landscape",
-        "sediment"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "cave_generator": {
-      "lookup_name": "cave_generator",
-      "scene": "res://commons/artifacts/cave_generator/cave_generator.tscn",
-      "name": "Cave Generator",
-      "description": "Cellular automaton cave generation with flood-fill connectivity â€” classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
-      "category": "proceduralgeneration",
-      "complexity": "intermediate",
-      "tags": [
-        "cave",
-        "cellular_automaton",
-        "flood_fill",
-        "roguelike",
-        "procedural",
-        "generation",
-        "connectivity"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "genetic_programming": {
-      "lookup_name": "genetic_programming",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
-      "name": "Genetic Programming",
-      "description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
-      "category": "proceduralgeneration",
-      "complexity": "advanced",
-      "tags": [
-        "genetic_programming",
-        "evolution",
-        "fitness",
-        "crossover",
-        "mutation",
-        "3d_shape",
-        "growth"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "flower_lab": {
-      "lookup_name": "flower_lab",
-      "scene": "res://commons/artifacts/flower_lab/flower_lab.tscn",
-      "name": "Flower Lab",
-      "description": "Interactive botanical laboratory â€” VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
-      "category": "proceduralgeneration",
-      "complexity": "beginner",
-      "tags": [
-        "flower",
-        "procedural",
-        "interactive",
-        "botanical",
-        "morphology",
-        "vr",
-        "sliders"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": []
-    },
-    "ik_arm_demo": {
-      "lookup_name": "ik_arm_demo",
-      "scene": "res://commons/artifacts/ik_arm_demo/ik_arm_demo.tscn",
-      "name": "IK Arm Demo",
-      "description": "Standalone TwoBoneIK3D arm demonstration — two procedural arms with animated targets tracing figure-8 patterns. Shows the same inverse kinematics solver used for VR body tracking.",
-      "category": "body",
-      "complexity": "intermediate",
-      "tags": [
-        "ik",
-        "inverse_kinematics",
-        "two_bone_ik",
-        "arm",
-        "body",
-        "skeleton",
-        "procedural_mesh"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bodyprogression"
-      ]
-    },
-    "torso_estimation_vis": {
-      "lookup_name": "torso_estimation_vis",
-      "scene": "res://commons/artifacts/torso_estimation_vis/torso_estimation_vis.tscn",
-      "name": "Torso Estimation Visualization",
-      "description": "3-point torso estimation demo — shows how head + two hand positions estimate torso orientation. Animated tracking points with visible shoulder computation and forward direction.",
-      "category": "body",
-      "complexity": "intermediate",
-      "tags": [
-        "torso",
-        "estimation",
-        "tracking",
-        "body",
-        "vr",
-        "3point",
-        "ik"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bodyprogression"
-      ]
-    },
-    "mirror_artifact": {
-      "lookup_name": "mirror_artifact",
-      "scene": "res://commons/artifacts/mirror_artifact/mirror_artifact.tscn",
-      "name": "Mirror Artifact",
-      "description": "Reflective mirror panel showing the player what their hands look like. A large vertical mirror surface with metallic material and decorative wooden frame.",
-      "category": "body",
-      "complexity": "beginner",
-      "tags": [
-        "mirror",
-        "body",
-        "reflection",
-        "hands",
-        "self"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bodyprogression"
-      ]
-    },
-    "necklace_anchor": {
-      "lookup_name": "necklace_anchor",
-      "scene": "res://commons/artifacts/necklace_anchor/necklace_anchor.tscn",
-      "name": "Necklace Anchor",
-      "description": "Pendant necklace display on a stand showing the concept of an identity anchor point. A vertical stand with torus ring, glowing gem pendant that slowly rotates.",
-      "category": "body",
-      "complexity": "beginner",
-      "tags": [
-        "necklace",
-        "pendant",
-        "anchor",
-        "identity",
-        "body",
-        "jewelry"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bodyprogression"
-      ]
-    },
-    "dress_selector": {
-      "lookup_name": "dress_selector",
-      "scene": "res://commons/artifacts/dress_selector/dress_selector.tscn",
-      "name": "Dress Selector",
-      "description": "Outfit selection interface with three mannequin display forms in Classic, Wicked, and Custom styles. Each mannequin has a selection button for choosing an outfit.",
-      "category": "body",
-      "complexity": "beginner",
-      "tags": [
-        "dress",
-        "outfit",
-        "selector",
-        "mannequin",
-        "body",
-        "fashion",
-        "customization"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "bodyprogression"
-      ]
-    },
-    "botanical_flower": {
-      "lookup_name": "botanical_flower",
-      "scene": "res://commons/artifacts/botanical_flower/botanical_flower.tscn",
-      "name": "Botanical Flower",
-      "description": "Standalone procedural flower — configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
-      "category": "proceduralgeneration",
-      "complexity": "beginner",
-      "tags": [
-        "flower",
-        "procedural",
-        "botanical",
-        "morphology",
-        "growth"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "flowers"
-      ]
-    },
-    "water_flowers": {
-      "lookup_name": "water_flowers",
-      "scene": "res://commons/artifacts/water_flowers/water_flowers.tscn",
-      "name": "Water Flowers",
-      "description": "Floating flowers on physically simulated Gerstner waves — buoyancy, wave alignment, and drift create a mesmerizing water garden. Configurable flower count, water size, wave strength, and drift speed.",
-      "category": "physicssimulation",
-      "complexity": "intermediate",
-      "tags": [
-        "water",
-        "flower",
-        "physics",
-        "buoyancy",
-        "waves",
-        "simulation"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "flowers"
-      ]
-    },
-    "example_8_6_recursive_tree_vr": {
-      "lookup_name": "example_8_6_recursive_tree_vr",
-      "name": "example_8_6_recursive_tree_vr",
-      "description": "texample_8_6_recursive_tree_vr",
-      "scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "example_8_3_recursion_circles_vr": {
-      "lookup_name": "example_8_3_recursion_circles_vr",
-      "name": "example_8_3_recursion_circles_vr",
-      "description": "this is the test",
-      "scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fibonacci_pagoda": {
-      "lookup_name": "fibonacci_pagoda",
-      "name": "fibonacci_pagoda",
-      "description": "fibonacci_pagoda",
-      "scene": "res://algorithms/fractals/pillar/fibonacci_pagoda.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        5,
-        8,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "test_scene_3": {
-      "lookup_name": "test_scene_3",
-      "name": "test",
-      "description": "this is the test",
-      "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "test_scene_4": {
-      "lookup_name": "test_scene_4",
-      "name": "This is just a test",
-      "description": "this is the test",
-      "scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "test_scene_5": {
-      "lookup_name": "test_scene_5",
-      "name": "test",
-      "description": "this is the test",
-      "scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "test_scene_6": {
-      "lookup_name": "test_scene_6",
-      "name": "This is just a test",
-      "description": "this is the test",
-      "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        4,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "marching_cubes_sculpt_vr": {
-      "lookup_name": "marching_cubes_sculpt_vr",
-      "name": "Marching Cubes VR Sculpt",
-      "description": "VR paintable marching cubes - sculpt in 3D with your controllers using GPU compute shaders",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "koch_curve_3d": {
-      "lookup_name": "koch_curve_3d",
-      "name": "3D Koch Curve",
-      "description": "Three-dimensional recursive Koch snowflake curve generation",
-      "scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals",
-        "recursiveemergence"
-      ],
-      "footprint": [
-        1,
-        1,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "cantor_set": {
-      "lookup_name": "cantor_set",
-      "name": "cantor_set",
-      "description": "cantor_set",
-      "scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        13,
-        4,
-        14
-      ],
-      "size_group": "world_scale"
-    },
-    "romanesco": {
-      "lookup_name": "romanesco",
-      "name": "romanesco",
-      "description": "romanesco",
-      "scene": "res://algorithms/fractals/romanesco/romanesco.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        8,
-        4,
-        8
-      ],
-      "size_group": "environment"
-    },
-    "sierpinski_triangle": {
-      "lookup_name": "sierpinski_triangle",
-      "name": "sierpinski_triangle",
-      "description": "sierpinski_triangle",
-      "scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "cube_subdivision": {
-      "lookup_name": "cube_subdivision",
-      "name": "cube_subdivision",
-      "description": "cube_subdivision",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "recursive_chair": {
-      "lookup_name": "recursive_chair",
-      "name": "Recursive Chair",
-      "description": "Chair created through recursive cube subdivision",
-      "scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        6,
-        3,
-        4
-      ],
-      "size_group": "environment"
-    },
-    "recursive_table": {
-      "lookup_name": "recursive_table",
-      "name": "recursive_table",
-      "description": "recursive_table",
-      "scene": "res://algorithms/fractals/cubesubdivision/recursive_table.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        6,
-        3,
-        4
-      ],
-      "size_group": "environment"
-    },
-    "koch_curve_1": {
-      "lookup_name": "koch_curve_1",
-      "name": "koch_curve_!",
-      "description": "koch_curve_1",
-      "scene": "res://algorithms/fractals/koch_curve_1/koch_curve.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        9,
-        16,
-        3
-      ],
-      "size_group": "world_scale"
-    },
-    "recursive_tree": {
-      "lookup_name": "recursive_tree",
-      "name": "recursive_tree",
-      "description": "recursive_tree",
-      "scene": "res://algorithms/fractals/recursive_tree/recursive_tree.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "datastructures",
-        "fractals",
-        "proceduralgeneration",
-        "proceduralgeneration_all",
-        "recursiveemergence"
-      ],
-      "footprint": [
-        1,
-        6,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "crackpropagation_ca": {
-      "lookup_name": "crackpropagation_ca",
-      "name": "crackpropagation_ca",
-      "description": "crackpropagation_ca",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "biological_growth"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "dewcoveredfol": {
-      "lookup_name": "dewcoveredfol",
-      "name": "dewcoveredfol",
-      "description": "dewcoveredfol",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/dewcoveredfoliage/dewcoveredfoliage.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "percolationnetwork_ca": {
-      "lookup_name": "percolationnetwork_ca",
-      "name": "percolationnetwork_ca",
-      "description": "percolationnetwork_ca",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "footprint": [
-        18,
-        1,
-        18
-      ],
-      "size_group": "world_scale"
-    },
-    "mandelbrot_set": {
-      "lookup_name": "mandelbrot_set",
-      "name": "Mandelbrot Set",
-      "description": "Fractal visualization of the famous Mandelbrot set",
-      "scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals",
-        "recursiveemergence"
-      ],
-      "footprint": [
-        17,
-        19,
-        9
-      ],
-      "size_group": "world_scale"
-    },
-    "julia_set": {
-      "lookup_name": "julia_set",
-      "name": "Julia Set",
-      "description": "Complex plane fractal visualization of Julia sets",
-      "scene": "res://algorithms/fractals/julia_set/julia_set.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals",
-        "proceduralgeneration",
-        "proceduralgeneration_all",
-        "recursiveemergence"
-      ],
-      "footprint": [
-        17,
-        16,
-        21
-      ],
-      "size_group": "world_scale"
-    },
-    "SierpinskiPyramid": {
-      "lookup_name": "SierpinskiPyramid",
-      "name": "SierpinskiPyramid",
-      "description": "SierpinskiPyramid",
-      "scene": "res://algorithms/fractals/sierpinski_pyramid/SierpinskiPyramid.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        5,
-        5,
-        5
-      ],
-      "size_group": "environment"
-    },
-    "CaveGenerator": {
-      "lookup_name": "CaveGenerator",
-      "name": "CaveGenerator",
-      "description": "CaveGenerator",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/cave_generator/CaveGenerator.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "wave_function_collapse": {
-      "lookup_name": "wave_function_collapse",
-      "name": "Wave Function Collapse",
-      "description": "Procedural generation using wave function collapse algorithm",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/wave_function_collapse.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "constraint_solvers",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        17,
-        16,
-        1
-      ],
-      "size_group": "world_scale"
-    },
-    "WFCCav": {
-      "lookup_name": "WFCCav",
-      "name": "WFCCav",
-      "description": "WFCCav",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFCCave.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        16,
-        4,
-        16
-      ],
-      "size_group": "world_scale"
-    },
-    "wfc_3d_demo": {
-      "lookup_name": "wfc_3d_demo",
-      "name": "wfc_3d_demo",
-      "description": "wfc_3d_demo",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfc3D/wfc_3d_demo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "constraint_solvers",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        22,
-        5,
-        22
-      ],
-      "size_group": "world_scale"
-    },
-    "voronoi_diagrams": {
-      "lookup_name": "voronoi_diagrams",
-      "name": "Voronoi Diagrams",
-      "description": "Spatial partitioning using Voronoi tessellation algorithms",
-      "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/voronoi_diagrams.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        17,
-        25,
-        16
-      ],
-      "size_group": "world_scale"
-    },
-    "tree_gen": {
-      "lookup_name": "tree_gen",
-      "name": "Tree Generator",
-      "description": "Procedural tree generation with branching algorithms",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/treegen/gen_tree.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "biological_growth",
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "gridscheckers": {
-      "lookup_name": "gridscheckers",
-      "name": "gridscheckers",
-      "description": "gridscheckers",
-      "scene": "res://algorithms/patterngeneration/gridscheckers/gridscheckers.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        3,
-        7
-      ],
-      "size_group": "environment"
-    },
-    "animalpatterns": {
-      "lookup_name": "animalpatterns",
-      "name": "animalpatterns",
-      "description": "animalpatterns",
-      "scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        8,
-        4,
-        9
-      ],
-      "size_group": "environment"
-    },
-    "fabrics": {
-      "lookup_name": "fabrics",
-      "name": "fabrics",
-      "description": "fabrics",
-      "scene": "res://algorithms/patterngeneration/fabrics/fabrics.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        6,
-        4,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "truchettiles": {
-      "lookup_name": "truchettiles",
-      "name": "truchettiles",
-      "description": "truchettiles",
-      "scene": "res://algorithms/patterngeneration/truchettiles/truchettiles.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        6,
-        3,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "waves": {
-      "lookup_name": "waves",
-      "name": "waves",
-      "description": "waves",
-      "scene": "res://algorithms/patterngeneration/waves/waves.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "patterngeneration"
-      ],
-      "footprint": [
-        7,
-        1,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "glassdivider": {
-      "lookup_name": "glassdivider",
-      "name": "glassdivider",
-      "description": "glassdivider",
-      "scene": "res://algorithms/patterngeneration/glassdivider/glassdivider.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        18,
-        13,
-        9
-      ],
-      "size_group": "world_scale"
-    },
-    "tile_patterns": {
-      "lookup_name": "tile_patterns",
-      "name": "Tile Patterns",
-      "description": "Procedural tile pattern generation and tiling algorithms",
-      "scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/tilepattern.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "GeneticProgramming": {
-      "lookup_name": "GeneticProgramming",
-      "name": "GeneticProgramming",
-      "description": "GeneticProgramming",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "liquid_simulation": {
-      "lookup_name": "liquid_simulation",
-      "name": "Liquid Simulation",
-      "description": "Particle-based liquid simulation and fluid dynamics",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "mushrooms": {
-      "lookup_name": "mushrooms",
-      "name": "Mushrooms",
-      "description": "Interactive procedural mushroom generation with organic growth patterns",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "biological_growth",
-        "randomness"
-      ],
-      "footprint": [
-        1,
-        5,
-        4
-      ],
-      "size_group": "environment"
-    },
-    "metaballs": {
-      "lookup_name": "metaballs",
-      "name": "Metaballs",
-      "description": "Interactive metaball visualization demonstrating implicit surface modeling",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces"
-      ],
-      "footprint": [
-        12,
-        12,
-        12
-      ],
-      "size_group": "world_scale"
-    },
-    "maze_generation": {
-      "lookup_name": "maze_generation",
-      "name": "Maze Generation",
-      "description": "VR-scale walkable maze with recursive backtracking generation",
-      "scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "layered_membrane": {
-      "lookup_name": "layered_membrane",
-      "name": "Layered Membrane",
-      "description": "Procedural membrane generation with layered structures",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "implicit_surface_modeling": {
-      "lookup_name": "implicit_surface_modeling",
-      "name": "Implicit Surface Modeling",
-      "description": "Metaball-based implicit surface generation and modeling",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        12,
-        12,
-        12
-      ],
-      "size_group": "world_scale"
-    },
-    "WFCSculptureGenerator": {
-      "lookup_name": "WFCSculptureGenerator",
-      "name": "WFCSculptureGenerator",
-      "description": "WFCSculptureGenerator",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "WFC3DGenerator": {
-      "lookup_name": "WFC3DGenerator",
-      "name": "WWFC3DGeneratorr",
-      "description": "WFC3DGenerator",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        45,
-        12,
-        45
-      ],
-      "size_group": "world_scale"
-    },
-    "modelsynthesis": {
-      "lookup_name": "modelsynthesis",
-      "name": "modelsynthesis",
-      "description": "modelsynthesis",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/modelsynthesis.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "testmaps"
-      ],
-      "footprint": [
-        13,
-        3,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "spherenetwork": {
-      "lookup_name": "spherenetwork",
-      "name": "spherenetwork",
-      "description": "spherenetwork",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/spherenetwork/spherenetwork.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "branching_growth_algorithm": {
-      "lookup_name": "branching_growth_algorithm",
-      "name": "Branching Growth Algorithm",
-      "description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all",
-        "softbodies"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "branching_growth_algorithm_continued": {
-      "lookup_name": "branching_growth_algorithm_continued",
-      "name": "Branching Growth Algorithm continued",
-      "description": "Procedural branching and growth pattern generation",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "marchingcave": {
-      "lookup_name": "marchingcave",
-      "name": "marchingcave",
-      "description": "marchingcave",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        7,
-        41,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "marchingcubes_cave": {
-      "lookup_name": "marchingcubes_cave",
-      "name": "marchingcubes_cave",
-      "description": "marchingcubes_cave",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        46,
-        44,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "marchingcubes_flat_landscape": {
-      "lookup_name": "marchingcubes_flat_landscape",
-      "name": "marchingcubes_flat_landscape",
-      "description": "marchingcubes_flat_landscape",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        36,
-        50,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "marchingcubes_torus_sculpture": {
-      "lookup_name": "marchingcubes_torus_sculpture",
-      "name": "marchingcubes_torus_sculpture",
-      "description": "marchingcubes_torus_sculpture",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        50,
-        50,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "marchingcubes_inside_cave": {
-      "lookup_name": "marchingcubes_inside_cave",
-      "name": "marchingcubes_inside_cave",
-      "description": "marchingcubes_inside_cave",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        50,
-        30,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "wfc_dungeon_generator": {
-      "lookup_name": "wfc_dungeon_generator",
-      "name": "wfc_dungeon_generator",
-      "description": "wfc_dungeon_generator",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_dungeon_generator.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "constraint_solvers",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        13,
-        3,
-        18
-      ],
-      "size_group": "world_scale"
-    },
-    "boolean_patterns": {
-      "lookup_name": "boolean_patterns",
-      "name": "boolean_patterns",
-      "description": "boolean_patterns",
-      "scene": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "constraint_solvers",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        36,
-        27,
-        41
-      ],
-      "size_group": "world_scale"
-    },
-    "marching_cubes_gallery": {
-      "lookup_name": "marching_cubes_gallery",
-      "name": "marching_cubes_gallery",
-      "description": "marching_cubes_gallery",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/sculpture_gallery.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        50,
-        17,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "cave_explorer_3d_ui": {
-      "lookup_name": "cave_explorer_3d_ui",
-      "name": "cave_explorer_3d_ui",
-      "description": "cave_explorer_3d_ui",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/cave_explorer_3d_ui.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        2,
-        2
-      ],
-      "size_group": "compact"
-    },
-    "marchingcubes_portal_landscape": {
-      "lookup_name": "marchingcubes_portal_landscape",
-      "name": "marchingcubes_portal_landscape",
-      "description": "marchingcubes_portal_landscape",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        50,
-        50,
-        50
-      ],
-      "size_group": "world_scale"
-    },
-    "GyroidDemo": {
-      "lookup_name": "GyroidDemo",
-      "name": "GyroidDemo",
-      "description": "GyroidDemo",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "isosurfaces",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        41,
-        31,
-        41
-      ],
-      "size_group": "world_scale"
-    },
-    "marching_cubes_cave_gallery": {
-      "lookup_name": "marching_cubes_cave_gallery",
-      "name": "marching_cubes_cave_gallery",
-      "description": "marching_cubes_cave_gallery",
-      "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marching_cubes_gallery.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        46,
-        17,
-        41
-      ],
-      "size_group": "world_scale"
-    },
-    "modernistchairgallery": {
-      "lookup_name": "modernistchairgallery",
-      "name": "modernistchairgallery",
-      "description": "Physics constraint systems for maintaining object relationships",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "tesseract_net_space_showcase": {
-      "lookup_name": "tesseract_net_space_showcase",
-      "name": "tesseract_net_space_showcase",
-      "description": "tesseract_net_space_showcase",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/tesseract_net_space_showcase.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        16,
-        4,
-        16
-      ],
-      "size_group": "world_scale"
-    },
-    "sixteen_cell_net_space_showcase": {
-      "lookup_name": "sixteen_cell_net_space_showcase",
-      "name": "sixteen_cell_net_space_showcase",
-      "description": "sixteen_cell_net_space_showcase",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions",
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        21,
-        4,
-        21
-      ],
-      "size_group": "world_scale"
-    },
-    "tessellating_portal_demo": {
-      "lookup_name": "tessellating_portal_demo",
-      "name": "tessellating_portal_demo",
-      "description": "tessellating_portal_demo",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/tessellating_portal_demo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        6,
-        9
-      ],
-      "size_group": "environment"
-    },
-    "tesseract_tunnel_demo": {
-      "lookup_name": "tesseract_tunnel_demo",
-      "name": "tesseract_tunnel_demo",
-      "description": "tesseract_tunnel_demo",
-      "scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel_demo.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "higher_dimensions",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        9,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "binary_space_partitioning": {
-      "lookup_name": "binary_space_partitioning",
-      "name": "binary_space_partitioning",
-      "description": "binary_space_partitioning",
-      "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "spatial_partitioning"
-      ],
-      "footprint": [
-        11,
-        1,
-        11
-      ],
-      "size_group": "world_scale"
-    },
-    "poisson_disk_sampling_3d": {
-      "lookup_name": "poisson_disk_sampling_3d",
-      "name": "poisson_disk_sampling_3d",
-      "description": "poisson_disk_sampling_3d",
-      "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "spatial_partitioning"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "space_colonization_algorithm": {
-      "lookup_name": "space_colonization_algorithm",
-      "name": "space_colonization_algorithm",
-      "description": "space_colonization_algorithm",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "voronoi_diagram_3d": {
-      "lookup_name": "voronoi_diagram_3d",
-      "name": "voronoi_diagram_3d",
-      "description": "voronoi_diagram_3d",
-      "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "spatial_partitioning"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "delaunay_triangulation_3d_cell": {
-      "lookup_name": "delaunay_triangulation_3d_cell",
-      "name": "delaunay_triangulation_3d_cell",
-      "description": "delaunay_triangulation_3d_cell",
-      "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all",
-        "spatial_partitioning"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "cube_mound_scene": {
-      "lookup_name": "cube_mound_scene",
-      "name": "cube_mound_scene",
-      "description": "cube_mound_scene",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        13,
-        3,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "cube_mound_scene_sphere": {
-      "lookup_name": "cube_mound_scene_sphere",
-      "name": "cube_mound_scene_sphere",
-      "description": "cube_mound_scene_sphere",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene_sphere.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        13,
-        3,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "caverandomwalk": {
-      "lookup_name": "caverandomwalk",
-      "name": "caverandomwalk",
-      "description": "caverandomwalk",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "mirror_cellular_texture_for_3d": {
-      "lookup_name": "mirror_cellular_texture_for_3d",
-      "name": "Mirror Cellular Texture for 3D",
-      "description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration",
-        "proceduralgeneration_all",
-        "recursiveemergence"
-      ],
-      "footprint": [
-        1,
-        2,
-        6
-      ],
-      "size_group": "environment"
-    },
-    "slime_mold": {
-      "lookup_name": "slime_mold",
-      "name": "Slime Mold",
-      "description": "Interactive slime mold simulation using Dave Stewart's tube algorithm",
-      "scene": "res://algorithms/proceduralgeneration/growth_systems/slimemold/slime.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "diffusion_limited_aggregation": {
-      "lookup_name": "diffusion_limited_aggregation",
-      "name": "diffusion_limited_aggregation",
-      "description": "diffusion_limited_aggregation",
-      "scene": "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        17,
-        16,
-        5
-      ],
-      "size_group": "world_scale"
-    },
-    "penrose_tilings": {
-      "lookup_name": "penrose_tilings",
-      "name": "penrose_tilings",
-      "description": "penrose_tilings",
-      "scene": "res://algorithms/patterngeneration/penrose_tilings/penrose_tilings.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics"
-      ],
-      "footprint": [
-        17,
-        16,
-        11
-      ],
-      "size_group": "world_scale"
-    },
-    "color_pattern_mate_texture_for_3d": {
-      "lookup_name": "color_pattern_mate_texture_for_3d",
-      "name": "Color Pattern Mate Texture for 3D",
-      "description": "Interactive 3D color pattern mate texture generation for procedural tiling",
-      "scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_mate_texture_for_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "color_pattern_texture_for_3d": {
-      "lookup_name": "color_pattern_texture_for_3d",
-      "name": "Color Pattern Texture for 3D",
-      "description": "Interactive 3D color pattern texture generation for procedural tiling systems",
-      "scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_texture_for_3d.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "fatwireframe": {
-      "lookup_name": "fatwireframe",
-      "name": "Fat Wireframe",
-      "description": "Procedural wireframe generation with adjustable line thickness and geometric complexity",
-      "scene": "res://algorithms/proceduralgeneration/hybrid_complex/wireframe/fatwireframe.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "unused"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "voronoi_grid_3d": {
-      "lookup_name": "voronoi_grid_3d",
-      "name": "voronoi_grid_3d",
-      "description": "voronoi_grid_3d",
-      "scene": "res://algorithms/voronoi/voronoi_grid_3D.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration_all"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "fractal_recursion_1": {
-      "lookup_name": "fractal_recursion_1",
-      "name": "Fractal Recursion 1",
-      "description": "Basic recursion visualization demonstrating fundamental recursive patterns",
-      "scene": "res://algorithms/fractals/example_8_1_recursion_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_recursion_2": {
-      "lookup_name": "fractal_recursion_2",
-      "name": "Fractal Recursion 2",
-      "description": "Advanced recursion patterns with multiple levels of depth",
-      "scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_recursion_circles": {
-      "lookup_name": "fractal_recursion_circles",
-      "name": "Recursive Circles",
-      "description": "Circular recursive fractal patterns demonstrating self-similarity",
-      "scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "recursive_boolean_cube": {
-      "lookup_name": "recursive_boolean_cube",
-      "name": "recursive_boolean_cube",
-      "description": "recursive_boolean_cube",
-      "scene": "res://algorithms/fractals/recursive_boolean_cube.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        3,
-        2,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_cantor_set": {
-      "lookup_name": "fractal_cantor_set",
-      "name": "Cantor Set",
-      "description": "Classic Cantor set fractal demonstrating infinite subdivision",
-      "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "cantor_pagoda_vr": {
-      "lookup_name": "cantor_pagoda_vr",
-      "name": "cantor_pagoda_vr",
-      "description": "cantor_pagoda_vr",
-      "scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        9,
-        3,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "example_8_4_cantor_set_vr": {
-      "lookup_name": "example_8_4_cantor_set_vr",
-      "name": "example_8_4_cantor_set_vr",
-      "description": "Cantor Set - infinite subdivision creating zero measure infinite set",
-      "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "example_8_4_cantor_pagoda_vr": {
-      "lookup_name": "example_8_4_cantor_pagoda_vr",
-      "name": "example_8_4_cantor_pagoda_vr",
-      "description": "Cantor Pagoda - 3D extension of Cantor set principle",
-      "scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        9,
-        3,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "inverted_tree_cloud": {
-      "lookup_name": "inverted_tree_cloud",
-      "name": "inverted_tree_cloud",
-      "description": "inverted_tree_cloud",
-      "scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        9,
-        5,
-        13
-      ],
-      "size_group": "world_scale"
-    },
-    "fractal_koch_curve": {
-      "lookup_name": "fractal_koch_curve",
-      "name": "Koch Curve",
-      "description": "Koch snowflake curve fractal with recursive edge patterns",
-      "scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_recursive_tree": {
-      "lookup_name": "fractal_recursive_tree",
-      "name": "Recursive Tree",
-      "description": "Branching tree structure using recursive algorithms",
-      "scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_stochastic_tree": {
-      "lookup_name": "fractal_stochastic_tree",
-      "name": "Stochastic Tree",
-      "description": "Randomized recursive tree with natural variation",
-      "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        4,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "stochastic_tree_separated": {
-      "lookup_name": "stochastic_tree_separated",
-      "name": "stochastic_tree_separated",
-      "description": "stochastic_tree_separated",
-      "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        4,
-        2
-      ],
-      "size_group": "room_scale"
-    },
-    "fractal_lsystem_tree": {
-      "lookup_name": "fractal_lsystem_tree",
-      "name": "L-System Tree",
-      "description": "L-System tree generation with formal grammar rules",
-      "scene": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "recursive_tree_2": {
-      "lookup_name": "recursive_tree_2",
-      "name": "recursive_tree_2",
-      "description": "recursive_tree_2",
-      "scene": "res://algorithms/fractals/recursivetree/recursive_tree.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "fractal_scene": {
-      "lookup_name": "fractal_scene",
-      "name": "fractal_scene",
-      "description": "fractal_scene",
-      "scene": "res://algorithms/fractals/meshfractal/fractal_scene.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        6,
-        11,
-        26
-      ],
-      "size_group": "world_scale"
-    },
-    "menger_sponge": {
-      "lookup_name": "menger_sponge",
-      "name": "menger_sponge",
-      "description": "menger_sponge",
-      "scene": "res://algorithms/fractals/mengersponge/menger_sponge.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        9,
-        3,
-        10
-      ],
-      "size_group": "environment"
-    },
-    "cube_bookshelf": {
-      "lookup_name": "cube_bookshelf",
-      "name": "Cube Bookshelf",
-      "description": "Bookshelf created through cube subdivision - grid of shelves with frame and trim",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_bookshelf.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "cube_staircase": {
-      "lookup_name": "cube_staircase",
-      "name": "Cube Staircase",
-      "description": "Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "cube_desk": {
-      "lookup_name": "cube_desk",
-      "name": "Cube Desk",
-      "description": "Modern desk with drawer unit created through cube subdivision",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_desk.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "cube_cabin": {
-      "lookup_name": "cube_cabin",
-      "name": "Cube Cabin",
-      "description": "Rustic cabin created through architectural cube subdivision - walls, door, windows, gabled roof, chimney and porch",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_cabin.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "fractals"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    },
-    "fractal_clouds": {
-      "lookup_name": "fractal_clouds",
-      "name": "Fractal Clouds",
-      "description": "Volumetric clouds using fractal Brownian motion noise. Presets: cumulus, stratus, cirrus, storm",
-      "scene": "res://algorithms/fractals/fractal_clouds/fractal_clouds.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        15,
-        8,
-        15
-      ],
-      "size_group": "world_scale"
-    },
-    "cube_chair": {
-      "lookup_name": "cube_chair",
-      "name": "Cube Chair",
-      "description": "Chair created through cube subdivision",
-      "scene": "res://algorithms/fractals/cubesubdivision/cube_chair.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        2,
-        3,
-        3
-      ],
-      "size_group": "room_scale"
-    },
-    "fibonacci_terrain": {
-      "lookup_name": "fibonacci_terrain",
-      "name": "Fibonacci Terrain",
-      "description": "Terrain generated through golden ratio subdivision - plane subdivides, random non-edge faces lift and subdivide. Presets: gentle_hills, mountain_peak, plateau, archipelago, fibonacci_spiral",
-      "scene": "res://algorithms/fractals/fibonacci_terrain/fibonacci_terrain.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        20,
-        5,
-        20
-      ],
-      "size_group": "world_scale"
-    },
-    "golden_rectangle": {
-      "lookup_name": "golden_rectangle",
-      "name": "Golden Rectangle",
-      "description": "Classic golden ratio rectangle subdivision with Fibonacci spiral. Shows numbers 1,1,2,3,5,8,13,21... Presets: classic, minimal, rainbow, deep, fast",
-      "scene": "res://algorithms/fractals/golden_rectangle/golden_rectangle.tscn",
-      "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "size_group": "compact"
-    }
-  }
+	"registry_info": {
+		"name": "procgen_extra",
+		"description": "Additional procedural generation artifacts â€” wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
+		"category": "proceduralgeneration",
+		"theoretical_grounding": "Constraint satisfaction (WFC), higher-dimensional geometry (tesseracts, penteracts), Turing patterns, maze generation algorithms"
+	},
+	"artifacts": {
+		"wfc": {
+			"lookup_name": "wfc",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFC.tscn",
+			"name": "Wave Function Collapse",
+			"description": "Wave Function Collapse algorithm â€” generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": [
+				"wfc",
+				"wave_function_collapse",
+				"constraint",
+				"procedural",
+				"generation",
+				"tile"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"reaction_diffusion": {
+			"lookup_name": "reaction_diffusion",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
+			"name": "Reaction Diffusion",
+			"description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"gray_scott",
+				"morphogenesis",
+				"growth"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"softbodies"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"reaction_diffusion_vr": {
+			"lookup_name": "reaction_diffusion_vr",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",
+			"name": "Reaction Diffusion (VR)",
+			"description": "Turing reaction-diffusion patterns in VR â€” two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"morphogenesis",
+				"vr",
+				"growth"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"tesseract_tunnel": {
+			"lookup_name": "tesseract_tunnel",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel.tscn",
+			"name": "Tesseract Tunnel",
+			"description": "Fly through a tunnel of rotating tesseracts â€” 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": [
+				"tesseract",
+				"4d",
+				"hypercube",
+				"tunnel",
+				"projection",
+				"higher_dimensional"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"penteract_double_projection": {
+			"lookup_name": "penteract_double_projection",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/penteract_double_projection.tscn",
+			"name": "Penteract Double Projection",
+			"description": "5D hypercube (penteract) projected twice â€” from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": [
+				"penteract",
+				"5d",
+				"projection",
+				"hypercube",
+				"higher_dimensional"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"maze_generator": {
+			"lookup_name": "maze_generator",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn",
+			"name": "Maze Generator",
+			"description": "Procedural maze generation â€” watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": [
+				"maze",
+				"generation",
+				"dfs",
+				"backtracking",
+				"spanning_tree",
+				"procedural"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"room_grammar": {
+			"lookup_name": "room_grammar",
+			"scene": "res://commons/artifacts/room_grammar/room_grammar.tscn",
+			"name": "Room Grammar",
+			"description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": [
+				"bsp",
+				"room",
+				"floor_plan",
+				"shape_grammar",
+				"procedural",
+				"architecture",
+				"partition"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"terrain_erosion": {
+			"lookup_name": "terrain_erosion",
+			"scene": "res://commons/artifacts/terrain_erosion/terrain_erosion.tscn",
+			"name": "Terrain Erosion",
+			"description": "Hydraulic erosion on a procedural heightmap â€” layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": [
+				"erosion",
+				"hydraulic",
+				"heightmap",
+				"terrain",
+				"procedural",
+				"landscape",
+				"sediment"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"cave_generator": {
+			"lookup_name": "cave_generator",
+			"scene": "res://commons/artifacts/cave_generator/cave_generator.tscn",
+			"name": "Cave Generator",
+			"description": "Cellular automaton cave generation with flood-fill connectivity â€” classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
+			"category": "proceduralgeneration",
+			"complexity": "intermediate",
+			"tags": [
+				"cave",
+				"cellular_automaton",
+				"flood_fill",
+				"roguelike",
+				"procedural",
+				"generation",
+				"connectivity"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"genetic_programming": {
+			"lookup_name": "genetic_programming",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+			"name": "Genetic Programming",
+			"description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
+			"category": "proceduralgeneration",
+			"complexity": "advanced",
+			"tags": [
+				"genetic_programming",
+				"evolution",
+				"fitness",
+				"crossover",
+				"mutation",
+				"3d_shape",
+				"growth"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"flower_lab": {
+			"lookup_name": "flower_lab",
+			"scene": "res://commons/artifacts/flower_lab/flower_lab.tscn",
+			"name": "Flower Lab",
+			"description": "Interactive botanical laboratory â€” VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": [
+				"flower",
+				"procedural",
+				"interactive",
+				"botanical",
+				"morphology",
+				"vr",
+				"sliders"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": []
+		},
+		"ik_arm_demo": {
+			"lookup_name": "ik_arm_demo",
+			"scene": "res://commons/artifacts/ik_arm_demo/ik_arm_demo.tscn",
+			"name": "IK Arm Demo",
+			"description": "Standalone TwoBoneIK3D arm demonstration — two procedural arms with animated targets tracing figure-8 patterns. Shows the same inverse kinematics solver used for VR body tracking.",
+			"category": "body",
+			"complexity": "intermediate",
+			"tags": [
+				"ik",
+				"inverse_kinematics",
+				"two_bone_ik",
+				"arm",
+				"body",
+				"skeleton",
+				"procedural_mesh"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"torso_estimation_vis": {
+			"lookup_name": "torso_estimation_vis",
+			"scene": "res://commons/artifacts/torso_estimation_vis/torso_estimation_vis.tscn",
+			"name": "Torso Estimation Visualization",
+			"description": "3-point torso estimation demo — shows how head + two hand positions estimate torso orientation. Animated tracking points with visible shoulder computation and forward direction.",
+			"category": "body",
+			"complexity": "intermediate",
+			"tags": [
+				"torso",
+				"estimation",
+				"tracking",
+				"body",
+				"vr",
+				"3point",
+				"ik"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"mirror_artifact": {
+			"lookup_name": "mirror_artifact",
+			"scene": "res://commons/artifacts/mirror_artifact/mirror_artifact.tscn",
+			"name": "Mirror Artifact",
+			"description": "Reflective mirror panel showing the player what their hands look like. A large vertical mirror surface with metallic material and decorative wooden frame.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"mirror",
+				"body",
+				"reflection",
+				"hands",
+				"self"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"necklace_anchor": {
+			"lookup_name": "necklace_anchor",
+			"scene": "res://commons/artifacts/necklace_anchor/necklace_anchor.tscn",
+			"name": "Necklace Anchor",
+			"description": "Pendant necklace display on a stand showing the concept of an identity anchor point. A vertical stand with torus ring, glowing gem pendant that slowly rotates.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"necklace",
+				"pendant",
+				"anchor",
+				"identity",
+				"body",
+				"jewelry"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"dress_selector": {
+			"lookup_name": "dress_selector",
+			"scene": "res://commons/artifacts/dress_selector/dress_selector.tscn",
+			"name": "Dress Selector",
+			"description": "Outfit selection interface with three mannequin display forms in Classic, Wicked, and Custom styles. Each mannequin has a selection button for choosing an outfit.",
+			"category": "body",
+			"complexity": "beginner",
+			"tags": [
+				"dress",
+				"outfit",
+				"selector",
+				"mannequin",
+				"body",
+				"fashion",
+				"customization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bodyprogression"
+			]
+		},
+		"botanical_flower": {
+			"lookup_name": "botanical_flower",
+			"scene": "res://commons/artifacts/botanical_flower/botanical_flower.tscn",
+			"name": "Botanical Flower",
+			"description": "Standalone procedural flower — configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
+			"category": "proceduralgeneration",
+			"complexity": "beginner",
+			"tags": [
+				"flower",
+				"procedural",
+				"botanical",
+				"morphology",
+				"growth"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"flowers"
+			]
+		},
+		"water_flowers": {
+			"lookup_name": "water_flowers",
+			"scene": "res://commons/artifacts/water_flowers/water_flowers.tscn",
+			"name": "Water Flowers",
+			"description": "Floating flowers on physically simulated Gerstner waves — buoyancy, wave alignment, and drift create a mesmerizing water garden. Configurable flower count, water size, wave strength, and drift speed.",
+			"category": "physicssimulation",
+			"complexity": "intermediate",
+			"tags": [
+				"water",
+				"flower",
+				"physics",
+				"buoyancy",
+				"waves",
+				"simulation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"flowers"
+			]
+		},
+		"example_8_6_recursive_tree_vr": {
+			"lookup_name": "example_8_6_recursive_tree_vr",
+			"name": "example_8_6_recursive_tree_vr",
+			"description": "texample_8_6_recursive_tree_vr",
+			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"example_8_3_recursion_circles_vr": {
+			"lookup_name": "example_8_3_recursion_circles_vr",
+			"name": "example_8_3_recursion_circles_vr",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fibonacci_pagoda": {
+			"lookup_name": "fibonacci_pagoda",
+			"name": "fibonacci_pagoda",
+			"description": "fibonacci_pagoda",
+			"scene": "res://algorithms/fractals/pillar/fibonacci_pagoda.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				5,
+				8,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					8,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"test_scene_3": {
+			"lookup_name": "test_scene_3",
+			"name": "test",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"test_scene_4": {
+			"lookup_name": "test_scene_4",
+			"name": "This is just a test",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"test_scene_5": {
+			"lookup_name": "test_scene_5",
+			"name": "test",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"test_scene_6": {
+			"lookup_name": "test_scene_6",
+			"name": "This is just a test",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				4,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"marching_cubes_sculpt_vr": {
+			"lookup_name": "marching_cubes_sculpt_vr",
+			"name": "Marching Cubes VR Sculpt",
+			"description": "VR paintable marching cubes - sculpt in 3D with your controllers using GPU compute shaders",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"koch_curve_3d": {
+			"lookup_name": "koch_curve_3d",
+			"name": "3D Koch Curve",
+			"description": "Three-dimensional recursive Koch snowflake curve generation",
+			"scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals",
+				"recursiveemergence"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"cantor_set": {
+			"lookup_name": "cantor_set",
+			"name": "cantor_set",
+			"description": "cantor_set",
+			"scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				13,
+				4,
+				14
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					13,
+					4,
+					14
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"romanesco": {
+			"lookup_name": "romanesco",
+			"name": "romanesco",
+			"description": "romanesco",
+			"scene": "res://algorithms/fractals/romanesco/romanesco.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				8,
+				4,
+				8
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					8,
+					4,
+					8
+				],
+				"size_group": "environment"
+			}
+		},
+		"sierpinski_triangle": {
+			"lookup_name": "sierpinski_triangle",
+			"name": "sierpinski_triangle",
+			"description": "sierpinski_triangle",
+			"scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_subdivision": {
+			"lookup_name": "cube_subdivision",
+			"name": "cube_subdivision",
+			"description": "cube_subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"recursive_chair": {
+			"lookup_name": "recursive_chair",
+			"name": "Recursive Chair",
+			"description": "Chair created through recursive cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				6,
+				3,
+				4
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					6,
+					3,
+					4
+				],
+				"size_group": "environment"
+			}
+		},
+		"recursive_table": {
+			"lookup_name": "recursive_table",
+			"name": "recursive_table",
+			"description": "recursive_table",
+			"scene": "res://algorithms/fractals/cubesubdivision/recursive_table.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				6,
+				3,
+				4
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					6,
+					3,
+					4
+				],
+				"size_group": "environment"
+			}
+		},
+		"koch_curve_1": {
+			"lookup_name": "koch_curve_1",
+			"name": "koch_curve_!",
+			"description": "koch_curve_1",
+			"scene": "res://algorithms/fractals/koch_curve_1/koch_curve.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				9,
+				16,
+				3
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					9,
+					16,
+					3
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"recursive_tree": {
+			"lookup_name": "recursive_tree",
+			"name": "recursive_tree",
+			"description": "recursive_tree",
+			"scene": "res://algorithms/fractals/recursive_tree/recursive_tree.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"datastructures",
+				"fractals",
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"recursiveemergence"
+			],
+			"footprint": [
+				1,
+				6,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					6,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"crackpropagation_ca": {
+			"lookup_name": "crackpropagation_ca",
+			"name": "crackpropagation_ca",
+			"description": "crackpropagation_ca",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"biological_growth"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"dewcoveredfol": {
+			"lookup_name": "dewcoveredfol",
+			"name": "dewcoveredfol",
+			"description": "dewcoveredfol",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/dewcoveredfoliage/dewcoveredfoliage.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"percolationnetwork_ca": {
+			"lookup_name": "percolationnetwork_ca",
+			"name": "percolationnetwork_ca",
+			"description": "percolationnetwork_ca",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration"
+			],
+			"footprint": [
+				18,
+				1,
+				18
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					18,
+					1,
+					18
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"mandelbrot_set": {
+			"lookup_name": "mandelbrot_set",
+			"name": "Mandelbrot Set",
+			"description": "Fractal visualization of the famous Mandelbrot set",
+			"scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals",
+				"recursiveemergence"
+			],
+			"footprint": [
+				17,
+				19,
+				9
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					19,
+					9
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"julia_set": {
+			"lookup_name": "julia_set",
+			"name": "Julia Set",
+			"description": "Complex plane fractal visualization of Julia sets",
+			"scene": "res://algorithms/fractals/julia_set/julia_set.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals",
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"recursiveemergence"
+			],
+			"footprint": [
+				17,
+				16,
+				21
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					16,
+					21
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"SierpinskiPyramid": {
+			"lookup_name": "SierpinskiPyramid",
+			"name": "SierpinskiPyramid",
+			"description": "SierpinskiPyramid",
+			"scene": "res://algorithms/fractals/sierpinski_pyramid/SierpinskiPyramid.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				5,
+				5,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			}
+		},
+		"CaveGenerator": {
+			"lookup_name": "CaveGenerator",
+			"name": "CaveGenerator",
+			"description": "CaveGenerator",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/cave_generator/CaveGenerator.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"wave_function_collapse": {
+			"lookup_name": "wave_function_collapse",
+			"name": "Wave Function Collapse",
+			"description": "Procedural generation using wave function collapse algorithm",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/wave_function_collapse.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"constraint_solvers",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				17,
+				16,
+				1
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					16,
+					1
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"WFCCav": {
+			"lookup_name": "WFCCav",
+			"name": "WFCCav",
+			"description": "WFCCav",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFCCave.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				16,
+				4,
+				16
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					16,
+					4,
+					16
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"wfc_3d_demo": {
+			"lookup_name": "wfc_3d_demo",
+			"name": "wfc_3d_demo",
+			"description": "wfc_3d_demo",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfc3D/wfc_3d_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"constraint_solvers",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				22,
+				5,
+				22
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					22,
+					5,
+					22
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"voronoi_diagrams": {
+			"lookup_name": "voronoi_diagrams",
+			"name": "Voronoi Diagrams",
+			"description": "Spatial partitioning using Voronoi tessellation algorithms",
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/voronoi_diagrams.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				17,
+				25,
+				16
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					25,
+					16
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"tree_gen": {
+			"lookup_name": "tree_gen",
+			"name": "Tree Generator",
+			"description": "Procedural tree generation with branching algorithms",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/treegen/gen_tree.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"biological_growth",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"gridscheckers": {
+			"lookup_name": "gridscheckers",
+			"name": "gridscheckers",
+			"description": "gridscheckers",
+			"scene": "res://algorithms/patterngeneration/gridscheckers/gridscheckers.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				3,
+				7
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					7
+				],
+				"size_group": "environment"
+			}
+		},
+		"animalpatterns": {
+			"lookup_name": "animalpatterns",
+			"name": "animalpatterns",
+			"description": "animalpatterns",
+			"scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				8,
+				4,
+				9
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					8,
+					4,
+					9
+				],
+				"size_group": "environment"
+			}
+		},
+		"fabrics": {
+			"lookup_name": "fabrics",
+			"name": "fabrics",
+			"description": "fabrics",
+			"scene": "res://algorithms/patterngeneration/fabrics/fabrics.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				6,
+				4,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					6,
+					4,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"truchettiles": {
+			"lookup_name": "truchettiles",
+			"name": "truchettiles",
+			"description": "truchettiles",
+			"scene": "res://algorithms/patterngeneration/truchettiles/truchettiles.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				6,
+				3,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					6,
+					3,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"waves": {
+			"lookup_name": "waves",
+			"name": "waves",
+			"description": "waves",
+			"scene": "res://algorithms/patterngeneration/waves/waves.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"footprint": [
+				7,
+				1,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					7,
+					1,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"glassdivider": {
+			"lookup_name": "glassdivider",
+			"name": "glassdivider",
+			"description": "glassdivider",
+			"scene": "res://algorithms/patterngeneration/glassdivider/glassdivider.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				18,
+				13,
+				9
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					18,
+					13,
+					9
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"tile_patterns": {
+			"lookup_name": "tile_patterns",
+			"name": "Tile Patterns",
+			"description": "Procedural tile pattern generation and tiling algorithms",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/tilepattern.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"GeneticProgramming": {
+			"lookup_name": "GeneticProgramming",
+			"name": "GeneticProgramming",
+			"description": "GeneticProgramming",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"liquid_simulation": {
+			"lookup_name": "liquid_simulation",
+			"name": "Liquid Simulation",
+			"description": "Particle-based liquid simulation and fluid dynamics",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"mushrooms": {
+			"lookup_name": "mushrooms",
+			"name": "Mushrooms",
+			"description": "Interactive procedural mushroom generation with organic growth patterns",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"biological_growth",
+				"randomness"
+			],
+			"footprint": [
+				1,
+				5,
+				4
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					5,
+					4
+				],
+				"size_group": "environment"
+			}
+		},
+		"metaballs": {
+			"lookup_name": "metaballs",
+			"name": "Metaballs",
+			"description": "Interactive metaball visualization demonstrating implicit surface modeling",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"footprint": [
+				12,
+				12,
+				12
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					12,
+					12,
+					12
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"maze_generation": {
+			"lookup_name": "maze_generation",
+			"name": "Maze Generation",
+			"description": "VR-scale walkable maze with recursive backtracking generation",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"layered_membrane": {
+			"lookup_name": "layered_membrane",
+			"name": "Layered Membrane",
+			"description": "Procedural membrane generation with layered structures",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"implicit_surface_modeling": {
+			"lookup_name": "implicit_surface_modeling",
+			"name": "Implicit Surface Modeling",
+			"description": "Metaball-based implicit surface generation and modeling",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				12,
+				12,
+				12
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					12,
+					12,
+					12
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"WFCSculptureGenerator": {
+			"lookup_name": "WFCSculptureGenerator",
+			"name": "WFCSculptureGenerator",
+			"description": "WFCSculptureGenerator",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"WFC3DGenerator": {
+			"lookup_name": "WFC3DGenerator",
+			"name": "WWFC3DGeneratorr",
+			"description": "WFC3DGenerator",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				45,
+				12,
+				45
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					45,
+					12,
+					45
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"modelsynthesis": {
+			"lookup_name": "modelsynthesis",
+			"name": "modelsynthesis",
+			"description": "modelsynthesis",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/modelsynthesis.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"footprint": [
+				13,
+				3,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					13,
+					3,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"spherenetwork": {
+			"lookup_name": "spherenetwork",
+			"name": "spherenetwork",
+			"description": "spherenetwork",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/spherenetwork/spherenetwork.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"branching_growth_algorithm": {
+			"lookup_name": "branching_growth_algorithm",
+			"name": "Branching Growth Algorithm",
+			"description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"softbodies"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"branching_growth_algorithm_continued": {
+			"lookup_name": "branching_growth_algorithm_continued",
+			"name": "Branching Growth Algorithm continued",
+			"description": "Procedural branching and growth pattern generation",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"marchingcave": {
+			"lookup_name": "marchingcave",
+			"name": "marchingcave",
+			"description": "marchingcave",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				7,
+				41,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					7,
+					41,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marchingcubes_cave": {
+			"lookup_name": "marchingcubes_cave",
+			"name": "marchingcubes_cave",
+			"description": "marchingcubes_cave",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				46,
+				44,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					46,
+					44,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marchingcubes_flat_landscape": {
+			"lookup_name": "marchingcubes_flat_landscape",
+			"name": "marchingcubes_flat_landscape",
+			"description": "marchingcubes_flat_landscape",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				36,
+				50,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					36,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marchingcubes_torus_sculpture": {
+			"lookup_name": "marchingcubes_torus_sculpture",
+			"name": "marchingcubes_torus_sculpture",
+			"description": "marchingcubes_torus_sculpture",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				50,
+				50,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marchingcubes_inside_cave": {
+			"lookup_name": "marchingcubes_inside_cave",
+			"name": "marchingcubes_inside_cave",
+			"description": "marchingcubes_inside_cave",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				50,
+				30,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					50,
+					30,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"wfc_dungeon_generator": {
+			"lookup_name": "wfc_dungeon_generator",
+			"name": "wfc_dungeon_generator",
+			"description": "wfc_dungeon_generator",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_dungeon_generator.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"constraint_solvers",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				13,
+				3,
+				18
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					13,
+					3,
+					18
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"boolean_patterns": {
+			"lookup_name": "boolean_patterns",
+			"name": "boolean_patterns",
+			"description": "boolean_patterns",
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"constraint_solvers",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				36,
+				27,
+				41
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					36,
+					27,
+					41
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marching_cubes_gallery": {
+			"lookup_name": "marching_cubes_gallery",
+			"name": "marching_cubes_gallery",
+			"description": "marching_cubes_gallery",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/sculpture_gallery.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				50,
+				17,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					50,
+					17,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"cave_explorer_3d_ui": {
+			"lookup_name": "cave_explorer_3d_ui",
+			"name": "cave_explorer_3d_ui",
+			"description": "cave_explorer_3d_ui",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/cave_explorer_3d_ui.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				2,
+				2
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					2
+				],
+				"size_group": "compact"
+			}
+		},
+		"marchingcubes_portal_landscape": {
+			"lookup_name": "marchingcubes_portal_landscape",
+			"name": "marchingcubes_portal_landscape",
+			"description": "marchingcubes_portal_landscape",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				50,
+				50,
+				50
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"GyroidDemo": {
+			"lookup_name": "GyroidDemo",
+			"name": "GyroidDemo",
+			"description": "GyroidDemo",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				41,
+				31,
+				41
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					41,
+					31,
+					41
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"marching_cubes_cave_gallery": {
+			"lookup_name": "marching_cubes_cave_gallery",
+			"name": "marching_cubes_cave_gallery",
+			"description": "marching_cubes_cave_gallery",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marching_cubes_gallery.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				46,
+				17,
+				41
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					46,
+					17,
+					41
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"modernistchairgallery": {
+			"lookup_name": "modernistchairgallery",
+			"name": "modernistchairgallery",
+			"description": "Physics constraint systems for maintaining object relationships",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"tesseract_net_space_showcase": {
+			"lookup_name": "tesseract_net_space_showcase",
+			"name": "tesseract_net_space_showcase",
+			"description": "tesseract_net_space_showcase",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/tesseract_net_space_showcase.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				16,
+				4,
+				16
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					16,
+					4,
+					16
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"sixteen_cell_net_space_showcase": {
+			"lookup_name": "sixteen_cell_net_space_showcase",
+			"name": "sixteen_cell_net_space_showcase",
+			"description": "sixteen_cell_net_space_showcase",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				21,
+				4,
+				21
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					21,
+					4,
+					21
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"tessellating_portal_demo": {
+			"lookup_name": "tessellating_portal_demo",
+			"name": "tessellating_portal_demo",
+			"description": "tessellating_portal_demo",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/tessellating_portal_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				6,
+				9
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					6,
+					9
+				],
+				"size_group": "environment"
+			}
+		},
+		"tesseract_tunnel_demo": {
+			"lookup_name": "tesseract_tunnel_demo",
+			"name": "tesseract_tunnel_demo",
+			"description": "tesseract_tunnel_demo",
+			"scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"higher_dimensions",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				9,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					9,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"binary_space_partitioning": {
+			"lookup_name": "binary_space_partitioning",
+			"name": "binary_space_partitioning",
+			"description": "binary_space_partitioning",
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"spatial_partitioning"
+			],
+			"footprint": [
+				11,
+				1,
+				11
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					11,
+					1,
+					11
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"poisson_disk_sampling_3d": {
+			"lookup_name": "poisson_disk_sampling_3d",
+			"name": "poisson_disk_sampling_3d",
+			"description": "poisson_disk_sampling_3d",
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"spatial_partitioning"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"space_colonization_algorithm": {
+			"lookup_name": "space_colonization_algorithm",
+			"name": "space_colonization_algorithm",
+			"description": "space_colonization_algorithm",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"voronoi_diagram_3d": {
+			"lookup_name": "voronoi_diagram_3d",
+			"name": "voronoi_diagram_3d",
+			"description": "voronoi_diagram_3d",
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"spatial_partitioning"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"delaunay_triangulation_3d_cell": {
+			"lookup_name": "delaunay_triangulation_3d_cell",
+			"name": "delaunay_triangulation_3d_cell",
+			"description": "delaunay_triangulation_3d_cell",
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all",
+				"spatial_partitioning"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_mound_scene": {
+			"lookup_name": "cube_mound_scene",
+			"name": "cube_mound_scene",
+			"description": "cube_mound_scene",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				13,
+				3,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					13,
+					3,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"cube_mound_scene_sphere": {
+			"lookup_name": "cube_mound_scene_sphere",
+			"name": "cube_mound_scene_sphere",
+			"description": "cube_mound_scene_sphere",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene_sphere.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				13,
+				3,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					13,
+					3,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"caverandomwalk": {
+			"lookup_name": "caverandomwalk",
+			"name": "caverandomwalk",
+			"description": "caverandomwalk",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"mirror_cellular_texture_for_3d": {
+			"lookup_name": "mirror_cellular_texture_for_3d",
+			"name": "Mirror Cellular Texture for 3D",
+			"description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"recursiveemergence"
+			],
+			"footprint": [
+				1,
+				2,
+				6
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					6
+				],
+				"size_group": "environment"
+			}
+		},
+		"slime_mold": {
+			"lookup_name": "slime_mold",
+			"name": "Slime Mold",
+			"description": "Interactive slime mold simulation using Dave Stewart's tube algorithm",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/slimemold/slime.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"diffusion_limited_aggregation": {
+			"lookup_name": "diffusion_limited_aggregation",
+			"name": "diffusion_limited_aggregation",
+			"description": "diffusion_limited_aggregation",
+			"scene": "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				17,
+				16,
+				5
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					16,
+					5
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"penrose_tilings": {
+			"lookup_name": "penrose_tilings",
+			"name": "penrose_tilings",
+			"description": "penrose_tilings",
+			"scene": "res://algorithms/patterngeneration/penrose_tilings/penrose_tilings.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics"
+			],
+			"footprint": [
+				17,
+				16,
+				11
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					17,
+					16,
+					11
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"color_pattern_mate_texture_for_3d": {
+			"lookup_name": "color_pattern_mate_texture_for_3d",
+			"name": "Color Pattern Mate Texture for 3D",
+			"description": "Interactive 3D color pattern mate texture generation for procedural tiling",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_mate_texture_for_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"color_pattern_texture_for_3d": {
+			"lookup_name": "color_pattern_texture_for_3d",
+			"name": "Color Pattern Texture for 3D",
+			"description": "Interactive 3D color pattern texture generation for procedural tiling systems",
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_texture_for_3d.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"fatwireframe": {
+			"lookup_name": "fatwireframe",
+			"name": "Fat Wireframe",
+			"description": "Procedural wireframe generation with adjustable line thickness and geometric complexity",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/wireframe/fatwireframe.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"voronoi_grid_3d": {
+			"lookup_name": "voronoi_grid_3d",
+			"name": "voronoi_grid_3d",
+			"description": "voronoi_grid_3d",
+			"scene": "res://algorithms/voronoi/voronoi_grid_3D.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"fractal_recursion_1": {
+			"lookup_name": "fractal_recursion_1",
+			"name": "Fractal Recursion 1",
+			"description": "Basic recursion visualization demonstrating fundamental recursive patterns",
+			"scene": "res://algorithms/fractals/example_8_1_recursion_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_recursion_2": {
+			"lookup_name": "fractal_recursion_2",
+			"name": "Fractal Recursion 2",
+			"description": "Advanced recursion patterns with multiple levels of depth",
+			"scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_recursion_circles": {
+			"lookup_name": "fractal_recursion_circles",
+			"name": "Recursive Circles",
+			"description": "Circular recursive fractal patterns demonstrating self-similarity",
+			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"recursive_boolean_cube": {
+			"lookup_name": "recursive_boolean_cube",
+			"name": "recursive_boolean_cube",
+			"description": "recursive_boolean_cube",
+			"scene": "res://algorithms/fractals/recursive_boolean_cube.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				3,
+				2,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_cantor_set": {
+			"lookup_name": "fractal_cantor_set",
+			"name": "Cantor Set",
+			"description": "Classic Cantor set fractal demonstrating infinite subdivision",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"cantor_pagoda_vr": {
+			"lookup_name": "cantor_pagoda_vr",
+			"name": "cantor_pagoda_vr",
+			"description": "cantor_pagoda_vr",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				9,
+				3,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					9,
+					3,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"example_8_4_cantor_set_vr": {
+			"lookup_name": "example_8_4_cantor_set_vr",
+			"name": "example_8_4_cantor_set_vr",
+			"description": "Cantor Set - infinite subdivision creating zero measure infinite set",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"example_8_4_cantor_pagoda_vr": {
+			"lookup_name": "example_8_4_cantor_pagoda_vr",
+			"name": "example_8_4_cantor_pagoda_vr",
+			"description": "Cantor Pagoda - 3D extension of Cantor set principle",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				9,
+				3,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					9,
+					3,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"inverted_tree_cloud": {
+			"lookup_name": "inverted_tree_cloud",
+			"name": "inverted_tree_cloud",
+			"description": "inverted_tree_cloud",
+			"scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				9,
+				5,
+				13
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					9,
+					5,
+					13
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"fractal_koch_curve": {
+			"lookup_name": "fractal_koch_curve",
+			"name": "Koch Curve",
+			"description": "Koch snowflake curve fractal with recursive edge patterns",
+			"scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_recursive_tree": {
+			"lookup_name": "fractal_recursive_tree",
+			"name": "Recursive Tree",
+			"description": "Branching tree structure using recursive algorithms",
+			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_stochastic_tree": {
+			"lookup_name": "fractal_stochastic_tree",
+			"name": "Stochastic Tree",
+			"description": "Randomized recursive tree with natural variation",
+			"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				4,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"stochastic_tree_separated": {
+			"lookup_name": "stochastic_tree_separated",
+			"name": "stochastic_tree_separated",
+			"description": "stochastic_tree_separated",
+			"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				4,
+				2
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					2
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fractal_lsystem_tree": {
+			"lookup_name": "fractal_lsystem_tree",
+			"name": "L-System Tree",
+			"description": "L-System tree generation with formal grammar rules",
+			"scene": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"recursive_tree_2": {
+			"lookup_name": "recursive_tree_2",
+			"name": "recursive_tree_2",
+			"description": "recursive_tree_2",
+			"scene": "res://algorithms/fractals/recursivetree/recursive_tree.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"fractal_scene": {
+			"lookup_name": "fractal_scene",
+			"name": "fractal_scene",
+			"description": "fractal_scene",
+			"scene": "res://algorithms/fractals/meshfractal/fractal_scene.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				6,
+				11,
+				26
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					6,
+					11,
+					26
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"menger_sponge": {
+			"lookup_name": "menger_sponge",
+			"name": "menger_sponge",
+			"description": "menger_sponge",
+			"scene": "res://algorithms/fractals/mengersponge/menger_sponge.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				9,
+				3,
+				10
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					9,
+					3,
+					10
+				],
+				"size_group": "environment"
+			}
+		},
+		"cube_bookshelf": {
+			"lookup_name": "cube_bookshelf",
+			"name": "Cube Bookshelf",
+			"description": "Bookshelf created through cube subdivision - grid of shelves with frame and trim",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_bookshelf.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_staircase": {
+			"lookup_name": "cube_staircase",
+			"name": "Cube Staircase",
+			"description": "Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_desk": {
+			"lookup_name": "cube_desk",
+			"name": "Cube Desk",
+			"description": "Modern desk with drawer unit created through cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_desk.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"cube_cabin": {
+			"lookup_name": "cube_cabin",
+			"name": "Cube Cabin",
+			"description": "Rustic cabin created through architectural cube subdivision - walls, door, windows, gabled roof, chimney and porch",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_cabin.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"fractal_clouds": {
+			"lookup_name": "fractal_clouds",
+			"name": "Fractal Clouds",
+			"description": "Volumetric clouds using fractal Brownian motion noise. Presets: cumulus, stratus, cirrus, storm",
+			"scene": "res://algorithms/fractals/fractal_clouds/fractal_clouds.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				15,
+				8,
+				15
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					15,
+					8,
+					15
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"cube_chair": {
+			"lookup_name": "cube_chair",
+			"name": "Cube Chair",
+			"description": "Chair created through cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_chair.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				3,
+				3
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			}
+		},
+		"fibonacci_terrain": {
+			"lookup_name": "fibonacci_terrain",
+			"name": "Fibonacci Terrain",
+			"description": "Terrain generated through golden ratio subdivision - plane subdivides, random non-edge faces lift and subdivide. Presets: gentle_hills, mountain_peak, plateau, archipelago, fibonacci_spiral",
+			"scene": "res://algorithms/fractals/fibonacci_terrain/fibonacci_terrain.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				20,
+				5,
+				20
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					20,
+					5,
+					20
+				],
+				"size_group": "world_scale"
+			}
+		},
+		"golden_rectangle": {
+			"lookup_name": "golden_rectangle",
+			"name": "Golden Rectangle",
+			"description": "Classic golden ratio rectangle subdivision with Fibonacci spiral. Shows numbers 1,1,2,3,5,8,13,21... Presets: classic, minimal, rainbow, deep, fast",
+			"scene": "res://algorithms/fractals/golden_rectangle/golden_rectangle.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		}
+	}
 }
