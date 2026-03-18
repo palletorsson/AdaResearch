@@ -19,3 +19,6 @@ func update(delta: float) -> void:
 		food_collected -= consumption
 		# Food provides energy to maintain health
 		health = min(health + consumption * 0.05, 1.0)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

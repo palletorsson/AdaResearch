@@ -108,3 +108,6 @@ func _test_physics_differences() -> void:
 		print("   - Higher precision = smoother physics")
 	
 	print("\n🏁 Soft Body Variations Test Complete!")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

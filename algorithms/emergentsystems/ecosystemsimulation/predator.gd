@@ -20,3 +20,6 @@ func eat_prey(prey: Prey) -> void:
 	# Gain health based on prey size
 	var nutrition = prey.size / 10.0
 	health = min(health + nutrition, 1.0)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

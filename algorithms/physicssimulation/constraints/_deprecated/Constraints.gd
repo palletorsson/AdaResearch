@@ -135,3 +135,6 @@ func _on_constraint_type_pressed() -> void:
 	# Update UI text
 	var constraint_names = ["Hinge", "Slider", "Pendulum", "Spring"]
 	$UI/VBoxContainer/ConstraintTypeButton.text = "Type: " + constraint_names[current_constraint_type]
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

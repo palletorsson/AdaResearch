@@ -23,3 +23,6 @@ func _process(delta: float) -> void:
 		direction += Vector3.DOWN
 		
 	position += direction * move_speed * delta
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

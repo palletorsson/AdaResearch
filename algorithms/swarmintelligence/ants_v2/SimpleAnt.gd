@@ -129,3 +129,6 @@ func set_reached_home() -> void:
 		pheromone_energy = 1.0 # Refill energy
 		# Do a 180 turn
 		rotate_y(PI)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

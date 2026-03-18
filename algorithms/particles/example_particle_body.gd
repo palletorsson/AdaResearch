@@ -165,3 +165,6 @@ func _input(event: InputEvent) -> void:
 			KEY_RIGHT:
 				blobfish_swarm.wiggle_amplitude += 0.05
 				print("Wiggle: %.2f" % blobfish_swarm.wiggle_amplitude)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -195,3 +195,6 @@ func _apply_rounding(pos: Vector3, half_size: float, r: float) -> Vector3:
 		y_sign * (cy + dy),
 		z_sign * (cz + dz)
 	)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
