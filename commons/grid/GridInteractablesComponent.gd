@@ -6,7 +6,6 @@ extends Node
 class_name GridInteractablesComponent
 
 # Path constants
-const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 const ARTIFACT_PLACEHOLDER_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
 static var _artifact_registry_cache_by_key: Dictionary = {}
@@ -139,11 +138,8 @@ func _build_registry_cache_key(paths: Array[String]) -> String:
 # Get artifact registry paths from map data and registry directory
 func _get_artifact_registry_paths() -> Array[String]:
 	var paths: Array[String] = []
-	
-	# 1. Add the main default file
-	paths.append(DEFAULT_ARTIFACTS_JSON_PATH)
-	
-	# 2. Add all JSON files from the registry directory
+
+	# Load all JSON files from the registry directory
 	var dir = DirAccess.open(REGISTRY_DIR_PATH)
 	if dir:
 		dir.list_dir_begin()

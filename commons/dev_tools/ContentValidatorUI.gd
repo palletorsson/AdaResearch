@@ -625,8 +625,7 @@ func _show_artifact_details(artifact_key: String, status: ContentValidator.Artif
 			lines.append("[color=gray]This artifact key is used in the map but has no entry in the artifact registry.[/color]")
 			lines.append("")
 			lines.append("To fix, add an entry to:")
-			lines.append("[code]res://commons/artifacts/grid_artifacts.json[/code]")
-			lines.append("or a file in:")
+			lines.append("To fix, add an entry to a file in:")
 			lines.append("[code]res://commons/artifacts/registry/[/code]")
 		
 		if status.scene_path != "":

@@ -257,7 +257,7 @@ const UTILITY_TYPES = {
 		"name": "label",
 		"file": "info_label.tscn",
 		"category": "ui",
-		"description": "Displays artifact name from grid_artifacts.json by keyid",
+		"description": "Displays artifact name from the artifact registry by keyid",
 		"supports_parameters": true  # keyid parameter
 	},
 

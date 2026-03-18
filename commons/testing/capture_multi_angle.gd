@@ -416,18 +416,7 @@ func _wait_for_map_ready(catalog: Node, timeout_seconds: float) -> bool:
 	return done
 
 func _find_artifact(lookup_name: String) -> Dictionary:
-	# Check grid_artifacts.json first (largest registry)
-	var grid_path: String = "res://commons/artifacts/grid_artifacts.json"
-	var grid_text: String = FileAccess.get_file_as_string(grid_path)
-	if not grid_text.is_empty():
-		var json := JSON.new()
-		if json.parse(grid_text) == OK and json.data is Dictionary:
-			var data: Dictionary = json.data
-			var artifacts: Dictionary = data.get("artifacts", data)
-			if artifacts.has(lookup_name):
-				return artifacts[lookup_name]
-
-	# Then check registry/ subdirectory
+	# Check registry/ directory
 	var registry_dir: String = "res://commons/artifacts/registry"
 	var dir := DirAccess.open(registry_dir)
 	if not dir:

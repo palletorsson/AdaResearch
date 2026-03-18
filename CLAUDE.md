@@ -112,7 +112,7 @@ See `doc/MAP_EDITING_PIPELINE.md` for detailed documentation.
 | Sequence definitions | `commons/maps/sequences/*.json` |
 | Map data | `commons/maps/{MapName}/map_data.json` |
 | Artifact registries | `commons/artifacts/registry/*.json` |
-| Legacy registry | `commons/artifacts/grid_artifacts.json` |
+| Legacy registry (deprecated) | `commons/artifacts/grid_artifacts.json.deprecated` |
 | Grid system | `commons/grid/GridSystem.gd` |
 | Utility registry | `commons/grid/UtilityRegistry.gd` |
 

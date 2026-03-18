@@ -402,104 +402,48 @@ func _update_current_map_data(scene_path: String, metadata: Dictionary) -> void:
 	print("Map data updated for:", current_map_data["scene_name"])
 
 func _lookup_artifact_comment(scene_path: String) -> String:
-	var artifact_path := "res://commons/artifacts/grid_artifacts.json"
-	if not ResourceLoader.exists(artifact_path):
-		return ""
-	var f := FileAccess.open(artifact_path, FileAccess.READ)
-	if f == null:
-		return ""
-	var text := f.get_as_text()
-	f.close()
-	var parsed = JSON.parse_string(text)
-	if typeof(parsed) != TYPE_DICTIONARY:
-		return ""
-	# File is a dictionary that likely has a top-level category mapping (e.g., "Procedural Generation" -> entries)
-	# First, try direct keys: full path and basename at top level
-	if parsed.has(scene_path):
-		var entry = parsed[scene_path]
-		if typeof(entry) == TYPE_DICTIONARY and entry.has("comment"):
-			return String(entry["comment"])
 	var key_name := String(scene_path.get_file().get_basename())
-	if parsed.has(key_name):
-		var entry2 = parsed[key_name]
-		if typeof(entry2) == TYPE_DICTIONARY and entry2.has("comment"):
-			return String(entry2["comment"])
-	# Fallback: scan nested categories where values are dictionaries of entries
-	for cat in parsed.keys():
-		var group = parsed[cat]
-		if typeof(group) == TYPE_DICTIONARY:
-			# try direct key in this group
-			if group.has(key_name):
-				var e = group[key_name]
-				if typeof(e) == TYPE_DICTIONARY and e.has("comment"):
-					return String(e["comment"])
-			# scan entries
-			for k in group.keys():
-				var v = group[k]
-				if typeof(v) == TYPE_DICTIONARY:
-					if v.has("scene") and String(v["scene"]) == scene_path and v.has("comment"):
-						return String(v["comment"])
-					if v.has("lookup_name") and String(v["lookup_name"]) == key_name and v.has("comment"):
-						return String(v["comment"])
-					if v.has("path") and String(v["path"]) == scene_path and v.has("comment"):
-						return String(v["comment"])
-	return ""
+	var result := _search_registry_field(key_name, scene_path, "comment")
+	return result
 
 func _lookup_artifact_todo(scene_path: String) -> String:
-	var artifact_path := "res://commons/artifacts/grid_artifacts.json"
-	if not ResourceLoader.exists(artifact_path):
-		return ""
-	var f := FileAccess.open(artifact_path, FileAccess.READ)
-	if f == null:
-		return ""
-	var text := f.get_as_text()
-	f.close()
-	var parsed = JSON.parse_string(text)
-	if typeof(parsed) != TYPE_DICTIONARY:
-		return ""
-	# Try direct path key and file basename at top level
-	if parsed.has(scene_path):
-		var entry = parsed[scene_path]
-		if typeof(entry) == TYPE_DICTIONARY and entry.has("todo"):
-			return String(entry["todo"])
-		if typeof(entry) == TYPE_STRING:
-			return String(entry)
 	var key_name := String(scene_path.get_file().get_basename())
-	if parsed.has(key_name):
-		var entry2 = parsed[key_name]
-		if typeof(entry2) == TYPE_DICTIONARY:
-			if entry2.has("todo"):
-				return String(entry2["todo"])
-			if entry2.has("notes"):
-				return String(entry2["notes"]) # fallback
-		if typeof(entry2) == TYPE_STRING:
-			return String(entry2)
-	# Fallback: scan nested categories
-	for cat in parsed.keys():
-		var group = parsed[cat]
-		if typeof(group) == TYPE_DICTIONARY:
-			if group.has(key_name):
-				var e = group[key_name]
-				if typeof(e) == TYPE_DICTIONARY:
-					if e.has("todo"):
-						return String(e["todo"])
-					if e.has("notes"):
-						return String(e["notes"]) # fallback
-				if typeof(e) == TYPE_STRING:
-					return String(e)
-			for k in group.keys():
-				var v = group[k]
-				if typeof(v) == TYPE_DICTIONARY:
-					var matches = (v.has("scene") and String(v["scene"]) == scene_path) or (v.has("path") and String(v["path"]) == scene_path)
-					if matches and v.has("todo"):
-						return String(v["todo"])
-					if matches and v.has("notes"):
-						return String(v["notes"]) # fallback
-					if v.has("lookup_name") and String(v["lookup_name"]) == key_name:
-						if v.has("todo"):
-							return String(v["todo"])
-						if v.has("notes"):
-							return String(v["notes"]) # fallback
+	var result := _search_registry_field(key_name, scene_path, "todo")
+	if result.is_empty():
+		result = _search_registry_field(key_name, scene_path, "notes")
+	return result
+
+# Search all registry/*.json files for a field on an artifact matched by key or scene path
+func _search_registry_field(key_name: String, scene_path: String, field: String) -> String:
+	const REGISTRY_DIR := "res://commons/artifacts/registry/"
+	var dir := DirAccess.open(REGISTRY_DIR)
+	if not dir:
+		return ""
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if not dir.current_is_dir() and fname.ends_with(".json"):
+			var f := FileAccess.open(REGISTRY_DIR + fname, FileAccess.READ)
+			if f:
+				var parsed = JSON.parse_string(f.get_as_text())
+				f.close()
+				if typeof(parsed) == TYPE_DICTIONARY:
+					var artifacts: Dictionary = parsed.get("artifacts", {})
+					# Direct key lookup
+					if artifacts.has(key_name):
+						var entry = artifacts[key_name]
+						if typeof(entry) == TYPE_DICTIONARY and entry.has(field):
+							dir.list_dir_end()
+							return String(entry[field])
+					# Fallback: match by scene path
+					for k in artifacts:
+						var v = artifacts[k]
+						if typeof(v) == TYPE_DICTIONARY:
+							if (v.has("scene") and String(v["scene"]) == scene_path) and v.has(field):
+								dir.list_dir_end()
+								return String(v[field])
+		fname = dir.get_next()
+	dir.list_dir_end()
 	return ""
 
 func get_current_map_data() -> Dictionary:

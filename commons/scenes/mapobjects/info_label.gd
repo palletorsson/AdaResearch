@@ -1,6 +1,6 @@
 extends Node3D
 
-# Label utility that displays artifact name from grid_artifacts.json
+# Label utility that displays artifact name from the artifact registry
 # Usage: la:keyid (e.g., "la:menu", "la:point", "la:line")
 
 @onready var label_node: Label3D = $StaticBody3D/Label3DName
@@ -10,8 +10,8 @@ var artifacts_data: Dictionary = {}
 var keyid: String = ""
 var artifact_name: String = "unknown"
 
-# Path to artifacts registry
-const ARTIFACTS_PATH = "res://commons/artifacts/grid_artifacts.json"
+# Path to artifact registries
+const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 
 func _ready():
 	# Load artifact data on ready
@@ -36,33 +36,33 @@ func set_keyid(id: String):
 		_load_artifacts_data()
 		_update_label_text()
 
-# Load artifacts data from JSON file
+# Load artifacts data from registry/*.json files
 func _load_artifacts_data():
-	if not FileAccess.file_exists(ARTIFACTS_PATH):
-		push_error("InfoLabel: Artifacts file not found at %s" % ARTIFACTS_PATH)
+	var dir = DirAccess.open(REGISTRY_DIR_PATH)
+	if not dir:
+		push_error("InfoLabel: Registry directory not found at %s" % REGISTRY_DIR_PATH)
 		return
 
-	var file = FileAccess.open(ARTIFACTS_PATH, FileAccess.READ)
-	if not file:
-		push_error("InfoLabel: Could not open artifacts file at %s" % ARTIFACTS_PATH)
-		return
-
-	var json_text = file.get_as_text()
-	file.close()
-
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-
-	if parse_result != OK:
-		push_error("InfoLabel: Failed to parse artifacts JSON: %s" % json.get_error_message())
-		return
-
-	var data = json.get_data()
-	if data and typeof(data) == TYPE_DICTIONARY:
-		artifacts_data = data.get("artifacts", {})
-		print("InfoLabel: Loaded %d artifacts from registry" % artifacts_data.size())
-	else:
-		push_error("InfoLabel: Invalid artifacts data structure")
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var full_path = REGISTRY_DIR_PATH + file_name
+			var file = FileAccess.open(full_path, FileAccess.READ)
+			if file:
+				var json = JSON.new()
+				if json.parse(file.get_as_text()) == OK:
+					var data = json.get_data()
+					if data is Dictionary:
+						var arts = data.get("artifacts", {})
+						if arts is Dictionary:
+							for key in arts:
+								if arts[key] is Dictionary:
+									artifacts_data[key] = arts[key]
+				file.close()
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	print("InfoLabel: Loaded %d artifacts from registry" % artifacts_data.size())
 
 # Update the label text based on keyid
 func _update_label_text():

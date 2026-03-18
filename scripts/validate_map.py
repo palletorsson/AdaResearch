@@ -20,7 +20,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 MAPS_DIR = REPO / "commons" / "maps"
 REGISTRY_DIR = REPO / "commons" / "artifacts" / "registry"
-LEGACY_REGISTRY = REPO / "commons" / "artifacts" / "grid_artifacts.json"
+# Legacy registry deprecated — all entries now in REGISTRY_DIR
 GRAMMAR_FILE = REPO / "grammar" / "grammar_structue.json"
 SEQUENCES_DIR = MAPS_DIR / "sequences"
 
@@ -66,20 +66,6 @@ def load_artifact_keys() -> set:
                                 keys.add(art["key_id"])
             except Exception:
                 pass
-
-    # Legacy registry (grid_artifacts.json) — nested: {"artifacts": {name: {...}}}
-    if LEGACY_REGISTRY.is_file():
-        try:
-            data = json.loads(LEGACY_REGISTRY.read_text(encoding="utf-8"))
-            if isinstance(data, dict):
-                # New format: {"artifacts": {"name": {...}}}
-                if "artifacts" in data and isinstance(data["artifacts"], dict):
-                    keys.update(data["artifacts"].keys())
-                else:
-                    # Flat format: {"name": {...}} (no wrapper)
-                    keys.update(data.keys())
-        except Exception:
-            pass
 
     _artifact_keys = keys
     return keys

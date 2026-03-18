@@ -811,7 +811,7 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.set_target_data([], target_params)
 			if status_message.length() > 0 and utility_object.has_method("set_status_message"):
 				utility_object.set_status_message(status_message)
-		"la":  # Label - displays artifact name from grid_artifacts.json
+		"la":  # Label - displays artifact name from the artifact registry
 			if parameters.size() > 0:
 				var keyid = parameters[0]
 				if utility_object.has_method("set_keyid"):

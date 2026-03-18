@@ -13,7 +13,7 @@ import sys
 
 ARTIFACTS_DIR = "commons/artifacts"
 REGISTRY_DIR = "commons/artifacts/registry"
-GRID_ARTIFACTS = "commons/artifacts/grid_artifacts.json"
+# Legacy grid_artifacts.json deprecated — all entries now in REGISTRY_DIR
 SKIP_DIRS = {"catalog", "registry", "placeholders"}
 
 
@@ -30,18 +30,6 @@ def load_registries():
                 for k, v in arts.items():
                     if isinstance(v, dict):
                         registries[v.get("lookup_name", k)] = v
-
-    # Legacy grid_artifacts.json
-    if os.path.exists(GRID_ARTIFACTS):
-        with open(GRID_ARTIFACTS, encoding="utf-8") as fh:
-            data = json.load(fh)
-            arts = data.get("artifacts", data)
-            if isinstance(arts, dict):
-                for k, v in arts.items():
-                    if isinstance(v, dict):
-                        ln = v.get("lookup_name", k)
-                        if ln not in registries:
-                            registries[ln] = v
 
     return registries
 

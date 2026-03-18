@@ -7,7 +7,6 @@ extends RefCounted
 const SEQUENCES_PATH = "res://commons/maps/sequences/"
 const MAPS_PATH = "res://commons/maps/"
 const SPINE_PATH = "res://commons/maps/curriculum_spine.json"
-const ARTIFACT_REGISTRY_PATH = "res://commons/artifacts/grid_artifacts.json"
 const ARTIFACT_REGISTRY_DIR = "res://commons/artifacts/registry/"
 
 #region Data Structures
@@ -366,8 +365,7 @@ static func _validate_map_artifacts(mi: MapInfo, artifact_registry: Dictionary, 
 
 static func _load_artifact_registry() -> Dictionary:
 	var registry: Dictionary = {}
-	_load_registry_file(ARTIFACT_REGISTRY_PATH, registry)
-	
+
 	var dir = DirAccess.open(ARTIFACT_REGISTRY_DIR)
 	if dir:
 		dir.list_dir_begin()

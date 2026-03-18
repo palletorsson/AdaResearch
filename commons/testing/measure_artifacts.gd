@@ -13,7 +13,6 @@
 extends SceneTree
 
 const REGISTRY_DIR := "res://commons/artifacts/registry/"
-const LEGACY_REGISTRY := "res://commons/artifacts/grid_artifacts.json"
 
 var _outdir: String = "res://ada_run"
 var _registry_filter: String = ""
@@ -214,18 +213,7 @@ func _run() -> void:
 func _load_all_artifacts() -> Dictionary:
 	var all_artifacts: Dictionary = {}
 
-	# Load legacy registry first (lower priority)
-	if ResourceLoader.exists(LEGACY_REGISTRY):
-		var legacy := _load_json(LEGACY_REGISTRY)
-		if legacy.has("artifacts"):
-			var arts: Dictionary = legacy["artifacts"]
-			for key in arts:
-				var entry: Dictionary = arts[key]
-				var lname: String = entry.get("lookup_name", key)
-				entry["_registry_source"] = "grid_artifacts.json"
-				all_artifacts[lname] = entry
-
-	# Load modern registries (higher priority, overwrites legacy)
+	# Load all registries from registry/ directory
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir:
 		dir.list_dir_begin()

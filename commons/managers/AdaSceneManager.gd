@@ -237,39 +237,34 @@ func _load_single_sequence_file(path: String):
 # =============================================================================
 
 func _get_sequence_for_artifact(artifact_id: String) -> String:
-	"""Get sequence name for artifact from grid_artifacts.json"""
-	const ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
-	
-	if not FileAccess.file_exists(ARTIFACTS_JSON_PATH):
+	"""Get sequence name for artifact from registry/*.json"""
+	const REGISTRY_DIR = "res://commons/artifacts/registry/"
+
+	var dir = DirAccess.open(REGISTRY_DIR)
+	if not dir:
 		if debug:
-			print("AdaSceneManager: Artifacts JSON not found: %s" % ARTIFACTS_JSON_PATH)
+			print("AdaSceneManager: Registry directory not found: %s" % REGISTRY_DIR)
 		return ""
-	
-	var file = FileAccess.open(ARTIFACTS_JSON_PATH, FileAccess.READ)
-	if not file:
-		if debug:
-			print("AdaSceneManager: Could not open artifacts file")
-		return ""
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		if debug:
-			print("AdaSceneManager: Failed to parse artifacts JSON")
-		return ""
-	
-	var artifacts_data = json.data.get("artifacts", {})
-	
-	if artifacts_data.has(artifact_id):
-		var artifact_info = artifacts_data[artifact_id]
-		var sequence = artifact_info.get("sequence", "")
-		if sequence and sequence != null:
-			return sequence
-	
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var file = FileAccess.open(REGISTRY_DIR + file_name, FileAccess.READ)
+			if file:
+				var json = JSON.new()
+				if json.parse(file.get_as_text()) == OK:
+					var artifacts_data = json.data.get("artifacts", {})
+					if artifacts_data.has(artifact_id):
+						var artifact_info = artifacts_data[artifact_id]
+						var sequence = artifact_info.get("sequence", "")
+						if sequence and sequence != null:
+							dir.list_dir_end()
+							return sequence
+				file.close()
+		file_name = dir.get_next()
+	dir.list_dir_end()
+
 	return ""
 
 # =============================================================================

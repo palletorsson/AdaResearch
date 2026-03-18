@@ -24,7 +24,6 @@ const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
 const COMMENT_DEFAULT_MARKDOWN_PATH := "res://ada_run/desktop_feedback.md"
 const COMMENT_DEFAULT_JSON_PATH := "res://ada_run/desktop_feedback.json"
 const COMMENT_CODEX_QUEUE_PATH := "res://ada_run/codex_change_requests.md"
-const ARTIFACT_LEGACY_REGISTRY_PATH := "res://commons/artifacts/grid_artifacts.json"
 const ARTIFACT_REGISTRY_DIR_PATH := "res://commons/artifacts/registry/"
 const MAP_GRADES_PATH := "res://commons/maps/catalog/map_grades.json"
 static var pending_map_name: String = ""
@@ -2505,8 +2504,6 @@ func _ensure_artifact_scene_index() -> void:
 		return
 
 	_artifact_scene_path_by_name.clear()
-	_merge_artifact_registry_file(ARTIFACT_LEGACY_REGISTRY_PATH, _artifact_scene_path_by_name)
-
 	var dir = DirAccess.open(ARTIFACT_REGISTRY_DIR_PATH)
 	if dir:
 		dir.list_dir_begin()

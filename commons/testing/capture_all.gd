@@ -334,17 +334,6 @@ func _load_all_registries() -> Dictionary:
 		fname = dir.get_next()
 	dir.list_dir_end()
 
-	# Also try legacy grid_artifacts.json
-	var legacy_path: String = "res://commons/artifacts/grid_artifacts.json"
-	var legacy_text: String = FileAccess.get_file_as_string(legacy_path)
-	if not legacy_text.is_empty():
-		var json2 := JSON.new()
-		if json2.parse(legacy_text) == OK and json2.data is Dictionary:
-			var arts: Dictionary = json2.data.get("artifacts", json2.data)
-			for key in arts:
-				if not all_artifacts.has(key):
-					all_artifacts[key] = arts[key]
-
 	print("  Registry:  %d artifact definitions loaded" % all_artifacts.size())
 	return all_artifacts
 

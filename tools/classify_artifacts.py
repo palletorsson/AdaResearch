@@ -25,7 +25,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_DIR = REPO_ROOT / "commons" / "artifacts" / "registry"
-LEGACY_REGISTRY = REPO_ROOT / "commons" / "artifacts" / "grid_artifacts.json"
+# Legacy registry deprecated — all entries now in REGISTRY_DIR
 DEFAULT_MEASUREMENTS = REPO_ROOT / "ada_run" / "artifact_measurements.json"
 OUTPUT_PATH = REPO_ROOT / "commons" / "artifacts" / "artifact_spatial_classification.json"
 
@@ -80,21 +80,10 @@ SHOWCASE_NAME_HINTS = [
 # ══════════════════════════════════════════════════════════════════
 
 def load_all_registries():
-    """Load all artifact entries from registry/*.json and legacy registry."""
+    """Load all artifact entries from registry/*.json."""
     artifacts = {}
 
-    # Legacy registry (lower priority)
-    if LEGACY_REGISTRY.exists():
-        data = _load_json(LEGACY_REGISTRY)
-        if "artifacts" in data:
-            for key, entry in data["artifacts"].items():
-                if not isinstance(entry, dict):
-                    continue
-                lname = entry.get("lookup_name", key)
-                entry["_registry_source"] = "grid_artifacts.json"
-                artifacts[lname] = entry
-
-    # Modern registries (higher priority)
+    # Load registries
     if REGISTRY_DIR.exists():
         for f in sorted(REGISTRY_DIR.glob("*.json")):
             data = _load_json(f)
