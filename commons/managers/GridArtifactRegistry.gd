@@ -2,9 +2,13 @@
 extends Node
 class_name GridArtifactRegistry
 
-# Path to the JSON file containing artifact definitions
-const ARTIFACT_DATA_PATH = "res://commons/artifacts/grid_artifacts.json"
+# Legacy file — DEPRECATED: all entries have been migrated to registry/*.json
+# Kept for backwards compatibility; will be removed in a future version.
+const LEGACY_DATA_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
+
+# Set to false to skip loading the deprecated legacy file
+var load_legacy_file: bool = false
 
 # Main registry of artifacts
 var artifacts: Dictionary = {}
@@ -19,17 +23,19 @@ func _ready():
 	# Load the artifact data on startup
 	load_artifact_data()
 
-# Load artifact data from JSON file and registry directory
+# Load artifact data from registry directory (and optionally legacy file)
 func load_artifact_data() -> void:
 	artifacts.clear()
 	_loaded_scenes.clear()
-	
-	# 1. Load main legacy file
-	_load_single_file(ARTIFACT_DATA_PATH)
-	
-	# 2. Load all files in registry directory
+
+	# 1. Load legacy file only if explicitly enabled (deprecated)
+	if load_legacy_file:
+		push_warning("GridArtifactRegistry: Loading deprecated grid_artifacts.json — all entries have been migrated to registry/*.json")
+		_load_single_file(LEGACY_DATA_PATH)
+
+	# 2. Load all files in registry directory (authoritative source)
 	_load_directory(REGISTRY_DIR_PATH)
-	
+
 	print("Total loaded: %d artifact definitions" % artifacts.size())
 	emit_signal("registry_loaded")
 
@@ -49,8 +55,8 @@ func _load_directory(dir_path: String) -> void:
 
 func _load_single_file(file_path: String) -> void:
 	if not FileAccess.file_exists(file_path):
-		if file_path == ARTIFACT_DATA_PATH: # Only error for main file if missing
-			push_error("Failed to open artifact data file: %s" % file_path)
+		if file_path == LEGACY_DATA_PATH:
+			push_warning("Legacy artifact file not found (expected — it is deprecated): %s" % file_path)
 		return
 		
 	var file = FileAccess.open(file_path, FileAccess.READ)

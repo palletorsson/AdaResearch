@@ -1,106 +1,287 @@
 {
-	"registry_info": {
-		"name": "alternative_geometries",
-		"description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
-		"category": "geometry",
-		"theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
-	},
-	"artifacts": {
-		"bulging_tunnel": {
-			"lookup_name": "bulging_tunnel",
-			"scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
-			"name": "Bulging Tunnel",
-			"description": "A tunnel whose walls bulge and contract, warping the perception of depth and distance. Non-Euclidean spatial distortion experienced from inside.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": ["alternative_geometry", "tunnel", "distortion", "non_euclidean", "spatial"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"mobius_strip_altgeo": {
-			"lookup_name": "mobius_strip_altgeo",
-			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
-			"name": "Möbius Strip (Walkable)",
-			"description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
-			"category": "geometry",
-			"complexity": "beginner",
-			"tags": ["mobius", "topology", "non_orientable", "walkable", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"non_euclidean_space": {
-			"lookup_name": "non_euclidean_space",
-			"scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
-			"name": "Non-Euclidean Space",
-			"description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
-			"category": "geometry",
-			"complexity": "advanced",
-			"tags": ["non_euclidean", "hyperbolic", "elliptic", "impossible_space", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"rhizomatic_structure": {
-			"lookup_name": "rhizomatic_structure",
-			"scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
-			"name": "Rhizomatic Structure",
-			"description": "Rhizomatic growth structure inspired by Deleuze and Guattari — non-hierarchical, multiply-connected, without center or periphery. Any point connects to any other.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": ["rhizome", "deleuze", "non_hierarchical", "network", "alternative_geometry", "critical_theory"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": ["graphtheory"]
-		},
-		"curvature_slider": {
-			"lookup_name": "curvature_slider",
-			"scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
-			"name": "Curvature Slider",
-			"description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
-			"category": "geometry",
-			"complexity": "beginner",
-			"tags": ["curvature", "non_euclidean", "slider", "interactive", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"elliptic_surface": {
-			"lookup_name": "elliptic_surface",
-			"scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
-			"name": "Elliptic Surface",
-			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": ["elliptic", "positive_curvature", "non_euclidean", "surface", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"hyperbolic_surface": {
-			"lookup_name": "hyperbolic_surface",
-			"scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
-			"name": "Hyperbolic Surface",
-			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": ["hyperbolic", "negative_curvature", "non_euclidean", "saddle", "surface", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"riemann_sphere": {
-			"lookup_name": "riemann_sphere",
-			"scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
-			"name": "Riemann Sphere",
-			"description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
-			"category": "geometry",
-			"complexity": "advanced",
-			"tags": ["riemann", "complex_analysis", "stereographic", "projection", "sphere", "alternative_geometry"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		}
-	}
+  "registry_info": {
+    "name": "alternative_geometries",
+    "description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
+    "category": "geometry",
+    "theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
+  },
+  "artifacts": {
+    "bulging_tunnel": {
+      "lookup_name": "bulging_tunnel",
+      "scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
+      "name": "Bulging Tunnel",
+      "description": "A tunnel whose walls bulge and contract, warping the perception of depth and distance. Non-Euclidean spatial distortion experienced from inside.",
+      "category": "geometry",
+      "complexity": "intermediate",
+      "tags": [
+        "alternative_geometry",
+        "tunnel",
+        "distortion",
+        "non_euclidean",
+        "spatial"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "mobius_strip_altgeo": {
+      "lookup_name": "mobius_strip_altgeo",
+      "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
+      "name": "Möbius Strip (Walkable)",
+      "description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
+      "category": "geometry",
+      "complexity": "beginner",
+      "tags": [
+        "mobius",
+        "topology",
+        "non_orientable",
+        "walkable",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "non_euclidean_space": {
+      "lookup_name": "non_euclidean_space",
+      "scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
+      "name": "Non-Euclidean Space",
+      "description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
+      "category": "geometry",
+      "complexity": "advanced",
+      "tags": [
+        "non_euclidean",
+        "hyperbolic",
+        "elliptic",
+        "impossible_space",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "rhizomatic_structure": {
+      "lookup_name": "rhizomatic_structure",
+      "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+      "name": "Rhizomatic Structure",
+      "description": "Rhizomatic growth structure inspired by Deleuze and Guattari — non-hierarchical, multiply-connected, without center or periphery. Any point connects to any other.",
+      "category": "geometry",
+      "complexity": "intermediate",
+      "tags": [
+        "rhizome",
+        "deleuze",
+        "non_hierarchical",
+        "network",
+        "alternative_geometry",
+        "critical_theory"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "graphtheory"
+      ]
+    },
+    "curvature_slider": {
+      "lookup_name": "curvature_slider",
+      "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+      "name": "Curvature Slider",
+      "description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
+      "category": "geometry",
+      "complexity": "beginner",
+      "tags": [
+        "curvature",
+        "non_euclidean",
+        "slider",
+        "interactive",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "elliptic_surface": {
+      "lookup_name": "elliptic_surface",
+      "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+      "name": "Elliptic Surface",
+      "description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
+      "category": "geometry",
+      "complexity": "intermediate",
+      "tags": [
+        "elliptic",
+        "positive_curvature",
+        "non_euclidean",
+        "surface",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "hyperbolic_surface": {
+      "lookup_name": "hyperbolic_surface",
+      "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+      "name": "Hyperbolic Surface",
+      "description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
+      "category": "geometry",
+      "complexity": "intermediate",
+      "tags": [
+        "hyperbolic",
+        "negative_curvature",
+        "non_euclidean",
+        "saddle",
+        "surface",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "riemann_sphere": {
+      "lookup_name": "riemann_sphere",
+      "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+      "name": "Riemann Sphere",
+      "description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
+      "category": "geometry",
+      "complexity": "advanced",
+      "tags": [
+        "riemann",
+        "complex_analysis",
+        "stereographic",
+        "projection",
+        "sphere",
+        "alternative_geometry"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "mobius_world": {
+      "lookup_name": "mobius_world",
+      "name": "MÃ¶bius World",
+      "description": "Walkable MÃ¶bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
+      "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "marching_cubes": {
+      "lookup_name": "marching_cubes",
+      "name": "Marching Cubes Test",
+      "description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
+      "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        21,
+        11
+      ],
+      "size_group": "world_scale"
+    },
+    "riemann_pi": {
+      "lookup_name": "riemann_pi",
+      "name": "riemann_pi",
+      "description": "riemann_pi",
+      "scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        23,
+        6,
+        4
+      ],
+      "size_group": "world_scale"
+    },
+    "riemann_torus": {
+      "lookup_name": "riemann_torus",
+      "name": "riemann_torus",
+      "description": "riemann_torus",
+      "scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        15,
+        2,
+        2
+      ],
+      "size_group": "world_scale"
+    },
+    "gyroid_cheese": {
+      "lookup_name": "gyroid_cheese",
+      "name": "gyroid_cheese",
+      "description": "gyroid_cheese",
+      "scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "entropy_morphogenesis": {
+      "lookup_name": "entropy_morphogenesis",
+      "name": "entropy_morphogenesis",
+      "description": "entropy_morphogenesis",
+      "scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "organic_space": {
+      "lookup_name": "organic_space",
+      "name": "Organic Space",
+      "description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
+      "scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        6,
+        13
+      ],
+      "size_group": "world_scale"
+    },
+    "rhizomatic_maze_space": {
+      "lookup_name": "rhizomatic_maze_space",
+      "name": "Rhizomatic Maze Space",
+      "description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
+      "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        50,
+        21,
+        50
+      ],
+      "size_group": "world_scale"
+    }
+  }
 }

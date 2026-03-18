@@ -1,94 +1,523 @@
 {
-	"registry_info": {
-		"name": "color",
-		"description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
-		"category": "color",
-		"theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
-	},
-	"artifacts": {
-		"color_mixing": {
-			"lookup_name": "color_mixing",
-			"scene": "res://algorithms/color/color_mixing/color_mixing.tscn",
-			"name": "Color Mixing",
-			"description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
-			"category": "color",
-			"complexity": "beginner",
-			"tags": ["color", "mixing", "additive", "subtractive", "rgb", "beginner"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"color_scanner": {
-			"lookup_name": "color_scanner",
-			"scene": "res://algorithms/color/color_scanner/color_scanner.tscn",
-			"name": "Color Scanner",
-			"description": "Scans and analyzes color properties of objects and materials. See the numeric values behind what your eyes perceive.",
-			"category": "color",
-			"complexity": "beginner",
-			"tags": ["color", "scanner", "analysis", "rgb", "hsv"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"colorsheets": {
-			"lookup_name": "colorsheets",
-			"scene": "res://algorithms/color/colorsheets/colorsheets.tscn",
-			"name": "Color Sheets",
-			"description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
-			"category": "color",
-			"complexity": "beginner",
-			"tags": ["color", "reference", "hue", "saturation", "value", "palette"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"glitchcolor": {
-			"lookup_name": "glitchcolor",
-			"scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
-			"name": "Glitch Color",
-			"description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
-			"category": "color",
-			"complexity": "intermediate",
-			"tags": ["color", "glitch", "chromatic_aberration", "corruption", "aesthetics"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"k_means_color": {
-			"lookup_name": "k_means_color",
-			"scene": "res://algorithms/color/k_means_color/k_means_color.tscn",
-			"name": "K-Means Color Clustering",
-			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
-			"category": "color",
-			"complexity": "intermediate",
-			"tags": ["color", "k_means", "clustering", "palette_extraction", "machine_learning"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"minimalglitch": {
-			"lookup_name": "minimalglitch",
-			"scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
-			"name": "Minimal Glitch",
-			"description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
-			"category": "color",
-			"complexity": "beginner",
-			"tags": ["color", "glitch", "minimal", "digital", "aesthetics"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"color_space_navigator": {
-			"lookup_name": "color_space_navigator",
-			"scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn",
-			"name": "Color Space Navigator",
-			"description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
-			"category": "color",
-			"complexity": "intermediate",
-			"tags": ["color", "rgb", "hsv", "color_space", "3d", "visualization"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		}
-	}
+  "registry_info": {
+    "name": "color",
+    "description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
+    "category": "color",
+    "theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
+  },
+  "artifacts": {
+    "color_mixing": {
+      "lookup_name": "color_mixing",
+      "scene": "res://algorithms/color/color_mixing/color_mixing.tscn",
+      "name": "Color Mixing",
+      "description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
+      "category": "color",
+      "complexity": "beginner",
+      "tags": [
+        "color",
+        "mixing",
+        "additive",
+        "subtractive",
+        "rgb",
+        "beginner"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "color_scanner": {
+      "lookup_name": "color_scanner",
+      "scene": "res://algorithms/color/color_scanner/color_scanner.tscn",
+      "name": "Color Scanner",
+      "description": "Scans and analyzes color properties of objects and materials. See the numeric values behind what your eyes perceive.",
+      "category": "color",
+      "complexity": "beginner",
+      "tags": [
+        "color",
+        "scanner",
+        "analysis",
+        "rgb",
+        "hsv"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "colorsheets": {
+      "lookup_name": "colorsheets",
+      "scene": "res://algorithms/color/colorsheets/colorsheets.tscn",
+      "name": "Color Sheets",
+      "description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
+      "category": "color",
+      "complexity": "beginner",
+      "tags": [
+        "color",
+        "reference",
+        "hue",
+        "saturation",
+        "value",
+        "palette"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "glitchcolor": {
+      "lookup_name": "glitchcolor",
+      "scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
+      "name": "Glitch Color",
+      "description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
+      "category": "color",
+      "complexity": "intermediate",
+      "tags": [
+        "color",
+        "glitch",
+        "chromatic_aberration",
+        "corruption",
+        "aesthetics"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "k_means_color": {
+      "lookup_name": "k_means_color",
+      "scene": "res://algorithms/color/k_means_color/k_means_color.tscn",
+      "name": "K-Means Color Clustering",
+      "description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
+      "category": "color",
+      "complexity": "intermediate",
+      "tags": [
+        "color",
+        "k_means",
+        "clustering",
+        "palette_extraction",
+        "machine_learning"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "minimalglitch": {
+      "lookup_name": "minimalglitch",
+      "scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
+      "name": "Minimal Glitch",
+      "description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
+      "category": "color",
+      "complexity": "beginner",
+      "tags": [
+        "color",
+        "glitch",
+        "minimal",
+        "digital",
+        "aesthetics"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "color_space_navigator": {
+      "lookup_name": "color_space_navigator",
+      "scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+      "name": "Color Space Navigator",
+      "description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
+      "category": "color",
+      "complexity": "intermediate",
+      "tags": [
+        "color",
+        "rgb",
+        "hsv",
+        "color_space",
+        "3d",
+        "visualization"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": []
+    },
+    "gridcolorizer": {
+      "lookup_name": "gridcolorizer",
+      "name": "gridcolorizer",
+      "description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
+      "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "RotatingLaser": {
+      "lookup_name": "RotatingLaser",
+      "name": "RotatingLaser",
+      "description": "RotatingLaser.",
+      "scene": "res://algorithms/color/rotating_laser/RotatingLaser.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "spectrum_forest": {
+      "lookup_name": "spectrum_forest",
+      "name": "spectrum_forest",
+      "description": "spectrum_forest.",
+      "scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        9,
+        6
+      ],
+      "size_group": "environment"
+    },
+    "pillarcolorcollection": {
+      "lookup_name": "pillarcolorcollection",
+      "name": "pillarcolorcollection",
+      "description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
+      "scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "strobe_lasers": {
+      "lookup_name": "strobe_lasers",
+      "name": "strobe_lasers",
+      "description": "strobe_lasers.",
+      "scene": "res://algorithms/color/strobe_lasers/strobe_lasers.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "colortrails": {
+      "lookup_name": "colortrails",
+      "name": "colortrails",
+      "description": "colortrails",
+      "scene": "res://algorithms/color/colortrails/colortrails.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "colorballs": {
+      "lookup_name": "colorballs",
+      "name": "colorballs",
+      "description": "colorballs",
+      "scene": "res://algorithms/color/colorballs/colorballs.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        3,
+        4
+      ],
+      "size_group": "room_scale"
+    },
+    "visual_color_mixing": {
+      "lookup_name": "visual_color_mixing",
+      "name": "visual_color_mixing",
+      "description": "visual_color_mixing",
+      "scene": "res://algorithms/color/color_mixing/visual_color_mixing.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        3,
+        2,
+        2
+      ],
+      "size_group": "room_scale"
+    },
+    "color_constellation_office": {
+      "lookup_name": "color_constellation_office",
+      "name": "color_constellation_office",
+      "description": "Office space with adaptive additive/subtractive constellations",
+      "scene": "res://algorithms/color/color_mixing/color_constellation_office.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "grab_stick": {
+      "lookup_name": "grab_stick",
+      "name": "grab_stick",
+      "description": "grab_stick",
+      "scene": "res://algorithms/color/color_scanner/grab_stick.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "grab_stick_scanner": {
+      "lookup_name": "grab_stick_scanner",
+      "name": "grab_stick_scannerk",
+      "description": "grab_stick_scanner",
+      "scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        5,
+        2
+      ],
+      "size_group": "environment"
+    },
+    "dark_side_prism": {
+      "lookup_name": "dark_side_prism",
+      "name": "dark_side_prism",
+      "description": "dark_side_prism",
+      "scene": "res://algorithms/color/dark_side_prism.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "coloredlines": {
+      "lookup_name": "coloredlines",
+      "name": "Colored Lines",
+      "description": "Interactive colored line visualization and manipulation algorithms",
+      "scene": "res://algorithms/color/colorlines/coloredlines.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        6,
+        1,
+        6
+      ],
+      "size_group": "environment"
+    },
+    "brick_wall_factory": {
+      "lookup_name": "brick_wall_factory",
+      "name": "brick_wall_factory",
+      "description": "brick_wall_factory",
+      "scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "SimultaneousContrast": {
+      "lookup_name": "SimultaneousContrast",
+      "name": "SimultaneousContrast",
+      "description": "SimultaneousContrast",
+      "scene": "res://algorithms/color/simultaneous_contrast/SimultaneousContrast.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        3,
+        4,
+        1
+      ],
+      "size_group": "room_scale"
+    },
+    "MetamerismLab": {
+      "lookup_name": "MetamerismLab",
+      "name": "MetamerismLab",
+      "description": "MetamerismLab",
+      "scene": "res://algorithms/color/metamerism_lab/MetamerismLab.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "SpectrumVisualizer": {
+      "lookup_name": "SpectrumVisualizer",
+      "name": "SpectrumVisualizer",
+      "description": "SpectrumVisualizer",
+      "scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "grabcolorcollection": {
+      "lookup_name": "grabcolorcollection",
+      "name": "grabcolorcollection",
+      "description": "grabcolorcollection",
+      "scene": "res://algorithms/color/grabcolor/grabcolorcollection.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "shelf": {
+      "lookup_name": "shelf",
+      "name": "shelf",
+      "description": "shelf",
+      "scene": "res://algorithms/color/grabcolor/shelf.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "size_group": "compact"
+    },
+    "shelf_with_stickers": {
+      "lookup_name": "shelf_with_stickers",
+      "name": "shelf_with_stickers",
+      "description": "shelf_with_stickers",
+      "scene": "res://algorithms/color/grabcolor/shelf_with_stickers.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        2
+      ],
+      "size_group": "compact"
+    },
+    "disco_lights": {
+      "lookup_name": "disco_lights",
+      "name": "disco_lights",
+      "description": "Interactive colored line visualization and manipulation algorithms",
+      "scene": "res://algorithms/color/colorball/disco_lights.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "advancedglitch": {
+      "lookup_name": "advancedglitch",
+      "name": "advancedglitch",
+      "description": "Interactive colored line visualization and manipulation algorithms",
+      "scene": "res://algorithms/color/advancedglitch/advancedglitch.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "spherecolors": {
+      "lookup_name": "spherecolors",
+      "name": "spherecolors",
+      "description": "spherecolors",
+      "scene": "res://algorithms/color/spherecolors/spherecolors.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        2,
+        2,
+        2
+      ],
+      "size_group": "compact"
+    },
+    "textureglitch": {
+      "lookup_name": "textureglitch",
+      "name": "textureglitch",
+      "description": "textureglitch",
+      "scene": "res://algorithms/color/textureglitch/textureglitch.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    }
+  }
 }

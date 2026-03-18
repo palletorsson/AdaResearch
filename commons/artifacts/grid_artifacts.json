@@ -2,6 +2,7 @@
 	"version": "1.0",
 	"format": "lab_artifacts",
 	"description": "Artifact definitions for the Lab environment",
+	"_deprecated": "2026-03-18: All entries have been migrated to commons/artifacts/registry/*.json. This file is kept for reference only and is no longer loaded at runtime. Use the modular registry files instead.",
 	"artifacts": {
 		"boids_aquarium": {
 			"name": "Boids Aquarium",
