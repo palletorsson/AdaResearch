@@ -131,3 +131,6 @@ func raycast_from_mouse(mouse_pos):
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	# query.collision_mask = ... (Ground layer)
 	return space.intersect_ray(query)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

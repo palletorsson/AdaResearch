@@ -44,3 +44,6 @@ func _get_vector_safe(pos):
 	var v = grid.get_vector(pos)
 	return Vector3(v.x, 0, v.z) # Grid returns Vector3(x,0,z) already? Check FlowGrid.
 	# grid.get_vector returns Vector3(v2.x, 0, v2.y). Correction: v2.y maps to Z. Correct.
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

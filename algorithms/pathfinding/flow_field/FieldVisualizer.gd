@@ -37,3 +37,6 @@ func update_visuals() -> void:
 				mesh.surface_add_vertex(end_pos)
 				
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

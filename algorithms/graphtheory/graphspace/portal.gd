@@ -30,3 +30,6 @@ func _on_enter(body: Node) -> void:
 		var pb = space_script.nodes[b].pos
 		var to = (body.global_transform.origin.distance_to(pa) < body.global_transform.origin.distance_to(pb)) if pb else pa
 		body.global_transform.origin = to + Vector3(0, 1.2, 0)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -69,3 +69,6 @@ func _update_parameters() -> void:
 		pathfinding_visualizer.allow_diagonal = diagonal_movement_slider.value > 0.5
 		pathfinding_visualizer.update_parameters()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
