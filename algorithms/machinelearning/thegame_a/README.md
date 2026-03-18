@@ -1,10 +1,10 @@
-# The Axiom Garden -- L-System Puzzle Game
+# The Axiom Garden — L-System Puzzle Game
 
-A puzzle game built around **L-System string rewriting** where players craft production rules to grow procedural plants that reach target goals while avoiding obstacles. The system is composed of modular components developed across nine iterative stages: the L-System engine, turtle interpreter, MultiMesh renderer, game controller, targets, obstacles, and neon-void environment.
+A puzzle game built around **L-System string rewriting** where players craft production rules to grow procedural plants that reach target goals while avoiding obstacles. The system is composed of modular components: the L-System engine, turtle interpreter, MultiMesh renderer, game controller, targets, obstacles, and neon-void environment.
 
 ## Concept Taught
 
-**L-Systems (Lindenmayer Systems) as formal grammars for growth.** L-Systems use string rewriting rules to model biological development -- a simple axiom string is repeatedly transformed by production rules, producing complex branching structures. This artifact turns that concept into a puzzle: players must discover which production rules cause a plant to grow into a specific shape, reach spatial targets, and avoid collision with obstacles. It teaches formal language theory, recursive string expansion, and the relationship between symbolic rules and geometric output.
+**L-Systems (Lindenmayer Systems) as formal grammars for growth.** L-Systems use string rewriting rules to model biological development — a simple axiom string is repeatedly transformed by production rules, producing complex branching structures. This artifact turns that concept into a puzzle: players must discover which production rules cause a plant to grow into a specific shape, reach spatial targets, and avoid collision with obstacles. It teaches formal language theory, recursive string expansion, and the relationship between symbolic rules and geometric output.
 
 ## How It Works
 
@@ -29,7 +29,7 @@ A puzzle game built around **L-System string rewriting** where players craft pro
 2. Six built-in solutions demonstrate different L-System patterns: The Seed, The Ladder, The Bush, The Vine, The Dragon (curve), and The Fern.
 3. After growing, performs **collision detection** using physics raycasts against obstacle bodies.
 4. Checks if any branch segment endpoints reach target spheres within their radius.
-5. Enforces a `max_segments` constraint -- overly complex plants "wither."
+5. Enforces a `max_segments` constraint — overly complex plants "wither."
 
 ### Supporting Components
 - **Target** (Target.gd): A semi-transparent cyan sphere marking a goal position. Emits `target_reached` signal.
@@ -49,7 +49,7 @@ A puzzle game built around **L-System string rewriting** where players craft pro
 ### GardenRenderer
 | Export | Type | Default | Description |
 |--------|------|---------|-------------|
-| `material` | StandardMaterial3D | -- | Custom branch material (defaults to green neon) |
+| `material` | StandardMaterial3D | — | Custom branch material (defaults to green neon) |
 | `thickness` | float | 0.05 | Branch cylinder radius |
 
 ### Target
@@ -65,21 +65,25 @@ A puzzle game built around **L-System string rewriting** where players craft pro
 - Six built-in L-System solutions (seed, ladder, bush, vine, dragon curve, fern)
 - Physics raycast collision detection against obstacle bodies
 - Target proximity detection with signal emission
-- Complexity constraint -- plants exceeding max_segments are killed
+- Complexity constraint — plants exceeding max_segments are killed
 - Rule parsing from user input text (format: `F=F[+F]F[-F]`)
 - Multi-rule support via comma separation (format: `X=...,F=...`)
 - Neon-void environment with glow, volumetric fog, and dark background
-- Nine test iteration scripts documenting the iterative development process
 
 ## Files
 
-- `AxiomGarden.gd` -- Main game controller with UI, solution management, collision/goal checking
-- `LSystem.gd` -- L-System string rewriting engine
-- `Turtle.gd` -- 3D turtle interpreter producing line segments
-- `GardenRenderer.gd` -- MultiMesh-based branch renderer
-- `Target.gd` -- Goal sphere with detection signal
-- `Obstacle.gd` -- Collision barrier body
-- `AxiomEnvironment.gd` -- Neon-void atmosphere setup
-- `AxiomGarden.tscn` -- Main scene file
-- `test_iteration_1.gd` through `test_iteration_9.gd` -- Iterative development test scripts
-- `test_full_playthrough.gd` -- Complete playthrough test
+### Runtime
+- `AxiomGarden.gd` — Main game controller with UI, solution management, collision/goal checking
+- `AxiomGarden.tscn` — Main scene file
+- `LSystem.gd` — L-System string rewriting engine
+- `Turtle.gd` — 3D turtle interpreter producing line segments
+- `GardenRenderer.gd` — MultiMesh-based branch renderer
+- `Target.gd` — Goal sphere with detection signal
+- `Obstacle.gd` — Collision barrier body
+- `AxiomEnvironment.gd` — Neon-void atmosphere setup
+
+### Validation
+- `test_axiom_garden.gd` — Consolidated validation suite (run via right-click → "Run" in the Script Editor). Covers L-System logic, turtle graphics, renderer pipeline, goal detection, withering, environment, stochastic rules, and full playthrough.
+
+### Archive
+- `_iterations/` — Original development iteration scripts (`test_iteration_1.gd` through `test_iteration_9.gd` and `test_full_playthrough.gd`). These document the step-by-step build process but are superseded by the consolidated validation script above.
