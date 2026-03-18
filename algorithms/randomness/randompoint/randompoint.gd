@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var area_half_extent: float = 0.8  # random within [-0.8, 0.8] on X and Y
 
@@ -58,3 +58,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Terrain and simulation parameters
 @export var terrain_size: Vector2 = Vector2(50.0, 50.0)
@@ -386,3 +386,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

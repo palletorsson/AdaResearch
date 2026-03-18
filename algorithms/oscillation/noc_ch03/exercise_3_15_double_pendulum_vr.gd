@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROD := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -166,3 +166,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

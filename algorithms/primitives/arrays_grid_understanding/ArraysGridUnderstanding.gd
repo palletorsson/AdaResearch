@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Arrays and Grid Understanding Visualization
 # Demonstrates fundamental data structure concepts in 3D space
@@ -367,3 +367,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

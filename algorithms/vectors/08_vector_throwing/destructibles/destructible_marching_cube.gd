@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 ## Destructible Marching Cubes Object
 ## Generates organic geometry using marching cubes, then shatters on impact
@@ -258,3 +258,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

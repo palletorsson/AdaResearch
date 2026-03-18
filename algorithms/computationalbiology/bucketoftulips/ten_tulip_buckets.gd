@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Ten Tulip Buckets Generator
 # Creates 10 instances of the bucket of tulips scene
@@ -245,3 +245,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

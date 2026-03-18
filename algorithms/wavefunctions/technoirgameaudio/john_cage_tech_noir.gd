@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Endless Techno-Noir Ambient Generator (Non-Blocking Version)
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
@@ -1264,3 +1264,6 @@ func shutdown_audio() -> void:
 		visualizer_root.queue_free()
 		visualizer_root = null
 	visualizer_infos.clear()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

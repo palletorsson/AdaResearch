@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Turret Demo - Spawns balls one at a time for the turret to destroy
 # Press SPACE to spawn a ball, or enable auto-spawn
@@ -166,3 +166,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

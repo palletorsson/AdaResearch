@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 ## GA + Cellular Automaton Shape Learner (3D).
 ## Evolves 3D CA rules to grow target shapes (cube, sphere, pyramid) from a single seed voxel.
@@ -297,3 +297,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

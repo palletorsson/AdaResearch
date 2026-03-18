@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var left_hand_path: NodePath
 @export var right_hand_path: NodePath
@@ -71,3 +71,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 ## Trig Walking Path Demo
 ## Generates walkable paths from Sine and Cosine waves using individual steps
@@ -262,3 +262,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

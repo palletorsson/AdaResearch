@@ -1,4 +1,4 @@
-﻿extends MeshInstance3D
+extends MeshInstance3D
 
 @export var length: int = 30
 @export var width: float = 0.2
@@ -59,3 +59,6 @@ func _draw_ribbon() -> void:
 		mesh.surface_add_vertex(pos + right * w)
 		
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
@@ -116,3 +116,6 @@ func initialize_rules() -> void:
 		# Generate random rule (0-255)
 		rules[i] = randi() % 256
 	print("CrosswayCA: New rules initialized")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

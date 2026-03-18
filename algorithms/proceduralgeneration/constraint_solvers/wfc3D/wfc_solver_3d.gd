@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var grid_size: Vector3i = Vector3i(20, 10, 20)
 @export var tile_size: float = 2.0
@@ -430,3 +430,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

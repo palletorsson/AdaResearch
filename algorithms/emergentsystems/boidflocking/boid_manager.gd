@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 class_name BoidManager
 
@@ -151,3 +151,6 @@ func _input(event: InputEvent) -> void:
 # Return the array of boids for optimization
 func get_boids():
 	return boids
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

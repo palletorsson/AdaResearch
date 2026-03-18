@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 class_name QueerNoiseTerrain
 
 # Terrain parameters
@@ -559,3 +559,6 @@ func get_terrain_info() -> Dictionary:
 		"terrain_size": terrain_size,
 		"resolution": terrain_resolution
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

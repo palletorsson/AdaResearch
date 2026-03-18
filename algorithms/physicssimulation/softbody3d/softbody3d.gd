@@ -1,4 +1,4 @@
-﻿extends SoftBody3D
+extends SoftBody3D
 class_name SoftBodyVariation
 
 # Soft body type-specific properties
@@ -291,3 +291,6 @@ func _validate_physics() -> void:
 	if global_position.y < -0.5:
 		global_position.y = 1.0
 		print("SoftBody: %s repositioned above floor" % soft_body_type)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

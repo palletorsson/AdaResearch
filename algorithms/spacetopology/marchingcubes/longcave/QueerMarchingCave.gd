@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 class_name QueerMarchingCave
 
 # Marching cubes parameters
@@ -458,3 +458,6 @@ func get_cave_info() -> Dictionary:
 		"cave_density": cave_density,
 		"vertical_bias": vertical_bias
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

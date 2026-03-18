@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var num_ants: int = 100
 @export var terrain_size: Vector2 = Vector2(50, 50)
@@ -122,3 +122,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

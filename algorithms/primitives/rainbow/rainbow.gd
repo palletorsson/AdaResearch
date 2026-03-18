@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
@@ -173,3 +173,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

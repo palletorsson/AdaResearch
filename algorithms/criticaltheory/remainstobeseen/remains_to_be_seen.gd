@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Implementation of a 3D representation inspired by Mona Hatoum's "Remains to be Seen"
 # This script creates a 3D installation with suspended furniture frames made of metal wire
@@ -338,3 +338,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

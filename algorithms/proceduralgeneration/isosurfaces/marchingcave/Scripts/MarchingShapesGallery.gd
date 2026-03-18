@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var spacing : float = 4.0  # Meters between shapes
 @export var shape_scale : float = 0.025  # Scale down from SDF units to VR meters
@@ -52,3 +52,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

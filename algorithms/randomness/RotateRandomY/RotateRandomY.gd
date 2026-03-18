@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 ## RotateRandomY.gd
 ## Randomly rotates MultiMesh cube instances around Y axis
 
@@ -72,3 +72,6 @@ func _process(_delta: float) -> void:
 	transform.basis = transform.basis.rotated(Vector3.UP, step_y)
 
 	multimesh.set_instance_transform(instance_index, transform)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 class_name CorridorTileMesh
 
 # Custom mesh generator for corridor tiles with visible doorways
@@ -233,3 +233,6 @@ static func add_wall_quad(vertices: PackedVector3Array, normals: PackedVector3Ar
 	indices.append(start_idx + 0)
 	indices.append(start_idx + 2)
 	indices.append(start_idx + 3)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

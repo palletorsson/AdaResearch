@@ -1,4 +1,4 @@
-﻿extends GadgetBase
+extends GadgetBase
 
 # Piston Gadget â€” Two pistons at 90Â° pushing a platform
 # Uses SliderJoint3D for each piston axis.
@@ -146,3 +146,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

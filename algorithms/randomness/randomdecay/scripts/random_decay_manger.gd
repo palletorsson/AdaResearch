@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # --- Exported Variables ---
 @export var grid_size: Vector2i = Vector2i(9, 9)  # Dimensions of the grid
@@ -75,3 +75,6 @@ func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 
 func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	decay_on = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

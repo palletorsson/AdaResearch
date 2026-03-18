@@ -1,4 +1,4 @@
-﻿extends CharacterBody3D
+extends CharacterBody3D
 class_name PhysarumAgent
 
 # References
@@ -88,3 +88,6 @@ func _local_to_grid(pos: Vector3) -> Vector2i:
 	var gx = int(remap(pos.x, -map_size.x/2, map_size.x/2, 0, grid.width))
 	var gy = int(remap(pos.z, -map_size.y/2, map_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

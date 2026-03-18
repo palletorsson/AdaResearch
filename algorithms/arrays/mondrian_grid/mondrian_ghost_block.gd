@@ -1,4 +1,4 @@
-﻿extends CSGBox3D
+extends CSGBox3D
 
 # MondrianGhostBlock.gd
 # Animates the block from opaque white to transparent fading in and out.
@@ -27,3 +27,6 @@ func _process(_delta):
 		var color = material_override.albedo_color
 		color.a = alpha
 		material_override.albedo_color = color
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

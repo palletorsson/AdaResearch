@@ -1,4 +1,4 @@
-﻿extends XRToolsPickable
+extends XRToolsPickable
 
 ## Grid Editor Cube (Improved)
 ## A cube that snaps to a grid and synchronizes with a paired cube in another grid
@@ -232,3 +232,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

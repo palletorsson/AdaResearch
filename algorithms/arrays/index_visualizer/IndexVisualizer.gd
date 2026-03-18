@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var tracked_node_name: String = "XRPlayer" 
 @export var font_size: int = 48
@@ -49,3 +49,6 @@ func _exit_tree() -> void:
 		if not child.owner:
 			child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
