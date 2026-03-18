@@ -160,16 +160,20 @@
 			"lookup_name": "sine_oscillation",
 			"scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
 			"name": "Sine Oscillation",
-			"description": "Pure sine wave oscillation visualization in 2D — the most fundamental periodic motion. Amplitude, frequency, phase, and their relationship to circular motion.",
+			"description": "Expressive 3D sine oscillation — rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
 			"tags": [
 				"sine",
+				"cosine",
 				"oscillation",
-				"2d",
+				"3d",
+				"unit_circle",
 				"circular_motion",
 				"amplitude",
-				"frequency"
+				"frequency",
+				"phase",
+				"wavelength"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
