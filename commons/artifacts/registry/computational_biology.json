@@ -189,14 +189,15 @@
 		},
 		"attractorsphere": {
 			"lookup_name": "attractorsphere",
-			"name": "attractorsphere",
-			"description": "attractorsphere",
+			"name": "Attractor Sphere",
+			"description": "Morphogenetic sphere with Gray-Scott reaction-diffusion surface patterns, diffusion gradient arrows, and temporal growth phases",
 			"scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
-			"category": "unknown",
+			"category": "computational_biology",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"transformation"
+				"transformation",
+				"computational_biology"
 			],
 			"footprint": [
 				1,
@@ -212,13 +213,19 @@
 				],
 				"size_group": "compact"
 			},
-			"complexity": "beginner",
+			"complexity": "intermediate",
 			"dev_themes": [
 				"biology",
-				"simulation"
+				"simulation",
+				"reaction-diffusion",
+				"morphogenesis"
 			],
 			"tags": [
-				"biology"
+				"biology",
+				"reaction-diffusion",
+				"turing-patterns",
+				"gray-scott",
+				"morphogenesis"
 			]
 		}
 	}
