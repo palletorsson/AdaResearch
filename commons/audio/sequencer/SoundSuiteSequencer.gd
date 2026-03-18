@@ -12,6 +12,7 @@ signal intent_changed(intent: Dictionary)
 
 const SAMPLE_RATE := 44100.0
 const SUITE_MAPPER_PATH := "res://commons/audio/soundbanks/SuitToSoundbankMapper.gd"
+const SOUNDBANKS_BASE_PATH := "res://commons/audio/soundbanks/"
 const VOICE_COUNT := 24
 
 const BASE_SUITES := {
@@ -118,9 +119,31 @@ var _current_step_interval: float = 0.125
 func _ready():
 	randomize()
 	_suite_definitions = BASE_SUITES.duplicate(true)
-	_register_mapper_suite("detroit_techno", "detroit_techno", "detroit_techno")
+	_auto_register_soundbanks()
 	_init_voice_pool()
 	_update_timing()
+
+
+func _auto_register_soundbanks():
+	var dir := DirAccess.open(SOUNDBANKS_BASE_PATH)
+	if dir == null:
+		push_warning("SoundSuiteSequencer: Could not open soundbanks directory")
+		return
+
+	var registered_count := 0
+	dir.list_dir_begin()
+	var entry := dir.get_next()
+	while not entry.is_empty():
+		if dir.current_is_dir() and not entry.begins_with("."):
+			var brief_path := SOUNDBANKS_BASE_PATH + entry + "/brief.json"
+			if FileAccess.file_exists(brief_path):
+				_register_mapper_suite(entry, entry, entry)
+				registered_count += 1
+		entry = dir.get_next()
+	dir.list_dir_end()
+
+	if registered_count > 0:
+		print("SoundSuiteSequencer: Auto-registered %d soundbank suites" % registered_count)
 
 
 func initialize(config: Dictionary):
