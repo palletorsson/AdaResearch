@@ -255,3 +255,6 @@ func _build_random_structure() -> void:
 
 		if i % 3 == 0:
 			await get_tree().create_timer(0.2).timeout
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

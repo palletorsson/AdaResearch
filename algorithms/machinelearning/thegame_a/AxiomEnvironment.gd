@@ -22,3 +22,6 @@ func _ready() -> void:
 	environment.volumetric_fog_enabled = true
 	environment.volumetric_fog_density = 0.01
 	environment.volumetric_fog_albedo = Color(0.1, 0.2, 0.3)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -83,3 +83,6 @@ func _process(delta: float) -> void:
 		vowel_synth.is_speaking = true
 	elif pressure < 0.01 and vowel_synth.is_speaking:
 		vowel_synth.is_speaking = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

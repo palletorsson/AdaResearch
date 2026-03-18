@@ -344,3 +344,6 @@ func is_static_kingdom() -> bool:
 	if not dna:
 		return true
 	return dna.mobility < 0.1
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

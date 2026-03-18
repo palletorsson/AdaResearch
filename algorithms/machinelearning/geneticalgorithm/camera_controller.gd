@@ -110,3 +110,6 @@ func set_camera_mode(mode: String) -> void:
 		"top":
 			target_position = Vector3(0, 50, 0)
 			target_rotation = Vector3(-90, 0, 0) 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -55,3 +55,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= 9.8 * delta
 
 	move_and_slide()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

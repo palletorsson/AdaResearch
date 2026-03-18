@@ -252,3 +252,6 @@ func _on_cross_kingdom(_parent_a: CritterEntity, _parent_b: CritterEntity, child
 
 func _on_ability_granted(ability_name: String, _data: Dictionary) -> void:
 	print("[Demo] Ability granted: %s" % ability_name)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
