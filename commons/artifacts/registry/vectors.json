@@ -114,7 +114,8 @@
 			"map_sequences": [
 				"forces"
 			],
-			"sequence": "forces"
+			"sequence": "forces",
+			"interaction": "grab"
 		},
 		"vector_subtraction_demo": {
 			"lookup_name": "vector_subtraction_demo",
@@ -186,7 +187,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"vector_normalize_demo": {
 			"lookup_name": "vector_normalize_demo",
@@ -226,7 +228,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"dot_product_projector": {
 			"lookup_name": "dot_product_projector",
@@ -269,7 +272,8 @@
 			"map_sequences": [
 				"forces"
 			],
-			"sequence": "forces"
+			"sequence": "forces",
+			"interaction": "grab"
 		},
 		"cross_product_demo": {
 			"lookup_name": "cross_product_demo",
@@ -312,7 +316,8 @@
 			"map_sequences": [
 				"forces"
 			],
-			"sequence": "forces"
+			"sequence": "forces",
+			"interaction": "grab"
 		},
 		"vector_projection_demo": {
 			"lookup_name": "vector_projection_demo",
@@ -380,7 +385,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"basis_vectors_rig": {
 			"lookup_name": "basis_vectors_rig",
@@ -425,7 +431,8 @@
 				"forces",
 				"testmaps"
 			],
-			"sequence": "forces"
+			"sequence": "forces",
+			"interaction": "grab"
 		},
 		"turret_targeting": {
 			"lookup_name": "turret_targeting",
@@ -714,7 +721,9 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"interaction": "grab",
+			"sequence": "vectors"
 		},
 		"vector_field_visualizer": {
 			"lookup_name": "vector_field_visualizer",
@@ -1183,7 +1192,8 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"vectorline": {
 			"lookup_name": "vectorline",

@@ -36,7 +36,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"barnsley_fern": {
 			"lookup_name": "barnsley_fern",
@@ -90,7 +91,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Bias is frozen E(S) â€” entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical Ï†: questioning whose data, whose categories."
 		},
 		"ca_rule_explorer": {
 			"lookup_name": "ca_rule_explorer",
@@ -122,7 +125,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Rule 110 is Turing complete â€” proof that simple local rules can produce universal computation. Edge of chaos territory."
 		},
 		"control_pendulum": {
 			"lookup_name": "control_pendulum",
@@ -184,7 +189,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Energy oscillates between subsystems. Î» = coupling strength. At edge of chaos, unpredictable transfer patterns emerge."
 		},
 		"distribution_sampler": {
 			"lookup_name": "distribution_sampler",
@@ -216,7 +223,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Distributions as 'shape of randomness' â€” entropy has structure. Different distributions = different Î» signatures."
 		},
 		"dna_specimen": {
 			"lookup_name": "dna_specimen",
@@ -248,7 +257,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"flow_field_painter": {
 			"lookup_name": "flow_field_painter",
@@ -280,7 +290,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure."
 		},
 		"force_field_visualizer": {
 			"lookup_name": "force_field_visualizer",
@@ -313,7 +325,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything."
 		},
 		"game_of_life_petri": {
 			"lookup_name": "game_of_life_petri",
@@ -345,7 +359,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Game of Life operates at the edge of chaos â€” simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules."
 		},
 		"glitch_body": {
 			"lookup_name": "glitch_body",
@@ -380,7 +396,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"harmonic_motion_demo": {
 			"lookup_name": "harmonic_motion_demo",
@@ -413,7 +430,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"jelly_variants": {
 			"lookup_name": "jelly_variants",
@@ -445,7 +463,9 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Parameter space exploration â€” stiffness, pressure, damping create different morphological behaviors"
 		},
 		"julia_set_explorer": {
 			"lookup_name": "julia_set_explorer",
@@ -477,7 +497,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a Î»-like dial."
 		},
 		"lsystem_editor": {
 			"lookup_name": "lsystem_editor",
@@ -510,7 +532,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like Î» â€” more iterations reveal more detail at the edge of legibility."
 		},
 		"mario_cube": {
 			"lookup_name": "mario_cube",
@@ -571,7 +595,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Order (Ï€) emerges from randomness through accumulation. Law of large numbers as F-minimization."
 		},
 		"orbital_mechanics_demo": {
 			"lookup_name": "orbital_mechanics_demo",
@@ -604,7 +630,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Orbit as dynamic equilibrium â€” perpetual falling, never landing. Balance between kinetic and potential. Stability from motion."
 		},
 		"oscilloscope_artifact": {
 			"lookup_name": "oscilloscope_artifact",
@@ -665,7 +693,9 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Noise is E(S) made visible. The threshold is a Î»-like parameter â€” where you draw the line between solid and void."
 		},
 		"petri_dish_worms": {
 			"lookup_name": "petri_dish_worms",
@@ -697,7 +727,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"queer_morphology_specimen": {
 			"lookup_name": "queer_morphology_specimen",
@@ -730,7 +761,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "THIS IS QFEP EMBODIED. Î» drives orderâ†’chaos transition in soft body physics. Ï† encodes resistance/embrace of change. At Î»â‰ˆ0.5, specimen breathes at edge of chaos â€” where life emerges. Queer morphology = form as process, not fixed state."
 		},
 		"random_walk_terrarium": {
 			"lookup_name": "random_walk_terrarium",
@@ -763,7 +796,9 @@
 					16
 				],
 				"size_group": "world_scale"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Random walk as pure E(S) â€” no memory, no direction, maximum entropy. LÃ©vy flights: structured randomness."
 		},
 		"spring_demo": {
 			"lookup_name": "spring_demo",
@@ -795,7 +830,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"spring_network": {
 			"lookup_name": "spring_network",
@@ -853,7 +889,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Matrix as transformation rule â€” how one space maps to another. det(M) shows information preservation/loss."
 		},
 		"turing_pattern_generator": {
 			"lookup_name": "turing_pattern_generator",
@@ -886,7 +924,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios â€” another Î» parameter space. Order (uniform) vs chaos (noise) with patterns at the edge."
 		},
 		"wave_interference_tank": {
 			"lookup_name": "wave_interference_tank",
@@ -918,7 +958,9 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe",
+			"qfep_connection": "Superposition â€” waves don't fight, they add. Patterns emerge from phase relationships. Information through interference."
 		},
 		"wave_equation_solver": {
 			"lookup_name": "wave_equation_solver",
@@ -980,7 +1022,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"player_presence_indicator": {
 			"lookup_name": "player_presence_indicator",
@@ -3017,7 +3060,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"circular_buffer": {
 			"lookup_name": "circular_buffer",
@@ -3056,7 +3100,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"matrix_multiply_visual": {
 			"lookup_name": "matrix_multiply_visual",
@@ -3094,7 +3139,8 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"index_map_puzzle": {
 			"lookup_name": "index_map_puzzle",
@@ -3133,7 +3179,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"spring_chain": {
 			"lookup_name": "spring_chain",
@@ -3172,7 +3219,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"drag_coefficient_wind_tunnel": {
 			"lookup_name": "drag_coefficient_wind_tunnel",
@@ -3210,7 +3258,8 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"impulse_collision_demo": {
 			"lookup_name": "impulse_collision_demo",
@@ -3248,7 +3297,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"centripetal_force_demo": {
 			"lookup_name": "centripetal_force_demo",
@@ -3286,7 +3336,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"surveillance_panopticon": {
 			"lookup_name": "surveillance_panopticon",
@@ -3323,7 +3374,8 @@
 					4
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "walk_through"
 		},
 		"attention_economy_sim": {
 			"lookup_name": "attention_economy_sim",
@@ -3360,7 +3412,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"filter_bubble_demo": {
 			"lookup_name": "filter_bubble_demo",
@@ -3396,7 +3449,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"data_labor_counter": {
 			"lookup_name": "data_labor_counter",
@@ -3432,7 +3486,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"big_o_race": {
 			"lookup_name": "big_o_race",
@@ -3469,7 +3524,8 @@
 					2
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"cache_hit_visualizer": {
 			"lookup_name": "cache_hit_visualizer",
@@ -3506,7 +3562,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"garbage_collector_demo": {
 			"lookup_name": "garbage_collector_demo",
@@ -3542,7 +3599,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"profiler_flame_graph": {
 			"lookup_name": "profiler_flame_graph",
@@ -3578,7 +3636,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"non_binary_classifier": {
 			"lookup_name": "non_binary_classifier",
@@ -3615,7 +3674,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"fluid_taxonomy_tree": {
 			"lookup_name": "fluid_taxonomy_tree",
@@ -3652,7 +3712,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"rhizome_navigator": {
 			"lookup_name": "rhizome_navigator",
@@ -3689,7 +3750,8 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "walk_through"
 		},
 		"sol_lewitt_wall_drawing": {
 			"lookup_name": "sol_lewitt_wall_drawing",
@@ -3725,7 +3787,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"bridget_riley_op_art": {
 			"lookup_name": "bridget_riley_op_art",
@@ -3761,7 +3824,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"vera_molnar_des_ordres": {
 			"lookup_name": "vera_molnar_des_ordres",
@@ -3798,7 +3862,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"agnes_martin_grid_painting": {
 			"lookup_name": "agnes_martin_grid_painting",
@@ -3834,7 +3899,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"kitbash_station": {
 			"lookup_name": "kitbash_station",
@@ -3870,7 +3936,8 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"constraint_sculptor": {
 			"lookup_name": "constraint_sculptor",
@@ -3906,7 +3973,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"found_object_assembler": {
 			"lookup_name": "found_object_assembler",
@@ -3942,7 +4010,8 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "grab"
 		},
 		"backpropagation_flow": {
 			"lookup_name": "backpropagation_flow",
@@ -3978,7 +4047,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"overfitting_demo": {
 			"lookup_name": "overfitting_demo",
@@ -4014,7 +4084,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"latent_space_walk": {
 			"lookup_name": "latent_space_walk",
@@ -4051,7 +4122,8 @@
 					3
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "walk_through"
 		},
 		"hypercube_rotation": {
 			"lookup_name": "hypercube_rotation",
@@ -4088,7 +4160,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"dimensional_analogy": {
 			"lookup_name": "dimensional_analogy",
@@ -4125,7 +4198,8 @@
 					1
 				],
 				"size_group": "room_scale"
-			}
+			},
+			"interaction": "observe"
 		},
 		"schlegel_diagram": {
 			"lookup_name": "schlegel_diagram",
@@ -4162,7 +4236,8 @@
 					2
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "observe"
 		},
 		"pressure_soft_body": {
 			"lookup_name": "pressure_soft_body",
@@ -4198,7 +4273,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"soft_body_slicer": {
 			"lookup_name": "soft_body_slicer",
@@ -4234,7 +4310,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		},
 		"viscous_fluid_blob": {
 			"lookup_name": "viscous_fluid_blob",
@@ -4271,7 +4348,8 @@
 					1
 				],
 				"size_group": "compact"
-			}
+			},
+			"interaction": "grab"
 		}
 	}
 }
