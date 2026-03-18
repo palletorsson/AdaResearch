@@ -1,63 +1,52 @@
-extends Control
+extends Node3D
 class_name SpaceDystopiaMain
 
 # The "App" for the Space Dystopia Album.
-# Creates the SciFiSynth engine and provides a player UI.
+# Creates the SciFiSynth engine and provides a VR player UI.
+
+const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
 var synth: SciFiSynth
-var track_buttons: Array[Button] = []
-var info_label: Label
+var track_buttons: Array[Node3D] = []
+var track_labels: Array[Label3D] = []
+var info_label: Label3D
 
 func _ready() -> void:
 	# 1. Setup Sound Engine
 	synth = SciFiSynth.new()
 	synth.name = "SciFiSynth"
 	add_child(synth)
-	
-	# 2. Setup UI
+
+	# 2. Setup VR UI
 	_setup_ui()
-	
+
 	# 3. Auto-play Track 1
 	_on_track_selected(1)
 
 func _setup_ui() -> void:
-	# Background
-	var bg = ColorRect.new()
-	bg.color = Color(0.05, 0.05, 0.08) # Dark SciFi Blue
-	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(bg)
-	
-	# Main Container
-	var center = CenterContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(center)
-	
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 20)
-	center.add_child(vbox)
-	
+	var y_pos := 0.56
+
 	# Title
-	var title = Label.new()
+	var title = Label3D.new()
 	title.text = "S P A C E   D Y S T O P I A"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 32)
+	title.font_size = 48
 	title.modulate = Color(0.6, 0.8, 1.0)
-	vbox.add_child(title)
-	
+	title.position = Vector3(0, y_pos, 0)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	add_child(title)
+	y_pos -= 0.1
+
 	# Info
-	info_label = Label.new()
+	info_label = Label3D.new()
 	info_label.text = "Initializing System..."
-	info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	info_label.font_size = 24
 	info_label.modulate = Color(0.5, 0.5, 0.5)
-	vbox.add_child(info_label)
-	
-	# Track List
-	var grid = GridContainer.new()
-	grid.columns = 2
-	grid.add_theme_constant_override("h_separation", 20)
-	grid.add_theme_constant_override("v_separation", 10)
-	vbox.add_child(grid)
-	
+	info_label.position = Vector3(0, y_pos, 0)
+	info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	add_child(info_label)
+	y_pos -= 0.1
+
+	# Track List (two columns)
 	var tracks = [
 		{ "id": 1, "name": "1. Post-Singularity Drift" },
 		{ "id": 2, "name": "2. Interdimensional" },
@@ -70,18 +59,33 @@ func _setup_ui() -> void:
 		{ "id": 9, "name": "9. Celestial Symphony" },
 		{ "id": 10, "name": "10. The Singularity" }
 	]
-	
-	for t in tracks:
-		var btn = Button.new()
-		btn.text = t.name
-		btn.custom_minimum_size = Vector2(200, 40)
-		btn.pressed.connect(func(): _on_track_selected(t.id))
-		grid.add_child(btn)
+
+	for i in range(tracks.size()):
+		var t = tracks[i]
+		var col = i % 2
+		var row = i / 2
+		var x_offset = -0.18 + col * 0.36
+		var btn_pos = Vector3(x_offset, y_pos - row * 0.09, 0)
+
+		var btn = VR_BUTTON_SCENE.instantiate()
+		btn.position = btn_pos
+		add_child(btn)
+
+		var lbl = Label3D.new()
+		lbl.text = t.name
+		lbl.font_size = 18
+		lbl.modulate = Color(0.85, 0.9, 1.0)
+		lbl.position = Vector3(0, 0.03, 0)
+		btn.add_child(lbl)
+
+		var area = btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_track_selected.bind(t.id))
+
 		track_buttons.append(btn)
+		track_labels.append(lbl)
 
 func _on_track_selected(id: int) -> void:
-	# Update Synths
-	# Update Synths
 	if id >= 1 and id <= 10:
 		synth.play_track(id)
 		_update_ui_state(id, "Playing...")
@@ -91,16 +95,17 @@ func _on_track_selected(id: int) -> void:
 
 func _update_ui_state(id: int, status: String) -> void:
 	info_label.text = "Track %d Active\nStatus: %s" % [id, status]
-	
-	for i in range(track_buttons.size()):
-		var btn = track_buttons[i]
+
+	for i in range(track_labels.size()):
 		if (i + 1) == id:
-			btn.modulate = Color(1.0, 1.0, 1.0) # Active
+			track_labels[i].modulate = Color(1.0, 1.0, 1.0)
 		else:
-			btn.modulate = Color(0.5, 0.5, 0.5) # Dim
+			track_labels[i].modulate = Color(0.5, 0.5, 0.5)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-

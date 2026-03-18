@@ -1,5 +1,5 @@
-# GameSoundMeter.gd - Universal sound meter system for game objects
-extends Control
+# GameSoundMeter.gd - Universal sound meter system for game objects (VR/3D)
+extends Node3D
 class_name GameSoundMeter
 
 # Core configuration
@@ -22,11 +22,6 @@ class_name GameSoundMeter
 @export var max_display_distance: float = 50.0
 @export var smoothing_factor: float = 0.8
 
-@export_group("UI Integration")
-@export var overlay_mode: bool = true  # Show as UI overlay
-@export var world_space_mode: bool = false  # Show in 3D world
-@export var auto_size_to_parent: bool = true
-
 enum DisplayStyle {
 	SPECTRUM_LINE,      # Green line spectrum
 	SPECTRUM_BARS,      # Individual bars
@@ -34,6 +29,10 @@ enum DisplayStyle {
 	VU_METER,          # Simple level meter
 	OSCILLOSCOPE       # Detailed waveform
 }
+
+# Panel size in meters (was ~500px Control, now 0.5m x 0.3m)
+const PANEL_SIZE := Vector3(0.5, 0.3, 0.0)
+const PX_TO_M := 0.5 / 500.0  # Pixel-to-meter ratio
 
 # Internal components
 var spectrum_analyzer: AudioEffectSpectrumAnalyzer
@@ -51,17 +50,27 @@ var teleport_cube_node: Node3D
 
 # Cached calculations
 var bar_width: float
-var meter_rect: Rect2
+var meter_size: Vector2  # In meters
 var is_initialized: bool = false
+
+# ImmediateMesh rendering
+var _mesh: ImmediateMesh
+var _mesh_instance: MeshInstance3D
+
+# Label3D nodes for text
+var _title_label: Label3D
+var _info_label: Label3D
+var _no_audio_label: Label3D
+var _freq_labels: Array[Label3D] = []
+var _amp_labels: Array[Label3D] = []
 
 func _ready() -> void:
 	_initialize_meter()
 	_setup_audio_analysis()
 	_find_game_objects()
-	
-	if auto_size_to_parent and get_parent():
-		_setup_auto_sizing()
-	
+	_setup_mesh()
+	_setup_labels()
+
 	print("GameSoundMeter: Initialized - Style: %s, Bars: %d, FPS: %.1f" % [
 		DisplayStyle.keys()[display_style], bar_count, update_fps
 	])
@@ -71,60 +80,141 @@ func _initialize_meter() -> void:
 	frequency_data.resize(bar_count)
 	smoothed_data.resize(bar_count)
 	peak_levels.resize(bar_count)
-	
+
 	frequency_data.fill(0.0)
 	smoothed_data.fill(0.0)
 	peak_levels.fill(0.0)
-	
+
 	update_interval = 1.0 / update_fps
-	_update_cached_values()
-	
-	# Connect signals
-	resized.connect(_on_resized)
+	meter_size = Vector2(PANEL_SIZE.x, PANEL_SIZE.y)
+	bar_width = meter_size.x / float(bar_count)
 	is_initialized = true
+
+func _setup_mesh() -> void:
+	"""Setup ImmediateMesh for 3D rendering"""
+	_mesh = ImmediateMesh.new()
+	_mesh_instance = MeshInstance3D.new()
+	_mesh_instance.mesh = _mesh
+	var mat = StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.no_depth_test = false
+	_mesh_instance.material_override = mat
+	add_child(_mesh_instance)
+
+func _setup_labels() -> void:
+	"""Create Label3D nodes for text overlays"""
+	# Title label
+	_title_label = Label3D.new()
+	_title_label.font_size = 48
+	_title_label.pixel_size = 0.001
+	_title_label.no_depth_test = false
+	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_title_label.position = Vector3(0.01, -0.02, 0.002)
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	add_child(_title_label)
+
+	# Info label
+	_info_label = Label3D.new()
+	_info_label.font_size = 36
+	_info_label.pixel_size = 0.001
+	_info_label.no_depth_test = false
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_info_label.position = Vector3(0.01, -0.04, 0.002)
+	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_info_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	add_child(_info_label)
+
+	# No audio label (hidden by default)
+	_no_audio_label = Label3D.new()
+	_no_audio_label.font_size = 56
+	_no_audio_label.pixel_size = 0.001
+	_no_audio_label.no_depth_test = false
+	_no_audio_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_no_audio_label.text = "NO AUDIO - TEST PATTERN"
+	_no_audio_label.modulate = Color.WHITE
+	_no_audio_label.position = Vector3(meter_size.x * 0.5, -meter_size.y * 0.5, 0.002)
+	_no_audio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_no_audio_label.visible = false
+	add_child(_no_audio_label)
+
+	# Frequency labels (for spectrum grid)
+	var freq_marks = [20, 100, 1000, 5000, 20000]
+	for i in range(freq_marks.size()):
+		var freq_hz = freq_marks[i]
+		var freq_ratio = log(freq_hz / 20.0) / log(1000.0)
+		var x = freq_ratio * meter_size.x
+
+		var lbl = Label3D.new()
+		lbl.font_size = 30
+		lbl.pixel_size = 0.001
+		lbl.no_depth_test = false
+		lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		lbl.modulate = Color(0.8, 1.0, 0.8, 0.9)
+		lbl.position = Vector3(x + 0.002, -meter_size.y + 0.005, 0.002)
+
+		if freq_hz < 1000:
+			lbl.text = "%d Hz" % freq_hz
+		else:
+			lbl.text = "%.1f kHz" % (freq_hz / 1000.0)
+
+		add_child(lbl)
+		_freq_labels.append(lbl)
+
+	# Amplitude labels
+	for i in range(4):
+		var amplitude = 1.0 - (float(i + 1) / 5.0)
+		var y = -(float(i + 1) / 5.0) * meter_size.y
+
+		var lbl = Label3D.new()
+		lbl.font_size = 30
+		lbl.pixel_size = 0.001
+		lbl.no_depth_test = false
+		lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		lbl.modulate = Color(0.8, 1.0, 0.8, 0.9)
+		lbl.text = "%.1f" % amplitude
+		lbl.position = Vector3(0.005, y - 0.002, 0.002)
+		add_child(lbl)
+		_amp_labels.append(lbl)
 
 func _setup_audio_analysis() -> void:
 	"""Setup spectrum analyzer for the target audio source"""
 	if monitor_master_bus:
-		# Monitor the master bus directly
 		var master_bus_index = AudioServer.get_bus_index("Master")
-		
-		# Setup spectrum analyzer
+
 		spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
-		spectrum_analyzer.buffer_length = 2.0  # Longer buffer for better analysis
+		spectrum_analyzer.buffer_length = 2.0
 		spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_2048
 		spectrum_analyzer.tap_back_pos = 0.0
-		
-		# Add analyzer to master bus
+
 		AudioServer.add_bus_effect(master_bus_index, spectrum_analyzer)
 		var effect_count = AudioServer.get_bus_effect_count(master_bus_index)
 		spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
-		
+
 		print("GameSoundMeter: Monitoring Master Bus - analyzing ALL game audio")
 	else:
-		# Use dedicated analysis bus for specific audio sources
 		var bus_name = "GameSoundMeter_Analysis"
 		var bus_index = AudioServer.get_bus_index(bus_name)
-		
-		# Create dedicated analysis bus
+
 		if bus_index == -1:
 			AudioServer.add_bus()
 			bus_index = AudioServer.get_bus_count() - 1
 			AudioServer.set_bus_name(bus_index, bus_name)
-			
-			# Route to master for audio output
 			AudioServer.set_bus_send(bus_index, "Master")
-		
-		# Setup spectrum analyzer
+
 		spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
-		spectrum_analyzer.buffer_length = 1.0  # Balance between accuracy and performance
+		spectrum_analyzer.buffer_length = 1.0
 		spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_1024
 		spectrum_analyzer.tap_back_pos = 0.0
-		
+
 		AudioServer.add_bus_effect(bus_index, spectrum_analyzer)
 		spectrum_instance = AudioServer.get_bus_effect_instance(bus_index, 0) as AudioEffectSpectrumAnalyzerInstance
-		
-		# Connect target audio player to analysis bus
+
 		if target_audio_player:
 			target_audio_player.bus = bus_name
 			print("GameSoundMeter: Connected audio player to analysis bus")
@@ -132,16 +222,14 @@ func _setup_audio_analysis() -> void:
 func _find_game_objects() -> void:
 	"""Auto-find teleport cube and audio components"""
 	if auto_find_teleport_audio:
-		# Look for teleport cube with CubeAudioPlayer
 		var teleport_nodes = get_tree().get_nodes_in_group("teleport")
 		if teleport_nodes.is_empty():
 			teleport_nodes = [get_tree().current_scene.find_child("*Teleport*", true, false)]
-		
+
 		for node in teleport_nodes:
 			if node:
 				var audio_player = node.find_child("TeleportAudio", true, false)
 				if audio_player and audio_player is Node3D:
-					# Look for AudioStreamPlayer3D children
 					for child in audio_player.get_children():
 						if child is AudioStreamPlayer3D:
 							target_audio_player = child
@@ -149,61 +237,46 @@ func _find_game_objects() -> void:
 							_setup_audio_analysis()
 							print("GameSoundMeter: Auto-found teleport audio: %s" % child.name)
 							break
-	
-	# Find player camera for distance culling
+
 	var cameras = [
 		get_tree().get_first_node_in_group("player_camera"),
 		get_tree().current_scene.find_child("Camera3D", true, false),
 		get_tree().current_scene.find_child("*Player*", true, false)
 	]
-	
+
 	for cam in cameras:
 		if cam and cam is Camera3D:
 			player_camera = cam
 			break
 
-func _setup_auto_sizing() -> void:
-	"""Setup automatic sizing to parent container"""
-	if get_parent() is Control:
-		var parent = get_parent() as Control
-		parent.resized.connect(_resize_to_parent)
-		_resize_to_parent()
-
-func _resize_to_parent() -> void:
-	"""Resize to fit parent container"""
-	if get_parent() is Control:
-		var parent = get_parent() as Control
-		size = parent.size
-		position = Vector2.ZERO
-
 func _process(delta: float) -> void:
 	if not is_initialized or not spectrum_instance:
 		return
-	
+
 	# Performance culling
 	if enable_distance_culling and _should_cull_update():
 		frame_skip_counter += 1
-		if frame_skip_counter < 30:  # Skip 30 frames when far away
+		if frame_skip_counter < 30:
 			return
 		frame_skip_counter = 0
-	
+
 	# Update at specified rate
 	update_timer += delta
 	if update_timer >= update_interval:
 		update_timer = 0.0
 		_update_audio_data()
-	
+
 	# Smooth the data
 	_smooth_audio_data(delta)
-	
-	# Trigger redraw
-	queue_redraw()
+
+	# Update 3D mesh
+	_update_mesh()
 
 func _should_cull_update() -> bool:
 	"""Check if we should skip updates for performance"""
 	if not player_camera or not target_audio_player:
 		return false
-	
+
 	var distance = player_camera.global_position.distance_to(target_audio_player.global_position)
 	return distance > max_display_distance
 
@@ -211,7 +284,7 @@ func _update_audio_data() -> void:
 	"""Update audio data from spectrum analyzer"""
 	if not spectrum_instance:
 		return
-	
+
 	match display_style:
 		DisplayStyle.SPECTRUM_LINE, DisplayStyle.SPECTRUM_BARS:
 			_update_spectrum_data()
@@ -224,184 +297,280 @@ func _update_spectrum_data() -> void:
 	"""Update frequency spectrum data"""
 	for i in range(bar_count):
 		var freq_ratio = float(i) / float(bar_count - 1)
-		# Use logarithmic scale for better human hearing range representation
-		# 20 Hz to 20,000 Hz (full human hearing range)
-		var freq_hz = 20.0 * pow(1000.0, freq_ratio)  # Logarithmic: 20Hz to 20kHz
-		
+		var freq_hz = 20.0 * pow(1000.0, freq_ratio)
+
 		var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
-			freq_hz, freq_hz + max(100.0, freq_hz * 0.1)  # Adaptive frequency window
+			freq_hz, freq_hz + max(100.0, freq_hz * 0.1)
 		).length()
-		
-		# Convert to normalized dB with enhanced lower frequency response
+
 		var db = 20.0 * log(magnitude) / log(10.0) if magnitude > 0.0 else -80.0
-		var normalized = clamp((db + 50.0) / 50.0, 0.0, 1.0)  # More sensitive range
-		
-		# Boost lower frequencies for better visibility
-		if i < bar_count * 0.3:  # First 30% of spectrum (lower frequencies)
-			normalized = normalized * 2.0  # Double the amplitude
-		
+		var normalized = clamp((db + 50.0) / 50.0, 0.0, 1.0)
+
+		if i < bar_count * 0.3:
+			normalized = normalized * 2.0
+
 		frequency_data[i] = normalized
-		peak_levels[i] = max(peak_levels[i] * 0.95, normalized)  # Peak hold
+		peak_levels[i] = max(peak_levels[i] * 0.95, normalized)
 
 func _update_vu_data() -> void:
 	"""Update VU meter data"""
 	var total_magnitude = 0.0
-	for i in range(10):  # Sample lower frequencies for VU
+	for i in range(10):
 		var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
 			i * 200.0, (i + 1) * 200.0
 		).length()
 		total_magnitude += magnitude
-	
+
 	var avg_magnitude = total_magnitude / 10.0
 	var db = 20.0 * log(avg_magnitude) / log(10.0) if avg_magnitude > 0.0 else -80.0
 	var normalized = clamp((db + 60.0) / 60.0, 0.0, 1.0)
-	
-	frequency_data[0] = normalized  # Use first element for VU level
+
+	frequency_data[0] = normalized
 
 func _update_waveform_data() -> void:
 	"""Update waveform data (simplified)"""
-	# For waveform, we sample across the spectrum and create a time-like representation
 	for i in range(bar_count):
 		var freq_ratio = float(i) / float(bar_count - 1)
 		var freq_hz = freq_ratio * 4000.0
-		
+
 		var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
 			freq_hz, freq_hz + 50.0
 		).length()
-		
-		frequency_data[i] = magnitude * 100.0  # Scale for waveform display
+
+		frequency_data[i] = magnitude * 100.0
 
 func _smooth_audio_data(delta: float) -> void:
 	"""Apply smoothing to audio data"""
 	var smooth_speed = 1.0 - pow(smoothing_factor, delta * 60.0)
-	
+
 	for i in range(bar_count):
 		smoothed_data[i] = lerp(smoothed_data[i], frequency_data[i], smooth_speed)
 
-func _draw() -> void:
-	"""Draw the sound meter based on selected style"""
+func _update_mesh() -> void:
+	"""Render the sound meter as ImmediateMesh on XY plane"""
 	if not is_initialized:
 		return
-	
+
+	_mesh.clear_surfaces()
+
 	# Draw background
 	if background_color.a > 0.0:
-		draw_rect(meter_rect, background_color)
-	
+		_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		_mesh.surface_set_color(background_color)
+		_mesh.surface_add_vertex(Vector3(0, 0, 0))
+		_mesh.surface_add_vertex(Vector3(meter_size.x, 0, 0))
+		_mesh.surface_add_vertex(Vector3(meter_size.x, -meter_size.y, 0))
+		_mesh.surface_add_vertex(Vector3(0, 0, 0))
+		_mesh.surface_add_vertex(Vector3(meter_size.x, -meter_size.y, 0))
+		_mesh.surface_add_vertex(Vector3(0, -meter_size.y, 0))
+		_mesh.surface_end()
+
 	# If no spectrum instance, show test pattern
 	if not spectrum_instance:
-		_draw_test_pattern()
+		_draw_test_pattern_mesh()
+		_no_audio_label.visible = true
+		_title_label.visible = false
+		_info_label.visible = false
 		return
-	
+	else:
+		_no_audio_label.visible = false
+
 	match display_style:
 		DisplayStyle.SPECTRUM_LINE:
-			_draw_spectrum_line()
+			_draw_spectrum_line_mesh()
 		DisplayStyle.SPECTRUM_BARS:
-			_draw_spectrum_bars()
+			_draw_spectrum_bars_mesh()
 		DisplayStyle.VU_METER:
-			_draw_vu_meter()
+			_draw_vu_meter_mesh()
 		DisplayStyle.WAVEFORM:
-			_draw_waveform()
+			_draw_waveform_mesh()
 		DisplayStyle.OSCILLOSCOPE:
-			_draw_oscilloscope()
+			_draw_oscilloscope_mesh()
 
-func _draw_spectrum_line() -> void:
-	"""Draw spectrum as connected line with grid and labels"""
+func _draw_spectrum_line_mesh() -> void:
+	"""Draw spectrum as connected line with grid"""
 	if smoothed_data.size() < 2:
 		return
-	
-	var points: PackedVector2Array = []
-	
-	# Add some padding to ensure full visibility
-	var padding = 10.0
-	var draw_rect = Rect2(meter_rect.position + Vector2(padding, padding), 
-						 meter_rect.size - Vector2(padding * 2, padding * 2))
-	
-	# Draw grid lines and labels first (behind the spectrum)
-	_draw_spectrum_grid(draw_rect)
-	
-	# Generate spectrum line points
-	for i in range(bar_count):
-		var x = draw_rect.position.x + (float(i) / float(bar_count - 1)) * draw_rect.size.x
-		var y = draw_rect.position.y + draw_rect.size.y - (smoothed_data[i] * (draw_rect.size.y - padding))
-		points.append(Vector2(x, y))
-	
-	# Draw glow effect (multiple passes)
+
+	var padding = 0.01  # 10px -> 0.01m
+	var draw_x = padding
+	var draw_y = -padding
+	var draw_w = meter_size.x - padding * 2
+	var draw_h = meter_size.y - padding * 2
+
+	# Draw grid lines
+	_draw_spectrum_grid_mesh(draw_x, draw_y, draw_w, draw_h)
+
+	# Draw spectrum line with glow passes
 	for glow_pass in range(3):
-		var glow_width = line_width + (glow_pass * 2)
 		var glow_alpha = 0.3 - (glow_pass * 0.1)
 		var glow_color = Color(line_color.r, line_color.g, line_color.b, glow_alpha)
-		
-		for i in range(points.size() - 1):
-			draw_line(points[i], points[i + 1], glow_color, glow_width)
-	
-	# Draw the main spectrum line (bright and solid)
-	for i in range(points.size() - 1):
-		draw_line(points[i], points[i + 1], line_color, line_width)
-	
-	# Draw title and info (on top)
-	_draw_spectrum_info(draw_rect)
+		if glow_pass == 2:
+			glow_color = line_color  # Main line is solid
 
-func _draw_spectrum_bars() -> void:
+		_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+		_mesh.surface_set_color(glow_color)
+
+		for i in range(bar_count - 1):
+			var x0 = draw_x + (float(i) / float(bar_count - 1)) * draw_w
+			var y0 = draw_y - draw_h + smoothed_data[i] * (draw_h - padding)
+			var x1 = draw_x + (float(i + 1) / float(bar_count - 1)) * draw_w
+			var y1 = draw_y - draw_h + smoothed_data[i + 1] * (draw_h - padding)
+
+			_mesh.surface_add_vertex(Vector3(x0, y0, 0.001))
+			_mesh.surface_add_vertex(Vector3(x1, y1, 0.001))
+
+		_mesh.surface_end()
+
+	# Update labels
+	_title_label.text = "FREQUENCY SPECTRUM"
+	_title_label.modulate = Color(0, 1, 0, 1)
+	_title_label.visible = true
+
+	_info_label.text = "Range: 20Hz-20kHz | Bars: %d | Log Scale | Master Bus" % bar_count
+	_info_label.modulate = Color(0.7, 0.9, 0.7, 0.8)
+	_info_label.visible = true
+
+func _draw_spectrum_grid_mesh(draw_x: float, draw_y: float, draw_w: float, draw_h: float) -> void:
+	"""Draw grid lines for spectrum display"""
+	var grid_color = Color(0.2, 0.5, 0.2, 0.6)
+
+	_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_mesh.surface_set_color(grid_color)
+
+	# Horizontal grid lines
+	for i in range(4):
+		var y = draw_y - (float(i + 1) / 5.0) * draw_h
+		_mesh.surface_add_vertex(Vector3(draw_x, y, 0.0005))
+		_mesh.surface_add_vertex(Vector3(draw_x + draw_w, y, 0.0005))
+
+	# Vertical grid lines (frequency marks)
+	var freq_marks = [20, 100, 1000, 5000, 20000]
+	for freq_hz in freq_marks:
+		var freq_ratio = log(freq_hz / 20.0) / log(1000.0)
+		var x = draw_x + freq_ratio * draw_w
+		_mesh.surface_add_vertex(Vector3(x, draw_y, 0.0005))
+		_mesh.surface_add_vertex(Vector3(x, draw_y - draw_h, 0.0005))
+
+	_mesh.surface_end()
+
+func _draw_spectrum_bars_mesh() -> void:
 	"""Draw spectrum as individual bars"""
-	for i in range(bar_count):
-		var x = meter_rect.position.x + i * bar_width
-		var height = smoothed_data[i] * height_multiplier
-		var y = meter_rect.position.y + meter_rect.size.y - height
-		
-		var bar_rect = Rect2(x, y, bar_width * 0.8, height)
-		draw_rect(bar_rect, line_color)
-		
-		# Draw peak hold
-		var peak_y = meter_rect.position.y + meter_rect.size.y - (peak_levels[i] * height_multiplier)
-		draw_line(Vector2(x, peak_y), Vector2(x + bar_width * 0.8, peak_y), Color.WHITE, 1.0)
+	_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-func _draw_vu_meter() -> void:
+	for i in range(bar_count):
+		var x = i * bar_width
+		var height = smoothed_data[i] * height_multiplier * PX_TO_M
+		var y = -meter_size.y
+		var w = bar_width * 0.8
+
+		# Bar rect (two triangles)
+		_mesh.surface_set_color(line_color)
+		_mesh.surface_add_vertex(Vector3(x, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y + height, 0.001))
+		_mesh.surface_add_vertex(Vector3(x, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y + height, 0.001))
+		_mesh.surface_add_vertex(Vector3(x, y + height, 0.001))
+
+	_mesh.surface_end()
+
+	# Peak hold lines
+	_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_mesh.surface_set_color(Color.WHITE)
+	for i in range(bar_count):
+		var x = i * bar_width
+		var peak_y = -meter_size.y + peak_levels[i] * height_multiplier * PX_TO_M
+		_mesh.surface_add_vertex(Vector3(x, peak_y, 0.0015))
+		_mesh.surface_add_vertex(Vector3(x + bar_width * 0.8, peak_y, 0.0015))
+	_mesh.surface_end()
+
+func _draw_vu_meter_mesh() -> void:
 	"""Draw VU style meter"""
 	var level = smoothed_data[0] if smoothed_data.size() > 0 else 0.0
-	var fill_width = level * meter_rect.size.x
-	
+	var fill_width = level * meter_size.x
+
 	# Background
-	draw_rect(meter_rect, Color(0.2, 0.2, 0.2, 1.0))
-	
+	_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	_mesh.surface_set_color(Color(0.2, 0.2, 0.2, 1.0))
+	_mesh.surface_add_vertex(Vector3(0, 0, 0.001))
+	_mesh.surface_add_vertex(Vector3(meter_size.x, 0, 0.001))
+	_mesh.surface_add_vertex(Vector3(meter_size.x, -meter_size.y, 0.001))
+	_mesh.surface_add_vertex(Vector3(0, 0, 0.001))
+	_mesh.surface_add_vertex(Vector3(meter_size.x, -meter_size.y, 0.001))
+	_mesh.surface_add_vertex(Vector3(0, -meter_size.y, 0.001))
+
 	# Level fill
-	var level_rect = Rect2(meter_rect.position, Vector2(fill_width, meter_rect.size.y))
 	var level_color = Color.GREEN if level < 0.7 else (Color.YELLOW if level < 0.9 else Color.RED)
-	draw_rect(level_rect, level_color)
+	_mesh.surface_set_color(level_color)
+	_mesh.surface_add_vertex(Vector3(0, 0, 0.002))
+	_mesh.surface_add_vertex(Vector3(fill_width, 0, 0.002))
+	_mesh.surface_add_vertex(Vector3(fill_width, -meter_size.y, 0.002))
+	_mesh.surface_add_vertex(Vector3(0, 0, 0.002))
+	_mesh.surface_add_vertex(Vector3(fill_width, -meter_size.y, 0.002))
+	_mesh.surface_add_vertex(Vector3(0, -meter_size.y, 0.002))
+	_mesh.surface_end()
 
-func _draw_waveform() -> void:
+func _draw_waveform_mesh() -> void:
 	"""Draw waveform representation"""
-	var center_y = meter_rect.position.y + meter_rect.size.y * 0.5
-	var points: PackedVector2Array = []
-	
-	for i in range(bar_count):
-		var x = meter_rect.position.x + (float(i) / float(bar_count - 1)) * meter_rect.size.x
-		var amplitude = smoothed_data[i] * meter_rect.size.y * 0.4
-		var y = center_y + sin(float(i) * 0.5) * amplitude  # Create wave-like pattern
-		points.append(Vector2(x, y))
-	
-	for i in range(points.size() - 1):
-		draw_line(points[i], points[i + 1], line_color, line_width)
+	var center_y = -meter_size.y * 0.5
 
-func _draw_oscilloscope() -> void:
+	_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_mesh.surface_set_color(line_color)
+
+	for i in range(bar_count - 1):
+		var x0 = (float(i) / float(bar_count - 1)) * meter_size.x
+		var amplitude0 = smoothed_data[i] * meter_size.y * 0.4
+		var y0 = center_y + sin(float(i) * 0.5) * amplitude0 * PX_TO_M
+
+		var x1 = (float(i + 1) / float(bar_count - 1)) * meter_size.x
+		var amplitude1 = smoothed_data[i + 1] * meter_size.y * 0.4
+		var y1 = center_y + sin(float(i + 1) * 0.5) * amplitude1 * PX_TO_M
+
+		_mesh.surface_add_vertex(Vector3(x0, y0, 0.001))
+		_mesh.surface_add_vertex(Vector3(x1, y1, 0.001))
+
+	_mesh.surface_end()
+
+func _draw_oscilloscope_mesh() -> void:
 	"""Draw oscilloscope style display"""
-	# Draw grid
 	var grid_color = Color(0, 0.3, 0, 0.5)
+
+	# Draw grid
+	_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_mesh.surface_set_color(grid_color)
 	for i in range(5):
-		var y = meter_rect.position.y + (float(i) / 4.0) * meter_rect.size.y
-		draw_line(Vector2(meter_rect.position.x, y), 
-				 Vector2(meter_rect.position.x + meter_rect.size.x, y), grid_color)
-	
-	_draw_waveform()  # Use waveform drawing for oscilloscope
+		var y = -(float(i) / 4.0) * meter_size.y
+		_mesh.surface_add_vertex(Vector3(0, y, 0.0005))
+		_mesh.surface_add_vertex(Vector3(meter_size.x, y, 0.0005))
+	_mesh.surface_end()
 
-func _update_cached_values() -> void:
-	"""Update cached calculation values"""
-	meter_rect = Rect2(Vector2.ZERO, size)
-	bar_width = meter_rect.size.x / float(bar_count)
-	print("GameSoundMeter: Meter rect updated - ", meter_rect)
+	# Waveform on top
+	_draw_waveform_mesh()
 
-func _on_resized() -> void:
-	"""Handle control resize"""
-	_update_cached_values()
+func _draw_test_pattern_mesh() -> void:
+	"""Draw a test pattern when no audio is available"""
+	var time = Time.get_time_dict_from_system()
+	var seconds = time.second + time.minute * 60.0
+
+	_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for i in range(bar_count):
+		var x = i * bar_width
+		var height = (sin(seconds * 2.0 + i * 0.3) * 0.5 + 0.5) * height_multiplier * 0.5 * PX_TO_M
+		var y = -meter_size.y
+		var w = bar_width * 0.8
+
+		var color = Color(0.5, 1.0, 0.5, 0.8)
+		_mesh.surface_set_color(color)
+		_mesh.surface_add_vertex(Vector3(x, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y + height, 0.001))
+		_mesh.surface_add_vertex(Vector3(x, y, 0.001))
+		_mesh.surface_add_vertex(Vector3(x + w, y + height, 0.001))
+		_mesh.surface_add_vertex(Vector3(x, y + height, 0.001))
+
+	_mesh.surface_end()
 
 # Public API
 func set_audio_target(player: AudioStreamPlayer3D) -> void:
@@ -424,73 +593,21 @@ func get_performance_stats() -> Dictionary:
 		"distance_culled": _should_cull_update() if enable_distance_culling else false
 	}
 
-func _draw_test_pattern() -> void:
-	"""Draw a test pattern when no audio is available"""
-	var time = Time.get_time_dict_from_system()
-	var seconds = time.second + time.minute * 60.0
-	
-	# Draw animated test bars
-	for i in range(bar_count):
-		var x = meter_rect.position.x + i * bar_width
-		var height = (sin(seconds * 2.0 + i * 0.3) * 0.5 + 0.5) * height_multiplier * 0.5
-		var y = meter_rect.position.y + meter_rect.size.y - height
-		
-		var bar_rect = Rect2(x, y, bar_width * 0.8, height)
-		var color = Color(0.5, 1.0, 0.5, 0.8)  # Dimmed green
-		draw_rect(bar_rect, color)
-	
-	# Draw "NO AUDIO" text
-	var font_size = 20
-	var text = "NO AUDIO - TEST PATTERN"
-	var text_pos = Vector2(meter_rect.size.x * 0.5 - 100, meter_rect.size.y * 0.5)
-	draw_string(get_theme_default_font(), text_pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, Color.WHITE)
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
-func _draw_spectrum_grid(rect: Rect2) -> void:
-	"""Draw grid lines and frequency labels"""
-	var grid_color = Color(0.2, 0.5, 0.2, 0.6)  # Green grid to match spectrum color
-	var text_color = Color(0.8, 1.0, 0.8, 0.9)  # Light green text
-	
-	# Draw horizontal grid lines (amplitude levels)
-	for i in range(4):
-		var y = rect.position.y + (float(i + 1) / 5.0) * rect.size.y
-		draw_line(Vector2(rect.position.x, y), Vector2(rect.position.x + rect.size.x, y), grid_color, 1.0)
-		
-		# Amplitude labels (0.2, 0.4, 0.6, 0.8)
-		var amplitude = 1.0 - (float(i + 1) / 5.0)  # From top: 0.8, 0.6, 0.4, 0.2
-		var amp_text = "%.1f" % amplitude
-		draw_string(get_theme_default_font(), Vector2(rect.position.x + 5, y - 2), 
-					amp_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, text_color)
-	
-	# Draw vertical grid lines (frequency divisions) - Human hearing range
-	var freq_marks = [20, 100, 1000, 5000, 20000]  # 20Hz, 100Hz, 1kHz, 5kHz, 20kHz
-	for i in range(freq_marks.size()):
-		var freq_hz = freq_marks[i]
-		# Convert to logarithmic position
-		var freq_ratio = log(freq_hz / 20.0) / log(1000.0)  # Log scale from 20Hz to 20kHz
-		var x = rect.position.x + freq_ratio * rect.size.x
-		draw_line(Vector2(x, rect.position.y), Vector2(x, rect.position.y + rect.size.y), grid_color, 1.0)
-		
-		# Frequency labels
-		var freq_text = ""
-		if freq_hz < 1000:
-			freq_text = "%d Hz" % freq_hz
-		else:
-			freq_text = "%.1f kHz" % (freq_hz / 1000.0)
-		
-		draw_string(get_theme_default_font(), Vector2(x + 2, rect.position.y + rect.size.y - 5), 
-					freq_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, text_color)
-
-func _draw_spectrum_info(rect: Rect2) -> void:
-	"""Draw title and current info"""
-	var title_color = Color(0, 1, 0, 1)  # Bright green to match spectrum
-	var info_color = Color(0.7, 0.9, 0.7, 0.8)
-	
-	# Title
-	var title = "FREQUENCY SPECTRUM"
-	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 20), 
-				title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, title_color)
-	
-	# Info - Updated to show full human hearing range
-	var info = "Range: 20Hz-20kHz (Human Hearing) | Bars: %d | Log Scale | Master Bus" % bar_count
-	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 40), 
-				info, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, info_color)
+func _exit_tree() -> void:
+	if _mesh_instance and is_instance_valid(_mesh_instance):
+		_mesh_instance.queue_free()
+	for lbl in _freq_labels:
+		if is_instance_valid(lbl):
+			lbl.queue_free()
+	for lbl in _amp_labels:
+		if is_instance_valid(lbl):
+			lbl.queue_free()
+	if _title_label and is_instance_valid(_title_label):
+		_title_label.queue_free()
+	if _info_label and is_instance_valid(_info_label):
+		_info_label.queue_free()
+	if _no_audio_label and is_instance_valid(_no_audio_label):
+		_no_audio_label.queue_free()

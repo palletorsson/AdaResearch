@@ -1,131 +1,105 @@
-extends Control
-
-@onready var main_container = VBoxContainer.new()
-@onready var scroll_container = ScrollContainer.new()
-@onready var sheets_container = VBoxContainer.new()
+extends Node3D
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 
+const SWATCH_SIZE := 0.03
+const SWATCH_GAP := 0.005
+const PALETTE_GAP_X := 0.2
+const PALETTE_GAP_Y := 0.22
+const COLUMNS := 2
+
 func _ready() -> void:
-	setup_ui()
-	create_all_palette_sheets()
+	_build_wall()
 
-func setup_ui() -> void:
-	# Main setup
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	
-	# Scroll container
-	scroll_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(scroll_container)
-	
-	# Main container
-	main_container.add_theme_constant_override("separation", 30)
-	scroll_container.add_child(main_container)
-	
-	# Add margin
-	var margin = MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_top", 20)
-	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_bottom", 20)
-	scroll_container.add_child(margin)
-	margin.add_child(main_container)
-	
+func _build_wall() -> void:
 	# Title
-	var title = Label.new()
+	var title := Label3D.new()
 	title.text = "20 Cultural & Emotional Color Palette Sheets"
-	title.add_theme_font_size_override("font_size", 28)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	main_container.add_child(title)
-	
+	title.font_size = 48
+	title.position = Vector3(0.25, 0.1, 0)
+	add_child(title)
+
 	# Subtitle
-	var subtitle = Label.new()
+	var subtitle := Label3D.new()
 	subtitle.text = "4x4 Color Grids from Art, History, Culture & Human Experience"
-	subtitle.add_theme_font_size_override("font_size", 16)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	subtitle.font_size = 28
 	subtitle.modulate = Color(0.7, 0.7, 0.7)
-	main_container.add_child(subtitle)
+	subtitle.position = Vector3(0.25, 0.06, 0)
+	add_child(subtitle)
 
-func create_all_palette_sheets() -> void:
-	# Create sheets in a grid layout (2 columns)
-	var grid_container = GridContainer.new()
-	grid_container.columns = 2
-	grid_container.add_theme_constant_override("h_separation", 30)
-	grid_container.add_theme_constant_override("v_separation", 30)
-	main_container.add_child(grid_container)
-	
-	# Create each palette sheet
+	# Create palette sheets in 2-column grid
 	var palette_keys = color_palette_resource.palettes.keys()
-	for palette_key in palette_keys:
+	for idx in range(palette_keys.size()):
+		var palette_key = palette_keys[idx]
 		var palette_data = color_palette_resource.palettes[palette_key]
-		var sheet = create_palette_sheet(palette_data)
-		grid_container.add_child(sheet)
+		var col := idx % COLUMNS
+		var row := idx / COLUMNS
+		var origin := Vector3(col * PALETTE_GAP_X, -row * PALETTE_GAP_Y, 0)
+		_create_palette_sheet(palette_data, origin)
 
-func create_palette_sheet(palette_data: Dictionary) -> Control:
-	var sheet_container = VBoxContainer.new()
-	sheet_container.add_theme_constant_override("separation", 10)
-	
-	# Title
-	var title_label = Label.new()
-	title_label.text = palette_data.title
-	title_label.add_theme_font_size_override("font_size", 16)
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	sheet_container.add_child(title_label)
-	
+func _create_palette_sheet(palette_data: Dictionary, origin: Vector3) -> void:
+	var container := Node3D.new()
+	container.position = origin
+	add_child(container)
+
+	# Palette title
+	var title_lbl := Label3D.new()
+	title_lbl.text = palette_data.title
+	title_lbl.font_size = 24
+	title_lbl.position = Vector3(0.06, 0.02, 0)
+	container.add_child(title_lbl)
+
 	# Description
-	var desc_label = Label.new()
-	desc_label.text = palette_data.description
-	desc_label.add_theme_font_size_override("font_size", 10)
-	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	desc_label.modulate = Color(0.8, 0.8, 0.8)
-	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	desc_label.custom_minimum_size = Vector2(300, 0)
-	sheet_container.add_child(desc_label)
-	
-	# 4x4 Color grid
-	var color_grid = GridContainer.new()
-	color_grid.columns = 4
-	color_grid.add_theme_constant_override("h_separation", 2)
-	color_grid.add_theme_constant_override("v_separation", 2)
-	
-	var colors = palette_data.colors
-	
-	# Create 16 color rectangles (4x4 grid)
+	var desc_lbl := Label3D.new()
+	desc_lbl.text = palette_data.description
+	desc_lbl.font_size = 14
+	desc_lbl.modulate = Color(0.8, 0.8, 0.8)
+	desc_lbl.position = Vector3(0.06, 0.0, 0)
+	desc_lbl.width = 0.15
+	desc_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	container.add_child(desc_lbl)
+
+	# 4x4 color grid
+	var colors: Array = palette_data.colors
+	var grid_start_y := -0.02
 	for i in range(16):
-		var color_rect = ColorRect.new()
-		color_rect.custom_minimum_size = Vector2(50, 50)
-		
+		var col := i % 4
+		var row_i := i / 4
+		var swatch_color: Color
 		if i < colors.size():
-			color_rect.color = colors[i]
+			swatch_color = colors[i]
 		else:
-			# Fill remaining slots with a neutral color
-			color_rect.color = Color(0.5, 0.5, 0.5, 0.3)
-		
-		# Add subtle border
-		var border_style = StyleBoxFlat.new()
-		border_style.border_width_left = 1
-		border_style.border_width_right = 1
-		border_style.border_width_top = 1
-		border_style.border_width_bottom = 1
-		border_style.border_color = Color(0.3, 0.3, 0.3)
-		color_rect.add_theme_stylebox_override("panel", border_style)
-		
-		color_grid.add_child(color_rect)
-	
-	sheet_container.add_child(color_grid)
-	
+			swatch_color = Color(0.5, 0.5, 0.5, 0.3)
+
+		var mesh_inst := MeshInstance3D.new()
+		var quad := QuadMesh.new()
+		quad.size = Vector2(SWATCH_SIZE, SWATCH_SIZE)
+		mesh_inst.mesh = quad
+
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = swatch_color
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mesh_inst.material_override = mat
+
+		mesh_inst.position = Vector3(
+			col * (SWATCH_SIZE + SWATCH_GAP),
+			grid_start_y - row_i * (SWATCH_SIZE + SWATCH_GAP),
+			0.001
+		)
+		container.add_child(mesh_inst)
+
 	# Color count info
-	var info_label = Label.new()
-	info_label.text = str(colors.size()) + " colors"
-	info_label.add_theme_font_size_override("font_size", 8)
-	info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	info_label.modulate = Color(0.6, 0.6, 0.6)
-	sheet_container.add_child(info_label)
-	
-	return sheet_container
+	var info_lbl := Label3D.new()
+	info_lbl.text = str(colors.size()) + " colors"
+	info_lbl.font_size = 12
+	info_lbl.modulate = Color(0.6, 0.6, 0.6)
+	info_lbl.position = Vector3(0.06, grid_start_y - 4 * (SWATCH_SIZE + SWATCH_GAP) - 0.01, 0)
+	container.add_child(info_lbl)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
-
