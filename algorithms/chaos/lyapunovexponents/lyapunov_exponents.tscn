@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dpew3wx2ihsdv" path="res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.gd" id="1_xjw1k"]
 
-[node name="LyapunovExponents" type="Node2D"]
+[node name="LyapunovExponents" type="Node3D"]
 script = ExtResource("1_xjw1k")
