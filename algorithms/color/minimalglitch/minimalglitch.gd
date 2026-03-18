@@ -189,4 +189,27 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	var cols := int(config["grid_cols"]) if config.has("grid_cols") else 5
+	var rows := int(config["grid_rows"]) if config.has("grid_rows") else 3
+	var spacing := float(config["cube_spacing"]) if config.has("cube_spacing") else 2.5
+	# Clear existing cubes (keep camera, light, env)
+	for cube in demo_cubes:
+		if is_instance_valid(cube):
+			cube.queue_free()
+	demo_cubes.clear()
+	materials.clear()
+	await get_tree().process_frame
+	for i in range(cols):
+		for j in range(rows):
+			var cube = CSGBox3D.new()
+			cube.size = Vector3(1, 1, 1)
+			cube.position = Vector3(i * spacing - cols * spacing * 0.5, j * spacing - rows * spacing * 0.5, 0)
+			var material = StandardMaterial3D.new()
+			material.flags_unshaded = true
+			material.flags_transparent = true
+			cube.material_override = material
+			demo_cubes.append(cube)
+			materials.append(material)
+			add_child(cube)

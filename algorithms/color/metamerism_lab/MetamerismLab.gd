@@ -121,4 +121,10 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("wave_speed"):
+		wave_speed = float(config["wave_speed"])
+	if config.has("wave_amplitude"):
+		wave_amplitude = float(config["wave_amplitude"])
+	_create_lab()

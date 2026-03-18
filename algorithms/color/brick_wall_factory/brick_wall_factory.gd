@@ -62,4 +62,20 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("wall_width"):
+		wall_width = int(config["wall_width"])
+	if config.has("wall_height"):
+		wall_height = int(config["wall_height"])
+	if config.has("brick_width"):
+		brick_size.x = float(config["brick_width"])
+	if config.has("brick_height"):
+		brick_size.y = float(config["brick_height"])
+	if config.has("brick_depth"):
+		brick_size.z = float(config["brick_depth"])
+	if config.has("mortar_thickness"):
+		mortar_thickness = float(config["mortar_thickness"])
+	if config.has("palette"):
+		palette = str(config["palette"])
+	generate_wall()

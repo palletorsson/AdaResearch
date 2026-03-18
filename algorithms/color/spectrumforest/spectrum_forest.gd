@@ -106,4 +106,16 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("forest_width"):
+		forest_size.x = float(config["forest_width"])
+	if config.has("forest_depth"):
+		forest_size.y = float(config["forest_depth"])
+	if config.has("line_count"):
+		line_count = int(config["line_count"])
+	if config.has("line_length"):
+		line_length = float(config["line_length"])
+	if config.has("ceiling_height"):
+		ceiling_height = float(config["ceiling_height"])
+	generate_forest()

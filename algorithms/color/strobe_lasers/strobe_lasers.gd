@@ -175,4 +175,27 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("beam_count"):
+		beam_count = int(config["beam_count"])
+	if config.has("beam_length"):
+		beam_length = float(config["beam_length"])
+	if config.has("beam_thickness"):
+		beam_thickness = float(config["beam_thickness"])
+	if config.has("spread_angle"):
+		spread_angle_deg = float(config["spread_angle"])
+	if config.has("rotation_speed"):
+		rotation_speed = float(config["rotation_speed"])
+	if config.has("strobe_frequency"):
+		strobe_frequency = float(config["strobe_frequency"])
+	if config.has("pulse_speed"):
+		pulse_speed = float(config["pulse_speed"])
+	if config.has("color"):
+		laser_color = Color.from_string(str(config["color"]), laser_color)
+	if config.has("rainbow_mode"):
+		rainbow_mode = config["rainbow_mode"] == true or str(config["rainbow_mode"]) == "true"
+	if config.has("rainbow_speed"):
+		rainbow_speed = float(config["rainbow_speed"])
+	_setup_multimesh()
+	_update_beams()

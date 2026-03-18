@@ -184,4 +184,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("rows"):
+		array_rows = int(config["rows"])
+	if config.has("cols"):
+		array_cols = int(config["cols"])
+	if config.has("spacing_x"):
+		array_spacing_x = float(config["spacing_x"])
+	if config.has("spacing_z"):
+		array_spacing_z = float(config["spacing_z"])
+	if config.has("rig_height"):
+		rig_height = float(config["rig_height"])
+	if config.has("beam_length"):
+		beam_length = float(config["beam_length"])
+	if config.has("beam_thickness"):
+		beam_thickness = float(config["beam_thickness"])
+	if config.has("pattern_speed"):
+		pattern_speed = float(config["pattern_speed"])
+	if config.has("pattern_amplitude"):
+		pattern_amplitude = float(config["pattern_amplitude"])
+	if config.has("pattern_type"):
+		pattern_type = int(config["pattern_type"])
+	if config.has("color_change_interval"):
+		color_change_interval = float(config["color_change_interval"])
+	_setup_rig()
+	_setup_multimesh()

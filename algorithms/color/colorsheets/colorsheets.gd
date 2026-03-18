@@ -2,11 +2,11 @@ extends Node3D
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 
-const SWATCH_SIZE := 0.03
-const SWATCH_GAP := 0.005
-const PALETTE_GAP_X := 0.2
-const PALETTE_GAP_Y := 0.22
-const COLUMNS := 2
+var SWATCH_SIZE := 0.03
+var SWATCH_GAP := 0.005
+var PALETTE_GAP_X := 0.2
+var PALETTE_GAP_Y := 0.22
+var COLUMNS := 2
 
 func _ready() -> void:
 	_build_wall()
@@ -97,7 +97,22 @@ func _create_palette_sheet(palette_data: Dictionary, origin: Vector3) -> void:
 	container.add_child(info_lbl)
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("swatch_size"):
+		SWATCH_SIZE = float(config["swatch_size"])
+	if config.has("swatch_gap"):
+		SWATCH_GAP = float(config["swatch_gap"])
+	if config.has("columns"):
+		COLUMNS = int(config["columns"])
+	if config.has("palette_gap_x"):
+		PALETTE_GAP_X = float(config["palette_gap_x"])
+	if config.has("palette_gap_y"):
+		PALETTE_GAP_Y = float(config["palette_gap_y"])
+	for child in get_children():
+		child.queue_free()
+	await get_tree().process_frame
+	_build_wall()
 
 func _exit_tree() -> void:
 	for child in get_children():

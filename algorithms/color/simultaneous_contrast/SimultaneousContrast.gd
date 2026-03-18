@@ -120,4 +120,12 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("cycle_duration"):
+		cycle_duration = float(config["cycle_duration"])
+	if config.has("background_separation"):
+		background_separation = float(config["background_separation"])
+	if config.has("target_size"):
+		target_size = float(config["target_size"])
+	_create_geometry()
