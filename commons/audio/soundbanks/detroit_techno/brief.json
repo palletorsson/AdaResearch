@@ -14,7 +14,7 @@
     "emotional_truth": "Afrofuturist machine funk - technology as liberation"
   },
 
-  "soundbank": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"],
+  "soundbank": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab", "sequence", "sweep_up", "sweep_down", "impact"],
 
   "forbidden": [
     "supersaw",
@@ -49,10 +49,10 @@
   },
 
   "sections": {
-    "intro": ["pad"],
-    "build": ["pad", "bass", "hihat"],
-    "main": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"],
-    "breakdown": ["pad", "bass"],
-    "outro": ["pad"]
+    "intro": ["pad", "sweep_up"],
+    "build": ["pad", "bass", "hihat", "sequence", "sweep_up"],
+    "main": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab", "sequence", "impact"],
+    "breakdown": ["pad", "bass", "sweep_down"],
+    "outro": ["pad", "sweep_down"]
   }
 }
