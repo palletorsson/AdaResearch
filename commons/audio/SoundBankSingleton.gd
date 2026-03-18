@@ -145,11 +145,11 @@ func get_current_ambient() -> String:
 
 func is_ambient_playing(preset_name: String) -> bool:
 	"""Check if a specific ambient preset is currently playing/paused"""
-	return current_ambient_preset == preset_name and _is_transitioning
+	return current_ambient_preset == preset_name
 
 func should_skip_generation(preset_name: String) -> bool:
-	"""Check if we should skip generation (same preset during transition)"""
-	return preset_name == current_ambient_preset and _is_transitioning
+	"""Check if we should skip generation (already playing this preset)"""
+	return preset_name == current_ambient_preset
 
 func _exit_tree():
 	# Clean up thread if running
