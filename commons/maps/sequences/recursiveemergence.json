@@ -44,7 +44,7 @@
 						"mirror_cellular_texture_for_3d"
 					],
 					"size_budget": "environment",
-					"rationale": "Introduction with 3 artifacts"
+					"rationale": "Time collapsed into space: 1D automata scroll spatially, grabbable rules let players feel the state transition, evolutionary algorithms mutate rulesets, mirror texture wraps output onto 3D form."
 				},
 				{
 					"map": "RecursiveEmergence_Cellular_Automata_2D",
@@ -54,7 +54,7 @@
 						"lattice_gas_automata"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 2 artifacts"
+					"rationale": "Grid life: 2D automata produce gliders, blinkers, and still-lifes from birth/death rules. Lattice gas bridges to fluid dynamics — same grid logic, different interpretation."
 				},
 				{
 					"map": "RecursiveEmergence_Cellular_Automata_3D",
@@ -64,7 +64,7 @@
 						"cellular_automata_3d_stacked"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Same rules, new dimension: 3D automata and stacked generations show how depth multiplies complexity. Forms emerge that the flat law never predicted."
 				},
 				{
 					"map": "RecursiveEmergence_Rule_30_110",
@@ -73,7 +73,7 @@
 						"rule_30_110_gravity"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Two rules, radically different outcomes: Rule 30 generates chaos, Rule 110 proves Turing completeness. The gap between noise and computation is eight bits."
 				},
 				{
 					"map": "RecursiveEmergence_Lattice_Gas_Automata",
@@ -82,7 +82,7 @@
 						"lattice_gas_automata"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Discrete particles with trivial collision rules converging into Navier-Stokes: fluid dynamics emerging from neighbor counting on a lattice."
 				},
 				{
 					"map": "RecursiveEmergence_Fibonacci_Sequences",
@@ -91,7 +91,7 @@
 						"fibonacci_sequences"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Simple addition cascading into the golden ratio: spirals governing sunflowers, shells, and galaxies. Recursion as nature's accumulator."
 				},
 				{
 					"map": "RecursiveEmergence_Tail_Recursion_Memoization",
@@ -100,7 +100,7 @@
 						"recursive_tree"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Recursive tree visualizes call stacks: tail recursion flattens them, memoization caches results, collapsing exponential branching into linear traversal."
 				},
 				{
 					"map": "RecursiveEmergence_Iterated_Function_Systems_IFS",
@@ -109,7 +109,7 @@
 						"koch_curve_3d"
 					],
 					"size_budget": "environment",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Finite contractions converging on attractors: 3D Koch curve shows how a handful of affine matrices encode ferns, forests, and self-similar geometry."
 				},
 				{
 					"map": "RecursiveEmergence_Koch_Curve",
@@ -118,7 +118,7 @@
 						"koch_curve"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Replace middle thirds forever: a continuous curve with no tangent anywhere. Infinite perimeter, finite area — six characters of rule producing infinite detail."
 				},
 				{
 					"map": "RecursiveEmergence_Mandelbrot_Set",
@@ -127,7 +127,7 @@
 						"mandelbrot_set"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "z → z² + c: escape vs boundedness tested at every point. The boundary between them is where miniature copies of the whole set nest at every scale."
 				},
 				{
 					"map": "RecursiveEmergence_Julia_Set",
@@ -137,7 +137,7 @@
 						"sierpinski_pyramid"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 2 artifacts"
+					"rationale": "Fix the constant, vary the start: each Julia set indexes unique dynamical behavior. Sierpinski pyramid sits centered as recursion made solid — the sequence's geometric capstone."
 				}
 			]
 		}

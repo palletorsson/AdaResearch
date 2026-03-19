@@ -43,7 +43,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 1 artifact"
+					"rationale": "Linear chains where nodes know only their next neighbor. Procedural construction mirrors list allocation — each node placed one at a time, pointer by pointer."
 				},
 				{
 					"map": "DataStructures_Trees",
@@ -52,7 +52,7 @@
 						"recursive_tree"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 1 artifact"
+					"rationale": "Binary recursion made spatial: chains fork into subtrees, every branch replicates the whole pattern. Recursive tree artifact embodies the self-similar structure."
 				},
 				{
 					"map": "DataStructures_Hash_Maps",
@@ -61,7 +61,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Deterministic scattering: keys destroyed into buckets for O(1) lookup. The cost of speed is lost structure — order traded for instant access."
 				},
 				{
 					"map": "DataStructures_Heap_Operations",
@@ -70,7 +70,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Tiered platforms enforcing parent-child dominance: almost-sorted order where the maximum always floats to the top. Priority queue as partial commitment to order."
 				},
 				{
 					"map": "DataStructures_Graph_Structures",
@@ -79,7 +79,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Pure relations without hierarchy: any node can link to any other. Chaotic procedural terrain mirrors the graph's refusal to privilege any single path."
 				},
 				{
 					"map": "DataStructures_Union_Find_Disjoint_Set",
@@ -88,7 +88,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Disjoint set platforms that merge irreversibly: path compression and rank union optimize the question 'are these connected?' to near-constant time."
 				},
 				{
 					"map": "DataStructures_Trie_Operations",
@@ -97,7 +97,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Shared prefix tree: one root branches into twenty-six children, enabling mid-keystroke autocomplete. Storage trades space for retrieval speed."
 				},
 				{
 					"map": "DataStructures_Segment_Tree",
@@ -106,7 +106,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Recursive array halving: internal nodes store aggregates enabling O(log n) range queries. Lazy propagation defers work until it's truly needed."
 				},
 				{
 					"map": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
@@ -115,7 +115,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Flat array where binary representation encodes reach: bit arithmetic replaces pointers, prefix sums update in O(log n) without tree overhead."
 				},
 				{
 					"map": "DataStructures_Suffix_Array_Tree",
@@ -124,7 +124,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Sorted suffix indices flattening tree structure: O(log n) pattern search with minimal memory. The suffix array trades construction time for compact representation."
 				},
 				{
 					"map": "DataStructures_BSP_Trees",
@@ -133,7 +133,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Recursive volume partitioning: binary spatial splits create rooms through subtraction rather than construction. The structure that powers Doom's rendering."
 				},
 				{
 					"map": "DataStructures_Quadtrees_Octrees",
@@ -142,7 +142,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Spatial triage: divide space adaptively based on density, ignore uniformity. Quadtrees in 2D, octrees in 3D — resolution follows where the data clusters."
 				}
 			]
 		}
