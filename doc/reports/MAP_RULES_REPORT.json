@@ -4355,7 +4355,7 @@
       "missing": 0,
       "maps": [
         {
-          "name": "Trans_Intro",
+          "name": "Trans_Introduction",
           "status": "FAIL",
           "issues": [
             {
@@ -4369,10 +4369,10 @@
               "msg": "Artifact 'balance_puzzle' at (5,10) h=2 unreachable"
             }
           ],
-          "fix_text": "**Trans_Intro**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'balance_puzzle' at (5,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Introduction**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'balance_puzzle' at (5,10) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
-          "name": "Trans_Translate_1",
+          "name": "Trans_Translation",
           "status": "FAIL",
           "issues": [
             {
@@ -4406,10 +4406,10 @@
               "msg": "Artifact 'pick_up_cube' at (4,12) h=2 unreachable"
             }
           ],
-          "fix_text": "**Trans_Translate_1**\n  Manual: Artifact 'player_trace' at (0,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'y_translation_cube' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,12) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (4,12) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_Translation**\n  Manual: Artifact 'player_trace' at (0,0) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'y_translation_cube' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (2,12) h=3 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (4,12) h=2 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
-          "name": "Trans_Translate_2",
+          "name": "Trans_AxisDecomposition",
           "status": "FAIL",
           "issues": [
             {
@@ -4493,16 +4493,16 @@
               "msg": "Artifact 'cube_scene' at (2,15) h=1 unreachable"
             }
           ],
-          "fix_text": "**Trans_Translate_2**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'x_translation_cube' at (2,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pickup_gate' at (6,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'translation_cube_demo' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (1,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (1,15) h=5 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_AxisDecomposition**\n  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge\n  Manual: Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'x_translation_cube' at (2,8) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pickup_gate' at (6,9) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'translation_cube_demo' at (1,11) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (1,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,12) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,13) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,14) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (0,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'pick_up_cube' at (1,15) h=5 unreachable — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'cube_scene' at (2,15) h=1 unreachable — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
-          "name": "Trans_Rotation_1",
+          "name": "Trans_Rotation",
           "status": "OK",
           "issues": [],
           "fix_text": ""
         },
         {
-          "name": "Trans_Rotation_2",
+          "name": "Trans_RotationSpectacle",
           "status": "FAIL",
           "issues": [
             {
@@ -4516,7 +4516,7 @@
               "msg": "Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID]"
             }
           ],
-          "fix_text": "**Trans_Rotation_2**\n  Manual: Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
+          "fix_text": "**Trans_RotationSpectacle**\n  Manual: Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell\n  Manual: Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID] — add wp/tc/br to connect, or move artifact to reachable cell"
         },
         {
           "name": "Trans_Scale",
