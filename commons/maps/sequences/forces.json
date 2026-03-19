@@ -33,15 +33,15 @@
 				"physics_vector_badge"
 			],
 			"content": [
-				"VectorFoundations: Components, magnitude, addition and subtraction\u00e2\u20ac\u201dthe grammar of direction meets quantity across three connected islands",
-				"VectorOperations: Dot product, cross product, projection and reflection\u00e2\u20ac\u201dmeasuring alignment, creating perpendiculars, decomposing motion",
-				"VectorDynamics: Vector fields, force vectors, and motion\u00e2\u20ac\u201dflow, curl, divergence, velocity and acceleration as vectors",
-				"VectorAdvanced: Torque, advanced exercises, and throwing\u00e2\u20ac\u201drotational forces, attraction magnitude, physics interaction across four islands",
-				"VectorWorkbench: Universal sandbox\u00e2\u20ac\u201dall vector operations computed simultaneously in one diamond arena, transition to forces",
-				"ForcesFoundations: Newton's laws, projectile motion, friction\u00e2\u20ac\u201dF=ma made tangible, then become the projectile via jump pad",
-				"ForcesSystems: Attractors, force fields, springs and particles\u00e2\u20ac\u201dfour islands of force systems connected by jump pads in clockwise circuit",
-				"ForcesChaos: N-body dynamics and strange attractors\u00e2\u20ac\u201dthree-body problem, chaos, deterministic unpredictability across two islands",
-				"ForcesArena: Drone combat, destruction sandbox, and exhibition gallery\u00e2\u20ac\u201dapplied forces break things, then a gallery of everything learned"
+				"VectorFoundations: Components and Addition",
+				"VectorOperations: Dot and Cross Product",
+				"VectorApplied: Targeting and Fields",
+				"VectorAdvanced: Torque and Throwing",
+				"ForcesFoundations: Newton's Laws",
+				"ForcesComposition: Superposition and Energy",
+				"ForcesSystems: Attractors and Springs",
+				"ForcesChaos: N-Body and Chaos",
+				"ForcesArena: Combat Arena"
 			],
 			"demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
 			"description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitude\u00e2\u20ac\u201dthe building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
@@ -71,10 +71,10 @@
 			"maps": [
 				"VectorFoundations",
 				"VectorOperations",
-				"VectorDynamics",
+				"VectorApplied",
 				"VectorAdvanced",
-				"VectorWorkbench",
 				"ForcesFoundations",
+				"ForcesComposition",
 				"ForcesSystems",
 				"ForcesChaos",
 				"ForcesArena"
@@ -105,7 +105,8 @@
 						"vector_addition_demo",
 						"ForceMagnitudeDemo",
 						"dark_sphere",
-						"vector_subtraction_demo"
+						"vector_subtraction_demo",
+						"coordinate_system_switcher"
 					],
 					"size_budget": "environment",
 					"rationale": "Three islands of vector fundamentals: components, magnitude, addition and subtraction. Entry point for the combined vectors+forces sequence."
@@ -117,23 +118,27 @@
 						"VectorBasics",
 						"basis_vectors_rig",
 						"dot_product_projector",
-						"dark_sphere"
+						"dark_sphere",
+						"vector_projection_demo",
+						"normal_force_demo"
 					],
 					"size_budget": "environment",
 					"rationale": "Three islands of advanced vector operations: dot product, cross product, projection/reflection. Builds on foundation components."
 				},
 				{
-					"map": "VectorDynamics",
+					"map": "VectorApplied",
 					"position": "foundation",
 					"artifacts": [
 						"VectorFieldFlow",
 						"force_field_visualizer",
 						"dark_sphere",
 						"VectorBasics",
-						"basis_vectors_rig"
+						"basis_vectors_rig",
+						"hl_turret_vectors",
+						"weather_vector_field"
 					],
 					"size_budget": "environment",
-					"rationale": "Vector fields, force vectors, and motion dynamics across three islands. Transition from static to dynamic vectors."
+					"rationale": "Targeting turrets, weather fields, and force vectors across three islands. Applied vector usage in game-like contexts."
 				},
 				{
 					"map": "VectorAdvanced",
@@ -142,27 +147,32 @@
 						"dark_sphere",
 						"exercise_1_3_solution_3_d_bouncing_ball_vr",
 						"exercise_1_8_solution_attraction_magnitude_vr",
-						"VectorThrowing"
+						"VectorThrowing",
+						"torque_demo"
 					],
 					"size_budget": "environment",
 					"rationale": "Four islands of advanced applications: torque, dynamic simulations, steering, projectile throwing."
 				},
 				{
-					"map": "VectorWorkbench",
+					"map": "ForcesComposition",
 					"position": "exploration",
 					"artifacts": [
 						"VectorBasics",
 						"basis_vectors_rig",
-						"dark_sphere"
+						"dark_sphere",
+						"combined_forces_demo",
+						"work_energy_demo",
+						"momentum_collision"
 					],
 					"size_budget": "mixed",
-					"rationale": "Universal sandbox: all vector operations computed simultaneously in one diamond arena. Transition point to forces."
+					"rationale": "Force superposition, work-energy theorem, and momentum conservation in one diamond arena. Bridges vectors to forces."
 				},
 				{
 					"map": "ForcesFoundations",
 					"position": "exploration",
 					"artifacts": [
-						"dark_sphere"
+						"dark_sphere",
+						"example_2_5_fluid_resistance_vr"
 					],
 					"size_budget": "environment",
 					"rationale": "Three islands of fundamental forces: Newton's laws, projectile motion, friction. Jump pads as embodied projectile physics."

@@ -3043,6 +3043,11 @@
 			"scene_path": "res://algorithms/particles/particle_campfire/particle_campfire.tscn",
 			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
 			"tags": ["particles", "synthesis", "campfire", "fire"]
+		},
+		"momentum_collision": {
+			"scene_path": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
+			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
+			"tags": ["physics", "momentum", "collision", "conservation"]
 		}
 	},
 	"sequence_mapping": {
