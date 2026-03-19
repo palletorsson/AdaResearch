@@ -2,7 +2,7 @@
 
 ## Overview
 
-This map teaches the mathematical bedrock of all physics simulation. It answers three questions in sequence: *What are the rules?* (Newton's laws), *How do we approximate them on a computer?* (numerical integration), and *What's the best way to do it?* (Verlet integration). Every subsequent physics map builds on these foundations.
+This map teaches the mathematical bedrock of all physics simulation. It answers four questions in sequence: *What are the rules?* (Newton's laws), *How do we approximate them on a computer?* (numerical integration), *What's the best way to do it?* (Verlet integration — shown side-by-side against Euler), and *What happens when the approximation fails?* (simulation instability). Every subsequent physics map builds on these foundations.
 
 ## Spatial Layout
 
@@ -20,7 +20,8 @@ This map teaches the mathematical bedrock of all physics simulation. It answers 
 |----------|----------|--------|--------|---------|
 | `newtons_laws` | West (2,3) | North | 1 | Demonstrates F=ma, action-reaction pairs, inertia. The three laws as interactive demonstrations. |
 | `numerical_integration` | East (6,3) | South | 1 | Shows Euler integration stepping through time — visible accumulation of error over frames. |
-| `verlet_integration` | Center (4,5) | North | 2 | The elevated centerpiece. Demonstrates Störmer-Verlet's position-based approach — same simulation, dramatically more stable. |
+| `verlet_integration` | Center (4,5) | North | 2 | The elevated centerpiece. Two orbiting particles side-by-side: Euler spirals outward (energy gain), Verlet stays bounded (symplectic). The equation x_new = 2x - x_prev + a·dt² is displayed. Ghost line shows the position-differencing trick. Energy readouts compare conservation. |
+| `simulation_instability` | (1,0) | East | 1 | Spring system with auto-ramping dt. Stable → drifting → EXPLODED. Demonstrates why the choice of method and timestep matters — the truth statement's promise about "knowing where the illusion breaks." |
 
 ### Utilities
 
@@ -43,13 +44,14 @@ This map teaches the mathematical bedrock of all physics simulation. It answers 
 1. **Player spawns** at height 5.5 above the north entrance, dropping onto the platform — immediately perceiving the layout from above.
 2. **Encounters Newton's laws** (west station) — the theoretical foundation. Force, mass, acceleration. Every action has a reaction. Objects at rest stay at rest.
 3. **Crosses to numerical integration** (east station) — sees the theory translated to discrete time steps. Euler's method: simple, intuitive, and visibly unstable over time.
-4. **Ascends the central platform** to Verlet integration — the synthesis. Same physics, different method, dramatically better results. The "aha" moment: *how* you compute matters as much as *what* you compute.
-5. **Reads annotation boards** for deeper context — mathematical notation, historical notes.
-6. **Exits south** through the teleporter to PhysicsSim_Bodies, carrying the understanding that simulation is approximation, and approximation technique matters.
+4. **Ascends the central platform** to Verlet integration — two particles orbiting side-by-side. Euler's orbit spirals outward as energy leaks in. Verlet's stays bounded. The ghost line shows the position-differencing trick: no velocity, just two positions and an acceleration. Energy readouts make the conservation difference visceral.
+5. **Encounters simulation instability** — a spring system running stable, then the timestep ramps up. The learner watches physics go from stable to drifting to exploded. This completes the truth statement: you now know where the illusion breaks.
+6. **Reads annotation boards** for deeper context — mathematical notation, historical notes.
+7. **Exits south** through the teleporter to PhysicsSim_Bodies, carrying the understanding that simulation is approximation, approximation technique matters, and bad approximation destroys the illusion.
 
 ## Design Intent
 
-The map is deliberately austere. No distractions, no spectacle — just three ideas presented in ascending order of sophistication. The central platform's elevation is meaningful: Verlet integration is literally and conceptually *above* the others, the synthesis that makes practical simulation possible. The whiteboard aesthetic signals "this is where you learn the math."
+The map is deliberately austere. No distractions, no spectacle — four ideas presented in ascending order of sophistication. The central platform's elevation is meaningful: Verlet integration is literally and conceptually *above* the others, the synthesis that makes practical simulation possible. The instability demo closes the loop — you learn the rules, the methods, the best method, and then what happens when even the best method is pushed too far. The whiteboard aesthetic signals "this is where you learn the math."
 
 ## Connection to Sequence
 
