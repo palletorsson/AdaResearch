@@ -18,7 +18,7 @@ const MAX_PARTICLES := 1200
 const LAUNCH_INTERVAL := 2.0
 const BURST_COUNT := 40
 
-class Particle:
+class BurstParticle:
 	var pos: Vector3
 	var vel: Vector3
 	var age: float
@@ -124,8 +124,8 @@ func _process(delta: float) -> void:
 	var count := mini(_particles.size(), MAX_PARTICLES)
 	_multi_mesh.visible_instance_count = count
 	for i in count:
-		var p: Particle = _particles[i]
-		var t := p.age / p.lifetime
+		var p: BurstParticle = _particles[i]
+		var t: float = p.age / p.lifetime
 		var s := p.size
 		if not p.is_primary:
 			s *= (1.0 - t)  # shrink over life
@@ -140,7 +140,7 @@ func _process(delta: float) -> void:
 
 
 func _launch_mortar() -> void:
-	var p := Particle.new()
+	var p := BurstParticle.new()
 	p.pos = Vector3(randf_range(-2.0, 2.0), 0.0, randf_range(-2.0, 2.0))
 	p.vel = Vector3(randf_range(-0.5, 0.5), randf_range(8.0, 12.0), randf_range(-0.5, 0.5))
 	p.age = 0.0
@@ -158,7 +158,7 @@ func _spawn_burst(origin: Vector3) -> void:
 	for _i in BURST_COUNT:
 		if _particles.size() >= MAX_PARTICLES:
 			break
-		var p := Particle.new()
+		var p := BurstParticle.new()
 		p.pos = origin
 		# Spherical spread
 		var theta := randf() * TAU

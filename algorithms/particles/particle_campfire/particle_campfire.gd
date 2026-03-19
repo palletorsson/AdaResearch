@@ -19,7 +19,7 @@ const MAX_PARTICLES := 800
 
 enum ParticleType { FIRE, EMBER, SMOKE }
 
-class Particle:
+class CampfireParticle:
 	var pos: Vector3
 	var vel: Vector3
 	var age: float
@@ -149,7 +149,7 @@ func _process(delta: float) -> void:
 		if p.age >= p.lifetime:
 			continue
 
-		var t := p.age / p.lifetime
+		var t: float = p.age / p.lifetime
 
 		match p.type:
 			ParticleType.FIRE:
@@ -174,8 +174,8 @@ func _process(delta: float) -> void:
 	var count := mini(_particles.size(), MAX_PARTICLES)
 	_multi_mesh.visible_instance_count = count
 	for i in count:
-		var p: Particle = _particles[i]
-		var t := p.age / p.lifetime
+		var p: CampfireParticle = _particles[i]
+		var t: float = p.age / p.lifetime
 		var color := _get_color(p.type, t)
 		var s := _get_size(p.type, t) * p.size
 
@@ -187,7 +187,7 @@ func _process(delta: float) -> void:
 
 
 func _spawn(type: int) -> void:
-	var p := Particle.new()
+	var p := CampfireParticle.new()
 	p.type = type
 	var spread := randf_range(-0.3, 0.3)
 
@@ -229,7 +229,7 @@ func _get_color(type: int, t: float) -> Color:
 			c.a = clampf(1.0 - t, 0.0, 1.0)
 			return c
 		ParticleType.SMOKE:
-			var grey := lerp(0.5, 0.3, t)
+			var grey: float = lerp(0.5, 0.3, t)
 			var c := Color(grey, grey, grey)
 			# Fade in then out
 			if t < 0.1:

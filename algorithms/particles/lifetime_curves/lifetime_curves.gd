@@ -17,7 +17,7 @@ extends Node3D
 const MAX_PARTICLES := 600
 const SPAWN_RATE := 40.0  # particles per second per emitter
 
-class Particle:
+class LifetimeParticle:
 	var pos: Vector3
 	var vel: Vector3
 	var age: float
@@ -144,7 +144,7 @@ func _process(delta: float) -> void:
 	# Render
 	_multi_mesh.visible_instance_count = _particles.size()
 	for i in _particles.size():
-		var p: Particle = _particles[i]
+		var p: LifetimeParticle = _particles[i]
 		var t := p.normalized_age()
 		var profile = _profiles[p.emitter_id]
 
@@ -167,7 +167,7 @@ func _process(delta: float) -> void:
 
 func _spawn_particle(emitter_id: int) -> void:
 	var profile = _profiles[emitter_id]
-	var p := Particle.new()
+	var p := LifetimeParticle.new()
 	p.emitter_id = emitter_id
 	p.pos = profile["offset"] + Vector3(randf_range(-0.3, 0.3), 0.0, randf_range(-0.3, 0.3))
 	p.vel = Vector3(randf_range(-0.5, 0.5), randf_range(1.0, 2.5), randf_range(-0.5, 0.5))

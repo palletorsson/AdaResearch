@@ -212,8 +212,8 @@ func _step_verlet() -> void:
 		if dist < 0.001:
 			continue
 		var dir := diff / dist
-		var stretch := dist - spring["rest"]
-		var force := dir * spring["k"] * stretch
+		var stretch: float = dist - float(spring["rest"])
+		var force: Vector3 = dir * float(spring["k"]) * stretch
 
 		# Damping
 		var vel_diff: Vector3 = _masses[b]["vel"] - _masses[a]["vel"]
@@ -240,8 +240,8 @@ func _compute_energy() -> float:
 	var pe := 0.0
 	for spring in _springs:
 		var dist: float = (_masses[spring["b"]]["pos"] - _masses[spring["a"]]["pos"]).length()
-		var stretch := dist - spring["rest"]
-		pe += 0.5 * spring["k"] * stretch * stretch
+		var stretch: float = dist - float(spring["rest"])
+		pe += 0.5 * float(spring["k"]) * stretch * stretch
 
 	# Gravitational PE
 	for m in _masses:
