@@ -4,6 +4,16 @@ extends Node3D
 # Starts with one cube, subdivides it, keeps some parts, removes others,
 # then recursively subdivides remaining parts with non-uniform scaling
 
+# @identity
+# essence: chair = subdivide_3x3x3(cube) -> keep(legs, seat, back) -> deform(stretch, flatten)
+# desire: To prove that a chair lives inside every cube — subdivision as revelation, not construction
+# critical_parameter: the 3x3x3 role assignment — which subcubes become seat vs leg vs back determines the entire form
+# triggers: Each step transforms role-tagged subcubes: flatten seat, stretch legs, extend back, add armrests
+# emerges: A recognizable chair from pure subdivision logic — no chair blueprint, only cube-cutting rules
+# needs: VR sit detection [missing], construction replay [missing]
+# relationships: Sibling to recursive_table and cube_desk; demonstrates that furniture is latent in geometry
+# truth: The chair was always inside the cube — subdivision merely removed what was not chair.
+
 @export var chair_size: float = 1.5
 @export var show_animation: bool = true
 @export var step_delay: float = 0.4

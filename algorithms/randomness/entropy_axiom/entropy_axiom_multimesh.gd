@@ -3,6 +3,16 @@ extends Node3D
 # Entropy Visualization: Order → Chaos (MultiMesh Version)
 # Static visualization - much more efficient than individual instances
 # 10x10x40 grid = 4000 instances in a single draw call
+#
+# @identity
+# essence: S = -Σ p_i log p_i — Shannon entropy as spatial gradient
+# desire: walk along the z-axis and watch order dissolve into chaos before your eyes
+# critical_parameter: max_randomness — controls displacement amplitude at the chaos end
+# triggers: z-position of each sphere determines its entropy factor via exponential curve
+# emerges: the blue-to-red color gradient makes the arrow of entropy visible as a thermodynamic landscape
+# needs: VR walkthrough [has via grid placement]; no controls needed — it is contemplative
+# relationships: anchors random_butterflies (they land on its grid); unlocks entropy_jar
+# truth: Entropy is not disorder — it is the number of ways a system can be without you noticing.
 
 @export var grid_size_x: int = 10
 @export var grid_size_y: int = 10

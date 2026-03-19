@@ -8,6 +8,16 @@
 # displacement (MSD) is tracked to demonstrate diffusion scaling laws.
 #
 # QFEP: Random walk as pure E(S) — no memory, no direction, maximum entropy
+#
+# @identity
+# essence: E[|r|²] = n·d·σ² — mean squared displacement scales linearly with step count
+# desire: peer into a glass box and watch colored particles wander without purpose or memory
+# critical_parameter: walk_mode — switches between WALK_2D (planar), WALK_3D (volumetric), LEVY_FLIGHT (heavy-tailed jumps)
+# triggers: mode switch buttons change step generator; each step calls _generate_step() with boundary reflection
+# emerges: Levy flights produce dramatically different trail topology — rare giant leaps amid local clusters
+# needs: VR mode buttons [has], reset button [has], trail rendering via ImmediateMesh [has]
+# relationships: contrasts with random_walk_leash (observed vs felt); feeds random_walk_collection and pixel_cloud
+# truth: A random walk has no destination — yet it explores space more honestly than any planned path.
 
 extends Node3D
 

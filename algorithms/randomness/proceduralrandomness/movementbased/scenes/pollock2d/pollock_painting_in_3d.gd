@@ -1,3 +1,13 @@
+# @identity
+# essence: drip(t) = position(random_walk) + color(random) + width(random) — action painting as algorithm
+# desire: watch a brush cursor trace Pollock-style drip paths across a floor canvas in real time
+# critical_parameter: simulate_brush_motion — when true, the 3D brush follows 2D stroke paths from the SubViewport
+# triggers: stroke_path_generated signal from PollockPainting2D drives brush tween across canvas surface
+# emerges: layered strokes create depth and complexity — the painting is never finished, only accumulated
+# needs: SubViewport for 2D painting [has]; Sprite3D projection [has]; VR proximity viewing [has]
+# relationships: feeds Randomness_Examples_of_Randomness map; contrasts with monte_carlo_dartboard (aesthetic vs computational randomness)
+# truth: A Pollock painting is not random — it is the trace of a body moving through a random field with intention.
+
 extends Node3D
 
 @export_group("Display")

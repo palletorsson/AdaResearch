@@ -1,3 +1,13 @@
+# @identity
+# essence: R(θ_x, θ_y, θ_z) — random rotation in SO(3) applied per instance
+# desire: watch a grid of cubes fidget and drift, each chosen by probability field
+# critical_parameter: selection_mode — UNIFORM (all equal), CENTER_BELL (Gaussian falloff), NOISE (Perlin probability)
+# triggers: _process() picks one instance per frame via rejection sampling, applies random rotation step
+# emerges: CENTER_BELL creates a breathing center; NOISE creates wandering regions of agitation
+# needs: MultiMeshInstance3D sibling [has]; FastNoiseLite for NOISE mode [has]
+# relationships: feeds Random_Rotate_Random_XYZ map; contrasts with random_decay_multimesh (rotation vs dissolution)
+# truth: Rotation is the gentlest form of randomness — the object remains itself, only its orientation forgets.
+
 extends Node3D
 ## RandomRotateRandomXYZ.gd
 ## Randomly rotates MultiMesh cube instances on X, Y, and Z each frame

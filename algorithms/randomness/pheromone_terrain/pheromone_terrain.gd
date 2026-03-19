@@ -1,3 +1,13 @@
+# @identity
+# essence: trail(x,y) += deposit; next = argmax(pheromone[neighbors]) with P(random) = 1 - attraction — stigmergy
+# desire: watch random walkers leave glowing trails that attract other walkers, building ridges from nothing
+# critical_parameter: pheromone_attraction — the probability a walker follows pheromone vs moves randomly (0 = pure random, 1 = pure trail-following)
+# triggers: _walk_step() deposits pheromone, raises terrain, then _choose_next_position() balances attraction vs random
+# emerges: path networks self-organize — walkers converge on trails they collectively created without communication
+# needs: PlaneMesh child with dynamic vertex modification [has]; VR observation [has]; controls [missing]
+# relationships: feeds Random_Pheromone map; depends on random walk concept; contrasts with pixel_cloud (self-avoiding vs self-attracting)
+# truth: Stigmergy is memory without a brain — the environment itself becomes the communication channel.
+
 extends Node3D
 
 ## Pheromone Terrain - Walkers that follow pheromone trails

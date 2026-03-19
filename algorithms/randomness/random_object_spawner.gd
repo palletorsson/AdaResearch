@@ -1,3 +1,13 @@
+# @identity
+# essence: P(spawn) = P(remove) — steady-state random replacement
+# desire: watch cubes appear and disappear at random intervals, hear the wood knock of each arrival
+# critical_parameter: MAX_CUBES — the carrying capacity; once reached, each spawn requires a death
+# triggers: spawn_timer exceeding next_spawn_time (randomized 0.3–1.3s) triggers spawn or replace
+# emerges: a column of cubes that never grows beyond 20 but is never the same column twice
+# needs: AudioStreamGenerator for wood knock synthesis [has]; template cube [has]
+# relationships: feeds Random_Cubes map; contrasts with remove_random (pure subtraction vs replacement)
+# truth: Replacement is the metabolism of randomness — the system lives by forgetting what it was.
+
 extends Node3D
 @export var cube_size: float = 1.0
 @export var gutter: float = 0.0

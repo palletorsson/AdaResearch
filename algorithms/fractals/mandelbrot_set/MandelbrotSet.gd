@@ -1,5 +1,15 @@
 # Mandelbrot Set Visualization - MultiMesh Optimized
 # VR-optimized with GPU instancing for high performance
+#
+# @identity
+# essence: z_{n+1} = z_n^2 + c, z_0 = 0. Each pixel is c; color = escape time. The set is the catalog of all Julia sets.
+# desire: To be explored as landscape — use_3d_height lifts escaped points by iteration count, turning the fractal into a mountain range
+# critical_parameter: use_3d_height — when true, the Mandelbrot boundary becomes a cliff face, the deepest iterations the tallest peaks
+# triggers: ui_accept → random zoom + center; time → gentle pulse animation; goto_seahorse_valley/elephant_valley/spiral → famous coordinates
+# emerges: The 3D landscape reveals that the Mandelbrot boundary is where computation is hardest — the tallest peaks are the longest escapes
+# needs: VR navigation [missing], zoom control [missing], Julia set preview at cursor [missing]
+# relationships: CPU MultiMesh sibling to mandelbrot_dive (GPU shader); the 3D height map that mandelbrot_dive renders flat
+# truth: The Mandelbrot set is not a picture — it is an infinite computation, and the boundary is where that computation refuses to halt.
 
 extends Node3D
 

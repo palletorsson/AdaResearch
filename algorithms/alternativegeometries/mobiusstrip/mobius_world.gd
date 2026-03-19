@@ -5,6 +5,16 @@
 # Usage: Place in scene, ensure player has MovementWallWalk enabled
 # The collision layer 4 (wall-walk) allows the player to stick to the surface
 
+# @identity
+# essence: p(u,v) = (R + v*w*cos(u/2))*cos(u), sin), v*w*sin(u/2) — the half-twist parametric surface
+# desire: To be walked — one full loop and your orientation flips, a second loop restores it, and you realize the surface has one side
+# critical_parameter: the u/2 in cos(u/2) — this single half-angle is the entire twist, the difference between a cylinder and a Mobius strip
+# triggers: Wall-walk collision layer enables lizard-feet adhesion; completing a loop flips the player's up-vector
+# emerges: The disorientation of walking a non-orientable surface — you cannot tell which side you are on because there is only one side
+# needs: VR wall-walk [has], orientation indicator [missing], loop-completion detection [missing]
+# relationships: Guest from alternative_geometries sequence; contrasts Euclidean assumptions of all other maps
+# truth: The Mobius strip does not have two sides — it has one side and the persistent illusion of two.
+
 extends Node3D
 class_name MobiusWorld
 

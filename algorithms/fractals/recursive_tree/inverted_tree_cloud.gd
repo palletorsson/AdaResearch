@@ -4,6 +4,16 @@ extends Node3D
 ## Uses the same geometric style as the original tree but inverted
 ## Animated rectangular cube cloud appears above in a timeline
 
+# @identity
+# essence: tree(depth) = trunk_down + branches_down(random_angle, shrink) + cube_cloud(orbit, fade_timeline)
+# desire: To unsettle — roots reaching down from the sky while a cloud of cubes orbits and pulses above
+# critical_parameter: vertical_tilt range (-0.5 to -0.2) — controls how steeply branches plunge downward
+# triggers: Recursive branch generation with random angles; cube cloud timeline loops with fade-in/out per cube
+# emerges: The cube cloud feels alive — independent orbit speeds and fade offsets create the illusion of breathing
+# needs: VR gravity toggle [missing], cloud interaction [missing]
+# relationships: Inverts recursive_tree; the cloud above mirrors what roots extract below — visual metaphor for data flow
+# truth: An inverted tree is not wrong — it is a root system, and roots are where the real computation happens.
+
 @export_category("Inverted Tree Structure")
 @export var num_main_branches: int = 5
 @export var max_sub_branches: int = 4

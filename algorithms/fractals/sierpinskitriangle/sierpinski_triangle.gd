@@ -4,6 +4,16 @@ extends Node3D
 # Starts with a 1-meter equilateral triangle and subdivides it recursively
 # Creates a beautiful fractal pattern by removing the center triangle each time
 
+# @identity
+# essence: sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
+# desire: To be walked through — 10m triangle rotated vertical, extruded per iteration, creating a fractal wall of triangular portals
+# critical_parameter: extrusion_height — each iteration extrudes deeper, turning the 2D fractal into a 3D walkable relief
+# triggers: subdivision_interval tick → all current triangles split into 3 → center removed → depth hue-shifts rainbow
+# emerges: The central voids become corridors — the removed triangles are the spaces you walk through
+# needs: VR walking [has via geometry], iteration control [missing]
+# relationships: 2D cousin of sierpinski_pyramid and menger_sponge; the canonical D ~ 1.585 fractal dimension example
+# truth: The Sierpinski triangle has zero area and infinite perimeter — it is the shape that taught mathematics that removal creates structure.
+
 # Settings
 @export var subdivision_interval: float = 1.0  # Time between subdivisions
 @export var max_iterations: int = 6  # Maximum subdivision depth

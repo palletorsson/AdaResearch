@@ -1,3 +1,13 @@
+# @identity
+# essence: d(decay)/dt = growth_rate · (0.2 + decay · 0.8) — autocatalytic decay
+# desire: watch two pristine stacks slowly crumble — drift, darken, sink — and feel entropy win
+# critical_parameter: decay_growth_rate — controls how fast decay accelerates once seeded
+# triggers: injection_accumulator randomly seeds decay into instances; decay_start_delay gates the onset
+# emerges: each instance decays at its own rate — the grid becomes a ruin uniquely every time
+# needs: VR push buttons for TOGGLE/RESET [has]; Grid.gdshader for wireframe overlay [has]
+# relationships: contrasts with Random_Rotate_Random_XYZ (rotation without destruction); feeds hardware_entropy_decay
+# truth: Decay is not failure — it is matter remembering that arrangement is improbable.
+
 extends Node3D
 
 # Random decay demo built with MultiMesh-only stacks.

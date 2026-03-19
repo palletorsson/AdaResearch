@@ -1,3 +1,13 @@
+# @identity
+# essence: P(x,z) = noise(x,z) > threshold → spawn — noise-driven spatial Poisson process
+# desire: wander through a procedural mushroom meadow where fairy rings and clusters emerge from noise
+# critical_parameter: mushroom_density — controls expected count per unit area; interacts with FastNoiseLite clearing threshold
+# triggers: generate_mushroom_positions() uses noise to create natural clearings; create_mushroom_patterns() adds fairy rings and clusters
+# emerges: fairy rings form perfect circles of identical species — order self-organizing within the random field
+# needs: random ground height grid [has]; 5 mushroom templates + glowing variant [has]; VR controls [missing]
+# relationships: feeds Random_Mushrooms map alongside random_number_book_page_collection; contrasts with pheromone_terrain (static vs dynamic growth)
+# truth: A mushroom meadow is randomness that has found a niche — noise filtered through ecology.
+
 extends Node3D
 
 # Configuration

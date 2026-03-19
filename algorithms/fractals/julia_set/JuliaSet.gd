@@ -3,6 +3,16 @@ extends Node3D
 # Julia Set Visualization - MultiMesh Optimized
 # Parameter-space fractal variants of the Mandelbrot set
 
+# @identity
+# essence: z_{n+1} = z_n^2 + c, fixed c, vary z_0. Each pixel is a starting point; escape or stay determines membership.
+# desire: To morph — c_real and c_imag animate through parameter space, and the Julia set shape-shifts in real-time
+# critical_parameter: c_real + c_imag — the complex parameter c determines whether the Julia set is connected (c inside Mandelbrot) or dust (c outside)
+# triggers: animate_parameters → c traces a Lissajous path; parameter trail shows recent c values as fading spheres
+# emerges: The topology change — as c crosses the Mandelbrot boundary, the Julia set shatters from connected to disconnected, visibly
+# needs: VR c-parameter control [missing], Mandelbrot overlay [missing]
+# relationships: Sibling to julia_set_explorer (GPU shader) and mandelbrot_set; each point in the Mandelbrot indexes a Julia set
+# truth: Every Julia set is a cross-section of the Mandelbrot set — the Mandelbrot is the catalog, each Julia set a page.
+
 # Julia set parameters
 @export var c_real := -0.7
 @export var c_imag := 0.27015

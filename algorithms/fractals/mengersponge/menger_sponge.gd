@@ -5,6 +5,16 @@ extends Node3D
 # and removing the center cube and the 6 face-centered cubes
 # Each iteration subdivides all existing cubes
 
+# @identity
+# essence: menger(cube) = 20 * menger(sub-cubes at kept positions), remove 7 cross-cubes per iteration. D = log(20)/log(3) ~ 2.727.
+# desire: To be walked inside — at 9m initial size and 2 iterations, the sponge has human-scale corridors through its cross-holes
+# critical_parameter: max_iterations — at 1 the cross-holes appear; at 2 the sub-holes within holes create a labyrinth; at 3 it would be 8000 cubes
+# triggers: subdivision_interval tick → find all cube_scene instances in scene tree → subdivide each into 20 kept positions → remove original
+# emerges: Corridors from three orthogonal axes — the removed crosses create walkable passages that penetrate the entire structure
+# needs: VR walkability [has at 9m scale], iteration control [missing]
+# relationships: The 3D culmination of the removal fractals: Cantor (1D) → Sierpinski (2D) → Menger (3D); D ~ 2.727, more than a plane
+# truth: The Menger sponge has infinite surface area and zero volume — it is a solid made entirely of holes.
+
 # Reference to the cube scene to instantiate
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 

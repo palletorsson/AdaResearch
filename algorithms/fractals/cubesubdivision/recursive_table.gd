@@ -4,6 +4,16 @@ extends Node3D
 # Starts with one cube, subdivides it, keeps tabletop and legs
 # Similar approach to recursive_chair but for a table form
 
+# @identity
+# essence: table = subdivide_3x2(cube) -> keep(top_layer, corner_legs) -> flatten(top) -> stretch(legs)
+# desire: To stand beside in VR — a table that assembled itself from a single cube through pure subtraction
+# critical_parameter: the top-layer vs bottom-layer role split — one layer becomes surface, four corners become legs
+# triggers: Each step refines: merge tabletop into single slab, thin the legs, add apron supports
+# emerges: Structural apron supports arise from the need to connect legs to tabletop — engineering from aesthetics
+# needs: VR place-objects-on-top [missing], construction replay [missing]
+# relationships: Sibling to recursive_chair; together they prove furniture is a family of subdivision strategies
+# truth: A table is a cube that kept its top layer and four corners — everything else was excess.
+
 @export var table_size: float = 2.5
 @export var show_animation: bool = true
 @export var step_delay: float = 0.4

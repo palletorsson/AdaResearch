@@ -1,3 +1,13 @@
+# @identity
+# essence: SAW(n) — self-avoiding walk with upward bias on a 3D integer lattice
+# desire: see a vertical sculpture made of cubes, each placed by a walk that refuses to retrace its steps
+# critical_parameter: upward_bias — weight multiplier for +Y steps; higher values produce taller, thinner clouds
+# triggers: self_avoiding_walk() with weighted_random_choice(); ui_accept regenerates the structure
+# emerges: the walker frequently traps itself — the sculpture is a record of how far freedom reached before constraint won
+# needs: cube_scene template [has]; keyboard regeneration [has]; VR controls [missing]
+# relationships: feeds Random_Walk map; contrasts with random_walk_terrarium (unbounded vs self-avoiding)
+# truth: Self-avoidance is memory — and memory is the first constraint that gives randomness shape.
+
 extends Node3D
 
 @export var grid_size: int = 16

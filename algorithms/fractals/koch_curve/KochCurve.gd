@@ -1,5 +1,15 @@
 # This script generates a VR-optimized Koch snowflake fractal.
 # It uses a single ArrayMesh instead of multiple CSG nodes for performance.
+#
+# @identity
+# essence: koch_segment(p1, p2) = [p1, p1+1/3, peak, p1+2/3, p2], equilateral bump on middle third. Iterated on a triangle.
+# desire: To cycle — iteration wraps from 0 to max_iterations and back, the snowflake assembling and resetting endlessly
+# critical_parameter: max_iterations (4) — at 0 it is a triangle, at 4 it has 768 segments; the ribbon width keeps it VR-readable
+# triggers: iteration_interval tick → advance iteration (wrapping); each step applies Koch rule to all segments then rebuilds ArrayMesh
+# emerges: Color gradients per segment — iteration_intensity and segment position create a procedural aurora across the snowflake
+# needs: VR manual iteration control [missing], zoom [missing]
+# relationships: VR-optimized ArrayMesh Koch; contrasts with fractal_koch_curve (ImmediateMesh, depth slider) and koch_curve_3d (3D portal)
+# truth: The Koch snowflake rebuilds itself from scratch each cycle — it does not remember its history, only its rule.
 
 extends Node3D
 

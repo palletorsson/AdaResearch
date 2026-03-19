@@ -5,6 +5,16 @@
 #
 # LCG: state = (state × 1664525 + 1013904223) mod 2^32
 # QFEP: Determinism masquerading as randomness — structure hidden in sequence.
+#
+# @identity
+# essence: x_{n+1} = (a·x_n + c) mod m — linear congruential generator
+# desire: crank the machine, watch arithmetic unfold, feel determinism wearing randomness as a mask
+# critical_parameter: initial_seed — same seed reproduces the entire sequence
+# triggers: _crank() → 4-phase animation (multiply, add, mod, result) with color-coded transitions
+# emerges: the history panel reveals periodicity — given enough cranks, the sequence must repeat
+# needs: VR push buttons [has] for CRANK/RESET/SEED
+# relationships: contrasts with trng_vs_prng; feeds slot_machine understanding of pseudo-randomness
+# truth: Determinism is not the opposite of randomness — it is randomness with a forgotten origin.
 
 extends Node3D
 

@@ -1,10 +1,20 @@
 # julia_set_explorer.gd
-# GPU-accelerated Julia set on a 1×1m table
+# GPU-accelerated Julia set on a 1x1m table
 # VR-enabled with c-parameter control — the Mandelbrot's sibling
 #
-# Julia sets: fix c, vary z₀ (each pixel is a starting point)
-# Mandelbrot: fix z₀=0, vary c (each pixel is a c value)
+# Julia sets: fix c, vary z0 (each pixel is a starting point)
+# Mandelbrot: fix z0=0, vary c (each pixel is a c value)
 # Connected Julia sets come from c values INSIDE the Mandelbrot
+
+# @identity
+# essence: z = z^2 + c per pixel (GPU shader), c controlled by VR sliders. 6 famous presets: Dendrite, San Marco, Rabbit, Spiral, Dragon, Douady.
+# desire: To be tuned — two sliders map to the real and imaginary parts of c, and every tiny adjustment reshapes the entire fractal
+# critical_parameter: c (complex) — moving c by 0.01 can change a connected dendrite into disconnected dust; the boundary is the Mandelbrot set
+# triggers: VR sliders → c_real/c_imag update → shader recomputes instantly; preset buttons → jump to famous Julia sets
+# emerges: The relationship between c and topology — learners discover that c values inside the Mandelbrot give connected Julia sets
+# needs: VR sliders [has], preset buttons [has], zoom [has via keyboard]. Mandelbrot overlay showing c position [missing]
+# relationships: GPU sibling to julia_set (MultiMesh CPU); paired with mandelbrot_dive for the full Mandelbrot-Julia duality
+# truth: The Julia set explorer is a microscope for the Mandelbrot set — each c value reveals one of infinitely many fractal universes.
 
 extends Node3D
 

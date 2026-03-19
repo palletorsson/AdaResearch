@@ -4,6 +4,16 @@
 # A counter tracks the ratio converging to 0.5 over many tosses.
 #
 # QFEP: Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.
+#
+# @identity
+# essence: X ~ Bernoulli(0.5) — the atom of all probability
+# desire: grab a coin, toss it, watch H/T ratio crawl toward 0.5000 one flip at a time
+# critical_parameter: the coin's global_transform.basis.y — dot product with world UP determines heads vs tails
+# triggers: _on_coin_dropped() sets thrown=true; velocity settling below threshold for 0.6s reads result
+# emerges: the history ribbon (HHTTHHTHT...) looks random but its running average is a straight line to 0.5
+# needs: XRToolsPickable coins [has]; tray + landing pad [has]; refill button [has]
+# relationships: simplest case of dice_throw (2 faces vs 6); feeds galton_board (each peg is a coin toss)
+# truth: The Bernoulli trial is the hydrogen atom of randomness — everything complex is built from binary choices.
 
 extends Node3D
 

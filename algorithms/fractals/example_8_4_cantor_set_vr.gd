@@ -13,6 +13,16 @@ extends Node3D
 ## Recursive division creating the Cantor set fractal
 ## Chapter 08: Fractals
 
+# @identity
+# essence: cantor(start, width, d) = line(start, width) + cantor(left_third, d+1) + cantor(right_third, d+1)
+# desire: To be read like a poem — each row shorter, the gaps widening, pink lines fading downward into infinity
+# critical_parameter: vertical_spacing — the gap between rows makes the fractal readable; too close and it blurs, too far and the pattern disconnects
+# triggers: Recursion descends row by row; emission intensity fades with depth; width shrinks by 1/3 per level
+# emerges: The visual rhythm of removal — the eye learns to see what is missing, not what remains
+# needs: VR depth control [missing], animation mode [missing]
+# relationships: Classic NOC translation; the 2D visualization that precedes the physical cantor_set (RigidBody) and cantor_pagoda (walkable)
+# truth: The Cantor set teaches subtraction as a creative act — what you remove defines what remains.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var max_depth: int = 6

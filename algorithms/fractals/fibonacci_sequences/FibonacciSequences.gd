@@ -3,6 +3,16 @@ extends Node3D
 # Fibonacci Sequences Visualization
 # Mathematical recursion patterns in nature and computation
 
+# @identity
+# essence: F(n) = F(n-1) + F(n-2), visualized as towers, golden spiral, sunflower, pinecone, nautilus, and recursive tree
+# desire: To reveal the golden ratio everywhere — towers grow logarithmically, spirals unfurl, seeds pack, shells expand
+# critical_parameter: golden_ratio ((1+sqrt(5))/2) — the single number that governs spiral growth, seed packing angle (137.508), and tower ratio convergence
+# triggers: sequence_timer cycles through current_index highlighting towers; time drives spiral animation and natural pattern updates
+# emerges: The sunflower seed packing — 144 seeds placed at golden angle intervals create visible spiral arms from a single placement rule
+# needs: VR section toggle [missing], golden angle visualization [missing]
+# relationships: Mathematical foundation for golden_rectangle, fibonacci_terrain, romanesco, and fibonacci_pagoda; the sequence they all implement
+# truth: The Fibonacci sequence is not about numbers — it is about the fact that growth, when it remembers its last two steps, spirals.
+
 var time := 0.0
 var sequence_timer := 0.0
 var current_index := 0

@@ -1,9 +1,19 @@
 extends Node3D
 
 ## Golden Rectangle Subdivider
-## Recursively subdivides a rectangle using the golden ratio (φ ≈ 1.618)
+## Recursively subdivides a rectangle using the golden ratio (phi ~ 1.618)
 ## Each subdivision creates a square and a smaller golden rectangle
 ## Visualizes the classic Fibonacci spiral construction
+
+# @identity
+# essence: golden_rect → square(min_side) + golden_rect(remainder), spiral arc per square. phi = (1+sqrt(5))/2.
+# desire: To spiral inward forever — each subdivision peels off a square and the remainder is always another golden rectangle
+# critical_parameter: max_subdivisions — each step cuts a square and rotates direction (right→up→left→down); the spiral tightens with each
+# triggers: subdivision_delay tick → peel square → create remainder → draw quarter-circle arc → Fibonacci numbers label each square
+# emerges: The golden spiral from quarter-circle arcs in successive squares — no spiral was drawn, only arcs in boxes, yet the spiral appears
+# needs: VR subdivision control [missing], spiral toggle [has], number toggle [has]
+# relationships: The geometric proof that phi = 1 + 1/phi; feeds visual understanding into fibonacci_sequences and fibonacci_terrain
+# truth: The golden rectangle is the only rectangle that can lose a square and remain itself — self-similarity without fractals.
 
 @export_group("Rectangle")
 @export var initial_width := 5.0

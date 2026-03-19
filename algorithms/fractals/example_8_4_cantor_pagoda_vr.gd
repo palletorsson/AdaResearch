@@ -13,6 +13,16 @@ extends Node3D
 ## Recursive Cantor set reimagined as walkable pagoda architecture
 ## Chapter 08: Fractals
 
+# @identity
+# essence: level(d) = {block(segment) for segment in cantor_segments(d)}, stacked with collision — walkable Cantor architecture
+# desire: To be walked through — each level is a Cantor iteration with StaticBody3D collision, ascending from 2^d blocks to 1
+# critical_parameter: max_depth — each additional level doubles the block count and shrinks them by 1/3, creating denser platforms above
+# triggers: The pagoda builds bottom-up; depth-based color gradient from purple (bottom/dense) to bright pink (top/sparse)
+# emerges: Walkable gaps between blocks at each level — the removed middle thirds become corridors and windows
+# needs: VR walking [has via collision], level info display [missing]
+# relationships: Architectural interpretation of cantor_set; pairs with fibonacci_pagoda (golden vs Cantor scaling)
+# truth: The Cantor set becomes architecture when you give its gaps floors and its segments walls.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var max_depth: int = 5

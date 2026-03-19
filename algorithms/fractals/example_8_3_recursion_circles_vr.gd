@@ -13,6 +13,16 @@ extends Node3D
 ## Recursive circles within circles
 ## Chapter 08: Fractals
 
+# @identity
+# essence: circle(center, r, d) = torus(r) + 4 * circle(center +/- offset, r * 0.5, d-1)
+# desire: To hypnotize — nested tori spinning at depth-dependent speeds, each ring a portal into the next scale
+# critical_parameter: max_depth — at 3 it's a simple pattern, at 5 the circles overlap and interfere, creating moire-like density
+# triggers: Full rotation of outermost ring → pause; depth-varying rotation_per_depth creates visual decoherence
+# emerges: Interference patterns between spinning tori at different depths — visual beats from simple rotation ratios
+# needs: VR depth slider [missing], rotation speed control [missing]
+# relationships: Simplest fractal recursion — precedes Koch and Sierpinski; introduces the 4-fold branching pattern
+# truth: Recursion is not repetition — it is self-reference, and the circle that contains circles is the first fractal you can hold.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 const MAT_POP_PLASTIC := preload("res://algorithms/shaders/queer_materials/mat_pop_plastic.tres")
 

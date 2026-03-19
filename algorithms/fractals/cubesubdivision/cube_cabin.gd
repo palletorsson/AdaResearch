@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates how buildings emerge from subtractive/additive operations
 # Subdivision creates rooms, windows, doors from a base cube
 
+# @identity
+# essence: cabin = foundation + walls + subtract(door, windows) + add(roof, chimney, porch), subtractive architecture
+# desire: To be approached — door, windows, porch, chimney, each step makes it more inviting, more inhabitable
+# critical_parameter: cabin_size — scales the entire structure proportionally; the ratios (wall height 0.6, door 0.45) are the architectural DNA
+# triggers: 8-step construction: foundation → walls → door → windows → roof → chimney → porch → details (lantern, welcome mat)
+# emerges: A sense of home from geometric primitives — the welcome mat and lantern are the final touches that transform boxes into architecture
+# needs: VR walk-inside [missing], door-open interaction [missing]
+# relationships: Most architecturally complete subdivision artifact; contrasts pure-math subdivisions (bookshelf, chair) with lived space
+# truth: Architecture is not the boxes — it is the holes cut in them for doors and windows, the subtractions that let light and people through.
+
 @export var cabin_size: float = 3.0
 @export var show_construction: bool = true
 @export var step_delay: float = 0.35

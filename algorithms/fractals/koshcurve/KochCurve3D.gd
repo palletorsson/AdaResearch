@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: koch_arch = map_to_arch(koch_points(iterations)) + koch_legs, fractal curve bent into a portal
+# desire: To be walked through — a Koch-curve arch with fractal legs, the boundary between order and chaos made into a doorway
+# critical_parameter: iterations — each level adds finer bumps to the arch and legs; at 4 the portal shimmers with fractal detail
+# triggers: depth_layers create Z-depth volume; rotation_speed enables slow rotation for display
+# emerges: The arch shape from mapping a linear fractal onto a semicircle — the Koch bumps become architectural ornament
+# needs: VR walk-through [has via geometry], rotation control [missing]
+# relationships: 3D architectural interpretation of the Koch curve; contrasts flat fractal_koch_curve with volumetric space
+# truth: A doorway made of fractals is a threshold with infinite detail — you can never fully see what you are walking through.
+
 @export var iterations: int = 4
 @export var line_width: float = 0.03
 @export var portal_width: float = 2.0

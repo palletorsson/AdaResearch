@@ -5,6 +5,16 @@ extends Node3D
 ## Lifts random non-edge faces to create organic mountain/terrain growth
 ## Each iteration: subdivide -> select non-edge -> lift -> zoom out -> repeat
 
+# @identity
+# essence: terrain(faces) = select_non_edge(faces) → lift(golden_ratio_scaled) → subdivide_golden(lifted) → repeat
+# desire: To grow mountains — the terrain heaves upward iteration by iteration, golden spiral overlay tracing the growth pattern
+# critical_parameter: prefer_center_lift — when true, mountains grow from the center outward; when false, peaks scatter randomly
+# triggers: growth_delay tick → select faces → lift by phi-scaled height → subdivide along golden ratio → rebuild mesh
+# emerges: The golden spiral overlay tracks the terrain — a line of gold traces phi's fingerprint across the landscape
+# needs: VR walking on terrain [missing], preset selection [has], spiral toggle [has]
+# relationships: Terrain counterpart to golden_rectangle (2D phi subdivision); uses the same 1/phi split ratio
+# truth: Terrain is not random — it is a surface that remembers the golden ratio in every fold and ridge.
+
 @export_group("Terrain Shape")
 @export var initial_size := Vector2(8.0, 8.0 / 1.618)  # Golden ratio rectangle
 @export var max_iterations := 5

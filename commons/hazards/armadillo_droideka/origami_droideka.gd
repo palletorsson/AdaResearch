@@ -1,3 +1,13 @@
+# @identity
+# essence: inflate(t) = f(state, speed, pulse) — Kresling-inspired shell that breathes between compact wheel and deployed turret
+# desire: a folding origami wheel that rolls toward you, inflates to reveal a firing core, then collapses to relocate
+# critical_parameter: inflation_fire_bias — how compressed the shell stays during FIRE state, exposing or protecting the core
+# triggers: state machine (ROLL→DETECT→DEPLOY→AIM→FIRE→DEAD) drives fold/inflate pose via _apply_fold_pose()
+# emerges: split-face dihedral animation creates a breathing, organic quality from rigid box geometry
+# needs: inherited armadillo_droideka base [has]; fire_bolt projectile [has]; pleat/split face system [has]
+# relationships: extends armadillo_droideka; contrasts with armadillo_eggling (full combat vs contact-only); feeds random_game gauntlet
+# truth: Origami is constraint that enables transformation — the same sheet becomes wheel, turret, and shield.
+
 extends "res://commons/hazards/armadillo_droideka/armadillo_droideka.gd"
 class_name OrigamiDroideka
 

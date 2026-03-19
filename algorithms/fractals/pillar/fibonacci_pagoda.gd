@@ -12,6 +12,16 @@ extends Node3D
 ## Creates a pagoda structure using pillarpart instances scaled by Fibonacci ratios
 ## Chapter 08: Fractals - Mathematical patterns in architecture
 
+# @identity
+# essence: tier_scale(n) = base_scale / phi^(n*0.5), stacking Fibonacci-ratioed tiers with golden finial
+# desire: To be looked up at — each tier smaller by the golden ratio, converging to a point that never quite arrives
+# critical_parameter: use_golden_ratio — toggles between pure Fibonacci integer ratios and continuous phi scaling, producing subtly different tapering
+# triggers: num_tiers increase → taller, more converging structure; roof_overhang → how far the eaves extend beyond the body
+# emerges: The visual impression of weightlessness at the top — pure mathematics making stone look like it floats
+# needs: VR tier-count slider [missing], walk-inside collision [missing]
+# relationships: Bridges fibonacci_sequences (abstract math) to architecture; contrasts with romanesco (organic Fibonacci)
+# truth: The golden ratio is not imposed on the pagoda — the pagoda is what the golden ratio looks like when it tries to be architecture.
+
 const PILLAR_SCENE = preload("res://algorithms/fractals/pillar/pillarpart.tscn")
 
 @export var num_tiers: int = 8

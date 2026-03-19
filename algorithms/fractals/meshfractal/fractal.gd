@@ -1,4 +1,15 @@
 # fractal.gd - Organic fractal generator with animation
+#
+# @identity
+# essence: part(level, i) = parent.rotation * child.rotation * spin(t), 5-branch recursive tree with MultiMesh
+# desire: To sway — every branch spins independently, gravity sags the arms, and the whole organism breathes
+# critical_parameter: reverse_spin_chance (0.25) — the probability a branch spins opposite to its siblings, creating visual turbulence
+# triggers: Each frame updates all levels: spin accumulates, sag responds to gravity, colors shift by golden ratio sampling
+# emerges: Organic breathing motion from independent per-part spin velocities and gravity sag — no animation was designed, only physics
+# needs: VR depth control [missing], wind force input [missing]
+# relationships: Most performant fractal (MultiMesh GPU instancing); organic counterpart to the geometric recursive_tree
+# truth: An organism is a tree where every branch has forgotten it is a branch and believes it is the whole.
+
 extends Node3D
 
 @export_range(3, 8) var depth: int = 6

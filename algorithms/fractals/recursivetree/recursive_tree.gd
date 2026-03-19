@@ -4,6 +4,16 @@ extends Node3D
 # Grows upward in Y with natural branching patterns
 # Features: randomized angles, tapering branches, natural colors, and smooth growth animation
 
+# @identity
+# essence: branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)
+# desire: To grow before your eyes — trunk first, then branches unfurl in real-time, leaf clusters blooming at the tips
+# critical_parameter: randomness_amount (0.15) — the variance injected into every angle and length, making each tree unique
+# triggers: growth_interval tick → pop next branch from queue → create tapered cylinder → enqueue children
+# emerges: Natural-looking asymmetry from uniform random perturbation — no two trees are alike, yet all are recognizably trees
+# needs: VR growth speed slider [missing], prune-by-grab [missing]
+# relationships: Deterministic sibling to fractal_stochastic_tree; feeds into inverted_tree_cloud (same algorithm, flipped)
+# truth: A tree is not designed — it is a recursive function that ran until it ran out of energy.
+
 # Tree settings
 @export var growth_interval: float = 0.3  # Time between growth steps
 @export var max_depth: int = 10  # Maximum recursion depth

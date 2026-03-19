@@ -15,6 +15,16 @@ extends Node3D
 ##
 ## Each depth level has a distinct color. A frame surrounds the pattern.
 
+# @identity
+# essence: circle(center, r, d) = torus(r) + circle(center, r * 0.5, d-1), concentric halving
+# desire: To introduce recursion visually — each ring half the size of the last, rainbow colors marking each depth level
+# critical_parameter: max_depth — at 6 the innermost ring is 1/64th of the original, nearly invisible, proving the recursion continues beyond sight
+# triggers: show_animation → rings appear one depth at a time; animation_speed controls the reveal rhythm
+# emerges: The visual proof that halving never reaches zero — the rings keep going, each smaller but present
+# needs: VR depth control [missing], animation toggle [has]
+# relationships: The simplest recursion example; precedes example_8_2 (squares) and example_8_3 (branching circles)
+# truth: Recursion is a function that trusts its smaller self to do the same work — and the concentric circles are the proof that trust was warranted.
+
 @export var max_depth: int = 6
 @export var initial_radius: float = 0.4
 @export var show_animation: bool = false

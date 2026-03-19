@@ -5,6 +5,16 @@
 #
 # QFEP: Independence — each reel is an independent uniform trial.
 # The combination space grows multiplicatively (6^3 = 216 outcomes).
+#
+# @identity
+# essence: P(A∩B∩C) = P(A)·P(B)·P(C) — independent joint probability
+# desire: pull the lever, feel anticipation as reels decelerate one by one
+# critical_parameter: symbols_per_reel — determines outcome space (6^3 = 216)
+# triggers: _pull_lever() → sequential reel-stop cascade via _stop_sequence_timer
+# emerges: histogram convergence to uniform — the longer you play, the flatter the bars
+# needs: VR push button [has], lever pull gesture [has]
+# relationships: contrasts with galton_board (binomial, not uniform); unlocks coin_toss
+# truth: Independence is not absence of connection — it is the impossibility of prediction from correlation.
 
 extends Node3D
 

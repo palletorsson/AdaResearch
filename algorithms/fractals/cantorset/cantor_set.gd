@@ -5,6 +5,16 @@ extends Node3D
 # removes the middle third, and stacks them using RigidBody3D physics
 # Bars fall and stack on top of each other
 
+# @identity
+# essence: cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.
+# desire: To watch something disappear — each iteration removes a third, and the bars physically fall into place with RigidBody3D
+# critical_parameter: max_iterations — at 5 iterations, each bar is 1/243 of the original, yet the set is still uncountably infinite
+# triggers: iteration_interval tick → split all current bars → new bars fall with physics → hue shifts per generation
+# emerges: The physical stacking of bars — gravity gives the abstract Cantor set a visceral presence as bars clatter into position
+# needs: VR iteration trigger [missing], physics interaction [missing]
+# relationships: Foundation for sierpinski_triangle (2D Cantor) and menger_sponge (3D Cantor); demonstrates measure-zero sets
+# truth: The Cantor set removes everything and keeps everything — zero length, uncountable points, the paradox made physical.
+
 # Cantor set settings
 @export var iteration_interval: float = 2.0  # Time between iterations in seconds
 @export var max_iterations: int = 5  # Maximum number of iterations

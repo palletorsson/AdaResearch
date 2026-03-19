@@ -4,6 +4,16 @@
 # vs total darts gives ratio ≈ π/4. Live counter shows π estimate improving.
 #
 # QFEP: Computation through accumulation — random sampling converges to truth.
+#
+# @identity
+# essence: π ≈ 4 · (points inside circle / total points) — Monte Carlo integration
+# desire: throw darts at a board and watch π emerge from chaos — green inside, red outside, gold answer
+# critical_parameter: max_darts — more darts means tighter convergence; error scales as 1/sqrt(n)
+# triggers: _throw_dart() samples uniform (rx, ry) in [0,1]², tests dx²+dy² <= 0.25
+# emerges: the π estimate converges — randomness computes a transcendental number without algebra
+# needs: VR push buttons for THROW/AUTO/RESET [has]; dart visual markers [has]
+# relationships: contrasts with galton_board (integration vs distribution); feeds understanding of random sampling
+# truth: Randomness is not the enemy of precision — given enough samples, it converges to any truth.
 
 extends Node3D
 

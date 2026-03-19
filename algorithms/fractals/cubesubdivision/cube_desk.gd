@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates hierarchical subdivision: table form + drawer grid
 # Shows how functional complexity emerges from recursive structure
 
+# @identity
+# essence: desk = table_form + grid_subdivide(drawer_unit, rows * cols), nested subdivision hierarchy
+# desire: To be used — drawers that emerged from subdividing a box within a box, functional complexity from recursive cuts
+# critical_parameter: drawer_rows * drawer_cols — the grid resolution of the drawer unit determines storage granularity
+# triggers: Construction sequence: desktop -> legs -> drawer frame -> individual drawers with handles -> details
+# emerges: Cable management holes and accent strips appear as final-step details — the desk develops personality
+# needs: VR drawer-open interaction [missing], construction speed control [missing]
+# relationships: Most complex cube-subdivision furniture; builds on recursive_table by adding nested second-level subdivision
+# truth: A desk is a table that subdivided one of its own volumes into a grid — recursion within recursion.
+
 @export var desk_size: float = 2.0
 @export var drawer_rows: int = 2
 @export var drawer_cols: int = 3

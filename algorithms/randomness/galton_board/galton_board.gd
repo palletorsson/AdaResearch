@@ -5,6 +5,16 @@
 #
 # QFEP: Central Limit Theorem as convergence — many independent binary
 # choices accumulate into Gaussian structure. Order from repetition.
+#
+# @identity
+# essence: Binomial(n, 0.5) → N(n/2, n/4) as n → ∞ — the Central Limit Theorem
+# desire: watch balls cascade through pegs and see the bell curve assemble itself from binary choices
+# critical_parameter: peg_rows — more rows means tighter Gaussian convergence; 8 rows gives 9 bins
+# triggers: auto_drop spawns balls at balls_per_second rate; peg collisions create the L/R branching
+# emerges: the bell curve overlay converges to match the histogram — theory becomes visible fact
+# needs: VR push buttons for DROP/AUTO/RESET/SPEED [has]; ball pool recycling [has]
+# relationships: contrasts with slot_machine (uniform vs Gaussian); feeds gaussian_random and random_bell_curve
+# truth: The bell curve is not imposed — it is the inevitable shape of accumulated independence.
 
 extends Node3D
 

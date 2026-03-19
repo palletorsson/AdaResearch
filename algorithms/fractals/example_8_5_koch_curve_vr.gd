@@ -13,6 +13,16 @@ extends Node3D
 ## Koch snowflake fractal with animated depth growth, color gradient, and VR controls
 ## Chapter 08: Fractals
 
+# @identity
+# essence: koch(segment) = [a, b, peak, d, e] where peak rises sqrt(3)/2 above the middle third. D = log(4)/log(3) ~ 1.26.
+# desire: To grow before your eyes — depth 0 is a triangle, depth 4 is a snowflake with 768 segments, each growth visible
+# critical_parameter: max_depth — each level quadruples segments; the VR ParameterController3D lets learners dial this live
+# triggers: animate_growth → depth increases over time; depth_controller → immediate regeneration; color_scheme → 4 palettes
+# emerges: The snowflake boundary — infinite perimeter enclosing finite area, visible as the curve fills space
+# needs: VR depth slider [has], color scheme control [has], snowflake toggle [has]
+# relationships: The Koch curve that all others reference; feeds into koch_curve_3d (portal arch) and fractal_koch_curve (NOC variant)
+# truth: The Koch snowflake has infinite perimeter and finite area — it is a line that wants to be a plane but never quite arrives.
+
 signal generation_complete(depth: int, segment_count: int)
 
 @export var max_depth: int = 4

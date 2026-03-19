@@ -1,3 +1,13 @@
+# @identity
+# essence: DNA → Morphology → Selection → Reproduction — artificial evolution
+# desire: spawn creatures from 4 kingdoms, watch them evolve, toggle hybrid mode to break taxonomy
+# critical_parameter: _hybrid_mode — when true, body_type floats between kingdoms, dissolving categories
+# triggers: _evolution.evolve_step() runs selection + crossover + mutation across the population
+# emerges: cross-kingdom breeding produces forms no single kingdom template could generate
+# needs: VR keyboard fallback [has]; population grid spawning [has]; LOD cycling [has]
+# relationships: depends on CritterSpawner, EvolutionSystem, MorphologyRouter; contrasts with mushrooms (static growth vs dynamic evolution)
+# truth: A kingdom is not a boundary — it is a region in a continuous morphospace.
+#
 # nature_system_demo.gd — Visual test scene for the Nature System
 #
 # Spawns critters from all 4 kingdoms in a grid so you can see what

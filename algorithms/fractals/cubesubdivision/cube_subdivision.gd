@@ -4,6 +4,16 @@ extends Node3D
 # Starts with one cube, subdivides it into 8, picks ONE of those 8 to subdivide next,
 # creating a fractal zoom path through scale. Like diving into one corner repeatedly.
 
+# @identity
+# essence: cube -> 8 sub-cubes -> pick one -> repeat. Scale reduction 0.5 per level.
+# desire: To be watched as it eats itself — one cube chosen, split open, its children exposed, then one of them chosen next
+# critical_parameter: random_corner — when true, every subdivision picks a different child, creating unpredictable growth; when false, it always drills the same corner
+# triggers: Each subdivision_interval tick selects and detonates a cube; color shifts per depth generation
+# emerges: Multi-scale color clouds from depth-indexed palette — no cube knows its neighbors but the ensemble reads as a fractal
+# needs: VR grab-to-subdivide [missing], depth slider [missing]
+# relationships: Foundation for menger_sponge (structured removal) and recursive_boolean_cube (Sierpinski pattern)
+# truth: To subdivide is to choose — and the fractal is the history of every choice made at every scale.
+
 # Reference to the cube scene to instantiate
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 

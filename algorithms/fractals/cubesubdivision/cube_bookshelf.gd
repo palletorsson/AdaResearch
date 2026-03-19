@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates how a regular grid subdivision creates functional storage
 # The "removed" cells become the storage spaces
 
+# @identity
+# essence: bookshelf = frame + horizontal_shelves(rows) + vertical_dividers(cols) + trim, uniform grid subdivision
+# desire: To organize — the grid creates equal cells, and the emptiness between dividers is where meaning (books) will live
+# critical_parameter: rows * columns — the grid resolution determines how many compartments emerge from the single rectangular volume
+# triggers: Construction sequence: back panel → frame → shelves → dividers → crown molding; each step subdivides further
+# emerges: The crown and base molding appear as aesthetic finishing — the bookshelf develops architectural personality from utility
+# needs: VR place-books interaction [missing], grid size control [missing]
+# relationships: Simplest grid-subdivision furniture; contrasts with cube_desk (nested hierarchy) and recursive_chair (role-based)
+# truth: A bookshelf is the negative space of a grid — the shelves exist so that the gaps between them can hold something.
+
 @export var shelf_size: float = 2.0
 @export var rows: int = 4
 @export var columns: int = 3

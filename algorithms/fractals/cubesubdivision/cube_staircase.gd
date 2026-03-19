@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates how diagonal subdivision of a cube creates stairs
 # Each step emerges from subdividing the remaining space
 
+# @identity
+# essence: staircase(n) = tread(n) + riser(n) + staircase(n-1), diagonal subdivision of a cube
+# desire: To be climbed in VR — each step materializing from nothing as the cube reveals its inner staircase
+# critical_parameter: step_count — determines granularity of the subdivision, how many slices the cube yields
+# triggers: show_construction toggle — animated step-by-step reveals the recursive logic; step_delay controls rhythm
+# emerges: Handrails and stringers arise as structural necessity from the step geometry, not designed separately
+# needs: VR step-on detection [missing], construction speed slider [missing]
+# relationships: Sibling to recursive_chair and recursive_table; all share the subdivision-to-furniture pattern
+# truth: A staircase is a cube that learned to subdivide itself along its own diagonal.
+
 @export var stair_size: float = 2.0
 @export var step_count: int = 6
 @export var show_construction: bool = true

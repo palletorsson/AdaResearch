@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: sierpinski_3d(pos, level, size) = 4 * sierpinski_3d(tetrahedral_vertices * size/2, level-1, size/2)
+# desire: To collapse — frozen RigidBody3D tetrahedra unfreeze after 2 seconds and tumble apart, the fractal disassembling itself
+# critical_parameter: max_level — at level 3 there are 64 cubes arranged in a Sierpinski tetrahedron; each level multiplies by 4
+# triggers: 2-second timer → unfreeze all bodies → gravity pulls the fractal apart → cubes scatter and collide
+# emerges: The destruction reveals the structure — only when the pieces fall do you see how they were nested
+# needs: VR re-freeze button [missing], level control [missing]
+# relationships: 3D extension of sierpinski_triangle; uses tetrahedral (not cubic) subdivision, producing a different D ~ 2.0
+# truth: The Sierpinski pyramid is a solid that, given time and gravity, will prove it was always an arrangement of gaps.
+
 var bodies = []
 var max_level = 3
 var size = 5.0
