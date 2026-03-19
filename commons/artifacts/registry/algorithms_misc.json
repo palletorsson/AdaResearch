@@ -1360,14 +1360,15 @@
 		"self_organizing_patterns": {
 			"lookup_name": "self_organizing_patterns",
 			"name": "Self-Organizing Patterns",
-			"description": "Emergent pattern formation through self-organization principles",
+			"description": "Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",
 			"scene": "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
-			"category": "unknown",
+			"category": "emergence",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
 				"patterngeneration",
-				"swarmintelligence"
+				"swarmintelligence",
+				"emergentsystems"
 			],
 			"footprint": [
 				16,
@@ -1385,11 +1386,15 @@
 			},
 			"complexity": "intermediate",
 			"tags": [
-				"pattern"
+				"emergence",
+				"self_organization",
+				"stigmergy",
+				"phase_transition",
+				"attractor"
 			],
 			"dev_themes": [
 				"algorithms",
-				"misc"
+				"emergent_systems"
 			]
 		},
 		"fibonacci_sequences": {
