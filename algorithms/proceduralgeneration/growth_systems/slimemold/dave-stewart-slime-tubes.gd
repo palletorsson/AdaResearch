@@ -3,6 +3,16 @@ extends Node3D
 # Dave Stewart-inspired Slimy Pools and Tubes Generator
 # Creates viscous, organic tubular forms with pooling liquid effects
 
+# @identity
+# essence: Physarum-inspired viscous tubes and pools — organic growth connecting food sources through chemical trail reinforcement
+# desire: To watch a brainless organism solve optimization: pools form at nodes, tubes connect them, networks self-organize
+# critical_parameter: viscosity — controls how thick and slow the slime behaves; high produces cohesive tubes, low produces runny spreading
+# triggers: More pools produce denser networks; high glossiness produces liquid glass; animation_speed controls growth tempo
+# emerges: Transport networks rivaling engineered infrastructure from local chemical sensing — no brain, no plan, just trails
+# needs: Noise-based deformation [has], subsurface scattering [has], bubble animation [has], VR interaction [missing]
+# relationships: Opening artifact in biological_growth sequence. Inspired by Physarum polycephalum / Atsushi Tero Tokyo rail study.
+# truth: The slime mold does not solve the maze — it grows through it, and the growth is the solution.
+
 # Configuration
 @export var pool_count: int = 5
 @export var tube_segments_per_pool: int = 3

@@ -1,3 +1,13 @@
+# @identity
+# essence: f(x) = sum(charge_i / |x - p_i|^2) -- metaball charges creating implicit surface danger zones
+# desire: blobby charges bulging toward the player, implicit surfaces merging and splitting
+# critical_parameter: _charges array -- position and strength of each metaball; iso-threshold defines boundary
+# triggers: player enters Area3D; charges drift toward player; damage inside iso-surface boundary
+# emerges: implicit surfaces as threat -- danger zone has no fixed shape, only a field equation
+# needs: Area3D [has]; charge tracking [has]; field evaluation [has]; damage accumulation [has]; VR interaction [missing]
+# relationships: embodies isosurfaces sequence; pairs with noise_field and spatial_voronoi as field hazards
+# truth: the surface is not a boundary you can see -- it is an equation you are inside or outside of.
+
 extends Area3D
 class_name IsosurfaceTrap
 ## Isosurfaces sequence — blobby metaball zone hazard.

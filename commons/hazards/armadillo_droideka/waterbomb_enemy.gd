@@ -1,3 +1,13 @@
+# @identity
+# essence: waterbomb_tessellation.roll() -> deploy(rigid_foldable_flower) -- compressed sphere blooming to attack
+# desire: a waterbomb rolling as compressed sphere, then blooming into rigid-foldable flower formation
+# critical_parameter: deployment state -- ROLLED (sphere) vs DEPLOYED (open waterbomb flower pattern)
+# triggers: player proximity triggers bloom; rigid-foldable faces maintain shape through unfolding
+# emerges: the crease pattern IS the creature -- waterbomb mathematics determine both forms
+# needs: CharacterBody3D [has]; waterbomb geometry [has]; rigid-foldable deployment [has]; VR interaction [missing]
+# relationships: origami family with miura_crawler, kresling_spire; sphere roller family
+# truth: every triangle face holds shape through unfolding -- rigidity in motion, origami made lethal.
+
 extends CharacterBody3D
 class_name WaterbombEnemy
 ## A rolling/deploying enemy using rigid waterbomb origami geometry.

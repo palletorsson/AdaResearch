@@ -1,3 +1,13 @@
+# @identity
+# essence: mode(curriculum_progress) -> hand_force(type) -- a held tool that evolves through the curriculum
+# desire: an evolving hand force tracking player progression, from slow cubes to swarm intelligence
+# critical_parameter: current_mode_index / unlocked_modes -- curriculum stage determines the tool's current power
+# triggers: XRToolsPickable grab/release; mode cycling through unlocked abilities; curriculum progression unlocks
+# emerges: the tool that grows with the learner -- same object, different capability at each understanding stage
+# needs: XRToolsPickable [has]; mode system [has]; fire cooldown [has]; curriculum tracking [has]
+# relationships: companion to loving_triangle (tool + atom pair); embodies Q-FEP progression across all sequences
+# truth: the catalyst does not change the world -- it changes what the holder can do in the world.
+
 # BecomingCatalyst.gd
 # The Becoming Catalyst — an evolving hand force that grows with the curriculum.
 # Not a weapon of destruction but a tool of transformation, becoming, and

@@ -1,3 +1,13 @@
+# @identity
+# essence: cell(x) = argmin_i(|x - seed_i|) -- ground partitioned into Voronoi territories by nearest seed
+# desire: drifting seed points dividing ground into territories -- safe, damage, slow, heal -- borders wander
+# critical_parameter: _seed_positions / _seed_types -- locations determine boundaries; types assign effects
+# triggers: seeds drift continuously; boundaries recompute; player cell type determines effect
+# emerges: Voronoi partitioning as territorial hazard -- map reorganizes by nearest-neighbor geometry
+# needs: Area3D [has]; seed tracking [has]; Voronoi computation [has]; type effects [has]; VR interaction [missing]
+# relationships: embodies spatial_partitioning sequence; pairs with noise_field (cell vs continuous field)
+# truth: Voronoi cells partition space by proximity -- borders between safe and lethal are always moving.
+
 extends Area3D
 class_name SpatialVoronoi
 ## Spatial-partitioning sequence hazard — ground plane divided into Voronoi cells.

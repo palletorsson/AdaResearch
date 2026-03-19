@@ -1,3 +1,13 @@
+# @identity
+# essence: output(t) = sum(grain(t_i, size, pitch, envelope)) -- thousands of micro-fragments into texture
+# desire: a cloud of sonic particles -- each grain too short to hear alone, together forming atmosphere
+# critical_parameter: grain_density / grain_size -- how many overlap and how long each lives; scatter randomizes
+# triggers: theme profiles reshape density, pitch, scatter, pan spread; grains spawn continuously
+# emerges: texture without waveform -- statistical accumulation produces sound no oscillator generates
+# needs: AudioStreamGenerator [has]; per-grain envelope and phase [has]; pad synthesis layer [has]; VR controls [missing]
+# relationships: micro-counterpart to additive (grains vs harmonics); parallels particle systems
+# truth: enough fragments of a thing become the thing -- or something it never was. Identity through multiplicity.
+
 extends Node3D
 
 # Granular Synthesis Visualization

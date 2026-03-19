@@ -1,3 +1,13 @@
+# @identity
+# essence: 3 bars, 3 right angles, each corner coherent, the whole impossible -- visual Goedel in 3D
+# desire: a triangle that looks correct from one viewpoint but is geometrically impossible in 3-space
+# critical_parameter: _is_at_sweet_spot -- whether the viewer stands at the one angle where illusion coheres
+# triggers: player position relative to sweet spot; indicator shows when the impossible view aligns
+# emerges: local validity does not guarantee global consistency -- the triangle knows what formal systems learned
+# needs: bar meshes [has]; sweet spot detection [has]; info label [has]; VR viewpoint tracking [missing]
+# relationships: paired with escher_staircase (impossible objects family); feeds Dark_Room_Paradox
+# truth: each corner is valid, the object is not -- incompleteness you can hold in your hands.
+
 # penrose_triangle.gd
 # The impossible triangle - locally coherent, globally impossible
 # A 3D construction that only "works" from specific viewpoints

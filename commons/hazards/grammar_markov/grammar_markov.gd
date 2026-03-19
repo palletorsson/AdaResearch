@@ -1,3 +1,13 @@
+# @identity
+# essence: state(t+1) = P(state(t)) -- floating tetrahedron with 4 face-states governed by probabilities
+# desire: a Markov chain attacking in grammar -- lunge, sweep, projectile, shield -- transitions visible
+# critical_parameter: _markov_state / transition probabilities -- which attack follows which, mutating over time
+# triggers: transition_timer fires state changes; probabilities shift with mutations; attack follows state
+# emerges: unpredictability with structure -- behavior is random but statistically learnable
+# needs: HazardCreatureBase [has]; state machine [has]; visible probabilities [has]; mutation system [has]; VR interaction [missing]
+# relationships: embodies grammar_systems sequence; Markov concept shared with generative_music
+# truth: every stochastic process is a bet on what comes next -- and the probabilities are always drifting.
+
 extends HazardCreatureBase
 class_name GrammarMarkov
 ## Floating Markov chain creature with 4 colored face-states.

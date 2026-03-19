@@ -1,3 +1,13 @@
+# @identity
+# essence: fold(sheet) -> glide(plane) -> ignite(pyre) -- origami paper plane that catches fire in flight
+# desire: a folded paper plane that glides, burns, and crashes as a flaming projectile
+# critical_parameter: _current_phase (AffinePhase) -- folding, gliding, igniting, crashing in sequence
+# triggers: phase timer drives state transitions; affine transforms control fold; fire activates mid-flight
+# emerges: paper folding meets thermodynamics -- beauty IS weapon, pyre IS payload
+# needs: fold geometry [has]; glide physics [has]; fire effect [has]; phase state machine [has]; VR interaction [missing]
+# relationships: origami family with miura_crawler, kresling_spire; unique fire element
+# truth: the fold that makes it fly also makes it burn -- structure and destruction share the same geometry.
+
 # OrigamiPyrePlane — floor hazard for the transformation sequence
 # A flat origami rectangle that smolders with paper-fire beneath transport cubes.
 # Its creased edges glow orange as it cycles through affine transformations —

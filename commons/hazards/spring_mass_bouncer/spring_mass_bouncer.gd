@@ -1,3 +1,13 @@
+# @identity
+# essence: F = -k*x -- 3x3 grid of mass nodes connected by springs obeying Hooke's law
+# desire: nine masses connected by springs deforming under stress, tension converted to damage
+# critical_parameter: spring constants / mass positions -- k determines stiffness; deformation generates damage
+# triggers: continuous spring simulation; masses oscillate under Hooke's law; contact triggers damage
+# emerges: soft body physics as threat -- the jiggling mass-spring system damages through deformation
+# needs: HazardCreatureBase [has]; 3x3 mass-spring grid [has]; Hooke's law [has]; tension viz [has]; VR interaction [missing]
+# relationships: embodies softbodies sequence; pairs with collision_crasher (elasticity vs impulse)
+# truth: F = -k*x -- the spring knows only displacement and stiffness, yet soft body dynamics emerge.
+
 extends HazardCreatureBase
 class_name SpringMassBouncer
 ## Soft bodies sequence — 3x3 grid of mass nodes connected by springs.

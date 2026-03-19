@@ -1,3 +1,13 @@
+# @identity
+# essence: Procedural binary tree — a trunk forks into branches, each branch forks again, recursion depth 3. Box meshes with emission materials create a geometric canopy. Self-similar at every level.
+# desire: To grow by halving — generate_branches calls itself with decremented depth, producing sub-branches from each endpoint. The tree is its own blueprint.
+# critical_parameter: num_main_branches / max_sub_branches — control branching factor; random_seed — deterministic chaos, same seed same tree
+# triggers: _ready → seed + material creation + full tree generation; rebuild_tree → clear all children, regenerate from parameters
+# emerges: A geometric sculpture where every subtree is a complete tree — hierarchy from constraint, not command. Each node knows only its children yet the whole structure self-organizes.
+# needs: VR branch manipulation [missing], growth animation [missing], parameter sliders [missing]
+# relationships: Appears in DataStructures_Trees (binary recursion) and RecursiveEmergence_Tail_Recursion_Memoization (call stack visualization). The tree that teaches both data structure and recursion.
+# truth: A tree is a list that learned to decide — left or right, less or greater. Hierarchy emerges not from authority but from the constraint of binary choice repeated.
+
 extends Node3D
 
 # Parameters for tree generation

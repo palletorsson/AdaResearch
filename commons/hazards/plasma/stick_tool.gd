@@ -1,3 +1,13 @@
+# @identity
+# essence: mediator(player, plasma) -> transmute(form) -- stick bridging player and plasma critter
+# desire: a simple stick that when dipped into plasma transforms raw energy into directed fire
+# critical_parameter: attached_plasma -- which plasma critter the stick mediates; tip contact triggers change
+# triggers: XRToolsPickable grab; tip contacts plasma -> attachment; plasma transmutes via stick mediation
+# emerges: the simplest tool becomes the key to transmuting hazard into benefit
+# needs: XRToolsPickable [has]; tip marker [has]; plasma attachment [has]; VR grab interaction [has]
+# relationships: paired with plasma_critter; mediator in Q-FEP dual-nature system; the ur-tool
+# truth: the stick is the oldest mediator -- extending reach and transforming relationship with the world.
+
 # StickTool.gd
 # A simple wooden stick the player can grab in VR.
 # Hold it near a PlasmaCritter → plasma attaches to the tip, becomes a torch.

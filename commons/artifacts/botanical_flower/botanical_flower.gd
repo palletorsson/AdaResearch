@@ -6,6 +6,16 @@
 extends Node3D
 class_name BotanicalFlowerArtifact
 
+# @identity
+# essence: Grid wrapper instantiating BotanicalFlower — petal count, length, curve, color, symmetry as procedural parameters
+# desire: To let players tune flower morphology through grid config, watching small parameter changes produce dramatic form shifts
+# critical_parameter: petal_count — the integer that most visibly transforms the flower from tulip to daisy to chrysanthemum
+# triggers: Low petal count produces simple bloom; high count produces dense rosette; bilateral symmetry produces orchid-like forms
+# emerges: Infinite flower variety from a handful of parameters forwarded to a single procedural generator
+# needs: apply_grid_config [has], preset support [has], VR sliders via map config [has]
+# relationships: Core artifact across Flower_Anatomy, Flower_Parameters, and Flower_Garden. Consumed by evolving_flowers as phenotype.
+# truth: A flower is not its petals — it is the parameters that decided how many petals to grow.
+
 const BOTANICAL_FLOWER := preload("res://commons/flora/botanical_flower.tscn")
 
 var _flower: Node3D = null

@@ -1,3 +1,13 @@
+# @identity
+# essence: carrier(t) = sin(2pi*fc*t + I*sin(2pi*fm*t)) -- one oscillator bending another from inside
+# desire: metallic bells and electric pianos cascade from two sine waves interfering at audio rate
+# critical_parameter: modulation_index -- small changes cascade into dense harmonic spectra; ratio sets carrier:modulator
+# triggers: theme profiles cycle carrier frequency, ratio, index depth, feedback amount, and harmonic mix
+# emerges: sounds that analog circuits cannot produce -- infinite sidebands from two simple oscillators
+# needs: AudioStreamGenerator [has]; carrier/modulator phase tracking [has]; feedback path [has]; VR controls [missing]
+# relationships: extends additive/subtractive by replacing addition with interference; Chowning DX7 legacy
+# truth: modulation is not addition -- it is mutual distortion, producing harmonics neither source contains alone.
+
 extends Node3D
 
 var time = 0.0

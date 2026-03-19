@@ -6,6 +6,16 @@ extends Node3D
 ## Three tracking spheres orbit and a torso wireframe responds in real time.
 ## "The body is not given — it is composed from inference."
 
+# @identity
+# essence: Three animated tracking points (head + two hands) driving real-time torso orientation estimation with visual feedback
+# desire: To show that the VR body is inferred, not measured: three points in space produce a torso through computation
+# critical_parameter: head_weight — how much head direction vs hand midpoint determines torso facing
+# triggers: Hands moving apart widens shoulder markers; head turning reorients forward arrow; asymmetric positions tilt the torso
+# emerges: A believable torso from three floating points — the body filling in gaps that sensors never measured
+# needs: Animated tracking points [has], shoulder markers [has], forward arrow [has], connection lines [has], VR input [missing — demo]
+# relationships: Fourth artifact in bodyprogression. Follows ik_arm_demo, precedes dress_selector. Uses 3-point estimation.
+# truth: The body is not given — it is the computation that fills the space between what the sensors actually see.
+
 @export var shoulder_width: float = 0.36
 @export var neck_offset: float = 0.15
 @export var head_weight: float = 0.7

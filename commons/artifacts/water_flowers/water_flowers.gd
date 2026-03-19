@@ -5,6 +5,16 @@
 extends Node3D
 class_name WaterFlowersArtifact
 
+# @identity
+# essence: Grid wrapper instantiating WaterFlowers — procedural blooms floating on Gerstner wave physics simulation
+# desire: To bring together botany and physics: flowers drift on mathematically accurate ocean waves in real time
+# critical_parameter: wave_strength — how tall the Gerstner waves grow; controls the drama of the floating motion
+# triggers: More flowers produce denser garden; stronger waves produce dramatic bobbing; drift speed scatters blooms
+# emerges: A living water garden where procedural flowers respond to procedural ocean — two systems coupled through physics
+# needs: apply_grid_config [has], flower count control [has], wave parameters [has], VR observation [has]
+# relationships: Fourth artifact in flowers sequence (Flower_Physics). Bridges botanical generation with physics simulation.
+# truth: The flower does not float — the wave lifts it, and the wave does not know the flower is there.
+
 const WATER_FLOWERS := preload("res://algorithms/physicssimulation/waterflowers/waterflowers.tscn")
 
 var _scene: Node3D = null

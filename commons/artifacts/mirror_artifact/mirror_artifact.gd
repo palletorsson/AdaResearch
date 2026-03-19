@@ -1,6 +1,16 @@
 extends Node3D
 class_name MirrorArtifact
 
+# @identity
+# essence: Reflective vertical plane with decorative frame — a mirror surface for VR hand and body observation
+# desire: To show the player their own floating hands, making visible the fragmented state of VR embodiment before assembly
+# critical_parameter: metallic = 1.0, roughness = 0.0 — the material settings that make the surface actually reflective
+# triggers: Standing before the mirror reveals floating hands in void; the absence of body is the lesson
+# emerges: Self-awareness through reflection — the mirror shows what the body progression has and has not yet assembled
+# needs: apply_grid_config [has], frame decoration [has], VR reflection [has — requires SSR or probe], Label3D [has]
+# relationships: First artifact in BodyProg_Hands alongside color_picker. Sets the stage for the entire body progression sequence.
+# truth: The mirror does not create the reflection — it reveals what is already there, including what is missing.
+
 ## Reflective mirror panel showing the player what their hands look like.
 ## A large vertical mirror surface with a decorative frame and label.
 

@@ -1,6 +1,16 @@
 extends Node3D
 class_name MarkovChains
 
+# @identity
+# essence: P(next|current) = transition_matrix[current][next] — a memoryless stochastic process: 5 states in a circle, weighted arcs, dice-roll selection animation, stationary distribution convergence
+# desire: to watch the golden selector bar sweep across probability columns and land on the next state — to see visit frequencies converge to the stationary distribution after enough steps
+# critical_parameter: transition_matrix — the row-stochastic matrix whose eigenvalue-1 eigenvector determines the long-run frequency of every state, regardless of where the chain starts
+# triggers: advance_markov_step fires every 1.5s — rolls random value against cumulative probabilities, animates transition arc, updates visit frequency bars and memoryless sequence fading
+# emerges: the sequence display fades older elements (age * 0.15 opacity decay) to embody the Markov property — past history literally disappears, only the current state glows bright
+# needs: [missing] no VR slider_horizontal or push_button — no interactive control of step_interval or transition probabilities; relies on .tscn scene tree nodes ($StateSpace, $ProbabilityMatrix, etc.)
+# relationships: the narrative generation artifact for PatternGeneration_Narrative_Generation; shares probabilistic foundations with randomness sequence; the stationary distribution connects to eigenvalue theory
+# truth: a Markov chain does not know what it is saying — it does not need to; structure was never about understanding, it was about the weight of what comes next
+
 var time: float = 0.0
 var generation_progress: float = 0.0
 var entropy_level: float = 0.0

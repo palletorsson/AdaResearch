@@ -1,5 +1,16 @@
 ## Shader 01: Shaping Functions — step, smoothstep, sin, pow
 ## Book of Shaders Chapter 5
+
+# @identity
+# essence: y = f(x) — step, smoothstep, sin, pow redistribute intensity across a gradient; each function is a policy for interpolation
+# desire: to drag sliders and watch a gradient bend — threshold sharpens, exponent compresses, frequency breathes
+# critical_parameter: threshold/exponent — the single number that decides where value concentrates
+# triggers: slider changes feed directly into shader uniforms; combined mode blends all four shaping policies
+# emerges: the combined panel reveals that every smooth surface is a weighted vote among discontinuity, cubic ease, oscillation, and power law
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: foundation for all subsequent shader maps — colors, shapes, patterns all reuse these shaping primitives
+# truth: a gradient is never neutral — every interpolation curve encodes a decision about how value distributes across space
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)

@@ -1,3 +1,13 @@
+# @identity
+# essence: waterbomb.compress() -> spring_release() -> hop(height) -- origami bouncing hazard
+# desire: a waterbomb that compresses and springs upward, hopping across terrain
+# critical_parameter: _health / compression cycle -- compression stores energy, release drives the hop
+# triggers: continuous compress-release cycle; each hop covers ground; landing zone damages player
+# emerges: origami as spring -- folding geometry stores and releases elastic energy for locomotion
+# needs: CharacterBody3D [has]; waterbomb mesh [has]; hop physics [has]; compression [has]; VR interaction [missing]
+# relationships: origami family; contrasts with waterbomb_enemy (stationary bloom vs mobile hopping)
+# truth: the fold stores energy -- compression IS the spring, origami geometry IS the locomotion.
+
 extends CharacterBody3D
 class_name WaterbombHopper
 ## Bouncing waterbomb tessellation enemy — origami-themed hazard.

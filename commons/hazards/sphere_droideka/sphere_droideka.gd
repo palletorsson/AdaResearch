@@ -1,3 +1,13 @@
+# @identity
+# essence: sphere_roll(v) -> deploy(turret) -- spherical droideka with shield and beam weapon
+# desire: smooth sphere rolling at speed, deploying into turreted form with shield and beam
+# critical_parameter: deployment state -- ROLLED (fast, invulnerable) vs DEPLOYED (stationary, armed, shielded)
+# triggers: player distance triggers deploy/retract; shield absorbs when deployed; beam targets player
+# emerges: the sphere IS the armor -- rolling geometry provides speed, deployment trades mobility for firepower
+# needs: class_name SphereDroideka [has]; roll physics [has]; shield system [has]; beam weapon [has]; VR interaction [missing]
+# relationships: contrasts with armadillo_droideka (biological vs mechanical); sphere roller family
+# truth: the sphere is the most efficient armor -- minimum surface for maximum volume, weaponized by deployment.
+
 ﻿extends CharacterBody3D
 class_name SphereDroideka
 ## Armadillidiidae-style spherical droideka.

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: 3D Wave Function Collapse — entropy-based cell selection collapsing tile superpositions with socket adjacency propagation
+# desire: To watch a world crystallize from pure possibility: every cell starts as everything, then observation forces a choice
+# critical_parameter: grid_size — the volume to fill; larger grids produce more complex emergent landscapes but risk contradiction
+# triggers: Animated generation shows cells collapsing in real time; base terrain seeds the bottom; propagation ripples outward
+# emerges: Voxel landscapes with grass, dirt, stone, water, sand — all from tile adjacency rules and entropy-minimizing selection
+# needs: Animated generation [has], socket compatibility [has], base terrain seeding [has], VR walkthrough [missing]
+# relationships: Paired with wave_function_collapse in constraint_solvers. Uses prototypes from wfc_3d_tiles.
+# truth: The world does not emerge from randomness — it emerges from the collapse of possibility under constraint.
+
 @export var grid_size: Vector3i = Vector3i(20, 10, 20)
 @export var tile_size: float = 2.0
 @export var tile_height: float = 1.0 # Half height match

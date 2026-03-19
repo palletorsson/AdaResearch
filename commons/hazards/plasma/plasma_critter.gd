@@ -1,3 +1,13 @@
+# @identity
+# essence: form(contact) -> transmute(effect) -- raw energy that takes shape from what touches it
+# desire: plasma that shocks raw, becomes fire via stick, becomes healing via water -- dual-nature
+# critical_parameter: current_form -- raw/fire/healing determined by what mediator contacts the plasma
+# triggers: stick_tool contact -> fire form; water -> healing; no mediator -> raw damage
+# emerges: Q-FEP dual-nature at creature scale -- same energy, different relation, different outcome
+# needs: Area3D [has]; form state machine [has]; mediator detection [has]; multiple effects [has]; VR interaction [missing]
+# relationships: paired with stick_tool and force_field; central Q-FEP dual-nature demonstration
+# truth: the plasma is the same substance whether it burns or heals -- the mediator determines manifestation.
+
 # PlasmaCritter.gd
 # A shapeshifting energy substance — the first critter.
 # In its raw form it shocks on contact. Touch it with a stick → fire torch.

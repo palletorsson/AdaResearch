@@ -1,4 +1,14 @@
 class_name TesseractTunnel
+
+# @identity
+# essence: 4D hypercube tessellation projected into a walkable 3D tunnel — perspective, stereographic, and orthographic projections
+# desire: To let players walk inside a rotating tesseract and feel dimensional projection break their spatial intuition
+# critical_parameter: w_offset — position in the fourth dimension; animating it sweeps the projection through 4D space
+# triggers: Changing projection_type switches views; w animation creates breathing geometry; edge colors shift with 4D depth
+# emerges: Architecture that cannot exist in 3D — nested cubes, self-intersecting edges, cells passing through each other
+# needs: ImmediateMesh rendering [has], 4D rotation animation [has], projection type switching [has], VR walkthrough [has]
+# relationships: Opening artifact in higher_dimensions sequence. Feeds into sixteen_cell and net_space. Uses 4D-to-3D projection math.
+# truth: The tunnel is not in three dimensions — it is a shadow cast by a shape you cannot see, rotating through a direction you cannot point.
 extends Node3D
 
 enum ProjectionType {

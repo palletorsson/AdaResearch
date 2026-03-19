@@ -1,6 +1,17 @@
 ## Shader 12: PINK EXTRAVAGANZA — Drag shader finale
 ## Melted candy, crushed pearl, memory skin, queer water, DRAG EXTRAVAGANZA
 ## This is LOUD. This is the final boss. Everything is maxed out.
+
+# @identity
+# essence: every uniform cranked past its intended range — melted candy vertex displacement, crushed pearl iridescence, oil slick latex, queer water refraction, drag extravaganza stacking all effects
+# desire: to stand in a room where five impossible materials bob and spin under pink/purple light — to witness the GPU compute beauty that taste would forbid
+# critical_parameter: rotation_speed — the spinning objects cycle view angles continuously, each revealing a different excess of the material at every moment
+# triggers: _process rotates objects and adds gentle sinusoidal bobbing; three OmniLight3D in pink/purple cast theatrical shadows; water plane sits on the floor refracting wrong on purpose
+# emerges: the composition — elevated sphere, flanking objects, floor water, HUGE pink title — produces drag runway energy; extravagance as computational posture
+# needs: [missing] no VR sliders or buttons — pure maximalist showcase; no interactive control, only witness
+# relationships: finale of the entire shader sequence; stacks techniques from all 11 prior lessons; the anti-thesis of shader_01's minimal gradient
+# truth: taste is a disciplinary mechanism — extravagance refuses it; the GPU does not know what is too much, it just computes
+
 extends Node3D
 
 var materials: Array[ShaderMaterial] = []

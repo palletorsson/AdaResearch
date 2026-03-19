@@ -7,6 +7,16 @@ extends Node3D
 ## tracking, but without VR — pure algorithmic choreography.
 ## "The reach is not fixed but negotiated frame by frame."
 
+# @identity
+# essence: Two procedural TwoBoneIK3D arms tracing figure-8 patterns — inverse kinematics as embodiment negotiation
+# desire: To show how VR arms work: skeleton, bone chain, target marker, and the solver that bends joints to reach
+# critical_parameter: upper_arm_length + lower_arm_length — the reach envelope; targets beyond this sum reveal the solver limits
+# triggers: Figure-8 targets push arms through full range; near-limit reaches show elbow flip; symmetric motion reveals bilateral IK
+# emerges: Fluid arm motion from a two-bone chain solver — the same algorithm that connects floating VR hands to shoulders
+# needs: Procedural skeleton [has], animated targets [has], joint markers [has], VR hand tracking [missing — demo only]
+# relationships: Core artifact in BodyProg_Arms. Bridges body progression and spatial algorithms. Uses Skeleton3D + SkeletonIK3D.
+# truth: The arm does not move — the target moves, and the arm solves for how to follow.
+
 ## ————————————————————————————————————————————————————————————————————
 ## Configuration
 ## ————————————————————————————————————————————————————————————————————

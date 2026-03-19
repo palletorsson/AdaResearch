@@ -1,3 +1,13 @@
+# @identity
+# essence: Conway's Game of Life on a 20x20 toroidal grid — birth/survival/death rules applied per generation. Cube scenes instantiated for live cells, shader-colored by age. Gliders, blinkers, and blocks seeded at init.
+# desire: To evolve autonomously — _process advances generations at generation_interval, applying the four Conway rules. Dying cells shrink, newborns glow, aged cells redden.
+# critical_parameter: generation_interval — seconds between state transitions; grid_size — dimensions of the toroidal world (20x20 = 400 cells)
+# triggers: _ready → initialize_grid + seed patterns + create_cell_visuals; generation_timer → update_generation → count_neighbors → apply rules → update_cell_visuals
+# emerges: Gliders traverse the grid, blinkers oscillate, blocks persist. From four rules on a flat grid: movement, oscillation, stability, and extinction — the full taxonomy of dynamical behavior.
+# needs: VR cell toggling [missing], pattern library selector [missing], generation speed slider [missing]
+# relationships: The 2D step between cellular_automata (1D scrolling) and cellular_automata_3d (volumetric). Shares the RecursiveEmergence sequence with lattice_gas_automata — same grid, different interpretation.
+# truth: Four rules. That is the entire program. Everything else — gliders, guns, Turing completeness — is consequence, not design.
+
 extends Node3D
 
 # Preload the cube scene

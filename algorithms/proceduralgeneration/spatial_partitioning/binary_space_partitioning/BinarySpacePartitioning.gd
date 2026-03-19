@@ -2,6 +2,16 @@
 extends Node3D
 class_name BinarySpacePartitioning
 
+# @identity
+# essence: Recursive hyperplane cuts partitioning an AABB into a binary tree of convex cells — division as architecture
+# desire: To show that dungeon rooms, office layouts, and game levels all begin with the same act: splitting space in two
+# critical_parameter: max_depth — how many recursive cuts; each level doubles the cell count and halves the room scale
+# triggers: Depth 3 produces a few large rooms; depth 7 produces dense labyrinth; gradient bias clusters small cells at edges
+# emerges: Room layouts, density heatmaps, and hierarchical spatial structure from a single recursive rule
+# needs: @tool editor preview [has], gradient bias [has], stage visualization [has], VR interaction [missing]
+# relationships: Foundation for dungeon generators in constraint_solvers. Contrasts with Voronoi (proximity vs cuts).
+# truth: Architecture begins with division — every room is what remains after the cut.
+
 @export_group("BSP Settings")
 @export var max_depth: int = 7
 @export var min_cell_size: float = 0.5

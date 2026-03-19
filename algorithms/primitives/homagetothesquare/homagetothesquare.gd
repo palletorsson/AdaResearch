@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: for i in 10: draw_quad(center, size[i], color[i]) — ten nested squares from Albers' color theory, each a slightly smaller concentric rectangle rendered front-to-back with vertex colors
+# desire: to stand before a flat painting and feel color relationships shift as squares nest — warm beige yields to mauve yields to coral, each boundary a silent argument about adjacency
+# critical_parameter: square_sizes ratio array — the proportional nesting from 1.0 down to 0.16 determines which color dominates peripheral vision vs foveal attention
+# triggers: _ready builds ArrayMesh with vertex colors and a dark wood frame; static display, no animation
+# emerges: transparency (alpha 0.8) lets background bleed through, so the painting's appearance depends on the grid cube behind it — context changes the work
+# needs: [missing] no VR interaction — pure contemplative object; no sliders, no buttons
+# relationships: a mathematical art primitive used in F14_Lab_Bench alongside platonicsolids, rainbow, and cube_scene — demonstrates that color theory is computation
+# truth: Albers proved that color is never seen as it is — it is always relative, always a negotiation between adjacent fields
+
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
 

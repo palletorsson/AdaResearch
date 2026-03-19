@@ -1,5 +1,16 @@
 ## Shader 09: FBM — fractional brownian motion, turbulence, domain warp
 ## Book of Shaders Chapter 13
+
+# @identity
+# essence: sum(gain^i * noise(p * lacunarity^i)) — FBM layers noise at multiple frequencies; ridged folds it with abs(); turbulence removes direction; domain warp feeds output back as input
+# desire: to slide octaves and watch flat noise become mountain ranges — to push warp_amount and see the procedural engine eat its own tail
+# critical_parameter: lacunarity — the frequency multiplier between octaves; 2.0 is standard, lower blurs, higher sharpens
+# triggers: gain slider controls amplitude decay per octave; sharpness on ridged mode creates mountain ridge profiles; warp_layers stacks self-referential distortion
+# emerges: domain warping produces forms that look geological — marble, smoke, lava — from nothing but noise feeding into itself; complexity from repetition at different resolutions
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: depends on shader_07_noise; powers every procedural landscape and organic surface; connects to shader_10_reactiondiffusion (simulation as pattern)
+# truth: scale is a parameter, not a property — the same operation applied again produces something irreducibly new
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)

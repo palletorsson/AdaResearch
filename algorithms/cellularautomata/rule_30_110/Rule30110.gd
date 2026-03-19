@@ -1,3 +1,13 @@
+# @identity
+# essence: Side-by-side elementary CA comparison — Rule 30 (chaotic) and Rule 110 (Turing-complete) visualized as dual MultiMesh grids. Each generation appends a row of colored cubes; Rule 30 in warm chaos tones, Rule 110 in cool complexity gradients.
+# desire: To show that eight bits separate noise from thought — same three-neighbor input, same pattern-to-state lookup, but Rule 30 produces cryptographic randomness while Rule 110 carries logic. Both advance in lockstep.
+# critical_parameter: grid_width (51) — cell count per row; max_generations (30) — vertical depth before reset; generation_speed (0.3s) — time between row advances
+# triggers: _process → generation_timer fires → advance_generation → apply_rule_30/apply_rule_110 → visualize both; reset at max_generations → reinitialize seeds
+# emerges: Rule 30's left half: turbulent triangles, no period, no compression. Rule 110's right half: structured gliders, localized structures, proven universal computation. The visual gap between them is the gap between entropy and information.
+# needs: VR rule number selector [missing], generation scrubber [missing], side-by-side parameter comparison [missing]
+# relationships: Focused companion to cellular_automata (1D scrolling texture) — same Wolfram rule engine, different visualization strategy. Appears in RecursiveEmergence_Rule_30_110 map under rule_30_110_gravity lookup.
+# truth: The distance between noise and thought is one lookup table apart. Rule 30 generates chaos. Rule 110 generates computation. Same format. Same input size. Radically different outputs.
+
 extends Node3D
 
 # Rule 30/110 Elementary Cellular Automaton Visualization

@@ -1,3 +1,13 @@
+# @identity
+# essence: eat(mushroom) -> alter_perception() -- pickable mushroom that rewrites sensory state
+# desire: a small organic form that dissolves when consumed, triggering perceptual transformation
+# critical_parameter: _dissolve_timer -- how quickly it vanishes after eating; effects depend on type
+# triggers: XRToolsPickable grab -> bring to face -> consume; dissolve animation; perception shift
+# emerges: the boundary between pickup and hazard dissolves -- medicine and poison share the same form
+# needs: XRToolsPickable [has]; dissolve animation [has]; mesh scaling [has]; VR grab interaction [has]
+# relationships: paired with stick_tool and becoming_catalyst as inventory items; Q-FEP dual-nature
+# truth: the mushroom is the same form whether it heals or harms -- context determines outcome.
+
 # edible_mushroom.gd
 # A mushroom the player can pick up and eat.
 # Extends XRToolsPickable so XR Tools' FunctionPickup can grab it.

@@ -2,10 +2,10 @@
 	"sequences": {
 		"biological_growth": {
 			"name": "Biological Growth: Life Finds a Way",
-			"truth": "Growth doesn't follow blueprints. It follows rules that respond to environment \u00e2\u20ac\u201d and what emerges surprises even the rules.",
-			"qfep_term": "\u00cf\u2020\u00ce\u201dE(S,t)",
-			"qfep_connection": "Biological growth IS the \u00cf\u2020 term \u00e2\u20ac\u201d the rate of entropy change over time. Slime mold finds shortest paths. Mushrooms colonize. Cracks propagate along stress. Each system increases or decreases local entropy through growth. The queer signature: growth that doesn't optimize, just persists.",
-			"description": "Algorithms inspired by biological growth processes. Slime mold solves mazes, mushroom mycelium networks, crack propagation follows stress fields, and tree generation builds branching forms. Nature's algorithms \u00e2\u20ac\u201d no central planner, no global view, just local rules and time.",
+			"truth": "Growth doesn't follow blueprints. It follows rules that respond to environment â€” and what emerges surprises even the rules.",
+			"qfep_term": "Ï†Î”E(S,t)",
+			"qfep_connection": "Biological growth IS the Ï† term â€” the rate of entropy change over time. Slime mold finds shortest paths. Mushrooms colonize. Cracks propagate along stress. Each system increases or decreases local entropy through growth. The queer signature: growth that doesn't optimize, just persists.",
+			"description": "Algorithms inspired by biological growth processes. Slime mold solves mazes, mushroom mycelium networks, crack propagation follows stress fields, and tree generation builds branching forms. Nature's algorithms â€” no central planner, no global view, just local rules and time.",
 			"layer": "systems",
 			"prerequisites": [
 				"noise",
@@ -15,16 +15,16 @@
 			"difficulty": "intermediate-advanced",
 			"estimated_time": "20-25 minutes",
 			"learning_objectives": [
-				"Physarum transport networks \u00e2\u20ac\u201d slime mold as optimization",
-				"Mycelium growth \u00e2\u20ac\u201d colonization without coordination",
-				"Crack propagation \u00e2\u20ac\u201d stress creates paths of least resistance",
-				"L-system tree generation \u00e2\u20ac\u201d grammar-driven branching"
+				"Physarum transport networks â€” slime mold as optimization",
+				"Mycelium growth â€” colonization without coordination",
+				"Crack propagation â€” stress creates paths of least resistance",
+				"L-system tree generation â€” grammar-driven branching"
 			],
 			"content": [
-				"BG_Slime_Mold: Physarum polycephalum simulation \u00e2\u20ac\u201d the organism that solves mazes and redesigns Tokyo's rail network",
-				"BG_Mushroom_Growth: Mycelium network expansion \u00e2\u20ac\u201d colonization, resource transport, fairy rings",
-				"BG_Crack_Propagation: Stress-driven fracture patterns \u00e2\u20ac\u201d cracks as cellular automata following material grain",
-				"BG_Tree_Forms: Procedural tree generation \u00e2\u20ac\u201d parametric branching, wind response, seasonal variation"
+				"BG_Slime_Mold: Brainless Optimization — Physarum polycephalum simulation â€” the organism that solves mazes and redesigns Tokyo's rail network",
+				"BG_Mushroom_Growth: Colonization Without Coordination — Mycelium network expansion â€” colonization, resource transport, fairy rings",
+				"BG_Crack_Propagation: Stress Finds a Path — Stress-driven fracture patterns â€” cracks as cellular automata following material grain",
+				"BG_Tree_Forms: Grammar Writes a Tree — Procedural tree generation â€” parametric branching, wind response, seasonal variation"
 			],
 			"maps": [
 				"BG_Slime_Mold",
@@ -40,7 +40,7 @@
 					"artifacts": [
 						"slimemold"
 					],
-					"compute": "MEDIUM \u00e2\u20ac\u201d 23KB, network simulation with _process"
+					"compute": "MEDIUM â€” 23KB, network simulation with _process"
 				},
 				"BG_Mushroom_Growth": {
 					"algorithms": [
@@ -49,7 +49,7 @@
 					"artifacts": [
 						"mushrooms"
 					],
-					"compute": "MEDIUM \u00e2\u20ac\u201d 29KB, growth simulation"
+					"compute": "MEDIUM â€” 29KB, growth simulation"
 				},
 				"BG_Crack_Propagation": {
 					"algorithms": [
@@ -58,7 +58,7 @@
 					"artifacts": [
 						"crackpropagation_ca"
 					],
-					"compute": "LIGHT \u00e2\u20ac\u201d 13KB, CA-based"
+					"compute": "LIGHT â€” 13KB, CA-based"
 				},
 				"BG_Tree_Forms": {
 					"algorithms": [
@@ -67,7 +67,7 @@
 					"artifacts": [
 						"tree_gen"
 					],
-					"compute": "LIGHT \u00e2\u20ac\u201d 15KB, one-shot generation"
+					"compute": "LIGHT â€” 15KB, one-shot generation"
 				}
 			},
 			"audio": {

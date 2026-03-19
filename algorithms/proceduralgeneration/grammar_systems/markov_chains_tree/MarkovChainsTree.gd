@@ -2,6 +2,16 @@
 extends Node3D
 class_name MarkovChainsTree
 
+# @identity
+# essence: Markov chain state machine growing a 3D tree — branch, grow, curve, or terminate as probabilistic state transitions
+# desire: To show that a tree is a random walk through growth states: each branch tip rolls dice to decide its next move
+# critical_parameter: branch_probability — the chance of forking; low values grow poles, high values grow bushes
+# triggers: High terminate_probability produces bonsai; high vertical_bias produces columnar; balanced produces naturalistic crown
+# emerges: Organic branching structure from eight Markov states — the tree shape is its transition matrix made spatial
+# needs: @tool editor preview [has], animated growth [has], bark/leaf materials [has], regenerate button [has], VR interaction [missing]
+# relationships: Tree variant of markov_chains in grammar_systems. Contrasts with L-system trees (rule rewriting vs state walking).
+# truth: A tree does not follow a blueprint — it walks a probability space, and the walk becomes wood.
+
 @export_group("Tree Settings")
 @export var tree_height: float = 10.0
 @export var max_iterations: int = 100

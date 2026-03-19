@@ -1,3 +1,13 @@
+# @identity
+# essence: fire(vertex) -> shrink(hull) -- convex polyhedron shedding vertices as projectiles
+# desire: a morphing convex hull launching its own points, shrinking with each attack
+# critical_parameter: vertex count / _fire_timer -- each projectile removes a vertex, hull shrinks
+# triggers: fire_timer triggers vertex ejection; hull recomputes; body shrinks as ammunition depletes
+# emerges: convexity as self-consuming weapon -- teaches convex geometry by destroying itself
+# needs: HazardCreatureBase [has]; convex hull computation [has]; vertex ejection [has]; VR interaction [missing]
+# relationships: embodies computationalgeometry sequence; self-consuming attack unique among hazards
+# truth: the hull teaches convexity by consuming itself -- structure is ammunition, geometry is finite.
+
 extends HazardCreatureBase
 class_name HullCrusher
 ## Computational geometry sequence — morphing convex polyhedron creature.

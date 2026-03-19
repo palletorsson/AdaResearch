@@ -1,3 +1,13 @@
+# @identity
+# essence: sign != signified -- a procedural pipe mesh with label saying this is not a pipe
+# desire: a pipe you can see and inspect but that insists it is not what it appears to be
+# critical_parameter: layers array -- maps representation levels (paint, canvas, word, variable) as strata
+# triggers: static display; player proximity reveals layer explanations; contradiction is always present
+# emerges: the gap between name and thing becomes tangible -- every data structure is a Magritte painting
+# needs: procedural pipe mesh [has]; label system [has]; layer explanation text [has]; VR interaction [missing]
+# relationships: foundational for artmathematics sequence; sign/signified gap extends to all formal systems
+# truth: representation is a gap pretending to be a bridge -- computation runs on signs detached from signified.
+
 # magritte_pipe.gd
 # "Ceci n'est pas une pipe" — This is not a pipe
 # René Magritte's 1929 painting that exposes the gap between signifier and signified

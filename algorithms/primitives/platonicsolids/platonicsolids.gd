@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: SurfaceTool.add_vertex(v) for each face of 9 hand-built polyhedra — diamond, prism, octahedron, rough rock, crystal cluster, bipyramid, truncated tetrahedron, geode, crystal shard — each colored with pride flag palette
+# desire: to see nine queer-colored geometric specimens arranged on a rainbow floor under pride-flag lighting — to hold mathematical form in a space that celebrates identity
+# critical_parameter: pride_colors array — six colors (red/orange/yellow/green/blue/purple) applied to each solid's wireframe shader, making geometry a vehicle for queer visibility
+# triggers: _ready builds all solids, rainbow floor, floating pride/trans banners, and six colored OmniLight3D in a circle; static display with no animation
+# emerges: the combination of hand-built polyhedra, pride lighting, and trans banners creates a mathematical cabinet of curiosities that is also a political statement
+# needs: [missing] no VR interaction — pure display; no sliders, no buttons, no grabbable objects
+# relationships: used in F14_Lab_Bench and F17_Zen_Garden as mathematical specimen; one of the core primitive artifacts alongside rainbow and homagetothesquare
+# truth: geometry does not belong to neutrality — every vertex can carry color, and color is never apolitical
+
 # PlatonicSolids.gd - Queer-themed geometric primitives in Godot 4
 # Based on Ada Research VR project structure
 

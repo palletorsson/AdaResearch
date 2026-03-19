@@ -1,3 +1,13 @@
+# @identity
+# essence: IK_chain(8_legs) -> surface_walk(any_geometry) -- procedural eight-legged surface crawler
+# desire: eight legs finding surfaces -- walls, ceilings, floors -- body follows feet, feet follow world
+# critical_parameter: IK target positions per leg -- each foot plants on nearest surface; pure procedural IK
+# triggers: continuous surface sampling; foot placement via IK; body orientation follows foot normals
+# emerges: the gait IS the geometry -- eight-leg redundancy dissolves the gait problem entirely
+# needs: CharacterBody3D [has]; procedural IK [has]; surface detection [has]; multi-surface walk [has]; VR interaction [missing]
+# relationships: parent of all leg critters (1-6 are subsets); contrasts with miura_crawler (legs vs folding)
+# truth: locomotion is not a feature -- it is the first argument a body makes about its space.
+
 # OctapodCrawler.gd
 # Procedural 8-legged wall-crawling creature — headcrab meets octopus.
 # The game's first enemy critter. Built entirely from code.

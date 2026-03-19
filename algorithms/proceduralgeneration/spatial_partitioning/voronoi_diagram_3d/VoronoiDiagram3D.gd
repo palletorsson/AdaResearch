@@ -76,6 +76,16 @@ var seed_points: Array[Vector3] = []
 var voronoi_cells: Array[VoronoiCell] = []
 var grid_resolution: Vector3i
 
+# @identity
+# essence: 3D Voronoi tessellation — seed points partitioning space into convex cells where every point belongs to its nearest seed
+# desire: To show that territory emerges from proximity alone: scatter seeds, and boundaries appear where claims collide
+# critical_parameter: num_seeds — how many territories; few seeds produce large kingdoms, many produce fine-grained mosaic
+# triggers: Regenerating with different seeds reorganizes all boundaries; render mode toggles faces, wireframe, and dual mesh
+# emerges: Organic spatial partitions from a single distance calculation per point
+# needs: @tool editor preview [has], seed distribution modes [has], color per cell [has], regenerate [has], VR interaction [missing]
+# relationships: Opening artifact in spatial_partitioning. Dual of delaunay_triangulation_3d_cell. Foundation for procedural terrain.
+# truth: The boundary between two territories is not drawn — it is discovered by distance alone.
+
 func _ready() -> void:
 	generate_voronoi()
 

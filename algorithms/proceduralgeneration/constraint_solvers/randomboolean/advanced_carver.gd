@@ -2,6 +2,16 @@
 ## Advanced CSG carving with multiple patterns and effects
 extends CSGCombiner3D
 
+# @identity
+# essence: CSG subtraction along procedural walk paths — random walk, spiral, branch, Perlin, tunnel patterns carving boolean voids
+# desire: To show that AND, OR, NOT applied to solid geometry produce caves, tunnels, and organic voids from boolean logic
+# critical_parameter: pattern — which carving strategy (random walk, spiral, branches, Perlin, grid tunnels) shapes the void
+# triggers: Random walk creates wormholes; spiral creates nautilus cores; branches create root systems; Perlin creates organic caves
+# emerges: Complex sculptural voids inside solid blocks from boolean subtraction along procedural paths
+# needs: Auto-generate [has], path visualization [has], seed control [has], VR interaction [missing]
+# relationships: Synthesis artifact for constraint_solvers sequence. Boolean CSG operations as spatial grammar alongside WFC.
+# truth: Subtraction is a generative act — what you remove defines the form more than what you leave.
+
 enum CarvePattern {
 	RANDOM_WALK,      # Standard random walk
 	SPIRAL,           # Spiral through the cube

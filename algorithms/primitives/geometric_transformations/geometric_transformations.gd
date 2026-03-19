@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Cycling demonstration of rotation, scaling, translation, and shearing applied to point, line, plane, and cube primitives
+# desire: To make matrix transformations visible: watch the same four operations reshape four geometric objects in sequence
+# critical_parameter: stage_interval — seconds per transformation type; controls the pace of the demonstration cycle
+# triggers: Each 3-second stage applies a new transformation; the four primitives deform together showing how transforms compose
+# emerges: Understanding that all mesh deformation reduces to four matrix operations applied to vertices
+# needs: Material setup [has], scene child references [has], VR interaction [missing — auto-cycling demo]
+# relationships: Core artifact across Meshes_One, Meshes_Three, and Meshes_Four. Foundation for all procedural geometry.
+# truth: A vertex does not know what shape it belongs to — it only knows the matrix that moves it.
+
 var time = 0.0
 var transformation_stage = 0
 var stage_timer = 0.0

@@ -1,6 +1,16 @@
 extends Node3D
 class_name DressSelector
 
+# @identity
+# essence: Three mannequin display forms with color-coded outfits and selection buttons — identity as wardrobe choice
+# desire: To present outfit selection as the final act of embodiment: the body fully assembled, now dressed by choice
+# critical_parameter: OUTFIT_DATA — the array of label/color pairs defining what identities are available to perform
+# triggers: Each mannequin on a pedestal with a selection button in front — press to choose your presentation
+# emerges: The synthesis of body progression: hands found, anchor placed, arms connected, torso estimated, now clothed
+# needs: Selection buttons [has], mannequin display [has], VR grab interaction [missing — buttons are visual only]
+# relationships: Final artifact in bodyprogression sequence. Follows torso_estimation_vis. Dress as performed identity.
+# truth: The outfit is not decoration — it is the last parameter of a body that was never given, only assembled.
+
 ## Dress/outfit selection interface with 3 mannequin display forms.
 ## Each mannequin has a different color and a selection button in front.
 

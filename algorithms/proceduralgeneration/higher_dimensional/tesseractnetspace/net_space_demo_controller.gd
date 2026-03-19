@@ -28,6 +28,16 @@ var camera_distance: float = 15.0
 var camera_angle: float = 0.0
 var camera_height: float = 10.0
 
+# @identity
+# essence: Desktop UI controller for tesseract net space — net type, dimensions, cube size, spacing, color, wireframe, hollow toggles
+# desire: To unfold a 4D hypercube into walkable 3D rooms and let players choose which of 261 possible nets to explore
+# critical_parameter: net_type — Dali Cross, Linear Chain, Folded Chain, Double Cross — different unfoldings of eight cubic cells
+# triggers: Switching net type reorganizes all cubes; hollow toggle reveals adjacency; wireframe shows edge structure
+# emerges: Architectural intuition for the fourth dimension through manipulation of its 3D shadow
+# needs: Desktop UI sliders [has], checkboxes [has], color picker [has], camera orbit [has], VR controls [missing]
+# relationships: Controller for tesseract_net_space_showcase in higher_dimensions. Contrasts with tesseract_tunnel (projection vs unfolding).
+# truth: To unfold a tesseract is to cut the fourth dimension — every net is a wound in hyperspace.
+
 func _ready() -> void:
 	# Connect UI signals
 	net_type_option.item_selected.connect(_on_net_type_selected)

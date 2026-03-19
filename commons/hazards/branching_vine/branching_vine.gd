@@ -1,3 +1,13 @@
+# @identity
+# essence: F -> F[+F]F[-F]F -- L-system grammar drives vine growth toward the player
+# desire: a vine growing from axiom F through production rules, branching procedurally toward its target
+# critical_parameter: _rules dictionary / _iteration_count -- grammar rules determine branching, iterations control depth
+# triggers: iteration_timer drives growth; player position attracts branch direction; damage on contact
+# emerges: biological growth pattern as hunting strategy -- the vine does not chase, it grows toward you
+# needs: HazardCreatureBase [has]; L-system string rewriting [has]; procedural mesh generation [has]; player targeting [has]
+# relationships: embodies L-systems sequence; contrasts with fractal_hydra (growth vs splitting)
+# truth: the simplest grammar generates the branching complexity of all plant life.
+
 extends HazardCreatureBase
 class_name BranchingVine
 ## L-systems sequence — procedural vine that grows via L-system rules.

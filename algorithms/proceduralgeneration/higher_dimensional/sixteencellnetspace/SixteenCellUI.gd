@@ -11,6 +11,16 @@ var stats_label: Label3D = null
 var hollow_on := false
 var spiral_on := false
 
+# @identity
+# essence: VR control panel for sixteen-cell net space — sliders and buttons adjusting size, spacing, hollow, and net pattern
+# desire: To give hands-on control over a 4D polytope projection: resize, respace, hollow out, cycle net patterns in real time
+# critical_parameter: pattern cycle — Cross, T-Shape, L-Shape, Zigzag, Spiral — each unfolding 16 tetrahedral cells differently
+# triggers: Size slider rescales the net; spacing slider separates cells; hollow toggle reveals internal structure; spiral adds twist
+# emerges: Intuition for 4D geometry through direct VR manipulation — the polytope becomes tangible through parameter play
+# needs: VR sliders [has], push buttons [has], Label3D [has], pattern cycling [has]
+# relationships: UI controller for sixteen_cell_net_space_showcase in higher_dimensions. Paired with SixteenCellNetSpace geometry node.
+# truth: You cannot see the fourth dimension, but you can adjust its projection until you feel it.
+
 var pattern_index := 0
 var pattern_names := ["Cross", "T-Shape", "L-Shape", "Zigzag", "Spiral"]
 

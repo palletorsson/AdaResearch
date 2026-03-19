@@ -1,6 +1,16 @@
 extends Node3D
 class_name NecklaceAnchor
 
+# @identity
+# essence: Vertical stand with torus ring and glowing pendant — a display piece showing the first body anchor point at neck
+# desire: To introduce the concept of body anchoring: a pendant at the neck as the seed from which embodiment grows outward
+# critical_parameter: pendant emission_energy — the glow intensity that draws attention to the anchor point as identity seed
+# triggers: The pendant slowly rotates, catching light; the torus ring marks where the necklace would sit on a body not yet assembled
+# emerges: The idea that identity accretes around physical anchors — the pendant is the first fixed point in floating fragments
+# needs: Animated pendant rotation [has], emissive material [has], VR interaction [missing — display only]
+# relationships: Second artifact in bodyprogression. Follows mirror_artifact (hands), precedes ik_arm_demo (arms).
+# truth: The body needs a center before it can have edges — the necklace is the seed, not the ornament.
+
 ## Pendant/necklace display on a stand showing an identity anchor point.
 ## A vertical stand with a torus necklace ring and a glowing pendant that slowly rotates.
 

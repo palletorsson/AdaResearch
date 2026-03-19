@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Proximity-based procedural tree spawner — generates parametric trees around VR camera position with distance culling
+# desire: To populate a forest that grows around the player: trees appear ahead and vanish behind, infinite generated nature
+# critical_parameter: generation_distance — the radius within which new trees spawn; controls forest extent around the player
+# triggers: Walking forward spawns trees ahead; max_trees caps density; min_tree_spacing prevents overlap
+# emerges: An endless procedural forest from a simple spawn/cull loop tied to camera position
+# needs: XR camera reference [has], distance-based generation [has], material system [has], VR walkthrough [has]
+# relationships: Final artifact in biological_growth (BG_Tree_Forms). Synthesizes grammar-driven growth with spatial management.
+# truth: The forest does not exist — it is generated around you, and the generation is the forest.
+
 # Direct reference to XR camera using relative path
 @onready var vr_camera = $"../XROrigin3D/XRCamera3D"
 

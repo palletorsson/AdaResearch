@@ -1,3 +1,13 @@
+# @identity
+# essence: fire(grid[i][j]) -> traverse(row_major) -- walking 4x4 grid firing cells by array index
+# desire: a sentinel attacking in row-major order, each cell lighting before firing -- traversal as combat
+# critical_parameter: _current_row / _current_col -- which cell fires next; row-major makes pattern learnable
+# triggers: fire_timer advances through [i][j]; cell lights, fires, resets; wraps at grid boundary
+# emerges: array indexing as attack pattern -- teaches [i][j] access by making each cell lethal
+# needs: HazardCreatureBase [has]; 4x4 cell grid [has]; row-major traversal [has]; cell highlight [has]; VR interaction [missing]
+# relationships: embodies array_tutorial sequence; pairs with data_tree_walker (linear vs hierarchical)
+# truth: the array attacks in row-major order -- i and j are not abstract, they are targeting coordinates.
+
 extends HazardCreatureBase
 class_name IndexSentinel
 ## Array Tutorial hazard — a walking 4×4 grid that fires cells by [i][j] index.

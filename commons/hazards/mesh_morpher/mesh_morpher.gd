@@ -1,3 +1,13 @@
+# @identity
+# essence: morph(sphere -> cube -> torus -> cylinder) -- 4 topological shapes, each a different attack
+# desire: a creature shifting between sphere, cube, torus, cylinder -- genus as combat strategy
+# critical_parameter: _current_topo / _morph_timer -- which topology is active determines attack type
+# triggers: morph_timer triggers change; transition_phase interpolates shapes; each has unique attack
+# emerges: topology as identity -- the creature's nature changes with genus, not just appearance
+# needs: HazardCreatureBase [has]; 4 topology meshes [has]; morph interpolation [has]; per-topology attacks [has]; VR interaction [missing]
+# relationships: embodies meshes sequence; contrasts with bricoleur_golem (fixed topologies vs improvised)
+# truth: genus is not cosmetic -- sphere, cube, torus, cylinder each encode different threats.
+
 extends HazardCreatureBase
 class_name MeshMorpher
 ## Meshes sequence creature — morphs between 4 topological shapes.

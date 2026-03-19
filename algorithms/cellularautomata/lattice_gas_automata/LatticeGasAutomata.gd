@@ -1,3 +1,13 @@
+# @identity
+# essence: Lattice gas automaton on a 20x20 grid with 8 velocity directions — particles propagate, collide (head-on pairs scatter perpendicular), and produce emergent fluid dynamics. Macroscopic density, velocity, and pressure computed from microscopic boolean states.
+# desire: To demonstrate that Navier-Stokes emerges from counting — particles obey trivial collision rules, yet the lattice forgets it is discrete. Vortices form. Turbulence cascades.
+# critical_parameter: grid_size (20) — lattice resolution; velocity_directions — 8 compass vectors defining the HPP/FHP-style lattice connectivity
+# triggers: _process → step_timer fires every 0.1s → update_lattice (collision + propagation + macroscopic calculation) → visualize all three layers
+# emerges: Four visualization layers: grid base (static), particle spheres (colored by direction), flow arrows (oriented by local velocity), density pillars (height = local density). Fluid behavior visible at macro scale from micro rules.
+# needs: VR obstacle placement [missing], flow speed control [missing], lattice topology selector [missing]
+# relationships: Bridges cellular automata to fluid dynamics — same grid logic as cellular_automata_2d, different interpretation. Appears in both RecursiveEmergence_Cellular_Automata_2D and RecursiveEmergence_Lattice_Gas_Automata maps.
+# truth: The continuous is a hallucination performed by the discrete at sufficient scale. Matter performing smoothness through sheer repetition.
+
 extends Node3D
 
 # Lattice Gas Automata Visualization

@@ -1,3 +1,13 @@
+# @identity
+# essence: next_note = markov_chain[current_note] -- algorithmic composition via probabilistic note selection
+# desire: melody that writes itself -- Markov chains choosing pitch, rhythm following tempo, scales shifting
+# critical_parameter: markov_chain transition probabilities -- which note follows which; tempo and scale set the frame
+# triggers: beat_timer fires notes per BPM; theme profiles reshape scale, tempo, vibrato, bass probability
+# emerges: music between noise and loops -- pattern almost holds, repetition almost breaks
+# needs: AudioStreamGenerator [has]; Markov chain state [has]; polyphonic note management [has]; VR controls [missing]
+# relationships: synthesis of all prior audio artifacts; Markov concept shared with grammar_markov hazard
+# truth: if a system produces music without intent, who is the musician? The rules, the randomness, or the listener?
+
 extends Node3D
 
 # Generative Music Algorithms

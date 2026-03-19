@@ -1,3 +1,13 @@
+# @identity
+# essence: legs_as_architecture(t) -- creature whose legs ARE structural members, walking architecture
+# desire: a mechanical strider where legs and building are the same thing
+# critical_parameter: leg positions / current_direction -- legs serve as both locomotion and structure
+# triggers: direction_timer changes patrol heading; legs cycle through walking motion; continuous movement
+# emerges: when legs become architecture, the creature constructs space by walking through it
+# needs: Node3D [has]; procedural legs [has]; patrol behavior [has]; VR interaction [missing]
+# relationships: paired with blockbuilderentity (walking architecture vs building creature)
+# truth: the tech strider's legs ARE architecture -- it does not walk through space, it builds space by walking.
+
 extends Node3D
 
 @export var walk_speed: float = 1.5

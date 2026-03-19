@@ -1,3 +1,13 @@
+# @identity
+# essence: CSP(variables, domains, constraints) -> solution | conflict -- graph coloring as minefield
+# desire: a 5x5 grid of tiles flickering in superposition until stepped on, collapsing to constraint colors
+# critical_parameter: _tile_domains -- which colors remain valid; stepping collapses domain to single value
+# triggers: player steps on tile -> domain collapses; constraints propagate; violation triggers damage
+# emerges: constraint satisfaction as spatial experience -- the web teaches CSP by making violations lethal
+# needs: Area3D [has]; tile domain tracking [has]; constraint propagation [has]; VR interaction [missing]
+# relationships: embodies constraint_solvers sequence; pairs with maze_spinner (generation vs satisfaction)
+# truth: a constraint web in superposition is possibility -- collapse is commitment, wrong commitment is damage.
+
 extends Area3D
 class_name ConstraintWeb
 ## Constraint-solvers sequence hazard — a 5x5 grid of tiles representing a CSP.

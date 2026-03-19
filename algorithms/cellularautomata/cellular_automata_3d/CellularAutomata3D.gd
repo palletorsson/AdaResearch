@@ -1,3 +1,13 @@
+# @identity
+# essence: 3D cellular automaton on a 12^3 grid — 26-neighbor Moore neighborhood, four rule sets (Life3D, Crystal Growth, Erosion, Diffusion). MultiMesh renders live cells as colored spheres; dying cells flash red before removal.
+# desire: To cycle through rule regimes — every rule_interval seconds the automaton switches rules and reinitializes, showing how the same grid substrate produces coral, crystal, erosion, and diffusion under different transition tables.
+# critical_parameter: current_rule (Rule3D enum) — selects which birth/survival/death thresholds apply; grid_size (12) — cube dimensions; max_generations (100) — simulation cap before halt
+# triggers: _process → generation_timer fires at generation_interval → generate_next_3d_generation; rule_timer → switch_3d_rule → reinitialize; GenerationControl/DensityIndicator → animated height indicators
+# emerges: Forms that the flat law never predicted — 2D rules given volume discover architecture. Crystal Growth seeds from center outward, Erosion strips sparse cells, Diffusion bridges corners. Same counting, different thresholds, radically different morphology.
+# needs: VR rule selector [missing], generation playback [missing], cell state inspection [missing]
+# relationships: The volumetric extension of cellular_automata_2d (2D grid life). Paired with cellular_automata_3d_stacked (stacked generation history). Appears in RecursiveEmergence_Cellular_Automata_3D map.
+# truth: The automaton does not know it has depth — it only counts neighbors. But depth knows it has the automaton. A flat law, given volume, discovers forms it was never told to make.
+
 extends Node3D
 
 var time = 0.0

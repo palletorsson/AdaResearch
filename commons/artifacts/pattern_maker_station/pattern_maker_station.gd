@@ -6,6 +6,17 @@
 #
 # Layout: XY back-panel (rotated 180 to face player), carpet on floor.
 # Reuses WallpaperGroups.get_symmetric_color() for tiling.
+
+# @identity
+# essence: symmetry_group(domain[x][y]) -> infinite_carpet — paint a small NxN grid, select one of 17 wallpaper groups, watch the GPU tile it into an infinite-seeming carpet via symmetry operators
+# desire: to touch cells on the upright panel with VR hands and see the floor carpet update in real time — to cycle through P1 to P6M and feel how constraint multiplies a fragment into architecture
+# critical_parameter: wallpaper_group — the symmetry operator that transforms a 4x4 domain into a universe; 17 groups, exactly 17, a hard constraint the universe imposes on 2D repetition
+# triggers: palette buttons select paint color; group cycle button advances through all 17 groups; flip X/Y and rotate CW transform the domain; clear resets to blank; touch painting via Area3D collision
+# emerges: the GPU shader carpet (wallpaper_tile.gdshader) with grout, noise distort, and aging parameters produces worn Italian mosaic effects from a handful of colored cells
+# needs: [has] push_button for group/flip/rotate/clear; [has] push_button palette selectors with emission indicators; [has] touch-paint via Area3D; [missing] no slider_horizontal controls
+# relationships: the hands-on synthesis station for the entire patterngeneration sequence; carpet uses WallpaperGroups from tiling_system; connects to Cove_Display_Gallery (gallery of all 17)
+# truth: structure does not emerge from complexity — it emerges from constraint applied to the almost-nothing
+
 extends Node3D
 class_name PatternMakerStation
 

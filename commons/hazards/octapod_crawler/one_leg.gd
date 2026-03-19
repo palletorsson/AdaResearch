@@ -1,3 +1,13 @@
+# @identity
+# essence: pogo(t) = bounce(single_IK_chain) -- one leg finding ground, the minimum of locomotion
+# desire: a single leg bouncing on one contact point -- the irreducible pogo stick
+# critical_parameter: single foot IK target -- one contact point means constant balance negotiation
+# triggers: continuous bounce cycle; procedural IK solves for ground; body wobbles around single support
+# emerges: locomotion from absolute minimum -- one leg forces the creature to pogo
+# needs: MeshInstance3D [has]; single IK chain [has]; bounce physics [has]; VR interaction [missing]
+# relationships: first in 1-to-8 leg progression; each additional leg changes the gait problem
+# truth: one leg, one contact point -- the pogo stick is locomotion reduced to its axiom.
+
 # one_leg.gd
 # ONE jumping leg — simplest possible FABRIK3D + SpringArm3D test.
 # The .tscn defines all nodes (Skeleton3D, bones, FABRIK3D, SpringArm3D, magnet).

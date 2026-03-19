@@ -1,3 +1,13 @@
+# @identity
+# essence: quadruped_gait(t) = diagonal_pairs(FL+BR, FR+BL) -- legs pair diagonally into trot and gallop
+# desire: four legs discovering diagonal pairing -- opposite corners move together
+# critical_parameter: diagonal pair timing -- FL+BR alternate with FR+BL; speed determines gait type
+# triggers: patrol_timer drives movement; gait alternates diagonal pairs; speed modulates walk/trot/gallop
+# emerges: diagonal pairing discovered not designed -- four legs naturally fall into this pattern
+# needs: MeshInstance3D [has]; quad IK chains [has]; diagonal gait [has]; patrol [has]; VR interaction [missing]
+# relationships: fourth in progression; introduces diagonal symmetry; dominant vertebrate pattern
+# truth: four legs pair diagonals because geometry demands it -- trot and gallop are necessities, not choices.
+
 # four_leg_critter.gd
 # Four-legged critter with STEPPING GAIT.
 # Each leg plants on the ground, stays planted while body moves,

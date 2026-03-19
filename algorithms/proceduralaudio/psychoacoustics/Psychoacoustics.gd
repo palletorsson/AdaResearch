@@ -1,3 +1,13 @@
+# @identity
+# essence: perception = transform(signal, cochlea, brain) -- the gap between pressure wave and heard sound
+# desire: masking, beating, binaural offsets -- auditory illusions revealing how hearing constructs reality
+# critical_parameter: masker_frequency / probe_offset -- where one tone renders another inaudible
+# triggers: theme profiles reshape masker frequency, probe timing, binaural offset, modulation depth
+# emerges: perception is not reception but generation -- the ear performs its own Fourier transform
+# needs: AudioStreamGenerator [has]; masker/probe envelope system [has]; binaural offset [has]; VR controls [missing]
+# relationships: capstone of proceduralaudio -- all synthesis lands between waveform and listener
+# truth: the instrument is the ear -- every synthesis decision is judged by what the listener constructs.
+
 extends Node3D
 
 # Psychoacoustics Visualization

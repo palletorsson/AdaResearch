@@ -1,3 +1,13 @@
+# @identity
+# essence: node(n) = node(n-1) * golden_angle * 0.618 -- Fibonacci spiral of shrinking spheres
+# desire: sphere nodes at the golden angle, each 0.618x the last, spawning recursive projectiles
+# critical_parameter: golden angle (137.5 deg) / scale ratio (0.618) -- Fibonacci parameters set geometry
+# triggers: spawn_timer adds nodes at golden angle; damage_timer fires from spiral nodes
+# emerges: Fibonacci sequence as spatial weapon -- golden ratio determines beauty and threat distribution
+# needs: player tracking [has]; spiral node generation [has]; golden angle [has]; projectiles [has]; VR interaction [missing]
+# relationships: embodies recursiveemergence; pairs with fractal_hydra (spiral vs branching)
+# truth: the golden angle distributes optimally -- same ratio arranging sunflower seeds arranges projectiles.
+
 extends Node3D
 class_name RecursionSpiral
 ## Recursive emergence sequence hazard — a Fibonacci spiral of shrinking sphere nodes.

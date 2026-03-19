@@ -2,6 +2,16 @@
 extends Node3D
 class_name PoissonDiskSampling3D
 
+# @identity
+# essence: Bridson's algorithm in 3D — dart-throwing with minimum distance rejection producing blue noise point distributions
+# desire: To show distribution between randomness and regularity: every point survives only by respecting its neighbors' boundaries
+# critical_parameter: min_distance — the exclusion radius; larger values produce sparser, more crystalline distributions
+# triggers: Low min_distance produces dense cloud; high produces sparse constellation; radius spheres reveal the exclusion zones
+# emerges: Even, natural-looking distributions with no clustering and no grid artifacts — blue noise from pure rejection
+# needs: @tool editor preview [has], multiple display modes [has], radius visualization [has], distance lines [has], VR interaction [missing]
+# relationships: Synthesis artifact in spatial_partitioning. Contrasts with Voronoi (partition vs distribution). Used for object placement.
+# truth: Blue noise is what remains when every random proposal that crowds its neighbor gets rejected — beauty through exclusion.
+
 @export_group("Sampling Settings")
 @export var sample_region: Vector3 = Vector3(10, 10, 10)
 @export var min_distance: float = 1.0

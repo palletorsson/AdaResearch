@@ -1,3 +1,13 @@
+# @identity
+# essence: Procedural kitbash environment — 30 modules (surrealist/mechanical/organic) placed randomly in 3D space, connected by pipes, beams, and floating bridges. Modular composition through randomized assembly.
+# desire: To be regenerated endlessly — connects to regenerate_emitters, clears all geometry, and rebuilds from scratch. Every instantiation is a unique surrealist landscape.
+# critical_parameter: generation_rules — "surrealist" spawns exquisite-corpse creatures and nonsensical machines, "mechanical" spawns joints and pipe systems, "organic" spawns coral and fluid vessels
+# triggers: regenerate_requested signal → full scene rebuild; _ready → initial generation with random color theme selection
+# emerges: A different world every time — the same code produces industrial cathedrals, alien nurseries, or surrealist galleries depending on the random seed and theme
+# needs: VR interaction [missing], module selection UI [missing], generation preview [missing]
+# relationships: The default environment artifact across data structures and geometry sequences — a procedural backdrop that gives each map a unique visual identity
+# truth: Randomness is not absence of structure — it is structure deferred to the moment of instantiation, where every possible world gets exactly one chance to exist.
+
 extends Node3D
 
 # Parameters for modular kitbashing generation

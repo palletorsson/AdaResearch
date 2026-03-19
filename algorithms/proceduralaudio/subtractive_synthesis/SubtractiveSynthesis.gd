@@ -1,3 +1,13 @@
+# @identity
+# essence: output(t) = filter(oscillator(t), cutoff, resonance) -- sculpting timbre by removing frequencies
+# desire: a bright sawtooth darkens as the filter sweeps down, resonance peaks at the cutoff edge
+# critical_parameter: filter_frequency / filter_resonance -- where removal happens and how much it feeds back
+# triggers: theme cycles reshape base frequency, filter drive, LFO rate; filter type rotates low/high/band/notch
+# emerges: identity through subtraction -- the Minimoog sound comes from what the filter withholds
+# needs: AudioStreamGenerator [has]; state-variable filter [has]; LFO modulation [has]; VR controls [missing]
+# relationships: complement of additive_synthesis (sculpt vs build); filter concept echoes subtractive sculpture
+# truth: identity emerges through what gets removed -- the material is always already there.
+
 extends Node3D
 
 var time = 0.0

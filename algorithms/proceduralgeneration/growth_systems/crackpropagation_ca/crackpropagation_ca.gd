@@ -2,6 +2,16 @@
 # Attach to a Node3D. Generates, grows and draws 2D crack lines on XZ-plane.
 extends Node3D
 
+# @identity
+# essence: Cellular automaton on a 2D stress grid — cells crack when local stress exceeds threshold, propagating fracture to neighbors
+# desire: To watch destruction emerge from accumulation: stress builds invisibly, then cracks bloom along paths of least resistance
+# critical_parameter: CRACK_THRESHOLD — the breaking point; lower values create dense shatter, higher values yield sparse clean fractures
+# triggers: High propagation rate produces explosive branching; direction bias produces river-like cracks; low threshold fragments everything
+# emerges: Realistic fracture networks from three cell states and local stress transfer
+# needs: Per-frame simulation [has], crack mesh visualization [has], seed control [has], VR interaction [missing]
+# relationships: Growth system in biological_growth alongside slimemold, mushrooms, tree_gen. CA-based like cellular_automata_3d_tree.
+# truth: A crack does not choose where to go — it reads the stress the material already carries.
+
 # ---------- Simulation parameters ----------
 @export var GRID_SIZE: int = 64        # cells per side
 @export var CELL_SIZE: float = 0.25    # world meters per cell

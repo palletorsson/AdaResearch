@@ -3,9 +3,9 @@
 		"spatial_partitioning": {
 			"name": "Spatial Partitioning: Dividing Space",
 			"truth": "To understand space, divide it. Every partition reveals structure hidden in continuity.",
-			"qfep_term": "\u00ce\u00bb",
-			"qfep_connection": "Spatial partitioning algorithms find order in continuous space\u00e2\u20ac\u201dthe \u00ce\u00bb parameter tuned for organization. Voronoi finds natural territories, Delaunay optimal connections, BSP recursive divisions.",
-			"formula": "space \u00e2\u2020\u2019 regions \u00e2\u2020\u2019 relationships",
+			"qfep_term": "Î»",
+			"qfep_connection": "Spatial partitioning algorithms find order in continuous spaceâ€”the Î» parameter tuned for organization. Voronoi finds natural territories, Delaunay optimal connections, BSP recursive divisions.",
+			"formula": "space â†’ regions â†’ relationships",
 			"description": "Algorithms that divide space into meaningful regions. Voronoi diagrams partition by proximity, Delaunay triangulation connects optimally, BSP trees divide recursively, Poisson sampling distributes evenly.",
 			"layer": "systems",
 			"prerequisites": [
@@ -82,6 +82,12 @@
 					"size_budget": "compact_only",
 					"rationale": "Poisson disk sampling in 3D: evenly distributed random points with guaranteed minimum spacing. Blue noise distribution — the synthesis of randomness and order."
 				}
+			],
+			"content": [
+				"ProceduralGeneration_Voronoi_Diagrams: Territories of Proximity",
+				"ProceduralGeneration_Delaunay_Triangulation: Optimal Triangulation",
+				"ProceduralGeneration_Space_Partitioning: Recursive Division",
+				"ProceduralGeneration_Poisson_Disk_Sampling: Blue Noise Distribution"
 			]
 		}
 	},

@@ -12,6 +12,16 @@
 ##   emission_strength – for visibility (default 0.8)
 ##   grout_width      – tile grout (default 0.02)
 
+# @identity
+# essence: for each Z-cluster of wall cubes, overlay all 6 faces with wallpaper_tile shader using a unique wallpaper group + neon palette + procedural domain texture
+# desire: to walk through a tunnel where every surface — walls, ceiling, floor — displays a different wallpaper group in neon color, immersing the body in mathematical symmetry
+# critical_parameter: cluster_size — cubes per Z-row before advancing to next wallpaper group; controls how much space each symmetry type occupies
+# triggers: on _ready, discovers GridSystem wall cubes, groups by Z, assigns wallpaper groups cyclically; builds ceiling and floor pattern cubes to close the tunnel
+# emerges: the combination of 8 neon palettes, 6 pattern types (blocks/stripes/diagonal/concentric/checker/cross), and 17 wallpaper groups produces a corridor that never visually repeats
+# needs: [missing] no VR sliders or buttons — configuration only through apply_grid_config; the gallery is a walk-through experience, not an interactive station
+# relationships: the architectural showcase complement to pattern_maker_station (interactive editing vs passive immersion); uses same wallpaper_tile.gdshader
+# truth: symmetry is not decoration — it is the mathematical structure that determines how a small truth propagates through space
+
 extends Node3D
 class_name WallPatternGallery
 

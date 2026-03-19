@@ -1,5 +1,16 @@
 ## Shader 08: Cellular Noise — Voronoi, Worley, Crackle
 ## Book of Shaders Chapter 12
+
+# @identity
+# essence: d = min(dist_to_points) — scatter seeds, ask every pixel which is closest; Voronoi partitions space by proximity, Worley returns distance, crackle = F2-F1 isolates ridges
+# desire: to toggle show_points and see the seeds that own each territory — to subtract F1 from F2 and watch cell walls appear from nothing
+# critical_parameter: scale — the number of seed points per unit area; more seeds = smaller cells = finer biological texture
+# triggers: speed slider animates seed positions; invert flips distance field; sharpness on crackle controls ridge width
+# emerges: crackle patterns (F2-F1) define structure entirely by boundaries — cell walls without cells, identity defined from contested borders between
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: extends shader_07_noise with spatial partitioning; Voronoi connects to PatternGeneration_Penrose_Tilings (aperiodic tessellation) and biological pattern formation
+# truth: Voronoi appears everywhere biology does — not because nature copies the algorithm, but because the algorithm describes what happens when competing centers claim space
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)

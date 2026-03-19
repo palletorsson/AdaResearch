@@ -17,6 +17,16 @@
 extends Node3D
 class_name FacadeBuilder
 
+# @identity
+# essence: Preset-driven or plan-driven facade composer — zones, bays, symmetry, and classical orders as architectural grammar
+# desire: To let players compose their own facades from learned vocabulary: base, columns, openings, cornice, crown
+# critical_parameter: preset — which architectural grammar (classical, gothic, palazzo, arcade, minimal) governs zone proportions
+# triggers: Switching presets transforms the entire facade; changing bay_count alters rhythm; symmetry mode reshapes hierarchy
+# emerges: Complete architectural facades from zone-based grammar rules
+# needs: apply_grid_config [has], plan JSON support [has], FacadeComposer integration [has], VR interaction [missing]
+# relationships: Synthesis artifact for facades sequence alongside facade_grammar_demo. Uses FacadeComposer part library.
+# truth: Every facade is a sentence in an architectural grammar — the preset is the dialect, the parameters are the words.
+
 const SC := preload("res://commons/composition/spatial_composition.gd")
 const FacadeComposerScript := preload("res://commons/facade_parts/facade_composer.gd")
 

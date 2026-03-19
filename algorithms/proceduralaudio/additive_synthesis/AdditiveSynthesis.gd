@@ -1,3 +1,13 @@
+# @identity
+# essence: spectrum(t) = sum(A_n * sin(n * f * t)) -- sound built by stacking sine harmonics
+# desire: oscillator pillars rise in harmonic series, each partial adding timbre to a growing chord
+# critical_parameter: harmonic_count -- number of partials stacked; theme profiles cycle queer/sci_fi/cyberpunk/epic
+# triggers: theme_timer cycles through 4 profiles, each reshaping fundamental frequency, harmonic weights, and vibrato
+# emerges: rich timbral color from pure sine waves -- bell, choir, organ from arithmetic frequency ratios
+# needs: AudioStreamGenerator [has]; real-time sample-level synthesis [has]; VR slider controls [missing]
+# relationships: paired with subtractive_synthesis (building up vs sculpting down); feeds fm_synthesis
+# truth: every complex sound is a sum of simple oscillations -- order produces richness, not randomness.
+
 extends Node3D
 
 var time = 0.0

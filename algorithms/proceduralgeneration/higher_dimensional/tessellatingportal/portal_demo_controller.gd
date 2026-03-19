@@ -26,6 +26,16 @@ var camera_distance: float = 8.0
 var camera_angle: float = 0.0
 var camera_height: float = 5.0
 
+# @identity
+# essence: Desktop UI controller for tessellating portal — sliders for radius, thickness, block size, color, emission, animation
+# desire: To let players tune a dimensional gateway: adjust portal geometry and see non-Euclidean space respond in real time
+# critical_parameter: portal_type — which tessellation pattern tiles through the portal; each creates different infinite-room topology
+# triggers: Radius change rescales the gateway; animation toggle starts rotation; randomize produces surprising configurations
+# emerges: Infinite non-Euclidean architecture from a finite portal mesh and seamless camera stitching
+# needs: Desktop UI sliders [has], color picker [has], animation toggle [has], camera orbit [has], VR controls [missing]
+# relationships: Controller for tessellating_portal_demo in higher_dimensions. Synthesis of projection, nets, and topology.
+# truth: The portal does not connect two rooms — it proves that the room was never bounded in the first place.
+
 func _ready() -> void:
 	# Connect UI signals
 	portal_type_option.item_selected.connect(_on_portal_type_selected)

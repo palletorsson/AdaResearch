@@ -1,3 +1,13 @@
+# @identity
+# essence: standing_wave(x,t) = cos(n*pi*x/L)*cos(omega*t) -- chamber with standing wave bars
+# desire: standing waves pinning nodes and anti-nodes to space -- safe at anti-nodes, lethal at nodes
+# critical_parameter: frequency / harmonic number -- determines node spacing; shifts every 8 seconds
+# triggers: player enters chamber; wave evaluated at position; node = damage, anti-node = safe
+# emerges: wave physics as spatial puzzle -- find anti-nodes to survive, but they shift
+# needs: Area3D [has]; standing wave viz [has]; harmonic shifting [has]; position damage [has]; VR interaction [missing]
+# relationships: embodies proceduralaudio sequence; pairs with wave_rider (traveling vs standing waves)
+# truth: safe at anti-nodes, lethal at nodes -- the wave divides space into life and death.
+
 extends Area3D
 class_name ResonanceChamber
 ## Procedural audio sequence hazard — a transparent chamber with standing wave bars.

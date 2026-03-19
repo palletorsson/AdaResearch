@@ -1,3 +1,13 @@
+# @identity
+# essence: cut(head) -> spawn(2 * head) -- multi-headed hydra with fractal branching to depth 3
+# desire: cut one head and two grow back, each smaller, inheriting the parent's attack -- self-similarity
+# critical_parameter: fractal depth / head count -- cutting increases heads exponentially until max depth
+# triggers: damage to a head triggers split; each new head inherits scaled attack; depth limits growth
+# emerges: the punishment for attacking IS more attackers -- self-similarity as defense strategy
+# needs: HazardCreatureBase [has]; head/neck mesh generation [has]; fractal splitting [has]; VR interaction [missing]
+# relationships: embodies fractals sequence; pairs with recursion_spiral (branching vs spiraling)
+# truth: the hydra is the fractal -- damage at any scale reproduces the pattern at smaller scale.
+
 extends HazardCreatureBase
 class_name FractalHydra
 ## Fractals sequence — multi-headed hydra with fractal branching.

@@ -2,6 +2,16 @@
 extends Node
 class_name VoxelField
 
+# @identity
+# essence: Layered simplex noise + sphere field evaluated at continuous 3D coordinates — scalar field as landscape
+# desire: To define a volumetric field where isosurfaces, gradients, and regions of interest emerge from noise alone
+# critical_parameter: iso — the isosurface threshold where noise becomes surface; shifting it reveals or hides entire topographies
+# triggers: Adjusting frequency reshapes terrain scale; iso sweep carves caves from mountains; ROI search finds curvature peaks
+# emerges: Organic scalar landscapes from two octaves of noise plus a soft sphere falloff
+# needs: No VR controls [missing] — pure data layer consumed by marching cubes and ROI finders
+# relationships: Feeds VoxelNoiseROIs which visualizes its interesting_score regions. Consumed by marching cubes extractors.
+# truth: A field has no surface until you choose a threshold — the landscape is a decision, not a fact.
+
 @export var seed: int = 1337
 @export var scale: float = 1.0          # world meters per voxel step
 @export var iso: float = -0.3            # isosurface value

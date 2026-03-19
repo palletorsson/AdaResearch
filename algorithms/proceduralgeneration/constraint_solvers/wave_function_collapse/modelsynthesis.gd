@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Model Synthesis (Merrell 2007) — 3D voxel generation via overlap constraints from exemplar with coherence search
+# desire: To grow a cave system from a small example: learn local neighborhoods and synthesize globally coherent output
+# critical_parameter: overlap_size — how many voxels of context must match; larger = more faithful, slower
+# triggers: Auto-generate fills the volume; coherence search accelerates by reusing exemplar positions; debug shows internals
+# emerges: Caves, tunnels, and chambers that look like the exemplar but extend far beyond it
+# needs: Exemplar generation [has], coherence optimization [has], auto-generate [has], debug mode [has], VR interaction [missing]
+# relationships: Core artifact in constraint_solvers alongside wfc_dungeon_generator. Model Synthesis is WFC's volumetric cousin.
+# truth: The cave was never designed — it was constrained into existence, neighborhood by neighborhood.
+
 @export_group("Model Synthesis Parameters")
 @export var exemplar_size: Vector3i = Vector3i(8, 8, 8)  # Size of input exemplar
 @export var output_size: Vector3i = Vector3i(32, 16, 32)  # Size of output synthesis

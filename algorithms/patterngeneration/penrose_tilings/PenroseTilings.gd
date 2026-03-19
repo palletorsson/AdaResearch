@@ -1,3 +1,13 @@
+# @identity
+# essence: aperiodic_tiling(n) = subdivide(kite, dart) -- perfect order without repetition from two tiles
+# desire: an infinite plane tiled with kites and darts that never repeats yet maintains five-fold symmetry
+# critical_parameter: current_iteration / max_iterations -- subdivision depth controlling tile count and complexity
+# triggers: iteration_timer drives progressive subdivision; each level splits tiles into smaller kite/dart pairs
+# emerges: infinite variety from finite rules -- discovered independently in Islamic architecture and crystallography
+# needs: triangle subdivision algorithm [has]; color-coded tile display [has]; VR interaction [missing]
+# relationships: capstone of artmathematics MathArt_Cultural_History; connects to tessellation theory
+# truth: aperiodic order proves structure need not repeat to be perfectly organized -- finite means, infinite coverage.
+
 extends Node3D
 
 var time = 0.0

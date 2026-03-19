@@ -2,6 +2,16 @@
 extends MeshInstance3D
 class_name DelaunayTriangulation3DCell
 
+# @identity
+# essence: Incremental Delaunay triangulation in 3D — circumsphere-tested tetrahedralization with grabbable vertex interaction
+# desire: To show the dual of Voronoi: optimal triangulation where no point violates any circumsphere, dragging a vertex re-triangulates live
+# critical_parameter: randomness — how far points deviate from hierarchical placement; 0 = regular lattice, 1 = scattered cloud
+# triggers: Grabbing a vertex and dragging re-triggers triangulation; low randomness produces crystalline; high produces chaotic mesh
+# emerges: Mathematically optimal triangulation from a single geometric constraint applied everywhere
+# needs: @tool editor preview [has], grabbable VR points [has], edge/vertex visualization [has], Label3D [has]
+# relationships: Dual of voronoi_diagram_3d in spatial_partitioning. Foundation for mesh generation in meshes sequence.
+# truth: One constraint — no point inside any circumsphere — is enough to produce the best possible triangulation.
+
 @export var generations: int = 7
 @export var initial_points: int = 20
 @export var subdivision_factor: float = 0.5

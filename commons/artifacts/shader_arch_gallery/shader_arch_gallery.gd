@@ -10,6 +10,16 @@
 ##   cube_size         – size of each cube (default 1.0)
 ##   emission_strength – emission for visibility (default 0.8)
 
+# @identity
+# essence: for i in total_cubes: cube[i].material = wallpaper_tile(random_group, random_palette, random_domain, random_scale) — every cube in a tunnel is a unique patchwork tile
+# desire: to walk through a self-built tunnel where floor, walls, and ceiling are each a different wallpaper pattern — Art to Eat style patchwork quilted in light
+# critical_parameter: tunnel_length — how many cubes deep the tunnel extends; 25 cubes means hundreds of unique shader-pattern surfaces
+# triggers: _ready builds the full tunnel geometry procedurally; each cube gets a random wallpaper group (0-16), palette (10 options), domain pattern (10 generators), and tile_scale
+# emerges: 10 domain generators (blocks, stripes, diagonal, cross, concentric, checker, scatter, stairs, zigzag, frame) combined with 10 palettes and 17 groups produce a tunnel that feels hand-curated but is entirely algorithmic
+# needs: [missing] no VR sliders or buttons — pure architectural walk-through; configuration only through apply_grid_config
+# relationships: the culmination of the patterngeneration sequence; synthesizes wallpaper groups, shader techniques, and procedural domain generation into a single immersive environment
+# truth: a patchwork is not random — it is every possible pattern given exactly one tile to exist in, and the corridor is the argument that they all deserve space
+
 extends Node3D
 class_name ShaderArchGallery
 

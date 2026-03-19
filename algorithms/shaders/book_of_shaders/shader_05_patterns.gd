@@ -1,5 +1,16 @@
 # Shader 05: Patterns — tiles, truchet, Wang tiles, Voronoi, noise synthesis
 # Elevated: 3 modes, VR controls, apply_grid_config
+
+# @identity
+# essence: tile_uv = fract(uv * grid) — one function definition, infinite instantiation; three modes cover classic tiling, Wang+Voronoi aperiodic patterns, and noise synthesis
+# desire: to press the Mode button and cycle from bricks to Voronoi to domain warp — to see the same UV space fold through radically different logics
+# critical_parameter: grid_size — the integer that multiplies space, turning one tile into a field
+# triggers: mode button cycles CLASSIC/WANG_VORONOI/NOISE; reset rebuilds current mode; aperiodic_mix slider interpolates between periodic and aperiodic Wang tiling
+# emerges: Truchet tiles from random corner flips produce labyrinths no one designed; Voronoi edge mode (F2-F1) reveals crackle patterns — structure defined entirely by boundaries
+# needs: [has] push_button for Mode and Reset; [has] ShaderRackPanel sliders per display
+# relationships: synthesizes shader_01 through shader_04; gateway to shader_08_cellularnoise (Voronoi) and PatternGeneration_Wang_Tiles (aperiodic theory)
+# truth: fract() does not copy — it folds space; the pattern was always there, the function just reveals where the seams are
+
 extends Node3D
 
 enum Mode { CLASSIC, WANG_VORONOI, NOISE }

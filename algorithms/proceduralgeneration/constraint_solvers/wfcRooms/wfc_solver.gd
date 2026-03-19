@@ -3,6 +3,16 @@
 ## Attach to a Node3D in your scene to generate procedural dungeons
 extends Node3D
 
+# @identity
+# essence: 2D Wave Function Collapse dungeon generator — room and corridor tiles collapsed via socket adjacency into floor plans
+# desire: To generate dungeons that feel designed but were never drawn: rooms connect because the rules permit nothing else
+# critical_parameter: grid_width x grid_height — the dungeon footprint; larger grids produce more complex layouts
+# triggers: Auto-generate fills the grid on ready; seed control enables reproducible dungeons; max_iterations prevents loops
+# emerges: Coherent dungeon layouts with rooms, corridors, and props — architecture from tile adjacency rules alone
+# needs: Tile prototype loading [has], socket rules [has], floor/wall materials [has], auto-generate [has], VR walkthrough [has]
+# relationships: Dungeon application of WFC in constraint_solvers. Contrasts with BSP dungeon generation (constraint vs division).
+# truth: A dungeon is not designed — it precipitates from adjacency rules, and the rules never see the whole.
+
 ## Size of the dungeon grid
 @export var grid_width : int = 20  # Scaled up
 @export var grid_height : int = 20 # Scaled up

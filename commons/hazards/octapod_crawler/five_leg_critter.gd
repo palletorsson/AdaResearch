@@ -1,3 +1,13 @@
+# @identity
+# essence: pentapod_asymmetric(t) = break_bilateral(5_legs) -- five legs shatter bilateral symmetry
+# desire: an odd-legged creature that cannot pair symmetrically -- five forces asymmetric gait
+# critical_parameter: asymmetric foot placement -- five legs have no bilateral pairing; gait must be improvised
+# triggers: patrol_timer drives movement; step gait cycles through 5 legs with no symmetric shortcut
+# emerges: bilateral symmetry breaking as locomotion puzzle -- five is the awkward prime
+# needs: MeshInstance3D [has]; 5 IK chains [has]; asymmetric gait [has]; patrol [has]; VR interaction [missing]
+# relationships: fifth in leg progression; first odd number past 3 that breaks all pairing strategies
+# truth: five legs break bilateral symmetry -- the gait cannot be mirrored, only invented.
+
 # five_leg_critter.gd
 # Five-legged critter with STEPPING GAIT.
 # Each leg plants on the ground, stays planted while body moves,

@@ -1,6 +1,16 @@
 extends Node3D
 class_name FourierTransform
 
+# @identity
+# essence: X(f) = sum(x(t) * e^(-2*pi*i*f*t)) — decomposes a composite waveform into frequency spectrum bars; 5 harmonics + noise synthesized in time domain, DFT computed per frame for visualization
+# desire: to see a messy waveform dissolve into clean frequency bars — to hear the sci-fi theremin audio that the same harmonics produce while watching them separate visually
+# critical_parameter: fundamental_freq — the base frequency whose integer multiples (harmonics) compose the signal; changing it shifts the entire spectrum
+# triggers: _process updates waveform in real time, computes simplified DFT, animates transform engine and data flow particles; AudioStreamGenerator produces theremin-like audio from the same harmonics
+# emerges: the data flow particles tracing sinusoidal paths between time and frequency domains make the abstract transform physically visible — information flows through the machine
+# needs: [missing] no VR slider_horizontal or push_button — no interactive control of fundamental_freq or noise_level; relies on .tscn scene tree nodes ($TimeDomain, $FrequencyDomain, etc.)
+# relationships: the core artifact for F17_Zen_Garden (contemplative mathematical object); connects to spectrum_display (frequency analysis) and standing_waves (wave physics)
+# truth: every signal is a sum of pure frequencies — the Fourier transform does not create this decomposition, it reveals the one that was always there
+
 var time: float = 0.0
 var transform_progress: float = 0.0
 var frequency_resolution: float = 0.0

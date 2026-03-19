@@ -4,7 +4,7 @@
 			"name": "Computational Geometry",
 			"description": "Explore geometric algorithms and spatial computation",
 			"qfep_term": "F",
-			"qfep_connection": "Geometric computation is exact, deterministic, order-maximizing \u00e2\u20ac\u201d the pure F-domain. Convex hulls, Voronoi diagrams, and triangulations find the minimal structures that organize spatial data.",
+			"qfep_connection": "Geometric computation is exact, deterministic, order-maximizing â€” the pure F-domain. Convex hulls, Voronoi diagrams, and triangulations find the minimal structures that organize spatial data.",
 			"difficulty": "advanced",
 			"estimated_time": "30-35 minutes",
 			"learning_objectives": [
@@ -14,17 +14,17 @@
 				"Morphological operations"
 			],
 			"maps": [
-				"Geometric_1",
-				"Geometric_2",
-				"Geometric_3",
-				"ComputationalGeometry_Medial_Axis_Transform",
-				"ComputationalGeometry_Distance_Fields_SDF",
-				"ComputationalGeometry_Morphological_Operations",
-				"ComputationalGeometry_Closest_Pair_Problem",
-				"ComputationalGeometry_Line_Intersection",
-				"ComputationalGeometry_Point_in_Polygon",
-				"ComputationalGeometry_Convex_Hull_Algorithms",
-				"ComputationalGeometry_Euclidean_Distance_Transform"
+				"Geometric_1: Grid as Ground Truth",
+				"Geometric_2: Void as Datum",
+				"Geometric_3: Irregular Exactitude",
+				"ComputationalGeometry_Medial_Axis_Transform: Skeleton of Shape",
+				"ComputationalGeometry_Distance_Fields_SDF: Distance Everywhere at Once",
+				"ComputationalGeometry_Morphological_Operations: Erosion and Dilation",
+				"ComputationalGeometry_Closest_Pair_Problem: Nearest Two Among Many",
+				"ComputationalGeometry_Line_Intersection: Where Paths Cross",
+				"ComputationalGeometry_Point_in_Polygon: Containment by Crossing Count",
+				"ComputationalGeometry_Convex_Hull_Algorithms: Tightest Boundary",
+				"ComputationalGeometry_Euclidean_Distance_Transform: Distance as Terrain"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_computationalgeometry",
