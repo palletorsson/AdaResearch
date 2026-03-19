@@ -1,6 +1,16 @@
 # bias_visualizer.gd
 extends Node3D
 class_name BiasVisualizer
+
+# @identity
+# essence: embedding_space(words, gender_axis) -> proximity_reveals_prejudice
+# desire: see whose edge cases the training data forgot
+# critical_parameter: analogy_type — switches between gender-profession, gender-trait, and algorithmic redlining
+# triggers: push-button selection cycles analogy modes; word proximity to gendered anchors shifts meaning
+# emerges: the uncomfortable recognition that "neutral" embeddings reproduce structural inequality
+# needs: VR push buttons [has], rotation toggle [has], word grab interaction [missing]
+# relationships: unlocks critical algorithmic thinking; depends on foundations crisis (incompleteness); contrasts ordered_grid (perfect pattern vs biased pattern)
+# truth: classification systems do not describe the world — they encode whose categories get to count
 ## Visualizes bias in word embeddings using a 3D word cloud.
 ## Words are positioned in a simulated embedding space where proximity to
 ## gendered anchors (man/woman) reveals learned stereotypical associations.

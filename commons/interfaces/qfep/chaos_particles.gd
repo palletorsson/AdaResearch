@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPChaosParticles
 
+# @identity
+# essence: GPU_particles(spread=180, velocity=random, angular_velocity=+-720) -> dissolution
+# desire: feel structure explode outward — every particle fleeing every other
+# critical_parameter: speed_max — controls how violently particles escape coherence
+# triggers: burst() creates explosive pulse; set_intensity() scales velocity and count
+# emerges: brief accidental alignments in the noise — ghosts of pattern in pure entropy
+# needs: VR intensity control [missing], burst trigger [missing]
+# relationships: contrasts ordered_grid (lambda=0 vs lambda=1); paired with dissolving_form; unlocks understanding of entropy term E(S)
+# truth: at lambda=1, information has no structure — dissolution is not destruction but the liberation of possibility
+
 ## Particle count (high for chaos)
 @export var particle_count: int = 300
 

@@ -1,4 +1,15 @@
 # PercolationNetwork3D.gd
+
+# @identity
+# essence: P(occupied) = threshold -> CA flow propagation from top to bottom — does the random lattice percolate?
+# desire: to stand inside a 3D lattice and watch pink flow seep through white cubes, hoping it reaches the bottom before paths run out
+# critical_parameter: PERCOLATION_THRESHOLD (0.4) — the probability that defines whether the system connects or fragments; near p_c the outcome is uncertain
+# triggers: _process ticks the CA every frame; flow propagates through 6-connected neighbors; collision removed from flowing cubes so player can walk through the network
+# emerges: at the critical threshold, the percolating cluster forms a fractal — neither filling the space nor vanishing, but threading through it
+# needs: per-cube collision [has]; flow visualization [has]; real-time CA [has]; VR threshold slider [missing]; Label3D [missing]
+# relationships: bridges cellularautomata sequence to proceduralgeneration; contrasts with caverandomwalk (random walk vs random lattice); teaches phase transitions
+# truth: connectivity is not gradual — below the threshold nothing connects, above it everything does, and at the threshold the system decides
+
 # Attach this script to a Node3D in your scene
 extends Node3D
 

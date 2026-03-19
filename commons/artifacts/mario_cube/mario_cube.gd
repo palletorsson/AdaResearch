@@ -1,5 +1,16 @@
 # mario_cube.gd — Listens for NextCube signal, removes DarkSphere, shows rainbow
 extends Node3D
+
+# @identity
+# essence: event -> destroy(DarkSphere) + reveal(Rainbow) — one-shot state transition from darkness to color
+# desire: to punch a block and break the darkness open, rainbow erupting where void used to be
+# critical_parameter: _activated — boolean gate that ensures the transformation happens exactly once, making it feel like a revelation
+# triggers: NextCube.next_requested signal or player body collision — either path leads to the same irreversible moment
+# emerges: the elastic tween on the rainbow and the back-ease shrink on the sphere create a visual call-and-response that feels choreographed
+# needs: NextCube signal [has]; DarkSphere reference [has]; player collision [has]; VR grab [missing]
+# relationships: depends on dark_sphere (destroys it); depends on NextCube (trigger); rainbow echoes the rainbow artifact's color bands
+# truth: joy is not the presence of color — it is the moment darkness becomes color
+
 ## Reacts to NextCube activation or player collision by removing a DarkSphere
 ## (with a shrink-to-zero tween) and revealing a 7-band rainbow arc.
 ## Each band is a procedural half-circle ArrayMesh at increasing radii.

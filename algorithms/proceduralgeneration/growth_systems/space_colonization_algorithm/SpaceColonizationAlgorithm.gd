@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: for each leaf_node: find closest attractor, grow segment_length toward it, kill attractor when reached — space colonization
+# desire: to watch a vascular network bloom from a single root as branches compete for scattered attractor points in 3D
+# critical_parameter: kill_distance — the radius at which an attractor is consumed; too small and branches overshoot, too large and the tree is sparse
+# triggers: regenerate rebuilds entirely; step_growth advances one iteration; toggle_animation switches between instant and animated growth
+# emerges: natural branch tapering from thickness_decay creates tree-like hierarchy without any explicit tree data structure
+# needs: attraction point display [has]; cube guide [has]; step/animate toggle [has]; VR attractor placement [missing]
+# relationships: follows GeneticProgramming (evolution vs growth); contrasts with branching_growth_algorithm (attractor-driven vs free branching)
+# truth: a tree does not know its shape — it only knows which direction has light, and how far to reach before stopping
+
 @export_group("Target Shape")
 @export var cube_size: Vector3 = Vector3(4, 4, 4)
 @export var attraction_points_count: int = 500

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: output(x,y) = Σ kernel(i,j) · image(x+i, y+j) — convolution as local pattern matching
+# desire: slide a kernel across an image with your hands, watch edges and features materialize
+# critical_parameter: kernel weights — Sobel detects edges, Gaussian blurs, Sharpen enhances
+# triggers: painting pixels changes the input image; applying different filters reveals different truths about the same data
+# emerges: the realization that "seeing" is not passive — it requires a choice of what to look for
+# needs: VR pixel painting [has conceptual], grabbable filter kernels [has], sliding kernel animation [has]
+# relationships: unlocks convolutional_neural_networks_cnns_vr (learned kernels vs hand-designed); depends on neural_networks_vr (feature hierarchy)
+# truth: every act of perception is a convolution — a commitment to which local patterns matter
+
 # VR-Reimagined Computer Vision
 # Interactive image processing with spatial convolution filters
 # Real-time edge detection, feature extraction, and object detection

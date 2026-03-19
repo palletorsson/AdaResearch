@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: N rigid spheres sampled from named color palettes — physics + palette = chromatic rain
+# desire: to toss, scatter, and watch colored balls pool and bounce, making palette differences visceral through physics
+# critical_parameter: current_palette_index — switches the entire chromatic vocabulary; same physics, different visual language
+# triggers: palette cycling recolors all balls instantly; falling below threshold respawns with new random palette color
+# emerges: balls cluster by momentum into accidental color groupings that look curated but are pure physics
+# needs: MultiMesh renderer [has]; palette cycling [has]; VR grab [missing]; turret integration [has]
+# relationships: depends on color_palettes.tres; colorballs group lets turret find and shoot at them; feeds into brick_wall_factory as color source contrast
+# truth: a color only becomes real when it has mass — palette theory means nothing until you can throw it
+
 # Random Color Rigidbody Balls - Sizes between handballs and golfballs
 # Creates physics-enabled balls with random colors from palette system
 

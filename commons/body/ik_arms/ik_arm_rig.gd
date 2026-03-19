@@ -238,8 +238,6 @@ func _build_procedural_mesh() -> void:
 
 	## Skin resource with bind poses
 	var skin := Skin.new()
-	for bone_i in range(_skeleton.get_bone_count()):
-		skin.add_bind(_skeleton.get_bone_count()) # placeholder, resized below
 	skin.set_bind_count(_skeleton.get_bone_count())
 	for bone_i in range(_skeleton.get_bone_count()):
 		skin.set_bind_bone(bone_i, bone_i)

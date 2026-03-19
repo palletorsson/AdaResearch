@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: pillar_grid(rows, cols) colored from palette[i % palette.size()] — vertical color swatches as architectural columns
+# desire: to walk a colonnade where each pillar is a different color, feeling palette relationships through spatial rhythm
+# critical_parameter: current_palette_index — cycling palettes transforms the colonnade's mood while the geometry stays fixed
+# triggers: cycle_to_next_palette() regenerates all pillars with the next palette; GameManager provides gradient palettes
+# emerges: the grid layout creates sight-lines through columns where distant pillars optically mix with near ones
+# needs: palette cycling [has]; pillar.tscn prefab [has]; VR palette selector [missing]; Label3D [missing]
+# relationships: depends on color_palettes.tres and pillar.tscn; contrasts with brick_wall_factory (horizontal vs vertical); feeds into color_sets_overview (structured vs grabbable)
+# truth: a column of color has gravity that a flat swatch does not — verticality makes color feel like it stands for something
+
 const PILLAR_SCENE = preload("res://commons/primitives/pillar/pillar.tscn")
 const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 

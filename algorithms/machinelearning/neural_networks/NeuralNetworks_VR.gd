@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: layers of neurons connected by weighted edges; forward pass propagates signal, backward pass propagates error
+# desire: walk through each layer as a physical room, throw data into the input, watch activations cascade and gradients flow back
+# critical_parameter: learning_rate — controls how aggressively weights change during backpropagation
+# triggers: auto_train drives forward/backward passes; backprop particles flow in reverse; data particles enter the network
+# emerges: the spatial intuition that depth creates abstraction — each room transforms the signal further
+# needs: grabbable neurons [has], throwable data [has], visible weight connections [has], backprop particle flow [has]
+# relationships: depends on gradient_descent_visualization (training IS optimization); unlocks lstms_vr (adding memory) and convolutional_neural_networks_cnns_vr (adding spatial structure)
+# truth: a neural network is not a brain — it is a differentiable function that learns by following its own error gradient
+
 # VR-Reimagined Neural Network Visualization
 # Walk through network layers as physical rooms
 # Interactive forward/backward propagation with visible weights

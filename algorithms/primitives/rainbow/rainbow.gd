@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: ROYGBIV arc(inner_radius + i*thickness) — concentric half-circle bands from ArrayMesh, primary + fainter secondary
+# desire: to stand beneath a double rainbow and feel the scale of spectral order arching overhead
+# critical_parameter: SECONDARY_FADE — controls how visible the second rainbow is, teaching that double rainbows exist with reversed color order
+# triggers: atmospheric particles drift with sin(time); no interaction triggers — the rainbow simply is
+# emerges: the reversed color order of the secondary rainbow is physically accurate and usually surprises people
+# needs: atmospheric particles [has]; VR scale [has]; interactive angle control [missing]; Label3D [missing]
+# relationships: echoes mario_cube (reveals rainbow); contrasts with dark_side_prism (arc vs linear); precedes rainbow_hallway (static vs immersive)
+# truth: a rainbow has no location — it exists only in the geometry between sun, water, and eye
+
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
 

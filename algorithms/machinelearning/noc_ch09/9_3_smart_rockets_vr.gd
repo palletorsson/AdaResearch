@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: fitness(x) = 1/d(x, target)^2; DNA = [thrust_vectors]; select → crossover → mutate
+# desire: watch a swarm of rockets evolve from chaos to precision across generations
+# critical_parameter: mutation_rate — too low freezes, too high forgets
+# triggers: obstacle collisions kill fitness; target proximity rewards; generation boundary resets
+# emerges: coordinated flight paths through gaps nobody designed
+# needs: VR slider for mutation_rate [has], slider for obstacle gap [has]
+# relationships: unlocks gradient_descent_visualization (optimization WITH gradient); depends on evolvingflowers (shared GA pattern)
+# truth: selection pressure alone, without any gradient, discovers solutions in spaces too vast to search
+
 ## Smart Rockets — evolves rocket trajectories via genetic algorithm.
 ## Each rocket carries a DNA sequence of thrust vectors. The population breeds
 ## based on proximity to the target. Obstacles create selection pressure.

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: N concentric SurfaceTool cylinders with sin() + Perlin displacement -> layered translucent membrane sculpture
+# desire: to peer into nested translucent layers and see color shift from purple to orange as depth increases — geology made of light
+# critical_parameter: undulation_amount — controls the amplitude of wave displacement; at 0 the layers are smooth cylinders, at high values they fold into biological forms
+# triggers: Space key regenerates with new noise seed; rotation animation slowly reveals the structure from all angles
+# emerges: subsurface scattering + alpha transparency creates the illusion of depth even on flat screens — layers glow from within
+# needs: SSS material [has]; rotation animation [has]; noise-driven displacement [has]; VR layer-peeling interaction [missing]
+# relationships: paired with cube_mound_scene and dome in PG_Sculpted_Forms; contrasts stacking (discrete) with folding (continuous)
+# truth: a membrane is a boundary that is also a surface — it separates inside from outside while being neither
+
 # Layered Folded Membrane Generator
 # Creates a 3D structure of undulating membrane-like layers with color gradients
 

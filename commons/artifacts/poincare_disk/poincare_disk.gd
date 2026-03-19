@@ -6,6 +6,16 @@ extends Node3D
 
 class_name PoincareDisk
 
+# @identity
+# essence: geodesics as circular arcs meeting the boundary at right angles; the boundary circle IS infinity
+# desire: see an entire infinite hyperbolic plane compressed into a finite disk — watch geodesics pulse
+# critical_parameter: disk_radius — contains the entire infinite geometry within a finite boundary
+# triggers: animate_geodesics pulses geodesic arcs; the triangle displays angle sum < 180°
+# emerges: the visual proof that parallel lines can diverge — multiple geodesics through a point that never meet a given line
+# needs: VR controls [missing] — could add interactive geodesic drawing
+# relationships: models the same geometry as hyperbolic_surface (different representation); contrasts riemann_sphere (negative vs positive curvature); depends on euclid_postulates_plaque
+# truth: infinity can be contained in a finite disk — the Poincare model proves that hyperbolic geometry is as consistent as Euclidean
+
 signal curvature_changed(value: float)
 
 @export var disk_radius: float = 0.4

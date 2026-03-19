@@ -1,6 +1,16 @@
 extends Node3D
 class_name RhizomaticMazeSpace
 
+# @identity
+# essence: growth_seeds -> RhizomaticMazeGenerator -> path_network -> organic tunnel meshes with noise displacement — Deleuze's rhizome as architecture
+# desire: to wander a non-hierarchical tunnel network where every path leads to more paths, with no center and no dead ends that feel final
+# critical_parameter: branch_probability (0.7) — controls how often paths fork; at 1.0 the network explodes, at 0 it is a single corridor
+# triggers: generate_rhizomatic_maze() builds the full system in 6 phases; regenerate_maze() creates a new seed and rebuilds everything
+# emerges: merge_threshold causes independent growth paths to fuse into loops, creating the non-hierarchical topology that defines a rhizome
+# needs: organic tunnel meshes [has]; trimesh collision [has]; navigation waypoints [has]; VR exploration [has]; growth animation [missing]
+# relationships: paired with mirror_cellular_texture_for_3d in PG_Mirrored_Patterns; contrasts with maze_generation (tree-structured vs rhizomatic)
+# truth: a rhizome has no beginning and no end — it is always in the middle, between things, a line of flight
+
 ## 3D Rhizomatic Maze Generator for Godot 4 VR
 ## Creates interconnected organic tunnel networks with maze-like properties
 ## Builds on the existing marching cubes and rhizomatic cave systems

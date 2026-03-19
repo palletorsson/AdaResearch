@@ -11,6 +11,16 @@ extends Node3D
 
 class_name QueerMorphologySpecimen
 
+# @identity
+# essence: soft_body(stiffness(lambda), damping(phi)) + fluid_shader(turbulence) -> specimen_in_jar
+# desire: hold a creature that refuses to be one thing, watch it breathe between crystal and dissolution
+# critical_parameter: lambda — edge of chaos dial that transitions specimen from crystalline to dissolving
+# triggers: lambda shifts stiffness/pressure/color; phi shifts damping/drag/subsurface scatter; presets jump to named states
+# emerges: the breathing motion at edge of chaos where pressure oscillates — the specimen appears alive
+# needs: VR sliders for lambda and phi [has], preset buttons [has], soft body physics [has]
+# relationships: synthesizes entire QFEP sequence; depends on lambda_slider, phi_slider; contrasts rigid_sculpture (frozen) vs fluid_form (flowing)
+# truth: queer morphology is not a fixed form but a process of becoming — the specimen is the theory made flesh
+
 ## Jar dimensions
 @export var jar_height: float = 0.4
 @export var jar_radius: float = 0.15

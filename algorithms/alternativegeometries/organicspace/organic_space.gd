@@ -2,6 +2,16 @@ extends Node3D
 
 class_name OrganicVRSpace
 
+# @identity
+# essence: CSG boolean(sphere, cylinder, box) + FastNoiseLite displacement -> organic cave interior with floating orbs
+# desire: to step inside a living space where walls breathe, tunnels curve, and crystals grow from nothing — architecture without architects
+# critical_parameter: organic_strength — controls how much noise deforms the base geometry; at 0 it is a sphere, at 1 it is a cave
+# triggers: regenerate_space() creates a new random interior; interactive orbs float with tween-driven gentle oscillation
+# emerges: CSG boolean subtraction of noisy spheres from the shell creates doorways and alcoves that feel intentional but are accidental
+# needs: CSG-to-mesh baking [has]; floating orbs [has]; atmospheric lighting [has]; VR regenerate trigger [missing]
+# relationships: paired with branching_growth_algorithm in PG_Branching_Growth; contrasts deterministic growth with noise-sculpted space
+# truth: an organic space is not designed from outside — it is what remains after noise has eaten away at geometry from within
+
 ## Procedural organic interior space generator for Godot 4 VR
 ## Inspired by the "Octavia Diva" model interior visualization
 

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: min_G max_D V(D,G) = E[log D(x)] + E[log(1 - D(G(z)))] — adversarial minimax game
+# desire: stand between two competing neural networks, throw noise into the generator, judge fake vs real
+# critical_parameter: competition_level — the balance between generator and discriminator drives quality
+# triggers: training_progress drives both losses; generator_loss falling means fakes improving; competition pillar grows with quality
+# emerges: Nash equilibrium where generated data becomes indistinguishable from real — creation from adversarial pressure
+# needs: throwable noise particles [has], central competition arena [has], feedback loop particles [has]
+# relationships: contrasts neural_networks_vr (discriminative vs generative); depends on gradient_descent_visualization (both networks optimize)
+# truth: creation can emerge from opposition — the generator learns to create precisely because the discriminator learns to destroy
+
 # VR-Reimagined GAN Visualization
 # Spatially separated Generator and Discriminator with central competition arena
 # Interactive adversarial training experience

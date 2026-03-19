@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: recursive backtracking — push cell, carve to random unvisited neighbor, backtrack when stuck, repeat until all visited
+# desire: to watch a maze carve itself in real time, the red cursor probing forward then retreating, every wall removal a permanent decision
+# critical_parameter: generation_speed — controls how fast the animation plays; slow enough to follow the algorithm's logic, fast enough to see the pattern emerge
+# triggers: show_generation enables animated step-by-step; each generation_step carves one wall and advances; stack exhaustion signals completion
+# emerges: the algorithm naturally creates a spanning tree — every cell is reachable from every other cell via exactly one path, without coding for it
+# needs: animated generation [has]; wall/floor collision [has]; entrance/exit creation [has]; VR walk-the-maze [has]; maze size slider [missing]
+# relationships: paired with caverandomwalk in PG_Caves_Mazes; contrasts structured corridors with organic tunnels; both create explorable spaces from rules
+# truth: a perfect maze has no loops — every dead end is a branch that reached as far as it could before the algorithm gave up and tried another way
+
 # Maze Generation using Recursive Backtracking
 # Creates animated 3D maze with step-by-step generation
 

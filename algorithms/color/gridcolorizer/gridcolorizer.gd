@@ -2,6 +2,16 @@
 # MultiMesh-compatible cube colorizer
 # Finds MultiMeshInstance3D and applies colors using per-instance color system
 
+# @identity
+# essence: color_pattern(i) -> MultiMesh.set_instance_color(i) — palettes, gradients, and sphere reflection mapped to grid indices
+# desire: to watch the entire grid floor transform as named color patterns sweep across hundreds of cubes simultaneously
+# critical_parameter: pattern_names[current_pattern_index] — each pattern is a different mapping from position to color (diagonal stripes, radial gradient, sphere reflection)
+# triggers: auto_cycle timer rotates through all patterns; NextCube signal advances manually; palette resource provides the color vocabulary
+# emerges: the sphere_reflection pattern creates an illusion of a reflective ball on a flat grid — pure math, no actual sphere
+# needs: MultiMeshInstance3D [has]; NextCube integration [has]; auto_cycle [has]; VR pattern selector [missing]
+# relationships: depends on GridMultiMesh and color_palettes.tres; contrasts with pillarcolorcollection (flat grid vs vertical pillars); GameManager provides gradient palettes
+# truth: color is not a property of the cube — it is a function of the cube's position in the pattern
+
 extends Node
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")

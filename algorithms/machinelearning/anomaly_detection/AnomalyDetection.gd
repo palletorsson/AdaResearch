@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: score(x) > threshold → anomaly; three heuristics: z-score, isolation radius, autoencoder error
+# desire: see the boundary between normal and anomalous shift as you change methods and thresholds
+# critical_parameter: threshold — determines where the decision boundary falls for each method
+# triggers: cycling detection mode recolors all points; lowering threshold floods with false positives
+# emerges: the realization that "anomaly" is not intrinsic — it depends entirely on which lens you use
+# needs: VR controls for mode cycling [missing], threshold adjustment [missing] — exported params only
+# relationships: contrasts enhanced_kmeans (clustering finds groups, anomaly detection finds outsiders); unlocks explainable_ai_xai_vr
+# truth: anomaly is not a property of a point but a relationship between a point and the model judging it
+
 ## Anomaly Detection Sandbox
 ## Interactive visualization of Z-Score, Isolation Radius, and Autoencoder
 ## Error anomaly detection methods. Anomalous points glow, rise, and scale

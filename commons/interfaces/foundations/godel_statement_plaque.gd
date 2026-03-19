@@ -10,6 +10,16 @@ extends Node3D
 
 class_name GodelStatementPlaque
 
+# @identity
+# essence: G: ¬∃p: Proves(p, G) — a sentence that asserts its own unprovability
+# desire: cycle through nine statements of increasing self-reference, feel the paradox tighten
+# critical_parameter: current_index — at index 4+ the plaque pulses gold, the paradox is live
+# triggers: click/grab advances to next statement; index >= 4 fires paradox_triggered signal; glow intensifies on hover
+# emerges: the vertigo of self-reference — each statement is more dangerous than the last
+# needs: VR area interaction [has], mouse click [has], XR grab [has conceptual]
+# relationships: unlocks escher_staircase (visual Godel); contrasts russell_set_box (set-theoretic vs arithmetic self-reference); depends on excluded_middle_demo
+# truth: every sufficiently powerful formal system contains true statements it cannot prove — completeness and consistency are mutually exclusive
+
 signal statement_changed(statement: String, index: int)
 signal paradox_triggered()
 

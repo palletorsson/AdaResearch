@@ -13,6 +13,16 @@ extends Node3D
 
 class_name FlorenskySphere
 
+# @identity
+# essence: A ∧ ¬A — paraconsistent logic; truth that holds contradiction without triviality
+# desire: observe the sphere oscillating between blue (A) and red (¬A), collapsing on interaction then returning to superposition
+# critical_parameter: current_state — BOTH is the natural state; observation collapses it temporarily
+# triggers: click/interact collapses superposition to A or ¬A; timer returns to BOTH after 2 seconds; right-click cycles all four states
+# emerges: the experience that contradiction is not destruction — it is a mode of being
+# needs: VR area interaction [has], mouse click [has]
+# relationships: contrasts schrodinger_box (quantum vs logical superposition); contrasts russell_set_box (contradiction as paradox vs contradiction as truth); unlocks qfep_formula_3d (the QFEP oscillation IS this logic)
+# truth: A and not-A can both be true — this is not a failure of logic but a description of reality that classical logic cannot contain
+
 signal state_observed(is_A: bool, is_not_A: bool)
 signal superposition_entered()
 signal superposition_collapsed()

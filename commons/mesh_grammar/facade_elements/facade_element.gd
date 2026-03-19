@@ -218,10 +218,10 @@ func _add_box(pos: Vector3, size: Vector3, color: Color = primary_color) -> Mesh
 	for face_data in faces:
 		var idx: Array = face_data[0]
 		var normal: Vector3 = face_data[1]
-		var v0 := corners[idx[0]]
-		var v1 := corners[idx[1]]
-		var v2 := corners[idx[2]]
-		var v3 := corners[idx[3]]
+		var v0: Vector3 = corners[idx[0]]
+		var v1: Vector3 = corners[idx[1]]
+		var v2: Vector3 = corners[idx[2]]
+		var v3: Vector3 = corners[idx[3]]
 		# Tri 1
 		st.set_normal(normal)
 		st.set_uv(Vector2(0, 1))

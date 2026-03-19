@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern
+# desire: to see a color palette become architecture, each brick a swatch in a wall you can walk alongside
+# critical_parameter: palette — selects from 20 named palettes (starry_night to industrial_brutalism), redefining the wall's emotional register
+# triggers: apply_grid_config can change dimensions, brick size, mortar, and palette at runtime — wall regenerates entirely
+# emerges: the running bond offset (half-brick shift on odd rows) creates diagonal color rivers through the palette sequence
+# needs: palette selection [has via config]; VR interaction [missing]; mortar color control [missing]
+# relationships: depends on color_palettes.tres; contrasts with pillarcolorcollection (vertical vs horizontal color display)
+# truth: a brick wall is a color sequence made solid — the mortar is the silence between notes
+
 @export var wall_width: int = 10
 @export var wall_height: int = 5
 @export var brick_size: Vector3 = Vector3(0.2, 0.1, 0.1)

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: explanation(model, input) → feature importance; three methods: SHAP (game theory), LIME (local surrogate), Grad-CAM (gradient attention)
+# desire: see WHY a model decided — grab feature bars, walk through perturbation clouds, read attention heatmaps
+# critical_parameter: feature_importance — the SHAP values that reveal which inputs the model actually used
+# triggers: switching XAI methods recolors the entire scene; manipulating features changes the explanation
+# emerges: the realization that different explanation methods disagree — there is no single "true" explanation
+# needs: grabbable SHAP bars [has], perturbation cloud [has], heatmap visualization [has], counterfactual path [has]
+# relationships: depends on neural_networks_vr (must have a model to explain); contrasts anomaly_detection (detecting vs explaining)
+# truth: a model that cannot explain itself is not understood — it is merely obeyed
+
 # VR-Reimagined Explainable AI (XAI)
 # Interactive visualization of model explanations
 # SHAP, LIME, Grad-CAM with spatial manipulation

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle
+# desire: to stand inside the album cover and watch white light split into a rainbow you can almost touch
+# critical_parameter: fan_length — controls how far the spectrum spreads, making refraction feel gentle or dramatic
+# triggers: none — static sculpture, always present, always splitting
+# emerges: the glow/bloom system makes the beams feel volumetric even though they are 1-pixel ImmediateMesh lines
+# needs: VR interaction [missing]; adjustable prism angle [missing]; Label3D [missing]
+# relationships: contrasts with rainbow (full arc vs linear split); precedes spectrum_forest (spatial color mapping)
+# truth: white light is not the absence of color — it is every color compressed into one, waiting for a boundary to reveal the multiplicity
+
 # Pink Floyd "Dark Side of the Moon" Prism Effect in 3D
 # Generates a procedural prism and light spectrum using standard geometry
 

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: prediction = majority_vote(tree₁(x), tree₂(x), ..., tree_n(x)); each tree trained on bootstrap sample with random feature subsets
+# desire: watch a forest of decision trees grow, each different, each voting — democracy of weak learners producing strong predictions
+# critical_parameter: num_trees — more trees reduce variance; the wisdom of crowds effect
+# triggers: auto_start grows trees one by one; bootstrap sampling shows how each tree sees different data; feature importance emerges
+# emerges: the ensemble is wiser than any individual tree — diversity plus aggregation equals accuracy
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: depends on enhanced_kmeans (trees split data like clustering); contrasts svm_visualization (one optimal boundary vs many approximate ones)
+# truth: a forest of imperfect decision-makers can be more reliable than any single expert — this is the mathematics of collective intelligence
+
 # =============================================================================
 # Random Forest Visualization — Collective Intelligence & Democratic Decisions
 # =============================================================================

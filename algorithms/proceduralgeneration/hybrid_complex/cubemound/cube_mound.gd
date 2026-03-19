@@ -1,6 +1,16 @@
 # cube_mound.gd - Drop cubes and generate mesh from pile
 extends Node3D
 
+# @identity
+# essence: drop(N cubes) -> wait(settle) -> voxelize(positions) -> surface_mesh — physics simulation crystallized into static geometry
+# desire: to watch cubes rain down, pile up, and then see the pile freeze into a sculptural mound you can walk on
+# critical_parameter: num_cubes — more cubes create taller, more complex mounds; the ratio of num_cubes to spawn_radius determines pile density
+# triggers: start_generation drops cubes; settling detection (all RigidBody3D.sleeping) triggers mesh generation; Space key restarts
+# emerges: the voxelized mesh smooths over individual cube positions, creating an organic-looking surface from discrete physics objects
+# needs: physics simulation [has]; voxel-to-mesh conversion [has]; trimesh collision [has]; VR cube dropping [missing]; real-time voxelization [missing]
+# relationships: paired with dome and layered_membrane in PG_Sculpted_Forms; contrasts accumulation (bottom-up) with subdivision (top-down)
+# truth: a mound is not designed — it is what gravity does to a collection of objects when you stop holding them up
+
 @export var num_cubes: int = 20
 @export var cube_size: float = 1.0
 @export var spawn_height: float = 10.0

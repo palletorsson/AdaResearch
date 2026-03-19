@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: θ(t+1) = θ(t) - η∇f(θ) — follow the negative gradient downhill; four variants racing on the same surface
+# desire: watch SGD, Momentum, Nesterov, and Adam race down a loss landscape, each with its own strategy
+# critical_parameter: learning_rate (η) — too small creeps, too large oscillates, just right converges
+# triggers: mode button switches between optimizer race, convergence analysis, and Hessian eigenvalue display; function button cycles loss surfaces
+# emerges: Adam's adaptive superiority on most surfaces; saddle points that trap SGD; Nesterov's look-ahead advantage
+# needs: VR push button for mode [has], sliders for learning rate, momentum, speed [has]
+# relationships: unlocks neural_network_visualization (gradient descent IS the training loop); contrasts 9_3_smart_rockets_vr (gradient-free vs gradient-based optimization)
+# truth: learning is descending a landscape you cannot fully see — the gradient is the only local truth available
+
 # Gradient Descent — Optimizer Variants & Convergence Analysis
 # Compares SGD, Momentum, Nesterov, Adam on 3D loss surfaces
 # Shows convergence behavior, learning rate sensitivity, Hessian structure

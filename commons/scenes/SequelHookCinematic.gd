@@ -145,8 +145,8 @@ func _spawn_cosmic_formula() -> void:
 
 	# Position in front of player, slightly above eye level
 	var cam := _xr_origin.find_child("XRCamera3D", true, false)
-	var forward := -cam.global_transform.basis.z if cam else Vector3(0, 0, -1)
-	var cam_pos := cam.global_position if cam else _xr_origin.global_position + Vector3(0, 1.8, 0)
+	var forward: Vector3 = -cam.global_transform.basis.z if cam else Vector3(0, 0, -1)
+	var cam_pos: Vector3 = cam.global_position if cam else _xr_origin.global_position + Vector3(0, 1.8, 0)
 
 	_formula_instance.global_position = cam_pos + forward * 6.0 + Vector3(0, 0.5, 0)
 	_formula_instance.scale = Vector3(5, 5, 5)
@@ -204,12 +204,12 @@ func _spawn_stars() -> void:
 
 func _show_title_sequence() -> void:
 	var cam := _xr_origin.find_child("XRCamera3D", true, false) if _xr_origin else null
-	var cam_pos := cam.global_position if cam else Vector3.ZERO
-	var forward := -cam.global_transform.basis.z if cam else Vector3(0, 0, -1)
-	var right := cam.global_transform.basis.x if cam else Vector3(1, 0, 0)
+	var cam_pos: Vector3 = cam.global_position if cam else Vector3.ZERO
+	var forward: Vector3 = -cam.global_transform.basis.z if cam else Vector3(0, 0, -1)
+	var right: Vector3 = cam.global_transform.basis.x if cam else Vector3(1, 0, 0)
 
 	# Position below the formula
-	var text_base := cam_pos + forward * 5.0 + Vector3(0, -1.5, 0)
+	var text_base: Vector3 = cam_pos + forward * 5.0 + Vector3(0, -1.5, 0)
 
 	var lines := [
 		"The Lab was inside something larger.",

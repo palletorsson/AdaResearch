@@ -279,7 +279,7 @@ func _place_scene(parent: Node3D, scene_path: String, pos: Vector3, scale_mult: 
 		push_warning("LandscapeScene: Could not load %s" % scene_path)
 		return
 
-	var instance := scene.instantiate()
+	var instance: Node = scene.instantiate()
 	instance.name = node_name
 	instance.position = pos
 	if scale_mult != 1.0:

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: X_centered → covariance → eigenvectors → project onto top-k components; maximize preserved variance
+# desire: watch blue data points collapse onto red projections as principal component axes reveal the hidden structure
+# critical_parameter: target_dimensions — how many dimensions to keep; the compression/information trade-off
+# triggers: auto_start runs the full PCA pipeline; projection animation interpolates points to their lower-dimensional positions
+# emerges: the realization that most of the variance lives in very few directions — data is lower-dimensional than it appears
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: unlocks gradient_descent_visualization (PCA is optimization without gradient); contrasts enhanced_kmeans (clustering vs dimensionality reduction)
+# truth: PCA reveals that high-dimensional data is a conspiracy of a few directions pretending to be many
+
 # =============================================================================
 # PCA — Principal Component Analysis Visualization
 # =============================================================================

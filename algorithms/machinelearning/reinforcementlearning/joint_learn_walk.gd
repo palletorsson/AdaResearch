@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: Q(s,a) ← Q(s,a) + α[r + γ·max_a' Q(s',a') - Q(s,a)] — tabular Q-learning for joint torques
+# desire: watch a random-limbed creature teach itself to walk through trial and error in VR
+# critical_parameter: exploration_rate (ε) — too high and the creature flails forever; too low and it gets stuck in a local gait
+# triggers: each update_frequency tick evaluates reward (distance traveled) and updates Q-table; exploration_decay shrinks ε over time
+# emerges: locomotion gaits nobody designed — the creature discovers how to use its own body
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: contrasts evolved_creatures (RL adapts behavior, EA adapts morphology); depends on gradient_descent_visualization (both are optimization)
+# truth: an agent does not need to understand its body to learn to use it — reward is the only teacher
+
 ## Reinforcement Learning Creature with Random Joints
 ## Creates a procedural creature that learns to walk using Q-learning.
 ## Joint torques are discovered through exploration / exploitation,

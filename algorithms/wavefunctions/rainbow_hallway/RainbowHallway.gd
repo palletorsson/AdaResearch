@@ -1,5 +1,15 @@
 ﻿extends Node3D
 
+# @identity
+# essence: tapered CSG tube tunnel + animated rainbow gradient shader — walk through a cone of cycling color
+# desire: to step into a narrowing tunnel of light where color flows past you like standing inside a prism
+# critical_parameter: start_radius vs end_radius — the taper ratio determines whether the tunnel feels like entering or being swallowed
+# triggers: _process updates shader parameters every frame; gradient_offset and animation_speed drive continuous color flow
+# emerges: the cone shape creates forced perspective that makes the tunnel feel infinitely long even at modest segment counts
+# needs: rainbow_hallway.gdshader [has]; CSG collision [has]; VR walkthrough [has]; speed control slider [missing]
+# relationships: follows rainbow (static arc vs immersive tunnel); contrasts with spectrum_forest (ambient vs directed color experience)
+# truth: a hallway of color is not a hallway with color on it — it is a space where color becomes the architecture itself
+
 @export var animation_speed: float = 1.0
 @export var gradient_offset: float = 0.5
 @export var glow_intensity: float = 0.5

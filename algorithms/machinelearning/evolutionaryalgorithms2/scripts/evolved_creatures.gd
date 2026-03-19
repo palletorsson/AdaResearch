@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: fitness(creature) → tournament selection → crossover(genes₁, genes₂) → mutate → next generation
+# desire: watch alien morphologies — symbiotic clusters, phase-shifting blobs, fractals — compete and evolve in VR
+# critical_parameter: mutation_rate — governs the balance between exploitation (refining) and exploration (inventing)
+# triggers: evolution_timer timeout breeds new generation; VR controller trigger raycasts to interact with creatures
+# emerges: creature types nobody designed — symbiotic, phase-shifting, recursive, resonance, topology-changing
+# needs: VR controller interaction [has], timer-based evolution [has]
+# relationships: extends evolvingflowers (richer morphology space); contrasts 9_3_smart_rockets_vr (fixed body, optimized trajectory vs evolved body)
+# truth: given enough variation and selection, form follows fitness without any designer
+
 ## Evolved Creatures – a population of exotic creature types evolving via genetic algorithm.
 ## Creature morphologies include symbiotic clusters, phase-shifting blobs, recursive fractals,
 ## resonance wave-forms, and topology-changing shapes.

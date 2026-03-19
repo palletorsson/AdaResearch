@@ -5,6 +5,16 @@
 extends Node3D
 class_name QFEPFormula3D
 
+# @identity
+# essence: TextMesh("QFE = F - lambda*E(S) + phi*delta_E(S,t)") with per-term color and pulse animation
+# desire: see the formula floating in space — each symbol glowing with its own color, alive with meaning
+# critical_parameter: highlighted_term — which term pulses brightest, drawing attention to one piece of the whole
+# triggers: highlight_term() intensifies one symbol; on_lambda_changed/on_phi_changed shift term colors to match system state
+# emerges: the formula reads differently depending on which term is highlighted — the whole changes meaning with focus
+# needs: VR term touch selection [missing], slider connections [missing]
+# relationships: central display in QFEP_Introduction and QFEP_Sandbox; depends on lambda_slider, phi_slider; references all QFEP terms
+# truth: QFE = F - lambda*E(S) + phi*delta_E(S,t) is not an equation to solve but a lens through which to see every system
+
 # Term colors
 const COLOR_QFE := Color(1.0, 1.0, 1.0)       # White - result
 const COLOR_F := Color(0.4, 0.6, 1.0)         # Blue - order

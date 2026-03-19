@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Attention(Q,K,V) = softmax(QK^T / √d_k)V — tokens attend to all other tokens via learned queries and keys
+# desire: walk through a token sequence, see attention beams connect distant tokens, switch between attention heads
+# critical_parameter: num_attention_heads — each head learns to attend to different relationship types
+# triggers: auto_train drives loss descent; head switching reveals different attention patterns; positional encoding visualization shows how order is encoded
+# emerges: multi-head attention patterns — some heads attend locally, others capture long-range dependencies, nobody assigns these roles
+# needs: grabbable tokens [has], switchable attention heads [has], attention beam visualization [has], positional encoding display [has]
+# relationships: supersedes lstms_vr (attention replaces recurrence for long-range dependencies); depends on neural_networks_vr (transformer IS a neural network)
+# truth: attention is all you need — the transformer proves that explicit memory gates are unnecessary when every token can directly query every other token
+
 # VR-Reimagined Transformer Visualization
 # Walk through token sequences with visible attention beams
 # Interactive multi-head attention and positional encoding

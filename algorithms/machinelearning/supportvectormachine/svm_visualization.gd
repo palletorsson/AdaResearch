@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: max margin: min ||w||² s.t. yᵢ(w·xᵢ + b) ≥ 1; kernel trick maps to higher dimensions
+# desire: see the maximum-margin hyperplane crystallize between classes, support vectors glowing gold at the boundary
+# critical_parameter: C_parameter — regularization; low C allows misclassification for wider margin, high C demands perfection
+# triggers: auto_start runs SMO optimization; kernel_type switches between linear, polynomial, RBF, sigmoid decision boundaries
+# emerges: support vectors — the few critical points that define the entire boundary; most data points are irrelevant
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: contrasts enhanced_kmeans (supervised vs unsupervised); contrasts random_forest_visualization (single optimal boundary vs ensemble of approximations)
+# truth: the decision boundary depends on only a few points — most of the data is redundant once the margin is found
+
 # =============================================================================
 # SVM — Support Vector Machine Visualization
 # =============================================================================

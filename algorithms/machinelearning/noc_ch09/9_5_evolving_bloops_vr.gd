@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: energy(t+1) = energy(t) - metabolism(gene) + food; reproduce when energy > threshold
+# desire: watch an ecosystem self-regulate — births, deaths, food cycles, population waves
+# critical_parameter: mutation_rate — shapes the gene drift between size and speed
+# triggers: food contact grants energy; energy depletion triggers death and food-drop; reproduction probabilistic
+# emerges: population oscillations, size/speed trade-off equilibria nobody prescribed
+# needs: VR slider for mutation_rate [has], slider for food interval [has]
+# relationships: contrasts 9_3_smart_rockets_vr (goal-directed vs open-ended); unlocks evolved_creatures (richer morphologies)
+# truth: a single gene controlling a trade-off is enough for an entire ecology to self-organize
+
 ## Evolving Bloops — a self-sustaining ecosystem simulation.
 ## Bloops wander, eat food, and reproduce when they have enough energy.
 ## Their DNA gene controls the size/speed trade-off (bigger = slower but lasts longer).

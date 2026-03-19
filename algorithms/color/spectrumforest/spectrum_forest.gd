@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum
+# desire: to walk through a rain of color, each step shifting the hue around you from violet to red
+# critical_parameter: line_count — at low counts the spectrum is sparse and abstract, at high counts it becomes an immersive curtain
+# triggers: none at runtime — static procedural sculpture generated once from deterministic seed
+# emerges: the density of lines creates an accidental fog effect where distant colors blend perceptually, demonstrating optical mixing
+# needs: VR walkthrough [has]; line_count slider [missing]; spectrum range control [missing]
+# relationships: contrasts with dark_side_prism (linear spectrum vs spatial spectrum); feeds into SpectrumVisualizer (animated spectrum vs static)
+# truth: the spectrum is continuous but we discretize it into lines — the gaps between lines are the same lie as RGB
+
 # Spectrum Forest: A field of hanging lines visualizing the color spectrum
 # Uses ImmediateMesh for thin, glowing "trace" lines.
 

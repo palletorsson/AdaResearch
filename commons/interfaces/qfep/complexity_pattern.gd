@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPComplexityPattern
 
+# @identity
+# essence: Conway_GoL(B3/S23) on toroidal grid, density ~40% -> edge-of-chaos automaton
+# desire: watch complexity self-organize — gliders, oscillators, structures nobody designed
+# critical_parameter: initial density (~0.4) — the lambda value that places this automaton at the edge of chaos
+# triggers: cells die out below threshold -> auto-reseed; each generation applies B3/S23 rules
+# emerges: gliders, blinkers, and long-lived metastable structures from random initial conditions
+# needs: VR speed control [missing], touch-to-toggle cells [missing], density slider [missing]
+# relationships: unlocks edge_core concept; depends on cellular automata foundations; contrasts preserved_pattern (frozen) and chaos_particles (dissolved)
+# truth: at the edge of chaos, simple local rules generate unbounded computational complexity
+
 ## Grid size
 @export var grid_size: int = 16
 

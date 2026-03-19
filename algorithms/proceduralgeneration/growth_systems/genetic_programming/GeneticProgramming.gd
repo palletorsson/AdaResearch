@@ -2,6 +2,16 @@
 extends Node3D
 class_name GeneticProgramming
 
+# @identity
+# essence: population[i].fitness = f(genome) -> select, crossover, mutate, repeat — evolution without a designer
+# desire: to watch 3D creatures evolve in front of you, generation by generation, toward a fitness goal no individual understands
+# critical_parameter: mutation_rate — too low and evolution stagnates, too high and good solutions dissolve; 0.3 is the edge of chaos
+# triggers: auto_evolve ticks generations on a timer; evolve_one_generation allows manual stepping; fitness_function selects the selection pressure
+# emerges: creatures converge on similar body plans despite random initialization — convergent evolution from pure math
+# needs: population grid display [has]; fitness labels [has]; auto-evolve timer [has]; VR selection pressure picker [missing]
+# relationships: opener for proceduralgeneration sequence; contrasts with space_colonization_algorithm (evolution vs growth); genome_type spans primitives to L-systems
+# truth: evolution does not design — it accumulates accidents that happen to survive
+
 @export_group("Evolution Settings")
 @export var population_size: int = 20
 @export var max_generations: int = 50

@@ -4,6 +4,16 @@
 extends Node3D
 class_name BrouwerChoiceSequence
 
+# @identity
+# essence: a₁, a₂, a₃, ... , ?, ? — each term chosen freely, never completed
+# desire: feel the openness of an infinite sequence that is always unfinished
+# critical_parameter: time — the sequence unfolds perpetually, dots gently bobbing
+# triggers: each dot fades in opacity toward the future; the question mark asserts genuine openness
+# emerges: the intuition that infinity is a process, not a completed object
+# needs: VR controls [missing] — could add ability to "choose" the next term
+# relationships: depends on excluded_middle_demo (LEM rejection enables choice sequences); contrasts constructive_proof (witness vs process)
+# truth: an infinite object that is never finished is not incomplete — it is the only honest way to talk about infinity
+
 var _dots: Array[MeshInstance3D] = []
 var _label: Label3D
 var _time: float = 0.0

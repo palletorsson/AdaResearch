@@ -5,6 +5,16 @@
 extends Node3D
 class_name ConstructiveProof
 
+# @identity
+# essence: ∃x P(x) requires exhibiting x — no proof by contradiction allowed
+# desire: grasp the difference between "something exists" and "here it is"
+# critical_parameter: the witness — without an explicit construction, the proof is rejected
+# triggers: static display; the box IS the witness, the arrow insists you must BUILD it
+# emerges: the gap between knowing something exists and being able to point at it
+# needs: VR controls [missing] — could add interactive construction vs contradiction examples
+# relationships: depends on excluded_middle_demo (rejecting LEM forces constructive proofs); contrasts godel_statement_plaque (true but unprovable)
+# truth: existence without construction is an article of faith, not a proof
+
 var _label: Label3D
 var _example_box: MeshInstance3D
 

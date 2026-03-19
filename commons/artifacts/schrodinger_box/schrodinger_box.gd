@@ -6,6 +6,16 @@ extends Node3D
 
 class_name SchrodingerBox
 
+# @identity
+# essence: |ψ⟩ = α|alive⟩ + β|dead⟩ → observation collapses to |alive⟩ or |dead⟩ with P = |α|²
+# desire: open the box and watch the superposition collapse — the lid swings, the state resolves, then resets
+# critical_parameter: auto_reset_time — how long the collapsed state persists before returning to superposition
+# triggers: click/observe collapses the wavefunction randomly; timer resets to superposition; lid animates open/close
+# emerges: the discomfort of genuine indeterminacy — the cat is not secretly alive or dead, it is both
+# needs: VR click interaction [has via mouse], XR interaction [missing]
+# relationships: contrasts florensky_sphere (quantum vs paraconsistent superposition); paired with superposition_display (abstract vs physical metaphor)
+# truth: observation does not reveal a pre-existing state — it creates one
+
 signal box_opened
 signal state_collapsed(is_alive: bool)
 signal superposition_entered

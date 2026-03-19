@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: dA/dt = D_a*nabla^2(A) - A*B^2 + f*(1-A); dB/dt = D_b*nabla^2(B) + A*B^2 - (k+f)*B
+# desire: watch two chemicals chase each other into coral, mitosis, mazes — Turing's morphogenesis alive
+# critical_parameter: feed_rate / kill_rate ratio — tiny changes cross phase boundaries between spots, stripes, and chaos
+# triggers: preset auto-cycle switches Gray-Scott parameters every 30s; random seeds nucleate new pattern islands
+# emerges: self-organizing spatial patterns from uniform initial conditions — structure from nothing but diffusion and reaction
+# needs: VR parameter controls [missing], preset selection buttons [missing], touch-to-seed interaction [missing]
+# relationships: unlocks edge_core understanding; depends on diffusion/laplacian concepts; contrasts ordered_grid (imposed order vs emergent order)
+# truth: pattern does not require a planner — two diffusing chemicals and a nonlinear reaction are sufficient for morphogenesis
+
 # Reaction-Diffusion (Gray-Scott Model) — 3D VR Version
 # Simulation runs on a grid, rendered as texture on a QuadMesh panel.
 

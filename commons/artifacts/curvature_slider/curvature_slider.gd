@@ -4,6 +4,16 @@
 extends Node3D
 class_name CurvatureSlider
 
+# @identity
+# essence: K ∈ [-1, +1] — Gaussian curvature as continuous parameter
+# desire: slide between hyperbolic, flat, and elliptic geometry with one hand
+# critical_parameter: curvature — the ONE number that determines the entire geometry
+# triggers: slider movement emits curvature_changed signal, updates label with geometry type
+# emerges: the intuition that geometry is not fixed — it is a parameter you can vary
+# needs: VR horizontal slider [has]
+# relationships: controls hyperbolic_surface (K<0) and elliptic_surface (K>0); depends on euclid_postulates_plaque (the fifth postulate IS the curvature assumption)
+# truth: flat space is not the default — it is the singular boundary between two infinite families of geometries
+
 signal curvature_changed(value: float)
 
 @export var curvature: float = 0.0  # -1 to +1

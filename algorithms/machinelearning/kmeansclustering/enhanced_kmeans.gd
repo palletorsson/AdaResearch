@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: assign each point to nearest centroid; move centroids to cluster means; repeat until convergence
+# desire: watch colored clusters crystallize from unlabeled chaos as centroids drift to their resting places
+# critical_parameter: cluster_count (K) — choosing K is the fundamental unsupervised learning decision
+# triggers: iteration step reassigns points and moves centroids; convergence stops when movement < threshold
+# emerges: Voronoi tessellation of space; initialization sensitivity (K-means++ vs random); the elbow in the inertia curve
+# needs: VR controls [missing] — has 2D UI buttons but no spatial VR sliders
+# relationships: contrasts svm_visualization (supervised boundaries vs unsupervised clustering); unlocks random_forest_visualization (ensemble methods)
+# truth: clustering does not discover structure in data — it imposes structure by choosing K
+
 # Enhanced K-Means Clustering Algorithm Visualization
 # Educational tool with advanced features and interactive controls
 

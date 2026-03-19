@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: c(t) = f·c(t-1) + i·tanh(W·[h,x]); h(t) = o·tanh(c(t)) — three gates control memory flow
+# desire: walk inside a room-scale LSTM cell, grab the forget/input/output gates, watch memory particles flow
+# critical_parameter: forget_gate_activation — controls how much the cell remembers vs forgets at each step
+# triggers: gate activations modulate memory particle flow; training_progress drives loss and accuracy displays
+# emerges: selective memory — the cell learns what to remember and what to discard without being told
+# needs: grabbable gate spheres [has], throwable input tokens [has], memory flow particles [has]
+# relationships: unlocks transformers_vr (attention replaces recurrence); contrasts neural_networks_vr (feedforward has no memory)
+# truth: memory is not storage — it is the continuous decision of what to keep and what to let go
+
 # VR-Reimagined LSTM Networks Visualization
 # Room-scale interactive LSTM cell where you can walk inside and manipulate gates
 # Designed for educational VR experience

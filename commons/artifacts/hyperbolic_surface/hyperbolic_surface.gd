@@ -5,6 +5,16 @@ extends Node3D
 
 class_name HyperbolicSurface
 
+# @identity
+# essence: y = K(x² - z²) — saddle surface with negative Gaussian curvature K < 0
+# desire: touch a saddle and feel space curve outward — parallel lines diverge, triangles have angle sum < 180°
+# critical_parameter: curvature — controls the severity of the saddle
+# triggers: static geometry; the shape itself teaches by contradicting Euclidean intuition
+# emerges: the realization that "straight" on a saddle looks curved from outside
+# needs: VR controls [missing] — could add curvature_slider connection
+# relationships: contrasts elliptic_surface (K>0, lines converge); depends on curvature_slider; paired with poincare_disk (same geometry, different model)
+# truth: on a negatively curved surface, there are infinitely many parallel lines through any point — the fifth postulate fails spectacularly
+
 @export var size: float = 0.5
 @export var resolution: int = 20
 @export var curvature: float = 1.0

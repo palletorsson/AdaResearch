@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPParticleChaos
 
+# @identity
+# essence: GPU_particles(spread=180, gravity=0, angular_velocity=+-360) -> pure entropy cloud
+# desire: be surrounded by particles that obey no pattern — feel the freedom of maximum entropy
+# critical_parameter: spread (180 = full sphere) — the absence of preferred direction that defines chaos
+# triggers: set_intensity() scales velocity and count; pulse() creates momentary burst
+# emerges: transient clusters and voids in the noise — the eye finds patterns even where none exist
+# needs: VR intensity control [missing], pulse trigger [missing]
+# relationships: represents E(S) term; contrasts ordered_grid (F term); paired with random_cubes; feeds into lambda spectrum
+# truth: entropy is not disorder but possibility — maximum spread means maximum freedom from constraint
+
 ## Particle count
 @export var particle_count: int = 200
 

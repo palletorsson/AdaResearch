@@ -6,6 +6,7 @@
 ## Static presets: carpet, facade, mosaic, quilt, tunnel
 
 extends RefCounted
+class_name SpatialComposition
 
 static var _script: GDScript
 

@@ -6,6 +6,16 @@ extends Node3D
 
 class_name BifurcationWalkway
 
+# @identity
+# essence: x_n+1 = r * x_n * (1 - x_n), iterated across r -> period-doubling cascade
+# desire: walk along the r axis and feel order shatter into chaos
+# critical_parameter: r — the growth rate that drives the system through bifurcations
+# triggers: r_min/r_max slider adjustment recomputes entire diagram; preset buttons jump to chaos/bifurcation regions
+# emerges: the Feigenbaum constant hiding in the self-similar spacing of bifurcation points
+# needs: VR sliders [has], preset buttons [has], zoom via keyboard [has]
+# relationships: unlocks understanding of lambda spectrum; depends on iteration concept; contrasts ordered_grid (fixed point vs period doubling)
+# truth: deterministic equations produce unpredictable behavior — chaos is not randomness but sensitive dependence
+
 ## Display dimensions
 @export var display_width: float = 2.0
 @export var display_height: float = 1.5

@@ -14,6 +14,16 @@
 extends Node3D
 class_name NeuralNetworkVisualizationShowcase
 
+# @identity
+# essence: a(l) = σ(W(l)·a(l-1) + b(l)); ∂L/∂W = δ·a(T); backpropagation through layers
+# desire: see neurons glow as activations flow forward, weights shimmer as gradients flow backward, error graph descend
+# critical_parameter: learning_rate — the step size that makes the difference between convergence and oscillation
+# triggers: auto_train drives mini-batch gradient descent; activation function selection changes the nonlinearity; error history builds the 3D graph
+# emerges: feature representation in hidden layers — the network discovers its own internal language
+# needs: VR controls [missing] — has orbit camera but no VR spatial interaction
+# relationships: depends on gradient_descent_visualization (backprop IS gradient descent on weights); unlocks convolutional_neural_networks_cnns_vr (specialized architecture)
+# truth: a neural network does not learn rules — it learns a continuous function that happens to approximate them
+
 # --- Configuration ---
 @export_category("Network Configuration")
 @export var input_layer_size: int = 4

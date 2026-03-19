@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: feature_map = ReLU(input ⊛ kernel + bias); pool → repeat → dense → classify
+# desire: walk through CNN layers as rooms, see feature maps shrink and deepen, feel hierarchy emerge
+# critical_parameter: kernel_weights — each 3x3 grid decides what pattern a filter detects
+# triggers: training_progress drives accuracy and activation pulsing; kernel editing changes learned features
+# emerges: hierarchical feature extraction — edges → textures → parts → objects, without anyone prescribing it
+# needs: grabbable kernel editors [has], feature map inspection [has], forward pass particle animation [has]
+# relationships: depends on computer_vision_vr (hand-designed → learned kernels); contrasts neural_networks_vr (dense vs spatial connectivity)
+# truth: the convolution is a bet that the same pattern can appear anywhere — translation invariance IS the inductive bias
+
 # VR-Reimagined Convolutional Neural Networks
 # Walk through CNN layers as physical spatial architecture
 # Interactive kernel design and feature map visualization

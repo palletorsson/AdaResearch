@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: genome = {petals, color_hue, symmetry, L-system_rules, branch_angle}; fitness = symmetry + vibrancy + complexity
+# desire: watch a garden of flowers evolve toward beauty — petals deepen in color, branching patterns elaborate
+# critical_parameter: mutation_rate — shapes how quickly the aesthetic drifts; too high and beauty dissolves
+# triggers: generation_time timer breeds new population; elite flowers survive; growth animation springs flowers up
+# emerges: L-system branching patterns, color preferences, symmetry — an aesthetic nobody programmed
+# needs: VR controls [missing] — generation_time and mutation_rate exported but no spatial sliders
+# relationships: depends on 9_3_smart_rockets_vr (shared GA pattern); unlocks evolved_creatures (from flowers to creatures)
+# truth: beauty is what survives selection — aesthetics can be an emergent property of optimization
+
 ## Evolving Flowers — a genetic algorithm that breeds flowers via L-System branching,
 ## petal geometry, and colour genes. Each generation is evaluated for aesthetic fitness
 ## (symmetry, colour vibrancy, branching complexity) and the best survive to breed.
