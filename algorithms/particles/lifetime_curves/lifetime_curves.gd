@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Property = f(normalized_age). Every particle traces an arc through parameter space as it ages.
+# desire: To show that aging is not linear. Three personalities of death: flash, fade, pulse.
+# critical_parameter: The curve shape — sharp sine peak (flash), gentle arc (fade), damped oscillation (pulse).
+# triggers: Spawn → particle enters curve, age crosses 0.5 → midlife behavior diverges between profiles
+# emerges: Visual personality from mathematical curves. The curve graph IS the soul of each emitter.
+# needs: VR curve editor or profile switcher [missing]. Lifetime duration slider [missing]. Spawn rate slider [missing].
+# relationships: Fills the gap in Particles_LifetimeAndTypes. Complements particle_campfire (synthesis uses these curves). Contrasts with sub_emitters (death as birth vs death as fade).
+# truth: How a particle dies defines what it looks like alive.
+
 ## Particle lifetime curves — color, size, and opacity mapped over normalized age [0,1].
 ## Three emitters side by side, each demonstrating a different curve profile:
 ## quick flash, slow fade, pulsing glow.

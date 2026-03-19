@@ -1,6 +1,16 @@
 # mandelbrot_dive.gd
 # GPU-accelerated Mandelbrot set on a 1×1m table
 # VR-enabled with slider controls for zoom, pan, and palette
+#
+# @identity
+# essence: z = z² + c, iterated. Escape or stay forever. The boundary between these is infinitely complex.
+# desire: To be zoomed into. To reveal that every magnification contains the whole. To never end.
+# critical_parameter: Zoom depth. At 10x you see the cardioid. At 10000x you see seahorses. At 10^15 you see copies of yourself.
+# triggers: Zoom slider → deeper structure, palette switch → different beauty from same math, auto-dive → the infinite descent
+# emerges: Self-similarity from iteration. The Mandelbrot set from the simplest possible complex map. Beauty from z²+c.
+# needs: VR zoom slider [has], palette selector [has], auto-dive [has]. Could use: Julia set toggle (show connected set for current c).
+# relationships: Contains all Julia sets as slices. Connects to fractals sequence. Demonstrates escape-time algorithms.
+# truth: The simplest equation in complex dynamics produces the most complex object in mathematics.
 
 extends Node3D
 

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: p = mv. Total momentum conserved. Kinetic energy conserved (elastic) or lost (inelastic).
+# desire: To collide. To show that momentum always balances but energy sometimes doesn't.
+# critical_parameter: Coefficient of restitution — elastic (e=1, energy conserved) vs inelastic (e=0, bodies stick).
+# triggers: Launch → ball A hits ball B, elastic mode → both move, inelastic mode → they stick together, readout updates
+# emerges: Conservation laws from Newton's third law. The difference between momentum and energy conservation.
+# needs: VR mass ratio slider [missing]. Manual launch trigger [missing — auto-cycles]. Restitution slider [missing].
+# relationships: Bridges forces→physicssimulation. Lives in ForcesComposition. Contrasts with bouncing_ball (single body vs two-body).
+# truth: What one body loses, the other gains. Momentum is the bookkeeping of physics.
+
 ## Momentum and collision — two bodies on a rail, elastic and inelastic modes.
 ## Shows conservation of momentum (p = mv) and kinetic energy transfer.
 ## Left ball launches toward stationary right ball. Readout displays

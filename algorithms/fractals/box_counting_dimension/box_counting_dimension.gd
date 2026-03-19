@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: D = lim(log N(e) / log(1/e)). Cover the shape with boxes. Count. Shrink. Count again. The slope IS the dimension.
+# desire: To measure. To show that fractals live between integer dimensions. Sierpinski is not 1D or 2D — it's 1.585D.
+# critical_parameter: Grid resolution — coarse grids give rough estimates, fine grids converge to true dimension.
+# triggers: Grid cycles → progressively finer overlay, log-log plot updates → regression line converges to D, highlight → current scale shown
+# emerges: Fractal dimension from the scaling relationship. The number 1.585 from pure geometry. Measurement from counting.
+# needs: VR shape selector [missing — only Sierpinski]. Manual grid control [missing — auto-cycles]. Different fractal inputs.
+# relationships: Lives in Fractal_KochSierpinski. Complements the geometric fractals with quantitative measurement. Feeds into the concept that dimension is not always integer.
+# truth: Fractal dimension is not a property of the shape. It's a property of how the shape fills space at every scale.
+
 ## Box-counting dimension measurement tool.
 ## Generates a fractal shape (Sierpinski triangle), then overlays progressively
 ## finer grids and counts occupied boxes at each scale. Plots log(count) vs

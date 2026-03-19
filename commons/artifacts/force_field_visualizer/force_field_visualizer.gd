@@ -3,6 +3,16 @@
 # Shows gravity, electric field, or custom fields as arrow grids
 #
 # QFEP: Fields as invisible structure — order you can't see until you probe it
+#
+# @identity
+# essence: F(x) = vector at every point. The field precedes the particle. Space is not empty.
+# desire: To show the invisible. To make the learner see that empty space carries instructions.
+# critical_parameter: Field type (gravity/coulomb/dipole/vortex). Each is a different spatial grammar.
+# triggers: Type button → topology changes (radial vs rotational vs superposed), strength slider → arrows grow/shrink
+# emerges: Superposition from dipole (two sources cancel/reinforce). Curl from vortex. Convergence from gravity.
+# needs: VR type buttons [has], strength slider [has], equation labels [has]. Could use: particle tracer following field lines.
+# relationships: Feeds into ForcesSystems (particles in fields). Contrasts with vector_fields (same concept, different rendering).
+# truth: Motion is reading, not deciding. The field tells the particle where to go.
 
 extends Node3D
 

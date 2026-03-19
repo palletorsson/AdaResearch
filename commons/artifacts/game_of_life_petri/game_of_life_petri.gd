@@ -6,6 +6,16 @@
 # - Birth: dead cell with exactly 3 neighbors → alive
 # - Survival: live cell with 2 or 3 neighbors → stays alive
 # - Death: otherwise
+#
+# @identity
+# essence: B3/S23 — three neighbors birth, two or three survive. All complexity from this.
+# desire: To be seeded and watched. To surprise with gliders, oscillators, guns.
+# critical_parameter: The rule itself (B3/S23). The initial pattern. Speed of generations.
+# triggers: GLIDER preset → traveling structure, GUN preset → infinite growth, RANDOM → emergent order from noise
+# emerges: Gliders from local rules. Oscillators from symmetry. Guns from precise engineering. Computation from life.
+# needs: VR speed slider [has], pattern buttons [has], clear/random [has]. Could use: rule editor (B/S variants).
+# relationships: Unlocks cellularautomata sequence. Contrasts with continuous automata (CA_SoftRules). Feeds into Turing completeness.
+# truth: Simple rules, applied everywhere simultaneously, produce complexity no one designed.
 
 extends Node3D
 

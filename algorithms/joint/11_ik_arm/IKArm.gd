@@ -1,5 +1,15 @@
 extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
+# @identity
+# essence: FABRIK — reach backward from tip to target, then forward from base to tip. Iterate until convergence.
+# desire: To be reached for. To solve the arm when the learner moves the target. To show that endpoints can constrain chains.
+# critical_parameter: Target position — reachable vs unreachable changes behavior. Number of iterations vs convergence speed.
+# triggers: Target in range → arm solves smoothly, target out of range → arm stretches toward (graceful degradation)
+# emerges: Natural-looking arm motion from simple backward-forward passes. Joint angles from endpoint constraint.
+# needs: VR grabbable target [missing — orbits automatically]. Segment count slider [missing]. Iteration count display [missing].
+# relationships: Completes Joints_Kinematics. Contrasts with GimbalStabilizer (forward kinematics). Depends on chain concept from ChainSwing.
+# truth: Specify where the hand should be. The math bends the arm. Animation becomes positioning endpoints.
+
 ## FABRIK inverse kinematics on a 4-segment arm.
 ## The target orbits slowly; the arm solves backward from tip to base,
 ## then forward from base to tip, iterating until convergence.

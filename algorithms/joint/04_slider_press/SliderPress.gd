@@ -1,5 +1,15 @@
 extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
+# @identity
+# essence: SliderJoint3D — 1 translational DOF. The opposite of a hinge. Linear motion, no spin.
+# desire: To slide. To show that constraining rotation while freeing translation builds pistons, drawers, rails.
+# critical_parameter: Motor speed and force — how fast and how hard the piston drives.
+# triggers: Speed slider → piston oscillates faster/slower, force slider → piston pushes harder against resistance
+# emerges: Mechanical rhythm from oscillating motor. The feel of constrained linear motion.
+# needs: VR speed slider [has], VR force slider [has], position/velocity labels [has]. Could use: adjustable joint limits.
+# relationships: Contrasts with HingeCrank (rotation vs translation). Pairs with SpringSuspension in same map. Feeds into constraints artifact.
+# truth: Sliders translate without rotating. The opposite constraint to the hinge. Together they build machines.
+
 ## Slider Joint Press — linear motion along one axis.
 ##
 ## A piston slides back and forth on a rail, constrained by SliderJoint3D.

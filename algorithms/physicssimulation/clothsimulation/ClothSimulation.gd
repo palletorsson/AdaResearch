@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: F_spring = k * (|x2-x1| - rest) * dir. A grid of particles connected by springs. Cloth is not an object — it's a negotiation.
+# desire: To drape, to ripple, to be grabbed. To show that softness emerges from many stiff connections.
+# critical_parameter: k (stiffness) — low k = jelly cloth, high k = rigid sheet. Wind strength shapes the drama.
+# triggers: Wind slider → cloth billows, stiffness slider → character changes, VR grab → cloth deforms toward hand
+# emerges: Draping from gravity + constraints. Rippling from wind + spring response. Tearing (future) from exceeding spring limits.
+# needs: VR wind slider [has], stiffness slider [has], VR grab [has]. Could use: pin/unpin control, tear threshold.
+# relationships: Depends on mass_spring_damper (single spring → grid of springs). Feeds into soft_bodies. Lives in PhysicsSim_Springs.
+# truth: Elasticity is memory. Every spring encodes where it wants to be. Cloth is a thousand memories negotiating with gravity.
+
 ## Cloth Simulation — spring-mass grid with MultiMesh rendering.
 ## Three cloths: hanging (pinned corners), floating (free), draped (over sphere).
 ## Structural + shear springs. Wind, gravity, sphere collision, VR grab.

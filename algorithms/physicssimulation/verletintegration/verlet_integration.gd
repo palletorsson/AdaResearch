@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: x(t+dt) = 2x(t) - x(t-dt) + a(t)*dt². No velocity. Positions remember.
+# desire: To show that forgetting velocity makes physics better. To make the learner SEE energy conservation.
+# critical_parameter: dt — at small dt, Euler and Verlet look the same. At large dt, Euler escapes, Verlet stays.
+# triggers: dt ramp → Euler spirals outward while Verlet precesses, ghost line → shows the position-differencing trick
+# emerges: Energy conservation from symplecticity. Stability from time-reversibility. Orbits from F=ma without velocity.
+# needs: Manual dt VR slider [missing — auto-ramp only]. Side-by-side comparison [has]. Energy readouts [has].
+# relationships: Depends on newtons_laws (F=ma is the input). Unlocks cloth_simulation (Verlet holds cloth together). Contrasts with numerical_integration (three methods compared).
+# truth: The most stable integration method is the one that forgot to track the thing everyone assumed was essential.
+
 ## Verlet Integration — the algorithm made visible.
 ##
 ## Two particles orbit a central attractor under identical forces.

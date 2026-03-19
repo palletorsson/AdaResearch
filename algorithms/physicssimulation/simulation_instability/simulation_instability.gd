@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: When dt > sqrt(2m/k), energy grows exponentially. The simulation lies, then screams.
+# desire: To break. To show the learner the exact moment physics stops being physics.
+# critical_parameter: dt (timestep) — the hidden lambda. Too small: nothing happens fast enough. Too large: everything explodes.
+# triggers: dt ramp crosses stability threshold → STABLE becomes DRIFTING becomes EXPLODED, auto-reset → cycle repeats
+# emerges: The stability boundary from the interaction of spring stiffness and timestep. Chaos from deterministic math.
+# needs: Manual dt VR slider [missing — auto-ramp only]. Stiffness slider [missing]. Reset button [has auto-reset].
+# relationships: Completes PhysicsSim_Foundations truth statement. Depends on verlet_integration (uses same method). Contrasts with fluid_simulation (SPH has its own CFL condition).
+# truth: Knowing where the illusion breaks is more important than knowing how it works.
+
 ## Simulation Instability — crank the timestep until physics explodes.
 ##
 ## Three spring-connected masses run with a visible dt slider.

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Three systems, one scene. Fire rises, embers arc, smoke expands. Forces + lifetime + collision = recognizable effect.
+# desire: To be warm. To synthesize everything the particle sequence taught into one thing you recognize from the real world.
+# critical_parameter: Wind — changes the fire's lean, the ember trajectories, the smoke drift. The campfire's character.
+# triggers: Wind change → fire leans and flickers, gravity on embers → ballistic arcs, smoke expansion → volumetric sense
+# emerges: A campfire from three independent particle types. Recognition from parameter curves. Atmosphere from math.
+# needs: VR wind slider [missing]. Temperature/intensity control [missing]. Log arrangement could be grabbable.
+# relationships: Capstone of particles sequence. Uses lifetime_curves patterns. Uses sub_emitter logic (embers are soft bursts).
+# truth: Emitters plus forces plus lifetime curves plus spatial behavior. This is what the sequence was building toward.
+
 ## Particle campfire — synthesis artifact combining emitters, forces, lifetime
 ## curves, and collision into one recognizable real-time effect.
 ## Fire (orange → red → grey, rising), embers (bright sparks, long trails),

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: On death, spawn children. Recursion in particle systems. One generation seeds the next.
+# desire: To explode beautifully. To show that death is not ending but transformation.
+# critical_parameter: Burst count — 10 children = sparkler, 40 = firework, 100 = supernova. Also: primary lifetime (height of burst).
+# triggers: Primary death → burst spawns at death position, gravity on children → parabolic arcs, color per burst → visual identity
+# emerges: Fireworks from mortar + burst. Recursive spawning as a pattern. The dramatic arc of launch-peak-explosion-rain.
+# needs: VR burst count slider [missing]. Primary launch angle control [missing]. Gravity slider [missing].
+# relationships: Extends Particles_Emitters concept (emitters that ARE particles). Feeds into particle_campfire (embers are soft sub-emitters).
+# truth: Particles spawning particles is recursion made physical. Death becomes birth.
+
 ## Sub-emitters: particles spawning particles on death.
 ## A mortar launches large projectiles upward. On death, each spawns a burst
 ## of child particles — the classic firework pattern.
