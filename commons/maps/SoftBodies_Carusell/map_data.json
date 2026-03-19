@@ -78,7 +78,7 @@
 		}
 	},
 	"map_info": {
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"description": "Carousel of soft cloth and mushrooms — playful physics where centripetal force, collision, and elastic recovery teach deformation through contact",
 		"dimensions": {
 			"depth": 20.0,
 			"max_height": 1.0,
@@ -87,12 +87,13 @@
 		"format": "json",
 		"lookup_name": "SoftBodies_Carusell",
 		"metadata": {
-			"category": "algorithms",
+			"category": "softbodies",
 			"difficulty": "beginner",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization","Grid manipulation","Random processes","8x8 region operations"]
+			"learning_objectives": ["Soft body collision response","Centripetal deformation","Cloth-obstacle interaction","Elastic recovery"]
 		},
-		"name": "Random Algorithms Arena",
+		"name": "Carousel of Soft Collisions",
+		"title": "Carousel of Soft Collisions",
 		"version": "1.0"
 	},
 	"settings": {
