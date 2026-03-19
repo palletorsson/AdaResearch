@@ -39,7 +39,7 @@
 			],
 			"maps": [
 				"SwarmIntelligence_PhysarumColony",
-				"SwarmIntelligence_FlowFeilds",
+				"SwarmIntelligence_FlowFields",
 				"SwarmIntelligence_Boids_Algorithm",
 				"SwarmIntelligence_Agent_Based_Modeling_ABM",
 				"SwarmIntelligence_Ant_Colony_Optimization",
@@ -79,7 +79,7 @@
 					"rationale": "Brainless computation through emergent network formation. Physarum solves mazes and optimizes paths without neurons or centralization."
 				},
 				{
-					"map": "SwarmIntelligence_FlowFeilds",
+					"map": "SwarmIntelligence_FlowFields",
 					"position": "foundation",
 					"artifacts": [
 						"FlowFieldMain"
@@ -149,7 +149,7 @@
 			"rationale": "Slime mold intelligence as sequence opener. Scene-embed or algorithm-only map with no grid artifacts."
 		},
 		{
-			"map": "SwarmIntelligence_FlowFeilds",
+			"map": "SwarmIntelligence_FlowFields",
 			"position": "foundation",
 			"artifacts": [],
 			"size_budget": "compact_only",
