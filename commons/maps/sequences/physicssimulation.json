@@ -92,7 +92,7 @@
 						"verlet_integration"
 					],
 					"size_budget": "environment",
-					"rationale": "Introduction with 3 artifacts"
+					"rationale": "Newton's laws launch the pipeline: force produces acceleration, integration methods (Euler vs Verlet) translate continuous math into discrete timesteps. The foundation of every physics engine."
 				},
 				{
 					"map": "PhysicsSim_Bodies",
@@ -104,7 +104,7 @@
 						"rigid_body"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 4 artifacts"
+					"rationale": "Solid objects meeting: rigid body rotation and angular momentum, collision detection (broad/narrow phase), constraints limiting freedom, bouncing ball as simplest negotiation between velocity and restitution."
 				},
 				{
 					"map": "PhysicsSim_Springs",
@@ -116,7 +116,7 @@
 						"spring_system"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 4 artifacts"
+					"rationale": "Hooke's law scaled up: single spring-damper oscillation, spring-mass lattices propagating waves, cloth emerging from many springs solving equilibrium collectively."
 				},
 				{
 					"map": "PhysicsSim_Fields",
@@ -129,7 +129,7 @@
 						"vector_fields"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 5 artifacts"
+					"rationale": "Invisible architecture: force fields and vector fields directing particles, n-body gravitational democracy, three-body chaos where determinism meets unpredictability."
 				},
 				{
 					"map": "PhysicsSim_Continuum",
@@ -142,7 +142,7 @@
 						"surreal_kinetic_sculpture"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 5 artifacts"
+					"rationale": "Continuous matter discretized: SPH fluid particles, FEM stress-strain, soft body deformation, magnetic fields, and kinetic sculpture where physics becomes art."
 				},
 				{
 					"map": "PhysicsSimulation_Bouncing_Ball_Physics",
@@ -151,7 +151,7 @@
 						"bouncing_ball"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Coefficient of restitution in action: elastic vs inelastic collisions, energy loss per bounce. Every bounce negotiates between velocity and entropy."
 				},
 				{
 					"map": "PhysicsSimulation_Cloth_Simulation",
@@ -160,7 +160,7 @@
 						"cloth_simulation"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Spring-mass lattice at scale: thousands of Hooke's law connections draping, tearing, settling. Cloth thinks with its whole body — no vertex knows the shape."
 				},
 				{
 					"map": "PhysicsSimulation_Collision_Detection",
@@ -169,7 +169,7 @@
 						"collision_detection"
 					],
 					"size_budget": "environment",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Broad phase meets narrow phase: spatial hashing eliminates distant pairs, GJK/SAT resolve overlaps. Split arena mirrors the two-stage detection pipeline."
 				},
 				{
 					"map": "PhysicsSimulation_Constraints",
@@ -178,7 +178,7 @@
 						"constraints"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Joints, hinges, degrees of freedom: the constraint solver reduces motion to what's permitted. Scaffold room with ramps embodies structured limitation."
 				},
 				{
 					"map": "PhysicsSimulation_Finite_Element_Method_FEM",
@@ -187,7 +187,7 @@
 						"fem_simulation"
 					],
 					"size_budget": "environment",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Discretization as engineering truth: finite basis functions approximate continuous stress-strain. Laboratory setting matches the analytical precision of FEM."
 				},
 				{
 					"map": "PhysicsSimulation_Fluid_Simulation_SPH",
@@ -196,7 +196,7 @@
 						"lattice_gas_automata"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Lattice gas automata: fluid behavior from collision rules on a discrete grid. Void basins contain the flow — particles bouncing on lattice points produce viscosity and pressure."
 				},
 				{
 					"map": "PhysicsSimulation_Force_Fields",
@@ -205,7 +205,7 @@
 						"force_fields"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Force as spatial function: radial room descends toward center source. Particles read invisible gradient — divergence, convergence, and vortex made walkable."
 				},
 				{
 					"map": "PhysicsSimulation_Mass_Spring_Damper",
@@ -214,7 +214,7 @@
 						"mass_spring_damper"
 					],
 					"size_budget": "environment",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Oscillation dissected: underdamped rings, overdamped creeps, critically damped settles fastest. Corridor with spring-mounted platforms embodies the damping ratio."
 				},
 				{
 					"map": "PhysicsSimulation_Newton_s_Laws",
@@ -223,7 +223,7 @@
 						"newtons_laws"
 					],
 					"size_budget": "environment",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Three laws, one arena: inertia resists, F=ma accelerates, action-reaction pairs. The simplest rules constraining everything physics simulation builds upon."
 				},
 				{
 					"map": "PhysicsSimulation_Numerical_Integration",
@@ -232,7 +232,7 @@
 						"numerical_integration"
 					],
 					"size_budget": "environment",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Stepped ascending room as accumulated area: Euler's first-order error, Verlet's time-reversible elegance, RK4's precision. The timestep method determines whether simulation behaves or explodes."
 				},
 				{
 					"map": "PhysicsSimulation_Particle_Systems",
@@ -241,7 +241,7 @@
 						"cellular_automata_3d"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "3D cellular automata as particle population: birth, death, and neighborhood rules producing crystalline growth. Particles governed by local logic, not global forces."
 				},
 				{
 					"map": "PhysicsSimulation_Rigid_Body_Dynamics",
@@ -250,7 +250,7 @@
 						"rigid_body"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Inertia tensor and angular momentum: obstacle course where rigid bodies tumble, spin, and conserve rotational energy. Geometry determines resistance to rotation."
 				},
 				{
 					"map": "PhysicsSimulation_Spring_Mass_Systems",
@@ -259,7 +259,7 @@
 						"spring_mass_system"
 					],
 					"size_budget": "mixed",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Suspended walkway as spring-mass bridge: local springs propagating waves globally. The discrete secret of continuous matter — vibration traveling through connected nodes."
 				},
 				{
 					"map": "PhysicsSimulation_Three_Body_Problem",
@@ -268,7 +268,7 @@
 						"cellular_automata_1d"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Poincaré's impossibility: three gravitational bodies with no closed-form solution. Cellular automata frames deterministic chaos — predictable rules, unpredictable outcomes."
 				},
 				{
 					"map": "PhysicsSimulation_Vector_Fields",
@@ -278,7 +278,7 @@
 						"vector_fields"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 2 artifacts"
+					"rationale": "Space as instruction set: vector field arrows direct particles through sources, sinks, and vortices. Dark sphere anchors the visual field; streamlines reveal invisible architecture."
 				},
 				{
 					"map": "PhysicsSimulation_Verlet_Integration",
@@ -287,7 +287,7 @@
 						"verlet_integration"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Verlet's elegance isolated: position-based integration that is time-reversible, energy-conserving, and stable. The method that makes cloth and molecular dynamics possible."
 				}
 			]
 		}
