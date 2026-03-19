@@ -1,5 +1,5 @@
-Given a scatter of points, find the tightest boundary that contains them all. No point left outside, no boundary segment that bends inward. Graham scan sorts by polar angle, then walks counterclockwise — rejecting any turn that curves the wrong way. Gift wrapping starts from the leftmost point and pivots, always choosing the most counterclockwise neighbor. Both algorithms converge on the same shape. The minimal enclosure.
+Platforms line the perimeter. The center is open, low — a courtyard surrounded by raised stations at height-3. Walk the border. You are tracing the convex hull.
 
-Walk the perimeter. Platforms rise along the outer edge — each one a vertex of the hull. The interior stays open, unstructured, irrelevant to the boundary. Points that fall inside are discarded. They contribute nothing to the shape.
+Imagine a rubber band stretched around pushpins on a board. It snaps to the outermost pins, ignoring everything interior. The convex hull is that rubber band: the tightest convex boundary enclosing all points. Graham scan sorts by angle and marches counterclockwise. Gift wrapping picks the next extreme point by turning. Both find the same boundary — the minimal enclosure.
 
-Every convex hull is an act of exclusion. The algorithm decides what counts as edge and what gets swallowed by interior. Structure defined not by what it contains but by what it refuses to fold around.
+Most points in a random scatter are interior — they contribute nothing to the hull. The hull is defined entirely by the extremes. The tightest boundary around a set reveals which members actually define the shape, and which are just along for the ride.

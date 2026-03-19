@@ -1,5 +1,5 @@
-Every cell knows how far it is from the nearest boundary. The EDT assigns each point in space a single number — its shortest distance to a source. Not Manhattan blocks. Not chessboard steps. True Euclidean: the straight-line gap between here and there, computed everywhere at once.
+The floor rises as you walk outward from center. Low in the middle, stepping up to height-2, then height-3 near the walls. The room is a bowl inverted — distance made into elevation.
 
-The floor rises. Heights increase from center outward, each column's elevation encoding its distance value. Walk the gradient room and feel the field under your feet — a terrain shaped entirely by proximity. The 8×8 grid becomes a topographic map of absence, every summit marking the point most removed from origin.
+The Euclidean distance transform computes, for every cell in a grid, the straight-line distance to the nearest obstacle or boundary. It turns a binary image — wall or not-wall — into a gradient. The result is a field where every point knows how far it is from the edge. Navigation algorithms use this to stay centered in corridors. Erosion algorithms use it to peel shapes layer by layer.
 
-Distance fields are quiet infrastructure. Collision detection, pathfinding, morphological operations, font rendering — all built on this single question asked at every point. How far? The answer reshapes space into a landscape where geometry becomes gravity.
+Height is distance. The floor is not architecture — it is a computation frozen mid-execution. The terrain is the answer to a question every cell asked simultaneously: how far am I from the nearest wall?

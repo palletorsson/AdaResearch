@@ -1,5 +1,5 @@
-Geometry begins with the grid. A 9×9 floor, tables at height 2, open space between. Before any algorithm can sort, search, or optimize, it needs to know where things are. Position. Adjacency. Distance. The raw coordinates that make computation spatial.
+A flat field of squares, uniform as graph paper. No voids, no walls, no tricks. Height-2 tables rise from the floor like workbenches in an empty workshop. The grid is not a metaphor here. It is the subject.
 
-Walk the grid. Notice the clusters — tables grouped, gaps between them. Every geometric algorithm starts here: points in space, the relationships between them. Convex hulls wrap. Voronoi diagrams partition. Triangulations connect. But first, the ground truth — a flat plane, a height step, the difference between *here* and *there*.
+Before convex hulls and distance fields, before any geometric algorithm can run, there must be ground. Coordinates. A place where "here" means something precise. The tables give you height — a second axis made physical. Walk between them. Notice how your body already computes distance, already interpolates position between landmarks.
 
-Space is not neutral. A grid implies axes, origin, orientation. To impose coordinates is to decide what counts as close, what counts as far, what counts as neighbor. Geometry's first act is also its first assumption.
+Every computational geometry algorithm assumes a coordinate system exists. This room is that assumption, made walkable. The grid is not scaffolding for the lesson. The grid is the lesson.

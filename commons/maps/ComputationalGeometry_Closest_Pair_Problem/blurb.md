@@ -1,5 +1,5 @@
-Given *n* points, find the two nearest. Brute force checks every pair — O(n²). Divide and conquer splits the set, solves each half, then handles the strip where the answer might cross the boundary. The strip is the hard part. Only points within distance *d* of the dividing line matter, and a geometric argument limits comparisons to seven neighbors. O(n log n). The closest pair hides in the crowd.
+Platforms scattered across a wide floor like stones in a dry riverbed. Height-3 islands, each a few cells across, separated by flat ground. Some close together, some far apart. Fibonacci spirals turn slowly on one of them.
 
-Scattered platforms dot the floor. Fibonacci sequences spiral through the arrangement — distance encoded in growth. The problem looks like search but operates like elimination. Most pairs don't matter. The algorithm's work is deciding what to ignore.
+The closest pair problem: given n points, find the two nearest. Brute force checks every combination — n-squared comparisons. The trick is divide and conquer. Split the set down the middle. Solve each half. The answer is either within one half or it straddles the divide. That straddling case is where the cleverness lives.
 
-Proximity is not a relationship between two points. It's a property that emerges only after every other distance has been ruled out. Closeness is what remains.
+Growth remembers its last two steps and spirals. The closest pair algorithm remembers its recursive subproblems. Among many scattered things, nearness is not obvious — it must be computed, and the fastest path to it runs through division.

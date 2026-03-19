@@ -1,5 +1,5 @@
-A Fenwick tree stores cumulative sums in a flat array. No pointers, no nodes — just indices whose binary representations encode their own reach. Flip the lowest set bit and you climb. Flip it again and you climb further. Each index knows exactly how much of the past it carries.
+Stepped platforms at heights that follow no obvious pattern — until you see it in binary. The first platform covers one cell. The second covers two. The fourth covers four. Responsibilities assigned by the lowest set bit.
 
-Update one element and only log(n) entries change. Query a prefix sum and only log(n) lookups resolve. The trick is arithmetic: `i & (-i)` extracts the responsibility of each position. The tree hides inside the binary structure of counting itself.
+A Fenwick tree computes prefix sums. Each node is responsible for a range determined by its index in binary: the lowest set bit tells you how many elements that node aggregates. Index 6 (binary 110) covers 2 elements. Index 8 (binary 1000) covers 8. Update cascades upward by adding the lowest set bit. Query cascades downward by subtracting it. Both operations: log-n.
 
-Stepped platforms rise across the grid. Height encodes accumulation — what each position holds, how far back its memory extends. Walk the levels. The structure is not built from branches but from the gaps between powers of two. Storage that remembers by forgetting where the boundaries are.
+The trick is that binary arithmetic already encodes a tree structure. No pointers, no child references — just an array whose indices, read in binary, reveal the hierarchy. The storage is flat. The structure is implicit. Binary arithmetic as architecture.

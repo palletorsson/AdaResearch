@@ -1,5 +1,3 @@
-A finite set of contractions. Apply them all. Take the output, apply them again. The attractor emerges — not drawn but converged upon. IFS encodes a fern in four affine maps. A forest in a handful of matrices. The whole shape lives inside its own pieces, and every piece contains the whole.
+Four raised platforms repeat the same shape at different scales, each one a contraction of the whole. Ramps lead between them. The room is its own map at two magnifications.
 
-Koch curves climb the walls here, their fractal edges folding inward at every scale. Three-dimensional geometry built from rules that fit in a single line. The platform repeats beneath your feet — smaller, rotated, translated — because the system that made it cannot stop making it.
-
-This is compression taken to its limit. Infinite detail from finite description. The image is not stored but generated, each iteration dragging complexity out of almost nothing. Identity as fixed point — what remains when the transformations have nowhere left to go.
+An iterated function system applies a handful of affine transformations — shrink, rotate, translate — and feeds the output back as input. The attractor is the fixed point: the shape that does not change under its own transformations. Ferns, corals, mountain ranges. Every part contains the logic of the whole. Self-similarity is not decoration. It is convergence.

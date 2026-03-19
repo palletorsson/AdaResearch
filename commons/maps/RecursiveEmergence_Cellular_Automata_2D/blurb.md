@@ -1,5 +1,3 @@
-A grid of cells. Each alive or dead. Each counting its neighbors. Three neighbors — birth. Two or three — survival. Anything else — death. Four rules. That's the entire program.
+The floor is alive. Cells flicker on and off in a flat grid, each one counting its neighbors — too few and it dies of loneliness, too many and it suffocates. Three neighbors: birth. Two or three: survival. Anything else: gone.
 
-The floor is the automaton. Gliders slide across it. Blinkers pulse in place. Blocks sit still, stable, resolved. The first dimension gave you a scroll — cause flowing rightward into effect. The second dimension gives you a world. Patterns interact. Collisions produce offspring neither parent contained.
-
-Lattice gas hides underneath — discrete particles obeying collision rules on the same grid, and from those collisions, fluid dynamics. Navier-Stokes emerging from counting neighbors. Turbulence from tic-tac-toe logic. The continuous is a hallucination performed by the discrete at sufficient scale.
+You walk across the computation. Gliders slide under your feet. Oscillators pulse in place. The grid is not a display; it is the automaton itself, and you are standing inside its logic. Life does not require biology — only adjacency and counting.

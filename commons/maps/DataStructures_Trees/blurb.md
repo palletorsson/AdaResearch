@@ -1,5 +1,5 @@
-A single trunk splits into two. Each branch splits again. Binary recursion made spatial — the tree grows by halving, and every node holds the whole pattern in miniature.
+A trunk room forks into two wings. Each wing forks again. The recursive tree artifact grows in the central space — box meshes splitting into sub-branches, self-similar at every level. The architecture mirrors the data structure mirrors the artifact.
 
-Linked lists gave you the chain. Now the chain forks. A tree is a list that learned to decide — left or right, less or greater, yes or no. Binary search compresses lookup from linear scan to logarithmic descent. To find one item among a million takes twenty steps. The structure itself does the thinking.
+A tree is a list that learned to decide. At each node: left or right, less or greater. Binary search trees sort by this single constraint, repeated. No central authority assigns positions — each node only knows its children, yet the whole structure self-organizes into sorted order. Hierarchy from constraint, not command.
 
-Walk the recursive tree. Every subtree is a complete tree. Every child is a root. Hierarchy emerges not from command but from constraint — each node knows only its children, yet the whole structure sorts itself. The tree doesn't centralize order. It distributes the question until the answer is local.
+The artifact's branches glow with emission materials, each subtree a complete tree in miniature. Walk from root to leaf. The path you take is a sequence of binary decisions. Every search, every insertion, every deletion follows this same descent — choosing, at each fork, which half of the world to keep.

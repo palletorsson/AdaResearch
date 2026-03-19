@@ -1,5 +1,3 @@
-The Mandelbrot set asks: does this point escape? The Julia set asks the same question with the rules reversed. Fix the constant, vary the starting point. Every pixel tested against the same equation, the same threshold. What changes is not the law but the initial condition.
+A void splits the room down the center like a fracture line. On each side, symmetric platforms mirror each other. The same equation governs both halves — what changes is only the starting point.
 
-A symmetric room split by a central void. On each side, fractal boundaries bloom — connected or dust, depending on a single parameter. The Sierpinski pyramid sits at the center, recursion made solid, the same shape eating itself at every scale. Rotate the constant through the complex plane and watch the Julia set shatter, reconnect, shatter again.
-
-The Mandelbrot set is a catalogue. Each point in it indexes a unique Julia set — a whole universe of boundary behavior filed under one coordinate. The map of all possible maps. Identity is not fixed. It is a parameter.
+The Julia set fixes c and varies z. The Mandelbrot set fixes z and varies c. They are the same computation viewed from opposite directions. Move c by a hundredth and a connected dendrite shatters into dust. The boundary between connected and disconnected Julia sets is the Mandelbrot set itself. Every constant contains a universe. The question is whether that universe holds together.
