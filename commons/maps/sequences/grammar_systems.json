@@ -55,7 +55,7 @@
 						"markov_chains_tree"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 3 artifacts"
+					"rationale": "Markov chains as generative grammar: transition probabilities predict next states from history. Clipboard logs the chain, tree variant shows branching probability paths."
 				},
 				{
 					"map": "ProceduralGeneration_N_grams",
@@ -64,7 +64,7 @@
 						"markov_chains"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "N-grams as local context windows: same Markov chain artifact reconfigured for N-gram analysis. Character and word-level pattern capture — the statistical foundation of language models."
 				},
 				{
 					"map": "Voxel_Grammar",
@@ -77,7 +77,7 @@
 						"voxelnoise"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 5 artifacts"
+					"rationale": "Voxel grammar synthesis: city generator and context-sensitive tree from L-systems, 3D cellular automata tree, voxel noise and ROI volumes. Five artifacts showing grammars building worlds from rules."
 				}
 			]
 		}

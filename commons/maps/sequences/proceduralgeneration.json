@@ -213,7 +213,7 @@
 						"GeneticProgramming"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 1 artifact"
+					"rationale": "Heavy compute solo map: 3D creatures evolve through selection pressure. Genetic programming as dramatic opener — evolution without explicit design."
 				},
 				{
 					"map": "PG_Space_Colonization",
@@ -222,7 +222,7 @@
 						"space_colonization_algorithm"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Heavy compute solo map: trees grow toward attractors via space colonization. Branching structure emerges from point-cloud competition — growth without blueprint."
 				},
 				{
 					"map": "PG_Percolation_Network",
@@ -232,7 +232,7 @@
 						"percolationnetwork_ca"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Heavy compute solo map: percolation network CA tests connectivity thresholds in random grids. Dark sphere anchors the visual field as clusters form or fragment at the critical probability."
 				},
 				{
 					"map": "PG_Branching_Growth",
@@ -242,7 +242,7 @@
 						"organic_space"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 2 artifacts"
+					"rationale": "Two growth strategies compared: branching algorithm builds tree-like structures toward attractors, organic noise space sculpts terrain from Perlin fields. Medium compute, safe to pair."
 				},
 				{
 					"map": "PG_Caves_Mazes",
@@ -252,7 +252,7 @@
 						"maze_generation"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 2 artifacts"
+					"rationale": "Procedural exploration spaces: cave random walk carves tunnels through solid rock, maze generation builds corridors from recursive backtracking. Two strategies for explorable worlds."
 				},
 				{
 					"map": "PG_Sculpted_Forms",
@@ -263,7 +263,7 @@
 						"layered_membrane"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 3 artifacts"
+					"rationale": "Geometric construction: cube mound accumulates voxels, dome subdivides icosahedra, layered membrane stacks transparent surfaces. Three ways rules sculpt form from accumulation."
 				},
 				{
 					"map": "PG_Mirrored_Patterns",
@@ -273,7 +273,7 @@
 						"rhizomatic_maze_space"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 2 artifacts"
+					"rationale": "Pattern from reflection and branching: mirrored cellular texture wraps CA output symmetrically onto 3D form, rhizomatic maze builds non-hierarchical branching networks. Light compute synthesis."
 				}
 			]
 		}

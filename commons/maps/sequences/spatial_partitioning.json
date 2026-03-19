@@ -53,7 +53,7 @@
 						"voronoi_diagram_3d"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 1 artifact"
+					"rationale": "Voronoi diagrams in 3D: space partitioned by proximity, every point belonging to its nearest seed. Natural territories emerging from distance alone."
 				},
 				{
 					"map": "ProceduralGeneration_Delaunay_Triangulation",
@@ -62,7 +62,7 @@
 						"delaunay_triangulation_3d_cell"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Delaunay triangulation: the dual of Voronoi, connecting points into optimal triangles. No point falls inside any triangle's circumscribed circle — geometric perfection."
 				},
 				{
 					"map": "ProceduralGeneration_Space_Partitioning",
@@ -71,7 +71,7 @@
 						"binary_space_partitioning"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Binary space partitioning: recursive hyperplane cuts dividing space into convex regions. The algorithm behind Doom's rendering and dungeon generation."
 				},
 				{
 					"map": "ProceduralGeneration_Poisson_Disk_Sampling",
@@ -80,7 +80,7 @@
 						"poisson_disk_sampling_3d"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Poisson disk sampling in 3D: evenly distributed random points with guaranteed minimum spacing. Blue noise distribution — the synthesis of randomness and order."
 				}
 			]
 		}

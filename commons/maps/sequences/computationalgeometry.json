@@ -41,21 +41,21 @@
 					"position": "intro",
 					"artifacts": [],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 0 artifacts"
+					"rationale": "Scene-embedded geometric algorithm demonstrations. Awaiting artifact placement — algorithm visualization runs in-scene."
 				},
 				{
 					"map": "Geometric_2",
 					"position": "intro",
 					"artifacts": [],
 					"size_budget": "compact_only",
-					"rationale": "Introduction with 0 artifacts"
+					"rationale": "Scene-embedded geometric algorithm demonstrations. Second introductory gallery — algorithm visualization runs in-scene."
 				},
 				{
 					"map": "Geometric_3",
 					"position": "foundation",
 					"artifacts": [],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 0 artifacts"
+					"rationale": "Scene-embedded geometric computations. Foundation gallery — spatial algorithms demonstrated through environment geometry."
 				},
 				{
 					"map": "ComputationalGeometry_Medial_Axis_Transform",
@@ -64,7 +64,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Medial axis as skeleton: the locus of inscribed circles that captures a shape's topological essence. Thinning geometry to its structural core."
 				},
 				{
 					"map": "ComputationalGeometry_Distance_Fields_SDF",
@@ -73,7 +73,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Signed distance fields: every point in space knows how far it is from the nearest surface. The implicit representation that powers modern rendering and collision."
 				},
 				{
 					"map": "ComputationalGeometry_Morphological_Operations",
@@ -82,7 +82,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Dilation, erosion, opening, closing: structuring elements sweep across shapes, adding or removing boundary pixels. Image processing as geometric sculpting."
 				},
 				{
 					"map": "ComputationalGeometry_Closest_Pair_Problem",
@@ -91,7 +91,7 @@
 						"fibonacci_sequences"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Divide and conquer finds the nearest two points in O(n log n). Fibonacci sequences provide spatial distribution context for the geometric search."
 				},
 				{
 					"map": "ComputationalGeometry_Line_Intersection",
@@ -100,7 +100,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Sweep line algorithm: a vertical line scans left to right, detecting segment crossings. Event-driven geometry turning O(n²) brute force into elegance."
 				},
 				{
 					"map": "ComputationalGeometry_Point_in_Polygon",
@@ -109,7 +109,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Ray casting: shoot a ray from the point, count boundary crossings. Odd means inside, even means outside. The simplest topological test in computational geometry."
 				},
 				{
 					"map": "ComputationalGeometry_Convex_Hull_Algorithms",
@@ -118,7 +118,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Gift wrapping, Graham scan, quickhull: multiple strategies for finding the tightest convex boundary. The rubber band around the nails — minimal enclosure as geometric synthesis."
 				},
 				{
 					"map": "ComputationalGeometry_Euclidean_Distance_Transform",
@@ -127,7 +127,7 @@
 						"env_one"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Every pixel labeled with its distance to the nearest feature: the distance transform that enables Voronoi computation, path planning, and morphological analysis."
 				}
 			]
 		}
