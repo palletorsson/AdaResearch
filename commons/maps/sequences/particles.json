@@ -47,7 +47,7 @@
 						"example_4_2_array_particles_vr"
 					],
 					"size_budget": "environment",
-					"rationale": "Introduction with 3 artifacts — vector_field removed (belongs to vectors sequence)"
+					"rationale": "Single particle and array: one particle demonstrates position/velocity/acceleration, arrays show population behavior. Dark sphere anchors the space."
 				},
 				{
 					"map": "Particles_Emitters",
@@ -60,7 +60,7 @@
 						"sub_emitters"
 					],
 					"size_budget": "mixed",
-					"rationale": "Building foundations with 5 artifacts including multiple emitters and sub-emitters"
+					"rationale": "Emitter architecture: single emitter, particle body, multiple emitters, and sub-emitters build the emission pipeline from source to cascade."
 				},
 				{
 					"map": "Particles_Forces",
@@ -71,7 +71,7 @@
 						"example_2_6_single_attractor_vr"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 3 force-related artifacts"
+					"rationale": "Particles under force: force fields push populations, single attractor pulls them. External forces shaping particle trajectories — Newton applied to swarms."
 				},
 				{
 					"map": "Particles_LifetimeAndTypes",
@@ -83,7 +83,7 @@
 						"lifetime_curves"
 					],
 					"size_budget": "environment",
-					"rationale": "Integration combining 4 artifacts — inheritance, configurable lifetimes, and lifetime curves"
+					"rationale": "Lifetime and type: inheritance polymorphism creates particle families, particle_systems manages populations, lifetime curves control birth-to-death trajectories."
 				},
 				{
 					"map": "Particles_Collision",
@@ -94,7 +94,7 @@
 						"particle_campfire"
 					],
 					"size_budget": "mixed",
-					"rationale": "Synthesis with 3 artifacts — collision, repulsion, and campfire synthesis capstone"
+					"rationale": "Collision and repulsion: particles that bounce off boundaries and push each other away. Campfire as capstone — fire, smoke, and embers synthesizing all particle systems into one scene."
 				}
 			]
 		}

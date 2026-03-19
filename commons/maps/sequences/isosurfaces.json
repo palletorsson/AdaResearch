@@ -127,7 +127,7 @@
             "voxel_noise_demo"
           ],
           "size_budget": "world_scale",
-          "rationale": "Introduction with 1 artifact"
+          "rationale": "Voxel noise as implicit surface source: 3D noise field defining density values that marching cubes will later polygonize. The raw material before the algorithm acts."
         },
         {
           "map": "ISO_LookupTable",
