@@ -10,7 +10,7 @@
 			"lookup_name": "astar",
 			"scene": "res://algorithms/searchpathfinding/astar/astar.tscn",
 			"name": "A* Pathfinding",
-			"description": "A* search algorithm visualization — heuristic-guided shortest path through a grid. Watch the frontier expand, guided by estimated distance, finding optimal paths faster than brute-force search.",
+			"description": "Advanced pathfinding comparison — Jump Point Search (pruned A* with symmetry breaking), Theta* (any-angle line-of-sight paths), and side-by-side algorithm comparison on the same randomized grid. ImmediateMesh visualization of open/closed sets, jump points, line-of-sight checks, and final paths with per-algorithm statistics.",
 			"category": "algorithms",
 			"complexity": "intermediate",
 			"tags": [
@@ -19,7 +19,11 @@
 				"heuristic",
 				"search",
 				"shortest_path",
-				"grid"
+				"grid",
+				"jps",
+				"theta_star",
+				"jump_point_search",
+				"any_angle"
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
