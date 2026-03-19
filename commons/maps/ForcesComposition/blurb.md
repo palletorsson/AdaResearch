@@ -1,36 +1,5 @@
-Universal sandbox for exploring vector operations.
+Forces combine. Two pulls on one body become a single resultant — vector addition applied to dynamics. Three forces, four forces, any number: sum them, and the net force determines the acceleration. Superposition is the principle that makes complex systems tractable. Decompose the chaos into individual forces, solve each one, add the results.
 
-## What It Shows
+Work is force times displacement. More precisely: the dot product F · d. Push something along the direction it moves and you transfer energy. Push perpendicular and you transfer nothing. The dot product from the vector operations map now has physical meaning — it measures how much a force accomplishes.
 
-Two draggable vectors (A and B) with ALL operations computed live:
-- **A + B** (yellow) — Vector addition
-- **A - B** (purple) — Vector subtraction
-- **A · B** — Dot product with angle
-- **A × B** (green) — Cross product
-- **proj_B(A)** (pink) — Projection of A onto B
-
-## Visual Elements
-
-- **Angle arc** between vectors (for dot product)
-- **Parallelogram** showing cross product area
-- **Info panel** with all computed values
-
-## Controls
-
-| Key | Action |
-|-----|--------|
-| 1 | Show all operations |
-| 2 | Addition mode only |
-| 3 | Dot product mode only |
-| 4 | Cross product mode only |
-| 5 | Projection mode only |
-| R | Reset vectors |
-
-## Why It Matters
-
-Instead of separate scenes for each operation, the Workbench shows how they relate:
-- Perpendicular vectors → dot product = 0
-- Parallel vectors → cross product = 0
-- Same vector → A - A = 0, A + A = 2A
-
-Everything updates in real-time as you drag.
+Momentum is mass times velocity. When two bodies collide, total momentum is conserved — what one loses, the other gains. Elastic collisions conserve kinetic energy too. Inelastic ones don't. Watch the numbers before and after impact: momentum balances, energy sometimes doesn't. Conservation laws are the bookkeeping of physics.
