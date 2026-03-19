@@ -10,13 +10,12 @@
 				"Compare joint variants"
 			],
 			"maps": [
-				"Joints_1",
-				"Joints_2",
-				"Joints_3",
-				"Joints_4",
-				"Joints_5",
-				"Joints_6",
-				"Joints_7"
+				"Joints_ConstrainedMotion",
+				"Joints_HingeAxis",
+				"Joints_SliderRail",
+				"Joints_BallSocket",
+				"Joints_SoftConstraints",
+				"Joints_Kinematics"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_init",
@@ -24,74 +23,64 @@
 			"completion_rewards": [],
 			"artifact_groups": [
 				{
-					"map": "Joints_1",
+					"map": "Joints_ConstrainedMotion",
 					"position": "intro",
 					"artifacts": [
-						"DoublePendulum",
-						"PendulumPin"
+						"PendulumPin",
+						"DoublePendulum"
 					],
 					"size_budget": "world_scale",
 					"rationale": "Introduction with 2 artifacts"
 				},
 				{
-					"map": "Joints_2",
+					"map": "Joints_HingeAxis",
 					"position": "foundation",
 					"artifacts": [
-						"CharacterRagdoll",
-						"HingeCrank"
+						"HingeCrank",
+						"DrawbridgeHinge"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Single-axis hinge rotation with 2 artifacts"
 				},
 				{
-					"map": "Joints_3",
+					"map": "Joints_SliderRail",
 					"position": "foundation",
 					"artifacts": [
-						"ConeTwistBag",
+						"SliderPress",
 						"SpringSuspension"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Linear translation joints with 2 artifacts"
 				},
 				{
-					"map": "Joints_4",
+					"map": "Joints_BallSocket",
 					"position": "exploration",
 					"artifacts": [
-						"ChainSwing",
+						"ConeTwistBag",
 						"CharacterRagdoll"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Deeper exploration through 2 artifacts"
+					"rationale": "Spherical rotation and cone-twist limits"
 				},
 				{
-					"map": "Joints_5",
+					"map": "Joints_SoftConstraints",
 					"position": "integration",
 					"artifacts": [
-						"DrawbridgeHinge",
-						"PendulumPin"
+						"ChainSwing",
+						"constraints"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 2 artifacts"
+					"rationale": "Springs, chains, and constraint solvers"
 				},
 				{
-					"map": "Joints_6",
-					"position": "integration",
-					"artifacts": [
-						"GimbalStabilizer",
-						"tscn_joint"
-					],
-					"size_budget": "mixed",
-					"rationale": "Integration combining 2 artifacts"
-				},
-				{
-					"map": "Joints_7",
+					"map": "Joints_Kinematics",
 					"position": "synthesis",
 					"artifacts": [
-						"DoublePendulum",
-						"PendulumPin"
+						"GimbalStabilizer",
+						"IKArm"
 					],
-					"size_budget": "world_scale",
-					"rationale": "Synthesis with 2 artifacts"
+					"size_budget": "mixed",
+					"rationale": "Articulated chains, gimbal mechanics, and inverse kinematic solving"
 				}
 			]
 		}

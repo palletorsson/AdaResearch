@@ -1,1 +1,0 @@
-Trees grow without blueprints. The stochastic tree introduces randomness into recursion—same grammar, different outcomes each time. Nature's fractals are never identical, yet always recognizable. Here, the λ parameter enters: deterministic rules plus entropy injection.

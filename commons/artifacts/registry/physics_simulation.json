@@ -455,6 +455,7 @@
 		"force_fields": {
 			"lookup_name": "force_fields",
 			"scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+			"scene_path": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
 			"name": "Force Fields",
 			"description": "Configurable force fields — uniform gravity, directional wind, radial attraction/repulsion, and vortex fields — applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
 			"qfep_connection": "Force fields as the lambda landscape — spatial functions that shape particle trajectories. Particles flowing through a field are entropy exploring the contours of imposed order. Superposition of fields creates emergent complexity from simple additive rules.",
@@ -532,6 +533,7 @@
 		"particle_systems": {
 			"lookup_name": "particle_systems",
 			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+			"scene_path": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
 			"name": "Particle Systems",
 			"description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die — creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
 			"qfep_connection": "Particle systems as statistical emergence — each particle follows trivial rules (birth, force, death), but the ensemble produces recognizable macroscopic patterns. Order from quantity: the thermodynamic limit where individual randomness becomes collective structure.",
@@ -1231,6 +1233,41 @@
 			],
 			"tags": [
 				"physics"
+			]
+		},
+		"SliderPress": {
+			"lookup_name": "SliderPress",
+			"name": "SliderPress",
+			"description": "Linear slider joint — piston/rail motion along one axis",
+			"scene": "res://algorithms/joint/04_slider_press/SliderPress.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"physics",
+				"joints"
+			],
+			"tags": [
+				"physics",
+				"joints"
 			]
 		},
 		"SpringSuspension": {
@@ -2986,6 +3023,26 @@
 				"physics",
 				"simulation"
 			]
+		},
+		"IKArm": {
+			"scene_path": "res://algorithms/joint/11_ik_arm/IKArm.tscn",
+			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
+			"tags": ["physics", "joints", "inverse-kinematics"]
+		},
+		"lifetime_curves": {
+			"scene_path": "res://algorithms/particles/lifetime_curves/lifetime_curves.tscn",
+			"description": "Three emitters demonstrating color, size, and opacity curves over particle lifetime",
+			"tags": ["particles", "lifetime", "curves"]
+		},
+		"sub_emitters": {
+			"scene_path": "res://algorithms/particles/sub_emitters/sub_emitters.tscn",
+			"description": "Firework mortar launching projectiles that spawn burst particles on death",
+			"tags": ["particles", "sub-emitters", "fireworks"]
+		},
+		"particle_campfire": {
+			"scene_path": "res://algorithms/particles/particle_campfire/particle_campfire.tscn",
+			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
+			"tags": ["particles", "synthesis", "campfire", "fire"]
 		}
 	},
 	"sequence_mapping": {

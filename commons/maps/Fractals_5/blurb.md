@@ -1,1 +1,0 @@
-Replace every edge with a spike. Do it again. The Koch curve has infinite length contained in finite area—a line that wants to be a plane but never quite arrives. Dimension 1.262: coastline logic, the boundary between bounded and unbounded.

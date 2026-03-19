@@ -1,1 +1,0 @@
-Chains of joints form articulated structures. Bones connected at joints, each rotation affecting all descendants. The skeleton emerges: move the shoulder and the hand follows. Hierarchical constraints propagate through the chain. Bodies become machines become characters.

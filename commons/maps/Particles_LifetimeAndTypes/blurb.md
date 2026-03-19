@@ -1,0 +1,1 @@
+Lifetime and type variation shape particles from birth to death. Inheritance gives each particle subclass its own behavior — fire, smoke, sparks — while configurable lifetime curves sculpt how they age. Quick bright flash or slow gentle fade, growing embers or shrinking sparks.

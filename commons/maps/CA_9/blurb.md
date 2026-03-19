@@ -1,1 +1,0 @@
-Three-dimensional cellular automata. Cells have 26 neighbors instead of 8. Patterns can tunnel, spiral, form shells. The computational cost explodes but so does the possibility space. Life in 3D is life with depth — structures that cannot exist in flatland.

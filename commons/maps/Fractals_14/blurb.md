@@ -1,1 +1,0 @@
-The journey ends where it could begin again. Stochastic trees return—deterministic rules plus random variation, the QFEP in botanical form. Each tree is unique, each follows the same grammar. This is the synthesis: F + λE(S) + φΔE(S,t) made vegetable.

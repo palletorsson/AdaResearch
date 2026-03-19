@@ -1,1 +1,0 @@
-z = z² + c. Five characters containing infinite complexity. The Mandelbrot set is the atlas of all Julia sets—each point a different universe, each zoom revealing new structure. The boundary is infinitely complex, never resolved, computationally irreducible. This is the edge of chaos made visible.

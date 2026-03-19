@@ -28,32 +28,24 @@
 				"Edge of chaos: where complex behavior emerges"
 			],
 			"content": [
-				"CA_1: Introduction to cellular automata concepts",
-				"CA_2: 1D automata\u00e2\u20ac\u201dWolfram's rule numbering",
-				"CA_3: Rule 30\u00e2\u20ac\u201dchaos from simple rules",
-				"CA_4: Rule 110\u00e2\u20ac\u201dcomputation at the edge",
-				"CA_5: Conway's Game of Life basics",
-				"CA_6: Gliders and spaceships",
-				"CA_7: Oscillators and still lifes",
-				"CA_8: Building with Life patterns",
-				"CA_9: 3D cellular automata",
-				"CA_10: Continuous automata",
-				"CA_11: Custom rule exploration",
-				"CA_12: Computational universality"
+				"CA_Introduction: Introduction",
+				"CA_ElementaryRules: Elementary Rules",
+				"CA_GameOfLife: Game of Life",
+				"CA_BeyondBinary: Beyond Binary",
+				"CA_ExpandingSpace: Expanding Space",
+				"CA_SoftRules: Soft Rules",
+				"CA_AgentsCircuits: Agents and Circuits",
+				"CA_EdgeOfChaos: Edge of Chaos"
 			],
 			"maps": [
-				"CA_1",
-				"CA_2",
-				"CA_3",
-				"CA_4",
-				"CA_5",
-				"CA_6",
-				"CA_7",
-				"CA_8",
-				"CA_9",
-				"CA_10",
-				"CA_12",
-				"CA_11"
+				"CA_Introduction",
+				"CA_ElementaryRules",
+				"CA_GameOfLife",
+				"CA_BeyondBinary",
+				"CA_ExpandingSpace",
+				"CA_SoftRules",
+				"CA_AgentsCircuits",
+				"CA_EdgeOfChaos"
 			],
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",
@@ -61,9 +53,9 @@
 				"res://commons/context/clipboard/tutorial_text/game_of_life_axioms.md"
 			],
 			"algorithm_paths": {
-				"CA_1": "res://algorithms/cellularautomata/basic/",
-				"CA_5": "res://algorithms/cellularautomata/gameoflife/",
-				"CA_9": "res://algorithms/cellularautomata/3d/"
+				"CA_Introduction": "res://algorithms/cellularautomata/basic/",
+				"CA_BeyondBinary": "res://algorithms/cellularautomata/gameoflife/",
+				"CA_ExpandingSpace": "res://algorithms/cellularautomata/3d/"
 			},
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_cellularautomata",
@@ -77,7 +69,7 @@
 			],
 			"artifact_groups": [
 				{
-					"map": "CA_1",
+					"map": "CA_Introduction",
 					"position": "intro",
 					"artifacts": [
 						"dark_sphere",
@@ -88,19 +80,7 @@
 					"rationale": "Artistic CA highlights: Persian rug pattern and line network introduce visual CA output"
 				},
 				{
-					"map": "CA_2",
-					"position": "intro",
-					"artifacts": [
-						"dark_sphere",
-						"ca_columns",
-						"mirrored_cellular_automata",
-						"ca_bridge"
-					],
-					"size_budget": "mixed",
-					"rationale": "CA showcase: avalanche, crack, dendrite patterns; structural CA with columns and bridge"
-				},
-				{
-					"map": "CA_3",
+					"map": "CA_ElementaryRules",
 					"position": "foundation",
 					"artifacts": [
 						"structure_growth",
@@ -110,77 +90,66 @@
 					"rationale": "Recrystallization and self-organization; building blocks of CA growth patterns"
 				},
 				{
-					"map": "CA_4",
+					"map": "CA_GameOfLife",
+					"position": "intro",
+					"artifacts": [
+						"dark_sphere",
+						"ca_columns",
+						"mirrored_cellular_automata",
+						"ca_bridge"
+					],
+					"size_budget": "mixed",
+					"rationale": "CA showcase: columns, mirrored automata, bridge structures, and natural phenomena"
+				},
+				{
+					"map": "CA_BeyondBinary",
 					"position": "foundation",
 					"artifacts": [
 						"dark_sphere",
 						"hexagon_ca_vr",
-						"ca_growth_network"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Elementary CA and Game of Life in VR; hands-on rule exploration"
-				},
-				{
-					"map": "CA_5",
-					"position": "exploration",
-					"artifacts": [
+						"ca_growth_network",
 						"game_of_life_petri",
-						"dark_sphere",
 						"mold_network"
 					],
 					"size_budget": "mixed",
-					"rationale": "Hexagon grids and 3D CA; Game of Life petri dish for interactive experimentation"
+					"rationale": "Beyond binary: hexagonal CA, growth networks, petri dish life, and mold network dynamics"
 				},
 				{
-					"map": "CA_6",
+					"map": "CA_ExpandingSpace",
 					"position": "exploration",
 					"artifacts": [
 						"dark_sphere",
 						"cellular_automata_3d_tree",
 						"crossway_ca",
-						"decaying_bridge"
+						"decaying_bridge",
+						"ca_chair_test"
 					],
 					"size_budget": "mixed",
-					"rationale": "Structure growth in 3D: tree growth, crossway patterns, and entropy via decaying bridge"
+					"rationale": "Expanding into space: 3D tree growth, crossway patterns, decay, and fractal chair exploration"
 				},
 				{
-					"map": "CA_7",
+					"map": "CA_SoftRules",
 					"position": "exploration",
 					"artifacts": [
-						"rule_30_110_gravity"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Wolfram elementary rules: Rule 30 chaos and Rule 110 computational universality"
-				},
-				{
-					"map": "CA_8",
-					"position": "integration",
-					"artifacts": [
+						"rule_30_110_gravity",
 						"ca_sphere"
 					],
 					"size_budget": "compact_only",
-					"rationale": "CA on non-planar topology: sphere surface demonstrates boundary-free automata"
+					"rationale": "Soft rules: stochastic Rule 30/110 gravity and CA on spherical non-planar topology"
 				},
 				{
-					"map": "CA_9",
-					"position": "integration",
+					"map": "CA_AgentsCircuits",
+					"position": "synthesis",
 					"artifacts": [
-						"ca_chair_test"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Fractal introduction through CA-driven recursive pattern exploration"
-				},
-				{
-					"map": "CA_10",
-					"position": "integration",
-					"artifacts": [
+						"ca_rule_explorer",
+						"CellularAutomata3DStacked",
 						"sierpinski_pyramid"
 					],
 					"size_budget": "mixed",
-					"rationale": "Sierpinski pyramid: classic fractal as 3D CA output demonstrating self-similarity"
+					"rationale": "Agents and circuits: interactive rule explorer, 3D stacked automata, and Sierpinski fractal"
 				},
 				{
-					"map": "CA_12",
+					"map": "CA_EdgeOfChaos",
 					"position": "synthesis",
 					"artifacts": [
 						"ca_screen",
@@ -189,16 +158,7 @@
 						"volumetric_fog_ca"
 					],
 					"size_budget": "mixed",
-					"rationale": "Dense showcase: screen display, self-organization, disease spread, and volumetric fog CA"
-				},
-				{
-					"map": "CA_11",
-					"position": "synthesis",
-					"artifacts": [
-						"ca_rule_explorer"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Interactive Wolfram rule explorer: synthesis through open-ended rule experimentation"
+					"rationale": "Edge of chaos: screen display, self-organization, disease spread, and volumetric fog CA"
 				}
 			]
 		}
