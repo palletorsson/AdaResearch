@@ -20,6 +20,7 @@ func _ready() -> void:
 const SUBSET_FILES: Array[String] = [
 	"res://tools/grid_editor/subsets/audio_rack.json",
 	"res://tools/grid_editor/subsets/big_pipes.json",
+	"res://tools/grid_editor/subsets/facade_elements.json",
 	"res://tools/grid_editor/subsets/glass_rack.json",
 	"res://tools/grid_editor/subsets/lab_items_horizontal.json",
 	"res://tools/grid_editor/subsets/sticky_notes.json",
