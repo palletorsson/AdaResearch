@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: height(x,z,t) = A * sin(omega*x + phi*t) * sin(omega*z) — 2D sine surface
+# desire: Stand on a living floor that undulates with sine waves in multiple topologies
+# critical_parameter: frequency — controls spatial density of the wave pattern across the surface
+# triggers: topology_timer cycles through flat, cylindrical, spherical, toroidal, Mobius mappings
+# emerges: the same sine function looks completely different in different coordinate systems
+# needs: VR standing on surface [has], topology switching [has]
+# relationships: depends on MultiMesh height-field rendering; contrasts with wave_propagation_3d (continuous surface vs tile grid); unlocks topology intuition
+# truth: The sine function is universal — it generates different worlds depending on the coordinate system you wrap it in.
+
 var time = 0.0
 var grid_size = 25
 var instance_count: int

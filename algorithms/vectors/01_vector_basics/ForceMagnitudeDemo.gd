@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Vector magnitude affects physical outcome
 ## Agent-PhysicsArchitect: Educational physics demonstration
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: F = ma. Drag the force vector longer → ball accelerates harder. Magnitude is felt, not read.
+## desire: To make the learner drag a red arrow and feel the ball respond proportionally — bigger arrow, faster ball.
+## critical_parameter: The length of the applied_force_vector. It is the magnitude that drives everything.
+## triggers: Force handle drag → acceleration scales linearly, R key → reset ball to origin, Space → freeze motion
+## emerges: The intuition that force and acceleration are the same shape. The ball's trajectory traces the force's history.
+## needs: VR draggable force arrow [has], info readout [has]. Missing: mass slider to show a = F/m with different m.
+## relationships: Entry point for forces sequence. Feeds into combined_forces_demo (multiple forces). Contrasts with work_energy_demo (same force, different measure).
+## truth: You never feel position or velocity. You feel acceleration. Force is the only thing that reaches your body.
 
 var applied_force_vector: Node3D
 var velocity_vector: Node3D

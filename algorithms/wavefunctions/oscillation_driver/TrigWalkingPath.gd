@@ -6,6 +6,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # Parameters
+
+# @identity
+# essence: x_sin(z) = A*sin(omega*z), x_cos(z) = A*cos(omega*z) — dual walkable trig paths
+# desire: Walk along sine and cosine paths simultaneously, feeling their phase relationship with your feet
+# critical_parameter: frequency — controls how tightly the paths oscillate in space
+# triggers: player Z-position generates new steps ahead; escalator-like phase scroll
+# emerges: the 90-degree phase offset between sin and cos becomes a physical spatial relationship
+# needs: VR locomotion [has], step collision [has]
+# relationships: depends on UnitCircleTrig (walking what it plots); contrasts with SimpleOscillatingBridge (dual path vs single bridge); unlocks trig embodiment
+# truth: Sine and cosine are the same motion, separated by a quarter turn.
+
 @export var step_scene: PackedScene # Optional: Use a custom scene for steps
 @export var frequency: float = 0.5
 @export var amplitude: float = 2.0

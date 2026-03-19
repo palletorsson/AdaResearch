@@ -8,6 +8,17 @@ extends Node3D
 
 class_name OscillationControlledCube
 
+
+# @identity
+# essence: cube.y = A*sin(t), cube.rotation = R*sin(t), cube.scale = lerp(min,max,sin(t))
+# desire: Watch a cube translate, rotate, and scale simultaneously driven by a single oscillation source
+# critical_parameter: the connected oscillation signal — one driver controls all three transformations
+# triggers: external oscillation_updated signal maps y_offset, angular_velocity, amplitude to transform channels
+# emerges: the unity of transformation types — all are manifestations of the same underlying oscillation
+# needs: VR observation [has], guide rails [has], connection to control_pendulum [has]
+# relationships: depends on control_pendulum oscillation signal; contrasts with rotating_cube_demo (multi-transform vs single rotation); unlocks transformation-as-oscillation
+# truth: Translation, rotation, and scaling are three faces of the same oscillation projected onto different axes.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var cube_size: float = 0.3

@@ -7,6 +7,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Rotating Ball)
+
+# @identity
+# essence: p(t) = (r*cos(omega*t), r*sin(omega*t), v_z*t) — helix as circle extruded through time
+# desire: Watch circular motion leave a helical trail as time flows along the Z axis
+# critical_parameter: radius — determines the helix width, making rotation visible as spatial coil
+# triggers: continuous time progression extends the helix; rotation_speed sets coil tightness
+# emerges: visual proof that a helix is circular motion plus linear translation
+# needs: VR viewpoint control [has], speed adjustment [missing]
+# relationships: depends on ImmediateMesh trail; contrasts with UnitCircleTrig (projection vs extrusion); unlocks helix intuition
+# truth: A helix is what happens when rotation refuses to stay in one plane.
+
 @onready var pivot: Node3D = $Pivot
 @onready var ball: MeshInstance3D = $Pivot/Ball
 

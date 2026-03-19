@@ -9,6 +9,17 @@ extends Node3D
 class_name PetriDishWorms
 
 ## Number of worms in the dish (1–30)
+
+# @identity
+# essence: worm_segment[i].offset = amplitude * sin(oscillation_speed * t + i * phase_per_segment)
+# desire: Watch tiny worms wriggle in a petri dish, their bodies undulating with traveling sine waves
+# critical_parameter: oscillation_speed — controls the frequency of the sinusoidal body wave
+# triggers: time drives phase-offset sine displacement along each worm body segment
+# emerges: lifelike locomotion from pure sine wave propagation through a chain of segments
+# needs: VR sliders for speed/count [has], observation [has]
+# relationships: depends on phase-offset sine animation; contrasts with dna_specimen (motile vs static biology); unlocks biological wave locomotion
+# truth: A worm moves by passing a sine wave through its body — locomotion is traveling oscillation.
+
 @export_range(1, 30) var num_worms: int = 8
 ## Segments per worm body — higher values produce smoother curves (2–50)
 @export_range(2, 50) var worm_length: int = 20

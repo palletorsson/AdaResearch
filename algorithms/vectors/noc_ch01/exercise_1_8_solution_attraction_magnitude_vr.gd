@@ -1,11 +1,21 @@
 ﻿# ===========================================================================
 # NOC Example 1.8: Exercise 1.8: Attraction Magnitude
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing â†’ GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: F = strength * dir / r^2. Inverse-square attraction. Closer = stronger. Orbit emerges from falling and missing.
+# desire: To let the learner grab the attractor in VR and drag it — watching the orbiting ball reshape its path in real time.
+# critical_parameter: attraction_strength — controls the force constant. Too weak → ball escapes. Too strong → ball spirals inward. The sweet spot produces stable orbits.
+# triggers: VR grab attractor sphere → ball orbit changes shape, strength slider → orbits tighten or loosen, velocity clamped at 0.15 to prevent escape
+# emerges: Elliptical orbits from the interplay of tangential velocity and radial attraction. Moving the attractor mid-orbit creates chaotic transitions between orbit shapes.
+# needs: VR grabbable attractor [has], strength parameter controller [has], force line visualization [has]. Missing: trail showing orbit history.
+# relationships: Extends bouncing_ball (adds attraction). Feeds into three_body_problem and nbody_simulation (many attractors). Gateway to gravitational dynamics.
+# truth: An orbit is a perpetual fall that always misses the ground. Attraction creates structure from nothing but distance and direction.
 
 extends Node3D
 

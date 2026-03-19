@@ -3,6 +3,17 @@ extends Node3D
 # Vowel Sound Board - Simplified
 # Allows selecting speech phrases directly in the Godot Inspector.
 
+
+# @identity
+# essence: vowel(formant1, formant2) -> pulse_train filtered through formant resonances
+# desire: Press buttons in VR to hear synthesized vowels and words assembled from phoneme chains
+# critical_parameter: formant frequencies (F1, F2) — the two resonant peaks that define each vowel
+# triggers: phrase selection triggers sequential phoneme playback with pitch interpolation
+# emerges: recognizable speech from pure synthesis — words without a voice, language from mathematics
+# needs: VR button press [has], phrase selection [has], ambient mode [has]
+# relationships: depends on formant synthesis engine; contrasts with timbre_sculptor (speech vs musical timbre); unlocks the physics of voice
+# truth: Every vowel is a pair of resonant frequencies — the mouth is a tunable resonator.
+
 @onready var mapper = $ValueMapper3D
 @onready var synth = $VowelSynth3D
 @onready var label_word = $LabelWord

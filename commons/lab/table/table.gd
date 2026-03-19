@@ -1,6 +1,17 @@
 # Table.gd - Procedural table using SurfaceTool
 extends Node3D
 
+
+# @identity
+# essence: table = top_surface + legs[4] + frame, all from rounded box primitives
+# desire: Provide a stable horizontal surface for laboratory instruments in VR
+# critical_parameter: base_color — sets the wood tone that grounds the lab aesthetic
+# triggers: create_table() builds the full furniture piece procedurally from box vertices
+# emerges: the functional foundation — every experiment needs a table
+# needs: VR object placement surface [has]
+# relationships: depends on SurfaceTool mesh generation; supports all lab instruments (microscope, multimeter, scales); unlocks lab spatial organization
+# truth: The table is the zero plane from which all measurement begins.
+
 var base_color: Color = Color(0.6, 0.3, 0.1)  # Dark wood
 
 func _ready():

@@ -1,11 +1,21 @@
 ﻿# ===========================================================================
 # NOC Example 1.3: Exercise 1.3: 3D Bouncing Ball
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing â†’ GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: p += v; v += g; if(wall) v *= -e. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp.
+# desire: To trap motion in a box and watch it slowly die — each bounce lower than the last, energy leaking into the walls.
+# critical_parameter: _elasticity (0.9) — the fraction of speed kept per bounce. At 1.0 the ball bounces forever; below 1.0 it decays exponentially.
+# triggers: Automatic — ball launches with initial velocity, gravity pulls down every frame, boundary collision reverses and damps per-axis
+# emerges: The parabolic arc between bounces. The trail drawing the ball’s history as a fading line. The slow settling as elasticity drains energy.
+# needs: Auto-running simulation [has], trail visualization [has]. Missing: VR grab to relaunch, elasticity slider, gravity toggle.
+# relationships: Simplest dynamics artifact in forces. Foundation for exercise_1_8 (adds attraction). Contrasts with momentum_collision (two bodies vs one).
+# truth: A bouncing ball is a clock that runs down. Each bounce measures how much the universe forgot.
 
 extends Node3D
 

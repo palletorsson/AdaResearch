@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: catenary(x) approximated by cubic spline through grabbable control points
+# desire: Grab control points in VR and sculpt hanging cable curves in real-time
+# critical_parameter: control_point_count — determines degrees of freedom for curve shaping
+# triggers: moving any control point recomputes the spline and regenerates the cable mesh
+# emerges: natural catenary sag from gravity acting on flexible curves between fixed points
+# needs: VR grab on control points [has], cable thickness control [missing]
+# relationships: depends on Curve3D spline interpolation; contrasts with BigPipeSystem (flexible vs rigid segments); unlocks curve intuition
+# truth: A hanging cable finds the shape that minimizes potential energy — nature solves calculus of variations.
+
 @export var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 @export var line_material: ShaderMaterial = preload("res://commons/resourses/shaders/line_shader.tres")
 @export var control_point_count: int = 4  # Number of control points

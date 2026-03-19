@@ -4,6 +4,17 @@ extends Node3D
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
 
 # Audio buses setup
+
+# @identity
+# essence: ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling
+# desire: Stand in a space where algorithmic composition endlessly generates cyberpunk ambience
+# critical_parameter: num_effect_players — determines the density of the random sound event texture
+# triggers: stochastic timers trigger random effect generation; drone layer provides continuous foundation
+# emerges: endless non-repeating ambient music from a small vocabulary of synthesis rules
+# needs: VR presence [has], 3D loading bar visualization [has]
+# relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
+# truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.
+
 const NUM_BUSES = 4
 var bus_names = ["Master", "Reverb", "Delay", "LowPass"]
 

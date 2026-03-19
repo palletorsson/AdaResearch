@@ -3,6 +3,17 @@ extends Node3D
 class_name GameSoundMeter
 
 # Core configuration
+
+# @identity
+# essence: FFT(audio_bus) -> frequency_bins[] -> bar_heights[] or waveform display
+# desire: See the frequency content of any sound rendered as a real-time spectrum analyzer in VR
+# critical_parameter: update_interval — balances visual responsiveness against performance cost
+# triggers: audio bus signal continuously feeds FFT; display_style switches between bar and wave modes
+# emerges: the invisible frequency structure of sound becomes a visible, dynamic sculpture
+# needs: VR viewport display [has], audio bus connection [has]
+# relationships: depends on AudioEffectSpectrumAnalyzer; contrasts with VRAudioMonitor (spectrum vs waveform); unlocks frequency domain visualization
+# truth: Every sound is a mixture of frequencies; the spectrum analyzer reveals the recipe.
+
 @export_group("Audio Source")
 @export var auto_find_teleport_audio: bool = true
 @export var target_audio_player: AudioStreamPlayer3D

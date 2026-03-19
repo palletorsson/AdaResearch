@@ -2,6 +2,17 @@
 extends Node3D
 
 # ----------------- Parameters -----------------
+
+# @identity
+# essence: r(theta) = base_radius + sine_mod * sin(mod_freq * theta), y = step_rise * i
+# desire: Climb a helical staircase whose radius breathes with sine modulation as you ascend
+# critical_parameter: SINE_MODULATION — amplitude of the radial sine wave that makes the staircase breathe
+# triggers: _compute_samples() calculates each step position from modulated polar coordinates
+# emerges: a walkable sine function wrapped into architecture — your body traces the wave by climbing
+# needs: VR locomotion and collision [has], staircase physics [has]
+# relationships: depends on polar-to-Cartesian conversion with sine modulation; contrasts with bernini_columns (staircase vs column spirals); unlocks wave-as-architecture
+# truth: A spiral staircase with sine-modulated radius is a helix that breathes.
+
 @export var STEP_COUNT: int = 80
 @export var TOTAL_TURNS: float = 2.0
 @export var BASE_RADIUS: float = 1.6

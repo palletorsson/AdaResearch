@@ -7,6 +7,17 @@ extends Node3D
 class_name DNASpecimen
 
 ## Helix parameters
+
+# @identity
+# essence: helix(t) = (r*cos(theta+t), h*t, r*sin(theta+t)) with pulsing emission
+# desire: Observe a rotating double helix specimen in a glowing fluid-filled jar
+# critical_parameter: rotation_speed — controls the mesmerizing spin that reveals helical structure
+# triggers: time drives rotation and emission pulsing; glow_intensity modulates luminescence
+# emerges: the specimen-as-meditation — continuous rotation reveals what static display cannot
+# needs: VR observation [has], label customization [has]
+# relationships: depends on double helix mesh; contrasts with double_helix_scene (specimen vs construction); unlocks biological oscillation appreciation
+# truth: DNA is a double wave frozen in molecular form — information stored as a helix.
+
 @export var rotation_speed: float = 0.2
 @export var helix_color_a: Color = Color(0.2, 0.6, 1.0)  # Blue strand
 @export var helix_color_b: Color = Color(1.0, 0.4, 0.6)  # Pink strand

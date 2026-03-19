@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabHolographicDisplay
 
+
+# @identity
+# essence: hologram(t) = content * (1 + scale_pulse * sin(2*TAU*t)) + bob * sin(1.5*TAU*t)
+# desire: Observe a floating holographic projection that bobs and pulses with subtle oscillation
+# critical_parameter: scan_frequency — controls the speed of the scanning line across the hologram
+# triggers: time drives vertical bob, scale pulse, scan line sweep, and flicker effects
+# emerges: the illusion of a sci-fi hologram from layered sine-driven animation
+# needs: VR observation [has], content swap [missing], glitch trigger [has]
+# relationships: depends on multi-sine animation layering; contrasts with microscope (hologram vs optical instrument); unlocks sci-fi lab aesthetic
+# truth: A hologram is light structured by interference — oscillation made visible as projection.
+
 @export_group("Hologram")
 @export var scan_frequency: float = 2.0  # Hz
 @export var flicker_frequency: float = 15.0  # Hz (subtle)

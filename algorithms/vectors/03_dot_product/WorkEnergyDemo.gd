@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Work depends on force and displacement angle
 ## Agent-PhysicsArchitect: Shows energy transfer
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: W = F . d = |F||d|cos(theta). Work is the dot product of force and displacement. Perpendicular force does zero work.
+## desire: To let the learner push a ball and see a work meter tick up — then push perpendicular and watch it stay at zero. The dot product made visceral.
+## critical_parameter: The angle between force and displacement. At 0 degrees all force does work; at 90 degrees none does; at 180 degrees work is negative (energy extracted).
+## triggers: Drag force vector → ball moves, work accumulates frame by frame as F.d, meter turns green (positive) / red (negative) / yellow (zero), R → reset total
+## emerges: Total work accumulating as an integral over the path. Negative work when force opposes motion. The work meter as a running dot-product integrator.
+## needs: VR draggable force [has], work meter display [has], angle readout [has]. Missing: kinetic energy comparison (W = delta KE).
+## relationships: Physical application of dot_product_projector. Lives in ForcesComposition. Contrasts with momentum_collision (energy conservation vs work done).
+## truth: Pushing sideways does nothing. Work is the component of force that agrees with motion. Everything else is wasted.
 
 var force_vector: Node3D
 var displacement_vector: Node3D

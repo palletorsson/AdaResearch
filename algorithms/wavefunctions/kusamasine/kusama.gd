@@ -1,6 +1,17 @@
 extends Node3D
 
 # Enhanced Configuration variables
+
+# @identity
+# essence: sculpture(t) = core + petals(sin(morph*t)) + tendrils(sin(pulse*t)) + orbital_rings
+# desire: Witness a Kusama-inspired sculpture pulse, morph, and shift color in obsessive oscillation
+# critical_parameter: detail_scale — controls geometric complexity of petals, tendrils, and orbital elements
+# triggers: time drives morph_time, pulse_time, and color_time through layered sine animations
+# emerges: obsessive visual density — polka dots as high-frequency oscillation of attention
+# needs: VR spatial presence [has], detail/color controls [missing]
+# relationships: depends on multi-layered procedural mesh generation; contrasts with ruth_asawa_sculpture (Kusama excess vs Asawa restraint); unlocks art-as-oscillation
+# truth: Obsessive repetition is oscillation at maximum frequency — the dot is the shortest wavelength of attention.
+
 @export_category("Ultra-Vivid Sculpture Configuration")
 @export var num_petals: int = 6
 @export var num_tendrils: int = 4

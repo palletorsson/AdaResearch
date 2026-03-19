@@ -13,6 +13,17 @@ extends Node3D
 ##
 ## OPTIMIZED: Uses WavefunctionResources for shared meshes and MultiMesh for trails
 
+
+# @identity
+# essence: Y_l^m(theta, phi) — position on sphere via spherical coordinates
+# desire: Watch a point orbit a sphere tracing harmonic patterns with a coin-sound rhythm
+# critical_parameter: orbit_speed_phi / orbit_speed_theta ratio — determines the harmonic pattern traced
+# triggers: auto_orbit toggles between free exploration and automated traversal
+# emerges: spherical Lissajous figures from two angular velocities on a sphere
+# needs: VR grab to manually steer the orbiting point [missing], speed sliders [missing]
+# relationships: depends on spherical coordinate mapping; contrasts with lissajous_curves (sphere vs plane); unlocks 3D harmonic visualization
+# truth: Every function on a sphere decomposes into spherical harmonics, the way every signal decomposes into sines.
+
 @onready var large_sphere: MeshInstance3D
 @onready var small_sphere: MeshInstance3D
 @onready var audio_player: AudioStreamPlayer3D

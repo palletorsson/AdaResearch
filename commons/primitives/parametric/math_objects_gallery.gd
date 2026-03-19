@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: gallery[i] = parametric_surface(u, v, params[variation]) — museum of mathematical forms
+# desire: Walk past a curated gallery of parametric surfaces, each with labeled variations
+# critical_parameter: variations_per_object — controls how many parameter variants are shown per surface type
+# triggers: _ready() generates the full grid of mathematical objects with labels
+# emerges: a periodic table of mathematical shapes — comparison reveals what parameters do
+# needs: VR walkthrough [has], interactive parameter tweaking [missing]
+# relationships: depends on parametric surface generators (breather, Klein, torus knot, etc.); contrasts with sine_space (gallery vs immersive single surface); unlocks mathematical surface literacy
+# truth: Every smooth surface is a parametric function of two variables — mathematics made solid.
+
 @export var variations_per_object: int = 3
 @export var row_spacing: float = 0.7
 @export var col_spacing: float = 0.5

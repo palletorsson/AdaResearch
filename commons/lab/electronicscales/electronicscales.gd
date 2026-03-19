@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabElectronicScales
 
+
+# @identity
+# essence: display(t) = target + amplitude * e^(-damping*t) * sin(omega*t) — damped oscillation to final reading
+# desire: Place objects on a scale and watch the reading oscillate before settling to true weight
+# critical_parameter: damping_factor — controls how fast oscillation decays to the final reading
+# triggers: start_weighing() initiates the damped oscillation sequence; tare() resets the zero
+# emerges: the drama of measurement — truth approached through diminishing oscillation
+# needs: VR object placement [missing], weight detection [missing]
+# relationships: depends on damped harmonic oscillator equation; contrasts with multimeter (mass vs voltage measurement); unlocks damped oscillation intuition
+# truth: Every precise measurement is the residue of an oscillation that has almost died.
+
 @export_group("Physics")
 @export var damping_factor: float = 2.0  # How fast oscillation decays
 @export var oscillation_frequency: float = 4.0  # Hz

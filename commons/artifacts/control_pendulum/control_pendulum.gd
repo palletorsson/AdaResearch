@@ -8,6 +8,17 @@ extends Node3D
 
 class_name ControlPendulum
 
+
+# @identity
+# essence: alpha = -(g/L)*sin(theta), omega += alpha*dt, theta += omega*dt, damped by 0.995
+# desire: Grab a pendulum bob in VR and feel gravity convert your release into oscillation
+# critical_parameter: pendulum_length — determines the natural frequency via sqrt(g/L)
+# triggers: grab() freezes physics; release() converts hand position to initial angle and starts oscillation
+# emerges: harmonic motion from the simplest possible setup — mass, string, gravity
+# needs: VR grab on bob [has], oscillation_updated signal output [has]
+# relationships: depends on gravity simulation; drives oscillation_controlled_cube via signal; contrasts with spring_demo (gravity vs spring restoring force)
+# truth: A pendulum is gravity's metronome — length alone determines the tempo.
+
 signal oscillation_updated(y_offset: float, angular_velocity: float, amplitude: float)
 signal grabbed
 signal released

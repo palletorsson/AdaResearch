@@ -4,6 +4,16 @@ class_name CoordinateSystemSwitcher
 ## Coordinate System Switcher — shows the same 3D point in Cartesian, Cylindrical,
 ## and Spherical coordinates simultaneously. ImmediateMesh axes/arcs, SphereMesh point,
 ## Label3D readouts. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.
+##
+## @identity
+## essence: One point, three descriptions: (x,y,z), (r,theta,z), (rho,theta,phi). The point does not change; only the language does.
+## desire: To show that coordinate systems are choices, not facts — the same white dot described three different ways simultaneously.
+## critical_parameter: point_cartesian — moving it rewrites all three readouts and redraws all projection lines and arcs.
+## triggers: set_point() or config change → full rebuild of axes, projections, arcs, and labels
+## emerges: The yellow cylindrical radial line and the magenta spherical rho line meeting at the same point — different decompositions of the same position.
+## needs: Static display [has], conversion formulas [has]. Missing: VR grabbable point handle, animated transitions between systems.
+## relationships: Extends basis_vectors_rig (both show frames). Prerequisite for VectorFieldFlow (fields use position-dependent coordinates).
+## truth: A coordinate system is a way of speaking, not a way of being. The point exists before any frame names it.
 
 # --- Configuration ---
 

@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: N = F · n̂ (component perpendicular to surface)
 ## Agent-PhysicsArchitect: Shows force decomposition
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: F_normal = (F.n)*n, F_parallel = F - F_normal. Gravity decomposes into the force that holds you up and the force that makes you slide.
+## desire: To show that one force becomes two when it meets a surface — the part the surface resists and the part that causes motion.
+## critical_parameter: surface_angle — steeper angle means more parallel component, more sliding. At 0 degrees all force is normal; at 90 degrees all force is parallel.
+## triggers: Arrow keys → tilt surface angle, ball slides along surface driven by parallel component, R → reset, Space → freeze
+## emerges: The ball accelerating faster on steeper surfaces. The normal force vector shrinking as the parallel one grows — a conservation visible in arrow lengths.
+## needs: Adjustable surface angle via keyboard [has], three force vectors displayed [has]. Missing: VR slider for angle, friction toggle.
+## relationships: Applies vector_projection_demo concepts to physics. Feeds into fluid_resistance (another force decomposition). Lives in VectorOperations.
+## truth: The surface does not push you up. It pushes you perpendicular to itself. Gravity does the rest.
 
 var gravity_vector: Node3D
 var normal_vector: Node3D

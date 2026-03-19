@@ -14,6 +14,16 @@
 #
 # VR-enabled: grab the bouncing ball target, use sliders for settings
 # QFEP: The turret as "computational subject" - vectors as the math of surveillance
+#
+# @identity
+# essence: D = T - P, cos(theta) = F.D/|F||D|, V = D-hat * speed, P' = P + V*dt. Nine vector operations in one machine.
+# desire: To make every vector operation serve a purpose — subtraction finds the target, dot product checks the FOV, cross product aims the barrel. Nothing is abstract here.
+# critical_parameter: field_of_view_degrees — the cone of awareness. Narrower FOV = more precise but more blind spots. The dot product threshold that separates "acquired" from "searching."
+# triggers: Ball bounces → turret tracks, FOV check passes → laser activates and bullets fire, bullet hits ball → impulse + sparks + score, sliders → adjust FOV/rate/speed
+# emerges: Leading the target — bullets aim at predicted position using ball velocity. Hit accuracy emerging from the interplay of fire rate, bullet speed, and ball chaos.
+# needs: VR grabbable ball [has], FOV/fire-rate/speed sliders [has], spawn button [has]. Missing: multiple turrets with crossfire.
+# relationships: Culmination of VectorApplied. Uses every operation taught in VectorBasics through VectorOperations. Contrasts with weather_vector_field (passive observation vs active targeting).
+# truth: A turret does not think. It subtracts, normalizes, dots, crosses, and integrates. Intelligence is arithmetic applied with purpose.
 
 extends Node3D
 

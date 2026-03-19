@@ -3,6 +3,17 @@
 # Gian Lorenzo Bernini's baroque architectural style.
 extends Node3D
 
+
+# @identity
+# essence: column(h) = r * (cos(spiral_density*h), h, sin(spiral_density*h)) with sine/cosine amplitude modulation
+# desire: Stand among baroque spiral columns that twist with trigonometric functions and emit organ tones
+# critical_parameter: spiral_density — controls how many helical turns per column height
+# triggers: time animates subtle column rotation; audio_phase drives organ sound generation
+# emerges: the baroque as frozen oscillation — architecture that remembers the wave that shaped it
+# needs: VR walkthrough [has], audio playback [has]
+# relationships: depends on procedural spiral mesh generation; contrasts with sine_cylinder_staircase (decorative vs functional spirals); unlocks wave-as-architecture
+# truth: A spiral column is a sine wave wrapped around a vertical axis.
+
 const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolumns/bernini_base.tscn")
 
 # -- Configuration --

@@ -6,6 +6,17 @@ extends Node3D
 
 class_name SineSpaceExplanation
 
+
+# @identity
+# essence: z(x,y,t) = A * sin(freq * x + speed * t) * sin(freq * y + speed * t)
+# desire: Examine a miniature animated sine surface with labeled parameters you can adjust
+# critical_parameter: frequency — controls the wave density visible on the explanation display
+# triggers: VR sliders adjust amplitude, frequency, and wave speed in real-time
+# emerges: understanding through control — seeing how each parameter deforms the surface
+# needs: VR sliders [has], display surface [has]
+# relationships: depends on SurfaceTool mesh regeneration; contrasts with sine_space (explanation vs immersion); unlocks sine surface parameter literacy
+# truth: Understanding a wave means knowing what each parameter does to the shape.
+
 @export var display_size: float = 1.0
 @export var grid_resolution: int = 24
 @export var amplitude: float = 0.12

@@ -4,6 +4,16 @@
 # and overdamped responses using Generic6DOFJoint3D spring parameters.
 # VR-interactive: grab any mass and release to watch it oscillate.
 # ===========================================================================
+#
+# @identity
+# essence: F = -kx - cv. Spring restores, damper resists. Three regimes: underdamped (oscillates), critically damped (fastest return), overdamped (sluggish return).
+# desire: To pull three masses down in VR and release — watching one ring like a bell, one snap back efficiently, one creep home reluctantly. Damping ratio as personality.
+# critical_parameter: damping coefficient d (0.5, 12.0, 40.0). It alone determines the character: d < d_critical = ringing, d = d_critical = optimal, d > d_critical = sluggish.
+# triggers: VR grab mass → pull down against spring, release → oscillation begins, each mass responds differently. R → reset all to rest. Spring lines update in real time.
+# emerges: The underdamped mass overshooting and ringing. The critically damped mass returning fastest without overshoot. The overdamped mass returning slowest. Three personalities from one equation.
+# needs: VR grab via Generic6DOFJoint3D [has], spring line visualization [has], labeled configurations [has]. Missing: damping slider, phase portrait display.
+# relationships: Foundation for spring_system (network of springs). Same physics as cloth simulation. The canonical second-order system used everywhere in control theory.
+# truth: Every vibrating system is a mass-spring-damper in disguise. The damping ratio is the system's temperament.
 
 extends Node3D
 

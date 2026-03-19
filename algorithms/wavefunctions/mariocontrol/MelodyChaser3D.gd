@@ -5,6 +5,17 @@ extends Node3D
 ## You follow with your grabbable point - when YOU are near a note, it plays.
 ## The leader stays slightly ahead to show you where to go next.
 
+
+# @identity
+# essence: scale[i] -> position[i] = f(layout_type), proximity(hand, note) -> trigger
+# desire: Chase notes through 3D space as a glowing point traverses a musical scale
+# critical_parameter: beat_interval — sets the tempo that drives the melodic sequence
+# triggers: proximity_threshold crossing between hand and note marker fires sound
+# emerges: spatial music — melody becomes a path you physically follow through space
+# needs: VR hand tracking for proximity [has], scale selection [has]
+# relationships: depends on pentatonic/chromatic scale definitions; contrasts with chord_tension_spring (melody vs harmony); unlocks embodied music theory
+# truth: A melody is a path through pitch-space traversed in time.
+
 @onready var mapper = $ValueMapper3D
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var label_note = $LabelNote

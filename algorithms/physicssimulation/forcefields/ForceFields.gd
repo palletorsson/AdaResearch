@@ -3,6 +3,16 @@
 # Uses Godot's built-in Area3D gravity_space_override to create force regions.
 # RigidBody3D balls are dropped in; the engine applies the forces automatically.
 # ===========================================================================
+#
+# @identity
+# essence: Area3D.gravity_space_override = COMBINE. Three zones, three rules: directional push, radial pull, viscous drag. Same balls, different fates.
+# desire: To throw balls into colored zones and watch physics change — one zone pushes sideways, one sucks inward, one floats with resistance. Territory as force law.
+# critical_parameter: gravity and linear_damp per zone. The point attractor's gravity (20.0) vs the wind zone's damp (4.0) — pull vs resistance, two ways to trap a ball.
+# triggers: VR grab balls → throw into zones, each zone applies its own physics automatically via Godot's Area3D system, R → reset all balls
+# emerges: Balls orbiting the point attractor. Balls floating in the wind/drag zone as buoyancy balances gravity. Balls ricocheting in the directional field.
+# needs: VR grabbable balls [has], three distinct Area3D zones [has]. Missing: zone parameter sliders, zone boundary visualization toggle.
+# relationships: Uses Godot's built-in Area3D (unlike force_field_visualizer which computes manually). Complements vector_fields (arrow visualization) with tactile interaction. Lives in ForcesSystems.
+# truth: A force field is a region with different rules. Cross the boundary and the laws change. Physics is local.
 extends Node3D
 
 # ---------------------------------------------------------------------------

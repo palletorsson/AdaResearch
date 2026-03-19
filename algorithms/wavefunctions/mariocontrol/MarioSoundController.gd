@@ -5,6 +5,17 @@ extends Node3D
 ## Controls various synthesis parameters via a 3D ball (ValueMapper3D)
 
 # Load PickupCube class to access static functions for Mario mode compatibility
+
+# @identity
+# essence: waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square, FM}
+# desire: Grab a ball in VR and hear game sound effects respond to your hand position
+# critical_parameter: mode — switches between Mario jump, coin, laser, explosion, powerup generators
+# triggers: ball movement maps 3D position to three synthesis parameters per mode
+# emerges: retro game audio vocabulary from basic waveform mathematics
+# needs: VR ball grab [has], mode switching [has]
+# relationships: depends on AudioStreamPlayer3D; contrasts with DualBallFMController (preset modes vs free FM); unlocks game audio literacy
+# truth: Every game sound is a parametric function of time with at most three degrees of freedom.
+
 const PickupCube = preload("res://commons/scenes/mapobjects/pick_up_cube.gd")
 
 enum SoundMode { MARIO, SINE_BELL, LASER_ZAP, TECHNO_KICK, NOISE_BURST }

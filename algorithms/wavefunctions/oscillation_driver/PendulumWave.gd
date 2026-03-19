@@ -7,6 +7,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Pendulum)
+
+# @identity
+# essence: theta(t) = theta_0 * cos(sqrt(g/L) * t) * e^(-damping*t)
+# desire: Watch a pendulum swing and see its trajectory traced as a time-domain waveform
+# critical_parameter: length — determines natural frequency via sqrt(g/L)
+# triggers: initial_angle sets energy; damping controls decay envelope
+# emerges: the fundamental connection between pendulum length and oscillation period
+# needs: VR grab to set initial angle [missing], length adjustment [missing]
+# relationships: depends on gravity simulation; contrasts with spring_demo (gravity vs elasticity); unlocks harmonic motion intuition
+# truth: Gravity and a string are sufficient to generate periodic motion.
+
 @onready var pivot: Node3D = $Pivot
 @onready var rod: MeshInstance3D = $Pivot/Rod
 @onready var bob: MeshInstance3D = $Pivot/Bob

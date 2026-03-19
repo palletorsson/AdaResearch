@@ -4,6 +4,17 @@
 extends Node3D
 
 ## The total number of cubes to generate.
+
+# @identity
+# essence: cube[i].transform(t) = rotate(speed_i * t) * scale(base + variation * sin(t))
+# desire: Float among hundreds of cubes all rotating and pulsing at different rates
+# critical_parameter: cube_count — determines the density of the transformation field
+# triggers: per-frame MultiMesh transform update applies unique rotation speeds to each instance
+# emerges: a galaxy of independent oscillators — collective visual rhythm from individual rotation rates
+# needs: VR spatial navigation [has], parameter control [missing]
+# relationships: depends on MultiMesh instancing; contrasts with rotating_cube_demo (mass vs individual cube); unlocks transformation-as-field
+# truth: A field of rotating objects is a field of phases — each cube is a clock at its own tempo.
+
 @export var cube_count: int = 500
 
 ## The radius of the sphere within which cubes will be randomly placed.

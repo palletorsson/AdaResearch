@@ -6,6 +6,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Unit Circle Ball)
+
+# @identity
+# essence: (cos(theta), sin(theta)) on circle -> sin projected as wave, cos projected as wave
+# desire: See rotation on the unit circle continuously generate sine and cosine wave trails
+# critical_parameter: rotation_speed — controls how fast the angle sweeps and waves extend
+# triggers: continuous angle increment projects position onto two perpendicular wave axes
+# emerges: visual proof that sine and cosine are projections of circular motion
+# needs: VR angle control [missing], projection distance slider [missing]
+# relationships: depends on ImmediateMesh trail drawing; contrasts with OscillationCurve (generation vs observation); unlocks unit circle intuition
+# truth: Rotation is the generator of all oscillation; sine and cosine are its shadows.
+
 @onready var driver_ball: MeshInstance3D = $DriverBall
 @onready var connection_lines: MeshInstance3D = $ConnectionLines
 

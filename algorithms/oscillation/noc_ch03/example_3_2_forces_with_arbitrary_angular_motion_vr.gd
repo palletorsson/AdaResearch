@@ -1,11 +1,21 @@
 # ===========================================================================
 # NOC Example 3.2: Forces with Arbitrary Angular Motion
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: a += F/m, v += a, p += v, omega += random, theta += omega. Linear attraction plus independent angular motion. Two dynamics, one body.
+# desire: To show that rotation and translation are independent — boxes orbit an attractor while spinning at their own rate, two freedoms coexisting.
+# critical_parameter: angular_damping (0.9-0.999) — controls how quickly spin decays. Low damping = chaotic spinning. High damping = gradual alignment. The knob between chaos and order.
+# triggers: Automatic — 8 movers orbit attractor, each accumulating random angular velocity. VR sliders → attractor strength and angular damping.
+# emerges: Movers wrapping around boundaries and re-entering from the opposite side (toroidal space). Spin rates diverging as random angular impulses accumulate.
+# needs: VR parameter controllers [has], attractor visualization [has]. Missing: angular velocity display arrows, trail visualization.
+# relationships: Extends torque_demo concepts to many bodies. Lives in ForcesSystems. Bridges linear forces (attraction) with angular dynamics (spin).
+# truth: Rotation does not need a force. It needs a torque — or random impulses. Translation and rotation are independent stories told by the same body.
 
 extends Node3D
 

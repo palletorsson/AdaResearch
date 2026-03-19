@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: F_ij = G*m_i*m_j/r^2. Three bodies, three mutual attractions, no closed-form solution. Deterministic rules, unpredictable trajectories.
+# desire: To watch three glowing bodies dance — orbiting, swapping partners, ejecting one, recapturing — Poincare's impossibility made visible.
+# critical_parameter: gravitational_constant (0.1) and initial conditions. Tiny changes in starting positions produce wildly different long-term behavior. This IS chaos.
+# triggers: Auto-start — bodies attract pairwise, trails trace history. Reset button → return to initial positions. Pause → freeze the dance. Mass slider → all masses change.
+# emerges: Figure-eight orbits (rare, unstable). Hierarchical pairs (two orbit closely, third orbits the pair). Ejection events (one body flung away). Sensitivity to initial conditions.
+# needs: VR UI buttons [has], trail visualization [has], auto-rotate for 3D perspective [has]. Missing: VR grabbable bodies to set initial conditions, Lyapunov exponent display.
+# relationships: Extends exercise_1_8 (two-body attraction → three-body chaos). Pairs with nbody_simulation (3 → N). Gateway to chaos_attractor (strange attractors from deterministic ODEs).
+# truth: Three bodies under gravity have no formula. The future is computable but not predictable. Determinism and predictability are not the same thing.
+
 class_name ThreeBodyProblem
 
 var bodies = []

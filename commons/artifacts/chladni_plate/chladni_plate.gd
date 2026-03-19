@@ -7,6 +7,17 @@ extends Node3D
 class_name ChladniPlate
 
 ## Plate parameters
+
+# @identity
+# essence: nodal_lines where cos(m*pi*x/L)*cos(n*pi*y/L) = 0, particles migrate to nodes
+# desire: Watch sand particles self-organize into Chladni figures as vibration modes change
+# critical_parameter: mode_pairs (m,n) — each pair defines a unique nodal pattern
+# triggers: mode cycling timer switches between vibration modes; particles drift to new nodal lines
+# emerges: geometric order from vibration — pattern appears without any particle knowing the whole
+# needs: VR mode selection [missing], manual frequency control [missing]
+# relationships: depends on standing wave node computation; contrasts with wave_propagation_3d (standing vs traveling waves); unlocks resonance visualization
+# truth: Vibration sorts matter into the geometry of its own nodal lines.
+
 @export var plate_size: float = 0.3  # Square plate side length
 @export var plate_thickness: float = 0.005
 

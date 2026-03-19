@@ -13,6 +13,17 @@ extends TurtlePipeBase
 class_name BigPipeSystem
 
 # Segment Scenes
+
+# @identity
+# essence: L-system turtle graphics — forward(f), turn(l/r), branch(s/t/x)
+# desire: Build labyrinthine pipe networks by issuing movement commands in VR
+# critical_parameter: segment_length — determines spatial scale of the entire network
+# triggers: generate_from_code() string parsing drives branching topology changes
+# emerges: complex 3D plumbing networks from simple command grammars
+# needs: VR text input for pipe codes [missing], grab-to-extend interface [missing]
+# relationships: unlocks procedural architecture; depends on TurtlePipeBase; contrasts with cable_builder (continuous vs discrete)
+# truth: Any spatial network can be described as a sequence of moves and turns.
+
 const SEGMENT_STRAIGHT = preload("res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn")
 const SEGMENT_CORNER = preload("res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn")
 const SEGMENT_SBEND = preload("res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn")

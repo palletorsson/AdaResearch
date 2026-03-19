@@ -1,5 +1,15 @@
 # sphere_splitting_showcase.gd
 # Showcase scene demonstrating all sphere splitting approaches
+#
+# @identity
+# essence: sphere → fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.
+# desire: To compare how the same sphere breaks under five different mathematical decompositions — each one a different answer to "how do you divide a sphere?"
+# critical_parameter: The impact point and velocity of the thrown ball. For planar cuts, the impact plane determines the split. For Voronoi, the crack propagates from impact. Geometry meets ballistics.
+# triggers: VR grab + throw → ball hits sphere, each sphere type fractures by its algorithm, stats track throws and total splits, per-sphere piece counts update live
+# emerges: Planar cuts producing clean halves. Octree producing eight cubic chunks. Sectors peeling like an orange. CSG producing irregular but realistic cuts. Each algorithm's personality visible in its fragments.
+# needs: Throwable balls [has], five sphere types [has], per-sphere info labels [has], live piece counters [has]. Missing: slow-motion mode, side-by-side comparison replay.
+# relationships: Companion to destructibles_test_scene (cubes + planes vs spheres). Lives in ForcesArena. Showcases computational geometry algorithms through destruction.
+# truth: There is no single way to break a sphere. Each fracture method is a decomposition basis — a different answer to what "parts" means.
 extends "../shared/vector_scene_base.gd"
 
 @export_group("Scene Configuration")

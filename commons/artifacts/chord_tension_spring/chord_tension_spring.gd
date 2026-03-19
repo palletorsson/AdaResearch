@@ -23,6 +23,17 @@
 extends Node3D
 class_name ChordTensionSpring
 
+
+# @identity
+# essence: tension = sum(spring_force(interval_distance)) for all pitch pairs in chord
+# desire: Drag pitch nodes in VR and feel musical tension as physical spring resistance
+# critical_parameter: spring stiffness per interval — maps harmonic consonance to physical force
+# triggers: dragging a node recalculates all spring forces and plays the resulting chord
+# emerges: the sensation of musical tension as embodied resistance — dissonance pulls harder
+# needs: VR grab on pitch nodes [has], audio playback [has]
+# relationships: depends on spring physics simulation; contrasts with harmonic_distance_table (force vs distance visualization); unlocks embodied harmony
+# truth: Musical tension is not metaphor — intervals exert measurable pull on perception.
+
 const _P = preload("res://commons/ui/ada_palette.gd")
 
 # ── Configuration ──

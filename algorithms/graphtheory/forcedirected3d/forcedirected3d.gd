@@ -4,6 +4,16 @@ extends Node3D
 # 3D Force-Directed Layout: Volumetric Graph Physics
 # Advanced 3D implementation with realistic physics simulation
 # Supports VR interaction and real-time manipulation
+#
+# @identity
+# essence: F_repel = k/r^2 (all pairs), F_spring = -k*(L-L0) (edges only). Repulsion spreads nodes apart; springs hold connected nodes together. Layout is equilibrium.
+# desire: To watch a graph untangle itself — nodes pushing apart, edges pulling together, the layout emerging from physics rather than being designed.
+# critical_parameter: temperature (simulated annealing). It starts at 1.0 and cools by 0.995 per step. High temperature = large movements, exploration. Low temperature = fine adjustment, convergence.
+# triggers: Auto-run on ready → simulation iterates, SPACE → pause/resume, R → regenerate graph, F → toggle force arrows, E → toggle edges, S → toggle stress coloring
+# emerges: Clusters forming for densely connected subgraphs. Simulated annealing cooling the system into a stable layout. Stress coloring revealing which nodes are under the most force.
+# needs: MultiMesh node/edge/force rendering [has], VR grab nodes [has], spatial hashing [has], convergence detection [has]. Missing: community detection coloring, edge bundling.
+# relationships: Applies force physics to graph theory (forces as layout algorithm, not simulation). Contrasts with nbody_simulation (all-pairs gravity vs spring+repulsion). Lives in ForcesChaos.
+# truth: A good layout is a force equilibrium. The graph does not know its shape — physics finds it by minimizing energy.
 
 @export_category("Graph Configuration")
 @export var node_count: int = 20

@@ -8,6 +8,17 @@ extends Node3D
 
 class_name FoucaultPendulum
 
+
+# @identity
+# essence: swing_plane(t) = initial_azimuth, earth_angle(t) += omega_earth * sin(latitude) * dt
+# desire: Watch a pendulum draw rosette patterns as the Earth rotates beneath its fixed swing plane
+# critical_parameter: earth_rotation_rate — controls precession speed (normally 360 deg/sidereal day * sin(lat))
+# triggers: time drives both pendulum swing and Earth rotation; trail accumulates on canvas
+# emerges: spirograph-like rosettes from the interaction of two independent rotational periods
+# needs: VR observation of canvas [has], latitude control [missing]
+# relationships: depends on inertial frame physics; contrasts with WavePaintings (inertial vs chaotic trace); unlocks rotating reference frame intuition
+# truth: The pendulum does not rotate — the Earth rotates beneath it, and the trail is proof.
+
 @export_category("Pendulum")
 ## Length of the pendulum wire from pivot to bob (meters)
 @export_range(1.0, 20.0, 0.1) var pendulum_length: float = 8.0

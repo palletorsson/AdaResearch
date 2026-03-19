@@ -1,5 +1,15 @@
 ## Vector Fields — Visualizes force fields with MultiMesh arrows and Area3D sources
 ## Arrows rendered in ONE draw call via MultiMesh, particles advected through the field
+##
+## @identity
+## essence: F(p) = sum(sources). Each point samples the superposed field of all Area3D gravity sources. Arrows point where particles would go.
+## desire: To place an attractor and a repulsor and watch the field tear itself between them — arrows bending, particles caught in the tug of war.
+## critical_parameter: The ratio of attractor gravity (+8) to repulsor gravity (-6). It determines whether particles orbit, escape, or get trapped.
+## triggers: Automatic — 125 arrows orient by sampling field, 30 particles advected by Area3D gravity overrides, escaped particles respawn randomly
+## emerges: Saddle points between attractor and repulsor where the field cancels. Particle streams forming visible flow lanes. Color gradient mapping field magnitude.
+## needs: MultiMesh arrow grid [has], RigidBody3D test particles [has], Area3D sources [has]. Missing: VR grabbable sources, field strength sliders.
+## relationships: More physical than VectorFieldFlow (uses Godot's Area3D physics). Complements force_field_visualizer (which computes fields analytically). Lives in ForcesSystems.
+## truth: A field is not a picture of arrows. It is a promise: if you put a particle here, this is what will happen.
 extends Node3D
 
 @export var grid_resolution: int = 5  # arrows per axis (5³ = 125 arrows)

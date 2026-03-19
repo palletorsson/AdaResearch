@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabMicroscope
 
+
+# @identity
+# essence: intensity(t) = min + (max-min) * (0.5 + 0.5 * sin(frequency * t * TAU))
+# desire: Peer at a microscope whose illumination breathes with gentle sine-wave pulsing
+# critical_parameter: light_frequency — controls the breathing rate of the stage illumination
+# triggers: time drives sinusoidal light intensity modulation on stage and objective lights
+# emerges: the feeling of a living instrument — breathing light suggests active observation
+# needs: VR observation [has], focus knob interaction [missing]
+# relationships: depends on sine-driven light animation; contrasts with holographicdisplay (optical vs holographic); unlocks lab instrument atmosphere
+# truth: Illumination is oscillation made useful — the microscope tames light waves into vision.
+
 @export_group("Illumination")
 @export var light_frequency: float = 0.3  # Hz - slow breathing
 @export var light_min: float = 0.3

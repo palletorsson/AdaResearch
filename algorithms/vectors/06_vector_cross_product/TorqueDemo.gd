@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Rotational force depends on position and direction
 ## Agent-PhysicsArchitect: Shows angular acceleration
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: tau = r x F. The cross product. Torque is perpendicular to both the lever arm and the force. The right-hand rule determines spin direction.
+## desire: To let the learner drag both the force and its application point — and watch the purple torque vector pop out perpendicular, spinning the ball.
+## critical_parameter: force_offset (the lever arm r). Force through the center produces zero torque. The further off-center, the more spin per unit force.
+## triggers: Drag cyan position handle → changes lever arm, drag red force handle → changes force direction/magnitude, purple torque arrow → updates via cross product, ball spins
+## emerges: Zero torque when force passes through center (r parallel to F → cross product vanishes). Maximum torque when force is perpendicular to the lever arm.
+## needs: VR draggable position and force vectors [has], torque readout [has]. Missing: wrench/door metaphor visualization, angular momentum display.
+## relationships: Cross product counterpart to dot_product_projector. Feeds into example_3_2 (angular motion from forces). Core operation in rigid body physics.
+## truth: Torque is not a force. It is the force's opinion about rotation, measured by how far off-center and how perpendicular it acts.
 
 var force_vector: Node3D
 var position_vector: Node3D

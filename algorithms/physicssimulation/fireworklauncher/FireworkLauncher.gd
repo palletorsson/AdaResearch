@@ -5,6 +5,16 @@
 #
 # QFEP: Many from one — a single event creates a statistical population.
 # ===========================================================================
+#
+# @identity
+# essence: launch → ascend → explode(N particles) → each: v += g, v *= drag, life -= dt, fade. One event becomes sixty trajectories.
+# desire: To launch a rocket and watch it bloom — sixty glowing particles inheriting random velocities from a single explosion point, then falling under gravity and drag.
+# critical_parameter: burst_force (1.0-8.0) — the initial speed of exploded particles. It sets the bloom radius. Higher = wider, more dramatic, longer airtime before gravity wins.
+# triggers: Auto-launch every 2.5s, FIRE button → manual launch, preset buttons → color palettes (classic/ocean/garden) and patterns (sphere/ring), burst slider → controls explosion force
+# emerges: Ring patterns from constrained emission (horizontal only). Sphere patterns from uniform random direction. Particle trails tracing parabolas. The moment of bloom as maximum expansion.
+# needs: VR preset buttons [has], fire button [has], burst force slider [has], auto-launch toggle [has]. Missing: height slider, multi-launch choreography.
+# relationships: CPU particle system (contrasts with particle_systems using GPUParticles3D). Lives in ForcesSystems. Each particle is a mini bouncing_ball with drag and lifetime.
+# truth: A firework is a population explosion. One event becomes many independent trajectories, each obeying the same law, each taking a different path.
 extends Node3D
 
 class_name FireworkLauncher

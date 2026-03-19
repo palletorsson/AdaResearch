@@ -11,6 +11,17 @@ class_name GlassPipeSegments
 # S-BEND SEGMENT
 # =============================================================================
 
+
+# @identity
+# essence: parametric glass tubes — straight, curved, s-bend, coil segments composed into racks
+# desire: Assemble laboratory glassware from modular pipe segments in VR
+# critical_parameter: tube_radius — scales the entire apparatus between capillary and industrial
+# triggers: segment type selection (straight, curve, sbend, coil) determines flow topology
+# emerges: complex distillation and reaction apparatus from simple tube primitives
+# needs: VR snap-together assembly [missing], fluid simulation [missing]
+# relationships: depends on ImmediateMesh generation; contrasts with BigPipeSystem (glass vs industrial); unlocks chemistry visualization
+# truth: Every fluid path is a composition of bends, straights, and coils.
+
 static func create_sbend(params: Dictionary, glass_mat: Material, liquid_mat: Material, show_liquid: bool) -> Node3D:
 	var group = Node3D.new()
 	var length = params.get("length", 0.3)

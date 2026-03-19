@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: height(x,z,t) = sum(A_ring * sin(omega*t - k*distance(x,z,center))) — expanding ring waves
+# desire: Watch concentric wave rings propagate across a tile floor, interfering where they meet
+# critical_parameter: grid_size — determines the spatial extent of the wave propagation field
+# triggers: wave_rings[] spawn at intervals; each ring expands and decays over time
+# emerges: interference patterns from overlapping circular waves — constructive and destructive zones appear
+# needs: VR interaction to spawn waves [missing], walking on tiles [has]
+# relationships: depends on MultiMesh tile height animation; contrasts with sine_space (propagating rings vs standing waves); unlocks wave interference visualization
+# truth: Every point in a wave field is the sum of all waves that have reached it — superposition is the law.
+
 @export var grid_size: int = 20  # ~11.6m total span
 @export var tile_size: float = 0.5  # Bigger tiles
 @export var tile_gutter: float = 0.08

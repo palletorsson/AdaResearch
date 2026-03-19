@@ -8,6 +8,17 @@ extends Node3D
 
 class_name YOscillationCube
 
+
+# @identity
+# essence: y(t) = A * sin(2*PI*f*t) — simple harmonic motion along the vertical axis
+# desire: Watch a cube bounce on a vertical rail, feeling the simplest possible oscillation
+# critical_parameter: frequency — controls how fast the cube oscillates up and down
+# triggers: time drives continuous sine evaluation; amplitude and frequency adjustable
+# emerges: the most elemental wave visualization — one axis, one sine, one cube
+# needs: VR observation [has], amplitude/frequency sliders [missing], ghost trail [has]
+# relationships: depends on basic sine function; contrasts with oscillation_controlled_cube (single vs multi-axis oscillation); unlocks y=sin(t) intuition
+# truth: y = A*sin(2*pi*f*t) is the simplest sentence in the language of oscillation.
+
 const GRID_SHADER = preload("res://commons/resourses/shaders/Grid.gdshader")
 
 @export var cube_size: float = 0.15  # Size in meters

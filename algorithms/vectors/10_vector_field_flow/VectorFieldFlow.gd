@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: F(p) = swirl(p) - radial(p). A vector field assigns a direction to every point. The particle reads the field and follows.
+# desire: To make an invisible flow visible — 81 arrows breathing in unison, a particle tracing the field's will.
+# critical_parameter: The swirl-to-radial ratio in _field_value(). It determines whether the field spirals inward, orbits, or ejects.
+# triggers: Automatic — arrows oscillate vertically, particle advects continuously. R → reset particle to origin, Space → freeze velocity.
+# emerges: Spiral trajectories from the combination of rotational swirl and inward radial pull. The particle's path is never a straight line.
+# needs: MultiMesh arrows [has], particle tracer [has]. Missing: VR slider to blend swirl vs radial, grabbable field source.
+# relationships: Applied version of force_field_visualizer (same concept, different rendering). Feeds into weather_vector_field (wind as vector field).
+# truth: A vector field is a set of instructions written in space. The particle has no memory and no plan — it only reads the local instruction.
+
 const GRID_RANGE := 4
 const GRID_SPACING := 0.9
 const FIELD_VERTICAL_OSCILLATION := 0.3

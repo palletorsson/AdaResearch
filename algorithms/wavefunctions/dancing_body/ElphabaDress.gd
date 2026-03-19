@@ -7,6 +7,17 @@
 
 extends Node3D
 
+
+# @identity
+# essence: r(u,v) = waist + (hem-waist)*u, modulated by sin(v*TAU + wave*u)
+# desire: Watch fabric ripple as sine waves propagate through a procedural dress mesh
+# critical_parameter: wave_intensity — transforms static garment into living oscillation
+# triggers: set_wave_intensity() deforms the parametric surface in real-time
+# emerges: cloth-like motion from pure trigonometric displacement of vertices
+# needs: VR sliders for wave parameters [missing], skeleton attachment [has]
+# relationships: depends on SurfaceTool mesh generation; contrasts with ruth_asawa_sculpture (fabric vs wire); unlocks wearable wave visualization
+# truth: Fabric is a surface that remembers every wave that passes through it.
+
 @export_group("Dress Shape")
 @export var waist_radius: float = 0.15
 @export var hem_radius: float = 0.4  # Bottom of dress

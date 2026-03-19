@@ -1,6 +1,17 @@
 @tool
 extends MeshInstance3D
 
+
+# @identity
+# essence: surface(u,v) = radius_curve(u) * (cos(v), sin(v)) + audio_reactive_deformation
+# desire: See a wire-mesh sculpture breathe and deform in response to ambient sound
+# critical_parameter: radius_curve — the profile curve that defines the lobed silhouette of the hanging form
+# triggers: audio spectrum analysis modulates the surface; band_values deform the mesh in real-time
+# emerges: sculpture as frozen listening — the wire form records sound as spatial deformation
+# needs: VR spatial audio input [has], spectrum analyzer [has]
+# relationships: depends on AudioEffectSpectrumAnalyzer; contrasts with kusama_sine (restrained wire vs excessive dots); unlocks sound-reactive sculpture
+# truth: A wire sculpture is a surface of revolution that has learned to listen.
+
 @export_category("Mesh Settings")
 @export_range(10, 200, 1) var u_resolution: int = 60
 @export_range(10, 200, 1) var v_resolution: int = 100

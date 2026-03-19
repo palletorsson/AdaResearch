@@ -6,6 +6,17 @@ class_name AirPointListener
 ## Part of Audio_AirPoints System Phase 1.
 
 # Target to track (The Air Point)
+
+# @identity
+# essence: proximity = clamp(1 - distance/max_distance, 0, 1), smoothed per frame
+# desire: Move through space and hear sound respond to your distance from a target
+# critical_parameter: max_distance — defines the radius of sonic influence
+# triggers: continuous distance measurement between listener and target drives proximity signal
+# emerges: spatial audio awareness — sound as a field you move through, not a point you trigger
+# needs: VR player position tracking [has], target node reference [has]
+# relationships: depends on spatial distance calculation; contrasts with MelodyChaser3D (continuous field vs discrete triggers); unlocks proximity-based audio
+# truth: Sound in space is a field of intensities that the body samples by moving through it.
+
 @export var target_path: NodePath
 var target_node: Node3D
 

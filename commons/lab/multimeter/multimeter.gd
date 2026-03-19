@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabMultimeter
 
+
+# @identity
+# essence: V(t) = dc_offset + ac_amplitude * sin(ac_frequency * t * TAU) + noise * randf()
+# desire: Read voltage on a multimeter whose needle oscillates with the measured AC signal
+# critical_parameter: ac_frequency — determines the oscillation rate of the measured voltage
+# triggers: time drives the AC sine wave; noise_level adds measurement uncertainty
+# emerges: the needle as wave visualizer — watching measurement oscillate reveals the signal nature
+# needs: VR observation [has], frequency/amplitude adjustment [missing]
+# relationships: depends on sine-driven needle deflection; contrasts with electronicscales (voltage vs mass oscillation); unlocks measurement-as-wave-observation
+# truth: Every AC measurement is reading the current value of an ongoing oscillation.
+
 @export_group("Measurement")
 @export var ac_frequency: float = 1.0  # Hz
 @export var ac_amplitude: float = 5.0  # Volts peak

@@ -5,6 +5,17 @@
 
 extends Node3D
 
+
+# @identity
+# essence: double_pendulum(theta1, theta2, omega1, omega2) -> canvas(x,y) trace
+# desire: Swing pendulums by hand and watch chaotic trajectories paint on wet canvases below
+# critical_parameter: num_pendulums and spacing — determines how many simultaneous paintings emerge
+# triggers: grabbing the bob sets initial conditions; release begins chaotic evolution
+# emerges: unique unrepeatable paintings from deterministic but chaotic double-pendulum dynamics
+# needs: VR grab on pendulum bobs [has], canvas painting system [has]
+# relationships: depends on DoublePendulum physics; contrasts with foucault_pendulum (chaos vs precession); unlocks chaos-as-art
+# truth: Chaos is not randomness — it is determinism so sensitive that prediction becomes impossible.
+
 const DoublePendulumScene = preload("res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn")
 const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 

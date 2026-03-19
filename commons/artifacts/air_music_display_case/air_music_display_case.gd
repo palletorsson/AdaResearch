@@ -5,6 +5,17 @@ class_name AirMusicDisplayCase
 ## Inspired by Ferm Living Miru - minimalist Scandinavian design.
 
 ## Overall case size in meters (0.5m cube default)
+
+# @identity
+# essence: display_case(air_music_instance, sliders[]) — framed exhibition of generative audio
+# desire: Examine a generative air music system like a museum specimen with parameter controls
+# critical_parameter: audio_volume_db — balances the sonic presence against the visual display
+# triggers: slider adjustments modify the contained air music system parameters
+# emerges: the museum-as-instrument — display cases that you play rather than observe
+# needs: VR sliders [has], air music system [has]
+# relationships: depends on air music generation; contrasts with SoundscapeRadioRack (curated display vs radio tuning); unlocks contemplative audio interaction
+# truth: Framing sound as specimen transforms listening from passive reception to active examination.
+
 @export_range(0.1, 2.0, 0.05) var case_scale: float = 0.5
 ## Dark walnut brown frame color
 @export var frame_color: Color = Color(0.25, 0.15, 0.08, 1.0)

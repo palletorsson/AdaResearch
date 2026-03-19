@@ -1,8 +1,18 @@
 extends Node3D
 
 ## N-Body Gravitational Simulation — 3D
-## Bodies attract each other via Newton's gravity (F = G*M*m / r²).
+## Bodies attract each other via Newton's gravity (F = G*M*m / r^2).
 ## Rendered with MultiMeshInstance3D for bodies, ImmediateMesh for force lines.
+##
+## @identity
+## essence: F = G*m1*m2/r^2 for all pairs. O(n^2) pairwise gravity. Every body pulls every other. The computational cost of democracy.
+## desire: To summon a miniature galaxy — 20 bodies collapsing, orbiting, scattering — and see the force lines connecting the strongest gravitational relationships.
+## critical_parameter: g_constant (0.0001) — the universal coupling. Too high → everything collapses to a point. Too low → bodies drift apart. The sweet spot creates structure.
+## triggers: Automatic — all pairs attract every frame, positions update, MultiMesh syncs, top-20 strongest force lines drawn as fading blue connections
+## emerges: Clustering — bodies clumping into gravitational groups. Binary pairs forming and dissolving. The force line network revealing gravitational structure.
+## needs: MultiMesh body rendering [has], force line visualization [has]. Missing: VR grabbable bodies, Barnes-Hut tree optimization, mass merging on collision.
+## relationships: Scales up three_body_problem (3 → 20). The O(n^2) cost motivates Barnes-Hut trees. Lives in ForcesChaos. Force lines preview graph theory concepts (forcedirected3d).
+## truth: Gravity is the simplest force and the hardest computation. N bodies, N^2 interactions. Complexity comes from counting, not from the law.
 
 class_name GravitationalSimulation
 

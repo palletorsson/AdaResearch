@@ -6,6 +6,16 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 ## A 6x6 grid of display arrows shows the resulting wind field.
 ## Rain particles fall under gravity + wind, their diagonal paths
 ## demonstrating force superposition visibly.
+##
+## @identity
+## essence: R = A + B; F_rain = gravity + wind. Vector addition drives both the field and the particles. Superposition made meteorological.
+## desire: To let the learner drag two wind arrows and watch rain fall sideways — making force superposition a weather event you stand inside.
+## critical_parameter: gravity_strength — it competes with wind. High gravity = rain falls nearly vertical; low gravity = rain flies nearly horizontal. The ratio is the angle.
+## triggers: Drag wind handles → 36 grid arrows recolor and reorient, rain particles change trajectory, mode button → trade/cross/opposing/updraft presets, pressure slider → zones drift and distort the field
+## emerges: Rain streaking diagonally as the decomposition display shows wind + gravity = trajectory. High/low pressure zones bending the uniform field into curves.
+## needs: VR grabbable wind vectors [has], mode/grid/reset buttons [has], gravity/pressure sliders [has]. Missing: temperature gradient coloring the field.
+## relationships: Applied extension of vector_addition_demo and VectorFieldFlow. Demonstrates the same addition in a narrative (weather) context. Contrasts with force_field_visualizer (abstract vs applied).
+## truth: Wind is a vector field. Rain is a particle advected through two fields at once. Weather is superposition you can stand in.
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")

@@ -2,6 +2,17 @@
 # A mesmerizing VR scene with dynamic, flowing colored lines weaving through 3D space
 extends Node3D
 
+
+# @identity
+# essence: path_i(t) = f_type(t, params) where type in {spiral, wave, random, orbit, dna}
+# desire: Walk through a hallway of flowing colored light tubes that follow mathematical paths
+# critical_parameter: flow_speed — controls how fast color flows along the lines
+# triggers: animation_speed modulates the parametric path evolution over time
+# emerges: an immersive tunnel of living light from five basic curve equations
+# needs: VR walkthrough [has], path type selection [missing]
+# relationships: depends on ImmediateMesh line rendering; contrasts with hallway_scene (color tubes vs sine tubes); unlocks parametric curve visualization
+# truth: Every flowing line is a parametric curve — a point moving through space according to equations.
+
 @export var line_count: int = 25
 @export var points_per_line: int = 100
 @export var animation_speed: float = 1.0

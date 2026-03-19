@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: tube_y(x, t) = A * sin(omega * x + phi * t) — sine-displaced cylinders in a tunnel
+# desire: Walk through a hallway where glowing tubes undulate with sine wave displacement
+# critical_parameter: tube_count — determines visual density of the oscillating environment
+# triggers: time drives phase animation; color_variants assign distinct hues per tube
+# emerges: an immersive sine wave environment — architecture that breathes with oscillation
+# needs: VR walkthrough [has], frequency control [missing]
+# relationships: depends on MultiMesh cylinder instancing; contrasts with coloredlines (sine tubes vs parametric curves); unlocks environmental wave experience
+# truth: A hallway of sine tubes is a frozen moment of wave interference made architectural.
+
 @export var hallway_length: float = 60.0
 @export var hallway_width: float = 12.0
 @export var hallway_height: float = 12.0

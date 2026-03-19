@@ -1,5 +1,15 @@
 ## Particle Systems — Uses Godot's GPUParticles3D (runs on GPU, not CPU)
 ## Shows different particle behaviors: fountain, fire, sparks, snow
+##
+## @identity
+## essence: emit(position, velocity, lifetime). Each particle: born, forced, aged, dead. The system is the population, not the individual.
+## desire: To show four archetypal particle behaviors side by side — fountain (ballistic), fire (buoyant), sparks (explosive), snow (gentle) — all from the same GPU machinery.
+## critical_parameter: gravity direction and damping per system. Fountain: gravity down, low damp. Fire: gravity UP (buoyancy), high damp. These two parameters create completely different phenomena.
+## triggers: Automatic — all four GPUParticles3D emit continuously. No interaction needed; the artifact is a living taxonomy.
+## emerges: Fire looking like fire despite being spheres — because upward gravity + high damping + color ramp = buoyant fading embers. The color gradient does most of the work.
+## needs: Four GPU particle systems [has]. Missing: VR sliders to morph between behaviors, particle count control, custom emission shapes.
+## relationships: GPU counterpart to firework_launcher (CPU particles). Lives in ForcesSystems. Feeds into particle effects throughout the engine.
+## truth: A particle system is a statistical object. No single particle matters. The population's distribution is the phenomenon.
 extends Node3D
 
 func _ready() -> void:

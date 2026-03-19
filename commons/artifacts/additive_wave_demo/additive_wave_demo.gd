@@ -11,6 +11,17 @@ class_name AdditiveWaveDemo
 ## square, sawtooth, and triangle waves by their harmonic signatures.
 
 ## Path to the fundamental frequency slider in the scene tree
+
+# @identity
+# essence: f(x) = sum(a_n * sin(n * omega * x)) — Fourier additive synthesis
+# desire: Stack harmonics with VR sliders and watch complex waveforms build from pure sines
+# critical_parameter: harmonic_amplitudes[] — each slider adds one frequency component
+# triggers: slider movement updates harmonic amplitudes; waveform redraws in real-time
+# emerges: square waves from odd harmonics, sawtooth from all — Fourier theorem made tactile
+# needs: VR sliders for 5 harmonics [has], preset buttons [has]
+# relationships: depends on fundamental + harmonics; contrasts with timbre_sculptor (visual vs audible synthesis); unlocks Fourier intuition
+# truth: Any periodic function is a sum of sines; complexity is superposition of simplicity.
+
 @export var fundamental_slider_path: NodePath = "ControlPanel/FundamentalSlider"
 ## Path to the 2nd harmonic slider
 @export var harmonic2_slider_path: NodePath = "ControlPanel/Harmonic2Slider"

@@ -13,6 +13,17 @@ extends Node3D
 class_name SineWallExplanation
 
 ## Overall scale of the base plate (meters)
+
+# @identity
+# essence: surface(z, y, t) = base + A * sin(freq * z + speed * t) — animated sine wall cross-section
+# desire: Examine a labeled sine wall model with adjustable parameters in VR
+# critical_parameter: frequency — controls the wave density visible on the wall display
+# triggers: VR sliders adjust amplitude, frequency, and wave speed; mesh regenerates per frame
+# emerges: understanding what amplitude, frequency, and phase mean on a physical wall surface
+# needs: VR sliders [has], mesh display [has]
+# relationships: depends on SurfaceTool mesh animation; contrasts with sine_wall_corridor (explanation vs immersion); unlocks wave parameter literacy
+# truth: A sine wall is a one-dimensional wave made two-dimensional — displacement as architecture.
+
 @export_range(0.1, 5.0, 0.1) var display_size: float = 1.0
 ## Height of the sine wall (meters)
 @export_range(0.1, 3.0, 0.05) var wall_height: float = 0.5

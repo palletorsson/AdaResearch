@@ -4,6 +4,17 @@ extends Node3D
 ## A complete musical instrument with multiple resonating bars
 ## Hit with the stick to create harmonious resonances!
 
+
+# @identity
+# essence: bar[i].frequency = pentatonic_scale[i], amplitude(t) = A * e^(-t/decay)
+# desire: Strike metal bars and hear pentatonic tones ring while seeing combined wave visualization
+# critical_parameter: decay_time — controls how long each bar resonates after being struck
+# triggers: striking a bar initiates a decaying sinusoidal vibration at that frequency
+# emerges: music from physics — the pentatonic scale emerges from choosing bar lengths
+# needs: VR strike interaction [has], wave visualizer [has]
+# relationships: depends on ResonatingBar physics; contrasts with chladni_plate (discrete strikes vs continuous vibration); unlocks resonance and timbre
+# truth: Every object has frequencies at which it wants to vibrate — striking reveals its voice.
+
 const RESONATING_BAR = preload("res://algorithms/wavefunctions/resonance/resonating_bar.tscn")
 
 # Musical scale: C major pentatonic (C, D, E, G, A)

@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: v = |v| * v-hat. A vector is magnitude times direction. Decompose into (x,y,z) components.
+# desire: To grab an arrow and stretch it — watching magnitude, unit vector, and components all update as one system.
+# critical_parameter: The dragged endpoint of vector_a. Its position simultaneously defines magnitude, direction, and all three components.
+# triggers: Drag endpoint → magnitude arc sweeps, unit vector rescales, component arrows resize along axes, spring gadget deflects
+# emerges: The magnitude arc dotting from the x-axis toward the vector tip. The spring scale responding to vector length like a physical instrument.
+# needs: Grabbable vector endpoint [has], component decomposition [has], spring scale gadget [has]. Missing: VR button to toggle component visibility.
+# relationships: Entry point for all vector artifacts. Foundation for basis_vectors_rig (decomposition) and dot_product_projector (magnitude in dot product formula).
+# truth: A vector is not a number and not a point. It is a displacement — a difference between two positions, carrying both how far and which way.
+
 const SpringScaleScript = preload("res://algorithms/vectors/shared/gadgets/spring_scale_gadget.gd")
 
 var vector_a: Node3D

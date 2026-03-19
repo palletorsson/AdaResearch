@@ -11,6 +11,16 @@
 #
 # VR-enabled with grabbable vector endpoints
 # QFEP: Projection as "shadow" - reducing dimensions while preserving alignment
+#
+# @identity
+# essence: reflect(A) = A - 2(A.n)n. Projection strips a component; reflection mirrors through a plane. Both are dot-product machines.
+# desire: To let the learner tilt a plane and watch a vector bounce — making the law of reflection a spatial experience, not a memorized rule.
+# critical_parameter: The normal vector direction. It defines the plane. Tilting it changes what "perpendicular" means and rewrites both projection and reflection.
+# triggers: Handle drag (A or n) → five arrows update simultaneously (A, n, projection, reflection, normal component), preset buttons → floor/wall/45deg/glance
+# emerges: Angle of incidence equaling angle of reflection — visible in the symmetry of A and its reflection about the translucent plane. Glancing angles produce near-tangent reflections.
+# needs: VR grabbable handles [has], preset buttons [has], translucent plane mesh [has]. Missing: bouncing ball animation following the reflection path.
+# relationships: Extends dot_product_projector (projection uses dot product). Feeds into normal_force_demo (force decomposition onto surface normal). Used by every billiard/bounce in the engine.
+# truth: A mirror does not reverse left and right. It reverses the component perpendicular to its surface. Reflection is subtraction, twice.
 
 extends Node3D
 

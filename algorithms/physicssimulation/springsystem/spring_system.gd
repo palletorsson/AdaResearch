@@ -2,6 +2,16 @@ extends Node3D
 
 # Spring-Mass System Physics Simulation
 # Interactive network of masses connected by springs with real-time physics
+#
+# @identity
+# essence: F = -k(|x|-L)*x-hat. A network of masses connected by Hooke's law springs. Each spring pulls its endpoints toward rest length.
+# desire: To see a web of springs breathe — wind perturbing it, colors shifting with tension, the whole system finding equilibrium and losing it again.
+# critical_parameter: spring_stiffness (k=50) and damping (0.95). Higher stiffness = faster oscillation, tighter network. Lower damping = longer ringing. Together they set the network's texture.
+# triggers: Auto-interaction pulses random forces every 2 seconds, wind oscillates continuously, Space → manual random impulse, auto-rotate reveals 3D structure
+# emerges: Tension waves propagating through the network. Color shifting from calm blue to hot pink as springs stretch. Fixed anchor points creating standing wave patterns.
+# needs: MultiMesh rendering for masses and springs [has], wind force [has], auto-interaction [has]. Missing: VR grab individual masses, stiffness slider.
+# relationships: Network extension of mass_spring_damper (single spring → many). Feeds into cloth simulation (2D grid of springs). Lives in ForcesSystems.
+# truth: A spring network is a medium. Perturbation at one point travels through connections. Structure is communication.
 
 @export_category("Spring System Parameters")
 @export var mass_count: int = 20

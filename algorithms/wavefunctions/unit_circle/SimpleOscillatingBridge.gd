@@ -4,6 +4,17 @@ extends Node3D
 ## Individual platform cubes that oscillate in X and Y based on sine/cosine
 ## Perfect for stepping from platform to platform
 
+
+# @identity
+# essence: y_i(t) = A_y * sin(omega * t + phi * i) + A_x * cos(omega * t + phi * i)
+# desire: Walk across platforms that rise and fall in a sine wave beneath your feet
+# critical_parameter: oscillation_speed — controls how fast the wave propagates through platforms
+# triggers: phase offset per platform creates traveling wave illusion
+# emerges: a walkable wave — the body learns wavelength by stepping across oscillating ground
+# needs: VR locomotion [has], collision bodies on platforms [has]
+# relationships: depends on phase-offset oscillation; contrasts with TrigWalkingPath (bridge vs staircase); unlocks embodied wave mechanics
+# truth: A traveling wave is identical oscillators displaced in phase.
+
 @export_group("Bridge Setup")
 @export var num_platforms: int = 20  # Number of stepping platforms
 @export var platform_spacing: float = 2.0  # Distance between platforms along Z

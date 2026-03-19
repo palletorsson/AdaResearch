@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabChemicalApparatus
 
+
+# @identity
+# essence: liquid_y(t) = base_y + bubble_amplitude * sin(bubble_frequency * t + phase_offset)
+# desire: Watch liquids bubble and burners flicker in laboratory glassware driven by sine oscillations
+# critical_parameter: bubble_frequency — controls the rhythm of bubbling across all vessels
+# triggers: phase_offset_per_vessel creates staggered bubbling; trigger_reaction() activates color changes
+# emerges: the feeling of an active chemistry lab from simple sinusoidal liquid oscillation
+# needs: VR interaction to trigger reactions [missing], temperature control [missing]
+# relationships: depends on sine-driven position animation; contrasts with GlassRack (dynamic vs static glass); unlocks lab environment
+# truth: Bubbling is periodic vertical displacement — chemistry oscillates at the molecular scale.
+
 @export_group("Bubbling")
 @export var bubble_frequency: float = 2.0  # Hz
 @export var bubble_amplitude: float = 0.02  # Meters

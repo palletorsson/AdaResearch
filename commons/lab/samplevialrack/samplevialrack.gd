@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabSampleVialRack
 
+
+# @identity
+# essence: glow[i](t) = lerp(min, max, 0.5 + 0.5*sin(frequency*t*TAU + phase[i]))
+# desire: Watch a rack of sample vials pulse with phase-offset luminescence like a slow wave
+# critical_parameter: wave_frequency — controls the collective pulsing rate across all vials
+# triggers: phase_mode switches between linear, radial, and random phase distribution across vials
+# emerges: a visible traveling wave across the rack — phase offset makes the wave apparent
+# needs: VR observation [has], phase mode selection [missing]
+# relationships: depends on sine-driven emission modulation; contrasts with chladni_plate (continuous glow vs discrete particles); unlocks phase wave visualization
+# truth: A row of oscillators with progressive phase offset is a traveling wave made of light.
+
 @export_group("Wave Settings")
 @export var wave_frequency: float = 0.5  # Hz
 @export var phase_mode: int = 0  # 0=linear, 1=radial, 2=random

@@ -1,11 +1,21 @@
 # ===========================================================================
 # NOC Example 3.3: Pointing in the Direction of Motion
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: look_at(position + velocity). A cone that always points where it is going. Orientation derived from velocity, not set independently.
+# desire: To show that direction of motion IS orientation — the cone's nose traces its velocity vector, making heading a consequence of movement, not a choice.
+# critical_parameter: thrust_magnitude (0.01-0.15) — controls how quickly the mover changes direction. Low thrust = gentle curves. High thrust = sharp turns.
+# triggers: Automatic — sinusoidal thrust direction drives the mover in Lissajous-like 3D curves. VR thrust slider → adjusts responsiveness. Mover wraps at boundaries.
+# emerges: The cone's orientation lagging behind direction changes, showing inertia. Smooth curves from continuous thrust. The mover tracing invisible Lissajous figures.
+# needs: VR thrust parameter controller [has], cone visual pointing along velocity [has]. Missing: trail visualization, multiple movers.
+# relationships: Companion to example_3_2 (arbitrary angular motion vs velocity-aligned orientation). Used by vector_drone (enemy AI points toward player). Core concept for steering behaviors.
+# truth: A thing that points where it moves has surrendered its identity to its velocity. Heading is not chosen; it is inherited from motion.
 
 extends Node3D
 
