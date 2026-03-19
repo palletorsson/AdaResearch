@@ -76,7 +76,7 @@
 						"PhysarumColony"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 1 artifact"
+					"rationale": "Brainless computation through emergent network formation. Physarum solves mazes and optimizes paths without neurons or centralization."
 				},
 				{
 					"map": "SwarmIntelligence_FlowFeilds",
@@ -85,7 +85,7 @@
 						"FlowFieldMain"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 1 artifact"
+					"rationale": "Behavior through invisible environmental direction. Agents follow local vector arrows without pathfinding or goals — the field is the program."
 				},
 				{
 					"map": "SwarmIntelligence_Boids_Algorithm",
@@ -97,16 +97,17 @@
 						"boids_aquarium"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 4 artifacts"
+					"rationale": "Four implementations of Reynolds' separation, alignment, cohesion. Aquarium for compact social behavior; 2D-in-3D for dimensional projection."
 				},
 				{
 					"map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
 					"position": "exploration",
 					"artifacts": [
-						"ant_colony_optimization"
+						"ant_colony_optimization",
+						"stigmergy_grid"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 1 artifact"
+					"rationale": "Agent-based modeling through pheromone stigmergy. Ant colony shows how individual rules produce emergent aggregate behavior; stigmergy grid visualizes the communication medium."
 				},
 				{
 					"map": "SwarmIntelligence_Ant_Colony_Optimization",
@@ -115,16 +116,17 @@
 						"AntColonyV2"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Stigmergy in action: pheromone trails, evaporation, and positive feedback drive optimal pathfinding. Indirect communication through environment modification."
 				},
 				{
 					"map": "SwarmIntelligence_Particle_Swarm_Optimization",
 					"position": "integration",
 					"artifacts": [
+						"particle_swarm_optimization",
 						"self_organizing_patterns"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 1 artifact"
+					"rationale": "Collective memory drives convergence. Particles balance exploration (randomness) with exploitation (personal and global best). Self-organizing patterns show emergent structure."
 				},
 				{
 					"map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
@@ -133,7 +135,7 @@
 						"ecosystem_simulation"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Synthesis with 1 artifact"
+					"rationale": "Synthesis: ecosystem integrates predator-prey dynamics as unified multi-agent system. Nature's optimization — decentralized, robust, adaptive — debugged over millions of years."
 				}
 			]
 		}
@@ -169,10 +171,11 @@
 			"map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
 			"position": "exploration",
 			"artifacts": [
-				"ant_colony_optimization"
+				"ant_colony_optimization",
+				"stigmergy_grid"
 			],
 			"size_budget": "compact_only",
-			"rationale": "Agent-based modeling with ant colony. Single focused artifact for society simulation."
+			"rationale": "Agent-based modeling through pheromone stigmergy. Ant colony and grid visualize indirect environmental communication."
 		},
 		{
 			"map": "SwarmIntelligence_Ant_Colony_Optimization",
@@ -185,10 +188,11 @@
 			"map": "SwarmIntelligence_Particle_Swarm_Optimization",
 			"position": "integration",
 			"artifacts": [
+				"particle_swarm_optimization",
 				"self_organizing_patterns"
 			],
 			"size_budget": "compact_only",
-			"rationale": "PSO with self-organizing patterns. Collective memory finds optima through particle interactions."
+			"rationale": "PSO with collective memory: particles balance exploration and exploitation. Self-organizing patterns show emergent structure."
 		},
 		{
 			"map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
