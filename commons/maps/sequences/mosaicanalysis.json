@@ -73,17 +73,18 @@
 						"tessellation_lattice_demo"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Introduction with 2 artifacts"
+					"rationale": "Players identify wallpaper groups in opus tessellatum and decompose motif tiles using interactive grid puzzle and tessellation lattice."
 				},
 				{
 					"map": "Mosaic_Byzantine_Gold",
 					"position": "foundation",
 					"artifacts": [
 						"pattern_tile_puzzle",
-						"tessellation_lattice_demo"
+						"tessellation_lattice_demo",
+						"tiles_explained"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Gold tesserae at angles create light-dependent patterns. Tiles explained artifact demonstrates viewing angle and reflection effects on pattern perception."
 				},
 				{
 					"map": "Mosaic_Majolica_Tiles",
@@ -93,17 +94,18 @@
 						"pattern_tile_puzzle"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Building foundations with 2 artifacts"
+					"rationale": "Baroque color palettes on square grid. Pattern maker applies 17 wallpaper groups to painted motifs, revealing tension between narrative imagery and geometric repetition."
 				},
 				{
 					"map": "Mosaic_Facade_Ornament",
 					"position": "exploration",
 					"artifacts": [
 						"pattern_tile_puzzle",
-						"tessellation_lattice_demo"
+						"tessellation_lattice_demo",
+						"lsystem_editor"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Deeper exploration through 2 artifacts"
+					"rationale": "Scrollwork and volutes as recursive grammar. L-system editor models baroque ornamental logic as production rules alongside tessellation tools."
 				},
 				{
 					"map": "Mosaic_Capri_Villa",
@@ -114,7 +116,7 @@
 						"tessellation_lattice_demo"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Integration combining 3 artifacts"
+					"rationale": "Decontextualized fragments from mixed centuries. Players identify symmetry groups in each piece and reason backward toward original complete patterns."
 				},
 				{
 					"map": "Mosaic_WFC_Reconstruction",
@@ -124,7 +126,7 @@
 						"wfc_tile_mosaic"
 					],
 					"size_budget": "compact_only",
-					"rationale": "Integration combining 2 artifacts"
+					"rationale": "WFC generates new tilings from documented adjacency rules. Compare algorithmic output to originals — constraint satisfaction vs. design intent."
 				},
 				{
 					"map": "Mosaic_Pattern_Maker",
@@ -135,7 +137,7 @@
 						"tessellation_lattice_demo"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Synthesis with 3 artifacts"
+					"rationale": "Full wallpaper group workstation: apply field-captured motifs to all 17 symmetry groups and compare algorithmic tiling to historical craft intent."
 				}
 			]
 		}
