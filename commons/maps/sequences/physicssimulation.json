@@ -2,12 +2,12 @@
 	"sequences": {
 		"physicssimulation": {
 			"name": "Physics Simulation: The Engine Behind Reality",
-			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous \u00e2\u20ac\u201d and knowing where the illusion breaks.",
+			"truth": "Reality is continuous. Simulation is discrete. The art of physics simulation is making the discrete feel continuous â€” and knowing where the illusion breaks.",
 			"qfep_term": "dynamics",
-			"qfep_connection": "Physics simulation is the computational engine of emergence (\u00cf\u2020). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden \u00ce\u00bb \u00e2\u20ac\u201d the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
-			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)\u00c2\u00b7dt\u00c2\u00b2",
+			"qfep_connection": "Physics simulation is the computational engine of emergence (Ï†). Forces (F) create order, entropy (E) dissolves it, and the simulation timestep (dt) is the hidden Î» â€” the parameter that determines whether the system behaves or explodes. Numerical stability is the edge of chaos.",
+			"formula": "x(t+dt) = 2x(t) - x(t-dt) + a(t)Â·dtÂ²",
 			"demonstration": "Feel Newton's laws pull you. Watch rigid bodies collide and scatter. Stretch springs until they oscillate. See force fields push particles into orbits. Pour fluid into a simulated world.",
-			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity \u00e2\u20ac\u201d and a new way the simulation can break.",
+			"description": "From F=ma to fluid dynamics. Five maps covering the full stack of physics simulation: the mathematical foundations (integration methods), rigid body dynamics (collisions and constraints), elastic systems (springs and cloth), force fields (particles and n-body), and continuous matter (fluids and soft bodies). Each map adds a layer of complexity â€” and a new way the simulation can break.",
 			"layer": "dynamics",
 			"prerequisites": [
 				"forces"
@@ -20,7 +20,7 @@
 			"difficulty": "advanced",
 			"estimated_time": "40-50 minutes",
 			"learning_objectives": [
-				"Numerical integration: Euler, Verlet, RK4 \u00e2\u20ac\u201d and why the method matters",
+				"Numerical integration: Euler, Verlet, RK4 â€” and why the method matters",
 				"Rigid body dynamics: rotation, angular momentum, inertia tensors",
 				"Collision detection: broad phase (spatial hashing) and narrow phase (GJK/SAT)",
 				"Constraints: joints, hinges, and how physics engines solve them",
@@ -32,11 +32,27 @@
 				"Soft body physics: the compromise between rigid and fluid"
 			],
 			"content": [
-				"PhysicsSim_Foundations: Newton's laws \u00e2\u2020\u2019 numerical integration \u00e2\u2020\u2019 Verlet. The math that makes simulation possible.",
-				"PhysicsSim_Bodies: Rigid bodies \u00e2\u2020\u2019 collision detection \u00e2\u2020\u2019 constraints \u00e2\u2020\u2019 bouncing ball. Solid things interacting.",
-				"PhysicsSim_Springs: Mass-spring-damper \u00e2\u2020\u2019 spring networks \u00e2\u2020\u2019 cloth. Elastic connections and emergent softness.",
-				"PhysicsSim_Fields: Force fields \u00e2\u2020\u2019 vector fields \u00e2\u2020\u2019 particles \u00e2\u2020\u2019 n-body \u00e2\u2020\u2019 three-body problem. Invisible forces, visible chaos.",
-				"PhysicsSim_Continuum: Fluid (SPH) \u00e2\u2020\u2019 FEM \u00e2\u2020\u2019 soft bodies \u00e2\u2020\u2019 magnetic fields \u00e2\u2020\u2019 kinetic sculpture. Continuous matter, discrete approximation."
+				"PhysicsSim_Foundations: Discretizing Reality — Newton’s laws → numerical integration → Verlet. The math that makes simulation possible.",
+				"PhysicsSim_Bodies: Rigid Bodies and Contact — Rigid bodies → collision detection → constraints → bouncing ball. Solid things interacting.",
+				"PhysicsSim_Springs: Elasticity and Memory — Mass-spring-damper → spring networks → cloth. Elastic connections and emergent softness.",
+				"PhysicsSim_Fields: Invisible Architecture — Force fields → vector fields → particles → n-body → three-body problem. Invisible forces, visible chaos.",
+				"PhysicsSim_Continuum: Continuous Matter — Fluid (SPH) → FEM → soft bodies → magnetic fields → kinetic sculpture. Continuous matter, discrete approximation.",
+				"PhysicsSimulation_Bouncing_Ball_Physics: Bouncing Ball",
+				"PhysicsSimulation_Cloth_Simulation: Cloth Simulation",
+				"PhysicsSimulation_Collision_Detection: Collision Detection",
+				"PhysicsSimulation_Constraints: Constraints",
+				"PhysicsSimulation_Finite_Element_Method_FEM: Finite Elements",
+				"PhysicsSimulation_Fluid_Simulation_SPH: Fluid Simulation",
+				"PhysicsSimulation_Force_Fields: Force Fields",
+				"PhysicsSimulation_Mass_Spring_Damper: Mass-Spring-Damper",
+				"PhysicsSimulation_Newton_s_Laws: Newton’s Laws",
+				"PhysicsSimulation_Numerical_Integration: Numerical Integration",
+				"PhysicsSimulation_Particle_Systems: Particle Systems",
+				"PhysicsSimulation_Rigid_Body_Dynamics: Rigid Body Dynamics",
+				"PhysicsSimulation_Spring_Mass_Systems: Spring-Mass Networks",
+				"PhysicsSimulation_Three_Body_Problem: Three-Body Problem",
+				"PhysicsSimulation_Vector_Fields: Vector Fields",
+				"PhysicsSimulation_Verlet_Integration: Verlet Integration"
 			],
 			"maps": [
 				"PhysicsSim_Foundations",
@@ -89,10 +105,11 @@
 					"artifacts": [
 						"newtons_laws",
 						"numerical_integration",
-						"verlet_integration"
+						"verlet_integration",
+						"simulation_instability"
 					],
 					"size_budget": "environment",
-					"rationale": "Newton's laws launch the pipeline: force produces acceleration, integration methods (Euler vs Verlet) translate continuous math into discrete timesteps. The foundation of every physics engine."
+					"rationale": "Newton's laws launch the pipeline: force produces acceleration, integration methods (Euler vs Verlet) translate continuous math into discrete timesteps. The foundation of every physics engine. Simulation instability completes the picture — watch what happens when dt grows too large."
 				},
 				{
 					"map": "PhysicsSim_Bodies",
@@ -193,10 +210,11 @@
 					"map": "PhysicsSimulation_Fluid_Simulation_SPH",
 					"position": "exploration",
 					"artifacts": [
-						"lattice_gas_automata"
+						"lattice_gas_automata",
+						"fluid_simulation"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Lattice gas automata: fluid behavior from collision rules on a discrete grid. Void basins contain the flow — particles bouncing on lattice points produce viscosity and pressure."
+					"rationale": "Two approaches to fluid: lattice gas automata (discrete collision rules on a grid) and SPH (smoothed particle hydrodynamics). Different discretizations of the same continuous truth."
 				},
 				{
 					"map": "PhysicsSimulation_Force_Fields",
@@ -238,10 +256,10 @@
 					"map": "PhysicsSimulation_Particle_Systems",
 					"position": "integration",
 					"artifacts": [
-						"cellular_automata_3d"
+						"particle_systems"
 					],
 					"size_budget": "world_scale",
-					"rationale": "3D cellular automata as particle population: birth, death, and neighborhood rules producing crystalline growth. Particles governed by local logic, not global forces."
+					"rationale": "Particle emitters, life cycles, and collective behavior from simple birth-death rules. Many particles, one system."
 				},
 				{
 					"map": "PhysicsSimulation_Rigid_Body_Dynamics",
@@ -265,10 +283,10 @@
 					"map": "PhysicsSimulation_Three_Body_Problem",
 					"position": "synthesis",
 					"artifacts": [
-						"cellular_automata_1d"
+						"three_body_problem"
 					],
 					"size_budget": "world_scale",
-					"rationale": "Poincaré's impossibility: three gravitational bodies with no closed-form solution. Cellular automata frames deterministic chaos — predictable rules, unpredictable outcomes."
+					"rationale": "Poincaré’s impossibility: three gravitational bodies with no closed-form solution. Deterministic chaos — predictable rules, unpredictable outcomes."
 				},
 				{
 					"map": "PhysicsSimulation_Vector_Fields",

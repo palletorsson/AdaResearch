@@ -3027,27 +3027,59 @@
 		"IKArm": {
 			"scene_path": "res://algorithms/joint/11_ik_arm/IKArm.tscn",
 			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
-			"tags": ["physics", "joints", "inverse-kinematics"]
+			"tags": [
+				"physics",
+				"joints",
+				"inverse-kinematics"
+			]
 		},
 		"lifetime_curves": {
 			"scene_path": "res://algorithms/particles/lifetime_curves/lifetime_curves.tscn",
 			"description": "Three emitters demonstrating color, size, and opacity curves over particle lifetime",
-			"tags": ["particles", "lifetime", "curves"]
+			"tags": [
+				"particles",
+				"lifetime",
+				"curves"
+			]
 		},
 		"sub_emitters": {
 			"scene_path": "res://algorithms/particles/sub_emitters/sub_emitters.tscn",
 			"description": "Firework mortar launching projectiles that spawn burst particles on death",
-			"tags": ["particles", "sub-emitters", "fireworks"]
+			"tags": [
+				"particles",
+				"sub-emitters",
+				"fireworks"
+			]
 		},
 		"particle_campfire": {
 			"scene_path": "res://algorithms/particles/particle_campfire/particle_campfire.tscn",
 			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
-			"tags": ["particles", "synthesis", "campfire", "fire"]
+			"tags": [
+				"particles",
+				"synthesis",
+				"campfire",
+				"fire"
+			]
 		},
 		"momentum_collision": {
 			"scene_path": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
 			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
-			"tags": ["physics", "momentum", "collision", "conservation"]
+			"tags": [
+				"physics",
+				"momentum",
+				"collision",
+				"conservation"
+			]
+		},
+		"simulation_instability": {
+			"scene_path": "res://algorithms/physicssimulation/simulation_instability/simulation_instability.tscn",
+			"description": "Spring system with ramping timestep — watch stable oscillation drift, then explode as dt grows too large",
+			"tags": [
+				"physics",
+				"instability",
+				"timestep",
+				"numerical"
+			]
 		}
 	},
 	"sequence_mapping": {
