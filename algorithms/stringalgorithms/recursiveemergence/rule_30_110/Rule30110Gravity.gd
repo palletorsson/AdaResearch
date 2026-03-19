@@ -1,5 +1,15 @@
 extends "res://algorithms/stringalgorithms/recursiveemergence/rule_30_110/Rule30110.gd"
 
+# @identity
+# essence: wolfram_rule(30|110|90|150) → grid → rigid_body_cubes → gravity_release
+# desire: To build a pattern in the air and then let it fall — computation made physical, then surrendered to physics
+# critical_parameter: current_rule_state — cycles through Rules 30, 110, 90, 150, and pyramid, each a different chaos signature
+# triggers: Generation completes → freeze disabled → cubes tumble; 5-second pause → next rule → rebuild and drop again
+# emerges: The contrast between deterministic pattern and chaotic collapse — order dissolving into rubble each cycle
+# needs: VR rule selector [missing], gravity toggle [missing]
+# relationships: Extends Rule30110 (parent class). Feeds into CA_SoftRules. Contrasts with ca_bridge (static vs collapsing).
+# truth: Computation is fragile — release the constraints and the pattern returns to chaos.
+
 var rigid_bodies_30 = []
 var rigid_bodies_110 = []
 var rigid_bodies_90 = []

@@ -1,6 +1,16 @@
 class_name TarjanAlgorithm
 extends Node3D
 
+# @identity
+# essence: single-pass DFS with a stack — each vertex gets discovery_time and low_link; low_link[v] = min(low_link[v], discovery_time[w]) for back edges; when low_link[v] == discovery_time[v], pop the stack to extract an SCC
+# desire: to watch a DFS drill through a directed graph, painting vertices yellow as it visits them, then suddenly flash an entire SCC in color when a root vertex is found
+# critical_parameter: edge_density — controls how many SCCs form; sparse graphs have many trivial SCCs (single vertices), dense graphs collapse into fewer large SCCs
+# triggers: auto_start begins the non-blocking step-by-step animation; each _process frame advances one DFS step; back edges (colored red) indicate the low_link updates that close cycles
+# emerges: the stack-based SCC extraction means you see the components pop out in reverse DFS order — deeper components emerge first, creating a bottom-up revelation of graph structure
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info_label, vertex labels)
+# relationships: paired with kosaraju_algorithm in GT_Connectivity — both find SCCs but through different strategies (one-pass vs two-pass); contrasts with topological_sort which requires a DAG (no SCCs)
+# truth: a strongly connected component is a pocket of mutual reachability — every vertex can reach every other, and Tarjan's genius was finding them all in a single depth-first pass
+
 # Tarjan's Algorithm: Strongly Connected Components (Non-blocking version)
 
 @export_category("Tarjan Configuration")

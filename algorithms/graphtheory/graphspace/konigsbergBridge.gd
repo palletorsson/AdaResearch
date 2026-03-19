@@ -1,5 +1,16 @@
 @tool
 extends GraphSpace
+
+# @identity
+# essence: 4 nodes (landmasses), 7 edges (bridges) — Euler's theorem: Eulerian path exists iff exactly 0 or 2 vertices have odd degree; all 4 vertices have degree 3 (odd), so no path exists
+# desire: to walk the seven bridges yourself and feel the impossibility — each bridge you cross is an edge consumed, and you cannot complete the walk because graph theory forbids it
+# critical_parameter: node degree — every landmass has odd degree (3), and Euler proved that this specific parity pattern makes a complete traversal impossible
+# triggers: educational_mode enables the analysis UI showing degree sequence, Euler's theorem, and the impossibility proof; historical bridge names and construction dates appear as Label3D nameplates
+# emerges: players attempting the walk inevitably retrace a bridge, discovering Euler's proof through embodied frustration rather than abstract reasoning
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (bridge nameplates, educational UI)
+# relationships: extends GraphSpace with a fixed historical topology; the first problem in graph theory (1736); contrasts with pathfinding3d which finds paths that DO exist
+# truth: the impossibility of the Konigsberg walk is not a failure of the walker — it is a property of the graph itself, and no amount of cleverness can overcome odd-degree parity
+
 class_name KonigsbergBridge
 
 # Enhanced Königsberg Bridge Problem using GraphSpace system

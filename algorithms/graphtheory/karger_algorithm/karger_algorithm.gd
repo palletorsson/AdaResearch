@@ -1,6 +1,16 @@
 class_name KargerAlgorithm
 extends Node3D
 
+# @identity
+# essence: randomized edge contraction — repeatedly merge endpoints of a random edge (Union-Find) until 2 super-vertices remain; the crossing edges are a cut; P(finding min-cut) >= 2/(n*(n-1))
+# desire: to watch four parallel contractions race side by side, each making different random choices, and see probability amplification turn a terrible single-run chance into near-certainty
+# critical_parameter: initial_vertex_count (n) — P(success per run) = 2/(n*(n-1)); for n=8 that is ~3.6% per run, but parallel repetition amplifies it exponentially
+# triggers: auto-demo starts new parallel rounds every _auto_interval seconds; ParameterController3D sliders for vertices, density, speed, and panel count; ImmediateMesh redrawn every frame
+# emerges: the probability amplification chart shows observed success rate converging toward theoretical P(at least one success) = 1 - (1-p)^k as rounds accumulate
+# needs: slider_horizontal [missing] (uses custom ParameterController3D instead); push_button [missing]; Label3D [has] (title, metrics, probability)
+# relationships: appears in GT_Flow alongside push_relabel; demonstrates randomized algorithms and the power of repetition; contrasts with deterministic Edmonds-Karp
+# truth: Karger's algorithm is a bet that randomness repeated enough times becomes certainty — the min-cut is always there, you just need enough attempts to stumble onto it
+
 ## Karger's Algorithm — Expressive VR 3D visualization
 ## Parallel run comparison: multiple simultaneous contractions, best-cut highlighting,
 ## probability amplification chart, cut/uncut edge coloring, VR slider controls.

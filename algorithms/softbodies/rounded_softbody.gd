@@ -8,6 +8,16 @@
 
 extends Node3D
 
+# @identity
+# essence: SoftBody3D rounded cube with per-vertex strain energy E = 0.5 * k * displacement^2 computed every frame, displayed as a blue-green-red heatmap overlay
+# desire: to let you squeeze a soft body with your VR hand and see the stress field bloom red under your grip — making internal forces visible and tangible
+# critical_parameter: _stiffness — governs the spring constant k in the strain equation; low stiffness means large deformation for small force, high stiffness means the body barely yields
+# triggers: VR grip_click activates hand squeeze mode, pushing vertices away from hand center; mode button cycles through STRAIN, COLLISION, and VOLUME visualization
+# emerges: in VOLUME mode, the pressure_coefficient auto-adjusts to preserve volume — squeeze one side and the other side bulges out, revealing conservation of volume as an emergent constraint
+# needs: slider_horizontal [has] (stiffness, pressure, squeeze); push_button [has] (mode cycle); Label3D [has]
+# relationships: deepens jelly_cube's deformation intro with quantitative strain visualization; three modes correspond to three aspects of continuum mechanics
+# truth: strain is not damage — it is the body's memory of every force that has touched it, written in the displacement of every vertex from its rest position
+
 ## Rounded SoftBody — Strain Energy Visualization
 ## Deformable rounded cube with stress coloring, collision forces, and volume tracking
 

@@ -1,6 +1,16 @@
 extends Node3D
 
-# Parameters for the SPICY QUEER growth algorithm 🌈✨
+# @identity
+# essence: space colonization algorithm — branches grow toward attractors, each step: find closest attractor, add jitter, extend by growth_distance, mark reached attractors as consumed
+# desire: to watch a tree grow toward light in real time — branches reaching, splitting, and filling space as attractors guide their path through 3D
+# critical_parameter: jitter — at 0 the growth is deterministic and straight, at high values branches wander organically, creating the difference between crystal and root
+# triggers: attractor proximity (< min_branch_distance) kills an attractor and deactivates the branch; pride flag color cycling every 10 seconds shifts the visual palette
+# emerges: branches competing for the same attractors create natural spacing patterns that resemble real vascular networks without any explicit spacing rule
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: appears in SoftBodies_Playground_of_Joy bridging soft body play to growth algorithms; connects to reaction_diffusion as another form of pattern-from-process
+# truth: a tree does not plan its shape — it grows toward what attracts it, and the shape is what remains after all the reaching is done
+
+# Parameters for the SPICY QUEER growth algorithm
 @export var max_branches = 100  # More branches for fabulous density!
 @export var attraction_distance = 4.0
 @export var min_branch_distance = 0.25

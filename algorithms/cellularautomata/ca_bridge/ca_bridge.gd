@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: next_cell = wolfram_rule(left, center, right) extruded as walkable bridge
+# desire: To be crossed — a 1D automaton made physical, each row of cubes a generation you walk through
+# critical_parameter: rule (0-255) — each Wolfram rule number produces a completely different bridge topology
+# triggers: Rule 30 → chaotic, broken path; Rule 110 → structured walkway; random initial row → organic variation
+# emerges: Walkable architecture from an 8-bit number — bridges, walls, gaps appear from three-neighbor logic
+# needs: VR rule selector [missing], speed control [missing], collision [has]
+# relationships: Feeds into CA_GameOfLife. Contrasts with ca_columns (1D→bridge vs 2D→towers). Precedes ca_rule_explorer.
+# truth: A bridge built by a rule — you walk on computation.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export_category("Bridge Settings")

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: 2D Hooke's law spring system — F_spring = k*(d - rest_length) attracts connected nodes, F_repulsion = k/d^2 repels all pairs, velocity *= damping each frame until energy minimizes
+# desire: to watch a tangled graph untangle itself — nodes repel, springs pull, and the layout emerges from nothing but force balance
+# critical_parameter: spring_strength vs repulsion_strength ratio — determines whether the graph collapses into a cluster or spreads into a readable layout
+# triggers: _process runs force calculation and position integration every frame; CSGSphere3D nodes scale with force magnitude to show stress visually
+# emerges: the system converges to a local energy minimum that reveals graph structure — clusters, bridges, and peripheral nodes become spatially evident
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: 2D precursor to forcedirected3d's volumetric simulation; demonstrates the same physics that graphspace uses to lay out walkable rooms
+# truth: the best way to see the structure of a graph is to let physics find it — repulsion separates, attraction connects, and equilibrium is the drawing
+
 var time = 0.0
 var nodes = []
 var edges = []

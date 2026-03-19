@@ -6,6 +6,16 @@
 # Features: nutrient diffusion, allometric scaling, seasonal growth cycles.
 # License: CC BY-NC-SA 3.0
 # ===========================================================================
+#
+# @identity
+# essence: tree.dbh += nutrients * season * strategy * health; nutrients diffuse and deplete — competitive growth on shared soil
+# desire: To grow a forest where trees compete — watch aggressive species starve neighbors, conservative ones endure winters
+# critical_parameter: nutrient_supply vs competition_radius — together they determine whether the forest is cooperative or cutthroat
+# triggers: Spring → growth burst; Winter → dormancy; aggressive strategy → fast growth but resource depletion; crown overlap → health decline
+# emerges: Ecosystem dynamics from individual L-system trees sharing a diffusing nutrient grid — ecology from grammar
+# needs: VR diffusion/nutrients/speed/trees controllers [has], Label3D [has], health graph [has]
+# relationships: Central to LSystems_Competition. Extends lsystem_tree (single tree → competing forest). Uses allometric power laws.
+# truth: Competition emerges when grammars share resources — ecology is grammar plus scarcity.
 
 extends Node3D
 

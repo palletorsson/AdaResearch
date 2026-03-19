@@ -1,6 +1,16 @@
 extends Node3D
 class_name ContextSensitiveLTree
 
+# @identity
+# essence: if ray_cast(branch_tip, obstacle) → prune_branch(red_stub) else grow_forward
+# desire: To grow around obstacles — a tree that senses its environment and adapts its shape accordingly
+# critical_parameter: obstacle positions — the spatial constraints that force the tree to find alternative growth paths
+# triggers: Obstacle near trunk → dramatic pruning, asymmetric crown; no obstacles → normal fractal plant
+# emerges: Adaptive morphology from collision detection — the tree's shape encodes the obstacle layout
+# needs: VR obstacle placement [missing], iteration control [missing], Label3D [has]
+# relationships: Feeds into LSystems_Growth. Extends lsystem_tree (blind growth → environmentally aware). Uses physics raycasting.
+# truth: Context sensitivity is how real trees grow — the environment is part of the grammar.
+
 ## Context-Sensitive L-System Tree
 ## Grows a tree that prunes branches when they encounter obstacles.
 ## Branches that would collide with obstacles are pruned (drawn as red stubs).

@@ -2,6 +2,16 @@
 # L-system with continuous angle/length parameters for organic branching.
 # Unlike discrete rule-based L-systems, parameters decay smoothly per branch
 # depth, producing naturalistic trees and plants.
+#
+# @identity
+# essence: angle(depth) = base_angle * 0.95^depth + random(-var, +var) — parametric decay per branch level
+# desire: To show that continuous parameters make L-systems organic — the same grammar, softer and more alive
+# critical_parameter: length_decay — how quickly branches shorten with depth, controlling the tree's overall proportion
+# triggers: Preset switch → Bushy Tree, Willow, Fern Spray, Coral Branch — same engine, different character
+# emerges: Natural-looking trees from angle randomization and length decay — no biological model, just parameter gradients
+# needs: VR preset/parameter controls [missing], Label3D [has]
+# relationships: Feeds into LSystems_Growth. Extends lsystem_tree (fixed angle → parametric decay). Contrasts with AnimatedTree (time vs parameters).
+# truth: Randomness in the parameters, not the rules, is what makes grammar look like nature.
 
 extends Node3D
 

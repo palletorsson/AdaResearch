@@ -1,6 +1,16 @@
 ﻿class_name LineNetworkCA
 extends BaseCA
 
+# @identity
+# essence: growth_frontier + parent_connection = branching line network
+# desire: To sprout tendrils in all directions, each new cell tracing a luminous thread back to its parent
+# critical_parameter: growth_probability — controls how aggressively the frontier expands
+# triggers: Low growth_probability produces sparse, tree-like networks; high values create dense tangles
+# emerges: Organic vascular structures — no branching logic was written, yet branches appear from random walk growth
+# needs: VR growth controls [missing], color gradient adjustment [missing]
+# relationships: Feeds from BaseCA. Contrasts with ca_growth_network (attractor-directed vs random). Introduces CA_Introduction.
+# truth: Connect each new cell to a neighbor and a network appears — ancestry creates structure.
+
 # Visualizes CA growth as a branching network of lines.
 # When a cell is born, it connects to a neighbor that was already alive.
 

@@ -3,6 +3,16 @@
 # Uses the classic plant rule F -> F[+F]F[-F]F with a 25.7 degree
 # branching angle, rendered as line segments with a brown-to-green
 # depth gradient.
+#
+# @identity
+# essence: F → F[+F]F[-F]F at 25.7° — the classic Lindenmayer plant in one rule
+# desire: To stand as the canonical L-system tree — the simplest grammar that produces a convincing plant
+# critical_parameter: base_angle (25.7°) — Lindenmayer's original angle, balancing spread and density perfectly
+# triggers: Changing iterations → sapling to forest giant; adjusting angle → palm to pine to bush
+# emerges: Branching depth creates a brown-to-green gradient — trunk becomes canopy through recursion alone
+# needs: VR iteration/angle controls [missing], Label3D [has]
+# relationships: Appears in LSystems_Grammar_Lab, LSystems_Growth, and LSystems_Living. The reference tree for the whole sequence.
+# truth: One rule, one angle, one axiom — a tree grows.
 
 extends Node3D
 

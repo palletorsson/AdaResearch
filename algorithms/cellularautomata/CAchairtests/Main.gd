@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: strategy.step(grid) where strategy in {rule_switching, memory, gradient, pure_ca, downward_columns}
+# desire: To grow furniture from rules — watch a chair emerge from a seed through five different CA strategies
+# critical_parameter: strategy_type — each of five strategies produces fundamentally different growth morphologies
+# triggers: Switching strategy → same seed, completely different chair; 30 generations → growth halts, form is final
+# emerges: Chair-like forms from volumetric CA — no furniture geometry was specified, only growth rules
+# needs: VR buttons [has via UI], speed slider [has], strategy switcher [has], Label3D [has]
+# relationships: Feeds into CA_ExpandingSpace. Demonstrates that CA rules can be design tools, not just simulations.
+# truth: A chair is a convergent form — different rules find it because sitting demands it.
+
 const CAStrategy = preload("res://algorithms/cellularautomata/CAchairtests/CAStrategy.gd")
 
 @onready var ca_grid = $CAGrid

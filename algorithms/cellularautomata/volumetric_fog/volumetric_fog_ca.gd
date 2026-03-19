@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: B5+/S4+ on a 3D grid → density texture → FogVolume — CA rules become visible atmosphere
+# desire: To be walked through — fog that has opinions about where it clumps, thinning and thickening by local rules
+# critical_parameter: smooth_factor and birth/survival thresholds (B5/S4) — control whether fog dissipates or aggregates
+# triggers: High survival threshold → fog evaporates; low → dense permanent clouds; grid resolution → fine mist vs chunky blocks
+# emerges: Cloud-like formations from binary CA rules — no fluid dynamics, yet the fog moves like weather
+# needs: VR density controls [missing], rule parameter sliders [missing]
+# relationships: Feeds into CA_EdgeOfChaos. Unique in using CA to drive Godot's FogVolume system directly.
+# truth: Fog is a cellular automaton — local density rules produce clouds no one shaped.
+
 # Volumetric Fog CA
 # Uses a 3D CA to drive a FogVolume's density texture.
 

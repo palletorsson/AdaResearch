@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: per_row_rule[y] = random(0..255); cell = wolfram(rule[y], neighbors)
+# desire: To be a crossroads of rules — each row obeys a different Wolfram number, creating layered conflict
+# critical_parameter: rule_change_interval — how often rules re-randomize, controlling stability vs perpetual novelty
+# triggers: Every 10 turns all rules re-randomize → the entire pattern language shifts; collision toggles walkability
+# emerges: Interference patterns where different rule regimes collide at row boundaries — moiré-like zones of order
+# needs: VR rule display [missing], speed control [missing], collision [has]
+# relationships: Extends ca_bridge (single rule → many rules). Feeds into CA_ExpandingSpace.
+# truth: When every row speaks a different rule language, the boundaries become the most interesting places.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 var grid_width = 10

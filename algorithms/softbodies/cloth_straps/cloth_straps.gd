@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: N parallel SoftBody3D strips pinned to a frame top bar — each strap is a foil-shader cloth that hangs under gravity and collides with player hands
+# desire: to create a curtain you walk through with your body — each strap drapes, parts, and swings back, making soft body physics tactile and intimate
+# critical_parameter: strap_count — more straps create a denser curtain with more inter-strap collision, fewer straps let each one swing freely
+# triggers: player collision (layer 20) displaces individual straps; throwing a rigid ball (ui_accept) demonstrates mass-vs-compliance interaction
+# emerges: overlapping straps tangle and bunch when disturbed simultaneously, creating knot-like configurations never coded into the system
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: follows jelly_cube and softmill as cloth-specific soft body; precedes flagdancer which adds bone-driven wind simulation
+# truth: a curtain is not a surface — it is an array of constraints negotiating gravity, and parting it reveals that softness is a collective property
+
 @export var strap_count: int = 8
 @export var strap_width: float = 0.3
 @export var strap_height: float = 3.5

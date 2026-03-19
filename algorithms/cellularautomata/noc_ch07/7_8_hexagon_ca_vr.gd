@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: hex_cell(t+1) = life_rule(6_neighbors) stacked vertically — terrain from time
+# desire: To grow a hexagonal landscape you can walk on, each generation a new geological layer
+# critical_parameter: random_flip — injects noise into deterministic rules, controlling the chaos-order boundary
+# triggers: High random_flip → turbulent terrain; low → smooth plateaus; changing radius → intimate vs epic scale
+# emerges: Walkable terrain with caves and overhangs from stacking hex Life generations with noise
+# needs: VR random_flip controller [has], Label3D [has], collision [has]
+# relationships: Extends CA_BeyondBinary (hex grid vs square). Feeds into CA_ExpandingSpace (3D from 2D).
+# truth: Six neighbors instead of eight — the shape of the neighborhood reshapes the world.
+
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const TERRAIN_SHADER := preload("res://algorithms/cellularautomata/noc_ch07/hex_terrain.gdshader")
 

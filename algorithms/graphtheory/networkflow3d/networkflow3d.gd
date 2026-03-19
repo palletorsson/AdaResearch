@@ -1,6 +1,16 @@
 class_name NetworkFlow3D
 extends Node3D
 
+# @identity
+# essence: Edmonds-Karp max flow via BFS augmenting paths on a 3D spatial network — residual_capacity tracks remaining edge capacity, particles visualize flow along saturated edges
+# desire: to see flow move through a 3D pipe network — particles streaming from source to sink, faster through wide pipes, bottlenecked at narrow ones
+# critical_parameter: max_capacity — sets the upper bound on edge capacity; combined with gravity_effect (which reduces uphill capacity by 30%), determines the maximum flow achievable
+# triggers: calculate_max_flow runs Edmonds-Karp to saturation, then spawns flow particles proportional to each edge's current_flow; gravity_effect toggle rebuilds the network with elevation-penalized capacities
+# emerges: pressure visualization colors non-source/sink nodes by net incoming flow, revealing bottleneck nodes that accumulate pressure — network congestion made visible
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: appears in GT_Network_Analysis alongside network_analysis; demonstrates max-flow min-cut duality; precedes push_relabel which solves the same problem differently
+# truth: maximum flow through a network equals the minimum cut that separates source from sink — every bottleneck is simultaneously a capacity and a vulnerability
+
 # 3D Network Flow: Volumetric Flow Dynamics
 # Advanced 3D network flow with particle visualization and VR interaction
 

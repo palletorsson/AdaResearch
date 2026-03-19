@@ -4,6 +4,16 @@
 
 extends Node3D
 
+# @identity
+# essence: SoftBody3D with spring-mass physics — stiffness, damping, and pressure_coefficient govern deformation response
+# desire: to let you poke a translucent cube and feel its resistance change under your hands as you drag sliders between rigid and liquid
+# critical_parameter: stiffness — at 0 the cube collapses into a puddle, at 1 it barely yields, the sweet spot between is where jelly lives
+# triggers: hand collision with the SoftBody3D surface causes real-time vertex displacement; pressure slider inflates or deflates the volume
+# emerges: at low stiffness and high pressure the cube becomes a breathing balloon; at low pressure it drapes over the pedestal like cloth
+# needs: slider_horizontal [has] (stiffness, damping, pressure); push_button [has] (color cycle, reset); Label3D [has]
+# relationships: introduces spring-mass foundation before cloth_straps and soft_mushroom; contrasts with rounded_softbody_test which adds strain visualization
+# truth: elasticity is not a property of the object — it is a negotiation between the object's internal forces and whatever touches it
+
 class_name JellyCube
 
 ## Side length of the jelly cube in meters (0.1–1.0)

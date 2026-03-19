@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: 2D Game of Life stacked as 3D history — each generation becomes a new vertical layer
+# desire: To grow a city of columns from a flat seed, then release walkers to erode and reshape it
+# critical_parameter: rule_born/rule_survive — the Life variant determines whether columns are sparse towers or dense walls
+# triggers: Generation completes → walkers spawn on top and begin stochastic erosion/deposition cycle
+# emerges: Architectural forms from Life rules; walker erosion carves arches and bridges no one planned
+# needs: VR rule controls [missing], walker parameter sliders [missing], density control [missing]
+# relationships: Feeds into CA_GameOfLife. Contrasts with ca_bridge (1D rule → bridge vs 2D rule → columns). Unlocks CellularAutomata3DStacked.
+# truth: Stack time as space and a flat automaton becomes architecture.
+
 @export_category("Grid Settings")
 @export var grid_size: int = 64
 @export var max_height: int = 128

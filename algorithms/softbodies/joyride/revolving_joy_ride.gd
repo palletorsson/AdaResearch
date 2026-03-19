@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: RigidBody3D hub rotating at ride_speed, with PinJoint3D chains suspending SoftBody3D spheres — centripetal force stretches the soft bodies outward while gravity pulls them down
+# desire: to spin you inside a carousel where every hanging blob deforms differently depending on its chain length and the ride's angular velocity
+# critical_parameter: ride_speed — slow rotation lets soft bodies dangle and sway, fast rotation stretches them into elongated teardrops that barely hold together
+# triggers: rotation.y increment in _physics_process drives the entire chain system; obstacle ring at the perimeter causes collision-deformation events
+# emerges: at certain speeds the chain links begin to oscillate in phase, creating synchronized pendulum waves across the four arms
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: builds on jelly_cube's spring-mass intro by adding chain dynamics and centripetal force; contrasts with breathing_room's static pressure oscillation
+# truth: a carousel is a centrifuge for compliance — the soft bodies do not choose their shape, the rotation imposes it
+
 # Configuration
 @export var ride_radius: float = 3.0
 @export var ride_speed: float = 1.0 # Radians per second

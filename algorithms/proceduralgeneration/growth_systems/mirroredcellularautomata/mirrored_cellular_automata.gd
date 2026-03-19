@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Life-like CA with forced quad/octant/rotational symmetry — pattern = rule + mirror
+# desire: To tile the floor with living kaleidoscope patterns that breathe between order and dissolution
+# critical_parameter: symmetry_type — quad, eight-way, or rotational mirror fundamentally changes the visual grammar
+# triggers: Switching symmetry mode transforms the same rules into radically different visual languages
+# emerges: Mandala-like forms from stochastic birth/death plus symmetry enforcement — no mandala was coded
+# needs: VR symmetry selector [missing], birth/death probability sliders [missing], Label3D [has]
+# relationships: Contrasts with persian_rug (deterministic symmetry vs stochastic). Feeds into CA_GameOfLife.
+# truth: Symmetry is not decoration — it is a second rule system layered on the first.
+
 # Mirrored Cellular Automata — 3D floor display
 # Creates symmetrical patterns that evolve according to cellular automata rules
 

@@ -1,6 +1,16 @@
 class_name KosarajuAlgorithm
 extends Node3D
 
+# @identity
+# essence: two-pass DFS — first pass on original graph records finish_times; second pass on transpose_adjacency_list processes vertices in reverse finish order, each new DFS tree is an SCC
+# desire: to see the graph flip — the transpose reversal switches edge directions, and the fact that SCCs survive this reversal is the visual proof that mutual reachability is symmetric
+# critical_parameter: edge_density — determines the graph's SCC structure; the transpose graph is computed at initialization and visualized with distinct orange edges in phase 2
+# triggers: first_dfs_pass colors vertices as they finish (gray); second_dfs_pass processes the transpose in reverse finish order, coloring each SCC distinctly; phase_label tracks which pass is active
+# emerges: watching the same graph from two directions reveals that SCCs are the invariant structure under edge reversal — what you can reach forward, you can also be reached from backward
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info_label, phase_label, vertex labels)
+# relationships: paired with tarjan_algorithm in GT_Connectivity — same problem, different strategy; the two-pass approach makes the transpose relationship explicit where Tarjan hides it in low_link
+# truth: Kosaraju's algorithm proves that strongly connected components are the same in a graph and its transpose — mutual reachability is a symmetric property of directed structure
+
 # Kosaraju's Algorithm: Strongly Connected Components
 # Visualizes the two-pass DFS approach to finding strongly connected components
 # Explores the relationship between original graph and its transpose

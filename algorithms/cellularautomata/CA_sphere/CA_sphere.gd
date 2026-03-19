@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: vertex(t+1) = evolve(mode, neighbors) where mode in {CA, random_walk, hill_seeking}
+# desire: To deform a sphere three different ways — watch topology warp under CA birth/death, random drift, and gravitational attraction
+# critical_parameter: evolution_mode — switches between three fundamentally different deformation algorithms on the same mesh
+# triggers: Mode switch → sphere resets and begins new deformation; iteration limit → evolution halts, form is frozen
+# emerges: Organic, tumor-like growths on a sphere surface from vertex-level CA rules that know nothing about shape
+# needs: VR mode selector [missing], iteration control [missing], keyboard input [has]
+# relationships: Feeds into CA_SoftRules. Demonstrates CA on non-planar topology — contrasts with flat grid automata.
+# truth: The same rules on a sphere produce forms no flat grid ever could — topology is a hidden variable.
+
 # Multi-Algorithm Sphere Evolution System
 # Three different approaches: Cellular Automata, Random Walk, Hill Seeking
 

@@ -1,6 +1,16 @@
 class_name PushRelabel
 extends Node3D
 
+# @identity
+# essence: preflow-push with height labels — initialize by saturating source edges, then repeatedly: push excess flow along admissible edges (height[u] > height[v]), or relabel (raise height) if no push is possible
+# desire: to see water pile up at nodes and overflow downhill — excess flow accumulates, height labels rise, and the algorithm finds max flow by managing local floods rather than finding global paths
+# critical_parameter: height[source] = |V| — the source starts at maximum height, creating initial pressure; excess flow at the sink accumulates into max_flow
+# triggers: step-by-step animation with delay between operations; push operations highlighted in orange; active nodes (with excess) glow yellow; height and excess labels update per node
+# emerges: the relabel operations create a "waterfall" effect where height labels propagate backward from sink to source, establishing the pressure gradient that drives flow forward
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info, flow, operation labels; per-node height/excess labels)
+# relationships: appears in GT_Flow; solves the same max-flow problem as networkflow3d's Edmonds-Karp but through local operations instead of global augmenting paths
+# truth: push-relabel proves that maximum flow can be found without ever finding a complete path — local excess management is sufficient if you get the heights right
+
 # Push-Relabel Algorithm: Maximum Flow
 # Visualizes the preflow-based approach to finding maximum flow in networks
 # Explores the concepts of excess flow, height labels, and push/relabel operations

@@ -1,5 +1,16 @@
 ﻿# DiseaseSpreadCA.gd
 # Epidemic spread model (SIR)
+#
+# @identity
+# essence: S → I with P(infection) * infected_neighbors; I → R with P(recovery) — the SIR model on a 3D grid
+# desire: To spread — watch infection ripple outward from patient zero, then the green wave of recovery follow
+# critical_parameter: INFECTION_RATE vs RECOVERY_RATE — their ratio determines whether the epidemic burns out or persists
+# triggers: High infection rate → explosive spread; high recovery → quick burnout; few initial infected → slow simmer
+# emerges: Epidemic wavefronts, herd immunity boundaries, and spatial clustering from two probabilities
+# needs: VR rate sliders [missing], reset button [missing], SIR count display [has via get_disease_counts]
+# relationships: Feeds into CA_EdgeOfChaos. Extends PulsingCA (pulsing spheres for visual drama).
+# truth: Two probabilities and a grid of neighbors — this is how pandemics actually work.
+
 extends PulsingCA
 
 const INFECTION_RATE = 0.2

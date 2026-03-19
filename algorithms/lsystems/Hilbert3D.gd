@@ -5,6 +5,16 @@
 # A 3D Hilbert curve demonstrating space-filling properties using L-Systems
 # License: CC BY-NC-SA 3.0
 # ===========================================================================
+#
+# @identity
+# essence: A → -BF+AFA+FB-, B → +AF-BFB-FA+ in 3D with pitch/roll — a single path visits every point in a cube
+# desire: To fill space with a single unbroken line — watch a path that never crosses itself touch every corner of a cube
+# critical_parameter: generations — each increment multiplies path length by 8, from simple fold to space-saturating curve
+# triggers: Generation 1 → simple bent path; generation 3 → dense space-filling weave; animated drawing → reveals the path order
+# emerges: A continuous path through 3D space that preserves locality — nearby points on the path are nearby in space
+# needs: VR generation controller [has], Label3D [has], animation toggle [has]
+# relationships: Feeds into LSystems_Grammars_And_Curves. Pairs with space_filling_curve_gallery (3D vs 2D gallery).
+# truth: A grammar can visit every point in space without crossing itself — infinity threaded through a cube.
 
 extends Node3D
 

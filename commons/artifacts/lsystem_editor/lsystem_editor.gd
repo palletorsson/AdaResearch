@@ -1,6 +1,16 @@
 # lsystem_editor.gd
 # Interactive L-system viewer with VR controls
 # Grammar as a generative tool
+#
+# @identity
+# essence: axiom → rules → string → turtle(F, +, -, [, ]) → line geometry — the full L-system pipeline interactively
+# desire: To be played with — slide between Koch, Sierpinski, Dragon, Plant, Bush, Fern, and Binary Tree in real time
+# critical_parameter: preset (0-6) — seven fundamentally different grammars, each a different visual universe
+# triggers: Changing angle while keeping rules → same grammar, different geometry; generation slider → growth stages
+# emerges: The insight that one renderer + different rules = infinite variety — grammar IS the design tool
+# needs: VR preset slider [has], generation slider [has], angle slider [has], Label3D [has]
+# relationships: Central to LSystems_Grammar_Lab. Feeds into lsystem_tree (fixed vs interactive). Pairs with fractal_lsystem_string.
+# truth: Seven presets, one turtle — the grammar is the artist.
 
 extends Node3D
 

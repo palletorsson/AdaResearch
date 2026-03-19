@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: generation_timer → lsystem.generate() → interpret → draw_with_wind — growth made visible in time
+# desire: To grow before your eyes — each generation adding branches with tapering thickness and wind sway
+# critical_parameter: growth_delay — controls the pace of revelation, from instant to meditative
+# triggers: Each generation adds depth, widens angles (angle_spread_per_gen), and adds leaves at terminal branches
+# emerges: Wind animation on cached segments creates living motion — the tree breathes after it finishes growing
+# needs: VR growth controls [missing], wind parameter sliders [missing], Label3D [has]
+# relationships: Extends lsystem_tree (static → animated). Feeds into LSystems_Growth. Uses LSystem.create_fractal_plant().
+# truth: Watching a tree grow generation by generation teaches more than seeing the final form.
+
 ## Animated L-System Tree
 ## Grows step-by-step showing L-System generation process.
 ## Realistic branch tapering, fractal angle variation, and wind sway.

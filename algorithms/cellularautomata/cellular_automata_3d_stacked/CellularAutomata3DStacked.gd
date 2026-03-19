@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: layer(n+1) = life_rules(layer(n)) with outward→upward phase transition
+# desire: To extrude a flat Game of Life into a standing structure — watch 2D rules build 3D form
+# critical_parameter: GrowthPhase transition at generation 4 — switches from horizontal expansion to vertical extrusion
+# triggers: Phase OUT → spreading footprint; phase UP → columns rising; generation 10 → growth halts
+# emerges: Architectural columns and cantilevers from the phase transition between horizontal and vertical growth
+# needs: VR phase controls [missing], speed control [missing]
+# relationships: Feeds into CA_AgentsCircuits. Builds on ca_columns (implicit stacking vs explicit phase control).
+# truth: The same rules in two phases — spread then rise — produce architecture from biology.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var grid_size = 20

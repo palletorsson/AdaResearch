@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: cell(t+1) = born/survive(neighbors) with four-fold symmetry enforcement
+# desire: To weave itself — a living carpet whose patterns breathe and shift like textile memory
+# critical_parameter: rule_border_born/survive vs rule_inner_born/survive — two rulesets create the border-interior tension
+# triggers: Switching random_seed reshuffles initial conditions; changing border vs inner rules shifts the visual dialect entirely
+# emerges: Intricate symmetric textile patterns from the interplay of two CA rulesets and forced mirror symmetry
+# needs: VR parameter controls [missing], auto-play toggle [has via auto_step]
+# relationships: Contrasts with mirrored_cellular_automata (stochastic symmetry vs deterministic). Feeds into CA_Introduction.
+# truth: Symmetry imposed on local rules transforms noise into ornament — the rug designs itself.
+
 @export_category("Rug Settings")
 @export var width: int = 256
 @export var height: int = 384

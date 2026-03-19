@@ -1,6 +1,16 @@
 class_name MSTVisualization
 extends Node3D
 
+# @identity
+# essence: Kruskal's (sort edges by weight, Union-Find to reject cycles) or Prim's (grow tree from starting vertex, always add cheapest crossing edge) — both find the minimum-weight spanning tree
+# desire: to watch the cheapest skeleton of a network assemble edge by edge — green edges accepted, red edges rejected for creating cycles, the MST growing like a nervous system
+# critical_parameter: algorithm_type ("kruskal" vs "prim") — Kruskal processes edges globally by weight (greedy on edges), Prim grows locally from a root (greedy on vertices) — same result, different experience
+# triggers: step-by-step timer advances one edge decision per tick; Union-Find path compression tracks connected components; edge_density controls how many redundant edges exist to reject
+# emerges: watching Kruskal reject edges reveals the cycle structure of the graph — every rejected edge would have closed a loop, and the set of rejected edges defines the graph's cycle space
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (vertex labels, edge weight labels)
+# relationships: appears in GT_Spanning_Trees; connects to push_relabel and karger which also optimize over graph structure; MST efficiency metric shows what fraction of total edge weight is necessary
+# truth: the minimum spanning tree is the cheapest way to keep everyone connected — every edge in it is necessary, and removing any one disconnects the network
+
 # Minimum Spanning Tree: Connection Politics & Optimal Networks
 # Visualizes MST algorithms with edge selection and cost optimization
 # Explores network connectivity and resource allocation strategies

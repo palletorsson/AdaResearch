@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: health(cell) -= decay_if_near_player; health += regrow_rate * healthy_neighbors
+# desire: To crumble under your feet and heal behind you — architecture that remembers your weight
+# critical_parameter: decay_speed vs regrow_speed — the ratio determines whether the bridge survives your crossing
+# triggers: Standing still → hole opens beneath you; moving fast → bridge barely notices; no player → full restoration
+# emerges: Path memory — the bridge records where you walked as a fading scar of transparency
+# needs: VR parameter controls [missing], player tracking [has via group lookup], collision [has]
+# relationships: Feeds into CA_ExpandingSpace. Extends ca_bridge (static structure → responsive architecture).
+# truth: Architecture that reacts to presence is architecture that is alive.
+
 # Living Architecture - Decaying Bridge
 # A bridge that decays when stepped on and regrows over time.
 

@@ -2,6 +2,16 @@
 # VR-optimized reaction-diffusion using GPU shader
 extends Node3D
 
+# @identity
+# essence: Gray-Scott reaction-diffusion on GPU via ping-pong SubViewport rendering — feed_rate and kill_rate parameters select pattern regimes (coral, mitosis, spots, maze, waves)
+# desire: to watch Turing patterns bloom on a quad in front of you — spots splitting, stripes forming, mazes growing — all from two chemicals diffusing at different speeds
+# critical_parameter: feed_rate / kill_rate pair — together they select the pattern regime; tiny changes (0.001) cross phase boundaries between spots and stripes
+# triggers: preset cycling (KEY_LEFT/RIGHT) loads predefined feed/kill pairs; KEY_SPACE drops a new seed point; KEY_R resets the simulation to uniform state
+# emerges: seed placement geometry determines the initial symmetry which the reaction-diffusion dynamics then break or amplify — same parameters, different seeds, different patterns
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (preset label)
+# relationships: GPU shader complement to turing_pattern_generator's CPU simulation; absorbed into softbodies sequence from morphogenesis
+# truth: Turing's last paper proved that two diffusing chemicals can create pattern from homogeneity — no blueprint needed, only differential diffusion
+
 # Shader parameters
 @export var feed_rate: float = 0.037
 @export var kill_rate: float = 0.06

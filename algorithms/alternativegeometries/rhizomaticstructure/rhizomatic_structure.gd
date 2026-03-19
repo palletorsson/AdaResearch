@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: recursive branching with lateral reconnection — each new node grows from a random parent with direction = lerp(random, away_from_center, 1 - growth_direction_randomness), then probabilistically connects to nearby existing nodes
+# desire: to grow a structure that has no center and no hierarchy — a rhizome where any point can connect to any other point, undermining tree-shaped thinking
+# critical_parameter: connection_probability — at 0 the structure is a tree (hierarchical), at 1.0 every nearby node reconnects (rhizomatic), the transition is where Deleuze meets graph theory
+# triggers: generate_structure builds the node/connection arrays; draw_structure renders CylinderMesh branches between connected nodes; regenerate() clears and regrows
+# emerges: lateral connections create cycles in an otherwise tree-shaped growth, producing a network topology that resists reduction to any single root or trunk
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: appears in GT_Network_Analysis as a Deleuze-Guattari-inspired contrast to hierarchical graph algorithms; challenges the tree assumption in tarjan and kosaraju
+# truth: a rhizome has no beginning and no end — only middles, and every connection is as legitimate as every other
+
 class_name RhizomaticStructure
 
 # Parameters for the rhizomatic structure

@@ -1,5 +1,15 @@
 extends StaticBody3D
 
+# @identity
+# essence: StaticBody3D rotating at constant angular velocity — torque = rotation_speed * delta applied every physics frame
+# desire: to be the unyielding thing that soft bodies must negotiate — a relentless kinematic arm that pushes, drags, and deforms anything compliant
+# critical_parameter: rotation_speed — slow enough to watch deformation happen, fast enough to fling soft bodies across the room
+# triggers: collision with any soft body or rigid body transfers kinetic energy through push_force; the pivot sphere marks the axis of rotation
+# emerges: when paired with SoftBody3D objects, the arm creates rhythmic compression-release cycles that look like breathing
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: paired with jelly_cube in SoftBodies_Soft_Body_Deformation; precedes revolving_joy_ride which adds chain dynamics to rotation
+# truth: a rotating arm does not care what it hits — compliance is always the softer body's problem
+
 # Simple rotating arm configuration
 @export var arm_length: float = 3.0
 @export var arm_thickness: float = 0.2

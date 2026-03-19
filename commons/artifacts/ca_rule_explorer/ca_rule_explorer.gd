@@ -1,6 +1,16 @@
 # ca_rule_explorer.gd
 # 1×1m horizontal board displaying Wolfram 1D cellular automata
 # VR-enabled with slider and button controls
+#
+# @identity
+# essence: next_cell = (rule >> (left<<2 | center<<1 | right)) & 1 — all 256 Wolfram rules on one board
+# desire: To be dialed — slide through all 256 rules and watch chaos, order, and Turing completeness appear
+# critical_parameter: rule (0-255) — a single 8-bit number that determines the entire visual universe
+# triggers: Rule 30 → chaos from a single seed; Rule 110 → Turing complete computation; Rule 90 → Sierpinski triangle
+# emerges: The full spectrum from death (Rule 0) to chaos (Rule 30) to computation (Rule 110) from one integer
+# needs: VR rule slider [has], speed slider [has], preset buttons [has], reset button [has], Label3D [has]
+# relationships: Central to CA_AgentsCircuits. Extends ca_bridge (single rule, no interaction vs full exploration).
+# truth: An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute anything.
 
 extends Node3D
 

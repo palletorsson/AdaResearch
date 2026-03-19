@@ -3,6 +3,17 @@
 # Drop this on a Node3D. Assign room_scene and portal_scene in the Inspector.
 @tool
 extends Node3D
+
+# @identity
+# essence: force-directed graph layout — repulsion F_rep = k/d^2, spring attraction F_spring = stretch * stiffness, iterated layout_iters times to position node_count rooms connected by weighted edges
+# desire: to walk through a graph — each room is a node, each bridge is an edge, and the spatial layout you traverse was computed by the same physics that arranges molecules
+# critical_parameter: repulsion vs edge_stiffness ratio — high repulsion spreads rooms far apart, high stiffness pulls connected rooms close, the equilibrium defines the walkable topology
+# triggers: seed parameter deterministically generates the graph; structure_type enum (RANDOM, BY_DEGREE, BY_DISTANCE) selects which building appears at each node based on graph properties
+# emerges: Dijkstra distances from focal_node drive ambient lighting — rooms far from the focus grow dim and cool, creating atmospheric depth from pure graph distance
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: foundation of graph theory sequence — introduces what a graph IS as a walkable space; extends into KonigsbergBridge which constrains the topology to a specific historical problem
+# truth: a graph is not a diagram — it is a set of relationships, and force-directed layout reveals that structure has a natural shape if you let physics find it
+
 class_name GraphSpace
 
 # Structure type enum

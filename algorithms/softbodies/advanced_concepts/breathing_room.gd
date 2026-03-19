@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: two SoftBody3D walls with sinusoidally oscillating pressure_coefficient — P(t) = (sin(t * breath_speed) + 1) * 0.5 * breath_amplitude — creating walls that inhale and exhale
+# desire: to trap you inside a room that breathes — walls expand inward on the inhale and contract on the exhale, making the architecture itself feel alive
+# critical_parameter: breath_amplitude — low amplitude creates subtle pulsing you barely notice, high amplitude compresses the walkable space until the walls nearly touch
+# triggers: the _process loop continuously modulates pressure_coefficient on both wall SoftBody3D instances; player collision with inflating walls creates push-back forces
+# emerges: the two walls breathing in sync create a bellows effect where standing between them during peak inflation feels like being squeezed by the room itself
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: extends static soft body demos (jelly_cube, cloth_straps) into environmental-scale architecture; precedes flagdancer which adds wind dynamics
+# truth: a room that breathes is no longer a container — it is a body, and you are inside it
+
 @export var room_size: Vector3 = Vector3(6, 4, 10)
 @export var wall_thickness: float = 0.5
 @export var breath_speed: float = 1.0

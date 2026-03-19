@@ -1,6 +1,16 @@
 class_name Pathfinding3D
 extends Node3D
 
+# @identity
+# essence: A* on a 3D voxel grid — f(n) = g(n) + h(n), with pluggable heuristics (Manhattan, Euclidean, Chebyshev) and movement models (ground, flying, swimming, climbing)
+# desire: to carve a glowing path through a 3D maze of voxels — watching the open set expand like a wavefront and the path crystallize when goal is reached
+# critical_parameter: heuristic_weight — at 1.0 it is standard A*, above 1.0 it becomes greedy (faster but suboptimal), at 0.0 it degenerates to Dijkstra
+# triggers: animated search mode steps through A* one node at a time, coloring open (yellow) and closed (blue) voxels; algorithm_type switches between A*, Dijkstra, JPS, and flow field
+# emerges: the search wavefront's shape reveals the heuristic's bias — Euclidean creates spherical expansion, Manhattan creates diamond-shaped expansion, Chebyshev creates cubic expansion
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: contrasts with KonigsbergBridge (paths that don't exist) by finding paths that DO exist; builds on graph foundations to add spatial navigation
+# truth: pathfinding does not move through space — it moves through a graph that happens to be embedded in space, and the heuristic is the algorithm's guess about geometry
+
 # 3D Pathfinding: Volumetric Navigation Algorithms
 # Comprehensive 3D pathfinding with voxel grids and multiple algorithms
 # Optimized for VR interaction and large-scale navigation

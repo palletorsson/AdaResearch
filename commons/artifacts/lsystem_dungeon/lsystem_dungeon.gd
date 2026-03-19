@@ -6,6 +6,16 @@
 # Axiom: "F"
 # Rules: F -> "F+RF-FF-FR+F", R -> "RFRFRF"
 # Turtle: F = corridor forward, R = room marker, + = left 90, - = right 90
+#
+# @identity
+# essence: F → F+RF-FF-FR+F, R → RFRFRF — corridor grammar with room markers at 90° turns
+# desire: To generate a dungeon you can look down on — corridors and rooms from two rewriting rules
+# critical_parameter: iterations — controls dungeon complexity from a single corridor to a labyrinthine floor plan
+# triggers: Iteration 1 → simple L-shaped corridor; iteration 4 → dense maze with many rooms and walled passages
+# emerges: Spatial variety from two rules — rooms appear at grammatical intersections, not placed by a designer
+# needs: VR iteration control [missing], Label3D [has]
+# relationships: Feeds into LSystems_Architecture. Contrasts with CityGenerator (2D plan vs 3D growth). Bridges to proceduralgeneration.
+# truth: Two rules and a turtle — the dungeon writes itself.
 
 extends Node3D
 

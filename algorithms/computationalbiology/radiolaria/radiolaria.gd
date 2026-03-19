@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: CSG boolean operations (UNION, SUBTRACTION) on spheres, cylinders, and tori — generating radiolaria, spiky forms, lattice spheres, ringed forms, and pollen through procedural composition
+# desire: to fill a grid with biological specimens that look grown rather than designed — each one a unique CSG sculpture you can walk around and inspect in VR
+# critical_parameter: spikiness_probability — controls how many forms grow spines; at 0 all forms are smooth spheres, at 1.0 every specimen bristles with projections
+# triggers: randi() % 6 selects form type per grid cell; randf() gates each sub-feature (bumps, spokes, pores); golden-ratio icosahedron vertices place spikes symmetrically
+# emerges: the combination of random form selection and random feature gating means no two grids produce the same cabinet of specimens, yet all feel biologically plausible
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: bridges soft body physics to affect theory in SoftBodies_Affect_Theory_Visualization; inspired by Ernst Haeckel's Kunstformen der Natur
+# truth: a radiolarian's skeleton is not engineered — it is what remains after surface tension, mineral deposition, and evolutionary pressure finish negotiating
+
 # Radiolaria and Pollen Form Generator
 # Creates a variety of symmetric geometric biological forms inspired by Ernst Haeckel illustrations
 

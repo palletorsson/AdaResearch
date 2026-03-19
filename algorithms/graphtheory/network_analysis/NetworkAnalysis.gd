@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: tiered network visualization — central hub nodes (high centrality), mid-tier cluster nodes, peripheral nodes — all orbiting with speed inversely proportional to centrality, connected by pulsing edges with flow particles
+# desire: to see a living network breathe — nodes orbit at different speeds based on their importance, edges pulse with data flow, and community boundaries glow like cell membranes
+# critical_parameter: analysis_progress — ramps from 0 to 1 over time, progressively amplifying all visual effects (node pulsing, edge glow, community alpha, particle trail intensity)
+# triggers: time drives orbital animation, edge pulse frequency, and community rotation; flow_particles traverse random edges continuously, creating a sense of constant network activity
+# emerges: the three-tier layout (central/cluster/peripheral) creates visual hierarchy without explicit label — centrality is expressed through node size, color, orbit radius, and glow intensity
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: appears in GT_Network_Analysis as the analytical complement to networkflow3d's algorithmic flow; provides qualitative network intuition before quantitative algorithms
+# truth: a network's structure is not in its nodes or edges alone — it is in the pattern of connections, and centrality measures which nodes the network would miss most
+
 class_name NetworkAnalysis
 
 var time: float = 0.0

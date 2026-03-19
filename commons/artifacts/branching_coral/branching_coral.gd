@@ -2,6 +2,16 @@
 # Marine L-system coral — organic branching structure with coral/seaweed visual language.
 # Multiple axiom starts produce a bushy colony. Color gradient from deep purple/brown
 # at the base to bright pink/coral at branch tips.
+#
+# @identity
+# essence: F → FF[+F][-F][>F][<F] from multiple shoot origins with 3D pitch/roll branching
+# desire: To grow a coral colony — multiple shoots from a shared base, each branching in all directions with organic randomness
+# critical_parameter: num_shoots — the number of independent growth starts that together form the colony's bushy silhouette
+# triggers: More shoots → denser colony; higher angle_variation → wilder, more organic forms; fewer iterations → sparse polyps
+# emerges: Colony morphology from independent shoots sharing a base — the whole is bushier than any individual shoot
+# needs: VR shoot/angle/iteration controls [missing], Label3D [has]
+# relationships: Appears in LSystems_Competition and LSystems_Living. Contrasts with lsystem_tree (single trunk vs multi-shoot colony).
+# truth: A coral is not one tree — it is many grammars growing from the same rock.
 
 extends Node3D
 

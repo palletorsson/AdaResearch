@@ -1,5 +1,16 @@
 ﻿# SelfOrganizationCA.gd
 # Self-organizing patterns and emergence
+#
+# @identity
+# essence: cell(t+1) = cell(t) * (1 - k) + avg(neighbors) * k + noise — local averaging with perturbation
+# desire: To settle into consensus regions, then be disturbed — watch opinion clusters form and dissolve
+# critical_parameter: INTERACTION_STRENGTH (0.1) — how fast cells converge toward their neighbors' average
+# triggers: High interaction → rapid homogenization into uniform zones; randomness prevents total consensus
+# emerges: Domain boundaries and cluster formation from simple averaging — phase separation without physics
+# needs: VR interaction/randomness sliders [missing], diversity readout [has via get_pattern_diversity]
+# relationships: Feeds into CA_EdgeOfChaos. Demonstrates self-organization as the CA analogue of social consensus.
+# truth: Average with your neighbors and add noise — domains form, boundaries emerge, organization happens without an organizer.
+
 extends BaseCA
 
 const INTERACTION_STRENGTH = 0.1

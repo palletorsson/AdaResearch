@@ -1,6 +1,16 @@
 class_name EdmondsAlgorithm
 extends Node3D
 
+# @identity
+# essence: greedy maximum matching — iterate edges in order; if both endpoints are unmatched, add the edge to the matching; matched vertices turn green, matching edges turn red
+# desire: to watch pairs form across a graph — each matched edge is a partnership, and the unmatched vertices that remain are the ones the graph's structure could not pair
+# critical_parameter: edge_density — sparse graphs leave many vertices unmatched; dense graphs approach perfect matching; the gap reveals structural constraints on pairing
+# triggers: step-by-step animation highlights each edge in yellow before accepting (green) or skipping it; matching_size counter tracks progress; ui_accept toggles start/stop
+# emerges: the greedy order matters — different edge orderings produce different matchings, and the greedy result is not always maximum; the gap between greedy and optimal reveals augmenting path opportunities
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info_label, matching_label, vertex labels)
+# relationships: synthesis artifact in GT_Matching; contrasts with flow-based matching approaches; the symmetry of the room layout mirrors the pairing theme
+# truth: matching is the mathematics of pairing — who connects with whom, who remains alone, and whether the graph's structure permits everyone to find a partner
+
 # Edmonds' Algorithm: Maximum Matching (Simplified Greedy Version)
 # For demonstration purposes, using a greedy matching approach
 

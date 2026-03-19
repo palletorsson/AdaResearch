@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: square_layer(n) → ca_prune(edge, isolation, random) → tree silhouette
+# desire: To grow upward layer by layer, pruning itself into a tree shape through local elimination rules
+# critical_parameter: edge_pruning_chance — controls how aggressively corners are carved, shaping the crown profile
+# triggers: High isolation_pruning → skeletal branches; low → dense canopy; changing base_size → bonsai vs oak
+# emerges: Tree-like silhouettes from rectangular layers and three simple removal rules — no tree model was coded
+# needs: VR pruning sliders [missing], growth speed control [missing]
+# relationships: Feeds into CA_ExpandingSpace. Contrasts with lsystem_tree (subtractive CA vs additive grammar).
+# truth: A tree is what remains when you remove everything that isn't tree.
+
 @export_category("Tree Settings")
 @export var base_size: int = 4
 @export var max_height: int = 20

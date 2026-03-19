@@ -1,6 +1,16 @@
 ﻿@tool
 extends Node3D
 
+# @identity
+# essence: growth_tip += attractor_force / distance^2, with stochastic branching
+# desire: To reach — tendrils seeking invisible attractors, branching when the signal is ambiguous
+# critical_parameter: attractor_strength — how powerfully distant goals bend the growth direction
+# triggers: Many attractors → dense bush; few → sparse reaching arms; high branch_probability → fractal explosion
+# emerges: Root-like, vascular networks from simple force-toward-goal logic — no branching pattern was specified
+# needs: VR attractor controls [missing], growth speed slider [missing]
+# relationships: Contrasts with line_network_ca (random vs directed growth). Feeds into CA_BeyondBinary.
+# truth: Growth toward a goal, with noise, is enough to produce every vascular pattern in nature.
+
 # Growth CA with Attractors - Organic root/slime network growth
 # Grows from seed points toward attractors, creating branching networks
 
