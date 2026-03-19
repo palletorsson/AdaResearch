@@ -1,6 +1,16 @@
 ﻿# Quad.gd - Creates an editable quad split into two triangles with different colors
 extends Node3D
 
+# @identity
+# essence: quad = 2 triangles sharing a diagonal — four vertices, two faces, one surface
+# desire: learner discovers that every quad is secretly two triangles — and the diagonal is a choice
+# critical_parameter: the different front/back colors (bi-reflection) — orientation becomes unmistakably visible
+# triggers: dragging any of the 4 vertex grab spheres — both triangles rebuild instantly from shared vertices
+# emerges: the arbitrary nature of the diagonal — quad triangulation is not unique, it is a design decision
+# needs: [has 4 grabbable vertex spheres [has], has front/back color Label3D [has], missing diagonal-flip button]
+# relationships: extends triangle concept to 4 vertices; every polygon face in games is quads or tris
+# truth: a quad face has no single correct triangulation — the software chooses, and the choice affects shading
+
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
 @export var sphere_y_offset: float = 0.0

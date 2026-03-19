@@ -2,6 +2,16 @@
 # Usage: capsule_radials_rings:90:1:#config:8:4 for 8 radial segments and 4 rings
 extends Node3D
 
+# @identity
+# essence: CapsuleMesh(radial_segments, rings, height, radius) — cylinder with hemispherical caps
+# desire: learner understands the capsule as a cylinder that has been made "safe" at its ends
+# critical_parameter: radial_segments — controls how round the cylinder cross-section appears
+# triggers: grid config syntax (capsule_radials_rings#config:8:4) or apply_grid_config() call at runtime
+# emerges: the capsule as the collision primitive of choice — smooth ends prevent snagging in physics
+# needs: [missing VR controls — configured via map data; no live slider]
+# relationships: sibling to torus_radials_rings in the configurable mesh family; both support #config syntax
+# truth: the capsule is the physicist's preferred solid — its hemispherical ends are differentiable at all points
+
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 
 @export var base_color: Color = Color(0.4, 0.8, 0.6)  # Teal

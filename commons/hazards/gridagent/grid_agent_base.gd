@@ -1,5 +1,16 @@
 ﻿# grid_agent_base.gd
 # Base class for Grid Agents - algorithmic entities that traverse and modify grid structures
+
+# @identity
+# essence: CharacterBody3D with a NavigationAgent3D that wanders grids, transitions between WANDERING→FEEDING→WORKING→CAPTURED→DIRECTED states, and applies EvolutionTiers operations to the grid cells it traverses
+# desire: to encounter something that has agency inside an array — to watch a grid agent wander through a 2D grid, consume cubes, and evolve tier by tier, making the array feel like a habitat rather than a data structure
+# critical_parameter: operation_radius — the number of cells the agent affects when in WORKING state; a small radius makes the agent precise and surgical; a large radius makes it chaotic and territorial
+# triggers: the agent tier (TIER_1_COPY through higher tiers) determines which GridOperations the agent applies when working; capturing it with the algo-gun (CAPTURED state) interrupts its autonomous behavior and lets the player direct it
+# emerges: multiple agents interacting on the same grid create emergent territorial behavior — they unintentionally avoid each other through the physical grid topology rather than any explicit collision logic
+# needs: NavigationAgent3D [has]; mesh sphere visual [has]; thought_label Label3D [has]; show_thoughts flag [has]; algo-gun capture mechanism [has when CAPTURED]; VR interaction for directing [has via DIRECTED state]
+# relationships: used in Tutorial_2D_Build alongside grid_2d_4x4 as a hazard that modifies the grid; depends on EvolutionTiers, GridInterface, GridOperations helper classes; connects to gridagent_puzzle maps
+# truth: an agent inside an array reveals that data structures are not passive containers — they are environments that agents inhabit, and the grid's indexed structure determines what moves are possible
+
 extends CharacterBody3D
 class_name GridAgent
 

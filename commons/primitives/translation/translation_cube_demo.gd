@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: constrained_translation — move only on allowed axis; sequential constraints: first UP, then SIDEWAYS
+# desire: learner physically discovers that translation is axis-specific — the door will not open any other way
+# critical_parameter: the axis sequence constraint — UP must complete before SIDEWAYS unlocks
+# triggers: grabbing the knob and moving; axis deviation is corrected by projecting motion onto the allowed axis
+# emerges: the idea that translation has direction — not all displacement is allowed, only along defined axes
+# needs: [has two grabbable door knobs [has], missing visual axis indicator showing current allowed direction]
+# relationships: precursor to axis_translation_cube; demonstrates constrained translation before the animated version
+# truth: a translation requires both a direction and a magnitude — constraint is what makes it meaningful
+
 ## Translation Demo - Two sliding doors with doorknob handles
 ## Each door: grab knob, slide UP, then slide SIDEWAYS to open
 

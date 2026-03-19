@@ -1,5 +1,15 @@
 # Pyramid.gd - Regular pyramid with square base (5 faces total)
 extends Node3D
+
+# @identity
+# essence: pyramid(apex, base_square) — 5 vertices, 8 edges, 5 faces with grid shader overlay
+# desire: learner sees the pyramid as a static reference object — a stable, canonical 3D form
+# critical_parameter: grid shader — makes face normals and surface orientation visible through grid lines
+# triggers: nothing — static, placed for observation and comparison against pyramid_edit
+# emerges: the grid shader as a diagnostic tool — surface orientation becomes readable at a glance
+# needs: [missing VR controls — static display only; use pyramid_edit for interaction]
+# relationships: static sibling to pyramid_edit; used as reference geometry in scale demonstrations
+# truth: a pyramid has 5 vertices but only 1 is special — the apex determines the form
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 

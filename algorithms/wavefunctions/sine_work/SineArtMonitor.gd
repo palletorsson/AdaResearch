@@ -18,4 +18,4 @@ func _ready() -> void:
         _screen_mesh.material_override = mat
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+    pass

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: pyramid(5 vertices) rebuilt from 5 draggable handles — apex and 4 base corners all movable
+# desire: learner discovers that the pyramid shape is not fixed — every vertex is a degree of freedom
+# critical_parameter: apex handle — moving it changes the character from flat to tall, from pyramid to spike
+# triggers: dragging any of the 5 grab sphere handles — mesh rebuilds instantly from new vertex positions
+# emerges: the intuition that named shapes are just default parameterisations of a more general vertex space
+# needs: [has 5 grabbable vertex handles [has], missing symmetry-lock toggle]
+# relationships: interactive version of pyramid.gd; sibling to animatedcubebuilder and triangle
+# truth: a pyramid is just a parameterisation — move the apex and it stops being a pyramid
+
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
 const HANDLE_ORDER := [
 	"base_back_left",

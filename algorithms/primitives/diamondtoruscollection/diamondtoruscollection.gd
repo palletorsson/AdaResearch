@@ -2,6 +2,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: diamonds[i].position = (cos(2πi/n)*r, -cylinder_length, sin(2πi/n)*r) — radial distribution on a torus
+# desire: learner feels the torus as a path — walking around it reveals equally-spaced hanging elements
+# critical_parameter: diamond_count — how many hanging diamonds; more creates denser radial symmetry
+# triggers: nothing at runtime — static display; editor-tool flag allows live-editing in Godot editor
+# emerges: the rainbow color array as a pedagogical signal — hue encodes position in the radial sequence
+# needs: [missing VR controls — static display; no live diamond_count slider]
+# relationships: uses octahedron as diamond unit; depends on torus geometry from torus_radials_rings
+# truth: a torus is a circle of circles — its symmetry group allows equal radial distribution of any count
+
 # Torus and diamond parameters
 @export var torus_radius: float = 2.0        # 2 meters from center to torus
 @export var cylinder_length: float = 1.0     # 1 meter long cylinders

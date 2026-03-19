@@ -1,6 +1,16 @@
 extends LineSnapPuzzleBase
 class_name ParallelLinePuzzle
 
+# @identity
+# essence: ∥ — two lines with the same direction vector, equal distance apart at every point
+# desire: learner understands parallelism as a relationship between directions, not just visual sameness
+# critical_parameter: the snap tolerance — how close endpoints must be to lock into position
+# triggers: snapping both lines to the 4 targets — the puzzle validates direction equality
+# emerges: the idea that parallel lines never meet because they share an infinite point at infinity
+# needs: [missing VR controls — all interaction is line-endpoint snapping]
+# relationships: extends LineSnapPuzzleBase; contrasts with plus_line_puzzle (perpendicular)
+# truth: parallel means same direction — a geometric property, not a visual impression
+
 ## ParallelLinePuzzle - Interactive puzzle to align two parallel lines
 ## Any endpoint can snap to any of the 4 targets
 

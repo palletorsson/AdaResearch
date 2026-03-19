@@ -2,6 +2,16 @@
 # A ground plane with a circular hole and 3 traffic cones around it
 extends Node3D
 
+# @identity
+# essence: ground_plane - circular_hole + 3_cones_at_120° — absence as geometry: topology through subtraction
+# desire: learner understands that holes are defined by what surrounds them, not what fills them
+# critical_parameter: hole_segments — how many triangles fan-triangulate the circular boundary of the hole
+# triggers: nothing — static environment piece; experienced by walking around and looking into the hole
+# emerges: the concept of Boolean subtraction — the hole is real space defined by its edge, not its missing content
+# needs: [missing VR controls — static environment object]
+# relationships: demonstrates Boolean difference concept; precursor to boolean_tunnel in transformation sequence
+# truth: a hole is not the absence of matter — it is a boundary condition imposed on surrounding matter
+
 @export var ground_size: float = 4.0  # Size of ground plane
 @export var hole_radius: float = 0.6  # Radius of the hole
 @export var ground_color: Color = Color(0.3, 0.3, 0.35)  # Asphalt gray

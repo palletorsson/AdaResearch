@@ -175,10 +175,10 @@ func _build_rounded_cube_mesh() -> void:
 				vi += 1
 
 	var add_quad := func(i: int, j: int, get_coords: Callable) -> void:
-		var c0 := get_coords.call(i, j)
-		var c1 := get_coords.call(i + 1, j)
-		var c2 := get_coords.call(i + 1, j + 1)
-		var c3 := get_coords.call(i, j + 1)
+		var c0: Variant = get_coords.call(i, j)
+		var c1: Variant = get_coords.call(i + 1, j)
+		var c2: Variant = get_coords.call(i + 1, j + 1)
+		var c3: Variant = get_coords.call(i, j + 1)
 		if vgrid.has(c0) and vgrid.has(c1) and vgrid.has(c2) and vgrid.has(c3):
 			var v0: int = vgrid[c0]
 			var v1: int = vgrid[c1]
@@ -223,13 +223,13 @@ func _capture_rest_state() -> void:
 	if not rid.is_valid():
 		return
 
-	_vertex_count = PhysicsServer3D.soft_body_get_point_count(rid)
+	_vertex_count = _soft_body.get_point_count()
 	_rest_positions.resize(_vertex_count)
 	_prev_positions.resize(_vertex_count)
 	_vertex_strain.resize(_vertex_count)
 
 	for i in range(_vertex_count):
-		var p := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var p := _soft_body.get_point_global_position(i)
 		_rest_positions[i] = p - _soft_body.global_position
 		_prev_positions[i] = p
 		_vertex_strain[i] = 0.0
@@ -470,7 +470,7 @@ func _process(delta: float) -> void:
 	var rid := _soft_body.get_physics_rid()
 	if rid.is_valid():
 		for i in range(_vertex_count):
-			_prev_positions[i] = PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+			_prev_positions[i] = _soft_body.get_point_global_position(i)
 
 
 # ── VR hand interaction ──────────────────────────────────────────────
@@ -503,7 +503,7 @@ func _apply_squeeze() -> void:
 		return
 
 	for i in range(_vertex_count):
-		var vpos := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var vpos := _soft_body.get_point_global_position(i)
 		var to_hand := _hand_pos - vpos
 		var dist := to_hand.length()
 		if dist < _squeeze_radius and dist > 0.001:
@@ -525,7 +525,7 @@ func _compute_strain() -> void:
 	var sb_origin := _soft_body.global_position
 
 	for i in range(_vertex_count):
-		var current := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var current := _soft_body.get_point_global_position(i)
 		var rest := _rest_positions[i] + sb_origin
 		var displacement := (current - rest).length()
 
@@ -560,7 +560,7 @@ func _detect_collisions(delta: float) -> void:
 
 	# Detect large velocity changes as collision proxies
 	for vi in range(_vertex_count):
-		var current := PhysicsServer3D.soft_body_get_point_global_position(rid, vi)
+		var current := _soft_body.get_point_global_position(vi)
 		var prev := _prev_positions[vi]
 		var vel := (current - prev) / maxf(delta, 0.001)
 		var speed := vel.length()
@@ -586,7 +586,7 @@ func _compute_volume() -> float:
 	var mx := Vector3(-INF, -INF, -INF)
 
 	for i in range(_vertex_count):
-		var p := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var p := _soft_body.get_point_global_position(i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 
@@ -649,7 +649,7 @@ func _draw_strain_overlay() -> void:
 
 	# Draw small diamond at each vertex colored by strain
 	for i in range(_vertex_count):
-		var p := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var p := _soft_body.get_point_global_position(i)
 		var t := clampf(_vertex_strain[i] / maxf(_max_strain, 0.001), 0.0, 1.0)
 		var col := _strain_color(t)
 		var sz := 0.008 + t * 0.012
@@ -692,7 +692,7 @@ func _draw_collision_forces() -> void:
 		var col := COL_COLLISION
 		col.a *= alpha
 
-		var arrow_len := 0.1 * cf["magnitude"]
+		var arrow_len: float = 0.1 * cf["magnitude"]
 		_im_arrow_3d(_force_im, cf["pos"], cf["dir"], arrow_len, col)
 
 		# Impact burst diamond
@@ -753,7 +753,7 @@ func _draw_volume_wireframe() -> void:
 	var mn := Vector3(INF, INF, INF)
 	var mx := Vector3(-INF, -INF, -INF)
 	for i in range(_vertex_count):
-		var p := PhysicsServer3D.soft_body_get_point_global_position(rid, i)
+		var p := _soft_body.get_point_global_position(i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 

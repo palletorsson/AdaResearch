@@ -8,12 +8,12 @@
 ## curve to wall so the wallpaper_tile shader tiles without seams.
 ##
 ## Usage:
-##   var cove := CoveDisplay.new()
+##   var cove := CarpetCoveDisplay.new()
 ##   cove.setup(2.0, 2.0, 1.5)  # width, depth(floor+wall), wall_height
 ##   cove.apply_shader_material(my_shader_material)
 ##   add_child(cove)
 extends Node3D
-class_name CoveDisplay
+class_name CarpetCoveDisplay
 
 ## Width of the display (X axis)
 @export var cove_width: float = 2.0

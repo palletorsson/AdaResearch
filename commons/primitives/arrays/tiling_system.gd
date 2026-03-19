@@ -122,7 +122,7 @@ var _preview_container: Node3D
 var _analyzer: TilingAnalyzer
 
 ## Internal PatternTilePuzzle for active layer editing
-var _active_zone: CompositionZone = CompositionZone.FIELD
+var _active_zone: int = CompositionZone.FIELD
 
 
 func _ready() -> void:
@@ -197,7 +197,7 @@ func get_available_periods() -> Array[String]:
 
 
 ## Get available motifs from the loaded pack, optionally filtered by zone.
-func get_available_motifs(zone_filter: CompositionZone = -1) -> Array[String]:
+func get_available_motifs(zone_filter: int = -1) -> Array[String]:
 	var result: Array[String] = []
 	if _pack_data.has("motifs"):
 		for key in _pack_data["motifs"].keys():
@@ -295,7 +295,7 @@ func load_site(site_name: String) -> void:
 ## === MOTIF MANAGEMENT ===
 
 ## Load a named motif from the current study pack into a composition zone.
-func load_motif(motif_name: String, zone: CompositionZone) -> void:
+func load_motif(motif_name: String, zone: int) -> void:
 	if not _pack_data.has("motifs") or not _pack_data["motifs"].has(motif_name):
 		push_warning("TilingSystem: Motif not found: %s" % motif_name)
 		return
@@ -624,7 +624,7 @@ func _rebuild() -> void:
 	compose()
 
 
-func _zone_to_string(zone: CompositionZone) -> String:
+func _zone_to_string(zone: int) -> String:
 	match zone:
 		CompositionZone.FIELD: return "field"
 		CompositionZone.BORDER: return "border"

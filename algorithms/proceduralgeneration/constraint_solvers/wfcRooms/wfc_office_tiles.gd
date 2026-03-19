@@ -599,8 +599,4 @@ func _add_preview_camera_and_light(root: Node3D) -> void:
 	root.add_child(env, true)
 	env.owner = root
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

@@ -494,7 +494,7 @@ func _step_particles(delta: float) -> void:
 			continue
 
 		# Slight curve from "magnetic field" (charge-dependent)
-		var cross_vel := Vector3(-p.vel.z, 0, p.vel.x) * 0.3 * p.charge
+		var cross_vel: Vector3 = Vector3(-p.vel.z, 0, p.vel.x) * 0.3 * p.charge
 		p.vel += cross_vel * dt
 		p.vel = p.vel.normalized() * p.vel.length()  # preserve speed
 		p.pos += p.vel * dt
@@ -520,7 +520,7 @@ func _step_particles(delta: float) -> void:
 			var pj: Dictionary = _particles[j]
 			if pi.charge != pj.charge and pi.pos.distance_to(pj.pos) < 0.2:
 				# Annihilation event — photon flash
-				var mid := (pi.pos + pj.pos) * 0.5
+				var mid: Vector3 = (pi.pos + pj.pos) * 0.5
 				_annihilation_flashes.append({"pos": mid, "life": 0.6})
 				# Remove higher index first
 				_particles.remove_at(j)
@@ -570,14 +570,14 @@ func _draw_particles() -> void:
 
 	# Annihilation flashes — expanding rings
 	for flash in _annihilation_flashes:
-		var frac := 1.0 - flash.life / 0.6
-		var r := 0.05 + frac * 0.3
+		var frac: float = 1.0 - flash.life / 0.6
+		var r: float = 0.05 + frac * 0.3
 		var fc := COL_FLASH
 		fc.a = (1.0 - frac) * 0.8
 		_im_circle(_particle_im, flash.pos + Vector3(0, 0.02, 0), r, fc, 12)
 		# Photon wavy lines emanating from flash (two directions)
 		if frac < 0.8:
-			var wave_len := frac * 1.0
+			var wave_len: float = frac * 1.0
 			_draw_wavy_line(_particle_im, flash.pos, flash.pos + Vector3(wave_len, 0.3 * frac, 0), 6, 0.05, COL_PHOTON)
 			_draw_wavy_line(_particle_im, flash.pos, flash.pos + Vector3(-wave_len, 0.3 * frac, 0), 6, 0.05, COL_PHOTON)
 

@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: X=red, Y=green, Z=blue axes at 3m length — the standard right-handed coordinate frame made visible
+# desire: learner stands inside the coordinate system and feels orientation as embodied direction
+# critical_parameter: axis_length = 3.0 — at half-scale (scale 0.5) these appear as 1.5m axes in world space
+# triggers: runtime adds info panel and gyroscope gadget showing orientation relative to viewer
+# emerges: the arbitrary nature of axis conventions — right-handed vs left-handed, Y-up vs Z-up are choices
+# needs: [has info panel [has], has gyroscope gadget [has], missing axis-label toggle or length slider]
+# relationships: used in vectors sequence; the gyroscope gadget adds interactive orientation feedback
+# truth: a coordinate system is a choice of three mutually perpendicular directions with an agreed origin
+
 # Coordinate System Visualization
 # Illustrates X, Y, Z axes with 3m length.
 

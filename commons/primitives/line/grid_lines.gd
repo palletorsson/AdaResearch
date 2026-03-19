@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines
+# desire: learner experiences space as structured and measurable, not infinite and featureless
+# critical_parameter: grid_size — how many cells appear; determines resolution of spatial reference
+# triggers: TraceData global signal — saved player traces appear as scaled rotating meshes on grid intersections
+# emerges: the grid as a display medium, not just reference — traces replay as spatial memory
+# needs: [has Label3D [has], missing VR controls — purely informational]
+# relationships: subscribes to player_trace data; uses line as its primitive unit
+# truth: a coordinate grid does not exist in space — it is a social agreement we project onto space
+
 # Script to create a grid of lines on the XZ plane (horizontal ground plane)
 
 @export var grid_size: int = 5  # Number of grid cells (will have grid_size+1 lines in each direction)

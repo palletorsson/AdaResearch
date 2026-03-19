@@ -1,7 +1,7 @@
 extends Creature
 class_name Predator
 
-func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
+func _init(pos: Vector3, dna_values: Dictionary = {}) -> void:
 	# Call parent _init to set up the base DNA if empty
 	super._init(pos, dna_values)
 	

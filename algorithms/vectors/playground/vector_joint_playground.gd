@@ -444,7 +444,7 @@ func _build_station_spring() -> void:
 	var base = h.create_static_body(Vector3(0, 0.075, 0), h.make_box_mesh(Vector3(1.0, 0.15, 1.0)), COLOR_FRAME, "Base")
 
 	# Guide columns — MultiMesh
-	var col_cyl := h.make_cylinder_mesh(0.04, 3.5)
+	var col_cyl: CylinderMesh = h.make_cylinder_mesh(0.04, 3.5)
 	col_cyl.material = h.get_material(COLOR_METAL)
 	var col_offsets := [Vector3(-0.4, 1.75, -0.4), Vector3(0.4, 1.75, -0.4), Vector3(-0.4, 1.75, 0.4), Vector3(0.4, 1.75, 0.4)]
 	var col_mm := MultiMesh.new()

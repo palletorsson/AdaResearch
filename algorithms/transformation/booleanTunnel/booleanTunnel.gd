@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: hollow_cube[i].rotation_z += i * rotation_per_segment — accumulating rotation carves a twisted corridor
+# desire: learner walks through a tunnel whose walls rotate and understands rotation as spatial grammar
+# critical_parameter: rotation_per_segment — how many degrees each segment adds; at 0° it is a straight box, at 10° a spiral
+# triggers: burst mode toggle and cone taper parameters; optional teleporter at the end fires on entry
+# emerges: the architectural experience of rotation as navigation — the body learns angles by moving through them
+# needs: [has apply_grid_config [has], missing live VR slider for rotation_per_segment]
+# relationships: used as boolean_tunnel in Trans_RotationSpectacle; sibling to hole_with_cones (Boolean topology)
+# truth: accumulated rotation is non-linear — each segment adds to all previous, so the total diverges quickly
+
 @export var cube_scene: PackedScene = preload("res://algorithms/primitives/booleans/booleanHollowCube.tscn")
 var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/teleport_scene.tscn")
 @export var num_segments: int = 18

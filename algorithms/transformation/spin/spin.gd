@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: MultiMesh phases: translate → translate+rotate → translate — rotation mid-sequence changes everything
+# desire: learner reads the full MultiMesh array as a story: straight, then spinning, then straight again
+# critical_parameter: z_rotation_degrees — the per-step rotation angle during phase 2; controls how tight the spiral
+# triggers: nothing at runtime — baked into MultiMesh transforms at ready(); regenerate flag rebuilds
+# emerges: the non-commutativity of transformation composition — the order of translate and rotate matters
+# needs: [missing VR controls — static MultiMesh; needs live z_rotation_degrees and phase-length sliders]
+# relationships: used in Trans_Rotation map to show composition; sibling to carousel_cake
+# truth: translation then rotation is not the same as rotation then translation — order is not commutative
+
 @export var copy_count_phase1: int = 10
 @export var translation_step: float = 0.14
 @export var rotation_count: int = 12

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: GPU computes noise per-fragment in parallel — the room sphere and walls run independent shader noise loops animated by a time uniform, cycling color and density in real-time
+# desire: to be inside the noise — to stand inside a sphere where the walls are made of animated GPU hash functions and feel surrounded by the mathematics of structured randomness
+# critical_parameter: animation_speed — controls the rate at which the shader's time uniform advances, determining whether the noise feels like slow clouds or fast chaos
+# triggers: toggling animation_enabled freezes the noise field, revealing its spatial structure without temporal motion; space bar toggles it; escape resets to original parameters
+# emerges: the two materials (room sphere vs walls) animate out of phase, creating a sense that the space itself is breathing — an undesigned emergent rhythm from two independent cycles
+# needs: animation_enabled toggle via spacebar [has]; no VR slider controls [missing]; color cycling and density animation are coupled to time only [has]
+# relationships: demonstrates GPU noise as distinct from CPU noise in noiselayers; pairs with shader_arch_gallery; shows what QueerNoiseShader.gdshader produces at room scale
+# truth: GPU noise is not one calculation but millions happening simultaneously — the shader room makes visible that what looks like a continuous field is massively parallel computation
+
 # Animation controls
 @export var animation_enabled: bool = true
 @export var animation_speed: float = 1.0

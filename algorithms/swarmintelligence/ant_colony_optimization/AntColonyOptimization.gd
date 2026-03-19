@@ -13,6 +13,16 @@
 class_name AntColonyOptimization
 extends Node3D
 
+# @identity
+# essence: τ_ij(t+1) = (1-ρ)·τ_ij(t) + Σ_k(Δτ^k_ij) where Δτ ∝ food_quality — pheromone is collective memory that decays
+# desire: to watch a trail appear between nest and food and feel the growing certainty of a route no ant planned — to see decision crystallize from repetition
+# critical_parameter: evaporation_rate — near zero, old bad paths persist forever and the colony gets stuck; near 0.1, trails fade fast enough for rerouting but the field looks chaotic
+# triggers: switching to MULTI_SOURCE mode reveals quality-weighted convergence: high-value food gets a brighter, wider trail even if it's farther away
+# emerges: tandem-running pairs form spontaneously in COMMUNICATION mode, linking experienced and naive ants into temporary teacher-student dyads
+# needs: [has] VR slider for evaporation rate and ant count; [has] mode cycle button and reset button; [missing] no slider for pheromone deposit strength or alpha/beta weights
+# relationships: depends on pheromone stigmergy discovered in stigmergy_grid; AntColonyV2 is the large-scale terrain version; unlocks understanding of why shortest paths win (positive feedback)
+# truth: the shortest path is not chosen — it is amplified; the colony is a distributed reinforcement learning system running on chemistry
+
 ## Ant Colony Optimization with pheromone gradient heatmap.
 ## COLONY mode shows standard ACO foraging with evaporation heatmap.
 ## COMMUNICATION mode highlights tandem running and recruitment signals.
@@ -343,8 +353,8 @@ func _deposit_pheromone(pos: Vector2, amount: float) -> void:
 		for dy in [-1, 0, 1]:
 			if dx == 0 and dy == 0:
 				continue
-			var nx := g.x + dx
-			var ny := g.y + dy
+			var nx: int = g.x + dx
+			var ny: int = g.y + dy
 			if nx >= 0 and nx < grid_resolution and ny >= 0 and ny < grid_resolution:
 				_pheromone_grid[nx][ny] += spread / 8.0
 
@@ -528,13 +538,13 @@ func _bias_toward_quality(ant: AntState) -> void:
 		var food: Dictionary = _food_sources[fi]
 		if food["remaining"] <= 0.0:
 			continue
-		var dist := ant.pos.distance_to(food["pos"])
-		var score := food["quality"] / maxf(dist, 0.5)
+		var dist: float = ant.pos.distance_to(food["pos"])
+		var score: float = food["quality"] / maxf(dist, 0.5)
 		if score > best_score:
 			best_score = score
 			best_idx = fi
 	if best_idx >= 0:
-		var target := _food_sources[best_idx]["pos"]
+		var target: Vector2 = _food_sources[best_idx]["pos"]
 		ant.wander_angle = ant.pos.angle_to_point(target)
 
 
@@ -637,7 +647,7 @@ func _draw_heatmap() -> void:
 	_heatmap_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	for x in range(grid_resolution):
 		for y in range(grid_resolution):
-			var val := _pheromone_grid[x][y]
+			var val: float = _pheromone_grid[x][y]
 			if val < 0.01:
 				continue
 
@@ -701,7 +711,7 @@ func _draw_food() -> void:
 		var food: Dictionary = _food_sources[fi]
 		var pos: Vector2 = food["pos"]
 		var quality: float = food["quality"]
-		var remaining_ratio := food["remaining"] / maxf(food["initial"], 1.0)
+		var remaining_ratio: float = food["remaining"] / maxf(food["initial"], 1.0)
 
 		var col: Color
 		if remaining_ratio <= 0.0:
@@ -727,12 +737,12 @@ func _draw_food() -> void:
 
 		# Quality rating ring (in MULTI_SOURCE mode)
 		if _mode == Mode.MULTI_SOURCE and remaining_ratio > 0.0:
-			var ring_r := r + 0.15
+			var ring_r: float = r + 0.15
 			var ring_col := Color(1.0, 1.0, 0.3, quality * 0.6)
 			for i in range(12):
 				var a0 := float(i) / 12.0 * TAU
 				var a1 := float(i + 1) / 12.0 * TAU
-				var inner := ring_r - 0.04
+				var inner: float = ring_r - 0.04
 				_food_im.surface_set_color(ring_col)
 				_food_im.surface_add_vertex(Vector3(pos.x + cos(a0) * inner, pos.y + sin(a0) * inner, 0.01))
 				_food_im.surface_add_vertex(Vector3(pos.x + cos(a0) * ring_r, pos.y + sin(a0) * ring_r, 0.01))

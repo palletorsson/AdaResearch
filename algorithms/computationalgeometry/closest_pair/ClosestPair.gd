@@ -620,7 +620,7 @@ func _draw_points() -> void:
 	_points_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	for i in range(_points.size()):
 		var col := _get_point_color(i)
-		var p := _points[i]
+		var p: Vector2 = _points[i]
 		var r := 0.12
 		# highlight closest pair larger
 		if i == _closest_pair[0] or i == _closest_pair[1]:

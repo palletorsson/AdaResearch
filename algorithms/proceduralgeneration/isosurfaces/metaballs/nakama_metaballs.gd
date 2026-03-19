@@ -65,7 +65,7 @@ func create_metaballs() -> void:
 		
 		metaballs.append(metaball)
 
-func create_shader_material() -> void:
+func create_shader_material() -> ShaderMaterial:
 	# Create a shader material for the metaball surface
 	var material = ShaderMaterial.new()
 	

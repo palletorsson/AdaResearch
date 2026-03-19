@@ -1,5 +1,16 @@
 # res://profiles/EditableProfile_PinkFold.gd
 extends Node3D
+
+# @identity
+# essence: zigzag(n_triangles, height_high, height_low) — a strip of alternating triangles forming a pleat profile
+# desire: learner feels how a complex perimeter shape is just many small triangles sharing edges
+# critical_parameter: grab_point_count — how many vertex handles exist along the zigzag strip perimeter
+# triggers: dragging any grab handle — the triangle strip deforms, showing how local edits ripple through profile
+# emerges: the strip as a minimal surface description — pleats and folds arise from alternating vertex heights
+# needs: [has many grabbable vertex handles [has], missing global height/frequency sliders]
+# relationships: sibling to triangle; demonstrates that profiles and extrusions are just strips of triangles
+# truth: a complex surface profile is built from the simplest unit — a triangle — repeated with shared edges
+
 ## One editable "folded paper (narrow pleats)" profile built from triangles.
 ## Baseline is at y = base_y, and the mesh is pink.
 

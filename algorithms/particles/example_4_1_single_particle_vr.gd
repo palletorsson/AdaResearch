@@ -539,7 +539,7 @@ func _draw_force_arrows() -> void:
 		var f := _per_source_forces[i]
 		if f.length() < 0.01:
 			continue
-		var color := _sources[i].color
+		var color: Color = _sources[i].color
 		color.a = 1.0
 		_draw_arrow(_particle_pos, f, color, 0.06)
 
@@ -587,19 +587,19 @@ func _draw_source_fields() -> void:
 
 	for src in _sources:
 		var segments := 24
-		var color := src.color
+		var color: Color = src.color
 
 		match src.type:
 			ForceType.GRAVITY_WELL:
 				# Concentric rings showing pull
 				for ring in range(2):
-					var r := src.radius * (0.5 + 0.5 * ring)
+					var r: float = src.radius * (0.5 + 0.5 * ring)
 					_draw_circle(src.pos, r, segments, color)
 				# Inward ticks
 				for j in range(8):
 					var angle := float(j) / 8.0 * TAU
-					var outer := src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius
-					var inner := src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.7
+					var outer: Vector3 = src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius
+					var inner: Vector3 = src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.7
 					_source_im.surface_set_color(color)
 					_source_im.surface_add_vertex(outer)
 					_source_im.surface_set_color(color)
@@ -611,8 +611,8 @@ func _draw_source_fields() -> void:
 				# Outward ticks
 				for j in range(8):
 					var angle := float(j) / 8.0 * TAU
-					var inner := src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.8
-					var outer := src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 1.1
+					var inner: Vector3 = src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.8
+					var outer: Vector3 = src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 1.1
 					_source_im.surface_set_color(color)
 					_source_im.surface_add_vertex(inner)
 					_source_im.surface_set_color(color)
@@ -624,8 +624,8 @@ func _draw_source_fields() -> void:
 				# Cross-hatch interior
 				for j in range(4):
 					var angle := float(j) / 4.0 * TAU
-					var a := src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.3
-					var b := src.pos + Vector3(cos(angle + PI), 0, sin(angle + PI)) * src.radius * 0.3
+					var a: Vector3 = src.pos + Vector3(cos(angle), 0, sin(angle)) * src.radius * 0.3
+					var b: Vector3 = src.pos + Vector3(cos(angle + PI), 0, sin(angle + PI)) * src.radius * 0.3
 					_source_im.surface_set_color(Color(color.r, color.g, color.b, 0.2))
 					_source_im.surface_add_vertex(a)
 					_source_im.surface_set_color(Color(color.r, color.g, color.b, 0.2))

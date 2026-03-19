@@ -271,7 +271,7 @@ func get_neighbors(x, y, z):
 	
 	return neighbors
 
-func get_opposite_direction(direction) -> void:
+func get_opposite_direction(direction) -> int:
 	match direction:
 		0: return 1  # North -> South
 		1: return 0  # South -> North

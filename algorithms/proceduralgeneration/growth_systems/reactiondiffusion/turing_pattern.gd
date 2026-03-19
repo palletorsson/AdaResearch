@@ -86,8 +86,8 @@ func _update_texture() -> void:
 
 	for y in range(height):
 		for x in range(width):
-			var a := grid_a[y][x]
-			var b := grid_b[y][x]
+			var a: float = grid_a[y][x]
+			var b: float = grid_b[y][x]
 			var color := Color(
 				clampf(a, 0.0, 1.0),
 				clampf(a - b, 0.0, 1.0),
@@ -146,9 +146,9 @@ func _simulate_step(delta: float) -> void:
 		for x in range(width):
 			var laplacian_a := _calculate_laplacian(grid_a, x, y)
 			var laplacian_b := _calculate_laplacian(grid_b, x, y)
-			var a := grid_a[y][x]
-			var b := grid_b[y][x]
-			var reaction := a * b * b * reaction_rate
+			var a: float = grid_a[y][x]
+			var b: float = grid_b[y][x]
+			var reaction: float = a * b * b * reaction_rate
 			next_a[y][x] = clampf(a + (diffusion_a * laplacian_a - reaction + feed_rate * (1.0 - a)) * delta, 0.0, 1.0)
 			next_b[y][x] = clampf(b + (diffusion_b * laplacian_b + reaction - (kill_rate + feed_rate) * b) * delta, 0.0, 1.0)
 

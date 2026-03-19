@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry
+# desire: to feel what it's like to be a network that designs itself — the moment a random scatter becomes a vascular web
+# critical_parameter: emission_centers layout — the attractor geometry determines every possible network the colony can grow
+# triggers: adding a new attractor causes the colony to re-route all trails within seconds, like rewiring a circuit live
+# emerges: shortest-path trees, Steiner networks, and load-balanced branching — solutions that take mathematicians centuries to formalize
+# needs: [missing] no VR sliders; attractor positions could be grabbed and moved; deposit/evaporation rate sliders would let learner push colony to collapse or overgrowth
+# relationships: unlocks AntColonyV2 and ant_colony_optimization; contrasts with FlowFieldMain (external field vs. self-created field); depends on PhysarumGrid and PhysarumAgent
+# truth: intelligence is a property of the medium, not the agent — the slime mold's network is smarter than any individual cell
+
 # Config
 @export var num_agents: int = 500
 @export var grid_resolution: int = 256

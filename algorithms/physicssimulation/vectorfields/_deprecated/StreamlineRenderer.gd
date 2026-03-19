@@ -142,9 +142,9 @@ func _vector_field(p: Vector3) -> Vector3:
 		var phase := _time * animation_speed + float(i) * 0.7
 		var c := base_c + Vector3(sin(phase), 0.0, cos(phase)) * center_orbit_radius
 		var r := p - c
-		var d2 := max(r.x * r.x + r.z * r.z, 0.0004)
+		var d2: float = max(r.x * r.x + r.z * r.z, 0.0004)
 		# Swirl: perpendicular in XZ
-		var swirl := Vector3(-r.z, 0.0, r.x) / d2
+		var swirl: Vector3 = Vector3(-r.z, 0.0, r.x) / d2
 		v += swirl * field_strength
 	# Gentle pull toward center
 	v += -p * 0.05

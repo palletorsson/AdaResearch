@@ -204,8 +204,4 @@ func set_owner_params(node, owner_node) -> void:
 		child.owner = owner_node
 		set_owner_params(child, owner_node)
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

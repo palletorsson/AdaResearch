@@ -1,6 +1,16 @@
 extends LineSnapPuzzleBase
 class_name TriangleLinePuzzle
 
+# @identity
+# essence: triangle = 3 edges connecting 3 vertices — the minimal closed polygon
+# desire: learner discovers that three lines can close into the simplest possible bounded shape
+# critical_parameter: closure — all 3 snap targets must be occupied with shared endpoints to complete
+# triggers: snapping all 3 line endpoints into the 3 triangle vertex targets
+# emerges: the triangle as the atomic unit of all mesh geometry — every surface is triangles beneath
+# needs: [missing VR controls — all interaction is line-endpoint snapping]
+# relationships: extends LineSnapPuzzleBase; logical predecessor to snap_tetrahedron_puzzle
+# truth: three points that are not collinear always define a triangle — and a unique plane
+
 ## TriangleLinePuzzle - Interactive puzzle to form a triangle from three lines
 ## Any endpoint can snap to any of the 3 triangle vertices
 

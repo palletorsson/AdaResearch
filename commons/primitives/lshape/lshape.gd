@@ -1,6 +1,16 @@
 ﻿# LShape.gd - Upside down L shape (fits within 1,1,1)
 extends Node3D
 
+# @identity
+# essence: L = two rectangular boxes joined at a corner with proper corner joint geometry
+# desire: learner sees how compound shapes are made by combining and subtracting rectangular volumes
+# critical_parameter: the corner joint geometry — the notch where vertical and horizontal arms meet
+# triggers: nothing — static display; placed as a reference form for Tetris/puzzle recognition
+# emerges: that the L-shape requires architectural thinking — internal corners must be explicitly built
+# needs: [missing VR controls — static display only]
+# relationships: sibling to plus.gd in the shape vocabulary; both demonstrate combined geometry
+# truth: non-convex shapes require explicit geometry at re-entrant corners — they cannot be a single box
+
 var base_color: Color = Color(0.2, 0.8, 1.0)  # Cyan
 var vertical_height: float = 3.0
 var horizontal_length: float = 1.0

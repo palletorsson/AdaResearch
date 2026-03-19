@@ -310,8 +310,8 @@ func _step_bifurcation() -> void:
 		if _bif_sweep_row >= _bif_grid_size:
 			_bif_computed = true
 			return
-		var f := lerp(_bif_f_min, _bif_f_max, float(_bif_sweep_col) / float(_bif_grid_size - 1))
-		var k := lerp(_bif_k_min, _bif_k_max, float(_bif_sweep_row) / float(_bif_grid_size - 1))
+		var f: float = lerp(_bif_f_min, _bif_f_max, float(_bif_sweep_col) / float(_bif_grid_size - 1))
+		var k: float = lerp(_bif_k_min, _bif_k_max, float(_bif_sweep_row) / float(_bif_grid_size - 1))
 		var classification := _probe_gray_scott(f, k)
 		_bif_results[_bif_sweep_row * _bif_grid_size + _bif_sweep_col] = classification
 		_bif_sweep_col += 1

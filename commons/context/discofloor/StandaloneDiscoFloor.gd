@@ -2,6 +2,16 @@
 # Self-contained disco floor with its own tile grid
 # Does NOT modify the main GridSystem cubes
 
+# @identity
+# essence: MultiMesh of (width × depth) flat tile instances, each independently colored per-step by pattern functions (checkerboard, wave, spiral, snake, rainbow) driven by animation_step advancing every pattern_speed seconds
+# desire: to stand on a floor that is computing — to feel the checkerboard pattern as an array of booleans where (x+z)%2 determines your tile's color, or to watch a snake pattern trace a Hamiltonian path through the grid beneath your feet
+# critical_parameter: pattern_speed — at 0.08s the animation is continuous and hypnotic; at 0.5s individual tiles visibly switch state one by one; this controls whether the floor reads as a pattern or as a computation
+# triggers: start_disco() begins animation; pattern_duration seconds elapse → next Pattern enum value; 10 patterns cycle automatically; walkable=true adds collision geometry so players can actually walk on the tiles
+# emerges: when 12×12 tiles animate together at disco speed, individual pattern logic (i.e., a simple modulo or sin function) becomes a physically immersive audiovisual experience — the mathematics disappears into sensation
+# needs: MultiMeshInstance3D [has]; collision for walking [has when walkable=true]; auto-cycling patterns [has]; DiscoSequencerBridge [has as sibling for audio sync]; no VR slider to control pattern or speed [missing]
+# relationships: paired with StepSequencer in Tutorial_Disco for the "arrays as music" synthesis; uses DiscoSequencerBridge for audio coupling; standalone variant of DiscoFloorController which requires GridSystem
+# truth: a disco floor is a 2D array of light values updated over time — every club floor is a physical proof that arrays can be felt, not just computed
+
 extends Node3D
 class_name StandaloneDiscoFloor
 

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: population(t+1) = reproduce(survive(eat(move(population(t))))) with DNA crossover and mutation at each birth — evolution in a closed box
+# desire: to watch a predator-prey cycle spike and crash and recover — to feel the ecosystem breathe and realize no agent understands the cycle, only you can see it
+# critical_parameter: mutation_rate — at 0 the ecosystem either freezes in its starting configuration or collapses; at 0.1 adaptation keeps prey one step ahead of predators indefinitely
+# triggers: balance_ecosystem() acts as a hidden stabilizer that respawns prey below 10 and weakens predators when they outnumber prey by 2:1 — remove it and the system collapses in minutes
+# emerges: prey develop faster flee_weight and higher perception_radius over generations without explicit selection pressure — predation IS the selection pressure
+# needs: [missing] no VR controls at all; prey_population, predator_population, and mutation_rate are hardcoded; learner cannot experiment with initial conditions
+# relationships: synthesis artifact for the swarmintelligence sequence; combines local movement rules from boids with genetic memory from neuroevolution; previews machinelearning sequence's evolutionary algorithms
+# truth: evolution has no goal — only the dead are wrong, and only the living get to try again
+
 ## Ecosystem simulation — 3D VR version.
 ## Prey, predators, and food rendered via MultiMeshInstance3D.
 
@@ -28,14 +38,14 @@ var info_label: Label3D
 
 # Inner classes ────────────────────────────────────────
 
-class Prey extends Creature:
+class EcoPrey extends Creature:
 	func _init(pos: Vector3, dna_values: Dictionary = {}) -> void:
 		super(pos, dna_values)
 
 	func eat_food(nutrition: float) -> void:
 		health += nutrition
 
-class Predator extends Creature:
+class EcoPredator extends Creature:
 	func _init(pos: Vector3, dna_values: Dictionary = {}) -> void:
 		super(pos, dna_values)
 		if dna.size() > 0:
@@ -277,14 +287,14 @@ func mutate_dna(dna: Dictionary) -> Dictionary:
 
 # Spawning ─────────────────────────────────────────────
 
-func spawn_prey(pos: Vector3, dna_values: Dictionary = {}) -> Prey:
-	var prey = Prey.new(pos, dna_values)
+func spawn_prey(pos: Vector3, dna_values: Dictionary = {}) -> EcoPrey:
+	var prey = EcoPrey.new(pos, dna_values)
 	prey_list.append(prey)
 	add_child(prey)
 	return prey
 
-func spawn_predator(pos: Vector3, dna_values: Dictionary = {}) -> Predator:
-	var predator = Predator.new(pos, dna_values)
+func spawn_predator(pos: Vector3, dna_values: Dictionary = {}) -> EcoPredator:
+	var predator = EcoPredator.new(pos, dna_values)
 	predator_list.append(predator)
 	add_child(predator)
 	return predator

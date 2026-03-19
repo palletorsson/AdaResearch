@@ -1,6 +1,16 @@
 @tool
 extends XRToolsPickable
 
+# @identity
+# essence: p = (x, y, z) — a position you can hold in your hand, relative to origin
+# desire: learner feels coordinates as embodied distance from origin, not abstract numbers
+# critical_parameter: the live line drawn to (0,0,0) while held — distance made visible
+# triggers: pickup cycles through 4 coordinate display formats (decimal / integer / scientific / words)
+# emerges: haptic pulse as a format-change event — the body learns before the mind
+# needs: [has Label3D [has], grabbable (XRToolsPickable) [has], missing slider control]
+# relationships: depends on origin; used alongside static_point to show pickable vs fixed
+# truth: a coordinate is a measurement from origin — hold the point, feel the measurement
+
 ## Interactive point that shows position and draws line to origin when held
 
 # Visual feedback

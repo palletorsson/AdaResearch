@@ -413,11 +413,11 @@ func _draw_tree_edges(node: Dictionary, scale: float, nonterminals: Array) -> vo
 	if children.is_empty():
 		return
 
-	var parent_pos := _node_positions.get(node["id"], Vector3.ZERO)
+	var parent_pos: Vector3 = _node_positions.get(node["id"], Vector3.ZERO)
 	var pp := Vector3(parent_pos.x * scale, -parent_pos.y * scale * 1.2, 0.0)
 
 	for child in children:
-		var child_pos := _node_positions.get(child["id"], Vector3.ZERO)
+		var child_pos: Vector3 = _node_positions.get(child["id"], Vector3.ZERO)
 		var cp := Vector3(child_pos.x * scale, -child_pos.y * scale * 1.2, 0.0)
 
 		# Draw edge as thin quad
@@ -447,12 +447,12 @@ func _draw_tree_edges(node: Dictionary, scale: float, nonterminals: Array) -> vo
 
 
 func _draw_tree_nodes(node: Dictionary, scale: float, nonterminals: Array) -> void:
-	var pos := _node_positions.get(node["id"], Vector3.ZERO)
+	var pos: Vector3 = _node_positions.get(node["id"], Vector3.ZERO)
 	var p := Vector3(pos.x * scale, -pos.y * scale * 1.2, 0.0)
 
-	var is_nt := node["symbol"] in nonterminals
+	var is_nt: bool = node["symbol"] in nonterminals
 	var is_active := _pending_expansions.has(node["id"])
-	var has_children := not node.get("children", []).is_empty()
+	var has_children: bool = not node.get("children", []).is_empty()
 
 	var col: Color
 	if is_active:
@@ -624,7 +624,7 @@ func _draw_chomsky_hierarchy() -> void:
 	var labels_y := [0.0, 0.0, 0.0, 0.0]
 
 	for i in range(4):
-		var s := sizes[i] * display_size
+		var s: float = sizes[i] * display_size
 		var col: Color = COL_HIERARCHY[i]
 
 		# Highlight current grammar's level
@@ -690,7 +690,7 @@ func _draw_derivation_history() -> void:
 			var x_pos := float(ci) * 0.025 - float(str_len) * 0.0125
 			var center := Vector3(x_pos, y_pos, 0.0)
 
-			var is_nt := ch in g["nonterminals"]
+			var is_nt: bool = ch in g["nonterminals"]
 			var col := COL_NONTERMINAL if is_nt else COL_TERMINAL
 
 			# Fade older steps

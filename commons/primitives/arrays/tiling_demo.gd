@@ -1,6 +1,17 @@
 ## TilingDemo — Standalone demo scene showcasing the tiling system.
 ## Shows Italian motifs as floor panels with different palettes and border compositions.
 ## Run this scene directly to test the tiling system.
+
+# @identity
+# essence: gallery of TilingSystem instances loaded with Italian historical motifs (checkerboard→meander→perspective cubes→floral cross) displayed as floor panels in two rows: individual motifs and composed floors with borders
+# desire: to walk through a gallery of floors and feel that mathematical tiling has a history — that the same index-based repetition logic underlies Roman mosaics, Cosmatesque pavements, and the array in your pocket
+# critical_parameter: panel_spacing — determines whether the gallery reads as a sequence of individual specimens or as a continuous floor surface; changing it shifts the experience from museum to architecture
+# triggers: the demo calls TilingSystem._demo_setup and _demo_composed_setup via call_deferred — each panel independently loads its motif pack and configures borders; composed floors add border+corner logic on top of field motifs
+# emerges: the Italian site names (Casa del Fauno, Santa Chiara, Certosa) attached to abstract tiling patterns reveal that mathematical structure carries cultural memory — the same p4m symmetry group appears in vastly different historical contexts
+# needs: no VR interactivity [missing]; static gallery with Label3D names [has]; overhead camera [has]; no slider controls for live editing [missing]
+# relationships: uses TilingSystem (the underlying tile engine); contrasts with PatternTilePuzzle (interactive editing vs historical display); connects to array_tutorial's gallery-of-patterns intro
+# truth: a tiling motif is a function from grid index to visual element, and every historical floor pattern is a specific instantiation of the same abstract array-to-image mapping
+
 extends Node3D
 
 @export var panel_size: Vector2 = Vector2(4.0, 4.0)

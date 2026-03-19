@@ -1,6 +1,18 @@
 ﻿# PythagoreanTriangleAngles.gd - Extends Pythagorean demo with Angle emphasis
 extends Node3D
 
+# @identity
+# essence: a² + b² = c² — the Pythagorean theorem made spatial: three squares grown from triangle sides
+# desire: learner sees the theorem not as a formula but as an area relationship — squares fitting together
+# critical_parameter: the right angle vertex — fixing it keeps the right angle while the learner explores leg ratios
+# triggers: dragging any vertex — hypotenuse square resizes to match the sum of the two leg squares
+# emerges: the theorem as a visual conservation law — the big square always equals the two small squares combined
+# needs: [has grabbable vertex spheres [has], has formula Label3D (a²+b²≈c²) [has], missing VR angle slider]
+# relationships: sibling to triangle; depends on understanding line length; connects to rotation via angles
+# truth: the Pythagorean theorem is a statement about areas, not lengths — c² is literally a square
+
+# PythagoreanTriangleAngles.gd - Extends Pythagorean demo with Angle emphasis
+
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.25
 @export var sphere_y_offset: float = 0.5  # Base height for interaction

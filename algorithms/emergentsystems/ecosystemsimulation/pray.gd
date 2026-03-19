@@ -3,7 +3,7 @@ class_name Prey
 
 var food_collected: float = 0.0
 
-func _init(pos: Vector2, dna_values: Dictionary = {}) -> void:
+func _init(pos: Vector3, dna_values: Dictionary = {}) -> void:
 	super._init(pos, dna_values)
 
 func eat_food(amount: float) -> void:

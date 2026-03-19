@@ -1,6 +1,16 @@
 extends Node3D
 class_name TorusCylinder
 
+# @identity
+# essence: torus.rotation_y += dt*speed; cylinder.position.y = sin(t*freq)*amplitude — rotation vs oscillation
+# desire: learner sees two fundamental animated transformations side by side: continuous rotation and periodic translation
+# critical_parameter: cylinder_osc_speed — the frequency of the sine wave; doubles the frequency, doubles the loops
+# triggers: _process(delta) — runs every frame; the ImmediateMesh trail grows continuously tracing the sine path
+# emerges: the sine wave as the path of a constrained oscillator — the trail makes the mathematical curve physical
+# needs: [has apply_grid_config [has], missing live VR sliders for frequency and rotation speed]
+# relationships: used in Trans_AxisDecomposition; sibling to spin.gd and carousel_cake.gd
+# truth: rotation and translation are both transformations — one preserves distance from a fixed point, the other does not
+
 ## Torus Cylinder — Animated 3D transformation demonstration.
 ##
 ## Pairs a continuously rotating torus with a sinusoidally oscillating cylinder

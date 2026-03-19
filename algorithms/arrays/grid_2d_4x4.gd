@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: for x in range(4): for z in range(4): cube.position = Vector3(x, 0, z) with label "[x, z]" — a 4×4 grid of pickup cubes where each cube's position equals its index, paired with a binary table that shows the same data as 1s and 0s
+# desire: to navigate a 2D array by walking it — to move from [0,0] to [3,3] and feel that two-dimensional indexing is a spatial act, not a notational one; and when you pick up a cube, to watch its slot turn to 0 in the binary table
+# critical_parameter: show_binary_table — when true, a BinaryTableDisplay appears beside the grid showing the same 4×4 structure as a matrix of 0s and 1s; removing cubes live-updates the table, making the array-as-data-structure visible
+# triggers: picking up any cube fires tree_exiting → _on_cube_removed(x,z) → grid_data[x][z] = 0 → binary_table.set_cell(x, z, 0) — the physical act of grabbing an object updates the data representation in real time
+# emerges: students discover that the grid is not just a physical arrangement but a data structure — removing a cube is setting a value in a 2D array, and the binary table makes the data model visible alongside the spatial model
+# needs: pickup cubes with grab physics [has]; Label3D index labels [has]; BinaryTableDisplay [has when show_binary_table=true]; pulsar_visualizer [external, in same map]; gridagent [external, in same map]; no VR slider controls [missing]
+# relationships: extends column_3_z to 2 dimensions; precedes grid_3d_4x4x4; binary table connects to pulsar_visualizer (radio signal as 2D array); appears with gridagent in Tutorial_2D_Build
+# truth: a 2D array is space folded into coordinates — this artifact makes coordinates walkable positions, proving that the abstract address [x,z] is always a location in space
+
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
 @export var show_binary_table: bool = true

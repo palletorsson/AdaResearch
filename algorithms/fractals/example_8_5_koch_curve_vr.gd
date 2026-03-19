@@ -215,7 +215,7 @@ func _on_depth_changed(new_depth: float) -> void:
 
 func _update_info_label() -> void:
 	if _info_label:
-		var seg_count := _lines_by_depth[_current_depth].size() if _current_depth < _lines_by_depth.size() else 0
+		var seg_count: int = _lines_by_depth[_current_depth].size() if _current_depth < _lines_by_depth.size() else 0
 		_info_label.text = "Koch Curve | Depth: %d / %d | Segments: %d" % [_current_depth, max_depth, seg_count]
 
 # ---------------------------------------------------------------------------

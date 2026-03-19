@@ -643,7 +643,7 @@ func _rebuild_genealogy() -> void:
 	for i in count:
 		var entry: Dictionary = _genealogy[i]
 		var x := float(i) / maxf(count - 1, 1) * tree_w
-		var y := (entry.fitness / max_fit) * tree_h * 0.8 + tree_h * 0.1
+		var y: float = (entry.fitness / max_fit) * tree_h * 0.8 + tree_h * 0.1
 		var pos := Vector3(x, y, 0.0)
 
 		# Node

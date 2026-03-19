@@ -242,7 +242,7 @@ func _step_physics(delta: float) -> void:
 
 		if _mode == Mode.FORCES:
 			# Gravity (mass-dependent)
-			var gravity := Vector3(0, -gravity_strength, 0) * mover.mass
+			var gravity: Vector3 = Vector3(0, -gravity_strength, 0) * mover.mass
 			mover.apply_force(gravity)
 
 			# Wind (mass-independent)

@@ -1,6 +1,16 @@
 # Plus.gd - Plus/cross shape (+) with 4 arms at 90° angles (fits within 1,1,1)
 extends Node3D
 
+# @identity
+# essence: cross = central box + 4 arm boxes rotated at 0°/90°/180°/270° — 4-fold rotational symmetry
+# desire: learner recognises the plus symbol as a designed artifact with symmetry group C4
+# critical_parameter: arm_length — controls the reach of each arm; determines aspect ratio of the cross
+# triggers: nothing — static display; fan-triangulated for clean geometry without T-junction artifacts
+# emerges: that a cross has the same symmetry as a square — 90° rotation leaves it invariant
+# needs: [missing VR controls — static display only]
+# relationships: sibling to lshape.gd; both are non-convex combined shapes; connects to plus_line_puzzle
+# truth: symmetry is a property of the transformation group that leaves a shape invariant — the cross has C4
+
 var base_color: Color = Color(0.2, 0.8, 0.2)  # Green (health pickup color)
 var arm_length: float = 0.45  # Length from center to arm tip
 var arm_width: float = 0.15   # Width of each arm

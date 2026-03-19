@@ -474,8 +474,4 @@ func add_terrain_to_scene(parent_node: Node3D) -> void:
 			old_parent.remove_child(collision_body)
 		parent_node.add_child(collision_body)
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

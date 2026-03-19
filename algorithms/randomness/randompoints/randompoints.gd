@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: blue_noise = dart_throwing — place points rejecting any candidate closer than min_dist to existing points, so emptiness is forbidden
+# desire: to feel the difference between fairness and freedom — blue noise is crowded rooms with social distancing, white noise is a mosh pit
+# critical_parameter: blue_noise_min_dist — the exclusion radius that turns white noise into structured randomness
+# triggers: switching DistributionType between UNIFORM/GAUSSIAN/BLUE_NOISE reveals three fundamentally different relationships with space
+# emerges: the packing limit — blue noise runs out of room before placing all requested points, which becomes visible as a teaching moment about density
+# needs: DistributionType selector [missing]; num_points slider [missing]; area_size control [missing]; all selection is export-only, no VR interaction
+# relationships: contrasts with randompoint (single white noise); prepares for perlin noise (structured randomness with continuity); connects to blue_noise sequence artifact
+# truth: structured randomness is not less random — it is randomness with a constraint, the way jazz improvisation is constrained by harmony
+
 enum DistributionType {
 	UNIFORM,
 	GAUSSIAN,

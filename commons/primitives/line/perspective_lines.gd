@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: all lines → (0,0,0) — convergence to a single vanishing point as perspective law
+# desire: learner sees how parallel lines in 3D space appear to converge when projected onto a 2D view
+# critical_parameter: the shared origin — all four line endpoints are forced to (0,0,0)
+# triggers: nothing at runtime — configured once in _ready() and remains static
+# emerges: the vanishing point as the infinite location of all parallel directions — a limit, not a place
+# needs: [missing VR controls — static demonstration only]
+# relationships: sibling to scale_lines; both are special configurations of the line primitive
+# truth: perspective is not distortion — it is projection, and projection reveals the vanishing point
+
 # Script to ensure perspective lines converge correctly to a vanishing point
 
 func _ready():

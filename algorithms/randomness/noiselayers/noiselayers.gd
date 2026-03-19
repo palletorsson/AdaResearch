@@ -1,6 +1,16 @@
 extends MeshInstance3D
 class_name NoiseLayers
 
+# @identity
+# essence: h(x,z) = Σᵢ amplitudeᵢ × noiseᵢ(frequencyᵢ × x, frequencyᵢ × z) — three independent FastNoiseLite layers summed into one terrain surface
+# desire: to stand on a landscape whose complexity you can feel was layered — mountains built from three different kinds of forgetting
+# critical_parameter: low_freq_amplitude — the macro landscape shape; dwarfs the other layers and defines whether the world feels like plains or alps
+# triggers: enabling erosion_simulation changes how slopes are smoothed — the terrain forgets its sharpest edges; switching between FRACTAL_FBM and FRACTAL_RIDGED on med_freq creates ridges vs rolling hills
+# emerges: the fractal nature of natural terrain becomes a walked-through sensation rather than an abstract formula — the learner finds that more octaves means more detail at every scale simultaneously
+# needs: no VR sliders exist [missing]; all parameters are editor exports only; LOD system responds to player position [has]
+# relationships: implements what noisetorus shows abstractly; precedes voxelnoise (discretized); depends on FastNoiseLite; connects to perlin_terrain_sculptor (interactive version)
+# truth: landscapes are not designed — they are superpositions of independent noise processes operating at different scales, and the earth's surface is an accidental sum
+
 # === TERRAIN PARAMETERS ===
 @export_group("Terrain Size")
 @export var terrain_size: int = 100

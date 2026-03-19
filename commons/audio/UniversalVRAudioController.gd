@@ -386,6 +386,77 @@ func load_rack_config_from_dict(data: Dictionary):
 	print("Loaded rack config from dict: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
 
 
+## --- Eurorack Modular Rack API ---
+
+## Load a Eurorack preset by name from module_library.json.
+## Creates an EurorackRack with compound modules containing real interactive controls.
+func load_eurorack_preset(preset_name: String) -> void:
+	_clear_controls()
+
+	# Hide legacy UI panels
+	if has_node("SelectionPanel"):
+		$SelectionPanel.visible = false
+	if has_node("Buttons"):
+		$Buttons.visible = false
+	if has_node("CableCase"):
+		$CableCase.visible = false
+
+	var EurorackRackScript = load("res://commons/audio/EurorackRack.gd")
+	var rack: Node3D = EurorackRackScript.new()
+	rack.name = "EurorackRack"
+	parameter_container.add_child(rack)
+	rack.load_preset(preset_name, self)
+
+	# Wire up cable routing if cable manager exists
+	if rack.cable_manager:
+		_eurorack_cable_manager = rack.cable_manager
+		_eurorack_cable_manager.parameter_routed.connect(_on_cable_routed)
+		_eurorack_cable_manager.parameter_unrouted.connect(_on_cable_unrouted)
+		print("UniversalVRAudioController: Cable manager connected — %d cables" % _eurorack_cable_manager.get_cable_count())
+
+	# Read sound_type from preset
+	var lib_path := "res://commons/audio/eurorack_modules/module_library.json"
+	if FileAccess.file_exists(lib_path):
+		var file := FileAccess.open(lib_path, FileAccess.READ)
+		var json := JSON.new()
+		if json.parse(file.get_as_text()) == OK:
+			var presets: Dictionary = json.data.get("rack_presets", {})
+			if presets.has(preset_name):
+				current_sound_key = presets[preset_name].get("sound_type", current_sound_key)
+		file.close()
+
+	print("UniversalVRAudioController: Loaded Eurorack preset '%s'" % preset_name)
+
+
+## Public wrappers for control creation (used by EurorackModule).
+func instantiate_control(control_type: String, control_id: String) -> Node:
+	return _instantiate_control(control_type, control_id)
+
+func configure_control(control: Node, config: Dictionary, control_type: String) -> void:
+	_configure_control(control, config, control_type)
+
+func connect_control_signals(control: Node, control_id: String, control_type: String, config: Dictionary) -> void:
+	_connect_control_signals(control, control_id, control_type, config)
+
+func attach_face_plate(control: Node3D, control_type: String):
+	return _attach_face_plate(control, control_type)
+
+
+## --- Eurorack Cable Routing ---
+
+var _eurorack_cable_manager: SynthCableManager = null
+
+
+func _on_cable_routed(from_param: String, to_param: String) -> void:
+	print("UVAC Cable: Routed %s → %s" % [from_param, to_param])
+	play_current_sound()
+
+
+func _on_cable_unrouted(from_param: String, to_param: String) -> void:
+	print("UVAC Cable: Unrouted %s → %s" % [from_param, to_param])
+	play_current_sound()
+
+
 func _configure_cable_case(layout: Dictionary):
 	"""Configure cable case decoration colors based on layout settings"""
 	var cable_case = get_node_or_null("CableCase")

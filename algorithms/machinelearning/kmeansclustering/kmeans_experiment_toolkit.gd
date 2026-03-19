@@ -295,9 +295,9 @@ func _draw_elbow_chart(k_values: Array, inertias: Array) -> void:
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 	for i in range(k_values.size() - 1):
 		var x1 := float(i) / (k_values.size() - 1) * chart_w
-		var y1 := (inertias[i] / max_inertia) * chart_h
+		var y1: float = (inertias[i] / max_inertia) * chart_h
 		var x2 := float(i + 1) / (k_values.size() - 1) * chart_w
-		var y2 := (inertias[i + 1] / max_inertia) * chart_h
+		var y2: float = (inertias[i + 1] / max_inertia) * chart_h
 		im.surface_set_color(Color.CYAN)
 		im.surface_add_vertex(Vector3(x1, y1, 0))
 		im.surface_set_color(Color.CYAN)
@@ -309,7 +309,7 @@ func _draw_elbow_chart(k_values: Array, inertias: Array) -> void:
 	# Point labels
 	for i in range(k_values.size()):
 		var x := float(i) / (k_values.size() - 1) * chart_w
-		var y := (inertias[i] / max_inertia) * chart_h
+		var y: float = (inertias[i] / max_inertia) * chart_h
 		var pt_label := Label3D.new()
 		pt_label.text = "K=%d" % k_values[i]
 		pt_label.font_size = 10
@@ -613,7 +613,7 @@ func find_best_initialization_method(results: Dictionary) -> String:
 
 	for method in results:
 		var data: Dictionary = results[method]
-		var score := (1.0 / data.avg_inertia) * (data.convergence_rate / 100.0)
+		var score: float = (1.0 / data.avg_inertia) * (data.convergence_rate / 100.0)
 
 		if score > best_score:
 			best_score = score

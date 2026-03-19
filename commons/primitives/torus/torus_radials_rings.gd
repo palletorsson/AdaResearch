@@ -4,6 +4,16 @@
 # ring_segments = divisions around the tube cross-section
 extends Node3D
 
+# @identity
+# essence: TorusMesh(rings, ring_segments, inner_radius, outer_radius) — a circle revolved around an axis
+# desire: learner understands the torus as a product of two circles — one for the path, one for the tube
+# critical_parameter: ring_segments — tube cross-section resolution; at 4 it looks square, at 32 it looks round
+# triggers: grid config syntax (torus_radials_rings#config:16:8) or apply_grid_config() call at runtime
+# emerges: that the torus has a topology distinct from a sphere — it has a hole and cannot be flattened
+# needs: [missing VR controls — configured via map data; no live slider]
+# relationships: used in combine_portals and diamondtoruscollection; shares config pattern with capsule
+# truth: the torus is topologically distinct from the sphere — its genus is 1, meaning it has exactly one hole
+
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 
 @export var base_color: Color = Color(0.5, 0.2, 0.35)  # Darker magenta for contrast

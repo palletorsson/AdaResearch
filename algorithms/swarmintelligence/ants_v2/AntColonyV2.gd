@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse — ant and environment co-evolve
+# desire: to walk across the terrain floor and watch ant highways emerge beneath you — paths that existed as pure probability before they were paths
+# critical_parameter: grid_resolution — at 64×64 trails look blotchy; at 256×256 the chemical landscape develops fine capillaries and branching structure
+# triggers: two food clusters at asymmetric distances produce unequal trail widths as the colony allocates traffic proportional to yield and proximity
+# emerges: trail Y-junctions that route ants to whichever food source is currently less depleted — an emergent load-balancer no one designed
+# needs: [missing] no VR controls at all; no sliders for ant_count, evaporation, deposit_amount; learner cannot intervene with the colony in real time
+# relationships: simpler predecessor to AntColonyOptimization (no quality weighting, no tandem running, no modes); AntColonyV2 is world-scale vs. ACO's compact heatmap
+# truth: the map is written by the travelers — the territory and the route emerge together
+
 @export var num_ants: int = 100
 @export var terrain_size: Vector2 = Vector2(50, 50)
 @export var grid_resolution: int = 256 # Higher res for better trails

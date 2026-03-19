@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: f_i = Σ(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] — three weighted averages over a local neighborhood
+# desire: to reach out a VR hand and feel the flock split and reform around your arm — to be a boulder in a river of agency
+# critical_parameter: interaction_radius — at zero, it's a particle cloud; past a threshold, a coherent organism crystallizes from the randomness
+# triggers: left trigger attracts boids toward controller; right trigger repels — learner's body becomes a temporary leader with no followers bound by loyalty
+# emerges: coordinated lane reversals, vortex rings, and split-rejoin events that no rule specifies — the flock invents maneuvers
+# needs: [has] VR controller attract/repel via trigger; [missing] no sliders for separation/alignment/cohesion weights; no on-screen parameter display
+# relationships: boids_aquarium wraps the same physics in a compact glass tank with sliders; boid_flocking adds the documentation UI; contrasts with FlowFieldMain (rules vs. field)
+# truth: coordination is not agreement — it is geometry; close enough means you are already the same
+
 class_name BoidManager
 
 # Boid prefab to spawn

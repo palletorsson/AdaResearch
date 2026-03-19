@@ -1,6 +1,16 @@
 extends Node3D
 class_name QueerNoiseTerrain
 
+# @identity
+# essence: height(x,z) = (primary_simplex + detail_perlin × 0.2 + cellular_warp × bulginess × 0.3) × height_multiplier — three noise layers where cellular noise warps the sample coordinates of the primary noise (domain warping)
+# desire: to sculpt with sliders in VR and feel the terrain respond — to discover that bulginess does not add hills but distorts the coordinate system, creating a qualitatively different kind of organic shape
+# critical_parameter: bulginess — controls the strength of domain warping; at 0 the terrain is standard fBm, at high values it develops bulging protrusions and hollow valleys that feel biological rather than geological
+# triggers: randomize_button generates entirely new seeds for all three noise generators; octaves slider changes primary fractal detail in real-time; contour toggle overlays topographic lines that reveal the height function's level sets
+# emerges: the queer color palette (pink→purple→cyan by height) encodes elevation as emotion rather than information — the terrain becomes a mood landscape; the NoiseBlobSpawner adds animated spheres that navigate the terrain surface
+# needs: NoiseScaleSlider [has]; HeightMultiplierSlider [has]; BulginessSlider [has]; OctavesSlider [has]; ColorShiftSlider [has]; ContourFrequencySlider [has]; BlobSpawnButton [has]; no VR slider_horizontal controls [missing]
+# relationships: precedes noise_terrain (terrain_generator.gd, time-animated); both are displayed in Noise_Perlin_Simplex map; domain warping connects to noisesphere concept; queer color scheme connects to QFEP
+# truth: domain warping is the act of sampling a function at a displaced location — when you warp the coordinate system with noise, you are not changing what the function computes but where it is asked
+
 # Terrain parameters
 @export var terrain_size: int = 100
 @export var terrain_resolution: int = 200

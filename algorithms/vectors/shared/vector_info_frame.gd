@@ -146,8 +146,4 @@ static func create(parent: Node3D, title: String, formula: String, description: 
 
 	return root
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
 

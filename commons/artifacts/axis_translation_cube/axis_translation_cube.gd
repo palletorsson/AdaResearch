@@ -4,6 +4,16 @@
 # Formula: position.axis = start + direction * progress
 # Creates cube directly with Grid shader (correct sizing)
 
+# @identity
+# essence: position[axis] = start + direction * lerp(0, 1, progress) — pure single-axis translation animated
+# desire: learner reads the label and watches the cube traverse one axis, internalising what "X translation" means
+# critical_parameter: axis — X, Y, or Z; determines which coordinate changes while the others stay fixed
+# triggers: VR speed slider (slider_horizontal) adjusts lerp speed live; ghost trail shows recent positions
+# emerges: the orthogonality of axes — moving on X changes nothing about Y or Z, visually confirmed
+# needs: [has slider_horizontal VR speed slider [has], has Label3D [has], trail ghosts [has]]
+# relationships: shared script for x_translation_cube, y_translation_cube, z_translation_cube map artifacts
+# truth: translation is the additive group action on position — it changes location while preserving orientation
+
 extends Node3D
 
 class_name AxisTranslationCube

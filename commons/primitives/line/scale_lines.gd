@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: [100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible
+# desire: learner viscerally understands the orders of magnitude separating human-scale from micro and macro
+# critical_parameter: the 1m line — the human-body reference; all others derive meaning relative to it
+# triggers: nothing — static configuration; the experience is spatial proximity and comparison
+# emerges: the body as unit — standing next to 1m makes all other lengths relative to your own height
+# needs: [missing VR controls — static reference display]
+# relationships: sibling to perspective_lines; both configure existing line nodes for a specific lesson
+# truth: every measurement is relative — scale only makes sense from a chosen reference
+
 # Script to ensure scale lines are positioned correctly at different measurements
 
 func _ready():

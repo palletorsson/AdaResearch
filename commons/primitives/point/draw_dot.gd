@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
+# desire: learner experiences themselves as a drawing instrument — hand motion becomes visible line
+# critical_parameter: trail_length — how many hand positions are stored before the oldest disappears
+# triggers: moving the grabbed sphere — total_distance accumulates and triggers unlock tags
+# emerges: the understanding that a continuous curve is just many sampled points
+# needs: [has Label3D [has], grabbable sphere [has], missing speed/density slider]
+# relationships: contrasts with static_point (fixed vs dynamic); pairs with player_trace
+# truth: a curve has no intrinsic form — it is just the limit of increasingly dense point samples
+
 @export var grab_point_path: NodePath = NodePath("GrabPoint")
 @export var draw_sphere_path: NodePath = NodePath("GrabPoint/DrawSphere")
 @export var trail_color: Color = Color(1.0, 0.4, 0.9, 1.0)

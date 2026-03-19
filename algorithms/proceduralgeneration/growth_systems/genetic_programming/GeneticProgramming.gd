@@ -728,10 +728,10 @@ func clear_visualization() -> void:
         child.queue_free()
 
 func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+    pass

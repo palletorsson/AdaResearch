@@ -613,7 +613,7 @@ func _step_graham() -> void:
 		var c := _points[candidate]
 		if not _is_ccw(a, b, c):
 			# Pop — not a left turn
-			var popped := _graham_stack.pop_back()
+			var popped: Variant = _graham_stack.pop_back()
 			_graham_rejected.append(popped)
 			_total_steps += 1
 			return  # Don't advance scan_i; recheck with new stack top

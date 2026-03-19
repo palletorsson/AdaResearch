@@ -2,6 +2,16 @@
 # Cannot be grabbed by hands or captured by gravity gun
 extends Node3D
 
+# @identity
+# essence: a location in space — coordinates (x, y, z) with no size, no volume
+# desire: learner feels that a point is pure position, nothing more, nothing else
+# critical_parameter: show_label — whether coordinate text billboard appears
+# triggers: nothing — entirely still, waiting to be observed
+# emerges: the realisation that all geometry begins from zero-dimensional position
+# needs: [missing VR controls — observation only, non-grabbable by design]
+# relationships: prerequisite for line; contrasts with interactive_point_origin (grabbable version)
+# truth: position exists independently of any object occupying it
+
 @export var point_color: Color = Color(0.0, 1.0, 1.0, 1.0)  # Cyan default
 @export var point_radius: float = 0.04
 @export var show_label: bool = true

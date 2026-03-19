@@ -1,4 +1,13 @@
 # VoxelWorld.gd
+# @identity
+# essence: voxel[x,y,z] = 1 if FastNoiseLite.get_noise_3d(x,y,z) > iso_level else 0 — continuous noise field discretized into a binary 3D grid
+# desire: to touch the threshold — to slide iso_level and watch a landscape of solid cubes dissolve or materialize, understanding that the voxel world is just a snapshot of a continuous noise field
+# critical_parameter: iso_level — the decision boundary between solid and void; small changes cause avalanches of appearing/disappearing cubes
+# triggers: iso_level crosses a noise peak → a cave collapses; noise_scale changes → the spatial frequency of the underlying field reshapes what's solid
+# emerges: the iso-surface concept — that topology of solid matter is defined by a threshold value, not by explicit geometry; also the glass/pink shader makes solid cubes feel crystalline
+# needs: links to perlin_terrain_sculptor via apply_perlin_terrain_controls signal bus [has]; no standalone VR sliders [missing]; responds to group "voxelnoise_receivers" [has]
+# relationships: depends on perlin_terrain_sculptor for interactive control; discretizes what noiselayers shows continuously; connects to marching cubes (smoother iso-surface)
+# truth: matter is a threshold — the voxel world reveals that solid and void are not intrinsic qualities but the result of where you draw the line through a continuous field
 extends Node3D
 
 # Local debug flag to gate prints (default off)

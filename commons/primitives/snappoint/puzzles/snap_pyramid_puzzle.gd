@@ -1,6 +1,16 @@
 extends SnapPointPuzzleBase
 class_name SnapPyramidPuzzle
 
+# @identity
+# essence: square pyramid = 5 vertices, 8 edges, 5 faces (1 square + 4 triangles) — non-Platonic mixed solid
+# desire: learner places 5 points and observes how a square base plus apex forces triangular sides
+# critical_parameter: 5 snap target positions — 4 corners of a square base plus 1 apex above center
+# triggers: snapping all 5 snap points to their targets → puzzle complete signal fires
+# emerges: that the apex position determines whether the pyramid is regular or skewed — height is a free variable
+# needs: [missing VR controls besides snapping — no label or slider]
+# relationships: extends SnapPointPuzzleBase; sibling to snap_tetrahedron_puzzle; pyramid.gd is its static version
+# truth: a pyramid has a free parameter — apex height — that tetrahedra and octahedra do not
+
 ## Snap Square Pyramid Puzzle Controller
 ## Manages a 5-point pyramid puzzle
 ## Extends SnapPointPuzzleBase for common functionality and tag system

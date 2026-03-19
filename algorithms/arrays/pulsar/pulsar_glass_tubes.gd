@@ -1,5 +1,16 @@
 # pulsar_glass_tubes.gd - 3D Glass Tube Visualization of Pulsar Radio Waves
 # Arrays as height - each tube's height represents signal intensity
+
+# @identity
+# essence: for each (row, col) in pulsar signal data: CylinderMesh(height = intensity × max_height, radius = tube_radius) positioned at (col×spacing_x, height/2, row×spacing_z) — every pulse's amplitude mapped to a physical glass tube height
+# desire: to stand beside a radio signal from 2300 light-years away and see it as physical columns of glass — to understand that scientific data is an array and that arrays can be beautiful, spatial, and historically specific
+# critical_parameter: max_height — scales all tube heights relative to the strongest signal pulse; at 0.25m the tallest tube reaches eye-level for seated VR; changing it transforms the data from a chart into an architectural landscape
+# triggers: visualization_mode switches between tubes (CylinderMesh), lines (ImmediateMesh), and points, showing that the same data array can take different physical forms depending only on the rendering choice
+# emerges: the sparse pattern of tall tubes versus short tubes reveals the pulsar's actual pulse shape — students encounter the mathematical structure of a neutron star's spin and atmosphere encoded in glass column heights
+# needs: glass material [has]; glow material [has]; all three visualization modes [has]; no VR controls for changing visualization_mode [missing]; apply_grid_config not implemented [missing]
+# relationships: compact form of pulsar_visualizer (which also shows the binary table); shares PulsarData static class for signal generation; appears in Tutorial_Pattern as the compact version; connects to grid_2d_4x4 (same data, different display)
+# truth: scientific visualization is always a mapping from array index to physical property — tube height is signal intensity, and standing beside this mapping makes data science a spatial act
+
 extends Node3D
 class_name PulsarGlassTubes
 

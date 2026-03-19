@@ -13,6 +13,16 @@
 class_name SelfOrganizingPatterns
 extends Node3D
 
+# @identity
+# essence: three modes — stigmergy (deposit/evaporate field), Ising phase transition (spin flip via Metropolis), attractor basins (gradient descent on potential landscape)
+# desire: to push the Noise slider past the critical temperature and watch an ordered flock dissolve into chaos in real time — to hold the phase transition in your hand
+# critical_parameter: coupling_strength — below the critical value spins are random (disordered phase); above it they spontaneously align (ordered phase); the exact threshold is where complexity peaks
+# triggers: in PHASE_TRANSITION mode, the automated temperature sweep crosses the critical point and the order-parameter graph shows a sharp kink — the signature of a second-order transition
+# emerges: in STIGMERGY mode, agents following their own collective trail spontaneously form rotating clusters — an ordered state nobody chose, arising from the instability of uniform randomness
+# needs: [has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button; [missing] no slider for agent_speed or deposit_rate
+# relationships: generalizes the stigmergy mechanism of stigmergy_grid and AntColonyOptimization into abstract physics; shares Ising model concepts with phase_transition topics in chaos sequence; connects to attractor theory in neural networks
+# truth: order is not imposed from outside — it falls into existence when local interactions exceed the noise floor
+
 ## Self-Organizing Patterns with stigmergy, phase transitions, and attractors.
 ## STIGMERGY mode shows indirect coordination through environmental markers.
 ## PHASE_TRANSITION mode detects order/disorder transitions via order parameters.
@@ -359,8 +369,8 @@ func _deposit_stigmergy(pos: Vector2, amount: float) -> void:
 		for dy in [-1, 0, 1]:
 			if dx == 0 and dy == 0:
 				continue
-			var nx := g.x + dx
-			var ny := g.y + dy
+			var nx: int = g.x + dx
+			var ny: int = g.y + dy
 			if nx >= 0 and nx < grid_resolution and ny >= 0 and ny < grid_resolution:
 				_stigmergy_grid[nx][ny] += spread / 8.0
 
@@ -402,7 +412,7 @@ func _compute_basin_grid() -> void:
 			for ai in range(_attractors.size()):
 				var attr: Dictionary = _attractors[ai]
 				var dist := world.distance_to(attr["pos"])
-				var potential := -attr["strength"] / maxf(dist, 0.1)
+				var potential: float = -attr["strength"] / maxf(dist, 0.1)
 				if potential < best_potential:
 					best_potential = potential
 					best_idx = ai
@@ -410,8 +420,8 @@ func _compute_basin_grid() -> void:
 
 			# Flow field: gradient toward nearest attractor
 			var nearest_attr: Dictionary = _attractors[best_idx]
-			var dir := (nearest_attr["pos"] - world)
-			var d := dir.length()
+			var dir: Vector2 = (nearest_attr["pos"] - world)
+			var d: float = dir.length()
 			if d > 0.01:
 				_flow_field[gx][gy] = dir.normalized() * minf(d, 1.0)
 			else:
@@ -604,9 +614,9 @@ func _update_attractor_basins_mode(delta: float) -> void:
 		var best_pull := 0.0
 		for ai in range(_attractors.size()):
 			var attr: Dictionary = _attractors[ai]
-			var dir := attr["pos"] - agent.pos
-			var dist := dir.length()
-			var pull := attr["strength"] / maxf(dist * dist, 0.1)
+			var dir: Vector2 = attr["pos"] - agent.pos
+			var dist: float = dir.length()
+			var pull: float = attr["strength"] / maxf(dist * dist, 0.1)
 			force += dir.normalized() * pull
 			if pull > best_pull:
 				best_pull = pull
@@ -752,13 +762,13 @@ func _draw_agents_stigmergy() -> void:
 		var fwd := Vector2(cos(agent.heading), sin(agent.heading))
 		var side := fwd.rotated(PI * 0.5)
 		var r := 0.08
-		var p := agent.pos
+		var p: Vector2 = agent.pos
 		var z := 0.05
 
-		var front := p + fwd * r * 1.8
-		var back := p - fwd * r
-		var left := p + side * r * 0.7
-		var right := p - side * r * 0.7
+		var front: Vector2 = p + fwd * r * 1.8
+		var back: Vector2 = p - fwd * r
+		var left: Vector2 = p + side * r * 0.7
+		var right: Vector2 = p - side * r * 0.7
 
 		var col := COL_AGENT_ALIGNED.lerp(COL_AGENT_RANDOM, noise_level)
 		_agents_im.surface_set_color(col)
@@ -782,7 +792,7 @@ func _draw_agents_ising() -> void:
 
 	for agent in _agents:
 		var r := 0.1
-		var p := agent.pos
+		var p: Vector2 = agent.pos
 		var z := 0.05
 		var col: Color
 		if agent.spin > 0:
@@ -811,7 +821,7 @@ func _draw_agents_basins() -> void:
 
 	for agent in _agents:
 		var r := 0.08
-		var p := agent.pos
+		var p: Vector2 = agent.pos
 		var z := 0.08
 		var col: Color
 		if agent.basin_id >= 0 and agent.basin_id < BASIN_COLORS.size():
@@ -854,13 +864,13 @@ func _draw_basin_coloring() -> void:
 			# Darken cells near boundaries between basins
 			var on_boundary := false
 			for dx in [-1, 1]:
-				var nx := gx + dx
+				var nx: int = gx + dx
 				if nx >= 0 and nx < grid_resolution and _basin_grid[nx][gy] != basin_id:
 					on_boundary = true
 					break
 			if not on_boundary:
 				for dy in [-1, 1]:
-					var ny := gy + dy
+					var ny: int = gy + dy
 					if ny >= 0 and ny < grid_resolution and _basin_grid[gx][ny] != basin_id:
 						on_boundary = true
 						break
@@ -885,7 +895,7 @@ func _draw_basin_coloring() -> void:
 	# Draw attractor centers as bright circles
 	for ai in range(_attractors.size()):
 		var attr: Dictionary = _attractors[ai]
-		var pos := attr["pos"]
+		var pos: Vector2 = attr["pos"]
 		var col: Color = attr["color"]
 		col.a = 0.9
 		var r := 0.2 + sin(_time * 2.0 + ai) * 0.04

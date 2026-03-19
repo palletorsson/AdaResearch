@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire "decision" is a lookup
+# desire: to stand inside an invisible force that bends your trajectory before you notice — to feel steered without a steerer
+# critical_parameter: sequence_mode — switching between open field, U-wall, zig-zag, linear wind, and noise turbulence reveals how field topology determines reachability
+# triggers: placing an obstacle changes the entire downstream vector field instantly via Dijkstra propagation from the target cell
+# emerges: traffic-like lane formation where many agents converge on the same narrow corridor without coordination or negotiation
+# needs: [missing] no VR controls — mouse-click target and right-click walls are desktop-only; VR needs controller-raycast placement of target and obstacles
+# relationships: foundation for ant pheromone fields; contrasts with boid_flocking (field is external vs. social); shares grid_resolution with PhysarumColony approach
+# truth: purpose is not inside the agent — it lives in the field the agent inhabits
+
 @export var agent_scene: PackedScene
 @onready var visualizer: MeshInstance3D = $FieldVisualizer
 @onready var camera: Camera3D = $Camera3D

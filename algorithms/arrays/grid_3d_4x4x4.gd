@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: for x,y,z in range(4)³: cube.position = Vector3(x,y,z) with label "[x,y,z]" — 64 pickup cubes forming a solid 4×4×4 volume where every position is labeled with its three-dimensional index
+# desire: to climb inside a three-dimensional array — to reach up and grab a cube at [2,3,1] and feel that three numbers describe a unique place in space that only you can occupy at that moment
+# critical_parameter: spacing — at 1.0m the cubes form a compact volume you can reach into; increasing spacing makes the array a sparse structure you must move through rather than reach across
+# triggers: picking up cubes physically empties cells from the volume — the 3D array becomes a sculpture with negative space carved by interaction
+# emerges: students discover that volumetric indexing requires physical intuition that 2D indexing does not — you must think in three directions simultaneously, and your body knows how to do this even when your mind struggles
+# needs: pickup cubes [has]; Label3D [x,y,z] labels [has]; no-depth-test labels ensure always-readable index [has]; apply_grid_config supports size_x/y/z/spacing overrides [has]; no live data visualization companion [missing]
+# relationships: extends grid_2d_4x4 to 3 dimensions; final step in the 1D→2D→3D spatial array progression; connects to voxelnoise (3D grid with noise values) and grid_3d in the grid_editor sequence
+# truth: a three-dimensional array is the minimum structure needed to represent volumetric space — every 3D game world, CT scan, and weather simulation is an indexed cube of values
+
 # 4x4x4 3D grid of cubes arranged in X, Y, and Z directions
 # Each cube is spaced 1 units apart
 

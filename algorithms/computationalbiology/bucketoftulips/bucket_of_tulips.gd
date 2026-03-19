@@ -515,8 +515,8 @@ func _draw_phyllotaxis_spiral() -> void:
 
 	# Draw the Fermat spiral path connecting tulip centers in order
 	for i in range(tulip_count - 1):
-		var d0 := _tulip_data[i]
-		var d1 := _tulip_data[i + 1]
+		var d0: Dictionary = _tulip_data[i]
+		var d1: Dictionary = _tulip_data[i + 1]
 		var p0 := Vector3(d0["base_x"], y, d0["base_z"])
 		var p1 := Vector3(d1["base_x"], y, d1["base_z"])
 
@@ -527,7 +527,7 @@ func _draw_phyllotaxis_spiral() -> void:
 	# Draw golden angle annotation arcs between consecutive tulips
 	# Show the constant angular spacing
 	for i in range(mini(tulip_count, 8)):
-		var d := _tulip_data[i]
+		var d: Dictionary = _tulip_data[i]
 		var cx := 0.0
 		var cz := 0.0
 		var r := sqrt(d["base_x"] * d["base_x"] + d["base_z"] * d["base_z"])
@@ -550,7 +550,7 @@ func _draw_phyllotaxis_spiral() -> void:
 
 	# Numbered index dots at each tulip position
 	for i in range(tulip_count):
-		var d := _tulip_data[i]
+		var d: Dictionary = _tulip_data[i]
 		var pos := Vector3(d["base_x"], y, d["base_z"])
 		# Small cross mark
 		var sz := 0.008
@@ -583,7 +583,7 @@ func _advance_growth(delta: float) -> void:
 
 	# Update each tulip with staggered growth (center grows first)
 	for i in range(_tulip_data.size()):
-		var d := _tulip_data[i]
+		var d: Dictionary = _tulip_data[i]
 		# Stagger: inner tulips grow first (lower spiral index)
 		var delay := float(i) / float(maxi(tulip_count, 1)) * 0.35
 		var local_progress := clampf((_growth_progress - delay) / (1.0 - delay), 0.0, 1.0)
@@ -619,7 +619,7 @@ func _update_environment(delta: float) -> void:
 
 	for d in _tulip_data:
 		# Drooping responds to heat — taller tulips droop more
-		var target_droop := heat_level * d["height_factor"]
+		var target_droop: float = heat_level * d["height_factor"]
 		d["droop"] = lerpf(d["droop"], target_droop, delta * 2.0)
 
 		# Wilting responds to drought — progressive desiccation

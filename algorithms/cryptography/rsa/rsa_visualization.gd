@@ -539,7 +539,7 @@ func _rebuild_tree() -> void:
 	for i in range(step_count):
 		var step : Dictionary = _modexp_steps[i]
 		var y_pos := tree_h * 0.5 - i * spacing_y
-		var is_sq := step["op"] == "sq"
+		var is_sq: bool = step["op"] == "sq"
 		var x_off := -0.03 if is_sq else 0.03
 
 		# Color by operation type
@@ -561,7 +561,7 @@ func _rebuild_tree() -> void:
 
 		# Connection line to previous
 		if i > 0:
-			var prev_is_sq := _modexp_steps[i - 1]["op"] == "sq"
+			var prev_is_sq: bool = _modexp_steps[i - 1]["op"] == "sq"
 			var prev_x := -0.03 if prev_is_sq else 0.03
 			var prev_y := tree_h * 0.5 - (i - 1) * spacing_y
 			var line_col := COL_DIM

@@ -1,6 +1,16 @@
 extends Node3D
 class_name StepSequencer
 
+# @identity
+# essence: 2D boolean array[track][step] where each 1 triggers a sound at BPM-derived intervals — a physical 16-step × 4-track drum machine rendered in 3D, where toggling a cell means "play this sound at this beat"
+# desire: to feel rhythm as a 2D array — to toggle cells on a physical 16-step grid and hear your pattern play back, discovering that a drum pattern is just a boolean matrix traversed column by column at a fixed tempo
+# critical_parameter: sound_preset — determines which 4 sounds fill the tracks; "house" gives TR909 kick + M1 piano + hi-hat + TB303 acid bass, turning the array into a culturally specific musical grammar
+# triggers: BPM controls the column-advance rate; step_triggered(track, step) fires on every active cell; the "house" preset carries the cultural memory of 1990s house music into the abstract array demonstration
+# emerges: students discover that musical style is a distribution over the boolean array — house music has kick on beats 1&3, and this pattern emerges from which cells are toggled; the array encodes cultural knowledge
+# needs: SequencerUI [has via SubViewport2Din3D]; AudioSynthesizer [has]; CustomSoundGenerator [has]; VR interaction for toggling cells [has]; BPM control [has]; no VR slider_horizontal [missing — uses internal UI]
+# relationships: paired with StandaloneDiscoFloor in Tutorial_Disco for the full arrays-as-music synthesis; house preset references Gypsy Woman/Crystal Waters production style; connects to step sequencer in audio rack
+# truth: a step sequencer is a for-loop over time — the array of steps is executed rhythmically, and music is what happens when a boolean array runs at 120 BPM
+
 ## 3D Step Sequencer
 ## Wraps SequencerUI in Viewport2Din3D for VR/3D interaction
 ## Handles audio playback

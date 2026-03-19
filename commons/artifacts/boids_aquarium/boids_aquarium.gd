@@ -4,6 +4,16 @@
 
 extends Node3D
 
+# @identity
+# essence: v_i = w_sep·separate + w_align·align + w_coh·cohere, O(n) via spatial hash grid — Reynolds (1987) in a 1m cube
+# desire: to peer through glass at thirty tiny creatures and realize the school has a shape, a mood, a personality — and you made it with three sliders
+# critical_parameter: separation_weight — below 0.5 boids collapse into a clump; above 3.0 they scatter into permanent isolation; the narrow band between is life
+# triggers: dragging SEP slider to max produces cold dispersal; dragging COH to max produces a pulsing sphere; ALIGN at max produces a synchronized arrow of motion
+# emerges: rotating toroids, figure-eight loops, and sudden directional consensus events — the tank finds shapes the designer never chose
+# needs: [has] VR sliders for separation, alignment, cohesion; [has] reset push button; [missing] no speed slider; no perception_radius slider
+# relationships: shares Reynolds rules with boid_manager but adds glass-tank scale and O(n) grid optimization; contrasts with stigmergy_grid (social vs. environmental memory)
+# truth: the boundary of the tank is the only rule that is truly external — every other behavior is the boids talking to each other
+
 class_name BoidsAquarium
 
 ## Tank dimensions (1m cube)

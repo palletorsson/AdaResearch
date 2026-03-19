@@ -1,6 +1,16 @@
 extends Node3D
 class_name AchillesTortoise
 
+# @identity
+# essence: A_n = L*(1-1/2^n), T_n = L*(1-1/2^(n+1)) — geometric series converging to a finite limit
+# desire: learner feels the paradox in time — watching each step get smaller, knowing they converge
+# critical_parameter: the step reveal timing — each step marker appears sequentially, spacing halving each time
+# triggers: auto-advances through steps; each step places Achilles and Tortoise markers at new positions
+# emerges: the resolution — infinite steps sum to finite distance; the paradox dissolves in the limit
+# needs: [missing VR controls — no step-advance button or speed slider]
+# relationships: uses primitives to illustrate infinite series; pedagogically connects to fractals
+# truth: infinite subdivision converges — Zeno was right about the steps, wrong about the sum
+
 ## Zeno's paradox of Achilles and the Tortoise.
 ## Achilles chases the Tortoise — each step he reaches where it WAS,
 ## but the Tortoise has moved forward. The gap halves every step.

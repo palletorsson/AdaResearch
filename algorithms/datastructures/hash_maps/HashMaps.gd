@@ -387,7 +387,7 @@ func _process(delta: float) -> void:
 	_insert_timer += delta
 	if _insert_timer >= _insert_interval and not _rehashing:
 		_insert_timer = 0.0
-		var key := _key_pool[_insert_counter % _key_pool.size()] + str(_insert_counter)
+		var key: String = _key_pool[_insert_counter % _key_pool.size()] + str(_insert_counter)
 		_insert_counter += 1
 		_insert_key(key)
 		# Check rehash threshold
@@ -561,7 +561,7 @@ func _rebuild_table() -> void:
 
 	for i in range(_bucket_count):
 		var bx := _bucket_x(i)
-		var load := _buckets[i].size()
+		var load: int = _buckets[i].size()
 		var color := _load_factor_color(load)
 
 		# Flash highlight

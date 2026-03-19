@@ -1,6 +1,16 @@
 @tool
 extends XRToolsPickable
 
+# @identity
+# essence: trihedron — 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive
+# desire: learner holds a 3D solid, turns it in their hands, and counts faces, edges, vertices
+# critical_parameter: button material toggle — pressing reveals the internal structure through a different material
+# triggers: pick up → snaps to shelf; button press → alternates material showing surface vs wireframe quality
+# emerges: the Euler relation (V-E+F=2) as something you count by holding; topology felt through handling
+# needs: [has VR button (material toggle) [has], has shelf snap [has], missing edge/vertex count label]
+# relationships: sibling to grab_octahedron; both teach held polyhedra with button interaction
+# truth: a solid is defined by its topology — how faces connect — not by any particular material or color
+
 ## Alternate material when button pressed
 @export var alternate_material : Material
 @export var snap_to_shelf: bool = true

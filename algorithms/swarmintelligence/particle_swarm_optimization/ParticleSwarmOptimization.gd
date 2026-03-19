@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: v_i(t+1) = ω·v_i(t) + c1·r1·(pbest_i - x_i) + c2·r2·(gbest - x_i) — velocity is nostalgia plus social pressure plus momentum
+# desire: to watch particles swarm a multi-peaked landscape and see them settle into the global maximum without any single particle understanding what "global" means
+# critical_parameter: inertia_weight (ω, oscillating 0.5–0.9) — high inertia keeps particles exploring wildly; low inertia causes premature convergence on a local peak
+# triggers: when the landscape's central peak is globally best, all particles eventually abandon personal bests to converge on the center — a visible collective capitulation
+# emerges: temporary sub-swarms that cluster around local peaks before the global best signal pulls them away — visible competition between exploitation and exploration
+# needs: [missing] no VR sliders for inertia, cognitive_coefficient, or social_coefficient; InertiaWeight and SwarmConvergence nodes are visual indicators only, not interactive
+# relationships: contrasts with AntColonyOptimization (pheromone trail vs. velocity memory); shares optimization objective with gradient_descent_landscape but without gradients; unlocks understanding of hyperparameter tuning in machinelearning
+# truth: remembering where you were best is not enough — you also need to know where the group was best; all optimization is a negotiation between self and collective
+
 var time = 0.0
 var particles = []
 var landscape_nodes = []

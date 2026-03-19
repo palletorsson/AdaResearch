@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: point = (randf_range(-e, e), randf_range(-e, e)) — pure white noise in 2D, every position equally likely
+# desire: to feel the lottery of position — grab the point, release it, watch it land somewhere that has no memory of where it was
+# critical_parameter: area_half_extent — the size of the possible universe this point can inhabit
+# triggers: dropping the point resets it; every drop is a new draw from the same distribution
+# emerges: the learner begins to notice that no region of space fills up faster than any other — uniformity as a lived sensation
+# needs: grab_sphere_point [has]; slider for area_half_extent [missing]; regenerate button [missing]
+# relationships: contrasts with randompoints (blue noise enforces spacing); precedes noiselayers (noise adds memory); pairs with randompoints for white vs blue comparison
+# truth: white noise is the null hypothesis of space — the universe before it learned to care where things go
+
 @export var area_half_extent: float = 0.8  # random within [-0.8, 0.8] on X and Y
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")

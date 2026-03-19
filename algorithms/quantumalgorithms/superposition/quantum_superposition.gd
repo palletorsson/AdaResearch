@@ -719,7 +719,7 @@ func _update_labels() -> void:
 			_title_label.text = "Quantum Gates"
 			var state_str := _format_state_vector()
 			_info_label.text = "State: " + state_str
-			var next_gate := GATE_NAMES[_current_gate]
+			var next_gate: String = GATE_NAMES[_current_gate]
 			_state_label.text = "Next: " + next_gate + "  |  History: " + " ".join(_gate_history.slice(-4))
 		Mode.BLOCH:
 			_title_label.text = "Bloch Sphere"

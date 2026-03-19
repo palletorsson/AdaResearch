@@ -3,6 +3,17 @@
 ## Edit patterns on a grid at desk height, see them tile across the floor in real-time.
 ## VR controllers: BY = cycle lattice, AX = cycle group, trigger = toggle symmetry mode.
 ## Desktop: M = toggle symmetry, Arrow keys = cycle lattice/group, 1-8 = select color.
+
+# @identity
+# essence: VR workspace = PatternTilePuzzle (tilted editing board at desk height) + live-updating floor carpet (MultiMesh tile texture regenerated on every pattern_changed signal) + optional wall preview panel
+# desire: to design a floor while standing on it — to grab a colored cube, place it on the tilted editing board, and see the tile pattern propagate immediately across the floor beneath your feet, closing the loop between authorship and inhabitation
+# critical_parameter: carpet_repeats — controls how many times the source tile repeats across the floor; at Vector2i(8,8) the floor becomes a demonstration of infinite repetition; at (2,2) the relationship between source and repeat is obvious
+# triggers: PatternTilePuzzle emits cell_changed → _update_carpet_texture regenerates the carpet ImageTexture; VR BY buttons cycle wallpaper lattice; VR AX buttons cycle group within lattice; trigger toggles symmetry mode
+# emerges: the live-update loop creates an authorship experience that traditional pattern editors lack — you feel yourself as both designer and inhabitant simultaneously, which embodies the array's core claim about index-to-value mapping
+# needs: floor carpet MultiMesh [has]; wall preview panel [has]; label for current mode [has]; VR controller button routing [has via handle_vr_button forwarded to puzzle]; grab cubes for editing [has via PatternTilePuzzle]
+# relationships: wraps PatternTilePuzzle as the editing logic; vr_tile_editor_mirror token uses MIRROR_XY repeat mode by default; connects to array_carpet for carpet-only display without editing
+# truth: the tile editor is a live proof that a 4×4 array, held in hand, can generate an infinite floor — the editing board is the source code and the carpet is the running program
+
 class_name VRTileEditor
 extends Node3D
 

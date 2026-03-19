@@ -1,4 +1,13 @@
 # NoiseSpace.gd - Algorithmic disruption
+# @identity
+# essence: height(x,z) = FastNoiseLite.get_noise_2d(x × noise_scale, z × noise_scale) × height_scale — fractal noise as a walkable terrain substrate
+# desire: to walk across a landscape that is simultaneously random and smooth — to feel that the ground underfoot is coherent without being designed
+# critical_parameter: noise_scale — at low values the terrain is a gentle undulation; at high values it becomes violently jagged; the sweet spot is where walking feels organic
+# triggers: changing octaves changes how many scales of detail are superimposed; the organic green material reinforces the disruption aesthetic of non-Euclidean space
+# emerges: the TopologySpace base class provides the mesh infrastructure; the noise generates height variation that makes this space feel like resistance — harder to traverse than a flat grid
+# needs: no VR controls [missing]; all parameters are export-only; the terrain is generated once at startup and does not update dynamically [has]
+# relationships: extends TopologySpace alongside other walkgrid substrates (FractalSpace, ErosionSpace, WaveInterferenceSpace); contrasts with flat SineSpace; used as the noise_space map substrate
+# truth: a noise landscape is the simplest possible proof that order and randomness are not opposites — every point in this terrain is deterministically computed yet no two regions feel the same
 extends TopologySpace
 class_name NoiseSpace
 

@@ -644,7 +644,7 @@ func _draw_grids() -> void:
 	_grid_im.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	for si in range(_alg_states.size()):
-		var off := _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
+		var off: Vector3 = _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
 		var hw := grid_size * cell_size * 0.5
 		# Grid lines
 		for i in range(grid_size + 1):
@@ -663,7 +663,7 @@ func _draw_cells() -> void:
 	_cells_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	for si in range(_alg_states.size()):
-		var off := _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
+		var off: Vector3 = _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
 		var state: Dictionary = _alg_states[si]
 
 		for x in range(grid_size):
@@ -697,7 +697,7 @@ func _draw_paths() -> void:
 	_path_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	for si in range(_alg_states.size()):
-		var off := _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
+		var off: Vector3 = _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
 		var state: Dictionary = _alg_states[si]
 		var p: Array = state["path"]
 		var col := _path_color(state["name"])
@@ -722,7 +722,7 @@ func _draw_overlays() -> void:
 	_overlay_im.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	for si in range(_alg_states.size()):
-		var off := _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
+		var off: Vector3 = _compare_offsets[si] if si < _compare_offsets.size() else Vector3.ZERO
 		var state: Dictionary = _alg_states[si]
 
 		# Draw Theta* line-of-sight checks (last N)

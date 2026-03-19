@@ -1,5 +1,15 @@
 extends CanvasLayer
 
+# @identity
+# essence: documentation panel for Reynolds' 1987 boids algorithm — separation + alignment + cohesion described in text and connected to a live BoidManager instance
+# desire: to read the three rules and immediately look up to see them happening — the gap between description and phenomenon collapsed into the same VR moment
+# critical_parameter: show_algorithm — with algorithm text visible, learners read the rules while watching them; without it, the behavior looks like magic with no explanation
+# triggers: the panel connects to the live BoidManager in the scene, so parameter changes in the manager are reflected in the UI context — explanation and simulation stay in sync
+# emerges: the question "why does alignment make them look alive?" — the documentation exists to be outrun by the learner's own observation
+# needs: [missing] no VR interaction; panel is 2D CanvasLayer projected into VR viewport — cannot be grabbed or repositioned by VR controller
+# relationships: companion to boid_manager (documents what it simulates); boids_2d_in_3d projects this panel into a 3D viewport quad for VR placement
+# truth: the rules are three lines of math; the flock is what those lines mean when they meet each other a thousand times per second
+
 # This script creates a 2D UI panel that can be displayed in your VR environment
 # with information about boids algorithms, history, and controls
 

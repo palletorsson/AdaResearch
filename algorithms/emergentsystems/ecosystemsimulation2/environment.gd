@@ -332,7 +332,7 @@ func _get_feature_type_for_location(position: Vector3) -> String:
 	else:
 		return "rock" if randf() < 0.7 else "crystal"
 
-func _create_tree(position: Vector3) -> void:
+func _create_tree(position: Vector3) -> Node3D:
 	var tree = Node3D.new()
 	tree.name = "Tree"
 	tree.position = position
@@ -369,10 +369,11 @@ func _create_tree(position: Vector3) -> void:
 	
 	foliage.position.y = trunk_mesh.height + foliage_mesh.radius * 0.5
 	tree.add_child(foliage)
-	
-	env_features.add_child(tree)
 
-func _create_rock(position: Vector3) -> void:
+	env_features.add_child(tree)
+	return tree
+
+func _create_rock(position: Vector3) -> Node3D:
 	var rock = MeshInstance3D.new()
 	rock.name = "Rock"
 	rock.position = position
@@ -418,10 +419,11 @@ func _create_rock(position: Vector3) -> void:
 	
 	# Random rotation
 	rock.rotation = Vector3(randf() * 0.3, randf() * TAU, randf() * 0.3)
-	
-	env_features.add_child(rock)
 
-func _create_crystal(position: Vector3) -> void:
+	env_features.add_child(rock)
+	return rock
+
+func _create_crystal(position: Vector3) -> Node3D:
 	var crystal = MeshInstance3D.new()
 	crystal.name = "Crystal"
 	crystal.position = position
@@ -460,10 +462,11 @@ func _create_crystal(position: Vector3) -> void:
 	
 	# Random rotation around y-axis
 	crystal.rotation.y = randf() * TAU
-	
-	env_features.add_child(crystal)
 
-func _create_plant(position: Vector3) -> void:
+	env_features.add_child(crystal)
+	return crystal
+
+func _create_plant(position: Vector3) -> Node3D:
 	var plant = Node3D.new()
 	plant.name = "Plant"
 	plant.position = position
@@ -512,10 +515,11 @@ func _create_plant(position: Vector3) -> void:
 		)
 		
 		plant.add_child(flower)
-	
-	env_features.add_child(plant)
 
-func _create_water_feature(position: Vector3) -> void:
+	env_features.add_child(plant)
+	return plant
+
+func _create_water_feature(position: Vector3) -> Node3D:
 	var water = MeshInstance3D.new()
 	water.name = "WaterFeature"
 	water.position = position
@@ -536,8 +540,9 @@ func _create_water_feature(position: Vector3) -> void:
 	
 	# Position slightly above ground to avoid z-fighting
 	water.position.y += 0.05
-	
+
 	env_features.add_child(water)
+	return water
 
 func update(delta: float, current_day: int) -> void:
 	# Update time of day

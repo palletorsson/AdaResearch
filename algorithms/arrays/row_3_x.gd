@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: for i in range(4): cube.position = Vector3(i × spacing, 0, 0) with label "[i]" — a 1D array of four pickup cubes along the X axis, backed by a 1-row BinaryTableDisplay that turns to 0 when a cube is grabbed
+# desire: to walk along an array in the X direction and feel that index increases as you move right — to then grab a cube and see the binary table update, closing the loop between physical action and data representation
+# critical_parameter: show_binary_table — when true, a 1-row × 4-column "array[i]" table hovers above the row; picking up cube [2] changes the table cell at column 2 from 1 to 0, showing that the cube is the data
+# triggers: tree_exiting signal on each cube fires _on_cube_removed(index) → sets array_data[0][index] = 0 → calls binary_table.set_cell(0, index, 0) — every grab is a write operation to a 1D array
+# emerges: the single-row binary table labeled "array[i]" makes explicit that a row of objects IS an array — the visualization and the physical layout are the same data structure rendered in two different media
+# needs: pickup cubes [has]; Label3D index labels [has]; BinaryTableDisplay [has]; apply_grid_config supports count/spacing/label overrides [has]; no VR controls beyond grabbing [missing]
+# relationships: same architecture as column_3_z but oriented along X instead of Z, and with binary table companion; both appear in Tutorial_2D_Build to show X and Z axes as independent array dimensions; precedes grid_2d_4x4
+# truth: a 1D array is a line of values — row_3_x makes this literal by arranging physical objects along an axis and labeling them with their distance from the origin
+
 # Row of 4 cubes arranged in X direction
 # Each cube is spaced 1 unit apart
 

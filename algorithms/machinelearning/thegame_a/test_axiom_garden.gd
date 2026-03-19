@@ -148,7 +148,4 @@ func _check(name: String, condition: bool) -> void:
 		_failed += 1
 		push_error("  FAIL: " + name)
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
+

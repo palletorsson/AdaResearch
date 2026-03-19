@@ -1,6 +1,16 @@
 # RoughRock.gd - Irregular polyhedron with rough surface
 extends Node3D
 
+# @identity
+# essence: cube_vertices + deterministic_noise(seed) → irregular polyhedron — controlled randomness
+# desire: learner sees a non-uniform organic shape and understands it as seeded perturbation of regular geometry
+# critical_parameter: noise_seed — the same seed always produces the same rock; change it, get a different rock
+# triggers: nothing at runtime — generated once at _ready() with a fixed seed for repeatability
+# emerges: the concept of procedural generation from seed — infinite variation, deterministic replay
+# needs: [missing VR controls — static; would benefit from live noise_seed slider]
+# relationships: sibling to all other static primitives; conceptual bridge to fractal/procgen sequences
+# truth: nature's irregularity is not random — it is deterministic noise that we lack the seed to predict
+
 var base_color: Color = Color(0.0, 0.8, 0.0)  # Green from pride colors
 
 func _ready():
