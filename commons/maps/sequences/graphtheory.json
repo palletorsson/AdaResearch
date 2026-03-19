@@ -1,170 +1,170 @@
 {
-	"sequences": {
-		"graphtheory": {
-			"name": "Graph Theory: Connections Define Structure",
-			"truth": "Everything is a graph if you squint hard enough.",
-			"qfep_term": "Integration",
-			"qfep_connection": "Graphs are pure relation \u00e2\u20ac\u201d nodes are identity, edges are connection. The F-term lives in structure (spanning trees, shortest paths); the E-term in randomness (random graphs, percolation). Flow algorithms optimize the F\u00e2\u2020\u201dE boundary.",
-			"description": "Nodes and edges \u00e2\u20ac\u201d the mathematics of connection. From K\u00c3\u00b6nigsberg bridges to network flow, graph theory asks: what can you reach, what's connected, and what's the best path? Each map combines related algorithms into one explorable space.",
-			"layer": "integration",
-			"prerequisites": [
-				"transformation",
-				"array_tutorial"
-			],
-			"unlocks": [],
-			"difficulty": "advanced",
-			"estimated_time": "30-40 minutes",
-			"learning_objectives": [
-				"Graphs as abstract representations of relationship",
-				"Force-directed layout as physics applied to structure",
-				"Pathfinding and traversal strategies",
-				"Connectivity \u00e2\u20ac\u201d strongly connected components",
-				"Optimization on graphs \u00e2\u20ac\u201d spanning trees, flow, matching"
-			],
-			"content": [
-				"GT_Foundations: K\u00c3\u00b6nigsberg Bridge problem + graph space exploration \u00e2\u20ac\u201d what IS a graph?",
-				"GT_Layout: Force-directed graph layout in 2D and 3D \u00e2\u20ac\u201d letting physics arrange structure",
-				"GT_Pathfinding: Finding paths through graphs \u00e2\u20ac\u201d the traversal problem",
-				"GT_Network_Analysis: Network structure, flow, and analysis",
-				"GT_Connectivity: Tarjan's + Kosaraju's + topological sort \u00e2\u20ac\u201d what's connected to what, in what order",
-				"GT_Spanning_Trees: Minimum spanning tree \u00e2\u20ac\u201d the lightest skeleton",
-				"GT_Flow: Push-relabel + Karger's \u00e2\u20ac\u201d maximum flow and minimum cut",
-				"GT_Matching: Edmonds' algorithm \u00e2\u20ac\u201d optimal pairing"
-			],
-			"maps": [
-				"GT_Foundations",
-				"GT_Layout",
-				"GT_Pathfinding",
-				"GT_Network_Analysis",
-				"GT_Connectivity",
-				"GT_Spanning_Trees",
-				"GT_Flow",
-				"GT_Matching"
-			],
-			"audio": {
-				"ambient_preset": "minimal_drone",
-				"volume": -10.0
-			},
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_graphtheory",
-			"completion_rewards": [
-				"graph_theory_badge"
-			],
-			"merge_plan": {
-				"_note": "Maps created by merging interactables from original 14 maps",
-				"GT_Foundations": [
-					"GraphTheory_Graphspace (graphspace, KonigsbergBridge)",
-					"GraphTheory_Graphspace_3d (graphspace3d)"
-				],
-				"GT_Layout": [
-					"GraphTheory_Force_Directed_Graph_Layout (force_directed_layout)",
-					"GraphTheory_Force_Directed_3d (forcedirected3d)"
-				],
-				"GT_Pathfinding": [
-					"GraphTheory_Path_Finding_3d (pathfinding3d)"
-				],
-				"GT_Network_Analysis": [
-					"GraphTheory_Network_Analysis (networkflow3d, network_analysis)"
-				],
-				"GT_Connectivity": [
-					"GraphTheory_Tarjan_s_Algorithm (tarjan_algorithm)",
-					"GraphTheory_Kosaraju_s_Algorithm (kosaraju_algorithm)",
-					"GraphTheory_Topological_Sort (topological_sort_algorithm)"
-				],
-				"GT_Spanning_Trees": [
-					"GraphTheory_Minimum_Spanning_Tree (mst_visualization)"
-				],
-				"GT_Flow": [
-					"GraphTheory_Push_Relabel_Algorithm (push_relabel_algorithm)",
-					"GraphTheory_Karger_s_Algorithm (karger_algorithm)"
-				],
-				"GT_Matching": [
-					"GraphTheory_Edmonds_Algorithm (edmonds_algorithm)"
-				]
-			},
-			"deferred_maps": [
-				"GraphTheory_Maximum_Flow_Algorithms"
-			],
-			"artifact_groups": [
-				{
-					"map": "GT_Foundations",
-					"position": "intro",
-					"artifacts": [
-						"graphspace",
-						"KonigsbergBridge"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Konigsberg-inspired islands and bridges introduce what a graph is; two compact artifacts on separate platforms"
-				},
-				{
-					"map": "GT_Layout",
-					"position": "intro",
-					"artifacts": [
-						"force_directed_layout"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Single artifact on asymmetric platforms; room topology itself demonstrates force-directed equilibrium"
-				},
-				{
-					"map": "GT_Pathfinding",
-					"position": "foundation",
-					"artifacts": [
-						"pathfinding3d"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Single artifact in maze corridor; player embodies the pathfinding algorithm through spatial navigation"
-				},
-				{
-					"map": "GT_Network_Analysis",
-					"position": "exploration",
-					"artifacts": [
-						"networkflow3d",
-						"network_analysis",
-						"rhizomatic_structure"
-					],
-					"size_budget": "mixed",
-					"rationale": "Hub-and-spoke topology with three artifacts; network flow and analysis from the heart of the graph"
-				},
-				{
-					"map": "GT_Connectivity",
-					"position": "exploration",
-					"artifacts": [
-						"tarjan_algorithm",
-						"kosaraju_algorithm"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Three connected rooms as strongly connected components; one algorithm artifact per room"
-				},
-				{
-					"map": "GT_Spanning_Trees",
-					"position": "integration",
-					"artifacts": [
-						"mst_visualization"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Scattered platforms at varying heights connected by walkways; single MST artifact on central elevated platform"
-				},
-				{
-					"map": "GT_Flow",
-					"position": "integration",
-					"artifacts": [
-						"push_relabel_algorithm"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Funnel narrows from wide entrance to tight exit; single artifact demonstrates flow constraints"
-				},
-				{
-					"map": "GT_Matching",
-					"position": "synthesis",
-					"artifacts": [
-						"edmonds_algorithm"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Symmetric room with perfect left-right mirror; single matching artifact at the symmetry axis"
-				}
-			]
-		}
-	},
-	"world_phase": "beyond",
-	"artifact_groups": []
+  "sequences": {
+    "graphtheory": {
+      "name": "Graph Theory: Connections Define Structure",
+      "truth": "Everything is a graph if you squint hard enough.",
+      "qfep_term": "Integration",
+      "qfep_connection": "Graphs are pure relation â€” nodes are identity, edges are connection. The F-term lives in structure (spanning trees, shortest paths); the E-term in randomness (random graphs, percolation). Flow algorithms optimize the Fâ†”E boundary.",
+      "description": "Nodes and edges â€” the mathematics of connection. From KÃ¶nigsberg bridges to network flow, graph theory asks: what can you reach, what's connected, and what's the best path? Each map combines related algorithms into one explorable space.",
+      "layer": "integration",
+      "prerequisites": [
+        "transformation",
+        "array_tutorial"
+      ],
+      "unlocks": [],
+      "difficulty": "advanced",
+      "estimated_time": "30-40 minutes",
+      "learning_objectives": [
+        "Graphs as abstract representations of relationship",
+        "Force-directed layout as physics applied to structure",
+        "Pathfinding and traversal strategies",
+        "Connectivity â€” strongly connected components",
+        "Optimization on graphs â€” spanning trees, flow, matching"
+      ],
+      "content": [
+        "GT_Foundations: Konigsberg Bridges and Euler — what IS a graph?",
+        "GT_Layout: Force-Directed Graph Equilibrium — letting physics arrange structure",
+        "GT_Pathfinding: Navigating the Search Tree — the traversal problem",
+        "GT_Network_Analysis: Centrality, Flow, and Bottlenecks — Network structure, flow, and analysis",
+        "GT_Connectivity: Strongly Connected Components — what's connected to what, in what order",
+        "GT_Spanning_Trees: The Lightest Skeleton — the lightest skeleton",
+        "GT_Flow: Maximum Flow, Minimum Cut — maximum flow and minimum cut",
+        "GT_Matching: Optimal Pairing via Blossoms — optimal pairing"
+      ],
+      "maps": [
+        "GT_Foundations",
+        "GT_Layout",
+        "GT_Pathfinding",
+        "GT_Network_Analysis",
+        "GT_Connectivity",
+        "GT_Spanning_Trees",
+        "GT_Flow",
+        "GT_Matching"
+      ],
+      "audio": {
+        "ambient_preset": "minimal_drone",
+        "volume": -10.0
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_graphtheory",
+      "completion_rewards": [
+        "graph_theory_badge"
+      ],
+      "merge_plan": {
+        "_note": "Maps created by merging interactables from original 14 maps",
+        "GT_Foundations": [
+          "GraphTheory_Graphspace (graphspace, KonigsbergBridge)",
+          "GraphTheory_Graphspace_3d (graphspace3d)"
+        ],
+        "GT_Layout": [
+          "GraphTheory_Force_Directed_Graph_Layout (force_directed_layout)",
+          "GraphTheory_Force_Directed_3d (forcedirected3d)"
+        ],
+        "GT_Pathfinding": [
+          "GraphTheory_Path_Finding_3d (pathfinding3d)"
+        ],
+        "GT_Network_Analysis": [
+          "GraphTheory_Network_Analysis (networkflow3d, network_analysis)"
+        ],
+        "GT_Connectivity": [
+          "GraphTheory_Tarjan_s_Algorithm (tarjan_algorithm)",
+          "GraphTheory_Kosaraju_s_Algorithm (kosaraju_algorithm)",
+          "GraphTheory_Topological_Sort (topological_sort_algorithm)"
+        ],
+        "GT_Spanning_Trees": [
+          "GraphTheory_Minimum_Spanning_Tree (mst_visualization)"
+        ],
+        "GT_Flow": [
+          "GraphTheory_Push_Relabel_Algorithm (push_relabel_algorithm)",
+          "GraphTheory_Karger_s_Algorithm (karger_algorithm)"
+        ],
+        "GT_Matching": [
+          "GraphTheory_Edmonds_Algorithm (edmonds_algorithm)"
+        ]
+      },
+      "deferred_maps": [
+        "GraphTheory_Maximum_Flow_Algorithms"
+      ],
+      "artifact_groups": [
+        {
+          "map": "GT_Foundations",
+          "position": "intro",
+          "artifacts": [
+            "graphspace",
+            "KonigsbergBridge"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Konigsberg-inspired islands and bridges introduce what a graph is; two compact artifacts on separate platforms"
+        },
+        {
+          "map": "GT_Layout",
+          "position": "intro",
+          "artifacts": [
+            "force_directed_layout"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Single artifact on asymmetric platforms; room topology itself demonstrates force-directed equilibrium"
+        },
+        {
+          "map": "GT_Pathfinding",
+          "position": "foundation",
+          "artifacts": [
+            "pathfinding3d"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Single artifact in maze corridor; player embodies the pathfinding algorithm through spatial navigation"
+        },
+        {
+          "map": "GT_Network_Analysis",
+          "position": "exploration",
+          "artifacts": [
+            "networkflow3d",
+            "network_analysis",
+            "rhizomatic_structure"
+          ],
+          "size_budget": "mixed",
+          "rationale": "Hub-and-spoke topology with three artifacts; network flow and analysis from the heart of the graph"
+        },
+        {
+          "map": "GT_Connectivity",
+          "position": "exploration",
+          "artifacts": [
+            "tarjan_algorithm",
+            "kosaraju_algorithm"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Three connected rooms as strongly connected components; one algorithm artifact per room"
+        },
+        {
+          "map": "GT_Spanning_Trees",
+          "position": "integration",
+          "artifacts": [
+            "mst_visualization"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Scattered platforms at varying heights connected by walkways; single MST artifact on central elevated platform"
+        },
+        {
+          "map": "GT_Flow",
+          "position": "integration",
+          "artifacts": [
+            "push_relabel_algorithm"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Funnel narrows from wide entrance to tight exit; single artifact demonstrates flow constraints"
+        },
+        {
+          "map": "GT_Matching",
+          "position": "synthesis",
+          "artifacts": [
+            "edmonds_algorithm"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Symmetric room with perfect left-right mirror; single matching artifact at the symmetry axis"
+        }
+      ]
+    }
+  },
+  "world_phase": "beyond",
+  "artifact_groups": []
 }
