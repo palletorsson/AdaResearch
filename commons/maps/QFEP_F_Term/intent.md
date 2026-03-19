@@ -3,3 +3,5 @@ Sequence role: Second map in QFEP Lab; isolates the F term. After the Introducti
 Technical angle: Free energy minimization, prediction error as the difference between model and world, Bayesian brain hypothesis. The crystal_cluster artifact crystallizes from disorder into order — F decreasing over time. The snap puzzles (cube, tetrahedron) require the learner to minimize structural error through assembly.
 Critical angle: F is the drive behind every formal system Euclid built, every pattern the curriculum taught. But the Foundations Crisis showed that pure formalization fails — Gödel proved F can never reach zero. The dark room problem makes this biological: an organism that only minimizes surprise would sit in the dark forever. Life requires entropy. F alone is necessary but insufficient.
 Key artifacts: crystal_cluster demonstrates F-minimization as crystallization from chaos; snap_cube_puzzle and snap_tetra_puzzle require pattern-finding (error reduction); lambda_slider contextualizes F within the full formula; dark_sphere as the ambient constant; tt for navigation.
+
+Gap: No gap identified.

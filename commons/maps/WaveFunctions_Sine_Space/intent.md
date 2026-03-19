@@ -3,3 +3,5 @@ Sequence role: Third map in Wavefunctions; transitions from temporal oscillation
 Technical angle: sin(t) as spatial displacement, simple harmonic motion (SHM) parameters mapped to geometry, multiple oscillators with phase offsets creating wave propagation effects. The sine_space artifact sculpts 3D geometry from the sine function; sine_wall_corridor creates an immersive corridor shaped by the wave.
 Critical angle: Spatializing the wave collapses the abstract/concrete distinction. The sine function is not a graph on paper — it is the shape of the floor, the curve of the wall, the geometry you navigate. This is the strongest argument for embodied mathematics: understanding comes from walking the function, not from reading its equation.
 Key artifacts: sine_space generates the 3D sine sculpture; sine_space_explanation provides the mathematical annotation; sine_wall_corridor creates the immersive walkable wave; sine_wall_explanation annotates the corridor; colorballs provide visual markers within the wave; dark_sphere anchors.
+
+Gap: colorballs needs VR grab.

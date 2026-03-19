@@ -3,3 +3,5 @@ Sequence role: Opens the Transformation sequence. Follows Primitives_Melencolia,
 Technical angle: T(v) = M * v with M as a 4x4 matrix — but before decomposition, the three operations appear side by side. Visual comparison of translate (position change), rotate (orientation change), and scale (magnitude change) applied to identical cubes. No axis constraints yet.
 Critical angle: Invariance as identity. Each transformation preserves something the others discard: translation keeps orientation and size, rotation keeps position and size, scale keeps position and orientation. What survives a transformation defines what the transformation is. The gap is the same; the strategies for crossing it reveal the structure of space itself.
 Key artifacts: balance_puzzle stages the gap as a problem requiring the right transformation; dark_sphere provides the constant reference — the thing that does not transform — against which all three changes become legible.
+
+Gap: No gap identified.

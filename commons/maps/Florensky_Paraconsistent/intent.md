@@ -3,3 +3,5 @@ Sequence role: Sixth map in Foundations Crisis; the queer response to the crisis
 Technical angle: Paraconsistent logic, explosion principle (ex contradictione quodlibet) and its rejection, relevant logics, quantum superposition as physical paraconsistency. The florensky_sphere holds contradictory states; schrodinger_box demonstrates superposition; superposition_display visualizes the coexistence.
 Critical angle: Florensky — mathematician, priest, executed by Stalin — proposed that truth can contain contradiction. This is the QFEP insight in logical form: order (F) and disorder (-λE) coexist in the formula, not as compromise but as productive tension. The queer dimension: identities that resist binary classification, states that are both/and rather than either/or. φ > 0 — embracing becoming rather than resisting it.
 Key artifacts: florensky_sphere holds contradictory logical states simultaneously; schrodinger_box demonstrates quantum superposition as physical paraconsistency; superposition_display visualizes the coexistence of exclusive states.
+
+Gap: schrodinger_box needs VR click interaction [has via mouse], XR interaction.

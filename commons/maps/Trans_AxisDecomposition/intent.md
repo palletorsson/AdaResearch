@@ -3,3 +3,5 @@ Sequence role: Third map. Deepens Trans_Translate_1 by decomposing translation i
 Technical angle: Axis-isolated translation: P' = P + (tx, 0, 0), P' = P + (0, ty, 0), P' = P + (0, 0, tz). Each axis independently testable. Sliding obstacles and coordinate displacement puzzles enforce single-axis reasoning before recombination. The cube_scene and translation_cube_demo make the decomposition tangible.
 Critical angle: Before movement, space is theoretical — coordinates without consequence. Translation tests the theory: can you get from here to there along one axis at a time? Descartes' analytic geometry made literal: space as three independent number lines, each one a degree of freedom. Independence of axes is not obvious; it is a structural claim about the world.
 Key artifacts: x_translation_cube and z_translation_cube isolate single-axis displacement; translation_cube_demo presents decomposition as a demonstrable principle; toruscylinder introduces a non-rectilinear form to test whether axis logic holds for curved geometry; pickup_gate#pickups sequences the learning through gated progression.
+
+Gap: No gap identified.

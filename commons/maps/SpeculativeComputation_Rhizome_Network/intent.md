@@ -3,3 +3,5 @@ Sequence role: Second map in Post-Foundations Crisis; the constructive alternati
 Technical angle: Rhizomatic network topology, non-hierarchical graph structures, the cave as procedurally generated rhizome (four interconnected chambers, multiple paths between any two). Deleuze and Guattari's six principles: connection, heterogeneity, multiplicity, asignifying rupture, cartography, decalcomania.
 Critical angle: The rhizome is the anti-tree — the structure that refuses hierarchy, refuses root, refuses the kind of binary classification that produces bias. In QFEP terms, the rhizome operates at high λ (many possible paths, high entropy) but with enough connectivity to maintain coherence. It is the spatial embodiment of φ > 0: structure that welcomes becoming.
 Key artifacts: rhizome_cave_demo generates the non-hierarchical cave system with multiple interconnected chambers and no privileged path.
+
+Gap: No gap identified.

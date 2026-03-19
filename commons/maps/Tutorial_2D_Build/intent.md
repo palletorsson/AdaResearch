@@ -3,3 +3,5 @@ Sequence role: Fourth map in Array Tutorial; the dimensional leap from 1D to 2D.
 Technical angle: 2D array indexing (row, column), grid construction, row_3_x and column_3_z helpers isolating each axis, gridagent for programmatic traversal, pulsar_visualizer for spatial state feedback. The pick_up_cube returns from Tutorial_Single — now there are multiple, addressed by position.
 Critical angle: Two dimensions transform sequence into space. One index says "where in line"; two indices say "where in field." The jump is not additive but multiplicative — a 4×4 grid has 16 positions, not 8. This is the moment arrays become spatial data structures, and the grid becomes a map of itself.
 Key artifacts: grid_2d_4x4 is the central 2D structure; row_3_x and column_3_z decompose axes; gridagent provides algorithmic navigation; pulsar_visualizer gives spatial feedback; pick_up_cube returns as the addressable element; xyz_coordinates labels the coordinate system; dark_sphere anchors.
+
+Gap: grid_2d_4x4 needs no VR slider controls; pulsar_visualizer needs no VR interactive controls; row_3_x needs no VR controls beyond grabbing.

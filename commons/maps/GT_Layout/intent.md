@@ -3,3 +3,5 @@ Sequence role: Second map in Graph Theory; connects back to the Forces sequence 
 Technical angle: Force-directed layout: Coulomb repulsion F = k/r² between all node pairs, Hooke attraction F = -k·d for connected pairs, iterative relaxation until equilibrium. The force_directed_layout artifact implements the full algorithm; the learner watches convergence from random initial positions.
 Critical angle: Graph layout reveals that structure and presentation are not the same thing. Two layouts of the same graph can look completely different yet encode identical relationships. The choice of layout algorithm is a choice of what to emphasize — proximity, centrality, clustering. Visualization is not neutral; it is editorial. The room settling into equilibrium is the F-term seeking minimum energy in a new domain.
 Key artifacts: force_directed_layout implements Coulomb-Hooke relaxation, demonstrating how physics algorithms serve as graph visualization tools.
+
+Gap: No gap identified.

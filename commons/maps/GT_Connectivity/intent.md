@@ -3,3 +3,5 @@ Sequence role: Fifth map in Graph Theory; introduces directed graphs and the asy
 Technical angle: Strongly connected components (SCCs), Tarjan's algorithm (single DFS with lowlink values), Kosaraju's algorithm (two-pass DFS), condensation into a directed acyclic graph (DAG), topological sort of the condensed graph. The tarjan_algorithm and kosaraju_algorithm artifacts implement both approaches for comparison.
 Critical angle: Connectivity is not binary in directed graphs — you can have one-way connections that create hierarchy from symmetric parts. The SCC decomposition reveals the deep structure: clusters of mutual reachability connected by one-way bridges. This mirrors social structures (cliques connected by brokers) and information flow (feedback loops connected by feeds).
 Key artifacts: tarjan_algorithm implements SCC discovery via single DFS; kosaraju_algorithm implements the two-pass alternative — same result, different approach, demonstrating that algorithmic diversity exists even for well-defined problems.
+
+Gap: kosaraju_algorithm needs slider_horizontal, push_button; tarjan_algorithm needs slider_horizontal, push_button.

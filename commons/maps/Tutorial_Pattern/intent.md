@@ -3,3 +3,5 @@ Sequence role: Sixth map in Array Tutorial; transitions from structural navigati
 Technical angle: Checkerboard indexing via modular arithmetic, wave patterns via trigonometric functions swept across indices, the script_runner#array artifact executing array-manipulation code in real time. Pattern_tile_mirror and pattern_tile_puzzle provide hands-on tiling with symmetry constraints.
 Critical angle: Pattern recognition is the cognitive bridge between data and meaning. The checkerboard formula is trivial; recognizing that it produces the pattern is the insight. Arrays are neutral containers until a rule runs across their indices — then structure emerges. The eye detects pattern before the mind derives the formula; this map reverses the process.
 Key artifacts: script_runner#array executes pattern-generating code live; pattern_tile_mirror and pattern_tile_puzzle#cursor provide interactive tiling; pattern_tile_puzzle#p4m#cursor introduces the p4m wallpaper group; dark_sphere anchors.
+
+Gap: No gap identified.

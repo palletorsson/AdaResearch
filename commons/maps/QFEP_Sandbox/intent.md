@@ -3,3 +3,5 @@ Sequence role: Seventh map in QFEP Lab; the open-ended playground. After six map
 Technical angle: Full interactive QFEP system: lambda_slider and phi_slider controlling a reactive_particles simulation via qfep_reactor. The formula (qfep_formula_3d) updates live as parameters change. The system's behavior — crystallization, emergence, dissolution — shifts continuously with the sliders.
 Critical angle: The sandbox embodies the pedagogical thesis: understanding is not declarative but operational. You understand QFEP when you can tune it, when you know what λ=0.35 feels like versus λ=0.45, when you can predict what increasing φ will do. The force metaphor is deliberate — QFEP is not knowledge but capacity. You have it or you don't. The sandbox tests whether you have it.
 Key artifacts: qfep_reactor is the responsive simulation engine; reactive_particles provide the visible system behavior; lambda_slider and phi_slider give full parameter control; qfep_formula_3d renders the live equation; tt for navigation.
+
+Gap: No gap identified.

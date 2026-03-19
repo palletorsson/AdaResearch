@@ -3,3 +3,5 @@ Sequence role: Fifth map in QFEP Lab; introduces the final and most radical term
 Technical angle: φΔE(S,t) as the temporal derivative term — how fast entropy is changing, weighted by sensitivity. φ < 0 resists entropy increase (rigid_sculpture, preserved_pattern); φ > 0 embraces it (fluid_form, transforming_pattern). The phi_slider lets the learner feel the difference: same λ, different φ, radically different behavior.
 Critical angle: φ is where the formula becomes ethical. Every system, every institution, every identity has a φ value — a disposition toward change. Conservative systems (φ < 0) resist perturbation, return to equilibrium. Queer systems (φ > 0) use perturbation as material for transformation. Neither is inherently better, but the curriculum's thesis — made explicit here — is that life and creativity require φ > 0.
 Key artifacts: phi_slider controls the rate-sensitivity parameter; rigid_sculpture and preserved_pattern demonstrate φ < 0 (resistance to change); fluid_form and transforming_pattern demonstrate φ > 0 (embrace of becoming); tt for navigation.
+
+Gap: No gap identified.

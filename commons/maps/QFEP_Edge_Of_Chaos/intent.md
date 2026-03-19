@@ -3,3 +3,5 @@ Sequence role: Sixth map in QFEP Lab; the moment the theory becomes phenomenal. 
 Technical angle: Langton's lambda parameter and its connection to QFEP's λ, Turing morphogenesis as edge-of-chaos pattern formation, the four classes of cellular automata behavior (fixed, periodic, chaotic, edge-of-chaos), criticality and phase transitions. The edge_core artifact generates emergent behavior at the critical λ value.
 Critical angle: The edge of chaos is the curriculum's ultimate thesis: creativity, life, learning, and computation all occur at the boundary between too much order and too much entropy. This is not a metaphor — it is a measurable property of dynamical systems. Langton showed it in cellular automata, Kauffman in genetic networks, Beggs and Plenz in neural tissue. The edge is where the QFEP formula's three terms balance productively.
 Key artifacts: edge_core generates emergent behavior at critical λ; emergence_zone visualizes the narrow band where complexity lives; turing_pattern connects to reaction-diffusion morphogenesis; lambda_slider provides continuous parameter control; tt for navigation.
+
+Gap: No gap identified.

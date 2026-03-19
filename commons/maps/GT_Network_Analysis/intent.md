@@ -3,3 +3,5 @@ Sequence role: Fourth map in Graph Theory; transitions from traversal (pathfindi
 Technical angle: Degree centrality (count connections), betweenness centrality (count shortest paths through node), eigenvector centrality (importance of neighbors matters), PageRank as eigenvector variant. Network flow: max-flow min-cut theorem, capacity constraints. The network_analysis artifact computes all centrality measures; networkflow3d visualizes flow.
 Critical angle: Centrality is political. Who is central depends on what you measure — connections (degree), gatekeeping power (betweenness), or association with other important nodes (eigenvector). Google's PageRank made eigenvector centrality the algorithm that organized human knowledge. The choice of metric is a choice of values, not just mathematics.
 Key artifacts: network_analysis computes and visualizes multiple centrality measures; networkflow3d demonstrates flow constraints and bottlenecks — capacity as a distinct structural property from connectivity.
+
+Gap: networkflow3d needs slider_horizontal, push_button, Label3D; rhizomatic_structure needs slider_horizontal, push_button, Label3D.

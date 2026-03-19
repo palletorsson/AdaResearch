@@ -3,3 +3,5 @@ Sequence role: Third map in QFEP Lab; isolates the entropy term after the F term
 Technical angle: Entropy as log of the number of accessible microstates, the -λE(S) term as the entropic drive that opposes F-minimization. High λ weights entropy heavily (chaos dominates); low λ weights it weakly (order dominates). The particle_chaos artifact shows unconstrained entropy; random_cubes show disordered structure.
 Critical angle: Entropy is where the Randomness, Noise, and Cellular Automata sequences find their formal home. The E_entropy phase of the curriculum was always this term. Pure entropy — λ→1 — is dissolution, not freedom. Freedom requires enough structure to make choices meaningful. The λ parameter mediates: how much entropy does the system tolerate?
 Key artifacts: particle_chaos demonstrates maximum entropy (no structure, pure randomness); random_cubes show disordered geometric form; lambda_slider controls the E-term weight in the formula; tt for navigation.
+
+Gap: No gap identified.

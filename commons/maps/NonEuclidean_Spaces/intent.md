@@ -3,3 +3,5 @@ Sequence role: Second map in Foundations Crisis; the constructive proof that alt
 Technical angle: Negative curvature (hyperbolic: saddle geometry, triangle angles sum to less than 180°), positive curvature (elliptic: sphere geometry, angles sum to more than 180°), Poincaré disk model, Riemann sphere. The curvature_slider parametrizes the entire space of constant-curvature geometries.
 Critical angle: If geometry itself — the most certain branch of mathematics — turns out to be a matter of choice, what else is? This map demonstrates that axioms are not discovered but declared. Multiple self-consistent worlds coexist. The Foundations Crisis begins not with contradiction but with abundance: too many truths, not too few.
 Key artifacts: curvature_slider parametrizes the geometry continuously; hyperbolic_surface and elliptic_surface provide immersive examples; poincare_disk shows the hyperbolic plane in finite form; riemann_sphere shows the elliptic model.
+
+Gap: elliptic_surface needs VR controls; hyperbolic_surface needs VR controls; poincare_disk needs VR controls; riemann_sphere needs VR controls.

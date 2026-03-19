@@ -3,3 +3,5 @@ Sequence role: Third and final map in Post-Foundations Crisis; the return to for
 Technical angle: Molecular modeling as formal system (valence rules, bond angles, molecular geometry), the MolecularDesigner artifact implementing chemical constraint satisfaction. The laboratory aesthetic (clean benches, organized tools) embodies the F-term; the void pit embodies the E-term lurking beneath.
 Critical angle: The sequence's answer to "what do we build?" is: formal systems, with humility. The laboratory is not innocent — it is a site of power, classification, and control. But it is also where discovery happens. The void pit is the curriculum's final spatial metaphor: every laboratory, every formal system, every order sits on top of something it cannot fully contain. Knowing this is the post-crisis capacity.
 Key artifacts: MolecularDesigner implements chemical formalization as interactive construction — atoms snapping to rules, bonds obeying geometry, structure emerging from constraints.
+
+Gap: MolecularDesigner needs VR grab on parts.

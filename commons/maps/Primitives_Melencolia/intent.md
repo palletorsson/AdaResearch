@@ -3,3 +3,5 @@ Sequence role: Eleventh and final map. Closes the Primitives sequence not with t
 Technical angle: Scene composition combining multiple primitive types (pyramid, prism, cube, torus, diamond), display and framing systems (bigframe, code_display), puzzle as retrospective (snap_pyramid_puzzle), Durer's polyhedron as historical reference object.
 Critical angle: Durer's Melencolia I — the angel surrounded by tools of measurement, immobilized by knowledge. The Herzog August Bibliothek as archive of everything and resolution of nothing. Completion as a form of mourning. Geometry's promise of total description confronts its own limits.
 Key artifacts: durer_scene as the central art-historical reference; bigframe for staging the scene as tableau; diamondtoruscollection for the accumulated formal vocabulary; snap_pyramid_puzzle as final hands-on act; code_display for making the underlying system legible at the moment of its exhaustion.
+
+Gap: No gap identified.
