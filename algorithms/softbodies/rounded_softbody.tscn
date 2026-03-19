@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://algorithms/softbodies/rounded_softbody.gd" id="1_rounded"]
 
-[node name="RoundedSoftBody" type="SoftBody3D"]
+[node name="RoundedSoftBody" type="Node3D"]
 script = ExtResource("1_rounded")

@@ -346,9 +346,9 @@
 			]
 		},
 		"rounded_softbody_test": {
-			"name": "Rounded SoftBody Test",
+			"name": "Rounded SoftBody — Strain Energy",
 			"lookup_name": "rounded_softbody_test",
-			"description": "Test scene for a rounded soft body implementation.",
+			"description": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement, collision-response force arrows with impact bursts, and volume preservation with real-time ratio chart. VR hand squeeze interaction pushes vertices. ImmediateMesh overlays for all visualizations.",
 			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
 			"category": "physics",
 			"include_in_map_data": true,
@@ -357,6 +357,9 @@
 				"softbodies"
 			],
 			"sequence": "softbodies",
+			"interactions": [
+				"squeeze"
+			],
 			"parameters": {
 				"footprint": [
 					9,
@@ -365,13 +368,18 @@
 				],
 				"size_group": "environment"
 			},
-			"complexity": "intermediate",
+			"complexity": "advanced",
 			"tags": [
-				"physics"
+				"physics",
+				"soft_body",
+				"strain",
+				"deformable",
+				"interactive"
 			],
 			"dev_themes": [
 				"physics",
-				"soft_body"
+				"soft_body",
+				"visualization"
 			]
 		},
 		"jelly_cube": {
