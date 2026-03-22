@@ -1,11 +1,7 @@
 extends Node3D
 
-## Rack Parity Scene — shows 2D and 3D versions of each control side by side.
-## Run this scene to capture comparison screenshots.
-##
-## Layout: Left column = 2D controls in SubViewport quads
-##         Right column = 3D VR-wrapped controls
-##         Each row is one control type, labeled.
+## Rack Parity Scene — 2D and 3D versions side by side, clean background.
+## No cables, no back panel, no autoloads. Just the controls.
 
 const CONTROLS = [
 	{"key": "slv", "name": "Vertical Slider", "scene": "res://commons/audio/rack_controls/RackSliderV.tscn"},
@@ -22,44 +18,54 @@ const CONTROLS = [
 	{"key": "label", "name": "Label", "scene": "res://commons/audio/rack_controls/RackLabel.tscn"},
 ]
 
-const ROW_SPACING := 0.25
-const COL_OFFSET := 0.35  # distance between 2D and 3D columns
-const START_Y := 1.5
+const ROW_SPACING := 0.28
+const COL_2D := -0.3
+const COL_3D := 0.3
+const START_Y := 1.8
+const BEZEL_DEPTH := 0.015
 
 
 func _ready() -> void:
+	# Kill any autoloaded audio/cable systems that might clutter
+	for child in get_tree().root.get_children():
+		if child != self and child.name != "RackParityScene":
+			if "cable" in child.name.to_lower() or "audio" in child.name.to_lower() or "rack" in child.name.to_lower():
+				child.visible = false
+
 	_setup_environment()
 	_build_rows()
 
 
 func _setup_environment() -> void:
-	# Dark background
+	# Clean dark background — no grid, no floor, no sky
 	var env := WorldEnvironment.new()
 	env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR
-	env.environment.background_color = Color(0.06, 0.06, 0.08)
-	env.environment.ambient_light_color = Color(0.8, 0.8, 0.85)
-	env.environment.ambient_light_energy = 0.6
+	env.environment.background_color = Color(0.04, 0.04, 0.06)
+	env.environment.ambient_light_color = Color(0.9, 0.9, 0.95)
+	env.environment.ambient_light_energy = 0.8
 	add_child(env)
 
-	# Soft directional light
+	# Soft front light
 	var light := DirectionalLight3D.new()
-	light.rotation_degrees = Vector3(-40, -20, 0)
-	light.light_energy = 0.8
+	light.rotation_degrees = Vector3(-30, 0, 0)
+	light.light_energy = 0.6
 	light.shadow_enabled = false
 	add_child(light)
 
-	# Camera facing the control wall
+	# Camera centered on the control wall
+	var center_y := START_Y - (CONTROLS.size() * ROW_SPACING * 0.5)
 	var cam := Camera3D.new()
 	cam.name = "ParityCamera"
-	cam.position = Vector3(0.0, START_Y - (CONTROLS.size() * ROW_SPACING * 0.5), 1.2)
-	cam.look_at(Vector3(0.0, START_Y - (CONTROLS.size() * ROW_SPACING * 0.5), 0.0))
+	cam.position = Vector3(0.0, center_y, 1.0)
+	cam.look_at(Vector3(0.0, center_y, 0.0))
+	cam.fov = 50.0
 	cam.current = true
 	add_child(cam)
 
 	# Column headers
-	_add_header("2D Control", Vector3(-COL_OFFSET, START_Y + 0.15, 0.01))
-	_add_header("3D VR Wrap", Vector3(COL_OFFSET, START_Y + 0.15, 0.01))
+	_add_label("2D", Vector3(COL_2D, START_Y + 0.12, 0.01), 16, Color(0.5, 0.7, 1.0))
+	_add_label("3D VR", Vector3(COL_3D, START_Y + 0.12, 0.01), 16, Color(1.0, 0.6, 0.3))
 
 
 func _build_rows() -> void:
@@ -67,113 +73,150 @@ func _build_rows() -> void:
 		var ctrl: Dictionary = CONTROLS[i]
 		var y := START_Y - i * ROW_SPACING
 
-		# Row label
-		var label := Label3D.new()
-		label.text = ctrl["name"]
-		label.font_size = 10
-		label.position = Vector3(-0.7, y, 0.01)
-		label.modulate = Color(0.7, 0.7, 0.75, 0.8)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		add_child(label)
+		# Row label on far left
+		_add_label(ctrl["name"], Vector3(-0.65, y, 0.01), 9, Color(0.5, 0.5, 0.55))
 
-		# 2D version — SubViewport rendered onto a quad
-		_add_2d_control(ctrl["scene"], ctrl["key"], Vector3(-COL_OFFSET, y, 0.0))
+		# 2D version — flat quad with SubViewport
+		_add_2d_version(ctrl["scene"], ctrl["key"], Vector3(COL_2D, y, 0.0))
 
-		# 3D version — VRRackControl wrapper
-		_add_3d_control(ctrl["scene"], ctrl["key"], Vector3(COL_OFFSET, y, 0.0))
-
-		# Thin separator line
-		if i < CONTROLS.size() - 1:
-			var sep := MeshInstance3D.new()
-			var box := BoxMesh.new()
-			box.size = Vector3(1.6, 0.001, 0.001)
-			sep.mesh = box
-			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(0.2, 0.2, 0.25, 0.3)
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			sep.material_override = mat
-			sep.position = Vector3(0.0, y - ROW_SPACING * 0.5, 0.0)
-			add_child(sep)
+		# 3D version — same control but with bezel chassis
+		_add_3d_version(ctrl["scene"], ctrl["key"], Vector3(COL_3D, y, 0.0))
 
 
-func _add_2d_control(scene_path: String, key: String, pos: Vector3) -> void:
-	var scene := load(scene_path) as PackedScene
-	if not scene:
+func _add_2d_version(scene_path: String, key: String, pos: Vector3) -> void:
+	var packed := load(scene_path) as PackedScene
+	if not packed:
+		_add_label("missing", pos, 8, Color(0.8, 0.2, 0.2))
 		return
 
-	var control_instance := scene.instantiate() as Control
-	if not control_instance:
+	var control := packed.instantiate()
+	if not control is Control:
+		_add_label("not Control", pos, 8, Color(0.8, 0.2, 0.2))
 		return
 
-	# Set a value so it's not at default
-	if "normalized_value" in control_instance:
-		control_instance.normalized_value = 0.65
-	if "control_label" in control_instance:
-		control_instance.control_label = key.to_upper()
+	# Configure
+	if "normalized_value" in control:
+		control.normalized_value = 0.65
+	if "control_label" in control:
+		control.control_label = key.to_upper()
+	if "level" in control:
+		control.level = 0.7
+	if "text" in control:
+		control.text = key.to_upper()
 
-	# Get pixel size
-	var px_size := control_instance.custom_minimum_size
-	if px_size == Vector2.ZERO:
-		px_size = Vector2(80, 180)
+	var px := control.custom_minimum_size
+	if px == Vector2.ZERO:
+		px = Vector2(80, 180)
 
 	# SubViewport
-	var viewport := SubViewport.new()
-	viewport.disable_3d = true
-	viewport.size = Vector2i(int(px_size.x * 2), int(px_size.y * 2))
-	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	viewport.transparent_bg = true
+	var vp := SubViewport.new()
+	vp.disable_3d = true
+	vp.size = Vector2i(int(px.x * 3), int(px.y * 3))
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	vp.transparent_bg = true
 
-	control_instance.anchors_preset = Control.PRESET_FULL_RECT
-	control_instance.anchor_right = 1.0
-	control_instance.anchor_bottom = 1.0
-	viewport.add_child(control_instance)
-	add_child(viewport)
+	control.anchors_preset = Control.PRESET_FULL_RECT
+	control.anchor_right = 1.0
+	control.anchor_bottom = 1.0
+	vp.add_child(control)
+	add_child(vp)
 
-	# Quad showing the viewport texture
-	var physical_size := px_size / 1000.0  # pixels to meters
-	var quad_mesh := MeshInstance3D.new()
-	quad_mesh.name = "2D_%s" % key
+	# Flat quad — no bezel, just the control
+	var phys := px / 1000.0
+	var mesh_inst := MeshInstance3D.new()
+	mesh_inst.name = "2D_%s" % key
 	var quad := QuadMesh.new()
-	quad.size = Vector2(physical_size.x, physical_size.y)
-	quad_mesh.mesh = quad
+	quad.size = Vector2(phys.x, phys.y)
+	mesh_inst.mesh = quad
 	var mat := StandardMaterial3D.new()
-	mat.albedo_texture = viewport.get_texture()
+	mat.albedo_texture = vp.get_texture()
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission_texture = viewport.get_texture()
-	mat.emission_energy_multiplier = 0.8
+	mat.emission_texture = vp.get_texture()
+	mat.emission_energy_multiplier = 1.0
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	quad_mesh.material_override = mat
-	quad_mesh.position = pos
-	add_child(quad_mesh)
+	mesh_inst.material_override = mat
+	mesh_inst.position = pos
+	add_child(mesh_inst)
 
 
-func _add_3d_control(scene_path: String, key: String, pos: Vector3) -> void:
-	var ctrl := VRRackControl.new()
-	ctrl.control_scene_path = scene_path
-	ctrl.name = "3D_%s" % key
-	ctrl.position = pos
-	add_child(ctrl)
-
-	# Set value and label after build
-	call_deferred("_configure_vr_control", ctrl, key)
-
-
-func _configure_vr_control(ctrl: VRRackControl, key: String) -> void:
-	if not is_instance_valid(ctrl):
+func _add_3d_version(scene_path: String, key: String, pos: Vector3) -> void:
+	var packed := load(scene_path) as PackedScene
+	if not packed:
+		_add_label("missing", pos, 8, Color(0.8, 0.2, 0.2))
 		return
-	ctrl.set_param_name(key.to_upper())
-	ctrl.set_normalized_value(0.65)
+
+	var control := packed.instantiate()
+	if not control is Control:
+		_add_label("not Control", pos, 8, Color(0.8, 0.2, 0.2))
+		return
+
+	# Configure
+	if "normalized_value" in control:
+		control.normalized_value = 0.65
+	if "control_label" in control:
+		control.control_label = key.to_upper()
+	if "level" in control:
+		control.level = 0.7
+	if "text" in control:
+		control.text = key.to_upper()
+
+	var px := control.custom_minimum_size
+	if px == Vector2.ZERO:
+		px = Vector2(80, 180)
+
+	# SubViewport
+	var vp := SubViewport.new()
+	vp.disable_3d = true
+	vp.size = Vector2i(int(px.x * 3), int(px.y * 3))
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	vp.transparent_bg = true
+
+	control.anchors_preset = Control.PRESET_FULL_RECT
+	control.anchor_right = 1.0
+	control.anchor_bottom = 1.0
+	vp.add_child(control)
+	add_child(vp)
+
+	var phys := px / 1000.0
+
+	# Bezel chassis — dark box behind the screen
+	var chassis := MeshInstance3D.new()
+	chassis.name = "Chassis_%s" % key
+	var chassis_mesh := BoxMesh.new()
+	chassis_mesh.size = Vector3(phys.x + 0.01, phys.y + 0.01, BEZEL_DEPTH)
+	chassis.mesh = chassis_mesh
+	var bezel_mat := StandardMaterial3D.new()
+	bezel_mat.albedo_color = Color(0.06, 0.06, 0.08)
+	bezel_mat.metallic = 0.3
+	bezel_mat.roughness = 0.7
+	chassis.material_override = bezel_mat
+	chassis.position = pos
+	add_child(chassis)
+
+	# Screen quad on front face of chassis
+	var screen := MeshInstance3D.new()
+	screen.name = "Screen_%s" % key
+	var quad := QuadMesh.new()
+	quad.size = Vector2(phys.x * 0.92, phys.y * 0.92)
+	screen.mesh = quad
+	var screen_mat := StandardMaterial3D.new()
+	screen_mat.albedo_texture = vp.get_texture()
+	screen_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	screen_mat.emission_enabled = true
+	screen_mat.emission_texture = vp.get_texture()
+	screen_mat.emission_energy_multiplier = 0.9
+	screen_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	screen.material_override = screen_mat
+	screen.position = pos + Vector3(0, 0, BEZEL_DEPTH * 0.5 + 0.001)
+	add_child(screen)
 
 
-func _add_header(text: String, pos: Vector3) -> void:
+func _add_label(text: String, pos: Vector3, font_size: int, color: Color) -> void:
 	var label := Label3D.new()
 	label.text = text
-	label.font_size = 14
+	label.font_size = font_size
 	label.position = pos
-	label.modulate = Color(0.9, 0.9, 0.95, 0.9)
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(label)
-
-
-func apply_grid_config(_config: Dictionary) -> void:
-	pass
