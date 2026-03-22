@@ -6,7 +6,7 @@ extends Node3D
 # critical_parameter: dt (timestep) — the hidden lambda. Too small: nothing happens fast enough. Too large: everything explodes.
 # triggers: dt ramp crosses stability threshold → STABLE becomes DRIFTING becomes EXPLODED, auto-reset → cycle repeats
 # emerges: The stability boundary from the interaction of spring stiffness and timestep. Chaos from deterministic math.
-# needs: Manual dt VR slider [missing — auto-ramp only]. Stiffness slider [missing]. Reset button [has auto-reset].
+# needs: Manual dt VR slider [has]. Stiffness slider [has]. Reset button [has]. Auto-ramp button [has].
 # relationships: Completes PhysicsSim_Foundations truth statement. Depends on verlet_integration (uses same method). Contrasts with fluid_simulation (SPH has its own CFL condition).
 # truth: Knowing where the illusion breaks is more important than knowing how it works.
 
@@ -32,6 +32,9 @@ var _label_dt: Label3D
 var _label_energy: Label3D
 var _label_status: Label3D
 var _exploded := false
+var _auto_ramp := false
+var _manual_dt := 0.016
+var _controls: Node3D
 
 const NUM_MASSES := 6
 const REST_LENGTH := 1.5
@@ -44,7 +47,36 @@ func _ready() -> void:
 	_setup_masses()
 	_setup_rendering()
 	_setup_labels()
+	_setup_controls()
 	_total_energy_initial = _compute_energy()
+
+
+func _setup_controls() -> void:
+	_controls = ArtifactControls.new()
+	_controls.position = Vector3(4.0, 3.0, 0.0)
+	_controls.rotation_degrees = Vector3(0, -45, 0)
+	add_child(_controls)
+
+	_controls.add_slider("TIMESTEP", 0.1, func(v: float):
+		_manual_dt = 0.005 + v * 0.2
+		_auto_ramp = false
+	)
+
+	_controls.add_slider("STIFFNESS", 0.5, func(v: float):
+		var new_k: float = 10.0 + v * 90.0
+		for spring in _springs:
+			spring["k"] = new_k
+	)
+
+	_controls.add_button("AUTO RAMP", func():
+		_auto_ramp = true
+		_reset()
+	)
+
+	_controls.add_button("RESET", func():
+		_auto_ramp = false
+		_reset()
+	)
 
 
 func _setup_masses() -> void:
@@ -143,7 +175,7 @@ func _setup_labels() -> void:
 	add_child(_label_status)
 
 	var hint := Label3D.new()
-	hint.text = "dt ramps up automatically"
+	hint.text = "Use sliders or press AUTO RAMP"
 	hint.font_size = 12
 	hint.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	hint.position = Vector3(0.0, 2.8, 3.0)
@@ -154,15 +186,17 @@ func _setup_labels() -> void:
 func _process(delta: float) -> void:
 	_time += delta
 
-	# Ramp dt over time: stable for 5s, then slowly increase
-	if _time < 5.0:
-		_dt = 0.016
-	elif _time < 20.0:
-		# Ramp from 0.016 to 0.15 over 15 seconds
-		var t := (_time - 5.0) / 15.0
-		_dt = lerp(0.016, 0.15, t * t)
+	if _auto_ramp:
+		# Ramp dt over time: stable for 5s, then slowly increase
+		if _time < 5.0:
+			_dt = 0.016
+		elif _time < 20.0:
+			var t := (_time - 5.0) / 15.0
+			_dt = lerp(0.016, 0.15, t * t)
+		else:
+			_dt = 0.15
 	else:
-		_dt = 0.15
+		_dt = _manual_dt
 
 	# Auto-reset after explosion
 	if _exploded:
