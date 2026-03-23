@@ -2,165 +2,96 @@
   "version": 2,
   "generator": "ada_facade_builder",
   "facade": {
-    "bays": 7,
-    "stories": 5,
+    "bays": 5,
+    "stories": 4,
     "symmetry": "bilateral",
-    "total_width": 14.0,
-    "total_height": 12.0,
-    "wall_depth": 0.3
+    "total_width": 10.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25
   },
   "zones": [
-    { "row": 0, "name": "Cornice", "height_multiplier": 0.4 },
-    { "row": 1, "name": "Gallery", "height_multiplier": 1.2 },
-    { "row": 2, "name": "Mezzanine", "height_multiplier": 0.7 },
-    { "row": 3, "name": "Shop", "height_multiplier": 1.4 },
-    { "row": 4, "name": "Plinth", "height_multiplier": 0.3 }
+    { "row": 0, "name": "Cornice", "height_multiplier": 0.35 },
+    { "row": 1, "name": "Gallery", "height_multiplier": 1.1 },
+    { "row": 2, "name": "Shop", "height_multiplier": 1.3 },
+    { "row": 3, "name": "Plinth", "height_multiplier": 0.25 }
   ],
   "materials": {
     "wall": "#D4C9B5",
     "zones": {
-      "Cornice": { "color": "#E8E2D8", "type": "carrara" },
-      "Gallery": { "color": "#E8E2D8", "type": "carrara" },
-      "Mezzanine": { "color": "#E0D8C8", "type": "carrara" },
-      "Shop": { "color": "#C8A860", "type": "siena" },
-      "Plinth": { "color": "#3D3832", "type": "dark_stone" }
+      "Cornice": { "color": "#E8E2D8" },
+      "Gallery": { "color": "#E0D8C8" },
+      "Shop": { "color": "#C8A860" },
+      "Plinth": { "color": "#3D3832" }
     }
   },
   "placements": [
-    { "col": 0, "row": 0, "part": "modillion", "col_span": 7 },
+    { "col": 0, "row": 0, "part": "dentil_cornice", "col_span": 5 },
 
-    { "col": 0, "row": 1, "part": "framed_marble_panel",
-      "sub_grid": {
-        "cols": [0.12, 0.76, 0.12],
-        "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "composite" } },
-          { "col": 1, "part": "arched_window", "params": { "keystone": true } },
-          { "col": 2, "part": "pilaster", "params": { "style": "composite" } }
-        ]
-      }
-    },
-    { "col": 1, "row": 1, "part": "framed_marble_panel",
-      "sub_grid": {
-        "cols": [0.12, 0.76, 0.12],
-        "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "composite" } },
-          { "col": 1, "part": "arched_window", "params": { "keystone": true } },
-          { "col": 2, "part": "pilaster", "params": { "style": "composite" } }
-        ]
-      }
-    },
-    { "col": 2, "row": 1, "part": "framed_marble_panel",
-      "sub_grid": {
-        "cols": [0.12, 0.76, 0.12],
-        "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "composite" } },
-          { "col": 1, "part": "arched_window", "params": { "keystone": true } },
-          { "col": 2, "part": "pilaster", "params": { "style": "composite" } }
-        ]
-      }
-    },
-    { "col": 3, "row": 1, "part": "framed_marble_panel",
-      "sub_grid": {
-        "cols": [0.12, 0.76, 0.12],
-        "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "composite" } },
-          { "col": 1, "part": "arched_window", "params": { "keystone": true } },
-          { "col": 2, "part": "pilaster", "params": { "style": "composite" } }
-        ]
-      }
-    },
+    { "col": 0, "row": 1, "part": "arched_window" },
+    { "col": 1, "row": 1, "part": "arched_window" },
+    { "col": 2, "row": 1, "part": "arched_window" },
 
-    { "col": 0, "row": 2, "part": "string_course", "col_span": 7 },
-
-    { "col": 0, "row": 3, "part": "framed_marble_panel",
-      "params": { "panel_material": "siena" },
+    { "col": 0, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "depth": 0.08 },
       "frames": [
-        { "width": 0.06, "profile": "ogee", "material": "carrara" },
-        { "width": 0.03, "profile": "fillet", "material": "grey_stone" },
-        { "width": 0.08, "profile": "flat", "material": "carrara" }
+        { "width": 0.12, "profile": "ogee", "material": "carrara" },
+        { "width": 0.05, "profile": "fillet", "material": "grey_stone" }
       ],
       "sub_grid": {
-        "cols": [0.15, 0.70, 0.15],
+        "cols": [0.12, 0.76, 0.12],
         "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "ionic" } },
+          { "col": 0, "part": "pilaster" },
           { "col": 1, "part": "framed_marble_panel",
-            "params": { "panel_material": "siena" },
+            "params": { "panel_material": "siena", "depth": 0.06 },
             "frames": [
-              { "width": 0.04, "profile": "half_round", "material": "carrara" },
-              { "width": 0.02, "profile": "fillet", "material": "grey_stone" }
+              { "width": 0.08, "profile": "half_round", "material": "carrara" }
             ]
           },
-          { "col": 2, "part": "pilaster", "params": { "style": "ionic" } }
+          { "col": 2, "part": "pilaster" }
         ]
       }
     },
-    { "col": 1, "row": 3, "part": "framed_marble_panel",
-      "params": { "panel_material": "siena" },
+    { "col": 1, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "depth": 0.08 },
       "frames": [
-        { "width": 0.06, "profile": "ogee", "material": "carrara" },
-        { "width": 0.03, "profile": "fillet", "material": "grey_stone" },
-        { "width": 0.08, "profile": "flat", "material": "carrara" }
+        { "width": 0.12, "profile": "ogee", "material": "carrara" },
+        { "width": 0.05, "profile": "fillet", "material": "grey_stone" }
       ],
       "sub_grid": {
-        "cols": [0.15, 0.70, 0.15],
+        "cols": [0.12, 0.76, 0.12],
         "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "ionic" } },
+          { "col": 0, "part": "pilaster" },
           { "col": 1, "part": "framed_marble_panel",
-            "params": { "panel_material": "siena" },
+            "params": { "panel_material": "siena", "depth": 0.06 },
             "frames": [
-              { "width": 0.04, "profile": "half_round", "material": "carrara" },
-              { "width": 0.02, "profile": "fillet", "material": "grey_stone" }
+              { "width": 0.08, "profile": "half_round", "material": "carrara" }
             ]
           },
-          { "col": 2, "part": "pilaster", "params": { "style": "ionic" } }
+          { "col": 2, "part": "pilaster" }
         ]
       }
     },
-    { "col": 2, "row": 3, "part": "framed_marble_panel",
-      "params": { "panel_material": "siena" },
+    { "col": 2, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "depth": 0.08 },
       "frames": [
-        { "width": 0.06, "profile": "ogee", "material": "carrara" },
-        { "width": 0.03, "profile": "fillet", "material": "grey_stone" },
-        { "width": 0.08, "profile": "flat", "material": "carrara" }
+        { "width": 0.12, "profile": "ogee", "material": "carrara" },
+        { "width": 0.05, "profile": "fillet", "material": "grey_stone" }
       ],
       "sub_grid": {
-        "cols": [0.15, 0.70, 0.15],
+        "cols": [0.12, 0.76, 0.12],
         "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "ionic" } },
+          { "col": 0, "part": "pilaster" },
           { "col": 1, "part": "framed_marble_panel",
-            "params": { "panel_material": "siena" },
+            "params": { "panel_material": "siena", "depth": 0.06 },
             "frames": [
-              { "width": 0.04, "profile": "half_round", "material": "carrara" },
-              { "width": 0.02, "profile": "fillet", "material": "grey_stone" }
+              { "width": 0.08, "profile": "half_round", "material": "carrara" }
             ]
           },
-          { "col": 2, "part": "pilaster", "params": { "style": "ionic" } }
-        ]
-      }
-    },
-    { "col": 3, "row": 3, "part": "framed_marble_panel",
-      "params": { "panel_material": "siena" },
-      "frames": [
-        { "width": 0.06, "profile": "ogee", "material": "carrara" },
-        { "width": 0.03, "profile": "fillet", "material": "grey_stone" },
-        { "width": 0.08, "profile": "flat", "material": "carrara" }
-      ],
-      "sub_grid": {
-        "cols": [0.15, 0.70, 0.15],
-        "placements": [
-          { "col": 0, "part": "pilaster", "params": { "style": "ionic" } },
-          { "col": 1, "part": "framed_marble_panel",
-            "params": { "panel_material": "siena" },
-            "frames": [
-              { "width": 0.04, "profile": "half_round", "material": "carrara" },
-              { "width": 0.02, "profile": "fillet", "material": "grey_stone" }
-            ]
-          },
-          { "col": 2, "part": "pilaster", "params": { "style": "ionic" } }
+          { "col": 2, "part": "pilaster" }
         ]
       }
     },
 
-    { "col": 0, "row": 4, "part": "ashlar", "col_span": 7 }
+    { "col": 0, "row": 3, "part": "rusticated_block", "col_span": 5 }
   ]
 }
