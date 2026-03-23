@@ -1285,6 +1285,111 @@
 				],
 				"size_group": "compact"
 			}
+		},
+		"octagon_square_floor": {
+			"name": "Octagon & Square Floor",
+			"lookup_name": "octagon_square_floor",
+			"description": "Procedural Pompeii mosaic floor with octagon-and-square tessellation — terracotta diamonds inside light octagons with dark interstitial squares.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/octagon_square_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"octagon",
+				"semi-regular"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"tumbling_blocks_floor": {
+			"name": "Tumbling Blocks Floor",
+			"lookup_name": "tumbling_blocks_floor",
+			"description": "Procedural Pompeii mosaic floor with tumbling blocks pattern — three rhombus shades create a 3D cube illusion on a hexagonal grid.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/tumbling_blocks_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"isometric"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"diamonds_squares_floor": {
+			"name": "Diamonds in Squares Floor",
+			"lookup_name": "diamonds_squares_floor",
+			"description": "Pompeii mosaic floor with diamonds-in-squares pattern. Each cell contains a 45-degree rotated diamond inscribed in a square, alternating dark/light in a checkerboard arrangement.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/diamonds_squares_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }
