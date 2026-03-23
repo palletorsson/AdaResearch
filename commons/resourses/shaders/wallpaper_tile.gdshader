@@ -41,7 +41,7 @@ uniform float noise_distort : hint_range(0.0, 0.1) = 0.0;
 // 3 = diamond: 45° rotated square inscribed in cell (Victorian encaustic)
 // 4 = diagonal_split_alt: 2 triangles (top-right / bottom-left diagonal)
 // 5 = tumbling_blocks: 3 rhombi per hex cell (Pompeii opus sectile 3D cubes)
-uniform int tile_shape : hint_range(0, 5, 1) = 0;
+uniform int tile_shape : hint_range(0, 6, 1) = 0;
 
 // ── Aging & Weathering ──────────────────────────────────────────────
 // Simulates centuries of wear on Roman/Italian mosaics and textiles.
@@ -213,6 +213,31 @@ vec3 apply_tile_shape(vec2 local, int shape, int tile_x, int tile_y) {
 		// Tumbling blocks — handled entirely in fragment(), not here.
 		// This is a passthrough; the real math is in tumbling_blocks_color().
 		return vec3(local, -1.0);
+	}
+
+	if (shape == 6) {
+		// Truchet pinwheel — true 90° rotation per tile.
+		// Diagonal direction alternates via (tile_x + tile_y) % 2,
+		// color assignment flips on odd rows so colors BREAK
+		// at boundaries instead of lining up into bands.
+		bool even_diag = ((tile_x + tile_y) % 2) == 0;
+		bool flip_colors = (tile_y % 2) == 1;
+		float region;
+
+		if (even_diag) {
+			// TL-BR diagonal
+			region = (local.y < local.x) ? 0.0 : 1.0;
+		} else {
+			// TR-BL diagonal
+			region = (local.y < (1.0 - local.x)) ? 0.0 : 1.0;
+		}
+
+		// Flip colors on odd rows for true pinwheel rotation
+		if (flip_colors) {
+			region = 1.0 - region;
+		}
+
+		return vec3(local, region);
 	}
 
 	return vec3(local, 0.0);
@@ -571,8 +596,8 @@ void fragment() {
 		if (emission_strength > 0.001) {
 			EMISSION = color * emission_strength;
 		}
-		return;
-	}
+	} else {
+	// ── Standard tile path (non-tumbling) ─────────────────────
 
 	// Get the symmetry-transformed UV within the domain
 	vec2 domain_uv = get_symmetric_uv(uv, wallpaper_group);
@@ -591,7 +616,7 @@ void fragment() {
 	vec2 region_offset = vec2(0.0);
 	if (tile_shape > 0 && sub_region > 0.0) {
 		// Shift by fraction of domain texture per sub-region
-		float domain_texel_size = 1.0 / max(textureSize(domain_texture, 0).x, 1);
+		float domain_texel_size = 1.0 / float(max(textureSize(domain_texture, 0).x, 1));
 		region_offset = vec2(sub_region * domain_texel_size * 2.0, sub_region * domain_texel_size);
 		domain_uv = fract(domain_uv + region_offset);
 	}
@@ -616,6 +641,15 @@ void fragment() {
 		// Distance to TR-BL diagonal: |x + y - 1| / sqrt(2)
 		float anti_diag = abs(shape_local.x + shape_local.y - 1.0) * 0.7071;
 		diag_dist = min(diag_dist, anti_diag);
+	}
+	if (tile_shape == 6) {
+		// Truchet: alternating diagonal per tile
+		bool even_diag = ((shape_tx + shape_ty) % 2) == 0;
+		if (even_diag) {
+			diag_dist = abs(shape_local.x - shape_local.y) * 0.7071;
+		} else {
+			diag_dist = abs(shape_local.x + shape_local.y - 1.0) * 0.7071;
+		}
 	}
 	if (tile_shape == 3) {
 		// Diamond edges: manhattan distance boundary
@@ -747,4 +781,5 @@ void fragment() {
 	if (emission_strength > 0.001) {
 		EMISSION = color * emission_strength;
 	}
+	} // end else (non-tumbling path)
 }

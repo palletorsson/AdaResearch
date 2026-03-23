@@ -119,7 +119,7 @@
 			"palette": ["#141418", "#EBE6D9", "#B32719", "#C09933", "#267366", "#D4A0A0"],
 			"default_technique": "opus_tessellatum",
 			"default_period": "roman_imperial",
-			"default_motifs": { "field": "star_pattern", "border": "meander_key", "medallion": "hex_rosette" }
+			"default_motifs": { "field": "nested_diamonds", "border": "meander_key", "threshold": "diamond_harlequin", "corner": "checkerboard", "medallion": "hex_rosette" }
 		}
 	},
 	"motifs": {
@@ -324,6 +324,94 @@
 				[0, 1, 2, 2, 1, 0],
 				[0, 0, 1, 1, 0, 0]
 			]
+		},
+		"pinwheel_truchet": {
+			"display": "Pinwheel / Truchet",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 4,
+			"domain": [
+				[0, 0, 1, 1],
+				[0, 1, 1, 0],
+				[1, 1, 0, 0],
+				[1, 0, 0, 1]
+			],
+			"source": "MANN Pompeii galleries"
+		},
+		"nested_diamonds": {
+			"display": "Nested Diamonds",
+			"group": "PMM",
+			"zone": "field",
+			"domain_size": 8,
+			"domain": [
+				[0, 0, 0, 1, 1, 0, 0, 0],
+				[0, 0, 1, 0, 0, 1, 0, 0],
+				[0, 1, 0, 0, 0, 0, 1, 0],
+				[1, 0, 0, 1, 1, 0, 0, 1],
+				[1, 0, 0, 1, 1, 0, 0, 1],
+				[0, 1, 0, 0, 0, 0, 1, 0],
+				[0, 0, 1, 0, 0, 1, 0, 0],
+				[0, 0, 0, 1, 1, 0, 0, 0]
+			],
+			"source": "MANN Pompeii galleries"
+		},
+		"diamond_harlequin": {
+			"display": "Diamond Harlequin",
+			"group": "PMM",
+			"zone": "threshold",
+			"domain_size": 4,
+			"domain": [
+				[0, 1, 0, 1],
+				[1, 0, 1, 0],
+				[0, 1, 0, 1],
+				[1, 0, 1, 0]
+			],
+			"source": "MANN Pompeii galleries"
+		},
+		"swastika_meander": {
+			"display": "Swastika Meander",
+			"group": "PMM",
+			"zone": "field",
+			"domain_size": 8,
+			"domain": [
+				[1, 1, 0, 0, 1, 1, 0, 0],
+				[1, 0, 0, 1, 1, 0, 0, 1],
+				[0, 0, 1, 1, 0, 0, 1, 1],
+				[0, 1, 1, 0, 0, 1, 1, 0],
+				[1, 1, 0, 0, 1, 1, 0, 0],
+				[1, 0, 0, 1, 1, 0, 0, 1],
+				[0, 0, 1, 1, 0, 0, 1, 1],
+				[0, 1, 1, 0, 0, 1, 1, 0]
+			],
+			"source": "MANN Pompeii galleries"
+		},
+		"sawtooth_border": {
+			"display": "Sawtooth / Arrow Border",
+			"group": "PM",
+			"zone": "border",
+			"domain_size": 4,
+			"domain": [
+				[0, 0, 0, 0],
+				[1, 0, 0, 0],
+				[1, 1, 0, 0],
+				[1, 1, 1, 0]
+			],
+			"source": "MANN Pompeii galleries"
+		},
+		"octagon_terracotta": {
+			"display": "Octagon with Terracotta",
+			"group": "P4M",
+			"zone": "field",
+			"domain_size": 6,
+			"domain": [
+				[0, 1, 1, 1, 1, 0],
+				[1, 0, 0, 0, 0, 1],
+				[1, 0, 2, 2, 0, 1],
+				[1, 0, 2, 2, 0, 1],
+				[1, 0, 0, 0, 0, 1],
+				[0, 1, 1, 1, 1, 0]
+			],
+			"source": "MANN Pompeii galleries"
 		}
 	}
 }
