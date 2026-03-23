@@ -16,10 +16,12 @@ extends Node3D
 class_name TumblingBlocksFloor
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd")
 
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
 @export var cubes_short: int = 6
 @export var border_width: int = 2
+@export var border_motif: int = BorderMotifs.Motif.SOLID
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_medium: Color = MosaicPalette.MEDIUM
 @export var color_light: Color = MosaicPalette.LIGHT
@@ -208,15 +210,18 @@ func _build() -> void:
 		return verts
 
 	# ── 1. Border bands ──
+	var terra_verts := PackedVector3Array()
 	if border_width > 0:
-		# Top band
-		dark_verts = _add_rect.call(dark_verts, 0.0, 0.0, fw, border_m)
-		# Bottom band
-		dark_verts = _add_rect.call(dark_verts, 0.0, fh - border_m, fw, border_m)
-		# Left band
-		dark_verts = _add_rect.call(dark_verts, 0.0, border_m, border_m, fh - 2.0 * border_m)
-		# Right band
-		dark_verts = _add_rect.call(dark_verts, fw - border_m, border_m, border_m, fh - 2.0 * border_m)
+		var result := BorderMotifs.draw_border_frame(
+			dark_verts, light_verts, terra_verts,
+			0.0, 0.0,
+			fw, fh,
+			border_m, rx,
+			border_motif, false
+		)
+		dark_verts = result["dark"]
+		light_verts = result["light"]
+		terra_verts = result["terra"]
 
 	# ── 2. Tumbling blocks field ──
 	# Each cube is centered at (cx, cz) and composed of 3 rhombuses:
@@ -294,6 +299,14 @@ func _build() -> void:
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		arr_mesh.surface_set_material(surf_idx, MosaicPalette.create_material(color_light, wear_level))
+		surf_idx += 1
+
+	if terra_verts.size() > 0:
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = terra_verts
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		arr_mesh.surface_set_material(surf_idx, MosaicPalette.create_material(MosaicPalette.TERRACOTTA, wear_level))
 		surf_idx += 1
 
 	if grout_verts.size() > 0:

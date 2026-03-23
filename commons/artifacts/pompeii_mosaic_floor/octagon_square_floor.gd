@@ -16,9 +16,12 @@ extends Node3D
 class_name OctagonSquareFloor
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd")
 
 @export var floor_size: Vector2 = Vector2(1.0, 0.8)
 @export var tiles_short: int = 5
+@export var border_widths: Array[int] = [1, 1]
+@export var border_motif: int = BorderMotifs.Motif.SOLID
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var color_terracotta: Color = MosaicPalette.TERRACOTTA
@@ -38,6 +41,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if fs is Array and fs.size() >= 2:
 		floor_size = Vector2(float(fs[0]), float(fs[1]))
 	tiles_short = int(config.get("tiles_short", tiles_short))
+	wear_level = float(config.get("wear_level", wear_level))
+	var bw = config.get("border_widths", null)
+	if bw is Array:
+		border_widths.clear()
+		for v in bw:
+			border_widths.append(int(v))
 	_build()
 
 
@@ -54,8 +63,10 @@ func _build() -> void:
 	var long_m := maxf(floor_size.x, floor_size.y)
 	var is_wide := floor_size.x >= floor_size.y
 
-	# Border = 2 cell-widths on each side (1 dark outer, 1 checker)
-	var border_cells := 2
+	# Border width from border_widths array
+	var border_cells: int = 0
+	for bw in border_widths:
+		border_cells += bw
 	var total_short := tiles_short + border_cells * 2
 	var pitch := short_m / float(total_short)
 	var total_long := int(round(long_m / pitch))
@@ -105,65 +116,22 @@ func _build() -> void:
 		verts.append(Vector3(cx - r, y_off, cz))
 		return verts
 
-	# ── 1. Border ──
-	# Layer 0: outer dark band (1 cell wide)
-	# Top
-	dark_verts = _add_rect.call(dark_verts, 0.0, 0.0, fw, pitch)
-	# Bottom
-	dark_verts = _add_rect.call(dark_verts, 0.0, fh - pitch, fw, pitch)
-	# Left
-	dark_verts = _add_rect.call(dark_verts, 0.0, pitch, pitch, fh - pitch * 2)
-	# Right
-	dark_verts = _add_rect.call(dark_verts, fw - pitch, pitch, pitch, fh - pitch * 2)
-
-	# Layer 1: checker band (1 cell wide) — 2x2 checkerboard within each cell
-	var cs := pitch * 0.5  # each checker square is half a cell
-
-	# Top checker band (full width between outer dark corners)
-	var num_h := int(round((fw - pitch * 2) / cs))
-	for row in range(2):
-		for i in range(num_h):
-			var x := pitch + i * cs
-			var z := pitch + row * cs
-			var is_dark_sq := ((i + row) % 2 == 0)
-			if is_dark_sq:
-				dark_verts = _add_rect.call(dark_verts, x, z, cs, cs)
-			else:
-				light_verts = _add_rect.call(light_verts, x, z, cs, cs)
-
-	# Bottom checker band
-	for row in range(2):
-		for i in range(num_h):
-			var x := pitch + i * cs
-			var z := fh - pitch * 2 + row * cs
-			var is_dark_sq := ((i + row) % 2 == 0)
-			if is_dark_sq:
-				dark_verts = _add_rect.call(dark_verts, x, z, cs, cs)
-			else:
-				light_verts = _add_rect.call(light_verts, x, z, cs, cs)
-
-	# Left checker band (between top and bottom bands)
-	var num_v := int(round((fh - pitch * 4) / cs))
-	for col in range(2):
-		for i in range(num_v):
-			var x := pitch + col * cs
-			var z := pitch * 2 + i * cs
-			var is_dark_sq := ((i + col) % 2 == 0)
-			if is_dark_sq:
-				dark_verts = _add_rect.call(dark_verts, x, z, cs, cs)
-			else:
-				light_verts = _add_rect.call(light_verts, x, z, cs, cs)
-
-	# Right checker band
-	for col in range(2):
-		for i in range(num_v):
-			var x := fw - pitch * 2 + col * cs
-			var z := pitch * 2 + i * cs
-			var is_dark_sq := ((i + col) % 2 == 0)
-			if is_dark_sq:
-				dark_verts = _add_rect.call(dark_verts, x, z, cs, cs)
-			else:
-				light_verts = _add_rect.call(light_verts, x, z, cs, cs)
+	# ── 1. Border bands ──
+	var border_terra_verts := PackedVector3Array()
+	var inset: int = 0
+	for i in border_widths.size():
+		var bw: int = border_widths[i]
+		var result := BorderMotifs.draw_border_frame(
+			dark_verts, light_verts, border_terra_verts,
+			inset * pitch, inset * pitch,
+			(gw - inset * 2) * pitch, (gh - inset * 2) * pitch,
+			bw * pitch, pitch,
+			border_motif, i % 2 == 1
+		)
+		dark_verts = result["dark"]
+		light_verts = result["light"]
+		border_terra_verts = result["terra"]
+		inset += bw
 
 	# ── 2. Octagon-and-square field ──
 	var margin := half_grout
@@ -251,41 +219,40 @@ func _build() -> void:
 				grout_verts.append(Vector3(ox - dh, 0, oz + pitch - cut - dh))
 				grout_verts.append(Vector3(ox + cut - dh, 0, oz + pitch - dh))
 
+	# Merge border terracotta into field terracotta
+	if border_terra_verts.size() > 0:
+		terra_verts.append_array(border_terra_verts)
+
 	# ── Build ArrayMesh ──
 	var arr_mesh := ArrayMesh.new()
-	var surface_idx := 0
 
 	if dark_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = dark_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_dark, wear_level))
-		surface_idx += 1
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_dark, wear_level))
 
 	if light_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_light, wear_level))
-		surface_idx += 1
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, wear_level))
 
 	if terra_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = terra_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_terracotta, wear_level))
-		surface_idx += 1
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_terracotta, wear_level))
 
 	if grout_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = grout_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(grout_color, wear_level))
-		surface_idx += 1
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(grout_color, wear_level))
 
 	_mi = MeshInstance3D.new()
 	_mi.mesh = arr_mesh

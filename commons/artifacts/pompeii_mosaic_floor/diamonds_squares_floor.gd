@@ -18,10 +18,12 @@ extends Node3D
 class_name DiamondsSquaresFloor
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd")
 
 @export var floor_size: Vector2 = Vector2(1.0, 0.75)
 @export var tiles_short: int = 8
 @export var border_width: int = 2
+@export var border_motif: int = BorderMotifs.Motif.SOLID
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var grout_color: Color = MosaicPalette.GROUT
@@ -93,17 +95,19 @@ func _build() -> void:
 		verts.append(c)
 		return verts
 
-	# ── 1. Border bands (dark) ──
+	# ── 1. Border bands ──
+	var terra_verts := PackedVector3Array()
 	if border_width > 0:
-		var bw := border_width
-		# Top band
-		dark_verts = _add_rect.call(dark_verts, 0.0, 0.0, float(gw) * ts, float(bw) * ts)
-		# Bottom band
-		dark_verts = _add_rect.call(dark_verts, 0.0, float(gh - bw) * ts, float(gw) * ts, float(bw) * ts)
-		# Left band (between top and bottom)
-		dark_verts = _add_rect.call(dark_verts, 0.0, float(bw) * ts, float(bw) * ts, float(gh - bw * 2) * ts)
-		# Right band
-		dark_verts = _add_rect.call(dark_verts, float(gw - bw) * ts, float(bw) * ts, float(bw) * ts, float(gh - bw * 2) * ts)
+		var result := BorderMotifs.draw_border_frame(
+			dark_verts, light_verts, terra_verts,
+			0.0, 0.0,
+			float(gw) * ts, float(gh) * ts,
+			float(border_width) * ts, ts,
+			border_motif, false
+		)
+		dark_verts = result["dark"]
+		light_verts = result["light"]
+		terra_verts = result["terra"]
 
 	# ── 2. Diamond-in-square field ──
 	# Each cell: 4 corner triangles + 1 center diamond (2 triangles)
@@ -205,6 +209,13 @@ func _build() -> void:
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, 0.3))
+
+	if terra_verts.size() > 0:
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = terra_verts
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(MosaicPalette.TERRACOTTA, 0.4))
 
 	if grout_verts.size() > 0:
 		var arrays := []

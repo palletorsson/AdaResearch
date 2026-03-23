@@ -18,10 +18,12 @@ extends Node3D
 class_name SwastikaMeanderFloor
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd")
 
 @export var floor_size: Vector2 = Vector2(1.0, 1.0)
 @export var cells_short: int = 3
 @export var border_widths: Array[int] = [2, 1, 2]
+@export var border_motif: int = BorderMotifs.Motif.SOLID
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var color_accent: Color = MosaicPalette.TERRACOTTA
@@ -172,26 +174,20 @@ func _build() -> void:
 		return verts
 
 	# ── 1. Border bands ──
+	var terra_verts := PackedVector3Array()
 	var inset: int = 0
 	for i in border_widths.size():
 		var bw: int = border_widths[i]
-		var is_dark := (i % 2 == 0)
-		var verts = dark_verts if is_dark else light_verts
-
-		var rx := inset
-		var ry := inset
-		var rw := gw_px - inset * 2
-		var rh := gh_px - inset * 2
-
-		verts = _add_rect.call(verts, rx * px_m, ry * px_m, rw * px_m, bw * px_m)
-		verts = _add_rect.call(verts, rx * px_m, (ry + rh - bw) * px_m, rw * px_m, bw * px_m)
-		verts = _add_rect.call(verts, rx * px_m, (ry + bw) * px_m, bw * px_m, (rh - bw * 2) * px_m)
-		verts = _add_rect.call(verts, (rx + rw - bw) * px_m, (ry + bw) * px_m, bw * px_m, (rh - bw * 2) * px_m)
-
-		if is_dark:
-			dark_verts = verts
-		else:
-			light_verts = verts
+		var result := BorderMotifs.draw_border_frame(
+			dark_verts, light_verts, terra_verts,
+			inset * px_m, inset * px_m,
+			(gw_px - inset * 2) * px_m, (gh_px - inset * 2) * px_m,
+			bw * px_m, px_m,
+			border_motif, i % 2 == 1
+		)
+		dark_verts = result["dark"]
+		light_verts = result["light"]
+		terra_verts = result["terra"]
 		inset += bw
 
 	# ── 2. Meander field ──
@@ -260,6 +256,10 @@ func _build() -> void:
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, wear_level))
+
+	# Merge border terracotta into accent verts (both use terracotta color)
+	if terra_verts.size() > 0:
+		accent_verts.append_array(terra_verts)
 
 	if accent_verts.size() > 0:
 		var arrays := []
