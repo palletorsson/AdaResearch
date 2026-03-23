@@ -4,8 +4,9 @@ uniform vec4 base_color : source_color = vec4(0.92, 0.9, 0.87, 1.0);
 uniform vec4 vein_color : source_color = vec4(0.4, 0.38, 0.35, 1.0);
 uniform float vein_scale : hint_range(1.0, 20.0) = 8.0;
 uniform float vein_intensity : hint_range(0.0, 1.0) = 0.6;
-uniform float roughness : hint_range(0.0, 1.0) = 0.3;
+uniform float roughness : hint_range(0.0, 1.0) = 0.25;
 uniform float normal_strength : hint_range(0.0, 2.0) = 0.5;
+uniform float subsurface_strength : hint_range(0.0, 1.0) = 0.15;
 
 // ---- Simplex-style 3D noise (hash-based) ----
 
@@ -86,22 +87,48 @@ float snoise(vec3 v) {
 	return 105.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
 }
 
-// ---- Fractal Brownian Motion (4 octaves, stretched for directional veins) ----
+// ---- Domain-warped FBM for swirling marble veins ----
 
-float fbm_vein(vec3 p) {
-	// Stretch along one axis to create directional veining
-	vec3 stretched = vec3(p.x * 0.5, p.y * 2.0, p.z * 0.7);
-
+// FBM with octave rotation to break axis alignment
+float fbm_marble(vec3 p, int octaves) {
 	float value = 0.0;
 	float amplitude = 0.5;
 	float frequency = 1.0;
 
-	for (int i = 0; i < 4; i++) {
-		value += amplitude * snoise(stretched * frequency);
-		frequency *= 2.17;
-		amplitude *= 0.48;
+	for (int i = 0; i < octaves; i++) {
+		value += amplitude * snoise(p * frequency);
+		// Rotate sampling direction each octave
+		p = vec3(
+			p.x * 0.8 - p.z * 0.6,
+			p.y,
+			p.x * 0.6 + p.z * 0.8
+		) + vec3(100.0);
+		frequency *= 2.1;
+		amplitude *= 0.47;
 	}
 	return value;
+}
+
+// Directional FBM — stretched along one axis for vein flow
+float fbm_vein(vec3 p) {
+	vec3 stretched = vec3(p.x * 0.5, p.y * 2.0, p.z * 0.7);
+	return fbm_marble(stretched, 5);
+}
+
+// Domain-warped veining — warp coordinates with fbm, then sample fbm again
+float domain_warped_veins(vec3 p) {
+	// First warp layer
+	float warp_x = fbm_marble(p + vec3(0.0, 0.0, 100.0), 4);
+	float warp_y = fbm_marble(p + vec3(100.0, 0.0, 0.0), 4);
+	float warp_z = fbm_marble(p + vec3(0.0, 100.0, 0.0), 4);
+	vec3 q = p + vec3(warp_x, warp_y, warp_z) * 2.5;
+
+	// Second warp layer (warp the warp) for extra turbulence
+	float warp2_x = fbm_marble(q * 0.8 + vec3(37.2, 81.4, 12.8), 3);
+	float warp2_y = fbm_marble(q * 0.8 + vec3(64.9, 12.6, 53.1), 3);
+	vec3 r = q + vec3(warp2_x, warp2_y, 0.0) * 1.5;
+
+	return fbm_vein(r);
 }
 
 // Secondary turbulence layer for fine detail
@@ -123,37 +150,43 @@ void fragment() {
 	vec3 world_pos = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec3 uv3 = world_pos * vein_scale;
 
-	// Primary vein pattern (directional, stretched noise)
-	float vein_primary = fbm_vein(uv3);
+	// Primary vein pattern (domain-warped for swirling organic flow)
+	float vein_primary = domain_warped_veins(uv3);
 
-	// Secondary fine veins (rotated sampling for variation)
-	float vein_secondary = fbm_vein(uv3 * 1.7 + vec3(31.7, 17.3, 5.9));
+	// Secondary fine veins (offset sampling for variation)
+	float vein_secondary = domain_warped_veins(uv3 * 1.5 + vec3(31.7, 17.3, 5.9));
 
 	// Fine turbulence detail
 	float detail = turbulence(uv3 * 2.5 + vec3(7.1, 13.2, 29.8));
 
-	// Combine vein layers: primary provides structure, secondary adds variety
-	float vein = vein_primary * 0.6 + vein_secondary * 0.3 + detail * 0.1;
+	// Combine vein layers
+	float vein = vein_primary * 0.55 + vein_secondary * 0.30 + detail * 0.15;
 
 	// Sharpen veins with a smooth threshold
-	vein = smoothstep(-0.1, 0.4, vein) * vein_intensity;
+	vein = smoothstep(-0.15, 0.45, vein) * vein_intensity;
 
 	// Mix base and vein colors
 	vec3 color = mix(base_color.rgb, vein_color.rgb, vein);
 
-	// Subtle color variation across the surface (large-scale)
-	float color_shift = snoise(world_pos * vein_scale * 0.15) * 0.03;
-	color += vec3(color_shift, color_shift * 0.8, color_shift * 0.6);
+	// Subtle warm color variation across the surface (large-scale drift)
+	float color_shift = snoise(world_pos * vein_scale * 0.12) * 0.035;
+	color += vec3(color_shift, color_shift * 0.75, color_shift * 0.5);
 
 	ALBEDO = color;
 	ROUGHNESS = roughness;
 	METALLIC = 0.0;
 	SPECULAR = 0.5;
 
+	// Subsurface scattering — polished marble has a warm translucent glow
+	if (subsurface_strength > 0.001) {
+		SSS_STRENGTH = subsurface_strength;
+		BACKLIGHT = vec3(subsurface_strength * 0.3);
+	}
+
 	// Normal perturbation from noise gradient (finite differences)
 	float eps = 0.01;
-	float nx = fbm_vein(uv3 + vec3(eps, 0.0, 0.0)) - fbm_vein(uv3 - vec3(eps, 0.0, 0.0));
-	float ny = fbm_vein(uv3 + vec3(0.0, eps, 0.0)) - fbm_vein(uv3 - vec3(0.0, eps, 0.0));
+	float nx = domain_warped_veins(uv3 + vec3(eps, 0.0, 0.0)) - domain_warped_veins(uv3 - vec3(eps, 0.0, 0.0));
+	float ny = domain_warped_veins(uv3 + vec3(0.0, eps, 0.0)) - domain_warped_veins(uv3 - vec3(eps, 0.0, 0.0));
 	vec3 perturbed_normal = normalize(vec3(-nx * normal_strength, -ny * normal_strength, 1.0));
 	NORMAL_MAP = perturbed_normal * 0.5 + 0.5;
 	NORMAL_MAP_DEPTH = normal_strength;

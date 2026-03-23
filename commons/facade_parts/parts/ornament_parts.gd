@@ -242,6 +242,42 @@ static func cartouche(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	return root
 
 
+## Impost line / string course band: thin projecting horizontal band at a
+## configurable height fraction within the cell. Typically placed at the arch
+## spring line (y_frac ≈ 0.88) to create the visual impost course.
+## Params: depth (float, default 0.035), band_height (float, default 0.025),
+##         y_frac (float, default 0.88 — fraction of cell height for band center).
+static func impost_line(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("ImpostLine")
+	var depth: float = p.get("depth", 0.035)
+	var band_h: float = p.get("band_height", 0.025)
+	var y_frac: float = p.get("y_frac", 0.88)
+	var band_y: float = h * y_frac
+
+	var _mat_imp := _M.stone(Color(0.84, 0.80, 0.74))
+
+	# Main projecting band
+	var band := _box("Band", Vector3(w, band_h, depth),
+		Vector3(w * 0.5, band_y, depth * 0.5),
+		CSGShape3D.OPERATION_UNION, _mat_imp)
+	root.add_child(band)
+
+	# Thin fillet above and below for visual definition
+	var fillet_h: float = band_h * 0.25
+	var fillet_depth: float = depth * 0.6
+	var fillet_top := _box("FilletTop", Vector3(w, fillet_h, fillet_depth),
+		Vector3(w * 0.5, band_y + band_h * 0.5 + fillet_h * 0.5, fillet_depth * 0.5),
+		CSGShape3D.OPERATION_UNION, _mat_imp)
+	root.add_child(fillet_top)
+
+	var fillet_bot := _box("FilletBot", Vector3(w, fillet_h, fillet_depth),
+		Vector3(w * 0.5, band_y - band_h * 0.5 - fillet_h * 0.5, fillet_depth * 0.5),
+		CSGShape3D.OPERATION_UNION, _mat_imp)
+	root.add_child(fillet_bot)
+
+	return root
+
+
 ## Pilaster ornament: flat decorative pilaster strip (thinner than structural).
 static func pilaster_orn(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("PilasterOrn")
@@ -290,6 +326,8 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 			return cartouche(w, h, params)
 		"pilaster_orn":
 			return pilaster_orn(w, h, params)
+		"impost_line":
+			return impost_line(w, h, params)
 		_:
 			push_warning("OrnamentParts: unknown part '%s'" % part_name)
 			var fallback := Node3D.new()
@@ -300,4 +338,5 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 static func get_names() -> PackedStringArray:
 	return PackedStringArray([
 		"pediment_tri", "pediment_broken", "medallion", "cartouche", "pilaster_orn",
+		"impost_line",
 	])

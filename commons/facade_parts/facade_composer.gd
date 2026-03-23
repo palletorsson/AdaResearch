@@ -38,8 +38,8 @@ static func build_from_file(json_path: String) -> Node3D:
 ## Build from a Dictionary (already parsed JSON). Returns Node3D.
 static func build_from_dict(data: Dictionary) -> Node3D:
 	var version: int = data.get("version", 0) as int
-	if version != 2:
-		push_warning("FacadeComposer: Unexpected version %d (expected 2)" % version)
+	if version < 2 or version > 3:
+		push_warning("FacadeComposer: Unexpected version %d (expected 2 or 3)" % version)
 
 	var facade_data: Dictionary = data.get("facade", {})
 	var zones_data: Array = data.get("zones", [])
@@ -186,46 +186,87 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		var cell_x := float(col) * cell_width
 		var cell_y := row_y_bottoms[row]
 
-		# Sub-grid: subdivide this cell into proportional columns
+		# Sub-grid: subdivide this cell into proportional columns or rows
 		if placement.has("sub_grid") and placement["sub_grid"] is Dictionary:
 			var sg: Dictionary = placement["sub_grid"]
-			var sg_cols: Array = sg.get("cols", [1.0])
 			var sg_placements: Array = sg.get("placements", [])
 
-			# Normalize column proportions
-			var total_prop: float = 0.0
-			for prop in sg_cols:
-				total_prop += float(prop)
+			if sg.has("rows"):
+				# Row-based sub_grid: subdivide vertically
+				var sg_rows: Array = sg.get("rows", [1.0])
+				var total_rprop: float = 0.0
+				for prop in sg_rows:
+					total_rprop += float(prop)
 
-			var sub_x: float = 0.0
-			for sg_placement in sg_placements:
-				if not sg_placement is Dictionary:
-					continue
-				var sg_col: int = int(sg_placement.get("col", 0))
-				if sg_col >= sg_cols.size():
-					continue
+				for sg_placement in sg_placements:
+					if not sg_placement is Dictionary:
+						continue
+					var sg_row: int = int(sg_placement.get("row", 0))
+					if sg_row >= sg_rows.size():
+						continue
 
-				# Compute sub-cell position and width
-				var prev_x: float = 0.0
-				for ci in range(0, sg_col):
-					prev_x += float(sg_cols[ci]) / total_prop * ew
+					# Compute sub-cell Y offset and height (row 0 = top of cell)
+					var prev_y: float = 0.0
+					for ri_sg in range(0, sg_row):
+						prev_y += float(sg_rows[ri_sg]) / total_rprop * eh
 
-				var sg_w: float = float(sg_cols[sg_col]) / total_prop * ew
-				var sg_part: String = str(sg_placement.get("part", ""))
-				if sg_part.is_empty():
-					continue
+					var sg_h: float = float(sg_rows[sg_row]) / total_rprop * eh
+					var sg_part: String = str(sg_placement.get("part", ""))
+					if sg_part.is_empty():
+						continue
 
-				var sg_params: Dictionary = {}
-				if sg_placement.has("params") and sg_placement["params"] is Dictionary:
-					sg_params = sg_placement["params"].duplicate()
-				if sg_placement.has("frames") and sg_placement["frames"] is Array:
-					sg_params["frames"] = sg_placement["frames"]
-				sg_params["wall_depth"] = wall_depth
+					var sg_params: Dictionary = {}
+					if sg_placement.has("params") and sg_placement["params"] is Dictionary:
+						sg_params = sg_placement["params"].duplicate()
+					if sg_placement.has("frames") and sg_placement["frames"] is Array:
+						sg_params["frames"] = sg_placement["frames"]
+					sg_params["wall_depth"] = wall_depth
 
-				var sg_node := _FPL.create(sg_part, sg_w, eh, sg_params)
-				sg_node.position = Vector3(cell_x + prev_x, cell_y, wall_depth * 0.5)
-				sg_node.name = "%s_c%d_r%d_sg%d" % [sg_part, col, row, sg_col]
-				elements_container.add_child(sg_node)
+					# Row 0 = top, so Y offset from cell bottom = eh - prev_y - sg_h
+					var sub_y := eh - prev_y - sg_h
+					var sg_node := _FPL.create(sg_part, ew, sg_h, sg_params)
+					sg_node.position = Vector3(cell_x, cell_y + sub_y, wall_depth * 0.5)
+					sg_node.name = "%s_c%d_r%d_sgr%d" % [sg_part, col, row, sg_row]
+					elements_container.add_child(sg_node)
+
+			else:
+				# Column-based sub_grid: subdivide horizontally
+				var sg_cols: Array = sg.get("cols", [1.0])
+
+				# Normalize column proportions
+				var total_prop: float = 0.0
+				for prop in sg_cols:
+					total_prop += float(prop)
+
+				var sub_x: float = 0.0
+				for sg_placement in sg_placements:
+					if not sg_placement is Dictionary:
+						continue
+					var sg_col: int = int(sg_placement.get("col", 0))
+					if sg_col >= sg_cols.size():
+						continue
+
+					# Compute sub-cell position and width
+					var prev_x: float = 0.0
+					for ci in range(0, sg_col):
+						prev_x += float(sg_cols[ci]) / total_prop * ew
+
+					var sg_w: float = float(sg_cols[sg_col]) / total_prop * ew
+					var sg_part: String = str(sg_placement.get("part", ""))
+					if sg_part.is_empty():
+						continue
+
+					var sg_params: Dictionary = {}
+					if sg_placement.has("params") and sg_placement["params"] is Dictionary:
+						sg_params = sg_placement["params"].duplicate()
+					if sg_placement.has("frames") and sg_placement["frames"] is Array:
+						sg_params["frames"] = sg_placement["frames"]
+					sg_params["wall_depth"] = wall_depth
+
+					var sg_node := _FPL.create(sg_part, sg_w, eh, sg_params)
+					sg_node.position = Vector3(cell_x + prev_x, cell_y, wall_depth * 0.5)
+					sg_node.name = "%s_c%d_r%d_sg%d" % [sg_part, col, row, sg_col]
+					elements_container.add_child(sg_node)
 			continue  # Skip normal placement — sub_grid handled it
 
 		# Generate the part via FacadePartLibrary
@@ -263,14 +304,21 @@ static func _apply_bilateral_symmetry(container: Node3D, total_width: float,
 		var col: int = placement.get("col", 0) as int
 		var row: int = placement.get("row", 0) as int
 		var part_name: String = str(placement.get("part", ""))
+		var col_span: int = placement.get("col_span", 1) as int
+		var row_span: int = placement.get("row_span", 1) as int
 
-		# Only mirror columns in the left half (0 to half-1)
-		if col >= half:
+		# Skip elements that already span the full width or reach beyond the half
+		if col + col_span > half:
 			continue
 		if part_name == "" or part_name == "plain_wall":
 			continue
 
-		var mirror_col := bays - 1 - col
+		# Mirror col: place the right edge of the mirrored span symmetrically
+		var mirror_col := bays - col_span - col
+		# Safety: skip if mirrored placement would go out of bounds
+		if mirror_col < 0 or mirror_col + col_span > bays:
+			continue
+
 		# Check if mirror position already has a placement
 		var already_placed := false
 		for existing in placements_data:
@@ -281,8 +329,6 @@ static func _apply_bilateral_symmetry(container: Node3D, total_width: float,
 		if already_placed:
 			continue
 
-		var col_span: int = placement.get("col_span", 1) as int
-		var row_span: int = placement.get("row_span", 1) as int
 		var ew := cell_width * float(col_span)
 		var eh: float = 0.0
 		for ri in range(row, mini(row + row_span, stories)):
@@ -292,6 +338,86 @@ static func _apply_bilateral_symmetry(container: Node3D, total_width: float,
 		if placement.has("params") and placement["params"] is Dictionary:
 			elem_params = placement["params"].duplicate()
 		elem_params["wall_depth"] = wall_depth
+
+		# Pass sub_grid to mirrored elements so they render the same internal layout
+		if placement.has("sub_grid") and placement["sub_grid"] is Dictionary:
+			var sg: Dictionary = placement["sub_grid"]
+			var sg_placements: Array = sg.get("placements", [])
+
+			var mirror_cell_x := float(mirror_col) * cell_width
+			var cell_y := row_y_bottoms[row]
+
+			if sg.has("rows"):
+				# Row-based sub_grid mirroring
+				var sg_rows: Array = sg.get("rows", [1.0])
+				var total_rprop: float = 0.0
+				for prop in sg_rows:
+					total_rprop += float(prop)
+
+				for sg_placement in sg_placements:
+					if not sg_placement is Dictionary:
+						continue
+					var sg_row: int = int(sg_placement.get("row", 0))
+					if sg_row >= sg_rows.size():
+						continue
+
+					var prev_y: float = 0.0
+					for ri_sg in range(0, sg_row):
+						prev_y += float(sg_rows[ri_sg]) / total_rprop * eh
+
+					var sg_h: float = float(sg_rows[sg_row]) / total_rprop * eh
+					var sg_part: String = str(sg_placement.get("part", ""))
+					if sg_part.is_empty():
+						continue
+
+					var sg_params: Dictionary = {}
+					if sg_placement.has("params") and sg_placement["params"] is Dictionary:
+						sg_params = sg_placement["params"].duplicate()
+					if sg_placement.has("frames") and sg_placement["frames"] is Array:
+						sg_params["frames"] = sg_placement["frames"]
+					sg_params["wall_depth"] = wall_depth
+
+					var sub_y := eh - prev_y - sg_h
+					var sg_node := _FPL.create(sg_part, ew, sg_h, sg_params)
+					sg_node.position = Vector3(mirror_cell_x, cell_y + sub_y, wall_depth * 0.5)
+					sg_node.name = "%s_c%d_r%d_sgr%d_mirror" % [sg_part, mirror_col, row, sg_row]
+					container.add_child(sg_node)
+			else:
+				# Column-based sub_grid mirroring
+				var sg_cols: Array = sg.get("cols", [1.0])
+
+				var total_prop: float = 0.0
+				for prop in sg_cols:
+					total_prop += float(prop)
+
+				for sg_placement in sg_placements:
+					if not sg_placement is Dictionary:
+						continue
+					var sg_col: int = int(sg_placement.get("col", 0))
+					if sg_col >= sg_cols.size():
+						continue
+
+					var prev_x: float = 0.0
+					for ci in range(0, sg_col):
+						prev_x += float(sg_cols[ci]) / total_prop * ew
+
+					var sg_w: float = float(sg_cols[sg_col]) / total_prop * ew
+					var sg_part: String = str(sg_placement.get("part", ""))
+					if sg_part.is_empty():
+						continue
+
+					var sg_params: Dictionary = {}
+					if sg_placement.has("params") and sg_placement["params"] is Dictionary:
+						sg_params = sg_placement["params"].duplicate()
+					if sg_placement.has("frames") and sg_placement["frames"] is Array:
+						sg_params["frames"] = sg_placement["frames"]
+					sg_params["wall_depth"] = wall_depth
+
+					var sg_node := _FPL.create(sg_part, sg_w, eh, sg_params)
+					sg_node.position = Vector3(mirror_cell_x + prev_x, cell_y, wall_depth * 0.5)
+					sg_node.name = "%s_c%d_r%d_sg%d_mirror" % [sg_part, mirror_col, row, sg_col]
+					container.add_child(sg_node)
+			continue
 
 		var part_node := _FPL.create(part_name, ew, eh, elem_params)
 		var cell_x := float(mirror_col) * cell_width

@@ -20,10 +20,11 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 	match part_name:
 		# Columns
 		"col_tuscan", "col_doric", "col_ionic", "col_corinthian", "pilaster", \
-		"col_solomonic", "col_composite":
+		"half_column", "engaged_column", "col_solomonic", "col_composite":
 			return _Col.create(part_name, w, h, params)
 		# Openings (windows + doors)
-		"rect_window", "arched_window", "venetian_bifora", "rose_window", "porthole", \
+		"rect_window", "arched_window", "venetian_bifora", \
+		"rose_window", "porthole", \
 		"single_door", "double_door", "arched_door", "portal":
 			return _Open.create(part_name, w, h, params)
 		# Arches
@@ -33,7 +34,8 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 		"juliet_balcony", "projecting_balcony", "loggia":
 			return _Bal.create(part_name, w, h, params)
 		# Cornices
-		"dentil_cornice", "cyma_recta", "string_course", "fascia", "modillion":
+		"dentil_cornice", "dentil_band", "cyma_recta", "cyma_recta_moulding", \
+		"string_course", "fascia", "rect_window_band", "cornice_shelf", "modillion":
 			return _Cor.create(part_name, w, h, params)
 		# Shutters
 		"louvered_shutter", "paneled_shutter":
@@ -45,7 +47,8 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 		"plain_wall", "rusticated_block", "stucco", "ashlar":
 			return _Surf.create(part_name, w, h, params)
 		# Ornaments
-		"pediment_tri", "pediment_broken", "medallion", "cartouche", "pilaster_orn":
+		"pediment_tri", "pediment_broken", "medallion", "cartouche", "pilaster_orn", \
+		"impost_line":
 			return _Orn.create(part_name, w, h, params)
 		# Frame & marble panels
 		"framed_marble_panel":

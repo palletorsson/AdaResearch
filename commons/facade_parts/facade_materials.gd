@@ -7,6 +7,7 @@ extends RefCounted
 ## Use from_zone() to map zone/material names from study packs to Materials.
 
 const MARBLE_SHADER_PATH := "res://commons/facade_parts/shaders/marble.gdshader"
+const MARBLE_SURFACE_SHADER_PATH := "res://commons/facade_parts/marble_surface.gdshader"
 
 # ---------------------------------------------------------------------------
 # Stone — rough, matte, natural rock surface
@@ -48,10 +49,70 @@ static func marble(base_color: Color = Color(0.92, 0.9, 0.87), vein_color: Color
 		mat.set_shader_parameter("vein_color", vein_color)
 		mat.set_shader_parameter("vein_scale", 8.0)
 		mat.set_shader_parameter("vein_intensity", 0.6)
-		mat.set_shader_parameter("roughness", 0.3)
+		mat.set_shader_parameter("roughness", 0.25)
 		mat.set_shader_parameter("normal_strength", 0.5)
+		mat.set_shader_parameter("subsurface_strength", 0.15)
 	else:
 		push_warning("FacadePartMaterials: Could not load marble shader at %s" % MARBLE_SHADER_PATH)
+	return mat
+
+
+# ---------------------------------------------------------------------------
+# Marble Surface — shader-based with style variants (Carrara, Siena, Breccia)
+# ---------------------------------------------------------------------------
+## Uses marble_surface.gdshader which supports vein_style: 0=Carrara, 1=Siena, 2=Breccia.
+## Preferred over marble() for zone backgrounds as it offers style control.
+static func marble_surface(style_name: String, color_override: Color = Color.WHITE, has_override: bool = false) -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	var shader := load(MARBLE_SURFACE_SHADER_PATH) as Shader
+	if not shader:
+		push_warning("FacadePartMaterials: Could not load marble_surface shader at %s" % MARBLE_SURFACE_SHADER_PATH)
+		return mat
+
+	mat.shader = shader
+
+	match style_name:
+		"siena":
+			# Giallo di Siena — warm golden-amber base with cream/ivory veins
+			var base_c: Color = color_override if has_override else Color(0.831, 0.647, 0.271)
+			var vein_c: Color = base_c.lightened(0.5) if has_override else Color(0.961, 0.902, 0.784)
+			mat.set_shader_parameter("base_color", base_c)
+			mat.set_shader_parameter("vein_color", vein_c)
+			mat.set_shader_parameter("vein_style", 1)  # swirled
+			mat.set_shader_parameter("vein_intensity", 0.75)
+			mat.set_shader_parameter("vein_scale", 4.0)
+			mat.set_shader_parameter("roughness_base", 0.22)
+			mat.set_shader_parameter("subsurface_strength", 0.25)
+		"carrara":
+			var base_c: Color = color_override if has_override else Color(0.94, 0.93, 0.90)
+			var vein_c: Color = base_c.darkened(0.25) if has_override else Color(0.70, 0.68, 0.65)
+			mat.set_shader_parameter("base_color", base_c)
+			mat.set_shader_parameter("vein_color", vein_c)
+			mat.set_shader_parameter("vein_style", 0)  # veined
+			mat.set_shader_parameter("vein_intensity", 0.4)
+			mat.set_shader_parameter("vein_scale", 8.0)
+			mat.set_shader_parameter("roughness_base", 0.25)
+			mat.set_shader_parameter("subsurface_strength", 0.15)
+		"dark_stone":
+			var base_c: Color = color_override if has_override else Color(0.25, 0.24, 0.22)
+			var vein_c: Color = base_c.darkened(0.3) if has_override else Color(0.18, 0.17, 0.16)
+			mat.set_shader_parameter("base_color", base_c)
+			mat.set_shader_parameter("vein_color", vein_c)
+			mat.set_shader_parameter("vein_style", 2)  # breccia
+			mat.set_shader_parameter("vein_intensity", 0.3)
+			mat.set_shader_parameter("vein_scale", 6.0)
+			mat.set_shader_parameter("roughness_base", 0.40)
+		_:
+			# Generic marble fallback
+			var base_c: Color = color_override if has_override else Color(0.92, 0.90, 0.87)
+			var vein_c: Color = base_c.darkened(0.4) if has_override else Color(0.65, 0.62, 0.58)
+			mat.set_shader_parameter("base_color", base_c)
+			mat.set_shader_parameter("vein_color", vein_c)
+			mat.set_shader_parameter("vein_style", 0)
+			mat.set_shader_parameter("vein_intensity", 0.5)
+			mat.set_shader_parameter("vein_scale", 6.0)
+			mat.set_shader_parameter("roughness_base", 0.30)
+
 	return mat
 
 
@@ -131,6 +192,12 @@ static func from_zone(zone_name: String, zone_color: String = "") -> Material:
 			if has_override:
 				return marble(color_override, color_override.darkened(0.5))
 			return marble()
+		"siena":
+			return marble_surface("siena", color_override, has_override)
+		"carrara":
+			return marble_surface("carrara", color_override, has_override)
+		"dark_stone":
+			return marble_surface("dark_stone", color_override, has_override)
 		"wood":
 			var c: Color = color_override if has_override else Color(0.45, 0.32, 0.2)
 			return wood(c)

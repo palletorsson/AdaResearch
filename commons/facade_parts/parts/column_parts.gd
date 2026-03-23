@@ -328,11 +328,17 @@ static func col_corinthian(w: float, h: float, p: Dictionary = {}) -> Node3D:
 
 
 ## Pilaster: flat column, CSGBox3D shaft with small capital box on top.
+## Optional params:
+##   style: "plain" | "ionic" | "corinthian" | "doric" — changes the capital form.
+##   fluted: bool — adds vertical flute grooves on the shaft face.
+##   depth: float — projection from wall (default 0.08).
 static func pilaster(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("Pilaster")
 	var depth: float = p.get("depth", 0.08)
+	var style: String = p.get("style", "plain")
+	var fluted: bool = p.get("fluted", false)
 	var pilaster_w: float = w * 0.25
-	var capital_h: float = h * 0.04
+	var capital_h: float = h * 0.05 if style == "ionic" or style == "corinthian" else h * 0.04
 	var base_h: float = h * 0.03
 	var shaft_h: float = h - capital_h - base_h
 	var cx := w * 0.5
@@ -351,11 +357,242 @@ static func pilaster(w: float, h: float, p: Dictionary = {}) -> Node3D:
 		CSGShape3D.OPERATION_UNION, body_mat)
 	root.add_child(shaft)
 
-	# Capital
-	var capital := _box("Capital", Vector3(pilaster_w * 1.3, capital_h, depth * 1.4),
-		Vector3(cx, base_h + shaft_h + capital_h * 0.5, depth * 0.5),
+	# Fluting: vertical grooves on the front face of the shaft
+	if fluted:
+		var flute_count: int = p.get("flute_count", 5)
+		var flute_w: float = pilaster_w / float(flute_count * 2 + 1)
+		var flute_depth: float = depth * 0.15
+		var flute_combiner := _combiner("Flutes", CSGShape3D.OPERATION_SUBTRACTION)
+		flute_combiner.position = Vector3.ZERO
+		root.add_child(flute_combiner)
+		for i in range(flute_count):
+			var fx := cx - pilaster_w * 0.5 + flute_w + float(i) * flute_w * 2.0 + flute_w * 0.5
+			var flute := _box("Flute_%d" % i,
+				Vector3(flute_w * 0.7, shaft_h * 0.92, flute_depth),
+				Vector3(fx, base_h + shaft_h * 0.5, depth + flute_depth * 0.3),
+				CSGShape3D.OPERATION_UNION, body_mat)
+			flute_combiner.add_child(flute)
+
+	# Capital — style-dependent
+	var cap_y := base_h + shaft_h
+	match style:
+		"ionic":
+			# Ionic capital: echinus band + volute scrolls + abacus
+			var echinus_h := capital_h * 0.30
+			var volute_h := capital_h * 0.40
+			var abacus_h := capital_h * 0.30
+			# Echinus
+			var echinus := _box("Echinus",
+				Vector3(pilaster_w * 1.15, echinus_h, depth * 1.2),
+				Vector3(cx, cap_y + echinus_h * 0.5, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(echinus)
+			# Volute scrolls (small cylinders at sides)
+			var scroll_r := pilaster_w * 0.25
+			var scroll_y := cap_y + echinus_h + volute_h * 0.45
+			var scroll_left := _cyl("VoluteLeft", scroll_r, depth * 0.8,
+				Vector3(cx - pilaster_w * 0.55, scroll_y, depth * 0.5), 12,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			scroll_left.rotation_degrees.x = 90.0
+			root.add_child(scroll_left)
+			var scroll_right := _cyl("VoluteRight", scroll_r, depth * 0.8,
+				Vector3(cx + pilaster_w * 0.55, scroll_y, depth * 0.5), 12,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			scroll_right.rotation_degrees.x = 90.0
+			root.add_child(scroll_right)
+			# Cushion connecting scrolls
+			var cushion := _box("VoluteCushion",
+				Vector3(pilaster_w * 1.1, volute_h * 0.5, depth * 1.0),
+				Vector3(cx, cap_y + echinus_h + volute_h * 0.25, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(cushion)
+			# Abacus
+			var abacus := _box("Abacus",
+				Vector3(pilaster_w * 1.3, abacus_h, depth * 1.4),
+				Vector3(cx, cap_y + echinus_h + volute_h + abacus_h * 0.5, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(abacus)
+		"corinthian":
+			# Simplified Corinthian: bell with two acanthus tiers + abacus
+			var bell_h := capital_h * 0.65
+			var abacus_h := capital_h * 0.35
+			var tier1 := _box("AcanthusLower",
+				Vector3(pilaster_w * 1.15, bell_h * 0.5, depth * 1.2),
+				Vector3(cx, cap_y + bell_h * 0.25, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(tier1)
+			var tier2 := _box("AcanthusUpper",
+				Vector3(pilaster_w * 1.3, bell_h * 0.5, depth * 1.3),
+				Vector3(cx, cap_y + bell_h * 0.75, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(tier2)
+			var abacus := _box("Abacus",
+				Vector3(pilaster_w * 1.4, abacus_h, depth * 1.5),
+				Vector3(cx, cap_y + bell_h + abacus_h * 0.5, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(abacus)
+		_:
+			# Plain / doric: simple capital block
+			var capital := _box("Capital", Vector3(pilaster_w * 1.3, capital_h, depth * 1.4),
+				Vector3(cx, cap_y + capital_h * 0.5, depth * 0.5),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			root.add_child(capital)
+
+	return root
+
+
+## Half-column (engaged column): semi-circular cross-section projecting from the wall.
+## The shaft is a full CSGCylinder3D positioned so the back half sits behind z=0 (the wall
+## face), giving the appearance of a column embedded in masonry. Supports Ionic (default),
+## Corinthian, or Doric style capitals, and optional fluting.
+static func half_column(w: float, h: float, p: Dictionary = {}) -> Node3D:
+	var root := _root("HalfColumn")
+	var style: String = p.get("style", "ionic")
+	var fluted: bool = p.get("fluted", true)
+	var radius: float = p.get("radius", w * 0.35)
+	var flute_count: int = p.get("flute_count", 20)
+
+	# Proportions
+	var base_h: float = h * 0.06
+	var capital_h: float = h * 0.07 if style == "corinthian" else h * 0.06
+	var shaft_h: float = h - base_h - capital_h
+	var cx := w * 0.5
+	# Push center to z=0 so the front half projects forward
+	var cz := 0.0
+
+	# Cream/ivory stone colors matching Galleria Vittorio Emanuele
+	var shaft_color := Color(0.90, 0.87, 0.80)   # cream/ivory
+	var cap_color := Color(0.88, 0.84, 0.76)      # slightly darker cream
+	var shaft_mat := _M.stone(shaft_color, 0.75)
+	var cap_mat := _M.stone(cap_color, 0.70)
+
+	# --- Clipper: a box behind the wall plane to subtract the back half ---
+	var clip := _combiner("WallClip", CSGShape3D.OPERATION_SUBTRACTION)
+	# We add the clip last so it cuts everything. Build parts inside a combiner first.
+	var body := _combiner("Body", CSGShape3D.OPERATION_UNION)
+	root.add_child(body)
+
+	# --- Base molding ---
+	# Torus-shaped base (wider cylinder)
+	var base_plinth := _cyl("BasePlinth", radius * 1.4, base_h * 0.4,
+		Vector3(cx, base_h * 0.2, cz), 24,
 		CSGShape3D.OPERATION_UNION, cap_mat)
-	root.add_child(capital)
+	body.add_child(base_plinth)
+
+	var base_torus := _cyl("BaseTorus", radius * 1.25, base_h * 0.6,
+		Vector3(cx, base_h * 0.7, cz), 24,
+		CSGShape3D.OPERATION_UNION, cap_mat)
+	body.add_child(base_torus)
+
+	# --- Shaft ---
+	var shaft := _cyl("Shaft", radius, shaft_h,
+		Vector3(cx, base_h + shaft_h * 0.5, cz), 24,
+		CSGShape3D.OPERATION_UNION, shaft_mat)
+	body.add_child(shaft)
+
+	# --- Fluting (front-half only visible after clipping) ---
+	if fluted:
+		_add_flutes(body, radius, shaft_h,
+			flute_count, Vector3(cx, base_h + shaft_h * 0.5, cz))
+
+	# --- Capital (style-dependent) ---
+	var cap_y := base_h + shaft_h
+
+	match style:
+		"doric":
+			# Necking + echinus + abacus
+			var necking_h := capital_h * 0.2
+			var echinus_h := capital_h * 0.35
+			var abacus_h := capital_h * 0.45
+
+			var necking := _cyl("Necking", radius * 0.95, necking_h,
+				Vector3(cx, cap_y + necking_h * 0.5, cz), 20,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(necking)
+
+			var echinus := _cyl("Echinus", radius * 1.25, echinus_h,
+				Vector3(cx, cap_y + necking_h + echinus_h * 0.5, cz), 20,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(echinus)
+
+			var abacus := _box("Abacus", Vector3(radius * 2.8, abacus_h, radius * 2.0),
+				Vector3(cx, cap_y + necking_h + echinus_h + abacus_h * 0.5, cz),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(abacus)
+
+		"corinthian":
+			# Bell capital with acanthus layers
+			var bell_h := capital_h * 0.65
+			var lip_h := capital_h * 0.15
+			var abacus_h := capital_h * 0.2
+
+			var acanthus_lo := _cyl("AcanthusLower", radius * 1.25, bell_h * 0.4,
+				Vector3(cx, cap_y + bell_h * 0.2, cz), 24,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(acanthus_lo)
+
+			var acanthus_hi := _cyl("AcanthusUpper", radius * 1.45, bell_h * 0.35,
+				Vector3(cx, cap_y + bell_h * 0.55, cz), 24,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(acanthus_hi)
+
+			var lip := _cyl("Lip", radius * 1.55, lip_h,
+				Vector3(cx, cap_y + bell_h + lip_h * 0.5, cz), 24,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(lip)
+
+			var abacus := _box("Abacus", Vector3(radius * 3.0, abacus_h, radius * 2.0),
+				Vector3(cx, cap_y + bell_h + lip_h + abacus_h * 0.5, cz),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(abacus)
+
+		_:
+			# Ionic (default) — echinus + volute scrolls + abacus
+			var echinus_h := capital_h * 0.30
+			var volute_h := capital_h * 0.45
+			var abacus_h := capital_h * 0.25
+
+			var echinus := _cyl("Echinus", radius * 1.15, echinus_h,
+				Vector3(cx, cap_y + echinus_h * 0.5, cz), 24,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(echinus)
+
+			# Volute scrolls (left and right)
+			var scroll_r := radius * 0.40
+			var scroll_y := cap_y + echinus_h + volute_h * 0.4
+
+			var scroll_left := _cyl("VoluteLeft", scroll_r, volute_h * 0.55,
+				Vector3(cx - radius * 1.2, scroll_y, cz), 16,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			scroll_left.rotation_degrees.z = 90.0
+			body.add_child(scroll_left)
+
+			var scroll_right := _cyl("VoluteRight", scroll_r, volute_h * 0.55,
+				Vector3(cx + radius * 1.2, scroll_y, cz), 16,
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			scroll_right.rotation_degrees.z = 90.0
+			body.add_child(scroll_right)
+
+			var cushion := _box("VoluteCushion",
+				Vector3(radius * 2.4, volute_h * 0.45, radius * 1.6),
+				Vector3(cx, cap_y + echinus_h + volute_h * 0.22, cz),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(cushion)
+
+			var abacus := _box("Abacus", Vector3(radius * 2.8, abacus_h, radius * 2.0),
+				Vector3(cx, cap_y + echinus_h + volute_h + abacus_h * 0.5, cz),
+				CSGShape3D.OPERATION_UNION, cap_mat)
+			body.add_child(abacus)
+
+	# --- Wall-clip box: remove everything behind z=0 (the wall face) ---
+	# The clip box extends behind the wall to cut the back half of all cylinders.
+	var clip_depth := radius * 2.0
+	var clip_box := _box("ClipBox",
+		Vector3(w * 2.0, h * 1.1, clip_depth),
+		Vector3(cx, h * 0.5, -clip_depth * 0.5),
+		CSGShape3D.OPERATION_UNION)
+	clip.add_child(clip_box)
+	body.add_child(clip)
 
 	return root
 
@@ -468,6 +705,8 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 			return col_corinthian(w, h, params)
 		"pilaster":
 			return pilaster(w, h, params)
+		"half_column", "engaged_column":
+			return half_column(w, h, params)
 		"col_solomonic":
 			return col_solomonic(w, h, params)
 		"col_composite":
@@ -482,5 +721,6 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 static func get_names() -> PackedStringArray:
 	return PackedStringArray([
 		"col_tuscan", "col_doric", "col_ionic", "col_corinthian",
-		"pilaster", "col_solomonic", "col_composite",
+		"pilaster", "half_column", "engaged_column",
+		"col_solomonic", "col_composite",
 	])

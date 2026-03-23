@@ -121,59 +121,206 @@ static func rect_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	return root
 
 
-## Arched window: rectangular lower portion + semicircular arch at top, keystone.
+## Arched window: rectangular lower portion + semicircular arch at top.
+## Supports keystone, archivolt molding, spandrel fill, ornate frame, and
+## dark/reflective glazing — designed for Galleria-style gallery arches.
+## Params:
+##   keystone (bool=false)     — trapezoidal keystone at apex
+##   ornate_frame (bool=false) — thicker, projected frame with archivolt ring
+##   arch_ratio (float=0.5)    — arch semicircle radius as fraction of opening_w
+##   arch_height_frac (float=0.85) — how much of zone height the opening uses
+##   archivolt_depth (float=0.02)  — forward projection of archivolt molding
+##   mullion (bool=false)      — vertical mullion bar
 static func arched_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("ArchedWindow")
 	var inset: float = p.get("inset", 0.12)
 	var frame_t: float = p.get("frame_thickness", 0.04)
 	var wall_depth: float = p.get("wall_depth", 0.25)
-	var margin_x: float = w * inset
-	var margin_y: float = h * 0.08
-	var opening_w: float = w - margin_x * 2.0
-	var arch_r: float = opening_w * 0.5
-	var rect_h: float = h - margin_y * 2.0 - arch_r
-	var cx := w * 0.5
-	var rect_cy := margin_y + rect_h * 0.5
+	var has_keystone: bool = p.get("keystone", false)
+	var ornate: bool = p.get("ornate_frame", false)
+	var arch_ratio: float = p.get("arch_ratio", 0.5)
+	var height_frac: float = p.get("arch_height_frac", 0.85)
+	var archivolt_depth: float = p.get("archivolt_depth", 0.02)
+	var has_mullion: bool = p.get("mullion", false)
 
-	var mat_glass := _M.stone(Color(0.08, 0.1, 0.15))
+	# --- Geometry ---
+	var margin_x: float = w * inset
+	var total_opening_h: float = h * height_frac
+	var bottom_margin: float = h * (1.0 - height_frac) * 0.5
+	var opening_w: float = w - margin_x * 2.0
+	var arch_r: float = opening_w * arch_ratio
+	var rect_h: float = total_opening_h - arch_r
+	if rect_h < 0.0:
+		rect_h = 0.0
+		arch_r = total_opening_h
+	var cx := w * 0.5
+	var rect_bottom := bottom_margin
+	var rect_cy := rect_bottom + rect_h * 0.5
+	var spring_y := rect_bottom + rect_h  # where the arch starts
+
+	# --- Materials ---
+	# Dark / reflective glass
+	var mat_glass := StandardMaterial3D.new()
+	mat_glass.albedo_color = Color(0.04, 0.05, 0.08)
+	mat_glass.roughness = 0.08
+	mat_glass.metallic = 0.6
+	mat_glass.metallic_specular = 0.9
+	mat_glass.cull_mode = BaseMaterial3D.CULL_BACK
+	mat_glass.resource_name = "ArchGlass"
+
 	var mat_frame := _M.stone(Color(0.75, 0.72, 0.66))
 	var mat_keystone := _M.stone(Color(0.82, 0.78, 0.72))
+	var mat_wall := _M.stone(Color(0.78, 0.74, 0.68))
+	# Archivolt molding — slightly lighter than frame
+	var mat_archivolt := _M.stone(Color(0.80, 0.76, 0.70))
+	if ornate:
+		frame_t *= 1.4
 
-	# Glass pane (dark void behind opening)
-	var glass_rect := _box("GlassPaneRect", Vector3(opening_w, rect_h, 0.01),
-		Vector3(cx, rect_cy, 0.03), CSGShape3D.OPERATION_UNION, mat_glass)
-	root.add_child(glass_rect)
+	# ==================================================================
+	# 1. Glass panes (dark / reflective window behind the opening)
+	# ==================================================================
+	var glass_z := 0.005  # slightly recessed behind frame
 
-	var glass_arch := _cyl("GlassPaneArch", arch_r, 0.01,
-		Vector3(cx, margin_y + rect_h, 0.03), 24,
+	# Rectangular glass
+	if rect_h > 0.001:
+		var glass_rect := _box("GlassPaneRect", Vector3(opening_w, rect_h, 0.008),
+			Vector3(cx, rect_cy, glass_z), CSGShape3D.OPERATION_UNION, mat_glass)
+		root.add_child(glass_rect)
+
+	# Semicircular glass (upper arch)
+	var glass_arch := _cyl("GlassPaneArch", arch_r, 0.008,
+		Vector3(cx, spring_y, glass_z), 32,
 		CSGShape3D.OPERATION_UNION, mat_glass)
 	glass_arch.rotation_degrees.x = 90.0
 	root.add_child(glass_arch)
 
-	# Sill
-	var sill := _box("Sill", Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
-		Vector3(cx, margin_y - frame_t * 0.5, wall_depth * 0.2),
+	# Clip lower half of the glass cylinder (keep only semicircle)
+	var glass_clip := _box("GlassArchClip",
+		Vector3(opening_w + 0.1, arch_r + 0.01, 0.03),
+		Vector3(cx, spring_y - (arch_r + 0.01) * 0.5, glass_z),
+		CSGShape3D.OPERATION_SUBTRACTION)
+	root.add_child(glass_clip)
+
+	# ==================================================================
+	# 2. Spandrel fill — wall-colored triangles above the arch curve
+	#    Fills the rectangular zone corners that sit above the semicircle.
+	# ==================================================================
+	var spandrel_top := spring_y + arch_r
+	var spandrel_h := spandrel_top - spring_y
+	var spandrel_z := 0.01
+	if spandrel_h > 0.01:
+		# Left spandrel (box covering left quarter, then arch subtracts the curve)
+		var sp_combiner := _combiner("SpandrelGroup")
+		root.add_child(sp_combiner)
+
+		# Full rectangular block spanning the arch zone
+		var sp_block := _box("SpanBlock",
+			Vector3(opening_w + frame_t * 2.0, spandrel_h, wall_depth * 0.18),
+			Vector3(cx, spring_y + spandrel_h * 0.5, wall_depth * 0.09),
+			CSGShape3D.OPERATION_UNION, mat_wall)
+		sp_combiner.add_child(sp_block)
+
+		# Subtract the arch cylinder from the spandrel block
+		var sp_cut := _cyl("SpanCut", arch_r + 0.001, wall_depth * 0.5,
+			Vector3(cx, spring_y, wall_depth * 0.09), 32,
+			CSGShape3D.OPERATION_SUBTRACTION)
+		sp_cut.rotation_degrees.x = 90.0
+		sp_combiner.add_child(sp_cut)
+
+	# ==================================================================
+	# 3. Sill (bottom ledge)
+	# ==================================================================
+	var sill := _box("Sill",
+		Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
+		Vector3(cx, rect_bottom - frame_t * 0.5, wall_depth * 0.2),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(sill)
 
-	# Jambs
-	var jamb_left := _box("JambLeft", Vector3(frame_t, rect_h, wall_depth * 0.3),
-		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, rect_cy, wall_depth * 0.15),
+	# ==================================================================
+	# 4. Jambs (vertical side frames)
+	# ==================================================================
+	var jamb_h := rect_h
+	var jamb_depth := wall_depth * 0.3 if not ornate else wall_depth * 0.38
+	var jamb_left := _box("JambLeft",
+		Vector3(frame_t, jamb_h, jamb_depth),
+		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, rect_cy, jamb_depth * 0.5),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(jamb_left)
 
-	var jamb_right := _box("JambRight", Vector3(frame_t, rect_h, wall_depth * 0.3),
-		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, rect_cy, wall_depth * 0.15),
+	var jamb_right := _box("JambRight",
+		Vector3(frame_t, jamb_h, jamb_depth),
+		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, rect_cy, jamb_depth * 0.5),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(jamb_right)
 
-	# Keystone
-	var keystone_h := arch_r * 0.25
-	var keystone := _box("Keystone",
-		Vector3(frame_t * 2.0, keystone_h, wall_depth * 0.35),
-		Vector3(cx, margin_y + rect_h + arch_r - keystone_h * 0.3, wall_depth * 0.18),
-		CSGShape3D.OPERATION_UNION, mat_keystone)
-	root.add_child(keystone)
+	# ==================================================================
+	# 5. Archivolt — raised molding ring following the arch curve
+	#    Built as outer cylinder minus inner cylinder, projected forward.
+	# ==================================================================
+	var archivolt_t := frame_t * 1.2  # thickness of the ring
+	var archivolt_z := archivolt_depth + wall_depth * 0.08  # projected in front of wall
+
+	var av_combiner := _combiner("ArchivolGroup")
+	root.add_child(av_combiner)
+
+	# Outer ring
+	var av_outer := _cyl("ArchivoltOuter", arch_r + archivolt_t, archivolt_depth + 0.01,
+		Vector3(cx, spring_y, archivolt_z), 32,
+		CSGShape3D.OPERATION_UNION, mat_archivolt)
+	av_outer.rotation_degrees.x = 90.0
+	av_combiner.add_child(av_outer)
+
+	# Inner subtraction (hollow the ring)
+	var av_inner := _cyl("ArchivoltInner", arch_r - 0.002, archivolt_depth + 0.05,
+		Vector3(cx, spring_y, archivolt_z), 32,
+		CSGShape3D.OPERATION_SUBTRACTION)
+	av_inner.rotation_degrees.x = 90.0
+	av_combiner.add_child(av_inner)
+
+	# Clip bottom half of archivolt (keep only semicircular top)
+	var av_clip := _box("ArchivoltClip",
+		Vector3(arch_r * 3.0, arch_r + 0.02, archivolt_depth + 0.1),
+		Vector3(cx, spring_y - (arch_r + 0.02) * 0.5, archivolt_z),
+		CSGShape3D.OPERATION_SUBTRACTION)
+	av_combiner.add_child(av_clip)
+
+	# ==================================================================
+	# 6. Keystone — trapezoidal block at the apex of the arch
+	# ==================================================================
+	if has_keystone:
+		var ks_h := arch_r * 0.30
+		var ks_top_w := frame_t * 1.2
+		var ks_bot_w := frame_t * 2.2
+		var ks_depth := archivolt_depth + wall_depth * 0.12
+		var ks_center_y := spring_y + arch_r - ks_h * 0.35
+
+		# Build trapezoidal keystone with CSGPolygon3D
+		# Profile in XY, extruded along Z (depth)
+		var ks_profile := PackedVector2Array()
+		ks_profile.append(Vector2(-ks_bot_w * 0.5, -ks_h * 0.5))   # bottom-left
+		ks_profile.append(Vector2( ks_bot_w * 0.5, -ks_h * 0.5))   # bottom-right
+		ks_profile.append(Vector2( ks_top_w * 0.5,  ks_h * 0.5))   # top-right
+		ks_profile.append(Vector2(-ks_top_w * 0.5,  ks_h * 0.5))   # top-left
+
+		var keystone := CSGPolygon3D.new()
+		keystone.name = "Keystone"
+		keystone.polygon = ks_profile
+		keystone.depth = ks_depth
+		keystone.mode = CSGPolygon3D.MODE_DEPTH
+		keystone.operation = CSGShape3D.OPERATION_UNION
+		keystone.material = mat_keystone
+		keystone.position = Vector3(cx, ks_center_y, -ks_depth * 0.5)
+		root.add_child(keystone)
+
+	# ==================================================================
+	# 7. Optional mullion
+	# ==================================================================
+	if has_mullion:
+		var mullion := _box("Mullion",
+			Vector3(frame_t * 0.5, rect_h + arch_r * 0.7, wall_depth * 0.15),
+			Vector3(cx, rect_bottom + (rect_h + arch_r * 0.7) * 0.5, wall_depth * 0.08),
+			CSGShape3D.OPERATION_UNION, mat_frame)
+		root.add_child(mullion)
 
 	return root
 
