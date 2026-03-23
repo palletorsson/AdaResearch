@@ -1,3 +1,19 @@
-# PG_Space_Colonization - Critical
+# PG_Space_Colonization — Critical Reflection
 
-Describe what this map normalizes, what it excludes, and what alternative computation it can open.
+The algorithm is named for what it does. Colonization. Scatter points in space — call them attractors, call them resources, call them nourishment. Drop a seed. The nearest branch reaches toward the nearest attractor. When it gets close enough, the attractor is consumed. Killed, the @identity block says: "kill attractor when reached." The tree grows by devouring what drew it forward.
+
+Simondon's individuation theory inverts the colonial metaphor. For Simondon, the individual does not consume its milieu — it emerges through it. The crystal and the solution are not in a predator-prey relationship; the crystal individuates by resolving the metastability of the solution, and in doing so transforms both itself and its environment. The space colonization algorithm enacts the opposite: the tree takes from the attractor field and gives nothing back. The attractors die. The space is depleted. What remains is the tree — a record of extraction, a fossil of appetite.
+
+Stiegler would recognize this as an attention economy. The kill_distance parameter — the radius at which an attractor is consumed — governs the economy of attention. Too small, and branches overshoot their targets, wasting effort. Too large, and the tree is sparse, consuming attractors before they can shape detailed structure. The critical parameter is a threshold of greed. At its optimum, the tree extracts maximum structural information from the attractor field with minimum waste. This is efficiency. This is also the logic that Stiegler diagnosed as proletarianization: the reduction of knowledge to procedure, the extraction of value from a milieu until nothing of interest remains.
+
+Adam Runions borrowed the algorithm from auxin transport in leaf venation. The biological origin matters. Leaves colonize space to gather light; veins branch toward the light-gathering tissue; the transport network records where resources were needed and delivered. But the biological system is reciprocal — the leaf feeds the root that feeds the soil that feeds the leaf. The algorithm retains only the forward stroke: consumption without return.
+
+What does this map normalize? Growth as reach. Structure as the trace of desire satisfied. The corridor alongside the growing tree forces a linear walk — you watch the tree solve "a problem no one posed," as the blurb says. But the problem was posed. The attractors pose it. Their distribution is the program, even if no one wrote production rules. The lambda_edge truth holds, but "enough" conceals the choice of what constitutes sufficiency. A tree that colonizes all available space is enough. A tree that leaves some attractors unconsumed, that creates clearings, that refuses to grow — that would not register as a successful run.
+
+What does it exclude? Reciprocity. Symbiosis. The mycelial networks where nutrients flow both ways. The space colonization algorithm cannot model a forest because a forest is not a tree. A forest is many organisms negotiating shared space. The algorithm can model only the logic of a single expanding agent in a field of passive resources.
+
+Simondon's associated milieu offers an alternative frame. In Simondon's technical philosophy, a well-designed technology creates an associated milieu — an environment that sustains the technology as the technology sustains the environment. The space colonization algorithm has no associated milieu. It consumes and expands. When the attractors are gone, the algorithm stops. The tree has no metabolism, no ongoing relationship with its space.
+
+The corridor forces you to walk alongside the tree's growth. You cannot walk inside it. You cannot become an attractor. The architecture separates observer from process, witness from participant. What would it mean to enter the attractor field — to be consumed by the algorithm, to become part of the branching structure, to lose your position as spectator and discover that observation was always already participation?
+
+The tree does not know what a body is. It finds one anyway. The question is what the body remembers about what it destroyed to take shape.
