@@ -16,10 +16,12 @@ extends Node3D
 class_name PompeiiMosaicFloor
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/border_motifs.gd")
 
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
 @export var tiles_short: int = 10
 @export var border_widths: Array[int] = [2, 1, 2]
+@export var border_motif: int = BorderMotifs.Motif.SAWTOOTH
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var grout_color: Color = MosaicPalette.GROUT
@@ -97,30 +99,20 @@ func _build() -> void:
 		return verts
 
 	# ── 1. Border bands ──
+	var terra_verts := PackedVector3Array()
 	var inset: int = 0
 	for i in border_widths.size():
 		var bw: int = border_widths[i]
-		var is_dark := (i % 2 == 0)
-		var verts = dark_verts if is_dark else light_verts
-
-		var rx := inset
-		var ry := inset
-		var rw := gw - inset * 2
-		var rh := gh - inset * 2
-
-		# Top
-		verts = _add_rect.call(verts, rx * ts, ry * ts, rw * ts, bw * ts)
-		# Bottom
-		verts = _add_rect.call(verts, rx * ts, (ry + rh - bw) * ts, rw * ts, bw * ts)
-		# Left
-		verts = _add_rect.call(verts, rx * ts, (ry + bw) * ts, bw * ts, (rh - bw * 2) * ts)
-		# Right
-		verts = _add_rect.call(verts, (rx + rw - bw) * ts, (ry + bw) * ts, bw * ts, (rh - bw * 2) * ts)
-
-		if is_dark:
-			dark_verts = verts
-		else:
-			light_verts = verts
+		var result := BorderMotifs.draw_border_frame(
+			dark_verts, light_verts, terra_verts,
+			inset * ts, inset * ts,
+			(gw - inset * 2) * ts, (gh - inset * 2) * ts,
+			bw * ts, ts,
+			border_motif, i % 2 == 1
+		)
+		dark_verts = result["dark"]
+		light_verts = result["light"]
+		terra_verts = result["terra"]
 		inset += bw
 
 	# ── 2. Truchet field ──
@@ -226,6 +218,13 @@ func _build() -> void:
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, wear_level))
+
+	if terra_verts.size() > 0:
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = terra_verts
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(MosaicPalette.TERRACOTTA, wear_level))
 
 	if grout_verts.size() > 0:
 		var arrays := []
