@@ -15,13 +15,16 @@
 extends Node3D
 class_name OctagonSquareFloor
 
+const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
+
 @export var floor_size: Vector2 = Vector2(1.0, 0.8)
 @export var tiles_short: int = 5
-@export var color_dark: Color = Color.html("#141418")
-@export var color_light: Color = Color.html("#EBE6D9")
-@export var color_terracotta: Color = Color.html("#B8603C")
-@export var grout_color: Color = Color.html("#887860")
+@export var color_dark: Color = MosaicPalette.DARK
+@export var color_light: Color = MosaicPalette.LIGHT
+@export var color_terracotta: Color = MosaicPalette.TERRACOTTA
+@export var grout_color: Color = MosaicPalette.GROUT
 @export_range(0.0, 0.1) var grout_width_fraction: float = 0.04
+@export_range(0.0, 1.0) var wear_level: float = 0.3
 
 var _mi: MeshInstance3D
 
@@ -257,10 +260,7 @@ func _build() -> void:
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = dark_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = color_dark
-		mat.roughness = 0.85
-		arr_mesh.surface_set_material(surface_idx, mat)
+		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_dark, wear_level))
 		surface_idx += 1
 
 	if light_verts.size() > 0:
@@ -268,10 +268,7 @@ func _build() -> void:
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = color_light
-		mat.roughness = 0.75
-		arr_mesh.surface_set_material(surface_idx, mat)
+		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_light, wear_level))
 		surface_idx += 1
 
 	if terra_verts.size() > 0:
@@ -279,10 +276,7 @@ func _build() -> void:
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = terra_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = color_terracotta
-		mat.roughness = 0.8
-		arr_mesh.surface_set_material(surface_idx, mat)
+		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(color_terracotta, wear_level))
 		surface_idx += 1
 
 	if grout_verts.size() > 0:
@@ -290,10 +284,7 @@ func _build() -> void:
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = grout_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		var mat := StandardMaterial3D.new()
-		mat.albedo_color = grout_color
-		mat.roughness = 0.9
-		arr_mesh.surface_set_material(surface_idx, mat)
+		arr_mesh.surface_set_material(surface_idx, MosaicPalette.create_material(grout_color, wear_level))
 		surface_idx += 1
 
 	_mi = MeshInstance3D.new()
