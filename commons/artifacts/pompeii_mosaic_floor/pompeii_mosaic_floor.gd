@@ -17,7 +17,7 @@ class_name PompeiiMosaicFloor
 
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
 @export var tiles_short: int = 10
-@export var border_widths: Array[int] = [2, 1, 2, 1]
+@export var border_widths: Array[int] = [1, 2, 1, 2]
 @export var color_dark: Color = Color.html("#141418")
 @export var color_light: Color = Color.html("#EBE6D9")
 @export var grout_color: Color = Color.html("#887860")
