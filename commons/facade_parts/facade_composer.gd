@@ -179,12 +179,59 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 			elem_params = placement["params"].duplicate()
 		elem_params["wall_depth"] = wall_depth
 
+		# Pass frame layers to part params (ring-stack border analog)
+		if placement.has("frames") and placement["frames"] is Array:
+			elem_params["frames"] = placement["frames"]
+
+		var cell_x := float(col) * cell_width
+		var cell_y := row_y_bottoms[row]
+
+		# Sub-grid: subdivide this cell into proportional columns
+		if placement.has("sub_grid") and placement["sub_grid"] is Dictionary:
+			var sg: Dictionary = placement["sub_grid"]
+			var sg_cols: Array = sg.get("cols", [1.0])
+			var sg_placements: Array = sg.get("placements", [])
+
+			# Normalize column proportions
+			var total_prop: float = 0.0
+			for prop in sg_cols:
+				total_prop += float(prop)
+
+			var sub_x: float = 0.0
+			for sg_placement in sg_placements:
+				if not sg_placement is Dictionary:
+					continue
+				var sg_col: int = int(sg_placement.get("col", 0))
+				if sg_col >= sg_cols.size():
+					continue
+
+				# Compute sub-cell position and width
+				var prev_x: float = 0.0
+				for ci in range(0, sg_col):
+					prev_x += float(sg_cols[ci]) / total_prop * ew
+
+				var sg_w: float = float(sg_cols[sg_col]) / total_prop * ew
+				var sg_part: String = str(sg_placement.get("part", ""))
+				if sg_part.is_empty():
+					continue
+
+				var sg_params: Dictionary = {}
+				if sg_placement.has("params") and sg_placement["params"] is Dictionary:
+					sg_params = sg_placement["params"].duplicate()
+				if sg_placement.has("frames") and sg_placement["frames"] is Array:
+					sg_params["frames"] = sg_placement["frames"]
+				sg_params["wall_depth"] = wall_depth
+
+				var sg_node := _FPL.create(sg_part, sg_w, eh, sg_params)
+				sg_node.position = Vector3(cell_x + prev_x, cell_y, wall_depth * 0.5)
+				sg_node.name = "%s_c%d_r%d_sg%d" % [sg_part, col, row, sg_col]
+				elements_container.add_child(sg_node)
+			continue  # Skip normal placement — sub_grid handled it
+
 		# Generate the part via FacadePartLibrary
 		var part_node := _FPL.create(part_name, ew, eh, elem_params)
 
 		# Position: cell left X, cell bottom Y, slightly in front of wall
-		var cell_x := float(col) * cell_width
-		var cell_y := row_y_bottoms[row]
 		part_node.position = Vector3(cell_x, cell_y, wall_depth * 0.5)
 		part_node.name = "%s_c%d_r%d" % [part_name, col, row]
 		elements_container.add_child(part_node)

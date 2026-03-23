@@ -13,6 +13,7 @@ const _Shut := preload("res://commons/facade_parts/parts/shutter_parts.gd")
 const _Rail := preload("res://commons/facade_parts/parts/railing_parts.gd")
 const _Surf := preload("res://commons/facade_parts/parts/surface_parts.gd")
 const _Orn := preload("res://commons/facade_parts/parts/ornament_parts.gd")
+const _Frame := preload("res://commons/facade_parts/parts/frame_parts.gd")
 
 static func create(part_name: String, w: float, h: float, params: Dictionary = {}) -> Node3D:
 	# Delegate to category part files
@@ -46,6 +47,9 @@ static func create(part_name: String, w: float, h: float, params: Dictionary = {
 		# Ornaments
 		"pediment_tri", "pediment_broken", "medallion", "cartouche", "pilaster_orn":
 			return _Orn.create(part_name, w, h, params)
+		# Frame & marble panels
+		"framed_marble_panel":
+			return _Frame.framed_marble_panel(w, h, params)
 		_:
 			push_warning("FacadePartLibrary: unknown part '%s'" % part_name)
 			var placeholder = Node3D.new()
