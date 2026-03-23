@@ -2438,6 +2438,42 @@
 			"tags": [
 				"algorithm"
 			]
+		},
+		"bias_from_inside": {
+			"lookup_name": "bias_from_inside",
+			"name": "Bias From Inside",
+			"description": "Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god's-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).",
+			"scene": "res://commons/artifacts/bias_from_inside/bias_from_inside.tscn",
+			"category": "critical",
+			"complexity": "intermediate",
+			"tags": [
+				"algorithmic_bias",
+				"embedding",
+				"perspective",
+				"critical_algorithms",
+				"compression",
+				"word_vectors"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"sequence": "criticalalgorithms",
+			"interaction": "interact",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			]
 		}
 	}
 }

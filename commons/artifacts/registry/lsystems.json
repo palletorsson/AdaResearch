@@ -388,6 +388,41 @@
 				"procedural"
 			]
 		},
+		"grammar_provenance": {
+			"name": "Grammar Provenance",
+			"lookup_name": "grammar_provenance",
+			"description": "Side-by-side L-system trees from three cultural/historical sources — Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion. Same engine, different axioms, different worlds. Asks: whose grammar?",
+			"qfep_connection": "The axiom is never neutral — every grammar encodes a worldview. Three F-descriptions produce three radically different E(S) landscapes. The engine is the same; the politics are in the rules.",
+			"scene": "res://commons/artifacts/grammar_provenance/grammar_provenance.tscn",
+			"category": "procedural",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"l_system",
+				"procedural",
+				"critical_theory",
+				"provenance",
+				"comparison"
+			],
+			"dev_themes": [
+				"grammar",
+				"l_systems",
+				"procedural",
+				"philosophy"
+			]
+		},
 		"genetic_tree_sculptor": {
 			"name": "Genetic Tree Sculptor",
 			"lookup_name": "genetic_tree_sculptor",

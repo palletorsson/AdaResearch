@@ -1882,6 +1882,79 @@
 			"tags": [
 				"machine_learning"
 			]
+		},
+		"non_teleological_evolution": {
+			"lookup_name": "non_teleological_evolution",
+			"name": "Non-Teleological Evolution",
+			"description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.",
+			"scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"tags": [
+				"evolution",
+				"non_teleological",
+				"drift",
+				"no_fitness",
+				"emergence",
+				"critical_theory"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"sequence": "machinelearning",
+			"interaction": "observe",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			]
+		},
+		"loss_function_comparator": {
+			"lookup_name": "loss_function_comparator",
+			"name": "Loss Function Comparator",
+			"description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.",
+			"scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"tags": [
+				"loss_function",
+				"gradient_descent",
+				"optimization",
+				"comparison",
+				"mse",
+				"huber",
+				"critical_theory"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"sequence": "machinelearning",
+			"interaction": "interact",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			]
 		}
 	}
 }

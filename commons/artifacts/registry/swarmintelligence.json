@@ -315,6 +315,43 @@
 				"swarm"
 			]
 		},
+		"fitness_landscape_politics": {
+			"name": "Fitness Landscape Politics",
+			"lookup_name": "fitness_landscape_politics",
+			"description": "30 PSO particles on 3 switchable fitness landscapes: convergence (corporate — minimize distance), spread (ecological — maximize diversity), novelty (artistic — seek the unvisited). Same agents, different power structures, different 'success.'",
+			"qfep_connection": "The fitness function IS the power structure. Switching landscapes does not change the agents' F-model — it changes what counts as low energy. Who defines the loss function defines the world.",
+			"scene": "res://commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
+			"category": "swarmintelligence",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"pso",
+				"particles",
+				"optimization",
+				"critical_theory",
+				"fitness",
+				"swarm"
+			],
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm",
+				"philosophy"
+			]
+		},
 		"PhysarumColony": {
 			"lookup_name": "PhysarumColony",
 			"name": "PhysarumColony",

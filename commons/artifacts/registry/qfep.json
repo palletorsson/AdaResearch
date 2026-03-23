@@ -1230,6 +1230,46 @@
 				"qfep"
 			]
 		},
+		"edge_of_chaos_unlocked": {
+			"name": "Edge of Chaos Unlocked",
+			"lookup_name": "edge_of_chaos_unlocked",
+			"description": "Reaction-diffusion system with the UNLOCKED lambda slider that the QFEP_Edge_Of_Chaos map withheld. Drag lambda from 0 (frozen crystal) through 0.4 (Turing patterns emerge) to 1.0 (pure noise). The artifact answers the critical text's question: adjusting IS knowledge. Witnessing IS knowledge. Different kinds.",
+			"scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+			"category": "qfep",
+			"interaction": "grab_slide",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "lambda",
+			"capacity": "CONTROL lambda directly",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"lambda",
+				"edge_of_chaos",
+				"critical_theory",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory",
+				"emergence"
+			]
+		},
 		"AnickaYiLab": {
 			"lookup_name": "AnickaYiLab",
 			"name": "AnickaYiLab",
