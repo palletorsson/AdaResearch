@@ -222,20 +222,26 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	var cols_span: int = max_col - min_col + 1
 	var rows_span: int = max_row - min_row + 1
 	var wt: float = _floor_plan_data.get("wall_thickness", 0.5)
+	var bbox_area: int = cols_span * rows_span
+	var is_rectangular: bool = cells.size() >= bbox_area * 0.9  # Allow small rounding
+
 	# Inset floor by half wall thickness so it fits inside the walls
 	var room_w: float = cols_span * cell_size - wt
 	var room_h: float = rows_span * cell_size - wt
 	var center_x: float = (min_col + cols_span * 0.5) * cell_size
 	var center_z: float = (min_row + rows_span * 0.5) * cell_size
 
-	# Try mosaic composition first
+	# Non-rectangular rooms (L-shapes, corridors): render per-cell quads
+	if not is_rectangular:
+		_place_per_cell_floor(cells, parent, cell_size, room)
+		return
+
+	# Try mosaic composition first (rectangular rooms only)
 	var mosaic_comp: String = room.get("mosaic_composition", "")
 	if not mosaic_comp.is_empty():
 		var comp_path := "res://commons/patterns/mosaics/%s.json" % mosaic_comp
 		var floor_node := MosaicFloorBuilder.build_floor(comp_path, Vector2(room_w, room_h), parent)
 		if floor_node:
-			# MosaicFloorBuilder already offsets mesh by (-fw/2, 0.005, -fh/2)
-			# so we just need to set the room center position (y=0 since mesh handles y)
 			floor_node.position = Vector3(center_x, 0.0, center_z)
 			return
 
@@ -266,6 +272,49 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	print("FloorPlanSpace: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
 		floor_pattern, center_x, center_z, room_w, room_h
 	])
+
+
+func _place_per_cell_floor(cells: Array, parent: Node3D, cell_size: float, room: Dictionary) -> void:
+	## Render individual cell quads for non-rectangular rooms (L-shapes, corridors).
+	var mat := StandardMaterial3D.new()
+	var color_hex: String = str(room.get("color", "#B0A890"))
+	mat.albedo_color = Color.html(color_hex) if color_hex.begins_with("#") else Color(0.7, 0.65, 0.55)
+	mat.roughness = 0.85
+
+	var verts := PackedVector3Array()
+	var y: float = 0.001
+	for cell in cells:
+		if not cell is Array or cell.size() < 2:
+			continue
+		var r: int = int(cell[0])
+		var c: int = int(cell[1])
+		var x0: float = c * cell_size
+		var z0: float = r * cell_size
+		var x1: float = x0 + cell_size
+		var z1: float = z0 + cell_size
+		verts.append(Vector3(x0, y, z0))
+		verts.append(Vector3(x1, y, z0))
+		verts.append(Vector3(x1, y, z1))
+		verts.append(Vector3(x0, y, z0))
+		verts.append(Vector3(x1, y, z1))
+		verts.append(Vector3(x0, y, z1))
+
+	if verts.is_empty():
+		return
+
+	var arr_mesh := ArrayMesh.new()
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	arr_mesh.surface_set_material(0, mat)
+
+	var mi := MeshInstance3D.new()
+	mi.mesh = arr_mesh
+	mi.name = "PerCellFloor_%s" % str(room.get("id", "room"))
+	parent.add_child(mi)
+
+	print("FloorPlanSpace: Per-cell floor for '%s' (%d cells)" % [str(room.get("id", "")), cells.size()])
 
 
 func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
