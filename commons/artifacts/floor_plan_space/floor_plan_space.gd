@@ -49,7 +49,12 @@ func _load_and_build() -> void:
 
 	var path := plan_path
 	if path.is_empty():
-		path = "res://commons/maps/MANN_Gallery_Museum/floor_plan.json"
+		# Auto-detect from current map if placed as artifact
+		var current_map := _get_current_map_name()
+		if not current_map.is_empty():
+			path = "res://commons/maps/%s/floor_plan.json" % current_map
+		else:
+			path = "res://commons/maps/MANN_Gallery_Museum/floor_plan.json"
 
 	if not _load_plan(path):
 		push_warning("FloorPlanSpace: Could not load plan from %s" % path)
@@ -57,6 +62,26 @@ func _load_and_build() -> void:
 
 	_build_all_rooms()
 	_built = true
+
+
+func _get_current_map_name() -> String:
+	# Try to get the current map name from the GridSystem
+	var gs = get_tree().get_first_node_in_group("grid_system") if is_inside_tree() else null
+	if gs and gs.has_method("get_current_map_name"):
+		return gs.get_current_map_name()
+	# Try GameManager singleton
+	if Engine.has_singleton("GameManager"):
+		var gm = Engine.get_singleton("GameManager")
+		if gm.has_method("get_current_map"):
+			return gm.get_current_map()
+	# Try to find GridSystem by name in the scene
+	if is_inside_tree():
+		var grid = get_tree().root.find_child("GridSystem", true, false)
+		if grid and grid.has_node("GridDataComponent"):
+			var data_comp = grid.get_node("GridDataComponent")
+			if data_comp.has_method("get_current_map_name"):
+				return data_comp.get_current_map_name()
+	return ""
 
 
 func _load_plan(path: String) -> bool:
