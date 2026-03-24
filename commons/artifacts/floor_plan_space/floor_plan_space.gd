@@ -212,8 +212,10 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 
 	var cols_span: int = max_col - min_col + 1
 	var rows_span: int = max_row - min_row + 1
-	var room_w: float = cols_span * cell_size
-	var room_h: float = rows_span * cell_size
+	var wt: float = _floor_plan_data.get("wall_thickness", 0.5)
+	# Inset floor by half wall thickness so it fits inside the walls
+	var room_w: float = cols_span * cell_size - wt
+	var room_h: float = rows_span * cell_size - wt
 	var center_x: float = (min_col + cols_span * 0.5) * cell_size
 	var center_z: float = (min_row + rows_span * 0.5) * cell_size
 
@@ -229,13 +231,13 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	# Fall back to artifact-based floor pattern
 	var floor_pattern: String = str(room.get("floor_pattern", ""))
 	if floor_pattern.is_empty():
-		_place_fallback_floor(parent, min_col, min_row, room_w, room_h, cell_size)
+		_place_fallback_floor(parent, center_x, center_z, room_w, room_h)
 		return
 
 	var scene := _load_artifact_scene(floor_pattern)
 	if not scene:
 		push_warning("FloorPlanSpace: Floor pattern '%s' not found, using fallback" % floor_pattern)
-		_place_fallback_floor(parent, min_col, min_row, room_w, room_h, cell_size)
+		_place_fallback_floor(parent, center_x, center_z, room_w, room_h)
 		return
 
 	var floor_instance: Node3D = scene.instantiate()
@@ -255,8 +257,8 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	])
 
 
-func _place_fallback_floor(parent: Node3D, min_col: int, min_row: int,
-		floor_w: float, floor_h: float, cell_size: float) -> void:
+func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
+		floor_w: float, floor_h: float) -> void:
 	var mesh_inst := MeshInstance3D.new()
 	var mesh := PlaneMesh.new()
 	mesh.size = Vector2(floor_w, floor_h)
@@ -267,9 +269,7 @@ func _place_fallback_floor(parent: Node3D, min_col: int, min_row: int,
 	mat.roughness = 0.9
 	mesh_inst.material_override = mat
 
-	var center_x: float = (min_col + floor_w / cell_size * 0.5) * cell_size
-	var center_z: float = (min_row + floor_h / cell_size * 0.5) * cell_size
-	mesh_inst.position = Vector3(center_x, 0.01, center_z)
+	mesh_inst.position = Vector3(cx, 0.01, cz)
 	mesh_inst.name = "FallbackFloor"
 	parent.add_child(mesh_inst)
 
