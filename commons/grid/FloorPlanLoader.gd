@@ -408,35 +408,38 @@ func _build_wall_segment(segment: Dictionary, parent: Node3D,
 	var wall_pos: Vector3
 	var wall_rot_y: float  # Degrees
 
+	# Facade decorative side faces +Z in local space.
+	# We ADD 180° to flip the facade so decorative side faces INWARD.
+	# Without the flip, the decorative side faces away from the room.
 	match dir:
 		"N":
 			# North edge: top of cell row -> z = row * cell_size
-			# Room is south (+Z). Facade faces +Z by default = faces into room.
+			# Room is south (+Z). Flip facade 180° so decorative side faces south.
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = start_row * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 0.0
+			wall_rot_y = 180.0
 		"S":
 			# South edge: bottom of cell row -> z = (row + 1) * cell_size
-			# Room is north (-Z). Rotate 180° so facade faces -Z = into room.
+			# Room is north (-Z). No flip needed, decorative side already faces +Z→north after 0°.
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = (start_row + 1) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 180.0
+			wall_rot_y = 0.0
 		"E":
 			# East edge: right of cell col -> x = (col + 1) * cell_size
-			# Room is west (-X). Rotate -90° so facade faces -X = into room.
+			# Room is west (-X). Rotate 90° so +Z→+X then facade faces west (into room).
 			var cx: float = (start_col + 1) * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = -90.0
+			wall_rot_y = 90.0
 		"W":
 			# West edge: left of cell col -> x = col * cell_size
-			# Room is east (+X). Rotate 90° so facade faces +X = into room.
+			# Room is east (+X). Rotate -90° so +Z→-X then facade faces east (into room).
 			var cx: float = start_col * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 90.0
+			wall_rot_y = -90.0
 
 	if wall_preset != "default" and wall_preset != "":
 		_build_facade_wall(parent, wall_pos, wall_rot_y, total_length, wall_height, wall_preset, wall_thickness)
