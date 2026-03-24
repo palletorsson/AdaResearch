@@ -105,10 +105,10 @@ static func ashlar(w: float, h: float, p: Dictionary = {}) -> Node3D:
 			if bx > w:
 				continue
 			var by := gap + block_h * 0.5 + float(row) * (block_h + gap)
-			# Clamp width at edges for offset rows
+			# Clamp width at edges for offset rows so blocks stay within bounds
 			var actual_w := block_w
 			if bx + block_w * 0.5 > w:
-				actual_w = (w - bx + block_w * 0.5) * 0.9
+				actual_w = maxf(gap, (w - bx) * 2.0 - gap)
 
 			var block := _box("Block_%d_%d" % [row, col],
 				Vector3(actual_w, block_h, depth),

@@ -323,7 +323,7 @@ static func _apply_bilateral_symmetry(container: Node3D, total_width: float,
 		var already_placed := false
 		for existing in placements_data:
 			if existing is Dictionary:
-				if existing.get("col", -1) as int == mirror_col and existing.get("row", -1) as int == row:
+				if int(existing.get("col", -1)) == mirror_col and int(existing.get("row", -1)) == row:
 					already_placed = true
 					break
 		if already_placed:

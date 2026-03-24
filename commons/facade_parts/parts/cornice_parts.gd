@@ -144,7 +144,7 @@ static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var poly := _polygon("CymaProfile", profile, w, Vector3(0.0, 0.0, 0.0),
 		CSGShape3D.OPERATION_UNION, _M.stone(Color(0.82, 0.78, 0.72)))
 	poly.rotation_degrees.y = -90.0
-	poly.position = Vector3(w, 0.0, 0.0)
+	poly.position = Vector3(0.0, 0.0, 0.0)
 	root.add_child(poly)
 
 	return root
