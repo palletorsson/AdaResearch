@@ -17,6 +17,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
+@export var y_offset: float = 1.0  # Raise above game world ground (GridSystem floor = y=1)
 
 var _floor_plan_data: Dictionary = {}
 var _built: bool = false
@@ -31,6 +32,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		plan_path = str(config["plan_path"])
 	if config.has("wall_preset"):
 		default_wall_preset = str(config["wall_preset"])
+	if config.has("y_offset"):
+		y_offset = float(config["y_offset"])
 	_load_and_build()
 
 
@@ -95,6 +98,7 @@ func _build_all_rooms() -> void:
 
 	var container := Node3D.new()
 	container.name = "FloorPlanRooms"
+	container.position.y = y_offset
 	add_child(container)
 
 	for room in rooms:
