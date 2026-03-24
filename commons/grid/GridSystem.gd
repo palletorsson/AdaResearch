@@ -512,7 +512,10 @@ func _on_wall_complete(wall_count: int):
 	call_deferred("_handle_player_spawn")
 
 ## Try to load and apply a floor_plan.json from the current map directory.
+var _floor_plan_loaded: bool = false
 func _try_load_floor_plan() -> void:
+	if _floor_plan_loaded:
+		return
 	if not data_component:
 		return
 	var current_map: String = data_component.get_current_map_name()
@@ -525,6 +528,7 @@ func _try_load_floor_plan() -> void:
 	add_child(loader)
 	if loader.load_floor_plan(map_dir):
 		loader.apply_floor_plan(self, cube_size)
+		_floor_plan_loaded = true
 		print("GridSystem: Floor plan applied")
 	else:
 		print("GridSystem: No floor plan found")
