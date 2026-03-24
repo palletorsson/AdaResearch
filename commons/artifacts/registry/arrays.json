@@ -1461,6 +1461,150 @@
 				"size_group": "compact"
 			}
 		},
+		"stepped_zigzag_floor": {
+			"name": "Stepped Zigzag Floor",
+			"lookup_name": "stepped_zigzag_floor",
+			"description": "Pompeii mosaic floor with stepped zigzag pattern — interlocking L-shaped steps in three tones create a 3D staircase illusion reminiscent of Escher's impossible staircases.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/stepped_zigzag_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"optical_illusion",
+				"zigzag"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"flower_of_life_floor": {
+			"name": "Flower of Life Floor",
+			"lookup_name": "flower_of_life_floor",
+			"description": "Procedural Pompeii mosaic floor with Flower of Life sacred geometry pattern — overlapping circles on a hexagonal grid creating petal shapes at intersections. Dark circle outlines on light background with terracotta accent petals.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/flower_of_life_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"sacred_geometry",
+				"flower_of_life",
+				"hexagonal"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"polka_dot_field_floor": {
+			"name": "Polka Dot Field Floor",
+			"lookup_name": "polka_dot_field_floor",
+			"description": "Pompeii mosaic floor with dark field and scattered small light tesserae in a regular grid with organic jitter. Common in vestibules and corridors, bordered by a meander pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/polka_dot_field_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"dots"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"star_rosette_floor": {
+			"name": "Star Rosette Floor",
+			"lookup_name": "star_rosette_floor",
+			"description": "Pompeii mosaic floor with hexagonal star rosette (hexagram) pattern. Six-pointed stars formed by overlapping equilateral triangles with small rhombi between stars. Classic Roman geometric mosaic.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/star_rosette_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"hexagram",
+				"star"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
 		"floor_plan_space": {
 			"name": "Floor Plan Space",
 			"lookup_name": "floor_plan_space",
@@ -1492,6 +1636,42 @@
 					0
 				],
 				"size_group": "large"
+			}
+		},
+		"radial_mandala_floor": {
+			"name": "Radial Mandala Floor",
+			"lookup_name": "radial_mandala_floor",
+			"description": "Procedural Pompeii mosaic floor with concentric radial mandala pattern. A terracotta 6-pointed star rosette at center, surrounded by rings of alternating dark/light triangles radiating outward with interlocking offset.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/radial_mandala_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"mandala",
+				"radial"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
 			}
 		}
 	}
