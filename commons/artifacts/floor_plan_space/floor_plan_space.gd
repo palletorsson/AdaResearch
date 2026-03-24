@@ -101,6 +101,8 @@ func _build_all_rooms() -> void:
 	container.position.y = y_offset
 	add_child(container)
 
+	var global_seen_edges: Dictionary = {}  # Shared across all rooms to prevent double walls
+
 	for room in rooms:
 		if not room is Dictionary:
 			continue
@@ -110,7 +112,7 @@ func _build_all_rooms() -> void:
 		container.add_child(room_node)
 
 		_place_room_floor(room, room_node, cell_size)
-		_generate_room_walls(room, room_node, cell_size, room_doorways.get(room_id, []))
+		_generate_room_walls(room, room_node, cell_size, room_doorways.get(room_id, []), global_seen_edges)
 		_build_exhibit_walls(room, room_node, cell_size)
 
 	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
@@ -337,7 +339,7 @@ func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
 # ── Wall generation ──────────────────────────────────────────────────────────
 
 func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float,
-		doorway_edges: Array) -> void:
+		doorway_edges: Array, global_seen_edges: Dictionary = {}) -> void:
 	var cells: Array = room.get("cells", [])
 	if cells.is_empty():
 		return
@@ -392,13 +394,12 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float,
 					"is_doorway": is_doorway,
 				})
 
-	# Deduplicate shared edges
-	var seen_edges: Dictionary = {}
+	# Deduplicate shared edges globally (prevents double walls between rooms)
 	var unique_edges: Array = []
 	for e in boundary_edges:
 		var canon_key: String = _canonical_edge_key(e["row"], e["col"], e["dir"])
-		if not seen_edges.has(canon_key):
-			seen_edges[canon_key] = true
+		if not global_seen_edges.has(canon_key):
+			global_seen_edges[canon_key] = true
 			unique_edges.append(e)
 	boundary_edges = unique_edges
 
