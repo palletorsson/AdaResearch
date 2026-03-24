@@ -1122,7 +1122,29 @@
 			"floor_config": {
 				"tiles_short": 6
 			},
-			"color": "#8E8E8E"
+			"color": "#8E8E8E",
+			"open_edges": [
+				{
+					"row": 13,
+					"col": 12,
+					"dir": "S"
+				},
+				{
+					"row": 13,
+					"col": 13,
+					"dir": "S"
+				},
+				{
+					"row": 6,
+					"col": 6,
+					"dir": "N"
+				},
+				{
+					"row": 6,
+					"col": 7,
+					"dir": "N"
+				}
+			]
 		}
 	],
 	"doorways": [

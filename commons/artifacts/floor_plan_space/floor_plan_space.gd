@@ -368,6 +368,13 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float,
 			var key := "%d,%d,%s" % [int(dw.get("row", 0)), int(dw.get("col", 0)), str(dw.get("direction", ""))]
 			doorway_set[key] = true
 
+	# Open edges — exterior entrances where no wall should be built
+	var open_edges: Array = room.get("open_edges", [])
+	for oe in open_edges:
+		if oe is Dictionary:
+			var key := "%d,%d,%s" % [int(oe.get("row", 0)), int(oe.get("col", 0)), str(oe.get("dir", ""))]
+			doorway_set[key] = true
+
 	# Find boundary edges
 	var boundary_edges: Array = []
 	for cell in cells:
