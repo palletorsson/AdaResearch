@@ -1673,6 +1673,150 @@
 				],
 				"size_group": "compact"
 			}
+		},
+		"guilloche_border_floor": {
+			"name": "Guilloche Border Floor",
+			"lookup_name": "guilloche_border_floor",
+			"description": "Pompeii mosaic floor with prominent guilloche (braided rope) border surrounding a simple checkerboard grid field with a central terracotta pictorial panel inset. The guilloche band features interlocking S-curves in dark, light and terracotta tesserae.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/guilloche_border_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"guilloche",
+				"border"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"honeycomb_hex_floor": {
+			"name": "Honeycomb Hex Floor",
+			"lookup_name": "honeycomb_hex_floor",
+			"description": "Procedural Pompeii mosaic floor with honeycomb hexagonal tessellation. Regular hexagons in alternating dark/light with dark grout outlines. Every 3rd hexagon features a small terracotta cross motif at its center.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/honeycomb_hex_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"hexagonal",
+				"honeycomb"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"diamond_lattice_floor": {
+			"name": "Diamond Lattice Floor",
+			"lookup_name": "diamond_lattice_floor",
+			"description": "Pompeii mosaic floor with diamond lattice pattern. Two sets of diagonal lines at 45 and 135 degrees cross to form a regular rhombus grid. Alternating dark/light diamonds create a rotated checkerboard effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/diamond_lattice_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"diamond",
+				"lattice"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"multi_zone_carpet_floor": {
+			"name": "Multi-Zone Carpet Floor",
+			"lookup_name": "multi_zone_carpet_floor",
+			"description": "Pompeii mosaic floor demonstrating carpet composition — nested rectangular bands of distinct motifs (dark border, sawtooth chevrons, scallop semicircles) surrounding a central checkerboard field. Demonstrates the Roman principle of hierarchical spatial framing.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/multi_zone_carpet_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"carpet",
+				"composition"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }
