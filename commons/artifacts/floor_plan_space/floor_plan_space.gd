@@ -225,7 +225,9 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 		var comp_path := "res://commons/patterns/mosaics/%s.json" % mosaic_comp
 		var floor_node := MosaicFloorBuilder.build_floor(comp_path, Vector2(room_w, room_h), parent)
 		if floor_node:
-			floor_node.position = Vector3(center_x, 0.005, center_z)
+			# MosaicFloorBuilder already offsets mesh by (-fw/2, 0.005, -fh/2)
+			# so we just need to set the room center position (y=0 since mesh handles y)
+			floor_node.position = Vector3(center_x, 0.0, center_z)
 			return
 
 	# Fall back to artifact-based floor pattern
