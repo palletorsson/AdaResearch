@@ -206,6 +206,7 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 
 	var wall_height: float = float(room.get("wall_height", 3.0))
 	var wall_preset: String = str(room.get("wall_preset", "default"))
+	var wall_thickness: float = float(_floor_plan_data.get("wall_thickness", 0.5))
 	var doorways: Array = room.get("doorways", [])
 
 	# Build a set of cells for fast lookup — key: "row,col"
@@ -251,6 +252,18 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 					"is_doorway": is_doorway,
 				})
 
+	# Deduplicate shared edges between rooms — two adjacent rooms share the
+	# same physical edge. Use a canonical edge key so each edge is only built
+	# once. We keep the first occurrence (arbitrary but consistent).
+	var seen_edges: Dictionary = {}
+	var unique_edges: Array = []
+	for e in boundary_edges:
+		var canon_key: String = _canonical_edge_key(e["row"], e["col"], e["dir"])
+		if not seen_edges.has(canon_key):
+			seen_edges[canon_key] = true
+			unique_edges.append(e)
+	boundary_edges = unique_edges
+
 	# Group contiguous boundary edges into wall segments by direction
 	var segments := _group_into_segments(boundary_edges)
 
@@ -260,7 +273,7 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 	parent.add_child(wall_container)
 
 	for seg in segments:
-		_build_wall_segment(seg, wall_container, cell_size, wall_height, wall_preset)
+		_build_wall_segment(seg, wall_container, cell_size, wall_height, wall_preset, wall_thickness)
 
 	print("FloorPlanLoader: Generated %d wall segments for room '%s'" % [
 		segments.size(), str(room.get("id", "room"))
@@ -354,8 +367,12 @@ func _group_into_segments(edges: Array) -> Array:
 
 
 ## Build a single wall segment (either facade or simple box).
+## Walls are 0.5m thick slabs centered ON the cell boundary edge.
+## N/S walls extend by wall_thickness/2 at each end to cover corners,
+## preventing gaps where perpendicular walls meet.
 func _build_wall_segment(segment: Dictionary, parent: Node3D,
-		cell_size: float, wall_height: float, wall_preset: String) -> void:
+		cell_size: float, wall_height: float, wall_preset: String,
+		wall_thickness: float) -> void:
 	var dir: String = segment["dir"]
 	var edges: Array = segment["edges"]
 	if edges.is_empty():
@@ -368,61 +385,68 @@ func _build_wall_segment(segment: Dictionary, parent: Node3D,
 	var start_row: int = edges[0]["row"]
 	var start_col: int = edges[0]["col"]
 
+	# N/S walls extend by half-thickness at each end to cover corners.
+	# E/W walls do NOT extend, so they butt up against N/S walls without overlap.
+	var corner_ext: float = wall_thickness * 0.5 if dir in ["N", "S"] else 0.0
+	var total_length: float = seg_meters + corner_ext * 2.0
+
 	# Compute wall position and rotation
 	# World coords: x = col * cell_size, z = row * cell_size
-	# Walls sit on the boundary edge of cells
+	# Walls are centered ON the boundary edge between cells
 	var wall_pos: Vector3
 	var wall_rot_y: float  # Degrees
 
 	match dir:
 		"N":
-			# North edge: top of cell row → z = row * cell_size
-			# Wall runs along X from start_col to start_col + seg_length
+			# North edge: top of cell row -> z = row * cell_size
+			# Wall runs along X, centered on the segment span (plus corner extensions)
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = start_row * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
 			wall_rot_y = 0.0  # Facing -Z (inward, toward higher row numbers)
 		"S":
-			# South edge: bottom of cell row → z = (row + 1) * cell_size
+			# South edge: bottom of cell row -> z = (row + 1) * cell_size
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = (start_row + 1) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
 			wall_rot_y = 180.0  # Facing +Z (inward, toward lower row numbers)
 		"E":
-			# East edge: right of cell col → x = (col + 1) * cell_size
+			# East edge: right of cell col -> x = (col + 1) * cell_size
 			var cx: float = (start_col + 1) * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
 			wall_rot_y = -90.0  # Facing -X (inward, toward lower col numbers)
 		"W":
-			# West edge: left of cell col → x = col * cell_size
+			# West edge: left of cell col -> x = col * cell_size
 			var cx: float = start_col * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
 			wall_rot_y = 90.0  # Facing +X (inward, toward higher col numbers)
 
 	if wall_preset != "default" and wall_preset != "":
-		_build_facade_wall(parent, wall_pos, wall_rot_y, seg_meters, wall_height, wall_preset)
+		_build_facade_wall(parent, wall_pos, wall_rot_y, total_length, wall_height, wall_preset, wall_thickness)
 	else:
-		_build_simple_wall(parent, wall_pos, wall_rot_y, seg_meters, wall_height)
+		_build_simple_wall(parent, wall_pos, wall_rot_y, total_length, wall_height, wall_thickness)
 
 
 ## Build a facade wall from a preset JSON.
+## The facade is placed centered on the edge, facing inward toward the room.
 func _build_facade_wall(parent: Node3D, pos: Vector3, rot_y: float,
-		width: float, height: float, preset_name: String) -> void:
+		width: float, height: float, preset_name: String,
+		wall_thickness: float = 0.5) -> void:
 	var preset_path := "res://commons/facade_parts/presets/%s.json" % preset_name
 
 	if not FileAccess.file_exists(preset_path):
 		push_warning("FloorPlanLoader: Facade preset '%s' not found at %s, using simple wall" % [
 			preset_name, preset_path
 		])
-		_build_simple_wall(parent, pos, rot_y, width, height)
+		_build_simple_wall(parent, pos, rot_y, width, height, wall_thickness)
 		return
 
 	# Load and modify the preset
 	var file := FileAccess.open(preset_path, FileAccess.READ)
 	if not file:
-		_build_simple_wall(parent, pos, rot_y, width, height)
+		_build_simple_wall(parent, pos, rot_y, width, height, wall_thickness)
 		return
 
 	var json := JSON.new()
@@ -430,7 +454,7 @@ func _build_facade_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	file.close()
 
 	if err != OK or not json.data is Dictionary:
-		_build_simple_wall(parent, pos, rot_y, width, height)
+		_build_simple_wall(parent, pos, rot_y, width, height, wall_thickness)
 		return
 
 	var preset_data: Dictionary = json.data.duplicate(true)
@@ -466,8 +490,9 @@ func _build_facade_wall(parent: Node3D, pos: Vector3, rot_y: float,
 
 
 ## Build a simple box wall (fallback).
+## Creates a BoxMesh of (length x wall_height x wall_thickness) centered on the edge.
 func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
-		width: float, height: float) -> void:
+		width: float, height: float, wall_thickness: float = 0.5) -> void:
 	var wall_root := Node3D.new()
 	wall_root.name = "SimpleWall"
 	parent.add_child(wall_root)
@@ -475,10 +500,10 @@ func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	wall_root.position = pos
 	wall_root.rotation_degrees.y = rot_y
 
-	# Visual mesh
+	# Visual mesh — width along the wall, height vertical, wall_thickness depth
 	var mesh_inst := MeshInstance3D.new()
 	var mesh := BoxMesh.new()
-	mesh.size = Vector3(width, height, 0.1)
+	mesh.size = Vector3(width, height, wall_thickness)
 	mesh_inst.mesh = mesh
 
 	var mat := StandardMaterial3D.new()
@@ -493,10 +518,35 @@ func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	body.name = "WallCollision"
 	var col_shape := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(width, height, 0.1)
+	shape.size = Vector3(width, height, wall_thickness)
 	col_shape.shape = shape
 	body.add_child(col_shape)
 	wall_root.add_child(body)
+
+
+# ── Edge deduplication helper ──────────────────────────────────────────────
+
+## Return a canonical key for a cell boundary edge so that the same physical
+## edge referenced from either side produces the same key.
+## E.g. cell (3,5) East == cell (3,6) West → both map to "3,6,W".
+## Convention: pick the lexicographically smaller key from the two equivalent
+## representations (cell-side vs neighbor-side).
+func _canonical_edge_key(row: int, col: int, dir: String) -> String:
+	var nr: int = row
+	var nc: int = col
+	var opp: String = dir
+	match dir:
+		"N":
+			nr = row - 1; nc = col; opp = "S"
+		"S":
+			nr = row + 1; nc = col; opp = "N"
+		"E":
+			nr = row; nc = col + 1; opp = "W"
+		"W":
+			nr = row; nc = col - 1; opp = "E"
+	var key_a := "%d,%d,%s" % [row, col, dir]
+	var key_b := "%d,%d,%s" % [nr, nc, opp]
+	return key_a if key_a < key_b else key_b
 
 
 # ── Artifact loading helper ─────────────────────────────────────────────────
