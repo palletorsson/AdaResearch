@@ -260,7 +260,7 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	if floor_instance.has_method("apply_grid_config"):
 		floor_instance.apply_grid_config(floor_config)
 
-	floor_instance.position = Vector3(center_x, 0.01, center_z)
+	floor_instance.position = Vector3(center_x, 0.005, center_z)  # Artifact floor above base
 	floor_instance.name = "Floor_%s" % str(room.get("id", "room"))
 
 	print("FloorPlanSpace: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
@@ -280,7 +280,7 @@ func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
 	mat.roughness = 0.9
 	mesh_inst.material_override = mat
 
-	mesh_inst.position = Vector3(cx, 0.01, cz)
+	mesh_inst.position = Vector3(cx, 0.001, cz)  # Base floor slightly above ground
 	mesh_inst.name = "FallbackFloor"
 	parent.add_child(mesh_inst)
 
@@ -785,7 +785,7 @@ func _add_fly_camera(rooms: Array, cell_size: float) -> void:
 	ground_mat.roughness = 0.95
 	ground_mat.metallic = 0.0
 	ground.material_override = ground_mat
-	ground.position = Vector3(cx, -0.01, cz)
+	ground.position = Vector3(cx, -0.05, cz)  # Well below base floor to avoid z-fighting
 	add_child(ground)
 
 	print("FloorPlanSpace: Camera at (%.1f, %.1f, %.1f), museum span %.0fx%.0f m" % [

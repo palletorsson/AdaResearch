@@ -188,6 +188,9 @@ static func build_floor(composition_path: String, floor_size: Vector2, parent: N
 			surface_count += 1
 
 	if grout_verts.size() > 0:
+		# Raise grout slightly above tile surfaces to prevent z-fighting
+		for vi in range(grout_verts.size()):
+			grout_verts[vi].y = 0.002
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = grout_verts
