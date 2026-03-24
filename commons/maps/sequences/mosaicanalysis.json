@@ -26,6 +26,7 @@
 				"Scale and viewing distance: how mosaic resolution maps to pixel density"
 			],
 			"content": [
+				"Grand_Pattern_Museum: Ultimate showcase museum with all 15 floor patterns across two wings and 8 floating facade exhibits in a grand central hall",
 				"Facade_Showcase: Open hall showcasing all 6 facade presets as freestanding floating exhibits \u00e2\u20ac\u201d classical, galleria, venetian gothic, baroque, florence marble, capri whitewash",
 				"MANN_Gallery_Museum: Walk through a museum gallery with 6 rooms \u00e2\u20ac\u201d each with a different Pompeii mosaic floor, Galleria facade walls, and freestanding exhibit panels",
 				"Mosaic_Pompeii_Floors: Geometric opus tessellatum \u00e2\u20ac\u201d wallpaper groups in Roman floors (Casa del Fauno, Casa dei Vettii)",
@@ -37,6 +38,7 @@
 				"Mosaic_Pattern_Maker: Wallpaper group workshop \u00e2\u20ac\u201d using pattern_maker_station with field-captured motifs"
 			],
 			"maps": [
+				"Grand_Pattern_Museum",
 				"Pattern_Showcase",
 				"Facade_Showcase",
 				"MANN_Gallery_Museum",
@@ -49,6 +51,7 @@
 				"Mosaic_Pattern_Maker"
 			],
 			"algorithm_paths": {
+				"Grand_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
 				"Pattern_Showcase": "res://commons/artifacts/floor_plan_space/",
 				"Facade_Showcase": "res://commons/artifacts/floor_plan_space/",
 				"MANN_Gallery_Museum": "res://commons/artifacts/floor_plan_space/",

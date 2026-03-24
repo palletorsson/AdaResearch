@@ -1,0 +1,302 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Giotto's Campanile / Florence Cathedral — polychrome marble facade with white, green, and pink geometric panels",
+  "facade": {
+    "bays": 5,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 12.0,
+    "total_height": 14.0,
+    "wall_depth": 0.3
+  },
+  "zones": [
+    { "row": 0, "name": "Cornice",       "height_multiplier": 0.4 },
+    { "row": 1, "name": "UpperGallery",  "height_multiplier": 1.0 },
+    { "row": 2, "name": "ReliefPanels",  "height_multiplier": 1.6 },
+    { "row": 3, "name": "Base",          "height_multiplier": 1.0 }
+  ],
+  "materials": {
+    "wall": "#F0EBE0",
+    "zones": {
+      "Cornice":      { "color": "#F0EBE0", "type": "carrara" },
+      "UpperGallery": { "color": "#E8DDD0", "type": "carrara" },
+      "ReliefPanels": { "color": "#D4A07A", "type": "siena" },
+      "Base":         { "color": "#F0EBE0", "type": "carrara" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "cornice_shelf", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.25, 0.25, 0.25, 0.25],
+        "placements": [
+          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.035 } },
+          { "row": 1, "part": "dentil_band", "params": { "block_w": 0.025, "block_h": 0.035, "block_d": 0.02 } },
+          { "row": 2, "part": "geometric_border", "params": { "pattern": "diamond", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "repeat": 24 } },
+          { "row": 3, "part": "fascia", "params": { "color": "#D4A07A" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "arched_window", "params": { "keystone": false, "mullion": true, "arch_ratio": 0.30, "arch_height_frac": 0.75, "archivolt_depth": 0.015, "frame_color": "#F0EBE0" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "arched_window", "params": { "keystone": false, "mullion": true, "arch_ratio": 0.30, "arch_height_frac": 0.75, "archivolt_depth": 0.015, "frame_color": "#F0EBE0" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "arched_window", "params": { "keystone": false, "mullion": true, "arch_ratio": 0.30, "arch_height_frac": 0.75, "archivolt_depth": 0.015, "frame_color": "#F0EBE0" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "arched_window", "params": { "keystone": false, "mullion": true, "arch_ratio": 0.30, "arch_height_frac": 0.75, "archivolt_depth": 0.015, "frame_color": "#F0EBE0" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 1, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "arched_window", "params": { "keystone": false, "mullion": true, "arch_ratio": 0.30, "arch_height_frac": 0.75, "archivolt_depth": 0.015, "frame_color": "#F0EBE0" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.30, 0.40, 0.30],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#2D5A3D" } },
+          { "row": 1, "part": "geometric_border", "params": { "pattern": "circle_in_diamond", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 20 } },
+          { "row": 2, "part": "fascia", "params": { "color": "#2D5A3D" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "serpentine_green" },
+        { "width": 0.02, "profile": "fillet", "material": "carrara" },
+        { "width": 0.06, "profile": "flat", "material": "serpentine_green" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "framed_marble_panel",
+            "params": { "panel_material": "siena", "frame_projection": 0.02, "panel_recess": 0.012, "hexagonal_relief": true },
+            "frames": [
+              { "width": 0.04, "profile": "half_round", "material": "carrara" },
+              { "width": 0.02, "profile": "fillet", "material": "serpentine_green" }
+            ]
+          },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "serpentine_green" },
+        { "width": 0.02, "profile": "fillet", "material": "siena" },
+        { "width": 0.06, "profile": "flat", "material": "serpentine_green" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "framed_marble_panel",
+            "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.012, "hexagonal_relief": true },
+            "frames": [
+              { "width": 0.04, "profile": "half_round", "material": "serpentine_green" },
+              { "width": 0.02, "profile": "fillet", "material": "siena" }
+            ]
+          },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "serpentine_green" },
+        { "width": 0.02, "profile": "fillet", "material": "carrara" },
+        { "width": 0.06, "profile": "flat", "material": "serpentine_green" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "framed_marble_panel",
+            "params": { "panel_material": "siena", "frame_projection": 0.02, "panel_recess": 0.012, "hexagonal_relief": true },
+            "frames": [
+              { "width": 0.04, "profile": "half_round", "material": "carrara" },
+              { "width": 0.02, "profile": "fillet", "material": "serpentine_green" }
+            ]
+          },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "serpentine_green" },
+        { "width": 0.02, "profile": "fillet", "material": "siena" },
+        { "width": 0.06, "profile": "flat", "material": "serpentine_green" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "framed_marble_panel",
+            "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.012, "hexagonal_relief": true },
+            "frames": [
+              { "width": 0.04, "profile": "half_round", "material": "serpentine_green" },
+              { "width": 0.02, "profile": "fillet", "material": "siena" }
+            ]
+          },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 2, "part": "framed_marble_panel",
+      "params": { "panel_material": "siena", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "serpentine_green" },
+        { "width": 0.02, "profile": "fillet", "material": "carrara" },
+        { "width": 0.06, "profile": "flat", "material": "serpentine_green" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "framed_marble_panel",
+            "params": { "panel_material": "siena", "frame_projection": 0.02, "panel_recess": 0.012, "hexagonal_relief": true },
+            "frames": [
+              { "width": 0.04, "profile": "half_round", "material": "carrara" },
+              { "width": 0.02, "profile": "fillet", "material": "serpentine_green" }
+            ]
+          },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.25, 0.50, 0.25],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#F0EBE0" } },
+          { "row": 1, "part": "geometric_border", "params": { "pattern": "diamond", "color_a": "#F0EBE0", "color_b": "#D4A07A", "color_c": "#2D5A3D", "repeat": 20 } },
+          { "row": 2, "part": "fascia", "params": { "color": "#F0EBE0" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 3, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.01 },
+      "frames": [
+        { "width": 0.04, "profile": "flat", "material": "serpentine_green" },
+        { "width": 0.03, "profile": "fillet", "material": "siena" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "geometric_border", "params": { "pattern": "hexagon_band", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 6 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 3, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.01 },
+      "frames": [
+        { "width": 0.04, "profile": "flat", "material": "serpentine_green" },
+        { "width": 0.03, "profile": "fillet", "material": "siena" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "geometric_border", "params": { "pattern": "hexagon_band", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 6 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 3, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.01 },
+      "frames": [
+        { "width": 0.04, "profile": "flat", "material": "serpentine_green" },
+        { "width": 0.03, "profile": "fillet", "material": "siena" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "geometric_border", "params": { "pattern": "hexagon_band", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 6 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 3, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.01 },
+      "frames": [
+        { "width": 0.04, "profile": "flat", "material": "serpentine_green" },
+        { "width": 0.03, "profile": "fillet", "material": "siena" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "geometric_border", "params": { "pattern": "hexagon_band", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 6 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 3, "part": "framed_marble_panel",
+      "params": { "panel_material": "carrara", "frame_projection": 0.02, "panel_recess": 0.01 },
+      "frames": [
+        { "width": 0.04, "profile": "flat", "material": "serpentine_green" },
+        { "width": 0.03, "profile": "fillet", "material": "siena" }
+      ],
+      "sub_grid": {
+        "cols": [0.14, 0.72, 0.14],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } },
+          { "col": 1, "part": "geometric_border", "params": { "pattern": "hexagon_band", "color_a": "#F0EBE0", "color_b": "#2D5A3D", "color_c": "#D4A07A", "repeat": 6 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "composite", "fluted": false, "color": "#2D5A3D" } }
+        ]
+      }
+    }
+  ]
+}
