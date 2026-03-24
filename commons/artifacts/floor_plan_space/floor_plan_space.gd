@@ -110,6 +110,10 @@ func _build_all_rooms() -> void:
 
 	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
 
+	# Add a simple fly camera if no camera exists in the scene
+	if not get_viewport().get_camera_3d():
+		_add_fly_camera(rooms, cell_size)
+
 
 # ── Doorway mapping ──────────────────────────────────────────────────────────
 # The floor_plan.json has top-level doorways like:
@@ -607,3 +611,46 @@ func _load_artifact_scene(lookup_name: String) -> PackedScene:
 			return scene
 
 	return null
+
+
+# ── Fly camera for standalone viewing ─────────────────────────────────────
+
+func _add_fly_camera(rooms: Array, cell_size: float) -> void:
+	# Find center of all rooms
+	var total_x := 0.0
+	var total_z := 0.0
+	var count := 0
+	for room in rooms:
+		for cell in room.get("cells", []):
+			if cell is Array and cell.size() >= 2:
+				total_x += int(cell[1]) * cell_size
+				total_z += int(cell[0]) * cell_size
+				count += 1
+	var cx := total_x / maxf(count, 1)
+	var cz := total_z / maxf(count, 1)
+
+	var cam := Camera3D.new()
+	cam.name = "FlyCamera"
+	cam.current = true
+	cam.position = Vector3(cx, 8.0, cz + 12.0)
+	cam.rotation_degrees = Vector3(-35, 0, 0)
+	add_child(cam)
+
+	# Add directional light
+	var light := DirectionalLight3D.new()
+	light.light_energy = 1.2
+	light.rotation_degrees = Vector3(-45, 30, 0)
+	light.shadow_enabled = true
+	add_child(light)
+
+	# Add ambient light
+	var env := WorldEnvironment.new()
+	var environment := Environment.new()
+	environment.ambient_light_color = Color(0.85, 0.82, 0.75)
+	environment.ambient_light_energy = 0.4
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color(0.15, 0.17, 0.22)
+	env.environment = environment
+	add_child(env)
+
+	print("FloorPlanSpace: Added fly camera at (%.1f, 8.0, %.1f)" % [cx, cz + 12.0])
