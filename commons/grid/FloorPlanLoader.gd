@@ -38,6 +38,7 @@ class_name FloorPlanLoader
 extends Node
 
 const FacadeComposerScript = preload("res://commons/facade_parts/facade_composer.gd")
+const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 var _floor_plan_data: Dictionary = {}
 var has_floor_plan: bool = false
@@ -119,10 +120,6 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	if cells.is_empty():
 		return
 
-	var floor_pattern: String = str(room.get("floor_pattern", ""))
-	if floor_pattern.is_empty():
-		return
-
 	# Compute bounding rect from cells — cells are [row, col]
 	var min_row: int = 999999
 	var max_row: int = -999999
@@ -147,14 +144,32 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	var rows_span: int = max_row - min_row + 1
 
 	# Floor size in meters
-	var floor_w: float = cols_span * cell_size
-	var floor_h: float = rows_span * cell_size
+	var room_w: float = cols_span * cell_size
+	var room_h: float = rows_span * cell_size
+
+	# Room center in world coords
+	var center_x: float = (min_col + cols_span * 0.5) * cell_size
+	var center_z: float = (min_row + rows_span * 0.5) * cell_size
+
+	# ── New: try mosaic composition first ──────────────────────────────────
+	var mosaic_comp: String = room.get("mosaic_composition", "")
+	if not mosaic_comp.is_empty():
+		var comp_path := "res://commons/patterns/mosaics/%s.json" % mosaic_comp
+		var floor_node := MosaicFloorBuilder.build_floor(comp_path, Vector2(room_w, room_h), parent)
+		if floor_node:
+			floor_node.position = Vector3(center_x, 0.005, center_z)
+			return
+
+	# ── Fall back to old artifact-based floor pattern ──────────────────────
+	var floor_pattern: String = str(room.get("floor_pattern", ""))
+	if floor_pattern.is_empty():
+		return
 
 	# Try to load the floor pattern scene from the artifact registry
 	var scene := _load_artifact_scene(floor_pattern)
 	if not scene:
 		push_warning("FloorPlanLoader: Floor pattern '%s' not found, using fallback" % floor_pattern)
-		_place_fallback_floor(parent, min_col, min_row, floor_w, floor_h, cell_size)
+		_place_fallback_floor(parent, min_col, min_row, room_w, room_h, cell_size)
 		return
 
 	var floor_instance: Node3D = scene.instantiate()
@@ -162,19 +177,16 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 
 	# Build config and apply
 	var floor_config: Dictionary = room.get("floor_config", {}).duplicate()
-	floor_config["floor_size"] = [floor_w, floor_h]
+	floor_config["floor_size"] = [room_w, room_h]
 
 	if floor_instance.has_method("apply_grid_config"):
 		floor_instance.apply_grid_config(floor_config)
 
-	# Position at room center (world coords: x = col * cell_size, z = row * cell_size)
-	var center_x: float = (min_col + cols_span * 0.5) * cell_size
-	var center_z: float = (min_row + rows_span * 0.5) * cell_size
 	floor_instance.position = Vector3(center_x, 0.01, center_z)
 	floor_instance.name = "Floor_%s" % str(room.get("id", "room"))
 
 	print("FloorPlanLoader: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
-		floor_pattern, center_x, center_z, floor_w, floor_h
+		floor_pattern, center_x, center_z, room_w, room_h
 	])
 
 
