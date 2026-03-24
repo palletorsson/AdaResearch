@@ -772,22 +772,6 @@ func _add_fly_camera(rooms: Array, cell_size: float) -> void:
 	env.environment = environment
 	add_child(env)
 
-	# ── Ground plane under the museum ──
-	var ground := MeshInstance3D.new()
-	ground.name = "GroundPlane"
-	var ground_mesh := PlaneMesh.new()
-	var ground_size: float = span_max * 3.0 + 20.0
-	ground_mesh.size = Vector2(ground_size, ground_size)
-	ground.mesh = ground_mesh
-
-	var ground_mat := StandardMaterial3D.new()
-	ground_mat.albedo_color = Color(0.38, 0.35, 0.3)
-	ground_mat.roughness = 0.95
-	ground_mat.metallic = 0.0
-	ground.material_override = ground_mat
-	ground.position = Vector3(cx, -0.05, cz)  # Well below base floor to avoid z-fighting
-	add_child(ground)
-
 	print("FloorPlanSpace: Camera at (%.1f, %.1f, %.1f), museum span %.0fx%.0f m" % [
 		cx, cam_height, cz + cam_back, span_x, span_z
 	])
