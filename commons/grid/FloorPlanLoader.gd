@@ -151,6 +151,9 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	var center_x: float = (min_col + cols_span * 0.5) * cell_size
 	var center_z: float = (min_row + rows_span * 0.5) * cell_size
 
+	# ── Floor collider so the player can stand on it ──────────────────────
+	_add_floor_collider(parent, center_x, center_z, room_w, room_h)
+
 	# ── New: try mosaic composition first ──────────────────────────────────
 	var mosaic_comp: String = room.get("mosaic_composition", "")
 	if not mosaic_comp.is_empty():
@@ -188,6 +191,18 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	print("FloorPlanLoader: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
 		floor_pattern, center_x, center_z, room_w, room_h
 	])
+
+
+func _add_floor_collider(parent: Node3D, cx: float, cz: float, w: float, h: float) -> void:
+	var body := StaticBody3D.new()
+	body.name = "FloorCollider"
+	var col_shape := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(w, 0.1, h)
+	col_shape.shape = shape
+	body.add_child(col_shape)
+	body.position = Vector3(cx, -0.05, cz)  # Just below floor surface
+	parent.add_child(body)
 
 
 func _place_fallback_floor(parent: Node3D, min_col: int, min_row: int,
