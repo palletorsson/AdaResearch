@@ -514,9 +514,8 @@ func _build_wall_segment(segment: Dictionary, parent: Node3D,
 	var start_row: int = edges[0]["row"]
 	var start_col: int = edges[0]["col"]
 
-	# N/S walls extend by half-thickness at each end to cover corners
-	var corner_ext: float = wall_thickness * 0.5 if dir in ["N", "S"] else 0.0
-	var total_length: float = seg_meters + corner_ext * 2.0
+	# No corner extensions — keep walls exactly segment length to avoid blocking doorways
+	var total_length: float = seg_meters
 
 	var wall_pos: Vector3
 	var wall_rot_y: float
