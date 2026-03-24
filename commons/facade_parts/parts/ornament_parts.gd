@@ -70,7 +70,7 @@ static func _root(rname: String) -> Node3D:
 ## Ported from CSGFacadeElements.triangular_pediment.
 static func pediment_tri(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("PedimentTri")
-	var depth: float = p.get("depth", 0.08)
+	var depth: float = p.get("depth", 0.04)
 	var peak_h: float = p.get("peak_height", h * 0.8)
 
 	# Triangular cross-section
@@ -84,8 +84,8 @@ static func pediment_tri(w: float, h: float, p: Dictionary = {}) -> Node3D:
 		CSGShape3D.OPERATION_UNION, _mat_ped)
 	root.add_child(triangle)
 
-	# Cornice line along bottom
-	var cornice := _box("Cornice", Vector3(w * 1.05, h * 0.12, depth * 1.3),
+	# Cornice line along bottom — clamped to cell width
+	var cornice := _box("Cornice", Vector3(w, h * 0.12, depth),
 		Vector3(w * 0.5, h * 0.06, depth * 0.5),
 		CSGShape3D.OPERATION_UNION, _mat_ped)
 	root.add_child(cornice)
@@ -105,7 +105,7 @@ static func pediment_tri(w: float, h: float, p: Dictionary = {}) -> Node3D:
 ## Ported from CSGFacadeElements.broken_pediment.
 static func pediment_broken(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("PedimentBroken")
-	var depth: float = p.get("depth", 0.08)
+	var depth: float = p.get("depth", 0.04)
 	var peak_h: float = p.get("peak_height", h * 0.8)
 	var gap_w: float = w * 0.2
 
@@ -133,8 +133,8 @@ static func pediment_broken(w: float, h: float, p: Dictionary = {}) -> Node3D:
 		CSGShape3D.OPERATION_UNION, _mat_bped)
 	root.add_child(right_tri)
 
-	# Cornice
-	var cornice := _box("Cornice", Vector3(w * 1.05, h * 0.12, depth * 1.3),
+	# Cornice — clamped to cell width
+	var cornice := _box("Cornice", Vector3(w, h * 0.12, depth),
 		Vector3(w * 0.5, h * 0.06, depth * 0.5),
 		CSGShape3D.OPERATION_UNION, _mat_bped)
 	root.add_child(cornice)

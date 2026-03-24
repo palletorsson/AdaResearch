@@ -122,7 +122,7 @@ static func dentil_band(w: float, h: float, p: Dictionary = {}) -> Node3D:
 ## Cyma recta: S-curve profile extruded along width.
 static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("CymaRecta")
-	var depth: float = p.get("depth", minf(h * 0.4, 0.05))
+	var depth: float = p.get("depth", minf(h * 0.4, 0.04))
 
 	# S-curve profile in Y-Z plane
 	var profile := PackedVector2Array()
@@ -155,7 +155,7 @@ static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
 static func cyma_recta_moulding(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var params := p.duplicate()
 	if not params.has("depth"):
-		params["depth"] = minf(h * 0.5, 0.06)
+		params["depth"] = minf(h * 0.5, 0.04)
 	var root := cyma_recta(w, h, params)
 	root.name = "CymaRectaMoulding"
 	return root
@@ -165,7 +165,7 @@ static func cyma_recta_moulding(w: float, h: float, p: Dictionary = {}) -> Node3
 ## Projection kept small (0.06m default) so geometry stays within facade width.
 static func cornice_shelf(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("CorniceShelf")
-	var projection: float = p.get("projection", 0.06)
+	var projection: float = p.get("projection", 0.04)
 	var slab_h: float = h * 0.5
 	var drip_h: float = h * 0.08
 
@@ -317,7 +317,7 @@ static func rect_window_band(w: float, h: float, p: Dictionary = {}) -> Node3D:
 ## Depth kept modest so brackets stay within facade footprint.
 static func modillion(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("Modillion")
-	var depth: float = p.get("depth", minf(h * 0.5, 0.06))
+	var depth: float = p.get("depth", minf(h * 0.5, 0.04))
 	var bracket_count: int = p.get("count", maxi(int(w / 0.30), 5))
 	var bracket_spacing := w / float(bracket_count)
 	var bracket_w: float = 0.04

@@ -86,23 +86,23 @@ static func rect_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	root.add_child(glass)
 
 	# Frame strips
-	var lintel := _box("Lintel", Vector3(opening_w + frame_t * 2.0, frame_t, wall_depth * 0.3),
+	var lintel := _box("Lintel", Vector3(minf(opening_w + frame_t * 2.0, w), frame_t, wall_depth * 0.3),
 		Vector3(cx, cy + opening_h * 0.5 + frame_t * 0.5, wall_depth * 0.15),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(lintel)
 
-	var sill := _box("Sill", Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
+	var sill := _box("Sill", Vector3(minf(opening_w + frame_t * 3.0, w), frame_t, wall_depth * 0.4),
 		Vector3(cx, cy - opening_h * 0.5 - frame_t * 0.5, wall_depth * 0.2),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(sill)
 
 	var jamb_left := _box("JambLeft", Vector3(frame_t, opening_h, wall_depth * 0.3),
-		Vector3(cx - opening_w * 0.5 - frame_t * 0.5, cy, wall_depth * 0.15),
+		Vector3(maxf(cx - opening_w * 0.5 - frame_t * 0.5, frame_t * 0.5), cy, wall_depth * 0.15),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(jamb_left)
 
 	var jamb_right := _box("JambRight", Vector3(frame_t, opening_h, wall_depth * 0.3),
-		Vector3(cx + opening_w * 0.5 + frame_t * 0.5, cy, wall_depth * 0.15),
+		Vector3(minf(cx + opening_w * 0.5 + frame_t * 0.5, w - frame_t * 0.5), cy, wall_depth * 0.15),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(jamb_right)
 
@@ -215,7 +215,7 @@ static func arched_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
 
 		# Full rectangular block spanning the arch zone
 		var sp_block := _box("SpanBlock",
-			Vector3(opening_w + frame_t * 2.0, spandrel_h, wall_depth * 0.18),
+			Vector3(minf(opening_w + frame_t * 2.0, w), spandrel_h, wall_depth * 0.18),
 			Vector3(cx, spring_y + spandrel_h * 0.5, wall_depth * 0.09),
 			CSGShape3D.OPERATION_UNION, mat_wall)
 		sp_combiner.add_child(sp_block)
@@ -231,7 +231,7 @@ static func arched_window(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	# 3. Sill (bottom ledge)
 	# ==================================================================
 	var sill := _box("Sill",
-		Vector3(opening_w + frame_t * 3.0, frame_t, wall_depth * 0.4),
+		Vector3(minf(opening_w + frame_t * 3.0, w), frame_t, wall_depth * 0.4),
 		Vector3(cx, rect_bottom - frame_t * 0.5, wall_depth * 0.2),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(sill)
@@ -376,7 +376,7 @@ static func venetian_bifora(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	root.add_child(column)
 
 	# Sill
-	var sill := _box("Sill", Vector3(total_opening_w + frame_t * 2.0, frame_t, wall_depth * 0.4),
+	var sill := _box("Sill", Vector3(minf(total_opening_w + frame_t * 2.0, w), frame_t, wall_depth * 0.4),
 		Vector3(cx, margin_y - frame_t * 0.5, wall_depth * 0.2),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(sill)
@@ -483,7 +483,7 @@ static func single_door(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	root.add_child(void_back)
 
 	# Frame
-	var lintel := _box("Lintel", Vector3(opening_w + frame_t * 2.5, frame_t * 1.5, wall_depth * 0.35),
+	var lintel := _box("Lintel", Vector3(minf(opening_w + frame_t * 2.5, w), frame_t * 1.5, wall_depth * 0.35),
 		Vector3(cx, opening_h + frame_t * 0.75, wall_depth * 0.18),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(lintel)
@@ -546,7 +546,7 @@ static func double_door(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	root.add_child(void_back)
 
 	# Frame
-	var lintel := _box("Lintel", Vector3(opening_w + frame_t * 2.5, frame_t * 1.5, wall_depth * 0.35),
+	var lintel := _box("Lintel", Vector3(minf(opening_w + frame_t * 2.5, w), frame_t * 1.5, wall_depth * 0.35),
 		Vector3(cx, opening_h + frame_t * 0.75, wall_depth * 0.18),
 		CSGShape3D.OPERATION_UNION, mat_frame)
 	root.add_child(lintel)

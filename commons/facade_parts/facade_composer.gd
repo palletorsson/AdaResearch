@@ -159,15 +159,15 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		var col: int = placement.get("col", 0) as int
 		var row: int = placement.get("row", 0) as int
 		var part_name: String = str(placement.get("part", ""))
-		var col_span: int = placement.get("col_span", 1) as int
-		var row_span: int = placement.get("row_span", 1) as int
+		var col_span: int = mini(placement.get("col_span", 1) as int, bays - col)
+		var row_span: int = mini(placement.get("row_span", 1) as int, stories - row)
 
 		if col < 0 or col >= bays or row < 0 or row >= stories:
 			continue
 		if part_name == "" or part_name == "plain_wall":
 			continue
 
-		# Calculate effective dimensions from spans
+		# Calculate effective dimensions from spans (clamped to facade bounds)
 		var ew := cell_width * float(col_span)
 		var eh: float = 0.0
 		for ri in range(row, mini(row + row_span, stories)):
@@ -304,8 +304,8 @@ static func _apply_bilateral_symmetry(container: Node3D, total_width: float,
 		var col: int = placement.get("col", 0) as int
 		var row: int = placement.get("row", 0) as int
 		var part_name: String = str(placement.get("part", ""))
-		var col_span: int = placement.get("col_span", 1) as int
-		var row_span: int = placement.get("row_span", 1) as int
+		var col_span: int = mini(placement.get("col_span", 1) as int, bays - col)
+		var row_span: int = mini(placement.get("row_span", 1) as int, stories - row)
 
 		# Skip elements that already span the full width or reach beyond the half
 		if col + col_span > half:
