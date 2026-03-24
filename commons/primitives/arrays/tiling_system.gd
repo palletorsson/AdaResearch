@@ -122,7 +122,7 @@ var _preview_container: Node3D
 var _analyzer: TilingAnalyzer
 
 ## Internal PatternTilePuzzle for active layer editing
-var _active_zone: int = CompositionZone.FIELD
+var _active_zone = CompositionZone.FIELD
 
 
 func _ready() -> void:
@@ -350,7 +350,7 @@ func set_layer_domain(zone: CompositionZone, domain: Array, group: WallpaperGrou
 
 ## Switch which layer is "active" for VR editing.
 func set_active_layer(zone: CompositionZone) -> void:
-	_active_zone = int(zone)
+	_active_zone = zone
 
 
 ## Get the active layer.
