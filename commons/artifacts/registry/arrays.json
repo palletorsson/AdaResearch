@@ -1460,6 +1460,39 @@
 				],
 				"size_group": "compact"
 			}
+		},
+		"floor_plan_space": {
+			"name": "Floor Plan Space",
+			"lookup_name": "floor_plan_space",
+			"description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system.",
+			"scene": "res://commons/artifacts/floor_plan_space/floor_plan_space.tscn",
+			"category": "architecture",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "advanced",
+			"tags": [
+				"floor_plan",
+				"architecture",
+				"museum",
+				"rooms"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					0
+				],
+				"size_group": "large"
+			}
 		}
 	}
 }

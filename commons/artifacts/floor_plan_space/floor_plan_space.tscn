@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp7f2kxl8qsne"]
+
+[ext_resource type="Script" path="res://commons/artifacts/floor_plan_space/floor_plan_space.gd" id="1_script"]
+
+[node name="FloorPlanSpace" type="Node3D"]
+script = ExtResource("1_script")
