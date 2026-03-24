@@ -428,18 +428,18 @@ func _build_wall_segment(segment: Dictionary, parent: Node3D,
 			wall_rot_y = 0.0
 		"E":
 			# East edge: right of cell col -> x = (col + 1) * cell_size
-			# Room is west (-X). Rotate 90° so +Z→+X then facade faces west (into room).
+			# Room is west (-X). Rotate -90° so +Z→-X = faces west into room.
 			var cx: float = (start_col + 1) * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 90.0
+			wall_rot_y = -90.0
 		"W":
 			# West edge: left of cell col -> x = col * cell_size
-			# Room is east (+X). Rotate -90° so +Z→-X then facade faces east (into room).
+			# Room is east (+X). Rotate 90° so +Z→+X = faces east into room.
 			var cx: float = start_col * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = -90.0
+			wall_rot_y = 90.0
 
 	if wall_preset != "default" and wall_preset != "":
 		_build_facade_wall(parent, wall_pos, wall_rot_y, total_length, wall_height, wall_preset, wall_thickness)
