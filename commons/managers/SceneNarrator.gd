@@ -698,7 +698,7 @@ func _find_spawn_position(gs: GridSystem) -> Vector3i:
 			return spawn_from_data
 	# Final fallback: first walkable floor tile
 	if gs.structure_component and gs.data_component:
-		var dims = gs.data_component.get_map_dimensions()
+		var dims = gs.data_component.get_grid_dimensions()
 		for z in range(int(dims.z)):
 			for x in range(int(dims.x)):
 				var h = gs.structure_component.find_highest_y_at(x, z)
