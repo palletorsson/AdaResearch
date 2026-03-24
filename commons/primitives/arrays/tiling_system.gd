@@ -350,7 +350,7 @@ func set_layer_domain(zone: CompositionZone, domain: Array, group: WallpaperGrou
 
 ## Switch which layer is "active" for VR editing.
 func set_active_layer(zone: CompositionZone) -> void:
-	_active_zone = zone
+	_active_zone = int(zone)
 
 
 ## Get the active layer.
