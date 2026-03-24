@@ -104,7 +104,7 @@ func _add_2d_version(scene_path: String, key: String, pos: Vector3) -> void:
 	if "text" in control:
 		control.text = key.to_upper()
 
-	var px := control.custom_minimum_size
+	var px: Vector2 = control.custom_minimum_size
 	if px == Vector2.ZERO:
 		px = Vector2(80, 180)
 
@@ -122,7 +122,7 @@ func _add_2d_version(scene_path: String, key: String, pos: Vector3) -> void:
 	add_child(vp)
 
 	# Flat quad — no bezel, just the control
-	var phys := px / 1000.0
+	var phys: Vector2 = px / 1000.0
 	var mesh_inst := MeshInstance3D.new()
 	mesh_inst.name = "2D_%s" % key
 	var quad := QuadMesh.new()
@@ -161,7 +161,7 @@ func _add_3d_version(scene_path: String, key: String, pos: Vector3) -> void:
 	if "text" in control:
 		control.text = key.to_upper()
 
-	var px := control.custom_minimum_size
+	var px: Vector2 = control.custom_minimum_size
 	if px == Vector2.ZERO:
 		px = Vector2(80, 180)
 
@@ -178,7 +178,7 @@ func _add_3d_version(scene_path: String, key: String, pos: Vector3) -> void:
 	vp.add_child(control)
 	add_child(vp)
 
-	var phys := px / 1000.0
+	var phys: Vector2 = px / 1000.0
 
 	# Bezel chassis — dark box behind the screen
 	var chassis := MeshInstance3D.new()

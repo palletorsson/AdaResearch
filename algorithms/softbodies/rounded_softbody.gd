@@ -239,7 +239,7 @@ func _capture_rest_state() -> void:
 	_vertex_strain.resize(_vertex_count)
 
 	for i in range(_vertex_count):
-		var p := _soft_body.get_point_global_position(i)
+		var p: Vector3 = _soft_body.get_point_global_position(i)
 		_rest_positions[i] = p - _soft_body.global_position
 		_prev_positions[i] = p
 		_vertex_strain[i] = 0.0
@@ -513,14 +513,14 @@ func _apply_squeeze() -> void:
 		return
 
 	for i in range(_vertex_count):
-		var vpos := _soft_body.get_point_global_position(i)
-		var to_hand := _hand_pos - vpos
-		var dist := to_hand.length()
+		var vpos: Vector3 = _soft_body.get_point_global_position(i)
+		var to_hand: Vector3 = _hand_pos - vpos
+		var dist: float = to_hand.length()
 		if dist < _squeeze_radius and dist > 0.001:
 			# Push vertices away from hand center (squeeze effect)
-			var push_dir := -to_hand.normalized()
-			var strength := _squeeze_strength * (1.0 - dist / _squeeze_radius)
-			var push := push_dir * strength * 0.016  # frame-rate independent approx
+			var push_dir: Vector3 = -to_hand.normalized()
+			var strength: float = _squeeze_strength * (1.0 - dist / _squeeze_radius)
+			var push: Vector3 = push_dir * strength * 0.016  # frame-rate independent approx
 			PhysicsServer3D.soft_body_move_point(rid, i, vpos + push)
 
 
@@ -535,12 +535,12 @@ func _compute_strain() -> void:
 	var sb_origin := _soft_body.global_position
 
 	for i in range(_vertex_count):
-		var current := _soft_body.get_point_global_position(i)
-		var rest := _rest_positions[i] + sb_origin
-		var displacement := (current - rest).length()
+		var current: Vector3 = _soft_body.get_point_global_position(i)
+		var rest: Vector3 = _rest_positions[i] + sb_origin
+		var displacement: float = (current - rest).length()
 
 		# Strain energy ~ 0.5 * k * displacement^2
-		var energy := 0.5 * _stiffness * displacement * displacement
+		var energy: float = 0.5 * _stiffness * displacement * displacement
 		_vertex_strain[i] = energy
 		_total_strain += energy
 
@@ -570,10 +570,10 @@ func _detect_collisions(delta: float) -> void:
 
 	# Detect large velocity changes as collision proxies
 	for vi in range(_vertex_count):
-		var current := _soft_body.get_point_global_position(vi)
-		var prev := _prev_positions[vi]
-		var vel := (current - prev) / maxf(delta, 0.001)
-		var speed := vel.length()
+		var current: Vector3 = _soft_body.get_point_global_position(vi)
+		var prev: Variant = _prev_positions[vi]
+		var vel: Vector3 = (current - prev) / maxf(delta, 0.001)
+		var speed: float = vel.length()
 
 		if speed > 1.5 and _collision_forces.size() < MAX_COLLISION_DISPLAY:
 			_collision_forces.append({
@@ -596,11 +596,11 @@ func _compute_volume() -> float:
 	var mx := Vector3(-INF, -INF, -INF)
 
 	for i in range(_vertex_count):
-		var p := _soft_body.get_point_global_position(i)
+		var p: Vector3 = _soft_body.get_point_global_position(i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 
-	var extents := mx - mn
+	var extents: Vector3 = mx - mn
 	return extents.x * extents.y * extents.z
 
 
@@ -659,9 +659,9 @@ func _draw_strain_overlay() -> void:
 
 	# Draw small diamond at each vertex colored by strain
 	for i in range(_vertex_count):
-		var p := _soft_body.get_point_global_position(i)
-		var t := clampf(_vertex_strain[i] / maxf(_max_strain, 0.001), 0.0, 1.0)
-		var col := _strain_color(t)
+		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var t: float = clampf(_vertex_strain[i] / maxf(_max_strain, 0.001), 0.0, 1.0)
+		var col: Color = _strain_color(t)
 		var sz := 0.008 + t * 0.012
 		_im_diamond(_strain_im, p, sz, col)
 
@@ -763,12 +763,12 @@ func _draw_volume_wireframe() -> void:
 	var mn := Vector3(INF, INF, INF)
 	var mx := Vector3(-INF, -INF, -INF)
 	for i in range(_vertex_count):
-		var p := _soft_body.get_point_global_position(i)
+		var p: Vector3 = _soft_body.get_point_global_position(i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 
-	var ratio := _current_volume / maxf(_rest_volume, 0.0001)
-	var deviation := absf(ratio - _volume_target_ratio)
+	var ratio: float = _current_volume / maxf(_rest_volume, 0.0001)
+	var deviation: float = absf(ratio - _volume_target_ratio)
 	var col := COL_VOLUME_OK if deviation < 0.05 else (COL_VOLUME_WARN if deviation < 0.15 else COL_VOLUME_BAD)
 
 	_ghost_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)

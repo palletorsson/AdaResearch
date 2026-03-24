@@ -236,7 +236,7 @@ func _create_controls() -> void:
 	_controls.name = "ArtifactControls"
 	add_child(_controls)
 
-	var slider := slider_scene.instantiate()
+	var slider: Node = slider_scene.instantiate()
 	slider.position = Vector3(0, 0.02, 0.45)
 	slider.rotation_degrees.y = 180
 	_controls.add_child(slider)

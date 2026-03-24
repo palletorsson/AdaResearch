@@ -347,8 +347,8 @@ func _handle_collisions(cloth: ClothPiece) -> void:
 			node.velocity.y = 0.0
 		# Spheres
 		for sphere in collision_spheres:
-			var diff := node.position - sphere["pos"]
-			var dist := diff.length()
+			var diff: Vector3 = node.position - sphere["pos"]
+			var dist: float = diff.length()
 			if dist < sphere["radius"]:
 				node.position = sphere["pos"] + diff.normalized() * sphere["radius"]
 				node.velocity *= 0.5

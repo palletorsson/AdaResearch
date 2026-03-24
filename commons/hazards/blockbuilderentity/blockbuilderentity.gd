@@ -8,7 +8,7 @@
 # relationships: unique among hazards -- modifies the map itself; techstrider legs ARE architecture too
 # truth: when the creature eats the environment and rebuilds it, hazard and level design become the same thing.
 
-﻿# Antimatter grey goo entity that consumes geometry and cages the player.
+# Antimatter grey goo entity that consumes geometry and cages the player.
 extends CharacterBody3D
 class_name BlockBuilderEntity
 

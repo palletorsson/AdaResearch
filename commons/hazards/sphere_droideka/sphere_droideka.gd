@@ -8,7 +8,7 @@
 # relationships: contrasts with armadillo_droideka (biological vs mechanical); sphere roller family
 # truth: the sphere is the most efficient armor -- minimum surface for maximum volume, weaponized by deployment.
 
-﻿extends CharacterBody3D
+extends CharacterBody3D
 class_name SphereDroideka
 ## Armadillidiidae-style spherical droideka.
 ## Rolls as a compact ball of overlapping shell plates.

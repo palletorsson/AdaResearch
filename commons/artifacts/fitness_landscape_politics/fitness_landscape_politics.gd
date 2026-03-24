@@ -233,12 +233,12 @@ func _update_swarm(delta: float) -> void:
 		var r2 := randf()
 
 		# PSO velocity update
-		var cognitive := COGNITIVE_WEIGHT * r1 * (p["best_pos"] - p["pos"])
-		var social := SOCIAL_WEIGHT * r2 * (_global_best_pos - p["pos"])
+		var cognitive: Vector3 = COGNITIVE_WEIGHT * r1 * (p["best_pos"] - p["pos"])
+		var social: Vector3 = SOCIAL_WEIGHT * r2 * (_global_best_pos - p["pos"])
 		p["vel"] = inertia * p["vel"] + cognitive + social
 
 		# Clamp speed
-		var spd := p["vel"].length()
+		var spd: float = p["vel"].length()
 		if spd > MAX_SPEED:
 			p["vel"] = p["vel"] / spd * MAX_SPEED
 

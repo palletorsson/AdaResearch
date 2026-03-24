@@ -122,7 +122,7 @@ var _preview_container: Node3D
 var _analyzer: TilingAnalyzer
 
 ## Internal PatternTilePuzzle for active layer editing
-var _active_zone: int = CompositionZone.FIELD
+var _active_zone: CompositionZone = CompositionZone.FIELD
 
 
 func _ready() -> void:

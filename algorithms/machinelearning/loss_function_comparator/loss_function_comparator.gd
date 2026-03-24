@@ -363,7 +363,7 @@ func _create_controls() -> void:
 	add_child(_controls)
 
 	# Outlier fraction slider
-	var slider := slider_scene.instantiate()
+	var slider: Node = slider_scene.instantiate()
 	slider.position = Vector3(0, 0.02, terrain_size * 0.5 + 0.15)
 	slider.rotation_degrees.y = 180
 	_controls.add_child(slider)
@@ -378,7 +378,7 @@ func _create_controls() -> void:
 	# Reset button
 	var btn_scene = load("res://commons/interactables/push_button.tscn")
 	if btn_scene:
-		var btn := btn_scene.instantiate()
+		var btn: Node = btn_scene.instantiate()
 		btn.position = Vector3(0.2, 0.02, terrain_size * 0.5 + 0.15)
 		_controls.add_child(btn)
 		var area = btn.get_node_or_null("InteractableAreaButton")

@@ -193,7 +193,7 @@ func _configure_rack_control(ctrl: Node, param_name: String, initial_value: floa
 	ctrl.set_normalized_value(initial_value)
 
 	# Connect value_changed from inner 2D control
-	var inner := ctrl.get_control()
+	var inner: Control = ctrl.get_control()
 	if inner and inner.has_signal("value_changed"):
 		inner.value_changed.connect(func(val: float):
 			on_change.call(val)
@@ -204,7 +204,7 @@ func _configure_rack_button(ctrl: Node, label_text: String, on_press: Callable) 
 	if not is_instance_valid(ctrl):
 		return
 	ctrl.set_param_name(label_text)
-	var inner := ctrl.get_control()
+	var inner: Control = ctrl.get_control()
 	if inner and inner.has_signal("pressed"):
 		inner.pressed.connect(func(): on_press.call())
 

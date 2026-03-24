@@ -8,7 +8,7 @@
 # relationships: unique hybrid -- rigid body with soft appendages; contrasts with pure walkers and fields
 # truth: a rigid cell that grew soft appendages -- the boundary of categories dissolves.
 
-﻿extends CharacterBody3D
+extends CharacterBody3D
 class_name TentacleCube
 ## Stationary machine cube that unfolds mechanical tentacles when player approaches.
 ## Uses Godot 4.6 IK for tentacle tracking. Dormant cube â†’ unfolds â†’ tracks player.
