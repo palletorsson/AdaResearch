@@ -1,0 +1,57 @@
+{
+	"map_info": {
+		"name": "Naples Street Museum",
+		"lookup_name": "Naples_Street_Museum",
+		"description": "A museum inspired by walking through Naples — rooms represent different buildings and sites you would visit, from Gesu Nuovo to Pompeii villas to Florentine facades.",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "intermediate",
+			"category": "mosaicanalysis",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Compare architectural styles across Neapolitan sites",
+				"Observe how floor patterns encode cultural computation",
+				"Experience facade presets as freestanding exhibits"
+			]
+		},
+		"title": "Naples Street Museum"
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0"
+			]
+		],
+		"utilities": [
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
+		]
+	}
+}

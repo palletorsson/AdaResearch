@@ -1,0 +1,43 @@
+{
+	"map_info": {
+		"name": "Roman Villa",
+		"lookup_name": "Roman_Villa",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0"
+			]
+		],
+		"utilities": [
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
+		]
+	}
+}

@@ -35,7 +35,10 @@
 				"Mosaic_Facade_Ornament: Neapolitan baroque facades \u00e2\u20ac\u201d scrollwork as recursive grammar, volutes as L-systems",
 				"Mosaic_Capri_Villa: Villa San Michele \u00e2\u20ac\u201d Axel Munthe's collected fragments, mixed period analysis",
 				"Mosaic_WFC_Reconstruction: Constraint reconstruction \u00e2\u20ac\u201d feeding documented patterns into WFC solver",
-				"Mosaic_Pattern_Maker: Wallpaper group workshop \u00e2\u20ac\u201d using pattern_maker_station with field-captured motifs"
+				"Mosaic_Pattern_Maker: Wallpaper group workshop \u00e2\u20ac\u201d using pattern_maker_station with field-captured motifs",
+				"Florence_Gallery: Uffizi-inspired long central gallery with eight side rooms \u00e2\u20ac\u201d each featuring a distinct mosaic floor pattern and Italian facade exhibit walls",
+				"Roman_Villa: Museum based on a Roman domus layout \u00e2\u20ac\u201d atrium, tablinum, peristyle, triclinium, and cubiculum rooms with distinct mosaic floor patterns",
+				"Naples_Street_Museum: L-shaped museum inspired by walking through Naples \u2014 six rooms (Gesu Nuovo, Cathedral, Pompeii Villa, Mosaic Workshop, Vestibule, Florence Room) with courtyard corridors and facade exhibits"
 			],
 			"maps": [
 				"Grand_Pattern_Museum",
@@ -48,7 +51,10 @@
 				"Mosaic_Facade_Ornament",
 				"Mosaic_Capri_Villa",
 				"Mosaic_WFC_Reconstruction",
-				"Mosaic_Pattern_Maker"
+				"Mosaic_Pattern_Maker",
+				"Florence_Gallery",
+				"Roman_Villa",
+				"Naples_Street_Museum"
 			],
 			"algorithm_paths": {
 				"Grand_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
@@ -61,7 +67,10 @@
 				"Mosaic_Facade_Ornament": "res://algorithms/lsystems/",
 				"Mosaic_Capri_Villa": "res://commons/primitives/arrays/",
 				"Mosaic_WFC_Reconstruction": "res://algorithms/wfc/",
-				"Mosaic_Pattern_Maker": "res://commons/artifacts/pattern_maker_station/"
+				"Mosaic_Pattern_Maker": "res://commons/artifacts/pattern_maker_station/",
+				"Florence_Gallery": "res://commons/artifacts/floor_plan_space/",
+				"Naples_Street_Museum": "res://commons/artifacts/floor_plan_space/",
+				"Roman_Villa": "res://commons/artifacts/floor_plan_space/"
 			},
 			"return_to": "lab",
 			"lab_map": null,
@@ -137,7 +146,7 @@
 						"wfc_tile_mosaic"
 					],
 					"size_budget": "compact_only",
-					"rationale": "WFC generates new tilings from documented adjacency rules. Compare algorithmic output to originals — constraint satisfaction vs. design intent."
+					"rationale": "WFC generates new tilings from documented adjacency rules. Compare algorithmic output to originals \u00e2\u20ac\u201d constraint satisfaction vs. design intent."
 				},
 				{
 					"map": "Mosaic_Pattern_Maker",
