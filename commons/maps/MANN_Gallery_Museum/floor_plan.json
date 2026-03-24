@@ -334,34 +334,12 @@
 				]
 			],
 			"wall_height": 5.0,
-			"wall_preset": "galleria_vittorio_emanuele",
+			"wall_preset": "default",
 			"mosaic_composition": "pinwheel_truchet_room",
 			"floor_config": {
 				"tiles_short": 12
 			},
-			"color": "#C9A84C",
-			"exhibit_walls": [
-				{
-					"preset": "galleria_vittorio_emanuele",
-					"width": 5.0,
-					"height": 4.0,
-					"position": [
-						8,
-						10
-					],
-					"rotation": 0
-				},
-				{
-					"preset": "classical",
-					"width": 4.0,
-					"height": 3.5,
-					"position": [
-						10,
-						14
-					],
-					"rotation": 90
-				}
-			]
+			"color": "#C9A84C"
 		},
 		{
 			"id": "north_gallery",
@@ -497,24 +475,12 @@
 				]
 			],
 			"wall_height": 4.0,
-			"wall_preset": "classical",
+			"wall_preset": "default",
 			"mosaic_composition": "mann_gallery_default",
 			"floor_config": {
 				"tiles_short": 8
 			},
-			"color": "#7B3F00",
-			"exhibit_walls": [
-				{
-					"preset": "classical",
-					"width": 3.0,
-					"height": 3.0,
-					"position": [
-						3,
-						14
-					],
-					"rotation": 180
-				}
-			]
+			"color": "#7B3F00"
 		},
 		{
 			"id": "east_wing_a",
@@ -627,19 +593,7 @@
 			"floor_config": {
 				"tiles_short": 6
 			},
-			"color": "#2E86AB",
-			"exhibit_walls": [
-				{
-					"preset": "venetian_gothic",
-					"width": 2.5,
-					"height": 2.5,
-					"position": [
-						8,
-						22
-					],
-					"rotation": 0
-				}
-			]
+			"color": "#2E86AB"
 		},
 		{
 			"id": "east_wing_b",
@@ -888,24 +842,12 @@
 				]
 			],
 			"wall_height": 4.0,
-			"wall_preset": "classical",
+			"wall_preset": "default",
 			"mosaic_composition": "truchet_wide_border",
 			"floor_config": {
 				"tiles_short": 10
 			},
-			"color": "#F18F01",
-			"exhibit_walls": [
-				{
-					"preset": "galleria_vittorio_emanuele",
-					"width": 3.0,
-					"height": 3.5,
-					"position": [
-						9,
-						3
-					],
-					"rotation": 90
-				}
-			]
+			"color": "#F18F01"
 		},
 		{
 			"id": "corridor",
@@ -1145,6 +1087,447 @@
 					"dir": "N"
 				}
 			]
+		},
+		{
+			"id": "facade_exhibition",
+			"name": "Facade Exhibition",
+			"color": "#D8D0C0",
+			"wall_height": 2.0,
+			"wall_preset": "default",
+			"cells": [
+				[
+					15,
+					4
+				],
+				[
+					15,
+					5
+				],
+				[
+					15,
+					6
+				],
+				[
+					15,
+					7
+				],
+				[
+					15,
+					8
+				],
+				[
+					15,
+					9
+				],
+				[
+					15,
+					10
+				],
+				[
+					15,
+					11
+				],
+				[
+					15,
+					12
+				],
+				[
+					15,
+					13
+				],
+				[
+					15,
+					14
+				],
+				[
+					15,
+					15
+				],
+				[
+					15,
+					16
+				],
+				[
+					15,
+					17
+				],
+				[
+					15,
+					18
+				],
+				[
+					15,
+					19
+				],
+				[
+					15,
+					20
+				],
+				[
+					15,
+					21
+				],
+				[
+					15,
+					22
+				],
+				[
+					16,
+					4
+				],
+				[
+					16,
+					5
+				],
+				[
+					16,
+					6
+				],
+				[
+					16,
+					7
+				],
+				[
+					16,
+					8
+				],
+				[
+					16,
+					9
+				],
+				[
+					16,
+					10
+				],
+				[
+					16,
+					11
+				],
+				[
+					16,
+					12
+				],
+				[
+					16,
+					13
+				],
+				[
+					16,
+					14
+				],
+				[
+					16,
+					15
+				],
+				[
+					16,
+					16
+				],
+				[
+					16,
+					17
+				],
+				[
+					16,
+					18
+				],
+				[
+					16,
+					19
+				],
+				[
+					16,
+					20
+				],
+				[
+					16,
+					21
+				],
+				[
+					16,
+					22
+				],
+				[
+					17,
+					4
+				],
+				[
+					17,
+					5
+				],
+				[
+					17,
+					6
+				],
+				[
+					17,
+					7
+				],
+				[
+					17,
+					8
+				],
+				[
+					17,
+					9
+				],
+				[
+					17,
+					10
+				],
+				[
+					17,
+					11
+				],
+				[
+					17,
+					12
+				],
+				[
+					17,
+					13
+				],
+				[
+					17,
+					14
+				],
+				[
+					17,
+					15
+				],
+				[
+					17,
+					16
+				],
+				[
+					17,
+					17
+				],
+				[
+					17,
+					18
+				],
+				[
+					17,
+					19
+				],
+				[
+					17,
+					20
+				],
+				[
+					17,
+					21
+				],
+				[
+					17,
+					22
+				],
+				[
+					18,
+					4
+				],
+				[
+					18,
+					5
+				],
+				[
+					18,
+					6
+				],
+				[
+					18,
+					7
+				],
+				[
+					18,
+					8
+				],
+				[
+					18,
+					9
+				],
+				[
+					18,
+					10
+				],
+				[
+					18,
+					11
+				],
+				[
+					18,
+					12
+				],
+				[
+					18,
+					13
+				],
+				[
+					18,
+					14
+				],
+				[
+					18,
+					15
+				],
+				[
+					18,
+					16
+				],
+				[
+					18,
+					17
+				],
+				[
+					18,
+					18
+				],
+				[
+					18,
+					19
+				],
+				[
+					18,
+					20
+				],
+				[
+					18,
+					21
+				],
+				[
+					18,
+					22
+				],
+				[
+					19,
+					4
+				],
+				[
+					19,
+					5
+				],
+				[
+					19,
+					6
+				],
+				[
+					19,
+					7
+				],
+				[
+					19,
+					8
+				],
+				[
+					19,
+					9
+				],
+				[
+					19,
+					10
+				],
+				[
+					19,
+					11
+				],
+				[
+					19,
+					12
+				],
+				[
+					19,
+					13
+				],
+				[
+					19,
+					14
+				],
+				[
+					19,
+					15
+				],
+				[
+					19,
+					16
+				],
+				[
+					19,
+					17
+				],
+				[
+					19,
+					18
+				],
+				[
+					19,
+					19
+				],
+				[
+					19,
+					20
+				],
+				[
+					19,
+					21
+				],
+				[
+					19,
+					22
+				]
+			],
+			"exhibit_walls": [
+				{
+					"preset": "galleria_vittorio_emanuele",
+					"width": 6.0,
+					"height": 3.5,
+					"position": [
+						17,
+						7
+					],
+					"rotation": 0,
+					"y_offset": 1.0
+				},
+				{
+					"preset": "classical",
+					"width": 5.0,
+					"height": 3.0,
+					"position": [
+						17,
+						14
+					],
+					"rotation": 0,
+					"y_offset": 1.0
+				},
+				{
+					"preset": "venetian_gothic",
+					"width": 4.0,
+					"height": 3.0,
+					"position": [
+						17,
+						20
+					],
+					"rotation": 0,
+					"y_offset": 1.0
+				}
+			],
+			"open_edges": [
+				{
+					"row": 19,
+					"col": 12,
+					"dir": "S"
+				},
+				{
+					"row": 19,
+					"col": 13,
+					"dir": "S"
+				},
+				{
+					"row": 19,
+					"col": 14,
+					"dir": "S"
+				}
+			]
 		}
 	],
 	"doorways": [
@@ -1243,6 +1626,20 @@
 				[
 					10,
 					18
+				]
+			]
+		},
+		{
+			"from": "corridor",
+			"to": "facade_exhibition",
+			"cells": [
+				[
+					13,
+					12
+				],
+				[
+					13,
+					13
 				]
 			]
 		}

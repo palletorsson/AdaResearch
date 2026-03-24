@@ -668,13 +668,15 @@ func _build_exhibit_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 		# Convert cell coords to world position (cell center)
 		var world_x: float = (ew_col + 0.5) * cell_size
 		var world_z: float = (ew_row + 0.5) * cell_size
-		var world_pos := Vector3(world_x, ew_height * 0.5, world_z)
+		var ew_y_offset: float = float(ew.get("y_offset", 0.0))
+		var world_pos := Vector3(world_x, ew_height * 0.5 + ew_y_offset, world_z)
 
 		# Build the facade wall
 		_build_facade_wall(container, world_pos, ew_rotation, ew_width, ew_height, preset_name, wall_thickness)
 
-		# Add pedestal base under the wall
-		_build_exhibit_pedestal(container, world_x, world_z, ew_width, wall_thickness, ew_rotation)
+		# No pedestal for floating facades
+		if ew_y_offset < 0.01:
+			_build_exhibit_pedestal(container, world_x, world_z, ew_width, wall_thickness, ew_rotation)
 
 	print("FloorPlanSpace: Placed %d exhibit walls in room '%s'" % [
 		exhibit_walls.size(), str(room.get("id", "room"))
