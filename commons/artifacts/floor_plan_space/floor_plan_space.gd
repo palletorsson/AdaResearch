@@ -44,7 +44,7 @@ func _load_and_build() -> void:
 
 	var path := plan_path
 	if path.is_empty():
-		path = "res://commons/maps/MANN_Corridor_Test/floor_plan.json"
+		path = "res://commons/maps/MANN_Gallery_Museum/floor_plan.json"
 
 	if not _load_plan(path):
 		push_warning("FloorPlanSpace: Could not load plan from %s" % path)
@@ -107,6 +107,7 @@ func _build_all_rooms() -> void:
 
 		_place_room_floor(room, room_node, cell_size)
 		_generate_room_walls(room, room_node, cell_size, room_doorways.get(room_id, []))
+		_build_exhibit_walls(room, room_node, cell_size)
 
 	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
 
@@ -573,6 +574,79 @@ func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	col_shape.shape = shape
 	body.add_child(col_shape)
 	wall_root.add_child(body)
+
+
+# ── Freestanding exhibit walls ─────────────────────────────────────────────
+
+func _build_exhibit_walls(room: Dictionary, parent: Node3D, cell_size: float) -> void:
+	var exhibit_walls: Array = room.get("exhibit_walls", [])
+	if exhibit_walls.is_empty():
+		return
+
+	var wall_thickness: float = float(_floor_plan_data.get("wall_thickness", 0.5))
+	var container := Node3D.new()
+	container.name = "ExhibitWalls"
+	parent.add_child(container)
+
+	for i in exhibit_walls.size():
+		var ew: Dictionary = exhibit_walls[i]
+		if not ew is Dictionary:
+			continue
+
+		var preset_name: String = str(ew.get("preset", default_wall_preset))
+		var ew_width: float = float(ew.get("width", 3.0))
+		var ew_height: float = float(ew.get("height", 3.0))
+		var ew_rotation: float = float(ew.get("rotation", 0.0))
+
+		# Position from [row, col] cell coordinates
+		var pos_arr: Array = ew.get("position", [0, 0])
+		var ew_row: float = float(pos_arr[0]) if pos_arr.size() > 0 else 0.0
+		var ew_col: float = float(pos_arr[1]) if pos_arr.size() > 1 else 0.0
+
+		# Convert cell coords to world position (cell center)
+		var world_x: float = (ew_col + 0.5) * cell_size
+		var world_z: float = (ew_row + 0.5) * cell_size
+		var world_pos := Vector3(world_x, ew_height * 0.5, world_z)
+
+		# Build the facade wall
+		_build_facade_wall(container, world_pos, ew_rotation, ew_width, ew_height, preset_name, wall_thickness)
+
+		# Add pedestal base under the wall
+		_build_exhibit_pedestal(container, world_x, world_z, ew_width, wall_thickness, ew_rotation)
+
+	print("FloorPlanSpace: Placed %d exhibit walls in room '%s'" % [
+		exhibit_walls.size(), str(room.get("id", "room"))
+	])
+
+
+## Build a thin dark pedestal base under an exhibit wall.
+func _build_exhibit_pedestal(parent: Node3D, cx: float, cz: float,
+		wall_width: float, wall_thickness: float, rot_y: float) -> void:
+	var pedestal_height: float = 0.05
+	var pedestal_margin: float = 0.1  # slightly wider than the wall on each side
+
+	var pedestal_root := Node3D.new()
+	pedestal_root.name = "ExhibitPedestal"
+	parent.add_child(pedestal_root)
+
+	pedestal_root.position = Vector3(cx, pedestal_height * 0.5, cz)
+	pedestal_root.rotation_degrees.y = rot_y
+
+	var mesh_inst := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(
+		wall_width + pedestal_margin * 2.0,
+		pedestal_height,
+		wall_thickness + pedestal_margin * 2.0
+	)
+	mesh_inst.mesh = mesh
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.13, 0.12)
+	mat.roughness = 0.7
+	mat.metallic = 0.1
+	mesh_inst.material_override = mat
+	pedestal_root.add_child(mesh_inst)
 
 
 # ── Edge deduplication helper ──────────────────────────────────────────────
