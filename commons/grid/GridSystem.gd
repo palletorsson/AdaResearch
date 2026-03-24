@@ -512,8 +512,10 @@ func _on_wall_complete(wall_count: int):
 	call_deferred("_handle_player_spawn")
 
 ## Try to load and apply a floor_plan.json from the current map directory.
+## DISABLED: use floor_plan_space artifact in interactables instead.
 var _floor_plan_loaded: bool = false
 func _try_load_floor_plan() -> void:
+	return  # Disabled — floor_plan_space artifact handles this
 	if _floor_plan_loaded:
 		return
 	if not data_component:
