@@ -14,6 +14,7 @@ const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
+const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 
 # Configuration
 @export var cube_size: float = 1.0
@@ -499,15 +500,34 @@ func _handle_wall_generation():
 		print("GridSystem: Generating walls...")
 		wall_component.generate_walls(wall_config)
 	else:
-		# Skip walls, go directly to spawn
+		# No walls config — still try floor plan overlay
+		_try_load_floor_plan()
+		# Go directly to spawn
 		call_deferred("_handle_player_spawn")
 
 # Handle wall generation completion
 func _on_wall_complete(wall_count: int):
 	print("GridSystem: Wall generation complete (%d walls)" % wall_count)
-
-	# Now handle player spawn positioning
+	_try_load_floor_plan()
 	call_deferred("_handle_player_spawn")
+
+## Try to load and apply a floor_plan.json from the current map directory.
+func _try_load_floor_plan() -> void:
+	if not data_component:
+		return
+	var current_map: String = data_component.get_current_map_name()
+	if current_map == "":
+		return
+	var map_dir: String = "res://commons/maps/" + current_map
+	print("GridSystem: Checking for floor plan at %s" % map_dir)
+	var loader := FloorPlanLoader.new()
+	loader.name = "FloorPlanLoader"
+	add_child(loader)
+	if loader.load_floor_plan(map_dir):
+		loader.apply_floor_plan(self, cube_size)
+		print("GridSystem: Floor plan applied")
+	else:
+		print("GridSystem: No floor plan found")
 
 # Handle player spawn positioning
 func _handle_player_spawn():
