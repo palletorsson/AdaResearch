@@ -1817,6 +1817,116 @@
 				],
 				"size_group": "compact"
 			}
+		},
+		"wave_scale_floor": {
+			"name": "Wave Scale Floor",
+			"lookup_name": "wave_scale_floor",
+			"description": "Roman imbrication (fish-scale) mosaic floor — overlapping semicircles arranged in offset rows creating a wave/scale effect. Common in Roman baths and fountains. Alternating dark, light, and terracotta rows with grout arc outlines.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/wave_scale_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis",
+				"testmaps"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"scale",
+				"wave",
+				"imbrication"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"basket_weave_floor": {
+			"name": "Basket Weave Floor",
+			"lookup_name": "basket_weave_floor",
+			"description": "Procedural Pompeii mosaic floor with basket weave (opus spicatum) pattern. Alternating horizontal and vertical pairs of 2:1 rectangular tiles in a checkerboard arrangement create a woven textile appearance. Dark and light pairs interlock like fabric.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/basket_weave_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"weave",
+				"textile"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"labyrinth_floor": {
+			"name": "Labyrinth Floor",
+			"lookup_name": "labyrinth_floor",
+			"description": "Pompeii mosaic floor with classical 7-circuit labyrinth pattern. A single unbroken path spirals inward from the entrance to the center — not a maze but a meditation in stone. Based on Roman house labyrinths found across the Mediterranean.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/labyrinth_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"labyrinth",
+				"classical"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }
