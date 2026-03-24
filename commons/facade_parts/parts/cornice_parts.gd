@@ -122,7 +122,7 @@ static func dentil_band(w: float, h: float, p: Dictionary = {}) -> Node3D:
 ## Cyma recta: S-curve profile extruded along width.
 static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("CymaRecta")
-	var depth: float = p.get("depth", h * 0.6)
+	var depth: float = p.get("depth", minf(h * 0.4, 0.05))
 
 	# S-curve profile in Y-Z plane
 	var profile := PackedVector2Array()
@@ -155,37 +155,37 @@ static func cyma_recta(w: float, h: float, p: Dictionary = {}) -> Node3D:
 static func cyma_recta_moulding(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var params := p.duplicate()
 	if not params.has("depth"):
-		params["depth"] = h * 0.9
+		params["depth"] = minf(h * 0.5, 0.06)
 	var root := cyma_recta(w, h, params)
 	root.name = "CymaRectaMoulding"
 	return root
 
 
 ## Cornice shelf: a heavy projecting horizontal slab that casts deep shadow.
-## Extends 0.15-0.2m forward from the wall face.
+## Projection kept small (0.06m default) so geometry stays within facade width.
 static func cornice_shelf(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("CorniceShelf")
-	var projection: float = p.get("projection", 0.18)
+	var projection: float = p.get("projection", 0.06)
 	var slab_h: float = h * 0.5
 	var drip_h: float = h * 0.08
 
 	var _mat_body := _M.stone(Color(0.85, 0.82, 0.76))
 	var _mat_shadow := _M.stone(Color(0.65, 0.62, 0.56))
 
-	# Main projecting slab — heavy crown molding shelf
-	var slab := _box("Slab", Vector3(w + 0.04, slab_h, projection),
+	# Main projecting slab — stays within facade width (no +0.04 overhang)
+	var slab := _box("Slab", Vector3(w, slab_h, projection),
 		Vector3(w * 0.5, h - slab_h * 0.5, projection * 0.5),
 		CSGShape3D.OPERATION_UNION, _mat_body)
 	root.add_child(slab)
 
 	# Soffit / underside shadow strip — thin dark strip under the slab
-	var soffit := _box("Soffit", Vector3(w + 0.04, drip_h, projection * 0.95),
+	var soffit := _box("Soffit", Vector3(w, drip_h, projection * 0.95),
 		Vector3(w * 0.5, h - slab_h - drip_h * 0.5, projection * 0.5),
 		CSGShape3D.OPERATION_UNION, _mat_shadow)
 	root.add_child(soffit)
 
 	# Drip edge — tiny lip at the front edge underside
-	var drip := _box("Drip", Vector3(w + 0.04, drip_h * 0.5, 0.01),
+	var drip := _box("Drip", Vector3(w, drip_h * 0.5, 0.01),
 		Vector3(w * 0.5, h - slab_h - drip_h * 0.25, projection - 0.005),
 		CSGShape3D.OPERATION_UNION, _mat_shadow)
 	root.add_child(drip)
@@ -202,7 +202,7 @@ static func cornice_shelf(w: float, h: float, p: Dictionary = {}) -> Node3D:
 ## String course: simple horizontal band with slight projection.
 static func string_course(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("StringCourse")
-	var depth: float = p.get("depth", 0.03)
+	var depth: float = p.get("depth", 0.02)
 
 	var band := _box("Band", Vector3(w, h, depth),
 		Vector3(w * 0.5, h * 0.5, depth * 0.5),
@@ -314,10 +314,10 @@ static func rect_window_band(w: float, h: float, p: Dictionary = {}) -> Node3D:
 
 
 ## Modillion cornice: cornice with bracket supports (scroll-shaped corbels).
-## Now with deeper projection and better proportioned brackets.
+## Depth kept modest so brackets stay within facade footprint.
 static func modillion(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var root := _root("Modillion")
-	var depth: float = p.get("depth", maxf(h * 1.0, 0.15))
+	var depth: float = p.get("depth", minf(h * 0.5, 0.06))
 	var bracket_count: int = p.get("count", maxi(int(w / 0.30), 5))
 	var bracket_spacing := w / float(bracket_count)
 	var bracket_w: float = 0.04
@@ -326,18 +326,18 @@ static func modillion(w: float, h: float, p: Dictionary = {}) -> Node3D:
 	var cornice_h := h * 0.30
 	var soffit_h := h * 0.08
 
-	# Top cornice slab (projecting outward)
+	# Top cornice slab — no side overhang, stays within facade width
 	var _mat_body := _M.stone(Color(0.85, 0.82, 0.76))
 	var _mat_modillion := _M.stone(Color(0.78, 0.74, 0.68))
 	var _mat_shadow := _M.stone(Color(0.62, 0.58, 0.52))
 
-	var slab := _box("Slab", Vector3(w + 0.02, cornice_h, depth),
+	var slab := _box("Slab", Vector3(w, cornice_h, depth),
 		Vector3(w * 0.5, h - cornice_h * 0.5, depth * 0.5),
 		CSGShape3D.OPERATION_UNION, _mat_body)
 	root.add_child(slab)
 
 	# Soffit shadow strip under slab
-	var soffit := _box("Soffit", Vector3(w + 0.02, soffit_h, depth * 0.9),
+	var soffit := _box("Soffit", Vector3(w, soffit_h, depth * 0.9),
 		Vector3(w * 0.5, h - cornice_h - soffit_h * 0.5, depth * 0.45),
 		CSGShape3D.OPERATION_UNION, _mat_shadow)
 	root.add_child(soffit)

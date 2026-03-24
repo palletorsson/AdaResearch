@@ -32,11 +32,11 @@
   "placements": [
 
     { "col": 0, "row": 0, "part": "cornice_shelf", "col_span": 5,
-      "params": { "projection": 0.18 },
+      "params": { "projection": 0.06 },
       "sub_grid": {
         "rows": [0.30, 0.20, 0.20, 0.30],
         "placements": [
-          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.18 } },
+          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.06 } },
           { "row": 1, "part": "modillion", "params": { "count": 20 } },
           { "row": 2, "part": "dentil_band", "params": { "block_w": 0.03, "block_h": 0.04, "block_d": 0.025 } },
           { "row": 3, "part": "cyma_recta_moulding" }
