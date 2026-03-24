@@ -18,6 +18,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
 @export var y_offset: float = 0.0  # Set to 1.0 if placed on top of GridSystem floor cubes
+var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
 var _built: bool = false
@@ -28,6 +29,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	_placed_as_artifact = true
 	if config.has("plan_path"):
 		plan_path = str(config["plan_path"])
 	if config.has("wall_preset"):
@@ -117,8 +119,8 @@ func _build_all_rooms() -> void:
 
 	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
 
-	# Add a simple fly camera if no camera exists in the scene
-	if not get_viewport().get_camera_3d():
+	# Add a simple fly camera only when running standalone (not placed in a map)
+	if not _placed_as_artifact and not get_viewport().get_camera_3d():
 		_add_fly_camera(rooms, cell_size)
 
 
