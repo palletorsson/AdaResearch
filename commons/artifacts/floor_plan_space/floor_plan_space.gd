@@ -690,41 +690,100 @@ func _load_artifact_scene(lookup_name: String) -> PackedScene:
 # ── Fly camera for standalone viewing ─────────────────────────────────────
 
 func _add_fly_camera(rooms: Array, cell_size: float) -> void:
-	# Find center of all rooms
-	var total_x := 0.0
-	var total_z := 0.0
-	var count := 0
+	# ── Compute bounding box of ALL rooms ──
+	var min_row: int = 999999
+	var max_row: int = -999999
+	var min_col: int = 999999
+	var max_col: int = -999999
 	for room in rooms:
 		for cell in room.get("cells", []):
 			if cell is Array and cell.size() >= 2:
-				total_x += int(cell[1]) * cell_size
-				total_z += int(cell[0]) * cell_size
-				count += 1
-	var cx := total_x / maxf(count, 1)
-	var cz := total_z / maxf(count, 1)
+				var r: int = int(cell[0])
+				var c: int = int(cell[1])
+				min_row = mini(min_row, r)
+				max_row = maxi(max_row, r)
+				min_col = mini(min_col, c)
+				max_col = maxi(max_col, c)
+
+	if min_row > max_row:
+		return  # no cells found
+
+	# World-space extents
+	var world_min_x: float = min_col * cell_size
+	var world_max_x: float = (max_col + 1) * cell_size
+	var world_min_z: float = min_row * cell_size
+	var world_max_z: float = (max_row + 1) * cell_size
+
+	var cx: float = (world_min_x + world_max_x) * 0.5
+	var cz: float = (world_min_z + world_max_z) * 0.5
+	var span_x: float = world_max_x - world_min_x
+	var span_z: float = world_max_z - world_min_z
+	var span_max: float = maxf(span_x, span_z)
+
+	# ── Camera: high enough and far back to see everything with margin ──
+	var cam_height: float = span_max * 0.7 + 4.0
+	var cam_back: float = span_max * 0.55 + 6.0
+	var cam_pitch: float = -atan2(cam_height, cam_back) * 180.0 / PI  # look toward center
 
 	var cam := Camera3D.new()
 	cam.name = "FlyCamera"
 	cam.current = true
-	cam.position = Vector3(cx, 8.0, cz + 12.0)
-	cam.rotation_degrees = Vector3(-35, 0, 0)
+	cam.fov = 50.0
+	cam.position = Vector3(cx, cam_height, cz + cam_back)
+	cam.rotation_degrees = Vector3(cam_pitch, 0, 0)
 	add_child(cam)
 
-	# Add directional light
-	var light := DirectionalLight3D.new()
-	light.light_energy = 1.2
-	light.rotation_degrees = Vector3(-45, 30, 0)
-	light.shadow_enabled = true
-	add_child(light)
+	# ── Main directional light (sun) — warm, slightly stronger ──
+	var sun := DirectionalLight3D.new()
+	sun.name = "SunLight"
+	sun.light_color = Color(1.0, 0.95, 0.85)
+	sun.light_energy = 1.5
+	sun.rotation_degrees = Vector3(-50, 30, 0)
+	sun.shadow_enabled = true
+	sun.shadow_bias = 0.05
+	add_child(sun)
 
-	# Add ambient light
+	# ── Secondary fill light from opposite side — cooler, softer ──
+	var fill := DirectionalLight3D.new()
+	fill.name = "FillLight"
+	fill.light_color = Color(0.75, 0.82, 1.0)
+	fill.light_energy = 0.6
+	fill.rotation_degrees = Vector3(-35, -140, 0)
+	fill.shadow_enabled = false
+	add_child(fill)
+
+	# ── Environment: warm ambient, warm background, subtle fog ──
 	var env := WorldEnvironment.new()
 	var environment := Environment.new()
-	environment.ambient_light_color = Color(0.85, 0.82, 0.75)
-	environment.ambient_light_energy = 0.4
+	environment.ambient_light_color = Color(0.95, 0.88, 0.75)
+	environment.ambient_light_energy = 0.55
 	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color(0.15, 0.17, 0.22)
+	environment.background_color = Color(0.22, 0.2, 0.18)
+	# Subtle depth fog
+	environment.fog_enabled = true
+	environment.fog_light_color = Color(0.25, 0.23, 0.2)
+	environment.fog_density = 0.006
+	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	environment.tonemap_white = 6.0
 	env.environment = environment
 	add_child(env)
 
-	print("FloorPlanSpace: Added fly camera at (%.1f, 8.0, %.1f)" % [cx, cz + 12.0])
+	# ── Ground plane under the museum ──
+	var ground := MeshInstance3D.new()
+	ground.name = "GroundPlane"
+	var ground_mesh := PlaneMesh.new()
+	var ground_size: float = span_max * 3.0 + 20.0
+	ground_mesh.size = Vector2(ground_size, ground_size)
+	ground.mesh = ground_mesh
+
+	var ground_mat := StandardMaterial3D.new()
+	ground_mat.albedo_color = Color(0.38, 0.35, 0.3)
+	ground_mat.roughness = 0.95
+	ground_mat.metallic = 0.0
+	ground.material_override = ground_mat
+	ground.position = Vector3(cx, -0.01, cz)
+	add_child(ground)
+
+	print("FloorPlanSpace: Camera at (%.1f, %.1f, %.1f), museum span %.0fx%.0f m" % [
+		cx, cam_height, cz + cam_back, span_x, span_z
+	])
