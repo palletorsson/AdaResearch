@@ -195,11 +195,16 @@ static func build_floor(composition_path: String, floor_size: Vector2, parent: N
 		arr_mesh.surface_set_material(surface_count, MosaicPalette.create_material(MosaicPalette.GROUT, wear))
 		surface_count += 1
 
+	var root := Node3D.new()
+	root.name = "MosaicFloorRoot"
+
 	var mi := MeshInstance3D.new()
 	mi.mesh = arr_mesh
 	mi.name = "MosaicFloor"
+	# Center the mesh within the root node
 	mi.position = Vector3(-fw * 0.5, 0.005, -fh * 0.5)
-	parent.add_child(mi)
+	root.add_child(mi)
+	parent.add_child(root)
 
 	var total_tris := 0
 	for cv in color_verts:
@@ -207,7 +212,7 @@ static func build_floor(composition_path: String, floor_size: Vector2, parent: N
 	total_tris += grout_verts.size() / 3
 	print("[MosaicFloorBuilder] Built %dx%d grid, motif=%s, %d tris" % [gw, gh, motif_id, total_tris])
 
-	return mi
+	return root
 
 
 # ── Composition loader ──
