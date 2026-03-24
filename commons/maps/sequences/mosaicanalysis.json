@@ -26,6 +26,7 @@
 				"Scale and viewing distance: how mosaic resolution maps to pixel density"
 			],
 			"content": [
+				"MANN_Gallery_Museum: Walk through a museum gallery with 6 rooms \u00e2\u20ac\u201d each with a different Pompeii mosaic floor, Galleria facade walls, and freestanding exhibit panels",
 				"Mosaic_Pompeii_Floors: Geometric opus tessellatum \u00e2\u20ac\u201d wallpaper groups in Roman floors (Casa del Fauno, Casa dei Vettii)",
 				"Mosaic_Byzantine_Gold: Gold-ground technique \u00e2\u20ac\u201d reflective tesserae, viewing angle, light as variable",
 				"Mosaic_Majolica_Tiles: Santa Chiara cloister \u00e2\u20ac\u201d majolica tile patterns, painted grid logic, baroque color",
@@ -35,6 +36,7 @@
 				"Mosaic_Pattern_Maker: Wallpaper group workshop \u00e2\u20ac\u201d using pattern_maker_station with field-captured motifs"
 			],
 			"maps": [
+				"MANN_Gallery_Museum",
 				"Mosaic_Pompeii_Floors",
 				"Mosaic_Byzantine_Gold",
 				"Mosaic_Majolica_Tiles",
@@ -44,6 +46,7 @@
 				"Mosaic_Pattern_Maker"
 			],
 			"algorithm_paths": {
+				"MANN_Gallery_Museum": "res://commons/artifacts/floor_plan_space/",
 				"Mosaic_Pompeii_Floors": "res://commons/primitives/arrays/",
 				"Mosaic_Byzantine_Gold": "res://algorithms/shaders/book_of_shaders/",
 				"Mosaic_Majolica_Tiles": "res://commons/primitives/arrays/",
