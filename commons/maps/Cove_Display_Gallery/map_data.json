@@ -1,6 +1,6 @@
 {
 	"map_info": {"name": "Cove Display Gallery", "lookup_name": "Cove_Display_Gallery", "description": "A walk-through tunnel portal of grid cubes showcasing all 17 wallpaper groups. Walls, ceiling, and floor covered with different pattern clusters.", "version": "5.0", "format": "json", "dimensions": {"width": 5, "depth": 55, "max_height": 4}, "title": "Wallpaper Group Tunnel"},
-	"utility_definitions": {"s": {"type": "spawn", "properties": {"height": 1.5}}},
+	"utility_definitions": {"s": {"type": "spawn", "properties": {"height": 1.5}}, "t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
 	"settings": {"auto_reveal_on_entry": true},
 	"layers": {
 		"structure": [

@@ -1,5 +1,6 @@
 {
 	"map_info": {"name": "MANN Gallery Museum", "lookup_name": "MANN_Gallery_Museum", "dimensions": {"width": 30, "depth": 30, "max_height": 1}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],

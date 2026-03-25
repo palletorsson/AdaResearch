@@ -1,5 +1,6 @@
 {
 	"map_info": {"name": "Florence Gallery", "lookup_name": "Florence_Gallery", "description": "A museum inspired by Florentine architecture â€” the Uffizi corridor concept with rooms branching off a long central gallery. Eight side rooms showcase distinct mosaic floor patterns and facade exhibit walls.", "version": "1.0", "format": "json", "dimensions": {"width": 35, "depth": 35, "max_height": 1}, "metadata": {"difficulty": "intermediate", "category": "mosaicanalysis", "estimated_time": "exploration based", "learning_objectives": ["Experience Florentine gallery architecture as spatial layout", "Compare eight distinct mosaic floor patterns in dedicated rooms", "Observe facade exhibit walls from multiple Italian architectural traditions", "Understand how corridor-and-room layouts guide exhibition flow"]}, "title": "Florence Gallery"},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
