@@ -40,7 +40,8 @@
 				"Roman_Villa: Museum based on a Roman domus layout \u00e2\u20ac\u201d atrium, tablinum, peristyle, triclinium, and cubiculum rooms with distinct mosaic floor patterns",
 				"Naples_Street_Museum: L-shaped museum inspired by walking through Naples \u2014 six rooms (Gesu Nuovo, Cathedral, Pompeii Villa, Mosaic Workshop, Vestibule, Florence Room) with courtyard corridors and facade exhibits",
 				"Historical_Periods_Gallery: Five themed halls (Roman Republican, Roman Imperial, Cosmatesque Medieval, Renaissance, Baroque) connected by a central gallery corridor \u2014 each with period-specific mosaic floors and facade exhibits",
-				"Mega_Pattern_Museum: The ultimate museum \u2014 all 18 floor pattern artifacts in a 6\u00d73 room grid plus all 11 facade presets floating in a grand hall below, connected by corridors"
+				"Mega_Pattern_Museum: The ultimate museum \u2014 all 18 floor pattern artifacts in a 6\u00d73 room grid plus all 11 facade presets floating in a grand hall below, connected by corridors",
+				"Pattern_Walls_Gallery: 12-room gallery (4\u00d73 grid) where each room combines a unique floor pattern with a unique wall facade preset \u2014 demonstrating how floor_pattern and wall_preset interact"
 			],
 			"maps": [
 				"Grand_Pattern_Museum",
@@ -62,7 +63,8 @@
 				"Facade_Italian_Presets",
 				"MANN_Corridor_Test",
 				"Tile_Shapes_Gallery",
-				"Wallpaper_Groups_Gallery"
+				"Wallpaper_Groups_Gallery",
+				"Pattern_Walls_Gallery"
 			],
 			"algorithm_paths": {
 				"Grand_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
@@ -80,7 +82,8 @@
 				"Naples_Street_Museum": "res://commons/artifacts/floor_plan_space/",
 				"Roman_Villa": "res://commons/artifacts/floor_plan_space/",
 				"Historical_Periods_Gallery": "res://commons/artifacts/floor_plan_space/",
-				"Mega_Pattern_Museum": "res://commons/artifacts/floor_plan_space/"
+				"Mega_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
+				"Pattern_Walls_Gallery": "res://commons/artifacts/floor_plan_space/"
 			},
 			"return_to": "lab",
 			"lab_map": null,
