@@ -1,0 +1,175 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Pompeii Black Room — Third Style wall painting with dominant black panels, red column dividers, and painted vignette windows",
+  "facade": {
+    "bays": 5,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 10.0,
+    "total_height": 8.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Frieze",    "height_multiplier": 0.25 },
+    { "row": 1, "name": "Upper",     "height_multiplier": 0.70 },
+    { "row": 2, "name": "MainZone",  "height_multiplier": 2.00 },
+    { "row": 3, "name": "Socle",     "height_multiplier": 0.35 }
+  ],
+  "materials": {
+    "wall": "#1A1A1A",
+    "zones": {
+      "Frieze":   { "color": "#F0E8D0", "type": "plaster" },
+      "Upper":    { "color": "#E8E0C8", "type": "plaster" },
+      "MainZone": { "color": "#1A1A1A", "type": "plaster" },
+      "Socle":    { "color": "#8B2500", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.35, 0.30, 0.35],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#F0E8D0" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#6B1800" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#F0E8D0" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#8B2500", "glass_color": "#3A2A1A" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ]
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#8B2500", "glass_color": "#3A2A1A" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ]
+    },
+    { "col": 4, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#8B2500", "glass_color": "#3A2A1A" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "flat", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "flat", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.30, 0.28, 0.30, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } },
+          { "col": 2, "part": "rect_window", "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#C8A860", "glass_color": "#4A3520" } },
+          { "col": 4, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "flat", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "flat", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.30, 0.28, 0.30, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } },
+          { "col": 2, "part": "rect_window", "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#C8A860", "glass_color": "#4A3520" } },
+          { "col": 4, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "flat", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": false, "color": "#8B2500" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 3, "part": "ashlar", "col_span": 5,
+      "params": { "material": "plaster", "color": "#8B2500" },
+      "sub_grid": {
+        "rows": [0.40, 0.20, 0.40],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#8B2500" } },
+          { "row": 1, "part": "string_course", "params": { "depth": 0.008, "band_height": 0.012, "color": "#6B1800" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#7A2000" } }
+        ]
+      }
+    }
+  ]
+}
