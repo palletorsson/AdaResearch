@@ -761,17 +761,41 @@ func _canonical_edge_key(row: int, col: int, dir: String) -> String:
 # ── Artifact loading helper ──────────────────────────────────────────────────
 
 func _load_artifact_scene(lookup_name: String) -> PackedScene:
+	# Try standard path: artifacts/{name}/{name}.tscn
 	var scene_path := "res://commons/artifacts/%s/%s.tscn" % [lookup_name, lookup_name]
 	if ResourceLoader.exists(scene_path):
 		var scene := load(scene_path) as PackedScene
 		if scene:
 			return scene
 
+	# Try pompeii_mosaic_floor subfolder (all floor patterns live here)
+	var mosaic_path := "res://commons/artifacts/pompeii_mosaic_floor/%s.tscn" % lookup_name
+	if ResourceLoader.exists(mosaic_path):
+		var scene := load(mosaic_path) as PackedScene
+		if scene:
+			return scene
+
+	# Try flat path
 	var alt_path := "res://commons/artifacts/%s.tscn" % lookup_name
 	if ResourceLoader.exists(alt_path):
 		var scene := load(alt_path) as PackedScene
 		if scene:
 			return scene
+
+	# Try registry lookup
+	var registry_path := "res://commons/artifacts/registry/arrays.json"
+	if FileAccess.file_exists(registry_path):
+		var file := FileAccess.open(registry_path, FileAccess.READ)
+		var json := JSON.new()
+		if json.parse(file.get_as_text()) == OK and json.data is Dictionary:
+			var artifacts: Dictionary = json.data.get("artifacts", {})
+			if artifacts.has(lookup_name):
+				var entry: Dictionary = artifacts[lookup_name]
+				var reg_scene: String = str(entry.get("scene", ""))
+				if not reg_scene.is_empty() and ResourceLoader.exists(reg_scene):
+					var scene := load(reg_scene) as PackedScene
+					if scene:
+						return scene
 
 	return null
 
