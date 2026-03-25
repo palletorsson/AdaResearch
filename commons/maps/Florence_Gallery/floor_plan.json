@@ -560,7 +560,19 @@
 			"wall_height": 4.0,
 			"wall_preset": "default",
 			"floor_pattern": "diamond_lattice_floor",
-			"color": "#C8A882"
+			"color": "#C8A882",
+			"open_edges": [
+				{
+					"row": 33,
+					"col": 15,
+					"dir": "S"
+				},
+				{
+					"row": 33,
+					"col": 16,
+					"dir": "S"
+				}
+			]
 		},
 		{
 			"id": "left_room_1",
@@ -862,7 +874,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "florentine_polychrome",
-					"width": 4.0,
+					"width": 3,
 					"height": 2.3,
 					"position": [
 						5,
@@ -1173,7 +1185,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "baroque",
-					"width": 5,
+					"width": 3,
 					"height": 3,
 					"position": [
 						13,
@@ -1782,7 +1794,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "florence_marble",
-					"width": 5,
+					"width": 3,
 					"height": 3,
 					"position": [
 						29,
@@ -2085,7 +2097,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "galleria_vittorio_emanuele",
-					"width": 4.0,
+					"width": 3,
 					"height": 2.3,
 					"position": [
 						5,
@@ -2388,7 +2400,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "venetian_gothic",
-					"width": 5,
+					"width": 3,
 					"height": 3,
 					"position": [
 						13,
@@ -2981,7 +2993,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "gothic_portal",
-					"width": 5,
+					"width": 3,
 					"height": 4,
 					"position": [
 						29,

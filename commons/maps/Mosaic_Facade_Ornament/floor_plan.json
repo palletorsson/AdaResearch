@@ -175,7 +175,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "classical",
-					"width": 3.5,
+					"width": 2,
 					"height": 2.4,
 					"position": [
 						10,
@@ -183,6 +183,18 @@
 					],
 					"rotation": 0,
 					"y_offset": 1.0
+				}
+			],
+			"open_edges": [
+				{
+					"row": 10,
+					"col": 1,
+					"dir": "W"
+				},
+				{
+					"row": 11,
+					"col": 1,
+					"dir": "W"
 				}
 			]
 		},
@@ -345,7 +357,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "gothic_portal",
-					"width": 3.5,
+					"width": 2,
 					"height": 2.5,
 					"position": [
 						10,
@@ -523,7 +535,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "baroque",
-					"width": 3.5,
+					"width": 2,
 					"height": 2.5,
 					"position": [
 						3,
@@ -693,7 +705,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "florentine_polychrome",
-					"width": 3.5,
+					"width": 2,
 					"height": 2.5,
 					"position": [
 						18,
@@ -879,7 +891,7 @@
 			"exhibit_walls": [
 				{
 					"preset": "nyc_tenement",
-					"width": 5.0,
+					"width": 3,
 					"height": 3.5,
 					"position": [
 						10,

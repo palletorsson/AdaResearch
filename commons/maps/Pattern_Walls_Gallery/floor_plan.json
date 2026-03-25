@@ -826,7 +826,19 @@
 			"floor_config": {
 				"tiles_short": 10
 			},
-			"color": "#D9B88F"
+			"color": "#D9B88F",
+			"open_edges": [
+				{
+					"row": 3,
+					"col": 39,
+					"dir": "E"
+				},
+				{
+					"row": 4,
+					"col": 39,
+					"dir": "E"
+				}
+			]
 		},
 		{
 			"id": "room_05",
@@ -2585,6 +2597,18 @@
 				[
 					4,
 					31
+				],
+				[
+					2,
+					32
+				],
+				[
+					3,
+					32
+				],
+				[
+					4,
+					32
 				]
 			],
 			"wall_height": 3.0,
@@ -2708,6 +2732,18 @@
 				[
 					13,
 					31
+				],
+				[
+					11,
+					32
+				],
+				[
+					12,
+					32
+				],
+				[
+					13,
+					32
 				]
 			],
 			"wall_height": 3.0,
@@ -2831,6 +2867,18 @@
 				[
 					22,
 					31
+				],
+				[
+					20,
+					32
+				],
+				[
+					21,
+					32
+				],
+				[
+					22,
+					32
 				]
 			],
 			"wall_height": 3.0,
@@ -3200,480 +3248,480 @@
 	],
 	"doorways": [
 		{
-			"room_a": "room_01",
-			"room_b": "h_corr_01",
-			"row": 2,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_01",
-			"room_b": "h_corr_01",
-			"row": 3,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_01",
-			"room_b": "room_02",
-			"row": 2,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_01",
-			"room_b": "room_02",
-			"row": 3,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_02",
-			"room_b": "h_corr_02",
-			"row": 2,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_02",
-			"room_b": "h_corr_02",
-			"row": 3,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_02",
-			"room_b": "room_03",
-			"row": 2,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_02",
-			"room_b": "room_03",
-			"row": 3,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_03",
-			"room_b": "h_corr_03",
-			"row": 2,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_03",
-			"room_b": "h_corr_03",
-			"row": 3,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_03",
-			"room_b": "room_04",
-			"row": 2,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_03",
-			"room_b": "room_04",
-			"row": 3,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_05",
-			"room_b": "h_corr_04",
-			"row": 11,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_05",
-			"room_b": "h_corr_04",
-			"row": 12,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_04",
-			"room_b": "room_06",
-			"row": 11,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_04",
-			"room_b": "room_06",
-			"row": 12,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_06",
-			"room_b": "h_corr_05",
-			"row": 11,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_06",
-			"room_b": "h_corr_05",
-			"row": 12,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_05",
-			"room_b": "room_07",
-			"row": 11,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_05",
-			"room_b": "room_07",
-			"row": 12,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_07",
-			"room_b": "h_corr_06",
-			"row": 11,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_07",
-			"room_b": "h_corr_06",
-			"row": 12,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_06",
-			"room_b": "room_08",
-			"row": 11,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_06",
-			"room_b": "room_08",
-			"row": 12,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_09",
-			"room_b": "h_corr_07",
-			"row": 20,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_09",
-			"room_b": "h_corr_07",
-			"row": 21,
-			"col": 7,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_07",
-			"room_b": "room_10",
-			"row": 20,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_07",
-			"room_b": "room_10",
-			"row": 21,
-			"col": 10,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_10",
-			"room_b": "h_corr_08",
-			"row": 20,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_10",
-			"room_b": "h_corr_08",
-			"row": 21,
-			"col": 18,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_08",
-			"room_b": "room_11",
-			"row": 20,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_08",
-			"room_b": "room_11",
-			"row": 21,
-			"col": 21,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_11",
-			"room_b": "h_corr_09",
-			"row": 20,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_11",
-			"room_b": "h_corr_09",
-			"row": 21,
-			"col": 29,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_09",
-			"room_b": "room_12",
-			"row": 20,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "h_corr_09",
-			"room_b": "room_12",
-			"row": 21,
-			"col": 31,
-			"dir": "E"
-		},
-		{
-			"room_a": "room_01",
-			"room_b": "v_corr_01",
-			"row": 6,
-			"col": 2,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_01",
-			"room_b": "v_corr_01",
-			"row": 6,
-			"col": 3,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_01",
-			"room_b": "room_05",
-			"row": 9,
-			"col": 2,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_01",
-			"room_b": "room_05",
-			"row": 9,
-			"col": 3,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_05",
-			"room_b": "v_corr_02",
-			"row": 15,
-			"col": 2,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_05",
-			"room_b": "v_corr_02",
-			"row": 15,
-			"col": 3,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_02",
-			"room_b": "room_09",
-			"row": 18,
-			"col": 2,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_02",
-			"room_b": "room_09",
-			"row": 18,
-			"col": 3,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_02",
-			"room_b": "v_corr_03",
-			"row": 6,
-			"col": 13,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_02",
-			"room_b": "v_corr_03",
-			"row": 6,
-			"col": 14,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_03",
-			"room_b": "room_06",
-			"row": 9,
-			"col": 13,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_03",
-			"room_b": "room_06",
-			"row": 9,
-			"col": 14,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_06",
-			"room_b": "v_corr_04",
-			"row": 15,
-			"col": 13,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_06",
-			"room_b": "v_corr_04",
-			"row": 15,
-			"col": 14,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_04",
-			"room_b": "room_10",
-			"row": 18,
-			"col": 13,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_04",
-			"room_b": "room_10",
-			"row": 18,
-			"col": 14,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_03",
-			"room_b": "v_corr_05",
-			"row": 6,
-			"col": 24,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_03",
-			"room_b": "v_corr_05",
-			"row": 6,
-			"col": 25,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_05",
-			"room_b": "room_07",
-			"row": 9,
-			"col": 24,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_05",
-			"room_b": "room_07",
-			"row": 9,
-			"col": 25,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_07",
-			"room_b": "v_corr_06",
-			"row": 15,
-			"col": 24,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_07",
-			"room_b": "v_corr_06",
-			"row": 15,
-			"col": 25,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_06",
-			"room_b": "room_11",
-			"row": 18,
-			"col": 24,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_06",
-			"room_b": "room_11",
-			"row": 18,
-			"col": 25,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_04",
-			"room_b": "v_corr_07",
-			"row": 6,
-			"col": 34,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_04",
-			"room_b": "v_corr_07",
-			"row": 6,
-			"col": 35,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_07",
-			"room_b": "room_08",
-			"row": 9,
-			"col": 34,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_07",
-			"room_b": "room_08",
-			"row": 9,
-			"col": 35,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_08",
-			"room_b": "v_corr_08",
-			"row": 15,
-			"col": 34,
-			"dir": "S"
-		},
-		{
-			"room_a": "room_08",
-			"room_b": "v_corr_08",
-			"row": 15,
-			"col": 35,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_08",
-			"room_b": "room_12",
-			"row": 18,
-			"col": 34,
-			"dir": "S"
-		},
-		{
-			"room_a": "v_corr_08",
-			"room_b": "room_12",
-			"row": 18,
-			"col": 35,
-			"dir": "S"
+			"from": "room_01",
+			"to": "h_corr_01",
+			"cells": [
+				[
+					3,
+					7
+				],
+				[
+					4,
+					7
+				]
+			]
+		},
+		{
+			"from": "h_corr_01",
+			"to": "room_02",
+			"cells": [
+				[
+					3,
+					11
+				],
+				[
+					4,
+					11
+				]
+			]
+		},
+		{
+			"from": "room_02",
+			"to": "h_corr_02",
+			"cells": [
+				[
+					3,
+					18
+				],
+				[
+					4,
+					18
+				]
+			]
+		},
+		{
+			"from": "h_corr_02",
+			"to": "room_03",
+			"cells": [
+				[
+					3,
+					22
+				],
+				[
+					4,
+					22
+				]
+			]
+		},
+		{
+			"from": "room_03",
+			"to": "h_corr_03",
+			"cells": [
+				[
+					3,
+					29
+				],
+				[
+					4,
+					29
+				]
+			]
+		},
+		{
+			"from": "h_corr_03",
+			"to": "room_04",
+			"cells": [
+				[
+					3,
+					32
+				],
+				[
+					4,
+					32
+				]
+			]
+		},
+		{
+			"from": "room_05",
+			"to": "h_corr_04",
+			"cells": [
+				[
+					12,
+					7
+				],
+				[
+					13,
+					7
+				]
+			]
+		},
+		{
+			"from": "h_corr_04",
+			"to": "room_06",
+			"cells": [
+				[
+					12,
+					11
+				],
+				[
+					13,
+					11
+				]
+			]
+		},
+		{
+			"from": "room_06",
+			"to": "h_corr_05",
+			"cells": [
+				[
+					12,
+					18
+				],
+				[
+					13,
+					18
+				]
+			]
+		},
+		{
+			"from": "h_corr_05",
+			"to": "room_07",
+			"cells": [
+				[
+					12,
+					22
+				],
+				[
+					13,
+					22
+				]
+			]
+		},
+		{
+			"from": "room_07",
+			"to": "h_corr_06",
+			"cells": [
+				[
+					12,
+					29
+				],
+				[
+					13,
+					29
+				]
+			]
+		},
+		{
+			"from": "h_corr_06",
+			"to": "room_08",
+			"cells": [
+				[
+					12,
+					32
+				],
+				[
+					13,
+					32
+				]
+			]
+		},
+		{
+			"from": "room_09",
+			"to": "h_corr_07",
+			"cells": [
+				[
+					21,
+					7
+				],
+				[
+					22,
+					7
+				]
+			]
+		},
+		{
+			"from": "h_corr_07",
+			"to": "room_10",
+			"cells": [
+				[
+					21,
+					11
+				],
+				[
+					22,
+					11
+				]
+			]
+		},
+		{
+			"from": "room_10",
+			"to": "h_corr_08",
+			"cells": [
+				[
+					21,
+					18
+				],
+				[
+					22,
+					18
+				]
+			]
+		},
+		{
+			"from": "h_corr_08",
+			"to": "room_11",
+			"cells": [
+				[
+					21,
+					22
+				],
+				[
+					22,
+					22
+				]
+			]
+		},
+		{
+			"from": "room_11",
+			"to": "h_corr_09",
+			"cells": [
+				[
+					21,
+					29
+				],
+				[
+					22,
+					29
+				]
+			]
+		},
+		{
+			"from": "h_corr_09",
+			"to": "room_12",
+			"cells": [
+				[
+					21,
+					32
+				],
+				[
+					22,
+					32
+				]
+			]
+		},
+		{
+			"from": "room_01",
+			"to": "v_corr_01",
+			"cells": [
+				[
+					6,
+					3
+				],
+				[
+					6,
+					4
+				]
+			]
+		},
+		{
+			"from": "v_corr_01",
+			"to": "room_05",
+			"cells": [
+				[
+					10,
+					3
+				],
+				[
+					10,
+					4
+				]
+			]
+		},
+		{
+			"from": "room_02",
+			"to": "v_corr_02",
+			"cells": [
+				[
+					6,
+					12
+				],
+				[
+					6,
+					13
+				]
+			]
+		},
+		{
+			"from": "v_corr_02",
+			"to": "room_06",
+			"cells": [
+				[
+					10,
+					12
+				],
+				[
+					10,
+					13
+				]
+			]
+		},
+		{
+			"from": "room_03",
+			"to": "v_corr_03",
+			"cells": [
+				[
+					6,
+					23
+				],
+				[
+					6,
+					24
+				]
+			]
+		},
+		{
+			"from": "v_corr_03",
+			"to": "room_07",
+			"cells": [
+				[
+					10,
+					23
+				],
+				[
+					10,
+					24
+				]
+			]
+		},
+		{
+			"from": "room_04",
+			"to": "v_corr_04",
+			"cells": [
+				[
+					6,
+					33
+				],
+				[
+					6,
+					34
+				]
+			]
+		},
+		{
+			"from": "v_corr_04",
+			"to": "room_08",
+			"cells": [
+				[
+					10,
+					33
+				],
+				[
+					10,
+					34
+				]
+			]
+		},
+		{
+			"from": "room_05",
+			"to": "v_corr_05",
+			"cells": [
+				[
+					15,
+					25
+				],
+				[
+					15,
+					26
+				]
+			]
+		},
+		{
+			"from": "v_corr_05",
+			"to": "room_09",
+			"cells": [
+				[
+					19,
+					25
+				],
+				[
+					19,
+					26
+				]
+			]
+		},
+		{
+			"from": "room_06",
+			"to": "v_corr_06",
+			"cells": [
+				[
+					15,
+					25
+				],
+				[
+					15,
+					26
+				]
+			]
+		},
+		{
+			"from": "v_corr_06",
+			"to": "room_10",
+			"cells": [
+				[
+					19,
+					25
+				],
+				[
+					19,
+					26
+				]
+			]
+		},
+		{
+			"from": "room_07",
+			"to": "v_corr_07",
+			"cells": [
+				[
+					15,
+					35
+				],
+				[
+					15,
+					36
+				]
+			]
+		},
+		{
+			"from": "v_corr_07",
+			"to": "room_11",
+			"cells": [
+				[
+					19,
+					35
+				],
+				[
+					19,
+					36
+				]
+			]
+		},
+		{
+			"from": "room_08",
+			"to": "v_corr_08",
+			"cells": [
+				[
+					15,
+					35
+				],
+				[
+					15,
+					36
+				]
+			]
+		},
+		{
+			"from": "v_corr_08",
+			"to": "room_12",
+			"cells": [
+				[
+					19,
+					35
+				],
+				[
+					19,
+					36
+				]
+			]
 		}
 	],
 	"open_edges": [

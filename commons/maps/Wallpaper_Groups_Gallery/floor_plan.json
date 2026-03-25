@@ -163,7 +163,19 @@
 			"floor_config": {
 				"tiles_short": 10
 			},
-			"color": "#E8A87C"
+			"color": "#E8A87C",
+			"open_edges": [
+				{
+					"row": 0,
+					"col": 2,
+					"dir": "N"
+				},
+				{
+					"row": 0,
+					"col": 3,
+					"dir": "N"
+				}
+			]
 		},
 		{
 			"id": "room_p2",
