@@ -151,6 +151,17 @@ func _build() -> void:
 		for gx in range(0, gw_px + 1):
 			grout_verts = _add_rect.call(grout_verts, gx * px_m - half, 0.0, grout_w, fh)
 
+
+	# ── Z-fighting fix: offset each surface to a distinct Y layer ──
+	# Hierarchy: grout(-0.001) < dark(0.0) < light(0.001) < accent/terra(0.002) < border(0.003)
+	var _offset_y := func(verts: PackedVector3Array, y_off: float) -> PackedVector3Array:
+		for i in verts.size():
+			verts[i].y = y_off
+		return verts
+	dark_verts = _offset_y.call(dark_verts, 0.0)
+	light_verts = _offset_y.call(light_verts, 0.001)
+	grout_verts = _offset_y.call(grout_verts, -0.001)
+
 	# ── Build ArrayMesh ──
 	var arr_mesh := ArrayMesh.new()
 	if dark_verts.size() > 0:

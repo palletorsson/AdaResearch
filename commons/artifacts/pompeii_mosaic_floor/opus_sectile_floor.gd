@@ -258,6 +258,26 @@ func _build() -> void:
 					grout_verts.append(p0i); grout_verts.append(p0o); grout_verts.append(p1o)
 					grout_verts.append(p0i); grout_verts.append(p1o); grout_verts.append(p1i)
 
+
+	# ── Z-fighting fix: offset each surface to a distinct Y layer ──
+	# Hierarchy: grout(-0.001) < corners(0.0) < discs(0.001) < border(0.002)
+	var _offset_y := func(verts: PackedVector3Array, y_off: float) -> PackedVector3Array:
+		for i in verts.size():
+			verts[i].y = y_off
+		return verts
+	grout_verts = _offset_y.call(grout_verts, -0.001)
+
+	# Offset color_verts: border colors at 0.0, corner colors at 0.001, disc colors at 0.002
+	var border_color_set: Array[Color] = [MosaicPalette.DARK, MosaicPalette.LIGHT]
+	for color_key in color_verts:
+		var verts: PackedVector3Array = color_verts[color_key]
+		var y_off: float = 0.001  # default for corner/pattern surfaces
+		if color_key in border_color_set:
+			y_off = 0.0  # border bands at base level
+		elif color_key in DISC_COLORS:
+			y_off = 0.002  # disc circles above corners
+		color_verts[color_key] = _offset_y.call(verts, y_off)
+
 	# ── Build ArrayMesh ──
 	var arr_mesh := ArrayMesh.new()
 
