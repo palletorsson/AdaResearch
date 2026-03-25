@@ -17,7 +17,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
-@export var y_offset: float = 0.0  # Set to 1.0 if placed on top of GridSystem floor cubes
+@export var y_offset: float = 1.0  # Flush with GridSystem floor cube tops (1m tall)
 var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
