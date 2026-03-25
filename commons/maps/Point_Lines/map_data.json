@@ -1,835 +1,835 @@
 {
   "documentation": {
-    "key_elements": [
-      "`line_demo` at (3,3) as baseline two-point relation",
-      "`modulor_man_demo` and `line_builder_3d` at row 4 for embodied proportion/construction",
-      "`plus_line_puzzle` and `parallel_line_puzzle` at row 9",
-      "`dark_sphere` enclosure at (3,11)",
-      "`line` + `laser_measure` + `laser_exploding_sphere` trio across rows 12-14",
-      "`perspective_lines` and `scale_lines` near row 23",
+	"key_elements": [
+	  "`line_demo` at (3,3) as baseline two-point relation",
+	  "`modulor_man_demo` and `line_builder_3d` at row 4 for embodied proportion/construction",
+	  "`plus_line_puzzle` and `parallel_line_puzzle` at row 9",
+	  "`dark_sphere` enclosure at (3,11)",
+	  "`line` + `laser_measure` + `laser_exploding_sphere` trio across rows 12-14",
+	  "`perspective_lines` and `scale_lines` near row 23",
       "Teleporter `t` at (5,21)"
-    ],
-    "layout": "7x27 elongated gallery with staged line systems and a late-map perspective zone.",
-    "objective": "Explore line multiplication: parallels, crossings, grids, and networks.",
-    "summary": "Point_Lines - Line Networks Workshop"
+	],
+	"layout": "7x27 elongated gallery with staged line systems and a late-map perspective zone.",
+	"objective": "Explore line multiplication: parallels, crossings, grids, and networks.",
+	"summary": "Point_Lines - Line Networks Workshop"
   },
   "layers": {
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	"interactables": [
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "line_demo:0",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		"line_demo:0",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        "modulor_man_demo:0:-0.5",
-        " ",
-        " ",
-        " ",
-        "line_builder_3d:0:0:0.5",
+	  ],
+	  [
+		" ",
+		"modulor_man_demo:0:-0.5",
+		" ",
+		" ",
+		" ",
+		"line_builder_3d:0:0:0.5",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        "plus_line_puzzle:0:1.2:0#plusfillhole:remove",
-        " ",
-        "parallel_line_puzzle:0:1.2:0#fillhole:remove",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		"plus_line_puzzle:0:1.2:0#plusfillhole:remove",
+		" ",
+		"parallel_line_puzzle:0:1.2:0#fillhole:remove",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        "cube_scene:0:0:0.90#group:plusfillhole",
-        " ",
-        "cube_scene:0:0:0.90#group:fillhole",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		"cube_scene:0:0:0.90#group:plusfillhole",
+		" ",
+		"cube_scene:0:0:0.90#group:fillhole",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "dark_sphere",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		"dark_sphere",
+		" ",
+		" ",
         " "
-      ],
-      [
-        "cube_scene:0:1:0.6",
-        "line:0:1",
-        " ",
-        " ",
-        "laser_measure:0:1",
-        " ",
+	  ],
+	  [
+		"cube_scene:0:1:0.6",
+		"line:0:1",
+		" ",
+		" ",
+		"laser_measure:0:1",
+		" ",
         "laser_exploding_sphere:0:2"
-      ],
-      [
-        "cube_scene:0:1:0.4",
-        "line:0:1",
-        " ",
-        " ",
-        "laser_measure:0:1",
-        " ",
+	  ],
+	  [
+		"cube_scene:0:1:0.4",
+		"line:0:1",
+		" ",
+		" ",
+		"laser_measure:0:1",
+		" ",
         "laser_exploding_sphere:0:2"
-      ],
-      [
-        "cube_scene:0:1:0.2",
-        "line:0:1",
-        " ",
-        " ",
-        "laser_measure:0:1",
-        " ",
+	  ],
+	  [
+		"cube_scene:0:1:0.2",
+		"line:0:1",
+		" ",
+		" ",
+		"laser_measure:0:1",
+		" ",
         "laser_exploding_sphere:0:2"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        "perspective_lines:0:2",
-        " ",
-        "scale_lines:0:3",
-        " ",
-        "perspective_lines:0:2",
+	  ],
+	  [
+		" ",
+		"perspective_lines:0:2",
+		" ",
+		"scale_lines:0:3",
+		" ",
+		"perspective_lines:0:2",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "lightrod:0:0:1#config:4:1",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		"lightrod:0:0:1#config:4:1",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         "dgrid:90:1.15:0.9#config:5:5"
-      ]
-    ],
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
+	  ]
+	],
+	"structure": [
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"0",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"0",
         "0"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "4",
-        "4",
-        "4",
-        "1",
-        "4",
-        "4",
+	  ],
+	  [
+		"4",
+		"4",
+		"4",
+		"1",
+		"4",
+		"4",
         "4"
-      ],
-      [
-        "4",
-        "4",
-        "4",
-        "1",
-        "4",
-        "4",
+	  ],
+	  [
+		"4",
+		"4",
+		"4",
+		"1",
+		"4",
+		"4",
         "4"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "2",
-        "2",
-        "1",
-        "2",
-        "1",
-        "2",
+	  ],
+	  [
+		"2",
+		"2",
+		"1",
+		"2",
+		"1",
+		"2",
         "2"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"0",
         "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
+	  ],
+	  [
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
         "1"
-      ],
-      [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      [
-        0.0,
-        "1",
-        0.0,
-        "1",
-        0.0,
-        "1",
-        0.0
-      ],
-      [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      [
-        0.0,
-        0.0,
-        0.0,
-        "1",
-        0.0,
-        0.0,
-        0.0
-      ],
-      [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
+	  ],
+	  [
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0
+	  ],
+	  [
+		0.0,
+		"1",
+		0.0,
+		"1",
+		0.0,
+		"1",
+		0.0
+	  ],
+	  [
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0
+	  ],
+	  [
+		0.0,
+		0.0,
+		0.0,
+		"1",
+		0.0,
+		0.0,
+		0.0
+	  ],
+	  [
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
         "1"
-      ]
-    ],
-    "utilities": [
-      [
-        "s",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ]
+	],
+	"utilities": [
+	  [
+		"s",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         "an:-90"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        "sub:line_measures",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		"sub:line_measures",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "t",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		"t",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "3t:lines",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		"3t:lines",
+		" ",
+		" ",
         " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
         " "
-      ]
-    ]
+	  ]
+	]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "enabled": true,
-      "energy": 1.2
-    }
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [
+		1.0,
+		0.9,
+		0.8
+	  ],
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
   },
   "map_info": {
-    "description": "Multiplies lines into context: parallels, crossings, and grids. This map shows how lines interact with each other, producing orientation, metric frameworks, and initial systems of measure. It is where discrete relations begin to behave as a network rather than a sequence.",
-    "description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
-    "dimensions": {
-      "depth": 27.0,
-      "max_height": 4.0,
-      "width": 7.0
-    },
-    "format": "json",
-    "lookup_name": "Point_Lines",
-    "metadata": {
-      "category": "tutorial",
-      "difficulty": "beginner",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "Line networks",
-        "Parallels and crossings",
+	"description": "Multiplies lines into context: parallels, crossings, and grids. This map shows how lines interact with each other, producing orientation, metric frameworks, and initial systems of measure. It is where discrete relations begin to behave as a network rather than a sequence.",
+	"description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
+	"dimensions": {
+	  "depth": 27.0,
+	  "max_height": 4.0,
+	  "width": 7.0
+	},
+	"format": "json",
+	"lookup_name": "Point_Lines",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": [
+		"Line networks",
+		"Parallels and crossings",
         "Grid formation"
-      ]
-    },
-    "name": "Lines",
-    "version": "1.0",
-    "title": "Lines, Networks, Measure"
+	  ]
+	},
+	"name": "Lines",
+	"version": "1.0",
+	"title": "Lines, Networks, Measure"
   },
   "settings": {
-    "auto_reveal_on_entry": false,
-    "background": {
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ],
-      "type": "sky"
-    },
-    "cube_size": 1.0,
-    "enable_physics": true,
-    "enter_type": "I",
-    "gutter": 0.0,
-    "initial_tile_visibility": "hidden_except_corners",
-    "show_grid": true
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"enter_type": "I",
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
   },
   "subtitles": {
-    "laser_distance": "Distance is the first gift of the line: a number that speaks of separation.",
-    "line_measures": "The line measures because it has no room to escape comparison."
+	"laser_distance": "Distance is the first gift of the line: a number that speaks of separation.",
+	"line_measures": "The line measures because it has no room to escape comparison."
   },
   "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "description": "Continue to next step",
-      "name": "Next",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
   }
 }

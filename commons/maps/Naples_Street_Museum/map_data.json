@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Naples Street Museum",
 		"lookup_name": "Naples_Street_Museum",
-		"description": "A museum inspired by walking through Naples — rooms represent different buildings and sites you would visit, from Gesu Nuovo to Pompeii villas to Florentine facades.",
+		"description": "A museum inspired by walking through Naples \u00e2\u20ac\u201d rooms represent different buildings and sites you would visit, from Gesu Nuovo to Pompeii villas to Florentine facades.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -25,12 +25,12 @@
 	"layers": {
 		"structure": [
 			[
-				"0",
-				"0"
+				"1",
+				"1"
 			],
 			[
-				"0",
-				"0"
+				"1",
+				"1"
 			]
 		],
 		"utilities": [
@@ -40,7 +40,7 @@
 			],
 			[
 				" ",
-				" "
+				"teleporter"
 			]
 		],
 		"interactables": [

@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Santa Chiara Majolica Tiles",
 		"lookup_name": "Mosaic_Majolica_Tiles",
-		"description": "Painted ceramic tiles from the Santa Chiara cloister in Naples — baroque color palettes on square grid.",
+		"description": "Painted ceramic tiles from the Santa Chiara cloister in Naples \u00e2\u20ac\u201d baroque color palettes on square grid.",
 		"version": "2.0",
 		"format": "json",
 		"dimensions": {
@@ -24,16 +24,34 @@
 	},
 	"layers": {
 		"structure": [
-			["0", "0"],
-			["0", "0"]
+			[
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1"
+			]
 		],
 		"utilities": [
-			["spawn", " "],
-			[" ", " "]
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				"teleporter"
+			]
 		],
 		"interactables": [
-			["floor_plan_space", " "],
-			[" ", " "]
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
 		]
 	}
 }

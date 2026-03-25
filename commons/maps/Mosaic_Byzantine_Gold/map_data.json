@@ -2,7 +2,7 @@
 	"map_info": {
 		"name": "Byzantine Gold-Ground Mosaics",
 		"lookup_name": "Mosaic_Byzantine_Gold",
-		"description": "Gold tesserae set at angles to catch light — how viewing distance and reflection create emergent pattern.",
+		"description": "Gold tesserae set at angles to catch light \u00e2\u20ac\u201d how viewing distance and reflection create emergent pattern.",
 		"version": "2.0",
 		"format": "json",
 		"dimensions": {
@@ -24,16 +24,34 @@
 	},
 	"layers": {
 		"structure": [
-			["0", "0"],
-			["0", "0"]
+			[
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1"
+			]
 		],
 		"utilities": [
-			["spawn", " "],
-			[" ", " "]
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				"teleporter"
+			]
 		],
 		"interactables": [
-			["floor_plan_space", " "],
-			[" ", " "]
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
 		]
 	}
 }

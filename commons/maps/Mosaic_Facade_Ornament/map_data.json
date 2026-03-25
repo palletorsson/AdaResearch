@@ -1,39 +1,57 @@
 {
-  "map_info": {
-    "name": "Mosaic Facade Ornament",
-    "lookup_name": "Mosaic_Facade_Ornament",
-    "description": "Five themed rooms pairing floor mosaics with facade ornament — classical Pompeii, Gothic labyrinth, Baroque star rosette, Renaissance diamonds, and modern grid lattice.",
-    "version": "2.0",
-    "format": "json",
-    "dimensions": {
-      "width": 2,
-      "depth": 2,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "mosaicanalysis",
-      "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Compare floor mosaic patterns with complementary facade styles",
-        "Recognize how ornamental grammar scales across floor and wall",
-        "Analyze recursive structure in baroque, gothic, and classical ornament"
-      ]
-    },
-    "title": "Mosaic Facade Ornament"
-  },
-  "layers": {
-    "structure": [
-      ["0", "0"],
-      ["0", "0"]
-    ],
-    "utilities": [
-      ["S", " "],
-      [" ", " "]
-    ],
-    "interactables": [
-      ["floor_plan_space", " "],
-      [" ", " "]
-    ]
-  }
+	"map_info": {
+		"name": "Mosaic Facade Ornament",
+		"lookup_name": "Mosaic_Facade_Ornament",
+		"description": "Five themed rooms pairing floor mosaics with facade ornament \u00e2\u20ac\u201d classical Pompeii, Gothic labyrinth, Baroque star rosette, Renaissance diamonds, and modern grid lattice.",
+		"version": "2.0",
+		"format": "json",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "intermediate",
+			"category": "mosaicanalysis",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Compare floor mosaic patterns with complementary facade styles",
+				"Recognize how ornamental grammar scales across floor and wall",
+				"Analyze recursive structure in baroque, gothic, and classical ornament"
+			]
+		},
+		"title": "Mosaic Facade Ornament"
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				"teleporter"
+			]
+		],
+		"interactables": [
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
+		]
+	}
 }

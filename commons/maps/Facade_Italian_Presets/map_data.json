@@ -3,7 +3,7 @@
 		"name": "Italian Presets",
 		"title": "Italian Presets",
 		"lookup_name": "Facade_Italian_Presets",
-		"description": "Grand exhibition hall showcasing all ten Italian facade presets as floating exhibits — from classical orders to Capri whitewash.",
+		"description": "Grand exhibition hall showcasing all ten Italian facade presets as floating exhibits \u00e2\u20ac\u201d from classical orders to Capri whitewash.",
 		"version": "2.0",
 		"format": "json",
 		"dimensions": {
@@ -25,25 +25,55 @@
 	},
 	"layers": {
 		"structure": [
-			["0", "0"],
-			["0", "0"]
+			[
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1"
+			]
 		],
 		"utilities": [
-			["spawn", " "],
-			[" ", " "]
+			[
+				"spawn",
+				" "
+			],
+			[
+				" ",
+				"teleporter"
+			]
 		],
 		"interactables": [
-			["floor_plan_space", " "],
-			[" ", " "]
+			[
+				"floor_plan_space",
+				" "
+			],
+			[
+				" ",
+				" "
+			]
 		]
 	},
 	"lighting": {
-		"ambient_color": [0.75, 0.7, 0.6],
+		"ambient_color": [
+			0.75,
+			0.7,
+			0.6
+		],
 		"ambient_energy": 1.0,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.3],
-			"color": [1.0, 0.95, 0.85],
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.3
+			],
+			"color": [
+				1.0,
+				0.95,
+				0.85
+			],
 			"energy": 1.1
 		}
 	},
@@ -54,7 +84,11 @@
 		"enable_physics": true,
 		"background": {
 			"type": "sky",
-			"color": [0.55, 0.5, 0.45]
+			"color": [
+				0.55,
+				0.5,
+				0.45
+			]
 		}
 	}
 }
