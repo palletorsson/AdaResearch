@@ -1,127 +1,39 @@
 {
   "map_info": {
-    "name": "Baroque Facade Ornament",
+    "name": "Mosaic Facade Ornament",
     "lookup_name": "Mosaic_Facade_Ornament",
-    "description": "Neapolitan baroque scrollwork and volutes as recursive grammars — L-system logic in carved stone and stucco.",
-    "version": "1.0",
+    "description": "Five themed rooms pairing floor mosaics with facade ornament — classical Pompeii, Gothic labyrinth, Baroque star rosette, Renaissance diamonds, and modern grid lattice.",
+    "version": "2.0",
     "format": "json",
     "dimensions": {
-      "width": 5,
-      "depth": 4,
-      "max_height": 3
+      "width": 2,
+      "depth": 2,
+      "max_height": 1
     },
     "metadata": {
       "difficulty": "intermediate",
       "category": "mosaicanalysis",
       "estimated_time": "exploration based",
       "learning_objectives": [
-        "Recognize recursive structure in baroque scrollwork",
-        "Model volutes and acanthus as L-system productions",
-        "Analyze how ornamental grammar scales across facade elements"
+        "Compare floor mosaic patterns with complementary facade styles",
+        "Recognize how ornamental grammar scales across floor and wall",
+        "Analyze recursive structure in baroque, gothic, and classical ornament"
       ]
     },
-    "title": "Baroque Facade Ornament"
+    "title": "Mosaic Facade Ornament"
   },
   "layers": {
     "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "1",
-        "1"
-      ]
+      ["0", "0"],
+      ["0", "0"]
     ],
     "utilities": [
-      [
-        "S",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "t",
-        " ",
-        " "
-      ]
+      ["S", " "],
+      [" ", " "]
     ],
     "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "pattern_tile_puzzle",
-        " ",
-        "tessellation_lattice_demo",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
+      ["floor_plan_space", " "],
+      [" ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

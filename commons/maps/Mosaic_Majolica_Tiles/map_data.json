@@ -1,127 +1,39 @@
 {
-  "map_info": {
-    "name": "Santa Chiara Majolica Tiles",
-    "lookup_name": "Mosaic_Majolica_Tiles",
-    "description": "Painted ceramic tiles from the Santa Chiara cloister in Naples — baroque color palettes on square grid.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 5,
-      "depth": 4,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "mosaicanalysis",
-      "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Analyze painted tile patterns on regular grids",
-        "Identify how narrative imagery interacts with geometric repetition",
-        "Map majolica color palettes to pattern generation"
-      ]
-    },
-    "title": "Majolica Tiles"
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        "S",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "t",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "pattern_maker_station",
-        " ",
-        "pattern_tile_puzzle",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  }
+	"map_info": {
+		"name": "Santa Chiara Majolica Tiles",
+		"lookup_name": "Mosaic_Majolica_Tiles",
+		"description": "Painted ceramic tiles from the Santa Chiara cloister in Naples — baroque color palettes on square grid.",
+		"version": "2.0",
+		"format": "json",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "intermediate",
+			"category": "mosaicanalysis",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Analyze painted tile patterns on regular grids",
+				"Identify how narrative imagery interacts with geometric repetition",
+				"Map majolica color palettes to pattern generation"
+			]
+		},
+		"title": "Majolica Tiles"
+	},
+	"layers": {
+		"structure": [
+			["0", "0"],
+			["0", "0"]
+		],
+		"utilities": [
+			["spawn", " "],
+			[" ", " "]
+		],
+		"interactables": [
+			["floor_plan_space", " "],
+			[" ", " "]
+		]
+	}
 }

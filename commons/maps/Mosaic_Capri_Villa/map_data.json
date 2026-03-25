@@ -1,148 +1,39 @@
 {
-  "map_info": {
-    "name": "Villa San Michele Fragments",
-    "lookup_name": "Mosaic_Capri_Villa",
-    "description": "Axel Munthes collected mosaic fragments at Villa San Michele on Capri — mixed period analysis.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "mosaicanalysis",
-      "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Analyze pattern fragments across historical periods",
-        "Identify symmetry groups in decontextualized mosaic pieces",
-        "Reconstruct possible original patterns from fragment evidence"
-      ]
-    },
-    "title": "Villa San Michele Fragments"
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        "S",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "t",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "pattern_tile_puzzle",
-        " ",
-        "tessellation_lattice_demo",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "pattern_maker_station",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  }
+	"map_info": {
+		"name": "Villa San Michele Fragments",
+		"lookup_name": "Mosaic_Capri_Villa",
+		"description": "Axel Munthes collected mosaic fragments at Villa San Michele on Capri — mixed period analysis.",
+		"version": "2.0",
+		"format": "json",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "intermediate",
+			"category": "mosaicanalysis",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Analyze pattern fragments across historical periods",
+				"Identify symmetry groups in decontextualized mosaic pieces",
+				"Reconstruct possible original patterns from fragment evidence"
+			]
+		},
+		"title": "Villa San Michele Fragments"
+	},
+	"layers": {
+		"structure": [
+			["0", "0"],
+			["0", "0"]
+		],
+		"utilities": [
+			["spawn", " "],
+			[" ", " "]
+		],
+		"interactables": [
+			["floor_plan_space", " "],
+			[" ", " "]
+		]
+	}
 }
