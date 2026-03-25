@@ -229,37 +229,21 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	if cells.is_empty():
 		return
 
-	# Build set of doorway cells so we exclude them from bbox computation
-	var doorway_cells: Dictionary = {}
-	var room_id: String = str(room.get("id", ""))
-	var all_doorways: Array = _floor_plan_data.get("doorways", [])
-	for dw in all_doorways:
-		var dw_from: String = str(dw.get("from", ""))
-		var dw_to: String = str(dw.get("to", ""))
-		if dw_from == room_id or dw_to == room_id:
-			for dc in dw.get("cells", []):
-				if dc is Array and dc.size() >= 2:
-					doorway_cells["%d,%d" % [int(dc[0]), int(dc[1])]] = true
-
-	# Compute bounding rect from core cells only (excluding doorway cells)
+	# Compute bounding rect from ALL cells
 	var min_row: int = 999999
 	var max_row: int = -999999
 	var min_col: int = 999999
 	var max_col: int = -999999
-	var core_count: int = 0
 
 	for cell in cells:
 		if not cell is Array or cell.size() < 2:
 			continue
 		var row: int = int(cell[0])
 		var col: int = int(cell[1])
-		var key := "%d,%d" % [row, col]
-		if not doorway_cells.has(key):
-			min_row = mini(min_row, row)
-			max_row = maxi(max_row, row)
-			min_col = mini(min_col, col)
-			max_col = maxi(max_col, col)
-			core_count += 1
+		min_row = mini(min_row, row)
+		max_row = maxi(max_row, row)
+		min_col = mini(min_col, col)
+		max_col = maxi(max_col, col)
 
 	if min_row > max_row:
 		return
@@ -268,7 +252,10 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	var rows_span: int = max_row - min_row + 1
 	var wt: float = _floor_plan_data.get("wall_thickness", 0.5)
 	var bbox_area: int = cols_span * rows_span
-	var is_rectangular: bool = core_count >= bbox_area * 0.9
+	# Rooms with doorway cells may have slightly more cells than the bbox.
+	# Use 0.7 threshold to handle rooms with doorway extensions gracefully.
+	# True L-shapes and corridors will have much lower ratios (< 0.5).
+	var is_rectangular: bool = cells.size() >= bbox_area * 0.7 and float(bbox_area) / float(cells.size()) < 2.0
 
 	# Inset floor by half wall thickness so it fits inside the walls
 	var room_w: float = cols_span * cell_size - wt
