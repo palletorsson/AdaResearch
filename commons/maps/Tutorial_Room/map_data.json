@@ -1,86 +1,42 @@
 {
-  "map_info": {
-    "name": "Tutorial Room",
-    "lookup_name": "Tutorial_Room",
-    "description": "Scaffold map for sequence tutorial_progression.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 7,
-      "depth": 9,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "tutorial_progression",
-      "estimated_time": "3-5 minutes",
-      "learning_objectives": [ "Prototype map for sequence `tutorial_progression`.", "Validate map flow and artifact placement.", "Refine layout for sequence pedagogy." ]
-    }
-  },
-  "documentation": {
-    "summary": "Tutorial_Room scaffold",
-    "layout": "7x9 test room with spawn and teleporter.",
-    "objective": "Prototype map for sequence `tutorial_progression`.",
-    "key_elements": [ "Add sequence artifacts." ]
-  },
-  "layers": {
-    "structure": [
-      [ "2", "2", "2", "2", "2", "2", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "2", "2", "2", "2", "2", "2" ]
-    ],
-    "utilities": [
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", "s", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "t", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " " ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next map in sequence.",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [ 0.4, 0.4, 0.5 ],
-    "ambient_energy": 0.6
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true
-  }
+	"map_info": {"name": "Tutorial Room", "lookup_name": "Tutorial_Room", "description": "Scaffold map for sequence tutorial_progression.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 9, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "tutorial_progression", "estimated_time": "3-5 minutes", "learning_objectives": ["Prototype map for sequence `tutorial_progression`.", "Validate map flow and artifact placement.", "Refine layout for sequence pedagogy."]}},
+	"documentation": {"summary": "Tutorial_Room scaffold", "layout": "7x9 test room with spawn and teleporter.", "objective": "Prototype map for sequence `tutorial_progression`.", "key_elements": ["Add sequence artifacts."]},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next map in sequence.", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true},
+	"layers": {
+		"structure": [
+			["2", "2", "2", "2", "2", "2", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "2"],
+			["2", "2", "2", "2", "2", "2", "2"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "s", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
+	}
 }

@@ -1,337 +1,39 @@
 {
-	"map_info": {
-		"name": "BG Crack Propagation",
-		"title": "Stress Finds a Path",
-		"lookup_name": "BG_Crack_Propagation",
-		"description": "Stress-driven fracture patterns — cracks follow material grain and stress concentration. Cellular automaton rules create realistic fracture networks.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 9,
-			"max_height": 2
-		},
-		"metadata": {
-			"difficulty": "intermediate",
-			"category": "biological_growth",
-			"estimated_time": "3-5 minutes",
-			"spatial_temperature": 0.45,
-			"design_notes": "Compact gallery — flat floor with the crack simulation as a wall-mounted display. Small room, focused viewing. Light compute allows intimate scale."
-		}
-	},
+	"map_info": {"name": "BG Crack Propagation", "title": "Stress Finds a Path", "lookup_name": "BG_Crack_Propagation", "description": "Stress-driven fracture patterns â€” cracks follow material grain and stress concentration. Cellular automaton rules create realistic fracture networks.", "version": "1.0", "format": "json", "dimensions": {"width": 9, "depth": 9, "max_height": 2}, "metadata": {"difficulty": "intermediate", "category": "biological_growth", "estimated_time": "3-5 minutes", "spatial_temperature": 0.45, "design_notes": "Compact gallery â€” flat floor with the crack simulation as a wall-mounted display. Small room, focused viewing. Light compute allows intimate scale."}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"0"
-			]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "0"]
 		],
 		"utilities": [
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"an",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"sp",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"t"
-			]
+			["s", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "an", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "sp", " ", " ", " ", " ", " ", " ", "t"]
 		],
 		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"crackpropagation_ca:0:2",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "crackpropagation_ca:0:2", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
 	}
 }

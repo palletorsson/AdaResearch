@@ -1,26 +1,5 @@
 {
-	"map_info": {
-			"name": "Grid Subset Gallery",
-			"lookup_name": "Grid_Subset_Gallery",
-			"description": "Showroom of all grid editor 3D subsets and standalone audio rack configs \u2014 chemical models, sticky notes, periodic table, glass rack, audio rack presets + direct configs, big pipes, and lab items.",
-			"version": "1.0",
-			"format": "json",
-			"dimensions": {
-					"width": 19,
-					"depth": 34,
-					"max_height": 3
-			},
-			"metadata": {
-					"difficulty": "beginner",
-					"category": "interactive",
-					"estimated_time": "exploration based",
-					"learning_objectives": [
-							"Explore ball-and-stick molecular models with CPK coloring",
-							"Compare simple auto-bonded molecules to complex explicit-bond ring systems",
-							"See sticky note boards, periodic table tiles, glassware, synth panels, pipes, and lab equipment"
-					]
-			}
-	},
+	"map_info": {"name": "Grid Subset Gallery", "lookup_name": "Grid_Subset_Gallery", "description": "Showroom of all grid editor 3D subsets and standalone audio rack configs — chemical models, sticky notes, periodic table, glass rack, audio rack presets + direct configs, big pipes, and lab items.", "version": "1.0", "format": "json", "dimensions": {"width": 19, "depth": 34, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "interactive", "estimated_time": "exploration based", "learning_objectives": ["Explore ball-and-stick molecular models with CPK coloring", "Compare simple auto-bonded molecules to complex explicit-bond ring systems", "See sticky note boards, periodic table tiles, glassware, synth panels, pipes, and lab equipment"]}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],

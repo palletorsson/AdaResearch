@@ -1,151 +1,24 @@
 {
-  "map_info": {
-    "name": "Tutorial_Single",
-    "lookup_name": "Tutorial_Single",
-    "description": "Your first interaction - one cube to grab, one exit to find.",
-    "version": "1.0",
-    "format": "json",
-    "created_from": "progressive_tutorial_design",
-    "dimensions": {
-      "width": 4,
-      "depth": 3,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "absolute_beginner",
-      "category": "onboarding",
-      "estimated_time": "1 minute",
-      "learning_objectives": [
-        "Learn VR hand tracking",
-        "First object interaction",
-        "Understand grabbing mechanics"
-      ]
-    },
-    "title": "One Cube, One Grab"
-  },
-  "documentation": {
-    "summary": "Tutorial_Single - Single Cube Task",
-    "layout": "4x3 micro-platform with spawn and score nodes framing a solitary pickup.",
-    "objective": "Provide a minimal task: pick up a single cube before teleporting onward.",
-    "key_elements": [
-      "Score cube `sp` at (2,0) signalling completion",
-      "`pick_up_cube` target at (1,1)",
-      "Teleporter `t` at (2,1) to continue"
-    ]
-  },
-  "layers": {
-    "structure": [
-      [
-        "2",
-        "2",
-        "2",
-        "2"
-      ],
-      [
-        "2",
-        "1",
-        "0",
-        "2"
-      ],
-      [
-        "2",
-        "2",
-        "2",
-        "2"
-      ]
-    ],
-    "utilities": [
-      [
-        " ",
-        " ",
-        "sp",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "t",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "pick_up_cube",
-        " ",
-        " "
-      ],
-      [
-        "dark_sphere",
-        " ",
-        "xyz_coordinates",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "name": "Exit Portal",
-      "description": "Step here to progress to the next level",
-      "type": "teleporter",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.8,
-    "directional_light": {
-      "enabled": true,
-      "direction": [
-        -0.3,
-        -0.7,
-        -0.2
-      ],
-      "color": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "energy": 1.0
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": false,
-    "enable_physics": true,
-    "background": {
-      "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.5
-      ]
-    },
-    "special_instructions": "Try to grab the green cube with your hand controllers, then step on the exit portal",
-    "enter_type": "one_cube"
-  }
+	"map_info": {"name": "Tutorial_Single", "lookup_name": "Tutorial_Single", "description": "Your first interaction - one cube to grab, one exit to find.", "version": "1.0", "format": "json", "created_from": "progressive_tutorial_design", "dimensions": {"width": 4, "depth": 3, "max_height": 2}, "metadata": {"difficulty": "absolute_beginner", "category": "onboarding", "estimated_time": "1 minute", "learning_objectives": ["Learn VR hand tracking", "First object interaction", "Understand grabbing mechanics"]}, "title": "One Cube, One Grab"},
+	"documentation": {"summary": "Tutorial_Single - Single Cube Task", "layout": "4x3 micro-platform with spawn and score nodes framing a solitary pickup.", "objective": "Provide a minimal task: pick up a single cube before teleporting onward.", "key_elements": ["Score cube `sp` at (2,0) signalling completion", "`pick_up_cube` target at (1,1)", "Teleporter `t` at (2,1) to continue"]},
+	"utility_definitions": {"t": {"name": "Exit Portal", "description": "Step here to progress to the next level", "type": "teleporter", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.8, "directional_light": {"enabled": true, "direction": [-0.3, -0.7, -0.2], "color": [1.0, 1.0, 1.0], "energy": 1.0}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": false, "enable_physics": true, "background": {"type": "sky", "color": [0.2, 0.3, 0.5]}, "special_instructions": "Try to grab the green cube with your hand controllers, then step on the exit portal", "enter_type": "one_cube"},
+	"layers": {
+		"structure": [
+			["2", "2", "2", "2"],
+			["2", "1", "0", "2"],
+			["2", "2", "2", "2"]
+		],
+		"utilities": [
+			[" ", " ", "sp", " "],
+			[" ", " ", "t", " "],
+			[" ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " "],
+			[" ", "pick_up_cube", " ", " "],
+			["dark_sphere", " ", "xyz_coordinates", " "]
+		]
+	}
 }

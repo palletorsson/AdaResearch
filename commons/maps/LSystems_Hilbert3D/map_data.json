@@ -1,62 +1,36 @@
 {
-  "map_info": {
-	"name": "Hilbert 3D Curve",
-	"lookup_name": "LSystems_Hilbert3D",
-	"description": "A dense checkerboard of platforms. The space itself is a 3D grid the Hilbert curve fills — floor and platform alternate.",
-	"version": "1.0",
-	"format": "json",
-	"dimensions": {
-	  "width": 8,
-	  "depth": 8,
-	  "max_height": 1
-	},
-	"metadata": {
-	  "difficulty": "intermediate",
-	  "category": "l_systems",
-	  "spatial_temperature": 0.7,
-	  "design_notes": "Checkerboard of h1 floor and h3 platforms. Space-filling curve made tangible. Dense and regular."
+	"map_info": {"name": "Hilbert 3D Curve", "lookup_name": "LSystems_Hilbert3D", "description": "A dense checkerboard of platforms. The space itself is a 3D grid the Hilbert curve fills — floor and platform alternate.", "version": "1.0", "format": "json", "dimensions": {"width": 8, "depth": 8, "max_height": 1}, "metadata": {"difficulty": "intermediate", "category": "l_systems", "spatial_temperature": 0.7, "design_notes": "Checkerboard of h1 floor and h3 platforms. Space-filling curve made tangible. Dense and regular."}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			["s", "an", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "wp", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "wp", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "wp:180", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "wp:180", " ", "t", " "],
+			[" ", " ", " ", " ", " ", "wp:90", "sp", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "Hilbert3D", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "]
+		]
 	}
-  },
-  "layers": {
-	"structure": [
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "0", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1" ]
-	],
-	"utilities": [
-	  [ "s", "an", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", "wp", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", "wp", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", "wp:180", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", "wp:180", " ", "t", " " ],
-	  [ " ", " ", " ", " ", " ", "wp:90", "sp", " " ]
-	],
-	"interactables": [
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", "Hilbert3D", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " " ]
-	]
-  },
-  "utility_definitions": {
-	"t": {
-	  "type": "teleporter",
-	  "name": "Next",
-	  "description": "Continue to next step",
-	  "properties": {
-		"action": "next_in_sequence"
-	  }
-	}
-  }
 }

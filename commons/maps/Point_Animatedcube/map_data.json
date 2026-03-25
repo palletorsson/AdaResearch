@@ -1,476 +1,57 @@
 {
-  "map_info": {
-    "name": "06 The Quad",
-    "lookup_name": "Point_Animatedcube",
-    "description": "A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.",
-    "description_2": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation - how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 7,
-      "depth": 14,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "tutorial",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "Cube construction",
-        "Volume and enclosure",
-        "Animated assembly"
-      ]
-    },
-    "title": "Cube Assembly from Primitives"
-  },
-  "documentation": {
-    "summary": "Point_Animatedcube - Cube Construction Animation",
-    "layout": "7x14 grid with two stacked builder rows, a central dome, and a late teleporter exit.",
-    "objective": "Observe staged cube assembly from primitives and compare multiple synchronized builder instances.",
-    "key_elements": [
-      "`animatedcubebuilder` rigs at (2,4), (4,4), (2,8), and (4,8)",
-      "`dark_sphere` ambient dome at (3,4)",
-      "`polyhedron_nets_cube` fold preview at (3,10)",
-      "Teleporter `t` at (5,12)"
-    ]
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "2",
-        "1",
-        "2",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "2",
-        "1",
-        "2",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "an:-90"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "t",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "animatedcubebuilder:0:0:0.5",
-        "dark_sphere",
-        "animatedcubebuilder:0:0:0.5",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "animatedcubebuilder:0:0:0.5",
-        " ",
-        "animatedcubebuilder:0:0:0.5",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "polyhedron_nets_cube:0:1#loop_fold:true",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
-    }
-  }
+	"map_info": {"name": "06 The Quad", "lookup_name": "Point_Animatedcube", "description": "A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.", "description_2": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation - how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 14, "max_height": 2}, "metadata": {"difficulty": "beginner", "category": "tutorial", "estimated_time": "3-4 minutes", "learning_objectives": ["Cube construction", "Volume and enclosure", "Animated assembly"]}, "title": "Cube Assembly from Primitives"},
+	"documentation": {"summary": "Point_Animatedcube - Cube Construction Animation", "layout": "7x14 grid with two stacked builder rows, a central dome, and a late teleporter exit.", "objective": "Observe staged cube assembly from primitives and compare multiple synchronized builder instances.", "key_elements": ["`animatedcubebuilder` rigs at (2,4), (4,4), (2,8), and (4,8)", "`dark_sphere` ambient dome at (3,4)", "`polyhedron_nets_cube` fold preview at (3,10)", "Teleporter `t` at (5,12)"]},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "1", "1", "0", "0"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "0", "1"],
+			["0", "0", "0", "0", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", "an:-90"],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "animatedcubebuilder:0:0:0.5", "dark_sphere", "animatedcubebuilder:0:0:0.5", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "animatedcubebuilder:0:0:0.5", " ", "animatedcubebuilder:0:0:0.5", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "polyhedron_nets_cube:0:1#loop_fold:true", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
+	}
 }

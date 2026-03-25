@@ -1,263 +1,35 @@
 {
-	"map_info": {
-		"name": "Well",
-		"lookup_name": "F20_Well",
-		"description": "Tall walls surround a void at the center -- looking down into depth, the oculus effect.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 7,
-			"depth": 7,
-			"max_height": 6
-		},
-		"title": "Descent into Focus"
-	},
+	"map_info": {"name": "Well", "lookup_name": "F20_Well", "description": "Tall walls surround a void at the center -- looking down into depth, the oculus effect.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 7, "max_height": 6}, "title": "Descent into Focus"},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Exit", "description": "Return", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true, "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1"
-			],
-			[
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1"
-			],
-			[
-				"1",
-				"5",
-				"5",
-				"1",
-				"5",
-				"5",
-				"1"
-			],
-			[
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1"
-			],
-			[
-				"1",
-				"5",
-				"5",
-				"5",
-				"5",
-				"5",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			]
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "5", "5", "5", "5", "5", "1"],
+			["1", "5", "5", "5", "5", "5", "1"],
+			["1", "5", "5", "1", "5", "5", "1"],
+			["1", "5", "5", "5", "5", "5", "1"],
+			["1", "5", "5", "5", "5", "5", "1"],
+			["1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				"spectrum_display:0:1",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "spectrum_display:0:1", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Exit",
-			"description": "Return",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1,
-		"gutter": 0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
 	}
 }

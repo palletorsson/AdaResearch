@@ -1,45 +1,27 @@
 {
-  "map_info": {
-    "name": "TestMap_Unused_23",
-    "lookup_name": "TestMap_Unused_23",
-    "description": "Test map for artifacts: sculpt_one, segment_slide, shader_noise_space, simplex_noise",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    }
-  },
-  "layers": {
-    "structure": [
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ]
-    ],
-    "utilities": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "s", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "t", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "sculpt_one:0:2", " ", "segment_slide:0:2", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "shader_noise_space:0:2", " ", "simplex_noise:0:2", " " ],
-      [ " ", " ", " ", " ", " " ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  }
+	"map_info": {"name": "TestMap_Unused_23", "lookup_name": "TestMap_Unused_23", "description": "Test map for artifacts: sculpt_one, segment_slide, shader_noise_space, simplex_noise", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "sculpt_one:0:2", " ", "segment_slide:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "shader_noise_space:0:2", " ", "simplex_noise:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	}
 }

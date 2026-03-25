@@ -1,45 +1,27 @@
 {
-  "map_info": {
-    "name": "TestMap_Unused_25",
-    "lookup_name": "TestMap_Unused_25",
-    "description": "Test map for artifacts: spawn_randomcubes, spectral_analyzer, spectral_sine_wave, spectrum_display",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    }
-  },
-  "layers": {
-    "structure": [
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ]
-    ],
-    "utilities": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "s", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "t", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "spawn_randomcubes:0:2", " ", "spectral_analyzer:0:2", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "spectral_sine_wave:0:2", " ", "spectrum_display:0:2", " " ],
-      [ " ", " ", " ", " ", " " ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  }
+	"map_info": {"name": "TestMap_Unused_25", "lookup_name": "TestMap_Unused_25", "description": "Test map for artifacts: spawn_randomcubes, spectral_analyzer, spectral_sine_wave, spectrum_display", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "spawn_randomcubes:0:2", " ", "spectral_analyzer:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "spectral_sine_wave:0:2", " ", "spectrum_display:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	}
 }

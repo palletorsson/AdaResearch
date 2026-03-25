@@ -1,666 +1,78 @@
 {
-  "map_info": {
-	"name": "Scale",
-	"lookup_name": "Trans_Scale",
-	"description": "Scale as relational change. The map contrasts reference geometry with interactive scaling artifacts to show how magnitude shifts while shape relations persist.",
-	"version": "1.0",
-	"format": "json",
-	"dimensions": {
-	  "width": 7,
-	  "depth": 21,
-	  "max_height": 5
-	},
-	"metadata": {
-	  "difficulty": "beginner",
-	  "category": "tutorial",
-	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"Uniform and comparative scaling",
-		"Reference-based scale perception",
-		"Player-triggered scale interaction",
-        "Scale as structural transformation"
-	  ]
-	},
-	"title": "Scale"
-  },
-  "documentation": {
-	"summary": "Transformation_6 - Scale Playground",
-	"layout": "Compact open platform with reference prisms, scaling stations, and contextual support artifacts.",
-	"objective": "Demonstrate scale changes through direct interaction and comparison against fixed reference forms.",
-	"key_elements": [
-	  "`scale_me:0:1` primary interactive scaling artifact",
-	  "`clipboard#vr_scale_controls:180:0:0.5` in-map VR scale instructions",
-	  "`chair_assembly_puzzle:180:-0.5#furniture_type:chair` applied scale context",
-	  "`prism_block:90` and `cube_scene:45:0.2:0.6` as visual reference set",
-      "`dark_sphere` atmosphere with multiple `t` teleport exits"
-	]
-  },
-  "layers": {
-	"structure": [
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"0",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"2",
-		"2",
-		"2",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"0",
-		"1",
-		"1",
-		"1",
-		"0",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-		"1",
-        "1"
-	  ],
-	  [
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0
-	  ]
-	],
-	"utilities": [
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        "an:-90"
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		"3t:Scale me",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"t",
-		" ",
-		" ",
-		" ",
-		"t",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		"t",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ]
-	],
-	"interactables": [
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		"",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		"",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		"chair_assembly_puzzle:180:-0.5#furniture_type:chair",
-		"clipboard#vr_scale_controls:180:0:0.5",
-		" ",
-        ""
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		"scale_me:0:1",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		"prism_block:90",
-		"prism_block:90",
-		"cube_scene:45:0.2:0.6",
-		"cube_scene:45:0.2:0.6",
-		"cube_scene:45:0.2:0.6",
-		"prism_block:90",
-        "prism_block:90"
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		"dark_sphere",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"prism_block:90",
-		" ",
-		" ",
-		" ",
-		"prism_block:90",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		"prism_block:90",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ]
-	]
-  },
-  "utility_definitions": {
-	"t": {
-	  "type": "teleporter",
-	  "name": "Next",
-	  "description": "Continue to next step",
-	  "properties": {
-		"action": "next_in_sequence"
-	  }
-	},
-	"s": {
-	  "properties": {
-		"height": 5.5
-	  }
+	"map_info": {"name": "Scale", "lookup_name": "Trans_Scale", "description": "Scale as relational change. The map contrasts reference geometry with interactive scaling artifacts to show how magnitude shifts while shape relations persist.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 21, "max_height": 5}, "metadata": {"difficulty": "beginner", "category": "tutorial", "estimated_time": "3-4 minutes", "learning_objectives": ["Uniform and comparative scaling", "Reference-based scale perception", "Player-triggered scale interaction", "Scale as structural transformation"]}, "title": "Scale"},
+	"documentation": {"summary": "Transformation_6 - Scale Playground", "layout": "Compact open platform with reference prisms, scaling stations, and contextual support artifacts.", "objective": "Demonstrate scale changes through direct interaction and comparison against fixed reference forms.", "key_elements": ["`scale_me:0:1` primary interactive scaling artifact", "`clipboard#vr_scale_controls:180:0:0.5` in-map VR scale instructions", "`chair_assembly_puzzle:180:-0.5#furniture_type:chair` applied scale context", "`prism_block:90` and `cube_scene:45:0.2:0.6` as visual reference set", "`dark_sphere` atmosphere with multiple `t` teleport exits"]},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "1", "1", "0", "0"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "2", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "0", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			[0, 0, 0, 0, 0, 0, 0]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", "an:-90"],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "3t:Scale me", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "t", " ", " ", " ", "t", " "],
+			[" ", " ", " ", "t", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", "chair_assembly_puzzle:180:-0.5#furniture_type:chair", "clipboard#vr_scale_controls:180:0:0.5", " ", ""],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "scale_me:0:1", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["prism_block:90", "prism_block:90", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "prism_block:90", "prism_block:90"],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "dark_sphere", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "prism_block:90", " ", " ", " ", "prism_block:90", " "],
+			[" ", " ", " ", "prism_block:90", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
 	}
-  },
-  "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
-	"ambient_energy": 0.6,
-	"directional_light": {
-	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
-	  "energy": 1.2
-	}
-  },
-  "settings": {
-	"cube_size": 1.0,
-	"gutter": 0.0,
-	"show_grid": true,
-	"enable_physics": true,
-	"auto_reveal_on_entry": false,
-	"initial_tile_visibility": "hidden_except_corners",
-	"background": {
-	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
-	}
-  }
 }

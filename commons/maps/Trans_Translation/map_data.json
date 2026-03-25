@@ -1,747 +1,87 @@
 {
-  "map_info": {
-    "name": "Translation Basics",
-    "lookup_name": "Trans_Translation",
-    "description": "Translation as navigational infrastructure. Walkways, transport cubes, and axis-constrained artifacts stage displacement across voids while keeping orientation and scale intact.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 7,
-      "depth": 24,
-      "max_height": 10
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "tutorial",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "Translation along constrained axes",
-        "Displacement without rotation or scaling",
-        "Route planning through transport systems",
-        "Spatial reasoning across voids"
-      ]
-    },
-    "title": "Translation Basics"
-  },
-  "documentation": {
-    "summary": "Transformation_2 - Translation Route Field",
-    "layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.",
-    "objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.",
-    "key_elements": [
-      "`player_trace` records movement path through the route",
-      "`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations",
-      "Multiple `pick_up_cube` targets staged across levels",
-      "`pickup_gate#pickups:7` as collection threshold gate",
-      "`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"
-    ]
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "2",
-        "1",
-        "2"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "1",
-        "0",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "0",
-        "1",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "2",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "1",
-        "0",
-        "0",
-        "1",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "1",
-        "0",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "2",
-        "0",
-        "0",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "1",
-        "1",
-        "0",
-        "1",
-        "0"
-      ],
-      [
-        "0",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "1",
-        "3",
-        "1",
-        "2",
-        "1",
-        "2"
-      ],
-      [
-        "0",
-        "1",
-        "1",
-        "1",
-        "3",
-        "1",
-        "3"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "3",
-        "1",
-        "3"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "3",
-        "1",
-        "3"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "1",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "1",
-        "1",
-        "1",
-        "0",
-        "1"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "1",
-        "1",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        " ",
-        " ",
-        " ",
-        "wp:90",
-        " ",
-        " ",
-        "an:-90"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "",
-        " ",
-        "tc:3:z",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "tc:1:y:auto",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "wp",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "tc:3:y",
-        " ",
-        "tc:2:y",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "tc:6:y",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "sc:3:-0.5:1:-1",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "s",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "t",
-        "sp"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        "player_trace",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "z_translation_cube:180:1.5:2"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "pick_up_cube:0:1",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        ""
-      ],
-      [
-        " ",
-        "",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "dark_sphere",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "y_translation_cube:180:1.5:2",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "pick_up_cube:0:1",
-        " ",
-        "pick_up_cube:0:1",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        "",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "pick_up_cube:0:1",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "pick_up_cube",
-        " ",
-        " ",
-        "",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "pickup_gate#pickups:7",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
-    }
-  }
+	"map_info": {"name": "Translation Basics", "lookup_name": "Trans_Translation", "description": "Translation as navigational infrastructure. Walkways, transport cubes, and axis-constrained artifacts stage displacement across voids while keeping orientation and scale intact.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 24, "max_height": 10}, "metadata": {"difficulty": "beginner", "category": "tutorial", "estimated_time": "3-4 minutes", "learning_objectives": ["Translation along constrained axes", "Displacement without rotation or scaling", "Route planning through transport systems", "Spatial reasoning across voids"]}, "title": "Translation Basics"},
+	"documentation": {"summary": "Transformation_2 - Translation Route Field", "layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.", "objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.", "key_elements": ["`player_trace` records movement path through the route", "`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations", "Multiple `pick_up_cube` targets staged across levels", "`pickup_gate#pickups:7` as collection threshold gate", "`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"]},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "2", "1", "2"],
+			["1", "1", "1", "0", "1", "0", "1"],
+			["1", "1", "1", "0", "0", "0", "1"],
+			["1", "1", "1", "0", "0", "1", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "1", "1", "1"],
+			["2", "1", "1", "1", "1", "1", "1"],
+			["0", "0", "1", "0", "0", "1", "0"],
+			["0", "0", "1", "0", "1", "1", "1"],
+			["0", "0", "2", "0", "0", "1", "1"],
+			["0", "0", "1", "1", "0", "1", "0"],
+			["0", "1", "1", "1", "1", "1", "1"],
+			["0", "1", "3", "1", "2", "1", "2"],
+			["0", "1", "1", "1", "3", "1", "3"],
+			["1", "1", "1", "1", "3", "1", "3"],
+			["1", "1", "1", "1", "3", "1", "3"],
+			["1", "1", "0", "1", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["0", "1", "1", "1", "1", "1", "1"],
+			["0", "0", "1", "1", "1", "0", "1"],
+			["0", "0", "0", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", "wp:90", " ", " ", "an:-90"],
+			[" ", " ", " ", "", " ", "tc:3:z", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "tc:1:y:auto", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "wp", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "tc:3:y", " ", "tc:2:y", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "tc:6:y", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "sc:3:-0.5:1:-1", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "s", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", "sp"],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			["player_trace", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "z_translation_cube:180:1.5:2"],
+			[" ", " ", " ", " ", " ", "pick_up_cube:0:1", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", ""],
+			[" ", "", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "dark_sphere", " ", " ", " "],
+			[" ", "y_translation_cube:180:1.5:2", " ", " ", " ", " ", " "],
+			[" ", " ", "pick_up_cube:0:1", " ", "pick_up_cube:0:1", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " "],
+			["", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "pick_up_cube:0:1", " ", " ", " ", " "],
+			[" ", " ", "pick_up_cube", " ", " ", "", " "],
+			[" ", " ", " ", " ", " ", "pickup_gate#pickups:7", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
+	}
 }

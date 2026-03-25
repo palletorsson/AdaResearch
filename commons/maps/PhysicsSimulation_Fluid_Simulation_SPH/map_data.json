@@ -1,327 +1,38 @@
 {
-  "map_info": {
-    "name": "Pool room with void basins representing fluid volumes",
-    "lookup_name": "PhysicsSimulation_Fluid_Simulation_SPH",
-    "description": "Pool room with void basins representing fluid volumes",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 8,
-      "max_height": 6
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "physicssimulation",
-      "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "SPH fluid simulation",
-        "Particle-based fluids",
-        "Pressure computation"
-      ],
-      "spatial_temperature": 0.5
-    },
-    "title": "Fluid Simulation"
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        "s",
-        "an",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "sp",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "t",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "fluid_simulation",
-        " ",
-        " ",
-        " ",
-        "lattice_gas_automata",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
-    }
-  }
+	"map_info": {"name": "Pool room with void basins representing fluid volumes", "lookup_name": "PhysicsSimulation_Fluid_Simulation_SPH", "description": "Pool room with void basins representing fluid volumes", "version": "1.0", "format": "json", "dimensions": {"width": 8, "depth": 8, "max_height": 6}, "metadata": {"difficulty": "advanced", "category": "physicssimulation", "estimated_time": "10-15 minutes", "learning_objectives": ["SPH fluid simulation", "Particle-based fluids", "Pressure computation"], "spatial_temperature": 0.5}, "title": "Fluid Simulation"},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "0", "0", "0", "0", "1", "1"],
+			["1", "1", "0", "0", "0", "0", "1", "1"],
+			["1", "1", "0", "0", "0", "0", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "0", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			["s", "an", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "sp", " ", " "],
+			[" ", " ", " ", "t", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			["fluid_simulation", " ", " ", " ", "lattice_gas_automata", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	}
 }

@@ -1,45 +1,27 @@
 {
-  "map_info": {
-    "name": "TestMap_Unused_14",
-    "lookup_name": "TestMap_Unused_14",
-    "description": "Test map for artifacts: perlin_noise, perlin_noise_clouds, perlin_noise_terrain, perlinvolume",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    }
-  },
-  "layers": {
-    "structure": [
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ]
-    ],
-    "utilities": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "s", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "t", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "perlin_noise:0:2", " ", "perlin_noise_clouds:0:2", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "perlin_noise_terrain:0:2", " ", "perlinvolume:0:2", " " ],
-      [ " ", " ", " ", " ", " " ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  }
+	"map_info": {"name": "TestMap_Unused_14", "lookup_name": "TestMap_Unused_14", "description": "Test map for artifacts: perlin_noise, perlin_noise_clouds, perlin_noise_terrain, perlinvolume", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "perlin_noise:0:2", " ", "perlin_noise_clouds:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "perlin_noise_terrain:0:2", " ", "perlinvolume:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	}
 }

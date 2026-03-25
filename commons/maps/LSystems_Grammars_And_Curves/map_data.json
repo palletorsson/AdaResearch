@@ -1,396 +1,45 @@
 {
-  "map_info": {
-    "name": "03 Grammars and Curves",
-    "lookup_name": "LSystems_Grammars_And_Curves",
-    "description": "Production rules formalized. The same rewriting system that grows trees can fill every point in space. A flat open floor gives clear sightlines to the 3D Hilbert curve on its raised platform. Three space-filling curves on the floor show how different grammars visit different paths.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 10,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "lsystems",
-      "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "Context-free grammars as computational tools",
-        "Production rules and derivations",
-        "Space-filling curves: one path visits every point",
-        "Hilbert, Peano, and Moore curve comparison"
-      ]
-    },
-    "title": "Grammars and Curves"
-  },
-  "documentation": {
-    "summary": "LSystems_Grammars_And_Curves — Formal grammar meets space-filling",
-    "layout": "8x10 flat floor with h2 pedestal under Hilbert3D. Open sightlines to curves.",
-    "objective": "See grammar as computation. Production rules A→-BF+AFA+FB- produce paths that visit every point in a region.",
-    "key_elements": [
-      "`Hilbert3D` at (3,3) — 3D space-filling curve",
-      "`space_filling_curve_gallery` at (4,6) — Hilbert/Peano/Moore triptych on floor"
-    ]
-  },
-  "layers": {
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "2",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "0",
-        "1",
-        "1",
-        "1"
-      ],
-      [
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
-      ]
-    ],
-    "utilities": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "an"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "t",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        "s",
-        " ",
-        " "
-      ]
-    ],
-    "interactables": [
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        "Hilbert3D",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "space_filling_curve_gallery",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Architecture",
-      "description": "Continue to see grammar build cities",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [
-      0.35,
-      0.35,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        0.9,
-        0.9,
-        1.0
-      ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [
-        0.2,
-        0.2,
-        0.5
-      ]
-    }
-  }
+	"map_info": {"name": "03 Grammars and Curves", "lookup_name": "LSystems_Grammars_And_Curves", "description": "Production rules formalized. The same rewriting system that grows trees can fill every point in space. A flat open floor gives clear sightlines to the 3D Hilbert curve on its raised platform. Three space-filling curves on the floor show how different grammars visit different paths.", "version": "1.0", "format": "json", "dimensions": {"width": 8, "depth": 10, "max_height": 2}, "metadata": {"difficulty": "intermediate", "category": "lsystems", "estimated_time": "5-7 minutes", "learning_objectives": ["Context-free grammars as computational tools", "Production rules and derivations", "Space-filling curves: one path visits every point", "Hilbert, Peano, and Moore curve comparison"]}, "title": "Grammars and Curves"},
+	"documentation": {"summary": "LSystems_Grammars_And_Curves — Formal grammar meets space-filling", "layout": "8x10 flat floor with h2 pedestal under Hilbert3D. Open sightlines to curves.", "objective": "See grammar as computation. Production rules A→-BF+AFA+FB- produce paths that visit every point in a region.", "key_elements": ["`Hilbert3D` at (3,3) — 3D space-filling curve", "`space_filling_curve_gallery` at (4,6) — Hilbert/Peano/Moore triptych on floor"]},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Architecture", "description": "Continue to see grammar build cities", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.35, 0.35, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [0.9, 0.9, 1.0], "energy": 1.2}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.2, 0.5]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "2", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "0", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", "an"],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "s", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "Hilbert3D", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "space_filling_curve_gallery", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	}
 }

@@ -1,103 +1,48 @@
 {
-	"map_info": {
-		"name": "Hazards Zoo — Legs & Specials",
-		"lookup_name": "Hazards_Zoo_3",
-		"description": "Procedural legs from 1 to 8, plus special creatures. Part 3 of 7 in the Hazards bestiary.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 15,
-			"depth": 11,
-			"max_height": 3
-		},
-		"title": "Procedural Legs and Special Creatures",
-		"metadata": {
-			"difficulty": "exhibition",
-			"category": "hazards",
-			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Watch procedural locomotion emerge from 1 to 8 legs",
-				"See different gaits: bipedal balance, tripod stability, quadruped diagonals, hexapod alternation",
-				"Meet special one-off creatures — block builders, tech striders, tentacle cubes"
-			]
-		}
-	},
+	"map_info": {"name": "Hazards Zoo — Legs & Specials", "lookup_name": "Hazards_Zoo_3", "description": "Procedural legs from 1 to 8, plus special creatures. Part 3 of 7 in the Hazards bestiary.", "version": "1.0", "format": "json", "dimensions": {"width": 15, "depth": 11, "max_height": 3}, "title": "Procedural Legs and Special Creatures", "metadata": {"difficulty": "exhibition", "category": "hazards", "estimated_time": "exploration based", "learning_objectives": ["Watch procedural locomotion emerge from 1 to 8 legs", "See different gaits: bipedal balance, tripod stability, quadruped diagonals, hexapod alternation", "Meet special one-off creatures — block builders, tech striders, tentacle cubes"]}},
+	"spawn_points": {"default": {"position": [0.5, 1.8, 0.5], "rotation": [0.0, 180.0, 0.0], "description": "Entrance — facing the zoo rows"}},
+	"tutorial_text": {"hazards_zoo_legs": {"title": "PROCEDURAL LEGS", "text": "From 1 to 8 legs — watch locomotion emerge. Each leg count produces different gaits: bipedal balance, tripod stability, quadruped diagonals, hexapod alternation, octapod waves."}, "hazards_zoo_special": {"title": "SPECIAL CREATURES", "text": "Block Builder (constructs with grid), Tech Strider (tall mechanical walker), Tentacle Cube (grid cell with limbs), Falling Blocks (gravity hazard)."}},
+	"lighting": {"ambient_color": [0.7, 0.7, 0.85], "ambient_energy": 0.4, "directional_light": {"enabled": true, "direction": [-0.3, -0.8, -0.2], "color": [1.0, 0.98, 0.95], "energy": 0.8}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": false, "enable_physics": true, "background": {"type": "sky", "color": [0.08, 0.1, 0.18]}},
 	"layers": {
 		"structure": [
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" "," "," "," "," ","soft_stage_dashboard:0:1.2"," "," "," ","progression_driver:0:0.8"," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			["tt:hazards_zoo_legs:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" ","one_leg"," ","two_leg_critter"," ","three_leg_critter"," ","four_leg_critter"," ","five_leg_critter"," ","six_leg_critter"," ","octapod_ik"," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			["tt:hazards_zoo_special:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" ","blockbuilderentity"," ","techstrider"," ","tentacle_cube"," ","fallingblocks"," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+			[" ", " ", " ", " ", " ", "soft_stage_dashboard:0:1.2", " ", " ", " ", "progression_driver:0:0.8", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["tt:hazards_zoo_legs:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "one_leg", " ", "two_leg_critter", " ", "three_leg_critter", " ", "four_leg_critter", " ", "five_leg_critter", " ", "six_leg_critter", " ", "octapod_ik", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["tt:hazards_zoo_special:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "blockbuilderentity", " ", "techstrider", " ", "tentacle_cube", " ", "fallingblocks", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"spawn_points": {
-		"default": {
-			"position": [0.5, 1.8, 0.5],
-			"rotation": [0.0, 180.0, 0.0],
-			"description": "Entrance — facing the zoo rows"
-		}
-	},
-	"tutorial_text": {
-		"hazards_zoo_legs": {
-			"title": "PROCEDURAL LEGS",
-			"text": "From 1 to 8 legs — watch locomotion emerge. Each leg count produces different gaits: bipedal balance, tripod stability, quadruped diagonals, hexapod alternation, octapod waves."
-		},
-		"hazards_zoo_special": {
-			"title": "SPECIAL CREATURES",
-			"text": "Block Builder (constructs with grid), Tech Strider (tall mechanical walker), Tentacle Cube (grid cell with limbs), Falling Blocks (gravity hazard)."
-		}
-	},
-	"lighting": {
-		"ambient_color": [0.7, 0.7, 0.85],
-		"ambient_energy": 0.4,
-		"directional_light": {
-			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.98, 0.95],
-			"energy": 0.8
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": false,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [0.08, 0.1, 0.18]
-		}
 	}
 }

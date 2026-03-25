@@ -1,263 +1,35 @@
 {
+	"map_info": {"description": "An enclosed room with a single dramatic entry -- crossing the threshold feels like an event.", "dimensions": {"depth": 7, "max_height": 6, "width": 7}, "format": "json", "lookup_name": "F26_Portal_Chamber", "name": "Portal Chamber", "version": "1.0", "title": "Threshold as Event"},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
+	"settings": {"background": {"color": [0.2, 0.3, 0.7], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "show_grid": true},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Return", "name": "Exit", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				"crystal_ball:0:0:0.5",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "crystal_ball:0:0:0.5", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"3",
-				"3",
-				"1",
-				"3",
-				"3",
-				"1"
-			],
-			[
-				"1",
-				"3",
-				"1",
-				"1",
-				"1",
-				"3",
-				"1"
-			],
-			[
-				"1",
-				"3",
-				"1",
-				"1",
-				"1",
-				"3",
-				"1"
-			],
-			[
-				"1",
-				"3",
-				"1",
-				"1",
-				"1",
-				"3",
-				"1"
-			],
-			[
-				"1",
-				"3",
-				"3",
-				"3",
-				"3",
-				"3",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			]
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "3", "3", "1", "3", "3", "1"],
+			["1", "3", "1", "1", "1", "3", "1"],
+			["1", "3", "1", "1", "1", "3", "1"],
+			["1", "3", "1", "1", "1", "3", "1"],
+			["1", "3", "3", "3", "3", "3", "1"],
+			["1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"enabled": true,
-			"energy": 1.2
-		}
-	},
-	"map_info": {
-		"description": "An enclosed room with a single dramatic entry -- crossing the threshold feels like an event.",
-		"dimensions": {
-			"depth": 7,
-			"max_height": 6,
-			"width": 7
-		},
-		"format": "json",
-		"lookup_name": "F26_Portal_Chamber",
-		"name": "Portal Chamber",
-		"version": "1.0",
-		"title": "Threshold as Event"
-	},
-	"settings": {
-		"background": {
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			],
-			"type": "sky"
-		},
-		"cube_size": 1.0,
-		"enable_physics": true,
-		"gutter": 0.0,
-		"show_grid": true
-	},
-	"utility_definitions": {
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		},
-		"t": {
-			"description": "Return",
-			"name": "Exit",
-			"properties": {
-				"action": "next_in_sequence"
-			},
-			"type": "teleporter"
-		}
 	}
 }

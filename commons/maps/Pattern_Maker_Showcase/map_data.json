@@ -1,27 +1,5 @@
 {
-	"map_info": {
-		"name": "Pattern Maker Showcase",
-		"title": "Shader-Based Pattern Artifacts",
-		"lookup_name": "Pattern_Maker_Showcase",
-		"description": "Showcases the shader-based wallpaper group pattern artifacts from the pattern-maker system using wallpaper_tile.gdshader",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 12,
-			"depth": 10,
-			"max_height": 1
-		},
-		"metadata": {
-			"difficulty": "beginner",
-			"category": "patterns",
-			"estimated_time": "5-10 minutes",
-			"learning_objectives": [
-				"Explore shader-based wallpaper group patterns",
-				"Interact with pattern tile artifacts",
-				"Understand wallpaper_tile.gdshader system"
-			]
-		}
-	},
+	"map_info": {"name": "Pattern Maker Showcase", "title": "Shader-Based Pattern Artifacts", "lookup_name": "Pattern_Maker_Showcase", "description": "Showcases the shader-based wallpaper group pattern artifacts from the pattern-maker system using wallpaper_tile.gdshader", "version": "1.0", "format": "json", "dimensions": {"width": 12, "depth": 10, "max_height": 1}, "metadata": {"difficulty": "beginner", "category": "patterns", "estimated_time": "5-10 minutes", "learning_objectives": ["Explore shader-based wallpaper group patterns", "Interact with pattern tile artifacts", "Understand wallpaper_tile.gdshader system"]}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],

@@ -1,81 +1,40 @@
 {
-	"map_info": {
-		"name": "Grid Editor Workshop",
-		"lookup_name": "Grid_Editor_Workshop",
-		"description": "Interactive grid layout editor — mirror of the web grid-editor. Place control panel elements on a 24x14 grid using preset configurations.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 9,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "beginner",
-			"category": "interactive",
-			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Explore grid-based layout design",
-				"Understand element placement and spatial reasoning",
-				"Compare web and VR representations of the same system"
-			]
-		}
-	},
+	"map_info": {"name": "Grid Editor Workshop", "lookup_name": "Grid_Editor_Workshop", "description": "Interactive grid layout editor — mirror of the web grid-editor. Place control panel elements on a 24x14 grid using preset configurations.", "version": "1.0", "format": "json", "dimensions": {"width": 9, "depth": 9, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "interactive", "estimated_time": "exploration based", "learning_objectives": ["Explore grid-based layout design", "Understand element placement and spatial reasoning", "Compare web and VR representations of the same system"]}},
+	"settings": {"auto_reveal_on_entry": true, "background": {"color": [0.12, 0.12, 0.15], "type": "sky"}, "cube_size": 1.0, "gutter": 0.0, "initial_tile_visibility": "visible", "show_grid": false, "enable_physics": true},
+	"lighting": {"ambient_color": [0.5, 0.5, 0.55], "ambient_energy": 0.7, "directional_light": {"color": [1.0, 0.95, 0.9], "direction": [-0.3, -0.8, -0.3], "enabled": true, "energy": 1.0}},
 	"layers": {
 		"structure": [
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," ","t"," "," "," "," "," "],
-			["s"," "," "," "," "," "," "," "," "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "t", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," ","grid_editor_board"," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "grid_editor_board", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"settings": {
-		"auto_reveal_on_entry": true,
-		"background": {
-			"color": [0.12, 0.12, 0.15],
-			"type": "sky"
-		},
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"initial_tile_visibility": "visible",
-		"show_grid": false,
-		"enable_physics": true
-	},
-	"lighting": {
-		"ambient_color": [0.5, 0.5, 0.55],
-		"ambient_energy": 0.7,
-		"directional_light": {
-			"color": [1.0, 0.95, 0.9],
-			"direction": [-0.3, -0.8, -0.3],
-			"enabled": true,
-			"energy": 1.0
-		}
 	}
 }

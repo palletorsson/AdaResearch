@@ -1,102 +1,48 @@
 {
-	"map_info": {
-		"name": "Hazards Zoo — AI & Fields",
-		"lookup_name": "Hazards_Zoo_6",
-		"description": "AI/stochastic creatures and spatial field hazard zones. Part 6 of 7 in the Hazards bestiary.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 15,
-			"depth": 11,
-			"max_height": 3
-		},
-		"title": "AI Predators and Spatial Fields",
-		"metadata": {
-			"difficulty": "exhibition",
-			"category": "hazards",
-			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"See computation as predation — gradient descent, Markov chains, procedural generation",
-				"Experience the mathematics of space as hazard zones — Perlin noise, Voronoi, metaballs, CSP"
-			]
-		}
-	},
+	"map_info": {"name": "Hazards Zoo — AI & Fields", "lookup_name": "Hazards_Zoo_6", "description": "AI/stochastic creatures and spatial field hazard zones. Part 6 of 7 in the Hazards bestiary.", "version": "1.0", "format": "json", "dimensions": {"width": 15, "depth": 11, "max_height": 3}, "title": "AI Predators and Spatial Fields", "metadata": {"difficulty": "exhibition", "category": "hazards", "estimated_time": "exploration based", "learning_objectives": ["See computation as predation — gradient descent, Markov chains, procedural generation", "Experience the mathematics of space as hazard zones — Perlin noise, Voronoi, metaballs, CSP"]}},
+	"spawn_points": {"default": {"position": [0.5, 1.8, 0.5], "rotation": [0.0, 180.0, 0.0], "description": "Entrance — facing the zoo rows"}},
+	"tutorial_text": {"hazards_zoo_ai": {"title": "AI & STOCHASTIC", "text": "Gradient Hunter (machine learning descent), Grammar Markov (transition chains), Maze Spinner (procedural generation), Paradox Stalker (foundational crisis). Computation as predation."}, "hazards_zoo_fields": {"title": "SPATIAL FIELDS", "text": "Noise Field (Perlin terrain), Chromatic Field (RGB zones), Spatial Voronoi (cell partitions), Isosurface Trap (metaballs), Constraint Web (CSP tiles). The mathematics of space as hazard zones."}},
+	"lighting": {"ambient_color": [0.7, 0.7, 0.85], "ambient_energy": 0.4, "directional_light": {"enabled": true, "direction": [-0.3, -0.8, -0.2], "color": [1.0, 0.98, 0.95], "energy": 0.8}},
+	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": false, "enable_physics": true, "background": {"type": "sky", "color": [0.08, 0.1, 0.18]}},
 	"layers": {
 		"structure": [
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			["s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" "," "," "," "," ","soft_stage_dashboard:0:1.2"," "," "," ","progression_driver:0:0.8"," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			["tt:hazards_zoo_ai:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" ","gradient_hunter"," ","grammar_markov"," ","maze_spinner"," ","paradox_stalker"," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			["tt:hazards_zoo_fields:180:1.0"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" ","noise_field"," ","chromatic_field"," ","spatial_voronoi"," ","isosurface_trap"," ","constraint_web"," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+			[" ", " ", " ", " ", " ", "soft_stage_dashboard:0:1.2", " ", " ", " ", "progression_driver:0:0.8", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["tt:hazards_zoo_ai:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "gradient_hunter", " ", "grammar_markov", " ", "maze_spinner", " ", "paradox_stalker", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["tt:hazards_zoo_fields:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "noise_field", " ", "chromatic_field", " ", "spatial_voronoi", " ", "isosurface_trap", " ", "constraint_web", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"spawn_points": {
-		"default": {
-			"position": [0.5, 1.8, 0.5],
-			"rotation": [0.0, 180.0, 0.0],
-			"description": "Entrance — facing the zoo rows"
-		}
-	},
-	"tutorial_text": {
-		"hazards_zoo_ai": {
-			"title": "AI & STOCHASTIC",
-			"text": "Gradient Hunter (machine learning descent), Grammar Markov (transition chains), Maze Spinner (procedural generation), Paradox Stalker (foundational crisis). Computation as predation."
-		},
-		"hazards_zoo_fields": {
-			"title": "SPATIAL FIELDS",
-			"text": "Noise Field (Perlin terrain), Chromatic Field (RGB zones), Spatial Voronoi (cell partitions), Isosurface Trap (metaballs), Constraint Web (CSP tiles). The mathematics of space as hazard zones."
-		}
-	},
-	"lighting": {
-		"ambient_color": [0.7, 0.7, 0.85],
-		"ambient_energy": 0.4,
-		"directional_light": {
-			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.98, 0.95],
-			"energy": 0.8
-		}
-	},
-	"settings": {
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"show_grid": false,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [0.08, 0.1, 0.18]
-		}
 	}
 }

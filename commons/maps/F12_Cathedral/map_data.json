@@ -1,290 +1,38 @@
 {
-	"map_info": {
-		"name": "Cathedral",
-		"lookup_name": "F12_Cathedral",
-		"description": "Towering columns create vertical drama and awe -- height as spiritual emotion.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 7,
-			"depth": 8,
-			"max_height": 6
-		},
-		"title": "Height as Emotion"
-	},
+	"map_info": {"name": "Cathedral", "lookup_name": "F12_Cathedral", "description": "Towering columns create vertical drama and awe -- height as spiritual emotion.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 8, "max_height": 6}, "title": "Height as Emotion"},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Exit", "description": "Return", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1, 0.9, 0.8], "energy": 1.2}},
+	"settings": {"cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true, "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"1",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"1",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"1",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"1",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"1",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"6",
-				"6",
-				"3",
-				"6",
-				"6",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			]
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "6", "6", "1", "6", "6", "1"],
+			["1", "6", "6", "1", "6", "6", "1"],
+			["1", "6", "6", "1", "6", "6", "1"],
+			["1", "6", "6", "1", "6", "6", "1"],
+			["1", "6", "6", "1", "6", "6", "1"],
+			["1", "6", "6", "3", "6", "6", "1"],
+			["1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"s",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["s", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Exit",
-			"description": "Return",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5
-			}
-		}
-	},
-	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
-		"ambient_energy": 0.6,
-		"directional_light": {
-			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1,
-				0.9,
-				0.8
-			],
-			"energy": 1.2
-		}
-	},
-	"settings": {
-		"cube_size": 1,
-		"gutter": 0,
-		"show_grid": true,
-		"enable_physics": true,
-		"background": {
-			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
-		}
 	}
 }
