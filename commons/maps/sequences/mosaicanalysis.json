@@ -43,7 +43,8 @@
 				"Mega_Pattern_Museum: The ultimate museum \u2014 all 18 floor pattern artifacts in a 6\u00d73 room grid plus all 11 facade presets floating in a grand hall below, connected by corridors",
 				"Pattern_Walls_Gallery: 12-room gallery (4\u00d73 grid) where each room combines a unique floor pattern with a unique wall facade preset \u2014 demonstrating how floor_pattern and wall_preset interact",
 				"Postmodern_Gallery: Four large rooms showcasing postmodern facade presets as freestanding double-sided sculptural walls \u2014 superstudio grid, memphis totem, decon fragment, and continuous monument",
-				"Pompeii_Villa_Paintings: Recreated Pompeii villa rooms with painted wall styles (red room, black room, fourth style) and matching geometric mosaic floors \u2014 meander, carpet, guilloche, and nested diamonds"
+				"Pompeii_Villa_Paintings: Recreated Pompeii villa rooms with painted wall styles (red room, black room, fourth style) and matching geometric mosaic floors \u2014 meander, carpet, guilloche, and nested diamonds",
+				"Immersive_Pattern_Rooms: Six large rooms where floor, walls, and ceiling all have different patterns \u2014 total immersion in geometry with Truchet, hexagonal, spiral, knot, op art, and labyrinth themes"
 			],
 			"maps": [
 				"Grand_Pattern_Museum",
@@ -70,7 +71,8 @@
 				"Cove_Display_Gallery",
 				"Shader_Arch_Gallery",
 				"Postmodern_Gallery",
-				"Pompeii_Villa_Paintings"
+				"Pompeii_Villa_Paintings",
+				"Immersive_Pattern_Rooms"
 			],
 			"algorithm_paths": {
 				"Grand_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
@@ -91,7 +93,8 @@
 				"Mega_Pattern_Museum": "res://commons/artifacts/floor_plan_space/",
 				"Pattern_Walls_Gallery": "res://commons/artifacts/floor_plan_space/",
 				"Postmodern_Gallery": "res://commons/artifacts/floor_plan_space/",
-				"Pompeii_Villa_Paintings": "res://commons/artifacts/floor_plan_space/"
+				"Pompeii_Villa_Paintings": "res://commons/artifacts/floor_plan_space/",
+				"Immersive_Pattern_Rooms": "res://commons/artifacts/floor_plan_space/"
 			},
 			"return_to": "lab",
 			"lab_map": null,
