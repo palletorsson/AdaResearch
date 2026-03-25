@@ -139,7 +139,9 @@ func _build_all_rooms() -> void:
 		container.add_child(room_node)
 
 		_place_room_floor(room, room_node, cell_size)
+		_place_room_ceiling(room, room_node, cell_size)
 		_generate_room_walls(room, room_node, cell_size, room_doorways.get(room_id, []), global_seen_edges)
+		_place_room_wall_patterns(room, room_node, cell_size)
 		_build_exhibit_walls(room, room_node, cell_size)
 
 	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
@@ -364,6 +366,240 @@ func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
 	mesh_inst.position = Vector3(cx, 0.001, cz)  # Base floor slightly above ground
 	mesh_inst.name = "FallbackFloor"
 	parent.add_child(mesh_inst)
+
+
+# ── Ceiling placement ────────────────────────────────────────────────────────
+
+func _place_room_ceiling(room: Dictionary, parent: Node3D, cell_size: float) -> void:
+	var ceiling_pattern: String = str(room.get("ceiling_pattern", ""))
+	if ceiling_pattern.is_empty():
+		return
+
+	var cells: Array = room.get("cells", [])
+	if cells.is_empty():
+		return
+
+	# Compute bounding rect
+	var min_row: int = 999999
+	var max_row: int = -999999
+	var min_col: int = 999999
+	var max_col: int = -999999
+	for cell in cells:
+		if not cell is Array or cell.size() < 2:
+			continue
+		var row: int = int(cell[0])
+		var col: int = int(cell[1])
+		min_row = mini(min_row, row)
+		max_row = maxi(max_row, row)
+		min_col = mini(min_col, col)
+		max_col = maxi(max_col, col)
+
+	if min_row > max_row:
+		return
+
+	var cols_span: int = max_col - min_col + 1
+	var rows_span: int = max_row - min_row + 1
+	var wt: float = _floor_plan_data.get("wall_thickness", 0.5)
+	var wall_height: float = float(room.get("wall_height", 3.0))
+
+	var room_w: float = cols_span * cell_size - wt
+	var room_h: float = rows_span * cell_size - wt
+	var center_x: float = (min_col + cols_span * 0.5) * cell_size
+	var center_z: float = (min_row + rows_span * 0.5) * cell_size
+
+	var scene := _load_artifact_scene(ceiling_pattern)
+	if not scene:
+		push_warning("FloorPlanSpace: Ceiling pattern '%s' not found, skipping" % ceiling_pattern)
+		return
+
+	var ceiling_instance: Node3D = scene.instantiate()
+	parent.add_child(ceiling_instance)
+
+	var ceiling_config: Dictionary = room.get("ceiling_config", {}).duplicate()
+	ceiling_config["floor_size"] = [room_w, room_h]
+
+	if ceiling_instance.has_method("apply_grid_config"):
+		ceiling_instance.apply_grid_config(ceiling_config)
+
+	# Place at wall_height, flipped upside down
+	ceiling_instance.position = Vector3(center_x, wall_height, center_z)
+	ceiling_instance.rotation_degrees.x = 180.0
+	ceiling_instance.name = "Ceiling_%s" % str(room.get("id", "room"))
+
+	print("FloorPlanSpace: Placed ceiling '%s' at (%.1f, %.1f) y=%.1f size %.1fx%.1f" % [
+		ceiling_pattern, center_x, center_z, wall_height, room_w, room_h
+	])
+
+
+# ── Wall pattern placement ───────────────────────────────────────────────────
+
+func _place_room_wall_patterns(room: Dictionary, parent: Node3D, cell_size: float) -> void:
+	var wall_pattern: String = str(room.get("wall_pattern", ""))
+	if wall_pattern.is_empty():
+		return
+
+	var cells: Array = room.get("cells", [])
+	if cells.is_empty():
+		return
+
+	var wall_height: float = float(room.get("wall_height", 3.0))
+	var wt: float = _floor_plan_data.get("wall_thickness", 0.5)
+
+	var scene := _load_artifact_scene(wall_pattern)
+	if not scene:
+		push_warning("FloorPlanSpace: Wall pattern '%s' not found, skipping" % wall_pattern)
+		return
+
+	# Build cell set for boundary detection
+	var cell_set: Dictionary = {}
+	for cell in cells:
+		if cell is Array and cell.size() >= 2:
+			cell_set["%d,%d" % [int(cell[0]), int(cell[1])]] = true
+
+	# Find boundary edges (same logic as wall generation)
+	var boundary_edges: Array = []
+	for cell in cells:
+		if not cell is Array or cell.size() < 2:
+			continue
+		var row: int = int(cell[0])
+		var col: int = int(cell[1])
+		var neighbors := {
+			"N": "%d,%d" % [row - 1, col],
+			"S": "%d,%d" % [row + 1, col],
+			"E": "%d,%d" % [row, col + 1],
+			"W": "%d,%d" % [row, col - 1],
+		}
+		for dir in neighbors:
+			if not cell_set.has(neighbors[dir]):
+				boundary_edges.append({"row": row, "col": col, "dir": dir})
+
+	# Group into segments for wall-sized pattern panels
+	var segments := _group_wall_pattern_segments(boundary_edges)
+
+	var wall_patterns_container := Node3D.new()
+	wall_patterns_container.name = "WallPatterns"
+	parent.add_child(wall_patterns_container)
+
+	var pattern_count: int = 0
+	for seg in segments:
+		var dir: String = seg["dir"]
+		var edges: Array = seg["edges"]
+		if edges.is_empty():
+			continue
+
+		var seg_length: int = edges.size()
+		var seg_meters: float = seg_length * cell_size
+		var start_row: int = edges[0]["row"]
+		var start_col: int = edges[0]["col"]
+
+		# Calculate wall center position and rotation (same as wall placement)
+		var wall_pos: Vector3
+		var wall_rot_y: float
+		# Pattern offset from wall surface: half wall thickness + tiny gap inward
+		var pattern_inset: float = wt * 0.5 + 0.01
+
+		match dir:
+			"N":
+				var cx: float = (start_col + seg_length * 0.5) * cell_size
+				var cz: float = start_row * cell_size + pattern_inset
+				wall_pos = Vector3(cx, wall_height * 0.5, cz)
+				wall_rot_y = 0.0
+			"S":
+				var cx: float = (start_col + seg_length * 0.5) * cell_size
+				var cz: float = (start_row + 1) * cell_size - pattern_inset
+				wall_pos = Vector3(cx, wall_height * 0.5, cz)
+				wall_rot_y = 180.0
+			"E":
+				var cx: float = (start_col + 1) * cell_size - pattern_inset
+				var cz: float = (start_row + seg_length * 0.5) * cell_size
+				wall_pos = Vector3(cx, wall_height * 0.5, cz)
+				wall_rot_y = 90.0
+			"W":
+				var cx: float = start_col * cell_size + pattern_inset
+				var cz: float = (start_row + seg_length * 0.5) * cell_size
+				wall_pos = Vector3(cx, wall_height * 0.5, cz)
+				wall_rot_y = -90.0
+
+		var pattern_instance: Node3D = scene.instantiate()
+		wall_patterns_container.add_child(pattern_instance)
+
+		# Configure the pattern to fit the wall dimensions
+		var pattern_config: Dictionary = room.get("wall_config", {}).duplicate()
+		pattern_config["floor_size"] = [seg_meters, wall_height]
+
+		if pattern_instance.has_method("apply_grid_config"):
+			pattern_instance.apply_grid_config(pattern_config)
+
+		pattern_instance.position = wall_pos
+		# Rotate upright (stand on wall face) then orient to wall direction
+		pattern_instance.rotation_degrees = Vector3(-90.0, wall_rot_y, 0.0)
+		pattern_instance.name = "WallPattern_%s_%d" % [dir, pattern_count]
+		pattern_count += 1
+
+	print("FloorPlanSpace: Placed %d wall pattern panels for room '%s'" % [
+		pattern_count, str(room.get("id", "room"))
+	])
+
+
+## Group boundary edges into contiguous segments for wall patterns (no doorway filtering).
+func _group_wall_pattern_segments(edges: Array) -> Array:
+	var by_dir: Dictionary = { "N": [], "S": [], "E": [], "W": [] }
+	for e in edges:
+		var dir: String = e["dir"]
+		if by_dir.has(dir):
+			by_dir[dir].append(e)
+
+	var all_segments: Array = []
+
+	for dir in ["N", "S"]:
+		var dir_edges: Array = by_dir[dir]
+		if dir_edges.is_empty():
+			continue
+		var by_row: Dictionary = {}
+		for e in dir_edges:
+			var r: int = e["row"]
+			if not by_row.has(r):
+				by_row[r] = []
+			by_row[r].append(e)
+		for r in by_row:
+			var row_edges: Array = by_row[r]
+			row_edges.sort_custom(func(a, b): return a["col"] < b["col"])
+			var current_seg: Array = []
+			for e in row_edges:
+				if current_seg.size() > 0:
+					var last_col: int = current_seg[-1]["col"]
+					if e["col"] != last_col + 1:
+						all_segments.append({ "dir": dir, "edges": current_seg.duplicate() })
+						current_seg.clear()
+				current_seg.append(e)
+			if current_seg.size() > 0:
+				all_segments.append({ "dir": dir, "edges": current_seg.duplicate() })
+
+	for dir in ["E", "W"]:
+		var dir_edges: Array = by_dir[dir]
+		if dir_edges.is_empty():
+			continue
+		var by_col: Dictionary = {}
+		for e in dir_edges:
+			var c: int = e["col"]
+			if not by_col.has(c):
+				by_col[c] = []
+			by_col[c].append(e)
+		for c in by_col:
+			var col_edges: Array = by_col[c]
+			col_edges.sort_custom(func(a, b): return a["row"] < b["row"])
+			var current_seg: Array = []
+			for e in col_edges:
+				if current_seg.size() > 0:
+					var last_row: int = current_seg[-1]["row"]
+					if e["row"] != last_row + 1:
+						all_segments.append({ "dir": dir, "edges": current_seg.duplicate() })
+						current_seg.clear()
+				current_seg.append(e)
+			if current_seg.size() > 0:
+				all_segments.append({ "dir": dir, "edges": current_seg.duplicate() })
+
+	return all_segments
 
 
 # ── Wall generation ──────────────────────────────────────────────────────────
