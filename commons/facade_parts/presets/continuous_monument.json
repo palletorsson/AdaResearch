@@ -1,0 +1,93 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Continuous Monument — Direct Superstudio reference. A long, low mirror-chrome wall of pure endless repetition. Every bay identical, every cell the same rect_window. No variation, no hierarchy — the repetition IS the statement. Thin string courses slice the surface into a relentless grid.",
+  "facade": {
+    "bays": 6,
+    "stories": 6,
+    "symmetry": "bilateral",
+    "total_width": 15.0,
+    "total_height": 8.0,
+    "wall_depth": 0.15
+  },
+  "zones": [
+    { "row": 0, "name": "Band 1", "height_multiplier": 1.0 },
+    { "row": 1, "name": "Band 2", "height_multiplier": 1.0 },
+    { "row": 2, "name": "Band 3", "height_multiplier": 1.0 },
+    { "row": 3, "name": "Band 4", "height_multiplier": 1.0 },
+    { "row": 4, "name": "Band 5", "height_multiplier": 1.0 },
+    { "row": 5, "name": "Band 6", "height_multiplier": 1.0 }
+  ],
+  "materials": {
+    "wall": "#E8E8E8",
+    "zones": {
+      "Band 1": { "color": "#E8E8E8", "type": "dressed_stone" },
+      "Band 2": { "color": "#E8E8E8", "type": "dressed_stone" },
+      "Band 3": { "color": "#E8E8E8", "type": "dressed_stone" },
+      "Band 4": { "color": "#E8E8E8", "type": "dressed_stone" },
+      "Band 5": { "color": "#E8E8E8", "type": "dressed_stone" },
+      "Band 6": { "color": "#E8E8E8", "type": "dressed_stone" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 0, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    },
+
+    { "col": 0, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    },
+
+    { "col": 0, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 2, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    },
+
+    { "col": 0, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 3, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 3, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    },
+
+    { "col": 0, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 4, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    },
+
+    { "col": 0, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 3, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 4, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 5, "row": 5, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 5, "part": "string_course", "col_span": 6,
+      "params": { "depth": 0.01, "band_height": 0.02, "y_frac": 0.0 }
+    }
+  ]
+}
