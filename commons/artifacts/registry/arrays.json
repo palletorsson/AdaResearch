@@ -1569,6 +1569,42 @@
 				"size_group": "compact"
 			}
 		},
+		"meander_threshold_floor": {
+			"name": "Meander Threshold Floor",
+			"lookup_name": "meander_threshold_floor",
+			"description": "Pompeii mosaic threshold floor with bold Greek key meander border framing a dark field with scattered white tesserae. Common Roman doorway pattern placed at transitions between rooms.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/meander_threshold_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"threshold"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
 		"star_rosette_floor": {
 			"name": "Star Rosette Floor",
 			"lookup_name": "star_rosette_floor",
@@ -1913,6 +1949,81 @@
 				"pompeii",
 				"labyrinth",
 				"classical"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"san_michele_mosaic_floor": {
+			"name": "San Michele Mosaic Floor",
+			"lookup_name": "san_michele_mosaic_floor",
+			"description": "Circular Roman mosaic floor inspired by Villa San Michele, Capri. Concentric zones read from outside in: circular vine scroll border, square Greek key meander frame, dark solid band, classical 7-circuit labyrinth, and a central terracotta rosette.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/san_michele_mosaic_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"labyrinth",
+				"circular",
+				"meander",
+				"rosette"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"dense_carpet_floor": {
+			"name": "Dense Carpet Floor",
+			"lookup_name": "dense_carpet_floor",
+			"description": "Pompeii mosaic floor imitating woven textile: a dark field covered in hundreds of tiny light crosses arranged in a dense offset grid, creating a carpet/tweed effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/dense_carpet_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"carpet",
+				"cross",
+				"textile"
 			],
 			"dev_themes": [
 				"arrays",
