@@ -1,0 +1,121 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Pompeii Coffered Ceiling — 5x5 grid of recessed coffers with gold frames and alternating dark red/black inner panels, viewed from below",
+  "facade": {
+    "bays": 5,
+    "stories": 3,
+    "symmetry": "bilateral",
+    "total_width": 10.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "OuterBorder",  "height_multiplier": 0.40 },
+    { "row": 1, "name": "CofferGrid",   "height_multiplier": 2.00 },
+    { "row": 2, "name": "InnerBorder",  "height_multiplier": 0.40 }
+  ],
+  "materials": {
+    "wall": "#1A1A1A",
+    "zones": {
+      "OuterBorder": { "color": "#C8A860", "type": "plaster" },
+      "CofferGrid":  { "color": "#3A1500", "type": "plaster" },
+      "InnerBorder": { "color": "#C8A860", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.30, 0.40, 0.30],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#8B2500" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "rows": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "row": 1, "part": "fascia", "params": { "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "rows": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "row": 1, "part": "fascia", "params": { "color": "#1A1A1A" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "rows": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "row": 1, "part": "fascia", "params": { "color": "#8B2500" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "rows": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "row": 1, "part": "fascia", "params": { "color": "#1A1A1A" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "gold" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "rows": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "row": 1, "part": "fascia", "params": { "color": "#8B2500" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.30, 0.40, 0.30],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#8B2500" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    }
+  ]
+}

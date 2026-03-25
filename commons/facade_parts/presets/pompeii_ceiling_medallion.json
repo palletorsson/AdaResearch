@@ -1,0 +1,115 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Pompeii Medallion Ceiling — 3x3 layout with a central rose window medallion surrounded by simple painted panels in gold and deep red",
+  "facade": {
+    "bays": 3,
+    "stories": 3,
+    "symmetry": "bilateral",
+    "total_width": 8.0,
+    "total_height": 8.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Upper",   "height_multiplier": 1.00 },
+    { "row": 1, "name": "Middle",  "height_multiplier": 1.60 },
+    { "row": 2, "name": "Lower",   "height_multiplier": 1.00 }
+  ],
+  "materials": {
+    "wall": "#6B1A1A",
+    "zones": {
+      "Upper":  { "color": "#6B1A1A", "type": "plaster" },
+      "Middle": { "color": "#6B1A1A", "type": "plaster" },
+      "Lower":  { "color": "#6B1A1A", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "fillet", "material": "gold" }
+      ]
+    },
+    { "col": 1, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "arched_window", "params": { "frame_width": 0.03, "frame_depth": 0.015, "frame_color": "#C8A860", "glass_color": "#4A2020" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "fillet", "material": "gold" }
+      ]
+    },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "arched_window", "params": { "frame_width": 0.03, "frame_depth": 0.015, "frame_color": "#C8A860", "glass_color": "#4A2020" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "rose_window", "col_span": 1, "row_span": 1,
+      "params": {
+        "outer_radius_fraction": 0.90,
+        "petal_count": 12,
+        "frame_width": 0.05,
+        "frame_depth": 0.025,
+        "frame_color": "#C8A860",
+        "glass_color": "#6B1A1A",
+        "hub_color": "#F0E8D0",
+        "hub_radius_fraction": 0.20
+      }
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "arched_window", "params": { "frame_width": 0.03, "frame_depth": 0.015, "frame_color": "#C8A860", "glass_color": "#4A2020" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "fillet", "material": "gold" }
+      ]
+    },
+    { "col": 1, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "dark_stone", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.25, 0.50, 0.25],
+        "placements": [
+          { "col": 1, "part": "arched_window", "params": { "frame_width": 0.03, "frame_depth": 0.015, "frame_color": "#C8A860", "glass_color": "#4A2020" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 2, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "fillet", "material": "gold" }
+      ]
+    }
+  ]
+}
