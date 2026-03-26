@@ -64,42 +64,57 @@ func apply_grid_config(config: Dictionary) -> void:
 	_build()
 
 
-## The Greek key rule: given position along border and depth, is this cell dark?
+## The Greek key as a BOUNDARY FUNCTION.
 ##
-## p = position along the border (will be taken mod period)
-## d = depth from outer edge of meander zone (0 = outermost)
-## b = band_width
+## Instead of 4 band rules, define a single boundary line that zigzags
+## between top and bottom of the border strip. Each cell asks one question:
+## "Am I above or below the boundary?" — that's it.
 ##
-## Derived from the exact_meander_floor bitmap (the proven Greek key tile):
-##   Band 0 (d = 0..b-1):    dark for p in [0, 3b)   (wide outer bar)
-##   Band 1 (d = b..2b-1):   dark for p in [0, b) and [2b, 3b)   (two vertical pillars)
-##   Band 2 (d = 2b..3b-1):  dark for p in [0, b) and [2b, 4b)   (left pillar + hook bar)
-##   Band 3 (d = 3b..4b-1):  dark for p in [0, b)   (just left pillar)
+## The boundary is a stepped function of position along the border:
 ##
-## When tiled: the right end of one period's outer bar (band 0) connects
-## to the left pillar of the next period, creating the continuous meander.
+##   depth
+##   ↑ b ┌───┐       ┌───┐
+##   │   │   │       │   │
+##   │ 0 ┘   └───────┘   └───
+##   └─────────────────────────-> pos_along
+##       0   b  2b  3b  4b
+##
+## Dark territory = cells where depth < boundary(pos)
+## Light territory = cells where depth >= boundary(pos)
+##
+## The boundary function creates the Greek key hook:
+## - At phase [0, b): boundary is HIGH (=border_depth) -> dark column going full depth
+## - At phase [b, 2b): boundary is LOW (=b) -> only top band is dark
+## - At phase [2b, 3b): boundary is HIGH again -> dark column
+## - At phase [3b, 4b): boundary is LOW -> only top band
+## But the HIGH columns alternate between connecting to top and bottom,
+## creating the interlocking hook pattern.
 func _is_dark_cell(p_raw: int, d: int, b: int) -> bool:
 	var period := 4 * b
 	var p := p_raw % period
 	if p < 0:
 		p += period
 
-	var band := d / b
-	if band > 3:
-		band = 3
+	var max_d: int = 4 * b  # total meander depth
 
-	if band == 0:
-		# Outer bar: dark for first 3/4 of period
-		return p < 3 * b
-	elif band == 1:
-		# Two vertical pillars
-		return p < b or (p >= 2 * b and p < 3 * b)
-	elif band == 2:
-		# Left pillar + hook bar extending right
-		return p < b or p >= 2 * b
+	# The boundary zigzags: define how deep the dark territory extends
+	# at each position along the border
+	var boundary: int = 0
+
+	if p < b:
+		# Phase 0: dark goes full depth (left vertical bar of the key)
+		boundary = max_d
+	elif p < 2 * b:
+		# Phase 1: dark only at the top (top horizontal bar)
+		boundary = b
+	elif p < 3 * b:
+		# Phase 2: dark goes to depth 3b (inner hook going back down)
+		boundary = 3 * b
 	else:
-		# Just the left pillar (vertical connector to next period's outer bar)
-		return p < b
+		# Phase 3: dark only at the top (connecting to next key)
+		boundary = b
+
+	return d < boundary
 
 
 func _build() -> void:
