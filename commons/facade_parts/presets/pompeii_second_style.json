@@ -1,0 +1,201 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Pompeii Second Style — trompe l'oeil architectural wall painting with painted columns, pediments, receding vistas, and central mythological panel. The most architecturally ambitious of the four Pompeian styles, creating the illusion of rooms and colonnades beyond the wall surface.",
+  "facade": {
+    "bays": 5,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 14.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "UpperGallery",  "height_multiplier": 0.60 },
+    { "row": 1, "name": "MainField",     "height_multiplier": 2.20 },
+    { "row": 2, "name": "ColumnZone",    "height_multiplier": 0.50 },
+    { "row": 3, "name": "Socle",         "height_multiplier": 0.45 }
+  ],
+  "materials": {
+    "wall": "#8B2500",
+    "zones": {
+      "UpperGallery": { "color": "#E8DCC8", "type": "plaster" },
+      "MainField":    { "color": "#8B2500", "type": "plaster" },
+      "ColumnZone":   { "color": "#E8DCC8", "type": "plaster" },
+      "Socle":        { "color": "#2A2520", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.006 },
+      "frames": [
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.18, 0.64, 0.18],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.45, "frame_color": "#C8A860", "glass_color": "#87CEEB", "archivolt_depth": 0.010 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.006 },
+      "frames": [
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.18, 0.64, 0.18],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.45, "frame_color": "#C8A860", "glass_color": "#87CEEB", "archivolt_depth": 0.010 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.006 },
+      "frames": [
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.18, 0.64, 0.18],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.50, "frame_color": "#C8A860", "glass_color": "#6BA3C8", "archivolt_depth": 0.012 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.006 },
+      "frames": [
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.18, 0.64, 0.18],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.45, "frame_color": "#C8A860", "glass_color": "#87CEEB", "archivolt_depth": 0.010 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.006 },
+      "frames": [
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.18, 0.64, 0.18],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.45, "frame_color": "#C8A860", "glass_color": "#87CEEB", "archivolt_depth": 0.010 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "siena", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.025, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.35, "frame_color": "#C8A860", "glass_color": "#2A2520", "archivolt_depth": 0.015 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "siena", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.025, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.30, "frame_color": "#C8A860", "glass_color": "#2A2520", "archivolt_depth": 0.018 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "siena", "frame_projection": 0.035, "panel_recess": 0.025 },
+      "frames": [
+        { "width": 0.06, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.03, "profile": "cavetto", "material": "gold" },
+        { "width": 0.015, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.12, 0.76, 0.12],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.40, "frame_color": "#C8A860", "glass_color": "#4A3520", "archivolt_depth": 0.020 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "siena", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.025, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.30, "frame_color": "#C8A860", "glass_color": "#2A2520", "archivolt_depth": 0.018 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "siena", "frame_projection": 0.030, "panel_recess": 0.020 },
+      "frames": [
+        { "width": 0.05, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.025, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } },
+          { "col": 1, "part": "arched_window", "params": { "arch_ratio": 0.35, "frame_color": "#C8A860", "glass_color": "#2A2520", "archivolt_depth": 0.015 } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#E8DCC8" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.20, 0.60, 0.20],
+        "placements": [
+          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.020, "color": "#C8A860" } },
+          { "row": 1, "part": "dentil_band", "params": { "block_w": 0.02, "block_h": 0.02, "block_d": 0.012, "color": "#C8A860" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#4A6B4A" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 3, "part": "ashlar", "col_span": 5,
+      "params": { "material": "dark_stone", "color": "#2A2520" },
+      "sub_grid": {
+        "rows": [0.25, 0.50, 0.25],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#3A3530" } },
+          { "row": 1, "part": "string_course", "params": { "depth": 0.012, "band_height": 0.018, "color": "#4A4540" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#2A2520" } }
+        ]
+      }
+    }
+  ]
+}
