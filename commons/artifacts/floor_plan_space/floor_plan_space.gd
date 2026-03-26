@@ -17,7 +17,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
-@export var y_offset: float = -2.0  # Lower the whole scene further
+@export var y_offset: float = -10.0  # EXTREME test — should be way underground
 var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
@@ -127,6 +127,7 @@ func _build_all_rooms() -> void:
 	container.name = "FloorPlanRooms"
 	container.position.y = y_offset
 	add_child(container)
+	print("FloorPlanSpace: y_offset=%s, container.y=%s, global_pos=%s" % [y_offset, container.position.y, global_position])
 
 	var global_seen_edges: Dictionary = {}  # Shared across all rooms to prevent double walls
 
