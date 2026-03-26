@@ -89,24 +89,42 @@ func apply_grid_config(config: Dictionary) -> void:
 ## - At phase [3b, 4b): boundary is LOW -> only top band
 ## But the HIGH columns alternate between connecting to top and bottom,
 ## creating the interlocking hook pattern.
-## Fully continuous boundary function — no integers, no grid snapping.
-## Works on FLOAT coordinates. The boundary is a continuous zigzag.
-func _is_dark_cell_continuous(pos: float, depth: float, b: float) -> bool:
-	var period: float = 4.0 * b
-	var p: float = fmod(pos, period)
-	if p < 0.0:
-		p += period
-
+## NO TILING. NO fmod. NO period.
+##
+## Instead: the side length determines how many hooks fit.
+## Each hook adapts its width to fill the side evenly.
+## No two hooks need be identical — they stretch to fit.
+##
+## side_length: total length of this border side in cells
+## pos: position along this side (0 to side_length)
+## depth: distance from outer edge into the border
+## b: band width (line thickness)
+func _is_dark_cell_distributed(pos: float, depth: float, b: float, side_length: float) -> bool:
 	var max_d: float = 4.0 * b
+	var ideal_period: float = 4.0 * b
 
-	# Boundary: how deep does dark territory extend at this position?
+	# How many hooks fit along this side? ROUND to nearest integer.
+	# This means each hook stretches or compresses slightly to fill exactly.
+	var num_hooks: int = maxi(1, int(round(side_length / ideal_period)))
+	var actual_period: float = side_length / float(num_hooks)
+
+	# Where in the current hook are we? (NOT fmod — distributed evenly)
+	var hook_index: int = clampi(int(pos / actual_period), 0, num_hooks - 1)
+	var hook_start: float = hook_index * actual_period
+	var p: float = pos - hook_start  # position within THIS hook
+
+	# Scale the phase boundaries to this hook's actual width
+	var q1: float = actual_period * 0.25  # was: b
+	var q2: float = actual_period * 0.50  # was: 2b
+	var q3: float = actual_period * 0.75  # was: 3b
+
+	# Boundary: how deep does dark territory extend?
 	var boundary: float = 0.0
-
-	if p < b:
+	if p < q1:
 		boundary = max_d
-	elif p < 2.0 * b:
+	elif p < q2:
 		boundary = b
-	elif p < 3.0 * b:
+	elif p < q3:
 		boundary = 3.0 * b
 	else:
 		boundary = b
@@ -244,33 +262,44 @@ func _build() -> void:
 				var depth_v: float = d_v - ob_f
 				var pos_h: float
 				var pos_v: float
+				var len_h: float  # length of the horizontal side
+				var len_v: float  # length of the vertical side
 
 				if d_top <= d_bot:
 					pos_h = rx - ob_f
+					len_h = sw_f
 				else:
-					pos_h = sw_f + sh_f + (float(gw - 1) - ob_f - rx)
+					pos_h = float(gw - 1) - ob_f - rx
+					len_h = sw_f
 
 				if d_right <= d_left:
-					pos_v = sw_f + (ry - ob_f)
+					pos_v = ry - ob_f
+					len_v = sh_f
 				else:
-					pos_v = 2.0 * sw_f + sh_f + (float(gh - 1) - ob_f - ry)
+					pos_v = float(gh - 1) - ob_f - ry
+					len_v = sh_f
 
-				var dark_h := _is_dark_cell_continuous(pos_h, depth_h, bw_f)
-				var dark_v := _is_dark_cell_continuous(pos_v, depth_v, bw_f)
+				var dark_h := _is_dark_cell_distributed(pos_h, depth_h, bw_f, len_h)
+				var dark_v := _is_dark_cell_distributed(pos_v, depth_v, bw_f, len_v)
 				is_dark = dark_h or dark_v
 			else:
 				var pos_along: float = 0.0
+				var side_len: float = sw_f  # default
 
 				if d_top == min_dist:
 					pos_along = rx - ob_f
+					side_len = sw_f
 				elif d_right == min_dist:
-					pos_along = sw_f + (ry - ob_f)
+					pos_along = ry - ob_f
+					side_len = sh_f
 				elif d_bot == min_dist:
-					pos_along = sw_f + sh_f + (float(gw - 1) - ob_f - rx)
+					pos_along = float(gw - 1) - ob_f - rx
+					side_len = sw_f
 				else:
-					pos_along = 2.0 * sw_f + sh_f + (float(gh - 1) - ob_f - ry)
+					pos_along = float(gh - 1) - ob_f - ry
+					side_len = sh_f
 
-				is_dark = _is_dark_cell_continuous(pos_along, depth, bw_f)
+				is_dark = _is_dark_cell_distributed(pos_along, depth, bw_f, side_len)
 
 			# Check if random walk visited this cell
 			var walk_key: int = tx * 10000 + ty
