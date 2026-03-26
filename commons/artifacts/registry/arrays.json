@@ -2405,6 +2405,260 @@
 				],
 				"size_group": "compact"
 			}
+		},
+		"pixel_invader_floor": {
+			"name": "Pixel Invader Floor",
+			"lookup_name": "pixel_invader_floor",
+			"description": "Procedural pixel art floor with space invader sprites tiled in electric green on a black field. 11x8 bitmap characters march across the ground like an 8-bit arcade screen.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pixel_invader_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"retro",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"neon_chevron_floor": {
+			"name": "Neon Chevron Floor",
+			"lookup_name": "neon_chevron_floor",
+			"description": "Procedural pixel art floor with bold V-shaped chevron stripes radiating from center. Hot pink, electric blue, yellow, and purple bands alternate with black gaps for a rainbow V pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/neon_chevron_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"chevron",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"glitch_grid_floor": {
+			"name": "Glitch Grid Floor",
+			"lookup_name": "glitch_grid_floor",
+			"description": "Procedural pixel art floor with digital noise aesthetic. Mostly black grid with ~18% of cells lit in hot pink, cyan, lime, red, or white using deterministic hash for reproducible glitch pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/glitch_grid_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"glitch",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"memphis_floor": {
+			"name": "Memphis Pattern Floor",
+			"lookup_name": "memphis_floor",
+			"description": "Procedural pixel art floor inspired by Memphis Group / Sottsass design. Pastel pink background with scattered black triangles, yellow dots, and teal zigzag shapes placed by pseudo-random hash.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/memphis_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"memphis",
+				"postmodern"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"rainbow_checker_floor": {
+			"name": "Rainbow Checkerboard Floor",
+			"lookup_name": "rainbow_checker_floor",
+			"description": "Procedural pixel art floor with rainbow checkerboard pattern. Each row uses a different spectrum color paired with black: red, orange, yellow, green, blue, purple — then repeats.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/rainbow_checker_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"rainbow",
+				"checkerboard"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"pixel_cross_floor": {
+			"name": "Pixel Cross Carpet Floor",
+			"lookup_name": "pixel_cross_floor",
+			"description": "Procedural pixel art floor with large 5x5 pixel crosses on a dark background. Alternating bright green and hot pink crosses in staggered rows create a bold carpet effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pixel_cross_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"cross",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"turtle_meander_floor": {
+			"name": "Turtle Meander Floor",
+			"lookup_name": "turtle_meander_floor",
+			"description": "Procedural mosaic floor whose Greek key border is traced by a turtle graphics engine. The same turtle machine generates the ancient meander, the Hilbert curve, and the Peano curve — different programs, same machine.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/turtle_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"turtle_graphics",
+				"meander",
+				"hilbert",
+				"algorithms"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation",
+				"algorithms"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }
