@@ -89,32 +89,29 @@ func apply_grid_config(config: Dictionary) -> void:
 ## - At phase [3b, 4b): boundary is LOW -> only top band
 ## But the HIGH columns alternate between connecting to top and bottom,
 ## creating the interlocking hook pattern.
-func _is_dark_cell(p_raw: int, d: int, b: int) -> bool:
-	var period := 4 * b
-	var p := p_raw % period
-	if p < 0:
+## Fully continuous boundary function — no integers, no grid snapping.
+## Works on FLOAT coordinates. The boundary is a continuous zigzag.
+func _is_dark_cell_continuous(pos: float, depth: float, b: float) -> bool:
+	var period: float = 4.0 * b
+	var p: float = fmod(pos, period)
+	if p < 0.0:
 		p += period
 
-	var max_d: int = 4 * b  # total meander depth
+	var max_d: float = 4.0 * b
 
-	# The boundary zigzags: define how deep the dark territory extends
-	# at each position along the border
-	var boundary: int = 0
+	# Boundary: how deep does dark territory extend at this position?
+	var boundary: float = 0.0
 
 	if p < b:
-		# Phase 0: dark goes full depth (left vertical bar of the key)
 		boundary = max_d
-	elif p < 2 * b:
-		# Phase 1: dark only at the top (top horizontal bar)
+	elif p < 2.0 * b:
 		boundary = b
-	elif p < 3 * b:
-		# Phase 2: dark goes to depth 3b (inner hook going back down)
-		boundary = 3 * b
+	elif p < 3.0 * b:
+		boundary = 3.0 * b
 	else:
-		# Phase 3: dark only at the top (connecting to next key)
 		boundary = b
 
-	return d < boundary
+	return depth < boundary
 
 
 func _build() -> void:
@@ -138,10 +135,11 @@ func _build() -> void:
 
 	var total_border: int = outer_band + border_depth
 
-	var dark_verts := PackedVector3Array()
-	var light_verts := PackedVector3Array()
+	var stone_verts := PackedVector3Array()  # ALL stones in one mesh
+	var stone_colors := PackedColorArray()   # per-vertex color
 	var grout_verts := PackedVector3Array()
-	var walk_verts := PackedVector3Array()  # random walk trail
+	var walk_verts := PackedVector3Array()
+	var walk_colors := PackedColorArray()
 
 	# ── Random walk over ALL tiles ──
 	# Proves we can touch every stone independently
@@ -183,27 +181,34 @@ func _build() -> void:
 			var rule_tx: float = wx / cs
 			var rule_ty: float = wz / cs
 
-			# Use JITTERED coordinates for pattern decision
-			var rtx: int = clampi(int(round(rule_tx)), 0, gw - 1)
-			var rty: int = clampi(int(round(rule_ty)), 0, gh - 1)
-			var d_top := rty
-			var d_bot := gh - 1 - rty
-			var d_left := rtx
-			var d_right := gw - 1 - rtx
-			var min_dist := mini(mini(d_top, d_bot), mini(d_left, d_right))
+			# CONTINUOUS coordinates — no grid snapping
+			var rx: float = rule_tx
+			var ry: float = rule_ty
+			var d_top: float = ry
+			var d_bot: float = float(gh - 1) - ry
+			var d_left: float = rx
+			var d_right: float = float(gw - 1) - rx
+			var min_dist: float = minf(minf(d_top, d_bot), minf(d_left, d_right))
+
+			# Per-stone color: base color + unique jitter
+			var color_jitter: float = (_hash_2d(tx + 137, ty + 211) - 0.5) * 0.08
+			var dark_c := Color(color_dark.r + color_jitter, color_dark.g + color_jitter, color_dark.b + color_jitter * 0.5)
+			var light_c := Color(color_light.r + color_jitter, color_light.g + color_jitter * 0.8, color_light.b + color_jitter * 0.6)
 
 			# Outer solid dark band
-			if min_dist < outer_band:
-				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
+			if min_dist < float(outer_band):
+				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, dark_c)
+				stone_verts = r[0]; stone_colors = r[1]
 				continue
 
 			# Interior field
-			if min_dist >= total_border:
-				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
+			if min_dist >= float(total_border):
+				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, dark_c)
+				stone_verts = r[0]; stone_colors = r[1]
 				continue
 
-			# Meander zone
-			var depth: int = min_dist - outer_band
+			# Meander zone — FLOAT depth, no integer snapping
+			var depth: float = min_dist - float(outer_band)
 
 			# Determine which edge is nearest and use its parallel coordinate
 			# as pos_along. For corners (equidistant from two edges), we
@@ -223,57 +228,62 @@ func _build() -> void:
 
 			# Check if cell is in a corner zone (equidistant from two edges)
 			var in_corner := false
-			var d_h := mini(d_top, d_bot)  # nearest horizontal edge distance
-			var d_v := mini(d_left, d_right)  # nearest vertical edge distance
-			if d_h < total_border and d_v < total_border and d_h == d_v:
+			var d_h: float = minf(d_top, d_bot)
+			var d_v: float = minf(d_left, d_right)
+			if d_h < float(total_border) and d_v < float(total_border) and absf(d_h - d_v) < 0.5:
 				in_corner = true
 
 			var is_dark: bool
+			var ob_f: float = float(outer_band)
+			var sw_f: float = float(side_w)
+			var sh_f: float = float(side_h)
+			var bw_f: float = float(band_width)
 
 			if in_corner:
-				# Corner zone: AND the rules from both adjacent edges.
-				# This creates the L-bend where meander turns the corner.
-				var depth_h: int = d_h - outer_band
-				var depth_v: int = d_v - outer_band
-				var pos_h: int  # pos_along for the horizontal edge
-				var pos_v: int  # pos_along for the vertical edge
+				var depth_h: float = d_h - ob_f
+				var depth_v: float = d_v - ob_f
+				var pos_h: float
+				var pos_v: float
 
 				if d_top <= d_bot:
-					pos_h = rtx - outer_band
+					pos_h = rx - ob_f
 				else:
-					pos_h = side_w + side_h + (gw - 1 - outer_band - rtx)
+					pos_h = sw_f + sh_f + (float(gw - 1) - ob_f - rx)
 
 				if d_right <= d_left:
-					pos_v = side_w + (rty - outer_band)
+					pos_v = sw_f + (ry - ob_f)
 				else:
-					pos_v = 2 * side_w + side_h + (gh - 1 - outer_band - rty)
+					pos_v = 2.0 * sw_f + sh_f + (float(gh - 1) - ob_f - ry)
 
-				var dark_h := _is_dark_cell(pos_h, depth_h, band_width)
-				var dark_v := _is_dark_cell(pos_v, depth_v, band_width)
+				var dark_h := _is_dark_cell_continuous(pos_h, depth_h, bw_f)
+				var dark_v := _is_dark_cell_continuous(pos_v, depth_v, bw_f)
 				is_dark = dark_h or dark_v
 			else:
-				# Straight edge: use nearest edge
-				var pos_along: int = 0
+				var pos_along: float = 0.0
 
 				if d_top == min_dist:
-					pos_along = rtx - outer_band
+					pos_along = rx - ob_f
 				elif d_right == min_dist:
-					pos_along = side_w + (rty - outer_band)
+					pos_along = sw_f + (ry - ob_f)
 				elif d_bot == min_dist:
-					pos_along = side_w + side_h + (gw - 1 - outer_band - rtx)
+					pos_along = sw_f + sh_f + (float(gw - 1) - ob_f - rx)
 				else:
-					pos_along = 2 * side_w + side_h + (gh - 1 - outer_band - rty)
+					pos_along = 2.0 * sw_f + sh_f + (float(gh - 1) - ob_f - ry)
 
-				is_dark = _is_dark_cell(pos_along, depth, band_width)
+				is_dark = _is_dark_cell_continuous(pos_along, depth, bw_f)
 
 			# Check if random walk visited this cell
 			var walk_key: int = tx * 10000 + ty
 			if walk_visited.has(walk_key):
-				walk_verts = _add_rect(walk_verts, wx, wz, tile_size, tile_size)
+				var walk_c := Color(MosaicPalette.TERRACOTTA.r + color_jitter, MosaicPalette.TERRACOTTA.g + color_jitter, MosaicPalette.TERRACOTTA.b + color_jitter * 0.5)
+				var r := _add_colored_rect(walk_verts, walk_colors, wx, wz, tile_size, tile_size, walk_c)
+				walk_verts = r[0]; walk_colors = r[1]
 			elif is_dark:
-				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
+				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, dark_c)
+				stone_verts = r[0]; stone_colors = r[1]
 			else:
-				light_verts = _add_rect(light_verts, wx, wz, tile_size, tile_size)
+				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, light_c)
+				stone_verts = r[0]; stone_colors = r[1]
 
 	# Interior polka dots
 	var field_x0 := total_border
@@ -295,7 +305,10 @@ func _build() -> void:
 			var jz := (_hash_2d(dx + 97, dz + 53) - 0.5) * 0.8
 			var px_x := clampf(field_x0 + base_px + jx, field_x0 + 0.5, field_x1 - 1.5)
 			var px_z := clampf(field_y0 + base_pz + jz, field_y0 + 0.5, field_y1 - 1.5)
-			light_verts = _add_rect(light_verts, px_x * cs, px_z * cs, cs, cs)
+			var dot_jitter: float = (_hash_2d(dx + 200, dz + 300) - 0.5) * 0.06
+			var dot_c := Color(color_light.r + dot_jitter, color_light.g + dot_jitter, color_light.b + dot_jitter)
+			var r := _add_colored_rect(stone_verts, stone_colors, px_x * cs, px_z * cs, cs, cs, dot_c)
+			stone_verts = r[0]; stone_colors = r[1]
 
 	# Grout lines
 	if grout_width_fraction > 0.001:
@@ -307,35 +320,42 @@ func _build() -> void:
 			grout_verts = _add_rect(grout_verts, gx * cs - half, 0.0, grout_w, fh)
 
 	# Y offsets for z-fighting prevention
-	for i in dark_verts.size():
-		dark_verts[i].y = 0.0
-	for i in light_verts.size():
-		light_verts[i].y = 0.001
+	for i in stone_verts.size():
+		stone_verts[i].y = 0.0
 	for i in walk_verts.size():
-		walk_verts[i].y = 0.003  # walk trail on TOP of everything
+		walk_verts[i].y = 0.003
 	for i in grout_verts.size():
 		grout_verts[i].y = -0.001
 
-	# Build ArrayMesh
+	# Build ArrayMesh — ONE surface with vertex colors for per-stone variation
 	var arr_mesh := ArrayMesh.new()
-	if dark_verts.size() > 0:
+
+	# Stone surface: all stones in one mesh with per-vertex color
+	if stone_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = dark_verts
+		arrays[Mesh.ARRAY_VERTEX] = stone_verts
+		arrays[Mesh.ARRAY_COLOR] = stone_colors
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_dark, wear_level))
-	if light_verts.size() > 0:
-		var arrays := []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = light_verts
-		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, wear_level))
+		# Material that reads vertex colors
+		var mat := StandardMaterial3D.new()
+		mat.vertex_color_use_as_albedo = true
+		mat.roughness = 0.85
+		arr_mesh.surface_set_material(0, mat)
+
+	# Walk trail surface
 	if walk_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = walk_verts
+		arrays[Mesh.ARRAY_COLOR] = walk_colors
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(MosaicPalette.TERRACOTTA, wear_level))
+		var mat := StandardMaterial3D.new()
+		mat.vertex_color_use_as_albedo = true
+		mat.roughness = 0.75
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, mat)
+
+	# Grout surface (uniform color, no per-stone variation needed)
 	if grout_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
@@ -357,9 +377,9 @@ func _build() -> void:
 	_body.position = Vector3(0, 0.005, 0)
 	add_child(_body)
 
-	print("[FreeMeanderFloor] Built %dx%d grid, band=%d, border=%d (%d dark, %d light, %d grout tris)" % [
+	print("[FreeMeanderFloor] Built %dx%d grid, band=%d, border=%d (%d stone, %d walk, %d grout tris)" % [
 		gw, gh, band_width, border_depth,
-		dark_verts.size() / 3, light_verts.size() / 3, grout_verts.size() / 3,
+		stone_verts.size() / 3, walk_verts.size() / 3, grout_verts.size() / 3,
 	])
 
 
@@ -371,6 +391,21 @@ func _add_rect(verts: PackedVector3Array, x: float, z: float, w: float, h: float
 	verts.append(Vector3(x + w, 0, z + h))
 	verts.append(Vector3(x, 0, z + h))
 	return verts
+
+
+## Add a rect with per-stone color. Each stone gets 6 vertices (2 tris)
+## all sharing the same color — but different stones get different colors.
+func _add_colored_rect(verts: PackedVector3Array, colors: PackedColorArray,
+		x: float, z: float, w: float, h: float, color: Color) -> Array:
+	verts.append(Vector3(x, 0, z))
+	verts.append(Vector3(x + w, 0, z))
+	verts.append(Vector3(x + w, 0, z + h))
+	verts.append(Vector3(x, 0, z))
+	verts.append(Vector3(x + w, 0, z + h))
+	verts.append(Vector3(x, 0, z + h))
+	for _i in 6:
+		colors.append(color)
+	return [verts, colors]
 
 
 func _hash_2d(x: int, y: int) -> float:
