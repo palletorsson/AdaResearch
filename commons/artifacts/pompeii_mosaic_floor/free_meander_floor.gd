@@ -194,39 +194,39 @@ func _build() -> void:
 			# Stone center in WORLD coordinates (jittered)
 			var wx := tx * cs + jx
 			var wz := ty * cs + jz
-			# Use the JITTERED world position for the pattern decision
-			# Convert back to grid-like coordinates for the rule
-			var rule_tx: float = wx / cs
-			var rule_ty: float = wz / cs
 
-			# CONTINUOUS coordinates — no grid snapping
-			var rx: float = rule_tx
-			var ry: float = rule_ty
-			var d_top: float = ry
-			var d_bot: float = float(gh - 1) - ry
-			var d_left: float = rx
-			var d_right: float = float(gw - 1) - rx
-			var min_dist: float = minf(minf(d_top, d_bot), minf(d_left, d_right))
+			# ALL distances in WORLD UNITS (meters), NOT grid cells
+			# No conversion back to grid coords. The world position IS the input.
+			var d_top_w: float = wz                    # distance from top edge
+			var d_bot_w: float = fh - wz               # distance from bottom edge
+			var d_left_w: float = wx                   # distance from left edge
+			var d_right_w: float = fw - wx             # distance from right edge
+			var min_dist_w: float = minf(minf(d_top_w, d_bot_w), minf(d_left_w, d_right_w))
 
 			# Per-stone color: base color + unique jitter
 			var color_jitter: float = (_hash_2d(tx + 137, ty + 211) - 0.5) * 0.08
 			var dark_c := Color(color_dark.r + color_jitter, color_dark.g + color_jitter, color_dark.b + color_jitter * 0.5)
 			var light_c := Color(color_light.r + color_jitter, color_light.g + color_jitter * 0.8, color_light.b + color_jitter * 0.6)
 
+			# World-unit border dimensions
+			var outer_band_w: float = float(outer_band) * cs
+			var total_border_w: float = float(total_border) * cs
+			var band_w: float = float(band_width) * cs  # band width in meters
+
 			# Outer solid dark band
-			if min_dist < float(outer_band):
+			if min_dist_w < outer_band_w:
 				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, dark_c)
 				stone_verts = r[0]; stone_colors = r[1]
 				continue
 
 			# Interior field
-			if min_dist >= float(total_border):
+			if min_dist_w >= total_border_w:
 				var r := _add_colored_rect(stone_verts, stone_colors, wx, wz, tile_size, tile_size, dark_c)
 				stone_verts = r[0]; stone_colors = r[1]
 				continue
 
-			# Meander zone — FLOAT depth, no integer snapping
-			var depth: float = min_dist - float(outer_band)
+			# Meander zone — depth in WORLD UNITS
+			var depth_w: float = min_dist_w - outer_band_w
 
 			# Determine which edge is nearest and use its parallel coordinate
 			# as pos_along. For corners (equidistant from two edges), we
@@ -245,61 +245,56 @@ func _build() -> void:
 			var side_h: int = gh - 2 * outer_band
 
 			# Check if cell is in a corner zone (equidistant from two edges)
+			# Corner detection in world units
 			var in_corner := false
-			var d_h: float = minf(d_top, d_bot)
-			var d_v: float = minf(d_left, d_right)
-			if d_h < float(total_border) and d_v < float(total_border) and absf(d_h - d_v) < 0.5:
+			var d_h_w: float = minf(d_top_w, d_bot_w)
+			var d_v_w: float = minf(d_left_w, d_right_w)
+			if d_h_w < total_border_w and d_v_w < total_border_w and absf(d_h_w - d_v_w) < cs:
 				in_corner = true
 
 			var is_dark: bool
-			var ob_f: float = float(outer_band)
-			var sw_f: float = float(side_w)
-			var sh_f: float = float(side_h)
-			var bw_f: float = float(band_width)
+
+			# Side lengths in WORLD units
+			var side_w_w: float = fw - 2.0 * outer_band_w
+			var side_h_w: float = fh - 2.0 * outer_band_w
 
 			if in_corner:
-				var depth_h: float = d_h - ob_f
-				var depth_v: float = d_v - ob_f
-				var pos_h: float
-				var pos_v: float
-				var len_h: float  # length of the horizontal side
-				var len_v: float  # length of the vertical side
+				var depth_h_w: float = d_h_w - outer_band_w
+				var depth_v_w: float = d_v_w - outer_band_w
+				var pos_h_w: float
+				var pos_v_w: float
 
-				if d_top <= d_bot:
-					pos_h = rx - ob_f
-					len_h = sw_f
+				if d_top_w <= d_bot_w:
+					pos_h_w = wx - outer_band_w
 				else:
-					pos_h = float(gw - 1) - ob_f - rx
-					len_h = sw_f
+					pos_h_w = fw - outer_band_w - wx
 
-				if d_right <= d_left:
-					pos_v = ry - ob_f
-					len_v = sh_f
+				if d_right_w <= d_left_w:
+					pos_v_w = wz - outer_band_w
 				else:
-					pos_v = float(gh - 1) - ob_f - ry
-					len_v = sh_f
+					pos_v_w = fh - outer_band_w - wz
 
-				var dark_h := _is_dark_cell_distributed(pos_h, depth_h, bw_f, len_h)
-				var dark_v := _is_dark_cell_distributed(pos_v, depth_v, bw_f, len_v)
+				var dark_h := _is_dark_cell_distributed(pos_h_w, depth_h_w, band_w, side_w_w)
+				var dark_v := _is_dark_cell_distributed(pos_v_w, depth_v_w, band_w, side_h_w)
 				is_dark = dark_h or dark_v
 			else:
-				var pos_along: float = 0.0
-				var side_len: float = sw_f  # default
+				var pos_along_w: float = 0.0
+				var side_len_w: float = side_w_w
 
-				if d_top == min_dist:
-					pos_along = rx - ob_f
-					side_len = sw_f
-				elif d_right == min_dist:
-					pos_along = ry - ob_f
-					side_len = sh_f
-				elif d_bot == min_dist:
-					pos_along = float(gw - 1) - ob_f - rx
-					side_len = sw_f
+				if d_top_w == min_dist_w:
+					pos_along_w = wx - outer_band_w
+					side_len_w = side_w_w
+				elif d_right_w == min_dist_w:
+					pos_along_w = wz - outer_band_w
+					side_len_w = side_h_w
+				elif d_bot_w == min_dist_w:
+					pos_along_w = fw - outer_band_w - wx
+					side_len_w = side_w_w
 				else:
-					pos_along = float(gh - 1) - ob_f - ry
-					side_len = sh_f
+					pos_along_w = fh - outer_band_w - wz
+					side_len_w = side_h_w
 
-				is_dark = _is_dark_cell_distributed(pos_along, depth, bw_f, side_len)
+				is_dark = _is_dark_cell_distributed(pos_along_w, depth_w, band_w, side_len_w)
 
 			# Check if random walk visited this cell
 			var walk_key: int = tx * 10000 + ty
