@@ -130,6 +130,7 @@ collide_with_areas = true
 
 [node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" unique_id=1844701323 instance=ExtResource("10_5sk3y")]
 enabled = true
+flight_button = "ax_button"
 
 [node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="6" unique_id=1913051319 instance=ExtResource("12_cwrn5")]
 script = ExtResource("13_j7xni")
