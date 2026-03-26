@@ -23,7 +23,7 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 ## Key size (meander) or recursion depth (Hilbert/Peano)
 @export var meander_depth: int = 3
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
-@export var tiles_short: int = 12
+@export var tiles_short: int = 40
 ## Border composition: outer dark band, light gap, turtle path zone, light gap, inner dark band
 @export var outer_band: int = 1
 @export var inner_band: int = 1
@@ -99,39 +99,67 @@ class MeanderTurtle:
 	# ── Meander Programs ──
 
 	func meander_tooth(s: int) -> void:
-		## One meander tooth (U-shaped hook into the border zone).
-		## The turtle ends facing the SAME direction, advanced (s) cells along the edge.
-		## Depth: s-1 cells perpendicular to the edge.
-		## Pattern for s=3, facing right:
-		##   X X
-		##   X .
-		##   X X X
-		forward(1)
-		turn_right()
-		forward(s - 1)
+		## One Greek key meander unit — the classic squared spiral.
+		## s = number of cells the key extends perpendicular to the edge.
+		## The turtle starts on the edge, facing along it.
+		## After this call, the turtle has advanced 2*s cells along the edge.
+		##
+		## The key pattern (s=3, facing right, perpendicular = up):
+		##
+		##   ██████████      <- go up s, right s*2, down s
+		##   ██      ██
+		##   ██  ██  ██      <- inner: down (s-2), left (s*2-2), up (s-2)
+		##   ██  ██████
+		##   ██
+		##   ████████████→   <- continue along edge
+		##
+		## This creates the signature "hooked spiral" of the Greek key.
+
+		if s < 2:
+			forward(2)
+			return
+
+		var w: int = s * 2  # width of one key unit along the edge
+
+		# Go perpendicular (into the border zone)
 		turn_left()
-		forward(1)
-		turn_left()
-		forward(s - 1)
+		forward(s)
+		# Go along the top
 		turn_right()
-		forward(1)
+		forward(w)
+		# Go back down
+		turn_right()
+		forward(s)
+		# Hook back: go along the bottom (backward) partway
+		turn_right()
+		forward(w - 2)
+		# Go up into the inner spiral
+		turn_right()
+		forward(s - 2)
+		# Go along inner top
+		turn_left()
+		forward(w - 2)
+		# Come back down to the edge
+		turn_left()
+		forward(s)
 
 	func meander_border(outer_w: int, outer_h: int, s: int) -> void:
-		## Trace Greek key meander teeth around all 4 sides.
+		## Trace Greek key meander around all 4 sides.
+		## Each key unit advances 2*s cells along the edge.
 		## The turtle starts at (0,0) facing right.
-		## Each tooth advances s cells along the edge.
+		var key_width: int = s * 2  # each key occupies 2*s along the edge
 		var side_lengths: Array[int] = [outer_w, outer_h, outer_w, outer_h]
 		for side_idx in 4:
 			var side_len: int = side_lengths[side_idx]
-			if s <= 0:
+			if s <= 1:
 				forward(side_len)
 				turn_right()
 				continue
 
-			var num_teeth: int = side_len / s
-			var remaining: int = side_len - num_teeth * s
+			var num_keys: int = side_len / key_width
+			var remaining: int = side_len - num_keys * key_width
 
-			for _k in num_teeth:
+			for _k in num_keys:
 				meander_tooth(s)
 
 			if remaining > 0:
@@ -278,7 +306,10 @@ func _build() -> void:
 
 	match border_mode:
 		0:  # Greek key meander
-			turtle.reset(Vector2.ZERO, 0)
+			# Start at bottom-left corner, facing right.
+			# Teeth go UPWARD (turn_left from right = up = y decreases).
+			# This keeps the path inside the zone (0..zone_h-1).
+			turtle.reset(Vector2(0, turtle_zone_h - 1), 0)
 			turtle.meander_border(turtle_zone_w, turtle_zone_h, meander_depth)
 		1:  # Hilbert curve — run along each side
 			_trace_hilbert_border(turtle, turtle_zone_w, turtle_zone_h, meander_depth)
