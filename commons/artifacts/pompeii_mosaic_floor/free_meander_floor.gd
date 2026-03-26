@@ -1,22 +1,27 @@
 # free_meander_floor.gd
 # Rule-based Greek key meander — no tiles, no turtle, no bitmap.
-# Each cell decides its own color from ONE modular arithmetic rule
+# Each cell decides its own color from a mathematical rule
 # applied to its global position, exactly as a Roman mosaicist
 # would place each stone independently.
 #
-# THE RULE: territory = ((pos_along + ring * band_width) % period) < half_period
+# The approach: for each cell in the border zone, compute two coordinates:
+#   pos_along = position along the nearest edge (the coordinate parallel to that edge)
+#   depth = distance from outer edge of meander zone (perpendicular to that edge)
 #
-# pos_along = continuous position around the entire border perimeter
-# ring = depth / band_width (which concentric ring of the spiral)
-# The shift (ring * band_width) rotates the dark/light boundary inward,
-# creating the Greek key hook from pure modular arithmetic.
+# Then evaluate a 2D rule in (pos_along % period, depth) space that
+# produces the Greek key hook pattern. The key is four depth bands,
+# each with a different dark/light split that creates the spiral hook.
+#
+# For corners: the cell is equidistant from two edges. We pick the edge
+# that gives the most continuous pattern by using a consistent tie-breaking
+# rule (horizontal edges win over vertical).
 #
 # @identity
 #   essence: the Greek key as a per-cell mathematical rule, not a repeated tile
 #   desire: players see the cleanest meander yet — because it IS the rule
 #   critical_parameter: band_width — controls the hook depth and period
 #   triggers: instantiation or apply_grid_config
-#   emerges: the insight that all Greek key patterns are one line of modular arithmetic
+#   emerges: the insight that all Greek key patterns emerge from four band rules
 #   needs: [implemented] per-cell rule evaluation, ArrayMesh, MosaicPalette
 #   relationships: exact_meander_floor (bitmap approach), double_snake_meander (walk approach)
 #   truth: Roman mosaicists thought in rules, not tiles
@@ -59,6 +64,44 @@ func apply_grid_config(config: Dictionary) -> void:
 	_build()
 
 
+## The Greek key rule: given position along border and depth, is this cell dark?
+##
+## p = position along the border (will be taken mod period)
+## d = depth from outer edge of meander zone (0 = outermost)
+## b = band_width
+##
+## Derived from the exact_meander_floor bitmap (the proven Greek key tile):
+##   Band 0 (d = 0..b-1):    dark for p in [0, 3b)   (wide outer bar)
+##   Band 1 (d = b..2b-1):   dark for p in [0, b) and [2b, 3b)   (two vertical pillars)
+##   Band 2 (d = 2b..3b-1):  dark for p in [0, b) and [2b, 4b)   (left pillar + hook bar)
+##   Band 3 (d = 3b..4b-1):  dark for p in [0, b)   (just left pillar)
+##
+## When tiled: the right end of one period's outer bar (band 0) connects
+## to the left pillar of the next period, creating the continuous meander.
+func _is_dark_cell(p_raw: int, d: int, b: int) -> bool:
+	var period := 4 * b
+	var p := p_raw % period
+	if p < 0:
+		p += period
+
+	var band := d / b
+	if band > 3:
+		band = 3
+
+	if band == 0:
+		# Outer bar: dark for first 3/4 of period
+		return p < 3 * b
+	elif band == 1:
+		# Two vertical pillars
+		return p < b or (p >= 2 * b and p < 3 * b)
+	elif band == 2:
+		# Left pillar + hook bar extending right
+		return p < b or p >= 2 * b
+	else:
+		# Just the left pillar (vertical connector to next period's outer bar)
+		return p < b
+
+
 func _build() -> void:
 	if _mi:
 		_mi.queue_free()
@@ -67,100 +110,114 @@ func _build() -> void:
 		_body.queue_free()
 		_body = null
 
-	# Grid dimensions — cells along each axis
+	# Grid dimensions
 	var is_wide := floor_size.x >= floor_size.y
 	var long_m := maxf(floor_size.x, floor_size.y)
 	var short_m := minf(floor_size.x, floor_size.y)
 	var cell_size := long_m / float(grid_cells)
 	var gw: int = grid_cells if is_wide else int(round(short_m / cell_size))
 	var gh: int = int(round(short_m / cell_size)) if is_wide else grid_cells
-	var cs := cell_size  # shorthand
+	var cs := cell_size
 	var fw := gw * cs
 	var fh := gh * cs
 
-	var period: int = 4 * band_width
-	var half_period: int = 2 * band_width
-	var total_border: int = outer_band + border_depth  # outer solid band + meander zone
+	var total_border: int = outer_band + border_depth
 
 	var dark_verts := PackedVector3Array()
 	var light_verts := PackedVector3Array()
 	var grout_verts := PackedVector3Array()
-
-	# Meander zone boundaries (inside the outer solid band)
-	var mz_x0: int = outer_band
-	var mz_y0: int = outer_band
-	var mz_x1: int = gw - 1 - outer_band
-	var mz_y1: int = gh - 1 - outer_band
 
 	for ty in gh:
 		for tx in gw:
 			var wx := tx * cs
 			var wz := ty * cs
 
-			# Distance from each edge
 			var d_top := ty
 			var d_bot := gh - 1 - ty
 			var d_left := tx
 			var d_right := gw - 1 - tx
 			var min_dist := mini(mini(d_top, d_bot), mini(d_left, d_right))
 
-			# ── Outer solid dark band ──
+			# Outer solid dark band
 			if min_dist < outer_band:
 				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
 				continue
 
-			# ── Interior field (dark with polka dots) ──
+			# Interior field
 			if min_dist >= total_border:
 				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
 				continue
 
-			# ── Meander zone ──
-			# depth = distance from the outer edge of the meander zone
+			# Meander zone
 			var depth: int = min_dist - outer_band
 
-			# Determine which side this cell belongs to using diagonal quadrants.
-			# Coordinates relative to the meander zone rectangle.
-			var rx: int = tx - mz_x0  # 0..mz_width
-			var ry: int = ty - mz_y0  # 0..mz_height
-			var mz_w: int = mz_x1 - mz_x0  # width of meander zone rect
-			var mz_h: int = mz_y1 - mz_y0  # height of meander zone rect
+			# Determine which edge is nearest and use its parallel coordinate
+			# as pos_along. For corners (equidistant from two edges), we
+			# evaluate the rule from BOTH adjacent sides and AND the results,
+			# creating a natural L-bend where the two dark regions overlap.
+			#
+			# For TOP edge: depth = d_top - ob, pos_along = tx - ob
+			# For RIGHT edge: depth = d_right - ob, pos_along = ty - ob
+			# For BOTTOM edge: depth = d_bot - ob, pos_along = gw - 1 - ob - tx
+			# For LEFT edge: depth = d_left - ob, pos_along = gh - 1 - ob - ty
+			#
+			# Perimeter offsets make it continuous clockwise:
+			# Top -> Right -> Bottom -> Left
 
-			# Use cross-products with the diagonals to determine quadrant (side).
-			# Diagonal 1: (0,0) to (mz_w, mz_h) — cross = rx*mz_h - ry*mz_w
-			# Diagonal 2: (mz_w,0) to (0, mz_h) — cross = (mz_w-rx)*mz_h - ry*mz_w
-			var cross1: int = rx * mz_h - ry * mz_w
-			var cross2: int = (mz_w - rx) * mz_h - ry * mz_w
+			var side_w: int = gw - 2 * outer_band
+			var side_h: int = gh - 2 * outer_band
 
-			var pos_along: int = 0
+			# Check if cell is in a corner zone (equidistant from two edges)
+			var in_corner := false
+			var d_h := mini(d_top, d_bot)  # nearest horizontal edge distance
+			var d_v := mini(d_left, d_right)  # nearest vertical edge distance
+			if d_h < total_border and d_v < total_border and d_h == d_v:
+				in_corner = true
 
-			if cross1 >= 0 and cross2 >= 0:
-				# Top side: pos_along = tx relative to meander zone left
-				pos_along = rx
-			elif cross1 >= 0 and cross2 < 0:
-				# Right side: pos_along = top_width + ty relative to meander zone top
-				pos_along = mz_w + ry
-			elif cross1 < 0 and cross2 < 0:
-				# Bottom side: pos_along = top_width + right_height + distance from right
-				pos_along = mz_w + mz_h + (mz_w - rx)
+			var is_dark: bool
+
+			if in_corner:
+				# Corner zone: AND the rules from both adjacent edges.
+				# This creates the L-bend where meander turns the corner.
+				var depth_h: int = d_h - outer_band
+				var depth_v: int = d_v - outer_band
+				var pos_h: int  # pos_along for the horizontal edge
+				var pos_v: int  # pos_along for the vertical edge
+
+				if d_top <= d_bot:
+					pos_h = tx - outer_band
+				else:
+					pos_h = side_w + side_h + (gw - 1 - outer_band - tx)
+
+				if d_right <= d_left:
+					pos_v = side_w + (ty - outer_band)
+				else:
+					pos_v = 2 * side_w + side_h + (gh - 1 - outer_band - ty)
+
+				var dark_h := _is_dark_cell(pos_h, depth_h, band_width)
+				var dark_v := _is_dark_cell(pos_v, depth_v, band_width)
+				is_dark = dark_h or dark_v
 			else:
-				# Left side: pos_along = top_width + right_height + bottom_width + distance from bottom
-				pos_along = 2 * mz_w + mz_h + (mz_h - ry)
+				# Straight edge: use nearest edge
+				var pos_along: int = 0
 
-			# ── THE SQUARED SPIRAL RULE ──
-			# Instead of shifting along the perimeter (which creates diagonals),
-			# use a 2D XOR-like rule on the LOCAL coordinates within the meander zone.
-			# The Greek key is: alternate dark/light in blocks of band_width,
-			# with the phase flipping every band_width in BOTH x and y.
-			var bx: int = (rx / band_width) % 2  # which horizontal block
-			var by: int = (ry / band_width) % 2  # which vertical block
-			var is_dark: bool = (bx ^ by) == 0  # XOR creates checkerboard of blocks
+				if d_top == min_dist:
+					pos_along = tx - outer_band
+				elif d_right == min_dist:
+					pos_along = side_w + (ty - outer_band)
+				elif d_bot == min_dist:
+					pos_along = side_w + side_h + (gw - 1 - outer_band - tx)
+				else:
+					pos_along = 2 * side_w + side_h + (gh - 1 - outer_band - ty)
+
+				is_dark = _is_dark_cell(pos_along, depth, band_width)
 
 			if is_dark:
 				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
 			else:
 				light_verts = _add_rect(light_verts, wx, wz, cs, cs)
 
-	# ── Interior polka dots (light on dark field) ──
+	# Interior polka dots
 	var field_x0 := total_border
 	var field_y0 := total_border
 	var field_x1 := gw - total_border
@@ -182,7 +239,7 @@ func _build() -> void:
 			var px_z := clampf(field_y0 + base_pz + jz, field_y0 + 0.5, field_y1 - 1.5)
 			light_verts = _add_rect(light_verts, px_x * cs, px_z * cs, cs, cs)
 
-	# ── Grout lines ──
+	# Grout lines
 	if grout_width_fraction > 0.001:
 		var grout_w := cs * grout_width_fraction * 10.0
 		var half := grout_w * 0.5
@@ -191,7 +248,7 @@ func _build() -> void:
 		for gx in range(0, gw + 1):
 			grout_verts = _add_rect(grout_verts, gx * cs - half, 0.0, grout_w, fh)
 
-	# ── Y offsets to prevent z-fighting ──
+	# Y offsets for z-fighting prevention
 	for i in dark_verts.size():
 		dark_verts[i].y = 0.0
 	for i in light_verts.size():
@@ -199,7 +256,7 @@ func _build() -> void:
 	for i in grout_verts.size():
 		grout_verts[i].y = -0.001
 
-	# ── Build ArrayMesh ──
+	# Build ArrayMesh
 	var arr_mesh := ArrayMesh.new()
 	if dark_verts.size() > 0:
 		var arrays := []
@@ -234,8 +291,8 @@ func _build() -> void:
 	_body.position = Vector3(0, 0.005, 0)
 	add_child(_body)
 
-	print("[FreeMeanderFloor] Built %dx%d grid, band=%d, period=%d (%d dark, %d light, %d grout tris)" % [
-		gw, gh, band_width, period,
+	print("[FreeMeanderFloor] Built %dx%d grid, band=%d, border=%d (%d dark, %d light, %d grout tris)" % [
+		gw, gh, band_width, border_depth,
 		dark_verts.size() / 3, light_verts.size() / 3, grout_verts.size() / 3,
 	])
 

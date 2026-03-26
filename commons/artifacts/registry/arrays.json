@@ -1822,6 +1822,43 @@
 				"size_group": "compact"
 			}
 		},
+		"mirror_snake_meander": {
+			"name": "Mirror Snake Meander",
+			"lookup_name": "mirror_snake_meander",
+			"description": "Greek key meander via mirrored self-avoiding crossing snakes. Solve one quarter of the border, mirror X to complete each side, mirror Y to create the interlocking counter-snake. The crossings emerge automatically from the mirroring. Four depth bands where bands 0/3 and 1/2 are mirrors produce the classic Pompeii hook pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/mirror_snake_meander.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"mirror_symmetry"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
 		"braid_meander_floor": {
 			"name": "Braid Meander Floor",
 			"lookup_name": "braid_meander_floor",
