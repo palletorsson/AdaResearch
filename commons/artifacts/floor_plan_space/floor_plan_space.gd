@@ -17,7 +17,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
-@export var y_offset: float = -1.0  # Match ground level (grid cube top=1.0, offset=-1.0, result=0.0)
+@export var y_offset: float = -2.0  # Lower the whole scene further
 var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
