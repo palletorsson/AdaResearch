@@ -125,9 +125,12 @@ func _build_all_rooms() -> void:
 
 	var container := Node3D.new()
 	container.name = "FloorPlanRooms"
-	container.position.y = y_offset
+	# AUTO-DETECT: place the museum floor at y=0 (ground level)
+	# regardless of where the GridSystem placed this artifact
+	var auto_y: float = -global_position.y
+	container.position.y = auto_y
 	add_child(container)
-	print("FloorPlanSpace: y_offset=%s, container.y=%s, global_pos=%s" % [y_offset, container.position.y, global_position])
+	print("FloorPlanSpace: global_pos.y=%s, auto_y=%s → museum floor at y=0" % [global_position.y, auto_y])
 
 	var global_seen_edges: Dictionary = {}  # Shared across all rooms to prevent double walls
 
