@@ -283,7 +283,7 @@ func _build() -> void:
 
 	# StaticBody3D for collision
 	var body := StaticBody3D.new()
-	var col := CollisionShape3D.new()
+	#var col := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = Vector3(fw, 0.01, fh)
 	col.shape = shape

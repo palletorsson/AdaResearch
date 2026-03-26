@@ -32,7 +32,7 @@ const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/borde
 @export var circle_segments: int = 36
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -56,8 +56,8 @@ func apply_grid_config(config: Dictionary) -> void:
 func _build() -> void:
 	if _mi:
 		_mi.queue_free()
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 
 	var dark_verts := PackedVector3Array()
 	var light_verts := PackedVector3Array()
@@ -338,14 +338,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# ── StaticBody3D for collision ──
-	_body = StaticBody3D.new()
+	#_body = StaticBody3D.new()
 	var col_shape := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
 	col_shape.shape = box
 	_body.add_child(col_shape)
 	_body.position = Vector3(0, 0.0, 0)
-	add_child(_body)
+	#add_child(_body)
 
 	print("[FlowerOfLifeFloor] Built %dx%d grid, %d circles, %d petals (%d dark, %d light, %d terra, %d grout tris)" % [
 		gw, gh, centers.size(), petal_counter,

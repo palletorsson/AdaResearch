@@ -46,7 +46,7 @@ const CORNER_COLORS: Array[Color] = [
 @export_range(0.0, 1.0) var wear_level: float = 0.25
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -67,8 +67,8 @@ func _build() -> void:
 	if _mi:
 		_mi.queue_free()
 		_mi = null
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 		_body = null
 
 	var short_m := minf(floor_size.x, floor_size.y)
@@ -303,14 +303,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# StaticBody3D for collision
-	_body = StaticBody3D.new()
+	#_body = StaticBody3D.new()
 	var col_shape := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
 	col_shape.shape = box
 	_body.add_child(col_shape)
 	_body.position = Vector3(0, 0.0, 0)
-	add_child(_body)
+	#add_child(_body)
 
 	var total_tris: int = 0
 	for cv_key in color_verts:

@@ -32,7 +32,7 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 @export_range(0.0, 1.0) var wear_level: float = 0.3
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -52,8 +52,8 @@ func apply_grid_config(config: Dictionary) -> void:
 func _build() -> void:
 	if _mi:
 		_mi.queue_free()
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 
 	# Grid dimensions — border widths in tiles
 	var border_each: int = border_dark + border_light + border_inner_dark
@@ -227,14 +227,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# StaticBody3D with CollisionShape3D for floor collision
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
-	col.shape = box
-	_body.add_child(col)
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
+	#col.shape = box
+	#_body.add_child(col)
 	_body.position = Vector3(0, 0.005, 0)
-	add_child(_body)
+	#add_child(_body)
 
 	var field_w := fx1 - fx0
 	var field_h := fy1 - fy0

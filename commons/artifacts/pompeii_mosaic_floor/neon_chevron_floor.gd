@@ -20,7 +20,7 @@ class_name NeonChevronFloor
 @export var border_width: int = 1
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 const COLOR_HOT_PINK := Color(1.0, 0.078, 0.576, 1.0)    # #FF1493
 const COLOR_ELEC_BLUE := Color(0.0, 0.749, 1.0, 1.0)     # #00BFFF
@@ -58,8 +58,8 @@ func _create_neon_material(color: Color, emission: bool = false) -> StandardMate
 func _build() -> void:
 	if _mi:
 		_mi.queue_free()
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 
 	var colors: Array = [COLOR_HOT_PINK, COLOR_ELEC_BLUE, COLOR_YELLOW, COLOR_PURPLE]
 
@@ -156,14 +156,14 @@ func _build() -> void:
 	_mi.position = Vector3(-fw * 0.5, 0.005, -fh * 0.5)
 	add_child(_mi)
 
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
-	col.shape = box
-	_body.add_child(col)
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
+	#col.shape = box
+	#_body.add_child(col)
 	_body.position = Vector3(0.0, 0.0, 0.0)
-	add_child(_body)
+	#add_child(_body)
 
 	var total_tris: int = 0
 	for i in 5:

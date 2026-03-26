@@ -226,10 +226,10 @@ func _build() -> void:
 
 	# Add StaticBody3D with CollisionShape3D for floor collision
 	var body := StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
-	col.shape = box
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
+	#col.shape = box
 	body.add_child(col)
 	body.position = Vector3(0, 0.005, 0)
 	add_child(body)

@@ -126,11 +126,24 @@ func _build_all_rooms() -> void:
 	var container := Node3D.new()
 	container.name = "FloorPlanRooms"
 	# AUTO-DETECT: place the museum floor at y=0 (ground level)
-	# regardless of where the GridSystem placed this artifact
 	var auto_y: float = -global_position.y
 	container.position.y = auto_y
 	add_child(container)
-	print("FloorPlanSpace: global_pos.y=%s, auto_y=%s → museum floor at y=0" % [global_position.y, auto_y])
+	print("FloorPlanSpace: global_pos.y=%s, auto_y=%s" % [global_position.y, auto_y])
+
+	# Big floor collider spanning the entire scene
+	var grid_size: Array = _floor_plan_data.get("grid_size", [20, 20])
+	var gs_w: float = float(grid_size[0]) * cell_size if grid_size.size() > 0 else 20.0
+	var gs_h: float = float(grid_size[1]) * cell_size if grid_size.size() > 1 else 20.0
+	var floor_body := StaticBody3D.new()
+	floor_body.name = "BigFloorCollider"
+	var floor_col := CollisionShape3D.new()
+	var floor_box := BoxShape3D.new()
+	floor_box.size = Vector3(gs_w, 0.1, gs_h)
+	floor_col.shape = floor_box
+	floor_col.position = Vector3(gs_w * 0.5, auto_y - 0.05, gs_h * 0.5)
+	floor_body.add_child(floor_col)
+	add_child(floor_body)
 
 	var global_seen_edges: Dictionary = {}  # Shared across all rooms to prevent double walls
 

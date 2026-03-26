@@ -254,7 +254,7 @@ func _build() -> void:
 	var body := StaticBody3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = Vector3(fw, 0.01, fh)
-	var col := CollisionShape3D.new()
+	#var col := CollisionShape3D.new()
 	col.shape = shape
 	body.add_child(col)
 	body.position = Vector3(0, 0.005, 0)

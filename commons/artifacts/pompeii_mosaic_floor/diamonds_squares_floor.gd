@@ -30,7 +30,7 @@ const BorderMotifs = preload("res://commons/artifacts/pompeii_mosaic_floor/borde
 @export_range(0.0, 0.1) var grout_width_fraction: float = 0.06
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -49,8 +49,8 @@ func apply_grid_config(config: Dictionary) -> void:
 func _build() -> void:
 	if _mi:
 		_mi.queue_free()
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 
 	# Grid dimensions
 	var short_m := minf(floor_size.x, floor_size.y)
@@ -245,14 +245,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# ── StaticBody3D + CollisionShape3D ──
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
-	col.shape = box
-	_body.add_child(col)
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
+	#col.shape = box
+	#_body.add_child(col)
 	_body.position = Vector3(0.0, 0.0, 0.0)
-	add_child(_body)
+	#add_child(_body)
 
 	print("[DiamondsSquaresFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [
 		gw, gh,

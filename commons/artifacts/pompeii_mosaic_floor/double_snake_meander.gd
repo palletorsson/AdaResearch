@@ -36,7 +36,7 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 @export_range(0.0, 1.0) var wear_level: float = 0.3
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 # Derived from band_width
 var _border_depth: int
@@ -62,8 +62,8 @@ func _build() -> void:
 	if _mi:
 		_mi.queue_free()
 		_mi = null
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 		_body = null
 
 	var b := band_width
@@ -201,14 +201,14 @@ func _build() -> void:
 	_mi.position = Vector3(-fw * 0.5, 0.005, -fh * 0.5)
 	add_child(_mi)
 
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(fw, 0.01, fh)
-	col.shape = box
-	_body.add_child(col)
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(fw, 0.01, fh)
+	#col.shape = box
+	#_body.add_child(col)
 	_body.position = Vector3(0, 0.005, 0)
-	add_child(_body)
+	#add_child(_body)
 
 	print("[DoubleSnakeMeander] Built %dx%d grid, border=%d, band=%d, period=%d" % [gw, gh, d, b, _period])
 

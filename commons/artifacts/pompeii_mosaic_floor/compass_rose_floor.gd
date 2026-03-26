@@ -33,7 +33,7 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 @export_range(0.0, 1.0) var wear_level: float = 0.3
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -58,8 +58,8 @@ func _build() -> void:
 	if _mi:
 		_mi.queue_free()
 		_mi = null
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 		_body = null
 
 	var dark_verts := PackedVector3Array()
@@ -371,15 +371,15 @@ func _build() -> void:
 	_mi.position = Vector3(0, 0.005, 0)
 	add_child(_mi)
 
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
 	var shape := CylinderShape3D.new()
 	shape.radius = floor_radius
 	shape.height = 0.01
 	col.shape = shape
 	col.position = Vector3(0, 0.005, 0)
-	_body.add_child(col)
-	add_child(_body)
+	#_body.add_child(col)
+	#add_child(_body)
 
 	print("[CompassRoseFloor] Built 16-point star (%.2fm radius) — %d dark tris, %d light tris, %d accent tris, %d grout tris" % [
 		floor_radius,

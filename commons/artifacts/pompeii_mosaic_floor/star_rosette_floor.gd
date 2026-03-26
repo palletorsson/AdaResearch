@@ -288,7 +288,7 @@ func _build() -> void:
 
 	# Add StaticBody3D for floor collider
 	var body := StaticBody3D.new()
-	var col := CollisionShape3D.new()
+	#var col := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = Vector3(fw, 0.01, fh)
 	col.shape = shape

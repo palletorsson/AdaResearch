@@ -24,7 +24,7 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 @export_range(0.0, 1.0) var wear_level: float = 0.3
 
 var _mi: MeshInstance3D
-var _body: StaticBody3D
+#var _body: StaticBody3D
 
 
 func _ready() -> void:
@@ -42,8 +42,8 @@ func _build() -> void:
 	if _mi:
 		_mi.queue_free()
 		_mi = null
-	if _body:
-		_body.queue_free()
+	#if _body:
+		#_body.queue_free()
 		_body = null
 
 	var R := floor_radius
@@ -264,14 +264,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# ── StaticBody3D + CollisionShape3D ──
-	_body = StaticBody3D.new()
-	var col := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(R * 2.0, 0.01, R * 2.0)
-	col.shape = box
-	_body.add_child(col)
+	#_body = StaticBody3D.new()
+	#var col := CollisionShape3D.new()
+	#var box := BoxShape3D.new()
+	#box.size = Vector3(R * 2.0, 0.01, R * 2.0)
+	#col.shape = box
+	#_body.add_child(col)
 	_body.position = Vector3(0.0, 0.005, 0.0)
-	add_child(_body)
+	#add_child(_body)
 
 	print("[SanMicheleMosaicFloor] Built circular floor R=%.3f (%d dark, %d light, %d terra tris)" % [
 		R,
