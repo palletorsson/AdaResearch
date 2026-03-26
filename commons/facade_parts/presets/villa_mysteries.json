@@ -1,0 +1,196 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Villa of Mysteries (Villa dei Misteri), Pompeii — Second Style megalographic frieze room. Life-size figural panels on continuous Pompeii red ground, divided by trompe-l'oeil painted pilasters. Dark green-black socle, ochre cornices, cream upper zone with architectural vistas.",
+  "facade": {
+    "bays": 5,
+    "stories": 3,
+    "symmetry": "bilateral",
+    "total_width": 12.0,
+    "total_height": 8.0,
+    "wall_depth": 0.25
+  },
+  "bay_widths": [0.18, 0.20, 0.24, 0.20, 0.18],
+  "zones": [
+    { "row": 0, "name": "Upper",    "height_multiplier": 0.60 },
+    { "row": 1, "name": "MainZone", "height_multiplier": 2.40 },
+    { "row": 2, "name": "Socle",    "height_multiplier": 0.50 }
+  ],
+  "materials": {
+    "wall": "#8B2500",
+    "zones": {
+      "Upper":    { "color": "#F0E8D0", "type": "plaster" },
+      "MainZone": { "color": "#8B2500", "type": "plaster" },
+      "Socle":    { "color": "#1A3322", "type": "plaster" }
+    }
+  },
+  "placements": [
+
+    { "_comment": "=== UPPER ZONE — cream panels with painted architectural vistas ===" },
+
+    { "col": 0, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#C8A860", "glass_color": "#D8C8A0" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#C8A860", "glass_color": "#D8C8A0" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.012, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.025, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.10, 0.80, 0.10],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.018, "frame_depth": 0.010, "frame_color": "#C8A860", "glass_color": "#D8C8A0" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#C8A860", "glass_color": "#D8C8A0" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 0, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "cream", "frame_projection": 0.010, "panel_recess": 0.008 },
+      "frames": [
+        { "width": 0.02, "profile": "fillet", "material": "cream" }
+      ],
+      "sub_grid": {
+        "cols": [0.15, 0.70, 0.15],
+        "placements": [
+          { "col": 1, "part": "rect_window", "params": { "frame_width": 0.015, "frame_depth": 0.008, "frame_color": "#C8A860", "glass_color": "#D8C8A0" } }
+        ]
+      }
+    },
+
+    { "_comment": "=== CORNICE — ochre string course separating upper from main ===" },
+
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 5,
+      "params": { "depth": 0.02, "band_height": 0.04, "color": "#C8A860", "position": "bottom" },
+      "sub_grid": {
+        "rows": [0.30, 0.40, 0.30],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "fascia", "params": { "color": "#8B2500" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    },
+
+    { "_comment": "=== MAIN ZONE — megalographic figural bays on Pompeii red, divided by painted pilasters ===" },
+    { "_comment": "Bay layout: narrow | medium | WIDE CENTER | medium | narrow — bilateral symmetry" },
+
+    { "col": 0, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 1, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 2, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.025, "panel_recess": 0.015 },
+      "frames": [
+        { "width": 0.04, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.02, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.05, 0.90, 0.05],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 3, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+    { "col": 4, "row": 1, "part": "framed_marble_panel", "col_span": 1, "row_span": 1,
+      "params": { "panel_material": "pompeii_red", "frame_projection": 0.020, "panel_recess": 0.012 },
+      "frames": [
+        { "width": 0.03, "profile": "ogee", "material": "pompeii_red" },
+        { "width": 0.015, "profile": "fillet", "material": "gold" }
+      ],
+      "sub_grid": {
+        "cols": [0.06, 0.88, 0.06],
+        "placements": [
+          { "col": 0, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } },
+          { "col": 2, "part": "pilaster", "params": { "style": "corinthian", "fluted": true, "color": "#C8A860" } }
+        ]
+      }
+    },
+
+    { "_comment": "=== SOCLE — dark green/black band with geometric border patterns ===" },
+
+    { "col": 0, "row": 2, "part": "ashlar", "col_span": 5,
+      "params": { "material": "dark_stone", "color": "#1A3322" },
+      "sub_grid": {
+        "rows": [0.15, 0.10, 0.50, 0.10, 0.15],
+        "placements": [
+          { "row": 0, "part": "fascia", "params": { "color": "#C8A860" } },
+          { "row": 1, "part": "string_course", "params": { "depth": 0.008, "band_height": 0.010, "color": "#0F1F15" } },
+          { "row": 2, "part": "fascia", "params": { "color": "#1A3322" } },
+          { "row": 3, "part": "string_course", "params": { "depth": 0.008, "band_height": 0.010, "color": "#0F1F15" } },
+          { "row": 4, "part": "fascia", "params": { "color": "#C8A860" } }
+        ]
+      }
+    }
+  ]
+}
