@@ -473,5 +473,3 @@ func add_terrain_to_scene(parent_node: Node3D) -> void:
 		if old_parent:
 			old_parent.remove_child(collision_body)
 		parent_node.add_child(collision_body)
-
-

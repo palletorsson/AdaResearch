@@ -186,5 +186,3 @@ static func _try_set_property(obj: Object, prop: String, value) -> void:
 		if typeof(p) == TYPE_DICTIONARY and p.has("name") and str(p["name"]) == prop:
 			obj.set(prop, value)
 			return
-
-
