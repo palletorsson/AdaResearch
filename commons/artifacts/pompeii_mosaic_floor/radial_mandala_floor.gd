@@ -294,8 +294,8 @@ func _build() -> void:
 	var shape := CylinderShape3D.new()
 	shape.radius = floor_radius
 	shape.height = 0.01
-	col.shape = shape
-	col.position = Vector3(0, 0.005, 0)
+	#col.shape = shape
+	#col.position = Vector3(0, 0.005, 0)
 	#_body.add_child(col)
 	#add_child(_body)
 

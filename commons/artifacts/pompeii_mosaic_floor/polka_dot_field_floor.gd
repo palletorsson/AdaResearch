@@ -225,14 +225,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# Add StaticBody3D with CollisionShape3D for floor collision
-	var body := StaticBody3D.new()
+	#var body := StaticBody3D.new()
 	#var col := CollisionShape3D.new()
 	#var box := BoxShape3D.new()
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
-	body.add_child(col)
-	body.position = Vector3(0, 0.005, 0)
-	add_child(body)
+	#body.add_child(col)
+	#body.position = Vector3(0, 0.005, 0)
+	#add_child(body)
 
 	print("[PolkaDotFieldFloor] Built %dx%d grid, %d dots (%d dark tris, %d light tris, %d grout tris)" % [
 		gw, gh,

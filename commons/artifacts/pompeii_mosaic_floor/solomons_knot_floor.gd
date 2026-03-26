@@ -251,14 +251,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# StaticBody3D for collision
-	var body := StaticBody3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(fw, 0.01, fh)
+	#var body := StaticBody3D.new()
+	#var shape := BoxShape3D.new()
+	#shape.size = Vector3(fw, 0.01, fh)
 	#var col := CollisionShape3D.new()
-	col.shape = shape
-	body.add_child(col)
-	body.position = Vector3(0, 0.005, 0)
-	add_child(body)
+	#col.shape = shape
+	#body.add_child(col)
+	#body.position = Vector3(0, 0.005, 0)
+	#add_child(body)
 
 	print("[SolomonsKnotFloor] Built %dx%d tiles, %dx%d px grid" % [
 		tiles_x, tiles_y, gw_px, gh_px,

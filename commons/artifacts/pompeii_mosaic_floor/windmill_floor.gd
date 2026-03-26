@@ -282,14 +282,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# StaticBody3D for collision
-	var body := StaticBody3D.new()
+	#var body := StaticBody3D.new()
 	#var col := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(fw, 0.01, fh)
-	col.shape = shape
-	body.add_child(col)
-	body.position = Vector3(0, 0.0, 0)
-	add_child(body)
+	#var shape := BoxShape3D.new()
+	#shape.size = Vector3(fw, 0.01, fh)
+	#col.shape = shape
+	#body.add_child(col)
+	#body.position = Vector3(0, 0.0, 0)
+	#add_child(body)
 
 	print("[WindmillFloor] Built %dx%d units (%d dark tris, %d light tris, %d terra tris, %d grout tris)" % [
 		units_x, units_y,

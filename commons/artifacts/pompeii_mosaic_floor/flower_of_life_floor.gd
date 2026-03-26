@@ -339,10 +339,10 @@ func _build() -> void:
 
 	# ── StaticBody3D for collision ──
 	#_body = StaticBody3D.new()
-	var col_shape := CollisionShape3D.new()
+	#var col_shape := CollisionShape3D.new()
 	#var box := BoxShape3D.new()
 	#box.size = Vector3(fw, 0.01, fh)
-	col_shape.shape = box
+	#col_shape.shape = box
 	#_body.add_child(col_shape)
 	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)

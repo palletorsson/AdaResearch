@@ -287,14 +287,14 @@ func _build() -> void:
 	add_child(_mi)
 
 	# Add StaticBody3D for floor collider
-	var body := StaticBody3D.new()
+	#var body := StaticBody3D.new()
 	#var col := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(fw, 0.01, fh)
-	col.shape = shape
-	body.add_child(col)
-	body.position = Vector3(0, 0.005, 0)
-	add_child(body)
+	#var shape := BoxShape3D.new()
+	#shape.size = Vector3(fw, 0.01, fh)
+	#col.shape = shape
+	#body.add_child(col)
+	#body.position = Vector3(0, 0.005, 0)
+	#add_child(body)
 
 	print("[StarRosetteFloor] Built %dx%d grid, %d stars (%d dark tris, %d light tris, %d grout tris)" % [
 		gw, gh, stars_x * stars_y,
