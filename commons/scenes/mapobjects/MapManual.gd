@@ -587,8 +587,10 @@ func _connect_controller_signals() -> void:
 
 func _on_controller_button_pressed(button: String, controller: XRController3D) -> void:
 	# Toggle from left-hand BY button (Y on Quest). X is now used for catalyst firing.
-	if button == "by_button" and controller and controller.tracker == &"left_hand":
-		toggle_manual()
+	# TEMPORARILY DISABLED: Y button now used for flight mode
+	# if button == "by_button" and controller and controller.tracker == &"left_hand":
+	#	toggle_manual()
+	pass
 
 func _input(event: InputEvent) -> void:
 	# Desktop fallback: M key toggles manual
