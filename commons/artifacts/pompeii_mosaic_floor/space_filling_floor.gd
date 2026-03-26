@@ -26,8 +26,8 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 ## 0 = Greek Key Meander, 1 = Hilbert Curve, 2 = Peano Curve, 3 = Penrose-ish
 @export var mode: int = 0
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
-@export var grid_cells: int = 80
-@export var border_depth: int = 16
+@export var grid_cells: int = 120
+@export var border_depth: int = 22
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var grout_color: Color = MosaicPalette.GROUT
