@@ -162,30 +162,44 @@ func _build() -> void:
 
 	for ty in gh:
 		for tx in gw:
-			# ── Per-tile jitter (mosaic, not grid) ──
+			# ── MOSAIC STONE placement ──
+			# Each stone is jittered in position and size.
+			# CRUCIALLY: the pattern decision (dark/light) is made at the
+			# JITTERED position, not the grid position. This means the
+			# pattern boundary wobbles with the stones — like real mosaic
+			# where the craftsman places each stone and THEN decides its color
+			# based on where it actually landed.
 			var hash_val: float = _hash_2d(tx, ty)
 			var hash_val2: float = _hash_2d(tx + 73, ty + 31)
-			var jx: float = (hash_val - 0.5) * cs * 0.15  # position jitter +-7.5%
-			var jz: float = (hash_val2 - 0.5) * cs * 0.15
-			var size_jitter: float = 0.85 + hash_val * 0.3  # size 85%-115%
+			var jx: float = (hash_val - 0.5) * cs * 0.5  # position jitter +-25%
+			var jz: float = (hash_val2 - 0.5) * cs * 0.5
+			var size_jitter: float = 0.7 + hash_val * 0.6  # size 70%-130%
 			var tile_size: float = cs * size_jitter
+			# Stone center in WORLD coordinates (jittered)
 			var wx := tx * cs + jx
 			var wz := ty * cs + jz
+			# Use the JITTERED world position for the pattern decision
+			# Convert back to grid-like coordinates for the rule
+			var rule_tx: float = wx / cs
+			var rule_ty: float = wz / cs
 
-			var d_top := ty
-			var d_bot := gh - 1 - ty
-			var d_left := tx
-			var d_right := gw - 1 - tx
+			# Use JITTERED coordinates for pattern decision
+			var rtx: int = clampi(int(round(rule_tx)), 0, gw - 1)
+			var rty: int = clampi(int(round(rule_ty)), 0, gh - 1)
+			var d_top := rty
+			var d_bot := gh - 1 - rty
+			var d_left := rtx
+			var d_right := gw - 1 - rtx
 			var min_dist := mini(mini(d_top, d_bot), mini(d_left, d_right))
 
 			# Outer solid dark band
 			if min_dist < outer_band:
-				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
+				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
 				continue
 
 			# Interior field
 			if min_dist >= total_border:
-				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
+				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
 				continue
 
 			# Meander zone
@@ -225,14 +239,14 @@ func _build() -> void:
 				var pos_v: int  # pos_along for the vertical edge
 
 				if d_top <= d_bot:
-					pos_h = tx - outer_band
+					pos_h = rtx - outer_band
 				else:
-					pos_h = side_w + side_h + (gw - 1 - outer_band - tx)
+					pos_h = side_w + side_h + (gw - 1 - outer_band - rtx)
 
 				if d_right <= d_left:
-					pos_v = side_w + (ty - outer_band)
+					pos_v = side_w + (rty - outer_band)
 				else:
-					pos_v = 2 * side_w + side_h + (gh - 1 - outer_band - ty)
+					pos_v = 2 * side_w + side_h + (gh - 1 - outer_band - rty)
 
 				var dark_h := _is_dark_cell(pos_h, depth_h, band_width)
 				var dark_v := _is_dark_cell(pos_v, depth_v, band_width)
@@ -242,13 +256,13 @@ func _build() -> void:
 				var pos_along: int = 0
 
 				if d_top == min_dist:
-					pos_along = tx - outer_band
+					pos_along = rtx - outer_band
 				elif d_right == min_dist:
-					pos_along = side_w + (ty - outer_band)
+					pos_along = side_w + (rty - outer_band)
 				elif d_bot == min_dist:
-					pos_along = side_w + side_h + (gw - 1 - outer_band - tx)
+					pos_along = side_w + side_h + (gw - 1 - outer_band - rtx)
 				else:
-					pos_along = 2 * side_w + side_h + (gh - 1 - outer_band - ty)
+					pos_along = 2 * side_w + side_h + (gh - 1 - outer_band - rty)
 
 				is_dark = _is_dark_cell(pos_along, depth, band_width)
 
