@@ -26,8 +26,8 @@ class_name DoubleSnakeMeander
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
 
 @export var floor_size: Vector2 = Vector2(1.2, 0.9)
-@export var band_width: int = 5
-@export var grid_cells: int = 80
+@export var band_width: int = 3
+@export var grid_cells: int = 144
 @export var dot_spacing: int = 4
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
