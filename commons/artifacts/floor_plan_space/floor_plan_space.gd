@@ -896,14 +896,15 @@ func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	mesh_inst.material_override = mat
 	wall_root.add_child(mesh_inst)
 
-	var body := StaticBody3D.new()
-	body.name = "WallCollision"
-	var col_shape := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(width, height, wall_thickness)
-	col_shape.shape = shape
-	body.add_child(col_shape)
-	wall_root.add_child(body)
+	# Wall colliders disabled — players can walk through walls for now
+	#var body := StaticBody3D.new()
+	#body.name = "WallCollision"
+	#var col_shape := CollisionShape3D.new()
+	#var shape := BoxShape3D.new()
+	#shape.size = Vector3(width, height, wall_thickness)
+	#col_shape.shape = shape
+	#body.add_child(col_shape)
+	#wall_root.add_child(body)
 
 
 # ── Freestanding exhibit walls ─────────────────────────────────────────────
