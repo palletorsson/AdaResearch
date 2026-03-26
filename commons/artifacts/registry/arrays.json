@@ -1785,6 +1785,43 @@
 				"size_group": "compact"
 			}
 		},
+		"free_meander_floor": {
+			"name": "Free Meander Floor",
+			"lookup_name": "free_meander_floor",
+			"description": "Rule-based Greek key meander — no tiles, no turtle, no bitmap. Each cell decides its own color from ONE modular arithmetic rule applied to its global position. The entire pattern is: territory = ((pos_along + ring * band_width) % period) < half_period. Dark field interior with polka dots.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/free_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"modular_arithmetic"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
 		"braid_meander_floor": {
 			"name": "Braid Meander Floor",
 			"lookup_name": "braid_meander_floor",
