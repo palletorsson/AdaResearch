@@ -141,11 +141,36 @@ func _build() -> void:
 	var dark_verts := PackedVector3Array()
 	var light_verts := PackedVector3Array()
 	var grout_verts := PackedVector3Array()
+	var walk_verts := PackedVector3Array()  # random walk trail
+
+	# ── Random walk over ALL tiles ──
+	# Proves we can touch every stone independently
+	var walk_visited := {}
+	var walk_x: int = gw / 2
+	var walk_y: int = gh / 2
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 42
+	for _step in 800:
+		walk_visited[walk_x * 10000 + walk_y] = true
+		# Random direction: 0=right, 1=down, 2=left, 3=up
+		var dir: int = rng.randi_range(0, 3)
+		match dir:
+			0: walk_x = mini(walk_x + 1, gw - 1)
+			1: walk_y = mini(walk_y + 1, gh - 1)
+			2: walk_x = maxi(walk_x - 1, 0)
+			3: walk_y = maxi(walk_y - 1, 0)
 
 	for ty in gh:
 		for tx in gw:
-			var wx := tx * cs
-			var wz := ty * cs
+			# ── Per-tile jitter (mosaic, not grid) ──
+			var hash_val: float = _hash_2d(tx, ty)
+			var hash_val2: float = _hash_2d(tx + 73, ty + 31)
+			var jx: float = (hash_val - 0.5) * cs * 0.15  # position jitter +-7.5%
+			var jz: float = (hash_val2 - 0.5) * cs * 0.15
+			var size_jitter: float = 0.85 + hash_val * 0.3  # size 85%-115%
+			var tile_size: float = cs * size_jitter
+			var wx := tx * cs + jx
+			var wz := ty * cs + jz
 
 			var d_top := ty
 			var d_bot := gh - 1 - ty
@@ -227,10 +252,14 @@ func _build() -> void:
 
 				is_dark = _is_dark_cell(pos_along, depth, band_width)
 
-			if is_dark:
-				dark_verts = _add_rect(dark_verts, wx, wz, cs, cs)
+			# Check if random walk visited this cell
+			var walk_key: int = tx * 10000 + ty
+			if walk_visited.has(walk_key):
+				walk_verts = _add_rect(walk_verts, wx, wz, tile_size, tile_size)
+			elif is_dark:
+				dark_verts = _add_rect(dark_verts, wx, wz, tile_size, tile_size)
 			else:
-				light_verts = _add_rect(light_verts, wx, wz, cs, cs)
+				light_verts = _add_rect(light_verts, wx, wz, tile_size, tile_size)
 
 	# Interior polka dots
 	var field_x0 := total_border
@@ -268,6 +297,8 @@ func _build() -> void:
 		dark_verts[i].y = 0.0
 	for i in light_verts.size():
 		light_verts[i].y = 0.001
+	for i in walk_verts.size():
+		walk_verts[i].y = 0.003  # walk trail on TOP of everything
 	for i in grout_verts.size():
 		grout_verts[i].y = -0.001
 
@@ -285,6 +316,12 @@ func _build() -> void:
 		arrays[Mesh.ARRAY_VERTEX] = light_verts
 		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_light, wear_level))
+	if walk_verts.size() > 0:
+		var arrays := []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = walk_verts
+		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(MosaicPalette.TERRACOTTA, wear_level))
 	if grout_verts.size() > 0:
 		var arrays := []
 		arrays.resize(Mesh.ARRAY_MAX)
