@@ -254,7 +254,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.0, 0.0)  # Centered since mesh is centered
+	#_body.position = Vector3(0.0, 0.0, 0.0)  # Centered since mesh is centered
 	#add_child(_body)
 
 	print("[BasketWeaveFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [

@@ -55,7 +55,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	# Grid dimensions
 	var border_each: int = 0
@@ -301,7 +301,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0, 0.005, 0)
+	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
 	print("[DiamondLatticeFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [

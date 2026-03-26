@@ -57,7 +57,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	# ── Grid dimensions ──
 	# Border structure (outside→in): dark_outer(1) + guilloche(4) + dark_inner(1) = 6 cells each side
@@ -250,7 +250,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.0, 0.0)
+	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
 	print("[GuillocheBorderFloor] Built %dx%d grid, border=%d cells/side, panel=%dx%d" % [

@@ -60,7 +60,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	# Border total width in tile units
 	var border_each: int = 0
@@ -354,8 +354,8 @@ func _build() -> void:
 	#var box := BoxShape3D.new()
 	#box.size = Vector3(fw, 0.01, fh)
 	col_shape.shape = box
-	_body.add_child(col_shape)
-	_body.position = Vector3(0, 0.0, 0)
+	#_body.add_child(col_shape)
+	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)
 
 	print("[PeltaShieldFloor] Built %dx%d grid, radius=%.3f (%d dark, %d light, %d terra, %d grout tris)" % [

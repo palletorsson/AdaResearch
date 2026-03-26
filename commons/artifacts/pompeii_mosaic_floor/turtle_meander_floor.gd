@@ -214,7 +214,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	# Grid dimensions
 	# The meander tooth goes s-1 cells deep; add 1 for the edge line itself
@@ -456,7 +456,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.0, 0.0)
+	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
 	var mode_names: Array[String] = ["Greek Key Meander", "Hilbert Curve", "Peano Curve"]

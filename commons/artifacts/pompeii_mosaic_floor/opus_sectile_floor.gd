@@ -69,7 +69,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	var short_m := minf(floor_size.x, floor_size.y)
 	var long_m := maxf(floor_size.x, floor_size.y)
@@ -308,8 +308,8 @@ func _build() -> void:
 	#var box := BoxShape3D.new()
 	#box.size = Vector3(fw, 0.01, fh)
 	col_shape.shape = box
-	_body.add_child(col_shape)
-	_body.position = Vector3(0, 0.0, 0)
+	#_body.add_child(col_shape)
+	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)
 
 	var total_tris: int = 0

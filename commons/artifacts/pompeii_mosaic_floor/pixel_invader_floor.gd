@@ -178,7 +178,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.0, 0.0)
+	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
 	print("[PixelInvaderFloor] Built %dx%d grid (%d black tris, %d green tris)" % [

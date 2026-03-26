@@ -44,7 +44,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	var R := floor_radius
 	var dark_verts := PackedVector3Array()
@@ -270,7 +270,7 @@ func _build() -> void:
 	#box.size = Vector3(R * 2.0, 0.01, R * 2.0)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.005, 0.0)
+	#_body.position = Vector3(0.0, 0.005, 0.0)
 	#add_child(_body)
 
 	print("[SanMicheleMosaicFloor] Built circular floor R=%.3f (%d dark, %d light, %d terra tris)" % [

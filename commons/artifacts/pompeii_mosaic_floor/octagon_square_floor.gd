@@ -282,7 +282,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0.0, 0.0, 0.0)
+	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
 	print("[OctagonSquareFloor] Built %dx%d grid, pitch=%.4f, oct_side=%.4f (%d dark, %d light, %d terra, %d grout tris)" % [

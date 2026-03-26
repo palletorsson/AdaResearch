@@ -310,7 +310,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	# Grid dimensions
 	var border_each: int = 0
@@ -468,7 +468,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0, 0.005, 0)
+	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
 	print("[LabyrinthFloor] Built %dx%d grid, labyrinth %dx%d (%d dark tris, %d light tris, %d grout tris)" % [

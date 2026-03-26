@@ -60,7 +60,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	var dark_verts := PackedVector3Array()
 	var light_verts := PackedVector3Array()

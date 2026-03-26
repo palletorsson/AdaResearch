@@ -64,7 +64,7 @@ func _build() -> void:
 		_mi = null
 	#if _body:
 		#_body.queue_free()
-		_body = null
+		#_body = null
 
 	var b := band_width
 	# Border depth = 4*b (fits exactly one spiral depth)
@@ -207,7 +207,7 @@ func _build() -> void:
 	#box.size = Vector3(fw, 0.01, fh)
 	#col.shape = box
 	#_body.add_child(col)
-	_body.position = Vector3(0, 0.005, 0)
+	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
 	print("[DoubleSnakeMeander] Built %dx%d grid, border=%d, band=%d, period=%d" % [gw, gh, d, b, _period])
