@@ -25,9 +25,9 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 
 ## 0 = Greek Key Meander, 1 = Hilbert Curve, 2 = Peano Curve, 3 = Penrose-ish
 @export var mode: int = 0
-@export var floor_size: Vector2 = Vector2(1.2, 1.2)
-@export var grid_cells: int = 48
-@export var border_depth: int = 8
+@export var floor_size: Vector2 = Vector2(1.2, 0.9)
+@export var grid_cells: int = 80
+@export var border_depth: int = 16
 @export var color_dark: Color = MosaicPalette.DARK
 @export var color_light: Color = MosaicPalette.LIGHT
 @export var grout_color: Color = MosaicPalette.GROUT
@@ -134,20 +134,24 @@ static func _make_key_bitmap(d: int) -> Array:
 		row.fill(false)
 		tile.append(row)
 
-	# Helper: draw a horizontal or vertical line on the tile
+	# Helper: draw a horizontal or vertical line on the tile (3 cells wide)
 	var _hline := func(y: int, x0: int, x1: int) -> void:
 		var lo: int = mini(x0, x1)
 		var hi: int = maxi(x0, x1)
-		for x in range(lo, hi + 1):
-			if x >= 0 and x < w and y >= 0 and y < d:
-				tile[y][x] = true
+		for dy in 3:
+			var yy: int = y + dy
+			for x in range(lo, hi + 1):
+				if x >= 0 and x < w and yy >= 0 and yy < d:
+					tile[yy][x] = true
 
 	var _vline := func(x: int, y0: int, y1: int) -> void:
 		var lo: int = mini(y0, y1)
 		var hi: int = maxi(y0, y1)
-		for y in range(lo, hi + 1):
-			if x >= 0 and x < w and y >= 0 and y < d:
-				tile[y][x] = true
+		for dx in 3:
+			var xx: int = x + dx
+			for y in range(lo, hi + 1):
+				if xx >= 0 and xx < w and y >= 0 and y < d:
+					tile[y][xx] = true
 
 	# Trace the squared spiral via line segments.
 	# Start at (0, d-1). The spiral goes:
@@ -169,10 +173,11 @@ static func _make_key_bitmap(d: int) -> Array:
 	_hline.call(cy, cx, rgt)
 	cx = rgt
 
-	# Spiral inward
+	# Spiral inward (step=4 for 3-wide lines + 1 gap)
+	var step: int = 4
 	while true:
-		# Seg 3: Down the right edge, stop 2 from bottom
-		var down_to: int = bot - 2
+		# Seg 3: Down the right edge, stop step from bottom
+		var down_to: int = bot - step
 		if down_to <= top:
 			# No room for more spiral — just go to bottom and exit
 			_vline.call(cx, cy, bot)
@@ -181,15 +186,15 @@ static func _make_key_bitmap(d: int) -> Array:
 		_vline.call(cx, cy, down_to)
 		cy = down_to
 
-		# Seg 4: Left, stop 2 from left edge
-		var left_to: int = lft + 2
+		# Seg 4: Left, stop step from left edge
+		var left_to: int = lft + step
 		if left_to > rgt:
 			break
 		_hline.call(cy, cx, left_to)
 		cx = left_to
 
-		# Seg 5: Up to inner top (top + 2)
-		var up_to: int = top + 2
+		# Seg 5: Up to inner top (top + step)
+		var up_to: int = top + step
 		if up_to >= cy:
 			# Exit: go down and right
 			_vline.call(cx, cy, bot)
@@ -198,19 +203,19 @@ static func _make_key_bitmap(d: int) -> Array:
 		_vline.call(cx, cy, up_to)
 		cy = up_to
 
-		# Seg 6: Right to inner right (rgt - 2)
-		var right_to: int = rgt - 2
+		# Seg 6: Right to inner right (rgt - step)
+		var right_to: int = rgt - step
 		if right_to <= cx:
 			break
 		_hline.call(cy, cx, right_to)
 		cx = right_to
 
 		# Shrink bounds
-		top += 2
-		bot -= 2
-		lft += 2
-		rgt -= 2
-		if bot - top < 2 or rgt - lft < 2:
+		top += step
+		bot -= step
+		lft += step
+		rgt -= step
+		if bot - top < step or rgt - lft < step:
 			break
 
 	# Exit: go down to bottom row, then right to exit
