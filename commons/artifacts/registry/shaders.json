@@ -1034,6 +1034,40 @@
 			"tags": [
 				"shader"
 			]
+		},
+		"science_screen": {
+			"name": "Science Screen",
+			"lookup_name": "science_screen",
+			"description": "Large VR display showing 2D abstractions of nearby 3D artifacts. Detects grid-aware artifacts and renders simplified pixel-grid views with algorithm name, dimensions, and cell stats. The meeting point of 2D and 3D — split consciousness between body experience and visual understanding.",
+			"scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+			"category": "shaders",
+			"tags": [
+				"display",
+				"screen",
+				"viewport",
+				"2d",
+				"abstraction",
+				"reflection",
+				"grid",
+				"configurable"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "patterngeneration",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			]
 		}
 	}
 }
