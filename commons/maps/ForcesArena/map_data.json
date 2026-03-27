@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "The grand finale — three massive arenas for drone combat, physics destruction, and a curated exhibition gallery of all vector and forces knowledge, connected by long-range jump pads.", "dimensions": {"depth": 34, "max_height": 6, "width": 30}, "format": "json", "lookup_name": "ForcesArena", "metadata": {"category": "forces", "difficulty": "advanced", "estimated_time": "15-25 minutes", "learning_objectives": ["Drone control and vector application", "Physics destruction and force visualization", "Exhibition gallery of all vector operations", "Combat integration with forces knowledge"], "spatial_temperature": 0.5}, "name": "Forces Arena: Combat, Destruction & Exhibition", "title": "Combat Arena", "version": "1.0"},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Return to lab", "name": "Exit", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
 	"settings": {"auto_reveal_on_entry": true, "background": {"color": [0.15, 0.2, 0.4], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "all_visible", "show_grid": true},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Return to lab", "name": "Exit", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"structure": [
 			["1", "1", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
@@ -58,7 +58,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "jp:6:28:12", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

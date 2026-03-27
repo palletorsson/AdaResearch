@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "A gallery showcasing all vector mathematics examples", "dimensions": {"depth": 20, "max_height": 4, "width": 13}, "format": "json", "lookup_name": "Vector_Exhibition", "metadata": {"category": "vectors", "difficulty": "overview", "estimated_time": "15-30 minutes"}, "name": "Vector Exhibition", "version": "1.2"},
+	"utility_definitions": {"t": {"description": "Continue to next step", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.95, 0.85], "direction": [-0.3, -0.8, -0.3], "enabled": true, "energy": 1.0}},
 	"settings": {"auto_reveal_on_entry": true, "background": {"color": [0.15, 0.2, 0.3], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "visible", "show_grid": true},
-	"utility_definitions": {"t": {"description": "Continue to next step", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -56,7 +56,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

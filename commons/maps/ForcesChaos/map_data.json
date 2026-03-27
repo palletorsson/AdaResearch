@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "Two islands of chaos and complexity — n-body simulations and strange attractors — connected by a long-range jump pad across the void.", "dimensions": {"depth": 19, "max_height": 6, "width": 22}, "format": "json", "lookup_name": "ForcesChaos", "metadata": {"category": "forces", "difficulty": "advanced", "estimated_time": "8-12 minutes", "learning_objectives": ["Three-body problem and n-body simulation", "Two-body attraction and orbital dynamics", "Chaos attractors and strange dynamics", "Force-directed systems"], "spatial_temperature": 0.45}, "name": "Forces Chaos: N-Body & Strange Attractors", "title": "N-Body and Chaos", "version": "1.0"},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.35, 0.35, 0.45], "ambient_energy": 0.5, "directional_light": {"color": [1.0, 0.85, 0.7], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.0}},
 	"settings": {"auto_reveal_on_entry": false, "background": {"color": [0.12, 0.15, 0.35], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "all_visible", "show_grid": true},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
@@ -35,7 +35,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", "jp:17:13:10", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", "s", "sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

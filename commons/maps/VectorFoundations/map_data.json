@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "Three islands of vector fundamentals — components, addition, and subtraction — connected by bridges across the void. Pick up the catalyst to begin your forces training.", "dimensions": {"depth": 16, "max_height": 6, "width": 22}, "format": "json", "lookup_name": "VectorFoundations", "metadata": {"category": "vectors", "difficulty": "beginner", "estimated_time": "8-12 minutes", "learning_objectives": ["Vector magnitude and direction", "Basis vectors (i, j, k)", "Vector addition: head-to-tail, parallelogram law", "Vector subtraction: relative position and displacement"], "spatial_temperature": 0.35}, "name": "Vector Foundations: Components, Addition & Subtraction", "title": "Components and Addition", "version": "1.0"},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
 	"settings": {"auto_reveal_on_entry": false, "background": {"color": [0.15, 0.2, 0.4], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "all_visible", "show_grid": true},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1"],
@@ -31,7 +31,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "br:z:2", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

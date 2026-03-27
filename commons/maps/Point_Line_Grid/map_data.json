@@ -1,7 +1,7 @@
 {
 	"map_info": {"name": "The Grid Trace", "lookup_name": "Point_Line_Grid", "description": "The Grid provides the stable structure of space; the Trace records what happens within it. Where the Line reduces movement to an efficient relation, the Trace accumulates duration—sequence, hesitation, deviation. As a body moves, positions are recorded against the grid, forming a temporary history. Yet this history is bounded: memory is finite, motion is sampled, and deviation is measured relative to fixed frames. The Trace resists reduction, but only from within the grid that enables its capture, leaving a remainder that cannot be fully contained.", "description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.", "version": "1.0", "format": "json", "dimensions": {"width": 8, "depth": 14, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "tutorial", "estimated_time": "3-4 minutes", "learning_objectives": ["Grid structure", "Trace recording", "Coordinate system politics"]}, "title": "Grid Quantizes Movement"},
-	"documentation": {"summary": "Point_Line_Grid - Grid and Trace Space", "layout": "8x14 grid with central void and extended south runway.", "objective": "Combine grid structure with trace recording; addressable space meets duration.", "key_elements": ["`player_trace` at (0,0)", "`grid_lines` at (4,3)", "`dark_sphere` enclosure at (3,4)", "`grab_sphere_point_snap` at (2,8)", "Teleporter `t` at (4,8)", "Floating text: the_grid/the_trace"]},
 	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"documentation": {"summary": "Point_Line_Grid - Grid and Trace Space", "layout": "8x14 grid with central void and extended south runway.", "objective": "Combine grid structure with trace recording; addressable space meets duration.", "key_elements": ["`player_trace` at (0,0)", "`grid_lines` at (4,3)", "`dark_sphere` enclosure at (3,4)", "`grab_sphere_point_snap` at (2,8)", "Teleporter `t` at (4,8)", "Floating text: the_grid/the_trace"]},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
 	"settings": {"enter_type": "I", "cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
 	"layers": {
@@ -29,7 +29,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "ds", " ", " ", " "],
 			[" ", " ", " ", " ", "t", " ", " ", "an:-90"],
 			[" ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " "],

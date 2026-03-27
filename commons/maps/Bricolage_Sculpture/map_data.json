@@ -1,7 +1,7 @@
 {
 	"map_info": {"name": "Bricolage: The Sculpture", "lookup_name": "Bricolage_Sculpture", "description": "Balance discoveryâ€”sculpture as negotiation with gravity, meaning through relation", "version": "1.0", "format": "json", "dimensions": {"width": 13, "depth": 13, "max_height": 3}, "title": "Balance Without Blueprint", "metadata": {"difficulty": "intermediate", "category": "bricolage", "estimated_time": "6-7 minutes", "learning_objectives": ["Sculpture as balance discovery", "Counterweight and tension", "Meaning through relation"]}},
-	"documentation": {"summary": "Bricolage_Sculpture - Balance Without Blueprint", "layout": "13Ã—13 gallery space with sculpture demonstrations", "objective": "Discover sculpture through balanceâ€”no function except standing, meaning emerges from relations", "key_elements": ["Balanced sculpture examples", "Counterweight demonstration", "Interactive balance builder"]},
 	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to Dome", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 4.5}}},
+	"documentation": {"summary": "Bricolage_Sculpture - Balance Without Blueprint", "layout": "13Ã—13 gallery space with sculpture demonstrations", "objective": "Discover sculpture through balanceâ€”no function except standing, meaning emerges from relations", "key_elements": ["Balanced sculpture examples", "Counterweight demonstration", "Interactive balance builder"]},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.45], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.95, 0.9], "energy": 1.2}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "visible", "background": {"type": "sky", "color": [0.2, 0.2, 0.25]}},
 	"layers": {
@@ -27,7 +27,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

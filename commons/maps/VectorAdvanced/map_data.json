@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "Four islands of advanced vector applications — torque, dynamic simulations, steering behaviors, and projectile throwing — connected by a bridge network across the void.", "dimensions": {"depth": 19, "max_height": 6, "width": 22}, "format": "json", "lookup_name": "VectorAdvanced", "metadata": {"category": "vectors", "difficulty": "advanced", "estimated_time": "10-15 minutes", "learning_objectives": ["Torque and rotational mechanics", "Bouncing and random acceleration", "Steering behavior and attraction forces", "Projectile trajectories and throwing vectors"], "spatial_temperature": 0.35}, "name": "Vector Advanced: Torque, Dynamics & Throwing", "title": "Torque and Throwing", "version": "1.0"},
+	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
 	"settings": {"auto_reveal_on_entry": false, "background": {"color": [0.15, 0.2, 0.4], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "all_visible", "show_grid": true},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next map", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1"],
@@ -35,7 +35,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "br:z:2", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "br:z:2", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "br:x:7", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

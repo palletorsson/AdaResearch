@@ -1,7 +1,7 @@
 {
 	"map_info": {"name": "Puzzle 03: Rotate - The Turner", "lookup_name": "gridagent_puzzle03_rotate", "description": "Learn ROTATE: Spin structures to match target orientation. This teaches: 'I can change orientation.'", "version": "1.0", "format": "json", "dimensions": {"width": 11, "depth": 11, "max_height": 3}, "metadata": {"difficulty": "tutorial", "category": "gridagent_tutorial", "tier": "3_rotate", "estimated_time": "5 minutes", "learning_objective": "Understand algorithmic transformation - rotation"}},
-	"documentation": {"summary": "Puzzle 03 - ROTATE Tier: Rotate structures to match target pattern", "layout": "L-shaped structures in wrong orientations", "objective": "Use ROTATE agent to spin structures 90° until they align", "solution": "Agent rotates L-shapes to create continuous path"},
 	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Puzzle", "properties": {"action": "next_in_sequence"}}},
+	"documentation": {"summary": "Puzzle 03 - ROTATE Tier: Rotate structures to match target pattern", "layout": "L-shaped structures in wrong orientations", "objective": "Use ROTATE agent to spin structures 90° until they align", "solution": "Agent rotates L-shapes to create continuous path"},
 	"artifact_definitions": {"algo_gun": {"scene": "res://algorithms/forces/algo_gun.tscn", "name": "Algo-Gun"}},
 	"lighting": {"ambient_color": [0.9, 0.7, 0.5], "ambient_energy": 1.0, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.3], "color": [1.0, 0.95, 0.85], "energy": 1.5}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0},
@@ -25,7 +25,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

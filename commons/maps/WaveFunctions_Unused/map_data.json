@@ -1,7 +1,7 @@
 {
 	"map_info": {"name": "Random Algorithms Arena", "lookup_name": "WaveFunctions_Unused", "description": "12x12 grid with 8x8 middle area for algorithm demonstrations", "version": "1.0", "format": "json", "dimensions": {"width": 13, "depth": 14, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "algorithms", "estimated_time": "5-7 minutes", "learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]}},
-	"documentation": {"summary": "WaveFunctions Standing Wave Patterns", "layout": "13x14 observation floor with annotation and scoring kiosks flanking the standing wave array.", "objective": "Study interference nodes using the standing wave visualizer before concluding the module.", "key_elements": ["Spawn `s` at the northern entry", "`standing_waves` array at center stage", "Annotation cube `an` and score cube `sp` near the southern exit", "Teleporter `t` to advance"]},
 	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
+	"documentation": {"summary": "WaveFunctions Standing Wave Patterns", "layout": "13x14 observation floor with annotation and scoring kiosks flanking the standing wave array.", "objective": "Study interference nodes using the standing wave visualizer before concluding the module.", "key_elements": ["Spawn `s` at the northern entry", "`standing_waves` array at center stage", "Annotation cube `an` and score cube `sp` near the southern exit", "Teleporter `t` to advance"]},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
 	"layers": {
@@ -27,7 +27,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

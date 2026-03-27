@@ -1,7 +1,7 @@
 {
 	"map_info": {"name": "Bricolage: Constraints", "lookup_name": "Bricolage_Constraints", "description": "What pushes backâ€”gravity, balance, connectivity, and the discovery of structure", "version": "1.0", "format": "json", "dimensions": {"width": 13, "depth": 15, "max_height": 3}, "title": "What Pushes Back", "metadata": {"difficulty": "intermediate", "category": "bricolage", "estimated_time": "6-7 minutes", "learning_objectives": ["Constraint literacy", "Gravity, balance, connectivity", "Structure emerges when constraints satisfied"]}},
-	"documentation": {"summary": "Bricolage_Constraints - What Pushes Back", "layout": "13Ã—15 demonstration space with constraint failure/success demonstrations", "objective": "Learn to read constraintsâ€”understand what pushes back and why", "key_elements": ["Gravity demonstration (floating vs supported)", "Balance demonstration (tipping vs stable)", "Connectivity demonstration (falling apart vs bonded)", "Triangulation demonstration (racking vs rigid)"]},
 	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to Chair Assembly", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 4.5}}},
+	"documentation": {"summary": "Bricolage_Constraints - What Pushes Back", "layout": "13Ã—15 demonstration space with constraint failure/success demonstrations", "objective": "Learn to read constraintsâ€”understand what pushes back and why", "key_elements": ["Gravity demonstration (floating vs supported)", "Balance demonstration (tipping vs stable)", "Connectivity demonstration (falling apart vs bonded)", "Triangulation demonstration (racking vs rigid)"]},
 	"lighting": {"ambient_color": [0.45, 0.4, 0.4], "ambient_energy": 0.65, "directional_light": {"enabled": true, "direction": [-0.3, -0.8, -0.3], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "visible", "background": {"type": "sky", "color": [0.22, 0.2, 0.2]}},
 	"layers": {
@@ -30,7 +30,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

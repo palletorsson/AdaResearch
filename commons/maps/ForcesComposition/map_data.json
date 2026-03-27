@@ -1,8 +1,8 @@
 {
 	"map_info": {"description": "Multiple forces on one body, work as dot product, energy conservation", "dimensions": {"depth": 14, "max_height": 3, "width": 14}, "format": "json", "lookup_name": "ForcesComposition", "metadata": {"category": "vectors", "difficulty": "intermediate", "estimated_time": "10-20 minutes", "learning_objectives": ["See all vector operations computed simultaneously", "Understand relationships between operations", "Build intuition through direct manipulation"], "spatial_temperature": 0.35}, "name": "ForcesComposition", "title": "Superposition and Energy", "version": "1.0"},
+	"utility_definitions": {"s": {"properties": {"height": 2.0}}, "t": {"description": "Continue to Forces", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.95, 0.85], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
 	"settings": {"auto_reveal_on_entry": true, "background": {"color": [0.2, 0.25, 0.4], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "all_visible", "show_grid": true},
-	"utility_definitions": {"s": {"properties": {"height": 2.0}}, "t": {"description": "Continue to Forces", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "1", "1", "1", "1", "1", "1", "2", "2", "2", "2"],
@@ -28,7 +28,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

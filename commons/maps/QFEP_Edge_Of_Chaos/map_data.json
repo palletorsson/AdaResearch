@@ -1,8 +1,8 @@
 {
 	"map_info": {"name": "Edge of Chaos: Where Life Happens", "lookup_name": "QFEP_Edge_Of_Chaos", "description": "λ ≈ 0.3-0.5. The sweet spot. Not frozen order, not dissolved chaos. Here, at the edge, complexity emerges. Life happens.", "version": "1.0", "format": "json", "dimensions": {"width": 14, "depth": 14, "max_height": 5}, "metadata": {"difficulty": "advanced", "category": "qfep", "estimated_time": "5-6 minutes", "learning_objectives": ["Edge of chaos: λ ≈ 0.3-0.5", "Langton's discovery: complexity emerges here", "Not too ordered, not too chaotic", "This is where adaptation, learning, life happens"]}, "title": "Where Complexity Emerges"},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "To the Sandbox", "description": "You've felt the edge. Now control it yourself.", "properties": {"action": "next_in_sequence"}}},
 	"audio": {"ambient_preset": "edge_of_chaos_alive", "volume": -4.0},
 	"documentation": {"summary": "QFEP_Edge_Of_Chaos - The Sweet Spot", "layout": "Immersive organic space. Turing patterns emerge. The world breathes.", "objective": "Experience the edge of chaos. Feel the aliveness. This is where QFEP says life exists.", "key_elements": ["Turing patterns emerging around you", "Particles that self-organize", "Lambda slider locked at 0.4 (edge)", "The world responds to you"]},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "To the Sandbox", "description": "You've felt the edge. Now control it yourself.", "properties": {"action": "next_in_sequence"}}},
 	"lighting": {"ambient_color": [0.15, 0.25, 0.2], "ambient_energy": 0.7, "directional_light": {"enabled": true, "direction": [-0.3, -0.6, -0.4], "color": [0.8, 1.0, 0.9], "energy": 1.0}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "background": {"type": "sky", "color": [0.05, 0.12, 0.1]}, "grid_animation": {"enabled": true, "type": "organic_grow", "duration": 0.5, "delay_between": 0.02, "order": "radial_center", "easing": "ease_in_out"}},
 	"layers": {
@@ -28,7 +28,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "el:2:1", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "el:2:1", "ds", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

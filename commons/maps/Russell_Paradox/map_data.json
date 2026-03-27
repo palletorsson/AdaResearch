@@ -1,10 +1,10 @@
 {
 	"map_info": {"description": "The set of all sets that don't contain themselves. Does it contain itself? If yes, then no. If no, then yes. Self-reference breaks logic.", "dimensions": {"depth": 12.0, "max_height": 3.0, "width": 11.0}, "format": "json", "lookup_name": "Russell_Paradox", "metadata": {"category": "foundations", "difficulty": "advanced", "estimated_time": "4-5 minutes", "learning_objectives": ["Experience Russell's Paradox viscerally", "Understand how self-reference creates edges", "See why naive set theory collapsed", "Connect to QFEP: systems have outsides"]}, "name": "Russell's Paradox", "version": "1.0", "title": "The Self-Containing Set"},
+	"utility_definitions": {"t": {"description": "To Gödel's theorem", "name": "Continue", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"audio": {"ambient_preset": "logic_chamber", "volume": -8.0},
 	"documentation": {"key_elements": ["Outer ring: height-3 walls — the universe of sets", "Middle ring: height-2 walls — the subset boundary", "Inner floor: height-1 — the paradoxical set itself", "Russell set box at the dead center", "Spiral entry forces inward movement through containment layers"], "layout": "Three concentric rectangular rings (heights 3, 2, 1) nesting inward. The outer ring is a tall wall (height 3), the middle ring (height 2) forms the second set, and the innermost floor (height 1) holds the russell_set_box — the set that asks: do I contain myself? Player enters from the top into the outer ring and spirals inward. The spatial nesting embodies the self-referential containment that creates the paradox.", "spatial_pattern": "nested_concentric", "summary": "Russell's Paradox — nested concentric boxes, each containing the next"},
 	"lighting": {"ambient_color": [0.15, 0.1, 0.2], "ambient_energy": 0.5},
 	"settings": {"background": {"color": [0.08, 0.05, 0.12], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "show_grid": true},
-	"utility_definitions": {"t": {"description": "To Gödel's theorem", "name": "Continue", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
 	"layers": {
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -40,7 +40,7 @@
 			[" ", " ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "tt:russell_technical:180:0.5", " ", " ", "tt:russell_critical:180:0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

@@ -1,8 +1,8 @@
 {
 	"map_info": {"name": "QFEP Introduction", "lookup_name": "QFEP_Introduction", "description": "The formula that unifies everything. QFE = F − λE(S) + φΔE(S,t). See it. Touch it. Begin to understand.", "version": "1.0", "format": "json", "dimensions": {"width": 9, "depth": 12, "max_height": 3}, "metadata": {"difficulty": "advanced", "category": "qfep", "estimated_time": "4-5 minutes", "learning_objectives": ["See the QFEP formula as unified framework", "Understand F as order-seeking drive", "Understand E(S) as entropy/freedom", "First encounter with λ and φ sliders"]}, "title": "The Unifying Formula"},
+	"utility_definitions": {"t": {"type": "teleporter", "name": "Continue", "description": "Explore the F term", "properties": {"action": "next_in_sequence"}}},
 	"audio": {"ambient_preset": "laboratory_hum", "volume": -8.0},
 	"documentation": {"summary": "QFEP_Introduction - The Formula Revealed", "layout": "Intimate laboratory space. Formula display at center. Grabbable term objects.", "objective": "See the unified formula. Begin to understand the terms. First touch of the sliders.", "key_elements": ["3D formula display at center", "Grabbable F, E, λ, φ term objects", "lambda_slider and phi_slider for first interaction", "Clipboards with technical and critical readings"]},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Continue", "description": "Explore the F term", "properties": {"action": "next_in_sequence"}}},
 	"lighting": {"ambient_color": [0.15, 0.15, 0.25], "ambient_energy": 0.5, "directional_light": {"enabled": true, "direction": [-0.3, -0.8, -0.3], "color": [0.9, 0.9, 1.0], "energy": 0.8}},
 	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "visible", "background": {"type": "sky", "color": [0.05, 0.05, 0.15]}},
 	"layers": {
@@ -24,7 +24,7 @@
 			[" ", " ", " ", " ", "sub:map", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "el:2", " ", " ", " ", " ", " ", "el:2", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "ds", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
