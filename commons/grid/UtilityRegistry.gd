@@ -287,10 +287,18 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # feature_name, optional color/params
 	},
 
+	"ds": {
+		"name": "dark_sphere",
+		"file": "dark_sphere_utility.tscn",
+		"category": "atmosphere",
+		"description": "Large dark sphere that envelops the scene — makes artifacts pop against darkness",
+		"supports_parameters": true  # radius (default covers entire map)
+	},
+
 	# Empty space
 	" ": {
-		"name": "none", 
-		"file": "", 
+		"name": "none",
+		"file": "",
 		"category": "empty",
 		"description": "Empty grid space",
 		"supports_parameters": false
@@ -309,6 +317,7 @@ const CATEGORIES = {
 	"navigation": "Navigation aids and indicators",
 	"safety": "Checkpoints and reset points",
 	"hazard": "Danger zones and environmental hazards",
+	"atmosphere": "Scene atmosphere and environmental effects",
 	"empty": "Empty space marker"
 }
 
