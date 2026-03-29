@@ -164,6 +164,11 @@ To regenerate the tree after codebase changes:
 python tools/lod_tree_generator.py
 ```
 
+## Heat Map
+
+Run `python tools/heat_map_generator.py` to see what needs work.
+The `/continue` skill reads this to pick the next task.
+
 ## Artifact Creation Pattern
 
 3 files: `<token>.gd`, `<token>.tscn`, registry JSON entry.

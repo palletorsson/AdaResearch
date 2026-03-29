@@ -3,18 +3,19 @@
 	"description": "Dynamic focus system — what matters, what works, what to try next",
 
 	"current_focus": {
-		"updated": "2026-03-28",
-		"primary": "2D-3D knowledge loop: build web editors for every algorithm principle",
+		"updated": "2026-03-29",
+		"primary": "Mission center: wire real data, fix VR walkability",
 		"secondary": [
+			"2D-3D knowledge loop: build web editors for every algorithm principle",
 			"Meander tile system: solve the tile constraint (tiles repeat, mosaics don't)",
-			"LOD system: optimize context loading for AI sessions",
-			"Presentation: refine 25-slide Naples talk for delivery"
+			"LOD system: optimize context loading for AI sessions"
 		],
-		"blocked": [
-			"VR floor plan height: y_offset not working consistently",
-			"Flight mode: button conflicts with other systems"
+		"blocked": [],
+		"resolved": [
+			"VR floor plan height: y_offset fixed (commit 64ce68bf — 90->0)",
+			"Flight mode: button conflicts resolved (commit 29a261e8 — LEFT X)"
 		],
-		"energy": "The meander investigation opened ontological questions about space-filling, infinity, and the limits of discrete systems. Follow this thread."
+		"energy": "Floor height and flight mode unblocked. Heat map drives autonomous work — pick the hottest item, fix it, regenerate."
 	},
 
 	"productive_patterns": [
@@ -65,6 +66,14 @@
 			"evidence": "The meander iterations (practice) led to the space-filling ontology blog (theory) which reframed the problem as continuous vs discrete.",
 			"effectiveness": "This is what makes it RESEARCH, not just engineering.",
 			"caveat": "Don't get stuck in one mode. If you've been building for 2 hours, write. If you've been writing for 1 hour, build."
+		},
+		{
+			"id": "continue-command-heat-map",
+			"description": "Run heat_map_generator.py, pick the hottest actionable item, fix it, regenerate. The /continue skill automates this loop.",
+			"when": "Starting a session without a specific task, or finishing one task and looking for the next",
+			"evidence": "Heat map surfaces blocked items at 90, active topics at 60-80, empty sequences at 50. Fixes flow naturally.",
+			"effectiveness": "Eliminates 'what should I work on?' decision fatigue. Temperature = priority.",
+			"caveat": "Don't chase low-temperature items when high-temperature items exist. Fix blockers first."
 		},
 		{
 			"id": "solve-above-then-project-down",
