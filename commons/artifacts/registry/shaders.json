@@ -1068,6 +1068,41 @@
 				"shaders",
 				"visual"
 			]
+		},
+		"filter_screen": {
+			"name": "Filter Screen",
+			"lookup_name": "filter_screen",
+			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor — teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
+			"scene": "res://commons/artifacts/filter_screen/filter_screen.tscn",
+			"category": "shaders",
+			"tags": [
+				"display",
+				"screen",
+				"viewport",
+				"projection",
+				"camera",
+				"3d-to-2d",
+				"filter",
+				"configurable"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "patterngeneration",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual",
+				"projection"
+			]
 		}
 	}
 }

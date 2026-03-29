@@ -1,19 +1,7 @@
 {
-  "generated": "2026-03-29T22:23:42.646715",
+  "generated": "2026-03-29T22:40:09.835433",
   "description": "Auto-generated heat map from project signals",
   "items": [
-    {
-      "item": "VR floor plan height: y_offset not working consistently",
-      "temperature": 90,
-      "reason": "blocked",
-      "action": "unblock"
-    },
-    {
-      "item": "Flight mode: button conflicts with other systems",
-      "temperature": 90,
-      "reason": "blocked",
-      "action": "unblock"
-    },
     {
       "item": "floor",
       "temperature": 80,
@@ -22,8 +10,14 @@
     },
     {
       "item": "facade",
-      "temperature": 75,
-      "reason": "active (3 recent commits)",
+      "temperature": 70,
+      "reason": "active (2 recent commits)",
+      "action": "continue"
+    },
+    {
+      "item": "mosaic",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
       "action": "continue"
     },
     {
@@ -51,45 +45,9 @@
       "action": "continue"
     },
     {
-      "item": "sequence:advancedlaboratory",
-      "temperature": 50,
-      "reason": "empty sequence (Advanced Laboratory)",
-      "action": "create maps"
-    },
-    {
-      "item": "sequence:criticalalgorithms",
-      "temperature": 50,
-      "reason": "empty sequence (Critical Algorithms)",
-      "action": "create maps"
-    },
-    {
-      "item": "sequence:morphogenesis",
-      "temperature": 50,
-      "reason": "empty sequence (Morphogenesis: Pattern from Noise)",
-      "action": "create maps"
-    },
-    {
       "item": "sequence:resourcemanagement",
       "temperature": 50,
       "reason": "empty sequence (Resource Management)",
-      "action": "create maps"
-    },
-    {
-      "item": "sequence:searchpathfinding",
-      "temperature": 50,
-      "reason": "empty sequence (Search & Pathfinding)",
-      "action": "create maps"
-    },
-    {
-      "item": "sequence:speculativecomputation",
-      "temperature": 50,
-      "reason": "empty sequence (Speculative Computation)",
-      "action": "create maps"
-    },
-    {
-      "item": "sequence:vectors",
-      "temperature": 50,
-      "reason": "empty sequence (Vectors: Direction + Magnitude = Everyth)",
       "action": "create maps"
     }
   ]

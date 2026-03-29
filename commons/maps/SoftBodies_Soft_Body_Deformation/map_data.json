@@ -1,41 +1,353 @@
 {
-	"map_info": {"description": "Bouncy room with elevated platforms for soft body experiments", "dimensions": {"depth": 9.0, "max_height": 2.0, "width": 8.0}, "format": "json", "lookup_name": "SoftBodies_Soft_Body_Deformation", "metadata": {"category": "softbodies", "difficulty": "intermediate", "estimated_time": "5-7 minutes", "learning_objectives": [], "spatial_temperature": 0.5}, "name": "Soft Body Deformation Lab", "version": "1.0", "title": "Soft Body Deformation"},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next step", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
-	"lighting": {"ambient_color": [0.5, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
-	"settings": {"auto_reveal_on_entry": false, "background": {"color": [0.2, 0.3, 0.7], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "hidden_except_corners", "show_grid": true},
-	"layers": {
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "jelly_cube:0:0.5:1", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "softmill", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"structure": [
-			["1", "1", "2", "2", "2", "2", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["2", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "0", "1"],
-			["1", "1", "2", "2", "2", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ds", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+    "description": "Bouncy room with elevated platforms for soft body experiments",
+    "dimensions": {
+      "depth": 9.0,
+      "max_height": 2.0,
+      "width": 8.0
+    },
+    "format": "json",
+    "lookup_name": "SoftBodies_Soft_Body_Deformation",
+    "metadata": {
+      "category": "softbodies",
+      "difficulty": "intermediate",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [],
+      "spatial_temperature": 0.5
+    },
+    "name": "Soft Body Deformation Lab",
+    "version": "1.0",
+    "title": "Soft Body Deformation"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    },
+    "t": {
+      "description": "Continue to next step",
+      "name": "Next",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "enabled": true,
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "auto_reveal_on_entry": false,
+    "background": {
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "initial_tile_visibility": "hidden_except_corners",
+    "show_grid": true
+  },
+  "layers": {
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "jelly_cube:0:0.5:1",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "softmill",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "structure": [
+      [
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "sp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "ds",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
 }

@@ -1,60 +1,668 @@
 {
-	"map_info": {"description": "The fifth postulate that held geometry together for 2000 years. Through one point, exactly one line parallel to a given line. What if it weren't true?", "dimensions": {"depth": 15.0, "max_height": 3.0, "width": 11.0}, "format": "json", "lookup_name": "Euclid_Parallel", "metadata": {"category": "foundations", "difficulty": "intermediate", "estimated_time": "4-5 minutes", "learning_objectives": ["Understand Euclid's five postulates", "See parallel lines as the foundation of flat space", "Question what seems self-evident", "Prepare for the crisis of non-Euclidean geometry"]}, "name": "Euclid's Parallel Postulate", "version": "1.0", "title": "The Fifth Postulate"},
-	"utility_definitions": {"t": {"description": "What if parallel lines could meet?", "name": "Continue", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
-	"audio": {"ambient_preset": "ancient_library", "volume": -10.0},
-	"documentation": {"key_elements": ["Symmetrical colonnade entry (height-3 pillars framing height-1 path)", "Parallel lines and angle sum flanking the central axis", "Euclid postulates plaque at the center of the chamber", "Perfect bilateral symmetry throughout"], "layout": "Classical colonnade — symmetrical corridor with parallel height-3 pillars leading to central postulate plaque. Perfect bilateral symmetry embodies Euclidean certainty.", "objective": "Experience the certainty of Euclidean space before it shatters", "spatial_pattern": "colonnade_to_chamber", "summary": "The postulate that defined geometry"},
-	"lighting": {"ambient_color": [0.25, 0.22, 0.18], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.95, 0.85], "direction": [-0.3, -0.8, -0.3], "enabled": true, "energy": 0.9}},
-	"settings": {"background": {"color": [0.15, 0.12, 0.1], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "show_grid": true},
-	"layers": {
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "parallel_lines:0:0.5", " ", " ", " ", "angle_sum_triangle:0:0.5", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "euclid_postulates_plaque:0:1.2:1", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "3", "1", "3", "1", "1", "1", "1"],
-			["0", "0", "3", "0", "3", "1", "3", "0", "3", "0", "0"],
-			["0", "1", "3", "1", "3", "1", "3", "1", "3", "0", "0"],
-			["0", "0", "2", "1", "1", "1", "1", "1", "2", "0", "0"],
-			["0", "2", "1", "1", "1", "1", "1", "1", "1", "2", "0"],
-			["0", "2", "1", "1", "1", "1", "1", "1", "1", "2", "0"],
-			["0", "2", "1", "1", "1", "1", "1", "1", "1", "2", "0"],
-			["0", "2", "1", "1", "1", "1", "1", "1", "1", "2", "0"],
-			["0", "2", "1", "1", "1", "1", "1", "1", "1", "2", "0"],
-			["0", "0", "2", "1", "1", "1", "1", "1", "2", "0", "0"],
-			["0", "0", "2", "1", "1", "1", "1", "1", "2", "0", "0"],
-			["0", "0", "2", "1", "1", "1", "1", "1", "2", "0", "0"],
-			["0", "0", "0", "2", "2", "0", "2", "2", "0", "0", "0"],
-			["0", "0", "2", "1", "1", "1", "1", "1", "2", "0", "0"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "tt:euclid_technical:180:0.5", " ", " ", " ", "tt:euclid_critical:180:0.5", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+    "description": "The fifth postulate that held geometry together for 2000 years. Through one point, exactly one line parallel to a given line. What if it weren't true?",
+    "dimensions": {
+      "depth": 15.0,
+      "max_height": 3.0,
+      "width": 11.0
+    },
+    "format": "json",
+    "lookup_name": "Euclid_Parallel",
+    "metadata": {
+      "category": "foundations",
+      "difficulty": "intermediate",
+      "estimated_time": "4-5 minutes",
+      "learning_objectives": [
+        "Understand Euclid's five postulates",
+        "See parallel lines as the foundation of flat space",
+        "Question what seems self-evident",
+        "Prepare for the crisis of non-Euclidean geometry"
+      ]
+    },
+    "name": "Euclid's Parallel Postulate",
+    "version": "1.0",
+    "title": "The Fifth Postulate"
+  },
+  "utility_definitions": {
+    "t": {
+      "description": "What if parallel lines could meet?",
+      "name": "Continue",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "audio": {
+    "ambient_preset": "ancient_library",
+    "volume": -10.0
+  },
+  "documentation": {
+    "key_elements": [
+      "Symmetrical colonnade entry (height-3 pillars framing height-1 path)",
+      "Parallel lines and angle sum flanking the central axis",
+      "Euclid postulates plaque at the center of the chamber",
+      "Perfect bilateral symmetry throughout"
+    ],
+    "layout": "Classical colonnade — symmetrical corridor with parallel height-3 pillars leading to central postulate plaque. Perfect bilateral symmetry embodies Euclidean certainty.",
+    "objective": "Experience the certainty of Euclidean space before it shatters",
+    "spatial_pattern": "colonnade_to_chamber",
+    "summary": "The postulate that defined geometry"
+  },
+  "lighting": {
+    "ambient_color": [
+      0.25,
+      0.22,
+      0.18
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.95,
+        0.85
+      ],
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "enabled": true,
+      "energy": 0.9
+    }
+  },
+  "settings": {
+    "background": {
+      "color": [
+        0.15,
+        0.12,
+        0.1
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "show_grid": true
+  },
+  "layers": {
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "parallel_lines:0:0.5",
+        " ",
+        " ",
+        " ",
+        "angle_sum_triangle:0:0.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "euclid_postulates_plaque:0:1.2:1",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "3",
+        "0",
+        "3",
+        "1",
+        "3",
+        "0",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "0",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ]
+    ],
+    "utilities": [
+      [
+        "sp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "sub:map",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "ds",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "tt:euclid_technical:180:0.5",
+        " ",
+        " ",
+        " ",
+        "tt:euclid_critical:180:0.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
 }

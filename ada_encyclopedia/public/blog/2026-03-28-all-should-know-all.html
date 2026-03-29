@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Should Know All — Building a Multi-Resolution Knowledge System | Ada Research</title>
+<style>
+  :root { --bg: #0a0a0f; --surface: #12121a; --surface2: #1a1a26; --border: #2a2a3a; --text: #e0e0e8; --dim: #8888a0; --accent: #D4A545; --accent2: #4A90D9; --pink: #E91E63; --cyan: #22d3ee; --green: #4ade80; --orange: #fb923c; --violet: #a78bfa; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.8; max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  h1 { font-size: 2.2rem; margin: 2rem 0 0.5rem; color: var(--accent); line-height: 1.3; }
+  h2 { font-size: 1.5rem; margin: 3rem 0 1rem; color: var(--accent2); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  h3 { font-size: 1.15rem; margin: 2rem 0 0.5rem; color: var(--pink); }
+  p { margin: 0.8rem 0; }
+  .date { color: var(--dim); font-size: 0.9rem; }
+  .intro { font-size: 1.1rem; color: var(--text); line-height: 1.9; }
+  .pullquote { border-left: 3px solid var(--pink); padding: 1rem 1.5rem; margin: 2rem 0; background: var(--surface); border-radius: 0 8px 8px 0; font-size: 1.05rem; color: var(--pink); font-style: italic; line-height: 1.7; }
+  .pullquote.gold { border-color: var(--accent); color: var(--accent); }
+  .pullquote.blue { border-color: var(--accent2); color: var(--accent2); }
+  .pullquote.green { border-color: var(--green); color: var(--green); }
+  .lod-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem 1.5rem; margin: 1.5rem 0; }
+  .lod-card .level { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; font-weight: 600; }
+  .lod-card .level.l0 { color: var(--cyan); }
+  .lod-card .level.l1 { color: var(--green); }
+  .lod-card .level.l2 { color: var(--orange); }
+  .lod-card .level.l3 { color: var(--violet); }
+  .lod-card h4 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .lod-card p { font-size: 0.95rem; color: var(--dim); margin: 0.3rem 0; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin: 1.5rem 0; }
+  .grid3 > div { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; text-align: center; }
+  .grid3 h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .grid3 p { font-size: 0.85rem; color: var(--dim); margin: 0.3rem 0; }
+  .grid3 .num { font-size: 2rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .grid3 .num.cy { color: var(--cyan); }
+  .grid3 .num.pk { color: var(--pink); }
+  .grid3 .num.gn { color: var(--green); }
+  .arch-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .arch-table th, .arch-table td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  .arch-table th { color: var(--accent2); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .arch-table td:first-child { color: var(--cyan); font-weight: 600; }
+  .formula { font-family: 'Consolas', monospace; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.5rem; margin: 1rem 0; color: var(--cyan); font-size: 0.95rem; overflow-x: auto; }
+  .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  .twin > div { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+  .twin h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .twin p { font-size: 0.9rem; color: var(--dim); margin: 0.3rem 0; }
+  .closing { text-align: center; margin: 3rem 0 1rem; font-size: 1.15rem; color: var(--accent); font-style: italic; }
+  @media (max-width: 768px) { .grid3 { grid-template-columns: 1fr; } .twin { grid-template-columns: 1fr; } h1 { font-size: 1.7rem; } }
+</style>
+</head>
+<body>
+
+<p class="date">28 March 2026</p>
+<h1>All Should Know All</h1>
+<p class="intro">We built three separate systems for Ada Research: interactive web editors, VR infoboards, and a writing tool. Today we wired them into one knowledge system where every part knows about every other part. The key insight was LOD &mdash; Level of Detail &mdash; applied not to geometry, but to understanding.</p>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>The Problem: Three Islands</h2>
+
+<p>By morning we had three apps that didn't talk to each other:</p>
+
+<div class="grid3">
+  <div>
+    <div class="num cy">16</div>
+    <h4>Web Primitives</h4>
+    <p>Interactive 2D editors at localhost:3003/primitives</p>
+  </div>
+  <div>
+    <div class="num pk">662</div>
+    <h4>Map Directories</h4>
+    <p>Each with blurb.md, intent.md, technical.md, critical.md</p>
+  </div>
+  <div>
+    <div class="num gn">20</div>
+    <h4>VR Infoboards</h4>
+    <p>Godot 3D boards in commons/infoboards_3d/boards/</p>
+  </div>
+</div>
+
+<p>The web editors taught the math interactively. The map MDs held the writing &mdash; 554 blurbs, 193 technicals, 184 intents, 161 criticals. The VR boards embodied the experience. But none of them knew about each other. Writing about Array_Patterns meant opening three apps and switching between them.</p>
+
+<div class="pullquote gold">The question wasn't "how do we merge the databases." It was "what does each primitive actually teach about the world?" The ontology came first. The integration followed.</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>The Ontology: Not How, But What</h2>
+
+<p>We asked a simple question about each primitive: <em>what lens does it open?</em></p>
+
+<p>Not "how does a line work" but "what does a line reveal about reality?" The answer surprised us: a line is both the thing measured AND the instrument of measurement. Length and ruler are the same object. You cannot separate the measured from the measurement.</p>
+
+<p>Every primitive opened a similar door:</p>
+
+<table class="arch-table">
+  <tr><th>Primitive</th><th>Lens</th><th>Core Question</th></tr>
+  <tr><td>Point</td><td>Location</td><td>What system am I in?</td></tr>
+  <tr><td>Line</td><td>Connection + Measure</td><td>What defines "between"? What is the unit?</td></tr>
+  <tr><td>Triangle</td><td>Surface</td><td>What's the minimum enclosure?</td></tr>
+  <tr><td>Grid</td><td>Discretization</td><td>What resolution reveals? What hides?</td></tr>
+  <tr><td>Vectors</td><td>Interpretation</td><td>Same data &mdash; what does it mean?</td></tr>
+  <tr><td>Wave</td><td>Decomposition</td><td>What's the hidden spectrum?</td></tr>
+  <tr><td>Random Walk</td><td>Dimensionality</td><td>Return or escape?</td></tr>
+  <tr><td>Arrays</td><td>Order</td><td>Who controls the index?</td></tr>
+  <tr><td>Forces</td><td>Invisibility</td><td>What unseen pressures shape trajectories?</td></tr>
+</table>
+
+<p>These aren't metaphors. The dot product <em>literally</em> measures alignment between two directions. The random walk <em>literally</em> returns home in 2D but escapes in 3D. The math is the ontology.</p>
+
+<h3>The Line Insight</h3>
+
+<p>The deepest surprise came from the simplest primitive. A line connects two points &mdash; everyone knows that. But a line is also how we <em>measure</em> the distance between those points. The ruler is made of the thing it measures. This is not a philosophical curiosity. It's the reason non-Euclidean geometry exists: when the ruler curves, measurement itself changes.</p>
+
+<div class="pullquote">The line is both length and measure. The instrument is part of the system it measures. You cannot step outside.</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>LOD: Level of Detail for Understanding</h2>
+
+<p>In 3D graphics, LOD means showing a simpler mesh when the object is far away. We applied the same idea to knowledge:</p>
+
+<div class="lod-card">
+  <div class="level l0">LOD 0 &mdash; Glance</div>
+  <h4>Point &rarr; Location &rarr; "What system am I in?"</h4>
+  <p>One line. Enough to orient across 14 primitives in a single table. No file reads &mdash; served from the index alone.</p>
+</div>
+
+<div class="lod-card">
+  <div class="level l1">LOD 1 &mdash; Card</div>
+  <h4>+ "A point doesn't exist without a space to exist in."</h4>
+  <p>One sentence that captures the deepest takeaway. Plus QFEP connection, tags, related primitives. Enough to decide what to work on.</p>
+</div>
+
+<div class="lod-card">
+  <div class="level l2">LOD 2 &mdash; Discussion</div>
+  <h4>+ Euclidean, hyperbolic, spherical, spacetime, topology&hellip;</h4>
+  <p>The full ontological text. Open questions. QFEP analysis. Enough to think through the primitive deeply.</p>
+</div>
+
+<div class="lod-card">
+  <div class="level l3">LOD 3 &mdash; Deep</div>
+  <h4>+ Connections to Line, Coordinate System, Grid&hellip;</h4>
+  <p>How this primitive links to others. The raw markdown. Cross-references. The full web of relationships.</p>
+</div>
+
+<p>The API serves any level: <code>GET /api/ontology?lod=0</code> returns 14 one-liners. <code>GET /api/ontology?primitive=line&amp;lod=3</code> returns everything about lines. The same data, four resolutions, zero redundancy.</p>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>The Architecture: All Should Know All</h2>
+
+<p>The breakthrough was realizing that LOD already existed in the map writing. Every map has layers of text at different depths:</p>
+
+<table class="arch-table">
+  <tr><th>Map File</th><th>What It Is</th><th>LOD</th></tr>
+  <tr><td>blurb.md</td><td>2-3 sentence hook</td><td>Glance</td></tr>
+  <tr><td>intent.md</td><td>Concept, role, angles, gaps</td><td>Card + Discussion</td></tr>
+  <tr><td>technical.md</td><td>Implementation details</td><td>How it works</td></tr>
+  <tr><td>critical.md</td><td>Theory, QFEP, queer reading</td><td>Why it matters</td></tr>
+  <tr><td>summary.md</td><td>Full synthesis</td><td>Deep</td></tr>
+</table>
+
+<p>The ontology MDs mirror this exactly. Same LOD pattern, different scope. The ontology asks "what does a <em>line</em> teach?" The map MDs ask "what does <em>this specific room about lines</em> teach?"</p>
+
+<p>We wired three systems into one knowledge graph:</p>
+
+<div class="formula">
+doc/ontology/*.md &larr;&rarr; commons/maps/*/blurb|intent|critical.md &larr;&rarr; ada_writer_pro<br>
+&nbsp;&nbsp;&nbsp;(what it opens) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (what each room teaches) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (where you write)
+</div>
+
+<div class="twin">
+  <div>
+    <h4 style="color:var(--cyan)">Encyclopedia API</h4>
+    <p><code>/api/ontology</code> &mdash; primitive lenses at any LOD</p>
+    <p><code>/api/knowledge</code> &mdash; unified: ontology + map texts + sequences</p>
+    <p>Search across everything. Filter by sequence, phase, map name.</p>
+  </div>
+  <div>
+    <h4 style="color:var(--pink)">Ada Writer API</h4>
+    <p><code>/api/ontology</code> &mdash; same ontology, accessed from the writing tool</p>
+    <p>When editing Array_Patterns, the writer knows the "arrays" ontology: "Who controls the index?"</p>
+    <p>The lens informs the writing. The writing deepens the lens.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>What Changes</h2>
+
+<h3>For writing</h3>
+<p>When you open a map in Ada Writer, the ontology is there. Writing about Point_One? The sidebar shows: <em>Lens: Location. "What system am I in?" Insight: A point doesn't exist without a space to exist in.</em> The writing becomes grounded in the question the primitive asks.</p>
+
+<h3>For building</h3>
+<p>When building a web editor, the ontology tells you what to foreground. The Wave editor doesn't just show sine curves &mdash; it asks "what's the hidden spectrum?" The tangent mode shows discontinuity not as a bug but as a boundary condition. The Fourier mode shows decomposition as analysis of identity.</p>
+
+<h3>For AI</h3>
+<p>The LOD system is a context window optimizer. At LOD 0, an AI agent can orient across 14 primitives in 14 lines. At LOD 3, it gets the full discussion, open questions, and connections. The right depth for the right moment. No wasted tokens.</p>
+
+<h3>For VR</h3>
+<p>The Filter Screen projects 3D into 2D. The Science Screen renders grid data as pixels. Both are ontology in action &mdash; the filter screen asks "what is lost in projection?" and the science screen asks "how do pixels represent reality?" Standing between them in VR, you experience the gap between 2D understanding and 3D embodiment. That gap <em>is</em> the research.</p>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>The Shape of the Knowledge</h2>
+
+<div class="grid3">
+  <div>
+    <div class="num cy">14</div>
+    <h4>Ontology Files</h4>
+    <p>One per primitive, organized by sequence, YAML frontmatter</p>
+  </div>
+  <div>
+    <div class="num pk">1,252</div>
+    <h4>Map Text Files</h4>
+    <p>554 blurbs, 193 technicals, 184 intents, 161 criticals, 160 summaries</p>
+  </div>
+  <div>
+    <div class="num gn">3</div>
+    <h4>Apps Connected</h4>
+    <p>Encyclopedia, Ada Writer, Godot &mdash; all reading the same source</p>
+  </div>
+</div>
+
+<p>The source of truth is the filesystem. Markdown files in two directories: <code>doc/ontology/</code> for primitive lenses, <code>commons/maps/</code> for map writing. Three apps read from the same place. Edit a file, every app sees the change.</p>
+
+<div class="formula">
+Edit doc/ontology/primitives/line.md &rarr; API serves it &rarr; encyclopedia renders it &rarr; writer uses it as context &rarr; VR embodies it &rarr; come back, deepen the question
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>What We Learned</h2>
+
+<p>The ontology came from asking the right question. Not "how does a triangle work" but "why does winding order determine visibility?" Not "what is a random walk" but "why does a drunk man in 2D always return home while a drunk bird in 3D escapes?"</p>
+
+<p>The LOD system came from recognizing that the same question needs different depths at different moments. Glancing across 14 primitives needs one line each. Thinking deeply about one needs the full discussion with open questions.</p>
+
+<p>The integration came from refusing to let knowledge live in silos. The writer should know the ontology. The ontology should know the maps. The web editor should know the question it's asking. All should know all.</p>
+
+<div class="pullquote gold">The primitive is not the visualization. The primitive is the question.</div>
+
+<p class="closing">Think flat. Build deep. The loop never ends.</p>
+
+</body>
+</html>
