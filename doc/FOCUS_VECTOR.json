@@ -3,20 +3,20 @@
   "description": "Dynamic focus system — what matters, what works, what to try next",
   "current_focus": {
     "updated": "2026-03-28",
-    "primary": "Improve Godot maps and scenes — make every map walkable, beautiful, and teaching something",
+    "primary": "Spine sequences: make every map in the 19 spine sequences walkable, beautiful, and teaching something",
     "secondary": [
-      "Fix VR walkability: floor height, colliders, flight mode, doorways",
-      "Test and polish the 5 best museum maps in VR headset",
-      "Improve pattern quality: match Pompeii photos more closely",
-      "Fill remaining empty sequences with working maps",
-      "Connect web editors to Godot: changes in browser should show in VR"
+      "Spine priority: primitives, transformation, color, forces, array_tutorial",
+      "Fix VR walkability across all spine maps",
+      "Improve artifact quality in spine maps",
+      "Test spine flow: can a player walk the full curriculum?",
+      "Museum maps (mosaicanalysis) are secondary to spine"
     ],
     "blocked": [],
     "resolved": [
       "VR floor plan height: y_offset fixed (commit 64ce68bf — 90->0)",
       "Flight mode: button conflicts resolved (commit 29a261e8 — LEFT X)"
     ],
-    "energy": "Everything we built is a tool. The WORK is the VR experience. Focus on what the player sees and walks through."
+    "energy": "The spine IS the game. Everything else supports it. 19 sequences, ~150 maps. Make them work."
   },
   "productive_patterns": [
     {
