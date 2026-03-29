@@ -164,6 +164,23 @@ To regenerate the tree after codebase changes:
 python tools/lod_tree_generator.py
 ```
 
+## Map Building (IMPORTANT — read before making maps)
+
+See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
+
+**Three layers:** structure (heights 0-5), utilities (sp/t/ds/r/m/an/3t), interactables (artifact:rotation:y_offset)
+
+**Maps are narrative spaces with 5 phases:**
+1. Entry (spawn + context)
+2. Teaching (main artifact)
+3. Exploration (related artifacts)
+4. Reflection (text + darkness)
+5. Exit (teleporter)
+
+**Map Studio:** `/map-studio` in the encyclopedia — 3-layer visual editor built from scratch.
+
+**Spine sequences are the priority** — 19 sequences forming the core curriculum.
+
 ## Heat Map
 
 Run `python tools/heat_map_generator.py` to see what needs work.
