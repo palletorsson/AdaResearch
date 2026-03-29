@@ -132,3 +132,22 @@ artifact_name:0:1.2:0#fillhole:remove → with group commands
 - Point_Lines: 7x27 (tall, sequential)
 - Point_Trace: 7x14 (medium)
 - Average: 7 wide, 10-27 deep
+
+## Artifact Orientation (Current Limitation)
+
+Artifacts do NOT have a built-in "front face" property. You must:
+1. Know from experience which way they face
+2. Use `:rotation` parameter to rotate them (0, 90, 180, 270)
+3. Check captures at `/captures/artifacts/name/front.png`
+
+**Convention:** Most artifacts face +Z (forward) by default.
+- `:0` = faces forward (+Z)
+- `:90` = faces right (+X)
+- `:180` = faces backward (-Z)
+- `:-90` or `:270` = faces left (-X)
+
+**Footprint:** 669/1678 artifacts have `footprint: [w, h, d]` in registry.
+The rest need measurement or capture to understand their size.
+
+**386 artifacts have 4-angle captures** in the encyclopedia gallery.
+The Map Studio should show these previews when placing artifacts.
