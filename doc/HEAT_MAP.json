@@ -1,17 +1,17 @@
 {
-  "generated": "2026-03-29T22:40:09.835433",
+  "generated": "2026-03-29T23:52:59.679125",
   "description": "Auto-generated heat map from project signals",
   "items": [
     {
       "item": "floor",
-      "temperature": 80,
-      "reason": "active (4 recent commits)",
+      "temperature": 75,
+      "reason": "active (3 recent commits)",
       "action": "continue"
     },
     {
-      "item": "facade",
-      "temperature": 70,
-      "reason": "active (2 recent commits)",
+      "item": "primitive",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
       "action": "continue"
     },
     {
@@ -21,25 +21,13 @@
       "action": "continue"
     },
     {
+      "item": "facade",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
+      "action": "continue"
+    },
+    {
       "item": "pattern",
-      "temperature": 65,
-      "reason": "active (1 recent commits)",
-      "action": "continue"
-    },
-    {
-      "item": "lod",
-      "temperature": 65,
-      "reason": "active (1 recent commits)",
-      "action": "continue"
-    },
-    {
-      "item": "meander",
-      "temperature": 65,
-      "reason": "active (1 recent commits)",
-      "action": "continue"
-    },
-    {
-      "item": "capture",
       "temperature": 65,
       "reason": "active (1 recent commits)",
       "action": "continue"
