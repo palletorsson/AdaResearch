@@ -825,12 +825,12 @@ func _build_wall_segment(segment: Dictionary, parent: Node3D,
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = start_row * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 180.0
+			wall_rot_y = 0.0
 		"S":
 			var cx: float = (start_col + seg_length * 0.5) * cell_size
 			var cz: float = (start_row + 1) * cell_size
 			wall_pos = Vector3(cx, wall_height * 0.5, cz)
-			wall_rot_y = 0.0
+			wall_rot_y = 180.0
 		"E":
 			var cx: float = (start_col + 1) * cell_size
 			var cz: float = (start_row + seg_length * 0.5) * cell_size
