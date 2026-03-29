@@ -1,0 +1,32 @@
+{
+	"map_info": {"name": "Systems Lab", "lookup_name": "AdvancedLaboratory_Systems_Lab", "description": "A working lab with entropy visualization, coupled oscillators, ecosystem simulation, and spring networks — systems theory made tangible.", "version": "1.0", "format": "json", "dimensions": {"width": 6, "depth": 6, "max_height": 2}, "title": "Systems Theory Laboratory", "metadata": {"difficulty": "advanced", "category": "advancedlaboratory", "estimated_time": "8-12 minutes", "learning_objectives": ["Entropy and disorder", "Coupled oscillation", "Ecosystem dynamics", "Spring network behavior"]}},
+	"utility_definitions": {"s": {"type": "spawn", "properties": {"height": 1.5}}, "t": {"type": "teleporter", "name": "Exit", "description": "Return", "properties": {"action": "next_in_sequence"}}},
+	"lighting": {"ambient_color": [0.3, 0.35, 0.4], "ambient_energy": 0.5, "directional_light": {"enabled": true, "direction": [-0.3, -1.0, -0.4], "color": [1.0, 0.95, 0.9], "energy": 0.9}},
+	"settings": {"cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true, "background": {"type": "sky", "color": [0.15, 0.2, 0.3]}},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "0"]
+		],
+		"utilities": [
+			["s", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "ds", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t"]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " "],
+			[" ", "entropy_visualization", " ", " ", "coupled_oscillator_lattice", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", "ecosystem_simulation", " ", " ", "spring_network", " "],
+			[" ", " ", " ", " ", " ", " "]
+		]
+	}
+}
