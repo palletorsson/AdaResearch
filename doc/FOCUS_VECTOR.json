@@ -1,221 +1,235 @@
 {
-	"version": "1.0",
-	"description": "Dynamic focus system — what matters, what works, what to try next",
-
-	"current_focus": {
-		"updated": "2026-03-29",
-		"primary": "Mission center: wire real data, fix VR walkability",
-		"secondary": [
-			"2D-3D knowledge loop: build web editors for every algorithm principle",
-			"Meander tile system: solve the tile constraint (tiles repeat, mosaics don't)",
-			"LOD system: optimize context loading for AI sessions"
-		],
-		"blocked": [],
-		"resolved": [
-			"VR floor plan height: y_offset fixed (commit 64ce68bf — 90->0)",
-			"Flight mode: button conflicts resolved (commit 29a261e8 — LEFT X)"
-		],
-		"energy": "Floor height and flight mode unblocked. Heat map drives autonomous work — pick the hottest item, fix it, regenerate."
-	},
-
-	"productive_patterns": [
-		{
-			"id": "multi-agent-parallel",
-			"description": "Launch 3-5 agents in parallel for independent tasks (e.g., build 5 floor patterns simultaneously)",
-			"when": "Multiple artifacts or presets need building, each independent",
-			"evidence": "Built 10 floor patterns in one batch, 5 facade presets simultaneously",
-			"effectiveness": "10x throughput vs sequential",
-			"caveat": "Registry conflicts — agents may write to same JSON file. Commit after each completes."
-		},
-		{
-			"id": "capture-screenshot-iterate",
-			"description": "Build artifact → capture Godot screenshot → evaluate → fix → recapture",
-			"when": "Visual output needs to match a reference photo",
-			"evidence": "14 meander iterations, each improving on the last",
-			"effectiveness": "High for visual matching, but requires clear reference",
-			"caveat": "Can loop forever if the reference is ambiguous. Set max iterations."
-		},
-		{
-			"id": "blog-as-thinking",
-			"description": "Write a blog post ABOUT the problem to clarify thinking before solving it",
-			"when": "Stuck on a conceptual problem (not just a bug)",
-			"evidence": "Grid as Governance blog clarified the recursive grammar. QFEP blog defined the framework. Space-filling blog opened the ontological question.",
-			"effectiveness": "Breakthrough-level. Writing IS thinking.",
-			"caveat": "Takes time. Don't blog when you should be coding."
-		},
-		{
-			"id": "museum-photo-to-artifact",
-			"description": "Photograph in museum → analyze pattern → build procedural artifact → compare side-by-side",
-			"when": "Creating new patterns from real-world references",
-			"evidence": "42 floor patterns from MANN and Pompeii photos",
-			"effectiveness": "High. The comparison reveals what the pattern IS (formal structure) vs what it ALSO IS (material, aging, context).",
-			"caveat": "The gap between photo and render is not failure — it IS the data (λ parameter)."
-		},
-		{
-			"id": "web-first-then-godot",
-			"description": "Build the 2D web editor first, iterate fast, THEN port to Godot 3D",
-			"when": "Building any new system (pattern maker, mosaic editor, facade builder, floor plan editor, meander editor)",
-			"evidence": "Every successful pipeline started in the web UI. The meander editor enabled drawing tiles that the GDScript couldn't get right alone.",
-			"effectiveness": "Essential. The web is where Claude thinks best. Godot is where the user experiences.",
-			"caveat": "The web→Godot JSON bridge can become a bottleneck if the format doesn't match."
-		},
-		{
-			"id": "theory-practice-loop",
-			"description": "Alternate between building (practice) and writing (theory). Each informs the other.",
-			"when": "Always. This IS the research methodology.",
-			"evidence": "The meander iterations (practice) led to the space-filling ontology blog (theory) which reframed the problem as continuous vs discrete.",
-			"effectiveness": "This is what makes it RESEARCH, not just engineering.",
-			"caveat": "Don't get stuck in one mode. If you've been building for 2 hours, write. If you've been writing for 1 hour, build."
-		},
-		{
-			"id": "continue-command-heat-map",
-			"description": "Run heat_map_generator.py, pick the hottest actionable item, fix it, regenerate. The /continue skill automates this loop.",
-			"when": "Starting a session without a specific task, or finishing one task and looking for the next",
-			"evidence": "Heat map surfaces blocked items at 90, active topics at 60-80, empty sequences at 50. Fixes flow naturally.",
-			"effectiveness": "Eliminates 'what should I work on?' decision fatigue. Temperature = priority.",
-			"caveat": "Don't chase low-temperature items when high-temperature items exist. Fix blockers first."
-		},
-		{
-			"id": "solve-above-then-project-down",
-			"description": "Solve the problem at a HIGHER abstraction level, then project the solution onto the implementation",
-			"when": "The implementation keeps failing (like the meander tile problem)",
-			"evidence": "Meander insight: define the braid topology FIRST, then project onto tiles. The tile system was the constraint, not the solution.",
-			"effectiveness": "Breakthrough pattern. If you're stuck, go UP one level.",
-			"caveat": "Requires recognizing WHEN you're fighting the wrong abstraction."
-		}
-	],
-
-	"templates": [
-		{
-			"id": "new-floor-pattern",
-			"name": "Create a new floor pattern",
-			"steps": [
-				"1. Find/photograph reference image",
-				"2. Analyze: what are the repeating elements? what symmetry group?",
-				"3. Create .gd with class_name, ArrayMesh, MosaicPalette, StaticBody3D, apply_grid_config()",
-				"4. Create .tscn (minimal scene file)",
-				"5. Register in commons/artifacts/registry/arrays.json",
-				"6. Run Godot capture: capture_multi_angle.gd --mode=artifact --target=<name>",
-				"7. Copy captures to encyclopedia gallery + blog",
-				"8. Update capture-manifest.json",
-				"9. Place in a museum map for VR testing"
-			],
-			"time_estimate": "15-30 minutes per pattern"
-		},
-		{
-			"id": "new-facade-preset",
-			"name": "Create a new facade preset",
-			"steps": [
-				"1. Find/photograph reference building",
-				"2. Analyze: how many stories? bays? what zone hierarchy?",
-				"3. Create JSON in commons/facade_parts/presets/",
-				"4. Use version 3 format with zones, placements, materials",
-				"5. Test: point facade_builder.tscn to the new preset, capture",
-				"6. Compare to reference photo",
-				"7. Add to a museum map as exhibit_wall"
-			],
-			"time_estimate": "10-20 minutes per preset"
-		},
-		{
-			"id": "new-museum-map",
-			"name": "Create a new museum map",
-			"steps": [
-				"1. Design room layout on paper or in floor plan editor",
-				"2. Create floor_plan.json with rooms, doorways, open_edges",
-				"3. Assign floor_pattern and wall_preset to each room",
-				"4. Add exhibit_walls for freestanding facades",
-				"5. Create minimal map_data.json (structure + spawn + teleporter + floor_plan_space)",
-				"6. Verify: all rooms ≥5×5, corridors ≥3 wide, all reachable, facades fit",
-				"7. Register in sequence",
-				"8. Capture top-down screenshot"
-			],
-			"time_estimate": "20-40 minutes per map"
-		},
-		{
-			"id": "new-web-primitive",
-			"name": "Create a new web primitive editor",
-			"steps": [
-				"1. Identify the principle (what Godot infoboard does it match?)",
-				"2. Define the ONTOLOGICAL QUESTION (not 'how does it work' but 'what does it reveal?')",
-				"3. Build interactive canvas with the core concept",
-				"4. Add teaching content: 3 key lessons",
-				"5. Add JSON export for Godot bridge",
-				"6. Add to /primitives index page",
-				"7. Write the lens description for PRIMITIVE_ONTOLOGY.md"
-			],
-			"time_estimate": "30-60 minutes per primitive"
-		},
-		{
-			"id": "investigate-pattern",
-			"name": "Deep investigation of a pattern/concept",
-			"steps": [
-				"1. Start with the reference photo or concept",
-				"2. Try the simplest implementation",
-				"3. Capture, compare, identify what's wrong",
-				"4. Try a different approach",
-				"5. Document EACH iteration (screenshot + description)",
-				"6. After 3-5 iterations, STOP and write about what you learned",
-				"7. If stuck, go UP one abstraction level",
-				"8. Blog the investigation (the failures ARE the research)",
-				"9. Record discoveries in LOD_DISCOVERIES.json"
-			],
-			"time_estimate": "1-3 hours, open-ended"
-		}
-	],
-
-	"directions_to_explore": [
-		{
-			"id": "continuous-meander",
-			"priority": "high",
-			"description": "Solve the meander with continuous coordinates, not tiles. The boundary function works — the rendering needs per-stone freedom.",
-			"related": ["meander_threshold_floor", "free_meander_floor", "tile_meander_floor"],
-			"theoretical_connection": "This connects to the question of discrete vs continuous, which connects to Cantor's continuum, which connects to the ontology of space."
-		},
-		{
-			"id": "complete-primitive-editors",
-			"priority": "high",
-			"description": "Build web editors for all 20 infoboard principles. 3 done, 17 to go.",
-			"related": ["primitives/point", "primitives/line", "primitives/grid"],
-			"theoretical_connection": "Each primitive is a LENS on reality. The collection of lenses IS a theory of computation."
-		},
-		{
-			"id": "facade-aedicula",
-			"priority": "medium",
-			"description": "Build the aedicula_frame part — the temple-front frame that defines Fourth Style wall painting. Missing from part catalog.",
-			"related": ["pompeii_fourth_style", "villa_mysteries"],
-			"theoretical_connection": "The aedicula is the FRAME — it declares that what's inside has been lifted into the space of representation. It's a visual bracket, a border, a reading protocol."
-		},
-		{
-			"id": "vr-floor-height",
-			"priority": "high",
-			"description": "Fix the floor plan space y_offset so museum floors align with the grid system floor. Currently broken — floors float or sink.",
-			"related": ["floor_plan_space.gd", "all museum maps"],
-			"theoretical_connection": "The gap between the platform you stand on and the museum you see is a literal λ parameter — the distance between system and content."
-		},
-		{
-			"id": "science-screen-integration",
-			"priority": "medium",
-			"description": "Place science_screen artifacts in museum maps next to the floor patterns they abstract. The 2D mirror next to the 3D reality.",
-			"related": ["science_screen.gd", "filter_screen.gd"],
-			"theoretical_connection": "The gap between 3D experience and 2D representation IS the research question made visible."
-		}
-	],
-
-	"anti-patterns": [
-		{
-			"id": "tile-first-thinking",
-			"description": "Don't start with the tile/implementation. Start with the RULE/TOPOLOGY, then project down.",
-			"learned_from": "14 meander iterations — every tile-first approach produced identical repeated hooks"
-		},
-		{
-			"id": "too-many-maps",
-			"description": "22 museum maps but most haven't been tested in VR. Quality over quantity.",
-			"learned_from": "Building maps is fast but verifying they work in VR is slow and we skip it"
-		},
-		{
-			"id": "jitter-as-freedom",
-			"description": "Adding jitter to tiles doesn't make them mosaics. The DECISION must be free, not just the rendering.",
-			"learned_from": "Meander v14: jittered positions but grid-snapped decisions. Looked identical to v13."
-		}
-	]
+  "version": "1.0",
+  "description": "Dynamic focus system — what matters, what works, what to try next",
+  "current_focus": {
+    "updated": "2026-03-28",
+    "primary": "Improve Godot maps and scenes — make every map walkable, beautiful, and teaching something",
+    "secondary": [
+      "Fix VR walkability: floor height, colliders, flight mode, doorways",
+      "Test and polish the 5 best museum maps in VR headset",
+      "Improve pattern quality: match Pompeii photos more closely",
+      "Fill remaining empty sequences with working maps",
+      "Connect web editors to Godot: changes in browser should show in VR"
+    ],
+    "blocked": [],
+    "resolved": [
+      "VR floor plan height: y_offset fixed (commit 64ce68bf — 90->0)",
+      "Flight mode: button conflicts resolved (commit 29a261e8 — LEFT X)"
+    ],
+    "energy": "Everything we built is a tool. The WORK is the VR experience. Focus on what the player sees and walks through."
+  },
+  "productive_patterns": [
+    {
+      "id": "multi-agent-parallel",
+      "description": "Launch 3-5 agents in parallel for independent tasks (e.g., build 5 floor patterns simultaneously)",
+      "when": "Multiple artifacts or presets need building, each independent",
+      "evidence": "Built 10 floor patterns in one batch, 5 facade presets simultaneously",
+      "effectiveness": "10x throughput vs sequential",
+      "caveat": "Registry conflicts — agents may write to same JSON file. Commit after each completes."
+    },
+    {
+      "id": "capture-screenshot-iterate",
+      "description": "Build artifact → capture Godot screenshot → evaluate → fix → recapture",
+      "when": "Visual output needs to match a reference photo",
+      "evidence": "14 meander iterations, each improving on the last",
+      "effectiveness": "High for visual matching, but requires clear reference",
+      "caveat": "Can loop forever if the reference is ambiguous. Set max iterations."
+    },
+    {
+      "id": "blog-as-thinking",
+      "description": "Write a blog post ABOUT the problem to clarify thinking before solving it",
+      "when": "Stuck on a conceptual problem (not just a bug)",
+      "evidence": "Grid as Governance blog clarified the recursive grammar. QFEP blog defined the framework. Space-filling blog opened the ontological question.",
+      "effectiveness": "Breakthrough-level. Writing IS thinking.",
+      "caveat": "Takes time. Don't blog when you should be coding."
+    },
+    {
+      "id": "museum-photo-to-artifact",
+      "description": "Photograph in museum → analyze pattern → build procedural artifact → compare side-by-side",
+      "when": "Creating new patterns from real-world references",
+      "evidence": "42 floor patterns from MANN and Pompeii photos",
+      "effectiveness": "High. The comparison reveals what the pattern IS (formal structure) vs what it ALSO IS (material, aging, context).",
+      "caveat": "The gap between photo and render is not failure — it IS the data (λ parameter)."
+    },
+    {
+      "id": "web-first-then-godot",
+      "description": "Build the 2D web editor first, iterate fast, THEN port to Godot 3D",
+      "when": "Building any new system (pattern maker, mosaic editor, facade builder, floor plan editor, meander editor)",
+      "evidence": "Every successful pipeline started in the web UI. The meander editor enabled drawing tiles that the GDScript couldn't get right alone.",
+      "effectiveness": "Essential. The web is where Claude thinks best. Godot is where the user experiences.",
+      "caveat": "The web→Godot JSON bridge can become a bottleneck if the format doesn't match."
+    },
+    {
+      "id": "theory-practice-loop",
+      "description": "Alternate between building (practice) and writing (theory). Each informs the other.",
+      "when": "Always. This IS the research methodology.",
+      "evidence": "The meander iterations (practice) led to the space-filling ontology blog (theory) which reframed the problem as continuous vs discrete.",
+      "effectiveness": "This is what makes it RESEARCH, not just engineering.",
+      "caveat": "Don't get stuck in one mode. If you've been building for 2 hours, write. If you've been writing for 1 hour, build."
+    },
+    {
+      "id": "continue-command-heat-map",
+      "description": "Run heat_map_generator.py, pick the hottest actionable item, fix it, regenerate. The /continue skill automates this loop.",
+      "when": "Starting a session without a specific task, or finishing one task and looking for the next",
+      "evidence": "Heat map surfaces blocked items at 90, active topics at 60-80, empty sequences at 50. Fixes flow naturally.",
+      "effectiveness": "Eliminates 'what should I work on?' decision fatigue. Temperature = priority.",
+      "caveat": "Don't chase low-temperature items when high-temperature items exist. Fix blockers first."
+    },
+    {
+      "id": "solve-above-then-project-down",
+      "description": "Solve the problem at a HIGHER abstraction level, then project the solution onto the implementation",
+      "when": "The implementation keeps failing (like the meander tile problem)",
+      "evidence": "Meander insight: define the braid topology FIRST, then project onto tiles. The tile system was the constraint, not the solution.",
+      "effectiveness": "Breakthrough pattern. If you're stuck, go UP one level.",
+      "caveat": "Requires recognizing WHEN you're fighting the wrong abstraction."
+    }
+  ],
+  "templates": [
+    {
+      "id": "new-floor-pattern",
+      "name": "Create a new floor pattern",
+      "steps": [
+        "1. Find/photograph reference image",
+        "2. Analyze: what are the repeating elements? what symmetry group?",
+        "3. Create .gd with class_name, ArrayMesh, MosaicPalette, StaticBody3D, apply_grid_config()",
+        "4. Create .tscn (minimal scene file)",
+        "5. Register in commons/artifacts/registry/arrays.json",
+        "6. Run Godot capture: capture_multi_angle.gd --mode=artifact --target=<name>",
+        "7. Copy captures to encyclopedia gallery + blog",
+        "8. Update capture-manifest.json",
+        "9. Place in a museum map for VR testing"
+      ],
+      "time_estimate": "15-30 minutes per pattern"
+    },
+    {
+      "id": "new-facade-preset",
+      "name": "Create a new facade preset",
+      "steps": [
+        "1. Find/photograph reference building",
+        "2. Analyze: how many stories? bays? what zone hierarchy?",
+        "3. Create JSON in commons/facade_parts/presets/",
+        "4. Use version 3 format with zones, placements, materials",
+        "5. Test: point facade_builder.tscn to the new preset, capture",
+        "6. Compare to reference photo",
+        "7. Add to a museum map as exhibit_wall"
+      ],
+      "time_estimate": "10-20 minutes per preset"
+    },
+    {
+      "id": "new-museum-map",
+      "name": "Create a new museum map",
+      "steps": [
+        "1. Design room layout on paper or in floor plan editor",
+        "2. Create floor_plan.json with rooms, doorways, open_edges",
+        "3. Assign floor_pattern and wall_preset to each room",
+        "4. Add exhibit_walls for freestanding facades",
+        "5. Create minimal map_data.json (structure + spawn + teleporter + floor_plan_space)",
+        "6. Verify: all rooms ≥5×5, corridors ≥3 wide, all reachable, facades fit",
+        "7. Register in sequence",
+        "8. Capture top-down screenshot"
+      ],
+      "time_estimate": "20-40 minutes per map"
+    },
+    {
+      "id": "new-web-primitive",
+      "name": "Create a new web primitive editor",
+      "steps": [
+        "1. Identify the principle (what Godot infoboard does it match?)",
+        "2. Define the ONTOLOGICAL QUESTION (not 'how does it work' but 'what does it reveal?')",
+        "3. Build interactive canvas with the core concept",
+        "4. Add teaching content: 3 key lessons",
+        "5. Add JSON export for Godot bridge",
+        "6. Add to /primitives index page",
+        "7. Write the lens description for PRIMITIVE_ONTOLOGY.md"
+      ],
+      "time_estimate": "30-60 minutes per primitive"
+    },
+    {
+      "id": "investigate-pattern",
+      "name": "Deep investigation of a pattern/concept",
+      "steps": [
+        "1. Start with the reference photo or concept",
+        "2. Try the simplest implementation",
+        "3. Capture, compare, identify what's wrong",
+        "4. Try a different approach",
+        "5. Document EACH iteration (screenshot + description)",
+        "6. After 3-5 iterations, STOP and write about what you learned",
+        "7. If stuck, go UP one abstraction level",
+        "8. Blog the investigation (the failures ARE the research)",
+        "9. Record discoveries in LOD_DISCOVERIES.json"
+      ],
+      "time_estimate": "1-3 hours, open-ended"
+    }
+  ],
+  "directions_to_explore": [
+    {
+      "id": "continuous-meander",
+      "priority": "high",
+      "description": "Solve the meander with continuous coordinates, not tiles. The boundary function works — the rendering needs per-stone freedom.",
+      "related": [
+        "meander_threshold_floor",
+        "free_meander_floor",
+        "tile_meander_floor"
+      ],
+      "theoretical_connection": "This connects to the question of discrete vs continuous, which connects to Cantor's continuum, which connects to the ontology of space."
+    },
+    {
+      "id": "complete-primitive-editors",
+      "priority": "high",
+      "description": "Build web editors for all 20 infoboard principles. 3 done, 17 to go.",
+      "related": [
+        "primitives/point",
+        "primitives/line",
+        "primitives/grid"
+      ],
+      "theoretical_connection": "Each primitive is a LENS on reality. The collection of lenses IS a theory of computation."
+    },
+    {
+      "id": "facade-aedicula",
+      "priority": "medium",
+      "description": "Build the aedicula_frame part — the temple-front frame that defines Fourth Style wall painting. Missing from part catalog.",
+      "related": [
+        "pompeii_fourth_style",
+        "villa_mysteries"
+      ],
+      "theoretical_connection": "The aedicula is the FRAME — it declares that what's inside has been lifted into the space of representation. It's a visual bracket, a border, a reading protocol."
+    },
+    {
+      "id": "vr-floor-height",
+      "priority": "high",
+      "description": "Fix the floor plan space y_offset so museum floors align with the grid system floor. Currently broken — floors float or sink.",
+      "related": [
+        "floor_plan_space.gd",
+        "all museum maps"
+      ],
+      "theoretical_connection": "The gap between the platform you stand on and the museum you see is a literal λ parameter — the distance between system and content."
+    },
+    {
+      "id": "science-screen-integration",
+      "priority": "medium",
+      "description": "Place science_screen artifacts in museum maps next to the floor patterns they abstract. The 2D mirror next to the 3D reality.",
+      "related": [
+        "science_screen.gd",
+        "filter_screen.gd"
+      ],
+      "theoretical_connection": "The gap between 3D experience and 2D representation IS the research question made visible."
+    }
+  ],
+  "anti-patterns": [
+    {
+      "id": "tile-first-thinking",
+      "description": "Don't start with the tile/implementation. Start with the RULE/TOPOLOGY, then project down.",
+      "learned_from": "14 meander iterations — every tile-first approach produced identical repeated hooks"
+    },
+    {
+      "id": "too-many-maps",
+      "description": "22 museum maps but most haven't been tested in VR. Quality over quantity.",
+      "learned_from": "Building maps is fast but verifying they work in VR is slow and we skip it"
+    },
+    {
+      "id": "jitter-as-freedom",
+      "description": "Adding jitter to tiles doesn't make them mosaics. The DECISION must be free, not just the rendering.",
+      "learned_from": "Meander v14: jittered positions but grid-snapped decisions. Looked identical to v13."
+    }
+  ]
 }
