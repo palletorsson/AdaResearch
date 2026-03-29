@@ -143,3 +143,27 @@ In `ada_encyclopedia/public/blog/`:
 8. **Solve above, project down** — When stuck, go UP one abstraction level. Define the rule/topology first, then project onto implementation.
 
 **Anti-patterns to avoid:** Tile-first thinking (start with topology, not tiles), building too many maps without VR testing, jitter-as-freedom (adding noise to tile positions does not create mosaic freedom).
+
+## Map Building Understanding (Late Session Discovery)
+
+**Artifact parameters in interactables layer:**
+- `artifact_name:rotation:y_offset` (e.g. `origin:180:-0.5`)
+- `artifact_name:rotation:scale` (e.g. `script_runner#point:90:1`)
+- `#` suffix = variant (e.g. `script_runner#point`)
+
+**Utility codes beyond sp/t:**
+- `m:x:y:z:delay` = move player to position after delay
+- `an:angle` = set player angle
+- `sub:scene_name` = sub-scene link
+- `3t:text` = 3D floating text label
+- `ds` = dark sphere (scene lighting)
+
+**Key insight:** Maps are NARRATIVE SPACES, not data grids. Each map tells a story:
+1. Entry (spawn + context)
+2. Teaching moment (main artifact)
+3. Exploration (related artifacts)
+4. Reflection (text, darkness)
+5. Exit (teleporter)
+
+**Map Studio built:** /map-studio — 3-layer editor I understand from scratch.
+**Next:** Use Map Studio to build spine maps with narrative structure.
