@@ -135,6 +135,35 @@ See `doc/MAP_EDITING_PIPELINE.md` for detailed documentation.
 | `/ada-knowledge-updater` | track | Scan codebase, update knowledge |
 | `/ada-orchestrator` | track | Session handoff, onboarding |
 
+## Quick Context Loading
+
+For targeted work, use the LOD query tool instead of reading everything:
+```
+python tools/lod_query.py <topic>
+```
+
+This returns only the relevant context at the right depth. The tree is generated from the actual codebase.
+
+| Command | What you get |
+|---------|-------------|
+| `python tools/lod_query.py` | Project overview — stats, all sequences listed |
+| `python tools/lod_query.py mosaicanalysis` | Sequence detail — maps, artifacts, truth statement |
+| `python tools/lod_query.py MANN_Gallery_Museum` | Map detail — dimensions, artifacts placed |
+| `python tools/lod_query.py pompeii_mosaic_floor` | Artifact detail — exports, key functions, file path |
+| `python tools/lod_query.py pompeii_mosaic_floor._build_truchet_field` | Function detail |
+| `python tools/lod_query.py meander` | Fuzzy search — finds all meander-related items |
+| `python tools/lod_query.py --list sequences` | List all sequence IDs |
+
+To record what this session discovered:
+```
+python tools/lod_session_writer.py --topic "meander" --insight "tiles repeat, mosaics don't" --lod 3
+```
+
+To regenerate the tree after codebase changes:
+```
+python tools/lod_tree_generator.py
+```
+
 ## Artifact Creation Pattern
 
 3 files: `<token>.gd`, `<token>.tscn`, registry JSON entry.
