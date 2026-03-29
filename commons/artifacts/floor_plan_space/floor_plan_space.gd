@@ -17,7 +17,7 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
-@export var y_offset: float = -0.5
+@export var y_offset: float = 0.0  # GridSystem places artifact at cube top; rooms build at y=0 internally
 var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
@@ -25,7 +25,13 @@ var _built: bool = false
 
 
 func _ready() -> void:
-	_load_and_build()
+	# Defer build to next frame so global_position is valid
+	# (apply_grid_config will also trigger a build for artifacts)
+	call_deferred("_deferred_build")
+
+func _deferred_build() -> void:
+	if not _built:
+		_load_and_build()
 
 
 func apply_grid_config(config: Dictionary) -> void:
