@@ -98,3 +98,37 @@ Row 9: Frame counter + coordinate system (REFERENCE)
 ## Map Studio
 Built at `/map-studio`. I (Claude) built this from scratch and understand every layer.
 API: `/api/map-studio` (save/load), `/api/map-studio/artifacts` (search registry)
+
+## Design Language (learned from studying primitives maps)
+
+### Layout Principle: Top-to-Bottom Like a Book Page
+Maps are TALL, not wide. The player reads the map by walking forward (increasing row).
+
+### Consistent Elements
+- **Row 0:** Spawn (`sp`) + `m:x:y:z:0.1` for precise position + `an:-90` at right edge
+- **Row 1-3:** Teaching artifacts (the main content)
+- **Center area:** Dark sphere (both artifact + `ds` utility)
+- **Row 10-20:** Exploration artifacts, sub-scene portals (`sub:`)
+- **Near bottom:** Teleporter on VOID (`t` on S=0 — you fall to exit)
+- **Last rows:** Text label (`3t:concept_name`) + reference tools
+
+### Artifact Parameters
+```
+artifact_name                      → default placement
+artifact_name:rotation             → rotated (degrees)
+artifact_name:rotation:y_offset    → rotated + lifted/lowered
+artifact_name:rotation:y_offset:scale → rotated + offset + scaled
+artifact_name#variant              → variant of the artifact
+artifact_name:0:1.2:0#fillhole:remove → with group commands
+```
+
+### Grouping System
+- `#fillhole:remove` — this artifact creates a hole when removed
+- `#group:fillhole` — this artifact belongs to the fillhole group
+- When the puzzle artifact is solved, grouped artifacts appear/disappear
+
+### Key Dimensions
+- Point_One: 7x10 (small, focused)
+- Point_Lines: 7x27 (tall, sequential)
+- Point_Trace: 7x14 (medium)
+- Average: 7 wide, 10-27 deep
