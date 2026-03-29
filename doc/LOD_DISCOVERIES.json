@@ -6,6 +6,31 @@
       "topic": "LOD system",
       "insight": "Built 3-tool LOD onboarding: generator, query, session writer. Tree has 55 sequences, 498 maps, 1670 artifacts.",
       "lod": 0
+    },
+    {
+      "timestamp": "2026-03-29T21:15:51.391176+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces: entry(spawn+context) → teaching(main artifact) → exploration(related artifacts) → reflection(text+darkness) → exit(teleporter). Artifact params: name:rotation:y_offset. Structure 0=void 1=floor 2+=wall. Utilities: sp/t/ds/r/m:x:y:z:delay/an:angle/sub:scene/3t:text. The Map Studio at /map-studio understands all 3 layers.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative",
+        "structure",
+        "utilities",
+        "interactables"
+      ]
+    },
+    {
+      "timestamp": "2026-03-29T21:16:06.034423+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces with 5 phases. Structure 0=void 1=floor 2+=wall. Artifact params name:rotation:y_offset. Map Studio at /map-studio.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative"
+      ]
     }
   ]
 }
