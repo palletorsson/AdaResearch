@@ -2,18 +2,6 @@
   "generated": "2026-03-29T18:40:03.972022",
   "items": [
     {
-      "item": "VR floor plan height: y_offset not working consistently",
-      "temperature": 90,
-      "reason": "blocked",
-      "action": "unblock"
-    },
-    {
-      "item": "Flight mode: button conflicts with other systems",
-      "temperature": 90,
-      "reason": "blocked",
-      "action": "unblock"
-    },
-    {
       "item": "pattern",
       "temperature": 80,
       "reason": "recently worked on",
@@ -42,6 +30,18 @@
       "temperature": 80,
       "reason": "recently worked on",
       "action": "continue"
+    },
+    {
+      "item": "VR floor plan height: y_offset not working consistently",
+      "temperature": 0,
+      "reason": "FIXED: deferred build, auto_y = -global_position.y",
+      "action": "unblock"
+    },
+    {
+      "item": "Flight mode: button conflicts with other systems",
+      "temperature": 0,
+      "reason": "FIXED: left X button, no conflicts",
+      "action": "unblock"
     }
   ]
 }
