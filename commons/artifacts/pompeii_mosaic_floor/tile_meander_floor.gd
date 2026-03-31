@@ -80,119 +80,16 @@ const KEY_W := 10    # key unit width: 10 pixels per hook
 #
 # To get this alternating in/out, we need TWO half-keys in one unit:
 const KEY_UNIT: Array = [
-	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 1, 0, 1, 1, 1, 1, 0, 1, 1],
-	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-	[0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-	[0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-]		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = field_verts
-		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_field, wear_level))
-
-	if line_verts.size() > 0:
-		var arrays := []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = line_verts
-		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_meander, wear_level))
-
-	if grout_verts.size() > 0:
-		var arrays := []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = grout_verts
-		arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		arr_mesh.surface_set_material(arr_mesh.get_surface_count() - 1, MosaicPalette.create_material(color_grout, wear_level))
-
-	_mi = MeshInstance3D.new()
-	_mi.mesh = arr_mesh
-	_mi.position = Vector3(-fw * 0.5, 0.005, -fh * 0.5)
-	add_child(_mi)
-
-	print("[TileMeanderFloor] Built %dx%d grid (%d field, %d line tris)" % [
-		gw, gh,
-		field_verts.size() / 3,
-		line_verts.size() / 3,
-	])
-
-
-# ── Paint horizontal keys along bottom or top side ──
-func _paint_h_keys(pixels: Array, start_x: int, start_y: int, length: int, gw: int, gh: int, flip_v: bool) -> void:
-	if length <= 0:
-		return
-	# Tile KEY_UNIT horizontally
-	for px_offset in range(length):
-		var src_col := px_offset % KEY_W
-		var target_x := start_x + px_offset
-		if target_x < 0 or target_x >= gw:
-			continue
-		for row in range(BAND_H):
-			var src_row := (BAND_H - 1 - row) if flip_v else row
-			var target_y := start_y + row
-			if target_y < 0 or target_y >= gh:
-				continue
-			if KEY_UNIT[src_row][src_col] == 1:
-				pixels[target_y][target_x] = 1
-
-
-# ── Paint vertical keys along left or right side ──
-# Rotate KEY_UNIT 90 degrees CW for vertical run
-func _paint_v_keys(pixels: Array, start_x: int, start_y: int, length: int, gw: int, gh: int, flip_h: bool) -> void:
-	if length <= 0:
-		return
-	# When rotated 90 CW: output[y][x] = input[KEY_W-1-x][y % KEY_W] but we need to map properly.
-	# Rotated: the band runs vertically. Band width = BAND_H (now horizontal).
-	# The key repeats every KEY_W pixels vertically.
-	for py_offset in range(length):
-		var src_col := py_offset % KEY_W   # which column in the original key (maps to vertical position)
-		var target_y := start_y + py_offset
-		if target_y < 0 or target_y >= gh:
-			continue
-		for col in range(BAND_H):
-			# 90 CW rotation: rotated[py][px] = original[BAND_H - 1 - px][py_within_key]
-			# but px here is the column within the band (0..BAND_H-1)
-			var src_row: int
-			if flip_h:
-				src_row = col
-			else:
-				src_row = BAND_H - 1 - col
-			var target_x := start_x + col
-			if target_x < 0 or target_x >= gw:
-				continue
-			if KEY_UNIT[src_row][src_col] == 1:
-				pixels[target_y][target_x] = 1
-
-
-# ── Paint corner bitmap ──
-# rotation: 0=top-left, 1=top-right, 2=bottom-right, 3=bottom-left
-func _paint_corner_bmp(pixels: Array, cx: int, cy: int, gw: int, gh: int, rotation: int) -> void:
-	for py in range(BAND_H):
-		for px in range(BAND_H):
-			var src_row: int
-			var src_col: int
-			match rotation:
-				0:  # top-left: as-is
-					src_row = py
-					src_col = px
-				1:  # top-right: mirror horizontally
-					src_row = py
-					src_col = BAND_H - 1 - px
-				2:  # bottom-right: mirror both
-					src_row = BAND_H - 1 - py
-					src_col = BAND_H - 1 - px
-				3:  # bottom-left: mirror vertically
-					src_row = BAND_H - 1 - py
-					src_col = px
-
-			var val: int = CORNER[src_row][src_col]
-			var target_x := cx + px
-			var target_y := cy + py
-			if val == 1 and target_x >= 0 and target_x < gw and target_y >= 0 and target_y < gh:
-				pixels[target_y][target_x] = 1
+	[0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+	[1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+	[1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+	[1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+	[1, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
 
 
 # ── Paint thin border lines around the meander band ──

@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "description": "Point_One: spawn in darkness, discover a single point, touch it, world lights up.",
+  "initial_state": {
+    "hidden_artifacts": ["interactive_point_origin", "CoordinateSystem3M", "static_point", "frame_counter_display", "folding_past"],
+    "hidden_utilities": ["t"],
+    "lighting": { "ambient_energy": 0.1 }
+  },
+  "events": [
+    {
+      "id": "reveal_origin",
+      "trigger": { "type": "delay", "seconds": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "origin", "animation": "fade_in", "duration": 1.5 }
+      ]
+    },
+    {
+      "id": "reveal_point",
+      "trigger": { "type": "delay", "seconds": 4.0 },
+      "actions": [
+        { "type": "reveal", "target": "interactive_point_origin", "animation": "scale_up", "duration": 1.0 }
+      ]
+    },
+    {
+      "id": "player_touches_point",
+      "trigger": { "type": "zone", "position": [1, 3], "radius": 1.5 },
+      "actions": [
+        { "type": "reveal", "target": "CoordinateSystem3M", "animation": "scale_up", "duration": 0.8 },
+        { "type": "lighting", "ambient_energy": 0.6, "duration": 2.5 },
+        { "type": "text", "text": "position without extension", "position": [1, 2.5, 3] }
+      ]
+    },
+    {
+      "id": "show_more",
+      "trigger": { "type": "after", "event": "player_touches_point", "delay": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "static_point", "animation": "fade_in", "duration": 1.0 },
+        { "type": "reveal", "target": "folding_past", "animation": "fade_in", "duration": 1.5 }
+      ]
+    },
+    {
+      "id": "show_exit",
+      "trigger": { "type": "after", "event": "show_more", "delay": 2.0 },
+      "actions": [
+        { "type": "activate", "target": "t" },
+        { "type": "reveal", "target": "t", "animation": "fade_in", "duration": 1.0 }
+      ]
+    }
+  ]
+}

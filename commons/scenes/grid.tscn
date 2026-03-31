@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dp16jbaa5uj0v" path="res://commons/scenes/mapobjects/PlayerBoundsCheck.gd" id="4_bounds_script"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 [ext_resource type="Script" uid="uid://nwo7del1p6np" path="res://commons/audio/components/AudioLoadingIndicator.gd" id="6_loading"]
+[ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="7_darksphere"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
@@ -70,3 +71,5 @@ box_bounds = Vector3(100, 50, 100)
 script = ExtResource("6_loading")
 label_offset = Vector3(0, 0.3, -1.2)
 label_font_size = 24
+
+[node name="DarkSphere" parent="." index="10" instance=ExtResource("7_darksphere")]

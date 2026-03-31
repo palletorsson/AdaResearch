@@ -13,8 +13,8 @@ const CLIMB_NODE_NAME := "MovementClimb"
 # Map ability names (from soft_stages.json) to node names.
 # Only abilities defined in soft_stages.json movement_abilities are gated.
 # wall_walk is NOT gated — it has no stage entry and stays always available.
+# flight removed from gating — always available for testing/development
 const ABILITY_TO_NODE: Dictionary = {
-	"flight": FLIGHT_NODE_NAME,
 	"climb": CLIMB_NODE_NAME,
 }
 

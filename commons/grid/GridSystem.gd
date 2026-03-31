@@ -14,6 +14,7 @@ const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
+const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
 const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 
 # Configuration
@@ -35,6 +36,7 @@ var spawn_component
 var ceiling_component
 var wall_component
 var audio_component
+var timeline_component
 
 # Scene references
 @onready var base_cube = $CubeScene
@@ -168,6 +170,10 @@ func _initialize_components():
 	audio_component = AudioComponentScript.new()
 	audio_component.name = "GridAudioComponent"
 	add_child(audio_component)
+
+	timeline_component = TimelineComponentScript.new()
+	timeline_component.name = "GridTimelineComponent"
+	add_child(timeline_component)
 
 	# Connect component signals
 	_connect_component_signals()
@@ -303,6 +309,7 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	ceiling_component.initialize(self, data_component, component_settings)
 	wall_component.initialize(self, data_component, component_settings)
 	audio_component.initialize(self, data_component)
+	timeline_component.initialize(self, data_component, structure_component, component_settings)
 
 	# Set sequence ID if available from scene data
 	var current_sequence = get_meta("current_sequence", {})

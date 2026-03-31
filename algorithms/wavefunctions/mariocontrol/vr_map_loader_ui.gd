@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 class_name VRMapLoaderUI
 
 ## Compatibility signal expected by settings_ui.gd.

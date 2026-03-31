@@ -1,6 +1,6 @@
 extends Node
 
-@export var enabled: bool = true
+@export var enabled: bool = false
 @export var oversight_base_url: String = "http://localhost:3001"
 @export var voice_endpoint: String = "/api/voice"
 @export var push_to_talk_action: StringName = &"oversight_push_to_talk"

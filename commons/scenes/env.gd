@@ -4,7 +4,7 @@ extends Node3D
 
 # === ENVIRONMENT CONFIGURATION ===
 @export_group("Environment Settings")
-@export var auto_setup_on_ready: bool = true
+@export var auto_setup_on_ready: bool = false
 @export var target_platform: String = "desktop_vr"  # "desktop_vr" or "mobile_vr"
 @export var enable_advanced_effects: bool = true
 @export var performance_target_fps: int = 90

@@ -7,7 +7,7 @@ class_name DarkSphereUtility
 
 @export var sphere_radius: float = 50.0
 @export var sphere_color: Color = Color(0.02, 0.02, 0.03)
-@export var ambient_light_energy: float = 0.15
+@export var ambient_light_energy: float = 0.4
 @export var ambient_light_color: Color = Color(0.6, 0.55, 0.5)
 
 var _mesh: MeshInstance3D
@@ -61,7 +61,7 @@ func _setup_environment() -> void:
 	env.ambient_light_color = ambient_light_color
 	env.ambient_light_energy = ambient_light_energy
 	env.fog_enabled = false
-	env.tonemap_mode = Environment.TONE_MAP_FILMIC
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 
 	_env = WorldEnvironment.new()
 	_env.name = "DarkSphereEnvironment"
