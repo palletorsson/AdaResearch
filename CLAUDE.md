@@ -33,13 +33,56 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 
 Run from repo root:
 
+### Steering & Status
 | Tool | Command | Purpose |
 |------|---------|---------|
+| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 19 spine sequences through 7 completion stages |
+| **Pipeline (single)** | `python tools/sequence_pipeline_scorer.py <seq_id>` | Score one sequence |
 | **Dashboard** | `powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status, recommendations |
+| **Heat Map** | `python tools/heat_map_generator.py` | Temperature-based priority scoring |
+
+### Navigation & Context
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **LOD Query** | `python tools/lod_query.py <topic>` | Fractal-depth context lookup |
+| **LOD Tree Gen** | `python tools/lod_tree_generator.py` | Regenerate LOD_TREE.json from codebase |
+| **LOD Writer** | `python tools/lod_session_writer.py --topic X --insight Y --lod N` | Record session discoveries |
 | **Ada Navigator** | `python tools/ada/ada.py overview` | Seq/map/artifact lookup |
-| **Workbench** | `python tools/spine_map_workbench.py status` | Sequence contracts, scaffolding |
+
+### Validation & Quality
+| Tool | Command | Purpose |
+|------|---------|---------|
 | **Pathfinder** | `python tools/map_pathfinder.py check <MapName> --verbose` | Reachability, rule validation |
+| **Verify Sequence** | `python tools/verify_sequence.py <seq_id>` | Full sequence validation |
+| **Workbench** | `python tools/spine_map_workbench.py status` | Sequence contracts, scaffolding |
 | **Release Gates** | `python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json` | Launch-quality checks |
+
+### Content & Identity
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **Garden Listener** | `python tools/garden_listener.py --diagnosis` | Audit sequence/map/artifact health |
+| **Query Identities** | `python tools/query_identities.py truths` | Find @identity truth statements |
+| **Map Text Writer** | `python tools/map_text_writer.py` | Generate blurb/intent/technical docs |
+| **Classify Artifacts** | `python tools/classify_artifacts.py` | Auto-classify artifacts by category |
+
+### Companion Tools (separate repos)
+| Tool | Location | Purpose |
+|------|----------|---------|
+| **Context Manager** | `C:\Users\palle\Documents\GitHub\claude_context_manager` | Session browser, clone, memory, working tree |
+| **Encyclopedia** | `C:\Users\palle\Documents\GitHub\ada_encyclopedia` | Web editors, search, substrates, API |
+| **Writer** | `C:\Users\palle\Documents\GitHub\ada_writer_pro` | Book writing tool |
+
+### Sequence Completion Pipeline (7 stages)
+```
+1. Structure     — maps defined in sequence JSON
+2. Documentation — blurb.md + intent.md per map
+3. Artifacts     — every interactable has a scene file on disk
+4. Maps          — map_data.json with 3 layers
+5. Validation    — pathfinder passes
+6. VR Testing    — walked in headset, feedback via bridge
+7. Polish        — captures fresh, docs updated
+```
+HEAD = lowest incomplete stage. Work at the head. Move it forward.
 
 ## Godot Capture Pipeline
 
