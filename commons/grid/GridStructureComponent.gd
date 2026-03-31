@@ -61,6 +61,8 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	# Only update base_cube if the template is valid
 	if is_instance_valid(cube_template):
 		base_cube = cube_template
+		# Always hide the template cube — it's only used for mesh/material extraction
+		base_cube.visible = false
 
 	# Apply settings
 	cube_size = settings.get("cube_size", 1.0)

@@ -20,8 +20,8 @@ extends Node3D
 class_name ScienceScreen
 
 ## Physical dimensions
-@export var screen_width: float = 2.0
-@export var screen_height: float = 1.5
+@export var screen_width: float = 3.0
+@export var screen_height: float = 2.2
 
 ## Colors
 @export var screen_color: Color = Color(0.05, 0.05, 0.08)
@@ -50,9 +50,15 @@ var _cell_count: int = 0
 var _pattern_type: String = "none"
 var _source_artifact_name: String = ""
 
+## Point tracking mode — when a pickable point is nearby
+var _tracking_point: Node3D = null
+var _point_mode: bool = false
+var _point_trail: Array[Vector3] = []  # Trail of recent positions
+const MAX_TRAIL := 60
+
 ## Viewport resolution
-const VP_WIDTH: int = 512
-const VP_HEIGHT: int = 384
+const VP_WIDTH: int = 768
+const VP_HEIGHT: int = 576
 
 ## Scan timer
 var _scan_timer: float = 0.0
@@ -69,6 +75,16 @@ func _process(delta: float) -> void:
 	if _scan_timer >= scan_interval:
 		_scan_timer = 0.0
 		_scan_for_artifacts()
+		if not _point_mode:
+			_scan_for_points()
+
+	# Track point position for trail
+	if _point_mode and is_instance_valid(_tracking_point) and _tracking_point.visible:
+		var pos := _tracking_point.global_position
+		_point_trail.append(pos)
+		if _point_trail.size() > MAX_TRAIL:
+			_point_trail.pop_front()
+
 	_canvas.queue_redraw()
 
 
@@ -187,6 +203,45 @@ func _scan_subtree(node: Node, origin: Vector3, best_dist: float, best_node: Nod
 					best_dist = d
 					best_node = grandchild
 					_source_artifact_name = grandchild.name
+
+func _scan_for_points() -> void:
+	## Look for nearby pickable points (XRToolsPickable with position data)
+	var parent := get_parent()
+	if not parent:
+		return
+	var my_pos := global_position
+	_scan_point_subtree(parent, my_pos)
+
+func _scan_point_subtree(node: Node, origin: Vector3) -> void:
+	for child in node.get_children():
+		if child == self:
+			continue
+		if child is Node3D:
+			var lookup: String = str(child.get_meta("artifact_lookup_name", ""))
+			var is_point: bool = "point" in lookup or "point" in child.name.to_lower()
+			if is_point and child.get("freeze") != null:
+				var d: float = origin.distance_to(child.global_position)
+				if d < scan_radius:
+					_tracking_point = child
+					_point_mode = true
+					_label_name = "POINT TRACKER"
+					_source_artifact_name = lookup if lookup != "" else child.name
+					print("[ScienceScreen] Tracking point: %s" % _source_artifact_name)
+					return
+		for grandchild in child.get_children():
+			if grandchild is Node3D:
+				var lookup: String = str(grandchild.get_meta("artifact_lookup_name", ""))
+				var is_point: bool = "point" in lookup or "point" in grandchild.name.to_lower()
+				if is_point and grandchild.get("freeze") != null:
+					var d: float = origin.distance_to(grandchild.global_position)
+					if d < scan_radius:
+						_tracking_point = grandchild
+						_point_mode = true
+						_label_name = "POINT TRACKER"
+						_source_artifact_name = lookup if lookup != "" else grandchild.name
+						print("[ScienceScreen] Tracking point: %s" % _source_artifact_name)
+						return
+
 
 func _extract_grid_data(node: Node) -> void:
 	# Try to read grid dimensions from common patterns
@@ -388,10 +443,15 @@ class _ScreenCanvas extends Control:
 		]
 		draw_string(font, Vector2(8, status_y), status, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.5, 0.5, 0.55))
 
-		# ── Grid visualization ──
+		# ── Visualization area ──
 		var grid_top := status_y + 12.0
 		var grid_margin := 16.0
 		var grid_area := Vector2(vp_size.x - grid_margin * 2, vp_size.y - grid_top - grid_margin)
+
+		# ── Point tracking mode ──
+		if screen_ref._point_mode and is_instance_valid(screen_ref._tracking_point):
+			_draw_point_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
 
 		if screen_ref._grid_cols > 0 and screen_ref._grid_rows > 0:
 			var cell_w := grid_area.x / float(screen_ref._grid_cols)
@@ -445,18 +505,105 @@ class _ScreenCanvas extends Control:
 			var msg := "Scanning for artifacts..."
 			draw_string(font, Vector2(vp_size.x * 0.5 - 60, vp_size.y * 0.5), msg, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.3, 0.35))
 
-		# ── Scanline overlay (subtle CRT feel) ──
-		var scanline_color := Color(0, 0, 0, 0.06)
-		var y := 0.0
-		while y < vp_size.y:
-			draw_line(Vector2(0, y), Vector2(vp_size.x, y), scanline_color, 1.0)
-			y += 3.0
+	func _draw_point_tracker(vp_size: Vector2, grid_top: float, margin: float, area: Vector2, font: Font) -> void:
+		var pos: Vector3 = screen_ref._tracking_point.global_position
+		var grid_range: float = 5.0
 
-		# ── Border glow pulse ──
-		var t := fmod(Time.get_ticks_msec() / 1000.0, 4.0) / 4.0
-		var pulse := 0.3 + 0.15 * sin(t * TAU)
-		var glow_color := Color(screen_ref.highlight_color, pulse)
-		draw_rect(Rect2(0, 0, vp_size.x, 1), glow_color)
-		draw_rect(Rect2(0, vp_size.y - 1, vp_size.x, 1), glow_color)
-		draw_rect(Rect2(0, 0, 1, vp_size.y), glow_color)
-		draw_rect(Rect2(vp_size.x - 1, 0, 1, vp_size.y), glow_color)
+		# ── Scientific dark background ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(0.02, 0.02, 0.04))
+
+		# ── Header ──
+		draw_rect(Rect2(0, 0, vp_size.x, 36), Color(0.05, 0.05, 0.08))
+		draw_string(font, Vector2(12, 25), "POINT POSITION", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.4, 0.8, 1.0))
+		draw_string(font, Vector2(vp_size.x - 150, 25), "P = (x, y)", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.3, 0.3, 0.4))
+
+		# ── Coordinate grid area (X horizontal, Y vertical) ──
+		var grid_top_y: float = 44.0
+		var side: float = minf(area.x, vp_size.y - grid_top_y - 50)
+		var ox: float = (vp_size.x - side) * 0.5
+		var oy: float = grid_top_y + 4
+
+		# Grid background
+		draw_rect(Rect2(ox - 1, oy - 1, side + 2, side + 2), Color(0.04, 0.04, 0.06))
+
+		# Minor grid (thin)
+		var minor_div: int = 20
+		var minor_step: float = side / float(minor_div)
+		for i in range(minor_div + 1):
+			var p: float = float(i) * minor_step
+			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.06, 0.07, 0.09), 0.5)
+			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.06, 0.07, 0.09), 0.5)
+
+		# Major grid (brighter)
+		var major_div: int = 4
+		var major_step: float = side / float(major_div)
+		for i in range(major_div + 1):
+			var p: float = float(i) * major_step
+			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.1, 0.12, 0.16), 1.0)
+			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.1, 0.12, 0.16), 1.0)
+
+		# Center axes
+		var cx: float = ox + side * 0.5
+		var cy: float = oy + side * 0.5
+		# X axis (red)
+		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.7, 0.15, 0.15, 0.5), 1.5)
+		# Y axis (green) — Godot Y maps to screen vertical
+		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.15, 0.7, 0.15, 0.5), 1.5)
+
+		# Axis labels with values
+		draw_string(font, Vector2(ox + side + 4, cy + 4), "X", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.7, 0.2, 0.2))
+		draw_string(font, Vector2(cx + 4, oy - 2), "Y", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.2, 0.7, 0.2))
+
+		# Scale labels at edges
+		var range_str: String = "%.0f" % grid_range
+		draw_string(font, Vector2(ox - 2, cy + 14), "-%s" % range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
+		draw_string(font, Vector2(ox + side - 14, cy + 14), range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
+		draw_string(font, Vector2(cx + 6, oy + side - 2), "-%s" % range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
+		draw_string(font, Vector2(cx + 6, oy + 10), range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
+
+		# ── Map position: X → screen X, Y → screen Y (inverted: up = positive) ──
+		var dot_x: float = cx + (pos.x / grid_range) * (side * 0.5)
+		var dot_y: float = cy - (pos.y / grid_range) * (side * 0.5)  # Invert Y so up is positive
+
+		# ── Trail ──
+		if screen_ref._point_trail.size() > 1:
+			for i in range(screen_ref._point_trail.size() - 1):
+				var t0: Vector3 = screen_ref._point_trail[i]
+				var t1: Vector3 = screen_ref._point_trail[i + 1]
+				var tx0: float = cx + (t0.x / grid_range) * (side * 0.5)
+				var ty0: float = cy - (t0.y / grid_range) * (side * 0.5)
+				var tx1: float = cx + (t1.x / grid_range) * (side * 0.5)
+				var ty1: float = cy - (t1.y / grid_range) * (side * 0.5)
+				var alpha: float = float(i) / float(screen_ref._point_trail.size()) * 0.5
+				draw_line(Vector2(tx0, ty0), Vector2(tx1, ty1), Color(0.3, 0.8, 1.0, alpha), 1.5)
+
+		# ── Projection lines from dot to axes ──
+		# Dashed line to X axis
+		draw_line(Vector2(dot_x, dot_y), Vector2(dot_x, cy), Color(0.7, 0.15, 0.15, 0.3), 1.0)
+		# Dashed line to Y axis
+		draw_line(Vector2(dot_x, dot_y), Vector2(cx, dot_y), Color(0.15, 0.7, 0.15, 0.3), 1.0)
+		# Tick marks on axes
+		draw_rect(Rect2(dot_x - 1, cy - 4, 2, 8), Color(0.9, 0.3, 0.3))
+		draw_rect(Rect2(cx - 4, dot_y - 1, 8, 2), Color(0.3, 0.9, 0.3))
+
+		# ── Point dot (glowing) ──
+		draw_circle(Vector2(dot_x, dot_y), 16.0, Color(1.0, 0.6, 1.0, 0.1))
+		draw_circle(Vector2(dot_x, dot_y), 11.0, Color(1.0, 0.6, 1.0, 0.25))
+		draw_circle(Vector2(dot_x, dot_y), 6.0, Color(1.0, 0.8, 1.0))
+
+		# ── Coordinate readout (bottom panel) ──
+		var panel_y: float = oy + side + 8
+		draw_rect(Rect2(ox, panel_y, side, 48), Color(0.04, 0.04, 0.06))
+		draw_rect(Rect2(ox, panel_y, side, 1), Color(0.15, 0.2, 0.25))
+
+		# X value
+		var x_str: String = "x = %.3f" % pos.x
+		draw_string(font, Vector2(ox + 14, panel_y + 20), x_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.9, 0.3, 0.3))
+
+		# Y value
+		var y_str: String = "y = %.3f" % pos.y
+		draw_string(font, Vector2(ox + side * 0.5 + 14, panel_y + 20), y_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.3, 0.9, 0.3))
+
+		# Full vector
+		var vec_str: String = "P = (%.2f, %.2f)" % [pos.x, pos.y]
+		draw_string(font, Vector2(ox + 14, panel_y + 40), vec_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.5, 0.5, 0.6))

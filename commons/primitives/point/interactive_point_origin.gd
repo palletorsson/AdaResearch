@@ -51,12 +51,14 @@ var _display_format_index: int = 2 # Start at 2 so first pickup cycles to 0 (def
 func _ready() -> void:
 	super()
 	
-	# Get mesh and materials
+	# Get mesh and materials — start glowing so point is visible in dark scenes
 	var mesh_instance = get_node_or_null("MeshInstance3D")
 	if mesh_instance:
 		_original_material = mesh_instance.get_active_material(0)
 		_glow_material = _build_glow_material(_original_material)
-	
+		mesh_instance.material_override = _glow_material
+		_is_glowing = true
+
 	# Setup audio
 	_setup_pickup_audio()
 	

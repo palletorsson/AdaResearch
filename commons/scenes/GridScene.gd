@@ -92,6 +92,12 @@ func _spawn_entry_by_type():
 		if settings.has("enter_type"):
 			enter_type = settings["enter_type"]
 
+	# Skip entry cubes if map has a timeline (scripted experience manages its own flow)
+	var timeline_path := "res://commons/maps/%s/timeline.json" % (grid_system.map_name if grid_system else "")
+	if FileAccess.file_exists(timeline_path):
+		print("GridScene: Timeline found — skipping entry cubes")
+		return
+
 	print("GridScene: Spawning entry type '%s'" % enter_type)
 
 	# Clear any existing entry
@@ -100,6 +106,10 @@ func _spawn_entry_by_type():
 		existing.queue_free()
 
 	# Spawn based on type
+	if enter_type == "none":
+		print("GridScene: enter_type=none — no entry cubes")
+		return
+
 	var instance: Node3D
 	if enter_type == "corridor":
 		instance = CORRIDOR_SCENE.instantiate()
@@ -131,12 +141,10 @@ func _spawn_entry_by_type():
 	print("GridScene: Spawned %s at position %s" % [enter_type, instance.position])
 
 func _deferred_entry_check():
-	"""Fallback check after a frame - spawn entry if not already done"""
-	await get_tree().process_frame  # Wait one more frame for map data
-	var existing = get_node_or_null("ActiveEntry")
-	if not existing:
-		print("GridScene: Deferred fallback - spawning entry")
-		_spawn_entry_by_type()
+	"""Fallback check — wait for map generation signal instead of spawning immediately"""
+	# Don't spawn here. Wait for _on_map_generation_complete which has the actual map data.
+	# The signal-based path is the correct one.
+	pass
 
 func _on_map_generation_complete():
 	"""Handle grid system completing map generation"""

@@ -22,27 +22,60 @@ func initialize(grid_system: Node, data_component: Node, structure_component: No
 	_grid_system = grid_system
 	_structure_component = structure_component
 
+	# Get the lookup_name (filesystem name with underscores), not display name
 	var map_name: String = ""
-	if data_component.has_method("get_map_name"):
-		map_name = data_component.get_map_name()
-	elif grid_system.get("current_map_name"):
-		map_name = grid_system.current_map_name
+	if data_component and data_component.has_method("get_current_map_name"):
+		map_name = data_component.get_current_map_name()
+	if map_name == "" and grid_system.get("map_name"):
+		map_name = grid_system.map_name
+	# Fallback: try get_map_name but replace spaces with underscores
+	if map_name == "" and data_component and data_component.has_method("get_map_name"):
+		map_name = data_component.get_map_name().replace(" ", "_")
+
+	print("[Timeline] Init: map_name = '%s'" % map_name)
 
 	if map_name == "":
+		print("[Timeline] No map name found — skipping")
 		return
 
 	_load_timeline(map_name)
 	if _events.is_empty():
+		print("[Timeline] No timeline.json for %s" % map_name)
 		return
 
-	# Wait one frame so all artifacts are placed
+	# Wait for artifacts to be placed
+	if not is_inside_tree():
+		print("[Timeline] WARNING: Not in tree yet, deferring")
+		await ready
 	await get_tree().process_frame
 	await get_tree().process_frame
+
+	# Debug: list all artifacts with meta
+	_debug_list_artifacts()
 
 	_apply_initial_state()
 	_arm_triggers()
 	_initialized = true
-	print("[Timeline] Loaded %d events for %s" % [_events.size(), map_name])
+	print("[Timeline] ✓ Loaded %d events for %s" % [_events.size(), map_name])
+
+
+func _debug_list_artifacts():
+	var count := 0
+	_walk_tree(_grid_system, func(node):
+		if node is Node3D:
+			var ln = node.get_meta("artifact_lookup_name", "")
+			var aid = node.get_meta("artifact_id", "")
+			if ln != "" or aid != "":
+				print("[Timeline] Found artifact: '%s' (id='%s') node=%s" % [ln, aid, node.name])
+				count += 1
+	)
+	print("[Timeline] Total artifacts with meta: %d" % count)
+
+
+func _walk_tree(node: Node, callback: Callable):
+	callback.call(node)
+	for child in node.get_children():
+		_walk_tree(child, callback)
 
 
 # ── Load ────────────────────────────────────────────────────
@@ -70,27 +103,45 @@ func _load_timeline(map_name: String) -> void:
 func _apply_initial_state() -> void:
 	var initial: Dictionary = _timeline_data.get("initial_state", {})
 
+	# Set lighting FIRST — kill all light immediately
+	var lighting: Dictionary = initial.get("lighting", {})
+	if lighting.has("ambient_energy"):
+		_set_ambient_energy(float(lighting["ambient_energy"]), 0.0)
+	if lighting.has("directional_energy"):
+		_set_directional_energy(float(lighting["directional_energy"]), 0.0)
+
 	# Hide artifacts
 	for art_name in initial.get("hidden_artifacts", []):
 		var node := _find_artifact(art_name)
 		if node:
 			node.visible = false
-			# Disable collision too
 			_set_collision_recursive(node, false)
 
 	# Hide/deactivate utilities (teleporter)
 	for util_name in initial.get("hidden_utilities", []):
 		if util_name == "t":
 			_set_teleporters_active(false)
+			# Retry after a short delay in case teleporter isn't placed yet
+			_retry_hide_teleporter()
 		else:
 			var node := _find_utility(util_name)
 			if node:
 				node.visible = false
 
-	# Set initial lighting
-	var lighting: Dictionary = initial.get("lighting", {})
-	if lighting.has("ambient_energy"):
-		_set_ambient_energy(float(lighting["ambient_energy"]), 0.0)
+
+func _retry_hide_teleporter() -> void:
+	# Teleporter may be placed after initial state runs — retry a few times
+	for i in range(5):
+		await get_tree().create_timer(0.3).timeout
+		var tp := _find_teleporter(_grid_system.get_tree().current_scene)
+		if tp and tp.visible:
+			tp.set("active", false)
+			tp.visible = false
+			for child in tp.get_children():
+				if child is Node3D:
+					child.visible = false
+			print("[Timeline] Teleporter hidden (retry %d)" % i)
+			return
 
 
 # ── Arm triggers ────────────────────────────────────────────
@@ -310,6 +361,8 @@ func _action_hide(target: String, duration: float) -> void:
 func _action_lighting(action: Dictionary, duration: float) -> void:
 	if action.has("ambient_energy"):
 		_set_ambient_energy(float(action["ambient_energy"]), duration)
+	if action.has("directional_energy"):
+		_set_directional_energy(float(action["directional_energy"]), duration)
 
 
 func _action_grid_animate(action: Dictionary) -> void:
@@ -343,18 +396,19 @@ func _action_text(action: Dictionary) -> void:
 # ── Helpers ─────────────────────────────────────────────────
 
 func _find_artifact(art_name: String) -> Node3D:
-	# Search in grid system children (interactables component places them)
-	for child in _grid_system.get_children():
-		if child.name.begins_with(art_name) or child.get_meta("lookup_name", "") == art_name:
-			return child
-		# Search one level deeper
-		for grandchild in child.get_children():
-			if grandchild.name.begins_with(art_name) or grandchild.get_meta("lookup_name", "") == art_name:
-				return grandchild
-	# Try scene tree search
-	var results := _grid_system.get_tree().current_scene.find_children("*%s*" % art_name, "", true, false)
-	if results.size() > 0:
-		return results[0]
+	return _search_node(_grid_system, art_name)
+
+
+func _search_node(node: Node, art_name: String) -> Node3D:
+	if node is Node3D:
+		var ln: String = node.get_meta("artifact_lookup_name", "")
+		var aid: String = node.get_meta("artifact_id", "")
+		if ln == art_name or aid == art_name:
+			return node
+	for child in node.get_children():
+		var found := _search_node(child, art_name)
+		if found:
+			return found
 	return null
 
 
@@ -366,12 +420,28 @@ func _find_utility(util_name: String) -> Node3D:
 
 
 func _set_teleporters_active(active: bool) -> void:
-	var teleporters := _grid_system.get_tree().current_scene.find_children("*", "Node3D", true, false)
-	for node in teleporters:
-		if node.has_method("_set_active") or node.get("active") != null:
-			if "teleport" in node.name.to_lower() or node.is_in_group("teleporter"):
-				node.set("active", active)
-				node.visible = active
+	var tp := _find_teleporter(_grid_system.get_tree().current_scene)
+	if tp:
+		tp.set("active", active)
+		tp.visible = active
+		for child in tp.get_children():
+			if child is Node3D:
+				child.visible = active
+		print("[Timeline] Teleporter %s: %s" % ["SHOWN" if active else "HIDDEN", tp.name])
+	else:
+		print("[Timeline] WARNING: No teleporter found")
+
+
+func _find_teleporter(node: Node) -> Node3D:
+	if node is Node3D and node.name.to_lower() == "teleport":
+		return node
+	if node is Node3D and node.get("active") != null and node.is_in_group("teleporter"):
+		return node
+	for child in node.get_children():
+		var found := _find_teleporter(child)
+		if found:
+			return found
+	return null
 
 
 func _set_ambient_energy(target: float, duration: float) -> void:
@@ -389,12 +459,41 @@ func _set_ambient_energy(target: float, duration: float) -> void:
 		tween.tween_property(env, "ambient_light_energy", target, duration)
 
 
+func _set_directional_energy(target: float, duration: float) -> void:
+	# Find all DirectionalLight3D in the scene
+	_walk_tree(_grid_system.get_tree().current_scene, func(node):
+		if node is DirectionalLight3D:
+			if duration <= 0:
+				node.light_energy = target
+			else:
+				var tween := create_tween()
+				tween.tween_property(node, "light_energy", target, duration)
+			print("[Timeline] DirectionalLight energy -> %.1f (%.1fs)" % [target, duration])
+	)
+
+
 func _set_collision_recursive(node: Node, enabled: bool) -> void:
+	# Handle XRToolsPickable — toggle its enabled property
+	if node.has_method("set_pickable") or node.get("enabled") != null:
+		if "XRToolsPickable" in node.get_class() or node.get_script() and "Pickable" in str(node.get_script().get_path()):
+			node.set("enabled", enabled)
+
+	# Handle collision shapes
 	if node is CollisionShape3D:
 		node.disabled = not enabled
+
+	# Handle physics bodies
 	if node is StaticBody3D or node is RigidBody3D:
-		if node.has_method("set_collision_layer"):
-			node.collision_layer = 1 if enabled else 0
-			node.collision_mask = 1 if enabled else 0
+		if enabled:
+			# Restore default layers
+			node.collision_layer = node.get_meta("_original_layer", 1)
+			node.collision_mask = node.get_meta("_original_mask", 1)
+		else:
+			# Save and zero out
+			node.set_meta("_original_layer", node.collision_layer)
+			node.set_meta("_original_mask", node.collision_mask)
+			node.collision_layer = 0
+			node.collision_mask = 0
+
 	for child in node.get_children():
 		_set_collision_recursive(child, enabled)

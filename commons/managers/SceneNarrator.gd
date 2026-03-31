@@ -10,11 +10,11 @@ extends Node
 @export var auto_narrate_on_map_load: bool = true
 @export var simulation_interval: float = 2.0
 
-# --- Output paths ---
-const SPATIAL_PATH = "res://ada_run/scene_spatial.md"
-const SIMULATION_PATH = "res://ada_run/simulation_transcript.md"
-const JOURNEY_PATH = "res://ada_run/journey_narrative.md"
-const EVENTS_PATH = "res://ada_run/scene_events.jsonl"
+# --- Output paths (use user:// on mobile, res:// on desktop for AI readability) ---
+var SPATIAL_PATH: String = "user://ada_run/scene_spatial.md" if OS.has_feature("android") else "res://ada_run/scene_spatial.md"
+var SIMULATION_PATH: String = "user://ada_run/simulation_transcript.md" if OS.has_feature("android") else "res://ada_run/simulation_transcript.md"
+var JOURNEY_PATH: String = "user://ada_run/journey_narrative.md" if OS.has_feature("android") else "res://ada_run/journey_narrative.md"
+var EVENTS_PATH: String = "user://ada_run/scene_events.jsonl" if OS.has_feature("android") else "res://ada_run/scene_events.jsonl"
 
 # --- State ---
 var _grid_system: GridSystem = null
@@ -1405,8 +1405,11 @@ func _resolve_path(path: String) -> String:
 		if test:
 			test.close()
 			return path
-		# Fall back to user://
-		return path.replace("res://", "user://")
+		# Fall back to user:// and ensure directory exists
+		var user_path = path.replace("res://", "user://")
+		var dir_path = user_path.get_base_dir()
+		DirAccess.make_dir_recursive_absolute(dir_path)
+		return user_path
 	return path
 
 func _timestamp() -> String:
