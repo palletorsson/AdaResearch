@@ -1,0 +1,100 @@
+{
+  "version": "1.0",
+  "description": "QFEP_Introduction: Total darkness. The entropy dial appears first. Then the formula materializes. Then the terms. Then the world.",
+  "initial_state": {
+    "hidden_artifacts": [
+      "qfep_formula_3d",
+      "lambda_slider",
+      "phi_slider",
+      "grab_sphere_F",
+      "grab_sphere_E",
+      "grab_sphere_lambda",
+      "tt:qfep_introduction",
+      "tt:qfep_critical"
+    ],
+    "hidden_utilities": ["t"],
+    "lighting": {
+      "ambient_energy": 0.0,
+      "directional_energy": 0.0
+    }
+  },
+  "events": [
+    {
+      "id": "darkness_breathes",
+      "trigger": { "type": "delay", "delay": 2.0 },
+      "actions": [
+        { "type": "text", "text": "QFE = F − λE(S) + φΔE(S,t)", "position": [4, 3.0, 2], "duration": 4.0 },
+        { "type": "lighting", "ambient_energy": 0.05, "directional_energy": 0.0, "duration": 2.0 }
+      ]
+    },
+    {
+      "id": "lambda_emerges",
+      "trigger": { "type": "after", "event": "darkness_breathes", "delay": 3.0 },
+      "actions": [
+        { "type": "reveal", "target": "lambda_slider", "animation": "fade_in", "duration": 2.0 },
+        { "type": "lighting", "ambient_energy": 0.1, "directional_energy": 0.0, "duration": 2.0 },
+        { "type": "text", "text": "λ — how much entropy matters", "position": [2, 1.8, 4], "duration": 3.0 }
+      ]
+    },
+    {
+      "id": "player_approaches_slider",
+      "trigger": { "type": "zone", "position": [4, 4], "radius": 2.5 },
+      "actions": [
+        { "type": "reveal", "target": "phi_slider", "animation": "fade_in", "duration": 1.5 },
+        { "type": "text", "text": "φ — sensitivity to change over time", "position": [6, 1.8, 4], "duration": 3.0 },
+        { "type": "lighting", "ambient_energy": 0.15, "directional_energy": 0.1, "duration": 2.0 }
+      ]
+    },
+    {
+      "id": "formula_materializes",
+      "trigger": { "type": "after", "event": "player_approaches_slider", "delay": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "qfep_formula_3d", "animation": "scale_up", "duration": 2.5 },
+        { "type": "lighting", "ambient_energy": 0.25, "directional_energy": 0.2, "duration": 3.0 },
+        { "type": "text", "text": "the formula that unifies everything", "position": [4, 3.5, 2], "duration": 4.0 }
+      ]
+    },
+    {
+      "id": "F_term_appears",
+      "trigger": { "type": "after", "event": "formula_materializes", "delay": 2.5 },
+      "actions": [
+        { "type": "reveal", "target": "grab_sphere_F", "animation": "fade_in", "duration": 1.0 },
+        { "type": "text", "text": "F — the form-seeking drive", "position": [1, 1.5, 6], "duration": 3.0 }
+      ]
+    },
+    {
+      "id": "E_term_appears",
+      "trigger": { "type": "after", "event": "F_term_appears", "delay": 1.5 },
+      "actions": [
+        { "type": "reveal", "target": "grab_sphere_E", "animation": "fade_in", "duration": 1.0 },
+        { "type": "text", "text": "E(S) — entropy of the system", "position": [4, 1.5, 6], "duration": 3.0 }
+      ]
+    },
+    {
+      "id": "lambda_term_appears",
+      "trigger": { "type": "after", "event": "E_term_appears", "delay": 1.5 },
+      "actions": [
+        { "type": "reveal", "target": "grab_sphere_lambda", "animation": "fade_in", "duration": 1.0 },
+        { "type": "text", "text": "λ — the entropy weight", "position": [7, 1.5, 6], "duration": 3.0 }
+      ]
+    },
+    {
+      "id": "full_reveal",
+      "trigger": { "type": "after", "event": "lambda_term_appears", "delay": 2.0 },
+      "actions": [
+        { "type": "lighting", "ambient_energy": 0.5, "directional_energy": 0.8, "duration": 4.0 },
+        { "type": "reveal", "target": "tt:qfep_introduction", "animation": "fade_in", "duration": 1.5 },
+        { "type": "reveal", "target": "tt:qfep_critical", "animation": "fade_in", "duration": 1.5 },
+        { "type": "text", "text": "see it — touch it — begin to understand", "position": [4, 2.5, 8], "duration": 5.0 }
+      ]
+    },
+    {
+      "id": "show_exit",
+      "trigger": { "type": "after", "event": "full_reveal", "delay": 4.0 },
+      "actions": [
+        { "type": "activate", "target": "t" },
+        { "type": "reveal", "target": "t", "animation": "fade_in", "duration": 1.5 }
+      ]
+    }
+  ]
+}
