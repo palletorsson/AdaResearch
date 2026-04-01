@@ -76,13 +76,14 @@ func _initialize():
 
 	root.add_child(instance)
 
-	# Setup a camera so screenshots work
+	# Setup camera — player perspective: standing at spawn, looking forward at the screen
 	_camera = Camera3D.new()
 	_camera.name = "AgentCamera"
-	_camera.position = Vector3(3, 8, 12)
-	_camera.look_at(Vector3(3, 0, 5))
+	_camera.position = Vector3(1, 1.7, 5)  # Standing in front of the screen
 	_camera.current = true
 	root.add_child(_camera)
+	# Find the science screen node and look directly at it
+	call_deferred("_aim_camera_at_screen")
 
 	await _wait(1.0)
 
@@ -271,6 +272,35 @@ func _build_plan(events: Array) -> Array[Dictionary]:
 
 
 # ── Event callback ───────────────────────────────────────────
+
+func _aim_camera_at_screen() -> void:
+	await _wait(5.0)  # Wait for map to fully load
+	# Find the science screen by walking the tree
+	var screen: Node3D = null
+	var all_nodes := root.get_children()
+	for node in root.get_children():
+		_find_screen(node)
+	if _found_screen:
+		_camera.position = _found_screen.global_position + Vector3(0, 0.5, -2.5)
+		_camera.look_at(_found_screen.global_position + Vector3(0, 0.3, 0))
+		print("[Agent] Camera aimed at screen at %s" % str(_found_screen.global_position))
+	else:
+		print("[Agent] WARNING: Science screen not found, using default aim")
+		_camera.look_at(Vector3(1, 1.5, 7))
+
+var _found_screen: Node3D = null
+
+func _find_screen(node: Node) -> void:
+	if _found_screen:
+		return
+	if node is Node3D:
+		var lookup: String = str(node.get_meta("artifact_lookup_name", ""))
+		if lookup == "science_screen" or "ScienceScreen" in node.name:
+			_found_screen = node
+			return
+	for child in node.get_children():
+		_find_screen(child)
+
 
 func _on_event(event_id: String):
 	if event_id not in _events_fired:

@@ -1,60 +1,143 @@
 {
-	"map_info": {"name": "The Line", "lookup_name": "Point_Line", "description": "Captures trace into a line. Here relational history becomes discipline: the trace is formalized into directed relation. This map stages the first formal link between discrete moments, converting duration into geometry. Lines are not given; they are captured traces.", "description_2": "The Line introduces relation, direction, and the possibility of measurement. By stretching between points or extending through space, the line transforms isolated positions into ordered relations. Length, direction, and orientation emerge as measurable properties, revealing how geometry begins not with form but with comparison. The player's embodied action makes explicit that a line is not an object but a negotiated distance between at least two commitments in space.", "manual_file": "res://commons/context/clipboard/tutorial_text/line_axioms.md", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 15, "max_height": 2}, "metadata": {"difficulty": "beginner", "category": "tutorial", "estimated_time": "3-4 minutes", "learning_objectives": ["Line as relation", "Measurement", "Direction and length"]}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
-	"documentation": {"summary": "Point_Line - Line Introduction Chamber", "layout": "7x15 grid with irregular voids and a central line interaction zone.", "objective": "Demonstrate line segment as relation between two points; embodied measurement.", "key_elements": ["`line_demo` at (3,5) - two snap points connected by dynamic measuring line", "`dark_sphere` enclosure at (3,2)", "Teleporter `t` at (5,6)"]},
-	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1.0, 0.9, 0.8], "energy": 1.2}},
-	"settings": {"enter_type": "I", "cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "0", "0"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "1", "1", "1", "0", "0"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "an:-90"],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "ds", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", ""],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "line_demo", " ", " ", " "],
-			["", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+	  "name": "The Line",
+	  "lookup_name": "Point_Line",
+	  "description": "Captures trace into a line. Here relational history becomes discipline: the trace is formalized into directed relation. This map stages the first formal link between discrete moments, converting duration into geometry. Lines are not given; they are captured traces.",
+	  "description_2": "The Line introduces relation, direction, and the possibility of measurement. By stretching between points or extending through space, the line transforms isolated positions into ordered relations. Length, direction, and orientation emerge as measurable properties, revealing how geometry begins not with form but with comparison. The player's embodied action makes explicit that a line is not an object but a negotiated distance between at least two commitments in space.",
+	  "manual_file": "res://commons/context/clipboard/tutorial_text/line_axioms.md",
+	  "version": "1.0",
+	  "format": "json",
+	  "dimensions": {
+		  "width": 7,
+		  "depth": 15,
+		  "max_height": 2
+	  },
+	  "metadata": {
+		  "difficulty": "beginner",
+		  "category": "tutorial",
+		  "estimated_time": "3-4 minutes",
+		  "learning_objectives": [
+			  "Line as relation",
+			  "Measurement",
+              "Direction and length"
+		  ]
+	  }
+  },
+  "utility_definitions": {
+	  "t": {
+		  "type": "teleporter",
+		  "name": "Next",
+		  "description": "Continue to next step",
+		  "properties": {
+			  "action": "next_in_sequence"
+		  }
+	  },
+	  "s": {
+		  "properties": {
+			  "height": 5.5
+		  }
+	  }
+  },
+  "documentation": {
+	  "summary": "Point_Line - Line Introduction Chamber",
+	  "layout": "7x15 grid with irregular voids and a central line interaction zone.",
+	  "objective": "Demonstrate line segment as relation between two points; embodied measurement.",
+	  "key_elements": [
+		  "`line_demo` at (3,5) - two snap points connected by dynamic measuring line",
+		  "`dark_sphere` enclosure at (3,2)",
+          "Teleporter `t` at (5,6)"
+	  ]
+  },
+  "lighting": {
+	  "ambient_color": [
+		  0.4,
+		  0.4,
+		  0.5
+	  ],
+	  "ambient_energy": 0.6,
+	  "directional_light": {
+		  "enabled": true,
+		  "direction": [
+			  -0.4,
+			  -0.7,
+			  -0.4
+		  ],
+		  "color": [
+			  1.0,
+			  0.9,
+			  0.8
+		  ],
+		  "energy": 1.2
+	  }
+  },
+  "settings": {
+	  "enter_type": "I",
+	  "cube_size": 1.0,
+	  "gutter": 0.0,
+	  "show_grid": true,
+	  "enable_physics": true,
+	  "auto_reveal_on_entry": false,
+	  "initial_tile_visibility": "hidden_except_corners",
+	  "background": {
+		  "type": "sky",
+		  "color": [
+			  0.2,
+			  0.3,
+			  0.7
+		  ]
+	  }
+  },
+  "layers": {
+	"structure": [
+	  ["1", "1", "1", "1", "1", "0", "0"],
+	  ["1", "1", "1", "1", "1", "0", "1"],
+	  ["0", "0", "1", "1", "1", "0", "0"],
+	  ["1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "0", "1"],
+	  ["0", "0", "0", "0", "1", "1", "1"],
+	  ["0", "0", "0", "0", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0"]
+	],
+	"utilities": [
+	  [" ", "sp", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", "an:-90"],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", "t", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "]
+	],
+	"interactables": [
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "line:0:1", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "science_screen:180:1.5", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "]
+	]
+  }
 }

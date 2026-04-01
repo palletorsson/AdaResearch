@@ -53,13 +53,31 @@ var _source_artifact_name: String = ""
 ## Point tracking mode — when a pickable point is nearby
 var _tracking_point: Node3D = null
 var _point_mode: bool = false
-var _point_trail: Array[Vector3] = []  # Trail of recent positions
-const MAX_TRAIL := 60
+var _point_origin: Vector3 = Vector3.ZERO  # Initial position — all coords relative to this
+var _point_origin_set: bool = false
+var _point_trail: Array[Vector3] = []  # Stores RELATIVE positions
+const MAX_TRAIL := 100
+
+## Point game state — target, score, particles
+var _point_target: Vector3 = Vector3.ZERO
+var _point_target_color: Color = Color(0.06, 0.65, 0.88)
+var _point_score: int = 0
+var _point_exploding: bool = false
+var _point_explode_timer: float = 0.0
+var _point_particles: Array[Dictionary] = []  # [{pos: Vector3, vel: Vector3, life: float, color: Color}]
+var _point_target_idx: int = 0
+const POINT_SNAP_DIST := 0.5
+const POINT_TARGET_COLORS: Array[Color] = [
+	Color(0.06, 0.65, 0.88), Color(0.96, 0.62, 0.04), Color(0.06, 0.73, 0.51),
+	Color(0.94, 0.27, 0.27), Color(0.93, 0.29, 0.60), Color(0.02, 0.71, 0.83),
+]
 
 ## Line tracking mode — two endpoints forming a line segment
 var _line_mode: bool = false
 var _tracking_line_p1: Node3D = null
 var _tracking_line_p2: Node3D = null
+var _line_origin: Vector3 = Vector3.ZERO  # Midpoint of initial line — all coords relative
+var _line_origin_set: bool = false
 
 ## Draw dot mode — tracks a drawing artifact's trail
 var _draw_mode: bool = false
@@ -85,6 +103,9 @@ func _ready() -> void:
 	_build_screen()
 	_build_viewport()
 	_apply_viewport_to_screen()
+	# Default to point mode with white coordinate grid
+	_point_mode = true
+	_label_name = "POINT POSITION"
 	# Initial scan
 	_scan_for_artifacts()
 
@@ -105,14 +126,79 @@ func _process(delta: float) -> void:
 		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
 			_scan_for_generic()
 
-	# Track point position for trail
+	# Track point position for trail + game logic
 	if _point_mode and is_instance_valid(_tracking_point) and _tracking_point.visible:
-		var pos: Vector3 = _tracking_point.global_position
+		var abs_pos: Vector3 = _tracking_point.global_position
+
+		# Set origin on first frame — all subsequent positions are relative
+		if not _point_origin_set:
+			_point_origin = abs_pos
+			_point_origin_set = true
+
+		# Relative position (origin = 0,0)
+		var pos: Vector3 = abs_pos - _point_origin
 		_point_trail.append(pos)
 		if _point_trail.size() > MAX_TRAIL:
 			_point_trail.pop_front()
 
+		# Initialize target if needed
+		if _point_target == Vector3.ZERO:
+			_spawn_new_target()
+
+		# Check if point reached target (using relative coords)
+		if not _point_exploding:
+			var d: float = Vector2(pos.x, pos.y).distance_to(Vector2(_point_target.x, _point_target.y))
+			if d < POINT_SNAP_DIST:
+				_point_exploding = true
+				_point_explode_timer = 0.5
+				_point_score += 1
+				_spawn_point_particles()
+
+		# Update explosion
+		if _point_exploding:
+			_point_explode_timer -= delta
+			if _point_explode_timer <= 0:
+				_point_exploding = false
+				_spawn_new_target()
+
+		# Update particles
+		for i in range(_point_particles.size() - 1, -1, -1):
+			var p: Dictionary = _point_particles[i]
+			p["pos"] += p["vel"] * delta
+			p["vel"].y -= 2.0 * delta
+			p["life"] -= delta
+			if p["life"] <= 0:
+				_point_particles.remove_at(i)
+
+	# Track line origin
+	if _line_mode and is_instance_valid(_tracking_line_p1) and is_instance_valid(_tracking_line_p2):
+		if not _line_origin_set:
+			_line_origin = (_tracking_line_p1.global_position + _tracking_line_p2.global_position) * 0.5
+			_line_origin_set = true
+
 	_canvas.queue_redraw()
+
+
+func _spawn_new_target() -> void:
+	_point_target = Vector3(
+		randf_range(-1.5, 1.5),
+		randf_range(-0.5, 1.5),
+		0
+	)
+	_point_target_idx += 1
+	_point_target_color = POINT_TARGET_COLORS[_point_target_idx % POINT_TARGET_COLORS.size()]
+
+
+func _spawn_point_particles() -> void:
+	for i in range(20):
+		var angle: float = (float(i) / 20.0) * TAU + randf() * 0.3
+		var speed: float = 1.5 + randf() * 3.0
+		_point_particles.append({
+			"pos": Vector3(_point_target.x, _point_target.y, 0),
+			"vel": Vector3(cos(angle) * speed, sin(angle) * speed, 0),
+			"life": 0.4 + randf() * 0.3,
+			"color": [Color(0.55, 0.36, 0.96), Color(0.06, 0.65, 0.88), Color(0.96, 0.62, 0.04), Color(1, 1, 1)].pick_random(),
+		})
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -689,8 +775,8 @@ class _ScreenCanvas extends Control:
 			_draw_generic_tracker(vp_size, grid_top, grid_margin, grid_area, font)
 			return
 
-		# ── Point tracking mode ──
-		if screen_ref._point_mode and is_instance_valid(screen_ref._tracking_point):
+		# ── Point tracking mode (show white grid even without tracked point) ──
+		if screen_ref._point_mode:
 			_draw_point_tracker(vp_size, grid_top, grid_margin, grid_area, font)
 			return
 
@@ -747,107 +833,121 @@ class _ScreenCanvas extends Control:
 			draw_string(font, Vector2(vp_size.x * 0.5 - 60, vp_size.y * 0.5), msg, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.3, 0.35))
 
 	func _draw_point_tracker(vp_size: Vector2, grid_top: float, margin: float, area: Vector2, font: Font) -> void:
-		var pos: Vector3 = screen_ref._tracking_point.global_position
-		var grid_range: float = 5.0
+		# Use relative position (origin = where the point started), or zero if no point yet
+		var pos: Vector3 = Vector3.ZERO
+		if is_instance_valid(screen_ref._tracking_point):
+			pos = screen_ref._tracking_point.global_position - screen_ref._point_origin
+		var grid_range: float = 2.0
 
-		# ── Scientific dark background ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(0.02, 0.02, 0.04))
+		# ── Light scientific background (matching web UI) ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(1.0, 1.0, 1.0))
 
-		# ── Header ──
-		draw_rect(Rect2(0, 0, vp_size.x, 36), Color(0.05, 0.05, 0.08))
-		draw_string(font, Vector2(12, 25), "POINT POSITION", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.4, 0.8, 1.0))
-		draw_string(font, Vector2(vp_size.x - 150, 25), "P = (x, y)", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.3, 0.3, 0.4))
+		# ── Header bar ──
+		draw_rect(Rect2(0, 0, vp_size.x, 36), Color(0.965, 0.973, 0.98))
+		draw_line(Vector2(0, 36), Vector2(vp_size.x, 36), Color(0.82, 0.85, 0.88), 1.0)
+		draw_string(font, Vector2(12, 25), "Point Position", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.12, 0.14, 0.16))
+		draw_string(font, Vector2(vp_size.x * 0.45, 25), "P = (x, y)", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.04, 0.41, 0.85))
+		draw_string(font, Vector2(vp_size.x - 100, 25), "Score: %d" % screen_ref._point_score, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.43, 0.47, 0.51))
 
-		# ── Coordinate grid area (X horizontal, Y vertical) ──
-		var grid_top_y: float = 44.0
-		var side: float = minf(area.x, vp_size.y - grid_top_y - 50)
+		# ── Coordinate grid area ──
+		var grid_top_y: float = 42.0
+		var side: float = minf(area.x, vp_size.y - grid_top_y - 60)
 		var ox: float = (vp_size.x - side) * 0.5
 		var oy: float = grid_top_y + 4
 
-		# Grid background
-		draw_rect(Rect2(ox - 1, oy - 1, side + 2, side + 2), Color(0.04, 0.04, 0.06))
+		# Grid border
+		draw_rect(Rect2(ox - 1, oy - 1, side + 2, side + 2), Color(0.82, 0.85, 0.88))
+		draw_rect(Rect2(ox, oy, side, side), Color(1.0, 1.0, 1.0))
 
-		# Minor grid (thin)
-		var minor_div: int = 20
+		# Minor grid
+		var minor_div: int = 10
 		var minor_step: float = side / float(minor_div)
-		for i in range(minor_div + 1):
+		for i in range(1, minor_div):
 			var p: float = float(i) * minor_step
-			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.06, 0.07, 0.09), 0.5)
-			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.06, 0.07, 0.09), 0.5)
+			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.94, 0.94, 0.96), 0.5)
+			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.94, 0.94, 0.96), 0.5)
 
-		# Major grid (brighter)
-		var major_div: int = 4
-		var major_step: float = side / float(major_div)
-		for i in range(major_div + 1):
-			var p: float = float(i) * major_step
-			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.1, 0.12, 0.16), 1.0)
-			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.1, 0.12, 0.16), 1.0)
-
-		# Center axes
+		# Major grid (center lines)
 		var cx: float = ox + side * 0.5
 		var cy: float = oy + side * 0.5
-		# X axis (red)
-		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.7, 0.15, 0.15, 0.5), 1.5)
-		# Y axis (green) — Godot Y maps to screen vertical
-		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.15, 0.7, 0.15, 0.5), 1.5)
+		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.82, 0.84, 0.87), 0.8)
+		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.82, 0.84, 0.87), 0.8)
 
-		# Axis labels with values
-		draw_string(font, Vector2(ox + side + 4, cy + 4), "X", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.7, 0.2, 0.2))
-		draw_string(font, Vector2(cx + 4, oy - 2), "Y", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.2, 0.7, 0.2))
+		# Axes
+		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.86, 0.15, 0.15), 1.5)
+		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.09, 0.64, 0.29), 1.5)
 
-		# Scale labels at edges
-		var range_str: String = "%.0f" % grid_range
-		draw_string(font, Vector2(ox - 2, cy + 14), "-%s" % range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
-		draw_string(font, Vector2(ox + side - 14, cy + 14), range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
-		draw_string(font, Vector2(cx + 6, oy + side - 2), "-%s" % range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
-		draw_string(font, Vector2(cx + 6, oy + 10), range_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.25, 0.25, 0.3))
+		# Axis labels
+		draw_string(font, Vector2(ox + side + 5, cy + 5), "x", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.86, 0.15, 0.15))
+		draw_string(font, Vector2(cx - 14, oy - 5), "y", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.09, 0.64, 0.29))
+		# Scale
+		var range_label: String = "%.1f" % grid_range
+		draw_string(font, Vector2(ox - 6, cy + 14), "-%s" % range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
+		draw_string(font, Vector2(ox + side - 14, cy + 14), range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
+		draw_string(font, Vector2(cx + 5, oy + 11), range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
+		draw_string(font, Vector2(cx + 5, oy + side - 3), "-%s" % range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
 
-		# ── Map position: X → screen X, Y → screen Y (inverted: up = positive) ──
-		var dot_x: float = cx + (pos.x / grid_range) * (side * 0.5)
-		var dot_y: float = cy - (pos.y / grid_range) * (side * 0.5)  # Invert Y so up is positive
+		# ── Map position (negate X: screen faces player at 180°) ──
+		var dot_x: float = cx - (pos.x / grid_range) * (side * 0.5)
+		var dot_y: float = cy - (pos.y / grid_range) * (side * 0.5)
 
-		# ── Trail ──
+		# ── Trail (violet) ──
 		if screen_ref._point_trail.size() > 1:
 			for i in range(screen_ref._point_trail.size() - 1):
 				var t0: Vector3 = screen_ref._point_trail[i]
 				var t1: Vector3 = screen_ref._point_trail[i + 1]
-				var tx0: float = cx + (t0.x / grid_range) * (side * 0.5)
+				var tx0: float = cx - (t0.x / grid_range) * (side * 0.5)
 				var ty0: float = cy - (t0.y / grid_range) * (side * 0.5)
-				var tx1: float = cx + (t1.x / grid_range) * (side * 0.5)
+				var tx1: float = cx - (t1.x / grid_range) * (side * 0.5)
 				var ty1: float = cy - (t1.y / grid_range) * (side * 0.5)
-				var alpha: float = float(i) / float(screen_ref._point_trail.size()) * 0.5
-				draw_line(Vector2(tx0, ty0), Vector2(tx1, ty1), Color(0.3, 0.8, 1.0, alpha), 1.5)
+				var alpha: float = float(i) / float(screen_ref._point_trail.size()) * 0.35
+				draw_line(Vector2(tx0, ty0), Vector2(tx1, ty1), Color(0.55, 0.36, 0.96, alpha), 1.5)
 
-		# ── Projection lines from dot to axes ──
-		# Dashed line to X axis
-		draw_line(Vector2(dot_x, dot_y), Vector2(dot_x, cy), Color(0.7, 0.15, 0.15, 0.3), 1.0)
-		# Dashed line to Y axis
-		draw_line(Vector2(dot_x, dot_y), Vector2(cx, dot_y), Color(0.15, 0.7, 0.15, 0.3), 1.0)
-		# Tick marks on axes
-		draw_rect(Rect2(dot_x - 1, cy - 4, 2, 8), Color(0.9, 0.3, 0.3))
-		draw_rect(Rect2(cx - 4, dot_y - 1, 8, 2), Color(0.3, 0.9, 0.3))
+		# ── Target (if not exploding) ──
+		if not screen_ref._point_exploding and screen_ref._point_target != Vector3.ZERO:
+			var tgt: Vector3 = screen_ref._point_target
+			var tgt_x: float = cx - (tgt.x / grid_range) * (side * 0.5)
+			var tgt_y: float = cy - (tgt.y / grid_range) * (side * 0.5)
+			var pulse: float = sin(Time.get_ticks_msec() / 300.0) * 3.0
+			var tgt_col: Color = screen_ref._point_target_color
+			draw_circle(Vector2(tgt_x, tgt_y), 16.0 + pulse, Color(tgt_col, 0.15))
+			draw_circle(Vector2(tgt_x, tgt_y), 10.0, Color(tgt_col, 0.3))
+			draw_circle(Vector2(tgt_x, tgt_y), 3.0, tgt_col)
+			draw_line(Vector2(dot_x, dot_y), Vector2(tgt_x, tgt_y), Color(tgt_col, 0.15), 1.0)
 
-		# ── Point dot (glowing) ──
-		draw_circle(Vector2(dot_x, dot_y), 16.0, Color(1.0, 0.6, 1.0, 0.1))
-		draw_circle(Vector2(dot_x, dot_y), 11.0, Color(1.0, 0.6, 1.0, 0.25))
-		draw_circle(Vector2(dot_x, dot_y), 6.0, Color(1.0, 0.8, 1.0))
+		# ── Particles ──
+		for p_data in screen_ref._point_particles:
+			var p_pos: Vector3 = p_data["pos"]
+			var p_life: float = p_data["life"]
+			var p_color: Color = p_data["color"]
+			var p_sx: float = cx - (p_pos.x / grid_range) * (side * 0.5)
+			var p_sy: float = cy - (p_pos.y / grid_range) * (side * 0.5)
+			draw_circle(Vector2(p_sx, p_sy), 3.0, Color(p_color, clampf(p_life * 2.0, 0.0, 1.0)))
 
-		# ── Coordinate readout (bottom panel) ──
-		var panel_y: float = oy + side + 8
-		draw_rect(Rect2(ox, panel_y, side, 48), Color(0.04, 0.04, 0.06))
-		draw_rect(Rect2(ox, panel_y, side, 1), Color(0.15, 0.2, 0.25))
+		# ── Projection lines ──
+		draw_line(Vector2(dot_x, dot_y), Vector2(dot_x, cy), Color(0.86, 0.15, 0.15, 0.12), 1.0)
+		draw_line(Vector2(dot_x, dot_y), Vector2(cx, dot_y), Color(0.09, 0.64, 0.29, 0.12), 1.0)
+		draw_rect(Rect2(dot_x - 1.5, cy - 3, 3, 6), Color(0.86, 0.15, 0.15))
+		draw_rect(Rect2(cx - 3, dot_y - 1.5, 6, 3), Color(0.09, 0.64, 0.29))
 
-		# X value
-		var x_str: String = "x = %.3f" % pos.x
-		draw_string(font, Vector2(ox + 14, panel_y + 20), x_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.9, 0.3, 0.3))
+		# ── Point dot (violet with highlight) ──
+		draw_circle(Vector2(dot_x, dot_y), 14.0, Color(0.55, 0.36, 0.96, 0.08))
+		draw_circle(Vector2(dot_x, dot_y), 10.0, Color(0.55, 0.36, 0.96, 0.2))
+		draw_circle(Vector2(dot_x, dot_y), 7.0, Color(0.55, 0.36, 0.96))
+		draw_circle(Vector2(dot_x - 2, dot_y - 2), 2.0, Color(1, 1, 1, 0.7))
 
-		# Y value
-		var y_str: String = "y = %.3f" % pos.y
-		draw_string(font, Vector2(ox + side * 0.5 + 14, panel_y + 20), y_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.3, 0.9, 0.3))
+		# ── Readout panel (light surface) ──
+		var panel_y: float = oy + side + 6
+		draw_rect(Rect2(ox, panel_y, side, 46), Color(0.965, 0.973, 0.98))
+		draw_rect(Rect2(ox - 1, panel_y - 1, side + 2, 48), Color(0.82, 0.85, 0.88))
+		draw_rect(Rect2(ox, panel_y, side, 46), Color(0.965, 0.973, 0.98))
 
-		# Full vector
-		var vec_str: String = "P = (%.2f, %.2f)" % [pos.x, pos.y]
-		draw_string(font, Vector2(ox + 14, panel_y + 40), vec_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.5, 0.5, 0.6))
+		draw_string(font, Vector2(ox + 12, panel_y + 18), "x = %.3f" % pos.x, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(0.86, 0.15, 0.15))
+		draw_string(font, Vector2(ox + side * 0.5 + 12, panel_y + 18), "y = %.3f" % pos.y, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(0.09, 0.64, 0.29))
+
+		var d_to_target: float = Vector2(pos.x, pos.y).distance_to(Vector2(screen_ref._point_target.x, screen_ref._point_target.y))
+		draw_string(font, Vector2(ox + 12, panel_y + 36), "d = %.2f" % d_to_target, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.61, 0.64, 0.67))
+		draw_string(font, Vector2(ox + side * 0.5 + 12, panel_y + 36), "total: %.1f" % screen_ref._point_trail.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.61, 0.64, 0.67))
 
 		# ── Scanlines ──
 		_draw_scanlines(vp_size)
@@ -907,7 +1007,8 @@ class _ScreenCanvas extends Control:
 		return {"ox": ox, "oy": oy, "side": side, "cx": cx, "cy": cy}
 
 	func _world_to_screen(world_pos: Vector3, cx: float, cy: float, side: float, grid_range: float) -> Vector2:
-		var sx: float = cx + (world_pos.x / grid_range) * (side * 0.5)
+		# Negate X because screen faces player (rotation 180)
+		var sx: float = cx - (world_pos.x / grid_range) * (side * 0.5)
 		var sy: float = cy - (world_pos.y / grid_range) * (side * 0.5)
 		return Vector2(sx, sy)
 
@@ -917,17 +1018,19 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_line_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		var pos_a: Vector3 = screen_ref._tracking_line_p1.global_position
-		var pos_b: Vector3 = screen_ref._tracking_line_p2.global_position
-		var grid_range: float = 5.0
+		# Relative to line origin (midpoint of initial line position)
+		var pos_a: Vector3 = screen_ref._tracking_line_p1.global_position - screen_ref._line_origin
+		var pos_b: Vector3 = screen_ref._tracking_line_p2.global_position - screen_ref._line_origin
+		var grid_range: float = 2.5
 
-		# ── Background ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(0.02, 0.02, 0.04))
+		# ── Light background (matching web UI) ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(1.0, 1.0, 1.0))
 
-		# ── Header ──
-		draw_rect(Rect2(0.0, 0.0, vp_size.x, 36.0), Color(0.05, 0.05, 0.08))
-		draw_string(font, Vector2(12.0, 25.0), "LINE SEGMENT", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.4, 0.8, 1.0))
-		draw_string(font, Vector2(vp_size.x - 200.0, 25.0), "AB = |B - A|", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.3, 0.3, 0.4))
+		# ── Header (light style) ──
+		draw_rect(Rect2(0.0, 0.0, vp_size.x, 36.0), Color(0.965, 0.973, 0.98))
+		draw_line(Vector2(0, 36), Vector2(vp_size.x, 36), Color(0.82, 0.85, 0.88), 1.0)
+		draw_string(font, Vector2(12.0, 25.0), "Line Measurement", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.12, 0.14, 0.16))
+		draw_string(font, Vector2(vp_size.x - 200.0, 25.0), "|AB| = sqrt(dx^2 + dy^2)", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.04, 0.41, 0.85))
 
 		# ── XY grid ──
 		var grid_top_y: float = 44.0
