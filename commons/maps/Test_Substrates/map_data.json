@@ -1,30 +1,30 @@
 {
   "map_info": {
-      "name": "Substrate Showcase",
-      "lookup_name": "Test_Substrates",
-      "description": "All substrates side by side: Grid2D, Living Paper, BarArray, Grid3D, Profile, and standalone artifacts",
-      "version": "1.0",
-      "format": "grid",
-      "dimensions": {
-          "width": 11,
-          "depth": 11,
-          "max_height": 3
-      },
-      "metadata": {
-          "author": "Ada",
-          "date": "2026-02-12",
-          "category": "testing"
-      }
+    "name": "Substrate Showcase",
+    "lookup_name": "Test_Substrates",
+    "description": "All substrates side by side: Grid2D, Living Paper, BarArray, Grid3D, Profile, and standalone artifacts",
+    "version": "1.0",
+    "format": "grid",
+    "dimensions": {
+      "width": 11,
+      "depth": 11,
+      "max_height": 3
+    },
+    "metadata": {
+      "author": "Ada",
+      "date": "2026-02-12",
+      "category": "testing"
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "layers": {
     "structure": [
@@ -54,7 +54,7 @@
       [" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:commons_artifacts#layout:rack_layout.json"],
       [" ", "grid2d_life", " ", "grid2d_wireworld", " ", "grid2d_bfs", " ", "grid2d_seeds", " ", "grid2d_langtons_ant", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", "living_paper_random_walk", " ", "living_paper_levy", " ", "living_paper_mandelbrot", " ", "living_paper_life", " ", "living_paper_sierpinski", " "],

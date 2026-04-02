@@ -1,86 +1,59 @@
 {
   "map_info": {
-      "name": "Primitives_Godot",
-      "lookup_name": "Primitives_Godot",
-      "description": "Godot Built-in Meshes - exploring segment counts and tessellation",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 9,
-          "depth": 5,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "beginner",
-          "category": "primitives",
-          "estimated_time": "5 minutes",
-          "learning_objectives": [
-              "Godot primitives",
-              "Mesh segments",
-              "Tessellation",
-              "Low poly vs high poly"
-          ]
-      }
+    "name": "Primitives_Godot",
+    "lookup_name": "Primitives_Godot",
+    "description": "Godot Built-in Meshes - exploring segment counts and tessellation",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 5,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "primitives",
+      "estimated_time": "5 minutes",
+      "learning_objectives": ["Godot primitives", "Mesh segments", "Tessellation", "Low poly vs high poly"]
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next primitive showcase",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next primitive showcase",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "documentation": {
-      "summary": "Primitives_Godot - Built-in Mesh Gallery",
-      "layout": "9x5 platform showcasing Godot's built-in mesh types with varying segment counts",
-      "objective": "Understand how segment parameters affect mesh appearance and performance",
-      "key_elements": [
-          "Sphere variations (low/mid/high poly) demonstrating rings and radial segments",
-          "Cylinder variations showing radial segment differences",
-          "Torus with low segment count revealing donut structure",
-          "Capsule and Box meshes as reference primitives",
-          "Teleporter at exit"
-      ]
+    "summary": "Primitives_Godot - Built-in Mesh Gallery",
+    "layout": "9x5 platform showcasing Godot's built-in mesh types with varying segment counts",
+    "objective": "Understand how segment parameters affect mesh appearance and performance",
+    "key_elements": ["Sphere variations (low/mid/high poly) demonstrating rings and radial segments", "Cylinder variations showing radial segment differences", "Torus with low segment count revealing donut structure", "Capsule and Box meshes as reference primitives", "Teleporter at exit"]
   },
   "lighting": {
-      "ambient_color": [
-          0.5,
-          0.5,
-          0.6
-      ],
-      "ambient_energy": 0.7,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.3,
-              -0.7,
-              -0.5
-          ],
-          "color": [
-              1.0,
-              0.95,
-              0.9
-          ],
-          "energy": 1.3
-      }
+    "ambient_color": [0.5, 0.5, 0.6],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3, -0.7, -0.5],
+      "color": [1.0, 0.95, 0.9],
+      "energy": 1.3
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": true,
-      "enable_physics": true,
-      "auto_reveal_on_entry": true,
-      "initial_tile_visibility": "all_visible",
-      "background": {
-          "type": "sky",
-          "color": [
-              0.3,
-              0.4,
-              0.7
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": true,
+    "initial_tile_visibility": "all_visible",
+    "background": {
+      "type": "sky",
+      "color": [0.3, 0.4, 0.7]
+    }
   },
   "layers": {
     "structure": [
@@ -98,7 +71,7 @@
       [" ", " ", " ", " ", " ", " ", "t", " ", " "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:primitives#layout:rack_layout.json"],
       ["sphere_low", "sphere_mid", "sphere_high", " ", "cylinder_low", "cylinder_mid", " ", "torus_low", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " "],
       ["sphere", " ", "cylinder", " ", "capsule", " ", "torus", " ", "cube"],

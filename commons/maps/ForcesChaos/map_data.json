@@ -1,82 +1,60 @@
 {
   "map_info": {
-      "description": "Three islands of chaos: n-body simulations, strange attractors, and force-directed systems. Jump between islands to experience how deterministic rules produce unpredictable dynamics.",
-      "dimensions": {
-          "depth": 19,
-          "max_height": 6,
-          "width": 22
-      },
-      "format": "json",
-      "lookup_name": "ForcesChaos",
-      "metadata": {
-          "category": "forces",
-          "difficulty": "advanced",
-          "estimated_time": "10-15 minutes",
-          "learning_objectives": [
-              "Three-body problem and n-body simulation",
-              "Two-body attraction and orbital dynamics",
-              "Chaos attractors and strange dynamics",
-              "Force-directed graph layout",
-              "Particle systems and springs"
-          ],
-          "spatial_temperature": 0.45
-      },
-      "name": "Forces Chaos: N-Body & Strange Attractors",
-      "title": "N-Body and Chaos",
-      "version": "2.0"
+    "description": "Three islands of chaos: n-body simulations, strange attractors, and force-directed systems. Jump between islands to experience how deterministic rules produce unpredictable dynamics.",
+    "dimensions": {
+      "depth": 19,
+      "max_height": 6,
+      "width": 22
+    },
+    "format": "json",
+    "lookup_name": "ForcesChaos",
+    "metadata": {
+      "category": "forces",
+      "difficulty": "advanced",
+      "estimated_time": "10-15 minutes",
+      "learning_objectives": ["Three-body problem and n-body simulation", "Two-body attraction and orbital dynamics", "Chaos attractors and strange dynamics", "Force-directed graph layout", "Particle systems and springs"],
+      "spatial_temperature": 0.45
+    },
+    "name": "Forces Chaos: N-Body & Strange Attractors",
+    "title": "N-Body and Chaos",
+    "version": "2.0"
   },
   "utility_definitions": {
-      "s": {
-          "properties": {
-              "height": 5.5
-          }
-      },
-      "t": {
-          "description": "Continue to next map",
-          "name": "Next",
-          "properties": {
-              "action": "next_in_sequence"
-          },
-          "type": "teleporter"
+    "s": {
+      "properties": {
+        "height": 5.5
       }
+    },
+    "t": {
+      "description": "Continue to next map",
+      "name": "Next",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
   },
   "lighting": {
-      "ambient_color": [
-          0.3,
-          0.3,
-          0.45
-      ],
-      "ambient_energy": 0.45,
-      "directional_light": {
-          "color": [
-              1.0,
-              0.8,
-              0.65
-          ],
-          "direction": [
-              -0.4,
-              -0.7,
-              -0.4
-          ],
-          "enabled": true,
-          "energy": 0.9
-      }
+    "ambient_color": [0.3, 0.3, 0.45],
+    "ambient_energy": 0.45,
+    "directional_light": {
+      "color": [1.0, 0.8, 0.65],
+      "direction": [-0.4, -0.7, -0.4],
+      "enabled": true,
+      "energy": 0.9
+    }
   },
   "settings": {
-      "auto_reveal_on_entry": false,
-      "background": {
-          "color": [
-              0.1,
-              0.12,
-              0.3
-          ],
-          "type": "sky"
-      },
-      "cube_size": 1.0,
-      "enable_physics": true,
-      "gutter": 0.0,
-      "initial_tile_visibility": "all_visible",
-      "show_grid": true
+    "auto_reveal_on_entry": false,
+    "background": {
+      "color": [0.1, 0.12, 0.3],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "initial_tile_visibility": "all_visible",
+    "show_grid": true
   },
   "layers": {
     "structure": [
@@ -122,7 +100,7 @@
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:physics_simulation#layout:rack_layout.json"],
       [" ", " ", "three_body_problem", " ", " ", " ", "nbody_simulation", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "chaos_attractor", " ", " ", "forcedirected3d", " ", " ", " "],
       [" ", "example_2_8_two_body_attraction_vr", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
