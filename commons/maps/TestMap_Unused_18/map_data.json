@@ -1,27 +1,45 @@
 {
-	"map_info": {"name": "TestMap_Unused_18", "lookup_name": "TestMap_Unused_18", "description": "Test map for artifacts: random_edge_profile_collection, random_gaussian_texture, random_number_book_page_collection, random_plants", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", "ds", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "random_edge_profile_collection:0:2", " ", "random_gaussian_texture:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "random_number_book_page_collection:0:2", " ", "random_plants:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "TestMap_Unused_18",
+      "lookup_name": "TestMap_Unused_18",
+      "description": "Test map for artifacts: random_edge_profile_collection, random_gaussian_texture, random_number_book_page_collection, random_plants",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " "],
+      [" ", "random_edge_profile_collection:0:2", " ", "random_gaussian_texture:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "random_number_book_page_collection:0:2", " ", "random_plants:0:2", " "],
+      [" ", " ", " ", " ", " "]
+    ]
+  }
 }

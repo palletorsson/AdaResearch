@@ -1,27 +1,45 @@
 {
-	"map_info": {"name": "TestMap_Unused_9", "lookup_name": "TestMap_Unused_9", "description": "Test map for artifacts: line_builder_3d, lissajous_curves, liturgicalambientgen, mario_test_sound_ui", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", "ds", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "line_builder_3d:0:2", " ", "lissajous_curves:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "liturgicalambientgen:0:2", " ", "mario_test_sound_ui:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "TestMap_Unused_9",
+      "lookup_name": "TestMap_Unused_9",
+      "description": "Test map for artifacts: line_builder_3d, lissajous_curves, liturgicalambientgen, mario_test_sound_ui",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " "],
+      [" ", "line_builder_3d:0:2", " ", "lissajous_curves:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "liturgicalambientgen:0:2", " ", "mario_test_sound_ui:0:2", " "],
+      [" ", " ", " ", " ", " "]
+    ]
+  }
 }

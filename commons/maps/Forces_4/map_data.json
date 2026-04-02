@@ -1,40 +1,112 @@
 {
-	"map_info": {"description": "Attractor systems — single and multiple attractors pulling particles through force fields", "dimensions": {"depth": 9, "max_height": 2, "width": 7}, "format": "json", "lookup_name": "Forces_4", "metadata": {"category": "forces", "difficulty": "intermediate", "estimated_time": "3-4 minutes", "learning_objectives": ["Two-body systems", "N-body problems", "Gravitational interactions", "Orbital mechanics"]}, "name": "Forces_4", "version": "1.0"},
-	"utility_definitions": {"s": {"properties": {"height": 5.5}}, "t": {"description": "Continue to next step", "name": "Next", "properties": {"action": "next_in_sequence"}, "type": "teleporter"}},
-	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"color": [1.0, 0.9, 0.8], "direction": [-0.4, -0.7, -0.4], "enabled": true, "energy": 1.2}},
-	"settings": {"auto_reveal_on_entry": false, "background": {"color": [0.2, 0.3, 0.7], "type": "sky"}, "cube_size": 1.0, "enable_physics": true, "gutter": 0.0, "initial_tile_visibility": "hidden_except_corners", "show_grid": true},
-	"layers": {
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "VectorBasics", " ", "basis_vectors_rig:180:-0.5 ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "2", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", "an.-90"],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ds", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "sp", " "],
-			[" ", " ", " ", " ", "t", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "description": "Attractor systems — single and multiple attractors pulling particles through force fields",
+      "dimensions": {
+          "depth": 9,
+          "max_height": 2,
+          "width": 7
+      },
+      "format": "json",
+      "lookup_name": "Forces_4",
+      "metadata": {
+          "category": "forces",
+          "difficulty": "intermediate",
+          "estimated_time": "3-4 minutes",
+          "learning_objectives": [
+              "Two-body systems",
+              "N-body problems",
+              "Gravitational interactions",
+              "Orbital mechanics"
+          ]
+      },
+      "name": "Forces_4",
+      "version": "1.0"
+  },
+  "utility_definitions": {
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      },
+      "t": {
+          "description": "Continue to next step",
+          "name": "Next",
+          "properties": {
+              "action": "next_in_sequence"
+          },
+          "type": "teleporter"
+      }
+  },
+  "lighting": {
+      "ambient_color": [
+          0.4,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.6,
+      "directional_light": {
+          "color": [
+              1.0,
+              0.9,
+              0.8
+          ],
+          "direction": [
+              -0.4,
+              -0.7,
+              -0.4
+          ],
+          "enabled": true,
+          "energy": 1.2
+      }
+  },
+  "settings": {
+      "auto_reveal_on_entry": false,
+      "background": {
+          "color": [
+              0.2,
+              0.3,
+              0.7
+          ],
+          "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "initial_tile_visibility": "hidden_except_corners",
+      "show_grid": true
+  },
+  "layers": {
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "VectorBasics", " ", "basis_vectors_rig:180:-0.5 ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ],
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "2", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "0", "1"],
+      ["0", "0", "0", "0", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", "an.-90"],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "sp", " "],
+      [" ", " ", " ", " ", "t", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

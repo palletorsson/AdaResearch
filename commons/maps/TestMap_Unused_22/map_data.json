@@ -1,27 +1,45 @@
 {
-	"map_info": {"name": "TestMap_Unused_22", "lookup_name": "TestMap_Unused_22", "description": "Test map for artifacts: resonance_frequencies, resonance_frequencies_visualizer, resonating_metallophone, rotate_random_y", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", "ds", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "resonance_frequencies:0:2", " ", "resonance_frequencies_visualizer:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "resonating_metallophone:0:2", " ", "rotate_random_y:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "TestMap_Unused_22",
+      "lookup_name": "TestMap_Unused_22",
+      "description": "Test map for artifacts: resonance_frequencies, resonance_frequencies_visualizer, resonating_metallophone, rotate_random_y",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " "],
+      [" ", "resonance_frequencies:0:2", " ", "resonance_frequencies_visualizer:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "resonating_metallophone:0:2", " ", "rotate_random_y:0:2", " "],
+      [" ", " ", " ", " ", " "]
+    ]
+  }
 }

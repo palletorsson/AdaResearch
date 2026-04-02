@@ -1,42 +1,70 @@
 {
-	"map_info": {"name": "PG Branching Growth", "lookup_name": "PG_Branching_Growth", "description": "Two growth strategies: explicit branching algorithm builds tree-like structures while noise-driven organic space creates continuous terrain. Rules vs fields.", "version": "1.0", "format": "json", "dimensions": {"width": 12, "depth": 10, "max_height": 3}, "metadata": {"difficulty": "intermediate", "category": "proceduralgeneration", "estimated_time": "5-7 minutes", "spatial_temperature": 0.55, "design_notes": "L-shaped room. Left wing: branching growth in void pit. Right wing: organic space on raised platform. Connected by a floor corridor. Two artifacts physically separated for compute safety."}, "title": "Rules Versus Noise Fields"},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
-			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
-			["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
-			["1", "1", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1"],
-			["1", "1", "1", "1", "1", "1", "0", "0", "0", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "0", "0", "0", "1", "0", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "wp:270", " ", " ", " "],
-			[" ", "an", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "ds", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", "branching_growth_algorithm:0:2:2", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "organic_space:0:2", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "PG Branching Growth",
+      "lookup_name": "PG_Branching_Growth",
+      "description": "Two growth strategies: explicit branching algorithm builds tree-like structures while noise-driven organic space creates continuous terrain. Rules vs fields.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 12,
+          "depth": 10,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "proceduralgeneration",
+          "estimated_time": "5-7 minutes",
+          "spatial_temperature": 0.55,
+          "design_notes": "L-shaped room. Left wing: branching growth in void pit. Right wing: organic space on raised platform. Connected by a floor corridor. Two artifacts physically separated for compute safety."
+      },
+      "title": "Rules Versus Noise Fields"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+      ["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+      ["1", "1", "0", "0", "0", "1", "1", "1", "3", "3", "3", "1"],
+      ["1", "1", "0", "0", "0", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "0", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "0", "0", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "wp:270", " ", " ", " "],
+      [" ", "an", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", "branching_growth_algorithm:0:2:2", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "organic_space:0:2", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

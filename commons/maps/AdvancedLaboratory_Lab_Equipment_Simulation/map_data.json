@@ -1,36 +1,63 @@
 {
-	"map_info": {"name": "Lab Equipment Simulation", "lookup_name": "AdvancedLaboratory_Lab_Equipment_Simulation", "description": "A clean laboratory with raised work surfaces and a void pit revealing something underneath. Orderly but with one surprise.", "version": "1.0", "format": "json", "dimensions": {"width": 9, "depth": 8, "max_height": 2}, "metadata": {"difficulty": "advanced", "category": "advanced_laboratory", "spatial_temperature": 0.8, "design_notes": "Lab benches (h2) arranged around room. Central void pit. Clean, systematic layout with one disruption."}, "title": "Molecular Design After Crisis"},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "2", "2", "1"],
-			["1", "1", "1", "1", "1", "1", "2", "2", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "2", "1", "0", "0", "1", "1", "1"],
-			["1", "2", "2", "1", "0", "0", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "0", "1"],
-			["1", "1", "1", "2", "2", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", "an", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ds", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "wp:180", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "sp", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "MolecularDesigner", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "Lab Equipment Simulation",
+      "lookup_name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "description": "A clean laboratory with raised work surfaces and a void pit revealing something underneath. Orderly but with one surprise.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 8,
+          "max_height": 2
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "advanced_laboratory",
+          "spatial_temperature": 0.8,
+          "design_notes": "Lab benches (h2) arranged around room. Central void pit. Clean, systematic layout with one disruption."
+      },
+      "title": "Molecular Design After Crisis"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "2", "2", "1"],
+      ["1", "1", "1", "1", "1", "1", "2", "2", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "2", "2", "1", "0", "0", "1", "1", "1"],
+      ["1", "2", "2", "1", "0", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "2", "2", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      ["s", "an", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "wp:180", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "sp", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "MolecularDesigner", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

@@ -98,33 +98,257 @@ const VP_HEIGHT: int = 576
 
 ## Scan timer
 var _scan_timer: float = 0.0
+var _mode_locked: bool = false  # Once a mode is set, stop scanning
+var _explicit_mode: String = ""  # Set via map JSON: "point", "line", "trace", "triangle", "generic"
+
+## Dynamic info text — loaded from blurb.md / intent.md
+var _info_lines: Array[String] = []  # All available info sentences
+var _info_index: int = 0  # Current info line
+var _info_timer: float = 0.0  # Timer for cycling text
+var _info_cycle_interval: float = 6.0  # Seconds between text changes
+var _info_current: String = ""  # Currently displayed line
+var _info_sub: String = ""  # Sub-line (dim text)
 
 func _ready() -> void:
 	_build_screen()
 	_build_viewport()
 	_apply_viewport_to_screen()
-	# Default to point mode with white coordinate grid
+	# Start with point mode as visual default (white grid shown immediately)
 	_point_mode = true
-	_label_name = "POINT POSITION"
-	# Initial scan
-	_scan_for_artifacts()
+	# Load map text for info bar
+	call_deferred("_load_map_text")
+	# Deferred scan connects tracking nodes after artifacts are placed
+	call_deferred("_deferred_first_scan")
+
+
+## Load blurb.md and intent.md from the current map directory for the info bar
+func _load_map_text() -> void:
+	await get_tree().create_timer(3.0).timeout  # Wait for map name to be set
+	var map_name: String = ""
+	var gs := _find_grid_system()
+	if gs:
+		map_name = gs.get("map_name") if gs.get("map_name") else ""
+	if map_name == "":
+		_info_lines = ["Drag to interact. The screen shows what you do."]
+		_info_current = _info_lines[0]
+		return
+
+	# Load blurb.md
+	var blurb_path: String = "res://commons/maps/%s/blurb.md" % map_name
+	if FileAccess.file_exists(blurb_path):
+		var f := FileAccess.open(blurb_path, FileAccess.READ)
+		if f:
+			var text: String = f.get_as_text().strip_edges()
+			f.close()
+			# Split into sentences
+			for sentence in text.split("."):
+				var s: String = sentence.strip_edges()
+				if s.length() > 10:
+					_info_lines.append(s + ".")
+
+	# Load intent.md — extract concept and critical angle
+	var intent_path: String = "res://commons/maps/%s/intent.md" % map_name
+	if FileAccess.file_exists(intent_path):
+		var f := FileAccess.open(intent_path, FileAccess.READ)
+		if f:
+			var text: String = f.get_as_text()
+			f.close()
+			for line in text.split("\n"):
+				line = line.strip_edges()
+				if line.begins_with("Concept:"):
+					_info_lines.append(line.substr(8).strip_edges())
+				elif line.begins_with("Critical angle:"):
+					_info_lines.append(line.substr(15).strip_edges())
+
+	if _info_lines.is_empty():
+		_info_lines = ["Interact with the artifacts. The screen shows the math."]
+	_info_current = _info_lines[0]
+	if _info_lines.size() > 1:
+		_info_sub = _info_lines[1]
+	print("[ScienceScreen] Loaded %d info lines from %s" % [_info_lines.size(), map_name])
+
+
+func _find_grid_system() -> Node:
+	var parent := get_parent()
+	while parent:
+		if parent.get("map_name") != null:
+			return parent
+		parent = parent.get_parent()
+	return null
+
+
+## Find nearest sibling artifact that has a specific property
+func _find_artifact_with_property(prop_name: String) -> Node3D:
+	var parent := get_parent()
+	if not parent:
+		return null
+	var my_pos := global_position
+	var best: Node3D = null
+	var best_dist: float = scan_radius + 1.0
+	for child in parent.get_children():
+		if child == self or not (child is Node3D):
+			continue
+		if prop_name in child:
+			var d: float = my_pos.distance_to(child.global_position)
+			if d < best_dist:
+				best_dist = d
+				best = child as Node3D
+	return best
+
+
+## Set mode explicitly — called from apply_grid_config when map JSON has #mode:xxx
+func _set_explicit_mode(mode_str: String) -> void:
+	_explicit_mode = mode_str
+	# Clear all modes first
+	_point_mode = false
+	_line_mode = false
+	_draw_mode = false
+	_triangle_mode = false
+	_generic_mode = false
+	match mode_str:
+		"point":
+			_point_mode = true
+			_label_name = "POINT TRACKER"
+		"line":
+			_line_mode = true
+			_label_name = "LINE ANALYZER"
+		"trace", "draw":
+			_draw_mode = true
+			_label_name = "TRACE RECORDER"
+		"triangle":
+			_triangle_mode = true
+			_label_name = "TRIANGLE ANALYZER"
+		"net", "cube":
+			_generic_mode = true
+			_generic_mode_name = "net"
+			_label_name = "CUBE NET"
+		"wave", "pendulum", "sine":
+			_generic_mode = true
+			_generic_mode_name = "wave"
+			_label_name = "WAVEFORM"
+		"field", "noise":
+			_generic_mode = true
+			_generic_mode_name = "field"
+			_label_name = "FIELD MAP"
+		"scatter", "swarm", "boids":
+			_generic_mode = true
+			_generic_mode_name = "scatter"
+			_label_name = "SCATTER PLOT"
+		"grid", "ca", "automata":
+			_generic_mode = true
+			_generic_mode_name = "grid"
+			_label_name = "GRID VIEW"
+		"bars", "histogram", "sort":
+			_generic_mode = true
+			_generic_mode_name = "bars"
+			_label_name = "BAR CHART"
+		_:
+			_point_mode = true  # Unknown mode → default to point
+			_label_name = "SCIENCE SCREEN"
+	_mode_locked = true
+	print("[ScienceScreen] Explicit mode set: %s" % mode_str)
+
+
+func _get_active_mode() -> String:
+	if _point_mode: return "point"
+	if _line_mode: return "line"
+	if _draw_mode: return "trace"
+	if _triangle_mode: return "triangle"
+	if _generic_mode: return "generic"
+	return "none"
+
+
+func _deferred_first_scan() -> void:
+	await get_tree().create_timer(2.0).timeout  # Wait for all artifacts to be placed
+	# If mode was already set explicitly via config, just connect tracking nodes
+	if _mode_locked:
+		_connect_tracking_for_mode()
+		print("[ScienceScreen] Mode locked (explicit): %s" % _get_active_mode())
+		return
+	# Fallback: scan if no explicit mode was set (legacy maps without #mode:xxx)
+	_point_mode = false
+	_scan_for_points()
+	if not _point_mode:
+		_scan_for_lines()
+	if not _point_mode and not _line_mode:
+		_scan_for_draw_dot()
+	if not _point_mode and not _line_mode and not _draw_mode:
+		_scan_for_triangles()
+	if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode:
+		_scan_for_generic()
+	if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
+		_point_mode = true
+	_mode_locked = true
+	print("[ScienceScreen] Mode locked (scan): %s" % _get_active_mode())
+
+
+## Connect the right tracking node for the explicit mode
+func _connect_tracking_for_mode() -> void:
+	match _explicit_mode:
+		"point":
+			_scan_for_points()
+		"line":
+			_scan_for_lines()
+		"trace", "draw":
+			_scan_for_draw_dot()
+		"triangle":
+			_scan_for_triangles()
+		"wave", "pendulum", "sine":
+			# Find pendulum or oscillation artifact
+			var art: Node3D = _find_artifact_with_property("_angle")
+			if not art: art = _find_artifact_with_property("current_amplitude")
+			if art:
+				_tracking_generic = art
+				print("[ScienceScreen] Tracking wave: %s" % art.name)
+		"scatter", "swarm", "boids":
+			# Find boid container
+			var art: Node3D = _find_artifact_with_property("boid_count")
+			if art:
+				_tracking_generic = art
+				print("[ScienceScreen] Tracking swarm: %s" % art.name)
+		"grid", "ca", "automata":
+			# Find CA or grid artifact
+			var art: Node3D = _find_artifact_with_property("grid_size")
+			if art:
+				_tracking_generic = art
+				print("[ScienceScreen] Tracking grid: %s" % art.name)
+		"bars", "histogram", "sort":
+			# Find bar array artifact
+			var art: Node3D = _find_artifact_with_property("_current_heights")
+			if not art: art = _find_artifact_with_property("_array")
+			if art:
+				_tracking_generic = art
+				print("[ScienceScreen] Tracking bars: %s" % art.name)
+		"field", "noise":
+			# Find noise field artifact
+			var art: Node3D = _find_artifact_with_property("noise_frequency")
+			if not art: art = _find_artifact_with_property("height_scale")
+			if art:
+				_tracking_generic = art
+				print("[ScienceScreen] Tracking field: %s" % art.name)
+		"net", "cube":
+			_scan_for_generic()
 
 func _process(delta: float) -> void:
-	_scan_timer += delta
-	if _scan_timer >= scan_interval:
-		_scan_timer = 0.0
-		_scan_for_artifacts()
-		# Scan for visualization modes in priority order
-		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
-			_scan_for_points()
-		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
-			_scan_for_lines()
-		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
-			_scan_for_draw_dot()
-		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
-			_scan_for_triangles()
-		if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
-			_scan_for_generic()
+	# Never rescan once a mode is locked
+	if not _mode_locked:
+		_scan_timer += delta
+		if _scan_timer >= scan_interval:
+			_scan_timer = 0.0
+			# Only scan if no mode is active (besides default point mode)
+			if not _line_mode and not _draw_mode and not _triangle_mode and not _generic_mode:
+				_scan_for_points()
+				if not _point_mode:
+					_scan_for_lines()
+				if not _point_mode and not _line_mode:
+					_scan_for_draw_dot()
+				if not _point_mode and not _line_mode and not _draw_mode:
+					_scan_for_triangles()
+				if not _point_mode and not _line_mode and not _draw_mode and not _triangle_mode:
+					_scan_for_generic()
+			# Lock once any mode is active
+			if _point_mode or _line_mode or _draw_mode or _triangle_mode or _generic_mode:
+				_mode_locked = true
 
 	# Track point position for trail + game logic
 	if _point_mode and is_instance_valid(_tracking_point) and _tracking_point.visible:
@@ -175,6 +399,15 @@ func _process(delta: float) -> void:
 		if not _line_origin_set:
 			_line_origin = (_tracking_line_p1.global_position + _tracking_line_p2.global_position) * 0.5
 			_line_origin_set = true
+
+	# Cycle info bar text
+	if _info_lines.size() > 1:
+		_info_timer += delta
+		if _info_timer >= _info_cycle_interval:
+			_info_timer = 0.0
+			_info_index = (_info_index + 1) % _info_lines.size()
+			_info_current = _info_lines[_info_index]
+			_info_sub = _info_lines[(_info_index + 1) % _info_lines.size()] if _info_lines.size() > 1 else ""
 
 	_canvas.queue_redraw()
 
@@ -255,6 +488,17 @@ func _build_screen() -> void:
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_screen_mesh.material_override = mat
 
+	# ── Screen glow light — makes the screen cast green light into the room ──
+	var screen_light := OmniLight3D.new()
+	screen_light.name = "ScreenGlow"
+	screen_light.light_color = Color(0.3, 0.9, 0.5)  # green tint
+	screen_light.light_energy = 0.6
+	screen_light.omni_range = 4.0
+	screen_light.omni_attenuation = 1.5
+	screen_light.position = Vector3(0, screen_y, -0.3)  # slightly in front of screen
+	screen_light.shadow_enabled = false
+	add_child(screen_light)
+
 	# ── LED indicator dot (top-right corner, small green sphere) ──
 	var led: MeshInstance3D = MeshInstance3D.new()
 	var led_sphere: SphereMesh = SphereMesh.new()
@@ -287,7 +531,7 @@ func _build_screen() -> void:
 	var stand_box: BoxMesh = BoxMesh.new()
 	stand_box.size = Vector3(0.06, screen_y, 0.06)
 	_stand_mesh.mesh = stand_box
-	_stand_mesh.position = Vector3(0, screen_y * 0.5, -0.02)
+	_stand_mesh.position = Vector3(0, screen_y * 0.5, -0.08)
 	add_child(_stand_mesh)
 
 	var stand_mat: StandardMaterial3D = StandardMaterial3D.new()
@@ -301,7 +545,7 @@ func _build_screen() -> void:
 	var base_box: BoxMesh = BoxMesh.new()
 	base_box.size = Vector3(0.3, 0.02, 0.2)
 	base_mesh.mesh = base_box
-	base_mesh.position = Vector3(0, 0.01, -0.02)
+	base_mesh.position = Vector3(0, 0.01, -0.08)
 	add_child(base_mesh)
 
 	var base_mat: StandardMaterial3D = StandardMaterial3D.new()
@@ -330,7 +574,7 @@ func _apply_viewport_to_screen() -> void:
 	mat.albedo_texture = _viewport.get_texture()
 	mat.emission_enabled = true
 	mat.emission_texture = _viewport.get_texture()
-	mat.emission_energy_multiplier = 1.2
+	mat.emission_energy_multiplier = 4.0
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_screen_mesh.material_override = mat
 
@@ -415,7 +659,7 @@ func _scan_point_subtree(node: Node, origin: Vector3) -> void:
 						return
 
 
-## ── Line scanning: find artifacts with "line" in lookup_name that have two child points ──
+## ── Line scanning: find artifacts with "line" in lookup_name that have two grabbable points ──
 func _scan_for_lines() -> void:
 	var parent: Node = get_parent()
 	if not parent:
@@ -432,21 +676,27 @@ func _scan_for_lines() -> void:
 		var d: float = my_pos.distance_to(child.global_position)
 		if d > scan_radius:
 			continue
-		# Find two child points (RigidBody3D or Node3D with "point" / "p1" / "p2" in name)
+		# Find two grabbable points anywhere in subtree (GrabSphere, RigidBody3D with freeze)
 		var points: Array[Node3D] = []
-		for sub in child.get_children():
-			if sub is Node3D:
-				var sn: String = sub.name.to_lower()
-				if "point" in sn or "p1" in sn or "p2" in sn or "endpoint" in sn or sub.get("freeze") != null:
-					points.append(sub as Node3D)
+		_find_grabbable_points(child, points)
 		if points.size() >= 2:
 			_tracking_line_p1 = points[0]
 			_tracking_line_p2 = points[1]
 			_line_mode = true
 			_label_name = "LINE ANALYZER"
 			_source_artifact_name = lookup if lookup != "" else child.name
-			print("[ScienceScreen] Tracking line: %s" % _source_artifact_name)
+			print("[ScienceScreen] Tracking line: %s (p1=%s, p2=%s)" % [_source_artifact_name, points[0].name, points[1].name])
 			return
+
+
+## Recursively find grabbable nodes (RigidBody3D / XRToolsPickable) in a subtree
+func _find_grabbable_points(node: Node, results: Array[Node3D], depth: int = 0) -> void:
+	if depth > 4:
+		return
+	for child in node.get_children():
+		if child is Node3D and child.get("freeze") != null:
+			results.append(child as Node3D)
+		_find_grabbable_points(child, results, depth + 1)
 
 ## ── Draw dot scanning: find artifacts with "draw_dot" in lookup_name ──
 func _scan_for_draw_dot() -> void:
@@ -671,9 +921,14 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("bg"):
 		screen_color = _parse_color(str(config_data["bg"]), screen_color)
 
+	# Explicit mode from map JSON — skips all scanning
+	if config_data.has("mode"):
+		var mode_str: String = str(config_data["mode"]).to_lower().strip_edges()
+		_set_explicit_mode(mode_str)
+
 	# Rebuild with new dimensions
 	_rebuild()
-	print("[ScienceScreen] Config applied — %sx%s, scan=%.1fm" % [screen_width, screen_height, scan_radius])
+	print("[ScienceScreen] Config applied — %sx%s, mode=%s" % [screen_width, screen_height, _get_active_mode()])
 
 func _parse_color(s: String, fallback: Color) -> Color:
 	var parts := s.split(",")
@@ -696,7 +951,8 @@ func _deferred_rebuild() -> void:
 	_build_screen()
 	_build_viewport()
 	_apply_viewport_to_screen()
-	_scan_for_artifacts()
+	# Do NOT scan for artifacts here — respect the locked mode
+	# The initial scan in _deferred_first_scan handles mode detection
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -720,65 +976,64 @@ class _ScreenCanvas extends Control:
 			return
 
 		var vp_size: Vector2 = size
+		var font: Font = ThemeDB.fallback_font
 
-		# ── Background ──
+		# ── CHECK MODES FIRST — each mode draws its own full screen ──
+		var grid_top: float = 60.0
+		var grid_margin: float = 16.0
+		var grid_area: Vector2 = Vector2(vp_size.x - grid_margin * 2, vp_size.y - grid_top - grid_margin)
+
+		# Point mode — white coordinate grid with point game
+		if screen_ref._point_mode:
+			_draw_point_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
+
+		# Line mode — draw even without tracking (shows zeroed coordinate grid)
+		if screen_ref._line_mode:
+			_draw_line_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
+
+		# Trace/draw mode — draw even without tracking
+		if screen_ref._draw_mode:
+			_draw_dot_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
+
+		# Triangle mode
+		if screen_ref._triangle_mode:
+			_draw_triangle_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
+
+		# Generic tracking — dispatch by mode name
+		if screen_ref._generic_mode:
+			match screen_ref._generic_mode_name:
+				"net":
+					_draw_net_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"wave":
+					_draw_wave_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"field":
+					_draw_field_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"scatter":
+					_draw_scatter_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"grid":
+					_draw_grid_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"bars":
+					_draw_bars_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				_:
+					_draw_generic_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+			return
+
+		# ── FALLBACK: grid mode (only if no mode matched) ──
 		draw_rect(Rect2(Vector2.ZERO, vp_size), screen_ref.screen_color)
-
-		# ── Header bar ──
 		var header_h: float = 32.0
 		draw_rect(Rect2(0, 0, vp_size.x, header_h), Color(0.08, 0.08, 0.12))
-
 		var title: String = screen_ref._label_name if screen_ref._label_name != "" else "SCIENCE SCREEN"
-		var font: Font = ThemeDB.fallback_font
-		var font_size: int = 14
-		draw_string(font, Vector2(8, 22), title.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, screen_ref.highlight_color)
-
-		# ── Status line ──
+		draw_string(font, Vector2(8, 22), title.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, screen_ref.highlight_color)
 		var status_y: float = header_h + 16
 		var status: String = "%dx%d  |  %s  |  %d cells" % [
 			screen_ref._grid_cols, screen_ref._grid_rows,
 			screen_ref._pattern_type, screen_ref._cell_count
 		]
 		draw_string(font, Vector2(8, status_y), status, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.5, 0.5, 0.55))
-
-		# ── Visualization area ──
-		var grid_top: float = status_y + 12.0
-		var grid_margin: float = 16.0
-		var grid_area: Vector2 = Vector2(vp_size.x - grid_margin * 2, vp_size.y - grid_top - grid_margin)
-
-		# ── Scanlines overlay (drawn at end for CRT feel) ──
-		# Applied after content by each mode individually
-
-		# ── Line tracking mode ──
-		if screen_ref._line_mode and is_instance_valid(screen_ref._tracking_line_p1) and is_instance_valid(screen_ref._tracking_line_p2):
-			_draw_line_tracker(vp_size, grid_top, grid_margin, grid_area, font)
-			return
-
-		# ── Draw dot tracking mode ──
-		if screen_ref._draw_mode and is_instance_valid(screen_ref._tracking_draw_dot):
-			_draw_dot_tracker(vp_size, grid_top, grid_margin, grid_area, font)
-			return
-
-		# ── Triangle tracking mode ──
-		if screen_ref._triangle_mode and screen_ref._tracking_tri_points.size() >= 3:
-			var tri_valid: bool = true
-			for tp in screen_ref._tracking_tri_points:
-				if not is_instance_valid(tp):
-					tri_valid = false
-					break
-			if tri_valid:
-				_draw_triangle_tracker(vp_size, grid_top, grid_margin, grid_area, font)
-				return
-
-		# ── Generic tracking mode ──
-		if screen_ref._generic_mode and is_instance_valid(screen_ref._tracking_generic):
-			_draw_generic_tracker(vp_size, grid_top, grid_margin, grid_area, font)
-			return
-
-		# ── Point tracking mode (show white grid even without tracked point) ──
-		if screen_ref._point_mode:
-			_draw_point_tracker(vp_size, grid_top, grid_margin, grid_area, font)
-			return
 
 		if screen_ref._grid_cols > 0 and screen_ref._grid_rows > 0:
 			var cell_w := grid_area.x / float(screen_ref._grid_cols)
@@ -832,88 +1087,186 @@ class _ScreenCanvas extends Control:
 			var msg := "Scanning for artifacts..."
 			draw_string(font, Vector2(vp_size.x * 0.5 - 60, vp_size.y * 0.5), msg, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.3, 0.35))
 
+	# Dark instrument colors (shared across all modes)
+	# Instrument palette — BRIGHT for VR (4x emission + OmniLight on screen)
+	const I_BG := Color(0.1, 0.18, 0.12)           # lighter green bg
+	const I_PANEL := Color(0.15, 0.32, 0.2)        # light green panel — glows strongly
+	const I_PANEL_BORDER := Color(0.5, 1.0, 0.65, 0.8)    # bright green border
+	const I_GRID_MINOR := Color(0.25, 1.0, 0.5, 0.3)      # green grid
+	const I_GRID_MAJOR := Color(0.3, 1.0, 0.55, 0.6)      # green grid quarter lines — bold
+	const I_AXIS_X := Color(1.0, 0.5, 0.5)         # bright red
+	const I_AXIS_Y := Color(0.4, 1.0, 0.6)         # bright green
+	const I_DOT := Color(0.8, 0.65, 1.0)           # bright violet
+	const I_CYAN := Color(0.55, 1.0, 1.0)          # bright cyan
+	const I_AMBER := Color(1.0, 0.75, 0.2)         # bright amber
+	const I_TEXT := Color(1.0, 1.0, 1.0)            # white text
+	const I_DIM := Color(0.7, 0.8, 0.75)           # readable dim
+	const I_MUTED := Color(0.45, 0.6, 0.5)         # visible muted
+	const I_CORNER := 18.0
+
+	func _draw_corner_brackets(ox: float, oy: float, side: float) -> void:
+		var L: float = I_CORNER
+		var c: Color = I_PANEL_BORDER
+		draw_line(Vector2(ox, oy + L), Vector2(ox, oy), c, 2.0)
+		draw_line(Vector2(ox, oy), Vector2(ox + L, oy), c, 2.0)
+		draw_line(Vector2(ox + side - L, oy), Vector2(ox + side, oy), c, 2.0)
+		draw_line(Vector2(ox + side, oy), Vector2(ox + side, oy + L), c, 2.0)
+		draw_line(Vector2(ox, oy + side - L), Vector2(ox, oy + side), c, 2.0)
+		draw_line(Vector2(ox, oy + side), Vector2(ox + L, oy + side), c, 2.0)
+		draw_line(Vector2(ox + side - L, oy + side), Vector2(ox + side, oy + side), c, 2.0)
+		draw_line(Vector2(ox + side, oy + side), Vector2(ox + side, oy + side - L), c, 2.0)
+
+	func _draw_instrument_header(vp_size: Vector2, font: Font, title: String, formula: String, score_val: int) -> void:
+		draw_rect(Rect2(0, 0, vp_size.x, 38), I_PANEL)
+		draw_line(Vector2(0, 38), Vector2(vp_size.x, 38), I_PANEL_BORDER, 2.0)
+		draw_string(font, Vector2(14, 26), title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_TEXT)
+		draw_string(font, Vector2(vp_size.x * 0.4, 26), formula, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_CYAN)
+		draw_string(font, Vector2(vp_size.x - 130, 26), "SCORE %03d" % score_val, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_DIM)
+
+	# Layout constants
+	const INFO_H := 64.0    # bottom info bar height
+	const HEADER_H := 38.0  # top header height
+	const DATA_W := 220.0   # right data panel width
+	const PAD := 6.0        # spacing between panels
+
+	## Returns {ox, oy, side, cx, cy, data_x, data_y, data_w, data_h, info_y} — full layout metrics
+	func _draw_instrument_grid(vp_size: Vector2, font: Font, grid_range: float) -> Dictionary:
+		var grid_top_y: float = HEADER_H + PAD
+		# Grid is square, left-aligned, leaving room for data panel on right and info bar at bottom
+		var available_h: float = vp_size.y - grid_top_y - INFO_H - PAD * 2
+		var available_w: float = vp_size.x - DATA_W - PAD * 3
+		var side: float = minf(available_w, available_h)
+		var ox: float = PAD + (available_w - side) * 0.5
+		var oy: float = grid_top_y + (available_h - side) * 0.5
+		var cx: float = ox + side * 0.5
+		var cy: float = oy + side * 0.5
+
+		# Data panel position (right of grid)
+		var data_x: float = ox + side + PAD
+		var data_y: float = grid_top_y
+		var data_w: float = vp_size.x - data_x - PAD
+		var data_h: float = available_h
+
+		# Info bar position (bottom)
+		var info_y: float = vp_size.y - INFO_H
+
+		# Grid surface + outline
+		draw_rect(Rect2(ox, oy, side, side), I_PANEL)
+		draw_rect(Rect2(ox, oy, side, side), I_PANEL_BORDER, false, 2.0)
+
+		# Minor grid (10 divisions)
+		var step: float = side / 10.0
+		for i in range(1, 10):
+			var p: float = float(i) * step
+			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), I_GRID_MINOR, 1.0)
+			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), I_GRID_MINOR, 1.0)
+
+		# Quarter lines (brighter)
+		for frac in [0.25, 0.75]:
+			draw_line(Vector2(ox + side * frac, oy), Vector2(ox + side * frac, oy + side), I_GRID_MAJOR, 1.5)
+			draw_line(Vector2(ox, oy + side * frac), Vector2(ox + side, oy + side * frac), I_GRID_MAJOR, 1.5)
+
+		# Axes
+		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), I_AXIS_X, 2.0)
+		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), I_AXIS_Y, 2.0)
+
+		# Corner brackets
+		_draw_corner_brackets(ox, oy, side)
+
+		# Axis labels
+		draw_string(font, Vector2(ox + side + 6, cy + 6), "X", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_AXIS_X)
+		draw_string(font, Vector2(cx - 4, oy - 6), "Y", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_AXIS_Y)
+
+		# Scale ticks
+		var rl: String = "%.1f" % grid_range
+		draw_string(font, Vector2(ox - 4, cy + 16), "-%s" % rl, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font, Vector2(ox + side - 20, cy + 16), rl, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font, Vector2(cx + 5, oy + 13), rl, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font, Vector2(cx + 5, oy + side - 3), "-%s" % rl, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+
+		# Data panel background
+		draw_rect(Rect2(data_x, data_y, data_w, data_h), I_PANEL)
+		draw_rect(Rect2(data_x, data_y, data_w, data_h), I_PANEL_BORDER, false, 2.0)
+
+		# Info bar background
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL)
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL_BORDER, false, 2.0)
+
+		return {"ox": ox, "oy": oy, "side": side, "cx": cx, "cy": cy,
+				"data_x": data_x, "data_y": data_y, "data_w": data_w, "data_h": data_h,
+				"info_y": info_y}
+
+	## Draw labeled values in the data panel — entries is [{label, value, color}]
+	func _draw_data_panel(font: Font, g: Dictionary, entries: Array, title: String = "DATA") -> void:
+		var dx: float = g["data_x"]
+		var dy: float = g["data_y"]
+		var dw: float = g["data_w"]
+		# Title
+		draw_string(font, Vector2(dx + 10, dy + 18), title, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, I_DIM)
+		draw_line(Vector2(dx + 8, dy + 24), Vector2(dx + dw - 8, dy + 24), Color(I_PANEL_BORDER, 0.3), 1.0)
+		# Entries
+		var y_off: float = 42.0
+		for entry in entries:
+			var label: String = entry.get("label", "")
+			var value: String = entry.get("value", "")
+			var col: Color = entry.get("color", I_TEXT)
+			draw_string(font, Vector2(dx + 10, dy + y_off), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+			draw_string(font, Vector2(dx + 10, dy + y_off + 16), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, col)
+			y_off += 40.0
+
+	## Draw info/explain text in the bottom bar
+	func _draw_info_bar(font: Font, vp_size: Vector2, info_y: float, text_line1: String, text_line2: String = "") -> void:
+		draw_string(font, Vector2(14, info_y + 20), text_line1, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, I_TEXT)
+		if text_line2 != "":
+			draw_string(font, Vector2(14, info_y + 40), text_line2, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+
 	func _draw_point_tracker(vp_size: Vector2, grid_top: float, margin: float, area: Vector2, font: Font) -> void:
-		# Use relative position (origin = where the point started), or zero if no point yet
 		var pos: Vector3 = Vector3.ZERO
 		if is_instance_valid(screen_ref._tracking_point):
 			pos = screen_ref._tracking_point.global_position - screen_ref._point_origin
 		var grid_range: float = 2.0
 
-		# ── Light scientific background (matching web UI) ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(1.0, 1.0, 1.0))
+		# ── Dark background ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
 
-		# ── Header bar ──
-		draw_rect(Rect2(0, 0, vp_size.x, 36), Color(0.965, 0.973, 0.98))
-		draw_line(Vector2(0, 36), Vector2(vp_size.x, 36), Color(0.82, 0.85, 0.88), 1.0)
-		draw_string(font, Vector2(12, 25), "Point Position", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.12, 0.14, 0.16))
-		draw_string(font, Vector2(vp_size.x * 0.45, 25), "P = (x, y)", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.04, 0.41, 0.85))
-		draw_string(font, Vector2(vp_size.x - 100, 25), "Score: %d" % screen_ref._point_score, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.43, 0.47, 0.51))
+		# ── Header + grid ──
+		_draw_instrument_header(vp_size, font, "POINT POSITION", "P = (x, y)", screen_ref._point_score)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, grid_range)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
 
-		# ── Coordinate grid area ──
-		var grid_top_y: float = 42.0
-		var side: float = minf(area.x, vp_size.y - grid_top_y - 60)
-		var ox: float = (vp_size.x - side) * 0.5
-		var oy: float = grid_top_y + 4
-
-		# Grid border
-		draw_rect(Rect2(ox - 1, oy - 1, side + 2, side + 2), Color(0.82, 0.85, 0.88))
-		draw_rect(Rect2(ox, oy, side, side), Color(1.0, 1.0, 1.0))
-
-		# Minor grid
-		var minor_div: int = 10
-		var minor_step: float = side / float(minor_div)
-		for i in range(1, minor_div):
-			var p: float = float(i) * minor_step
-			draw_line(Vector2(ox + p, oy), Vector2(ox + p, oy + side), Color(0.94, 0.94, 0.96), 0.5)
-			draw_line(Vector2(ox, oy + p), Vector2(ox + side, oy + p), Color(0.94, 0.94, 0.96), 0.5)
-
-		# Major grid (center lines)
-		var cx: float = ox + side * 0.5
-		var cy: float = oy + side * 0.5
-		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.82, 0.84, 0.87), 0.8)
-		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.82, 0.84, 0.87), 0.8)
-
-		# Axes
-		draw_line(Vector2(ox, cy), Vector2(ox + side, cy), Color(0.86, 0.15, 0.15), 1.5)
-		draw_line(Vector2(cx, oy), Vector2(cx, oy + side), Color(0.09, 0.64, 0.29), 1.5)
-
-		# Axis labels
-		draw_string(font, Vector2(ox + side + 5, cy + 5), "x", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.86, 0.15, 0.15))
-		draw_string(font, Vector2(cx - 14, oy - 5), "y", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.09, 0.64, 0.29))
-		# Scale
-		var range_label: String = "%.1f" % grid_range
-		draw_string(font, Vector2(ox - 6, cy + 14), "-%s" % range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
-		draw_string(font, Vector2(ox + side - 14, cy + 14), range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
-		draw_string(font, Vector2(cx + 5, oy + 11), range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
-		draw_string(font, Vector2(cx + 5, oy + side - 3), "-%s" % range_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(0.61, 0.64, 0.67))
-
-		# ── Map position (negate X: screen faces player at 180°) ──
+		# ── Map position (negate X: screen faces player at 180) ──
 		var dot_x: float = cx - (pos.x / grid_range) * (side * 0.5)
 		var dot_y: float = cy - (pos.y / grid_range) * (side * 0.5)
 
-		# ── Trail (violet) ──
+		# ── Trail ──
 		if screen_ref._point_trail.size() > 1:
-			for i in range(screen_ref._point_trail.size() - 1):
+			var n: int = screen_ref._point_trail.size()
+			for i in range(n - 1):
 				var t0: Vector3 = screen_ref._point_trail[i]
 				var t1: Vector3 = screen_ref._point_trail[i + 1]
 				var tx0: float = cx - (t0.x / grid_range) * (side * 0.5)
 				var ty0: float = cy - (t0.y / grid_range) * (side * 0.5)
 				var tx1: float = cx - (t1.x / grid_range) * (side * 0.5)
 				var ty1: float = cy - (t1.y / grid_range) * (side * 0.5)
-				var alpha: float = float(i) / float(screen_ref._point_trail.size()) * 0.35
-				draw_line(Vector2(tx0, ty0), Vector2(tx1, ty1), Color(0.55, 0.36, 0.96, alpha), 1.5)
+				var t: float = float(i) / float(n)
+				draw_line(Vector2(tx0, ty0), Vector2(tx1, ty1), Color(I_DOT, 0.1 + t * 0.6), 1.0 + t * 1.5)
 
-		# ── Target (if not exploding) ──
+		# ── Target ──
 		if not screen_ref._point_exploding and screen_ref._point_target != Vector3.ZERO:
 			var tgt: Vector3 = screen_ref._point_target
 			var tgt_x: float = cx - (tgt.x / grid_range) * (side * 0.5)
 			var tgt_y: float = cy - (tgt.y / grid_range) * (side * 0.5)
 			var pulse: float = sin(Time.get_ticks_msec() / 300.0) * 3.0
 			var tgt_col: Color = screen_ref._point_target_color
-			draw_circle(Vector2(tgt_x, tgt_y), 16.0 + pulse, Color(tgt_col, 0.15))
-			draw_circle(Vector2(tgt_x, tgt_y), 10.0, Color(tgt_col, 0.3))
-			draw_circle(Vector2(tgt_x, tgt_y), 3.0, tgt_col)
-			draw_line(Vector2(dot_x, dot_y), Vector2(tgt_x, tgt_y), Color(tgt_col, 0.15), 1.0)
+			draw_circle(Vector2(tgt_x, tgt_y), 22.0 + pulse, Color(tgt_col, 0.15))
+			draw_circle(Vector2(tgt_x, tgt_y), 14.0, Color(tgt_col, 0.35))
+			draw_circle(Vector2(tgt_x, tgt_y), 4.0, tgt_col)
+			# Crosshair
+			draw_line(Vector2(tgt_x - 28, tgt_y), Vector2(tgt_x + 28, tgt_y), Color(tgt_col, 0.15), 1.0)
+			draw_line(Vector2(tgt_x, tgt_y - 28), Vector2(tgt_x, tgt_y + 28), Color(tgt_col, 0.15), 1.0)
+			# Distance line
+			draw_line(Vector2(dot_x, dot_y), Vector2(tgt_x, tgt_y), Color(tgt_col, 0.1), 1.0)
 
 		# ── Particles ──
 		for p_data in screen_ref._point_particles:
@@ -922,34 +1275,40 @@ class _ScreenCanvas extends Control:
 			var p_color: Color = p_data["color"]
 			var p_sx: float = cx - (p_pos.x / grid_range) * (side * 0.5)
 			var p_sy: float = cy - (p_pos.y / grid_range) * (side * 0.5)
-			draw_circle(Vector2(p_sx, p_sy), 3.0, Color(p_color, clampf(p_life * 2.0, 0.0, 1.0)))
+			draw_circle(Vector2(p_sx, p_sy), 2.5, Color(p_color, clampf(p_life * 2.0, 0.0, 1.0)))
 
-		# ── Projection lines ──
-		draw_line(Vector2(dot_x, dot_y), Vector2(dot_x, cy), Color(0.86, 0.15, 0.15, 0.12), 1.0)
-		draw_line(Vector2(dot_x, dot_y), Vector2(cx, dot_y), Color(0.09, 0.64, 0.29, 0.12), 1.0)
-		draw_rect(Rect2(dot_x - 1.5, cy - 3, 3, 6), Color(0.86, 0.15, 0.15))
-		draw_rect(Rect2(cx - 3, dot_y - 1.5, 6, 3), Color(0.09, 0.64, 0.29))
+		# ── Projections ──
+		draw_line(Vector2(dot_x, dot_y), Vector2(dot_x, cy), Color(I_AXIS_X, 0.2), 1.5)
+		draw_line(Vector2(dot_x, dot_y), Vector2(cx, dot_y), Color(I_AXIS_Y, 0.2), 1.5)
+		draw_circle(Vector2(dot_x, cy), 4.0, I_AXIS_X)
+		draw_circle(Vector2(cx, dot_y), 4.0, I_AXIS_Y)
 
-		# ── Point dot (violet with highlight) ──
-		draw_circle(Vector2(dot_x, dot_y), 14.0, Color(0.55, 0.36, 0.96, 0.08))
-		draw_circle(Vector2(dot_x, dot_y), 10.0, Color(0.55, 0.36, 0.96, 0.2))
-		draw_circle(Vector2(dot_x, dot_y), 7.0, Color(0.55, 0.36, 0.96))
-		draw_circle(Vector2(dot_x - 2, dot_y - 2), 2.0, Color(1, 1, 1, 0.7))
+		# ── Point dot ──
+		draw_circle(Vector2(dot_x, dot_y), 18.0, Color(I_DOT, 0.12))
+		draw_circle(Vector2(dot_x, dot_y), 12.0, Color(I_DOT, 0.35))
+		draw_circle(Vector2(dot_x, dot_y), 7.0, I_DOT)
+		draw_circle(Vector2(dot_x - 2, dot_y - 2), 2.0, Color(1, 1, 1, 0.4))
 
-		# ── Readout panel (light surface) ──
-		var panel_y: float = oy + side + 6
-		draw_rect(Rect2(ox, panel_y, side, 46), Color(0.965, 0.973, 0.98))
-		draw_rect(Rect2(ox - 1, panel_y - 1, side + 2, 48), Color(0.82, 0.85, 0.88))
-		draw_rect(Rect2(ox, panel_y, side, 46), Color(0.965, 0.973, 0.98))
+		# ── Inline coordinate label ──
+		draw_string(font, Vector2(dot_x + 14, dot_y - 6), "(%.2f, %.2f)" % [pos.x, pos.y], HORIZONTAL_ALIGNMENT_LEFT, -1, 13, I_DIM)
 
-		draw_string(font, Vector2(ox + 12, panel_y + 18), "x = %.3f" % pos.x, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(0.86, 0.15, 0.15))
-		draw_string(font, Vector2(ox + side * 0.5 + 12, panel_y + 18), "y = %.3f" % pos.y, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color(0.09, 0.64, 0.29))
-
+		# ── Data panel (right side) ──
 		var d_to_target: float = Vector2(pos.x, pos.y).distance_to(Vector2(screen_ref._point_target.x, screen_ref._point_target.y))
-		draw_string(font, Vector2(ox + 12, panel_y + 36), "d = %.2f" % d_to_target, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.61, 0.64, 0.67))
-		draw_string(font, Vector2(ox + side * 0.5 + 12, panel_y + 36), "total: %.1f" % screen_ref._point_trail.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.61, 0.64, 0.67))
+		var sign_x: String = "+" if pos.x >= 0 else ""
+		var sign_y: String = "+" if pos.y >= 0 else ""
+		_draw_data_panel(font, g, [
+			{"label": "X POSITION", "value": "%s%.3f" % [sign_x, pos.x], "color": I_AXIS_X},
+			{"label": "Y POSITION", "value": "%s%.3f" % [sign_y, pos.y], "color": I_AXIS_Y},
+			{"label": "DISTANCE", "value": "%.3f" % d_to_target, "color": I_CYAN},
+			{"label": "TRAIL", "value": "%d pts" % screen_ref._point_trail.size(), "color": I_DOT},
+			{"label": "SCORE", "value": "%d" % screen_ref._point_score, "color": I_TEXT},
+		], "POINT DATA")
 
-		# ── Scanlines ──
+		# ── Info bar (bottom) — dynamic text from blurb.md/intent.md ──
+		_draw_info_bar(font, vp_size, g["info_y"],
+			screen_ref._info_current,
+			screen_ref._info_sub)
+
 		_draw_scanlines(vp_size)
 
 
@@ -1018,81 +1377,70 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_line_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		# Relative to line origin (midpoint of initial line position)
-		var pos_a: Vector3 = screen_ref._tracking_line_p1.global_position - screen_ref._line_origin
-		var pos_b: Vector3 = screen_ref._tracking_line_p2.global_position - screen_ref._line_origin
+		var pos_a: Vector3 = Vector3.ZERO
+		var pos_b: Vector3 = Vector3(0.5, 0.3, 0)
+		if is_instance_valid(screen_ref._tracking_line_p1):
+			pos_a = screen_ref._tracking_line_p1.global_position - screen_ref._line_origin
+		if is_instance_valid(screen_ref._tracking_line_p2):
+			pos_b = screen_ref._tracking_line_p2.global_position - screen_ref._line_origin
 		var grid_range: float = 2.5
 
-		# ── Light background (matching web UI) ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(1.0, 1.0, 1.0))
+		# ── Dark background ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "LINE MEASUREMENT", "|AB| = sqrt(dx^2+dy^2)", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, grid_range)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
 
-		# ── Header (light style) ──
-		draw_rect(Rect2(0.0, 0.0, vp_size.x, 36.0), Color(0.965, 0.973, 0.98))
-		draw_line(Vector2(0, 36), Vector2(vp_size.x, 36), Color(0.82, 0.85, 0.88), 1.0)
-		draw_string(font, Vector2(12.0, 25.0), "Line Measurement", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.12, 0.14, 0.16))
-		draw_string(font, Vector2(vp_size.x - 200.0, 25.0), "|AB| = sqrt(dx^2 + dy^2)", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.04, 0.41, 0.85))
-
-		# ── XY grid ──
-		var grid_top_y: float = 44.0
-		var g: Dictionary = _draw_xy_grid(vp_size, grid_top_y, area, font, grid_range)
-		var ox: float = g["ox"]
-		var oy: float = g["oy"]
-		var side: float = g["side"]
-		var cx: float = g["cx"]
-		var cy: float = g["cy"]
-
-		# Map world to screen
 		var sa: Vector2 = _world_to_screen(pos_a, cx, cy, side, grid_range)
 		var sb: Vector2 = _world_to_screen(pos_b, cx, cy, side, grid_range)
 
-		# ── Projection lines to axes ──
-		draw_line(Vector2(sa.x, sa.y), Vector2(sa.x, cy), Color(0.7, 0.15, 0.15, 0.2), 1.0)
-		draw_line(Vector2(sa.x, sa.y), Vector2(cx, sa.y), Color(0.15, 0.7, 0.15, 0.2), 1.0)
-		draw_line(Vector2(sb.x, sb.y), Vector2(sb.x, cy), Color(0.7, 0.15, 0.15, 0.2), 1.0)
-		draw_line(Vector2(sb.x, sb.y), Vector2(cx, sb.y), Color(0.15, 0.7, 0.15, 0.2), 1.0)
+		# ── Projections ──
+		draw_line(Vector2(sa.x, sa.y), Vector2(sa.x, cy), Color(I_AXIS_X, 0.12), 1.0)
+		draw_line(Vector2(sa.x, sa.y), Vector2(cx, sa.y), Color(I_AXIS_Y, 0.12), 1.0)
+		draw_line(Vector2(sb.x, sb.y), Vector2(sb.x, cy), Color(I_AXIS_X, 0.12), 1.0)
+		draw_line(Vector2(sb.x, sb.y), Vector2(cx, sb.y), Color(I_AXIS_Y, 0.12), 1.0)
 
-		# ── Connecting line (golden) ──
-		draw_line(sa, sb, Color(1.0, 0.85, 0.3, 0.9), 2.5)
+		# ── Line AB (violet with glow) ──
+		draw_line(sa, sb, Color(I_DOT, 0.2), 10.0)
+		draw_line(sa, sb, I_DOT, 3.0)
+
+		# ── Midpoint ──
+		var mid: Vector2 = (sa + sb) * 0.5
+		draw_circle(mid, 5.0, Color(I_DOT, 0.5))
+		draw_string(font, Vector2(mid.x + 8, mid.y - 6), "M", HORIZONTAL_ALIGNMENT_LEFT, -1, 13, I_DIM)
 
 		# ── Endpoint A (cyan) ──
-		draw_circle(sa, 12.0, Color(0.3, 0.9, 1.0, 0.15))
-		draw_circle(sa, 7.0, Color(0.3, 0.9, 1.0, 0.4))
-		draw_circle(sa, 4.0, Color(0.5, 1.0, 1.0))
-		draw_string(font, Vector2(sa.x + 8.0, sa.y - 8.0), "A", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.3, 0.9, 1.0))
+		draw_circle(sa, 16.0, Color(I_CYAN, 0.15))
+		draw_circle(sa, 10.0, Color(I_CYAN, 0.4))
+		draw_circle(sa, 5.0, I_CYAN)
+		draw_string(font, Vector2(sa.x + 10, sa.y - 8), "A", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_CYAN)
 
-		# ── Endpoint B (orange) ──
-		draw_circle(sb, 12.0, Color(1.0, 0.6, 0.2, 0.15))
-		draw_circle(sb, 7.0, Color(1.0, 0.6, 0.2, 0.4))
-		draw_circle(sb, 4.0, Color(1.0, 0.8, 0.5))
-		draw_string(font, Vector2(sb.x + 8.0, sb.y - 8.0), "B", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(1.0, 0.6, 0.2))
+		# ── Endpoint B (amber) ──
+		draw_circle(sb, 16.0, Color(I_AMBER, 0.15))
+		draw_circle(sb, 10.0, Color(I_AMBER, 0.4))
+		draw_circle(sb, 5.0, I_AMBER)
+		draw_string(font, Vector2(sb.x + 10, sb.y - 8), "B", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_AMBER)
 
-		# ── Readout panel ──
-		var panel_y: float = oy + side + 8.0
-		draw_rect(Rect2(ox, panel_y, side, 60.0), Color(0.04, 0.04, 0.06))
-		draw_rect(Rect2(ox, panel_y, side, 1.0), Color(0.15, 0.2, 0.25))
-
-		# Distance
+		# ── Data panel (right side) ──
 		var dx: float = pos_b.x - pos_a.x
 		var dy: float = pos_b.y - pos_a.y
 		var dist: float = sqrt(dx * dx + dy * dy)
-		var dist_str: String = "|AB| = %.3f" % dist
-		draw_string(font, Vector2(ox + 14.0, panel_y + 18.0), dist_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(1.0, 0.85, 0.3))
+		var angle_deg: float = rad_to_deg(atan2(dy, dx))
+		var sign_th: String = "+" if angle_deg >= 0 else ""
 
-		# Angle
-		var angle_rad: float = atan2(dy, dx)
-		var angle_deg: float = rad_to_deg(angle_rad)
-		var angle_str: String = "theta = %.1f deg" % angle_deg
-		draw_string(font, Vector2(ox + side * 0.5 + 14.0, panel_y + 18.0), angle_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.7, 0.7, 0.8))
+		_draw_data_panel(font, g, [
+			{"label": "|AB| LENGTH", "value": "%.3f" % dist, "color": I_DOT},
+			{"label": "THETA ANGLE", "value": "%s%.1f deg" % [sign_th, angle_deg], "color": Color(0.925, 0.306, 0.604)},
+			{"label": "DELTA X", "value": "%+.3f" % dx, "color": I_AXIS_X},
+			{"label": "DELTA Y", "value": "%+.3f" % dy, "color": I_AXIS_Y},
+			{"label": "MIDPOINT", "value": "(%.2f, %.2f)" % [(pos_a.x + pos_b.x) * 0.5, (pos_a.y + pos_b.y) * 0.5], "color": I_DIM},
+		], "LINE DATA")
 
-		# Coordinates
-		var a_str: String = "A = (%.2f, %.2f)" % [pos_a.x, pos_a.y]
-		var b_str: String = "B = (%.2f, %.2f)" % [pos_b.x, pos_b.y]
-		draw_string(font, Vector2(ox + 14.0, panel_y + 40.0), a_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.9, 1.0, 0.7))
-		draw_string(font, Vector2(ox + side * 0.5 + 14.0, panel_y + 40.0), b_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1.0, 0.6, 0.2, 0.7))
-
-		# Delta
-		var delta_str: String = "dx=%.2f  dy=%.2f" % [dx, dy]
-		draw_string(font, Vector2(ox + 14.0, panel_y + 56.0), delta_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.4, 0.4, 0.5))
+		# ── Info bar (bottom) — dynamic text from blurb.md/intent.md ──
+		_draw_info_bar(font, vp_size, g["info_y"],
+			screen_ref._info_current,
+			screen_ref._info_sub)
 
 		_draw_scanlines(vp_size)
 
@@ -1102,107 +1450,76 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_dot_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		var draw_node: Node3D = screen_ref._tracking_draw_dot
-		var grid_range: float = 5.0
+		var draw_node: Node3D = screen_ref._tracking_draw_dot if is_instance_valid(screen_ref._tracking_draw_dot) else null
 
-		# ── Background ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(0.02, 0.02, 0.04))
+		# ── Dark background + shared layout ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "TRACE PATH", "L = sum|p[i]-p[i-1]|", 0)
 
-		# ── Header ──
-		draw_rect(Rect2(0.0, 0.0, vp_size.x, 36.0), Color(0.05, 0.05, 0.08))
-		draw_string(font, Vector2(12.0, 25.0), "DRAW PATH TRACER", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.4, 0.8, 1.0))
-
-		# ── XY grid ──
-		var grid_top_y: float = 44.0
-		var g: Dictionary = _draw_xy_grid(vp_size, grid_top_y, area, font, grid_range)
-		var ox: float = g["ox"]
-		var oy: float = g["oy"]
-		var side: float = g["side"]
-		var cx: float = g["cx"]
-		var cy: float = g["cy"]
-
-		# ── Get trail points from the draw_dot artifact ──
+		# Use auto-zoom grid range based on trail
 		var trail_points: Array = []
-		if "_trail_points" in draw_node:
-			trail_points = draw_node.get("_trail_points")
-		elif "trail_points" in draw_node:
-			trail_points = draw_node.get("trail_points")
-		elif "points" in draw_node:
-			trail_points = draw_node.get("points")
+		if draw_node:
+			if "_trail_points" in draw_node:
+				trail_points = draw_node.get("_trail_points")
+			elif "trail_points" in draw_node:
+				trail_points = draw_node.get("trail_points")
+			if trail_points.size() == 0:
+				trail_points = [draw_node.global_position]
 
-		# Fallback: use current position as single point
-		if trail_points.size() == 0:
-			trail_points = [draw_node.global_position]
-
-		# ── Compute bounding box ──
-		var min_x: float = 99999.0
-		var max_x: float = -99999.0
-		var min_y: float = 99999.0
-		var max_y: float = -99999.0
+		# Bounding box + length
+		var min_x: float = 99999.0; var max_x: float = -99999.0
+		var min_y: float = 99999.0; var max_y: float = -99999.0
 		var total_length: float = 0.0
-
 		for i in range(trail_points.size()):
 			var tp: Vector3 = trail_points[i] if trail_points[i] is Vector3 else Vector3.ZERO
-			if tp.x < min_x:
-				min_x = tp.x
-			if tp.x > max_x:
-				max_x = tp.x
-			if tp.y < min_y:
-				min_y = tp.y
-			if tp.y > max_y:
-				max_y = tp.y
+			min_x = minf(min_x, tp.x); max_x = maxf(max_x, tp.x)
+			min_y = minf(min_y, tp.y); max_y = maxf(max_y, tp.y)
 			if i > 0:
-				var prev_tp: Vector3 = trail_points[i - 1] if trail_points[i - 1] is Vector3 else Vector3.ZERO
-				var seg_dx: float = tp.x - prev_tp.x
-				var seg_dy: float = tp.y - prev_tp.y
-				total_length += sqrt(seg_dx * seg_dx + seg_dy * seg_dy)
+				var prev: Vector3 = trail_points[i - 1] if trail_points[i - 1] is Vector3 else Vector3.ZERO
+				total_length += Vector2(tp.x - prev.x, tp.y - prev.y).length()
 
-		# ── Draw bounding box ──
-		var bb_tl: Vector2 = _world_to_screen(Vector3(min_x, max_y, 0.0), cx, cy, side, grid_range)
-		var bb_br: Vector2 = _world_to_screen(Vector3(max_x, min_y, 0.0), cx, cy, side, grid_range)
-		var bb_width: float = bb_br.x - bb_tl.x
-		var bb_height: float = bb_br.y - bb_tl.y
-		if bb_width > 2.0 and bb_height > 2.0:
-			draw_rect(Rect2(bb_tl.x, bb_tl.y, bb_width, bb_height), Color(0.3, 0.5, 0.8, 0.08))
-			# Border of bounding box
-			draw_line(Vector2(bb_tl.x, bb_tl.y), Vector2(bb_tl.x + bb_width, bb_tl.y), Color(0.3, 0.5, 0.8, 0.2), 1.0)
-			draw_line(Vector2(bb_tl.x + bb_width, bb_tl.y), Vector2(bb_tl.x + bb_width, bb_tl.y + bb_height), Color(0.3, 0.5, 0.8, 0.2), 1.0)
-			draw_line(Vector2(bb_tl.x + bb_width, bb_tl.y + bb_height), Vector2(bb_tl.x, bb_tl.y + bb_height), Color(0.3, 0.5, 0.8, 0.2), 1.0)
-			draw_line(Vector2(bb_tl.x, bb_tl.y + bb_height), Vector2(bb_tl.x, bb_tl.y), Color(0.3, 0.5, 0.8, 0.2), 1.0)
+		var span_x: float = max_x - min_x
+		var span_y: float = max_y - min_y
+		var grid_range: float = maxf(maxf(span_x, span_y) * 0.575, 0.5)
 
-		# ── Draw trail as connected line segments ──
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, grid_range)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
+
+		var center_x: float = (min_x + max_x) * 0.5
+		var center_y: float = (min_y + max_y) * 0.5
+
+		# ── Draw trail (in grid area, centered on trail bbox) ──
 		if trail_points.size() > 1:
-			for i in range(trail_points.size() - 1):
+			var n: int = trail_points.size()
+			for i in range(n - 1):
 				var p0: Vector3 = trail_points[i] if trail_points[i] is Vector3 else Vector3.ZERO
 				var p1: Vector3 = trail_points[i + 1] if trail_points[i + 1] is Vector3 else Vector3.ZERO
-				var s0: Vector2 = _world_to_screen(p0, cx, cy, side, grid_range)
-				var s1: Vector2 = _world_to_screen(p1, cx, cy, side, grid_range)
-				var trail_alpha: float = 0.3 + 0.7 * (float(i) / float(trail_points.size()))
-				draw_line(s0, s1, Color(0.2, 0.9, 0.5, trail_alpha), 2.0)
+				var s0: Vector2 = Vector2(cx + ((p0.x - center_x) / grid_range) * side * 0.5, cy - ((p0.y - center_y) / grid_range) * side * 0.5)
+				var s1: Vector2 = Vector2(cx + ((p1.x - center_x) / grid_range) * side * 0.5, cy - ((p1.y - center_y) / grid_range) * side * 0.5)
+				var t: float = float(i) / float(n)
+				draw_line(s0, s1, Color(I_DOT, 0.15 + 0.85 * t), 1.5 + 4.5 * t)
 
-		# ── Draw current position as a bright dot ──
-		var cur_pos: Vector3 = draw_node.global_position
-		var cur_screen: Vector2 = _world_to_screen(cur_pos, cx, cy, side, grid_range)
-		draw_circle(cur_screen, 10.0, Color(0.2, 1.0, 0.5, 0.15))
-		draw_circle(cur_screen, 6.0, Color(0.2, 1.0, 0.5, 0.4))
-		draw_circle(cur_screen, 3.0, Color(0.5, 1.0, 0.7))
+		# ── Current position dot ──
+		var cur_pos: Vector3 = draw_node.global_position if draw_node else Vector3.ZERO
+		var cur_scr: Vector2 = Vector2(cx + ((cur_pos.x - center_x) / grid_range) * side * 0.5, cy - ((cur_pos.y - center_y) / grid_range) * side * 0.5)
+		draw_circle(cur_scr, 16.0, Color(I_DOT, 0.12))
+		draw_circle(cur_scr, 10.0, Color(I_DOT, 0.35))
+		draw_circle(cur_scr, 5.0, I_DOT)
 
-		# ── Readout panel ──
-		var panel_y: float = oy + side + 8.0
-		draw_rect(Rect2(ox, panel_y, side, 48.0), Color(0.04, 0.04, 0.06))
-		draw_rect(Rect2(ox, panel_y, side, 1.0), Color(0.15, 0.2, 0.25))
+		# ── Data panel (right side) — continuous position data ──
+		_draw_data_panel(font, g, [
+			{"label": "X POSITION", "value": "%.3f" % cur_pos.x, "color": I_AXIS_X},
+			{"label": "Y POSITION", "value": "%.3f" % cur_pos.y, "color": I_AXIS_Y},
+			{"label": "POINTS", "value": "%d" % trail_points.size(), "color": I_DOT},
+			{"label": "PATH LENGTH", "value": "%.3f m" % total_length, "color": I_TEXT},
+			{"label": "ZOOM", "value": "%.0f cm" % (grid_range * 200.0), "color": I_DIM},
+		], "TRACE DATA")
 
-		var count_str: String = "Points: %d" % trail_points.size()
-		draw_string(font, Vector2(ox + 14.0, panel_y + 18.0), count_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.2, 0.9, 0.5))
-
-		var len_str: String = "Length: %.3f" % total_length
-		draw_string(font, Vector2(ox + side * 0.4, panel_y + 18.0), len_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.6, 0.8, 0.7))
-
-		var pos_str: String = "Pos: (%.2f, %.2f)" % [cur_pos.x, cur_pos.y]
-		draw_string(font, Vector2(ox + 14.0, panel_y + 40.0), pos_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.4, 0.4, 0.5))
-
-		var bb_str: String = "BBox: %.2f x %.2f" % [max_x - min_x, max_y - min_y]
-		draw_string(font, Vector2(ox + side * 0.5, panel_y + 40.0), bb_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.5, 0.8, 0.7))
+		# ── Info bar (bottom) — dynamic text ──
+		_draw_info_bar(font, vp_size, g["info_y"],
+			screen_ref._info_current,
+			screen_ref._info_sub)
 
 		_draw_scanlines(vp_size)
 
@@ -1212,21 +1529,22 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_triangle_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		var pa: Vector3 = screen_ref._tracking_tri_points[0].global_position
-		var pb: Vector3 = screen_ref._tracking_tri_points[1].global_position
-		var pc: Vector3 = screen_ref._tracking_tri_points[2].global_position
-		var grid_range: float = 5.0
+		var pa: Vector3 = Vector3(-0.5, 0, 0)
+		var pb: Vector3 = Vector3(0.5, 0, 0)
+		var pc: Vector3 = Vector3(0, 0.8, 0)
+		if screen_ref._tracking_tri_points.size() >= 3:
+			if is_instance_valid(screen_ref._tracking_tri_points[0]):
+				pa = screen_ref._tracking_tri_points[0].global_position
+			if is_instance_valid(screen_ref._tracking_tri_points[1]):
+				pb = screen_ref._tracking_tri_points[1].global_position
+			if is_instance_valid(screen_ref._tracking_tri_points[2]):
+				pc = screen_ref._tracking_tri_points[2].global_position
+		var grid_range: float = 3.0
 
-		# ── Background ──
-		draw_rect(Rect2(Vector2.ZERO, vp_size), Color(0.02, 0.02, 0.04))
-
-		# ── Header ──
-		draw_rect(Rect2(0.0, 0.0, vp_size.x, 36.0), Color(0.05, 0.05, 0.08))
-		draw_string(font, Vector2(12.0, 25.0), "TRIANGLE ANALYZER", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.4, 0.8, 1.0))
-
-		# ── XY grid ──
-		var grid_top_y: float = 44.0
-		var g: Dictionary = _draw_xy_grid(vp_size, grid_top_y, area, font, grid_range)
+		# ── Dark background + shared layout ──
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "TRIANGLE", "A = 0.5|AB x AC|", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, grid_range)
 		var ox: float = g["ox"]
 		var oy: float = g["oy"]
 		var side: float = g["side"]
@@ -1239,33 +1557,36 @@ class _ScreenCanvas extends Control:
 		var sc: Vector2 = _world_to_screen(pc, cx, cy, side, grid_range)
 
 		# ── Filled triangle (semi-transparent) ──
-		var tri_color: Color = Color(0.3, 0.6, 0.9, 0.12)
+		var tri_color: Color = Color(I_DOT, 0.08)
 		var tri_points: PackedVector2Array = PackedVector2Array([sa, sb, sc])
 		var tri_colors: PackedColorArray = PackedColorArray([tri_color, tri_color, tri_color])
 		draw_polygon(tri_points, tri_colors)
 
-		# ── Triangle edges ──
-		# AB (cyan to orange)
-		draw_line(sa, sb, Color(0.4, 0.8, 0.9, 0.8), 2.0)
-		# BC (orange to magenta)
-		draw_line(sb, sc, Color(0.9, 0.5, 0.3, 0.8), 2.0)
-		# CA (magenta to cyan)
-		draw_line(sc, sa, Color(0.8, 0.3, 0.8, 0.8), 2.0)
+		# ── Triangle edges (glow + solid) ──
+		draw_line(sa, sb, Color(I_DOT, 0.15), 8.0)
+		draw_line(sb, sc, Color(I_DOT, 0.15), 8.0)
+		draw_line(sc, sa, Color(I_DOT, 0.15), 8.0)
+		draw_line(sa, sb, I_DOT, 2.5)
+		draw_line(sb, sc, I_DOT, 2.5)
+		draw_line(sc, sa, I_DOT, 2.5)
 
 		# ── Vertex A (cyan) ──
-		draw_circle(sa, 10.0, Color(0.3, 0.9, 1.0, 0.2))
-		draw_circle(sa, 5.0, Color(0.5, 1.0, 1.0))
-		draw_string(font, Vector2(sa.x + 8.0, sa.y - 8.0), "A", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.3, 0.9, 1.0))
+		draw_circle(sa, 14.0, Color(I_CYAN, 0.15))
+		draw_circle(sa, 8.0, Color(I_CYAN, 0.4))
+		draw_circle(sa, 4.0, I_CYAN)
+		draw_string(font, Vector2(sa.x + 10, sa.y - 8), "A", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_CYAN)
 
-		# ── Vertex B (orange) ──
-		draw_circle(sb, 10.0, Color(1.0, 0.6, 0.2, 0.2))
-		draw_circle(sb, 5.0, Color(1.0, 0.8, 0.4))
-		draw_string(font, Vector2(sb.x + 8.0, sb.y - 8.0), "B", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(1.0, 0.6, 0.2))
+		# ── Vertex B (amber) ──
+		draw_circle(sb, 14.0, Color(I_AMBER, 0.15))
+		draw_circle(sb, 8.0, Color(I_AMBER, 0.4))
+		draw_circle(sb, 4.0, I_AMBER)
+		draw_string(font, Vector2(sb.x + 10, sb.y - 8), "B", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_AMBER)
 
-		# ── Vertex C (magenta) ──
-		draw_circle(sc, 10.0, Color(0.9, 0.3, 0.8, 0.2))
-		draw_circle(sc, 5.0, Color(1.0, 0.5, 0.9))
-		draw_string(font, Vector2(sc.x + 8.0, sc.y - 8.0), "C", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.9, 0.3, 0.8))
+		# ── Vertex C (violet) ──
+		draw_circle(sc, 14.0, Color(I_DOT, 0.15))
+		draw_circle(sc, 8.0, Color(I_DOT, 0.4))
+		draw_circle(sc, 4.0, I_DOT)
+		draw_string(font, Vector2(sc.x + 10, sc.y - 8), "C", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_DOT)
 
 		# ── Centroid ──
 		var centroid_x: float = (pa.x + pb.x + pc.x) / 3.0
@@ -1302,27 +1623,531 @@ class _ScreenCanvas extends Control:
 		# ── Area (cross product / 2) ──
 		var tri_area: float = absf((pb.x - pa.x) * (pc.y - pa.y) - (pc.x - pa.x) * (pb.y - pa.y)) * 0.5
 
-		# ── Readout panel ──
-		var panel_y: float = oy + side + 8.0
-		draw_rect(Rect2(ox, panel_y, side, 68.0), Color(0.04, 0.04, 0.06))
-		draw_rect(Rect2(ox, panel_y, side, 1.0), Color(0.15, 0.2, 0.25))
+		# ── Data panel (right side) ──
+		var perimeter: float = len_ab + len_bc + len_ca
+		_draw_data_panel(font, g, [
+			{"label": "AREA", "value": "%.3f" % tri_area, "color": I_DOT},
+			{"label": "PERIMETER", "value": "%.3f" % perimeter, "color": I_TEXT},
+			{"label": "ANGLES", "value": "%.0f  %.0f  %.0f" % [angle_a, angle_b, angle_c], "color": Color(0.925, 0.306, 0.604)},
+			{"label": "AB / BC / CA", "value": "%.2f / %.2f / %.2f" % [len_ab, len_bc, len_ca], "color": I_DIM},
+			{"label": "CENTROID", "value": "(%.2f, %.2f)" % [centroid_x, centroid_y], "color": Color(1.0, 1.0, 0.4)},
+		], "TRIANGLE DATA")
 
-		# Side lengths
-		var sides_str: String = "AB=%.2f  BC=%.2f  CA=%.2f" % [len_ab, len_bc, len_ca]
-		draw_string(font, Vector2(ox + 14.0, panel_y + 16.0), sides_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.6, 0.8, 0.9))
+		# ── Info bar (bottom) — dynamic text ──
+		_draw_info_bar(font, vp_size, g["info_y"],
+			screen_ref._info_current,
+			screen_ref._info_sub)
 
-		# Angles
-		var angles_str: String = "A=%.1f  B=%.1f  C=%.1f deg" % [angle_a, angle_b, angle_c]
-		draw_string(font, Vector2(ox + 14.0, panel_y + 34.0), angles_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(0.8, 0.7, 0.5))
+		_draw_scanlines(vp_size)
 
-		# Area
-		var area_str: String = "Area = %.3f" % tri_area
-		draw_string(font, Vector2(ox + 14.0, panel_y + 52.0), area_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.9, 0.8, 0.3))
 
-		# Centroid coordinates
-		var cen_str: String = "Centroid = (%.2f, %.2f)" % [centroid_x, centroid_y]
-		draw_string(font, Vector2(ox + side * 0.5, panel_y + 52.0), cen_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1.0, 1.0, 0.4, 0.5))
+	# ═══════════════════════════════════════════════════════════════
+	# CUBE NET — unfold a 3D cube's faces into 2D cross layout
+	# ═══════════════════════════════════════════════════════════════
 
+	func _draw_net_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "CUBE NET", "6 faces, 8 vertices, 12 edges", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, 3.0)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
+
+		# Get 8 vertex positions from the tracked artifact
+		var verts: Array[Vector3] = []
+		for i in range(8):
+			verts.append(Vector3(
+				[-0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5][i],
+				[-0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5][i],
+				[-0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5][i]
+			))
+
+		# Try to read actual positions from the tracked artifact
+		if is_instance_valid(screen_ref._tracking_generic):
+			var art: Node = screen_ref._tracking_generic
+			if "handle_nodes" in art:
+				var handles: Array = art.get("handle_nodes")
+				for i in range(mini(handles.size(), 8)):
+					if is_instance_valid(handles[i]):
+						var origin: Vector3 = art.global_position
+						verts[i] = handles[i].global_position - origin
+
+		# Cube faces as quads (indices into verts) — standard cube net cross layout
+		# Face order: front, right, back, left, top, bottom
+		var faces: Array = [
+			[4, 5, 6, 7],  # front (+Z)
+			[1, 5, 6, 2],  # right (+X)
+			[0, 1, 2, 3],  # back (-Z)
+			[4, 0, 3, 7],  # left (-X)
+			[3, 2, 6, 7],  # top (+Y)
+			[4, 5, 1, 0],  # bottom (-Y)
+		]
+		var face_colors: Array[Color] = [
+			I_CYAN, I_AMBER, Color(0.925, 0.306, 0.604), I_AXIS_Y, I_DOT, I_DIM
+		]
+		var face_names: Array[String] = ["FRONT", "RIGHT", "BACK", "LEFT", "TOP", "BOTTOM"]
+
+		# Net layout: cross pattern — each face gets a 2D offset in grid units
+		# Layout (face_size = side/4):
+		#       [TOP]
+		# [LEFT][FRONT][RIGHT][BACK]
+		#       [BOTTOM]
+		var face_size: float = side / 4.2
+		var net_cx: float = cx - face_size * 0.5  # Center the cross
+		var net_cy: float = cy - face_size * 0.5
+		var net_offsets: Array[Vector2] = [
+			Vector2(1, 1),   # front — center
+			Vector2(2, 1),   # right
+			Vector2(3, 1),   # back
+			Vector2(0, 1),   # left
+			Vector2(1, 0),   # top
+			Vector2(1, 2),   # bottom
+		]
+
+		# Draw each face as a deformed quad
+		for fi in range(6):
+			var face: Array = faces[fi]
+			var offset: Vector2 = net_offsets[fi]
+			var base_x: float = ox + offset.x * face_size + (side - face_size * 4) * 0.5
+			var base_y: float = oy + offset.y * face_size + (side - face_size * 3) * 0.5
+			var col: Color = face_colors[fi]
+
+			# Get the 4 vertex positions for this face and project to 2D
+			# Map each vertex's local displacement to deform the square
+			var corners: Array[Vector2] = []
+			for vi in range(4):
+				var v: Vector3 = verts[face[vi]]
+				# Simple projection: use two axes per face for the 2D layout
+				var u: float = 0.0; var w: float = 0.0
+				match fi:
+					0: u = v.x; w = v.y  # front: XY
+					1: u = -v.z; w = v.y  # right: ZY
+					2: u = -v.x; w = v.y  # back: XY flipped
+					3: u = v.z; w = v.y  # left: ZY flipped
+					4: u = v.x; w = -v.z  # top: XZ
+					5: u = v.x; w = v.z  # bottom: XZ
+				corners.append(Vector2(
+					base_x + (u + 0.5) * face_size,
+					base_y + (0.5 - w) * face_size
+				))
+
+			# Fill
+			if corners.size() == 4:
+				var poly: PackedVector2Array = PackedVector2Array(corners)
+				var colors: PackedColorArray = PackedColorArray([Color(col, 0.1), Color(col, 0.1), Color(col, 0.1), Color(col, 0.1)])
+				draw_polygon(poly, colors)
+				# Edges
+				for ei in range(4):
+					draw_line(corners[ei], corners[(ei + 1) % 4], Color(col, 0.7), 2.0)
+				# Face label
+				var center_2d: Vector2 = (corners[0] + corners[1] + corners[2] + corners[3]) * 0.25
+				draw_string(font, Vector2(center_2d.x - 12, center_2d.y + 4), face_names[fi], HORIZONTAL_ALIGNMENT_LEFT, -1, 9, Color(col, 0.5))
+
+		# ── Data panel ──
+		var vol: float = absf(verts[0].distance_to(verts[1]) * verts[0].distance_to(verts[3]) * verts[0].distance_to(verts[4]))
+		var edge_len: float = verts[0].distance_to(verts[1])
+		_draw_data_panel(font, g, [
+			{"label": "EDGE LENGTH", "value": "%.3f" % edge_len, "color": I_TEXT},
+			{"label": "VERTICES", "value": "8", "color": I_CYAN},
+			{"label": "EDGES", "value": "12", "color": I_AMBER},
+			{"label": "FACES", "value": "6", "color": I_DOT},
+			{"label": "V-E+F", "value": "%d" % (8 - 12 + 6), "color": Color(1.0, 1.0, 0.4)},
+		], "CUBE NET DATA")
+
+		_draw_info_bar(font, vp_size, g["info_y"],
+			screen_ref._info_current,
+			screen_ref._info_sub)
+		_draw_scanlines(vp_size)
+
+
+	# ═══════════════════════════════════════════════════════════════
+	# WAVE — time-series sine/oscillation graph
+	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_wave_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "WAVEFORM", "y = A sin(wt + phi)", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, 2.0)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
+
+		# Read waveform data from artifact or generate live sine
+		var t: float = Time.get_ticks_msec() / 1000.0
+		var amplitude: float = 1.5
+		var frequency: float = 1.0
+		var cur_angle: float = 0.0
+		var angular_vel: float = 0.0
+
+		# Try reading from artifact
+		var art: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
+		if art:
+			if "current_amplitude" in art: amplitude = float(art.get("current_amplitude"))
+			if "current_angular_velocity" in art: angular_vel = float(art.get("current_angular_velocity"))
+			if "_angle" in art: cur_angle = float(art.get("_angle"))
+			# Use angle to modulate the wave
+			if cur_angle != 0.0:
+				frequency = maxf(absf(angular_vel) / TAU, 0.1)
+
+		# Draw waveform — 200 sample points
+		var prev_scr: Vector2 = Vector2.ZERO
+		var grid_range: float = 2.0
+		for i in range(200):
+			var x_val: float = -grid_range + (float(i) / 199.0) * grid_range * 2.0
+			var y_val: float = amplitude * sin(frequency * (x_val + t) * TAU + cur_angle)
+			y_val = clampf(y_val, -grid_range, grid_range)
+			var sx: float = ox + ((x_val + grid_range) / (grid_range * 2.0)) * side
+			var sy: float = cy - (y_val / grid_range) * (side * 0.5)
+			var scr: Vector2 = Vector2(sx, sy)
+			if i > 0:
+				draw_line(prev_scr, scr, I_DOT, 2.5)
+				draw_line(prev_scr, scr, Color(I_DOT, 0.15), 8.0)
+			prev_scr = scr
+
+		# Current value marker at center
+		var cur_y: float = amplitude * sin(cur_angle)
+		var cur_scr: Vector2 = Vector2(cx, cy - (cur_y / grid_range) * (side * 0.5))
+		draw_circle(cur_scr, 8.0, Color(I_CYAN, 0.3))
+		draw_circle(cur_scr, 4.0, I_CYAN)
+
+		# Data panel
+		_draw_data_panel(font, g, [
+			{"label": "AMPLITUDE", "value": "%.3f" % amplitude, "color": I_DOT},
+			{"label": "FREQUENCY", "value": "%.2f Hz" % frequency, "color": I_CYAN},
+			{"label": "ANGLE", "value": "%.2f rad" % cur_angle, "color": I_AMBER},
+			{"label": "VELOCITY", "value": "%.3f" % angular_vel, "color": I_AXIS_Y},
+			{"label": "CURRENT Y", "value": "%.3f" % cur_y, "color": I_TEXT},
+		], "WAVE DATA")
+		_draw_info_bar(font, vp_size, g["info_y"], screen_ref._info_current, screen_ref._info_sub)
+		_draw_scanlines(vp_size)
+
+
+	# ═══════════════════════════════════════════════════════════════
+	# FIELD — 2D noise/force intensity heatmap
+	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_field_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "FIELD MAP", "f(x,y) intensity", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, 2.0)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+
+		# Generate a field heatmap — read from artifact or procedural
+		var t: float = Time.get_ticks_msec() / 3000.0
+		var field_cells: int = 20
+		var noise_freq: float = 2.0
+		var noise_scale: float = 1.0
+		var threshold: float = 0.5
+		var art: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
+		if art:
+			if "grid_size" in art: field_cells = clampi(int(art.get("grid_size")), 4, 40)
+			if "noise_frequency" in art: noise_freq = float(art.get("noise_frequency"))
+			if "noise_scale" in art: noise_scale = float(art.get("noise_scale"))
+			if "height_scale" in art: noise_scale = float(art.get("height_scale"))
+			if "threshold" in art: threshold = float(art.get("threshold"))
+			if "damage_threshold" in art: threshold = float(art.get("damage_threshold"))
+
+		var cell_size: float = side / float(field_cells)
+
+		# Try to read tile materials for real color data
+		var has_real_data: bool = false
+		if art and "_tile_mats" in art:
+			var mats: Array = art.get("_tile_mats")
+			var gs: int = int(art.get("grid_size")) if "grid_size" in art else 10
+			for yi in range(mini(gs, field_cells)):
+				for xi in range(mini(gs, field_cells)):
+					var idx: int = yi * gs + xi
+					if idx < mats.size() and mats[idx] is StandardMaterial3D:
+						var mat_col: Color = mats[idx].albedo_color
+						var brightness: float = (mat_col.r + mat_col.g + mat_col.b) / 3.0
+						var col: Color = Color(I_AXIS_Y, brightness * 0.8) if brightness > 0.2 else Color(I_BG, 0.5)
+						draw_rect(Rect2(ox + xi * cell_size, oy + yi * cell_size, cell_size - 1, cell_size - 1), col)
+			has_real_data = mats.size() > 0
+
+		if not has_real_data:
+			for yi in range(field_cells):
+				for xi in range(field_cells):
+					var fx: float = float(xi) / float(field_cells) * 4.0 - 2.0
+					var fy: float = float(yi) / float(field_cells) * 4.0 - 2.0
+					var val: float = (sin(fx * noise_freq + t) * cos(fy * (noise_freq * 1.5) - t * 0.7) + 1.0) * 0.5
+					val = clampf(val * noise_scale, 0.0, 1.0)
+					var col: Color = Color(I_AXIS_Y, val * 0.6) if val > threshold * 0.5 else Color(I_BG, 0.5)
+					draw_rect(Rect2(ox + xi * cell_size, oy + yi * cell_size, cell_size - 1, cell_size - 1), col)
+
+		# Data panel
+		_draw_data_panel(font, g, [
+			{"label": "RESOLUTION", "value": "%dx%d" % [field_cells, field_cells], "color": I_TEXT},
+			{"label": "FREQUENCY", "value": "%.2f" % noise_freq, "color": I_CYAN},
+			{"label": "SCALE", "value": "%.2f" % noise_scale, "color": I_AMBER},
+			{"label": "THRESHOLD", "value": "%.2f" % threshold, "color": I_AXIS_X},
+			{"label": "SOURCE", "value": "LIVE" if has_real_data else "DEMO", "color": I_AXIS_Y if has_real_data else I_DIM},
+		], "FIELD DATA")
+		_draw_info_bar(font, vp_size, g["info_y"], screen_ref._info_current, screen_ref._info_sub)
+		_draw_scanlines(vp_size)
+
+
+	# ═══════════════════════════════════════════════════════════════
+	# SCATTER — multi-agent/particle positions as dots
+	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_scatter_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "SCATTER PLOT", "N agents in 2D space", 0)
+		var g: Dictionary = _draw_instrument_grid(vp_size, font, 5.0)
+		var ox: float = g["ox"]; var oy: float = g["oy"]; var side: float = g["side"]
+		var cx: float = g["cx"]; var cy: float = g["cy"]
+		var grid_range: float = 5.0
+
+		# Try to read agent positions from artifact
+		var agents: Array = []
+		var art: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
+		if art:
+			# Walk children recursively to find boid-like nodes (small mesh instances)
+			for child in art.get_children():
+				if child is Node3D:
+					if child.visible and (child is MeshInstance3D or child.get_child_count() > 0):
+						agents.append(child.global_position - art.global_position)
+					# Also check grandchildren (boid containers often nest)
+					for gc in child.get_children():
+						if gc is Node3D and gc.visible and gc is MeshInstance3D:
+							agents.append(gc.global_position - art.global_position)
+
+		# If no agents found, generate demo swarm
+		if agents.is_empty():
+			var t: float = Time.get_ticks_msec() / 1000.0
+			var rng := RandomNumberGenerator.new()
+			rng.seed = 42
+			for i in range(30):
+				var a: float = float(i) / 30.0 * TAU + t * 0.3
+				var r: float = 1.5 + rng.randf() * 2.0 + sin(t + float(i) * 0.5) * 0.5
+				agents.append(Vector3(cos(a) * r, sin(a) * r, 0))
+
+		# Draw agents as dots
+		var count: int = agents.size()
+		for i in range(count):
+			var pos: Vector3 = agents[i]
+			var sx: float = cx + (pos.x / grid_range) * (side * 0.5)
+			var sy: float = cy - (pos.y / grid_range) * (side * 0.5)
+			var hue: float = float(i) / float(maxi(count, 1))
+			var col: Color = Color.from_hsv(hue * 0.6 + 0.5, 0.7, 1.0)
+			draw_circle(Vector2(sx, sy), 5.0, Color(col, 0.3))
+			draw_circle(Vector2(sx, sy), 2.5, col)
+
+		# Data panel — read params from artifact
+		var sep_w: float = art.get("separation_weight") if art and "separation_weight" in art else 0.0
+		var ali_w: float = art.get("alignment_weight") if art and "alignment_weight" in art else 0.0
+		var coh_w: float = art.get("cohesion_weight") if art and "cohesion_weight" in art else 0.0
+		var max_spd: float = art.get("max_speed") if art and "max_speed" in art else 0.0
+		_draw_data_panel(font, g, [
+			{"label": "AGENTS", "value": "%d" % count, "color": I_CYAN},
+			{"label": "SEPARATION", "value": "%.2f" % sep_w, "color": I_AXIS_X},
+			{"label": "ALIGNMENT", "value": "%.2f" % ali_w, "color": I_AXIS_Y},
+			{"label": "COHESION", "value": "%.2f" % coh_w, "color": I_DOT},
+			{"label": "MAX SPEED", "value": "%.1f m/s" % max_spd, "color": I_DIM},
+		], "SWARM DATA")
+		_draw_info_bar(font, vp_size, g["info_y"], screen_ref._info_current, screen_ref._info_sub)
+		_draw_scanlines(vp_size)
+
+
+	# ═══════════════════════════════════════════════════════════════
+	# GRID — 2D cellular automata / cell state heatmap
+	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_grid_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "GRID VIEW", "cell state heatmap", 0)
+
+		# Use custom grid area (not coordinate-based)
+		var gtop: float = HEADER_H + PAD
+		var avail_h: float = vp_size.y - gtop - INFO_H - PAD * 2
+		var avail_w: float = vp_size.x - DATA_W - PAD * 3
+		var grid_side: float = minf(avail_w, avail_h)
+		var gx: float = PAD + (avail_w - grid_side) * 0.5
+		var gy: float = gtop + (avail_h - grid_side) * 0.5
+
+		# Try to read grid data from artifact
+		var cols: int = 16; var rows: int = 16
+		var cells: Array = []
+		var gen_count: int = 0
+		var art: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
+		if art:
+			if "grid_size" in art:
+				cols = int(art.get("grid_size"))
+				rows = cols
+			if "grid_width" in art: cols = int(art.get("grid_width"))
+			if "grid_height" in art: rows = int(art.get("grid_height"))
+			if "cells" in art and art.get("cells") is Array:
+				cells = art.get("cells")
+			elif "_grid" in art and art.get("_grid") is Array:
+				cells = art.get("_grid")
+			if "_generation" in art: gen_count = int(art.get("_generation"))
+			elif "generation" in art: gen_count = int(art.get("generation"))
+
+		# Panel backgrounds
+		draw_rect(Rect2(gx, gy, grid_side, grid_side), I_PANEL)
+		draw_rect(Rect2(gx, gy, grid_side, grid_side), I_PANEL_BORDER, false, 2.0)
+
+		var data_x: float = gx + grid_side + PAD
+		var data_y: float = gtop
+		var data_w: float = vp_size.x - data_x - PAD
+		draw_rect(Rect2(data_x, data_y, data_w, avail_h), I_PANEL)
+		draw_rect(Rect2(data_x, data_y, data_w, avail_h), I_PANEL_BORDER, false, 2.0)
+
+		var info_y: float = vp_size.y - INFO_H
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL)
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL_BORDER, false, 2.0)
+
+		# Draw cells
+		var cell_w: float = grid_side / float(cols)
+		var cell_h: float = grid_side / float(rows)
+		var alive_count: int = 0
+		var t: float = Time.get_ticks_msec() / 1000.0
+
+		for r in range(rows):
+			for c in range(cols):
+				var val: int = 0
+				if r < cells.size() and cells[r] is Array and c < cells[r].size():
+					val = int(cells[r][c]) if cells[r][c] is int or cells[r][c] is float else 0
+				else:
+					# Demo pattern: procedural CA-like
+					val = 1 if (sin(float(c) * 0.7 + t) * cos(float(r) * 0.9 - t * 0.5)) > 0.2 else 0
+
+				if val > 0:
+					alive_count += 1
+					var intensity: float = clampf(float(val) / 3.0, 0.3, 1.0)
+					var col: Color = Color(I_AXIS_Y, intensity)
+					draw_rect(Rect2(gx + c * cell_w + 0.5, gy + r * cell_h + 0.5, cell_w - 1, cell_h - 1), col)
+
+		# Grid lines
+		for c in range(cols + 1):
+			draw_line(Vector2(gx + c * cell_w, gy), Vector2(gx + c * cell_w, gy + grid_side), I_GRID_MINOR, 0.5)
+		for r in range(rows + 1):
+			draw_line(Vector2(gx, gy + r * cell_h), Vector2(gx + grid_side, gy + r * cell_h), I_GRID_MINOR, 0.5)
+
+		# Data panel text
+		var font2: Font = ThemeDB.fallback_font
+		draw_string(font2, Vector2(data_x + 10, data_y + 18), "GRID DATA", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, I_DIM)
+		draw_line(Vector2(data_x + 8, data_y + 24), Vector2(data_x + data_w - 8, data_y + 24), Color(I_PANEL_BORDER, 0.3), 1.0)
+		draw_string(font2, Vector2(data_x + 10, data_y + 42), "SIZE", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font2, Vector2(data_x + 10, data_y + 58), "%dx%d" % [cols, rows], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_TEXT)
+		draw_string(font2, Vector2(data_x + 10, data_y + 82), "ALIVE", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font2, Vector2(data_x + 10, data_y + 98), "%d" % alive_count, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_AXIS_Y)
+		draw_string(font2, Vector2(data_x + 10, data_y + 122), "DENSITY", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		var density: float = float(alive_count) / float(cols * rows) * 100.0
+		draw_string(font2, Vector2(data_x + 10, data_y + 138), "%.1f%%" % density, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_CYAN)
+		if gen_count > 0:
+			draw_string(font2, Vector2(data_x + 10, data_y + 162), "GENERATION", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+			draw_string(font2, Vector2(data_x + 10, data_y + 178), "%d" % gen_count, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_AMBER)
+
+		_draw_info_bar(font2, vp_size, info_y, screen_ref._info_current, screen_ref._info_sub)
+		_draw_scanlines(vp_size)
+
+
+	# ═══════════════════════════════════════════════════════════════
+	# BARS — histogram / sorted array visualization
+	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_bars_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)
+		_draw_instrument_header(vp_size, font, "BAR CHART", "array[i] as height", 0)
+
+		var gtop: float = HEADER_H + PAD
+		var avail_h: float = vp_size.y - gtop - INFO_H - PAD * 2
+		var avail_w: float = vp_size.x - DATA_W - PAD * 3
+		var chart_w: float = avail_w
+		var chart_h: float = avail_h
+		var chart_x: float = PAD
+		var chart_y: float = gtop
+
+		# Panel backgrounds
+		draw_rect(Rect2(chart_x, chart_y, chart_w, chart_h), I_PANEL)
+		draw_rect(Rect2(chart_x, chart_y, chart_w, chart_h), I_PANEL_BORDER, false, 2.0)
+
+		var data_x: float = chart_x + chart_w + PAD
+		var data_y: float = gtop
+		var data_w: float = vp_size.x - data_x - PAD
+		draw_rect(Rect2(data_x, data_y, data_w, chart_h), I_PANEL)
+		draw_rect(Rect2(data_x, data_y, data_w, chart_h), I_PANEL_BORDER, false, 2.0)
+
+		var info_y: float = vp_size.y - INFO_H
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL)
+		draw_rect(Rect2(0, info_y, vp_size.x, INFO_H), I_PANEL_BORDER, false, 2.0)
+
+		# Try to read array data from artifact
+		var values: Array = []
+		var algo_name: String = ""
+		var is_sorted: bool = false
+		var art: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
+		if art:
+			# bar_array_renderer exposes _current_heights
+			if "_current_heights" in art:
+				var h = art.get("_current_heights")
+				if h is PackedFloat32Array:
+					for v in h: values.append(float(v))
+			# bar_array_substrate exposes _array
+			elif "_array" in art:
+				var a = art.get("_array")
+				if a is PackedFloat32Array:
+					for v in a: values.append(float(v))
+			elif "values" in art and art.get("values") is Array:
+				values = art.get("values")
+			# Check for child renderer
+			if values.is_empty():
+				for child in art.get_children():
+					if "_current_heights" in child:
+						var h = child.get("_current_heights")
+						if h is PackedFloat32Array:
+							for v in h: values.append(float(v))
+						break
+			if "_is_done" in art: is_sorted = bool(art.get("_is_done"))
+			if "algorithm" in art: algo_name = str(art.get("algorithm"))
+
+		# Demo: generate bars if no data
+		if values.is_empty():
+			var rng := RandomNumberGenerator.new()
+			rng.seed = 12345
+			for i in range(20):
+				values.append(rng.randf_range(0.1, 1.0))
+
+		# Draw bars
+		var n: int = values.size()
+		var bar_w: float = (chart_w - 20) / float(maxi(n, 1))
+		var max_val: float = 0.001
+		for v in values:
+			max_val = maxf(max_val, float(v))
+
+		for i in range(n):
+			var val: float = float(values[i])
+			var h: float = (val / max_val) * (chart_h - 20)
+			var bx: float = chart_x + 10 + i * bar_w
+			var by: float = chart_y + chart_h - 10 - h
+			var hue: float = float(i) / float(maxi(n, 1)) * 0.3 + 0.3
+			var col: Color = Color.from_hsv(hue, 0.7, 0.9)
+			# Bar glow
+			draw_rect(Rect2(bx + 1, by, bar_w - 2, h), Color(col, 0.6))
+			draw_rect(Rect2(bx, by - 1, bar_w, h + 2), Color(col, 0.15))
+
+		# Baseline
+		draw_line(Vector2(chart_x + 10, chart_y + chart_h - 10), Vector2(chart_x + chart_w - 10, chart_y + chart_h - 10), I_GRID_MAJOR, 1.5)
+
+		# Data panel
+		var font2: Font = ThemeDB.fallback_font
+		draw_string(font2, Vector2(data_x + 10, data_y + 18), "ARRAY DATA", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, I_DIM)
+		draw_line(Vector2(data_x + 8, data_y + 24), Vector2(data_x + data_w - 8, data_y + 24), Color(I_PANEL_BORDER, 0.3), 1.0)
+		draw_string(font2, Vector2(data_x + 10, data_y + 42), "ELEMENTS", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font2, Vector2(data_x + 10, data_y + 58), "%d" % n, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_CYAN)
+		draw_string(font2, Vector2(data_x + 10, data_y + 82), "MAX VALUE", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font2, Vector2(data_x + 10, data_y + 98), "%.3f" % max_val, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_AMBER)
+		var avg: float = 0.0
+		for v in values: avg += float(v)
+		avg /= float(maxi(n, 1))
+		draw_string(font2, Vector2(data_x + 10, data_y + 122), "AVERAGE", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+		draw_string(font2, Vector2(data_x + 10, data_y + 138), "%.3f" % avg, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_DOT)
+		if algo_name != "":
+			draw_string(font2, Vector2(data_x + 10, data_y + 162), "ALGORITHM", HORIZONTAL_ALIGNMENT_LEFT, -1, 11, I_DIM)
+			draw_string(font2, Vector2(data_x + 10, data_y + 178), algo_name.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_CYAN)
+		if is_sorted:
+			draw_string(font2, Vector2(data_x + 10, data_y + 200), "SORTED", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_AXIS_Y)
+
+		_draw_info_bar(font2, vp_size, info_y, screen_ref._info_current, screen_ref._info_sub)
 		_draw_scanlines(vp_size)
 
 
@@ -1331,7 +2156,7 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_generic_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		var target: Node3D = screen_ref._tracking_generic
+		var target: Node3D = screen_ref._tracking_generic if is_instance_valid(screen_ref._tracking_generic) else null
 		var mode_name: String = screen_ref._generic_mode_name
 
 		# ── Background ──
@@ -1369,7 +2194,7 @@ class _ScreenCanvas extends Control:
 		draw_rect(Rect2(viz_margin, panel_y, viz_width, 60.0), Color(0.04, 0.04, 0.06))
 		draw_rect(Rect2(viz_margin, panel_y, viz_width, 1.0), Color(0.15, 0.2, 0.25))
 
-		var pos: Vector3 = target.global_position
+		var pos: Vector3 = target.global_position if target else Vector3.ZERO
 		var pos_str: String = "Position: (%.2f, %.2f, %.2f)" % [pos.x, pos.y, pos.z]
 		draw_string(font, Vector2(viz_margin + 14.0, panel_y + 18.0), pos_str, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.5, 0.7, 0.9))
 

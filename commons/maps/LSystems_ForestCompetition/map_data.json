@@ -1,42 +1,68 @@
 {
-	"map_info": {"name": "Forest Competition", "lookup_name": "LSystems_ForestCompetition", "description": "A wide open field with scattered void clearings where trees compete for space. Gaps create ecological niches.", "version": "1.0", "format": "json", "dimensions": {"width": 8, "depth": 10, "max_height": 1}, "metadata": {"difficulty": "intermediate", "category": "l_systems", "spatial_temperature": 0.65, "design_notes": "Mostly flat field with void patches. Trees compete around clearing edges. Organic gap distribution."}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "0", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", "an", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ds", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", "sp", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ForestCompetition", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "Forest Competition",
+      "lookup_name": "LSystems_ForestCompetition",
+      "description": "A wide open field with scattered void clearings where trees compete for space. Gaps create ecological niches.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 8,
+          "depth": 10,
+          "max_height": 1
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "l_systems",
+          "spatial_temperature": 0.65,
+          "design_notes": "Mostly flat field with void patches. Trees compete around clearing edges. Organic gap distribution."
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      ["s", "an", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", "sp", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "ForestCompetition", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

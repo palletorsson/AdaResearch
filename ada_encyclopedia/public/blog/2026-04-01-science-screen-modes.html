@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Screen: Explicit Modes | Ada Research Blog</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 720px; margin: 0 auto; padding: 2rem; background: #0a0a0f; color: #d4d4d8; line-height: 1.7; }
+  h1 { color: #e4e4e7; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  h2 { color: #a78bfa; font-size: 1.3rem; margin-top: 2rem; }
+  h3 { color: #67e8f9; font-size: 1.1rem; }
+  .date { color: #71717a; font-size: 0.9rem; }
+  .highlight { background: #1e1b2e; border-left: 3px solid #a78bfa; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+  .tag { display: inline-block; background: #1e1b2e; color: #a78bfa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin: 2px; }
+  code { background: #1e1b2e; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #67e8f9; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 1rem 0; }
+  .stat { text-align: center; background: #111118; padding: 0.5rem; border-radius: 4px; }
+  .stat-num { font-size: 1.4rem; color: #a78bfa; font-weight: bold; }
+  .stat-label { font-size: 0.75rem; color: #71717a; }
+  a { color: #67e8f9; }
+  .section-break { text-align: center; color: #333; margin: 2rem 0; letter-spacing: 1em; }
+  .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.2rem 0; }
+  .img-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .img-row img { width: 100%; border-radius: 6px; border: 1px solid #27272a; }
+  .img-single { margin: 1.2rem 0; }
+  .img-single img { width: 100%; border-radius: 6px; border: 1px solid #27272a; }
+  .img-caption { text-align: center; font-size: 0.8rem; color: #71717a; margin-top: 0.3rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #27272a; font-size: 0.9rem; }
+  th { color: #a78bfa; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  .before-after > div { background: #111118; border: 1px solid #27272a; border-radius: 8px; padding: 1rem; }
+  .before-after h3 { margin-top: 0; }
+</style>
+</head>
+<body>
+
+<p class="date">April 1, 2026</p>
+<h1>Science Screen: From Heuristics to Explicit Modes</h1>
+
+<p>The Science Screen is a 2D monitor inside VR &mdash; a flat coordinate grid that mirrors what the player does with 3D artifacts. You grab a point in space, the screen shows its XY coordinates. You stretch a line between two endpoints, the screen shows distance, angle, midpoint. You draw a trace, the screen auto-zooms to fit your stroke.</p>
+
+<p>Today we rebuilt the mode selection system from scratch. The old version guessed what to show by scanning nearby artifacts for name patterns. The new version is one word in the map JSON.</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">modes supported</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">heuristic scans</div></div>
+  <div class="stat"><div class="stat-num">1</div><div class="stat-label">config key</div></div>
+</div>
+
+<h2>The Problem: Name-Matching Heuristics</h2>
+
+<p>The original Science Screen scanned nearby artifacts and tried to guess the right visualization mode. It looked for <code>"point"</code> in node names, <code>"line"</code> in lookup strings, <code>"draw_dot"</code> in class names. This worked until it didn't:</p>
+
+<ul>
+  <li>The trace map's <code>GrabPoint</code> was detected as a "point" artifact &mdash; wrong mode</li>
+  <li>A mesh artifact triggered the grid fallback, showing "mesh monitor" with cell counts</li>
+  <li>The scan ran every second, sometimes switching modes mid-session</li>
+  <li>Line endpoints were nested inside <code>lineContainer/GrabSphere</code> &mdash; the shallow scan missed them</li>
+</ul>
+
+<div class="highlight">
+<strong>The root cause:</strong> The screen was trying to be smart. It should have been told.
+</div>
+
+<h2>The Fix: One Config Key</h2>
+
+<p>Mode is now declared in the map JSON, not discovered at runtime:</p>
+
+<table>
+  <tr><th>Map</th><th>Interactable String</th><th>Mode</th></tr>
+  <tr><td>Point_One</td><td><code>science_screen:180:0.5#mode:point</code></td><td>Point tracker + target game</td></tr>
+  <tr><td>Point_Line</td><td><code>science_screen:180:1#mode:line</code></td><td>Line analyzer (|AB|, &theta;, midpoint)</td></tr>
+  <tr><td>Point_Trace</td><td><code>science_screen:180:2#mode:trace</code></td><td>Trace recorder with auto-zoom</td></tr>
+</table>
+
+<p>The <code>#mode:xxx</code> config flows through the standard <code>apply_grid_config</code> pipeline. The screen sets its mode immediately, locks it, then connects tracking nodes. No scanning, no guessing, no mode switches.</p>
+
+<p>Legacy maps without <code>#mode</code> still get the old scan-based fallback &mdash; but the scan now stops at the first match and locks permanently.</p>
+
+<h2>Three Modes in VR</h2>
+
+<div class="img-row triple">
+  <div><img src="images/science-screen-point.png" alt="Point tracker mode"><p class="img-caption">Point: white coordinate grid, target game, score counter</p></div>
+  <div><img src="images/science-screen-line.png" alt="Line analyzer mode"><p class="img-caption">Line: two endpoints A/B, distance |AB|, angle &theta;</p></div>
+  <div><img src="images/science-screen-trace.png" alt="Trace recorder mode"><p class="img-caption">Trace: auto-zoom drawing, point count, path length</p></div>
+</div>
+
+<p>Each mode renders its own full-screen visualization with a light scientific style (off-white background, subtle grid lines, colored data). The dark "mesh monitor" fallback is now dead code &mdash; it can never appear when an explicit mode is set.</p>
+
+<h2>How Each Mode Works</h2>
+
+<h3>Point Tracker</h3>
+<p>Tracks a single grabbable point relative to its starting position. Red X-axis, green Y-axis, labeled tick marks. An orange target ring spawns at random positions &mdash; drag the point to it, score increments, particles explode. The coordinate readout updates at 60fps. Grid range: 2 meters (arm reach).</p>
+
+<h3>Line Analyzer</h3>
+<p>Finds two <code>RigidBody3D</code> nodes inside the line artifact's subtree (recursive search up to 4 levels deep &mdash; this solved the <code>lineContainer/GrabSphere</code> nesting). Renders point A (cyan) and B (orange) with a connecting line segment, projection lines to axes, and a readout: distance <code>|AB|</code>, angle <code>&theta;</code>, coordinates of both endpoints.</p>
+
+<h3>Trace Recorder</h3>
+<p>Reads <code>_trail_points</code> from the <code>draw_dot</code> artifact &mdash; an array of <code>Vector3</code> positions sampled as the player moves the grab sphere. The visualization auto-zooms: minimum 30cm range for small strokes, expanding to fit larger drawings with 15% padding. Trail lines fade from thin/transparent (old) to thick/solid (new). Grid step adapts: 10cm when zoomed tight, 50cm when zoomed out.</p>
+
+<div class="section-break">&middot; &middot; &middot;</div>
+
+<h2>The 2D&ndash;3D Bridge Pattern</h2>
+
+<p>Every Science Screen mode mirrors a web primitive game. The point tracker matches <code>/primitives/point</code> (drag dot to colored target). The line analyzer matches <code>/primitives/line</code> (drag A and B endpoints). The trace recorder matches <code>/primitives/trace</code> (draw shapes, measure coverage).</p>
+
+<div class="highlight">
+<strong>The principle:</strong> Learn the math on a flat screen where it's legible. Experience it with your body in VR where it's visceral. The Science Screen is the seam between the two &mdash; a 2D surface floating in 3D space, showing you that the coordinate system you used on the web is the same one your hands are moving through.
+</div>
+
+<p>The web games run at <code>localhost:3003/primitives/point</code>. The VR screens run inside Godot. Same visual language: off-white background, red/green axes, colored data points, bottom readout panel. Different input: mouse drag vs. hand grab. Same math underneath.</p>
+
+<h2>Automated Testing</h2>
+
+<p>The timeline test player now supports <code>--duration=N</code> for automated screenshots:</p>
+
+<pre><code>godot --path . --xr-mode off --script res://commons/testing/timeline_test_player.gd \
+  -- --map=Point_One --duration=10</code></pre>
+
+<p>Loads the map, waits for artifacts and Science Screen to initialize, aims the camera at the screen, waits N seconds, captures a screenshot, and exits. All three screenshots in this post were generated this way &mdash; no headset needed to verify the visualization is correct.</p>
+
+<h2>What Changed (Files)</h2>
+
+<table>
+  <tr><th>File</th><th>Change</th></tr>
+  <tr><td><code>science_screen.gd</code></td><td>Added <code>_set_explicit_mode()</code>, <code>_connect_tracking_for_mode()</code>, <code>_find_grabbable_points()</code> (recursive). Removed all calls to <code>_scan_for_artifacts()</code>. Null-safe draw functions.</td></tr>
+  <tr><td><code>Point_One/map_data.json</code></td><td><code>#mode:point</code></td></tr>
+  <tr><td><code>Point_Line/map_data.json</code></td><td><code>#mode:line</code></td></tr>
+  <tr><td><code>Point_Trace/map_data.json</code></td><td><code>#mode:trace</code></td></tr>
+  <tr><td><code>timeline_test_player.gd</code></td><td>Added <code>--duration=N</code> with auto-screenshot</td></tr>
+</table>
+
+<p class="date" style="margin-top: 2rem; border-top: 1px solid #27272a; padding-top: 1rem;">Session: Science Screen explicit mode system &mdash; from heuristic scanning to declarative config.</p>
+
+</body>
+</html>

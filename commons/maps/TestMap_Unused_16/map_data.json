@@ -1,27 +1,45 @@
 {
-	"map_info": {"name": "TestMap_Unused_16", "lookup_name": "TestMap_Unused_16", "description": "Test map for artifacts: pollock_3d, pool_hole_noise, probability_distributions_3d, rainbow_hallway", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", "ds", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "pollock_3d:0:2", " ", "pool_hole_noise:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "probability_distributions_3d:0:2", " ", "rainbow_hallway:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "TestMap_Unused_16",
+      "lookup_name": "TestMap_Unused_16",
+      "description": "Test map for artifacts: pollock_3d, pool_hole_noise, probability_distributions_3d, rainbow_hallway",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " "],
+      [" ", "pollock_3d:0:2", " ", "pool_hole_noise:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "probability_distributions_3d:0:2", " ", "rainbow_hallway:0:2", " "],
+      [" ", " ", " ", " ", " "]
+    ]
+  }
 }

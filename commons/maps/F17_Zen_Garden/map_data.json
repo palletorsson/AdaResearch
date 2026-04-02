@@ -1,35 +1,95 @@
 {
-	"map_info": {"name": "Zen Garden", "lookup_name": "F17_Zen_Garden", "description": "Asymmetric elements in open space -- deliberate imbalance creates contemplative tension.", "version": "1.0", "format": "json", "dimensions": {"width": 9, "depth": 7, "max_height": 6}, "title": "Contemplative Imbalance"},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Exit", "description": "Return", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
-	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1, 0.9, 0.8], "energy": 1.2}},
-	"settings": {"cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true, "background": {"type": "sky", "color": [0.2, 0.3, 0.7]}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "2", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "2", "1", "1", "1", "3", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "3", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "ds", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			["s", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "probability_sphere:0:0:0.4", " ", " ", " ", "noisetorus:0:0:0.4", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "fourier_transform:0:0:0.4", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "unit_circle:0:0:0.4"],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "Zen Garden",
+      "lookup_name": "F17_Zen_Garden",
+      "description": "Asymmetric elements in open space -- deliberate imbalance creates contemplative tension.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 7,
+          "max_height": 6
+      },
+      "title": "Contemplative Imbalance"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Exit",
+          "description": "Return",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      },
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      }
+  },
+  "lighting": {
+      "ambient_color": [
+          0.4,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.6,
+      "directional_light": {
+          "enabled": true,
+          "direction": [
+              -0.4,
+              -0.7,
+              -0.4
+          ],
+          "color": [
+              1,
+              0.9,
+              0.8
+          ],
+          "energy": 1.2
+      }
+  },
+  "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+          "type": "sky",
+          "color": [
+              0.2,
+              0.3,
+              0.7
+          ]
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "2", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "2", "1", "1", "1", "3", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "2", "3", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "2"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      ["s", " ", " ", " ", " ", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "probability_sphere:0:0:0.4", " ", " ", " ", "noisetorus:0:0:0.4", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "fourier_transform:0:0:0.4", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "unit_circle:0:0:0.4"],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

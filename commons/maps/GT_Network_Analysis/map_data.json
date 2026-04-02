@@ -1,45 +1,73 @@
 {
-	"map_info": {"name": "Network Hub", "lookup_name": "GT_Network_Analysis", "description": "Hub-and-spoke topology â€” a central platform with radiating arms. Network flow and analysis from the heart of the graph.", "version": "1.0", "format": "json", "dimensions": {"width": 11, "depth": 11, "max_height": 5}, "metadata": {"difficulty": "advanced", "category": "graphtheory", "estimated_time": "5-7 minutes", "spatial_temperature": 0.7, "design_notes": "Hub-and-spoke â€” central 3Ã—3 platform (h2) with four arms extending N/S/E/W over void (h0). Arms are width-1 walkways. Two artifacts on the central hub. Player approaches from one arm, exits from another."}, "title": "Centrality, Flow, and Bottlenecks"},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next step", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
-			["1", "1", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "2", "2", "2", "0", "0", "0", "0"],
-			["1", "1", "1", "1", "2", "2", "2", "1", "1", "1", "1"],
-			["0", "0", "0", "0", "2", "2", "2", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "1", "0", "0", "1", "1", "1"],
-			["0", "0", "0", "0", "0", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			["s", "an", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "tc:4:x", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "wp", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "ds", " ", "wp", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "wp", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "networkflow3d:0:0:0.6", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "rhizomatic_structure:0:0:0.6", " "],
-			[" ", " ", " ", " ", " ", "network_analysis:0:0:0.6", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "Network Hub",
+      "lookup_name": "GT_Network_Analysis",
+      "description": "Hub-and-spoke topology â€” a central platform with radiating arms. Network flow and analysis from the heart of the graph.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 11,
+          "depth": 11,
+          "max_height": 5
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "graphtheory",
+          "estimated_time": "5-7 minutes",
+          "spatial_temperature": 0.7,
+          "design_notes": "Hub-and-spoke â€” central 3Ã—3 platform (h2) with four arms extending N/S/E/W over void (h0). Arms are width-1 walkways. Two artifacts on the central hub. Player approaches from one arm, exits from another."
+      },
+      "title": "Centrality, Flow, and Bottlenecks"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+      ["1", "1", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+      ["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+      ["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+      ["0", "0", "0", "0", "2", "2", "2", "0", "0", "0", "0"],
+      ["1", "1", "1", "1", "2", "2", "2", "1", "1", "1", "1"],
+      ["0", "0", "0", "0", "2", "2", "2", "0", "0", "0", "0"],
+      ["0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0"],
+      ["0", "0", "0", "0", "0", "1", "0", "0", "1", "1", "1"],
+      ["0", "0", "0", "0", "0", "1", "1", "1", "1", "0", "1"],
+      ["0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      ["s", "an", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "tc:4:x", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "wp", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "networkflow3d:0:0:0.6", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "rhizomatic_structure:0:0:0.6", " "],
+      [" ", " ", " ", " ", " ", "network_analysis:0:0:0.6", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

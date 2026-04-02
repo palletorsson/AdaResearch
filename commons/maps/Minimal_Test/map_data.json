@@ -1,42 +1,96 @@
 {
-	"map_info": {"name": "Minimal Test", "lookup_name": "Minimal_Test", "description": "Scaffold map for sequence development_testing.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 9, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "development_testing", "estimated_time": "3-5 minutes", "learning_objectives": ["Prototype map for sequence `development_testing`.", "Validate map flow and artifact placement.", "Refine layout for sequence pedagogy."]}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next map in sequence.", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
-	"documentation": {"summary": "Minimal_Test scaffold", "layout": "7x9 test room with spawn and teleporter.", "objective": "Prototype map for sequence `development_testing`.", "key_elements": ["Add sequence artifacts."]},
-	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6},
-	"settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true},
-	"layers": {
-		"structure": [
-			["2", "2", "2", "2", "2", "2", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "s", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "ds", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "Minimal Test",
+      "lookup_name": "Minimal_Test",
+      "description": "Scaffold map for sequence development_testing.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 7,
+          "depth": 9,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "beginner",
+          "category": "development_testing",
+          "estimated_time": "3-5 minutes",
+          "learning_objectives": [
+              "Prototype map for sequence `development_testing`.",
+              "Validate map flow and artifact placement.",
+              "Refine layout for sequence pedagogy."
+          ]
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next map in sequence.",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      },
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      }
+  },
+  "documentation": {
+      "summary": "Minimal_Test scaffold",
+      "layout": "7x9 test room with spawn and teleporter.",
+      "objective": "Prototype map for sequence `development_testing`.",
+      "key_elements": [
+          "Add sequence artifacts."
+      ]
+  },
+  "lighting": {
+      "ambient_color": [
+          0.4,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.6
+  },
+  "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true
+  },
+  "layers": {
+    "structure": [
+      ["2", "2", "2", "2", "2", "2", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "1", "0", "2"],
+      ["2", "2", "2", "2", "2", "2", "2"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", "s", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

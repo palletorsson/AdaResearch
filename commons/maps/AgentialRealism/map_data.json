@@ -1,42 +1,96 @@
 {
-	"map_info": {"name": "AgentialRealism", "lookup_name": "AgentialRealism", "description": "Scaffold map for sequence advanced_concepts.", "version": "1.0", "format": "json", "dimensions": {"width": 7, "depth": 9, "max_height": 3}, "metadata": {"difficulty": "beginner", "category": "advanced_concepts", "estimated_time": "3-5 minutes", "learning_objectives": ["Prototype map for sequence `advanced_concepts`.", "Validate map flow and artifact placement.", "Refine layout for sequence pedagogy."]}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next", "description": "Continue to next map in sequence.", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}},
-	"documentation": {"summary": "AgentialRealism scaffold", "layout": "7x9 test room with spawn and teleporter.", "objective": "Prototype map for sequence `advanced_concepts`.", "key_elements": ["Add sequence artifacts."]},
-	"lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6},
-	"settings": {"cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true},
-	"layers": {
-		"structure": [
-			["1", "1", "2", "2", "2", "2", "2"],
-			["1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "2", "2", "1", "1", "2"],
-			["2", "1", "2", "2", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1"],
-			["2", "1", "1", "1", "1", "0", "1"],
-			["2", "2", "2", "2", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "s", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "ds", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "k", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+	  "name": "AgentialRealism",
+	  "lookup_name": "AgentialRealism",
+	  "description": "Scaffold map for sequence advanced_concepts.",
+	  "version": "1.0",
+	  "format": "json",
+	  "dimensions": {
+		  "width": 7,
+		  "depth": 9,
+		  "max_height": 3
+	  },
+	  "metadata": {
+		  "difficulty": "beginner",
+		  "category": "advanced_concepts",
+		  "estimated_time": "3-5 minutes",
+		  "learning_objectives": [
+			  "Prototype map for sequence `advanced_concepts`.",
+			  "Validate map flow and artifact placement.",
+              "Refine layout for sequence pedagogy."
+		  ]
+	  }
+  },
+  "utility_definitions": {
+	  "t": {
+		  "type": "teleporter",
+		  "name": "Next",
+		  "description": "Continue to next map in sequence.",
+		  "properties": {
+			  "action": "next_in_sequence"
+		  }
+	  },
+	  "s": {
+		  "properties": {
+			  "height": 5.5
+		  }
+	  }
+  },
+  "documentation": {
+	  "summary": "AgentialRealism scaffold",
+	  "layout": "7x9 test room with spawn and teleporter.",
+	  "objective": "Prototype map for sequence `advanced_concepts`.",
+	  "key_elements": [
+          "Add sequence artifacts."
+	  ]
+  },
+  "lighting": {
+	  "ambient_color": [
+		  0.4,
+		  0.4,
+		  0.5
+	  ],
+	  "ambient_energy": 0.6
+  },
+  "settings": {
+	  "cube_size": 1,
+	  "gutter": 0,
+	  "show_grid": true,
+	  "enable_physics": true
+  },
+  "layers": {
+	"structure": [
+	  ["1", "1", "2", "2", "2", "2", "2"],
+	  ["1", "1", "1", "1", "1", "1", "2"],
+	  ["2", "1", "1", "1", "1", "1", "2"],
+	  ["2", "1", "2", "2", "1", "1", "2"],
+	  ["2", "1", "2", "2", "1", "1", "2"],
+	  ["2", "1", "1", "1", "1", "1", "2"],
+	  ["2", "1", "1", "1", "1", "1", "1"],
+	  ["2", "1", "1", "1", "1", "0", "1"],
+	  ["2", "2", "2", "2", "1", "1", "1"]
+	],
+	"utilities": [
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", "s", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", "t", " "],
+	  [" ", " ", " ", " ", " ", " ", " "]
+	],
+	"interactables": [
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", "k", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " "]
+	]
+  }
 }

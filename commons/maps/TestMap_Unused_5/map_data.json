@@ -1,27 +1,45 @@
 {
-	"map_info": {"name": "TestMap_Unused_5", "lookup_name": "TestMap_Unused_5", "description": "Test map for artifacts: coupled_oscillator_lattice, crystal_random_walk_demo, distribution_visualization, doublehelix", "dimensions": {"width": 5, "depth": 5, "max_height": 3}},
-	"utility_definitions": {"t": {"type": "teleporter", "name": "Next Lesson", "description": "Continue to the next algorithm demonstration", "properties": {"action": "next_in_sequence"}}},
-	"layers": {
-		"structure": [
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1"]
-		],
-		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "s", "ds", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "t", " ", " "]
-		],
-		"interactables": [
-			[" ", " ", " ", " ", " "],
-			[" ", "coupled_oscillator_lattice:0:2", " ", "crystal_random_walk_demo:0:2", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", "distribution_visualization:0:2", " ", "doublehelix:0:2", " "],
-			[" ", " ", " ", " ", " "]
-		]
-	}
+  "map_info": {
+      "name": "TestMap_Unused_5",
+      "lookup_name": "TestMap_Unused_5",
+      "description": "Test map for artifacts: coupled_oscillator_lattice, crystal_random_walk_demo, distribution_visualization, doublehelix",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " "],
+      [" ", "coupled_oscillator_lattice:0:2", " ", "crystal_random_walk_demo:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "distribution_visualization:0:2", " ", "doublehelix:0:2", " "],
+      [" ", " ", " ", " ", " "]
+    ]
+  }
 }

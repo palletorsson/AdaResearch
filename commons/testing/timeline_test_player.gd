@@ -17,6 +17,7 @@ var map_name := "Point_One"
 var speed := 1.0
 var do_capture := false
 var timeout_sec := 60.0
+var duration_sec := 0.0  # If > 0, wait this many seconds then screenshot and quit
 
 var _grid_system: Node
 var _timeline_comp: Node
@@ -37,6 +38,9 @@ func _init():
 			do_capture = true
 		elif arg.begins_with("--timeout="):
 			timeout_sec = float(arg.substr(10))
+		elif arg.begins_with("--duration="):
+			duration_sec = float(arg.substr(11))
+			do_capture = true  # Auto-enable capture
 
 	print("[Agent] ══════════════════════════════════════")
 	print("[Agent] Map: %s | Speed: %.1fx" % [map_name, speed])
@@ -109,6 +113,16 @@ func _initialize():
 
 	# Play through the timeline
 	await _play_timeline()
+
+	# Duration mode: wait then capture final screenshot
+	if duration_sec > 0:
+		var already_waited: float = _elapsed
+		var remaining: float = maxf(duration_sec - already_waited, 1.0)
+		print("[Agent] Duration mode: waiting %.1fs more for screenshot..." % remaining)
+		await _wait(remaining)
+		await _capture("final_%s" % map_name)
+		var img_path := "user://timeline_test/%s/final_%s.png" % [map_name, map_name]
+		print("[Agent] Screenshot saved: %s" % img_path)
 
 	# Final report
 	_report()
@@ -281,8 +295,8 @@ func _aim_camera_at_screen() -> void:
 	for node in root.get_children():
 		_find_screen(node)
 	if _found_screen:
-		_camera.position = _found_screen.global_position + Vector3(0, 0.5, -2.5)
-		_camera.look_at(_found_screen.global_position + Vector3(0, 0.3, 0))
+		_camera.position = _found_screen.global_position + Vector3(0, 0.3, -1.8)
+		_camera.look_at(_found_screen.global_position + Vector3(0, 0.15, 0))
 		print("[Agent] Camera aimed at screen at %s" % str(_found_screen.global_position))
 	else:
 		print("[Agent] WARNING: Science screen not found, using default aim")
