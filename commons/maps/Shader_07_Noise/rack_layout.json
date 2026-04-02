@@ -1,0 +1,42 @@
+{
+  "collection": "shaders",
+  "cols": 9,
+  "rows": 3,
+  "title": "SHADER 07 NOISE",
+  "shader_paths": true,
+  "slots": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      "res://algorithms/shaders/book_of_shaders/noise_value.gdshader",
+      null,
+      "res://algorithms/shaders/book_of_shaders/noise_gradient.gdshader",
+      null,
+      "res://algorithms/shaders/book_of_shaders/noise_simplex.gdshader",
+      null,
+      "res://algorithms/shaders/book_of_shaders/noise_warped.gdshader",
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

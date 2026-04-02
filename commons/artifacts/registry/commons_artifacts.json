@@ -1605,9 +1605,9 @@
 			"size_group": "environment",
 			"parameters": {
 				"footprint": [
-					8,
-					9,
-					10
+					6,
+					6,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -5348,6 +5348,21 @@
 				"commons",
 				"mixed",
 				"physics"
+			]
+		},
+		"library_rack": {
+			"lookup_name": "library_rack",
+			"name": "Library Rack",
+			"description": "Universal collection display wall. Reads any artifact registry and builds a grid of cubes, each containing a scaled-down artifact or shader. Config: #collection:shaders#cols:6#rows:4",
+			"scene": "res://commons/artifacts/library_rack/library_rack.tscn",
+			"category": "display",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"library",
+				"collection",
+				"display",
+				"rack"
 			]
 		}
 	}
