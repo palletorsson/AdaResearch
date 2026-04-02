@@ -1,208 +1,209 @@
 {
-	"sequences": {
-		"swarmintelligence": {
-			"name": "Swarm Intelligence: No Leader, Yet Coordinated",
-			"truth": "No leader, yet coordinated. Stigmergy: the environment is the message. Local rules produce global intelligence.",
-			"qfep_term": "\u00ce\u00bb",
-			"qfep_connection": "Swarm systems operate at the edge of chaos\u00e2\u20ac\u201dthe \u00ce\u00bb parameter that modulates between order and entropy. \u00cf\u2020\u00ce\u201dE(S,t) manifests as collective adaptive capacity: the swarm's rate of entropy change determines its survival.",
-			"formula": "Agent_i = \u00ce\u00a3 local_rules(neighbors_i)",
-			"demonstration": "Watch boids flock without a leader. See ants find shortest paths through pheromone trails. Observe particles converge on optima through collective memory.",
-			"description": "Collective behavior and distributed intelligence. Individual agents follow simple local rules, yet global coordination emerges. This is queer intelligence\u00e2\u20ac\u201dnon-hierarchical, decentralized, resistant to single points of failure.",
-			"layer": "systems",
-			"prerequisites": [
-				"vectors",
-				"forces",
-				"lsystems"
-			],
-			"unlocks": [
-				"machinelearning",
-				"recursiveemergence"
-			],
-			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
-			"learning_objectives": [
-				"Collective behavior from local rules: no central controller needed",
-				"Stigmergy: indirect communication through environment modification",
-				"Separation, alignment, cohesion: the three rules of Boids",
-				"Ant Colony Optimization: pheromone-based pathfinding",
-				"Particle Swarm Optimization: collective memory finds optima",
-				"Agent-based modeling: simulating societies from individuals"
-			],
-			"content": [
-				"SwarmIntelligence_PhysarumColony: Slime mold intelligence\u00e2\u20ac\u201dbrainless computation",
-				"SwarmIntelligence_FlowFields: Vector fields guide collective motion",
-				"SwarmIntelligence_Boids_Algorithm: Reynolds' flocking\u00e2\u20ac\u201dseparation, alignment, cohesion",
-				"SwarmIntelligence_Agent_Based_Modeling_ABM: Societies from simple agents",
-				"SwarmIntelligence_Ant_Colony_Optimization: Pheromone trails find shortest paths",
-				"SwarmIntelligence_Particle_Swarm_Optimization: Collective memory, personal best, global best",
-				"SwarmIntelligence_Swarm_Intelligence_Algorithms: Overview of swarm paradigms"
-			],
-			"maps": [
-				"SwarmIntelligence_PhysarumColony",
-				"SwarmIntelligence_FlowFields",
-				"SwarmIntelligence_Boids_Algorithm",
-				"SwarmIntelligence_Agent_Based_Modeling_ABM",
-				"SwarmIntelligence_Ant_Colony_Optimization",
-				"SwarmIntelligence_Particle_Swarm_Optimization",
-				"SwarmIntelligence_Swarm_Intelligence_Algorithms"
-			],
-			"axiom_files": [
-				"res://commons/context/clipboard/tutorial_text/swarm_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/boids_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/stigmergy_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/ant_colony_axioms.md"
-			],
-			"algorithm_paths": {
-				"SwarmIntelligence_Boids_Algorithm": "res://algorithms/emergentsystems/boidflocking/",
-				"SwarmIntelligence_Ant_Colony_Optimization": "res://algorithms/swarmintelligence/antcolony/",
-				"SwarmIntelligence_Particle_Swarm_Optimization": "res://algorithms/swarmintelligence/particleswarm/",
-				"SwarmIntelligence_PhysarumColony": "res://algorithms/swarmintelligence/physarum/"
-			},
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_swarmintelligence",
-			"unlock_requirements": [
-				"lsystems"
-			],
-			"completion_rewards": [
-				"swarm_coordinator_badge",
-				"collective_intelligence_badge",
-				"stigmergy_master_badge"
-			],
-			"artifact_groups": [
-				{
-					"map": "SwarmIntelligence_PhysarumColony",
-					"position": "intro",
-					"artifacts": [
-						"PhysarumColony"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Brainless computation through emergent network formation. Physarum solves mazes and optimizes paths without neurons or centralization."
-				},
-				{
-					"map": "SwarmIntelligence_FlowFields",
-					"position": "foundation",
-					"artifacts": [
-						"FlowFieldMain"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Behavior through invisible environmental direction. Agents follow local vector arrows without pathfinding or goals — the field is the program."
-				},
-				{
-					"map": "SwarmIntelligence_Boids_Algorithm",
-					"position": "foundation",
-					"artifacts": [
-						"boid_flocking",
-						"boid_manager",
-						"boids_2d_in_3d",
-						"boids_aquarium"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Four implementations of Reynolds' separation, alignment, cohesion. Aquarium for compact social behavior; 2D-in-3D for dimensional projection."
-				},
-				{
-					"map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-					"position": "exploration",
-					"artifacts": [
-						"ant_colony_optimization",
-						"stigmergy_grid"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Agent-based modeling through pheromone stigmergy. Ant colony shows how individual rules produce emergent aggregate behavior; stigmergy grid visualizes the communication medium."
-				},
-				{
-					"map": "SwarmIntelligence_Ant_Colony_Optimization",
-					"position": "integration",
-					"artifacts": [
-						"AntColonyV2"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Stigmergy in action: pheromone trails, evaporation, and positive feedback drive optimal pathfinding. Indirect communication through environment modification."
-				},
-				{
-					"map": "SwarmIntelligence_Particle_Swarm_Optimization",
-					"position": "integration",
-					"artifacts": [
-						"particle_swarm_optimization",
-						"self_organizing_patterns"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Collective memory drives convergence. Particles balance exploration (randomness) with exploitation (personal and global best). Self-organizing patterns show emergent structure."
-				},
-				{
-					"map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
-					"position": "synthesis",
-					"artifacts": [
-						"ecosystem_simulation"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Synthesis: ecosystem integrates predator-prey dynamics as unified multi-agent system. Nature's optimization — decentralized, robust, adaptive — debugged over millions of years."
-				}
-			]
-		}
-	},
-	"artifact_groups": [
-		{
-			"map": "SwarmIntelligence_PhysarumColony",
-			"position": "intro",
-			"artifacts": [],
-			"size_budget": "compact_only",
-			"rationale": "Slime mold intelligence as sequence opener. Scene-embed or algorithm-only map with no grid artifacts."
-		},
-		{
-			"map": "SwarmIntelligence_FlowFields",
-			"position": "foundation",
-			"artifacts": [],
-			"size_budget": "compact_only",
-			"rationale": "Vector fields guide collective motion. Algorithm-only map with no grid artifacts currently placed."
-		},
-		{
-			"map": "SwarmIntelligence_Boids_Algorithm",
-			"position": "foundation",
-			"artifacts": [
-				"boids_aquarium",
-				"boid_flocking",
-				"boid_manager",
-				"boids_2d_in_3d"
-			],
-			"size_budget": "mixed",
-			"rationale": "Reynolds flocking with four boid variants. Dense artifact map showing separation, alignment, cohesion."
-		},
-		{
-			"map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-			"position": "exploration",
-			"artifacts": [
-				"ant_colony_optimization",
-				"stigmergy_grid"
-			],
-			"size_budget": "compact_only",
-			"rationale": "Agent-based modeling through pheromone stigmergy. Ant colony and grid visualize indirect environmental communication."
-		},
-		{
-			"map": "SwarmIntelligence_Ant_Colony_Optimization",
-			"position": "exploration",
-			"artifacts": [],
-			"size_budget": "compact_only",
-			"rationale": "Dedicated ACO map. Algorithm-only or scene-embed with no grid artifacts currently placed."
-		},
-		{
-			"map": "SwarmIntelligence_Particle_Swarm_Optimization",
-			"position": "integration",
-			"artifacts": [
-				"particle_swarm_optimization",
-				"self_organizing_patterns"
-			],
-			"size_budget": "compact_only",
-			"rationale": "PSO with collective memory: particles balance exploration and exploitation. Self-organizing patterns show emergent structure."
-		},
-		{
-			"map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
-			"position": "synthesis",
-			"artifacts": [
-				"ecosystem_simulation"
-			],
-			"size_budget": "environment",
-			"rationale": "Overview synthesis map. Ecosystem simulation integrates swarm paradigms into unified system."
-		}
-	],
-	"world_phase": "organic"
+  "sequences": {
+    "swarmintelligence": {
+      "name": "Swarm Intelligence: No Leader, Yet Coordinated",
+      "truth": "No leader, yet coordinated. Stigmergy: the environment is the message. Local rules produce global intelligence.",
+      "qfep_term": "Î»",
+      "qfep_connection": "Swarm systems operate at the edge of chaosâ€”the Î» parameter that modulates between order and entropy. Ï†Î”E(S,t) manifests as collective adaptive capacity: the swarm's rate of entropy change determines its survival.",
+      "formula": "Agent_i = Î£ local_rules(neighbors_i)",
+      "demonstration": "Watch boids flock without a leader. See ants find shortest paths through pheromone trails. Observe particles converge on optima through collective memory.",
+      "description": "Collective behavior and distributed intelligence. Individual agents follow simple local rules, yet global coordination emerges. This is queer intelligenceâ€”non-hierarchical, decentralized, resistant to single points of failure.",
+      "layer": "systems",
+      "prerequisites": [
+        "vectors",
+        "forces",
+        "lsystems"
+      ],
+      "unlocks": [
+        "machinelearning",
+        "recursiveemergence"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "25-30 minutes",
+      "learning_objectives": [
+        "Collective behavior from local rules: no central controller needed",
+        "Stigmergy: indirect communication through environment modification",
+        "Separation, alignment, cohesion: the three rules of Boids",
+        "Ant Colony Optimization: pheromone-based pathfinding",
+        "Particle Swarm Optimization: collective memory finds optima",
+        "Agent-based modeling: simulating societies from individuals"
+      ],
+      "content": [
+        "SwarmIntelligence_PhysarumColony: Slime mold intelligenceâ€”brainless computation",
+        "SwarmIntelligence_FlowFields: Vector fields guide collective motion",
+        "SwarmIntelligence_Boids_Algorithm: Reynolds' flockingâ€”separation, alignment, cohesion",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM: Societies from simple agents",
+        "SwarmIntelligence_Ant_Colony_Optimization: Pheromone trails find shortest paths",
+        "SwarmIntelligence_Particle_Swarm_Optimization: Collective memory, personal best, global best",
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms: Overview of swarm paradigms"
+      ],
+      "maps": [
+        "SwarmIntelligence_PhysarumColony",
+        "SwarmIntelligence_FlowFields",
+        "SwarmIntelligence_Boids_Algorithm",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM",
+        "SwarmIntelligence_Ant_Colony_Optimization",
+        "SwarmIntelligence_Particle_Swarm_Optimization",
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+        "Chamber_Swarm"
+      ],
+      "axiom_files": [
+        "res://commons/context/clipboard/tutorial_text/swarm_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/boids_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/stigmergy_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/ant_colony_axioms.md"
+      ],
+      "algorithm_paths": {
+        "SwarmIntelligence_Boids_Algorithm": "res://algorithms/emergentsystems/boidflocking/",
+        "SwarmIntelligence_Ant_Colony_Optimization": "res://algorithms/swarmintelligence/antcolony/",
+        "SwarmIntelligence_Particle_Swarm_Optimization": "res://algorithms/swarmintelligence/particleswarm/",
+        "SwarmIntelligence_PhysarumColony": "res://algorithms/swarmintelligence/physarum/"
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_swarmintelligence",
+      "unlock_requirements": [
+        "lsystems"
+      ],
+      "completion_rewards": [
+        "swarm_coordinator_badge",
+        "collective_intelligence_badge",
+        "stigmergy_master_badge"
+      ],
+      "artifact_groups": [
+        {
+          "map": "SwarmIntelligence_PhysarumColony",
+          "position": "intro",
+          "artifacts": [
+            "PhysarumColony"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Brainless computation through emergent network formation. Physarum solves mazes and optimizes paths without neurons or centralization."
+        },
+        {
+          "map": "SwarmIntelligence_FlowFields",
+          "position": "foundation",
+          "artifacts": [
+            "FlowFieldMain"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Behavior through invisible environmental direction. Agents follow local vector arrows without pathfinding or goals — the field is the program."
+        },
+        {
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "position": "foundation",
+          "artifacts": [
+            "boid_flocking",
+            "boid_manager",
+            "boids_2d_in_3d",
+            "boids_aquarium"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Four implementations of Reynolds' separation, alignment, cohesion. Aquarium for compact social behavior; 2D-in-3D for dimensional projection."
+        },
+        {
+          "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "position": "exploration",
+          "artifacts": [
+            "ant_colony_optimization",
+            "stigmergy_grid"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Agent-based modeling through pheromone stigmergy. Ant colony shows how individual rules produce emergent aggregate behavior; stigmergy grid visualizes the communication medium."
+        },
+        {
+          "map": "SwarmIntelligence_Ant_Colony_Optimization",
+          "position": "integration",
+          "artifacts": [
+            "AntColonyV2"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Stigmergy in action: pheromone trails, evaporation, and positive feedback drive optimal pathfinding. Indirect communication through environment modification."
+        },
+        {
+          "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "position": "integration",
+          "artifacts": [
+            "particle_swarm_optimization",
+            "self_organizing_patterns"
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Collective memory drives convergence. Particles balance exploration (randomness) with exploitation (personal and global best). Self-organizing patterns show emergent structure."
+        },
+        {
+          "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "position": "synthesis",
+          "artifacts": [
+            "ecosystem_simulation"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Synthesis: ecosystem integrates predator-prey dynamics as unified multi-agent system. Nature's optimization — decentralized, robust, adaptive — debugged over millions of years."
+        }
+      ]
+    }
+  },
+  "artifact_groups": [
+    {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "position": "intro",
+      "artifacts": [],
+      "size_budget": "compact_only",
+      "rationale": "Slime mold intelligence as sequence opener. Scene-embed or algorithm-only map with no grid artifacts."
+    },
+    {
+      "map": "SwarmIntelligence_FlowFields",
+      "position": "foundation",
+      "artifacts": [],
+      "size_budget": "compact_only",
+      "rationale": "Vector fields guide collective motion. Algorithm-only map with no grid artifacts currently placed."
+    },
+    {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "position": "foundation",
+      "artifacts": [
+        "boids_aquarium",
+        "boid_flocking",
+        "boid_manager",
+        "boids_2d_in_3d"
+      ],
+      "size_budget": "mixed",
+      "rationale": "Reynolds flocking with four boid variants. Dense artifact map showing separation, alignment, cohesion."
+    },
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "position": "exploration",
+      "artifacts": [
+        "ant_colony_optimization",
+        "stigmergy_grid"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Agent-based modeling through pheromone stigmergy. Ant colony and grid visualize indirect environmental communication."
+    },
+    {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "position": "exploration",
+      "artifacts": [],
+      "size_budget": "compact_only",
+      "rationale": "Dedicated ACO map. Algorithm-only or scene-embed with no grid artifacts currently placed."
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "position": "integration",
+      "artifacts": [
+        "particle_swarm_optimization",
+        "self_organizing_patterns"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "PSO with collective memory: particles balance exploration and exploitation. Self-organizing patterns show emergent structure."
+    },
+    {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "position": "synthesis",
+      "artifacts": [
+        "ecosystem_simulation"
+      ],
+      "size_budget": "environment",
+      "rationale": "Overview synthesis map. Ecosystem simulation integrates swarm paradigms into unified system."
+    }
+  ],
+  "world_phase": "organic"
 }

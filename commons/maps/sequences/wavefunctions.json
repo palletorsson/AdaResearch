@@ -1,293 +1,294 @@
 {
   "sequences": {
-	"wavefunctions": {
-	  "name": "Wavefunctions: Everything Oscillates",
-	  "truth": "Everything oscillates. Fourier shows every signal is a sum of sines. The wave is the fundamental pattern of non-restâ€”perpetual movement between poles.",
-	  "qfep_term": "dynamics",
-	  "qfep_connection": "Wavefunctions are the mathematical form of edge-of-chaos dynamics. Oscillation is neither static order nor chaotic randomnessâ€”it is periodic motion at the boundary. In QFEP terms, waves drive the temporal evolution Ï†Î”E(S,t) through rhythmic alternation.",
-	  "formula": "sin(t) = projection of rotation, f(x) = Î£ aâ‚™sin(nÏ‰x + Ï†â‚™)",
-	  "demonstration": "See rotation become sine on the unit circle. Hear Fourier synthesis build complex sounds from simple waves. Watch the double pendulum transition from periodic to chaotic.",
-	  "description": "The sine wave is the fundamental pattern of non-restâ€”perpetual oscillation between poles. From rotation projected to line, to sound as material wave, to chaos as pattern breaking. Waves are the mathematical form of desire: always moving toward opposite, never settling.",
-	  "layer": "behaviors",
-	  "prerequisites": [
-		"primitives",
+    "wavefunctions": {
+      "name": "Wavefunctions: Everything Oscillates",
+      "truth": "Everything oscillates. Fourier shows every signal is a sum of sines. The wave is the fundamental pattern of non-restâ€”perpetual movement between poles.",
+      "qfep_term": "dynamics",
+      "qfep_connection": "Wavefunctions are the mathematical form of edge-of-chaos dynamics. Oscillation is neither static order nor chaotic randomnessâ€”it is periodic motion at the boundary. In QFEP terms, waves drive the temporal evolution Ï†Î”E(S,t) through rhythmic alternation.",
+      "formula": "sin(t) = projection of rotation, f(x) = Î£ aâ‚™sin(nÏ‰x + Ï†â‚™)",
+      "demonstration": "See rotation become sine on the unit circle. Hear Fourier synthesis build complex sounds from simple waves. Watch the double pendulum transition from periodic to chaotic.",
+      "description": "The sine wave is the fundamental pattern of non-restâ€”perpetual oscillation between poles. From rotation projected to line, to sound as material wave, to chaos as pattern breaking. Waves are the mathematical form of desire: always moving toward opposite, never settling.",
+      "layer": "behaviors",
+      "prerequisites": [
+        "primitives",
         "vectors"
-	  ],
-	  "unlocks": [
-		"physicssimulation",
+      ],
+      "unlocks": [
+        "physicssimulation",
         "proceduralaudio"
-	  ],
-	  "difficulty": "intermediate",
-	  "estimated_time": "25-35 minutes",
-	  "learning_objectives": [
-		"Rotation creates oscillation (unit circle â†’ sine)",
-		"Parameters of oscillation: amplitude, frequency, phase",
-		"Fourier synthesis: any signal is a sum of sines",
-		"Interference and resonance: when waves meet",
-		"Beat frequencies: slow modulation from fast waves",
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "25-35 minutes",
+      "learning_objectives": [
+        "Rotation creates oscillation (unit circle â†’ sine)",
+        "Parameters of oscillation: amplitude, frequency, phase",
+        "Fourier synthesis: any signal is a sum of sines",
+        "Interference and resonance: when waves meet",
+        "Beat frequencies: slow modulation from fast waves",
         "From periodic to chaotic: the double pendulum transition"
-	  ],
-	  "content": [
-		"WaveFunctions_Intro: Oscillation Control Room",
-		"WaveFunctions_Pendulum: Gravity Creates Rhythm",
-		"WaveFunctions_Sine_Space: Walking Through Sine",
-		"WaveFunctions_Unit_Circle: Rotation Becomes Oscillation",
-		"WaveFunctions_3D_Wave_Propagation: Waves Through Space",
-		"WaveFunctions_Effect_Sound: Sound as Waveform",
-		"Wavefunctions_Bernini: Baroque Helical Columns",
-		"WaveFunctions_John_Cage: Silence Between Waves",
-		"WaveFunctions_AirMusic: Spatial Sound Laboratory",
-		"Wavefunctions_Sky_Stairs: Sine Curve Staircase",
-		"WaveFunctions_TrigWalkingPath: Walk the Trig Function",
+      ],
+      "content": [
+        "WaveFunctions_Intro: Oscillation Control Room",
+        "WaveFunctions_Pendulum: Gravity Creates Rhythm",
+        "WaveFunctions_Sine_Space: Walking Through Sine",
+        "WaveFunctions_Unit_Circle: Rotation Becomes Oscillation",
+        "WaveFunctions_3D_Wave_Propagation: Waves Through Space",
+        "WaveFunctions_Effect_Sound: Sound as Waveform",
+        "Wavefunctions_Bernini: Baroque Helical Columns",
+        "WaveFunctions_John_Cage: Silence Between Waves",
+        "WaveFunctions_AirMusic: Spatial Sound Laboratory",
+        "Wavefunctions_Sky_Stairs: Sine Curve Staircase",
+        "WaveFunctions_TrigWalkingPath: Walk the Trig Function",
         "WaveFunctions_Synthesis_Lab: Fourier Decomposition Lab"
-	  ],
-	  "maps": [
-		"WaveFunctions_Intro",
-		"WaveFunctions_Pendulum",
-		"WaveFunctions_Sine_Space",
-		"WaveFunctions_Unit_Circle",
-		"WaveFunctions_3D_Wave_Propagation",
-		"WaveFunctions_Effect_Sound",
-		"Wavefunctions_Bernini",
-		"WaveFunctions_John_Cage",
-		"WaveFunctions_AirMusic",
-		"Wavefunctions_Sky_Stairs",
-		"WaveFunctions_TrigWalkingPath",
-        "WaveFunctions_Synthesis_Lab"
-	  ],
-	  "axiom_files": [
-		"res://commons/context/clipboard/tutorial_text/wavefunction_axioms.md",
-		"res://commons/context/clipboard/tutorial_text/fourier_axioms.md",
+      ],
+      "maps": [
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle",
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Bernini",
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic",
+        "Wavefunctions_Sky_Stairs",
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab",
+        "Chamber_Waves"
+      ],
+      "axiom_files": [
+        "res://commons/context/clipboard/tutorial_text/wavefunction_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/fourier_axioms.md",
         "res://commons/context/clipboard/tutorial_text/oscillation_axioms.md"
-	  ],
-	  "algorithm_paths": {
-		"WaveFunctions_Unit_Circle": "res://algorithms/wavefunctions/unitcircle/",
-		"WaveFunctions_Fourier_Form": "res://algorithms/wavefunctions/fourier_transform/",
-		"WaveFunctions_Pendulum": "res://algorithms/wavefunctions/oscillation_driver/"
-	  },
-	  "audio": {
-		"ambient_preset": "space_station_isolation",
-		"interactive_sounds": {
-		  "teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
-		},
-		"volume": -10.0
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_wavefunctions",
-	  "unlock_requirements": [
+      ],
+      "algorithm_paths": {
+        "WaveFunctions_Unit_Circle": "res://algorithms/wavefunctions/unitcircle/",
+        "WaveFunctions_Fourier_Form": "res://algorithms/wavefunctions/fourier_transform/",
+        "WaveFunctions_Pendulum": "res://algorithms/wavefunctions/oscillation_driver/"
+      },
+      "audio": {
+        "ambient_preset": "space_station_isolation",
+        "interactive_sounds": {
+          "teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
+        },
+        "volume": -10.0
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_wavefunctions",
+      "unlock_requirements": [
         "primitives"
-	  ],
-	  "completion_rewards": [
-		"wave_researcher_badge",
-		"oscillation_intuition_badge",
+      ],
+      "completion_rewards": [
+        "wave_researcher_badge",
+        "oscillation_intuition_badge",
         "fourier_master_badge"
-	  ],
-	  "artifact_groups": [
-		{
-		  "map": "WaveFunctions_Intro",
-		  "position": "intro",
-		  "artifacts": [
-			"SphericalHarmonics",
-			"control_pendulum",
-			"cube_scene",
-			"dark_sphere",
-			"mario_cube_time_trace",
-			"oscillation_controlled_cube",
-			"pick_up_cube",
-			"pickup_cube_rotating",
-			"pickup_cube_static",
-			"pickup_cube_transforming",
-			"rotatescalecubes",
-			"rotating_cube",
-			"rotating_cube_demo",
-			"transformation_cube",
+      ],
+      "artifact_groups": [
+        {
+          "map": "WaveFunctions_Intro",
+          "position": "intro",
+          "artifacts": [
+            "SphericalHarmonics",
+            "control_pendulum",
+            "cube_scene",
+            "dark_sphere",
+            "mario_cube_time_trace",
+            "oscillation_controlled_cube",
+            "pick_up_cube",
+            "pickup_cube_rotating",
+            "pickup_cube_static",
+            "pickup_cube_transforming",
+            "rotatescalecubes",
+            "rotating_cube",
+            "rotating_cube_demo",
+            "transformation_cube",
             "y_oscillation_cube"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Introduction with 15 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_Pendulum",
-		  "position": "intro",
-		  "artifacts": [
-			"BigPipeSystem",
-			"GlassRack",
-			"PendulumWave",
-			"VRAudioMonitor",
-			"WavePaintings",
-			"dark_sphere",
-			"draw_dot_time_domain",
-			"foucault_pendulum",
-			"lab_table",
+          ],
+          "size_budget": "environment",
+          "rationale": "Introduction with 15 artifacts"
+        },
+        {
+          "map": "WaveFunctions_Pendulum",
+          "position": "intro",
+          "artifacts": [
+            "BigPipeSystem",
+            "GlassRack",
+            "PendulumWave",
+            "VRAudioMonitor",
+            "WavePaintings",
+            "dark_sphere",
+            "draw_dot_time_domain",
+            "foucault_pendulum",
+            "lab_table",
             "seismograph"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Introduction with 10 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_Sine_Space",
-		  "position": "foundation",
-		  "artifacts": [
-			"colorballs",
-			"dark_sphere",
-			"sine_space",
-			"sine_space_explanation",
-			"sine_wall_corridor",
+          ],
+          "size_budget": "environment",
+          "rationale": "Introduction with 10 artifacts"
+        },
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "position": "foundation",
+          "artifacts": [
+            "colorballs",
+            "dark_sphere",
+            "sine_space",
+            "sine_space_explanation",
+            "sine_wall_corridor",
             "sine_wall_explanation"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Building foundations with 6 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_Unit_Circle",
-		  "position": "foundation",
-		  "artifacts": [
-			"OscillationCurve",
-			"SimpleOscillatingBridge",
-			"colorballs",
-			"cube_scene",
-			"dark_sphere",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Building foundations with 6 artifacts"
+        },
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "position": "foundation",
+          "artifacts": [
+            "OscillationCurve",
+            "SimpleOscillatingBridge",
+            "colorballs",
+            "cube_scene",
+            "dark_sphere",
             "unit_circle_advanced"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Building foundations with 6 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_3D_Wave_Propagation",
-		  "position": "exploration",
-		  "artifacts": [
-			"dark_sphere",
-			"kusama_sine",
+          ],
+          "size_budget": "environment",
+          "rationale": "Building foundations with 6 artifacts"
+        },
+        {
+          "map": "WaveFunctions_3D_Wave_Propagation",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "kusama_sine",
             "wave_propagation_3d"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Deeper exploration through 3 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_Effect_Sound",
-		  "position": "exploration",
-		  "artifacts": [
-			"AudioContr",
-			"BigPipeSystem",
-			"DualBallFMController",
-			"GlassRack",
-			"MarioSoundController",
-			"MelodyChaser3D",
-			"Rack303Acid",
-			"RackDX7Piano",
-			"RackMoogBass",
-			"RackSineBasic",
-			"VRAudioMonitor",
-			"audio_catalog_tablet",
-			"cable_builder",
-			"chord_tension_spring",
-			"dark_sphere",
-			"harmonic_distance_table",
-			"interactable_demo",
-			"lab_table",
-			"mario_test_sound_ui",
-			"pick_up_cube",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Deeper exploration through 3 artifacts"
+        },
+        {
+          "map": "WaveFunctions_Effect_Sound",
+          "position": "exploration",
+          "artifacts": [
+            "AudioContr",
+            "BigPipeSystem",
+            "DualBallFMController",
+            "GlassRack",
+            "MarioSoundController",
+            "MelodyChaser3D",
+            "Rack303Acid",
+            "RackDX7Piano",
+            "RackMoogBass",
+            "RackSineBasic",
+            "VRAudioMonitor",
+            "audio_catalog_tablet",
+            "cable_builder",
+            "chord_tension_spring",
+            "dark_sphere",
+            "harmonic_distance_table",
+            "interactable_demo",
+            "lab_table",
+            "mario_test_sound_ui",
+            "pick_up_cube",
             "timbre_sculptor"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Deeper exploration through 21 artifacts"
-		},
-		{
-		  "map": "Wavefunctions_Bernini",
-		  "position": "exploration",
-		  "artifacts": [
-			"ElphabaDress",
-			"bernini_columns",
-			"dark_sphere",
+          ],
+          "size_budget": "mixed",
+          "rationale": "Deeper exploration through 21 artifacts"
+        },
+        {
+          "map": "Wavefunctions_Bernini",
+          "position": "exploration",
+          "artifacts": [
+            "ElphabaDress",
+            "bernini_columns",
+            "dark_sphere",
             "vowel_sound_board"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Deeper exploration through 4 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_John_Cage",
-		  "position": "integration",
-		  "artifacts": [
-			"dark_sphere",
-			"dual_display_test",
-			"john_cage_tech_noir",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Deeper exploration through 4 artifacts"
+        },
+        {
+          "map": "WaveFunctions_John_Cage",
+          "position": "integration",
+          "artifacts": [
+            "dark_sphere",
+            "dual_display_test",
+            "john_cage_tech_noir",
             "ruth_asawa_sculpture"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Integration combining 4 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_AirMusic",
-		  "position": "integration",
-		  "artifacts": [
-			"BigPipeSystem",
-			"GlassRack",
-			"RackAmbientDrone",
-			"SystemsMusicTest",
-			"air_music_display_case",
-			"dark_sphere",
-			"lab_table",
+          ],
+          "size_budget": "environment",
+          "rationale": "Integration combining 4 artifacts"
+        },
+        {
+          "map": "WaveFunctions_AirMusic",
+          "position": "integration",
+          "artifacts": [
+            "BigPipeSystem",
+            "GlassRack",
+            "RackAmbientDrone",
+            "SystemsMusicTest",
+            "air_music_display_case",
+            "dark_sphere",
+            "lab_table",
             "resonating_metallophone"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Integration combining 8 artifacts"
-		},
-		{
-		  "map": "Wavefunctions_Sky_Stairs",
-		  "position": "integration",
-		  "artifacts": [
-			"cube_scene",
-			"dark_sphere",
-			"math_objects",
+          ],
+          "size_budget": "environment",
+          "rationale": "Integration combining 8 artifacts"
+        },
+        {
+          "map": "Wavefunctions_Sky_Stairs",
+          "position": "integration",
+          "artifacts": [
+            "cube_scene",
+            "dark_sphere",
+            "math_objects",
             "sine_cylinder_staircase"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Integration combining 4 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_TrigWalkingPath",
-		  "position": "synthesis",
-		  "artifacts": [
-			"TrigWalkingPath",
+          ],
+          "size_budget": "environment",
+          "rationale": "Integration combining 4 artifacts"
+        },
+        {
+          "map": "WaveFunctions_TrigWalkingPath",
+          "position": "synthesis",
+          "artifacts": [
+            "TrigWalkingPath",
             "dark_sphere"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Synthesis with 2 artifacts"
-		},
-		{
-		  "map": "WaveFunctions_Synthesis_Lab",
-		  "position": "synthesis",
-		  "artifacts": [
-			"GlassRack",
-			"SoundscapeRadioRack",
-			"UnitCircleTrig",
-			"additive_wave_demo",
-			"air_music_display_case",
-			"atmosphericmonitoring",
-			"chemicalapparatus",
-			"chladni_plate",
-			"coloredlines",
-			"dark_sphere",
-			"dna_specimen",
-			"double_helix_scene",
-			"electronicscales",
-			"hallway_scene",
-			"holographicdisplay",
-			"ibomagneticresonator",
-			"lissajous_curves",
-			"microscope",
-			"multimeter",
-			"oscilloscope",
-			"petri_dish_worms",
-			"samplevialrack",
-			"seismograph",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Synthesis with 2 artifacts"
+        },
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "position": "synthesis",
+          "artifacts": [
+            "GlassRack",
+            "SoundscapeRadioRack",
+            "UnitCircleTrig",
+            "additive_wave_demo",
+            "air_music_display_case",
+            "atmosphericmonitoring",
+            "chemicalapparatus",
+            "chladni_plate",
+            "coloredlines",
+            "dark_sphere",
+            "dna_specimen",
+            "double_helix_scene",
+            "electronicscales",
+            "hallway_scene",
+            "holographicdisplay",
+            "ibomagneticresonator",
+            "lissajous_curves",
+            "microscope",
+            "multimeter",
+            "oscilloscope",
+            "petri_dish_worms",
+            "samplevialrack",
+            "seismograph",
             "spring_demo"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Synthesis with 24 artifacts"
-		}
-	  ]
-	}
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Synthesis with 24 artifacts"
+        }
+      ]
+    }
   },
   "world_phase": "grid",
   "artifact_groups": []

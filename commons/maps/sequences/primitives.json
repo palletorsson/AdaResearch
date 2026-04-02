@@ -1,251 +1,253 @@
 {
   "sequences": {
-	"primitives": {
-	  "name": "Primitives: Points Build Worlds",
-	  "truth": "A point is position without extension. Everything is built from nothing.",
-	  "qfep_term": "F",
-	  "qfep_connection": "Stable foundations before entropy enters. The deterministic base from which complexity grows. Primitives are pure orderâ€”the F term before Î»E(S) introduces chaos.",
-	  "formula": "Point = Vector3(x, y, z)",
-	  "demonstration": "Place a point in void. Connect two points to make a line. Three points define a plane. From nothing, everything.",
-	  "description": "Fundamental geometric primitives and their axioms. The atoms of computationâ€”dimensionless points become lines, triangles, cubes, worlds.",
-	  "layer": "primitives",
-	  "prerequisites": [],
-	  "unlocks": [
-		"transformations",
-		"meshes",
-		"color",
+    "primitives": {
+      "name": "Primitives: Points Build Worlds",
+      "truth": "A point is position without extension. Everything is built from nothing.",
+      "qfep_term": "F",
+      "qfep_connection": "Stable foundations before entropy enters. The deterministic base from which complexity grows. Primitives are pure orderâ€”the F term before Î»E(S) introduces chaos.",
+      "formula": "Point = Vector3(x, y, z)",
+      "demonstration": "Place a point in void. Connect two points to make a line. Three points define a plane. From nothing, everything.",
+      "description": "Fundamental geometric primitives and their axioms. The atoms of computationâ€”dimensionless points become lines, triangles, cubes, worlds.",
+      "layer": "primitives",
+      "prerequisites": [],
+      "unlocks": [
+        "transformations",
+        "meshes",
+        "color",
         "datastructures"
-	  ],
-	  "ambient_preset": "prog_synth_70s",
-	  "difficulty": "beginner",
-	  "estimated_time": "15-20 minutes",
-	  "learning_objectives": [
-		"Understanding Vector3 as position in 3D space",
-		"Point visualization: existence without extension",
-		"Line topology: connection between two positions",
-		"Triangle rasterization: the GPU's atomic unit",
+      ],
+      "ambient_preset": "prog_synth_70s",
+      "difficulty": "beginner",
+      "estimated_time": "15-20 minutes",
+      "learning_objectives": [
+        "Understanding Vector3 as position in 3D space",
+        "Point visualization: existence without extension",
+        "Line topology: connection between two positions",
+        "Triangle rasterization: the GPU's atomic unit",
         "From primitives to meshes: building complexity from simplicity"
-	  ],
-	  "content": [
-		"Point_One: Position Without Extension",
-		"Point_Lines: Lines, Networks, Measure",
-		"Point_Trace: Duration and Residue",
-		"Point_Line_Grid: Grid Quantizes Movement",
-		"Point_Triangle: Three Points Close a Boundary",
-		"Point_Triangle_Context: Triangles Applied",
-		"Primitives_Polythedra: Trihedra and First Solids",
-		"Point_Animatedcube: Cube Assembly from Primitives",
-		"Primitives_Ignorance: Limits of Geometric Knowledge",
-		"Primitives_Portals: Circular Approximation and Limits",
+      ],
+      "content": [
+        "Point_One: Position Without Extension",
+        "Point_Lines: Lines, Networks, Measure",
+        "Point_Trace: Duration and Residue",
+        "Point_Line_Grid: Grid Quantizes Movement",
+        "Point_Triangle: Three Points Close a Boundary",
+        "Point_Triangle_Context: Triangles Applied",
+        "Primitives_Polythedra: Trihedra and First Solids",
+        "Point_Animatedcube: Cube Assembly from Primitives",
+        "Primitives_Ignorance: Limits of Geometric Knowledge",
+        "Primitives_Portals: Circular Approximation and Limits",
         "Primitives_Melencolia: Melancholy of Finitude"
-	  ],
-	  "maps": [
-		"Point_One",
-		"Point_Lines",
-		"Point_Trace",
-		"Point_Line_Grid",
-		"Point_Triangle",
-		"Point_Triangle_Context",
-		"Primitives_Polythedra",
-		"Point_Animatedcube",
-		"Primitives_Ignorance",
-		"Primitives_Portals",
-        "Primitives_Melencolia"
-	  ],
-	  "axiom_files": [
-		"res://commons/context/clipboard/tutorial_text/primitives_axioms.md",
-		"res://commons/context/clipboard/tutorial_text/point_axioms.md",
-		"res://commons/context/clipboard/tutorial_text/line_axioms.md",
+      ],
+      "maps": [
+        "Point_One",
+        "Point_Line",
+        "Point_Lines",
+        "Point_Trace",
+        "Point_Line_Grid",
+        "Point_Triangle",
+        "Point_Triangle_Context",
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Primitives_Portals",
+        "Primitives_Melencolia",
+        "Chamber_Primitives"
+      ],
+      "axiom_files": [
+        "res://commons/context/clipboard/tutorial_text/primitives_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/point_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/line_axioms.md",
         "res://commons/context/clipboard/tutorial_text/triangle_axioms.md"
-	  ],
-	  "algorithm_paths": {
-		"Point_Zero": "res://commons/primitives/points/",
-		"Point_Line": "res://commons/primitives/lines/",
-		"Point_Triangle": "res://commons/primitives/triangles/"
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_primitives",
-	  "unlock_requirements": [],
-	  "completion_rewards": [
-		"primitive_badge",
+      ],
+      "algorithm_paths": {
+        "Point_Zero": "res://commons/primitives/points/",
+        "Point_Line": "res://commons/primitives/lines/",
+        "Point_Triangle": "res://commons/primitives/triangles/"
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_primitives",
+      "unlock_requirements": [],
+      "completion_rewards": [
+        "primitive_badge",
         "foundation_builder_badge"
-	  ],
-	  "artifact_groups": [
-		{
-		  "map": "Point_One",
-		  "position": "intro",
-		  "artifacts": [
-			"origin",
-			"static_point",
-			"interactive_point_origin",
-			"script_runner#point",
-			"dark_sphere",
-			"folding_past",
-			"frame_counter_display",
+      ],
+      "artifact_groups": [
+        {
+          "map": "Point_One",
+          "position": "intro",
+          "artifacts": [
+            "origin",
+            "static_point",
+            "interactive_point_origin",
+            "script_runner#point",
+            "dark_sphere",
+            "folding_past",
+            "frame_counter_display",
             "CoordinateSystem3M"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Minimal intro: a single point in void with code display and coordinate reference. Establishes the atom of space."
-		},
-		{
-		  "map": "Point_Lines",
-		  "position": "foundation",
-		  "artifacts": [
-			"line_demo",
-			"modulor_man_demo",
-			"line_builder_3d",
-			"plus_line_puzzle",
-			"parallel_line_puzzle",
-			"cube_scene",
-			"dark_sphere",
-			"line",
-			"laser_measure",
-			"laser_exploding_sphere",
-			"perspective_lines",
-			"scale_lines",
-			"lightrod",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Minimal intro: a single point in void with code display and coordinate reference. Establishes the atom of space."
+        },
+        {
+          "map": "Point_Lines",
+          "position": "foundation",
+          "artifacts": [
+            "line_demo",
+            "modulor_man_demo",
+            "line_builder_3d",
+            "plus_line_puzzle",
+            "parallel_line_puzzle",
+            "cube_scene",
+            "dark_sphere",
+            "line",
+            "laser_measure",
+            "laser_exploding_sphere",
+            "perspective_lines",
+            "scale_lines",
+            "lightrod",
             "dgrid"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Line multiplication and networks: parallels, crossings, grids, and measurement. Builds on point concepts toward structured relations."
-		},
-		{
-		  "map": "Point_Trace",
-		  "position": "foundation",
-		  "artifacts": [
-			"draw_dot",
-			"dark_sphere",
+          ],
+          "size_budget": "mixed",
+          "rationale": "Line multiplication and networks: parallels, crossings, grids, and measurement. Builds on point concepts toward structured relations."
+        },
+        {
+          "map": "Point_Trace",
+          "position": "foundation",
+          "artifacts": [
+            "draw_dot",
+            "dark_sphere",
             "cube_scene"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Trace as accumulated movement introduces duration and gesture, bridging points to paths."
-		},
-		{
-		  "map": "Point_Line_Grid",
-		  "position": "exploration",
-		  "artifacts": [
-			"player_trace",
-			"grid_lines",
-			"dark_sphere",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Trace as accumulated movement introduces duration and gesture, bridging points to paths."
+        },
+        {
+          "map": "Point_Line_Grid",
+          "position": "exploration",
+          "artifacts": [
+            "player_trace",
+            "grid_lines",
+            "dark_sphere",
             "grab_sphere_point_snap"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Grid structure meets trace recording; addressable space meets duration. Combines earlier point and line concepts."
-		},
-		{
-		  "map": "Point_Triangle",
-		  "position": "exploration",
-		  "artifacts": [
-			"triangle_line_puzzle",
-			"dark_sphere",
-			"cube_scene",
-			"triangle",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Grid structure meets trace recording; addressable space meets duration. Combines earlier point and line concepts."
+        },
+        {
+          "map": "Point_Triangle",
+          "position": "exploration",
+          "artifacts": [
+            "triangle_line_puzzle",
+            "dark_sphere",
+            "cube_scene",
+            "triangle",
             "triangleprofiles"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "First closure: three points define a surface. Triangle as boundary and GPU atom."
-		},
-		{
-		  "map": "Point_Triangle_Context",
-		  "position": "exploration",
-		  "artifacts": [
-			"folded_strip",
-			"draw_triangle_faces",
-			"interactivetriangle",
-			"pythagorean_triangle_angles",
-			"quad_line_puzzle",
-			"quad",
-			"dark_sphere",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "First closure: three points define a surface. Triangle as boundary and GPU atom."
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "position": "exploration",
+          "artifacts": [
+            "folded_strip",
+            "draw_triangle_faces",
+            "interactivetriangle",
+            "pythagorean_triangle_angles",
+            "quad_line_puzzle",
+            "quad",
+            "dark_sphere",
             "cube_scene"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Applied triangle knowledge: Pythagorean theorem, quad decomposition. Transition from triangle to quad."
-		},
-		{
-		  "map": "Primitives_Polythedra",
-		  "position": "exploration",
-		  "artifacts": [
-			"grab_trihedron",
-			"snap_tetrahedron_puzzle",
-			"dark_sphere",
-			"cube_scene",
+          ],
+          "size_budget": "mixed",
+          "rationale": "Applied triangle knowledge: Pythagorean theorem, quad decomposition. Transition from triangle to quad."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "position": "exploration",
+          "artifacts": [
+            "grab_trihedron",
+            "snap_tetrahedron_puzzle",
+            "dark_sphere",
+            "cube_scene",
             "pyramid_edit"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Trihedron and tetrahedron assembly: first 3D solids from triangular faces."
-		},
-		{
-		  "map": "Point_Animatedcube",
-		  "position": "integration",
-		  "artifacts": [
-			"animatedcubebuilder",
-			"dark_sphere",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Trihedron and tetrahedron assembly: first 3D solids from triangular faces."
+        },
+        {
+          "map": "Point_Animatedcube",
+          "position": "integration",
+          "artifacts": [
+            "animatedcubebuilder",
+            "dark_sphere",
             "polyhedron_nets_cube"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Animated cube construction from primitives. Combines points, lines, triangles, quads into volume."
-		},
-		{
-		  "map": "Primitives_Ignorance",
-		  "position": "integration",
-		  "artifacts": [
-			"platonic_grabbables",
-			"dark_sphere",
-			"hole_with_cones",
-			"sphere_high",
-			"sphere_mid",
-			"sphere_low",
-			"star_primitive",
-			"righttriangle",
-			"roughrock",
-			"truncatedtetrahedron",
-			"capsule",
-			"snap_octahedron_puzzle",
-			"grab_octahedron",
-			"cube_scene",
-			"sphere",
-			"lshape",
-			"prism_block",
-			"torus_radials_rings",
-			"capsule_radials_rings",
-			"diamonds",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Animated cube construction from primitives. Combines points, lines, triangles, quads into volume."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "position": "integration",
+          "artifacts": [
+            "platonic_grabbables",
+            "dark_sphere",
+            "hole_with_cones",
+            "sphere_high",
+            "sphere_mid",
+            "sphere_low",
+            "star_primitive",
+            "righttriangle",
+            "roughrock",
+            "truncatedtetrahedron",
+            "capsule",
+            "snap_octahedron_puzzle",
+            "grab_octahedron",
+            "cube_scene",
+            "sphere",
+            "lshape",
+            "prism_block",
+            "torus_radials_rings",
+            "capsule_radials_rings",
+            "diamonds",
             "plus"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Large gallery re-encountering primitives as constructs. Resolution studies, variant solids, architectural modules. Dense integration map."
-		},
-		{
-		  "map": "Primitives_Portals",
-		  "position": "integration",
-		  "artifacts": [
-			"combine_portals",
-			"achilles_tortoise",
-			"dark_sphere",
+          ],
+          "size_budget": "environment",
+          "rationale": "Large gallery re-encountering primitives as constructs. Resolution studies, variant solids, architectural modules. Dense integration map."
+        },
+        {
+          "map": "Primitives_Portals",
+          "position": "integration",
+          "artifacts": [
+            "combine_portals",
+            "achilles_tortoise",
+            "dark_sphere",
             "capsule"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Toroidal portals and Zeno's paradox: circular approximation, continuity vs discretization."
-		},
-		{
-		  "map": "Primitives_Melencolia",
-		  "position": "synthesis",
-		  "artifacts": [
-			"pyramid",
-			"snap_pyramid_puzzle",
-			"pyramidlong",
-			"cube_scene",
-			"dark_sphere",
-			"prism_block",
-			"bigframe",
-			"diamondtoruscollection",
-			"durer_scene",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Toroidal portals and Zeno's paradox: circular approximation, continuity vs discretization."
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "position": "synthesis",
+          "artifacts": [
+            "pyramid",
+            "snap_pyramid_puzzle",
+            "pyramidlong",
+            "cube_scene",
+            "dark_sphere",
+            "prism_block",
+            "bigframe",
+            "diamondtoruscollection",
+            "durer_scene",
             "code_display"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Culmination: callbacks to pyramids, cubes, and prisms from earlier maps. Historical context through Durer. Melancholy of geometric limits."
-		}
-	  ]
-	}
+          ],
+          "size_budget": "environment",
+          "rationale": "Culmination: callbacks to pyramids, cubes, and prisms from earlier maps. Historical context through Durer. Melancholy of geometric limits."
+        }
+      ]
+    }
   },
   "world_phase": "grid",
   "artifact_groups": []

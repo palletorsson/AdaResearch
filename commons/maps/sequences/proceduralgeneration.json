@@ -1,353 +1,354 @@
 {
   "sequences": {
-	"proceduralgeneration": {
-	  "name": "Procedural Generation: Rules Build Worlds",
-	  "truth": "A world doesn't need an author. Rules and randomness are enough.",
-	  "qfep_term": "Lambda_Edge",
-	  "qfep_connection": "Procedural generation IS the Î» boundary â€” rules (F) constrained by randomness (E) produce emergent worlds. Every generator balances determinism against surprise. The threshold IS the interesting part.",
-	  "description": "From a seed, a world grows. Growth algorithms, maze generators, evolutionary systems â€” each finds different ways to let rules create structure. Heavy compute artifacts get their own rooms; lighter ones share space.",
-	  "layer": "lambda_edge",
-	  "prerequisites": [
-		"noise",
+    "proceduralgeneration": {
+      "name": "Procedural Generation: Rules Build Worlds",
+      "truth": "A world doesn't need an author. Rules and randomness are enough.",
+      "qfep_term": "Lambda_Edge",
+      "qfep_connection": "Procedural generation IS the Î» boundary â€” rules (F) constrained by randomness (E) produce emergent worlds. Every generator balances determinism against surprise. The threshold IS the interesting part.",
+      "description": "From a seed, a world grows. Growth algorithms, maze generators, evolutionary systems â€” each finds different ways to let rules create structure. Heavy compute artifacts get their own rooms; lighter ones share space.",
+      "layer": "lambda_edge",
+      "prerequisites": [
+        "noise",
         "cellularautomata"
-	  ],
-	  "unlocks": [],
-	  "difficulty": "intermediate-advanced",
-	  "estimated_time": "30-40 minutes",
-	  "learning_objectives": [
-		"Evolutionary computation â€” selection pressure without design",
-		"Growth algorithms â€” branching, colonization, organic form",
-		"Procedural exploration â€” caves and mazes from rules",
-		"Geometric construction â€” sculpting forms from procedures",
+      ],
+      "unlocks": [],
+      "difficulty": "intermediate-advanced",
+      "estimated_time": "30-40 minutes",
+      "learning_objectives": [
+        "Evolutionary computation â€” selection pressure without design",
+        "Growth algorithms â€” branching, colonization, organic form",
+        "Procedural exploration â€” caves and mazes from rules",
+        "Geometric construction â€” sculpting forms from procedures",
         "Pattern generation â€” mirrors, rhizomes, cellular textures"
-	  ],
-	  "content": [
-		"PG_Genetic_Evolution: Evolving Creatures Through Selection — 3D creatures evolve through selection (HEAVY: solo)",
-		"PG_Space_Colonization: Trees Grow Toward Attractors — trees grow toward attractors (HEAVY: solo)",
-		"PG_Percolation_Network: Connectivity Phase Transitions — connectivity thresholds in random grids (HEAVY: solo)",
-		"PG_Branching_Growth: Rules Versus Noise Fields — two growth strategies compared",
-		"PG_Caves_Mazes: Carving Versus Constructing Space — procedural exploration spaces",
-		"PG_Sculpted_Forms: Geometry from Accumulation Rules — geometry from accumulation rules",
+      ],
+      "content": [
+        "PG_Genetic_Evolution: Evolving Creatures Through Selection — 3D creatures evolve through selection (HEAVY: solo)",
+        "PG_Space_Colonization: Trees Grow Toward Attractors — trees grow toward attractors (HEAVY: solo)",
+        "PG_Percolation_Network: Connectivity Phase Transitions — connectivity thresholds in random grids (HEAVY: solo)",
+        "PG_Branching_Growth: Rules Versus Noise Fields — two growth strategies compared",
+        "PG_Caves_Mazes: Carving Versus Constructing Space — procedural exploration spaces",
+        "PG_Sculpted_Forms: Geometry from Accumulation Rules — geometry from accumulation rules",
         "PG_Mirrored_Patterns: Reflection and Rhizomatic Branching — pattern from reflection and branching"
-	  ],
-	  "maps": [
-		"PG_Genetic_Evolution",
-		"PG_Space_Colonization",
-		"PG_Percolation_Network",
-		"PG_Branching_Growth",
-		"PG_Caves_Mazes",
-		"PG_Sculpted_Forms",
-        "PG_Mirrored_Patterns"
-	  ],
-	  "audio": {
-		"ambient_preset": "minimal_drone",
-		"volume": -10.0
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_proceduralgeneration",
-	  "completion_rewards": [
+      ],
+      "maps": [
+        "PG_Genetic_Evolution",
+        "PG_Space_Colonization",
+        "PG_Percolation_Network",
+        "PG_Branching_Growth",
+        "PG_Caves_Mazes",
+        "PG_Sculpted_Forms",
+        "PG_Mirrored_Patterns",
+        "Chamber_ProcGen"
+      ],
+      "audio": {
+        "ambient_preset": "minimal_drone",
+        "volume": -10.0
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_proceduralgeneration",
+      "completion_rewards": [
         "procedural_master_badge"
-	  ],
-	  "algorithm_sources": {
-		"_note": "Mapping from new maps to source algorithm folders and original map artifacts",
-		"PG_Genetic_Evolution": {
-		  "algorithms": [
+      ],
+      "algorithm_sources": {
+        "_note": "Mapping from new maps to source algorithm folders and original map artifacts",
+        "PG_Genetic_Evolution": {
+          "algorithms": [
             "proceduralgeneration/growth_systems/genetic_programming"
-		  ],
-		  "original_maps": [
-			"ProceduralGeneration_Genetic_Algorithms",
+          ],
+          "original_maps": [
+            "ProceduralGeneration_Genetic_Algorithms",
             "ProceduralGeneration_Genetic_Programming"
-		  ],
-		  "artifacts": [
+          ],
+          "artifacts": [
             "GeneticProgramming"
-		  ],
-		  "compute": "HEAVY â€” TICK + MESH + NESTED_LOOP (24KB). Solo map."
-		},
-		"PG_Space_Colonization": {
-		  "algorithms": [
+          ],
+          "compute": "HEAVY â€” TICK + MESH + NESTED_LOOP (24KB). Solo map."
+        },
+        "PG_Space_Colonization": {
+          "algorithms": [
             "proceduralgeneration/growth_systems/space_colonization_algorithm"
-		  ],
-		  "original_maps": [
+          ],
+          "original_maps": [
             "ProceduralGeneration_Space_Colonization_Algorithms"
-		  ],
-		  "artifacts": [
+          ],
+          "artifacts": [
             "space_colonization_algorithm"
-		  ],
-		  "compute": "HEAVY â€” TICK + MESH + NESTED_LOOP (14KB). Solo map."
-		},
-		"PG_Percolation_Network": {
-		  "algorithms": [
+          ],
+          "compute": "HEAVY â€” TICK + MESH + NESTED_LOOP (14KB). Solo map."
+        },
+        "PG_Percolation_Network": {
+          "algorithms": [
             "proceduralgeneration/growth_systems/percolationnetwork_ca"
-		  ],
-		  "original_maps": [
+          ],
+          "original_maps": [
             "ProceduralGeneration_17"
-		  ],
-		  "artifacts": [
+          ],
+          "artifacts": [
             "percolationnetwork_ca"
-		  ],
-		  "compute": "HEAVY â€” TICK + NESTED_LOOP (15KB). Solo map."
-		},
-		"PG_Branching_Growth": {
-		  "algorithms": [
-			"proceduralgeneration/growth_systems/branchinggrowthalgorithm",
+          ],
+          "compute": "HEAVY â€” TICK + NESTED_LOOP (15KB). Solo map."
+        },
+        "PG_Branching_Growth": {
+          "algorithms": [
+            "proceduralgeneration/growth_systems/branchinggrowthalgorithm",
             "alternativegeometries/organicspace"
-		  ],
-		  "original_maps": [
-			"ProceduralGeneration_BranchingGrowthAlgorithm",
+          ],
+          "original_maps": [
+            "ProceduralGeneration_BranchingGrowthAlgorithm",
             "ProceduralGeneration_Seven"
-		  ],
-		  "artifacts": [
-			"branching_growth_algorithm",
+          ],
+          "artifacts": [
+            "branching_growth_algorithm",
             "organic_space"
-		  ],
-		  "compute": "MEDIUM â€” branching is TICK+MESH (14KB), organic is one-shot NOISE/SHADER (9KB). Safe to pair."
-		},
-		"PG_Caves_Mazes": {
-		  "algorithms": [
-			"proceduralgeneration/growth_systems/caverandomwalk",
+          ],
+          "compute": "MEDIUM â€” branching is TICK+MESH (14KB), organic is one-shot NOISE/SHADER (9KB). Safe to pair."
+        },
+        "PG_Caves_Mazes": {
+          "algorithms": [
+            "proceduralgeneration/growth_systems/caverandomwalk",
             "proceduralgeneration/procedural_logic/mazegeneration"
-		  ],
-		  "original_maps": [
-			"ProceduralGeneration_CaveRandomWalk",
+          ],
+          "original_maps": [
+            "ProceduralGeneration_CaveRandomWalk",
             "ProceduralGeneration_Maze"
-		  ],
-		  "artifacts": [
-			"caverandomwalk",
+          ],
+          "artifacts": [
+            "caverandomwalk",
             "maze_generation"
-		  ],
-		  "compute": "MEDIUM â€” cave is one-shot NESTED_LOOP (6KB), maze has TICK but mostly generates-then-explores (11KB). Safe to pair."
-		},
-		"PG_Sculpted_Forms": {
-		  "algorithms": [
-			"proceduralgeneration/hybrid_complex/cubemound",
-			"alternativegeometries/organicspace",
+          ],
+          "compute": "MEDIUM â€” cave is one-shot NESTED_LOOP (6KB), maze has TICK but mostly generates-then-explores (11KB). Safe to pair."
+        },
+        "PG_Sculpted_Forms": {
+          "algorithms": [
+            "proceduralgeneration/hybrid_complex/cubemound",
+            "alternativegeometries/organicspace",
             "proceduralgeneration/hybrid_complex/layeredmembrane"
-		  ],
-		  "original_maps": [
-			"ProceduralGeneration_CubeMound",
-			"ProceduralGeneration_Dome",
+          ],
+          "original_maps": [
+            "ProceduralGeneration_CubeMound",
+            "ProceduralGeneration_Dome",
             "ProceduralGeneration_Five"
-		  ],
-		  "artifacts": [
-			"cube_mound_scene",
-			"cube_mound_scene_sphere",
-			"dome",
+          ],
+          "artifacts": [
+            "cube_mound_scene",
+            "cube_mound_scene_sphere",
+            "dome",
             "layered_membrane"
-		  ],
-		  "compute": "MEDIUM â€” cube_mound has TICK+MESH (9KB), dome/membrane are one-shot. Spread spatially."
-		},
-		"PG_Mirrored_Patterns": {
-		  "algorithms": [
-			"proceduralgeneration/growth_systems/mirroredcellularautomata",
+          ],
+          "compute": "MEDIUM â€” cube_mound has TICK+MESH (9KB), dome/membrane are one-shot. Spread spatially."
+        },
+        "PG_Mirrored_Patterns": {
+          "algorithms": [
+            "proceduralgeneration/growth_systems/mirroredcellularautomata",
             "alternativegeometries/rhizomaticmazespace"
-		  ],
-		  "original_maps": [
+          ],
+          "original_maps": [
             "ProceduralGeneration_Eight"
-		  ],
-		  "artifacts": [
-			"mirror_cellular_texture_for_3d",
+          ],
+          "artifacts": [
+            "mirror_cellular_texture_for_3d",
             "rhizomatic_maze_space"
-		  ],
-		  "compute": "LIGHT â€” both are one-shot generators. Safe to share."
-		}
-	  },
-	  "redistributed_artifacts": {
-		"_note": "Artifacts from stripped numbered maps that belong in other sequences",
-		"to_fractals": [
-		  "julia_set (from _Ten)",
+          ],
+          "compute": "LIGHT â€” both are one-shot generators. Safe to share."
+        }
+      },
+      "redistributed_artifacts": {
+        "_note": "Artifacts from stripped numbered maps that belong in other sequences",
+        "to_fractals": [
+          "julia_set (from _Ten)",
           "fibonacci_sequences (from _Four, _Ten)"
-		],
-		"to_lsystems": [
-		  "lsystem_tree (from _Five)",
-		  "context_free_grammars (from _Ten)",
-		  "recursive_tree (from _Seven)",
+        ],
+        "to_lsystems": [
+          "lsystem_tree (from _Five)",
+          "context_free_grammars (from _Ten)",
+          "recursive_tree (from _Seven)",
           "tree_gen (from _Ten)"
-		],
-		"to_cellularautomata": [
+        ],
+        "to_cellularautomata": [
           "rule_30_110 (from _Eleven)"
-		],
-		"to_spatial_partitioning": [
-		  "voronoi_diagrams + voronoi_space (from _Three)",
+        ],
+        "to_spatial_partitioning": [
+          "voronoi_diagrams + voronoi_space (from _Three)",
           "voronoi_grid_3d (from _Dome)"
-		],
-		"to_constraint_solvers": [
+        ],
+        "to_constraint_solvers": [
           "boolean_patterns_demo (from _Two)"
-		],
-		"to_higher_dimensions": [
+        ],
+        "to_higher_dimensions": [
           "sixteen_cell_net_space_showcase (from _21)"
-		],
-		"misplaced": [
-		  "grab_stick (from _Eight â€” color tool, not procgen)",
-		  "interactable_demo (from _Dome â€” generic demo)",
+        ],
+        "misplaced": [
+          "grab_stick (from _Eight â€” color tool, not procgen)",
+          "interactable_demo (from _Dome â€” generic demo)",
           "array_visualizer (from _Seven, _Eleven â€” generic display)"
-		]
-	  },
-	  "deferred_maps": [
-		"ProceduralGeneration_Two",
-		"ProceduralGeneration_Three",
-		"ProceduralGeneration_Four",
-		"ProceduralGeneration_Five",
-		"ProceduralGeneration_Seven",
-		"ProceduralGeneration_Eight",
-		"ProceduralGeneration_Ten",
-		"ProceduralGeneration_Eleven",
+        ]
+      },
+      "deferred_maps": [
+        "ProceduralGeneration_Two",
+        "ProceduralGeneration_Three",
+        "ProceduralGeneration_Four",
+        "ProceduralGeneration_Five",
+        "ProceduralGeneration_Seven",
+        "ProceduralGeneration_Eight",
+        "ProceduralGeneration_Ten",
+        "ProceduralGeneration_Eleven",
         "ProceduralGeneration_21"
-	  ],
-	  "sub_sequences": {
-		"_note": "Focused sub-sequences in branch tracks â€” see their own sequence JSONs",
-		"grammar_systems": "3 maps â€” Markov, N-grams, Voxel Grammar",
-		"spatial_partitioning": "4 maps â€” Voronoi, Delaunay, BSP, Poisson",
-		"constraint_solvers": "3 maps â€” WFC, Boolean patterns",
-		"isosurfaces": "3 maps â€” Marching cubes, cave, gallery",
-		"higher_dimensions": "4 maps â€” Tesseract, 16-cell, portals"
-	  },
-	  "references": {
-		"reorg_doc": "doc/PROCEDURAL_GENERATION_REORGANIZATION.md",
-		"algorithm_categories": "algorithms/proceduralgeneration/ (9 folders)"
-	  },
-	  "artifact_groups": [
-		{
-		  "map": "PG_Genetic_Evolution",
-		  "position": "intro",
-		  "artifacts": [
+      ],
+      "sub_sequences": {
+        "_note": "Focused sub-sequences in branch tracks â€” see their own sequence JSONs",
+        "grammar_systems": "3 maps â€” Markov, N-grams, Voxel Grammar",
+        "spatial_partitioning": "4 maps â€” Voronoi, Delaunay, BSP, Poisson",
+        "constraint_solvers": "3 maps â€” WFC, Boolean patterns",
+        "isosurfaces": "3 maps â€” Marching cubes, cave, gallery",
+        "higher_dimensions": "4 maps â€” Tesseract, 16-cell, portals"
+      },
+      "references": {
+        "reorg_doc": "doc/PROCEDURAL_GENERATION_REORGANIZATION.md",
+        "algorithm_categories": "algorithms/proceduralgeneration/ (9 folders)"
+      },
+      "artifact_groups": [
+        {
+          "map": "PG_Genetic_Evolution",
+          "position": "intro",
+          "artifacts": [
             "GeneticProgramming"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Heavy compute solo map: 3D creatures evolve through selection pressure. Genetic programming as dramatic opener — evolution without explicit design."
-		},
-		{
-		  "map": "PG_Space_Colonization",
-		  "position": "foundation",
-		  "artifacts": [
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Heavy compute solo map: 3D creatures evolve through selection pressure. Genetic programming as dramatic opener — evolution without explicit design."
+        },
+        {
+          "map": "PG_Space_Colonization",
+          "position": "foundation",
+          "artifacts": [
             "space_colonization_algorithm"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Heavy compute solo map: trees grow toward attractors via space colonization. Branching structure emerges from point-cloud competition — growth without blueprint."
-		},
-		{
-		  "map": "PG_Percolation_Network",
-		  "position": "foundation",
-		  "artifacts": [
-			"dark_sphere",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Heavy compute solo map: trees grow toward attractors via space colonization. Branching structure emerges from point-cloud competition — growth without blueprint."
+        },
+        {
+          "map": "PG_Percolation_Network",
+          "position": "foundation",
+          "artifacts": [
+            "dark_sphere",
             "percolationnetwork_ca"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Heavy compute solo map: percolation network CA tests connectivity thresholds in random grids. Dark sphere anchors the visual field as clusters form or fragment at the critical probability."
-		},
-		{
-		  "map": "PG_Branching_Growth",
-		  "position": "exploration",
-		  "artifacts": [
-			"branching_growth_algorithm",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Heavy compute solo map: percolation network CA tests connectivity thresholds in random grids. Dark sphere anchors the visual field as clusters form or fragment at the critical probability."
+        },
+        {
+          "map": "PG_Branching_Growth",
+          "position": "exploration",
+          "artifacts": [
+            "branching_growth_algorithm",
             "organic_space"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Two growth strategies compared: branching algorithm builds tree-like structures toward attractors, organic noise space sculpts terrain from Perlin fields. Medium compute, safe to pair."
-		},
-		{
-		  "map": "PG_Caves_Mazes",
-		  "position": "integration",
-		  "artifacts": [
-			"caverandomwalk",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Two growth strategies compared: branching algorithm builds tree-like structures toward attractors, organic noise space sculpts terrain from Perlin fields. Medium compute, safe to pair."
+        },
+        {
+          "map": "PG_Caves_Mazes",
+          "position": "integration",
+          "artifacts": [
+            "caverandomwalk",
             "maze_generation"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Procedural exploration spaces: cave random walk carves tunnels through solid rock, maze generation builds corridors from recursive backtracking. Two strategies for explorable worlds."
-		},
-		{
-		  "map": "PG_Sculpted_Forms",
-		  "position": "integration",
-		  "artifacts": [
-			"cube_mound_scene",
-			"dome",
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Procedural exploration spaces: cave random walk carves tunnels through solid rock, maze generation builds corridors from recursive backtracking. Two strategies for explorable worlds."
+        },
+        {
+          "map": "PG_Sculpted_Forms",
+          "position": "integration",
+          "artifacts": [
+            "cube_mound_scene",
+            "dome",
             "layered_membrane"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Geometric construction: cube mound accumulates voxels, dome subdivides icosahedra, layered membrane stacks transparent surfaces. Three ways rules sculpt form from accumulation."
-		},
-		{
-		  "map": "PG_Mirrored_Patterns",
-		  "position": "synthesis",
-		  "artifacts": [
-			"mirror_cellular_texture_for_3d",
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Geometric construction: cube mound accumulates voxels, dome subdivides icosahedra, layered membrane stacks transparent surfaces. Three ways rules sculpt form from accumulation."
+        },
+        {
+          "map": "PG_Mirrored_Patterns",
+          "position": "synthesis",
+          "artifacts": [
+            "mirror_cellular_texture_for_3d",
             "rhizomatic_maze_space"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "Pattern from reflection and branching: mirrored cellular texture wraps CA output symmetrically onto 3D form, rhizomatic maze builds non-hierarchical branching networks. Light compute synthesis."
-		}
-	  ]
-	}
+          ],
+          "size_budget": "world_scale",
+          "rationale": "Pattern from reflection and branching: mirrored cellular texture wraps CA output symmetrically onto 3D form, rhizomatic maze builds non-hierarchical branching networks. Light compute synthesis."
+        }
+      ]
+    }
   },
   "artifact_groups": [
-	{
-	  "map": "PG_Genetic_Evolution",
-	  "position": "intro",
-	  "artifacts": [
+    {
+      "map": "PG_Genetic_Evolution",
+      "position": "intro",
+      "artifacts": [
         "GeneticProgramming"
-	  ],
-	  "size_budget": "environment",
-	  "rationale": "Heavy compute solo map. Genetic programming 3D creatures as dramatic sequence opener."
-	},
-	{
-	  "map": "PG_Space_Colonization",
-	  "position": "foundation",
-	  "artifacts": [
+      ],
+      "size_budget": "environment",
+      "rationale": "Heavy compute solo map. Genetic programming 3D creatures as dramatic sequence opener."
+    },
+    {
+      "map": "PG_Space_Colonization",
+      "position": "foundation",
+      "artifacts": [
         "space_colonization_algorithm"
-	  ],
-	  "size_budget": "environment",
-	  "rationale": "Heavy compute solo map. Trees grow toward attractors, building on evolutionary concept."
-	},
-	{
-	  "map": "PG_Percolation_Network",
-	  "position": "foundation",
-	  "artifacts": [
-		"dark_sphere",
+      ],
+      "size_budget": "environment",
+      "rationale": "Heavy compute solo map. Trees grow toward attractors, building on evolutionary concept."
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "position": "foundation",
+      "artifacts": [
+        "dark_sphere",
         "percolationnetwork_ca"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Heavy compute solo map. Connectivity thresholds in random grids, cellular automata bridge."
-	},
-	{
-	  "map": "PG_Branching_Growth",
-	  "position": "exploration",
-	  "artifacts": [
-		"branching_growth_algorithm",
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Heavy compute solo map. Connectivity thresholds in random grids, cellular automata bridge."
+    },
+    {
+      "map": "PG_Branching_Growth",
+      "position": "exploration",
+      "artifacts": [
+        "branching_growth_algorithm",
         "organic_space"
-	  ],
-	  "size_budget": "mixed",
-	  "rationale": "Two growth strategies compared. Medium compute, safe to pair branching with organic noise."
-	},
-	{
-	  "map": "PG_Caves_Mazes",
-	  "position": "exploration",
-	  "artifacts": [
-		"caverandomwalk",
+      ],
+      "size_budget": "mixed",
+      "rationale": "Two growth strategies compared. Medium compute, safe to pair branching with organic noise."
+    },
+    {
+      "map": "PG_Caves_Mazes",
+      "position": "exploration",
+      "artifacts": [
+        "caverandomwalk",
         "maze_generation"
-	  ],
-	  "size_budget": "mixed",
-	  "rationale": "Procedural exploration spaces. Cave random walk and maze generation paired as complementary strategies."
-	},
-	{
-	  "map": "PG_Sculpted_Forms",
-	  "position": "integration",
-	  "artifacts": [
-		"cube_mound_scene",
-		"dome",
+      ],
+      "size_budget": "mixed",
+      "rationale": "Procedural exploration spaces. Cave random walk and maze generation paired as complementary strategies."
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "position": "integration",
+      "artifacts": [
+        "cube_mound_scene",
+        "dome",
         "layered_membrane"
-	  ],
-	  "size_budget": "mixed",
-	  "rationale": "Three geometric construction methods. Accumulation rules produce sculpted forms from different approaches."
-	},
-	{
-	  "map": "PG_Mirrored_Patterns",
-	  "position": "synthesis",
-	  "artifacts": [
-		"mirror_cellular_texture_for_3d",
+      ],
+      "size_budget": "mixed",
+      "rationale": "Three geometric construction methods. Accumulation rules produce sculpted forms from different approaches."
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "position": "synthesis",
+      "artifacts": [
+        "mirror_cellular_texture_for_3d",
         "rhizomatic_maze_space"
-	  ],
-	  "size_budget": "mixed",
-	  "rationale": "Pattern from reflection and branching. Light compute synthesis pairing mirrored CA texture with rhizomatic maze."
-	}
+      ],
+      "size_budget": "mixed",
+      "rationale": "Pattern from reflection and branching. Light compute synthesis pairing mirrored CA texture with rhizomatic maze."
+    }
   ],
   "world_phase": "organic"
 }
