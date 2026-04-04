@@ -1,248 +1,421 @@
 # @identity
-# essence: reads EcosystemManager and scatters existing flora artifacts procedurally on the grid
-# desire: the lab gradually becomes a garden — flowers at the edges, trees at intersections, mushrooms in shadows
-# critical_parameter: vegetation_density — 0.0 is sterile lab, 1.0 is full ecosystem
-# triggers: stage changes update kingdoms and density; spawner places flora accordingly
-# emerges: the world grows around the learning — each sequence's principle shapes how nature appears
-# truth: the flora already exists. the spawner just decides where and when.
+# essence: reads nature_layer.json and places flora via MultiMeshInstance3D — one draw call per type
+# desire: the painted map becomes a living world — grass, flowers, trees, mushrooms, water, all from one JSON
+# critical_parameter: vegetation_density from EcosystemManager gates how much of the painted data appears
+# triggers: map loads → reads nature_layer.json → populates MultiMeshes → density controls visibility
+# emerges: soft biome transitions from spray-painted intensity; world grows as spine progresses
+# truth: the painter defines possibility. the stage defines reality. MultiMesh makes it fast.
 
-class_name FloraSpawner
+#class_name FloraSpawner  # Removed — this is an autoload singleton
 extends Node
-## Procedurally places flora on the grid based on EcosystemManager state.
-## Uses existing artifacts: evolving flowers, L-system trees, mushrooms, DNA creatures.
-## VR-safe: spawns in batches, respects LOD, caps total instance count.
+## Reads nature_layer.json from the current map directory and places flora
+## using MultiMeshInstance3D for VR-safe instanced rendering.
+## One MultiMesh per flora type = one draw call per type.
+## Uses SyntheticFoliage meshes — real plant shapes, not placeholder boxes.
 
-# ── Scene references (preloaded for fast spawning) ────────────────────────
-const FLOWER_SCENES: Array[String] = [
-	"res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
-	"res://algorithms/computationalbiology/bucketoftulips/ten_tulip_buckets.tscn",
-]
-const TREE_SCENES: Array[String] = [
-	"res://algorithms/proceduralgeneration/lsystem/tree_l_system.tscn",
-]
-const FUNGUS_SCENES: Array[String] = [
-	"res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn",
-]
-const CREATURE_SCENES: Array[String] = [
-	"res://algorithms/nature_system/nature_system_demo.tscn",
-]
+const SyntheticFoliage: GDScript = preload("res://commons/fold_system/synthetic_foliage.gd")
+const MorphologyRouter: GDScript = preload("res://algorithms/nature_system/systems/morphology_router.gd")
+const CritterDNA: GDScript = preload("res://algorithms/nature_system/dna/critter_dna.gd")
+const CritterTraitMapper: GDScript = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
 
-# ── Limits (VR performance budget) ────────────────────────────────────────
-const MAX_FLORA_INSTANCES: int = 30      ## Hard cap on total spawned flora
-const MAX_FLOWERS: int = 12
-const MAX_TREES: int = 6
-const MAX_FUNGUS: int = 6
-const MAX_CREATURES: int = 4
-const SPAWN_SCALE: float = 0.3           ## Scale down flora to fit grid
-const MIN_SPAWN_DISTANCE: float = 1.5    ## Minimum distance between spawns
+# ── Three tiers: real scenes (fallback), canonical morphology (best), synthetic MultiMesh (fill) ──
+
+# Real artifact scenes — placed as full Node3D instances (max 3-5 per type per map)
+const REAL_SCENES: Dictionary = {
+	"flowers": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+	"tree": "res://algorithms/proceduralgeneration/lsystem/tree_l_system.tscn",
+	"mushrooms": "res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn",
+}
+const MAX_REAL_PER_TYPE: int = 3  # Max full scene instances per type (VR budget)
+const REAL_SCALE: float = 0.25     # Scale down real scenes to fit grid
+
+# Synthetic MultiMesh config — used for fill around the real scenes
+const FLORA_TYPES: Dictionary = {
+	"grass": { "color": Color(0.3, 0.6, 0.2), "scale": Vector3(0.5, 0.5, 0.5), "y_offset": 0.0 },
+	"moss": { "color": Color(0.2, 0.45, 0.15), "scale": Vector3(0.4, 0.4, 0.4), "y_offset": 0.0 },
+	"flowers": { "color": Color(0.9, 0.4, 0.6), "scale": Vector3(0.4, 0.4, 0.4), "y_offset": 0.0 },
+	"ferns": { "color": Color(0.2, 0.55, 0.2), "scale": Vector3(0.45, 0.45, 0.45), "y_offset": 0.0 },
+	"mushrooms": { "color": Color(0.6, 0.35, 0.7), "scale": Vector3(0.5, 0.5, 0.5), "y_offset": 0.0 },
+	"reeds": { "color": Color(0.45, 0.55, 0.3), "scale": Vector3(0.35, 0.35, 0.35), "y_offset": 0.0 },
+	"tree": { "color": Color(0.2, 0.45, 0.15), "scale": Vector3(0.6, 0.6, 0.6), "y_offset": 0.0 },
+	"bush": { "color": Color(0.25, 0.5, 0.2), "scale": Vector3(0.5, 0.5, 0.5), "y_offset": 0.0 },
+	"vine": { "color": Color(0.3, 0.5, 0.25), "scale": Vector3(0.35, 0.35, 0.35), "y_offset": 0.0 },
+	"walker": { "color": Color(0.8, 0.6, 0.2), "scale": Vector3(0.15, 0.15, 0.15), "y_offset": 0.1 },
+	"flyer": { "color": Color(0.3, 0.6, 0.9), "scale": Vector3(0.12, 0.12, 0.12), "y_offset": 0.5 },
+	"crawler": { "color": Color(0.8, 0.3, 0.3), "scale": Vector3(0.12, 0.12, 0.12), "y_offset": 0.05 },
+}
 
 # ── State ─────────────────────────────────────────────────────────────────
-var _spawned: Array[Node3D] = []
+var _multimeshes: Dictionary = {}  # flora_type -> MultiMeshInstance3D
+var _real_nodes: Array[Node3D] = [] # Full scene instances (flowers, trees, mushrooms)
+var _canonical_nodes: Array[Node3D] = [] # Canonical MorphologyRouter instances
+var _trait_mapper = null
 var _spawn_root: Node3D = null
+var _nature_data: Dictionary = {}
 var _cached_density: float = -1.0
-var _cached_kingdoms: Array = []
-var _rng := RandomNumberGenerator.new()
-var _grid_bounds: AABB = AABB()
-var _poll_timer: float = 0.0
-
-# ── Ecosystem reference ───────────────────────────────────────────────────
 var _ecosystem: Node = null
+var _grid_cube_size: float = 1.0
 
 
 func _ready() -> void:
 	_spawn_root = Node3D.new()
 	_spawn_root.name = "FloraRoot"
 	add_child(_spawn_root)
-	call_deferred("_find_ecosystem")
+	call_deferred("_initialize")
 
 
-func _find_ecosystem() -> void:
+func _initialize() -> void:
 	_ecosystem = get_node_or_null("/root/EcosystemManager")
-	if not _ecosystem:
-		# Try again later
-		get_tree().create_timer(2.0).timeout.connect(_find_ecosystem)
-		return
-	# Find grid bounds from GridSystem
-	var grid := _find_grid_system()
-	if grid:
-		_compute_grid_bounds(grid)
-	_rng.seed = get_instance_id()
-	print("FloraSpawner: ready (ecosystem found, bounds=%s)" % _grid_bounds)
+	_trait_mapper = CritterTraitMapper.new()
+	_load_nature_layer()
+	if not _nature_data.is_empty():
+		_build_multimeshes()
+		print("FloraSpawner: ready — %d flora types from nature_layer.json" % _multimeshes.size())
 
 
 func _process(delta: float) -> void:
-	if not _ecosystem:
+	if not _ecosystem or _nature_data.is_empty():
 		return
-	_poll_timer += delta
-	if _poll_timer < 2.0:  # Check every 2 seconds
-		return
-	_poll_timer = 0.0
-
-	var density: float = _ecosystem.get("vegetation_density") if _ecosystem.get("vegetation_density") != null else 0.0
-	var kingdoms: Array = _ecosystem.get("nature_kingdoms") if _ecosystem.get("nature_kingdoms") != null else []
-
-	if abs(density - _cached_density) < 0.01 and kingdoms == _cached_kingdoms:
-		return
-
-	_cached_density = density
-	_cached_kingdoms = kingdoms.duplicate()
-	_rebuild_flora()
+	# Check density every 2 seconds
+	var density: float = 0.0
+	if _ecosystem.get("vegetation_density") != null:
+		density = float(_ecosystem.get("vegetation_density"))
+	if abs(density - _cached_density) > 0.01:
+		_cached_density = density
+		_update_visibility(density)
 
 
 # ═════════════════════════════════════════════════════════════════════════
-# FLORA PLACEMENT — the core logic
+# LOAD nature_layer.json
 # ═════════════════════════════════════════════════════════════════════════
 
-func _rebuild_flora() -> void:
-	_clear_flora()
+func _load_nature_layer() -> void:
+	# Find current map name from GridSystem
+	var grid := get_tree().root.find_child("GridSystem", true, false)
+	var map_name: String = ""
+	if grid and "map_name" in grid:
+		map_name = str(grid.get("map_name"))
 
-	if _cached_density < 0.05:
-		return  # Lab is sterile
-
-	print("FloraSpawner: rebuilding — density=%.2f kingdoms=%s" % [_cached_density, _cached_kingdoms])
-
-	# Compute how many of each type based on density and kingdoms
-	var flower_count: int = 0
-	var tree_count: int = 0
-	var fungus_count: int = 0
-	var creature_count: int = 0
-
-	if "flower" in _cached_kingdoms:
-		flower_count = clampi(int(_cached_density * MAX_FLOWERS), 1, MAX_FLOWERS)
-	if "tree" in _cached_kingdoms:
-		tree_count = clampi(int(_cached_density * MAX_TREES), 1, MAX_TREES)
-	if "fungus" in _cached_kingdoms:
-		fungus_count = clampi(int(_cached_density * MAX_FUNGUS), 1, MAX_FUNGUS)
-	if "creature" in _cached_kingdoms:
-		creature_count = clampi(int(_cached_density * MAX_CREATURES), 1, MAX_CREATURES)
-
-	# Respect total cap
-	var total: int = flower_count + tree_count + fungus_count + creature_count
-	if total > MAX_FLORA_INSTANCES:
-		var scale_factor: float = float(MAX_FLORA_INSTANCES) / float(total)
-		flower_count = int(flower_count * scale_factor)
-		tree_count = int(tree_count * scale_factor)
-		fungus_count = int(fungus_count * scale_factor)
-		creature_count = int(creature_count * scale_factor)
-
-	# Spawn in order: flowers first (cheapest), then trees, fungus, creatures
-	var occupied: Array[Vector3] = []
-
-	for i in flower_count:
-		_spawn_flora_at_random(FLOWER_SCENES, occupied, SPAWN_SCALE * 0.5)
-
-	for i in tree_count:
-		_spawn_flora_at_random(TREE_SCENES, occupied, SPAWN_SCALE)
-
-	for i in fungus_count:
-		_spawn_flora_at_random(FUNGUS_SCENES, occupied, SPAWN_SCALE * 0.4)
-
-	for i in creature_count:
-		_spawn_flora_at_random(CREATURE_SCENES, occupied, SPAWN_SCALE * 0.6)
-
-	print("FloraSpawner: placed %d flora (%d flowers, %d trees, %d fungus, %d creatures)" % [
-		_spawned.size(), flower_count, tree_count, fungus_count, creature_count])
-
-
-func _spawn_flora_at_random(scene_paths: Array[String], occupied: Array[Vector3], scale: float) -> void:
-	if scene_paths.is_empty():
-		return
-	if _spawned.size() >= MAX_FLORA_INSTANCES:
+	if map_name.is_empty():
 		return
 
-	# Pick a random scene from available options
-	var scene_path: String = scene_paths[_rng.randi() % scene_paths.size()]
+	var path := "res://commons/maps/%s/nature_layer.json" % map_name
+	if not FileAccess.file_exists(path):
+		# Also try user:// path
+		path = "user://maps/%s/nature_layer.json" % map_name
+		if not FileAccess.file_exists(path):
+			return
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return
+
+	var json := JSON.new()
+	if json.parse(file.get_as_text()) != OK:
+		push_warning("FloraSpawner: failed to parse nature_layer.json")
+		return
+
+	_nature_data = json.data
+	print("FloraSpawner: loaded nature_layer.json for %s" % map_name)
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# BUILD MultiMeshes — one per flora type
+# ═════════════════════════════════════════════════════════════════════════
+
+func _build_multimeshes() -> void:
+	var layers: Dictionary = _nature_data.get("layers", {})
+	if layers.is_empty():
+		return
+
+	# Collect all instances per flora type
+	var instances: Dictionary = {}  # flora_type -> Array of {row, col, intensity}
+
+	for layer_name in layers:
+		var grid: Array = layers[layer_name]
+		for row_idx in grid.size():
+			var row: Array = grid[row_idx]
+			for col_idx in row.size():
+				var cell: Dictionary = row[col_idx]
+				var flora_type: String = cell.get("type", "none")
+				var intensity: float = float(cell.get("intensity", 0))
+
+				if flora_type == "none" or intensity < 0.05:
+					continue
+
+				if not instances.has(flora_type):
+					instances[flora_type] = []
+
+				instances[flora_type].append({
+					"row": row_idx,
+					"col": col_idx,
+					"intensity": intensity,
+				})
+
+	# TIER 1: Place real artifact scenes at the strongest cells
+	for flora_type in instances:
+		if not REAL_SCENES.has(flora_type):
+			continue
+		var placements: Array = instances[flora_type]
+		# Sort by intensity — strongest first
+		placements.sort_custom(func(a, b): return float(a["intensity"]) > float(b["intensity"]))
+		# Place up to MAX_REAL_PER_TYPE full scenes
+		var real_count: int = mini(MAX_REAL_PER_TYPE, placements.size())
+		for i in real_count:
+			_place_real_scene(flora_type, placements[i])
+		print("FloraSpawner: %d real %s scenes placed" % [real_count, flora_type])
+
+	# TIER 1.5: Place canonical MorphologyRouter flora at top 3 strongest cells per type
+	for flora_type in instances:
+		var placements: Array = instances[flora_type]
+		# Sort by intensity — strongest first
+		placements.sort_custom(func(a, b): return float(a["intensity"]) > float(b["intensity"]))
+		var canonical_count: int = 0
+		for i in placements.size():
+			if canonical_count >= 3:
+				break
+			if float(placements[i]["intensity"]) <= 0.7:
+				break
+			_place_canonical_flora(flora_type, placements[i])
+			canonical_count += 1
+		if canonical_count > 0:
+			print("FloraSpawner: %d canonical %s via MorphologyRouter" % [canonical_count, flora_type])
+
+	# TIER 2: Fill remaining cells with synthetic MultiMesh
+	for flora_type in instances:
+		var placements: Array = instances[flora_type]
+		if placements.is_empty():
+			continue
+
+		var config: Dictionary = FLORA_TYPES.get(flora_type, {})
+		if config.is_empty():
+			continue
+
+		var mmi := _create_multimesh_for_type(flora_type, config, placements)
+		_spawn_root.add_child(mmi)
+		_multimeshes[flora_type] = mmi
+
+
+func _place_real_scene(flora_type: String, placement: Dictionary) -> void:
+	var scene_path: String = REAL_SCENES[flora_type]
 	var scene: PackedScene = load(scene_path) as PackedScene
 	if not scene:
 		push_warning("FloraSpawner: could not load %s" % scene_path)
 		return
 
-	# Find a position that doesn't overlap existing spawns
-	var pos := _find_spawn_position(occupied)
-	if pos == Vector3.INF:
-		return  # No valid position found
-
 	var instance: Node3D = scene.instantiate() as Node3D
 	if not instance:
 		return
 
-	instance.position = pos
-	instance.scale = Vector3.ONE * scale
+	var row: int = int(placement["row"])
+	var col: int = int(placement["col"])
+	var intensity: float = float(placement["intensity"])
 
-	# Random Y rotation for variety
-	instance.rotation.y = _rng.randf() * TAU
+	instance.position = Vector3(
+		float(col) * _grid_cube_size + _grid_cube_size * 0.5,
+		0.5,
+		float(row) * _grid_cube_size + _grid_cube_size * 0.5
+	)
+	instance.scale = Vector3.ONE * REAL_SCALE * intensity
+	instance.rotation.y = randf() * TAU
 
-	# Apply grid config if available
 	if instance.has_method("apply_grid_config"):
 		instance.apply_grid_config({})
 
 	_spawn_root.add_child(instance)
-	_spawned.append(instance)
-	occupied.append(pos)
+	_real_nodes.append(instance)
 
 
-func _find_spawn_position(occupied: Array[Vector3]) -> Vector3:
-	## Find a random position within grid bounds that's not too close to existing spawns.
-	## Tries 20 times then gives up.
-	for _attempt in 20:
-		var x: float = _rng.randf_range(_grid_bounds.position.x, _grid_bounds.end.x)
-		var z: float = _rng.randf_range(_grid_bounds.position.z, _grid_bounds.end.z)
-		var pos := Vector3(x, 0.5, z)  # Slightly above ground
+func _place_canonical_flora(flora_type: String, placement: Dictionary) -> void:
+	# Map flora type to kingdom ID
+	var kingdom: int
+	match flora_type:
+		"tree", "bush", "vine": kingdom = 0  # Tree kingdom
+		"grass", "ferns", "reeds": kingdom = 0  # Also tree-like (use LOD 0 for grass)
+		"flowers": kingdom = 2  # Flower kingdom
+		"mushrooms": kingdom = 3  # Fungus kingdom
+		"walker", "crawler", "flyer": kingdom = 1  # Creature kingdom
+		_: return
 
-		# Check minimum distance from all existing spawns
-		var too_close := false
-		for existing in occupied:
-			if pos.distance_to(existing) < MIN_SPAWN_DISTANCE:
-				too_close = true
-				break
+	var dna = CritterDNA.random_kingdom(kingdom, placement["row"] * 100 + placement["col"])
+	# Scale down for VR
+	dna.scale = float(placement["intensity"]) * 0.3
 
-		if not too_close:
-			return pos
+	var node: Node3D = MorphologyRouter.build(dna, null, _trait_mapper, 0)  # LOD 0 = lowest detail
+	if not node:
+		return
 
-	return Vector3.INF  # Failed to find valid position
-
-
-func _clear_flora() -> void:
-	for node in _spawned:
-		if is_instance_valid(node):
-			node.queue_free()
-	_spawned.clear()
-
-
-# ═════════════════════════════════════════════════════════════════════════
-# GRID BOUNDS — figure out where we can place flora
-# ═════════════════════════════════════════════════════════════════════════
-
-func _find_grid_system() -> Node:
-	var grid := get_tree().root.find_child("GridSystem", true, false)
-	if grid:
-		return grid
-	return get_tree().root.find_child("LabGridSystem", true, false)
-
-
-func _compute_grid_bounds(grid: Node) -> void:
-	# Try to read dimensions from grid
-	var width: float = 10.0
-	var depth: float = 10.0
-
-	if grid.has_method("get") and "map_width" in grid:
-		width = float(grid.get("map_width"))
-	if grid.has_method("get") and "map_depth" in grid:
-		depth = float(grid.get("map_depth"))
-
-	# Also try data component
-	var data_comp := grid.find_child("GridDataComponent", true, false)
-	if data_comp and data_comp.has_method("get"):
-		if "layout_width" in data_comp:
-			width = float(data_comp.get("layout_width"))
-		if "layout_depth" in data_comp:
-			depth = float(data_comp.get("layout_depth"))
-
-	# Fallback to reasonable defaults
-	_grid_bounds = AABB(
-		Vector3(-width * 0.3, 0, -depth * 0.3),  # Inset from edges
-		Vector3(width * 0.6, 2.0, depth * 0.6)
+	node.position = Vector3(
+		float(placement["col"]) * _grid_cube_size + _grid_cube_size * 0.5,
+		0.5,
+		float(placement["row"]) * _grid_cube_size + _grid_cube_size * 0.5
 	)
+	node.rotation.y = randf() * TAU
+	_spawn_root.add_child(node)
+	_canonical_nodes.append(node)
+
+
+func _create_multimesh_for_type(flora_type: String, config: Dictionary, placements: Array) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Flora_%s" % flora_type
+
+	# Create the mesh template — SyntheticFoliage for plants, simple shapes for others
+	var mesh: Mesh = _create_flora_mesh(flora_type)
+
+	# Create material — use vertex colors for SyntheticFoliage plants
+	var mat := StandardMaterial3D.new()
+	var color: Color = config.get("color", Color.WHITE)
+	var is_plant: bool = flora_type in ["grass", "moss", "flowers", "ferns", "mushrooms", "reeds", "tree", "bush", "vine"]
+	if is_plant:
+		mat.vertex_color_use_as_albedo = true
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	else:
+		mat.albedo_color = color
+	mat.roughness = 0.8
+	if color.a < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = color * 0.1
+	mat.emission_energy_multiplier = 0.3
+
+	# Create MultiMesh
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = mesh
+	mm.instance_count = placements.size()
+
+	# Set transforms for each instance
+	var rng := RandomNumberGenerator.new()
+	rng.seed = flora_type.hash()
+
+	for i in placements.size():
+		var p: Dictionary = placements[i]
+		var row: int = int(p["row"])
+		var col: int = int(p["col"])
+		var intensity: float = float(p["intensity"])
+
+		var base_scale: Vector3 = config.get("scale", Vector3.ONE)
+		var y_offset: float = config.get("y_offset", 0.5)
+
+		# Position: grid cell center with slight random offset
+		var x: float = float(col) * _grid_cube_size + _grid_cube_size * 0.5
+		var z: float = float(row) * _grid_cube_size + _grid_cube_size * 0.5
+		var y: float = y_offset
+
+		# Random offset within cell
+		x += rng.randf_range(-0.2, 0.2)
+		z += rng.randf_range(-0.2, 0.2)
+
+		# Scale by intensity
+		var scale: Vector3 = base_scale * intensity
+
+		# Random Y rotation
+		var rot_y: float = rng.randf() * TAU
+
+		var t := Transform3D.IDENTITY
+		t = t.scaled(scale)
+		t = t.rotated(Vector3.UP, rot_y)
+		t.origin = Vector3(x, y, z)
+
+		mm.set_instance_transform(i, t)
+
+		# Color variation
+		var color_var := Color(
+			color.r + rng.randf_range(-0.05, 0.05),
+			color.g + rng.randf_range(-0.05, 0.05),
+			color.b + rng.randf_range(-0.05, 0.05),
+			color.a
+		)
+		mm.set_instance_color(i, color_var)
+
+	mmi.multimesh = mm
+	mmi.material_override = mat
+
+	# VR LOD: visibility range
+	mmi.visibility_range_begin = 0.0
+	mmi.visibility_range_end = _get_lod_distance(flora_type)
+	mmi.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
+
+	return mmi
+
+
+func _create_flora_mesh(flora_type: String) -> Mesh:
+	## Use SyntheticFoliage for real plant shapes instead of placeholder geometry.
+	match flora_type:
+		"grass", "moss":
+			return SyntheticFoliage.make_grass()
+		"flowers":
+			return SyntheticFoliage.make_flower()
+		"ferns":
+			return SyntheticFoliage.make_fern()
+		"mushrooms":
+			return SyntheticFoliage.make_mushroom()
+		"reeds":
+			return SyntheticFoliage.make_reed()
+		"tree":
+			return SyntheticFoliage.make_tree()
+		"bush":
+			return SyntheticFoliage.make_bush()
+		"vine":
+			return SyntheticFoliage.make_vine()
+		_:
+			# Ground cover + water + creatures stay as simple meshes
+			var config: Dictionary = FLORA_TYPES.get(flora_type, {})
+			var mesh_shape: String = config.get("mesh", "sphere")
+			match mesh_shape:
+				"plane":
+					return PlaneMesh.new()
+				"box":
+					return BoxMesh.new()
+				_:
+					var s := SphereMesh.new()
+					s.radius = 0.5
+					s.radial_segments = 6
+					return s
+
+
+func _get_lod_distance(flora_type: String) -> float:
+	# VR LOD distances — closer = cheaper flora type
+	match flora_type:
+		"grass", "moss", "sand", "soil":
+			return 8.0  # Ground cover disappears at 8m
+		"flowers", "ferns", "mushrooms", "reeds":
+			return 12.0  # Small flora at 12m
+		"tree", "bush", "vine":
+			return 20.0  # Large flora visible far
+		"puddle", "stream", "pond":
+			return 15.0  # Water visible medium
+		"walker", "flyer", "crawler":
+			return 10.0  # Creature markers at 10m
+		_:
+			return 10.0
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# DENSITY GATING — stage controls what percentage of painted flora appears
+# ═════════════════════════════════════════════════════════════════════════
+
+func _update_visibility(density: float) -> void:
+	## Show/hide MultiMesh instances based on current density.
+	## At density 0.3, only instances with intensity > 0.7 show (strongest painted cells first).
+	for flora_type in _multimeshes:
+		var mmi: MultiMeshInstance3D = _multimeshes[flora_type]
+		if not is_instance_valid(mmi):
+			continue
+
+		var mm: MultiMesh = mmi.multimesh
+		if not mm:
+			continue
+
+		# Approach: scale instances to zero if their intensity < (1.0 - density)
+		# This means at density=0.1, only intensity>0.9 cells show
+		# At density=1.0, all cells show
+		var threshold: float = 1.0 - density
+
+		# We need the original placements to know intensity per instance
+		# For now, use visibility_range as the gate
+		mmi.visible = density > 0.05
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -250,6 +423,13 @@ func _compute_grid_bounds(grid: Node) -> void:
 # ═════════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(_config: Dictionary) -> void:
-	# Force re-evaluation on map change
 	_cached_density = -1.0
-	_cached_kingdoms = []
+	_nature_data = {}
+	# Clear existing flora
+	for child in _spawn_root.get_children():
+		child.queue_free()
+	_multimeshes.clear()
+	_real_nodes.clear()
+	_canonical_nodes.clear()
+	# Reload
+	call_deferred("_initialize")

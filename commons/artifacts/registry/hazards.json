@@ -1671,6 +1671,34 @@
 			"complexity": "exhibition",
 			"dev_themes": ["fold_system"]
 		},
+		"foliage_showcase": {
+			"name": "Foliage Showcase",
+			"lookup_name": "foliage_showcase",
+			"description": "All 8 synthetic plant types side by side — grass, flower, fern, mushroom, reed, tree, bush, vine. Low-poly procedural meshes for MultiMesh instancing.",
+			"scene": "res://commons/fold_system/foliage_showcase.tscn",
+			"category": "hazards",
+			"tags": ["fold_system", "foliage", "plants", "procedural", "showcase"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "hazards",
+			"map_sequences": ["hazards"],
+			"complexity": "beginner",
+			"dev_themes": ["fold_system"]
+		},
+		"flora_landscape": {
+			"name": "Flora Landscape",
+			"lookup_name": "flora_landscape",
+			"description": "Renders the Folding Zoo nature_layer.json as a 3D landscape. Vertex-colored ground mesh with MultiMesh flora on top.",
+			"scene": "res://commons/fold_system/flora_landscape.tscn",
+			"category": "hazards",
+			"tags": ["fold_system", "nature", "landscape", "flora", "ground_mesh"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "hazards",
+			"map_sequences": ["hazards"],
+			"complexity": "exhibition",
+			"dev_themes": ["fold_system"]
+		},
 		"inflate_flock": {
 			"name": "Inflate Flock",
 			"lookup_name": "inflate_flock",

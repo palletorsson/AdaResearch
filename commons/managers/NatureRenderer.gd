@@ -3,7 +3,7 @@
 # Fog, sky color, ground tint, ambient particles — all driven by vegetation_density.
 # Lightweight: checks state once per second, tweens transitions, no per-frame alloc.
 
-class_name NatureRenderer
+#class_name NatureRenderer  # Removed — autoload singleton
 extends Node
 
 # -- Cached references --
