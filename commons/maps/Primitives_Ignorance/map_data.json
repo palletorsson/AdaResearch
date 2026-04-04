@@ -1,154 +1,154 @@
 {
   "map_info": {
-    "name": "07 Ignorance",
-    "lookup_name": "Primitives_Ignorance",
-    "description": "A deliberate epistemic reset. \"Primitive\" here names not a lowest form but a stage of unknowing: the point, line, and shape are re-encountered as constructs rather than givens. This map undermines formal mastery, revealing assumptions and blind spots that underlie geometric forms.",
-    "description_2": "New Primitive Forms - explore advanced procedural shapes and architectural elements",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 27,
-      "max_height": 4
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "primitives",
-      "estimated_time": "5-6 minutes",
-      "learning_objectives": ["Advanced primitives", "Procedural generation", "Architectural forms", "Parametric shapes"]
-    },
-    "title": "Limits of Geometric Knowledge"
+	"name": "07 Ignorance",
+	"lookup_name": "Primitives_Ignorance",
+	"description": "A deliberate epistemic reset. \"Primitive\" here names not a lowest form but a stage of unknowing: the point, line, and shape are re-encountered as constructs rather than givens. This map undermines formal mastery, revealing assumptions and blind spots that underlie geometric forms.",
+	"description_2": "New Primitive Forms - explore advanced procedural shapes and architectural elements",
+	"version": "1.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 9,
+	  "depth": 27,
+	  "max_height": 4
+	},
+	"metadata": {
+	  "difficulty": "intermediate",
+	  "category": "primitives",
+	  "estimated_time": "5-6 minutes",
+	  "learning_objectives": ["Advanced primitives", "Procedural generation", "Architectural forms", "Parametric shapes"]
+	},
+	"title": "Limits of Geometric Knowledge"
   },
   "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	},
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	}
   },
   "documentation": {
-    "summary": "Primitives_Ignorance - Epistemic Reset Pavilion",
-    "layout": "9x27 gallery runway with staggered plinth bands and a late teleporter exit.",
-    "objective": "Re-encounter primitives as constructs through resolution studies, variant solids, and architectural modules.",
-    "key_elements": ["`platonic_grabbables` at (3,4)", "Sphere LOD comparison (`sphere_high`/`sphere_mid`/`sphere_low`) at rows 11, 13, 15", "`star_primitive`, `truncatedtetrahedron`, and `capsule` at x=7 across rows 11-15", "`snap_octahedron_puzzle` at (4,17) with `grab_octahedron` supports at (2,17) and (6,17)", "`prism_block` strip at row 21", "`torus_radials_rings` + `capsule_radials_rings` pattern at row 23", "`diamonds` centerpiece at (4,25)", "`dark_sphere` at (4,8)", "Teleporter `t` at (4,23)", "Floating text `3t:Let_no_one_ignorant_of_geometry_enter_here` at (4,8)"]
+	"summary": "Primitives_Ignorance - Epistemic Reset Pavilion",
+	"layout": "9x27 gallery runway with staggered plinth bands and a late teleporter exit.",
+	"objective": "Re-encounter primitives as constructs through resolution studies, variant solids, and architectural modules.",
+	"key_elements": ["`platonic_grabbables` at (3,4)", "Sphere LOD comparison (`sphere_high`/`sphere_mid`/`sphere_low`) at rows 11, 13, 15", "`star_primitive`, `truncatedtetrahedron`, and `capsule` at x=7 across rows 11-15", "`snap_octahedron_puzzle` at (4,17) with `grab_octahedron` supports at (2,17) and (6,17)", "`prism_block` strip at row 21", "`torus_radials_rings` + `capsule_radials_rings` pattern at row 23", "`diamonds` centerpiece at (4,25)", "`dark_sphere` at (4,8)", "Teleporter `t` at (4,23)", "Floating text `3t:Let_no_one_ignorant_of_geometry_enter_here` at (4,8)"]
   },
   "lighting": {
-    "ambient_color": [0.4, 0.4, 0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.4, -0.7, -0.4],
-      "color": [1.0, 0.9, 0.8],
-      "energy": 1.2
-    }
+	"ambient_color": [0.4, 0.4, 0.5],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [-0.4, -0.7, -0.4],
+	  "color": [1.0, 0.9, 0.8],
+	  "energy": 1.2
+	}
   },
   "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [0.2, 0.3, 0.7]
-    }
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": true,
+	"enable_physics": true,
+	"auto_reveal_on_entry": false,
+	"initial_tile_visibility": "hidden_except_corners",
+	"background": {
+	  "type": "sky",
+	  "color": [0.2, 0.3, 0.7]
+	}
   },
   "layers": {
-    "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
-      ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
-      ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["3", "3", "3", "3", "1", "3", "3", "3", "3"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "0", "1", "2", "1", "2", "1", "2", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "2", "1", "2", "1", "2", "1", "2", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "2", "1", "2", "1", "2", "1", "2", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "2", "1", "1", "1", "2", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "2", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1", "1"],
-      ["0", "0", "0", "1", "1", "1", "0", "0", "0"],
-      ["0", "0", "0", "0", "0", "0", "0", "0", "0"],
-      ["0", "0", "0", "0", "0", "0", "0", "0", "0"]
-    ],
-    "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", "platonic_grabbables", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      ["library_rack:0:0#collection:primitives#layout:rack_spheres.json", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "hole_with_cones:30:0.5", " ", "sphere_high", " ", "sphere_high", " ", "star_primitive", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "righttriangle", " ", "sphere_mid", " ", "sphere_mid", " ", "truncatedtetrahedron", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "roughrock", " ", "sphere_low", " ", "sphere_low", " ", "capsule", " "],
-      ["library_rack:0:0#collection:primitives#layout:rack_octahedra.json", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "grab_octahedron:0:0:0.4", " ", "snap_octahedron_puzzle:0:0.5:0#fillhole:remove", " ", "grab_octahedron:0:0:0.4", " ", " "],
-      [" ", " ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "sphere:0:5.6", " ", " ", " ", " "],
-      [" ", " ", " ", "lshape:0:-0.5", " ", "lshape:180:-0.5", " ", " ", " "],
-      ["prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90", " ", "prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90"],
-      ["library_rack:0:0#collection:primitives#layout:rack_prisms.json", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:primitives#layout:rack_torus.json"],
-      ["torus_radials_rings:0:1:1#config:8:4", " ", "capsule_radials_rings:90:1:#radial:3#rings:3", "capsule_radials_rings:90:1:#radial:7#rings:3", " ", "capsule_radials_rings:90:1:#radial:7#rings:3", "capsule_radials_rings:90:1:#radial:3#rings:3", " ", "torus_radials_rings:0:1:1#config:8:4"],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "plus:0:1", " ", " ", "diamonds:0:1:0.6", " ", " ", "plus:0:1", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    ],
-    "utilities": [
-      ["sp", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "an", " ", " ", "3t:Let_no_one_ignorant_of_geometry_enter_here", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "wp", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    ]
+	"structure": [
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
+	  ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
+	  ["1", "1", "1", "2", "2", "2", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["3", "3", "3", "3", "1", "3", "3", "3", "3"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "0", "1", "2", "1", "2", "1", "2", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "2", "1", "2", "1", "2", "1", "2", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "2", "1", "2", "1", "2", "1", "2", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "2", "1", "1", "1", "2", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "2", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "0", "1", "1", "1", "1"],
+	  ["0", "0", "0", "1", "1", "1", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0", "0", "0"],
+	  ["0", "0", "0", "0", "0", "0", "0", "0", "0"]
+	],
+	"interactables": [
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", "platonic_grabbables", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["library_rack:0:0#collection:primitives#layout:rack_spheres.json", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "hole_with_cones:30:0.5", " ", "sphere_high", " ", "sphere_high", " ", "star_primitive", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "righttriangle", " ", "sphere_mid", " ", "sphere_mid", " ", "truncatedtetrahedron", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "roughrock", " ", "sphere_low", " ", "sphere_low", " ", "capsule", " "],
+	  ["library_rack:0:0#collection:primitives#layout:rack_octahedra.json", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "grab_octahedron:0:0:0.4", " ", "snap_octahedron_puzzle:0:0.5:0#fillhole:remove", " ", "grab_octahedron:0:0:0.4", " ", " "],
+	  [" ", " ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", "sphere:0:5.6", " ", " ", " ", " "],
+	  [" ", " ", " ", "lshape:0:-0.5", " ", "lshape:180:-0.5", " ", " ", " "],
+	  ["prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90", " ", "prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90"],
+	  ["library_rack:0:0#collection:primitives#layout:rack_prisms.json", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:primitives#layout:rack_torus.json"],
+	  ["torus_radials_rings:0:1:1#config:8:4", " ", "capsule_radials_rings:90:1:#radial:3#rings:3", "capsule_radials_rings:90:1:#radial:7#rings:3", " ", "capsule_radials_rings:90:1:#radial:7#rings:3", "capsule_radials_rings:90:1:#radial:3#rings:3", " ", "torus_radials_rings:0:1:1#config:8:4"],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "plus:0:1", " ", " ", "diamonds:0:1:0.6", " ", " ", "plus:0:1", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	],
+	"utilities": [
+	  ["sp", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "an", " ", " ", "3t:Let_no_one_ignorant_of_geometry_enter_here", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", "wp", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", "t", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	]
   }
 }

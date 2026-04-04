@@ -1,96 +1,96 @@
 {
   "map_info": {
-    "name": "Hazards Zoo — Origami & Rollers",
-    "lookup_name": "Hazards_Zoo",
-    "description": "Origami Folders and Sphere Rollers — creatures built from folding mathematics and compressed rolling forms. Part 1 of 7 in the Hazards bestiary.",
-    "version": "4.0",
-    "format": "json",
-    "dimensions": {
-      "width": 15,
-      "depth": 10,
-      "max_height": 3
-    },
-    "title": "Origami Folders and Sphere Rollers",
-    "metadata": {
-      "difficulty": "exhibition",
-      "category": "hazards",
-      "estimated_time": "exploration based",
-      "learning_objectives": ["Observe origami fold patterns in motion — Miura-ori, Kresling, kaleidocycle", "See how compressed rolling forms unfold to attack", "Watch personality progression possibilities"]
-    }
+	"name": "Hazards Zoo — Origami & Rollers",
+	"lookup_name": "Hazards_Zoo",
+	"description": "Origami Folders and Sphere Rollers — creatures built from folding mathematics and compressed rolling forms. Part 1 of 7 in the Hazards bestiary.",
+	"version": "4.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 15,
+	  "depth": 10,
+	  "max_height": 3
+	},
+	"title": "Origami Folders and Sphere Rollers",
+	"metadata": {
+	  "difficulty": "exhibition",
+	  "category": "hazards",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": ["Observe origami fold patterns in motion — Miura-ori, Kresling, kaleidocycle", "See how compressed rolling forms unfold to attack", "Watch personality progression possibilities"]
+	}
   },
   "spawn_points": {
-    "default": {
-      "position": [0.5, 1.8, 0.5],
-      "rotation": [0.0, 180.0, 0.0],
-      "description": "Entrance — facing the zoo rows"
-    }
+	"default": {
+	  "position": [0.5, 1.8, 0.5],
+	  "rotation": [0.0, 180.0, 0.0],
+	  "description": "Entrance — facing the zoo rows"
+	}
   },
   "tutorial_text": {
-    "hazards_zoo_origami": {
-      "title": "ORIGAMI FOLDERS",
-      "text": "Miura crawler, Kresling spire, Kaleidocycle, Scissor stalker, Pyre plane — creatures built from folding mathematics."
-    },
-    "hazards_zoo_rollers": {
-      "title": "SPHERE ROLLERS",
-      "text": "Armadillo droideka, Eggling, Origami droideka, Waterbomb enemy, Sphere droideka — they roll compressed, unfold to attack."
-    }
+	"hazards_zoo_origami": {
+	  "title": "ORIGAMI FOLDERS",
+	  "text": "Miura crawler, Kresling spire, Kaleidocycle, Scissor stalker, Pyre plane — creatures built from folding mathematics."
+	},
+	"hazards_zoo_rollers": {
+	  "title": "SPHERE ROLLERS",
+	  "text": "Armadillo droideka, Eggling, Origami droideka, Waterbomb enemy, Sphere droideka — they roll compressed, unfold to attack."
+	}
   },
   "lighting": {
-    "ambient_color": [0.7, 0.7, 0.85],
-    "ambient_energy": 0.4,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.3, -0.8, -0.2],
-      "color": [1.0, 0.98, 0.95],
-      "energy": 0.8
-    }
+	"ambient_color": [0.7, 0.7, 0.85],
+	"ambient_energy": 0.4,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [-0.3, -0.8, -0.2],
+	  "color": [1.0, 0.98, 0.95],
+	  "energy": 0.8
+	}
   },
   "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": false,
-    "enable_physics": true,
-    "background": {
-      "type": "sky",
-      "color": [0.08, 0.1, 0.18]
-    }
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": false,
+	"enable_physics": true,
+	"background": {
+	  "type": "sky",
+	  "color": [0.08, 0.1, 0.18]
+	}
   },
   "layers": {
-    "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
-    ],
-    "utilities": [
-      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-    ],
-    "interactables": [
-      [" ", " ", " ", " ", " ", "soft_stage_dashboard:0:1.2", " ", " ", " ", "progression_driver:0:0.8", " ", " ", " ", " ", "library_rack:180:1.5#collection:hazards#cols:6#rows:4"],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      ["tt:hazards_zoo_origami:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "miura_crawler", " ", "kresling_spire", " ", "kaleidocycle_enemy", " ", "scissor_stalker", " ", "origami_pyre_plane", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      ["tt:hazards_zoo_rollers:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "armadillo_droideka", " ", "armadillo_eggling", " ", "origami_droideka", " ", "waterbomb_enemy", " ", "sphere_droideka", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-    ]
+	"structure": [
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+	],
+	"utilities": [
+	  ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "t", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+	],
+	"interactables": [
+	  [" ", " ", " ", " ", " ", "soft_stage_dashboard:0:1.2", " ", " ", " ", "progression_driver:0:0.8", " ", " ", " ", " ", "library_rack:180:1.5#collection:hazards#cols:6#rows:4"],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:hazards_zoo_origami:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "miura_crawler", " ", "kresling_spire", " ", "kaleidocycle_enemy", " ", "scissor_stalker", " ", "origami_pyre_plane", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:hazards_zoo_rollers:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", "armadillo_droideka", " ", "armadillo_eggling", " ", "origami_droideka", " ", "waterbomb_enemy", " ", "sphere_droideka", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+	]
   }
 }

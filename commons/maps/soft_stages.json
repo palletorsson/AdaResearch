@@ -83,13 +83,13 @@
 				"ambient_preset": "perception_shift"
 			},
 			"hazards": {
-				"unlock_types": ["kresling_spire", "force_field"],
+				"unlock_types": ["kresling_spire", "force_field", "goomba_box", "shell_roller", "spring_hopper"],
 				"spawner_behavior": "active",
 				"personality_shift": {
 					"miura_crawler": "neutral",
 					"kaleidocycle_enemy": "wary"
 				},
-				"max_concurrent": 2
+				"max_concurrent": 3
 			},
 			"capability": {
 				"capacity_level": 3,
