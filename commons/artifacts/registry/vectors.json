@@ -117,6 +117,39 @@
 			"sequence": "forces",
 			"interaction": "grab"
 		},
+		"vector_addition_walk": {
+			"lookup_name": "vector_addition_walk",
+			"scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn",
+			"class_name": "VectorAdditionWalk",
+			"name": "Vector Addition Walk (Room Scale)",
+			"description": "Player-scale 3D vector addition. Walk inside a 3m coordinate grid, grab vector endpoints at body height, see parallelogram construction and component projections in real space.",
+			"qfep_connection": "Embodied composition: you ARE inside the vector space. Walk along X to feel the X component. Addition becomes spatial, not symbolic.",
+			"signals": [],
+			"interactions": [
+				"grab handle spheres to adjust vectors A and B",
+				"walk through the grid to see components",
+				"preset buttons for orthogonal/acute/3D configurations"
+			],
+			"parameters": {
+				"vector_a": "First vector (default 1.5, 0.5, 0)",
+				"vector_b": "Second vector (default 0.3, 1.2, 0.8)",
+				"grid_size": "Size of walkable grid in meters (default 3.0)",
+				"grid_divisions": "Grid lines per axis (default 6)",
+				"max_vector_length": "Maximum vector length (default 2.5)",
+				"footprint": [4, 4, 3],
+				"size_group": "environment"
+			},
+			"dev_themes": ["vectors"],
+			"dev_category": "vector_operations",
+			"category": "mathematics",
+			"complexity": "beginner",
+			"tags": ["vectors", "addition", "parallelogram", "room-scale", "walkable"],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"sequence": "forces",
+			"interaction": "grab"
+		},
 		"vector_subtraction_demo": {
 			"lookup_name": "vector_subtraction_demo",
 			"scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",

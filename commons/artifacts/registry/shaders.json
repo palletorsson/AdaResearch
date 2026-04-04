@@ -1103,6 +1103,36 @@
 				"visual",
 				"projection"
 			]
+		},
+		"shader_bibliotek": {
+			"name": "Substrate Bibliotek",
+			"lookup_name": "shader_bibliotek",
+			"description": "Freestanding wall of cubes — each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
+			"scene": "res://commons/artifacts/shader_bibliotek/shader_bibliotek.tscn",
+			"category": "shaders",
+			"tags": [
+				"shaders",
+				"substrate",
+				"library",
+				"showcase",
+				"wall",
+				"catalog"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["shaders"],
+			"sequence": "shaders",
+			"spatial_footprint": {
+				"grid_cells": [4, 1, 3],
+				"size_group": "medium"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"shaders",
+				"visual",
+				"substrate",
+				"library"
+			]
 		}
 	}
 }
