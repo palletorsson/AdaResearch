@@ -1215,51 +1215,29 @@ func _find_scene_manager():
 
 	return null
 
+## Cached sequence names — auto-discovered from res://commons/maps/sequences/*.json
+var _known_sequences_cache: Array = []
+
 func _is_sequence_name(name: String) -> bool:
-	"""Check if the name is a sequence name rather than a map name"""
-	var known_sequences = [
-		"primitives",
-		"transformation",
-		"tests",
-		"color",
-		"array_tutorial",
-		"meshestextures",
-		"randomness",
-		"vectors",
-		"fractals",
-		"cellularautomata",
-		"joints",
-		"wavefunctions",
-		"noise",
-		"forces",
-		"proceduralaudio",
-		"physicssimulation",
-		"softbodies",
-		"recursiveemergence",
-		"lsystems",
-		"swarmintelligence",
-		"patterngeneration",
-		"mosaicanalysis",
-		"proceduralgeneration",
-		"searchpathfinding",
-		"topology",
-		"graphtheory",
-		"computationalgeometry",
-		"machinelearning",
-		"criticalalgorithms",
-		"speculativecomputation",
-		"resourcemanagement",
-		"advancedlaboratory",
-		"qfeplaboratory",
-		"testmaps",
-		"grammar_systems",
-		"spatial_partitioning",
-		"constraint_solvers",
-		"isosurfaces",
-		"higher_dimensions",
-		"morphogenesis"
-	]
-	return name in known_sequences
+	if _known_sequences_cache.is_empty():
+		_known_sequences_cache = _discover_sequence_names()
+	return name in _known_sequences_cache
+
+## Scan the sequences directory for all .json files and extract their names.
+## Runs once, cached for the session.
+static func _discover_sequence_names() -> Array:
+	var names: Array = []
+	var dir := DirAccess.open("res://commons/maps/sequences")
+	if not dir:
+		push_warning("GridUtilitiesComponent: Could not open sequences directory for autodiscovery")
+		return names
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".json") and file_name != "sequence_index.json" and file_name != "templates.json":
+			names.append(file_name.get_basename())
+		file_name = dir.get_next()
+	return names
 
 # Debug: Print scene tree to help find SceneManager
 func _debug_print_scene_tree():
