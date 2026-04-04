@@ -20,6 +20,9 @@ const ENEMY_SCENES: Dictionary = {
 	"kaleidocycle_enemy": "res://commons/hazards/kaleidocycle/kaleidocycle_enemy.tscn",
 	"origami_droideka": "res://commons/hazards/armadillo_droideka/origami_droideka.tscn",
 	"armadillo_droideka": "res://commons/hazards/armadillo_droideka/armadillo_droideka.tscn",
+	"goomba_box": "res://commons/hazards/goomba_box/goomba_box.tscn",
+	"shell_roller": "res://commons/hazards/shell_roller/shell_roller.tscn",
+	"spring_hopper": "res://commons/hazards/spring_hopper/spring_hopper.tscn",
 }
 
 
