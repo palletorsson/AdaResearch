@@ -3,20 +3,20 @@
   "description": "Dynamic focus system — what matters, what works, what to try next",
   "current_focus": {
     "updated": "2026-03-28",
-    "primary": "Spine sequences: make every map in the 19 spine sequences walkable, beautiful, and teaching something",
+    "primary": "Rebuild all primitives maps using Map Studio. Learn by building. Primitives = first sequence = most important.",
     "secondary": [
-      "Spine priority: primitives, transformation, color, forces, array_tutorial",
-      "Fix VR walkability across all spine maps",
-      "Improve artifact quality in spine maps",
-      "Test spine flow: can a player walk the full curriculum?",
-      "Museum maps (mosaicanalysis) are secondary to spine"
+      "Use /map-studio to build each map from scratch",
+      "Study existing maps first (Point_One is the model)",
+      "Follow narrative structure: entry, teaching, exploration, reflection, exit",
+      "Test each map in Godot after building",
+      "The primitives sequence has 11 maps — rebuild all of them"
     ],
     "blocked": [],
     "resolved": [
       "VR floor plan height: y_offset fixed (commit 64ce68bf — 90->0)",
       "Flight mode: button conflicts resolved (commit 29a261e8 — LEFT X)"
     ],
-    "energy": "The spine IS the game. Everything else supports it. 19 sequences, ~150 maps. Make them work."
+    "energy": "Building is knowing. Rebuild the primitives maps to understand how to make ALL maps."
   },
   "productive_patterns": [
     {

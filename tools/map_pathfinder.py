@@ -551,12 +551,15 @@ def check_rules(graph: MapGraph) -> list[dict]:
             for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]
         )
         if not adjacent_reachable:
-            on_void = graph.hmap.get(pos, 0) == 0
+            art_h = graph.hmap.get(pos, 0)
+            on_void = art_h == 0
             suffix = " [on VOID]" if on_void else ""
+            # Unreachable artifacts are treated as view-only display pieces
+            # (isolated pedestals, elevated decorations, etc.) — WARN not ERROR
             issues.append({
                 "rule": 4,
-                "severity": "ERROR",
-                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={graph.hmap.get(pos, 0)} unreachable{suffix}",
+                "severity": "WARN",
+                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={art_h} unreachable (view-only){suffix}",
             })
 
     # Rule 5: Teleport must stand on y=0 (void) in structure

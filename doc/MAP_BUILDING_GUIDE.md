@@ -133,18 +133,32 @@ artifact_name:0:1.2:0#fillhole:remove → with group commands
 - Point_Trace: 7x14 (medium)
 - Average: 7 wide, 10-27 deep
 
-## Artifact Orientation (Current Limitation)
+## Artifact Reading Light
 
-Artifacts do NOT have a built-in "front face" property. You must:
-1. Know from experience which way they face
-2. Use `:rotation` parameter to rotate them (0, 90, 180, 270)
-3. Check captures at `/captures/artifacts/name/front.png`
+Artifacts store a `reading_light` in their registry `parameters` that describes how the artifact radiates readability toward the player. Based on light principals:
 
-**Convention:** Most artifacts face +Z (forward) by default.
-- `:0` = faces forward (+Z)
-- `:90` = faces right (+X)
-- `:180` = faces backward (-Z)
-- `:-90` or `:270` = faces left (-X)
+**Light types:**
+- **Omni** — readable from all sides, like a point light (sculptures, 3D objects you walk around)
+- **Spot** — cone of readability from a front face (displays, demos with a viewing sweet spot)
+- **Area** — flat directional projection, narrow cone (screens, paintings, info boards)
+
+**Properties:**
+```json
+"reading_light": {
+  "type": "spot",        // "omni" | "spot" | "area"
+  "direction": "+z",     // front face: "+z" | "-z" | "+x" | "-x" (ignored for omni)
+  "cone": 90,            // viewing angle in degrees (spot: 30-170, area: 45, omni: 360)
+  "radius": 3            // readable range in grid cells
+}
+```
+
+**Rotation mapping** (to point the front toward the player):
+- `direction: +z` → `:0` rotation
+- `direction: +x` → `:270` rotation
+- `direction: -z` → `:180` rotation
+- `direction: -x` → `:90` rotation
+
+**Edit** in the encyclopedia at `/scenes/detail` — the footprint card shows the light cone on the grid. Click to cycle direction, adjust cone and reach with sliders.
 
 **Footprint:** 669/1678 artifacts have `footprint: [w, h, d]` in registry.
 The rest need measurement or capture to understand their size.

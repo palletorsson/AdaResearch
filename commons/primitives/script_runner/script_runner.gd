@@ -96,8 +96,8 @@ const GRID_COLORS = {
 
 # Keywords for syntax highlighting
 const KEYWORDS = ["var", "func", "if", "else", "elif", "for", "while", "return",
-                  "class", "extends", "const", "enum", "signal", "await", "in",
-                  "true", "false", "null", "self", "print", "Vector3", "Color"]
+				  "class", "extends", "const", "enum", "signal", "await", "in",
+				  "true", "false", "null", "self", "print", "Vector3", "Color"]
 
 # Path to scripts JSON
 const SCRIPTS_PATH = "res://commons/primitives/script_runner/scripts.json"
@@ -1095,4 +1095,3 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			_reset_script()
 			play()
-
