@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/fold_system/zoo/folding_zoo.gd" id="1"]
+
+[node name="FoldingZoo" type="Node3D"]
+script = ExtResource("1")

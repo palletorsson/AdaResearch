@@ -1,0 +1,144 @@
+{
+  "map_info": {
+	"name": "Folding Zoo",
+	"lookup_name": "Folding_Zoo",
+	"description": "Every fold primitive in one room. Origami bird, deltahedron nets, helix ribbon, helix cylinder, Fibonacci snake — each with 5-stage progressions showing the fold principle: same vertices, same faces, only positions change.",
+	"version": "2.0",
+	"format": "json",
+	"dimensions": {
+	  "width": 14,
+	  "depth": 16,
+	  "max_height": 2
+	},
+	"title": "The Folding Zoo",
+	"metadata": {
+	  "difficulty": "exhibition",
+	  "category": "hazards",
+	  "estimated_time": "exploration based",
+	  "learning_objectives": [
+		"See fold_amount drive geometry from 0 to 1 across five primitive types",
+		"Verify same vertex and face count at every fold stage",
+        "Compare deltahedron nets, helix coils, pineapple cylinders, Fibonacci spirals, and origami bones"
+	  ]
+	}
+  },
+  "spawn_points": {
+	"default": {
+	  "position": [0.5, 1.8, 0.5],
+	  "rotation": [0.0, 180.0, 0.0],
+	  "description": "Entrance facing the fold exhibits"
+	}
+  },
+  "tutorial_text": {
+	"fold_principle": {
+	  "title": "THE FOLD PRINCIPLE",
+	  "text": "Same vertices, same faces, only positions change. Folding doesn't create or destroy material — it rearranges what's already there. Every exhibit here proves it."
+	},
+	"fold_deltahedra": {
+	  "title": "DELTAHEDRON NETS",
+	  "text": "Triangles can't deform. A closed convex deltahedron can't flex. The net IS the genome — tetrahedron (4f), octahedron (8f), icosahedron (20f)."
+	},
+	"fold_helices": {
+	  "title": "HELIX STRUCTURES",
+	  "text": "Sin and cos fold flat ribbons into spirals. The helix ribbon coils into DNA springs. The helix cylinder wraps a grid into a pineapple tube."
+	},
+	"fold_snake": {
+	  "title": "FIBONACCI SNAKE",
+	  "text": "Phi encodes rest. Sin encodes motion. A golden spiral unfurls into a slithering sine wave. The transition is the creature's lifecycle."
+	},
+	"fold_bird": {
+	  "title": "ORIGAMI BIRD",
+	  "text": "13 bone segments with Transformer-style activation windows. Legs deploy first, then neck, then wings, then head — a cascading reveal."
+	},
+	"fold_zoo_full": {
+	  "title": "THE FULL ZOO",
+	  "text": "Six zones: bone fold, chain fold, shell fold, state parade, misfold, spring tension. Debug overlays show live fold_amount, tension, energy, and misfold."
+	}
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next",
+	  "description": "Continue to next step",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	}
+  },
+  "lighting": {
+	"ambient_color": [0.5, 0.52, 0.58],
+	"ambient_energy": 0.45,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [-0.3, -0.8, -0.2],
+	  "color": [1.0, 0.98, 0.95],
+	  "energy": 0.9
+	}
+  },
+  "settings": {
+	"cube_size": 1.0,
+	"gutter": 0.0,
+	"show_grid": false,
+	"enable_physics": true,
+	"background": {
+	  "type": "sky",
+	  "color": [0.06, 0.07, 0.1]
+	}
+  },
+  "layers": {
+	"structure": [
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+	],
+	"utilities": [
+	  [" ", " ", "t", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_principle:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_deltahedra:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_helices:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_snake:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_bird:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  ["tt:fold_zoo_full:180:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+	],
+	"interactables": [
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "deltahedron_stages:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "helix_fold:0:0.5", " ", " ", " ", " ", "helix_cylinder:0:0.5", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "fibonacci_snake_stages:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "origami_bird:0:0.5", " ", "origami_bird:90:0.5", " ", "origami_bird:180:0.5", " ", "origami_bird:270:0.5", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "fold_demo_critter:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "inflate_flock:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "fold_wall:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+	]
+  }
+}
