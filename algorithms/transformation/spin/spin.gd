@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+class_name Spin
 
 # @identity
 # essence: MultiMesh phases: translate → translate+rotate → translate — rotation mid-sequence changes everything

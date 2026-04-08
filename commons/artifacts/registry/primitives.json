@@ -1209,7 +1209,7 @@
 		"cube_scene": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive. Tag syntax: cube_scene:rot:ytrans:scale#group:tagname (e.g., cube_scene:0:0:1#group:fillhole registers cube with tag 'fillhole' for puzzle events). Use 'visible':false in artifact_definitions to hide initially.",
+			"description": "A configurable cube scene used as reference geometry across the project. Its variants can be grabbed, scaled, subdivided, snapped, or augmented, but the cube remains the stable primitive beneath those state changes. That makes it ideal for seeing what a transformation preserves and what it alters. In the transformation sequence it functions as the baseline form against which other changes read clearly.",
 			"dev_themes": [
 				"art",
 				"core",
@@ -1244,7 +1244,22 @@
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
 			"size_group": "compact",
 			"tags": [
+				"primitives",
+				"transformation",
+				"cube",
+				"subdivision",
+				"interaction",
+				"geometry",
 				"2d"
+			],
+			"qfep_connection": "Transformation changes S while the cube serves as the invariant reference body. Because the base form is so legible, every modification becomes easy to compare against it.",
+			"gamwell_reference": "",
+			"capacity": "TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.",
+			"interactions": [
+				"grab cube variants and move them through space",
+				"compare scaled, subdivided, and snapped cube behaviors",
+				"attach or detach auxiliary utilities where present",
+				"use the cube as a baseline reference for other transformed forms"
 			]
 		},
 		"cube_scene_drag_points": {
@@ -4288,7 +4303,7 @@
 		"player_trace": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "player_trace.",
+			"description": "A recorder that turns the player's motion into a visible line in space. Every step writes another point, so translation through the room becomes geometry rather than a forgotten action. The artifact makes path and trajectory tangible, especially when compared against grids and axis-constrained motion. It turns movement into a time-indexed drawing.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -4317,7 +4332,22 @@
 			"scene": "res://commons/primitives/point/player_trace.tscn",
 			"size_group": "compact",
 			"tags": [
+				"transformation",
+				"path",
+				"trajectory",
+				"time",
+				"coordinates",
+				"trace",
 				"primitive"
+			],
+			"qfep_connection": "Transformation is recorded here as a trajectory through S over time. The body changes position continuously, while the trace preserves that history as form.",
+			"gamwell_reference": "",
+			"capacity": "SEE your own motion become a drawable path through time.",
+			"interactions": [
+				"walk through space to extend the trace",
+				"change trail_length to keep more or less motion history",
+				"compare your recorded path against grid or axis demonstrations",
+				"use the line as a visible record of translation over time"
 			]
 		},
 		"plus": {
@@ -4554,7 +4584,7 @@
 		"prism_block": {
 			"category": "unknown",
 			"complexity": "advanced",
-			"description": "Static-body triangular prism block with grid shader and collision.",
+			"description": "A triangular prism used as reference geometry when cubes are too symmetrical to show the difference clearly. Rotating or scaling it changes which faces dominate the view, so the artifact makes orientation and aspect easier to read. It is a reminder that transformations act on more than boxes. The prism broadens the learner's sense of what can stay invariant under change.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -4584,8 +4614,23 @@
 			"scene": "res://commons/primitives/prismes/prism_block.tscn",
 			"size_group": "compact",
 			"tags": [
+				"transformation",
+				"prism",
+				"geometry",
+				"reference",
+				"scale",
+				"rotation",
 				"2d",
 				"physics"
+			],
+			"qfep_connection": "Transformation changes pose and size while the prism's edge structure stays coherent. A less symmetric primitive makes preserved relations easier to notice.",
+			"gamwell_reference": "",
+			"capacity": "COMPARE how a non-cubic primitive responds to rotation and scaling.",
+			"interactions": [
+				"place the prism beside cubes as a comparison shape",
+				"inspect how triangular faces reorient under rotation",
+				"use the block as a reference for scaling exercises",
+				"compare its silhouette against more symmetric primitives"
 			]
 		},
 		"prismblock": {
@@ -5231,7 +5276,7 @@
 		"righttriangle": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Thin right-triangle prism leaning to the positive X side with grid shader material and adjustable size.",
+			"description": "A right triangle presented as a clean spatial reference. Translation and rotation can move it anywhere, but the ninety-degree relation remains the defining invariant. That makes it useful for reading orientation, perpendicularity, and angular preservation against more complex scenes. It keeps the idea of the right angle available as a diagnostic form.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -5260,7 +5305,22 @@
 			"scene": "res://commons/primitives/righttriangle/righttriangle.tscn",
 			"size_group": "compact",
 			"tags": [
+				"transformation",
+				"right_triangle",
+				"geometry",
+				"invariant",
+				"reference",
+				"rotation",
 				"2d"
+			],
+			"qfep_connection": "Transformation changes position and orientation while the right angle stays invariant. The artifact isolates what geometric identity survives motion.",
+			"gamwell_reference": "",
+			"capacity": "READ which properties survive rotation and translation because the right angle stays invariant.",
+			"interactions": [
+				"place the triangle beside rotating geometry as a reference",
+				"compare its hypotenuse and legs under different orientations",
+				"use it to read perpendicular relationships in the room",
+				"inspect how a thin 2D form behaves inside 3D space"
 			]
 		},
 		"rock_primitive": {

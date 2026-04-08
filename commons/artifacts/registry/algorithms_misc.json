@@ -2313,7 +2313,7 @@
 		"scale_me": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "scale_me",
+			"description": "A grab sphere that rescales the world around the player. The geometry keeps its proportions, but your reference body changes, so scale becomes something felt rather than merely calculated. That shift makes the same room read as intimate, toy-like, or monumental without changing its form. It is scale as embodiment.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -2341,7 +2341,22 @@
 			"scene": "res://algorithms/primitives/scaleme/scale_me.tscn",
 			"size_group": "compact",
 			"tags": [
+				"transformation",
+				"scale",
+				"embodiment",
+				"world_scale",
+				"perspective",
+				"interaction",
 				"algorithm"
+			],
+			"qfep_connection": "Pure S through uniform scaling: ratios are preserved while the reference frame changes. Identity survives, but the felt relation between body and world is transformed.",
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
+			"capacity": "FEEL uniform scaling as a change in bodily reference rather than a numeric ratio.",
+			"interactions": [
+				"grab the trigger sphere to rescale the world",
+				"compare the room before and after the scale shift",
+				"adjust scale_amount to test subtle versus monumental change",
+				"wait for the automatic reset to compare embodied reference frames"
 			]
 		},
 		"self_organizing_patterns": {

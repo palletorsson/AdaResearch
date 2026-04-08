@@ -191,7 +191,7 @@
 		"dark_sphere": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "An atmospheric dark sphere with pulsing purple emission and slow rotation — serves as an ambient marker and catalyst preview station in maps.",
+			"description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
 			"dev_themes": [
 				"grammar",
 				"l_systems",
@@ -235,8 +235,22 @@
 			},
 			"scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
 			"tags": [
+				"reference",
+				"atmosphere",
+				"sphere",
+				"scale_marker",
+				"lighting",
 				"geometry",
 				"procedural"
+			],
+			"qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+			"gamwell_reference": "",
+			"capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+			"interactions": [
+				"observe the pulsing sphere against transformed geometry",
+				"use it as a scale and occlusion reference in the room",
+				"compare its stable silhouette with more dynamic artifacts nearby",
+				"treat it as an atmospheric marker when reading spatial change"
 			]
 		},
 		"fractal_lsystem_string": {

@@ -1,4 +1,5 @@
 extends Node3D
+class_name TranslationCubeDemo
 
 # @identity
 # essence: constrained_translation — move only on allowed axis; sequential constraints: first UP, then SIDEWAYS

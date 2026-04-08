@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+class_name CarouselCake
 
 # @identity
 # essence: layer_speed[i] = base_speed * multiplier^i — exponential speed escalation across 8 rotating layers

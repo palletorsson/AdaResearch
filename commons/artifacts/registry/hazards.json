@@ -164,7 +164,7 @@
 		"catalyst_target": {
 			"category": "tools",
 			"complexity": "beginner",
-			"description": "Practice target for catalyst projectiles. A floating sphere with orbiting rings that flashes on hit. Can be static or moving via grid config.",
+			"description": "A practice target that flashes, explodes, and respawns when struck. Its visible states change quickly, but the target remains recognizably the same object across idle, hit, destroyed, and restored phases. Movement options add patrol and orbit patterns without changing that core identity. It is a compact lesson in state transition.",
 			"dev_themes": [
 				"gameplay",
 				"hazards"
@@ -185,10 +185,22 @@
 			"scene": "res://commons/hazards/becoming_catalyst/catalyst_target.tscn",
 			"size_group": "xlarge",
 			"tags": [
+				"transformation",
+				"state_change",
 				"target",
-				"catalyst",
+				"respawn",
+				"projectile",
 				"practice",
-				"projectile"
+				"catalyst"
+			],
+			"qfep_connection": "Transformation here is discrete state change: intact, flashing, destroyed, respawned. Identity persists while S moves through a small cycle of visibly distinct modes.",
+			"gamwell_reference": "",
+			"capacity": "TRACK a target through hit, destroy, and respawn states while keeping its identity legible.",
+			"interactions": [
+				"hit the target with catalyst projectiles",
+				"switch between static, patrolling, and orbiting motion via config",
+				"change the target shape to compare different visual states",
+				"watch the respawn loop reset the object after destruction"
 			]
 		},
 		"chromatic_field": {

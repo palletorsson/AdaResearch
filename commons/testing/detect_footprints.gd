@@ -318,8 +318,9 @@ func _load_sequence_artifacts(seq_id: String) -> Dictionary:
 				var json := JSON.new()
 				if json.parse(json_text) == OK and json.data is Dictionary:
 					var data: Dictionary = json.data
-					var sequences: Dictionary = data.get("sequences", {})
-					if sequences.has(seq_id):
+					var sequences_data: Variant = data.get("sequences", {})
+					if sequences_data is Dictionary and (sequences_data as Dictionary).has(seq_id):
+						var sequences: Dictionary = sequences_data
 						var seq: Dictionary = sequences[seq_id]
 						# Collect from artifact_groups
 						var groups: Array = seq.get("artifact_groups", [])

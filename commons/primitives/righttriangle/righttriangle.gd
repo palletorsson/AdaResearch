@@ -1,5 +1,6 @@
 # RightTriangle.gd - 90 degree right triangle leaning right in black
 extends Node3D
+class_name RightTriangle
 
 # @identity
 # essence: right_triangle(base, height) with 90° angle at origin — the geometric primitive of Pythagoras

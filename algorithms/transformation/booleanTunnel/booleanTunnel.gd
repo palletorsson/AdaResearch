@@ -1,4 +1,5 @@
 extends Node3D
+class_name BooleanTunnel
 
 # @identity
 # essence: hollow_cube[i].rotation_z += i * rotation_per_segment — accumulating rotation carves a twisted corridor

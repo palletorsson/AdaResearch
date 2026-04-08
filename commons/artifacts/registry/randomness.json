@@ -2853,7 +2853,7 @@
 		"rotate_grid_cubes": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Rotates grid cubes with configurable patterns including alternating directions and phase offsets for passable slopes.",
+			"description": "A grid of cubes rotated in repeating row-based patterns. The lattice stays fixed while orientation changes propagate across it, making the difference between flat and tilted sections immediately readable. Animation exposes rotation as a patterned field rather than a single isolated action. It shows how a transformation can be distributed across a structure.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -2869,9 +2869,23 @@
 			"scene": "res://algorithms/randomness/RotateGridCubes.tscn",
 			"sequence": "randomness",
 			"tags": [
-				"2d",
+				"transformation",
+				"rotation",
 				"grid",
+				"pattern",
+				"animation",
+				"lattice",
+				"2d",
 				"procedural"
+			],
+			"qfep_connection": "Transformation modifies orientation across S while the grid itself remains stable. Patterned rotation makes state change legible as repetition and variation on a fixed lattice.",
+			"gamwell_reference": "",
+			"capacity": "READ patterned rotation across a fixed lattice and compare flat rows against tilted ones.",
+			"interactions": [
+				"watch the rotation pattern move across rows",
+				"toggle animation on or off",
+				"change rot_amount and rot_amount_y to reshape the pattern",
+				"compare flat sections with rotated ramps or slopes"
 			]
 		},
 		"rotate_random_y": {

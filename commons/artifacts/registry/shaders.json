@@ -575,7 +575,7 @@
 		"science_screen": {
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "Large VR display showing 2D abstractions of nearby 3D artifacts. Detects grid-aware artifacts and renders simplified pixel-grid views with algorithm name, dimensions, and cell stats. The meeting point of 2D and 3D — split consciousness between body experience and visual understanding.",
+			"description": "A large display that projects nearby 3D artifacts into simplified 2D abstractions. The screen keeps the structure of the source object but changes its representational state, turning embodied experience into diagram. That makes it a useful bridge between moving through a form and reasoning about it. It stages projection as a transformation with both gains and losses.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -602,14 +602,25 @@
 			"sequence": "patterngeneration",
 			"size_group": "standard",
 			"tags": [
-				"display",
+				"projection",
+				"transformation",
 				"screen",
-				"viewport",
-				"2d",
 				"abstraction",
+				"2d",
 				"reflection",
+				"display",
+				"viewport",
 				"grid",
 				"configurable"
+			],
+			"qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+			"gamwell_reference": "",
+			"capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+			"interactions": [
+				"bring a grid-aware artifact near the screen",
+				"compare the embodied 3D object with its flat rendering",
+				"read algorithm labels and cell statistics on the display",
+				"use the screen to reflect on what projection keeps and discards"
 			]
 		},
 		"shader_01_shaping": {

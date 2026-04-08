@@ -1,4 +1,5 @@
 extends Node3D
+class_name RotateGridCubes
 
 ## RotateGridCubes.gd
 ## Rotation pattern: Z → flat → Y → flat → X(neg) → flat → All → flat

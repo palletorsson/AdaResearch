@@ -1,4 +1,5 @@
 extends "res://commons/primitives/point/grab_sphere.gd"
+class_name ScaleMe
 
 # @identity
 # essence: world.scale *= scale_amount on pickup — the player's reference frame grows, making everything feel tiny

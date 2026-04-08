@@ -890,7 +890,7 @@
 		"clipboard": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Clipboard for copy-paste operations and data transfer",
+			"description": "A world-space document you have to hold in order to read. Pages, code snippets, and tutorial fragments stay coherent while the object flips between states, positions, and content sets. Because it is grabbable, reading becomes an embodied interaction rather than a detached overlay. It is the sequence's stable carrier for changing information.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -918,7 +918,22 @@
 			"scene": "res://commons/context/clipboard/clipboard.tscn",
 			"size_group": "compact",
 			"tags": [
+				"interface",
+				"transformation",
+				"documentation",
+				"pagination",
+				"grabbable",
+				"vr",
 				"commons"
+			],
+			"qfep_connection": "Transformation changes the clipboard's state, page, and content while preserving a continuous reading object. It is S as interface transition rather than geometric motion.",
+			"gamwell_reference": "",
+			"capacity": "NAVIGATE paged tutorial content as a stateful object in the world.",
+			"interactions": [
+				"grab the clipboard to reveal it as a held document",
+				"flip pages with VR trigger or grip input",
+				"swap content via apply_grid_config page keys or tutorial IDs",
+				"drop the clipboard to finish the reading interaction"
 			]
 		},
 		"clipboard_large": {
@@ -2375,9 +2390,9 @@
 				"mixed"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				1.0,
+				1.0,
+				1.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "health_display",
@@ -2388,9 +2403,9 @@
 			"name": "health_display",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
@@ -2441,9 +2456,9 @@
 				"mixed"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				1.0,
+				1.0,
+				1.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "hits_reset_display",
@@ -2454,9 +2469,9 @@
 			"name": "hits_reset_display",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
@@ -3648,15 +3663,15 @@
 		"pick_up_cube": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Cartesian coordinate system, x y z godot",
+			"description": "A grab-and-carry cube that turns translation into a bodily action. The object does not change shape or orientation much; what matters is that its position is rewritten by the player's movement through space. In puzzle contexts that simple displacement becomes rule-bearing and consequential. It is translation reduced to a portable primitive.",
 			"dev_themes": [
 				"commons",
 				"mixed"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pick_up_cube",
@@ -3672,16 +3687,31 @@
 			"name": "Pick Up Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
 			"size_group": "compact",
 			"tags": [
+				"translation",
+				"grabbable",
+				"pickup",
+				"coordinates",
+				"puzzle",
+				"interaction",
 				"simulation"
+			],
+			"qfep_connection": "Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates translation as the simplest embodied state update.",
+			"gamwell_reference": "",
+			"capacity": "MOVE an object through space and understand translation as carried displacement.",
+			"interactions": [
+				"grab the cube and carry it through the map",
+				"drop it onto targets or through gates",
+				"change point or value settings through map config",
+				"compare object movement against static reference geometry"
 			]
 		},
 		"pickable_showcase": {
@@ -3719,15 +3749,15 @@
 		"pickup_gate": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "A blocking gate that opens when a specified number of pickup cubes are collected. Use pickup_gate#pickups:5 or pickup_gate#count:3#color:blue",
+			"description": "A blocking gate whose state depends on how many pickup cubes have crossed the threshold. Its geometry is simple, but its logic makes transformation legible as a rule: the gate is closed, then open, because enough translated objects changed the count. That turns motion into conditional infrastructure. It teaches that state change can be triggered by accumulated displacement.",
 			"dev_themes": [
 				"commons",
 				"mixed"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pickup_gate",
@@ -3736,16 +3766,31 @@
 			"name": "Pickup Gate",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
 			"scene": "res://commons/portals/pickup_gate.tscn",
 			"size_group": "compact",
 			"tags": [
+				"translation",
+				"gate",
+				"threshold",
+				"collection",
+				"state_change",
+				"puzzle",
 				"color"
+			],
+			"qfep_connection": "Transformation here is thresholded state change. Repeated object translations alter the count until the gate preserves a new open identity.",
+			"gamwell_reference": "",
+			"capacity": "REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.",
+			"interactions": [
+				"carry pickup cubes into the gate zone",
+				"configure how many pickups are required through map tokens",
+				"watch the gate open once the threshold is met",
+				"use gate color or count settings to stage different collection puzzles"
 			]
 		},
 		"player_position": {
