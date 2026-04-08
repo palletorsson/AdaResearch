@@ -359,7 +359,7 @@ func _frame_camera(instance: Node) -> void:
 		if aabb.size.length() > 0.01:
 			orbit_focus = aabb.get_center()
 			var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-			orbit_dist = max_dim * 2.0
+			orbit_dist = max_dim * 1.0
 
 	var offset := Vector3(
 		sin(_orbit_yaw) * cos(_orbit_pitch),

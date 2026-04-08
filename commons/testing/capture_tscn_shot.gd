@@ -233,7 +233,7 @@ func _run_capture() -> void:
 				var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
 				var horiz_dim: float = max(aabb.size.x, aabb.size.z)
 				if orbit_dist <= 0.01:
-					orbit_dist = max_dim * 2.0
+					orbit_dist = max_dim * 0.7
 				# Compensate for camera pitch on tall objects:
 				# The downward pitch wastes the bottom of the frame on ground
 				# while clipping the top. Shift focus upward proportionally.

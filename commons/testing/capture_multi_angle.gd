@@ -235,17 +235,7 @@ func _run_artifact_capture() -> void:
 	fill.shadow_enabled = false
 	scene_root.add_child(fill)
 
-	# Ground plane
-	var ground := MeshInstance3D.new()
-	var ground_mesh := PlaneMesh.new()
-	ground_mesh.size = Vector2(80, 80)
-	ground.mesh = ground_mesh
-	var ground_mat := StandardMaterial3D.new()
-	ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	ground.material_override = ground_mat
-	scene_root.add_child(ground)
-
-	# Load artifact from registry
+	# Load artifact from registry (ground added later if scene lacks its own)
 	var artifact_info: Dictionary = _find_artifact(_target)
 	if artifact_info.is_empty():
 		push_error("capture_multi_angle: Artifact '%s' not found in any registry" % _target)
@@ -280,50 +270,100 @@ func _run_artifact_capture() -> void:
 	await process_frame
 	await process_frame
 
+	# Disable any cameras the artifact created (they override our capture camera)
+	_disable_cameras_recursive(artifact)
+	camera.current = true
+
+	# Add ground plane only if artifact doesn't provide its own WorldEnvironment
+	var has_own_env := false
+	for child in (artifact as Node).get_children():
+		if child is WorldEnvironment:
+			has_own_env = true
+			break
+	if not has_own_env:
+		var ground := MeshInstance3D.new()
+		var ground_mesh := PlaneMesh.new()
+		ground_mesh.size = Vector2(16, 16)
+		ground.mesh = ground_mesh
+		var ground_mat := StandardMaterial3D.new()
+		ground_mat.albedo_color = Color(0.13, 0.13, 0.16)
+		ground_mat.roughness = 0.95
+		ground.material_override = ground_mat
+		scene_root.add_child(ground)
+
 	# Compute AABB for framing
 	var aabb: AABB = _get_combined_aabb(artifact as Node3D)
 	var orbit_focus: Vector3 = Vector3(0, 1.0, 0)
-	var orbit_distance: float = 5.0
+	var base_distance: float = 5.0
 
 	if aabb.size.length() > 0:
 		orbit_focus = aabb.get_center()
 		var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-		orbit_distance = max_dim * 1.2
-		print("capture_multi_angle [artifact]: AABB size=%s center=%s distance=%.1f" % [
-			aabb.size, orbit_focus, orbit_distance
+		base_distance = max_dim * 1.0
+		print("capture_multi_angle [artifact]: AABB size=%s center=%s base_dist=%.1f" % [
+			aabb.size, orbit_focus, base_distance
 		])
 
-	# Wait for rendering
+	# Wait for rendering (trails need time to build)
 	await create_timer(_wait_seconds).timeout
 	await process_frame
 	await process_frame
 
-	# Capture each angle
+	# --- ZOOM SWEEP: 3 distances (wide / sweet / tight), default = sweet ---
+	var zoom_factors: Array[float] = [1.4, 1.0, 0.65]
+
 	var saved: int = 0
 	for angle_def in ARTIFACT_ANGLES:
 		var angle_name: String = angle_def["name"]
 		var yaw: float = float(angle_def["yaw"])
 		var pitch: float = float(angle_def["pitch"])
 
-		var offset := Vector3(
+		# Capture at all 3 distances
+		for zi in range(zoom_factors.size()):
+			var zoom: float = zoom_factors[zi]
+			var dist: float = base_distance * zoom
+			var cam_offset := Vector3(
+				sin(yaw) * cos(pitch),
+				sin(pitch),
+				cos(yaw) * cos(pitch)
+			) * dist
+			camera.global_position = orbit_focus + cam_offset
+			camera.look_at(orbit_focus, Vector3.UP)
+
+			await process_frame
+			await process_frame
+			await create_timer(0.15).timeout
+			await process_frame
+
+			var img: Image = root.get_texture().get_image()
+			if img == null:
+				continue
+
+			# Save with zoom suffix (far/mid/close)
+			var zoom_name: String = ["far", "mid", "close"][zi]
+			var suffix: String = angle_name + "_" + zoom_name
+			var shot_path: String = _save_shot(suffix)
+			if not shot_path.is_empty():
+				print("capture_multi_angle [artifact]:   %s @ dist=%.1f -> %s" % [suffix, dist, shot_path])
+
+		# Save the wide zoom (full artifact visible) as the default
+		var sweet_dist: float = base_distance * zoom_factors[0]
+		var cam_offset := Vector3(
 			sin(yaw) * cos(pitch),
 			sin(pitch),
 			cos(yaw) * cos(pitch)
-		) * orbit_distance
-		camera.global_position = orbit_focus + offset
+		) * sweet_dist
+		camera.global_position = orbit_focus + cam_offset
 		camera.look_at(orbit_focus, Vector3.UP)
-
-		# Settle
-		await create_timer(_settle_seconds).timeout
 		await process_frame
 		await process_frame
 
 		var shot_path: String = _save_shot(angle_name)
 		if not shot_path.is_empty():
 			saved += 1
-			print("capture_multi_angle [artifact]: ✅ %s -> %s" % [angle_name, shot_path])
-		else:
-			push_error("capture_multi_angle [artifact]: ❌ Failed to save %s" % angle_name)
+			print("capture_multi_angle [artifact]: ✅ %s -> %s (dist=%.1f)" % [
+				angle_name, shot_path, sweet_dist
+			])
 
 	print("capture_multi_angle [artifact]: Done — %d/%d shots saved" % [saved, ARTIFACT_ANGLES.size()])
 	_save_report(saved)
@@ -366,6 +406,12 @@ func _save_report(saved_count: int) -> void:
 		file.store_string(JSON.stringify(report, "\t"))
 		file.close()
 		print("capture_multi_angle: Report -> %s" % report_path)
+
+func _disable_cameras_recursive(node: Node) -> void:
+	if node is Camera3D:
+		(node as Camera3D).current = false
+	for child in node.get_children():
+		_disable_cameras_recursive(child)
 
 func _hide_overlay_nodes(catalog: Node) -> void:
 	var names: Array[String] = [

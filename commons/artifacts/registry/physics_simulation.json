@@ -1,16 +1,16 @@
 {
 	"artifacts": {
 		"ChainSwing": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "ChainSwing",
+			"category": "forces",
+			"complexity": "intermediate",
+			"description": "A double-pendulum swing built from pin joints and rigid links. Two chain segments hang from an anchor beam, ending in a glowing seat that receives periodic sinusoidal force. The trail draws the seat's arc through space, revealing how constraints propagate force through a chain — each link amplifying or dampening the one above. Arrow keys let you push the swing manually, hunting for resonance where small inputs produce large arcs.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
+				5.0,
+				5.0,
 				1.0
 			],
 			"include_in_map_data": true,
@@ -22,29 +22,48 @@
 			"name": "ChainSwing",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
+					5.0,
+					5.0,
 					1.0
 				],
-				"size_group": "compact"
+				"size_group": "large"
 			},
 			"scene": "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
-			"size_group": "compact",
+			"size_group": "large",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"pin-joint",
+				"chain",
+				"pendulum",
+				"constraint",
+				"oscillation",
+				"trail",
+				"resonance",
+				"forces"
+			],
+			"qfep_connection": "Classical F — force as law transmitted through constraint chains. Each pin joint is a rule that permits rotation but forbids translation, and the emergent swing pattern is the system's negotiation between gravity and those rules.",
+			"gamwell_reference": "Mechanics of constrained motion, Lagrangian dynamics, coupled oscillators, double pendulum chaos",
+			"interactions": [
+				"watch the periodic drive swing the seat automatically",
+				"press arrow keys to push the seat left or right",
+				"observe the trail drawing the seat's motion history",
+				"notice how joint markers glow at constraint points"
+			],
+			"signals": [],
+			"capacity": "PREDICT how force propagates through a chain of pin joints by observing the relationship between driving frequency and swing amplitude."
 		},
 		"CharacterRagdoll": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "CharacterRagdoll",
+			"category": "forces",
+			"complexity": "intermediate",
+			"description": "A minimal ragdoll — one torso and one leg connected by a cone-twist joint at the hip. The joint limits swing to 35 degrees and twist to 25 degrees, mimicking the biomechanical range of a human hip. Press space to impulse the leg and watch how the cone-twist constraint channels the force into naturalistic swinging. This is the seed of character physics: from this single hip joint, the full ragdoll grows by adding more limbs and joints.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
 				1.0,
-				1.0,
+				5.0,
 				1.0
 			],
 			"include_in_map_data": true,
@@ -57,7 +76,7 @@
 			"parameters": {
 				"footprint": [
 					1.0,
-					1.0,
+					5.0,
 					1.0
 				],
 				"size_group": "compact"
@@ -65,20 +84,36 @@
 			"scene": "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
 			"size_group": "compact",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"cone-twist-joint",
+				"ragdoll",
+				"character",
+				"biomechanics",
+				"hip-joint",
+				"multi-body"
+			],
+			"qfep_connection": "Classical F moving toward phi — the cone-twist constraint at the hip is Form, but the emergent ragdoll motion hints at Entity. A body built from constraints begins to look like it has intention, even though it's purely mechanical.",
+			"gamwell_reference": "Ragdoll physics, biomechanical joint modeling, character simulation, constrained multi-body dynamics, hip joint kinematics",
+			"interactions": [
+				"press space to impulse the leg and watch hip-joint dynamics",
+				"observe how cone-twist limits produce naturalistic swing range",
+				"compare with ConeTwistBag for the same joint type on different geometry"
+			],
+			"signals": [],
+			"capacity": "BUILD a minimal ragdoll from rigid bodies and cone-twist joints and explain how joint limits produce biomechanically plausible motion."
 		},
 		"ConeTwistBag": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "ConeTwistBag",
+			"category": "forces",
+			"complexity": "intermediate",
+			"description": "A punching bag hanging from a fixed anchor via a cone-twist joint. The cone-twist constraint limits the bag's swing to a 45-degree cone while allowing only 15 degrees of twist — like a ball-and-socket joint with angular limits. Nudge the bag and watch it swing within its invisible cone boundary, then slowly settle as damping absorbs the energy. The joint's bias and softness parameters control how sharply the limits are enforced.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
+				6.0,
+				4.0,
 				1.0
 			],
 			"include_in_map_data": true,
@@ -90,30 +125,46 @@
 			"name": "ConeTwistBag",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
+					6.0,
+					4.0,
 					1.0
 				],
-				"size_group": "compact"
+				"size_group": "large"
 			},
 			"scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
-			"size_group": "compact",
+			"size_group": "large",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"cone-twist-joint",
+				"angular-constraint",
+				"swing",
+				"pendulum",
+				"biomechanics",
+				"damping"
+			],
+			"qfep_connection": "Classical F — the cone-twist joint as an angular constraint that defines a region of permitted motion. The swing span and twist span are the Form parameters; the emergent pendular motion within that cone is the system's behavior.",
+			"gamwell_reference": "Ball-and-socket joints, angular constraints, cone-twist mechanics, biomechanical joint limits, pendular dynamics",
+			"interactions": [
+				"press space to apply an impulse and watch the bag swing",
+				"observe the bag staying within its invisible cone boundary",
+				"notice how twist is more restricted than swing"
+			],
+			"signals": [],
+			"capacity": "DISTINGUISH between swing span and twist span in a cone-twist joint and predict how angular limits shape pendular motion."
 		},
 		"DrawbridgeHinge": {
-			"category": "unknown",
+			"category": "forces",
 			"complexity": "beginner",
-			"description": "DrawbridgeHinge",
+			"description": "A motorized drawbridge attached to a stone tower via a hinge joint. The motor rotates the bridge up and down within an 85-degree arc. Arrow keys control the motor velocity; when idle, the bridge gently oscillates with a sinusoidal drive. The hinge joint is the workhorse of mechanical constraint — one rotational degree of freedom, producing everything from doors to engines. Here it lifts a bridge, making the constraint visible as architecture.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				9.0,
+				6.0,
+				3.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "DrawbridgeHinge",
@@ -124,30 +175,47 @@
 			"name": "DrawbridgeHinge",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					9.0,
+					6.0,
+					3.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
 			"scene": "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"hinge-joint",
+				"motor",
+				"drawbridge",
+				"rotation",
+				"torque",
+				"angular-limit",
+				"architecture"
+			],
+			"qfep_connection": "Pure F — the hinge joint as the most intuitive constraint: one axis of rotation, everything else locked. The motor adds controllable energy, turning the constraint into a machine.",
+			"gamwell_reference": "Hinge mechanics, motorized joints, drawbridge engineering, single-axis rotation, torque and angular velocity",
+			"interactions": [
+				"press up/down arrow keys to control bridge motor velocity",
+				"watch idle oscillation when no keys are pressed",
+				"observe the hinge limit preventing over-rotation"
+			],
+			"signals": [],
+			"capacity": "CONTROL a motorized hinge joint and explain how angular limits and motor velocity combine to create mechanical behavior."
 		},
 		"GimbalStabilizer": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "GimbalStabilizer",
+			"category": "forces",
+			"complexity": "advanced",
+			"description": "A dual-hinge gimbal system with independent yaw and pitch control. Two motor-driven hinges are stacked orthogonally: one rotates freely around the vertical axis (yaw), the other is limited to plus-or-minus 45 degrees on the horizontal axis (pitch). Together they aim a payload in 3D space. The idle mode sweeps smoothly through a Lissajous-like pattern; arrow keys override with direct motor control. This demonstrates how composing multiple single-axis joints creates multi-axis articulation.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				3.0,
+				5.0,
+				3.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "GimbalStabilizer",
@@ -158,30 +226,48 @@
 			"name": "GimbalStabilizer",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					3.0,
+					5.0,
+					3.0
 				],
-				"size_group": "compact"
+				"size_group": "large"
 			},
 			"scene": "res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn",
-			"size_group": "compact",
+			"size_group": "large",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"hinge-joint",
+				"gimbal",
+				"yaw",
+				"pitch",
+				"motor",
+				"stabilizer",
+				"multi-axis",
+				"robotics"
+			],
+			"qfep_connection": "Composed F — two hinge constraints stacked orthogonally, each removing one degree of freedom while their composition allows two-axis aiming. The gimbal is Form squared: constraint upon constraint yielding expressive control.",
+			"gamwell_reference": "Gimbal systems, multi-axis rotation, Euler angles and gimbal lock, camera stabilization, robotic actuators, Lissajous figures",
+			"interactions": [
+				"press arrow keys to override yaw and pitch motors",
+				"watch the idle Lissajous-like sweep pattern",
+				"observe how pitch limits constrain vertical range while yaw is free"
+			],
+			"signals": [],
+			"capacity": "COMPOSE two orthogonal hinge joints into a gimbal system and predict how independent motor control on each axis produces 2D aiming."
 		},
 		"HingeCrank": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "HingeCrank",
+			"category": "forces",
+			"complexity": "intermediate",
+			"description": "A motorized crank mechanism combining three joint types into one machine. A hinge joint spins a wheel at constant velocity, a pin joint connects the wheel to a sliding rod, and a slider joint guides the rod along a rail. The result is rotary-to-linear conversion — the fundamental mechanism behind pistons, steam engines, and sewing machines. Watch how continuous rotation becomes reciprocating translation through the geometry of constraint.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
+				4.0,
 				1.0,
-				1.0,
-				1.0
+				2.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "HingeCrank",
@@ -192,17 +278,35 @@
 			"name": "HingeCrank",
 			"parameters": {
 				"footprint": [
+					4.0,
 					1.0,
-					1.0,
-					1.0
+					2.0
 				],
-				"size_group": "compact"
+				"size_group": "large"
 			},
 			"scene": "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
-			"size_group": "compact",
+			"size_group": "large",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"hinge-joint",
+				"slider-joint",
+				"pin-joint",
+				"crank",
+				"mechanism",
+				"motor",
+				"piston",
+				"kinematics"
+			],
+			"qfep_connection": "Classical F — three constraint rules (hinge, pin, slider) composed into a mechanism. Each joint removes degrees of freedom; together they channel rotary energy into linear work.",
+			"gamwell_reference": "Crank-slider mechanism, rotary-to-linear conversion, Watt linkage, mechanical advantage, kinematics of machines",
+			"interactions": [
+				"watch the motor-driven wheel spin and push the rod",
+				"observe how rotation converts to linear reciprocation",
+				"notice the slider rail constraining the rod's path"
+			],
+			"signals": [],
+			"capacity": "DESCRIBE how combining hinge, pin, and slider joints converts rotary motion to linear motion in a crank-slider mechanism."
 		},
 		"IKArm": {
 			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
@@ -214,16 +318,16 @@
 			]
 		},
 		"PendulumPin": {
-			"category": "unknown",
-			"complexity": "intermediate",
-			"description": "PendulumPin",
+			"category": "forces",
+			"complexity": "beginner",
+			"description": "The simplest joint demo — a single sphere suspended from a fixed anchor by a pin joint. Gravity pulls the bob down; the pin constraint keeps it tethered, converting potential energy into angular motion. The bob swings freely in 3D, slowly decaying as linear damping bleeds energy. This is the atom of the joints sequence: one constraint, one body, one degree of freedom worth watching.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
 				1.0,
-				1.0,
+				4.0,
 				1.0
 			],
 			"include_in_map_data": true,
@@ -236,7 +340,7 @@
 			"parameters": {
 				"footprint": [
 					1.0,
-					1.0,
+					4.0,
 					1.0
 				],
 				"size_group": "compact"
@@ -244,21 +348,37 @@
 			"scene": "res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",
 			"size_group": "compact",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"pin-joint",
+				"pendulum",
+				"harmonic-motion",
+				"damping",
+				"constraint",
+				"simple"
+			],
+			"qfep_connection": "Pure F — a single constraint rule (the pin) producing predictable periodic motion. The pendulum is Form at its most elementary: structure yields behavior.",
+			"gamwell_reference": "Simple pendulum mechanics, Galileo's isochronism, harmonic motion, single degree-of-freedom systems",
+			"interactions": [
+				"watch the bob swing from its initial nudge",
+				"press space to apply an impulse and restart the swing",
+				"observe how damping gradually reduces the arc"
+			],
+			"signals": [],
+			"capacity": "EXPLAIN how a pin joint constrains motion to rotation around a fixed point and how damping converts oscillation into stillness."
 		},
 		"SliderPress": {
-			"category": "unknown",
+			"category": "forces",
 			"complexity": "intermediate",
-			"description": "Linear slider joint — piston/rail motion along one axis",
+			"description": "A piston and rail system demonstrating the slider joint — one translational degree of freedom. The piston oscillates along a Z-axis track with controllable motor speed and force via VR sliders. Real-time labels show position and velocity, making the relationship between motor parameters and motion directly readable. The slider joint is the opposite of a hinge: where hinges permit rotation and forbid translation, sliders permit translation and forbid rotation.",
 			"dev_themes": [
 				"physics",
 				"joints"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				3.0,
+				2.0,
+				4.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "SliderPress",
@@ -269,31 +389,49 @@
 			"name": "SliderPress",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					3.0,
+					2.0,
+					4.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
 			"scene": "res://algorithms/joint/04_slider_press/SliderPress.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
 				"physics",
-				"joints"
-			]
+				"joints",
+				"slider-joint",
+				"piston",
+				"rail",
+				"motor",
+				"force",
+				"velocity",
+				"interactive",
+				"VR-controls"
+			],
+			"qfep_connection": "Classical F — the slider joint as a constraint that channels energy into exactly one translational axis. Motor speed and force become controllable parameters that the learner tunes to feel the difference between velocity and impulse.",
+			"gamwell_reference": "Linear actuators, prismatic joints, piston mechanics, controllable force systems, degrees of freedom in mechanisms",
+			"interactions": [
+				"adjust the speed slider to control oscillation frequency",
+				"adjust the force slider to control piston push strength",
+				"read position and velocity labels in real time",
+				"compare slider behavior with hinge rotation"
+			],
+			"signals": [],
+			"capacity": "TUNE motor speed and force parameters to control a slider joint's translational motion and read the resulting position and velocity."
 		},
 		"SpringSuspension": {
-			"category": "unknown",
+			"category": "forces",
 			"complexity": "intermediate",
-			"description": "SpringSuspension",
+			"description": "A car-like suspension system using a Generic6DOF joint configured as a vertical spring. A wheel hangs below a chassis, free to bounce vertically but locked in all other axes. The spring stiffness and damping create the characteristic suspension feel — press space to drop the wheel and watch it oscillate to rest. This demonstrates how a single 6DOF joint with carefully chosen axis locks and spring parameters can simulate complex mechanical behavior.",
 			"dev_themes": [
 				"physics",
 				"simulation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				4.0,
+				3.0,
+				2.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "SpringSuspension",
@@ -304,17 +442,34 @@
 			"name": "SpringSuspension",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					4.0,
+					3.0,
+					2.0
 				],
-				"size_group": "compact"
+				"size_group": "large"
 			},
 			"scene": "res://algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
-			"size_group": "compact",
+			"size_group": "large",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"6dof-joint",
+				"spring",
+				"damping",
+				"suspension",
+				"vehicle",
+				"oscillation",
+				"hooke"
+			],
+			"qfep_connection": "Classical F with lambda-tuning — the 6DOF joint's spring stiffness and damping are the lambda parameters that tune between rigid constraint (high stiffness) and free motion (low stiffness). The sweet spot produces naturalistic suspension.",
+			"gamwell_reference": "Spring-damper systems, suspension mechanics, Generic6DOF joints, Hooke's law in constrained systems, shock absorber dynamics",
+			"interactions": [
+				"press space to bounce the wheel and watch it oscillate",
+				"observe the spring-damped settling behavior",
+				"notice how vertical motion is free but lateral motion is locked"
+			],
+			"signals": [],
+			"capacity": "EXPLAIN how a 6DOF joint with spring parameters on one axis and locks on all others creates suspension behavior."
 		},
 		"algo_gun": {
 			"category": "unknown",
@@ -3047,9 +3202,9 @@
 			]
 		},
 		"tscn_joint": {
-			"category": "unknown",
+			"category": "forces",
 			"complexity": "beginner",
-			"description": "tscn_joint",
+			"description": "A static reference scene showing multiple joint types side by side for comparison. Demonstrates the visual difference between pin, hinge, slider, cone-twist, and 6DOF joints in a single exhibit. Used as an overview or index artifact at the start of the joints sequence.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -3077,8 +3232,25 @@
 			"scene": "res://algorithms/joint/shared/static_exemple.tscn",
 			"size_group": "room_scale",
 			"tags": [
-				"physics"
-			]
+				"physics",
+				"joints",
+				"taxonomy",
+				"overview",
+				"pin-joint",
+				"hinge-joint",
+				"slider-joint",
+				"cone-twist-joint",
+				"6dof-joint",
+				"reference"
+			],
+			"qfep_connection": "Pure F — a taxonomy of constraints. Each joint type removes different degrees of freedom; seeing them together reveals the design space of mechanical connection.",
+			"gamwell_reference": "Joint taxonomy, degrees of freedom comparison, constraint classification, mechanical connection types",
+			"interactions": [
+				"walk between joint exhibits to compare constraint types",
+				"observe which axes each joint type permits or restricts"
+			],
+			"signals": [],
+			"capacity": "CLASSIFY joint types by the degrees of freedom they permit and predict which joint is appropriate for a given mechanical task."
 		},
 		"vector_fields": {
 			"capacity": "SEE the force before the object arrives — the field exists everywhere, waiting",

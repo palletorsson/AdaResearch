@@ -39,7 +39,11 @@
 			"qfep_connection": "phi-dE — the rate of evolutionary change. Each generation is a dE step. Fitness is the selection pressure (phi) that amplifies some mutations and kills others. Lambda emerges as the mutation rate: too low and evolution stalls, too high and it melts.",
 			"gamwell_reference": "Constraint satisfaction, evolutionary computation, genetic algorithms",
 			"capacity": "WATCH evolution accumulate accidents that happen to survive — design without a designer",
-			"interactions": ["auto-evolve on timer", "manual step one generation", "observe fitness labels on population grid"],
+			"interactions": [
+				"auto-evolve on timer",
+				"manual step one generation",
+				"observe fitness labels on population grid"
+			],
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -686,17 +690,17 @@
 			]
 		},
 		"crackpropagation_ca": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "crackpropagation_ca",
+			"category": "morphogenesis",
+			"complexity": "intermediate",
+			"description": "A cellular automaton that grows fracture networks from invisible stress. A 64x64 grid accumulates stress through diffusion and decay — when a cell crosses the crack threshold, it shatters and pushes stress outward. The result is realistic branching cracks that follow paths of least resistance, guided by direction bias that prevents zig-zag. You watch destruction emerge from accumulation: nothing visible happens until the threshold breaks, then cracks bloom explosively across the surface.",
 			"dev_themes": [
 				"generation",
 				"procedural"
 			],
 			"footprint": [
+				6.0,
 				1.0,
-				1.0,
-				1.0
+				6.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "crackpropagation_ca",
@@ -707,17 +711,36 @@
 			"name": "crackpropagation_ca",
 			"parameters": {
 				"footprint": [
+					6.0,
 					1.0,
-					1.0,
-					1.0
+					6.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
-				"procedural"
-			]
+				"cellular-automata",
+				"fracture",
+				"stress",
+				"crack",
+				"propagation",
+				"threshold",
+				"morphogenesis",
+				"growth",
+				"procedural",
+				"emergence"
+			],
+			"qfep_connection": "Edge of chaos — the crack threshold is the critical lambda where order (intact material) meets entropy (shattered field). Below threshold: stability. Above: catastrophic branching. The propagation rate tunes how fast the phase transition sweeps through the grid.",
+			"gamwell_reference": "Fracture mechanics, cellular automata, stress propagation, percolation theory, crack branching patterns in nature",
+			"interactions": [
+				"watch cracks emerge from the center stress seed",
+				"observe branching patterns following direction bias",
+				"notice how crack width varies with local stress intensity",
+				"compare dense shatter (low threshold) vs sparse fractures (high threshold)"
+			],
+			"signals": [],
+			"capacity": "PREDICT how cellular automaton crack propagation creates realistic fracture networks from local stress transfer and threshold-based state transitions."
 		},
 		"cube_bookshelf": {
 			"category": "unknown",
@@ -2756,9 +2779,9 @@
 			]
 		},
 		"mushrooms": {
-			"category": "unknown",
+			"category": "morphogenesis",
 			"complexity": "intermediate",
-			"description": "Interactive procedural mushroom generation with organic growth patterns",
+			"description": "A procedural mushroom meadow grown from noise. FastNoiseLite drives a spatial Poisson process — mushrooms spawn where noise exceeds a density threshold, creating natural clearings and clusters. Five species templates produce variety; a glowing variant adds bioluminescent accents. Fairy rings self-organize as perfect circles of identical species within the random field. The ground itself is procedurally deformed, and ambient lighting creates a forest-floor atmosphere. Walk through and feel how randomness filtered through ecological rules produces something that looks alive.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -2787,8 +2810,27 @@
 			"scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
 			"size_group": "xlarge",
 			"tags": [
-				"procedural"
-			]
+				"procedural",
+				"mushrooms",
+				"noise",
+				"poisson-process",
+				"fairy-ring",
+				"bioluminescence",
+				"ecology",
+				"growth",
+				"spatial",
+				"morphogenesis"
+			],
+			"qfep_connection": "E(S) entropy filtered through ecological form — noise is the raw entropy, density threshold is the filter, and species templates are the forms that entropy fills. Fairy rings are emergent order: lambda-tuning where structured patterns crystallize from random placement.",
+			"gamwell_reference": "Spatial Poisson processes, noise-driven procedural generation, fairy ring mycology, bioluminescent fungi, ecological niche theory",
+			"interactions": [
+				"walk through the procedural meadow",
+				"find fairy rings — perfect circles of identical species",
+				"spot glowing mushrooms in the undergrowth",
+				"notice how clearings form from noise thresholds"
+			],
+			"signals": [],
+			"capacity": "EXPLAIN how noise-driven spatial processes create naturalistic distributions and how fairy rings emerge as self-organized order within random fields."
 		},
 		"necklace_anchor": {
 			"category": "body",
@@ -3772,9 +3814,9 @@
 			]
 		},
 		"tree_gen": {
-			"category": "unknown",
+			"category": "morphogenesis",
 			"complexity": "intermediate",
-			"description": "Procedural tree generation with branching algorithms",
+			"description": "An infinite procedural forest that grows around you. Trees spawn within a generation radius as you walk, and vanish behind you when you leave. The generation loop is the algorithm: proximity check, spacing constraint, spawn, cull. No tree exists until you approach; the forest is an illusion maintained by continuous generation. Two tree styles (simple blocks and complex clusters) with red emissive materials create an alien forest that feels both procedural and alive.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -3805,8 +3847,26 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural",
-				"tree"
-			]
+				"trees",
+				"forest",
+				"proximity",
+				"generation",
+				"culling",
+				"infinite",
+				"spatial",
+				"VR",
+				"morphogenesis"
+			],
+			"qfep_connection": "Pure phi — the rate of change IS the content. The forest exists only as a process of generation and removal. Stop walking and the forest freezes. The generation_distance parameter controls how far ahead reality extends.",
+			"gamwell_reference": "Procedural world generation, infinite terrain, proximity-based LOD, parametric tree generation, spatial hashing",
+			"interactions": [
+				"walk forward to generate new trees ahead",
+				"look behind to see trees vanishing at removal distance",
+				"notice spacing constraints preventing overlap",
+				"observe two tree styles appearing randomly"
+			],
+			"signals": [],
+			"capacity": "BUILD a proximity-based procedural spawning system that creates and destroys content around the player position to simulate infinite generated worlds."
 		},
 		"truchettiles": {
 			"category": "unknown",

@@ -1,158 +1,147 @@
-# Visual Improvement Handover — Physics Simulation
+# Making Algorithms Visible
 
-> Learn what makes a good scene by improving every artifact in `physics_simulation.json`.
+You are improving the visual quality of algorithm artifacts in Ada Research — a VR project where learners stand inside mathematical ideas and watch them run.
 
-## The Question
+There are ~600 artifacts. Most are algorithmically correct but visually dead. Your job is to make them alive.
 
-What makes a good VR algorithm visualization? By improving 90 physics artifacts one by one, we develop a pattern language for visual quality.
+---
 
-## Visual Quality Checklist
+## What You're Working With
 
-From the improvements we already made, a pattern emerged:
+Each artifact is a Godot 4 scene (`.tscn` + `.gd`). It extends Node3D, builds itself procedurally in `_ready()`, and runs its algorithm in `_process()`. The learner stands at arm's length in VR and watches.
 
-### 1. VISIBILITY — Can you see it?
-- **Scale**: Objects must be visible at arm's length in VR (~0.05m minimum radius for spheres)
-- **Bad**: exercise_1_3 had 0.03m ball → nearly invisible
-- **Good**: exercise_1_3 now has 0.06m ball + wireframe box
+The code works. The algorithms are right. What's missing is the layer between "correct simulation" and "thing you can understand by looking at it."
 
-### 2. CONTAINMENT — Can you see the boundaries?
-- **Bad**: bouncing_ball had invisible collision walls → ball seemed to float in nothing
-- **Good**: bouncing_ball now has wireframe cube showing the containment box
-- **Pattern**: Use thin cylinder edges with `Basis(right, direction, up)` orientation (see `line_static.gd`)
+## What "Alive" Means
 
-### 3. TRAILS — Can you see the history?
-- **Bad**: exercise_1_5 had no trail → just two dots, no sense of motion
-- **Good**: exercise_1_5 now has chase trail + connection line to target
-- **Pattern**: `ImmediateMesh` with `PRIMITIVE_LINE_STRIP`, 200-300 points, transparent material
+An alive artifact answers five questions without the learner having to think:
 
-### 4. CONNECTIONS — Can you see the relationships?
-- **Bad**: exercise_1_8 had no orbit trail → just a ball near a sphere
-- **Good**: exercise_1_8 now draws the orbit path + force line to attractor
-- **Pattern**: Connection lines between related objects (force vectors, springs, attraction)
+1. **What moves?** — One thing should be obviously the protagonist. It glows brighter, it's a different color, it leaves a trail. Your eye goes there first.
 
-### 5. GLOW — Does it feel alive?
-- **Bad**: flat `StandardMaterial3D` with no emission → looks like gray plastic
-- **Good**: `emission_enabled = true`, `emission = color * 0.4`, `emission_energy_multiplier = 1.5`
-- **Pattern**: Every interactive object should glow slightly. Bright emission for targets/attractors.
+2. **What holds?** — The structure, frame, or constraint that shapes the motion. It should be visible but quieter — present without competing. A warm muted tone, subtle emission.
 
-### 6. COLOR — Does it communicate?
-- **Bad**: all objects same color → can't distinguish roles
-- **Good**: Different colors for different roles (ball=cyan, target=pink, force=yellow, trail=faded)
-- **Pattern**: Use the queer_colors palette for variety. Attractor=accent, mover=primary, trail=faded.
+3. **What connects?** — The invisible relationships. Joints, forces, springs, constraints. These are the *reason* the motion looks the way it does. They must become visible — glowing markers, drawn lines, color-coded endpoints.
 
-### 7. INFORMATION — Can you read the state?
-- **Good**: exercise_1_8 has `Label3D` showing "dist: 0.123, force: 0.045"
-- **Pattern**: Billboard `Label3D` for state readouts. Small, positioned above the scene.
+4. **Where has it been?** — Algorithms unfold over time. A trail is not decoration — it IS the algorithm made visible. A pendulum without a trail is just a ball. A pendulum with a trail is a diagram of harmonic decay.
 
-### 8. CAMERA — Does the screenshot show the artifact well?
-- **Bad**: scene fills screen but you can't tell what it is
-- **Good**: 3/4 angle, object centered, ground plane gives depth reference
-- **Pattern**: `--yaw=0.4 --pitch=0.35` for most. No ground for self-contained artifacts. Longer wait for procedural builders.
+5. **What does the number say?** — Every algorithm has a critical parameter. Show it. A velocity, an angle, a distance, a force magnitude. The learner should be able to read the number and connect it to what they see.
 
-## The 90 Artifacts
+## How to Think About Each Artifact
 
-Browse at: `http://localhost:3003/artifacts?registry=physics_simulation`
+Don't start with "what code pattern do I apply." Start with:
 
-### Group 1: Joint Demos (10 artifacts)
-```
-ChainSwing, CharacterRagdoll, ConeTwistBag, DrawbridgeHinge,
-GimbalStabilizer, HingeCrank, PendulumPin, SpringSuspension,
-tscn_joint, IKArm
-```
-**Common issues**: Most are `.tscn`-only with minimal procedural code. They rely on Godot's built-in physics joints. Visually they're often just gray boxes connected by invisible constraints.
-**Visual improvements**: Add edge highlighting to show joint connections. Add glow to contact points. Add axis indicators showing constrained vs free axes.
+**What is the story this algorithm tells?**
 
-### Group 2: Nature of Code Chapter 2 — Forces (8 artifacts)
-```
-example_2_2 through example_2_9, bouncing_ball
-```
-**Common issues**: Tiny spheres, no trails, no force visualization.
-**Visual improvements**: Bigger objects, trails, force arrows, emissive materials. We already fixed bouncing_ball, exercise_1_3, exercise_1_5, exercise_1_8.
+A chain swing tells the story of resonance — small periodic inputs creating large oscillations through a chain of constraints. The visual should make resonance *obvious*: the trail gets wider when the driving frequency matches the natural frequency. The joint markers pulse. The info label shows amplitude growing.
 
-### Group 3: Nature of Code Chapter 3 — Oscillation (14 artifacts)
-```
-example_3_1 through example_3_11, exercise_3_*
-```
-**Common issues**: Many are sinusoidal motion demos with small objects. No wave visualization.
-**Visual improvements**: Trail lines showing oscillation patterns. Phase indicators. Amplitude/frequency labels.
+A drawbridge tells the story of a motor fighting gravity through a single hinge. The visual should make the constraint *architectural* — warm stone, mechanical precision, the satisfying arc of the bridge tip traced in space.
 
-### Group 4: Nature of Code Chapter 4 — Particles (7 artifacts)
-```
-example_4_1 through example_4_6, example_particle_body
-```
-**Common issues**: Particle systems may look good dynamically but capture as a single frame → unclear.
-**Visual improvements**: Longer wait time for captures. Multiple particle colors. Emission trails.
+A ragdoll tells the story of intention emerging from pure mechanics. The visual should make it slightly uncanny — the leg moves "like a leg" even though nothing is trying to be a leg. The color should be warm, organic, almost fleshy.
 
-### Group 5: Nature of Code Chapter 6 — Physics (8 artifacts)
-```
-example_6_1 through example_6_8
-```
-**Common issues**: Rigid body demos using Godot's built-in physics. Often just falling boxes.
-**Visual improvements**: Edge outlines on rigid bodies. Velocity arrows. Collision flash effects.
+**Every artifact has a story. Find it. Then make it visible.**
 
-### Group 6: Core Physics Sims (20+ artifacts)
-```
-mass_spring_damper, spring_system, three_body_problem, nbody_simulation,
-force_fields, vector_fields, particle_systems, verlet_integration,
-firework_launcher, friction_ramp, gravity_well, newton_cradle,
-cloth_simulation, fluid_simulation, magnetic_simulation, fem_simulation,
-soft_bodies, slingshot_launcher, rigid_body, numerical_integration
-```
-**These are the showcase artifacts** — each represents a major physics concept. They should look stunning.
-**Visual improvements per artifact**: Varies. Focus on what tells the story of the physics.
+## The Palette
 
-### Group 7: Artistic/Synthesis (5 artifacts)
-```
-waterflowers, waterone, surreal_kinetic_sculpture, softmill, softstopscene
-```
-**Already visually rich** — these are art pieces. Focus on camera angle and lighting.
+Not a rigid rulebook — a starting vocabulary:
 
-## Workflow Per Artifact
+| Role | Color | Why |
+|------|-------|-----|
+| Primary mover | Cyan-teal | Cool, electric, draws the eye |
+| Constraint/joint | Orange | Warm complement to cyan, reads as "mechanism" |
+| Anchor/fixed | Yellow-gold | Suggests solidity, warmth, ground truth |
+| Frame/structure | Cool gray or warm amber | Recedes but present |
+| Trail | Mover color at 30% alpha | Ghost of the mover's history |
 
-```
-1. LOOK at the screenshot: /scenes/detail?path={scene_path}
-2. READ the code: what does it build?
-3. IDENTIFY visual problems: tiny? no containment? no trail? flat color?
-4. EDIT the GDScript: apply the patterns above
-5. CAPTURE new screenshot: godot --scene={path} --yaw=0.4 --pitch=0.35
-6. COMPARE: does the new shot tell the story better?
-```
+Use emission on everything the learner should notice. The energy scale communicates hierarchy:
+- Structural frame: 0.5 (barely glows)
+- Active bodies: 1.0-1.5 (alive)
+- The protagonist: 2.0 (unmistakable)
+- Markers and indicators: 2.5+ (read as annotation)
 
-## Commands
+## The Trail Is The Algorithm
 
+This deserves its own section because it's the single most important visual element.
+
+A screenshot of a physics simulation without trails shows you nothing. You see objects at one moment in time. You have no idea what they were doing a second ago or what they'll do next.
+
+A trail turns time into space. The pendulum's trail IS the harmonic function. The orbit trail IS the gravitational relationship. The crank rod's trail IS the Fourier component.
+
+**Trail the interesting position.** Not the center of mass — the foot of the ragdoll, the seat of the swing, the tip of the rod, the outer edge of the bridge. The position that moves most, that traces the most expressive curve.
+
+## What To Do With Each Artifact
+
+1. Read the code. Understand the algorithm. What moves, what's fixed, what's the critical parameter?
+2. Read the `@identity` block. It contains the poetic truth. If there's no identity block, write one.
+3. Decide: what's the story? What should the learner see first, second, third?
+4. Replace flat materials with emissive ones. Assign colors by role.
+5. Add a trail on the most expressive position.
+6. Add markers at invisible constraint points.
+7. Add a Label3D showing the critical number.
+8. Capture a screenshot. Does the screenshot tell the story? If not, iterate.
+
+## Screenshot Pipeline
+
+The project has a full capture pipeline that outputs to the encyclopedia's `scene-catalog/` directory.
+
+### Batch (all scenes)
 ```bash
-# View artifact in encyclopedia
-http://localhost:3003/artifact/{lookup_name}
+python commons/testing/batch_capture_all_scenes.py
+```
+Reads `scene-catalog.json`, captures every scene to `ada_encyclopedia/public/scene-catalog/`. Skips existing PNGs. Auto-restarts on crashes. This is the authoritative pipeline — run it after visual improvements to update the catalog.
 
-# View scene detail with screenshot
-http://localhost:3003/scenes/detail?path=res://algorithms/physicssimulation/{folder}/{file}.tscn
+### Per-artifact (3 zoom levels + 4 angles)
+```bash
+godot --path . --xr-mode off --no-window \
+  --script res://commons/testing/capture_multi_angle.gd \
+  -- --mode=artifact --target=LOOKUP_NAME
+```
+Outputs to `user://multi_shots/<target>/`. For each of 4 angles (front, left, right, top), captures 3 zoom levels: `_far` (1.4x), `_mid` (1.0x), `_close` (0.65x). Default image uses the wide shot. Disables any cameras the artifact creates to ensure the capture camera controls framing. Skips ground plane for scenes with their own `WorldEnvironment`.
 
-# Capture new screenshot
+### Single shot
+```bash
 godot --path . --xr-mode off --no-window \
   --script res://commons/testing/capture_tscn_shot.gd \
-  -- --scene=res://{path}.tscn \
-  --out=C:/Users/palle/Documents/GitHub/ada_encyclopedia/public/scene-catalog/{lookup_name}.png \
-  --ground=true --yaw=0.4 --pitch=0.35 --distance=0 --wait=3.0
-
-# Run full improvement (docs + code + screenshot)
-/ada-artifact-improver {lookup_name}
+  -- --scene=res://PATH.tscn --ground=false --wait=4.0 \
+  --out=OUTPUT_PATH.png
 ```
 
-## What We Learned So Far
+### Key details
+- Scenes with `CaptureCamera` child nodes use their artist-placed angle
+- AABB-based framing at 1.0x max dimension (fills the frame)
+- Wait 3-4 seconds before capture so trails have time to build
+- Artifact cameras are disabled so the capture camera controls the shot
 
-| Artifact | Problem | Fix | Lesson |
-|----------|---------|-----|--------|
-| bouncing_ball | Cylinder edges rotated wrong | `Basis(right, dir, up)` instead of `look_at` | Always use cross-product basis for cylinder orientation |
-| exercise_1_3 | Ball invisible (0.03m), no box | Larger ball (0.06m), wireframe box, @export vars | Minimum visible size ~0.05m. Always show containment. |
-| exercise_1_5 | Just two dots, no motion sense | Trail + connection line + emissive materials | Trails are essential — they show the algorithm's history |
-| exercise_1_8 | No orbit path visible | Added 300-point orbit trail | Orbits only make sense when you can see the path |
-| bulging_tunnel | Code fine, just needed identity | class_name + @identity | Not all improvements are visual — some are structural |
+## What "Done" Looks Like
 
-## Start Here
+A done artifact tells its story in a screenshot. You look at it and you know:
+- What's the protagonist (brightest, trailing)
+- What's the structure (quieter, framing)
+- What's the constraint (orange markers at invisible joints)
+- What happened over time (the trail's shape)
+- What the critical number is (the readout)
 
-Pick the first artifact in Group 1 (ChainSwing) and run:
-```
-/ada-artifact-improver ChainSwing
-```
+And in VR, you stand in front of it and the algorithm *teaches itself to you* because the visual hierarchy matches the conceptual hierarchy.
 
-Look at the proposal. Look at the screenshot. Ask: what would make this scene tell its story?
+## The Registry
+
+After visual improvements, update `commons/artifacts/registry/*.json` with proper metadata:
+- `description`: 5-layer description from @identity
+- `qfep_connection`: where in E = F + lambda * phi * dE
+- `capacity`: "VERB what_learner_can_do_after"
+- `interactions`: what the learner can trigger
+- `tags`: 5-10 keywords
+- `footprint`: real AABB from capture output
+
+Use `/ada-artifact-improver auto` for batch metadata work.
+
+## Current State
+
+| Sequence | Avg Score | Status |
+|----------|-----------|--------|
+| joints | 7.0/8 | visually upgraded + metadata done |
+| foundationscrisis | 4.5/8 | gold standard template |
+| physicssimulation | 4.5/8 | partially done |
+| forces | 3.7/8 | 15 improved |
+| graphtheory | 5.3/8 | metadata done |
+
+Run `python tools/heat_map_generator.py` for the full priority list. Lowest-scoring sequences with the fewest artifacts are the quickest wins.
