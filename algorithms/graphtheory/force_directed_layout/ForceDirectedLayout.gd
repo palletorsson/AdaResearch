@@ -1,4 +1,5 @@
 extends Node3D
+class_name ForceDirectedLayout
 
 # @identity
 # essence: 2D Hooke's law spring system — F_spring = k*(d - rest_length) attracts connected nodes, F_repulsion = k/d^2 repels all pairs, velocity *= damping each frame until energy minimizes

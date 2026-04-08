@@ -413,10 +413,15 @@
 		"rhizomatic_structure": {
 			"category": "geometry",
 			"complexity": "intermediate",
-			"description": "Rhizomatic growth structure inspired by Deleuze and Guattari — non-hierarchical, multiply-connected, without center or periphery. Any point connects to any other.",
+			"description": "Grow a network that refuses root, trunk, and leaves. Recursive branching creates a scaffold, then lateral reconnections turn that scaffold into a mesh where any point can connect to any other. Adjusting reconnection probability moves the artifact between tree and rhizome, making hierarchy versus multiplicity a concrete topological choice. It brings Deleuze and Guattari into graph theory by questioning when a tree is the wrong model.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
+			],
+			"footprint": [
+				20,
+				18,
+				14
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rhizomatic_structure",
@@ -426,13 +431,26 @@
 			],
 			"name": "Rhizomatic Structure",
 			"scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
 				"rhizome",
-				"deleuze",
 				"non_hierarchical",
+				"cycles",
+				"topology",
+				"deleuze",
 				"network",
 				"alternative_geometry",
 				"critical_theory"
+			],
+			"qfep_connection": "A challenge to hierarchical F: lateral reconnection redistributes structure away from roots and trunks. It asks what graph order looks like when no center is privileged.",
+			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception",
+			"capacity": "COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.",
+			"interactions": [
+				"regenerate the structure",
+				"tune connection_probability to move between tree and rhizome",
+				"change growth_direction_randomness to bias branching",
+				"inspect cycles formed by lateral reconnections"
 			]
 		},
 		"riemann_pi": {

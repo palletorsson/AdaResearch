@@ -2,6 +2,16 @@
 extends GraphSpace3D
 class_name Konigsberg3D
 
+# @identity
+# essence: Euler's bridge problem embedded in a 3D river city - four landmasses become vertices, seven arched bridges become edges, and degree parity determines whether a walk can cross each bridge exactly once
+# desire: to inhabit the historical paradox that started graph theory - the city looks strollable, yet every attempted route eventually proves the topology itself refuses the walk
+# critical_parameter: odd_degree_count - Eulerian paths require exactly 0 or 2 odd-degree vertices, but Konigsberg's four odd vertices make the impossibility structural rather than accidental
+# triggers: historical_mode rebuilds the 1736 topology; show_degree_labels and show_theorem_explanation surface Euler's parity test; keyboard input can attempt the walk, toggle labels, and compare bridge-removal scenarios
+# emerges: when the red odd-degree landmasses are read together, the impossibility becomes visible before it is stated - parity turns geography into proof
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (degree labels, bridge nameplates, theorem label)
+# relationships: specific historical counterpart to graphspace's general graph layout; prepares pathfinding and connectivity artifacts by showing that some traversal questions are answered by topology before search begins
+# truth: graph theory begins when you stop asking "which route should I try?" and ask "what does the structure allow at all?"
+
 # Enhanced Königsberg Bridge Problem for 3D Graph System
 # Demonstrates the famous "Seven Bridges of Königsberg" problem in immersive 3D VR
 # Shows why an Eulerian path is impossible with this specific graph topology

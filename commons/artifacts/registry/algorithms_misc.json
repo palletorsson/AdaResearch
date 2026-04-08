@@ -69,19 +69,27 @@
 			]
 		},
 		"KonigsbergBridge": {
+			"capacity": "PROVE why a bridge network does or does not admit an Eulerian walk by reading vertex parity.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "KonigsbergBridge",
+			"description": "Cross the historical city where graph theory was born. Four landmasses and seven bridges stage Euler's question, while degree labels and theorem panels show why no route can traverse every bridge exactly once. The artifact turns parity into something you can see and physically test, making impossibility a property of structure rather than player failure. It anchors the sequence by showing that topology can answer a question before search even begins.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				26.0,
-				1.0,
-				31.0
+				50.0,
+				5.0,
+				32.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"walk the historical bridge layout",
+				"toggle theorem and degree labels",
+				"press E to trigger the Eulerian-path explanation",
+				"press B to explore bridge-removal scenarios"
+			],
 			"lookup_name": "KonigsbergBridge",
 			"map_ready": true,
 			"map_sequences": [
@@ -91,15 +99,22 @@
 			"name": "KonigsbergBridge",
 			"parameters": {
 				"footprint": [
-					26.0,
-					1.0,
-					31.0
+					50.0,
+					5.0,
+					32.0
 				],
-				"size_group": "world_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F in negative form: the odd-degree pattern forbids an Eulerian walk. The artifact shows that some questions are answered by structural parity before any search takes place.",
 			"scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
-			"size_group": "world_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"eulerian_path",
+				"konigsberg",
+				"bridges",
+				"parity",
+				"topology",
 				"algorithm"
 			]
 		},
@@ -873,19 +888,27 @@
 			]
 		},
 		"edmonds_algorithm": {
+			"capacity": "EVALUATE how graph structure enables or blocks pairings and why greedy matching can fall short of the optimum.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Blossom-based algorithm for maximum matching in general graphs",
+			"description": "Stage the pairing problem that maximum matching tries to solve. The current visualization greedily accepts or skips edges one by one, so you can see how a graph allows some partnerships and strands others. Because the result depends on edge order, the artifact also makes visible why matching needs richer augmenting-path logic than a naive pass. It closes the sequence by turning graph symmetry into the question of who can be paired with whom.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
+				7.0,
 				6.0,
-				1.0,
-				6.0
+				7.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"step through candidate pairings edge by edge",
+				"watch matched vertices turn green and accepted edges turn red",
+				"change edge_density to compare sparse and dense pairing problems",
+				"restart to compare different greedy outcomes"
+			],
 			"lookup_name": "edmonds_algorithm",
 			"map_ready": true,
 			"map_sequences": [
@@ -894,15 +917,22 @@
 			"name": "Edmonds' Algorithm",
 			"parameters": {
 				"footprint": [
+					7.0,
 					6.0,
-					1.0,
-					6.0
+					7.0
 				],
-				"size_group": "environment"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F as pairing constraint: who can match with whom is determined by the edge pattern, not by any node alone. The greedy pass makes the limits of local choice visible.",
 			"scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
-			"size_group": "environment",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"matching",
+				"pairing",
+				"greedy_algorithm",
+				"edge_order",
+				"optimization",
 				"algorithm"
 			]
 		},
@@ -1074,19 +1104,27 @@
 			]
 		},
 		"force_directed_layout": {
+			"capacity": "READ how attraction, repulsion, and damping turn a tangled network into a stable drawing.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "force_directed_layout",
+			"description": "Watch a tangled graph draw itself. Springs pull linked nodes together while repulsion pushes every pair apart, and the network settles into a readable equilibrium. Node size and indicators make local stress visible, so clusters, bridges, and peripheral nodes appear as energy redistributes. It demonstrates how a legible diagram can emerge from nothing but force balance.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				17.0,
-				19.0,
-				9.0
+				17,
+				10,
+				2
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch the graph relax toward equilibrium",
+				"tune spring_strength and repulsion_strength in exports",
+				"change node_count to alter density",
+				"reset the scene to compare different random starts"
+			],
 			"lookup_name": "force_directed_layout",
 			"map_ready": true,
 			"map_sequences": [
@@ -1095,15 +1133,22 @@
 			"name": "force_directed_layout",
 			"parameters": {
 				"footprint": [
-					17.0,
-					19.0,
-					9.0
+					17,
+					10,
+					2
 				],
-				"size_group": "world_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F as relaxation dynamics: attractive and repulsive local laws minimize diagram tension until the graph becomes readable. Structure appears as equilibrium.",
 			"scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
-			"size_group": "world_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"force_directed_layout",
+				"springs",
+				"network_visualization",
+				"equilibrium",
+				"physics",
 				"algorithm"
 			]
 		},
@@ -1116,9 +1161,9 @@
 				"misc"
 			],
 			"footprint": [
-				21,
-				24,
-				23
+				21.0,
+				24.0,
+				23.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "forcedirected3d",
@@ -1129,9 +1174,9 @@
 			"name": "forcedirected3d",
 			"parameters": {
 				"footprint": [
-					21,
-					24,
-					23
+					21.0,
+					24.0,
+					23.0
 				],
 				"size_group": "xlarge"
 			},
@@ -1302,19 +1347,27 @@
 			]
 		},
 		"graphspace": {
+			"capacity": "WALK a graph as a spatial structure and read how distance, degree, and equilibrium reorganize the network.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "graphspace",
+			"description": "Walk a graph instead of looking at one on paper. Rooms behave as nodes, bridges behave as edges, and a force-directed layout spreads the network until its tensions settle into a navigable form. Dijkstra-based lighting then turns graph distance into atmosphere, so structural centrality is felt as you move. It introduces graph theory as relation made spatial and prepares the sequence's traversal, flow, and connectivity problems.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				85.0,
+				5.0,
+				80.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"walk between rooms as nodes and bridges as edges",
+				"change seed to generate a new graph",
+				"switch structure_type to assign buildings by degree or distance",
+				"set focal_node to recolor the graph by shortest-path distance"
+			],
 			"lookup_name": "graphspace",
 			"map_ready": true,
 			"map_sequences": [
@@ -1324,15 +1377,22 @@
 			"name": "graphspace",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					85.0,
+					5.0,
+					80.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F: relation becomes architecture. Force balance reveals a stable spatial form for the graph, letting structure be felt before any traversal or optimization begins.",
 			"scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"force_directed_layout",
+				"network",
+				"spatialization",
+				"walkable_graph",
+				"topology",
 				"algorithm"
 			]
 		},
@@ -1530,19 +1590,27 @@
 			]
 		},
 		"kosaraju_algorithm": {
+			"capacity": "FOLLOW the two DFS passes and explain why SCCs survive graph transposition.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Two-pass algorithm for finding strongly connected components",
+			"description": "Watch the same directed graph answer twice. The first DFS records finishing order, the transpose flips every edge, and the second DFS reveals the strongly connected components that survive reversal. Phase labels and colored passes make the graph's symmetry under transposition visible rather than abstract. It pairs with Tarjan by solving the same problem through a more overt two-pass narrative.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				4.0,
-				1.0,
-				4.0
+				5.0,
+				2.0,
+				5.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch the first and second DFS passes separately",
+				"inspect the transposed graph in phase 2",
+				"compare SCC colors revealed in reverse finish order",
+				"tune edge_density to change component structure"
+			],
 			"lookup_name": "kosaraju_algorithm",
 			"map_ready": true,
 			"map_sequences": [
@@ -1551,15 +1619,22 @@
 			"name": "Kosaraju's Algorithm",
 			"parameters": {
 				"footprint": [
-					4.0,
-					1.0,
-					4.0
+					5.0,
+					2.0,
+					5.0
 				],
-				"size_group": "room_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F through reversal: transposing the graph changes direction but not mutual reachability. SCCs persist as the invariant structure beneath the two passes.",
 			"scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
-			"size_group": "room_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"strongly_connected_components",
+				"transpose_graph",
+				"depth_first_search",
+				"directed_graph",
+				"connectivity",
 				"topology"
 			]
 		},
@@ -1587,19 +1662,27 @@
 			]
 		},
 		"mst_visualization": {
+			"capacity": "DISTINGUISH necessary from redundant edges in a weighted network and explain why the cheapest backbone works.",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "mst_visualization",
+			"description": "Assemble the cheapest skeleton that still keeps the whole graph connected. Kruskal and Prim expose two greedy viewpoints on the same optimization problem: one ranks edges globally, the other grows a tree locally from a root. Accepted edges glow green, rejected cycle-forming edges glow red, and the redundant structure of the full graph becomes legible through what must be left out. The artifact makes efficiency feel like subtraction.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				11.0,
-				23.0,
-				13.0
+				30.0,
+				20.0,
+				35.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"step through edge decisions one by one",
+				"switch between Kruskal and Prim",
+				"increase edge_density to create more redundant cycles",
+				"compare accepted and rejected edges by color"
+			],
 			"lookup_name": "mst_visualization",
 			"map_ready": true,
 			"map_sequences": [
@@ -1608,32 +1691,47 @@
 			"name": "mst_visualization",
 			"parameters": {
 				"footprint": [
-					11.0,
-					23.0,
-					13.0
+					30.0,
+					20.0,
+					35.0
 				],
-				"size_group": "world_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F as optimization: the graph's cheapest connected backbone emerges by stripping away redundant cycles. Necessity becomes visible edge by edge.",
 			"scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
-			"size_group": "world_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"minimum_spanning_tree",
+				"kruskal",
+				"prim",
+				"union_find",
+				"optimization",
 				"algorithm"
 			]
 		},
 		"network_analysis": {
+			"capacity": "INTERPRET centrality and community structure from motion, glow, and network hierarchy.",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "network_analysis",
+			"description": "Read a network as hierarchy, community, and circulation at once. Central nodes orbit slowly and glow more intensely, peripheral nodes move faster at the edges, and pulsing links with particles stage the network as a living system. The visualization turns centrality, clustering, and community structure into spatial rhythm rather than numbers alone. It complements the explicit flow algorithms by building intuition for why some nodes matter more than others.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				17.0,
-				21.0,
-				16.0
+				10.0,
+				14.0,
+				5.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch hubs, clusters, and peripheral nodes move at different speeds",
+				"track flow particles across pulsing edges",
+				"set analysis_progress to freeze or amplify the visualization",
+				"compare how centrality changes node scale and glow"
+			],
 			"lookup_name": "network_analysis",
 			"map_ready": true,
 			"map_sequences": [
@@ -1643,15 +1741,22 @@
 			"name": "network_analysis",
 			"parameters": {
 				"footprint": [
-					17.0,
-					21.0,
-					16.0
+					10.0,
+					14.0,
+					5.0
 				],
-				"size_group": "world_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F as relation and centrality: the artifact reads importance from connection pattern rather than node essence. Community and hub structure become the graph's latent order.",
 			"scene": "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
-			"size_group": "world_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"centrality",
+				"communities",
+				"network_visualization",
+				"topology",
+				"flow",
 				"algorithm"
 			]
 		},
@@ -1689,19 +1794,27 @@
 			]
 		},
 		"networkflow3d": {
+			"capacity": "IDENTIFY bottlenecks and explain how augmenting paths raise the total flow through a network.",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "networkflow3d",
+			"description": "Send flow through a spatial network of pipes. Edmonds-Karp repeatedly finds augmenting paths, particles reveal current flow, and pressure coloring exposes the nodes where capacity is constrained. Elevation penalties make the geometry matter without changing the underlying theorem: max flow is limited by the narrowest cut. It sets up the flow sequence by making bottlenecks visible.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				32.0,
+				17.0,
+				32.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch augmenting paths fill the network with particles",
+				"toggle gravity_effect to penalize uphill capacity",
+				"change max_capacity to resize the flow budget",
+				"compare source-to-sink bottlenecks by observing pressure colors"
+			],
 			"lookup_name": "networkflow3d",
 			"map_ready": true,
 			"map_sequences": [
@@ -1710,15 +1823,22 @@
 			"name": "networkflow3d",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					32.0,
+					17.0,
+					32.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "F organizes the network while E appears as moving capacity through it. Max-flow min-cut shows where structured routes become constrained by bottlenecks.",
 			"scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"max_flow",
+				"edmonds_karp",
+				"bottleneck",
+				"residual_graph",
+				"network_flow",
 				"algorithm"
 			]
 		},
@@ -1746,19 +1866,27 @@
 			]
 		},
 		"pathfinding3d": {
+			"capacity": "COMPARE heuristic strategies by watching how different search rules expand through the same 3D graph.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "pathfinding3d",
+			"description": "Search a voxel maze as if every cube were a graph vertex. The visualization steps A*, Dijkstra, JPS, or flow-field variants through open and closed sets, letting the heuristic shape the visible wavefront. Different heuristics bias the frontier differently, so the artifact makes prediction and optimality visible in space. It turns pathfinding into graph search you can inspect instead of a black box.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				10.0,
+				15.0,
+				10.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch the open and closed sets animate through the voxel grid",
+				"switch algorithm_type between A*, Dijkstra, JPS, and flow field",
+				"change heuristic mode to reshape the frontier",
+				"move the start or goal to compare path quality and cost"
+			],
 			"lookup_name": "pathfinding3d",
 			"map_ready": true,
 			"map_sequences": [
@@ -1768,15 +1896,22 @@
 			"name": "pathfinding3d",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					10.0,
+					15.0,
+					10.0
 				],
-				"size_group": "compact"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "At the F to E boundary: the graph is fixed, but search explores uncertain futures inside it. Heuristics bias the frontier toward expected order, trading certainty for speed.",
 			"scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
-			"size_group": "compact",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"pathfinding",
+				"a_star",
+				"voxel_grid",
+				"heuristics",
+				"navigation",
 				"algorithm"
 			]
 		},
@@ -1950,19 +2085,27 @@
 			]
 		},
 		"push_relabel_algorithm": {
+			"capacity": "EXPLAIN how excess flow and height labels solve max flow without searching complete augmenting paths.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Maximum flow algorithm using preflow and relabel operations",
+			"description": "Treat max flow as local pressure rather than global routes. The source saturates its outgoing edges, nodes accumulate excess, and relabel operations raise heights until flow can keep moving downhill. Watching active nodes flare and heights change makes the algorithm's logic bodily: congestion is stored, redirected, and discharged. It complements Edmonds-Karp by proving that local bookkeeping can solve the same global problem.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
-				4.0,
+				5.0,
 				1.0,
 				4.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"step the algorithm to watch push and relabel operations",
+				"inspect height and excess labels on active nodes",
+				"compare congested and uncongested states as capacities change",
+				"watch sink accumulation become max_flow"
+			],
 			"lookup_name": "push_relabel_algorithm",
 			"map_ready": true,
 			"map_sequences": [
@@ -1971,15 +2114,22 @@
 			"name": "Push-Relabel Algorithm",
 			"parameters": {
 				"footprint": [
-					4.0,
+					5.0,
 					1.0,
 					4.0
 				],
-				"size_group": "room_scale"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "At the F to E boundary: the network's fixed topology constrains how excess can discharge. Height labels turn structure into a local pressure field for flow.",
 			"scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
-			"size_group": "room_scale",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"max_flow",
+				"push_relabel",
+				"preflow",
+				"height_labels",
+				"optimization",
 				"algorithm"
 			]
 		},
@@ -2339,19 +2489,27 @@
 			]
 		},
 		"tarjan_algorithm": {
+			"capacity": "TRACE low-link propagation and see where directed cycles collapse into strongly connected components.",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "DFS-based algorithm for finding strongly connected components",
+			"description": "Follow a single depth-first pass as it discovers strongly connected components. Discovery times, low-link values, and the stack make cycles visible as pockets of mutual reachability that pop out in reverse traversal order. Back edges show exactly where a directed graph folds back on itself, and each component flashes into view when its root condition is met. It teaches SCCs as something you can watch emerge, not just compute.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
 			"footprint": [
+				7.0,
 				6.0,
-				1.0,
-				6.0
+				7.0
 			],
+			"gamwell_reference": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch DFS visit vertices one step at a time",
+				"track back edges and low-link updates",
+				"compare sparse and dense directed graphs via edge_density",
+				"read component colors as SCCs pop from the stack"
+			],
 			"lookup_name": "tarjan_algorithm",
 			"map_ready": true,
 			"map_sequences": [
@@ -2360,15 +2518,21 @@
 			"name": "Tarjan's Algorithm",
 			"parameters": {
 				"footprint": [
+					7.0,
 					6.0,
-					1.0,
-					6.0
+					7.0
 				],
-				"size_group": "environment"
+				"size_group": "xlarge"
 			},
+			"qfep_connection": "Pure F in directed form: SCCs mark the regions where reachability closes back on itself. Low-link values reveal hidden cycles inside apparent sequence.",
 			"scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
-			"size_group": "environment",
+			"size_group": "xlarge",
 			"tags": [
+				"graph_theory",
+				"strongly_connected_components",
+				"depth_first_search",
+				"low_link",
+				"directed_graph",
 				"topology"
 			]
 		},
